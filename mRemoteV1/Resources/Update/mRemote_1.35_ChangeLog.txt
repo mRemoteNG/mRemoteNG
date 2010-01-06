@@ -1,0 +1,344 @@
+V1.35:
+  Added single instance mode (look in Options - Startup/Exit) - No cmd arguments supported yet!
+  Added possibilty to start a Ext. App before connecting and on disconnect (e.g. for VPN/RAS)
+  Added option to the Ext. Apps to tell mRemote to wait for the exit of the Ext. App
+  Added encryption setting for ICA
+  
+  WARNING! There have been changes to the connections file/SQL tables and the Ext. Apps XML file
+    Please always backup your whole config before updating to a new mRemote beta release, especially when there have been changes to the config files/SQL tables
+    Here's a list of new columns that need to be created before saving connections to an SQL server:
+      Name: ICAEncryptionStrength, Data-Type: varchar, Length: 64, Allow Nulls: No
+      Name: InheritICAEncryptionStrength, Data-Type: bit, Length: 1, Allow Nulls: No
+      Name: PreExtApp, Date-Type: varchar, Length: 512, Allow Nulls: Yes
+      Name: PostExtApp, Date-Type: varchar, Length: 512, Allow Nulls: Yes
+      Name: InheritPreExtApp, Date-Type: bit, Length: 1, Allow Nulls: No
+      Name: InheritPostExtApp, Date-Type: bit, Length: 1, Allow Nulls: No
+
+V1.33:
+  Fixed problem that caused RDP connections not to initialize properly when using XP SP3
+  Fixed bug in Port Scan that prevented hosts with no hostname from being imported
+
+V1.32:
+  Added: Inheritance defaults can now be customized (look in the root properties of your connections tree)
+  Fixed bug that made password-secured connection files not load properly because the return value from the password screen was always null
+  Fixed a lot of outdated code in the import functions (Import from XML, Import from AD, Import from RDP files)
+  Fixed bug that caused properties with a ' character not to be saved properly when using SQL Server
+  Changed Target CPU to AnyCPU again as I think the x86 setting caused problems on x64 machines (although it shouldn't)
+
+V1.31:
+  Small speed improvement to the port scanner
+  Fixed bug that caused SQL live-update to not work when not using AD Authentication
+  Fixed bug that caused Save As not to work
+
+V1.30:
+  Added experimental SQL Server with live-update (multi-user) support (see Help - Getting started - SQL Configuration)
+  Added bunch of new icons to the UI, most of them by famfamfam.com
+  Added dropdown button to Quicky Toolbar to choose protocol
+  Many smaller changes and additions
+  Fixed: Wrong default PuTTY session name
+  Fixed bug in Port Scanner that caused an error when no DNS name could be resolved
+
+V1.25:
+  Added inheritance for folders
+  Added port scan feature and possibility to import from a scan
+  Added toolbar for Ext. Apps (see View - External Applications Toolbar)
+  Added quick connect as toolbar
+  Added code that creates a backup of the current connections file every time it is loaded (It's named YourConsFile.xml_BAK)
+  Added description variable to Ext. Apps
+  Fixed bug that allowed inheriting from root node
+  Fixed bug that caused Ext. Apps launched from a connection tab to use the selected tree node instead of the current tab
+  Fixed bug that caused mRemote not to save panel layout and Ext. Apps on exit
+
+V1.24:
+  Fixed a bug in connections loading mechanism that caused a corrupted connections file when upgrading from a previous version
+
+V1.23:
+  Added feature to remember which connections were opened on last runtime and reconnect to them on the next start (see Tools - Options - Startup/Exit)
+    A command line switch is also available to cancel reconnecting (/noreconnect or /norc)
+  Added Auto Save feature (Tools - Options - Connections - Auto Save every...)
+  Added Ext. Apps to connection tab context menu
+  Added better error handling for RDP connection creation
+  Fixed problem with Sessions feature on 64bit systems
+  Fixed Sessions feature not working when using global credentials
+  Fixed several problems with the Active Directory OU picker control
+  Fixed bug in Connection duplicate code that caused duplicated connection to still have previous tree node assigned
+
+V1.20:
+  Added External Applications feature (check the help section for more info)
+  Added duplicate feature to Connections tree
+  Fixed: MagicLibrary.dll was not included in the setup package
+
+V1.16:
+  New Domain: www.mRemote.org
+  Fixed PuTTY connections appearing in a new window
+    There's a new setting in the options to fine tune the time to wait until the window has been created
+  Fixed export not working
+  Added reconnect feature in tab menu
+
+V1.15:
+  Added: New portable package
+  Added: Defaults for new connections can now be customized
+    Click the root item and then the new Properties-like button with a small yellow star to get to the settings
+  Fixed Import from Active Directory not working
+  Fixed problem with single click connect not focusing correctly
+  Fixed root node not being renamed after changing name in property grid
+
+V1.10:
+  Added support for setting a password to protect the connections file with (look in the root of your connections tree)
+  Added RDP file import feature
+  Added new command-line switch to reset panel's positions
+  Added HTTPS as protocol
+  Added HTTP/S basic authentication
+  Added support for setting a Proxy server for automatic updates
+  Some changes in help section
+  Fixed the bug that passwords stored in the options weren't decrypted when a connection was opened
+  Fixed "bug" that prevented "Connect to console session" from working in RDC6.1 (Vista SP1 RC1/XP SP3 RC1)
+
+V1.00:
+  Merry Christmas! =)
+  
+  V1.00 is a (almost) complete rewrite of the whole application
+  The code base is now much cleaner and more (easily) extendable
+  New features include (but are not limited to):
+    Every part of the application is now integrated into panels which can be moved, docked and undocked, hidden, moved to another monitor, etc.
+      This makes many new and exciting ways to manage connection and application windows possible
+      You can for example open up 4 PuTTY sessions in 4 different panels and align them in the main application so you can use all 4 side by side - 2 on the upper side and 2 on the bottom for example
+      This can be done for EVERY part of the application, it's completely modular and customizable
+    Connection and folder (previously called containers) properties have moved to a new property grid control
+    Every setting (with the exclusion of the hostname, which wouldn't make any sense) can now be inherited from the parent folder
+    Connection file saving/loading is now handled a bit different (more in the help section)
+    Application restart is no longer nececary after changing options, they are active with a click of the OK button
+    Smart size can now be activated also if a connection is already open (in the right click menu of the active tab)
+    A panel name can be stored with every connection (or folder, if inherting) to always open the connection in the specified panel
+  And last but not least, many bugs have been fixed, though there are probably many new bugs aswell - Did I already mention this is a rewrite? ;)
+  I hope you like my work and if you do please consider donating on the mRemote website to support me a little. Any amount will do! Thx!
+
+V0.50:
+  Removed old Terminal (SSH, Telnet) control and embedded PuTTY instead
+    This decision brings mostly good but also some bad news
+    The good news is that now everything that works in putty also works in mRemote
+      This means X11 forwarding, SSH port forwarding, session logging, appearance customization, etc. should be working fine now
+      It also brings some new protocols (Rlogin, RAW)
+    The bad news is that I cannot fully integrate Putty into mRemote because it is a standalone application and thus has it's own window handle
+      This means that you won't be able to use Ctrl+Tab to switch between tabs, catching errors or infos through the new Errors and Infos tab isn't possible, etc.
+  Added possibility to change resolution or display mode (Fit to window, Fullscreen, Smart size)
+  Added new setting in options to show logon info on tab titles
+  Added new feature that catches popup dialogs and puts them in a managed interface. This is another step to make mRemote a single window application.
+    Pressing escape switches back to the connection list
+    There is a context menu that allows you to copy selected errors/warnings/infos to the clipboard (text only) or to delete them
+    There also are settings in the option to change when to switch to the tab and to switch back to the normal behaviour of displaying message popups
+  Added QuickConnect history and auto-complete functions
+  Added a few new Icons (Linux, Windows, ESX, Log, Finance)
+  Improved options tab
+  Connections file version is now 1.2
+  Fixed some form drawing bugs
+
+V0.35:
+  Added tab switching/closing hotkeys
+    Switch to next tab: Ctrl+Tab
+    Switch to previous tab: Ctrl+Shift+Tab
+    Close active tab: Ctrl+W
+    This does not and will probably never work with RDP connections!
+  Fixed bug in updating code that still displayed the current version in the old format (x.x.x.x instead of x.xx)
+  Fixed bug where the colors setting was not correctly read after saving and reloading a connections file (only with 256 colors setting)
+  Fixed bug that made connect to console session and fullscreen options not work
+  Fixed bug that when opening options, update or about tab caused weird paddings next to the tab or other strange behaviour
+  Changed shortcuts to menu items in main menu as they interfered with some terminal key bindings
+
+V0.30:
+  Added HTTP as protocol to allow for basic web-based administration
+  Added new connections menu to the toolbar
+    Left click on a connection connects
+    Right click on a container or connection opens the config tab for the selected item
+  Added two new connection context menu entries for quickly connecting to console session or connecting in fullscreen
+  Improved tray icon menu (just like the main connections menu)
+  The connections tree can now be hidden
+    To hide it right click on the splitter (the divider between the connections tree and the tabbing interface)
+  Removed overlay (RDP locking) feature in favor of simply grabbing input when clicking inside the control area
+    I hope nobody is too sad that the nice looking overlay feature had to go, but..., well, it had to! ;-)
+  Changed "Redirect Key combinations (like in fullscreen)" to be disabled when in kiosk mode as it has no effect then anyway
+  Several small bugfixes and code improvements
+
+V0.20:
+  Added Drag and Drop support for tabs
+  Added tab context menu
+    Switch to/from fullscreen
+    Take a screenshot
+    Transfer files via SCP/SFTP (SSH)
+    Send special keys (VNC)
+    Rename tabs
+    Duplicate tabs (Create another instance of the connection)
+    Show config
+    Close tab (disconnect)
+  Removed Fullscreen and Send special keys buttons from the main toolbar as they are now in the tab context menu
+  Added middle click support for tabs (close/disconnect)
+  Added SSH file transfer (SCP/SFTP) support
+  Added Tools menu to the tree context menu
+    Transfer files via SCP/SFTP (SSH)
+    Import/Export features
+    Sorting
+  Changed version format
+  Fixed the problem that caused mRemote to crash when dragging a parent node of the connections tree onto one of it's child nodes
+  Fixed problem in importing mechanism that allowed importing connections including the root which resulted in multiple root items that couldn't be deleted
+  Fixed problem with quick connect
+
+V0.0.9.0:
+  Added support for redirecting key combinations (Alt+Tab, Winkey, ...)
+  Added Import/Export features
+  Added Quick Connect Port support, just type the host you want to connect to followed by a ":" and then the port
+  Added Connect/Disconnect buttons to connections context menu
+  Added two new icons (Test Server | TST; Build Server | BS)
+  Many changes to the connections loading/saving mechanisms
+  confCons version is now 1.0
+  Some code cleanup
+  Fixed auto session info to only try to get session information when a RDP connection is selected
+  Fixed AD Import feature (didn't care if imported items were computers, groups, users, ... ;)
+  Fixed settings and connections not saving when installing updates from the auto-updater
+  Fixed form size and location not saving properly when closing the application in minimized state or in maximized state on a secondary monitor
+
+V0.0.8.2:
+  Added SSH1 to Quick Connect GUI
+  Changed buffer size of terminal control, it's now 500 lines
+  Fixed terminal connections not getting focus when changing tabs
+  Fixed bug in terminal code that caused hitting "home" to show "~" instead of jumping to the start of the line
+  Fixed bug that caused that hitting enter in mRemote wouldn't do anything when options was opened before
+
+V0.0.8.0:
+  Added code to check if the msrdp com control is registered
+  Many Improvements to the terminal control (ssh1(!), ssh2, telnet)
+  Fixed bug that caused mRemote to crash when moving connection into root node (only with inheritance enabled)
+  Fixed bug: Pressing delete when editing a node's name caused delete messagebox to show
+
+V0.0.7.5:
+  Added inheritance feature to inherit connection settings from parent container
+  Expanded/Collapsed state of tree nodes will now be saved
+  Reduced auto session info delay to 700ms
+  Some code maintainance
+  Some corrections to connections tree and quick search behaviour
+  Fixed bug in TerminalControl that caused the error message "error loading string"
+  Fixed: Settings saving on exit was broken in V0.0.7.0, this is fixed now
+  Changed connections file version to 0.9
+  Fixed connections context menu bug that made import from ad option inaccessible
+  Fixed session info filling up with infos about hosts previously selected
+
+V0.0.7.0:
+  Massive GUI redesign and changes, hope you like it! =)
+  Fixed bug that made session info to query immediately after selecting a connection (when enabled), there is now a one second delay to prevent collecting session info for more than one host
+  
+V0.0.6.8:
+  Added connection import feature for Active Directory
+  Tidied up project references
+  Multiple changes to setup routine
+  Improved error handling for auto-update
+  Improved download handling for auto-update
+  Fixed bug that made download finished/failed message box appear multiple times when update was canceled and re-downloaded
+  Fixed bug where double-clicking a container opened all connections inside this container
+
+V0.0.6.6:
+  Changed port textbox control to only allow digits
+  Small changes to connection code for SSH
+  Fixed port setting not saving (or always displaying default port for selected protocol)
+
+V0.0.6.5:
+  Added auto update feature
+  Changed: Multiple UI Changes (added shortcuts, rearranged menu items, ...)
+  Fixed the problem where the connections file version was saved either with a dot or a comma, depending on system language
+  Fixed not being able to connect to SSH2 hosts without specifying username and password
+  Fixed several problems with Quick Connect
+  Improved saving of config changes
+  Fixed connections tab not closing when using SSH
+
+V0.0.6.0:
+  Added new protocols: SSH2 and Telnet
+  Added first command line switch/parameter "/consfile"
+    Ex.: mRemote.exe /consfile "%PathToYourConnectionsFile%"
+  Added button to screenshots to delete a screenshot
+  Added Host Status (Ping) feature
+  Many code rewrites and changes in almost every area
+  Changed the way connections get loaded
+    The default path for the connection file is no longer in the application directory but in the local application data folder. 
+    Ex.: c:\Documents and Settings\felix\Local Settings\Application Data\Felix_Deimel\mRemote\
+    If opening a connection file from a custom location (click on open link) saving will also occur in this file and not like in previous versions to the default connections file
+    To import your old connection file please use the following procedure: start mRemote, click on "Open" and find your old connection file. Then click on "Save As" and save it with the default file name to the default location
+  Changed the font and style of context menus
+  Changed Quick Connect UI
+  Fixed connection settings in config tab not saving when clicking another connection before jumping to another config field
+  Fixed a bug where renaming a container caused the first connection in the same container to be renamed too
+
+V0.0.5.0 R2:
+  Fixed a bug that prevented connections from opening when icon files were assigned in a previous version of mRemote
+
+V0.0.5.0:
+  Added (Global) fullscreen / kiosk feature
+  Added redirection settings for disk drives, printers, ports, smart cards and sound
+  Added option to write a log file
+  Added option to open new tabs on the right side of the currently selected tab
+  Added possibility to connect to all nodes in a container
+  Changed session functions to work in background
+  Changed icon choosing mechanism and added a bunch of default icons
+  Changed: Containers with connection can now be deleted just like empty containers
+  Changed screenshot functions to now collect all screenshots in one tab
+  Changed: More settings can now be changed on container basis
+  Changed config file version to 0.6
+  Changed: Small internal changes to the connection saving/creating and opening mechanisms
+  Fixed "Display Wallpapers" and "Display Themes" settings, they are working now
+
+V0.0.3.6:
+  Added Feature to display an overlay when RDP connection tab has lost the focus, clicking on this gives the focus back to the control
+  Added standard handlers for F2 (rename) and DEL (delete) keys in the treeview
+  Added icon preview for connections in config tab
+  Changed the way new connections and containers are being created in the treeview. The pop up window will not be displayed any longer, instead everything is handled inplace by the treeview.
+  Changed some minor UI related stuff
+  Fixed bug in tab closing mechanism that caused icons (play/pause) to not be set on the correct tree nodes
+
+V0.0.3.5:
+  Added Feature to query and log off sessions on a remote machine and option to do this automatically
+  Added Option to show icon in system tray with connection menu
+  Changed controls to flat style as I think this fits the whole application more than the old 3D look
+  Multiple UI changes to eliminate annoying behaviour
+
+V0.0.3.3:
+  Added Feature to specify which login information to use when no info is provided in the config of a remote machine
+  Fixed bug in Quick Find where trying to open a connection when no node was found caused an error
+  Fixed bug where the main form was not rendered correctly when hiding top bar and using XP Themes
+  Fixed bug in drag-drop routine that caused application to hang when trying to drop a node on one of it's child nodes
+  Fixed bug where taskbar buttons for fullscreen rdp windows did not disappear after disconnecting
+  
+V0.0.3.2:
+  Added new Save As Dialog with feature to only save specific connection settings
+  Added Option to display Tooltips when hovering over host entries in the connection tree
+  Added Option to ask at exit when there are open connections
+  Fixed bug where saving connections file with spaces in the root node caused an error -> updated Connection File Version to 0.5
+  Fixed bug in options tab where the browse button for a custom connection file didn't do anything
+
+V0.0.3.0:
+  Added Options Tab
+    Load connections file from different location
+    Save/Don’t Save connections file on exit
+    Show current tab name in window title
+  Added drag and drop functionality to the connections tree
+  Added feature to hide top bar
+  Added feature to send special keys (VNC)
+  Updated VncSharp Library to V0.88 (still pretty buggy)
+
+V0.0.2.7:
+  Added feature to save connection settings to all connections in the selected container
+  Icon choosing bug fixed
+  Taskbar button had no text when in fullscreen – fixed
+  Fixed bug in Quick Connect GUI
+  Disabled "Display Wallpaper" and "Display Themes" checkboxes as these features are not implemented
+
+V0.0.2.5:
+  Quick connect button bug fixed
+  Search field resize bug fixed
+  Splitter position is now saved on exit
+  Added new connections toolstrip (same functions as context menu)
+
+V0.0.2.4:
+  Changed default color depth to 16bit
+  Added Keep Alive Interval (1 Minute)
+  Added Options to choose between RDP & VNC
+  Added Port Setting for RDP
+  Added Option to connect to console
+  Added Menu Entries to move Connections & Containers up & down
+  Some small code improvements

@@ -1,0 +1,363 @@
+<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class frmMain
+    Inherits System.Windows.Forms.Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.pnlDock = New WeifenLuo.WinFormsUI.Docking.DockPanel
+        Me.msMain = New System.Windows.Forms.MenuStrip
+        Me.mMenFile = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenFileNew = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenFileLoad = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenFileSep1 = New System.Windows.Forms.ToolStripSeparator
+        Me.mMenFileSave = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenFileSaveAs = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenFileSep2 = New System.Windows.Forms.ToolStripSeparator
+        Me.mMenFileExit = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenView = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenViewAddConnectionPanel = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenViewConnectionPanels = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenViewSep1 = New System.Windows.Forms.ToolStripSeparator
+        Me.mMenViewConnections = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenViewConfig = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenViewErrorsAndInfos = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenViewSessions = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenViewScreenshotManager = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenViewSep2 = New System.Windows.Forms.ToolStripSeparator
+        Me.mMenViewFullscreen = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenTools = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenToolsUpdate = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenToolsSSHTransfer = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenToolsSep1 = New System.Windows.Forms.ToolStripSeparator
+        Me.mMenToolsOptions = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenSep1 = New System.Windows.Forms.ToolStripSeparator
+        Me.mMenQuickConnect = New System.Windows.Forms.ToolStripLabel
+        Me.cmbQuickConnect = New System.Windows.Forms.ToolStripComboBox
+        Me.mMenPlay = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenInfo = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenInfoHelp = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenInfoWebsite = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenInfoSep1 = New System.Windows.Forms.ToolStripSeparator
+        Me.mMenInfoAbout = New System.Windows.Forms.ToolStripMenuItem
+        Me.msMain.SuspendLayout()
+        Me.SuspendLayout()
+        '
+        'pnlDock
+        '
+        Me.pnlDock.ActiveAutoHideContent = Nothing
+        Me.pnlDock.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlDock.DockLeftPortion = 230
+        Me.pnlDock.DockRightPortion = 230
+        Me.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow
+        Me.pnlDock.Location = New System.Drawing.Point(0, 27)
+        Me.pnlDock.Name = "pnlDock"
+        Me.pnlDock.Size = New System.Drawing.Size(842, 496)
+        Me.pnlDock.TabIndex = 13
+        '
+        'msMain
+        '
+        Me.msMain.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.msMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenFile, Me.mMenView, Me.mMenTools, Me.mMenSep1, Me.mMenQuickConnect, Me.cmbQuickConnect, Me.mMenPlay, Me.mMenInfo})
+        Me.msMain.Location = New System.Drawing.Point(0, 0)
+        Me.msMain.Name = "msMain"
+        Me.msMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        Me.msMain.Size = New System.Drawing.Size(842, 27)
+        Me.msMain.TabIndex = 16
+        Me.msMain.Text = "Main Toolbar"
+        '
+        'mMenFile
+        '
+        Me.mMenFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenFileNew, Me.mMenFileLoad, Me.mMenFileSep1, Me.mMenFileSave, Me.mMenFileSaveAs, Me.mMenFileSep2, Me.mMenFileExit})
+        Me.mMenFile.Image = Global.mRemote.My.Resources.Resources.File
+        Me.mMenFile.Name = "mMenFile"
+        Me.mMenFile.Size = New System.Drawing.Size(51, 23)
+        Me.mMenFile.Text = "&File"
+        '
+        'mMenFileNew
+        '
+        Me.mMenFileNew.Name = "mMenFileNew"
+        Me.mMenFileNew.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
+        Me.mMenFileNew.Size = New System.Drawing.Size(241, 22)
+        Me.mMenFileNew.Text = "New Connections"
+        '
+        'mMenFileLoad
+        '
+        Me.mMenFileLoad.Name = "mMenFileLoad"
+        Me.mMenFileLoad.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+        Me.mMenFileLoad.Size = New System.Drawing.Size(241, 22)
+        Me.mMenFileLoad.Text = "Open Connections"
+        '
+        'mMenFileSep1
+        '
+        Me.mMenFileSep1.Name = "mMenFileSep1"
+        Me.mMenFileSep1.Size = New System.Drawing.Size(238, 6)
+        '
+        'mMenFileSave
+        '
+        Me.mMenFileSave.Name = "mMenFileSave"
+        Me.mMenFileSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
+        Me.mMenFileSave.Size = New System.Drawing.Size(241, 22)
+        Me.mMenFileSave.Text = "Save Connections"
+        '
+        'mMenFileSaveAs
+        '
+        Me.mMenFileSaveAs.Name = "mMenFileSaveAs"
+        Me.mMenFileSaveAs.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
+                    Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
+        Me.mMenFileSaveAs.Size = New System.Drawing.Size(241, 22)
+        Me.mMenFileSaveAs.Text = "Save Connections As"
+        '
+        'mMenFileSep2
+        '
+        Me.mMenFileSep2.Name = "mMenFileSep2"
+        Me.mMenFileSep2.Size = New System.Drawing.Size(238, 6)
+        '
+        'mMenFileExit
+        '
+        Me.mMenFileExit.Name = "mMenFileExit"
+        Me.mMenFileExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
+        Me.mMenFileExit.Size = New System.Drawing.Size(241, 22)
+        Me.mMenFileExit.Text = "Exit"
+        '
+        'mMenView
+        '
+        Me.mMenView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenViewAddConnectionPanel, Me.mMenViewConnectionPanels, Me.mMenViewSep1, Me.mMenViewConnections, Me.mMenViewConfig, Me.mMenViewErrorsAndInfos, Me.mMenViewSessions, Me.mMenViewScreenshotManager, Me.mMenViewSep2, Me.mMenViewFullscreen})
+        Me.mMenView.Image = Global.mRemote.My.Resources.Resources.View
+        Me.mMenView.Name = "mMenView"
+        Me.mMenView.Size = New System.Drawing.Size(58, 23)
+        Me.mMenView.Text = "&View"
+        '
+        'mMenViewAddConnectionPanel
+        '
+        Me.mMenViewAddConnectionPanel.Name = "mMenViewAddConnectionPanel"
+        Me.mMenViewAddConnectionPanel.Size = New System.Drawing.Size(190, 22)
+        Me.mMenViewAddConnectionPanel.Text = "Add Connection Panel"
+        '
+        'mMenViewConnectionPanels
+        '
+        Me.mMenViewConnectionPanels.Name = "mMenViewConnectionPanels"
+        Me.mMenViewConnectionPanels.Size = New System.Drawing.Size(190, 22)
+        Me.mMenViewConnectionPanels.Text = "Connection Panels"
+        '
+        'mMenViewSep1
+        '
+        Me.mMenViewSep1.Name = "mMenViewSep1"
+        Me.mMenViewSep1.Size = New System.Drawing.Size(187, 6)
+        '
+        'mMenViewConnections
+        '
+        Me.mMenViewConnections.Checked = True
+        Me.mMenViewConnections.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.mMenViewConnections.Name = "mMenViewConnections"
+        Me.mMenViewConnections.Size = New System.Drawing.Size(190, 22)
+        Me.mMenViewConnections.Text = "Connections"
+        '
+        'mMenViewConfig
+        '
+        Me.mMenViewConfig.Checked = True
+        Me.mMenViewConfig.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.mMenViewConfig.Name = "mMenViewConfig"
+        Me.mMenViewConfig.Size = New System.Drawing.Size(190, 22)
+        Me.mMenViewConfig.Text = "Config"
+        '
+        'mMenViewErrorsAndInfos
+        '
+        Me.mMenViewErrorsAndInfos.Checked = True
+        Me.mMenViewErrorsAndInfos.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.mMenViewErrorsAndInfos.Name = "mMenViewErrorsAndInfos"
+        Me.mMenViewErrorsAndInfos.Size = New System.Drawing.Size(190, 22)
+        Me.mMenViewErrorsAndInfos.Text = "Errors and Infos"
+        '
+        'mMenViewSessions
+        '
+        Me.mMenViewSessions.Checked = True
+        Me.mMenViewSessions.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.mMenViewSessions.Name = "mMenViewSessions"
+        Me.mMenViewSessions.Size = New System.Drawing.Size(190, 22)
+        Me.mMenViewSessions.Text = "Sessions"
+        '
+        'mMenViewScreenshotManager
+        '
+        Me.mMenViewScreenshotManager.Name = "mMenViewScreenshotManager"
+        Me.mMenViewScreenshotManager.Size = New System.Drawing.Size(190, 22)
+        Me.mMenViewScreenshotManager.Text = "Screenshot Manager"
+        '
+        'mMenViewSep2
+        '
+        Me.mMenViewSep2.Name = "mMenViewSep2"
+        Me.mMenViewSep2.Size = New System.Drawing.Size(187, 6)
+        '
+        'mMenViewFullscreen
+        '
+        Me.mMenViewFullscreen.Name = "mMenViewFullscreen"
+        Me.mMenViewFullscreen.Size = New System.Drawing.Size(190, 22)
+        Me.mMenViewFullscreen.Text = "Fullscreen (Kiosk Mode)"
+        '
+        'mMenTools
+        '
+        Me.mMenTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenToolsUpdate, Me.mMenToolsSSHTransfer, Me.mMenToolsSep1, Me.mMenToolsOptions})
+        Me.mMenTools.Image = Global.mRemote.My.Resources.Resources.Tools
+        Me.mMenTools.Name = "mMenTools"
+        Me.mMenTools.Size = New System.Drawing.Size(61, 23)
+        Me.mMenTools.Text = "&Tools"
+        '
+        'mMenToolsUpdate
+        '
+        Me.mMenToolsUpdate.Image = Global.mRemote.My.Resources.Resources.Update
+        Me.mMenToolsUpdate.Name = "mMenToolsUpdate"
+        Me.mMenToolsUpdate.Size = New System.Drawing.Size(160, 22)
+        Me.mMenToolsUpdate.Text = "Update"
+        '
+        'mMenToolsSSHTransfer
+        '
+        Me.mMenToolsSSHTransfer.Image = Global.mRemote.My.Resources.Resources.SSHTransfer
+        Me.mMenToolsSSHTransfer.Name = "mMenToolsSSHTransfer"
+        Me.mMenToolsSSHTransfer.Size = New System.Drawing.Size(160, 22)
+        Me.mMenToolsSSHTransfer.Text = "SSH File Transfer"
+        '
+        'mMenToolsSep1
+        '
+        Me.mMenToolsSep1.Name = "mMenToolsSep1"
+        Me.mMenToolsSep1.Size = New System.Drawing.Size(157, 6)
+        '
+        'mMenToolsOptions
+        '
+        Me.mMenToolsOptions.Image = Global.mRemote.My.Resources.Resources.Options
+        Me.mMenToolsOptions.Name = "mMenToolsOptions"
+        Me.mMenToolsOptions.Size = New System.Drawing.Size(160, 22)
+        Me.mMenToolsOptions.Text = "Options"
+        '
+        'mMenSep1
+        '
+        Me.mMenSep1.Name = "mMenSep1"
+        Me.mMenSep1.Size = New System.Drawing.Size(6, 23)
+        '
+        'mMenQuickConnect
+        '
+        Me.mMenQuickConnect.Name = "mMenQuickConnect"
+        Me.mMenQuickConnect.Size = New System.Drawing.Size(87, 20)
+        Me.mMenQuickConnect.Text = "  &Quick Connect:"
+        '
+        'cmbQuickConnect
+        '
+        Me.cmbQuickConnect.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
+        Me.cmbQuickConnect.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
+        Me.cmbQuickConnect.Name = "cmbQuickConnect"
+        Me.cmbQuickConnect.Size = New System.Drawing.Size(120, 23)
+        '
+        'mMenPlay
+        '
+        Me.mMenPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mMenPlay.Image = Global.mRemote.My.Resources.Resources.Play_Quick
+        Me.mMenPlay.Name = "mMenPlay"
+        Me.mMenPlay.Size = New System.Drawing.Size(28, 23)
+        Me.mMenPlay.Text = "Play"
+        '
+        'mMenInfo
+        '
+        Me.mMenInfo.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
+        Me.mMenInfo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenInfoHelp, Me.mMenInfoWebsite, Me.mMenInfoSep1, Me.mMenInfoAbout})
+        Me.mMenInfo.Image = Global.mRemote.My.Resources.Resources.Info
+        Me.mMenInfo.Name = "mMenInfo"
+        Me.mMenInfo.Size = New System.Drawing.Size(53, 23)
+        Me.mMenInfo.Text = "&Info"
+        '
+        'mMenInfoHelp
+        '
+        Me.mMenInfoHelp.Image = Global.mRemote.My.Resources.Resources.Help
+        Me.mMenInfoHelp.Name = "mMenInfoHelp"
+        Me.mMenInfoHelp.Size = New System.Drawing.Size(116, 22)
+        Me.mMenInfoHelp.Text = "Help"
+        '
+        'mMenInfoWebsite
+        '
+        Me.mMenInfoWebsite.Image = Global.mRemote.My.Resources.Resources.Website
+        Me.mMenInfoWebsite.Name = "mMenInfoWebsite"
+        Me.mMenInfoWebsite.Size = New System.Drawing.Size(116, 22)
+        Me.mMenInfoWebsite.Text = "Website"
+        '
+        'mMenInfoSep1
+        '
+        Me.mMenInfoSep1.Name = "mMenInfoSep1"
+        Me.mMenInfoSep1.Size = New System.Drawing.Size(113, 6)
+        '
+        'mMenInfoAbout
+        '
+        Me.mMenInfoAbout.Image = Global.mRemote.My.Resources.Resources.mRemote
+        Me.mMenInfoAbout.Name = "mMenInfoAbout"
+        Me.mMenInfoAbout.Size = New System.Drawing.Size(116, 22)
+        Me.mMenInfoAbout.Text = "About"
+        '
+        'frmMain
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(842, 523)
+        Me.Controls.Add(Me.pnlDock)
+        Me.Controls.Add(Me.msMain)
+        Me.Icon = Global.mRemote.My.Resources.Resources.mRemote_Icon
+        Me.MainMenuStrip = Me.msMain
+        'Me.MaximumSize = New System.Drawing.Size(20000, 4000)
+        Me.Name = "frmMain"
+        Me.Text = "mRemote"
+        Me.msMain.ResumeLayout(False)
+        Me.msMain.PerformLayout()
+        Me.ResumeLayout(False)
+        Me.PerformLayout()
+
+    End Sub
+    Friend WithEvents pnlDock As WeifenLuo.WinFormsUI.Docking.DockPanel
+    Friend WithEvents msMain As System.Windows.Forms.MenuStrip
+    Friend WithEvents mMenFile As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenView As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenTools As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenSep1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mMenQuickConnect As System.Windows.Forms.ToolStripLabel
+    Friend WithEvents mMenPlay As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenInfo As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileNew As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileLoad As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileSep1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mMenFileSave As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileSaveAs As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileSep2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mMenFileExit As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenToolsUpdate As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenToolsSep1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mMenToolsOptions As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenInfoHelp As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenInfoWebsite As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenInfoSep1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mMenInfoAbout As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenViewConnectionPanels As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenViewSep1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mMenViewSessions As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenViewConnections As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenViewConfig As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenViewErrorsAndInfos As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenViewScreenshotManager As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenViewAddConnectionPanel As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents cmbQuickConnect As System.Windows.Forms.ToolStripComboBox
+    Friend WithEvents mMenViewSep2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mMenViewFullscreen As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenToolsSSHTransfer As System.Windows.Forms.ToolStripMenuItem
+
+End Class

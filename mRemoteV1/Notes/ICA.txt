@@ -1,0 +1,42 @@
+﻿("InputEncoding", "ISO8859_1")
+("TcpBrowserAddress", "CitrixServer1")
+("TcpBrowserAddress2", "CitrixServer2")
+("Version", "2")
+("TransportReconnectEnabled", "On")
+("RemoveICAFile", "Yes")
+("ProxyType", "None")
+("ClientName", "PC1513")
+("ProxyTimeout", "30000")
+("Application", "SSODesktop")
+("DesiredColor", "8")
+("Launcher", "WI")
+("TransportDriver", "TCP/IP")
+("WinStationDriver", "ICA 3.0")
+("ClientAudio", "Off")
+("Compress", "Off")
+("DesiredHRES", "4294967295")
+("DesiredVRES", "4294967295")
+("ScreenPercent", "0")
+("UseDefaultWindowSize", "Off")
+("DesiredWinType", "0")
+("TWIMode", "Off")
+("Username", "ISFEAF")
+("Title", "[" & "ISFEAF" & "]")
+("ClearPassword", "test")
+("Domain", "MH")
+("AutologonAllowed", "ON")
+("CacheICAFile", "FALSE")
+("Launch", "TRUE")
+("TWIDisableSessionSharing", "TRUE")
+
+DesiredColor
+ 1 = 16 Colors
+ 2 = 256 Colors
+ 4 = 16Bit
+ 8 = 32Bit
+ 
+ Encryption
+  EncRC5-128 = 128-bit encryption
+  EncRC5-0 = 128-bit encryption for logon only
+  EncRC5-56 = 56-bit encryption
+  EncRC5-40 = 40-bit encryption

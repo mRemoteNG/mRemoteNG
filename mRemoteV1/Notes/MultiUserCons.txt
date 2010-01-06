@@ -1,0 +1,5 @@
+﻿Task:
+Many Users access the same connections on an sql server.
+Everyone should get everyones changes but not loose the ones he made himself.
+
+How to do it:
