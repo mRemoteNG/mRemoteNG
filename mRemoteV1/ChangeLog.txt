@@ -5,6 +5,7 @@
   Removed references to visionapp Remote Desktop
   Changed name and location of log file
 	%USERPROFILE%\Local Settings\Application Data\mRemoteNG\mRemoteNG.log
+  Changed filename delimiter in title bar from pipe to dash
 
 1.50:
   Added the following formats to the "Save Connections As" function:

@@ -1565,9 +1565,9 @@ Namespace App
                 Else
                     If ConnectionFileName <> "" And ConnectionsFileLoaded = True Then
                         If My.Settings.ShowCompleteConsPathInTitle Then
-                            txt &= " | " & ConnectionFileName
+                            txt &= " - " & ConnectionFileName
                         Else
-                            txt &= " | " & ConnectionFileName.Substring(ConnectionFileName.LastIndexOf("\") + 1)
+                            txt &= " - " & ConnectionFileName.Substring(ConnectionFileName.LastIndexOf("\") + 1)
                         End If
                     End If
                 End If
