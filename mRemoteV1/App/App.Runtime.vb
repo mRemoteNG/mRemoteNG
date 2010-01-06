@@ -250,7 +250,7 @@ Namespace App
             Public Shared Sub CreateLogger()
                 log4net.Config.XmlConfigurator.Configure(New FileInfo("mRemote.exe.config"))
 
-                log = log4net.LogManager.GetLogger("mRemote.Log")
+                log = log4net.LogManager.GetLogger("mRemoteNG.Log")
             End Sub
 
             Public Shared Sub UpdateCheck()

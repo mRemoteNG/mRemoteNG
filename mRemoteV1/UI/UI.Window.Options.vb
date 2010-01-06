@@ -931,7 +931,7 @@ Namespace UI
                 Me.chkWriteLogFile.Name = "chkWriteLogFile"
                 Me.chkWriteLogFile.Size = New System.Drawing.Size(287, 19)
                 Me.chkWriteLogFile.TabIndex = 10
-                Me.chkWriteLogFile.Text = "Write log file (application directory\mRemote.log)"
+                Me.chkWriteLogFile.Text = "Write log file (mRemoteNG.log)"
                 Me.chkWriteLogFile.UseVisualStyleBackColor = True
                 '
                 'pnlProxy

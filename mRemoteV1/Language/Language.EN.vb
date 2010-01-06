@@ -231,7 +231,7 @@
         Public Const LaunchPutty As String = "Launch PuTTY"
         Public Const UseCustomPuttyPath As String = "Use custom PuTTY path:"
         Public Const AutomaticallyGetSessionInfo As String = "Automatically get session information"
-        Public Const WriteLogFile As String = "Write log file (application directory\mRemote.log)"
+        Public Const WriteLogFile As String = "Write log file (mRemoteNG.log)"
         Public Const StartupExit As String = "Startup/Exit"
         Public Const AllowOnlySingleInstance As String = "Allow only a single instance of the application (mRemoteNG restart required)"
         Public Const ReconnectAtStartup As String = "Reconnect to previously opened sessions on startup"
