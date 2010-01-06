@@ -69,7 +69,7 @@ Partial Class frmMain
         Me.mMenInfoWebsite = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenInfovRD08 = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenInfoSep2 = New System.Windows.Forms.ToolStripSeparator
-        Me.mMenInfoAnnouncments = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenInfoAnnouncements = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenInfoAbout = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenSep3 = New System.Windows.Forms.ToolStripSeparator
         Me.lblQuickConnect = New System.Windows.Forms.ToolStripLabel
@@ -373,7 +373,7 @@ Partial Class frmMain
         '
         'mMenInfo
         '
-        Me.mMenInfo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenInfoHelp, Me.mMenInfoSep1, Me.mMenInfoDonate, Me.mMenInfoWebsite, Me.mMenInfovRD08, Me.mMenInfoSep2, Me.mMenInfoAnnouncments, Me.mMenInfoAbout})
+        Me.mMenInfo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenInfoHelp, Me.mMenInfoSep1, Me.mMenInfoDonate, Me.mMenInfoWebsite, Me.mMenInfovRD08, Me.mMenInfoSep2, Me.mMenInfoAnnouncements, Me.mMenInfoAbout})
         Me.mMenInfo.Name = "mMenInfo"
         Me.mMenInfo.Size = New System.Drawing.Size(41, 20)
         Me.mMenInfo.Text = "&Help"
@@ -418,12 +418,12 @@ Partial Class frmMain
         Me.mMenInfoSep2.Name = "mMenInfoSep2"
         Me.mMenInfoSep2.Size = New System.Drawing.Size(199, 6)
         '
-        'mMenInfoAnnouncments
+        'mMenInfoAnnouncements
         '
-        Me.mMenInfoAnnouncments.Image = Global.mRemote.My.Resources.Resources.News
-        Me.mMenInfoAnnouncments.Name = "mMenInfoAnnouncments"
-        Me.mMenInfoAnnouncments.Size = New System.Drawing.Size(202, 22)
-        Me.mMenInfoAnnouncments.Text = "Announcments"
+        Me.mMenInfoAnnouncements.Image = Global.mRemote.My.Resources.Resources.News
+        Me.mMenInfoAnnouncements.Name = "mMenInfoAnnouncements"
+        Me.mMenInfoAnnouncements.Size = New System.Drawing.Size(202, 22)
+        Me.mMenInfoAnnouncements.Text = "Announcements"
         '
         'mMenInfoAbout
         '
@@ -625,7 +625,7 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mMenToolsUVNCSC As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenToolsComponentsCheck As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mMenInfoAnnouncments As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenInfoAnnouncements As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenInfovRD08 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenInfoSep2 As System.Windows.Forms.ToolStripSeparator
 

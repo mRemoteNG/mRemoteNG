@@ -31,8 +31,6 @@ Partial Class frmPassword
         Me.lblStatus = New System.Windows.Forms.Label
         Me.pbLock = New System.Windows.Forms.PictureBox
         Me.pnlImage = New System.Windows.Forms.Panel
-        Me.txtSnake = New System.Windows.Forms.TextBox
-        Me.lblTips = New System.Windows.Forms.Label
         CType(Me.pbLock, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlImage.SuspendLayout()
         Me.SuspendLayout()
@@ -131,29 +129,6 @@ Partial Class frmPassword
         Me.pnlImage.Size = New System.Drawing.Size(100, 100)
         Me.pnlImage.TabIndex = 8
         '
-        'txtSnake
-        '
-        Me.txtSnake.BackColor = System.Drawing.SystemColors.Control
-        Me.txtSnake.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.txtSnake.Location = New System.Drawing.Point(9, 143)
-        Me.txtSnake.Name = "txtSnake"
-        Me.txtSnake.ReadOnly = True
-        Me.txtSnake.Size = New System.Drawing.Size(100, 13)
-        Me.txtSnake.TabIndex = 9
-        Me.txtSnake.TabStop = False
-        '
-        'lblTips
-        '
-        Me.lblTips.ForeColor = System.Drawing.Color.White
-        Me.lblTips.Location = New System.Drawing.Point(129, 6)
-        Me.lblTips.Name = "lblTips"
-        Me.lblTips.Size = New System.Drawing.Size(150, 118)
-        Me.lblTips.TabIndex = 10
-        Me.lblTips.Text = "Enter: Start/Pause" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Up/Down: Change difficulty" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Arrow Keys: Steer the snake" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Esc:" & _
-            " Quit (at any time)" & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & Global.Microsoft.VisualBasic.ChrW(13) & Global.Microsoft.VisualBasic.ChrW(10) & "Have Fun! =)"
-        Me.lblTips.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.lblTips.Visible = False
-        '
         'frmPassword
         '
         Me.AcceptButton = Me.btnOK
@@ -165,13 +140,11 @@ Partial Class frmPassword
         Me.Controls.Add(Me.txtVerify)
         Me.Controls.Add(Me.txtPassword)
         Me.Controls.Add(Me.lblStatus)
-        Me.Controls.Add(Me.txtSnake)
         Me.Controls.Add(Me.lblVerify)
         Me.Controls.Add(Me.lblPassword)
         Me.Controls.Add(Me.pnlImage)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOK)
-        Me.Controls.Add(Me.lblTips)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.MaximizeBox = False
         Me.MinimizeBox = False
@@ -196,6 +169,4 @@ Partial Class frmPassword
     Friend WithEvents lblStatus As System.Windows.Forms.Label
     Friend WithEvents pbLock As System.Windows.Forms.PictureBox
     Friend WithEvents pnlImage As System.Windows.Forms.Panel
-    Friend WithEvents txtSnake As System.Windows.Forms.TextBox
-    Friend WithEvents lblTips As System.Windows.Forms.Label
 End Class

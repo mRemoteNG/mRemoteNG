@@ -487,7 +487,7 @@ Public Class frmMain
         App.Runtime.GoToDonate()
     End Sub
 
-    Private Sub mMenInfoAnnouncments_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoAnnouncments.Click
+    Private Sub mMenInfoAnnouncements_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoAnnouncements.Click
         App.Runtime.Windows.Show(UI.Window.Type.Announcement)
     End Sub
 

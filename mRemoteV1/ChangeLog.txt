@@ -1,5 +1,7 @@
 ﻿1.60:
   Changed name to mRemoteNG
+  Fixed menu bar not staying docked to left side
+  Removed snakes game Easter egg
 
 1.50:
   Added the following formats to the "Save Connections As" function:

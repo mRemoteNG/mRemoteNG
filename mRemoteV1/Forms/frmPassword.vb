@@ -107,33 +107,4 @@
             Me.txtVerify.SelectionLength = Me.txtVerify.TextLength
         End If
     End Sub
-
-
-    Private Sub txtPassword_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtPassword.TextChanged
-        If txtPassword.Text = "ijustwannaplay" Then
-            pbLock.Visible = False
-            btnOK.Visible = False
-            btnCancel.Visible = False
-            txtPassword.Visible = False
-            txtVerify.Visible = False
-            lblPassword.Visible = False
-            lblStatus.Visible = False
-            lblVerify.Visible = False
-            AcceptButton = Nothing
-            CancelButton = Nothing
-            BackColor = Color.DimGray
-            Me.Text = "SnakeFX Lite"
-            pnlImage.Top = (Me.ClientSize.Height / 2) - (Me.pnlImage.Height / 2)
-            lblTips.Visible = True
-
-            Easter.Snake.Game.CreatePicBox(pnlImage)
-            Easter.Snake.Game.Mode = Easter.Snake.Game.GameMode.Welcome
-            Easter.Snake.Game.SetupGame()
-            txtSnake.Focus()
-        End If
-    End Sub
-
-    Private Sub txtSnake_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles txtSnake.KeyDown
-        Easter.Snake.Game.CheckKeyPress(e)
-    End Sub
 End Class

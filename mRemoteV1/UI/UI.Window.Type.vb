@@ -16,7 +16,6 @@ Namespace UI
             Help = 12
             ExternalApps = 13
             PortScan = 14
-            Snake = 15
             UltraVNCSC = 16
             ComponentsCheck = 17
             Announcement = 18

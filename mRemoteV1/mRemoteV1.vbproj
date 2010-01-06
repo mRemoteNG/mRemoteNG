@@ -197,7 +197,6 @@
     <Compile Include="Container\Container.List.vb" />
     <Compile Include="Credential\Credential.Info.vb" />
     <Compile Include="Credential\Credential.List.vb" />
-    <Compile Include="Easter\Easter.Snake.vb" />
     <Compile Include="Forms\frmChoosePanel.Designer.vb">
       <DependentUpon>frmChoosePanel.vb</DependentUpon>
     </Compile>
