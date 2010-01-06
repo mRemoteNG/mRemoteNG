@@ -8,7 +8,7 @@ Public Class frmMain
 #Region "Startup & Shutdown"
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'insert enable edition code here
-        App.Editions.Spanlink.Enabled = True
+        App.Editions.Spanlink.Enabled = False
 
         ApplyLanguage()
 
