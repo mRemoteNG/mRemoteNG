@@ -67,7 +67,6 @@ Partial Class frmMain
         Me.mMenInfoSep1 = New System.Windows.Forms.ToolStripSeparator
         Me.mMenInfoDonate = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenInfoWebsite = New System.Windows.Forms.ToolStripMenuItem
-        Me.mMenInfovRD08 = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenInfoSep2 = New System.Windows.Forms.ToolStripSeparator
         Me.mMenInfoAnnouncements = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenInfoAbout = New System.Windows.Forms.ToolStripMenuItem
@@ -373,7 +372,7 @@ Partial Class frmMain
         '
         'mMenInfo
         '
-        Me.mMenInfo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenInfoHelp, Me.mMenInfoSep1, Me.mMenInfoDonate, Me.mMenInfoWebsite, Me.mMenInfovRD08, Me.mMenInfoSep2, Me.mMenInfoAnnouncements, Me.mMenInfoAbout})
+        Me.mMenInfo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenInfoHelp, Me.mMenInfoSep1, Me.mMenInfoDonate, Me.mMenInfoWebsite, Me.mMenInfoSep2, Me.mMenInfoAnnouncements, Me.mMenInfoAbout})
         Me.mMenInfo.Name = "mMenInfo"
         Me.mMenInfo.Size = New System.Drawing.Size(41, 20)
         Me.mMenInfo.Text = "&Help"
@@ -384,52 +383,45 @@ Partial Class frmMain
         Me.mMenInfoHelp.Image = CType(resources.GetObject("mMenInfoHelp.Image"), System.Drawing.Image)
         Me.mMenInfoHelp.Name = "mMenInfoHelp"
         Me.mMenInfoHelp.ShortcutKeys = System.Windows.Forms.Keys.F1
-        Me.mMenInfoHelp.Size = New System.Drawing.Size(202, 22)
+        Me.mMenInfoHelp.Size = New System.Drawing.Size(179, 22)
         Me.mMenInfoHelp.Text = "mRemoteNG Help"
         '
         'mMenInfoSep1
         '
         Me.mMenInfoSep1.Name = "mMenInfoSep1"
-        Me.mMenInfoSep1.Size = New System.Drawing.Size(199, 6)
+        Me.mMenInfoSep1.Size = New System.Drawing.Size(176, 6)
         '
         'mMenInfoDonate
         '
         Me.mMenInfoDonate.Image = Global.mRemote.My.Resources.Resources.Donate
         Me.mMenInfoDonate.Name = "mMenInfoDonate"
-        Me.mMenInfoDonate.Size = New System.Drawing.Size(202, 22)
+        Me.mMenInfoDonate.Size = New System.Drawing.Size(179, 22)
         Me.mMenInfoDonate.Text = "Donate"
         '
         'mMenInfoWebsite
         '
         Me.mMenInfoWebsite.Image = CType(resources.GetObject("mMenInfoWebsite.Image"), System.Drawing.Image)
         Me.mMenInfoWebsite.Name = "mMenInfoWebsite"
-        Me.mMenInfoWebsite.Size = New System.Drawing.Size(202, 22)
+        Me.mMenInfoWebsite.Size = New System.Drawing.Size(179, 22)
         Me.mMenInfoWebsite.Text = "Website"
-        '
-        'mMenInfovRD08
-        '
-        Me.mMenInfovRD08.Image = Global.mRemote.My.Resources.Resources.vRD08R1
-        Me.mMenInfovRD08.Name = "mMenInfovRD08"
-        Me.mMenInfovRD08.Size = New System.Drawing.Size(202, 22)
-        Me.mMenInfovRD08.Text = "visionapp Remote Desktop"
         '
         'mMenInfoSep2
         '
         Me.mMenInfoSep2.Name = "mMenInfoSep2"
-        Me.mMenInfoSep2.Size = New System.Drawing.Size(199, 6)
+        Me.mMenInfoSep2.Size = New System.Drawing.Size(176, 6)
         '
         'mMenInfoAnnouncements
         '
         Me.mMenInfoAnnouncements.Image = Global.mRemote.My.Resources.Resources.News
         Me.mMenInfoAnnouncements.Name = "mMenInfoAnnouncements"
-        Me.mMenInfoAnnouncements.Size = New System.Drawing.Size(202, 22)
+        Me.mMenInfoAnnouncements.Size = New System.Drawing.Size(179, 22)
         Me.mMenInfoAnnouncements.Text = "Announcements"
         '
         'mMenInfoAbout
         '
         Me.mMenInfoAbout.Image = Global.mRemote.My.Resources.Resources.mRemote
         Me.mMenInfoAbout.Name = "mMenInfoAbout"
-        Me.mMenInfoAbout.Size = New System.Drawing.Size(202, 22)
+        Me.mMenInfoAbout.Size = New System.Drawing.Size(179, 22)
         Me.mMenInfoAbout.Text = "About"
         '
         'mMenSep3
@@ -626,7 +618,6 @@ Partial Class frmMain
     Friend WithEvents mMenToolsUVNCSC As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenToolsComponentsCheck As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenInfoAnnouncements As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mMenInfovRD08 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenInfoSep2 As System.Windows.Forms.ToolStripSeparator
 
 End Class

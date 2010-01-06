@@ -636,8 +636,4 @@ Public Class frmMain
         SysMenu.InsertMenuItem(SysMenu.SystemMenuHandle, 1, Tools.SystemMenu.Flags.MF_BYPOSITION Or Tools.SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, Nothing)
     End Sub
 #End Region
-
-    Private Sub mMenInfovRD08_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfovRD08.Click
-        Process.Start("http://software.visionapp.com/vrd")
-    End Sub
 End Class

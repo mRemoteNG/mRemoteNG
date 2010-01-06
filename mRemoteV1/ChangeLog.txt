@@ -2,6 +2,7 @@
   Changed name to mRemoteNG
   Fixed menu bar not staying docked to left side
   Removed snakes game Easter egg
+  Removed references to visionapp Remote Desktop
 
 1.50:
   Added the following formats to the "Save Connections As" function:
