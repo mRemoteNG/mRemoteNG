@@ -3,7 +3,7 @@ Imports System.Net
 Imports mRemote.App.Runtime
 
 Namespace App
-    Public Class Announcment
+    Public Class Announcement
 #Region "Private Properties"
         Private wCl As WebClient
         Private wPr As WebProxy
@@ -16,47 +16,47 @@ Namespace App
             End Get
         End Property
 
-        Public Function IsAnnouncmentAvailable() As Boolean
+        Public Function IsAnnouncementAvailable() As Boolean
             Try
-                Dim aI As Info = GetAnnouncmentInfo()
+                Dim aI As Info = GetAnnouncementInfo()
 
                 If aI.InfoOk = False Then
                     Return False
                 End If
 
-                If aI.Name <> My.Settings.LastAnnouncment Then
+                If aI.Name <> My.Settings.LastAnnouncement Then
                     Return True
                 Else
                     Return False
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "IsAnnouncmentAvailable failed" & vbNewLine & ex.Message, True)
+                mC.AddMessage(Messages.MessageClass.WarningMsg, "IsAnnouncementAvailable failed" & vbNewLine & ex.Message, True)
                 Return False
             End Try
         End Function
 
-        Public Function GetAnnouncmentInfo() As Info
+        Public Function GetAnnouncementInfo() As Info
             Try
-                Dim strAnnouncment As String = GetAnnouncmentFile()
+                Dim strAnnouncement As String = GetAnnouncementFile()
 
                 CreateWebClient()
 
                 Dim aI As New Info()
 
-                If strAnnouncment <> "" Then
+                If strAnnouncement <> "" Then
                     aI.InfoOk = True
 
                     Try
                         'get Name
-                        Dim strName As String = strAnnouncment.Substring(strAnnouncment.IndexOf("Name: ") + 6, strAnnouncment.IndexOf(vbNewLine) - 6)
+                        Dim strName As String = strAnnouncement.Substring(strAnnouncement.IndexOf("Name: ") + 6, strAnnouncement.IndexOf(vbNewLine) - 6)
                         aI.Name = strName
 
-                        strAnnouncment = strAnnouncment.Remove(0, strAnnouncment.IndexOf(vbNewLine) + 2)
+                        strAnnouncement = strAnnouncement.Remove(0, strAnnouncement.IndexOf(vbNewLine) + 2)
 
                         'get Download URL
                         Dim strU As String = ""
 
-                        strU = strAnnouncment.Substring(strAnnouncment.IndexOf("URL: ") + 5, strAnnouncment.IndexOf(vbNewLine) - 5)
+                        strU = strAnnouncement.Substring(strAnnouncement.IndexOf("URL: ") + 5, strAnnouncement.IndexOf(vbNewLine) - 5)
 
                         aI.URL = strU
                     Catch ex As Exception
@@ -69,26 +69,26 @@ Namespace App
                 _curAI = aI
                 Return aI
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "Getting announcment info failed" & vbNewLine & ex.Message, True)
+                mC.AddMessage(Messages.MessageClass.WarningMsg, "Getting Announcement info failed" & vbNewLine & ex.Message, True)
                 Return Nothing
             End Try
         End Function
 
-        Private Function GetAnnouncmentFile() As String
+        Private Function GetAnnouncementFile() As String
             Try
                 CreateWebClient()
 
                 Dim strTemp As String
 
                 Try
-                    strTemp = wCl.DownloadString(App.Info.General.URLAnnouncment)
+                    strTemp = wCl.DownloadString(App.Info.General.URLAnnouncement)
                 Catch ex As Exception
                     strTemp = ""
                 End Try
 
                 Return strTemp
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "GetAnnouncmentFile failed" & vbNewLine & ex.Message, True)
+                mC.AddMessage(Messages.MessageClass.WarningMsg, "GetAnnouncementFile failed" & vbNewLine & ex.Message, True)
                 Return ""
             End Try
         End Function

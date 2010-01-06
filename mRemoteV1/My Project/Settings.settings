@@ -431,7 +431,7 @@
     <Setting Name="InhDefaultExtApp" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="LastAnnouncment" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+    <Setting Name="LastAnnouncement" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
   </Settings>

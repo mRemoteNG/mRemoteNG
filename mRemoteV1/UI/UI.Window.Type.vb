@@ -19,7 +19,7 @@ Namespace UI
             Snake = 15
             UltraVNCSC = 16
             ComponentsCheck = 17
-            Announcment = 18
+            Announcement = 18
         End Enum
     End Namespace
 End Namespace

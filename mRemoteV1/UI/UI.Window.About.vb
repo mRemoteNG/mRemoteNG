@@ -141,9 +141,9 @@ Namespace UI
                 Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblTitle.Location = New System.Drawing.Point(13, 19)
                 Me.lblTitle.Name = "lblTitle"
-                Me.lblTitle.Size = New System.Drawing.Size(92, 24)
+                Me.lblTitle.Size = New System.Drawing.Size(120, 24)
                 Me.lblTitle.TabIndex = 3
-                Me.lblTitle.Text = "mRemote"
+                Me.lblTitle.Text = "mRemoteNG"
                 '
                 'lblVersion
                 '

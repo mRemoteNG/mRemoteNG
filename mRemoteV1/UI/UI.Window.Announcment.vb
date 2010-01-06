@@ -4,7 +4,7 @@ Imports System.Threading
 
 Namespace UI
     Namespace Window
-        Public Class Announcment
+        Public Class Announcement
             Inherits UI.Window.Base
 
 #Region "Form Init"
@@ -24,13 +24,13 @@ Namespace UI
                 Me.wBrowser.Size = New System.Drawing.Size(549, 474)
                 Me.wBrowser.TabIndex = 0
                 '
-                'Announcment
+                'Announcement
                 '
                 Me.ClientSize = New System.Drawing.Size(549, 474)
                 Me.Controls.Add(Me.wBrowser)
-                Me.Name = "Announcment"
-                Me.TabText = "Announcment"
-                Me.Text = "Announcment"
+                Me.Name = "Announcement"
+                Me.TabText = "Announcement"
+                Me.Text = "Announcement"
                 Me.Icon = My.Resources.News_Icon
                 Me.ResumeLayout(False)
 
@@ -39,17 +39,17 @@ Namespace UI
 
 #Region "Public Methods"
             Public Sub New(ByVal Panel As DockContent)
-                Me.WindowType = Type.Announcment
+                Me.WindowType = Type.Announcement
                 Me.DockPnl = Panel
                 Me.InitializeComponent()
             End Sub
 #End Region
 
 #Region "Private Methods"
-            Private Sub Announcment_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+            Private Sub Announcement_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
                 ApplyLanguage()
 
-                Me.CheckForAnnouncment()
+                Me.CheckForAnnouncement()
             End Sub
 
             Private Sub ApplyLanguage()
@@ -57,50 +57,50 @@ Namespace UI
             End Sub
 #End Region
 
-            Private aN As App.Announcment
+            Private aN As App.Announcement
             Private uT As Thread
 
-            Public Event AnnouncmentCheckCompleted(ByVal AnnouncmentAvailable As Boolean)
+            Public Event AnnouncementCheckCompleted(ByVal AnnouncementAvailable As Boolean)
 
-            Private IsAnnouncmentCheckHandlerDeclared As Boolean = False
+            Private IsAnnouncementCheckHandlerDeclared As Boolean = False
 
-            Public Sub CheckForAnnouncment()
+            Public Sub CheckForAnnouncement()
                 Try
-                    uT = New Thread(AddressOf CheckForAnnouncmentBG)
+                    uT = New Thread(AddressOf CheckForAnnouncementBG)
                     uT.IsBackground = True
                     'uT.SetApartmentState(ApartmentState.STA)
 
-                    If Me.IsAnnouncmentCheckHandlerDeclared = False Then
-                        AddHandler AnnouncmentCheckCompleted, AddressOf AnnouncmentCheckComplete
-                        Me.IsAnnouncmentCheckHandlerDeclared = True
+                    If Me.IsAnnouncementCheckHandlerDeclared = False Then
+                        AddHandler AnnouncementCheckCompleted, AddressOf AnnouncementCheckComplete
+                        Me.IsAnnouncementCheckHandlerDeclared = True
                     End If
 
                     uT.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForAnnouncment (UI.Window.Announcment) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForAnnouncement (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
-            Private Sub CheckForAnnouncmentBG()
+            Private Sub CheckForAnnouncementBG()
                 Try
-                    aN = New App.Announcment
+                    aN = New App.Announcement
 
-                    If aN.IsAnnouncmentAvailable = True Then
-                        RaiseEvent AnnouncmentCheckCompleted(True)
+                    If aN.IsAnnouncementAvailable = True Then
+                        RaiseEvent AnnouncementCheckCompleted(True)
                     Else
-                        RaiseEvent AnnouncmentCheckCompleted(False)
+                        RaiseEvent AnnouncementCheckCompleted(False)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForAnnouncmentBG (UI.Window.Announcment) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForAnnouncementBG (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
-            Private Sub AnnouncmentCheckComplete(ByVal AnnouncmentAvailable As Boolean)
+            Private Sub AnnouncementCheckComplete(ByVal AnnouncementAvailable As Boolean)
                 Try
                     wBrowser.Navigate(aN.curAI.URL)
-                    My.Settings.LastAnnouncment = aN.curAI.Name
+                    My.Settings.LastAnnouncement = aN.curAI.Name
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AnnouncmentCheckComplete (UI.Window.Announcment) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AnnouncementCheckComplete (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class

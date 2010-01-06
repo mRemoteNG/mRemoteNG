@@ -1,4 +1,7 @@
-﻿1.50:
+﻿1.60:
+  Changed name to mRemoteNG
+
+1.50:
   Added the following formats to the "Save Connections As" function:
     mRemote CSV (standard CSV file with all properties)
     vRD 2008 CSV (standard CSV file with properties relevant for importing connections in vRD 2008)
@@ -7,9 +10,9 @@
 1.49:
   mRemote and visionapp Remote Desktop 2008 merge!
     Read more here: http://www.mremote.org/wiki/visionappMerge.ashx
-    or in the announcment panel.
+    or in the Announcement panel.
   Added features to the update function
-  Added Announcment feature
+  Added Announcement feature
   Changed copyright notice in about screen and text when connecting via VNC
   Fixed some SQL-related problems
 

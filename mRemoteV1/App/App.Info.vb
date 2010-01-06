@@ -6,7 +6,7 @@ Namespace App
             Public Shared ReadOnly URLHome As String = "http://www.mRemote.org/"
             Public Shared ReadOnly URLDonate As String = "https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=felix%2edeimel%40gmail%2ecom&item_name=mRemote%20Donations&buyer_credit_promo_code=&buyer_credit_product_category=&buyer_credit_shipping_method=&buyer_credit_user_address_change=&no_shipping=0&no_note=1&tax=0&currency_code=EUR&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8"
             Public Shared ReadOnly URLBugs As String = "http://bugs.mremote.org/"
-            Public Shared ReadOnly URLAnnouncment As String = "http://update.mRemote.org/mRemote_Announcment.txt"
+            Public Shared ReadOnly URLAnnouncement As String = "http://update.mRemote.org/mRemote_Announcment.txt"
             Public Shared ReadOnly URLvRD As String = "http://software.visionapp.com/vrd"
             Public Shared ReadOnly LogFile As String = My.Application.Info.DirectoryPath & "\mRemote.log"
             Public Shared ReadOnly HomePath As String = My.Application.Info.DirectoryPath
@@ -18,7 +18,7 @@ Namespace App
 
         Public Class Settings
             'Exchange to make portable/normal
-            Public Shared ReadOnly SettingsPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.CompanyName.Replace(" ", "_") & "\" & My.Application.Info.ProductName
+            Public Shared ReadOnly SettingsPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName
             'Public Shared ReadOnly SettingsPath As String = My.Application.Info.DirectoryPath
 
             Public Shared ReadOnly LayoutFileName As String = "pnlLayout.xml"

@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' Review the values of the assembly attributes
 
-<Assembly: AssemblyTitle("mRemote")> 
+<Assembly: AssemblyTitle("mRemoteNG")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Felix Deimel")> 
-<Assembly: AssemblyProduct("mRemote")> 
-<Assembly: AssemblyCopyright("Copyright © Felix Deimel 2007 - 2008")> 
+<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyProduct("mRemoteNG")> 
+<Assembly: AssemblyCopyright("Copyright © 2007-2010 Felix Deimel, Riley McArdle")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 'The following GUID is for the ID of the typelib if this project is exposed to COM
-<Assembly: Guid("397830ab-3bbe-4d82-95d0-dfbf02e70174")> 
+<Assembly: Guid("A99669B2-FAEB-11DE-995A-826C56D89593")> 
 
 ' Version information for an assembly consists of the following four values:
 '
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.50")> 
-<Assembly: AssemblyFileVersion("1.50")> 
+<Assembly: AssemblyVersion("1.60")> 
+<Assembly: AssemblyFileVersion("1.60")> 

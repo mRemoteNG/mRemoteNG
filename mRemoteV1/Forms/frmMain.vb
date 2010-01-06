@@ -53,7 +53,7 @@ Public Class frmMain
         End If
 
         Startup.UpdateCheck()
-        Startup.AnnouncmentCheck()
+        Startup.AnnouncementCheck()
         Startup.CreateSQLUpdateHandlerAndStartTimer()
 
         AddSysMenuItems()
@@ -127,8 +127,8 @@ Public Class frmMain
             End If
         End If
 
-        If App.Runtime.IsAnnouncmentAvailable Then
-            App.Runtime.Windows.Show(UI.Window.Type.Announcment)
+        If App.Runtime.IsAnnouncementAvailable Then
+            App.Runtime.Windows.Show(UI.Window.Type.Announcement)
             Me.tmrShowUpdate.Enabled = False
         End If
 
@@ -488,7 +488,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mMenInfoAnnouncments_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoAnnouncments.Click
-        App.Runtime.Windows.Show(UI.Window.Type.Announcment)
+        App.Runtime.Windows.Show(UI.Window.Type.Announcement)
     End Sub
 
     Private Sub mMenInfoAbout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoAbout.Click

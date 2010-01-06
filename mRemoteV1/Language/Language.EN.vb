@@ -25,7 +25,7 @@
         Public Const Props_Domain As String = "Domain"
         Public Const Descr_Domain As String = "Enter your domain."
         Public Const Props_Protocol As String = "Protocol"
-        Public Const Descr_Protocol As String = "Choose the protocol mRemote should use to connect to the host."
+        Public Const Descr_Protocol As String = "Choose the protocol mRemoteNG should use to connect to the host."
         Public Const Props_Port As String = "Port"
         Public Const Descr_Port As String = "Enter the port the selected protocol is listening on."
         Public Const Props_PuttySession As String = "Putty Session"
@@ -108,15 +108,15 @@
         Public Const Menu_Connections As String = "Connections"
         Public Const Menu_ConnectionsConfig As String = "Connections && Config"
         Public Const Menu_Donate As String = "Donate"
-        Public Const Menu_ErrorsAndInfos As String = "Errors and Infos"
-        Public Const Menu_ErrorsInfos As String = "Errors && Infos"
+        Public Const Menu_ErrorsAndInfos As String = "Notifications"
+        Public Const Menu_ErrorsInfos As String = "Notifications"
         Public Const Menu_Exit As String = "Exit"
         Public Const Menu_ExternalApplications As String = "External Applications"
         Public Const Menu_ExternalApplicationsToolbar As String = "External Applications Toolbar"
         Public Const Menu_File As String = "&File"
         Public Const Menu_FullScreenKioskMode As String = "Fullscreen (Kiosk Mode)"
-        Public Const Menu_Help As String = "Help"
-        Public Const Menu_Info As String = "&Info"
+        Public Const Menu_Help As String = "mRemoteNG Help"
+        Public Const Menu_Info As String = "&Help"
         Public Const Menu_JumpTo As String = "Jump To"
         Public Const Menu_NewConnections As String = "New Connections"
         Public Const Menu_OpenConnections As String = "Open Connections"
@@ -233,7 +233,7 @@
         Public Const AutomaticallyGetSessionInfo As String = "Automatically get session information"
         Public Const WriteLogFile As String = "Write log file (application directory\mRemote.log)"
         Public Const StartupExit As String = "Startup/Exit"
-        Public Const AllowOnlySingleInstance As String = "Allow only a single instance of the application (mRemote restart required)"
+        Public Const AllowOnlySingleInstance As String = "Allow only a single instance of the application (mRemoteNG restart required)"
         Public Const ReconnectAtStartup As String = "Reconnect to previously opened sessions on startup"
         Public Const CheckForUpdatesOnStartup As String = "Check for updates on startup"
         Public Const ConfirmExit As String = "Confirm exit if there are open connections"
@@ -261,11 +261,11 @@
         Public Const EmptyUsernamePasswordDomainFields As String = "For empty Username, Password or Domain fields use:"
         Public Const SingleClickOnOpenConnectionSwitchesToIt As String = "Single click on opened connection switches to it"
         Public Const SingleClickOnConnectionOpensIt As String = "Single click on connection opens it"
-        Public Const SwitchToErrorsAndInfos As String = "Switch to Errors && Infos panel on"
+        Public Const SwitchToErrorsAndInfos As String = "Switch to Notifications panel on"
         Public Const Errors As String = "Errors"
         Public Const Warnings As String = "Warnings"
         Public Const Informations As String = "Informations"
-        Public Const UseOnlyErrorsAndInfosPanel As String = "Use only Errors && Infos panel (no messagebox popups)"
+        Public Const UseOnlyErrorsAndInfosPanel As String = "Use only Notifications panel (no messagebox popups)"
         Public Const Applications As String = "Applications"
         Public Const ProxyTestSucceeded As String = "Proxy test succeeded!"
         Public Const ProxyTestFailed As String = "Proxy test failed!"
@@ -303,8 +303,8 @@
         Public Const ChoosePanelBeforeConnecting As String = "Choose panel before connecting"
         Public Const Tools As String = "Tools"
         Public Const ImportExport As String = "Import/Export"
-        Public Const ExportmRemoteXML As String = "Export mRemote XML"
-        Public Const ImportmRemoteXML As String = "Import mRemote XML"
+        Public Const ExportmRemoteXML As String = "Export mRemote/mRemoteNG XML"
+        Public Const ImportmRemoteXML As String = "Import mRemote/mRemoteNG XML"
         Public Const ImportAD As String = "Import from Active Directory"
         Public Const ImportRDPFiles As String = "Import from .RDP file(s)"
         Public Const ImportPortScan As String = "Import from Port Scan"
@@ -326,7 +326,7 @@
         Public Const Version As String = "Version"
         Public Const UpdateAvailable As String = "Update available!"
         Public Const NoUpdateAvailable As String = "No update available!"
-        Public Const UpdateDownloadComplete As String = "Download complete!" & vbNewLine & "mRemote will now quit and begin with the installation."
+        Public Const UpdateDownloadComplete As String = "Download complete!" & vbNewLine & "mRemoteNG will now quit and begin with the installation."
         Public Const SendTo As String = "Send to..."
         Public Const Screen As String = "Screen"
 
@@ -360,30 +360,30 @@
         Public Const CcRDPOK As String = "All RDP components were found and seem to be registered properly."
         Public Const CcRDPFailed As String = "For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services Client) 6.0 installed. You can get it here: http://support.microsoft.com/kb/925876" & vbNewLine & _
                                      "If you have RDP 6.0 installed and the check still fails, try to register mstscax.dll manually. To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\windows\system32\mstscax.dll"" (Where c:\ is your system drive)." & vbNewLine & _
-                                     "If you still have trouble getting RDP to work please consult the mRemote forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                     "If you still have trouble getting RDP to work please consult the mRemoteNG forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
         Public Const CcVNCOK As String = "All VNC components were found and seem to be registered properly."
         Public Const CcVNCFailed As String = "VNC requires the scvncctrl.dll library to be registered. If you are using one of the none-setup packages like the portable package, this must be done manually." & vbNewLine & _
-                                     "To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\Program Files\mRemote\scvncctrl.dll"" (Where c:\Program Files\mRemote\ is the path to your mRemote installation)." & vbNewLine & _
-                                     "If you are still not able to pass this check or use VNC in mRemote please consult the forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                     "To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\Program Files\mRemoteNG\scvncctrl.dll"" (Where c:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation)." & vbNewLine & _
+                                     "If you are still not able to pass this check or use VNC in mRemoteNG please consult the forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
         Public Const CcPuttyOK As String = "The PuTTY executable was found and should be ready to use."
-        Public Const CcPuttyFailed As String = "The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemote package and is located in the installation path." & vbNewLine & _
-                                     "Please make sure that either you have the Putty.exe in your mRemote directory (default: c:\Program Files\mRemote\) or that you specified a valid path to your PuTTY executable in the Options (Tools - Options - Advanced - Custom PuTTY path)"
+        Public Const CcPuttyFailed As String = "The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemoteNG package and is located in the installation path." & vbNewLine & _
+                                     "Please make sure that either you have the Putty.exe in your mRemoteNG directory (default: c:\Program Files\mRemoteNG\) or that you specified a valid path to your PuTTY executable in the Options (Tools - Options - Advanced - Custom PuTTY path)"
         Public Const CcICAOK As String = "All ICA components were found and seem to be registered properly."
         Public Const CcICAFailed As String = "ICA requires that the Citrix Presentation Server Client is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/" & vbNewLine & _
                                      "If you have the Citrix Presentation Server Client installed and the check still fails, try to register wfica.ocx manually." & vbNewLine & _
                                      "To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\Program Files\Citrix\ICA Client\wfica.ocx"" (Where c:\Program Files\Citrix\ICA Client\ is the path to your Citrix Presentation Server Client installation)." & vbNewLine & _
-                                     "If you are still not able to pass this check or use ICA in mRemote please consult the forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                     "If you are still not able to pass this check or use ICA in mRemoteNG please consult the forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
         Public Const CcGeckoOK As String = "XULrunner was found and seems to be installed properly."
         Public Const CcGeckoFailed As String = "To use the Gecko Rendering Engine you need to have XULrunner 1.8.1.x and the path to the installation set in your Options." & vbNewLine & _
                                      "You can download XULrunner 1.8.1.3 here: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/" & vbNewLine & _
-                                     "When you are finished downloading extract the package to a path of your choice. Then in mRemote go to Tools - Options - Advanced and enter the correct path in the XULrunner path field." & vbNewLine & _
-                                     "If you are still not able to pass this check or use the Gecko Engine in mRemote please consult the forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                     "When you are finished downloading extract the package to a path of your choice. Then in mRemoteNG go to Tools - Options - Advanced and enter the correct path in the XULrunner path field." & vbNewLine & _
+                                     "If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please consult the forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
         Public Const CcEOLOK As String = "EOLWTSCOM was found and seems to be registered properly."
         Public Const CcEOLFailed As String = "The (RDP) Sessions feature requires that you have a registered copy of eolwtscom.dll on your system." & vbNewLine & _
-                                     "mRemote ships with this component but will not register it automatically unless you run the setup package." & vbNewLine & _
-                                     "To do register it manually do this: Open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\Program Files\mRemote\eolwtscom.dll"" (Where c:\Program Files\mRemote\ is the path to your mRemote installation)." & vbNewLine & _
-                                     "If you are still not able to pass this check or use the (RDP) Sessions feature in mRemote please consult the forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                     "mRemoteNG ships with this component but will not register it automatically unless you run the setup package." & vbNewLine & _
+                                     "To do register it manually do this: Open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\Program Files\mRemoteNG\eolwtscom.dll"" (Where c:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation)." & vbNewLine & _
+                                     "If you are still not able to pass this check or use the (RDP) Sessions feature in mRemoteNG please consult the forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
 
-        Public Const PropertiesWillOnlyBeSavedMRemoteXML As String = "(These properties will only be saved if you select mRemote XML as output file format!)"
+        Public Const PropertiesWillOnlyBeSavedMRemoteXML As String = "(These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!)"
     End Class
 End Namespace

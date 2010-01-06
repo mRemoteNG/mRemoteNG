@@ -25,7 +25,7 @@ Namespace App
         Public Shared log As log4net.ILog
 
         Public Shared IsUpdateAvailable As Boolean
-        Public Shared IsAnnouncmentAvailable As Boolean
+        Public Shared IsAnnouncementAvailable As Boolean
         Public Shared ConnectionsFileLoaded As Boolean
 
         Public Shared WithEvents tmrSqlWatcher As Timers.Timer
@@ -75,8 +75,8 @@ Namespace App
             Public Shared ultravncscPanel As New DockContent
             Public Shared componentscheckForm As UI.Window.ComponentsCheck
             Public Shared componentscheckPanel As New DockContent
-            Public Shared announcmentForm As UI.Window.Announcment
-            Public Shared announcmentPanel As New DockContent
+            Public Shared AnnouncementForm As UI.Window.Announcement
+            Public Shared AnnouncementPanel As New DockContent
 
             Public Shared Sub Show(ByVal WindowType As UI.Window.Type, Optional ByVal PortScanMode As Tools.PortScan.PortScanMode = Tools.PortScan.PortScanMode.Normal)
                 Try
@@ -136,11 +136,11 @@ Namespace App
                             Windows.componentscheckPanel = Windows.componentscheckForm
 
                             Windows.componentscheckForm.Show(frmMain.pnlDock)
-                        Case UI.Window.Type.Announcment
-                            Windows.announcmentForm = New UI.Window.Announcment(announcmentPanel)
-                            Windows.announcmentPanel = Windows.announcmentForm
+                        Case UI.Window.Type.Announcement
+                            Windows.AnnouncementForm = New UI.Window.Announcement(AnnouncementPanel)
+                            Windows.AnnouncementPanel = Windows.AnnouncementForm
 
-                            Windows.announcmentForm.Show(frmMain.pnlDock)
+                            Windows.AnnouncementForm.Show(frmMain.pnlDock)
                     End Select
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "Show (App.Runtime.Windows) failed" & vbNewLine & ex.Message, True)
@@ -224,8 +224,8 @@ Namespace App
                 Windows.updateForm = New UI.Window.Update(Windows.updatePanel)
                 Windows.updatePanel = Windows.updateForm
 
-                Windows.announcmentForm = New UI.Window.Announcment(Windows.announcmentPanel)
-                Windows.announcmentPanel = Windows.announcmentForm
+                Windows.AnnouncementForm = New UI.Window.Announcement(Windows.AnnouncementPanel)
+                Windows.AnnouncementPanel = Windows.AnnouncementForm
             End Sub
 
             Public Shared Sub GetConnectionIcons()
@@ -265,16 +265,16 @@ Namespace App
                 IsUpdateAvailable = UpdateAvailable
             End Sub
 
-            Public Shared Sub AnnouncmentCheck()
+            Public Shared Sub AnnouncementCheck()
                 If App.Editions.Spanlink.Enabled = False Then
                     frmMain.tmrShowUpdate.Enabled = True
-                    Windows.announcmentForm.CheckForAnnouncment()
-                    AddHandler Windows.announcmentForm.AnnouncmentCheckCompleted, AddressOf AnnouncmentCheckComplete
+                    Windows.AnnouncementForm.CheckForAnnouncement()
+                    AddHandler Windows.AnnouncementForm.AnnouncementCheckCompleted, AddressOf AnnouncementCheckComplete
                 End If
             End Sub
 
-            Private Shared Sub AnnouncmentCheckComplete(ByVal AnnouncmentAvailable As Boolean)
-                IsAnnouncmentAvailable = AnnouncmentAvailable
+            Private Shared Sub AnnouncementCheckComplete(ByVal AnnouncementAvailable As Boolean)
+                IsAnnouncementAvailable = AnnouncementAvailable
             End Sub
 
             Public Shared Sub ParseCommandLineArgs()
@@ -1558,7 +1558,7 @@ Namespace App
 
         Public Shared Sub SetMainFormText(Optional ByVal ConnectionFileName As String = "")
             Try
-                Dim txt As String = "mRemote"
+                Dim txt As String = "mRemoteNG"
 
                 If App.Editions.Spanlink.Enabled Then
                     txt &= " | Spanlink Communications"
