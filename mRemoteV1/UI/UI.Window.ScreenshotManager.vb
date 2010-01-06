@@ -64,45 +64,48 @@ Namespace UI
                 Me.mMenFile.Image = Global.mRemote.My.Resources.Resources.File
                 Me.mMenFile.Name = "mMenFile"
                 Me.mMenFile.Size = New System.Drawing.Size(51, 20)
-                Me.mMenFile.Text = Language.Base.Menu_File
+                Me.mMenFile.Text = "&File"
                 '
                 'mMenFileSaveAll
                 '
                 Me.mMenFileSaveAll.Image = Global.mRemote.My.Resources.Resources.Screenshot_Save
                 Me.mMenFileSaveAll.Name = "mMenFileSaveAll"
-                Me.mMenFileSaveAll.Size = New System.Drawing.Size(152, 22)
-                Me.mMenFileSaveAll.Text = Language.Base.SaveAll
+                Me.mMenFileSaveAll.Size = New System.Drawing.Size(128, 22)
+                Me.mMenFileSaveAll.Text = "Save All"
                 '
                 'mMenFileRemoveAll
                 '
                 Me.mMenFileRemoveAll.Image = Global.mRemote.My.Resources.Resources.Screenshot_Delete
                 Me.mMenFileRemoveAll.Name = "mMenFileRemoveAll"
-                Me.mMenFileRemoveAll.Size = New System.Drawing.Size(152, 22)
-                Me.mMenFileRemoveAll.Text = Language.Base.RemoveAll
+                Me.mMenFileRemoveAll.Size = New System.Drawing.Size(128, 22)
+                Me.mMenFileRemoveAll.Text = "Remove All"
                 '
                 'cMenScreenshot
                 '
                 Me.cMenScreenshot.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenScreenshotCopy, Me.cMenScreenshotSave})
                 Me.cMenScreenshot.Name = "cMenScreenshot"
-                Me.cMenScreenshot.Size = New System.Drawing.Size(111, 48)
+                Me.cMenScreenshot.Size = New System.Drawing.Size(100, 48)
                 '
                 'cMenScreenshotCopy
                 '
                 Me.cMenScreenshotCopy.Image = Global.mRemote.My.Resources.Resources.Screenshot_Copy
                 Me.cMenScreenshotCopy.Name = "cMenScreenshotCopy"
-                Me.cMenScreenshotCopy.Size = New System.Drawing.Size(110, 22)
-                Me.cMenScreenshotCopy.Text = Language.Base.Copy
+                Me.cMenScreenshotCopy.Size = New System.Drawing.Size(99, 22)
+                Me.cMenScreenshotCopy.Text = "Copy"
                 '
                 'cMenScreenshotSave
                 '
                 Me.cMenScreenshotSave.Image = Global.mRemote.My.Resources.Resources.Screenshot_Save
                 Me.cMenScreenshotSave.Name = "cMenScreenshotSave"
-                Me.cMenScreenshotSave.Size = New System.Drawing.Size(110, 22)
-                Me.cMenScreenshotSave.Text = Language.Base.Save
+                Me.cMenScreenshotSave.Size = New System.Drawing.Size(99, 22)
+                Me.cMenScreenshotSave.Text = "Save"
                 '
                 'dlgSaveSingleImage
                 '
-                Me.dlgSaveSingleImage.Filter = "JPG " & Language.Base.File & " (.jpg)|*.jpg|PNG " & Language.Base.File & " (.png)|*.png|GIF " & Language.Base.File & " (.gif)|*.gif"
+                Me.dlgSaveSingleImage.Filter = "Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group Fi" & _
+                    "le (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Ne" & _
+                    "twork Graphics File (.png)|*.png"
+                Me.dlgSaveSingleImage.FilterIndex = 4
                 '
                 'ScreenshotManager
                 '
@@ -113,8 +116,8 @@ Namespace UI
                 Me.Icon = Global.mRemote.My.Resources.Resources.Screenshot_Icon
                 Me.MainMenuStrip = Me.msMain
                 Me.Name = "ScreenshotManager"
-                Me.TabText = Language.Base.Screenshots
-                Me.Text = Language.Base.Screenshots
+                Me.TabText = "Screenshots"
+                Me.Text = "Screenshots"
                 Me.msMain.ResumeLayout(False)
                 Me.msMain.PerformLayout()
                 Me.cMenScreenshot.ResumeLayout(False)
@@ -135,7 +138,7 @@ Namespace UI
                 mMenFileRemoveAll.Text = Language.Base.RemoveAll
                 cMenScreenshotCopy.Text = Language.Base.Copy
                 cMenScreenshotSave.Text = Language.Base.Save
-                dlgSaveSingleImage.Filter = "JPG " & Language.Base.File & " (.jpg)|*.jpg|PNG " & Language.Base.File & " (.png)|*.png|GIF " & Language.Base.File & " (.gif)|*.gif"
+                dlgSaveSingleImage.Filter = Language.Base.SaveImageFilter
                 TabText = Language.Base.Screenshots
                 Text = Language.Base.Screenshots
             End Sub
@@ -300,12 +303,14 @@ Namespace UI
                 Try
                     If Me.dlgSaveSingleImage.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
                         Select Case LCase(Me.dlgSaveSingleImage.FileName.Substring(Me.dlgSaveSingleImage.FileName.LastIndexOf(".") + 1))
-                            Case "png"
-                                TryCast(Me.cMenScreenshot.Tag, PictureBox).Image.Save(Me.dlgSaveSingleImage.FileName, Imaging.ImageFormat.Png)
-                            Case "jpg"
-                                TryCast(Me.cMenScreenshot.Tag, PictureBox).Image.Save(Me.dlgSaveSingleImage.FileName, Imaging.ImageFormat.Jpeg)
                             Case "gif"
                                 TryCast(Me.cMenScreenshot.Tag, PictureBox).Image.Save(Me.dlgSaveSingleImage.FileName, Imaging.ImageFormat.Gif)
+                            Case "jpeg"
+                                TryCast(Me.cMenScreenshot.Tag, PictureBox).Image.Save(Me.dlgSaveSingleImage.FileName, Imaging.ImageFormat.Jpeg)
+                            Case "jpg"
+                                TryCast(Me.cMenScreenshot.Tag, PictureBox).Image.Save(Me.dlgSaveSingleImage.FileName, Imaging.ImageFormat.Jpeg)
+                            Case "png"
+                                TryCast(Me.cMenScreenshot.Tag, PictureBox).Image.Save(Me.dlgSaveSingleImage.FileName, Imaging.ImageFormat.Png)
                         End Select
                     End If
                 Catch ex As Exception

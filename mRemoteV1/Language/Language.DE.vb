@@ -282,7 +282,7 @@
         Public Const SaveAll As String = "Alle speichern"
         Public Const RemoveAll As String = "Alle entfernen"
         Public Const Save As String = "Speichern"
-        Public Const File As String = "Datei"
+        Public Const SaveImageFilter As String = "Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group File (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Network Graphics File (.png)|*.png" ' TODO: Translate
         Public Const Screenshots As String = "Screenshots"
         Public Const Activity As String = "Aktivität"
         Public Const Type As String = "Type"

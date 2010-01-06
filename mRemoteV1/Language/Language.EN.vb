@@ -283,7 +283,7 @@
         Public Const SaveAll As String = "Save All"
         Public Const RemoveAll As String = "Remove All"
         Public Const Save As String = "Save"
-        Public Const File As String = "File"
+        Public Const SaveImageFilter As String = "Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group File (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Network Graphics File (.png)|*.png"
         Public Const Screenshots As String = "Screenshots"
         Public Const Activity As String = "Activity"
         Public Const Type As String = "Type"
