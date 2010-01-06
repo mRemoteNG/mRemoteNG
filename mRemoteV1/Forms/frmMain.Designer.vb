@@ -109,20 +109,17 @@ Partial Class frmMain
         Me.msMain.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.msMain.GripMargin = New System.Windows.Forms.Padding(2, 0, 0, 0)
         Me.msMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenFile, Me.mMenView, Me.mMenTools, Me.mMenInfo})
-        Me.msMain.Location = New System.Drawing.Point(3, 0)
+        Me.msMain.Location = New System.Drawing.Point(0, 0)
         Me.msMain.Name = "msMain"
-        Me.msMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.msMain.Size = New System.Drawing.Size(323, 24)
-        Me.msMain.Stretch = False
+        Me.msMain.Size = New System.Drawing.Size(842, 24)
         Me.msMain.TabIndex = 16
         Me.msMain.Text = "Main Toolbar"
         '
         'mMenFile
         '
         Me.mMenFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenFileNew, Me.mMenFileLoad, Me.mMenFileSep1, Me.mMenFileSave, Me.mMenFileSaveAs, Me.mMenFileSep2, Me.mMenFileExit})
-        Me.mMenFile.Image = CType(resources.GetObject("mMenFile.Image"), System.Drawing.Image)
         Me.mMenFile.Name = "mMenFile"
-        Me.mMenFile.Size = New System.Drawing.Size(51, 20)
+        Me.mMenFile.Size = New System.Drawing.Size(35, 20)
         Me.mMenFile.Text = "&File"
         '
         'mMenFileNew
@@ -179,9 +176,8 @@ Partial Class frmMain
         'mMenView
         '
         Me.mMenView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenViewAddConnectionPanel, Me.mMenViewConnectionPanels, Me.mMenViewSep1, Me.mMenViewConnections, Me.mMenViewConfig, Me.mMenViewSessions, Me.mMenViewErrorsAndInfos, Me.mMenViewScreenshotManager, Me.ToolStripSeparator1, Me.mMenViewJumpTo, Me.mMenViewSep2, Me.mMenViewQuickConnectToolbar, Me.mMenViewExtAppsToolbar, Me.mMenViewSep3, Me.mMenViewFullscreen})
-        Me.mMenView.Image = CType(resources.GetObject("mMenView.Image"), System.Drawing.Image)
         Me.mMenView.Name = "mMenView"
-        Me.mMenView.Size = New System.Drawing.Size(58, 20)
+        Me.mMenView.Size = New System.Drawing.Size(42, 20)
         Me.mMenView.Text = "&View"
         '
         'mMenViewAddConnectionPanel
@@ -317,9 +313,8 @@ Partial Class frmMain
         'mMenTools
         '
         Me.mMenTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenToolsSSHTransfer, Me.mMenToolsUVNCSC, Me.mMenToolsExternalApps, Me.mMenToolsPortScan, Me.mMenToolsSep1, Me.mMenToolsUpdate, Me.mMenToolsComponentsCheck, Me.mMenToolsOptions})
-        Me.mMenTools.Image = CType(resources.GetObject("mMenTools.Image"), System.Drawing.Image)
         Me.mMenTools.Name = "mMenTools"
-        Me.mMenTools.Size = New System.Drawing.Size(61, 20)
+        Me.mMenTools.Size = New System.Drawing.Size(45, 20)
         Me.mMenTools.Text = "&Tools"
         '
         'mMenToolsSSHTransfer
@@ -379,10 +374,9 @@ Partial Class frmMain
         'mMenInfo
         '
         Me.mMenInfo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenInfoHelp, Me.mMenInfoSep1, Me.mMenInfoDonate, Me.mMenInfoWebsite, Me.mMenInfovRD08, Me.mMenInfoSep2, Me.mMenInfoAnnouncments, Me.mMenInfoAbout})
-        Me.mMenInfo.Image = CType(resources.GetObject("mMenInfo.Image"), System.Drawing.Image)
         Me.mMenInfo.Name = "mMenInfo"
-        Me.mMenInfo.Size = New System.Drawing.Size(53, 20)
-        Me.mMenInfo.Text = "&Info"
+        Me.mMenInfo.Size = New System.Drawing.Size(41, 20)
+        Me.mMenInfo.Text = "&Help"
         Me.mMenInfo.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal
         '
         'mMenInfoHelp
@@ -391,7 +385,7 @@ Partial Class frmMain
         Me.mMenInfoHelp.Name = "mMenInfoHelp"
         Me.mMenInfoHelp.ShortcutKeys = System.Windows.Forms.Keys.F1
         Me.mMenInfoHelp.Size = New System.Drawing.Size(202, 22)
-        Me.mMenInfoHelp.Text = "Help"
+        Me.mMenInfoHelp.Text = "mRemoteNG Help"
         '
         'mMenInfoSep1
         '
@@ -446,7 +440,7 @@ Partial Class frmMain
         'lblQuickConnect
         '
         Me.lblQuickConnect.Name = "lblQuickConnect"
-        Me.lblQuickConnect.Size = New System.Drawing.Size(47, 22)
+        Me.lblQuickConnect.Size = New System.Drawing.Size(43, 22)
         Me.lblQuickConnect.Text = "&Quicky:"
         '
         'cmbQuickConnect
@@ -454,7 +448,7 @@ Partial Class frmMain
         Me.cmbQuickConnect.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbQuickConnect.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbQuickConnect.Name = "cmbQuickConnect"
-        Me.cmbQuickConnect.Size = New System.Drawing.Size(120, 23)
+        Me.cmbQuickConnect.Size = New System.Drawing.Size(120, 21)
         '
         'tsContainer
         '
@@ -532,14 +526,14 @@ Partial Class frmMain
         Me.cMenExtAppsToolbar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenToolbarShowText})
         Me.cMenExtAppsToolbar.Name = "cMenToolbar"
         Me.cMenExtAppsToolbar.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.cMenExtAppsToolbar.Size = New System.Drawing.Size(129, 26)
+        Me.cMenExtAppsToolbar.Size = New System.Drawing.Size(126, 26)
         '
         'cMenToolbarShowText
         '
         Me.cMenToolbarShowText.Checked = True
         Me.cMenToolbarShowText.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cMenToolbarShowText.Name = "cMenToolbarShowText"
-        Me.cMenToolbarShowText.Size = New System.Drawing.Size(128, 22)
+        Me.cMenToolbarShowText.Size = New System.Drawing.Size(125, 22)
         Me.cMenToolbarShowText.Text = "Show Text"
         '
         'tmrShowUpdate
