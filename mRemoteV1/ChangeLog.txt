@@ -8,6 +8,7 @@
   Changed filename delimiter in title bar from pipe to dash
   Changed default format for saving screenshot images to PNG
   Changed website addresses
+  Added Report a Bug to the Help menu
 
 1.50:
   Added the following formats to the "Save Connections As" function:

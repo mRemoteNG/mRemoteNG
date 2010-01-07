@@ -65,6 +65,7 @@ Partial Class frmMain
         Me.mMenInfo = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenInfoHelp = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenInfoSep1 = New System.Windows.Forms.ToolStripSeparator
+        Me.mMenInfoBugReport = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenInfoDonate = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenInfoWebsite = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenInfoSep2 = New System.Windows.Forms.ToolStripSeparator
@@ -372,7 +373,7 @@ Partial Class frmMain
         '
         'mMenInfo
         '
-        Me.mMenInfo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenInfoHelp, Me.mMenInfoSep1, Me.mMenInfoDonate, Me.mMenInfoWebsite, Me.mMenInfoSep2, Me.mMenInfoAnnouncements, Me.mMenInfoAbout})
+        Me.mMenInfo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenInfoHelp, Me.mMenInfoSep1, Me.mMenInfoBugReport, Me.mMenInfoDonate, Me.mMenInfoWebsite, Me.mMenInfoSep2, Me.mMenInfoAnnouncements, Me.mMenInfoAbout})
         Me.mMenInfo.Name = "mMenInfo"
         Me.mMenInfo.Size = New System.Drawing.Size(41, 20)
         Me.mMenInfo.Text = "&Help"
@@ -390,6 +391,13 @@ Partial Class frmMain
         '
         Me.mMenInfoSep1.Name = "mMenInfoSep1"
         Me.mMenInfoSep1.Size = New System.Drawing.Size(176, 6)
+        '
+        'mMenInfoBugReport
+        '
+        Me.mMenInfoBugReport.Image = Global.mRemote.My.Resources.Resources.Bug
+        Me.mMenInfoBugReport.Name = "mMenInfoBugReport"
+        Me.mMenInfoBugReport.Size = New System.Drawing.Size(179, 22)
+        Me.mMenInfoBugReport.Text = "Report a Bug"
         '
         'mMenInfoDonate
         '
@@ -619,5 +627,6 @@ Partial Class frmMain
     Friend WithEvents mMenToolsComponentsCheck As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenInfoAnnouncements As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenInfoSep2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mMenInfoBugReport As System.Windows.Forms.ToolStripMenuItem
 
 End Class

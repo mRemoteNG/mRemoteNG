@@ -90,6 +90,7 @@ Public Class frmMain
         mMenToolsOptions.Text = Language.Base.Menu_Options
         mMenInfo.Text = Language.Base.Menu_Info
         mMenInfoHelp.Text = Language.Base.Menu_Help
+        mMenInfoBugReport.Text = Language.Base.Menu_BugReport
         mMenInfoDonate.Text = Language.Base.Menu_Donate
         mMenInfoWebsite.Text = Language.Base.Menu_Website
         mMenInfoAbout.Text = Language.Base.Menu_About
@@ -475,7 +476,7 @@ Public Class frmMain
         App.Runtime.Windows.Show(UI.Window.Type.Help)
     End Sub
 
-    Private Sub mMenInfoBugReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub mMenInfoBugReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoBugReport.Click
         App.Runtime.GoToBugs()
     End Sub
 

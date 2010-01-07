@@ -102,7 +102,7 @@
 
         Public Const Menu_About As String = "About"
         Public Const Menu_AddConnectionPanel As String = "Add Connection Panel"
-        Public Const Menu_BugReport As String = "Bug Report"
+        Public Const Menu_BugReport As String = "Report a Bug"
         Public Const Menu_Config As String = "Config"
         Public Const Menu_ConnectionPanels As String = "Connection Panels"
         Public Const Menu_Connections As String = "Connections"
