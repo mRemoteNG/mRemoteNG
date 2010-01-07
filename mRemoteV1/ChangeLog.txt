@@ -7,6 +7,7 @@
 	%USERPROFILE%\Local Settings\Application Data\mRemoteNG\mRemoteNG.log
   Changed filename delimiter in title bar from pipe to dash
   Changed default format for saving screenshot images to PNG
+  Changed website addresses
 
 1.50:
   Added the following formats to the "Save Connections As" function:

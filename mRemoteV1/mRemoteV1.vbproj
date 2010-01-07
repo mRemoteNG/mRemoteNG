@@ -715,6 +715,7 @@
     <None Include="Resources\Icons_FamFamFam\News_Icon.ico" />
     <None Include="Resources\Images_FamFamFam\News.png" />
     <None Include="Resources\Images\vRD08R1.png" />
+    <Content Include="Resources\Announcement\mRemote_Announcement.txt" />
     <Content Include="Resources\Update\mRemote_Update.txt" />
     <Content Include="Help\Main.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -810,9 +811,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\Announcment\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
