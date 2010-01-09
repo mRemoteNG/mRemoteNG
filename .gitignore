@@ -4,3 +4,4 @@ mRemoteV1/publish
 *.pfx
 *.suo
 *.vbproj.user
+Thumbs.db
