@@ -17,6 +17,7 @@ OutFile "bin\mRemoteNG-Installer-${PRODUCT_VERSION}.exe"
 SetCompressor /SOLID lzma
 InstallDir "$PROGRAMFILES\mRemoteNG"
 InstallDirRegKey HKLM "Software\mRemoteNG" "InstallPath"
+RequestExecutionLevel admin
 
 ; Version Information
 VIProductVersion ${PRODUCT_VERSION_LONG}
@@ -119,7 +120,7 @@ Section "un.Uninstall"
 	RMDIR /r $INSTDIR
 
 	; Start Menu
-	Delete "$SMPROGRAMS\mRemoteNG\mRemote.lnk"
+	Delete "$SMPROGRAMS\mRemoteNG\mRemoteNG.lnk"
 	Delete "$SMPROGRAMS\mRemoteNG\Uninstall.lnk"
 	RMDir "$SMPROGRAMS\mRemoteNG"
 
