@@ -594,9 +594,6 @@
     <Content Include="Help\Update.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="License.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Notes\Help.txt" />
     <Content Include="Notes\ICA.txt" />
     <Content Include="Notes\Misc.txt" />
