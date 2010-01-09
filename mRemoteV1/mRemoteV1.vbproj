@@ -717,7 +717,6 @@
     <None Include="Resources\Icons\ComponentsCheck_Icon.ico" />
     <None Include="Resources\Icons_FamFamFam\News_Icon.ico" />
     <None Include="Resources\Images_FamFamFam\News.png" />
-    <None Include="Resources\Images\vRD08R1.png" />
     <Content Include="Resources\Announcement\mRemote_Announcement.txt" />
     <Content Include="Resources\Update\mRemote_Update.txt" />
     <Content Include="Help\Main.css">
