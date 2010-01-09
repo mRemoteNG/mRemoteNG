@@ -1,10 +1,15 @@
 !include "MUI.nsh"
+!include "WordFunc.nsh"
+!insertmacro VersionCompare
 
 !DEFINE PRODUCT_VERSION_MAJOR 1
 !DEFINE PRODUCT_VERSION_MINOR 60
 
 !DEFINE PRODUCT_VERSION "${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}"
 !DEFINE PRODUCT_VERSION_LONG "${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.0.0"
+
+; Global Variables
+Var InstallDotNET
 
 ; Basic Config
 Name "mRemoteNG ${PRODUCT_VERSION}"
@@ -42,7 +47,7 @@ VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" ${PRODUCT_VERSION_LONG}
 
 ; Finish Page
 !define MUI_FINISHPAGE_RUN_NOTCHECKED
-!define MUI_FINISHPAGE_RUN_Text "Lauch mRemoteNG Now"
+!define MUI_FINISHPAGE_RUN_Text "Launch mRemoteNG Now"
 !define MUI_FINISHPAGE_RUN "$INSTDIR\mRemoteNG.exe"
 !insertmacro MUI_PAGE_FINISH
 
@@ -53,7 +58,30 @@ VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" ${PRODUCT_VERSION_LONG}
 ; Set Language
 !insertmacro MUI_LANGUAGE "English"
 
-Section ""
+Function .onInit
+	; Check .NET version
+	StrCpy $InstallDotNET "No"
+	Call GetDotNETVersion
+	Pop $0
+
+	${If} $0 == "not found"
+		StrCpy $InstallDotNET "Yes"
+	${EndIf}
+
+	StrCpy $0 $0 "" 1 # skip "v"
+
+	${VersionCompare} $0 "2.0" $1
+	${If} $1 == 2
+		StrCpy $InstallDotNET "Yes"
+	${EndIf}
+
+	${If} $InstallDotNET == "Yes"
+		MessageBox MB_OK|MB_ICONEXCLAMATION "mRemoteNG requires Microsoft .NET Framework 2.0."
+		Quit
+	${EndIf}
+FunctionEnd
+
+Section "" ; Install
 	SetOutPath $INSTDIR
 
 	; AddFiles
@@ -101,3 +129,15 @@ Section "un.Uninstall"
 	DeleteRegKey /ifempty HKCU "Software\mRemoteNG"
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG"
 SectionEnd
+
+Function GetDotNETVersion
+	Push $0
+	Push $1
+
+	System::Call "mscoree::GetCORVersion(w .r0, i ${NSIS_MAX_STRLEN}, *i) i .r1"
+	StrCmp $1 "error" 0 +2
+	StrCpy $0 "not found"
+
+	Pop $1
+	Exch $0
+FunctionEnd
