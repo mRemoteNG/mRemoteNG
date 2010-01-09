@@ -90,6 +90,7 @@ Public Class frmMain
         mMenToolsOptions.Text = Language.Base.Menu_Options
         mMenInfo.Text = Language.Base.Menu_Info
         mMenInfoHelp.Text = Language.Base.Menu_Help
+        mMenInfoForum.Text = Language.Base.Menu_Forum
         mMenInfoBugReport.Text = Language.Base.Menu_BugReport
         mMenInfoDonate.Text = Language.Base.Menu_Donate
         mMenInfoWebsite.Text = Language.Base.Menu_Website
@@ -474,6 +475,10 @@ Public Class frmMain
 #Region "Info"
     Private Sub mMenInfoHelp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoHelp.Click
         App.Runtime.Windows.Show(UI.Window.Type.Help)
+    End Sub
+
+    Private Sub mMenInfoForum_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoForum.Click
+        App.Runtime.GoToForum()
     End Sub
 
     Private Sub mMenInfoBugReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenInfoBugReport.Click

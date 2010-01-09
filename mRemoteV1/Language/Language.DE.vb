@@ -102,7 +102,8 @@
 
         Public Const Menu_About As String = "Über"
         Public Const Menu_AddConnectionPanel As String = "Verbindungs Panel hinzufügen"
-        Public Const Menu_BugReport As String = "Bug Report"
+        Public Const Menu_Forum As String = "Support Forum" ' TODO: Translate
+        Public Const Menu_BugReport As String = "Bug Report" ' TODO: Translate
         Public Const Menu_Config As String = "Konfiguration"
         Public Const Menu_ConnectionPanels As String = "Verbindungs Panels"
         Public Const Menu_Connections As String = "Verbindungen"
@@ -360,11 +361,11 @@
         Public Const CcRDPOK As String = "Alle RDP Komponenten wurden gefunden und scheinen korrekt registriert zu sein."
         Public Const CcRDPFailed As String = "Um RDP korrekt betreiben können muss mindestens Remote Desktop Connection (Terminal Services Client) 6.0 installiert sein. Hier können sie die Software herunterladen: http://support.microsoft.com/kb/925876" & vbNewLine & _
                                             "Wenn sie RDP 6.0 bereits installiert haben und der Check noch immer fehlschlägt, versuchen sie die Datei mstscax.dll manuell zu registrieren. Öffnen sie hierzu den Ausführen Dialog (Start - Ausführen) und geben sie Folgendes ein: regsvr32 ""c:\windows\system32\mstscax.dll"" (Wobei c:\ ihr System-Laufwerk ist)." & vbNewLine & _
-                                            "Wenn sie noch immer Probleme mit RDP haben, konsultieren sie bitte das mRemote Forum: http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                            "Wenn sie noch immer Probleme mit RDP haben, konsultieren sie bitte das mRemote Forum: http://forum.mremoteng.org/"
         Public Const CcVNCOK As String = "Alle VNC Komponenten wurden gefunden und scheinen korrekt registriert zu sein."
         Public Const CcVNCFailed As String = "VNC benötigt die Datei scvncctrl.dll (wird mitgeliefert). Diese muss registriert sein. Wenn sie eines der nicht-Setup Pakete verwenden muss dies manuell durchgeführt werden." & vbNewLine & _
                                             "Öffnen sie hierzu den Ausführen Dialog (Start - Ausführen) und geben sie Folgendes ein: regsvr32 ""c:\Programme\mRemote\scvncctrl.dll"" (Wobei c:\Programme\mRemote\ ihr mRemote Installations-Pfad ist)." & vbNewLine & _
-                                            "Wenn sie noch immer Probleme mit VNC haben, konsultieren sie bitte das mRemote Forum: http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                            "Wenn sie noch immer Probleme mit VNC haben, konsultieren sie bitte das mRemote Forum: http://forum.mremoteng.org/"
         Public Const CcPuttyOK As String = "PuTTY wurde gefunden und scheint betriebsbereit zu sein."
         Public Const CcPuttyFailed As String = "Die Protokolle, SSH, Telnet, Rlogin und RAW benötigen PuTTY. PuTTY wird in allen mRemote Paketen mitgeliefert und befindet sich im Installations-Pfad." & vbNewLine & _
                                             "Bitte versichern sie sich dass sich die Datei Putty.exe in ihrem mRemote Installations-Pfad befindet (Standard: c:\Programme\mRemote\) oder dass sie einen korrekten Pfad in den Optionen (Extras - Optionen - Erweitert - Eigener PuTTY Pfad) angegeben haben."
@@ -372,17 +373,17 @@
         Public Const CcICAFailed As String = "ICA benötigt eine funktionierende Citrix Presentation Server Client Installation und dass die Datei wfica.ocx korrekt registriert ist. Hier können sie den Client herunterladen: http://www.citrix.com/download/" & vbNewLine & _
                                             "Wenn sie Citrix Presentation Server Client installiert haben und noch immer Probleme haben diesen Check erfolgreich abzuschließen, versuchen sie die Datei wfica.ocx manuell zu registrieren." & vbNewLine & _
                                             "Öffnen sie hierzu den Ausführen Dialog (Start - Ausführen) und geben sie Folgendes ein: regsvr32 ""c:\Programme\Citrix\ICA Client\wfica.ocx"" (Wobei c:\Programme\Citrix\ICA Client\ ihr Citrix Presentation Server Client Installations-Pfad ist)." & vbNewLine & _
-                                            "Wenn sie noch immer Probleme mit ICA haben, konsultieren sie bitte das mRemote Forum: http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                            "Wenn sie noch immer Probleme mit ICA haben, konsultieren sie bitte das mRemote Forum: http://forum.mremoteng.org/"
         Public Const CcGeckoOK As String = "XULrunner wurde gefunden und scheint korrekt installiert zu sein."
         Public Const CcGeckoFailed As String = "Um die Gecko Rendering Engine benutzen zu können benötigen sie XULrunner 1.8.1.x und einen korrekt eingetragenen Pfad in den Optionen." & vbNewLine & _
                                             "Hier können sie XULrunner 1.8.1.3 herunterladen: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/" & vbNewLine & _
                                             "Wenn der Download abgeschlossen ist entpacken sie das Paket (Der Speicherort ist dabei ihnen überlassen). Als nächstes öffnen sie (in mRemote) Extras - Optionen - Erweitert und geben sie den korrekten Pfad im XULrunner Feld an." & vbNewLine & _
-                                            "Wenn sie noch immer Probleme mit der Gecko Engine in mRemote haben, konsultieren sie bitte das mRemote Forum: http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                            "Wenn sie noch immer Probleme mit der Gecko Engine in mRemote haben, konsultieren sie bitte das mRemote Forum: http://forum.mremoteng.org/"
         Public Const CcEOLOK As String = "EOLWTSCOM wurde gefunden und scheint korrekt registriert zu sein."
         Public Const CcEOLFailed As String = "Das (RDP) Sessions feature benötigt die Datei eolwtscom.dll. Diese muss korrekt registriert sein." & vbNewLine & _
                                             "Alle mRemote Pakete beinhalten diese Datei, jedoch muss sie, wenn sie eines der nicht-Setup Pakete verwenden manuell registriert werden." & vbNewLine & _
                                             "Öffnen sie hierzu den Ausführen Dialog (Start - Ausführen) und geben sie Folgendes ein: regsvr32 ""c:\Programme\mRemote\eolwtscom.dll"" (Wobei c:\Programme\mRemote\ ihr mRemote Installations-Pfad ist)." & vbNewLine & _
-                                            "Wenn sie noch immer Probleme mit dem (RDP) Sessions Feature in mRemote haben, konsultieren sie bitte das mRemote Forum: http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                            "Wenn sie noch immer Probleme mit dem (RDP) Sessions Feature in mRemote haben, konsultieren sie bitte das mRemote Forum: http://forum.mremoteng.org/"
 
         Public Const PropertiesWillOnlyBeSavedMRemoteXML As String = "(Diese Einstellungen werden nur gespeichert wenn sie mRemote XML als Dateiformat auswählen!)"
     End Class

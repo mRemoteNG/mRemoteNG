@@ -3,10 +3,11 @@ Imports System.Environment
 Namespace App
     Namespace Info
         Public Class General
-            Public Shared ReadOnly URLHome As String = "http://www.mRemoteNG.org/"
-            Public Shared ReadOnly URLDonate As String = "http://donate.mRemoteNG.org/"
-            Public Shared ReadOnly URLBugs As String = "http://bugs.mRemoteNG.org/"
-            Public Shared ReadOnly URLAnnouncement As String = "http://update.mRemoteNG.org/announcement.txt"
+            Public Shared ReadOnly URLHome As String = "http://www.mremoteng.org/"
+            Public Shared ReadOnly URLDonate As String = "http://donate.mremoteng.org/"
+            Public Shared ReadOnly URLForum As String = "http://forum.mremoteng.org/"
+            Public Shared ReadOnly URLBugs As String = "http://bugs.mremoteng.org/"
+            Public Shared ReadOnly URLAnnouncement As String = "http://update.mremoteng.org/announcement.txt"
             Public Shared ReadOnly LogFile As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\mRemoteNG.log"
             Public Shared ReadOnly HomePath As String = My.Application.Info.DirectoryPath
             Public Shared EncryptionKey As String = "mR3m"
@@ -25,7 +26,7 @@ Namespace App
         End Class
 
         Public Class Update
-            Public Shared ReadOnly URL As String = "http://update.mRemoteNG.org/"
+            Public Shared ReadOnly URL As String = "http://update.mremoteng.org/"
 #If DEBUG Then
             Public Shared ReadOnly File As String = "update-debug.txt"
 #Else

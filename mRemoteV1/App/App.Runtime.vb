@@ -1517,16 +1517,36 @@ Namespace App
 #End Region
 
 #Region "Misc"
+        Public Shared Sub GoToURL(ByVal URL As String)
+            Dim cI As New mRemote.Connection.Info
+
+            cI.Name = "Website"
+            cI.Hostname = URL
+            If URL.StartsWith("https:") Then
+                cI.Protocol = Connection.Protocol.Protocols.HTTPS
+            Else
+                cI.Protocol = Connection.Protocol.Protocols.HTTP
+            End If
+            cI.SetDefaultPort()
+            cI.IsQuicky = True
+
+            App.Runtime.OpenConnection(cI, mRemote.Connection.Info.Force.DoNotJump)
+        End Sub
+
         Public Shared Sub GoToWebsite()
-            Process.Start(App.Info.General.URLHome)
+            GoToURL(App.Info.General.URLHome)
         End Sub
 
         Public Shared Sub GoToDonate()
-            Process.Start(App.Info.General.URLDonate)
+            GoToURL(App.Info.General.URLDonate)
+        End Sub
+
+        Public Shared Sub GoToForum()
+            GoToURL(App.Info.General.URLForum)
         End Sub
 
         Public Shared Sub GoToBugs()
-            Process.Start(App.Info.General.URLBugs)
+            GoToURL(App.Info.General.URLBugs)
         End Sub
 
         Public Shared Sub Report(ByVal Text As String)

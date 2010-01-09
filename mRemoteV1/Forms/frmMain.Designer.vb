@@ -59,7 +59,6 @@ Partial Class frmMain
         Me.mMenToolsExternalApps = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenToolsPortScan = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenToolsSep1 = New System.Windows.Forms.ToolStripSeparator
-        Me.mMenToolsUpdate = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenToolsComponentsCheck = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenToolsOptions = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenInfo = New System.Windows.Forms.ToolStripMenuItem
@@ -83,6 +82,9 @@ Partial Class frmMain
         Me.cMenToolbarShowText = New System.Windows.Forms.ToolStripMenuItem
         Me.tmrShowUpdate = New System.Windows.Forms.Timer(Me.components)
         Me.tmrAutoSave = New System.Windows.Forms.Timer(Me.components)
+        Me.mMenToolsUpdate = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenInfoForum = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
         Me.msMain.SuspendLayout()
         Me.tsContainer.ContentPanel.SuspendLayout()
         Me.tsContainer.TopToolStripPanel.SuspendLayout()
@@ -312,7 +314,7 @@ Partial Class frmMain
         '
         'mMenTools
         '
-        Me.mMenTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenToolsSSHTransfer, Me.mMenToolsUVNCSC, Me.mMenToolsExternalApps, Me.mMenToolsPortScan, Me.mMenToolsSep1, Me.mMenToolsUpdate, Me.mMenToolsComponentsCheck, Me.mMenToolsOptions})
+        Me.mMenTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenToolsSSHTransfer, Me.mMenToolsUVNCSC, Me.mMenToolsExternalApps, Me.mMenToolsPortScan, Me.mMenToolsSep1, Me.mMenToolsComponentsCheck, Me.mMenToolsOptions})
         Me.mMenTools.Name = "mMenTools"
         Me.mMenTools.Size = New System.Drawing.Size(45, 20)
         Me.mMenTools.Text = "&Tools"
@@ -350,13 +352,6 @@ Partial Class frmMain
         Me.mMenToolsSep1.Name = "mMenToolsSep1"
         Me.mMenToolsSep1.Size = New System.Drawing.Size(170, 6)
         '
-        'mMenToolsUpdate
-        '
-        Me.mMenToolsUpdate.Image = Global.mRemote.My.Resources.Resources.Update
-        Me.mMenToolsUpdate.Name = "mMenToolsUpdate"
-        Me.mMenToolsUpdate.Size = New System.Drawing.Size(173, 22)
-        Me.mMenToolsUpdate.Text = "Update"
-        '
         'mMenToolsComponentsCheck
         '
         Me.mMenToolsComponentsCheck.Image = Global.mRemote.My.Resources.Resources.ComponentsCheck
@@ -373,7 +368,7 @@ Partial Class frmMain
         '
         'mMenInfo
         '
-        Me.mMenInfo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenInfoHelp, Me.mMenInfoSep1, Me.mMenInfoBugReport, Me.mMenInfoDonate, Me.mMenInfoWebsite, Me.mMenInfoSep2, Me.mMenInfoAnnouncements, Me.mMenInfoAbout})
+        Me.mMenInfo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenInfoHelp, Me.mMenInfoSep1, Me.mMenInfoWebsite, Me.mMenInfoDonate, Me.mMenInfoForum, Me.mMenInfoBugReport, Me.ToolStripSeparator2, Me.mMenInfoAnnouncements, Me.mMenToolsUpdate, Me.mMenInfoSep2, Me.mMenInfoAbout})
         Me.mMenInfo.Name = "mMenInfo"
         Me.mMenInfo.Size = New System.Drawing.Size(41, 20)
         Me.mMenInfo.Text = "&Help"
@@ -430,7 +425,7 @@ Partial Class frmMain
         Me.mMenInfoAbout.Image = Global.mRemote.My.Resources.Resources.mRemote
         Me.mMenInfoAbout.Name = "mMenInfoAbout"
         Me.mMenInfoAbout.Size = New System.Drawing.Size(179, 22)
-        Me.mMenInfoAbout.Text = "About"
+        Me.mMenInfoAbout.Text = "About mRemoteNG"
         '
         'mMenSep3
         '
@@ -545,6 +540,24 @@ Partial Class frmMain
         '
         Me.tmrAutoSave.Interval = 10000
         '
+        'mMenToolsUpdate
+        '
+        Me.mMenToolsUpdate.Image = Global.mRemote.My.Resources.Resources.Update
+        Me.mMenToolsUpdate.Name = "mMenToolsUpdate"
+        Me.mMenToolsUpdate.Size = New System.Drawing.Size(179, 22)
+        Me.mMenToolsUpdate.Text = "Check for Updates"
+        '
+        'mMenInfoForum
+        '
+        Me.mMenInfoForum.Name = "mMenInfoForum"
+        Me.mMenInfoForum.Size = New System.Drawing.Size(179, 22)
+        Me.mMenInfoForum.Text = "Support Forum"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(176, 6)
+        '
         'frmMain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -583,7 +596,6 @@ Partial Class frmMain
     Friend WithEvents mMenFileSaveAs As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenFileSep2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mMenFileExit As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mMenToolsUpdate As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenToolsSep1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mMenToolsOptions As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenInfoHelp As System.Windows.Forms.ToolStripMenuItem
@@ -628,5 +640,8 @@ Partial Class frmMain
     Friend WithEvents mMenInfoAnnouncements As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenInfoSep2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mMenInfoBugReport As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mMenInfoForum As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenToolsUpdate As System.Windows.Forms.ToolStripMenuItem
 
 End Class

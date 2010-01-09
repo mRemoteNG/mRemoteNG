@@ -8,7 +8,9 @@
   Changed filename delimiter in title bar from pipe to dash
   Changed default format for saving screenshot images to PNG
   Changed website addresses
-  Added Report a Bug to the Help menu
+  Added Report a Bug and Support Forum links to the Help menu
+  Moved Check for Updates to the Help menu
+  Changed website links in Help menu to load within mRemoteNG instead of launching an external browser
 
 1.50:
   Added the following formats to the "Save Connections As" function:

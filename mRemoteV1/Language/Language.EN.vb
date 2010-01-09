@@ -102,6 +102,7 @@
 
         Public Const Menu_About As String = "About"
         Public Const Menu_AddConnectionPanel As String = "Add Connection Panel"
+        Public Const Menu_Forum As String = "Support Forum"
         Public Const Menu_BugReport As String = "Report a Bug"
         Public Const Menu_Config As String = "Config"
         Public Const Menu_ConnectionPanels As String = "Connection Panels"
@@ -130,7 +131,7 @@
         Public Const Menu_SessionsScreenshots As String = "Sessions && Screenshots"
         Public Const Menu_SSHFileTransfer As String = "SSH File Transfer"
         Public Const Menu_Tools As String = "&Tools"
-        Public Const Menu_Update As String = "Update"
+        Public Const Menu_Update As String = "Check for Updates"
         Public Const Menu_View As String = "&View"
         Public Const Menu_Website As String = "Website"
 
@@ -360,11 +361,11 @@
         Public Const CcRDPOK As String = "All RDP components were found and seem to be registered properly."
         Public Const CcRDPFailed As String = "For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services Client) 6.0 installed. You can get it here: http://support.microsoft.com/kb/925876" & vbNewLine & _
                                      "If you have RDP 6.0 installed and the check still fails, try to register mstscax.dll manually. To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\windows\system32\mstscax.dll"" (Where c:\ is your system drive)." & vbNewLine & _
-                                     "If you still have trouble getting RDP to work please consult the mRemoteNG forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                     "If you still have trouble getting RDP to work please consult the mRemoteNG Forum at http://forum.mremoteng.org/"
         Public Const CcVNCOK As String = "All VNC components were found and seem to be registered properly."
         Public Const CcVNCFailed As String = "VNC requires the scvncctrl.dll library to be registered. If you are using one of the none-setup packages like the portable package, this must be done manually." & vbNewLine & _
                                      "To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\Program Files\mRemoteNG\scvncctrl.dll"" (Where c:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation)." & vbNewLine & _
-                                     "If you are still not able to pass this check or use VNC in mRemoteNG please consult the forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                     "If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/"
         Public Const CcPuttyOK As String = "The PuTTY executable was found and should be ready to use."
         Public Const CcPuttyFailed As String = "The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemoteNG package and is located in the installation path." & vbNewLine & _
                                      "Please make sure that either you have the Putty.exe in your mRemoteNG directory (default: c:\Program Files\mRemoteNG\) or that you specified a valid path to your PuTTY executable in the Options (Tools - Options - Advanced - Custom PuTTY path)"
@@ -372,17 +373,17 @@
         Public Const CcICAFailed As String = "ICA requires that the Citrix Presentation Server Client is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/" & vbNewLine & _
                                      "If you have the Citrix Presentation Server Client installed and the check still fails, try to register wfica.ocx manually." & vbNewLine & _
                                      "To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\Program Files\Citrix\ICA Client\wfica.ocx"" (Where c:\Program Files\Citrix\ICA Client\ is the path to your Citrix Presentation Server Client installation)." & vbNewLine & _
-                                     "If you are still not able to pass this check or use ICA in mRemoteNG please consult the forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                     "If you are still not able to pass this check or use ICA in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/"
         Public Const CcGeckoOK As String = "XULrunner was found and seems to be installed properly."
         Public Const CcGeckoFailed As String = "To use the Gecko Rendering Engine you need to have XULrunner 1.8.1.x and the path to the installation set in your Options." & vbNewLine & _
                                      "You can download XULrunner 1.8.1.3 here: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/" & vbNewLine & _
                                      "When you are finished downloading extract the package to a path of your choice. Then in mRemoteNG go to Tools - Options - Advanced and enter the correct path in the XULrunner path field." & vbNewLine & _
-                                     "If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please consult the forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                     "If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/"
         Public Const CcEOLOK As String = "EOLWTSCOM was found and seems to be registered properly."
         Public Const CcEOLFailed As String = "The (RDP) Sessions feature requires that you have a registered copy of eolwtscom.dll on your system." & vbNewLine & _
                                      "mRemoteNG ships with this component but will not register it automatically unless you run the setup package." & vbNewLine & _
                                      "To do register it manually do this: Open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\Program Files\mRemoteNG\eolwtscom.dll"" (Where c:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation)." & vbNewLine & _
-                                     "If you are still not able to pass this check or use the (RDP) Sessions feature in mRemoteNG please consult the forums at http://sourceforge.net/forum/forum.php?forum_id=677204"
+                                     "If you are still not able to pass this check or use the (RDP) Sessions feature in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/"
 
         Public Const PropertiesWillOnlyBeSavedMRemoteXML As String = "(These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!)"
     End Class
