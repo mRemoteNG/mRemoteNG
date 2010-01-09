@@ -24,7 +24,7 @@
     <ManifestCertificateThumbprint>B249710A6BB08171F8E75082CF2355AE2890911A</ManifestCertificateThumbprint>
     <ManifestKeyFile>mRemoteV1_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -111,7 +111,7 @@
     </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\log4net.dll</HintPath>
+      <HintPath>References\log4net.dll</HintPath>
     </Reference>
     <Reference Include="MagicLibrary, Version=1.7.4.0, Culture=neutral, PublicKeyToken=3a6eb82f876a49bc">
       <SpecificVersion>False</SpecificVersion>
@@ -599,7 +599,6 @@
     <Content Include="ChangeLog.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="mRemoteV1_TemporaryKey.pfx" />
     <None Include="My Project\DataSources\mRemote.Language.Base.datasource" />
     <None Include="My Project\DataSources\mRemote.Language.EN.datasource" />
     <None Include="Notes\PropertyList.csv" />
