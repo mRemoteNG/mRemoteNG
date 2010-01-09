@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <StartupObject>mRemote.My.MyApplication</StartupObject>
     <RootNamespace>mRemote</RootNamespace>
-    <AssemblyName>mRemote</AssemblyName>
+    <AssemblyName>mRemoteNG</AssemblyName>
     <MyType>WindowsForms</MyType>
     <OptionExplicit>On</OptionExplicit>
     <FileUpgradeFlags>
@@ -785,8 +785,6 @@
     <None Include="Resources\Images\Arrow_Down.png" />
     <None Include="Resources\Images\ActiveDirectory.png" />
     <None Include="Resources\Images\Website.png" />
-    <None Include="scvncctrl.lic">
-    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">

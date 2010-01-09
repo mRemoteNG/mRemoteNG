@@ -204,7 +204,7 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="QuickyTBLocation" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">300, 0</Value>
+      <Value Profile="(Default)">3, 24</Value>
     </Setting>
     <Setting Name="QuickyTBParentDock" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)">Top</Value>
