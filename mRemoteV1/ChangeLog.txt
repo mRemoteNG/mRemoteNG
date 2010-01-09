@@ -3,8 +3,6 @@
   Fixed menu bar not staying docked to left side
   Removed snakes game Easter egg
   Removed references to visionapp Remote Desktop
-  Changed name and location of log file
-	%USERPROFILE%\Local Settings\Application Data\mRemoteNG\mRemoteNG.log
   Changed filename delimiter in title bar from pipe to dash
   Changed default format for saving screenshot images to PNG
   Changed website addresses

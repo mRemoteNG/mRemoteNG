@@ -8,7 +8,6 @@ Namespace App
             Public Shared ReadOnly URLForum As String = "http://forum.mremoteng.org/"
             Public Shared ReadOnly URLBugs As String = "http://bugs.mremoteng.org/"
             Public Shared ReadOnly URLAnnouncement As String = "http://update.mremoteng.org/announcement.txt"
-            Public Shared ReadOnly LogFile As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\mRemoteNG.log"
             Public Shared ReadOnly HomePath As String = My.Application.Info.DirectoryPath
             Public Shared EncryptionKey As String = "mR3m"
             Public Shared ReportingFilePath As String = ""
