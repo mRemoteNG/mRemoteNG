@@ -8,7 +8,7 @@
   Changed website addresses
   Added Report a Bug and Support Forum links to the Help menu
   Moved Check for Updates to the Help menu
-  Changed website links in Help menu to load within mRemoteNG instead of launching an external browser
+  Changed website links in Help menu and About page to load within mRemoteNG instead of launching an external browser
 
 1.50:
   Added the following formats to the "Save Connections As" function:
