@@ -48,7 +48,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CheckForUpdatesOnStartup" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ShowDescriptionTooltipsInTree" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -433,6 +433,12 @@
     </Setting>
     <Setting Name="LastAnnouncement" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CheckForUpdatesAsked" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CheckForUpdatesFrequencyDays" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">7</Value>
     </Setting>
   </Settings>
 </SettingsFile>

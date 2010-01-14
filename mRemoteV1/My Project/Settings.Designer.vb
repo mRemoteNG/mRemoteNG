@@ -252,7 +252,7 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Configuration.SettingsProviderAttribute(GetType(mRemote.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property CheckForUpdatesOnStartup() As Boolean
             Get
                 Return CType(Me("CheckForUpdatesOnStartup"),Boolean)
@@ -1924,6 +1924,30 @@ Namespace My
             End Get
             Set
                 Me("LastAnnouncement") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property CheckForUpdatesAsked() As Boolean
+            Get
+                Return CType(Me("CheckForUpdatesAsked"),Boolean)
+            End Get
+            Set
+                Me("CheckForUpdatesAsked") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("7")>  _
+        Public Property CheckForUpdatesFrequencyDays() As Integer
+            Get
+                Return CType(Me("CheckForUpdatesFrequencyDays"),Integer)
+            End Get
+            Set
+                Me("CheckForUpdatesFrequencyDays") = value
             End Set
         End Property
     End Class

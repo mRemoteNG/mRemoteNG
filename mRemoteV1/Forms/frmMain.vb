@@ -44,12 +44,16 @@ Public Class frmMain
         'LoadCredentials()
         LoadConnections()
 
-        If My.Settings.FirstStart Then
-            Windows.Show(UI.Window.Type.About)
-        End If
+        'If My.Settings.FirstStart Then
+        '   Windows.Show(UI.Window.Type.About)
+        'End If
 
         If My.Settings.StartupComponentsCheck Then
             Windows.Show(UI.Window.Type.ComponentsCheck)
+        End If
+
+        If Not My.Settings.CheckForUpdatesAsked Then
+            ' TODO: Show updates options
         End If
 
         Startup.UpdateCheck()

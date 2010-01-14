@@ -1,4 +1,10 @@
-﻿1.60:
+﻿1.61:
+  Rearranged the Options page and added an Updates tab
+  Added option to change how often updates are checked
+  Open Updates options tab before connecting for the first time
+  No longer show About page on first run
+
+1.60:
   Changed name to mRemoteNG
   Fixed menu bar not staying docked to left side
   Removed snakes game Easter egg
