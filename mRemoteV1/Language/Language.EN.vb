@@ -363,9 +363,10 @@
                                      "If you have RDP 6.0 installed and the check still fails, try to register mstscax.dll manually. To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\windows\system32\mstscax.dll"" (Where c:\ is your system drive)." & vbNewLine & _
                                      "If you still have trouble getting RDP to work please consult the mRemoteNG Forum at http://forum.mremoteng.org/"
         Public Const CcVNCOK As String = "All VNC components were found and seem to be registered properly."
-        Public Const CcVNCFailed As String = "VNC requires the scvncctrl.dll library to be registered. If you are using one of the non-setup packages like the portable package, this must be done manually." & vbNewLine & _
-                                     "To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\Program Files\mRemoteNG\scvncctrl.dll"" (Where c:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation)." & vbNewLine & _
-                                     "If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/"
+        'Public Const CcVNCFailed As String = "VNC requires the scvncctrl.dll library to be registered. If you are using one of the non-setup packages like the portable package, this must be done manually." & vbNewLine & _
+        '                             "To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\Program Files\mRemoteNG\scvncctrl.dll"" (Where c:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation)." & vbNewLine & _
+        '                             "If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/"
+        Public Const CcVNCFailed As String = "Due to licensing issues, this version of mRemoteNG does not support VNC."
         Public Const CcPuttyOK As String = "The PuTTY executable was found and should be ready to use."
         Public Const CcPuttyFailed As String = "The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemoteNG package and is located in the installation path." & vbNewLine & _
                                      "Please make sure that either you have the Putty.exe in your mRemoteNG directory (default: c:\Program Files\mRemoteNG\) or that you specified a valid path to your PuTTY executable in the Options (Tools - Options - Advanced - Custom PuTTY path)"

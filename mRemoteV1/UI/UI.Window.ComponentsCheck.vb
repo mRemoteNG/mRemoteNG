@@ -517,33 +517,33 @@ Namespace UI
                 RDP.Dispose()
 
 
-                Dim VNC As AxViewerX.AxCSC_ViewerXControl = Nothing
+                'Dim VNC As AxViewerX.AxCSC_ViewerXControl = Nothing
 
-                Try
-                    VNC = New AxViewerX.AxCSC_ViewerXControl
-                    mRemote.Connection.Protocol.VNC.SetupLicense(VNC)
-                    VNC.CreateControl()
+                'Try
+                '    VNC = New AxViewerX.AxCSC_ViewerXControl
+                '    mRemote.Connection.Protocol.VNC.SetupLicense(VNC)
+                '    VNC.CreateControl()
 
-                    Do Until VNC.Created
-                        Thread.Sleep(10)
-                        System.Windows.Forms.Application.DoEvents()
-                    Loop
+                '    Do Until VNC.Created
+                '        Thread.Sleep(10)
+                '        System.Windows.Forms.Application.DoEvents()
+                '    Loop
 
-                    pbCheck2.Image = My.Resources.Good_Symbol
-                    lblCheck2.ForeColor = Color.DarkOliveGreen
-                    lblCheck2.Text = "VNC (Virtual Network Computing) " & Language.Base.CcCheckSucceeded
-                    txtCheck2.Text = Language.Base.CcVNCOK
-                Catch ex As Exception
-                    pbCheck2.Image = My.Resources.Bad_Symbol
-                    lblCheck2.ForeColor = Color.Firebrick
-                    lblCheck2.Text = "VNC (Virtual Network Computing) " & Language.Base.CcCheckFailed
-                    txtCheck2.Text = Language.Base.CcVNCFailed
+                '    pbCheck2.Image = My.Resources.Good_Symbol
+                '    lblCheck2.ForeColor = Color.DarkOliveGreen
+                '    lblCheck2.Text = "VNC (Virtual Network Computing) " & Language.Base.CcCheckSucceeded
+                '    txtCheck2.Text = Language.Base.CcVNCOK
+                'Catch ex As Exception
+                pbCheck2.Image = My.Resources.Bad_Symbol
+                lblCheck2.ForeColor = Color.Firebrick
+                lblCheck2.Text = "VNC (Virtual Network Computing) " & Language.Base.CcCheckFailed
+                txtCheck2.Text = Language.Base.CcVNCFailed
 
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "VNC " & errorMsg, True)
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
-                End Try
+                mC.AddMessage(Messages.MessageClass.WarningMsg, "VNC " & errorMsg, True)
+                'mC.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
+                'End Try
 
-                VNC.Dispose()
+                'VNC.Dispose()
 
 
                 Dim pPath As String = ""

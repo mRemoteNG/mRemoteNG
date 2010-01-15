@@ -77,10 +77,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\AxInterop.MSTSCLib.dll</HintPath>
     </Reference>
-    <Reference Include="AxInterop.ViewerX, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\AxInterop.ViewerX.dll</HintPath>
-    </Reference>
     <Reference Include="AxInterop.WFICALib, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\AxInterop.WFICALib.dll</HintPath>
@@ -100,10 +96,6 @@
     <Reference Include="Interop.MSTSCLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Interop.MSTSCLib.dll</HintPath>
-    </Reference>
-    <Reference Include="Interop.ViewerX, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\Interop.ViewerX.dll</HintPath>
     </Reference>
     <Reference Include="Interop.WFICALib, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

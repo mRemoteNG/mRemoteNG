@@ -1,4 +1,8 @@
-﻿1.60:
+﻿1.61:
+  Removed unlicensed SmartCode Solutions ViewerX VNC Viewer ActiveX
+  This version of mRemoteNG does not support VNC
+
+1.60:
   Changed name to mRemoteNG
   Fixed menu bar not staying docked to left side
   Removed snakes game Easter egg

@@ -3,7 +3,7 @@
 !insertmacro VersionCompare
 
 !DEFINE PRODUCT_VERSION_MAJOR 1
-!DEFINE PRODUCT_VERSION_MINOR 60
+!DEFINE PRODUCT_VERSION_MINOR 61
 
 !DEFINE PRODUCT_VERSION "${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}"
 !DEFINE PRODUCT_VERSION_LONG "${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.0.0"
@@ -95,7 +95,6 @@ Section "" ; Install
 
 	; Register ActiveX components
 	RegDLL "$INSTDIR\eolwtscom.dll"
-	RegDLL "$INSTDIR\scvncctrl.dll"
  
 	; Start Menu
 	CreateDirectory "$SMPROGRAMS\mRemoteNG"
@@ -114,7 +113,6 @@ SectionEnd
 Section "un.Uninstall"
 	; Unregister ActiveX components
 	UnregDLL "$INSTDIR\eolwtscom.dll"
-	UnregDLL "$INSTDIR\scvncctrl.dll"
 
 	; Delete Files
 	RMDIR /r $INSTDIR
