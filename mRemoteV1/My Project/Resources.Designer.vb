@@ -760,6 +760,42 @@ Namespace My.Resources
             End Get
         End Property
         
+        '''<summary>
+        '''  Looks up a localized string similar to Every {0} days.
+        '''</summary>
+        Friend ReadOnly Property strUpdateFrequencyCustom() As String
+            Get
+                Return ResourceManager.GetString("strUpdateFrequencyCustom", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Daily.
+        '''</summary>
+        Friend ReadOnly Property strUpdateFrequencyDaily() As String
+            Get
+                Return ResourceManager.GetString("strUpdateFrequencyDaily", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Monthly.
+        '''</summary>
+        Friend ReadOnly Property strUpdateFrequencyMonthly() As String
+            Get
+                Return ResourceManager.GetString("strUpdateFrequencyMonthly", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Weekly.
+        '''</summary>
+        Friend ReadOnly Property strUpdateFrequencyWeekly() As String
+            Get
+                Return ResourceManager.GetString("strUpdateFrequencyWeekly", resourceCulture)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Tab_Icon() As System.Drawing.Icon
             Get
                 Dim obj As Object = ResourceManager.GetObject("Tab_Icon", resourceCulture)

@@ -252,7 +252,7 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Configuration.SettingsProviderAttribute(GetType(mRemote.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
         Public Property CheckForUpdatesOnStartup() As Boolean
             Get
                 Return CType(Me("CheckForUpdatesOnStartup"),Boolean)
@@ -445,7 +445,6 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemote.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property ResetPanels() As Boolean
@@ -952,10 +951,8 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemote.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False"),  _
-         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property ResetToolbars() As Boolean
             Get
                 Return CType(Me("ResetToolbars"),Boolean)
@@ -1928,6 +1925,7 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemote.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property CheckForUpdatesAsked() As Boolean
@@ -1940,6 +1938,7 @@ Namespace My
         End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemote.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("7")>  _
         Public Property CheckForUpdatesFrequencyDays() As Integer

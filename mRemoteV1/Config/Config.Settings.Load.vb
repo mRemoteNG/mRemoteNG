@@ -79,9 +79,9 @@ Namespace Config
                         Me.LoadExternalAppsFromXML()
 
                         If My.Settings.ResetToolbars = False Then
-                            Me.LoadToolbarsFromSettings()
+                            LoadToolbarsFromSettings()
                         Else
-                            Me.SetToolbarsDefault()
+                            SetToolbarsDefault()
                         End If
                     End With
                 Catch ex As Exception

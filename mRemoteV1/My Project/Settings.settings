@@ -48,7 +48,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CheckForUpdatesOnStartup" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="ShowDescriptionTooltipsInTree" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -92,7 +92,7 @@
     <Setting Name="ShowProtocolOnTabs" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ResetPanels" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+    <Setting Name="ResetPanels" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="UpdateUseProxy" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
@@ -209,7 +209,7 @@
     <Setting Name="QuickyTBParentDock" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)">Top</Value>
     </Setting>
-    <Setting Name="ResetToolbars" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.Boolean" Scope="User">
+    <Setting Name="ResetToolbars" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="UseSQLServer" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
@@ -434,10 +434,10 @@
     <Setting Name="LastAnnouncement" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="CheckForUpdatesAsked" Type="System.Boolean" Scope="User">
+    <Setting Name="CheckForUpdatesAsked" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="CheckForUpdatesFrequencyDays" Type="System.Int32" Scope="User">
+    <Setting Name="CheckForUpdatesFrequencyDays" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">7</Value>
     </Setting>
   </Settings>

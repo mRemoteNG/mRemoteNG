@@ -299,7 +299,6 @@ Namespace UI
                 '
                 Me.cboUpdateCheckFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
                 Me.cboUpdateCheckFrequency.FormattingEnabled = True
-                Me.cboUpdateCheckFrequency.Items.AddRange(New Object() {"Daily", "Weekly", "Monthly"})
                 Me.cboUpdateCheckFrequency.Location = New System.Drawing.Point(48, 40)
                 Me.cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency"
                 Me.cboUpdateCheckFrequency.Size = New System.Drawing.Size(128, 23)
@@ -1351,7 +1350,6 @@ Namespace UI
                 Try
                     Me.chkSaveConsOnExit.Checked = My.Settings.SaveConsOnExit
                     Me.chkConfirmExit.Checked = My.Settings.ConfirmExit
-                    Me.chkCheckForUpdatesOnStartup.Checked = My.Settings.CheckForUpdatesOnStartup
                     Me.chkReconnectOnStart.Checked = My.Settings.OpenConsFromLastSession
                     Me.chkProperInstallationOfComponentsAtStartup.Checked = My.Settings.StartupComponentsCheck
 
@@ -1394,6 +1392,27 @@ Namespace UI
                     Me.chkMCWarnings.Checked = My.Settings.SwitchToMCOnWarning
                     Me.chkMCErrors.Checked = My.Settings.SwitchToMCOnError
 
+                    chkCheckForUpdatesOnStartup.Checked = My.Settings.CheckForUpdatesOnStartup
+                    cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked
+                    cboUpdateCheckFrequency.Items.Clear()
+                    Dim nDaily As Integer = cboUpdateCheckFrequency.Items.Add(My.Resources.strUpdateFrequencyDaily)
+                    Dim nWeekly As Integer = cboUpdateCheckFrequency.Items.Add(My.Resources.strUpdateFrequencyWeekly)
+                    Dim nMonthly As Integer = cboUpdateCheckFrequency.Items.Add(My.Resources.strUpdateFrequencyMonthly)
+                    Select Case My.Settings.CheckForUpdatesFrequencyDays
+                        Case Is < 1
+                            chkCheckForUpdatesOnStartup.Checked = False
+                            cboUpdateCheckFrequency.SelectedIndex = nDaily
+                        Case 1 ' Daily
+                            cboUpdateCheckFrequency.SelectedIndex = nDaily
+                        Case 7 ' Weekly
+                            cboUpdateCheckFrequency.SelectedIndex = nWeekly
+                        Case 31 ' Monthly
+                            cboUpdateCheckFrequency.SelectedIndex = nMonthly
+                        Case Else
+                            Dim nCustom As Integer = cboUpdateCheckFrequency.Items.Add(String.Format(My.Resources.strUpdateFrequencyCustom, My.Settings.CheckForUpdatesFrequencyDays))
+                            cboUpdateCheckFrequency.SelectedIndex = nCustom
+                    End Select
+
                     Me.chkWriteLogFile.Checked = My.Settings.WriteLogFile
                     Me.chkEncryptCompleteFile.Checked = My.Settings.EncryptCompleteConnectionsFile
                     Me.chkAutomaticallyGetSessionInfo.Checked = My.Settings.AutomaticallyGetSessionInfo
@@ -1428,7 +1447,6 @@ Namespace UI
                 Try
                     My.Settings.SaveConsOnExit = Me.chkSaveConsOnExit.Checked
                     My.Settings.ConfirmExit = Me.chkConfirmExit.Checked
-                    My.Settings.CheckForUpdatesOnStartup = Me.chkCheckForUpdatesOnStartup.Checked
                     My.Settings.OpenConsFromLastSession = Me.chkReconnectOnStart.Checked
                     My.Settings.StartupComponentsCheck = Me.chkProperInstallationOfComponentsAtStartup.Checked
 
@@ -1489,6 +1507,18 @@ Namespace UI
                     My.Settings.SwitchToMCOnWarning = Me.chkMCWarnings.Checked
                     My.Settings.SwitchToMCOnError = Me.chkMCErrors.Checked
 
+                    My.Settings.CheckForUpdatesOnStartup = chkCheckForUpdatesOnStartup.Checked
+                    Select Case cboUpdateCheckFrequency.SelectedItem.ToString()
+                        Case My.Resources.strUpdateFrequencyDaily
+                            My.Settings.CheckForUpdatesFrequencyDays = 1
+                        Case My.Resources.strUpdateFrequencyWeekly
+                            My.Settings.CheckForUpdatesFrequencyDays = 7
+                        Case My.Resources.strUpdateFrequencyMonthly
+                            My.Settings.CheckForUpdatesFrequencyDays = 31
+                        Case Else
+                            ' Custom so do not change
+                    End Select
+
                     My.Settings.WriteLogFile = Me.chkWriteLogFile.Checked
                     My.Settings.EncryptCompleteConnectionsFile = Me.chkEncryptCompleteFile.Checked
                     My.Settings.AutomaticallyGetSessionInfo = Me.chkAutomaticallyGetSessionInfo.Checked
@@ -1543,6 +1573,10 @@ Namespace UI
                 Me.WindowType = Type.Options
                 Me.DockPnl = Panel
                 Me.InitializeComponent()
+            End Sub
+
+            Public Sub ShowUpdatesTab()
+                TabController.SelectedTab = tabUpdates
             End Sub
 #End Region
 
@@ -1720,6 +1754,10 @@ Namespace UI
                 oDlg = Nothing
             End Sub
 
+            Private Sub chkCheckForUpdatesOnStartup_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkCheckForUpdatesOnStartup.CheckedChanged
+                cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked
+            End Sub
+
             Private Sub chkUseProxyForAutomaticUpdates_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkUseProxyForAutomaticUpdates.CheckedChanged
                 Me.pnlProxyBasic.Enabled = Me.chkUseProxyForAutomaticUpdates.Checked
                 Me.btnTestProxy.Enabled = Me.chkUseProxyForAutomaticUpdates.Checked
@@ -1757,8 +1795,6 @@ Namespace UI
                 End If
             End Sub
 
-
-
             Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
                 Me.Close()
             End Sub
@@ -1768,10 +1804,6 @@ Namespace UI
                 Me.Close()
             End Sub
 #End Region
-
-            Private Sub TabController_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabController.SelectionChanged
-
-            End Sub
         End Class
     End Namespace
 End Namespace
