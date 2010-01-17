@@ -10,21 +10,19 @@ Namespace Connection
 #Region "Properties"
             Public Property SmartSize() As Boolean
                 Get
-                    Return Not VNC.AutoScroll
+                    Return VNC.Scaled
                 End Get
                 Set(ByVal value As Boolean)
-                    VNC.SetScalingMode(value)
-                    VNC.AutoScroll = Not value
+                    VNC.Scaled = value
                 End Set
             End Property
 
             Public Property ViewOnly() As Boolean
                 Get
-                    'Return VNC.ViewOnly ' TODO: Fix this
-                    Return False
+                    Return VNC.ViewOnly
                 End Get
                 Set(ByVal value As Boolean)
-                    VNC.SetInputMode(value)
+                    VNC.ViewOnly = value
                 End Set
             End Property
 #End Region

@@ -17,7 +17,6 @@ Namespace UI
             Friend WithEvents pnlBottom As System.Windows.Forms.Panel
             Friend WithEvents pbLogo As System.Windows.Forms.PictureBox
             Friend WithEvents lblEdition As System.Windows.Forms.Label
-            Friend WithEvents llblCopyright2 As System.Windows.Forms.LinkLabel
             Friend WithEvents llblCopyright3 As System.Windows.Forms.LinkLabel
             Friend WithEvents pnlTop As System.Windows.Forms.Panel
 
@@ -27,7 +26,6 @@ Namespace UI
                 Me.pbLogo = New System.Windows.Forms.PictureBox
                 Me.pnlBottom = New System.Windows.Forms.Panel
                 Me.llblCopyright3 = New System.Windows.Forms.LinkLabel
-                Me.llblCopyright2 = New System.Windows.Forms.LinkLabel
                 Me.txtChangeLog = New System.Windows.Forms.TextBox
                 Me.lblTitle = New System.Windows.Forms.Label
                 Me.lblVersion = New System.Windows.Forms.Label
@@ -82,7 +80,6 @@ Namespace UI
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlBottom.BackColor = System.Drawing.SystemColors.Control
                 Me.pnlBottom.Controls.Add(Me.llblCopyright3)
-                Me.pnlBottom.Controls.Add(Me.llblCopyright2)
                 Me.pnlBottom.Controls.Add(Me.txtChangeLog)
                 Me.pnlBottom.Controls.Add(Me.lblTitle)
                 Me.pnlBottom.Controls.Add(Me.lblVersion)
@@ -98,28 +95,15 @@ Namespace UI
                 'llblCopyright3
                 '
                 Me.llblCopyright3.AutoSize = True
-                Me.llblCopyright3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.llblCopyright3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.llblCopyright3.ForeColor = System.Drawing.SystemColors.ControlText
                 Me.llblCopyright3.LinkColor = System.Drawing.Color.Blue
-                Me.llblCopyright3.Location = New System.Drawing.Point(29, 111)
+                Me.llblCopyright3.Location = New System.Drawing.Point(16, 116)
                 Me.llblCopyright3.Name = "llblCopyright3"
-                Me.llblCopyright3.Size = New System.Drawing.Size(57, 13)
+                Me.llblCopyright3.Size = New System.Drawing.Size(79, 18)
                 Me.llblCopyright3.TabIndex = 4
                 Me.llblCopyright3.TabStop = True
                 Me.llblCopyright3.Text = "Copyright3"
-                '
-                'llblCopyright2
-                '
-                Me.llblCopyright2.AutoSize = True
-                Me.llblCopyright2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.llblCopyright2.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.llblCopyright2.LinkColor = System.Drawing.Color.Blue
-                Me.llblCopyright2.Location = New System.Drawing.Point(29, 93)
-                Me.llblCopyright2.Name = "llblCopyright2"
-                Me.llblCopyright2.Size = New System.Drawing.Size(57, 13)
-                Me.llblCopyright2.TabIndex = 3
-                Me.llblCopyright2.TabStop = True
-                Me.llblCopyright2.Text = "Copyright2"
                 '
                 'txtChangeLog
                 '
@@ -129,14 +113,14 @@ Namespace UI
                 Me.txtChangeLog.BackColor = System.Drawing.SystemColors.Control
                 Me.txtChangeLog.BorderStyle = System.Windows.Forms.BorderStyle.None
                 Me.txtChangeLog.Cursor = System.Windows.Forms.Cursors.Default
-                Me.txtChangeLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.txtChangeLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.txtChangeLog.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.txtChangeLog.Location = New System.Drawing.Point(115, 158)
+                Me.txtChangeLog.Location = New System.Drawing.Point(24, 184)
                 Me.txtChangeLog.Multiline = True
                 Me.txtChangeLog.Name = "txtChangeLog"
                 Me.txtChangeLog.ReadOnly = True
                 Me.txtChangeLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-                Me.txtChangeLog.Size = New System.Drawing.Size(670, 229)
+                Me.txtChangeLog.Size = New System.Drawing.Size(761, 203)
                 Me.txtChangeLog.TabIndex = 7
                 Me.txtChangeLog.TabStop = False
                 '
@@ -145,7 +129,7 @@ Namespace UI
                 Me.lblTitle.AutoSize = True
                 Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblTitle.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.lblTitle.Location = New System.Drawing.Point(13, 19)
+                Me.lblTitle.Location = New System.Drawing.Point(16, 16)
                 Me.lblTitle.Name = "lblTitle"
                 Me.lblTitle.Size = New System.Drawing.Size(120, 24)
                 Me.lblTitle.TabIndex = 0
@@ -156,7 +140,7 @@ Namespace UI
                 Me.lblVersion.AutoSize = True
                 Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblVersion.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.lblVersion.Location = New System.Drawing.Point(17, 50)
+                Me.lblVersion.Location = New System.Drawing.Point(16, 56)
                 Me.lblVersion.Name = "lblVersion"
                 Me.lblVersion.Size = New System.Drawing.Size(58, 18)
                 Me.lblVersion.TabIndex = 1
@@ -167,7 +151,7 @@ Namespace UI
                 Me.lblChangeLog.AutoSize = True
                 Me.lblChangeLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblChangeLog.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.lblChangeLog.Location = New System.Drawing.Point(16, 155)
+                Me.lblChangeLog.Location = New System.Drawing.Point(16, 160)
                 Me.lblChangeLog.Name = "lblChangeLog"
                 Me.lblChangeLog.Size = New System.Drawing.Size(92, 18)
                 Me.lblChangeLog.TabIndex = 6
@@ -176,11 +160,11 @@ Namespace UI
                 'lblLicense
                 '
                 Me.lblLicense.AutoSize = True
-                Me.lblLicense.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.lblLicense.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblLicense.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.lblLicense.Location = New System.Drawing.Point(28, 129)
+                Me.lblLicense.Location = New System.Drawing.Point(16, 96)
                 Me.lblLicense.Name = "lblLicense"
-                Me.lblLicense.Size = New System.Drawing.Size(44, 13)
+                Me.lblLicense.Size = New System.Drawing.Size(59, 18)
                 Me.lblLicense.TabIndex = 5
                 Me.lblLicense.Text = "License"
                 '
@@ -189,7 +173,7 @@ Namespace UI
                 Me.lblCopyright.AutoSize = True
                 Me.lblCopyright.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblCopyright.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.lblCopyright.Location = New System.Drawing.Point(17, 68)
+                Me.lblCopyright.Location = New System.Drawing.Point(16, 76)
                 Me.lblCopyright.Name = "lblCopyright"
                 Me.lblCopyright.Size = New System.Drawing.Size(71, 18)
                 Me.lblCopyright.TabIndex = 2
@@ -237,16 +221,11 @@ Namespace UI
 
                     Me.lblCopyright.Text = My.Application.Info.Copyright
 
-                    'Me.llblCopyright2.Text = "Contains VNC viewer software licensed from SmartCode Solutions"
-                    'Me.llblCopyright2.Links.Add(43, 100, (App.Info.General.SmartCodeURL))
-                    Me.llblCopyright2.Text = "This version of mRemoteNG does not support VNC"
-                    Me.llblCopyright2.Links.Clear()
+                    Me.llblCopyright3.Text = "Includes icons by FAMFAMFAM"
+                    Me.llblCopyright3.Links.Add(18, 9, (App.Info.General.FamFamFamURL))
 
-                    Me.llblCopyright3.Text = "Some Icons by FAMFAMFAM"
-                    Me.llblCopyright3.Links.Add(14, 100, (App.Info.General.FamFamFamURL))
-
-                    If File.Exists(My.Application.Info.DirectoryPath & "\ChangeLog.txt") Then
-                        Dim sR As New StreamReader(My.Application.Info.DirectoryPath & "\ChangeLog.txt")
+                    If File.Exists(My.Application.Info.DirectoryPath & "\CHANGELOG.TXT") Then
+                        Dim sR As New StreamReader(My.Application.Info.DirectoryPath & "\CHANGELOG.TXT")
                         Me.txtChangeLog.Text = sR.ReadToEnd
                         sR.Close()
                     End If
@@ -267,10 +246,6 @@ Namespace UI
                     lblEdition.Text = "Spanlink Communications"
                     lblEdition.Visible = True
                 End If
-            End Sub
-
-            Private Sub llblCopyright2_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llblCopyright2.LinkClicked
-                App.Runtime.GoToURL(App.Info.General.SmartCodeURL)
             End Sub
 
             Private Sub llblCopyright3_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llblCopyright3.LinkClicked

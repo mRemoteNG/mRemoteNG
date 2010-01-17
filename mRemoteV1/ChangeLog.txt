@@ -2,9 +2,9 @@
   Switched to VncSharp, an open source VNC component
   VNC is supported again except for the following features:
     Windows authentication
-    Toggling view only mode while connected (must be set before connecting)
     Setting the compression, encoding and color settings
     Connecting through a proxy server
+    Free SmartSize mode (it does the same thing as Aspect SmartSize mode now)
   Rearranged the Options page and added an Updates tab
   Added option to change how often updates are checked
   Open Updates options tab before connecting for the first time

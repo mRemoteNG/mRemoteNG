@@ -141,9 +141,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Tamir.SharpSSH.dll</HintPath>
     </Reference>
-    <Reference Include="VncSharp, Version=1.0.0.0, Culture=neutral, PublicKeyToken=61974755c7bfea7c, processorArchitecture=MSIL">
+    <Reference Include="VncSharpNG, Version=1.1.0.0, Culture=neutral, PublicKeyToken=61974755c7bfea7c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\VncSharp.dll</HintPath>
+      <HintPath>References\VncSharpNG.dll</HintPath>
     </Reference>
     <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.2.2864.18696, Culture=neutral, PublicKeyToken=d481317c817cec47, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -601,7 +601,7 @@
     <Content Include="Notes\Help.txt" />
     <Content Include="Notes\ICA.txt" />
     <Content Include="Notes\Misc.txt" />
-    <Content Include="ChangeLog.txt">
+    <Content Include="CHANGELOG.TXT">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="My Project\DataSources\mRemote.Language.Base.datasource" />

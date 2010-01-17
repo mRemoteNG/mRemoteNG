@@ -98,7 +98,6 @@ Namespace UI
                 Me.cmenTabViewOnly.Name = "cmenTabViewOnly"
                 Me.cmenTabViewOnly.Size = New System.Drawing.Size(201, 22)
                 Me.cmenTabViewOnly.Text = "View Only (VNC)"
-                Me.cmenTabViewOnly.Visible = False
                 '
                 'ToolStripSeparator1
                 '
