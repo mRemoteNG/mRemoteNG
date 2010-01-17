@@ -237,8 +237,10 @@ Namespace UI
 
                     Me.lblCopyright.Text = My.Application.Info.Copyright
 
-                    Me.llblCopyright2.Text = "Contains VNC viewer software licensed from SmartCode Solutions"
-                    Me.llblCopyright2.Links.Add(43, 100, (App.Info.General.SmartCodeURL))
+                    'Me.llblCopyright2.Text = "Contains VNC viewer software licensed from SmartCode Solutions"
+                    'Me.llblCopyright2.Links.Add(43, 100, (App.Info.General.SmartCodeURL))
+                    Me.llblCopyright2.Text = "This version of mRemoteNG does not support VNC"
+                    Me.llblCopyright2.Links.Clear()
 
                     Me.llblCopyright3.Text = "Some Icons by FAMFAMFAM"
                     Me.llblCopyright3.Links.Add(14, 100, (App.Info.General.FamFamFamURL))

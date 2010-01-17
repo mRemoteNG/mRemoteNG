@@ -77,27 +77,28 @@ Namespace UI
                 Me.cmenTab.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmenTabFullscreen, Me.cmenTabSmartSize, Me.cmenTabViewOnly, Me.ToolStripSeparator1, Me.cmenTabScreenshot, Me.cmenTabStartChat, Me.cmenTabTransferFile, Me.cmenTabRefreshScreen, Me.cmenTabSendSpecialKeys, Me.cmenTabExternalApps, Me.cmenTabSep1, Me.cmenTabRenameTab, Me.cmenTabDuplicateTab, Me.cmenTabReconnect, Me.cmenTabDisconnect})
                 Me.cmenTab.Name = "cmenTab"
                 Me.cmenTab.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-                Me.cmenTab.Size = New System.Drawing.Size(202, 302)
+                Me.cmenTab.Size = New System.Drawing.Size(202, 324)
                 '
                 'cmenTabFullscreen
                 '
                 Me.cmenTabFullscreen.Image = Global.mRemote.My.Resources.Resources.Fullscreen
                 Me.cmenTabFullscreen.Name = "cmenTabFullscreen"
                 Me.cmenTabFullscreen.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabFullscreen.Text = Language.Base.Fullscreen & " (RDP)"
+                Me.cmenTabFullscreen.Text = "Fullscreen (RDP)"
                 '
                 'cmenTabSmartSize
                 '
                 Me.cmenTabSmartSize.Image = Global.mRemote.My.Resources.Resources.SmartSize
                 Me.cmenTabSmartSize.Name = "cmenTabSmartSize"
                 Me.cmenTabSmartSize.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabSmartSize.Text = Language.Base.SmartSize & " (RDP/VNC)"
+                Me.cmenTabSmartSize.Text = "SmartSize (RDP/VNC)"
                 '
                 'cmenTabViewOnly
                 '
                 Me.cmenTabViewOnly.Name = "cmenTabViewOnly"
                 Me.cmenTabViewOnly.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabViewOnly.Text = Language.Base.Props_ViewOnly & " (VNC)"
+                Me.cmenTabViewOnly.Text = "View Only (VNC)"
+                Me.cmenTabViewOnly.Visible = False
                 '
                 'ToolStripSeparator1
                 '
@@ -109,28 +110,29 @@ Namespace UI
                 Me.cmenTabScreenshot.Image = Global.mRemote.My.Resources.Resources.Screenshot_Add
                 Me.cmenTabScreenshot.Name = "cmenTabScreenshot"
                 Me.cmenTabScreenshot.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabScreenshot.Text = Language.Base.Screenshot
+                Me.cmenTabScreenshot.Text = "Screenshot"
                 '
                 'cmenTabStartChat
                 '
                 Me.cmenTabStartChat.Image = Global.mRemote.My.Resources.Resources.Chat
                 Me.cmenTabStartChat.Name = "cmenTabStartChat"
                 Me.cmenTabStartChat.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabStartChat.Text = Language.Base.StartChat & " (VNC)"
+                Me.cmenTabStartChat.Text = "Start Chat (VNC)"
+                Me.cmenTabStartChat.Visible = False
                 '
                 'cmenTabTransferFile
                 '
                 Me.cmenTabTransferFile.Image = Global.mRemote.My.Resources.Resources.SSHTransfer
                 Me.cmenTabTransferFile.Name = "cmenTabTransferFile"
                 Me.cmenTabTransferFile.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabTransferFile.Text = Language.Base.TransferFile & " (SSH/VNC)"
+                Me.cmenTabTransferFile.Text = "Transfer File (SSH)"
                 '
                 'cmenTabRefreshScreen
                 '
                 Me.cmenTabRefreshScreen.Image = Global.mRemote.My.Resources.Resources.Refresh
                 Me.cmenTabRefreshScreen.Name = "cmenTabRefreshScreen"
                 Me.cmenTabRefreshScreen.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabRefreshScreen.Text = Language.Base.RefreshScreen & " (VNC)"
+                Me.cmenTabRefreshScreen.Text = "Refresh Screen (VNC)"
                 '
                 'cmenTabSendSpecialKeys
                 '
@@ -138,26 +140,26 @@ Namespace UI
                 Me.cmenTabSendSpecialKeys.Image = Global.mRemote.My.Resources.Resources.Keyboard
                 Me.cmenTabSendSpecialKeys.Name = "cmenTabSendSpecialKeys"
                 Me.cmenTabSendSpecialKeys.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabSendSpecialKeys.Text = Language.Base.SendSpecialKeys & " (VNC)"
+                Me.cmenTabSendSpecialKeys.Text = "Send special Keys (VNC)"
                 '
                 'cmenTabSendSpecialKeysCtrlAltDel
                 '
                 Me.cmenTabSendSpecialKeysCtrlAltDel.Name = "cmenTabSendSpecialKeysCtrlAltDel"
-                Me.cmenTabSendSpecialKeysCtrlAltDel.Size = New System.Drawing.Size(146, 22)
-                Me.cmenTabSendSpecialKeysCtrlAltDel.Text = Language.Base.Key_Control & "+" & Language.Base.Key_Alt & "+" & Language.Base.Key_Del
+                Me.cmenTabSendSpecialKeysCtrlAltDel.Size = New System.Drawing.Size(141, 22)
+                Me.cmenTabSendSpecialKeysCtrlAltDel.Text = "Ctrl+Alt+Del"
                 '
                 'cmenTabSendSpecialKeysCtrlEsc
                 '
                 Me.cmenTabSendSpecialKeysCtrlEsc.Name = "cmenTabSendSpecialKeysCtrlEsc"
-                Me.cmenTabSendSpecialKeysCtrlEsc.Size = New System.Drawing.Size(146, 22)
-                Me.cmenTabSendSpecialKeysCtrlEsc.Text = Language.Base.Key_Control & "+" & Language.Base.Key_Esc
+                Me.cmenTabSendSpecialKeysCtrlEsc.Size = New System.Drawing.Size(141, 22)
+                Me.cmenTabSendSpecialKeysCtrlEsc.Text = "Ctrl+Esc"
                 '
                 'cmenTabExternalApps
                 '
                 Me.cmenTabExternalApps.Image = CType(resources.GetObject("cmenTabExternalApps.Image"), System.Drawing.Image)
                 Me.cmenTabExternalApps.Name = "cmenTabExternalApps"
                 Me.cmenTabExternalApps.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabExternalApps.Text = Language.Base.Menu_ExternalApplications
+                Me.cmenTabExternalApps.Text = "External Applications"
                 '
                 'cmenTabSep1
                 '
@@ -169,27 +171,27 @@ Namespace UI
                 Me.cmenTabRenameTab.Image = Global.mRemote.My.Resources.Resources.Rename
                 Me.cmenTabRenameTab.Name = "cmenTabRenameTab"
                 Me.cmenTabRenameTab.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabRenameTab.Text = Language.Base.RenameTab
+                Me.cmenTabRenameTab.Text = "Rename Tab"
                 '
                 'cmenTabDuplicateTab
                 '
                 Me.cmenTabDuplicateTab.Name = "cmenTabDuplicateTab"
                 Me.cmenTabDuplicateTab.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabDuplicateTab.Text = Language.Base.DuplicateTab
+                Me.cmenTabDuplicateTab.Text = "Duplicate Tab"
                 '
                 'cmenTabReconnect
                 '
                 Me.cmenTabReconnect.Image = CType(resources.GetObject("cmenTabReconnect.Image"), System.Drawing.Image)
                 Me.cmenTabReconnect.Name = "cmenTabReconnect"
                 Me.cmenTabReconnect.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabReconnect.Text = Language.Base.Reconnect
+                Me.cmenTabReconnect.Text = "Reconnect"
                 '
                 'cmenTabDisconnect
                 '
                 Me.cmenTabDisconnect.Image = Global.mRemote.My.Resources.Resources.Pause
                 Me.cmenTabDisconnect.Name = "cmenTabDisconnect"
                 Me.cmenTabDisconnect.Size = New System.Drawing.Size(201, 22)
-                Me.cmenTabDisconnect.Text = Language.Base.Disconnect
+                Me.cmenTabDisconnect.Text = "Disconnect"
                 '
                 'Connection
                 '
@@ -278,7 +280,7 @@ Namespace UI
                 cmenTabViewOnly.Text = Language.Base.Props_ViewOnly & " (VNC)"
                 cmenTabScreenshot.Text = Language.Base.Screenshot
                 cmenTabStartChat.Text = Language.Base.StartChat & " (VNC)"
-                cmenTabTransferFile.Text = Language.Base.TransferFile & " (SSH/VNC)"
+                cmenTabTransferFile.Text = Language.Base.TransferFile & " (SSH)"
                 cmenTabRefreshScreen.Text = Language.Base.RefreshScreen & " (VNC)"
                 cmenTabSendSpecialKeys.Text = Language.Base.SendSpecialKeys & " (VNC)"
                 cmenTabSendSpecialKeysCtrlAltDel.Text = Language.Base.Key_Control & "+" & Language.Base.Key_Alt & "+" & Language.Base.Key_Del
@@ -398,7 +400,7 @@ Namespace UI
                         Me.cmenTabSmartSize.Enabled = True
                         Me.cmenTabStartChat.Enabled = True
                         Me.cmenTabRefreshScreen.Enabled = True
-                        Me.cmenTabTransferFile.Enabled = True
+                        Me.cmenTabTransferFile.Enabled = False
 
                         Dim vnc As mRemote.Connection.Protocol.VNC = IC.Protocol
                         Me.cmenTabSmartSize.Checked = vnc.SmartSize

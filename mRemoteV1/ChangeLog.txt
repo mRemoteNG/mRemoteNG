@@ -1,8 +1,18 @@
-﻿1.61:
+﻿1.62:
+  Switched to VncSharp, an open source VNC component
+  VNC is supported again except for the following features:
+    Windows authentication
+    Toggling view only mode while connected (must be set before connecting)
+    Setting the compression, encoding and color settings
+    Connecting through a proxy server
   Rearranged the Options page and added an Updates tab
   Added option to change how often updates are checked
   Open Updates options tab before connecting for the first time
   No longer show About page on first run
+
+1.61:
+  Removed unlicensed SmartCode Solutions ViewerX VNC Viewer ActiveX
+  This version of mRemoteNG does not support VNC
 
 1.60:
   Changed name to mRemoteNG

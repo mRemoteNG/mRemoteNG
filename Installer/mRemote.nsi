@@ -95,7 +95,6 @@ Section "" ; Install
 
 	; Register ActiveX components
 	RegDLL "$INSTDIR\eolwtscom.dll"
-	RegDLL "$INSTDIR\scvncctrl.dll"
  
 	; Start Menu
 	CreateDirectory "$SMPROGRAMS\mRemoteNG"
@@ -121,7 +120,6 @@ SectionEnd
 Section "un.Uninstall"
 	; Unregister ActiveX components
 	UnregDLL "$INSTDIR\eolwtscom.dll"
-	UnregDLL "$INSTDIR\scvncctrl.dll"
 
 	; Delete Files
 	RMDIR /r $INSTDIR
