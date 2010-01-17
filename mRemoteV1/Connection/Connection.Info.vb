@@ -823,7 +823,7 @@ Namespace Connection
 #Region "VNC"
         Private _VNCCompression As mRemote.Connection.Protocol.VNC.Compression = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.Compression), My.Settings.ConDefaultVNCCompression)
         <Category(Category4 & Language.Base.Props_Appearance), _
-           Browsable(True), _
+           Browsable(False), _
            DisplayName(Language.Base.Props_Compression), _
            Description(Language.Base.Descr_Compression), _
            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
@@ -850,7 +850,7 @@ Namespace Connection
 
         Private _VNCEncoding As mRemote.Connection.Protocol.VNC.Encoding = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.Encoding), My.Settings.ConDefaultVNCEncoding)
         <Category(Category4 & Language.Base.Props_Appearance), _
-           Browsable(True), _
+           Browsable(False), _
            DisplayName(Language.Base.Props_Encoding), _
            Description(Language.Base.Descr_Encoding), _
            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
@@ -878,7 +878,7 @@ Namespace Connection
 
         Private _VNCAuthMode As mRemote.Connection.Protocol.VNC.AuthMode = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.AuthMode), My.Settings.ConDefaultVNCAuthMode)
         <Category(Category2 & Language.Base.Props_Connection), _
-            Browsable(True), _
+            Browsable(False), _
             DisplayName(Language.Base.Props_AuthMode), _
             Description(Language.Base.Descr_AuthMode), _
             TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
@@ -905,7 +905,7 @@ Namespace Connection
 
         Private _VNCProxyType As mRemote.Connection.Protocol.VNC.ProxyType = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.ProxyType), My.Settings.ConDefaultVNCProxyType)
         <Category(Category6 & Language.Base.Props_Misc), _
-           Browsable(True), _
+           Browsable(False), _
            DisplayName(Language.Base.Props_ProxyType), _
            Description(Language.Base.Descr_ProxyType), _
            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
@@ -932,7 +932,7 @@ Namespace Connection
 
         Private _VNCProxyIP As String = My.Settings.ConDefaultVNCProxyIP
         <Category(Category6 & Language.Base.Props_Misc), _
-            Browsable(True), _
+            Browsable(False), _
             DisplayName(Language.Base.Props_ProxyIP), _
             Description(Language.Base.Descr_ProxyIP)> _
         Public Property VNCProxyIP() As String
@@ -958,7 +958,7 @@ Namespace Connection
 
         Private _VNCProxyPort As Integer = My.Settings.ConDefaultVNCProxyPort
         <Category(Category6 & Language.Base.Props_Misc), _
-            Browsable(True), _
+            Browsable(False), _
             DisplayName(Language.Base.Props_ProxyPort), _
             Description(Language.Base.Descr_ProxyPort)> _
         Public Property VNCProxyPort() As Integer
@@ -984,7 +984,7 @@ Namespace Connection
 
         Private _VNCProxyUsername As String = My.Settings.ConDefaultVNCProxyUsername
         <Category(Category6 & Language.Base.Props_Misc), _
-            Browsable(True), _
+            Browsable(False), _
             DisplayName(Language.Base.Props_ProxyUsername), _
             Description(Language.Base.Props_ProxyUsername)> _
         Public Property VNCProxyUsername() As String
@@ -1010,7 +1010,7 @@ Namespace Connection
 
         Private _VNCProxyPassword As String = My.Settings.ConDefaultVNCProxyPassword
         <Category(Category6 & Language.Base.Props_Misc), _
-            Browsable(True), _
+            Browsable(False), _
             DisplayName(Language.Base.Props_ProxyPassword), _
             Description(Language.Base.Descr_ProxyPassword), _
             PasswordPropertyText(True)> _
@@ -1037,7 +1037,7 @@ Namespace Connection
 
         Private _VNCColors As mRemote.Connection.Protocol.VNC.Colors = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.Colors), My.Settings.ConDefaultVNCColors)
         <Category(Category4 & Language.Base.Props_Appearance), _
-           Browsable(True), _
+           Browsable(False), _
            DisplayName(Language.Base.Props_Colors), _
            Description(Language.Base.Descr_Colors), _
            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _

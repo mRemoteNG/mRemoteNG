@@ -1,5 +1,5 @@
 Imports mRemote.App.Runtime
-'Imports AxViewerX
+Imports VncSharp
 Imports System.ComponentModel
 
 Namespace Connection
@@ -10,59 +10,44 @@ Namespace Connection
 #Region "Properties"
             Public Property SmartSize() As Boolean
                 Get
-                    'If VNC.StretchMode = ViewerX.ScreenStretchMode.SSM_NONE Then
-                    Return False
-                    'Else
-                    '    Return True
-                    'End If
+                    Return Not VNC.AutoScroll
                 End Get
                 Set(ByVal value As Boolean)
-                    'If value = False Then
-                    '    VNC.StretchMode = ViewerX.ScreenStretchMode.SSM_NONE
-                    'Else
-                    '    If Info.VNCSmartSizeMode = SmartSizeMode.SmartSFree Then
-                    '        VNC.StretchMode = ViewerX.ScreenStretchMode.SSM_FREE
-                    '    Else
-                    '        VNC.StretchMode = ViewerX.ScreenStretchMode.SSM_ASPECT
-                    '    End If
-                    'End If
+                    VNC.SetScalingMode(value)
+                    VNC.AutoScroll = Not value
                 End Set
             End Property
 
             Public Property ViewOnly() As Boolean
                 Get
-                    'Return VNC.ViewOnly
+                    'Return VNC.ViewOnly ' TODO: Fix this
                     Return False
                 End Get
                 Set(ByVal value As Boolean)
-                    'VNC.ViewOnly = value
+                    VNC.SetInputMode(value)
                 End Set
             End Property
 #End Region
 
 #Region "Private Declarations"
-            'Private VNC As AxCSC_ViewerXControl
+            Private VNC As VncSharp.RemoteDesktop
             Private Info As Connection.Info
 #End Region
 
 #Region "Public Methods"
             Public Sub New()
-                'Me.Control = New AxCSC_ViewerXControl
-                'SetupLicense(Me.Control)
+                Me.Control = New VncSharp.RemoteDesktop
             End Sub
 
             Public Overrides Function SetProps() As Boolean
                 MyBase.SetProps()
 
                 Try
-                    'VNC = Me.Control
+                    VNC = Me.Control
 
-                    'Info = Me.InterfaceControl.Info
+                    Info = Me.InterfaceControl.Info
 
-                    'VNC.BeginInit()
-
-                    'VNC.Port = Me.Info.Port
-                    'VNC.HostIP = Me.Info.Hostname
+                    VNC.VncPort = Me.Info.Port
 
                     'If Info.VNCCompression <> Compression.CompNone Then
                     '    VNC.JPEGCompression = True
@@ -122,17 +107,6 @@ Namespace Connection
                     '    VNC.RestrictPixel = False
                     'End If
 
-                    'Select Case Info.VNCSmartSizeMode
-                    '    Case SmartSizeMode.SmartSNo
-                    '        VNC.StretchMode = ViewerX.ScreenStretchMode.SSM_NONE
-                    '    Case SmartSizeMode.SmartSFree
-                    '        VNC.StretchMode = ViewerX.ScreenStretchMode.SSM_FREE
-                    '    Case SmartSizeMode.SmartSAspect
-                    '        VNC.StretchMode = ViewerX.ScreenStretchMode.SSM_ASPECT
-                    'End Select
-
-                    'VNC.ViewOnly = Info.VNCViewOnly
-
                     'VNC.ConnectingText = Language.Base.Connecting & " (SmartCode VNC viewer)"
                     'VNC.DisconnectedText = Language.Base.Disconnected
                     'VNC.MessageBoxes = False
@@ -149,7 +123,7 @@ Namespace Connection
                 Me.SetEventHandlers()
 
                 Try
-                    'VNC.ConnectAsync()
+                    VNC.Connect(Me.Info.Hostname, Me.Info.VNCViewOnly, Info.VNCSmartSizeMode <> SmartSizeMode.SmartSNo)
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "Opening connection failed" & vbNewLine & ex.Message)
                     Return False
@@ -160,7 +134,7 @@ Namespace Connection
 
             Public Overrides Sub Disconnect()
                 Try
-                    'VNC.Disconnect()
+                    VNC.Disconnect()
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "VNC Disconnect failed" & vbNewLine & ex.Message, True)
                 End Try
@@ -170,9 +144,9 @@ Namespace Connection
                 Try
                     Select Case Keys
                         Case SpecialKeys.CtrlAltDel
-                            'VNC.SendCAD()
+                            VNC.SendSpecialKeys(SpecialKeys.CtrlAltDel)
                         Case SpecialKeys.CtrlEsc
-                            'VNC.SendCtrlEsq()
+                            VNC.SendSpecialKeys(SpecialKeys.CtrlEsc)
                     End Select
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "VNC SendSpecialKeys failed" & vbNewLine & ex.Message, True)
@@ -223,7 +197,7 @@ Namespace Connection
 
             Public Sub RefreshScreen()
                 Try
-                    'VNC.RequestRefresh()
+                    VNC.FullScreenUpdate()
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "VNC RefreshScreen failed" & vbNewLine & ex.Message, True)
                 End Try
@@ -233,20 +207,11 @@ Namespace Connection
 #Region "Private Methods"
             Private Sub SetEventHandlers()
                 Try
-                    'AddHandler VNC.ConnectedEvent, AddressOf VNCEvent_Connected
-                    'AddHandler VNC.Disconnected, AddressOf VNCEvent_Disconnected
+                    AddHandler VNC.ConnectComplete, AddressOf VNCEvent_Connected
+                    AddHandler VNC.ConnectionLost, AddressOf VNCEvent_Disconnected
+                    VNC.GetPassword = AddressOf VNCEvent_Authenticate
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "VNC SetEventHandlers failed" & vbNewLine & ex.Message, True)
-                End Try
-            End Sub
-
-            Public Shared Sub SetupLicense(ByVal vncCtrl As Control)
-                Try
-                    Dim f As System.Reflection.FieldInfo
-                    f = GetType(AxHost).GetField("licenseKey", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance)
-                    f.SetValue(vncCtrl, "{072169039103041044176252035252117103057101225235137221179204110241121074}")
-                Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "VNC SetupLicense failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -254,12 +219,17 @@ Namespace Connection
 #Region "Private Events & Handlers"
             Private Sub VNCEvent_Connected(ByVal sender As Object, ByVal e As EventArgs)
                 MyBase.Event_Connected(Me)
+                VNC.AutoScroll = Info.VNCSmartSizeMode = SmartSizeMode.SmartSNo
             End Sub
 
             Private Sub VNCEvent_Disconnected(ByVal sender As Object, ByVal e As EventArgs)
                 MyBase.Event_Disconnected(sender, e.ToString)
                 MyBase.Close()
             End Sub
+
+            Private Function VNCEvent_Authenticate() As String
+                Return Info.Password
+            End Function
 #End Region
 
 #Region "Enums"
