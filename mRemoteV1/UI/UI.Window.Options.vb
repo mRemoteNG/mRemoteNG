@@ -102,6 +102,7 @@ Namespace UI
             Friend WithEvents cboUpdateCheckFrequency As System.Windows.Forms.ComboBox
             Friend WithEvents lblUpdatesExplanation As System.Windows.Forms.Label
             Friend WithEvents pnlUpdateCheck As System.Windows.Forms.Panel
+            Friend WithEvents btnUpdateCheckNow As System.Windows.Forms.Button
             Friend WithEvents TabController As Crownwood.Magic.Controls.TabControl
 
             Private Sub InitializeComponent()
@@ -110,6 +111,7 @@ Namespace UI
                 Me.pnlUpdates = New System.Windows.Forms.Panel
                 Me.lblUpdatesExplanation = New System.Windows.Forms.Label
                 Me.pnlUpdateCheck = New System.Windows.Forms.Panel
+                Me.btnUpdateCheckNow = New System.Windows.Forms.Button
                 Me.chkCheckForUpdatesOnStartup = New System.Windows.Forms.CheckBox
                 Me.cboUpdateCheckFrequency = New System.Windows.Forms.ComboBox
                 Me.pnlProxy = New System.Windows.Forms.Panel
@@ -277,12 +279,23 @@ Namespace UI
                 '
                 'pnlUpdateCheck
                 '
+                Me.pnlUpdateCheck.Controls.Add(Me.btnUpdateCheckNow)
                 Me.pnlUpdateCheck.Controls.Add(Me.chkCheckForUpdatesOnStartup)
                 Me.pnlUpdateCheck.Controls.Add(Me.cboUpdateCheckFrequency)
                 Me.pnlUpdateCheck.Location = New System.Drawing.Point(16, 64)
                 Me.pnlUpdateCheck.Name = "pnlUpdateCheck"
-                Me.pnlUpdateCheck.Size = New System.Drawing.Size(536, 72)
+                Me.pnlUpdateCheck.Size = New System.Drawing.Size(536, 120)
                 Me.pnlUpdateCheck.TabIndex = 137
+                '
+                'btnUpdateCheckNow
+                '
+                Me.btnUpdateCheckNow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.btnUpdateCheckNow.Location = New System.Drawing.Point(8, 80)
+                Me.btnUpdateCheckNow.Name = "btnUpdateCheckNow"
+                Me.btnUpdateCheckNow.Size = New System.Drawing.Size(80, 32)
+                Me.btnUpdateCheckNow.TabIndex = 136
+                Me.btnUpdateCheckNow.Text = "Check Now"
+                Me.btnUpdateCheckNow.UseVisualStyleBackColor = True
                 '
                 'chkCheckForUpdatesOnStartup
                 '
@@ -298,6 +311,7 @@ Namespace UI
                 'cboUpdateCheckFrequency
                 '
                 Me.cboUpdateCheckFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+                Me.cboUpdateCheckFrequency.FlatStyle = System.Windows.Forms.FlatStyle.Flat
                 Me.cboUpdateCheckFrequency.FormattingEnabled = True
                 Me.cboUpdateCheckFrequency.Location = New System.Drawing.Point(48, 40)
                 Me.cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency"
@@ -311,7 +325,7 @@ Namespace UI
                 Me.pnlProxy.Controls.Add(Me.chkUseProxyAuthentication)
                 Me.pnlProxy.Controls.Add(Me.pnlProxyAuthentication)
                 Me.pnlProxy.Controls.Add(Me.btnTestProxy)
-                Me.pnlProxy.Location = New System.Drawing.Point(16, 168)
+                Me.pnlProxy.Location = New System.Drawing.Point(16, 216)
                 Me.pnlProxy.Name = "pnlProxy"
                 Me.pnlProxy.Size = New System.Drawing.Size(536, 224)
                 Me.pnlProxy.TabIndex = 134
@@ -1756,6 +1770,10 @@ Namespace UI
 
             Private Sub chkCheckForUpdatesOnStartup_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkCheckForUpdatesOnStartup.CheckedChanged
                 cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked
+            End Sub
+
+            Private Sub btnUpdateCheckNow_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUpdateCheckNow.Click
+                App.Runtime.Windows.Show(UI.Window.Type.Update)
             End Sub
 
             Private Sub chkUseProxyForAutomaticUpdates_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkUseProxyForAutomaticUpdates.CheckedChanged

@@ -1949,6 +1949,32 @@ Namespace My
                 Me("CheckForUpdatesFrequencyDays") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemote.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("1980-01-01")>  _
+        Public Property CheckForUpdatesLastCheck() As Date
+            Get
+                Return CType(Me("CheckForUpdatesLastCheck"),Date)
+            End Get
+            Set
+                Me("CheckForUpdatesLastCheck") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemote.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property UpdatePending() As Boolean
+            Get
+                Return CType(Me("UpdatePending"),Boolean)
+            End Get
+            Set
+                Me("UpdatePending") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

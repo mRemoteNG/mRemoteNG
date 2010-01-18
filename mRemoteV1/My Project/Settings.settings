@@ -440,5 +440,11 @@
     <Setting Name="CheckForUpdatesFrequencyDays" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">7</Value>
     </Setting>
+    <Setting Name="CheckForUpdatesLastCheck" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">1980-01-01</Value>
+    </Setting>
+    <Setting Name="UpdatePending" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

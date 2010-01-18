@@ -26,9 +26,15 @@ Namespace Config
             Public Sub Load()
                 Try
                     With Me._MainForm
+                        ' Migrate settings from previous version
                         If My.Settings.DoUpgrade Then
                             My.Settings.Upgrade()
                             My.Settings.DoUpgrade = False
+
+                            ' Clear pending update flag
+                            ' This is used for automatic updates, not for settings migration, but it
+                            ' needs to be cleared here because we know that we just updated.
+                            My.Settings.UpdatePending = False
                         End If
 
                         If My.Settings.MainFormLocation <> New Point(999, 999) Then

@@ -51,7 +51,7 @@ Public Class frmMain
         If Not My.Settings.CheckForUpdatesAsked Then
             Windows.Show(UI.Window.Type.Options)
             Windows.optionsForm.ShowUpdatesTab()
-
+            My.Settings.CheckForUpdatesAsked = True
         End If
 
         Startup.UpdateCheck()
@@ -125,10 +125,8 @@ Public Class frmMain
         End If
 
         If App.Runtime.IsUpdateAvailable Then
-            If My.Settings.CheckForUpdatesOnStartup Then
-                App.Runtime.Windows.Show(UI.Window.Type.Update)
-                Me.tmrShowUpdate.Enabled = False
-            End If
+            App.Runtime.Windows.Show(UI.Window.Type.Update)
+            Me.tmrShowUpdate.Enabled = False
         End If
 
         If App.Runtime.IsAnnouncementAvailable Then

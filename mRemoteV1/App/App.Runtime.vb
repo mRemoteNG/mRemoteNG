@@ -254,26 +254,33 @@ Namespace App
             End Sub
 
             Public Shared Sub UpdateCheck()
-                If My.Settings.CheckForUpdatesOnStartup Then
-                    frmMain.tmrShowUpdate.Enabled = True
-                    Windows.updateForm.CheckForUpdate()
-                    AddHandler Windows.updateForm.UpdateCheckCompleted, AddressOf UpdateCheckComplete
+                If My.Settings.CheckForUpdatesAsked And My.Settings.CheckForUpdatesOnStartup Then
+                    If My.Settings.UpdatePending Or My.Settings.CheckForUpdatesLastCheck < Date.Now.Subtract(TimeSpan.FromDays(My.Settings.CheckForUpdatesFrequencyDays)) Then
+                        frmMain.tmrShowUpdate.Enabled = True
+                        Windows.updateForm.CheckForUpdate()
+                        AddHandler Windows.updateForm.UpdateCheckCompleted, AddressOf UpdateCheckComplete
+                    End If
                 End If
             End Sub
 
             Private Shared Sub UpdateCheckComplete(ByVal UpdateAvailable As Boolean)
+                My.Settings.CheckForUpdatesLastCheck = Date.Now
+                My.Settings.UpdatePending = UpdateAvailable
                 IsUpdateAvailable = UpdateAvailable
             End Sub
 
             Public Shared Sub AnnouncementCheck()
-                If App.Editions.Spanlink.Enabled = False Then
-                    frmMain.tmrShowUpdate.Enabled = True
-                    Windows.AnnouncementForm.CheckForAnnouncement()
-                    AddHandler Windows.AnnouncementForm.AnnouncementCheckCompleted, AddressOf AnnouncementCheckComplete
+                If My.Settings.CheckForUpdatesAsked And My.Settings.CheckForUpdatesOnStartup And App.Editions.Spanlink.Enabled = False Then
+                    If My.Settings.CheckForUpdatesLastCheck < Date.Now.Subtract(TimeSpan.FromDays(My.Settings.CheckForUpdatesFrequencyDays)) Then
+                        frmMain.tmrShowUpdate.Enabled = True
+                        Windows.AnnouncementForm.CheckForAnnouncement()
+                        AddHandler Windows.AnnouncementForm.AnnouncementCheckCompleted, AddressOf AnnouncementCheckComplete
+                    End If
                 End If
             End Sub
 
             Private Shared Sub AnnouncementCheckComplete(ByVal AnnouncementAvailable As Boolean)
+                My.Settings.CheckForUpdatesLastCheck = Date.Now
                 IsAnnouncementAvailable = AnnouncementAvailable
             End Sub
 
