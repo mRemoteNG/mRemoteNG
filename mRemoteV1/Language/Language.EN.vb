@@ -358,19 +358,21 @@
         Public Const CcNotInstalledProperly As String = "not installed properly"
         Public Const CcCheckSucceeded As String = "Check succeeded!"
         Public Const CcCheckFailed As String = "Check failed!"
-        Public Const CcRDPOK As String = "All RDP components were found and seem to be registered properly."
+        Public Const CcRDPOK As String = "All RDP components were found and seem to be registered properly." & vbNewLine & _
+                                    "Remote Desktop Connection Control Version {0}"
         Public Const CcRDPFailed As String = "For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services Client) 6.0 installed. You can get it here: http://support.microsoft.com/kb/925876" & vbNewLine & _
                                      "If you have RDP 6.0 installed and the check still fails, try to register mstscax.dll manually. To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\windows\system32\mstscax.dll"" (Where c:\ is your system drive)." & vbNewLine & _
                                      "If you still have trouble getting RDP to work please consult the mRemoteNG Forum at http://forum.mremoteng.org/"
-        Public Const CcVNCOK As String = "All VNC components were found and seem to be registered properly."
-        'Public Const CcVNCFailed As String = "VNC requires the scvncctrl.dll library to be registered. If you are using one of the non-setup packages like the portable package, this must be done manually." & vbNewLine & _
-        '                             "To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\Program Files\mRemoteNG\scvncctrl.dll"" (Where c:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation)." & vbNewLine & _
-        '                             "If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/"
-        Public Const CcVNCFailed As String = "Due to licensing issues, this version of mRemoteNG does not support VNC."
+        Public Const CcVNCOK As String = "All VNC components were found and seem to be registered properly." & vbNewLine & _
+                                    "VncSharpNG Control Version {0}"
+        Public Const CcVNCFailed As String = "VNC requires VncSharpNG.dll to be located in your mRemoteNG application folder." & vbNewLine & _
+                                     "Please make sure that you have the VncSharpNG.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\)." & vbNewLine & _
+                                     "If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/"
         Public Const CcPuttyOK As String = "The PuTTY executable was found and should be ready to use."
         Public Const CcPuttyFailed As String = "The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemoteNG package and is located in the installation path." & vbNewLine & _
                                      "Please make sure that either you have the Putty.exe in your mRemoteNG directory (default: c:\Program Files\mRemoteNG\) or that you specified a valid path to your PuTTY executable in the Options (Tools - Options - Advanced - Custom PuTTY path)"
-        Public Const CcICAOK As String = "All ICA components were found and seem to be registered properly."
+        Public Const CcICAOK As String = "All ICA components were found and seem to be registered properly." & vbNewLine & _
+                                    "Citrix ICA Client Control Version {0}"
         Public Const CcICAFailed As String = "ICA requires that the Citrix Presentation Server Client is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/" & vbNewLine & _
                                      "If you have the Citrix Presentation Server Client installed and the check still fails, try to register wfica.ocx manually." & vbNewLine & _
                                      "To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\Program Files\Citrix\ICA Client\wfica.ocx"" (Where c:\Program Files\Citrix\ICA Client\ is the path to your Citrix Presentation Server Client installation)." & vbNewLine & _

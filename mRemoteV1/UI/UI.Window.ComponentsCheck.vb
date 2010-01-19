@@ -503,7 +503,7 @@ Namespace UI
                     pbCheck1.Image = My.Resources.Good_Symbol
                     lblCheck1.ForeColor = Color.DarkOliveGreen
                     lblCheck1.Text = "RDP (Remote Desktop) " & Language.Base.CcCheckSucceeded
-                    txtCheck1.Text = Language.Base.CcRDPOK
+                    txtCheck1.Text = String.Format(Language.Base.CcRDPOK, RDP.Version)
                 Catch ex As Exception
                     pbCheck1.Image = My.Resources.Bad_Symbol
                     lblCheck1.ForeColor = Color.Firebrick
@@ -514,36 +514,35 @@ Namespace UI
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
                 End Try
 
-                RDP.Dispose()
+                If RDP IsNot Nothing Then RDP.Dispose()
 
 
-                'Dim VNC As AxViewerX.AxCSC_ViewerXControl = Nothing
+                Dim VNC As VncSharp.RemoteDesktop = Nothing
 
-                'Try
-                '    VNC = New AxViewerX.AxCSC_ViewerXControl
-                '    mRemote.Connection.Protocol.VNC.SetupLicense(VNC)
-                '    VNC.CreateControl()
+                Try
+                    VNC = New VncSharp.RemoteDesktop
+                    VNC.CreateControl()
 
-                '    Do Until VNC.Created
-                '        Thread.Sleep(10)
-                '        System.Windows.Forms.Application.DoEvents()
-                '    Loop
+                    Do Until VNC.Created
+                        Thread.Sleep(10)
+                        System.Windows.Forms.Application.DoEvents()
+                    Loop
 
-                '    pbCheck2.Image = My.Resources.Good_Symbol
-                '    lblCheck2.ForeColor = Color.DarkOliveGreen
-                '    lblCheck2.Text = "VNC (Virtual Network Computing) " & Language.Base.CcCheckSucceeded
-                '    txtCheck2.Text = Language.Base.CcVNCOK
-                'Catch ex As Exception
-                pbCheck2.Image = My.Resources.Bad_Symbol
-                lblCheck2.ForeColor = Color.Firebrick
-                lblCheck2.Text = "VNC (Virtual Network Computing) " & Language.Base.CcCheckFailed
-                txtCheck2.Text = Language.Base.CcVNCFailed
+                    pbCheck2.Image = My.Resources.Good_Symbol
+                    lblCheck2.ForeColor = Color.DarkOliveGreen
+                    lblCheck2.Text = "VNC (Virtual Network Computing) " & Language.Base.CcCheckSucceeded
+                    txtCheck2.Text = String.Format(Language.Base.CcVNCOK, VNC.ProductVersion)
+                Catch ex As Exception
+                    pbCheck2.Image = My.Resources.Bad_Symbol
+                    lblCheck2.ForeColor = Color.Firebrick
+                    lblCheck2.Text = "VNC (Virtual Network Computing) " & Language.Base.CcCheckFailed
+                    txtCheck2.Text = Language.Base.CcVNCFailed
 
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "VNC " & errorMsg, True)
-                'mC.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
-                'End Try
+                    mC.AddMessage(Messages.MessageClass.WarningMsg, "VNC " & errorMsg, True)
+                    'mC.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
+                End Try
 
-                'VNC.Dispose()
+                If VNC IsNot Nothing Then VNC.Dispose()
 
 
                 Dim pPath As String = ""
@@ -584,7 +583,7 @@ Namespace UI
                     pbCheck4.Image = My.Resources.Good_Symbol
                     lblCheck4.ForeColor = Color.DarkOliveGreen
                     lblCheck4.Text = "ICA (Citrix ICA) " & Language.Base.CcCheckSucceeded
-                    txtCheck4.Text = Language.Base.CcICAOK
+                    txtCheck4.Text = String.Format(Language.Base.CcICAOK, ICA.Version)
                 Catch ex As Exception
                     pbCheck4.Image = My.Resources.Bad_Symbol
                     lblCheck4.ForeColor = Color.Firebrick
@@ -595,7 +594,7 @@ Namespace UI
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
                 End Try
 
-                ICA.Dispose()
+                If ICA IsNot Nothing Then ICA.Dispose()
 
 
                 Dim GeckoBad As Boolean = False
@@ -626,7 +625,6 @@ Namespace UI
                     mC.AddMessage(Messages.MessageClass.WarningMsg, "Gecko " & errorMsg, True)
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " & My.Settings.XULRunnerPath, True)
                 End If
-
 
 
                 Dim eol As EOLWTSCOM.WTSCOM = Nothing

@@ -11,6 +11,7 @@
   No longer show About page on first run
   Renamed Quicky toolbar to Quick Connect toolbar
   Changed back to allowing toolbars to dock to the left or right of the menu bar and added gripper to move it around
+  Added RDP, VNC and ICA version numbers to Components Check page
 
 1.61:
   Removed unlicensed SmartCode Solutions ViewerX VNC Viewer ActiveX
