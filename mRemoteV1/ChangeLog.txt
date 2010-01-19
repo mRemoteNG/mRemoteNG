@@ -12,6 +12,7 @@
   Renamed Quicky toolbar to Quick Connect toolbar
   Changed back to allowing toolbars to dock to the left or right of the menu bar and added gripper to move it around
   Added RDP, VNC and ICA version numbers to Components Check page
+  Fixed a bug with the inheritance buttons on the Config panel disappearing after awhile
 
 1.61:
   Removed unlicensed SmartCode Solutions ViewerX VNC Viewer ActiveX

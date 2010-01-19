@@ -395,34 +395,36 @@ Namespace UI
 #End Region
 
 #Region "Private Methods"
+            Private tsCustom As ToolStrip = Nothing
+
             Private Sub Config_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
                 ApplyLanguage()
 
                 Try
                     'Show PropertyGrid Toolbar buttons
-                    Dim nT As New ToolStrip
-                    nT.Items.Add(Me.btnShowProperties)
-                    nT.Items.Add(Me.btnShowInheritance)
-                    nT.Items.Add(Me.btnShowDefaultProperties)
-                    nT.Items.Add(Me.btnShowDefaultInheritance)
-                    nT.Items.Add(Me.btnHostStatus)
-                    nT.Items.Add(Me.btnIcon)
-                    nT.Show()
+                    tsCustom = New ToolStrip
+                    tsCustom.Items.Add(btnShowProperties)
+                    tsCustom.Items.Add(btnShowInheritance)
+                    tsCustom.Items.Add(btnShowDefaultProperties)
+                    tsCustom.Items.Add(btnShowDefaultInheritance)
+                    tsCustom.Items.Add(btnHostStatus)
+                    tsCustom.Items.Add(btnIcon)
+                    tsCustom.Show()
 
-                    Dim T As ToolStrip = New ToolStrip
+                    Dim tsDefault As ToolStrip = New ToolStrip
 
-                    For Each ctrl As System.Windows.Forms.Control In Me.pGrid.Controls
+                    For Each ctrl As System.Windows.Forms.Control In pGrid.Controls
                         Dim tStrip As ToolStrip = TryCast(ctrl, ToolStrip)
 
                         If tStrip IsNot Nothing Then
-                            T = tStrip
+                            tsDefault = tStrip
                             Exit For
                         End If
                     Next
 
-                    T.AllowMerge = True
-                    T.Items(T.Items.Count - 1).Visible = False
-                    ToolStripManager.Merge(nT, T)
+                    tsDefault.AllowMerge = True
+                    tsDefault.Items(tsDefault.Items.Count - 1).Visible = False
+                    ToolStripManager.Merge(tsCustom, tsDefault)
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "Load (UI.Window.Config) failed" & vbNewLine & ex.Message, True)
                 End Try
