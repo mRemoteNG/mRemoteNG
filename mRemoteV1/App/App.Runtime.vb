@@ -1191,7 +1191,7 @@ Namespace App
                 Next
 
                 If qHost <> "" Then
-                    nCi.Name = "Quicky: " & qHost
+                    nCi.Name = "Quick: " & qHost
                     nCi.Hostname = qHost
                     nCi.Port = qPort
                     nCi.IsQuicky = True
@@ -1209,7 +1209,7 @@ Namespace App
                     '--------
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Creating quicky failed" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Creating quick connect failed" & vbNewLine & ex.Message)
             End Try
 
             Return Nothing

@@ -123,7 +123,7 @@
         Public Const Menu_OpenConnections As String = "Open Connections"
         Public Const Menu_Options As String = "Options"
         Public Const Menu_PortScan As String = "Port Scan"
-        Public Const Menu_QuickyToolbar As String = "Quicky Toolbar"
+        Public Const Menu_QuickyToolbar As String = "Quick Connect Toolbar"
         Public Const Menu_SaveConnections As String = "Save Connections"
         Public Const Menu_SaveConnectionsAs As String = "Save Connections As"
         Public Const Menu_ScreenshotManager As String = "Screenshot Manager"
@@ -135,8 +135,8 @@
         Public Const Menu_View As String = "&View"
         Public Const Menu_Website As String = "Website"
 
-        Public Const Toolbar_Play As String = "Play"
-        Public Const Toolbar_Quicky As String = "&Quicky:"
+        Public Const Toolbar_Play As String = "Connect"
+        Public Const Toolbar_Quicky As String = "&Connect:"
         Public Const Toolbar_ShowText As String = "Show Text"
 
         Public Const Password As String = "Password:"

@@ -562,29 +562,33 @@ Public Class frmMain
     End Sub
 
 #Region "Window Overrides and DockPanel Stuff"
-    Private Msg13 As Boolean = False
-    Private Msg71 As Boolean = False
+    Private Const WM_GETTEXT As Integer = &HD
+    Private Const WM_ACTIVATEAPP As Integer = &H1C
+    Private Const WM_WINDOWPOSCHANGED As Integer = &H47
+
+    Private bWmGetTextFlag As Boolean = False
+    Private bWmWindowPosChangedFlag As Boolean = False
 
     Protected Overloads Overrides Sub WndProc(ByRef m As Message)
         Try
             'Debug.Print(m.Msg)
 
-            If m.Msg = 13 Then
-                Msg13 = True
-            ElseIf m.Msg = 71 Then
-                If Msg13 Then
+            If m.Msg = WM_GETTEXT Then
+                bWmGetTextFlag = True
+            ElseIf m.Msg = WM_WINDOWPOSCHANGED Then
+                If bWmGetTextFlag Then
                     ActivateConnection()
                 End If
 
-                Msg13 = False
-                Msg71 = True
-            ElseIf m.Msg = 28 Then
-                If Msg71 Then
+                bWmGetTextFlag = False
+                bWmWindowPosChangedFlag = True
+            ElseIf m.Msg = WM_ACTIVATEAPP Then
+                If bWmWindowPosChangedFlag Then
                     ActivateConnection()
                 End If
             Else
-                Msg13 = False
-                Msg71 = False
+                bWmGetTextFlag = False
+                bWmWindowPosChangedFlag = False
             End If
 
             If m.Msg = Tools.SystemMenu.Flags.WM_SYSCOMMAND Then

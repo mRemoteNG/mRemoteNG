@@ -9,6 +9,8 @@
   Added option to change how often updates are checked
   Open Updates options tab before connecting for the first time
   No longer show About page on first run
+  Renamed Quicky toolbar to Quick Connect toolbar
+  Changed back to allowing toolbars to dock to the left or right of the menu bar and added gripper to move it around
 
 1.61:
   Removed unlicensed SmartCode Solutions ViewerX VNC Viewer ActiveX
