@@ -75,7 +75,7 @@ Namespace App
                         'get Download URL
                         Dim strU As String = ""
 
-                        strU = strUpdate.Substring(strUpdate.IndexOf("dURL: ") + 6, strUpdate.IndexOf(vbNewLine) - 6).Replace(".exe", "_" & Language.Base.CurrentLanguage.ToString & ".exe")
+                        strU = strUpdate.Substring(strUpdate.IndexOf("dURL: ") + 6, strUpdate.IndexOf(vbNewLine) - 6)
 
                         uI.DownloadUrl = strU
 
@@ -125,7 +125,7 @@ Namespace App
 
                 _curUI.UpdateLocation = My.Computer.FileSystem.SpecialDirectories.Temp & "\mRemote_Update.exe"
                 wCl.DownloadFileAsync(New Uri(dURL), _curUI.UpdateLocation)
-
+                
                 Return True
             Catch ex As Exception
                 mC.AddMessage(Messages.MessageClass.WarningMsg, "Update download failed" & vbNewLine & ex.Message, True)
