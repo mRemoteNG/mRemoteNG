@@ -207,7 +207,9 @@ Namespace Connection
                 Try
                     AddHandler VNC.ConnectComplete, AddressOf VNCEvent_Connected
                     AddHandler VNC.ConnectionLost, AddressOf VNCEvent_Disconnected
-                    VNC.GetPassword = AddressOf VNCEvent_Authenticate
+                    If Not String.IsNullOrEmpty(Info.Password) Then
+                        VNC.GetPassword = AddressOf VNCEvent_Authenticate
+                    End If
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "VNC SetEventHandlers failed" & vbNewLine & ex.Message, True)
                 End Try
