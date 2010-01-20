@@ -238,8 +238,8 @@ Namespace UI
                 Me.TabController.IDEPixelArea = True
                 Me.TabController.Location = New System.Drawing.Point(0, 0)
                 Me.TabController.Name = "TabController"
-                Me.TabController.SelectedIndex = 4
-                Me.TabController.SelectedTab = Me.tabUpdates
+                Me.TabController.SelectedIndex = 3
+                Me.TabController.SelectedTab = Me.tabConnections
                 Me.TabController.Size = New System.Drawing.Size(573, 522)
                 Me.TabController.TabIndex = 10
                 Me.TabController.TabPages.AddRange(New Crownwood.Magic.Controls.TabPage() {Me.tabStartupExit, Me.tabAppearance, Me.tabTabs, Me.tabConnections, Me.tabUpdates, Me.tabAdvanced})
@@ -250,6 +250,7 @@ Namespace UI
                 Me.tabUpdates.Icon = Global.mRemote.My.Resources.Resources.Info_Icon
                 Me.tabUpdates.Location = New System.Drawing.Point(0, 0)
                 Me.tabUpdates.Name = "tabUpdates"
+                Me.tabUpdates.Selected = False
                 Me.tabUpdates.Size = New System.Drawing.Size(573, 492)
                 Me.tabUpdates.TabIndex = 5000
                 Me.tabUpdates.Title = "Updates"
@@ -760,7 +761,6 @@ Namespace UI
                 Me.tabConnections.Icon = Global.mRemote.My.Resources.Resources.Root_Icon
                 Me.tabConnections.Location = New System.Drawing.Point(0, 0)
                 Me.tabConnections.Name = "tabConnections"
-                Me.tabConnections.Selected = False
                 Me.tabConnections.Size = New System.Drawing.Size(573, 492)
                 Me.tabConnections.TabIndex = 4000
                 Me.tabConnections.Title = "Connections"
@@ -997,7 +997,7 @@ Namespace UI
                             Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lblSQLInfo.Enabled = False
-                Me.lblSQLInfo.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.lblSQLInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World)
                 Me.lblSQLInfo.Location = New System.Drawing.Point(291, 11)
                 Me.lblSQLInfo.Name = "lblSQLInfo"
                 Me.lblSQLInfo.Size = New System.Drawing.Size(203, 131)
@@ -1587,6 +1587,7 @@ Namespace UI
                 Me.WindowType = Type.Options
                 Me.DockPnl = Panel
                 Me.InitializeComponent()
+                App.Runtime.FontOverride(Me)
             End Sub
 
             Public Sub ShowUpdatesTab()

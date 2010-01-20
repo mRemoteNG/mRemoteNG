@@ -1639,6 +1639,17 @@ Namespace App
 
             Return Nothing
         End Function
+
+        ' Override the font of all controls in a container with the default font based on the OS version
+        Public Shared Sub FontOverride(ByRef ctlParent As Control)
+            Dim ctlChild As Control
+            For Each ctlChild In ctlParent.Controls
+                ctlChild.Font = New System.Drawing.Font(SystemFonts.MessageBoxFont.Name, ctlChild.Font.Size, ctlChild.Font.Style, ctlChild.Font.Unit, ctlChild.Font.GdiCharSet)
+                If ctlChild.Controls.Count > 0 Then
+                    FontOverride(ctlChild)
+                End If
+            Next
+        End Sub
 #End Region
 
 #Region "SQL Watcher"

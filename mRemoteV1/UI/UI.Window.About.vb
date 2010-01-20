@@ -47,7 +47,7 @@ Namespace UI
                 Me.pnlTop.ForeColor = System.Drawing.Color.White
                 Me.pnlTop.Location = New System.Drawing.Point(-1, -1)
                 Me.pnlTop.Name = "pnlTop"
-                Me.pnlTop.Size = New System.Drawing.Size(788, 174)
+                Me.pnlTop.Size = New System.Drawing.Size(788, 145)
                 Me.pnlTop.TabIndex = 0
                 '
                 'lblEdition
@@ -55,9 +55,9 @@ Namespace UI
                 Me.lblEdition.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lblEdition.BackColor = System.Drawing.Color.Black
                 Me.lblEdition.ForeColor = System.Drawing.Color.White
-                Me.lblEdition.Location = New System.Drawing.Point(455, 127)
+                Me.lblEdition.Location = New System.Drawing.Point(512, 112)
                 Me.lblEdition.Name = "lblEdition"
-                Me.lblEdition.Size = New System.Drawing.Size(318, 24)
+                Me.lblEdition.Size = New System.Drawing.Size(264, 24)
                 Me.lblEdition.TabIndex = 0
                 Me.lblEdition.Text = "Edition"
                 Me.lblEdition.TextAlign = System.Drawing.ContentAlignment.BottomRight
@@ -66,9 +66,9 @@ Namespace UI
                 'pbLogo
                 '
                 Me.pbLogo.Image = Global.mRemote.My.Resources.Resources.Logo
-                Me.pbLogo.Location = New System.Drawing.Point(13, 22)
+                Me.pbLogo.Location = New System.Drawing.Point(8, 8)
                 Me.pbLogo.Name = "pbLogo"
-                Me.pbLogo.Size = New System.Drawing.Size(409, 129)
+                Me.pbLogo.Size = New System.Drawing.Size(492, 128)
                 Me.pbLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize
                 Me.pbLogo.TabIndex = 1
                 Me.pbLogo.TabStop = False
@@ -87,23 +87,24 @@ Namespace UI
                 Me.pnlBottom.Controls.Add(Me.lblLicense)
                 Me.pnlBottom.Controls.Add(Me.lblCopyright)
                 Me.pnlBottom.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.pnlBottom.Location = New System.Drawing.Point(-1, 173)
+                Me.pnlBottom.Location = New System.Drawing.Point(-1, 144)
                 Me.pnlBottom.Name = "pnlBottom"
-                Me.pnlBottom.Size = New System.Drawing.Size(788, 389)
+                Me.pnlBottom.Size = New System.Drawing.Size(788, 418)
                 Me.pnlBottom.TabIndex = 1
                 '
                 'llblCopyright3
                 '
                 Me.llblCopyright3.AutoSize = True
-                Me.llblCopyright3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.llblCopyright3.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.llblCopyright3.ForeColor = System.Drawing.SystemColors.ControlText
                 Me.llblCopyright3.LinkColor = System.Drawing.Color.Blue
                 Me.llblCopyright3.Location = New System.Drawing.Point(16, 116)
                 Me.llblCopyright3.Name = "llblCopyright3"
-                Me.llblCopyright3.Size = New System.Drawing.Size(79, 18)
+                Me.llblCopyright3.Size = New System.Drawing.Size(79, 22)
                 Me.llblCopyright3.TabIndex = 4
                 Me.llblCopyright3.TabStop = True
                 Me.llblCopyright3.Text = "Copyright3"
+                Me.llblCopyright3.UseCompatibleTextRendering = True
                 '
                 'txtChangeLog
                 '
@@ -113,71 +114,76 @@ Namespace UI
                 Me.txtChangeLog.BackColor = System.Drawing.SystemColors.Control
                 Me.txtChangeLog.BorderStyle = System.Windows.Forms.BorderStyle.None
                 Me.txtChangeLog.Cursor = System.Windows.Forms.Cursors.Default
-                Me.txtChangeLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.txtChangeLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.txtChangeLog.ForeColor = System.Drawing.SystemColors.ControlText
                 Me.txtChangeLog.Location = New System.Drawing.Point(24, 184)
                 Me.txtChangeLog.Multiline = True
                 Me.txtChangeLog.Name = "txtChangeLog"
                 Me.txtChangeLog.ReadOnly = True
                 Me.txtChangeLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-                Me.txtChangeLog.Size = New System.Drawing.Size(761, 203)
+                Me.txtChangeLog.Size = New System.Drawing.Size(761, 232)
                 Me.txtChangeLog.TabIndex = 7
                 Me.txtChangeLog.TabStop = False
                 '
                 'lblTitle
                 '
                 Me.lblTitle.AutoSize = True
-                Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblTitle.ForeColor = System.Drawing.SystemColors.ControlText
                 Me.lblTitle.Location = New System.Drawing.Point(16, 16)
                 Me.lblTitle.Name = "lblTitle"
-                Me.lblTitle.Size = New System.Drawing.Size(120, 24)
+                Me.lblTitle.Size = New System.Drawing.Size(122, 27)
                 Me.lblTitle.TabIndex = 0
                 Me.lblTitle.Text = "mRemoteNG"
+                Me.lblTitle.UseCompatibleTextRendering = True
                 '
                 'lblVersion
                 '
                 Me.lblVersion.AutoSize = True
-                Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.lblVersion.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblVersion.ForeColor = System.Drawing.SystemColors.ControlText
                 Me.lblVersion.Location = New System.Drawing.Point(16, 56)
                 Me.lblVersion.Name = "lblVersion"
-                Me.lblVersion.Size = New System.Drawing.Size(58, 18)
+                Me.lblVersion.Size = New System.Drawing.Size(57, 22)
                 Me.lblVersion.TabIndex = 1
                 Me.lblVersion.Text = "Version"
+                Me.lblVersion.UseCompatibleTextRendering = True
                 '
                 'lblChangeLog
                 '
                 Me.lblChangeLog.AutoSize = True
-                Me.lblChangeLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.lblChangeLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblChangeLog.ForeColor = System.Drawing.SystemColors.ControlText
                 Me.lblChangeLog.Location = New System.Drawing.Point(16, 160)
                 Me.lblChangeLog.Name = "lblChangeLog"
-                Me.lblChangeLog.Size = New System.Drawing.Size(92, 18)
+                Me.lblChangeLog.Size = New System.Drawing.Size(92, 22)
                 Me.lblChangeLog.TabIndex = 6
                 Me.lblChangeLog.Text = "Change Log:"
+                Me.lblChangeLog.UseCompatibleTextRendering = True
                 '
                 'lblLicense
                 '
                 Me.lblLicense.AutoSize = True
-                Me.lblLicense.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.lblLicense.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblLicense.ForeColor = System.Drawing.SystemColors.ControlText
                 Me.lblLicense.Location = New System.Drawing.Point(16, 96)
                 Me.lblLicense.Name = "lblLicense"
-                Me.lblLicense.Size = New System.Drawing.Size(59, 18)
+                Me.lblLicense.Size = New System.Drawing.Size(58, 22)
                 Me.lblLicense.TabIndex = 5
                 Me.lblLicense.Text = "License"
+                Me.lblLicense.UseCompatibleTextRendering = True
                 '
                 'lblCopyright
                 '
                 Me.lblCopyright.AutoSize = True
-                Me.lblCopyright.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.lblCopyright.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblCopyright.ForeColor = System.Drawing.SystemColors.ControlText
                 Me.lblCopyright.Location = New System.Drawing.Point(16, 76)
                 Me.lblCopyright.Name = "lblCopyright"
-                Me.lblCopyright.Size = New System.Drawing.Size(71, 18)
+                Me.lblCopyright.Size = New System.Drawing.Size(70, 22)
                 Me.lblCopyright.TabIndex = 2
                 Me.lblCopyright.Text = "Copyright"
+                Me.lblCopyright.UseCompatibleTextRendering = True
                 '
                 'About
                 '
@@ -185,9 +191,8 @@ Namespace UI
                 Me.ClientSize = New System.Drawing.Size(784, 564)
                 Me.Controls.Add(Me.pnlTop)
                 Me.Controls.Add(Me.pnlBottom)
-                Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.Icon = Global.mRemote.My.Resources.Resources.mRemote_Tray_Icon
+                Me.Icon = Global.mRemote.My.Resources.Resources.mRemote_Icon
                 Me.MaximumSize = New System.Drawing.Size(20000, 10000)
                 Me.Name = "About"
                 Me.TabText = "About"
@@ -207,6 +212,7 @@ Namespace UI
                 Me.WindowType = Type.About
                 Me.DockPnl = Panel
                 Me.InitializeComponent()
+                App.Runtime.FontOverride(Me)
             End Sub
 #End Region
 

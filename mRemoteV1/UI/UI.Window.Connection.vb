@@ -196,7 +196,7 @@ Namespace UI
                 '
                 Me.ClientSize = New System.Drawing.Size(632, 453)
                 Me.Controls.Add(Me.TabController)
-                Me.Icon = Global.mRemote.My.Resources.Resources.mRemote_Tray_Icon
+                Me.Icon = Global.mRemote.My.Resources.Resources.mRemote_Icon
                 Me.Name = "Connection"
                 Me.TabText = "UI.Window.Connection"
                 Me.Text = "UI.Window.Connection"

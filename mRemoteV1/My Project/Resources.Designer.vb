@@ -459,13 +459,6 @@ Namespace My.Resources
             End Get
         End Property
         
-        Friend ReadOnly Property mRemote_Tray_Icon() As System.Drawing.Icon
-            Get
-                Dim obj As Object = ResourceManager.GetObject("mRemote_Tray_Icon", resourceCulture)
-                Return CType(obj,System.Drawing.Icon)
-            End Get
-        End Property
-        
         Friend ReadOnly Property News() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("News", resourceCulture)

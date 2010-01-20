@@ -80,7 +80,7 @@ Namespace Tools
                     Me._nI = New NotifyIcon
                     Me._nI.Text = "mRemote"
                     Me._nI.BalloonTipText = "mRemote"
-                    Me._nI.Icon = My.Resources.mRemote_Tray_Icon
+                    Me._nI.Icon = My.Resources.mRemote_Icon
                     Me._nI.ContextMenuStrip = Me._cMen
                     Me._nI.Visible = True
 

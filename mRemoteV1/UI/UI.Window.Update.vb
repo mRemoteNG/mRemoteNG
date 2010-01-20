@@ -44,7 +44,7 @@ Namespace UI
                 Me.btnCheckForUpdate.FlatStyle = System.Windows.Forms.FlatStyle.Flat
                 Me.btnCheckForUpdate.Location = New System.Drawing.Point(16, 104)
                 Me.btnCheckForUpdate.Name = "btnCheckForUpdate"
-                Me.btnCheckForUpdate.Size = New System.Drawing.Size(80, 32)
+                Me.btnCheckForUpdate.Size = New System.Drawing.Size(104, 32)
                 Me.btnCheckForUpdate.TabIndex = 5
                 Me.btnCheckForUpdate.Text = "Check Again"
                 Me.btnCheckForUpdate.UseVisualStyleBackColor = True
@@ -211,6 +211,7 @@ Namespace UI
                 Me.WindowType = Type.Update
                 Me.DockPnl = Panel
                 Me.InitializeComponent()
+                App.Runtime.FontOverride(Me)
             End Sub
 
             Public Sub CheckForUpdate()

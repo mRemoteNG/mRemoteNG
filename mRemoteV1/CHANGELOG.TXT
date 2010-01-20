@@ -1,4 +1,7 @@
-﻿1.62:
+﻿1.63:
+  New icon and logo
+
+1.62:
   Switched to VncSharp, an open source VNC component
   VNC is supported again except for the following features:
     Windows authentication
