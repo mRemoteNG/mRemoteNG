@@ -457,4 +457,25 @@
   <data name="strUpdateFrequencyWeekly" xml:space="preserve">
     <value>Weekly</value>
   </data>
+  <data name="strFAMFAMFAMAttribution" xml:space="preserve">
+    <value>Includes icons by [FAMFAMFAM]</value>
+  </data>
+  <data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
+    <value>http://www.famfamfam.com/</value>
+  </data>
+  <data name="strMagicLibraryAttribution" xml:space="preserve">
+    <value>Uses the Magic library by [Crownwood Software]</value>
+  </data>
+  <data name="strMagicLibraryAttributionURL" xml:space="preserve">
+    <value>http://www.dotnetmagic.com/</value>
+  </data>
+  <data name="strAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="strChangeLogLabel" xml:space="preserve">
+    <value>Change Log:</value>
+  </data>
+  <data name="strReleasedUnderGPL" xml:space="preserve">
+    <value>Released under the GNU General Public License (GPL)</value>
+  </data>
 </root>

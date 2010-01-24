@@ -754,6 +754,69 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to About.
+        '''</summary>
+        Friend ReadOnly Property strAbout() As String
+            Get
+                Return ResourceManager.GetString("strAbout", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Change Log:.
+        '''</summary>
+        Friend ReadOnly Property strChangeLogLabel() As String
+            Get
+                Return ResourceManager.GetString("strChangeLogLabel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Includes icons by [FAMFAMFAM].
+        '''</summary>
+        Friend ReadOnly Property strFAMFAMFAMAttribution() As String
+            Get
+                Return ResourceManager.GetString("strFAMFAMFAMAttribution", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to http://www.famfamfam.com/.
+        '''</summary>
+        Friend ReadOnly Property strFAMFAMFAMAttributionURL() As String
+            Get
+                Return ResourceManager.GetString("strFAMFAMFAMAttributionURL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Uses the Magic library by [Crownwood Software].
+        '''</summary>
+        Friend ReadOnly Property strMagicLibraryAttribution() As String
+            Get
+                Return ResourceManager.GetString("strMagicLibraryAttribution", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to http://www.dotnetmagic.com/.
+        '''</summary>
+        Friend ReadOnly Property strMagicLibraryAttributionURL() As String
+            Get
+                Return ResourceManager.GetString("strMagicLibraryAttributionURL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Released under the GNU General Public License (GPL).
+        '''</summary>
+        Friend ReadOnly Property strReleasedUnderGPL() As String
+            Get
+                Return ResourceManager.GetString("strReleasedUnderGPL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Every {0} days.
         '''</summary>
         Friend ReadOnly Property strUpdateFrequencyCustom() As String

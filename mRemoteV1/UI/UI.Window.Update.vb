@@ -374,7 +374,7 @@ Namespace UI
 
             Private Sub ApplyLanguage()
                 btnCheckForUpdate.Text = Language.Base.CheckForUpdate
-                lblChangeLogLabel.Text = Language.Base.ChangeLog
+                lblChangeLogLabel.Text = My.Resources.strChangeLogLabel
                 btnDownload.Text = Language.Base.DownloadAndInstall
                 lblCurrentVersionLabel.Text = Language.Base.AvailableVersion & ":"
                 lblInstalledVersionLabel.Text = Language.Base.CurrentVersion & ":"

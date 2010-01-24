@@ -1,6 +1,7 @@
 Imports mRemote.App.Runtime
 Imports System.Reflection
 Imports Crownwood
+Imports mRemote.App.Native
 
 Public Class frmMain
     Public prevWindowsState As FormWindowState
@@ -111,10 +112,13 @@ Public Class frmMain
             End If
         End If
 
+        For Each Window As UI.Window.Base In wL
+            Window.Close()
+        Next
+
         App.Runtime.Shutdown.BeforeQuit()
 
         Debug.Print("[END] - " & Now)
-        End
     End Sub
 #End Region
 
@@ -562,10 +566,6 @@ Public Class frmMain
     End Sub
 
 #Region "Window Overrides and DockPanel Stuff"
-    Private Const WM_GETTEXT As Integer = &HD
-    Private Const WM_ACTIVATEAPP As Integer = &H1C
-    Private Const WM_WINDOWPOSCHANGED As Integer = &H47
-
     Private bWmGetTextFlag As Boolean = False
     Private bWmWindowPosChangedFlag As Boolean = False
 

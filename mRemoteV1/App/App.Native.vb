@@ -20,7 +20,7 @@ Namespace App
         End Function
 
         <DllImport("user32.dll")> _
-        Public Shared Function SetWindowLong(ByVal hWnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As Integer) As Integer
+        Public Shared Function SetWindowLong(ByVal hWnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As Long) As Integer
         End Function
 
         <DllImport("user32.dll", SetLastError:=True)> _
@@ -116,6 +116,10 @@ Namespace App
         Public Const MF_BYCOMMAND As Integer = &H0
         Public Const MF_BYPOSITION As Integer = &H400
         Public Const MF_POPUP As Integer = &H10
+
+        Public Const WM_GETTEXT As Integer = &HD
+        Public Const WM_ACTIVATEAPP As Integer = &H1C
+        Public Const WM_WINDOWPOSCHANGED As Integer = &H47
 
         Public Const WM_SYSCOMMAND As Integer = &H112
 

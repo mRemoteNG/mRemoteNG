@@ -11,8 +11,6 @@ Namespace App
             Public Shared ReadOnly HomePath As String = My.Application.Info.DirectoryPath
             Public Shared EncryptionKey As String = "mR3m"
             Public Shared ReportingFilePath As String = ""
-            Public Shared SmartCodeURL As String = "http://www.s-code.com/products/viewerx/"
-            Public Shared FamFamFamURL As String = "http://www.famfamfam.com/"
         End Class
 
         Public Class Settings

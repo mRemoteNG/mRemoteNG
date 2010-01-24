@@ -10,8 +10,6 @@ Namespace Connection
             Inherits Connection.Protocol.Base
 
 #Region "Private Properties"
-            Private PuttyProcessStartInfo As New ProcessStartInfo()
-            Private Arguments As String
 #End Region
 
 #Region "Public Properties"
@@ -101,49 +99,51 @@ Namespace Connection
 
             Public Overrides Function Connect() As Boolean
                 Try
-                    PuttyProcessStartInfo.FileName = _PuttyPath
+                    PuttyProcess = New Process
 
-                    Select Case Me._PuttyProtocol
-                        Case Putty_Protocol.raw
-                            Arguments = "-load " & """" & Me.InterfaceControl.Info.PuttySession & """" & " -" & Me._PuttyProtocol.ToString & " -P " & Me.InterfaceControl.Info.Port & " """ & Me.InterfaceControl.Info.Hostname & """"
-                        Case Putty_Protocol.rlogin
-                            Arguments = "-load " & """" & Me.InterfaceControl.Info.PuttySession & """" & " -" & Me._PuttyProtocol.ToString & " -P " & Me.InterfaceControl.Info.Port & " """ & Me.InterfaceControl.Info.Hostname & """"
-                        Case Putty_Protocol.ssh
-                            Dim UserArg As String = ""
-                            Dim PassArg As String = ""
+                    With PuttyProcess.StartInfo
+                        .FileName = _PuttyPath
 
-                            If My.Settings.EmptyCredentials = "windows" Then
-                                UserArg = " -l """ & Environment.UserName & """"
-                            ElseIf My.Settings.EmptyCredentials = "custom" Then
-                                UserArg = " -l """ & My.Settings.DefaultUsername & """"
-                                PassArg = " -pw """ & Security.Crypt.Decrypt(My.Settings.DefaultPassword, App.Info.General.EncryptionKey) & """"
-                            End If
+                        Select Case Me._PuttyProtocol
+                            Case Putty_Protocol.raw
+                                .Arguments = "-load " & """" & Me.InterfaceControl.Info.PuttySession & """" & " -" & Me._PuttyProtocol.ToString & " -P " & Me.InterfaceControl.Info.Port & " """ & Me.InterfaceControl.Info.Hostname & """"
+                            Case Putty_Protocol.rlogin
+                                .Arguments = "-load " & """" & Me.InterfaceControl.Info.PuttySession & """" & " -" & Me._PuttyProtocol.ToString & " -P " & Me.InterfaceControl.Info.Port & " """ & Me.InterfaceControl.Info.Hostname & """"
+                            Case Putty_Protocol.ssh
+                                Dim UserArg As String = ""
+                                Dim PassArg As String = ""
 
-                            If Me.InterfaceControl.Info.Username <> "" Then
-                                UserArg = " -l """ & Me.InterfaceControl.Info.Username & """"
-                            End If
+                                If My.Settings.EmptyCredentials = "windows" Then
+                                    UserArg = " -l """ & Environment.UserName & """"
+                                ElseIf My.Settings.EmptyCredentials = "custom" Then
+                                    UserArg = " -l """ & My.Settings.DefaultUsername & """"
+                                    PassArg = " -pw """ & Security.Crypt.Decrypt(My.Settings.DefaultPassword, App.Info.General.EncryptionKey) & """"
+                                End If
 
-                            If Me.InterfaceControl.Info.Password <> "" Then
-                                PassArg = " -pw """ & Me.InterfaceControl.Info.Password & """"
-                            End If
+                                If Me.InterfaceControl.Info.Username <> "" Then
+                                    UserArg = " -l """ & Me.InterfaceControl.Info.Username & """"
+                                End If
 
-                            Arguments = "-load " & """" & Me.InterfaceControl.Info.PuttySession & """" & " -" & Me._PuttyProtocol.ToString & " -" & Me._PuttySSHVersion & UserArg & PassArg & " -P " & Me.InterfaceControl.Info.Port & " """ & Me.InterfaceControl.Info.Hostname & """"
-                        Case Putty_Protocol.telnet
-                            Arguments = "-load " & """" & Me.InterfaceControl.Info.PuttySession & """" & " -" & Me._PuttyProtocol.ToString & " -P " & Me.InterfaceControl.Info.Port & " """ & Me.InterfaceControl.Info.Hostname & """"
-                        Case Putty_Protocol.serial
-                            Arguments = "-load " & """" & Me.InterfaceControl.Info.PuttySession & """" & " -" & Me._PuttyProtocol.ToString & " -P " & Me.InterfaceControl.Info.Port & " """ & Me.InterfaceControl.Info.Hostname & """"
-                    End Select
+                                If Me.InterfaceControl.Info.Password <> "" Then
+                                    PassArg = " -pw """ & Me.InterfaceControl.Info.Password & """"
+                                End If
 
-                    'REMOVE IN RELEASE!
-                    'mC.AddMessage(Messages.MessageClass.InformationMsg, "PuTTY Arguments: " & Arguments, True)
+                                .Arguments = "-load " & """" & Me.InterfaceControl.Info.PuttySession & """" & " -" & Me._PuttyProtocol.ToString & " -" & Me._PuttySSHVersion & UserArg & PassArg & " -P " & Me.InterfaceControl.Info.Port & " """ & Me.InterfaceControl.Info.Hostname & """"
+                            Case Putty_Protocol.telnet
+                                .Arguments = "-load " & """" & Me.InterfaceControl.Info.PuttySession & """" & " -" & Me._PuttyProtocol.ToString & " -P " & Me.InterfaceControl.Info.Port & " """ & Me.InterfaceControl.Info.Hostname & """"
+                            Case Putty_Protocol.serial
+                                .Arguments = "-load " & """" & Me.InterfaceControl.Info.PuttySession & """" & " -" & Me._PuttyProtocol.ToString & " -P " & Me.InterfaceControl.Info.Port & " """ & Me.InterfaceControl.Info.Hostname & """"
+                        End Select
 
-                    PuttyProcessStartInfo.Arguments = Arguments
+                        'REMOVE IN RELEASE!
+                        'mC.AddMessage(Messages.MessageClass.InformationMsg, "PuTTY Arguments: " & .Arguments, True)
+                    End With
 
-                    PuttyProcess = Process.Start(PuttyProcessStartInfo)
                     PuttyProcess.EnableRaisingEvents = True
-                    PuttyProcess.WaitForInputIdle()
-
                     AddHandler PuttyProcess.Exited, AddressOf ProcessExited
+
+                    PuttyProcess.Start()
+                    PuttyProcess.WaitForInputIdle()
 
                     Dim TryCount As Integer = 0
                     Do Until PuttyProcess.MainWindowHandle <> IntPtr.Zero And Me.InterfaceControl.Handle <> IntPtr.Zero And Me.PuttyProcess.MainWindowTitle <> "Default IME"
@@ -167,9 +167,8 @@ Namespace Connection
                     mC.AddMessage(Messages.MessageClass.InformationMsg, "PuTTY Title: " & PuttyProcess.MainWindowTitle, True)
                     mC.AddMessage(Messages.MessageClass.InformationMsg, "Panel Handle: " & Me.InterfaceControl.Parent.Handle.ToString, True)
 
-                    SetParent(Me.PuttyHandle, Me.InterfaceControl.Parent.Handle)
-                    SetWindowLong(Me.PuttyHandle, 0, WS_VISIBLE)
-                    ShowWindow(Me.PuttyHandle, SW_SHOWMAXIMIZED)
+                    SetParent(PuttyHandle, InterfaceControl.Parent.Handle)
+                    ShowWindow(PuttyHandle, SW_SHOWMAXIMIZED)
                     Resize()
 
                     MyBase.Connect()
@@ -183,7 +182,7 @@ Namespace Connection
 
             Public Overrides Sub Focus()
                 Try
-                    SetForegroundWindow(PuttyHandle)
+                    'SetForegroundWindow(PuttyHandle)
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't Focus (Connection.Protocol.PuttyBase)" & vbNewLine & ex.Message, True)
                 End Try
