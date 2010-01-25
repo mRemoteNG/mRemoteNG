@@ -3,6 +3,7 @@
   Fixed problems moving or resizing the main window while PuTTY (SSH/telnet/rlogin/raw) connections are open
   Fixed PuTTY processes not closing on Vista and 7 with UAC enabled
   Updated DockPanel Suite from 2.2.0 to 2.3.1
+  Fixed error if the mouse is clicked outside of the remote screen area of a VNC connection
 
 1.62:
   Switched to VncSharp, an open source VNC component
