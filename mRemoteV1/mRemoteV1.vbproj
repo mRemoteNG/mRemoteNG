@@ -608,7 +608,6 @@
     <None Include="My Project\DataSources\mRemote.Language.EN.datasource" />
     <None Include="Notes\PropertyList.csv" />
     <None Include="Resources\Images\PuttyConfig.png" />
-    <None Include="Resources\Images\Logo_XMas.png" />
     <None Include="Resources\Images\Play_Quick.png" />
     <None Include="Resources\Icons\Play_Quick_Icon.ico" />
     <None Include="Resources\Icons\SSHTransfer_Icon.ico" />
@@ -622,16 +621,12 @@
     <None Include="Resources\Images\Connections_SaveAs.png" />
     <None Include="Resources\Images\Connections_Save.png" />
     <None Include="Resources\Icons\Connections_SaveAs_Icon.ico" />
-    <None Include="Resources\Icons\Connections_Load_Icon.ico" />
-    <None Include="Resources\Icons\Connections_New_Icon.ico" />
-    <None Include="Resources\Icons\Connections_Save_Icon.ico" />
     <None Include="Resources\Images\Sort_ZA.png" />
     <None Include="Resources\Images\Sort_AZ.png" />
     <None Include="Resources\Icons\Help_Icon.ico" />
     <None Include="Resources\Images\Lock.png" />
     <None Include="Resources\Images\Refresh.png" />
     <None Include="Resources\Images\RDP.png" />
-    <None Include="Resources\Images\Logo_NewYear.png" />
     <None Include="Resources\Images\PropertiesDefault.png" />
     <None Include="Resources\Images\ExtApp.png" />
     <None Include="Resources\Icons\ExtApp_Icon.ico" />
@@ -708,8 +703,6 @@
     <Content Include="Notes\PropertyList.txt" />
     <None Include="Resources\Images_FamFamFam\Monitor_GoTo.png" />
     <None Include="Resources\Images_FamFamFam\Monitor.png" />
-    <None Include="Resources\Images_FamFamFam\Monitor_Mini.png" />
-    <None Include="Resources\Icons\UVNC_SC_Helpdesk.ico" />
     <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
     <None Include="Resources\Images\UVNC_SC.png" />
     <None Include="Resources\Images\Bad_Symbol.png" />
@@ -723,7 +716,6 @@
     <Content Include="Help\Main.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\Icons\mRemote_Tray_Icon.ico" />
     <None Include="Resources\Images\Copy.png" />
     <None Include="Resources\Icons\mRemote_Icon.ico" />
     <None Include="Resources\Icons\Sessions_Icon.ico" />
