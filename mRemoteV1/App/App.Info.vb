@@ -35,7 +35,7 @@ Namespace App
             Public Shared ReadOnly DefaultConnectionsPath As String = App.Info.Settings.SettingsPath
             Public Shared ReadOnly DefaultConnectionsFile As String = "confCons.xml"
             Public Shared ReadOnly DefaultConnectionsFileNew As String = "confConsNew.xml"
-            Public Shared ReadOnly ConnectionFileVersion As Double = 2.1
+            Public Shared ReadOnly ConnectionFileVersion As Double = 2.2
         End Class
 
         Public Class Credentials

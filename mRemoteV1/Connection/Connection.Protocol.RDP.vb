@@ -33,7 +33,6 @@ Namespace Connection
 #End Region
 
 #Region "Private Declarations"
-            Private rd As MSTSCLib.IMsRdpClient5
             Private RDP As AxMsRdpClient5
             Private Info As Connection.Info
             Private RDPVersion As Version
@@ -90,7 +89,7 @@ Namespace Connection
                     Me.SetRedirectKeys()
                     Me.SetRedirection()
                     Me.SetAuthenticationLevel()
-                    Me.SetTSGateway()
+                    Me.SetRDGateway()
 
                     RDP.ColorDepth = Int(Me.Info.Colors)
 
@@ -156,15 +155,16 @@ Namespace Connection
 #End Region
 
 #Region "Private Methods"
-            Private Sub SetTSGateway()
+            Private Sub SetRDGateway()
                 Try
-                    'If RDP.TransportSettings.GatewayIsSupported = 1 Then
-                    '    MsgBox("TS Gateway supported")
-                    'Else
-                    '    MsgBox("TS Gateway unsupported")
-                    'End If
+                    If RDP.TransportSettings.GatewayIsSupported = 1 Then
+                        mC.AddMessage(Messages.MessageClass.InformationMsg, "RD Gateway is supported", True)
+                        RDP.TransportSettings.GatewayHostname = Me.Info.RDGatewayHostname
+                    Else
+                        mC.AddMessage(Messages.MessageClass.InformationMsg, "RD Gateway is not supported", True)
+                    End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "RDP SetTSGateway failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "RDP SetRDGateway failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
