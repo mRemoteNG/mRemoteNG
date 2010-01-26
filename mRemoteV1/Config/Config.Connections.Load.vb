@@ -973,6 +973,11 @@ Namespace Config
                             conI.ExtApp = .Attributes("ExtApp").Value
                             conI.Inherit.ExtApp = .Attributes("InheritExtApp").Value
                         End If
+
+                        If Me.confVersion > 2.1 Then '2.2
+                            conI.RDGatewayHostname = .Attributes("RDGatewayHostname").Value
+                            conI.Inherit.RDGatewayHostname = .Attributes("InheritRDGatewayHostname").Value
+                        End If
                     End With
 
                     Return conI

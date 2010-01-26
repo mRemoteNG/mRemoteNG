@@ -1116,8 +1116,21 @@ Namespace Connection
             End Set
         End Property
 #End Region
-
-
+#Region "RD Gateway"
+        Private _RDGatewayHostname As String
+        <Category(Category3 & Language.Base.Props_Protocol), _
+            Browsable(True), _
+            DisplayName(Language.Base.Props_RDGatewayHostname), _
+            Description(Language.Base.Descr_RDGatewayHostname)> _
+        Public Property RDGatewayHostname() As String
+            Get
+                Return Me._RDGatewayHostname
+            End Get
+            Set(ByVal value As String)
+                Me._RDGatewayHostname = value
+            End Set
+        End Property
+#End Region
 
 
         Private _Inherit As Inheritance = New Inheritance(Me)
@@ -1982,6 +1995,22 @@ Namespace Connection
                 End Set
             End Property
 #End Region
+#Region "RD Gateway"
+            Private _RDGatewayHostname As Boolean = False
+            <Category(Category3 & Language.Base.Props_Protocol), _
+                Browsable(True), _
+                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayHostname), _
+                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
+            Public Property RDGatewayHostname() As Boolean
+                Get
+                    Return Me._RDGatewayHostname
+                End Get
+                Set(ByVal value As Boolean)
+                    Me._RDGatewayHostname = value
+                End Set
+            End Property
+#End Region
+
         End Class
 
         <Flags()> _

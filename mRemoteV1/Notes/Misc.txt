@@ -52,6 +52,9 @@ How to add a new protocol:
 		Connection.Info.SetDefaultPort
 		UI.Window.Config.ShowHideGridItems
 		
+Remote Desktop ActiveX Control Reference
+	http://msdn.microsoft.com/en-us/library/aa383022%28VS.85%29.aspx
+
 RDP 6.0 NLA:
 	AdvancedSettings5.AuthenticationLevel
 	0 = No authentication of the server.
