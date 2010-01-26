@@ -158,16 +158,16 @@ Namespace Config
                             dc.Close()
                         Loop
 
-                        .pnlDock.SuspendLayout(True)
+                        '.pnlDock.SuspendLayout(True)
 
                         If File.Exists(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.LayoutFileName) And My.Settings.ResetPanels = False Then
                             Startup.CreatePanels()
                             .pnlDock.LoadFromXml(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.LayoutFileName, AddressOf GetContentFromPersistString)
-                        Else
+                        Else                            
                             Startup.CreatePanels(True)
                         End If
 
-                        .pnlDock.ResumeLayout(True, True)
+                        '.pnlDock.ResumeLayout(True, True)
                     End With
                 Catch ex As Exception
                     App.Runtime.log.Error("LoadPanelsFromXML failed" & vbNewLine & ex.Message)

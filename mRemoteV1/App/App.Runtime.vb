@@ -192,8 +192,7 @@ Namespace App
                 Windows.errorsForm = New UI.Window.ErrorsAndInfos(Windows.errorsPanel)
                 Windows.errorsPanel = Windows.errorsForm
 
-                If ShowDefault Then
-                    Windows.errorsPanel.AutoHidePortion = 150
+                If ShowDefault Then                    
                     Windows.errorsPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
                 End If
 
@@ -201,25 +200,14 @@ Namespace App
                 Windows.sessionsPanel = Windows.sessionsForm
 
                 If ShowDefault Then
-                    Windows.sessionsPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-                    Windows.sessionsPanel.DockTo(frmMain.pnlDock.Panes(frmMain.pnlDock.Panes.Count - 1), DockStyle.Bottom, 0)
+                    Windows.sessionsPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)                    
                 End If
 
                 Windows.screenshotForm = New UI.Window.ScreenshotManager(Windows.screenshotPanel)
                 Windows.screenshotPanel = Windows.screenshotForm
 
-                If ShowDefault Then
-                    Windows.screenshotPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-                    Windows.screenshotForm.Hide()
-                End If
-
                 Windows.quickyForm = New UI.Window.QuickConnect(Windows.quickyPanel)
                 Windows.quickyPanel = Windows.quickyForm
-
-                If ShowDefault Then
-                    Windows.quickyPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-                    Windows.quickyForm.Hide()
-                End If
 
                 Windows.updateForm = New UI.Window.Update(Windows.updatePanel)
                 Windows.updatePanel = Windows.updateForm
