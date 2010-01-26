@@ -6,3 +6,4 @@ mRemoteV1/publish
 *.suo
 *.vbproj.user
 Thumbs.db
+_ReSharper.mRemoteV1/*
