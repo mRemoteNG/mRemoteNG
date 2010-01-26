@@ -88,6 +88,8 @@
         Public Const Descr_MacAddress As String = "Enter the MAC Address of the remote host if you wish to use it in Ext. Apps."
         Public Const Props_UserField As String = "User Field"
         Public Const Descr_UserField As String = "Feel free to enter any information you need here."
+        Public Const Props_RDGatewayHostname As String = "Gateway Hostname"
+        Public Const Descr_RDGatewayHostname As String = "Specifies the host name of the Remote Desktop Gateway server."
 
         Public Const Props_General As String = "General"
         Public Const Props_Display As String = "Display"
