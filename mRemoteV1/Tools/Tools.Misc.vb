@@ -332,6 +332,7 @@ Namespace Tools
                         Save()
                         targetForm.WindowState = FormWindowState.Maximized
                         targetForm.FormBorderStyle = FormBorderStyle.None
+                        targetForm.MainMenuStrip.Visible = False
                         SetWinFullScreen(targetForm.Handle)
                     End If
                 Catch ex As Exception
@@ -349,6 +350,7 @@ Namespace Tools
                 Try
                     targetForm.WindowState = winState
                     targetForm.FormBorderStyle = brdStyle
+                    targetForm.MainMenuStrip.Visible = True
                     targetForm.Bounds = bounds
                     FullscreenActive = False
                 Catch ex As Exception

@@ -311,6 +311,7 @@ Partial Class frmMain
         '
         Me.mMenViewFullscreen.Image = Global.mRemote.My.Resources.Resources.Fullscreen
         Me.mMenViewFullscreen.Name = "mMenViewFullscreen"
+        Me.mMenViewFullscreen.ShortcutKeys = System.Windows.Forms.Keys.F11
         Me.mMenViewFullscreen.Size = New System.Drawing.Size(228, 22)
         Me.mMenViewFullscreen.Text = "Fullscreen (Kiosk Mode)"
         '
