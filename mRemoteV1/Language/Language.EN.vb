@@ -117,7 +117,7 @@
         Public Const Menu_ExternalApplications As String = "External Applications"
         Public Const Menu_ExternalApplicationsToolbar As String = "External Applications Toolbar"
         Public Const Menu_File As String = "&File"
-        Public Const Menu_FullScreenKioskMode As String = "Fullscreen (Kiosk Mode)"
+        Public Const Menu_FullScreenKioskMode As String = "Full Screen"
         Public Const Menu_Help As String = "mRemoteNG Help"
         Public Const Menu_Info As String = "&Help"
         Public Const Menu_JumpTo As String = "Jump To"

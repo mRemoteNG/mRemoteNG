@@ -478,4 +478,7 @@
   <data name="strReleasedUnderGPL" xml:space="preserve">
     <value>Released under the GNU General Public License (GPL)</value>
   </data>
+  <data name="strConfirmResetLayout" xml:space="preserve">
+    <value>Are you sure you want to reset the panels to their default layout?</value>
+  </data>
 </root>

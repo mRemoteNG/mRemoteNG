@@ -339,6 +339,12 @@ Public Class frmMain
         Windows.errorsForm.Activate()
     End Sub
 
+    Private Sub mMenViewResetLayout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewResetLayout.Click
+        If MsgBox(My.Resources.strConfirmResetLayout, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+            App.Runtime.Startup.SetDefaultLayout()
+        End If
+    End Sub
+
     Private Sub mMenViewAddConnectionPanel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewAddConnectionPanel.Click
         AddPanel()
     End Sub

@@ -172,60 +172,57 @@ Namespace App
         End Class
 
         Public Class Startup
-            Public Shared Sub CreatePanels(Optional ByVal ShowDefault As Boolean = False)
+            Public Shared Sub CreatePanels()
                 Windows.configForm = New UI.Window.Config(Windows.configPanel)
                 Windows.configPanel = Windows.configForm
-
-                If ShowDefault Then
-                    Windows.configPanel.Show(frmMain.pnlDock, DockState.DockLeft)
-                End If
 
                 Windows.treeForm = New UI.Window.Tree(Windows.treePanel)
                 Windows.treePanel = Windows.treeForm
                 Tree.Node.TreeView = Windows.treeForm.tvConnections
 
-                If ShowDefault Then
-                    Windows.treePanel.Show(frmMain.pnlDock, DockState.DockLeft)
-                    Windows.treePanel.DockTo(frmMain.pnlDock.Panes(frmMain.pnlDock.Panes.Count - 1), DockStyle.Top, 0)
-                End If
-
                 Windows.errorsForm = New UI.Window.ErrorsAndInfos(Windows.errorsPanel)
                 Windows.errorsPanel = Windows.errorsForm
-
-                If ShowDefault Then
-                    Windows.errorsPanel.AutoHidePortion = 150
-                    Windows.errorsPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-                End If
 
                 Windows.sessionsForm = New UI.Window.Sessions(Windows.sessionsPanel)
                 Windows.sessionsPanel = Windows.sessionsForm
 
-                If ShowDefault Then
-                    Windows.sessionsPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-                    Windows.sessionsPanel.DockTo(frmMain.pnlDock.Panes(frmMain.pnlDock.Panes.Count - 1), DockStyle.Bottom, 0)
-                End If
-
                 Windows.screenshotForm = New UI.Window.ScreenshotManager(Windows.screenshotPanel)
                 Windows.screenshotPanel = Windows.screenshotForm
 
-                If ShowDefault Then
-                    Windows.screenshotPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-                    Windows.screenshotForm.Hide()
-                End If
-
                 Windows.quickyForm = New UI.Window.QuickConnect(Windows.quickyPanel)
                 Windows.quickyPanel = Windows.quickyForm
-
-                If ShowDefault Then
-                    Windows.quickyPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-                    Windows.quickyForm.Hide()
-                End If
 
                 Windows.updateForm = New UI.Window.Update(Windows.updatePanel)
                 Windows.updatePanel = Windows.updateForm
 
                 Windows.AnnouncementForm = New UI.Window.Announcement(Windows.AnnouncementPanel)
                 Windows.AnnouncementPanel = Windows.AnnouncementForm
+            End Sub
+
+            Public Shared Sub SetDefaultLayout()
+                frmMain.pnlDock.Visible = False
+
+                Windows.configPanel.Show(frmMain.pnlDock, DockState.DockLeft)
+
+                Windows.treePanel.Show(frmMain.pnlDock, DockState.DockLeft)
+                For Each pane As DockPane In frmMain.pnlDock.Panes
+                    If pane.DockState = DockState.DockLeft Then
+                        Windows.treePanel.DockTo(pane, DockStyle.Top, 0)
+                        Exit For
+                    End If
+                Next
+
+                Windows.errorsPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
+
+                Windows.sessionsPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
+
+                Windows.screenshotPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
+                Windows.screenshotForm.Hide()
+
+                Windows.quickyPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
+                Windows.quickyForm.Hide()
+
+                frmMain.pnlDock.Visible = True
             End Sub
 
             Public Shared Sub GetConnectionIcons()

@@ -124,8 +124,8 @@
   <data name="mMenViewConfig.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAwAA
-        CwMBSY6M0gAAArhJREFUOE91U91LU3EYnt0GjUYSgv+EoDeCgXkhiuBAL7swoTWUEryYF2JXQlebTIlK
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAgAA
+        CwIBm8luNgAAArhJREFUOE91U91LU3EYnt0GjUYSgv+EoDeCgXkhiuBAL7swoTWUEryYF2JXQlebTIlK
         pA1bmfODND+DpqUzt5Vfm7NtZx9n52xnui9zm/m5p9/vlINcHnjhnPf83ud5n/d9fhIAkv9FQ0NDrU6n
         29fr9cnS0tKqq87lFQ8MDNxqaWm5oVKpjPFEEql0Gp2dnYb29vbrGo3m9mWgHIDBYGh7PzmZ1en1gtE4
         kgoLEYTCAmLxOE5OTzExMXHw2mAQTCZT9vmLF8oLIBFAJpNde/N2iGP5EOKJhBh70SjYIAchEsHu3h4O
@@ -143,8 +143,8 @@
   <data name="mMenViewSessions.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAwAA
-        CwMBSY6M0gAAA4RJREFUOE9lk21MU3cUh/9L5pxabCoz2YsmLiwbDp0TddMU1sLo7e3LtZTSQim2ILft
+        YQUAAAAgY0hSTQAAeiYAAICEAAD6AAAAgOgAAHUwAADqYAAAOpgAABdwnLpRPAAAAAlwSFlzAAALAgAA
+        CwIBm8luNgAAA4RJREFUOE9lk21MU3cUh/9L5pxabCoz2YsmLiwbDp0TddMU1sLo7e3LtZTSQim2ILft
         ENoKtIVSXksEKRStwwoVDSZGCGPIyDbYCG5s02TZFudCtiDIjNFszjiWrFmZWf3tln2Z8uHJOV/Oc345
         ySEAyP9hd24gcUo4zKmJrzRlJk6HVIJol4IfrcsQ3M1LfaaUShE8KdnKJ3EeGY6LatIEy7iFG/i+DP6V
         EPMUAsrVCKr5aFcKYN2bEMnf94KqlE4mVurllYJgFo/EOZ6xZkso+zl80KDExVoanqxE2IU8FO5YjSbd

@@ -23,6 +23,21 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
+        Dim DockPanelSkin3 As WeifenLuo.WinFormsUI.Docking.DockPanelSkin = New WeifenLuo.WinFormsUI.Docking.DockPanelSkin
+        Dim AutoHideStripSkin3 As WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin = New WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin
+        Dim DockPanelGradient7 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient
+        Dim TabGradient15 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim DockPaneStripSkin3 As WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin = New WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin
+        Dim DockPaneStripGradient3 As WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient = New WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient
+        Dim TabGradient16 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim DockPanelGradient8 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient
+        Dim TabGradient17 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim DockPaneStripToolWindowGradient3 As WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient = New WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient
+        Dim TabGradient18 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim TabGradient19 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim DockPanelGradient9 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient
+        Dim TabGradient20 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim TabGradient21 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.pnlDock = New WeifenLuo.WinFormsUI.Docking.DockPanel
         Me.msMain = New System.Windows.Forms.MenuStrip
@@ -85,6 +100,7 @@ Partial Class frmMain
         Me.cMenToolbarShowText = New System.Windows.Forms.ToolStripMenuItem
         Me.tmrShowUpdate = New System.Windows.Forms.Timer(Me.components)
         Me.tmrAutoSave = New System.Windows.Forms.Timer(Me.components)
+        Me.mMenViewResetLayout = New System.Windows.Forms.ToolStripMenuItem
         Me.msMain.SuspendLayout()
         Me.tsContainer.ContentPanel.SuspendLayout()
         Me.tsContainer.TopToolStripPanel.SuspendLayout()
@@ -97,12 +113,57 @@ Partial Class frmMain
         '
         Me.pnlDock.ActiveAutoHideContent = Nothing
         Me.pnlDock.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.pnlDock.DockBackColor = System.Drawing.SystemColors.Control
         Me.pnlDock.DockLeftPortion = 230
         Me.pnlDock.DockRightPortion = 230
         Me.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow
         Me.pnlDock.Location = New System.Drawing.Point(0, 0)
         Me.pnlDock.Name = "pnlDock"
-        Me.pnlDock.Size = New System.Drawing.Size(842, 474)
+        Me.pnlDock.Size = New System.Drawing.Size(842, 449)
+        DockPanelGradient7.EndColor = System.Drawing.SystemColors.ControlLight
+        DockPanelGradient7.StartColor = System.Drawing.SystemColors.ControlLight
+        AutoHideStripSkin3.DockStripGradient = DockPanelGradient7
+        TabGradient15.EndColor = System.Drawing.SystemColors.Control
+        TabGradient15.StartColor = System.Drawing.SystemColors.Control
+        TabGradient15.TextColor = System.Drawing.SystemColors.ControlDarkDark
+        AutoHideStripSkin3.TabGradient = TabGradient15
+        DockPanelSkin3.AutoHideStripSkin = AutoHideStripSkin3
+        TabGradient16.EndColor = System.Drawing.SystemColors.ControlLightLight
+        TabGradient16.StartColor = System.Drawing.SystemColors.ControlLightLight
+        TabGradient16.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripGradient3.ActiveTabGradient = TabGradient16
+        DockPanelGradient8.EndColor = System.Drawing.SystemColors.Control
+        DockPanelGradient8.StartColor = System.Drawing.SystemColors.Control
+        DockPaneStripGradient3.DockStripGradient = DockPanelGradient8
+        TabGradient17.EndColor = System.Drawing.SystemColors.ControlLight
+        TabGradient17.StartColor = System.Drawing.SystemColors.ControlLight
+        TabGradient17.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripGradient3.InactiveTabGradient = TabGradient17
+        DockPaneStripSkin3.DocumentGradient = DockPaneStripGradient3
+        TabGradient18.EndColor = System.Drawing.SystemColors.ActiveCaption
+        TabGradient18.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical
+        TabGradient18.StartColor = System.Drawing.SystemColors.GradientActiveCaption
+        TabGradient18.TextColor = System.Drawing.SystemColors.ActiveCaptionText
+        DockPaneStripToolWindowGradient3.ActiveCaptionGradient = TabGradient18
+        TabGradient19.EndColor = System.Drawing.SystemColors.Control
+        TabGradient19.StartColor = System.Drawing.SystemColors.Control
+        TabGradient19.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripToolWindowGradient3.ActiveTabGradient = TabGradient19
+        DockPanelGradient9.EndColor = System.Drawing.SystemColors.ControlLight
+        DockPanelGradient9.StartColor = System.Drawing.SystemColors.ControlLight
+        DockPaneStripToolWindowGradient3.DockStripGradient = DockPanelGradient9
+        TabGradient20.EndColor = System.Drawing.SystemColors.GradientInactiveCaption
+        TabGradient20.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical
+        TabGradient20.StartColor = System.Drawing.SystemColors.GradientInactiveCaption
+        TabGradient20.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripToolWindowGradient3.InactiveCaptionGradient = TabGradient20
+        TabGradient21.EndColor = System.Drawing.Color.Transparent
+        TabGradient21.StartColor = System.Drawing.Color.Transparent
+        TabGradient21.TextColor = System.Drawing.SystemColors.ControlDarkDark
+        DockPaneStripToolWindowGradient3.InactiveTabGradient = TabGradient21
+        DockPaneStripSkin3.ToolWindowGradient = DockPaneStripToolWindowGradient3
+        DockPanelSkin3.DockPaneStripSkin = DockPaneStripSkin3
+        Me.pnlDock.Skin = DockPanelSkin3
         Me.pnlDock.TabIndex = 13
         '
         'msMain
@@ -114,7 +175,7 @@ Partial Class frmMain
         Me.msMain.Location = New System.Drawing.Point(3, 0)
         Me.msMain.Name = "msMain"
         Me.msMain.Padding = New System.Windows.Forms.Padding(2, 2, 0, 2)
-        Me.msMain.Size = New System.Drawing.Size(182, 24)
+        Me.msMain.Size = New System.Drawing.Size(274, 24)
         Me.msMain.Stretch = False
         Me.msMain.TabIndex = 16
         Me.msMain.Text = "Main Toolbar"
@@ -179,7 +240,7 @@ Partial Class frmMain
         '
         'mMenView
         '
-        Me.mMenView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenViewAddConnectionPanel, Me.mMenViewConnectionPanels, Me.mMenViewSep1, Me.mMenViewConnections, Me.mMenViewConfig, Me.mMenViewSessions, Me.mMenViewErrorsAndInfos, Me.mMenViewScreenshotManager, Me.ToolStripSeparator1, Me.mMenViewJumpTo, Me.mMenViewSep2, Me.mMenViewQuickConnectToolbar, Me.mMenViewExtAppsToolbar, Me.mMenViewSep3, Me.mMenViewFullscreen})
+        Me.mMenView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenViewAddConnectionPanel, Me.mMenViewConnectionPanels, Me.mMenViewSep1, Me.mMenViewConnections, Me.mMenViewConfig, Me.mMenViewSessions, Me.mMenViewErrorsAndInfos, Me.mMenViewScreenshotManager, Me.ToolStripSeparator1, Me.mMenViewJumpTo, Me.mMenViewResetLayout, Me.mMenViewSep2, Me.mMenViewQuickConnectToolbar, Me.mMenViewExtAppsToolbar, Me.mMenViewSep3, Me.mMenViewFullscreen})
         Me.mMenView.Name = "mMenView"
         Me.mMenView.Size = New System.Drawing.Size(44, 20)
         Me.mMenView.Text = "&View"
@@ -311,8 +372,9 @@ Partial Class frmMain
         '
         Me.mMenViewFullscreen.Image = Global.mRemote.My.Resources.Resources.Fullscreen
         Me.mMenViewFullscreen.Name = "mMenViewFullscreen"
+        Me.mMenViewFullscreen.ShortcutKeys = System.Windows.Forms.Keys.F11
         Me.mMenViewFullscreen.Size = New System.Drawing.Size(228, 22)
-        Me.mMenViewFullscreen.Text = "Fullscreen (Kiosk Mode)"
+        Me.mMenViewFullscreen.Text = "Full Screen"
         '
         'mMenTools
         '
@@ -476,7 +538,7 @@ Partial Class frmMain
         '
         Me.tsContainer.ContentPanel.Controls.Add(Me.pnlDock)
         Me.tsContainer.ContentPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsContainer.ContentPanel.Size = New System.Drawing.Size(842, 474)
+        Me.tsContainer.ContentPanel.Size = New System.Drawing.Size(842, 449)
         Me.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill
         '
         'tsContainer.LeftToolStripPanel
@@ -532,7 +594,7 @@ Partial Class frmMain
         '
         Me.tsExtAppsToolbar.ContextMenuStrip = Me.cMenExtAppsToolbar
         Me.tsExtAppsToolbar.Dock = System.Windows.Forms.DockStyle.None
-        Me.tsExtAppsToolbar.Location = New System.Drawing.Point(254, 24)
+        Me.tsExtAppsToolbar.Location = New System.Drawing.Point(39, 49)
         Me.tsExtAppsToolbar.Name = "tsExtAppsToolbar"
         Me.tsExtAppsToolbar.Size = New System.Drawing.Size(111, 25)
         Me.tsExtAppsToolbar.TabIndex = 17
@@ -559,6 +621,12 @@ Partial Class frmMain
         'tmrAutoSave
         '
         Me.tmrAutoSave.Interval = 10000
+        '
+        'mMenViewResetLayout
+        '
+        Me.mMenViewResetLayout.Name = "mMenViewResetLayout"
+        Me.mMenViewResetLayout.Size = New System.Drawing.Size(228, 22)
+        Me.mMenViewResetLayout.Text = "Reset Layout"
         '
         'frmMain
         '
@@ -644,5 +712,6 @@ Partial Class frmMain
     Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mMenInfoForum As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenToolsUpdate As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenViewResetLayout As System.Windows.Forms.ToolStripMenuItem
 
 End Class
