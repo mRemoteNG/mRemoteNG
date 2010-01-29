@@ -90,6 +90,12 @@
         Public Const Descr_UserField As String = "Feel free to enter any information you need here."
         Public Const Props_RDGatewayHostname As String = "Gateway Hostname"
         Public Const Descr_RDGatewayHostname As String = "Specifies the host name of the Remote Desktop Gateway server."
+        Public Const Props_RDGatewayUsername As String = "Gateway Username"
+        Public Const Descr_RDGatewayUsername As String = "Specifies the user name that a user provides to connect to the RD Gateway server."
+        Public Const Props_RDGatewayPassword As String = "Gateway Password"
+        Public Const Descr_RDGatewayPassword As String = "Specifies the password that a user provides to connect to the RD Gateway server."
+        Public Const Props_RDGatewayDomain As String = "Gateway Domain"
+        Public Const Descr_RDGatewayDomain As String = "Specifies the domain name that a user provides to connect to the RD Gateway server."
 
         Public Const Props_General As String = "General"
         Public Const Props_Display As String = "Display"

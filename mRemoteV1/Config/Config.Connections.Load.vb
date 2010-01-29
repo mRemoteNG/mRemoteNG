@@ -976,7 +976,13 @@ Namespace Config
 
                         If Me.confVersion > 2.1 Then '2.2
                             conI.RDGatewayHostname = .Attributes("RDGatewayHostname").Value
+                            conI.RDGatewayUsername = .Attributes("RDGatewayUsername").Value
+                            conI.RDGatewayPassword = .Attributes("RDGatewayPassword").Value
+                            conI.RDGatewayDomain = .Attributes("RDGatewayDomain").Value
                             conI.Inherit.RDGatewayHostname = .Attributes("InheritRDGatewayHostname").Value
+                            conI.Inherit.RDGatewayUsername = .Attributes("InheritRDGatewayUsername").Value
+                            conI.Inherit.RDGatewayPassword = .Attributes("InheritRDGatewayPassword").Value
+                            conI.Inherit.RDGatewayDomain = .Attributes("InheritRDGatewayDomain").Value
                         End If
                     End With
 

@@ -160,6 +160,9 @@ Namespace Connection
                     If RDP.TransportSettings.GatewayIsSupported = 1 Then
                         mC.AddMessage(Messages.MessageClass.InformationMsg, "RD Gateway is supported", True)
                         RDP.TransportSettings.GatewayHostname = Me.Info.RDGatewayHostname
+                        RDP.TransportSettings.GatewayUsername = Me.Info.RDGatewayUsername
+                        RDP.TransportSettings.GatewayPassword = Me.Info.RDGatewayPassword
+                        RDP.TransportSettings.GatewayDomain = Me.Info.RDGatewayDomain
                     Else
                         mC.AddMessage(Messages.MessageClass.InformationMsg, "RD Gateway is not supported", True)
                     End If

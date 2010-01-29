@@ -1124,10 +1124,101 @@ Namespace Connection
             Description(Language.Base.Descr_RDGatewayHostname)> _
         Public Property RDGatewayHostname() As String
             Get
-                Return Me._RDGatewayHostname
+                If Me._Inherit.RDGatewayHostname And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer = True Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.RDGatewayHostname
+                Else
+                    Return Me._RDGatewayHostname
+                End If
             End Get
             Set(ByVal value As String)
                 Me._RDGatewayHostname = value
+            End Set
+        End Property
+
+        Private _RDGatewayUsername As String
+        <Category(Category3 & Language.Base.Props_Protocol), _
+            Browsable(True), _
+            DisplayName(Language.Base.Props_RDGatewayUsername), _
+            Description(Language.Base.Descr_RDGatewayUsername)> _
+        Public Property RDGatewayUsername() As String
+            Get
+                If Me._Inherit.RDGatewayUsername And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer = True Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.RDGatewayUsername
+                Else
+                    Return Me._RDGatewayUsername
+                End If
+            End Get
+            Set(ByVal value As String)
+                Me._RDGatewayUsername = value
+            End Set
+        End Property
+
+        Private _RDGatewayPassword As String
+        <Category(Category3 & Language.Base.Props_Protocol), _
+            Browsable(True), _
+            DisplayName(Language.Base.Props_RDGatewayPassword), _
+            Description(Language.Base.Descr_RDGatewayPassword), _
+            PasswordPropertyText(True)> _
+        Public Property RDGatewayPassword() As String
+            Get
+                If Me._Inherit.RDGatewayPassword And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer = True Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.RDGatewayPassword
+                Else
+                    Return Me._RDGatewayPassword
+                End If
+            End Get
+            Set(ByVal value As String)
+                Me._RDGatewayPassword = value
+            End Set
+        End Property
+
+        Private _RDGatewayDomain As String
+        <Category(Category3 & Language.Base.Props_Protocol), _
+            Browsable(True), _
+            DisplayName(Language.Base.Props_RDGatewayDomain), _
+            Description(Language.Base.Descr_RDGatewayDomain)> _
+        Public Property RDGatewayDomain() As String
+            Get
+                If Me._Inherit.RDGatewayDomain And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer = True Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.RDGatewayDomain
+                Else
+                    Return Me._RDGatewayDomain
+                End If
+            End Get
+            Set(ByVal value As String)
+                Me._RDGatewayDomain = value
             End Set
         End Property
 #End Region
@@ -2007,6 +2098,48 @@ Namespace Connection
                 End Get
                 Set(ByVal value As Boolean)
                     Me._RDGatewayHostname = value
+                End Set
+            End Property
+
+            Private _RDGatewayUsername As Boolean = False
+            <Category(Category3 & Language.Base.Props_Protocol), _
+                Browsable(True), _
+                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayUsername), _
+                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
+            Public Property RDGatewayUsername() As Boolean
+                Get
+                    Return Me._RDGatewayUsername
+                End Get
+                Set(ByVal value As Boolean)
+                    Me._RDGatewayUsername = value
+                End Set
+            End Property
+
+            Private _RDGatewayPassword As Boolean = False
+            <Category(Category3 & Language.Base.Props_Protocol), _
+                Browsable(True), _
+                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayPassword), _
+                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
+            Public Property RDGatewayPassword() As Boolean
+                Get
+                    Return Me._RDGatewayPassword
+                End Get
+                Set(ByVal value As Boolean)
+                    Me._RDGatewayPassword = value
+                End Set
+            End Property
+
+            Private _RDGatewayDomain As Boolean = False
+            <Category(Category3 & Language.Base.Props_Protocol), _
+                Browsable(True), _
+                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayDomain), _
+                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
+            Public Property RDGatewayDomain() As Boolean
+                Get
+                    Return Me._RDGatewayDomain
+                End Get
+                Set(ByVal value As Boolean)
+                    Me._RDGatewayDomain = value
                 End Set
             End Property
 #End Region
