@@ -33,14 +33,14 @@ Namespace Connection
 #End Region
 
 #Region "Private Declarations"
-            Private RDP As AxMsRdpClient5
+            Private RDP As AxMsRdpClient6NotSafeForScripting
             Private Info As Connection.Info
             Private RDPVersion As Version
 #End Region
 
 #Region "Public Methods"
             Public Sub New()
-                Me.Control = New AxMsRdpClient5
+                Me.Control = New AxMsRdpClient6NotSafeForScripting
             End Sub
 
             Public Overrides Function SetProps() As Boolean
@@ -79,6 +79,7 @@ Namespace Connection
                     RDP.AdvancedSettings2.keepAliveInterval = 60000 'in milliseconds (10.000 = 10 seconds)
                     RDP.AdvancedSettings5.AuthenticationLevel = 0
                     RDP.AdvancedSettings.EncryptionEnabled = 1
+                    RDP.AdvancedSettings7.EnableCredSspSupport = True
 
                     RDP.AdvancedSettings2.overallConnectionTimeout = 20
 
