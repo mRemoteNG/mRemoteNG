@@ -1,9 +1,6 @@
 Imports System.Windows.Forms
-Imports System.Threading
 Imports System.ComponentModel
-Imports mRemote.Tools.Controls
 Imports mRemote.Tools.Misc.PropertyGridCategory
-Imports mRemote.Tools.Misc.PropertyGridValue
 Imports mRemote.App.Runtime
 
 Namespace Connection
@@ -414,9 +411,142 @@ Namespace Connection
             End Set
         End Property
 #End Region
-#Region "4 Appearance"
+#Region "4 RD Gateway"
+        Private _RDGatewayUsageMethod As mRemote.Connection.Protocol.RDP.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDGatewayUsageMethod), My.Settings.ConDefaultRDGatewayUsageMethod)
+        <Category(Category4 & Language.Base.Category_RDGateway), _
+            Browsable(True), _
+            DisplayName(Language.Base.Props_RDGatewayUsageMethod), _
+            Description(Language.Base.Descr_RDGatewayUsageMethod), _
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        Public Property RDGatewayUsageMethod() As mRemote.Connection.Protocol.RDP.RDGatewayUsageMethod
+            Get
+                If Me._Inherit.RDGatewayUsageMethod And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.RDGatewayUsageMethod
+                Else
+                    Return _RDGatewayUsageMethod
+                End If
+            End Get
+            Set(ByVal value As mRemote.Connection.Protocol.RDP.RDGatewayUsageMethod)
+                _RDGatewayUsageMethod = value
+            End Set
+        End Property
+
+        Private _RDGatewayHostname As String
+        <Category(Category4 & Language.Base.Category_RDGateway), _
+            Browsable(True), _
+            DisplayName(Language.Base.Props_RDGatewayHostname), _
+            Description(Language.Base.Descr_RDGatewayHostname)> _
+        Public Property RDGatewayHostname() As String
+            Get
+                If Me._Inherit.RDGatewayHostname And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer = True Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.RDGatewayHostname
+                Else
+                    Return Me._RDGatewayHostname
+                End If
+            End Get
+            Set(ByVal value As String)
+                Me._RDGatewayHostname = value
+            End Set
+        End Property
+
+        Private _RDGatewayUsername As String
+        <Category(Category4 & Language.Base.Category_RDGateway), _
+            Browsable(True), _
+            DisplayName(Language.Base.Props_RDGatewayUsername), _
+            Description(Language.Base.Descr_RDGatewayUsername)> _
+        Public Property RDGatewayUsername() As String
+            Get
+                If Me._Inherit.RDGatewayUsername And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer = True Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.RDGatewayUsername
+                Else
+                    Return Me._RDGatewayUsername
+                End If
+            End Get
+            Set(ByVal value As String)
+                Me._RDGatewayUsername = value
+            End Set
+        End Property
+
+        Private _RDGatewayPassword As String
+        <Category(Category4 & Language.Base.Category_RDGateway), _
+            Browsable(True), _
+            DisplayName(Language.Base.Props_RDGatewayPassword), _
+            Description(Language.Base.Descr_RDGatewayPassword), _
+            PasswordPropertyText(True)> _
+        Public Property RDGatewayPassword() As String
+            Get
+                If Me._Inherit.RDGatewayPassword And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer = True Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.RDGatewayPassword
+                Else
+                    Return Me._RDGatewayPassword
+                End If
+            End Get
+            Set(ByVal value As String)
+                Me._RDGatewayPassword = value
+            End Set
+        End Property
+
+        Private _RDGatewayDomain As String
+        <Category(Category4 & Language.Base.Category_RDGateway), _
+            Browsable(True), _
+            DisplayName(Language.Base.Props_RDGatewayDomain), _
+            Description(Language.Base.Descr_RDGatewayDomain)> _
+        Public Property RDGatewayDomain() As String
+            Get
+                If Me._Inherit.RDGatewayDomain And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer = True Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.RDGatewayDomain
+                Else
+                    Return Me._RDGatewayDomain
+                End If
+            End Get
+            Set(ByVal value As String)
+                Me._RDGatewayDomain = value
+            End Set
+        End Property
+#End Region
+#Region "5 Appearance"
         Private _Resolution As Connection.Protocol.RDP.RDPResolutions = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDPResolutions), My.Settings.ConDefaultResolution)
-        <Category(Category4 & Language.Base.Props_Appearance), _
+        <Category(Category5 & Language.Base.Props_Appearance), _
             Browsable(True), _
             DisplayName(Language.Base.Props_Resolution), _
             Description(Language.Base.Descr_Resolution), _
@@ -443,7 +573,7 @@ Namespace Connection
         End Property
 
         Private _Colors As Connection.Protocol.RDP.RDPColors = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDPColors), My.Settings.ConDefaultColors)
-        <Category(Category4 & Language.Base.Props_Appearance), _
+        <Category(Category5 & Language.Base.Props_Appearance), _
             Browsable(True), _
             DisplayName(Language.Base.Props_Colors), _
             Description(Language.Base.Descr_Colors), _
@@ -470,7 +600,7 @@ Namespace Connection
         End Property
 
         Private _CacheBitmaps As Boolean = My.Settings.ConDefaultCacheBitmaps
-        <Category(Category4 & Language.Base.Props_Appearance), _
+        <Category(Category5 & Language.Base.Props_Appearance), _
             Browsable(True), _
             DisplayName(Language.Base.Props_CacheBitmaps), _
             Description(Language.Base.Descr_CacheBitmaps), _
@@ -497,7 +627,7 @@ Namespace Connection
         End Property
 
         Private _DisplayWallpaper As Boolean = My.Settings.ConDefaultDisplayWallpaper
-        <Category(Category4 & Language.Base.Props_Appearance), _
+        <Category(Category5 & Language.Base.Props_Appearance), _
             Browsable(True), _
             DisplayName(Language.Base.Props_DisplayWallpaper), _
             Description(Language.Base.Descr_DisplayWallpaper), _
@@ -524,7 +654,7 @@ Namespace Connection
         End Property
 
         Private _DisplayThemes As Boolean = My.Settings.ConDefaultDisplayThemes
-        <Category(Category4 & Language.Base.Props_Appearance), _
+        <Category(Category5 & Language.Base.Props_Appearance), _
             Browsable(True), _
             DisplayName(Language.Base.Props_DisplayThemes), _
             Description(Language.Base.Descr_DisplayThemes), _
@@ -550,9 +680,9 @@ Namespace Connection
             End Set
         End Property
 #End Region
-#Region "5 Redirect"
+#Region "6 Redirect"
         Private _RedirectKeys As Boolean = My.Settings.ConDefaultRedirectKeys
-        <Category(Category5 & Language.Base.Props_Redirect), _
+        <Category(Category6 & Language.Base.Props_Redirect), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RedKeyCombinations), _
             Description(Language.Base.Descr_RedKeyCombinations), _
@@ -579,7 +709,7 @@ Namespace Connection
         End Property
 
         Private _RedirectDiskDrives As Boolean = My.Settings.ConDefaultRedirectDiskDrives
-        <Category(Category5 & Language.Base.Props_Redirect), _
+        <Category(Category6 & Language.Base.Props_Redirect), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RedDiskDrives), _
             Description(Language.Base.Descr_RedDiskDrives), _
@@ -606,7 +736,7 @@ Namespace Connection
         End Property
 
         Private _RedirectPrinters As Boolean = My.Settings.ConDefaultRedirectPrinters
-        <Category(Category5 & Language.Base.Props_Redirect), _
+        <Category(Category6 & Language.Base.Props_Redirect), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RedPrinters), _
             Description(Language.Base.Descr_RedPrinters), _
@@ -633,7 +763,7 @@ Namespace Connection
         End Property
 
         Private _RedirectPorts As Boolean = My.Settings.ConDefaultRedirectPorts
-        <Category(Category5 & Language.Base.Props_Redirect), _
+        <Category(Category6 & Language.Base.Props_Redirect), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RedPorts), _
             Description(Language.Base.Descr_RedPorts), _
@@ -660,7 +790,7 @@ Namespace Connection
         End Property
 
         Private _RedirectSmartCards As Boolean = My.Settings.ConDefaultRedirectSmartCards
-        <Category(Category5 & Language.Base.Props_Redirect), _
+        <Category(Category6 & Language.Base.Props_Redirect), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RedSmartCards), _
             Description(Language.Base.Descr_RedSmartCards), _
@@ -687,7 +817,7 @@ Namespace Connection
         End Property
 
         Private _RedirectSound As Connection.Protocol.RDP.RDPSounds = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDPSounds), My.Settings.ConDefaultRedirectSound)
-        <Category(Category5 & Language.Base.Props_Redirect), _
+        <Category(Category6 & Language.Base.Props_Redirect), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RedSounds), _
             Description(Language.Base.Descr_RedSound), _
@@ -713,9 +843,9 @@ Namespace Connection
             End Set
         End Property
 #End Region
-#Region "6 Misc"
+#Region "7 Misc"
         Private _PreExtApp As String = My.Settings.ConDefaultPreExtApp
-        <Category(Category6 & Language.Base.Props_Misc), _
+        <Category(Category7 & Language.Base.Props_Misc), _
             Browsable(True), _
             DisplayName(Language.Base.Props_PreExtApp), _
             Description(Language.Base.Descr_PreExtApp), _
@@ -742,7 +872,7 @@ Namespace Connection
         End Property
 
         Private _PostExtApp As String = My.Settings.ConDefaultPostExtApp
-        <Category(Category6 & Language.Base.Props_Misc), _
+        <Category(Category7 & Language.Base.Props_Misc), _
             Browsable(True), _
             DisplayName(Language.Base.Props_PostExtApp), _
             Description(Language.Base.Descr_PostExtApp), _
@@ -768,8 +898,8 @@ Namespace Connection
             End Set
         End Property
 
-        Private _MacAddress As String = My.Settings.conDefaultMacAddress
-        <Category(Category6 & Language.Base.Props_Misc), _
+        Private _MacAddress As String = My.Settings.ConDefaultMacAddress
+        <Category(Category7 & Language.Base.Props_Misc), _
             Browsable(True), _
             DisplayName(Language.Base.Props_MacAddress), _
             Description(Language.Base.Descr_MacAddress)> _
@@ -795,7 +925,7 @@ Namespace Connection
         End Property
 
         Private _UserField As String = My.Settings.ConDefaultUserField
-        <Category(Category6 & Language.Base.Props_Misc), _
+        <Category(Category7 & Language.Base.Props_Misc), _
             Browsable(True), _
             DisplayName(Language.Base.Props_UserField), _
             Description(Language.Base.Descr_UserField)> _
@@ -822,7 +952,7 @@ Namespace Connection
 #End Region
 #Region "VNC"
         Private _VNCCompression As mRemote.Connection.Protocol.VNC.Compression = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.Compression), My.Settings.ConDefaultVNCCompression)
-        <Category(Category4 & Language.Base.Props_Appearance), _
+        <Category(Category5 & Language.Base.Props_Appearance), _
            Browsable(False), _
            DisplayName(Language.Base.Props_Compression), _
            Description(Language.Base.Descr_Compression), _
@@ -849,7 +979,7 @@ Namespace Connection
         End Property
 
         Private _VNCEncoding As mRemote.Connection.Protocol.VNC.Encoding = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.Encoding), My.Settings.ConDefaultVNCEncoding)
-        <Category(Category4 & Language.Base.Props_Appearance), _
+        <Category(Category5 & Language.Base.Props_Appearance), _
            Browsable(False), _
            DisplayName(Language.Base.Props_Encoding), _
            Description(Language.Base.Descr_Encoding), _
@@ -904,7 +1034,7 @@ Namespace Connection
         End Property
 
         Private _VNCProxyType As mRemote.Connection.Protocol.VNC.ProxyType = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.ProxyType), My.Settings.ConDefaultVNCProxyType)
-        <Category(Category6 & Language.Base.Props_Misc), _
+        <Category(Category7 & Language.Base.Props_Misc), _
            Browsable(False), _
            DisplayName(Language.Base.Props_ProxyType), _
            Description(Language.Base.Descr_ProxyType), _
@@ -931,7 +1061,7 @@ Namespace Connection
         End Property
 
         Private _VNCProxyIP As String = My.Settings.ConDefaultVNCProxyIP
-        <Category(Category6 & Language.Base.Props_Misc), _
+        <Category(Category7 & Language.Base.Props_Misc), _
             Browsable(False), _
             DisplayName(Language.Base.Props_ProxyIP), _
             Description(Language.Base.Descr_ProxyIP)> _
@@ -957,7 +1087,7 @@ Namespace Connection
         End Property
 
         Private _VNCProxyPort As Integer = My.Settings.ConDefaultVNCProxyPort
-        <Category(Category6 & Language.Base.Props_Misc), _
+        <Category(Category7 & Language.Base.Props_Misc), _
             Browsable(False), _
             DisplayName(Language.Base.Props_ProxyPort), _
             Description(Language.Base.Descr_ProxyPort)> _
@@ -983,7 +1113,7 @@ Namespace Connection
         End Property
 
         Private _VNCProxyUsername As String = My.Settings.ConDefaultVNCProxyUsername
-        <Category(Category6 & Language.Base.Props_Misc), _
+        <Category(Category7 & Language.Base.Props_Misc), _
             Browsable(False), _
             DisplayName(Language.Base.Props_ProxyUsername), _
             Description(Language.Base.Props_ProxyUsername)> _
@@ -1009,7 +1139,7 @@ Namespace Connection
         End Property
 
         Private _VNCProxyPassword As String = My.Settings.ConDefaultVNCProxyPassword
-        <Category(Category6 & Language.Base.Props_Misc), _
+        <Category(Category7 & Language.Base.Props_Misc), _
             Browsable(False), _
             DisplayName(Language.Base.Props_ProxyPassword), _
             Description(Language.Base.Descr_ProxyPassword), _
@@ -1036,7 +1166,7 @@ Namespace Connection
         End Property
 
         Private _VNCColors As mRemote.Connection.Protocol.VNC.Colors = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.Colors), My.Settings.ConDefaultVNCColors)
-        <Category(Category4 & Language.Base.Props_Appearance), _
+        <Category(Category5 & Language.Base.Props_Appearance), _
            Browsable(False), _
            DisplayName(Language.Base.Props_Colors), _
            Description(Language.Base.Descr_Colors), _
@@ -1063,7 +1193,7 @@ Namespace Connection
         End Property
 
         Private _VNCSmartSizeMode As mRemote.Connection.Protocol.VNC.SmartSizeMode = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.SmartSizeMode), My.Settings.ConDefaultVNCSmartSizeMode)
-        <Category(Category4 & Language.Base.Props_Appearance), _
+        <Category(Category5 & Language.Base.Props_Appearance), _
            Browsable(True), _
            DisplayName(Language.Base.Props_SmartSizeMode), _
            Description(Language.Base.Descr_SmartSizeMode), _
@@ -1090,7 +1220,7 @@ Namespace Connection
         End Property
 
         Private _VNCViewOnly As Boolean = My.Settings.ConDefaultVNCViewOnly
-        <Category(Category4 & Language.Base.Props_Appearance), _
+        <Category(Category5 & Language.Base.Props_Appearance), _
            Browsable(True), _
            DisplayName(Language.Base.Props_ViewOnly), _
            Description(Language.Base.Descr_ViewOnly), _
@@ -1113,112 +1243,6 @@ Namespace Connection
             End Get
             Set(ByVal value As Boolean)
                 _VNCViewOnly = value
-            End Set
-        End Property
-#End Region
-#Region "RD Gateway"
-        Private _RDGatewayHostname As String
-        <Category(Category3 & Language.Base.Props_Protocol), _
-            Browsable(True), _
-            DisplayName(Language.Base.Props_RDGatewayHostname), _
-            Description(Language.Base.Descr_RDGatewayHostname)> _
-        Public Property RDGatewayHostname() As String
-            Get
-                If Me._Inherit.RDGatewayHostname And Me._Parent IsNot Nothing Then
-                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
-
-                    If Me._IsContainer = True Then
-                        Dim curCont As Container.Info = Me._Parent
-                        Dim parCont As Container.Info = curCont.Parent
-                        parCon = parCont.ConnectionInfo
-                    End If
-
-                    Return parCon.RDGatewayHostname
-                Else
-                    Return Me._RDGatewayHostname
-                End If
-            End Get
-            Set(ByVal value As String)
-                Me._RDGatewayHostname = value
-            End Set
-        End Property
-
-        Private _RDGatewayUsername As String
-        <Category(Category3 & Language.Base.Props_Protocol), _
-            Browsable(True), _
-            DisplayName(Language.Base.Props_RDGatewayUsername), _
-            Description(Language.Base.Descr_RDGatewayUsername)> _
-        Public Property RDGatewayUsername() As String
-            Get
-                If Me._Inherit.RDGatewayUsername And Me._Parent IsNot Nothing Then
-                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
-
-                    If Me._IsContainer = True Then
-                        Dim curCont As Container.Info = Me._Parent
-                        Dim parCont As Container.Info = curCont.Parent
-                        parCon = parCont.ConnectionInfo
-                    End If
-
-                    Return parCon.RDGatewayUsername
-                Else
-                    Return Me._RDGatewayUsername
-                End If
-            End Get
-            Set(ByVal value As String)
-                Me._RDGatewayUsername = value
-            End Set
-        End Property
-
-        Private _RDGatewayPassword As String
-        <Category(Category3 & Language.Base.Props_Protocol), _
-            Browsable(True), _
-            DisplayName(Language.Base.Props_RDGatewayPassword), _
-            Description(Language.Base.Descr_RDGatewayPassword), _
-            PasswordPropertyText(True)> _
-        Public Property RDGatewayPassword() As String
-            Get
-                If Me._Inherit.RDGatewayPassword And Me._Parent IsNot Nothing Then
-                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
-
-                    If Me._IsContainer = True Then
-                        Dim curCont As Container.Info = Me._Parent
-                        Dim parCont As Container.Info = curCont.Parent
-                        parCon = parCont.ConnectionInfo
-                    End If
-
-                    Return parCon.RDGatewayPassword
-                Else
-                    Return Me._RDGatewayPassword
-                End If
-            End Get
-            Set(ByVal value As String)
-                Me._RDGatewayPassword = value
-            End Set
-        End Property
-
-        Private _RDGatewayDomain As String
-        <Category(Category3 & Language.Base.Props_Protocol), _
-            Browsable(True), _
-            DisplayName(Language.Base.Props_RDGatewayDomain), _
-            Description(Language.Base.Descr_RDGatewayDomain)> _
-        Public Property RDGatewayDomain() As String
-            Get
-                If Me._Inherit.RDGatewayDomain And Me._Parent IsNot Nothing Then
-                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
-
-                    If Me._IsContainer = True Then
-                        Dim curCont As Container.Info = Me._Parent
-                        Dim parCont As Container.Info = curCont.Parent
-                        parCon = parCont.ConnectionInfo
-                    End If
-
-                    Return parCon.RDGatewayDomain
-                Else
-                    Return Me._RDGatewayDomain
-                End If
-            End Get
-            Set(ByVal value As String)
-                Me._RDGatewayDomain = value
             End Set
         End Property
 #End Region
@@ -1718,9 +1742,80 @@ Namespace Connection
                 End Set
             End Property
 #End Region
-#Region "5 Appearance"
+#Region "5 RD Gateway"
+            Private _RDGatewayUsageMethod As Boolean = False
+            <Category(Category5 & Language.Base.Category_RDGateway), _
+                Browsable(True), _
+                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayUsageMethod), _
+                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
+            Public Property RDGatewayUsageMethod() As Boolean
+                Get
+                    Return Me._RDGatewayUsageMethod
+                End Get
+                Set(ByVal value As Boolean)
+                    Me._RDGatewayUsageMethod = value
+                End Set
+            End Property
+
+            Private _RDGatewayHostname As Boolean = False
+            <Category(Category5 & Language.Base.Category_RDGateway), _
+                Browsable(True), _
+                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayHostname), _
+                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
+            Public Property RDGatewayHostname() As Boolean
+                Get
+                    Return Me._RDGatewayHostname
+                End Get
+                Set(ByVal value As Boolean)
+                    Me._RDGatewayHostname = value
+                End Set
+            End Property
+
+            Private _RDGatewayUsername As Boolean = False
+            <Category(Category5 & Language.Base.Category_RDGateway), _
+                Browsable(True), _
+                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayUsername), _
+                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
+            Public Property RDGatewayUsername() As Boolean
+                Get
+                    Return Me._RDGatewayUsername
+                End Get
+                Set(ByVal value As Boolean)
+                    Me._RDGatewayUsername = value
+                End Set
+            End Property
+
+            Private _RDGatewayPassword As Boolean = False
+            <Category(Category5 & Language.Base.Category_RDGateway), _
+                Browsable(True), _
+                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayPassword), _
+                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
+            Public Property RDGatewayPassword() As Boolean
+                Get
+                    Return Me._RDGatewayPassword
+                End Get
+                Set(ByVal value As Boolean)
+                    Me._RDGatewayPassword = value
+                End Set
+            End Property
+
+            Private _RDGatewayDomain As Boolean = False
+            <Category(Category5 & Language.Base.Category_RDGateway), _
+                Browsable(True), _
+                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayDomain), _
+                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
+            Public Property RDGatewayDomain() As Boolean
+                Get
+                    Return Me._RDGatewayDomain
+                End Get
+                Set(ByVal value As Boolean)
+                    Me._RDGatewayDomain = value
+                End Set
+            End Property
+#End Region
+#Region "6 Appearance"
             Private _Resolution As Boolean = My.Settings.InhDefaultResolution
-            <Category(Category5 & Language.Base.Props_Appearance), _
+            <Category(Category6 & Language.Base.Props_Appearance), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Resolution), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1734,7 +1829,7 @@ Namespace Connection
             End Property
 
             Private _Colors As Boolean = My.Settings.InhDefaultColors
-            <Category(Category5 & Language.Base.Props_Appearance), _
+            <Category(Category6 & Language.Base.Props_Appearance), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Colors), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1748,7 +1843,7 @@ Namespace Connection
             End Property
 
             Private _CacheBitmaps As Boolean = My.Settings.InhDefaultCacheBitmaps
-            <Category(Category5 & Language.Base.Props_Appearance), _
+            <Category(Category6 & Language.Base.Props_Appearance), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_CacheBitmaps), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1762,7 +1857,7 @@ Namespace Connection
             End Property
 
             Private _DisplayWallpaper As Boolean = My.Settings.InhDefaultDisplayWallpaper
-            <Category(Category5 & Language.Base.Props_Appearance), _
+            <Category(Category6 & Language.Base.Props_Appearance), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_DisplayWallpaper), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1776,7 +1871,7 @@ Namespace Connection
             End Property
 
             Private _DisplayThemes As Boolean = My.Settings.InhDefaultDisplayThemes
-            <Category(Category5 & Language.Base.Props_Appearance), _
+            <Category(Category6 & Language.Base.Props_Appearance), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_DisplayThemes), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1791,7 +1886,7 @@ Namespace Connection
 #End Region
 #Region "6 Redirect"
             Private _RedirectKeys As Boolean = My.Settings.InhDefaultRedirectKeys
-            <Category(Category6 & Language.Base.Props_Redirect), _
+            <Category(Category7 & Language.Base.Props_Redirect), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RedKeyCombinations), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1805,7 +1900,7 @@ Namespace Connection
             End Property
 
             Private _RedirectDiskDrives As Boolean = My.Settings.InhDefaultRedirectDiskDrives
-            <Category(Category6 & Language.Base.Props_Redirect), _
+            <Category(Category7 & Language.Base.Props_Redirect), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RedDiskDrives), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1819,7 +1914,7 @@ Namespace Connection
             End Property
 
             Private _RedirectPrinters As Boolean = My.Settings.InhDefaultRedirectPrinters
-            <Category(Category6 & Language.Base.Props_Redirect), _
+            <Category(Category7 & Language.Base.Props_Redirect), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RedPrinters), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1833,7 +1928,7 @@ Namespace Connection
             End Property
 
             Private _RedirectPorts As Boolean = My.Settings.InhDefaultRedirectPorts
-            <Category(Category6 & Language.Base.Props_Redirect), _
+            <Category(Category7 & Language.Base.Props_Redirect), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RedPorts), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1847,7 +1942,7 @@ Namespace Connection
             End Property
 
             Private _RedirectSmartCards As Boolean = My.Settings.InhDefaultRedirectSmartCards
-            <Category(Category6 & Language.Base.Props_Redirect), _
+            <Category(Category7 & Language.Base.Props_Redirect), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RedSmartCards), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1861,7 +1956,7 @@ Namespace Connection
             End Property
 
             Private _RedirectSound As Boolean = My.Settings.InhDefaultRedirectSound
-            <Category(Category6 & Language.Base.Props_Redirect), _
+            <Category(Category7 & Language.Base.Props_Redirect), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RedSounds), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1876,7 +1971,7 @@ Namespace Connection
 #End Region
 #Region "7 Misc"
             Private _PreExtApp As Boolean = My.Settings.InhDefaultPreExtApp
-            <Category(Category7 & Language.Base.Props_Misc), _
+            <Category(Category8 & Language.Base.Props_Misc), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_PreExtApp), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1890,7 +1985,7 @@ Namespace Connection
             End Property
 
             Private _PostExtApp As Boolean = My.Settings.InhDefaultPostExtApp
-            <Category(Category7 & Language.Base.Props_Misc), _
+            <Category(Category8 & Language.Base.Props_Misc), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_PostExtApp), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1904,7 +1999,7 @@ Namespace Connection
             End Property
 
             Private _MacAddress As Boolean = My.Settings.InhDefaultMacAddress
-            <Category(Category7 & Language.Base.Props_Misc), _
+            <Category(Category8 & Language.Base.Props_Misc), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_MacAddress), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1918,7 +2013,7 @@ Namespace Connection
             End Property
 
             Private _UserField As Boolean = My.Settings.InhDefaultUserField
-            <Category(Category7 & Language.Base.Props_Misc), _
+            <Category(Category8 & Language.Base.Props_Misc), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_UserField), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1933,7 +2028,7 @@ Namespace Connection
 #End Region
 #Region "VNC"
             Private _VNCCompression As Boolean = My.Settings.InhDefaultVNCCompression
-            <Category(Category5 & Language.Base.Props_Appearance), _
+            <Category(Category6 & Language.Base.Props_Appearance), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Compression), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1947,7 +2042,7 @@ Namespace Connection
             End Property
 
             Private _VNCEncoding As Boolean = My.Settings.InhDefaultVNCEncoding
-            <Category(Category5 & Language.Base.Props_Appearance), _
+            <Category(Category6 & Language.Base.Props_Appearance), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Encoding), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1975,7 +2070,7 @@ Namespace Connection
             End Property
 
             Private _VNCProxyType As Boolean = My.Settings.InhDefaultVNCProxyType
-            <Category(Category7 & Language.Base.Props_Misc), _
+            <Category(Category8 & Language.Base.Props_Misc), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ProxyType), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1989,7 +2084,7 @@ Namespace Connection
             End Property
 
             Private _VNCProxyIP As Boolean = My.Settings.InhDefaultVNCProxyIP
-            <Category(Category7 & Language.Base.Props_Misc), _
+            <Category(Category8 & Language.Base.Props_Misc), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ProxyIP), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2003,7 +2098,7 @@ Namespace Connection
             End Property
 
             Private _VNCProxyPort As Boolean = My.Settings.InhDefaultVNCProxyPort
-            <Category(Category7 & Language.Base.Props_Misc), _
+            <Category(Category8 & Language.Base.Props_Misc), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ProxyPort), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2017,7 +2112,7 @@ Namespace Connection
             End Property
 
             Private _VNCProxyUsername As Boolean = My.Settings.InhDefaultVNCProxyUsername
-            <Category(Category7 & Language.Base.Props_Misc), _
+            <Category(Category8 & Language.Base.Props_Misc), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ProxyUsername), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2031,7 +2126,7 @@ Namespace Connection
             End Property
 
             Private _VNCProxyPassword As Boolean = My.Settings.InhDefaultVNCProxyPassword
-            <Category(Category7 & Language.Base.Props_Misc), _
+            <Category(Category8 & Language.Base.Props_Misc), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ProxyPassword), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2045,7 +2140,7 @@ Namespace Connection
             End Property
 
             Private _VNCColors As Boolean = My.Settings.InhDefaultVNCColors
-            <Category(Category5 & Language.Base.Props_Appearance), _
+            <Category(Category6 & Language.Base.Props_Appearance), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Colors), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2059,7 +2154,7 @@ Namespace Connection
             End Property
 
             Private _VNCSmartSizeMode As Boolean = My.Settings.InhDefaultVNCSmartSizeMode
-            <Category(Category5 & Language.Base.Props_Appearance), _
+            <Category(Category6 & Language.Base.Props_Appearance), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_SmartSizeMode), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2073,7 +2168,7 @@ Namespace Connection
             End Property
 
             Private _VNCViewOnly As Boolean = My.Settings.InhDefaultVNCViewOnly
-            <Category(Category5 & Language.Base.Props_Appearance), _
+            <Category(Category6 & Language.Base.Props_Appearance), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ViewOnly), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2083,63 +2178,6 @@ Namespace Connection
                 End Get
                 Set(ByVal value As Boolean)
                     _VNCViewOnly = value
-                End Set
-            End Property
-#End Region
-#Region "RD Gateway"
-            Private _RDGatewayHostname As Boolean = False
-            <Category(Category3 & Language.Base.Props_Protocol), _
-                Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayHostname), _
-                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
-            Public Property RDGatewayHostname() As Boolean
-                Get
-                    Return Me._RDGatewayHostname
-                End Get
-                Set(ByVal value As Boolean)
-                    Me._RDGatewayHostname = value
-                End Set
-            End Property
-
-            Private _RDGatewayUsername As Boolean = False
-            <Category(Category3 & Language.Base.Props_Protocol), _
-                Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayUsername), _
-                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
-            Public Property RDGatewayUsername() As Boolean
-                Get
-                    Return Me._RDGatewayUsername
-                End Get
-                Set(ByVal value As Boolean)
-                    Me._RDGatewayUsername = value
-                End Set
-            End Property
-
-            Private _RDGatewayPassword As Boolean = False
-            <Category(Category3 & Language.Base.Props_Protocol), _
-                Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayPassword), _
-                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
-            Public Property RDGatewayPassword() As Boolean
-                Get
-                    Return Me._RDGatewayPassword
-                End Get
-                Set(ByVal value As Boolean)
-                    Me._RDGatewayPassword = value
-                End Set
-            End Property
-
-            Private _RDGatewayDomain As Boolean = False
-            <Category(Category3 & Language.Base.Props_Protocol), _
-                Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayDomain), _
-                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
-            Public Property RDGatewayDomain() As Boolean
-                Get
-                    Return Me._RDGatewayDomain
-                End Get
-                Set(ByVal value As Boolean)
-                    Me._RDGatewayDomain = value
                 End Set
             End Property
 #End Region

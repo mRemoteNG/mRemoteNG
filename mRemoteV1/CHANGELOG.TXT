@@ -7,6 +7,7 @@
   Fixed flashing and red lines at bottom of the window on first run
   Added View->Reset Layout menu item
   Added F11 shortcut key to View->Full Screen
+  Improved RDP error reporting
 
 1.62:
   Switched to VncSharp, an open source VNC component

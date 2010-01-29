@@ -1428,10 +1428,12 @@ Namespace App
                 mC.AddMessage(Messages.MessageClass.InformationMsg, "Protocol Event Disconnected" & vbNewLine & "Message: " & DisconnectedMessage, True)
 
                 Dim Prot As Connection.Protocol.Base = sender
-
                 If Prot.InterfaceControl.Info.Protocol = Connection.Protocol.Protocols.RDP Then
-                    If DisconnectedMessage > 3 Then
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, "RDP Disconnected!" & vbNewLine & "Error Code: " & DisconnectedMessage & vbNewLine & "Error Description: " & Connection.Protocol.RDP.DisconnectionErrors.GetError(DisconnectedMessage))
+                    Dim Reason As String() = DisconnectedMessage.Split(vbCrLf)
+                    Dim ReasonCode As String = Reason(0)
+                    Dim ReasonDescription As String = Reason(1)
+                    If ReasonCode > 3 Then
+                        mC.AddMessage(Messages.MessageClass.WarningMsg, "RDP Disconnected!" & vbNewLine & ReasonDescription & vbNewLine & "Error code " & ReasonCode)
                     End If
                 End If
             Catch ex As Exception

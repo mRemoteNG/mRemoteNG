@@ -201,13 +201,14 @@ Namespace Tools
         End Function
 
         Public Class PropertyGridCategory
-            Public Const Category1 As String = vbCr & vbCr & vbCr & vbCr & vbCr & vbCr & vbCr
-            Public Const Category2 As String = vbCr & vbCr & vbCr & vbCr & vbCr & vbCr
-            Public Const Category3 As String = vbCr & vbCr & vbCr & vbCr & vbCr
-            Public Const Category4 As String = vbCr & vbCr & vbCr & vbCr
-            Public Const Category5 As String = vbCr & vbCr & vbCr
-            Public Const Category6 As String = vbCr & vbCr
-            Public Const Category7 As String = vbCr
+            Public Const Category1 As String = vbCr & vbCr & vbCr & vbCr & vbCr & vbCr & vbCr & vbCr
+            Public Const Category2 As String = vbCr & vbCr & vbCr & vbCr & vbCr & vbCr & vbCr
+            Public Const Category3 As String = vbCr & vbCr & vbCr & vbCr & vbCr & vbCr
+            Public Const Category4 As String = vbCr & vbCr & vbCr & vbCr & vbCr
+            Public Const Category5 As String = vbCr & vbCr & vbCr & vbCr
+            Public Const Category6 As String = vbCr & vbCr & vbCr
+            Public Const Category7 As String = vbCr & vbCr
+            Public Const Category8 As String = vbCr
         End Class
 
         Public Class PropertyGridValue

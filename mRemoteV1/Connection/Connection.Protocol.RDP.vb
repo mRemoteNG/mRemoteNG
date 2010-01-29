@@ -159,6 +159,7 @@ Namespace Connection
                 Try
                     If RDP.TransportSettings.GatewayIsSupported = 1 Then
                         mC.AddMessage(Messages.MessageClass.InformationMsg, "RD Gateway is supported", True)
+                        RDP.TransportSettings.GatewayUsageMethod = Me.Info.RDGatewayUsageMethod
                         RDP.TransportSettings.GatewayHostname = Me.Info.RDGatewayHostname
                         RDP.TransportSettings.GatewayUsername = Me.Info.RDGatewayUsername
                         RDP.TransportSettings.GatewayPassword = Me.Info.RDGatewayPassword
@@ -356,7 +357,8 @@ Namespace Connection
             End Sub
 
             Private Sub RDPEvent_OnDisconnected(ByVal sender As Object, ByVal e As AxMSTSCLib.IMsTscAxEvents_OnDisconnectedEvent)
-                MyBase.Event_Disconnected(Me, e.discReason)
+                Dim Reason As String = RDP.GetErrorDescription(e.discReason, RDP.ExtendedDisconnectReason)
+                MyBase.Event_Disconnected(Me, e.discReason & vbCrLf & Reason)
 
                 If My.Settings.ReconnectOnDisconnect Then
                     ReconnectGroup = New ReconnectGroup
@@ -482,6 +484,15 @@ Namespace Connection
                 AuthRequired = 1
                 <Description(Language.Base.WarnIfAuthFails)> _
                 WarnOnFailedAuth = 2
+            End Enum
+
+            Public Enum RDGatewayUsageMethod
+                <Description("Never")> _
+                Never = 0 ' TSC_PROXY_MODE_NONE_DIRECT
+                <Description("Always")> _
+                Always = 1 ' TSC_PROXY_MODE_DIRECT
+                <Description("Detect")> _
+                Detect = 2 ' TSC_PROXY_MODE_DETECT
             End Enum
 #End Region
 
@@ -720,71 +731,27 @@ Namespace Connection
             End Class
 #End Region
 
-#Region "Disconnection Errors"
-            Public Class DisconnectionErrors
-                Public Shared Code(3080) As String
-
-                Public Shared Function GetError(ByVal id As Integer) As String
-                    Try
-                        Code(1) = "Local Disconnection (not an error)"
-                        Code(2) = "Remote Disconnection by user (not an error)"
-                        Code(3) = "Remote Disconnection by server (not an error)"
-                        Code(260) = "DNS Lookup Failed"
-                        Code(262) = "Out of memory condition"
-                        Code(264) = "Connection Timed Out"
-                        Code(516) = "WinSock socket connect failed"
-                        Code(518) = "Out of memory condition"
-                        Code(520) = "Host Not Found error (GetHostByName failed)."
-                        Code(772) = "WinSock send call failed"
-                        Code(774) = "Out of memory condition"
-                        Code(776) = "Invalid IP address specified"
-                        Code(1028) = "WinSock recv call failed"
-                        Code(1030) = "Invalid Security Data"
-                        Code(1032) = "Internal error (code 1032)"
-                        Code(1286) = "Invalid Encryption Method"
-                        Code(1288) = "DNS Lookup failed"
-                        Code(1540) = "GetHostByName call failed"
-                        Code(1542) = "Invalid server security data"
-                        Code(1544) = "Internal Error (timer error)"
-                        Code(1796) = "Timeout occurred"
-                        Code(1798) = "Failed to unpack server certificate"
-                        Code(2052) = "Bad IP address specified"
-                        Code(2054) = "Internal Security Error"
-                        Code(2308) = "Socket closed"
-                        Code(2310) = "Internal Security Error"
-                        Code(2566) = "Internal Security Error"
-                        Code(2822) = "Encryption error"
-                        Code(2824) = "Your session was taken by someone else"
-                        Code(3078) = "Decryption error"
-
-                        Return (Code(id))
-                    Catch ex As Exception
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetError failed (DisconnectionErrors)" & vbNewLine & ex.Message, True)
-                    End Try
-
-                    Return ""
-                End Function
-            End Class
-
+#Region "Fatal Errors"
             Public Class FatalErrors
-                Public Shared Code(110) As String
+                Protected Shared _description() As String = { _
+                    0 = "An unknown error has occurred.", _
+                    1 = "Internal error code 1.", _
+                    2 = "An out-of-memory error has occurred.", _
+                    3 = "A window-creation error has occurred.", _
+                    4 = "Internal error code 2.", _
+                    5 = "Internal error code 3. This is not a valid state.", _
+                    6 = "Internal error code 4.", _
+                    7 = "An unrecoverable error has occurred during client connection.", _
+                    100 = "Winsock initialization error." _
+                }
 
                 Public Shared Function GetError(ByVal id As String) As String
                     Try
-                        Code(0) = "An unknown error has occurred"
-                        Code(1) = "Internal error code 1"
-                        Code(2) = "Out of memory error"
-                        Code(3) = "Window creation error"
-                        Code(4) = "Internal error code 2"
-                        Code(5) = "Internal error code 3 (Invalid state)"
-                        Code(100) = "Winsock initialization error"
-
-                        Return (Code(id))
+                        Return (_description(id))
                     Catch ex As Exception
                         mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetError failed (FatalErrors)" & vbNewLine & ex.Message, True)
+                        Return String.Format("An unknown fatal RDP error has occurred.  Error code {0}.", id)
                     End Try
-
-                    Return ""
                 End Function
             End Class
 #End Region

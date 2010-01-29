@@ -446,5 +446,8 @@
     <Setting Name="UpdatePending" Provider="mRemote.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="ConDefaultRDGatewayUsageMethod" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Never</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

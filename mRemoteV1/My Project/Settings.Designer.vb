@@ -1975,6 +1975,15 @@ Namespace My
                 Me("UpdatePending") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("Never")>  _
+        Public ReadOnly Property ConDefaultRDGatewayUsageMethod() As String
+            Get
+                Return CType(Me("ConDefaultRDGatewayUsageMethod"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 
