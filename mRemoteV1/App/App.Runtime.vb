@@ -1433,7 +1433,11 @@ Namespace App
                     Dim ReasonCode As String = Reason(0)
                     Dim ReasonDescription As String = Reason(1)
                     If ReasonCode > 3 Then
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, "RDP Disconnected!" & vbNewLine & ReasonDescription & vbNewLine & "Error code " & ReasonCode & ".")
+                        If ReasonDescription <> "" Then
+                            mC.AddMessage(Messages.MessageClass.WarningMsg, "RDP Disconnected!" & vbNewLine & ReasonDescription & vbNewLine & "Error code " & ReasonCode & ".")
+                        Else
+                            mC.AddMessage(Messages.MessageClass.WarningMsg, "RDP Disconnected!" & vbNewLine & "Error code " & ReasonCode & ".")
+                        End If
                     End If
                 End If
             Catch ex As Exception

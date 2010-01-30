@@ -92,6 +92,8 @@
         Public Const Descr_RDGatewayUsageMethod As String = "Specifies when to use a Remote Desktop Gateway (RD Gateway) server."
         Public Const Props_RDGatewayHostname As String = "Gateway Hostname"
         Public Const Descr_RDGatewayHostname As String = "Specifies the host name of the Remote Desktop Gateway server."
+        Public Const Props_RDGatewayUseConnectionCredentials As String = "Gateway Credentials"
+        Public Const Descr_RDGatewayUseConnectionCredentials As String = "Specifies whether or not to log on to the gateway using the same username and password as the connection."
         Public Const Props_RDGatewayUsername As String = "Gateway Username"
         Public Const Descr_RDGatewayUsername As String = "Specifies the user name that a user provides to connect to the RD Gateway server."
         Public Const Props_RDGatewayPassword As String = "Gateway Password"

@@ -449,5 +449,8 @@
     <Setting Name="ConDefaultRDGatewayUsageMethod" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Never</Value>
     </Setting>
+    <Setting Name="ConDefaultRDGatewayUseConnectionCredentials" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Yes</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -160,11 +160,20 @@ Namespace Connection
                 Try
                     If RDP.TransportSettings.GatewayIsSupported = 1 Then
                         mC.AddMessage(Messages.MessageClass.InformationMsg, "RD Gateway is supported", True)
-                        RDP.TransportSettings.GatewayUsageMethod = Me.Info.RDGatewayUsageMethod
-                        RDP.TransportSettings.GatewayHostname = Me.Info.RDGatewayHostname
-                        RDP.TransportSettings.GatewayUsername = Me.Info.RDGatewayUsername
-                        RDP.TransportSettings.GatewayPassword = Me.Info.RDGatewayPassword
-                        RDP.TransportSettings.GatewayDomain = Me.Info.RDGatewayDomain
+                        If Me.Info.RDGatewayUsageMethod <> RDGatewayUsageMethod.Never Then
+                            RDP.TransportSettings2.GatewayProfileUsageMethod = 1
+                            RDP.TransportSettings.GatewayUsageMethod = Me.Info.RDGatewayUsageMethod
+                            RDP.TransportSettings.GatewayHostname = Me.Info.RDGatewayHostname
+                            If Me.Info.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes Then
+                                RDP.TransportSettings.GatewayUsername = Me.Info.Username
+                                RDP.TransportSettings.GatewayPassword = Me.Info.Password
+                                RDP.TransportSettings.GatewayDomain = Me.Info.Domain
+                            Else
+                                RDP.TransportSettings.GatewayUsername = Me.Info.RDGatewayUsername
+                                RDP.TransportSettings.GatewayPassword = Me.Info.RDGatewayPassword
+                                RDP.TransportSettings.GatewayDomain = Me.Info.RDGatewayDomain
+                            End If
+                        End If
                     Else
                         mC.AddMessage(Messages.MessageClass.InformationMsg, "RD Gateway is not supported", True)
                     End If
@@ -494,6 +503,13 @@ Namespace Connection
                 Always = 1 ' TSC_PROXY_MODE_DIRECT
                 <Description("Detect")> _
                 Detect = 2 ' TSC_PROXY_MODE_DETECT
+            End Enum
+
+            Public Enum RDGatewayUseConnectionCredentials
+                <Description("Use a different username and password")> _
+                No = 0
+                <Description("Use the same username and password")> _
+                Yes = 1
             End Enum
 #End Region
 

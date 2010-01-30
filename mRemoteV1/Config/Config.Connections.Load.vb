@@ -977,8 +977,9 @@ Namespace Config
                         If Me.confVersion > 2.1 Then '2.2
                             conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.RDP.RDGatewayUsageMethod), .Attributes("RDGatewayUsageMethod").Value)
                             conI.RDGatewayHostname = .Attributes("RDGatewayHostname").Value
+                            conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Attributes("RDGatewayUseConnectionCredentials").Value)
                             conI.RDGatewayUsername = .Attributes("RDGatewayUsername").Value
-                            conI.RDGatewayPassword = .Attributes("RDGatewayPassword").Value
+                            conI.RDGatewayPassword = Security.Crypt.Decrypt(.Attributes("RDGatewayPassword").Value, pW)
                             conI.RDGatewayDomain = .Attributes("RDGatewayDomain").Value
                             conI.Inherit.RDGatewayUsageMethod = .Attributes("InheritRDGatewayUsageMethod").Value
                             conI.Inherit.RDGatewayHostname = .Attributes("InheritRDGatewayHostname").Value

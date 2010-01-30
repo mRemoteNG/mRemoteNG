@@ -640,9 +640,26 @@ Namespace Config
 
                     xW.WriteAttributeString("RDGatewayUsageMethod", "", curConI.RDGatewayUsageMethod.ToString)
                     xW.WriteAttributeString("RDGatewayHostname", "", curConI.RDGatewayHostname)
-                    xW.WriteAttributeString("RDGatewayUsername", "", curConI.RDGatewayUsername)
-                    xW.WriteAttributeString("RDGatewayPassword", "", curConI.RDGatewayPassword)
-                    xW.WriteAttributeString("RDGatewayDomain", "", curConI.RDGatewayDomain)
+
+                    xW.WriteAttributeString("RDGatewayUseConnectionCredentials", "", curConI.RDGatewayUseConnectionCredentials.ToString)
+
+                    If Me._SaveSecurity.Username = True Then
+                        xW.WriteAttributeString("RDGatewayUsername", "", curConI.RDGatewayUsername)
+                    Else
+                        xW.WriteAttributeString("RDGatewayUsername", "", "")
+                    End If
+
+                    If Me._SaveSecurity.Password = True Then
+                        xW.WriteAttributeString("RDGatewayPassword", "", curConI.RDGatewayPassword)
+                    Else
+                        xW.WriteAttributeString("RDGatewayPassword", "", "")
+                    End If
+
+                    If Me._SaveSecurity.Domain = True Then
+                        xW.WriteAttributeString("RDGatewayDomain", "", curConI.RDGatewayDomain)
+                    Else
+                        xW.WriteAttributeString("RDGatewayDomain", "", "")
+                    End If
 
                     If Me._SaveSecurity.Inheritance = True Then
                         xW.WriteAttributeString("InheritCacheBitmaps", "", curConI.Inherit.CacheBitmaps)
@@ -687,6 +704,7 @@ Namespace Config
                         xW.WriteAttributeString("InheritVNCViewOnly", "", curConI.Inherit.VNCViewOnly)
                         xW.WriteAttributeString("InheritRDGatewayUsageMethod", "", curConI.Inherit.RDGatewayUsageMethod)
                         xW.WriteAttributeString("InheritRDGatewayHostname", "", curConI.Inherit.RDGatewayHostname)
+                        xW.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "", curConI.Inherit.RDGatewayUsername)
                         xW.WriteAttributeString("InheritRDGatewayUsername", "", curConI.Inherit.RDGatewayUsername)
                         xW.WriteAttributeString("InheritRDGatewayPassword", "", curConI.Inherit.RDGatewayPassword)
                         xW.WriteAttributeString("InheritRDGatewayDomain", "", curConI.Inherit.RDGatewayDomain)
@@ -732,6 +750,7 @@ Namespace Config
                         xW.WriteAttributeString("InheritVNCSmartSizeMode", "", False)
                         xW.WriteAttributeString("InheritVNCViewOnly", "", False)
                         xW.WriteAttributeString("InheritRDGatewayHostname", "", False)
+                        xW.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "", False)
                         xW.WriteAttributeString("InheritRDGatewayUsername", "", False)
                         xW.WriteAttributeString("InheritRDGatewayPassword", "", False)
                         xW.WriteAttributeString("InheritRDGatewayDomain", "", False)
@@ -774,10 +793,10 @@ Namespace Config
                     csvLn += "Domain;"
                 End If
 
-                csvLn += "Hostname;Protocol;PuttySession;Port;ConnectToConsole;RenderingEngine;ICAEncryptionStrength;RDPAuthenticationLevel;Colors;Resolution;DisplayWallpaper;DisplayThemes;CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;RedirectKeys;PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                csvLn += "Hostname;Protocol;PuttySession;Port;ConnectToConsole;RenderingEngine;ICAEncryptionStrength;RDPAuthenticationLevel;Colors;Resolution;DisplayWallpaper;DisplayThemes;CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;RedirectKeys;PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
 
                 If SaveSecurity.Inheritance Then
-                    csvLn += "InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;InheritProtocol;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritUseConsoleSession;InheritRenderingEngine;InheritUsername;InheritICAEncryptionStrength;InheritRDPAuthenticationLevel;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;InheritRDGatewayUsageMethod;InheritRDGatewayHostname;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain"
+                    csvLn += "InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;InheritProtocol;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritUseConsoleSession;InheritRenderingEngine;InheritUsername;InheritICAEncryptionStrength;InheritRDPAuthenticationLevel;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;InheritRDGatewayUsageMethod;InheritRDGatewayHostname;InheritRDGatewayUseConnectionCredentials;InheritRDGatewayUsername;InheritRDGatewayPassword;InheritRDGatewayDomain"
                 End If
 
                 csvWr.WriteLine(csvLn)

@@ -465,6 +465,33 @@ Namespace Connection
             End Set
         End Property
 
+        Private _RDGatewayUseConnectionCredentials As mRemote.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), My.Settings.ConDefaultRDGatewayUseConnectionCredentials)
+        <Category(Category4 & Language.Base.Category_RDGateway), _
+            Browsable(True), _
+            DisplayName(Language.Base.Props_RDGatewayUseConnectionCredentials), _
+            Description(Language.Base.Descr_RDGatewayUseConnectionCredentials), _
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        Public Property RDGatewayUseConnectionCredentials() As mRemote.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials
+            Get
+                If Me._Inherit.RDGatewayUseConnectionCredentials And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.RDGatewayUseConnectionCredentials
+                Else
+                    Return _RDGatewayUseConnectionCredentials
+                End If
+            End Get
+            Set(ByVal value As mRemote.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials)
+                _RDGatewayUseConnectionCredentials = value
+            End Set
+        End Property
+
         Private _RDGatewayUsername As String
         <Category(Category4 & Language.Base.Category_RDGateway), _
             Browsable(True), _
@@ -1768,6 +1795,20 @@ Namespace Connection
                 End Get
                 Set(ByVal value As Boolean)
                     Me._RDGatewayHostname = value
+                End Set
+            End Property
+
+            Private _RDGatewayUseConnectionCredentials As Boolean = False
+            <Category(Category5 & Language.Base.Category_RDGateway), _
+                Browsable(True), _
+                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayUseConnectionCredentials), _
+                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
+            Public Property RDGatewayUseConnectionCredentials() As Boolean
+                Get
+                    Return Me._RDGatewayUseConnectionCredentials
+                End Get
+                Set(ByVal value As Boolean)
+                    Me._RDGatewayUseConnectionCredentials = value
                 End Set
             End Property
 
