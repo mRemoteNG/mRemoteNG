@@ -481,4 +481,10 @@
   <data name="strConfirmResetLayout" xml:space="preserve">
     <value>Are you sure you want to reset the panels to their default layout?</value>
   </data>
+  <data name="strConfirmExitMainInstruction" xml:space="preserve">
+    <value>Do you want to close all open connections?</value>
+  </data>
+  <data name="strDoNotShowThisMessageAgain" xml:space="preserve">
+    <value>Do not show this message again.</value>
+  </data>
 </root>

@@ -2,6 +2,7 @@ Imports mRemote.App.Runtime
 Imports System.Reflection
 Imports Crownwood
 Imports mRemote.App.Native
+Imports PSTaskDialog
 
 Public Class frmMain
     Public prevWindowsState As FormWindowState
@@ -106,7 +107,11 @@ Public Class frmMain
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         If My.Settings.ConfirmExit And wL.Count > 0 Then
-            If MsgBox(Language.Base.UnclosedConnectionPanels, MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.No Then
+            Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.AssemblyName, My.Resources.strConfirmExitMainInstruction, "", "", "", My.Resources.strDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+            If cTaskDialog.VerificationChecked Then
+                My.Settings.ConfirmExit = False
+            End If
+            If Result = DialogResult.No Then
                 e.Cancel = True
                 Exit Sub
             End If
@@ -122,6 +127,7 @@ Public Class frmMain
     End Sub
 #End Region
 
+#Region "Timer"
     Private tmrRuns As Integer = 0
     Private Sub tmrShowUpdate_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrShowUpdate.Tick
         If tmrRuns = 5 Then
@@ -145,7 +151,7 @@ Public Class frmMain
         mC.AddMessage(Messages.MessageClass.InformationMsg, "Doing AutoSave", True)
         App.Runtime.SaveConnections()
     End Sub
-
+#End Region
 
 #Region "Ext Apps Toolbar"
     Private Sub cMenToolbarShowText_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenToolbarShowText.Click
@@ -558,6 +564,7 @@ Public Class frmMain
     End Sub
 #End Region
 
+#Region "Window Overrides and DockPanel Stuff"
     Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
         If Me.WindowState = FormWindowState.Minimized Then
             If My.Settings.MinimizeToTray Then
@@ -571,7 +578,6 @@ Public Class frmMain
         End If
     End Sub
 
-#Region "Window Overrides and DockPanel Stuff"
     Private bWmGetTextFlag As Boolean = False
     Private bWmWindowPosChangedFlag As Boolean = False
 
@@ -579,32 +585,31 @@ Public Class frmMain
         Try
             'Debug.Print(m.Msg)
 
-            If m.Msg = WM_GETTEXT Then
-                bWmGetTextFlag = True
-            ElseIf m.Msg = WM_WINDOWPOSCHANGED Then
-                If bWmGetTextFlag Then
-                    ActivateConnection()
-                End If
-
-                bWmGetTextFlag = False
-                bWmWindowPosChangedFlag = True
-            ElseIf m.Msg = WM_ACTIVATEAPP Then
-                If bWmWindowPosChangedFlag Then
-                    ActivateConnection()
-                End If
-            Else
-                bWmGetTextFlag = False
-                bWmWindowPosChangedFlag = False
-            End If
-
-            If m.Msg = Tools.SystemMenu.Flags.WM_SYSCOMMAND Then
-                For i As Integer = 0 To SysMenSubItems.Length - 1
-                    If SysMenSubItems(i) = m.WParam Then
-                        Screens.SendFormToScreen(Screen.AllScreens(i))
-                        Exit For
+            Select m.Msg
+                Case WM_GETTEXT
+                    bWmGetTextFlag = True
+                Case WM_WINDOWPOSCHANGED
+                    If bWmGetTextFlag Then
+                        ActivateConnection()
                     End If
-                Next
-            End If
+
+                    bWmGetTextFlag = False
+                    bWmWindowPosChangedFlag = True
+                Case WM_ACTIVATEAPP
+                    If bWmWindowPosChangedFlag Then
+                        ActivateConnection()
+                    End If
+                Case WM_SYSCOMMAND
+                    For i As Integer = 0 To SysMenSubItems.Length - 1
+                        If SysMenSubItems(i) = m.WParam Then
+                            Screens.SendFormToScreen(Screen.AllScreens(i))
+                            Exit For
+                        End If
+                    Next
+                Case Else
+                    bWmGetTextFlag = False
+                    bWmWindowPosChangedFlag = False
+            End Select
         Catch ex As Exception
         End Try
 

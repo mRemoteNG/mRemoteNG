@@ -772,11 +772,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Do you want to close all open connections?.
+        '''</summary>
+        Friend ReadOnly Property strConfirmExitMainInstruction() As String
+            Get
+                Return ResourceManager.GetString("strConfirmExitMainInstruction", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Are you sure you want to reset the panels to their default layout?.
         '''</summary>
         Friend ReadOnly Property strConfirmResetLayout() As String
             Get
                 Return ResourceManager.GetString("strConfirmResetLayout", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Do not show this message again..
+        '''</summary>
+        Friend ReadOnly Property strDoNotShowThisMessageAgain() As String
+            Get
+                Return ResourceManager.GetString("strDoNotShowThisMessageAgain", resourceCulture)
             End Get
         End Property
         

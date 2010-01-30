@@ -340,7 +340,6 @@
         Public Const SendTo As String = "Send to..."
         Public Const Screen As String = "Screen"
 
-        Public Const UnclosedConnectionPanels As String = "There are unclosed connection panels, are you sure you want to quit?"
         Public Const SaveConnectionsFileBeforeOpeningAnother As String = "Do you want to save the current connections file before loading another?"
         Public Const NewPanel As String = "New Panel"
         Public Const PanelName As String = "Panel name"
