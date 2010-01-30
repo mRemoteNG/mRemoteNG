@@ -1,0 +1,92 @@
+Contributors
+============
+
+Felix Deimel
+Riley McArdle
+David Vidmar
+
+
+Included Components
+===================
+
+ADTree 1.0
+Copyright © 2004 Marc Merritt
+Copyright © 2008 Felix Deimel
+http://www.codeproject.com/KB/selection/ADPickerCtrl.aspx
+
+DiffieHellman 1.0
+Copyright © 2003 The Mentalis.org Team
+Modified New BSD License
+http://www.mentalis.org/
+
+DockPanel Suite 2.3.1
+Copyright © 2007 Weifen Luo
+MIT License
+http://sourceforge.net/projects/dockpanelsuite/
+
+Emergent OnLine WTSCOM 2.0.6.0
+Copyright © 2001-2003 Emergent OnLine
+http://www.go-eol.com/
+
+FilteredPropertyGrid 1.0.0.0
+Copyright © 2006 Azuria
+http://www.codeproject.com/KB/cs/FilteredPropertyGrid.aspx
+
+GeckoFX 1.8.1.4
+Copyright © 2008 Skybound Software
+Mozilla Public License 1.1
+http://www.geckofx.org/
+
+IPTextBox 1.1
+Copyright © 2006 Matthew Kleinwaks
+Copyright © 2008 Felix Deimel
+http://www.vbforums.com/showthread.php?t=430169
+
+log4net 1.2.10.0
+Copyright © 2001-2006 The Apache Software Foundation
+Apache License Version 2.0
+http://logging.apache.org/log4net/
+
+Magic Library 1.7.4
+Copyright © 2002-2003 Crownwood Consulting, Ltd.
+Freely redistributable with attribution
+http://www.dotnetmagic.com/magic_download.html
+
+Mentalis.org Security Library 1.0.13.715
+Copyright © 2002-2005 The Mentalis.org Team
+Modified New BSD License
+http://www.mentalis.org/
+
+MiniGeckoBrowser 1.0
+Copyright © 2008 Felix Deimel
+http://www.appjuice.org/
+
+MiniTabControl 1.0
+Copyright © 2008 Felix Deimel
+http://www.appjuice.org/
+
+PuTTY 0.60
+Copyright © 1997-2007 Simon Tatham
+MIT License
+http://www.chiark.greenend.org.uk/~sgtatham/putty/
+
+SharpSSH 1.1.1.13
+Copyright © 2002-2008 Atsuhiko Yamanaka, JCraft, Inc.
+Copyright © 2007 Tamir Gal
+BSD Style License
+http://www.tamirgal.com/blog/page/SharpSSH.aspx
+
+Silk Icon Set
+Copyright © 2005-2008 FAMFAMFAM
+Creative Commons Attribution 2.5 License
+http://www.famfamfam.com/
+
+Vista TaskDialog Wrapper and Emulator 1.0
+Copyright © 2007-2009 Hedley Muscroft
+Code Project Open License (CPOL)
+http://www.codeproject.com/KB/vista/Vista_TaskDialog_Wrapper.aspx
+
+VncSharp 1.0
+Copyright © 2004-2009 David Humphrey
+GNU General Public License (GPL) Version 2
+http://cdot.senecac.on.ca/projects/vncsharp/
