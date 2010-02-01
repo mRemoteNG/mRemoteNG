@@ -10,6 +10,7 @@
   Improved RDP error reporting
   Added support for Credential Security Support Provider (CredSSP) which is required for Network Level Authentication (NLA)
   Added support for connecting through Remote Desktop Gateway servers
+  Popups can now be allowed in Internet Explorer by holding Ctrl+Alt when clicking a link
 
 1.62:
   Switched to VncSharp, an open source VNC component

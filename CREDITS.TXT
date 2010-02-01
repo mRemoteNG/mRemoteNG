@@ -6,6 +6,15 @@ Riley McArdle
 David Vidmar
 
 
+Included Source Code
+====================
+
+Command Line Arguments Parser 1.0
+Copyright © 2002 Richard Lopes
+MIT License
+http://www.codeproject.com/KB/recipes/command_line.aspx
+
+
 Included Components
 ===================
 

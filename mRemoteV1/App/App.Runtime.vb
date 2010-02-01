@@ -1530,7 +1530,7 @@ Namespace App
         Public Shared Sub GoToURL(ByVal URL As String)
             Dim cI As New mRemote.Connection.Info
 
-            cI.Name = "Website"
+            cI.Name = ""
             cI.Hostname = URL
             If URL.StartsWith("https:") Then
                 cI.Protocol = Connection.Protocol.Protocols.HTTPS

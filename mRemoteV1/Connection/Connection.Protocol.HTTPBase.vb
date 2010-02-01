@@ -1,6 +1,5 @@
 ﻿Imports System.Windows.Forms
 Imports mRemote.App.Runtime
-Imports Skybound.Gecko
 Imports System.ComponentModel
 
 Namespace Connection
@@ -19,7 +18,6 @@ Namespace Connection
             Public Sub New(ByVal RenderingEngine As RenderingEngine)
                 Try
                     If RenderingEngine = RenderingEngine.Gecko Then
-                        'Skybound.Gecko.Xpcom.Initialize(My.Settings.XULRunnerPath)
                         Me.Control = New MiniGeckoBrowser.MiniGeckoBrowser
                         TryCast(Me.Control, MiniGeckoBrowser.MiniGeckoBrowser).XULrunnerPath = My.Settings.XULRunnerPath
                     Else
@@ -39,19 +37,29 @@ Namespace Connection
                 MyBase.SetProps()
 
                 Try
-                    wBrowser = Me.Control
+                    Dim objTabPage As Crownwood.Magic.Controls.TabPage = TryCast(Me.InterfaceControl.Parent, Crownwood.Magic.Controls.TabPage)
+                    Me.tabTitle = objTabPage.Title
+                Catch ex As Exception
+                    Me.tabTitle = ""
+                End Try
+
+                Try
+                    Me.wBrowser = Me.Control
 
                     If InterfaceControl.Info.RenderingEngine = RenderingEngine.Gecko Then
-                        'AddHandler TryCast(wBrowser, GeckoWebBrowser).CreateWindow, AddressOf gex_CreateWindow
-                        AddHandler TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser).TitleChanged, AddressOf wBrowser_DocumentTitleChanged
-                        AddHandler TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser).LastTabRemoved, AddressOf wBrowser_LastTabRemoved
-                        'wBrowser.Width = wBrowser.Width
-                    Else
-                        TryCast(wBrowser, WebBrowser).AllowWebBrowserDrop = False
-                        TryCast(wBrowser, WebBrowser).ScrollBarsEnabled = True
+                        Dim objMiniGeckoBrowser As MiniGeckoBrowser.MiniGeckoBrowser = TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser)
 
-                        AddHandler TryCast(wBrowser, WebBrowser).DocumentTitleChanged, AddressOf wBrowser_DocumentTitleChanged
-                        AddHandler TryCast(wBrowser, WebBrowser).NewWindow, AddressOf wBrowser_NewWindow
+                        AddHandler objMiniGeckoBrowser.TitleChanged, AddressOf wBrowser_DocumentTitleChanged
+                        AddHandler objMiniGeckoBrowser.LastTabRemoved, AddressOf wBrowser_LastTabRemoved
+                    Else
+                        Dim objWebBrowser As WebBrowser = TryCast(wBrowser, WebBrowser)
+                        Dim objAxWebBrowser As SHDocVw.WebBrowser = DirectCast(objWebBrowser.ActiveXInstance, SHDocVw.WebBrowser)
+
+                        objWebBrowser.AllowWebBrowserDrop = False
+                        objWebBrowser.ScrollBarsEnabled = True
+
+                        AddHandler objWebBrowser.DocumentTitleChanged, AddressOf wBrowser_DocumentTitleChanged
+                        AddHandler objAxWebBrowser.NewWindow3, AddressOf wBrowser_NewWindow3
                     End If
 
                     Return True
@@ -111,14 +119,15 @@ Namespace Connection
 
 #Region "Events"
             Private Sub gex_CreateWindow(ByVal sender As Object, ByVal e As Skybound.Gecko.GeckoCreateWindowEventArgs)
-                'Dim tP As TabPage = AddTab()
-                'e.WebBrowser = tP.Controls(0)
                 e.WebBrowser = Me.wBrowser
             End Sub
 
-            Private Sub wBrowser_NewWindow(ByVal sender As Object, ByVal e As CancelEventArgs)
-                e.Cancel = True
-                TryCast(wBrowser, WebBrowser).Navigate(TryCast(wBrowser, WebBrowser).StatusText)
+            Private Sub wBrowser_NewWindow3(ByRef ppDisp As Object, ByRef Cancel As Boolean, ByVal dwFlags As Long, ByVal bstrUrlContext As String, ByVal bstrUrl As String)
+                If (dwFlags And NWMF.NWMF_OVERRIDEKEY) Then
+                    Cancel = False
+                Else
+                    Cancel = True
+                End If
             End Sub
 
             Private Sub wBrowser_LastTabRemoved(ByVal sender As Object)
@@ -131,10 +140,6 @@ Namespace Connection
                     tabP = TryCast(InterfaceControl.Parent, Crownwood.Magic.Controls.TabPage)
 
                     If tabP IsNot Nothing Then
-                        If tabTitle = "" Then
-                            tabTitle = tabP.Title
-                        End If
-
                         Dim shortTitle As String = ""
 
                         If Me.InterfaceControl.Info.RenderingEngine = RenderingEngine.Gecko Then
@@ -151,7 +156,11 @@ Namespace Connection
                             End If
                         End If
 
-                        tabP.Title = tabTitle & " - " & shortTitle
+                        If Me.tabTitle <> "" Then
+                            tabP.Title = tabTitle & " - " & shortTitle
+                        Else
+                            tabP.Title = shortTitle
+                        End If
                     End If
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.WarningMsg, "wBrowser_DocumentTitleChanged (Connection.Protocol.HTTPBase) failed" & vbNewLine & ex.Message, True)
@@ -159,12 +168,31 @@ Namespace Connection
             End Sub
 #End Region
 
+#Region "Enums"
             Public Enum RenderingEngine
                 <Description("Internet Explorer")> _
                 IE = 1
                 <Description("Gecko (Firefox)")> _
                 Gecko = 2
             End Enum
+
+            Private Enum NWMF
+                NWMF_UNLOADING = &H1
+                NWMF_USERINITED = &H2
+                NWMF_FIRST = &H4
+                NWMF_OVERRIDEKEY = &H8
+                NWMF_SHOWHELP = &H10
+                NWMF_HTMLDIALOG = &H20
+                NWMF_FROMDIALOGCHILD = &H40
+                NWMF_USERREQUESTED = &H80
+                NWMF_USERALLOWED = &H100
+                NWMF_FORCEWINDOW = &H10000
+                NWMF_FORCETAB = &H20000
+                NWMF_SUGGESTWINDOW = &H40000
+                NWMF_SUGGESTTAB = &H80000
+                NWMF_INACTIVETAB = &H100000
+            End Enum
+#End Region
         End Class
     End Namespace
 End Namespace
