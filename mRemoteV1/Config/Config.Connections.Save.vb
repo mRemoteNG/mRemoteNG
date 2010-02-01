@@ -227,7 +227,9 @@ Namespace Config
                                                "RedirectPrinters, RedirectSmartCards, RedirectSound, RedirectKeys, " & _
                                                "Connected, PreExtApp, PostExtApp, MacAddress, UserField, ExtApp, VNCCompression, VNCEncoding, VNCAuthMode, " & _
                                                "VNCProxyType, VNCProxyIP, VNCProxyPort, VNCProxyUsername, VNCProxyPassword, " & _
-                                               "VNCColors, VNCSmartSizeMode, VNCViewOnly, InheritCacheBitmaps, InheritColors, " & _
+                                               "VNCColors, VNCSmartSizeMode, VNCViewOnly, " & _
+                                               "RDGatewayUsageMethod, RDGatewayHostname, RDGatewayUseConnectionCredentials, RDGatewayUsername, RDGatewayPassword, RDGatewayDomain, " & _
+                                               "InheritCacheBitmaps, InheritColors, " & _
                                                "InheritDescription, InheritDisplayThemes, InheritDisplayWallpaper, InheritDomain, " & _
                                                "InheritIcon, InheritPanel, InheritPassword, InheritPort, " & _
                                                "InheritProtocol, InheritPuttySession, InheritRedirectDiskDrives, " & _
@@ -238,6 +240,7 @@ Namespace Config
                                                "InheritVNCAuthMode, InheritVNCProxyType, InheritVNCProxyIP, InheritVNCProxyPort, " & _
                                                "InheritVNCProxyUsername, InheritVNCProxyPassword, InheritVNCColors, " & _
                                                "InheritVNCSmartSizeMode, InheritVNCViewOnly, " & _
+                                               "InheritRDGatewayUsageMethod, InheritRDGatewayHostname, InheritRDGatewayUseConnectionCredentials, InheritRDGatewayUsername, InheritRDGatewayPassword, InheritRDGatewayDomain, " & _
                                                "PositionID, ParentID, ConstantID, LastChange)" & _
                                                "VALUES (", sqlCon)
 
@@ -340,6 +343,28 @@ Namespace Config
                     sqlQuery.CommandText &= "'" & .VNCSmartSizeMode.ToString & "',"
                     sqlQuery.CommandText &= "'" & .VNCViewOnly & "',"
 
+                    sqlQuery.CommandText &= "'" & .RDGatewayUsageMethod.ToString & "',"
+                    sqlQuery.CommandText &= "'" & .RDGatewayHostname & "',"
+                    sqlQuery.CommandText &= "'" & .RDGatewayUseConnectionCredentials.ToString & "',"
+
+                    If Me._SaveSecurity.Username = True Then
+                        sqlQuery.CommandText &= "'" & .RDGatewayUsername & "',"
+                    Else
+                        sqlQuery.CommandText &= "'" & "" & "',"
+                    End If
+
+                    If Me._SaveSecurity.Password = True Then
+                        sqlQuery.CommandText &= "'" & .RDGatewayPassword & "',"
+                    Else
+                        sqlQuery.CommandText &= "'" & "" & "',"
+                    End If
+
+                    If Me._SaveSecurity.Domain = True Then
+                        sqlQuery.CommandText &= "'" & .RDGatewayDomain & "',"
+                    Else
+                        sqlQuery.CommandText &= "'" & "" & "',"
+                    End If
+
                     With .Inherit
                         If Me._SaveSecurity.Inheritance = True Then
                             sqlQuery.CommandText &= "'" & .CacheBitmaps & "',"
@@ -383,6 +408,13 @@ Namespace Config
                             sqlQuery.CommandText &= "'" & .VNCColors & "',"
                             sqlQuery.CommandText &= "'" & .VNCSmartSizeMode & "',"
                             sqlQuery.CommandText &= "'" & .VNCViewOnly & "',"
+
+                            sqlQuery.CommandText &= "'" & .RDGatewayUsageMethod & "',"
+                            sqlQuery.CommandText &= "'" & .RDGatewayHostname & "',"
+                            sqlQuery.CommandText &= "'" & .RDGatewayUseConnectionCredentials & "',"
+                            sqlQuery.CommandText &= "'" & .RDGatewayUsername & "',"
+                            sqlQuery.CommandText &= "'" & .RDGatewayPassword & "',"
+                            sqlQuery.CommandText &= "'" & .RDGatewayDomain & "',"
                         Else
                             sqlQuery.CommandText &= "'" & False & "',"
                             sqlQuery.CommandText &= "'" & False & "',"
@@ -425,6 +457,13 @@ Namespace Config
                             sqlQuery.CommandText &= "'" & False & "',"
                             sqlQuery.CommandText &= "'" & False & "',"
                             sqlQuery.CommandText &= "'" & False & "',"
+
+                            sqlQuery.CommandText &= "'" & False & "'," ' .RDGatewayUsageMethod
+                            sqlQuery.CommandText &= "'" & False & "'," ' .RDGatewayHostname
+                            sqlQuery.CommandText &= "'" & False & "'," ' .RDGatewayUseConnectionCredentials
+                            sqlQuery.CommandText &= "'" & False & "'," ' .RDGatewayUsername
+                            sqlQuery.CommandText &= "'" & False & "'," ' .RDGatewayPassword
+                            sqlQuery.CommandText &= "'" & False & "'," ' .RDGatewayDomain
                         End If
                     End With
 
@@ -704,7 +743,7 @@ Namespace Config
                         xW.WriteAttributeString("InheritVNCViewOnly", "", curConI.Inherit.VNCViewOnly)
                         xW.WriteAttributeString("InheritRDGatewayUsageMethod", "", curConI.Inherit.RDGatewayUsageMethod)
                         xW.WriteAttributeString("InheritRDGatewayHostname", "", curConI.Inherit.RDGatewayHostname)
-                        xW.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "", curConI.Inherit.RDGatewayUsername)
+                        xW.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "", curConI.Inherit.RDGatewayUseConnectionCredentials)
                         xW.WriteAttributeString("InheritRDGatewayUsername", "", curConI.Inherit.RDGatewayUsername)
                         xW.WriteAttributeString("InheritRDGatewayPassword", "", curConI.Inherit.RDGatewayPassword)
                         xW.WriteAttributeString("InheritRDGatewayDomain", "", curConI.Inherit.RDGatewayDomain)
@@ -761,8 +800,9 @@ Namespace Config
             End Sub
 #End Region
 
-            Private csvWr As StreamWriter
 #Region "CSV"
+            Private csvWr As StreamWriter
+
             Private Sub SaveTomRCSV()
                 If App.Runtime.ConnectionsFileLoaded = False Then
                     Exit Sub

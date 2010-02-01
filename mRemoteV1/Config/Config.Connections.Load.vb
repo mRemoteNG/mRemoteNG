@@ -536,6 +536,20 @@ Namespace Config
                             conI.Inherit.ExtApp = .Item("InheritExtApp")
                         End If
 
+                        If Me.confVersion >= 2.2 Then
+                            conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.RDP.RDGatewayUsageMethod), .Item("RDGatewayUsageMethod"))
+                            conI.RDGatewayHostname = .Item("RDGatewayHostname")
+                            conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Item("RDGatewayUseConnectionCredentials"))
+                            conI.RDGatewayUsername = .Item("RDGatewayUsername")
+                            conI.RDGatewayPassword = Security.Crypt.Decrypt(.Item("RDGatewayPassword"), pW)
+                            conI.RDGatewayDomain = .Item("RDGatewayDomain")
+                            conI.Inherit.RDGatewayUsageMethod = .Item("InheritRDGatewayUsageMethod")
+                            conI.Inherit.RDGatewayHostname = .Item("InheritRDGatewayHostname")
+                            conI.Inherit.RDGatewayUsername = .Item("InheritRDGatewayUsername")
+                            conI.Inherit.RDGatewayPassword = .Item("InheritRDGatewayPassword")
+                            conI.Inherit.RDGatewayDomain = .Item("InheritRDGatewayDomain")
+                        End If
+
                         If SQLUpdate = True Then
                             conI.PleaseConnect = .Item("Connected")
                         End If
