@@ -9,6 +9,10 @@ Namespace Connection
         Public Class PuttyBase
             Inherits Connection.Protocol.Base
 
+#Region "Constants"
+            Private Const IDM_RECONF As Int32 = &H50 ' PuTTY Settings Menu ID
+#End Region
+
 #Region "Private Properties"
 #End Region
 
@@ -179,7 +183,6 @@ Namespace Connection
                 End Try
             End Function
 
-
             Public Overrides Sub Focus()
                 Try
                     'SetForegroundWindow(PuttyHandle)
@@ -212,6 +215,15 @@ Namespace Connection
                 End Try
 
                 MyBase.Close()
+            End Sub
+
+            Public Sub ShowSettingsDialog()
+                Try
+                    PostMessage(Me.PuttyHandle, WM_SYSCOMMAND, IDM_RECONF, 0)
+                    SetForegroundWindow(Me.PuttyHandle)
+                Catch ex As Exception
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ShowSettingsDialog failed (Connection.Protocol.PuttyBase)" & vbNewLine & ex.Message, True)
+                End Try
             End Sub
 #End Region
 

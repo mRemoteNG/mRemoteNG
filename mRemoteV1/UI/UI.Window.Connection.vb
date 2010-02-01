@@ -4,7 +4,6 @@ Imports System.Windows.Forms
 Imports Crownwood
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemote.App.Runtime
-Imports System.IO
 
 Namespace UI
     Namespace Window
@@ -31,6 +30,7 @@ Namespace UI
             Friend WithEvents cmenTabStartChat As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cmenTabRefreshScreen As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+            Friend WithEvents cmenTabPuttySettings As System.Windows.Forms.ToolStripMenuItem
 
             Public WithEvents TabController As Crownwood.Magic.Controls.TabControl
             Private Sub InitializeComponent()
@@ -55,6 +55,7 @@ Namespace UI
                 Me.cmenTabDuplicateTab = New System.Windows.Forms.ToolStripMenuItem
                 Me.cmenTabReconnect = New System.Windows.Forms.ToolStripMenuItem
                 Me.cmenTabDisconnect = New System.Windows.Forms.ToolStripMenuItem
+                Me.cmenTabPuttySettings = New System.Windows.Forms.ToolStripMenuItem
                 Me.cmenTab.SuspendLayout()
                 Me.SuspendLayout()
                 '
@@ -74,10 +75,10 @@ Namespace UI
                 '
                 'cmenTab
                 '
-                Me.cmenTab.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmenTabFullscreen, Me.cmenTabSmartSize, Me.cmenTabViewOnly, Me.ToolStripSeparator1, Me.cmenTabScreenshot, Me.cmenTabStartChat, Me.cmenTabTransferFile, Me.cmenTabRefreshScreen, Me.cmenTabSendSpecialKeys, Me.cmenTabExternalApps, Me.cmenTabSep1, Me.cmenTabRenameTab, Me.cmenTabDuplicateTab, Me.cmenTabReconnect, Me.cmenTabDisconnect})
+                Me.cmenTab.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cmenTabFullscreen, Me.cmenTabSmartSize, Me.cmenTabViewOnly, Me.ToolStripSeparator1, Me.cmenTabScreenshot, Me.cmenTabStartChat, Me.cmenTabTransferFile, Me.cmenTabRefreshScreen, Me.cmenTabSendSpecialKeys, Me.cmenTabPuttySettings, Me.cmenTabExternalApps, Me.cmenTabSep1, Me.cmenTabRenameTab, Me.cmenTabDuplicateTab, Me.cmenTabReconnect, Me.cmenTabDisconnect})
                 Me.cmenTab.Name = "cmenTab"
                 Me.cmenTab.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-                Me.cmenTab.Size = New System.Drawing.Size(202, 324)
+                Me.cmenTab.Size = New System.Drawing.Size(202, 346)
                 '
                 'cmenTabFullscreen
                 '
@@ -192,10 +193,17 @@ Namespace UI
                 Me.cmenTabDisconnect.Size = New System.Drawing.Size(201, 22)
                 Me.cmenTabDisconnect.Text = "Disconnect"
                 '
+                'cmenTabPuttySettings
+                '
+                Me.cmenTabPuttySettings.Name = "cmenTabPuttySettings"
+                Me.cmenTabPuttySettings.Size = New System.Drawing.Size(201, 22)
+                Me.cmenTabPuttySettings.Text = "PuTTY Settings"
+                '
                 'Connection
                 '
                 Me.ClientSize = New System.Drawing.Size(632, 453)
                 Me.Controls.Add(Me.TabController)
+                Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.Icon = Global.mRemote.My.Resources.Resources.mRemote_Icon
                 Me.Name = "Connection"
                 Me.TabText = "UI.Window.Connection"
@@ -416,6 +424,12 @@ Namespace UI
                         Me.cmenTabTransferFile.Enabled = True
                     End If
 
+                    If TypeOf IC.Protocol Is mRemote.Connection.Protocol.PuttyBase Then
+                        Me.cmenTabPuttySettings.Enabled = True
+                    Else
+                        Me.cmenTabPuttySettings.Enabled = False
+                    End If
+
                     AddExternalApps()
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideMenuButtons (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
@@ -462,6 +476,10 @@ Namespace UI
 
             Private Sub cmenTabFullscreen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmenTabFullscreen.Click
                 Me.ToggleFullscreen()
+            End Sub
+
+            Private Sub cmenTabPuttySettings_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmenTabPuttySettings.Click
+                Me.ShowPuttySettingsDialog()
             End Sub
 
             Private Sub cmenTabExternalAppsEntry_Click(ByVal sender As Object, ByVal e As System.EventArgs)
@@ -632,6 +650,24 @@ Namespace UI
                     End If
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleFullscreen (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                End Try
+            End Sub
+
+            Private Sub ShowPuttySettingsDialog()
+                Try
+                    If Me.TabController.SelectedTab IsNot Nothing Then
+                        If TypeOf Me.TabController.SelectedTab.Tag Is mRemote.Connection.InterfaceControl Then
+                            Dim objInterfaceControl As mRemote.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+
+                            If TypeOf objInterfaceControl.Protocol Is mRemote.Connection.Protocol.PuttyBase Then
+                                Dim objPuttyBase As mRemote.Connection.Protocol.PuttyBase = objInterfaceControl.Protocol
+
+                                objPuttyBase.ShowSettingsDialog()
+                            End If
+                        End If
+                    End If
+                Catch ex As Exception
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ShowPuttySettingsDialog (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -892,7 +928,6 @@ Namespace UI
                 End Try
             End Sub
 #End Region
-
         End Class
     End Namespace
 End Namespace
