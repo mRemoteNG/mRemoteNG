@@ -368,8 +368,8 @@
         Public Const CcCheckFailed As String = "Check failed!"
         Public Const CcRDPOK As String = "All RDP components were found and seem to be registered properly." & vbNewLine & _
                                     "Remote Desktop Connection Control Version {0}"
-        Public Const CcRDPFailed As String = "For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services Client) 6.0 installed. You can get it here: http://support.microsoft.com/kb/925876" & vbNewLine & _
-                                     "If you have RDP 6.0 installed and the check still fails, try to register mstscax.dll manually. To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\windows\system32\mstscax.dll"" (Where c:\ is your system drive)." & vbNewLine & _
+        Public Const CcRDPFailed As String = "For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services Client) 6.1 installed. You can get it here: http://support.microsoft.com/kb/951616" & vbNewLine & _
+                                     "If you have RDP 6.1 installed and the check still fails, try to register mstscax.dll manually. To do this open up the run dialog (Start - Run) and enter the following: regsvr32 ""c:\windows\system32\mstscax.dll"" (Where c:\ is your system drive)." & vbNewLine & _
                                      "If you still have trouble getting RDP to work please consult the mRemoteNG Forum at http://forum.mremoteng.org/"
         Public Const CcVNCOK As String = "All VNC components were found and seem to be registered properly." & vbNewLine & _
                                     "VncSharpNG Control Version {0}"
