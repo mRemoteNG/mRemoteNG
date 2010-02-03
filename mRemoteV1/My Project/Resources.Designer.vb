@@ -835,6 +835,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Portable Edition.
+        '''</summary>
+        Friend ReadOnly Property strPortableEdition() As String
+            Get
+                Return ResourceManager.GetString("strPortableEdition", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Released under the GNU General Public License (GPL).
         '''</summary>
         Friend ReadOnly Property strReleasedUnderGPL() As String

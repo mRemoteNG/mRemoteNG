@@ -56,6 +56,7 @@ Namespace UI
                 '
                 Me.lblEdition.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lblEdition.BackColor = System.Drawing.Color.Black
+                Me.lblEdition.Font = New System.Drawing.Font("Microsoft Sans Serif", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblEdition.ForeColor = System.Drawing.Color.White
                 Me.lblEdition.Location = New System.Drawing.Point(512, 112)
                 Me.lblEdition.Name = "lblEdition"
@@ -243,10 +244,15 @@ Namespace UI
             End Sub
 
             Private Sub ApplyEditions()
+#If PORTABLE Then
+                lblEdition.Text = My.Resources.strPortableEdition
+                lblEdition.Visible = True
+#Else
                 If App.Editions.Spanlink.Enabled Then
                     lblEdition.Text = "Spanlink Communications"
                     lblEdition.Visible = True
                 End If
+#End If
             End Sub
 
             Private Sub FillLinkLabel(ByVal llbl As LinkLabel, ByVal Text As String, ByVal URL As String)

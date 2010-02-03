@@ -487,4 +487,7 @@
   <data name="strDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Do not show this message again.</value>
   </data>
+  <data name="strPortableEdition" xml:space="preserve">
+    <value>Portable Edition</value>
+  </data>
 </root>

@@ -14,10 +14,11 @@ Namespace App
         End Class
 
         Public Class Settings
-            'Exchange to make portable/normal
+#If Not PORTABLE Then
             Public Shared ReadOnly SettingsPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName
-            'Public Shared ReadOnly SettingsPath As String = My.Application.Info.DirectoryPath
-
+#Else
+            Public Shared ReadOnly SettingsPath As String = My.Application.Info.DirectoryPath
+#End If
             Public Shared ReadOnly LayoutFileName As String = "pnlLayout.xml"
             Public Shared ReadOnly ExtAppsFilesName As String = "extApps.xml"
         End Class

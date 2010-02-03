@@ -3,7 +3,7 @@
 !insertmacro VersionCompare
 
 !DEFINE PRODUCT_VERSION_MAJOR 1
-!DEFINE PRODUCT_VERSION_MINOR 62
+!DEFINE PRODUCT_VERSION_MINOR 63
 
 !DEFINE PRODUCT_VERSION "${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}"
 !DEFINE PRODUCT_VERSION_LONG "${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.0.0"
@@ -13,7 +13,7 @@ Var InstallDotNET
 
 ; Basic Config
 Name "mRemoteNG ${PRODUCT_VERSION}"
-OutFile "bin\mRemoteNG-Installer-${PRODUCT_VERSION}.exe"
+OutFile "..\Release\mRemoteNG-Installer-${PRODUCT_VERSION}.exe"
 SetCompressor /SOLID lzma
 InstallDir "$PROGRAMFILES\mRemoteNG"
 InstallDirRegKey HKLM "Software\mRemoteNG" "InstallPath"
@@ -106,7 +106,7 @@ Section "" ; Install
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayName" "mRemoteNG"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "Publisher" "mRemoteNG"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayIcon" "$INSTDIR\mRemoteNG.exe"
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "EstimatedSize" 5816
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "EstimatedSize" 6464
 
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayVersion" ${PRODUCT_VERSION}
 	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "VersionMajor" ${PRODUCT_VERSION_MAJOR}

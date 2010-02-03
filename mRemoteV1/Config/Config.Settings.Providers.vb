@@ -6,14 +6,12 @@ Namespace Config
     Namespace Settings
         Namespace Providers
             Public Class ChooseProvider
-                'Exchange to make portable/normal
+#If Not PORTABLE Then
                 Inherits LocalFileSettingsProvider
-                'Inherits PortableSettingsProvider
+#Else
+                Inherits PortableSettingsProvider
+#End If
             End Class
-
-
-
-
 
             Public Class PortableSettingsProvider
                 Inherits SettingsProvider
@@ -145,13 +143,17 @@ Namespace Config
                     End Try
 
                     'Check to see if the node exists, if so then set its new value
-                    If Not SettingNode Is Nothing Then
-                        SettingNode.InnerText = propVal.SerializedValue.ToString
+                    If SettingNode IsNot Nothing Then
+                        If propVal.SerializedValue IsNot Nothing Then
+                            SettingNode.InnerText = propVal.SerializedValue.ToString
+                        End If
                     Else
                         If IsRoaming(propVal.Property) Then
                             'Store the value as an element of the Settings Root Node
                             SettingNode = SettingsXML.CreateElement(propVal.Name)
-                            SettingNode.InnerText = propVal.SerializedValue.ToString
+                            If propVal.SerializedValue IsNot Nothing Then
+                                SettingNode.InnerText = propVal.SerializedValue.ToString
+                            End If
                             SettingsXML.SelectSingleNode(SETTINGSROOT).AppendChild(SettingNode)
                         Else
                             'Its machine specific, store as an element of the machine name node,
@@ -169,10 +171,14 @@ Namespace Config
                             End If
 
                             SettingNode = SettingsXML.CreateElement(propVal.Name)
-                            SettingNode.InnerText = propVal.SerializedValue.ToString
+                            If propVal.SerializedValue IsNot Nothing Then
+                                SettingNode.InnerText = propVal.SerializedValue.ToString
+                            End If
                             MachineNode.AppendChild(SettingNode)
                         End If
                     End If
+
+
                 End Sub
 
                 Private Function IsRoaming(ByVal prop As SettingsProperty) As Boolean
