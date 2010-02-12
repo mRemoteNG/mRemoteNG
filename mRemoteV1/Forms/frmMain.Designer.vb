@@ -23,31 +23,45 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim DockPanelSkin3 As WeifenLuo.WinFormsUI.Docking.DockPanelSkin = New WeifenLuo.WinFormsUI.Docking.DockPanelSkin
-        Dim AutoHideStripSkin3 As WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin = New WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin
-        Dim DockPanelGradient7 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient
-        Dim TabGradient15 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
-        Dim DockPaneStripSkin3 As WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin = New WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin
-        Dim DockPaneStripGradient3 As WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient = New WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient
-        Dim TabGradient16 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
-        Dim DockPanelGradient8 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient
-        Dim TabGradient17 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
-        Dim DockPaneStripToolWindowGradient3 As WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient = New WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient
-        Dim TabGradient18 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
-        Dim TabGradient19 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
-        Dim DockPanelGradient9 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient
-        Dim TabGradient20 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
-        Dim TabGradient21 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim DockPanelSkin5 As WeifenLuo.WinFormsUI.Docking.DockPanelSkin = New WeifenLuo.WinFormsUI.Docking.DockPanelSkin
+        Dim AutoHideStripSkin5 As WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin = New WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin
+        Dim DockPanelGradient13 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient
+        Dim TabGradient29 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim DockPaneStripSkin5 As WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin = New WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin
+        Dim DockPaneStripGradient5 As WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient = New WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient
+        Dim TabGradient30 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim DockPanelGradient14 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient
+        Dim TabGradient31 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim DockPaneStripToolWindowGradient5 As WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient = New WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient
+        Dim TabGradient32 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim TabGradient33 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim DockPanelGradient15 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient
+        Dim TabGradient34 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
+        Dim TabGradient35 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.pnlDock = New WeifenLuo.WinFormsUI.Docking.DockPanel
         Me.msMain = New System.Windows.Forms.MenuStrip
         Me.mMenFile = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenFileNewConnection = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenFileNewFolder = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenFileSep1 = New System.Windows.Forms.ToolStripSeparator
         Me.mMenFileNew = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenFileLoad = New System.Windows.Forms.ToolStripMenuItem
-        Me.mMenFileSep1 = New System.Windows.Forms.ToolStripSeparator
         Me.mMenFileSave = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenFileSaveAs = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenFileSep2 = New System.Windows.Forms.ToolStripSeparator
+        Me.mMenFileImportExport = New System.Windows.Forms.ToolStripMenuItem
+        Me.ImportFromXMLFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ImportFromRDPFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ImportFromActiveDirectoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ImportFromPortScanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator
+        Me.ExportToXMLFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenFileSep3 = New System.Windows.Forms.ToolStripSeparator
+        Me.mMenFileDelete = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenFileRename = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenFileDuplicate = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenFileSep4 = New System.Windows.Forms.ToolStripSeparator
         Me.mMenFileExit = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenView = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenViewAddConnectionPanel = New System.Windows.Forms.ToolStripMenuItem
@@ -63,6 +77,7 @@ Partial Class frmMain
         Me.mMenViewJumpToConnectionsConfig = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenViewJumpToSessionsScreenshots = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenViewJumpToErrorsInfos = New System.Windows.Forms.ToolStripMenuItem
+        Me.mMenViewResetLayout = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenViewSep2 = New System.Windows.Forms.ToolStripSeparator
         Me.mMenViewQuickConnectToolbar = New System.Windows.Forms.ToolStripMenuItem
         Me.mMenViewExtAppsToolbar = New System.Windows.Forms.ToolStripMenuItem
@@ -92,21 +107,28 @@ Partial Class frmMain
         Me.lblQuickConnect = New System.Windows.Forms.ToolStripLabel
         Me.cmbQuickConnect = New System.Windows.Forms.ToolStripComboBox
         Me.tsContainer = New System.Windows.Forms.ToolStripContainer
-        Me.tsQuickConnect = New System.Windows.Forms.ToolStrip
-        Me.btnQuickyPlay = New System.Windows.Forms.ToolStripSplitButton
-        Me.mMenQuickyCon = New System.Windows.Forms.ToolStripMenuItem
         Me.tsExtAppsToolbar = New System.Windows.Forms.ToolStrip
         Me.cMenExtAppsToolbar = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.cMenToolbarShowText = New System.Windows.Forms.ToolStripMenuItem
+        Me.tsQuickConnect = New System.Windows.Forms.ToolStrip
+        Me.btnQuickyPlay = New System.Windows.Forms.ToolStripSplitButton
+        Me.mMenQuickyCon = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStrip1 = New System.Windows.Forms.ToolStrip
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton
+        Me.ToolStripButton2 = New System.Windows.Forms.ToolStripButton
+        Me.ToolStripButton3 = New System.Windows.Forms.ToolStripButton
         Me.tmrShowUpdate = New System.Windows.Forms.Timer(Me.components)
         Me.tmrAutoSave = New System.Windows.Forms.Timer(Me.components)
-        Me.mMenViewResetLayout = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripDropDownButton
+        Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem
         Me.msMain.SuspendLayout()
         Me.tsContainer.ContentPanel.SuspendLayout()
         Me.tsContainer.TopToolStripPanel.SuspendLayout()
         Me.tsContainer.SuspendLayout()
-        Me.tsQuickConnect.SuspendLayout()
         Me.cMenExtAppsToolbar.SuspendLayout()
+        Me.tsQuickConnect.SuspendLayout()
+        Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'pnlDock
@@ -119,51 +141,51 @@ Partial Class frmMain
         Me.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow
         Me.pnlDock.Location = New System.Drawing.Point(0, 0)
         Me.pnlDock.Name = "pnlDock"
-        Me.pnlDock.Size = New System.Drawing.Size(842, 449)
-        DockPanelGradient7.EndColor = System.Drawing.SystemColors.ControlLight
-        DockPanelGradient7.StartColor = System.Drawing.SystemColors.ControlLight
-        AutoHideStripSkin3.DockStripGradient = DockPanelGradient7
-        TabGradient15.EndColor = System.Drawing.SystemColors.Control
-        TabGradient15.StartColor = System.Drawing.SystemColors.Control
-        TabGradient15.TextColor = System.Drawing.SystemColors.ControlDarkDark
-        AutoHideStripSkin3.TabGradient = TabGradient15
-        DockPanelSkin3.AutoHideStripSkin = AutoHideStripSkin3
-        TabGradient16.EndColor = System.Drawing.SystemColors.ControlLightLight
-        TabGradient16.StartColor = System.Drawing.SystemColors.ControlLightLight
-        TabGradient16.TextColor = System.Drawing.SystemColors.ControlText
-        DockPaneStripGradient3.ActiveTabGradient = TabGradient16
-        DockPanelGradient8.EndColor = System.Drawing.SystemColors.Control
-        DockPanelGradient8.StartColor = System.Drawing.SystemColors.Control
-        DockPaneStripGradient3.DockStripGradient = DockPanelGradient8
-        TabGradient17.EndColor = System.Drawing.SystemColors.ControlLight
-        TabGradient17.StartColor = System.Drawing.SystemColors.ControlLight
-        TabGradient17.TextColor = System.Drawing.SystemColors.ControlText
-        DockPaneStripGradient3.InactiveTabGradient = TabGradient17
-        DockPaneStripSkin3.DocumentGradient = DockPaneStripGradient3
-        TabGradient18.EndColor = System.Drawing.SystemColors.ActiveCaption
-        TabGradient18.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical
-        TabGradient18.StartColor = System.Drawing.SystemColors.GradientActiveCaption
-        TabGradient18.TextColor = System.Drawing.SystemColors.ActiveCaptionText
-        DockPaneStripToolWindowGradient3.ActiveCaptionGradient = TabGradient18
-        TabGradient19.EndColor = System.Drawing.SystemColors.Control
-        TabGradient19.StartColor = System.Drawing.SystemColors.Control
-        TabGradient19.TextColor = System.Drawing.SystemColors.ControlText
-        DockPaneStripToolWindowGradient3.ActiveTabGradient = TabGradient19
-        DockPanelGradient9.EndColor = System.Drawing.SystemColors.ControlLight
-        DockPanelGradient9.StartColor = System.Drawing.SystemColors.ControlLight
-        DockPaneStripToolWindowGradient3.DockStripGradient = DockPanelGradient9
-        TabGradient20.EndColor = System.Drawing.SystemColors.GradientInactiveCaption
-        TabGradient20.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical
-        TabGradient20.StartColor = System.Drawing.SystemColors.GradientInactiveCaption
-        TabGradient20.TextColor = System.Drawing.SystemColors.ControlText
-        DockPaneStripToolWindowGradient3.InactiveCaptionGradient = TabGradient20
-        TabGradient21.EndColor = System.Drawing.Color.Transparent
-        TabGradient21.StartColor = System.Drawing.Color.Transparent
-        TabGradient21.TextColor = System.Drawing.SystemColors.ControlDarkDark
-        DockPaneStripToolWindowGradient3.InactiveTabGradient = TabGradient21
-        DockPaneStripSkin3.ToolWindowGradient = DockPaneStripToolWindowGradient3
-        DockPanelSkin3.DockPaneStripSkin = DockPaneStripSkin3
-        Me.pnlDock.Skin = DockPanelSkin3
+        Me.pnlDock.Size = New System.Drawing.Size(842, 474)
+        DockPanelGradient13.EndColor = System.Drawing.SystemColors.ControlLight
+        DockPanelGradient13.StartColor = System.Drawing.SystemColors.ControlLight
+        AutoHideStripSkin5.DockStripGradient = DockPanelGradient13
+        TabGradient29.EndColor = System.Drawing.SystemColors.Control
+        TabGradient29.StartColor = System.Drawing.SystemColors.Control
+        TabGradient29.TextColor = System.Drawing.SystemColors.ControlDarkDark
+        AutoHideStripSkin5.TabGradient = TabGradient29
+        DockPanelSkin5.AutoHideStripSkin = AutoHideStripSkin5
+        TabGradient30.EndColor = System.Drawing.SystemColors.ControlLightLight
+        TabGradient30.StartColor = System.Drawing.SystemColors.ControlLightLight
+        TabGradient30.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripGradient5.ActiveTabGradient = TabGradient30
+        DockPanelGradient14.EndColor = System.Drawing.SystemColors.Control
+        DockPanelGradient14.StartColor = System.Drawing.SystemColors.Control
+        DockPaneStripGradient5.DockStripGradient = DockPanelGradient14
+        TabGradient31.EndColor = System.Drawing.SystemColors.ControlLight
+        TabGradient31.StartColor = System.Drawing.SystemColors.ControlLight
+        TabGradient31.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripGradient5.InactiveTabGradient = TabGradient31
+        DockPaneStripSkin5.DocumentGradient = DockPaneStripGradient5
+        TabGradient32.EndColor = System.Drawing.SystemColors.ActiveCaption
+        TabGradient32.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical
+        TabGradient32.StartColor = System.Drawing.SystemColors.GradientActiveCaption
+        TabGradient32.TextColor = System.Drawing.SystemColors.ActiveCaptionText
+        DockPaneStripToolWindowGradient5.ActiveCaptionGradient = TabGradient32
+        TabGradient33.EndColor = System.Drawing.SystemColors.Control
+        TabGradient33.StartColor = System.Drawing.SystemColors.Control
+        TabGradient33.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripToolWindowGradient5.ActiveTabGradient = TabGradient33
+        DockPanelGradient15.EndColor = System.Drawing.SystemColors.ControlLight
+        DockPanelGradient15.StartColor = System.Drawing.SystemColors.ControlLight
+        DockPaneStripToolWindowGradient5.DockStripGradient = DockPanelGradient15
+        TabGradient34.EndColor = System.Drawing.SystemColors.GradientInactiveCaption
+        TabGradient34.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical
+        TabGradient34.StartColor = System.Drawing.SystemColors.GradientInactiveCaption
+        TabGradient34.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripToolWindowGradient5.InactiveCaptionGradient = TabGradient34
+        TabGradient35.EndColor = System.Drawing.Color.Transparent
+        TabGradient35.StartColor = System.Drawing.Color.Transparent
+        TabGradient35.TextColor = System.Drawing.SystemColors.ControlDarkDark
+        DockPaneStripToolWindowGradient5.InactiveTabGradient = TabGradient35
+        DockPaneStripSkin5.ToolWindowGradient = DockPaneStripToolWindowGradient5
+        DockPanelSkin5.DockPaneStripSkin = DockPaneStripSkin5
+        Me.pnlDock.Skin = DockPanelSkin5
         Me.pnlDock.TabIndex = 13
         '
         'msMain
@@ -175,46 +197,62 @@ Partial Class frmMain
         Me.msMain.Location = New System.Drawing.Point(3, 0)
         Me.msMain.Name = "msMain"
         Me.msMain.Padding = New System.Windows.Forms.Padding(2, 2, 0, 2)
-        Me.msMain.Size = New System.Drawing.Size(274, 24)
+        Me.msMain.Size = New System.Drawing.Size(182, 24)
         Me.msMain.Stretch = False
         Me.msMain.TabIndex = 16
         Me.msMain.Text = "Main Toolbar"
         '
         'mMenFile
         '
-        Me.mMenFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenFileNew, Me.mMenFileLoad, Me.mMenFileSep1, Me.mMenFileSave, Me.mMenFileSaveAs, Me.mMenFileSep2, Me.mMenFileExit})
+        Me.mMenFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenFileNewConnection, Me.mMenFileNewFolder, Me.mMenFileSep1, Me.mMenFileNew, Me.mMenFileLoad, Me.mMenFileSave, Me.mMenFileSaveAs, Me.mMenFileSep2, Me.mMenFileImportExport, Me.mMenFileSep3, Me.mMenFileDelete, Me.mMenFileRename, Me.mMenFileDuplicate, Me.mMenFileSep4, Me.mMenFileExit})
         Me.mMenFile.Name = "mMenFile"
         Me.mMenFile.Size = New System.Drawing.Size(37, 20)
         Me.mMenFile.Text = "&File"
+        '
+        'mMenFileNewConnection
+        '
+        Me.mMenFileNewConnection.Image = Global.mRemote.My.Resources.Resources.Connection_Add
+        Me.mMenFileNewConnection.Name = "mMenFileNewConnection"
+        Me.mMenFileNewConnection.ShortcutKeys = CType((System.Windows.Forms.Keys.Shift Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
+        Me.mMenFileNewConnection.Size = New System.Drawing.Size(281, 22)
+        Me.mMenFileNewConnection.Text = "New Connection"
+        '
+        'mMenFileNewFolder
+        '
+        Me.mMenFileNewFolder.Image = Global.mRemote.My.Resources.Resources.Folder_Add
+        Me.mMenFileNewFolder.Name = "mMenFileNewFolder"
+        Me.mMenFileNewFolder.ShortcutKeys = System.Windows.Forms.Keys.F7
+        Me.mMenFileNewFolder.Size = New System.Drawing.Size(281, 22)
+        Me.mMenFileNewFolder.Text = "New Folder"
+        '
+        'mMenFileSep1
+        '
+        Me.mMenFileSep1.Name = "mMenFileSep1"
+        Me.mMenFileSep1.Size = New System.Drawing.Size(278, 6)
         '
         'mMenFileNew
         '
         Me.mMenFileNew.Image = Global.mRemote.My.Resources.Resources.Connections_New
         Me.mMenFileNew.Name = "mMenFileNew"
         Me.mMenFileNew.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.mMenFileNew.Size = New System.Drawing.Size(256, 22)
-        Me.mMenFileNew.Text = "New Connections"
+        Me.mMenFileNew.Size = New System.Drawing.Size(281, 22)
+        Me.mMenFileNew.Text = "New Connection File"
         '
         'mMenFileLoad
         '
         Me.mMenFileLoad.Image = Global.mRemote.My.Resources.Resources.Connections_Load
         Me.mMenFileLoad.Name = "mMenFileLoad"
         Me.mMenFileLoad.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.mMenFileLoad.Size = New System.Drawing.Size(256, 22)
-        Me.mMenFileLoad.Text = "Open Connections"
-        '
-        'mMenFileSep1
-        '
-        Me.mMenFileSep1.Name = "mMenFileSep1"
-        Me.mMenFileSep1.Size = New System.Drawing.Size(253, 6)
+        Me.mMenFileLoad.Size = New System.Drawing.Size(281, 22)
+        Me.mMenFileLoad.Text = "Open Connection File..."
         '
         'mMenFileSave
         '
         Me.mMenFileSave.Image = Global.mRemote.My.Resources.Resources.Connections_Save
         Me.mMenFileSave.Name = "mMenFileSave"
         Me.mMenFileSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mMenFileSave.Size = New System.Drawing.Size(256, 22)
-        Me.mMenFileSave.Text = "Save Connections"
+        Me.mMenFileSave.Size = New System.Drawing.Size(281, 22)
+        Me.mMenFileSave.Text = "Save Connection File"
         '
         'mMenFileSaveAs
         '
@@ -222,20 +260,93 @@ Partial Class frmMain
         Me.mMenFileSaveAs.Name = "mMenFileSaveAs"
         Me.mMenFileSaveAs.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
                     Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.mMenFileSaveAs.Size = New System.Drawing.Size(256, 22)
-        Me.mMenFileSaveAs.Text = "Save Connections As"
+        Me.mMenFileSaveAs.Size = New System.Drawing.Size(281, 22)
+        Me.mMenFileSaveAs.Text = "Save Connection File As..."
         '
         'mMenFileSep2
         '
         Me.mMenFileSep2.Name = "mMenFileSep2"
-        Me.mMenFileSep2.Size = New System.Drawing.Size(253, 6)
+        Me.mMenFileSep2.Size = New System.Drawing.Size(278, 6)
+        '
+        'mMenFileImportExport
+        '
+        Me.mMenFileImportExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportFromXMLFileToolStripMenuItem, Me.ImportFromRDPFileToolStripMenuItem, Me.ImportFromActiveDirectoryToolStripMenuItem, Me.ImportFromPortScanToolStripMenuItem, Me.ToolStripSeparator6, Me.ExportToXMLFileToolStripMenuItem})
+        Me.mMenFileImportExport.Name = "mMenFileImportExport"
+        Me.mMenFileImportExport.Size = New System.Drawing.Size(281, 22)
+        Me.mMenFileImportExport.Text = "Import/Export Folder"
+        '
+        'ImportFromXMLFileToolStripMenuItem
+        '
+        Me.ImportFromXMLFileToolStripMenuItem.Name = "ImportFromXMLFileToolStripMenuItem"
+        Me.ImportFromXMLFileToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
+        Me.ImportFromXMLFileToolStripMenuItem.Text = "Import from XML File..."
+        '
+        'ImportFromRDPFileToolStripMenuItem
+        '
+        Me.ImportFromRDPFileToolStripMenuItem.Name = "ImportFromRDPFileToolStripMenuItem"
+        Me.ImportFromRDPFileToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
+        Me.ImportFromRDPFileToolStripMenuItem.Text = "Import from RDP File..."
+        '
+        'ImportFromActiveDirectoryToolStripMenuItem
+        '
+        Me.ImportFromActiveDirectoryToolStripMenuItem.Name = "ImportFromActiveDirectoryToolStripMenuItem"
+        Me.ImportFromActiveDirectoryToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
+        Me.ImportFromActiveDirectoryToolStripMenuItem.Text = "Import from Active Directory..."
+        '
+        'ImportFromPortScanToolStripMenuItem
+        '
+        Me.ImportFromPortScanToolStripMenuItem.Name = "ImportFromPortScanToolStripMenuItem"
+        Me.ImportFromPortScanToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
+        Me.ImportFromPortScanToolStripMenuItem.Text = "Import from Port Scan..."
+        '
+        'ToolStripSeparator6
+        '
+        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(232, 6)
+        '
+        'ExportToXMLFileToolStripMenuItem
+        '
+        Me.ExportToXMLFileToolStripMenuItem.Name = "ExportToXMLFileToolStripMenuItem"
+        Me.ExportToXMLFileToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
+        Me.ExportToXMLFileToolStripMenuItem.Text = "Export to XML File..."
+        '
+        'mMenFileSep3
+        '
+        Me.mMenFileSep3.Name = "mMenFileSep3"
+        Me.mMenFileSep3.Size = New System.Drawing.Size(278, 6)
+        '
+        'mMenFileDelete
+        '
+        Me.mMenFileDelete.Image = Global.mRemote.My.Resources.Resources.Delete
+        Me.mMenFileDelete.Name = "mMenFileDelete"
+        Me.mMenFileDelete.Size = New System.Drawing.Size(281, 22)
+        Me.mMenFileDelete.Text = "Delete..."
+        '
+        'mMenFileRename
+        '
+        Me.mMenFileRename.Image = Global.mRemote.My.Resources.Resources.Rename
+        Me.mMenFileRename.Name = "mMenFileRename"
+        Me.mMenFileRename.Size = New System.Drawing.Size(281, 22)
+        Me.mMenFileRename.Text = "Rename"
+        '
+        'mMenFileDuplicate
+        '
+        Me.mMenFileDuplicate.Image = Global.mRemote.My.Resources.Resources.Connection_Duplicate
+        Me.mMenFileDuplicate.Name = "mMenFileDuplicate"
+        Me.mMenFileDuplicate.Size = New System.Drawing.Size(281, 22)
+        Me.mMenFileDuplicate.Text = "Duplicate"
+        '
+        'mMenFileSep4
+        '
+        Me.mMenFileSep4.Name = "mMenFileSep4"
+        Me.mMenFileSep4.Size = New System.Drawing.Size(278, 6)
         '
         'mMenFileExit
         '
         Me.mMenFileExit.Image = Global.mRemote.My.Resources.Resources.Quit
         Me.mMenFileExit.Name = "mMenFileExit"
         Me.mMenFileExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.mMenFileExit.Size = New System.Drawing.Size(256, 22)
+        Me.mMenFileExit.Size = New System.Drawing.Size(281, 22)
         Me.mMenFileExit.Text = "Exit"
         '
         'mMenView
@@ -344,6 +455,12 @@ Partial Class frmMain
         Me.mMenViewJumpToErrorsInfos.Size = New System.Drawing.Size(260, 22)
         Me.mMenViewJumpToErrorsInfos.Text = "Errors && Infos"
         '
+        'mMenViewResetLayout
+        '
+        Me.mMenViewResetLayout.Name = "mMenViewResetLayout"
+        Me.mMenViewResetLayout.Size = New System.Drawing.Size(228, 22)
+        Me.mMenViewResetLayout.Text = "Reset Layout"
+        '
         'mMenViewSep2
         '
         Me.mMenViewSep2.Name = "mMenViewSep2"
@@ -396,6 +513,7 @@ Partial Class frmMain
         Me.mMenToolsUVNCSC.Name = "mMenToolsUVNCSC"
         Me.mMenToolsUVNCSC.Size = New System.Drawing.Size(184, 22)
         Me.mMenToolsUVNCSC.Text = "UltraVNC SingleClick"
+        Me.mMenToolsUVNCSC.Visible = False
         '
         'mMenToolsExternalApps
         '
@@ -525,7 +643,7 @@ Partial Class frmMain
         Me.cmbQuickConnect.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend
         Me.cmbQuickConnect.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems
         Me.cmbQuickConnect.Name = "cmbQuickConnect"
-        Me.cmbQuickConnect.Size = New System.Drawing.Size(120, 25)
+        Me.cmbQuickConnect.Size = New System.Drawing.Size(200, 25)
         '
         'tsContainer
         '
@@ -538,7 +656,7 @@ Partial Class frmMain
         '
         Me.tsContainer.ContentPanel.Controls.Add(Me.pnlDock)
         Me.tsContainer.ContentPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-        Me.tsContainer.ContentPanel.Size = New System.Drawing.Size(842, 449)
+        Me.tsContainer.ContentPanel.Size = New System.Drawing.Size(842, 474)
         Me.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill
         '
         'tsContainer.LeftToolStripPanel
@@ -557,9 +675,33 @@ Partial Class frmMain
         'tsContainer.TopToolStripPanel
         '
         Me.tsContainer.TopToolStripPanel.Controls.Add(Me.msMain)
-        Me.tsContainer.TopToolStripPanel.Controls.Add(Me.tsQuickConnect)
         Me.tsContainer.TopToolStripPanel.Controls.Add(Me.tsExtAppsToolbar)
+        Me.tsContainer.TopToolStripPanel.Controls.Add(Me.tsQuickConnect)
+        Me.tsContainer.TopToolStripPanel.Controls.Add(Me.ToolStrip1)
         Me.tsContainer.TopToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+        '
+        'tsExtAppsToolbar
+        '
+        Me.tsExtAppsToolbar.ContextMenuStrip = Me.cMenExtAppsToolbar
+        Me.tsExtAppsToolbar.Dock = System.Windows.Forms.DockStyle.None
+        Me.tsExtAppsToolbar.Location = New System.Drawing.Point(334, 24)
+        Me.tsExtAppsToolbar.Name = "tsExtAppsToolbar"
+        Me.tsExtAppsToolbar.Size = New System.Drawing.Size(111, 25)
+        Me.tsExtAppsToolbar.TabIndex = 17
+        '
+        'cMenExtAppsToolbar
+        '
+        Me.cMenExtAppsToolbar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenToolbarShowText})
+        Me.cMenExtAppsToolbar.Name = "cMenToolbar"
+        Me.cMenExtAppsToolbar.Size = New System.Drawing.Size(129, 26)
+        '
+        'cMenToolbarShowText
+        '
+        Me.cMenToolbarShowText.Checked = True
+        Me.cMenToolbarShowText.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.cMenToolbarShowText.Name = "cMenToolbarShowText"
+        Me.cMenToolbarShowText.Size = New System.Drawing.Size(128, 22)
+        Me.cMenToolbarShowText.Text = "Show Text"
         '
         'tsQuickConnect
         '
@@ -567,7 +709,7 @@ Partial Class frmMain
         Me.tsQuickConnect.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.lblQuickConnect, Me.cmbQuickConnect, Me.btnQuickyPlay, Me.mMenQuickyCon})
         Me.tsQuickConnect.Location = New System.Drawing.Point(3, 24)
         Me.tsQuickConnect.Name = "tsQuickConnect"
-        Me.tsQuickConnect.Size = New System.Drawing.Size(251, 25)
+        Me.tsQuickConnect.Size = New System.Drawing.Size(331, 25)
         Me.tsQuickConnect.TabIndex = 18
         '
         'btnQuickyPlay
@@ -590,28 +732,38 @@ Partial Class frmMain
         Me.mMenQuickyCon.Size = New System.Drawing.Size(30, 22)
         Me.mMenQuickyCon.Text = "Connections"
         '
-        'tsExtAppsToolbar
+        'ToolStrip1
         '
-        Me.tsExtAppsToolbar.ContextMenuStrip = Me.cMenExtAppsToolbar
-        Me.tsExtAppsToolbar.Dock = System.Windows.Forms.DockStyle.None
-        Me.tsExtAppsToolbar.Location = New System.Drawing.Point(39, 49)
-        Me.tsExtAppsToolbar.Name = "tsExtAppsToolbar"
-        Me.tsExtAppsToolbar.Size = New System.Drawing.Size(111, 25)
-        Me.tsExtAppsToolbar.TabIndex = 17
+        Me.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripSplitButton1})
+        Me.ToolStrip1.Location = New System.Drawing.Point(445, 24)
+        Me.ToolStrip1.Name = "ToolStrip1"
+        Me.ToolStrip1.Size = New System.Drawing.Size(264, 25)
+        Me.ToolStrip1.TabIndex = 19
         '
-        'cMenExtAppsToolbar
+        'ToolStripButton1
         '
-        Me.cMenExtAppsToolbar.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenToolbarShowText})
-        Me.cMenExtAppsToolbar.Name = "cMenToolbar"
-        Me.cMenExtAppsToolbar.Size = New System.Drawing.Size(129, 26)
+        Me.ToolStripButton1.Image = Global.mRemote.My.Resources.Resources.Play
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Size = New System.Drawing.Size(72, 22)
+        Me.ToolStripButton1.Text = "Connect"
         '
-        'cMenToolbarShowText
+        'ToolStripButton2
         '
-        Me.cMenToolbarShowText.Checked = True
-        Me.cMenToolbarShowText.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.cMenToolbarShowText.Name = "cMenToolbarShowText"
-        Me.cMenToolbarShowText.Size = New System.Drawing.Size(128, 22)
-        Me.cMenToolbarShowText.Text = "Show Text"
+        Me.ToolStripButton2.Image = Global.mRemote.My.Resources.Resources.Screenshot
+        Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton2.Name = "ToolStripButton2"
+        Me.ToolStripButton2.Size = New System.Drawing.Size(85, 22)
+        Me.ToolStripButton2.Text = "Screenshot"
+        '
+        'ToolStripButton3
+        '
+        Me.ToolStripButton3.Image = Global.mRemote.My.Resources.Resources.Refresh
+        Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripButton3.Name = "ToolStripButton3"
+        Me.ToolStripButton3.Size = New System.Drawing.Size(66, 22)
+        Me.ToolStripButton3.Text = "Refresh"
         '
         'tmrShowUpdate
         '
@@ -622,11 +774,27 @@ Partial Class frmMain
         '
         Me.tmrAutoSave.Interval = 10000
         '
-        'mMenViewResetLayout
+        'ToolStripSplitButton1
         '
-        Me.mMenViewResetLayout.Name = "mMenViewResetLayout"
-        Me.mMenViewResetLayout.Size = New System.Drawing.Size(228, 22)
-        Me.mMenViewResetLayout.Text = "Reset Layout"
+        Me.ToolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripSplitButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2})
+        Me.ToolStripSplitButton1.Image = Global.mRemote.My.Resources.Resources.Keyboard
+        Me.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.ToolStripSplitButton1.Name = "ToolStripSplitButton1"
+        Me.ToolStripSplitButton1.Size = New System.Drawing.Size(29, 22)
+        Me.ToolStripSplitButton1.Text = "Special Keys"
+        '
+        'ToolStripMenuItem1
+        '
+        Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(152, 22)
+        Me.ToolStripMenuItem1.Text = "Ctrl-Alt-Del"
+        '
+        'ToolStripMenuItem2
+        '
+        Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
+        Me.ToolStripMenuItem2.Size = New System.Drawing.Size(152, 22)
+        Me.ToolStripMenuItem2.Text = "Ctrl-Esc"
         '
         'frmMain
         '
@@ -645,9 +813,11 @@ Partial Class frmMain
         Me.tsContainer.TopToolStripPanel.PerformLayout()
         Me.tsContainer.ResumeLayout(False)
         Me.tsContainer.PerformLayout()
+        Me.cMenExtAppsToolbar.ResumeLayout(False)
         Me.tsQuickConnect.ResumeLayout(False)
         Me.tsQuickConnect.PerformLayout()
-        Me.cMenExtAppsToolbar.ResumeLayout(False)
+        Me.ToolStrip1.ResumeLayout(False)
+        Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -660,10 +830,9 @@ Partial Class frmMain
     Friend WithEvents mMenInfo As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenFileNew As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenFileLoad As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mMenFileSep1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mMenFileSave As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenFileSaveAs As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mMenFileSep2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mMenFileSep1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mMenFileExit As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenToolsSep1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mMenToolsOptions As System.Windows.Forms.ToolStripMenuItem
@@ -713,5 +882,27 @@ Partial Class frmMain
     Friend WithEvents mMenInfoForum As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenToolsUpdate As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenViewResetLayout As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileDuplicate As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileSep2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mMenFileNewConnection As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileNewFolder As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileImportExport As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ImportFromXMLFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ImportFromRDPFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ImportFromActiveDirectoryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ImportFromPortScanToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ExportToXMLFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileSep3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mMenFileDelete As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileRename As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileSep4 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ToolStrip1 As System.Windows.Forms.ToolStrip
+    Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripButton2 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripButton3 As System.Windows.Forms.ToolStripButton
+    Friend WithEvents ToolStripSplitButton1 As System.Windows.Forms.ToolStripDropDownButton
+    Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
 
 End Class

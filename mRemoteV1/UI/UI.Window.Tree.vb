@@ -1,6 +1,5 @@
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemote.App.Runtime
-Imports System.IO
 
 Namespace UI
     Namespace Window
@@ -127,28 +126,26 @@ Namespace UI
                 Me.cMenTree.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeAddConnection, Me.cMenTreeAddFolder, Me.cMenTreeSep1, Me.cMenTreeConnect, Me.cMenTreeConnectWithOptions, Me.cMenTreeDisconnect, Me.cMenTreeSep2, Me.cMenTreeTools, Me.cMenTreeSep3, Me.cMenTreeDuplicate, Me.cMenTreeRename, Me.cMenTreeDelete, Me.cMenTreeSep4, Me.cMenTreeMoveUp, Me.cMenTreeMoveDown})
                 Me.cMenTree.Name = "cMenTree"
                 Me.cMenTree.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-                Me.cMenTree.Size = New System.Drawing.Size(197, 292)
+                Me.cMenTree.Size = New System.Drawing.Size(187, 292)
                 '
                 'cMenTreeAddConnection
                 '
                 Me.cMenTreeAddConnection.Image = Global.mRemote.My.Resources.Resources.Connection_Add
                 Me.cMenTreeAddConnection.Name = "cMenTreeAddConnection"
-                Me.cMenTreeAddConnection.ShortcutKeys = CType((System.Windows.Forms.Keys.Shift Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-                Me.cMenTreeAddConnection.Size = New System.Drawing.Size(196, 22)
-                Me.cMenTreeAddConnection.Text = "Add Connection"
+                Me.cMenTreeAddConnection.Size = New System.Drawing.Size(186, 22)
+                Me.cMenTreeAddConnection.Text = "New Connection"
                 '
                 'cMenTreeAddFolder
                 '
                 Me.cMenTreeAddFolder.Image = Global.mRemote.My.Resources.Resources.Folder_Add
                 Me.cMenTreeAddFolder.Name = "cMenTreeAddFolder"
-                Me.cMenTreeAddFolder.ShortcutKeys = System.Windows.Forms.Keys.F7
-                Me.cMenTreeAddFolder.Size = New System.Drawing.Size(196, 22)
-                Me.cMenTreeAddFolder.Text = "Add Folder"
+                Me.cMenTreeAddFolder.Size = New System.Drawing.Size(186, 22)
+                Me.cMenTreeAddFolder.Text = "New Folder"
                 '
                 'cMenTreeSep1
                 '
                 Me.cMenTreeSep1.Name = "cMenTreeSep1"
-                Me.cMenTreeSep1.Size = New System.Drawing.Size(193, 6)
+                Me.cMenTreeSep1.Size = New System.Drawing.Size(183, 6)
                 '
                 'cMenTreeConnect
                 '
@@ -156,14 +153,14 @@ Namespace UI
                 Me.cMenTreeConnect.Name = "cMenTreeConnect"
                 Me.cMenTreeConnect.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
                             Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-                Me.cMenTreeConnect.Size = New System.Drawing.Size(196, 22)
+                Me.cMenTreeConnect.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeConnect.Text = "Connect"
                 '
                 'cMenTreeConnectWithOptions
                 '
                 Me.cMenTreeConnectWithOptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeConnectWithOptionsConnectToConsoleSession, Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession, Me.cMenTreeConnectWithOptionsConnectInFullscreen, Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting})
                 Me.cMenTreeConnectWithOptions.Name = "cMenTreeConnectWithOptions"
-                Me.cMenTreeConnectWithOptions.Size = New System.Drawing.Size(196, 22)
+                Me.cMenTreeConnectWithOptions.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeConnectWithOptions.Text = "Connect (with options)"
                 '
                 'cMenTreeConnectWithOptionsConnectToConsoleSession
@@ -197,20 +194,20 @@ Namespace UI
                 '
                 Me.cMenTreeDisconnect.Image = Global.mRemote.My.Resources.Resources.Pause
                 Me.cMenTreeDisconnect.Name = "cMenTreeDisconnect"
-                Me.cMenTreeDisconnect.Size = New System.Drawing.Size(196, 22)
+                Me.cMenTreeDisconnect.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeDisconnect.Text = "Disconnect"
                 '
                 'cMenTreeSep2
                 '
                 Me.cMenTreeSep2.Name = "cMenTreeSep2"
-                Me.cMenTreeSep2.Size = New System.Drawing.Size(193, 6)
+                Me.cMenTreeSep2.Size = New System.Drawing.Size(183, 6)
                 '
                 'cMenTreeTools
                 '
                 Me.cMenTreeTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeToolsTransferFile, Me.cMenTreeToolsImportExport, Me.cMenTreeToolsSort, Me.cMenTreeToolsExternalApps})
                 Me.cMenTreeTools.Image = Global.mRemote.My.Resources.Resources.Tools
                 Me.cMenTreeTools.Name = "cMenTreeTools"
-                Me.cMenTreeTools.Size = New System.Drawing.Size(196, 22)
+                Me.cMenTreeTools.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeTools.Text = "Tools"
                 '
                 'cMenTreeToolsTransferFile
@@ -298,14 +295,14 @@ Namespace UI
                 'cMenTreeSep3
                 '
                 Me.cMenTreeSep3.Name = "cMenTreeSep3"
-                Me.cMenTreeSep3.Size = New System.Drawing.Size(193, 6)
+                Me.cMenTreeSep3.Size = New System.Drawing.Size(183, 6)
                 '
                 'cMenTreeDuplicate
                 '
                 Me.cMenTreeDuplicate.Image = Global.mRemote.My.Resources.Resources.Connection_Duplicate
                 Me.cMenTreeDuplicate.Name = "cMenTreeDuplicate"
                 Me.cMenTreeDuplicate.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
-                Me.cMenTreeDuplicate.Size = New System.Drawing.Size(196, 22)
+                Me.cMenTreeDuplicate.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeDuplicate.Text = "Duplicate"
                 '
                 'cMenTreeRename
@@ -313,7 +310,7 @@ Namespace UI
                 Me.cMenTreeRename.Image = Global.mRemote.My.Resources.Resources.Rename
                 Me.cMenTreeRename.Name = "cMenTreeRename"
                 Me.cMenTreeRename.ShortcutKeys = System.Windows.Forms.Keys.F2
-                Me.cMenTreeRename.Size = New System.Drawing.Size(196, 22)
+                Me.cMenTreeRename.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeRename.Text = "Rename"
                 '
                 'cMenTreeDelete
@@ -321,20 +318,20 @@ Namespace UI
                 Me.cMenTreeDelete.Image = Global.mRemote.My.Resources.Resources.Delete
                 Me.cMenTreeDelete.Name = "cMenTreeDelete"
                 Me.cMenTreeDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete
-                Me.cMenTreeDelete.Size = New System.Drawing.Size(196, 22)
+                Me.cMenTreeDelete.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeDelete.Text = "Delete"
                 '
                 'cMenTreeSep4
                 '
                 Me.cMenTreeSep4.Name = "cMenTreeSep4"
-                Me.cMenTreeSep4.Size = New System.Drawing.Size(193, 6)
+                Me.cMenTreeSep4.Size = New System.Drawing.Size(183, 6)
                 '
                 'cMenTreeMoveUp
                 '
                 Me.cMenTreeMoveUp.Image = Global.mRemote.My.Resources.Resources.Arrow_Up
                 Me.cMenTreeMoveUp.Name = "cMenTreeMoveUp"
                 Me.cMenTreeMoveUp.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Up), System.Windows.Forms.Keys)
-                Me.cMenTreeMoveUp.Size = New System.Drawing.Size(196, 22)
+                Me.cMenTreeMoveUp.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeMoveUp.Text = "Move up"
                 '
                 'cMenTreeMoveDown
@@ -342,7 +339,7 @@ Namespace UI
                 Me.cMenTreeMoveDown.Image = Global.mRemote.My.Resources.Resources.Arrow_Down
                 Me.cMenTreeMoveDown.Name = "cMenTreeMoveDown"
                 Me.cMenTreeMoveDown.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Down), System.Windows.Forms.Keys)
-                Me.cMenTreeMoveDown.Size = New System.Drawing.Size(196, 22)
+                Me.cMenTreeMoveDown.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeMoveDown.Text = "Move down"
                 '
                 'imgListTree
@@ -425,6 +422,7 @@ Namespace UI
                 Me.ClientSize = New System.Drawing.Size(192, 453)
                 Me.Controls.Add(Me.msMain)
                 Me.Controls.Add(Me.pnlConnections)
+                Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.HideOnClose = True
                 Me.Icon = Global.mRemote.My.Resources.Resources.Root_Icon
                 Me.Name = "Tree"
@@ -656,9 +654,6 @@ Namespace UI
                         Case mRemote.Tree.Node.Type.Connection
                             Dim conI As mRemote.Connection.Info = tNode.Tag
 
-                            Me.cMenTreeAddConnection.Enabled = False
-                            Me.cMenTreeAddFolder.Enabled = False
-
                             Me.cMenTreeConnect.Enabled = True
                             Me.cMenTreeConnectWithOptions.Enabled = True
 
@@ -695,13 +690,11 @@ Namespace UI
                             Me.cMenTreeToolsExternalApps.Enabled = True
 
                             Me.cMenTreeDuplicate.Enabled = True
+                            Me.cMenTreeDelete.Enabled = True
 
                             Me.cMenTreeMoveUp.Enabled = True
                             Me.cMenTreeMoveDown.Enabled = True
                         Case mRemote.Tree.Node.Type.Container
-                            Me.cMenTreeAddConnection.Enabled = True
-                            Me.cMenTreeAddFolder.Enabled = True
-
                             Me.cMenTreeConnect.Enabled = True
                             Me.cMenTreeConnectWithOptions.Enabled = True
                             Me.cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
@@ -731,13 +724,11 @@ Namespace UI
                             Me.cMenTreeToolsExternalApps.Enabled = False
 
                             Me.cMenTreeDuplicate.Enabled = True
+                            Me.cMenTreeDelete.Enabled = True
 
                             Me.cMenTreeMoveUp.Enabled = True
                             Me.cMenTreeMoveDown.Enabled = True
                         Case mRemote.Tree.Node.Type.Root
-                            Me.cMenTreeAddConnection.Enabled = True
-                            Me.cMenTreeAddFolder.Enabled = True
-
                             Me.cMenTreeConnect.Enabled = False
                             Me.cMenTreeConnectWithOptions.Enabled = False
                             Me.cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
@@ -757,6 +748,7 @@ Namespace UI
                             Me.cMenTreeToolsExternalApps.Enabled = False
 
                             Me.cMenTreeDuplicate.Enabled = False
+                            Me.cMenTreeDelete.Enabled = False
 
                             Me.cMenTreeMoveUp.Enabled = False
                             Me.cMenTreeMoveDown.Enabled = False
@@ -1038,7 +1030,12 @@ Namespace UI
                         nNode.Tag = nConI
                         cL.Add(nConI)
 
-                        Me.tvConnections.SelectedNode.Nodes.Add(nNode)
+                        If mRemote.Tree.Node.GetNodeType(Me.tvConnections.SelectedNode) = mRemote.Tree.Node.Type.Connection Then
+                            Me.tvConnections.SelectedNode.Parent.Nodes.Add(nNode)
+                        Else
+                            Me.tvConnections.SelectedNode.Nodes.Add(nNode)
+                        End If
+
                         Me.tvConnections.SelectedNode = nNode
                         Me.tvConnections.SelectedNode.BeginEdit()
                     End If
@@ -1069,7 +1066,12 @@ Namespace UI
                         nNode.Tag = nContI
                         ctL.Add(nContI)
 
-                        Me.tvConnections.SelectedNode.Nodes.Add(nNode)
+                        If mRemote.Tree.Node.GetNodeType(Me.tvConnections.SelectedNode) = mRemote.Tree.Node.Type.Connection Then
+                            Me.tvConnections.SelectedNode.Parent.Nodes.Add(nNode)
+                        Else
+                            Me.tvConnections.SelectedNode.Nodes.Add(nNode)
+                        End If
+
                         Me.tvConnections.SelectedNode = nNode
                         Me.tvConnections.SelectedNode.BeginEdit()
                     End If

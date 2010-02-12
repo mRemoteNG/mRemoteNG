@@ -219,6 +219,53 @@ Public Class frmMain
 
 #Region "Menu"
 #Region "File"
+    Private Sub mMenFile_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFile.DropDownOpening
+        Select Case Tree.Node.GetNodeType(mRemote.Tree.Node.SelectedNode)
+            Case Tree.Node.Type.Root
+                mMenFileImportExport.Enabled = True
+                mMenFileDelete.Enabled = False
+                mMenFileRename.Enabled = True
+                mMenFileDuplicate.Enabled = False
+                mMenFileDelete.Text = My.Resources.strMenuFileDelete
+                mMenFileRename.Text = My.Resources.strMenuFileRenameFolder
+                mMenFileDuplicate.Text = My.Resources.strMenuFileDuplicate
+            Case Tree.Node.Type.Container
+                mMenFileImportExport.Enabled = True
+                mMenFileDelete.Enabled = True
+                mMenFileRename.Enabled = True
+                mMenFileDuplicate.Enabled = True
+                mMenFileDelete.Text = My.Resources.strMenuFileDeleteFolder
+                mMenFileRename.Text = My.Resources.strMenuFileRenameFolder
+                mMenFileDuplicate.Text = My.Resources.strMenuFileDuplicateFolder
+            Case Tree.Node.Type.Connection
+                mMenFileImportExport.Enabled = False
+                mMenFileDelete.Enabled = True
+                mMenFileRename.Enabled = True
+                mMenFileDuplicate.Enabled = True
+                mMenFileDelete.Text = My.Resources.strMenuFileDeleteConnection
+                mMenFileRename.Text = My.Resources.strMenuFileRenameConnection
+                mMenFileDuplicate.Text = My.Resources.strMenuFileDuplicateConnection
+            Case Else
+                mMenFileImportExport.Enabled = False
+                mMenFileDelete.Enabled = False
+                mMenFileRename.Enabled = False
+                mMenFileDuplicate.Enabled = False
+                mMenFileDelete.Text = My.Resources.strMenuFileDelete
+                mMenFileRename.Text = My.Resources.strMenuFileRename
+                mMenFileDuplicate.Text = My.Resources.strMenuFileDuplicate
+        End Select
+    End Sub
+
+    Private Sub mMenFileNewConnection_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileNewConnection.Click
+        App.Runtime.Windows.treeForm.AddConnection()
+        SaveConnectionsBG()
+    End Sub
+
+    Private Sub mMenFileNewFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileNewFolder.Click
+        App.Runtime.Windows.treeForm.AddFolder()
+        SaveConnectionsBG()
+    End Sub
+
     Private Sub mMenFileNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileNew.Click
         NewConnections()
     End Sub
@@ -247,6 +294,21 @@ Public Class frmMain
     Private Sub mMenFileExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileExit.Click
         App.Runtime.Shutdown.Quit()
     End Sub
+
+    Private Sub mMenFileDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileDelete.Click
+        Tree.Node.DeleteSelectedNode()
+        SaveConnectionsBG()
+    End Sub
+
+    Private Sub mMenFileRename_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileRename.Click
+        Tree.Node.StartRenameSelectedNode()
+        SaveConnectionsBG()
+    End Sub
+
+    Private Sub mMenFileDuplicate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileDuplicate.Click
+        Tree.Node.CloneNode(Tree.Node.SelectedNode)
+        SaveConnectionsBG()
+    End Sub
 #End Region
 
 #Region "View"
@@ -268,6 +330,12 @@ Public Class frmMain
 
             Me.mMenViewConnectionPanels.DropDownItems.Add(tItem)
         Next
+
+        If Me.mMenViewConnectionPanels.DropDownItems.Count > 0 Then
+            Me.mMenViewConnectionPanels.Enabled = True
+        Else
+            Me.mMenViewConnectionPanels.Enabled = False
+        End If
     End Sub
 
     Private Sub ConnectionPanelMenuItem_Click(ByVal sender As Object, ByVal e As System.EventArgs)

@@ -772,6 +772,33 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Are you sure you want to delete the connection, &quot;{0}&quot;?.
+        '''</summary>
+        Friend ReadOnly Property strConfirmDeleteNodeConnection() As String
+            Get
+                Return ResourceManager.GetString("strConfirmDeleteNodeConnection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Are you sure you want to delete the empty folder, &quot;{0}&quot;?.
+        '''</summary>
+        Friend ReadOnly Property strConfirmDeleteNodeFolder() As String
+            Get
+                Return ResourceManager.GetString("strConfirmDeleteNodeFolder", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Are you sure you want to delete the folder, &quot;{0}&quot;? Any folders or connections that it contains will also be deleted..
+        '''</summary>
+        Friend ReadOnly Property strConfirmDeleteNodeFolderNotEmpty() As String
+            Get
+                Return ResourceManager.GetString("strConfirmDeleteNodeFolderNotEmpty", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Do you want to close all open connections?.
         '''</summary>
         Friend ReadOnly Property strConfirmExitMainInstruction() As String
@@ -831,6 +858,87 @@ Namespace My.Resources
         Friend ReadOnly Property strMagicLibraryAttributionURL() As String
             Get
                 Return ResourceManager.GetString("strMagicLibraryAttributionURL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Delete....
+        '''</summary>
+        Friend ReadOnly Property strMenuFileDelete() As String
+            Get
+                Return ResourceManager.GetString("strMenuFileDelete", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Delete Connection....
+        '''</summary>
+        Friend ReadOnly Property strMenuFileDeleteConnection() As String
+            Get
+                Return ResourceManager.GetString("strMenuFileDeleteConnection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Delete Folder....
+        '''</summary>
+        Friend ReadOnly Property strMenuFileDeleteFolder() As String
+            Get
+                Return ResourceManager.GetString("strMenuFileDeleteFolder", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Duplicate.
+        '''</summary>
+        Friend ReadOnly Property strMenuFileDuplicate() As String
+            Get
+                Return ResourceManager.GetString("strMenuFileDuplicate", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Duplicate Connection.
+        '''</summary>
+        Friend ReadOnly Property strMenuFileDuplicateConnection() As String
+            Get
+                Return ResourceManager.GetString("strMenuFileDuplicateConnection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Duplicate Folder.
+        '''</summary>
+        Friend ReadOnly Property strMenuFileDuplicateFolder() As String
+            Get
+                Return ResourceManager.GetString("strMenuFileDuplicateFolder", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Rename.
+        '''</summary>
+        Friend ReadOnly Property strMenuFileRename() As String
+            Get
+                Return ResourceManager.GetString("strMenuFileRename", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Rename Connection.
+        '''</summary>
+        Friend ReadOnly Property strMenuFileRenameConnection() As String
+            Get
+                Return ResourceManager.GetString("strMenuFileRenameConnection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Rename Folder.
+        '''</summary>
+        Friend ReadOnly Property strMenuFileRenameFolder() As String
+            Get
+                Return ResourceManager.GetString("strMenuFileRenameFolder", resourceCulture)
             End Get
         End Property
         

@@ -490,4 +490,40 @@
   <data name="strPortableEdition" xml:space="preserve">
     <value>Portable Edition</value>
   </data>
+  <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
+    <value>Are you sure you want to delete the connection, "{0}"?</value>
+  </data>
+  <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
+    <value>Are you sure you want to delete the empty folder, "{0}"?</value>
+  </data>
+  <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
+    <value>Are you sure you want to delete the folder, "{0}"? Any folders or connections that it contains will also be deleted.</value>
+  </data>
+  <data name="strMenuFileDelete" xml:space="preserve">
+    <value>Delete...</value>
+  </data>
+  <data name="strMenuFileDeleteConnection" xml:space="preserve">
+    <value>Delete Connection...</value>
+  </data>
+  <data name="strMenuFileDeleteFolder" xml:space="preserve">
+    <value>Delete Folder...</value>
+  </data>
+  <data name="strMenuFileDuplicate" xml:space="preserve">
+    <value>Duplicate</value>
+  </data>
+  <data name="strMenuFileDuplicateConnection" xml:space="preserve">
+    <value>Duplicate Connection</value>
+  </data>
+  <data name="strMenuFileDuplicateFolder" xml:space="preserve">
+    <value>Duplicate Folder</value>
+  </data>
+  <data name="strMenuFileRename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="strMenuFileRenameConnection" xml:space="preserve">
+    <value>Rename Connection</value>
+  </data>
+  <data name="strMenuFileRenameFolder" xml:space="preserve">
+    <value>Rename Folder</value>
+  </data>
 </root>

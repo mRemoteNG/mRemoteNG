@@ -181,33 +181,29 @@ Namespace Tree
 
         Public Shared Function AddNode(ByVal NodeType As Tree.Node.Type, Optional ByVal Text As String = "") As TreeNode
             Try
-                If SelectedNode IsNot Nothing Then
-                    If Tree.Node.GetNodeType(SelectedNode) = Type.Container Or Tree.Node.GetNodeType(SelectedNode) = Type.Root Then
-                        Dim nNode As New TreeNode
-                        nNode.Text = Language.Base.New_ & " "
+                Dim nNode As New TreeNode
+                nNode.Text = Language.Base.New_ & " "
 
-                        Select Case NodeType
-                            Case Type.Connection
-                                nNode.Text &= Language.Base.Connection
-                                nNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
-                                nNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
-                            Case Type.Container
-                                nNode.Text &= Language.Base.Folder
-                                nNode.ImageIndex = Images.Enums.TreeImage.Container
-                                nNode.SelectedImageIndex = Images.Enums.TreeImage.Container
-                            Case Type.Root
-                                nNode.Text &= Language.Base.Root
-                                nNode.ImageIndex = Images.Enums.TreeImage.Root
-                                nNode.SelectedImageIndex = Images.Enums.TreeImage.Root
-                        End Select
+                Select Case NodeType
+                    Case Type.Connection
+                        nNode.Text &= Language.Base.Connection
+                        nNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
+                        nNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
+                    Case Type.Container
+                        nNode.Text &= Language.Base.Folder
+                        nNode.ImageIndex = Images.Enums.TreeImage.Container
+                        nNode.SelectedImageIndex = Images.Enums.TreeImage.Container
+                    Case Type.Root
+                        nNode.Text &= Language.Base.Root
+                        nNode.ImageIndex = Images.Enums.TreeImage.Root
+                        nNode.SelectedImageIndex = Images.Enums.TreeImage.Root
+                End Select
 
-                        If Text <> "" Then
-                            nNode.Text = Text
-                        End If
-
-                        Return nNode
-                    End If
+                If Text <> "" Then
+                    nNode.Text = Text
                 End If
+
+                Return nNode
             Catch ex As Exception
                 mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddNode failed" & vbNewLine & ex.Message, True)
             End Try
@@ -393,23 +389,31 @@ Namespace Tree
 
         Public Shared Sub DeleteSelectedNode()
             Try
-                If SelectedNode IsNot Nothing Then
-                    If MsgBox(Language.Base.SureToDeleteItem, MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
-                        If Tree.Node.GetNodeType(SelectedNode) <> Type.Root Then 'root cannot be removed
-                            If Tree.Node.IsEmpty(SelectedNode) = False Then 'remove single node
-                                SelectedNode.Remove()
-                            Else 'remove parent and sub nodes
-                                For Each tNode As TreeNode In SelectedNode.Nodes
-                                    tNode.Remove()
-                                Next
+                If SelectedNode Is Nothing Then Return
 
+                Select Case Tree.Node.GetNodeType(SelectedNode)
+                    Case Type.Root
+                        mC.AddMessage(Messages.MessageClass.WarningMsg, "The root item cannot be deleted!")
+                    Case Type.Container
+                        If Tree.Node.IsEmpty(SelectedNode) = False Then
+                            If MsgBox(String.Format(My.Resources.strConfirmDeleteNodeFolder, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
                                 SelectedNode.Remove()
                             End If
                         Else
-                            mC.AddMessage(Messages.MessageClass.WarningMsg, "The Root Item cannot be deleted!")
+                            If MsgBox(String.Format(My.Resources.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+                                For Each tNode As TreeNode In SelectedNode.Nodes
+                                    tNode.Remove()
+                                Next
+                                SelectedNode.Remove()
+                            End If
                         End If
-                    End If
-                End If
+                    Case Type.Connection
+                        If MsgBox(String.Format(My.Resources.strConfirmDeleteNodeConnection, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+                            SelectedNode.Remove()
+                        End If
+                    Case Else
+                        mC.AddMessage(Messages.MessageClass.WarningMsg, "Tree item type is unknown so it cannot be deleted!")
+                End Select
             Catch ex As Exception
                 mC.AddMessage(Messages.MessageClass.ErrorMsg, "Deleting selected node failed" & vbNewLine & ex.Message, True)
             End Try
