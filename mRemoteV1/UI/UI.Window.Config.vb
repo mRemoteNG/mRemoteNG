@@ -433,9 +433,9 @@ Namespace UI
                 btnShowProperties.Text = Language.Base.Properties
                 btnShowDefaultProperties.Text = Language.Base.Default_ & " " & Language.Base.Properties
                 btnIcon.Text = Language.Base.Props_Icon
-                btnHostStatus.Text = Language.Base.Status
-                Text = Language.Base.Menu_Config
-                TabText = Language.Base.Menu_Config
+                btnHostStatus.Text = My.Resources.strStatus
+                Text = My.Resources.strMenuConfig
+                TabText = My.Resources.strMenuConfig
             End Sub
 
             Private Sub pGrid_PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs) Handles pGrid.PropertyValueChanged

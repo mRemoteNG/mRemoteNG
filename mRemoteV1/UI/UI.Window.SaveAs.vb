@@ -169,7 +169,7 @@ Namespace UI
                 If Export Then
                     Me.SetFormText(Language.Base.Export)
                 Else
-                    Me.SetFormText(Language.Base.Menu_SaveConnectionsAs)
+                    Me.SetFormText(My.Resources.strMenuSaveConnectionFileAs)
                 End If
 
                 Me._Export = Export
@@ -187,12 +187,12 @@ Namespace UI
                 lvSecurity.Items(1).Text = Language.Base.Props_Password
                 lvSecurity.Items(2).Text = Language.Base.Props_Domain
                 lvSecurity.Items(3).Text = Language.Base.Inheritance
-                btnCancel.Text = Language.Base.Button_Cancel
-                btnOK.Text = Language.Base.Button_OK
+                btnCancel.Text = My.Resources.strButtonCancel
+                btnOK.Text = My.Resources.strButtonOK
                 Label1.Text = Language.Base.UncheckProperties
                 lblMremoteXMLOnly.Text = Language.Base.PropertiesWillOnlyBeSavedMRemoteXML
-                TabText = Language.Base.Menu_SaveConnectionsAs
-                Text = Language.Base.Menu_SaveConnectionsAs
+                TabText = My.Resources.strMenuSaveConnectionFileAs
+                Text = My.Resources.strMenuSaveConnectionFileAs
             End Sub
 
             Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click

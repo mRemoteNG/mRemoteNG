@@ -69,7 +69,7 @@ Namespace Tools
                     Me._cMenSep1 = New ToolStripSeparator
 
                     Me._cMenExit = New ToolStripMenuItem
-                    Me._cMenExit.Text = Language.Base.Menu_Exit
+                    Me._cMenExit.Text = My.Resources.strMenuExit
                     AddHandler Me._cMenExit.Click, AddressOf cMenExit_Click
 
                     Me._cMen = New ContextMenuStrip

@@ -282,7 +282,7 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                cmenTabFullscreen.Text = Language.Base.Fullscreen & " (RDP)"
+                cmenTabFullscreen.Text = My.Resources.strMenuFullScreenRDP
                 cmenTabSmartSize.Text = Language.Base.SmartSize & " (RDP/VNC)"
                 cmenTabViewOnly.Text = Language.Base.Props_ViewOnly & " (VNC)"
                 cmenTabScreenshot.Text = Language.Base.Screenshot
@@ -292,7 +292,7 @@ Namespace UI
                 cmenTabSendSpecialKeys.Text = Language.Base.SendSpecialKeys & " (VNC)"
                 cmenTabSendSpecialKeysCtrlAltDel.Text = Language.Base.Key_Control & "+" & Language.Base.Key_Alt & "+" & Language.Base.Key_Del
                 cmenTabSendSpecialKeysCtrlEsc.Text = Language.Base.Key_Control & "+" & Language.Base.Key_Esc
-                cmenTabExternalApps.Text = Language.Base.Menu_ExternalApplications
+                cmenTabExternalApps.Text = My.Resources.strMenuExternalTools
                 cmenTabRenameTab.Text = Language.Base.RenameTab
                 cmenTabDuplicateTab.Text = Language.Base.DuplicateTab
                 cmenTabReconnect.Text = Language.Base.Reconnect

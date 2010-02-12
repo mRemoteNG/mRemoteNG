@@ -64,7 +64,7 @@ Partial Class frmPassword
         Me.lblPassword.Name = "lblPassword"
         Me.lblPassword.Size = New System.Drawing.Size(56, 13)
         Me.lblPassword.TabIndex = 2
-        Me.lblPassword.Text = Language.Base.Password
+        Me.lblPassword.Text = My.Resources.strLabelPassword
         '
         'lblVerify
         '
@@ -73,7 +73,7 @@ Partial Class frmPassword
         Me.lblVerify.Name = "lblVerify"
         Me.lblVerify.Size = New System.Drawing.Size(36, 13)
         Me.lblVerify.TabIndex = 3
-        Me.lblVerify.Text = Language.Base.Verify
+        Me.lblVerify.Text = My.Resources.strLabelVerify
         '
         'btnOK
         '
@@ -83,7 +83,7 @@ Partial Class frmPassword
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(69, 23)
         Me.btnOK.TabIndex = 4
-        Me.btnOK.Text = Language.Base.Button_OK
+        Me.btnOK.Text = My.Resources.strButtonOK
         Me.btnOK.UseVisualStyleBackColor = True
         '
         'btnCancel
@@ -95,7 +95,7 @@ Partial Class frmPassword
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(69, 23)
         Me.btnCancel.TabIndex = 5
-        Me.btnCancel.Text = Language.Base.Button_Cancel
+        Me.btnCancel.Text = My.Resources.strButtonCancel
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'lblStatus
@@ -107,7 +107,7 @@ Partial Class frmPassword
         Me.lblStatus.Name = "lblStatus"
         Me.lblStatus.Size = New System.Drawing.Size(189, 14)
         Me.lblStatus.TabIndex = 6
-        Me.lblStatus.Text = Language.Base.Status
+        Me.lblStatus.Text = "Status"
         Me.lblStatus.TextAlign = System.Drawing.ContentAlignment.TopRight
         Me.lblStatus.Visible = False
         '
@@ -152,7 +152,7 @@ Partial Class frmPassword
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = Language.Base.Security
+        Me.Text = My.Resources.strTitlePassword
         CType(Me.pbLock, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlImage.ResumeLayout(False)
         Me.pnlImage.PerformLayout()

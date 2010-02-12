@@ -238,7 +238,7 @@ Namespace UI
 #Region "Private Methods"
             Private Sub ApplyLanguage()
                 lblLicense.Text = My.Resources.strReleasedUnderGPL
-                lblChangeLog.Text = My.Resources.strChangeLogLabel
+                lblChangeLog.Text = My.Resources.strLabelChangeLog
                 TabText = My.Resources.strAbout
                 Text = My.Resources.strAbout
             End Sub

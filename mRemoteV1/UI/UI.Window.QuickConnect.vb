@@ -33,7 +33,7 @@ Namespace UI
                 Me.btnCancel.Size = New System.Drawing.Size(75, 23)
                 Me.btnCancel.TabIndex = 20
                 Me.btnCancel.TabStop = False
-                Me.btnCancel.Text = Language.Base.Button_Cancel
+                Me.btnCancel.Text = My.Resources.strButtonCancel
                 Me.btnCancel.UseVisualStyleBackColor = True
                 '
                 'QuickConnect
@@ -85,7 +85,7 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                btnCancel.Text = Language.Base.Button_Cancel
+                btnCancel.Text = My.Resources.strButtonCancel
                 TabText = Language.Base.QuickConnect
                 Text = Language.Base.QuickConnect
             End Sub

@@ -472,7 +472,7 @@
   <data name="strAbout" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="strChangeLogLabel" xml:space="preserve">
+  <data name="strLabelChangeLog" xml:space="preserve">
     <value>Change Log:</value>
   </data>
   <data name="strReleasedUnderGPL" xml:space="preserve">
@@ -499,31 +499,202 @@
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>Are you sure you want to delete the folder, "{0}"? Any folders or connections that it contains will also be deleted.</value>
   </data>
-  <data name="strMenuFileDelete" xml:space="preserve">
+  <data name="strMenuDelete" xml:space="preserve">
     <value>Delete...</value>
   </data>
-  <data name="strMenuFileDeleteConnection" xml:space="preserve">
+  <data name="strMenuDeleteConnection" xml:space="preserve">
     <value>Delete Connection...</value>
   </data>
-  <data name="strMenuFileDeleteFolder" xml:space="preserve">
+  <data name="strMenuDeleteFolder" xml:space="preserve">
     <value>Delete Folder...</value>
   </data>
-  <data name="strMenuFileDuplicate" xml:space="preserve">
+  <data name="strMenuDuplicate" xml:space="preserve">
     <value>Duplicate</value>
   </data>
-  <data name="strMenuFileDuplicateConnection" xml:space="preserve">
+  <data name="strMenuDuplicateConnection" xml:space="preserve">
     <value>Duplicate Connection</value>
   </data>
-  <data name="strMenuFileDuplicateFolder" xml:space="preserve">
+  <data name="strMenuDuplicateFolder" xml:space="preserve">
     <value>Duplicate Folder</value>
   </data>
-  <data name="strMenuFileRename" xml:space="preserve">
+  <data name="strMenuRename" xml:space="preserve">
     <value>Rename</value>
   </data>
-  <data name="strMenuFileRenameConnection" xml:space="preserve">
+  <data name="strMenuRenameConnection" xml:space="preserve">
     <value>Rename Connection</value>
   </data>
-  <data name="strMenuFileRenameFolder" xml:space="preserve">
+  <data name="strMenuRenameFolder" xml:space="preserve">
     <value>Rename Folder</value>
+  </data>
+  <data name="strActive" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="strButtonCancel" xml:space="preserve">
+    <value>&amp;Cancel</value>
+  </data>
+  <data name="strButtonClose" xml:space="preserve">
+    <value>&amp;Close</value>
+  </data>
+  <data name="strButtonImport" xml:space="preserve">
+    <value>&amp;Import</value>
+  </data>
+  <data name="strButtonNew" xml:space="preserve">
+    <value>&amp;New</value>
+  </data>
+  <data name="strButtonOK" xml:space="preserve">
+    <value>&amp;OK</value>
+  </data>
+  <data name="strButtonScan" xml:space="preserve">
+    <value>&amp;Scan</value>
+  </data>
+  <data name="strButtonStop" xml:space="preserve">
+    <value>&amp;Stop</value>
+  </data>
+  <data name="strConnectionDescriptionColors" xml:space="preserve">
+    <value>Select the colour quality to be used.</value>
+  </data>
+  <data name="strConnectionPropertyColors" xml:space="preserve">
+    <value>Colours</value>
+  </data>
+  <data name="strInactive" xml:space="preserve">
+    <value>Inactive</value>
+  </data>
+  <data name="strLabelConnect" xml:space="preserve">
+    <value>&amp;Connect:</value>
+  </data>
+  <data name="strLabelPassword" xml:space="preserve">
+    <value>Password:</value>
+  </data>
+  <data name="strLabelVerify" xml:space="preserve">
+    <value>Verify:</value>
+  </data>
+  <data name="strMenuAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="strMenuAddConnectionPanel" xml:space="preserve">
+    <value>Add Connection Panel</value>
+  </data>
+  <data name="strMenuCheckForUpdates" xml:space="preserve">
+    <value>Check for Updates</value>
+  </data>
+  <data name="strMenuConfig" xml:space="preserve">
+    <value>Config</value>
+  </data>
+  <data name="strMenuConnect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="strMenuConnectionPanels" xml:space="preserve">
+    <value>Connection Panels</value>
+  </data>
+  <data name="strMenuConnections" xml:space="preserve">
+    <value>Connections</value>
+  </data>
+  <data name="strMenuConnectionsAndConfig" xml:space="preserve">
+    <value>Connections and Config</value>
+  </data>
+  <data name="strMenuDonate" xml:space="preserve">
+    <value>Donate</value>
+  </data>
+  <data name="strMenuExit" xml:space="preserve">
+    <value>Exit</value>
+  </data>
+  <data name="strMenuExternalTools" xml:space="preserve">
+    <value>External Tools</value>
+  </data>
+  <data name="strMenuExternalToolsToolbar" xml:space="preserve">
+    <value>External Tools Toolbar</value>
+  </data>
+  <data name="strMenuFile" xml:space="preserve">
+    <value>&amp;File</value>
+  </data>
+  <data name="strMenuFullScreen" xml:space="preserve">
+    <value>Full Screen</value>
+  </data>
+  <data name="strMenuFullScreenRDP" xml:space="preserve">
+    <value>Full Screen (RDP)</value>
+  </data>
+  <data name="strMenuHelp" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="strMenuHelpContents" xml:space="preserve">
+    <value>mRemoteNG Help</value>
+  </data>
+  <data name="strMenuJumpTo" xml:space="preserve">
+    <value>Jump To</value>
+  </data>
+  <data name="strMenuNewConnectionFile" xml:space="preserve">
+    <value>New Connection File</value>
+  </data>
+  <data name="strMenuNotifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="strMenuOpenConnectionFile" xml:space="preserve">
+    <value>Open Connection File...</value>
+  </data>
+  <data name="strMenuOptions" xml:space="preserve">
+    <value>Options</value>
+  </data>
+  <data name="strMenuPortScan" xml:space="preserve">
+    <value>Port Scan</value>
+  </data>
+  <data name="strMenuQuickConnectToolbar" xml:space="preserve">
+    <value>Quick Connect Toolbar</value>
+  </data>
+  <data name="strMenuReportBug" xml:space="preserve">
+    <value>Report a Bug</value>
+  </data>
+  <data name="strMenuSaveConnectionFile" xml:space="preserve">
+    <value>Save Connection File</value>
+  </data>
+  <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
+    <value>Save Connection File As...</value>
+  </data>
+  <data name="strMenuScreenshotManager" xml:space="preserve">
+    <value>Screenshot Manager</value>
+  </data>
+  <data name="strMenuSessions" xml:space="preserve">
+    <value>Sessions</value>
+  </data>
+  <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
+    <value>Sessions and Screenshots</value>
+  </data>
+  <data name="strMenuShowText" xml:space="preserve">
+    <value>Show Text</value>
+  </data>
+  <data name="strMenuSSHFileTransfer" xml:space="preserve">
+    <value>SSH File Transfer</value>
+  </data>
+  <data name="strMenuSupportForum" xml:space="preserve">
+    <value>Support Forum</value>
+  </data>
+  <data name="strMenuTools" xml:space="preserve">
+    <value>&amp;Tools</value>
+  </data>
+  <data name="strMenuView" xml:space="preserve">
+    <value>&amp;View</value>
+  </data>
+  <data name="strMenuWebsite" xml:space="preserve">
+    <value>Website</value>
+  </data>
+  <data name="strSelectPanel" xml:space="preserve">
+    <value>Select a panel from the list below or click New to add a new one. Click OK to continue.</value>
+  </data>
+  <data name="strSmartSizeModeAspect" xml:space="preserve">
+    <value>Aspect</value>
+  </data>
+  <data name="strSmartSizeModeFree" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="strSmartSizeModeNone" xml:space="preserve">
+    <value>No SmartSize</value>
+  </data>
+  <data name="strStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="strTitlePassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="strTitleSelectPanel" xml:space="preserve">
+    <value>Select Panel</value>
   </data>
 </root>

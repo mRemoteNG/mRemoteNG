@@ -46,7 +46,7 @@ Partial Class frmChoosePanel
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(69, 23)
         Me.btnOK.TabIndex = 20
-        Me.btnOK.Text = Language.Base.Button_OK
+        Me.btnOK.Text = My.Resources.strButtonOK
         Me.btnOK.UseVisualStyleBackColor = True
         '
         'lblDescription
@@ -55,7 +55,7 @@ Partial Class frmChoosePanel
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Size = New System.Drawing.Size(229, 29)
         Me.lblDescription.TabIndex = 0
-        Me.lblDescription.Text = Language.Base.SelectAPanel
+        Me.lblDescription.Text = My.Resources.strSelectPanel
         '
         'btnNew
         '
@@ -66,7 +66,7 @@ Partial Class frmChoosePanel
         Me.btnNew.Name = "btnNew"
         Me.btnNew.Size = New System.Drawing.Size(57, 23)
         Me.btnNew.TabIndex = 40
-        Me.btnNew.Text = Language.Base.Button_New
+        Me.btnNew.Text = My.Resources.strButtonNew
         Me.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnNew.UseVisualStyleBackColor = True
         '
@@ -78,7 +78,7 @@ Partial Class frmChoosePanel
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(69, 23)
         Me.btnCancel.TabIndex = 30
-        Me.btnCancel.Text = Language.Base.Button_Cancel
+        Me.btnCancel.Text = My.Resources.strButtonCancel
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'frmChoosePanel
@@ -100,7 +100,7 @@ Partial Class frmChoosePanel
         Me.Name = "frmChoosePanel"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = Language.Base.SelectPanel
+        Me.Text = My.Resources.strTitleSelectPanel
         Me.ResumeLayout(False)
 
     End Sub

@@ -17,11 +17,11 @@ Public Class frmChoosePanel
     End Sub
 
     Private Sub ApplyLanguage()
-        btnOK.Text = Language.Base.Button_OK
-        lblDescription.Text = Language.Base.SelectAPanel
-        btnNew.Text = Language.Base.Button_New
-        btnCancel.Text = Language.Base.Button_Cancel
-        Text = Language.Base.SelectPanel
+        btnOK.Text = My.Resources.strButtonOK
+        lblDescription.Text = My.Resources.strSelectPanel
+        btnNew.Text = My.Resources.strButtonNew
+        btnCancel.Text = My.Resources.strButtonCancel
+        Text = My.Resources.strTitleSelectPanel
     End Sub
 
     Private Sub AddAvailablePanels()

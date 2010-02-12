@@ -12,6 +12,8 @@ Public Class frmMain
         'insert enable edition code here
         App.Editions.Spanlink.Enabled = False
 
+        Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo("de-DE")
+
         ApplyLanguage()
 
         Debug.Print("---------------------------" & vbNewLine & "[START] - " & Now)
@@ -65,44 +67,44 @@ Public Class frmMain
     End Sub
 
     Private Sub ApplyLanguage()
-        mMenFile.Text = Language.Base.Menu_File
-        mMenFileNew.Text = Language.Base.Menu_NewConnections
-        mMenFileLoad.Text = Language.Base.Menu_OpenConnections
-        mMenFileSave.Text = Language.Base.Menu_SaveConnections
-        mMenFileSaveAs.Text = Language.Base.Menu_SaveConnectionsAs
-        mMenFileExit.Text = Language.Base.Menu_Exit
-        mMenView.Text = Language.Base.Menu_View
-        mMenViewAddConnectionPanel.Text = Language.Base.Menu_AddConnectionPanel
-        mMenViewConnectionPanels.Text = Language.Base.Menu_ConnectionPanels
-        mMenViewConnections.Text = Language.Base.Menu_Connections
-        mMenViewConfig.Text = Language.Base.Menu_Config
-        mMenViewSessions.Text = Language.Base.Menu_Sessions
-        mMenViewErrorsAndInfos.Text = Language.Base.Menu_ErrorsAndInfos
-        mMenViewScreenshotManager.Text = Language.Base.Menu_ScreenshotManager
-        mMenViewJumpTo.Text = Language.Base.Menu_JumpTo
-        mMenViewJumpToConnectionsConfig.Text = Language.Base.Menu_ConnectionsConfig
-        mMenViewJumpToSessionsScreenshots.Text = Language.Base.Menu_SessionsScreenshots
-        mMenViewJumpToErrorsInfos.Text = Language.Base.Menu_ErrorsInfos
-        mMenViewQuickConnectToolbar.Text = Language.Base.Menu_QuickyToolbar
-        mMenViewExtAppsToolbar.Text = Language.Base.Menu_ExternalApplicationsToolbar
-        mMenViewFullscreen.Text = Language.Base.Menu_FullScreenKioskMode
-        mMenTools.Text = Language.Base.Menu_Tools
-        mMenToolsSSHTransfer.Text = Language.Base.Menu_SSHFileTransfer
-        mMenToolsExternalApps.Text = Language.Base.Menu_ExternalApplications
-        mMenToolsPortScan.Text = Language.Base.Menu_PortScan
-        mMenToolsUpdate.Text = Language.Base.Menu_Update
-        mMenToolsOptions.Text = Language.Base.Menu_Options
-        mMenInfo.Text = Language.Base.Menu_Info
-        mMenInfoHelp.Text = Language.Base.Menu_Help
-        mMenInfoForum.Text = Language.Base.Menu_Forum
-        mMenInfoBugReport.Text = Language.Base.Menu_BugReport
-        mMenInfoDonate.Text = Language.Base.Menu_Donate
-        mMenInfoWebsite.Text = Language.Base.Menu_Website
-        mMenInfoAbout.Text = Language.Base.Menu_About
-        lblQuickConnect.Text = Language.Base.Toolbar_Quicky
-        btnQuickyPlay.Text = Language.Base.Toolbar_Play
-        mMenQuickyCon.Text = Language.Base.Menu_Connections
-        cMenToolbarShowText.Text = Language.Base.Toolbar_ShowText
+        mMenFile.Text = My.Resources.strMenuFile
+        mMenFileNew.Text = My.Resources.strMenuNewConnectionFile
+        mMenFileLoad.Text = My.Resources.strMenuOpenConnectionFile
+        mMenFileSave.Text = My.Resources.strMenuSaveConnectionFile
+        mMenFileSaveAs.Text = My.Resources.strMenuSaveConnectionFileAs
+        mMenFileExit.Text = My.Resources.strMenuExit
+        mMenView.Text = My.Resources.strMenuView
+        mMenViewAddConnectionPanel.Text = My.Resources.strMenuAddConnectionPanel
+        mMenViewConnectionPanels.Text = My.Resources.strMenuConnectionPanels
+        mMenViewConnections.Text = My.Resources.strMenuConnections
+        mMenViewConfig.Text = My.Resources.strMenuConfig
+        mMenViewSessions.Text = My.Resources.strMenuSessions
+        mMenViewErrorsAndInfos.Text = My.Resources.strMenuNotifications
+        mMenViewScreenshotManager.Text = My.Resources.strMenuScreenshotManager
+        mMenViewJumpTo.Text = My.Resources.strMenuJumpTo
+        mMenViewJumpToConnectionsConfig.Text = My.Resources.strMenuConnectionsAndConfig
+        mMenViewJumpToSessionsScreenshots.Text = My.Resources.strMenuSessionsAndScreenshots
+        mMenViewJumpToErrorsInfos.Text = My.Resources.strMenuNotifications
+        mMenViewQuickConnectToolbar.Text = My.Resources.strMenuQuickConnectToolbar
+        mMenViewExtAppsToolbar.Text = My.Resources.strMenuExternalToolsToolbar
+        mMenViewFullscreen.Text = My.Resources.strMenuFullScreen
+        mMenTools.Text = My.Resources.strMenuTools
+        mMenToolsSSHTransfer.Text = My.Resources.strMenuSSHFileTransfer
+        mMenToolsExternalApps.Text = My.Resources.strMenuExternalTools
+        mMenToolsPortScan.Text = My.Resources.strMenuPortScan
+        mMenToolsUpdate.Text = My.Resources.strMenuCheckForUpdates
+        mMenToolsOptions.Text = My.Resources.strMenuOptions
+        mMenInfo.Text = My.Resources.strMenuHelp
+        mMenInfoHelp.Text = My.Resources.strMenuHelpContents
+        mMenInfoForum.Text = My.Resources.strMenuSupportForum
+        mMenInfoBugReport.Text = My.Resources.strMenuReportBug
+        mMenInfoDonate.Text = My.Resources.strMenuDonate
+        mMenInfoWebsite.Text = My.Resources.strMenuWebsite
+        mMenInfoAbout.Text = My.Resources.strMenuAbout
+        lblQuickConnect.Text = My.Resources.strLabelConnect
+        btnQuickyPlay.Text = My.Resources.strMenuConnect
+        mMenQuickyCon.Text = My.Resources.strMenuConnections
+        cMenToolbarShowText.Text = My.Resources.strMenuShowText
     End Sub
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
@@ -226,33 +228,33 @@ Public Class frmMain
                 mMenFileDelete.Enabled = False
                 mMenFileRename.Enabled = True
                 mMenFileDuplicate.Enabled = False
-                mMenFileDelete.Text = My.Resources.strMenuFileDelete
-                mMenFileRename.Text = My.Resources.strMenuFileRenameFolder
-                mMenFileDuplicate.Text = My.Resources.strMenuFileDuplicate
+                mMenFileDelete.Text = My.Resources.strMenuDelete
+                mMenFileRename.Text = My.Resources.strMenuRenameFolder
+                mMenFileDuplicate.Text = My.Resources.strMenuDuplicate
             Case Tree.Node.Type.Container
                 mMenFileImportExport.Enabled = True
                 mMenFileDelete.Enabled = True
                 mMenFileRename.Enabled = True
                 mMenFileDuplicate.Enabled = True
-                mMenFileDelete.Text = My.Resources.strMenuFileDeleteFolder
-                mMenFileRename.Text = My.Resources.strMenuFileRenameFolder
-                mMenFileDuplicate.Text = My.Resources.strMenuFileDuplicateFolder
+                mMenFileDelete.Text = My.Resources.strMenuDeleteFolder
+                mMenFileRename.Text = My.Resources.strMenuRenameFolder
+                mMenFileDuplicate.Text = My.Resources.strMenuDuplicateFolder
             Case Tree.Node.Type.Connection
                 mMenFileImportExport.Enabled = False
                 mMenFileDelete.Enabled = True
                 mMenFileRename.Enabled = True
                 mMenFileDuplicate.Enabled = True
-                mMenFileDelete.Text = My.Resources.strMenuFileDeleteConnection
-                mMenFileRename.Text = My.Resources.strMenuFileRenameConnection
-                mMenFileDuplicate.Text = My.Resources.strMenuFileDuplicateConnection
+                mMenFileDelete.Text = My.Resources.strMenuDeleteConnection
+                mMenFileRename.Text = My.Resources.strMenuRenameConnection
+                mMenFileDuplicate.Text = My.Resources.strMenuDuplicateConnection
             Case Else
                 mMenFileImportExport.Enabled = False
                 mMenFileDelete.Enabled = False
                 mMenFileRename.Enabled = False
                 mMenFileDuplicate.Enabled = False
-                mMenFileDelete.Text = My.Resources.strMenuFileDelete
-                mMenFileRename.Text = My.Resources.strMenuFileRename
-                mMenFileDuplicate.Text = My.Resources.strMenuFileDuplicate
+                mMenFileDelete.Text = My.Resources.strMenuDelete
+                mMenFileRename.Text = My.Resources.strMenuRename
+                mMenFileDuplicate.Text = My.Resources.strMenuDuplicate
         End Select
     End Sub
 

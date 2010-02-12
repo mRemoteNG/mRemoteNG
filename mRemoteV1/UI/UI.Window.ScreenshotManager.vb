@@ -133,7 +133,7 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                mMenFile.Text = Language.Base.Menu_File
+                mMenFile.Text = My.Resources.strMenuFile
                 mMenFileSaveAll.Text = Language.Base.SaveAll
                 mMenFileRemoveAll.Text = Language.Base.RemoveAll
                 cMenScreenshotCopy.Text = Language.Base.Copy

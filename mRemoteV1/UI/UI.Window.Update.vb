@@ -374,15 +374,14 @@ Namespace UI
 
             Private Sub ApplyLanguage()
                 btnCheckForUpdate.Text = Language.Base.CheckForUpdate
-                lblChangeLogLabel.Text = My.Resources.strChangeLogLabel
+                lblChangeLogLabel.Text = My.Resources.strLabelChangeLog
                 btnDownload.Text = Language.Base.DownloadAndInstall
                 lblCurrentVersionLabel.Text = Language.Base.AvailableVersion & ":"
                 lblInstalledVersionLabel.Text = Language.Base.CurrentVersion & ":"
                 lblAvailableVersion.Text = Language.Base.Version
                 lblCurrentVersion.Text = Language.Base.Version
-                lblStatus.Text = Language.Base.Status
-                TabText = Language.Base.Menu_Update
-                Text = Language.Base.Menu_Update
+                TabText = My.Resources.strMenuCheckForUpdates
+                Text = My.Resources.strMenuCheckForUpdates
             End Sub
 
             Private Sub btnCheckForUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCheckForUpdate.Click
@@ -420,7 +419,7 @@ Namespace UI
                     Me.btnDownload.Enabled = True
 
                     If Success = True Then
-                        If MessageBox.Show(Language.Base.UpdateDownloadComplete, Language.Base.Menu_Update, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = System.Windows.Forms.DialogResult.OK Then
+                        If MessageBox.Show(Language.Base.UpdateDownloadComplete, My.Resources.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = System.Windows.Forms.DialogResult.OK Then
                             Try
                                 App.Runtime.Shutdown.BeforeQuit()
 

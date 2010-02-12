@@ -32,7 +32,7 @@ Namespace UI
                 Me.btnOK.Name = "btnOK"
                 Me.btnOK.Size = New System.Drawing.Size(75, 23)
                 Me.btnOK.TabIndex = 100
-                Me.btnOK.Text = Language.Base.Button_OK
+                Me.btnOK.Text = My.Resources.strButtonOK
                 Me.btnOK.UseVisualStyleBackColor = True
                 '
                 'btnCancel
@@ -44,7 +44,7 @@ Namespace UI
                 Me.btnCancel.Name = "btnCancel"
                 Me.btnCancel.Size = New System.Drawing.Size(75, 23)
                 Me.btnCancel.TabIndex = 110
-                Me.btnCancel.Text = Language.Base.Button_Cancel
+                Me.btnCancel.Text = My.Resources.strButtonCancel
                 Me.btnCancel.UseVisualStyleBackColor = True
                 '
                 'txtDomain
@@ -133,8 +133,8 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                btnOK.Text = Language.Base.Button_OK
-                btnCancel.Text = Language.Base.Button_Cancel
+                btnOK.Text = My.Resources.strButtonOK
+                btnCancel.Text = My.Resources.strButtonCancel
                 lblDomain.Text = Language.Base.Props_Domain & ":"
                 btnChangeDomain.Text = Language.Base.Change
                 Label2.Text = Language.Base.Change

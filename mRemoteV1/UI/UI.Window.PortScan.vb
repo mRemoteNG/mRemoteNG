@@ -392,17 +392,17 @@ Namespace UI
             Private Sub ApplyLanguage()
                 lblStartIP.Text = Language.Base.StartIP & ":"
                 lblEndIP.Text = Language.Base.EndIP & ":"
-                btnScan.Text = Language.Base.Button_Scan
-                btnCancel.Text = Language.Base.Button_Cancel
-                btnImport.Text = Language.Base.Button_Import
+                btnScan.Text = My.Resources.strButtonScan
+                btnCancel.Text = My.Resources.strButtonCancel
+                btnImport.Text = My.Resources.strButtonImport
                 lblOnlyImport.Text = Language.Base.ProtocolToImport & ":"
                 clmHost.Text = Language.Base.Props_HostnameIP
                 clmOpenPorts.Text = Language.Base.OpenPorts
                 clmClosedPorts.Text = Language.Base.ClosedPorts
                 Label2.Text = Language.Base.EndPort & ":"
                 Label1.Text = Language.Base.StartPort & ":"
-                TabText = Language.Base.Menu_PortScan
-                Text = Language.Base.Menu_PortScan
+                TabText = My.Resources.strMenuPortScan
+                Text = My.Resources.strMenuPortScan
             End Sub
 
             Private Sub btnScan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnScan.Click
@@ -456,9 +456,9 @@ Namespace UI
                     Me.Invoke(d)
                 Else
                     If scanning = True Then
-                        btnScan.Text = Language.Base.Button_Stop
+                        btnScan.Text = My.Resources.strButtonStop
                     Else
-                        btnScan.Text = Language.Base.Button_Scan
+                        btnScan.Text = My.Resources.strButtonScan
                     End If
                 End If
             End Sub

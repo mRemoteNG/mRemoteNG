@@ -86,12 +86,12 @@
     End Sub
 
     Private Sub ApplyLanguage()
-        lblPassword.Text = Language.Base.Password
-        lblVerify.Text = Language.Base.Verify
-        btnOK.Text = Language.Base.Button_OK
-        btnCancel.Text = Language.Base.Button_Cancel
-        lblStatus.Text = Language.Base.Status
-        Text = Language.Base.Security
+        lblPassword.Text = My.Resources.strLabelPassword
+        lblVerify.Text = My.Resources.strLabelVerify
+        btnOK.Text = My.Resources.strButtonOK
+        btnCancel.Text = My.Resources.strButtonCancel
+        lblStatus.Text = "Status"
+        Text = My.Resources.strTitlePassword
     End Sub
 
     Private Sub txtPassword_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPassword.GotFocus

@@ -144,8 +144,8 @@ Namespace UI
                 Me.HideOnClose = True
                 Me.Icon = Global.mRemote.My.Resources.Resources.Info_Icon
                 Me.Name = "ErrorsAndInfos"
-                Me.TabText = Language.Base.Menu_ErrorsAndInfos
-                Me.Text = Language.Base.Menu_ErrorsAndInfos
+                Me.TabText = My.Resources.strMenuNotifications
+                Me.Text = My.Resources.strMenuNotifications
                 Me.pnlErrorMsg.ResumeLayout(False)
                 Me.pnlErrorMsg.PerformLayout()
                 CType(Me.pbError, System.ComponentModel.ISupportInitialize).EndInit()
@@ -176,8 +176,8 @@ Namespace UI
                 clmMessage.Text = Language.Base.Message
                 cMenMCCopy.Text = Language.Base.Copy
                 cMenMCDelete.Text = Language.Base.Delete
-                TabText = Language.Base.Menu_ErrorsAndInfos
-                Text = Language.Base.Menu_ErrorsAndInfos
+                TabText = My.Resources.strMenuNotifications
+                Text = My.Resources.strMenuNotifications
             End Sub
 #End Region
 

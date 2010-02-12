@@ -763,11 +763,74 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Change Log:.
+        '''  Looks up a localized string similar to Active.
         '''</summary>
-        Friend ReadOnly Property strChangeLogLabel() As String
+        Friend ReadOnly Property strActive() As String
             Get
-                Return ResourceManager.GetString("strChangeLogLabel", resourceCulture)
+                Return ResourceManager.GetString("strActive", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Cancel.
+        '''</summary>
+        Friend ReadOnly Property strButtonCancel() As String
+            Get
+                Return ResourceManager.GetString("strButtonCancel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Close.
+        '''</summary>
+        Friend ReadOnly Property strButtonClose() As String
+            Get
+                Return ResourceManager.GetString("strButtonClose", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Import.
+        '''</summary>
+        Friend ReadOnly Property strButtonImport() As String
+            Get
+                Return ResourceManager.GetString("strButtonImport", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;New.
+        '''</summary>
+        Friend ReadOnly Property strButtonNew() As String
+            Get
+                Return ResourceManager.GetString("strButtonNew", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;OK.
+        '''</summary>
+        Friend ReadOnly Property strButtonOK() As String
+            Get
+                Return ResourceManager.GetString("strButtonOK", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Scan.
+        '''</summary>
+        Friend ReadOnly Property strButtonScan() As String
+            Get
+                Return ResourceManager.GetString("strButtonScan", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Stop.
+        '''</summary>
+        Friend ReadOnly Property strButtonStop() As String
+            Get
+                Return ResourceManager.GetString("strButtonStop", resourceCulture)
             End Get
         End Property
         
@@ -817,6 +880,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Select the colour quality to be used..
+        '''</summary>
+        Friend ReadOnly Property strConnectionDescriptionColors() As String
+            Get
+                Return ResourceManager.GetString("strConnectionDescriptionColors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Colours.
+        '''</summary>
+        Friend ReadOnly Property strConnectionPropertyColors() As String
+            Get
+                Return ResourceManager.GetString("strConnectionPropertyColors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Do not show this message again..
         '''</summary>
         Friend ReadOnly Property strDoNotShowThisMessageAgain() As String
@@ -844,6 +925,51 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Inactive.
+        '''</summary>
+        Friend ReadOnly Property strInactive() As String
+            Get
+                Return ResourceManager.GetString("strInactive", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Change Log:.
+        '''</summary>
+        Friend ReadOnly Property strLabelChangeLog() As String
+            Get
+                Return ResourceManager.GetString("strLabelChangeLog", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Connect:.
+        '''</summary>
+        Friend ReadOnly Property strLabelConnect() As String
+            Get
+                Return ResourceManager.GetString("strLabelConnect", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Password:.
+        '''</summary>
+        Friend ReadOnly Property strLabelPassword() As String
+            Get
+                Return ResourceManager.GetString("strLabelPassword", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Verify:.
+        '''</summary>
+        Friend ReadOnly Property strLabelVerify() As String
+            Get
+                Return ResourceManager.GetString("strLabelVerify", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Uses the Magic library by [Crownwood Software].
         '''</summary>
         Friend ReadOnly Property strMagicLibraryAttribution() As String
@@ -862,83 +988,407 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to About.
+        '''</summary>
+        Friend ReadOnly Property strMenuAbout() As String
+            Get
+                Return ResourceManager.GetString("strMenuAbout", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Add Connection Panel.
+        '''</summary>
+        Friend ReadOnly Property strMenuAddConnectionPanel() As String
+            Get
+                Return ResourceManager.GetString("strMenuAddConnectionPanel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Check for Updates.
+        '''</summary>
+        Friend ReadOnly Property strMenuCheckForUpdates() As String
+            Get
+                Return ResourceManager.GetString("strMenuCheckForUpdates", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Config.
+        '''</summary>
+        Friend ReadOnly Property strMenuConfig() As String
+            Get
+                Return ResourceManager.GetString("strMenuConfig", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Connect.
+        '''</summary>
+        Friend ReadOnly Property strMenuConnect() As String
+            Get
+                Return ResourceManager.GetString("strMenuConnect", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Connection Panels.
+        '''</summary>
+        Friend ReadOnly Property strMenuConnectionPanels() As String
+            Get
+                Return ResourceManager.GetString("strMenuConnectionPanels", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Connections.
+        '''</summary>
+        Friend ReadOnly Property strMenuConnections() As String
+            Get
+                Return ResourceManager.GetString("strMenuConnections", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Connections and Config.
+        '''</summary>
+        Friend ReadOnly Property strMenuConnectionsAndConfig() As String
+            Get
+                Return ResourceManager.GetString("strMenuConnectionsAndConfig", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Delete....
         '''</summary>
-        Friend ReadOnly Property strMenuFileDelete() As String
+        Friend ReadOnly Property strMenuDelete() As String
             Get
-                Return ResourceManager.GetString("strMenuFileDelete", resourceCulture)
+                Return ResourceManager.GetString("strMenuDelete", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized string similar to Delete Connection....
         '''</summary>
-        Friend ReadOnly Property strMenuFileDeleteConnection() As String
+        Friend ReadOnly Property strMenuDeleteConnection() As String
             Get
-                Return ResourceManager.GetString("strMenuFileDeleteConnection", resourceCulture)
+                Return ResourceManager.GetString("strMenuDeleteConnection", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized string similar to Delete Folder....
         '''</summary>
-        Friend ReadOnly Property strMenuFileDeleteFolder() As String
+        Friend ReadOnly Property strMenuDeleteFolder() As String
             Get
-                Return ResourceManager.GetString("strMenuFileDeleteFolder", resourceCulture)
+                Return ResourceManager.GetString("strMenuDeleteFolder", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Donate.
+        '''</summary>
+        Friend ReadOnly Property strMenuDonate() As String
+            Get
+                Return ResourceManager.GetString("strMenuDonate", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized string similar to Duplicate.
         '''</summary>
-        Friend ReadOnly Property strMenuFileDuplicate() As String
+        Friend ReadOnly Property strMenuDuplicate() As String
             Get
-                Return ResourceManager.GetString("strMenuFileDuplicate", resourceCulture)
+                Return ResourceManager.GetString("strMenuDuplicate", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized string similar to Duplicate Connection.
         '''</summary>
-        Friend ReadOnly Property strMenuFileDuplicateConnection() As String
+        Friend ReadOnly Property strMenuDuplicateConnection() As String
             Get
-                Return ResourceManager.GetString("strMenuFileDuplicateConnection", resourceCulture)
+                Return ResourceManager.GetString("strMenuDuplicateConnection", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized string similar to Duplicate Folder.
         '''</summary>
-        Friend ReadOnly Property strMenuFileDuplicateFolder() As String
+        Friend ReadOnly Property strMenuDuplicateFolder() As String
             Get
-                Return ResourceManager.GetString("strMenuFileDuplicateFolder", resourceCulture)
+                Return ResourceManager.GetString("strMenuDuplicateFolder", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Exit.
+        '''</summary>
+        Friend ReadOnly Property strMenuExit() As String
+            Get
+                Return ResourceManager.GetString("strMenuExit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to External Tools.
+        '''</summary>
+        Friend ReadOnly Property strMenuExternalTools() As String
+            Get
+                Return ResourceManager.GetString("strMenuExternalTools", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to External Tools Toolbar.
+        '''</summary>
+        Friend ReadOnly Property strMenuExternalToolsToolbar() As String
+            Get
+                Return ResourceManager.GetString("strMenuExternalToolsToolbar", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;File.
+        '''</summary>
+        Friend ReadOnly Property strMenuFile() As String
+            Get
+                Return ResourceManager.GetString("strMenuFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Full Screen.
+        '''</summary>
+        Friend ReadOnly Property strMenuFullScreen() As String
+            Get
+                Return ResourceManager.GetString("strMenuFullScreen", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Full Screen (RDP).
+        '''</summary>
+        Friend ReadOnly Property strMenuFullScreenRDP() As String
+            Get
+                Return ResourceManager.GetString("strMenuFullScreenRDP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Help.
+        '''</summary>
+        Friend ReadOnly Property strMenuHelp() As String
+            Get
+                Return ResourceManager.GetString("strMenuHelp", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to mRemoteNG Help.
+        '''</summary>
+        Friend ReadOnly Property strMenuHelpContents() As String
+            Get
+                Return ResourceManager.GetString("strMenuHelpContents", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Jump To.
+        '''</summary>
+        Friend ReadOnly Property strMenuJumpTo() As String
+            Get
+                Return ResourceManager.GetString("strMenuJumpTo", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to New Connection File.
+        '''</summary>
+        Friend ReadOnly Property strMenuNewConnectionFile() As String
+            Get
+                Return ResourceManager.GetString("strMenuNewConnectionFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Notifications.
+        '''</summary>
+        Friend ReadOnly Property strMenuNotifications() As String
+            Get
+                Return ResourceManager.GetString("strMenuNotifications", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Open Connection File....
+        '''</summary>
+        Friend ReadOnly Property strMenuOpenConnectionFile() As String
+            Get
+                Return ResourceManager.GetString("strMenuOpenConnectionFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Options.
+        '''</summary>
+        Friend ReadOnly Property strMenuOptions() As String
+            Get
+                Return ResourceManager.GetString("strMenuOptions", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Port Scan.
+        '''</summary>
+        Friend ReadOnly Property strMenuPortScan() As String
+            Get
+                Return ResourceManager.GetString("strMenuPortScan", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Quick Connect Toolbar.
+        '''</summary>
+        Friend ReadOnly Property strMenuQuickConnectToolbar() As String
+            Get
+                Return ResourceManager.GetString("strMenuQuickConnectToolbar", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized string similar to Rename.
         '''</summary>
-        Friend ReadOnly Property strMenuFileRename() As String
+        Friend ReadOnly Property strMenuRename() As String
             Get
-                Return ResourceManager.GetString("strMenuFileRename", resourceCulture)
+                Return ResourceManager.GetString("strMenuRename", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized string similar to Rename Connection.
         '''</summary>
-        Friend ReadOnly Property strMenuFileRenameConnection() As String
+        Friend ReadOnly Property strMenuRenameConnection() As String
             Get
-                Return ResourceManager.GetString("strMenuFileRenameConnection", resourceCulture)
+                Return ResourceManager.GetString("strMenuRenameConnection", resourceCulture)
             End Get
         End Property
         
         '''<summary>
         '''  Looks up a localized string similar to Rename Folder.
         '''</summary>
-        Friend ReadOnly Property strMenuFileRenameFolder() As String
+        Friend ReadOnly Property strMenuRenameFolder() As String
             Get
-                Return ResourceManager.GetString("strMenuFileRenameFolder", resourceCulture)
+                Return ResourceManager.GetString("strMenuRenameFolder", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Report a Bug.
+        '''</summary>
+        Friend ReadOnly Property strMenuReportBug() As String
+            Get
+                Return ResourceManager.GetString("strMenuReportBug", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Save Connection File.
+        '''</summary>
+        Friend ReadOnly Property strMenuSaveConnectionFile() As String
+            Get
+                Return ResourceManager.GetString("strMenuSaveConnectionFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Save Connection File As....
+        '''</summary>
+        Friend ReadOnly Property strMenuSaveConnectionFileAs() As String
+            Get
+                Return ResourceManager.GetString("strMenuSaveConnectionFileAs", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Screenshot Manager.
+        '''</summary>
+        Friend ReadOnly Property strMenuScreenshotManager() As String
+            Get
+                Return ResourceManager.GetString("strMenuScreenshotManager", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Sessions.
+        '''</summary>
+        Friend ReadOnly Property strMenuSessions() As String
+            Get
+                Return ResourceManager.GetString("strMenuSessions", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Sessions and Screenshots.
+        '''</summary>
+        Friend ReadOnly Property strMenuSessionsAndScreenshots() As String
+            Get
+                Return ResourceManager.GetString("strMenuSessionsAndScreenshots", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Show Text.
+        '''</summary>
+        Friend ReadOnly Property strMenuShowText() As String
+            Get
+                Return ResourceManager.GetString("strMenuShowText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to SSH File Transfer.
+        '''</summary>
+        Friend ReadOnly Property strMenuSSHFileTransfer() As String
+            Get
+                Return ResourceManager.GetString("strMenuSSHFileTransfer", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Support Forum.
+        '''</summary>
+        Friend ReadOnly Property strMenuSupportForum() As String
+            Get
+                Return ResourceManager.GetString("strMenuSupportForum", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Tools.
+        '''</summary>
+        Friend ReadOnly Property strMenuTools() As String
+            Get
+                Return ResourceManager.GetString("strMenuTools", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;View.
+        '''</summary>
+        Friend ReadOnly Property strMenuView() As String
+            Get
+                Return ResourceManager.GetString("strMenuView", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Website.
+        '''</summary>
+        Friend ReadOnly Property strMenuWebsite() As String
+            Get
+                Return ResourceManager.GetString("strMenuWebsite", resourceCulture)
             End Get
         End Property
         
@@ -957,6 +1407,69 @@ Namespace My.Resources
         Friend ReadOnly Property strReleasedUnderGPL() As String
             Get
                 Return ResourceManager.GetString("strReleasedUnderGPL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select a panel from the list below or click New to add a new one. Click OK to continue..
+        '''</summary>
+        Friend ReadOnly Property strSelectPanel() As String
+            Get
+                Return ResourceManager.GetString("strSelectPanel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Aspect.
+        '''</summary>
+        Friend ReadOnly Property strSmartSizeModeAspect() As String
+            Get
+                Return ResourceManager.GetString("strSmartSizeModeAspect", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Free.
+        '''</summary>
+        Friend ReadOnly Property strSmartSizeModeFree() As String
+            Get
+                Return ResourceManager.GetString("strSmartSizeModeFree", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to No SmartSize.
+        '''</summary>
+        Friend ReadOnly Property strSmartSizeModeNone() As String
+            Get
+                Return ResourceManager.GetString("strSmartSizeModeNone", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Status.
+        '''</summary>
+        Friend ReadOnly Property strStatus() As String
+            Get
+                Return ResourceManager.GetString("strStatus", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Password.
+        '''</summary>
+        Friend ReadOnly Property strTitlePassword() As String
+            Get
+                Return ResourceManager.GetString("strTitlePassword", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select Panel.
+        '''</summary>
+        Friend ReadOnly Property strTitleSelectPanel() As String
+            Get
+                Return ResourceManager.GetString("strTitleSelectPanel", resourceCulture)
             End Get
         End Property
         

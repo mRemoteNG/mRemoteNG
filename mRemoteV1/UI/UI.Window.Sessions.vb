@@ -90,8 +90,8 @@ Namespace UI
                 Me.HideOnClose = True
                 Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
                 Me.Name = "Sessions"
-                Me.TabText = Language.Base.Menu_Sessions
-                Me.Text = Language.Base.Menu_Sessions
+                Me.TabText = My.Resources.strMenuSessions
+                Me.Text = My.Resources.strMenuSessions
                 Me.cMenSession.ResumeLayout(False)
                 Me.ResumeLayout(False)
 
@@ -132,8 +132,8 @@ Namespace UI
                 clmSesType.Text = Language.Base.Type
                 cMenSessionRefresh.Text = Language.Base.Refresh
                 cMenSessionLogOff.Text = Language.Base.LogOff
-                TabText = Language.Base.Menu_Sessions
-                Text = Language.Base.Menu_Sessions
+                TabText = My.Resources.strMenuSessions
+                Text = My.Resources.strMenuSessions
             End Sub
 #End Region
 

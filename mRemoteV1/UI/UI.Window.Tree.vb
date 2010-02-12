@@ -497,13 +497,13 @@ Namespace UI
                 cMenTreeToolsSort.Text = Language.Base.Sort
                 cMenTreeToolsSortAscending.Text = Language.Base.SortAsc
                 cMenTreeToolsSortDescending.Text = Language.Base.SortDesc
-                cMenTreeToolsExternalApps.Text = Language.Base.Menu_ExternalApplications
+                cMenTreeToolsExternalApps.Text = My.Resources.strMenuExternalTools
                 cMenTreeDuplicate.Text = Language.Base.Duplicate
                 cMenTreeRename.Text = Language.Base.Rename
                 cMenTreeDelete.Text = Language.Base.Delete
                 cMenTreeMoveUp.Text = Language.Base.MoveUp
                 cMenTreeMoveDown.Text = Language.Base.MoveDown
-                mMenView.Text = Language.Base.Menu_View
+                mMenView.Text = My.Resources.strMenuView
                 mMenViewExpandAllFolders.Text = Language.Base.ExpandAllFolders
                 mMenViewCollapseAllFolders.Text = Language.Base.CollapseAllFolders
                 TabText = Language.Base.Connections

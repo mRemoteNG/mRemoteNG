@@ -1723,10 +1723,10 @@ Namespace UI
                 chkMCWarnings.Text = Language.Base.Warnings
                 chkMCInformation.Text = Language.Base.Informations
                 chkUseOnlyErrorsAndInfosPanel.Text = Language.Base.UseOnlyErrorsAndInfosPanel
-                btnOK.Text = Language.Base.Button_OK
-                btnCancel.Text = Language.Base.Button_Cancel
-                TabText = Language.Base.Menu_Options
-                Text = Language.Base.Menu_Options
+                btnOK.Text = My.Resources.strButtonOK
+                btnCancel.Text = My.Resources.strButtonCancel
+                TabText = My.Resources.strMenuOptions
+                Text = My.Resources.strMenuOptions
                 Label3.Text = Language.Base.UltraVNCSCListeningPort & ":"
                 chkProperInstallationOfComponentsAtStartup.Text = Language.Base.CheckProperInstallationOfComponentsAtStartup
                 lblXulRunnerPath.Text = Language.Base.XULrunnerPath & ":"

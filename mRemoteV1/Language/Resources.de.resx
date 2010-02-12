@@ -1,0 +1,328 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strAbout" xml:space="preserve">
+    <value>Über</value>
+  </data>
+  <data name="strActive" xml:space="preserve">
+    <value>Aktiv</value>
+  </data>
+  <data name="strButtonCancel" xml:space="preserve">
+    <value>&amp;Abbrechen</value>
+  </data>
+  <data name="strButtonClose" xml:space="preserve">
+    <value>&amp;Schließen</value>
+  </data>
+  <data name="strButtonImport" xml:space="preserve">
+    <value>&amp;Importieren</value>
+  </data>
+  <data name="strButtonNew" xml:space="preserve">
+    <value>&amp;Neu</value>
+  </data>
+  <data name="strButtonScan" xml:space="preserve">
+    <value>&amp;Scannnen</value>
+  </data>
+  <data name="strButtonStop" xml:space="preserve">
+    <value>&amp;Stop</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
+    <value>Are you sure you want to delete the connection, "{0}"?</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
+    <value>Are you sure you want to delete the empty folder, "{0}"?</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
+    <value>Are you sure you want to delete the folder, "{0}"? Any folders or connections that it contains will also be deleted.</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strConfirmExitMainInstruction" xml:space="preserve">
+    <value>Do you want to close all open connections?</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strConfirmResetLayout" xml:space="preserve">
+    <value>Are you sure you want to reset the panels to their default layout?</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strConnectionDescriptionColors" xml:space="preserve">
+    <value>Wählen sie die Farb Qualität.</value>
+  </data>
+  <data name="strConnectionPropertyColors" xml:space="preserve">
+    <value>Farben</value>
+  </data>
+  <data name="strDoNotShowThisMessageAgain" xml:space="preserve">
+    <value>Do not show this message again.</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strFAMFAMFAMAttribution" xml:space="preserve">
+    <value>Includes icons by [FAMFAMFAM]</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strInactive" xml:space="preserve">
+    <value>Inaktiv</value>
+  </data>
+  <data name="strLabelChangeLog" xml:space="preserve">
+    <value>Change Log:</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strLabelConnect" xml:space="preserve">
+    <value>&amp;Connect:</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strLabelPassword" xml:space="preserve">
+    <value>Passwort:</value>
+  </data>
+  <data name="strLabelVerify" xml:space="preserve">
+    <value>Überprüfen:</value>
+  </data>
+  <data name="strMagicLibraryAttribution" xml:space="preserve">
+    <value>Uses the Magic library by [Crownwood Software]</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strMenuAbout" xml:space="preserve">
+    <value>Über</value>
+  </data>
+  <data name="strMenuAddConnectionPanel" xml:space="preserve">
+    <value>Verbindungs Panel hinzufügen</value>
+  </data>
+  <data name="strMenuCheckForUpdates" xml:space="preserve">
+    <value>Suche nach Updates</value>
+  </data>
+  <data name="strMenuConfig" xml:space="preserve">
+    <value>Konfiguration</value>
+  </data>
+  <data name="strMenuConnect" xml:space="preserve">
+    <value>Connect</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strMenuConnectionPanels" xml:space="preserve">
+    <value>Verbindungs Panels</value>
+  </data>
+  <data name="strMenuConnections" xml:space="preserve">
+    <value>Verbindungen</value>
+  </data>
+  <data name="strMenuConnectionsConfig" xml:space="preserve">
+    <value>Verbindungen and Konfiguration</value>
+  </data>
+  <data name="strMenuDonate" xml:space="preserve">
+    <value>Spenden</value>
+  </data>
+  <data name="strMenuExit" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="strMenuExternalTools" xml:space="preserve">
+    <value>Externe Programme</value>
+  </data>
+  <data name="strMenuExternalToolsToolbar" xml:space="preserve">
+    <value>Externe Programme Symbolleiste</value>
+  </data>
+  <data name="strMenuFile" xml:space="preserve">
+    <value>&amp;Datei</value>
+  </data>
+  <data name="strMenuFullScreen" xml:space="preserve">
+    <value>Vollbild</value>
+  </data>
+  <data name="strMenuFullScreenRDP" xml:space="preserve">
+    <value>Vollbild (RDP)</value>
+  </data>
+  <data name="strMenuHelp" xml:space="preserve">
+    <value>&amp;Hilfe</value>
+  </data>
+  <data name="strMenuHelpContents" xml:space="preserve">
+    <value>mRemoteNG Hilfe</value>
+  </data>
+  <data name="strMenuJumpTo" xml:space="preserve">
+    <value>Springe Zu</value>
+  </data>
+  <data name="strMenuNewConnectionFile" xml:space="preserve">
+    <value>Neu Verbindungen Datei</value>
+  </data>
+  <data name="strMenuNotifications" xml:space="preserve">
+    <value>Meldungen</value>
+  </data>
+  <data name="strMenuOpenConnectionFile" xml:space="preserve">
+    <value>Verbindungen Datei Öffnen...</value>
+  </data>
+  <data name="strMenuOptions" xml:space="preserve">
+    <value>Optionen</value>
+  </data>
+  <data name="strMenuPortScan" xml:space="preserve">
+    <value>Port Scan</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strMenuQuickConnectToolbar" xml:space="preserve">
+    <value>Schnell Verbinden Symbolleiste</value>
+  </data>
+  <data name="strMenuSaveConnectionFile" xml:space="preserve">
+    <value>Verbindungen Datei Speichern</value>
+  </data>
+  <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
+    <value>Verbindungen Datei Speichern Unter...</value>
+  </data>
+  <data name="strMenuScreenshotManager" xml:space="preserve">
+    <value>Screenshot Manager</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strMenuSessions" xml:space="preserve">
+    <value>Sessions</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
+    <value>Sessions and Screenshots</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strMenuShowText" xml:space="preserve">
+    <value>Text Anzeigen</value>
+  </data>
+  <data name="strMenuSSHFileTransfer" xml:space="preserve">
+    <value>SSH Datei Transfer</value>
+  </data>
+  <data name="strMenuTools" xml:space="preserve">
+    <value>E&amp;xtras</value>
+  </data>
+  <data name="strMenuView" xml:space="preserve">
+    <value>&amp;Ansicht</value>
+  </data>
+  <data name="strMenuWebsite" xml:space="preserve">
+    <value>Webseite</value>
+  </data>
+  <data name="strSelectPanel" xml:space="preserve">
+    <value>Wähle ein panel aus der liste oder klicke auf Neu um ein neues zu erstellen. Klicke OK um fortzufahren.</value>
+  </data>
+  <data name="strSmartSizeModeAspect" xml:space="preserve">
+    <value>Aspekt</value>
+  </data>
+  <data name="strSmartSizeModeFree" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="strSmartSizeModeNone" xml:space="preserve">
+    <value>Kein SmartSize</value>
+  </data>
+  <data name="strStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="strTitlePassword" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="strTitleSelectPanel" xml:space="preserve">
+    <value>Wähle Panel</value>
+  </data>
+</root>

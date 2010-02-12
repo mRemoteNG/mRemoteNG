@@ -422,15 +422,15 @@ Namespace UI
                 cMenAppsRemove.Text = Language.Base.Remove
                 cMenAppsStart.Text = Language.Base.Start
                 grpEditor.Text = Language.Base.Application & " " & Language.Base.Editor
-                Label4.Text = Language.Base.Menu_Options & ":"
+                Label4.Text = My.Resources.strMenuOptions & ":"
                 chkWaitForExit.Text = Language.Base.WaitForExit
                 btnBrowse.Text = Language.Base.Browse
                 Label3.Text = Language.Base.Arguments & ":"
                 Label2.Text = Language.Base.Filename & ":"
                 Label1.Text = Language.Base.DisplayName & ":"
                 dlgOpenFile.Filter = Language.Base.All & " " & Language.Base.Files & " (*.*)|*.*"
-                TabText = Language.Base.Menu_ExternalApplications
-                Text = Language.Base.Menu_ExternalApplications
+                TabText = My.Resources.strMenuExternalTools
+                Text = My.Resources.strMenuExternalTools
             End Sub
 
             Private Sub lvApps_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvApps.DoubleClick

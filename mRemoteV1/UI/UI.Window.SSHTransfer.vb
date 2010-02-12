@@ -290,8 +290,8 @@ Namespace UI
                 Me.Controls.Add(Me.pbStatus)
                 Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
                 Me.Name = "SSHTransfer"
-                Me.TabText = Language.Base.Menu_SSHFileTransfer
-                Me.Text = Language.Base.Menu_SSHFileTransfer
+                Me.TabText = My.Resources.strMenuSSHFileTransfer
+                Me.Text = My.Resources.strMenuSSHFileTransfer
                 Me.grpFiles.ResumeLayout(False)
                 Me.grpFiles.PerformLayout()
                 Me.grpConnection.ResumeLayout(False)
@@ -361,8 +361,8 @@ Namespace UI
                 lblPort.Text = Language.Base.Props_Port & ":"
                 lblHost.Text = Language.Base.Host & ":"
                 btnTransfer.Text = Language.Base.Transfer
-                TabText = Language.Base.Menu_SSHFileTransfer
-                Text = Language.Base.Menu_SSHFileTransfer
+                TabText = My.Resources.strMenuSSHFileTransfer
+                Text = My.Resources.strMenuSSHFileTransfer
             End Sub
 #End Region
 

@@ -646,9 +646,9 @@ Namespace Connection
 
                             If SessionUser <> "" Then
                                 If SessionState = 0 Then
-                                    colSessions.Add(SessionID, Language.Base.Active, SessionUser, SessionName)
+                                    colSessions.Add(SessionID, My.Resources.strActive, SessionUser, SessionName)
                                 Else
-                                    colSessions.Add(SessionID, Language.Base.Inactive, SessionUser, SessionName)
+                                    colSessions.Add(SessionID, My.Resources.strInactive, SessionUser, SessionName)
                                 End If
                             End If
                         Next
