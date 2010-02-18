@@ -18,7 +18,7 @@ Public Class frmChoosePanel
 
     Private Sub ApplyLanguage()
         btnOK.Text = My.Resources.strButtonOK
-        lblDescription.Text = My.Resources.strSelectPanel
+        lblDescription.Text = My.Resources.strLabelSelectPanel
         btnNew.Text = My.Resources.strButtonNew
         btnCancel.Text = My.Resources.strButtonCancel
         Text = My.Resources.strTitleSelectPanel

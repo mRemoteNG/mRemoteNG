@@ -55,7 +55,7 @@ Partial Class frmChoosePanel
         Me.lblDescription.Name = "lblDescription"
         Me.lblDescription.Size = New System.Drawing.Size(229, 29)
         Me.lblDescription.TabIndex = 0
-        Me.lblDescription.Text = My.Resources.strSelectPanel
+        Me.lblDescription.Text = My.Resources.strLabelSelectPanel
         '
         'btnNew
         '

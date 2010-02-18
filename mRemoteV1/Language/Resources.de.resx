@@ -140,7 +140,6 @@
   </data>
   <data name="strButtonStop" xml:space="preserve">
     <value>&amp;Stop</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
     <value>Are you sure you want to delete the connection, "{0}"?</value>
@@ -155,12 +154,10 @@
     <comment>Need translation</comment>
   </data>
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
-    <value>Do you want to close all open connections?</value>
-    <comment>Need translation</comment>
+    <value>Möchten Sie alle offenen Verbindungen schließen?</value>
   </data>
   <data name="strConfirmResetLayout" xml:space="preserve">
-    <value>Are you sure you want to reset the panels to their default layout?</value>
-    <comment>Need translation</comment>
+    <value>Sind Sie sicher das Sie das Panel auf das Standartlayout zurücksetzen wollen?</value>
   </data>
   <data name="strConnectionDescriptionColors" xml:space="preserve">
     <value>Wählen sie die Farb Qualität.</value>
@@ -168,13 +165,11 @@
   <data name="strConnectionPropertyColors" xml:space="preserve">
     <value>Farben</value>
   </data>
-  <data name="strDoNotShowThisMessageAgain" xml:space="preserve">
-    <value>Do not show this message again.</value>
-    <comment>Need translation</comment>
+  <data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
+    <value>Diese Nachricht nicht erneut zeigen.</value>
   </data>
   <data name="strFAMFAMFAMAttribution" xml:space="preserve">
-    <value>Includes icons by [FAMFAMFAM]</value>
-    <comment>Need translation</comment>
+    <value>Beinhaltet die Symbole von [FAMFAMFAM]</value>
   </data>
   <data name="strInactive" xml:space="preserve">
     <value>Inaktiv</value>
@@ -185,7 +180,6 @@
   </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Connect:</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strLabelPassword" xml:space="preserve">
     <value>Passwort:</value>
@@ -194,8 +188,7 @@
     <value>Überprüfen:</value>
   </data>
   <data name="strMagicLibraryAttribution" xml:space="preserve">
-    <value>Uses the Magic library by [Crownwood Software]</value>
-    <comment>Need translation</comment>
+    <value>Benutzt die Magic library von [Crownwood Software]</value>
   </data>
   <data name="strMenuAbout" xml:space="preserve">
     <value>Über</value>
@@ -211,7 +204,6 @@
   </data>
   <data name="strMenuConnect" xml:space="preserve">
     <value>Connect</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strMenuConnectionPanels" xml:space="preserve">
     <value>Verbindungs Panels</value>
@@ -250,7 +242,7 @@
     <value>mRemoteNG Hilfe</value>
   </data>
   <data name="strMenuJumpTo" xml:space="preserve">
-    <value>Springe Zu</value>
+    <value>Springe zu</value>
   </data>
   <data name="strMenuNewConnectionFile" xml:space="preserve">
     <value>Neu Verbindungen Datei</value>
@@ -259,38 +251,34 @@
     <value>Meldungen</value>
   </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
-    <value>Verbindungen Datei Öffnen...</value>
+    <value>Verbindungen Datei öffnen...</value>
   </data>
   <data name="strMenuOptions" xml:space="preserve">
     <value>Optionen</value>
   </data>
   <data name="strMenuPortScan" xml:space="preserve">
     <value>Port Scan</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strMenuQuickConnectToolbar" xml:space="preserve">
     <value>Schnell Verbinden Symbolleiste</value>
   </data>
   <data name="strMenuSaveConnectionFile" xml:space="preserve">
-    <value>Verbindungen Datei Speichern</value>
+    <value>Verbindungen Datei speichern</value>
   </data>
   <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
-    <value>Verbindungen Datei Speichern Unter...</value>
+    <value>Verbindungen Datei speichern unter...</value>
   </data>
   <data name="strMenuScreenshotManager" xml:space="preserve">
     <value>Screenshot Manager</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strMenuSessions" xml:space="preserve">
     <value>Sessions</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
     <value>Sessions and Screenshots</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strMenuShowText" xml:space="preserve">
-    <value>Text Anzeigen</value>
+    <value>Text anzeigen</value>
   </data>
   <data name="strMenuSSHFileTransfer" xml:space="preserve">
     <value>SSH Datei Transfer</value>
@@ -304,8 +292,8 @@
   <data name="strMenuWebsite" xml:space="preserve">
     <value>Webseite</value>
   </data>
-  <data name="strSelectPanel" xml:space="preserve">
-    <value>Wähle ein panel aus der liste oder klicke auf Neu um ein neues zu erstellen. Klicke OK um fortzufahren.</value>
+  <data name="strLabelSelectPanel" xml:space="preserve">
+    <value>Wähle ein Panel aus der Liste oder klicke auf Neu um ein neues zu erstellen. Klicke OK um fortzufahren.</value>
   </data>
   <data name="strSmartSizeModeAspect" xml:space="preserve">
     <value>Aspekt</value>
@@ -324,5 +312,51 @@
   </data>
   <data name="strTitleSelectPanel" xml:space="preserve">
     <value>Wähle Panel</value>
+  </data>
+  <data name="strButtonLaunchPutty" xml:space="preserve">
+    <value>Starte PuTTY</value>
+  </data>
+  <data name="strButtonTestProxy" xml:space="preserve">
+    <value>Test Proxy</value>
+  </data>
+  <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
+    <value>Automatisch versuchen zu verbinden wenn Verbindung getrennt wird (nur RDP &amp;&amp; ICA)</value>
+  </data>
+  <data name="strCheckboxProxyAuthentication" xml:space="preserve">
+    <value>Benutze Authentifizierung</value>
+  </data>
+  <data name="strCheckboxPuttyPath" xml:space="preserve">
+    <value>Eigener PuTTY Pfad:</value>
+  </data>
+  <data name="strCheckboxUpdateUseProxy" xml:space="preserve">
+    <value>Proxy für automatische Updates verwenden</value>
+  </data>
+  <data name="strLabelAddress" xml:space="preserve">
+    <value>Addresse:</value>
+  </data>
+  <data name="strLabelPortableEdition" xml:space="preserve">
+    <value>Portable Edition</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strLabelPuttySessionsConfig" xml:space="preserve">
+    <value>Hier klicken um PuTTY Sessions zu konfigurieren:</value>
+  </data>
+  <data name="strLabelPuttyTimeout" xml:space="preserve">
+    <value>Maximale Zeit die auf PuTTY und integrierte Ext. Apps gewartet wird:</value>
+  </data>
+  <data name="strLabelReleasedUnderGPL" xml:space="preserve">
+    <value>Unter der GNU General Public License (GPL) veröffentlicht</value>
+  </data>
+  <data name="strLabelSeconds" xml:space="preserve">
+    <value>Sekunden</value>
+  </data>
+  <data name="strMenuCtrlAltDel" xml:space="preserve">
+    <value>Ctrl-Alt-Del</value>
+  </data>
+  <data name="strMenuCtrlEsc" xml:space="preserve">
+    <value>Ctrl-Esc</value>
+  </data>
+  <data name="strTabAdvanced" xml:space="preserve">
+    <value>Erweitert</value>
   </data>
 </root>

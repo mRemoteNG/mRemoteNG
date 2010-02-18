@@ -290,8 +290,8 @@ Namespace UI
                 cmenTabTransferFile.Text = Language.Base.TransferFile & " (SSH)"
                 cmenTabRefreshScreen.Text = Language.Base.RefreshScreen & " (VNC)"
                 cmenTabSendSpecialKeys.Text = Language.Base.SendSpecialKeys & " (VNC)"
-                cmenTabSendSpecialKeysCtrlAltDel.Text = Language.Base.Key_Control & "+" & Language.Base.Key_Alt & "+" & Language.Base.Key_Del
-                cmenTabSendSpecialKeysCtrlEsc.Text = Language.Base.Key_Control & "+" & Language.Base.Key_Esc
+                cmenTabSendSpecialKeysCtrlAltDel.Text = My.Resources.strMenuCtrlAltDel
+                cmenTabSendSpecialKeysCtrlEsc.Text = My.Resources.strMenuCtrlEsc
                 cmenTabExternalApps.Text = My.Resources.strMenuExternalTools
                 cmenTabRenameTab.Text = Language.Base.RenameTab
                 cmenTabDuplicateTab.Text = Language.Base.DuplicateTab

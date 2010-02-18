@@ -799,6 +799,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Launch PuTTY.
+        '''</summary>
+        Friend ReadOnly Property strButtonLaunchPutty() As String
+            Get
+                Return ResourceManager.GetString("strButtonLaunchPutty", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &amp;New.
         '''</summary>
         Friend ReadOnly Property strButtonNew() As String
@@ -831,6 +840,60 @@ Namespace My.Resources
         Friend ReadOnly Property strButtonStop() As String
             Get
                 Return ResourceManager.GetString("strButtonStop", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Test Proxy.
+        '''</summary>
+        Friend ReadOnly Property strButtonTestProxy() As String
+            Get
+                Return ResourceManager.GetString("strButtonTestProxy", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only).
+        '''</summary>
+        Friend ReadOnly Property strCheckboxAutomaticReconnect() As String
+            Get
+                Return ResourceManager.GetString("strCheckboxAutomaticReconnect", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Do not show this message again..
+        '''</summary>
+        Friend ReadOnly Property strCheckboxDoNotShowThisMessageAgain() As String
+            Get
+                Return ResourceManager.GetString("strCheckboxDoNotShowThisMessageAgain", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to This proxy server requires authentication.
+        '''</summary>
+        Friend ReadOnly Property strCheckboxProxyAuthentication() As String
+            Get
+                Return ResourceManager.GetString("strCheckboxProxyAuthentication", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Use custom PuTTY path:.
+        '''</summary>
+        Friend ReadOnly Property strCheckboxPuttyPath() As String
+            Get
+                Return ResourceManager.GetString("strCheckboxPuttyPath", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Use a proxy server to connect.
+        '''</summary>
+        Friend ReadOnly Property strCheckboxUpdateUseProxy() As String
+            Get
+                Return ResourceManager.GetString("strCheckboxUpdateUseProxy", resourceCulture)
             End Get
         End Property
         
@@ -898,15 +961,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Do not show this message again..
-        '''</summary>
-        Friend ReadOnly Property strDoNotShowThisMessageAgain() As String
-            Get
-                Return ResourceManager.GetString("strDoNotShowThisMessageAgain", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Includes icons by [FAMFAMFAM].
         '''</summary>
         Friend ReadOnly Property strFAMFAMFAMAttribution() As String
@@ -934,6 +988,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Address:.
+        '''</summary>
+        Friend ReadOnly Property strLabelAddress() As String
+            Get
+                Return ResourceManager.GetString("strLabelAddress", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Change Log:.
         '''</summary>
         Friend ReadOnly Property strLabelChangeLog() As String
@@ -957,6 +1020,60 @@ Namespace My.Resources
         Friend ReadOnly Property strLabelPassword() As String
             Get
                 Return ResourceManager.GetString("strLabelPassword", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Portable Edition.
+        '''</summary>
+        Friend ReadOnly Property strLabelPortableEdition() As String
+            Get
+                Return ResourceManager.GetString("strLabelPortableEdition", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to To configure PuTTY sessions click this button:.
+        '''</summary>
+        Friend ReadOnly Property strLabelPuttySessionsConfig() As String
+            Get
+                Return ResourceManager.GetString("strLabelPuttySessionsConfig", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Max. PuTTY &amp;&amp; Integrated Ext. Apps wait time:.
+        '''</summary>
+        Friend ReadOnly Property strLabelPuttyTimeout() As String
+            Get
+                Return ResourceManager.GetString("strLabelPuttyTimeout", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Released under the GNU General Public License (GPL).
+        '''</summary>
+        Friend ReadOnly Property strLabelReleasedUnderGPL() As String
+            Get
+                Return ResourceManager.GetString("strLabelReleasedUnderGPL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to seconds.
+        '''</summary>
+        Friend ReadOnly Property strLabelSeconds() As String
+            Get
+                Return ResourceManager.GetString("strLabelSeconds", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select a panel from the list below or click New to add a new one. Click OK to continue..
+        '''</summary>
+        Friend ReadOnly Property strLabelSelectPanel() As String
+            Get
+                Return ResourceManager.GetString("strLabelSelectPanel", resourceCulture)
             End Get
         End Property
         
@@ -1056,6 +1173,24 @@ Namespace My.Resources
         Friend ReadOnly Property strMenuConnectionsAndConfig() As String
             Get
                 Return ResourceManager.GetString("strMenuConnectionsAndConfig", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ctrl-Alt-Del.
+        '''</summary>
+        Friend ReadOnly Property strMenuCtrlAltDel() As String
+            Get
+                Return ResourceManager.GetString("strMenuCtrlAltDel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ctrl-Esc.
+        '''</summary>
+        Friend ReadOnly Property strMenuCtrlEsc() As String
+            Get
+                Return ResourceManager.GetString("strMenuCtrlEsc", resourceCulture)
             End Get
         End Property
         
@@ -1393,33 +1528,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Portable Edition.
-        '''</summary>
-        Friend ReadOnly Property strPortableEdition() As String
-            Get
-                Return ResourceManager.GetString("strPortableEdition", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Released under the GNU General Public License (GPL).
-        '''</summary>
-        Friend ReadOnly Property strReleasedUnderGPL() As String
-            Get
-                Return ResourceManager.GetString("strReleasedUnderGPL", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Select a panel from the list below or click New to add a new one. Click OK to continue..
-        '''</summary>
-        Friend ReadOnly Property strSelectPanel() As String
-            Get
-                Return ResourceManager.GetString("strSelectPanel", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Aspect.
         '''</summary>
         Friend ReadOnly Property strSmartSizeModeAspect() As String
@@ -1452,6 +1560,15 @@ Namespace My.Resources
         Friend ReadOnly Property strStatus() As String
             Get
                 Return ResourceManager.GetString("strStatus", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Advanced.
+        '''</summary>
+        Friend ReadOnly Property strTabAdvanced() As String
+            Get
+                Return ResourceManager.GetString("strTabAdvanced", resourceCulture)
             End Get
         End Property
         

@@ -475,7 +475,7 @@
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>Change Log:</value>
   </data>
-  <data name="strReleasedUnderGPL" xml:space="preserve">
+  <data name="strLabelReleasedUnderGPL" xml:space="preserve">
     <value>Released under the GNU General Public License (GPL)</value>
   </data>
   <data name="strConfirmResetLayout" xml:space="preserve">
@@ -484,10 +484,10 @@
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>Do you want to close all open connections?</value>
   </data>
-  <data name="strDoNotShowThisMessageAgain" xml:space="preserve">
+  <data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Do not show this message again.</value>
   </data>
-  <data name="strPortableEdition" xml:space="preserve">
+  <data name="strLabelPortableEdition" xml:space="preserve">
     <value>Portable Edition</value>
   </data>
   <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
@@ -676,7 +676,7 @@
   <data name="strMenuWebsite" xml:space="preserve">
     <value>Website</value>
   </data>
-  <data name="strSelectPanel" xml:space="preserve">
+  <data name="strLabelSelectPanel" xml:space="preserve">
     <value>Select a panel from the list below or click New to add a new one. Click OK to continue.</value>
   </data>
   <data name="strSmartSizeModeAspect" xml:space="preserve">
@@ -696,5 +696,44 @@
   </data>
   <data name="strTitleSelectPanel" xml:space="preserve">
     <value>Select Panel</value>
+  </data>
+  <data name="strButtonLaunchPutty" xml:space="preserve">
+    <value>Launch PuTTY</value>
+  </data>
+  <data name="strButtonTestProxy" xml:space="preserve">
+    <value>Test Proxy</value>
+  </data>
+  <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
+    <value>Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only)</value>
+  </data>
+  <data name="strCheckboxProxyAuthentication" xml:space="preserve">
+    <value>This proxy server requires authentication</value>
+  </data>
+  <data name="strCheckboxPuttyPath" xml:space="preserve">
+    <value>Use custom PuTTY path:</value>
+  </data>
+  <data name="strCheckboxUpdateUseProxy" xml:space="preserve">
+    <value>Use a proxy server to connect</value>
+  </data>
+  <data name="strLabelAddress" xml:space="preserve">
+    <value>Address:</value>
+  </data>
+  <data name="strLabelPuttySessionsConfig" xml:space="preserve">
+    <value>To configure PuTTY sessions click this button:</value>
+  </data>
+  <data name="strLabelPuttyTimeout" xml:space="preserve">
+    <value>Max. PuTTY &amp;&amp; Integrated Ext. Apps wait time:</value>
+  </data>
+  <data name="strLabelSeconds" xml:space="preserve">
+    <value>seconds</value>
+  </data>
+  <data name="strMenuCtrlAltDel" xml:space="preserve">
+    <value>Ctrl-Alt-Del</value>
+  </data>
+  <data name="strMenuCtrlEsc" xml:space="preserve">
+    <value>Ctrl-Esc</value>
+  </data>
+  <data name="strTabAdvanced" xml:space="preserve">
+    <value>Advanced</value>
   </data>
 </root>

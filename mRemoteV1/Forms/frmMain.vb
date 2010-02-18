@@ -109,7 +109,7 @@ Public Class frmMain
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         If My.Settings.ConfirmExit And wL.Count > 0 Then
-            Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.AssemblyName, My.Resources.strConfirmExitMainInstruction, "", "", "", My.Resources.strDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+            Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.AssemblyName, My.Resources.strConfirmExitMainInstruction, "", "", "", My.Resources.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
             If cTaskDialog.VerificationChecked Then
                 My.Settings.ConfirmExit = False
             End If

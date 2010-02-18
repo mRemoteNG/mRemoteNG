@@ -1665,21 +1665,21 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                tabAdvanced.Title = Language.Base.Advanced
-                btnTestProxy.Text = Language.Base.TestProxy
-                Label2.Text = Language.Base.Seconds
-                Label1.Text = Language.Base.MaxPuttyWaitTime & ":"
-                chkAutomaticReconnect.Text = Language.Base.AutomaticallyTryToReconnect
-                lblProxyAddress.Text = Language.Base.Address & ":"
+                tabAdvanced.Title = My.Resources.strTabAdvanced
+                btnTestProxy.Text = My.Resources.strButtonTestProxy
+                Label2.Text = My.Resources.strLabelSeconds
+                Label1.Text = My.Resources.strLabelPuttyTimeout
+                chkAutomaticReconnect.Text = My.Resources.strCheckboxAutomaticReconnect
+                lblProxyAddress.Text = My.Resources.strLabelAddress
                 lblProxyPort.Text = Language.Base.Props_Port & ":"
                 lblProxyUsername.Text = Language.Base.Props_Username & ":"
                 lblProxyPassword.Text = Language.Base.Props_Password & ":"
-                chkUseProxyAuthentication.Text = Language.Base.UseAuthentication
-                chkUseProxyForAutomaticUpdates.Text = Language.Base.UseProxyForAutomaticUpdates
-                lblConfigurePuttySessions.Text = Language.Base.ToConfigurePuttySessions
-                btnLaunchPutty.Text = Language.Base.LaunchPutty
+                chkUseProxyAuthentication.Text = My.Resources.strCheckboxProxyAuthentication
+                chkUseProxyForAutomaticUpdates.Text = My.Resources.strCheckboxUpdateUseProxy
+                lblConfigurePuttySessions.Text = My.Resources.strLabelPuttySessionsConfig
+                btnLaunchPutty.Text = My.Resources.strButtonLaunchPutty
                 btnBrowseCustomPuttyPath.Text = Language.Base.Browse
-                chkUseCustomPuttyPath.Text = Language.Base.UseCustomPuttyPath
+                chkUseCustomPuttyPath.Text = My.Resources.strCheckboxPuttyPath
                 chkAutomaticallyGetSessionInfo.Text = Language.Base.AutomaticallyGetSessionInfo
                 chkWriteLogFile.Text = Language.Base.WriteLogFile
                 tabStartupExit.Title = Language.Base.StartupExit

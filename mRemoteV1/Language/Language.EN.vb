@@ -168,23 +168,6 @@
         Public Const DisplayName As String = Props_Display & " " & Props_Name
         Public Const ReallyDeleteSelectedApplications As String = "Do you really want to delete the selected application(s)?"
 
-
-        Public Const Key_Control As String = "Ctrl"
-        Public Const Key_Alt As String = "Alt"
-        Public Const Key_Del As String = "Del"
-        Public Const Key_Esc As String = "Esc"
-
-        Public Const Advanced As String = "Advanced"
-        Public Const TestProxy As String = "Test Proxy"
-        Public Const Seconds As String = "seconds"
-        Public Const MaxPuttyWaitTime As String = "Max. PuTTY && Integrated Ext. Apps wait time"
-        Public Const AutomaticallyTryToReconnect As String = "Automatically try to reconnect when disconnected from server (RDP && ICA only)"
-        Public Const Address As String = "Address"
-        Public Const UseAuthentication As String = "This proxy server requires authentication"
-        Public Const UseProxyForAutomaticUpdates As String = "Use a proxy server to connect"
-        Public Const ToConfigurePuttySessions As String = "To configure PuTTY sessions click this button:"
-        Public Const LaunchPutty As String = "Launch PuTTY"
-        Public Const UseCustomPuttyPath As String = "Use custom PuTTY path:"
         Public Const AutomaticallyGetSessionInfo As String = "Automatically get session information"
         Public Const WriteLogFile As String = "Write log file (mRemoteNG.log)"
         Public Const StartupExit As String = "Startup/Exit"
