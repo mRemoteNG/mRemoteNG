@@ -506,8 +506,8 @@ Namespace UI
                 mMenView.Text = My.Resources.strMenuView
                 mMenViewExpandAllFolders.Text = Language.Base.ExpandAllFolders
                 mMenViewCollapseAllFolders.Text = Language.Base.CollapseAllFolders
-                TabText = Language.Base.Connections
-                Text = Language.Base.Connections
+                TabText = My.Resources.strConnections
+                Text = My.Resources.strConnections
             End Sub
 #End Region
 

@@ -736,4 +736,67 @@
   <data name="strTabAdvanced" xml:space="preserve">
     <value>Advanced</value>
   </data>
+  <data name="strButtonChange" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="strCheckboxReconnectWhenReady" xml:space="preserve">
+    <value>Reconnect when ready</value>
+  </data>
+  <data name="strConnections" xml:space="preserve">
+    <value>Connections</value>
+  </data>
+  <data name="strFilterAll" xml:space="preserve">
+    <value>All Files (*.*)</value>
+  </data>
+  <data name="strFilterApplication" xml:space="preserve">
+    <value>Application Files (*.exe)</value>
+  </data>
+  <data name="strFiltermRemoteCSV" xml:space="preserve">
+    <value>mRemote CSV Files (*.csv)</value>
+  </data>
+  <data name="strFiltermRemoteXML" xml:space="preserve">
+    <value>mRemote XML Files (*.xml)</value>
+  </data>
+  <data name="strFilterRDP" xml:space="preserve">
+    <value>RDP Files (*.rdp)</value>
+  </data>
+  <data name="strFiltervRD2008CSV" xml:space="preserve">
+    <value>visionapp Remote Desktop 2008 CSV Files (*.csv)</value>
+  </data>
+  <data name="strGroupboxAutomaticReconnect" xml:space="preserve">
+    <value>Automatic Reconnect</value>
+  </data>
+  <data name="strGroupboxConnection" xml:space="preserve">
+    <value>Connection</value>
+  </data>
+  <data name="strGroupboxFiles" xml:space="preserve">
+    <value>Files</value>
+  </data>
+  <data name="strLabelServerStatus" xml:space="preserve">
+    <value>Server Status:</value>
+  </data>
+  <data name="strNewConnection" xml:space="preserve">
+    <value>New Connection</value>
+  </data>
+  <data name="strNewFolder" xml:space="preserve">
+    <value>New Folder</value>
+  </data>
+  <data name="strNewRoot" xml:space="preserve">
+    <value>New Root</value>
+  </data>
+  <data name="strNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="strTitleError" xml:space="preserve">
+    <value>Error ({0})</value>
+  </data>
+  <data name="strTitleInformation" xml:space="preserve">
+    <value>Information ({0})</value>
+  </data>
+  <data name="strTitleWarning" xml:space="preserve">
+    <value>Warning ({0})</value>
+  </data>
+  <data name="strYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
 </root>

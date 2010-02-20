@@ -1699,7 +1699,7 @@ Namespace UI
                 chkOpenNewTabRightOfSelected.Text = Language.Base.OpenNewTabRight
                 chkAlwaysShowPanelSelectionDlg.Text = Language.Base.AlwaysShowPanelSelection
                 chkDoubleClickClosesTab.Text = Language.Base.DoubleClickTabClosesIt
-                tabConnections.Title = Language.Base.Connections
+                tabConnections.Title = My.Resources.strConnections
                 chkHostnameLikeDisplayName.Text = Language.Base.SetHostnameLikeDisplayName
                 grpExperimental.Text = Language.Base.Experimental.ToUpper
                 chkUseSQLServer.Text = Language.Base.UseSQLServer
@@ -1746,7 +1746,7 @@ Namespace UI
 
             Private Sub btnBrowseCustomPuttyPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseCustomPuttyPath.Click
                 Dim oDlg As New OpenFileDialog()
-                oDlg.Filter = Language.Base.Applications & " (*.exe)|*.exe|" & Language.Base.All & " " & Language.Base.Files & " (*.*)|*.*"
+                oDlg.Filter = My.Resources.strFilterApplication & "|*.exe|" & My.Resources.strFilterAll & "|*.*"
                 oDlg.FileName = "putty.exe"
                 oDlg.CheckFileExists = True
                 oDlg.Multiselect = False

@@ -428,7 +428,7 @@ Namespace UI
                 Label3.Text = Language.Base.Arguments & ":"
                 Label2.Text = Language.Base.Filename & ":"
                 Label1.Text = Language.Base.DisplayName & ":"
-                dlgOpenFile.Filter = Language.Base.All & " " & Language.Base.Files & " (*.*)|*.*"
+                dlgOpenFile.Filter = My.Resources.strFilterAll & "|*.*"
                 TabText = My.Resources.strMenuExternalTools
                 Text = My.Resources.strMenuExternalTools
             End Sub

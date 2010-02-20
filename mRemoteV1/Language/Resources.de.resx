@@ -359,4 +359,84 @@
   <data name="strTabAdvanced" xml:space="preserve">
     <value>Erweitert</value>
   </data>
+  <data name="strButtonChange" xml:space="preserve">
+    <value>Ändern</value>
+  </data>
+  <data name="strCheckboxReconnectWhenReady" xml:space="preserve">
+    <value>Verbinden wenn bereit</value>
+  </data>
+  <data name="strConnections" xml:space="preserve">
+    <value>Verbindungen</value>
+  </data>
+  <data name="strFilterAll" xml:space="preserve">
+    <value>Alle Dateien (*.*)</value>
+  </data>
+  <data name="strFilterApplication" xml:space="preserve">
+    <value>Application Dateien (*.exe)</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strFiltermRemoteCSV" xml:space="preserve">
+    <value>mRemote CSV Dateien (*.csv)</value>
+  </data>
+  <data name="strFiltermRemoteXML" xml:space="preserve">
+    <value>mRemote XML Dateien (*.xml)</value>
+  </data>
+  <data name="strFilterRDP" xml:space="preserve">
+    <value>RDP Dateien (*.rdp)</value>
+  </data>
+  <data name="strFiltervRD2008CSV" xml:space="preserve">
+    <value>visionapp Remote Desktop 2008 CSV Dateien (*.csv)</value>
+  </data>
+  <data name="strGroupboxAutomaticReconnect" xml:space="preserve">
+    <value>Automatisches wiederverbinden</value>
+  </data>
+  <data name="strGroupboxConnection" xml:space="preserve">
+    <value>Verbindung</value>
+  </data>
+  <data name="strGroupboxFiles" xml:space="preserve">
+    <value>Dateien</value>
+  </data>
+  <data name="strLabelServerStatus" xml:space="preserve">
+    <value>Server Status:</value>
+  </data>
+  <data name="strNewConnection" xml:space="preserve">
+    <value>Neu Verbindung</value>
+  </data>
+  <data name="strNewFolder" xml:space="preserve">
+    <value>Neu Ordner</value>
+  </data>
+  <data name="strNewRoot" xml:space="preserve">
+    <value>Neu Wurzel</value>
+  </data>
+  <data name="strNo" xml:space="preserve">
+    <value>Nein</value>
+  </data>
+  <data name="strTitleError" xml:space="preserve">
+    <value>Fehler ({0})</value>
+  </data>
+  <data name="strTitleInformation" xml:space="preserve">
+    <value>Information ({0})</value>
+  </data>
+  <data name="strTitleWarning" xml:space="preserve">
+    <value>Warnung ({0})</value>
+  </data>
+  <data name="strUpdateFrequencyCustom" xml:space="preserve">
+    <value>Every {0} days</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strUpdateFrequencyDaily" xml:space="preserve">
+    <value>Daily</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strUpdateFrequencyMonthly" xml:space="preserve">
+    <value>Monthly</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strUpdateFrequencyWeekly" xml:space="preserve">
+    <value>Weekly</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strYes" xml:space="preserve">
+    <value>Ya</value>
+  </data>
 </root>

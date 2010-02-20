@@ -12,7 +12,6 @@ Namespace UI
             Friend WithEvents lblDomain As System.Windows.Forms.Label
             Friend WithEvents btnChangeDomain As System.Windows.Forms.Button
             Friend WithEvents AD As ADTree.ADtree
-            Friend WithEvents Label2 As System.Windows.Forms.Label
 
             Private Sub InitializeComponent()
                 Me.btnOK = New System.Windows.Forms.Button
@@ -20,7 +19,6 @@ Namespace UI
                 Me.txtDomain = New System.Windows.Forms.TextBox
                 Me.lblDomain = New System.Windows.Forms.Label
                 Me.btnChangeDomain = New System.Windows.Forms.Button
-                Me.Label2 = New System.Windows.Forms.Label
                 Me.AD = New ADTree.ADtree
                 Me.SuspendLayout()
                 '
@@ -32,7 +30,7 @@ Namespace UI
                 Me.btnOK.Name = "btnOK"
                 Me.btnOK.Size = New System.Drawing.Size(75, 23)
                 Me.btnOK.TabIndex = 100
-                Me.btnOK.Text = My.Resources.strButtonOK
+                Me.btnOK.Text = Global.mRemote.My.Resources.Resources.strButtonOK
                 Me.btnOK.UseVisualStyleBackColor = True
                 '
                 'btnCancel
@@ -44,7 +42,7 @@ Namespace UI
                 Me.btnCancel.Name = "btnCancel"
                 Me.btnCancel.Size = New System.Drawing.Size(75, 23)
                 Me.btnCancel.TabIndex = 110
-                Me.btnCancel.Text = My.Resources.strButtonCancel
+                Me.btnCancel.Text = Global.mRemote.My.Resources.Resources.strButtonCancel
                 Me.btnCancel.UseVisualStyleBackColor = True
                 '
                 'txtDomain
@@ -64,7 +62,7 @@ Namespace UI
                 Me.lblDomain.Name = "lblDomain"
                 Me.lblDomain.Size = New System.Drawing.Size(46, 13)
                 Me.lblDomain.TabIndex = 20
-                Me.lblDomain.Text = Language.Base.Props_Domain & ":"
+                Me.lblDomain.Text = "Domain:"
                 '
                 'btnChangeDomain
                 '
@@ -74,26 +72,19 @@ Namespace UI
                 Me.btnChangeDomain.Name = "btnChangeDomain"
                 Me.btnChangeDomain.Size = New System.Drawing.Size(75, 23)
                 Me.btnChangeDomain.TabIndex = 40
-                Me.btnChangeDomain.Text = Language.Base.Change
+                Me.btnChangeDomain.Text = Global.mRemote.My.Resources.Resources.strButtonChange
                 Me.btnChangeDomain.UseVisualStyleBackColor = True
-                '
-                'Label2
-                '
-                Me.Label2.AutoSize = True
-                Me.Label2.Location = New System.Drawing.Point(-190, 349)
-                Me.Label2.Name = "Label2"
-                Me.Label2.Size = New System.Drawing.Size(44, 13)
-                Me.Label2.TabIndex = 3
-                Me.Label2.Text = Language.Base.Change
                 '
                 'AD
                 '
+                Me.AD.ADPath = Nothing
                 Me.AD.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                             Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.AD.Domain = ""
+                Me.AD.Domain = "akane"
                 Me.AD.Location = New System.Drawing.Point(0, 0)
                 Me.AD.Name = "AD"
+                Me.AD.SelectedNode = Nothing
                 Me.AD.Size = New System.Drawing.Size(530, 341)
                 Me.AD.TabIndex = 10
                 '
@@ -103,12 +94,12 @@ Namespace UI
                 Me.CancelButton = Me.btnCancel
                 Me.ClientSize = New System.Drawing.Size(530, 373)
                 Me.Controls.Add(Me.AD)
-                Me.Controls.Add(Me.Label2)
                 Me.Controls.Add(Me.lblDomain)
                 Me.Controls.Add(Me.txtDomain)
                 Me.Controls.Add(Me.btnChangeDomain)
                 Me.Controls.Add(Me.btnCancel)
                 Me.Controls.Add(Me.btnOK)
+                Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.Icon = Global.mRemote.My.Resources.Resources.ActiveDirectory_Icon
                 Me.Name = "ADImport"
                 Me.TabText = "Active Directory Import"
@@ -136,8 +127,7 @@ Namespace UI
                 btnOK.Text = My.Resources.strButtonOK
                 btnCancel.Text = My.Resources.strButtonCancel
                 lblDomain.Text = Language.Base.Props_Domain & ":"
-                btnChangeDomain.Text = Language.Base.Change
-                Label2.Text = Language.Base.Change
+                btnChangeDomain.Text = My.Resources.strButtonChange
             End Sub
 #End Region
 

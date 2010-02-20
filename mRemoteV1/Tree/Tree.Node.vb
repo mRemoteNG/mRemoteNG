@@ -182,19 +182,18 @@ Namespace Tree
         Public Shared Function AddNode(ByVal NodeType As Tree.Node.Type, Optional ByVal Text As String = "") As TreeNode
             Try
                 Dim nNode As New TreeNode
-                nNode.Text = Language.Base.New_ & " "
 
                 Select Case NodeType
                     Case Type.Connection
-                        nNode.Text &= Language.Base.Connection
+                        nNode.Text = My.Resources.strNewConnection
                         nNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
                         nNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
                     Case Type.Container
-                        nNode.Text &= Language.Base.Folder
+                        nNode.Text = My.Resources.strNewFolder
                         nNode.ImageIndex = Images.Enums.TreeImage.Container
                         nNode.SelectedImageIndex = Images.Enums.TreeImage.Container
                     Case Type.Root
-                        nNode.Text &= Language.Base.Root
+                        nNode.Text = My.Resources.strNewRoot
                         nNode.ImageIndex = Images.Enums.TreeImage.Root
                         nNode.SelectedImageIndex = Images.Enums.TreeImage.Root
                 End Select
@@ -500,7 +499,7 @@ Namespace Tree
             Else
                 _TreeView.Nodes.Clear()
                 '_TreeView.Nodes.Add("Credentials")
-                _TreeView.Nodes.Add(Language.Base.Connections)
+                _TreeView.Nodes.Add(My.Resources.strConnections)
             End If
         End Sub
 

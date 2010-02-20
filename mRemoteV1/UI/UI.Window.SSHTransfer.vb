@@ -74,7 +74,7 @@ Namespace UI
                 Me.grpFiles.Size = New System.Drawing.Size(668, 194)
                 Me.grpFiles.TabIndex = 2000
                 Me.grpFiles.TabStop = False
-                Me.grpFiles.Text = Language.Base.Files
+                Me.grpFiles.Text = My.Resources.strGroupboxFiles
                 '
                 'lblLocalFile
                 '
@@ -146,7 +146,7 @@ Namespace UI
                 Me.grpConnection.Size = New System.Drawing.Size(668, 135)
                 Me.grpConnection.TabIndex = 1000
                 Me.grpConnection.TabStop = False
-                Me.grpConnection.Text = Language.Base.Connection
+                Me.grpConnection.Text = My.Resources.strGroupboxConnection
                 '
                 'radProtSFTP
                 '
@@ -350,11 +350,11 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                grpFiles.Text = Language.Base.Files
+                grpFiles.Text = My.Resources.strGroupboxFiles
                 lblLocalFile.Text = Language.Base.LocalFile & ":"
                 lblRemoteFile.Text = Language.Base.RemoteFile & ":"
                 btnBrowse.Text = Language.Base.Browse
-                grpConnection.Text = Language.Base.Connection
+                grpConnection.Text = My.Resources.strGroupboxConnection
                 lblProtocol.Text = Language.Base.Props_Protocol & ":"
                 lblPassword.Text = Language.Base.Props_Password & ":"
                 lblUser.Text = Language.Base.User & ":"

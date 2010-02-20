@@ -781,6 +781,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Change.
+        '''</summary>
+        Friend ReadOnly Property strButtonChange() As String
+            Get
+                Return ResourceManager.GetString("strButtonChange", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &amp;Close.
         '''</summary>
         Friend ReadOnly Property strButtonClose() As String
@@ -889,6 +898,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Reconnect when ready.
+        '''</summary>
+        Friend ReadOnly Property strCheckboxReconnectWhenReady() As String
+            Get
+                Return ResourceManager.GetString("strCheckboxReconnectWhenReady", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Use a proxy server to connect.
         '''</summary>
         Friend ReadOnly Property strCheckboxUpdateUseProxy() As String
@@ -961,6 +979,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Connections.
+        '''</summary>
+        Friend ReadOnly Property strConnections() As String
+            Get
+                Return ResourceManager.GetString("strConnections", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Includes icons by [FAMFAMFAM].
         '''</summary>
         Friend ReadOnly Property strFAMFAMFAMAttribution() As String
@@ -975,6 +1002,87 @@ Namespace My.Resources
         Friend ReadOnly Property strFAMFAMFAMAttributionURL() As String
             Get
                 Return ResourceManager.GetString("strFAMFAMFAMAttributionURL", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to All Files (*.*).
+        '''</summary>
+        Friend ReadOnly Property strFilterAll() As String
+            Get
+                Return ResourceManager.GetString("strFilterAll", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Application Files (*.exe).
+        '''</summary>
+        Friend ReadOnly Property strFilterApplication() As String
+            Get
+                Return ResourceManager.GetString("strFilterApplication", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to mRemote CSV Files (*.csv).
+        '''</summary>
+        Friend ReadOnly Property strFiltermRemoteCSV() As String
+            Get
+                Return ResourceManager.GetString("strFiltermRemoteCSV", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to mRemote XML Files (*.xml).
+        '''</summary>
+        Friend ReadOnly Property strFiltermRemoteXML() As String
+            Get
+                Return ResourceManager.GetString("strFiltermRemoteXML", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to RDP Files (*.rdp).
+        '''</summary>
+        Friend ReadOnly Property strFilterRDP() As String
+            Get
+                Return ResourceManager.GetString("strFilterRDP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to visionapp Remote Desktop 2008 CSV Files (*.csv).
+        '''</summary>
+        Friend ReadOnly Property strFiltervRD2008CSV() As String
+            Get
+                Return ResourceManager.GetString("strFiltervRD2008CSV", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Automatic Reconnect.
+        '''</summary>
+        Friend ReadOnly Property strGroupboxAutomaticReconnect() As String
+            Get
+                Return ResourceManager.GetString("strGroupboxAutomaticReconnect", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Connection.
+        '''</summary>
+        Friend ReadOnly Property strGroupboxConnection() As String
+            Get
+                Return ResourceManager.GetString("strGroupboxConnection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Files.
+        '''</summary>
+        Friend ReadOnly Property strGroupboxFiles() As String
+            Get
+                Return ResourceManager.GetString("strGroupboxFiles", resourceCulture)
             End Get
         End Property
         
@@ -1074,6 +1182,15 @@ Namespace My.Resources
         Friend ReadOnly Property strLabelSelectPanel() As String
             Get
                 Return ResourceManager.GetString("strLabelSelectPanel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Server Status:.
+        '''</summary>
+        Friend ReadOnly Property strLabelServerStatus() As String
+            Get
+                Return ResourceManager.GetString("strLabelServerStatus", resourceCulture)
             End Get
         End Property
         
@@ -1528,6 +1645,42 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to New Connection.
+        '''</summary>
+        Friend ReadOnly Property strNewConnection() As String
+            Get
+                Return ResourceManager.GetString("strNewConnection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to New Folder.
+        '''</summary>
+        Friend ReadOnly Property strNewFolder() As String
+            Get
+                Return ResourceManager.GetString("strNewFolder", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to New Root.
+        '''</summary>
+        Friend ReadOnly Property strNewRoot() As String
+            Get
+                Return ResourceManager.GetString("strNewRoot", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to No.
+        '''</summary>
+        Friend ReadOnly Property strNo() As String
+            Get
+                Return ResourceManager.GetString("strNo", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Aspect.
         '''</summary>
         Friend ReadOnly Property strSmartSizeModeAspect() As String
@@ -1573,6 +1726,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Error ({0}).
+        '''</summary>
+        Friend ReadOnly Property strTitleError() As String
+            Get
+                Return ResourceManager.GetString("strTitleError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Information ({0}).
+        '''</summary>
+        Friend ReadOnly Property strTitleInformation() As String
+            Get
+                Return ResourceManager.GetString("strTitleInformation", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Password.
         '''</summary>
         Friend ReadOnly Property strTitlePassword() As String
@@ -1587,6 +1758,15 @@ Namespace My.Resources
         Friend ReadOnly Property strTitleSelectPanel() As String
             Get
                 Return ResourceManager.GetString("strTitleSelectPanel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Warning ({0}).
+        '''</summary>
+        Friend ReadOnly Property strTitleWarning() As String
+            Get
+                Return ResourceManager.GetString("strTitleWarning", resourceCulture)
             End Get
         End Property
         
@@ -1623,6 +1803,15 @@ Namespace My.Resources
         Friend ReadOnly Property strUpdateFrequencyWeekly() As String
             Get
                 Return ResourceManager.GetString("strUpdateFrequencyWeekly", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Yes.
+        '''</summary>
+        Friend ReadOnly Property strYes() As String
+            Get
+                Return ResourceManager.GetString("strYes", resourceCulture)
             End Get
         End Property
         

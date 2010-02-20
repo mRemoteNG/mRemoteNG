@@ -84,9 +84,9 @@
     End Sub
 
     Private Sub ApplyLanguage()
-        grpAutomaticReconnect.Text = Language.Base.AutomaticReconnect
+        grpAutomaticReconnect.Text = My.Resources.strGroupboxAutomaticReconnect
         btnClose.Text = My.Resources.strButtonClose
-        lblServerStatus.Text = Language.Base.ServerStatus
-        chkReconnectWhenReady.Text = Language.Base.ReconnectWhenReady
+        lblServerStatus.Text = My.Resources.strLabelServerStatus
+        chkReconnectWhenReady.Text = My.Resources.strCheckboxReconnectWhenReady
     End Sub
 End Class

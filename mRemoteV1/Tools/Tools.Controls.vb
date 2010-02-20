@@ -63,7 +63,7 @@ Namespace Tools
             Public Sub New()
                 Try
                     Me._cMenCons = New ToolStripMenuItem
-                    Me._cMenCons.Text = Language.Base.Connections
+                    Me._cMenCons.Text = My.Resources.strConnections
                     Me._cMenCons.Image = My.Resources.Root
 
                     Me._cMenSep1 = New ToolStripSeparator
@@ -178,8 +178,6 @@ Namespace Tools
             End Sub
         End Class
 
-
-
         Public Shared Function ConnectionsSaveAsDialog() As SaveFileDialog
             Dim sDlg As New SaveFileDialog()
             sDlg.CheckPathExists = True
@@ -187,8 +185,7 @@ Namespace Tools
             sDlg.FileName = App.Info.Connections.DefaultConnectionsFile
             sDlg.OverwritePrompt = True
 
-            sDlg.Filter = "mRemote XML " & Language.Base.Files & " (*.xml)|*.xml|" & "mRemote CSV " & Language.Base.Files & " (*.csv)|*.csv|" & "vRD 2008 CSV " & Language.Base.Files & " (*.csv)|*.csv|" & Language.Base.All & " " & Language.Base.Files & " (*.*)|*.*"
-
+            sDlg.Filter = My.Resources.strFiltermRemoteXML & "|*.xml|" & My.Resources.strFiltermRemoteCSV & "|*.csv|" & My.Resources.strFiltervRD2008CSV & "|*.csv|" & My.Resources.strFilterAll & "|*.*"
 
             Return sDlg
         End Function
@@ -197,7 +194,7 @@ Namespace Tools
             Dim lDlg As New OpenFileDialog()
             lDlg.CheckFileExists = True
             lDlg.InitialDirectory = App.Info.Connections.DefaultConnectionsPath
-            lDlg.Filter = "mRemote XML " & Language.Base.Files & " (*.xml)|*.xml|" & Language.Base.All & " " & Language.Base.Files & " (*.*)|*.*"
+            lDlg.Filter = My.Resources.strFiltermRemoteXML & "|*.xml|" & My.Resources.strFilterAll & "|*.*"
 
             Return lDlg
         End Function
@@ -206,13 +203,10 @@ Namespace Tools
             Dim lDlg As New OpenFileDialog()
             lDlg.CheckFileExists = True
             'lDlg.InitialDirectory = App.Info.Connections.DefaultConnectionsPath
-            lDlg.Filter = "RDP " & Language.Base.Files & " (*.rdp)|*.rdp|" & Language.Base.All & " " & Language.Base.Files & " (*.*)|*.*"
+            lDlg.Filter = My.Resources.strFilterRDP & "|*.rdp|" & My.Resources.strFilterAll & "|*.*"
 
             Return lDlg
         End Function
-
-
-
 
         Public Class TreeNodeSorter
             Implements IComparer
