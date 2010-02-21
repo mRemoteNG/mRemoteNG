@@ -86,7 +86,7 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                btnDisconnect.Text = Language.Base.Disconnect
+                btnDisconnect.Text = My.Resources.strButtonDisconnect
             End Sub
 
             Private Sub StartListening()

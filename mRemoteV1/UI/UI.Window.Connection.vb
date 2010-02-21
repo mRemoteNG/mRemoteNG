@@ -283,20 +283,20 @@ Namespace UI
 
             Private Sub ApplyLanguage()
                 cmenTabFullscreen.Text = My.Resources.strMenuFullScreenRDP
-                cmenTabSmartSize.Text = Language.Base.SmartSize & " (RDP/VNC)"
-                cmenTabViewOnly.Text = Language.Base.Props_ViewOnly & " (VNC)"
-                cmenTabScreenshot.Text = Language.Base.Screenshot
-                cmenTabStartChat.Text = Language.Base.StartChat & " (VNC)"
-                cmenTabTransferFile.Text = Language.Base.TransferFile & " (SSH)"
-                cmenTabRefreshScreen.Text = Language.Base.RefreshScreen & " (VNC)"
-                cmenTabSendSpecialKeys.Text = Language.Base.SendSpecialKeys & " (VNC)"
+                cmenTabSmartSize.Text = My.Resources.strMenuSmartSize
+                cmenTabViewOnly.Text = My.Resources.strMenuViewOnly
+                cmenTabScreenshot.Text = My.Resources.strMenuScreenshot
+                cmenTabStartChat.Text = My.Resources.strMenuStartChat
+                cmenTabTransferFile.Text = My.Resources.strMenuTransferFile
+                cmenTabRefreshScreen.Text = My.Resources.strMenuRefreshScreen
+                cmenTabSendSpecialKeys.Text = My.Resources.strMenuSendSpecialKeys
                 cmenTabSendSpecialKeysCtrlAltDel.Text = My.Resources.strMenuCtrlAltDel
                 cmenTabSendSpecialKeysCtrlEsc.Text = My.Resources.strMenuCtrlEsc
                 cmenTabExternalApps.Text = My.Resources.strMenuExternalTools
-                cmenTabRenameTab.Text = Language.Base.RenameTab
-                cmenTabDuplicateTab.Text = Language.Base.DuplicateTab
-                cmenTabReconnect.Text = Language.Base.Reconnect
-                cmenTabDisconnect.Text = Language.Base.Disconnect
+                cmenTabRenameTab.Text = My.Resources.strMenuRenameTab
+                cmenTabDuplicateTab.Text = My.Resources.strMenuDuplicateTab
+                cmenTabReconnect.Text = My.Resources.strMenuReconnect
+                cmenTabDisconnect.Text = My.Resources.strMenuDisconnect
             End Sub
 
             Private Sub Connection_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing

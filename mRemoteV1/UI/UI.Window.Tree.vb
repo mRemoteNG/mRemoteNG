@@ -485,9 +485,9 @@ Namespace UI
                 cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.Base.ConnectToConsoleSession
                 cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.Base.ConnectInFullscreen
                 cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.Base.ChoosePanelBeforeConnecting
-                cMenTreeDisconnect.Text = Language.Base.Disconnect
+                cMenTreeDisconnect.Text = My.Resources.strMenuDisconnect
                 cMenTreeTools.Text = Language.Base.Tools
-                cMenTreeToolsTransferFile.Text = Language.Base.TransferFile & " (SSH)"
+                cMenTreeToolsTransferFile.Text = My.Resources.strMenuTransferFile
                 cMenTreeToolsImportExport.Text = Language.Base.ImportExport
                 cMenTreeToolsImportExportExportmRemoteXML.Text = Language.Base.ExportmRemoteXML
                 cMenTreeToolsImportExportImportmRemoteXML.Text = Language.Base.ImportmRemoteXML
@@ -500,7 +500,7 @@ Namespace UI
                 cMenTreeToolsExternalApps.Text = My.Resources.strMenuExternalTools
                 cMenTreeDuplicate.Text = Language.Base.Duplicate
                 cMenTreeRename.Text = Language.Base.Rename
-                cMenTreeDelete.Text = Language.Base.Delete
+                cMenTreeDelete.Text = My.Resources.strMenuDelete
                 cMenTreeMoveUp.Text = Language.Base.MoveUp
                 cMenTreeMoveDown.Text = Language.Base.MoveDown
                 mMenView.Text = My.Resources.strMenuView

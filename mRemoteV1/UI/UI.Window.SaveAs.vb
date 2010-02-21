@@ -183,10 +183,10 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                lvSecurity.Items(0).Text = Language.Base.Props_Username
-                lvSecurity.Items(1).Text = Language.Base.Props_Password
-                lvSecurity.Items(2).Text = Language.Base.Props_Domain
-                lvSecurity.Items(3).Text = Language.Base.Inheritance
+                lvSecurity.Items(0).Text = My.Resources.strCheckboxUsername
+                lvSecurity.Items(1).Text = My.Resources.strCheckboxPassword
+                lvSecurity.Items(2).Text = My.Resources.strCheckboxDomain
+                lvSecurity.Items(3).Text = My.Resources.strCheckboxInheritance
                 btnCancel.Text = My.Resources.strButtonCancel
                 btnOK.Text = My.Resources.strButtonOK
                 Label1.Text = Language.Base.UncheckProperties

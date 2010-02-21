@@ -103,7 +103,7 @@ Namespace UI
                 '
                 'clmMessage
                 '
-                Me.clmMessage.Text = Language.Base.Message
+                Me.clmMessage.Text = My.Resources.strColumnMessage
                 Me.clmMessage.Width = 184
                 '
                 'cMenMC
@@ -120,7 +120,7 @@ Namespace UI
                 Me.cMenMCCopy.Name = "cMenMCCopy"
                 Me.cMenMCCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
                 Me.cMenMCCopy.Size = New System.Drawing.Size(136, 22)
-                Me.cMenMCCopy.Text = Language.Base.Copy
+                Me.cMenMCCopy.Text = My.Resources.strMenuCopy
                 '
                 'cMenMCDelete
                 '
@@ -128,7 +128,7 @@ Namespace UI
                 Me.cMenMCDelete.Name = "cMenMCDelete"
                 Me.cMenMCDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete
                 Me.cMenMCDelete.Size = New System.Drawing.Size(136, 22)
-                Me.cMenMCDelete.Text = Language.Base.Delete
+                Me.cMenMCDelete.Text = My.Resources.strMenuDelete
                 '
                 'imgListMC
                 '
@@ -173,9 +173,9 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                clmMessage.Text = Language.Base.Message
-                cMenMCCopy.Text = Language.Base.Copy
-                cMenMCDelete.Text = Language.Base.Delete
+                clmMessage.Text = My.Resources.strColumnMessage
+                cMenMCCopy.Text = My.Resources.strMenuCopy
+                cMenMCDelete.Text = My.Resources.strMenuDelete
                 TabText = My.Resources.strMenuNotifications
                 Text = My.Resources.strMenuNotifications
             End Sub

@@ -122,7 +122,7 @@ Namespace UI
                 Me.btnBrowse.Name = "btnBrowse"
                 Me.btnBrowse.Size = New System.Drawing.Size(81, 23)
                 Me.btnBrowse.TabIndex = 30
-                Me.btnBrowse.Text = Language.Base.Browse
+                Me.btnBrowse.Text = My.Resources.strButtonBrowse
                 Me.btnBrowse.UseVisualStyleBackColor = True
                 '
                 'grpConnection
@@ -353,7 +353,7 @@ Namespace UI
                 grpFiles.Text = My.Resources.strGroupboxFiles
                 lblLocalFile.Text = Language.Base.LocalFile & ":"
                 lblRemoteFile.Text = Language.Base.RemoteFile & ":"
-                btnBrowse.Text = Language.Base.Browse
+                btnBrowse.Text = My.Resources.strButtonBrowse
                 grpConnection.Text = My.Resources.strGroupboxConnection
                 lblProtocol.Text = Language.Base.Props_Protocol & ":"
                 lblPassword.Text = Language.Base.Props_Password & ":"

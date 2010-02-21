@@ -1678,7 +1678,7 @@ Namespace UI
                 chkUseProxyForAutomaticUpdates.Text = My.Resources.strCheckboxUpdateUseProxy
                 lblConfigurePuttySessions.Text = My.Resources.strLabelPuttySessionsConfig
                 btnLaunchPutty.Text = My.Resources.strButtonLaunchPutty
-                btnBrowseCustomPuttyPath.Text = Language.Base.Browse
+                btnBrowseCustomPuttyPath.Text = My.Resources.strButtonBrowse
                 chkUseCustomPuttyPath.Text = My.Resources.strCheckboxPuttyPath
                 chkAutomaticallyGetSessionInfo.Text = Language.Base.AutomaticallyGetSessionInfo
                 chkWriteLogFile.Text = Language.Base.WriteLogFile
@@ -1730,7 +1730,7 @@ Namespace UI
                 Label3.Text = Language.Base.UltraVNCSCListeningPort & ":"
                 chkProperInstallationOfComponentsAtStartup.Text = Language.Base.CheckProperInstallationOfComponentsAtStartup
                 lblXulRunnerPath.Text = Language.Base.XULrunnerPath & ":"
-                btnBrowseXulRunnerPath.Text = Language.Base.Browse
+                btnBrowseXulRunnerPath.Text = My.Resources.strButtonBrowse
                 chkEncryptCompleteFile.Text = Language.Base.EncryptCompleteConnectionFile
             End Sub
 

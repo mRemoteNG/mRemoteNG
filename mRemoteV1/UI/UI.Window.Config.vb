@@ -428,10 +428,10 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                btnShowInheritance.Text = Language.Base.Inheritance
-                btnShowDefaultInheritance.Text = Language.Base.Default_ & " " & Language.Base.Inheritance
-                btnShowProperties.Text = Language.Base.Properties
-                btnShowDefaultProperties.Text = Language.Base.Default_ & " " & Language.Base.Properties
+                btnShowInheritance.Text = My.Resources.strButtonInheritance
+                btnShowDefaultInheritance.Text = My.Resources.strButtonDefaultInheritance
+                btnShowProperties.Text = My.Resources.strButtonProperties
+                btnShowDefaultProperties.Text = My.Resources.strButtonDefaultProperties
                 btnIcon.Text = Language.Base.Props_Icon
                 btnHostStatus.Text = My.Resources.strStatus
                 Text = My.Resources.strMenuConfig

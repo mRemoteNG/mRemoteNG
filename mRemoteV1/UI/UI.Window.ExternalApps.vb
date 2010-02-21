@@ -199,9 +199,9 @@ Namespace UI
                 '
                 Me.btnBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.btnBrowse.Location = New System.Drawing.Point(602, 40)
+                Me.btnBrowse.Location = New System.Drawing.Point(576, 40)
                 Me.btnBrowse.Name = "btnBrowse"
-                Me.btnBrowse.Size = New System.Drawing.Size(69, 23)
+                Me.btnBrowse.Size = New System.Drawing.Size(95, 23)
                 Me.btnBrowse.TabIndex = 40
                 Me.btnBrowse.Text = "Browse..."
                 Me.btnBrowse.UseVisualStyleBackColor = True
@@ -223,7 +223,7 @@ Namespace UI
                 Me.txtFilename.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
                 Me.txtFilename.Location = New System.Drawing.Point(104, 42)
                 Me.txtFilename.Name = "txtFilename"
-                Me.txtFilename.Size = New System.Drawing.Size(492, 20)
+                Me.txtFilename.Size = New System.Drawing.Size(464, 20)
                 Me.txtFilename.TabIndex = 30
                 '
                 'txtDisplayName
@@ -272,6 +272,7 @@ Namespace UI
                 Me.ClientSize = New System.Drawing.Size(684, 323)
                 Me.Controls.Add(Me.grpEditor)
                 Me.Controls.Add(Me.lvApps)
+                Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
                 Me.Name = "ExternalApps"
                 Me.TabText = "External Applications"
@@ -377,7 +378,17 @@ Namespace UI
 
             Private Sub RemoveApps()
                 Try
-                    If MsgBox(Language.Base.ReallyDeleteSelectedApplications, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+                    Dim Prompt As String = ""
+                    Select Case lvApps.SelectedItems.Count
+                        Case Is < 1
+                            Exit Sub
+                        Case Is = 1
+                            Prompt = String.Format(My.Resources.strConfirmDeleteExternalTool, lvApps.SelectedItems(0).Text)
+                        Case Is > 1
+                            Prompt = String.Format(My.Resources.strConfirmDeleteExternalToolMultiple, lvApps.SelectedItems.Count)
+                    End Select
+
+                    If MsgBox(Prompt, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                         For Each lvItem As ListViewItem In lvApps.SelectedItems
                             ExtApps.Remove(lvItem.Tag)
                             lvItem.Tag = Nothing
@@ -414,21 +425,21 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                clmDisplayName.Text = Language.Base.Props_Display & " " & Language.Base.Props_Name
-                clmFilename.Text = Language.Base.Filename
-                clmArguments.Text = Language.Base.Arguments
-                clmWaitForExit.Text = Language.Base.WaitForExit
-                cMenAppsAdd.Text = Language.Base.Add
-                cMenAppsRemove.Text = Language.Base.Remove
-                cMenAppsStart.Text = Language.Base.Start
-                grpEditor.Text = Language.Base.Application & " " & Language.Base.Editor
-                Label4.Text = My.Resources.strMenuOptions & ":"
-                chkWaitForExit.Text = Language.Base.WaitForExit
-                btnBrowse.Text = Language.Base.Browse
-                Label3.Text = Language.Base.Arguments & ":"
-                Label2.Text = Language.Base.Filename & ":"
-                Label1.Text = Language.Base.DisplayName & ":"
-                dlgOpenFile.Filter = My.Resources.strFilterAll & "|*.*"
+                clmDisplayName.Text = My.Resources.strColumnDisplayName
+                clmFilename.Text = My.Resources.strColumnFilename
+                clmArguments.Text = My.Resources.strColumnArguments
+                clmWaitForExit.Text = My.Resources.strColumnWaitForExit
+                cMenAppsAdd.Text = My.Resources.strMenuNewExternalTool
+                cMenAppsRemove.Text = My.Resources.strMenuDeleteExternalTool
+                cMenAppsStart.Text = My.Resources.strMenuLaunchExternalTool
+                grpEditor.Text = My.Resources.strGroupboxExternalToolProperties
+                Label4.Text = My.Resources.strLabelOptions
+                chkWaitForExit.Text = My.Resources.strCheckboxWaitForExit
+                btnBrowse.Text = My.Resources.strButtonBrowse
+                Label3.Text = My.Resources.strLabelArguments
+                Label2.Text = My.Resources.strLabelFilename
+                Label1.Text = My.Resources.strLabelDisplayName
+                dlgOpenFile.Filter = My.Resources.strFilterApplication & "|*.exe|" & My.Resources.strFilterAll & "|*.*"
                 TabText = My.Resources.strMenuExternalTools
                 Text = My.Resources.strMenuExternalTools
             End Sub

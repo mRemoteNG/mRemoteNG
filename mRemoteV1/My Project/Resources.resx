@@ -799,4 +799,121 @@
   <data name="strYes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="strButtonBrowse" xml:space="preserve">
+    <value>&amp;Browse...</value>
+  </data>
+  <data name="strButtonDefaultInheritance" xml:space="preserve">
+    <value>Default Inheritance</value>
+  </data>
+  <data name="strButtonDefaultProperties" xml:space="preserve">
+    <value>Default Properties</value>
+  </data>
+  <data name="strButtonDisconnect" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="strButtonInheritance" xml:space="preserve">
+    <value>Inheritance</value>
+  </data>
+  <data name="strButtonProperties" xml:space="preserve">
+    <value>Properties</value>
+  </data>
+  <data name="strCheckboxDomain" xml:space="preserve">
+    <value>Domain</value>
+  </data>
+  <data name="strCheckboxInheritance" xml:space="preserve">
+    <value>Inheritance</value>
+  </data>
+  <data name="strCheckboxPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="strCheckboxUsername" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="strCheckboxWaitForExit" xml:space="preserve">
+    <value>Wait for exit</value>
+  </data>
+  <data name="strColumnArguments" xml:space="preserve">
+    <value>Arguments</value>
+  </data>
+  <data name="strColumnDisplayName" xml:space="preserve">
+    <value>Display Name</value>
+  </data>
+  <data name="strColumnFilename" xml:space="preserve">
+    <value>Filename</value>
+  </data>
+  <data name="strColumnMessage" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="strColumnWaitForExit" xml:space="preserve">
+    <value>Wait For Exit</value>
+  </data>
+  <data name="strConfirmDeleteExternalTool" xml:space="preserve">
+    <value>Are you sure you want to delete the external tool, "{0}"?</value>
+  </data>
+  <data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
+    <value>Are you sure you want to delete the {0} selected external tools?</value>
+  </data>
+  <data name="strGroupboxExternalToolProperties" xml:space="preserve">
+    <value>External Tool Properties</value>
+  </data>
+  <data name="strLabelArguments" xml:space="preserve">
+    <value>Arguments:</value>
+  </data>
+  <data name="strLabelDisplayName" xml:space="preserve">
+    <value>Display Name</value>
+  </data>
+  <data name="strLabelFilename" xml:space="preserve">
+    <value>Filename:</value>
+  </data>
+  <data name="strLabelOptions" xml:space="preserve">
+    <value>Options:</value>
+  </data>
+  <data name="strMenuCopy" xml:space="preserve">
+    <value>Copy</value>
+  </data>
+  <data name="strMenuDeleteExternalTool" xml:space="preserve">
+    <value>Delete External Tool...</value>
+  </data>
+  <data name="strMenuDisconnect" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="strMenuDuplicateTab" xml:space="preserve">
+    <value>Duplicate Tab</value>
+  </data>
+  <data name="strMenuLaunchExternalTool" xml:space="preserve">
+    <value>Launch External Tool</value>
+  </data>
+  <data name="strMenuNewExternalTool" xml:space="preserve">
+    <value>New External Tool</value>
+  </data>
+  <data name="strMenuPaste" xml:space="preserve">
+    <value>Paste</value>
+  </data>
+  <data name="strMenuReconnect" xml:space="preserve">
+    <value>Reconnect</value>
+  </data>
+  <data name="strMenuRefreshScreen" xml:space="preserve">
+    <value>Refresh Screen (VNC)</value>
+  </data>
+  <data name="strMenuRenameTab" xml:space="preserve">
+    <value>Rename Tab</value>
+  </data>
+  <data name="strMenuScreenshot" xml:space="preserve">
+    <value>Screenshot</value>
+  </data>
+  <data name="strMenuSendSpecialKeys" xml:space="preserve">
+    <value>Send Special Keys (VNC)</value>
+  </data>
+  <data name="strMenuSmartSize" xml:space="preserve">
+    <value>SmartSize (RDP/VNC)</value>
+  </data>
+  <data name="strMenuStartChat" xml:space="preserve">
+    <value>Start Chat (VNC)</value>
+  </data>
+  <data name="strMenuTransferFile" xml:space="preserve">
+    <value>Transfer File (SSH)</value>
+  </data>
+  <data name="strMenuViewOnly" xml:space="preserve">
+    <value>View Only (VNC)</value>
+  </data>
 </root>

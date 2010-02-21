@@ -136,7 +136,7 @@ Namespace UI
                 mMenFile.Text = My.Resources.strMenuFile
                 mMenFileSaveAll.Text = Language.Base.SaveAll
                 mMenFileRemoveAll.Text = Language.Base.RemoveAll
-                cMenScreenshotCopy.Text = Language.Base.Copy
+                cMenScreenshotCopy.Text = My.Resources.strMenuCopy
                 cMenScreenshotSave.Text = Language.Base.Save
                 dlgSaveSingleImage.Filter = Language.Base.SaveImageFilter
                 TabText = Language.Base.Screenshots
