@@ -396,7 +396,7 @@ Namespace UI
                 btnCancel.Text = My.Resources.strButtonCancel
                 btnImport.Text = My.Resources.strButtonImport
                 lblOnlyImport.Text = Language.Base.ProtocolToImport & ":"
-                clmHost.Text = Language.Base.Props_HostnameIP
+                clmHost.Text = My.Resources.strColumnHostnameIP
                 clmOpenPorts.Text = Language.Base.OpenPorts
                 clmClosedPorts.Text = Language.Base.ClosedPorts
                 Label2.Text = Language.Base.EndPort & ":"

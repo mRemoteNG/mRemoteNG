@@ -179,7 +179,7 @@ Namespace UI
                 Me.lblProtocol.Name = "lblProtocol"
                 Me.lblProtocol.Size = New System.Drawing.Size(49, 13)
                 Me.lblProtocol.TabIndex = 90
-                Me.lblProtocol.Text = Language.Base.Props_Protocol & ":"
+                Me.lblProtocol.Text = My.Resources.strLabelProtocol
                 '
                 'lblPassword
                 '
@@ -188,7 +188,7 @@ Namespace UI
                 Me.lblPassword.Name = "lblPassword"
                 Me.lblPassword.Size = New System.Drawing.Size(56, 13)
                 Me.lblPassword.TabIndex = 70
-                Me.lblPassword.Text = Language.Base.Props_Password & ":"
+                Me.lblPassword.Text = My.Resources.strLabelPassword
                 '
                 'lblUser
                 '
@@ -207,7 +207,7 @@ Namespace UI
                 Me.lblPort.Name = "lblPort"
                 Me.lblPort.Size = New System.Drawing.Size(29, 13)
                 Me.lblPort.TabIndex = 30
-                Me.lblPort.Text = Language.Base.Props_Port & ":"
+                Me.lblPort.Text = My.Resources.strLabelPort
                 '
                 'lblHost
                 '
@@ -355,10 +355,10 @@ Namespace UI
                 lblRemoteFile.Text = Language.Base.RemoteFile & ":"
                 btnBrowse.Text = My.Resources.strButtonBrowse
                 grpConnection.Text = My.Resources.strGroupboxConnection
-                lblProtocol.Text = Language.Base.Props_Protocol & ":"
-                lblPassword.Text = Language.Base.Props_Password & ":"
+                lblProtocol.Text = My.Resources.strLabelProtocol
+                lblPassword.Text = My.Resources.strLabelPassword
                 lblUser.Text = Language.Base.User & ":"
-                lblPort.Text = Language.Base.Props_Port & ":"
+                lblPort.Text = My.Resources.strLabelPort
                 lblHost.Text = Language.Base.Host & ":"
                 btnTransfer.Text = Language.Base.Transfer
                 TabText = My.Resources.strMenuSSHFileTransfer

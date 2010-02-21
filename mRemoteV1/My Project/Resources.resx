@@ -550,10 +550,10 @@
   <data name="strButtonStop" xml:space="preserve">
     <value>&amp;Stop</value>
   </data>
-  <data name="strConnectionDescriptionColors" xml:space="preserve">
+  <data name="strPropertyDescriptionColors" xml:space="preserve">
     <value>Select the colour quality to be used.</value>
   </data>
-  <data name="strConnectionPropertyColors" xml:space="preserve">
+  <data name="strPropertyNameColors" xml:space="preserve">
     <value>Colours</value>
   </data>
   <data name="strInactive" xml:space="preserve">
@@ -916,10 +916,136 @@
   <data name="strMenuViewOnly" xml:space="preserve">
     <value>View Only (VNC)</value>
   </data>
-  <data name="strConnectionDescriptionHostnameIP" xml:space="preserve">
+  <data name="strPropertyDescriptionHostnameIP" xml:space="preserve">
     <value>Enter the hostname or ip you want to connect to.</value>
   </data>
-  <data name="strConnectionPropertyHostnameIP" xml:space="preserve">
+  <data name="strPropertyNameHostnameIP" xml:space="preserve">
     <value>Hostname/IP</value>
+  </data>
+  <data name="strButtonIcon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="strCategoryAppearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="strCategoryConnection" xml:space="preserve">
+    <value>Connection</value>
+  </data>
+  <data name="strCategoryCredentials" xml:space="preserve">
+    <value>Credentials</value>
+  </data>
+  <data name="strCategoryDisplay" xml:space="preserve">
+    <value>Display</value>
+  </data>
+  <data name="strCategoryGateway" xml:space="preserve">
+    <value>Gateway</value>
+  </data>
+  <data name="strCategoryMiscellaneous" xml:space="preserve">
+    <value>Miscellaneous</value>
+  </data>
+  <data name="strCategoryProtocol" xml:space="preserve">
+    <value>Protocol</value>
+  </data>
+  <data name="strCategoryRedirect" xml:space="preserve">
+    <value>Redirect</value>
+  </data>
+  <data name="strColumnHostnameIP" xml:space="preserve">
+    <value>Hostname/IP</value>
+  </data>
+  <data name="strColumnUsername" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="strLabelDomain" xml:space="preserve">
+    <value>Domain:</value>
+  </data>
+  <data name="strLabelPort" xml:space="preserve">
+    <value>Port:</value>
+  </data>
+  <data name="strLabelProtocol" xml:space="preserve">
+    <value>Protocol:</value>
+  </data>
+  <data name="strLabelUsername" xml:space="preserve">
+    <value>Username:</value>
+  </data>
+  <data name="strPropertyDescriptionDescription" xml:space="preserve">
+    <value>Put your notes or a description for the host here.</value>
+  </data>
+  <data name="strPropertyDescriptionDomain" xml:space="preserve">
+    <value>Enter your domain.</value>
+  </data>
+  <data name="strPropertyDescriptionIcon" xml:space="preserve">
+    <value>Choose a icon that will be displayed when connected to the host.</value>
+  </data>
+  <data name="strPropertyDescriptionName" xml:space="preserve">
+    <value>This is the name that will be displayed in the connections tree.</value>
+  </data>
+  <data name="strPropertyDescriptionPanel" xml:space="preserve">
+    <value>Sets the panel in which the connection will open.</value>
+  </data>
+  <data name="strPropertyDescriptionPassword" xml:space="preserve">
+    <value>Enter your password.</value>
+  </data>
+  <data name="strPropertyDescriptionPort" xml:space="preserve">
+    <value>Enter the port the selected protocol is listening on.</value>
+  </data>
+  <data name="strPropertyDescriptionProtocol" xml:space="preserve">
+    <value>Choose the protocol mRemoteNG should use to connect to the host.</value>
+  </data>
+  <data name="strPropertyDescriptionUsername" xml:space="preserve">
+    <value>Enter your username.</value>
+  </data>
+  <data name="strPropertyNameDescription" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="strPropertyNameDomain" xml:space="preserve">
+    <value>Domain</value>
+  </data>
+  <data name="strPropertyNameIcon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="strPropertyNameInheritDescription" xml:space="preserve">
+    <value>Inherit Description</value>
+  </data>
+  <data name="strPropertyNameInheritDomain" xml:space="preserve">
+    <value>Inherit Domain</value>
+  </data>
+  <data name="strPropertyNameInheritIcon" xml:space="preserve">
+    <value>Inherit Icon</value>
+  </data>
+  <data name="strPropertyNameInheritPanel" xml:space="preserve">
+    <value>Inherit Panel</value>
+  </data>
+  <data name="strPropertyNameInheritPassword" xml:space="preserve">
+    <value>Inherit Password</value>
+  </data>
+  <data name="strPropertyNameInheritPort" xml:space="preserve">
+    <value>Inherit Port</value>
+  </data>
+  <data name="strPropertyNameInheritProtocol" xml:space="preserve">
+    <value>Inherit Protocol</value>
+  </data>
+  <data name="strPropertyNameInheritUsername" xml:space="preserve">
+    <value>Inherit Username</value>
+  </data>
+  <data name="strPropertyNameName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="strPropertyNamePanel" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="strPropertyNamePassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="strPropertyNamePort" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="strPropertyNameProtocol" xml:space="preserve">
+    <value>Protocol</value>
+  </data>
+  <data name="strPropertyNameUsername" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="strTabAppearance" xml:space="preserve">
+    <value>Appearance</value>
   </data>
 </root>

@@ -159,10 +159,10 @@
   <data name="strConfirmResetLayout" xml:space="preserve">
     <value>Sind Sie sicher das Sie das Panel auf das Standartlayout zurücksetzen wollen?</value>
   </data>
-  <data name="strConnectionDescriptionColors" xml:space="preserve">
+  <data name="strPropertyDescriptionColors" xml:space="preserve">
     <value>Wählen sie die Farb Qualität.</value>
   </data>
-  <data name="strConnectionPropertyColors" xml:space="preserve">
+  <data name="strPropertyNameColors" xml:space="preserve">
     <value>Farben</value>
   </data>
   <data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
@@ -558,10 +558,138 @@
   <data name="strMenuViewOnly" xml:space="preserve">
     <value>View-Only (VNC)</value>
   </data>
-  <data name="strConnectionDescriptionHostnameIP" xml:space="preserve">
+  <data name="strPropertyDescriptionHostnameIP" xml:space="preserve">
     <value>Der Hostname oder die IP zu der eine Verbinung aufgebaut werden soll.</value>
   </data>
-  <data name="strConnectionPropertyHostnameIP" xml:space="preserve">
+  <data name="strPropertyNameHostnameIP" xml:space="preserve">
     <value>Hostname/IP</value>
+  </data>
+  <data name="strButtonIcon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="strCategoryAppearance" xml:space="preserve">
+    <value>Aussehen</value>
+  </data>
+  <data name="strCategoryConnection" xml:space="preserve">
+    <value>Verbindung</value>
+  </data>
+  <data name="strCategoryCredentials" xml:space="preserve">
+    <value>Credentials</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strCategoryDisplay" xml:space="preserve">
+    <value>Anzeige</value>
+  </data>
+  <data name="strCategoryGateway" xml:space="preserve">
+    <value>Gateway</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strCategoryMiscellaneous" xml:space="preserve">
+    <value>Verschiedenes</value>
+  </data>
+  <data name="strCategoryProtocol" xml:space="preserve">
+    <value>Protokoll</value>
+  </data>
+  <data name="strCategoryRedirect" xml:space="preserve">
+    <value>Umleitung</value>
+  </data>
+  <data name="strColumnHostnameIP" xml:space="preserve">
+    <value>Hostname/IP</value>
+  </data>
+  <data name="strColumnUsername" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="strLabelDomain" xml:space="preserve">
+    <value>Domäne:</value>
+  </data>
+  <data name="strLabelPort" xml:space="preserve">
+    <value>Port:</value>
+  </data>
+  <data name="strLabelProtocol" xml:space="preserve">
+    <value>Protokoll:</value>
+  </data>
+  <data name="strLabelUsername" xml:space="preserve">
+    <value>Benutzername:</value>
+  </data>
+  <data name="strPropertyDescriptionDescription" xml:space="preserve">
+    <value>Put your notes or a description for the host here.</value>
+  </data>
+  <data name="strPropertyDescriptionDomain" xml:space="preserve">
+    <value>Geben sie hier ihre Domäne ein.</value>
+  </data>
+  <data name="strPropertyDescriptionIcon" xml:space="preserve">
+    <value>Das ausgewählte Icon wird bei Verbindung zum Host im Tab angezeigt.</value>
+  </data>
+  <data name="strPropertyDescriptionName" xml:space="preserve">
+    <value>Dies ist der Name der im Verbindungs Baum angezeigt wird.</value>
+  </data>
+  <data name="strPropertyDescriptionPanel" xml:space="preserve">
+    <value>Setzt das Panel in dem die Verbindung geöffnet wird.</value>
+  </data>
+  <data name="strPropertyDescriptionPassword" xml:space="preserve">
+    <value>Geben sie hier ihr Passwort ein.</value>
+  </data>
+  <data name="strPropertyDescriptionPort" xml:space="preserve">
+    <value>Geben sie den Port ein auf dem das Protokoll auf Verbindungen wartet.</value>
+  </data>
+  <data name="strPropertyDescriptionProtocol" xml:space="preserve">
+    <value>Wählen sie das Protokoll das verwendet werden soll um eine Verbindung aufzubauen.</value>
+  </data>
+  <data name="strPropertyDescriptionUsername" xml:space="preserve">
+    <value>Geben sie hier ihren Benutzernamen ein.</value>
+  </data>
+  <data name="strPropertyNameDescription" xml:space="preserve">
+    <value>Beschreibung</value>
+  </data>
+  <data name="strPropertyNameDomain" xml:space="preserve">
+    <value>Domäne</value>
+  </data>
+  <data name="strPropertyNameIcon" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="strPropertyNameInheritDescription" xml:space="preserve">
+    <value>Vererbe Beschreibung</value>
+  </data>
+  <data name="strPropertyNameInheritDomain" xml:space="preserve">
+    <value>Vererbe Domäne</value>
+  </data>
+  <data name="strPropertyNameInheritIcon" xml:space="preserve">
+    <value>Vererbe Icon</value>
+  </data>
+  <data name="strPropertyNameInheritPanel" xml:space="preserve">
+    <value>Vererbe Panel</value>
+  </data>
+  <data name="strPropertyNameInheritPassword" xml:space="preserve">
+    <value>Vererbe Passwort</value>
+  </data>
+  <data name="strPropertyNameInheritPort" xml:space="preserve">
+    <value>Vererbe Port</value>
+  </data>
+  <data name="strPropertyNameInheritProtocol" xml:space="preserve">
+    <value>Vererbe Protokoll</value>
+  </data>
+  <data name="strPropertyNameInheritUsername" xml:space="preserve">
+    <value>Vererbe Benutzername</value>
+  </data>
+  <data name="strPropertyNameName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="strPropertyNamePanel" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="strPropertyNamePassword" xml:space="preserve">
+    <value>Passwort</value>
+  </data>
+  <data name="strPropertyNamePort" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="strPropertyNameProtocol" xml:space="preserve">
+    <value>Protokoll</value>
+  </data>
+  <data name="strPropertyNameUsername" xml:space="preserve">
+    <value>Benutzername</value>
+  </data>
+  <data name="strTabAppearance" xml:space="preserve">
+    <value>Aussehen</value>
   </data>
 </root>

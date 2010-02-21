@@ -1,6 +1,6 @@
 Imports System.Windows.Forms
 Imports System.ComponentModel
-Imports mRemote.Tools.Misc.PropertyGridCategory
+Imports mRemote.Tools.LocalizedAttributes
 
 Namespace Root
     <DefaultProperty("Name")> _
@@ -11,15 +11,15 @@ Namespace Root
 
 #Region "Properties"
         Private _Name As String = "Connections"
-        <Category(Category1 & "Display"), _
-           Browsable(True), _
-           [ReadOnly](False), _
-           Bindable(False), _
-           DefaultValue(""), _
-           DesignOnly(False), _
-           DisplayName(Language.Base.Props_Name), _
-           Description("Enter a name"), _
-           Attributes.Root()> _
+        <LocalizedCategory("strCategoryDisplay", 1), _
+            Browsable(True), _
+            [ReadOnly](False), _
+            Bindable(False), _
+            DefaultValue(""), _
+            DesignOnly(False), _
+            LocalizedDisplayName("strPropertyNameName"), _
+            LocalizedDescription("strPropertyDescriptionName"), _
+            Attributes.Root()> _
         Public Property Name() As String
             Get
                 Return Me._Name
@@ -30,7 +30,7 @@ Namespace Root
         End Property
 
         Private _Password As Boolean
-        <Category(Category1 & "Display"), _
+        <LocalizedCategory("strCategoryDisplay", 1), _
            Browsable(True), _
            [ReadOnly](False), _
            Bindable(False), _

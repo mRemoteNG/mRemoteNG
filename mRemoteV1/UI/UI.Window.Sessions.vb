@@ -51,7 +51,7 @@ Namespace UI
                 '
                 'clmSesUsername
                 '
-                Me.clmSesUsername.Text = Language.Base.Props_Username
+                Me.clmSesUsername.Text = My.Resources.strColumnUsername
                 Me.clmSesUsername.Width = 80
                 '
                 'clmSesActivity
@@ -127,7 +127,7 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                clmSesUsername.Text = Language.Base.Props_Username
+                clmSesUsername.Text = My.Resources.strColumnUsername
                 clmSesActivity.Text = Language.Base.Activity
                 clmSesType.Text = Language.Base.Type
                 cMenSessionRefresh.Text = Language.Base.Refresh

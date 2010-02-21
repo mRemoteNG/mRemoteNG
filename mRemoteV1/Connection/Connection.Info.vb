@@ -1,6 +1,5 @@
 Imports System.Windows.Forms
 Imports System.ComponentModel
-Imports mRemote.Tools.Misc.PropertyGridCategory
 Imports mRemote.Tools.LocalizedAttributes
 Imports mRemote.App.Runtime
 
@@ -10,10 +9,10 @@ Namespace Connection
 #Region "Properties"
 #Region "1 Display"
         Private _Name As String = "New Connection"
-        <Category(Category1 & Language.Base.Props_Display), _
-           Browsable(True), _
-           DisplayName(Language.Base.Props_Name), _
-           Description(Language.Base.Descr_Name)> _
+        <LocalizedCategory("strCategoryDisplay", 1), _
+            Browsable(True), _
+            LocalizedDisplayName("strPropertyNameName"), _
+            LocalizedDescription("strPropertyDescriptionName")> _
         Public Property Name() As String
             Get
                 Return Me._Name
@@ -24,10 +23,10 @@ Namespace Connection
         End Property
 
         Private _Description As String = My.Settings.ConDefaultDescription
-        <Category(Category1 & Language.Base.Props_Display), _
+        <LocalizedCategory("strCategoryDisplay", 1), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_Description), _
-            Description(Language.Base.Descr_Description)> _
+            LocalizedDisplayName("strPropertyNameDescription"), _
+            LocalizedDescription("strPropertyDescriptionDescription")> _
         Public Property Description() As String
             Get
                 If Me._Inherit.Description And Me._Parent IsNot Nothing Then
@@ -50,11 +49,11 @@ Namespace Connection
         End Property
 
         Private _Icon As String = My.Settings.ConDefaultIcon
-        <Category(Category1 & Language.Base.Props_Display), _
+        <LocalizedCategory("strCategoryDisplay", 1), _
             TypeConverter(GetType(mRemote.Connection.Icon)), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_Icon), _
-            Description(Language.Base.Descr_Icon)> _
+            LocalizedDisplayName("strPropertyNameIcon"), _
+            LocalizedDescription("strPropertyDescriptionIcon")> _
         Public Property Icon() As String
             Get
                 If Me._Inherit.Icon And Me._Parent IsNot Nothing Then
@@ -77,10 +76,10 @@ Namespace Connection
         End Property
 
         Private _Panel As String = My.Settings.ConDefaultPanel
-        <Category(Category1 & Language.Base.Props_Display), _
+        <LocalizedCategory("strCategoryDisplay", 1), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_Panel), _
-            Description(Language.Base.Descr_Panel)> _
+            LocalizedDisplayName("strPropertyNamePanel"), _
+            LocalizedDescription("strPropertyDescriptionPanel")> _
             Public Property Panel() As String
             Get
                 If Me._Inherit.Panel And Me._Parent IsNot Nothing Then
@@ -104,10 +103,10 @@ Namespace Connection
 #End Region
 #Region "2 Connection"
         Private _Hostname As String = ""
-        <Category(Category2 & Language.Base.Props_Connection), _
+        <LocalizedCategory("strCategoryConnection", 2), _
             Browsable(True), _
-            LocalizedDisplayName("strConnectionPropertyHostnameIP"), _
-            LocalizedDescription("strConnectionDescriptionHostnameIP")> _
+            LocalizedDisplayName("strPropertyNameHostnameIP"), _
+            LocalizedDescription("strPropertyDescriptionHostnameIP")> _
         Public Property Hostname() As String
             Get
                 Return Me._Hostname
@@ -118,10 +117,10 @@ Namespace Connection
         End Property
 
         Private _Username As String = My.Settings.ConDefaultUsername
-        <Category(Category2 & Language.Base.Props_Connection), _
+        <LocalizedCategory("strCategoryConnection", 2), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_Username), _
-            Description(Language.Base.Descr_Username)> _
+            LocalizedDisplayName("strPropertyNameUsername"), _
+            LocalizedDescription("strPropertyDescriptionUsername")> _
         Public Property Username() As String
             Get
                 If Me._Inherit.Username And Me._Parent IsNot Nothing Then
@@ -144,10 +143,10 @@ Namespace Connection
         End Property
 
         Private _Password As String = My.Settings.ConDefaultPassword
-        <Category(Category2 & Language.Base.Props_Connection), _
+        <LocalizedCategory("strCategoryConnection", 2), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_Password), _
-            Description(Language.Base.Descr_Password), _
+            LocalizedDisplayName("strPropertyNamePassword"), _
+            LocalizedDescription("strPropertyDescriptionPassword"), _
             PasswordPropertyText(True)> _
         Public Property Password() As String
             Get
@@ -171,10 +170,10 @@ Namespace Connection
         End Property
 
         Private _Domain As String = My.Settings.ConDefaultDomain
-        <Category(Category2 & Language.Base.Props_Connection), _
+        <LocalizedCategory("strCategoryConnection", 2), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_Domain), _
-            Description(Language.Base.Descr_Domain)> _
+            LocalizedDisplayName("strPropertyNameDomain"), _
+            LocalizedDescription("strPropertyDescriptionDomain")> _
         Public Property Domain() As String
             Get
                 If Me._Inherit.Domain And Me._Parent IsNot Nothing Then
@@ -198,10 +197,10 @@ Namespace Connection
 #End Region
 #Region "3 Protocol"
         Private _Protocol As Connection.Protocol.Protocols = Tools.Misc.StringToEnum(GetType(Connection.Protocol.Protocols), My.Settings.ConDefaultProtocol)
-        <Category(Category3 & Language.Base.Props_Protocol), _
+        <LocalizedCategory("strCategoryProtocol", 3), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_Protocol), _
-            Description(Language.Base.Descr_Protocol), _
+            LocalizedDisplayName("strPropertyNameProtocol"), _
+            LocalizedDescription("strPropertyDescriptionProtocol"), _
             TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
         Public Property Protocol() As Connection.Protocol.Protocols
             Get
@@ -225,7 +224,7 @@ Namespace Connection
         End Property
 
         Private _ExtApp As String = My.Settings.ConDefaultExtApp
-        <Category(Category3 & Language.Base.Props_Protocol), _
+        <LocalizedCategory("strCategoryProtocol", 3), _
             Browsable(True), _
             DisplayName(Language.Base.Props_ExtApp), _
             Description(Language.Base.Descr_ExtApp), _
@@ -252,10 +251,10 @@ Namespace Connection
         End Property
 
         Private _Port As Integer
-        <Category(Category3 & Language.Base.Props_Protocol), _
+        <LocalizedCategory("strCategoryProtocol", 3), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_Port), _
-            Description(Language.Base.Descr_Port)> _
+            LocalizedDisplayName("strPropertyNamePort"), _
+            LocalizedDescription("strPropertyDescriptionPort")> _
         Public Property Port() As Integer
             Get
                 If Me._Inherit.Port And Me._Parent IsNot Nothing Then
@@ -278,7 +277,7 @@ Namespace Connection
         End Property
 
         Private _PuttySession As String = My.Settings.ConDefaultPuttySession
-        <Category(Category3 & Language.Base.Props_Protocol), _
+        <LocalizedCategory("strCategoryProtocol", 3), _
             Browsable(True), _
             DisplayName(Language.Base.Props_PuttySession), _
             Description(Language.Base.Descr_PuttySession), _
@@ -305,7 +304,7 @@ Namespace Connection
         End Property
 
         Private _ICAEncryption As Connection.Protocol.ICA.EncryptionStrength = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.ICA.EncryptionStrength), My.Settings.ConDefaultICAEncryptionStrength)
-        <Category(Category3 & Language.Base.Props_Protocol), _
+        <LocalizedCategory("strCategoryProtocol", 3), _
             Browsable(True), _
             DisplayName(Language.Base.Props_EncryrptionStrength), _
             Description(Language.Base.Descr_EncryptionStrength), _
@@ -332,7 +331,7 @@ Namespace Connection
         End Property
 
         Private _UseConsoleSession As Boolean = My.Settings.ConDefaultUseConsoleSession
-        <Category(Category3 & Language.Base.Props_Protocol), _
+        <LocalizedCategory("strCategoryProtocol", 3), _
             Browsable(True), _
             DisplayName(Language.Base.Props_UseConsoleSession), _
             Description(Language.Base.Descr_UseConsoleSession), _
@@ -359,7 +358,7 @@ Namespace Connection
         End Property
 
         Private _RDPAuthenticationLevel As Connection.Protocol.RDP.AuthenticationLevel = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.RDP.AuthenticationLevel), My.Settings.ConDefaultRDPAuthenticationLevel)
-        <Category(Category3 & Language.Base.Props_Protocol), _
+        <LocalizedCategory("strCategoryProtocol", 3), _
             Browsable(True), _
             DisplayName(Language.Base.Props_AuthenticationLevel), _
             Description(Language.Base.Descr_AuthenticationLevel), _
@@ -386,7 +385,7 @@ Namespace Connection
         End Property
 
         Private _RenderingEngine As Connection.Protocol.HTTPBase.RenderingEngine = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.HTTPBase.RenderingEngine), My.Settings.ConDefaultRenderingEngine)
-        <Category(Category3 & Language.Base.Props_Protocol), _
+        <LocalizedCategory("strCategoryProtocol", 3), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RenderingEngine), _
             Description(Language.Base.Descr_RenderingEngine), _
@@ -414,7 +413,7 @@ Namespace Connection
 #End Region
 #Region "4 RD Gateway"
         Private _RDGatewayUsageMethod As mRemote.Connection.Protocol.RDP.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDGatewayUsageMethod), My.Settings.ConDefaultRDGatewayUsageMethod)
-        <Category(Category4 & Language.Base.Category_RDGateway), _
+        <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RDGatewayUsageMethod), _
             Description(Language.Base.Descr_RDGatewayUsageMethod), _
@@ -441,7 +440,7 @@ Namespace Connection
         End Property
 
         Private _RDGatewayHostname As String
-        <Category(Category4 & Language.Base.Category_RDGateway), _
+        <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RDGatewayHostname), _
             Description(Language.Base.Descr_RDGatewayHostname)> _
@@ -467,7 +466,7 @@ Namespace Connection
         End Property
 
         Private _RDGatewayUseConnectionCredentials As mRemote.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), My.Settings.ConDefaultRDGatewayUseConnectionCredentials)
-        <Category(Category4 & Language.Base.Category_RDGateway), _
+        <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RDGatewayUseConnectionCredentials), _
             Description(Language.Base.Descr_RDGatewayUseConnectionCredentials), _
@@ -494,7 +493,7 @@ Namespace Connection
         End Property
 
         Private _RDGatewayUsername As String
-        <Category(Category4 & Language.Base.Category_RDGateway), _
+        <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RDGatewayUsername), _
             Description(Language.Base.Descr_RDGatewayUsername)> _
@@ -520,7 +519,7 @@ Namespace Connection
         End Property
 
         Private _RDGatewayPassword As String
-        <Category(Category4 & Language.Base.Category_RDGateway), _
+        <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RDGatewayPassword), _
             Description(Language.Base.Descr_RDGatewayPassword), _
@@ -547,7 +546,7 @@ Namespace Connection
         End Property
 
         Private _RDGatewayDomain As String
-        <Category(Category4 & Language.Base.Category_RDGateway), _
+        <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RDGatewayDomain), _
             Description(Language.Base.Descr_RDGatewayDomain)> _
@@ -574,7 +573,7 @@ Namespace Connection
 #End Region
 #Region "5 Appearance"
         Private _Resolution As Connection.Protocol.RDP.RDPResolutions = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDPResolutions), My.Settings.ConDefaultResolution)
-        <Category(Category5 & Language.Base.Props_Appearance), _
+        <LocalizedCategory("strCategoryAppearance", 5), _
             Browsable(True), _
             DisplayName(Language.Base.Props_Resolution), _
             Description(Language.Base.Descr_Resolution), _
@@ -601,10 +600,10 @@ Namespace Connection
         End Property
 
         Private _Colors As Connection.Protocol.RDP.RDPColors = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDPColors), My.Settings.ConDefaultColors)
-        <Category(Category5 & Language.Base.Props_Appearance), _
+        <LocalizedCategory("strCategoryAppearance", 5), _
             Browsable(True), _
-            LocalizedDisplayName("strConnectionPropertyColors"), _
-            LocalizedDescription("strConnectionDescriptionColors"), _
+            LocalizedDisplayName("strPropertyNameColors"), _
+            LocalizedDescription("strPropertyDescriptionColors"), _
             TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
         Public Property Colors() As Connection.Protocol.RDP.RDPColors
             Get
@@ -628,7 +627,7 @@ Namespace Connection
         End Property
 
         Private _CacheBitmaps As Boolean = My.Settings.ConDefaultCacheBitmaps
-        <Category(Category5 & Language.Base.Props_Appearance), _
+        <LocalizedCategory("strCategoryAppearance", 5), _
             Browsable(True), _
             DisplayName(Language.Base.Props_CacheBitmaps), _
             Description(Language.Base.Descr_CacheBitmaps), _
@@ -655,7 +654,7 @@ Namespace Connection
         End Property
 
         Private _DisplayWallpaper As Boolean = My.Settings.ConDefaultDisplayWallpaper
-        <Category(Category5 & Language.Base.Props_Appearance), _
+        <LocalizedCategory("strCategoryAppearance", 5), _
             Browsable(True), _
             DisplayName(Language.Base.Props_DisplayWallpaper), _
             Description(Language.Base.Descr_DisplayWallpaper), _
@@ -682,7 +681,7 @@ Namespace Connection
         End Property
 
         Private _DisplayThemes As Boolean = My.Settings.ConDefaultDisplayThemes
-        <Category(Category5 & Language.Base.Props_Appearance), _
+        <LocalizedCategory("strCategoryAppearance", 5), _
             Browsable(True), _
             DisplayName(Language.Base.Props_DisplayThemes), _
             Description(Language.Base.Descr_DisplayThemes), _
@@ -710,7 +709,7 @@ Namespace Connection
 #End Region
 #Region "6 Redirect"
         Private _RedirectKeys As Boolean = My.Settings.ConDefaultRedirectKeys
-        <Category(Category6 & Language.Base.Props_Redirect), _
+        <LocalizedCategory("strCategoryRedirect", 6), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RedKeyCombinations), _
             Description(Language.Base.Descr_RedKeyCombinations), _
@@ -737,7 +736,7 @@ Namespace Connection
         End Property
 
         Private _RedirectDiskDrives As Boolean = My.Settings.ConDefaultRedirectDiskDrives
-        <Category(Category6 & Language.Base.Props_Redirect), _
+        <LocalizedCategory("strCategoryRedirect", 6), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RedDiskDrives), _
             Description(Language.Base.Descr_RedDiskDrives), _
@@ -764,7 +763,7 @@ Namespace Connection
         End Property
 
         Private _RedirectPrinters As Boolean = My.Settings.ConDefaultRedirectPrinters
-        <Category(Category6 & Language.Base.Props_Redirect), _
+        <LocalizedCategory("strCategoryRedirect", 6), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RedPrinters), _
             Description(Language.Base.Descr_RedPrinters), _
@@ -791,7 +790,7 @@ Namespace Connection
         End Property
 
         Private _RedirectPorts As Boolean = My.Settings.ConDefaultRedirectPorts
-        <Category(Category6 & Language.Base.Props_Redirect), _
+        <LocalizedCategory("strCategoryRedirect", 6), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RedPorts), _
             Description(Language.Base.Descr_RedPorts), _
@@ -818,7 +817,7 @@ Namespace Connection
         End Property
 
         Private _RedirectSmartCards As Boolean = My.Settings.ConDefaultRedirectSmartCards
-        <Category(Category6 & Language.Base.Props_Redirect), _
+        <LocalizedCategory("strCategoryRedirect", 6), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RedSmartCards), _
             Description(Language.Base.Descr_RedSmartCards), _
@@ -845,7 +844,7 @@ Namespace Connection
         End Property
 
         Private _RedirectSound As Connection.Protocol.RDP.RDPSounds = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDPSounds), My.Settings.ConDefaultRedirectSound)
-        <Category(Category6 & Language.Base.Props_Redirect), _
+        <LocalizedCategory("strCategoryRedirect", 6), _
             Browsable(True), _
             DisplayName(Language.Base.Props_RedSounds), _
             Description(Language.Base.Descr_RedSound), _
@@ -873,7 +872,7 @@ Namespace Connection
 #End Region
 #Region "7 Misc"
         Private _PreExtApp As String = My.Settings.ConDefaultPreExtApp
-        <Category(Category7 & Language.Base.Props_Misc), _
+        <LocalizedCategory("strCategoryMiscellaneous", 7), _
             Browsable(True), _
             DisplayName(Language.Base.Props_PreExtApp), _
             Description(Language.Base.Descr_PreExtApp), _
@@ -900,7 +899,7 @@ Namespace Connection
         End Property
 
         Private _PostExtApp As String = My.Settings.ConDefaultPostExtApp
-        <Category(Category7 & Language.Base.Props_Misc), _
+        <LocalizedCategory("strCategoryMiscellaneous", 7), _
             Browsable(True), _
             DisplayName(Language.Base.Props_PostExtApp), _
             Description(Language.Base.Descr_PostExtApp), _
@@ -927,7 +926,7 @@ Namespace Connection
         End Property
 
         Private _MacAddress As String = My.Settings.ConDefaultMacAddress
-        <Category(Category7 & Language.Base.Props_Misc), _
+        <LocalizedCategory("strCategoryMiscellaneous", 7), _
             Browsable(True), _
             DisplayName(Language.Base.Props_MacAddress), _
             Description(Language.Base.Descr_MacAddress)> _
@@ -953,7 +952,7 @@ Namespace Connection
         End Property
 
         Private _UserField As String = My.Settings.ConDefaultUserField
-        <Category(Category7 & Language.Base.Props_Misc), _
+        <LocalizedCategory("strCategoryMiscellaneous", 7), _
             Browsable(True), _
             DisplayName(Language.Base.Props_UserField), _
             Description(Language.Base.Descr_UserField)> _
@@ -980,7 +979,7 @@ Namespace Connection
 #End Region
 #Region "VNC"
         Private _VNCCompression As mRemote.Connection.Protocol.VNC.Compression = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.Compression), My.Settings.ConDefaultVNCCompression)
-        <Category(Category5 & Language.Base.Props_Appearance), _
+        <LocalizedCategory("strCategoryAppearance", 5), _
            Browsable(False), _
            DisplayName(Language.Base.Props_Compression), _
            Description(Language.Base.Descr_Compression), _
@@ -1007,11 +1006,11 @@ Namespace Connection
         End Property
 
         Private _VNCEncoding As mRemote.Connection.Protocol.VNC.Encoding = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.Encoding), My.Settings.ConDefaultVNCEncoding)
-        <Category(Category5 & Language.Base.Props_Appearance), _
-           Browsable(False), _
-           DisplayName(Language.Base.Props_Encoding), _
-           Description(Language.Base.Descr_Encoding), _
-           TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5), _
+            Browsable(False), _
+            DisplayName(Language.Base.Props_Encoding), _
+            Description(Language.Base.Descr_Encoding), _
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
         Public Property VNCEncoding() As mRemote.Connection.Protocol.VNC.Encoding
             Get
                 If Me._Inherit.VNCEncoding And Me._Parent IsNot Nothing Then
@@ -1035,7 +1034,7 @@ Namespace Connection
 
 
         Private _VNCAuthMode As mRemote.Connection.Protocol.VNC.AuthMode = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.AuthMode), My.Settings.ConDefaultVNCAuthMode)
-        <Category(Category2 & Language.Base.Props_Connection), _
+        <LocalizedCategory("strCategoryConnection", 2), _
             Browsable(False), _
             DisplayName(Language.Base.Props_AuthMode), _
             Description(Language.Base.Descr_AuthMode), _
@@ -1062,7 +1061,7 @@ Namespace Connection
         End Property
 
         Private _VNCProxyType As mRemote.Connection.Protocol.VNC.ProxyType = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.ProxyType), My.Settings.ConDefaultVNCProxyType)
-        <Category(Category7 & Language.Base.Props_Misc), _
+        <LocalizedCategory("strCategoryMiscellaneous", 7), _
            Browsable(False), _
            DisplayName(Language.Base.Props_ProxyType), _
            Description(Language.Base.Descr_ProxyType), _
@@ -1089,7 +1088,7 @@ Namespace Connection
         End Property
 
         Private _VNCProxyIP As String = My.Settings.ConDefaultVNCProxyIP
-        <Category(Category7 & Language.Base.Props_Misc), _
+        <LocalizedCategory("strCategoryMiscellaneous", 7), _
             Browsable(False), _
             DisplayName(Language.Base.Props_ProxyIP), _
             Description(Language.Base.Descr_ProxyIP)> _
@@ -1115,7 +1114,7 @@ Namespace Connection
         End Property
 
         Private _VNCProxyPort As Integer = My.Settings.ConDefaultVNCProxyPort
-        <Category(Category7 & Language.Base.Props_Misc), _
+        <LocalizedCategory("strCategoryMiscellaneous", 7), _
             Browsable(False), _
             DisplayName(Language.Base.Props_ProxyPort), _
             Description(Language.Base.Descr_ProxyPort)> _
@@ -1141,7 +1140,7 @@ Namespace Connection
         End Property
 
         Private _VNCProxyUsername As String = My.Settings.ConDefaultVNCProxyUsername
-        <Category(Category7 & Language.Base.Props_Misc), _
+        <LocalizedCategory("strCategoryMiscellaneous", 7), _
             Browsable(False), _
             DisplayName(Language.Base.Props_ProxyUsername), _
             Description(Language.Base.Props_ProxyUsername)> _
@@ -1167,7 +1166,7 @@ Namespace Connection
         End Property
 
         Private _VNCProxyPassword As String = My.Settings.ConDefaultVNCProxyPassword
-        <Category(Category7 & Language.Base.Props_Misc), _
+        <LocalizedCategory("strCategoryMiscellaneous", 7), _
             Browsable(False), _
             DisplayName(Language.Base.Props_ProxyPassword), _
             Description(Language.Base.Descr_ProxyPassword), _
@@ -1194,11 +1193,11 @@ Namespace Connection
         End Property
 
         Private _VNCColors As mRemote.Connection.Protocol.VNC.Colors = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.Colors), My.Settings.ConDefaultVNCColors)
-        <Category(Category5 & Language.Base.Props_Appearance), _
-           Browsable(False), _
-           DisplayName(Language.Base.Props_Colors), _
-           Description(Language.Base.Descr_Colors), _
-           TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5), _
+            Browsable(False), _
+            DisplayName(Language.Base.Props_Colors), _
+            Description(Language.Base.Descr_Colors), _
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
        Public Property VNCColors() As mRemote.Connection.Protocol.VNC.Colors
             Get
                 If Me._Inherit.VNCColors And Me._Parent IsNot Nothing Then
@@ -1221,11 +1220,11 @@ Namespace Connection
         End Property
 
         Private _VNCSmartSizeMode As mRemote.Connection.Protocol.VNC.SmartSizeMode = Tools.Misc.StringToEnum(GetType(Connection.Protocol.VNC.SmartSizeMode), My.Settings.ConDefaultVNCSmartSizeMode)
-        <Category(Category5 & Language.Base.Props_Appearance), _
-           Browsable(True), _
-           DisplayName(Language.Base.Props_SmartSizeMode), _
-           Description(Language.Base.Descr_SmartSizeMode), _
-           TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5), _
+            Browsable(True), _
+            DisplayName(Language.Base.Props_SmartSizeMode), _
+            Description(Language.Base.Descr_SmartSizeMode), _
+            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
         Public Property VNCSmartSizeMode() As mRemote.Connection.Protocol.VNC.SmartSizeMode
             Get
                 If Me._Inherit.VNCSmartSizeMode And Me._Parent IsNot Nothing Then
@@ -1248,11 +1247,11 @@ Namespace Connection
         End Property
 
         Private _VNCViewOnly As Boolean = My.Settings.ConDefaultVNCViewOnly
-        <Category(Category5 & Language.Base.Props_Appearance), _
-           Browsable(True), _
-           DisplayName(Language.Base.Props_ViewOnly), _
-           Description(Language.Base.Descr_ViewOnly), _
-           TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        <LocalizedCategory("strCategoryAppearance", 5), _
+            Browsable(True), _
+            DisplayName(Language.Base.Props_ViewOnly), _
+            Description(Language.Base.Descr_ViewOnly), _
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
         Public Property VNCViewOnly() As Boolean
             Get
                 If Me._Inherit.VNCViewOnly And Me._Parent IsNot Nothing Then
@@ -1544,11 +1543,11 @@ Namespace Connection
 
 
 #Region "1 General"
-            <Category(Category1 & Language.Base.Props_General), _
-                          Browsable(True), _
-                          DisplayName(Language.Base.Props_InheritEverything), _
-                          TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
-                      Public Property EverythingInherited() As Boolean
+            <LocalizedCategory("strCategoryGeneral", 1), _
+                Browsable(True), _
+                DisplayName(Language.Base.Props_InheritEverything), _
+                TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
+            Public Property EverythingInherited() As Boolean
                 Get
                     If Me._CacheBitmaps And Me._Colors And Me._Description And Me._DisplayThemes And Me._DisplayWallpaper _
                     And Me._Domain And Me._Icon And Me._Password And Me._Port And Me._Protocol And Me._PuttySession _
@@ -1573,9 +1572,9 @@ Namespace Connection
 #End Region
 #Region "2 Display"
             Private _Description As Boolean = My.Settings.InhDefaultDescription
-            <Category(Category2 & Language.Base.Props_Display), _
+            <LocalizedCategory("strCategoryDisplay", 2), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Description), _
+                LocalizedDisplayName("strPropertyNameInheritDescription"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property Description() As Boolean
                 Get
@@ -1587,9 +1586,9 @@ Namespace Connection
             End Property
 
             Private _Icon As Boolean = My.Settings.InhDefaultIcon
-            <Category(Category2 & Language.Base.Props_Display), _
+            <LocalizedCategory("strCategoryDisplay", 2), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Icon), _
+                LocalizedDisplayName("strPropertyNameInheritIcon"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property Icon() As Boolean
                 Get
@@ -1601,9 +1600,9 @@ Namespace Connection
             End Property
 
             Private _Panel As Boolean = My.Settings.InhDefaultPanel
-            <Category(Category2 & Language.Base.Props_Display), _
+            <LocalizedCategory("strCategoryDisplay", 2), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Panel), _
+                LocalizedDisplayName("strPropertyNameInheritPanel"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property Panel() As Boolean
                 Get
@@ -1616,9 +1615,9 @@ Namespace Connection
 #End Region
 #Region "3 Connection"
             Private _Username As Boolean = My.Settings.InhDefaultUsername
-            <Category(Category3 & Language.Base.Props_Connection), _
+            <LocalizedCategory("strCategoryConnection", 3), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Username), _
+                LocalizedDisplayName("strPropertyNameInheritUsername"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property Username() As Boolean
                 Get
@@ -1630,9 +1629,9 @@ Namespace Connection
             End Property
 
             Private _Password As Boolean = My.Settings.InhDefaultPassword
-            <Category(Category3 & Language.Base.Props_Connection), _
+            <LocalizedCategory("strCategoryConnection", 3), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Password), _
+                LocalizedDisplayName("strPropertyNameInheritPassword"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property Password() As Boolean
                 Get
@@ -1644,9 +1643,9 @@ Namespace Connection
             End Property
 
             Private _Domain As Boolean = My.Settings.InhDefaultDomain
-            <Category(Category3 & Language.Base.Props_Connection), _
+            <LocalizedCategory("strCategoryConnection", 3), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Domain), _
+                LocalizedDisplayName("strPropertyNameInheritDomain"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property Domain() As Boolean
                 Get
@@ -1659,9 +1658,9 @@ Namespace Connection
 #End Region
 #Region "4 Protocol"
             Private _Protocol As Boolean = My.Settings.InhDefaultProtocol
-            <Category(Category4 & Language.Base.Props_Protocol), _
+            <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Protocol), _
+                LocalizedDisplayName("strPropertyNameInheritProtocol"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property Protocol() As Boolean
                 Get
@@ -1673,7 +1672,7 @@ Namespace Connection
             End Property
 
             Private _ExtApp As Boolean = My.Settings.InhDefaultExtApp
-            <Category(Category4 & Language.Base.Props_Protocol), _
+            <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ExtApp), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1687,9 +1686,9 @@ Namespace Connection
             End Property
 
             Private _Port As Boolean = My.Settings.InhDefaultPort
-            <Category(Category4 & Language.Base.Props_Protocol), _
+            <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Port), _
+                LocalizedDisplayName("strPropertyNameInheritPort"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property Port() As Boolean
                 Get
@@ -1701,7 +1700,7 @@ Namespace Connection
             End Property
 
             Private _PuttySession As Boolean = My.Settings.InhDefaultPuttySession
-            <Category(Category4 & Language.Base.Props_Protocol), _
+            <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_PuttySession), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1715,7 +1714,7 @@ Namespace Connection
             End Property
 
             Private _ICAEncryption As Boolean = My.Settings.InhDefaultICAEncryptionStrength
-            <Category(Category4 & Language.Base.Props_Protocol), _
+            <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_EncryrptionStrength), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1729,7 +1728,7 @@ Namespace Connection
             End Property
 
             Private _RDPAuthenticationLevel As Boolean = My.Settings.InhDefaultRDPAuthenticationLevel
-            <Category(Category4 & Language.Base.Props_Protocol), _
+            <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_AuthenticationLevel), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1743,7 +1742,7 @@ Namespace Connection
             End Property
 
             Private _RenderingEngine As Boolean = My.Settings.InhDefaultRenderingEngine
-            <Category(Category4 & Language.Base.Props_Protocol), _
+            <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RenderingEngine), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1757,7 +1756,7 @@ Namespace Connection
             End Property
 
             Private _UseConsoleSession As Boolean = My.Settings.InhDefaultUseConsoleSession
-            <Category(Category4 & Language.Base.Props_Protocol), _
+            <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_UseConsoleSession), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1772,7 +1771,7 @@ Namespace Connection
 #End Region
 #Region "5 RD Gateway"
             Private _RDGatewayUsageMethod As Boolean = False
-            <Category(Category5 & Language.Base.Category_RDGateway), _
+            <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayUsageMethod), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1786,7 +1785,7 @@ Namespace Connection
             End Property
 
             Private _RDGatewayHostname As Boolean = False
-            <Category(Category5 & Language.Base.Category_RDGateway), _
+            <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayHostname), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1800,7 +1799,7 @@ Namespace Connection
             End Property
 
             Private _RDGatewayUseConnectionCredentials As Boolean = False
-            <Category(Category5 & Language.Base.Category_RDGateway), _
+            <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayUseConnectionCredentials), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1814,7 +1813,7 @@ Namespace Connection
             End Property
 
             Private _RDGatewayUsername As Boolean = False
-            <Category(Category5 & Language.Base.Category_RDGateway), _
+            <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayUsername), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1828,7 +1827,7 @@ Namespace Connection
             End Property
 
             Private _RDGatewayPassword As Boolean = False
-            <Category(Category5 & Language.Base.Category_RDGateway), _
+            <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayPassword), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1842,7 +1841,7 @@ Namespace Connection
             End Property
 
             Private _RDGatewayDomain As Boolean = False
-            <Category(Category5 & Language.Base.Category_RDGateway), _
+            <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayDomain), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1857,7 +1856,7 @@ Namespace Connection
 #End Region
 #Region "6 Appearance"
             Private _Resolution As Boolean = My.Settings.InhDefaultResolution
-            <Category(Category6 & Language.Base.Props_Appearance), _
+            <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Resolution), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1871,7 +1870,7 @@ Namespace Connection
             End Property
 
             Private _Colors As Boolean = My.Settings.InhDefaultColors
-            <Category(Category6 & Language.Base.Props_Appearance), _
+            <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Colors), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1885,7 +1884,7 @@ Namespace Connection
             End Property
 
             Private _CacheBitmaps As Boolean = My.Settings.InhDefaultCacheBitmaps
-            <Category(Category6 & Language.Base.Props_Appearance), _
+            <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_CacheBitmaps), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1899,7 +1898,7 @@ Namespace Connection
             End Property
 
             Private _DisplayWallpaper As Boolean = My.Settings.InhDefaultDisplayWallpaper
-            <Category(Category6 & Language.Base.Props_Appearance), _
+            <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_DisplayWallpaper), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1913,7 +1912,7 @@ Namespace Connection
             End Property
 
             Private _DisplayThemes As Boolean = My.Settings.InhDefaultDisplayThemes
-            <Category(Category6 & Language.Base.Props_Appearance), _
+            <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_DisplayThemes), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1926,9 +1925,9 @@ Namespace Connection
                 End Set
             End Property
 #End Region
-#Region "6 Redirect"
+#Region "7 Redirect"
             Private _RedirectKeys As Boolean = My.Settings.InhDefaultRedirectKeys
-            <Category(Category7 & Language.Base.Props_Redirect), _
+            <LocalizedCategory("strCategoryRedirect", 7), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RedKeyCombinations), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1942,7 +1941,7 @@ Namespace Connection
             End Property
 
             Private _RedirectDiskDrives As Boolean = My.Settings.InhDefaultRedirectDiskDrives
-            <Category(Category7 & Language.Base.Props_Redirect), _
+            <LocalizedCategory("strCategoryRedirect", 7), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RedDiskDrives), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1956,7 +1955,7 @@ Namespace Connection
             End Property
 
             Private _RedirectPrinters As Boolean = My.Settings.InhDefaultRedirectPrinters
-            <Category(Category7 & Language.Base.Props_Redirect), _
+            <LocalizedCategory("strCategoryRedirect", 7), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RedPrinters), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1970,7 +1969,7 @@ Namespace Connection
             End Property
 
             Private _RedirectPorts As Boolean = My.Settings.InhDefaultRedirectPorts
-            <Category(Category7 & Language.Base.Props_Redirect), _
+            <LocalizedCategory("strCategoryRedirect", 7), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RedPorts), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1984,7 +1983,7 @@ Namespace Connection
             End Property
 
             Private _RedirectSmartCards As Boolean = My.Settings.InhDefaultRedirectSmartCards
-            <Category(Category7 & Language.Base.Props_Redirect), _
+            <LocalizedCategory("strCategoryRedirect", 7), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RedSmartCards), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -1998,7 +1997,7 @@ Namespace Connection
             End Property
 
             Private _RedirectSound As Boolean = My.Settings.InhDefaultRedirectSound
-            <Category(Category7 & Language.Base.Props_Redirect), _
+            <LocalizedCategory("strCategoryRedirect", 7), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RedSounds), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2011,9 +2010,9 @@ Namespace Connection
                 End Set
             End Property
 #End Region
-#Region "7 Misc"
+#Region "8 Misc"
             Private _PreExtApp As Boolean = My.Settings.InhDefaultPreExtApp
-            <Category(Category8 & Language.Base.Props_Misc), _
+            <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_PreExtApp), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2027,7 +2026,7 @@ Namespace Connection
             End Property
 
             Private _PostExtApp As Boolean = My.Settings.InhDefaultPostExtApp
-            <Category(Category8 & Language.Base.Props_Misc), _
+            <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_PostExtApp), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2041,7 +2040,7 @@ Namespace Connection
             End Property
 
             Private _MacAddress As Boolean = My.Settings.InhDefaultMacAddress
-            <Category(Category8 & Language.Base.Props_Misc), _
+            <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_MacAddress), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2055,7 +2054,7 @@ Namespace Connection
             End Property
 
             Private _UserField As Boolean = My.Settings.InhDefaultUserField
-            <Category(Category8 & Language.Base.Props_Misc), _
+            <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_UserField), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2070,7 +2069,7 @@ Namespace Connection
 #End Region
 #Region "VNC"
             Private _VNCCompression As Boolean = My.Settings.InhDefaultVNCCompression
-            <Category(Category6 & Language.Base.Props_Appearance), _
+            <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Compression), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2084,7 +2083,7 @@ Namespace Connection
             End Property
 
             Private _VNCEncoding As Boolean = My.Settings.InhDefaultVNCEncoding
-            <Category(Category6 & Language.Base.Props_Appearance), _
+            <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Encoding), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2098,7 +2097,7 @@ Namespace Connection
             End Property
 
             Private _VNCAuthMode As Boolean = My.Settings.InhDefaultVNCAuthMode
-            <Category(Category3 & Language.Base.Props_Connection), _
+            <LocalizedCategory("strCategoryConnection", 3), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_AuthMode), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2112,7 +2111,7 @@ Namespace Connection
             End Property
 
             Private _VNCProxyType As Boolean = My.Settings.InhDefaultVNCProxyType
-            <Category(Category8 & Language.Base.Props_Misc), _
+            <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ProxyType), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2126,7 +2125,7 @@ Namespace Connection
             End Property
 
             Private _VNCProxyIP As Boolean = My.Settings.InhDefaultVNCProxyIP
-            <Category(Category8 & Language.Base.Props_Misc), _
+            <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ProxyIP), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2140,7 +2139,7 @@ Namespace Connection
             End Property
 
             Private _VNCProxyPort As Boolean = My.Settings.InhDefaultVNCProxyPort
-            <Category(Category8 & Language.Base.Props_Misc), _
+            <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ProxyPort), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2154,7 +2153,7 @@ Namespace Connection
             End Property
 
             Private _VNCProxyUsername As Boolean = My.Settings.InhDefaultVNCProxyUsername
-            <Category(Category8 & Language.Base.Props_Misc), _
+            <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ProxyUsername), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2168,7 +2167,7 @@ Namespace Connection
             End Property
 
             Private _VNCProxyPassword As Boolean = My.Settings.InhDefaultVNCProxyPassword
-            <Category(Category8 & Language.Base.Props_Misc), _
+            <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ProxyPassword), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2182,7 +2181,7 @@ Namespace Connection
             End Property
 
             Private _VNCColors As Boolean = My.Settings.InhDefaultVNCColors
-            <Category(Category6 & Language.Base.Props_Appearance), _
+            <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_Colors), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2196,7 +2195,7 @@ Namespace Connection
             End Property
 
             Private _VNCSmartSizeMode As Boolean = My.Settings.InhDefaultVNCSmartSizeMode
-            <Category(Category6 & Language.Base.Props_Appearance), _
+            <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_SmartSizeMode), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
@@ -2210,7 +2209,7 @@ Namespace Connection
             End Property
 
             Private _VNCViewOnly As Boolean = My.Settings.InhDefaultVNCViewOnly
-            <Category(Category6 & Language.Base.Props_Appearance), _
+            <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
                 DisplayName(Language.Base.Inherit & " " & Language.Base.Props_ViewOnly), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _

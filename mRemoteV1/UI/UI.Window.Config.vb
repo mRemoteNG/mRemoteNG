@@ -432,7 +432,7 @@ Namespace UI
                 btnShowDefaultInheritance.Text = My.Resources.strButtonDefaultInheritance
                 btnShowProperties.Text = My.Resources.strButtonProperties
                 btnShowDefaultProperties.Text = My.Resources.strButtonDefaultProperties
-                btnIcon.Text = Language.Base.Props_Icon
+                btnIcon.Text = My.Resources.strButtonIcon
                 btnHostStatus.Text = My.Resources.strStatus
                 Text = My.Resources.strMenuConfig
                 TabText = My.Resources.strMenuConfig
@@ -442,18 +442,18 @@ Namespace UI
                 Try
                     If TypeOf Me.pGrid.SelectedObject Is mRemote.Connection.Info Then
                         Select Case e.ChangedItem.Label
-                            Case Language.Base.Props_Protocol
+                            Case My.Resources.strPropertyNameProtocol
                                 TryCast(Me.pGrid.SelectedObject, mRemote.Connection.Info).SetDefaultPort()
-                            Case Language.Base.Props_Name
+                            Case My.Resources.strPropertyNameName
                                 App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Text = Me.pGrid.SelectedObject.Name
-                            Case Language.Base.Props_Icon
+                            Case My.Resources.strPropertyNameIcon
                                 Dim conIcon As Icon = mRemote.Connection.Icon.FromString(TryCast(Me.pGrid.SelectedObject, mRemote.Connection.Info).Icon)
                                 If conIcon IsNot Nothing Then
                                     Me.btnIcon.Image = conIcon.ToBitmap
                                 End If
                             Case Language.Base.Props_PuttySession
                                 mRemote.Connection.PuttySession.PuttySessions = mRemote.Connection.Protocol.PuttyBase.GetSessions()
-                            Case Language.Base.Props_HostnameIP
+                            Case My.Resources.strPropertyNameHostnameIP
                                 Me.SetHostStatus(Me.pGrid.SelectedObject)
                         End Select
 
@@ -476,7 +476,7 @@ Namespace UI
                                         rInfo.Password = False
                                     End If
                                 End If
-                            Case Language.Base.Props_Name
+                            Case My.Resources.strPropertyNameName
                                 App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Text = Me.pGrid.SelectedObject.Name
                         End Select
                     End If

@@ -1,15 +1,14 @@
 ﻿Imports System.ComponentModel
-Imports mRemote.Tools.Misc.PropertyGridCategory
-Imports mRemote.Tools.Misc.PropertyGridValue
+Imports mRemote.Tools.LocalizedAttributes
 
 Namespace Credential
     Public Class Info
 #Region "1 Display"
         Private _Name As String
-        <Category(Category1 & "Display"), _
-           Browsable(True), _
-           DisplayName(Language.Base.Props_Name), _
-           Description("Enter a name")> _
+        <LocalizedCategory("strCategoryDisplay", 1), _
+            Browsable(True), _
+            LocalizedDisplayName("strPropertyNameName"), _
+            LocalizedDescription("strPropertyDescriptionName")> _
         Public Property Name() As String
             Get
                 Return _Name
@@ -20,10 +19,10 @@ Namespace Credential
         End Property
 
         Private _Description As String
-        <Category(Category1 & "Description"), _
-           Browsable(True), _
-           DisplayName(Language.Base.Props_Description), _
-           Description("Enter a description")> _
+        <LocalizedCategory("strCategoryDisplay", 1), _
+            Browsable(True), _
+            LocalizedDisplayName("strPropertyNameDescription"), _
+            LocalizedDescription("strPropertyDescriptionDescription")> _
         Public Property Description() As String
             Get
                 Return _Description
@@ -35,10 +34,10 @@ Namespace Credential
 #End Region
 #Region "2 Credentials"
         Private _Username As String
-        <Category(Category2 & "Credentials"), _
+        <LocalizedCategory("strCategoryCredentials", 2), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_Username), _
-            Description("Enter a username")> _
+            LocalizedDisplayName("strPropertyNameUsername"), _
+            LocalizedDescription("strPropertyDescriptionUsername")> _
         Public Property Username() As String
             Get
                 Return _Username
@@ -49,10 +48,10 @@ Namespace Credential
         End Property
 
         Private _Password As String
-        <Category(Category2 & "Credentials"), _
+        <LocalizedCategory("strCategoryCredentials", 2), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_Password), _
-            Description("Enter a password"), _
+            LocalizedDisplayName("strPropertyNamePassword"), _
+            LocalizedDescription("strPropertyDescriptionPassword"), _
             PasswordPropertyText(True)> _
         Public Property Password() As String
             Get
@@ -64,10 +63,10 @@ Namespace Credential
         End Property
 
         Private _Domain As String
-        <Category(Category2 & "Credentials"), _
+        <LocalizedCategory("strCategoryCredentials", 2), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_Domain), _
-            Description("Enter a domain")> _
+            LocalizedDisplayName("strPropertyNameDomain"), _
+            LocalizedDescription("strPropertyDescriptionDomain")> _
         Public Property Domain() As String
             Get
                 Return _Domain

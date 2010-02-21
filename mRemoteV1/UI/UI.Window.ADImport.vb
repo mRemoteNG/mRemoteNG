@@ -126,7 +126,7 @@ Namespace UI
             Private Sub ApplyLanguage()
                 btnOK.Text = My.Resources.strButtonOK
                 btnCancel.Text = My.Resources.strButtonCancel
-                lblDomain.Text = Language.Base.Props_Domain & ":"
+                lblDomain.Text = My.Resources.strLabelDomain
                 btnChangeDomain.Text = My.Resources.strButtonChange
             End Sub
 #End Region

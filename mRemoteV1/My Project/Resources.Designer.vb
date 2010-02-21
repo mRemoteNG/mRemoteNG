@@ -835,6 +835,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Icon.
+        '''</summary>
+        Friend ReadOnly Property strButtonIcon() As String
+            Get
+                Return ResourceManager.GetString("strButtonIcon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to &amp;Import.
         '''</summary>
         Friend ReadOnly Property strButtonImport() As String
@@ -912,6 +921,78 @@ Namespace My.Resources
         Friend ReadOnly Property strButtonTestProxy() As String
             Get
                 Return ResourceManager.GetString("strButtonTestProxy", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Appearance.
+        '''</summary>
+        Friend ReadOnly Property strCategoryAppearance() As String
+            Get
+                Return ResourceManager.GetString("strCategoryAppearance", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Connection.
+        '''</summary>
+        Friend ReadOnly Property strCategoryConnection() As String
+            Get
+                Return ResourceManager.GetString("strCategoryConnection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Credentials.
+        '''</summary>
+        Friend ReadOnly Property strCategoryCredentials() As String
+            Get
+                Return ResourceManager.GetString("strCategoryCredentials", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Display.
+        '''</summary>
+        Friend ReadOnly Property strCategoryDisplay() As String
+            Get
+                Return ResourceManager.GetString("strCategoryDisplay", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Gateway.
+        '''</summary>
+        Friend ReadOnly Property strCategoryGateway() As String
+            Get
+                Return ResourceManager.GetString("strCategoryGateway", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Miscellaneous.
+        '''</summary>
+        Friend ReadOnly Property strCategoryMiscellaneous() As String
+            Get
+                Return ResourceManager.GetString("strCategoryMiscellaneous", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Protocol.
+        '''</summary>
+        Friend ReadOnly Property strCategoryProtocol() As String
+            Get
+                Return ResourceManager.GetString("strCategoryProtocol", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Redirect.
+        '''</summary>
+        Friend ReadOnly Property strCategoryRedirect() As String
+            Get
+                Return ResourceManager.GetString("strCategoryRedirect", resourceCulture)
             End Get
         End Property
         
@@ -1042,11 +1123,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Hostname/IP.
+        '''</summary>
+        Friend ReadOnly Property strColumnHostnameIP() As String
+            Get
+                Return ResourceManager.GetString("strColumnHostnameIP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Message.
         '''</summary>
         Friend ReadOnly Property strColumnMessage() As String
             Get
                 Return ResourceManager.GetString("strColumnMessage", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Username.
+        '''</summary>
+        Friend ReadOnly Property strColumnUsername() As String
+            Get
+                Return ResourceManager.GetString("strColumnUsername", resourceCulture)
             End Get
         End Property
         
@@ -1119,42 +1218,6 @@ Namespace My.Resources
         Friend ReadOnly Property strConfirmResetLayout() As String
             Get
                 Return ResourceManager.GetString("strConfirmResetLayout", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Select the colour quality to be used..
-        '''</summary>
-        Friend ReadOnly Property strConnectionDescriptionColors() As String
-            Get
-                Return ResourceManager.GetString("strConnectionDescriptionColors", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Enter the hostname or ip you want to connect to..
-        '''</summary>
-        Friend ReadOnly Property strConnectionDescriptionHostnameIP() As String
-            Get
-                Return ResourceManager.GetString("strConnectionDescriptionHostnameIP", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Colours.
-        '''</summary>
-        Friend ReadOnly Property strConnectionPropertyColors() As String
-            Get
-                Return ResourceManager.GetString("strConnectionPropertyColors", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Hostname/IP.
-        '''</summary>
-        Friend ReadOnly Property strConnectionPropertyHostnameIP() As String
-            Get
-                Return ResourceManager.GetString("strConnectionPropertyHostnameIP", resourceCulture)
             End Get
         End Property
         
@@ -1330,6 +1393,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Domain:.
+        '''</summary>
+        Friend ReadOnly Property strLabelDomain() As String
+            Get
+                Return ResourceManager.GetString("strLabelDomain", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Filename:.
         '''</summary>
         Friend ReadOnly Property strLabelFilename() As String
@@ -1357,11 +1429,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Port:.
+        '''</summary>
+        Friend ReadOnly Property strLabelPort() As String
+            Get
+                Return ResourceManager.GetString("strLabelPort", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Portable Edition.
         '''</summary>
         Friend ReadOnly Property strLabelPortableEdition() As String
             Get
                 Return ResourceManager.GetString("strLabelPortableEdition", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Protocol:.
+        '''</summary>
+        Friend ReadOnly Property strLabelProtocol() As String
+            Get
+                Return ResourceManager.GetString("strLabelProtocol", resourceCulture)
             End Get
         End Property
         
@@ -1416,6 +1506,15 @@ Namespace My.Resources
         Friend ReadOnly Property strLabelServerStatus() As String
             Get
                 Return ResourceManager.GetString("strLabelServerStatus", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Username:.
+        '''</summary>
+        Friend ReadOnly Property strLabelUsername() As String
+            Get
+                Return ResourceManager.GetString("strLabelUsername", resourceCulture)
             End Get
         End Property
         
@@ -2050,6 +2149,276 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Select the colour quality to be used..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionColors() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionColors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Put your notes or a description for the host here..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionDescription() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionDescription", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Enter your domain..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionDomain() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionDomain", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Enter the hostname or ip you want to connect to..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionHostnameIP() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionHostnameIP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Choose a icon that will be displayed when connected to the host..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionIcon() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionIcon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to This is the name that will be displayed in the connections tree..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionName() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Sets the panel in which the connection will open..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionPanel() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionPanel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Enter your password..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionPassword() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionPassword", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Enter the port the selected protocol is listening on..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionPort() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionPort", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Choose the protocol mRemoteNG should use to connect to the host..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionProtocol() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionProtocol", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Enter your username..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionUsername() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionUsername", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Colours.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameColors() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameColors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Description.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameDescription() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameDescription", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Domain.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameDomain() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameDomain", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Hostname/IP.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameHostnameIP() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameHostnameIP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Icon.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameIcon() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameIcon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Description.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritDescription() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritDescription", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Domain.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritDomain() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritDomain", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Icon.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritIcon() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritIcon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Panel.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritPanel() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritPanel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Password.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritPassword() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritPassword", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Port.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritPort() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritPort", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Protocol.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritProtocol() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritProtocol", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Username.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritUsername() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritUsername", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Name.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameName() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Panel.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNamePanel() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNamePanel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Password.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNamePassword() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNamePassword", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Port.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNamePort() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNamePort", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Protocol.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameProtocol() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameProtocol", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Username.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameUsername() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameUsername", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Aspect.
         '''</summary>
         Friend ReadOnly Property strSmartSizeModeAspect() As String
@@ -2091,6 +2460,15 @@ Namespace My.Resources
         Friend ReadOnly Property strTabAdvanced() As String
             Get
                 Return ResourceManager.GetString("strTabAdvanced", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Appearance.
+        '''</summary>
+        Friend ReadOnly Property strTabAppearance() As String
+            Get
+                Return ResourceManager.GetString("strTabAppearance", resourceCulture)
             End Get
         End Property
         
