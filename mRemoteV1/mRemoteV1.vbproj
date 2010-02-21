@@ -261,6 +261,7 @@
     <Compile Include="Tools\Tools.Controls.vb">
     </Compile>
     <Compile Include="Tools\Tools.ExternalApp.vb" />
+    <Compile Include="Tools\Tools.LocalizedAttributes.vb" />
     <Compile Include="Tools\Tools.Misc.vb" />
     <Compile Include="Tools\Tools.PortScan.vb" />
     <Compile Include="Tools\Tools.SystemMenu.vb" />

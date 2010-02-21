@@ -1,6 +1,7 @@
 Imports System.Windows.Forms
 Imports System.ComponentModel
 Imports mRemote.Tools.Misc.PropertyGridCategory
+Imports mRemote.Tools.LocalizedAttributes
 Imports mRemote.App.Runtime
 
 Namespace Connection
@@ -105,8 +106,8 @@ Namespace Connection
         Private _Hostname As String = ""
         <Category(Category2 & Language.Base.Props_Connection), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_HostnameIP), _
-            Description(Language.Base.Descr_HostnameIP)> _
+            LocalizedDisplayName("strConnectionPropertyHostnameIP"), _
+            LocalizedDescription("strConnectionDescriptionHostnameIP")> _
         Public Property Hostname() As String
             Get
                 Return Me._Hostname
@@ -602,8 +603,8 @@ Namespace Connection
         Private _Colors As Connection.Protocol.RDP.RDPColors = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDPColors), My.Settings.ConDefaultColors)
         <Category(Category5 & Language.Base.Props_Appearance), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_Colors), _
-            Description(Language.Base.Descr_Colors), _
+            LocalizedDisplayName("strConnectionPropertyColors"), _
+            LocalizedDescription("strConnectionDescriptionColors"), _
             TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
         Public Property Colors() As Connection.Protocol.RDP.RDPColors
             Get

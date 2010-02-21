@@ -1132,11 +1132,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Enter the hostname or ip you want to connect to..
+        '''</summary>
+        Friend ReadOnly Property strConnectionDescriptionHostnameIP() As String
+            Get
+                Return ResourceManager.GetString("strConnectionDescriptionHostnameIP", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Colours.
         '''</summary>
         Friend ReadOnly Property strConnectionPropertyColors() As String
             Get
                 Return ResourceManager.GetString("strConnectionPropertyColors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Hostname/IP.
+        '''</summary>
+        Friend ReadOnly Property strConnectionPropertyHostnameIP() As String
+            Get
+                Return ResourceManager.GetString("strConnectionPropertyHostnameIP", resourceCulture)
             End Get
         End Property
         

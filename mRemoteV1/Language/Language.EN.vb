@@ -8,8 +8,6 @@
         Public Const Descr_Icon As String = "Choose a icon that will be displayed when connected to the host."
         Public Const Props_Panel As String = "Panel"
         Public Const Descr_Panel As String = "Sets the panel in which the connection will open."
-        Public Const Props_HostnameIP As String = "Hostname/IP"
-        Public Const Descr_HostnameIP As String = "Enter the hostname or ip you want to connect to."
         Public Const Props_Username As String = "Username"
         Public Const Descr_Username As String = "Enter your username."
         Public Const Props_Password As String = "Password"

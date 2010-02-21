@@ -558,4 +558,10 @@
   <data name="strMenuViewOnly" xml:space="preserve">
     <value>View-Only (VNC)</value>
   </data>
+  <data name="strConnectionDescriptionHostnameIP" xml:space="preserve">
+    <value>Der Hostname oder die IP zu der eine Verbinung aufgebaut werden soll.</value>
+  </data>
+  <data name="strConnectionPropertyHostnameIP" xml:space="preserve">
+    <value>Hostname/IP</value>
+  </data>
 </root>
