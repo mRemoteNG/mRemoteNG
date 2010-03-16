@@ -451,9 +451,9 @@ Namespace UI
                                 If conIcon IsNot Nothing Then
                                     Me.btnIcon.Image = conIcon.ToBitmap
                                 End If
-                            Case Language.Base.Props_PuttySession
+                            Case My.Resources.strPropertyNamePuttySession
                                 mRemote.Connection.PuttySession.PuttySessions = mRemote.Connection.Protocol.PuttyBase.GetSessions()
-                            Case My.Resources.strPropertyNameHostnameIP
+                            Case My.Resources.strPropertyNameAddress
                                 Me.SetHostStatus(Me.pGrid.SelectedObject)
                         End Select
 

@@ -970,6 +970,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to General.
+        '''</summary>
+        Friend ReadOnly Property strCategoryGeneral() As String
+            Get
+                Return ResourceManager.GetString("strCategoryGeneral", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Miscellaneous.
         '''</summary>
         Friend ReadOnly Property strCategoryMiscellaneous() As String
@@ -2149,11 +2158,56 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Enter the hostname or ip you want to connect to..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionAddress() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionAddress", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select which authentication level this connection should use..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionAuthenticationLevel() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionAuthenticationLevel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select how you want to authenticate against the VNC server..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionAuthenticationMode() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionAuthenticationMode", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select whether to use bitmap caching or not..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionCacheBitmaps() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionCacheBitmaps", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Select the colour quality to be used..
         '''</summary>
         Friend ReadOnly Property strPropertyDescriptionColors() As String
             Get
                 Return ResourceManager.GetString("strPropertyDescriptionColors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select the compression value to be used..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionCompression() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionCompression", resourceCulture)
             End Get
         End Property
         
@@ -2167,6 +2221,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Select yes if the theme of the remote host should be displayed..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionDisplayThemes() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionDisplayThemes", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select yes if the wallpaper of the remote host should be displayed..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionDisplayWallpaper() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionDisplayWallpaper", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Enter your domain..
         '''</summary>
         Friend ReadOnly Property strPropertyDescriptionDomain() As String
@@ -2176,11 +2248,47 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Enter the hostname or ip you want to connect to..
+        '''  Looks up a localized string similar to Select the encoding mode to be used..
         '''</summary>
-        Friend ReadOnly Property strPropertyDescriptionHostnameIP() As String
+        Friend ReadOnly Property strPropertyDescriptionEncoding() As String
             Get
-                Return ResourceManager.GetString("strPropertyDescriptionHostnameIP", resourceCulture)
+                Return ResourceManager.GetString("strPropertyDescriptionEncoding", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select the encryption strength of the remote host..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionEncryptionStrength() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionEncryptionStrength", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select the external tool to be started..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionExternalTool() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionExternalTool", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select a external tool to be started after the disconnection to the remote host..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionExternalToolAfter() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionExternalToolAfter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select a external tool to be started before the connection to the remote host is established..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionExternalToolBefore() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionExternalToolBefore", resourceCulture)
             End Get
         End Property
         
@@ -2190,6 +2298,15 @@ Namespace My.Resources
         Friend ReadOnly Property strPropertyDescriptionIcon() As String
             Get
                 Return ResourceManager.GetString("strPropertyDescriptionIcon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Enter the MAC address of the remote host if you wish to use it in an external tool..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionMACAddress() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionMACAddress", resourceCulture)
             End Get
         End Property
         
@@ -2239,11 +2356,209 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Select a PuTTY session to be used when connecting..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionPuttySession() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionPuttySession", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select whether local disk drives should be shown on the remote host..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionRedirectDrives() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionRedirectDrives", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select whether key combinations (e.g. Alt-Tab) should be redirected to the remote host..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionRedirectKeys() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionRedirectKeys", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select whether local ports (ie. com, parallel) should be shown on the remote host..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionRedirectPorts() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionRedirectPorts", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select whether local printers should be shown on the remote host..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionRedirectPrinters() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionRedirectPrinters", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select whether local Smart Cards should be available on the remote host..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionRedirectSmartCards() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionRedirectSmartCards", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select how remote sound should be redirected..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionRedirectSounds() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionRedirectSounds", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select one of the available rendering engines that will be used to display HTML..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionRenderingEngine() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionRenderingEngine", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Choose the resolution or mode this connection will open in..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionResolution() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionResolution", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Select the SmartSize mode to be used..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionSmartSizeMode() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionSmartSizeMode", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Connect to the console session of the remote host..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionUseConsoleSession() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionUseConsoleSession", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Feel free to enter any information you need here..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionUser1() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionUser1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Enter your username..
         '''</summary>
         Friend ReadOnly Property strPropertyDescriptionUsername() As String
             Get
                 Return ResourceManager.GetString("strPropertyDescriptionUsername", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to If you want to establish a view only connection to the host select yes..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionViewOnly() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionViewOnly", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Enter the proxy address to be used..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionVNCProxyAddress() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionVNCProxyAddress", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Enter your password for authenticating against the proxy..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionVNCProxyPassword() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionVNCProxyPassword", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Enter the port the proxy server listens on..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionVNCProxyPort() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionVNCProxyPort", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to If you use a proxy to tunnel VNC connections, select which type it is..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionVNCProxyType() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionVNCProxyType", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Enter your username for authenticating against the proxy..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionVNCProxyUsername() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionVNCProxyUsername", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Hostname/IP.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameAddress() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameAddress", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Server Authentication.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameAuthenticationLevel() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameAuthenticationLevel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Authentication Mode.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameAuthenticationMode() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameAuthenticationMode", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Cache Bitmaps.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameCacheBitmaps() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameCacheBitmaps", resourceCulture)
             End Get
         End Property
         
@@ -2257,11 +2572,38 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Compression.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameCompression() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameCompression", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Description.
         '''</summary>
         Friend ReadOnly Property strPropertyNameDescription() As String
             Get
                 Return ResourceManager.GetString("strPropertyNameDescription", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Display Themes.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameDisplayThemes() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameDisplayThemes", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Display Wallpaper.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameDisplayWallpaper() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameDisplayWallpaper", resourceCulture)
             End Get
         End Property
         
@@ -2275,11 +2617,47 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Hostname/IP.
+        '''  Looks up a localized string similar to Encoding.
         '''</summary>
-        Friend ReadOnly Property strPropertyNameHostnameIP() As String
+        Friend ReadOnly Property strPropertyNameEncoding() As String
             Get
-                Return ResourceManager.GetString("strPropertyNameHostnameIP", resourceCulture)
+                Return ResourceManager.GetString("strPropertyNameEncoding", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Encryption Strength.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameEncryptionStrength() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameEncryptionStrength", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to External Tool.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameExternalTool() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameExternalTool", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to External Tool After.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameExternalToolAfter() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameExternalToolAfter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to External Tool Before.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameExternalToolBefore() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameExternalToolBefore", resourceCulture)
             End Get
         End Property
         
@@ -2293,11 +2671,83 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Inherit All.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritAll() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritAll", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Server Authentication.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritAuthenticationLevel() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritAuthenticationLevel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Authentication Mode.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritAuthenticationMode() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritAuthenticationMode", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Cache Bitmaps.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritCacheBitmaps() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritCacheBitmaps", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Colours.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritColors() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritColors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Compression.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritCompression() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritCompression", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Inherit Description.
         '''</summary>
         Friend ReadOnly Property strPropertyNameInheritDescription() As String
             Get
                 Return ResourceManager.GetString("strPropertyNameInheritDescription", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Display Themes.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritDisplayThemes() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritDisplayThemes", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Display Wallpaper.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritDisplayWallpaper() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritDisplayWallpaper", resourceCulture)
             End Get
         End Property
         
@@ -2311,11 +2761,65 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Inherit Encoding.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritEncoding() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritEncoding", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Encryption Strength.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritEncryptionStrength() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritEncryptionStrength", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit External Tool.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritExternalTool() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritExternalTool", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit External Tool After.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritExternalToolAfter() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritExternalToolAfter", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit External Tool Before.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritExternalToolBefore() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritExternalToolBefore", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Inherit Icon.
         '''</summary>
         Friend ReadOnly Property strPropertyNameInheritIcon() As String
             Get
                 Return ResourceManager.GetString("strPropertyNameInheritIcon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit MAC Address.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritMACAddress() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritMACAddress", resourceCulture)
             End Get
         End Property
         
@@ -2356,11 +2860,182 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Inherit PuTTY Session.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritPuttySession() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritPuttySession", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Disk Drives.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritRedirectDrives() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritRedirectDrives", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Key Combinations.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritRedirectKeys() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritRedirectKeys", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Ports.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritRedirectPorts() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritRedirectPorts", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Printers.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritRedirectPrinters() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritRedirectPrinters", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Smart Cards.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritRedirectSmartCards() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritRedirectSmartCards", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Sounds.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritRedirectSounds() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritRedirectSounds", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Rendering Engine.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritRenderingEngine() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritRenderingEngine", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Resolution.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritResolution() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritResolution", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit SmartSize Mode.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritSmartSizeMode() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritSmartSizeMode", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Use Console Session.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritUseConsoleSession() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritUseConsoleSession", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit User Field.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritUser1() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritUser1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Inherit Username.
         '''</summary>
         Friend ReadOnly Property strPropertyNameInheritUsername() As String
             Get
                 Return ResourceManager.GetString("strPropertyNameInheritUsername", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit View Only.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritViewOnly() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritViewOnly", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Proxy Address.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritVNCProxyAddress() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritVNCProxyAddress", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Proxy Password.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritVNCProxyPassword() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritVNCProxyPassword", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Proxy Port.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritVNCProxyPort() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritVNCProxyPort", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Proxy Type.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritVNCProxyType() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritVNCProxyType", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Inherit Proxy Username.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameInheritVNCProxyUsername() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameInheritVNCProxyUsername", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to MAC Address.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameMACAddress() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameMACAddress", resourceCulture)
             End Get
         End Property
         
@@ -2410,11 +3085,173 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to PuTTY Session.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNamePuttySession() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNamePuttySession", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Disk Drives.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameRedirectDrives() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameRedirectDrives", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Key Combinations.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameRedirectKeys() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameRedirectKeys", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Ports.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameRedirectPorts() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameRedirectPorts", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Printers.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameRedirectPrinters() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameRedirectPrinters", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Smart Cards.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameRedirectSmartCards() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameRedirectSmartCards", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Sounds.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameRedirectSounds() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameRedirectSounds", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Rendering Engine.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameRenderingEngine() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameRenderingEngine", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Resolution.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameResolution() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameResolution", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to SmartSize Mode.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameSmartSizeMode() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameSmartSizeMode", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Use Console Session.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameUseConsoleSession() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameUseConsoleSession", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to User Field.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameUser1() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameUser1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Username.
         '''</summary>
         Friend ReadOnly Property strPropertyNameUsername() As String
             Get
                 Return ResourceManager.GetString("strPropertyNameUsername", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to View Only.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameViewOnly() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameViewOnly", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Proxy Address.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameVNCProxyAddress() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameVNCProxyAddress", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Proxy Password.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameVNCProxyPassword() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameVNCProxyPassword", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Proxy Port.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameVNCProxyPort() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameVNCProxyPort", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Proxy Type.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameVNCProxyType() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameVNCProxyType", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Proxy Username.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameVNCProxyUsername() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameVNCProxyUsername", resourceCulture)
             End Get
         End Property
         

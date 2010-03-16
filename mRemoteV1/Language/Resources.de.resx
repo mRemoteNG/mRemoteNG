@@ -558,10 +558,10 @@
   <data name="strMenuViewOnly" xml:space="preserve">
     <value>View-Only (VNC)</value>
   </data>
-  <data name="strPropertyDescriptionHostnameIP" xml:space="preserve">
+  <data name="strPropertyDescriptionAddress" xml:space="preserve">
     <value>Der Hostname oder die IP zu der eine Verbinung aufgebaut werden soll.</value>
   </data>
-  <data name="strPropertyNameHostnameIP" xml:space="preserve">
+  <data name="strPropertyNameAddress" xml:space="preserve">
     <value>Hostname/IP</value>
   </data>
   <data name="strButtonIcon" xml:space="preserve">
@@ -691,5 +691,297 @@
   </data>
   <data name="strTabAppearance" xml:space="preserve">
     <value>Aussehen</value>
+  </data>
+  <data name="strCategoryGeneral" xml:space="preserve">
+    <value>Generell</value>
+  </data>
+  <data name="strPropertyDescriptionAuthenticationLevel" xml:space="preserve">
+    <value>Wählen sie welche Authentifizierungs-Variante verwendet wird.</value>
+  </data>
+  <data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
+    <value>Wählen sie wie sie sich am VNC server authentifizieren wollen.</value>
+  </data>
+  <data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
+    <value>Wählen sie ob Bitmap caching zum Einsatz kommen soll.</value>
+  </data>
+  <data name="strPropertyDescriptionCompression" xml:space="preserve">
+    <value>Wählen sie die Kompressionsrate die verwendet werden soll.</value>
+  </data>
+  <data name="strPropertyDescriptionDisplayThemes" xml:space="preserve">
+    <value>Wählen sie ob Themen am Remote Host angezeigt werden sollen.</value>
+  </data>
+  <data name="strPropertyDescriptionDisplayWallpaper" xml:space="preserve">
+    <value>Wählen sie ob Hintergrundbilder am Remote Host angezeigt werden sollen.</value>
+  </data>
+  <data name="strPropertyDescriptionEncoding" xml:space="preserve">
+    <value>Wählen sie die Codierung die verwendet werden soll.</value>
+  </data>
+  <data name="strPropertyDescriptionEncryptionStrength" xml:space="preserve">
+    <value>Wählen sie die Verschlüsselungsstärke des Remote Hosts.</value>
+  </data>
+  <data name="strPropertyDescriptionExternalTool" xml:space="preserve">
+    <value>Wählen sie die Ext. App die gestartet werden soll.</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyDescriptionExternalToolAfter" xml:space="preserve">
+    <value>Wählen sie eine Ext. App die gestartet werden soll nachdem die Verbindung zum Remote Host getrennt wurde.</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyDescriptionExternalToolBefore" xml:space="preserve">
+    <value>Wählen sie eine Ext. App die gestartet werden soll bevor die Verbindung zum Remote Host aufgebaut wurde.</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyDescriptionMACAddress" xml:space="preserve">
+    <value>Geben sie die MAC Adresse des Remote Hosts ein (kann für Ext. Apps verwendet werden).</value>
+  </data>
+  <data name="strPropertyDescriptionPuttySession" xml:space="preserve">
+    <value>Wählen sie eine PuTTY session die bei Verbindung verwendet werden soll.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
+    <value>Wählen sie ob ihre lokalen Festplatten am Remote Host angezeigt werden sollen.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectKeys" xml:space="preserve">
+    <value>Wählen sie ob Tastenkombinationen wie z.B. Alt-Tab auf den Remote Host umgeleitet werden sollen.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectPorts" xml:space="preserve">
+    <value>Wählen sie ob ihre lokalen Ports wie z.B. COM, Parallel auf dem Remote Host angezeigt werden sollen.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
+    <value>Wählen sie ob ihre lokalen Drucker am Remote Host angezeigt werden sollen.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
+    <value>Wählen sie ob ihre lokalen Smart Cards auf dem Remote Host zur Verfügung stehen sollen.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
+    <value>Wählen sie wie Töne auf dem Remote Host wiedergegeben werden sollen.</value>
+  </data>
+  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
+    <value>Wählen sie eine der Rendering Engines die verwendet wird um html darzustellen.</value>
+  </data>
+  <data name="strPropertyDescriptionResolution" xml:space="preserve">
+    <value>Wählen sie die Auflösung in welcher der Host geöffnet werden soll.</value>
+  </data>
+  <data name="strPropertyDescriptionSmartSizeMode" xml:space="preserve">
+    <value>Wählen sie den SmartSize Modus der verwendet werden soll.</value>
+  </data>
+  <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
+    <value>Zur Console Session des Remote Hosts verbinden.</value>
+  </data>
+  <data name="strPropertyDescriptionUser1" xml:space="preserve">
+    <value>Dieses Feld ist frei beschreibbar.</value>
+  </data>
+  <data name="strPropertyDescriptionViewOnly" xml:space="preserve">
+    <value>Wählen sie ob sie eine View-Only Verbindung aufbauen wollen.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyAddress" xml:space="preserve">
+    <value>Geben sie die IP des Proxy Servers ein.</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyPassword" xml:space="preserve">
+    <value>Geben sie ihr Password ein.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyPort" xml:space="preserve">
+    <value>Geben sie den Port des Proxy Servers ein.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyType" xml:space="preserve">
+    <value>Wenn sie einen Proxy verwenden um auf den Remote Host zugreifen zu können, wählen sie hier den Typ.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyUsername" xml:space="preserve">
+    <value>Geben sie ihren Benutzernamen ein.</value>
+  </data>
+  <data name="strPropertyNameAuthenticationLevel" xml:space="preserve">
+    <value>Serverauthentifizierung</value>
+  </data>
+  <data name="strPropertyNameAuthenticationMode" xml:space="preserve">
+    <value>Authentication Mode</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyNameCacheBitmaps" xml:space="preserve">
+    <value>Bitmaps zwischenspeichern</value>
+  </data>
+  <data name="strPropertyNameCompression" xml:space="preserve">
+    <value>Kompremierung</value>
+  </data>
+  <data name="strPropertyNameDisplayThemes" xml:space="preserve">
+    <value>Themen anzeigen</value>
+  </data>
+  <data name="strPropertyNameDisplayWallpaper" xml:space="preserve">
+    <value>Hintergrundbild anzeigen</value>
+  </data>
+  <data name="strPropertyNameEncoding" xml:space="preserve">
+    <value>Codierung</value>
+  </data>
+  <data name="strPropertyNameEncryptionStrength" xml:space="preserve">
+    <value>Verschlüsselungsstärke</value>
+  </data>
+  <data name="strPropertyNameExternalTool" xml:space="preserve">
+    <value>External Tool</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyNameExternalToolAfter" xml:space="preserve">
+    <value>External Tool After</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyNameExternalToolBefore" xml:space="preserve">
+    <value>External Tool Before</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyNameInheritAll" xml:space="preserve">
+    <value>Alles vererben</value>
+  </data>
+  <data name="strPropertyNameInheritAuthenticationLevel" xml:space="preserve">
+    <value>Vererbe Serverauthentifizierung</value>
+  </data>
+  <data name="strPropertyNameInheritAuthenticationMode" xml:space="preserve">
+    <value>Vererbe Authentication Mode</value>
+  </data>
+  <data name="strPropertyNameInheritCacheBitmaps" xml:space="preserve">
+    <value>Vererbe Cache Bitmaps</value>
+  </data>
+  <data name="strPropertyNameInheritColors" xml:space="preserve">
+    <value>Vererbe Farben</value>
+  </data>
+  <data name="strPropertyNameInheritCompression" xml:space="preserve">
+    <value>Vererbe Kompremierung</value>
+  </data>
+  <data name="strPropertyNameInheritDisplayThemes" xml:space="preserve">
+    <value>Vererbe Display Themes</value>
+  </data>
+  <data name="strPropertyNameInheritDisplayWallpaper" xml:space="preserve">
+    <value>Vererbe Display Wallpaper</value>
+  </data>
+  <data name="strPropertyNameInheritEncoding" xml:space="preserve">
+    <value>Vererbe Codierung</value>
+  </data>
+  <data name="strPropertyNameInheritEncryptionStrength" xml:space="preserve">
+    <value>Vererbe Verschlüsselungsstärke</value>
+  </data>
+  <data name="strPropertyNameInheritExternalTool" xml:space="preserve">
+    <value>Vererbe External Tool</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyNameInheritExternalToolAfter" xml:space="preserve">
+    <value>Vererbe External Tool After</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyNameInheritExternalToolBefore" xml:space="preserve">
+    <value>Vererbe External Tool Before</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyNameInheritMACAddress" xml:space="preserve">
+    <value>Vererbe MAC Adresse</value>
+  </data>
+  <data name="strPropertyNameInheritPuttySession" xml:space="preserve">
+    <value>Vererbe PuTTY Session</value>
+  </data>
+  <data name="strPropertyNameInheritRedirectDrives" xml:space="preserve">
+    <value>Vererbe Disk Drives</value>
+  </data>
+  <data name="strPropertyNameInheritRedirectKeys" xml:space="preserve">
+    <value>Vererbe Key Combinations</value>
+  </data>
+  <data name="strPropertyNameInheritRedirectPorts" xml:space="preserve">
+    <value>Vererbe Ports</value>
+  </data>
+  <data name="strPropertyNameInheritRedirectPrinters" xml:space="preserve">
+    <value>Vererbe Printers</value>
+  </data>
+  <data name="strPropertyNameInheritRedirectSmartCards" xml:space="preserve">
+    <value>Vererbe Smart Cards</value>
+  </data>
+  <data name="strPropertyNameInheritRedirectSounds" xml:space="preserve">
+    <value>Vererbe Sounds</value>
+  </data>
+  <data name="strPropertyNameInheritRenderingEngine" xml:space="preserve">
+    <value>Vererbe Rendering Engine</value>
+  </data>
+  <data name="strPropertyNameInheritResolution" xml:space="preserve">
+    <value>Vererbe Resolution</value>
+  </data>
+  <data name="strPropertyNameInheritSmartSizeMode" xml:space="preserve">
+    <value>Vererbe SmartSize Modus</value>
+  </data>
+  <data name="strPropertyNameInheritUseConsoleSession" xml:space="preserve">
+    <value>Vererbe Verwende Console Session</value>
+  </data>
+  <data name="strPropertyNameInheritUser1" xml:space="preserve">
+    <value>Vererbe Benutzer Feld</value>
+  </data>
+  <data name="strPropertyNameInheritViewOnly" xml:space="preserve">
+    <value>Vererbe View-Only</value>
+  </data>
+  <data name="strPropertyNameInheritVNCProxyAddress" xml:space="preserve">
+    <value>Vererbe Proxy Address</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyNameInheritVNCProxyPassword" xml:space="preserve">
+    <value>Vererbe Proxy Passwort</value>
+  </data>
+  <data name="strPropertyNameInheritVNCProxyPort" xml:space="preserve">
+    <value>Vererbe Proxy Port</value>
+  </data>
+  <data name="strPropertyNameInheritVNCProxyType" xml:space="preserve">
+    <value>Vererbe Proxy Typ</value>
+  </data>
+  <data name="strPropertyNameInheritVNCProxyUsername" xml:space="preserve">
+    <value>Vererbe Proxy Benutzername</value>
+  </data>
+  <data name="strPropertyNameMACAddress" xml:space="preserve">
+    <value>MAC Adresse</value>
+  </data>
+  <data name="strPropertyNamePuttySession" xml:space="preserve">
+    <value>PuTTY Session</value>
+  </data>
+  <data name="strPropertyNameRedirectDrives" xml:space="preserve">
+    <value>Festplatten</value>
+  </data>
+  <data name="strPropertyNameRedirectKeys" xml:space="preserve">
+    <value>Tastenkombinationen</value>
+  </data>
+  <data name="strPropertyNameRedirectPorts" xml:space="preserve">
+    <value>Ports</value>
+  </data>
+  <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
+    <value>Drucker</value>
+  </data>
+  <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
+    <value>Smart Cards</value>
+  </data>
+  <data name="strPropertyNameRedirectSounds" xml:space="preserve">
+    <value>Töne</value>
+  </data>
+  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
+    <value>Rendering Engine</value>
+  </data>
+  <data name="strPropertyNameResolution" xml:space="preserve">
+    <value>Auflösung</value>
+  </data>
+  <data name="strPropertyNameSmartSizeMode" xml:space="preserve">
+    <value>SmartSize Modus</value>
+  </data>
+  <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
+    <value>Verwende Console Session</value>
+  </data>
+  <data name="strPropertyNameUser1" xml:space="preserve">
+    <value>Benutzer Feld</value>
+  </data>
+  <data name="strPropertyNameViewOnly" xml:space="preserve">
+    <value>View-Only</value>
+  </data>
+  <data name="strPropertyNameVNCProxyAddress" xml:space="preserve">
+    <value>Proxy Address</value>
+    <comment>Need translation</comment>
+  </data>
+  <data name="strPropertyNameVNCProxyPassword" xml:space="preserve">
+    <value>Proxy Passwort</value>
+  </data>
+  <data name="strPropertyNameVNCProxyPort" xml:space="preserve">
+    <value>Proxy Port</value>
+  </data>
+  <data name="strPropertyNameVNCProxyType" xml:space="preserve">
+    <value>Proxy Typ</value>
+  </data>
+  <data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
+    <value>Proxy Benutzername</value>
   </data>
 </root>
