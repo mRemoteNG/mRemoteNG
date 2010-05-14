@@ -478,34 +478,34 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                cMenTreeAddConnection.Text = Language.Base.AddConnection
-                cMenTreeAddFolder.Text = Language.Base.AddFolder
-                cMenTreeConnect.Text = Language.Base.Connect
-                cMenTreeConnectWithOptions.Text = Language.Base.ConnectWithOptions
-                cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.Base.ConnectToConsoleSession
-                cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.Base.ConnectInFullscreen
-                cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.Base.ChoosePanelBeforeConnecting
+                cMenTreeAddConnection.Text = My.Resources.strAddConnection
+                cMenTreeAddFolder.Text = My.Resources.strAddFolder
+                cMenTreeConnect.Text = My.Resources.strConnect
+                cMenTreeConnectWithOptions.Text = My.Resources.strConnectWithOptions
+                cMenTreeConnectWithOptionsConnectToConsoleSession.Text = My.Resources.strConnectToConsoleSession
+                cMenTreeConnectWithOptionsConnectInFullscreen.Text = My.Resources.strConnectInFullscreen
+                cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = My.Resources.strChoosePanelBeforeConnecting
                 cMenTreeDisconnect.Text = My.Resources.strMenuDisconnect
-                cMenTreeTools.Text = Language.Base.Tools
+                cMenTreeTools.Text = My.Resources.strTools
                 cMenTreeToolsTransferFile.Text = My.Resources.strMenuTransferFile
-                cMenTreeToolsImportExport.Text = Language.Base.ImportExport
-                cMenTreeToolsImportExportExportmRemoteXML.Text = Language.Base.ExportmRemoteXML
-                cMenTreeToolsImportExportImportmRemoteXML.Text = Language.Base.ImportmRemoteXML
-                cMenTreeToolsImportExportImportFromAD.Text = Language.Base.ImportAD
-                cMenTreeToolsImportExportImportFromRDPFiles.Text = Language.Base.ImportRDPFiles
-                cMenTreeToolsImportExportImportFromPortScan.Text = Language.Base.ImportPortScan
-                cMenTreeToolsSort.Text = Language.Base.Sort
-                cMenTreeToolsSortAscending.Text = Language.Base.SortAsc
-                cMenTreeToolsSortDescending.Text = Language.Base.SortDesc
+                cMenTreeToolsImportExport.Text = My.Resources.strImportExport
+                cMenTreeToolsImportExportExportmRemoteXML.Text = My.Resources.strExportmRemoteXML
+                cMenTreeToolsImportExportImportmRemoteXML.Text = My.Resources.strImportmRemoteXML
+                cMenTreeToolsImportExportImportFromAD.Text = My.Resources.strImportAD
+                cMenTreeToolsImportExportImportFromRDPFiles.Text = My.Resources.strImportRDPFiles
+                cMenTreeToolsImportExportImportFromPortScan.Text = My.Resources.strImportPortScan
+                cMenTreeToolsSort.Text = My.Resources.strSort
+                cMenTreeToolsSortAscending.Text = My.Resources.strSortAsc
+                cMenTreeToolsSortDescending.Text = My.Resources.strSortDesc
                 cMenTreeToolsExternalApps.Text = My.Resources.strMenuExternalTools
-                cMenTreeDuplicate.Text = Language.Base.Duplicate
-                cMenTreeRename.Text = Language.Base.Rename
+                cMenTreeDuplicate.Text = My.Resources.strDuplicate
+                cMenTreeRename.Text = My.Resources.strRename
                 cMenTreeDelete.Text = My.Resources.strMenuDelete
-                cMenTreeMoveUp.Text = Language.Base.MoveUp
-                cMenTreeMoveDown.Text = Language.Base.MoveDown
+                cMenTreeMoveUp.Text = My.Resources.strMoveUp
+                cMenTreeMoveDown.Text = My.Resources.strMoveDown
                 mMenView.Text = My.Resources.strMenuView
-                mMenViewExpandAllFolders.Text = Language.Base.ExpandAllFolders
-                mMenViewCollapseAllFolders.Text = Language.Base.CollapseAllFolders
+                mMenViewExpandAllFolders.Text = My.Resources.strExpandAllFolders
+                mMenViewCollapseAllFolders.Text = My.Resources.strCollapseAllFolders
                 TabText = My.Resources.strConnections
                 Text = My.Resources.strConnections
             End Sub
@@ -555,7 +555,7 @@ Namespace UI
             Private Sub tvConnections_AfterLabelEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.NodeLabelEditEventArgs) Handles tvConnections.AfterLabelEdit
                 Try
                     If My.Settings.SetHostnameLikeDisplayName Then
-                        If e.Node.Text = Language.Base.NewConnection Then
+                        If e.Node.Text = My.Resources.strNewConnection Then
                             TryCast(e.Node.Tag, mRemote.Connection.Info).Hostname = e.Label
                         End If
                     End If

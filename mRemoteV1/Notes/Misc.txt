@@ -7,17 +7,8 @@ How to build the portable package:
 	  from GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.CompanyName.Replace(" ", "_") & "\" & My.Application.Info.ProductName
 	  to My.Application.Info.DirectoryPath
 
-How to build the different language packages:
-	In Language.Base:
-		change Inherits Language.XX to the language of your choice
-		change the CurrentLanguage var to the same language
-
-
 How to add a new language:
-	In Language.Base:
-		Add the language code to the Languages Enum
-	Create a new Language.XX class in the Language namespace
-		Copy all Constants from one of the existing language classes and replace the strings
+	Create a new Language.XX.resx file in the My Project folder
 
 Localize PropertyGrid:
 	http://www.morganskinner.com/Articles/LocalizedPropertyGrid/

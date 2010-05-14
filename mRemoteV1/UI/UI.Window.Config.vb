@@ -466,7 +466,7 @@ Namespace UI
                         Dim rInfo As mRemote.Root.Info = Me.pGrid.SelectedObject
 
                         Select Case e.ChangedItem.Label
-                            Case Language.Base.PasswordProtect
+                            Case My.Resources.strPasswordProtect
                                 If rInfo.Password = True Then
                                     Dim pw As String = Tools.Misc.PasswordDialog
 

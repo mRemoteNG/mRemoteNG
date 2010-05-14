@@ -36,7 +36,7 @@ Namespace Root
            Bindable(False), _
            DefaultValue(""), _
            DesignOnly(False), _
-           DisplayName(Language.Base.PasswordProtect), _
+           LocalizedDisplayName("strPasswordProtect"), _
            Attributes.Root(), _
            TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
         Public Property Password() As Boolean

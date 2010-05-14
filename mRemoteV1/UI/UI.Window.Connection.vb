@@ -215,7 +215,12 @@ Namespace UI
 #End Region
 
 #Region "Public Methods"
-            Public Sub New(ByVal Panel As DockContent, Optional ByVal FormText As String = Language.Base.NewPanel)
+            Public Sub New(ByVal Panel As DockContent, Optional ByVal FormText As String = "")
+
+                If FormText = "" Then
+                    FormText = My.Resources.strNewPanel
+                End If
+
                 Me.WindowType = Type.Connection
                 Me.DockPnl = Panel
                 Me.InitializeComponent()
@@ -755,7 +760,7 @@ Namespace UI
 
             Private Sub RenameTab()
                 Try
-                    Dim nTitle As String = InputBox(Language.Base.NewTitle & ":", , Me.TabController.SelectedTab.Title.Replace("&&", "&"))
+                    Dim nTitle As String = InputBox(My.Resources.strNewTitle & ":", , Me.TabController.SelectedTab.Title.Replace("&&", "&"))
 
                     If nTitle <> "" Then
                         Me.TabController.SelectedTab.Title = nTitle.Replace("&", "&&")

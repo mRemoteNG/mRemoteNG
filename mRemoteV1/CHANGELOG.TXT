@@ -1,4 +1,7 @@
-﻿1.63:
+﻿1.64:
+  AR: Fixed translations, moved everything into resx
+
+1.63:
   New icon and logo
   Fixed problems moving or resizing the main window while PuTTY (SSH/telnet/rlogin/raw) connections are open
   Fixed PuTTY processes not closing on Vista and 7 with UAC enabled

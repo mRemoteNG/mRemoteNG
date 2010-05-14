@@ -42,7 +42,7 @@ Public Class frmChoosePanel
     End Sub
 
     Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
-        Dim pnlName As String = InputBox(Language.Base.PanelName & ":", Language.Base.NewPanel, Language.Base.NewPanel)
+        Dim pnlName As String = InputBox(My.Resources.strPanelName & ":", My.Resources.strNewPanel, My.Resources.strNewPanel)
 
         If pnlName <> "" Then
             AddPanel(pnlName)

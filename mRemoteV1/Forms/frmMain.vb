@@ -69,10 +69,19 @@ Public Class frmMain
     Private Sub ApplyLanguage()
         mMenFile.Text = My.Resources.strMenuFile
         mMenFileNew.Text = My.Resources.strMenuNewConnectionFile
+        mMenFileNewConnection.Text = My.Resources.strNewConnection
+        mMenFileNewFolder.Text = My.Resources.strNewFolder
         mMenFileLoad.Text = My.Resources.strMenuOpenConnectionFile
         mMenFileSave.Text = My.Resources.strMenuSaveConnectionFile
         mMenFileSaveAs.Text = My.Resources.strMenuSaveConnectionFileAs
+        mMenFileImportExport.Text = My.Resources.strImportExport
+        ImportFromActiveDirectoryToolStripMenuItem.Text = My.Resources.strImportAD
+        ImportFromPortScanToolStripMenuItem.Text = My.Resources.strImportPortScan
+        ImportFromRDPFileToolStripMenuItem.Text = My.Resources.strImportRDPFiles
+        ImportFromXMLFileToolStripMenuItem.Text = My.Resources.strImportmRemoteXML
+        ExportToXMLFileToolStripMenuItem.Text = My.Resources.strExportmRemoteXML
         mMenFileExit.Text = My.Resources.strMenuExit
+
         mMenView.Text = My.Resources.strMenuView
         mMenViewAddConnectionPanel.Text = My.Resources.strMenuAddConnectionPanel
         mMenViewConnectionPanels.Text = My.Resources.strMenuConnectionPanels
@@ -85,15 +94,19 @@ Public Class frmMain
         mMenViewJumpToConnectionsConfig.Text = My.Resources.strMenuConnectionsAndConfig
         mMenViewJumpToSessionsScreenshots.Text = My.Resources.strMenuSessionsAndScreenshots
         mMenViewJumpToErrorsInfos.Text = My.Resources.strMenuNotifications
+        mMenViewResetLayout.Text = My.Resources.strMenuResetLayout
         mMenViewQuickConnectToolbar.Text = My.Resources.strMenuQuickConnectToolbar
         mMenViewExtAppsToolbar.Text = My.Resources.strMenuExternalToolsToolbar
         mMenViewFullscreen.Text = My.Resources.strMenuFullScreen
+
         mMenTools.Text = My.Resources.strMenuTools
         mMenToolsSSHTransfer.Text = My.Resources.strMenuSSHFileTransfer
         mMenToolsExternalApps.Text = My.Resources.strMenuExternalTools
         mMenToolsPortScan.Text = My.Resources.strMenuPortScan
+        mMenToolsComponentsCheck.Text = My.Resources.strComponentsCheck
         mMenToolsUpdate.Text = My.Resources.strMenuCheckForUpdates
         mMenToolsOptions.Text = My.Resources.strMenuOptions
+
         mMenInfo.Text = My.Resources.strMenuHelp
         mMenInfoHelp.Text = My.Resources.strMenuHelpContents
         mMenInfoForum.Text = My.Resources.strMenuSupportForum
@@ -101,9 +114,12 @@ Public Class frmMain
         mMenInfoDonate.Text = My.Resources.strMenuDonate
         mMenInfoWebsite.Text = My.Resources.strMenuWebsite
         mMenInfoAbout.Text = My.Resources.strMenuAbout
+        mMenInfoAnnouncements.Text = My.Resources.strMenuAnnouncements
+
         lblQuickConnect.Text = My.Resources.strLabelConnect
         btnQuickyPlay.Text = My.Resources.strMenuConnect
         mMenQuickyCon.Text = My.Resources.strMenuConnections
+
         cMenToolbarShowText.Text = My.Resources.strMenuShowText
     End Sub
 
@@ -274,7 +290,7 @@ Public Class frmMain
 
     Private Sub mMenFileLoad_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileLoad.Click
         If App.Runtime.ConnectionsFileLoaded Then
-            Select Case MsgBox(Language.Base.SaveConnectionsFileBeforeOpeningAnother, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question)
+            Select Case MsgBox(My.Resources.strSaveConnectionsFileBeforeOpeningAnother, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question)
                 Case MsgBoxResult.Yes
                     App.Runtime.SaveConnections()
                 Case MsgBoxResult.Cancel
@@ -720,10 +736,10 @@ Public Class frmMain
 
         For i As Integer = 0 To Screen.AllScreens.Length - 1
             SysMenSubItems(i) = 200 + i
-            SysMenu.AppendMenuItem(popMen, Tools.SystemMenu.Flags.MF_STRING, SysMenSubItems(i), Language.Base.Screen & " " & i + 1)
+            SysMenu.AppendMenuItem(popMen, Tools.SystemMenu.Flags.MF_STRING, SysMenSubItems(i), My.Resources.strScreen & " " & i + 1)
         Next
 
-        SysMenu.InsertMenuItem(SysMenu.SystemMenuHandle, 0, Tools.SystemMenu.Flags.MF_POPUP Or Tools.SystemMenu.Flags.MF_BYPOSITION, popMen, Language.Base.SendTo)
+        SysMenu.InsertMenuItem(SysMenu.SystemMenuHandle, 0, Tools.SystemMenu.Flags.MF_POPUP Or Tools.SystemMenu.Flags.MF_BYPOSITION, popMen, My.Resources.strSendTo)
         SysMenu.InsertMenuItem(SysMenu.SystemMenuHandle, 1, Tools.SystemMenu.Flags.MF_BYPOSITION Or Tools.SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, Nothing)
     End Sub
 #End Region

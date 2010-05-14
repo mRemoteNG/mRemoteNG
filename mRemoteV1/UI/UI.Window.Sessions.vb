@@ -56,11 +56,11 @@ Namespace UI
                 '
                 'clmSesActivity
                 '
-                Me.clmSesActivity.Text = Language.Base.Activity
+                Me.clmSesActivity.Text = My.Resources.strActivity
                 '
                 'clmSesType
                 '
-                Me.clmSesType.Text = Language.Base.Type
+                Me.clmSesType.Text = My.Resources.strType
                 Me.clmSesType.Width = 80
                 '
                 'cMenSession
@@ -74,14 +74,14 @@ Namespace UI
                 Me.cMenSessionRefresh.Image = Global.mRemote.My.Resources.Resources.Refresh
                 Me.cMenSessionRefresh.Name = "cMenSessionRefresh"
                 Me.cMenSessionRefresh.Size = New System.Drawing.Size(123, 22)
-                Me.cMenSessionRefresh.Text = Language.Base.Refresh
+                Me.cMenSessionRefresh.Text = My.Resources.strRefresh
                 '
                 'cMenSessionLogOff
                 '
                 Me.cMenSessionLogOff.Image = Global.mRemote.My.Resources.Resources.Session_LogOff
                 Me.cMenSessionLogOff.Name = "cMenSessionLogOff"
                 Me.cMenSessionLogOff.Size = New System.Drawing.Size(123, 22)
-                Me.cMenSessionLogOff.Text = Language.Base.LogOff
+                Me.cMenSessionLogOff.Text = My.Resources.strLogOff
                 '
                 'Sessions
                 '
@@ -128,10 +128,10 @@ Namespace UI
 
             Private Sub ApplyLanguage()
                 clmSesUsername.Text = My.Resources.strColumnUsername
-                clmSesActivity.Text = Language.Base.Activity
-                clmSesType.Text = Language.Base.Type
-                cMenSessionRefresh.Text = Language.Base.Refresh
-                cMenSessionLogOff.Text = Language.Base.LogOff
+                clmSesActivity.Text = My.Resources.strActivity
+                clmSesType.Text = My.Resources.strType
+                cMenSessionRefresh.Text = My.Resources.strRefresh
+                cMenSessionLogOff.Text = My.Resources.strLogOff
                 TabText = My.Resources.strMenuSessions
                 Text = My.Resources.strMenuSessions
             End Sub

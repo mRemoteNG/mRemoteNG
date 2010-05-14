@@ -96,7 +96,7 @@ Namespace Connection
 
                     Me.SetPerformanceFlags()
 
-                    RDP.ConnectingText = Language.Base.Connecting
+                    RDP.ConnectingText = My.Resources.strConnecting
 
                     Return True
                 Catch ex As Exception
@@ -407,9 +407,9 @@ Namespace Connection
                 Port = 3389
             End Enum
 
-            Public Enum RDPColors
-                <Description(Language.Base.RDP256Colors)> _
-                Colors256 = 8
+            Public Enum RDPColors ' TODO: Translate this
+                <Description("8 Bit")> _
+                Colors256 = 8 ' My.Resources.strRDP256Colors
                 <Description("16 Bit")> _
                 Colors16Bit = 16
                 <Description("24 Bit")> _
@@ -418,16 +418,16 @@ Namespace Connection
                 Colors32Bit = 32
             End Enum
 
-            Public Enum RDPSounds
-                <Description(Language.Base.RDPSoundBringToThisComputer)> _
-                BringToThisComputer = 0
-                <Description(Language.Base.RDPSoundLeaveAtRemoteComputer)> _
-                LeaveAtRemoteComputer = 1
-                <Description(Language.Base.RDPSoundDoNotPlay)> _
-                DoNotPlay = 2
+            Public Enum RDPSounds ' TODO: Translate this
+                <Description("Bring sound to this computer")> _
+                BringToThisComputer = 0 ' My.Resources.strRDPSoundBringToThisComputer
+                <Description("Leave sound at remote computer")> _
+                LeaveAtRemoteComputer = 1 ' My.Resources.strRDPSoundLeaveAtRemoteComputer
+                <Description("Do not play sound")> _
+                DoNotPlay = 2 ' My.Resources.strRDPSoundDoNotPlay
             End Enum
 
-            Private Enum RDPPerformanceFlags
+            Private Enum RDPPerformanceFlags ' TODO: Translate this
                 <Description("Disable Wallpaper")> _
                 DisableWallpaper = 1
                 <Description("Disable Full Window drag")> _
@@ -442,13 +442,13 @@ Namespace Connection
                 DisableCursorBlinking = 40
             End Enum
 
-            Public Enum RDPResolutions
-                <Description(Language.Base.RDPFitToPanel)> _
-                FitToWindow
-                <Description(Language.Base.Fullscreen)> _
-                Fullscreen
-                <Description(Language.Base.RDPSmartSize)> _
-                SmartSize
+            Public Enum RDPResolutions ' TODO: Translate this
+                <Description("Fit to panel")> _
+                FitToWindow ' My.Resources.strRDPFitToPanel
+                <Description("Fullscreen")> _
+                Fullscreen ' My.Resources.strFullscreen
+                <Description("SmartSize")> _
+                SmartSize ' My.Resources.strRDPSmartSize
                 <Description("640x480")> _
                 Res640x480
                 <Description("800x600")> _
@@ -487,16 +487,16 @@ Namespace Connection
                 Res3840x2400
             End Enum
 
-            Public Enum AuthenticationLevel
-                <Description(Language.Base.AlwaysConnectEvenIfAuthFails)> _
-                NoAuth = 0
-                <Description(Language.Base.DontConnectWhenAuthFails)> _
-                AuthRequired = 1
-                <Description(Language.Base.WarnIfAuthFails)> _
-                WarnOnFailedAuth = 2
+            Public Enum AuthenticationLevel ' TODO: Translate this
+                <Description("Always Connect Even If Auth Fails")> _
+                NoAuth = 0 ' My.Resources.strAlwaysConnectEvenIfAuthFails
+                <Description("Dont Connect When Auth Fails")> _
+                AuthRequired = 1 ' My.Resources.strDontConnectWhenAuthFails
+                <Description("Warn If Auth Fails")> _
+                WarnOnFailedAuth = 2 ' My.Resources.strWarnIfAuthFails
             End Enum
 
-            Public Enum RDGatewayUsageMethod
+            Public Enum RDGatewayUsageMethod ' TODO: Translate this
                 <Description("Never")> _
                 Never = 0 ' TSC_PROXY_MODE_NONE_DIRECT
                 <Description("Always")> _
@@ -505,7 +505,7 @@ Namespace Connection
                 Detect = 2 ' TSC_PROXY_MODE_DETECT
             End Enum
 
-            Public Enum RDGatewayUseConnectionCredentials
+            Public Enum RDGatewayUseConnectionCredentials ' TODO: Translate this
                 <Description("Use a different username and password")> _
                 No = 0
                 <Description("Use the same username and password")> _

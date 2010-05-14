@@ -12,7 +12,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("mRemoteNG")> 
-<Assembly: AssemblyCopyright("Copyright © 2007-2010 Felix Deimel, Riley McArdle")> 
+<Assembly: AssemblyCopyright("Copyright © 2007-2009 Felix Deimel, 2010 Riley McArdle")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
@@ -31,5 +31,5 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.63")> 
-<Assembly: AssemblyFileVersion("1.63")> 
+<Assembly: AssemblyVersion("1.64")> 
+<Assembly: AssemblyFileVersion("1.64")> 

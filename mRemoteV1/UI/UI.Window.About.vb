@@ -245,7 +245,7 @@ Namespace UI
 
             Private Sub ApplyEditions()
 #If PORTABLE Then
-                lblEdition.Text = My.Resources.strPortableEdition
+                lblEdition.Text = My.Resources.strLabelPortableEdition
                 lblEdition.Visible = True
 #Else
                 If App.Editions.Spanlink.Enabled Then
