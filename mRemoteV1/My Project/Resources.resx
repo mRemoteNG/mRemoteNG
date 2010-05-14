@@ -471,7 +471,6 @@
   </data>
   <data name="strAbout" xml:space="preserve">
     <value>About</value>
-    <comment> </comment>
   </data>
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>Change Log:</value>
@@ -1825,5 +1824,17 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strMenuAnnouncements" xml:space="preserve">
     <value>Announcements</value>
+  </data>
+  <data name="strScreenshot" xml:space="preserve">
+    <value>Screenshot</value>
+  </data>
+  <data name="strSpecialKeys" xml:space="preserve">
+    <value>Speical Keys</value>
+  </data>
+  <data name="strKeysCtrlAltDel" xml:space="preserve">
+    <value>CTRL-ALT-DEL</value>
+  </data>
+  <data name="strKeysCtrlEsc" xml:space="preserve">
+    <value>CTRL-ESC</value>
   </data>
 </root>

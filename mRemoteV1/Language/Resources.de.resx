@@ -1524,4 +1524,16 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
 	<data name="strMenuAnnouncements" xml:space="preserve">
 		<value>Ankündigungen</value>
 	</data>
+	<data name="strScreenshot" xml:space="preserve">
+		<value>Bildschirmschnappschuss</value>
+	</data>
+	<data name="strSpecialKeys" xml:space="preserve">
+		<value>Spezielle Tastenkombinationen</value>
+	</data>
+	<data name="strKeysCtrlAltDel" xml:space="preserve">
+		<value>STRG-ALT-ENTF</value>
+	</data>
+	<data name="strKeysCtrlEsc" xml:space="preserve">
+		<value>STRG-ESC</value>
+	</data>
 </root>

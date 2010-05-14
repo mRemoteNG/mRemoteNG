@@ -121,6 +121,14 @@ Public Class frmMain
         mMenQuickyCon.Text = My.Resources.strMenuConnections
 
         cMenToolbarShowText.Text = My.Resources.strMenuShowText
+
+        ToolStripButton1.Text = My.Resources.strConnect
+        ToolStripButton2.Text = My.Resources.strScreenshot
+        ToolStripButton3.Text = My.Resources.strRefresh
+
+        ToolStripSplitButton1.Text = My.Resources.strSpecialKeys
+        ToolStripMenuItem1.Text = My.Resources.strKeysCtrlAltDel
+        ToolStripMenuItem2.Text = My.Resources.strKeysCtrlEsc
     End Sub
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
