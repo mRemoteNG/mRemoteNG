@@ -1976,6 +1976,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die CTRL-ALT-DEL ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strKeysCtrlAltDel() As String
+            Get
+                Return ResourceManager.GetString("strKeysCtrlAltDel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die CTRL-ESC ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strKeysCtrlEsc() As String
+            Get
+                Return ResourceManager.GetString("strKeysCtrlEsc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Address: ähnelt.
         '''</summary>
         Friend ReadOnly Property strLabelAddress() As String
@@ -4397,6 +4415,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Screenshot ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strScreenshot() As String
+            Get
+                Return ResourceManager.GetString("strScreenshot", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Screenshots ähnelt.
         '''</summary>
         Friend ReadOnly Property strScreenshots() As String
@@ -4528,6 +4555,15 @@ Namespace My.Resources
         Friend ReadOnly Property strSortDesc() As String
             Get
                 Return ResourceManager.GetString("strSortDesc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Speical Keys ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strSpecialKeys() As String
+            Get
+                Return ResourceManager.GetString("strSpecialKeys", resourceCulture)
             End Get
         End Property
         
