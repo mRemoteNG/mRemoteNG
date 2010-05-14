@@ -179,7 +179,7 @@
     <comment>Need translation</comment>
   </data>
 	<data name="strLabelConnect" xml:space="preserve">
-    <value>&amp;Connect:</value>
+    <value>&amp;Schnell Verbinden:</value>
   </data>
 	<data name="strLabelPassword" xml:space="preserve">
     <value>Passwort:</value>
@@ -203,7 +203,7 @@
     <value>Konfiguration</value>
   </data>
 	<data name="strMenuConnect" xml:space="preserve">
-    <value>Connect</value>
+    <value>Verbinden</value>
   </data>
 	<data name="strMenuConnectionPanels" xml:space="preserve">
     <value>Verbindungs Panels</value>
@@ -1039,19 +1039,19 @@
 		<value>Unterstützungs Forum</value>
 	</data>
 	<data name="strRDP256Colors" xml:space="preserve">
-		<value>256 Farben</value>
+		<value>256 Farben (8Bit)</value>
 	</data>
 	<data name="strRDPSoundBringToThisComputer" xml:space="preserve">
-		<value>Auf diesem Computer wiedergeben</value>
+		<value>Hier wiedergeben</value>
 	</data>
 	<data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
-		<value>Auf dem Remotecomputer wiedergeben</value>
+		<value>Auf dem Host wiedergeben</value>
 	</data>
 	<data name="strRDPSoundDoNotPlay" xml:space="preserve">
 		<value>Nicht wiedergeben</value>
 	</data>
 	<data name="strRDPFitToPanel" xml:space="preserve">
-		<value>An das Panel anpassen</value>
+		<value>An Panel anpassen</value>
 	</data>
 	<data name="strFullscreen" xml:space="preserve">
 		<value>Vollbild</value>
@@ -1227,7 +1227,7 @@ Wenn Sie noch immer Probleme mit der (RDP) Session Funktion in mRemoteNG haben, 
 		<value>Start Port</value>
 	</data>
 	<data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
-		<value>Remote Desktop Gateway Passwort</value>
+		<value>Gateway Passwort</value>
 	</data>
 	<data name="strPropertyNameRDGatewayUsageMethod" xml:space="preserve">
 		<value>Verwende Gateway</value>
@@ -1236,7 +1236,7 @@ Wenn Sie noch immer Probleme mit der (RDP) Session Funktion in mRemoteNG haben, 
 		<value>Spezifiziert ob ein Remote Desktop Gateway (RD Gateway) Server verwendet werden soll.</value>
 	</data>
 	<data name="strPropertyNameRDGatewayPasswordInherit" xml:space="preserve">
-		<value>Vererbe Remote Desktop Gateway Passwort</value>
+		<value>Vererbe Gateway Passwort</value>
 	</data>
 	<data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
 		<value>Gateway Benutzername</value>
@@ -1535,5 +1535,47 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
 	</data>
 	<data name="strKeysCtrlEsc" xml:space="preserve">
 		<value>STRG-ESC</value>
+	</data>
+	<data name="strRDP65536Colors" xml:space="preserve">
+		<value>65536 Farben (16Bit)</value>
+	</data>
+	<data name="strRDP16777216Colors" xml:space="preserve">
+		<value>16777216 Farben (24Bit)</value>
+	</data>
+	<data name="strRDP4294967296Colors" xml:space="preserve">
+		<value>4294967296 Farben (32Bit)</value>
+	</data>
+	<data name="strRDPDisableWallpaper" xml:space="preserve">
+		<value>Entferne Hintergrundbild</value>
+	</data>
+	<data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+		<value>Fensterinhalt beim ziehen nicht anzeigen</value>
+	</data>
+	<data name="strRDPDisableMenuAnimations" xml:space="preserve">
+		<value>Menü Animationen deaktivieren</value>
+	</data>
+	<data name="strRDPDisableThemes" xml:space="preserve">
+		<value>Themen deaktivieren</value>
+	</data>
+	<data name="strRDPDisableCursorShadow" xml:space="preserve">
+		<value>Cursorschatten deaktivieren</value>
+	</data>
+	<data name="strRDPDisableCursorblinking" xml:space="preserve">
+		<value>Cursor blinken abschalten</value>
+	</data>
+	<data name="strNever" xml:space="preserve">
+		<value>Niemals</value>
+	</data>
+	<data name="strAlways" xml:space="preserve">
+		<value>Immer</value>
+	</data>
+	<data name="strDetect" xml:space="preserve">
+		<value>Erkennen</value>
+	</data>
+	<data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
+		<value>Anderen Benutzernamen und Passwort verwenden</value>
+	</data>
+	<data name="strUseSameUsernameAndPassword" xml:space="preserve">
+		<value>Selben Benutzer und Passwort verwenden</value>
 	</data>
 </root>
