@@ -1491,4 +1491,46 @@
 	<data name="strKeysCtrlEsc" xml:space="preserve">
 		<value></value>
 	</data>
+	<data name="strRDP65536Colors" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRDP16777216Colors" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRDP4294967296Colors" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRDPDisableWallpaper" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRDPDisableMenuAnimations" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRDPDisableThemes" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRDPDisableCursorShadow" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRDPDisableCursorblinking" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strNever" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strAlways" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strDetect" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strUseSameUsernameAndPassword" xml:space="preserve">
+		<value></value>
+	</data>
 </root>

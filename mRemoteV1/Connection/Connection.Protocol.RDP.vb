@@ -4,6 +4,7 @@ Imports AxMSTSCLib
 Imports EOLWTSCOM
 Imports System.ComponentModel
 Imports mRemote.App.Runtime
+Imports mRemote.Tools.LocalizedAttributes
 
 Namespace Connection
     Namespace Protocol
@@ -407,48 +408,48 @@ Namespace Connection
                 Port = 3389
             End Enum
 
-            Public Enum RDPColors ' TODO: Translate this
-                <Description("8 Bit")> _
-                Colors256 = 8 ' My.Resources.strRDP256Colors
-                <Description("16 Bit")> _
+            Public Enum RDPColors
+                <LocalizedDescription("strRDP256Colors")> _
+                Colors256 = 8
+                <LocalizedDescription("strRDP65536Colors")> _
                 Colors16Bit = 16
-                <Description("24 Bit")> _
+                <LocalizedDescription("strRDP16777216Colors")> _
                 Colors24Bit = 24
-                <Description("32 Bit")> _
+                <LocalizedDescription("strRDP4294967296Colors")> _
                 Colors32Bit = 32
             End Enum
 
-            Public Enum RDPSounds ' TODO: Translate this
-                <Description("Bring sound to this computer")> _
-                BringToThisComputer = 0 ' My.Resources.strRDPSoundBringToThisComputer
-                <Description("Leave sound at remote computer")> _
-                LeaveAtRemoteComputer = 1 ' My.Resources.strRDPSoundLeaveAtRemoteComputer
-                <Description("Do not play sound")> _
-                DoNotPlay = 2 ' My.Resources.strRDPSoundDoNotPlay
+            Public Enum RDPSounds
+                <LocalizedDescription("strRDPSoundBringToThisComputer")> _
+                BringToThisComputer = 0
+                <LocalizedDescription("strRDPSoundLeaveAtRemoteComputer")> _
+                LeaveAtRemoteComputer = 1
+                <LocalizedDescription("strRDPSoundDoNotPlay")> _
+                DoNotPlay = 2
             End Enum
 
-            Private Enum RDPPerformanceFlags ' TODO: Translate this
-                <Description("Disable Wallpaper")> _
+            Private Enum RDPPerformanceFlags
+                <Description("strRDPDisableWallpaper")> _
                 DisableWallpaper = 1
-                <Description("Disable Full Window drag")> _
+                <Description("strRDPDisableFullWindowdrag")> _
                 DisableFullWindowDrag = 2
-                <Description("Disable Menu Animations")> _
+                <Description("strRDPDisableMenuAnimations")> _
                 DisableMenuAnimations = 4
-                <Description("Disable Themes")> _
+                <Description("strRDPDisableThemes")> _
                 DisableThemes = 8
-                <Description("Disable Cursor Shadow")> _
+                <Description("strRDPDisableCursorShadow")> _
                 DisableCursorShadow = 20
-                <Description("Disable Cursor blinking")> _
+                <Description("strRDPDisableCursorblinking")> _
                 DisableCursorBlinking = 40
             End Enum
 
-            Public Enum RDPResolutions ' TODO: Translate this
-                <Description("Fit to panel")> _
-                FitToWindow ' My.Resources.strRDPFitToPanel
-                <Description("Fullscreen")> _
-                Fullscreen ' My.Resources.strFullscreen
-                <Description("SmartSize")> _
-                SmartSize ' My.Resources.strRDPSmartSize
+            Public Enum RDPResolutions
+                <LocalizedDescription("strRDPFitToPanel")> _
+                FitToWindow
+                <LocalizedDescription("strFullscreen")> _
+                Fullscreen
+                <LocalizedDescription("strRDPSmartSize")> _
+                SmartSize
                 <Description("640x480")> _
                 Res640x480
                 <Description("800x600")> _
@@ -487,28 +488,28 @@ Namespace Connection
                 Res3840x2400
             End Enum
 
-            Public Enum AuthenticationLevel ' TODO: Translate this
-                <Description("Always Connect Even If Auth Fails")> _
-                NoAuth = 0 ' My.Resources.strAlwaysConnectEvenIfAuthFails
-                <Description("Dont Connect When Auth Fails")> _
-                AuthRequired = 1 ' My.Resources.strDontConnectWhenAuthFails
-                <Description("Warn If Auth Fails")> _
-                WarnOnFailedAuth = 2 ' My.Resources.strWarnIfAuthFails
+            Public Enum AuthenticationLevel
+                <LocalizedDescription("strAlwaysConnectEvenIfAuthFails")> _
+                NoAuth = 0
+                <LocalizedDescription("strDontConnectWhenAuthFails")> _
+                AuthRequired = 1
+                <LocalizedDescription("strWarnIfAuthFails")> _
+                WarnOnFailedAuth = 2
             End Enum
 
-            Public Enum RDGatewayUsageMethod ' TODO: Translate this
-                <Description("Never")> _
+            Public Enum RDGatewayUsageMethod
+                <LocalizedDescription("strNever")> _
                 Never = 0 ' TSC_PROXY_MODE_NONE_DIRECT
-                <Description("Always")> _
+                <LocalizedDescription("strAlways")> _
                 Always = 1 ' TSC_PROXY_MODE_DIRECT
-                <Description("Detect")> _
+                <LocalizedDescription("strDetect")> _
                 Detect = 2 ' TSC_PROXY_MODE_DETECT
             End Enum
 
-            Public Enum RDGatewayUseConnectionCredentials ' TODO: Translate this
-                <Description("Use a different username and password")> _
+            Public Enum RDGatewayUseConnectionCredentials
+                <LocalizedDescription("strUseDifferentUsernameAndPassword")> _
                 No = 0
-                <Description("Use the same username and password")> _
+                <LocalizedDescription("strUseSameUsernameAndPassword")> _
                 Yes = 1
             End Enum
 #End Region
