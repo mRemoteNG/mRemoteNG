@@ -530,8 +530,12 @@ Namespace App
 #End Region
 
 #Region "Panels"
-        Public Shared Function AddPanel(Optional ByVal Title As String = Language.Base.NewPanel, Optional ByVal NoTabber As Boolean = False) As Form
+        Public Shared Function AddPanel(Optional ByVal Title As String = "", Optional ByVal NoTabber As Boolean = False) As Form
             Try
+                If Title = "" Then
+                    Title = My.Resources.strNewPanel
+                End If
+
                 Dim pnlcForm As New DockContent
                 Dim cForm As New UI.Window.Connection(pnlcForm)
                 pnlcForm = cForm
@@ -541,13 +545,13 @@ Namespace App
 
                 'create rename item
                 Dim cMenRen As New ToolStripMenuItem
-                cMenRen.Text = Language.Base.Rename
+                cMenRen.Text = My.Resources.strRename
                 cMenRen.Image = My.Resources.Rename
                 cMenRen.Tag = pnlcForm
                 AddHandler cMenRen.Click, AddressOf cMenConnectionPanelRename_Click
 
                 Dim cMenScreens As New ToolStripMenuItem
-                cMenScreens.Text = Language.Base.SendTo
+                cMenScreens.Text = My.Resources.strSendTo
                 cMenScreens.Image = My.Resources.Monitor
                 cMenScreens.Tag = pnlcForm
                 cMenScreens.DropDownItems.Add("Dummy")
@@ -581,7 +585,7 @@ Namespace App
                 Dim conW As UI.Window.Connection
                 conW = sender.Tag
 
-                Dim nTitle As String = InputBox(Language.Base.NewTitle & ":", , sender.Tag.Text.Replace("&&", "&"))
+                Dim nTitle As String = InputBox(My.Resources.strNewTitle & ":", , sender.Tag.Text.Replace("&&", "&"))
 
                 If nTitle <> "" Then
                     conW.SetFormText(nTitle.Replace("&", "&&"))
@@ -597,7 +601,7 @@ Namespace App
                 cMenScreens.DropDownItems.Clear()
 
                 For i As Integer = 0 To Screen.AllScreens.Length - 1
-                    Dim cMenScreen As New ToolStripMenuItem(Language.Base.Screen & " " & i + 1)
+                    Dim cMenScreen As New ToolStripMenuItem(My.Resources.strScreen & " " & i + 1)
                     cMenScreen.Tag = New ArrayList
                     cMenScreen.Image = My.Resources.Monitor_GoTo
                     TryCast(cMenScreen.Tag, ArrayList).Add(Screen.AllScreens(i))

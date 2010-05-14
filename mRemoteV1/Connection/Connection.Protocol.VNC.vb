@@ -105,8 +105,8 @@ Namespace Connection
                     '    VNC.RestrictPixel = False
                     'End If
 
-                    'VNC.ConnectingText = Language.Base.Connecting & " (SmartCode VNC viewer)"
-                    'VNC.DisconnectedText = Language.Base.Disconnected
+                    'VNC.ConnectingText = My.Resources.strInheritConnecting & " (SmartCode VNC viewer)"
+                    'VNC.DisconnectedText = My.Resources.strInheritDisconnected
                     'VNC.MessageBoxes = False
                     'VNC.EndInit()
 
@@ -242,9 +242,9 @@ Namespace Connection
                 CtrlEsc
             End Enum
 
-            Public Enum Compression
-                <Description(Language.Base.NoCompression)> _
-                CompNone = 99
+            Public Enum Compression ' TODO: Translate this
+                <Description("No compression")> _
+                CompNone = 99 ' My.Resources.strNoCompression
                 <Description("0")> _
                 Comp0 = 0
                 <Description("1")> _
@@ -293,9 +293,9 @@ Namespace Connection
                 AuthWin
             End Enum
 
-            Public Enum ProxyType
-                <Description(Language.Base.None)> _
-                ProxyNone
+            Public Enum ProxyType ' TODO: Translate this
+                <Description("none")> _
+                ProxyNone ' My.Resources.strNone
                 <Description("HTTP")> _
                 ProxyHTTP
                 <Description("Socks 5")> _
@@ -304,20 +304,20 @@ Namespace Connection
                 ProxyUltra
             End Enum
 
-            Public Enum Colors
-                <Description(Language.Base.Normal)> _
-                ColNormal
+            Public Enum Colors ' TODO: Translate this
+                <Description("Normal")> _
+                ColNormal 'My.Resources.strNormal
                 <Description("8-bit")> _
                 Col8Bit
             End Enum
 
-            Public Enum SmartSizeMode
-                <Description(Language.Base.NoSmartSize)> _
-                SmartSNo
-                <Description(Language.Base.Free)> _
-                SmartSFree
-                <Description(Language.Base.Aspect)> _
-                SmartSAspect
+            Public Enum SmartSizeMode ' TODO: Translate this
+                <Description("No SmartSize")> _
+                SmartSNo ' My.Resources.strNoSmartSize
+                <Description("Free")> _
+                SmartSFree ' My.Resources.strFree
+                <Description("Aspect")> _
+                SmartSAspect ' My.Resources.strAspect
             End Enum
 #End Region
         End Class

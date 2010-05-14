@@ -254,7 +254,7 @@ Namespace UI
                     If UpdateAvailable = True Then
                         My.Settings.UpdatePending = True
 
-                        SetStatus(Color.OrangeRed, Language.Base.UpdateAvailable)
+                        SetStatus(Color.OrangeRed, My.Resources.strUpdateAvailable)
                         SetVisible(pnlUp, True)
 
                         Dim uI As App.Update.Info = uD.GetUpdateInfo()
@@ -278,7 +278,7 @@ Namespace UI
                     Else
                         My.Settings.UpdatePending = False
 
-                        SetStatus(Color.ForestGreen, Language.Base.NoUpdateAvailable)
+                        SetStatus(Color.ForestGreen, My.Resources.strNoUpdateAvailable)
                         SetVisible(pnlUp, False)
 
                         Dim uI As App.Update.Info = uD.GetUpdateInfo()
@@ -373,13 +373,13 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                btnCheckForUpdate.Text = Language.Base.CheckForUpdate
+                btnCheckForUpdate.Text = My.Resources.strCheckForUpdate
                 lblChangeLogLabel.Text = My.Resources.strLabelChangeLog
-                btnDownload.Text = Language.Base.DownloadAndInstall
-                lblCurrentVersionLabel.Text = Language.Base.AvailableVersion & ":"
-                lblInstalledVersionLabel.Text = Language.Base.CurrentVersion & ":"
-                lblAvailableVersion.Text = Language.Base.Version
-                lblCurrentVersion.Text = Language.Base.Version
+                btnDownload.Text = My.Resources.strDownloadAndInstall
+                lblCurrentVersionLabel.Text = My.Resources.strAvailableVersion & ":"
+                lblInstalledVersionLabel.Text = My.Resources.strCurrentVersion & ":"
+                lblAvailableVersion.Text = My.Resources.strVersion
+                lblCurrentVersion.Text = My.Resources.strVersion
                 TabText = My.Resources.strMenuCheckForUpdates
                 Text = My.Resources.strMenuCheckForUpdates
             End Sub
@@ -419,7 +419,7 @@ Namespace UI
                     Me.btnDownload.Enabled = True
 
                     If Success = True Then
-                        If MessageBox.Show(Language.Base.UpdateDownloadComplete, My.Resources.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = System.Windows.Forms.DialogResult.OK Then
+                        If MessageBox.Show(My.Resources.strUpdateDownloadComplete, My.Resources.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = System.Windows.Forms.DialogResult.OK Then
                             Try
                                 App.Runtime.Shutdown.BeforeQuit()
 

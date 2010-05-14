@@ -415,8 +415,8 @@ Namespace Connection
         Private _RDGatewayUsageMethod As mRemote.Connection.Protocol.RDP.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDGatewayUsageMethod), My.Settings.ConDefaultRDGatewayUsageMethod)
         <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_RDGatewayUsageMethod), _
-            Description(Language.Base.Descr_RDGatewayUsageMethod), _
+            LocalizedDisplayName("strPropertyNameRDGatewayUsageMethod"), _
+            LocalizedDescription("strPropertyDescriptionRDGatewayUsageMethod"), _
             TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
         Public Property RDGatewayUsageMethod() As mRemote.Connection.Protocol.RDP.RDGatewayUsageMethod
             Get
@@ -442,8 +442,8 @@ Namespace Connection
         Private _RDGatewayHostname As String
         <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_RDGatewayHostname), _
-            Description(Language.Base.Descr_RDGatewayHostname)> _
+            LocalizedDisplayName("strPropertyNameRDGatewayHostname"), _
+            LocalizedDescription("strPropertyDescriptionRDGatewayHostname")> _
         Public Property RDGatewayHostname() As String
             Get
                 If Me._Inherit.RDGatewayHostname And Me._Parent IsNot Nothing Then
@@ -468,8 +468,8 @@ Namespace Connection
         Private _RDGatewayUseConnectionCredentials As mRemote.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), My.Settings.ConDefaultRDGatewayUseConnectionCredentials)
         <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_RDGatewayUseConnectionCredentials), _
-            Description(Language.Base.Descr_RDGatewayUseConnectionCredentials), _
+            LocalizedDisplayName("strPropertyNameRDGatewayUseConnectionCredentials"), _
+            LocalizedDescription("strPropertyDescriptionRDGatewayUseConnectionCredentials"), _
             TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
         Public Property RDGatewayUseConnectionCredentials() As mRemote.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials
             Get
@@ -495,8 +495,8 @@ Namespace Connection
         Private _RDGatewayUsername As String
         <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_RDGatewayUsername), _
-            Description(Language.Base.Descr_RDGatewayUsername)> _
+            LocalizedDisplayName("strPropertyNameRDGatewayUsername"), _
+            LocalizedDescription("strPropertyDescriptionRDGatewayUsername")> _
         Public Property RDGatewayUsername() As String
             Get
                 If Me._Inherit.RDGatewayUsername And Me._Parent IsNot Nothing Then
@@ -521,8 +521,8 @@ Namespace Connection
         Private _RDGatewayPassword As String
         <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_RDGatewayPassword), _
-            Description(Language.Base.Descr_RDGatewayPassword), _
+            LocalizedDisplayName("strPropertyNameRDGatewayPassword"), _
+            LocalizedDescription("strPropertyNameRDGatewayPassword"), _
             PasswordPropertyText(True)> _
         Public Property RDGatewayPassword() As String
             Get
@@ -548,8 +548,8 @@ Namespace Connection
         Private _RDGatewayDomain As String
         <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
-            DisplayName(Language.Base.Props_RDGatewayDomain), _
-            Description(Language.Base.Descr_RDGatewayDomain)> _
+            LocalizedDisplayName("strPropertyNameRDGatewayDomain"), _
+            LocalizedDescription("strPropertyDescriptionRDGatewayDomain")> _
         Public Property RDGatewayDomain() As String
             Get
                 If Me._Inherit.RDGatewayDomain And Me._Parent IsNot Nothing Then
@@ -1773,7 +1773,7 @@ Namespace Connection
             Private _RDGatewayUsageMethod As Boolean = False
             <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayUsageMethod), _
+                LocalizedDisplayName("strPropertyNameRDGatewayUsageMethodInherit"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDGatewayUsageMethod() As Boolean
                 Get
@@ -1787,7 +1787,7 @@ Namespace Connection
             Private _RDGatewayHostname As Boolean = False
             <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayHostname), _
+                LocalizedDisplayName("strPropertyNameRDGatewayHostnameInherit"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDGatewayHostname() As Boolean
                 Get
@@ -1801,7 +1801,7 @@ Namespace Connection
             Private _RDGatewayUseConnectionCredentials As Boolean = False
             <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayUseConnectionCredentials), _
+                LocalizedDisplayName("strPropertyNameRDGatewayUseConnectionCredentialsInherit"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDGatewayUseConnectionCredentials() As Boolean
                 Get
@@ -1815,7 +1815,8 @@ Namespace Connection
             Private _RDGatewayUsername As Boolean = False
             <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayUsername), _
+                LocalizedDisplayName("strPropertyNameRDGatewayUsername"), _
+                LocalizedDescription("strPropertyDescriptionRDGatewayUsername"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDGatewayUsername() As Boolean
                 Get
@@ -1829,7 +1830,8 @@ Namespace Connection
             Private _RDGatewayPassword As Boolean = False
             <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayPassword), _
+                LocalizedDisplayName("strPropertyNameRDGatewayPasswordInherit"), _
+                LocalizedDescription("strPropertyDescriptionRDGatewayPasswordInherit"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDGatewayPassword() As Boolean
                 Get
@@ -1843,7 +1845,7 @@ Namespace Connection
             Private _RDGatewayDomain As Boolean = False
             <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
-                DisplayName(Language.Base.Inherit & " " & Language.Base.Props_RDGatewayDomain), _
+                LocalizedDisplayName("strPropertyNameRDGatewayDomainInherit"), _
                 TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDGatewayDomain() As Boolean
                 Get

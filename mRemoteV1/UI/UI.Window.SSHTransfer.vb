@@ -83,7 +83,7 @@ Namespace UI
                 Me.lblLocalFile.Name = "lblLocalFile"
                 Me.lblLocalFile.Size = New System.Drawing.Size(55, 13)
                 Me.lblLocalFile.TabIndex = 10
-                Me.lblLocalFile.Text = Language.Base.LocalFile & ":"
+                Me.lblLocalFile.Text = My.Resources.strLocalFile & ":"
                 '
                 'txtLocalFile
                 '
@@ -112,7 +112,7 @@ Namespace UI
                 Me.lblRemoteFile.Name = "lblRemoteFile"
                 Me.lblRemoteFile.Size = New System.Drawing.Size(66, 13)
                 Me.lblRemoteFile.TabIndex = 40
-                Me.lblRemoteFile.Text = Language.Base.RemoteFile & ":"
+                Me.lblRemoteFile.Text = My.Resources.strRemoteFile & ":"
                 '
                 'btnBrowse
                 '
@@ -197,7 +197,7 @@ Namespace UI
                 Me.lblUser.Name = "lblUser"
                 Me.lblUser.Size = New System.Drawing.Size(32, 13)
                 Me.lblUser.TabIndex = 50
-                Me.lblUser.Text = Language.Base.User & ":"
+                Me.lblUser.Text = My.Resources.strUser & ":"
                 '
                 'lblPort
                 '
@@ -216,7 +216,7 @@ Namespace UI
                 Me.lblHost.Name = "lblHost"
                 Me.lblHost.Size = New System.Drawing.Size(32, 13)
                 Me.lblHost.TabIndex = 10
-                Me.lblHost.Text = Language.Base.Host & ":"
+                Me.lblHost.Text = My.Resources.strHost & ":"
                 '
                 'txtPort
                 '
@@ -268,7 +268,7 @@ Namespace UI
                 Me.btnTransfer.Name = "btnTransfer"
                 Me.btnTransfer.Size = New System.Drawing.Size(83, 29)
                 Me.btnTransfer.TabIndex = 10000
-                Me.btnTransfer.Text = Language.Base.Transfer
+                Me.btnTransfer.Text = My.Resources.strTransfer
                 Me.btnTransfer.TextAlign = System.Drawing.ContentAlignment.MiddleRight
                 Me.btnTransfer.UseVisualStyleBackColor = True
                 '
@@ -351,16 +351,16 @@ Namespace UI
 
             Private Sub ApplyLanguage()
                 grpFiles.Text = My.Resources.strGroupboxFiles
-                lblLocalFile.Text = Language.Base.LocalFile & ":"
-                lblRemoteFile.Text = Language.Base.RemoteFile & ":"
+                lblLocalFile.Text = My.Resources.strLocalFile & ":"
+                lblRemoteFile.Text = My.Resources.strRemoteFile & ":"
                 btnBrowse.Text = My.Resources.strButtonBrowse
                 grpConnection.Text = My.Resources.strGroupboxConnection
                 lblProtocol.Text = My.Resources.strLabelProtocol
                 lblPassword.Text = My.Resources.strLabelPassword
-                lblUser.Text = Language.Base.User & ":"
+                lblUser.Text = My.Resources.strUser & ":"
                 lblPort.Text = My.Resources.strLabelPort
-                lblHost.Text = Language.Base.Host & ":"
-                btnTransfer.Text = Language.Base.Transfer
+                lblHost.Text = My.Resources.strHost & ":"
+                btnTransfer.Text = My.Resources.strTransfer
                 TabText = My.Resources.strMenuSSHFileTransfer
                 Text = My.Resources.strMenuSSHFileTransfer
             End Sub
@@ -420,7 +420,7 @@ Namespace UI
             Private Function AllFieldsSet() As Boolean
                 If Me.txtHost.Text <> "" And Me.txtPort.Text <> "" And Me.txtUser.Text <> "" And Me.txtLocalFile.Text <> "" And Me.txtRemoteFile.Text <> "" Then
                     If Me.txtPassword.Text = "" Then
-                        If MsgBox(Language.Base.EmptyPasswordContinue, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+                        If MsgBox(My.Resources.strEmptyPasswordContinue, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.No Then
                             Return False
                         End If
                     End If

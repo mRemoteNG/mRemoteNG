@@ -45,8 +45,8 @@ Namespace UI
                 Me.HideOnClose = True
                 Me.Icon = Global.mRemote.My.Resources.Resources.Play_Quick_Icon
                 Me.Name = "QuickConnect"
-                Me.TabText = Language.Base.QuickConnect
-                Me.Text = Language.Base.QuickConnect
+                Me.TabText = My.Resources.strQuickConnect
+                Me.Text = My.Resources.strQuickConnect
                 Me.ResumeLayout(False)
 
             End Sub
@@ -86,8 +86,8 @@ Namespace UI
 
             Private Sub ApplyLanguage()
                 btnCancel.Text = My.Resources.strButtonCancel
-                TabText = Language.Base.QuickConnect
-                Text = Language.Base.QuickConnect
+                TabText = My.Resources.strQuickConnect
+                Text = My.Resources.strQuickConnect
             End Sub
 
             Private Sub CreateButtons()

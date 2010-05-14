@@ -390,17 +390,17 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                lblStartIP.Text = Language.Base.StartIP & ":"
-                lblEndIP.Text = Language.Base.EndIP & ":"
+                lblStartIP.Text = My.Resources.strStartIP & ":"
+                lblEndIP.Text = My.Resources.strEndIP & ":"
                 btnScan.Text = My.Resources.strButtonScan
                 btnCancel.Text = My.Resources.strButtonCancel
                 btnImport.Text = My.Resources.strButtonImport
-                lblOnlyImport.Text = Language.Base.ProtocolToImport & ":"
+                lblOnlyImport.Text = My.Resources.strProtocolToImport & ":"
                 clmHost.Text = My.Resources.strColumnHostnameIP
-                clmOpenPorts.Text = Language.Base.OpenPorts
-                clmClosedPorts.Text = Language.Base.ClosedPorts
-                Label2.Text = Language.Base.EndPort & ":"
-                Label1.Text = Language.Base.StartPort & ":"
+                clmOpenPorts.Text = My.Resources.strOpenPorts
+                clmClosedPorts.Text = My.Resources.strClosedPorts
+                Label2.Text = My.Resources.strEndPort & ":"
+                Label1.Text = My.Resources.strStartPort & ":"
                 TabText = My.Resources.strMenuPortScan
                 Text = My.Resources.strMenuPortScan
             End Sub

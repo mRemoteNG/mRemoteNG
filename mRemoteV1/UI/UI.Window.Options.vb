@@ -1680,58 +1680,58 @@ Namespace UI
                 btnLaunchPutty.Text = My.Resources.strButtonLaunchPutty
                 btnBrowseCustomPuttyPath.Text = My.Resources.strButtonBrowse
                 chkUseCustomPuttyPath.Text = My.Resources.strCheckboxPuttyPath
-                chkAutomaticallyGetSessionInfo.Text = Language.Base.AutomaticallyGetSessionInfo
-                chkWriteLogFile.Text = Language.Base.WriteLogFile
-                tabStartupExit.Title = Language.Base.StartupExit
-                chkSingleInstance.Text = Language.Base.AllowOnlySingleInstance
-                chkReconnectOnStart.Text = Language.Base.ReconnectAtStartup
-                chkCheckForUpdatesOnStartup.Text = Language.Base.CheckForUpdatesOnStartup
-                chkConfirmExit.Text = Language.Base.ConfirmExit
-                chkSaveConsOnExit.Text = Language.Base.SaveConsOnExit
+                chkAutomaticallyGetSessionInfo.Text = My.Resources.strAutomaticallyGetSessionInfo
+                chkWriteLogFile.Text = My.Resources.strWriteLogFile
+                tabStartupExit.Title = My.Resources.strStartupExit
+                chkSingleInstance.Text = My.Resources.strAllowOnlySingleInstance
+                chkReconnectOnStart.Text = My.Resources.strReconnectAtStartup
+                chkCheckForUpdatesOnStartup.Text = My.Resources.strCheckForUpdatesOnStartup
+                chkConfirmExit.Text = My.Resources.strConfirmExit
+                chkSaveConsOnExit.Text = My.Resources.strSaveConsOnExit
                 tabAppearance.Title = My.Resources.strTabAppearance
-                chkMinimizeToSystemTray.Text = Language.Base.MinimizeToSysTray
-                chkShowFullConnectionsFilePathInTitle.Text = Language.Base.ShowFullConsFilePath
-                chkShowSystemTrayIcon.Text = Language.Base.AlwaysShowSysTrayIcon
-                chkShowDescriptionTooltipsInTree.Text = Language.Base.ShowDescriptionTooltips
-                tabTabs.Title = Language.Base.TabsAndPanels
-                chkShowProtocolOnTabs.Text = Language.Base.ShowProtocolOnTabs
-                chkShowLogonInfoOnTabs.Text = Language.Base.ShowLogonInfoOnTabs
-                chkOpenNewTabRightOfSelected.Text = Language.Base.OpenNewTabRight
-                chkAlwaysShowPanelSelectionDlg.Text = Language.Base.AlwaysShowPanelSelection
-                chkDoubleClickClosesTab.Text = Language.Base.DoubleClickTabClosesIt
+                chkMinimizeToSystemTray.Text = My.Resources.strMinimizeToSysTray
+                chkShowFullConnectionsFilePathInTitle.Text = My.Resources.strShowFullConsFilePath
+                chkShowSystemTrayIcon.Text = My.Resources.strAlwaysShowSysTrayIcon
+                chkShowDescriptionTooltipsInTree.Text = My.Resources.strShowDescriptionTooltips
+                tabTabs.Title = My.Resources.strTabsAndPanels
+                chkShowProtocolOnTabs.Text = My.Resources.strShowProtocolOnTabs
+                chkShowLogonInfoOnTabs.Text = My.Resources.strShowLogonInfoOnTabs
+                chkOpenNewTabRightOfSelected.Text = My.Resources.strOpenNewTabRight
+                chkAlwaysShowPanelSelectionDlg.Text = My.Resources.strAlwaysShowPanelSelection
+                chkDoubleClickClosesTab.Text = My.Resources.strDoubleClickTabClosesIt
                 tabConnections.Title = My.Resources.strConnections
-                chkHostnameLikeDisplayName.Text = Language.Base.SetHostnameLikeDisplayName
-                grpExperimental.Text = Language.Base.Experimental.ToUpper
-                chkUseSQLServer.Text = Language.Base.UseSQLServer
-                lblSQLInfo.Text = Language.Base.SQLInfo
+                chkHostnameLikeDisplayName.Text = My.Resources.strSetHostnameLikeDisplayName
+                grpExperimental.Text = My.Resources.strExperimental.ToUpper
+                chkUseSQLServer.Text = My.Resources.strUseSQLServer
+                lblSQLInfo.Text = My.Resources.strSQLInfo
                 lblSQLUsername.Text = My.Resources.strLabelUsername
-                lblSQLServer.Text = Language.Base.SQLServer & ":"
+                lblSQLServer.Text = My.Resources.strSQLServer & ":"
                 lblSQLPassword.Text = My.Resources.strLabelPassword
-                lblAutoSave2.Text = Language.Base.AutoSaveMins
-                lblAutoSave1.Text = Language.Base.AutoSaveEvery
+                lblAutoSave2.Text = My.Resources.strAutoSaveMins
+                lblAutoSave1.Text = My.Resources.strAutoSaveEvery
                 lblCredentialsDomain.Text = My.Resources.strLabelDomain
                 lblCredentialsPassword.Text = My.Resources.strLabelPassword
                 lblCredentialsUsername.Text = My.Resources.strLabelUsername
-                radCredentialsCustom.Text = Language.Base.TheFollowing & ":"
-                radCredentialsWindows.Text = Language.Base.MyCurrentWindowsCreds
-                radCredentialsNoInfo.Text = Language.Base.NoInformation
-                lblDefaultCredentials.Text = Language.Base.EmptyUsernamePasswordDomainFields
-                chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.Base.SingleClickOnOpenConnectionSwitchesToIt
-                chkSingleClickOnConnectionOpensIt.Text = Language.Base.SingleClickOnConnectionOpensIt
-                lblSwitchToErrorsAndInfos.Text = Language.Base.SwitchToErrorsAndInfos & ":"
-                chkMCErrors.Text = Language.Base.Errors
-                chkMCWarnings.Text = Language.Base.Warnings
-                chkMCInformation.Text = Language.Base.Informations
-                chkUseOnlyErrorsAndInfosPanel.Text = Language.Base.UseOnlyErrorsAndInfosPanel
+                radCredentialsCustom.Text = My.Resources.strTheFollowing & ":"
+                radCredentialsWindows.Text = My.Resources.strMyCurrentWindowsCreds
+                radCredentialsNoInfo.Text = My.Resources.strNoInformation
+                lblDefaultCredentials.Text = My.Resources.strEmptyUsernamePasswordDomainFields
+                chkSingleClickOnOpenedConnectionSwitchesToIt.Text = My.Resources.strSingleClickOnOpenConnectionSwitchesToIt
+                chkSingleClickOnConnectionOpensIt.Text = My.Resources.strSingleClickOnConnectionOpensIt
+                lblSwitchToErrorsAndInfos.Text = My.Resources.strSwitchToErrorsAndInfos & ":"
+                chkMCErrors.Text = My.Resources.strErrors
+                chkMCWarnings.Text = My.Resources.strWarnings
+                chkMCInformation.Text = My.Resources.strInformations
+                chkUseOnlyErrorsAndInfosPanel.Text = My.Resources.strUseOnlyErrorsAndInfosPanel
                 btnOK.Text = My.Resources.strButtonOK
                 btnCancel.Text = My.Resources.strButtonCancel
                 TabText = My.Resources.strMenuOptions
                 Text = My.Resources.strMenuOptions
-                Label3.Text = Language.Base.UltraVNCSCListeningPort & ":"
-                chkProperInstallationOfComponentsAtStartup.Text = Language.Base.CheckProperInstallationOfComponentsAtStartup
-                lblXulRunnerPath.Text = Language.Base.XULrunnerPath & ":"
+                Label3.Text = My.Resources.strUltraVNCSCListeningPort & ":"
+                chkProperInstallationOfComponentsAtStartup.Text = My.Resources.strCheckProperInstallationOfComponentsAtStartup
+                lblXulRunnerPath.Text = My.Resources.strXULrunnerPath & ":"
                 btnBrowseXulRunnerPath.Text = My.Resources.strButtonBrowse
-                chkEncryptCompleteFile.Text = Language.Base.EncryptCompleteConnectionFile
+                chkEncryptCompleteFile.Text = My.Resources.strEncryptCompleteConnectionFile
             End Sub
 
             Public Shadows Sub Show(ByVal DockPanel As DockPanel)
@@ -1798,9 +1798,9 @@ Namespace UI
                 Dim ud As New App.Update()
 
                 If ud.IsProxyOK Then
-                    MsgBox(Language.Base.ProxyTestSucceeded, MsgBoxStyle.Information)
+                    MsgBox(My.Resources.strProxyTestSucceeded, MsgBoxStyle.Information)
                 Else
-                    MsgBox(Language.Base.ProxyTestFailed, MsgBoxStyle.Exclamation)
+                    MsgBox(My.Resources.strProxyTestFailed, MsgBoxStyle.Exclamation)
                 End If
             End Sub
 

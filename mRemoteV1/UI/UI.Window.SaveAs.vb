@@ -167,7 +167,7 @@ Namespace UI
                 Me.InitializeComponent()
 
                 If Export Then
-                    Me.SetFormText(Language.Base.Export)
+                    Me.SetFormText(My.Resources.strExport)
                 Else
                     Me.SetFormText(My.Resources.strMenuSaveConnectionFileAs)
                 End If
@@ -189,8 +189,8 @@ Namespace UI
                 lvSecurity.Items(3).Text = My.Resources.strCheckboxInheritance
                 btnCancel.Text = My.Resources.strButtonCancel
                 btnOK.Text = My.Resources.strButtonOK
-                Label1.Text = Language.Base.UncheckProperties
-                lblMremoteXMLOnly.Text = Language.Base.PropertiesWillOnlyBeSavedMRemoteXML
+                Label1.Text = My.Resources.strUncheckProperties
+                lblMremoteXMLOnly.Text = My.Resources.strPropertiesWillOnlyBeSavedMRemoteXML
                 TabText = My.Resources.strMenuSaveConnectionFileAs
                 Text = My.Resources.strMenuSaveConnectionFileAs
             End Sub

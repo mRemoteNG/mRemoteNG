@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -471,6 +471,7 @@
   </data>
   <data name="strAbout" xml:space="preserve">
     <value>About</value>
+    <comment> </comment>
   </data>
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>Change Log:</value>
@@ -1326,5 +1327,503 @@
   </data>
   <data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
     <value>Proxy Username</value>
+  </data>
+  <data name="strComponentsCheck" xml:space="preserve">
+    <value>Components Check</value>
+  </data>
+  <data name="strCcAlwaysShowScreen" xml:space="preserve">
+    <value>Always show this screen at startup</value>
+  </data>
+  <data name="strCcCheckAgain" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="strConnecting" xml:space="preserve">
+    <value>Connecting...</value>
+  </data>
+  <data name="strRDP256Colors" xml:space="preserve">
+    <value>256 Colors</value>
+  </data>
+  <data name="strRDPSoundBringToThisComputer" xml:space="preserve">
+    <value>Bring to this computer</value>
+  </data>
+  <data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
+    <value>Leave at remote computer</value>
+  </data>
+  <data name="strRDPSoundDoNotPlay" xml:space="preserve">
+    <value>Do not play</value>
+  </data>
+  <data name="strRDPFitToPanel" xml:space="preserve">
+    <value>Fit To Panel</value>
+  </data>
+  <data name="strFullscreen" xml:space="preserve">
+    <value>Fullscreen</value>
+  </data>
+  <data name="strRDPSmartSize" xml:space="preserve">
+    <value>Smart Size</value>
+  </data>
+  <data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
+    <value>Always connect, even if authentication fails</value>
+  </data>
+  <data name="strDontConnectWhenAuthFails" xml:space="preserve">
+    <value>Don't connect if authentication fails</value>
+  </data>
+  <data name="strWarnIfAuthFails" xml:space="preserve">
+    <value>Warn me if authentication fails</value>
+  </data>
+  <data name="strCcNotInstalledProperly" xml:space="preserve">
+    <value>not installed properly</value>
+  </data>
+  <data name="strCcCheckSucceeded" xml:space="preserve">
+    <value>Check succeeded!</value>
+  </data>
+  <data name="strCcRDPOK" xml:space="preserve">
+    <value>All RDP components were found and seem to be registered properly.
+Remote Desktop Connection Control Version {0}</value>
+  </data>
+  <data name="strCcCheckFailed" xml:space="preserve">
+    <value>Check failed!</value>
+  </data>
+  <data name="strCcRDPFailed" xml:space="preserve">
+    <value>For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services Client) 6.1 installed. You can get it here: http://support.microsoft.com/kb/951616
+If you have RDP 6.1 installed and the check still fails, try to register mstscax.dll manually. To do this open up the run dialog (Start - Run) and enter the following: regsvr32 "c:\windows\system32\mstscax.dll" (Where c:\ is your system drive).
+If you still have trouble getting RDP to work please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
+  </data>
+  <data name="strPasswordProtect" xml:space="preserve">
+    <value>Password protect</value>
+  </data>
+  <data name="strCcVNCOK" xml:space="preserve">
+    <value>All VNC components were found and seem to be registered properly.
+VncSharpNG Control Version {0}</value>
+  </data>
+  <data name="strCcVNCFailed" xml:space="preserve">
+    <value>VNC requires VncSharpNG.dll to be located in your mRemoteNG application folder.
+Please make sure that you have the VncSharpNG.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
+If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
+  </data>
+  <data name="strCcPuttyOK" xml:space="preserve">
+    <value>The PuTTY executable was found and should be ready to use.</value>
+  </data>
+  <data name="strCcPuttyFailed" xml:space="preserve">
+    <value>The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemoteNG package and is located in the installation path.
+Please make sure that either you have the Putty.exe in your mRemoteNG directory (default: c:\Program Files\mRemoteNG\) or that you specified a valid path to your PuTTY executable in the Options (Tools - Options - Advanced - Custom PuTTY path)</value>
+  </data>
+  <data name="strCcICAOK" xml:space="preserve">
+    <value>All ICA components were found and seem to be registered properly.
+Citrix ICA Client Control Version {0}</value>
+  </data>
+  <data name="strCcICAFailed" xml:space="preserve">
+    <value>ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/
+If you have the XenDesktop Online Plugin installed and the check still fails, try to register wfica.ocx manually.
+To do this open up the run dialog (Start - Run) and enter the following: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (Where c:\Program Files\Citrix\ICA Client\ is the path to your XenDesktop Online Plugin installation).
+If you are still not able to pass this check or use ICA in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/"</value>
+  </data>
+  <data name="strCcGeckoOK" xml:space="preserve">
+    <value>XULrunner was found and seems to be installed properly.</value>
+  </data>
+  <data name="strCcGeckoFailed" xml:space="preserve">
+    <value>To use the Gecko Rendering Engine you need to have XULrunner 1.8.1.x and the path to the installation set in your Options.
+You can download XULrunner 1.8.1.3 here: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
+When you are finished downloading extract the package to a path of your choice. Then in mRemoteNG go to Tools - Options - Advanced and enter the correct path in the XULrunner path field.
+If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
+  </data>
+  <data name="strCcEOLOK" xml:space="preserve">
+    <value>EOLWTSCOM was found and seems to be registered properly.</value>
+  </data>
+  <data name="strCcEOLFailed" xml:space="preserve">
+    <value>The (RDP) Sessions feature requires that you have a registered copy of eolwtscom.dll on your system.
+mRemoteNG ships with this component but will not register it automatically unless you run the setup package.
+To do register it manually do this: Open up the run dialog (Start - Run) and enter the following: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (Where c:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation).
+If you are still not able to pass this check or use the (RDP) Sessions feature in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
+  </data>
+  <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
+    <value>Automatically get session information</value>
+  </data>
+  <data name="strWriteLogFile" xml:space="preserve">
+    <value>Write log file (mRemoteNG.log)</value>
+  </data>
+  <data name="strStartupExit" xml:space="preserve">
+    <value>Startup/Exit</value>
+  </data>
+  <data name="strAllowOnlySingleInstance" xml:space="preserve">
+    <value>Allow only a single instance of the application (mRemoteNG restart required)</value>
+  </data>
+  <data name="strReconnectAtStartup" xml:space="preserve">
+    <value>Reconnect to previously opened sessions on startup</value>
+  </data>
+  <data name="strCheckForUpdatesOnStartup" xml:space="preserve">
+    <value>Check for updates and announcements at startup</value>
+  </data>
+  <data name="strConfirmExit" xml:space="preserve">
+    <value>Confirm exit if there are open connections</value>
+  </data>
+  <data name="strSaveConsOnExit" xml:space="preserve">
+    <value>Save connections on exit</value>
+  </data>
+  <data name="strMinimizeToSysTray" xml:space="preserve">
+    <value>Minimize to System Tray</value>
+  </data>
+  <data name="strShowFullConsFilePath" xml:space="preserve">
+    <value>Show full connections file path in window title</value>
+  </data>
+  <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
+    <value>Always show System Tray Icon</value>
+  </data>
+  <data name="strShowDescriptionTooltips" xml:space="preserve">
+    <value>Show description tooltips in connection tree</value>
+  </data>
+  <data name="strTabsAndPanels" xml:space="preserve">
+    <value>Tabs &amp;&amp; Panels</value>
+  </data>
+  <data name="strShowProtocolOnTabs" xml:space="preserve">
+    <value>Show protocols on tab names</value>
+  </data>
+  <data name="strShowLogonInfoOnTabs" xml:space="preserve">
+    <value>Show logon information on tab names</value>
+  </data>
+  <data name="strOpenNewTabRight" xml:space="preserve">
+    <value>Open new tab to the right of the currently selected tab</value>
+  </data>
+  <data name="strAlwaysShowPanelSelection" xml:space="preserve">
+    <value>Always show panel selection dialog when opening connections</value>
+  </data>
+  <data name="strDoubleClickTabClosesIt" xml:space="preserve">
+    <value>Double click on tab closes it</value>
+  </data>
+  <data name="strSetHostnameLikeDisplayName" xml:space="preserve">
+    <value>Set hostname like display name when creating new connections</value>
+  </data>
+  <data name="strExperimental" xml:space="preserve">
+    <value>Experimental</value>
+  </data>
+  <data name="strUseSQLServer" xml:space="preserve">
+    <value>Use SQL Server to load &amp;&amp; save connections</value>
+  </data>
+  <data name="strSQLInfo" xml:space="preserve">
+    <value>Please see Help - Getting started - SQL Configuration for more Info!</value>
+  </data>
+  <data name="strSQLServer" xml:space="preserve">
+    <value>SQL Server</value>
+  </data>
+  <data name="strAutoSaveMins" xml:space="preserve">
+    <value>Minutes (0 means disabled)</value>
+  </data>
+  <data name="strAutoSaveEvery" xml:space="preserve">
+    <value>Auto Save every:</value>
+  </data>
+  <data name="strStartIP" xml:space="preserve">
+    <value>Start IP</value>
+  </data>
+  <data name="strEndIP" xml:space="preserve">
+    <value>End IP</value>
+  </data>
+  <data name="strOpenPorts" xml:space="preserve">
+    <value>Open Ports</value>
+  </data>
+  <data name="strClosedPorts" xml:space="preserve">
+    <value>Closed Ports</value>
+  </data>
+  <data name="strEndPort" xml:space="preserve">
+    <value>End Port</value>
+  </data>
+  <data name="strStartPort" xml:space="preserve">
+    <value>Start Port</value>
+  </data>
+  <data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
+    <value>Remote Desktop Gateway Password</value>
+  </data>
+  <data name="strPropertyNameRDGatewayUsageMethod" xml:space="preserve">
+    <value>Use Gateway</value>
+  </data>
+  <data name="strPropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+    <value>Specifies when to use a Remote Desktop Gateway (RD Gateway) server.</value>
+  </data>
+  <data name="strPropertyNameRDGatewayPasswordInherit" xml:space="preserve">
+    <value>Inherit Remote Desktop Gateway Password</value>
+  </data>
+  <data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
+    <value>Gateway Username</value>
+  </data>
+  <data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
+    <value>Specifies the user name that a user provides to connect to the RD Gateway server.</value>
+  </data>
+  <data name="strPropertyDescriptionRDGatewayPasswordInherit" xml:space="preserve">
+    <value />
+  </data>
+  <data name="strProtocolToImport" xml:space="preserve">
+    <value>Protocol to import</value>
+  </data>
+  <data name="strQuickConnect" xml:space="preserve">
+    <value>Quick Connect</value>
+  </data>
+  <data name="strLocalFile" xml:space="preserve">
+    <value>Local file</value>
+  </data>
+  <data name="strRemoteFile" xml:space="preserve">
+    <value>Remote file</value>
+  </data>
+  <data name="strSaveAll" xml:space="preserve">
+    <value>Save All</value>
+  </data>
+  <data name="strRemoveAll" xml:space="preserve">
+    <value>Remove All</value>
+  </data>
+  <data name="strSave" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="strSaveImageFilter" xml:space="preserve">
+    <value>Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group File (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Network Graphics File (.png)|*.png</value>
+  </data>
+  <data name="strScreenshots" xml:space="preserve">
+    <value>Screenshots</value>
+  </data>
+  <data name="strActivity" xml:space="preserve">
+    <value>Activity</value>
+  </data>
+  <data name="strPropertyNameRDGatewayHostname" xml:space="preserve">
+    <value>Gateway Hostname</value>
+  </data>
+  <data name="strPropertyDescriptionRDGatewayHostname" xml:space="preserve">
+    <value>Specifies the host name of the Remote Desktop Gateway server.</value>
+  </data>
+  <data name="strPropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+    <value>Gateway Credentials</value>
+  </data>
+  <data name="strPropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
+    <value>Specifies whether or not to log on to the gateway using the same username and password as the connection.</value>
+  </data>
+  <data name="strPropertyNameRDGatewayDomain" xml:space="preserve">
+    <value>Gateway Domain</value>
+  </data>
+  <data name="strPropertyDescriptionRDGatewayDomain" xml:space="preserve">
+    <value>Specifies the domain name that a user provides to connect to the RD Gateway server.</value>
+  </data>
+  <data name="strPropertyNameRDGatewayUsageMethodInherit" xml:space="preserve">
+    <value>Inherit Use Gateway</value>
+  </data>
+  <data name="strPropertyNameRDGatewayUseConnectionCredentialsInherit" xml:space="preserve">
+    <value>Inherit Gateway Credentials</value>
+  </data>
+  <data name="strPropertyNameRDGatewayHostnameInherit" xml:space="preserve">
+    <value>Inherit Gateway Hostname</value>
+  </data>
+  <data name="strNoCompression" xml:space="preserve">
+    <value>No Compression</value>
+  </data>
+  <data name="strNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="strNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
+  <data name="strNoSmartSize" xml:space="preserve">
+    <value>No SmartSize</value>
+  </data>
+  <data name="strFree" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="strAspect" xml:space="preserve">
+    <value>Aspect</value>
+  </data>
+  <data name="strNewPanel" xml:space="preserve">
+    <value>New Panel</value>
+  </data>
+  <data name="strRename" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="strSendTo" xml:space="preserve">
+    <value>Send To...</value>
+  </data>
+  <data name="strNewTitle" xml:space="preserve">
+    <value>New Title</value>
+  </data>
+  <data name="strScreen" xml:space="preserve">
+    <value>Screen</value>
+  </data>
+  <data name="strPanelName" xml:space="preserve">
+    <value>Panel Name</value>
+  </data>
+  <data name="strUser" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="strHost" xml:space="preserve">
+    <value>Host</value>
+  </data>
+  <data name="strTransfer" xml:space="preserve">
+    <value>Transfer</value>
+  </data>
+  <data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
+    <value>Do you want to save the current connections file before loading another?</value>
+  </data>
+  <data name="strEmptyPasswordContinue" xml:space="preserve">
+    <value>Do you want to continue with no password?</value>
+  </data>
+  <data name="strExport" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="strUncheckProperties" xml:space="preserve">
+    <value>Uncheck the properties you want not to be saved!</value>
+  </data>
+  <data name="strType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="strRefresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="strLogOff" xml:space="preserve">
+    <value>Logoff</value>
+  </data>
+  <data name="strTheFollowing" xml:space="preserve">
+    <value>the follwing</value>
+  </data>
+  <data name="strMyCurrentWindowsCreds" xml:space="preserve">
+    <value>my current credentials (windows logon info)</value>
+  </data>
+  <data name="strNoInformation" xml:space="preserve">
+    <value>none</value>
+  </data>
+  <data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
+    <value>Single click on opened connection switches to it</value>
+  </data>
+  <data name="strSingleClickOnConnectionOpensIt" xml:space="preserve">
+    <value>Single click on connection opens it</value>
+  </data>
+  <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
+    <value>Switch to Notifications panel on</value>
+  </data>
+  <data name="strErrors" xml:space="preserve">
+    <value>Errors</value>
+  </data>
+  <data name="strWarnings" xml:space="preserve">
+    <value>Warnings</value>
+  </data>
+  <data name="strInformations" xml:space="preserve">
+    <value>Informations</value>
+  </data>
+  <data name="strUseOnlyErrorsAndInfosPanel" xml:space="preserve">
+    <value>Use only Notifications panel (no messagebox popups)</value>
+  </data>
+  <data name="strUltraVNCSCListeningPort" xml:space="preserve">
+    <value>UltraVNC SingleClick Port</value>
+  </data>
+  <data name="strCheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
+    <value>Check proper installation of components at startup</value>
+  </data>
+  <data name="strXULrunnerPath" xml:space="preserve">
+    <value>XULrunner path</value>
+  </data>
+  <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
+    <value>Completely encrypt connection file</value>
+  </data>
+  <data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
+    <value>For empty Username, Password or Domain fields use:</value>
+  </data>
+  <data name="strProxyTestSucceeded" xml:space="preserve">
+    <value>Proxy test succeeded!</value>
+  </data>
+  <data name="strProxyTestFailed" xml:space="preserve">
+    <value>Proxy test failed!</value>
+  </data>
+  <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
+    <value>(These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!)</value>
+  </data>
+  <data name="strAddConnection" xml:space="preserve">
+    <value>New Connection</value>
+  </data>
+  <data name="strAddFolder" xml:space="preserve">
+    <value>New folder</value>
+  </data>
+  <data name="strConnect" xml:space="preserve">
+    <value>Connect</value>
+  </data>
+  <data name="strConnectWithOptions" xml:space="preserve">
+    <value>Connect (with options)</value>
+  </data>
+  <data name="strConnectToConsoleSession" xml:space="preserve">
+    <value>Connect to console session</value>
+  </data>
+  <data name="strConnectInFullscreen" xml:space="preserve">
+    <value>Connect in fullscreen mode</value>
+  </data>
+  <data name="strChoosePanelBeforeConnecting" xml:space="preserve">
+    <value>Choose panel before connecting</value>
+  </data>
+  <data name="strTools" xml:space="preserve">
+    <value>Tools</value>
+  </data>
+  <data name="strImportExport" xml:space="preserve">
+    <value>Import/Export</value>
+  </data>
+  <data name="strExportmRemoteXML" xml:space="preserve">
+    <value>Export mRemote/mRemoteNG XML</value>
+  </data>
+  <data name="strImportmRemoteXML" xml:space="preserve">
+    <value>Import mRemote/mRemoteNG XML</value>
+  </data>
+  <data name="strImportAD" xml:space="preserve">
+    <value>Import from Active Directory</value>
+  </data>
+  <data name="strImportRDPFiles" xml:space="preserve">
+    <value>Import from .RDP file(s)</value>
+  </data>
+  <data name="strImportPortScan" xml:space="preserve">
+    <value>Import from Port Scan</value>
+  </data>
+  <data name="strSort" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="strSortAsc" xml:space="preserve">
+    <value>Ascending (A-Z)</value>
+  </data>
+  <data name="strSortDesc" xml:space="preserve">
+    <value>Descending (Z-A)</value>
+  </data>
+  <data name="strDuplicate" xml:space="preserve">
+    <value>Duplicate</value>
+  </data>
+  <data name="strMoveUp" xml:space="preserve">
+    <value>Move up</value>
+  </data>
+  <data name="strMoveDown" xml:space="preserve">
+    <value>Move down</value>
+  </data>
+  <data name="strExpandAllFolders" xml:space="preserve">
+    <value>Expand all folders</value>
+  </data>
+  <data name="strCollapseAllFolders" xml:space="preserve">
+    <value>Collapse all folders</value>
+  </data>
+  <data name="strInheritNewConnection" xml:space="preserve">
+    <value>mRemoteNG is up to date</value>
+  </data>
+  <data name="strNoUpdateAvailable" xml:space="preserve">
+    <value>No update available</value>
+  </data>
+  <data name="strCheckForUpdate" xml:space="preserve">
+    <value>Check Again</value>
+  </data>
+  <data name="strDownloadAndInstall" xml:space="preserve">
+    <value>Download and Install</value>
+  </data>
+  <data name="strAvailableVersion" xml:space="preserve">
+    <value>Current Version</value>
+  </data>
+  <data name="strCurrentVersion" xml:space="preserve">
+    <value>Installed version</value>
+  </data>
+  <data name="strVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="strUpdateDownloadComplete" xml:space="preserve">
+    <value>Download complete!
+mRemoteNG will now quit and begin with the installation.</value>
+  </data>
+  <data name="strUpdateAvailable" xml:space="preserve">
+    <value>mRemoteNG requires an update</value>
+  </data>
+  <data name="strMenuResetLayout" xml:space="preserve">
+    <value>Reset layout</value>
+  </data>
+  <data name="strMenuAnnouncements" xml:space="preserve">
+    <value>Announcements</value>
   </data>
 </root>

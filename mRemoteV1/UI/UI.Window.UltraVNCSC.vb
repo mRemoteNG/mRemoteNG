@@ -104,7 +104,7 @@ Namespace UI
                     'vnc.Show()
 
                     'vnc.StretchMode = ViewerX.ScreenStretchMode.SSM_ASPECT
-                    'vnc.ListeningText = Language.Base.ListeningForIncomingVNCConnections & " " & My.Settings.UVNCSCPort
+                    'vnc.ListeningText = My.Resources.strInheritListeningForIncomingVNCConnections & " " & My.Settings.UVNCSCPort
 
                     'vnc.ListenEx(My.Settings.UVNCSCPort)
                 Catch ex As Exception
