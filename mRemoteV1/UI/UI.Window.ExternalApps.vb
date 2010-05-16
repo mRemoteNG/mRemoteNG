@@ -435,6 +435,7 @@ Namespace UI
                 grpEditor.Text = My.Resources.strGroupboxExternalToolProperties
                 Label4.Text = My.Resources.strLabelOptions
                 chkWaitForExit.Text = My.Resources.strCheckboxWaitForExit
+                chkTryIntegrate.Text = My.Resources.strTryIntegrate
                 btnBrowse.Text = My.Resources.strButtonBrowse
                 Label3.Text = My.Resources.strLabelArguments
                 Label2.Text = My.Resources.strLabelFilename

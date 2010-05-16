@@ -1969,4 +1969,31 @@ Please use File - Load Connections for normal connection files!</value>
     <value>Connections file "{0}" could not be loaded!
 Starting with new connections file.</value>
   </data>
+  <data name="strTryIntegrate" xml:space="preserve">
+    <value>Try to integrate</value>
+  </data>
+  <data name="strUpdateCheck" xml:space="preserve">
+    <value>mRemoteNG can periodically connect to the mRemoteNG website to check for updates and product announcements.</value>
+  </data>
+  <data name="strCheckNow" xml:space="preserve">
+    <value>Check now</value>
+  </data>
+  <data name="strUpdateCheckFailed" xml:space="preserve">
+    <value>Check For Update failed!</value>
+  </data>
+  <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
+    <value>Check for update completion failed!</value>
+  </data>
+  <data name="strUpdateDownloadFailed" xml:space="preserve">
+    <value>Download Update failed!</value>
+  </data>
+  <data name="strUpdateStartFailed" xml:space="preserve">
+    <value>Error starting update!</value>
+  </data>
+  <data name="strUpdateDeleteFailed" xml:space="preserve">
+    <value>Error deleting update file!</value>
+  </data>
+  <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
+    <value>Download complete failed!</value>
+  </data>
 </root>

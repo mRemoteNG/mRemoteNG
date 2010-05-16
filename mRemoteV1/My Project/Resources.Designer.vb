@@ -1446,6 +1446,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Check now ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strCheckNow() As String
+            Get
+                Return ResourceManager.GetString("strCheckNow", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Check proper installation of components at startup ähnelt.
         '''</summary>
         Friend ReadOnly Property strCheckProperInstallationOfComponentsAtStartup() As String
@@ -5102,6 +5111,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Try to integrate ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strTryIntegrate() As String
+            Get
+                Return ResourceManager.GetString("strTryIntegrate", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Type ähnelt.
         '''</summary>
         Friend ReadOnly Property strType() As String
@@ -5138,12 +5156,66 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die mRemoteNG can periodically connect to the mRemoteNG website to check for updates and product announcements. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strUpdateCheck() As String
+            Get
+                Return ResourceManager.GetString("strUpdateCheck", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Check for update completion failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strUpdateCheckCompleteFailed() As String
+            Get
+                Return ResourceManager.GetString("strUpdateCheckCompleteFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Check For Update failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strUpdateCheckFailed() As String
+            Get
+                Return ResourceManager.GetString("strUpdateCheckFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Error deleting update file! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strUpdateDeleteFailed() As String
+            Get
+                Return ResourceManager.GetString("strUpdateDeleteFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Download complete!
         '''mRemoteNG will now quit and begin with the installation. ähnelt.
         '''</summary>
         Friend ReadOnly Property strUpdateDownloadComplete() As String
             Get
                 Return ResourceManager.GetString("strUpdateDownloadComplete", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Download complete failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strUpdateDownloadCompleteFailed() As String
+            Get
+                Return ResourceManager.GetString("strUpdateDownloadCompleteFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Download Update failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strUpdateDownloadFailed() As String
+            Get
+                Return ResourceManager.GetString("strUpdateDownloadFailed", resourceCulture)
             End Get
         End Property
         
@@ -5180,6 +5252,15 @@ Namespace My.Resources
         Friend ReadOnly Property strUpdateFrequencyWeekly() As String
             Get
                 Return ResourceManager.GetString("strUpdateFrequencyWeekly", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Error starting update! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strUpdateStartFailed() As String
+            Get
+                Return ResourceManager.GetString("strUpdateStartFailed", resourceCulture)
             End Get
         End Property
         
