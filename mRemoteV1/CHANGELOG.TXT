@@ -1,5 +1,5 @@
 ﻿1.64:
-  AR: Fixed translations, moved everything into resx
+  AR: Fixed translations, moved everything into resx, refactoring, namespace renamed to mRemoteNG
 
 1.63:
   New icon and logo

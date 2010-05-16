@@ -1,5 +1,5 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 Imports System.IO
 
 Namespace UI
@@ -61,21 +61,21 @@ Namespace UI
                 'mMenFile
                 '
                 Me.mMenFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenFileSaveAll, Me.mMenFileRemoveAll})
-                Me.mMenFile.Image = Global.mRemote.My.Resources.Resources.File
+                Me.mMenFile.Image = Global.mRemoteNG.My.Resources.Resources.File
                 Me.mMenFile.Name = "mMenFile"
                 Me.mMenFile.Size = New System.Drawing.Size(51, 20)
                 Me.mMenFile.Text = "&File"
                 '
                 'mMenFileSaveAll
                 '
-                Me.mMenFileSaveAll.Image = Global.mRemote.My.Resources.Resources.Screenshot_Save
+                Me.mMenFileSaveAll.Image = Global.mRemoteNG.My.Resources.Resources.Screenshot_Save
                 Me.mMenFileSaveAll.Name = "mMenFileSaveAll"
                 Me.mMenFileSaveAll.Size = New System.Drawing.Size(128, 22)
                 Me.mMenFileSaveAll.Text = "Save All"
                 '
                 'mMenFileRemoveAll
                 '
-                Me.mMenFileRemoveAll.Image = Global.mRemote.My.Resources.Resources.Screenshot_Delete
+                Me.mMenFileRemoveAll.Image = Global.mRemoteNG.My.Resources.Resources.Screenshot_Delete
                 Me.mMenFileRemoveAll.Name = "mMenFileRemoveAll"
                 Me.mMenFileRemoveAll.Size = New System.Drawing.Size(128, 22)
                 Me.mMenFileRemoveAll.Text = "Remove All"
@@ -88,14 +88,14 @@ Namespace UI
                 '
                 'cMenScreenshotCopy
                 '
-                Me.cMenScreenshotCopy.Image = Global.mRemote.My.Resources.Resources.Screenshot_Copy
+                Me.cMenScreenshotCopy.Image = Global.mRemoteNG.My.Resources.Resources.Screenshot_Copy
                 Me.cMenScreenshotCopy.Name = "cMenScreenshotCopy"
                 Me.cMenScreenshotCopy.Size = New System.Drawing.Size(99, 22)
                 Me.cMenScreenshotCopy.Text = "Copy"
                 '
                 'cMenScreenshotSave
                 '
-                Me.cMenScreenshotSave.Image = Global.mRemote.My.Resources.Resources.Screenshot_Save
+                Me.cMenScreenshotSave.Image = Global.mRemoteNG.My.Resources.Resources.Screenshot_Save
                 Me.cMenScreenshotSave.Name = "cMenScreenshotSave"
                 Me.cMenScreenshotSave.Size = New System.Drawing.Size(99, 22)
                 Me.cMenScreenshotSave.Text = "Save"
@@ -113,7 +113,7 @@ Namespace UI
                 Me.Controls.Add(Me.flpScreenshots)
                 Me.Controls.Add(Me.msMain)
                 Me.HideOnClose = True
-                Me.Icon = Global.mRemote.My.Resources.Resources.Screenshot_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Screenshot_Icon
                 Me.MainMenuStrip = Me.msMain
                 Me.Name = "ScreenshotManager"
                 Me.TabText = "Screenshots"

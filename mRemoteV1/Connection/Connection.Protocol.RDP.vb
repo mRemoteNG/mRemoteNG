@@ -3,8 +3,8 @@ Imports System.Threading
 Imports AxMSTSCLib
 Imports EOLWTSCOM
 Imports System.ComponentModel
-Imports mRemote.App.Runtime
-Imports mRemote.Tools.LocalizedAttributes
+Imports mRemoteNG.App.Runtime
+Imports mRemoteNG.Tools.LocalizedAttributes
 
 Namespace Connection
     Namespace Protocol

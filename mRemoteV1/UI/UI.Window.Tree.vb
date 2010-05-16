@@ -1,5 +1,5 @@
 Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -130,14 +130,14 @@ Namespace UI
                 '
                 'cMenTreeAddConnection
                 '
-                Me.cMenTreeAddConnection.Image = Global.mRemote.My.Resources.Resources.Connection_Add
+                Me.cMenTreeAddConnection.Image = Global.mRemoteNG.My.Resources.Resources.Connection_Add
                 Me.cMenTreeAddConnection.Name = "cMenTreeAddConnection"
                 Me.cMenTreeAddConnection.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeAddConnection.Text = "New Connection"
                 '
                 'cMenTreeAddFolder
                 '
-                Me.cMenTreeAddFolder.Image = Global.mRemote.My.Resources.Resources.Folder_Add
+                Me.cMenTreeAddFolder.Image = Global.mRemoteNG.My.Resources.Resources.Folder_Add
                 Me.cMenTreeAddFolder.Name = "cMenTreeAddFolder"
                 Me.cMenTreeAddFolder.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeAddFolder.Text = "New Folder"
@@ -149,7 +149,7 @@ Namespace UI
                 '
                 'cMenTreeConnect
                 '
-                Me.cMenTreeConnect.Image = Global.mRemote.My.Resources.Resources.Play
+                Me.cMenTreeConnect.Image = Global.mRemoteNG.My.Resources.Resources.Play
                 Me.cMenTreeConnect.Name = "cMenTreeConnect"
                 Me.cMenTreeConnect.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
                             Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
@@ -178,21 +178,21 @@ Namespace UI
                 '
                 'cMenTreeConnectWithOptionsConnectInFullscreen
                 '
-                Me.cMenTreeConnectWithOptionsConnectInFullscreen.Image = Global.mRemote.My.Resources.Resources.Fullscreen
+                Me.cMenTreeConnectWithOptionsConnectInFullscreen.Image = Global.mRemoteNG.My.Resources.Resources.Fullscreen
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Name = "cMenTreeConnectWithOptionsConnectInFullscreen"
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Size = New System.Drawing.Size(231, 22)
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Text = "Connect in fullscreen"
                 '
                 'cMenTreeConnectWithOptionsChoosePanelBeforeConnecting
                 '
-                Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Image = Global.mRemote.My.Resources.Resources.Panels
+                Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Image = Global.mRemoteNG.My.Resources.Resources.Panels
                 Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Name = "cMenTreeConnectWithOptionsChoosePanelBeforeConnecting"
                 Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Size = New System.Drawing.Size(231, 22)
                 Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = "Choose panel before connecting"
                 '
                 'cMenTreeDisconnect
                 '
-                Me.cMenTreeDisconnect.Image = Global.mRemote.My.Resources.Resources.Pause
+                Me.cMenTreeDisconnect.Image = Global.mRemoteNG.My.Resources.Resources.Pause
                 Me.cMenTreeDisconnect.Name = "cMenTreeDisconnect"
                 Me.cMenTreeDisconnect.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeDisconnect.Text = "Disconnect"
@@ -205,14 +205,14 @@ Namespace UI
                 'cMenTreeTools
                 '
                 Me.cMenTreeTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeToolsTransferFile, Me.cMenTreeToolsImportExport, Me.cMenTreeToolsSort, Me.cMenTreeToolsExternalApps})
-                Me.cMenTreeTools.Image = Global.mRemote.My.Resources.Resources.Tools
+                Me.cMenTreeTools.Image = Global.mRemoteNG.My.Resources.Resources.Tools
                 Me.cMenTreeTools.Name = "cMenTreeTools"
                 Me.cMenTreeTools.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeTools.Text = "Tools"
                 '
                 'cMenTreeToolsTransferFile
                 '
-                Me.cMenTreeToolsTransferFile.Image = Global.mRemote.My.Resources.Resources.SSHTransfer
+                Me.cMenTreeToolsTransferFile.Image = Global.mRemoteNG.My.Resources.Resources.SSHTransfer
                 Me.cMenTreeToolsTransferFile.Name = "cMenTreeToolsTransferFile"
                 Me.cMenTreeToolsTransferFile.Size = New System.Drawing.Size(172, 22)
                 Me.cMenTreeToolsTransferFile.Text = "Transfer File (SSH)"
@@ -226,14 +226,14 @@ Namespace UI
                 '
                 'cMenTreeToolsImportExportExportmRemoteXML
                 '
-                Me.cMenTreeToolsImportExportExportmRemoteXML.Image = Global.mRemote.My.Resources.Resources.Connections_SaveAs
+                Me.cMenTreeToolsImportExportExportmRemoteXML.Image = Global.mRemoteNG.My.Resources.Resources.Connections_SaveAs
                 Me.cMenTreeToolsImportExportExportmRemoteXML.Name = "cMenTreeToolsImportExportExportmRemoteXML"
                 Me.cMenTreeToolsImportExportExportmRemoteXML.Size = New System.Drawing.Size(204, 22)
                 Me.cMenTreeToolsImportExportExportmRemoteXML.Text = "Export mRemote XML"
                 '
                 'cMenTreeToolsImportExportImportmRemoteXML
                 '
-                Me.cMenTreeToolsImportExportImportmRemoteXML.Image = Global.mRemote.My.Resources.Resources.Connections_Load
+                Me.cMenTreeToolsImportExportImportmRemoteXML.Image = Global.mRemoteNG.My.Resources.Resources.Connections_Load
                 Me.cMenTreeToolsImportExportImportmRemoteXML.Name = "cMenTreeToolsImportExportImportmRemoteXML"
                 Me.cMenTreeToolsImportExportImportmRemoteXML.Size = New System.Drawing.Size(204, 22)
                 Me.cMenTreeToolsImportExportImportmRemoteXML.Text = "Import mRemote XML"
@@ -245,21 +245,21 @@ Namespace UI
                 '
                 'cMenTreeToolsImportExportImportFromAD
                 '
-                Me.cMenTreeToolsImportExportImportFromAD.Image = Global.mRemote.My.Resources.Resources.ActiveDirectory
+                Me.cMenTreeToolsImportExportImportFromAD.Image = Global.mRemoteNG.My.Resources.Resources.ActiveDirectory
                 Me.cMenTreeToolsImportExportImportFromAD.Name = "cMenTreeToolsImportExportImportFromAD"
                 Me.cMenTreeToolsImportExportImportFromAD.Size = New System.Drawing.Size(204, 22)
                 Me.cMenTreeToolsImportExportImportFromAD.Text = "Import from Active Directory"
                 '
                 'cMenTreeToolsImportExportImportFromRDPFiles
                 '
-                Me.cMenTreeToolsImportExportImportFromRDPFiles.Image = Global.mRemote.My.Resources.Resources.RDP
+                Me.cMenTreeToolsImportExportImportFromRDPFiles.Image = Global.mRemoteNG.My.Resources.Resources.RDP
                 Me.cMenTreeToolsImportExportImportFromRDPFiles.Name = "cMenTreeToolsImportExportImportFromRDPFiles"
                 Me.cMenTreeToolsImportExportImportFromRDPFiles.Size = New System.Drawing.Size(204, 22)
                 Me.cMenTreeToolsImportExportImportFromRDPFiles.Text = "Import from .RDP file(s)"
                 '
                 'cMenTreeToolsImportExportImportFromPortScan
                 '
-                Me.cMenTreeToolsImportExportImportFromPortScan.Image = Global.mRemote.My.Resources.Resources.PortScan
+                Me.cMenTreeToolsImportExportImportFromPortScan.Image = Global.mRemoteNG.My.Resources.Resources.PortScan
                 Me.cMenTreeToolsImportExportImportFromPortScan.Name = "cMenTreeToolsImportExportImportFromPortScan"
                 Me.cMenTreeToolsImportExportImportFromPortScan.Size = New System.Drawing.Size(204, 22)
                 Me.cMenTreeToolsImportExportImportFromPortScan.Text = "Import from Port Scan"
@@ -273,21 +273,21 @@ Namespace UI
                 '
                 'cMenTreeToolsSortAscending
                 '
-                Me.cMenTreeToolsSortAscending.Image = Global.mRemote.My.Resources.Resources.Sort_AZ
+                Me.cMenTreeToolsSortAscending.Image = Global.mRemoteNG.My.Resources.Resources.Sort_AZ
                 Me.cMenTreeToolsSortAscending.Name = "cMenTreeToolsSortAscending"
                 Me.cMenTreeToolsSortAscending.Size = New System.Drawing.Size(157, 22)
                 Me.cMenTreeToolsSortAscending.Text = "Ascending (A-Z)"
                 '
                 'cMenTreeToolsSortDescending
                 '
-                Me.cMenTreeToolsSortDescending.Image = Global.mRemote.My.Resources.Resources.Sort_ZA
+                Me.cMenTreeToolsSortDescending.Image = Global.mRemoteNG.My.Resources.Resources.Sort_ZA
                 Me.cMenTreeToolsSortDescending.Name = "cMenTreeToolsSortDescending"
                 Me.cMenTreeToolsSortDescending.Size = New System.Drawing.Size(157, 22)
                 Me.cMenTreeToolsSortDescending.Text = "Descending (Z-A)"
                 '
                 'cMenTreeToolsExternalApps
                 '
-                Me.cMenTreeToolsExternalApps.Image = Global.mRemote.My.Resources.Resources.ExtApp
+                Me.cMenTreeToolsExternalApps.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp
                 Me.cMenTreeToolsExternalApps.Name = "cMenTreeToolsExternalApps"
                 Me.cMenTreeToolsExternalApps.Size = New System.Drawing.Size(172, 22)
                 Me.cMenTreeToolsExternalApps.Text = "External Applications"
@@ -299,7 +299,7 @@ Namespace UI
                 '
                 'cMenTreeDuplicate
                 '
-                Me.cMenTreeDuplicate.Image = Global.mRemote.My.Resources.Resources.Connection_Duplicate
+                Me.cMenTreeDuplicate.Image = Global.mRemoteNG.My.Resources.Resources.Connection_Duplicate
                 Me.cMenTreeDuplicate.Name = "cMenTreeDuplicate"
                 Me.cMenTreeDuplicate.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
                 Me.cMenTreeDuplicate.Size = New System.Drawing.Size(186, 22)
@@ -307,7 +307,7 @@ Namespace UI
                 '
                 'cMenTreeRename
                 '
-                Me.cMenTreeRename.Image = Global.mRemote.My.Resources.Resources.Rename
+                Me.cMenTreeRename.Image = Global.mRemoteNG.My.Resources.Resources.Rename
                 Me.cMenTreeRename.Name = "cMenTreeRename"
                 Me.cMenTreeRename.ShortcutKeys = System.Windows.Forms.Keys.F2
                 Me.cMenTreeRename.Size = New System.Drawing.Size(186, 22)
@@ -315,7 +315,7 @@ Namespace UI
                 '
                 'cMenTreeDelete
                 '
-                Me.cMenTreeDelete.Image = Global.mRemote.My.Resources.Resources.Delete
+                Me.cMenTreeDelete.Image = Global.mRemoteNG.My.Resources.Resources.Delete
                 Me.cMenTreeDelete.Name = "cMenTreeDelete"
                 Me.cMenTreeDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete
                 Me.cMenTreeDelete.Size = New System.Drawing.Size(186, 22)
@@ -328,7 +328,7 @@ Namespace UI
                 '
                 'cMenTreeMoveUp
                 '
-                Me.cMenTreeMoveUp.Image = Global.mRemote.My.Resources.Resources.Arrow_Up
+                Me.cMenTreeMoveUp.Image = Global.mRemoteNG.My.Resources.Resources.Arrow_Up
                 Me.cMenTreeMoveUp.Name = "cMenTreeMoveUp"
                 Me.cMenTreeMoveUp.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Up), System.Windows.Forms.Keys)
                 Me.cMenTreeMoveUp.Size = New System.Drawing.Size(186, 22)
@@ -336,7 +336,7 @@ Namespace UI
                 '
                 'cMenTreeMoveDown
                 '
-                Me.cMenTreeMoveDown.Image = Global.mRemote.My.Resources.Resources.Arrow_Down
+                Me.cMenTreeMoveDown.Image = Global.mRemoteNG.My.Resources.Resources.Arrow_Down
                 Me.cMenTreeMoveDown.Name = "cMenTreeMoveDown"
                 Me.cMenTreeMoveDown.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Down), System.Windows.Forms.Keys)
                 Me.cMenTreeMoveDown.Size = New System.Drawing.Size(186, 22)
@@ -364,7 +364,7 @@ Namespace UI
                 'PictureBox1
                 '
                 Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-                Me.PictureBox1.Image = Global.mRemote.My.Resources.Resources.Search
+                Me.PictureBox1.Image = Global.mRemoteNG.My.Resources.Resources.Search
                 Me.PictureBox1.Location = New System.Drawing.Point(0, 411)
                 Me.PictureBox1.Name = "PictureBox1"
                 Me.PictureBox1.Size = New System.Drawing.Size(16, 16)
@@ -398,21 +398,21 @@ Namespace UI
                 '
                 Me.mMenView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
                 Me.mMenView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenViewExpandAllFolders, Me.mMenViewCollapseAllFolders})
-                Me.mMenView.Image = Global.mRemote.My.Resources.Resources.View
+                Me.mMenView.Image = Global.mRemoteNG.My.Resources.Resources.View
                 Me.mMenView.Name = "mMenView"
                 Me.mMenView.Size = New System.Drawing.Size(28, 20)
                 Me.mMenView.Text = "&View"
                 '
                 'mMenViewExpandAllFolders
                 '
-                Me.mMenViewExpandAllFolders.Image = Global.mRemote.My.Resources.Resources.Expand
+                Me.mMenViewExpandAllFolders.Image = Global.mRemoteNG.My.Resources.Resources.Expand
                 Me.mMenViewExpandAllFolders.Name = "mMenViewExpandAllFolders"
                 Me.mMenViewExpandAllFolders.Size = New System.Drawing.Size(161, 22)
                 Me.mMenViewExpandAllFolders.Text = "Expand all folders"
                 '
                 'mMenViewCollapseAllFolders
                 '
-                Me.mMenViewCollapseAllFolders.Image = Global.mRemote.My.Resources.Resources.Collapse
+                Me.mMenViewCollapseAllFolders.Image = Global.mRemoteNG.My.Resources.Resources.Collapse
                 Me.mMenViewCollapseAllFolders.Name = "mMenViewCollapseAllFolders"
                 Me.mMenViewCollapseAllFolders.Size = New System.Drawing.Size(161, 22)
                 Me.mMenViewCollapseAllFolders.Text = "Collapse all folders"
@@ -424,7 +424,7 @@ Namespace UI
                 Me.Controls.Add(Me.pnlConnections)
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.HideOnClose = True
-                Me.Icon = Global.mRemote.My.Resources.Resources.Root_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Root_Icon
                 Me.Name = "Tree"
                 Me.TabText = "Connections"
                 Me.Text = "Connections"
@@ -556,11 +556,11 @@ Namespace UI
                 Try
                     If My.Settings.SetHostnameLikeDisplayName Then
                         If e.Node.Text = My.Resources.strNewConnection Then
-                            TryCast(e.Node.Tag, mRemote.Connection.Info).Hostname = e.Label
+                            TryCast(e.Node.Tag, mRemoteNG.Connection.Info).Hostname = e.Label
                         End If
                     End If
 
-                    mRemote.Tree.Node.FinishRenameSelectedNode(e.Label)
+                    mRemoteNG.Tree.Node.FinishRenameSelectedNode(e.Label)
                     Windows.configForm.pGrid_SelectedObjectChanged()
                     Me.ShowHideTreeContextMenuItems(e.Node)
                     SaveConnectionsBG()
@@ -571,13 +571,13 @@ Namespace UI
 
             Private Sub tvConnections_AfterSelect(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles tvConnections.AfterSelect
                 Try
-                    Select Case mRemote.Tree.Node.GetNodeType(e.Node)
-                        Case mRemote.Tree.Node.Type.Connection
+                    Select Case mRemoteNG.Tree.Node.GetNodeType(e.Node)
+                        Case mRemoteNG.Tree.Node.Type.Connection
                             Windows.configForm.SetPropertyGridObject(e.Node.Tag)
-                            Windows.sessionsForm.CurrentHost = TryCast(e.Node.Tag, mRemote.Connection.Info).Hostname
-                        Case mRemote.Tree.Node.Type.Container
-                            Windows.configForm.SetPropertyGridObject(TryCast(e.Node.Tag, mRemote.Container.Info).ConnectionInfo)
-                        Case mRemote.Tree.Node.Type.Root
+                            Windows.sessionsForm.CurrentHost = TryCast(e.Node.Tag, mRemoteNG.Connection.Info).Hostname
+                        Case mRemoteNG.Tree.Node.Type.Container
+                            Windows.configForm.SetPropertyGridObject(TryCast(e.Node.Tag, mRemoteNG.Container.Info).ConnectionInfo)
+                        Case mRemoteNG.Tree.Node.Type.Root
                             Windows.configForm.SetPropertyGridObject(e.Node.Tag)
                         Case Else
                             Exit Sub
@@ -587,7 +587,7 @@ Namespace UI
                     Me.ShowHideTreeContextMenuItems(e.Node)
                     Windows.sessionsForm.GetSessionsAuto()
 
-                    App.Runtime.LastSelected = mRemote.Tree.Node.GetConstantID(e.Node)
+                    App.Runtime.LastSelected = mRemoteNG.Tree.Node.GetConstantID(e.Node)
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterSelect (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
@@ -599,11 +599,11 @@ Namespace UI
                     Me.tvConnections.SelectedNode = e.Node
 
                     If e.Button = System.Windows.Forms.MouseButtons.Left Then
-                        If My.Settings.SingleClickOnConnectionOpensIt And mRemote.Tree.Node.GetNodeType(e.Node) = mRemote.Tree.Node.Type.Connection Then
+                        If My.Settings.SingleClickOnConnectionOpensIt And mRemoteNG.Tree.Node.GetNodeType(e.Node) = mRemoteNG.Tree.Node.Type.Connection Then
                             App.Runtime.OpenConnection()
                         End If
 
-                        If My.Settings.SingleClickSwitchesToOpenConnection And mRemote.Tree.Node.GetNodeType(e.Node) = mRemote.Tree.Node.Type.Connection Then
+                        If My.Settings.SingleClickSwitchesToOpenConnection And mRemoteNG.Tree.Node.GetNodeType(e.Node) = mRemoteNG.Tree.Node.Type.Connection Then
                             App.Runtime.SwitchToOpenConnection(e.Node.Tag)
                         End If
                     End If
@@ -613,23 +613,23 @@ Namespace UI
             End Sub
 
             Private Sub tvConnections_NodeMouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles tvConnections.NodeMouseDoubleClick
-                If mRemote.Tree.Node.GetNodeType(mRemote.Tree.Node.SelectedNode) = mRemote.Tree.Node.Type.Connection Then
+                If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
                     App.Runtime.OpenConnection()
                 End If
             End Sub
 
             Private Sub tvConnections_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles tvConnections.MouseMove
                 Try
-                    mRemote.Tree.Node.SetNodeToolTip(e, Me.DescriptionTooltip)
+                    mRemoteNG.Tree.Node.SetNodeToolTip(e, Me.DescriptionTooltip)
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_MouseMove (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
-            Private Function IsConnectionOpen(ByVal ConnectionInfos() As mRemote.Connection.Info) As Boolean
+            Private Function IsConnectionOpen(ByVal ConnectionInfos() As mRemoteNG.Connection.Info) As Boolean
                 Try
                     If ConnectionInfos IsNot Nothing Then
-                        For Each conI As mRemote.Connection.Info In ConnectionInfos
+                        For Each conI As mRemoteNG.Connection.Info In ConnectionInfos
                             If conI.OpenConnections.Count > 0 Then
                                 Return True
                             End If
@@ -650,29 +650,29 @@ Namespace UI
                         Exit Sub
                     End If
 
-                    Select Case mRemote.Tree.Node.GetNodeType(tNode)
-                        Case mRemote.Tree.Node.Type.Connection
-                            Dim conI As mRemote.Connection.Info = tNode.Tag
+                    Select Case mRemoteNG.Tree.Node.GetNodeType(tNode)
+                        Case mRemoteNG.Tree.Node.Type.Connection
+                            Dim conI As mRemoteNG.Connection.Info = tNode.Tag
 
                             Me.cMenTreeConnect.Enabled = True
                             Me.cMenTreeConnectWithOptions.Enabled = True
 
-                            If TryCast(tNode.Tag, mRemote.Connection.Info).OpenConnections.Count > 0 Then
+                            If TryCast(tNode.Tag, mRemoteNG.Connection.Info).OpenConnections.Count > 0 Then
                                 Me.cMenTreeDisconnect.Enabled = True
                             Else
                                 Me.cMenTreeDisconnect.Enabled = False
                             End If
 
-                            If conI.Protocol = mRemote.Connection.Protocol.Protocols.SSH1 Or conI.Protocol = mRemote.Connection.Protocol.Protocols.SSH2 Then
+                            If conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH1 Or conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH2 Then
                                 Me.cMenTreeToolsTransferFile.Enabled = True
                             Else
                                 Me.cMenTreeToolsTransferFile.Enabled = False
                             End If
 
-                            If conI.Protocol = mRemote.Connection.Protocol.Protocols.RDP Then
+                            If conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Then
                                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = True
                                 Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = True
-                            ElseIf conI.Protocol = mRemote.Connection.Protocol.Protocols.ICA Then
+                            ElseIf conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.ICA Then
                                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = True
                                 Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
                             Else
@@ -694,7 +694,7 @@ Namespace UI
 
                             Me.cMenTreeMoveUp.Enabled = True
                             Me.cMenTreeMoveDown.Enabled = True
-                        Case mRemote.Tree.Node.Type.Container
+                        Case mRemoteNG.Tree.Node.Type.Container
                             Me.cMenTreeConnect.Enabled = True
                             Me.cMenTreeConnectWithOptions.Enabled = True
                             Me.cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
@@ -703,8 +703,8 @@ Namespace UI
                             Me.cMenTreeDisconnect.Enabled = False
 
                             For Each n As TreeNode In tNode.Nodes
-                                If TypeOf n.Tag Is mRemote.Connection.Info Then
-                                    Dim cI As mRemote.Connection.Info = n.Tag
+                                If TypeOf n.Tag Is mRemoteNG.Connection.Info Then
+                                    Dim cI As mRemoteNG.Connection.Info = n.Tag
                                     If cI.OpenConnections.Count > 0 Then
                                         Me.cMenTreeDisconnect.Enabled = True
                                         Exit For
@@ -728,7 +728,7 @@ Namespace UI
 
                             Me.cMenTreeMoveUp.Enabled = True
                             Me.cMenTreeMoveDown.Enabled = True
-                        Case mRemote.Tree.Node.Type.Root
+                        Case mRemoteNG.Tree.Node.Type.Root
                             Me.cMenTreeConnect.Enabled = False
                             Me.cMenTreeConnectWithOptions.Enabled = False
                             Me.cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
@@ -784,7 +784,7 @@ Namespace UI
                         Exit Sub
                     End If
 
-                    If mRemote.Tree.Node.GetNodeType(dropNode) = mRemote.Tree.Node.Type.Root Then
+                    If mRemoteNG.Tree.Node.GetNodeType(dropNode) = mRemoteNG.Tree.Node.Type.Root Then
                         Exit Sub
                     End If
 
@@ -800,21 +800,21 @@ Namespace UI
                     'the TreeView root nodes, otherwise add it to the end of
                     'the dropNode child nodes
 
-                    If mRemote.Tree.Node.GetNodeType(targetNode) = mRemote.Tree.Node.Type.Root Or mRemote.Tree.Node.GetNodeType(targetNode) = mRemote.Tree.Node.Type.Container Then
+                    If mRemoteNG.Tree.Node.GetNodeType(targetNode) = mRemoteNG.Tree.Node.Type.Root Or mRemoteNG.Tree.Node.GetNodeType(targetNode) = mRemoteNG.Tree.Node.Type.Container Then
                         targetNode.Nodes.Insert(0, dropNode)
                     Else
                         targetNode.Parent.Nodes.Insert(targetNode.Index + 1, dropNode)
                     End If
 
-                    If mRemote.Tree.Node.GetNodeType(dropNode) = mRemote.Tree.Node.Type.Connection Or mRemote.Tree.Node.GetNodeType(dropNode) = mRemote.Tree.Node.Type.Container Then
-                        If mRemote.Tree.Node.GetNodeType(dropNode.Parent) = mRemote.Tree.Node.Type.Container Then
+                    If mRemoteNG.Tree.Node.GetNodeType(dropNode) = mRemoteNG.Tree.Node.Type.Connection Or mRemoteNG.Tree.Node.GetNodeType(dropNode) = mRemoteNG.Tree.Node.Type.Container Then
+                        If mRemoteNG.Tree.Node.GetNodeType(dropNode.Parent) = mRemoteNG.Tree.Node.Type.Container Then
                             dropNode.Tag.Parent = dropNode.Parent.Tag
-                        ElseIf mRemote.Tree.Node.GetNodeType(dropNode.Parent) = mRemote.Tree.Node.Type.Root Then
+                        ElseIf mRemoteNG.Tree.Node.GetNodeType(dropNode.Parent) = mRemoteNG.Tree.Node.Type.Root Then
                             dropNode.Tag.Parent = Nothing
-                            If mRemote.Tree.Node.GetNodeType(dropNode) = mRemote.Tree.Node.Type.Connection Then
-                                dropNode.Tag.Inherit = New mRemote.Connection.Info.Inheritance(dropNode.Tag, False)
-                            ElseIf mRemote.Tree.Node.GetNodeType(dropNode) = mRemote.Tree.Node.Type.Container Then
-                                dropNode.Tag.ConnectionInfo.Inherit = New mRemote.Connection.Info.Inheritance(dropNode.Tag.ConnectionInfo, False)
+                            If mRemoteNG.Tree.Node.GetNodeType(dropNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                                dropNode.Tag.Inherit = New mRemoteNG.Connection.Info.Inheritance(dropNode.Tag, False)
+                            ElseIf mRemoteNG.Tree.Node.GetNodeType(dropNode) = mRemoteNG.Tree.Node.Type.Container Then
+                                dropNode.Tag.ConnectionInfo.Inherit = New mRemoteNG.Connection.Info.Inheritance(dropNode.Tag.ConnectionInfo, False)
                             End If
                         End If
                     End If
@@ -921,23 +921,23 @@ Namespace UI
             End Sub
 
             Private Sub cMenTreeConnect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeConnect.Click
-                App.Runtime.OpenConnection(mRemote.Connection.Info.Force.DoNotJump)
+                App.Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.DoNotJump)
             End Sub
 
             Private Sub cMenTreeConnectWithOptionsConnectToConsoleSession_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeConnectWithOptionsConnectToConsoleSession.Click
-                App.Runtime.OpenConnection(mRemote.Connection.Info.Force.UseConsoleSession Or mRemote.Connection.Info.Force.DoNotJump)
+                App.Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.UseConsoleSession Or mRemoteNG.Connection.Info.Force.DoNotJump)
             End Sub
 
             Private Sub cMenTreeConnectWithOptionsDontConnectToConsoleSession_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeConnectWithOptionsDontConnectToConsoleSession.Click
-                App.Runtime.OpenConnection(mRemote.Connection.Info.Force.DontUseConsoleSession Or mRemote.Connection.Info.Force.DoNotJump)
+                App.Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.DontUseConsoleSession Or mRemoteNG.Connection.Info.Force.DoNotJump)
             End Sub
 
             Private Sub cMenTreeConnectWithOptionsConnectInFullscreen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeConnectWithOptionsConnectInFullscreen.Click
-                App.Runtime.OpenConnection(mRemote.Connection.Info.Force.Fullscreen Or mRemote.Connection.Info.Force.DoNotJump)
+                App.Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.Fullscreen Or mRemoteNG.Connection.Info.Force.DoNotJump)
             End Sub
 
             Private Sub cMenTreeConnectWithOptionsChoosePanelBeforeConnecting_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Click
-                App.Runtime.OpenConnection(mRemote.Connection.Info.Force.OverridePanel Or mRemote.Connection.Info.Force.DoNotJump)
+                App.Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.OverridePanel Or mRemoteNG.Connection.Info.Force.DoNotJump)
             End Sub
 
             Private Sub cMenTreeDisconnect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeDisconnect.Click
@@ -969,12 +969,12 @@ Namespace UI
             End Sub
 
             Private Sub cMenTreeToolsSortAscending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeToolsSortAscending.Click
-                mRemote.Tree.Node.Sort(Me.tvConnections.SelectedNode, Tools.Controls.TreeNodeSorter.SortType.Ascending)
+                mRemoteNG.Tree.Node.Sort(Me.tvConnections.SelectedNode, Tools.Controls.TreeNodeSorter.SortType.Ascending)
                 SaveConnectionsBG()
             End Sub
 
             Private Sub cMenTreeToolsSortDescending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeToolsSortDescending.Click
-                mRemote.Tree.Node.Sort(Me.tvConnections.SelectedNode, Tools.Controls.TreeNodeSorter.SortType.Descending)
+                mRemoteNG.Tree.Node.Sort(Me.tvConnections.SelectedNode, Tools.Controls.TreeNodeSorter.SortType.Descending)
                 SaveConnectionsBG()
             End Sub
 
@@ -987,27 +987,27 @@ Namespace UI
             End Sub
 
             Private Sub cMenTreeDuplicate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeDuplicate.Click
-                mRemote.Tree.Node.CloneNode(tvConnections.SelectedNode)
+                mRemoteNG.Tree.Node.CloneNode(tvConnections.SelectedNode)
                 SaveConnectionsBG()
             End Sub
 
             Private Sub cMenTreeRename_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeRename.Click
-                mRemote.Tree.Node.StartRenameSelectedNode()
+                mRemoteNG.Tree.Node.StartRenameSelectedNode()
                 SaveConnectionsBG()
             End Sub
 
             Private Sub cMenTreeDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeDelete.Click
-                mRemote.Tree.Node.DeleteSelectedNode()
+                mRemoteNG.Tree.Node.DeleteSelectedNode()
                 SaveConnectionsBG()
             End Sub
 
             Private Sub cMenTreeMoveUp_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeMoveUp.Click
-                mRemote.Tree.Node.MoveNodeUp()
+                mRemoteNG.Tree.Node.MoveNodeUp()
                 SaveConnectionsBG()
             End Sub
 
             Private Sub cMenTreeMoveDown_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeMoveDown.Click
-                mRemote.Tree.Node.MoveNodeDown()
+                mRemoteNG.Tree.Node.MoveNodeDown()
                 SaveConnectionsBG()
             End Sub
 #End Region
@@ -1015,11 +1015,11 @@ Namespace UI
 #Region "Context Menu Actions"
             Public Sub AddConnection()
                 Try
-                    Dim nNode As TreeNode = mRemote.Tree.Node.AddNode(mRemote.Tree.Node.Type.Connection)
+                    Dim nNode As TreeNode = mRemoteNG.Tree.Node.AddNode(mRemoteNG.Tree.Node.Type.Connection)
 
                     If nNode IsNot Nothing Then
-                        Dim nConI As New mRemote.Connection.Info()
-                        If TypeOf Me.tvConnections.SelectedNode.Tag Is mRemote.Container.Info Then
+                        Dim nConI As New mRemoteNG.Connection.Info()
+                        If TypeOf Me.tvConnections.SelectedNode.Tag Is mRemoteNG.Container.Info Then
                             nConI.Parent = Me.tvConnections.SelectedNode.Tag
                         Else
                             nConI.Inherit.TurnOffInheritanceCompletely()
@@ -1030,7 +1030,7 @@ Namespace UI
                         nNode.Tag = nConI
                         cL.Add(nConI)
 
-                        If mRemote.Tree.Node.GetNodeType(Me.tvConnections.SelectedNode) = mRemote.Tree.Node.Type.Connection Then
+                        If mRemoteNG.Tree.Node.GetNodeType(Me.tvConnections.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
                             Me.tvConnections.SelectedNode.Parent.Nodes.Add(nNode)
                         Else
                             Me.tvConnections.SelectedNode.Nodes.Add(nNode)
@@ -1046,27 +1046,27 @@ Namespace UI
 
             Public Sub AddFolder()
                 Try
-                    Dim nNode As TreeNode = mRemote.Tree.Node.AddNode(mRemote.Tree.Node.Type.Container)
+                    Dim nNode As TreeNode = mRemoteNG.Tree.Node.AddNode(mRemoteNG.Tree.Node.Type.Container)
 
                     If nNode IsNot Nothing Then
-                        Dim nContI As New mRemote.Container.Info()
-                        If mRemote.Tree.Node.GetNodeType(mRemote.Tree.Node.SelectedNode) = mRemote.Tree.Node.Type.Container Then
-                            nContI.Parent = mRemote.Tree.Node.SelectedNode.Tag
+                        Dim nContI As New mRemoteNG.Container.Info()
+                        If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Container Then
+                            nContI.Parent = mRemoteNG.Tree.Node.SelectedNode.Tag
                         Else
                             nContI.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
                         End If
 
                         nContI.TreeNode = nNode
-                        nContI.ConnectionInfo = New mRemote.Connection.Info(nContI)
+                        nContI.ConnectionInfo = New mRemoteNG.Connection.Info(nContI)
 
-                        If mRemote.Tree.Node.GetNodeType(mRemote.Tree.Node.SelectedNode) <> mRemote.Tree.Node.Type.Container Then
+                        If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) <> mRemoteNG.Tree.Node.Type.Container Then
                             nContI.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
                         End If
 
                         nNode.Tag = nContI
                         ctL.Add(nContI)
 
-                        If mRemote.Tree.Node.GetNodeType(Me.tvConnections.SelectedNode) = mRemote.Tree.Node.Type.Connection Then
+                        If mRemoteNG.Tree.Node.GetNodeType(Me.tvConnections.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
                             Me.tvConnections.SelectedNode.Parent.Nodes.Add(nNode)
                         Else
                             Me.tvConnections.SelectedNode.Nodes.Add(nNode)
@@ -1083,17 +1083,17 @@ Namespace UI
             Private Sub DisconnectConnection()
                 Try
                     If Me.tvConnections.SelectedNode IsNot Nothing Then
-                        If TypeOf Me.tvConnections.SelectedNode.Tag Is mRemote.Connection.Info Then
-                            Dim conI As mRemote.Connection.Info = Me.tvConnections.SelectedNode.Tag
+                        If TypeOf Me.tvConnections.SelectedNode.Tag Is mRemoteNG.Connection.Info Then
+                            Dim conI As mRemoteNG.Connection.Info = Me.tvConnections.SelectedNode.Tag
                             For i As Integer = 0 To conI.OpenConnections.Count - 1
                                 conI.OpenConnections(i).Disconnect()
                             Next
                         End If
 
-                        If TypeOf Me.tvConnections.SelectedNode.Tag Is mRemote.Container.Info Then
+                        If TypeOf Me.tvConnections.SelectedNode.Tag Is mRemoteNG.Container.Info Then
                             For Each n As TreeNode In Me.tvConnections.SelectedNode.Nodes
-                                If TypeOf n.Tag Is mRemote.Connection.Info Then
-                                    Dim conI As mRemote.Connection.Info = n.Tag
+                                If TypeOf n.Tag Is mRemoteNG.Connection.Info Then
+                                    Dim conI As mRemoteNG.Connection.Info = n.Tag
                                     For i As Integer = 0 To conI.OpenConnections.Count - 1
                                         conI.OpenConnections(i).Disconnect()
                                     Next
@@ -1110,7 +1110,7 @@ Namespace UI
                 Try
                     Windows.Show(Type.SSHTransfer)
 
-                    Dim conI As mRemote.Connection.Info = mRemote.Tree.Node.SelectedNode.Tag
+                    Dim conI As mRemoteNG.Connection.Info = mRemoteNG.Tree.Node.SelectedNode.Tag
 
                     Windows.sshtransferForm.Hostname = conI.Hostname
                     Windows.sshtransferForm.Username = conI.Username
@@ -1196,8 +1196,8 @@ Namespace UI
 
             Private Sub StartExternalApp(ByVal ExtA As Tools.ExternalApp)
                 Try
-                    If mRemote.Tree.Node.GetNodeType(mRemote.Tree.Node.SelectedNode) = mRemote.Tree.Node.Type.Connection Then
-                        ExtA.Start(mRemote.Tree.Node.SelectedNode.Tag)
+                    If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                        ExtA.Start(mRemoteNG.Tree.Node.SelectedNode.Tag)
                     End If
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
@@ -1207,11 +1207,11 @@ Namespace UI
 
 #Region "Menu"
             Private Sub mMenViewExpandAllFolders_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewExpandAllFolders.Click
-                mRemote.Tree.Node.ExpandAllNodes()
+                mRemoteNG.Tree.Node.ExpandAllNodes()
             End Sub
 
             Private Sub mMenViewCollapseAllFolders_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewCollapseAllFolders.Click
-                mRemote.Tree.Node.CollapseAllNodes()
+                mRemoteNG.Tree.Node.CollapseAllNodes()
             End Sub
 #End Region
 
@@ -1234,7 +1234,7 @@ Namespace UI
             End Sub
 
             Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
-                Me.tvConnections.SelectedNode = mRemote.Tree.Node.Find(Me.tvConnections.Nodes(0), Me.txtSearch.Text)
+                Me.tvConnections.SelectedNode = mRemoteNG.Tree.Node.Find(Me.tvConnections.Nodes(0), Me.txtSearch.Text)
             End Sub
 
             Private Sub tvConnections_KeyPress(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyPressEventArgs) Handles tvConnections.KeyPress
@@ -1253,7 +1253,7 @@ Namespace UI
             Private Sub tvConnections_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles tvConnections.KeyDown
                 Try
                     If e.KeyCode = Keys.Enter Then
-                        If TypeOf Me.tvConnections.SelectedNode.Tag Is mRemote.Connection.Info Then
+                        If TypeOf Me.tvConnections.SelectedNode.Tag Is mRemoteNG.Connection.Info Then
                             e.Handled = True
                             App.Runtime.OpenConnection()
                         Else

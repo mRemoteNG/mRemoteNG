@@ -1,5 +1,5 @@
 ﻿Imports System.ComponentModel
-Imports mRemote.Tools.LocalizedAttributes
+Imports mRemoteNG.Tools.LocalizedAttributes
 
 Namespace Credential
     Public Class Info

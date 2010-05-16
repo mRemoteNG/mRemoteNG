@@ -1,5 +1,5 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -71,14 +71,14 @@ Namespace UI
                 '
                 'cMenSessionRefresh
                 '
-                Me.cMenSessionRefresh.Image = Global.mRemote.My.Resources.Resources.Refresh
+                Me.cMenSessionRefresh.Image = Global.mRemoteNG.My.Resources.Resources.Refresh
                 Me.cMenSessionRefresh.Name = "cMenSessionRefresh"
                 Me.cMenSessionRefresh.Size = New System.Drawing.Size(123, 22)
                 Me.cMenSessionRefresh.Text = My.Resources.strRefresh
                 '
                 'cMenSessionLogOff
                 '
-                Me.cMenSessionLogOff.Image = Global.mRemote.My.Resources.Resources.Session_LogOff
+                Me.cMenSessionLogOff.Image = Global.mRemoteNG.My.Resources.Resources.Session_LogOff
                 Me.cMenSessionLogOff.Name = "cMenSessionLogOff"
                 Me.cMenSessionLogOff.Size = New System.Drawing.Size(123, 22)
                 Me.cMenSessionLogOff.Text = My.Resources.strLogOff
@@ -140,9 +140,9 @@ Namespace UI
 #Region "Private Methods"
             Private Sub GetSessionsBG()
                 Try
-                    Dim tS As New mRemote.Connection.Protocol.RDP.TerminalSessions
+                    Dim tS As New mRemoteNG.Connection.Protocol.RDP.TerminalSessions
                     Dim sU As New Security.Impersonator
-                    Dim tsSessions As New mRemote.Connection.Protocol.RDP.Sessions
+                    Dim tsSessions As New mRemoteNG.Connection.Protocol.RDP.Sessions
 
                     sU.StartImpersonation(tDomain, tUserName, tPassword)
 
@@ -189,7 +189,7 @@ Namespace UI
                         Exit Sub
                     End If
 
-                    Dim ts As New mRemote.Connection.Protocol.RDP.TerminalSessions
+                    Dim ts As New mRemoteNG.Connection.Protocol.RDP.TerminalSessions
                     Dim sU As New Security.Impersonator
 
                     sU.StartImpersonation(tDomain, tUserName, tPassword)
@@ -259,17 +259,17 @@ Namespace UI
                 Try
                     Dim nowHost As String = ""
 
-                    If TypeOf mRemote.Tree.Node.SelectedNode.Tag Is mRemote.Connection.Info Then
-                        nowHost = TryCast(mRemote.Tree.Node.SelectedNode.Tag, mRemote.Connection.Info).Hostname
+                    If TypeOf mRemoteNG.Tree.Node.SelectedNode.Tag Is mRemoteNG.Connection.Info Then
+                        nowHost = TryCast(mRemoteNG.Tree.Node.SelectedNode.Tag, mRemoteNG.Connection.Info).Hostname
                     Else
                         Me.ClearList()
                         Exit Sub
                     End If
 
                     If My.Settings.AutomaticallyGetSessionInfo And Me._CurrentHost = nowHost Then
-                        Dim conI As mRemote.Connection.Info = mRemote.Tree.Node.SelectedNode.Tag
+                        Dim conI As mRemoteNG.Connection.Info = mRemoteNG.Tree.Node.SelectedNode.Tag
 
-                        If conI.Protocol = mRemote.Connection.Protocol.Protocols.RDP Or conI.Protocol = mRemote.Connection.Protocol.Protocols.ICA Then
+                        If conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Or conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.ICA Then
                             'continue
                         Else
                             Me.ClearList()
@@ -302,20 +302,20 @@ Namespace UI
             End Sub
 
             Public Sub GetSessions()
-                If mRemote.Tree.Node.SelectedNode Is Nothing Then
+                If mRemoteNG.Tree.Node.SelectedNode Is Nothing Then
                     Exit Sub
                 End If
 
-                If TypeOf mRemote.Tree.Node.SelectedNode.Tag Is mRemote.Connection.Info Then
+                If TypeOf mRemoteNG.Tree.Node.SelectedNode.Tag Is mRemoteNG.Connection.Info Then
                     'continue
                 Else
                     Me.ClearList()
                     Exit Sub
                 End If
 
-                Dim conI As mRemote.Connection.Info = mRemote.Tree.Node.SelectedNode.Tag
+                Dim conI As mRemoteNG.Connection.Info = mRemoteNG.Tree.Node.SelectedNode.Tag
 
-                If conI.Protocol = mRemote.Connection.Protocol.Protocols.RDP Or conI.Protocol = mRemote.Connection.Protocol.Protocols.ICA Then
+                If conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Or conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.ICA Then
                     'continue
                 Else
                     Me.ClearList()
@@ -364,15 +364,15 @@ Namespace UI
             End Sub
 
             Public Sub KillSession()
-                If TypeOf mRemote.Tree.Node.SelectedNode.Tag Is mRemote.Connection.Info Then
+                If TypeOf mRemoteNG.Tree.Node.SelectedNode.Tag Is mRemoteNG.Connection.Info Then
                     'continue
                 Else
                     Exit Sub
                 End If
 
-                Dim conI As mRemote.Connection.Info = mRemote.Tree.Node.SelectedNode.Tag
+                Dim conI As mRemoteNG.Connection.Info = mRemoteNG.Tree.Node.SelectedNode.Tag
 
-                If conI.Protocol = mRemote.Connection.Protocol.Protocols.RDP Then
+                If conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Then
                     'continue
                 Else
                     Exit Sub

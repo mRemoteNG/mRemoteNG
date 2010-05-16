@@ -1,9 +1,9 @@
 Imports System.Windows.Forms
 Imports System.Xml
 Imports System.IO
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 Imports System.Data.SqlClient
-Imports mRemote.Tools.Misc
+Imports mRemoteNG.Tools.Misc
 
 Namespace Config
     Namespace Connections
@@ -178,8 +178,8 @@ Namespace Config
 
                 Dim strProtected As String
                 If tN.Tag IsNot Nothing Then
-                    If TryCast(tN.Tag, mRemote.Root.Info).Password = True Then
-                        pW = TryCast(tN.Tag, mRemote.Root.Info).PasswordString
+                    If TryCast(tN.Tag, mRemoteNG.Root.Info).Password = True Then
+                        pW = TryCast(tN.Tag, mRemoteNG.Root.Info).PasswordString
                         strProtected = Security.Crypt.Encrypt("ThisIsProtected", pW)
                     Else
                         strProtected = Security.Crypt.Encrypt("ThisIsNotProtected", pW)
@@ -534,8 +534,8 @@ Namespace Config
                     If exp Then
                         xW.WriteAttributeString("Protected", "", Security.Crypt.Encrypt("ThisIsNotProtected", pW))
                     Else
-                        If TryCast(tN.Tag, mRemote.Root.Info).Password = True Then
-                            pW = TryCast(tN.Tag, mRemote.Root.Info).PasswordString
+                        If TryCast(tN.Tag, mRemoteNG.Root.Info).Password = True Then
+                            pW = TryCast(tN.Tag, mRemoteNG.Root.Info).PasswordString
                             xW.WriteAttributeString("Protected", "", Security.Crypt.Encrypt("ThisIsProtected", pW))
                         Else
                             xW.WriteAttributeString("Protected", "", Security.Crypt.Encrypt("ThisIsNotProtected", pW))

@@ -33,12 +33,11 @@ Namespace App
 
         Public Shared LastSelected As String
 
-        Public Shared DefaultConnection As mRemote.Connection.Info
-        Public Shared DefaultInheritance As mRemote.Connection.Info.Inheritance
+        Public Shared DefaultConnection As mRemoteNG.Connection.Info
+        Public Shared DefaultInheritance As mRemoteNG.Connection.Info.Inheritance
 
         Public Shared ExtApps As New ArrayList()
 #End Region
-
 
         Public Class Windows
             Public Shared treeForm As UI.Window.Tree
@@ -245,7 +244,7 @@ Namespace App
             End Sub
 
             Public Shared Sub CreateLogger()
-                log4net.Config.XmlConfigurator.Configure(New FileInfo("mRemote.exe.config"))
+                log4net.Config.XmlConfigurator.Configure(New FileInfo("mRemoteNG.exe.config"))
 
                 log = log4net.LogManager.GetLogger("mRemoteNG.Log")
             End Sub
@@ -331,7 +330,6 @@ Namespace App
                         NoReconnectParam = "norc"
                     End If
 
-
                     If ConsParam <> "" Then
                         If File.Exists(cmd(ConsParam)) = False Then
                             If File.Exists(My.Application.Info.DirectoryPath & "\" & cmd(ConsParam)) Then
@@ -369,7 +367,7 @@ Namespace App
                         My.Settings.ResetToolbars = True
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't parse command line args" & vbNewLine & ex.Message)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strCommandLineArgsCouldNotBeParsed & vbNewLine & ex.Message)
                 End Try
             End Sub
 
@@ -411,20 +409,21 @@ Namespace App
 
                     If Editions.Spanlink.Enabled Then
                         If SaveReport() Then
+                            ' ToDo: Change Report.log location
                             File.Delete(My.Application.Info.DirectoryPath & "\Report.log")
                         End If
                     End If
 
                     sS.Save()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't save settings or dispose SysTray Icon" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSettingsCouldNotBeSavedOrTrayDispose & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class
 
 #Region "Default Connection"
-        Public Shared Function DefaultConnectionFromSettings() As mRemote.Connection.Info
-            DefaultConnection = New mRemote.Connection.Info
+        Public Shared Function DefaultConnectionFromSettings() As mRemoteNG.Connection.Info
+            DefaultConnection = New mRemoteNG.Connection.Info
             DefaultConnection.IsDefault = True
 
             Return DefaultConnection
@@ -476,8 +475,8 @@ Namespace App
 #End Region
 
 #Region "Default Inheritance"
-        Public Shared Function DefaultInheritanceFromSettings() As mRemote.Connection.Info.Inheritance
-            DefaultInheritance = New mRemote.Connection.Info.Inheritance(Nothing)
+        Public Shared Function DefaultInheritanceFromSettings() As mRemoteNG.Connection.Info.Inheritance
+            DefaultInheritance = New mRemoteNG.Connection.Info.Inheritance(Nothing)
             DefaultInheritance.IsDefault = True
 
             Return DefaultInheritance
@@ -807,9 +806,9 @@ Namespace App
                     For i As Integer = 0 To lD.FileNames.Length - 1
                         nNode = Tree.Node.AddNode(Tree.Node.Type.Container, "Import #" & i)
 
-                        Dim nContI As New mRemote.Container.Info()
+                        Dim nContI As New mRemoteNG.Container.Info()
                         nContI.TreeNode = nNode
-                        nContI.ConnectionInfo = New mRemote.Connection.Info(nContI)
+                        nContI.ConnectionInfo = New mRemoteNG.Connection.Info(nContI)
 
                         If Tree.Node.SelectedNode IsNot Nothing Then
                             If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Container Then
@@ -848,7 +847,7 @@ Namespace App
 
                         Dim nNode As TreeNode = Tree.Node.AddNode(Tree.Node.Type.Connection, Path.GetFileNameWithoutExtension(lD.FileNames(i)))
 
-                        Dim nConI As New mRemote.Connection.Info()
+                        Dim nConI As New mRemoteNG.Connection.Info()
                         nConI.Inherit = New Connection.Info.Inheritance(nConI)
 
                         nConI.Name = nNode.Text
@@ -956,14 +955,14 @@ Namespace App
             End Try
         End Sub
 
-        Public Shared Sub ImportConnectionsFromPortScan(ByVal Hosts As ArrayList, ByVal Protocol As mRemote.Connection.Protocol.Protocols)
+        Public Shared Sub ImportConnectionsFromPortScan(ByVal Hosts As ArrayList, ByVal Protocol As mRemoteNG.Connection.Protocol.Protocols)
             For Each Host As Tools.PortScan.ScanHost In Hosts
-                Dim finalProt As mRemote.Connection.Protocol.Protocols
+                Dim finalProt As mRemoteNG.Connection.Protocol.Protocols
                 Dim protOK As Boolean = False
 
                 Dim nNode As TreeNode = Tree.Node.AddNode(Tree.Node.Type.Connection, Host.HostNameWithoutDomain)
 
-                Dim nConI As New mRemote.Connection.Info()
+                Dim nConI As New mRemoteNG.Connection.Info()
                 nConI.Inherit = New Connection.Info.Inheritance(nConI)
 
                 nConI.Name = Host.HostNameWithoutDomain
@@ -1148,7 +1147,7 @@ Namespace App
 
                 conS.Save()
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(My.Resources.strConnectionsFileCouldNotSaveAs,conS.ConnectionFileName) & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strConnectionsFileCouldNotSaveAs, conS.ConnectionFileName) & vbNewLine & ex.Message)
             End Try
 
         End Sub
@@ -1224,7 +1223,7 @@ Namespace App
             End Try
         End Sub
 
-        Public Shared Sub OpenConnection(ByVal Force As mRemote.Connection.Info.Force)
+        Public Shared Sub OpenConnection(ByVal Force As mRemoteNG.Connection.Info.Force)
             Try
                 If Windows.treeForm.tvConnections.SelectedNode.Tag Is Nothing Then
                     Exit Sub
@@ -1246,7 +1245,7 @@ Namespace App
             End Try
         End Sub
 
-        Public Shared Sub OpenConnection(ByVal ConnectionInfo As mRemote.Connection.Info)
+        Public Shared Sub OpenConnection(ByVal ConnectionInfo As mRemoteNG.Connection.Info)
             Try
                 OpenConnection(ConnectionInfo, Connection.Info.Force.None)
             Catch ex As Exception
@@ -1254,7 +1253,7 @@ Namespace App
             End Try
         End Sub
 
-        Public Shared Sub OpenConnection(ByVal ConnectionInfo As mRemote.Connection.Info, ByVal ConnectionForm As Form)
+        Public Shared Sub OpenConnection(ByVal ConnectionInfo As mRemoteNG.Connection.Info, ByVal ConnectionForm As Form)
             Try
                 OpenConnectionFinal(ConnectionInfo, Connection.Info.Force.None, ConnectionForm)
             Catch ex As Exception
@@ -1262,7 +1261,7 @@ Namespace App
             End Try
         End Sub
 
-        Public Shared Sub OpenConnection(ByVal ConnectionInfo As mRemote.Connection.Info, ByVal ConnectionForm As Form, ByVal Force As Connection.Info.Force)
+        Public Shared Sub OpenConnection(ByVal ConnectionInfo As mRemoteNG.Connection.Info, ByVal ConnectionForm As Form, ByVal Force As Connection.Info.Force)
             Try
                 OpenConnectionFinal(ConnectionInfo, Force, ConnectionForm)
             Catch ex As Exception
@@ -1270,7 +1269,7 @@ Namespace App
             End Try
         End Sub
 
-        Public Shared Sub OpenConnection(ByVal ConnectionInfo As mRemote.Connection.Info, ByVal Force As mRemote.Connection.Info.Force)
+        Public Shared Sub OpenConnection(ByVal ConnectionInfo As mRemoteNG.Connection.Info, ByVal Force As mRemoteNG.Connection.Info.Force)
             Try
                 OpenConnectionFinal(ConnectionInfo, Force, Nothing)
             Catch ex As Exception
@@ -1279,7 +1278,7 @@ Namespace App
         End Sub
 
 
-        Private Shared Sub OpenConnectionFinal(ByVal nCi As mRemote.Connection.Info, ByVal Force As mRemote.Connection.Info.Force, ByVal ConForm As Form)
+        Private Shared Sub OpenConnectionFinal(ByVal nCi As mRemoteNG.Connection.Info, ByVal Force As mRemoteNG.Connection.Info.Force, ByVal ConForm As Form)
             Try
                 If nCi.Hostname = "" And nCi.Protocol <> Connection.Protocol.Protocols.IntApp Then
                     mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strConnectionOpenFailedNoHostname)
@@ -1412,7 +1411,7 @@ Namespace App
         End Sub
 
         Public Shared Function SwitchToOpenConnection(ByVal nCi As Connection.Info) As Boolean
-            Dim IC As mRemote.Connection.InterfaceControl = FindConnectionContainer(nCi)
+            Dim IC As mRemoteNG.Connection.InterfaceControl = FindConnectionContainer(nCi)
 
             If IC IsNot Nothing Then
                 TryCast(IC.FindForm, UI.Window.Connection).Focus()
@@ -1480,7 +1479,7 @@ Namespace App
         End Sub
 
         Public Shared Sub Prot_Event_Connected(ByVal sender As Object)
-            Dim prot As mRemote.Connection.Protocol.Base = sender
+            Dim prot As mRemoteNG.Connection.Protocol.Base = sender
 
             mC.AddMessage(Messages.MessageClass.InformationMsg, "Protocol Event Connected", True)
             mC.AddMessage(Messages.MessageClass.ReportMsg, "Connection to " & prot.InterfaceControl.Info.Hostname & " via " & prot.InterfaceControl.Info.Protocol.ToString & " established by user " & My.User.Name & " (Description: " & prot.InterfaceControl.Info.Description & "; User Field: " & prot.InterfaceControl.Info.UserField & ")")
@@ -1532,7 +1531,7 @@ Namespace App
 
 #Region "Misc"
         Public Shared Sub GoToURL(ByVal URL As String)
-            Dim cI As New mRemote.Connection.Info
+            Dim cI As New mRemoteNG.Connection.Info
 
             cI.Name = ""
             cI.Hostname = URL
@@ -1544,7 +1543,7 @@ Namespace App
             cI.SetDefaultPort()
             cI.IsQuicky = True
 
-            App.Runtime.OpenConnection(cI, mRemote.Connection.Info.Force.DoNotJump)
+            App.Runtime.OpenConnection(cI, mRemoteNG.Connection.Info.Force.DoNotJump)
         End Sub
 
         Public Shared Sub GoToWebsite()

@@ -1,9 +1,8 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
 Imports Tamir.SharpSsh
-Imports Tamir.SharpSsh.jsch
 Imports System.IO
 Imports System.Threading
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -122,7 +121,7 @@ Namespace UI
                 Me.btnBrowse.Name = "btnBrowse"
                 Me.btnBrowse.Size = New System.Drawing.Size(81, 23)
                 Me.btnBrowse.TabIndex = 30
-                Me.btnBrowse.Text = Global.mRemote.My.Resources.Resources.strButtonBrowse
+                Me.btnBrowse.Text = Global.mRemoteNG.My.Resources.Resources.strButtonBrowse
                 Me.btnBrowse.UseVisualStyleBackColor = True
                 '
                 'grpConnection
@@ -262,7 +261,7 @@ Namespace UI
                 '
                 Me.btnTransfer.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.btnTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.btnTransfer.Image = Global.mRemote.My.Resources.Resources.SSHTransfer
+                Me.btnTransfer.Image = Global.mRemoteNG.My.Resources.Resources.SSHTransfer
                 Me.btnTransfer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
                 Me.btnTransfer.Location = New System.Drawing.Point(597, 382)
                 Me.btnTransfer.Name = "btnTransfer"
@@ -291,7 +290,7 @@ Namespace UI
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
                 Me.Name = "SSHTransfer"
-                Me.TabText = Global.mRemote.My.Resources.Resources.strMenuSSHFileTransfer
+                Me.TabText = Global.mRemoteNG.My.Resources.Resources.strMenuSSHFileTransfer
                 Me.Text = "SSH File Transfer"
                 Me.grpFiles.ResumeLayout(False)
                 Me.grpFiles.PerformLayout()

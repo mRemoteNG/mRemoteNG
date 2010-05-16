@@ -1,6 +1,6 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
 Imports System.IO
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -68,7 +68,7 @@ Namespace UI
                 '
                 'pbLogo
                 '
-                Me.pbLogo.Image = Global.mRemote.My.Resources.Resources.Logo
+                Me.pbLogo.Image = Global.mRemoteNG.My.Resources.Resources.Logo
                 Me.pbLogo.Location = New System.Drawing.Point(8, 8)
                 Me.pbLogo.Name = "pbLogo"
                 Me.pbLogo.Size = New System.Drawing.Size(492, 128)
@@ -211,7 +211,7 @@ Namespace UI
                 Me.Controls.Add(Me.pnlBottom)
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.Icon = Global.mRemote.My.Resources.Resources.mRemote_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.Resources.mRemote_Icon
                 Me.MaximumSize = New System.Drawing.Size(20000, 10000)
                 Me.Name = "About"
                 Me.TabText = "About"

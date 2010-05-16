@@ -1,4 +1,4 @@
-﻿Imports mRemote.App.Runtime
+﻿Imports mRemoteNG.App.Runtime
 Imports System.IO
 Imports System.ComponentModel
 

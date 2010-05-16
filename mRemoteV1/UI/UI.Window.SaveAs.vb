@@ -1,5 +1,5 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -105,7 +105,7 @@ Namespace UI
                 '
                 'PictureBox1
                 '
-                Me.PictureBox1.Image = Global.mRemote.My.Resources.Resources.WarningSmall
+                Me.PictureBox1.Image = Global.mRemoteNG.My.Resources.Resources.WarningSmall
                 Me.PictureBox1.Location = New System.Drawing.Point(15, 31)
                 Me.PictureBox1.Name = "PictureBox1"
                 Me.PictureBox1.Size = New System.Drawing.Size(16, 16)
@@ -123,7 +123,7 @@ Namespace UI
                 Me.Controls.Add(Me.lvSecurity)
                 Me.Controls.Add(Me.btnCancel)
                 Me.Controls.Add(Me.btnOK)
-                Me.Icon = Global.mRemote.My.Resources.Resources.Connections_SaveAs_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Connections_SaveAs_Icon
                 Me.Name = "SaveAs"
                 Me.TabText = "Save Connections As"
                 Me.Text = "Save Connections As"

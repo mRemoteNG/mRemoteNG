@@ -1,6 +1,4 @@
-﻿Imports System.IO
-
-Namespace App
+﻿Namespace App
     Namespace Editions
         Public Class Spanlink
             Public Shared Enabled As Boolean = True

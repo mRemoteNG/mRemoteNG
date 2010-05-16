@@ -1,6 +1,6 @@
 Imports System.Windows.Forms
 Imports System.Threading
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace Connection
     Namespace Protocol
@@ -39,12 +39,12 @@ Namespace Connection
             End Property
 #End Region
 
-            Private _Force As mRemote.Connection.Info.Force
-            Public Property Force() As mRemote.Connection.Info.Force
+            Private _Force As mRemoteNG.Connection.Info.Force
+            Public Property Force() As mRemoteNG.Connection.Info.Force
                 Get
                     Return Me._Force
                 End Get
-                Set(ByVal value As mRemote.Connection.Info.Force)
+                Set(ByVal value As mRemoteNG.Connection.Info.Force)
                     Me._Force = value
                 End Set
             End Property

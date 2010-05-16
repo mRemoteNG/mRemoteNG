@@ -1,6 +1,6 @@
 Imports System.Windows.Forms
 Imports System.ComponentModel
-Imports mRemote.Tools.LocalizedAttributes
+Imports mRemoteNG.Tools.LocalizedAttributes
 
 Namespace Root
     <DefaultProperty("Name")> _
@@ -38,7 +38,7 @@ Namespace Root
            DesignOnly(False), _
            LocalizedDisplayName("strPasswordProtect"), _
            Attributes.Root(), _
-           TypeConverter(GetType(mRemote.Tools.Misc.YesNoTypeConverter))> _
+           TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
         Public Property Password() As Boolean
             Get
                 Return _Password

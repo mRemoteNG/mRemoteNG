@@ -1,5 +1,5 @@
 ﻿Imports System.Windows.Forms
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace Connection
     Namespace Protocol

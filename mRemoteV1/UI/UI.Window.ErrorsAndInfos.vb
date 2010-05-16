@@ -1,5 +1,5 @@
 Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -116,7 +116,7 @@ Namespace UI
                 '
                 'cMenMCCopy
                 '
-                Me.cMenMCCopy.Image = Global.mRemote.My.Resources.Resources.Copy
+                Me.cMenMCCopy.Image = Global.mRemoteNG.My.Resources.Resources.Copy
                 Me.cMenMCCopy.Name = "cMenMCCopy"
                 Me.cMenMCCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
                 Me.cMenMCCopy.Size = New System.Drawing.Size(136, 22)
@@ -124,7 +124,7 @@ Namespace UI
                 '
                 'cMenMCDelete
                 '
-                Me.cMenMCDelete.Image = Global.mRemote.My.Resources.Resources.Delete
+                Me.cMenMCDelete.Image = Global.mRemoteNG.My.Resources.Resources.Delete
                 Me.cMenMCDelete.Name = "cMenMCDelete"
                 Me.cMenMCDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete
                 Me.cMenMCDelete.Size = New System.Drawing.Size(136, 22)
@@ -142,7 +142,7 @@ Namespace UI
                 Me.Controls.Add(Me.lvErrorCollector)
                 Me.Controls.Add(Me.pnlErrorMsg)
                 Me.HideOnClose = True
-                Me.Icon = Global.mRemote.My.Resources.Resources.Info_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Info_Icon
                 Me.Name = "ErrorsAndInfos"
                 Me.TabText = My.Resources.strMenuNotifications
                 Me.Text = My.Resources.strMenuNotifications
@@ -351,7 +351,7 @@ Namespace UI
                 End Try
             End Sub
 #End Region
-            
+
             Public Enum ControlLayout
                 Vertical = 0
                 Horizontal = 1

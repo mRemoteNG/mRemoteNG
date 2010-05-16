@@ -1,6 +1,6 @@
 Imports System.Windows.Forms
 Imports System.Xml
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 Imports System.Data
 Imports System.Data.SqlClient
 Imports System.IO
@@ -537,9 +537,9 @@ Namespace Config
                         End If
 
                         If Me.confVersion >= 2.2 Then
-                            conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.RDP.RDGatewayUsageMethod), .Item("RDGatewayUsageMethod"))
+                            conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), .Item("RDGatewayUsageMethod"))
                             conI.RDGatewayHostname = .Item("RDGatewayHostname")
-                            conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Item("RDGatewayUseConnectionCredentials"))
+                            conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Item("RDGatewayUseConnectionCredentials"))
                             conI.RDGatewayUsername = .Item("RDGatewayUsername")
                             conI.RDGatewayPassword = Security.Crypt.Decrypt(.Item("RDGatewayPassword"), pW)
                             conI.RDGatewayDomain = .Item("RDGatewayDomain")
@@ -929,7 +929,7 @@ Namespace Config
                         End If
 
                         If Me.confVersion > 1.5 Then '1.6
-                            conI.ICAEncryption = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.ICA.EncryptionStrength), .Attributes("ICAEncryptionStrength").Value)
+                            conI.ICAEncryption = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.ICA.EncryptionStrength), .Attributes("ICAEncryptionStrength").Value)
                             conI.Inherit.ICAEncryption = .Attributes("InheritICAEncryptionStrength").Value
 
                             conI.PreExtApp = .Attributes("PreExtApp").Value
@@ -939,16 +939,16 @@ Namespace Config
                         End If
 
                         If Me.confVersion > 1.6 Then '1.7
-                            conI.VNCCompression = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.VNC.Compression), .Attributes("VNCCompression").Value)
-                            conI.VNCEncoding = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.VNC.Encoding), .Attributes("VNCEncoding").Value)
-                            conI.VNCAuthMode = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.VNC.AuthMode), .Attributes("VNCAuthMode").Value)
-                            conI.VNCProxyType = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.VNC.ProxyType), .Attributes("VNCProxyType").Value)
+                            conI.VNCCompression = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.Compression), .Attributes("VNCCompression").Value)
+                            conI.VNCEncoding = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.Encoding), .Attributes("VNCEncoding").Value)
+                            conI.VNCAuthMode = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.AuthMode), .Attributes("VNCAuthMode").Value)
+                            conI.VNCProxyType = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.ProxyType), .Attributes("VNCProxyType").Value)
                             conI.VNCProxyIP = .Attributes("VNCProxyIP").Value
                             conI.VNCProxyPort = .Attributes("VNCProxyPort").Value
                             conI.VNCProxyUsername = .Attributes("VNCProxyUsername").Value
                             conI.VNCProxyPassword = Security.Crypt.Decrypt(.Attributes("VNCProxyPassword").Value, pW)
-                            conI.VNCColors = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.VNC.Colors), .Attributes("VNCColors").Value)
-                            conI.VNCSmartSizeMode = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.VNC.SmartSizeMode), .Attributes("VNCSmartSizeMode").Value)
+                            conI.VNCColors = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.Colors), .Attributes("VNCColors").Value)
+                            conI.VNCSmartSizeMode = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.VNC.SmartSizeMode), .Attributes("VNCSmartSizeMode").Value)
                             conI.VNCViewOnly = .Attributes("VNCViewOnly").Value
 
                             conI.Inherit.VNCCompression = .Attributes("InheritVNCCompression").Value
@@ -965,13 +965,13 @@ Namespace Config
                         End If
 
                         If Me.confVersion > 1.7 Then '1.8
-                            conI.RDPAuthenticationLevel = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.RDP.AuthenticationLevel), .Attributes("RDPAuthenticationLevel").Value)
+                            conI.RDPAuthenticationLevel = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.AuthenticationLevel), .Attributes("RDPAuthenticationLevel").Value)
 
                             conI.Inherit.RDPAuthenticationLevel = .Attributes("InheritRDPAuthenticationLevel").Value
                         End If
 
                         If Me.confVersion > 1.8 Then '1.9
-                            conI.RenderingEngine = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.HTTPBase.RenderingEngine), .Attributes("RenderingEngine").Value)
+                            conI.RenderingEngine = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.HTTPBase.RenderingEngine), .Attributes("RenderingEngine").Value)
                             conI.MacAddress = .Attributes("MacAddress").Value
 
                             conI.Inherit.RenderingEngine = .Attributes("InheritRenderingEngine").Value
@@ -989,9 +989,9 @@ Namespace Config
                         End If
 
                         If Me.confVersion > 2.1 Then '2.2
-                            conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.RDP.RDGatewayUsageMethod), .Attributes("RDGatewayUsageMethod").Value)
+                            conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), .Attributes("RDGatewayUsageMethod").Value)
                             conI.RDGatewayHostname = .Attributes("RDGatewayHostname").Value
-                            conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Attributes("RDGatewayUseConnectionCredentials").Value)
+                            conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Attributes("RDGatewayUseConnectionCredentials").Value)
                             conI.RDGatewayUsername = .Attributes("RDGatewayUsername").Value
                             conI.RDGatewayPassword = Security.Crypt.Decrypt(.Attributes("RDGatewayPassword").Value, pW)
                             conI.RDGatewayDomain = .Attributes("RDGatewayDomain").Value
@@ -1010,7 +1010,7 @@ Namespace Config
                 End Try
             End Function
 
-            Private Function Authenticate(ByVal Value As String, ByVal CompareToOriginalValue As Boolean, Optional ByVal RootInfo As mRemote.Root.Info = Nothing) As Boolean
+            Private Function Authenticate(ByVal Value As String, ByVal CompareToOriginalValue As Boolean, Optional ByVal RootInfo As mRemoteNG.Root.Info = Nothing) As Boolean
                 If CompareToOriginalValue Then
                     Do Until Security.Crypt.Decrypt(Value, pW) <> Value
                         pW = Tools.Misc.PasswordDialog(False)

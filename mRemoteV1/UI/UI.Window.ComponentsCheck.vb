@@ -1,6 +1,6 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
 Imports System.IO
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 Imports System.Threading
 
 Namespace UI
@@ -415,7 +415,7 @@ Namespace UI
                 Me.Controls.Add(Me.pnlChecks)
                 Me.Controls.Add(Me.chkAlwaysShow)
                 Me.Controls.Add(Me.btnCheckAgain)
-                Me.Icon = Global.mRemote.My.Resources.Resources.ComponentsCheck_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.Resources.ComponentsCheck_Icon
                 Me.Name = "ComponentsCheck"
                 Me.TabText = "Components Check"
                 Me.Text = "Components Check"
@@ -647,7 +647,7 @@ Namespace UI
                 End Try
             End Sub
 #End Region
-            
+
         End Class
     End Namespace
 End Namespace

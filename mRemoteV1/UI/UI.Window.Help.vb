@@ -1,5 +1,4 @@
-﻿Imports mRemote.App.Runtime
-Imports WeifenLuo.WinFormsUI.Docking
+﻿Imports WeifenLuo.WinFormsUI.Docking
 
 Namespace UI
     Namespace Window
@@ -195,7 +194,7 @@ Namespace UI
                 '
                 Me.ClientSize = New System.Drawing.Size(542, 323)
                 Me.Controls.Add(Me.pnlSplitter)
-                Me.Icon = Global.mRemote.My.Resources.Resources.Help_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Help_Icon
                 Me.Name = "Help"
                 Me.TabText = "Help"
                 Me.Text = "Help"
