@@ -266,7 +266,7 @@ Namespace Config
 
                     sqlCon.Close()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "LoadFromSQL failed (Config.Connections.Load)" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLoadFromSqlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -412,7 +412,7 @@ Namespace Config
                         'AddNodesFromSQL(tNode)
                     End While
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodesFromSQL failed (Config.Connections.Load)" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strAddNodesFromSqlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -557,7 +557,7 @@ Namespace Config
 
                     Return conI
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetConnectionInfoFromSQL failed (Config.Connections.Load)" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strGetConnectionInfoFromSqlFailed & vbNewLine & ex.Message, True)
                 End Try
 
                 Return Nothing
@@ -630,7 +630,7 @@ Namespace Config
                         Me.confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes("ConfVersion").Value)
                         My.Application.ChangeCulture(originalCulture.ToString)
                     Else
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, "You are trying to load a connection file that was created using an very early version of mRemote, this could result in an runtime error." & vbNewLine & "If you run into such an error, please create a new connection file!")
+                        mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strOldConffile)
                     End If
 
                     ' SECTION 2. Initialize the treeview control.
@@ -668,7 +668,7 @@ Namespace Config
                     End If
 
                     If Me._Import = True And imp = False Then
-                        mC.AddMessage(Messages.MessageClass.InformationMsg, "You cannot import a normal connection file." & vbNewLine & "Please use File - Load Connections for normal connection files!")
+                        mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strCannotImportNormalSessionFile)
 
                         Exit Sub
                     End If
@@ -707,7 +707,7 @@ Namespace Config
                     App.Runtime.Windows.treeForm.InitialRefresh()
                 Catch ex As Exception
                     App.Runtime.ConnectionsFileLoaded = False
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "LoadFromXML failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLoadFromXMLFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -783,7 +783,7 @@ Namespace Config
                         inTreeNode.Text = inXmlNode.Attributes("Name").Value.Trim
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeFromXML failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strAddNodeFromXMLFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1005,7 +1005,7 @@ Namespace Config
 
                     Return conI
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetConnectionInfoFromXml failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strGetConnectionInfoFromXmlFailed & vbNewLine & ex.Message, True)
                     Return Nothing
                 End Try
             End Function

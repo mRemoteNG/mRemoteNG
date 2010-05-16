@@ -142,15 +142,15 @@
     <value>&amp;Stop</value>
   </data>
 	<data name="strConfirmDeleteNodeConnection" xml:space="preserve">
-    <value>Are you sure you want to delete the connection, "{0}"?</value>
+    <value>Sind Sie sicher dass Sie die Verbindung "{0}" entfernen möchten?</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strConfirmDeleteNodeFolder" xml:space="preserve">
-    <value>Are you sure you want to delete the empty folder, "{0}"?</value>
+    <value>Sind Sie sicher dass Sie den leeren Ordner "{0}" entfernen möchten?</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
-    <value>Are you sure you want to delete the folder, "{0}"? Any folders or connections that it contains will also be deleted.</value>
+    <value>Sind Sie sicher dass Sie den Ordner "{0}" entfernen möchten? Jeder Ordner und jede Verbindung in diesem Ordner werden ebenfalls gelöscht.</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strConfirmExitMainInstruction" xml:space="preserve">
@@ -269,7 +269,7 @@
     <value>Bildschirmschnappschuss Verwaltung</value>
   </data>
 	<data name="strMenuSessions" xml:space="preserve">
-    <value>Sessions</value>
+    <value>Sitzungen</value>
   </data>
 	<data name="strMenuSessionsAndScreenshots" xml:space="preserve">
     <value>Sitzungen and Bildschirmschnappschüsse</value>
@@ -278,7 +278,7 @@
     <value>Text anzeigen</value>
   </data>
 	<data name="strMenuSSHFileTransfer" xml:space="preserve">
-    <value>SSH Datei Transfer</value>
+    <value>SSH Datei Übertragung</value>
   </data>
 	<data name="strMenuTools" xml:space="preserve">
     <value>E&amp;xtras</value>
@@ -336,7 +336,7 @@
     <comment>Need translation</comment>
   </data>
 	<data name="strLabelPuttySessionsConfig" xml:space="preserve">
-    <value>Hier klicken um PuTTY Sessions zu konfigurieren:</value>
+    <value>Hier klicken um die PuTTY Sitzung zu konfigurieren:</value>
   </data>
 	<data name="strLabelPuttyTimeout" xml:space="preserve">
     <value>Maximale Zeit die auf PuTTY und integrierte Ext. Apps gewartet wird:</value>
@@ -348,10 +348,10 @@
     <value>Sekunden</value>
   </data>
 	<data name="strMenuCtrlAltDel" xml:space="preserve">
-    <value>Ctrl-Alt-Del</value>
+    <value>STRG-ALT-ENTF</value>
   </data>
 	<data name="strMenuCtrlEsc" xml:space="preserve">
-    <value>Ctrl-Esc</value>
+    <value>STRG-ESC</value>
   </data>
 	<data name="strTabAdvanced" xml:space="preserve">
     <value>Erweitert</value>
@@ -485,15 +485,15 @@
     <value>Auf Beendigung warten</value>
   </data>
 	<data name="strConfirmDeleteExternalTool" xml:space="preserve">
-    <value>Are you sure you want to delete the external tool, "{0}"?</value>
+    <value>Sind Sie sicher dass Sie das extene Programm "{0}" entfernen möchten?</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
-    <value>Are you sure you want to delete the {0} selected external tools?</value>
+    <value>Sind Sie sicher dass Sie die {0} selektierten externen Programme entfernen möchten?</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strGroupboxExternalToolProperties" xml:space="preserve">
-    <value>Applikation Editor</value>
+    <value>Eigenschaften des externen Programmes</value>
   </data>
 	<data name="strLabelArguments" xml:space="preserve">
     <value>Parameter:</value>
@@ -553,7 +553,7 @@
     <value>Datei übertragen (SSH)</value>
   </data>
 	<data name="strMenuViewOnly" xml:space="preserve">
-    <value>View-Only (VNC)</value>
+    <value>Nur Ansicht (VNC)</value>
   </data>
 	<data name="strPropertyDescriptionAddress" xml:space="preserve">
     <value>Der Hostname oder die IP zu der eine Verbinung aufgebaut werden soll.</value>
@@ -609,7 +609,7 @@
     <value>Benutzername:</value>
   </data>
 	<data name="strPropertyDescriptionDescription" xml:space="preserve">
-    <value>Put your notes or a description for the host here.</value>
+    <value>Geben Sie hier Ihre Notitzen oder eine Beschreibung des Hosts ein.</value>
   </data>
 	<data name="strPropertyDescriptionDomain" xml:space="preserve">
     <value>Geben Sie hier ihre Domäne ein.</value>
@@ -642,7 +642,7 @@
     <value>Domäne</value>
   </data>
 	<data name="strPropertyNameIcon" xml:space="preserve">
-    <value>Icon</value>
+    <value>Symbol</value>
   </data>
 	<data name="strPropertyNameInheritDescription" xml:space="preserve">
     <value>Vererbe Beschreibung</value>
@@ -762,7 +762,7 @@
     <value>Wählen Sie den automatische Anpassungs (SmartSize) Modus der verwendet werden soll.</value>
   </data>
 	<data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
-    <value>Zur Console Session des Remote Hosts verbinden.</value>
+    <value>Zur Konsolen Sitzung des entfernten Hosts verbinden.</value>
   </data>
 	<data name="strPropertyDescriptionUser1" xml:space="preserve">
     <value>Dieses Feld ist frei beschreibbar.</value>
@@ -790,14 +790,14 @@
     <value>Serverauthentifizierung</value>
   </data>
 	<data name="strPropertyNameAuthenticationMode" xml:space="preserve">
-    <value>Authentication Mode</value>
+    <value>Authentifizierungs Modus</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strPropertyNameCacheBitmaps" xml:space="preserve">
     <value>Bitmaps zwischenspeichern</value>
   </data>
 	<data name="strPropertyNameCompression" xml:space="preserve">
-    <value>Kompremierung</value>
+    <value>Komprimierung</value>
   </data>
 	<data name="strPropertyNameDisplayThemes" xml:space="preserve">
     <value>Themen anzeigen</value>
@@ -812,15 +812,15 @@
     <value>Verschlüsselungsstärke</value>
   </data>
 	<data name="strPropertyNameExternalTool" xml:space="preserve">
-    <value>External Tool</value>
+    <value>Externes Programm</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strPropertyNameExternalToolAfter" xml:space="preserve">
-    <value>External Tool After</value>
+    <value>Externes Programm nachher</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strPropertyNameExternalToolBefore" xml:space="preserve">
-    <value>External Tool Before</value>
+    <value>Externes Programm vorher</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strPropertyNameInheritAll" xml:space="preserve">
@@ -869,7 +869,7 @@
     <value>Vererbe MAC Adresse</value>
   </data>
 	<data name="strPropertyNameInheritPuttySession" xml:space="preserve">
-    <value>Vererbe PuTTY Session</value>
+    <value>Vererbe PuTTY Sitzung</value>
   </data>
 	<data name="strPropertyNameInheritRedirectDrives" xml:space="preserve">
     <value>Vererbe Disk Drives</value>
@@ -899,7 +899,7 @@
     <value>Vererbe SmartSize Modus</value>
   </data>
 	<data name="strPropertyNameInheritUseConsoleSession" xml:space="preserve">
-    <value>Vererbe Verwende Console Session</value>
+    <value>Vererbe Verwende Konsolen Sitzung</value>
   </data>
 	<data name="strPropertyNameInheritUser1" xml:space="preserve">
     <value>Vererbe Benutzer Feld</value>
@@ -927,7 +927,7 @@
     <value>MAC Adresse</value>
   </data>
 	<data name="strPropertyNamePuttySession" xml:space="preserve">
-    <value>PuTTY Session</value>
+    <value>PuTTY Sitzung</value>
   </data>
 	<data name="strPropertyNameRedirectDrives" xml:space="preserve">
     <value>Festplatten</value>
@@ -957,7 +957,7 @@
     <value>SmartSize Modus</value>
   </data>
 	<data name="strPropertyNameUseConsoleSession" xml:space="preserve">
-    <value>Verwende Console Session</value>
+    <value>Verwende Konsole</value>
   </data>
 	<data name="strPropertyNameUser1" xml:space="preserve">
     <value>Benutzer Feld</value>
@@ -1027,7 +1027,7 @@
 		<value>Ordner umbenennen</value>
 	</data>
 	<data name="strButtonOK" xml:space="preserve">
-		<value></value>
+		<value>&amp;OK</value>
 	</data>
 	<data name="strMenuConnectionsAndConfig" xml:space="preserve">
 		<value>Verbindungen and Konfiguration</value>
@@ -1131,16 +1131,16 @@ Wenn Sie noch immer Probleme mit der Gecko Engine in mRemote haben, konsultieren
 		<value>Die (RDP) Sitzungs Funktion benötigt die Datei eolwtscom.dll. Diese muss korrekt registriert sein.
 Alle mRemoteNG Pakete beinhalten diese Datei, jedoch muss sie wenn Sie eines der nicht-Setup Pakete verwenden manuell registriert werden.
 Öffnen Sie hierzu den Ausführen Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\Programme\mRemoteNG\eolwtscom.dll" (Wobei c:\Programme\mRemoteNG\ Ihr mRemoteNG Installations-Pfad ist).
-Wenn Sie noch immer Probleme mit der (RDP) Session Funktion in mRemoteNG haben, konsultieren Sie bitte das mRemoteNG Forum: http://forum.mremoteng.org/</value>
+Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben, konsultieren Sie bitte das mRemoteNG Forum: http://forum.mremoteng.org/</value>
 	</data>
 	<data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
-		<value>Automatisch Session Informationen einholen</value>
+		<value>Automatisch Sitzungs Informationen einholen</value>
 	</data>
 	<data name="strWriteLogFile" xml:space="preserve">
 		<value>Log File schreiben (mRemoteNG.log)</value>
 	</data>
 	<data name="strStartupExit" xml:space="preserve">
-		<value>Start/Ende</value>
+		<value>Anfang/Ende</value>
 	</data>
 	<data name="strAllowOnlySingleInstance" xml:space="preserve">
 		<value>Nur eine Instanz zulassen (mRemote Neustart benötigt)</value>
@@ -1209,7 +1209,7 @@ Wenn Sie noch immer Probleme mit der (RDP) Session Funktion in mRemoteNG haben, 
 		<value>Automatisch speichern jede:</value>
 	</data>
 	<data name="strStartIP" xml:space="preserve">
-		<value>Start IP</value>
+		<value>Anfangs IP</value>
 	</data>
 	<data name="strEndIP" xml:space="preserve">
 		<value>End IP</value>
@@ -1224,7 +1224,7 @@ Wenn Sie noch immer Probleme mit der (RDP) Session Funktion in mRemoteNG haben, 
 		<value>End Port</value>
 	</data>
 	<data name="strStartPort" xml:space="preserve">
-		<value>Start Port</value>
+		<value>Anfangs Port</value>
 	</data>
 	<data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
 		<value>Gateway Passwort</value>
@@ -1347,7 +1347,7 @@ Wenn Sie noch immer Probleme mit der (RDP) Session Funktion in mRemoteNG haben, 
 		<value>Host</value>
 	</data>
 	<data name="strTransfer" xml:space="preserve">
-		<value>Transfer</value>
+		<value>Übertragen</value>
 	</data>
 	<data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
 		<value>Wollen sie die aktuelle Verbindungs-Datei speichern bevor eine andere geladen wird?</value>
@@ -1374,7 +1374,7 @@ Wenn Sie noch immer Probleme mit der (RDP) Session Funktion in mRemoteNG haben, 
 		<value>die folgenden</value>
 	</data>
 	<data name="strMyCurrentWindowsCreds" xml:space="preserve">
-		<value>meine aktuellen (Windows login Informationen)</value>
+		<value>meine aktuellen (Windows Anmelde Informationen)</value>
 	</data>
 	<data name="strNoInformation" xml:space="preserve">
 		<value>keine</value>
@@ -1497,7 +1497,7 @@ Wenn Sie noch immer Probleme mit der (RDP) Session Funktion in mRemoteNG haben, 
 		<value></value>
 	</data>
 	<data name="strCheckForUpdate" xml:space="preserve">
-		<value>Auf Aktualisierung prüfen</value>
+		<value>Prüfen</value>
 	</data>
 	<data name="strDownloadAndInstall" xml:space="preserve">
 		<value>Herunterladen &amp;&amp; Installieren</value>
@@ -1577,5 +1577,92 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
 	</data>
 	<data name="strUseSameUsernameAndPassword" xml:space="preserve">
 		<value>Selben Benutzer und Passwort verwenden</value>
+	</data>
+	<data name="strCannotStartPortScan" xml:space="preserve">
+		<value>Die eingegebenen IP Daten sind ungültig, kann den Port Scan nicht starten.</value>
+	</data>
+	<data name="strPleaseFillAllFields" xml:space="preserve">
+		<value>Bitte alle Felder ausfüllen!</value>
+	</data>
+	<data name="strLocalFileDoesNotExist" xml:space="preserve">
+		<value>Die lokale Datei existiert nicht!</value>
+	</data>
+	<data name="strSSHTransferFailed" xml:space="preserve">
+		<value>Übertragung fehlgeschlagen!</value>
+	</data>
+	<data name="strSSHStartTransferBG" xml:space="preserve">
+		<value>SSH Übertragung im Hintergrund fehlgeschlagen!</value>
+	</data>
+	<data name="strSSHTranferSuccessful" xml:space="preserve">
+		<value>Übertragung erfolgreich!</value>
+	</data>
+	<data name="strSSHTransferEndFailed" xml:space="preserve">
+		<value>SSH Abschluss der Übertragung fehlgeschlagen!</value>
+	</data>
+	<data name="strOldConffile" xml:space="preserve">
+		<value>Sie versuchen eine Sitzungs Datei zu laden die mit einer sehr frühen mRemote/mRemoteNG Version erstellt wurde - dies kann zu Fehlern führen.
+Wenn Sie Fehler feststellen, dann sollten Sie eine neue Sitzungs Datei erstellen!</value>
+	</data>
+	<data name="strCannotImportNormalSessionFile" xml:space="preserve">
+		<value>Sie können keine Verbindungsdatei importieren.
+Bitte verwenden Sie Datei - Verbindungen laden für normale Verbindungs Dateien!</value>
+	</data>
+	<data name="strLoadFromXmlFailed" xml:space="preserve">
+		<value>Laden der XML Datei fehlgeschlagen!</value>
+	</data>
+	<data name="strAddNodeFromXmlFailed" xml:space="preserve">
+		<value>Knoten von XML laden ist fehlgeschlagen!</value>
+	</data>
+	<data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
+		<value>Verbindungs Informationen von XML holen ist fehlgeschlagen!</value>
+	</data>
+	<data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
+		<value>Kann keine neue Verbindungsdatei erstellen!</value>
+	</data>
+	<data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
+		<value>Verbindungs Datei "{0}" konnte nicht geladen werden!</value>
+	</data>
+	<data name="strConnectionsFileBackupFailed" xml:space="preserve">
+		<value>Verbindungs Datei Sicherheitskopie konnte nicht erstellt werden!</value>
+	</data>
+	<data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
+		<value>Verbindungs Datei konnte nicht importiert werden!</value>
+	</data>
+	<data name="strRdpFileCouldNotBeImported" xml:space="preserve">
+		<value>RDP Datei konnte nicht importiert werden!</value>
+	</data>
+	<data name="strConnectionsFileCouldNotBeSaved" xml:space="preserve">
+		<value>Verbindungs Datei konnte nicht gespeichert werden!</value>
+	</data>
+	<data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
+		<value>Verbindungs Datei konnte nicht als "{0}" gespeichert werden!</value>
+	</data>
+	<data name="strQuickConnectFailed" xml:space="preserve">
+		<value>Schnelle Verbindung fehlgeschlagen!</value>
+	</data>
+	<data name="strConnectionOpenFailed" xml:space="preserve">
+		<value>Öffnen der Verbindung ist fehlgeschlagen!</value>
+	</data>
+	<data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
+		<value>Öffnen der Verbindung fehlgeschlagen: Kein Hostname definiert!</value>
+	</data>
+	<data name="strNoExtAppDefined" xml:space="preserve">
+		<value>Kein externes Programm definiert!</value>
+	</data>
+	<data name="strLoadFromSqlFailed" xml:space="preserve">
+		<value>Laden per SQL fehlgeschlagen!</value>
+	</data>
+	<data name="strAddNodesFromSqlFailed" xml:space="preserve">
+		<value>Knoten von SQL laden ist fehlgeschlagen!</value>
+	</data>
+	<data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
+		<value>Verbindungs Daten von SQL laden ist fehlgeschlagen!</value>
+	</data>
+	<data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
+		<value>Kann das Port Scan Panel nicht laden!</value>
+	</data>
+	<data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
+		<value>Verbindungs Datei "{0}" konnte nicht geladen werden!
+Starte mit neuer Datei.</value>
 	</data>
 </root>

@@ -674,7 +674,7 @@ Namespace App
 
                 conL.Load()
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't create new connections file" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strCouldNotCreateNewConnectionsFile & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -739,9 +739,9 @@ Namespace App
 
                     If File.Exists(conL.ConnectionFileName) = False Then
                         If WithDialog Then
-                            mC.AddMessage(Messages.MessageClass.WarningMsg, "Connections file could not be loaded!" & vbNewLine & "Location was: " & conL.ConnectionFileName)
+                            mC.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strConnectionsFileCouldNotBeLoaded, conL.ConnectionFileName))
                         Else
-                            mC.AddMessage(Messages.MessageClass.InformationMsg, "Connections file could not be loaded!" & vbNewLine & "Location was: " & conL.ConnectionFileName & vbNewLine & "Starting with new connections file.")
+                            mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strConnectionsFileCouldNotBeLoadedNew, conL.ConnectionFileName))
                             App.Runtime.NewConnections()
                         End If
 
@@ -753,7 +753,7 @@ Namespace App
                             File.Copy(conL.ConnectionFileName, conL.ConnectionFileName & "_BAK", True)
                         End If
                     Catch ex As Exception
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, "Couldn't create backup of connections file" & vbNewLine & vbNewLine & ex.Message)
+                        mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strConnectionsFileBackupFailed & vbNewLine & vbNewLine & ex.Message)
                     End Try
                 End If
 
@@ -792,7 +792,7 @@ Namespace App
                     tmrSqlWatcher.Start()
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't load connections file" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeLoaded & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -833,7 +833,7 @@ Namespace App
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't import connections file" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeImported & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -952,7 +952,7 @@ Namespace App
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't import rdp file" & vbNewLine & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpFileCouldNotBeImported & vbNewLine & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1092,11 +1092,12 @@ Namespace App
                     tmrSqlWatcher.Start()
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't save connections file" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeSaved & vbNewLine & ex.Message)
             End Try
         End Sub
 
         Public Shared Sub SaveConnectionsAs(ByVal SaveSecurity As Security.Save, ByVal RootNode As TreeNode)
+            Dim conS As New Config.Connections.Save
             Try
                 Dim tmrWasEnabled As Boolean
 
@@ -1107,7 +1108,6 @@ Namespace App
                     End If
                 End If
 
-                Dim conS As New Config.Connections.Save
 
                 Dim sD As SaveFileDialog = Tools.Controls.ConnectionsSaveAsDialog
 
@@ -1148,7 +1148,7 @@ Namespace App
 
                 conS.Save()
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't save connections file as" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(My.Resources.strConnectionsFileCouldNotSaveAs,conS.ConnectionFileName) & vbNewLine & ex.Message)
             End Try
 
         End Sub
@@ -1210,7 +1210,7 @@ Namespace App
                     '--------
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Creating quick connect failed" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strQuickConnectFailed & vbNewLine & ex.Message)
             End Try
 
             Return Nothing
@@ -1220,7 +1220,7 @@ Namespace App
             Try
                 OpenConnection(Connection.Info.Force.None)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Opening connection failed" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1242,7 +1242,7 @@ Namespace App
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Opening connection failed" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1250,7 +1250,7 @@ Namespace App
             Try
                 OpenConnection(ConnectionInfo, Connection.Info.Force.None)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Opening connection failed" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1258,7 +1258,7 @@ Namespace App
             Try
                 OpenConnectionFinal(ConnectionInfo, Connection.Info.Force.None, ConnectionForm)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Opening connection failed" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1266,7 +1266,7 @@ Namespace App
             Try
                 OpenConnectionFinal(ConnectionInfo, Force, ConnectionForm)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Opening connection failed" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1274,7 +1274,7 @@ Namespace App
             Try
                 OpenConnectionFinal(ConnectionInfo, Force, Nothing)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Opening connection failed" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1282,7 +1282,7 @@ Namespace App
         Private Shared Sub OpenConnectionFinal(ByVal nCi As mRemote.Connection.Info, ByVal Force As mRemote.Connection.Info.Force, ByVal ConForm As Form)
             Try
                 If nCi.Hostname = "" And nCi.Protocol <> Connection.Protocol.Protocols.IntApp Then
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "Cannot open connection: No hostname specified")
+                    mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strConnectionOpenFailedNoHostname)
                     Exit Sub
                 End If
 
@@ -1325,7 +1325,7 @@ Namespace App
                         nProt = New Connection.Protocol.IntApp
 
                         If nCi.ExtApp = "" Then
-                            Throw New Exception("No Ext. App specified.")
+                            Throw New Exception(My.Resources.strNoExtAppDefined)
                         End If
                     Case Else
                         Exit Sub
@@ -1407,7 +1407,7 @@ Namespace App
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Opening connection failed" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 

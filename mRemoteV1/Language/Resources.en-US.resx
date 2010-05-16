@@ -1533,4 +1533,88 @@
 	<data name="strUseSameUsernameAndPassword" xml:space="preserve">
 		<value></value>
 	</data>
+	<data name="strCannotStartPortScan" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPleaseFillAllFields" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strLocalFileDoesNotExist" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strSSHTransferFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strSSHStartTransferBG" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strSSHTranferSuccessful" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strSSHTransferEndFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strOldConffile" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strCannotImportNormalSessionFile" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strLoadFromXmlFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strAddNodeFromXmlFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strConnectionsFileBackupFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpFileCouldNotBeImported" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strConnectionsFileCouldNotBeSaved" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strQuickConnectFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strConnectionOpenFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strNoExtAppDefined" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strLoadFromSqlFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strAddNodesFromSqlFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
+		<value></value>
+	</data>
 </root>

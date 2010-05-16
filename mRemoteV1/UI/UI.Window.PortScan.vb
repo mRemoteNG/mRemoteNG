@@ -385,7 +385,7 @@ Namespace UI
                         cbProtocol.SelectedIndex = 0
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't load PortScan panel" & vbNewLine & vbNewLine & ex.Message)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPortScanCouldNotLoadPanel & vbNewLine & vbNewLine & ex.Message)
                 End Try
             End Sub
 
@@ -412,7 +412,7 @@ Namespace UI
                     If ipOK() Then
                         StartScan()
                     Else
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, "Cannot start Port Scan, incorrect IP format!")
+                        mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strCannotStartPortScan)
                     End If
                 End If
             End Sub

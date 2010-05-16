@@ -74,25 +74,25 @@ Namespace UI
                 Me.grpFiles.Size = New System.Drawing.Size(668, 194)
                 Me.grpFiles.TabIndex = 2000
                 Me.grpFiles.TabStop = False
-                Me.grpFiles.Text = My.Resources.strGroupboxFiles
+                Me.grpFiles.Text = "Files"
                 '
                 'lblLocalFile
                 '
                 Me.lblLocalFile.AutoSize = True
                 Me.lblLocalFile.Location = New System.Drawing.Point(20, 25)
                 Me.lblLocalFile.Name = "lblLocalFile"
-                Me.lblLocalFile.Size = New System.Drawing.Size(55, 13)
+                Me.lblLocalFile.Size = New System.Drawing.Size(52, 13)
                 Me.lblLocalFile.TabIndex = 10
-                Me.lblLocalFile.Text = My.Resources.strLocalFile & ":"
+                Me.lblLocalFile.Text = "Local file:"
                 '
                 'txtLocalFile
                 '
                 Me.txtLocalFile.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.txtLocalFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-                Me.txtLocalFile.Location = New System.Drawing.Point(92, 23)
+                Me.txtLocalFile.Location = New System.Drawing.Point(105, 23)
                 Me.txtLocalFile.Name = "txtLocalFile"
-                Me.txtLocalFile.Size = New System.Drawing.Size(468, 20)
+                Me.txtLocalFile.Size = New System.Drawing.Size(455, 20)
                 Me.txtLocalFile.TabIndex = 20
                 '
                 'txtRemoteFile
@@ -100,9 +100,9 @@ Namespace UI
                 Me.txtRemoteFile.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.txtRemoteFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-                Me.txtRemoteFile.Location = New System.Drawing.Point(92, 49)
+                Me.txtRemoteFile.Location = New System.Drawing.Point(105, 49)
                 Me.txtRemoteFile.Name = "txtRemoteFile"
-                Me.txtRemoteFile.Size = New System.Drawing.Size(555, 20)
+                Me.txtRemoteFile.Size = New System.Drawing.Size(542, 20)
                 Me.txtRemoteFile.TabIndex = 50
                 '
                 'lblRemoteFile
@@ -110,9 +110,9 @@ Namespace UI
                 Me.lblRemoteFile.AutoSize = True
                 Me.lblRemoteFile.Location = New System.Drawing.Point(20, 51)
                 Me.lblRemoteFile.Name = "lblRemoteFile"
-                Me.lblRemoteFile.Size = New System.Drawing.Size(66, 13)
+                Me.lblRemoteFile.Size = New System.Drawing.Size(63, 13)
                 Me.lblRemoteFile.TabIndex = 40
-                Me.lblRemoteFile.Text = My.Resources.strRemoteFile & ":"
+                Me.lblRemoteFile.Text = "Remote file:"
                 '
                 'btnBrowse
                 '
@@ -122,7 +122,7 @@ Namespace UI
                 Me.btnBrowse.Name = "btnBrowse"
                 Me.btnBrowse.Size = New System.Drawing.Size(81, 23)
                 Me.btnBrowse.TabIndex = 30
-                Me.btnBrowse.Text = My.Resources.strButtonBrowse
+                Me.btnBrowse.Text = Global.mRemote.My.Resources.Resources.strButtonBrowse
                 Me.btnBrowse.UseVisualStyleBackColor = True
                 '
                 'grpConnection
@@ -146,7 +146,7 @@ Namespace UI
                 Me.grpConnection.Size = New System.Drawing.Size(668, 135)
                 Me.grpConnection.TabIndex = 1000
                 Me.grpConnection.TabStop = False
-                Me.grpConnection.Text = My.Resources.strGroupboxConnection
+                Me.grpConnection.Text = "Connection"
                 '
                 'radProtSFTP
                 '
@@ -179,7 +179,7 @@ Namespace UI
                 Me.lblProtocol.Name = "lblProtocol"
                 Me.lblProtocol.Size = New System.Drawing.Size(49, 13)
                 Me.lblProtocol.TabIndex = 90
-                Me.lblProtocol.Text = My.Resources.strLabelProtocol
+                Me.lblProtocol.Text = "Protocol:"
                 '
                 'lblPassword
                 '
@@ -188,7 +188,7 @@ Namespace UI
                 Me.lblPassword.Name = "lblPassword"
                 Me.lblPassword.Size = New System.Drawing.Size(56, 13)
                 Me.lblPassword.TabIndex = 70
-                Me.lblPassword.Text = My.Resources.strLabelPassword
+                Me.lblPassword.Text = "Password:"
                 '
                 'lblUser
                 '
@@ -197,7 +197,7 @@ Namespace UI
                 Me.lblUser.Name = "lblUser"
                 Me.lblUser.Size = New System.Drawing.Size(32, 13)
                 Me.lblUser.TabIndex = 50
-                Me.lblUser.Text = My.Resources.strUser & ":"
+                Me.lblUser.Text = "User:"
                 '
                 'lblPort
                 '
@@ -207,7 +207,7 @@ Namespace UI
                 Me.lblPort.Name = "lblPort"
                 Me.lblPort.Size = New System.Drawing.Size(29, 13)
                 Me.lblPort.TabIndex = 30
-                Me.lblPort.Text = My.Resources.strLabelPort
+                Me.lblPort.Text = "Port:"
                 '
                 'lblHost
                 '
@@ -216,7 +216,7 @@ Namespace UI
                 Me.lblHost.Name = "lblHost"
                 Me.lblHost.Size = New System.Drawing.Size(32, 13)
                 Me.lblHost.TabIndex = 10
-                Me.lblHost.Text = My.Resources.strHost & ":"
+                Me.lblHost.Text = "Host:"
                 '
                 'txtPort
                 '
@@ -232,9 +232,9 @@ Namespace UI
                 Me.txtHost.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.txtHost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-                Me.txtHost.Location = New System.Drawing.Point(92, 25)
+                Me.txtHost.Location = New System.Drawing.Point(105, 25)
                 Me.txtHost.Name = "txtHost"
-                Me.txtHost.Size = New System.Drawing.Size(484, 20)
+                Me.txtHost.Size = New System.Drawing.Size(471, 20)
                 Me.txtHost.TabIndex = 20
                 '
                 'txtPassword
@@ -242,10 +242,10 @@ Namespace UI
                 Me.txtPassword.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-                Me.txtPassword.Location = New System.Drawing.Point(92, 77)
+                Me.txtPassword.Location = New System.Drawing.Point(105, 77)
                 Me.txtPassword.Name = "txtPassword"
                 Me.txtPassword.PasswordChar = Global.Microsoft.VisualBasic.ChrW(42)
-                Me.txtPassword.Size = New System.Drawing.Size(484, 20)
+                Me.txtPassword.Size = New System.Drawing.Size(471, 20)
                 Me.txtPassword.TabIndex = 80
                 '
                 'txtUser
@@ -253,9 +253,9 @@ Namespace UI
                 Me.txtUser.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-                Me.txtUser.Location = New System.Drawing.Point(92, 51)
+                Me.txtUser.Location = New System.Drawing.Point(105, 51)
                 Me.txtUser.Name = "txtUser"
-                Me.txtUser.Size = New System.Drawing.Size(484, 20)
+                Me.txtUser.Size = New System.Drawing.Size(471, 20)
                 Me.txtUser.TabIndex = 60
                 '
                 'btnTransfer
@@ -268,7 +268,7 @@ Namespace UI
                 Me.btnTransfer.Name = "btnTransfer"
                 Me.btnTransfer.Size = New System.Drawing.Size(83, 29)
                 Me.btnTransfer.TabIndex = 10000
-                Me.btnTransfer.Text = My.Resources.strTransfer
+                Me.btnTransfer.Text = "Transfer"
                 Me.btnTransfer.TextAlign = System.Drawing.ContentAlignment.MiddleRight
                 Me.btnTransfer.UseVisualStyleBackColor = True
                 '
@@ -288,10 +288,11 @@ Namespace UI
                 Me.Controls.Add(Me.grpConnection)
                 Me.Controls.Add(Me.btnTransfer)
                 Me.Controls.Add(Me.pbStatus)
+                Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
                 Me.Name = "SSHTransfer"
-                Me.TabText = My.Resources.strMenuSSHFileTransfer
-                Me.Text = My.Resources.strMenuSSHFileTransfer
+                Me.TabText = Global.mRemote.My.Resources.Resources.strMenuSSHFileTransfer
+                Me.Text = "SSH File Transfer"
                 Me.grpFiles.ResumeLayout(False)
                 Me.grpFiles.PerformLayout()
                 Me.grpConnection.ResumeLayout(False)
@@ -369,12 +370,12 @@ Namespace UI
 #Region "Private Methods"
             Private Sub StartTransfer(ByVal Protocol As SSHTransferProtocol)
                 If AllFieldsSet() = False Then
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Please fill all fields!")
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPleaseFillAllFields)
                     Exit Sub
                 End If
 
                 If File.Exists(Me.txtLocalFile.Text) = False Then
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "Local file does not exist!")
+                    mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strLocalFileDoesNotExist)
                     Exit Sub
                 End If
 
@@ -400,7 +401,7 @@ Namespace UI
                     t.SetApartmentState(ApartmentState.STA)
                     t.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Transfer failed!" & vbNewLine & ex.Message)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHTransferFailed & vbNewLine & ex.Message)
                     Me.sshT.Close()
                 End Try
             End Sub
@@ -413,7 +414,7 @@ Namespace UI
                     DisableButtons()
                     Me.sshT.Put(LocalFile, RemoteFile)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "StartTransferBG (UI.Window.SSHTransfer) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHStartTransferBG & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -492,7 +493,7 @@ Namespace UI
                     EnableButtons()
                     SetStatus()
 
-                    mC.AddMessage(Messages.MessageClass.InformationMsg, "Transfer successful!")
+                    mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strSSHTransferFailed)
 
                     If Me.sshT IsNot Nothing Then
                         Me.sshT.Close()
@@ -500,7 +501,7 @@ Namespace UI
                         Me.sshT.Close()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SshTransfer_End (UI.Window.SSHTransfer) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHTransferEndFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
