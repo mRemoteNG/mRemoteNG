@@ -799,11 +799,38 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die AddNodeFromXML failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strAddNodeFromXmlFailed() As String
+            Get
+                Return ResourceManager.GetString("strAddNodeFromXmlFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die AddNodesFromSQL failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strAddNodesFromSqlFailed() As String
+            Get
+                Return ResourceManager.GetString("strAddNodesFromSqlFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Allow only a single instance of the application (mRemoteNG restart required) ähnelt.
         '''</summary>
         Friend ReadOnly Property strAllowOnlySingleInstance() As String
             Get
                 Return ResourceManager.GetString("strAllowOnlySingleInstance", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Always ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strAlways() As String
+            Get
+                Return ResourceManager.GetString("strAlways", resourceCulture)
             End Get
         End Property
         
@@ -1029,6 +1056,25 @@ Namespace My.Resources
         Friend ReadOnly Property strButtonTestProxy() As String
             Get
                 Return ResourceManager.GetString("strButtonTestProxy", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die You cannot import a normal connection file.
+        '''Please use File - Load Connections for normal connection files! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strCannotImportNormalSessionFile() As String
+            Get
+                Return ResourceManager.GetString("strCannotImportNormalSessionFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Cannot start Port Scan, incorrect IP format! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strCannotStartPortScan() As String
+            Get
+                Return ResourceManager.GetString("strCannotStartPortScan", resourceCulture)
             End Get
         End Property
         
@@ -1607,11 +1653,84 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Opening connection failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionOpenFailed() As String
+            Get
+                Return ResourceManager.GetString("strConnectionOpenFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Cannot open connection: No hostname specified! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionOpenFailedNoHostname() As String
+            Get
+                Return ResourceManager.GetString("strConnectionOpenFailedNoHostname", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Connections ähnelt.
         '''</summary>
         Friend ReadOnly Property strConnections() As String
             Get
                 Return ResourceManager.GetString("strConnections", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t create backup of connections file! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionsFileBackupFailed() As String
+            Get
+                Return ResourceManager.GetString("strConnectionsFileBackupFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t import connections file! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionsFileCouldNotBeImported() As String
+            Get
+                Return ResourceManager.GetString("strConnectionsFileCouldNotBeImported", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Connections file &quot;{0}&quot; could not be loaded! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionsFileCouldNotBeLoaded() As String
+            Get
+                Return ResourceManager.GetString("strConnectionsFileCouldNotBeLoaded", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Connections file &quot;{0}&quot; could not be loaded!
+        '''Starting with new connections file. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionsFileCouldNotBeLoadedNew() As String
+            Get
+                Return ResourceManager.GetString("strConnectionsFileCouldNotBeLoadedNew", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t save connections file! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionsFileCouldNotBeSaved() As String
+            Get
+                Return ResourceManager.GetString("strConnectionsFileCouldNotBeSaved", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t save connections file as &quot;{0}&quot;! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionsFileCouldNotSaveAs() As String
+            Get
+                Return ResourceManager.GetString("strConnectionsFileCouldNotSaveAs", resourceCulture)
             End Get
         End Property
         
@@ -1634,11 +1753,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t create new connections file! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strCouldNotCreateNewConnectionsFile() As String
+            Get
+                Return ResourceManager.GetString("strCouldNotCreateNewConnectionsFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Installed version ähnelt.
         '''</summary>
         Friend ReadOnly Property strCurrentVersion() As String
             Get
                 Return ResourceManager.GetString("strCurrentVersion", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Detect ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strDetect() As String
+            Get
+                Return ResourceManager.GetString("strDetect", resourceCulture)
             End Get
         End Property
         
@@ -1855,6 +1992,24 @@ Namespace My.Resources
         Friend ReadOnly Property strFullscreen() As String
             Get
                 Return ResourceManager.GetString("strFullscreen", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Get Connection Info From SQL failed ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strGetConnectionInfoFromSqlFailed() As String
+            Get
+                Return ResourceManager.GetString("strGetConnectionInfoFromSqlFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Get Connection Info From Xml failed ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strGetConnectionInfoFromXmlFailed() As String
+            Get
+                Return ResourceManager.GetString("strGetConnectionInfoFromXmlFailed", resourceCulture)
             End Get
         End Property
         
@@ -2174,11 +2329,38 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Load From SQL failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strLoadFromSqlFailed() As String
+            Get
+                Return ResourceManager.GetString("strLoadFromSqlFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Load From XML failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strLoadFromXmlFailed() As String
+            Get
+                Return ResourceManager.GetString("strLoadFromXmlFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Local file ähnelt.
         '''</summary>
         Friend ReadOnly Property strLocalFile() As String
             Get
                 Return ResourceManager.GetString("strLocalFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Local file does not exist! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strLocalFileDoesNotExist() As String
+            Get
+                Return ResourceManager.GetString("strLocalFileDoesNotExist", resourceCulture)
             End Get
         End Property
         
@@ -2831,6 +3013,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Never ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strNever() As String
+            Get
+                Return ResourceManager.GetString("strNever", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die New Connection ähnelt.
         '''</summary>
         Friend ReadOnly Property strNewConnection() As String
@@ -2894,6 +3085,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die No Ext. App specified. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strNoExtAppDefined() As String
+            Get
+                Return ResourceManager.GetString("strNoExtAppDefined", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die none ähnelt.
         '''</summary>
         Friend ReadOnly Property strNoInformation() As String
@@ -2939,6 +3139,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die You are trying to load a connection file that was created using an very early version of mRemote, this could result in an runtime error.
+        '''If you run into such an error, please create a new connection file! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strOldConffile() As String
+            Get
+                Return ResourceManager.GetString("strOldConffile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Open new tab to the right of the currently selected tab ähnelt.
         '''</summary>
         Friend ReadOnly Property strOpenNewTabRight() As String
@@ -2971,6 +3181,24 @@ Namespace My.Resources
         Friend ReadOnly Property strPasswordProtect() As String
             Get
                 Return ResourceManager.GetString("strPasswordProtect", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Please fill all fields ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPleaseFillAllFields() As String
+            Get
+                Return ResourceManager.GetString("strPleaseFillAllFields", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t load PortScan panel! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPortScanCouldNotLoadPanel() As String
+            Get
+                Return ResourceManager.GetString("strPortScanCouldNotLoadPanel", resourceCulture)
             End Get
         End Property
         
@@ -4262,11 +4490,110 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die 256 Colors ähnelt.
+        '''  Sucht eine lokalisierte Zeichenfolge, die Creating quick connect failed ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strQuickConnectFailed() As String
+            Get
+                Return ResourceManager.GetString("strQuickConnectFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die 16777216 Colors (24bit) ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRDP16777216Colors() As String
+            Get
+                Return ResourceManager.GetString("strRDP16777216Colors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die 256 Colors (8bit) ähnelt.
         '''</summary>
         Friend ReadOnly Property strRDP256Colors() As String
             Get
                 Return ResourceManager.GetString("strRDP256Colors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die 4294967296 Colors (32bit) ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRDP4294967296Colors() As String
+            Get
+                Return ResourceManager.GetString("strRDP4294967296Colors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die 65536 Colors (16bit) ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRDP65536Colors() As String
+            Get
+                Return ResourceManager.GetString("strRDP65536Colors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Disable Cursor blinking ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRDPDisableCursorblinking() As String
+            Get
+                Return ResourceManager.GetString("strRDPDisableCursorblinking", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Disable Cursor Shadow ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRDPDisableCursorShadow() As String
+            Get
+                Return ResourceManager.GetString("strRDPDisableCursorShadow", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Disable Full Window drag ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRDPDisableFullWindowdrag() As String
+            Get
+                Return ResourceManager.GetString("strRDPDisableFullWindowdrag", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Disable Menu Animations ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRDPDisableMenuAnimations() As String
+            Get
+                Return ResourceManager.GetString("strRDPDisableMenuAnimations", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Disable Themes ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRDPDisableThemes() As String
+            Get
+                Return ResourceManager.GetString("strRDPDisableThemes", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Disable Wallpaper ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRDPDisableWallpaper() As String
+            Get
+                Return ResourceManager.GetString("strRDPDisableWallpaper", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t import rdp file! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpFileCouldNotBeImported() As String
+            Get
+                Return ResourceManager.GetString("strRdpFileCouldNotBeImported", resourceCulture)
             End Get
         End Property
         
@@ -4586,6 +4913,42 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die SSH background transfer failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strSSHStartTransferBG() As String
+            Get
+                Return ResourceManager.GetString("strSSHStartTransferBG", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Transfer successful! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strSSHTranferSuccessful() As String
+            Get
+                Return ResourceManager.GetString("strSSHTranferSuccessful", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Ssh Transfee End (UI.Window.SSHTransfer) failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strSSHTransferEndFailed() As String
+            Get
+                Return ResourceManager.GetString("strSSHTransferEndFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Transfer ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strSSHTransferFailed() As String
+            Get
+                Return ResourceManager.GetString("strSSHTransferFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Start IP ähnelt.
         '''</summary>
         Friend ReadOnly Property strStartIP() As String
@@ -4730,6 +5093,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Transfer failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strTransferFailed() As String
+            Get
+                Return ResourceManager.GetString("strTransferFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Type ähnelt.
         '''</summary>
         Friend ReadOnly Property strType() As String
@@ -4812,6 +5184,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Use a different username and password ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strUseDifferentUsernameAndPassword() As String
+            Get
+                Return ResourceManager.GetString("strUseDifferentUsernameAndPassword", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Use only Notifications panel (no messagebox popups) ähnelt.
         '''</summary>
         Friend ReadOnly Property strUseOnlyErrorsAndInfosPanel() As String
@@ -4826,6 +5207,15 @@ Namespace My.Resources
         Friend ReadOnly Property strUser() As String
             Get
                 Return ResourceManager.GetString("strUser", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Use the same username and password ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strUseSameUsernameAndPassword() As String
+            Get
+                Return ResourceManager.GetString("strUseSameUsernameAndPassword", resourceCulture)
             End Get
         End Property
         
