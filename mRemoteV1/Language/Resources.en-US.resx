@@ -1617,4 +1617,31 @@
 	<data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
 		<value></value>
 	</data>
+	<data name="strTryIntegrate" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strUpdateCheck" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strCheckNow" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strUpdateCheckFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strUpdateCheckCompleteFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strUpdateDownloadFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strUpdateStartFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strUpdateDeleteFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
+		<value></value>
+	</data>
 </root>

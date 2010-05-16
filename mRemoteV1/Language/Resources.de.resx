@@ -314,7 +314,7 @@
     <value>Starte PuTTY</value>
   </data>
 	<data name="strButtonTestProxy" xml:space="preserve">
-    <value>Test Proxy</value>
+    <value>Proxy prüfen</value>
   </data>
 	<data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatisch versuchen zu verbinden wenn Verbindung getrennt wird (nur RDP &amp;&amp; ICA)</value>
@@ -418,26 +418,26 @@
     <value>Warnung ({0})</value>
   </data>
 	<data name="strUpdateFrequencyCustom" xml:space="preserve">
-    <value>Every {0} days</value>
+    <value>Alle {0} Tage</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strUpdateFrequencyDaily" xml:space="preserve">
-    <value>Daily</value>
+    <value>Täglich</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strUpdateFrequencyMonthly" xml:space="preserve">
-    <value>Monthly</value>
+    <value>Monatlich</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strUpdateFrequencyWeekly" xml:space="preserve">
-    <value>Weekly</value>
+    <value>Wöchentlich</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strYes" xml:space="preserve">
     <value>Ja</value>
   </data>
 	<data name="strButtonBrowse" xml:space="preserve">
-    <value>&amp;Durchsuchen...</value>
+    <value>&amp;Wählen...</value>
   </data>
 	<data name="strButtonDefaultInheritance" xml:space="preserve">
     <value>Standard Vererbung</value>
@@ -1600,8 +1600,8 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
 		<value>SSH Abschluss der Übertragung fehlgeschlagen!</value>
 	</data>
 	<data name="strOldConffile" xml:space="preserve">
-		<value>Sie versuchen eine Sitzungs Datei zu laden die mit einer sehr frühen mRemote/mRemoteNG Version erstellt wurde - dies kann zu Fehlern führen.
-Wenn Sie Fehler feststellen, dann sollten Sie eine neue Sitzungs Datei erstellen!</value>
+		<value>Sie versuchen eine Verbindungs Datei zu laden die mit einer sehr frühen mRemote/mRemoteNG Version erstellt wurde - dies kann zu Fehlern führen.
+Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstellen!</value>
 	</data>
 	<data name="strCannotImportNormalSessionFile" xml:space="preserve">
 		<value>Sie können keine Verbindungsdatei importieren.
@@ -1664,5 +1664,32 @@ Bitte verwenden Sie Datei - Verbindungen laden für normale Verbindungs Dateien!
 	<data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
 		<value>Verbindungs Datei "{0}" konnte nicht geladen werden!
 Starte mit neuer Datei.</value>
+	</data>
+	<data name="strTryIntegrate" xml:space="preserve">
+		<value>Integration versuchen</value>
+	</data>
+	<data name="strUpdateCheck" xml:space="preserve">
+		<value>mRemoteNG kann periodisch auf der mRemoteNG Webseite nach Aktualisierungen und Neuigkeiten suchen.</value>
+	</data>
+	<data name="strCheckNow" xml:space="preserve">
+		<value>Jetzt prüfen</value>
+	</data>
+	<data name="strUpdateCheckFailed" xml:space="preserve">
+		<value>Prüfung auf Aktualisierung ist fehlgeschlagen!</value>
+	</data>
+	<data name="strUpdateCheckCompleteFailed" xml:space="preserve">
+		<value>Abschliessen der Prüfung auf Aktualisierung ist fehlgeschlagen!</value>
+	</data>
+	<data name="strUpdateDownloadFailed" xml:space="preserve">
+		<value>Herunterladen der Aktualisierung ist fehlgeschlagen!</value>
+	</data>
+	<data name="strUpdateStartFailed" xml:space="preserve">
+		<value>Starten der Aktualisierung ist fehlgeschlagen!</value>
+	</data>
+	<data name="strUpdateDeleteFailed" xml:space="preserve">
+		<value>Löschen der Aktualisierungsdatei ist gehlgeschlagen!</value>
+	</data>
+	<data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
+		<value>Abschluss des Downloads ist fehlgeschlagen!</value>
 	</data>
 </root>

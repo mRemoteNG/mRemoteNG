@@ -227,7 +227,7 @@ Namespace UI
 
                     uT.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForUpdate (UI.Window.Update) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateCheckFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -243,7 +243,7 @@ Namespace UI
                         RaiseEvent UpdateCheckCompleted(False)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForUpdateBG (UI.Window.Update) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateCheckFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -286,7 +286,7 @@ Namespace UI
                         SetAvailableVersionText(uI.Version.ToString)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "UpdateCheckComplete (UI.Window.Update) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateCheckCompleteFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -404,7 +404,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "DownloadUpdate (UI.Window.Update) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDownloadFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -425,7 +425,7 @@ Namespace UI
 
                                 Process.Start(uD.curUI.UpdateLocation)
                             Catch ex As Exception
-                                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Error starting update!" & vbNewLine & ex.Message)
+                                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateStartFailed & vbNewLine & ex.Message)
                             End Try
 
                             End
@@ -433,14 +433,14 @@ Namespace UI
                             Try
                                 File.Delete(uD.curUI.UpdateLocation)
                             Catch ex As Exception
-                                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Error deleting update file!" & vbNewLine & ex.Message)
+                                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDeleteFailed & vbNewLine & ex.Message)
                             End Try
                         End If
                     Else
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, "Update download failed!")
+                        mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDownloadFailed)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "DLCompleted (UI.Window.Update) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDownloadCompleteFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
