@@ -113,7 +113,7 @@ Partial Class frmPassword
         '
         'pbLock
         '
-        Me.pbLock.Image = Global.mRemote.My.Resources.Resources.Lock
+        Me.pbLock.Image = Global.mRemoteNG.My.Resources.Resources.Lock
         Me.pbLock.Location = New System.Drawing.Point(7, 8)
         Me.pbLock.Name = "pbLock"
         Me.pbLock.Size = New System.Drawing.Size(64, 64)

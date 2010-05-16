@@ -1,5 +1,5 @@
 ﻿Imports System.Threading
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 Imports System.Net.NetworkInformation
 
 Namespace Tools

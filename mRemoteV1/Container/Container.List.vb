@@ -1,5 +1,3 @@
-Imports System.Windows.Forms
-
 Namespace Container
     Public Class List
         Inherits CollectionBase

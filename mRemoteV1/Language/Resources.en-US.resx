@@ -1644,4 +1644,52 @@
 	<data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
 		<value></value>
 	</data>
+	<data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strSettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strUltraVncRepeater" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strSocks5" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strHttp" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strVnc" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strWindows" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strExtApp" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRDP" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strSsh1" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strSsh2" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strTelnet" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRlogin" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRAW" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strICA" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strHttps" xml:space="preserve">
+		<value></value>
+	</data>
 </root>

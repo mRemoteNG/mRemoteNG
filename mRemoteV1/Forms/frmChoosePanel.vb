@@ -1,4 +1,4 @@
-﻿Imports mRemote.App.Runtime
+﻿Imports mRemoteNG.App.Runtime
 
 Public Class frmChoosePanel
     Public Property Panel() As String

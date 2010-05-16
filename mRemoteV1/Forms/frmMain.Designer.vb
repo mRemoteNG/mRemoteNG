@@ -211,7 +211,7 @@ Partial Class frmMain
         '
         'mMenFileNewConnection
         '
-        Me.mMenFileNewConnection.Image = Global.mRemote.My.Resources.Resources.Connection_Add
+        Me.mMenFileNewConnection.Image = Global.mRemoteNG.My.Resources.Resources.Connection_Add
         Me.mMenFileNewConnection.Name = "mMenFileNewConnection"
         Me.mMenFileNewConnection.ShortcutKeys = CType((System.Windows.Forms.Keys.Shift Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
         Me.mMenFileNewConnection.Size = New System.Drawing.Size(334, 22)
@@ -219,7 +219,7 @@ Partial Class frmMain
         '
         'mMenFileNewFolder
         '
-        Me.mMenFileNewFolder.Image = Global.mRemote.My.Resources.Resources.Folder_Add
+        Me.mMenFileNewFolder.Image = Global.mRemoteNG.My.Resources.Resources.Folder_Add
         Me.mMenFileNewFolder.Name = "mMenFileNewFolder"
         Me.mMenFileNewFolder.ShortcutKeys = System.Windows.Forms.Keys.F7
         Me.mMenFileNewFolder.Size = New System.Drawing.Size(334, 22)
@@ -232,7 +232,7 @@ Partial Class frmMain
         '
         'mMenFileNew
         '
-        Me.mMenFileNew.Image = Global.mRemote.My.Resources.Resources.Connections_New
+        Me.mMenFileNew.Image = Global.mRemoteNG.My.Resources.Resources.Connections_New
         Me.mMenFileNew.Name = "mMenFileNew"
         Me.mMenFileNew.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
         Me.mMenFileNew.Size = New System.Drawing.Size(334, 22)
@@ -240,7 +240,7 @@ Partial Class frmMain
         '
         'mMenFileLoad
         '
-        Me.mMenFileLoad.Image = Global.mRemote.My.Resources.Resources.Connections_Load
+        Me.mMenFileLoad.Image = Global.mRemoteNG.My.Resources.Resources.Connections_Load
         Me.mMenFileLoad.Name = "mMenFileLoad"
         Me.mMenFileLoad.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
         Me.mMenFileLoad.Size = New System.Drawing.Size(334, 22)
@@ -248,7 +248,7 @@ Partial Class frmMain
         '
         'mMenFileSave
         '
-        Me.mMenFileSave.Image = Global.mRemote.My.Resources.Resources.Connections_Save
+        Me.mMenFileSave.Image = Global.mRemoteNG.My.Resources.Resources.Connections_Save
         Me.mMenFileSave.Name = "mMenFileSave"
         Me.mMenFileSave.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
         Me.mMenFileSave.Size = New System.Drawing.Size(334, 22)
@@ -256,7 +256,7 @@ Partial Class frmMain
         '
         'mMenFileSaveAs
         '
-        Me.mMenFileSaveAs.Image = Global.mRemote.My.Resources.Resources.Connections_SaveAs
+        Me.mMenFileSaveAs.Image = Global.mRemoteNG.My.Resources.Resources.Connections_SaveAs
         Me.mMenFileSaveAs.Name = "mMenFileSaveAs"
         Me.mMenFileSaveAs.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
                     Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
@@ -317,21 +317,21 @@ Partial Class frmMain
         '
         'mMenFileDelete
         '
-        Me.mMenFileDelete.Image = Global.mRemote.My.Resources.Resources.Delete
+        Me.mMenFileDelete.Image = Global.mRemoteNG.My.Resources.Resources.Delete
         Me.mMenFileDelete.Name = "mMenFileDelete"
         Me.mMenFileDelete.Size = New System.Drawing.Size(334, 22)
         Me.mMenFileDelete.Text = "Delete..."
         '
         'mMenFileRename
         '
-        Me.mMenFileRename.Image = Global.mRemote.My.Resources.Resources.Rename
+        Me.mMenFileRename.Image = Global.mRemoteNG.My.Resources.Resources.Rename
         Me.mMenFileRename.Name = "mMenFileRename"
         Me.mMenFileRename.Size = New System.Drawing.Size(334, 22)
         Me.mMenFileRename.Text = "Rename"
         '
         'mMenFileDuplicate
         '
-        Me.mMenFileDuplicate.Image = Global.mRemote.My.Resources.Resources.Connection_Duplicate
+        Me.mMenFileDuplicate.Image = Global.mRemoteNG.My.Resources.Resources.Connection_Duplicate
         Me.mMenFileDuplicate.Name = "mMenFileDuplicate"
         Me.mMenFileDuplicate.Size = New System.Drawing.Size(334, 22)
         Me.mMenFileDuplicate.Text = "Duplicate"
@@ -343,7 +343,7 @@ Partial Class frmMain
         '
         'mMenFileExit
         '
-        Me.mMenFileExit.Image = Global.mRemote.My.Resources.Resources.Quit
+        Me.mMenFileExit.Image = Global.mRemoteNG.My.Resources.Resources.Quit
         Me.mMenFileExit.Name = "mMenFileExit"
         Me.mMenFileExit.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
         Me.mMenFileExit.Size = New System.Drawing.Size(334, 22)
@@ -358,14 +358,14 @@ Partial Class frmMain
         '
         'mMenViewAddConnectionPanel
         '
-        Me.mMenViewAddConnectionPanel.Image = Global.mRemote.My.Resources.Resources.Panel_Add
+        Me.mMenViewAddConnectionPanel.Image = Global.mRemoteNG.My.Resources.Resources.Panel_Add
         Me.mMenViewAddConnectionPanel.Name = "mMenViewAddConnectionPanel"
         Me.mMenViewAddConnectionPanel.Size = New System.Drawing.Size(228, 22)
         Me.mMenViewAddConnectionPanel.Text = "Add Connection Panel"
         '
         'mMenViewConnectionPanels
         '
-        Me.mMenViewConnectionPanels.Image = Global.mRemote.My.Resources.Resources.Panels
+        Me.mMenViewConnectionPanels.Image = Global.mRemoteNG.My.Resources.Resources.Panels
         Me.mMenViewConnectionPanels.Name = "mMenViewConnectionPanels"
         Me.mMenViewConnectionPanels.Size = New System.Drawing.Size(228, 22)
         Me.mMenViewConnectionPanels.Text = "Connection Panels"
@@ -379,7 +379,7 @@ Partial Class frmMain
         '
         Me.mMenViewConnections.Checked = True
         Me.mMenViewConnections.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.mMenViewConnections.Image = Global.mRemote.My.Resources.Resources.Root
+        Me.mMenViewConnections.Image = Global.mRemoteNG.My.Resources.Resources.Root
         Me.mMenViewConnections.Name = "mMenViewConnections"
         Me.mMenViewConnections.Size = New System.Drawing.Size(228, 22)
         Me.mMenViewConnections.Text = "Connections"
@@ -406,7 +406,7 @@ Partial Class frmMain
         '
         Me.mMenViewErrorsAndInfos.Checked = True
         Me.mMenViewErrorsAndInfos.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.mMenViewErrorsAndInfos.Image = Global.mRemote.My.Resources.Resources.ErrorsAndInfos
+        Me.mMenViewErrorsAndInfos.Image = Global.mRemoteNG.My.Resources.Resources.ErrorsAndInfos
         Me.mMenViewErrorsAndInfos.Name = "mMenViewErrorsAndInfos"
         Me.mMenViewErrorsAndInfos.Size = New System.Drawing.Size(228, 22)
         Me.mMenViewErrorsAndInfos.Text = "Errors and Infos"
@@ -426,7 +426,7 @@ Partial Class frmMain
         'mMenViewJumpTo
         '
         Me.mMenViewJumpTo.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenViewJumpToConnectionsConfig, Me.mMenViewJumpToSessionsScreenshots, Me.mMenViewJumpToErrorsInfos})
-        Me.mMenViewJumpTo.Image = Global.mRemote.My.Resources.Resources.JumpTo
+        Me.mMenViewJumpTo.Image = Global.mRemoteNG.My.Resources.Resources.JumpTo
         Me.mMenViewJumpTo.Name = "mMenViewJumpTo"
         Me.mMenViewJumpTo.Size = New System.Drawing.Size(228, 22)
         Me.mMenViewJumpTo.Text = "Jump To"
@@ -468,7 +468,7 @@ Partial Class frmMain
         '
         'mMenViewQuickConnectToolbar
         '
-        Me.mMenViewQuickConnectToolbar.Image = Global.mRemote.My.Resources.Resources.Play_Quick
+        Me.mMenViewQuickConnectToolbar.Image = Global.mRemoteNG.My.Resources.Resources.Play_Quick
         Me.mMenViewQuickConnectToolbar.Name = "mMenViewQuickConnectToolbar"
         Me.mMenViewQuickConnectToolbar.Size = New System.Drawing.Size(228, 22)
         Me.mMenViewQuickConnectToolbar.Text = "Quick Connect Toolbar"
@@ -487,7 +487,7 @@ Partial Class frmMain
         '
         'mMenViewFullscreen
         '
-        Me.mMenViewFullscreen.Image = Global.mRemote.My.Resources.Resources.Fullscreen
+        Me.mMenViewFullscreen.Image = Global.mRemoteNG.My.Resources.Resources.Fullscreen
         Me.mMenViewFullscreen.Name = "mMenViewFullscreen"
         Me.mMenViewFullscreen.ShortcutKeys = System.Windows.Forms.Keys.F11
         Me.mMenViewFullscreen.Size = New System.Drawing.Size(228, 22)
@@ -502,14 +502,14 @@ Partial Class frmMain
         '
         'mMenToolsSSHTransfer
         '
-        Me.mMenToolsSSHTransfer.Image = Global.mRemote.My.Resources.Resources.SSHTransfer
+        Me.mMenToolsSSHTransfer.Image = Global.mRemoteNG.My.Resources.Resources.SSHTransfer
         Me.mMenToolsSSHTransfer.Name = "mMenToolsSSHTransfer"
         Me.mMenToolsSSHTransfer.Size = New System.Drawing.Size(184, 22)
         Me.mMenToolsSSHTransfer.Text = "SSH File Transfer"
         '
         'mMenToolsUVNCSC
         '
-        Me.mMenToolsUVNCSC.Image = Global.mRemote.My.Resources.Resources.UVNC_SC
+        Me.mMenToolsUVNCSC.Image = Global.mRemoteNG.My.Resources.Resources.UVNC_SC
         Me.mMenToolsUVNCSC.Name = "mMenToolsUVNCSC"
         Me.mMenToolsUVNCSC.Size = New System.Drawing.Size(184, 22)
         Me.mMenToolsUVNCSC.Text = "UltraVNC SingleClick"
@@ -524,7 +524,7 @@ Partial Class frmMain
         '
         'mMenToolsPortScan
         '
-        Me.mMenToolsPortScan.Image = Global.mRemote.My.Resources.Resources.PortScan
+        Me.mMenToolsPortScan.Image = Global.mRemoteNG.My.Resources.Resources.PortScan
         Me.mMenToolsPortScan.Name = "mMenToolsPortScan"
         Me.mMenToolsPortScan.Size = New System.Drawing.Size(184, 22)
         Me.mMenToolsPortScan.Text = "Port Scan"
@@ -536,7 +536,7 @@ Partial Class frmMain
         '
         'mMenToolsComponentsCheck
         '
-        Me.mMenToolsComponentsCheck.Image = Global.mRemote.My.Resources.Resources.ComponentsCheck
+        Me.mMenToolsComponentsCheck.Image = Global.mRemoteNG.My.Resources.Resources.ComponentsCheck
         Me.mMenToolsComponentsCheck.Name = "mMenToolsComponentsCheck"
         Me.mMenToolsComponentsCheck.Size = New System.Drawing.Size(184, 22)
         Me.mMenToolsComponentsCheck.Text = "Components Check"
@@ -578,7 +578,7 @@ Partial Class frmMain
         '
         'mMenInfoDonate
         '
-        Me.mMenInfoDonate.Image = Global.mRemote.My.Resources.Resources.Donate
+        Me.mMenInfoDonate.Image = Global.mRemoteNG.My.Resources.Resources.Donate
         Me.mMenInfoDonate.Name = "mMenInfoDonate"
         Me.mMenInfoDonate.Size = New System.Drawing.Size(190, 22)
         Me.mMenInfoDonate.Text = "Donate"
@@ -591,7 +591,7 @@ Partial Class frmMain
         '
         'mMenInfoBugReport
         '
-        Me.mMenInfoBugReport.Image = Global.mRemote.My.Resources.Resources.Bug
+        Me.mMenInfoBugReport.Image = Global.mRemoteNG.My.Resources.Resources.Bug
         Me.mMenInfoBugReport.Name = "mMenInfoBugReport"
         Me.mMenInfoBugReport.Size = New System.Drawing.Size(190, 22)
         Me.mMenInfoBugReport.Text = "Report a Bug"
@@ -603,14 +603,14 @@ Partial Class frmMain
         '
         'mMenInfoAnnouncements
         '
-        Me.mMenInfoAnnouncements.Image = Global.mRemote.My.Resources.Resources.News
+        Me.mMenInfoAnnouncements.Image = Global.mRemoteNG.My.Resources.Resources.News
         Me.mMenInfoAnnouncements.Name = "mMenInfoAnnouncements"
         Me.mMenInfoAnnouncements.Size = New System.Drawing.Size(190, 22)
         Me.mMenInfoAnnouncements.Text = "Announcements"
         '
         'mMenToolsUpdate
         '
-        Me.mMenToolsUpdate.Image = Global.mRemote.My.Resources.Resources.Update
+        Me.mMenToolsUpdate.Image = Global.mRemoteNG.My.Resources.Resources.Update
         Me.mMenToolsUpdate.Name = "mMenToolsUpdate"
         Me.mMenToolsUpdate.Size = New System.Drawing.Size(190, 22)
         Me.mMenToolsUpdate.Text = "Check for Updates"
@@ -622,7 +622,7 @@ Partial Class frmMain
         '
         'mMenInfoAbout
         '
-        Me.mMenInfoAbout.Image = Global.mRemote.My.Resources.Resources.mRemote
+        Me.mMenInfoAbout.Image = Global.mRemoteNG.My.Resources.Resources.mRemote
         Me.mMenInfoAbout.Name = "mMenInfoAbout"
         Me.mMenInfoAbout.Size = New System.Drawing.Size(190, 22)
         Me.mMenInfoAbout.Text = "About mRemoteNG"
@@ -715,7 +715,7 @@ Partial Class frmMain
         'btnQuickyPlay
         '
         Me.btnQuickyPlay.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.btnQuickyPlay.Image = Global.mRemote.My.Resources.Resources.Play_Quick
+        Me.btnQuickyPlay.Image = Global.mRemoteNG.My.Resources.Resources.Play_Quick
         Me.btnQuickyPlay.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.btnQuickyPlay.Name = "btnQuickyPlay"
         Me.btnQuickyPlay.Size = New System.Drawing.Size(32, 22)
@@ -726,7 +726,7 @@ Partial Class frmMain
         Me.mMenQuickyCon.AutoSize = False
         Me.mMenQuickyCon.AutoToolTip = True
         Me.mMenQuickyCon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mMenQuickyCon.Image = Global.mRemote.My.Resources.Resources.Root
+        Me.mMenQuickyCon.Image = Global.mRemoteNG.My.Resources.Resources.Root
         Me.mMenQuickyCon.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.mMenQuickyCon.Name = "mMenQuickyCon"
         Me.mMenQuickyCon.Size = New System.Drawing.Size(30, 22)
@@ -743,7 +743,7 @@ Partial Class frmMain
         '
         'ToolStripButton1
         '
-        Me.ToolStripButton1.Image = Global.mRemote.My.Resources.Resources.Play
+        Me.ToolStripButton1.Image = Global.mRemoteNG.My.Resources.Resources.Play
         Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton1.Name = "ToolStripButton1"
         Me.ToolStripButton1.Size = New System.Drawing.Size(72, 22)
@@ -751,7 +751,7 @@ Partial Class frmMain
         '
         'ToolStripButton2
         '
-        Me.ToolStripButton2.Image = Global.mRemote.My.Resources.Resources.Screenshot
+        Me.ToolStripButton2.Image = Global.mRemoteNG.My.Resources.Resources.Screenshot
         Me.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton2.Name = "ToolStripButton2"
         Me.ToolStripButton2.Size = New System.Drawing.Size(85, 22)
@@ -759,7 +759,7 @@ Partial Class frmMain
         '
         'ToolStripButton3
         '
-        Me.ToolStripButton3.Image = Global.mRemote.My.Resources.Resources.Refresh
+        Me.ToolStripButton3.Image = Global.mRemoteNG.My.Resources.Resources.Refresh
         Me.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripButton3.Name = "ToolStripButton3"
         Me.ToolStripButton3.Size = New System.Drawing.Size(66, 22)
@@ -769,7 +769,7 @@ Partial Class frmMain
         '
         Me.ToolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
         Me.ToolStripSplitButton1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2})
-        Me.ToolStripSplitButton1.Image = Global.mRemote.My.Resources.Resources.Keyboard
+        Me.ToolStripSplitButton1.Image = Global.mRemoteNG.My.Resources.Resources.Keyboard
         Me.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ToolStripSplitButton1.Name = "ToolStripSplitButton1"
         Me.ToolStripSplitButton1.Size = New System.Drawing.Size(29, 22)
@@ -802,7 +802,7 @@ Partial Class frmMain
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(842, 523)
         Me.Controls.Add(Me.tsContainer)
-        Me.Icon = Global.mRemote.My.Resources.Resources.mRemote_Icon
+        Me.Icon = Global.mRemoteNG.My.Resources.Resources.mRemote_Icon
         Me.MainMenuStrip = Me.msMain
         Me.Name = "frmMain"
         Me.Text = "mRemoteNG"

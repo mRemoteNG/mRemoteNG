@@ -1,6 +1,6 @@
 Imports System.IO
 Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 Imports System.Xml
 
 Namespace Config

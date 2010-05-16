@@ -1,10 +1,9 @@
 Imports System.Reflection
 Imports System.ComponentModel
-Imports System.Drawing.Design
 Imports System.Runtime.InteropServices
 Imports System.Collections.Specialized
 Imports System.Text.RegularExpressions
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 Imports System.IO
 Imports System.Data.SqlClient
 

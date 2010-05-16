@@ -1,6 +1,5 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemote.App.Runtime
-'Imports AxViewerX
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -54,7 +53,7 @@ Namespace UI
                 Me.ClientSize = New System.Drawing.Size(446, 362)
                 Me.Controls.Add(Me.pnlContainer)
                 Me.Controls.Add(Me.tsMain)
-                Me.Icon = Global.mRemote.My.Resources.UVNC_SC_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.UVNC_SC_Icon
                 Me.Name = "UltraVNCSC"
                 Me.TabText = "UltraVNC SC"
                 Me.Text = "UltraVNC SC"
@@ -110,7 +109,7 @@ Namespace UI
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "StartListening (UI.Window.UltraVNCSC) failed" & vbNewLine & ex.Message, False)
                     Close()
-                End Try   
+                End Try
             End Sub
 
             Private Sub SetupLicense()

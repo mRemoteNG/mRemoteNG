@@ -1,5 +1,5 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -247,7 +247,7 @@ Namespace UI
                 'tabConnections
                 '
                 Me.tabConnections.Controls.Add(Me.pnlConnections)
-                Me.tabConnections.Icon = Global.mRemote.My.Resources.Resources.Root_Icon
+                Me.tabConnections.Icon = Global.mRemoteNG.My.Resources.Resources.Root_Icon
                 Me.tabConnections.Location = New System.Drawing.Point(0, 0)
                 Me.tabConnections.Name = "tabConnections"
                 Me.tabConnections.Selected = False
@@ -567,7 +567,7 @@ Namespace UI
                 'tabStartupExit
                 '
                 Me.tabStartupExit.Controls.Add(Me.pnlStartup)
-                Me.tabStartupExit.Icon = Global.mRemote.My.Resources.Resources.StartupExit_Icon
+                Me.tabStartupExit.Icon = Global.mRemoteNG.My.Resources.Resources.StartupExit_Icon
                 Me.tabStartupExit.Location = New System.Drawing.Point(0, 0)
                 Me.tabStartupExit.Name = "tabStartupExit"
                 Me.tabStartupExit.Selected = False
@@ -649,7 +649,7 @@ Namespace UI
                 'tabAppearance
                 '
                 Me.tabAppearance.Controls.Add(Me.pnlAppearance)
-                Me.tabAppearance.Icon = Global.mRemote.My.Resources.Resources.Appearance_Icon
+                Me.tabAppearance.Icon = Global.mRemoteNG.My.Resources.Resources.Appearance_Icon
                 Me.tabAppearance.Location = New System.Drawing.Point(0, 0)
                 Me.tabAppearance.Name = "tabAppearance"
                 Me.tabAppearance.Selected = False
@@ -719,7 +719,7 @@ Namespace UI
                 'tabTabs
                 '
                 Me.tabTabs.Controls.Add(Me.pnlTabsAndPanels)
-                Me.tabTabs.Icon = Global.mRemote.My.Resources.Resources.Tab_Icon
+                Me.tabTabs.Icon = Global.mRemoteNG.My.Resources.Resources.Tab_Icon
                 Me.tabTabs.Location = New System.Drawing.Point(0, 0)
                 Me.tabTabs.Name = "tabTabs"
                 Me.tabTabs.Selected = False
@@ -862,7 +862,7 @@ Namespace UI
                 'tabUpdates
                 '
                 Me.tabUpdates.Controls.Add(Me.pnlUpdates)
-                Me.tabUpdates.Icon = Global.mRemote.My.Resources.Resources.Info_Icon
+                Me.tabUpdates.Icon = Global.mRemoteNG.My.Resources.Resources.Info_Icon
                 Me.tabUpdates.Location = New System.Drawing.Point(0, 0)
                 Me.tabUpdates.Name = "tabUpdates"
                 Me.tabUpdates.Size = New System.Drawing.Size(573, 492)
@@ -1077,7 +1077,7 @@ Namespace UI
                 'tabAdvanced
                 '
                 Me.tabAdvanced.Controls.Add(Me.pnlAdvanced)
-                Me.tabAdvanced.Icon = Global.mRemote.My.Resources.Resources.Config_Icon
+                Me.tabAdvanced.Icon = Global.mRemoteNG.My.Resources.Resources.Config_Icon
                 Me.tabAdvanced.Location = New System.Drawing.Point(0, 0)
                 Me.tabAdvanced.Name = "tabAdvanced"
                 Me.tabAdvanced.Selected = False
@@ -1225,7 +1225,7 @@ Namespace UI
                 'btnLaunchPutty
                 '
                 Me.btnLaunchPutty.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.btnLaunchPutty.Image = Global.mRemote.My.Resources.Resources.PuttyConfig
+                Me.btnLaunchPutty.Image = Global.mRemoteNG.My.Resources.Resources.PuttyConfig
                 Me.btnLaunchPutty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
                 Me.btnLaunchPutty.Location = New System.Drawing.Point(297, 153)
                 Me.btnLaunchPutty.Name = "btnLaunchPutty"
@@ -1315,7 +1315,7 @@ Namespace UI
                 Me.Controls.Add(Me.btnCancel)
                 Me.Controls.Add(Me.btnOK)
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.Icon = Global.mRemote.My.Resources.Resources.Options_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Options_Icon
                 Me.Name = "Options"
                 Me.TabText = "Options"
                 Me.Text = "Options"
@@ -1387,7 +1387,7 @@ Namespace UI
                     Me.chkUseSQLServer.Checked = My.Settings.UseSQLServer
                     Me.txtSQLServer.Text = My.Settings.SQLHost
                     Me.txtSQLUsername.Text = My.Settings.SQLUser
-                    Me.txtSQLPassword.Text = mRemote.Security.Crypt.Decrypt(My.Settings.SQLPass, App.Info.General.EncryptionKey)
+                    Me.txtSQLPassword.Text = mRemoteNG.Security.Crypt.Decrypt(My.Settings.SQLPass, App.Info.General.EncryptionKey)
 
                     Select Case My.Settings.EmptyCredentials
                         Case "noinfo"
@@ -1399,7 +1399,7 @@ Namespace UI
                     End Select
 
                     Me.txtCredentialsUsername.Text = My.Settings.DefaultUsername
-                    Me.txtCredentialsPassword.Text = mRemote.Security.Crypt.Decrypt(My.Settings.DefaultPassword, App.Info.General.EncryptionKey)
+                    Me.txtCredentialsPassword.Text = mRemoteNG.Security.Crypt.Decrypt(My.Settings.DefaultPassword, App.Info.General.EncryptionKey)
                     Me.txtCredentialsDomain.Text = My.Settings.DefaultDomain
 
                     Me.chkUseOnlyErrorsAndInfosPanel.Checked = My.Settings.ShowNoMessageBoxes
@@ -1503,7 +1503,7 @@ Namespace UI
                     My.Settings.UseSQLServer = Me.chkUseSQLServer.Checked
                     My.Settings.SQLHost = Me.txtSQLServer.Text
                     My.Settings.SQLUser = Me.txtSQLUsername.Text
-                    My.Settings.SQLPass = mRemote.Security.Crypt.Encrypt(Me.txtSQLPassword.Text, App.Info.General.EncryptionKey)
+                    My.Settings.SQLPass = mRemoteNG.Security.Crypt.Encrypt(Me.txtSQLPassword.Text, App.Info.General.EncryptionKey)
 
                     If Me.radCredentialsNoInfo.Checked Then
                         My.Settings.EmptyCredentials = "noinfo"
@@ -1514,7 +1514,7 @@ Namespace UI
                     End If
 
                     My.Settings.DefaultUsername = Me.txtCredentialsUsername.Text
-                    My.Settings.DefaultPassword = mRemote.Security.Crypt.Encrypt(Me.txtCredentialsPassword.Text, App.Info.General.EncryptionKey)
+                    My.Settings.DefaultPassword = mRemoteNG.Security.Crypt.Encrypt(Me.txtCredentialsPassword.Text, App.Info.General.EncryptionKey)
                     My.Settings.DefaultDomain = Me.txtCredentialsDomain.Text
 
                     My.Settings.ShowNoMessageBoxes = Me.chkUseOnlyErrorsAndInfosPanel.Checked
@@ -1543,9 +1543,9 @@ Namespace UI
                     My.Settings.CustomPuttyPath = Me.txtCustomPuttyPath.Text
 
                     If My.Settings.UseCustomPuttyPath Then
-                        mRemote.Connection.Protocol.PuttyBase.PuttyPath = My.Settings.CustomPuttyPath
+                        mRemoteNG.Connection.Protocol.PuttyBase.PuttyPath = My.Settings.CustomPuttyPath
                     Else
-                        mRemote.Connection.Protocol.PuttyBase.PuttyPath = My.Application.Info.DirectoryPath & "\putty.exe"
+                        mRemoteNG.Connection.Protocol.PuttyBase.PuttyPath = My.Application.Info.DirectoryPath & "\putty.exe"
                     End If
 
                     My.Settings.MaxPuttyWaitTime = Me.numPuttyWaitTime.Value
@@ -1744,7 +1744,7 @@ Namespace UI
             End Sub
 
             Private Sub btnLaunchPutty_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLaunchPutty.Click
-                mRemote.Connection.Protocol.PuttyBase.StartPutty()
+                mRemoteNG.Connection.Protocol.PuttyBase.StartPutty()
             End Sub
 
             Private Sub btnBrowseCustomPuttyPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseCustomPuttyPath.Click

@@ -1,6 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace App
     Public Class Update
@@ -190,9 +190,6 @@ Namespace App
             End Try
         End Sub
 #End Region
-
-
-
 
         Public Class Info
             Private _Version As Version

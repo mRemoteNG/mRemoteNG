@@ -1,5 +1,5 @@
 Imports System.Windows.Forms
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 Imports System.DirectoryServices
 
 Namespace Tree
@@ -46,9 +46,9 @@ Namespace Tree
         Public Shared Function GetConstantID(ByVal node As TreeNode) As String
             Select Case GetNodeType(node)
                 Case Type.Connection
-                    Return TryCast(node.Tag, mRemote.Connection.Info).ConstantID
+                    Return TryCast(node.Tag, mRemoteNG.Connection.Info).ConstantID
                 Case Type.Container
-                    Return TryCast(node.Tag, mRemote.Container.Info).ConnectionInfo.ConstantID
+                    Return TryCast(node.Tag, mRemoteNG.Container.Info).ConnectionInfo.ConstantID
             End Select
 
             Return Nothing
@@ -214,9 +214,9 @@ Namespace Tree
             Try
                 Dim adCNode As TreeNode = Tree.Node.AddNode(Type.Container)
 
-                Dim nContI As New mRemote.Container.Info()
+                Dim nContI As New mRemoteNG.Container.Info()
                 nContI.TreeNode = adCNode
-                nContI.ConnectionInfo = New mRemote.Connection.Info(nContI)
+                nContI.ConnectionInfo = New mRemoteNG.Connection.Info(nContI)
 
                 If Tree.Node.SelectedNode IsNot Nothing Then
                     If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Container Then
@@ -274,10 +274,10 @@ Namespace Tree
 
                     Dim adNode As TreeNode = Tree.Node.AddNode(Type.Connection, strDisplayName)
 
-                    Dim nConI As New mRemote.Connection.Info()
-                    Dim nInh As New mRemote.Connection.Info.Inheritance(nConI, True)
+                    Dim nConI As New mRemoteNG.Connection.Info()
+                    Dim nInh As New mRemoteNG.Connection.Info.Inheritance(nConI, True)
                     nInh.Description = False
-                    If TypeOf rNode.Tag Is mRemote.Container.Info Then
+                    If TypeOf rNode.Tag Is mRemoteNG.Container.Info Then
                         nConI.Parent = rNode.Tag
                     End If
                     nConI.Inherit = nInh
@@ -343,7 +343,7 @@ Namespace Tree
                 End If
             Catch ex As Exception
                 mC.AddMessage(Messages.MessageClass.WarningMsg, "CloneNode failed (Tree.Node)" & vbNewLine & ex.Message)
-            End Try         
+            End Try
         End Sub
 
         Public Shared Sub SetNodeImage(ByVal treeNode As TreeNode, ByVal Img As Images.Enums.TreeImage)
@@ -376,7 +376,7 @@ Namespace Tree
                     Else
                         'Get this node's object data.
                         If GetNodeType(old_node) = Type.Connection Then
-                            tTip.SetToolTip(_TreeView, TryCast(old_node.Tag, mRemote.Connection.Info).Description)
+                            tTip.SetToolTip(_TreeView, TryCast(old_node.Tag, mRemoteNG.Connection.Info).Description)
                         End If
                     End If
                 End If

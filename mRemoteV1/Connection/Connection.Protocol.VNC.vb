@@ -1,6 +1,7 @@
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 Imports VncSharp
 Imports System.ComponentModel
+Imports mRemoteNG.Tools.LocalizedAttributes
 
 Namespace Connection
     Namespace Protocol
@@ -242,9 +243,9 @@ Namespace Connection
                 CtrlEsc
             End Enum
 
-            Public Enum Compression ' TODO: Translate this
-                <Description("No compression")> _
-                CompNone = 99 ' My.Resources.strNoCompression
+            Public Enum Compression
+                <LocalizedDescription("strNoCompression")> _
+                CompNone = 99
                 <Description("0")> _
                 Comp0 = 0
                 <Description("1")> _
@@ -287,37 +288,37 @@ Namespace Connection
             End Enum
 
             Public Enum AuthMode
-                <Description("VNC")> _
+                <LocalizedDescription("VNC")> _
                 AuthVNC
-                <Description("Windows")> _
+                <LocalizedDescription("Windows")> _
                 AuthWin
             End Enum
 
-            Public Enum ProxyType ' TODO: Translate this
-                <Description("none")> _
-                ProxyNone ' My.Resources.strNone
-                <Description("HTTP")> _
+            Public Enum ProxyType
+                <LocalizedDescription("strNone")> _
+                ProxyNone
+                <LocalizedDescription("strHttp")> _
                 ProxyHTTP
-                <Description("Socks 5")> _
+                <LocalizedDescription("strSocks5")> _
                 ProxySocks5
-                <Description("Ultra VNC Repeater")> _
+                <LocalizedDescription("strUltraVncRepeater")> _
                 ProxyUltra
             End Enum
 
-            Public Enum Colors ' TODO: Translate this
-                <Description("Normal")> _
-                ColNormal 'My.Resources.strNormal
+            Public Enum Colors
+                <LocalizedDescription("strNormal")> _
+                ColNormal
                 <Description("8-bit")> _
                 Col8Bit
             End Enum
 
-            Public Enum SmartSizeMode ' TODO: Translate this
-                <Description("No SmartSize")> _
-                SmartSNo ' My.Resources.strNoSmartSize
-                <Description("Free")> _
-                SmartSFree ' My.Resources.strFree
-                <Description("Aspect")> _
-                SmartSAspect ' My.Resources.strAspect
+            Public Enum SmartSizeMode
+                <LocalizedDescription("strNoSmartSize")> _
+                SmartSNo
+                <LocalizedDescription("strFree")> _
+                SmartSFree
+                <LocalizedDescription("strAspect")> _
+                SmartSAspect
             End Enum
 #End Region
         End Class

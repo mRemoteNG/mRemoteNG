@@ -1,7 +1,7 @@
 Imports System.IO
 Imports System.Security.Cryptography
 Imports System.Text
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace Security
     Public Class Crypt

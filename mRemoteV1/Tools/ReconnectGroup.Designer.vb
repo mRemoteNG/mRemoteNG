@@ -89,7 +89,7 @@ Partial Class ReconnectGroup
         '
         'pbServerStatus
         '
-        Me.pbServerStatus.Image = Global.mRemote.My.Resources.Resources.HostStatus_Check
+        Me.pbServerStatus.Image = Global.mRemoteNG.My.Resources.Resources.HostStatus_Check
         Me.pbServerStatus.Location = New System.Drawing.Point(99, 23)
         Me.pbServerStatus.Name = "pbServerStatus"
         Me.pbServerStatus.Size = New System.Drawing.Size(16, 16)

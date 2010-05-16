@@ -1,4 +1,4 @@
-﻿Imports mRemote.App.Runtime
+﻿Imports mRemoteNG.App.Runtime
 Imports System.Threading
 Imports AxWFICALib
 Imports System.ComponentModel

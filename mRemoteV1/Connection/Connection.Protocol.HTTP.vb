@@ -1,6 +1,3 @@
-Imports System.Windows.Forms
-Imports mRemote.App.Runtime
-
 Namespace Connection
     Namespace Protocol
         Public Class HTTP

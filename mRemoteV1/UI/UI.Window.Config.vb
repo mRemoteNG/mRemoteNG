@@ -1,6 +1,6 @@
 Imports WeifenLuo.WinFormsUI.Docking
 Imports System.Net.NetworkInformation
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -49,7 +49,7 @@ Namespace UI
                 'btnShowInheritance
                 '
                 Me.btnShowInheritance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.btnShowInheritance.Image = Global.mRemote.My.Resources.Resources.Inheritance
+                Me.btnShowInheritance.Image = Global.mRemoteNG.My.Resources.Resources.Inheritance
                 Me.btnShowInheritance.ImageTransparentColor = System.Drawing.Color.Magenta
                 Me.btnShowInheritance.Name = "btnShowInheritance"
                 Me.btnShowInheritance.Size = New System.Drawing.Size(23, 22)
@@ -58,7 +58,7 @@ Namespace UI
                 'btnShowDefaultInheritance
                 '
                 Me.btnShowDefaultInheritance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.btnShowDefaultInheritance.Image = Global.mRemote.My.Resources.Resources.Inheritance_Default
+                Me.btnShowDefaultInheritance.Image = Global.mRemoteNG.My.Resources.Resources.Inheritance_Default
                 Me.btnShowDefaultInheritance.ImageTransparentColor = System.Drawing.Color.Magenta
                 Me.btnShowDefaultInheritance.Name = "btnShowDefaultInheritance"
                 Me.btnShowDefaultInheritance.Size = New System.Drawing.Size(23, 22)
@@ -69,7 +69,7 @@ Namespace UI
                 Me.btnShowProperties.Checked = True
                 Me.btnShowProperties.CheckState = System.Windows.Forms.CheckState.Checked
                 Me.btnShowProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.btnShowProperties.Image = Global.mRemote.My.Resources.Resources.Properties
+                Me.btnShowProperties.Image = Global.mRemoteNG.My.Resources.Resources.Properties
                 Me.btnShowProperties.ImageTransparentColor = System.Drawing.Color.Magenta
                 Me.btnShowProperties.Name = "btnShowProperties"
                 Me.btnShowProperties.Size = New System.Drawing.Size(23, 22)
@@ -78,7 +78,7 @@ Namespace UI
                 'btnShowDefaultProperties
                 '
                 Me.btnShowDefaultProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.btnShowDefaultProperties.Image = Global.mRemote.My.Resources.Resources.Properties_Default
+                Me.btnShowDefaultProperties.Image = Global.mRemoteNG.My.Resources.Resources.Properties_Default
                 Me.btnShowDefaultProperties.ImageTransparentColor = System.Drawing.Color.Magenta
                 Me.btnShowDefaultProperties.Name = "btnShowDefaultProperties"
                 Me.btnShowDefaultProperties.Size = New System.Drawing.Size(23, 22)
@@ -97,7 +97,7 @@ Namespace UI
                 '
                 Me.btnHostStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
                 Me.btnHostStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.btnHostStatus.Image = Global.mRemote.My.Resources.Resources.HostStatus_Check
+                Me.btnHostStatus.Image = Global.mRemoteNG.My.Resources.Resources.HostStatus_Check
                 Me.btnHostStatus.ImageTransparentColor = System.Drawing.Color.Magenta
                 Me.btnHostStatus.Name = "btnHostStatus"
                 Me.btnHostStatus.Size = New System.Drawing.Size(23, 22)
@@ -114,7 +114,7 @@ Namespace UI
                 Me.ClientSize = New System.Drawing.Size(226, 530)
                 Me.Controls.Add(Me.pGrid)
                 Me.HideOnClose = True
-                Me.Icon = Global.mRemote.My.Resources.Resources.Config_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Config_Icon
                 Me.Name = "Config"
                 Me.TabText = "Config"
                 Me.Text = "Config"
@@ -262,13 +262,13 @@ Namespace UI
 
                     Me.btnIcon.Image = Nothing
 
-                    If TypeOf Obj Is mRemote.Connection.Info Then 'CONNECTION INFO
-                        If TryCast(Obj, mRemote.Connection.Info).IsContainer = False Then 'NO CONTAINER
+                    If TypeOf Obj Is mRemoteNG.Connection.Info Then 'CONNECTION INFO
+                        If TryCast(Obj, mRemoteNG.Connection.Info).IsContainer = False Then 'NO CONTAINER
                             If Me.PropertiesVisible Then 'Properties selected
                                 Me.pGrid.SelectedObject = Obj
 
                                 Me.btnShowProperties.Enabled = True
-                                If TryCast(Obj, mRemote.Connection.Info).Parent IsNot Nothing Then
+                                If TryCast(Obj, mRemoteNG.Connection.Info).Parent IsNot Nothing Then
                                     Me.btnShowInheritance.Enabled = True
                                 Else
                                     Me.btnShowInheritance.Enabled = False
@@ -280,7 +280,7 @@ Namespace UI
                             ElseIf Me.DefaultPropertiesVisible Then 'Defaults selected
                                 Me.pGrid.SelectedObject = Obj
 
-                                If TryCast(Obj, mRemote.Connection.Info).IsDefault Then 'Is the default connection
+                                If TryCast(Obj, mRemoteNG.Connection.Info).IsDefault Then 'Is the default connection
                                     Me.btnShowProperties.Enabled = True
                                     Me.btnShowInheritance.Enabled = False
                                     Me.btnShowDefaultProperties.Enabled = True
@@ -298,7 +298,7 @@ Namespace UI
                                     Me.PropertiesVisible = True
                                 End If
                             ElseIf Me.InheritanceVisible Then 'Inheritance selected
-                                Me.pGrid.SelectedObject = TryCast(Obj, mRemote.Connection.Info).Inherit
+                                Me.pGrid.SelectedObject = TryCast(Obj, mRemoteNG.Connection.Info).Inherit
 
                                 Me.btnShowProperties.Enabled = True
                                 Me.btnShowInheritance.Enabled = True
@@ -316,11 +316,11 @@ Namespace UI
 
                                 Me.PropertiesVisible = True
                             End If
-                        ElseIf TryCast(Obj, mRemote.Connection.Info).IsContainer Then 'CONTAINER
+                        ElseIf TryCast(Obj, mRemoteNG.Connection.Info).IsContainer Then 'CONTAINER
                             Me.pGrid.SelectedObject = Obj
 
                             Me.btnShowProperties.Enabled = True
-                            If TryCast(TryCast(Obj, mRemote.Connection.Info).Parent, mRemote.Container.Info).Parent IsNot Nothing Then
+                            If TryCast(TryCast(Obj, mRemoteNG.Connection.Info).Parent, mRemoteNG.Container.Info).Parent IsNot Nothing Then
                                 Me.btnShowInheritance.Enabled = True
                             Else
                                 Me.btnShowInheritance.Enabled = False
@@ -333,11 +333,11 @@ Namespace UI
                             Me.PropertiesVisible = True
                         End If
 
-                        Dim conIcon As Icon = mRemote.Connection.Icon.FromString(TryCast(Obj, mRemote.Connection.Info).Icon)
+                        Dim conIcon As Icon = mRemoteNG.Connection.Icon.FromString(TryCast(Obj, mRemoteNG.Connection.Info).Icon)
                         If conIcon IsNot Nothing Then
                             Me.btnIcon.Image = conIcon.ToBitmap
                         End If
-                    ElseIf TypeOf Obj Is mRemote.Root.Info Then 'ROOT
+                    ElseIf TypeOf Obj Is mRemoteNG.Root.Info Then 'ROOT
                         Me.PropertiesVisible = True
                         Me.DefaultPropertiesVisible = False
                         Me.btnShowProperties.Enabled = True
@@ -348,7 +348,7 @@ Namespace UI
                         Me.btnHostStatus.Enabled = False
 
                         Me.pGrid.SelectedObject = Obj
-                    ElseIf TypeOf Obj Is mRemote.Connection.Info.Inheritance Then 'INHERITANCE
+                    ElseIf TypeOf Obj Is mRemoteNG.Connection.Info.Inheritance Then 'INHERITANCE
                         Me.pGrid.SelectedObject = Obj
 
                         If Me.InheritanceVisible Then
@@ -358,11 +358,11 @@ Namespace UI
                             Me.btnShowDefaultProperties.Enabled = False
                             Me.btnShowDefaultInheritance.Enabled = False
                             Me.btnIcon.Enabled = True
-                            Me.btnHostStatus.Enabled = Not TryCast(TryCast(Obj, mRemote.Connection.Info.Inheritance).Parent, mRemote.Connection.Info).IsContainer
+                            Me.btnHostStatus.Enabled = Not TryCast(TryCast(Obj, mRemoteNG.Connection.Info.Inheritance).Parent, mRemoteNG.Connection.Info).IsContainer
 
                             Me.InheritanceVisible = True
 
-                            Dim conIcon As Icon = mRemote.Connection.Icon.FromString(TryCast(TryCast(Obj, mRemote.Connection.Info.Inheritance).Parent, mRemote.Connection.Info).Icon)
+                            Dim conIcon As Icon = mRemoteNG.Connection.Icon.FromString(TryCast(TryCast(Obj, mRemoteNG.Connection.Info.Inheritance).Parent, mRemoteNG.Connection.Info).Icon)
                             If conIcon IsNot Nothing Then
                                 Me.btnIcon.Image = conIcon.ToBitmap
                             End If
@@ -374,7 +374,7 @@ Namespace UI
                             Me.btnIcon.Enabled = False
                             Me.btnHostStatus.Enabled = False
 
-                            Me.DefaultInheritanceVisible = True               
+                            Me.DefaultInheritanceVisible = True
                         End If
 
                     End If
@@ -440,30 +440,30 @@ Namespace UI
 
             Private Sub pGrid_PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs) Handles pGrid.PropertyValueChanged
                 Try
-                    If TypeOf Me.pGrid.SelectedObject Is mRemote.Connection.Info Then
+                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
                         Select Case e.ChangedItem.Label
                             Case My.Resources.strPropertyNameProtocol
-                                TryCast(Me.pGrid.SelectedObject, mRemote.Connection.Info).SetDefaultPort()
+                                TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).SetDefaultPort()
                             Case My.Resources.strPropertyNameName
                                 App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Text = Me.pGrid.SelectedObject.Name
                             Case My.Resources.strPropertyNameIcon
-                                Dim conIcon As Icon = mRemote.Connection.Icon.FromString(TryCast(Me.pGrid.SelectedObject, mRemote.Connection.Info).Icon)
+                                Dim conIcon As Icon = mRemoteNG.Connection.Icon.FromString(TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).Icon)
                                 If conIcon IsNot Nothing Then
                                     Me.btnIcon.Image = conIcon.ToBitmap
                                 End If
                             Case My.Resources.strPropertyNamePuttySession
-                                mRemote.Connection.PuttySession.PuttySessions = mRemote.Connection.Protocol.PuttyBase.GetSessions()
+                                mRemoteNG.Connection.PuttySession.PuttySessions = mRemoteNG.Connection.Protocol.PuttyBase.GetSessions()
                             Case My.Resources.strPropertyNameAddress
                                 Me.SetHostStatus(Me.pGrid.SelectedObject)
                         End Select
 
-                        If TryCast(Me.pGrid.SelectedObject, mRemote.Connection.Info).IsDefault Then
+                        If TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).IsDefault Then
                             App.Runtime.DefaultConnectionToSettings()
                         End If
                     End If
 
-                    If TypeOf Me.pGrid.SelectedObject Is mRemote.Root.Info Then
-                        Dim rInfo As mRemote.Root.Info = Me.pGrid.SelectedObject
+                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Then
+                        Dim rInfo As mRemoteNG.Root.Info = Me.pGrid.SelectedObject
 
                         Select Case e.ChangedItem.Label
                             Case My.Resources.strPasswordProtect
@@ -481,8 +481,8 @@ Namespace UI
                         End Select
                     End If
 
-                    If TypeOf Me.pGrid.SelectedObject Is mRemote.Connection.Info.Inheritance Then
-                        If TryCast(Me.pGrid.SelectedObject, mRemote.Connection.Info.Inheritance).IsDefault Then
+                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info.Inheritance Then
+                        If TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info.Inheritance).IsDefault Then
                             App.Runtime.DefaultInheritanceToSettings()
                         End If
                     End If
@@ -498,42 +498,42 @@ Namespace UI
                 Try
                     Dim strHide As String = ""
 
-                    If TypeOf Me.pGrid.SelectedObject Is mRemote.Connection.Info Then
-                        Dim conI As mRemote.Connection.Info = pGrid.SelectedObject
+                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
+                        Dim conI As mRemoteNG.Connection.Info = pGrid.SelectedObject
 
                         Select Case conI.Protocol
-                            Case mRemote.Connection.Protocol.Protocols.RDP
+                            Case mRemoteNG.Connection.Protocol.Protocols.RDP
                                 strHide &= "ExtApp;RenderingEngine;PuttySession;ICAEncryption;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;"
-                                If conI.RDGatewayUsageMethod = mRemote.Connection.Protocol.RDP.RDGatewayUsageMethod.Never Then
+                                If conI.RDGatewayUsageMethod = mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod.Never Then
                                     strHide &= "RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
-                                Else If conI.RDGatewayUseConnectionCredentials Then
+                                ElseIf conI.RDGatewayUseConnectionCredentials Then
                                     strHide &= "RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
                                 End If
-                            Case mRemote.Connection.Protocol.Protocols.VNC
+                            Case mRemoteNG.Connection.Protocol.Protocols.VNC
                                 strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;PuttySession;ICAEncryption;RDPAuthenticationLevel;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
-                                If conI.VNCAuthMode = mRemote.Connection.Protocol.VNC.AuthMode.AuthVNC Then
+                                If conI.VNCAuthMode = mRemoteNG.Connection.Protocol.VNC.AuthMode.AuthVNC Then
                                     strHide &= "Username;Domain;"
                                 End If
-                                If conI.VNCProxyType = mRemote.Connection.Protocol.VNC.ProxyType.ProxyNone Then
+                                If conI.VNCProxyType = mRemoteNG.Connection.Protocol.VNC.ProxyType.ProxyNone Then
                                     strHide &= "VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyUsername;"
                                 End If
-                            Case mRemote.Connection.Protocol.Protocols.SSH1
+                            Case mRemoteNG.Connection.Protocol.Protocols.SSH1
                                 strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
-                            Case mRemote.Connection.Protocol.Protocols.SSH2
+                            Case mRemoteNG.Connection.Protocol.Protocols.SSH2
                                 strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
-                            Case mRemote.Connection.Protocol.Protocols.Telnet
+                            Case mRemoteNG.Connection.Protocol.Protocols.Telnet
                                 strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;Password;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;Username;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
-                            Case mRemote.Connection.Protocol.Protocols.Rlogin
+                            Case mRemoteNG.Connection.Protocol.Protocols.Rlogin
                                 strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;Password;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;Username;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
-                            Case mRemote.Connection.Protocol.Protocols.RAW
+                            Case mRemoteNG.Connection.Protocol.Protocols.RAW
                                 strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;Password;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;Username;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
-                            Case mRemote.Connection.Protocol.Protocols.HTTP
+                            Case mRemoteNG.Connection.Protocol.Protocols.HTTP
                                 strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;PuttySession;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
-                            Case mRemote.Connection.Protocol.Protocols.HTTPS
+                            Case mRemoteNG.Connection.Protocol.Protocols.HTTPS
                                 strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;PuttySession;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
-                            Case mRemote.Connection.Protocol.Protocols.ICA
+                            Case mRemoteNG.Connection.Protocol.Protocols.ICA
                                 strHide &= "ExtApp;DisplayThemes;DisplayWallpaper;PuttySession;RDPAuthenticationLevel;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;UseConsoleSession;RenderingEngine;Port;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
-                            Case mRemote.Connection.Protocol.Protocols.IntApp
+                            Case mRemoteNG.Connection.Protocol.Protocols.IntApp
                                 strHide &= "CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;PuttySession;ICAEncryption;RDPAuthenticationLevel;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
                         End Select
 
@@ -710,7 +710,7 @@ Namespace UI
                         Else
                             strHide = "Hostname;Name;"
                         End If
-                    ElseIf TypeOf Me.pGrid.SelectedObject Is mRemote.Root.Info Then
+                    ElseIf TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Then
                         strHide &= "TreeNode;"
                     Else
                         strHide = ";"
@@ -725,33 +725,33 @@ Namespace UI
             End Sub
 
             Private Sub btnShowProperties_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnShowProperties.Click
-                If TypeOf Me.pGrid.SelectedObject Is mRemote.Connection.Info.Inheritance Then
-                    If TryCast(Me.pGrid.SelectedObject, mRemote.Connection.Info.Inheritance).IsDefault Then
+                If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info.Inheritance Then
+                    If TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info.Inheritance).IsDefault Then
                         Me.PropertiesVisible = True
                         Me.InheritanceVisible = False
                         Me.DefaultPropertiesVisible = False
                         Me.DefaultInheritanceVisible = False
-                        Me.SetPropertyGridObject(TryCast(App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Tag, mRemote.Root.Info))
+                        Me.SetPropertyGridObject(TryCast(App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Tag, mRemoteNG.Root.Info))
                     Else
                         Me.PropertiesVisible = True
                         Me.InheritanceVisible = False
                         Me.DefaultPropertiesVisible = False
                         Me.DefaultInheritanceVisible = False
-                        Me.SetPropertyGridObject(TryCast(Me.pGrid.SelectedObject, mRemote.Connection.Info.Inheritance).Parent)
+                        Me.SetPropertyGridObject(TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info.Inheritance).Parent)
                     End If
-                ElseIf TypeOf Me.pGrid.SelectedObject Is mRemote.Connection.Info Then
-                    If TryCast(Me.pGrid.SelectedObject, mRemote.Connection.Info).IsDefault Then
+                ElseIf TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
+                    If TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).IsDefault Then
                         Me.PropertiesVisible = True
                         Me.InheritanceVisible = False
                         Me.DefaultPropertiesVisible = False
                         Me.DefaultInheritanceVisible = False
-                        Me.SetPropertyGridObject(TryCast(App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Tag, mRemote.Root.Info))
+                        Me.SetPropertyGridObject(TryCast(App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Tag, mRemoteNG.Root.Info))
                     End If
                 End If
             End Sub
 
             Private Sub btnShowDefaultProperties_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnShowDefaultProperties.Click
-                If TypeOf Me.pGrid.SelectedObject Is mRemote.Root.Info Or TypeOf Me.pGrid.SelectedObject Is mRemote.Connection.Info.Inheritance Then
+                If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Or TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info.Inheritance Then
                     Me.PropertiesVisible = False
                     Me.InheritanceVisible = False
                     Me.DefaultPropertiesVisible = True
@@ -761,17 +761,17 @@ Namespace UI
             End Sub
 
             Private Sub btnShowInheritance_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnShowInheritance.Click
-                If TypeOf Me.pGrid.SelectedObject Is mRemote.Connection.Info Then
+                If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
                     Me.PropertiesVisible = False
                     Me.InheritanceVisible = True
                     Me.DefaultPropertiesVisible = False
                     Me.DefaultInheritanceVisible = False
-                    Me.SetPropertyGridObject(TryCast(Me.pGrid.SelectedObject, mRemote.Connection.Info).Inherit)
+                    Me.SetPropertyGridObject(TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).Inherit)
                 End If
             End Sub
 
             Private Sub btnShowDefaultInheritance_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnShowDefaultInheritance.Click
-                If TypeOf Me.pGrid.SelectedObject Is mRemote.Root.Info Or TypeOf Me.pGrid.SelectedObject Is mRemote.Connection.Info Then
+                If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Or TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
                     Me.PropertiesVisible = False
                     Me.InheritanceVisible = False
                     Me.DefaultPropertiesVisible = False
@@ -786,13 +786,13 @@ Namespace UI
 
             Private Sub btnIcon_Click(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles btnIcon.MouseUp
                 Try
-                    If TypeOf Me.pGrid.SelectedObject Is mRemote.Connection.Info Then
+                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
                         Me.cMenIcons.Items.Clear()
 
-                        For Each iStr As String In mRemote.Connection.Icon.Icons
+                        For Each iStr As String In mRemoteNG.Connection.Icon.Icons
                             Dim tI As New ToolStripMenuItem
                             tI.Text = iStr
-                            tI.Image = mRemote.Connection.Icon.FromString(iStr).ToBitmap
+                            tI.Image = mRemoteNG.Connection.Icon.FromString(iStr).ToBitmap
                             AddHandler tI.Click, AddressOf IconMenu_Click
 
                             Me.cMenIcons.Items.Add(tI)
@@ -808,9 +808,9 @@ Namespace UI
 
             Private Sub IconMenu_Click(ByVal sender As Object, ByVal e As System.EventArgs)
                 Try
-                    If TypeOf Me.pGrid.SelectedObject Is mRemote.Connection.Info Then
-                        TryCast(Me.pGrid.SelectedObject, mRemote.Connection.Info).Icon = TryCast(sender, ToolStripMenuItem).Text
-                        Dim conIcon As Icon = mRemote.Connection.Icon.FromString(TryCast(Me.pGrid.SelectedObject, mRemote.Connection.Info).Icon)
+                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
+                        TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).Icon = TryCast(sender, ToolStripMenuItem).Text
+                        Dim conIcon As Icon = mRemoteNG.Connection.Icon.FromString(TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).Icon)
                         If conIcon IsNot Nothing Then
                             Me.btnIcon.Image = conIcon.ToBitmap
                         End If
@@ -863,23 +863,23 @@ Namespace UI
 
             Public Sub SetHostStatus(ByVal ConnectionInfo As Object)
                 Try
-                    If TypeOf ConnectionInfo Is mRemote.Connection.Info Then
+                    If TypeOf ConnectionInfo Is mRemoteNG.Connection.Info Then
                         'continue
-                    ElseIf TypeOf ConnectionInfo Is mRemote.Connection.Info.Inheritance Then
-                        ConnectionInfo = TryCast(ConnectionInfo, mRemote.Connection.Info.Inheritance).Parent
+                    ElseIf TypeOf ConnectionInfo Is mRemoteNG.Connection.Info.Inheritance Then
+                        ConnectionInfo = TryCast(ConnectionInfo, mRemoteNG.Connection.Info.Inheritance).Parent
                     Else
                         Me.btnHostStatus.Image = My.Resources.HostStatus_Check
                         Exit Sub
                     End If
 
-                    If TryCast(ConnectionInfo, mRemote.Connection.Info).IsContainer Then
+                    If TryCast(ConnectionInfo, mRemoteNG.Connection.Info).IsContainer Then
                         Me.btnHostStatus.Image = My.Resources.HostStatus_Check
                         Exit Sub
                     End If
 
                     Me.btnHostStatus.Image = My.Resources.HostStatus_Check
                     Me.btnHostStatus.Tag = "checking"
-                    HostName = TryCast(ConnectionInfo, mRemote.Connection.Info).Hostname
+                    HostName = TryCast(ConnectionInfo, mRemoteNG.Connection.Info).Hostname
                     pThread = New Threading.Thread(AddressOf CheckHostAlive)
                     pThread.IsBackground = True
                     pThread.Start()

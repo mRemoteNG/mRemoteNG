@@ -1,5 +1,5 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -115,7 +115,7 @@ Namespace UI
                 '
                 'cMenAppsAdd
                 '
-                Me.cMenAppsAdd.Image = Global.mRemote.My.Resources.Resources.ExtApp_Add
+                Me.cMenAppsAdd.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp_Add
                 Me.cMenAppsAdd.Name = "cMenAppsAdd"
                 Me.cMenAppsAdd.ShortcutKeys = CType((System.Windows.Forms.Keys.Shift Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
                 Me.cMenAppsAdd.Size = New System.Drawing.Size(147, 22)
@@ -123,7 +123,7 @@ Namespace UI
                 '
                 'cMenAppsRemove
                 '
-                Me.cMenAppsRemove.Image = Global.mRemote.My.Resources.Resources.ExtApp_Delete
+                Me.cMenAppsRemove.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp_Delete
                 Me.cMenAppsRemove.Name = "cMenAppsRemove"
                 Me.cMenAppsRemove.ShortcutKeys = System.Windows.Forms.Keys.Delete
                 Me.cMenAppsRemove.Size = New System.Drawing.Size(147, 22)
@@ -136,7 +136,7 @@ Namespace UI
                 '
                 'cMenAppsStart
                 '
-                Me.cMenAppsStart.Image = Global.mRemote.My.Resources.Resources.ExtApp_Start
+                Me.cMenAppsStart.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp_Start
                 Me.cMenAppsStart.Name = "cMenAppsStart"
                 Me.cMenAppsStart.Size = New System.Drawing.Size(147, 22)
                 Me.cMenAppsStart.Text = "Start"
@@ -405,7 +405,7 @@ Namespace UI
             Private Sub StartApp()
                 Try
                     For Each lvItem As ListViewItem In lvApps.SelectedItems
-                        TryCast(lvItem.Tag, mRemote.Tools.ExternalApp).Start()
+                        TryCast(lvItem.Tag, mRemoteNG.Tools.ExternalApp).Start()
                     Next
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.WarningMsg, "StartApp failed (UI.Window.ExternalApps" & vbNewLine & ex.Message, True)

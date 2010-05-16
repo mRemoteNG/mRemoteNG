@@ -1,5 +1,5 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -112,7 +112,7 @@ Namespace UI
                 '
                 Me.btnScan.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.btnScan.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.btnScan.Image = Global.mRemote.My.Resources.Resources.Search
+                Me.btnScan.Image = Global.mRemoteNG.My.Resources.Resources.Search
                 Me.btnScan.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
                 Me.btnScan.Location = New System.Drawing.Point(448, 8)
                 Me.btnScan.Name = "btnScan"
@@ -418,7 +418,7 @@ Namespace UI
             End Sub
 
             Private Sub btnImport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnImport.Click
-                Dim prot As mRemote.Connection.Protocol.Protocols = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.Protocols), cbProtocol.SelectedItem)
+                Dim prot As mRemoteNG.Connection.Protocol.Protocols = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.Protocols), cbProtocol.SelectedItem)
 
                 Dim arrHosts As New ArrayList
                 For Each lvItem As ListViewItem In lvHosts.SelectedItems

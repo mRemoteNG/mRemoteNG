@@ -1,29 +1,30 @@
 Imports System.ComponentModel
+Imports mRemoteNG.Tools.LocalizedAttributes
 
 Namespace Connection
     Namespace Protocol
         Public Enum Protocols
-            <Description("RDP")> _
+            <LocalizedDescription("strRdp")> _
             RDP = 0
-            <Description("VNC")> _
+            <LocalizedDescription("strVnc")> _
             VNC = 1
-            <Description("SSH1")> _
+            <LocalizedDescription("strSsh1")> _
             SSH1 = 2
-            <Description("SSH2")> _
+            <LocalizedDescription("strSsh2")> _
             SSH2 = 3
-            <Description("Telnet")> _
+            <LocalizedDescription("strTelnet")> _
             Telnet = 4
-            <Description("Rlogin")> _
+            <LocalizedDescription("strRlogin")> _
             Rlogin = 5
-            <Description("RAW")> _
+            <LocalizedDescription("strRAW")> _
             RAW = 6
-            <Description("HTTP")> _
+            <LocalizedDescription("strHttp")> _
             HTTP = 7
-            <Description("HTTPS")> _
+            <LocalizedDescription("strHttps")> _
             HTTPS = 8
-            <Description("ICA")> _
+            <LocalizedDescription("strICA")> _
             ICA = 9
-            <Description("Ext. App")> _
+            <LocalizedDescription("strExtApp")> _
             IntApp = 20
             <Browsable(False)> _
             NONE = 999

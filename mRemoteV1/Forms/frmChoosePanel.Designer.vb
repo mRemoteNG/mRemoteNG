@@ -60,7 +60,7 @@ Partial Class frmChoosePanel
         'btnNew
         '
         Me.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnNew.Image = Global.mRemote.My.Resources.Resources.Panel_Add
+        Me.btnNew.Image = Global.mRemoteNG.My.Resources.Resources.Panel_Add
         Me.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
         Me.btnNew.Location = New System.Drawing.Point(10, 44)
         Me.btnNew.Name = "btnNew"
@@ -94,7 +94,7 @@ Partial Class frmChoosePanel
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.cbPanels)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-        Me.Icon = Global.mRemote.My.Resources.Resources.Panels_Icon
+        Me.Icon = Global.mRemoteNG.My.Resources.Resources.Panels_Icon
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmChoosePanel"

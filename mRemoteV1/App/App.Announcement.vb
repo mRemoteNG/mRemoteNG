@@ -1,6 +1,5 @@
-﻿Imports System.IO
-Imports System.Net
-Imports mRemote.App.Runtime
+﻿Imports System.Net
+Imports mRemoteNG.App.Runtime
 
 Namespace App
     Public Class Announcement

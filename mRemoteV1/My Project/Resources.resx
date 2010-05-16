@@ -1996,4 +1996,52 @@ Starting with new connections file.</value>
   <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
     <value>Download complete failed!</value>
   </data>
+  <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
+    <value>Couldn't parse command line args!</value>
+  </data>
+  <data name="strSettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
+    <value>Couldn't save settings or dispose SysTray Icon!</value>
+  </data>
+  <data name="strUltraVncRepeater" xml:space="preserve">
+    <value>Ultra VNC Repeater</value>
+  </data>
+  <data name="strSocks5" xml:space="preserve">
+    <value>Socks 5</value>
+  </data>
+  <data name="strHttp" xml:space="preserve">
+    <value>HTTP</value>
+  </data>
+  <data name="strVnc" xml:space="preserve">
+    <value>VNC</value>
+  </data>
+  <data name="strWindows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="strExtApp" xml:space="preserve">
+    <value>Ext. App</value>
+  </data>
+  <data name="strRDP" xml:space="preserve">
+    <value>RDP</value>
+  </data>
+  <data name="strSsh1" xml:space="preserve">
+    <value>SSH version 1</value>
+  </data>
+  <data name="strSsh2" xml:space="preserve">
+    <value>SSH version 2</value>
+  </data>
+  <data name="strTelnet" xml:space="preserve">
+    <value>Telnet</value>
+  </data>
+  <data name="strRlogin" xml:space="preserve">
+    <value>Rlogin</value>
+  </data>
+  <data name="strRAW" xml:space="preserve">
+    <value>RAW</value>
+  </data>
+  <data name="strICA" xml:space="preserve">
+    <value>ICA</value>
+  </data>
+  <data name="strHttps" xml:space="preserve">
+    <value>HTTPS</value>
+  </data>
 </root>

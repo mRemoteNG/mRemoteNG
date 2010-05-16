@@ -1,5 +1,5 @@
 Imports System.Windows.Forms
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace Tools
     Public Class Controls
@@ -164,7 +164,7 @@ Namespace Tools
 
             Private Sub ConMenItem_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
                 If e.Button = MouseButtons.Left Then
-                    If TypeOf sender.Tag Is mRemote.Connection.Info Then
+                    If TypeOf sender.Tag Is mRemoteNG.Connection.Info Then
                         If frmMain.Visible = False Then
                             ShowForm()
                         End If

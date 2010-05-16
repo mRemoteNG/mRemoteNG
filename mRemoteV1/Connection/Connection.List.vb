@@ -1,5 +1,3 @@
-Imports System.Windows.Forms
-
 Namespace Connection
     Public Class List
         Inherits CollectionBase

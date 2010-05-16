@@ -1,8 +1,8 @@
-﻿Imports mRemote.App.Native
+﻿Imports mRemoteNG.App.Native
 Imports System.Threading
 Imports Microsoft.Win32
 Imports System.Drawing
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace Connection
     Namespace Protocol

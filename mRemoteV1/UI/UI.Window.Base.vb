@@ -1,4 +1,3 @@
-Imports System.Windows.Forms
 Imports WeifenLuo.WinFormsUI.Docking
 
 Namespace UI

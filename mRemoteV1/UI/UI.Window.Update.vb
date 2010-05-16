@@ -1,7 +1,7 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
 Imports System.Threading
 Imports System.IO
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -182,7 +182,7 @@ Namespace UI
                 Me.Controls.Add(Me.lblCurrentVersion)
                 Me.Controls.Add(Me.pnlUp)
                 Me.Controls.Add(Me.lblStatus)
-                Me.Icon = Global.mRemote.My.Resources.Resources.Update_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Update_Icon
                 Me.Name = "Update"
                 Me.TabText = "Update"
                 Me.Text = "Update"

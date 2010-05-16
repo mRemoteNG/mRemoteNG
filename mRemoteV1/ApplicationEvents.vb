@@ -11,7 +11,7 @@
 
         Private Sub MyApplication_Startup(ByVal sender As Object, ByVal e As Microsoft.VisualBasic.ApplicationServices.StartupEventArgs) Handles Me.Startup
             If My.Settings.SingleInstance Then
-                Dim mutexID As String = "mRemote_SingleInstanceMutex"
+                Dim mutexID As String = "mRemoteNG_SingleInstanceMutex"
 
                 mutex = New System.Threading.Mutex(False, mutexID)
 

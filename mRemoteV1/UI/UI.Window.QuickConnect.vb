@@ -1,6 +1,6 @@
 ﻿Imports WeifenLuo.WinFormsUI.Docking
 Imports System.Reflection
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
@@ -43,7 +43,7 @@ Namespace UI
                 Me.Controls.Add(Me.btnCancel)
                 Me.Controls.Add(Me.flpProtocols)
                 Me.HideOnClose = True
-                Me.Icon = Global.mRemote.My.Resources.Resources.Play_Quick_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Play_Quick_Icon
                 Me.Name = "QuickConnect"
                 Me.TabText = My.Resources.strQuickConnect
                 Me.Text = My.Resources.strQuickConnect
@@ -61,12 +61,12 @@ Namespace UI
 #End Region
 
 #Region "Public Properties"
-            Private _ConnectionInfo As mRemote.Connection.Info
-            Public Property ConnectionInfo() As mRemote.Connection.Info
+            Private _ConnectionInfo As mRemoteNG.Connection.Info
+            Public Property ConnectionInfo() As mRemoteNG.Connection.Info
                 Get
                     Return Me._ConnectionInfo
                 End Get
-                Set(ByVal value As mRemote.Connection.Info)
+                Set(ByVal value As mRemoteNG.Connection.Info)
                     Me._ConnectionInfo = value
                 End Set
             End Property
@@ -92,7 +92,7 @@ Namespace UI
 
             Private Sub CreateButtons()
                 Try
-                    For Each fI As FieldInfo In GetType(mRemote.Connection.Protocol.Protocols).GetFields
+                    For Each fI As FieldInfo In GetType(mRemoteNG.Connection.Protocol.Protocols).GetFields
                         If fI.Name <> "value__" And fI.Name <> "NONE" And fI.Name <> "IntApp" Then
                             Dim nBtn As New Button
                             nBtn.Text = fI.Name
@@ -110,21 +110,21 @@ Namespace UI
 
             Private Sub ProtocolButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
                 Try
-                    Me._ConnectionInfo.Protocol = Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.Protocols), sender.Text)
+                    Me._ConnectionInfo.Protocol = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.Protocols), sender.Text)
 
                     If Me._ConnectionInfo.Port = 0 Then
                         Me._ConnectionInfo.SetDefaultPort()
 
-                        If mRemote.Connection.QuickConnect.History.Exists(Me._ConnectionInfo.Hostname) = False Then
-                            mRemote.Connection.QuickConnect.History.Add(Me._ConnectionInfo.Hostname)
+                        If mRemoteNG.Connection.QuickConnect.History.Exists(Me._ConnectionInfo.Hostname) = False Then
+                            mRemoteNG.Connection.QuickConnect.History.Add(Me._ConnectionInfo.Hostname)
                         End If
                     Else
-                        If mRemote.Connection.QuickConnect.History.Exists(Me._ConnectionInfo.Hostname) = False Then
-                            mRemote.Connection.QuickConnect.History.Add(Me._ConnectionInfo.Hostname & ":" & Me._ConnectionInfo.Port)
+                        If mRemoteNG.Connection.QuickConnect.History.Exists(Me._ConnectionInfo.Hostname) = False Then
+                            mRemoteNG.Connection.QuickConnect.History.Add(Me._ConnectionInfo.Hostname & ":" & Me._ConnectionInfo.Port)
                         End If
                     End If
 
-                    App.Runtime.OpenConnection(Me._ConnectionInfo, mRemote.Connection.Info.Force.DoNotJump)
+                    App.Runtime.OpenConnection(Me._ConnectionInfo, mRemoteNG.Connection.Info.Force.DoNotJump)
 
                     Me.Hide()
                 Catch ex As Exception

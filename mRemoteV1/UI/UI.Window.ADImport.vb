@@ -30,7 +30,7 @@ Namespace UI
                 Me.btnOK.Name = "btnOK"
                 Me.btnOK.Size = New System.Drawing.Size(75, 23)
                 Me.btnOK.TabIndex = 100
-                Me.btnOK.Text = Global.mRemote.My.Resources.Resources.strButtonOK
+                Me.btnOK.Text = Global.mRemoteNG.My.Resources.Resources.strButtonOK
                 Me.btnOK.UseVisualStyleBackColor = True
                 '
                 'btnCancel
@@ -42,7 +42,7 @@ Namespace UI
                 Me.btnCancel.Name = "btnCancel"
                 Me.btnCancel.Size = New System.Drawing.Size(75, 23)
                 Me.btnCancel.TabIndex = 110
-                Me.btnCancel.Text = Global.mRemote.My.Resources.Resources.strButtonCancel
+                Me.btnCancel.Text = Global.mRemoteNG.My.Resources.Resources.strButtonCancel
                 Me.btnCancel.UseVisualStyleBackColor = True
                 '
                 'txtDomain
@@ -72,7 +72,7 @@ Namespace UI
                 Me.btnChangeDomain.Name = "btnChangeDomain"
                 Me.btnChangeDomain.Size = New System.Drawing.Size(75, 23)
                 Me.btnChangeDomain.TabIndex = 40
-                Me.btnChangeDomain.Text = Global.mRemote.My.Resources.Resources.strButtonChange
+                Me.btnChangeDomain.Text = Global.mRemoteNG.My.Resources.Resources.strButtonChange
                 Me.btnChangeDomain.UseVisualStyleBackColor = True
                 '
                 'AD
@@ -100,7 +100,7 @@ Namespace UI
                 Me.Controls.Add(Me.btnCancel)
                 Me.Controls.Add(Me.btnOK)
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.Icon = Global.mRemote.My.Resources.Resources.ActiveDirectory_Icon
+                Me.Icon = Global.mRemoteNG.My.Resources.Resources.ActiveDirectory_Icon
                 Me.Name = "ADImport"
                 Me.TabText = "Active Directory Import"
                 Me.Text = "Active Directory Import"
@@ -145,7 +145,7 @@ Namespace UI
 
             Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
                 Me._ADPath = Me.AD.ADPath
-                mRemote.Tree.Node.AddADNodes(Me._ADPath)
+                mRemoteNG.Tree.Node.AddADNodes(Me._ADPath)
                 Me.DialogResult = Windows.Forms.DialogResult.OK
                 Me.Close()
             End Sub

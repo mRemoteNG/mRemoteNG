@@ -339,7 +339,7 @@
     <value>Hier klicken um die PuTTY Sitzung zu konfigurieren:</value>
   </data>
 	<data name="strLabelPuttyTimeout" xml:space="preserve">
-    <value>Maximale Zeit die auf PuTTY und integrierte Ext. Apps gewartet wird:</value>
+    <value>Maximale Zeit die auf PuTTY und integrierte externe Programme gewartet wird:</value>
   </data>
 	<data name="strLabelReleasedUnderGPL" xml:space="preserve">
     <value>Unter der GNU General Public License (GPL) veröffentlicht</value>
@@ -1691,5 +1691,53 @@ Starte mit neuer Datei.</value>
 	</data>
 	<data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
 		<value>Abschluss des Downloads ist fehlgeschlagen!</value>
+	</data>
+	<data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
+		<value>Die Kommandozeilen Parameter kontnen nicht ausgewertet werden!</value>
+	</data>
+	<data name="strSettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
+		<value>Konnte die Konfiguration nicht sichern oder das Tray Symbol entfernen!</value>
+	</data>
+	<data name="strUltraVncRepeater" xml:space="preserve">
+		<value>Ultra Vnc Repeater</value>
+	</data>
+	<data name="strSocks5" xml:space="preserve">
+		<value>Socks 5</value>
+	</data>
+	<data name="strHttp" xml:space="preserve">
+		<value>HTTP</value>
+	</data>
+	<data name="strVnc" xml:space="preserve">
+		<value>VNC</value>
+	</data>
+	<data name="strWindows" xml:space="preserve">
+		<value>Windows</value>
+	</data>
+	<data name="strExtApp" xml:space="preserve">
+		<value>Externes Programm</value>
+	</data>
+	<data name="strRDP" xml:space="preserve">
+		<value>RDP</value>
+	</data>
+	<data name="strSsh1" xml:space="preserve">
+		<value>SSH Version 1</value>
+	</data>
+	<data name="strSsh2" xml:space="preserve">
+		<value>SSH Version 2</value>
+	</data>
+	<data name="strTelnet" xml:space="preserve">
+		<value>Telnet</value>
+	</data>
+	<data name="strRlogin" xml:space="preserve">
+		<value>Rlogin</value>
+	</data>
+	<data name="strRAW" xml:space="preserve">
+		<value>Rohdaten (RAW)</value>
+	</data>
+	<data name="strICA" xml:space="preserve">
+		<value>ICA</value>
+	</data>
+	<data name="strHttps" xml:space="preserve">
+		<value>HTTPS</value>
 	</data>
 </root>

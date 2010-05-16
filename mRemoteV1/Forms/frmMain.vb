@@ -1,7 +1,7 @@
-Imports mRemote.App.Runtime
+Imports mRemoteNG.App.Runtime
 Imports System.Reflection
 Imports Crownwood
-Imports mRemote.App.Native
+Imports mRemoteNG.App.Native
 Imports PSTaskDialog
 
 Public Class frmMain
@@ -246,7 +246,7 @@ Public Class frmMain
 #Region "Menu"
 #Region "File"
     Private Sub mMenFile_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFile.DropDownOpening
-        Select Case Tree.Node.GetNodeType(mRemote.Tree.Node.SelectedNode)
+        Select Case Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode)
             Case Tree.Node.Type.Root
                 mMenFileImportExport.Enabled = True
                 mMenFileDelete.Enabled = False
@@ -523,7 +523,7 @@ Public Class frmMain
         Try
             btnQuickyPlay.DropDownItems.Clear()
 
-            For Each fI As FieldInfo In GetType(mRemote.Connection.Protocol.Protocols).GetFields
+            For Each fI As FieldInfo In GetType(mRemoteNG.Connection.Protocol.Protocols).GetFields
                 If fI.Name <> "value__" And fI.Name <> "NONE" And fI.Name <> "IntApp" Then
                     Dim nBtn As New ToolStripMenuItem
                     nBtn.Text = fI.Name
@@ -538,21 +538,21 @@ Public Class frmMain
 
     Private Sub QuickyProtocolButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
         Try
-            Dim conI As Connection.Info = CreateQuicky(QuickyText, Tools.Misc.StringToEnum(GetType(mRemote.Connection.Protocol.Protocols), sender.Text))
+            Dim conI As Connection.Info = CreateQuicky(QuickyText, Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.Protocols), sender.Text))
 
             If conI.Port = 0 Then
                 conI.SetDefaultPort()
 
-                If mRemote.Connection.QuickConnect.History.Exists(conI.Hostname) = False Then
-                    mRemote.Connection.QuickConnect.History.Add(conI.Hostname)
+                If mRemoteNG.Connection.QuickConnect.History.Exists(conI.Hostname) = False Then
+                    mRemoteNG.Connection.QuickConnect.History.Add(conI.Hostname)
                 End If
             Else
-                If mRemote.Connection.QuickConnect.History.Exists(conI.Hostname) = False Then
-                    mRemote.Connection.QuickConnect.History.Add(conI.Hostname & ":" & conI.Port)
+                If mRemoteNG.Connection.QuickConnect.History.Exists(conI.Hostname) = False Then
+                    mRemoteNG.Connection.QuickConnect.History.Add(conI.Hostname & ":" & conI.Port)
                 End If
             End If
 
-            App.Runtime.OpenConnection(conI, mRemote.Connection.Info.Force.DoNotJump)
+            App.Runtime.OpenConnection(conI, mRemoteNG.Connection.Info.Force.DoNotJump)
         Catch ex As Exception
             mC.AddMessage(Messages.MessageClass.ErrorMsg, "QuickyProtocolButton_Click (frmMain) failed" & vbNewLine & ex.Message, True)
         End Try
@@ -651,7 +651,7 @@ Public Class frmMain
 
     Private Sub ConMenItem_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         If e.Button = MouseButtons.Left Then
-            If TypeOf sender.Tag Is mRemote.Connection.Info Then
+            If TypeOf sender.Tag Is mRemoteNG.Connection.Info Then
                 App.Runtime.OpenConnection(sender.Tag)
             End If
         End If
@@ -679,7 +679,7 @@ Public Class frmMain
         Try
             'Debug.Print(m.Msg)
 
-            Select m.Msg
+            Select Case m.Msg
                 Case WM_GETTEXT
                     bWmGetTextFlag = True
                 Case WM_WINDOWPOSCHANGED
