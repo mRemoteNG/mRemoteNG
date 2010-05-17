@@ -21,12 +21,11 @@ RequestExecutionLevel admin
 
 ; Version Information
 VIProductVersion ${PRODUCT_VERSION_LONG}
-!DEFINE LANG_ENGLISH "1033-English"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductName" "mRemoteNG"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "ProductVersion" ${PRODUCT_VERSION_LONG}
-VIAddVersionKey /LANG=${LANG_ENGLISH} "LegalCopyright" "Copyright © 2007-2009 Felix Deimel, 2010 Riley McArdle"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileDescription" "mRemoteNG ${PRODUCT_VERSION} Installer"
-VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" ${PRODUCT_VERSION_LONG}
+VIAddVersionKey "ProductName" "mRemoteNG"
+VIAddVersionKey "ProductVersion" ${PRODUCT_VERSION_LONG}
+VIAddVersionKey "LegalCopyright" "Copyright © 2007-2009 Felix Deimel, 2010 Riley McArdle"
+VIAddVersionKey "FileDescription" "mRemoteNG ${PRODUCT_VERSION} Installer"
+VIAddVersionKey "FileVersion" ${PRODUCT_VERSION_LONG}
 
 ; Design
 !define MUI_HEADERIMAGE
@@ -48,7 +47,6 @@ VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" ${PRODUCT_VERSION_LONG}
 
 ; Finish Page
 !define MUI_FINISHPAGE_RUN_NOTCHECKED
-!define MUI_FINISHPAGE_RUN_Text "Launch mRemoteNG Now"
 !define MUI_FINISHPAGE_RUN "$INSTDIR\mRemoteNG.exe"
 !insertmacro MUI_PAGE_FINISH
 
@@ -58,6 +56,23 @@ VIAddVersionKey /LANG=${LANG_ENGLISH} "FileVersion" ${PRODUCT_VERSION_LONG}
 
 ; Set Language
 !insertmacro MUI_LANGUAGE "English"
+!insertmacro MUI_LANGUAGE "German"
+!insertmacro MUI_LANGUAGE "Dutch"
+!insertmacro MUI_LANGUAGE "French"
+!insertmacro MUI_LANGUAGE "Polish"
+!insertmacro MUI_LANGUAGE "Spanish"
+!insertmacro MUI_LANGUAGE "Czech"
+
+; Finish Page translations
+LangString LaunchMremoteNow ${LANG_ENGLISH} "Launch mRemoteNG Now"
+LangString LaunchMremoteNow ${LANG_GERMAN} "mRemoteNG jetzt Starten"
+LangString LaunchMremoteNow ${LANG_DUTCH} "mRemoteNG run DUTCH message"
+LangString LaunchMremoteNow ${LANG_FRENCH} "mRemoteNG run FRENCH message"
+LangString LaunchMremoteNow ${LANG_POLISH} "mRemoteNG run POLISH message"
+LangString LaunchMremoteNow ${LANG_SPANISH} "mRemoteNG run SPANISH message"
+LangString LaunchMremoteNow ${LANG_CZECH} "mRemoteNG run CZECH message"
+
+!define MUI_FINISHPAGE_RUN_Text "$(LaunchMremoteNow)"
 
 Function .onInit
 	; Check .NET version
