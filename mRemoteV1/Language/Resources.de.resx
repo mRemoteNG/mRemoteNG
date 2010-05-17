@@ -993,12 +993,6 @@
 	<data name="strConnecting" xml:space="preserve">
 		<value>Verbinde...</value>
 	</data>
-	<data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
-		<value></value>
-	</data>
-	<data name="strMagicLibraryAttributionURL" xml:space="preserve">
-		<value></value>
-	</data>
 	<data name="strMenuDelete" xml:space="preserve">
 		<value>Löschen...</value>
 	</data>
@@ -1243,9 +1237,6 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
 	</data>
 	<data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
 		<value>Definiert den Benutzernamen zum Verbinden mit dem Gateway Server.</value>
-	</data>
-	<data name="strPropertyDescriptionRDGatewayPasswordInherit" xml:space="preserve">
-		<value></value>
 	</data>
 	<data name="strProtocolToImport" xml:space="preserve">
 		<value>Zu importierendes Protokoll</value>
@@ -1492,9 +1483,6 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
 	</data>
 	<data name="strInheritNewConnection" xml:space="preserve">
 		<value>mRemoteNG ist aktuell</value>
-	</data>
-	<data name="strNoUpdateAvailable" xml:space="preserve">
-		<value></value>
 	</data>
 	<data name="strCheckForUpdate" xml:space="preserve">
 		<value>Prüfen</value>
