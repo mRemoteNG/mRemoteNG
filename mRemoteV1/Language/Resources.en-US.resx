@@ -1692,4 +1692,115 @@
 	<data name="strHttps" xml:space="preserve">
 		<value></value>
 	</data>
+	<data name="strRdpErrorGetFailure" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpErrorGetUnknown" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpErrorUnknown" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpErrorCode1" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpErrorOutOfMemory" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpErrorWindowCreation" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpErrorCode2" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpErrorCode3" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpErrorCode4" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpErrorConnection" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpErrorWinsock" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpAddSessionFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpGetSessionsFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpCloseConnectionFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpOpenConnectionFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpAddResolutionsFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpAddResolutionFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpGatewayNotSupported" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpSetGatewayFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpSetConsoleSwitch" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpSetConsoleSessionFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpSetCredentialsFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpSetResolutionFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpSetPortFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpSetRedirectKeysFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpSetRedirectionFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpSetPerformanceFlagsFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpSetEventHandlersFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpControlCreationFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpSetPropsFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpConnectionOpenFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpDisconnectFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpToggleFullscreenFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpToggleSmartSizeFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpFocusFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strRdpGatewayIsSupported" xml:space="preserve">
+		<value></value>
+	</data>
 </root>

@@ -4607,6 +4607,60 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP Add Resolution failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpAddResolutionFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpAddResolutionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP Add Resolutions failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpAddResolutionsFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpAddResolutionsFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Add Session failed ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpAddSessionFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpAddSessionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Close RDP Connection failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpCloseConnectionFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpCloseConnectionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Opening connection failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpConnectionOpenFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpConnectionOpenFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t create RDP control, please check mRemote requirements. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpControlCreationFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpControlCreationFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Disable Cursor blinking ähnelt.
         '''</summary>
         Friend ReadOnly Property strRDPDisableCursorblinking() As String
@@ -4661,6 +4715,114 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP Disconnect failed, trying to close! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpDisconnectFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpDisconnectFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Internal error code 1. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpErrorCode1() As String
+            Get
+                Return ResourceManager.GetString("strRdpErrorCode1", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Internal error code 2. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpErrorCode2() As String
+            Get
+                Return ResourceManager.GetString("strRdpErrorCode2", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Internal error code 3. This is not a valid state. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpErrorCode3() As String
+            Get
+                Return ResourceManager.GetString("strRdpErrorCode3", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Internal error code 4. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpErrorCode4() As String
+            Get
+                Return ResourceManager.GetString("strRdpErrorCode4", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die An unrecoverable error has occurred during client connection. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpErrorConnection() As String
+            Get
+                Return ResourceManager.GetString("strRdpErrorConnection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die GetError failed (FatalErrors) ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpErrorGetFailure() As String
+            Get
+                Return ResourceManager.GetString("strRdpErrorGetFailure", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die An unknown fatal RDP error has occurred.  Error code {0}. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpErrorGetUnknown() As String
+            Get
+                Return ResourceManager.GetString("strRdpErrorGetUnknown", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die An out-of-memory error has occurred. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpErrorOutOfMemory() As String
+            Get
+                Return ResourceManager.GetString("strRdpErrorOutOfMemory", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die An unknown error has occurred. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpErrorUnknown() As String
+            Get
+                Return ResourceManager.GetString("strRdpErrorUnknown", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die A window-creation error has occurred. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpErrorWindowCreation() As String
+            Get
+                Return ResourceManager.GetString("strRdpErrorWindowCreation", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Winsock initialization error. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpErrorWinsock() As String
+            Get
+                Return ResourceManager.GetString("strRdpErrorWinsock", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t import rdp file! ähnelt.
         '''</summary>
         Friend ReadOnly Property strRdpFileCouldNotBeImported() As String
@@ -4675,6 +4837,159 @@ Namespace My.Resources
         Friend ReadOnly Property strRDPFitToPanel() As String
             Get
                 Return ResourceManager.GetString("strRDPFitToPanel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP Focus failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpFocusFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpFocusFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RD Gateway is supported. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpGatewayIsSupported() As String
+            Get
+                Return ResourceManager.GetString("strRdpGatewayIsSupported", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RD Gateway is not supported! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpGatewayNotSupported() As String
+            Get
+                Return ResourceManager.GetString("strRdpGatewayNotSupported", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die GetSessions failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpGetSessionsFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpGetSessionsFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Open RDP Connectin failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpOpenConnectionFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpOpenConnectionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP SetAuthenticationLevel failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpSetAuthenticationLevelFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpSetAuthenticationLevelFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP SetUseConsoleSession failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpSetConsoleSessionFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpSetConsoleSessionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Setting Console switch for RDC {0}. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpSetConsoleSwitch() As String
+            Get
+                Return ResourceManager.GetString("strRdpSetConsoleSwitch", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP SetCredentials failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpSetCredentialsFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpSetCredentialsFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP SetEventHandlers failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpSetEventHandlersFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpSetEventHandlersFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP SetRDGateway failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpSetGatewayFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpSetGatewayFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP SetPerformanceFlags failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpSetPerformanceFlagsFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpSetPerformanceFlagsFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP SetPort failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpSetPortFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpSetPortFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP SetProps failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpSetPropsFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpSetPropsFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Rdp Set Redirection Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpSetRedirectionFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpSetRedirectionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Rdp Set Redirect Keys Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpSetRedirectKeysFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpSetRedirectKeysFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP SetResolution failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpSetResolutionFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpSetResolutionFailed", resourceCulture)
             End Get
         End Property
         
@@ -4711,6 +5026,24 @@ Namespace My.Resources
         Friend ReadOnly Property strRDPSoundLeaveAtRemoteComputer() As String
             Get
                 Return ResourceManager.GetString("strRDPSoundLeaveAtRemoteComputer", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP ToggleFullscreen failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpToggleFullscreenFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpToggleFullscreenFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP ToggleSmartSize failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpToggleSmartSizeFailed() As String
+            Get
+                Return ResourceManager.GetString("strRdpToggleSmartSizeFailed", resourceCulture)
             End Get
         End Property
         
