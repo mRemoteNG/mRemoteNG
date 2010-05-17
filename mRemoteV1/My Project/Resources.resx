@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
+	<!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -59,1989 +59,2100 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
-  <resheader name="resmimetype">
-    <value>text/microsoft-resx</value>
-  </resheader>
-  <resheader name="version">
-    <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </resheader>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="_Error" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Error.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ActiveDirectory" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\ActiveDirectory.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Collapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Collapse.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ErrorSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\ErrorSmall.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Expand" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Expand.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Fullscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Fullscreen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HostStatus_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\HostStatus_Check.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HostStatus_Off" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\HostStatus_Off.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="HostStatus_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\HostStatus_On.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Information" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Information.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="InformationSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\InformationSmall.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Rename" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Rename.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Root" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Root.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Root_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Root_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Warning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Info_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Info_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="mRemote_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\mRemote_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PuttyConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\PuttyConfig.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="mRemote" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\mRemote.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Play_Quick" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Play_Quick.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Play_Quick_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Play_Quick_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Connections_Load" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Connections_Load.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Connections_New" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Connections_New.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Connections_Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Connections_Save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Connections_SaveAs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Connections_SaveAs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ErrorsAndInfos" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\ErrorsAndInfos.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sort_AZ" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Sort_AZ.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sort_ZA" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Sort_ZA.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Lock.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="RDP" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\RDP.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Config" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Config.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Config_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\Config_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Copy.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Donate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Donate.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Info" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Info.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Inheritance" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Inheritance.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Keyboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Keyboard.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Options" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Options.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Options_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\Options_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panels" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Panels.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panel_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Panel_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panel_Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Panel_Close.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Quit" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Quit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Save_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\Save_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Screenshot.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Screenshot_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot_Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Screenshot_Copy.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot_Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Screenshot_Delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\Screenshot_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Screenshot_Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Screenshot_Save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Search" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Search.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="View" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\View.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="WarningSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\WarningSmall.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Website" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Website.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Appearance_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\Appearance_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Arrow_Down" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Arrow_Down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Arrow_Up" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Arrow_Up.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Bug" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Bug.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Connections_SaveAs_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\Connections_SaveAs_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Connection_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Connection_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Connection_Duplicate" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Connection_Duplicate.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ExtApp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\ExtApp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ExtApp_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\ExtApp_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ExtApp_Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\ExtApp_Delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ExtApp_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\ExtApp_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ExtApp_Start" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\ExtApp_Start.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="File" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\File.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Folder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Folder_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Folder_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Help_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\Help_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Page" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Page.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Pause.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Play" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Play.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PortScan" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\PortScan.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="PortScan_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\PortScan_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Properties" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Properties.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Properties_Default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Properties_Default.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Refresh.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sessions" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Sessions.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Sessions_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\Sessions_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Session_LogOff" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Session_LogOff.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SmartSize" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\SmartSize.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SSHTransfer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\SSHTransfer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="SSHTransfer_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\SSHTransfer_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="StartupExit_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\StartupExit_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Tab_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\Tab_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Tools" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Tools.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Update" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Update.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Update_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\Update_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Console" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Console.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Inheritance_Default" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Inheritance_Default.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Chat" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Chat.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Panels_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\Panels_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="JumpTo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\JumpTo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Monitor" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Monitor.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Monitor_GoTo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\Monitor_GoTo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UVNC_SC" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\UVNC_SC.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="UVNC_SC_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\UVNC_SC_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Bad_Symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Bad_Symbol.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ComponentsCheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\ComponentsCheck.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ComponentsCheck_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\ComponentsCheck_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Good_Symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images\Good_Symbol.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="ActiveDirectory_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons\ActiveDirectory_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="News_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Icons_FamFamFam\News_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="News" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Images_FamFamFam\News.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="strUpdateFrequencyCustom" xml:space="preserve">
+	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+		<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+		<xsd:element name="root" msdata:IsDataSet="true">
+			<xsd:complexType>
+				<xsd:choice maxOccurs="unbounded">
+					<xsd:element name="metadata">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" />
+							</xsd:sequence>
+							<xsd:attribute name="name" use="required" type="xsd:string" />
+							<xsd:attribute name="type" type="xsd:string" />
+							<xsd:attribute name="mimetype" type="xsd:string" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="assembly">
+						<xsd:complexType>
+							<xsd:attribute name="alias" type="xsd:string" />
+							<xsd:attribute name="name" type="xsd:string" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="data">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+							<xsd:attribute ref="xml:space" />
+						</xsd:complexType>
+					</xsd:element>
+					<xsd:element name="resheader">
+						<xsd:complexType>
+							<xsd:sequence>
+								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+							</xsd:sequence>
+							<xsd:attribute name="name" type="xsd:string" use="required" />
+						</xsd:complexType>
+					</xsd:element>
+				</xsd:choice>
+			</xsd:complexType>
+		</xsd:element>
+	</xsd:schema>
+	<resheader name="resmimetype">
+		<value>text/microsoft-resx</value>
+	</resheader>
+	<resheader name="version">
+		<value>2.0</value>
+	</resheader>
+	<resheader name="reader">
+		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<resheader name="writer">
+		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+	</resheader>
+	<assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+	<data name="_Error" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Error.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="ActiveDirectory" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\ActiveDirectory.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Collapse" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Collapse.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="ErrorSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\ErrorSmall.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Expand" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Expand.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Fullscreen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Fullscreen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="HostStatus_Check" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\HostStatus_Check.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="HostStatus_Off" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\HostStatus_Off.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="HostStatus_On" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\HostStatus_On.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Information" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Information.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="InformationSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\InformationSmall.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Rename" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Rename.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Root" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Root.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Root_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons\Root_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Warning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Warning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Info_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons\Info_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="mRemote_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons\mRemote_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="PuttyConfig" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\PuttyConfig.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="mRemote" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\mRemote.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Play_Quick" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Play_Quick.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Play_Quick_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons\Play_Quick_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Connections_Load" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Connections_Load.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Connections_New" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Connections_New.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Connections_Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Connections_Save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Connections_SaveAs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Connections_SaveAs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="ErrorsAndInfos" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\ErrorsAndInfos.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Sort_AZ" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Sort_AZ.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Sort_ZA" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Sort_ZA.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Lock" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Lock.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="RDP" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\RDP.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Config" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Config.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Config_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\Config_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Copy.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Donate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Donate.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Info" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Info.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Inheritance" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Inheritance.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Keyboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Keyboard.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Options" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Options.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Options_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\Options_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Panels" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Panels.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Panel_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Panel_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Panel_Close" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Panel_Close.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Quit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Quit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Save_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\Save_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Screenshot" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Screenshot.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Screenshot_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Screenshot_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Screenshot_Copy" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Screenshot_Copy.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Screenshot_Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Screenshot_Delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Screenshot_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\Screenshot_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Screenshot_Save" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Screenshot_Save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Search" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Search.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="View" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\View.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="WarningSmall" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\WarningSmall.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Website" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Website.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Appearance_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\Appearance_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Arrow_Down" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Arrow_Down.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Arrow_Up" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Arrow_Up.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Bug" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Bug.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Connections_SaveAs_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons\Connections_SaveAs_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Connection_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Connection_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Connection_Duplicate" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Connection_Duplicate.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="ExtApp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\ExtApp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="ExtApp_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\ExtApp_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="ExtApp_Delete" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\ExtApp_Delete.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="ExtApp_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\ExtApp_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="ExtApp_Start" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\ExtApp_Start.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="File" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\File.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Folder" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Folder.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Folder_Add" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Folder_Add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Help" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Help.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Help_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\Help_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Page" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Page.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Pause.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Play" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Play.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="PortScan" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\PortScan.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="PortScan_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\PortScan_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Properties" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Properties.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Properties_Default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Properties_Default.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Refresh" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Refresh.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Sessions" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Sessions.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Sessions_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\Sessions_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Session_LogOff" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Session_LogOff.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="SmartSize" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\SmartSize.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="SSHTransfer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\SSHTransfer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="SSHTransfer_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\SSHTransfer_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="StartupExit_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\StartupExit_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Tab_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\Tab_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Tools" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Tools.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Update" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Update.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Update_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\Update_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Console" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Console.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Inheritance_Default" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Inheritance_Default.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Chat" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Chat.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Panels_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\Panels_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="JumpTo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\JumpTo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Monitor" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Monitor.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Monitor_GoTo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\Monitor_GoTo.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="UVNC_SC" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\UVNC_SC.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="UVNC_SC_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons\UVNC_SC_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Bad_Symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Bad_Symbol.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="ComponentsCheck" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\ComponentsCheck.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="ComponentsCheck_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons\ComponentsCheck_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="Good_Symbol" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images\Good_Symbol.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="ActiveDirectory_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons\ActiveDirectory_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="News_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Icons_FamFamFam\News_Icon.ico;System.Drawing.Icon, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="News" type="System.Resources.ResXFileRef, System.Windows.Forms">
+		<value>..\Resources\Images_FamFamFam\News.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+	</data>
+	<data name="strUpdateFrequencyCustom" xml:space="preserve">
     <value>Every {0} days</value>
   </data>
-  <data name="strUpdateFrequencyDaily" xml:space="preserve">
+	<data name="strUpdateFrequencyDaily" xml:space="preserve">
     <value>Daily</value>
   </data>
-  <data name="strUpdateFrequencyMonthly" xml:space="preserve">
+	<data name="strUpdateFrequencyMonthly" xml:space="preserve">
     <value>Monthly</value>
   </data>
-  <data name="strUpdateFrequencyWeekly" xml:space="preserve">
+	<data name="strUpdateFrequencyWeekly" xml:space="preserve">
     <value>Weekly</value>
   </data>
-  <data name="strFAMFAMFAMAttribution" xml:space="preserve">
+	<data name="strFAMFAMFAMAttribution" xml:space="preserve">
     <value>Includes icons by [FAMFAMFAM]</value>
   </data>
-  <data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
+	<data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
     <value>http://www.famfamfam.com/</value>
   </data>
-  <data name="strMagicLibraryAttribution" xml:space="preserve">
+	<data name="strMagicLibraryAttribution" xml:space="preserve">
     <value>Uses the Magic library by [Crownwood Software]</value>
   </data>
-  <data name="strMagicLibraryAttributionURL" xml:space="preserve">
+	<data name="strMagicLibraryAttributionURL" xml:space="preserve">
     <value>http://www.dotnetmagic.com/</value>
   </data>
-  <data name="strAbout" xml:space="preserve">
+	<data name="strAbout" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="strLabelChangeLog" xml:space="preserve">
+	<data name="strLabelChangeLog" xml:space="preserve">
     <value>Change Log:</value>
   </data>
-  <data name="strLabelReleasedUnderGPL" xml:space="preserve">
+	<data name="strLabelReleasedUnderGPL" xml:space="preserve">
     <value>Released under the GNU General Public License (GPL)</value>
   </data>
-  <data name="strConfirmResetLayout" xml:space="preserve">
+	<data name="strConfirmResetLayout" xml:space="preserve">
     <value>Are you sure you want to reset the panels to their default layout?</value>
   </data>
-  <data name="strConfirmExitMainInstruction" xml:space="preserve">
+	<data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>Do you want to close all open connections?</value>
   </data>
-  <data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
+	<data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
     <value>Do not show this message again.</value>
   </data>
-  <data name="strLabelPortableEdition" xml:space="preserve">
+	<data name="strLabelPortableEdition" xml:space="preserve">
     <value>Portable Edition</value>
   </data>
-  <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
+	<data name="strConfirmDeleteNodeConnection" xml:space="preserve">
     <value>Are you sure you want to delete the connection, "{0}"?</value>
   </data>
-  <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
+	<data name="strConfirmDeleteNodeFolder" xml:space="preserve">
     <value>Are you sure you want to delete the empty folder, "{0}"?</value>
   </data>
-  <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
+	<data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>Are you sure you want to delete the folder, "{0}"? Any folders or connections that it contains will also be deleted.</value>
   </data>
-  <data name="strMenuDelete" xml:space="preserve">
+	<data name="strMenuDelete" xml:space="preserve">
     <value>Delete...</value>
   </data>
-  <data name="strMenuDeleteConnection" xml:space="preserve">
+	<data name="strMenuDeleteConnection" xml:space="preserve">
     <value>Delete Connection...</value>
   </data>
-  <data name="strMenuDeleteFolder" xml:space="preserve">
+	<data name="strMenuDeleteFolder" xml:space="preserve">
     <value>Delete Folder...</value>
   </data>
-  <data name="strMenuDuplicate" xml:space="preserve">
+	<data name="strMenuDuplicate" xml:space="preserve">
     <value>Duplicate</value>
   </data>
-  <data name="strMenuDuplicateConnection" xml:space="preserve">
+	<data name="strMenuDuplicateConnection" xml:space="preserve">
     <value>Duplicate Connection</value>
   </data>
-  <data name="strMenuDuplicateFolder" xml:space="preserve">
+	<data name="strMenuDuplicateFolder" xml:space="preserve">
     <value>Duplicate Folder</value>
   </data>
-  <data name="strMenuRename" xml:space="preserve">
+	<data name="strMenuRename" xml:space="preserve">
     <value>Rename</value>
   </data>
-  <data name="strMenuRenameConnection" xml:space="preserve">
+	<data name="strMenuRenameConnection" xml:space="preserve">
     <value>Rename Connection</value>
   </data>
-  <data name="strMenuRenameFolder" xml:space="preserve">
+	<data name="strMenuRenameFolder" xml:space="preserve">
     <value>Rename Folder</value>
   </data>
-  <data name="strActive" xml:space="preserve">
+	<data name="strActive" xml:space="preserve">
     <value>Active</value>
   </data>
-  <data name="strButtonCancel" xml:space="preserve">
+	<data name="strButtonCancel" xml:space="preserve">
     <value>&amp;Cancel</value>
   </data>
-  <data name="strButtonClose" xml:space="preserve">
+	<data name="strButtonClose" xml:space="preserve">
     <value>&amp;Close</value>
   </data>
-  <data name="strButtonImport" xml:space="preserve">
+	<data name="strButtonImport" xml:space="preserve">
     <value>&amp;Import</value>
   </data>
-  <data name="strButtonNew" xml:space="preserve">
+	<data name="strButtonNew" xml:space="preserve">
     <value>&amp;New</value>
   </data>
-  <data name="strButtonOK" xml:space="preserve">
+	<data name="strButtonOK" xml:space="preserve">
     <value>&amp;OK</value>
   </data>
-  <data name="strButtonScan" xml:space="preserve">
+	<data name="strButtonScan" xml:space="preserve">
     <value>&amp;Scan</value>
   </data>
-  <data name="strButtonStop" xml:space="preserve">
+	<data name="strButtonStop" xml:space="preserve">
     <value>&amp;Stop</value>
   </data>
-  <data name="strPropertyDescriptionColors" xml:space="preserve">
+	<data name="strPropertyDescriptionColors" xml:space="preserve">
     <value>Select the colour quality to be used.</value>
   </data>
-  <data name="strPropertyNameColors" xml:space="preserve">
+	<data name="strPropertyNameColors" xml:space="preserve">
     <value>Colours</value>
   </data>
-  <data name="strInactive" xml:space="preserve">
+	<data name="strInactive" xml:space="preserve">
     <value>Inactive</value>
   </data>
-  <data name="strLabelConnect" xml:space="preserve">
+	<data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Connect:</value>
   </data>
-  <data name="strLabelPassword" xml:space="preserve">
+	<data name="strLabelPassword" xml:space="preserve">
     <value>Password:</value>
   </data>
-  <data name="strLabelVerify" xml:space="preserve">
+	<data name="strLabelVerify" xml:space="preserve">
     <value>Verify:</value>
   </data>
-  <data name="strMenuAbout" xml:space="preserve">
+	<data name="strMenuAbout" xml:space="preserve">
     <value>About</value>
   </data>
-  <data name="strMenuAddConnectionPanel" xml:space="preserve">
+	<data name="strMenuAddConnectionPanel" xml:space="preserve">
     <value>Add Connection Panel</value>
   </data>
-  <data name="strMenuCheckForUpdates" xml:space="preserve">
+	<data name="strMenuCheckForUpdates" xml:space="preserve">
     <value>Check for Updates</value>
   </data>
-  <data name="strMenuConfig" xml:space="preserve">
+	<data name="strMenuConfig" xml:space="preserve">
     <value>Config</value>
   </data>
-  <data name="strMenuConnect" xml:space="preserve">
+	<data name="strMenuConnect" xml:space="preserve">
     <value>Connect</value>
   </data>
-  <data name="strMenuConnectionPanels" xml:space="preserve">
+	<data name="strMenuConnectionPanels" xml:space="preserve">
     <value>Connection Panels</value>
   </data>
-  <data name="strMenuConnections" xml:space="preserve">
+	<data name="strMenuConnections" xml:space="preserve">
     <value>Connections</value>
   </data>
-  <data name="strMenuConnectionsAndConfig" xml:space="preserve">
+	<data name="strMenuConnectionsAndConfig" xml:space="preserve">
     <value>Connections and Config</value>
   </data>
-  <data name="strMenuDonate" xml:space="preserve">
+	<data name="strMenuDonate" xml:space="preserve">
     <value>Donate</value>
   </data>
-  <data name="strMenuExit" xml:space="preserve">
+	<data name="strMenuExit" xml:space="preserve">
     <value>Exit</value>
   </data>
-  <data name="strMenuExternalTools" xml:space="preserve">
+	<data name="strMenuExternalTools" xml:space="preserve">
     <value>External Tools</value>
   </data>
-  <data name="strMenuExternalToolsToolbar" xml:space="preserve">
+	<data name="strMenuExternalToolsToolbar" xml:space="preserve">
     <value>External Tools Toolbar</value>
   </data>
-  <data name="strMenuFile" xml:space="preserve">
+	<data name="strMenuFile" xml:space="preserve">
     <value>&amp;File</value>
   </data>
-  <data name="strMenuFullScreen" xml:space="preserve">
+	<data name="strMenuFullScreen" xml:space="preserve">
     <value>Full Screen</value>
   </data>
-  <data name="strMenuFullScreenRDP" xml:space="preserve">
+	<data name="strMenuFullScreenRDP" xml:space="preserve">
     <value>Full Screen (RDP)</value>
   </data>
-  <data name="strMenuHelp" xml:space="preserve">
+	<data name="strMenuHelp" xml:space="preserve">
     <value>&amp;Help</value>
   </data>
-  <data name="strMenuHelpContents" xml:space="preserve">
+	<data name="strMenuHelpContents" xml:space="preserve">
     <value>mRemoteNG Help</value>
   </data>
-  <data name="strMenuJumpTo" xml:space="preserve">
+	<data name="strMenuJumpTo" xml:space="preserve">
     <value>Jump To</value>
   </data>
-  <data name="strMenuNewConnectionFile" xml:space="preserve">
+	<data name="strMenuNewConnectionFile" xml:space="preserve">
     <value>New Connection File</value>
   </data>
-  <data name="strMenuNotifications" xml:space="preserve">
+	<data name="strMenuNotifications" xml:space="preserve">
     <value>Notifications</value>
   </data>
-  <data name="strMenuOpenConnectionFile" xml:space="preserve">
+	<data name="strMenuOpenConnectionFile" xml:space="preserve">
     <value>Open Connection File...</value>
   </data>
-  <data name="strMenuOptions" xml:space="preserve">
+	<data name="strMenuOptions" xml:space="preserve">
     <value>Options</value>
   </data>
-  <data name="strMenuPortScan" xml:space="preserve">
+	<data name="strMenuPortScan" xml:space="preserve">
     <value>Port Scan</value>
   </data>
-  <data name="strMenuQuickConnectToolbar" xml:space="preserve">
+	<data name="strMenuQuickConnectToolbar" xml:space="preserve">
     <value>Quick Connect Toolbar</value>
   </data>
-  <data name="strMenuReportBug" xml:space="preserve">
+	<data name="strMenuReportBug" xml:space="preserve">
     <value>Report a Bug</value>
   </data>
-  <data name="strMenuSaveConnectionFile" xml:space="preserve">
+	<data name="strMenuSaveConnectionFile" xml:space="preserve">
     <value>Save Connection File</value>
   </data>
-  <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
+	<data name="strMenuSaveConnectionFileAs" xml:space="preserve">
     <value>Save Connection File As...</value>
   </data>
-  <data name="strMenuScreenshotManager" xml:space="preserve">
+	<data name="strMenuScreenshotManager" xml:space="preserve">
     <value>Screenshot Manager</value>
   </data>
-  <data name="strMenuSessions" xml:space="preserve">
+	<data name="strMenuSessions" xml:space="preserve">
     <value>Sessions</value>
   </data>
-  <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
+	<data name="strMenuSessionsAndScreenshots" xml:space="preserve">
     <value>Sessions and Screenshots</value>
   </data>
-  <data name="strMenuShowText" xml:space="preserve">
+	<data name="strMenuShowText" xml:space="preserve">
     <value>Show Text</value>
   </data>
-  <data name="strMenuSSHFileTransfer" xml:space="preserve">
+	<data name="strMenuSSHFileTransfer" xml:space="preserve">
     <value>SSH File Transfer</value>
   </data>
-  <data name="strMenuSupportForum" xml:space="preserve">
+	<data name="strMenuSupportForum" xml:space="preserve">
     <value>Support Forum</value>
   </data>
-  <data name="strMenuTools" xml:space="preserve">
+	<data name="strMenuTools" xml:space="preserve">
     <value>&amp;Tools</value>
   </data>
-  <data name="strMenuView" xml:space="preserve">
+	<data name="strMenuView" xml:space="preserve">
     <value>&amp;View</value>
   </data>
-  <data name="strMenuWebsite" xml:space="preserve">
+	<data name="strMenuWebsite" xml:space="preserve">
     <value>Website</value>
   </data>
-  <data name="strLabelSelectPanel" xml:space="preserve">
+	<data name="strLabelSelectPanel" xml:space="preserve">
     <value>Select a panel from the list below or click New to add a new one. Click OK to continue.</value>
   </data>
-  <data name="strSmartSizeModeAspect" xml:space="preserve">
+	<data name="strSmartSizeModeAspect" xml:space="preserve">
     <value>Aspect</value>
   </data>
-  <data name="strSmartSizeModeFree" xml:space="preserve">
+	<data name="strSmartSizeModeFree" xml:space="preserve">
     <value>Free</value>
   </data>
-  <data name="strSmartSizeModeNone" xml:space="preserve">
+	<data name="strSmartSizeModeNone" xml:space="preserve">
     <value>No SmartSize</value>
   </data>
-  <data name="strStatus" xml:space="preserve">
+	<data name="strStatus" xml:space="preserve">
     <value>Status</value>
   </data>
-  <data name="strTitlePassword" xml:space="preserve">
+	<data name="strTitlePassword" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="strTitleSelectPanel" xml:space="preserve">
+	<data name="strTitleSelectPanel" xml:space="preserve">
     <value>Select Panel</value>
   </data>
-  <data name="strButtonLaunchPutty" xml:space="preserve">
+	<data name="strButtonLaunchPutty" xml:space="preserve">
     <value>Launch PuTTY</value>
   </data>
-  <data name="strButtonTestProxy" xml:space="preserve">
+	<data name="strButtonTestProxy" xml:space="preserve">
     <value>Test Proxy</value>
   </data>
-  <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
+	<data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only)</value>
   </data>
-  <data name="strCheckboxProxyAuthentication" xml:space="preserve">
+	<data name="strCheckboxProxyAuthentication" xml:space="preserve">
     <value>This proxy server requires authentication</value>
   </data>
-  <data name="strCheckboxPuttyPath" xml:space="preserve">
+	<data name="strCheckboxPuttyPath" xml:space="preserve">
     <value>Use custom PuTTY path:</value>
   </data>
-  <data name="strCheckboxUpdateUseProxy" xml:space="preserve">
+	<data name="strCheckboxUpdateUseProxy" xml:space="preserve">
     <value>Use a proxy server to connect</value>
   </data>
-  <data name="strLabelAddress" xml:space="preserve">
+	<data name="strLabelAddress" xml:space="preserve">
     <value>Address:</value>
   </data>
-  <data name="strLabelPuttySessionsConfig" xml:space="preserve">
+	<data name="strLabelPuttySessionsConfig" xml:space="preserve">
     <value>To configure PuTTY sessions click this button:</value>
   </data>
-  <data name="strLabelPuttyTimeout" xml:space="preserve">
+	<data name="strLabelPuttyTimeout" xml:space="preserve">
     <value>Max. PuTTY &amp;&amp; Integrated Ext. Apps wait time:</value>
   </data>
-  <data name="strLabelSeconds" xml:space="preserve">
+	<data name="strLabelSeconds" xml:space="preserve">
     <value>seconds</value>
   </data>
-  <data name="strMenuCtrlAltDel" xml:space="preserve">
+	<data name="strMenuCtrlAltDel" xml:space="preserve">
     <value>Ctrl-Alt-Del</value>
   </data>
-  <data name="strMenuCtrlEsc" xml:space="preserve">
+	<data name="strMenuCtrlEsc" xml:space="preserve">
     <value>Ctrl-Esc</value>
   </data>
-  <data name="strTabAdvanced" xml:space="preserve">
+	<data name="strTabAdvanced" xml:space="preserve">
     <value>Advanced</value>
   </data>
-  <data name="strButtonChange" xml:space="preserve">
+	<data name="strButtonChange" xml:space="preserve">
     <value>Change</value>
   </data>
-  <data name="strCheckboxReconnectWhenReady" xml:space="preserve">
+	<data name="strCheckboxReconnectWhenReady" xml:space="preserve">
     <value>Reconnect when ready</value>
   </data>
-  <data name="strConnections" xml:space="preserve">
+	<data name="strConnections" xml:space="preserve">
     <value>Connections</value>
   </data>
-  <data name="strFilterAll" xml:space="preserve">
+	<data name="strFilterAll" xml:space="preserve">
     <value>All Files (*.*)</value>
   </data>
-  <data name="strFilterApplication" xml:space="preserve">
+	<data name="strFilterApplication" xml:space="preserve">
     <value>Application Files (*.exe)</value>
   </data>
-  <data name="strFiltermRemoteCSV" xml:space="preserve">
+	<data name="strFiltermRemoteCSV" xml:space="preserve">
     <value>mRemote CSV Files (*.csv)</value>
   </data>
-  <data name="strFiltermRemoteXML" xml:space="preserve">
+	<data name="strFiltermRemoteXML" xml:space="preserve">
     <value>mRemote XML Files (*.xml)</value>
   </data>
-  <data name="strFilterRDP" xml:space="preserve">
+	<data name="strFilterRDP" xml:space="preserve">
     <value>RDP Files (*.rdp)</value>
   </data>
-  <data name="strFiltervRD2008CSV" xml:space="preserve">
+	<data name="strFiltervRD2008CSV" xml:space="preserve">
     <value>visionapp Remote Desktop 2008 CSV Files (*.csv)</value>
   </data>
-  <data name="strGroupboxAutomaticReconnect" xml:space="preserve">
+	<data name="strGroupboxAutomaticReconnect" xml:space="preserve">
     <value>Automatic Reconnect</value>
   </data>
-  <data name="strGroupboxConnection" xml:space="preserve">
+	<data name="strGroupboxConnection" xml:space="preserve">
     <value>Connection</value>
   </data>
-  <data name="strGroupboxFiles" xml:space="preserve">
+	<data name="strGroupboxFiles" xml:space="preserve">
     <value>Files</value>
   </data>
-  <data name="strLabelServerStatus" xml:space="preserve">
+	<data name="strLabelServerStatus" xml:space="preserve">
     <value>Server Status:</value>
   </data>
-  <data name="strNewConnection" xml:space="preserve">
+	<data name="strNewConnection" xml:space="preserve">
     <value>New Connection</value>
   </data>
-  <data name="strNewFolder" xml:space="preserve">
+	<data name="strNewFolder" xml:space="preserve">
     <value>New Folder</value>
   </data>
-  <data name="strNewRoot" xml:space="preserve">
+	<data name="strNewRoot" xml:space="preserve">
     <value>New Root</value>
   </data>
-  <data name="strNo" xml:space="preserve">
+	<data name="strNo" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="strTitleError" xml:space="preserve">
+	<data name="strTitleError" xml:space="preserve">
     <value>Error ({0})</value>
   </data>
-  <data name="strTitleInformation" xml:space="preserve">
+	<data name="strTitleInformation" xml:space="preserve">
     <value>Information ({0})</value>
   </data>
-  <data name="strTitleWarning" xml:space="preserve">
+	<data name="strTitleWarning" xml:space="preserve">
     <value>Warning ({0})</value>
   </data>
-  <data name="strYes" xml:space="preserve">
+	<data name="strYes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="strButtonBrowse" xml:space="preserve">
+	<data name="strButtonBrowse" xml:space="preserve">
     <value>&amp;Browse...</value>
   </data>
-  <data name="strButtonDefaultInheritance" xml:space="preserve">
+	<data name="strButtonDefaultInheritance" xml:space="preserve">
     <value>Default Inheritance</value>
   </data>
-  <data name="strButtonDefaultProperties" xml:space="preserve">
+	<data name="strButtonDefaultProperties" xml:space="preserve">
     <value>Default Properties</value>
   </data>
-  <data name="strButtonDisconnect" xml:space="preserve">
+	<data name="strButtonDisconnect" xml:space="preserve">
     <value>Disconnect</value>
   </data>
-  <data name="strButtonInheritance" xml:space="preserve">
+	<data name="strButtonInheritance" xml:space="preserve">
     <value>Inheritance</value>
   </data>
-  <data name="strButtonProperties" xml:space="preserve">
+	<data name="strButtonProperties" xml:space="preserve">
     <value>Properties</value>
   </data>
-  <data name="strCheckboxDomain" xml:space="preserve">
+	<data name="strCheckboxDomain" xml:space="preserve">
     <value>Domain</value>
   </data>
-  <data name="strCheckboxInheritance" xml:space="preserve">
+	<data name="strCheckboxInheritance" xml:space="preserve">
     <value>Inheritance</value>
   </data>
-  <data name="strCheckboxPassword" xml:space="preserve">
+	<data name="strCheckboxPassword" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="strCheckboxUsername" xml:space="preserve">
+	<data name="strCheckboxUsername" xml:space="preserve">
     <value>Username</value>
   </data>
-  <data name="strCheckboxWaitForExit" xml:space="preserve">
+	<data name="strCheckboxWaitForExit" xml:space="preserve">
     <value>Wait for exit</value>
   </data>
-  <data name="strColumnArguments" xml:space="preserve">
+	<data name="strColumnArguments" xml:space="preserve">
     <value>Arguments</value>
   </data>
-  <data name="strColumnDisplayName" xml:space="preserve">
+	<data name="strColumnDisplayName" xml:space="preserve">
     <value>Display Name</value>
   </data>
-  <data name="strColumnFilename" xml:space="preserve">
+	<data name="strColumnFilename" xml:space="preserve">
     <value>Filename</value>
   </data>
-  <data name="strColumnMessage" xml:space="preserve">
+	<data name="strColumnMessage" xml:space="preserve">
     <value>Message</value>
   </data>
-  <data name="strColumnWaitForExit" xml:space="preserve">
+	<data name="strColumnWaitForExit" xml:space="preserve">
     <value>Wait For Exit</value>
   </data>
-  <data name="strConfirmDeleteExternalTool" xml:space="preserve">
+	<data name="strConfirmDeleteExternalTool" xml:space="preserve">
     <value>Are you sure you want to delete the external tool, "{0}"?</value>
   </data>
-  <data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
+	<data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
     <value>Are you sure you want to delete the {0} selected external tools?</value>
   </data>
-  <data name="strGroupboxExternalToolProperties" xml:space="preserve">
+	<data name="strGroupboxExternalToolProperties" xml:space="preserve">
     <value>External Tool Properties</value>
   </data>
-  <data name="strLabelArguments" xml:space="preserve">
+	<data name="strLabelArguments" xml:space="preserve">
     <value>Arguments:</value>
   </data>
-  <data name="strLabelDisplayName" xml:space="preserve">
+	<data name="strLabelDisplayName" xml:space="preserve">
     <value>Display Name</value>
   </data>
-  <data name="strLabelFilename" xml:space="preserve">
+	<data name="strLabelFilename" xml:space="preserve">
     <value>Filename:</value>
   </data>
-  <data name="strLabelOptions" xml:space="preserve">
+	<data name="strLabelOptions" xml:space="preserve">
     <value>Options:</value>
   </data>
-  <data name="strMenuCopy" xml:space="preserve">
+	<data name="strMenuCopy" xml:space="preserve">
     <value>Copy</value>
   </data>
-  <data name="strMenuDeleteExternalTool" xml:space="preserve">
+	<data name="strMenuDeleteExternalTool" xml:space="preserve">
     <value>Delete External Tool...</value>
   </data>
-  <data name="strMenuDisconnect" xml:space="preserve">
+	<data name="strMenuDisconnect" xml:space="preserve">
     <value>Disconnect</value>
   </data>
-  <data name="strMenuDuplicateTab" xml:space="preserve">
+	<data name="strMenuDuplicateTab" xml:space="preserve">
     <value>Duplicate Tab</value>
   </data>
-  <data name="strMenuLaunchExternalTool" xml:space="preserve">
+	<data name="strMenuLaunchExternalTool" xml:space="preserve">
     <value>Launch External Tool</value>
   </data>
-  <data name="strMenuNewExternalTool" xml:space="preserve">
+	<data name="strMenuNewExternalTool" xml:space="preserve">
     <value>New External Tool</value>
   </data>
-  <data name="strMenuPaste" xml:space="preserve">
+	<data name="strMenuPaste" xml:space="preserve">
     <value>Paste</value>
   </data>
-  <data name="strMenuReconnect" xml:space="preserve">
+	<data name="strMenuReconnect" xml:space="preserve">
     <value>Reconnect</value>
   </data>
-  <data name="strMenuRefreshScreen" xml:space="preserve">
+	<data name="strMenuRefreshScreen" xml:space="preserve">
     <value>Refresh Screen (VNC)</value>
   </data>
-  <data name="strMenuRenameTab" xml:space="preserve">
+	<data name="strMenuRenameTab" xml:space="preserve">
     <value>Rename Tab</value>
   </data>
-  <data name="strMenuScreenshot" xml:space="preserve">
+	<data name="strMenuScreenshot" xml:space="preserve">
     <value>Screenshot</value>
   </data>
-  <data name="strMenuSendSpecialKeys" xml:space="preserve">
+	<data name="strMenuSendSpecialKeys" xml:space="preserve">
     <value>Send Special Keys (VNC)</value>
   </data>
-  <data name="strMenuSmartSize" xml:space="preserve">
+	<data name="strMenuSmartSize" xml:space="preserve">
     <value>SmartSize (RDP/VNC)</value>
   </data>
-  <data name="strMenuStartChat" xml:space="preserve">
+	<data name="strMenuStartChat" xml:space="preserve">
     <value>Start Chat (VNC)</value>
   </data>
-  <data name="strMenuTransferFile" xml:space="preserve">
+	<data name="strMenuTransferFile" xml:space="preserve">
     <value>Transfer File (SSH)</value>
   </data>
-  <data name="strMenuViewOnly" xml:space="preserve">
+	<data name="strMenuViewOnly" xml:space="preserve">
     <value>View Only (VNC)</value>
   </data>
-  <data name="strPropertyDescriptionAddress" xml:space="preserve">
+	<data name="strPropertyDescriptionAddress" xml:space="preserve">
     <value>Enter the hostname or ip you want to connect to.</value>
   </data>
-  <data name="strPropertyNameAddress" xml:space="preserve">
+	<data name="strPropertyNameAddress" xml:space="preserve">
     <value>Hostname/IP</value>
   </data>
-  <data name="strButtonIcon" xml:space="preserve">
+	<data name="strButtonIcon" xml:space="preserve">
     <value>Icon</value>
   </data>
-  <data name="strCategoryAppearance" xml:space="preserve">
+	<data name="strCategoryAppearance" xml:space="preserve">
     <value>Appearance</value>
   </data>
-  <data name="strCategoryConnection" xml:space="preserve">
+	<data name="strCategoryConnection" xml:space="preserve">
     <value>Connection</value>
   </data>
-  <data name="strCategoryCredentials" xml:space="preserve">
+	<data name="strCategoryCredentials" xml:space="preserve">
     <value>Credentials</value>
   </data>
-  <data name="strCategoryDisplay" xml:space="preserve">
+	<data name="strCategoryDisplay" xml:space="preserve">
     <value>Display</value>
   </data>
-  <data name="strCategoryGateway" xml:space="preserve">
+	<data name="strCategoryGateway" xml:space="preserve">
     <value>Gateway</value>
   </data>
-  <data name="strCategoryMiscellaneous" xml:space="preserve">
+	<data name="strCategoryMiscellaneous" xml:space="preserve">
     <value>Miscellaneous</value>
   </data>
-  <data name="strCategoryProtocol" xml:space="preserve">
+	<data name="strCategoryProtocol" xml:space="preserve">
     <value>Protocol</value>
   </data>
-  <data name="strCategoryRedirect" xml:space="preserve">
+	<data name="strCategoryRedirect" xml:space="preserve">
     <value>Redirect</value>
   </data>
-  <data name="strColumnHostnameIP" xml:space="preserve">
+	<data name="strColumnHostnameIP" xml:space="preserve">
     <value>Hostname/IP</value>
   </data>
-  <data name="strColumnUsername" xml:space="preserve">
+	<data name="strColumnUsername" xml:space="preserve">
     <value>Username</value>
   </data>
-  <data name="strLabelDomain" xml:space="preserve">
+	<data name="strLabelDomain" xml:space="preserve">
     <value>Domain:</value>
   </data>
-  <data name="strLabelPort" xml:space="preserve">
+	<data name="strLabelPort" xml:space="preserve">
     <value>Port:</value>
   </data>
-  <data name="strLabelProtocol" xml:space="preserve">
+	<data name="strLabelProtocol" xml:space="preserve">
     <value>Protocol:</value>
   </data>
-  <data name="strLabelUsername" xml:space="preserve">
+	<data name="strLabelUsername" xml:space="preserve">
     <value>Username:</value>
   </data>
-  <data name="strPropertyDescriptionDescription" xml:space="preserve">
+	<data name="strPropertyDescriptionDescription" xml:space="preserve">
     <value>Put your notes or a description for the host here.</value>
   </data>
-  <data name="strPropertyDescriptionDomain" xml:space="preserve">
+	<data name="strPropertyDescriptionDomain" xml:space="preserve">
     <value>Enter your domain.</value>
   </data>
-  <data name="strPropertyDescriptionIcon" xml:space="preserve">
+	<data name="strPropertyDescriptionIcon" xml:space="preserve">
     <value>Choose a icon that will be displayed when connected to the host.</value>
   </data>
-  <data name="strPropertyDescriptionName" xml:space="preserve">
+	<data name="strPropertyDescriptionName" xml:space="preserve">
     <value>This is the name that will be displayed in the connections tree.</value>
   </data>
-  <data name="strPropertyDescriptionPanel" xml:space="preserve">
+	<data name="strPropertyDescriptionPanel" xml:space="preserve">
     <value>Sets the panel in which the connection will open.</value>
   </data>
-  <data name="strPropertyDescriptionPassword" xml:space="preserve">
+	<data name="strPropertyDescriptionPassword" xml:space="preserve">
     <value>Enter your password.</value>
   </data>
-  <data name="strPropertyDescriptionPort" xml:space="preserve">
+	<data name="strPropertyDescriptionPort" xml:space="preserve">
     <value>Enter the port the selected protocol is listening on.</value>
   </data>
-  <data name="strPropertyDescriptionProtocol" xml:space="preserve">
+	<data name="strPropertyDescriptionProtocol" xml:space="preserve">
     <value>Choose the protocol mRemoteNG should use to connect to the host.</value>
   </data>
-  <data name="strPropertyDescriptionUsername" xml:space="preserve">
+	<data name="strPropertyDescriptionUsername" xml:space="preserve">
     <value>Enter your username.</value>
   </data>
-  <data name="strPropertyNameDescription" xml:space="preserve">
+	<data name="strPropertyNameDescription" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="strPropertyNameDomain" xml:space="preserve">
+	<data name="strPropertyNameDomain" xml:space="preserve">
     <value>Domain</value>
   </data>
-  <data name="strPropertyNameIcon" xml:space="preserve">
+	<data name="strPropertyNameIcon" xml:space="preserve">
     <value>Icon</value>
   </data>
-  <data name="strPropertyNameInheritDescription" xml:space="preserve">
+	<data name="strPropertyNameInheritDescription" xml:space="preserve">
     <value>Inherit Description</value>
   </data>
-  <data name="strPropertyNameInheritDomain" xml:space="preserve">
+	<data name="strPropertyNameInheritDomain" xml:space="preserve">
     <value>Inherit Domain</value>
   </data>
-  <data name="strPropertyNameInheritIcon" xml:space="preserve">
+	<data name="strPropertyNameInheritIcon" xml:space="preserve">
     <value>Inherit Icon</value>
   </data>
-  <data name="strPropertyNameInheritPanel" xml:space="preserve">
+	<data name="strPropertyNameInheritPanel" xml:space="preserve">
     <value>Inherit Panel</value>
   </data>
-  <data name="strPropertyNameInheritPassword" xml:space="preserve">
+	<data name="strPropertyNameInheritPassword" xml:space="preserve">
     <value>Inherit Password</value>
   </data>
-  <data name="strPropertyNameInheritPort" xml:space="preserve">
+	<data name="strPropertyNameInheritPort" xml:space="preserve">
     <value>Inherit Port</value>
   </data>
-  <data name="strPropertyNameInheritProtocol" xml:space="preserve">
+	<data name="strPropertyNameInheritProtocol" xml:space="preserve">
     <value>Inherit Protocol</value>
   </data>
-  <data name="strPropertyNameInheritUsername" xml:space="preserve">
+	<data name="strPropertyNameInheritUsername" xml:space="preserve">
     <value>Inherit Username</value>
   </data>
-  <data name="strPropertyNameName" xml:space="preserve">
+	<data name="strPropertyNameName" xml:space="preserve">
     <value>Name</value>
   </data>
-  <data name="strPropertyNamePanel" xml:space="preserve">
+	<data name="strPropertyNamePanel" xml:space="preserve">
     <value>Panel</value>
   </data>
-  <data name="strPropertyNamePassword" xml:space="preserve">
+	<data name="strPropertyNamePassword" xml:space="preserve">
     <value>Password</value>
   </data>
-  <data name="strPropertyNamePort" xml:space="preserve">
+	<data name="strPropertyNamePort" xml:space="preserve">
     <value>Port</value>
   </data>
-  <data name="strPropertyNameProtocol" xml:space="preserve">
+	<data name="strPropertyNameProtocol" xml:space="preserve">
     <value>Protocol</value>
   </data>
-  <data name="strPropertyNameUsername" xml:space="preserve">
+	<data name="strPropertyNameUsername" xml:space="preserve">
     <value>Username</value>
   </data>
-  <data name="strTabAppearance" xml:space="preserve">
+	<data name="strTabAppearance" xml:space="preserve">
     <value>Appearance</value>
   </data>
-  <data name="strCategoryGeneral" xml:space="preserve">
+	<data name="strCategoryGeneral" xml:space="preserve">
     <value>General</value>
   </data>
-  <data name="strPropertyDescriptionAuthenticationLevel" xml:space="preserve">
+	<data name="strPropertyDescriptionAuthenticationLevel" xml:space="preserve">
     <value>Select which authentication level this connection should use.</value>
   </data>
-  <data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
+	<data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
     <value>Select how you want to authenticate against the VNC server.</value>
   </data>
-  <data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
+	<data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
     <value>Select whether to use bitmap caching or not.</value>
   </data>
-  <data name="strPropertyDescriptionCompression" xml:space="preserve">
+	<data name="strPropertyDescriptionCompression" xml:space="preserve">
     <value>Select the compression value to be used.</value>
   </data>
-  <data name="strPropertyDescriptionDisplayThemes" xml:space="preserve">
+	<data name="strPropertyDescriptionDisplayThemes" xml:space="preserve">
     <value>Select yes if the theme of the remote host should be displayed.</value>
   </data>
-  <data name="strPropertyDescriptionDisplayWallpaper" xml:space="preserve">
+	<data name="strPropertyDescriptionDisplayWallpaper" xml:space="preserve">
     <value>Select yes if the wallpaper of the remote host should be displayed.</value>
   </data>
-  <data name="strPropertyDescriptionEncoding" xml:space="preserve">
+	<data name="strPropertyDescriptionEncoding" xml:space="preserve">
     <value>Select the encoding mode to be used.</value>
   </data>
-  <data name="strPropertyDescriptionEncryptionStrength" xml:space="preserve">
+	<data name="strPropertyDescriptionEncryptionStrength" xml:space="preserve">
     <value>Select the encryption strength of the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionExternalTool" xml:space="preserve">
+	<data name="strPropertyDescriptionExternalTool" xml:space="preserve">
     <value>Select the external tool to be started.</value>
   </data>
-  <data name="strPropertyDescriptionExternalToolAfter" xml:space="preserve">
+	<data name="strPropertyDescriptionExternalToolAfter" xml:space="preserve">
     <value>Select a external tool to be started after the disconnection to the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionExternalToolBefore" xml:space="preserve">
+	<data name="strPropertyDescriptionExternalToolBefore" xml:space="preserve">
     <value>Select a external tool to be started before the connection to the remote host is established.</value>
   </data>
-  <data name="strPropertyDescriptionMACAddress" xml:space="preserve">
+	<data name="strPropertyDescriptionMACAddress" xml:space="preserve">
     <value>Enter the MAC address of the remote host if you wish to use it in an external tool.</value>
   </data>
-  <data name="strPropertyDescriptionPuttySession" xml:space="preserve">
+	<data name="strPropertyDescriptionPuttySession" xml:space="preserve">
     <value>Select a PuTTY session to be used when connecting.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
+	<data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
     <value>Select whether local disk drives should be shown on the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectKeys" xml:space="preserve">
+	<data name="strPropertyDescriptionRedirectKeys" xml:space="preserve">
     <value>Select whether key combinations (e.g. Alt-Tab) should be redirected to the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectPorts" xml:space="preserve">
+	<data name="strPropertyDescriptionRedirectPorts" xml:space="preserve">
     <value>Select whether local ports (ie. com, parallel) should be shown on the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
+	<data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
     <value>Select whether local printers should be shown on the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
+	<data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
     <value>Select whether local Smart Cards should be available on the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
+	<data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Select how remote sound should be redirected.</value>
   </data>
-  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
+	<data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
     <value>Select one of the available rendering engines that will be used to display HTML.</value>
   </data>
-  <data name="strPropertyDescriptionResolution" xml:space="preserve">
+	<data name="strPropertyDescriptionResolution" xml:space="preserve">
     <value>Choose the resolution or mode this connection will open in.</value>
   </data>
-  <data name="strPropertyDescriptionSmartSizeMode" xml:space="preserve">
+	<data name="strPropertyDescriptionSmartSizeMode" xml:space="preserve">
     <value>Select the SmartSize mode to be used.</value>
   </data>
-  <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
+	<data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
     <value>Connect to the console session of the remote host.</value>
   </data>
-  <data name="strPropertyDescriptionUser1" xml:space="preserve">
+	<data name="strPropertyDescriptionUser1" xml:space="preserve">
     <value>Feel free to enter any information you need here.</value>
   </data>
-  <data name="strPropertyDescriptionViewOnly" xml:space="preserve">
+	<data name="strPropertyDescriptionViewOnly" xml:space="preserve">
     <value>If you want to establish a view only connection to the host select yes.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyAddress" xml:space="preserve">
+	<data name="strPropertyDescriptionVNCProxyAddress" xml:space="preserve">
     <value>Enter the proxy address to be used.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyPassword" xml:space="preserve">
+	<data name="strPropertyDescriptionVNCProxyPassword" xml:space="preserve">
     <value>Enter your password for authenticating against the proxy.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyPort" xml:space="preserve">
+	<data name="strPropertyDescriptionVNCProxyPort" xml:space="preserve">
     <value>Enter the port the proxy server listens on.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyType" xml:space="preserve">
+	<data name="strPropertyDescriptionVNCProxyType" xml:space="preserve">
     <value>If you use a proxy to tunnel VNC connections, select which type it is.</value>
   </data>
-  <data name="strPropertyDescriptionVNCProxyUsername" xml:space="preserve">
+	<data name="strPropertyDescriptionVNCProxyUsername" xml:space="preserve">
     <value>Enter your username for authenticating against the proxy.</value>
   </data>
-  <data name="strPropertyNameAuthenticationLevel" xml:space="preserve">
+	<data name="strPropertyNameAuthenticationLevel" xml:space="preserve">
     <value>Server Authentication</value>
   </data>
-  <data name="strPropertyNameAuthenticationMode" xml:space="preserve">
+	<data name="strPropertyNameAuthenticationMode" xml:space="preserve">
     <value>Authentication Mode</value>
   </data>
-  <data name="strPropertyNameCacheBitmaps" xml:space="preserve">
+	<data name="strPropertyNameCacheBitmaps" xml:space="preserve">
     <value>Cache Bitmaps</value>
   </data>
-  <data name="strPropertyNameCompression" xml:space="preserve">
+	<data name="strPropertyNameCompression" xml:space="preserve">
     <value>Compression</value>
   </data>
-  <data name="strPropertyNameDisplayThemes" xml:space="preserve">
+	<data name="strPropertyNameDisplayThemes" xml:space="preserve">
     <value>Display Themes</value>
   </data>
-  <data name="strPropertyNameDisplayWallpaper" xml:space="preserve">
+	<data name="strPropertyNameDisplayWallpaper" xml:space="preserve">
     <value>Display Wallpaper</value>
   </data>
-  <data name="strPropertyNameEncoding" xml:space="preserve">
+	<data name="strPropertyNameEncoding" xml:space="preserve">
     <value>Encoding</value>
   </data>
-  <data name="strPropertyNameEncryptionStrength" xml:space="preserve">
+	<data name="strPropertyNameEncryptionStrength" xml:space="preserve">
     <value>Encryption Strength</value>
   </data>
-  <data name="strPropertyNameExternalTool" xml:space="preserve">
+	<data name="strPropertyNameExternalTool" xml:space="preserve">
     <value>External Tool</value>
   </data>
-  <data name="strPropertyNameExternalToolAfter" xml:space="preserve">
+	<data name="strPropertyNameExternalToolAfter" xml:space="preserve">
     <value>External Tool After</value>
   </data>
-  <data name="strPropertyNameExternalToolBefore" xml:space="preserve">
+	<data name="strPropertyNameExternalToolBefore" xml:space="preserve">
     <value>External Tool Before</value>
   </data>
-  <data name="strPropertyNameInheritAll" xml:space="preserve">
+	<data name="strPropertyNameInheritAll" xml:space="preserve">
     <value>Inherit All</value>
   </data>
-  <data name="strPropertyNameInheritAuthenticationLevel" xml:space="preserve">
+	<data name="strPropertyNameInheritAuthenticationLevel" xml:space="preserve">
     <value>Inherit Server Authentication</value>
   </data>
-  <data name="strPropertyNameInheritAuthenticationMode" xml:space="preserve">
+	<data name="strPropertyNameInheritAuthenticationMode" xml:space="preserve">
     <value>Inherit Authentication Mode</value>
   </data>
-  <data name="strPropertyNameInheritCacheBitmaps" xml:space="preserve">
+	<data name="strPropertyNameInheritCacheBitmaps" xml:space="preserve">
     <value>Inherit Cache Bitmaps</value>
   </data>
-  <data name="strPropertyNameInheritColors" xml:space="preserve">
+	<data name="strPropertyNameInheritColors" xml:space="preserve">
     <value>Inherit Colours</value>
   </data>
-  <data name="strPropertyNameInheritCompression" xml:space="preserve">
+	<data name="strPropertyNameInheritCompression" xml:space="preserve">
     <value>Inherit Compression</value>
   </data>
-  <data name="strPropertyNameInheritDisplayThemes" xml:space="preserve">
+	<data name="strPropertyNameInheritDisplayThemes" xml:space="preserve">
     <value>Inherit Display Themes</value>
   </data>
-  <data name="strPropertyNameInheritDisplayWallpaper" xml:space="preserve">
+	<data name="strPropertyNameInheritDisplayWallpaper" xml:space="preserve">
     <value>Inherit Display Wallpaper</value>
   </data>
-  <data name="strPropertyNameInheritEncoding" xml:space="preserve">
+	<data name="strPropertyNameInheritEncoding" xml:space="preserve">
     <value>Inherit Encoding</value>
   </data>
-  <data name="strPropertyNameInheritEncryptionStrength" xml:space="preserve">
+	<data name="strPropertyNameInheritEncryptionStrength" xml:space="preserve">
     <value>Inherit Encryption Strength</value>
   </data>
-  <data name="strPropertyNameInheritExternalTool" xml:space="preserve">
+	<data name="strPropertyNameInheritExternalTool" xml:space="preserve">
     <value>Inherit External Tool</value>
   </data>
-  <data name="strPropertyNameInheritExternalToolAfter" xml:space="preserve">
+	<data name="strPropertyNameInheritExternalToolAfter" xml:space="preserve">
     <value>Inherit External Tool After</value>
   </data>
-  <data name="strPropertyNameInheritExternalToolBefore" xml:space="preserve">
+	<data name="strPropertyNameInheritExternalToolBefore" xml:space="preserve">
     <value>Inherit External Tool Before</value>
   </data>
-  <data name="strPropertyNameInheritMACAddress" xml:space="preserve">
+	<data name="strPropertyNameInheritMACAddress" xml:space="preserve">
     <value>Inherit MAC Address</value>
   </data>
-  <data name="strPropertyNameInheritPuttySession" xml:space="preserve">
+	<data name="strPropertyNameInheritPuttySession" xml:space="preserve">
     <value>Inherit PuTTY Session</value>
   </data>
-  <data name="strPropertyNameInheritRedirectDrives" xml:space="preserve">
+	<data name="strPropertyNameInheritRedirectDrives" xml:space="preserve">
     <value>Inherit Disk Drives</value>
   </data>
-  <data name="strPropertyNameInheritRedirectKeys" xml:space="preserve">
+	<data name="strPropertyNameInheritRedirectKeys" xml:space="preserve">
     <value>Inherit Key Combinations</value>
   </data>
-  <data name="strPropertyNameInheritRedirectPorts" xml:space="preserve">
+	<data name="strPropertyNameInheritRedirectPorts" xml:space="preserve">
     <value>Inherit Ports</value>
   </data>
-  <data name="strPropertyNameInheritRedirectPrinters" xml:space="preserve">
+	<data name="strPropertyNameInheritRedirectPrinters" xml:space="preserve">
     <value>Inherit Printers</value>
   </data>
-  <data name="strPropertyNameInheritRedirectSmartCards" xml:space="preserve">
+	<data name="strPropertyNameInheritRedirectSmartCards" xml:space="preserve">
     <value>Inherit Smart Cards</value>
   </data>
-  <data name="strPropertyNameInheritRedirectSounds" xml:space="preserve">
+	<data name="strPropertyNameInheritRedirectSounds" xml:space="preserve">
     <value>Inherit Sounds</value>
   </data>
-  <data name="strPropertyNameInheritRenderingEngine" xml:space="preserve">
+	<data name="strPropertyNameInheritRenderingEngine" xml:space="preserve">
     <value>Inherit Rendering Engine</value>
   </data>
-  <data name="strPropertyNameInheritResolution" xml:space="preserve">
+	<data name="strPropertyNameInheritResolution" xml:space="preserve">
     <value>Inherit Resolution</value>
   </data>
-  <data name="strPropertyNameInheritSmartSizeMode" xml:space="preserve">
+	<data name="strPropertyNameInheritSmartSizeMode" xml:space="preserve">
     <value>Inherit SmartSize Mode</value>
   </data>
-  <data name="strPropertyNameInheritUseConsoleSession" xml:space="preserve">
+	<data name="strPropertyNameInheritUseConsoleSession" xml:space="preserve">
     <value>Inherit Use Console Session</value>
   </data>
-  <data name="strPropertyNameInheritUser1" xml:space="preserve">
+	<data name="strPropertyNameInheritUser1" xml:space="preserve">
     <value>Inherit User Field</value>
   </data>
-  <data name="strPropertyNameInheritViewOnly" xml:space="preserve">
+	<data name="strPropertyNameInheritViewOnly" xml:space="preserve">
     <value>Inherit View Only</value>
   </data>
-  <data name="strPropertyNameInheritVNCProxyAddress" xml:space="preserve">
+	<data name="strPropertyNameInheritVNCProxyAddress" xml:space="preserve">
     <value>Inherit Proxy Address</value>
   </data>
-  <data name="strPropertyNameInheritVNCProxyPassword" xml:space="preserve">
+	<data name="strPropertyNameInheritVNCProxyPassword" xml:space="preserve">
     <value>Inherit Proxy Password</value>
   </data>
-  <data name="strPropertyNameInheritVNCProxyPort" xml:space="preserve">
+	<data name="strPropertyNameInheritVNCProxyPort" xml:space="preserve">
     <value>Inherit Proxy Port</value>
   </data>
-  <data name="strPropertyNameInheritVNCProxyType" xml:space="preserve">
+	<data name="strPropertyNameInheritVNCProxyType" xml:space="preserve">
     <value>Inherit Proxy Type</value>
   </data>
-  <data name="strPropertyNameInheritVNCProxyUsername" xml:space="preserve">
+	<data name="strPropertyNameInheritVNCProxyUsername" xml:space="preserve">
     <value>Inherit Proxy Username</value>
   </data>
-  <data name="strPropertyNameMACAddress" xml:space="preserve">
+	<data name="strPropertyNameMACAddress" xml:space="preserve">
     <value>MAC Address</value>
   </data>
-  <data name="strPropertyNamePuttySession" xml:space="preserve">
+	<data name="strPropertyNamePuttySession" xml:space="preserve">
     <value>PuTTY Session</value>
   </data>
-  <data name="strPropertyNameRedirectDrives" xml:space="preserve">
+	<data name="strPropertyNameRedirectDrives" xml:space="preserve">
     <value>Disk Drives</value>
   </data>
-  <data name="strPropertyNameRedirectKeys" xml:space="preserve">
+	<data name="strPropertyNameRedirectKeys" xml:space="preserve">
     <value>Key Combinations</value>
   </data>
-  <data name="strPropertyNameRedirectPorts" xml:space="preserve">
+	<data name="strPropertyNameRedirectPorts" xml:space="preserve">
     <value>Ports</value>
   </data>
-  <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
+	<data name="strPropertyNameRedirectPrinters" xml:space="preserve">
     <value>Printers</value>
   </data>
-  <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
+	<data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
     <value>Smart Cards</value>
   </data>
-  <data name="strPropertyNameRedirectSounds" xml:space="preserve">
+	<data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Sounds</value>
   </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
+	<data name="strPropertyNameRenderingEngine" xml:space="preserve">
     <value>Rendering Engine</value>
   </data>
-  <data name="strPropertyNameResolution" xml:space="preserve">
+	<data name="strPropertyNameResolution" xml:space="preserve">
     <value>Resolution</value>
   </data>
-  <data name="strPropertyNameSmartSizeMode" xml:space="preserve">
+	<data name="strPropertyNameSmartSizeMode" xml:space="preserve">
     <value>SmartSize Mode</value>
   </data>
-  <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
+	<data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>Use Console Session</value>
   </data>
-  <data name="strPropertyNameUser1" xml:space="preserve">
+	<data name="strPropertyNameUser1" xml:space="preserve">
     <value>User Field</value>
   </data>
-  <data name="strPropertyNameViewOnly" xml:space="preserve">
+	<data name="strPropertyNameViewOnly" xml:space="preserve">
     <value>View Only</value>
   </data>
-  <data name="strPropertyNameVNCProxyAddress" xml:space="preserve">
+	<data name="strPropertyNameVNCProxyAddress" xml:space="preserve">
     <value>Proxy Address</value>
   </data>
-  <data name="strPropertyNameVNCProxyPassword" xml:space="preserve">
+	<data name="strPropertyNameVNCProxyPassword" xml:space="preserve">
     <value>Proxy Password</value>
   </data>
-  <data name="strPropertyNameVNCProxyPort" xml:space="preserve">
+	<data name="strPropertyNameVNCProxyPort" xml:space="preserve">
     <value>Proxy Port</value>
   </data>
-  <data name="strPropertyNameVNCProxyType" xml:space="preserve">
+	<data name="strPropertyNameVNCProxyType" xml:space="preserve">
     <value>Proxy Type</value>
   </data>
-  <data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
+	<data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
     <value>Proxy Username</value>
   </data>
-  <data name="strComponentsCheck" xml:space="preserve">
+	<data name="strComponentsCheck" xml:space="preserve">
     <value>Components Check</value>
   </data>
-  <data name="strCcAlwaysShowScreen" xml:space="preserve">
+	<data name="strCcAlwaysShowScreen" xml:space="preserve">
     <value>Always show this screen at startup</value>
   </data>
-  <data name="strCcCheckAgain" xml:space="preserve">
+	<data name="strCcCheckAgain" xml:space="preserve">
     <value>Refresh</value>
   </data>
-  <data name="strConnecting" xml:space="preserve">
+	<data name="strConnecting" xml:space="preserve">
     <value>Connecting...</value>
   </data>
-  <data name="strRDP256Colors" xml:space="preserve">
+	<data name="strRDP256Colors" xml:space="preserve">
     <value>256 Colors (8bit)</value>
   </data>
-  <data name="strRDPSoundBringToThisComputer" xml:space="preserve">
+	<data name="strRDPSoundBringToThisComputer" xml:space="preserve">
     <value>Bring to this computer</value>
   </data>
-  <data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
+	<data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
     <value>Leave at remote computer</value>
   </data>
-  <data name="strRDPSoundDoNotPlay" xml:space="preserve">
+	<data name="strRDPSoundDoNotPlay" xml:space="preserve">
     <value>Do not play</value>
   </data>
-  <data name="strRDPFitToPanel" xml:space="preserve">
+	<data name="strRDPFitToPanel" xml:space="preserve">
     <value>Fit To Panel</value>
   </data>
-  <data name="strFullscreen" xml:space="preserve">
+	<data name="strFullscreen" xml:space="preserve">
     <value>Fullscreen</value>
   </data>
-  <data name="strRDPSmartSize" xml:space="preserve">
+	<data name="strRDPSmartSize" xml:space="preserve">
     <value>Smart Size</value>
   </data>
-  <data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
+	<data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
     <value>Always connect, even if authentication fails</value>
   </data>
-  <data name="strDontConnectWhenAuthFails" xml:space="preserve">
+	<data name="strDontConnectWhenAuthFails" xml:space="preserve">
     <value>Don't connect if authentication fails</value>
   </data>
-  <data name="strWarnIfAuthFails" xml:space="preserve">
+	<data name="strWarnIfAuthFails" xml:space="preserve">
     <value>Warn me if authentication fails</value>
   </data>
-  <data name="strCcNotInstalledProperly" xml:space="preserve">
+	<data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>not installed properly</value>
   </data>
-  <data name="strCcCheckSucceeded" xml:space="preserve">
+	<data name="strCcCheckSucceeded" xml:space="preserve">
     <value>Check succeeded!</value>
   </data>
-  <data name="strCcRDPOK" xml:space="preserve">
+	<data name="strCcRDPOK" xml:space="preserve">
     <value>All RDP components were found and seem to be registered properly.
 Remote Desktop Connection Control Version {0}</value>
   </data>
-  <data name="strCcCheckFailed" xml:space="preserve">
+	<data name="strCcCheckFailed" xml:space="preserve">
     <value>Check failed!</value>
   </data>
-  <data name="strCcRDPFailed" xml:space="preserve">
+	<data name="strCcRDPFailed" xml:space="preserve">
     <value>For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services Client) 6.1 installed. You can get it here: http://support.microsoft.com/kb/951616
 If you have RDP 6.1 installed and the check still fails, try to register mstscax.dll manually. To do this open up the run dialog (Start - Run) and enter the following: regsvr32 "c:\windows\system32\mstscax.dll" (Where c:\ is your system drive).
 If you still have trouble getting RDP to work please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
   </data>
-  <data name="strPasswordProtect" xml:space="preserve">
+	<data name="strPasswordProtect" xml:space="preserve">
     <value>Password protect</value>
   </data>
-  <data name="strCcVNCOK" xml:space="preserve">
+	<data name="strCcVNCOK" xml:space="preserve">
     <value>All VNC components were found and seem to be registered properly.
 VncSharpNG Control Version {0}</value>
   </data>
-  <data name="strCcVNCFailed" xml:space="preserve">
+	<data name="strCcVNCFailed" xml:space="preserve">
     <value>VNC requires VncSharpNG.dll to be located in your mRemoteNG application folder.
 Please make sure that you have the VncSharpNG.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
 If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
   </data>
-  <data name="strCcPuttyOK" xml:space="preserve">
+	<data name="strCcPuttyOK" xml:space="preserve">
     <value>The PuTTY executable was found and should be ready to use.</value>
   </data>
-  <data name="strCcPuttyFailed" xml:space="preserve">
+	<data name="strCcPuttyFailed" xml:space="preserve">
     <value>The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemoteNG package and is located in the installation path.
 Please make sure that either you have the Putty.exe in your mRemoteNG directory (default: c:\Program Files\mRemoteNG\) or that you specified a valid path to your PuTTY executable in the Options (Tools - Options - Advanced - Custom PuTTY path)</value>
   </data>
-  <data name="strCcICAOK" xml:space="preserve">
+	<data name="strCcICAOK" xml:space="preserve">
     <value>All ICA components were found and seem to be registered properly.
 Citrix ICA Client Control Version {0}</value>
   </data>
-  <data name="strCcICAFailed" xml:space="preserve">
+	<data name="strCcICAFailed" xml:space="preserve">
     <value>ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/
 If you have the XenDesktop Online Plugin installed and the check still fails, try to register wfica.ocx manually.
 To do this open up the run dialog (Start - Run) and enter the following: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (Where c:\Program Files\Citrix\ICA Client\ is the path to your XenDesktop Online Plugin installation).
 If you are still not able to pass this check or use ICA in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/"</value>
   </data>
-  <data name="strCcGeckoOK" xml:space="preserve">
+	<data name="strCcGeckoOK" xml:space="preserve">
     <value>XULrunner was found and seems to be installed properly.</value>
   </data>
-  <data name="strCcGeckoFailed" xml:space="preserve">
+	<data name="strCcGeckoFailed" xml:space="preserve">
     <value>To use the Gecko Rendering Engine you need to have XULrunner 1.8.1.x and the path to the installation set in your Options.
 You can download XULrunner 1.8.1.3 here: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
 When you are finished downloading extract the package to a path of your choice. Then in mRemoteNG go to Tools - Options - Advanced and enter the correct path in the XULrunner path field.
 If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
   </data>
-  <data name="strCcEOLOK" xml:space="preserve">
+	<data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM was found and seems to be registered properly.</value>
   </data>
-  <data name="strCcEOLFailed" xml:space="preserve">
+	<data name="strCcEOLFailed" xml:space="preserve">
     <value>The (RDP) Sessions feature requires that you have a registered copy of eolwtscom.dll on your system.
 mRemoteNG ships with this component but will not register it automatically unless you run the setup package.
 To do register it manually do this: Open up the run dialog (Start - Run) and enter the following: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (Where c:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation).
 If you are still not able to pass this check or use the (RDP) Sessions feature in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
   </data>
-  <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
+	<data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
     <value>Automatically get session information</value>
   </data>
-  <data name="strWriteLogFile" xml:space="preserve">
+	<data name="strWriteLogFile" xml:space="preserve">
     <value>Write log file (mRemoteNG.log)</value>
   </data>
-  <data name="strStartupExit" xml:space="preserve">
+	<data name="strStartupExit" xml:space="preserve">
     <value>Startup/Exit</value>
   </data>
-  <data name="strAllowOnlySingleInstance" xml:space="preserve">
+	<data name="strAllowOnlySingleInstance" xml:space="preserve">
     <value>Allow only a single instance of the application (mRemoteNG restart required)</value>
   </data>
-  <data name="strReconnectAtStartup" xml:space="preserve">
+	<data name="strReconnectAtStartup" xml:space="preserve">
     <value>Reconnect to previously opened sessions on startup</value>
   </data>
-  <data name="strCheckForUpdatesOnStartup" xml:space="preserve">
+	<data name="strCheckForUpdatesOnStartup" xml:space="preserve">
     <value>Check for updates and announcements at startup</value>
   </data>
-  <data name="strConfirmExit" xml:space="preserve">
+	<data name="strConfirmExit" xml:space="preserve">
     <value>Confirm exit if there are open connections</value>
   </data>
-  <data name="strSaveConsOnExit" xml:space="preserve">
+	<data name="strSaveConsOnExit" xml:space="preserve">
     <value>Save connections on exit</value>
   </data>
-  <data name="strMinimizeToSysTray" xml:space="preserve">
+	<data name="strMinimizeToSysTray" xml:space="preserve">
     <value>Minimize to System Tray</value>
   </data>
-  <data name="strShowFullConsFilePath" xml:space="preserve">
+	<data name="strShowFullConsFilePath" xml:space="preserve">
     <value>Show full connections file path in window title</value>
   </data>
-  <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
+	<data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>Always show System Tray Icon</value>
   </data>
-  <data name="strShowDescriptionTooltips" xml:space="preserve">
+	<data name="strShowDescriptionTooltips" xml:space="preserve">
     <value>Show description tooltips in connection tree</value>
   </data>
-  <data name="strTabsAndPanels" xml:space="preserve">
+	<data name="strTabsAndPanels" xml:space="preserve">
     <value>Tabs &amp;&amp; Panels</value>
   </data>
-  <data name="strShowProtocolOnTabs" xml:space="preserve">
+	<data name="strShowProtocolOnTabs" xml:space="preserve">
     <value>Show protocols on tab names</value>
   </data>
-  <data name="strShowLogonInfoOnTabs" xml:space="preserve">
+	<data name="strShowLogonInfoOnTabs" xml:space="preserve">
     <value>Show logon information on tab names</value>
   </data>
-  <data name="strOpenNewTabRight" xml:space="preserve">
+	<data name="strOpenNewTabRight" xml:space="preserve">
     <value>Open new tab to the right of the currently selected tab</value>
   </data>
-  <data name="strAlwaysShowPanelSelection" xml:space="preserve">
+	<data name="strAlwaysShowPanelSelection" xml:space="preserve">
     <value>Always show panel selection dialog when opening connections</value>
   </data>
-  <data name="strDoubleClickTabClosesIt" xml:space="preserve">
+	<data name="strDoubleClickTabClosesIt" xml:space="preserve">
     <value>Double click on tab closes it</value>
   </data>
-  <data name="strSetHostnameLikeDisplayName" xml:space="preserve">
+	<data name="strSetHostnameLikeDisplayName" xml:space="preserve">
     <value>Set hostname like display name when creating new connections</value>
   </data>
-  <data name="strExperimental" xml:space="preserve">
+	<data name="strExperimental" xml:space="preserve">
     <value>Experimental</value>
   </data>
-  <data name="strUseSQLServer" xml:space="preserve">
+	<data name="strUseSQLServer" xml:space="preserve">
     <value>Use SQL Server to load &amp;&amp; save connections</value>
   </data>
-  <data name="strSQLInfo" xml:space="preserve">
+	<data name="strSQLInfo" xml:space="preserve">
     <value>Please see Help - Getting started - SQL Configuration for more Info!</value>
   </data>
-  <data name="strSQLServer" xml:space="preserve">
+	<data name="strSQLServer" xml:space="preserve">
     <value>SQL Server</value>
   </data>
-  <data name="strAutoSaveMins" xml:space="preserve">
+	<data name="strAutoSaveMins" xml:space="preserve">
     <value>Minutes (0 means disabled)</value>
   </data>
-  <data name="strAutoSaveEvery" xml:space="preserve">
+	<data name="strAutoSaveEvery" xml:space="preserve">
     <value>Auto Save every:</value>
   </data>
-  <data name="strStartIP" xml:space="preserve">
+	<data name="strStartIP" xml:space="preserve">
     <value>Start IP</value>
   </data>
-  <data name="strEndIP" xml:space="preserve">
+	<data name="strEndIP" xml:space="preserve">
     <value>End IP</value>
   </data>
-  <data name="strOpenPorts" xml:space="preserve">
+	<data name="strOpenPorts" xml:space="preserve">
     <value>Open Ports</value>
   </data>
-  <data name="strClosedPorts" xml:space="preserve">
+	<data name="strClosedPorts" xml:space="preserve">
     <value>Closed Ports</value>
   </data>
-  <data name="strEndPort" xml:space="preserve">
+	<data name="strEndPort" xml:space="preserve">
     <value>End Port</value>
   </data>
-  <data name="strStartPort" xml:space="preserve">
+	<data name="strStartPort" xml:space="preserve">
     <value>Start Port</value>
   </data>
-  <data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
     <value>Remote Desktop Gateway Password</value>
   </data>
-  <data name="strPropertyNameRDGatewayUsageMethod" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayUsageMethod" xml:space="preserve">
     <value>Use Gateway</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
+	<data name="strPropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
     <value>Specifies when to use a Remote Desktop Gateway (RD Gateway) server.</value>
   </data>
-  <data name="strPropertyNameRDGatewayPasswordInherit" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayPasswordInherit" xml:space="preserve">
     <value>Inherit Remote Desktop Gateway Password</value>
   </data>
-  <data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
     <value>Gateway Username</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
+	<data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
     <value>Specifies the user name that a user provides to connect to the RD Gateway server.</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayPasswordInherit" xml:space="preserve">
-    <value />
+	<data name="strPropertyDescriptionRDGatewayPasswordInherit" xml:space="preserve">
+    <value></value>
   </data>
-  <data name="strProtocolToImport" xml:space="preserve">
+	<data name="strProtocolToImport" xml:space="preserve">
     <value>Protocol to import</value>
   </data>
-  <data name="strQuickConnect" xml:space="preserve">
+	<data name="strQuickConnect" xml:space="preserve">
     <value>Quick Connect</value>
   </data>
-  <data name="strLocalFile" xml:space="preserve">
+	<data name="strLocalFile" xml:space="preserve">
     <value>Local file</value>
   </data>
-  <data name="strRemoteFile" xml:space="preserve">
+	<data name="strRemoteFile" xml:space="preserve">
     <value>Remote file</value>
   </data>
-  <data name="strSaveAll" xml:space="preserve">
+	<data name="strSaveAll" xml:space="preserve">
     <value>Save All</value>
   </data>
-  <data name="strRemoveAll" xml:space="preserve">
+	<data name="strRemoveAll" xml:space="preserve">
     <value>Remove All</value>
   </data>
-  <data name="strSave" xml:space="preserve">
+	<data name="strSave" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="strSaveImageFilter" xml:space="preserve">
+	<data name="strSaveImageFilter" xml:space="preserve">
     <value>Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group File (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Network Graphics File (.png)|*.png</value>
   </data>
-  <data name="strScreenshots" xml:space="preserve">
+	<data name="strScreenshots" xml:space="preserve">
     <value>Screenshots</value>
   </data>
-  <data name="strActivity" xml:space="preserve">
+	<data name="strActivity" xml:space="preserve">
     <value>Activity</value>
   </data>
-  <data name="strPropertyNameRDGatewayHostname" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayHostname" xml:space="preserve">
     <value>Gateway Hostname</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayHostname" xml:space="preserve">
+	<data name="strPropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>Specifies the host name of the Remote Desktop Gateway server.</value>
   </data>
-  <data name="strPropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
     <value>Gateway Credentials</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
+	<data name="strPropertyDescriptionRDGatewayUseConnectionCredentials" xml:space="preserve">
     <value>Specifies whether or not to log on to the gateway using the same username and password as the connection.</value>
   </data>
-  <data name="strPropertyNameRDGatewayDomain" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayDomain" xml:space="preserve">
     <value>Gateway Domain</value>
   </data>
-  <data name="strPropertyDescriptionRDGatewayDomain" xml:space="preserve">
+	<data name="strPropertyDescriptionRDGatewayDomain" xml:space="preserve">
     <value>Specifies the domain name that a user provides to connect to the RD Gateway server.</value>
   </data>
-  <data name="strPropertyNameRDGatewayUsageMethodInherit" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayUsageMethodInherit" xml:space="preserve">
     <value>Inherit Use Gateway</value>
   </data>
-  <data name="strPropertyNameRDGatewayUseConnectionCredentialsInherit" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayUseConnectionCredentialsInherit" xml:space="preserve">
     <value>Inherit Gateway Credentials</value>
   </data>
-  <data name="strPropertyNameRDGatewayHostnameInherit" xml:space="preserve">
+	<data name="strPropertyNameRDGatewayHostnameInherit" xml:space="preserve">
     <value>Inherit Gateway Hostname</value>
   </data>
-  <data name="strNoCompression" xml:space="preserve">
+	<data name="strNoCompression" xml:space="preserve">
     <value>No Compression</value>
   </data>
-  <data name="strNone" xml:space="preserve">
+	<data name="strNone" xml:space="preserve">
     <value>None</value>
   </data>
-  <data name="strNormal" xml:space="preserve">
+	<data name="strNormal" xml:space="preserve">
     <value>Normal</value>
   </data>
-  <data name="strNoSmartSize" xml:space="preserve">
+	<data name="strNoSmartSize" xml:space="preserve">
     <value>No SmartSize</value>
   </data>
-  <data name="strFree" xml:space="preserve">
+	<data name="strFree" xml:space="preserve">
     <value>Free</value>
   </data>
-  <data name="strAspect" xml:space="preserve">
+	<data name="strAspect" xml:space="preserve">
     <value>Aspect</value>
   </data>
-  <data name="strNewPanel" xml:space="preserve">
+	<data name="strNewPanel" xml:space="preserve">
     <value>New Panel</value>
   </data>
-  <data name="strRename" xml:space="preserve">
+	<data name="strRename" xml:space="preserve">
     <value>Rename</value>
   </data>
-  <data name="strSendTo" xml:space="preserve">
+	<data name="strSendTo" xml:space="preserve">
     <value>Send To...</value>
   </data>
-  <data name="strNewTitle" xml:space="preserve">
+	<data name="strNewTitle" xml:space="preserve">
     <value>New Title</value>
   </data>
-  <data name="strScreen" xml:space="preserve">
+	<data name="strScreen" xml:space="preserve">
     <value>Screen</value>
   </data>
-  <data name="strPanelName" xml:space="preserve">
+	<data name="strPanelName" xml:space="preserve">
     <value>Panel Name</value>
   </data>
-  <data name="strUser" xml:space="preserve">
+	<data name="strUser" xml:space="preserve">
     <value>User</value>
   </data>
-  <data name="strHost" xml:space="preserve">
+	<data name="strHost" xml:space="preserve">
     <value>Host</value>
   </data>
-  <data name="strSSHTransferFailed" xml:space="preserve">
+	<data name="strSSHTransferFailed" xml:space="preserve">
     <value>Transfer</value>
   </data>
-  <data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
+	<data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
     <value>Do you want to save the current connections file before loading another?</value>
   </data>
-  <data name="strEmptyPasswordContinue" xml:space="preserve">
+	<data name="strEmptyPasswordContinue" xml:space="preserve">
     <value>Do you want to continue with no password?</value>
   </data>
-  <data name="strExport" xml:space="preserve">
+	<data name="strExport" xml:space="preserve">
     <value>Export</value>
   </data>
-  <data name="strUncheckProperties" xml:space="preserve">
+	<data name="strUncheckProperties" xml:space="preserve">
     <value>Uncheck the properties you want not to be saved!</value>
   </data>
-  <data name="strType" xml:space="preserve">
+	<data name="strType" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="strRefresh" xml:space="preserve">
+	<data name="strRefresh" xml:space="preserve">
     <value>Refresh</value>
   </data>
-  <data name="strLogOff" xml:space="preserve">
+	<data name="strLogOff" xml:space="preserve">
     <value>Logoff</value>
   </data>
-  <data name="strTheFollowing" xml:space="preserve">
+	<data name="strTheFollowing" xml:space="preserve">
     <value>the follwing</value>
   </data>
-  <data name="strMyCurrentWindowsCreds" xml:space="preserve">
+	<data name="strMyCurrentWindowsCreds" xml:space="preserve">
     <value>my current credentials (windows logon info)</value>
   </data>
-  <data name="strNoInformation" xml:space="preserve">
+	<data name="strNoInformation" xml:space="preserve">
     <value>none</value>
   </data>
-  <data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
+	<data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value>Single click on opened connection switches to it</value>
   </data>
-  <data name="strSingleClickOnConnectionOpensIt" xml:space="preserve">
+	<data name="strSingleClickOnConnectionOpensIt" xml:space="preserve">
     <value>Single click on connection opens it</value>
   </data>
-  <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
+	<data name="strSwitchToErrorsAndInfos" xml:space="preserve">
     <value>Switch to Notifications panel on</value>
   </data>
-  <data name="strErrors" xml:space="preserve">
+	<data name="strErrors" xml:space="preserve">
     <value>Errors</value>
   </data>
-  <data name="strWarnings" xml:space="preserve">
+	<data name="strWarnings" xml:space="preserve">
     <value>Warnings</value>
   </data>
-  <data name="strInformations" xml:space="preserve">
+	<data name="strInformations" xml:space="preserve">
     <value>Informations</value>
   </data>
-  <data name="strUseOnlyErrorsAndInfosPanel" xml:space="preserve">
+	<data name="strUseOnlyErrorsAndInfosPanel" xml:space="preserve">
     <value>Use only Notifications panel (no messagebox popups)</value>
   </data>
-  <data name="strUltraVNCSCListeningPort" xml:space="preserve">
+	<data name="strUltraVNCSCListeningPort" xml:space="preserve">
     <value>UltraVNC SingleClick Port</value>
   </data>
-  <data name="strCheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
+	<data name="strCheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
     <value>Check proper installation of components at startup</value>
   </data>
-  <data name="strXULrunnerPath" xml:space="preserve">
+	<data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner path</value>
   </data>
-  <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
+	<data name="strEncryptCompleteConnectionFile" xml:space="preserve">
     <value>Completely encrypt connection file</value>
   </data>
-  <data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
+	<data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>For empty Username, Password or Domain fields use:</value>
   </data>
-  <data name="strProxyTestSucceeded" xml:space="preserve">
+	<data name="strProxyTestSucceeded" xml:space="preserve">
     <value>Proxy test succeeded!</value>
   </data>
-  <data name="strProxyTestFailed" xml:space="preserve">
+	<data name="strProxyTestFailed" xml:space="preserve">
     <value>Proxy test failed!</value>
   </data>
-  <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
+	<data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
     <value>(These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!)</value>
   </data>
-  <data name="strAddConnection" xml:space="preserve">
+	<data name="strAddConnection" xml:space="preserve">
     <value>New Connection</value>
   </data>
-  <data name="strAddFolder" xml:space="preserve">
+	<data name="strAddFolder" xml:space="preserve">
     <value>New folder</value>
   </data>
-  <data name="strConnect" xml:space="preserve">
+	<data name="strConnect" xml:space="preserve">
     <value>Connect</value>
   </data>
-  <data name="strConnectWithOptions" xml:space="preserve">
+	<data name="strConnectWithOptions" xml:space="preserve">
     <value>Connect (with options)</value>
   </data>
-  <data name="strConnectToConsoleSession" xml:space="preserve">
+	<data name="strConnectToConsoleSession" xml:space="preserve">
     <value>Connect to console session</value>
   </data>
-  <data name="strConnectInFullscreen" xml:space="preserve">
+	<data name="strConnectInFullscreen" xml:space="preserve">
     <value>Connect in fullscreen mode</value>
   </data>
-  <data name="strChoosePanelBeforeConnecting" xml:space="preserve">
+	<data name="strChoosePanelBeforeConnecting" xml:space="preserve">
     <value>Choose panel before connecting</value>
   </data>
-  <data name="strTools" xml:space="preserve">
+	<data name="strTools" xml:space="preserve">
     <value>Tools</value>
   </data>
-  <data name="strImportExport" xml:space="preserve">
+	<data name="strImportExport" xml:space="preserve">
     <value>Import/Export</value>
   </data>
-  <data name="strExportmRemoteXML" xml:space="preserve">
+	<data name="strExportmRemoteXML" xml:space="preserve">
     <value>Export mRemote/mRemoteNG XML</value>
   </data>
-  <data name="strImportmRemoteXML" xml:space="preserve">
+	<data name="strImportmRemoteXML" xml:space="preserve">
     <value>Import mRemote/mRemoteNG XML</value>
   </data>
-  <data name="strImportAD" xml:space="preserve">
+	<data name="strImportAD" xml:space="preserve">
     <value>Import from Active Directory</value>
   </data>
-  <data name="strImportRDPFiles" xml:space="preserve">
+	<data name="strImportRDPFiles" xml:space="preserve">
     <value>Import from .RDP file(s)</value>
   </data>
-  <data name="strImportPortScan" xml:space="preserve">
+	<data name="strImportPortScan" xml:space="preserve">
     <value>Import from Port Scan</value>
   </data>
-  <data name="strSort" xml:space="preserve">
+	<data name="strSort" xml:space="preserve">
     <value>Sort</value>
   </data>
-  <data name="strSortAsc" xml:space="preserve">
+	<data name="strSortAsc" xml:space="preserve">
     <value>Ascending (A-Z)</value>
   </data>
-  <data name="strSortDesc" xml:space="preserve">
+	<data name="strSortDesc" xml:space="preserve">
     <value>Descending (Z-A)</value>
   </data>
-  <data name="strDuplicate" xml:space="preserve">
+	<data name="strDuplicate" xml:space="preserve">
     <value>Duplicate</value>
   </data>
-  <data name="strMoveUp" xml:space="preserve">
+	<data name="strMoveUp" xml:space="preserve">
     <value>Move up</value>
   </data>
-  <data name="strMoveDown" xml:space="preserve">
+	<data name="strMoveDown" xml:space="preserve">
     <value>Move down</value>
   </data>
-  <data name="strExpandAllFolders" xml:space="preserve">
+	<data name="strExpandAllFolders" xml:space="preserve">
     <value>Expand all folders</value>
   </data>
-  <data name="strCollapseAllFolders" xml:space="preserve">
+	<data name="strCollapseAllFolders" xml:space="preserve">
     <value>Collapse all folders</value>
   </data>
-  <data name="strInheritNewConnection" xml:space="preserve">
+	<data name="strInheritNewConnection" xml:space="preserve">
     <value>mRemoteNG is up to date</value>
   </data>
-  <data name="strNoUpdateAvailable" xml:space="preserve">
+	<data name="strNoUpdateAvailable" xml:space="preserve">
     <value>No update available</value>
   </data>
-  <data name="strCheckForUpdate" xml:space="preserve">
+	<data name="strCheckForUpdate" xml:space="preserve">
     <value>Check Again</value>
   </data>
-  <data name="strDownloadAndInstall" xml:space="preserve">
+	<data name="strDownloadAndInstall" xml:space="preserve">
     <value>Download and Install</value>
   </data>
-  <data name="strAvailableVersion" xml:space="preserve">
+	<data name="strAvailableVersion" xml:space="preserve">
     <value>Current Version</value>
   </data>
-  <data name="strCurrentVersion" xml:space="preserve">
+	<data name="strCurrentVersion" xml:space="preserve">
     <value>Installed version</value>
   </data>
-  <data name="strVersion" xml:space="preserve">
+	<data name="strVersion" xml:space="preserve">
     <value>Version</value>
   </data>
-  <data name="strUpdateDownloadComplete" xml:space="preserve">
+	<data name="strUpdateDownloadComplete" xml:space="preserve">
     <value>Download complete!
 mRemoteNG will now quit and begin with the installation.</value>
   </data>
-  <data name="strUpdateAvailable" xml:space="preserve">
+	<data name="strUpdateAvailable" xml:space="preserve">
     <value>mRemoteNG requires an update</value>
   </data>
-  <data name="strMenuResetLayout" xml:space="preserve">
+	<data name="strMenuResetLayout" xml:space="preserve">
     <value>Reset layout</value>
   </data>
-  <data name="strMenuAnnouncements" xml:space="preserve">
+	<data name="strMenuAnnouncements" xml:space="preserve">
     <value>Announcements</value>
   </data>
-  <data name="strScreenshot" xml:space="preserve">
+	<data name="strScreenshot" xml:space="preserve">
     <value>Screenshot</value>
   </data>
-  <data name="strSpecialKeys" xml:space="preserve">
+	<data name="strSpecialKeys" xml:space="preserve">
     <value>Speical Keys</value>
   </data>
-  <data name="strKeysCtrlAltDel" xml:space="preserve">
+	<data name="strKeysCtrlAltDel" xml:space="preserve">
     <value>CTRL-ALT-DEL</value>
   </data>
-  <data name="strKeysCtrlEsc" xml:space="preserve">
+	<data name="strKeysCtrlEsc" xml:space="preserve">
     <value>CTRL-ESC</value>
   </data>
-  <data name="strRDP65536Colors" xml:space="preserve">
+	<data name="strRDP65536Colors" xml:space="preserve">
     <value>65536 Colors (16bit)</value>
   </data>
-  <data name="strRDP16777216Colors" xml:space="preserve">
+	<data name="strRDP16777216Colors" xml:space="preserve">
     <value>16777216 Colors (24bit)</value>
   </data>
-  <data name="strRDP4294967296Colors" xml:space="preserve">
+	<data name="strRDP4294967296Colors" xml:space="preserve">
     <value>4294967296 Colors (32bit)</value>
   </data>
-  <data name="strRDPDisableWallpaper" xml:space="preserve">
+	<data name="strRDPDisableWallpaper" xml:space="preserve">
     <value>Disable Wallpaper</value>
   </data>
-  <data name="strRDPDisableFullWindowdrag" xml:space="preserve">
+	<data name="strRDPDisableFullWindowdrag" xml:space="preserve">
     <value>Disable Full Window drag</value>
   </data>
-  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+	<data name="strRDPDisableMenuAnimations" xml:space="preserve">
     <value>Disable Menu Animations</value>
   </data>
-  <data name="strRDPDisableThemes" xml:space="preserve">
+	<data name="strRDPDisableThemes" xml:space="preserve">
     <value>Disable Themes</value>
   </data>
-  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+	<data name="strRDPDisableCursorShadow" xml:space="preserve">
     <value>Disable Cursor Shadow</value>
   </data>
-  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+	<data name="strRDPDisableCursorblinking" xml:space="preserve">
     <value>Disable Cursor blinking</value>
   </data>
-  <data name="strNever" xml:space="preserve">
+	<data name="strNever" xml:space="preserve">
     <value>Never</value>
   </data>
-  <data name="strAlways" xml:space="preserve">
+	<data name="strAlways" xml:space="preserve">
     <value>Always</value>
   </data>
-  <data name="strDetect" xml:space="preserve">
+	<data name="strDetect" xml:space="preserve">
     <value>Detect</value>
   </data>
-  <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
+	<data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
     <value>Use a different username and password</value>
   </data>
-  <data name="strUseSameUsernameAndPassword" xml:space="preserve">
+	<data name="strUseSameUsernameAndPassword" xml:space="preserve">
     <value>Use the same username and password</value>
   </data>
-  <data name="strCannotStartPortScan" xml:space="preserve">
+	<data name="strCannotStartPortScan" xml:space="preserve">
     <value>Cannot start Port Scan, incorrect IP format!</value>
   </data>
-  <data name="strPleaseFillAllFields" xml:space="preserve">
+	<data name="strPleaseFillAllFields" xml:space="preserve">
     <value>Please fill all fields</value>
   </data>
-  <data name="strLocalFileDoesNotExist" xml:space="preserve">
+	<data name="strLocalFileDoesNotExist" xml:space="preserve">
     <value>Local file does not exist!</value>
   </data>
-  <data name="strTransferFailed" xml:space="preserve">
+	<data name="strTransferFailed" xml:space="preserve">
     <value>Transfer failed!</value>
   </data>
-  <data name="strSSHStartTransferBG" xml:space="preserve">
+	<data name="strSSHStartTransferBG" xml:space="preserve">
     <value>SSH background transfer failed!</value>
   </data>
-  <data name="strSSHTranferSuccessful" xml:space="preserve">
+	<data name="strSSHTranferSuccessful" xml:space="preserve">
     <value>Transfer successful!</value>
   </data>
-  <data name="strSSHTransferEndFailed" xml:space="preserve">
+	<data name="strSSHTransferEndFailed" xml:space="preserve">
     <value>Ssh Transfee End (UI.Window.SSHTransfer) failed!</value>
   </data>
-  <data name="strTransfer" xml:space="preserve">
+	<data name="strTransfer" xml:space="preserve">
     <value>Transfer</value>
   </data>
-  <data name="strOldConffile" xml:space="preserve">
+	<data name="strOldConffile" xml:space="preserve">
     <value>You are trying to load a connection file that was created using an very early version of mRemote, this could result in an runtime error.
 If you run into such an error, please create a new connection file!</value>
   </data>
-  <data name="strCannotImportNormalSessionFile" xml:space="preserve">
+	<data name="strCannotImportNormalSessionFile" xml:space="preserve">
     <value>You cannot import a normal connection file.
 Please use File - Load Connections for normal connection files!</value>
   </data>
-  <data name="strLoadFromXmlFailed" xml:space="preserve">
+	<data name="strLoadFromXmlFailed" xml:space="preserve">
     <value>Load From XML failed!</value>
   </data>
-  <data name="strAddNodeFromXmlFailed" xml:space="preserve">
+	<data name="strAddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML failed!</value>
   </data>
-  <data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
+	<data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
     <value>Get Connection Info From Xml failed</value>
   </data>
-  <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
+	<data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Couldn't create new connections file!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
+	<data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
     <value>Connections file "{0}" could not be loaded!</value>
   </data>
-  <data name="strConnectionsFileBackupFailed" xml:space="preserve">
+	<data name="strConnectionsFileBackupFailed" xml:space="preserve">
     <value>Couldn't create backup of connections file!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
+	<data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
     <value>Couldn't import connections file!</value>
   </data>
-  <data name="strRdpFileCouldNotBeImported" xml:space="preserve">
+	<data name="strRdpFileCouldNotBeImported" xml:space="preserve">
     <value>Couldn't import rdp file!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeSaved" xml:space="preserve">
+	<data name="strConnectionsFileCouldNotBeSaved" xml:space="preserve">
     <value>Couldn't save connections file!</value>
   </data>
-  <data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
+	<data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>Couldn't save connections file as "{0}"!</value>
   </data>
-  <data name="strQuickConnectFailed" xml:space="preserve">
+	<data name="strQuickConnectFailed" xml:space="preserve">
     <value>Creating quick connect failed</value>
   </data>
-  <data name="strConnectionOpenFailed" xml:space="preserve">
+	<data name="strConnectionOpenFailed" xml:space="preserve">
     <value>Opening connection failed!</value>
   </data>
-  <data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
+	<data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
     <value>Cannot open connection: No hostname specified!</value>
   </data>
-  <data name="strNoExtAppDefined" xml:space="preserve">
+	<data name="strNoExtAppDefined" xml:space="preserve">
     <value>No Ext. App specified.</value>
   </data>
-  <data name="strLoadFromSqlFailed" xml:space="preserve">
+	<data name="strLoadFromSqlFailed" xml:space="preserve">
     <value>Load From SQL failed!</value>
   </data>
-  <data name="strAddNodesFromSqlFailed" xml:space="preserve">
+	<data name="strAddNodesFromSqlFailed" xml:space="preserve">
     <value>AddNodesFromSQL failed!</value>
   </data>
-  <data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
+	<data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
     <value>Get Connection Info From SQL failed</value>
   </data>
-  <data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
+	<data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Couldn't load PortScan panel!</value>
   </data>
-  <data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
+	<data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
     <value>Connections file "{0}" could not be loaded!
 Starting with new connections file.</value>
   </data>
-  <data name="strTryIntegrate" xml:space="preserve">
+	<data name="strTryIntegrate" xml:space="preserve">
     <value>Try to integrate</value>
   </data>
-  <data name="strUpdateCheck" xml:space="preserve">
+	<data name="strUpdateCheck" xml:space="preserve">
     <value>mRemoteNG can periodically connect to the mRemoteNG website to check for updates and product announcements.</value>
   </data>
-  <data name="strCheckNow" xml:space="preserve">
+	<data name="strCheckNow" xml:space="preserve">
     <value>Check now</value>
   </data>
-  <data name="strUpdateCheckFailed" xml:space="preserve">
+	<data name="strUpdateCheckFailed" xml:space="preserve">
     <value>Check For Update failed!</value>
   </data>
-  <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
+	<data name="strUpdateCheckCompleteFailed" xml:space="preserve">
     <value>Check for update completion failed!</value>
   </data>
-  <data name="strUpdateDownloadFailed" xml:space="preserve">
+	<data name="strUpdateDownloadFailed" xml:space="preserve">
     <value>Download Update failed!</value>
   </data>
-  <data name="strUpdateStartFailed" xml:space="preserve">
+	<data name="strUpdateStartFailed" xml:space="preserve">
     <value>Error starting update!</value>
   </data>
-  <data name="strUpdateDeleteFailed" xml:space="preserve">
+	<data name="strUpdateDeleteFailed" xml:space="preserve">
     <value>Error deleting update file!</value>
   </data>
-  <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
+	<data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
     <value>Download complete failed!</value>
   </data>
-  <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
+	<data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Couldn't parse command line args!</value>
   </data>
-  <data name="strSettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
+	<data name="strSettingsCouldNotBeSavedOrTrayDispose" xml:space="preserve">
     <value>Couldn't save settings or dispose SysTray Icon!</value>
   </data>
-  <data name="strUltraVncRepeater" xml:space="preserve">
+	<data name="strUltraVncRepeater" xml:space="preserve">
     <value>Ultra VNC Repeater</value>
   </data>
-  <data name="strSocks5" xml:space="preserve">
+	<data name="strSocks5" xml:space="preserve">
     <value>Socks 5</value>
   </data>
-  <data name="strHttp" xml:space="preserve">
+	<data name="strHttp" xml:space="preserve">
     <value>HTTP</value>
   </data>
-  <data name="strVnc" xml:space="preserve">
+	<data name="strVnc" xml:space="preserve">
     <value>VNC</value>
   </data>
-  <data name="strWindows" xml:space="preserve">
+	<data name="strWindows" xml:space="preserve">
     <value>Windows</value>
   </data>
-  <data name="strExtApp" xml:space="preserve">
+	<data name="strExtApp" xml:space="preserve">
     <value>Ext. App</value>
   </data>
-  <data name="strRDP" xml:space="preserve">
+	<data name="strRDP" xml:space="preserve">
     <value>RDP</value>
   </data>
-  <data name="strSsh1" xml:space="preserve">
+	<data name="strSsh1" xml:space="preserve">
     <value>SSH version 1</value>
   </data>
-  <data name="strSsh2" xml:space="preserve">
+	<data name="strSsh2" xml:space="preserve">
     <value>SSH version 2</value>
   </data>
-  <data name="strTelnet" xml:space="preserve">
+	<data name="strTelnet" xml:space="preserve">
     <value>Telnet</value>
   </data>
-  <data name="strRlogin" xml:space="preserve">
+	<data name="strRlogin" xml:space="preserve">
     <value>Rlogin</value>
   </data>
-  <data name="strRAW" xml:space="preserve">
+	<data name="strRAW" xml:space="preserve">
     <value>RAW</value>
   </data>
-  <data name="strICA" xml:space="preserve">
+	<data name="strICA" xml:space="preserve">
     <value>ICA</value>
   </data>
-  <data name="strHttps" xml:space="preserve">
+	<data name="strHttps" xml:space="preserve">
     <value>HTTPS</value>
   </data>
+	<data name="strRdpErrorGetFailure" xml:space="preserve">
+		<value>GetError failed (FatalErrors)</value>
+	</data>
+	<data name="strRdpErrorGetUnknown" xml:space="preserve">
+		<value>An unknown fatal RDP error has occurred.  Error code {0}.</value>
+	</data>
+	<data name="strRdpErrorUnknown" xml:space="preserve">
+		<value>An unknown error has occurred.</value>
+	</data>
+	<data name="strRdpErrorCode1" xml:space="preserve">
+		<value>Internal error code 1.</value>
+	</data>
+	<data name="strRdpErrorOutOfMemory" xml:space="preserve">
+		<value>An out-of-memory error has occurred.</value>
+	</data>
+	<data name="strRdpErrorWindowCreation" xml:space="preserve">
+		<value>A window-creation error has occurred.</value>
+	</data>
+	<data name="strRdpErrorCode2" xml:space="preserve">
+		<value>Internal error code 2.</value>
+	</data>
+	<data name="strRdpErrorCode3" xml:space="preserve">
+		<value>Internal error code 3. This is not a valid state.</value>
+	</data>
+	<data name="strRdpErrorCode4" xml:space="preserve">
+		<value>Internal error code 4.</value>
+	</data>
+	<data name="strRdpErrorConnection" xml:space="preserve">
+		<value>An unrecoverable error has occurred during client connection.</value>
+	</data>
+	<data name="strRdpErrorWinsock" xml:space="preserve">
+		<value>Winsock initialization error.</value>
+	</data>
+	<data name="strRdpAddSessionFailed" xml:space="preserve">
+		<value>Add Session failed</value>
+	</data>
+	<data name="strRdpGetSessionsFailed" xml:space="preserve">
+		<value>GetSessions failed!</value>
+	</data>
+	<data name="strRdpCloseConnectionFailed" xml:space="preserve">
+		<value>Close RDP Connection failed!</value>
+	</data>
+	<data name="strRdpOpenConnectionFailed" xml:space="preserve">
+		<value>Open RDP Connectin failed!</value>
+	</data>
+	<data name="strRdpAddResolutionsFailed" xml:space="preserve">
+		<value>RDP Add Resolutions failed!</value>
+	</data>
+	<data name="strRdpAddResolutionFailed" xml:space="preserve">
+		<value>RDP Add Resolution failed!</value>
+	</data>
+	<data name="strRdpGatewayNotSupported" xml:space="preserve">
+		<value>RD Gateway is not supported!</value>
+	</data>
+	<data name="strRdpSetGatewayFailed" xml:space="preserve">
+		<value>RDP SetRDGateway failed!</value>
+	</data>
+	<data name="strRdpSetConsoleSwitch" xml:space="preserve">
+		<value>Setting Console switch for RDC {0}.</value>
+	</data>
+	<data name="strRdpSetConsoleSessionFailed" xml:space="preserve">
+		<value>RDP SetUseConsoleSession failed!</value>
+	</data>
+	<data name="strRdpSetCredentialsFailed" xml:space="preserve">
+		<value>RDP SetCredentials failed!</value>
+	</data>
+	<data name="strRdpSetResolutionFailed" xml:space="preserve">
+		<value>RDP SetResolution failed!</value>
+	</data>
+	<data name="strRdpSetPortFailed" xml:space="preserve">
+		<value>RDP SetPort failed!</value>
+	</data>
+	<data name="strRdpSetRedirectKeysFailed" xml:space="preserve">
+		<value>Rdp Set Redirect Keys Failed!</value>
+	</data>
+	<data name="strRdpSetRedirectionFailed" xml:space="preserve">
+		<value>Rdp Set Redirection Failed!</value>
+	</data>
+	<data name="strRdpSetPerformanceFlagsFailed" xml:space="preserve">
+		<value>RDP SetPerformanceFlags failed!</value>
+	</data>
+	<data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
+		<value>RDP SetAuthenticationLevel failed!</value>
+	</data>
+	<data name="strRdpSetEventHandlersFailed" xml:space="preserve">
+		<value>RDP SetEventHandlers failed!</value>
+	</data>
+	<data name="strRdpControlCreationFailed" xml:space="preserve">
+		<value>Couldn't create RDP control, please check mRemote requirements.</value>
+	</data>
+	<data name="strRdpSetPropsFailed" xml:space="preserve">
+		<value>RDP SetProps failed!</value>
+	</data>
+	<data name="strRdpConnectionOpenFailed" xml:space="preserve">
+		<value>Opening connection failed!</value>
+	</data>
+	<data name="strRdpDisconnectFailed" xml:space="preserve">
+		<value>RDP Disconnect failed, trying to close!</value>
+	</data>
+	<data name="strRdpToggleFullscreenFailed" xml:space="preserve">
+		<value>RDP ToggleFullscreen failed!</value>
+	</data>
+	<data name="strRdpToggleSmartSizeFailed" xml:space="preserve">
+		<value>RDP ToggleSmartSize failed!</value>
+	</data>
+	<data name="strRdpFocusFailed" xml:space="preserve">
+		<value>RDP Focus failed!</value>
+	</data>
+	<data name="strRdpGatewayIsSupported" xml:space="preserve">
+		<value>RD Gateway is supported.</value>
+	</data>
 </root>

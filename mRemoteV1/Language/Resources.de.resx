@@ -1740,4 +1740,115 @@ Starte mit neuer Datei.</value>
 	<data name="strHttps" xml:space="preserve">
 		<value>HTTPS</value>
 	</data>
+	<data name="strRdpErrorGetFailure" xml:space="preserve">
+		<value>Fehler beim Auslesen der Fehlermeldung!</value>
+	</data>
+	<data name="strRdpErrorGetUnknown" xml:space="preserve">
+		<value>Ein unbekannter schwerer Fehler ist der RDP Verbindung "{0}" aufgetreten!</value>
+	</data>
+	<data name="strRdpErrorUnknown" xml:space="preserve">
+		<value>Ein unbekannter Fehler ist aufgetreten.</value>
+	</data>
+	<data name="strRdpErrorCode1" xml:space="preserve">
+		<value>Interner Fehler Code 1.</value>
+	</data>
+	<data name="strRdpErrorOutOfMemory" xml:space="preserve">
+		<value>Kein freier Speicher verfügbar.</value>
+	</data>
+	<data name="strRdpErrorWindowCreation" xml:space="preserve">
+		<value>Fenster konnte nicht erstellt werden.</value>
+	</data>
+	<data name="strRdpErrorCode2" xml:space="preserve">
+		<value>Interner Fehler Code 2.</value>
+	</data>
+	<data name="strRdpErrorCode3" xml:space="preserve">
+		<value>Interner Fehler Code 3 - dies ist kein zugelassener Zustand.</value>
+	</data>
+	<data name="strRdpErrorCode4" xml:space="preserve">
+		<value>Interner Fehler Code 4.</value>
+	</data>
+	<data name="strRdpErrorConnection" xml:space="preserve">
+		<value>Beim Aufbau der Verbindung ist ein nicht behebbarer Fehler aufgetreten!</value>
+	</data>
+	<data name="strRdpErrorWinsock" xml:space="preserve">
+		<value>Winsock Initialisierung fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpAddSessionFailed" xml:space="preserve">
+		<value>Hinzufügen der Sitzung ist fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpGetSessionsFailed" xml:space="preserve">
+		<value>Auslesen der RDP Sitzungen fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpCloseConnectionFailed" xml:space="preserve">
+		<value>Schließen der RDP Verbindung fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpOpenConnectionFailed" xml:space="preserve">
+		<value>Öffen der RDP Verbindung fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpAddResolutionsFailed" xml:space="preserve">
+		<value>Hinzufügen der Auflösungen fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpAddResolutionFailed" xml:space="preserve">
+		<value>Hinzufügen der Auflösung fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpGatewayNotSupported" xml:space="preserve">
+		<value>RDP Gateway wird nicht unterstützt!</value>
+	</data>
+	<data name="strRdpSetGatewayFailed" xml:space="preserve">
+		<value>Setzen der RDP Gateway fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpSetConsoleSwitch" xml:space="preserve">
+		<value>Setzen der Konsolenumschaltung für RDC {0}.</value>
+	</data>
+	<data name="strRdpSetConsoleSessionFailed" xml:space="preserve">
+		<value>Verwenden der Konsolen Sitzung fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpSetCredentialsFailed" xml:space="preserve">
+		<value>Setzen der RDP Anmeldedaten fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpSetResolutionFailed" xml:space="preserve">
+		<value>Setzen der Auflösung fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpSetPortFailed" xml:space="preserve">
+		<value>Setzen des RDP Ports fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpSetRedirectKeysFailed" xml:space="preserve">
+		<value>Setzen der RDP Weiterleitungsschlüssel fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpSetRedirectionFailed" xml:space="preserve">
+		<value>Setzen der RDP Weiterleitung fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpSetPerformanceFlagsFailed" xml:space="preserve">
+		<value>Setzen der Performanz Parameter fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
+		<value>Setzen des RDP Authenifizierungs Levels fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpSetEventHandlersFailed" xml:space="preserve">
+		<value>Setzen der RDP Fehlderbehandlungsroutine fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpControlCreationFailed" xml:space="preserve">
+		<value>Konte das RDP Plugin nicht einbinden, bitte prüfen Sie die mRemote Voraussetzungen.</value>
+	</data>
+	<data name="strRdpSetPropsFailed" xml:space="preserve">
+		<value>Setzen der RDP Parameter fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpConnectionOpenFailed" xml:space="preserve">
+		<value>Öffnen der Verbindung fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpDisconnectFailed" xml:space="preserve">
+		<value>Trennen der Verbindung fehlgeschlagen, versuche zu schließen!</value>
+	</data>
+	<data name="strRdpToggleFullscreenFailed" xml:space="preserve">
+		<value>Umschalten in Vollbild Modus fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpToggleSmartSizeFailed" xml:space="preserve">
+		<value>Umschalten der automatischen Größenanpassung (SmartSize) fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpFocusFailed" xml:space="preserve">
+		<value>Setzen des Fokus fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpGatewayIsSupported" xml:space="preserve">
+		<value>RDP Gateway wird unterstützt.</value>
+	</data>
 </root>
