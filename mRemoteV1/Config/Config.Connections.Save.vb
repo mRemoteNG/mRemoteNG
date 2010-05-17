@@ -1,6 +1,7 @@
 Imports System.Windows.Forms
 Imports System.Xml
 Imports System.IO
+Imports System.Globalization
 Imports mRemoteNG.App.Runtime
 Imports System.Data.SqlClient
 Imports mRemoteNG.Tools.Misc
@@ -191,13 +192,9 @@ Namespace Config
                 sqlQuery = New SqlCommand("DELETE FROM tblRoot", sqlCon)
                 sqlWr = sqlQuery.ExecuteNonQuery
 
-
-                Dim originalCulture As System.Globalization.CultureInfo = My.Application.Culture
-                My.Application.ChangeCulture("en-US")
-                sqlQuery = New SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES('" & PrepareValueForDB(tN.Text) & "', 0, '" & strProtected & "'," & App.Info.Connections.ConnectionFileVersion & ")", sqlCon)
-                My.Application.ChangeCulture(originalCulture.ToString)
+                Dim enCulture As CultureInfo = New CultureInfo("en-US")
+                sqlQuery = New SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES('" & PrepareValueForDB(tN.Text) & "', 0, '" & strProtected & "'," & App.Info.Connections.ConnectionFileVersion.ToString(enCulture) & ")", sqlCon)
                 sqlWr = sqlQuery.ExecuteNonQuery
-
 
                 sqlQuery = New SqlCommand("DELETE FROM tblCons", sqlCon)
                 sqlWr = sqlQuery.ExecuteNonQuery
@@ -542,10 +539,8 @@ Namespace Config
                         End If
                     End If
 
-                    Dim originalCulture As System.Globalization.CultureInfo = My.Application.Culture
-                    My.Application.ChangeCulture("en-US")
-                    xW.WriteAttributeString("ConfVersion", "", App.Info.Connections.ConnectionFileVersion)
-                    My.Application.ChangeCulture(originalCulture.ToString)
+                    Dim enCulture As System.Globalization.CultureInfo = New CultureInfo("en-US")
+                    xW.WriteAttributeString("ConfVersion", "", App.Info.Connections.ConnectionFileVersion.ToString(enCulture))
 
                     Dim tNC As TreeNodeCollection
                     tNC = tN.Nodes
