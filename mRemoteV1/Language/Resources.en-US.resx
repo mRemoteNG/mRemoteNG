@@ -1803,4 +1803,151 @@
 	<data name="strRdpGatewayIsSupported" xml:space="preserve">
 		<value></value>
 	</data>
+	<data name="strHttpConnectionFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strHttpSetPropsFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strHttpConnectFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strHttpGecko" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strHttpInternetExplorer" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIcaConnectionFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIcaSetPropsFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIcaControlFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIcaSetCredentialsFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIcaSetResolutionFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIcaSetEventHandlersFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strEncBasic" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strEnc128BitLogonOnly" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strEnc40Bit" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strEnc56Bit" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strEnc128Bit" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIntAppConnectionFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIntAppStuff" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIntAppHandle" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIntAppTitle" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIntAppParentHandle" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIntAppFocusFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIntAppResizeFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIntAppKillFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strIntAppDisposeFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPuttyStuff" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPuttyHandle" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPuttyTitle" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPuttyParentHandle" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPuttyConnectionFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPuttyFocusFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPuttyResizeFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPuttyKillFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPuttyDisposeFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPuttyShowSettingsDialogFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPuttyGetSessionsFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strPuttyStartFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strVncStartChatFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strVncRefreshFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strVncSetEventHandlersFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strQuickConnectAddFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strVncConnectionOpenFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strVncConnectionDisconnectFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strVncSendSpecialKeysFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strVncToggleSmartSizeFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strVncToggleViewOnlyFailed" xml:space="preserve">
+		<value></value>
+	</data>
+	<data name="strVncSetPropsFailed" xml:space="preserve">
+		<value></value>
+	</data>
 </root>

@@ -1851,4 +1851,151 @@ Starte mit neuer Datei.</value>
 	<data name="strRdpGatewayIsSupported" xml:space="preserve">
 		<value>RDP Gateway wird unterstützt.</value>
 	</data>
+	<data name="strHttpConnectionFailed" xml:space="preserve">
+		<value>Erstellen der HTTP Verbindung fehlgeschlagen!</value>
+	</data>
+	<data name="strHttpSetPropsFailed" xml:space="preserve">
+		<value>Setzen der HTTP Parameter fehlgeschlagen!</value>
+	</data>
+	<data name="strHttpConnectFailed" xml:space="preserve">
+		<value>Verbindung mit HTTP fehlgeschlagen!</value>
+	</data>
+	<data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
+		<value>Ändern des Webseiten Titels fehlgeschlagen!</value>
+	</data>
+	<data name="strHttpGecko" xml:space="preserve">
+		<value>Gecko (Firefox)</value>
+	</data>
+	<data name="strHttpInternetExplorer" xml:space="preserve">
+		<value>Internet Explorer</value>
+	</data>
+	<data name="strIcaConnectionFailed" xml:space="preserve">
+		<value>ICA Verbindung fehlgeschlagen!</value>
+	</data>
+	<data name="strIcaSetPropsFailed" xml:space="preserve">
+		<value>Setzen der ICA Paramter fehlgeschlagen!</value>
+	</data>
+	<data name="strIcaControlFailed" xml:space="preserve">
+		<value>Einbinden des ICA Plugins fehlgeschlagen!</value>
+	</data>
+	<data name="strIcaSetCredentialsFailed" xml:space="preserve">
+		<value>Setzen der ICA Authenifizierung ist fehlgeschlagen!</value>
+	</data>
+	<data name="strIcaSetResolutionFailed" xml:space="preserve">
+		<value>Setzen der Auflösung fehlgschlagen!</value>
+	</data>
+	<data name="strIcaSetEventHandlersFailed" xml:space="preserve">
+		<value>Setzen der Fehlerbehandlung fehlgeschlagen!</value>
+	</data>
+	<data name="strEncBasic" xml:space="preserve">
+		<value>Einfach</value>
+	</data>
+	<data name="strEnc128BitLogonOnly" xml:space="preserve">
+		<value>128 Bit (nur Anmeldung)</value>
+	</data>
+	<data name="strEnc40Bit" xml:space="preserve">
+		<value>40 Bit</value>
+	</data>
+	<data name="strEnc56Bit" xml:space="preserve">
+		<value>56 Bit</value>
+	</data>
+	<data name="strEnc128Bit" xml:space="preserve">
+		<value>128 Bit</value>
+	</data>
+	<data name="strIntAppConnectionFailed" xml:space="preserve">
+		<value>Verbindung fehlgeschlagen!</value>
+	</data>
+	<data name="strIntAppStuff" xml:space="preserve">
+		<value>--- Internes Programm ---</value>
+	</data>
+	<data name="strIntAppHandle" xml:space="preserve">
+		<value>Internes Programm Handle: {0}</value>
+	</data>
+	<data name="strIntAppTitle" xml:space="preserve">
+		<value>Internes Programm Titel: {0}</value>
+	</data>
+	<data name="strIntAppParentHandle" xml:space="preserve">
+		<value>Panel Handle: {0}</value>
+	</data>
+	<data name="strIntAppFocusFailed" xml:space="preserve">
+		<value>Setzen des Fokus fehlgeschlagen!</value>
+	</data>
+	<data name="strIntAppResizeFailed" xml:space="preserve">
+		<value>Internes Programm Größenanpassung fehlgeschlagen!</value>
+	</data>
+	<data name="strIntAppKillFailed" xml:space="preserve">
+		<value>Beenden des Internen Programmes fehlgeschlagen!</value>
+	</data>
+	<data name="strIntAppDisposeFailed" xml:space="preserve">
+		<value>Zerstören des Internen Programmes fehlgeschlagen!</value>
+	</data>
+	<data name="strPuttyStuff" xml:space="preserve">
+		<value>--- PuTTY ---</value>
+	</data>
+	<data name="strPuttyHandle" xml:space="preserve">
+		<value>Putty Handle: {0}</value>
+	</data>
+	<data name="strPuttyTitle" xml:space="preserve">
+		<value>PuTTY Title: {0}</value>
+	</data>
+	<data name="strPuttyParentHandle" xml:space="preserve">
+		<value>Panel Handle: {0}</value>
+	</data>
+	<data name="strPuttyConnectionFailed" xml:space="preserve">
+		<value>Verbindung fehlgeschlagen!</value>
+	</data>
+	<data name="strPuttyFocusFailed" xml:space="preserve">
+		<value>Setzen des Fokus fehlgeschlagen!</value>
+	</data>
+	<data name="strPuttyResizeFailed" xml:space="preserve">
+		<value>Ändern der Größe fehlgschlagen!</value>
+	</data>
+	<data name="strPuttyKillFailed" xml:space="preserve">
+		<value>Beenden von PuTTY fehlgeschlagen!</value>
+	</data>
+	<data name="strPuttyDisposeFailed" xml:space="preserve">
+		<value>Zerstören von PuTTY fehlgeschlagen!</value>
+	</data>
+	<data name="strPuttyShowSettingsDialogFailed" xml:space="preserve">
+		<value>Anzeigen des PuTTY Konfigurationsfensters fehlgeschlagen!</value>
+	</data>
+	<data name="strPuttyGetSessionsFailed" xml:space="preserve">
+		<value>Auslesen der PuTTY Verbindungsliste fehlgeschlagen!</value>
+	</data>
+	<data name="strPuttyStartFailed" xml:space="preserve">
+		<value>Konnte PuTTY nicht starten!</value>
+	</data>
+	<data name="strVncStartChatFailed" xml:space="preserve">
+		<value>Starten des VNC Chat fehlgeschlagen!</value>
+	</data>
+	<data name="strVncRefreshFailed" xml:space="preserve">
+		<value>VNC atualisieren des Bildschirminhalts ist fehlgeschlagen!</value>
+	</data>
+	<data name="strVncSetEventHandlersFailed" xml:space="preserve">
+		<value>Setzen der Fehlerbehandlungsroutine fehlgeschlagen!</value>
+	</data>
+	<data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
+		<value>Prüfungs auf Schnell Verbindungs Historie fehlgeschlagen!</value>
+	</data>
+	<data name="strQuickConnectAddFailed" xml:space="preserve">
+		<value>Hinzufüfen zur Schnell Verbindungs Historie fehlgeschlagen!</value>
+	</data>
+	<data name="strVncConnectionOpenFailed" xml:space="preserve">
+		<value>Öffnen der VNC Verbindung fehlgeschlagen!</value>
+	</data>
+	<data name="strVncConnectionDisconnectFailed" xml:space="preserve">
+		<value>Trennen der VNC Verbindung fehlgeschlagen!</value>
+	</data>
+	<data name="strVncSendSpecialKeysFailed" xml:space="preserve">
+		<value>Senden spezieller Tastenkombinationen ist fehlgeschlagen!</value>
+	</data>
+	<data name="strVncToggleSmartSizeFailed" xml:space="preserve">
+		<value>Setzen der automatischen Größenanpassung (SmartSize) fehlgeschlagen!</value>
+	</data>
+	<data name="strVncToggleViewOnlyFailed" xml:space="preserve">
+		<value>Setzen des nur Ansicht Modus fehlgeschlagen!</value>
+	</data>
+	<data name="strVncSetPropsFailed" xml:space="preserve">
+		<value>Setzen der VNC Parameter fehlgeschlagen!</value>
+	</data>
 </root>

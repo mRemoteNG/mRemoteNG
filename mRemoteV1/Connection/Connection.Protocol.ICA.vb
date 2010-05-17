@@ -2,6 +2,7 @@
 Imports System.Threading
 Imports AxWFICALib
 Imports System.ComponentModel
+Imports mRemoteNG.Tools.LocalizedAttributes
 
 Namespace Connection
     Namespace Protocol
@@ -18,7 +19,7 @@ Namespace Connection
                 Try
                     Me.Control = New AxICAClient
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't create new Connection.Protocol.ICA" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaControlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -51,7 +52,7 @@ Namespace Connection
 
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't SetProps (Connection.Protocol.ICA)" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaSetPropsFailed & vbNewLine & ex.Message, True)
                     Return False
                 End Try
             End Function
@@ -64,7 +65,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Opening connection failed!" & vbNewLine & ex.Message)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaConnectionFailed & vbNewLine & ex.Message)
                     Return False
                 End Try
             End Function
@@ -110,7 +111,7 @@ Namespace Connection
                         ICA.Domain = _dom
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ICA SetCredentials failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaSetCredentialsFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -135,7 +136,7 @@ Namespace Connection
                             ICA.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, RDP.Resolutions.Items(Int(Info.Resolution)).Width, RDP.Resolutions.Items(Int(Info.Resolution)).Height, 0)
                     End Select
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ICA SetResolution failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaSetResolutionFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -174,7 +175,7 @@ Namespace Connection
                     AddHandler ICA.OnConnectFailed, AddressOf ICAEvent_OnConnectFailed
                     AddHandler ICA.OnDisconnect, AddressOf ICAEvent_OnDisconnect
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ICA SetEventHandlers failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaSetEventHandlersFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -229,15 +230,15 @@ Namespace Connection
             End Enum
 
             Public Enum EncryptionStrength
-                <Description("Basic")> _
+                <LocalizedDescription("strEncBasic")> _
                 EncrBasic = 1
-                <Description("128 Bit (logon only)")> _
+                <LocalizedDescription("strEnc128BitLogonOnly")> _
                 Encr128BitLogonOnly = 127
-                <Description("40 Bit")> _
+                <LocalizedDescription("strEnc40Bit")> _
                 Encr40Bit = 40
-                <Description("56 Bit")> _
+                <LocalizedDescription("strEnc56Bit")> _
                 Encr56Bit = 56
-                <Description("128 Bit")> _
+                <LocalizedDescription("strEnc128Bit")> _
                 Encr128Bit = 128
             End Enum
 #End Region
