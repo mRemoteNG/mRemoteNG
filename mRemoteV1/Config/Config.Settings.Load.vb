@@ -206,6 +206,11 @@ Namespace Config
 
 #Region "Private Methods"
             Private Function GetContentFromPersistString(ByVal persistString As String) As IDockContent
+                ' pnlLayout.xml persistence XML fix for refactoring to mRemoteNG
+                If (persistString.StartsWith("mRemote.")) Then
+                    persistString = persistString.Replace("mRemote.", "mRemoteNG.")
+                End If
+
                 Try
                     If persistString = GetType(UI.Window.Config).ToString Then
                         Return Windows.configPanel

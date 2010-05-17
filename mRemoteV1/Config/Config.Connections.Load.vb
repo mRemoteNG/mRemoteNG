@@ -1,5 +1,6 @@
 Imports System.Windows.Forms
 Imports System.Xml
+Imports System.Globalization
 Imports mRemoteNG.App.Runtime
 Imports System.Data
 Imports System.Data.SqlClient
@@ -201,10 +202,8 @@ Namespace Config
                         sqlRd.Read()
                     End If
 
-                    Dim originalCulture As System.Globalization.CultureInfo = My.Application.Culture
-                    My.Application.ChangeCulture("en-US")
-                    Me.confVersion = Convert.ToDouble(sqlRd.Item("confVersion"))
-                    My.Application.ChangeCulture(originalCulture.ToString)
+                    Dim enCulture As CultureInfo = New CultureInfo("en-US")
+                    Me.confVersion = Convert.ToDouble(sqlRd.Item("confVersion"), enCulture)
 
                     Dim rootNode As TreeNode
                     rootNode = New TreeNode(sqlRd.Item("Name"))
@@ -625,10 +624,8 @@ Namespace Config
                     End If
 
                     If xDom.DocumentElement.HasAttribute("ConfVersion") Then
-                        Dim originalCulture As System.Globalization.CultureInfo = My.Application.Culture
-                        My.Application.ChangeCulture("en-US")
-                        Me.confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes("ConfVersion").Value)
-                        My.Application.ChangeCulture(originalCulture.ToString)
+                        Dim enCulture As System.Globalization.CultureInfo = New CultureInfo("en-US")
+                        Me.confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes("ConfVersion").Value, enCulture)
                     Else
                         mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strOldConffile)
                     End If
@@ -707,7 +704,7 @@ Namespace Config
                     App.Runtime.Windows.treeForm.InitialRefresh()
                 Catch ex As Exception
                     App.Runtime.ConnectionsFileLoaded = False
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLoadFromXMLFailed & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLoadFromXmlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -783,7 +780,7 @@ Namespace Config
                         inTreeNode.Text = inXmlNode.Attributes("Name").Value.Trim
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strAddNodeFromXMLFailed & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strAddNodeFromXmlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
