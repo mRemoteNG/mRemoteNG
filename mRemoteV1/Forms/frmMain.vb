@@ -12,14 +12,11 @@ Public Class frmMain
         'insert enable edition code here
         App.Editions.Spanlink.Enabled = False
 
-        Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo("de-DE")
-
         ApplyLanguage()
 
         Debug.Print("---------------------------" & vbNewLine & "[START] - " & Now)
 
         Startup.ParseCommandLineArgs()
-
 
         sL = New Config.Settings.Load(Me)
         sS = New Config.Settings.Save(Me)
