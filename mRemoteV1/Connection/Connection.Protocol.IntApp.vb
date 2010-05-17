@@ -113,11 +113,11 @@ Namespace Connection
                     IntAppHandle = IntAppProcess.MainWindowHandle
 
 
-                    mC.AddMessage(Messages.MessageClass.InformationMsg, "--- IntApp Stuff ---", True)
+                    mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strIntAppStuff, True)
 
-                    mC.AddMessage(Messages.MessageClass.InformationMsg, "IntApp Handle: " & IntAppHandle.ToString, True)
-                    mC.AddMessage(Messages.MessageClass.InformationMsg, "IntApp Title: " & IntAppProcess.MainWindowTitle, True)
-                    mC.AddMessage(Messages.MessageClass.InformationMsg, "IntApp Handle: " & Me.InterfaceControl.Parent.Handle.ToString, True)
+                    mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strIntAppHandle, IntAppHandle.ToString), True)
+                    mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strIntAppTitle, IntAppProcess.MainWindowTitle), True)
+                    mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strIntAppParentHandle & Me.InterfaceControl.Parent.Handle.ToString), True)
 
                     SetParent(Me.IntAppHandle, Me.InterfaceControl.Parent.Handle)
                     SetWindowLong(Me.IntAppHandle, 0, WS_VISIBLE)
@@ -128,7 +128,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't Connect" & vbNewLine & ex.Message)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIntAppConnectionFailed & vbNewLine & ex.Message)
                     Return False
                 End Try
             End Function
@@ -138,7 +138,7 @@ Namespace Connection
                 Try
                     SetForegroundWindow(IntAppHandle)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't Focus (Connection.Protocol.IntApp)" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIntAppFocusFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -146,7 +146,7 @@ Namespace Connection
                 Try
                     MoveWindow(IntAppHandle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), Me.InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), Me.InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), True)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't Resize (Connection.Protocol.IntApp)" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIntAppResizeFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -156,7 +156,7 @@ Namespace Connection
                         IntAppProcess.Kill()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Killing IntApp Process failed (Connection.Protocol.IntApp)" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIntAppKillFailed & vbNewLine & ex.Message, True)
                 End Try
 
                 Try
@@ -164,7 +164,7 @@ Namespace Connection
                         IntAppProcess.Dispose()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Dispose of IntApp process failed (Connection.Protocol.IntApp)" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIntAppDisposeFailed & vbNewLine & ex.Message, True)
                 End Try
 
                 MyBase.Close()

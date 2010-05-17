@@ -1852,6 +1852,51 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die 128 Bit ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strEnc128Bit() As String
+            Get
+                Return ResourceManager.GetString("strEnc128Bit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die 128Bit (logon only) ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strEnc128BitLogonOnly() As String
+            Get
+                Return ResourceManager.GetString("strEnc128BitLogonOnly", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die 40 Bit ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strEnc40Bit() As String
+            Get
+                Return ResourceManager.GetString("strEnc40Bit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die 56 Bit ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strEnc56Bit() As String
+            Get
+                Return ResourceManager.GetString("strEnc56Bit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Basic ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strEncBasic() As String
+            Get
+                Return ResourceManager.GetString("strEncBasic", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Completely encrypt connection file ähnelt.
         '''</summary>
         Friend ReadOnly Property strEncryptCompleteConnectionFile() As String
@@ -2095,6 +2140,51 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die HTTP Connect Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strHttpConnectFailed() As String
+            Get
+                Return ResourceManager.GetString("strHttpConnectFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t create new HTTP Connection! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strHttpConnectionFailed() As String
+            Get
+                Return ResourceManager.GetString("strHttpConnectionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Changeing HTTP Document Tile Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strHttpDocumentTileChangeFailed() As String
+            Get
+                Return ResourceManager.GetString("strHttpDocumentTileChangeFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Gecko (Firefox) ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strHttpGecko() As String
+            Get
+                Return ResourceManager.GetString("strHttpGecko", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Internet Explorer ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strHttpInternetExplorer() As String
+            Get
+                Return ResourceManager.GetString("strHttpInternetExplorer", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die HTTPS ähnelt.
         '''</summary>
         Friend ReadOnly Property strHttps() As String
@@ -2104,11 +2194,74 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Set HTTP Props failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strHttpSetPropsFailed() As String
+            Get
+                Return ResourceManager.GetString("strHttpSetPropsFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die ICA ähnelt.
         '''</summary>
         Friend ReadOnly Property strICA() As String
             Get
                 Return ResourceManager.GetString("strICA", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t create new ICA Connection! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIcaConnectionFailed() As String
+            Get
+                Return ResourceManager.GetString("strIcaConnectionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Loading ICA Plugin failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIcaControlFailed() As String
+            Get
+                Return ResourceManager.GetString("strIcaControlFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die ICA SetCredentials failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIcaSetCredentialsFailed() As String
+            Get
+                Return ResourceManager.GetString("strIcaSetCredentialsFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die ICA Set Event Handlers Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIcaSetEventHandlersFailed() As String
+            Get
+                Return ResourceManager.GetString("strIcaSetEventHandlersFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die ICA Set Props Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIcaSetPropsFailed() As String
+            Get
+                Return ResourceManager.GetString("strIcaSetPropsFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die ICA Set Resolution Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIcaSetResolutionFailed() As String
+            Get
+                Return ResourceManager.GetString("strIcaSetResolutionFailed", resourceCulture)
             End Get
         End Property
         
@@ -2181,6 +2334,87 @@ Namespace My.Resources
         Friend ReadOnly Property strInheritNewConnection() As String
             Get
                 Return ResourceManager.GetString("strInheritNewConnection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Connection failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIntAppConnectionFailed() As String
+            Get
+                Return ResourceManager.GetString("strIntAppConnectionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Dispose of Int App process failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIntAppDisposeFailed() As String
+            Get
+                Return ResourceManager.GetString("strIntAppDisposeFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Int App Focus Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIntAppFocusFailed() As String
+            Get
+                Return ResourceManager.GetString("strIntAppFocusFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Int App Handle: {0} ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIntAppHandle() As String
+            Get
+                Return ResourceManager.GetString("strIntAppHandle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Killing Int App Process failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIntAppKillFailed() As String
+            Get
+                Return ResourceManager.GetString("strIntAppKillFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Panel Handle: {0} ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIntAppParentHandle() As String
+            Get
+                Return ResourceManager.GetString("strIntAppParentHandle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Int App Resize failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIntAppResizeFailed() As String
+            Get
+                Return ResourceManager.GetString("strIntAppResizeFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die --- IntApp Stuff --- ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIntAppStuff() As String
+            Get
+                Return ResourceManager.GetString("strIntAppStuff", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Int App Title: {0} ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strIntAppTitle() As String
+            Get
+                Return ResourceManager.GetString("strIntAppTitle", resourceCulture)
             End Get
         End Property
         
@@ -4535,6 +4769,114 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Connection failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPuttyConnectionFailed() As String
+            Get
+                Return ResourceManager.GetString("strPuttyConnectionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Dispose of Putty process failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPuttyDisposeFailed() As String
+            Get
+                Return ResourceManager.GetString("strPuttyDisposeFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t set focus! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPuttyFocusFailed() As String
+            Get
+                Return ResourceManager.GetString("strPuttyFocusFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Get Putty Sessions Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPuttyGetSessionsFailed() As String
+            Get
+                Return ResourceManager.GetString("strPuttyGetSessionsFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Putty Handle: {0} ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPuttyHandle() As String
+            Get
+                Return ResourceManager.GetString("strPuttyHandle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Killing Putty Process failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPuttyKillFailed() As String
+            Get
+                Return ResourceManager.GetString("strPuttyKillFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Panel Handle: {0} ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPuttyParentHandle() As String
+            Get
+                Return ResourceManager.GetString("strPuttyParentHandle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Putty Resize Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPuttyResizeFailed() As String
+            Get
+                Return ResourceManager.GetString("strPuttyResizeFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Show PuTTY Settings Dialog failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPuttyShowSettingsDialogFailed() As String
+            Get
+                Return ResourceManager.GetString("strPuttyShowSettingsDialogFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Putty Start Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPuttyStartFailed() As String
+            Get
+                Return ResourceManager.GetString("strPuttyStartFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die --- PuTTY Stuff --- ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPuttyStuff() As String
+            Get
+                Return ResourceManager.GetString("strPuttyStuff", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die PuTTY Title: {0} ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPuttyTitle() As String
+            Get
+                Return ResourceManager.GetString("strPuttyTitle", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Quick Connect ähnelt.
         '''</summary>
         Friend ReadOnly Property strQuickConnect() As String
@@ -4544,11 +4886,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Quick Connect Add Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strQuickConnectAddFailed() As String
+            Get
+                Return ResourceManager.GetString("strQuickConnectAddFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Creating quick connect failed ähnelt.
         '''</summary>
         Friend ReadOnly Property strQuickConnectFailed() As String
             Get
                 Return ResourceManager.GetString("strQuickConnectFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Quick Connect History Exists Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strQuickConnectHistoryExistsFailed() As String
+            Get
+                Return ResourceManager.GetString("strQuickConnectHistoryExistsFailed", resourceCulture)
             End Get
         End Property
         
@@ -5783,6 +6143,87 @@ Namespace My.Resources
         Friend ReadOnly Property strVnc() As String
             Get
                 Return ResourceManager.GetString("strVnc", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die VNC disconnect failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strVncConnectionDisconnectFailed() As String
+            Get
+                Return ResourceManager.GetString("strVncConnectionDisconnectFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Opening connection failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strVncConnectionOpenFailed() As String
+            Get
+                Return ResourceManager.GetString("strVncConnectionOpenFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die VNC Refresh Screen Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strVncRefreshFailed() As String
+            Get
+                Return ResourceManager.GetString("strVncRefreshFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die VNC SendSpecialKeys failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strVncSendSpecialKeysFailed() As String
+            Get
+                Return ResourceManager.GetString("strVncSendSpecialKeysFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die VNC Set Event Handlers failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strVncSetEventHandlersFailed() As String
+            Get
+                Return ResourceManager.GetString("strVncSetEventHandlersFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die VNC Set Props Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strVncSetPropsFailed() As String
+            Get
+                Return ResourceManager.GetString("strVncSetPropsFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die VNC Start Chat Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strVncStartChatFailed() As String
+            Get
+                Return ResourceManager.GetString("strVncStartChatFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die VNC Toggle SmartSize Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strVncToggleSmartSizeFailed() As String
+            Get
+                Return ResourceManager.GetString("strVncToggleSmartSizeFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die VNC Toggle ViewOnly Failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strVncToggleViewOnlyFailed() As String
+            Get
+                Return ResourceManager.GetString("strVncToggleViewOnlyFailed", resourceCulture)
             End Get
         End Property
         

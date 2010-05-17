@@ -1,6 +1,7 @@
 ﻿Imports System.Windows.Forms
 Imports mRemoteNG.App.Runtime
 Imports System.ComponentModel
+Imports mRemoteNG.Tools.LocalizedAttributes
 
 Namespace Connection
     Namespace Protocol
@@ -26,7 +27,7 @@ Namespace Connection
 
                     NewExtended()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't create new Connection.Protocol.HTTPBase" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strHttpConnectionFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -64,7 +65,7 @@ Namespace Connection
 
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't SetProps (Connection.Protocol.HTTPBase)" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strHttpSetPropsFailed & vbNewLine & ex.Message, True)
                     Return False
                 End Try
             End Function
@@ -107,7 +108,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't Connect (Connection.Protocol.HTTPBase)" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strHttpConnectFailed & vbNewLine & ex.Message, True)
                     Return False
                 End Try
             End Function
@@ -163,16 +164,16 @@ Namespace Connection
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "wBrowser_DocumentTitleChanged (Connection.Protocol.HTTPBase) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strHttpDocumentTileChangeFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
 
 #Region "Enums"
             Public Enum RenderingEngine
-                <Description("Internet Explorer")> _
+                <LocalizedDescription("strHttpInternetExplorer")> _
                 IE = 1
-                <Description("Gecko (Firefox)")> _
+                <LocalizedDescription("strHttpGecko (Firefox)")> _
                 Gecko = 2
             End Enum
 
