@@ -1428,7 +1428,7 @@ Namespace App
 #Region "Event Handlers"
         Public Shared Sub Prot_Event_Disconnected(ByVal sender As Object, ByVal DisconnectedMessage As String)
             Try
-                mC.AddMessage(Messages.MessageClass.InformationMsg, "Protocol Event Disconnected" & vbNewLine & "Message: " & DisconnectedMessage, True)
+                mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strProtocolEventDisconnected, DisconnectedMessage), True)
 
                 Dim Prot As Connection.Protocol.Base = sender
                 If Prot.InterfaceControl.Info.Protocol = Connection.Protocol.Protocols.RDP Then
@@ -1437,14 +1437,14 @@ Namespace App
                     Dim ReasonDescription As String = Reason(1)
                     If ReasonCode > 3 Then
                         If ReasonDescription <> "" Then
-                            mC.AddMessage(Messages.MessageClass.WarningMsg, "RDP Disconnected!" & vbNewLine & ReasonDescription & vbNewLine & "Error code " & ReasonCode & ".")
+                            mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strRdpDisconnected & vbNewLine & ReasonDescription & vbNewLine & String.Format(My.Resources.strErrorCode, ReasonCode))
                         Else
-                            mC.AddMessage(Messages.MessageClass.WarningMsg, "RDP Disconnected!" & vbNewLine & "Error code " & ReasonCode & ".")
+                            mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strRdpDisconnected & vbNewLine & String.Format(My.Resources.strErrorCode, ReasonCode))
                         End If
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Protocol Event Disconnected failed" & vbNewLine & ex.Message, True)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strProtocolEventDisconnectFailed, ex.Message), True)
             End Try
         End Sub
 
@@ -1452,14 +1452,13 @@ Namespace App
             Try
                 Dim Prot As Connection.Protocol.Base = sender
 
-                mC.AddMessage(Messages.MessageClass.InformationMsg, "Protocol Event Closed", True)
+                mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnenctionCloseEvent, True)
 
                 If App.Editions.Spanlink.Enabled Then
-                    mC.AddMessage(Messages.MessageClass.ReportMsg, "Connection to " & Prot.InterfaceControl.Info.Hostname & " via " & Prot.InterfaceControl.Info.Protocol.ToString & " closed by user " & My.User.Name & " (Description: " & Prot.InterfaceControl.Info.Description & "; User Field: " & Prot.InterfaceControl.Info.UserField & ")")
+                    mC.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Resources.strConnenctionClosedByUserDetail, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString, My.User.Name, Prot.InterfaceControl.Info.Description, Prot.InterfaceControl.Info.UserField))
                 Else
-                    mC.AddMessage(Messages.MessageClass.ReportMsg, "Connection to " & Prot.InterfaceControl.Info.Hostname & " via " & Prot.InterfaceControl.Info.Protocol.ToString & " closed by user " & My.User.Name)
+                    mC.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Resources.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString, My.User.Name))
                 End If
-
 
                 Prot.InterfaceControl.Info.OpenConnections.Remove(Prot)
 
@@ -1474,30 +1473,30 @@ Namespace App
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Protocol Event Closed failed" & vbNewLine & ex.Message, True)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnenctionCloseEventFailed & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
         Public Shared Sub Prot_Event_Connected(ByVal sender As Object)
             Dim prot As mRemoteNG.Connection.Protocol.Base = sender
 
-            mC.AddMessage(Messages.MessageClass.InformationMsg, "Protocol Event Connected", True)
-            mC.AddMessage(Messages.MessageClass.ReportMsg, "Connection to " & prot.InterfaceControl.Info.Hostname & " via " & prot.InterfaceControl.Info.Protocol.ToString & " established by user " & My.User.Name & " (Description: " & prot.InterfaceControl.Info.Description & "; User Field: " & prot.InterfaceControl.Info.UserField & ")")
+            mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnectionEventConnected, True)
+            mC.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Resources.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString, My.User.Name, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField))
         End Sub
 
         Public Shared Sub Prot_Event_ErrorOccured(ByVal sender As Object, ByVal ErrorMessage As String)
             Try
-                mC.AddMessage(Messages.MessageClass.InformationMsg, "Protocol Event ErrorOccured", True)
+                mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnectionEventErrorOccured, True)
 
                 Dim Prot As Connection.Protocol.Base = sender
 
                 If Prot.InterfaceControl.Info.Protocol = Connection.Protocol.Protocols.RDP Then
                     If ErrorMessage > -1 Then
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, "RDP Error!" & vbNewLine & "Error Code: " & ErrorMessage & vbNewLine & "Error Description: " & Connection.Protocol.RDP.FatalErrors.GetError(ErrorMessage))
+                        mC.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strConnectionRdpErrorDetail, ErrorMessage, Connection.Protocol.RDP.FatalErrors.GetError(ErrorMessage)))
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Protocol Event ErrorOccured failed" & vbNewLine & ex.Message, True)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionEventConnectionFailed & vbNewLine & ex.Message, True)
             End Try
         End Sub
 #End Region
@@ -1568,7 +1567,7 @@ Namespace App
                 sWr.WriteLine(Text)
                 sWr.Close()
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Writing to report file failed!")
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLogWriteToFileFailed)
             End Try
         End Sub
 
@@ -1584,7 +1583,7 @@ Namespace App
 
                 Return True
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't save report to final location. (App.Runtime.SaveReport)" & vbNewLine & ex.Message, True)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLogWriteToFileFinalLocationFailed & vbNewLine & ex.Message, True)
                 Return False
             End Try
         End Function
@@ -1607,7 +1606,7 @@ Namespace App
 
                 ChangeMainFormText(txt)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Setting main form text failed" & vbNewLine & ex.Message, True)
+                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSettingMainFormTextFailed & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -1665,7 +1664,7 @@ Namespace App
 
         Private Shared Sub SQLUpdateCheckFinished(ByVal UpdateAvailable As Boolean)
             If UpdateAvailable = True Then
-                mC.AddMessage(Messages.MessageClass.InformationMsg, "SQL Update check finished and there is an update available! Going to refresh connections.", True)
+                mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strSqlUpdateCheckUpdateAvailable, True)
                 LoadConnectionsBG()
             End If
         End Sub

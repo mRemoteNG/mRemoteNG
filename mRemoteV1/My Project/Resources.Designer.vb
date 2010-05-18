@@ -1671,6 +1671,42 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Protocol Event Connected ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionEventConnected() As String
+            Get
+                Return ResourceManager.GetString("strConnectionEventConnected", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Connection to &quot;{0}&quot; via &quot;{1}&quot; established by user &quot;{2}&quot; (Description: &quot;{3}&quot;; User Field: &quot;{4}&quot;) ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionEventConnectedDetail() As String
+            Get
+                Return ResourceManager.GetString("strConnectionEventConnectedDetail", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Conenction failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionEventConnectionFailed() As String
+            Get
+                Return ResourceManager.GetString("strConnectionEventConnectionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Protocol Event ErrorOccured ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionEventErrorOccured() As String
+            Get
+                Return ResourceManager.GetString("strConnectionEventErrorOccured", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Opening connection failed! ähnelt.
         '''</summary>
         Friend ReadOnly Property strConnectionOpenFailed() As String
@@ -1685,6 +1721,17 @@ Namespace My.Resources
         Friend ReadOnly Property strConnectionOpenFailedNoHostname() As String
             Get
                 Return ResourceManager.GetString("strConnectionOpenFailedNoHostname", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP error!
+        '''Error Code: {0}
+        '''Error Description: {1} ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionRdpErrorDetail() As String
+            Get
+                Return ResourceManager.GetString("strConnectionRdpErrorDetail", resourceCulture)
             End Get
         End Property
         
@@ -1767,6 +1814,42 @@ Namespace My.Resources
         Friend ReadOnly Property strConnectWithOptions() As String
             Get
                 Return ResourceManager.GetString("strConnectWithOptions", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Connection to {0} via {1} closed by user {2}. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnenctionClosedByUser() As String
+            Get
+                Return ResourceManager.GetString("strConnenctionClosedByUser", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Connection to {0} via {1} closed by user {2}.  (Description: &quot;{3}&quot;; User Field: &quot;{4}&quot;) ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnenctionClosedByUserDetail() As String
+            Get
+                Return ResourceManager.GetString("strConnenctionClosedByUserDetail", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Connection Event Closed ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnenctionCloseEvent() As String
+            Get
+                Return ResourceManager.GetString("strConnenctionCloseEvent", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Connection Event Closed failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnenctionCloseEventFailed() As String
+            Get
+                Return ResourceManager.GetString("strConnenctionCloseEventFailed", resourceCulture)
             End Get
         End Property
         
@@ -1920,6 +2003,15 @@ Namespace My.Resources
         Friend ReadOnly Property strEndPort() As String
             Get
                 Return ResourceManager.GetString("strEndPort", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Error code {0}. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strErrorCode() As String
+            Get
+                Return ResourceManager.GetString("strErrorCode", resourceCulture)
             End Get
         End Property
         
@@ -2658,6 +2750,24 @@ Namespace My.Resources
         Friend ReadOnly Property strLogOff() As String
             Get
                 Return ResourceManager.GetString("strLogOff", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Writing to report file failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strLogWriteToFileFailed() As String
+            Get
+                Return ResourceManager.GetString("strLogWriteToFileFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t save report to final location. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strLogWriteToFileFinalLocationFailed() As String
+            Get
+                Return ResourceManager.GetString("strLogWriteToFileFinalLocationFailed", resourceCulture)
             End Get
         End Property
         
@@ -3725,15 +3835,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die  ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyDescriptionRDGatewayPasswordInherit() As String
-            Get
-                Return ResourceManager.GetString("strPropertyDescriptionRDGatewayPasswordInherit", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Specifies when to use a Remote Desktop Gateway (RD Gateway) server. ähnelt.
         '''</summary>
         Friend ReadOnly Property strPropertyDescriptionRDGatewayUsageMethod() As String
@@ -4742,6 +4843,27 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Protocol Event Disconnected.
+        '''Message:
+        '''{0} ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strProtocolEventDisconnected() As String
+            Get
+                Return ResourceManager.GetString("strProtocolEventDisconnected", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Protocol Event Disconnected failed.
+        '''{0} ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strProtocolEventDisconnectFailed() As String
+            Get
+                Return ResourceManager.GetString("strProtocolEventDisconnectFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Protocol to import ähnelt.
         '''</summary>
         Friend ReadOnly Property strProtocolToImport() As String
@@ -5071,6 +5193,15 @@ Namespace My.Resources
         Friend ReadOnly Property strRDPDisableWallpaper() As String
             Get
                 Return ResourceManager.GetString("strRDPDisableWallpaper", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP disconnected! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpDisconnected() As String
+            Get
+                Return ResourceManager.GetString("strRdpDisconnected", resourceCulture)
             End Get
         End Property
         
@@ -5552,6 +5683,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Setting main form text failed ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strSettingMainFormTextFailed() As String
+            Get
+                Return ResourceManager.GetString("strSettingMainFormTextFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t save settings or dispose SysTray Icon! ähnelt.
         '''</summary>
         Friend ReadOnly Property strSettingsCouldNotBeSavedOrTrayDispose() As String
@@ -5701,6 +5841,15 @@ Namespace My.Resources
         Friend ReadOnly Property strSQLServer() As String
             Get
                 Return ResourceManager.GetString("strSQLServer", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die SQL Update check finished and there is an update available! Going to refresh connections. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strSqlUpdateCheckUpdateAvailable() As String
+            Get
+                Return ResourceManager.GetString("strSqlUpdateCheckUpdateAvailable", resourceCulture)
             End Get
         End Property
         
