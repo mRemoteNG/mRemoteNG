@@ -1545,9 +1545,6 @@ If you are still not able to pass this check or use the (RDP) Sessions feature i
 	<data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
     <value>Specifies the user name that a user provides to connect to the RD Gateway server.</value>
   </data>
-	<data name="strPropertyDescriptionRDGatewayPasswordInherit" xml:space="preserve">
-    <value></value>
-  </data>
 	<data name="strProtocolToImport" xml:space="preserve">
     <value>Protocol to import</value>
   </data>
@@ -2301,5 +2298,61 @@ Starting with new connections file.</value>
 	</data>
 	<data name="strVncSetPropsFailed" xml:space="preserve">
 		<value>VNC Set Props Failed!</value>
+	</data>
+	<data name="strRdpDisconnected" xml:space="preserve">
+		<value>RDP disconnected!</value>
+	</data>
+	<data name="strErrorCode" xml:space="preserve">
+		<value>Error code {0}.</value>
+	</data>
+	<data name="strProtocolEventDisconnected" xml:space="preserve">
+		<value>Protocol Event Disconnected.
+Message:
+{0}</value>
+	</data>
+	<data name="strProtocolEventDisconnectFailed" xml:space="preserve">
+		<value>Protocol Event Disconnected failed.
+{0}</value>
+	</data>
+	<data name="strConnenctionClosedByUserDetail" xml:space="preserve">
+		<value>Connection to {0} via {1} closed by user {2}.  (Description: "{3}"; User Field: "{4}")</value>
+	</data>
+	<data name="strConnenctionClosedByUser" xml:space="preserve">
+		<value>Connection to {0} via {1} closed by user {2}.</value>
+	</data>
+	<data name="strConnenctionCloseEvent" xml:space="preserve">
+		<value>Connection Event Closed</value>
+	</data>
+	<data name="strConnenctionCloseEventFailed" xml:space="preserve">
+		<value>Connection Event Closed failed!</value>
+	</data>
+	<data name="strConnectionEventConnected" xml:space="preserve">
+		<value>Protocol Event Connected</value>
+	</data>
+	<data name="strConnectionEventConnectedDetail" xml:space="preserve">
+		<value>Connection to "{0}" via "{1}" established by user "{2}" (Description: "{3}"; User Field: "{4}")</value>
+	</data>
+	<data name="strConnectionEventErrorOccured" xml:space="preserve">
+		<value>Protocol Event ErrorOccured</value>
+	</data>
+	<data name="strConnectionEventConnectionFailed" xml:space="preserve">
+		<value>Conenction failed!</value>
+	</data>
+	<data name="strConnectionRdpErrorDetail" xml:space="preserve">
+		<value>RDP error!
+Error Code: {0}
+Error Description: {1}</value>
+	</data>
+	<data name="strLogWriteToFileFailed" xml:space="preserve">
+		<value>Writing to report file failed!</value>
+	</data>
+	<data name="strLogWriteToFileFinalLocationFailed" xml:space="preserve">
+		<value>Couldn't save report to final location.</value>
+	</data>
+	<data name="strSqlUpdateCheckUpdateAvailable" xml:space="preserve">
+		<value>SQL Update check finished and there is an update available! Going to refresh connections.</value>
+	</data>
+	<data name="strSettingMainFormTextFailed" xml:space="preserve">
+		<value>Setting main form text failed</value>
 	</data>
 </root>

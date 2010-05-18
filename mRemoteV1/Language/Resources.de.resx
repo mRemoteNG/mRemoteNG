@@ -1097,7 +1097,7 @@ Wenn Sie noch immer Probleme mit VNC haben, konsultieren Sie bitte das mRemoteNG
 	</data>
 	<data name="strCcPuttyFailed" xml:space="preserve">
 		<value>Die Protokolle, SSH, Telnet, Rlogin und RAW benötigen PuTTY. PuTTY wird in allen mRemote Paketen mitgeliefert und befindet sich im Installations-Pfad.
-Bitte versichern Sie sich, dass sich die Datei Putty.exe in ihrem mRemote Installations-Pfad befindet (Standard: c:\Programme\mRemote\) oder dass Sie einen korrekten Pfad in den Optionen (Extras - Optionen - Erweitert - Eigener PuTTY Pfad) angegeben haben.</value>
+Bitte versichern Sie sich, dass sich die Datei Putty.exe in ihrem mRemote Installations-Pfad befindet (Standard: c:\Programme\mRemoteNG\) oder dass Sie einen korrekten Pfad in den Optionen (Extras - Optionen - Erweitert - Eigener PuTTY Pfad) angegeben haben.</value>
 	</data>
 	<data name="strCcICAOK" xml:space="preserve">
 		<value>Alle ICA Komponenten wurden gefunden und scheinen korrekt registriert zu sein.
@@ -1985,5 +1985,61 @@ Starte mit neuer Datei.</value>
 	</data>
 	<data name="strVncSetPropsFailed" xml:space="preserve">
 		<value>Setzen der VNC Parameter fehlgeschlagen!</value>
+	</data>
+	<data name="strRdpDisconnected" xml:space="preserve">
+		<value>RDP Verbindung getrennt!</value>
+	</data>
+	<data name="strErrorCode" xml:space="preserve">
+		<value>Fehler Nummer {0}.</value>
+	</data>
+	<data name="strConnenctionEventDisconnected" xml:space="preserve">
+		<value>Protokoll Ereignis Verbindung getrennt.
+Nachricht:
+{0}</value>
+	</data>
+	<data name="strConnenctionEventDisconnectFailed" xml:space="preserve">
+		<value>Protokoll Ereignis Trennen der Verbindung fehlgeschlagen!
+{0}</value>
+	</data>
+	<data name="strConnenctionClosedByUserDetail" xml:space="preserve">
+		<value>Verbindung zu {0} mit {1} wurde vom Benutzer {2} getrennt.  (Beschreibung: "{3}"; Benutzer Feld: "{4}")</value>
+	</data>
+	<data name="strConnenctionClosedByUser" xml:space="preserve">
+		<value>Verbindung zu {0} mit {1} wurde vom Benutzer {2} getrennt.  (Description: " &amp; Prot.InterfaceControl.Info.Description &amp; "; User Field: " &amp; Prot.InterfaceControl.Info.UserField &amp; ")"</value>
+	</data>
+	<data name="strConnenctionCloseEvent" xml:space="preserve">
+		<value>Ereignis Verbindung beenden</value>
+	</data>
+	<data name="strConnenctionCloseEventFailed" xml:space="preserve">
+		<value>Ereignis Verbindung beenden fehlgeschlagen!</value>
+	</data>
+	<data name="strConnectionEventConnected" xml:space="preserve">
+		<value>Ereignis Verbindung hergestellt</value>
+	</data>
+	<data name="strConnectionEventConnectedDetail" xml:space="preserve">
+		<value>Verbindung zu "{0}" mit "{1}" hergestellt von Benutzer "{2}" (Beschreibung: "{3}"; Benutzer Feld: "{4}")</value>
+	</data>
+	<data name="strConnectionEventErrorOccured" xml:space="preserve">
+		<value>Ein Protokoll Ereignis Fehler ist aufgetreten!</value>
+	</data>
+	<data name="strConnectionEventConnectionFailed" xml:space="preserve">
+		<value>Verbindung fehlgeschlagen!</value>
+	</data>
+	<data name="strConnectionRdpErrorDetail" xml:space="preserve">
+		<value>RDP Fehler!
+Fehler Code: {0}
+Fehler Beschreibung: {1}</value>
+	</data>
+	<data name="strLogWriteToFileFailed" xml:space="preserve">
+		<value>Schreiben des Report.log fehlgeschlagen!</value>
+	</data>
+	<data name="strLogWriteToFileFinalLocationFailed" xml:space="preserve">
+		<value>Kann das Report.log nicht im Zielordner speichern!</value>
+	</data>
+	<data name="strSettingMainFormTextFailed" xml:space="preserve">
+		<value>Setzen der Hauptformular Texte fehlgeschlagen!</value>
+	</data>
+	<data name="strSqlUpdateCheckUpdateAvailable" xml:space="preserve">
+		<value>SQL Aktualisierungsprüfung beendet und es existiert eine Aktualisierung! Aktualisiere die Verbindungsdaten.</value>
 	</data>
 </root>
