@@ -54,32 +54,11 @@ VIAddVersionKey "FileVersion" ${PRODUCT_VERSION_LONG}
 !insertmacro MUI_UNPAGE_CONFIRM
 !insertmacro MUI_UNPAGE_INSTFILES
 
-; Set Language
-!insertmacro MUI_LANGUAGE "English"
-!include "Language\english.nsi"
-
-!insertmacro MUI_LANGUAGE "German"
-!include "Language\german.nsi"
-
-!insertmacro MUI_LANGUAGE "Dutch"
-!include "Language\dutch.nsi"
-
-!insertmacro MUI_LANGUAGE "French"
-!include "Language\french.nsi"
-
-!insertmacro MUI_LANGUAGE "Polish"
-!include "Language\polish.nsi"
-
-!insertmacro MUI_LANGUAGE "Spanish"
-!include "Language\spanish.nsi"
-
-!insertmacro MUI_LANGUAGE "Czech"
-!include "Language\czech.nsi"
-
-!define MUI_FINISHPAGE_RUN_Text "$(LaunchMremoteNow)"
-
-; Language names
+; Get Languages
 !include "Language\languages.nsi"
+
+; Set finish page text
+!define MUI_FINISHPAGE_RUN_Text "$(LaunchMremoteNow)"
 
 Function .onInit
 	;Language selection dialog
