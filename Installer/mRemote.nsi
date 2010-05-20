@@ -56,25 +56,56 @@ VIAddVersionKey "FileVersion" ${PRODUCT_VERSION_LONG}
 
 ; Set Language
 !insertmacro MUI_LANGUAGE "English"
-!insertmacro MUI_LANGUAGE "German"
-!insertmacro MUI_LANGUAGE "Dutch"
-!insertmacro MUI_LANGUAGE "French"
-!insertmacro MUI_LANGUAGE "Polish"
-!insertmacro MUI_LANGUAGE "Spanish"
-!insertmacro MUI_LANGUAGE "Czech"
+!include "Language\english.nsi"
 
-; Finish Page translations
-LangString LaunchMremoteNow ${LANG_ENGLISH} "Launch mRemoteNG Now"
-LangString LaunchMremoteNow ${LANG_GERMAN} "mRemoteNG jetzt Starten"
-LangString LaunchMremoteNow ${LANG_DUTCH} "mRemoteNG run DUTCH message"
-LangString LaunchMremoteNow ${LANG_FRENCH} "mRemoteNG run FRENCH message"
-LangString LaunchMremoteNow ${LANG_POLISH} "mRemoteNG run POLISH message"
-LangString LaunchMremoteNow ${LANG_SPANISH} "mRemoteNG run SPANISH message"
-LangString LaunchMremoteNow ${LANG_CZECH} "mRemoteNG run CZECH message"
+!insertmacro MUI_LANGUAGE "German"
+!include "Language\german.nsi"
+
+!insertmacro MUI_LANGUAGE "Dutch"
+!include "Language\dutch.nsi"
+
+!insertmacro MUI_LANGUAGE "French"
+!include "Language\french.nsi"
+
+!insertmacro MUI_LANGUAGE "Polish"
+!include "Language\polish.nsi"
+
+!insertmacro MUI_LANGUAGE "Spanish"
+!include "Language\spanish.nsi"
+
+!insertmacro MUI_LANGUAGE "Czech"
+!include "Language\czech.nsi"
 
 !define MUI_FINISHPAGE_RUN_Text "$(LaunchMremoteNow)"
 
+; Language names
+!include "Language\languages.nsi"
+
 Function .onInit
+	;Language selection dialog
+	Push ""
+	Push ${LANG_ENGLISH}
+	Push ${LanguageNameEnglish}
+	Push ${LANG_GERMAN}
+	Push ${LanguageNameGerman}
+	Push ${LANG_DUTCH}
+	Push ${LanguageNameDutch}
+	Push ${LANG_FRENCH}
+	Push ${LanguageNameFrench}
+	Push ${LANG_POLISH}
+	Push ${LanguageNamePolish}
+	Push ${LANG_SPANISH}
+	Push ${LanguageNameSpanish}
+	Push ${LANG_CZECH}
+	Push ${LanguageNameCzech}
+	Push A ; A means auto count languages
+	       ; for the auto count to work the first empty push (Push "") must remain
+	LangDLL::LangDialog  "$(InstallerLanguage)" "$(SelectInstallerLanguage)"
+
+	Pop $LANGUAGE
+	StrCmp $LANGUAGE "cancel" 0 +2
+		Abort
+
 	; Check .NET version
 	StrCpy $InstallDotNET "No"
 	Call GetDotNETVersion
@@ -92,7 +123,7 @@ Function .onInit
 	${EndIf}
 
 	${If} $InstallDotNET == "Yes"
-		MessageBox MB_OK|MB_ICONEXCLAMATION "mRemoteNG requires Microsoft .NET Framework 2.0."
+		MessageBox MB_OK|MB_ICONEXCLAMATION "$(RequiresNetFramework)"
 		Quit
 	${EndIf}
 FunctionEnd
