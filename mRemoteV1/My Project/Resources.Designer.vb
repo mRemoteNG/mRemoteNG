@@ -4999,6 +4999,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Quick: {0} ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strQuick() As String
+            Get
+                Return ResourceManager.GetString("strQuick", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Quick Connect ähnelt.
         '''</summary>
         Friend ReadOnly Property strQuickConnect() As String
