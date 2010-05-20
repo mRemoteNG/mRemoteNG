@@ -136,7 +136,7 @@
     <value>&amp;Neu</value>
   </data>
 	<data name="strButtonScan" xml:space="preserve">
-    <value>&amp;Scannnen</value>
+    <value>&amp;Scannen</value>
   </data>
 	<data name="strButtonStop" xml:space="preserve">
     <value>&amp;Stop</value>
@@ -157,10 +157,10 @@
     <value>Möchten Sie alle offenen Verbindungen schließen?</value>
   </data>
 	<data name="strConfirmResetLayout" xml:space="preserve">
-    <value>Sind Sie sicher das Sie das Panel auf das Standartlayout zurücksetzen wollen?</value>
+    <value>Sind Sie sicher das Sie das Panel auf das Standardlayout zurücksetzen wollen?</value>
   </data>
 	<data name="strPropertyDescriptionColors" xml:space="preserve">
-    <value>Wählen Sie die Farb Qualität.</value>
+    <value>Wählen Sie die zu verwendende Farb Qualität.</value>
   </data>
 	<data name="strPropertyNameColors" xml:space="preserve">
     <value>Farben</value>
@@ -188,7 +188,7 @@
     <value>Überprüfen:</value>
   </data>
 	<data name="strMagicLibraryAttribution" xml:space="preserve">
-    <value>Benutzt die Magic library von [Crownwood Software]</value>
+    <value>Benutzt die Magic Bibliothek von [Crownwood Software]</value>
   </data>
 	<data name="strMenuAbout" xml:space="preserve">
     <value>Über</value>
@@ -242,13 +242,13 @@
     <value>Springe zu</value>
   </data>
 	<data name="strMenuNewConnectionFile" xml:space="preserve">
-    <value>Neu Verbindungen Datei</value>
+    <value>Neue Konfigurations Datei</value>
   </data>
 	<data name="strMenuNotifications" xml:space="preserve">
     <value>Meldungen</value>
   </data>
 	<data name="strMenuOpenConnectionFile" xml:space="preserve">
-    <value>Verbindungen Datei öffnen...</value>
+    <value>Konfigurations Datei öffnen...</value>
   </data>
 	<data name="strMenuOptions" xml:space="preserve">
     <value>Optionen</value>
@@ -260,10 +260,10 @@
     <value>Direkt Verbinden Symbolleiste</value>
   </data>
 	<data name="strMenuSaveConnectionFile" xml:space="preserve">
-    <value>Verbindungen Datei speichern</value>
+    <value>Konfigurations Datei speichern</value>
   </data>
 	<data name="strMenuSaveConnectionFileAs" xml:space="preserve">
-    <value>Verbindungen Datei speichern unter...</value>
+    <value>Konfigurations Datei speichern unter...</value>
   </data>
 	<data name="strMenuScreenshotManager" xml:space="preserve">
     <value>Bildschirmschnappschuss Verwaltung</value>
@@ -290,7 +290,7 @@
     <value>Webseite</value>
   </data>
 	<data name="strLabelSelectPanel" xml:space="preserve">
-    <value>Wähle ein Panel aus der Liste oder klicke auf Neu um ein neues zu erstellen. Klicke OK um fortzufahren.</value>
+    <value>Wählen Sie ein Panel aus der Liste oder klicken Sie auf Neu um ein neues zu erstellen. Klickeen Sie OK um fortzufahren.</value>
   </data>
 	<data name="strSmartSizeModeAspect" xml:space="preserve">
     <value>Aspekt</value>
@@ -336,7 +336,7 @@
     <comment>Need translation</comment>
   </data>
 	<data name="strLabelPuttySessionsConfig" xml:space="preserve">
-    <value>Hier klicken um die PuTTY Sitzung zu konfigurieren:</value>
+    <value>Klicken Sie hier um die PuTTY Sitzung zu konfigurieren:</value>
   </data>
 	<data name="strLabelPuttyTimeout" xml:space="preserve">
     <value>Maximale Zeit die auf PuTTY und integrierte externe Programme gewartet wird:</value>
@@ -538,7 +538,7 @@
     <value>Tab umbenennen</value>
   </data>
 	<data name="strMenuScreenshot" xml:space="preserve">
-    <value>Screenshot</value>
+    <value>Bildschirmschnappschuss</value>
   </data>
 	<data name="strMenuSendSpecialKeys" xml:space="preserve">
     <value>Tastenkombination senden (VNC)</value>
@@ -562,7 +562,7 @@
     <value>Hostname/IP</value>
   </data>
 	<data name="strButtonIcon" xml:space="preserve">
-    <value>Icon</value>
+    <value>Symbol</value>
   </data>
 	<data name="strCategoryAppearance" xml:space="preserve">
     <value>Aussehen</value>
@@ -571,7 +571,7 @@
     <value>Verbindung</value>
   </data>
 	<data name="strCategoryCredentials" xml:space="preserve">
-    <value>Credentials</value>
+    <value>Anmeldedaten</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strCategoryDisplay" xml:space="preserve">
@@ -696,10 +696,10 @@
     <value>Wählen Sie welche Authentifizierungs-Variante verwendet wird.</value>
   </data>
 	<data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
-    <value>Wählen Sie wie sie sich am VNC server authentifizieren wollen.</value>
+    <value>Wählen Sie wie Sie sich am VNC server authentifizieren wollen.</value>
   </data>
 	<data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
-    <value>Wählen Sie ob Bitmap caching zum Einsatz kommen soll.</value>
+    <value>Wählen Sie ob Bitmap Zwischenspeicherung verwendet werden soll.</value>
   </data>
 	<data name="strPropertyDescriptionCompression" xml:space="preserve">
     <value>Wählen Sie die Kompressionsrate die verwendet werden soll.</value>
@@ -775,7 +775,7 @@
     <comment>Need translation</comment>
   </data>
 	<data name="strPropertyDescriptionVNCProxyPassword" xml:space="preserve">
-    <value>Geben Sie ihr Passwort ein.</value>
+    <value>Geben Sie Ihr Passwort ein.</value>
   </data>
 	<data name="strPropertyDescriptionVNCProxyPort" xml:space="preserve">
     <value>Geben Sie den Port des Proxy Servers ein.</value>
@@ -784,7 +784,7 @@
     <value>Wenn Sie einen Proxy verwenden um auf das entfernte System zugreifen zu können, wählen sie hier den Typ.</value>
   </data>
 	<data name="strPropertyDescriptionVNCProxyUsername" xml:space="preserve">
-    <value>Geben Sie ihren Benutzernamen ein.</value>
+    <value>Geben Sie Ihren Benutzernamen ein.</value>
   </data>
 	<data name="strPropertyNameAuthenticationLevel" xml:space="preserve">
     <value>Serverauthentifizierung</value>
@@ -1076,8 +1076,8 @@ Remote Desktop Verbindung Control Version {0}</value>
 		<value>Prüfung fehlgeschlagen!</value>
 	</data>
 	<data name="strCcRDPFailed" xml:space="preserve">
-		<value>Um RDP korrekt betreiben können muss mindestens Remote Desktop Connection (Terminal Services Client) 6.0 installiert sein. Hier können Sie die Software herunterladen: http://support.microsoft.com/kb/925876
-Wenn Sie RDP 6.0 bereits installiert haben und die Prüfung noch immer fehlschlägt, versuchen Sie die Datei mstscax.dll manuell zu registrieren. Öffnen Sie hierzu den Ausführen Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\windows\system32\mstscax.dll" (Wobei c:\ Ihr System-Laufwerk ist).
+		<value>Um RDP korrekt betreiben können muss mindestens Remote Desktop Connection (Terminal Services Client) 6.0 installiert sein. Hier können Sie die Software herunterladen: http://support.microsoft.com/kb/951616
+Wenn Sie RDP 6.1 bereits installiert haben und die Prüfung noch immer fehlschlägt, versuchen Sie die Datei mstscax.dll manuell zu registrieren. Öffnen Sie hierzu den Ausführen Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\windows\system32\mstscax.dll" (Wobei c:\ Ihr System-Laufwerk ist).
 Wenn Sie noch immer Probleme mit RDP haben, konsultieren Sie bitte das mRemoteNG Forum: http://forum.mremoteng.org/</value>
 	</data>
 	<data name="strPasswordProtect" xml:space="preserve">
@@ -1537,7 +1537,7 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
 		<value>Entferne Hintergrundbild</value>
 	</data>
 	<data name="strRDPDisableFullWindowdrag" xml:space="preserve">
-		<value>Fensterinhalt beim ziehen nicht anzeigen</value>
+		<value>Fensterinhalt beim Ziehen nicht anzeigen</value>
 	</data>
 	<data name="strRDPDisableMenuAnimations" xml:space="preserve">
 		<value>Menü Animationen deaktivieren</value>
@@ -1963,10 +1963,10 @@ Starte mit neuer Datei.</value>
 		<value>Setzen der Fehlerbehandlungsroutine fehlgeschlagen!</value>
 	</data>
 	<data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-		<value>Prüfungs auf Direkt Verbindungs Historie fehlgeschlagen!</value>
+		<value>Prüfung auf Direkt Verbindungs Historie fehlgeschlagen!</value>
 	</data>
 	<data name="strQuickConnectAddFailed" xml:space="preserve">
-		<value>Hinzufüfen zur Direkt Verbindungs Historie fehlgeschlagen!</value>
+		<value>Hinzufügen zur Direkt Verbindungs Historie fehlgeschlagen!</value>
 	</data>
 	<data name="strVncConnectionOpenFailed" xml:space="preserve">
 		<value>Öffnen der VNC Verbindung fehlgeschlagen!</value>
