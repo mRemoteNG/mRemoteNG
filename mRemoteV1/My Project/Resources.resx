@@ -2355,4 +2355,7 @@ Error Description: {1}</value>
 	<data name="strSettingMainFormTextFailed" xml:space="preserve">
 		<value>Setting main form text failed</value>
 	</data>
+	<data name="strQuick" xml:space="preserve">
+		<value>Quick: {0}</value>
+	</data>
 </root>

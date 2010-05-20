@@ -1191,7 +1191,7 @@ Namespace App
                 Next
 
                 If qHost <> "" Then
-                    nCi.Name = "Quick: " & qHost
+                    nCi.Name = String.Format(My.Resources.strQuick, qHost)
                     nCi.Hostname = qHost
                     nCi.Port = qPort
                     nCi.IsQuicky = True

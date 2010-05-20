@@ -179,7 +179,7 @@
     <comment>Need translation</comment>
   </data>
 	<data name="strLabelConnect" xml:space="preserve">
-    <value>&amp;Schnell Verbinden:</value>
+    <value>&amp;Direkt Verbinden:</value>
   </data>
 	<data name="strLabelPassword" xml:space="preserve">
     <value>Passwort:</value>
@@ -257,7 +257,7 @@
     <value>Port Scan</value>
   </data>
 	<data name="strMenuQuickConnectToolbar" xml:space="preserve">
-    <value>Schnell Verbinden Symbolleiste</value>
+    <value>Direkt Verbinden Symbolleiste</value>
   </data>
 	<data name="strMenuSaveConnectionFile" xml:space="preserve">
     <value>Verbindungen Datei speichern</value>
@@ -1242,7 +1242,7 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
 		<value>Zu importierendes Protokoll</value>
 	</data>
 	<data name="strQuickConnect" xml:space="preserve">
-		<value>Sofort verbinden</value>
+		<value>Direkt verbinden</value>
 	</data>
 	<data name="strLocalFile" xml:space="preserve">
 		<value>Lokale Datei</value>
@@ -1626,7 +1626,7 @@ Bitte verwenden Sie Datei - Verbindungen laden für normale Verbindungs Dateien!
 		<value>Verbindungs Datei konnte nicht als "{0}" gespeichert werden!</value>
 	</data>
 	<data name="strQuickConnectFailed" xml:space="preserve">
-		<value>Schnelle Verbindung fehlgeschlagen!</value>
+		<value>Direkte Verbindung fehlgeschlagen!</value>
 	</data>
 	<data name="strConnectionOpenFailed" xml:space="preserve">
 		<value>Öffnen der Verbindung ist fehlgeschlagen!</value>
@@ -1963,10 +1963,10 @@ Starte mit neuer Datei.</value>
 		<value>Setzen der Fehlerbehandlungsroutine fehlgeschlagen!</value>
 	</data>
 	<data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-		<value>Prüfungs auf Schnell Verbindungs Historie fehlgeschlagen!</value>
+		<value>Prüfungs auf Direkt Verbindungs Historie fehlgeschlagen!</value>
 	</data>
 	<data name="strQuickConnectAddFailed" xml:space="preserve">
-		<value>Hinzufüfen zur Schnell Verbindungs Historie fehlgeschlagen!</value>
+		<value>Hinzufüfen zur Direkt Verbindungs Historie fehlgeschlagen!</value>
 	</data>
 	<data name="strVncConnectionOpenFailed" xml:space="preserve">
 		<value>Öffnen der VNC Verbindung fehlgeschlagen!</value>
@@ -2041,5 +2041,8 @@ Fehler Beschreibung: {1}</value>
 	</data>
 	<data name="strSqlUpdateCheckUpdateAvailable" xml:space="preserve">
 		<value>SQL Aktualisierungsprüfung beendet und es existiert eine Aktualisierung! Aktualisiere die Verbindungsdaten.</value>
+	</data>
+	<data name="strQuick" xml:space="preserve">
+		<value>Direkt: {0}</value>
 	</data>
 </root>
