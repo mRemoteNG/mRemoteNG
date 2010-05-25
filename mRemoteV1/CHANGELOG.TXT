@@ -1,5 +1,8 @@
 ﻿1.64:
   AR: Fixed translations, moved everything into resx, refactoring, namespace renamed to mRemoteNG
+  AR: Removed confConsNew.xml -> creating new files with vb code
+  AR: Fixed RD Gateway and other inheritance bugs, rewritten to use a List of String instead of a string for hiding properties
+  AR: Added locales to nsis installer
 
 1.63:
   New icon and logo

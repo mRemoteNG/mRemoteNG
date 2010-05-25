@@ -2,6 +2,7 @@
 Imports System.IO
 Imports Crownwood
 Imports System.Threading
+Imports System.Xml
 
 Namespace App
     Public Class Runtime
@@ -640,37 +641,29 @@ Namespace App
 #End Region
 
 #Region "Connections Loading/Saving"
-        Public Shared Sub NewConnections()
+        Public Shared Sub NewConnections(ByVal filename As String)
             Try
                 cL = New Connection.List
                 ctL = New Container.List
 
                 Dim conL As New Config.Connections.Load
 
-                If File.Exists(App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile) = False Then
-                    If Directory.Exists(App.Info.Connections.DefaultConnectionsPath) = False Then
-                        Directory.CreateDirectory(App.Info.Connections.DefaultConnectionsPath)
-                    End If
+                My.Settings.LoadConsFromCustomLocation = False
 
-                    File.Copy(My.Application.Info.DirectoryPath & "\" & App.Info.Connections.DefaultConnectionsFileNew, App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile)
-                    conL.ConnectionFileName = App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile
-                    My.Settings.LoadConsFromCustomLocation = False
-                Else
-                    Dim lD As SaveFileDialog = Tools.Controls.ConnectionsSaveAsDialog
-                    If lD.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-                        File.Copy(My.Application.Info.DirectoryPath & "\" & App.Info.Connections.DefaultConnectionsFileNew, lD.FileName, True)
-                        conL.ConnectionFileName = lD.FileName
+                Dim xW As New XmlTextWriter(filename, System.Text.Encoding.UTF8)
+                xW.Formatting = Formatting.Indented
+                xW.Indentation = 4
 
-                        If conL.ConnectionFileName = App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile Then
-                            My.Settings.LoadConsFromCustomLocation = False
-                        Else
-                            My.Settings.LoadConsFromCustomLocation = True
-                            My.Settings.CustomConsPath = conL.ConnectionFileName
-                        End If
-                    Else
-                        Exit Sub
-                    End If
-                End If
+                xW.WriteStartDocument()
+                xW.WriteStartElement(My.Resources.strConnections)
+                xW.WriteAttributeString("Export", "", "False")
+                xW.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY")
+                xW.WriteAttributeString("ConfVersion", "", "2.2")
+
+                xW.WriteEndElement()
+                xW.WriteEndDocument()
+
+                xW.Close()
 
                 conL.ConnectionList = cL
                 conL.ContainerList = ctL
@@ -680,6 +673,8 @@ Namespace App
 
                 conL.RootTreeNode = Windows.treeForm.tvConnections.Nodes(0)
 
+                ' Load config
+                conL.ConnectionFileName = filename
                 conL.Load()
             Catch ex As Exception
                 mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strCouldNotCreateNewConnectionsFile & vbNewLine & ex.Message)
@@ -750,7 +745,7 @@ Namespace App
                             mC.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strConnectionsFileCouldNotBeLoaded, conL.ConnectionFileName))
                         Else
                             mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strConnectionsFileCouldNotBeLoadedNew, conL.ConnectionFileName))
-                            App.Runtime.NewConnections()
+                            App.Runtime.NewConnections(conL.ConnectionFileName)
                         End If
 
                         Exit Sub
@@ -764,7 +759,6 @@ Namespace App
                         mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strConnectionsFileBackupFailed & vbNewLine & vbNewLine & ex.Message)
                     End Try
                 End If
-
 
                 conL.ConnectionList = cL
                 conL.ContainerList = ctL

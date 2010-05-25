@@ -18,11 +18,13 @@ Public Class frmMain
 
         Startup.ParseCommandLineArgs()
 
+        ' Create gui config load and save objects
         sL = New Config.Settings.Load(Me)
         sS = New Config.Settings.Save(Me)
 
         Startup.CreateLogger()
 
+        ' Load GUI Configuration
         sL.Load()
 
         mC = New Messages.Collector(Windows.errorsForm)
@@ -290,7 +292,12 @@ Public Class frmMain
     End Sub
 
     Private Sub mMenFileNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileNew.Click
-        NewConnections()
+        Dim lD As SaveFileDialog = Tools.Controls.ConnectionsSaveAsDialog
+        If lD.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+            NewConnections(lD.FileName)
+        Else
+            Exit Sub
+        End If
     End Sub
 
     Private Sub mMenFileLoad_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileLoad.Click
