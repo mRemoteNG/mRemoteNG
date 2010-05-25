@@ -116,9 +116,6 @@
     <Setting Name="ConDefaultDescription" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ConDefaultIcon" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
-      <Value Profile="(Default)">mRemote</Value>
-    </Setting>
     <Setting Name="ConDefaultPanel" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)">General</Value>
     </Setting>
@@ -451,6 +448,27 @@
     </Setting>
     <Setting Name="ConDefaultRDGatewayUseConnectionCredentials" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Yes</Value>
+    </Setting>
+    <Setting Name="ConDefaultIcon" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mRemoteNG</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayUsageMethod" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayHostname" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayUsername" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayPassword" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayDomain" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayUseConnectionCredentials" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
     </Setting>
   </Settings>
 </SettingsFile>

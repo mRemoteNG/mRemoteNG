@@ -18,7 +18,7 @@ Namespace Config
             Private sqlQuery As SqlCommand
             Private sqlRd As SqlDataReader
 
-            Private sqlDB As String = "mRemote"
+            Private sqlDB As String = "mRemoteNG"
 
             Private selNode As TreeNode
 #End Region
@@ -83,10 +83,6 @@ Namespace Config
                     _PreviousSelected = value
                 End Set
             End Property
-
-
-
-
 
             Private _ConnectionFileName As String
             Public Property ConnectionFileName() As String

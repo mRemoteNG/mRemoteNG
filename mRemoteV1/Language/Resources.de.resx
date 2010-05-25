@@ -2045,4 +2045,37 @@ Fehler Beschreibung: {1}</value>
 	<data name="strQuick" xml:space="preserve">
 		<value>Direkt: {0}</value>
 	</data>
+	<data name="strSessionKillFailed" xml:space="preserve">
+		<value>Beenden der Sitzung im Hintergrund fehlgeschlagen!</value>
+	</data>
+	<data name="strSessionGetFailed" xml:space="preserve">
+		<value>Holen der Sitzung im Hintergrund fehlgeschlagen!</value>
+	</data>
+	<data name="strConfigPropertyGridObjectFailed" xml:space="preserve">
+		<value>Eigenschaften Grid Objekt Fehler!</value>
+	</data>
+	<data name="strConfigUiLoadFailed" xml:space="preserve">
+		<value>Konfigurationsfenster laden fehlgeschlagen!</value>
+	</data>
+	<data name="strConfigPropertyGridValueFailed" xml:space="preserve">
+		<value>Eigenschaften Grid Wert Fehler!</value>
+	</data>
+	<data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
+		<value>Verstecken nicht benötigter Eigenschaften fehlgeschlagen!</value>
+	</data>
+	<data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
+		<value>Bild Knopf Ereignis fehlgeschlagen!</value>
+	</data>
+	<data name="strConfigPropertyGridMenuClickFailed" xml:space="preserve">
+		<value>Menü Ereignis fehlgeschlagen!</value>
+	</data>
+	<data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
+		<value>Host Status setzen fehlgeschlagen!</value>
+	</data>
+	<data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
+		<value>Setzen der Standard Verbindungsdaten fehlgeschlagen!</value>
+	</data>
+	<data name="strPropertyNameRDGatewayDomainInherit" xml:space="preserve">
+		<value>Vererbe Gateway Domäne</value>
+	</data>
 </root>

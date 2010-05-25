@@ -382,7 +382,7 @@ Namespace UI
                     Me.ShowHideGridItems()
                     Me.SetHostStatus(Obj)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SetPropertyGridObject (UI.Window.Config) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridObjectFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -423,7 +423,7 @@ Namespace UI
                     tsDefault.Items(tsDefault.Items.Count - 1).Visible = False
                     ToolStripManager.Merge(tsCustom, tsDefault)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Load (UI.Window.Config) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigUiLoadFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -490,237 +490,604 @@ Namespace UI
                     Me.ShowHideGridItems()
                     App.Runtime.SaveConnectionsBG()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "pGrid_PopertyValueChanged (UI.Window.Config) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridValueFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub ShowHideGridItems()
                 Try
-                    Dim strHide As String = ""
+                    Dim strHide As List(Of String) = New List(Of String)
 
                     If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
                         Dim conI As mRemoteNG.Connection.Info = pGrid.SelectedObject
 
                         Select Case conI.Protocol
                             Case mRemoteNG.Connection.Protocol.Protocols.RDP
-                                strHide &= "ExtApp;RenderingEngine;PuttySession;ICAEncryption;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;"
+                                strHide.Add("ExtApp")
+                                strHide.Add("ICAEncryption")
+                                strHide.Add("PuttySession")
+                                strHide.Add("RenderingEngine")
+                                strHide.Add("VNCAuthMode")
+                                strHide.Add("VNCColors")
+                                strHide.Add("VNCCompression")
+                                strHide.Add("VNCEncoding")
+                                strHide.Add("VNCProxyIP")
+                                strHide.Add("VNCProxyPassword")
+                                strHide.Add("VNCProxyPort")
+                                strHide.Add("VNCProxyType")
+                                strHide.Add("VNCProxyUsername")
+                                strHide.Add("VNCSmartSizeMode")
+                                strHide.Add("VNCViewOnly")
                                 If conI.RDGatewayUsageMethod = mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod.Never Then
-                                    strHide &= "RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                                    strHide.Add("RDGatewayDomain")
+                                    strHide.Add("RDGatewayHostname")
+                                    strHide.Add("RDGatewayPassword")
+                                    strHide.Add("RDGatewayUseConnectionCredentials")
+                                    strHide.Add("RDGatewayUsername")
                                 ElseIf conI.RDGatewayUseConnectionCredentials Then
-                                    strHide &= "RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                                    strHide.Add("RDGatewayDomain")
+                                    strHide.Add("RDGatewayPassword")
+                                    strHide.Add("RDGatewayUsername")
                                 End If
                             Case mRemoteNG.Connection.Protocol.Protocols.VNC
-                                strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;PuttySession;ICAEncryption;RDPAuthenticationLevel;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                                strHide.Add("CacheBitmaps")
+                                strHide.Add("Colors")
+                                strHide.Add("DisplayThemes")
+                                strHide.Add("DisplayWallpaper")
+                                strHide.Add("ExtApp")
+                                strHide.Add("ICAEncryption")
+                                strHide.Add("PuttySession")
+                                strHide.Add("RDGatewayDomain")
+                                strHide.Add("RDGatewayHostname")
+                                strHide.Add("RDGatewayPassword")
+                                strHide.Add("RDGatewayUsageMethod")
+                                strHide.Add("RDGatewayUseConnectionCredentials")
+                                strHide.Add("RDGatewayUsername")
+                                strHide.Add("RDPAuthenticationLevel")
+                                strHide.Add("RedirectDiskDrives")
+                                strHide.Add("RedirectKeys")
+                                strHide.Add("RedirectPorts")
+                                strHide.Add("RedirectPrinters")
+                                strHide.Add("RedirectSmartCards")
+                                strHide.Add("RedirectSound")
+                                strHide.Add("RenderingEngine")
+                                strHide.Add("Resolution")
+                                strHide.Add("UseConsoleSession")
                                 If conI.VNCAuthMode = mRemoteNG.Connection.Protocol.VNC.AuthMode.AuthVNC Then
-                                    strHide &= "Username;Domain;"
+                                    strHide.Add("Username;Domain")
                                 End If
                                 If conI.VNCProxyType = mRemoteNG.Connection.Protocol.VNC.ProxyType.ProxyNone Then
-                                    strHide &= "VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyUsername;"
+                                    strHide.Add("VNCProxyIP")
+                                    strHide.Add("VNCProxyPassword")
+                                    strHide.Add("VNCProxyPort")
+                                    strHide.Add("VNCProxyUsername")
                                 End If
                             Case mRemoteNG.Connection.Protocol.Protocols.SSH1
-                                strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                                strHide.Add("CacheBitmaps")
+                                strHide.Add("Colors")
+                                strHide.Add("DisplayThemes")
+                                strHide.Add("DisplayWallpaper")
+                                strHide.Add("Domain")
+                                strHide.Add("ExtApp")
+                                strHide.Add("ICAEncryption")
+                                strHide.Add("RDGatewayDomain")
+                                strHide.Add("RDGatewayHostname")
+                                strHide.Add("RDGatewayPassword")
+                                strHide.Add("RDGatewayUsageMethod")
+                                strHide.Add("RDGatewayUseConnectionCredentials")
+                                strHide.Add("RDGatewayUsername")
+                                strHide.Add("RDPAuthenticationLevel")
+                                strHide.Add("RedirectDiskDrives")
+                                strHide.Add("RedirectKeys")
+                                strHide.Add("RedirectPorts")
+                                strHide.Add("RedirectPrinters")
+                                strHide.Add("RedirectSmartCards")
+                                strHide.Add("RedirectSound")
+                                strHide.Add("RenderingEngine")
+                                strHide.Add("Resolution")
+                                strHide.Add("UseConsoleSession")
+                                strHide.Add("VNCAuthMode")
+                                strHide.Add("VNCColors")
+                                strHide.Add("VNCCompression")
+                                strHide.Add("VNCEncoding")
+                                strHide.Add("VNCProxyIP")
+                                strHide.Add("VNCProxyPassword")
+                                strHide.Add("VNCProxyPort")
+                                strHide.Add("VNCProxyType")
+                                strHide.Add("VNCProxyUsername")
+                                strHide.Add("VNCSmartSizeMode")
+                                strHide.Add("VNCViewOnly")
                             Case mRemoteNG.Connection.Protocol.Protocols.SSH2
-                                strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                                strHide.Add("CacheBitmaps")
+                                strHide.Add("Colors")
+                                strHide.Add("DisplayThemes")
+                                strHide.Add("DisplayWallpaper")
+                                strHide.Add("Domain")
+                                strHide.Add("ExtApp")
+                                strHide.Add("ICAEncryption")
+                                strHide.Add("RDGatewayDomain")
+                                strHide.Add("RDGatewayHostname")
+                                strHide.Add("RDGatewayPassword")
+                                strHide.Add("RDGatewayUsageMethod")
+                                strHide.Add("RDGatewayUseConnectionCredentials")
+                                strHide.Add("RDGatewayUsername")
+                                strHide.Add("RDPAuthenticationLevel")
+                                strHide.Add("RedirectDiskDrives")
+                                strHide.Add("RedirectKeys")
+                                strHide.Add("RedirectPorts")
+                                strHide.Add("RedirectPrinters")
+                                strHide.Add("RedirectSmartCards")
+                                strHide.Add("RedirectSound")
+                                strHide.Add("RenderingEngine")
+                                strHide.Add("Resolution")
+                                strHide.Add("UseConsoleSession")
+                                strHide.Add("VNCAuthMode")
+                                strHide.Add("VNCColors")
+                                strHide.Add("VNCCompression")
+                                strHide.Add("VNCEncoding")
+                                strHide.Add("VNCProxyIP")
+                                strHide.Add("VNCProxyPassword")
+                                strHide.Add("VNCProxyPort")
+                                strHide.Add("VNCProxyType")
+                                strHide.Add("VNCProxyUsername")
+                                strHide.Add("VNCSmartSizeMode")
+                                strHide.Add("VNCViewOnly")
                             Case mRemoteNG.Connection.Protocol.Protocols.Telnet
-                                strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;Password;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;Username;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                                strHide.Add("CacheBitmaps")
+                                strHide.Add("Colors")
+                                strHide.Add("DisplayThemes")
+                                strHide.Add("DisplayWallpaper")
+                                strHide.Add("Domain")
+                                strHide.Add("ExtApp")
+                                strHide.Add("ICAEncryption")
+                                strHide.Add("Password")
+                                strHide.Add("RDGatewayDomain")
+                                strHide.Add("RDGatewayHostname")
+                                strHide.Add("RDGatewayPassword")
+                                strHide.Add("RDGatewayUsageMethod")
+                                strHide.Add("RDGatewayUseConnectionCredentials")
+                                strHide.Add("RDGatewayUsername")
+                                strHide.Add("RDPAuthenticationLevel")
+                                strHide.Add("RedirectDiskDrives")
+                                strHide.Add("RedirectKeys")
+                                strHide.Add("RedirectPorts")
+                                strHide.Add("RedirectPrinters")
+                                strHide.Add("RedirectSmartCards")
+                                strHide.Add("RedirectSound")
+                                strHide.Add("RenderingEngine")
+                                strHide.Add("Resolution")
+                                strHide.Add("UseConsoleSession")
+                                strHide.Add("Username")
+                                strHide.Add("VNCAuthMode")
+                                strHide.Add("VNCColors")
+                                strHide.Add("VNCCompression")
+                                strHide.Add("VNCEncoding")
+                                strHide.Add("VNCProxyIP")
+                                strHide.Add("VNCProxyPassword")
+                                strHide.Add("VNCProxyPort")
+                                strHide.Add("VNCProxyType")
+                                strHide.Add("VNCProxyUsername")
+                                strHide.Add("VNCSmartSizeMode")
+                                strHide.Add("VNCViewOnly")
                             Case mRemoteNG.Connection.Protocol.Protocols.Rlogin
-                                strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;Password;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;Username;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                                strHide.Add("CacheBitmaps")
+                                strHide.Add("Colors")
+                                strHide.Add("DisplayThemes")
+                                strHide.Add("DisplayWallpaper")
+                                strHide.Add("Domain")
+                                strHide.Add("ExtApp")
+                                strHide.Add("ICAEncryption")
+                                strHide.Add("Password")
+                                strHide.Add("RDGatewayDomain")
+                                strHide.Add("RDGatewayHostname")
+                                strHide.Add("RDGatewayPassword")
+                                strHide.Add("RDGatewayUsageMethod")
+                                strHide.Add("RDGatewayUseConnectionCredentials")
+                                strHide.Add("RDGatewayUsername")
+                                strHide.Add("RDPAuthenticationLevel")
+                                strHide.Add("RedirectDiskDrives")
+                                strHide.Add("RedirectKeys")
+                                strHide.Add("RedirectPorts")
+                                strHide.Add("RedirectPrinters")
+                                strHide.Add("RedirectSmartCards")
+                                strHide.Add("RedirectSound")
+                                strHide.Add("RenderingEngine")
+                                strHide.Add("Resolution")
+                                strHide.Add("UseConsoleSession")
+                                strHide.Add("Username")
+                                strHide.Add("VNCAuthMode")
+                                strHide.Add("VNCColors")
+                                strHide.Add("VNCCompression")
+                                strHide.Add("VNCEncoding")
+                                strHide.Add("VNCProxyIP")
+                                strHide.Add("VNCProxyPassword")
+                                strHide.Add("VNCProxyPort")
+                                strHide.Add("VNCProxyType")
+                                strHide.Add("VNCProxyUsername")
+                                strHide.Add("VNCSmartSizeMode")
+                                strHide.Add("VNCViewOnly")
                             Case mRemoteNG.Connection.Protocol.Protocols.RAW
-                                strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;Password;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;Username;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                                strHide.Add("CacheBitmaps")
+                                strHide.Add("Colors")
+                                strHide.Add("DisplayThemes")
+                                strHide.Add("DisplayWallpaper")
+                                strHide.Add("Domain")
+                                strHide.Add("ExtApp")
+                                strHide.Add("ICAEncryption")
+                                strHide.Add("Password")
+                                strHide.Add("RDGatewayDomain")
+                                strHide.Add("RDGatewayHostname")
+                                strHide.Add("RDGatewayPassword")
+                                strHide.Add("RDGatewayUsageMethod")
+                                strHide.Add("RDGatewayUseConnectionCredentials")
+                                strHide.Add("RDGatewayUsername")
+                                strHide.Add("RDPAuthenticationLevel")
+                                strHide.Add("RedirectDiskDrives")
+                                strHide.Add("RedirectKeys")
+                                strHide.Add("RedirectPorts")
+                                strHide.Add("RedirectPrinters")
+                                strHide.Add("RedirectSmartCards")
+                                strHide.Add("RedirectSound")
+                                strHide.Add("RenderingEngine")
+                                strHide.Add("Resolution")
+                                strHide.Add("UseConsoleSession")
+                                strHide.Add("Username")
+                                strHide.Add("VNCAuthMode")
+                                strHide.Add("VNCColors")
+                                strHide.Add("VNCCompression")
+                                strHide.Add("VNCEncoding")
+                                strHide.Add("VNCProxyIP")
+                                strHide.Add("VNCProxyPassword")
+                                strHide.Add("VNCProxyPort")
+                                strHide.Add("VNCProxyType")
+                                strHide.Add("VNCProxyUsername")
+                                strHide.Add("VNCSmartSizeMode")
+                                strHide.Add("VNCViewOnly")
                             Case mRemoteNG.Connection.Protocol.Protocols.HTTP
-                                strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;PuttySession;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                                strHide.Add("CacheBitmaps")
+                                strHide.Add("Colors")
+                                strHide.Add("DisplayThemes")
+                                strHide.Add("DisplayWallpaper")
+                                strHide.Add("Domain")
+                                strHide.Add("ExtApp")
+                                strHide.Add("ICAEncryption")
+                                strHide.Add("PuttySession")
+                                strHide.Add("RDGatewayDomain")
+                                strHide.Add("RDGatewayHostname")
+                                strHide.Add("RDGatewayPassword")
+                                strHide.Add("RDGatewayUsageMethod")
+                                strHide.Add("RDGatewayUseConnectionCredentials")
+                                strHide.Add("RDGatewayUsername")
+                                strHide.Add("RDPAuthenticationLevel")
+                                strHide.Add("RedirectDiskDrives")
+                                strHide.Add("RedirectKeys")
+                                strHide.Add("RedirectPorts")
+                                strHide.Add("RedirectPrinters")
+                                strHide.Add("RedirectSmartCards")
+                                strHide.Add("RedirectSound")
+                                strHide.Add("Resolution")
+                                strHide.Add("UseConsoleSession")
+                                strHide.Add("VNCAuthMode")
+                                strHide.Add("VNCColors")
+                                strHide.Add("VNCCompression")
+                                strHide.Add("VNCEncoding")
+                                strHide.Add("VNCProxyIP")
+                                strHide.Add("VNCProxyPassword")
+                                strHide.Add("VNCProxyPort")
+                                strHide.Add("VNCProxyType")
+                                strHide.Add("VNCProxyUsername")
+                                strHide.Add("VNCSmartSizeMode")
+                                strHide.Add("VNCViewOnly")
                             Case mRemoteNG.Connection.Protocol.Protocols.HTTPS
-                                strHide &= "ExtApp;CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;ICAEncryption;RDPAuthenticationLevel;PuttySession;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                                strHide.Add("CacheBitmaps")
+                                strHide.Add("Colors")
+                                strHide.Add("DisplayThemes")
+                                strHide.Add("DisplayWallpaper")
+                                strHide.Add("Domain")
+                                strHide.Add("ExtApp")
+                                strHide.Add("ICAEncryption")
+                                strHide.Add("PuttySession")
+                                strHide.Add("RDGatewayDomain")
+                                strHide.Add("RDGatewayHostname")
+                                strHide.Add("RDGatewayPassword")
+                                strHide.Add("RDGatewayUsageMethod")
+                                strHide.Add("RDGatewayUseConnectionCredentials")
+                                strHide.Add("RDGatewayUsername")
+                                strHide.Add("RDPAuthenticationLevel")
+                                strHide.Add("RedirectDiskDrives")
+                                strHide.Add("RedirectKeys")
+                                strHide.Add("RedirectPorts")
+                                strHide.Add("RedirectPrinters")
+                                strHide.Add("RedirectSmartCards")
+                                strHide.Add("RedirectSound;Resolution")
+                                strHide.Add("UseConsoleSession")
+                                strHide.Add("VNCAuthMode")
+                                strHide.Add("VNCColors")
+                                strHide.Add("VNCCompression")
+                                strHide.Add("VNCEncoding")
+                                strHide.Add("VNCProxyIP")
+                                strHide.Add("VNCProxyPassword")
+                                strHide.Add("VNCProxyPort")
+                                strHide.Add("VNCProxyType")
+                                strHide.Add("VNCProxyUsername")
+                                strHide.Add("VNCSmartSizeMode")
+                                strHide.Add("VNCViewOnly")
                             Case mRemoteNG.Connection.Protocol.Protocols.ICA
-                                strHide &= "ExtApp;DisplayThemes;DisplayWallpaper;PuttySession;RDPAuthenticationLevel;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;UseConsoleSession;RenderingEngine;Port;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                                strHide.Add("DisplayThemes")
+                                strHide.Add("DisplayWallpaper")
+                                strHide.Add("ExtApp")
+                                strHide.Add("Port")
+                                strHide.Add("PuttySession")
+                                strHide.Add("RDGatewayDomain")
+                                strHide.Add("RDGatewayHostname")
+                                strHide.Add("RDGatewayPassword")
+                                strHide.Add("RDGatewayUsageMethod")
+                                strHide.Add("RDGatewayUseConnectionCredentials")
+                                strHide.Add("RDGatewayUsername")
+                                strHide.Add("RDPAuthenticationLevel")
+                                strHide.Add("RedirectDiskDrives")
+                                strHide.Add("RedirectKeys")
+                                strHide.Add("RedirectPorts")
+                                strHide.Add("RedirectPrinters")
+                                strHide.Add("RedirectSmartCards")
+                                strHide.Add("RedirectSound")
+                                strHide.Add("RenderingEngine")
+                                strHide.Add("UseConsoleSession")
+                                strHide.Add("VNCAuthMode")
+                                strHide.Add("VNCColors")
+                                strHide.Add("VNCCompression")
+                                strHide.Add("VNCEncoding")
+                                strHide.Add("VNCProxyIP")
+                                strHide.Add("VNCProxyPassword")
+                                strHide.Add("VNCProxyPort")
+                                strHide.Add("VNCProxyType")
+                                strHide.Add("VNCProxyUsername")
+                                strHide.Add("VNCSmartSizeMode")
+                                strHide.Add("VNCViewOnly")
                             Case mRemoteNG.Connection.Protocol.Protocols.IntApp
-                                strHide &= "CacheBitmaps;Colors;DisplayThemes;DisplayWallpaper;Domain;PuttySession;ICAEncryption;RDPAuthenticationLevel;RedirectDiskDrives;RedirectKeys;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;Resolution;UseConsoleSession;RenderingEngine;VNCAuthMode;VNCColors;VNCCompression;VNCEncoding;VNCProxyIP;VNCProxyPassword;VNCProxyPort;VNCProxyType;VNCProxyUsername;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                                strHide.Add("CacheBitmaps")
+                                strHide.Add("Colors")
+                                strHide.Add("DisplayThemes")
+                                strHide.Add("DisplayWallpaper")
+                                strHide.Add("Domain")
+                                strHide.Add("ICAEncryption")
+                                strHide.Add("PuttySession")
+                                strHide.Add("RDGatewayDomain")
+                                strHide.Add("RDGatewayHostname")
+                                strHide.Add("RDGatewayPassword")
+                                strHide.Add("RDGatewayUsageMethod")
+                                strHide.Add("RDGatewayUseConnectionCredentials")
+                                strHide.Add("RDGatewayUsername")
+                                strHide.Add("RDPAuthenticationLevel")
+                                strHide.Add("RedirectDiskDrives")
+                                strHide.Add("RedirectKeys")
+                                strHide.Add("RedirectPorts")
+                                strHide.Add("RedirectPrinters")
+                                strHide.Add("RedirectSmartCards")
+                                strHide.Add("RedirectSound")
+                                strHide.Add("RenderingEngine")
+                                strHide.Add("Resolution")
+                                strHide.Add("UseConsoleSession")
+                                strHide.Add("VNCAuthMode")
+                                strHide.Add("VNCColors")
+                                strHide.Add("VNCCompression")
+                                strHide.Add("VNCEncoding")
+                                strHide.Add("VNCProxyIP")
+                                strHide.Add("VNCProxyPassword")
+                                strHide.Add("VNCProxyPort")
+                                strHide.Add("VNCProxyType")
+                                strHide.Add("VNCProxyUsername")
+                                strHide.Add("VNCSmartSizeMode")
+                                strHide.Add("VNCViewOnly")
                         End Select
 
                         If conI.IsDefault = False Then
                             With conI.Inherit
                                 If .CacheBitmaps Then
-                                    strHide &= "CacheBitmaps;"
+                                    strHide.Add("CacheBitmaps")
                                 End If
 
                                 If .Colors Then
-                                    strHide &= "Colors;"
+                                    strHide.Add("Colors")
                                 End If
 
                                 If .Description Then
-                                    strHide &= "Description;"
+                                    strHide.Add("Description")
                                 End If
 
                                 If .DisplayThemes Then
-                                    strHide &= "DisplayThemes;"
+                                    strHide.Add("DisplayThemes")
                                 End If
 
                                 If .DisplayWallpaper Then
-                                    strHide &= "DisplayWallpaper;"
+                                    strHide.Add("DisplayWallpaper")
                                 End If
 
                                 If .Domain Then
-                                    strHide &= "Domain;"
+                                    strHide.Add("Domain")
                                 End If
 
                                 If .Icon Then
-                                    strHide &= "Icon;"
+                                    strHide.Add("Icon")
                                 End If
 
                                 If .Password Then
-                                    strHide &= "Password;"
+                                    strHide.Add("Password")
                                 End If
 
                                 If .Port Then
-                                    strHide &= "Port;"
+                                    strHide.Add("Port")
                                 End If
 
                                 If .Protocol Then
-                                    strHide &= "Protocol;"
+                                    strHide.Add("Protocol")
                                 End If
 
                                 If .PuttySession Then
-                                    strHide &= "PuttySession;"
+                                    strHide.Add("PuttySession")
                                 End If
 
                                 If .RedirectDiskDrives Then
-                                    strHide &= "RedirectDiskDrives;"
+                                    strHide.Add("RedirectDiskDrives")
                                 End If
 
                                 If .RedirectKeys Then
-                                    strHide &= "RedirectKeys;"
+                                    strHide.Add("RedirectKeys")
                                 End If
 
                                 If .RedirectPorts Then
-                                    strHide &= "RedirectPorts;"
+                                    strHide.Add("RedirectPorts")
                                 End If
 
                                 If .RedirectPrinters Then
-                                    strHide &= "RedirectPrinters;"
+                                    strHide.Add("RedirectPrinters")
                                 End If
 
                                 If .RedirectSmartCards Then
-                                    strHide &= "RedirectSmartCards;"
+                                    strHide.Add("RedirectSmartCards")
                                 End If
 
                                 If .RedirectSound Then
-                                    strHide &= "RedirectSound;"
+                                    strHide.Add("RedirectSound")
                                 End If
 
                                 If .Resolution Then
-                                    strHide &= "Resolution;"
+                                    strHide.Add("Resolution")
                                 End If
 
                                 If .UseConsoleSession Then
-                                    strHide &= "UseConsoleSession;"
+                                    strHide.Add("UseConsoleSession")
                                 End If
 
                                 If .RenderingEngine Then
-                                    strHide &= "RenderingEngine;"
+                                    strHide.Add("RenderingEngine")
                                 End If
 
                                 If .ICAEncryption Then
-                                    strHide &= "ICAEncryption;"
+                                    strHide.Add("ICAEncryption")
                                 End If
 
                                 If .RDPAuthenticationLevel Then
-                                    strHide &= "RDPAuthenticationLevel;"
+                                    strHide.Add("RDPAuthenticationLevel")
                                 End If
 
                                 If .Username Then
-                                    strHide &= "Username;"
+                                    strHide.Add("Username")
                                 End If
 
                                 If .Panel Then
-                                    strHide &= "Panel;"
+                                    strHide.Add("Panel")
                                 End If
 
                                 If conI.IsContainer Then
-                                    strHide &= "Hostname;"
+                                    strHide.Add("Hostname")
                                 End If
 
                                 If .PreExtApp Then
-                                    strHide &= "PreExtApp;"
+                                    strHide.Add("PreExtApp")
                                 End If
 
                                 If .PostExtApp Then
-                                    strHide &= "PostExtApp;"
+                                    strHide.Add("PostExtApp")
                                 End If
 
                                 If .MacAddress Then
-                                    strHide &= "MacAddress;"
+                                    strHide.Add("MacAddress")
                                 End If
 
                                 If .UserField Then
-                                    strHide &= "UserField;"
+                                    strHide.Add("UserField")
                                 End If
 
                                 If .VNCAuthMode Then
-                                    strHide &= "VNCAuthMode;"
+                                    strHide.Add("VNCAuthMode")
                                 End If
 
                                 If .VNCColors Then
-                                    strHide &= "VNCColors;"
+                                    strHide.Add("VNCColors")
                                 End If
 
                                 If .VNCCompression Then
-                                    strHide &= "VNCCompression;"
+                                    strHide.Add("VNCCompression")
                                 End If
 
                                 If .VNCEncoding Then
-                                    strHide &= "VNCEncoding;"
+                                    strHide.Add("VNCEncoding")
                                 End If
 
                                 If .VNCProxyIP Then
-                                    strHide &= "VNCProxyIP;"
+                                    strHide.Add("VNCProxyIP")
                                 End If
 
                                 If .VNCProxyPassword Then
-                                    strHide &= "VNCProxyPassword;"
+                                    strHide.Add("VNCProxyPassword")
                                 End If
 
                                 If .VNCProxyPort Then
-                                    strHide &= "VNCProxyPort;"
+                                    strHide.Add("VNCProxyPort")
                                 End If
 
                                 If .VNCProxyType Then
-                                    strHide &= "VNCProxyType;"
+                                    strHide.Add("VNCProxyType")
                                 End If
 
                                 If .VNCProxyUsername Then
-                                    strHide &= "VNCProxyUsername;"
+                                    strHide.Add("VNCProxyUsername")
                                 End If
 
                                 If .VNCViewOnly Then
-                                    strHide &= "VNCViewOnly;"
+                                    strHide.Add("VNCViewOnly")
                                 End If
 
                                 If .VNCSmartSizeMode Then
-                                    strHide &= "VNCSmartSizeMode;"
+                                    strHide.Add("VNCSmartSizeMode")
                                 End If
 
                                 If .ExtApp Then
-                                    strHide &= "ExtApp"
+                                    strHide.Add("ExtApp")
+                                End If
+
+                                If .RDGatewayUsageMethod Then
+                                    strHide.Add("RDGatewayUsageMethod")
                                 End If
 
                                 If .RDGatewayHostname Then
-                                    strHide &= "RDGatewayHostname"
+                                    strHide.Add("RDGatewayHostname")
+                                End If
+
+                                If .RDGatewayUsername Then
+                                    strHide.Add("RDGatewayUsername")
+                                End If
+
+                                If .RDGatewayPassword Then
+                                    strHide.Add("RDGatewayPassword")
+                                End If
+
+                                If .RDGatewayDomain Then
+                                    strHide.Add("RDGatewayDomain")
+                                End If
+
+                                If .RDGatewayUseConnectionCredentials Then
+                                    strHide.Add("RDGatewayUseConnectionCredentials")
+                                End If
+
+                                If .RDGatewayHostname Then
+                                    strHide.Add("RDGatewayHostname")
                                 End If
                             End With
                         Else
-                            strHide = "Hostname;Name;"
+                            strHide.Add("Hostname")
+                            strHide.Add("Name")
                         End If
                     ElseIf TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Then
-                        strHide &= "TreeNode;"
-                    Else
-                        strHide = ";"
+                        strHide.Add("TreeNode")
                     End If
 
-                    Me.pGrid.HiddenProperties = strHide.Split(";")
+                    Me.pGrid.HiddenProperties = strHide.ToArray
 
                     Me.pGrid.Refresh()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideGridItems (UI.Window.Config) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridHideItemsFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -802,7 +1169,7 @@ Namespace UI
                         Me.cMenIcons.Show(mPos)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "btnIcon_Click (UI.Window.Config) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridButtonIconClickFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -818,7 +1185,7 @@ Namespace UI
                         App.Runtime.SaveConnectionsBG()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "IconMenu_Click (UI.Window.Config) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridMenuClickFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -884,7 +1251,7 @@ Namespace UI
                     pThread.IsBackground = True
                     pThread.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SetHostStatus (UI.Window.Config) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridSetHostStatusFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

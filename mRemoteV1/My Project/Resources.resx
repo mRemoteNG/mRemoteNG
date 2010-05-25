@@ -2358,4 +2358,37 @@ Error Description: {1}</value>
 	<data name="strQuick" xml:space="preserve">
 		<value>Quick: {0}</value>
 	</data>
+	<data name="strSessionKillFailed" xml:space="preserve">
+		<value>Kill Session Background failed</value>
+	</data>
+	<data name="strSessionGetFailed" xml:space="preserve">
+		<value>Get Sessions Background failed</value>
+	</data>
+	<data name="strConfigPropertyGridObjectFailed" xml:space="preserve">
+		<value>Property Grid object failed!</value>
+	</data>
+	<data name="strConfigUiLoadFailed" xml:space="preserve">
+		<value>Config UI load failed!</value>
+	</data>
+	<data name="strConfigPropertyGridValueFailed" xml:space="preserve">
+		<value>pGrid_PopertyValueChanged failed!</value>
+	</data>
+	<data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
+		<value>ShowHideGridItems failed!</value>
+	</data>
+	<data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
+		<value>btnIcon_Click failed!</value>
+	</data>
+	<data name="strConfigPropertyGridMenuClickFailed" xml:space="preserve">
+		<value>IconMenu_Click failed!</value>
+	</data>
+	<data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
+		<value>SetHostStatus failed!</value>
+	</data>
+	<data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
+		<value>Couldn't set default port!</value>
+	</data>
+	<data name="strPropertyNameRDGatewayDomainInherit" xml:space="preserve">
+		<value>Inherit Gateway Domain</value>
+	</data>
 </root>

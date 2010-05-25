@@ -512,6 +512,7 @@ Namespace App
                 My.Settings.InhDefaultPostExtApp = .PostExtApp
                 My.Settings.InhDefaultMacAddress = .MacAddress
                 My.Settings.InhDefaultUserField = .UserField
+                ' VNC inheritance
                 My.Settings.InhDefaultVNCAuthMode = .VNCAuthMode
                 My.Settings.InhDefaultVNCColors = .VNCColors
                 My.Settings.InhDefaultVNCCompression = .VNCCompression
@@ -523,7 +524,15 @@ Namespace App
                 My.Settings.InhDefaultVNCProxyUsername = .VNCProxyUsername
                 My.Settings.InhDefaultVNCSmartSizeMode = .VNCSmartSizeMode
                 My.Settings.InhDefaultVNCViewOnly = .VNCViewOnly
+                ' Ext. App inheritance
                 My.Settings.InhDefaultExtApp = .ExtApp
+                ' RDP gateway inheritance
+                My.Settings.InhDefaultRDGatewayUsageMethod = .RDGatewayUsageMethod
+                My.Settings.InhDefaultRDGatewayHostname = .RDGatewayHostname
+                My.Settings.InhDefaultRDGatewayUsername = .RDGatewayUsername
+                My.Settings.InhDefaultRDGatewayPassword = .RDGatewayPassword
+                My.Settings.InhDefaultRDGatewayDomain = .RDGatewayDomain
+                My.Settings.InhDefaultRDGatewayUseConnectionCredentials = .RDGatewayUseConnectionCredentials
             End With
         End Sub
 #End Region

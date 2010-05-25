@@ -10,7 +10,7 @@ Namespace Root
         End Sub
 
 #Region "Properties"
-        Private _Name As String = "Connections"
+        Private _Name As String = My.Resources.strConnections
         <LocalizedCategory("strCategoryDisplay", 1), _
             Browsable(True), _
             [ReadOnly](False), _
