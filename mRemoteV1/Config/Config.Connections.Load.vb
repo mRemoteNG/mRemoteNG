@@ -982,14 +982,18 @@ Namespace Config
                         End If
 
                         If Me.confVersion > 2.1 Then '2.2
+                            ' Get settings
                             conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), .Attributes("RDGatewayUsageMethod").Value)
                             conI.RDGatewayHostname = .Attributes("RDGatewayHostname").Value
                             conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), .Attributes("RDGatewayUseConnectionCredentials").Value)
                             conI.RDGatewayUsername = .Attributes("RDGatewayUsername").Value
                             conI.RDGatewayPassword = Security.Crypt.Decrypt(.Attributes("RDGatewayPassword").Value, pW)
                             conI.RDGatewayDomain = .Attributes("RDGatewayDomain").Value
+
+                            ' Get inheritance settings
                             conI.Inherit.RDGatewayUsageMethod = .Attributes("InheritRDGatewayUsageMethod").Value
                             conI.Inherit.RDGatewayHostname = .Attributes("InheritRDGatewayHostname").Value
+                            conI.Inherit.RDGatewayUseConnectionCredentials = .Attributes("InheritRDGatewayUseConnectionCredentials").Value
                             conI.Inherit.RDGatewayUsername = .Attributes("InheritRDGatewayUsername").Value
                             conI.Inherit.RDGatewayPassword = .Attributes("InheritRDGatewayPassword").Value
                             conI.Inherit.RDGatewayDomain = .Attributes("InheritRDGatewayDomain").Value
