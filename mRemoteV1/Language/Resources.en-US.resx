@@ -123,9 +123,6 @@
 	<data name="strPropertyNameColors" xml:space="preserve">
     <value>Colors</value>
   </data>
-	<data name="strPropertyNameInheritColors" xml:space="preserve">
-    <value>Inherit Colors</value>
-  </data>
 	<data name="strComponentsCheck" xml:space="preserve">
 		<value>Components Check</value>
 	</data>

@@ -2214,6 +2214,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit {0} ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strFormatInherit() As String
+            Get
+                Return ResourceManager.GetString("strFormatInherit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Description of inherited property: {0} ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strFormatInheritDescription() As String
+            Get
+                Return ResourceManager.GetString("strFormatInheritDescription", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Free ähnelt.
         '''</summary>
         Friend ReadOnly Property strFree() As String
@@ -3691,6 +3709,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Toggle all inheritance options. ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionAll() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionAll", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Select which authentication level this connection should use. ähnelt.
         '''</summary>
         Friend ReadOnly Property strPropertyDescriptionAuthenticationLevel() As String
@@ -4105,6 +4132,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die All ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameAll() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameAll", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Server Authentication ähnelt.
         '''</summary>
         Friend ReadOnly Property strPropertyNameAuthenticationLevel() As String
@@ -4240,366 +4276,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit All ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritAll() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritAll", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Server Authentication ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritAuthenticationLevel() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritAuthenticationLevel", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Authentication Mode ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritAuthenticationMode() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritAuthenticationMode", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Cache Bitmaps ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritCacheBitmaps() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritCacheBitmaps", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Colours ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritColors() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritColors", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Compression ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritCompression() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritCompression", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Description ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritDescription() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritDescription", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Display Themes ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritDisplayThemes() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritDisplayThemes", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Display Wallpaper ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritDisplayWallpaper() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritDisplayWallpaper", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Domain ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritDomain() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritDomain", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Encoding ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritEncoding() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritEncoding", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Encryption Strength ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritEncryptionStrength() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritEncryptionStrength", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit External Tool ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritExternalTool() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritExternalTool", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit External Tool After ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritExternalToolAfter() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritExternalToolAfter", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit External Tool Before ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritExternalToolBefore() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritExternalToolBefore", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Icon ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritIcon() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritIcon", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit MAC Address ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritMACAddress() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritMACAddress", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Panel ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritPanel() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritPanel", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Password ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritPassword() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritPassword", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Port ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritPort() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritPort", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Protocol ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritProtocol() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritProtocol", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit PuTTY Session ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritPuttySession() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritPuttySession", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Disk Drives ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritRedirectDrives() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritRedirectDrives", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Key Combinations ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritRedirectKeys() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritRedirectKeys", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Ports ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritRedirectPorts() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritRedirectPorts", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Printers ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritRedirectPrinters() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritRedirectPrinters", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Smart Cards ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritRedirectSmartCards() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritRedirectSmartCards", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Sounds ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritRedirectSounds() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritRedirectSounds", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Rendering Engine ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritRenderingEngine() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritRenderingEngine", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Resolution ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritResolution() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritResolution", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit SmartSize Mode ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritSmartSizeMode() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritSmartSizeMode", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Use Console Session ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritUseConsoleSession() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritUseConsoleSession", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit User Field ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritUser1() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritUser1", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Username ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritUsername() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritUsername", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit View Only ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritViewOnly() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritViewOnly", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Proxy Address ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritVNCProxyAddress() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritVNCProxyAddress", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Proxy Password ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritVNCProxyPassword() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritVNCProxyPassword", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Proxy Port ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritVNCProxyPort() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritVNCProxyPort", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Proxy Type ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritVNCProxyType() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritVNCProxyType", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Proxy Username ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameInheritVNCProxyUsername() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameInheritVNCProxyUsername", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die MAC Address ähnelt.
         '''</summary>
         Friend ReadOnly Property strPropertyNameMACAddress() As String
@@ -4672,29 +4348,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Gateway Domain ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameRDGatewayDomainInherit() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameRDGatewayDomainInherit", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Gateway Hostname ähnelt.
         '''</summary>
         Friend ReadOnly Property strPropertyNameRDGatewayHostname() As String
             Get
                 Return ResourceManager.GetString("strPropertyNameRDGatewayHostname", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Gateway Hostname ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameRDGatewayHostnameInherit() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameRDGatewayHostnameInherit", resourceCulture)
             End Get
         End Property
         
@@ -4708,15 +4366,6 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Remote Desktop Gateway Password ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameRDGatewayPasswordInherit() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameRDGatewayPasswordInherit", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Use Gateway ähnelt.
         '''</summary>
         Friend ReadOnly Property strPropertyNameRDGatewayUsageMethod() As String
@@ -4726,29 +4375,11 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Use Gateway ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameRDGatewayUsageMethodInherit() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameRDGatewayUsageMethodInherit", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Gateway Credentials ähnelt.
         '''</summary>
         Friend ReadOnly Property strPropertyNameRDGatewayUseConnectionCredentials() As String
             Get
                 Return ResourceManager.GetString("strPropertyNameRDGatewayUseConnectionCredentials", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Gateway Credentials ähnelt.
-        '''</summary>
-        Friend ReadOnly Property strPropertyNameRDGatewayUseConnectionCredentialsInherit() As String
-            Get
-                Return ResourceManager.GetString("strPropertyNameRDGatewayUseConnectionCredentialsInherit", resourceCulture)
             End Get
         End Property
         

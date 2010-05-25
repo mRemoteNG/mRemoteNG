@@ -73,5 +73,58 @@ Namespace Tools
                 End Get
             End Property
         End Class
+
+#Region "Special localization - with String.Format"
+
+        <AttributeUsage(AttributeTargets.All, AllowMultiple:=False, Inherited:=True)> _
+        Public Class LocalizedDisplayNameInheritAttribute
+            Inherits DisplayNameAttribute
+
+            Private Localized As Boolean
+
+            Public Sub New(ByVal value As String)
+                MyBase.New(value)
+
+                Me.Localized = False
+            End Sub
+
+            Public Overrides ReadOnly Property DisplayName() As String
+                Get
+                    If Not Me.Localized Then
+                        Me.Localized = True
+                        Me.DisplayNameValue = String.Format(My.Resources.strFormatInherit, My.Resources.ResourceManager.GetString(Me.DisplayNameValue))
+                    End If
+
+                    Return MyBase.DisplayName
+                End Get
+            End Property
+        End Class
+
+        <AttributeUsage(AttributeTargets.All, AllowMultiple:=False, Inherited:=True)> _
+        Public Class LocalizedDescriptionInheritAttribute
+            Inherits DescriptionAttribute
+
+            Private Localized As Boolean
+
+            Public Sub New(ByVal value As String)
+                MyBase.New(value)
+
+                Me.Localized = False
+            End Sub
+
+            Public Overrides ReadOnly Property Description() As String
+                Get
+                    If Not Me.Localized Then
+                        Me.Localized = True
+                        Me.DescriptionValue = String.Format(My.Resources.strFormatInheritDescription, My.Resources.ResourceManager.GetString(Me.DescriptionValue))
+                    End If
+
+                    Return MyBase.Description
+                End Get
+            End Property
+        End Class
+#End Region
+
     End Class
+
 End Namespace
