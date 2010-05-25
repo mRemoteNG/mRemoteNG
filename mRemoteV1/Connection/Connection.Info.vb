@@ -1451,7 +1451,6 @@ Namespace Connection
 #End Region
 
 #Region "Inheritance"
-
         Public Class Inheritance
             Public Sub New(ByVal Parent As Object, Optional ByVal InheritEverything As Boolean = False)
                 Me._Parent = Parent
@@ -1552,9 +1551,11 @@ Namespace Connection
 #Region "1 General"
             <LocalizedCategory("strCategoryGeneral", 1), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritAll"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameAll"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionAll"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property EverythingInherited() As Boolean
+                'LocalizedDisplayName("strPropertyNameInheritAll"), _
                 Get
                     If Me._CacheBitmaps And Me._Colors And Me._Description And Me._DisplayThemes And Me._DisplayWallpaper _
                     And Me._Domain And Me._Icon And Me._Password And Me._Port And Me._Protocol And Me._PuttySession _
@@ -1581,7 +1582,8 @@ Namespace Connection
             Private _Description As Boolean = My.Settings.InhDefaultDescription
             <LocalizedCategory("strCategoryDisplay", 2), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritDescription"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameDescription"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionDescription"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property Description() As Boolean
                 Get
@@ -1595,7 +1597,8 @@ Namespace Connection
             Private _Icon As Boolean = My.Settings.InhDefaultIcon
             <LocalizedCategory("strCategoryDisplay", 2), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritIcon"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameIcon"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionIcon"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property Icon() As Boolean
                 Get
@@ -1609,7 +1612,8 @@ Namespace Connection
             Private _Panel As Boolean = My.Settings.InhDefaultPanel
             <LocalizedCategory("strCategoryDisplay", 2), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritPanel"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNamePanel"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionPanel"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property Panel() As Boolean
                 Get
@@ -1624,7 +1628,8 @@ Namespace Connection
             Private _Username As Boolean = My.Settings.InhDefaultUsername
             <LocalizedCategory("strCategoryConnection", 3), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritUsername"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameUsername"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionUsername"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property Username() As Boolean
                 Get
@@ -1638,7 +1643,8 @@ Namespace Connection
             Private _Password As Boolean = My.Settings.InhDefaultPassword
             <LocalizedCategory("strCategoryConnection", 3), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritPassword"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNamePassword"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionPassword"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property Password() As Boolean
                 Get
@@ -1652,7 +1658,8 @@ Namespace Connection
             Private _Domain As Boolean = My.Settings.InhDefaultDomain
             <LocalizedCategory("strCategoryConnection", 3), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritDomain"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameDomain"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionDomain"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property Domain() As Boolean
                 Get
@@ -1667,7 +1674,8 @@ Namespace Connection
             Private _Protocol As Boolean = My.Settings.InhDefaultProtocol
             <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritProtocol"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameProtocol"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionProtocol"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property Protocol() As Boolean
                 Get
@@ -1681,7 +1689,8 @@ Namespace Connection
             Private _ExtApp As Boolean = My.Settings.InhDefaultExtApp
             <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritExternalTool"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameExternalTool"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionExternalTool"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property ExtApp() As Boolean
                 Get
@@ -1695,7 +1704,8 @@ Namespace Connection
             Private _Port As Boolean = My.Settings.InhDefaultPort
             <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritPort"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNamePort"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionPort"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property Port() As Boolean
                 Get
@@ -1709,7 +1719,8 @@ Namespace Connection
             Private _PuttySession As Boolean = My.Settings.InhDefaultPuttySession
             <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritPuttySession"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNamePuttySession"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionPuttySession"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property PuttySession() As Boolean
                 Get
@@ -1723,7 +1734,8 @@ Namespace Connection
             Private _ICAEncryption As Boolean = My.Settings.InhDefaultICAEncryptionStrength
             <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritEncryptionStrength"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameEncryptionStrength"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionEncryptionStrength"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property ICAEncryption() As Boolean
                 Get
@@ -1737,7 +1749,8 @@ Namespace Connection
             Private _RDPAuthenticationLevel As Boolean = My.Settings.InhDefaultRDPAuthenticationLevel
             <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritAuthenticationLevel"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameAuthenticationLevel"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionAuthenticationLevel"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDPAuthenticationLevel() As Boolean
                 Get
@@ -1751,7 +1764,8 @@ Namespace Connection
             Private _RenderingEngine As Boolean = My.Settings.InhDefaultRenderingEngine
             <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritRenderingEngine"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRenderingEngine"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRenderingEngine"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RenderingEngine() As Boolean
                 Get
@@ -1765,7 +1779,8 @@ Namespace Connection
             Private _UseConsoleSession As Boolean = My.Settings.InhDefaultUseConsoleSession
             <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritUseConsoleSession"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameUseConsoleSession"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionUseConsoleSession"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property UseConsoleSession() As Boolean
                 Get
@@ -1780,7 +1795,8 @@ Namespace Connection
             Private _RDGatewayUsageMethod As Boolean = My.Settings.InhDefaultRDGatewayUsageMethod
             <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameRDGatewayUsageMethodInherit"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRDGatewayUsageMethod"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDGatewayUsageMethod"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDGatewayUsageMethod() As Boolean
                 Get
@@ -1794,7 +1810,8 @@ Namespace Connection
             Private _RDGatewayHostname As Boolean = My.Settings.InhDefaultRDGatewayHostname
             <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameRDGatewayHostnameInherit"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRDGatewayHostname"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDGatewayHostname"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDGatewayHostname() As Boolean
                 Get
@@ -1808,7 +1825,8 @@ Namespace Connection
             Private _RDGatewayUseConnectionCredentials As Boolean = My.Settings.InhDefaultRDGatewayUseConnectionCredentials
             <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameRDGatewayUseConnectionCredentialsInherit"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRDGatewayUseConnectionCredentials"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDGatewayUseConnectionCredentials"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDGatewayUseConnectionCredentials() As Boolean
                 Get
@@ -1822,8 +1840,8 @@ Namespace Connection
             Private _RDGatewayUsername As Boolean = My.Settings.InhDefaultRDGatewayUsername
             <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameRDGatewayUsername"), _
-                LocalizedDescription("strPropertyDescriptionRDGatewayUsername"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRDGatewayUsername"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDGatewayUsername"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDGatewayUsername() As Boolean
                 Get
@@ -1837,8 +1855,8 @@ Namespace Connection
             Private _RDGatewayPassword As Boolean = My.Settings.InhDefaultRDGatewayPassword
             <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameRDGatewayPasswordInherit"), _
-                LocalizedDescription("strPropertyDescriptionRDGatewayPasswordInherit"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRDGatewayPassword"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDGatewayPassword"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDGatewayPassword() As Boolean
                 Get
@@ -1852,7 +1870,8 @@ Namespace Connection
             Private _RDGatewayDomain As Boolean = My.Settings.InhDefaultRDGatewayDomain
             <LocalizedCategory("strCategoryGateway", 5), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameRDGatewayDomainInherit"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRDGatewayDomain"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDGatewayDomain"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RDGatewayDomain() As Boolean
                 Get
@@ -1867,7 +1886,8 @@ Namespace Connection
             Private _Resolution As Boolean = My.Settings.InhDefaultResolution
             <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritResolution"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameResolution"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionResolution"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property Resolution() As Boolean
                 Get
@@ -1881,7 +1901,8 @@ Namespace Connection
             Private _Colors As Boolean = My.Settings.InhDefaultColors
             <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritColors"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameColors"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionColors"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property Colors() As Boolean
                 Get
@@ -1895,7 +1916,8 @@ Namespace Connection
             Private _CacheBitmaps As Boolean = My.Settings.InhDefaultCacheBitmaps
             <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritCacheBitmaps"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameCacheBitmaps"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionCacheBitmaps"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property CacheBitmaps() As Boolean
                 Get
@@ -1909,7 +1931,8 @@ Namespace Connection
             Private _DisplayWallpaper As Boolean = My.Settings.InhDefaultDisplayWallpaper
             <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritDisplayWallpaper"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameDisplayWallpaper"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionDisplayWallpaper"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property DisplayWallpaper() As Boolean
                 Get
@@ -1923,7 +1946,8 @@ Namespace Connection
             Private _DisplayThemes As Boolean = My.Settings.InhDefaultDisplayThemes
             <LocalizedCategory("strCategoryAppearance", 6), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritDisplayThemes"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameDisplayThemes"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionDisplayThemes"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property DisplayThemes() As Boolean
                 Get
@@ -1938,7 +1962,8 @@ Namespace Connection
             Private _RedirectKeys As Boolean = My.Settings.InhDefaultRedirectKeys
             <LocalizedCategory("strCategoryRedirect", 7), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritRedirectKeys"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectKeys"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectKeys"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RedirectKeys() As Boolean
                 Get
@@ -1952,7 +1977,8 @@ Namespace Connection
             Private _RedirectDiskDrives As Boolean = My.Settings.InhDefaultRedirectDiskDrives
             <LocalizedCategory("strCategoryRedirect", 7), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritRedirectDrives"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectDrives"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectDrives"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RedirectDiskDrives() As Boolean
                 Get
@@ -1966,7 +1992,8 @@ Namespace Connection
             Private _RedirectPrinters As Boolean = My.Settings.InhDefaultRedirectPrinters
             <LocalizedCategory("strCategoryRedirect", 7), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritRedirectPrinters"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectPrinters"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectPrinters"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RedirectPrinters() As Boolean
                 Get
@@ -1980,7 +2007,8 @@ Namespace Connection
             Private _RedirectPorts As Boolean = My.Settings.InhDefaultRedirectPorts
             <LocalizedCategory("strCategoryRedirect", 7), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritRedirectPorts"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectPorts"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectPorts"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RedirectPorts() As Boolean
                 Get
@@ -1994,7 +2022,8 @@ Namespace Connection
             Private _RedirectSmartCards As Boolean = My.Settings.InhDefaultRedirectSmartCards
             <LocalizedCategory("strCategoryRedirect", 7), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritRedirectSmartCards"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectSmartCards"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectSmartCards"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RedirectSmartCards() As Boolean
                 Get
@@ -2008,7 +2037,8 @@ Namespace Connection
             Private _RedirectSound As Boolean = My.Settings.InhDefaultRedirectSound
             <LocalizedCategory("strCategoryRedirect", 7), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritRedirectSounds"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectSounds"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectSounds"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property RedirectSound() As Boolean
                 Get
@@ -2023,7 +2053,8 @@ Namespace Connection
             Private _PreExtApp As Boolean = My.Settings.InhDefaultPreExtApp
             <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritExternalToolBefore"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameExternalToolBefore"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionExternalToolBefore"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property PreExtApp() As Boolean
                 Get
@@ -2037,7 +2068,8 @@ Namespace Connection
             Private _PostExtApp As Boolean = My.Settings.InhDefaultPostExtApp
             <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritExternalToolAfter"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameExternalToolAfter"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionExternalToolAfter"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property PostExtApp() As Boolean
                 Get
@@ -2051,7 +2083,8 @@ Namespace Connection
             Private _MacAddress As Boolean = My.Settings.InhDefaultMacAddress
             <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritMACAddress"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameMACAddress"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionMACAddress"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property MacAddress() As Boolean
                 Get
@@ -2065,7 +2098,8 @@ Namespace Connection
             Private _UserField As Boolean = My.Settings.InhDefaultUserField
             <LocalizedCategory("strCategoryMiscellaneous", 8), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritUser1"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameUser1"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionUser1"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property UserField() As Boolean
                 Get
@@ -2080,7 +2114,8 @@ Namespace Connection
             Private _VNCCompression As Boolean = My.Settings.InhDefaultVNCCompression
             <LocalizedCategory("strCategoryAppearance", 9), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritCompression"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameCompression"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionCompression"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property VNCCompression() As Boolean
                 Get
@@ -2094,7 +2129,8 @@ Namespace Connection
             Private _VNCEncoding As Boolean = My.Settings.InhDefaultVNCEncoding
             <LocalizedCategory("strCategoryAppearance", 9), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritEncoding"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameEncoding"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionEncoding"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property VNCEncoding() As Boolean
                 Get
@@ -2108,7 +2144,8 @@ Namespace Connection
             Private _VNCAuthMode As Boolean = My.Settings.InhDefaultVNCAuthMode
             <LocalizedCategory("strCategoryConnection", 9), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritAuthenticationMode"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameAuthenticationMode"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionAuthenticationMode"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property VNCAuthMode() As Boolean
                 Get
@@ -2122,7 +2159,8 @@ Namespace Connection
             Private _VNCProxyType As Boolean = My.Settings.InhDefaultVNCProxyType
             <LocalizedCategory("strCategoryMiscellaneous", 9), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritVNCProxyType"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameVNCProxyType"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionVNCProxyType"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property VNCProxyType() As Boolean
                 Get
@@ -2136,7 +2174,8 @@ Namespace Connection
             Private _VNCProxyIP As Boolean = My.Settings.InhDefaultVNCProxyIP
             <LocalizedCategory("strCategoryMiscellaneous", 9), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritVNCProxyAddress"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameVNCProxyAddress"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionVNCProxyAddress"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property VNCProxyIP() As Boolean
                 Get
@@ -2150,7 +2189,8 @@ Namespace Connection
             Private _VNCProxyPort As Boolean = My.Settings.InhDefaultVNCProxyPort
             <LocalizedCategory("strCategoryMiscellaneous", 9), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritVNCProxyPort"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameVNCProxyPort"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionVNCProxyPort"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property VNCProxyPort() As Boolean
                 Get
@@ -2164,7 +2204,8 @@ Namespace Connection
             Private _VNCProxyUsername As Boolean = My.Settings.InhDefaultVNCProxyUsername
             <LocalizedCategory("strCategoryMiscellaneous", 9), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritVNCProxyUsername"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameVNCProxyUsername"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionVNCProxyUsername"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property VNCProxyUsername() As Boolean
                 Get
@@ -2178,7 +2219,8 @@ Namespace Connection
             Private _VNCProxyPassword As Boolean = My.Settings.InhDefaultVNCProxyPassword
             <LocalizedCategory("strCategoryMiscellaneous", 9), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritVNCProxyPassword"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameVNCProxyPassword"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionVNCProxyPassword"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property VNCProxyPassword() As Boolean
                 Get
@@ -2192,7 +2234,8 @@ Namespace Connection
             Private _VNCColors As Boolean = My.Settings.InhDefaultVNCColors
             <LocalizedCategory("strCategoryAppearance", 9), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritColors"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameColors"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionColors"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property VNCColors() As Boolean
                 Get
@@ -2206,7 +2249,8 @@ Namespace Connection
             Private _VNCSmartSizeMode As Boolean = My.Settings.InhDefaultVNCSmartSizeMode
             <LocalizedCategory("strCategoryAppearance", 9), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritSmartSizeMode"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameSmartSizeMode"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionSmartSizeMode"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property VNCSmartSizeMode() As Boolean
                 Get
@@ -2220,7 +2264,8 @@ Namespace Connection
             Private _VNCViewOnly As Boolean = My.Settings.InhDefaultVNCViewOnly
             <LocalizedCategory("strCategoryAppearance", 9), _
                 Browsable(True), _
-                LocalizedDisplayName("strPropertyNameInheritViewOnly"), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameViewOnly"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionViewOnly"), _
                 TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
             Public Property VNCViewOnly() As Boolean
                 Get

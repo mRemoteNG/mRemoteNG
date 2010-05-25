@@ -644,30 +644,6 @@
 	<data name="strPropertyNameIcon" xml:space="preserve">
     <value>Symbol</value>
   </data>
-	<data name="strPropertyNameInheritDescription" xml:space="preserve">
-    <value>Vererbe Beschreibung</value>
-  </data>
-	<data name="strPropertyNameInheritDomain" xml:space="preserve">
-    <value>Vererbe Domäne</value>
-  </data>
-	<data name="strPropertyNameInheritIcon" xml:space="preserve">
-    <value>Vererbe Icon</value>
-  </data>
-	<data name="strPropertyNameInheritPanel" xml:space="preserve">
-    <value>Vererbe Panel</value>
-  </data>
-	<data name="strPropertyNameInheritPassword" xml:space="preserve">
-    <value>Vererbe Passwort</value>
-  </data>
-	<data name="strPropertyNameInheritPort" xml:space="preserve">
-    <value>Vererbe Port</value>
-  </data>
-	<data name="strPropertyNameInheritProtocol" xml:space="preserve">
-    <value>Vererbe Protokoll</value>
-  </data>
-	<data name="strPropertyNameInheritUsername" xml:space="preserve">
-    <value>Vererbe Benutzername</value>
-  </data>
 	<data name="strPropertyNameName" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -823,105 +799,8 @@
     <value>Externes Programm vorher</value>
     <comment>Need translation</comment>
   </data>
-	<data name="strPropertyNameInheritAll" xml:space="preserve">
-    <value>Alles vererben</value>
-  </data>
-	<data name="strPropertyNameInheritAuthenticationLevel" xml:space="preserve">
-    <value>Vererbe Serverauthentifizierung</value>
-  </data>
-	<data name="strPropertyNameInheritAuthenticationMode" xml:space="preserve">
-    <value>Vererbe Authentication Mode</value>
-  </data>
-	<data name="strPropertyNameInheritCacheBitmaps" xml:space="preserve">
-    <value>Vererbe Cache Bitmaps</value>
-  </data>
-	<data name="strPropertyNameInheritColors" xml:space="preserve">
-    <value>Vererbe Farben</value>
-  </data>
-	<data name="strPropertyNameInheritCompression" xml:space="preserve">
-    <value>Vererbe Kompremierung</value>
-  </data>
-	<data name="strPropertyNameInheritDisplayThemes" xml:space="preserve">
-    <value>Vererbe Display Themes</value>
-  </data>
-	<data name="strPropertyNameInheritDisplayWallpaper" xml:space="preserve">
-    <value>Vererbe Display Wallpaper</value>
-  </data>
-	<data name="strPropertyNameInheritEncoding" xml:space="preserve">
-    <value>Vererbe Codierung</value>
-  </data>
-	<data name="strPropertyNameInheritEncryptionStrength" xml:space="preserve">
-    <value>Vererbe Verschlüsselungsstärke</value>
-  </data>
-	<data name="strPropertyNameInheritExternalTool" xml:space="preserve">
-    <value>Vererbe External Tool</value>
-    <comment>Need translation</comment>
-  </data>
-	<data name="strPropertyNameInheritExternalToolAfter" xml:space="preserve">
-    <value>Vererbe External Tool After</value>
-    <comment>Need translation</comment>
-  </data>
-	<data name="strPropertyNameInheritExternalToolBefore" xml:space="preserve">
-    <value>Vererbe External Tool Before</value>
-    <comment>Need translation</comment>
-  </data>
-	<data name="strPropertyNameInheritMACAddress" xml:space="preserve">
-    <value>Vererbe MAC Adresse</value>
-  </data>
-	<data name="strPropertyNameInheritPuttySession" xml:space="preserve">
-    <value>Vererbe PuTTY Sitzung</value>
-  </data>
-	<data name="strPropertyNameInheritRedirectDrives" xml:space="preserve">
-    <value>Vererbe Disk Drives</value>
-  </data>
-	<data name="strPropertyNameInheritRedirectKeys" xml:space="preserve">
-    <value>Vererbe Key Combinations</value>
-  </data>
-	<data name="strPropertyNameInheritRedirectPorts" xml:space="preserve">
-    <value>Vererbe Ports</value>
-  </data>
-	<data name="strPropertyNameInheritRedirectPrinters" xml:space="preserve">
-    <value>Vererbe Printers</value>
-  </data>
-	<data name="strPropertyNameInheritRedirectSmartCards" xml:space="preserve">
-    <value>Vererbe Smart Cards</value>
-  </data>
-	<data name="strPropertyNameInheritRedirectSounds" xml:space="preserve">
-    <value>Vererbe Sounds</value>
-  </data>
-	<data name="strPropertyNameInheritRenderingEngine" xml:space="preserve">
-    <value>Vererbe Rendering Engine</value>
-  </data>
-	<data name="strPropertyNameInheritResolution" xml:space="preserve">
-    <value>Vererbe Resolution</value>
-  </data>
-	<data name="strPropertyNameInheritSmartSizeMode" xml:space="preserve">
-    <value>Vererbe SmartSize Modus</value>
-  </data>
-	<data name="strPropertyNameInheritUseConsoleSession" xml:space="preserve">
-    <value>Vererbe Verwende Konsolen Sitzung</value>
-  </data>
-	<data name="strPropertyNameInheritUser1" xml:space="preserve">
-    <value>Vererbe Benutzer Feld</value>
-  </data>
-	<data name="strPropertyNameInheritViewOnly" xml:space="preserve">
-    <value>Vererbe View-Only</value>
-  </data>
-	<data name="strPropertyNameInheritVNCProxyAddress" xml:space="preserve">
-    <value>Vererbe Proxy Address</value>
-    <comment>Need translation</comment>
-  </data>
-	<data name="strPropertyNameInheritVNCProxyPassword" xml:space="preserve">
-    <value>Vererbe Proxy Passwort</value>
-  </data>
-	<data name="strPropertyNameInheritVNCProxyPort" xml:space="preserve">
-    <value>Vererbe Proxy Port</value>
-  </data>
-	<data name="strPropertyNameInheritVNCProxyType" xml:space="preserve">
-    <value>Vererbe Proxy Typ</value>
-  </data>
-	<data name="strPropertyNameInheritVNCProxyUsername" xml:space="preserve">
-    <value>Vererbe Proxy Benutzername</value>
+	<data name="strPropertyNameAll" xml:space="preserve">
+    <value>Alles</value>
   </data>
 	<data name="strPropertyNameMACAddress" xml:space="preserve">
     <value>MAC Adresse</value>
@@ -1229,9 +1108,6 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
 	<data name="strPropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
 		<value>Spezifiziert ob ein Remote Desktop Gateway (RD Gateway) Server verwendet werden soll.</value>
 	</data>
-	<data name="strPropertyNameRDGatewayPasswordInherit" xml:space="preserve">
-		<value>Vererbe Gateway Passwort</value>
-	</data>
 	<data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
 		<value>Gateway Benutzername</value>
 	</data>
@@ -1285,15 +1161,6 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
 	</data>
 	<data name="strPropertyDescriptionRDGatewayDomain" xml:space="preserve">
 		<value>Gibt den Domänennamen an, der für die Verbindung zum Gateway Server verwendet werden soll.</value>
-	</data>
-	<data name="strPropertyNameRDGatewayUsageMethodInherit" xml:space="preserve">
-		<value>Vererbe Verwende Gateway</value>
-	</data>
-	<data name="strPropertyNameRDGatewayUseConnectionCredentialsInherit" xml:space="preserve">
-		<value>Vererbe Gateway Anmeldedaten</value>
-	</data>
-	<data name="strPropertyNameRDGatewayHostnameInherit" xml:space="preserve">
-		<value>Vererbe Gateway Hostname</value>
 	</data>
 	<data name="strNoCompression" xml:space="preserve">
 		<value>Keine Kompression</value>
@@ -2075,7 +1942,13 @@ Fehler Beschreibung: {1}</value>
 	<data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
 		<value>Setzen der Standard Verbindungsdaten fehlgeschlagen!</value>
 	</data>
-	<data name="strPropertyNameRDGatewayDomainInherit" xml:space="preserve">
-		<value>Vererbe Gateway Domäne</value>
+	<data name="strFormatInherit" xml:space="preserve">
+		<value>Vererbe {0}</value>
+	</data>
+	<data name="strFormatInheritDescription" xml:space="preserve">
+		<value>Beschreibung des zu vererbenden Elements: {0}</value>
+	</data>
+	<data name="strPropertyDescriptionAll" xml:space="preserve">
+		<value>Umschalten aller Vererbungen</value>
 	</data>
 </root>

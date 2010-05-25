@@ -1003,30 +1003,6 @@
 	<data name="strPropertyNameIcon" xml:space="preserve">
     <value>Icon</value>
   </data>
-	<data name="strPropertyNameInheritDescription" xml:space="preserve">
-    <value>Inherit Description</value>
-  </data>
-	<data name="strPropertyNameInheritDomain" xml:space="preserve">
-    <value>Inherit Domain</value>
-  </data>
-	<data name="strPropertyNameInheritIcon" xml:space="preserve">
-    <value>Inherit Icon</value>
-  </data>
-	<data name="strPropertyNameInheritPanel" xml:space="preserve">
-    <value>Inherit Panel</value>
-  </data>
-	<data name="strPropertyNameInheritPassword" xml:space="preserve">
-    <value>Inherit Password</value>
-  </data>
-	<data name="strPropertyNameInheritPort" xml:space="preserve">
-    <value>Inherit Port</value>
-  </data>
-	<data name="strPropertyNameInheritProtocol" xml:space="preserve">
-    <value>Inherit Protocol</value>
-  </data>
-	<data name="strPropertyNameInheritUsername" xml:space="preserve">
-    <value>Inherit Username</value>
-  </data>
 	<data name="strPropertyNameName" xml:space="preserve">
     <value>Name</value>
   </data>
@@ -1174,101 +1150,8 @@
 	<data name="strPropertyNameExternalToolBefore" xml:space="preserve">
     <value>External Tool Before</value>
   </data>
-	<data name="strPropertyNameInheritAll" xml:space="preserve">
-    <value>Inherit All</value>
-  </data>
-	<data name="strPropertyNameInheritAuthenticationLevel" xml:space="preserve">
-    <value>Inherit Server Authentication</value>
-  </data>
-	<data name="strPropertyNameInheritAuthenticationMode" xml:space="preserve">
-    <value>Inherit Authentication Mode</value>
-  </data>
-	<data name="strPropertyNameInheritCacheBitmaps" xml:space="preserve">
-    <value>Inherit Cache Bitmaps</value>
-  </data>
-	<data name="strPropertyNameInheritColors" xml:space="preserve">
-    <value>Inherit Colours</value>
-  </data>
-	<data name="strPropertyNameInheritCompression" xml:space="preserve">
-    <value>Inherit Compression</value>
-  </data>
-	<data name="strPropertyNameInheritDisplayThemes" xml:space="preserve">
-    <value>Inherit Display Themes</value>
-  </data>
-	<data name="strPropertyNameInheritDisplayWallpaper" xml:space="preserve">
-    <value>Inherit Display Wallpaper</value>
-  </data>
-	<data name="strPropertyNameInheritEncoding" xml:space="preserve">
-    <value>Inherit Encoding</value>
-  </data>
-	<data name="strPropertyNameInheritEncryptionStrength" xml:space="preserve">
-    <value>Inherit Encryption Strength</value>
-  </data>
-	<data name="strPropertyNameInheritExternalTool" xml:space="preserve">
-    <value>Inherit External Tool</value>
-  </data>
-	<data name="strPropertyNameInheritExternalToolAfter" xml:space="preserve">
-    <value>Inherit External Tool After</value>
-  </data>
-	<data name="strPropertyNameInheritExternalToolBefore" xml:space="preserve">
-    <value>Inherit External Tool Before</value>
-  </data>
-	<data name="strPropertyNameInheritMACAddress" xml:space="preserve">
-    <value>Inherit MAC Address</value>
-  </data>
-	<data name="strPropertyNameInheritPuttySession" xml:space="preserve">
-    <value>Inherit PuTTY Session</value>
-  </data>
-	<data name="strPropertyNameInheritRedirectDrives" xml:space="preserve">
-    <value>Inherit Disk Drives</value>
-  </data>
-	<data name="strPropertyNameInheritRedirectKeys" xml:space="preserve">
-    <value>Inherit Key Combinations</value>
-  </data>
-	<data name="strPropertyNameInheritRedirectPorts" xml:space="preserve">
-    <value>Inherit Ports</value>
-  </data>
-	<data name="strPropertyNameInheritRedirectPrinters" xml:space="preserve">
-    <value>Inherit Printers</value>
-  </data>
-	<data name="strPropertyNameInheritRedirectSmartCards" xml:space="preserve">
-    <value>Inherit Smart Cards</value>
-  </data>
-	<data name="strPropertyNameInheritRedirectSounds" xml:space="preserve">
-    <value>Inherit Sounds</value>
-  </data>
-	<data name="strPropertyNameInheritRenderingEngine" xml:space="preserve">
-    <value>Inherit Rendering Engine</value>
-  </data>
-	<data name="strPropertyNameInheritResolution" xml:space="preserve">
-    <value>Inherit Resolution</value>
-  </data>
-	<data name="strPropertyNameInheritSmartSizeMode" xml:space="preserve">
-    <value>Inherit SmartSize Mode</value>
-  </data>
-	<data name="strPropertyNameInheritUseConsoleSession" xml:space="preserve">
-    <value>Inherit Use Console Session</value>
-  </data>
-	<data name="strPropertyNameInheritUser1" xml:space="preserve">
-    <value>Inherit User Field</value>
-  </data>
-	<data name="strPropertyNameInheritViewOnly" xml:space="preserve">
-    <value>Inherit View Only</value>
-  </data>
-	<data name="strPropertyNameInheritVNCProxyAddress" xml:space="preserve">
-    <value>Inherit Proxy Address</value>
-  </data>
-	<data name="strPropertyNameInheritVNCProxyPassword" xml:space="preserve">
-    <value>Inherit Proxy Password</value>
-  </data>
-	<data name="strPropertyNameInheritVNCProxyPort" xml:space="preserve">
-    <value>Inherit Proxy Port</value>
-  </data>
-	<data name="strPropertyNameInheritVNCProxyType" xml:space="preserve">
-    <value>Inherit Proxy Type</value>
-  </data>
-	<data name="strPropertyNameInheritVNCProxyUsername" xml:space="preserve">
-    <value>Inherit Proxy Username</value>
+	<data name="strPropertyNameAll" xml:space="preserve">
+    <value>All</value>
   </data>
 	<data name="strPropertyNameMACAddress" xml:space="preserve">
     <value>MAC Address</value>
@@ -1536,9 +1419,6 @@ If you are still not able to pass this check or use the (RDP) Sessions feature i
 	<data name="strPropertyDescriptionRDGatewayUsageMethod" xml:space="preserve">
     <value>Specifies when to use a Remote Desktop Gateway (RD Gateway) server.</value>
   </data>
-	<data name="strPropertyNameRDGatewayPasswordInherit" xml:space="preserve">
-    <value>Inherit Remote Desktop Gateway Password</value>
-  </data>
 	<data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
     <value>Gateway Username</value>
   </data>
@@ -1592,15 +1472,6 @@ If you are still not able to pass this check or use the (RDP) Sessions feature i
   </data>
 	<data name="strPropertyDescriptionRDGatewayDomain" xml:space="preserve">
     <value>Specifies the domain name that a user provides to connect to the RD Gateway server.</value>
-  </data>
-	<data name="strPropertyNameRDGatewayUsageMethodInherit" xml:space="preserve">
-    <value>Inherit Use Gateway</value>
-  </data>
-	<data name="strPropertyNameRDGatewayUseConnectionCredentialsInherit" xml:space="preserve">
-    <value>Inherit Gateway Credentials</value>
-  </data>
-	<data name="strPropertyNameRDGatewayHostnameInherit" xml:space="preserve">
-    <value>Inherit Gateway Hostname</value>
   </data>
 	<data name="strNoCompression" xml:space="preserve">
     <value>No Compression</value>
@@ -2388,7 +2259,13 @@ Error Description: {1}</value>
 	<data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
 		<value>Couldn't set default port!</value>
 	</data>
-	<data name="strPropertyNameRDGatewayDomainInherit" xml:space="preserve">
-		<value>Inherit Gateway Domain</value>
+	<data name="strFormatInherit" xml:space="preserve">
+		<value>Inherit {0}</value>
+	</data>
+	<data name="strPropertyDescriptionAll" xml:space="preserve">
+		<value>Toggle all inheritance options.</value>
+	</data>
+	<data name="strFormatInheritDescription" xml:space="preserve">
+		<value>Description of inherited property: {0}</value>
 	</data>
 </root>
