@@ -1572,6 +1572,69 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die btnIcon_Click failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConfigPropertyGridButtonIconClickFailed() As String
+            Get
+                Return ResourceManager.GetString("strConfigPropertyGridButtonIconClickFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die ShowHideGridItems failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConfigPropertyGridHideItemsFailed() As String
+            Get
+                Return ResourceManager.GetString("strConfigPropertyGridHideItemsFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die IconMenu_Click failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConfigPropertyGridMenuClickFailed() As String
+            Get
+                Return ResourceManager.GetString("strConfigPropertyGridMenuClickFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Property Grid object failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConfigPropertyGridObjectFailed() As String
+            Get
+                Return ResourceManager.GetString("strConfigPropertyGridObjectFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die SetHostStatus failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConfigPropertyGridSetHostStatusFailed() As String
+            Get
+                Return ResourceManager.GetString("strConfigPropertyGridSetHostStatusFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die pGrid_PopertyValueChanged failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConfigPropertyGridValueFailed() As String
+            Get
+                Return ResourceManager.GetString("strConfigPropertyGridValueFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Config UI load failed! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConfigUiLoadFailed() As String
+            Get
+                Return ResourceManager.GetString("strConfigUiLoadFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Are you sure you want to delete the external tool, &quot;{0}&quot;? ähnelt.
         '''</summary>
         Friend ReadOnly Property strConfirmDeleteExternalTool() As String
@@ -1741,6 +1804,15 @@ Namespace My.Resources
         Friend ReadOnly Property strConnections() As String
             Get
                 Return ResourceManager.GetString("strConnections", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Couldn&apos;t set default port! ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strConnectionSetDefaultPortFailed() As String
+            Get
+                Return ResourceManager.GetString("strConnectionSetDefaultPortFailed", resourceCulture)
             End Get
         End Property
         
@@ -4600,6 +4672,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Inherit Gateway Domain ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameRDGatewayDomainInherit() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameRDGatewayDomainInherit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die Gateway Hostname ähnelt.
         '''</summary>
         Friend ReadOnly Property strPropertyNameRDGatewayHostname() As String
@@ -5679,6 +5760,24 @@ Namespace My.Resources
         Friend ReadOnly Property strSendTo() As String
             Get
                 Return ResourceManager.GetString("strSendTo", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Get Sessions Background failed ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strSessionGetFailed() As String
+            Get
+                Return ResourceManager.GetString("strSessionGetFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die Kill Session Background failed ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strSessionKillFailed() As String
+            Get
+                Return ResourceManager.GetString("strSessionKillFailed", resourceCulture)
             End Get
         End Property
         

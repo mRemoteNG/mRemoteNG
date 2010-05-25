@@ -178,7 +178,7 @@ Namespace UI
                     sU = Nothing
                     tS.CloseConnection(tServerHandle)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetSessionsBG (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSessionGetFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -214,7 +214,7 @@ Namespace UI
 
                     GetSessionsBG()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "KillSessionBG (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSessionKillFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 

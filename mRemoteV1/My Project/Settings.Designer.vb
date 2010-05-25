@@ -550,19 +550,6 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("mRemote")>  _
-        Public Property ConDefaultIcon() As String
-            Get
-                Return CType(Me("ConDefaultIcon"),String)
-            End Get
-            Set
-                Me("ConDefaultIcon") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("General")>  _
         Public Property ConDefaultPanel() As String
             Get
@@ -1992,6 +1979,91 @@ Namespace My
             Get
                 Return CType(Me("ConDefaultRDGatewayUseConnectionCredentials"),String)
             End Get
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("mRemoteNG")>  _
+        Public Property ConDefaultIcon() As String
+            Get
+                Return CType(Me("ConDefaultIcon"),String)
+            End Get
+            Set
+                Me("ConDefaultIcon") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property InhDefaultRDGatewayUsageMethod() As Boolean
+            Get
+                Return CType(Me("InhDefaultRDGatewayUsageMethod"),Boolean)
+            End Get
+            Set
+                Me("InhDefaultRDGatewayUsageMethod") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property InhDefaultRDGatewayHostname() As Boolean
+            Get
+                Return CType(Me("InhDefaultRDGatewayHostname"),Boolean)
+            End Get
+            Set
+                Me("InhDefaultRDGatewayHostname") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property InhDefaultRDGatewayUsername() As Boolean
+            Get
+                Return CType(Me("InhDefaultRDGatewayUsername"),Boolean)
+            End Get
+            Set
+                Me("InhDefaultRDGatewayUsername") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property InhDefaultRDGatewayPassword() As Boolean
+            Get
+                Return CType(Me("InhDefaultRDGatewayPassword"),Boolean)
+            End Get
+            Set
+                Me("InhDefaultRDGatewayPassword") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property InhDefaultRDGatewayDomain() As Boolean
+            Get
+                Return CType(Me("InhDefaultRDGatewayDomain"),Boolean)
+            End Get
+            Set
+                Me("InhDefaultRDGatewayDomain") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property InhDefaultRDGatewayUseConnectionCredentials() As Boolean
+            Get
+                Return CType(Me("InhDefaultRDGatewayUseConnectionCredentials"),Boolean)
+            End Get
+            Set
+                Me("InhDefaultRDGatewayUseConnectionCredentials") = value
+            End Set
         End Property
     End Class
 End Namespace
