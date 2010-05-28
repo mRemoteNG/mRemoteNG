@@ -2268,4 +2268,7 @@ Error Description: {1}</value>
 	<data name="strFormatInheritDescription" xml:space="preserve">
 		<value>Description of inherited property: {0}</value>
 	</data>
+	<data name="strPuttySettings" xml:space="preserve">
+		<value>PuTTY Settings</value>
+	</data>
 </root>
