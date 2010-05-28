@@ -1951,4 +1951,7 @@ Fehler Beschreibung: {1}</value>
 	<data name="strPropertyDescriptionAll" xml:space="preserve">
 		<value>Umschalten aller Vererbungen</value>
 	</data>
+	<data name="strPuttySettings" xml:space="preserve">
+		<value>PuTTY Einstellungen</value>
+	</data>
 </root>

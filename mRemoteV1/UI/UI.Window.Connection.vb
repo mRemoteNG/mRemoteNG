@@ -302,6 +302,7 @@ Namespace UI
                 cmenTabDuplicateTab.Text = My.Resources.strMenuDuplicateTab
                 cmenTabReconnect.Text = My.Resources.strMenuReconnect
                 cmenTabDisconnect.Text = My.Resources.strMenuDisconnect
+                cmenTabPuttySettings.Text = My.Resources.strPuttySettings
             End Sub
 
             Private Sub Connection_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
