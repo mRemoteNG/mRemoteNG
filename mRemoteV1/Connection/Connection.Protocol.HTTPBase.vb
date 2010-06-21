@@ -173,7 +173,7 @@ Namespace Connection
             Public Enum RenderingEngine
                 <LocalizedDescription("strHttpInternetExplorer")> _
                 IE = 1
-                <LocalizedDescription("strHttpGecko (Firefox)")> _
+                <LocalizedDescription("strHttpGecko")> _
                 Gecko = 2
             End Enum
 
