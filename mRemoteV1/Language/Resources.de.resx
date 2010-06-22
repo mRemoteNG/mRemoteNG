@@ -1954,4 +1954,7 @@ Fehler Beschreibung: {1}</value>
 	<data name="strPuttySettings" xml:space="preserve">
 		<value>PuTTY Einstellungen</value>
 	</data>
+	<data name="strRdpReconnectCount" xml:space="preserve">
+		<value>RDP Verbindungsversuche</value>
+	</data>
 </root>

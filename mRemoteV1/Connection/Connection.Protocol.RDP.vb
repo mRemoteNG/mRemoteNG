@@ -63,7 +63,6 @@ Namespace Connection
                         RDP.Dispose()
                         Return False
                     End Try
- 
 
                     Me.RDPVersion = New Version(RDP.Version)
 
@@ -76,7 +75,7 @@ Namespace Connection
                     'not user changeable
                     RDP.AdvancedSettings2.GrabFocusOnConnect = True
                     RDP.AdvancedSettings3.EnableAutoReconnect = True
-                    RDP.AdvancedSettings3.MaxReconnectAttempts = 3
+                    RDP.AdvancedSettings3.MaxReconnectAttempts = My.Settings.RdpReconnectionCount
                     RDP.AdvancedSettings2.keepAliveInterval = 60000 'in milliseconds (10.000 = 10 seconds)
                     RDP.AdvancedSettings5.AuthenticationLevel = 0
                     RDP.AdvancedSettings.EncryptionEnabled = 1
