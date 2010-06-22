@@ -5107,6 +5107,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Sucht eine lokalisierte Zeichenfolge, die RDP Reconnection Count ähnelt.
+        '''</summary>
+        Friend ReadOnly Property strRdpReconnectCount() As String
+            Get
+                Return ResourceManager.GetString("strRdpReconnectCount", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Sucht eine lokalisierte Zeichenfolge, die RDP SetAuthenticationLevel failed! ähnelt.
         '''</summary>
         Friend ReadOnly Property strRdpSetAuthenticationLevelFailed() As String

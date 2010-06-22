@@ -103,12 +103,18 @@ Namespace UI
             Friend WithEvents lblUpdatesExplanation As System.Windows.Forms.Label
             Friend WithEvents pnlUpdateCheck As System.Windows.Forms.Panel
             Friend WithEvents btnUpdateCheckNow As System.Windows.Forms.Button
+            Friend WithEvents Panel1 As System.Windows.Forms.Panel
+            Friend WithEvents lblRdpReconnectCount As System.Windows.Forms.Label
+            Friend WithEvents numRdpReconnectionCount As System.Windows.Forms.NumericUpDown
             Friend WithEvents TabController As Crownwood.Magic.Controls.TabControl
 
             Private Sub InitializeComponent()
                 Me.TabController = New Crownwood.Magic.Controls.TabControl
                 Me.tabConnections = New Crownwood.Magic.Controls.TabPage
                 Me.pnlConnections = New System.Windows.Forms.Panel
+                Me.Panel1 = New System.Windows.Forms.Panel
+                Me.lblRdpReconnectCount = New System.Windows.Forms.Label
+                Me.numRdpReconnectionCount = New System.Windows.Forms.NumericUpDown
                 Me.chkSingleClickOnConnectionOpensIt = New System.Windows.Forms.CheckBox
                 Me.pnlDefaultCredentials = New System.Windows.Forms.Panel
                 Me.radCredentialsCustom = New System.Windows.Forms.RadioButton
@@ -206,6 +212,8 @@ Namespace UI
                 Me.TabController.SuspendLayout()
                 Me.tabConnections.SuspendLayout()
                 Me.pnlConnections.SuspendLayout()
+                Me.Panel1.SuspendLayout()
+                CType(Me.numRdpReconnectionCount, System.ComponentModel.ISupportInitialize).BeginInit()
                 Me.pnlDefaultCredentials.SuspendLayout()
                 Me.pnlAutoSave.SuspendLayout()
                 CType(Me.numAutoSave, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -238,8 +246,8 @@ Namespace UI
                 Me.TabController.IDEPixelArea = True
                 Me.TabController.Location = New System.Drawing.Point(0, 0)
                 Me.TabController.Name = "TabController"
-                Me.TabController.SelectedIndex = 4
-                Me.TabController.SelectedTab = Me.tabUpdates
+                Me.TabController.SelectedIndex = 3
+                Me.TabController.SelectedTab = Me.tabConnections
                 Me.TabController.Size = New System.Drawing.Size(573, 522)
                 Me.TabController.TabIndex = 10
                 Me.TabController.TabPages.AddRange(New Crownwood.Magic.Controls.TabPage() {Me.tabStartupExit, Me.tabAppearance, Me.tabTabs, Me.tabConnections, Me.tabUpdates, Me.tabAdvanced})
@@ -250,7 +258,6 @@ Namespace UI
                 Me.tabConnections.Icon = Global.mRemoteNG.My.Resources.Resources.Root_Icon
                 Me.tabConnections.Location = New System.Drawing.Point(0, 0)
                 Me.tabConnections.Name = "tabConnections"
-                Me.tabConnections.Selected = False
                 Me.tabConnections.Size = New System.Drawing.Size(573, 492)
                 Me.tabConnections.TabIndex = 4000
                 Me.tabConnections.Title = "Connections"
@@ -261,6 +268,7 @@ Namespace UI
                             Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlConnections.AutoScroll = True
+                Me.pnlConnections.Controls.Add(Me.Panel1)
                 Me.pnlConnections.Controls.Add(Me.chkSingleClickOnConnectionOpensIt)
                 Me.pnlConnections.Controls.Add(Me.pnlDefaultCredentials)
                 Me.pnlConnections.Controls.Add(Me.chkSingleClickOnOpenedConnectionSwitchesToIt)
@@ -271,6 +279,34 @@ Namespace UI
                 Me.pnlConnections.Name = "pnlConnections"
                 Me.pnlConnections.Size = New System.Drawing.Size(567, 486)
                 Me.pnlConnections.TabIndex = 173
+                '
+                'Panel1
+                '
+                Me.Panel1.Controls.Add(Me.lblRdpReconnectCount)
+                Me.Panel1.Controls.Add(Me.numRdpReconnectionCount)
+                Me.Panel1.Location = New System.Drawing.Point(9, 72)
+                Me.Panel1.Name = "Panel1"
+                Me.Panel1.Size = New System.Drawing.Size(500, 29)
+                Me.Panel1.TabIndex = 40
+                '
+                'lblRdpReconnectCount
+                '
+                Me.lblRdpReconnectCount.AutoSize = True
+                Me.lblRdpReconnectCount.Location = New System.Drawing.Point(3, 9)
+                Me.lblRdpReconnectCount.Name = "lblRdpReconnectCount"
+                Me.lblRdpReconnectCount.Size = New System.Drawing.Size(141, 15)
+                Me.lblRdpReconnectCount.TabIndex = 40
+                Me.lblRdpReconnectCount.Text = "RDP Reconnection Count"
+                '
+                'numRdpReconnectionCount
+                '
+                Me.numRdpReconnectionCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+                Me.numRdpReconnectionCount.Location = New System.Drawing.Point(168, 6)
+                Me.numRdpReconnectionCount.Maximum = New Decimal(New Integer() {20, 0, 0, 0})
+                Me.numRdpReconnectionCount.Name = "numRdpReconnectionCount"
+                Me.numRdpReconnectionCount.Size = New System.Drawing.Size(53, 23)
+                Me.numRdpReconnectionCount.TabIndex = 41
+                Me.numRdpReconnectionCount.Value = New Decimal(New Integer() {5, 0, 0, 0})
                 '
                 'chkSingleClickOnConnectionOpensIt
                 '
@@ -295,10 +331,10 @@ Namespace UI
                 Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsPassword)
                 Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsUsername)
                 Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsDomain)
-                Me.pnlDefaultCredentials.Location = New System.Drawing.Point(9, 255)
+                Me.pnlDefaultCredentials.Location = New System.Drawing.Point(9, 295)
                 Me.pnlDefaultCredentials.Name = "pnlDefaultCredentials"
                 Me.pnlDefaultCredentials.Size = New System.Drawing.Size(500, 175)
-                Me.pnlDefaultCredentials.TabIndex = 172
+                Me.pnlDefaultCredentials.TabIndex = 70
                 '
                 'radCredentialsCustom
                 '
@@ -307,7 +343,7 @@ Namespace UI
                 Me.radCredentialsCustom.Location = New System.Drawing.Point(21, 69)
                 Me.radCredentialsCustom.Name = "radCredentialsCustom"
                 Me.radCredentialsCustom.Size = New System.Drawing.Size(97, 19)
-                Me.radCredentialsCustom.TabIndex = 110
+                Me.radCredentialsCustom.TabIndex = 73
                 Me.radCredentialsCustom.TabStop = True
                 Me.radCredentialsCustom.Text = "the following:"
                 Me.radCredentialsCustom.UseVisualStyleBackColor = True
@@ -328,7 +364,7 @@ Namespace UI
                 Me.radCredentialsNoInfo.Location = New System.Drawing.Point(21, 31)
                 Me.radCredentialsNoInfo.Name = "radCredentialsNoInfo"
                 Me.radCredentialsNoInfo.Size = New System.Drawing.Size(104, 19)
-                Me.radCredentialsNoInfo.TabIndex = 90
+                Me.radCredentialsNoInfo.TabIndex = 71
                 Me.radCredentialsNoInfo.TabStop = True
                 Me.radCredentialsNoInfo.Text = "no information"
                 Me.radCredentialsNoInfo.UseVisualStyleBackColor = True
@@ -340,7 +376,7 @@ Namespace UI
                 Me.radCredentialsWindows.Location = New System.Drawing.Point(21, 50)
                 Me.radCredentialsWindows.Name = "radCredentialsWindows"
                 Me.radCredentialsWindows.Size = New System.Drawing.Size(258, 19)
-                Me.radCredentialsWindows.TabIndex = 100
+                Me.radCredentialsWindows.TabIndex = 72
                 Me.radCredentialsWindows.TabStop = True
                 Me.radCredentialsWindows.Text = "my current credentials (windows logon info)"
                 Me.radCredentialsWindows.UseVisualStyleBackColor = True
@@ -352,7 +388,7 @@ Namespace UI
                 Me.txtCredentialsDomain.Location = New System.Drawing.Point(130, 147)
                 Me.txtCredentialsDomain.Name = "txtCredentialsDomain"
                 Me.txtCredentialsDomain.Size = New System.Drawing.Size(150, 23)
-                Me.txtCredentialsDomain.TabIndex = 170
+                Me.txtCredentialsDomain.TabIndex = 76
                 '
                 'lblCredentialsUsername
                 '
@@ -371,7 +407,7 @@ Namespace UI
                 Me.txtCredentialsPassword.Location = New System.Drawing.Point(130, 120)
                 Me.txtCredentialsPassword.Name = "txtCredentialsPassword"
                 Me.txtCredentialsPassword.Size = New System.Drawing.Size(150, 23)
-                Me.txtCredentialsPassword.TabIndex = 150
+                Me.txtCredentialsPassword.TabIndex = 75
                 Me.txtCredentialsPassword.UseSystemPasswordChar = True
                 '
                 'lblCredentialsPassword
@@ -391,7 +427,7 @@ Namespace UI
                 Me.txtCredentialsUsername.Location = New System.Drawing.Point(130, 93)
                 Me.txtCredentialsUsername.Name = "txtCredentialsUsername"
                 Me.txtCredentialsUsername.Size = New System.Drawing.Size(150, 23)
-                Me.txtCredentialsUsername.TabIndex = 130
+                Me.txtCredentialsUsername.TabIndex = 74
                 '
                 'lblCredentialsDomain
                 '
@@ -419,10 +455,10 @@ Namespace UI
                 Me.pnlAutoSave.Controls.Add(Me.lblAutoSave1)
                 Me.pnlAutoSave.Controls.Add(Me.numAutoSave)
                 Me.pnlAutoSave.Controls.Add(Me.lblAutoSave2)
-                Me.pnlAutoSave.Location = New System.Drawing.Point(9, 67)
+                Me.pnlAutoSave.Location = New System.Drawing.Point(9, 107)
                 Me.pnlAutoSave.Name = "pnlAutoSave"
                 Me.pnlAutoSave.Size = New System.Drawing.Size(500, 29)
-                Me.pnlAutoSave.TabIndex = 171
+                Me.pnlAutoSave.TabIndex = 50
                 '
                 'lblAutoSave1
                 '
@@ -440,7 +476,7 @@ Namespace UI
                 Me.numAutoSave.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
                 Me.numAutoSave.Name = "numAutoSave"
                 Me.numAutoSave.Size = New System.Drawing.Size(53, 23)
-                Me.numAutoSave.TabIndex = 50
+                Me.numAutoSave.TabIndex = 51
                 '
                 'lblAutoSave2
                 '
@@ -463,10 +499,10 @@ Namespace UI
                 Me.grpExperimental.Controls.Add(Me.lblSQLPassword)
                 Me.grpExperimental.Controls.Add(Me.txtSQLServer)
                 Me.grpExperimental.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.grpExperimental.Location = New System.Drawing.Point(9, 102)
+                Me.grpExperimental.Location = New System.Drawing.Point(9, 142)
                 Me.grpExperimental.Name = "grpExperimental"
                 Me.grpExperimental.Size = New System.Drawing.Size(500, 147)
-                Me.grpExperimental.TabIndex = 70
+                Me.grpExperimental.TabIndex = 60
                 Me.grpExperimental.TabStop = False
                 Me.grpExperimental.Text = "EXPERIMENTAL"
                 '
@@ -477,7 +513,7 @@ Namespace UI
                 Me.chkUseSQLServer.Location = New System.Drawing.Point(16, 20)
                 Me.chkUseSQLServer.Name = "chkUseSQLServer"
                 Me.chkUseSQLServer.Size = New System.Drawing.Size(248, 19)
-                Me.chkUseSQLServer.TabIndex = 50
+                Me.chkUseSQLServer.TabIndex = 61
                 Me.chkUseSQLServer.Text = "Use SQL Server to load && save connections"
                 Me.chkUseSQLServer.UseVisualStyleBackColor = True
                 '
@@ -512,7 +548,7 @@ Namespace UI
                 Me.txtSQLPassword.Location = New System.Drawing.Point(126, 101)
                 Me.txtSQLPassword.Name = "txtSQLPassword"
                 Me.txtSQLPassword.Size = New System.Drawing.Size(153, 23)
-                Me.txtSQLPassword.TabIndex = 110
+                Me.txtSQLPassword.TabIndex = 64
                 Me.txtSQLPassword.UseSystemPasswordChar = True
                 '
                 'lblSQLServer
@@ -532,7 +568,7 @@ Namespace UI
                 Me.txtSQLUsername.Location = New System.Drawing.Point(126, 74)
                 Me.txtSQLUsername.Name = "txtSQLUsername"
                 Me.txtSQLUsername.Size = New System.Drawing.Size(153, 23)
-                Me.txtSQLUsername.TabIndex = 90
+                Me.txtSQLUsername.TabIndex = 63
                 '
                 'lblSQLPassword
                 '
@@ -551,7 +587,7 @@ Namespace UI
                 Me.txtSQLServer.Location = New System.Drawing.Point(126, 47)
                 Me.txtSQLServer.Name = "txtSQLServer"
                 Me.txtSQLServer.Size = New System.Drawing.Size(153, 23)
-                Me.txtSQLServer.TabIndex = 70
+                Me.txtSQLServer.TabIndex = 62
                 '
                 'chkHostnameLikeDisplayName
                 '
@@ -865,6 +901,7 @@ Namespace UI
                 Me.tabUpdates.Icon = Global.mRemoteNG.My.Resources.Resources.Info_Icon
                 Me.tabUpdates.Location = New System.Drawing.Point(0, 0)
                 Me.tabUpdates.Name = "tabUpdates"
+                Me.tabUpdates.Selected = False
                 Me.tabUpdates.Size = New System.Drawing.Size(573, 492)
                 Me.tabUpdates.TabIndex = 5000
                 Me.tabUpdates.Title = "Updates"
@@ -1323,6 +1360,9 @@ Namespace UI
                 Me.tabConnections.ResumeLayout(False)
                 Me.pnlConnections.ResumeLayout(False)
                 Me.pnlConnections.PerformLayout()
+                Me.Panel1.ResumeLayout(False)
+                Me.Panel1.PerformLayout()
+                CType(Me.numRdpReconnectionCount, System.ComponentModel.ISupportInitialize).EndInit()
                 Me.pnlDefaultCredentials.ResumeLayout(False)
                 Me.pnlDefaultCredentials.PerformLayout()
                 Me.pnlAutoSave.ResumeLayout(False)
@@ -1382,6 +1422,7 @@ Namespace UI
                     Me.chkSingleClickOnConnectionOpensIt.Checked = My.Settings.SingleClickOnConnectionOpensIt
                     Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Checked = My.Settings.SingleClickSwitchesToOpenConnection
                     Me.chkHostnameLikeDisplayName.Checked = My.Settings.SetHostnameLikeDisplayName
+                    Me.numRdpReconnectionCount.Value = My.Settings.RdpReconnectionCount
                     Me.numAutoSave.Value = My.Settings.AutoSaveEveryMinutes
 
                     Me.chkUseSQLServer.Checked = My.Settings.UseSQLServer
@@ -1491,6 +1532,7 @@ Namespace UI
                     My.Settings.SingleClickOnConnectionOpensIt = Me.chkSingleClickOnConnectionOpensIt.Checked
                     My.Settings.SingleClickSwitchesToOpenConnection = Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Checked
                     My.Settings.SetHostnameLikeDisplayName = Me.chkHostnameLikeDisplayName.Checked
+                    My.Settings.RdpReconnectionCount = Me.numRdpReconnectionCount.Value
                     My.Settings.AutoSaveEveryMinutes = Me.numAutoSave.Value
 
                     If My.Settings.AutoSaveEveryMinutes > 0 Then
@@ -1709,6 +1751,7 @@ Namespace UI
                 lblSQLUsername.Text = My.Resources.strLabelUsername
                 lblSQLServer.Text = My.Resources.strSQLServer & ":"
                 lblSQLPassword.Text = My.Resources.strLabelPassword
+                lblRdpReconnectCount.Text = My.Resources.strRdpReconnectCount
                 lblAutoSave2.Text = My.Resources.strAutoSaveMins
                 lblAutoSave1.Text = My.Resources.strAutoSaveEvery
                 lblCredentialsDomain.Text = My.Resources.strLabelDomain
@@ -1826,6 +1869,10 @@ Namespace UI
                 Me.Close()
             End Sub
 #End Region
+
+            Private Sub TabController_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabController.SelectionChanged
+
+            End Sub
         End Class
     End Namespace
 End Namespace
