@@ -1,1 +1,1 @@
-﻿alle UI.Window.* -> ApplyLanguage
+﻿all UI.Window.* -> ApplyLanguage

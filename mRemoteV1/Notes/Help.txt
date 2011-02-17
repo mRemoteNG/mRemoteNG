@@ -33,7 +33,7 @@ Binary and source code packages are available for download.
 [[Getting Started]]
 [Prerequisites]
 WinXP; Vista -> x86
-not tested on x64!
+Win7 -> x86,x64
 Terminal Services Client 6.0
 Citrix Client for ICA (Registered wfica.ocx)
 
