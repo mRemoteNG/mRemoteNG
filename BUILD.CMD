@@ -3,15 +3,9 @@
 SET VCVARSALL="%ProgramFiles(x86)%\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
 SET DEVENV="devenv.exe"
 SET MAKENSIS="%ProgramFiles(x86)%\NSIS\makensis.exe"
-<<<<<<< HEAD
-SET RAR="%ProgramFiles%\WinRAR\WinRAR.exe"
-SET BINARYZIP="%~dp0\Release\mRemoteNG-1.63.zip"
-SET PORTABLEZIP="%~dp0\Release\mRemoteNG-Portable-1.63.zip"
-=======
 SET RAR="%ProgramFiles%\WinRAR\Rar.exe"
 SET BINARYZIP="%~dp0\Release\mRemoteNG-1.64.zip"
 SET PORTABLEZIP="%~dp0\Release\mRemoteNG-Portable-1.64.zip"
->>>>>>> f24b1b5cec015433e7f47e36aac2ad20256f1a37
 
 call %VCVARSALL% x86 > NUL 2>&1
 
