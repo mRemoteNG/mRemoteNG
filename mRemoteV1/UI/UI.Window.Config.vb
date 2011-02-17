@@ -113,6 +113,7 @@ Namespace UI
                 '
                 Me.ClientSize = New System.Drawing.Size(226, 530)
                 Me.Controls.Add(Me.pGrid)
+                Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.HideOnClose = True
                 Me.Icon = Global.mRemoteNG.My.Resources.Resources.Config_Icon
                 Me.Name = "Config"

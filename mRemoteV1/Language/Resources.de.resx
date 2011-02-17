@@ -669,35 +669,35 @@
     <value>Generell</value>
   </data>
 	<data name="strPropertyDescriptionAuthenticationLevel" xml:space="preserve">
-    <value>Wählen Sie welche Authentifizierungs-Variante verwendet wird.</value>
+    <value>Wählen Sie, welche Authentifizierungs-Variante verwendet wird.</value>
   </data>
 	<data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
-    <value>Wählen Sie wie Sie sich am VNC server authentifizieren wollen.</value>
+    <value>Wählen Sie, wie Sie sich am VNC server authentifizieren wollen.</value>
   </data>
 	<data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
-    <value>Wählen Sie ob Bitmap Zwischenspeicherung verwendet werden soll.</value>
+    <value>Wählen Sie, ob Bitmap Zwischenspeicherung verwendet werden soll.</value>
   </data>
 	<data name="strPropertyDescriptionCompression" xml:space="preserve">
-    <value>Wählen Sie die Kompressionsrate die verwendet werden soll.</value>
+    <value>Wählen Sie die Kompressionsrate, die verwendet werden soll.</value>
   </data>
 	<data name="strPropertyDescriptionDisplayThemes" xml:space="preserve">
-    <value>Wählen Sie ob Themen am Remote Host angezeigt werden sollen.</value>
+    <value>Wählen Sie, ob Themen am Remote Host angezeigt werden sollen.</value>
   </data>
 	<data name="strPropertyDescriptionDisplayWallpaper" xml:space="preserve">
-    <value>Wählen Sie ob Hintergrundbilder am Remote Host angezeigt werden sollen.</value>
+    <value>Wählen Sie, ob Hintergrundbilder am Remote Host angezeigt werden sollen.</value>
   </data>
 	<data name="strPropertyDescriptionEncoding" xml:space="preserve">
-    <value>Wählen Sie die Codierung die verwendet werden soll.</value>
+    <value>Wählen Sie die zu verwendende Codierung.</value>
   </data>
 	<data name="strPropertyDescriptionEncryptionStrength" xml:space="preserve">
     <value>Wählen Sie die Verschlüsselungsstärke des Remote Hosts.</value>
   </data>
 	<data name="strPropertyDescriptionExternalTool" xml:space="preserve">
-    <value>Wählen Sie die externe Applikation die gestartet werden soll.</value>
+    <value>Wählen Sie die zu startende externe Applikation.</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strPropertyDescriptionExternalToolAfter" xml:space="preserve">
-    <value>Wählen Sie eine externe Applikation die gestartet werden soll nachdem die Verbindung zum Remote Host getrennt wurde.</value>
+    <value>Wählen Sie eine externe Applikation, die gestartet werden soll nachdem die Verbindung zum Remote Host getrennt wurde.</value>
     <comment>Need translation</comment>
   </data>
 	<data name="strPropertyDescriptionExternalToolBefore" xml:space="preserve">
@@ -708,34 +708,34 @@
     <value>Geben Sie die MAC Adresse des Remote Hosts ein (kann für externe Applikationen verwendet werden).</value>
   </data>
 	<data name="strPropertyDescriptionPuttySession" xml:space="preserve">
-    <value>Wählen Sie eine PuTTY Sitzung die bei Verbindung verwendet werden soll.</value>
+    <value>Wählen Sie eine PuTTY Sitzung, die bei Verbindung verwendet werden soll.</value>
   </data>
 	<data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
-    <value>Wählen Sie ob ihre lokalen Festplatten im entfernten System angezeigt werden sollen.</value>
+    <value>Wählen Sie, ob ihre lokalen Festplatten im entfernten System angezeigt werden sollen.</value>
   </data>
 	<data name="strPropertyDescriptionRedirectKeys" xml:space="preserve">
     <value>Wählen Sie ob Tastenkombinationen wie z.B. Alt-Tab auf das entfernte System umgeleitet werden sollen.</value>
   </data>
 	<data name="strPropertyDescriptionRedirectPorts" xml:space="preserve">
-    <value>Wählen Sie ob ihre lokalen Ports wie z.B. COM, Parallel auf dem entfernte System angezeigt werden sollen.</value>
+    <value>Wählen Sie, ob ihre lokalen Ports wie z.B. COM, Parallel auf dem entfernte System angezeigt werden sollen.</value>
   </data>
 	<data name="strPropertyDescriptionRedirectPrinters" xml:space="preserve">
-    <value>Wählen Sie ob ihre lokalen Drucker auf dem entfernten System zur Verfügung stehen sollen.</value>
+    <value>Wählen Sie, ob ihre lokalen Drucker auf dem entfernten System zur Verfügung stehen sollen.</value>
   </data>
 	<data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
-    <value>Wählen Sie ob ihre lokalen Smart Cards auf dem entfernten System zur Verfügung stehen sollen.</value>
+    <value>Wählen Sie, ob Ihre lokalen Smart Cards auf dem entfernten System zur Verfügung stehen sollen.</value>
   </data>
 	<data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
-    <value>Wählen Sie wie Töne auf dem entfernten System wiedergegeben werden sollen.</value>
+    <value>Wählen Sie, wie Töne auf dem entfernten System wiedergegeben werden sollen.</value>
   </data>
 	<data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
     <value>Wählen Sie eine der Rendering Engines die verwendet wird um html darzustellen.</value>
   </data>
 	<data name="strPropertyDescriptionResolution" xml:space="preserve">
-    <value>Wählen Sie die Auflösung in welcher der Host geöffnet werden soll.</value>
+    <value>Wählen Sie die Auflösung in welcher die Verbindung geöffnet werden soll.</value>
   </data>
 	<data name="strPropertyDescriptionSmartSizeMode" xml:space="preserve">
-    <value>Wählen Sie den automatische Anpassungs (SmartSize) Modus der verwendet werden soll.</value>
+    <value>Wählen Sie den automatischen Anpassungsmodus (SmartSize), der verwendet werden soll.</value>
   </data>
 	<data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
     <value>Zur Konsolen Sitzung des entfernten Hosts verbinden.</value>
@@ -744,7 +744,7 @@
     <value>Dieses Feld ist frei beschreibbar.</value>
   </data>
 	<data name="strPropertyDescriptionViewOnly" xml:space="preserve">
-    <value>Wählen Sie ob sie eine Nur-Anzeige (View-Only) Verbindung aufbauen wollen.</value>
+    <value>Wählen Sie, ob sie eine Nur-Anzeige (View-Only) Verbindung aufbauen wollen.</value>
   </data>
 	<data name="strPropertyDescriptionVNCProxyAddress" xml:space="preserve">
     <value>Geben Sie die IP des Proxy Servers ein.</value>

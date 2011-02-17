@@ -14,7 +14,7 @@ Localize PropertyGrid:
 	http://www.morganskinner.com/Articles/LocalizedPropertyGrid/
 
 ToDo:
-	Attribute for roamin settings: "Global.System.Configuration.SettingsManageabilityAttribute(Configuration.SettingsManageability.Roaming), _"
+	Attribute for roaming settings: "Global.System.Configuration.SettingsManageabilityAttribute(Configuration.SettingsManageability.Roaming), _"
 
 PuTTY Problem:
 	http://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=96485
