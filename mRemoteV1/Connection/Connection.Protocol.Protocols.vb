@@ -4,7 +4,7 @@ Imports mRemoteNG.Tools.LocalizedAttributes
 Namespace Connection
     Namespace Protocol
         Public Enum Protocols
-            <LocalizedDescription("strRdp")> _
+            <LocalizedDescription("strRDP")> _
             RDP = 0
             <LocalizedDescription("strVnc")> _
             VNC = 1
