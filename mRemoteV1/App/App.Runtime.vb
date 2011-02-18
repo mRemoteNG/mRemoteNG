@@ -1346,7 +1346,7 @@ Namespace App
                     End If
                 End If
 
-
+                ' Create connection based on protocol type
                 Select Case nCi.Protocol
                     Case Connection.Protocol.Protocols.RDP
                         nProt = New Connection.Protocol.RDP
@@ -1421,7 +1421,6 @@ Namespace App
                 AddHandler nProt.Connected, AddressOf Prot_Event_Connected
                 AddHandler nProt.Closed, AddressOf Prot_Event_Closed
                 AddHandler nProt.ErrorOccured, AddressOf Prot_Event_ErrorOccured
-
 
                 nProt.InterfaceControl = New Connection.InterfaceControl(cContainer, nProt, nCi)
 

@@ -213,44 +213,47 @@ Namespace UI
                 Me.InitializeComponent()
             End Sub
 
-            'Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
-            '    Debug.Print("key: " & keyData.ToString)
-            '    Debug.Print("msg: " & msg.Msg)
-            '    Debug.Print("hwnd: " & msg.HWnd.ToString)
-            '    Debug.Print("lparam: " & msg.LParam.ToString)
-            '    Debug.Print("wparam: " & msg.WParam.ToString)
-            '    Debug.Print("result: " & msg.Result.ToString)
+            ' Main form handle command key events
+            Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+#If DEBUG Then
+                Debug.Print("key: " & keyData.ToString)
+                Debug.Print("msg: " & msg.Msg)
+                Debug.Print("hwnd: " & msg.HWnd.ToString)
+                Debug.Print("lparam: " & msg.LParam.ToString)
+                Debug.Print("wparam: " & msg.WParam.ToString)
+                Debug.Print("result: " & msg.Result.ToString)
+#End If
+                If keyData = Keys.Tab Then
+                    Dim curGridItemLabel As String = pGrid.SelectedGridItem.Label
+                    Dim gridItemIndex As Integer
 
-            '    If keyData = Keys.Tab Then
-            '        Dim curGridItemLabel As String = pGrid.SelectedGridItem.Label
-            '        Dim gridItemIndex As Integer
+                    For gridItemIndex = 0 To pGrid.SelectedGridItem.Parent.GridItems.Count
+                        If pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex).Label = curGridItemLabel Then
+                            Exit For
+                        End If
+                    Next
 
-            '        For gridItemIndex = 0 To pGrid.SelectedGridItem.Parent.GridItems.Count
-            '            If pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex).Label = curGridItemLabel Then
-            '                Exit For
-            '            End If
-            '        Next
+                    If pGrid.SelectedGridItem.Parent.GridItems.Count > gridItemIndex + 1 Then
+                        pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex + 1).Select()
+                    End If
+                End If
+                If keyData = (Keys.Tab Or Keys.Shift) Then
+                    Dim curGridItemLabel As String = pGrid.SelectedGridItem.Label
+                    Dim gridItemIndex As Integer
 
-            '        If pGrid.SelectedGridItem.Parent.GridItems.Count > gridItemIndex + 1 Then
-            '            pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex + 1).Select()
-            '        End If
-            '    ElseIf keyData = (Keys.Tab Or Keys.Shift) Then
-            '        Dim curGridItemLabel As String = pGrid.SelectedGridItem.Label
-            '        Dim gridItemIndex As Integer
+                    For gridItemIndex = 0 To pGrid.SelectedGridItem.Parent.GridItems.Count
+                        If pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex).Label = curGridItemLabel Then
+                            Exit For
+                        End If
+                    Next
 
-            '        For gridItemIndex = 0 To pGrid.SelectedGridItem.Parent.GridItems.Count
-            '            If pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex).Label = curGridItemLabel Then
-            '                Exit For
-            '            End If
-            '        Next
+                    If gridItemIndex - 1 >= 0 Then
+                        pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex - 1).Select()
+                    End If
+                End If
 
-            '        If gridItemIndex - 1 >= 0 Then
-            '            pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex - 1).Select()
-            '        End If
-            '    End If
-
-            '    Return MyBase.ProcessCmdKey(msg, keyData)
-            'End Function
+                Return MyBase.ProcessCmdKey(msg, keyData)
+            End Function
 
             Public Sub SetPropertyGridObject(ByVal Obj As Object)
                 Try
