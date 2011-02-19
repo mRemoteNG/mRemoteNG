@@ -235,6 +235,8 @@ Namespace UI
 
                     If pGrid.SelectedGridItem.Parent.GridItems.Count > gridItemIndex + 1 Then
                         pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex + 1).Select()
+                    Else
+                        pGrid.SelectedGridItem.Parent.GridItems(0).Select()
                     End If
                 End If
                 If keyData = (Keys.Tab Or Keys.Shift) Then
@@ -249,6 +251,8 @@ Namespace UI
 
                     If gridItemIndex - 1 >= 0 Then
                         pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex - 1).Select()
+                    Else
+                        pGrid.SelectedGridItem.Parent.GridItems(pGrid.SelectedGridItem.Parent.GridItems.Count - 1).Select()
                     End If
                 End If
 
