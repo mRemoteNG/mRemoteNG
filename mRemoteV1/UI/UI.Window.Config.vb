@@ -215,7 +215,7 @@ Namespace UI
 
             ' Main form handle command key events
             Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
-#If DEBUG Then
+#If Config = "Debug" Then
                 Debug.Print("key: " & keyData.ToString)
                 Debug.Print("msg: " & msg.Msg)
                 Debug.Print("hwnd: " & msg.HWnd.ToString)
