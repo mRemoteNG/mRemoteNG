@@ -103,16 +103,16 @@ Namespace Tools
             _Arguments = Arguments
         End Sub
 
-
+        ' Start external app
         Public Function Start(Optional ByVal ConnectionInfo As Connection.Info = Nothing) As Process
             Try
-                If _TryIntegrate = True Then
-                    StartIntApp(ConnectionInfo)
+                If _FileName = "" Then
+                    Throw New Exception("No Filename specified!")
                     Return Nothing
                 End If
 
-                If _FileName = "" Then
-                    Throw New Exception("No Filename specified!")
+                If _TryIntegrate = True Then
+                    StartIntApp(ConnectionInfo)
                     Return Nothing
                 End If
 
@@ -139,20 +139,26 @@ Namespace Tools
             End Try
         End Function
 
+        ' Start external app integrated
         Public Sub StartIntApp(Optional ByVal ConnectionInfo As Connection.Info = Nothing)
             Try
-                If _FileName = "" Then
-                    Throw New Exception("No Filename specified!")
-                    Exit Sub
-                End If
-
                 _ConnectionInfo = ConnectionInfo
 
                 Dim nCI As New Connection.Info
+
                 nCI.Protocol = Connection.Protocol.Protocols.IntApp
                 nCI.ExtApp = Me.DisplayName
                 nCI.Name = Me.DisplayName
                 nCI.Panel = "Int. Apps"
+                nCI.Hostname = _ConnectionInfo.Hostname
+                nCI.Port = _ConnectionInfo.Port
+                nCI.Username = _ConnectionInfo.Username
+                nCI.Password = _ConnectionInfo.Password
+                nCI.Domain = _ConnectionInfo.Domain
+                nCI.Description = _ConnectionInfo.Description
+                nCI.MacAddress = _ConnectionInfo.MacAddress
+                nCI.UserField = _ConnectionInfo.UserField
+                nCI.Description = _ConnectionInfo.Description
 
                 OpenConnection(nCI)
             Catch ex As Exception

@@ -1,7 +1,5 @@
 ﻿Imports mRemoteNG.App.Native
 Imports System.Threading
-Imports Microsoft.Win32
-Imports System.Drawing
 Imports mRemoteNG.App.Runtime
 
 Namespace Connection
@@ -112,12 +110,11 @@ Namespace Connection
 
                     IntAppHandle = IntAppProcess.MainWindowHandle
 
-
                     mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strIntAppStuff, True)
 
                     mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strIntAppHandle, IntAppHandle.ToString), True)
                     mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strIntAppTitle, IntAppProcess.MainWindowTitle), True)
-                    mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strIntAppParentHandle & Me.InterfaceControl.Parent.Handle.ToString), True)
+                    mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strIntAppParentHandle, Me.InterfaceControl.Parent.Handle.ToString), True)
 
                     SetParent(Me.IntAppHandle, Me.InterfaceControl.Parent.Handle)
                     SetWindowLong(Me.IntAppHandle, 0, WS_VISIBLE)
