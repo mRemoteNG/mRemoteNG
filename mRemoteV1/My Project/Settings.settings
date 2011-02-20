@@ -116,9 +116,6 @@
     <Setting Name="ConDefaultDescription" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="ConDefaultPanel" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
-      <Value Profile="(Default)">General</Value>
-    </Setting>
     <Setting Name="ConDefaultUsername" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

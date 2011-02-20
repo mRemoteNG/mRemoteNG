@@ -479,7 +479,6 @@ Namespace App
             With DefaultConnection
                 My.Settings.ConDefaultDescription = .Description
                 My.Settings.ConDefaultIcon = .Icon
-                My.Settings.ConDefaultPanel = .Panel
                 My.Settings.ConDefaultUsername = .Username
                 My.Settings.ConDefaultPassword = .Password
                 My.Settings.ConDefaultDomain = .Domain

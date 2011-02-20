@@ -75,7 +75,7 @@ Namespace Connection
             End Set
         End Property
 
-        Private _Panel As String = My.Settings.ConDefaultPanel
+        Private _Panel As String = My.Resources.strGeneral
         <LocalizedCategory("strCategoryDisplay", 1), _
             Browsable(True), _
             LocalizedDisplayName("strPropertyNamePanel"), _
