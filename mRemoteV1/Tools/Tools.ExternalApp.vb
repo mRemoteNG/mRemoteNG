@@ -159,6 +159,8 @@ Namespace Tools
                 nCI.MacAddress = _ConnectionInfo.MacAddress
                 nCI.UserField = _ConnectionInfo.UserField
                 nCI.Description = _ConnectionInfo.Description
+                nCI.PreExtApp = _ConnectionInfo.PreExtApp
+                nCI.PostExtApp = _ConnectionInfo.PostExtApp
 
                 OpenConnection(nCI)
             Catch ex As Exception
