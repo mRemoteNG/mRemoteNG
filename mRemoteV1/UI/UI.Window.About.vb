@@ -19,6 +19,7 @@ Namespace UI
             Friend WithEvents lblEdition As System.Windows.Forms.Label
             Friend WithEvents llblFAMFAMFAM As System.Windows.Forms.LinkLabel
             Friend WithEvents llblMagicLibrary As System.Windows.Forms.LinkLabel
+            Friend WithEvents llblWeifenLuo As System.Windows.Forms.LinkLabel
             Friend WithEvents pnlTop As System.Windows.Forms.Panel
 
             Private Sub InitializeComponent()
@@ -26,6 +27,7 @@ Namespace UI
                 Me.lblEdition = New System.Windows.Forms.Label
                 Me.pbLogo = New System.Windows.Forms.PictureBox
                 Me.pnlBottom = New System.Windows.Forms.Panel
+                Me.llblWeifenLuo = New System.Windows.Forms.LinkLabel
                 Me.llblMagicLibrary = New System.Windows.Forms.LinkLabel
                 Me.llblFAMFAMFAM = New System.Windows.Forms.LinkLabel
                 Me.txtChangeLog = New System.Windows.Forms.TextBox
@@ -82,6 +84,7 @@ Namespace UI
                             Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlBottom.BackColor = System.Drawing.SystemColors.Control
+                Me.pnlBottom.Controls.Add(Me.llblWeifenLuo)
                 Me.pnlBottom.Controls.Add(Me.llblMagicLibrary)
                 Me.pnlBottom.Controls.Add(Me.llblFAMFAMFAM)
                 Me.pnlBottom.Controls.Add(Me.txtChangeLog)
@@ -95,6 +98,20 @@ Namespace UI
                 Me.pnlBottom.Name = "pnlBottom"
                 Me.pnlBottom.Size = New System.Drawing.Size(788, 418)
                 Me.pnlBottom.TabIndex = 1
+                '
+                'llblWeifenLuo
+                '
+                Me.llblWeifenLuo.AutoSize = True
+                Me.llblWeifenLuo.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.llblWeifenLuo.ForeColor = System.Drawing.SystemColors.ControlText
+                Me.llblWeifenLuo.LinkColor = System.Drawing.Color.Blue
+                Me.llblWeifenLuo.Location = New System.Drawing.Point(16, 158)
+                Me.llblWeifenLuo.Name = "llblWeifenLuo"
+                Me.llblWeifenLuo.Size = New System.Drawing.Size(78, 22)
+                Me.llblWeifenLuo.TabIndex = 9
+                Me.llblWeifenLuo.TabStop = True
+                Me.llblWeifenLuo.Text = "WeifenLuo"
+                Me.llblWeifenLuo.UseCompatibleTextRendering = True
                 '
                 'llblMagicLibrary
                 '
@@ -134,12 +151,12 @@ Namespace UI
                 Me.txtChangeLog.Cursor = System.Windows.Forms.Cursors.Default
                 Me.txtChangeLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.txtChangeLog.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.txtChangeLog.Location = New System.Drawing.Point(24, 200)
+                Me.txtChangeLog.Location = New System.Drawing.Point(24, 224)
                 Me.txtChangeLog.Multiline = True
                 Me.txtChangeLog.Name = "txtChangeLog"
                 Me.txtChangeLog.ReadOnly = True
                 Me.txtChangeLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-                Me.txtChangeLog.Size = New System.Drawing.Size(760, 216)
+                Me.txtChangeLog.Size = New System.Drawing.Size(760, 192)
                 Me.txtChangeLog.TabIndex = 7
                 Me.txtChangeLog.TabStop = False
                 '
@@ -172,7 +189,7 @@ Namespace UI
                 Me.lblChangeLog.AutoSize = True
                 Me.lblChangeLog.Font = New System.Drawing.Font("Microsoft Sans Serif", 11.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblChangeLog.ForeColor = System.Drawing.SystemColors.ControlText
-                Me.lblChangeLog.Location = New System.Drawing.Point(16, 176)
+                Me.lblChangeLog.Location = New System.Drawing.Point(16, 199)
                 Me.lblChangeLog.Name = "lblChangeLog"
                 Me.lblChangeLog.Size = New System.Drawing.Size(92, 22)
                 Me.lblChangeLog.TabIndex = 6
@@ -285,6 +302,7 @@ Namespace UI
 
                     FillLinkLabel(llblFAMFAMFAM, My.Resources.strFAMFAMFAMAttribution, My.Resources.strFAMFAMFAMAttributionURL)
                     FillLinkLabel(llblMagicLibrary, My.Resources.strMagicLibraryAttribution, My.Resources.strMagicLibraryAttributionURL)
+                    FillLinkLabel(llblWeifenLuo, My.Resources.strWeifenLuoAttribution, My.Resources.strWeifenLuoAttributionURL)
 
                     If File.Exists(My.Application.Info.DirectoryPath & "\CHANGELOG.TXT") Then
                         Dim sR As New StreamReader(My.Application.Info.DirectoryPath & "\CHANGELOG.TXT")
@@ -302,6 +320,10 @@ Namespace UI
 
             Private Sub llblMagicLibrary_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llblMagicLibrary.LinkClicked
                 App.Runtime.GoToURL(My.Resources.strMagicLibraryAttributionURL)
+            End Sub
+
+            Private Sub llblWeifenLuo_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llblMagicLibrary.LinkClicked, llblWeifenLuo.LinkClicked
+                App.Runtime.GoToURL(My.Resources.strWeifenLuoAttributionURL)
             End Sub
 #End Region
         End Class

@@ -914,7 +914,7 @@ Namespace Config
                             conI.Inherit = New Connection.Info.Inheritance(conI, .Attributes("Inherit").Value)
 
                             conI.Icon = .Attributes("Icon").Value.Replace(".ico", "")
-                            conI.Panel = "General"
+                            conI.Panel = My.Resources.strGeneral
                         End If
 
                         If Me.confVersion > 1.4 Then '1.5

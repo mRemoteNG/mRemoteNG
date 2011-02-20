@@ -2274,4 +2274,13 @@ Error Description: {1}</value>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>RDP Reconnection Count</value>
   </data>
+  <data name="strWeifenLuoAttribution" xml:space="preserve">
+    <value>Uses the DockPanel Suite by [Weifen Luo]</value>
+  </data>
+  <data name="strWeifenLuoAttributionURL" xml:space="preserve">
+    <value>http://sourceforge.net/projects/dockpanelsuite/</value>
+  </data>
+  <data name="strGeneral" xml:space="preserve">
+    <value>General</value>
+  </data>
 </root>

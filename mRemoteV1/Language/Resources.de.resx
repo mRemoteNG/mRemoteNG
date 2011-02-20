@@ -666,7 +666,7 @@
     <value>Aussehen</value>
   </data>
 	<data name="strCategoryGeneral" xml:space="preserve">
-    <value>Generell</value>
+    <value>Allgemein</value>
   </data>
 	<data name="strPropertyDescriptionAuthenticationLevel" xml:space="preserve">
     <value>Wählen Sie, welche Authentifizierungs-Variante verwendet wird.</value>
@@ -1956,5 +1956,11 @@ Fehler Beschreibung: {1}</value>
 	</data>
 	<data name="strRdpReconnectCount" xml:space="preserve">
 		<value>RDP Verbindungsversuche</value>
+	</data>
+	<data name="strWeifenLuoAttribution" xml:space="preserve">
+		<value>Benutzt die DockPanel Suite von [Weifen Luo]</value>
+	</data>
+	<data name="strGeneral" xml:space="preserve">
+		<value>Allgemein</value>
 	</data>
 </root>
