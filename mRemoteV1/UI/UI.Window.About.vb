@@ -322,7 +322,7 @@ Namespace UI
                 App.Runtime.GoToURL(My.Resources.strMagicLibraryAttributionURL)
             End Sub
 
-            Private Sub llblWeifenLuo_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llblMagicLibrary.LinkClicked, llblWeifenLuo.LinkClicked
+            Private Sub llblWeifenLuo_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llblWeifenLuo.LinkClicked
                 App.Runtime.GoToURL(My.Resources.strWeifenLuoAttributionURL)
             End Sub
 #End Region
