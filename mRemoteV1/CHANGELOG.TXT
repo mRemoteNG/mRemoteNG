@@ -1,12 +1,17 @@
-1.64 (2011-##-##):
+﻿1.64 (2011-##-##):
   Bugs fixed: #6, #12, #14, #22, #25
-  Added real multilanguage support based on resx files, fixed translations, moved everything into resx, refactoring
-  Added locales to nsis installer
   Added Ctrl-Tab hotkey to change to the tab
+  Added locales to nsis installer
+  Added multilanguage support based on resx files, fixed translations, moved everything into resx, refactoring
+  Added Tab key to cycle through propertygrid entries (with shift-tab reverse move)
+  Added pre and post extApp for integrated Apps
+  Added credits for WeifenLuo
   Changed namespace to mRemoteNG
+  Fixed external apps macro expansion (missing parameters)
   Fixed RD Gateway and other inheritance bugs, rewritten to use a List of String instead of a string for hiding properties
   Removed confConsNew.xml -> creating new files with vb code
   Updated VNCSharpNG version. Corrects control key and alt key behavior.
+  Updated WeifenLuo to version 2.5 RC1
 
 1.63 (2010-02-02):
   New icon and logo
