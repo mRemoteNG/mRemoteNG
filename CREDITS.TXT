@@ -2,7 +2,9 @@ Contributors
 ============
 
 Felix Deimel
+Tom Hiller
 Riley McArdle
+Andreas Rehm
 David Vidmar
 
 
