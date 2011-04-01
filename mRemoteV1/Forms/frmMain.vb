@@ -24,6 +24,8 @@ Public Class frmMain
 
         Startup.CreateLogger()
 
+        Startup.RegisterHotKeys()
+
         ' Load GUI Configuration
         sL.Load()
 

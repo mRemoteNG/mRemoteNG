@@ -1,11 +1,14 @@
-﻿1.64:
-  AR: Bugs fixed: #14, #22, #25
-  AR: Fixed translations, moved everything into resx, refactoring, namespace renamed to mRemoteNG
-  AR: Removed confConsNew.xml -> creating new files with vb code
-  AR: Fixed RD Gateway and other inheritance bugs, rewritten to use a List of String instead of a string for hiding properties
-  AR: Added locales to nsis installer
+1.64 (2011-##-##):
+  Bugs fixed: #6, #12, #14, #22, #25
+  Added real multilanguage support based on resx files, fixed translations, moved everything into resx, refactoring
+  Added locales to nsis installer
+  Added Ctrl-Tab hotkey to change to the tab
+  Changed namespace to mRemoteNG
+  Fixed RD Gateway and other inheritance bugs, rewritten to use a List of String instead of a string for hiding properties
+  Removed confConsNew.xml -> creating new files with vb code
+  Updated VNCSharpNG version. Corrects control key and alt key behavior.
 
-1.63:
+1.63 (2010-02-02):
   New icon and logo
   Fixed problems moving or resizing the main window while PuTTY (SSH/telnet/rlogin/raw) connections are open
   Fixed PuTTY processes not closing on Vista and 7 with UAC enabled
@@ -20,7 +23,7 @@
   Popups can now be allowed in Internet Explorer by holding Ctrl+Alt when clicking a link
   Added PuTTY Settings item to tab context menu
 
-1.62:
+1.62 (2010-01-19):
   Switched to VncSharp, an open source VNC component
   VNC is supported again except for the following features:
     Windows authentication
@@ -36,11 +39,11 @@
   Added RDP, VNC and ICA version numbers to Components Check page
   Fixed a bug with the inheritance buttons on the Config panel disappearing after awhile
 
-1.61:
+1.61 (2010-01-14):
   Removed unlicensed SmartCode Solutions ViewerX VNC Viewer ActiveX
   This version of mRemoteNG does not support VNC
 
-1.60:
+1.60 (2010-01-09):
   Changed name to mRemoteNG
   Fixed menu bar not staying docked to left side
   Removed snakes game Easter egg

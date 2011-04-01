@@ -3,9 +3,11 @@ Imports System.IO
 Imports Crownwood
 Imports System.Threading
 Imports System.Xml
+Imports mRemoteNG.App.Native
 
 Namespace App
     Public Class Runtime
+
 #Region "Public Declarations"
         Public Shared sL As Config.Settings.Load
         Public Shared sS As Config.Settings.Save
@@ -38,8 +40,42 @@ Namespace App
         Public Shared DefaultInheritance As mRemoteNG.Connection.Info.Inheritance
 
         Public Shared ExtApps As New ArrayList()
+
+        'HotKeys
+        Public Shared HotKey_CtrlTab As clsHotKeyRegister
 #End Region
 
+        Public NotInheritable Class clsHotKeyRegister : Inherits NativeWindow
+            Private atomID As Integer
+
+            Event Pressed(ByVal ID As Integer)
+
+            Sub New(ByVal Modifier As ModifierKey, ByVal Key As Keys)
+                CreateHandle(New CreateParams)
+                atomID = GlobalAddAtom(GetHashCode())
+                RegisterHotKey(Handle, atomID, Modifier, Key)
+            End Sub
+
+            Sub Unregister()
+                UnregisterHotKey(Handle, atomID)
+            End Sub
+
+            Protected Overrides Sub WndProc(ByRef M As Message)
+                If M.Msg = 786 Then 'W_HOTKEY
+                    If ForegroundWindowRealtedToAppInstance() Then
+                        RaiseEvent Pressed(M.WParam.ToInt32)
+                    End If
+                End If
+                MyBase.WndProc(M)
+            End Sub
+
+            Public Enum ModifierKey
+                'None = 0  'Not a good idea to use, commenting out
+                Alt = 1
+                Ctrl = 2
+                Shift = 4
+            End Enum
+        End Class
         Public Class Windows
             Public Shared treeForm As UI.Window.Tree
             Public Shared treePanel As New DockContent
@@ -250,6 +286,11 @@ Namespace App
                 log = log4net.LogManager.GetLogger("mRemoteNG.Log")
             End Sub
 
+            Public Shared Sub RegisterHotKeys()
+                'Register HotKey
+                HotKey_CtrlTab = New clsHotKeyRegister(clsHotKeyRegister.ModifierKey.Ctrl, Keys.Tab)
+            End Sub
+
             Public Shared Sub UpdateCheck()
                 If My.Settings.CheckForUpdatesAsked And My.Settings.CheckForUpdatesOnStartup Then
                     If My.Settings.UpdatePending Or My.Settings.CheckForUpdatesLastCheck < Date.Now.Subtract(TimeSpan.FromDays(My.Settings.CheckForUpdatesFrequencyDays)) Then
@@ -413,7 +454,10 @@ Namespace App
                             ' ToDo: Change Report.log location
                             File.Delete(My.Application.Info.DirectoryPath & "\Report.log")
                         End If
+
                     End If
+                    'Unregister Hotkey
+                    HotKey_CtrlTab.Unregister()
 
                     sS.Save()
                 Catch ex As Exception
@@ -1656,6 +1700,45 @@ Namespace App
                 End If
             Next
         End Sub
+
+        'Determine if the Foreground window is current instance of mRemoteNG, Contained Putty instance or Contained External App instance
+        Public Shared Function ForegroundWindowRealtedToAppInstance() As Boolean
+            If GetForegroundWindow() = frmMain.Handle Then
+                Return True
+            End If
+
+            For Each conns As Connection.Info In cL
+                For Each openCon As Connection.Protocol.Base In conns.OpenConnections
+                    Select Case openCon.InterfaceControl.Info.Protocol
+                        Case Connection.Protocol.Protocols.SSH1
+                            If TryCast(openCon.InterfaceControl.Protocol, Connection.Protocol.PuttyBase).PuttyHandle = GetForegroundWindow() Then
+                                Return True
+                            End If
+                        Case Connection.Protocol.Protocols.SSH2
+                            If TryCast(openCon.InterfaceControl.Protocol, Connection.Protocol.PuttyBase).PuttyHandle = GetForegroundWindow() Then
+                                Return True
+                            End If
+                        Case Connection.Protocol.Protocols.RAW
+                            If TryCast(openCon.InterfaceControl.Protocol, Connection.Protocol.PuttyBase).PuttyHandle = GetForegroundWindow() Then
+                                Return True
+                            End If
+                        Case Connection.Protocol.Protocols.Rlogin
+                            If TryCast(openCon.InterfaceControl.Protocol, Connection.Protocol.PuttyBase).PuttyHandle = GetForegroundWindow() Then
+                                Return True
+                            End If
+                        Case Connection.Protocol.Protocols.Telnet
+                            If TryCast(openCon.InterfaceControl.Protocol, Connection.Protocol.PuttyBase).PuttyHandle = GetForegroundWindow() Then
+                                Return True
+                            End If
+                        Case Connection.Protocol.Protocols.IntApp
+                            If TryCast(openCon.InterfaceControl.Protocol, Connection.Protocol.IntApp).IntAppHandle = GetForegroundWindow() Then
+                                Return True
+                            End If
+                    End Select
+                Next
+            Next
+            Return False
+        End Function
 #End Region
 
 #Region "SQL Watcher"
