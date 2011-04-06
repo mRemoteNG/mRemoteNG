@@ -87,6 +87,14 @@ Namespace App
         Public Shared Function MapVirtualKey(ByVal wCode As Integer, ByVal wMapType As Integer) As Integer
         End Function
 
+        <DllImport("User32")> _
+        Public Shared Function SetClipboardViewer(ByVal hWndNewViewer As IntPtr) As IntPtr
+        End Function
+
+        <DllImport("User32")> _
+        Public Shared Function SendMessage(ByVal Handle As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+        End Function
+
         <DllImport("user32")> _
         Public Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal wMsg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Long
         End Function
@@ -149,6 +157,9 @@ Namespace App
 
         Public Const VK_CONTROL As Integer = &H11
         Public Const VK_C As Integer = &H67
+
+        Public Const WM_DRAWCLIPBOARD As Integer = 776
+        Public Const WM_CHANGECBCHAIN As Integer = 781
 #End Region
     End Class
 End Namespace

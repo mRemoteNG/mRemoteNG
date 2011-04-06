@@ -92,6 +92,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\ADTree.dll</HintPath>
     </Reference>
+    <Reference Include="AxInterop.WFICALib, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>do not check in\AxInterop.WFICALib.dll</HintPath>
+    </Reference>
     <Reference Include="DiffieHellman, Version=0.0.0.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\DiffieHellman.dll</HintPath>
@@ -99,6 +103,14 @@
     <Reference Include="FilteredPropertyGrid, Version=1.0.2258.31541, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\FilteredPropertyGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.EOLWTSCOM, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>do not check in\Interop.EOLWTSCOM.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.WFICALib, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>do not check in\Interop.WFICALib.dll</HintPath>
     </Reference>
     <Reference Include="IPTextBox, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -145,7 +157,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Tamir.SharpSSH.dll</HintPath>
     </Reference>
-    <Reference Include="VncSharpNG, Version=1.1.0.0, Culture=neutral, PublicKeyToken=61974755c7bfea7c, processorArchitecture=MSIL">
+    <Reference Include="VncSharpNG, Version=1.1.2.0, Culture=neutral, PublicKeyToken=61974755c7bfea7c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\VncSharpNG.dll</HintPath>
     </Reference>
@@ -894,22 +906,6 @@
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
-    <COMReference Include="AxWFICALib">
-      <Guid>{238F6F80-B8B4-11CF-8771-00A024541EE3}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>7</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="EOLWTSCOM">
-      <Guid>{96C3FA7A-3211-4D93-BFEA-4589DA4ABDE2}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="MSTSCLib">
       <Guid>{8C11EFA1-92C3-11D1-BC1E-00C04FA31489}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -932,14 +928,6 @@
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="WFICALib">
-      <Guid>{238F6F80-B8B4-11CF-8771-00A024541EE3}</Guid>
-      <VersionMajor>2</VersionMajor>
-      <VersionMinor>7</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
   </ItemGroup>

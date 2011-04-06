@@ -43,6 +43,7 @@ Namespace App
 
         'HotKeys
         Public Shared HotKey_CtrlTab As clsHotKeyRegister
+        Public Shared HotKey_ShiftTab As clsHotKeyRegister
 #End Region
 
         Public NotInheritable Class clsHotKeyRegister : Inherits NativeWindow
@@ -289,7 +290,10 @@ Namespace App
 
             Public Shared Sub RegisterHotKeys()
                 'Register HotKey
+                'Ctrl-Tab  |  Advance one tab
                 HotKey_CtrlTab = New clsHotKeyRegister(clsHotKeyRegister.ModifierKey.Ctrl, Keys.Tab)
+                'Shift-Tab  |  Reverse one tab
+                HotKey_ShiftTab = New clsHotKeyRegister(clsHotKeyRegister.ModifierKey.Ctrl + clsHotKeyRegister.ModifierKey.Shift, Keys.Tab)
             End Sub
 
             Public Shared Sub UpdateCheck()
@@ -457,8 +461,9 @@ Namespace App
                         End If
 
                     End If
-                    'Unregister Hotkey
+                    'Unregister Hotkeys
                     HotKey_CtrlTab.Unregister()
+                    HotKey_ShiftTab.Unregister()
 
                     sS.Save()
                 Catch ex As Exception
