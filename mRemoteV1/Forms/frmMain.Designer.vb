@@ -740,6 +740,7 @@ Partial Class frmMain
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(264, 25)
         Me.ToolStrip1.TabIndex = 19
+		Me.ToolStrip1.Visible = False
         '
         'ToolStripButton1
         '

@@ -135,10 +135,4 @@
 	<data name="strConnecting" xml:space="preserve">
 		<value>Connecting...</value>
 	</data>
-	<data name="strButtonCancel" xml:space="preserve">
-		<value>  </value>
-	</data>
-	<data name="strCcVNCFailed" xml:space="preserve">
-		<value> </value>
-	</data>
 </root>
