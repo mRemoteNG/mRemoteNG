@@ -207,7 +207,7 @@ Namespace Connection
                 Try
                     AddHandler VNC.ConnectComplete, AddressOf VNCEvent_Connected
                     AddHandler VNC.ConnectionLost, AddressOf VNCEvent_Disconnected
-                    AddHandler VNC.GotFocus, AddressOf VNCEvent_GotFocus
+                    AddHandler mRemoteNG.frmMain.clipboardchange, AddressOf VNCEvent_ClipboardChanged
                     If Not String.IsNullOrEmpty(Info.Password) Then
                         VNC.GetPassword = AddressOf VNCEvent_Authenticate
                     End If
@@ -228,7 +228,7 @@ Namespace Connection
                 MyBase.Close()
             End Sub
 
-            Private Sub VNCEvent_GotFocus(ByVal sender As Object, ByVal e As EventArgs)
+            Private Sub VNCEvent_ClipboardChanged()
                 Me.VNC.FillServerClipboard()
             End Sub
 

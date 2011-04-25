@@ -2,10 +2,13 @@ Imports mRemoteNG.App.Runtime
 Imports System.Reflection
 Imports Crownwood
 Imports mRemoteNG.App.Native
+Imports System.Runtime.InteropServices
 Imports PSTaskDialog
 
 Public Class frmMain
     Public prevWindowsState As FormWindowState
+    Public Shared Event clipboardchange()
+    Private fpChainedWindowHandle As IntPtr
 
 #Region "Startup & Shutdown"
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -17,6 +20,7 @@ Public Class frmMain
         Debug.Print("---------------------------" & vbNewLine & "[START] - " & Now)
 
         Startup.ParseCommandLineArgs()
+        fpChainedWindowHandle = SetClipboardViewer(Me.Handle)
 
         ' Create gui config load and save objects
         sL = New Config.Settings.Load(Me)
@@ -708,6 +712,13 @@ Public Class frmMain
                             Exit For
                         End If
                     Next
+                Case WM_DRAWCLIPBOARD
+                    RaiseEvent clipboardchange()
+                    SendMessage(fpChainedWindowHandle, m.Msg, m.LParam, m.WParam)
+                Case WM_CHANGECBCHAIN
+                    'Send to the next window
+                    SendMessage(fpChainedWindowHandle, m.Msg, m.LParam, m.WParam)
+                    fpChainedWindowHandle = m.LParam
                 Case Else
                     bWmGetTextFlag = False
                     bWmWindowPosChangedFlag = False

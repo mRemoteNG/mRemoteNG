@@ -145,7 +145,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Tamir.SharpSSH.dll</HintPath>
     </Reference>
-    <Reference Include="VncSharpNG, Version=1.1.0.0, Culture=neutral, PublicKeyToken=61974755c7bfea7c, processorArchitecture=MSIL">
+    <Reference Include="VncSharpNG, Version=1.1.2.0, Culture=neutral, PublicKeyToken=61974755c7bfea7c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\VncSharpNG.dll</HintPath>
     </Reference>
