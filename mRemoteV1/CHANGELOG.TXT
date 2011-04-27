@@ -1,17 +1,21 @@
-﻿1.64 (2011-##-##):
-  Bugs fixed: #6, #12, #14, #22, #25
-  Added Ctrl-Tab hotkey to change to the tab
-  Added locales to nsis installer
-  Added multilanguage support based on resx files, fixed translations, moved everything into resx, refactoring
-  Added Tab key to cycle through propertygrid entries (with shift-tab reverse move)
-  Added pre and post extApp for integrated Apps
-  Added credits for WeifenLuo
-  Changed namespace to mRemoteNG
-  Fixed external apps macro expansion (missing parameters)
-  Fixed RD Gateway and other inheritance bugs, rewritten to use a List of String instead of a string for hiding properties
-  Removed confConsNew.xml -> creating new files with vb code
-  Updated VNCSharpNG version. Corrects control key and alt key behavior.
-  Updated WeifenLuo to version 2.5 RC1
+﻿1.64 (2011-04-27):
+  Fixed bug 6 - VNC CTRL+key & keyboard combo mappings are broken
+  Fixed bug 12 - Tab switch is not working in config panel
+  Fixed bug 14 - RDP Connection authentication problem
+  Fixed bug 22 - External App parameter macro expansion doesn't work with "try to integrate"
+  Fixed bug 25 - Unhandled exception when mRemoteNG opens
+  Added multilanguage support and German translation to the application
+  Added Czech, Dutch, French, German, Polish, and Spanish translations to the installer
+  Added Ctrl-Tab hotkey to switch to the next tab and Ctrl-Shift-Tab to switch to the previous tab
+  Added Tab key to cycle through entries in the Config grid and Shift-Tab to cycle in reverse
+  Added ability to configure external tools to run before or after a connection is established
+  Fixed missing parameters in macro expansion for external tools
+  Fixed RD Gateway and other inheritance bugs
+  Changed how new connection files are created
+  Changed the internal namespace of the application to mRemoteNG instead of mRemote
+  Added credit for the DockPanel Suite to the About page
+  Updated DockPanel Suite to version 2.5 RC1
+  Updated VNCSharpNG to correct Ctrl and Alt key pass-through behavior
 
 1.63 (2010-02-02):
   New icon and logo
