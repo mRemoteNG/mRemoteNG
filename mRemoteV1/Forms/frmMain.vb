@@ -713,8 +713,8 @@ Public Class frmMain
                         End If
                     Next
                 Case WM_DRAWCLIPBOARD
-                    RaiseEvent clipboardchange()
                     SendMessage(fpChainedWindowHandle, m.Msg, m.LParam, m.WParam)
+                    RaiseEvent clipboardchange()
                 Case WM_CHANGECBCHAIN
                     'Send to the next window
                     SendMessage(fpChainedWindowHandle, m.Msg, m.LParam, m.WParam)
