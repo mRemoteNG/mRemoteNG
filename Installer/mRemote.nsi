@@ -74,12 +74,10 @@ Function .onInit
 	# On Vista with UAC, for example, this is not the same value when running
 	# with `RequestExecutionLevel user`. GetOriginalAccountType will return
 	# "admin" while GetAccountType will return "user".
-	UserInfo::GetOriginalAccountType
-	Pop $2
 	StrCmp $1 "Admin" 0 +3
 		Goto doit
 	StrCmp $1 "Power" 0 +3
-		Goto noop
+		Goto doit
 	StrCmp $1 "User" 0 +3
 		Goto noop
 	StrCmp $1 "Guest" 0 +3
@@ -188,6 +186,11 @@ Section "un.Uninstall"
 	RMDIR /r $INSTDIR
 
 	; Start Menu
+	SetShellVarContext all
+	Delete "$SMPROGRAMS\mRemoteNG\mRemoteNG.lnk"
+	Delete "$SMPROGRAMS\mRemoteNG\Uninstall.lnk"
+	RMDir "$SMPROGRAMS\mRemoteNG"
+	SetShellVarContext current
 	Delete "$SMPROGRAMS\mRemoteNG\mRemoteNG.lnk"
 	Delete "$SMPROGRAMS\mRemoteNG\Uninstall.lnk"
 	RMDir "$SMPROGRAMS\mRemoteNG"
