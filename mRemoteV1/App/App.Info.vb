@@ -15,7 +15,7 @@ Namespace App
 
         Public Class Settings
 #If Not PORTABLE Then
-            Public Shared ReadOnly SettingsPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName
+            Public Shared ReadOnly SettingsPath As String = GetFolderPath(SpecialFolder.ApplicationData) & "\" & My.Application.Info.ProductName
 #Else
             Public Shared ReadOnly SettingsPath As String = My.Application.Info.DirectoryPath
 #End If
