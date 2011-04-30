@@ -4,7 +4,7 @@ How to build the portable package:
 	  to Inherits PortableSettingsProvider
 	In App.Info.Settings:
 	  change SettingsPath
-	  from GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.CompanyName.Replace(" ", "_") & "\" & My.Application.Info.ProductName
+	  from GetFolderPath(SpecialFolder.ApplicationData) & "\" & My.Application.Info.CompanyName.Replace(" ", "_") & "\" & My.Application.Info.ProductName
 	  to My.Application.Info.DirectoryPath
 
 How to add a new language:
