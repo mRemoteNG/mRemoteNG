@@ -92,6 +92,7 @@ Function .onInit
 		Goto end
 	noop:
 		MessageBox MB_OK "$(RequiresAdminUser)"
+		Quit
 	end:
 FunctionEnd
 
