@@ -1,4 +1,11 @@
-﻿1.64 (2011-04-27):
+1.65 (2011-05-02):
+  Fixed Ctrl-Tab and Ctrl-Shift-Tab not working in any other applications while mRemoteNG is running
+  Ctrl-Tab and Ctrl-Shift-Tab no longer work to switch tabs within mRemoteNG
+  Fixed bug 36 - Install creates shortcuts only for the installing user
+  Fixed bug 38 - Application uses the wrong Application Data settings folder (in Local Settings)
+  Added code to the installer to check that the user is in the 'Power Users' or 'Administrators' group
+
+1.64 (2011-04-27):
   Fixed bug 6 - VNC CTRL+key & keyboard combo mappings are broken
   Fixed bug 12 - Tab switch is not working in config panel
   Fixed bug 14 - RDP Connection authentication problem

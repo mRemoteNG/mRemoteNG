@@ -3,7 +3,7 @@
 !insertmacro VersionCompare
 
 !DEFINE PRODUCT_VERSION_MAJOR 1
-!DEFINE PRODUCT_VERSION_MINOR 64
+!DEFINE PRODUCT_VERSION_MINOR 65
 
 !DEFINE PRODUCT_VERSION "${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}"
 !DEFINE PRODUCT_VERSION_LONG "${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.0.0"
@@ -23,7 +23,7 @@ RequestExecutionLevel admin
 VIProductVersion ${PRODUCT_VERSION_LONG}
 VIAddVersionKey "ProductName" "mRemoteNG"
 VIAddVersionKey "ProductVersion" ${PRODUCT_VERSION_LONG}
-VIAddVersionKey "LegalCopyright" "Copyright © 2007-2009 Felix Deimel, 2010 Riley McArdle"
+VIAddVersionKey "LegalCopyright" "Copyright © 2007-2009 Felix Deimel, 2010-2011 Riley McArdle"
 VIAddVersionKey "FileDescription" "mRemoteNG ${PRODUCT_VERSION} Installer"
 VIAddVersionKey "FileVersion" ${PRODUCT_VERSION_LONG}
 
