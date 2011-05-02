@@ -289,11 +289,12 @@ Namespace App
             End Sub
 
             Public Shared Sub RegisterHotKeys()
-                'Register HotKey
-                'Ctrl-Tab  |  Advance one tab
-                HotKey_CtrlTab = New clsHotKeyRegister(clsHotKeyRegister.ModifierKey.Ctrl, Keys.Tab)
-                'Shift-Tab  |  Reverse one tab
-                HotKey_ShiftTab = New clsHotKeyRegister(clsHotKeyRegister.ModifierKey.Ctrl + clsHotKeyRegister.ModifierKey.Shift, Keys.Tab)
+                ' This causes Ctrl-Tab and Ctrl-Shift-Tab to not work in any other applications. Not good. Disabled for now.
+                ' 'Register HotKey
+                ' 'Ctrl-Tab  |  Advance one tab
+                ' HotKey_CtrlTab = New clsHotKeyRegister(clsHotKeyRegister.ModifierKey.Ctrl, Keys.Tab)
+                ' 'Shift-Tab  |  Reverse one tab
+                ' HotKey_ShiftTab = New clsHotKeyRegister(clsHotKeyRegister.ModifierKey.Ctrl + clsHotKeyRegister.ModifierKey.Shift, Keys.Tab)
             End Sub
 
             Public Shared Sub UpdateCheck()
@@ -461,9 +462,9 @@ Namespace App
                         End If
 
                     End If
-                    'Unregister Hotkeys
-                    HotKey_CtrlTab.Unregister()
-                    HotKey_ShiftTab.Unregister()
+                    ' 'Unregister Hotkeys
+                    ' HotKey_CtrlTab.Unregister()
+                    ' HotKey_ShiftTab.Unregister()
 
                     sS.Save()
                 Catch ex As Exception
