@@ -227,8 +227,8 @@ Namespace UI
                 Me.Text = FormText
                 Me.TabText = FormText
 
-                AddHandler mRemoteNG.App.Runtime.HotKey_CtrlTab.Pressed, AddressOf CtrlTabHK_Press
-                AddHandler mRemoteNG.App.Runtime.HotKey_ShiftTab.Pressed, AddressOf ShiftTabHK_Press
+                'AddHandler mRemoteNG.App.Runtime.HotKey_CtrlTab.Pressed, AddressOf CtrlTabHK_Press
+                'AddHandler mRemoteNG.App.Runtime.HotKey_ShiftTab.Pressed, AddressOf ShiftTabHK_Press
             End Sub
 
             Protected Sub CtrlTabHK_Press(ByVal sender As Integer)
