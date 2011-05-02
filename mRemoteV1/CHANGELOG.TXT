@@ -1,3 +1,6 @@
+1.66 (2011-05-02):
+  Fixed connections not working
+
 1.65 (2011-05-02):
   Fixed Ctrl-Tab and Ctrl-Shift-Tab not working in any other applications while mRemoteNG is running
   Ctrl-Tab and Ctrl-Shift-Tab no longer work to switch tabs within mRemoteNG
