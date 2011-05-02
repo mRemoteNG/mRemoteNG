@@ -61,6 +61,41 @@ VIAddVersionKey "FileVersion" ${PRODUCT_VERSION_LONG}
 !define MUI_FINISHPAGE_RUN_Text "$(LaunchMremoteNow)"
 
 Function .onInit
+	ClearErrors
+	UserInfo::GetName
+	IfErrors Win9x
+	Pop $0
+	UserInfo::GetAccountType
+	Pop $1
+	# GetOriginalAccountType will check the tokens of the original user of the
+	# current thread/process. If the user tokens were elevated or limited for
+	# this process, GetOriginalAccountType will return the non-restricted
+	# account type.
+	# On Vista with UAC, for example, this is not the same value when running
+	# with `RequestExecutionLevel user`. GetOriginalAccountType will return
+	# "admin" while GetAccountType will return "user".
+	StrCmp $1 "Admin" 0 +3
+		Goto doit
+	StrCmp $1 "Power" 0 +3
+		Goto doit
+	StrCmp $1 "User" 0 +3
+		Goto noop
+	StrCmp $1 "Guest" 0 +3
+		Goto noop
+	MessageBox MB_OK "Unknown error"
+	Goto doit
+
+	Win9x:
+	doit:
+		# We can install
+		Call SelectLanguage
+		Goto end
+	noop:
+		MessageBox MB_OK "$(RequiresAdminUser)"
+	end:
+FunctionEnd
+
+Function SelectLanguage
 	;Language selection dialog
 	Push ""
 	Push ${LANG_ENGLISH}
@@ -109,7 +144,8 @@ FunctionEnd
 
 Section "" ; Install
 	SetOutPath $INSTDIR
-
+	SetShellVarContext all
+	
 	; AddFiles
 	File /r /x "mRemoteNG.vshost.*" "..\mRemoteV1\bin\Release\*.*"
 	File /r "Dependencies\*.*"
@@ -150,6 +186,11 @@ Section "un.Uninstall"
 	RMDIR /r $INSTDIR
 
 	; Start Menu
+	SetShellVarContext all
+	Delete "$SMPROGRAMS\mRemoteNG\mRemoteNG.lnk"
+	Delete "$SMPROGRAMS\mRemoteNG\Uninstall.lnk"
+	RMDir "$SMPROGRAMS\mRemoteNG"
+	SetShellVarContext current
 	Delete "$SMPROGRAMS\mRemoteNG\mRemoteNG.lnk"
 	Delete "$SMPROGRAMS\mRemoteNG\Uninstall.lnk"
 	RMDir "$SMPROGRAMS\mRemoteNG"

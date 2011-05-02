@@ -440,10 +440,10 @@
     <Setting Name="UpdatePending" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ConDefaultRDGatewayUsageMethod" Type="System.String" Scope="Application">
+    <Setting Name="ConDefaultRDGatewayUsageMethod" Type="System.String" Scope="User">
       <Value Profile="(Default)">Never</Value>
     </Setting>
-    <Setting Name="ConDefaultRDGatewayUseConnectionCredentials" Type="System.String" Scope="Application">
+    <Setting Name="ConDefaultRDGatewayUseConnectionCredentials" Type="System.String" Scope="User">
       <Value Profile="(Default)">Yes</Value>
     </Setting>
     <Setting Name="ConDefaultIcon" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
