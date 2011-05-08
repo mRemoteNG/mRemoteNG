@@ -28,8 +28,6 @@ Public Class frmMain
 
         Startup.CreateLogger()
 
-        Startup.RegisterHotKeys()
-
         ' Load GUI Configuration
         sL.Load()
 
@@ -66,6 +64,8 @@ Public Class frmMain
         Startup.UpdateCheck()
         Startup.AnnouncementCheck()
         Startup.CreateSQLUpdateHandlerAndStartTimer()
+
+        App.Runtime.KeyComboHook = New KeyboardComboHook
 
         AddSysMenuItems()
         AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf DisplayChanged
@@ -151,7 +151,8 @@ Public Class frmMain
         For Each Window As UI.Window.Base In wL
             Window.Close()
         Next
-
+        App.Runtime.KeyComboHook.unhookKeyboard()
+        App.Runtime.KeyComboHook = Nothing
         App.Runtime.Shutdown.BeforeQuit()
 
         Debug.Print("[END] - " & Now)

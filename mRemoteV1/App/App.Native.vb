@@ -95,24 +95,14 @@ Namespace App
         Public Shared Function SendMessage(ByVal Handle As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
         End Function
 
+        End Function
+
+        <DllImport("User32")> _
+        Public Shared Function SendMessage(ByVal Handle As IntPtr, ByVal msg As Integer, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+        End Function
+
         <DllImport("user32")> _
         Public Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal wMsg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Long
-        End Function
-
-        <DllImport("user32")> _
-        Public Shared Function RegisterHotKey(ByVal Handle As IntPtr, ByVal ID As Integer, ByVal Modifier As Integer, ByVal Key As Integer) As Integer
-        End Function
-
-        <DllImport("user32")> _
-        Public Shared Function UnregisterHotKey(ByVal Handle As IntPtr, ByVal ID As Integer) As Integer
-        End Function
-
-        <DllImport("kernel32")> _
-        Public Shared Function GlobalAddAtom(ByVal lpString As String) As Integer
-        End Function
-
-        <DllImport("kernel32")> _
-        Public Shared Function GlobalDeleteAtom(ByVal nAtom As Integer) As Integer
         End Function
 #End Region
 

@@ -3,6 +3,7 @@ Imports System.IO
 Imports Crownwood
 Imports System.Threading
 Imports System.Xml
+Imports InputManager
 Imports mRemoteNG.App.Native
 Imports System.Environment
 
@@ -41,42 +42,57 @@ Namespace App
         Public Shared DefaultInheritance As mRemoteNG.Connection.Info.Inheritance
 
         Public Shared ExtApps As New ArrayList()
-
-        'HotKeys
-        Public Shared HotKey_CtrlTab As clsHotKeyRegister
+        Public Shared KeyComboHook As KeyboardComboHook
         Public Shared HotKey_ShiftTab As clsHotKeyRegister
 #End Region
+        Public Class KeyboardComboHook
+            Private Shared keysDown As List(Of Integer)
+            Public Event RaiseKeyCombo(ByVal _keysDown As List(Of Integer))
 
-        Public NotInheritable Class clsHotKeyRegister : Inherits NativeWindow
-            Private atomID As Integer
-
-            Event Pressed(ByVal ID As Integer)
-
-            Sub New(ByVal Modifier As ModifierKey, ByVal Key As Keys)
-                CreateHandle(New CreateParams)
-                atomID = GlobalAddAtom(GetHashCode())
-                RegisterHotKey(Handle, atomID, Modifier, Key)
+            Public Sub New()
+                KeyboardHook.InstallHook()
+                keysDown = New List(Of Integer)
+                AddHandler KeyboardHook.KeyDown, AddressOf keyDown
+                AddHandler KeyboardHook.KeyUp, AddressOf keyUp
             End Sub
 
-            Sub Unregister()
-                UnregisterHotKey(Handle, atomID)
-            End Sub
-
-            Protected Overrides Sub WndProc(ByRef M As Message)
-                If M.Msg = 786 Then 'W_HOTKEY
-                    If ForegroundWindowRealtedToAppInstance() Then
-                        RaiseEvent Pressed(M.WParam.ToInt32)
-                    End If
+            Private Sub keyDown(ByVal keyCode As Integer)
+                If Not keysDown.Contains(NormalizeKey(keyCode)) Then
+                    keysDown.Add(NormalizeKey(keyCode))
                 End If
-                MyBase.WndProc(M)
             End Sub
 
-            Public Enum ModifierKey
-                'None = 0  'Not a good idea to use, commenting out
-                Alt = 1
-                Ctrl = 2
-                Shift = 4
-            End Enum
+            Private Sub keyUp(ByVal keyCode As Integer)
+                'NOTE: this is before the key is removed from the list
+                If keysDown.Count > 1 Then
+                    RaiseEvent RaiseKeyCombo(keysDown)
+                End If
+                keysDown.Remove(NormalizeKey(keyCode))
+            End Sub
+
+            Public Sub unhookKeyboard()
+                KeyboardHook.UninstallHook()
+            End Sub
+
+            Protected Overrides Sub Finalize()
+                KeyboardHook.UninstallHook()
+                keysDown.Clear()
+                MyBase.Finalize()
+            End Sub
+
+            Private Function NormalizeKey(ByVal keyCode As Integer) As Integer
+                Dim normalizedKey As Integer = keyCode
+
+                Select Case keyCode
+                    Case 162, 163, 131072   ' Keys.LControlKey,Keys.RControlKey,Keys.Control
+                        normalizedKey = 17  ' Keys.ControlKey
+                    Case 160, 161, 65536    'Keys.LShiftKey,Keys.RShiftKey,Keys.Shift
+                        normalizedKey = 16  'Keys.ShiftKey
+                    Case 165, 164, 262144   'Keys.RMenu,Keys.LMenu,Keys.Alt
+                        normalizedKey = 18  ' Keys.Menu (Alt Key)
+                End Select
+                Return normalizedKey
+            End Function
         End Class
         Public Class Windows
             Public Shared treeForm As UI.Window.Tree
@@ -288,14 +304,6 @@ Namespace App
                 log = log4net.LogManager.GetLogger("mRemoteNG.Log")
             End Sub
 
-            Public Shared Sub RegisterHotKeys()
-                ' This causes Ctrl-Tab and Ctrl-Shift-Tab to not work in any other applications. Not good. Disabled for now.
-                ' 'Register HotKey
-                ' 'Ctrl-Tab  |  Advance one tab
-                ' HotKey_CtrlTab = New clsHotKeyRegister(clsHotKeyRegister.ModifierKey.Ctrl, Keys.Tab)
-                ' 'Shift-Tab  |  Reverse one tab
-                ' HotKey_ShiftTab = New clsHotKeyRegister(clsHotKeyRegister.ModifierKey.Ctrl + clsHotKeyRegister.ModifierKey.Shift, Keys.Tab)
-            End Sub
 
             Public Shared Sub UpdateCheck()
                 If My.Settings.CheckForUpdatesAsked And My.Settings.CheckForUpdatesOnStartup Then
@@ -462,9 +470,7 @@ Namespace App
                         End If
 
                     End If
-                    ' 'Unregister Hotkeys
-                    ' HotKey_CtrlTab.Unregister()
-                    ' HotKey_ShiftTab.Unregister()
+
 
                     sS.Save()
                 Catch ex As Exception

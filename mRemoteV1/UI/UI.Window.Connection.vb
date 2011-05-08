@@ -227,17 +227,22 @@ Namespace UI
                 Me.Text = FormText
                 Me.TabText = FormText
 
-                'AddHandler mRemoteNG.App.Runtime.HotKey_CtrlTab.Pressed, AddressOf CtrlTabHK_Press
+                AddHandler mRemoteNG.App.Runtime.KeyComboHook.RaiseKeyCombo, AddressOf KeyboardHook_KeyCombo
                 'AddHandler mRemoteNG.App.Runtime.HotKey_ShiftTab.Pressed, AddressOf ShiftTabHK_Press
             End Sub
 
-            Protected Sub CtrlTabHK_Press(ByVal sender As Integer)
-                With Me.TabController
-                    If .TabPages.Count > 1 And Me.Visible Then
-                        If .TabPages.Count = .SelectedIndex + 1 Then
-                            .SelectedIndex = 0
-                        Else
-                            .SelectedIndex = .SelectedIndex + 1
+            Protected Sub KeyboardHook_KeyCombo(ByVal keyCode As List(Of Integer))
+                If ForegroundWindowRealtedToAppInstance() _
+                    And keyCode.Contains(Keys.ControlKey) _
+                    And keyCode.Contains(Keys.Tab) Then
+                    With Me.TabController
+                        If .TabPages.Count > 1 And Me.Visible Then
+                            If keyCode.Count = 2 Then
+
+                                If .TabPages.Count = .SelectedIndex + 1 Then
+                                    .SelectedIndex = 0
+                                Else
+                                    .SelectedIndex = .SelectedIndex + 1
                         End If
                         FocusIC()
                         RefreshIC()
@@ -251,12 +256,23 @@ Namespace UI
                             .SelectedIndex = .TabPages.Count - 1
                         Else
                             .SelectedIndex = .SelectedIndex - 1
+                                End If
+                                FocusIC()
+                                RefreshIC()
+                            ElseIf keyCode.Contains(Keys.ShiftKey) And keyCode.Count = 3 Then
+                                If .SelectedIndex = 0 Then
+                                    .SelectedIndex = .TabPages.Count - 1
+                                Else
+                                    .SelectedIndex = .SelectedIndex - 1
+                                End If
+                                FocusIC()
+                                RefreshIC()
+                            End If
                         End If
-                        FocusIC()
-                        RefreshIC()
-                    End If
-                End With
+                    End With
+                End If
             End Sub
+
             Public Function AddConnectionTab(ByVal conI As mRemoteNG.Connection.Info) As Magic.Controls.TabPage
                 Try
                     Dim nTab As New Magic.Controls.TabPage

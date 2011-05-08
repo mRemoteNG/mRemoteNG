@@ -48,6 +48,11 @@ Copyright © 2008 Skybound Software
 Mozilla Public License 1.1
 http://www.geckofx.org/
 
+InputManager library 
+Copyright © Nemex 2010
+Code Project Open License (CPOL)
+http://www.codeproject.com/KB/library/InputManager.aspx
+
 IPTextBox 1.1
 Copyright © 2006 Matthew Kleinwaks
 Copyright © 2008 Felix Deimel
