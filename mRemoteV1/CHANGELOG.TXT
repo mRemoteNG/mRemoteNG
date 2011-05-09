@@ -1,6 +1,7 @@
 ﻿1.67 (2011-XX-XX):
   Replaced hot key registration with low level keyboard hook.  Reinstated ctrl-tab and ctrl-shift-tab
   Moved application file migration execution before extApps.xml is loaded.  Also excluded from portable version
+  Disable ICA Hotkeys for Citrix connections.  Fixes issue with international users.
 
 1.66 (2011-05-02):
   Fixed connections not working
