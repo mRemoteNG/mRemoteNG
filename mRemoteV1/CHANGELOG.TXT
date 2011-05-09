@@ -1,4 +1,8 @@
-﻿1.66 (2011-05-02):
+﻿1.67 (2011-XX-XX):
+  Replaced hot key registration with low level keyboard hook.  Reinstated ctrl-tab and ctrl-shift-tab
+  Moved application file migration execution before extApps.xml is loaded.  Also excluded from portable version
+
+1.66 (2011-05-02):
   Fixed connections not working
 
 1.65 (2011-05-02):

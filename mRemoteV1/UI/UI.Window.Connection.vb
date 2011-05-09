@@ -228,7 +228,6 @@ Namespace UI
                 Me.TabText = FormText
 
                 AddHandler mRemoteNG.App.Runtime.KeyComboHook.RaiseKeyCombo, AddressOf KeyboardHook_KeyCombo
-                'AddHandler mRemoteNG.App.Runtime.HotKey_ShiftTab.Pressed, AddressOf ShiftTabHK_Press
             End Sub
 
             Protected Sub KeyboardHook_KeyCombo(ByVal keyCode As List(Of Integer))
@@ -238,24 +237,10 @@ Namespace UI
                     With Me.TabController
                         If .TabPages.Count > 1 And Me.Visible Then
                             If keyCode.Count = 2 Then
-
                                 If .TabPages.Count = .SelectedIndex + 1 Then
                                     .SelectedIndex = 0
                                 Else
                                     .SelectedIndex = .SelectedIndex + 1
-                        End If
-                        FocusIC()
-                        RefreshIC()
-                    End If
-                End With
-            End Sub
-            Protected Sub ShiftTabHK_Press(ByVal sender As Integer)
-                With Me.TabController
-                    If .TabPages.Count > 1 And Me.Visible Then
-                        If .SelectedIndex = 0 Then
-                            .SelectedIndex = .TabPages.Count - 1
-                        Else
-                            .SelectedIndex = .SelectedIndex - 1
                                 End If
                                 FocusIC()
                                 RefreshIC()

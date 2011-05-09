@@ -43,7 +43,6 @@ Namespace App
 
         Public Shared ExtApps As New ArrayList()
         Public Shared KeyComboHook As KeyboardComboHook
-        Public Shared HotKey_ShiftTab As clsHotKeyRegister
 #End Region
         Public Class KeyboardComboHook
             Private Shared keysDown As List(Of Integer)
@@ -796,22 +795,6 @@ Namespace App
                         End If
                     End If
 
-                    ' LocalApplicationData to ApplicationData move if needed
-                    Dim oldPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName
-                    Dim newPath As String = App.Info.Connections.DefaultConnectionsPath
-                    Dim dirinfonew As IO.DirectoryInfo
-                    dirinfonew = New IO.DirectoryInfo(newPath)
-                    If (Not dirinfonew.Exists) Then
-                        Dim dirinfoold As IO.DirectoryInfo
-                        dirinfoold = New IO.DirectoryInfo(oldPath)
-                        If (dirinfoold.Exists) Then
-                            MkDir(dirinfonew.FullName)
-                            For Each fileInfo As FileInfo In dirinfoold.GetFiles
-                                File.Move(fileInfo.FullName, Path.Combine(newPath, fileInfo.Name))
-                            Next
-                        End If
-                    End If
-
                     If File.Exists(conL.ConnectionFileName) = False Then
                         If WithDialog Then
                             mC.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strConnectionsFileCouldNotBeLoaded, conL.ConnectionFileName))
@@ -1225,6 +1208,17 @@ Namespace App
                 mC.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strConnectionsFileCouldNotSaveAs, conS.ConnectionFileName) & vbNewLine & ex.Message)
             End Try
 
+        End Sub
+
+        Public Shared Sub MigrateAppData()
+            ' LocalApplicationData to ApplicationData move if needed
+            Dim oldPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName
+            Dim newPath As String = App.Info.Connections.DefaultConnectionsPath
+            If (Not Directory.Exists(newPath) And Directory.Exists(oldPath)) Then
+                Directory.Move(oldPath, newPath)
+            End If
+
+            ' May want to search and remove depricated mRemote and mRemoteNG folders in the future
         End Sub
 #End Region
 

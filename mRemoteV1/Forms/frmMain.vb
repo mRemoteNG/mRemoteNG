@@ -21,7 +21,10 @@ Public Class frmMain
 
         Startup.ParseCommandLineArgs()
         fpChainedWindowHandle = SetClipboardViewer(Me.Handle)
-
+#If Not PORTABLE Then
+        'Migrate files before opening
+        App.Runtime.MigrateAppData()
+#End If
         ' Create gui config load and save objects
         sL = New Config.Settings.Load(Me)
         sS = New Config.Settings.Save(Me)
