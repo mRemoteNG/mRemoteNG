@@ -4,6 +4,7 @@ Imports Crownwood
 Imports System.Threading
 Imports System.Xml
 Imports mRemoteNG.App.Native
+Imports System.Environment
 
 Namespace App
     Public Class Runtime
@@ -784,6 +785,13 @@ Namespace App
                     Else
                         If My.Settings.LoadConsFromCustomLocation = False Then
                             conL.ConnectionFileName = App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile
+                            Dim oldPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName & "\" & App.Info.Connections.DefaultConnectionsFile
+                            Dim newPath As String = App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile
+                            If Not File.Exists(newPath) And File.Exists(oldPath) Then
+                                conL.ConnectionFileName = oldPath
+                            Else
+                                conL.ConnectionFileName = newPath
+                            End If
                         Else
                             conL.ConnectionFileName = My.Settings.CustomConsPath
                         End If
