@@ -4,7 +4,6 @@ Imports Crownwood
 Imports System.Threading
 Imports System.Xml
 Imports mRemoteNG.App.Native
-Imports System.Environment
 
 Namespace App
     Public Class Runtime
@@ -787,22 +786,6 @@ Namespace App
                             conL.ConnectionFileName = App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile
                         Else
                             conL.ConnectionFileName = My.Settings.CustomConsPath
-                        End If
-                    End If
-
-                    ' LocalApplicationData to ApplicationData move if needed
-                    Dim oldPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName
-                    Dim newPath As String = App.Info.Connections.DefaultConnectionsPath
-                    Dim dirinfonew As IO.DirectoryInfo
-                    dirinfonew = New IO.DirectoryInfo(newPath)
-                    If (Not dirinfonew.Exists) Then
-                        Dim dirinfoold As IO.DirectoryInfo
-                        dirinfoold = New IO.DirectoryInfo(oldPath)
-                        If (dirinfoold.Exists) Then
-                            MkDir(dirinfonew.FullName)
-                            For Each fileInfo As FileInfo In dirinfoold.GetFiles
-                                File.Move(fileInfo.FullName, Path.Combine(newPath, fileInfo.Name))
-                            Next
                         End If
                     End If
 
