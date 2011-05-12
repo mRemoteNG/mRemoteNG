@@ -2,6 +2,7 @@ Imports System.IO
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 Imports System.Xml
+Imports System.Environment
 
 Namespace Config
     Namespace Settings
@@ -172,12 +173,16 @@ Namespace Config
             End Sub
 
             Public Sub LoadExternalAppsFromXML()
-                If File.Exists(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.ExtAppsFilesName) = False Then
+                Dim oldPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName & "\" & App.Info.Settings.ExtAppsFilesName
+                Dim newPath As String = App.Info.Settings.SettingsPath & "\" & App.Info.Settings.ExtAppsFilesName
+                Dim xDom As New XmlDocument()
+                If File.Exists(newPath) Then
+                    xDom.Load(newPath)
+                ElseIf File.Exists(oldPath) Then
+                    xDom.Load(oldPath)
+                Else
                     Exit Sub
                 End If
-
-                Dim xDom As New XmlDocument()
-                xDom.Load(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.ExtAppsFilesName)
 
                 For Each xEl As XmlElement In xDom.DocumentElement.ChildNodes
                     Dim extA As New Tools.ExternalApp
