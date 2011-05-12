@@ -160,8 +160,13 @@ Namespace Config
                         Loop
 
                         Startup.CreatePanels()
-                        If File.Exists(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.LayoutFileName) And My.Settings.ResetPanels = False Then
-                            .pnlDock.LoadFromXml(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.LayoutFileName, AddressOf GetContentFromPersistString)
+
+                        Dim oldPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName & "\" & App.Info.Settings.LayoutFileName
+                        Dim newPath As String = App.Info.Settings.SettingsPath & "\" & App.Info.Settings.LayoutFileName
+                        If File.Exists(newPath) Then
+                            .pnlDock.LoadFromXml(newPath, AddressOf GetContentFromPersistString)
+                        ElseIf File.Exists(oldPath) Then
+                            .pnlDock.LoadFromXml(oldPath, AddressOf GetContentFromPersistString)
                         Else
                             Startup.SetDefaultLayout()
                         End If
