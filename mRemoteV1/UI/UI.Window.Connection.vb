@@ -226,37 +226,8 @@ Namespace UI
                 Me.InitializeComponent()
                 Me.Text = FormText
                 Me.TabText = FormText
-
-                'AddHandler mRemoteNG.App.Runtime.HotKey_CtrlTab.Pressed, AddressOf CtrlTabHK_Press
-                'AddHandler mRemoteNG.App.Runtime.HotKey_ShiftTab.Pressed, AddressOf ShiftTabHK_Press
             End Sub
 
-            Protected Sub CtrlTabHK_Press(ByVal sender As Integer)
-                With Me.TabController
-                    If .TabPages.Count > 1 And Me.Visible Then
-                        If .TabPages.Count = .SelectedIndex + 1 Then
-                            .SelectedIndex = 0
-                        Else
-                            .SelectedIndex = .SelectedIndex + 1
-                        End If
-                        FocusIC()
-                        RefreshIC()
-                    End If
-                End With
-            End Sub
-            Protected Sub ShiftTabHK_Press(ByVal sender As Integer)
-                With Me.TabController
-                    If .TabPages.Count > 1 And Me.Visible Then
-                        If .SelectedIndex = 0 Then
-                            .SelectedIndex = .TabPages.Count - 1
-                        Else
-                            .SelectedIndex = .SelectedIndex - 1
-                        End If
-                        FocusIC()
-                        RefreshIC()
-                    End If
-                End With
-            End Sub
             Public Function AddConnectionTab(ByVal conI As mRemoteNG.Connection.Info) As Magic.Controls.TabPage
                 Try
                     Dim nTab As New Magic.Controls.TabPage
