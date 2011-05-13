@@ -1,3 +1,6 @@
+1.67 (2011-XX-XX):
+  Disable ICA Hotkeys for Citrix connections.  Fixes issue with international users.
+
 1.66 (2011-05-02):
   Fixed connections not working
 
@@ -531,7 +534,7 @@ V0.0.3.2:
 V0.0.3.0:
   Added Options Tab
     Load connections file from different location
-    Save/Don’t Save connections file on exit
+    Save/Don't Save connections file on exit
     Show current tab name in window title
   Added drag and drop functionality to the connections tree
   Added feature to hide top bar
@@ -541,7 +544,7 @@ V0.0.3.0:
 V0.0.2.7:
   Added feature to save connection settings to all connections in the selected container
   Icon choosing bug fixed
-  Taskbar button had no text when in fullscreen – fixed
+  Taskbar button had no text when in fullscreen - fixed
   Fixed bug in Quick Connect GUI
   Disabled "Display Wallpaper" and "Display Themes" checkboxes as these features are not implemented
 

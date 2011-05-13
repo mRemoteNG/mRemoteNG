@@ -46,6 +46,30 @@ Namespace Connection
 
                     Me.SetSecurity()
 
+                    'Disable hotkeys for international users
+                    ICA.Hotkey1Shift = Nothing
+                    ICA.Hotkey1Char = Nothing
+                    ICA.Hotkey2Shift = Nothing
+                    ICA.Hotkey2Char = Nothing
+                    ICA.Hotkey3Shift = Nothing
+                    ICA.Hotkey3Char = Nothing
+                    ICA.Hotkey4Shift = Nothing
+                    ICA.Hotkey4Char = Nothing
+                    ICA.Hotkey5Shift = Nothing
+                    ICA.Hotkey5Char = Nothing
+                    ICA.Hotkey6Shift = Nothing
+                    ICA.Hotkey6Char = Nothing
+                    ICA.Hotkey7Shift = Nothing
+                    ICA.Hotkey7Char = Nothing
+                    ICA.Hotkey8Shift = Nothing
+                    ICA.Hotkey8Char = Nothing
+                    ICA.Hotkey9Shift = Nothing
+                    ICA.Hotkey9Char = Nothing
+                    ICA.Hotkey10Shift = Nothing
+                    ICA.Hotkey10Char = Nothing
+                    ICA.Hotkey11Shift = Nothing
+                    ICA.Hotkey11Char = Nothing
+
                     ICA.PersistentCacheEnabled = Info.CacheBitmaps
 
                     ICA.Title = Info.Name
