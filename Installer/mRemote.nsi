@@ -28,6 +28,8 @@ VIAddVersionKey "FileDescription" "mRemoteNG ${PRODUCT_VERSION} Installer"
 VIAddVersionKey "FileVersion" ${PRODUCT_VERSION_LONG}
 
 ; Design
+!define MUI_ICON "Setup_Install.ico"
+!define MUI_UNICON "RecycleBin.ico"
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_BITMAP "header.bmp" ; optional
 !define MUI_HEADERIMAGE_BITMAP_NOSTRETCH
