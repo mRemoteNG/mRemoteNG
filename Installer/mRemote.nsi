@@ -113,6 +113,8 @@ Function SelectLanguage
 	Push ${LanguageNameSpanish}
 	Push ${LANG_CZECH}
 	Push ${LanguageNameCzech}
+	Push ${LANG_THAI}
+	Push ${LanguageNameThai}
 	Push A ; A means auto count languages
 	       ; for the auto count to work the first empty push (Push "") must remain
 	LangDLL::LangDialog  "$(InstallerLanguage)" "$(SelectInstallerLanguage)"

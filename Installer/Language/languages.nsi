@@ -1,4 +1,4 @@
-; Language names
+﻿; Language names
 !define LanguageNameEnglish "English"
 !define LanguageNameGerman "Deutsch"
 !define LanguageNameDutch "Dutch"
@@ -6,6 +6,7 @@
 !define LanguageNamePolish "Polish"
 !define LanguageNameSpanish "Spanish"
 !define LanguageNameCzech "Czech"
+!define LanguageNameThai "ภาษาไทย"
 
 !insertmacro MUI_LANGUAGE "English"
 !include "Language\english.nsi"
@@ -27,3 +28,6 @@
 
 !insertmacro MUI_LANGUAGE "Czech"
 !include "Language\czech.nsi"
+
+!insertmacro MUI_LANGUAGE "Thai"
+!include "Language\thai.nsi"
