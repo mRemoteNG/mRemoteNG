@@ -165,8 +165,10 @@ Namespace Config
                         Dim newPath As String = App.Info.Settings.SettingsPath & "\" & App.Info.Settings.LayoutFileName
                         If File.Exists(newPath) Then
                             .pnlDock.LoadFromXml(newPath, AddressOf GetContentFromPersistString)
+#If Not PORTABLE Then
                         ElseIf File.Exists(oldPath) Then
                             .pnlDock.LoadFromXml(oldPath, AddressOf GetContentFromPersistString)
+#End If
                         Else
                             Startup.SetDefaultLayout()
                         End If
@@ -183,8 +185,10 @@ Namespace Config
                 Dim xDom As New XmlDocument()
                 If File.Exists(newPath) Then
                     xDom.Load(newPath)
+#If Not PORTABLE Then
                 ElseIf File.Exists(oldPath) Then
                     xDom.Load(oldPath)
+#End If
                 Else
                     Exit Sub
                 End If
