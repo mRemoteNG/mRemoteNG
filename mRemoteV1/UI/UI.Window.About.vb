@@ -298,7 +298,7 @@ Namespace UI
                 Try
                     lblCopyright.Text = My.Application.Info.Copyright
 
-                    Me.lblVersion.Text = "Version " & My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor
+                    Me.lblVersion.Text = "Version " & My.Application.Info.Version.ToString
 
                     FillLinkLabel(llblFAMFAMFAM, My.Resources.strFAMFAMFAMAttribution, My.Resources.strFAMFAMFAMAttributionURL)
                     FillLinkLabel(llblMagicLibrary, My.Resources.strMagicLibraryAttribution, My.Resources.strMagicLibraryAttributionURL)

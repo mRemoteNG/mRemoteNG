@@ -1,4 +1,4 @@
-﻿Imports WeifenLuo.WinFormsUI.Docking
+Imports WeifenLuo.WinFormsUI.Docking
 Imports System.Threading
 Imports System.IO
 Imports mRemoteNG.App.Runtime
@@ -60,7 +60,7 @@ Namespace UI
                 Me.pnlUp.Controls.Add(Me.txtChangeLog)
                 Me.pnlUp.Location = New System.Drawing.Point(16, 152)
                 Me.pnlUp.Name = "pnlUp"
-                Me.pnlUp.Size = New System.Drawing.Size(672, 248)
+                Me.pnlUp.Size = New System.Drawing.Size(718, 248)
                 Me.pnlUp.TabIndex = 6
                 Me.pnlUp.Visible = False
                 '
@@ -91,7 +91,7 @@ Namespace UI
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.prgbDownload.Location = New System.Drawing.Point(160, 224)
                 Me.prgbDownload.Name = "prgbDownload"
-                Me.prgbDownload.Size = New System.Drawing.Size(496, 23)
+                Me.prgbDownload.Size = New System.Drawing.Size(542, 23)
                 Me.prgbDownload.TabIndex = 3
                 '
                 'txtChangeLog
@@ -106,7 +106,7 @@ Namespace UI
                 Me.txtChangeLog.Name = "txtChangeLog"
                 Me.txtChangeLog.ReadOnly = True
                 Me.txtChangeLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-                Me.txtChangeLog.Size = New System.Drawing.Size(653, 181)
+                Me.txtChangeLog.Size = New System.Drawing.Size(699, 181)
                 Me.txtChangeLog.TabIndex = 1
                 Me.txtChangeLog.TabStop = False
                 '
@@ -145,7 +145,7 @@ Namespace UI
                 '
                 Me.lblAvailableVersion.Location = New System.Drawing.Point(136, 72)
                 Me.lblAvailableVersion.Name = "lblAvailableVersion"
-                Me.lblAvailableVersion.Size = New System.Drawing.Size(64, 16)
+                Me.lblAvailableVersion.Size = New System.Drawing.Size(104, 16)
                 Me.lblAvailableVersion.TabIndex = 4
                 Me.lblAvailableVersion.Text = "Version"
                 Me.lblAvailableVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -154,7 +154,7 @@ Namespace UI
                 '
                 Me.lblCurrentVersion.Location = New System.Drawing.Point(136, 48)
                 Me.lblCurrentVersion.Name = "lblCurrentVersion"
-                Me.lblCurrentVersion.Size = New System.Drawing.Size(64, 16)
+                Me.lblCurrentVersion.Size = New System.Drawing.Size(104, 16)
                 Me.lblCurrentVersion.TabIndex = 2
                 Me.lblCurrentVersion.Text = "Version"
                 Me.lblCurrentVersion.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
@@ -164,7 +164,7 @@ Namespace UI
                 Me.pbUpdateImage.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pbUpdateImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
                 Me.pbUpdateImage.Cursor = System.Windows.Forms.Cursors.Hand
-                Me.pbUpdateImage.Location = New System.Drawing.Point(200, 48)
+                Me.pbUpdateImage.Location = New System.Drawing.Point(246, 48)
                 Me.pbUpdateImage.Name = "pbUpdateImage"
                 Me.pbUpdateImage.Size = New System.Drawing.Size(468, 60)
                 Me.pbUpdateImage.TabIndex = 45
@@ -173,7 +173,7 @@ Namespace UI
                 '
                 'Update
                 '
-                Me.ClientSize = New System.Drawing.Size(688, 418)
+                Me.ClientSize = New System.Drawing.Size(734, 418)
                 Me.Controls.Add(Me.pbUpdateImage)
                 Me.Controls.Add(Me.lblCurrentVersionLabel)
                 Me.Controls.Add(Me.lblInstalledVersionLabel)
@@ -250,6 +250,7 @@ Namespace UI
             Private Sub UpdateCheckComplete(ByVal UpdateAvailable As Boolean)
                 Try
                     My.Settings.CheckForUpdatesLastCheck = Date.Now
+                    SetCurrentVersionText(My.Application.Info.Version.ToString)
 
                     If UpdateAvailable = True Then
                         My.Settings.UpdatePending = True
@@ -258,7 +259,6 @@ Namespace UI
                         SetVisible(pnlUp, True)
 
                         Dim uI As App.Update.Info = uD.GetUpdateInfo()
-                        SetCurrentVersionText(My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor)
                         SetAvailableVersionText(uI.Version.ToString)
                         SetChangeLogText(uI.ChangeLog)
 
@@ -282,7 +282,6 @@ Namespace UI
                         SetVisible(pnlUp, False)
 
                         Dim uI As App.Update.Info = uD.GetUpdateInfo()
-                        SetCurrentVersionText(My.Application.Info.Version.Major & "." & My.Application.Info.Version.Minor)
                         SetAvailableVersionText(uI.Version.ToString)
                     End If
                 Catch ex As Exception

@@ -1,31 +1,36 @@
-!include "MUI.nsh"
+﻿!include "MUI.nsh"
 !include "WordFunc.nsh"
 !insertmacro VersionCompare
 
-!DEFINE PRODUCT_VERSION_MAJOR 1
-!DEFINE PRODUCT_VERSION_MINOR 66
+!include "..\Release\Version.nsh"
 
-!DEFINE PRODUCT_VERSION "${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}"
-!DEFINE PRODUCT_VERSION_LONG "${PRODUCT_VERSION_MAJOR}.${PRODUCT_VERSION_MINOR}.0.0"
+; This will be passed in using the /D switch by BUILD.CMD
+!ifdef PRODUCT_VERSION_TAG
+	!define PRODUCT_VERSION_FRIENDLY "${PRODUCT_VERSION_SHORT} ${PRODUCT_VERSION_TAG}"
+	!define PRODUCT_VERSION_TAGGED "${PRODUCT_VERSION_SHORT}-${PRODUCT_VERSION_TAG}"
+!else
+	!define PRODUCT_VERSION_FRIENDLY "${PRODUCT_VERSION_SHORT}"
+	!define PRODUCT_VERSION_TAGGED "${PRODUCT_VERSION_SHORT}"
+!endif
 
 ; Global Variables
 Var InstallDotNET
 
 ; Basic Config
-Name "mRemoteNG ${PRODUCT_VERSION}"
-OutFile "..\Release\mRemoteNG-Installer-${PRODUCT_VERSION}.exe"
+Name "mRemoteNG ${PRODUCT_VERSION_FRIENDLY}"
+OutFile "..\Release\mRemoteNG-Installer-${PRODUCT_VERSION_TAGGED}.exe"
 SetCompressor /SOLID lzma
 InstallDir "$PROGRAMFILES\mRemoteNG"
 InstallDirRegKey HKLM "Software\mRemoteNG" "InstallPath"
 RequestExecutionLevel admin
 
 ; Version Information
-VIProductVersion ${PRODUCT_VERSION_LONG}
+VIProductVersion ${PRODUCT_VERSION}
 VIAddVersionKey "ProductName" "mRemoteNG"
-VIAddVersionKey "ProductVersion" ${PRODUCT_VERSION_LONG}
-VIAddVersionKey "LegalCopyright" "Copyright � 2007-2009 Felix Deimel, 2010-2011 Riley McArdle"
-VIAddVersionKey "FileDescription" "mRemoteNG ${PRODUCT_VERSION} Installer"
-VIAddVersionKey "FileVersion" ${PRODUCT_VERSION_LONG}
+VIAddVersionKey "ProductVersion" ${PRODUCT_VERSION}
+VIAddVersionKey "LegalCopyright" "Copyright © 2007-2009 Felix Deimel, 2010-2011 Riley McArdle"
+VIAddVersionKey "FileDescription" "mRemoteNG ${PRODUCT_VERSION_FRIENDLY} Installer"
+VIAddVersionKey "FileVersion" ${PRODUCT_VERSION}
 
 ; Design
 !define MUI_ICON "Setup_Install.ico"

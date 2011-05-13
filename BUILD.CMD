@@ -1,11 +1,11 @@
 @echo off
 
+SET VERSIONTAG=RC1
+
 SET VCVARSALL="%ProgramFiles(x86)%\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
 SET DEVENV="devenv.exe"
 SET MAKENSIS="%ProgramFiles(x86)%\NSIS\Unicode\makensis.exe"
 SET RAR="%ProgramFiles%\WinRAR\WinRAR.exe"
-SET BINARYZIP="%~dp0\Release\mRemoteNG-1.66.zip"
-SET PORTABLEZIP="%~dp0\Release\mRemoteNG-Portable-1.66.zip"
 
 call %VCVARSALL% x86 > NUL 2>&1
 
@@ -20,8 +20,23 @@ echo Building portable version...
 
 mkdir "%~dp0\Release"
 
+echo Getting product version...
+%MAKENSIS% "%~dp0\Installer\GetVersion.nsi"
+"%~dp0\Release\GetVersion.exe"
+call "%~dp0\Release\Version.cmd"
+
 echo Creating installer package...
-%MAKENSIS% "%~dp0\Installer\mRemote.nsi"
+if defined VERSIONTAG (
+	%MAKENSIS% /DPRODUCT_VERSION_TAG=%VERSIONTAG% "%~dp0\Installer\mRemote.nsi"
+
+	set BINARYZIP="%~dp0\Release\mRemoteNG-%PRODUCT_VERSION_SHORT%-%VERSIONTAG%.zip"
+	set PORTABLEZIP="%~dp0\Release\mRemoteNG-Portable-%PRODUCT_VERSION_SHORT%-%VERSIONTAG%.zip"
+) else (
+	%MAKENSIS% "%~dp0\Installer\mRemote.nsi"
+
+	set BINARYZIP="%~dp0\Release\mRemoteNG-%PRODUCT_VERSION_SHORT%.zip"
+	set PORTABLEZIP="%~dp0\Release\mRemoteNG-Portable-%PRODUCT_VERSION_SHORT%.zip"
+)
 
 echo Creating release ZIP file...
 del /f /q %BINARYZIP% > NUL 2>&1
