@@ -1,4 +1,5 @@
 1.67 (2011-XX-XX):
+  Fixed migration of external tools configuration and panel layout from Local to Roaming folder.
   Disable ICA Hotkeys for Citrix connections.  Fixes issue with international users.
 
 1.66 (2011-05-02):
