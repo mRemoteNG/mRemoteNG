@@ -1238,21 +1238,15 @@ Namespace UI
 
             Public Sub SetHostStatus(ByVal ConnectionInfo As Object)
                 Try
-                    If TypeOf ConnectionInfo Is mRemoteNG.Connection.Info Then
-                        'continue
-                    ElseIf TypeOf ConnectionInfo Is mRemoteNG.Connection.Info.Inheritance Then
-                        ConnectionInfo = TryCast(ConnectionInfo, mRemoteNG.Connection.Info.Inheritance).Parent
-                    Else
-                        Me.btnHostStatus.Image = My.Resources.HostStatus_Check
-                        Exit Sub
-                    End If
-
-                    If TryCast(ConnectionInfo, mRemoteNG.Connection.Info).IsContainer Then
-                        Me.btnHostStatus.Image = My.Resources.HostStatus_Check
-                        Exit Sub
-                    End If
-
                     Me.btnHostStatus.Image = My.Resources.HostStatus_Check
+
+                    ' To check status, ConnectionInfo must be an mRemoteNG.Connection.Info that is not a container
+                    If TypeOf ConnectionInfo Is mRemoteNG.Connection.Info Then
+                        If TryCast(ConnectionInfo, mRemoteNG.Connection.Info).IsContainer Then Return
+                    Else
+                        Return
+                    End If
+
                     Me.btnHostStatus.Tag = "checking"
                     HostName = TryCast(ConnectionInfo, mRemoteNG.Connection.Info).Hostname
                     pThread = New Threading.Thread(AddressOf CheckHostAlive)
