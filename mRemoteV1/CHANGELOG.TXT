@@ -2,9 +2,12 @@
   Fixed migration of external tools configuration and panel layout from Local to Roaming folder.
   Disable ICA Hotkeys for Citrix connections.  Fixes issue with international users.
   Added a language selection option so users can override the language if they don't want it automatically detected.
+  Addded Thai translation to the installer.
+  Updated graphics in the installer to mRemoteNG logo.
   Fixed RD Gateway default properties and RDP reconnection count setting not being saved.
   Fixed bug 33 - IPv6 doesn't work in quick Connect box.
   Moved the items under Tools in the Connections panel context menu up to the top level.
+  Changed to use full four part version numbers with major, minor, build, and revision
 
 1.66 (2011-05-02):
   Fixed connections not working
