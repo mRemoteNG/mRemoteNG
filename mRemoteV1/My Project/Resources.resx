@@ -1614,9 +1614,6 @@ If you are still not able to pass this check or use the (RDP) Sessions feature i
   <data name="strChoosePanelBeforeConnecting" xml:space="preserve">
     <value>Choose panel before connecting</value>
   </data>
-  <data name="strTools" xml:space="preserve">
-    <value>Tools</value>
-  </data>
   <data name="strImportExport" xml:space="preserve">
     <value>Import/Export</value>
   </data>

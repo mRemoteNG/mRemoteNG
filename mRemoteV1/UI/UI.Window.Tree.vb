@@ -25,7 +25,6 @@ Namespace UI
             Friend WithEvents cMenTreeConnectWithOptionsConnectInFullscreen As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeDisconnect As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeSep2 As System.Windows.Forms.ToolStripSeparator
-            Friend WithEvents cMenTreeTools As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeToolsTransferFile As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeToolsImportExport As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeToolsImportExportExportmRemoteXML As System.Windows.Forms.ToolStripMenuItem
@@ -65,7 +64,6 @@ Namespace UI
                 Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting = New System.Windows.Forms.ToolStripMenuItem
                 Me.cMenTreeDisconnect = New System.Windows.Forms.ToolStripMenuItem
                 Me.cMenTreeSep2 = New System.Windows.Forms.ToolStripSeparator
-                Me.cMenTreeTools = New System.Windows.Forms.ToolStripMenuItem
                 Me.cMenTreeToolsTransferFile = New System.Windows.Forms.ToolStripMenuItem
                 Me.cMenTreeToolsImportExport = New System.Windows.Forms.ToolStripMenuItem
                 Me.cMenTreeToolsImportExportExportmRemoteXML = New System.Windows.Forms.ToolStripMenuItem
@@ -123,10 +121,10 @@ Namespace UI
                 'cMenTree
                 '
                 Me.cMenTree.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.cMenTree.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeAddConnection, Me.cMenTreeAddFolder, Me.cMenTreeSep1, Me.cMenTreeConnect, Me.cMenTreeConnectWithOptions, Me.cMenTreeDisconnect, Me.cMenTreeSep2, Me.cMenTreeTools, Me.cMenTreeSep3, Me.cMenTreeDuplicate, Me.cMenTreeRename, Me.cMenTreeDelete, Me.cMenTreeSep4, Me.cMenTreeMoveUp, Me.cMenTreeMoveDown})
+                Me.cMenTree.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeAddConnection, Me.cMenTreeAddFolder, Me.cMenTreeSep1, Me.cMenTreeConnect, Me.cMenTreeConnectWithOptions, Me.cMenTreeDisconnect, Me.cMenTreeSep2, Me.cMenTreeToolsTransferFile, Me.cMenTreeToolsImportExport, Me.cMenTreeToolsSort, Me.cMenTreeToolsExternalApps, Me.cMenTreeSep3, Me.cMenTreeDuplicate, Me.cMenTreeRename, Me.cMenTreeDelete, Me.cMenTreeSep4, Me.cMenTreeMoveUp, Me.cMenTreeMoveDown})
                 Me.cMenTree.Name = "cMenTree"
                 Me.cMenTree.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-                Me.cMenTree.Size = New System.Drawing.Size(187, 292)
+                Me.cMenTree.Size = New System.Drawing.Size(187, 358)
                 '
                 'cMenTreeAddConnection
                 '
@@ -202,26 +200,18 @@ Namespace UI
                 Me.cMenTreeSep2.Name = "cMenTreeSep2"
                 Me.cMenTreeSep2.Size = New System.Drawing.Size(183, 6)
                 '
-                'cMenTreeTools
-                '
-                Me.cMenTreeTools.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeToolsTransferFile, Me.cMenTreeToolsImportExport, Me.cMenTreeToolsSort, Me.cMenTreeToolsExternalApps})
-                Me.cMenTreeTools.Image = Global.mRemoteNG.My.Resources.Resources.Tools
-                Me.cMenTreeTools.Name = "cMenTreeTools"
-                Me.cMenTreeTools.Size = New System.Drawing.Size(186, 22)
-                Me.cMenTreeTools.Text = "Tools"
-                '
                 'cMenTreeToolsTransferFile
                 '
                 Me.cMenTreeToolsTransferFile.Image = Global.mRemoteNG.My.Resources.Resources.SSHTransfer
                 Me.cMenTreeToolsTransferFile.Name = "cMenTreeToolsTransferFile"
-                Me.cMenTreeToolsTransferFile.Size = New System.Drawing.Size(172, 22)
+                Me.cMenTreeToolsTransferFile.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeToolsTransferFile.Text = "Transfer File (SSH)"
                 '
                 'cMenTreeToolsImportExport
                 '
                 Me.cMenTreeToolsImportExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeToolsImportExportExportmRemoteXML, Me.cMenTreeToolsImportExportImportmRemoteXML, Me.cMenTreeToolsImportExportSep1, Me.cMenTreeToolsImportExportImportFromAD, Me.cMenTreeToolsImportExportImportFromRDPFiles, Me.cMenTreeToolsImportExportImportFromPortScan})
                 Me.cMenTreeToolsImportExport.Name = "cMenTreeToolsImportExport"
-                Me.cMenTreeToolsImportExport.Size = New System.Drawing.Size(172, 22)
+                Me.cMenTreeToolsImportExport.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeToolsImportExport.Text = "Import/Export"
                 '
                 'cMenTreeToolsImportExportExportmRemoteXML
@@ -268,7 +258,7 @@ Namespace UI
                 '
                 Me.cMenTreeToolsSort.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeToolsSortAscending, Me.cMenTreeToolsSortDescending})
                 Me.cMenTreeToolsSort.Name = "cMenTreeToolsSort"
-                Me.cMenTreeToolsSort.Size = New System.Drawing.Size(172, 22)
+                Me.cMenTreeToolsSort.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeToolsSort.Text = "Sort"
                 '
                 'cMenTreeToolsSortAscending
@@ -289,7 +279,7 @@ Namespace UI
                 '
                 Me.cMenTreeToolsExternalApps.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp
                 Me.cMenTreeToolsExternalApps.Name = "cMenTreeToolsExternalApps"
-                Me.cMenTreeToolsExternalApps.Size = New System.Drawing.Size(172, 22)
+                Me.cMenTreeToolsExternalApps.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeToolsExternalApps.Text = "External Applications"
                 '
                 'cMenTreeSep3
@@ -486,7 +476,6 @@ Namespace UI
                 cMenTreeConnectWithOptionsConnectInFullscreen.Text = My.Resources.strConnectInFullscreen
                 cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = My.Resources.strChoosePanelBeforeConnecting
                 cMenTreeDisconnect.Text = My.Resources.strMenuDisconnect
-                cMenTreeTools.Text = My.Resources.strTools
                 cMenTreeToolsTransferFile.Text = My.Resources.strMenuTransferFile
                 cMenTreeToolsImportExport.Text = My.Resources.strImportExport
                 cMenTreeToolsImportExportExportmRemoteXML.Text = My.Resources.strExportmRemoteXML
@@ -978,7 +967,7 @@ Namespace UI
                 SaveConnectionsBG()
             End Sub
 
-            Private Sub cMenTreeTools_DropDownOpening(ByVal sender As Object, ByVal e As System.EventArgs) Handles cMenTreeTools.DropDownOpening
+            Private Sub cMenTree_DropDownOpening(ByVal sender As Object, ByVal e As System.EventArgs) Handles cMenTree.Opening
                 AddExternalApps()
             End Sub
 
