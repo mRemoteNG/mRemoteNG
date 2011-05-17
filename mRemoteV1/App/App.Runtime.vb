@@ -471,6 +471,12 @@ Namespace App
                 My.Settings.ConDefaultVNCSmartSizeMode = .VNCSmartSizeMode.ToString
                 My.Settings.ConDefaultVNCViewOnly = .VNCViewOnly
                 My.Settings.ConDefaultExtApp = .ExtApp
+                My.Settings.ConDefaultRDGatewayUsageMethod = .RDGatewayUsageMethod.ToString
+                My.Settings.ConDefaultRDGatewayHostname = .RDGatewayHostname
+                My.Settings.ConDefaultRDGatewayUsername = .RDGatewayUsername
+                My.Settings.ConDefaultRDGatewayPassword = .RDGatewayPassword
+                My.Settings.ConDefaultRDGatewayDomain = .RDGatewayDomain
+                My.Settings.ConDefaultRDGatewayUseConnectionCredentials = .RDGatewayUseConnectionCredentials.ToString
             End With
         End Sub
 #End Region

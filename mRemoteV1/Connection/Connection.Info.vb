@@ -439,7 +439,7 @@ Namespace Connection
             End Set
         End Property
 
-        Private _RDGatewayHostname As String
+        Private _RDGatewayHostname As String = My.Settings.ConDefaultRDGatewayHostname
         <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameRDGatewayHostname"), _
@@ -492,7 +492,7 @@ Namespace Connection
             End Set
         End Property
 
-        Private _RDGatewayUsername As String
+        Private _RDGatewayUsername As String = My.Settings.ConDefaultRDGatewayUsername
         <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameRDGatewayUsername"), _
@@ -518,7 +518,7 @@ Namespace Connection
             End Set
         End Property
 
-        Private _RDGatewayPassword As String
+        Private _RDGatewayPassword As String = My.Settings.ConDefaultRDGatewayPassword
         <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameRDGatewayPassword"), _
@@ -545,7 +545,7 @@ Namespace Connection
             End Set
         End Property
 
-        Private _RDGatewayDomain As String
+        Private _RDGatewayDomain As String = My.Settings.ConDefaultRDGatewayDomain
         <LocalizedCategory("strCategoryGateway", 4), _
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameRDGatewayDomain"), _
