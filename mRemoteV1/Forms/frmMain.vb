@@ -15,6 +15,11 @@ Public Class frmMain
         'insert enable edition code here
         App.Editions.Spanlink.Enabled = False
 
+        App.SupportedCultures.InstantiateSingleton()
+        If Not My.Settings.OverrideUICulture = "" And App.SupportedCultures.IsNameSupported(My.Settings.OverrideUICulture) Then
+            Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo(My.Settings.OverrideUICulture)
+        End If
+
         ApplyLanguage()
 
         Debug.Print("---------------------------" & vbNewLine & "[START] - " & Now)

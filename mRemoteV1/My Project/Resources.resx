@@ -2283,4 +2283,13 @@ Error Description: {1}</value>
   <data name="strGeneral" xml:space="preserve">
     <value>General</value>
   </data>
+  <data name="strLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="strLanguageDefault" xml:space="preserve">
+    <value>(Automatically Detect)</value>
+  </data>
+  <data name="strLanguageRestartRequired" xml:space="preserve">
+    <value>{0} must be restarted before changes to the language will take effect.</value>
+  </data>
 </root>

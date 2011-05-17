@@ -106,10 +106,41 @@ Namespace UI
             Friend WithEvents Panel1 As System.Windows.Forms.Panel
             Friend WithEvents lblRdpReconnectCount As System.Windows.Forms.Label
             Friend WithEvents numRdpReconnectionCount As System.Windows.Forms.NumericUpDown
+            Friend WithEvents lblLanguageRestartRequired As System.Windows.Forms.Label
+            Friend WithEvents cboLanguage As System.Windows.Forms.ComboBox
+            Friend WithEvents lblLanguage As System.Windows.Forms.Label
             Friend WithEvents TabController As Crownwood.Magic.Controls.TabControl
 
             Private Sub InitializeComponent()
                 Me.TabController = New Crownwood.Magic.Controls.TabControl
+                Me.tabAppearance = New Crownwood.Magic.Controls.TabPage
+                Me.pnlAppearance = New System.Windows.Forms.Panel
+                Me.lblLanguageRestartRequired = New System.Windows.Forms.Label
+                Me.cboLanguage = New System.Windows.Forms.ComboBox
+                Me.lblLanguage = New System.Windows.Forms.Label
+                Me.chkShowDescriptionTooltipsInTree = New System.Windows.Forms.CheckBox
+                Me.chkMinimizeToSystemTray = New System.Windows.Forms.CheckBox
+                Me.chkShowSystemTrayIcon = New System.Windows.Forms.CheckBox
+                Me.chkShowFullConnectionsFilePathInTitle = New System.Windows.Forms.CheckBox
+                Me.tabStartupExit = New Crownwood.Magic.Controls.TabPage
+                Me.pnlStartup = New System.Windows.Forms.Panel
+                Me.chkSaveConsOnExit = New System.Windows.Forms.CheckBox
+                Me.chkProperInstallationOfComponentsAtStartup = New System.Windows.Forms.CheckBox
+                Me.chkConfirmExit = New System.Windows.Forms.CheckBox
+                Me.chkSingleInstance = New System.Windows.Forms.CheckBox
+                Me.chkReconnectOnStart = New System.Windows.Forms.CheckBox
+                Me.tabTabs = New Crownwood.Magic.Controls.TabPage
+                Me.pnlTabsAndPanels = New System.Windows.Forms.Panel
+                Me.chkUseOnlyErrorsAndInfosPanel = New System.Windows.Forms.CheckBox
+                Me.lblSwitchToErrorsAndInfos = New System.Windows.Forms.Label
+                Me.chkMCInformation = New System.Windows.Forms.CheckBox
+                Me.chkMCErrors = New System.Windows.Forms.CheckBox
+                Me.chkMCWarnings = New System.Windows.Forms.CheckBox
+                Me.chkOpenNewTabRightOfSelected = New System.Windows.Forms.CheckBox
+                Me.chkShowProtocolOnTabs = New System.Windows.Forms.CheckBox
+                Me.chkDoubleClickClosesTab = New System.Windows.Forms.CheckBox
+                Me.chkShowLogonInfoOnTabs = New System.Windows.Forms.CheckBox
+                Me.chkAlwaysShowPanelSelectionDlg = New System.Windows.Forms.CheckBox
                 Me.tabConnections = New Crownwood.Magic.Controls.TabPage
                 Me.pnlConnections = New System.Windows.Forms.Panel
                 Me.Panel1 = New System.Windows.Forms.Panel
@@ -142,31 +173,6 @@ Namespace UI
                 Me.lblSQLPassword = New System.Windows.Forms.Label
                 Me.txtSQLServer = New System.Windows.Forms.TextBox
                 Me.chkHostnameLikeDisplayName = New System.Windows.Forms.CheckBox
-                Me.tabStartupExit = New Crownwood.Magic.Controls.TabPage
-                Me.pnlStartup = New System.Windows.Forms.Panel
-                Me.chkSaveConsOnExit = New System.Windows.Forms.CheckBox
-                Me.chkProperInstallationOfComponentsAtStartup = New System.Windows.Forms.CheckBox
-                Me.chkConfirmExit = New System.Windows.Forms.CheckBox
-                Me.chkSingleInstance = New System.Windows.Forms.CheckBox
-                Me.chkReconnectOnStart = New System.Windows.Forms.CheckBox
-                Me.tabAppearance = New Crownwood.Magic.Controls.TabPage
-                Me.pnlAppearance = New System.Windows.Forms.Panel
-                Me.chkShowDescriptionTooltipsInTree = New System.Windows.Forms.CheckBox
-                Me.chkMinimizeToSystemTray = New System.Windows.Forms.CheckBox
-                Me.chkShowSystemTrayIcon = New System.Windows.Forms.CheckBox
-                Me.chkShowFullConnectionsFilePathInTitle = New System.Windows.Forms.CheckBox
-                Me.tabTabs = New Crownwood.Magic.Controls.TabPage
-                Me.pnlTabsAndPanels = New System.Windows.Forms.Panel
-                Me.chkUseOnlyErrorsAndInfosPanel = New System.Windows.Forms.CheckBox
-                Me.lblSwitchToErrorsAndInfos = New System.Windows.Forms.Label
-                Me.chkMCInformation = New System.Windows.Forms.CheckBox
-                Me.chkMCErrors = New System.Windows.Forms.CheckBox
-                Me.chkMCWarnings = New System.Windows.Forms.CheckBox
-                Me.chkOpenNewTabRightOfSelected = New System.Windows.Forms.CheckBox
-                Me.chkShowProtocolOnTabs = New System.Windows.Forms.CheckBox
-                Me.chkDoubleClickClosesTab = New System.Windows.Forms.CheckBox
-                Me.chkShowLogonInfoOnTabs = New System.Windows.Forms.CheckBox
-                Me.chkAlwaysShowPanelSelectionDlg = New System.Windows.Forms.CheckBox
                 Me.tabUpdates = New Crownwood.Magic.Controls.TabPage
                 Me.pnlUpdates = New System.Windows.Forms.Panel
                 Me.lblUpdatesExplanation = New System.Windows.Forms.Label
@@ -210,6 +216,12 @@ Namespace UI
                 Me.btnOK = New System.Windows.Forms.Button
                 Me.btnCancel = New System.Windows.Forms.Button
                 Me.TabController.SuspendLayout()
+                Me.tabAppearance.SuspendLayout()
+                Me.pnlAppearance.SuspendLayout()
+                Me.tabStartupExit.SuspendLayout()
+                Me.pnlStartup.SuspendLayout()
+                Me.tabTabs.SuspendLayout()
+                Me.pnlTabsAndPanels.SuspendLayout()
                 Me.tabConnections.SuspendLayout()
                 Me.pnlConnections.SuspendLayout()
                 Me.Panel1.SuspendLayout()
@@ -218,12 +230,6 @@ Namespace UI
                 Me.pnlAutoSave.SuspendLayout()
                 CType(Me.numAutoSave, System.ComponentModel.ISupportInitialize).BeginInit()
                 Me.grpExperimental.SuspendLayout()
-                Me.tabStartupExit.SuspendLayout()
-                Me.pnlStartup.SuspendLayout()
-                Me.tabAppearance.SuspendLayout()
-                Me.pnlAppearance.SuspendLayout()
-                Me.tabTabs.SuspendLayout()
-                Me.pnlTabsAndPanels.SuspendLayout()
                 Me.tabUpdates.SuspendLayout()
                 Me.pnlUpdates.SuspendLayout()
                 Me.pnlUpdateCheck.SuspendLayout()
@@ -246,11 +252,336 @@ Namespace UI
                 Me.TabController.IDEPixelArea = True
                 Me.TabController.Location = New System.Drawing.Point(0, 0)
                 Me.TabController.Name = "TabController"
-                Me.TabController.SelectedIndex = 3
-                Me.TabController.SelectedTab = Me.tabConnections
+                Me.TabController.SelectedIndex = 1
+                Me.TabController.SelectedTab = Me.tabAppearance
                 Me.TabController.Size = New System.Drawing.Size(573, 522)
                 Me.TabController.TabIndex = 10
                 Me.TabController.TabPages.AddRange(New Crownwood.Magic.Controls.TabPage() {Me.tabStartupExit, Me.tabAppearance, Me.tabTabs, Me.tabConnections, Me.tabUpdates, Me.tabAdvanced})
+                '
+                'tabAppearance
+                '
+                Me.tabAppearance.Controls.Add(Me.pnlAppearance)
+                Me.tabAppearance.Icon = Global.mRemoteNG.My.Resources.Resources.Appearance_Icon
+                Me.tabAppearance.Location = New System.Drawing.Point(0, 0)
+                Me.tabAppearance.Name = "tabAppearance"
+                Me.tabAppearance.Size = New System.Drawing.Size(573, 492)
+                Me.tabAppearance.TabIndex = 2000
+                Me.tabAppearance.Title = "Appearance"
+                '
+                'pnlAppearance
+                '
+                Me.pnlAppearance.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                            Or System.Windows.Forms.AnchorStyles.Left) _
+                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                Me.pnlAppearance.AutoScroll = True
+                Me.pnlAppearance.Controls.Add(Me.lblLanguageRestartRequired)
+                Me.pnlAppearance.Controls.Add(Me.cboLanguage)
+                Me.pnlAppearance.Controls.Add(Me.lblLanguage)
+                Me.pnlAppearance.Controls.Add(Me.chkShowDescriptionTooltipsInTree)
+                Me.pnlAppearance.Controls.Add(Me.chkMinimizeToSystemTray)
+                Me.pnlAppearance.Controls.Add(Me.chkShowSystemTrayIcon)
+                Me.pnlAppearance.Controls.Add(Me.chkShowFullConnectionsFilePathInTitle)
+                Me.pnlAppearance.Location = New System.Drawing.Point(3, 3)
+                Me.pnlAppearance.Name = "pnlAppearance"
+                Me.pnlAppearance.Size = New System.Drawing.Size(567, 486)
+                Me.pnlAppearance.TabIndex = 41
+                '
+                'lblLanguageRestartRequired
+                '
+                Me.lblLanguageRestartRequired.AutoSize = True
+                Me.lblLanguageRestartRequired.Location = New System.Drawing.Point(16, 72)
+                Me.lblLanguageRestartRequired.Name = "lblLanguageRestartRequired"
+                Me.lblLanguageRestartRequired.Size = New System.Drawing.Size(423, 15)
+                Me.lblLanguageRestartRequired.TabIndex = 43
+                Me.lblLanguageRestartRequired.Text = "mRemoteNG must be restarted before changes to the language will take effect."
+                '
+                'cboLanguage
+                '
+                Me.cboLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+                Me.cboLanguage.FormattingEnabled = True
+                Me.cboLanguage.Location = New System.Drawing.Point(16, 40)
+                Me.cboLanguage.Name = "cboLanguage"
+                Me.cboLanguage.Size = New System.Drawing.Size(304, 23)
+                Me.cboLanguage.Sorted = True
+                Me.cboLanguage.TabIndex = 42
+                '
+                'lblLanguage
+                '
+                Me.lblLanguage.AutoSize = True
+                Me.lblLanguage.Location = New System.Drawing.Point(16, 16)
+                Me.lblLanguage.Name = "lblLanguage"
+                Me.lblLanguage.Size = New System.Drawing.Size(59, 15)
+                Me.lblLanguage.TabIndex = 41
+                Me.lblLanguage.Text = "Language"
+                '
+                'chkShowDescriptionTooltipsInTree
+                '
+                Me.chkShowDescriptionTooltipsInTree.AutoSize = True
+                Me.chkShowDescriptionTooltipsInTree.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkShowDescriptionTooltipsInTree.Location = New System.Drawing.Point(16, 120)
+                Me.chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree"
+                Me.chkShowDescriptionTooltipsInTree.Size = New System.Drawing.Size(256, 19)
+                Me.chkShowDescriptionTooltipsInTree.TabIndex = 10
+                Me.chkShowDescriptionTooltipsInTree.Text = "Show description tooltips in connection tree"
+                Me.chkShowDescriptionTooltipsInTree.UseVisualStyleBackColor = True
+                '
+                'chkMinimizeToSystemTray
+                '
+                Me.chkMinimizeToSystemTray.AutoSize = True
+                Me.chkMinimizeToSystemTray.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkMinimizeToSystemTray.Location = New System.Drawing.Point(16, 216)
+                Me.chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray"
+                Me.chkMinimizeToSystemTray.Size = New System.Drawing.Size(153, 19)
+                Me.chkMinimizeToSystemTray.TabIndex = 40
+                Me.chkMinimizeToSystemTray.Text = "Minimize to System Tray"
+                Me.chkMinimizeToSystemTray.UseVisualStyleBackColor = True
+                '
+                'chkShowSystemTrayIcon
+                '
+                Me.chkShowSystemTrayIcon.AutoSize = True
+                Me.chkShowSystemTrayIcon.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkShowSystemTrayIcon.Location = New System.Drawing.Point(16, 192)
+                Me.chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon"
+                Me.chkShowSystemTrayIcon.Size = New System.Drawing.Size(184, 19)
+                Me.chkShowSystemTrayIcon.TabIndex = 30
+                Me.chkShowSystemTrayIcon.Text = "Always show System Tray Icon"
+                Me.chkShowSystemTrayIcon.UseVisualStyleBackColor = True
+                '
+                'chkShowFullConnectionsFilePathInTitle
+                '
+                Me.chkShowFullConnectionsFilePathInTitle.AutoSize = True
+                Me.chkShowFullConnectionsFilePathInTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkShowFullConnectionsFilePathInTitle.Location = New System.Drawing.Point(16, 144)
+                Me.chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle"
+                Me.chkShowFullConnectionsFilePathInTitle.Size = New System.Drawing.Size(267, 19)
+                Me.chkShowFullConnectionsFilePathInTitle.TabIndex = 20
+                Me.chkShowFullConnectionsFilePathInTitle.Text = "Show full connections file path in window title"
+                Me.chkShowFullConnectionsFilePathInTitle.UseVisualStyleBackColor = True
+                '
+                'tabStartupExit
+                '
+                Me.tabStartupExit.Controls.Add(Me.pnlStartup)
+                Me.tabStartupExit.Icon = Global.mRemoteNG.My.Resources.Resources.StartupExit_Icon
+                Me.tabStartupExit.Location = New System.Drawing.Point(0, 0)
+                Me.tabStartupExit.Name = "tabStartupExit"
+                Me.tabStartupExit.Selected = False
+                Me.tabStartupExit.Size = New System.Drawing.Size(573, 492)
+                Me.tabStartupExit.TabIndex = 1000
+                Me.tabStartupExit.Title = "Startup/Exit"
+                '
+                'pnlStartup
+                '
+                Me.pnlStartup.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                            Or System.Windows.Forms.AnchorStyles.Left) _
+                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                Me.pnlStartup.AutoScroll = True
+                Me.pnlStartup.Controls.Add(Me.chkSaveConsOnExit)
+                Me.pnlStartup.Controls.Add(Me.chkProperInstallationOfComponentsAtStartup)
+                Me.pnlStartup.Controls.Add(Me.chkConfirmExit)
+                Me.pnlStartup.Controls.Add(Me.chkSingleInstance)
+                Me.pnlStartup.Controls.Add(Me.chkReconnectOnStart)
+                Me.pnlStartup.Location = New System.Drawing.Point(3, 3)
+                Me.pnlStartup.Name = "pnlStartup"
+                Me.pnlStartup.Size = New System.Drawing.Size(567, 486)
+                Me.pnlStartup.TabIndex = 51
+                '
+                'chkSaveConsOnExit
+                '
+                Me.chkSaveConsOnExit.AutoSize = True
+                Me.chkSaveConsOnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkSaveConsOnExit.Location = New System.Drawing.Point(16, 16)
+                Me.chkSaveConsOnExit.Name = "chkSaveConsOnExit"
+                Me.chkSaveConsOnExit.Size = New System.Drawing.Size(153, 19)
+                Me.chkSaveConsOnExit.TabIndex = 10
+                Me.chkSaveConsOnExit.Text = "Save connections on exit"
+                Me.chkSaveConsOnExit.UseVisualStyleBackColor = True
+                '
+                'chkProperInstallationOfComponentsAtStartup
+                '
+                Me.chkProperInstallationOfComponentsAtStartup.AutoSize = True
+                Me.chkProperInstallationOfComponentsAtStartup.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkProperInstallationOfComponentsAtStartup.Location = New System.Drawing.Point(16, 112)
+                Me.chkProperInstallationOfComponentsAtStartup.Name = "chkProperInstallationOfComponentsAtStartup"
+                Me.chkProperInstallationOfComponentsAtStartup.Size = New System.Drawing.Size(292, 19)
+                Me.chkProperInstallationOfComponentsAtStartup.TabIndex = 50
+                Me.chkProperInstallationOfComponentsAtStartup.Text = "Check proper installation of components at startup"
+                Me.chkProperInstallationOfComponentsAtStartup.UseVisualStyleBackColor = True
+                '
+                'chkConfirmExit
+                '
+                Me.chkConfirmExit.AutoSize = True
+                Me.chkConfirmExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkConfirmExit.Location = New System.Drawing.Point(16, 40)
+                Me.chkConfirmExit.Name = "chkConfirmExit"
+                Me.chkConfirmExit.Size = New System.Drawing.Size(245, 19)
+                Me.chkConfirmExit.TabIndex = 20
+                Me.chkConfirmExit.Text = "Confirm exit if there are open connections"
+                Me.chkConfirmExit.UseVisualStyleBackColor = True
+                '
+                'chkSingleInstance
+                '
+                Me.chkSingleInstance.AutoSize = True
+                Me.chkSingleInstance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkSingleInstance.Location = New System.Drawing.Point(16, 88)
+                Me.chkSingleInstance.Name = "chkSingleInstance"
+                Me.chkSingleInstance.Size = New System.Drawing.Size(411, 19)
+                Me.chkSingleInstance.TabIndex = 50
+                Me.chkSingleInstance.Text = "Allow only a single instance of the application (mRemote restart required)"
+                Me.chkSingleInstance.UseVisualStyleBackColor = True
+                '
+                'chkReconnectOnStart
+                '
+                Me.chkReconnectOnStart.AutoSize = True
+                Me.chkReconnectOnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkReconnectOnStart.Location = New System.Drawing.Point(16, 64)
+                Me.chkReconnectOnStart.Name = "chkReconnectOnStart"
+                Me.chkReconnectOnStart.Size = New System.Drawing.Size(296, 19)
+                Me.chkReconnectOnStart.TabIndex = 40
+                Me.chkReconnectOnStart.Text = "Reconnect to previously opened sessions on startup"
+                Me.chkReconnectOnStart.UseVisualStyleBackColor = True
+                '
+                'tabTabs
+                '
+                Me.tabTabs.Controls.Add(Me.pnlTabsAndPanels)
+                Me.tabTabs.Icon = Global.mRemoteNG.My.Resources.Resources.Tab_Icon
+                Me.tabTabs.Location = New System.Drawing.Point(0, 0)
+                Me.tabTabs.Name = "tabTabs"
+                Me.tabTabs.Selected = False
+                Me.tabTabs.Size = New System.Drawing.Size(573, 492)
+                Me.tabTabs.TabIndex = 3000
+                Me.tabTabs.Title = "Tabs && Panels"
+                '
+                'pnlTabsAndPanels
+                '
+                Me.pnlTabsAndPanels.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                            Or System.Windows.Forms.AnchorStyles.Left) _
+                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                Me.pnlTabsAndPanels.AutoScroll = True
+                Me.pnlTabsAndPanels.Controls.Add(Me.chkUseOnlyErrorsAndInfosPanel)
+                Me.pnlTabsAndPanels.Controls.Add(Me.lblSwitchToErrorsAndInfos)
+                Me.pnlTabsAndPanels.Controls.Add(Me.chkMCInformation)
+                Me.pnlTabsAndPanels.Controls.Add(Me.chkMCErrors)
+                Me.pnlTabsAndPanels.Controls.Add(Me.chkMCWarnings)
+                Me.pnlTabsAndPanels.Controls.Add(Me.chkOpenNewTabRightOfSelected)
+                Me.pnlTabsAndPanels.Controls.Add(Me.chkShowProtocolOnTabs)
+                Me.pnlTabsAndPanels.Controls.Add(Me.chkDoubleClickClosesTab)
+                Me.pnlTabsAndPanels.Controls.Add(Me.chkShowLogonInfoOnTabs)
+                Me.pnlTabsAndPanels.Controls.Add(Me.chkAlwaysShowPanelSelectionDlg)
+                Me.pnlTabsAndPanels.Location = New System.Drawing.Point(3, 3)
+                Me.pnlTabsAndPanels.Name = "pnlTabsAndPanels"
+                Me.pnlTabsAndPanels.Size = New System.Drawing.Size(567, 486)
+                Me.pnlTabsAndPanels.TabIndex = 51
+                '
+                'chkUseOnlyErrorsAndInfosPanel
+                '
+                Me.chkUseOnlyErrorsAndInfosPanel.AutoSize = True
+                Me.chkUseOnlyErrorsAndInfosPanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkUseOnlyErrorsAndInfosPanel.Location = New System.Drawing.Point(9, 146)
+                Me.chkUseOnlyErrorsAndInfosPanel.Name = "chkUseOnlyErrorsAndInfosPanel"
+                Me.chkUseOnlyErrorsAndInfosPanel.Size = New System.Drawing.Size(307, 19)
+                Me.chkUseOnlyErrorsAndInfosPanel.TabIndex = 51
+                Me.chkUseOnlyErrorsAndInfosPanel.Text = "Use only Notifications panel (no messagebox popups)"
+                Me.chkUseOnlyErrorsAndInfosPanel.UseVisualStyleBackColor = True
+                '
+                'lblSwitchToErrorsAndInfos
+                '
+                Me.lblSwitchToErrorsAndInfos.AutoSize = True
+                Me.lblSwitchToErrorsAndInfos.Location = New System.Drawing.Point(9, 171)
+                Me.lblSwitchToErrorsAndInfos.Name = "lblSwitchToErrorsAndInfos"
+                Me.lblSwitchToErrorsAndInfos.Size = New System.Drawing.Size(179, 15)
+                Me.lblSwitchToErrorsAndInfos.TabIndex = 52
+                Me.lblSwitchToErrorsAndInfos.Text = "Switch to Notifications panel on:"
+                '
+                'chkMCInformation
+                '
+                Me.chkMCInformation.AutoSize = True
+                Me.chkMCInformation.Enabled = False
+                Me.chkMCInformation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkMCInformation.Location = New System.Drawing.Point(25, 191)
+                Me.chkMCInformation.Name = "chkMCInformation"
+                Me.chkMCInformation.Size = New System.Drawing.Size(91, 19)
+                Me.chkMCInformation.TabIndex = 53
+                Me.chkMCInformation.Text = "Informations"
+                Me.chkMCInformation.UseVisualStyleBackColor = True
+                '
+                'chkMCErrors
+                '
+                Me.chkMCErrors.AutoSize = True
+                Me.chkMCErrors.Enabled = False
+                Me.chkMCErrors.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkMCErrors.Location = New System.Drawing.Point(223, 191)
+                Me.chkMCErrors.Name = "chkMCErrors"
+                Me.chkMCErrors.Size = New System.Drawing.Size(53, 19)
+                Me.chkMCErrors.TabIndex = 55
+                Me.chkMCErrors.Text = "Errors"
+                Me.chkMCErrors.UseVisualStyleBackColor = True
+                '
+                'chkMCWarnings
+                '
+                Me.chkMCWarnings.AutoSize = True
+                Me.chkMCWarnings.Enabled = False
+                Me.chkMCWarnings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkMCWarnings.Location = New System.Drawing.Point(132, 191)
+                Me.chkMCWarnings.Name = "chkMCWarnings"
+                Me.chkMCWarnings.Size = New System.Drawing.Size(73, 19)
+                Me.chkMCWarnings.TabIndex = 54
+                Me.chkMCWarnings.Text = "Warnings"
+                Me.chkMCWarnings.UseVisualStyleBackColor = True
+                '
+                'chkOpenNewTabRightOfSelected
+                '
+                Me.chkOpenNewTabRightOfSelected.AutoSize = True
+                Me.chkOpenNewTabRightOfSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkOpenNewTabRightOfSelected.Location = New System.Drawing.Point(9, 3)
+                Me.chkOpenNewTabRightOfSelected.Name = "chkOpenNewTabRightOfSelected"
+                Me.chkOpenNewTabRightOfSelected.Size = New System.Drawing.Size(309, 19)
+                Me.chkOpenNewTabRightOfSelected.TabIndex = 10
+                Me.chkOpenNewTabRightOfSelected.Text = "Open new tab to the right of the currently selected tab"
+                Me.chkOpenNewTabRightOfSelected.UseVisualStyleBackColor = True
+                '
+                'chkShowProtocolOnTabs
+                '
+                Me.chkShowProtocolOnTabs.AutoSize = True
+                Me.chkShowProtocolOnTabs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkShowProtocolOnTabs.Location = New System.Drawing.Point(9, 49)
+                Me.chkShowProtocolOnTabs.Name = "chkShowProtocolOnTabs"
+                Me.chkShowProtocolOnTabs.Size = New System.Drawing.Size(180, 19)
+                Me.chkShowProtocolOnTabs.TabIndex = 30
+                Me.chkShowProtocolOnTabs.Text = "Show protocols on tab names"
+                Me.chkShowProtocolOnTabs.UseVisualStyleBackColor = True
+                '
+                'chkDoubleClickClosesTab
+                '
+                Me.chkDoubleClickClosesTab.AutoSize = True
+                Me.chkDoubleClickClosesTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkDoubleClickClosesTab.Location = New System.Drawing.Point(9, 72)
+                Me.chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab"
+                Me.chkDoubleClickClosesTab.Size = New System.Drawing.Size(170, 19)
+                Me.chkDoubleClickClosesTab.TabIndex = 40
+                Me.chkDoubleClickClosesTab.Text = "Double click on tab closes it"
+                Me.chkDoubleClickClosesTab.UseVisualStyleBackColor = True
+                '
+                'chkShowLogonInfoOnTabs
+                '
+                Me.chkShowLogonInfoOnTabs.AutoSize = True
+                Me.chkShowLogonInfoOnTabs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkShowLogonInfoOnTabs.Location = New System.Drawing.Point(9, 26)
+                Me.chkShowLogonInfoOnTabs.Name = "chkShowLogonInfoOnTabs"
+                Me.chkShowLogonInfoOnTabs.Size = New System.Drawing.Size(227, 19)
+                Me.chkShowLogonInfoOnTabs.TabIndex = 20
+                Me.chkShowLogonInfoOnTabs.Text = "Show logon information on tab names"
+                Me.chkShowLogonInfoOnTabs.UseVisualStyleBackColor = True
+                '
+                'chkAlwaysShowPanelSelectionDlg
+                '
+                Me.chkAlwaysShowPanelSelectionDlg.AutoSize = True
+                Me.chkAlwaysShowPanelSelectionDlg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkAlwaysShowPanelSelectionDlg.Location = New System.Drawing.Point(9, 95)
+                Me.chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg"
+                Me.chkAlwaysShowPanelSelectionDlg.Size = New System.Drawing.Size(349, 19)
+                Me.chkAlwaysShowPanelSelectionDlg.TabIndex = 50
+                Me.chkAlwaysShowPanelSelectionDlg.Text = "Always show panel selection dialog when opening connectins"
+                Me.chkAlwaysShowPanelSelectionDlg.UseVisualStyleBackColor = True
                 '
                 'tabConnections
                 '
@@ -258,6 +589,7 @@ Namespace UI
                 Me.tabConnections.Icon = Global.mRemoteNG.My.Resources.Resources.Root_Icon
                 Me.tabConnections.Location = New System.Drawing.Point(0, 0)
                 Me.tabConnections.Name = "tabConnections"
+                Me.tabConnections.Selected = False
                 Me.tabConnections.Size = New System.Drawing.Size(573, 492)
                 Me.tabConnections.TabIndex = 4000
                 Me.tabConnections.Title = "Connections"
@@ -599,301 +931,6 @@ Namespace UI
                 Me.chkHostnameLikeDisplayName.TabIndex = 30
                 Me.chkHostnameLikeDisplayName.Text = "Set hostname like display name when creating new connections"
                 Me.chkHostnameLikeDisplayName.UseVisualStyleBackColor = True
-                '
-                'tabStartupExit
-                '
-                Me.tabStartupExit.Controls.Add(Me.pnlStartup)
-                Me.tabStartupExit.Icon = Global.mRemoteNG.My.Resources.Resources.StartupExit_Icon
-                Me.tabStartupExit.Location = New System.Drawing.Point(0, 0)
-                Me.tabStartupExit.Name = "tabStartupExit"
-                Me.tabStartupExit.Selected = False
-                Me.tabStartupExit.Size = New System.Drawing.Size(573, 492)
-                Me.tabStartupExit.TabIndex = 1000
-                Me.tabStartupExit.Title = "Startup/Exit"
-                '
-                'pnlStartup
-                '
-                Me.pnlStartup.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.pnlStartup.AutoScroll = True
-                Me.pnlStartup.Controls.Add(Me.chkSaveConsOnExit)
-                Me.pnlStartup.Controls.Add(Me.chkProperInstallationOfComponentsAtStartup)
-                Me.pnlStartup.Controls.Add(Me.chkConfirmExit)
-                Me.pnlStartup.Controls.Add(Me.chkSingleInstance)
-                Me.pnlStartup.Controls.Add(Me.chkReconnectOnStart)
-                Me.pnlStartup.Location = New System.Drawing.Point(3, 3)
-                Me.pnlStartup.Name = "pnlStartup"
-                Me.pnlStartup.Size = New System.Drawing.Size(567, 486)
-                Me.pnlStartup.TabIndex = 51
-                '
-                'chkSaveConsOnExit
-                '
-                Me.chkSaveConsOnExit.AutoSize = True
-                Me.chkSaveConsOnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkSaveConsOnExit.Location = New System.Drawing.Point(9, 3)
-                Me.chkSaveConsOnExit.Name = "chkSaveConsOnExit"
-                Me.chkSaveConsOnExit.Size = New System.Drawing.Size(153, 19)
-                Me.chkSaveConsOnExit.TabIndex = 10
-                Me.chkSaveConsOnExit.Text = "Save connections on exit"
-                Me.chkSaveConsOnExit.UseVisualStyleBackColor = True
-                '
-                'chkProperInstallationOfComponentsAtStartup
-                '
-                Me.chkProperInstallationOfComponentsAtStartup.AutoSize = True
-                Me.chkProperInstallationOfComponentsAtStartup.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkProperInstallationOfComponentsAtStartup.Location = New System.Drawing.Point(9, 97)
-                Me.chkProperInstallationOfComponentsAtStartup.Name = "chkProperInstallationOfComponentsAtStartup"
-                Me.chkProperInstallationOfComponentsAtStartup.Size = New System.Drawing.Size(292, 19)
-                Me.chkProperInstallationOfComponentsAtStartup.TabIndex = 50
-                Me.chkProperInstallationOfComponentsAtStartup.Text = "Check proper installation of components at startup"
-                Me.chkProperInstallationOfComponentsAtStartup.UseVisualStyleBackColor = True
-                '
-                'chkConfirmExit
-                '
-                Me.chkConfirmExit.AutoSize = True
-                Me.chkConfirmExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkConfirmExit.Location = New System.Drawing.Point(9, 26)
-                Me.chkConfirmExit.Name = "chkConfirmExit"
-                Me.chkConfirmExit.Size = New System.Drawing.Size(245, 19)
-                Me.chkConfirmExit.TabIndex = 20
-                Me.chkConfirmExit.Text = "Confirm exit if there are open connections"
-                Me.chkConfirmExit.UseVisualStyleBackColor = True
-                '
-                'chkSingleInstance
-                '
-                Me.chkSingleInstance.AutoSize = True
-                Me.chkSingleInstance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkSingleInstance.Location = New System.Drawing.Point(9, 74)
-                Me.chkSingleInstance.Name = "chkSingleInstance"
-                Me.chkSingleInstance.Size = New System.Drawing.Size(411, 19)
-                Me.chkSingleInstance.TabIndex = 50
-                Me.chkSingleInstance.Text = "Allow only a single instance of the application (mRemote restart required)"
-                Me.chkSingleInstance.UseVisualStyleBackColor = True
-                '
-                'chkReconnectOnStart
-                '
-                Me.chkReconnectOnStart.AutoSize = True
-                Me.chkReconnectOnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkReconnectOnStart.Location = New System.Drawing.Point(9, 51)
-                Me.chkReconnectOnStart.Name = "chkReconnectOnStart"
-                Me.chkReconnectOnStart.Size = New System.Drawing.Size(296, 19)
-                Me.chkReconnectOnStart.TabIndex = 40
-                Me.chkReconnectOnStart.Text = "Reconnect to previously opened sessions on startup"
-                Me.chkReconnectOnStart.UseVisualStyleBackColor = True
-                '
-                'tabAppearance
-                '
-                Me.tabAppearance.Controls.Add(Me.pnlAppearance)
-                Me.tabAppearance.Icon = Global.mRemoteNG.My.Resources.Resources.Appearance_Icon
-                Me.tabAppearance.Location = New System.Drawing.Point(0, 0)
-                Me.tabAppearance.Name = "tabAppearance"
-                Me.tabAppearance.Selected = False
-                Me.tabAppearance.Size = New System.Drawing.Size(573, 492)
-                Me.tabAppearance.TabIndex = 2000
-                Me.tabAppearance.Title = "Appearance"
-                '
-                'pnlAppearance
-                '
-                Me.pnlAppearance.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.pnlAppearance.AutoScroll = True
-                Me.pnlAppearance.Controls.Add(Me.chkShowDescriptionTooltipsInTree)
-                Me.pnlAppearance.Controls.Add(Me.chkMinimizeToSystemTray)
-                Me.pnlAppearance.Controls.Add(Me.chkShowSystemTrayIcon)
-                Me.pnlAppearance.Controls.Add(Me.chkShowFullConnectionsFilePathInTitle)
-                Me.pnlAppearance.Location = New System.Drawing.Point(3, 3)
-                Me.pnlAppearance.Name = "pnlAppearance"
-                Me.pnlAppearance.Size = New System.Drawing.Size(567, 486)
-                Me.pnlAppearance.TabIndex = 41
-                '
-                'chkShowDescriptionTooltipsInTree
-                '
-                Me.chkShowDescriptionTooltipsInTree.AutoSize = True
-                Me.chkShowDescriptionTooltipsInTree.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkShowDescriptionTooltipsInTree.Location = New System.Drawing.Point(9, 3)
-                Me.chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree"
-                Me.chkShowDescriptionTooltipsInTree.Size = New System.Drawing.Size(256, 19)
-                Me.chkShowDescriptionTooltipsInTree.TabIndex = 10
-                Me.chkShowDescriptionTooltipsInTree.Text = "Show description tooltips in connection tree"
-                Me.chkShowDescriptionTooltipsInTree.UseVisualStyleBackColor = True
-                '
-                'chkMinimizeToSystemTray
-                '
-                Me.chkMinimizeToSystemTray.AutoSize = True
-                Me.chkMinimizeToSystemTray.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkMinimizeToSystemTray.Location = New System.Drawing.Point(9, 82)
-                Me.chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray"
-                Me.chkMinimizeToSystemTray.Size = New System.Drawing.Size(153, 19)
-                Me.chkMinimizeToSystemTray.TabIndex = 40
-                Me.chkMinimizeToSystemTray.Text = "Minimize to System Tray"
-                Me.chkMinimizeToSystemTray.UseVisualStyleBackColor = True
-                '
-                'chkShowSystemTrayIcon
-                '
-                Me.chkShowSystemTrayIcon.AutoSize = True
-                Me.chkShowSystemTrayIcon.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkShowSystemTrayIcon.Location = New System.Drawing.Point(9, 59)
-                Me.chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon"
-                Me.chkShowSystemTrayIcon.Size = New System.Drawing.Size(184, 19)
-                Me.chkShowSystemTrayIcon.TabIndex = 30
-                Me.chkShowSystemTrayIcon.Text = "Always show System Tray Icon"
-                Me.chkShowSystemTrayIcon.UseVisualStyleBackColor = True
-                '
-                'chkShowFullConnectionsFilePathInTitle
-                '
-                Me.chkShowFullConnectionsFilePathInTitle.AutoSize = True
-                Me.chkShowFullConnectionsFilePathInTitle.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkShowFullConnectionsFilePathInTitle.Location = New System.Drawing.Point(9, 26)
-                Me.chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle"
-                Me.chkShowFullConnectionsFilePathInTitle.Size = New System.Drawing.Size(267, 19)
-                Me.chkShowFullConnectionsFilePathInTitle.TabIndex = 20
-                Me.chkShowFullConnectionsFilePathInTitle.Text = "Show full connections file path in window title"
-                Me.chkShowFullConnectionsFilePathInTitle.UseVisualStyleBackColor = True
-                '
-                'tabTabs
-                '
-                Me.tabTabs.Controls.Add(Me.pnlTabsAndPanels)
-                Me.tabTabs.Icon = Global.mRemoteNG.My.Resources.Resources.Tab_Icon
-                Me.tabTabs.Location = New System.Drawing.Point(0, 0)
-                Me.tabTabs.Name = "tabTabs"
-                Me.tabTabs.Selected = False
-                Me.tabTabs.Size = New System.Drawing.Size(573, 492)
-                Me.tabTabs.TabIndex = 3000
-                Me.tabTabs.Title = "Tabs && Panels"
-                '
-                'pnlTabsAndPanels
-                '
-                Me.pnlTabsAndPanels.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.pnlTabsAndPanels.AutoScroll = True
-                Me.pnlTabsAndPanels.Controls.Add(Me.chkUseOnlyErrorsAndInfosPanel)
-                Me.pnlTabsAndPanels.Controls.Add(Me.lblSwitchToErrorsAndInfos)
-                Me.pnlTabsAndPanels.Controls.Add(Me.chkMCInformation)
-                Me.pnlTabsAndPanels.Controls.Add(Me.chkMCErrors)
-                Me.pnlTabsAndPanels.Controls.Add(Me.chkMCWarnings)
-                Me.pnlTabsAndPanels.Controls.Add(Me.chkOpenNewTabRightOfSelected)
-                Me.pnlTabsAndPanels.Controls.Add(Me.chkShowProtocolOnTabs)
-                Me.pnlTabsAndPanels.Controls.Add(Me.chkDoubleClickClosesTab)
-                Me.pnlTabsAndPanels.Controls.Add(Me.chkShowLogonInfoOnTabs)
-                Me.pnlTabsAndPanels.Controls.Add(Me.chkAlwaysShowPanelSelectionDlg)
-                Me.pnlTabsAndPanels.Location = New System.Drawing.Point(3, 3)
-                Me.pnlTabsAndPanels.Name = "pnlTabsAndPanels"
-                Me.pnlTabsAndPanels.Size = New System.Drawing.Size(567, 486)
-                Me.pnlTabsAndPanels.TabIndex = 51
-                '
-                'chkUseOnlyErrorsAndInfosPanel
-                '
-                Me.chkUseOnlyErrorsAndInfosPanel.AutoSize = True
-                Me.chkUseOnlyErrorsAndInfosPanel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkUseOnlyErrorsAndInfosPanel.Location = New System.Drawing.Point(9, 146)
-                Me.chkUseOnlyErrorsAndInfosPanel.Name = "chkUseOnlyErrorsAndInfosPanel"
-                Me.chkUseOnlyErrorsAndInfosPanel.Size = New System.Drawing.Size(307, 19)
-                Me.chkUseOnlyErrorsAndInfosPanel.TabIndex = 51
-                Me.chkUseOnlyErrorsAndInfosPanel.Text = "Use only Notifications panel (no messagebox popups)"
-                Me.chkUseOnlyErrorsAndInfosPanel.UseVisualStyleBackColor = True
-                '
-                'lblSwitchToErrorsAndInfos
-                '
-                Me.lblSwitchToErrorsAndInfos.AutoSize = True
-                Me.lblSwitchToErrorsAndInfos.Location = New System.Drawing.Point(9, 171)
-                Me.lblSwitchToErrorsAndInfos.Name = "lblSwitchToErrorsAndInfos"
-                Me.lblSwitchToErrorsAndInfos.Size = New System.Drawing.Size(179, 15)
-                Me.lblSwitchToErrorsAndInfos.TabIndex = 52
-                Me.lblSwitchToErrorsAndInfos.Text = "Switch to Notifications panel on:"
-                '
-                'chkMCInformation
-                '
-                Me.chkMCInformation.AutoSize = True
-                Me.chkMCInformation.Enabled = False
-                Me.chkMCInformation.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkMCInformation.Location = New System.Drawing.Point(25, 191)
-                Me.chkMCInformation.Name = "chkMCInformation"
-                Me.chkMCInformation.Size = New System.Drawing.Size(91, 19)
-                Me.chkMCInformation.TabIndex = 53
-                Me.chkMCInformation.Text = "Informations"
-                Me.chkMCInformation.UseVisualStyleBackColor = True
-                '
-                'chkMCErrors
-                '
-                Me.chkMCErrors.AutoSize = True
-                Me.chkMCErrors.Enabled = False
-                Me.chkMCErrors.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkMCErrors.Location = New System.Drawing.Point(223, 191)
-                Me.chkMCErrors.Name = "chkMCErrors"
-                Me.chkMCErrors.Size = New System.Drawing.Size(53, 19)
-                Me.chkMCErrors.TabIndex = 55
-                Me.chkMCErrors.Text = "Errors"
-                Me.chkMCErrors.UseVisualStyleBackColor = True
-                '
-                'chkMCWarnings
-                '
-                Me.chkMCWarnings.AutoSize = True
-                Me.chkMCWarnings.Enabled = False
-                Me.chkMCWarnings.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkMCWarnings.Location = New System.Drawing.Point(132, 191)
-                Me.chkMCWarnings.Name = "chkMCWarnings"
-                Me.chkMCWarnings.Size = New System.Drawing.Size(73, 19)
-                Me.chkMCWarnings.TabIndex = 54
-                Me.chkMCWarnings.Text = "Warnings"
-                Me.chkMCWarnings.UseVisualStyleBackColor = True
-                '
-                'chkOpenNewTabRightOfSelected
-                '
-                Me.chkOpenNewTabRightOfSelected.AutoSize = True
-                Me.chkOpenNewTabRightOfSelected.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkOpenNewTabRightOfSelected.Location = New System.Drawing.Point(9, 3)
-                Me.chkOpenNewTabRightOfSelected.Name = "chkOpenNewTabRightOfSelected"
-                Me.chkOpenNewTabRightOfSelected.Size = New System.Drawing.Size(309, 19)
-                Me.chkOpenNewTabRightOfSelected.TabIndex = 10
-                Me.chkOpenNewTabRightOfSelected.Text = "Open new tab to the right of the currently selected tab"
-                Me.chkOpenNewTabRightOfSelected.UseVisualStyleBackColor = True
-                '
-                'chkShowProtocolOnTabs
-                '
-                Me.chkShowProtocolOnTabs.AutoSize = True
-                Me.chkShowProtocolOnTabs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkShowProtocolOnTabs.Location = New System.Drawing.Point(9, 49)
-                Me.chkShowProtocolOnTabs.Name = "chkShowProtocolOnTabs"
-                Me.chkShowProtocolOnTabs.Size = New System.Drawing.Size(180, 19)
-                Me.chkShowProtocolOnTabs.TabIndex = 30
-                Me.chkShowProtocolOnTabs.Text = "Show protocols on tab names"
-                Me.chkShowProtocolOnTabs.UseVisualStyleBackColor = True
-                '
-                'chkDoubleClickClosesTab
-                '
-                Me.chkDoubleClickClosesTab.AutoSize = True
-                Me.chkDoubleClickClosesTab.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkDoubleClickClosesTab.Location = New System.Drawing.Point(9, 72)
-                Me.chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab"
-                Me.chkDoubleClickClosesTab.Size = New System.Drawing.Size(170, 19)
-                Me.chkDoubleClickClosesTab.TabIndex = 40
-                Me.chkDoubleClickClosesTab.Text = "Double click on tab closes it"
-                Me.chkDoubleClickClosesTab.UseVisualStyleBackColor = True
-                '
-                'chkShowLogonInfoOnTabs
-                '
-                Me.chkShowLogonInfoOnTabs.AutoSize = True
-                Me.chkShowLogonInfoOnTabs.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkShowLogonInfoOnTabs.Location = New System.Drawing.Point(9, 26)
-                Me.chkShowLogonInfoOnTabs.Name = "chkShowLogonInfoOnTabs"
-                Me.chkShowLogonInfoOnTabs.Size = New System.Drawing.Size(227, 19)
-                Me.chkShowLogonInfoOnTabs.TabIndex = 20
-                Me.chkShowLogonInfoOnTabs.Text = "Show logon information on tab names"
-                Me.chkShowLogonInfoOnTabs.UseVisualStyleBackColor = True
-                '
-                'chkAlwaysShowPanelSelectionDlg
-                '
-                Me.chkAlwaysShowPanelSelectionDlg.AutoSize = True
-                Me.chkAlwaysShowPanelSelectionDlg.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkAlwaysShowPanelSelectionDlg.Location = New System.Drawing.Point(9, 95)
-                Me.chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg"
-                Me.chkAlwaysShowPanelSelectionDlg.Size = New System.Drawing.Size(349, 19)
-                Me.chkAlwaysShowPanelSelectionDlg.TabIndex = 50
-                Me.chkAlwaysShowPanelSelectionDlg.Text = "Always show panel selection dialog when opening connectins"
-                Me.chkAlwaysShowPanelSelectionDlg.UseVisualStyleBackColor = True
                 '
                 'tabUpdates
                 '
@@ -1357,6 +1394,15 @@ Namespace UI
                 Me.TabText = "Options"
                 Me.Text = "Options"
                 Me.TabController.ResumeLayout(False)
+                Me.tabAppearance.ResumeLayout(False)
+                Me.pnlAppearance.ResumeLayout(False)
+                Me.pnlAppearance.PerformLayout()
+                Me.tabStartupExit.ResumeLayout(False)
+                Me.pnlStartup.ResumeLayout(False)
+                Me.pnlStartup.PerformLayout()
+                Me.tabTabs.ResumeLayout(False)
+                Me.pnlTabsAndPanels.ResumeLayout(False)
+                Me.pnlTabsAndPanels.PerformLayout()
                 Me.tabConnections.ResumeLayout(False)
                 Me.pnlConnections.ResumeLayout(False)
                 Me.pnlConnections.PerformLayout()
@@ -1370,15 +1416,6 @@ Namespace UI
                 CType(Me.numAutoSave, System.ComponentModel.ISupportInitialize).EndInit()
                 Me.grpExperimental.ResumeLayout(False)
                 Me.grpExperimental.PerformLayout()
-                Me.tabStartupExit.ResumeLayout(False)
-                Me.pnlStartup.ResumeLayout(False)
-                Me.pnlStartup.PerformLayout()
-                Me.tabAppearance.ResumeLayout(False)
-                Me.pnlAppearance.ResumeLayout(False)
-                Me.pnlAppearance.PerformLayout()
-                Me.tabTabs.ResumeLayout(False)
-                Me.pnlTabsAndPanels.ResumeLayout(False)
-                Me.pnlTabsAndPanels.PerformLayout()
                 Me.tabUpdates.ResumeLayout(False)
                 Me.pnlUpdates.ResumeLayout(False)
                 Me.pnlUpdateCheck.ResumeLayout(False)
@@ -1407,6 +1444,19 @@ Namespace UI
                     Me.chkConfirmExit.Checked = My.Settings.ConfirmExit
                     Me.chkReconnectOnStart.Checked = My.Settings.OpenConsFromLastSession
                     Me.chkProperInstallationOfComponentsAtStartup.Checked = My.Settings.StartupComponentsCheck
+
+                    Me.cboLanguage.Items.Clear()
+                    Me.cboLanguage.Items.Add(My.Resources.strLanguageDefault)
+
+                    For Each CultureNativeName As String In App.SupportedCultures.CultureNativeNames
+                        Me.cboLanguage.Items.Add(CultureNativeName)
+                    Next
+                    If Not My.Settings.OverrideUICulture = "" And App.SupportedCultures.IsNameSupported(My.Settings.OverrideUICulture) Then
+                        Me.cboLanguage.SelectedItem = App.SupportedCultures.CultureNativeName(My.Settings.OverrideUICulture)
+                    End If
+                    If Me.cboLanguage.SelectedIndex = -1 Then
+                        Me.cboLanguage.SelectedIndex = 0
+                    End If
 
                     Me.chkShowDescriptionTooltipsInTree.Checked = My.Settings.ShowDescriptionTooltipsInTree
                     Me.chkShowSystemTrayIcon.Checked = My.Settings.ShowSystemTrayIcon
@@ -1505,6 +1555,12 @@ Namespace UI
                     My.Settings.ConfirmExit = Me.chkConfirmExit.Checked
                     My.Settings.OpenConsFromLastSession = Me.chkReconnectOnStart.Checked
                     My.Settings.StartupComponentsCheck = Me.chkProperInstallationOfComponentsAtStartup.Checked
+
+                    If Me.cboLanguage.SelectedIndex > 0 And App.SupportedCultures.IsNativeNameSupported(Me.cboLanguage.SelectedItem) Then
+                        My.Settings.OverrideUICulture = App.SupportedCultures.CultureName(Me.cboLanguage.SelectedItem)
+                    Else
+                        My.Settings.OverrideUICulture = ""
+                    End If
 
                     My.Settings.ShowDescriptionTooltipsInTree = Me.chkShowDescriptionTooltipsInTree.Checked
                     My.Settings.ShowSystemTrayIcon = Me.chkShowSystemTrayIcon.Checked
@@ -1778,6 +1834,8 @@ Namespace UI
                 lblXulRunnerPath.Text = My.Resources.strXULrunnerPath & ":"
                 btnBrowseXulRunnerPath.Text = My.Resources.strButtonBrowse
                 chkEncryptCompleteFile.Text = My.Resources.strEncryptCompleteConnectionFile
+                lblLanguage.Text = My.Resources.strLanguage
+                lblLanguageRestartRequired.Text = String.Format(My.Resources.strLanguageRestartRequired, My.Application.Info.ProductName)
             End Sub
 
             Public Shadows Sub Show(ByVal DockPanel As DockPanel)
@@ -1869,10 +1927,6 @@ Namespace UI
                 Me.Close()
             End Sub
 #End Region
-
-            Private Sub TabController_SelectionChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TabController.SelectionChanged
-
-            End Sub
         End Class
     End Namespace
 End Namespace

@@ -470,5 +470,11 @@
     <Setting Name="RdpReconnectionCount" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">5</Value>
     </Setting>
+    <Setting Name="OverrideUICulture" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SupportedUICultures" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">de,en,en-US</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
