@@ -691,7 +691,7 @@ Public Class frmMain
     Protected Overloads Overrides Sub WndProc(ByRef m As Message)
         Try
 #If Config = "Debug" Then
-            Debug.Print(m.Msg)
+            'Debug.Print(m.Msg)
 #End If
 
             Select Case m.Msg
