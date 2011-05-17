@@ -1176,54 +1176,28 @@ Namespace App
 
         Public Shared Function CreateQuicky(ByVal ConString As String, Optional ByVal Protocol As Connection.Protocol.Protocols = Connection.Protocol.Protocols.NONE) As Connection.Info
             Try
-                nCi = New Connection.Info
+                Dim Uri As System.Uri = New System.Uri("dummyscheme" + System.Uri.SchemeDelimiter + ConString)
 
-                If Protocol <> Connection.Protocol.Protocols.NONE Then
+                If Not String.IsNullOrEmpty(Uri.Host) Then
+                    nCi = New Connection.Info
+
+                    nCi.Name = String.Format(My.Resources.strQuick, Uri.Host)
                     nCi.Protocol = Protocol
-                End If
-
-                Dim qConS() As String = Split(ConString, ":")
-                Dim qHost As String = ""
-                Dim qPort As Integer = 0
-
-                For i As Integer = 0 To qConS.Length - 1
-                    If i = 0 Then
-                        qHost = qConS(i)
+                    nCi.Hostname = Uri.Host
+                    If Uri.Port = -1 Then
+                        nCi.Port = Nothing
+                    Else
+                        nCi.Port = Uri.Port
                     End If
-
-                    If i = 1 Then
-                        Try
-                            qPort = Int(qConS(i))
-                        Catch ex As Exception
-                            qHost += ":" & qConS(i)
-                        End Try
-                    End If
-
-                    If i = 2 Then
-                        Try
-                            qPort = Int(qConS(i))
-                        Catch ex As Exception
-                        End Try
-                    End If
-                Next
-
-                If qHost <> "" Then
-                    nCi.Name = String.Format(My.Resources.strQuick, qHost)
-                    nCi.Hostname = qHost
-                    nCi.Port = qPort
                     nCi.IsQuicky = True
 
                     Windows.quickyForm.ConnectionInfo = nCi
 
                     If Protocol = Connection.Protocol.Protocols.NONE Then
                         Windows.quickyPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-                    Else
-
                     End If
 
                     Return nCi
-                Else
-                    '--------
                 End If
             Catch ex As Exception
                 mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strQuickConnectFailed & vbNewLine & ex.Message)
