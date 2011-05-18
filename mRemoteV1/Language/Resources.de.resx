@@ -994,7 +994,7 @@ Wenn Sie noch immer Probleme mit ICA haben, konsultieren sie bitte das mRemoteNG
   <data name="strCcGeckoFailed" xml:space="preserve">
     <value>Um die Gecko Rendering Engine benutzen zu können benötigen Sie XULrunner 1.8.1.x und einen korrekt eingetragenen Pfad in den Optionen.
 Hier können Sie XULrunner 1.8.1.3 herunterladen: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Wenn der Download abgeschlossen ist entpacken Sie das Paket (Der Speicherort ist dabei ihnen überlassen). Als nächstes öffnen Sie (in mRemote) Extras - Optionen - Erweitert und geben Sie den korrekten Pfad im XULrunner Feld an.
+Wenn der Download abgeschlossen ist entpacken Sie das Paket (Der Speicherort ist dabei ihnen überlassen). Als nächstes öffnen Sie (in mRemoteNG) Extras - Optionen - Erweitert und geben Sie den korrekten Pfad im XULrunner Feld an.
 Wenn Sie noch immer Probleme mit der Gecko Engine in mRemote haben, konsultieren Sie bitte das mRemoteNG Forum: http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcEOLOK" xml:space="preserve">
@@ -1016,7 +1016,7 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
     <value>Anfang/Ende</value>
   </data>
   <data name="strAllowOnlySingleInstance" xml:space="preserve">
-    <value>Nur eine Instanz zulassen (mRemote Neustart benötigt)</value>
+    <value>Nur eine Instanz zulassen (mRemoteNG Neustart benötigt)</value>
   </data>
   <data name="strReconnectAtStartup" xml:space="preserve">
     <value>Offene Verbindungen speichern und beim nächsten Start wiederverbinden</value>
@@ -1360,9 +1360,6 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
   <data name="strCurrentVersion" xml:space="preserve">
     <value>Aktuelle Version</value>
   </data>
-  <data name="strVersion" xml:space="preserve">
-    <value>Version</value>
-  </data>
   <data name="strUpdateDownloadComplete" xml:space="preserve">
     <value>Download fertiggestellt!
 mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
@@ -1680,7 +1677,7 @@ Starte mit neuer Datei.</value>
     <value>Setzen der RDP Fehlderbehandlungsroutine fehlgeschlagen!</value>
   </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
-    <value>Konte das RDP Plugin nicht einbinden, bitte prüfen Sie die mRemote Voraussetzungen.</value>
+    <value>Konte das RDP Plugin nicht einbinden, bitte prüfen Sie die mRemoteNG Voraussetzungen.</value>
   </data>
   <data name="strRdpSetPropsFailed" xml:space="preserve">
     <value>Setzen der RDP Parameter fehlgeschlagen!</value>
