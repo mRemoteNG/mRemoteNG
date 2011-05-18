@@ -1223,7 +1223,7 @@
     <value>Connecting...</value>
   </data>
   <data name="strRDP256Colors" xml:space="preserve">
-    <value>256 Colors (8bit)</value>
+    <value>256 Colours (8-bit)</value>
   </data>
   <data name="strRDPSoundBringToThisComputer" xml:space="preserve">
     <value>Bring to this computer</value>
@@ -1540,13 +1540,13 @@ If you are still not able to pass this check or use the (RDP) Sessions feature i
     <value>Logoff</value>
   </data>
   <data name="strTheFollowing" xml:space="preserve">
-    <value>the follwing</value>
+    <value>The follwing</value>
   </data>
   <data name="strMyCurrentWindowsCreds" xml:space="preserve">
-    <value>my current credentials (windows logon info)</value>
+    <value>My current credentials (Windows logon information)</value>
   </data>
   <data name="strNoInformation" xml:space="preserve">
-    <value>none</value>
+    <value>None</value>
   </data>
   <data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value>Single click on opened connection switches to it</value>
@@ -1703,13 +1703,13 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>CTRL-ESC</value>
   </data>
   <data name="strRDP65536Colors" xml:space="preserve">
-    <value>65536 Colors (16bit)</value>
+    <value>65536 Colours (16-bit)</value>
   </data>
   <data name="strRDP16777216Colors" xml:space="preserve">
-    <value>16777216 Colors (24bit)</value>
+    <value>16777216 Colours (24-bit)</value>
   </data>
   <data name="strRDP4294967296Colors" xml:space="preserve">
-    <value>4294967296 Colors (32bit)</value>
+    <value>4294967296 Colours (32-bit)</value>
   </data>
   <data name="strRDPDisableWallpaper" xml:space="preserve">
     <value>Disable Wallpaper</value>
@@ -1763,7 +1763,7 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Transfer successful!</value>
   </data>
   <data name="strSSHTransferEndFailed" xml:space="preserve">
-    <value>Ssh Transfee End (UI.Window.SSHTransfer) failed!</value>
+    <value>SSH Transfer End (UI.Window.SSHTransfer) failed!</value>
   </data>
   <data name="strTransfer" xml:space="preserve">
     <value>Transfer</value>
@@ -1783,7 +1783,7 @@ Please use File - Load Connections for normal connection files!</value>
     <value>AddNodeFromXML failed!</value>
   </data>
   <data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
-    <value>Get Connection Info From Xml failed</value>
+    <value>Get Connection Info From XML failed</value>
   </data>
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Couldn't create new connections file!</value>
@@ -1997,7 +1997,7 @@ Starting with new connections file.</value>
     <value>RDP SetEventHandlers failed!</value>
   </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
-    <value>Couldn't create RDP control, please check mRemote requirements.</value>
+    <value>Couldn't create RDP control, please check mRemoteNG requirements.</value>
   </data>
   <data name="strRdpSetPropsFailed" xml:space="preserve">
     <value>RDP SetProps failed!</value>
@@ -2060,16 +2060,16 @@ Starting with new connections file.</value>
     <value>Basic</value>
   </data>
   <data name="strEnc128BitLogonOnly" xml:space="preserve">
-    <value>128Bit (logon only)</value>
+    <value>128-bit (logon only)</value>
   </data>
   <data name="strEnc40Bit" xml:space="preserve">
-    <value>40 Bit</value>
+    <value>40-bit</value>
   </data>
   <data name="strEnc56Bit" xml:space="preserve">
-    <value>56 Bit</value>
+    <value>56-bit</value>
   </data>
   <data name="strEnc128Bit" xml:space="preserve">
-    <value>128 Bit</value>
+    <value>128-bit</value>
   </data>
   <data name="strIntAppConnectionFailed" xml:space="preserve">
     <value>Connection failed!</value>
