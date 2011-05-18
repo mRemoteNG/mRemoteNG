@@ -1,6 +1,7 @@
 Contributors
 ============
 
+Lionel Caignec
 Felix Deimel
 Tom Hiller
 Riley McArdle

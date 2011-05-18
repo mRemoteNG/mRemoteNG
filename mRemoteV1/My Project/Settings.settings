@@ -474,7 +474,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="SupportedUICultures" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">de,en,en-US</Value>
+      <Value Profile="(Default)">de,en,en-US,fr</Value>
     </Setting>
     <Setting Name="ConDefaultRDGatewayHostname" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
