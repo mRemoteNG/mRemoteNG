@@ -47,6 +47,9 @@ Namespace UI
             Friend WithEvents cMenTreeToolsImportExportImportFromPortScan As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeConnectWithOptionsChoosePanelBeforeConnecting As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeConnectWithOptionsDontConnectToConsoleSession As System.Windows.Forms.ToolStripMenuItem
+            Friend WithEvents mMenSortAscending As System.Windows.Forms.ToolStripMenuItem
+            Friend WithEvents mMenAddConnection As System.Windows.Forms.ToolStripMenuItem
+            Friend WithEvents mMenAddFolder As System.Windows.Forms.ToolStripMenuItem
             Public WithEvents tvConnections As System.Windows.Forms.TreeView
             Private Sub InitializeComponent()
                 Me.components = New System.ComponentModel.Container
@@ -88,9 +91,12 @@ Namespace UI
                 Me.PictureBox1 = New System.Windows.Forms.PictureBox
                 Me.txtSearch = New System.Windows.Forms.TextBox
                 Me.msMain = New System.Windows.Forms.MenuStrip
+                Me.mMenAddConnection = New System.Windows.Forms.ToolStripMenuItem
+                Me.mMenAddFolder = New System.Windows.Forms.ToolStripMenuItem
                 Me.mMenView = New System.Windows.Forms.ToolStripMenuItem
                 Me.mMenViewExpandAllFolders = New System.Windows.Forms.ToolStripMenuItem
                 Me.mMenViewCollapseAllFolders = New System.Windows.Forms.ToolStripMenuItem
+                Me.mMenSortAscending = New System.Windows.Forms.ToolStripMenuItem
                 Me.cMenTree.SuspendLayout()
                 Me.pnlConnections.SuspendLayout()
                 CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -124,7 +130,7 @@ Namespace UI
                 Me.cMenTree.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeAddConnection, Me.cMenTreeAddFolder, Me.cMenTreeSep1, Me.cMenTreeConnect, Me.cMenTreeConnectWithOptions, Me.cMenTreeDisconnect, Me.cMenTreeSep2, Me.cMenTreeToolsTransferFile, Me.cMenTreeToolsImportExport, Me.cMenTreeToolsSort, Me.cMenTreeToolsExternalApps, Me.cMenTreeSep3, Me.cMenTreeDuplicate, Me.cMenTreeRename, Me.cMenTreeDelete, Me.cMenTreeSep4, Me.cMenTreeMoveUp, Me.cMenTreeMoveDown})
                 Me.cMenTree.Name = "cMenTree"
                 Me.cMenTree.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-                Me.cMenTree.Size = New System.Drawing.Size(187, 358)
+                Me.cMenTree.Size = New System.Drawing.Size(187, 336)
                 '
                 'cMenTreeAddConnection
                 '
@@ -376,13 +382,28 @@ Namespace UI
                 'msMain
                 '
                 Me.msMain.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.msMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenView})
+                Me.msMain.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenAddConnection, Me.mMenAddFolder, Me.mMenView, Me.mMenSortAscending})
                 Me.msMain.Location = New System.Drawing.Point(0, 0)
                 Me.msMain.Name = "msMain"
                 Me.msMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
+                Me.msMain.ShowItemToolTips = True
                 Me.msMain.Size = New System.Drawing.Size(192, 24)
                 Me.msMain.TabIndex = 10
                 Me.msMain.Text = "MenuStrip1"
+                '
+                'mMenAddConnection
+                '
+                Me.mMenAddConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+                Me.mMenAddConnection.Image = Global.mRemoteNG.My.Resources.Resources.Connection_Add
+                Me.mMenAddConnection.Name = "mMenAddConnection"
+                Me.mMenAddConnection.Size = New System.Drawing.Size(28, 20)
+                '
+                'mMenAddFolder
+                '
+                Me.mMenAddFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+                Me.mMenAddFolder.Image = Global.mRemoteNG.My.Resources.Resources.Folder_Add
+                Me.mMenAddFolder.Name = "mMenAddFolder"
+                Me.mMenAddFolder.Size = New System.Drawing.Size(28, 20)
                 '
                 'mMenView
                 '
@@ -406,6 +427,13 @@ Namespace UI
                 Me.mMenViewCollapseAllFolders.Name = "mMenViewCollapseAllFolders"
                 Me.mMenViewCollapseAllFolders.Size = New System.Drawing.Size(161, 22)
                 Me.mMenViewCollapseAllFolders.Text = "Collapse all folders"
+                '
+                'mMenSortAscending
+                '
+                Me.mMenSortAscending.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+                Me.mMenSortAscending.Image = Global.mRemoteNG.My.Resources.Resources.Sort_AZ
+                Me.mMenSortAscending.Name = "mMenSortAscending"
+                Me.mMenSortAscending.Size = New System.Drawing.Size(28, 20)
                 '
                 'Tree
                 '
@@ -492,9 +520,12 @@ Namespace UI
                 cMenTreeDelete.Text = My.Resources.strMenuDelete
                 cMenTreeMoveUp.Text = My.Resources.strMoveUp
                 cMenTreeMoveDown.Text = My.Resources.strMoveDown
-                mMenView.Text = My.Resources.strMenuView
+                mMenAddConnection.ToolTipText = My.Resources.strAddConnection
+                mMenAddFolder.ToolTipText = My.Resources.strAddFolder
+                mMenView.ToolTipText = My.Resources.strMenuView.Replace("&", "")
                 mMenViewExpandAllFolders.Text = My.Resources.strExpandAllFolders
                 mMenViewCollapseAllFolders.Text = My.Resources.strCollapseAllFolders
+                mMenSortAscending.ToolTipText = My.Resources.strSortAsc
                 TabText = My.Resources.strConnections
                 Text = My.Resources.strConnections
             End Sub
@@ -671,10 +702,7 @@ Namespace UI
 
                             Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = True
 
-
                             Me.cMenTreeToolsImportExport.Enabled = False
-
-                            Me.cMenTreeToolsSort.Enabled = False
 
                             Me.cMenTreeToolsExternalApps.Enabled = True
 
@@ -708,8 +736,6 @@ Namespace UI
                             Me.cMenTreeToolsImportExportImportFromAD.Enabled = True
                             Me.cMenTreeToolsImportExportImportmRemoteXML.Enabled = True
 
-                            Me.cMenTreeToolsSort.Enabled = True
-
                             Me.cMenTreeToolsExternalApps.Enabled = False
 
                             Me.cMenTreeDuplicate.Enabled = True
@@ -731,8 +757,6 @@ Namespace UI
                             Me.cMenTreeToolsImportExportExportmRemoteXML.Enabled = False
                             Me.cMenTreeToolsImportExportImportFromAD.Enabled = True
                             Me.cMenTreeToolsImportExportImportmRemoteXML.Enabled = True
-
-                            Me.cMenTreeToolsSort.Enabled = True
 
                             Me.cMenTreeToolsExternalApps.Enabled = False
 
@@ -899,12 +923,12 @@ Namespace UI
 #End Region
 
 #Region "Tree Context Menu"
-            Private Sub cMenTreeAddConnection_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeAddConnection.Click
+            Private Sub cMenTreeAddConnection_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeAddConnection.Click, mMenAddConnection.Click
                 Me.AddConnection()
                 SaveConnectionsBG()
             End Sub
 
-            Private Sub cMenTreeAddFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeAddFolder.Click
+            Private Sub cMenTreeAddFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeAddFolder.Click, mMenAddFolder.Click
                 Me.AddFolder()
                 SaveConnectionsBG()
             End Sub
@@ -957,13 +981,24 @@ Namespace UI
                 Me.ImportFromPortScan()
             End Sub
 
+            Private Sub mMenSortAscending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenSortAscending.Click
+                Me.tvConnections.BeginUpdate()
+                mRemoteNG.Tree.Node.Sort(Me.tvConnections.Nodes.Item(0), Tools.Controls.TreeNodeSorter.SortType.Ascending)
+                Me.tvConnections.EndUpdate()
+                SaveConnectionsBG()
+            End Sub
+
             Private Sub cMenTreeToolsSortAscending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeToolsSortAscending.Click
+                Me.tvConnections.BeginUpdate()
                 mRemoteNG.Tree.Node.Sort(Me.tvConnections.SelectedNode, Tools.Controls.TreeNodeSorter.SortType.Ascending)
+                Me.tvConnections.EndUpdate()
                 SaveConnectionsBG()
             End Sub
 
             Private Sub cMenTreeToolsSortDescending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeToolsSortDescending.Click
+                Me.tvConnections.BeginUpdate()
                 mRemoteNG.Tree.Node.Sort(Me.tvConnections.SelectedNode, Tools.Controls.TreeNodeSorter.SortType.Descending)
+                Me.tvConnections.EndUpdate()
                 SaveConnectionsBG()
             End Sub
 
@@ -1200,6 +1235,7 @@ Namespace UI
             End Sub
 
             Private Sub mMenViewCollapseAllFolders_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewCollapseAllFolders.Click
+                If Me.tvConnections.SelectedNode.IsEditing Then Me.tvConnections.SelectedNode.EndEdit(False)
                 mRemoteNG.Tree.Node.CollapseAllNodes()
             End Sub
 #End Region
@@ -1261,7 +1297,6 @@ Namespace UI
                 End Try
             End Sub
 #End Region
-
         End Class
     End Namespace
 End Namespace

@@ -8,7 +8,11 @@
   Fixed RD Gateway default properties and RDP reconnection count setting not being saved.
   Fixed bug 33 - IPv6 doesn't work in quick Connect box.
   Moved the items under Tools in the Connections panel context menu up to the top level.
-  Changed to use full four part version numbers with major, minor, build, and revision
+  Added buttons for Add Connection, Add Folder, and Sort Ascending (A-Z) to the Connections panel toolbar.
+  Fixed rename edit control staying open when collapsing all folders.
+  Changed sorting to sort all subfolders below the selected folder.
+  Allow sorting of connections if a connection entry is selected.
+  Changed to use full four part version numbers with major, minor, build, and revision.
 
 1.66 (2011-05-02):
   Fixed connections not working
