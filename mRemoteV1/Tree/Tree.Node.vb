@@ -479,13 +479,21 @@ Namespace Tree
 
         Public Shared Sub Sort(ByVal treeNode As TreeNode, ByVal sortType As Tools.Controls.TreeNodeSorter.SortType)
             Try
-                If Tree.Node.GetNodeType(treeNode) <> Type.Connection Then
-                    Dim ns As New Tools.Controls.TreeNodeSorter(treeNode, sortType)
-
-                    _TreeView.TreeViewNodeSorter = ns
-                    _TreeView.Sort()
-                    _TreeView.Sorted = False
+                If treeNode Is Nothing Then
+                    treeNode = _TreeView.Nodes.Item(0)
+                ElseIf Tree.Node.GetNodeType(treeNode) = Type.Connection Then
+                    treeNode = treeNode.Parent
                 End If
+
+                Dim ns As New Tools.Controls.TreeNodeSorter(treeNode, sortType)
+
+                _TreeView.TreeViewNodeSorter = ns
+                _TreeView.Sort()
+                _TreeView.Sorted = False
+
+                For Each childNode As TreeNode In treeNode.Nodes
+                    If GetNodeType(childNode) = Type.Container Then Sort(childNode, sortType)
+                Next
             Catch ex As Exception
                 mC.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" & vbNewLine & ex.Message, True)
             End Try
