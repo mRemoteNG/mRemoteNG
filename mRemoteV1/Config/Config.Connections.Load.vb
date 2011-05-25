@@ -440,7 +440,7 @@ Namespace Config
                         conI.Port = .Item("Port")
                         conI.PuttySession = .Item("PuttySession")
 
-                        conI.Colors = .Item("Colors")
+                        conI.Colors = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDPColors), .Item("Colors"))
                         conI.Resolution = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDPResolutions), .Item("Resolution"))
 
                         conI.Inherit = New Connection.Info.Inheritance(conI)
