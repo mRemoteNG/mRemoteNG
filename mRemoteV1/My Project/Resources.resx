@@ -1783,7 +1783,7 @@ Please use File - Load Connections for normal connection files!</value>
     <value>AddNodeFromXML failed!</value>
   </data>
   <data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
-    <value>Get Connection Info From XML failed</value>
+    <value>An error occured while loading the connection entry for "{0}" from "{1}". {2}</value>
   </data>
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Couldn't create new connections file!</value>

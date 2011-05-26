@@ -1167,9 +1167,6 @@
   <data name="strAddNodeFromXmlFailed" xml:space="preserve">
     <value>AddNodeFromXML a échoué!</value>
   </data>
-  <data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
-    <value>L'obtention des informations de connexion à partir de XML a échoué</value>
-  </data>
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Impossible de créer le nouveau fichier de connexions!</value>
   </data>

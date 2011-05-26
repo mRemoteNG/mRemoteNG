@@ -785,9 +785,9 @@ Namespace Config
             End Sub
 
             Private Function GetConnectionInfoFromXml(ByVal xxNode As XmlNode) As Connection.Info
-                Try
-                    Dim conI As New Connection.Info
+                Dim conI As New Connection.Info
 
+                Try
                     With xxNode
                         If Me.confVersion > 0.1 Then '0.2
                             conI.Name = .Attributes("Name").Value
@@ -1015,12 +1015,10 @@ Namespace Config
                             conI.Inherit.EnableDesktopComposition = .Attributes("InheritEnableDesktopComposition").Value
                         End If
                     End With
-
-                    Return conI
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strGetConnectionInfoFromXmlFailed & vbNewLine & ex.Message, True)
-                    Return Nothing
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strGetConnectionInfoFromXmlFailed, conI.Name, Me.ConnectionFileName, ex.Message), False)
                 End Try
+                Return conI
             End Function
 
             Private Function Authenticate(ByVal Value As String, ByVal CompareToOriginalValue As Boolean, Optional ByVal RootInfo As mRemoteNG.Root.Info = Nothing) As Boolean

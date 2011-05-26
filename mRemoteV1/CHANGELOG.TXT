@@ -15,6 +15,7 @@
   Added 15-bit Color RDP setting.
   Fixed loading of RDP Colors setting from SQL.
   Added Font Smoothing and Desktop Composition RDP settings.
+  Improved error handling when loading XML connection files.
   Changed to use full four part version numbers with major, minor, build, and revision.
 
 1.66 (2011-05-02):

@@ -2313,7 +2313,7 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Get Connection Info From XML failed.
+        '''  Looks up a localized string similar to An error occured while loading the connection entry for &quot;{0}&quot; from &quot;{1}&quot;. {2}.
         '''</summary>
         Friend ReadOnly Property strGetConnectionInfoFromXmlFailed() As String
             Get

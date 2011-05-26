@@ -1462,9 +1462,6 @@ Bitte verwenden Sie Datei - Verbindungen laden für normale Verbindungs Dateien!
   <data name="strAddNodeFromXmlFailed" xml:space="preserve">
     <value>Knoten von XML laden ist fehlgeschlagen!</value>
   </data>
-  <data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
-    <value>Verbindungs Informationen von XML holen ist fehlgeschlagen!</value>
-  </data>
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Kann keine neue Verbindungsdatei erstellen!</value>
   </data>
