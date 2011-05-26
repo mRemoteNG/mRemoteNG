@@ -1043,6 +1043,7 @@ Namespace UI
 
                     If nNode IsNot Nothing Then
                         Dim nConI As New mRemoteNG.Connection.Info()
+                        If Me.tvConnections.SelectedNode Is Nothing Then Me.tvConnections.SelectedNode = Me.tvConnections.Nodes.Item(0)
                         If TypeOf Me.tvConnections.SelectedNode.Tag Is mRemoteNG.Container.Info Then
                             nConI.Parent = Me.tvConnections.SelectedNode.Tag
                         Else

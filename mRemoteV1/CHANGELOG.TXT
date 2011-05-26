@@ -12,6 +12,7 @@
   Fixed rename edit control staying open when collapsing all folders.
   Changed sorting to sort all subfolders below the selected folder.
   Allow sorting of connections if a connection entry is selected.
+  Fixed adding a connection entry if nothing is selected in the tree.
   Added 15-bit Color RDP setting.
   Fixed loading of RDP Colors setting from SQL.
   Added Font Smoothing and Desktop Composition RDP settings.
