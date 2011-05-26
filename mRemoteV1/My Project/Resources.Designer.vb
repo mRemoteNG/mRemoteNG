@@ -3880,6 +3880,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Select whether to use desktop composition or not..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionEnableDesktopComposition() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionEnableDesktopComposition", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Select whether to use font smoothing or not..
         '''</summary>
         Friend ReadOnly Property strPropertyDescriptionEnableFontSmoothing() As String
@@ -4308,6 +4317,15 @@ Namespace My.Resources
         Friend ReadOnly Property strPropertyNameDomain() As String
             Get
                 Return ResourceManager.GetString("strPropertyNameDomain", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Desktop Composition.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameEnableDesktopComposition() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameEnableDesktopComposition", resourceCulture)
             End Get
         End Property
         

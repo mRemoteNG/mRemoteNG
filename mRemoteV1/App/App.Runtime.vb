@@ -450,6 +450,7 @@ Namespace App
                 My.Settings.ConDefaultDisplayWallpaper = .DisplayWallpaper
                 My.Settings.ConDefaultDisplayThemes = .DisplayThemes
                 My.Settings.ConDefaultEnableFontSmoothing = .EnableFontSmoothing
+                My.Settings.ConDefaultEnableDesktopComposition = .EnableDesktopComposition
                 My.Settings.ConDefaultRedirectKeys = .RedirectKeys
                 My.Settings.ConDefaultRedirectDiskDrives = .RedirectDiskDrives
                 My.Settings.ConDefaultRedirectPrinters = .RedirectPrinters
@@ -511,6 +512,7 @@ Namespace App
                 My.Settings.InhDefaultDisplayWallpaper = .DisplayWallpaper
                 My.Settings.InhDefaultDisplayThemes = .DisplayThemes
                 My.Settings.InhDefaultEnableFontSmoothing = .EnableFontSmoothing
+                My.Settings.InhDefaultEnableDesktopComposition = .EnableDesktopComposition
                 My.Settings.InhDefaultRedirectKeys = .RedirectKeys
                 My.Settings.InhDefaultRedirectDiskDrives = .RedirectDiskDrives
                 My.Settings.InhDefaultRedirectPrinters = .RedirectPrinters
@@ -930,6 +932,12 @@ Namespace App
                                         nConI.EnableFontSmoothing = True
                                     Else
                                         nConI.EnableFontSmoothing = False
+                                    End If
+                                Case "allow desktop composition"
+                                    If pValue = 1 Then
+                                        nConI.EnableDesktopComposition = True
+                                    Else
+                                        nConI.EnableDesktopComposition = False
                                     End If
                                 Case "redirectsmartcards"
                                     If pValue = 1 Then

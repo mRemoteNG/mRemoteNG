@@ -427,6 +427,7 @@ Namespace Config
                         conI.DisplayWallpaper = .Item("DisplayWallpaper")
                         conI.DisplayThemes = .Item("DisplayThemes")
                         conI.EnableFontSmoothing = .Item("EnableFontSmoothing")
+                        conI.EnableDesktopComposition = .Item("EnableDesktopComposition")
                         conI.CacheBitmaps = .Item("CacheBitmaps")
                         conI.UseConsoleSession = .Item("ConnectToConsole")
 
@@ -451,6 +452,7 @@ Namespace Config
                         conI.Inherit.DisplayThemes = .Item("InheritDisplayThemes")
                         conI.Inherit.DisplayWallpaper = .Item("InheritDisplayWallpaper")
                         conI.Inherit.EnableFontSmoothing = .Item("InheritEnableFontSmoothing")
+                        conI.Inherit.EnableDesktopComposition = .Item("InheritEnableDesktopComposition")
                         conI.Inherit.Domain = .Item("InheritDomain")
                         conI.Inherit.Icon = .Item("InheritIcon")
                         conI.Inherit.Panel = .Item("InheritPanel")
@@ -1006,9 +1008,11 @@ Namespace Config
                         If Me.confVersion > 2.2 Then '2.3
                             ' Get settings
                             conI.EnableFontSmoothing = .Attributes("EnableFontSmoothing").Value
+                            conI.EnableDesktopComposition = .Attributes("EnableDesktopComposition").Value
 
                             ' Get inheritance settings
                             conI.Inherit.EnableFontSmoothing = .Attributes("InheritEnableFontSmoothing").Value
+                            conI.Inherit.EnableDesktopComposition = .Attributes("InheritEnableDesktopComposition").Value
                         End If
                     End With
 

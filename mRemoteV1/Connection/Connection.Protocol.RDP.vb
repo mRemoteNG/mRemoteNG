@@ -338,6 +338,10 @@ Namespace Connection
                         pFlags += Int(Connection.Protocol.RDP.RDPPerformanceFlags.EnableFontSmoothing)
                     End If
 
+                    If Me.Info.EnableDesktopComposition Then
+                        pFlags += Int(Connection.Protocol.RDP.RDPPerformanceFlags.EnableDesktopComposition)
+                    End If
+
                     RDP.AdvancedSettings.PerformanceFlags = pFlags
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetPerformanceFlagsFailed & vbNewLine & ex.Message, True)
@@ -448,6 +452,8 @@ Namespace Connection
                 DisableCursorBlinking = &H40
                 <Description("strRDPEnableFontSmoothing")> _
                 EnableFontSmoothing = &H80
+                <Description("strRDPEnableDesktopComposition")> _
+                EnableDesktopComposition = &H100
             End Enum
 
             Public Enum RDPResolutions

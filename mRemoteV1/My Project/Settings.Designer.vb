@@ -2179,6 +2179,32 @@ Namespace My
                 Me("InhDefaultEnableFontSmoothing") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property ConDefaultEnableDesktopComposition() As Boolean
+            Get
+                Return CType(Me("ConDefaultEnableDesktopComposition"),Boolean)
+            End Get
+            Set
+                Me("ConDefaultEnableDesktopComposition") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property InhDefaultEnableDesktopComposition() As Boolean
+            Get
+                Return CType(Me("InhDefaultEnableDesktopComposition"),Boolean)
+            End Get
+            Set
+                Me("InhDefaultEnableDesktopComposition") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -733,6 +733,33 @@ Namespace Connection
                 Me._EnableFontSmoothing = value
             End Set
         End Property
+
+        Private _EnableDesktopComposition As Boolean = My.Settings.ConDefaultEnableDesktopComposition
+        <LocalizedCategory("strCategoryAppearance", 5), _
+            Browsable(True), _
+            LocalizedDisplayName("strPropertyNameEnableDesktopComposition"), _
+            LocalizedDescription("strPropertyDescriptionEnableDesktopComposition"), _
+            TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
+        Public Property EnableDesktopComposition() As Boolean
+            Get
+                If Me._Inherit.EnableDesktopComposition And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer = True Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.EnableDesktopComposition
+                Else
+                    Return Me._EnableDesktopComposition
+                End If
+            End Get
+            Set(ByVal value As Boolean)
+                Me._EnableDesktopComposition = value
+            End Set
+        End Property
 #End Region
 #Region "6 Redirect"
         Private _RedirectKeys As Boolean = My.Settings.ConDefaultRedirectKeys
@@ -1997,6 +2024,21 @@ Namespace Connection
                 End Get
                 Set(ByVal value As Boolean)
                     Me._EnableFontSmoothing = value
+                End Set
+            End Property
+
+            Private _EnableDesktopComposition As Boolean = My.Settings.InhDefaultEnableDesktopComposition
+            <LocalizedCategory("strCategoryAppearance", 6), _
+                Browsable(True), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameEnableDesktopComposition"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionEnableEnableDesktopComposition"), _
+                TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
+            Public Property EnableDesktopComposition() As Boolean
+                Get
+                    Return Me._EnableDesktopComposition
+                End Get
+                Set(ByVal value As Boolean)
+                    Me._EnableDesktopComposition = value
                 End Set
             End Property
 #End Region

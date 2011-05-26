@@ -494,5 +494,11 @@
     <Setting Name="InhDefaultEnableFontSmoothing" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="ConDefaultEnableDesktopComposition" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultEnableDesktopComposition" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

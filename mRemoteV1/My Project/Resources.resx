@@ -2313,4 +2313,10 @@ Error Description: {1}</value>
   <data name="strPropertyNameEnableFontSmoothing" xml:space="preserve">
     <value>Font Smoothing</value>
   </data>
+  <data name="strPropertyDescriptionEnableDesktopComposition" xml:space="preserve">
+    <value>Select whether to use desktop composition or not.</value>
+  </data>
+  <data name="strPropertyNameEnableDesktopComposition" xml:space="preserve">
+    <value>Desktop Composition</value>
+  </data>
 </root>
