@@ -3880,6 +3880,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Select whether to use font smoothing or not..
+        '''</summary>
+        Friend ReadOnly Property strPropertyDescriptionEnableFontSmoothing() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionEnableFontSmoothing", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Select the encoding mode to be used..
         '''</summary>
         Friend ReadOnly Property strPropertyDescriptionEncoding() As String
@@ -4299,6 +4308,15 @@ Namespace My.Resources
         Friend ReadOnly Property strPropertyNameDomain() As String
             Get
                 Return ResourceManager.GetString("strPropertyNameDomain", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Font Smoothing.
+        '''</summary>
+        Friend ReadOnly Property strPropertyNameEnableFontSmoothing() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameEnableFontSmoothing", resourceCulture)
             End Get
         End Property
         

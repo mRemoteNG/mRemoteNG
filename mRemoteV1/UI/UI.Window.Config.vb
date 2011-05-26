@@ -542,6 +542,7 @@ Namespace UI
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
                                 strHide.Add("DisplayWallpaper")
+                                strHide.Add("EnableFontSmoothing")
                                 strHide.Add("ExtApp")
                                 strHide.Add("ICAEncryption")
                                 strHide.Add("PuttySession")
@@ -575,6 +576,7 @@ Namespace UI
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
                                 strHide.Add("DisplayWallpaper")
+                                strHide.Add("EnableFontSmoothing")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
                                 strHide.Add("ICAEncryption")
@@ -610,6 +612,7 @@ Namespace UI
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
                                 strHide.Add("DisplayWallpaper")
+                                strHide.Add("EnableFontSmoothing")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
                                 strHide.Add("ICAEncryption")
@@ -645,6 +648,7 @@ Namespace UI
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
                                 strHide.Add("DisplayWallpaper")
+                                strHide.Add("EnableFontSmoothing")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
                                 strHide.Add("ICAEncryption")
@@ -682,6 +686,7 @@ Namespace UI
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
                                 strHide.Add("DisplayWallpaper")
+                                strHide.Add("EnableFontSmoothing")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
                                 strHide.Add("ICAEncryption")
@@ -719,6 +724,7 @@ Namespace UI
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
                                 strHide.Add("DisplayWallpaper")
+                                strHide.Add("EnableFontSmoothing")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
                                 strHide.Add("ICAEncryption")
@@ -756,6 +762,7 @@ Namespace UI
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
                                 strHide.Add("DisplayWallpaper")
+                                strHide.Add("EnableFontSmoothing")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
                                 strHide.Add("ICAEncryption")
@@ -791,6 +798,7 @@ Namespace UI
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
                                 strHide.Add("DisplayWallpaper")
+                                strHide.Add("EnableFontSmoothing")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
                                 strHide.Add("ICAEncryption")
@@ -823,6 +831,7 @@ Namespace UI
                             Case mRemoteNG.Connection.Protocol.Protocols.ICA
                                 strHide.Add("DisplayThemes")
                                 strHide.Add("DisplayWallpaper")
+                                strHide.Add("EnableFontSmoothing")
                                 strHide.Add("ExtApp")
                                 strHide.Add("Port")
                                 strHide.Add("PuttySession")
@@ -857,6 +866,7 @@ Namespace UI
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
                                 strHide.Add("DisplayWallpaper")
+                                strHide.Add("EnableFontSmoothing")
                                 strHide.Add("Domain")
                                 strHide.Add("ICAEncryption")
                                 strHide.Add("PuttySession")
@@ -909,6 +919,10 @@ Namespace UI
 
                                 If .DisplayWallpaper Then
                                     strHide.Add("DisplayWallpaper")
+                                End If
+
+                                If .EnableFontSmoothing Then
+                                    strHide.Add("EnableFontSmoothing")
                                 End If
 
                                 If .Domain Then

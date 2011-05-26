@@ -334,7 +334,11 @@ Namespace Connection
                         pFlags += Int(Connection.Protocol.RDP.RDPPerformanceFlags.DisableWallpaper)
                     End If
 
-                    RDP.AdvancedSettings2.PerformanceFlags = pFlags
+                    If Me.Info.EnableFontSmoothing Then
+                        pFlags += Int(Connection.Protocol.RDP.RDPPerformanceFlags.EnableFontSmoothing)
+                    End If
+
+                    RDP.AdvancedSettings.PerformanceFlags = pFlags
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetPerformanceFlagsFailed & vbNewLine & ex.Message, True)
                 End Try
@@ -431,17 +435,19 @@ Namespace Connection
 
             Private Enum RDPPerformanceFlags
                 <Description("strRDPDisableWallpaper")> _
-                DisableWallpaper = 1
+                DisableWallpaper = &H1
                 <Description("strRDPDisableFullWindowdrag")> _
-                DisableFullWindowDrag = 2
+                DisableFullWindowDrag = &H2
                 <Description("strRDPDisableMenuAnimations")> _
-                DisableMenuAnimations = 4
+                DisableMenuAnimations = &H4
                 <Description("strRDPDisableThemes")> _
-                DisableThemes = 8
+                DisableThemes = &H8
                 <Description("strRDPDisableCursorShadow")> _
-                DisableCursorShadow = 20
+                DisableCursorShadow = &H20
                 <Description("strRDPDisableCursorblinking")> _
-                DisableCursorBlinking = 40
+                DisableCursorBlinking = &H40
+                <Description("strRDPEnableFontSmoothing")> _
+                EnableFontSmoothing = &H80
             End Enum
 
             Public Enum RDPResolutions

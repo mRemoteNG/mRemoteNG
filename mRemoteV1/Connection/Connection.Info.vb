@@ -706,6 +706,33 @@ Namespace Connection
                 Me._DisplayThemes = value
             End Set
         End Property
+
+        Private _EnableFontSmoothing As Boolean = My.Settings.ConDefaultEnableFontSmoothing
+        <LocalizedCategory("strCategoryAppearance", 5), _
+            Browsable(True), _
+            LocalizedDisplayName("strPropertyNameEnableFontSmoothing"), _
+            LocalizedDescription("strPropertyDescriptionEnableFontSmoothing"), _
+            TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
+        Public Property EnableFontSmoothing() As Boolean
+            Get
+                If Me._Inherit.EnableFontSmoothing And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer = True Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.EnableFontSmoothing
+                Else
+                    Return Me._EnableFontSmoothing
+                End If
+            End Get
+            Set(ByVal value As Boolean)
+                Me._EnableFontSmoothing = value
+            End Set
+        End Property
 #End Region
 #Region "6 Redirect"
         Private _RedirectKeys As Boolean = My.Settings.ConDefaultRedirectKeys
@@ -1955,6 +1982,21 @@ Namespace Connection
                 End Get
                 Set(ByVal value As Boolean)
                     Me._DisplayThemes = value
+                End Set
+            End Property
+
+            Private _EnableFontSmoothing As Boolean = My.Settings.InhDefaultEnableFontSmoothing
+            <LocalizedCategory("strCategoryAppearance", 6), _
+                Browsable(True), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameEnableFontSmoothing"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionEnableFontSmoothing"), _
+                TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
+            Public Property EnableFontSmoothing() As Boolean
+                Get
+                    Return Me._EnableFontSmoothing
+                End Get
+                Set(ByVal value As Boolean)
+                    Me._EnableFontSmoothing = value
                 End Set
             End Property
 #End Region

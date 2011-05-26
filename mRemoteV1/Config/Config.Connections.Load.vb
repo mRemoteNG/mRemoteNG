@@ -426,6 +426,7 @@ Namespace Config
                         conI.Domain = .Item("DomainName")
                         conI.DisplayWallpaper = .Item("DisplayWallpaper")
                         conI.DisplayThemes = .Item("DisplayThemes")
+                        conI.EnableFontSmoothing = .Item("EnableFontSmoothing")
                         conI.CacheBitmaps = .Item("CacheBitmaps")
                         conI.UseConsoleSession = .Item("ConnectToConsole")
 
@@ -449,6 +450,7 @@ Namespace Config
                         conI.Inherit.Description = .Item("InheritDescription")
                         conI.Inherit.DisplayThemes = .Item("InheritDisplayThemes")
                         conI.Inherit.DisplayWallpaper = .Item("InheritDisplayWallpaper")
+                        conI.Inherit.EnableFontSmoothing = .Item("InheritEnableFontSmoothing")
                         conI.Inherit.Domain = .Item("InheritDomain")
                         conI.Inherit.Icon = .Item("InheritIcon")
                         conI.Inherit.Panel = .Item("InheritPanel")
@@ -999,6 +1001,14 @@ Namespace Config
                             conI.Inherit.RDGatewayUsername = .Attributes("InheritRDGatewayUsername").Value
                             conI.Inherit.RDGatewayPassword = .Attributes("InheritRDGatewayPassword").Value
                             conI.Inherit.RDGatewayDomain = .Attributes("InheritRDGatewayDomain").Value
+                        End If
+
+                        If Me.confVersion > 2.2 Then '2.3
+                            ' Get settings
+                            conI.EnableFontSmoothing = .Attributes("EnableFontSmoothing").Value
+
+                            ' Get inheritance settings
+                            conI.Inherit.EnableFontSmoothing = .Attributes("InheritEnableFontSmoothing").Value
                         End If
                     End With
 

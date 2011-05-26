@@ -2307,4 +2307,10 @@ Error Description: {1}</value>
   <data name="strRDP32768Colors" xml:space="preserve">
     <value>32768 Colours (15-bit)</value>
   </data>
+  <data name="strPropertyDescriptionEnableFontSmoothing" xml:space="preserve">
+    <value>Select whether to use font smoothing or not.</value>
+  </data>
+  <data name="strPropertyNameEnableFontSmoothing" xml:space="preserve">
+    <value>Font Smoothing</value>
+  </data>
 </root>

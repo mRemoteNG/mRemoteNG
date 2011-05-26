@@ -449,6 +449,7 @@ Namespace App
                 My.Settings.ConDefaultCacheBitmaps = .CacheBitmaps
                 My.Settings.ConDefaultDisplayWallpaper = .DisplayWallpaper
                 My.Settings.ConDefaultDisplayThemes = .DisplayThemes
+                My.Settings.ConDefaultEnableFontSmoothing = .EnableFontSmoothing
                 My.Settings.ConDefaultRedirectKeys = .RedirectKeys
                 My.Settings.ConDefaultRedirectDiskDrives = .RedirectDiskDrives
                 My.Settings.ConDefaultRedirectPrinters = .RedirectPrinters
@@ -509,6 +510,7 @@ Namespace App
                 My.Settings.InhDefaultCacheBitmaps = .CacheBitmaps
                 My.Settings.InhDefaultDisplayWallpaper = .DisplayWallpaper
                 My.Settings.InhDefaultDisplayThemes = .DisplayThemes
+                My.Settings.InhDefaultEnableFontSmoothing = .EnableFontSmoothing
                 My.Settings.InhDefaultRedirectKeys = .RedirectKeys
                 My.Settings.InhDefaultRedirectDiskDrives = .RedirectDiskDrives
                 My.Settings.InhDefaultRedirectPrinters = .RedirectPrinters
@@ -922,6 +924,12 @@ Namespace App
                                         nConI.DisplayThemes = True
                                     Else
                                         nConI.DisplayThemes = False
+                                    End If
+                                Case "allow font smoothing"
+                                    If pValue = 1 Then
+                                        nConI.EnableFontSmoothing = True
+                                    Else
+                                        nConI.EnableFontSmoothing = False
                                     End If
                                 Case "redirectsmartcards"
                                     If pValue = 1 Then

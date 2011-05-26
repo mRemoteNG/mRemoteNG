@@ -2153,6 +2153,32 @@ Namespace My
                 Me("ConDefaultRDGatewayDomain") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property ConDefaultEnableFontSmoothing() As Boolean
+            Get
+                Return CType(Me("ConDefaultEnableFontSmoothing"),Boolean)
+            End Get
+            Set
+                Me("ConDefaultEnableFontSmoothing") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property InhDefaultEnableFontSmoothing() As Boolean
+            Get
+                Return CType(Me("InhDefaultEnableFontSmoothing"),Boolean)
+            End Get
+            Set
+                Me("InhDefaultEnableFontSmoothing") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
