@@ -410,6 +410,8 @@ Namespace Connection
             Public Enum RDPColors
                 <LocalizedDescription("strRDP256Colors")> _
                 Colors256 = 8
+                <LocalizedDescription("strRDP32768Colors")> _
+                Colors15Bit = 15
                 <LocalizedDescription("strRDP65536Colors")> _
                 Colors16Bit = 16
                 <LocalizedDescription("strRDP16777216Colors")> _

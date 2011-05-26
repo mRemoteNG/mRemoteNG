@@ -879,6 +879,8 @@ Namespace Config
                                     conI.Colors = Connection.Protocol.RDP.RDPColors.Colors24Bit
                                 Case 3
                                     conI.Colors = Connection.Protocol.RDP.RDPColors.Colors32Bit
+                                Case 4
+                                    conI.Colors = Connection.Protocol.RDP.RDPColors.Colors15Bit
                             End Select
 
                             conI.RedirectSound = .Attributes("RedirectSound").Value

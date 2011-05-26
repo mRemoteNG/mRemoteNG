@@ -168,6 +168,8 @@ Namespace Connection
                 Select Case Info.Colors
                     Case RDP.RDPColors.Colors256
                         ICA.SetProp("DesiredColor", 2)
+                    Case RDP.RDPColors.Colors15Bit
+                        ICA.SetProp("DesiredColor", 4)
                     Case RDP.RDPColors.Colors16Bit
                         ICA.SetProp("DesiredColor", 4)
                     Case Else

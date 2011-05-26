@@ -886,6 +886,8 @@ Namespace App
                                     Select Case pValue
                                         Case 8
                                             nConI.Colors = Connection.Protocol.RDP.RDPColors.Colors256
+                                        Case 15
+                                            nConI.Colors = Connection.Protocol.RDP.RDPColors.Colors15Bit
                                         Case 16
                                             nConI.Colors = Connection.Protocol.RDP.RDPColors.Colors16Bit
                                         Case 24

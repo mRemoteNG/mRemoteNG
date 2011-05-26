@@ -4882,7 +4882,16 @@ Namespace My.Resources
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to 4294967296 Colours (32-bit).
+        '''  Looks up a localized string similar to 32768 Colours (15-bit).
+        '''</summary>
+        Friend ReadOnly Property strRDP32768Colors() As String
+            Get
+                Return ResourceManager.GetString("strRDP32768Colors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to 16777216 Colours (32-bit).
         '''</summary>
         Friend ReadOnly Property strRDP4294967296Colors() As String
             Get
