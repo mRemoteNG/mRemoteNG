@@ -1955,7 +1955,7 @@ Fehler Beschreibung: {1}</value>
     <value>Übertragung fehlgeschlagen!</value>
   </data>
   <data name="strProtocolEventDisconnected" xml:space="preserve">
-    <value>Protokollereignis Verbindungsabbruch.
+    <value>Protokollereignis Verbindung getrennnt.
 {0}</value>
   </data>
   <data name="strProtocolEventDisconnectFailed" xml:space="preserve">
