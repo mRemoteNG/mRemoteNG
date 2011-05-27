@@ -7,7 +7,7 @@
             For Each CultureName As String In My.Settings.SupportedUICultures.Split(",")
                 Try
                     CultureInfo = New Globalization.CultureInfo(CultureName.Trim)
-                    Add(CultureInfo.Name, CultureInfo.NativeName)
+                    Add(CultureInfo.Name, CultureInfo.TextInfo.ToTitleCase(CultureInfo.NativeName))
                 Catch ex As Exception
                     Debug.Print(String.Format("An exception occurred while adding the culture '{0}' to the list of supported cultures. {1}", CultureName, ex.ToString))
                 End Try
