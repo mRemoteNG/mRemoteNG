@@ -15,26 +15,26 @@ Public Class frmMain
         'insert enable edition code here
         App.Editions.Spanlink.Enabled = False
 
-        App.SupportedCultures.InstantiateSingleton()
-        If Not My.Settings.OverrideUICulture = "" And App.SupportedCultures.IsNameSupported(My.Settings.OverrideUICulture) Then
-            Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo(My.Settings.OverrideUICulture)
-        End If
-
-        ApplyLanguage()
-
-        Debug.Print("---------------------------" & vbNewLine & "[START] - " & Now)
-
-        Startup.ParseCommandLineArgs()
-        fpChainedWindowHandle = SetClipboardViewer(Me.Handle)
+        Startup.CreateLogger()
 
         ' Create gui config load and save objects
         sL = New Config.Settings.Load(Me)
         sS = New Config.Settings.Save(Me)
 
-        Startup.CreateLogger()
-
         ' Load GUI Configuration
         sL.Load()
+
+        Debug.Print("---------------------------" & vbNewLine & "[START] - " & Now)
+
+        Startup.ParseCommandLineArgs()
+
+        App.SupportedCultures.InstantiateSingleton()
+        If Not My.Settings.OverrideUICulture = "" And App.SupportedCultures.IsNameSupported(My.Settings.OverrideUICulture) Then
+            Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo(My.Settings.OverrideUICulture)
+        End If
+        ApplyLanguage()
+
+        fpChainedWindowHandle = SetClipboardViewer(Me.Handle)
 
         mC = New Messages.Collector(Windows.errorsForm)
 
