@@ -78,6 +78,8 @@ Public Class frmMain
 
         AddSysMenuItems()
         AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf DisplayChanged
+
+        Me.Opacity = 1
     End Sub
 
     Private Sub ApplyLanguage()

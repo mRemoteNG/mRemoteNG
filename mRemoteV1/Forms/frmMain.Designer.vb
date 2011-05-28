@@ -740,7 +740,7 @@ Partial Class frmMain
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(264, 25)
         Me.ToolStrip1.TabIndex = 19
-		Me.ToolStrip1.Visible = False
+        Me.ToolStrip1.Visible = False
         '
         'ToolStripButton1
         '
@@ -806,6 +806,7 @@ Partial Class frmMain
         Me.Icon = Global.mRemoteNG.My.Resources.Resources.mRemote_Icon
         Me.MainMenuStrip = Me.msMain
         Me.Name = "frmMain"
+        Me.Opacity = 0
         Me.Text = "mRemoteNG"
         Me.msMain.ResumeLayout(False)
         Me.msMain.PerformLayout()

@@ -263,6 +263,7 @@
     <Compile Include="Tools\Tools.Misc.vb" />
     <Compile Include="Tools\Tools.PortScan.vb" />
     <Compile Include="Tools\Tools.SystemMenu.vb" />
+    <Compile Include="Tools\Tools.WindowPlacement.vb" />
     <Compile Include="Tree\Tree.Node.vb" />
     <Compile Include="UI\UI.Window.About.vb">
       <SubType>Form</SubType>

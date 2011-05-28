@@ -19,6 +19,9 @@
   Improved error handling when loading XML connection files.
   Added the mRemoteNG icon to the list of selectable icons for connection entries.
   Added confirmation before closing connection tabs.
+  Fixed bug 42 - Maximized location not remembered with multiple monitors.
+  Improved loading and saving of window location.
+  Removed flickering on start up.
   Changed to use full four part version numbers with major, minor, build, and revision.
 
 1.66 (2011-05-02):

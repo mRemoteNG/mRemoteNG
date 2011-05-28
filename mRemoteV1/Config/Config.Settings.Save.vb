@@ -1,6 +1,7 @@
 Imports mRemoteNG.App.Runtime
 Imports System.Xml
 Imports System.IO
+Imports mRemoteNG.Tools.WindowPlacement
 
 Namespace Config
     Namespace Settings
@@ -25,12 +26,18 @@ Namespace Config
             Public Sub Save()
                 Try
                     With Me._MainForm
-                        If .WindowState = FormWindowState.Normal Then
-                            My.Settings.MainFormLocation = .Location
-                            My.Settings.MainFormSize = .Size
-                        Else
-                            My.Settings.MainFormLocation = .RestoreBounds.Location
-                            My.Settings.MainFormSize = .RestoreBounds.Size
+                        Dim windowPlacement As New Tools.WindowPlacement(_MainForm)
+                        If .WindowState = FormWindowState.Minimized And windowPlacement.RestoreToMaximized Then
+                            .Opacity = 0
+                            .WindowState = FormWindowState.Maximized
+                        End If
+
+                        My.Settings.MainFormLocation = .Location
+                        My.Settings.MainFormSize = .Size
+
+                        If Not .WindowState = FormWindowState.Normal Then
+                            My.Settings.MainFormRestoreLocation = .RestoreBounds.Location
+                            My.Settings.MainFormRestoreSize = .RestoreBounds.Size
                         End If
 
                         My.Settings.MainFormState = .WindowState

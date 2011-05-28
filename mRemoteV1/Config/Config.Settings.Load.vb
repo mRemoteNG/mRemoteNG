@@ -38,28 +38,38 @@ Namespace Config
                             My.Settings.UpdatePending = False
                         End If
 
-                        If My.Settings.MainFormLocation <> New Point(999, 999) Then
-                            .Location = My.Settings.MainFormLocation
-                        End If
-
-                        If My.Settings.MainFormSize <> Nothing Then
-                            .Size = My.Settings.MainFormSize
-                        End If
-
-                        'check if form is visible
-                        Dim curScreen As Screen = Screen.FromHandle(.Handle)
-
-                        If .Right < curScreen.Bounds.Left Or .Left > curScreen.Bounds.Right _
-                            Or .Top * -1 > curScreen.Bounds.Top * -1 Or .Bottom > curScreen.Bounds.Bottom Then
-                            .Location = curScreen.Bounds.Location
-                        End If
-
-
-                        If My.Settings.MainFormState = Nothing Or My.Settings.MainFormState = FormWindowState.Minimized Then
-                            .WindowState = FormWindowState.Normal
+                        .WindowState = FormWindowState.Normal
+                        If My.Settings.MainFormState = FormWindowState.Normal Then
+                            If Not My.Settings.MainFormLocation.IsEmpty Then .Location = My.Settings.MainFormLocation
+                            If Not My.Settings.MainFormSize.IsEmpty Then .Size = My.Settings.MainFormSize
                         Else
-                            .WindowState = My.Settings.MainFormState
+                            If Not My.Settings.MainFormRestoreLocation.IsEmpty Then .Location = My.Settings.MainFormRestoreLocation
+                            If Not My.Settings.MainFormRestoreSize.IsEmpty Then .Size = My.Settings.MainFormRestoreSize
                         End If
+                        If My.Settings.MainFormState = FormWindowState.Maximized Then
+                            .WindowState = FormWindowState.Maximized
+                        End If
+
+                        ' Make sure the form is visible on the screen
+                        Const minHorizontal As Integer = 300
+                        Const minVertical As Integer = 150
+                        Dim screenBounds As Drawing.Rectangle = Screen.FromHandle(.Handle).Bounds
+                        Dim newBounds As Drawing.Rectangle = .Bounds
+
+                        If newBounds.Right < screenBounds.Left + minHorizontal Then
+                            newBounds.X = screenBounds.Left + minHorizontal - newBounds.Width
+                        End If
+                        If newBounds.Left > screenBounds.Right - minHorizontal Then
+                            newBounds.X = screenBounds.Right - minHorizontal
+                        End If
+                        If newBounds.Bottom < screenBounds.Top + minVertical Then
+                            newBounds.Y = screenBounds.Top + minVertical - newBounds.Height
+                        End If
+                        If newBounds.Top > screenBounds.Bottom - minVertical Then
+                            newBounds.Y = screenBounds.Bottom - minVertical
+                        End If
+
+                        .Location = newBounds.Location
 
                         If My.Settings.MainFormKiosk = True Then
                             Tools.Misc.Fullscreen.EnterFullscreen()

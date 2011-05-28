@@ -56,8 +56,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("999, 999")>  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property MainFormLocation() As Global.System.Drawing.Point
             Get
                 Return CType(Me("MainFormLocation"),Global.System.Drawing.Point)
@@ -69,8 +68,7 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("900, 600")>  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
         Public Property MainFormSize() As Global.System.Drawing.Size
             Get
                 Return CType(Me("MainFormSize"),Global.System.Drawing.Size)
@@ -2216,6 +2214,30 @@ Namespace My
             End Get
             Set
                 Me("ConfirmCloseConnection") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property MainFormRestoreSize() As Global.System.Drawing.Size
+            Get
+                Return CType(Me("MainFormRestoreSize"),Global.System.Drawing.Size)
+            End Get
+            Set
+                Me("MainFormRestoreSize") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute()>  _
+        Public Property MainFormRestoreLocation() As Global.System.Drawing.Point
+            Get
+                Return CType(Me("MainFormRestoreLocation"),Global.System.Drawing.Point)
+            End Get
+            Set
+                Me("MainFormRestoreLocation") = value
             End Set
         End Property
     End Class
