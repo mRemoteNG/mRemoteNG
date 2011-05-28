@@ -1850,15 +1850,6 @@ Starte mit neuer Datei.</value>
   <data name="strErrorCode" xml:space="preserve">
     <value>Fehler Nummer {0}.</value>
   </data>
-  <data name="strConnenctionEventDisconnected" xml:space="preserve">
-    <value>Protokoll Ereignis Verbindung getrennt.
-Nachricht:
-{0}</value>
-  </data>
-  <data name="strConnenctionEventDisconnectFailed" xml:space="preserve">
-    <value>Protokoll Ereignis Trennen der Verbindung fehlgeschlagen!
-{0}</value>
-  </data>
   <data name="strConnenctionClosedByUserDetail" xml:space="preserve">
     <value>Verbindung zu {0} mit {1} wurde vom Benutzer {2} getrennt.  (Beschreibung: "{3}"; Benutzer Feld: "{4}")</value>
   </data>
@@ -1956,5 +1947,43 @@ Fehler Beschreibung: {1}</value>
   </data>
   <data name="strRDP32768Colors" xml:space="preserve">
     <value>32768 Farben (15Bit)</value>
+  </data>
+  <data name="strNoUpdateAvailable" xml:space="preserve">
+    <value>Keine Updates verfügbar</value>
+  </data>
+  <data name="strTransferFailed" xml:space="preserve">
+    <value>Übertragung fehlgeschlagen!</value>
+  </data>
+  <data name="strProtocolEventDisconnected" xml:space="preserve">
+    <value>Protokollereignis Verbindung getrennnt.
+{0}</value>
+  </data>
+  <data name="strProtocolEventDisconnectFailed" xml:space="preserve">
+    <value>Protokollereignis Verbindung trennen fehlgeschlagen.
+{0}</value>
+  </data>
+  <data name="strLanguage" xml:space="preserve">
+    <value>Sprache</value>
+  </data>
+  <data name="strLanguageDefault" xml:space="preserve">
+    <value>(Automatisch erkannt)</value>
+  </data>
+  <data name="strLanguageRestartRequired" xml:space="preserve">
+    <value>{0} muss neu gestartet werden, bevor die Sprache aktiv wird.</value>
+  </data>
+  <data name="strAskUpdatesCommandAskLater" xml:space="preserve">
+    <value>Später nochmal fragen</value>
+  </data>
+  <data name="strAskUpdatesCommandCustom" xml:space="preserve">
+    <value>Einstellungen jetzt anpassen</value>
+  </data>
+  <data name="strAskUpdatesCommandRecommended" xml:space="preserve">
+    <value>Verwende die empflohlenen Einstellungen</value>
+  </data>
+  <data name="strAskUpdatesContent" xml:space="preserve">
+    <value>{0} kann automatisch nach Updates suchen die neue Funktionen und Bug Fixes enthalten können. Es wird empfohlen, dass Sie {0} erlauben wöchentlich nach Updates zu suchen.</value>
+  </data>
+  <data name="strAskUpdatesMainInstruction" xml:space="preserve">
+    <value>Automatische Update Einstellungen</value>
   </data>
 </root>

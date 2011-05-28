@@ -3,6 +3,7 @@ Contributors
 
 Lionel Caignec
 Felix Deimel
+Holger Henke
 Tom Hiller
 Riley McArdle
 Apisitt Rattana
