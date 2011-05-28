@@ -109,6 +109,7 @@ Namespace UI
             Friend WithEvents lblLanguageRestartRequired As System.Windows.Forms.Label
             Friend WithEvents cboLanguage As System.Windows.Forms.ComboBox
             Friend WithEvents lblLanguage As System.Windows.Forms.Label
+            Friend WithEvents chkConfirmCloseConnection As System.Windows.Forms.CheckBox
             Friend WithEvents TabController As Crownwood.Magic.Controls.TabControl
 
             Private Sub InitializeComponent()
@@ -215,6 +216,7 @@ Namespace UI
                 Me.Label1 = New System.Windows.Forms.Label
                 Me.btnOK = New System.Windows.Forms.Button
                 Me.btnCancel = New System.Windows.Forms.Button
+                Me.chkConfirmCloseConnection = New System.Windows.Forms.CheckBox
                 Me.TabController.SuspendLayout()
                 Me.tabAppearance.SuspendLayout()
                 Me.pnlAppearance.SuspendLayout()
@@ -252,8 +254,8 @@ Namespace UI
                 Me.TabController.IDEPixelArea = True
                 Me.TabController.Location = New System.Drawing.Point(0, 0)
                 Me.TabController.Name = "TabController"
-                Me.TabController.SelectedIndex = 1
-                Me.TabController.SelectedTab = Me.tabAppearance
+                Me.TabController.SelectedIndex = 0
+                Me.TabController.SelectedTab = Me.tabStartupExit
                 Me.TabController.Size = New System.Drawing.Size(573, 522)
                 Me.TabController.TabIndex = 10
                 Me.TabController.TabPages.AddRange(New Crownwood.Magic.Controls.TabPage() {Me.tabStartupExit, Me.tabAppearance, Me.tabTabs, Me.tabConnections, Me.tabUpdates, Me.tabAdvanced})
@@ -264,6 +266,7 @@ Namespace UI
                 Me.tabAppearance.Icon = Global.mRemoteNG.My.Resources.Resources.Appearance_Icon
                 Me.tabAppearance.Location = New System.Drawing.Point(0, 0)
                 Me.tabAppearance.Name = "tabAppearance"
+                Me.tabAppearance.Selected = False
                 Me.tabAppearance.Size = New System.Drawing.Size(573, 492)
                 Me.tabAppearance.TabIndex = 2000
                 Me.tabAppearance.Title = "Appearance"
@@ -364,7 +367,6 @@ Namespace UI
                 Me.tabStartupExit.Icon = Global.mRemoteNG.My.Resources.Resources.StartupExit_Icon
                 Me.tabStartupExit.Location = New System.Drawing.Point(0, 0)
                 Me.tabStartupExit.Name = "tabStartupExit"
-                Me.tabStartupExit.Selected = False
                 Me.tabStartupExit.Size = New System.Drawing.Size(573, 492)
                 Me.tabStartupExit.TabIndex = 1000
                 Me.tabStartupExit.Title = "Startup/Exit"
@@ -375,6 +377,7 @@ Namespace UI
                             Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlStartup.AutoScroll = True
+                Me.pnlStartup.Controls.Add(Me.chkConfirmCloseConnection)
                 Me.pnlStartup.Controls.Add(Me.chkSaveConsOnExit)
                 Me.pnlStartup.Controls.Add(Me.chkProperInstallationOfComponentsAtStartup)
                 Me.pnlStartup.Controls.Add(Me.chkConfirmExit)
@@ -389,7 +392,7 @@ Namespace UI
                 '
                 Me.chkSaveConsOnExit.AutoSize = True
                 Me.chkSaveConsOnExit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkSaveConsOnExit.Location = New System.Drawing.Point(16, 16)
+                Me.chkSaveConsOnExit.Location = New System.Drawing.Point(16, 64)
                 Me.chkSaveConsOnExit.Name = "chkSaveConsOnExit"
                 Me.chkSaveConsOnExit.Size = New System.Drawing.Size(153, 19)
                 Me.chkSaveConsOnExit.TabIndex = 10
@@ -400,7 +403,7 @@ Namespace UI
                 '
                 Me.chkProperInstallationOfComponentsAtStartup.AutoSize = True
                 Me.chkProperInstallationOfComponentsAtStartup.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkProperInstallationOfComponentsAtStartup.Location = New System.Drawing.Point(16, 112)
+                Me.chkProperInstallationOfComponentsAtStartup.Location = New System.Drawing.Point(16, 136)
                 Me.chkProperInstallationOfComponentsAtStartup.Name = "chkProperInstallationOfComponentsAtStartup"
                 Me.chkProperInstallationOfComponentsAtStartup.Size = New System.Drawing.Size(292, 19)
                 Me.chkProperInstallationOfComponentsAtStartup.TabIndex = 50
@@ -422,7 +425,7 @@ Namespace UI
                 '
                 Me.chkSingleInstance.AutoSize = True
                 Me.chkSingleInstance.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkSingleInstance.Location = New System.Drawing.Point(16, 88)
+                Me.chkSingleInstance.Location = New System.Drawing.Point(16, 112)
                 Me.chkSingleInstance.Name = "chkSingleInstance"
                 Me.chkSingleInstance.Size = New System.Drawing.Size(411, 19)
                 Me.chkSingleInstance.TabIndex = 50
@@ -433,7 +436,7 @@ Namespace UI
                 '
                 Me.chkReconnectOnStart.AutoSize = True
                 Me.chkReconnectOnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkReconnectOnStart.Location = New System.Drawing.Point(16, 64)
+                Me.chkReconnectOnStart.Location = New System.Drawing.Point(16, 88)
                 Me.chkReconnectOnStart.Name = "chkReconnectOnStart"
                 Me.chkReconnectOnStart.Size = New System.Drawing.Size(296, 19)
                 Me.chkReconnectOnStart.TabIndex = 40
@@ -1381,6 +1384,17 @@ Namespace UI
                 Me.btnCancel.Text = "&Cancel"
                 Me.btnCancel.UseVisualStyleBackColor = True
                 '
+                'chkConfirmCloseConnection
+                '
+                Me.chkConfirmCloseConnection.AutoSize = True
+                Me.chkConfirmCloseConnection.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkConfirmCloseConnection.Location = New System.Drawing.Point(16, 16)
+                Me.chkConfirmCloseConnection.Name = "chkConfirmCloseConnection"
+                Me.chkConfirmCloseConnection.Size = New System.Drawing.Size(196, 19)
+                Me.chkConfirmCloseConnection.TabIndex = 51
+                Me.chkConfirmCloseConnection.Text = "Confirm closing connection tabs"
+                Me.chkConfirmCloseConnection.UseVisualStyleBackColor = True
+                '
                 'Options
                 '
                 Me.CancelButton = Me.btnCancel
@@ -1441,6 +1455,7 @@ Namespace UI
             Private Sub LoadOptions()
                 Try
                     Me.chkSaveConsOnExit.Checked = My.Settings.SaveConsOnExit
+                    Me.chkConfirmCloseConnection.Checked = My.Settings.ConfirmCloseConnection
                     Me.chkConfirmExit.Checked = My.Settings.ConfirmExit
                     Me.chkReconnectOnStart.Checked = My.Settings.OpenConsFromLastSession
                     Me.chkProperInstallationOfComponentsAtStartup.Checked = My.Settings.StartupComponentsCheck
@@ -1552,6 +1567,7 @@ Namespace UI
             Private Sub SaveOptions()
                 Try
                     My.Settings.SaveConsOnExit = Me.chkSaveConsOnExit.Checked
+                    My.Settings.ConfirmCloseConnection = Me.chkConfirmCloseConnection.Checked
                     My.Settings.ConfirmExit = Me.chkConfirmExit.Checked
                     My.Settings.OpenConsFromLastSession = Me.chkReconnectOnStart.Checked
                     My.Settings.StartupComponentsCheck = Me.chkProperInstallationOfComponentsAtStartup.Checked
@@ -1786,6 +1802,7 @@ Namespace UI
                 chkSingleInstance.Text = My.Resources.strAllowOnlySingleInstance
                 chkReconnectOnStart.Text = My.Resources.strReconnectAtStartup
                 chkCheckForUpdatesOnStartup.Text = My.Resources.strCheckForUpdatesOnStartup
+                chkConfirmCloseConnection.Text = My.Resources.strConfirmCloseConnection
                 chkConfirmExit.Text = My.Resources.strConfirmExit
                 chkSaveConsOnExit.Text = My.Resources.strSaveConsOnExit
                 tabAppearance.Title = My.Resources.strTabAppearance

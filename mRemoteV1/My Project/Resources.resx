@@ -2319,4 +2319,10 @@ Error Description: {1}</value>
   <data name="strPropertyNameEnableDesktopComposition" xml:space="preserve">
     <value>Desktop Composition</value>
   </data>
+  <data name="strConfirmCloseConnection" xml:space="preserve">
+    <value>Confirm closing connection tabs</value>
+  </data>
+  <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
+    <value>Do you want to close the connection, "{0}"?</value>
+  </data>
 </root>

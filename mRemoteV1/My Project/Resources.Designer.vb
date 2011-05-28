@@ -1680,6 +1680,24 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Confirm closing connection tabs.
+        '''</summary>
+        Friend ReadOnly Property strConfirmCloseConnection() As String
+            Get
+                Return ResourceManager.GetString("strConfirmCloseConnection", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Do you want to close the connection, &quot;{0}&quot;?.
+        '''</summary>
+        Friend ReadOnly Property strConfirmCloseConnectionMainInstruction() As String
+            Get
+                Return ResourceManager.GetString("strConfirmCloseConnectionMainInstruction", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Are you sure you want to delete the external tool, &quot;{0}&quot;?.
         '''</summary>
         Friend ReadOnly Property strConfirmDeleteExternalTool() As String

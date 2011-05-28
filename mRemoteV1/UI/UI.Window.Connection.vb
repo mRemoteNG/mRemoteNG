@@ -3,6 +3,7 @@ Imports System.Windows
 Imports System.Windows.Forms
 Imports Crownwood
 Imports WeifenLuo.WinFormsUI.Docking
+Imports PSTaskDialog
 Imports mRemoteNG.App.Runtime
 
 Namespace UI
@@ -344,12 +345,23 @@ Namespace UI
             End Sub
 
             Private Sub CloseConnectionTab()
+                Dim SelectedTab As Crownwood.Magic.Controls.TabPage = Me.TabController.SelectedTab
+                If My.Settings.ConfirmCloseConnection Then
+                    Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Resources.strConfirmCloseConnectionMainInstruction, SelectedTab.Title), "", "", "", My.Resources.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                    If cTaskDialog.VerificationChecked Then
+                        My.Settings.ConfirmCloseConnection = False
+                    End If
+                    If Result = DialogResult.No Then
+                        Exit Sub
+                    End If
+                End If
+
                 Try
-                    If Me.TabController.SelectedTab.Tag IsNot Nothing Then
-                        Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
+                    If SelectedTab.Tag IsNot Nothing Then
+                        Dim IC As mRemoteNG.Connection.InterfaceControl = SelectedTab.Tag
                         IC.Protocol.Close()
                     Else
-                        Me.CloseTab(Me.TabController.SelectedTab)
+                        Me.CloseTab(SelectedTab)
                     End If
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "CloseConnectionTab (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)

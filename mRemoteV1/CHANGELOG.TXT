@@ -18,6 +18,7 @@
   Added Font Smoothing and Desktop Composition RDP settings.
   Improved error handling when loading XML connection files.
   Added the mRemoteNG icon to the list of selectable icons for connection entries.
+  Added confirmation before closing connection tabs.
   Changed to use full four part version numbers with major, minor, build, and revision.
 
 1.66 (2011-05-02):

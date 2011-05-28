@@ -2205,6 +2205,19 @@ Namespace My
                 Me("InhDefaultEnableDesktopComposition") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property ConfirmCloseConnection() As Boolean
+            Get
+                Return CType(Me("ConfirmCloseConnection"),Boolean)
+            End Get
+            Set
+                Me("ConfirmCloseConnection") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
