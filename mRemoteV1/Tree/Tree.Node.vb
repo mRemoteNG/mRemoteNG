@@ -489,7 +489,6 @@ Namespace Tree
 
                 _TreeView.TreeViewNodeSorter = ns
                 _TreeView.Sort()
-                _TreeView.Sorted = False
 
                 For Each childNode As TreeNode In treeNode.Nodes
                     If GetNodeType(childNode) = Type.Container Then Sort(childNode, sortType)
