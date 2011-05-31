@@ -147,6 +147,13 @@ Namespace App
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "Show (App.Runtime.Windows) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
+
+            Public Shared Sub ShowUpdatesTab()
+                Windows.optionsForm = New UI.Window.Options(Windows.optionsPanel)
+                Windows.optionsPanel = Windows.optionsForm
+
+                Windows.optionsForm.Show(frmMain.pnlDock, 4)
+            End Sub
         End Class
 
         Public Class Screens

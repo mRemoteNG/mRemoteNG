@@ -1703,16 +1703,16 @@ Namespace UI
             End Sub
 #End Region
 
+#Region "Private Variables"
+            Private _initialTab As Integer = 0
+#End Region
+
 #Region "Public Methods"
             Public Sub New(ByVal Panel As DockContent)
                 Me.WindowType = Type.Options
                 Me.DockPnl = Panel
                 Me.InitializeComponent()
                 App.Runtime.FontOverride(Me)
-            End Sub
-
-            Public Sub ShowUpdatesTab()
-                TabController.SelectedTab = tabUpdates
             End Sub
 #End Region
 
@@ -1725,8 +1725,8 @@ Namespace UI
                 End If
                 Me.TabController.HideTabsMode = Crownwood.Magic.Controls.TabControl.HideTabsModes.HideAlways
                 Me.TabController.SelectedIndex = 1
-                Me.TabController.SelectedIndex = 0
-                Me.lvPages.Items(0).Selected = True
+                Me.TabController.SelectedIndex = _initialTab
+                Me.lvPages.Items(_initialTab).Selected = True
             End Sub
 
             Private Sub ApplySpanlinkEdition()
@@ -1838,9 +1838,10 @@ Namespace UI
                 lblLanguageRestartRequired.Text = String.Format(My.Resources.strLanguageRestartRequired, My.Application.Info.ProductName)
             End Sub
 
-            Public Shadows Sub Show(ByVal DockPanel As DockPanel)
+            Public Shadows Sub Show(ByVal DockPanel As DockPanel, Optional ByVal initialTab As Integer = 0)
                 Windows.optionsForm.LoadOptions()
 
+                _initialTab = initialTab
                 MyBase.ShowDialog(frmMain)
             End Sub
 
