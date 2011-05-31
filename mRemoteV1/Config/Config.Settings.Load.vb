@@ -38,6 +38,11 @@ Namespace Config
                             My.Settings.UpdatePending = False
                         End If
 
+                        App.SupportedCultures.InstantiateSingleton()
+                        If Not My.Settings.OverrideUICulture = "" And App.SupportedCultures.IsNameSupported(My.Settings.OverrideUICulture) Then
+                            Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo(My.Settings.OverrideUICulture)
+                        End If
+
                         .WindowState = FormWindowState.Normal
                         If My.Settings.MainFormState = FormWindowState.Normal Then
                             If Not My.Settings.MainFormLocation.IsEmpty Then .Location = My.Settings.MainFormLocation

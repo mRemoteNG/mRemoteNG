@@ -28,10 +28,6 @@ Public Class frmMain
 
         Startup.ParseCommandLineArgs()
 
-        App.SupportedCultures.InstantiateSingleton()
-        If Not My.Settings.OverrideUICulture = "" And App.SupportedCultures.IsNameSupported(My.Settings.OverrideUICulture) Then
-            Threading.Thread.CurrentThread.CurrentUICulture = New Globalization.CultureInfo(My.Settings.OverrideUICulture)
-        End If
         ApplyLanguage()
 
         fpChainedWindowHandle = SetClipboardViewer(Me.Handle)
