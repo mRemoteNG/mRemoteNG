@@ -5890,6 +5890,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Updates.
+        '''</summary>
+        Friend ReadOnly Property strTabUpdates() As String
+            Get
+                Return ResourceManager.GetString("strTabUpdates", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Telnet.
         '''</summary>
         Friend ReadOnly Property strTelnet() As String
