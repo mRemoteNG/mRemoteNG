@@ -385,8 +385,10 @@ Namespace App
                 Try
                     LastSQLUpdate = Nothing
                     RemoveHandler Tools.Misc.SQLUpdateCheckFinished, AddressOf SQLUpdateCheckFinished
-                    tmrSqlWatcher.Stop()
-                    tmrSqlWatcher.Close()
+                    If tmrSqlWatcher IsNot Nothing Then
+                        tmrSqlWatcher.Stop()
+                        tmrSqlWatcher.Close()
+                    End If
                 Catch ex As Exception
                 End Try
             End Sub
