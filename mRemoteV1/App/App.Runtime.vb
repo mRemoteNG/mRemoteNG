@@ -584,11 +584,9 @@ Namespace App
 
                 pnlcForm.Show(frmMain.pnlDock, DockState.Document)
 
-                If NoTabber = True Then
+                If NoTabber Then
                     TryCast(cForm, UI.Window.Connection).TabController.Dispose()
-                End If
-
-                If NoTabber = False Then
+                Else
                     wL.Add(cForm)
                 End If
 
@@ -1598,7 +1596,7 @@ Namespace App
 
         Public Shared Sub SetMainFormText(Optional ByVal ConnectionFileName As String = "")
             Try
-                Dim txt As String = "mRemoteNG"
+                Dim txt As String = My.Application.Info.ProductName
 
                 If App.Editions.Spanlink.Enabled Then
                     txt &= " | Spanlink Communications"
