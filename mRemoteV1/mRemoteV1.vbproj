@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4934A491-40BC-4E5B-9166-EA1169A220F6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
@@ -296,7 +296,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UI.Window.List.vb" />
-    <Compile Include="UI\UI.Window.Options.vb">
+    <Compile Include="Forms\frmOptions.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UI.Window.PortScan.vb">
@@ -396,8 +396,8 @@
       <DependentUpon>UI.Window.Help.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.Options.resx">
-      <DependentUpon>UI.Window.Options.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\frmOptions.resx">
+      <DependentUpon>frmOptions.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UI.Window.PortScan.resx">

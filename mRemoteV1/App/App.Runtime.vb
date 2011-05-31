@@ -54,7 +54,7 @@ Namespace App
             Public Shared screenshotPanel As New DockContent
             Public Shared quickyForm As UI.Window.QuickConnect
             Public Shared quickyPanel As New DockContent
-            Public Shared optionsForm As UI.Window.Options
+            Public Shared optionsForm As frmOptions
             Public Shared optionsPanel As New DockContent
             Public Shared saveasForm As UI.Window.SaveAs
             Public Shared saveasPanel As New DockContent
@@ -93,9 +93,7 @@ Namespace App
 
                             Windows.adimportPanel.Show(frmMain.pnlDock)
                         Case UI.Window.Type.Options
-                            Windows.optionsForm = New UI.Window.Options(Windows.optionsPanel)
-                            Windows.optionsPanel = Windows.optionsForm
-
+                            Windows.optionsForm = New frmOptions(Windows.optionsPanel)
                             Windows.optionsForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.SaveAs
                             Windows.saveasForm = New UI.Window.SaveAs(Windows.saveasPanel)
@@ -149,9 +147,7 @@ Namespace App
             End Sub
 
             Public Shared Sub ShowUpdatesTab()
-                Windows.optionsForm = New UI.Window.Options(Windows.optionsPanel)
-                Windows.optionsPanel = Windows.optionsForm
-
+                Windows.optionsForm = New frmOptions(Windows.optionsPanel)
                 Windows.optionsForm.Show(frmMain.pnlDock, 4)
             End Sub
         End Class
