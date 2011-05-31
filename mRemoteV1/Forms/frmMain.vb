@@ -10,6 +10,15 @@ Public Class frmMain
     Public Shared Event clipboardchange()
     Private fpChainedWindowHandle As IntPtr
 
+#Region "Properties"
+    Private _IsClosing As Boolean = False
+    Public ReadOnly Property IsClosing() As Boolean
+        Get
+            Return _IsClosing
+        End Get
+    End Property
+#End Region
+
 #Region "Startup & Shutdown"
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         'insert enable edition code here
@@ -154,6 +163,8 @@ Public Class frmMain
                 Exit Sub
             End If
         End If
+
+        _IsClosing = True
 
         For Each Window As UI.Window.Base In wL
             Window.Close()

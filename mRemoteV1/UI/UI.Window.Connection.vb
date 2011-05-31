@@ -307,6 +307,17 @@ Namespace UI
             End Sub
 
             Private Sub Connection_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+                If Not frmMain.IsClosing And My.Settings.ConfirmCloseConnection And TabController.TabPages.Count > 0 Then
+                    Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Resources.strConfirmCloseConnectionPanelMainInstruction, Me.Text), "", "", "", My.Resources.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                    If cTaskDialog.VerificationChecked Then
+                        My.Settings.ConfirmCloseConnection = False
+                    End If
+                    If Result = DialogResult.No Then
+                        e.Cancel = True
+                        Exit Sub
+                    End If
+                End If
+
                 Try
                     For Each tabP As Magic.Controls.TabPage In Me.TabController.TabPages
                         If tabP.Tag IsNot Nothing Then
