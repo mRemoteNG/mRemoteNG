@@ -72,8 +72,7 @@ Public Class frmMain
                 My.Settings.CheckForUpdatesAsked = True
             End If
             If cTaskDialog.CommandButtonResult = 1 Then
-                Windows.Show(UI.Window.Type.Options)
-                Windows.optionsForm.ShowUpdatesTab()
+                Windows.ShowUpdatesTab()
             End If
         End If
 
