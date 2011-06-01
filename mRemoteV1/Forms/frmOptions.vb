@@ -49,31 +49,11 @@ Public Class frmOptions
     Friend WithEvents lblRdpReconnectionCount As System.Windows.Forms.Label
     Friend WithEvents numRdpReconnectionCount As System.Windows.Forms.NumericUpDown
     Friend WithEvents chkSingleClickOnConnectionOpensIt As System.Windows.Forms.CheckBox
-    Friend WithEvents pnlDefaultCredentials As System.Windows.Forms.Panel
-    Friend WithEvents radCredentialsCustom As System.Windows.Forms.RadioButton
-    Friend WithEvents lblDefaultCredentials As System.Windows.Forms.Label
-    Friend WithEvents radCredentialsNoInfo As System.Windows.Forms.RadioButton
-    Friend WithEvents radCredentialsWindows As System.Windows.Forms.RadioButton
-    Friend WithEvents txtCredentialsDomain As System.Windows.Forms.TextBox
-    Friend WithEvents lblCredentialsUsername As System.Windows.Forms.Label
-    Friend WithEvents txtCredentialsPassword As System.Windows.Forms.TextBox
-    Friend WithEvents lblCredentialsPassword As System.Windows.Forms.Label
-    Friend WithEvents txtCredentialsUsername As System.Windows.Forms.TextBox
-    Friend WithEvents lblCredentialsDomain As System.Windows.Forms.Label
     Friend WithEvents chkSingleClickOnOpenedConnectionSwitchesToIt As System.Windows.Forms.CheckBox
     Friend WithEvents pnlAutoSave As System.Windows.Forms.Panel
     Friend WithEvents lblAutoSave1 As System.Windows.Forms.Label
     Friend WithEvents numAutoSave As System.Windows.Forms.NumericUpDown
     Friend WithEvents lblAutoSave2 As System.Windows.Forms.Label
-    Friend WithEvents grpExperimental As System.Windows.Forms.GroupBox
-    Friend WithEvents chkUseSQLServer As System.Windows.Forms.CheckBox
-    Friend WithEvents lblSQLInfo As System.Windows.Forms.Label
-    Friend WithEvents lblSQLUsername As System.Windows.Forms.Label
-    Friend WithEvents txtSQLPassword As System.Windows.Forms.TextBox
-    Friend WithEvents lblSQLServer As System.Windows.Forms.Label
-    Friend WithEvents txtSQLUsername As System.Windows.Forms.TextBox
-    Friend WithEvents lblSQLPassword As System.Windows.Forms.Label
-    Friend WithEvents txtSQLServer As System.Windows.Forms.TextBox
     Friend WithEvents chkHostnameLikeDisplayName As System.Windows.Forms.CheckBox
     Friend WithEvents chkUseOnlyErrorsAndInfosPanel As System.Windows.Forms.CheckBox
     Friend WithEvents lblSwitchToErrorsAndInfos As System.Windows.Forms.Label
@@ -105,6 +85,27 @@ Public Class frmOptions
     Friend WithEvents tabConnections As System.Windows.Forms.TabPage
     Friend WithEvents tabUpdates As System.Windows.Forms.TabPage
     Friend WithEvents tabAdvanced As System.Windows.Forms.TabPage
+    Friend WithEvents tabSQLServer As System.Windows.Forms.TabPage
+    Friend WithEvents pnlDefaultCredentials As System.Windows.Forms.Panel
+    Friend WithEvents radCredentialsCustom As System.Windows.Forms.RadioButton
+    Friend WithEvents lblDefaultCredentials As System.Windows.Forms.Label
+    Friend WithEvents radCredentialsNoInfo As System.Windows.Forms.RadioButton
+    Friend WithEvents radCredentialsWindows As System.Windows.Forms.RadioButton
+    Friend WithEvents txtCredentialsDomain As System.Windows.Forms.TextBox
+    Friend WithEvents lblCredentialsUsername As System.Windows.Forms.Label
+    Friend WithEvents txtCredentialsPassword As System.Windows.Forms.TextBox
+    Friend WithEvents lblCredentialsPassword As System.Windows.Forms.Label
+    Friend WithEvents txtCredentialsUsername As System.Windows.Forms.TextBox
+    Friend WithEvents lblCredentialsDomain As System.Windows.Forms.Label
+    Friend WithEvents chkUseSQLServer As System.Windows.Forms.CheckBox
+    Friend WithEvents lblSQLInfo As System.Windows.Forms.Label
+    Friend WithEvents lblSQLUsername As System.Windows.Forms.Label
+    Friend WithEvents txtSQLPassword As System.Windows.Forms.TextBox
+    Friend WithEvents lblSQLServer As System.Windows.Forms.Label
+    Friend WithEvents txtSQLUsername As System.Windows.Forms.TextBox
+    Friend WithEvents lblSQLPassword As System.Windows.Forms.Label
+    Friend WithEvents txtSQLServer As System.Windows.Forms.TextBox
+    Friend WithEvents lblExperimental As System.Windows.Forms.Label
     Private components As System.ComponentModel.IContainer
 
     Private Sub InitializeComponent()
@@ -113,8 +114,9 @@ Public Class frmOptions
         Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
         Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
         Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", 3)
-        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 4)
-        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 5)
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", 4)
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 5)
+        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
         Me.btnOK = New System.Windows.Forms.Button
         Me.btnCancel = New System.Windows.Forms.Button
@@ -157,31 +159,11 @@ Public Class frmOptions
         Me.cboUpdateCheckFrequency = New System.Windows.Forms.ComboBox
         Me.lblUpdatesExplanation = New System.Windows.Forms.Label
         Me.chkHostnameLikeDisplayName = New System.Windows.Forms.CheckBox
-        Me.grpExperimental = New System.Windows.Forms.GroupBox
-        Me.chkUseSQLServer = New System.Windows.Forms.CheckBox
-        Me.lblSQLInfo = New System.Windows.Forms.Label
-        Me.lblSQLUsername = New System.Windows.Forms.Label
-        Me.txtSQLPassword = New System.Windows.Forms.TextBox
-        Me.lblSQLServer = New System.Windows.Forms.Label
-        Me.txtSQLUsername = New System.Windows.Forms.TextBox
-        Me.lblSQLPassword = New System.Windows.Forms.Label
-        Me.txtSQLServer = New System.Windows.Forms.TextBox
         Me.pnlAutoSave = New System.Windows.Forms.Panel
         Me.lblAutoSave1 = New System.Windows.Forms.Label
         Me.numAutoSave = New System.Windows.Forms.NumericUpDown
         Me.lblAutoSave2 = New System.Windows.Forms.Label
         Me.chkSingleClickOnOpenedConnectionSwitchesToIt = New System.Windows.Forms.CheckBox
-        Me.pnlDefaultCredentials = New System.Windows.Forms.Panel
-        Me.radCredentialsCustom = New System.Windows.Forms.RadioButton
-        Me.lblDefaultCredentials = New System.Windows.Forms.Label
-        Me.radCredentialsNoInfo = New System.Windows.Forms.RadioButton
-        Me.radCredentialsWindows = New System.Windows.Forms.RadioButton
-        Me.txtCredentialsDomain = New System.Windows.Forms.TextBox
-        Me.lblCredentialsUsername = New System.Windows.Forms.Label
-        Me.txtCredentialsPassword = New System.Windows.Forms.TextBox
-        Me.lblCredentialsPassword = New System.Windows.Forms.Label
-        Me.txtCredentialsUsername = New System.Windows.Forms.TextBox
-        Me.lblCredentialsDomain = New System.Windows.Forms.Label
         Me.chkSingleClickOnConnectionOpensIt = New System.Windows.Forms.CheckBox
         Me.pnlRdpReconnectionCount = New System.Windows.Forms.Panel
         Me.lblRdpReconnectionCount = New System.Windows.Forms.Label
@@ -214,6 +196,27 @@ Public Class frmOptions
         Me.tabAppearance = New System.Windows.Forms.TabPage
         Me.tabTabsAndPanels = New System.Windows.Forms.TabPage
         Me.tabConnections = New System.Windows.Forms.TabPage
+        Me.tabSQLServer = New System.Windows.Forms.TabPage
+        Me.lblExperimental = New System.Windows.Forms.Label
+        Me.chkUseSQLServer = New System.Windows.Forms.CheckBox
+        Me.lblSQLUsername = New System.Windows.Forms.Label
+        Me.pnlDefaultCredentials = New System.Windows.Forms.Panel
+        Me.radCredentialsCustom = New System.Windows.Forms.RadioButton
+        Me.lblDefaultCredentials = New System.Windows.Forms.Label
+        Me.radCredentialsNoInfo = New System.Windows.Forms.RadioButton
+        Me.radCredentialsWindows = New System.Windows.Forms.RadioButton
+        Me.txtCredentialsDomain = New System.Windows.Forms.TextBox
+        Me.lblCredentialsUsername = New System.Windows.Forms.Label
+        Me.txtCredentialsPassword = New System.Windows.Forms.TextBox
+        Me.lblCredentialsPassword = New System.Windows.Forms.Label
+        Me.txtCredentialsUsername = New System.Windows.Forms.TextBox
+        Me.lblCredentialsDomain = New System.Windows.Forms.Label
+        Me.txtSQLPassword = New System.Windows.Forms.TextBox
+        Me.lblSQLInfo = New System.Windows.Forms.Label
+        Me.lblSQLServer = New System.Windows.Forms.Label
+        Me.txtSQLUsername = New System.Windows.Forms.TextBox
+        Me.txtSQLServer = New System.Windows.Forms.TextBox
+        Me.lblSQLPassword = New System.Windows.Forms.Label
         Me.tabUpdates = New System.Windows.Forms.TabPage
         Me.tabAdvanced = New System.Windows.Forms.TabPage
         CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -223,10 +226,8 @@ Public Class frmOptions
         CType(Me.numProxyPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProxyAuthentication.SuspendLayout()
         Me.pnlUpdateCheck.SuspendLayout()
-        Me.grpExperimental.SuspendLayout()
         Me.pnlAutoSave.SuspendLayout()
         CType(Me.numAutoSave, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlDefaultCredentials.SuspendLayout()
         Me.pnlRdpReconnectionCount.SuspendLayout()
         CType(Me.numRdpReconnectionCount, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.tcTabControl.SuspendLayout()
@@ -234,6 +235,8 @@ Public Class frmOptions
         Me.tabAppearance.SuspendLayout()
         Me.tabTabsAndPanels.SuspendLayout()
         Me.tabConnections.SuspendLayout()
+        Me.tabSQLServer.SuspendLayout()
+        Me.pnlDefaultCredentials.SuspendLayout()
         Me.tabUpdates.SuspendLayout()
         Me.tabAdvanced.SuspendLayout()
         Me.SuspendLayout()
@@ -265,7 +268,7 @@ Public Class frmOptions
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lvPages.FullRowSelect = True
         Me.lvPages.HideSelection = False
-        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6})
+        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7})
         Me.lvPages.LabelWrap = False
         Me.lvPages.LargeImageList = Me.imgListPages
         Me.lvPages.Location = New System.Drawing.Point(12, 12)
@@ -281,13 +284,14 @@ Public Class frmOptions
         'imgListPages
         '
         Me.imgListPages.ImageStream = CType(resources.GetObject("imgListPages.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.imgListPages.TransparentColor = System.Drawing.Color.Transparent
+        Me.imgListPages.TransparentColor = System.Drawing.Color.Fuchsia
         Me.imgListPages.Images.SetKeyName(0, "StartupExit_Icon.ico")
         Me.imgListPages.Images.SetKeyName(1, "Appearance_Icon.ico")
         Me.imgListPages.Images.SetKeyName(2, "Tab_Icon.ico")
         Me.imgListPages.Images.SetKeyName(3, "Root_Icon.ico")
-        Me.imgListPages.Images.SetKeyName(4, "Update_Icon.ico")
-        Me.imgListPages.Images.SetKeyName(5, "Config_Icon.ico")
+        Me.imgListPages.Images.SetKeyName(4, "VSProject_database.bmp")
+        Me.imgListPages.Images.SetKeyName(5, "Update_Icon.ico")
+        Me.imgListPages.Images.SetKeyName(6, "Config_Icon.ico")
         '
         'lblMaximumPuttyWaitTime
         '
@@ -647,106 +651,6 @@ Public Class frmOptions
         Me.chkHostnameLikeDisplayName.Text = "Set hostname like display name when creating new connections"
         Me.chkHostnameLikeDisplayName.UseVisualStyleBackColor = True
         '
-        'grpExperimental
-        '
-        Me.grpExperimental.BackColor = System.Drawing.Color.IndianRed
-        Me.grpExperimental.Controls.Add(Me.chkUseSQLServer)
-        Me.grpExperimental.Controls.Add(Me.lblSQLInfo)
-        Me.grpExperimental.Controls.Add(Me.lblSQLUsername)
-        Me.grpExperimental.Controls.Add(Me.txtSQLPassword)
-        Me.grpExperimental.Controls.Add(Me.lblSQLServer)
-        Me.grpExperimental.Controls.Add(Me.txtSQLUsername)
-        Me.grpExperimental.Controls.Add(Me.lblSQLPassword)
-        Me.grpExperimental.Controls.Add(Me.txtSQLServer)
-        Me.grpExperimental.Location = New System.Drawing.Point(3, 142)
-        Me.grpExperimental.Name = "grpExperimental"
-        Me.grpExperimental.Size = New System.Drawing.Size(500, 147)
-        Me.grpExperimental.TabIndex = 60
-        Me.grpExperimental.TabStop = False
-        Me.grpExperimental.Text = "EXPERIMENTAL"
-        '
-        'chkUseSQLServer
-        '
-        Me.chkUseSQLServer.AutoSize = True
-        Me.chkUseSQLServer.Location = New System.Drawing.Point(16, 20)
-        Me.chkUseSQLServer.Name = "chkUseSQLServer"
-        Me.chkUseSQLServer.Size = New System.Drawing.Size(234, 17)
-        Me.chkUseSQLServer.TabIndex = 61
-        Me.chkUseSQLServer.Text = "Use SQL Server to load && save connections"
-        Me.chkUseSQLServer.UseVisualStyleBackColor = True
-        '
-        'lblSQLInfo
-        '
-        Me.lblSQLInfo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblSQLInfo.Enabled = False
-        Me.lblSQLInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World)
-        Me.lblSQLInfo.Location = New System.Drawing.Point(291, 11)
-        Me.lblSQLInfo.Name = "lblSQLInfo"
-        Me.lblSQLInfo.Size = New System.Drawing.Size(203, 131)
-        Me.lblSQLInfo.TabIndex = 120
-        Me.lblSQLInfo.Text = "Please see Help - Getting started - SQL Configuration for more Info!"
-        Me.lblSQLInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblSQLUsername
-        '
-        Me.lblSQLUsername.AutoSize = True
-        Me.lblSQLUsername.Enabled = False
-        Me.lblSQLUsername.Location = New System.Drawing.Point(36, 77)
-        Me.lblSQLUsername.Name = "lblSQLUsername"
-        Me.lblSQLUsername.Size = New System.Drawing.Size(58, 13)
-        Me.lblSQLUsername.TabIndex = 80
-        Me.lblSQLUsername.Text = "Username:"
-        '
-        'txtSQLPassword
-        '
-        Me.txtSQLPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSQLPassword.Enabled = False
-        Me.txtSQLPassword.Location = New System.Drawing.Point(126, 101)
-        Me.txtSQLPassword.Name = "txtSQLPassword"
-        Me.txtSQLPassword.Size = New System.Drawing.Size(153, 20)
-        Me.txtSQLPassword.TabIndex = 64
-        Me.txtSQLPassword.UseSystemPasswordChar = True
-        '
-        'lblSQLServer
-        '
-        Me.lblSQLServer.AutoSize = True
-        Me.lblSQLServer.Enabled = False
-        Me.lblSQLServer.Location = New System.Drawing.Point(36, 50)
-        Me.lblSQLServer.Name = "lblSQLServer"
-        Me.lblSQLServer.Size = New System.Drawing.Size(65, 13)
-        Me.lblSQLServer.TabIndex = 60
-        Me.lblSQLServer.Text = "SQL Server:"
-        '
-        'txtSQLUsername
-        '
-        Me.txtSQLUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSQLUsername.Enabled = False
-        Me.txtSQLUsername.Location = New System.Drawing.Point(126, 74)
-        Me.txtSQLUsername.Name = "txtSQLUsername"
-        Me.txtSQLUsername.Size = New System.Drawing.Size(153, 20)
-        Me.txtSQLUsername.TabIndex = 63
-        '
-        'lblSQLPassword
-        '
-        Me.lblSQLPassword.AutoSize = True
-        Me.lblSQLPassword.Enabled = False
-        Me.lblSQLPassword.Location = New System.Drawing.Point(36, 104)
-        Me.lblSQLPassword.Name = "lblSQLPassword"
-        Me.lblSQLPassword.Size = New System.Drawing.Size(56, 13)
-        Me.lblSQLPassword.TabIndex = 100
-        Me.lblSQLPassword.Text = "Password:"
-        '
-        'txtSQLServer
-        '
-        Me.txtSQLServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSQLServer.Enabled = False
-        Me.txtSQLServer.Location = New System.Drawing.Point(126, 47)
-        Me.txtSQLServer.Name = "txtSQLServer"
-        Me.txtSQLServer.Size = New System.Drawing.Size(153, 20)
-        Me.txtSQLServer.TabIndex = 62
-        '
         'pnlAutoSave
         '
         Me.pnlAutoSave.Controls.Add(Me.lblAutoSave1)
@@ -793,123 +697,6 @@ Public Class frmOptions
         Me.chkSingleClickOnOpenedConnectionSwitchesToIt.TabIndex = 20
         Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Text = "Single click on opened connection switches to it"
         Me.chkSingleClickOnOpenedConnectionSwitchesToIt.UseVisualStyleBackColor = True
-        '
-        'pnlDefaultCredentials
-        '
-        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsCustom)
-        Me.pnlDefaultCredentials.Controls.Add(Me.lblDefaultCredentials)
-        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsNoInfo)
-        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsWindows)
-        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsDomain)
-        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsUsername)
-        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsPassword)
-        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsPassword)
-        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsUsername)
-        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsDomain)
-        Me.pnlDefaultCredentials.Location = New System.Drawing.Point(3, 295)
-        Me.pnlDefaultCredentials.Name = "pnlDefaultCredentials"
-        Me.pnlDefaultCredentials.Size = New System.Drawing.Size(500, 175)
-        Me.pnlDefaultCredentials.TabIndex = 70
-        '
-        'radCredentialsCustom
-        '
-        Me.radCredentialsCustom.AutoSize = True
-        Me.radCredentialsCustom.Location = New System.Drawing.Point(21, 69)
-        Me.radCredentialsCustom.Name = "radCredentialsCustom"
-        Me.radCredentialsCustom.Size = New System.Drawing.Size(87, 17)
-        Me.radCredentialsCustom.TabIndex = 73
-        Me.radCredentialsCustom.TabStop = True
-        Me.radCredentialsCustom.Text = "the following:"
-        Me.radCredentialsCustom.UseVisualStyleBackColor = True
-        '
-        'lblDefaultCredentials
-        '
-        Me.lblDefaultCredentials.AutoSize = True
-        Me.lblDefaultCredentials.Location = New System.Drawing.Point(8, 9)
-        Me.lblDefaultCredentials.Name = "lblDefaultCredentials"
-        Me.lblDefaultCredentials.Size = New System.Drawing.Size(257, 13)
-        Me.lblDefaultCredentials.TabIndex = 80
-        Me.lblDefaultCredentials.Text = "For empty Username, Password or Domain fields use:"
-        '
-        'radCredentialsNoInfo
-        '
-        Me.radCredentialsNoInfo.AutoSize = True
-        Me.radCredentialsNoInfo.Location = New System.Drawing.Point(21, 31)
-        Me.radCredentialsNoInfo.Name = "radCredentialsNoInfo"
-        Me.radCredentialsNoInfo.Size = New System.Drawing.Size(91, 17)
-        Me.radCredentialsNoInfo.TabIndex = 71
-        Me.radCredentialsNoInfo.TabStop = True
-        Me.radCredentialsNoInfo.Text = "no information"
-        Me.radCredentialsNoInfo.UseVisualStyleBackColor = True
-        '
-        'radCredentialsWindows
-        '
-        Me.radCredentialsWindows.AutoSize = True
-        Me.radCredentialsWindows.Location = New System.Drawing.Point(21, 50)
-        Me.radCredentialsWindows.Name = "radCredentialsWindows"
-        Me.radCredentialsWindows.Size = New System.Drawing.Size(227, 17)
-        Me.radCredentialsWindows.TabIndex = 72
-        Me.radCredentialsWindows.TabStop = True
-        Me.radCredentialsWindows.Text = "my current credentials (windows logon info)"
-        Me.radCredentialsWindows.UseVisualStyleBackColor = True
-        '
-        'txtCredentialsDomain
-        '
-        Me.txtCredentialsDomain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCredentialsDomain.Enabled = False
-        Me.txtCredentialsDomain.Location = New System.Drawing.Point(130, 147)
-        Me.txtCredentialsDomain.Name = "txtCredentialsDomain"
-        Me.txtCredentialsDomain.Size = New System.Drawing.Size(150, 20)
-        Me.txtCredentialsDomain.TabIndex = 76
-        '
-        'lblCredentialsUsername
-        '
-        Me.lblCredentialsUsername.AutoSize = True
-        Me.lblCredentialsUsername.Enabled = False
-        Me.lblCredentialsUsername.Location = New System.Drawing.Point(39, 95)
-        Me.lblCredentialsUsername.Name = "lblCredentialsUsername"
-        Me.lblCredentialsUsername.Size = New System.Drawing.Size(58, 13)
-        Me.lblCredentialsUsername.TabIndex = 120
-        Me.lblCredentialsUsername.Text = "Username:"
-        '
-        'txtCredentialsPassword
-        '
-        Me.txtCredentialsPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCredentialsPassword.Enabled = False
-        Me.txtCredentialsPassword.Location = New System.Drawing.Point(130, 120)
-        Me.txtCredentialsPassword.Name = "txtCredentialsPassword"
-        Me.txtCredentialsPassword.Size = New System.Drawing.Size(150, 20)
-        Me.txtCredentialsPassword.TabIndex = 75
-        Me.txtCredentialsPassword.UseSystemPasswordChar = True
-        '
-        'lblCredentialsPassword
-        '
-        Me.lblCredentialsPassword.AutoSize = True
-        Me.lblCredentialsPassword.Enabled = False
-        Me.lblCredentialsPassword.Location = New System.Drawing.Point(39, 123)
-        Me.lblCredentialsPassword.Name = "lblCredentialsPassword"
-        Me.lblCredentialsPassword.Size = New System.Drawing.Size(56, 13)
-        Me.lblCredentialsPassword.TabIndex = 140
-        Me.lblCredentialsPassword.Text = "Password:"
-        '
-        'txtCredentialsUsername
-        '
-        Me.txtCredentialsUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCredentialsUsername.Enabled = False
-        Me.txtCredentialsUsername.Location = New System.Drawing.Point(130, 93)
-        Me.txtCredentialsUsername.Name = "txtCredentialsUsername"
-        Me.txtCredentialsUsername.Size = New System.Drawing.Size(150, 20)
-        Me.txtCredentialsUsername.TabIndex = 74
-        '
-        'lblCredentialsDomain
-        '
-        Me.lblCredentialsDomain.AutoSize = True
-        Me.lblCredentialsDomain.Enabled = False
-        Me.lblCredentialsDomain.Location = New System.Drawing.Point(39, 150)
-        Me.lblCredentialsDomain.Name = "lblCredentialsDomain"
-        Me.lblCredentialsDomain.Size = New System.Drawing.Size(46, 13)
-        Me.lblCredentialsDomain.TabIndex = 160
-        Me.lblCredentialsDomain.Text = "Domain:"
         '
         'chkSingleClickOnConnectionOpensIt
         '
@@ -1185,6 +972,7 @@ Public Class frmOptions
         Me.tcTabControl.Controls.Add(Me.tabAppearance)
         Me.tcTabControl.Controls.Add(Me.tabTabsAndPanels)
         Me.tcTabControl.Controls.Add(Me.tabConnections)
+        Me.tcTabControl.Controls.Add(Me.tabSQLServer)
         Me.tcTabControl.Controls.Add(Me.tabUpdates)
         Me.tcTabControl.Controls.Add(Me.tabAdvanced)
         Me.tcTabControl.Location = New System.Drawing.Point(172, 12)
@@ -1249,8 +1037,6 @@ Public Class frmOptions
         Me.tabConnections.Controls.Add(Me.pnlRdpReconnectionCount)
         Me.tabConnections.Controls.Add(Me.chkSingleClickOnConnectionOpensIt)
         Me.tabConnections.Controls.Add(Me.chkHostnameLikeDisplayName)
-        Me.tabConnections.Controls.Add(Me.pnlDefaultCredentials)
-        Me.tabConnections.Controls.Add(Me.grpExperimental)
         Me.tabConnections.Controls.Add(Me.chkSingleClickOnOpenedConnectionSwitchesToIt)
         Me.tabConnections.Controls.Add(Me.pnlAutoSave)
         Me.tabConnections.Location = New System.Drawing.Point(4, 22)
@@ -1259,6 +1045,238 @@ Public Class frmOptions
         Me.tabConnections.TabIndex = 3
         Me.tabConnections.Text = "Connections"
         Me.tabConnections.UseVisualStyleBackColor = True
+        '
+        'tabSQLServer
+        '
+        Me.tabSQLServer.Controls.Add(Me.lblExperimental)
+        Me.tabSQLServer.Controls.Add(Me.chkUseSQLServer)
+        Me.tabSQLServer.Controls.Add(Me.lblSQLUsername)
+        Me.tabSQLServer.Controls.Add(Me.pnlDefaultCredentials)
+        Me.tabSQLServer.Controls.Add(Me.txtSQLPassword)
+        Me.tabSQLServer.Controls.Add(Me.lblSQLInfo)
+        Me.tabSQLServer.Controls.Add(Me.lblSQLServer)
+        Me.tabSQLServer.Controls.Add(Me.txtSQLUsername)
+        Me.tabSQLServer.Controls.Add(Me.txtSQLServer)
+        Me.tabSQLServer.Controls.Add(Me.lblSQLPassword)
+        Me.tabSQLServer.Location = New System.Drawing.Point(4, 22)
+        Me.tabSQLServer.Name = "tabSQLServer"
+        Me.tabSQLServer.Size = New System.Drawing.Size(602, 463)
+        Me.tabSQLServer.TabIndex = 6
+        Me.tabSQLServer.Text = "SQL Server"
+        Me.tabSQLServer.UseVisualStyleBackColor = True
+        '
+        'lblExperimental
+        '
+        Me.lblExperimental.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblExperimental.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World)
+        Me.lblExperimental.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lblExperimental.Location = New System.Drawing.Point(3, 0)
+        Me.lblExperimental.Name = "lblExperimental"
+        Me.lblExperimental.Size = New System.Drawing.Size(596, 25)
+        Me.lblExperimental.TabIndex = 121
+        Me.lblExperimental.Text = "EXPERIMENTAL"
+        Me.lblExperimental.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'chkUseSQLServer
+        '
+        Me.chkUseSQLServer.AutoSize = True
+        Me.chkUseSQLServer.Location = New System.Drawing.Point(3, 76)
+        Me.chkUseSQLServer.Name = "chkUseSQLServer"
+        Me.chkUseSQLServer.Size = New System.Drawing.Size(234, 17)
+        Me.chkUseSQLServer.TabIndex = 61
+        Me.chkUseSQLServer.Text = "Use SQL Server to load && save connections"
+        Me.chkUseSQLServer.UseVisualStyleBackColor = True
+        '
+        'lblSQLUsername
+        '
+        Me.lblSQLUsername.AutoSize = True
+        Me.lblSQLUsername.Enabled = False
+        Me.lblSQLUsername.Location = New System.Drawing.Point(23, 133)
+        Me.lblSQLUsername.Name = "lblSQLUsername"
+        Me.lblSQLUsername.Size = New System.Drawing.Size(58, 13)
+        Me.lblSQLUsername.TabIndex = 80
+        Me.lblSQLUsername.Text = "Username:"
+        '
+        'pnlDefaultCredentials
+        '
+        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsCustom)
+        Me.pnlDefaultCredentials.Controls.Add(Me.lblDefaultCredentials)
+        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsNoInfo)
+        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsWindows)
+        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsDomain)
+        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsUsername)
+        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsPassword)
+        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsPassword)
+        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsUsername)
+        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsDomain)
+        Me.pnlDefaultCredentials.Location = New System.Drawing.Point(3, 203)
+        Me.pnlDefaultCredentials.Name = "pnlDefaultCredentials"
+        Me.pnlDefaultCredentials.Size = New System.Drawing.Size(596, 175)
+        Me.pnlDefaultCredentials.TabIndex = 72
+        '
+        'radCredentialsCustom
+        '
+        Me.radCredentialsCustom.AutoSize = True
+        Me.radCredentialsCustom.Location = New System.Drawing.Point(21, 69)
+        Me.radCredentialsCustom.Name = "radCredentialsCustom"
+        Me.radCredentialsCustom.Size = New System.Drawing.Size(87, 17)
+        Me.radCredentialsCustom.TabIndex = 73
+        Me.radCredentialsCustom.TabStop = True
+        Me.radCredentialsCustom.Text = "the following:"
+        Me.radCredentialsCustom.UseVisualStyleBackColor = True
+        '
+        'lblDefaultCredentials
+        '
+        Me.lblDefaultCredentials.AutoSize = True
+        Me.lblDefaultCredentials.Location = New System.Drawing.Point(8, 9)
+        Me.lblDefaultCredentials.Name = "lblDefaultCredentials"
+        Me.lblDefaultCredentials.Size = New System.Drawing.Size(257, 13)
+        Me.lblDefaultCredentials.TabIndex = 80
+        Me.lblDefaultCredentials.Text = "For empty Username, Password or Domain fields use:"
+        '
+        'radCredentialsNoInfo
+        '
+        Me.radCredentialsNoInfo.AutoSize = True
+        Me.radCredentialsNoInfo.Location = New System.Drawing.Point(21, 31)
+        Me.radCredentialsNoInfo.Name = "radCredentialsNoInfo"
+        Me.radCredentialsNoInfo.Size = New System.Drawing.Size(91, 17)
+        Me.radCredentialsNoInfo.TabIndex = 71
+        Me.radCredentialsNoInfo.TabStop = True
+        Me.radCredentialsNoInfo.Text = "no information"
+        Me.radCredentialsNoInfo.UseVisualStyleBackColor = True
+        '
+        'radCredentialsWindows
+        '
+        Me.radCredentialsWindows.AutoSize = True
+        Me.radCredentialsWindows.Location = New System.Drawing.Point(21, 50)
+        Me.radCredentialsWindows.Name = "radCredentialsWindows"
+        Me.radCredentialsWindows.Size = New System.Drawing.Size(227, 17)
+        Me.radCredentialsWindows.TabIndex = 72
+        Me.radCredentialsWindows.TabStop = True
+        Me.radCredentialsWindows.Text = "my current credentials (windows logon info)"
+        Me.radCredentialsWindows.UseVisualStyleBackColor = True
+        '
+        'txtCredentialsDomain
+        '
+        Me.txtCredentialsDomain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCredentialsDomain.Enabled = False
+        Me.txtCredentialsDomain.Location = New System.Drawing.Point(130, 147)
+        Me.txtCredentialsDomain.Name = "txtCredentialsDomain"
+        Me.txtCredentialsDomain.Size = New System.Drawing.Size(150, 20)
+        Me.txtCredentialsDomain.TabIndex = 76
+        '
+        'lblCredentialsUsername
+        '
+        Me.lblCredentialsUsername.AutoSize = True
+        Me.lblCredentialsUsername.Enabled = False
+        Me.lblCredentialsUsername.Location = New System.Drawing.Point(39, 95)
+        Me.lblCredentialsUsername.Name = "lblCredentialsUsername"
+        Me.lblCredentialsUsername.Size = New System.Drawing.Size(58, 13)
+        Me.lblCredentialsUsername.TabIndex = 120
+        Me.lblCredentialsUsername.Text = "Username:"
+        '
+        'txtCredentialsPassword
+        '
+        Me.txtCredentialsPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCredentialsPassword.Enabled = False
+        Me.txtCredentialsPassword.Location = New System.Drawing.Point(130, 120)
+        Me.txtCredentialsPassword.Name = "txtCredentialsPassword"
+        Me.txtCredentialsPassword.Size = New System.Drawing.Size(150, 20)
+        Me.txtCredentialsPassword.TabIndex = 75
+        Me.txtCredentialsPassword.UseSystemPasswordChar = True
+        '
+        'lblCredentialsPassword
+        '
+        Me.lblCredentialsPassword.AutoSize = True
+        Me.lblCredentialsPassword.Enabled = False
+        Me.lblCredentialsPassword.Location = New System.Drawing.Point(39, 123)
+        Me.lblCredentialsPassword.Name = "lblCredentialsPassword"
+        Me.lblCredentialsPassword.Size = New System.Drawing.Size(56, 13)
+        Me.lblCredentialsPassword.TabIndex = 140
+        Me.lblCredentialsPassword.Text = "Password:"
+        '
+        'txtCredentialsUsername
+        '
+        Me.txtCredentialsUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCredentialsUsername.Enabled = False
+        Me.txtCredentialsUsername.Location = New System.Drawing.Point(130, 93)
+        Me.txtCredentialsUsername.Name = "txtCredentialsUsername"
+        Me.txtCredentialsUsername.Size = New System.Drawing.Size(150, 20)
+        Me.txtCredentialsUsername.TabIndex = 74
+        '
+        'lblCredentialsDomain
+        '
+        Me.lblCredentialsDomain.AutoSize = True
+        Me.lblCredentialsDomain.Enabled = False
+        Me.lblCredentialsDomain.Location = New System.Drawing.Point(39, 150)
+        Me.lblCredentialsDomain.Name = "lblCredentialsDomain"
+        Me.lblCredentialsDomain.Size = New System.Drawing.Size(46, 13)
+        Me.lblCredentialsDomain.TabIndex = 160
+        Me.lblCredentialsDomain.Text = "Domain:"
+        '
+        'txtSQLPassword
+        '
+        Me.txtSQLPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSQLPassword.Enabled = False
+        Me.txtSQLPassword.Location = New System.Drawing.Point(113, 157)
+        Me.txtSQLPassword.Name = "txtSQLPassword"
+        Me.txtSQLPassword.Size = New System.Drawing.Size(153, 20)
+        Me.txtSQLPassword.TabIndex = 64
+        Me.txtSQLPassword.UseSystemPasswordChar = True
+        '
+        'lblSQLInfo
+        '
+        Me.lblSQLInfo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblSQLInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World)
+        Me.lblSQLInfo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lblSQLInfo.Location = New System.Drawing.Point(3, 25)
+        Me.lblSQLInfo.Name = "lblSQLInfo"
+        Me.lblSQLInfo.Size = New System.Drawing.Size(596, 25)
+        Me.lblSQLInfo.TabIndex = 120
+        Me.lblSQLInfo.Text = "Please see Help - Getting started - SQL Configuration for more Info!"
+        Me.lblSQLInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblSQLServer
+        '
+        Me.lblSQLServer.AutoSize = True
+        Me.lblSQLServer.Enabled = False
+        Me.lblSQLServer.Location = New System.Drawing.Point(23, 106)
+        Me.lblSQLServer.Name = "lblSQLServer"
+        Me.lblSQLServer.Size = New System.Drawing.Size(65, 13)
+        Me.lblSQLServer.TabIndex = 60
+        Me.lblSQLServer.Text = "SQL Server:"
+        '
+        'txtSQLUsername
+        '
+        Me.txtSQLUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSQLUsername.Enabled = False
+        Me.txtSQLUsername.Location = New System.Drawing.Point(113, 130)
+        Me.txtSQLUsername.Name = "txtSQLUsername"
+        Me.txtSQLUsername.Size = New System.Drawing.Size(153, 20)
+        Me.txtSQLUsername.TabIndex = 63
+        '
+        'txtSQLServer
+        '
+        Me.txtSQLServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSQLServer.Enabled = False
+        Me.txtSQLServer.Location = New System.Drawing.Point(113, 103)
+        Me.txtSQLServer.Name = "txtSQLServer"
+        Me.txtSQLServer.Size = New System.Drawing.Size(153, 20)
+        Me.txtSQLServer.TabIndex = 62
+        '
+        'lblSQLPassword
+        '
+        Me.lblSQLPassword.AutoSize = True
+        Me.lblSQLPassword.Enabled = False
+        Me.lblSQLPassword.Location = New System.Drawing.Point(23, 160)
+        Me.lblSQLPassword.Name = "lblSQLPassword"
+        Me.lblSQLPassword.Size = New System.Drawing.Size(56, 13)
+        Me.lblSQLPassword.TabIndex = 100
+        Me.lblSQLPassword.Text = "Password:"
         '
         'tabUpdates
         '
@@ -1326,13 +1344,9 @@ Public Class frmOptions
         Me.pnlProxyAuthentication.PerformLayout()
         Me.pnlUpdateCheck.ResumeLayout(False)
         Me.pnlUpdateCheck.PerformLayout()
-        Me.grpExperimental.ResumeLayout(False)
-        Me.grpExperimental.PerformLayout()
         Me.pnlAutoSave.ResumeLayout(False)
         Me.pnlAutoSave.PerformLayout()
         CType(Me.numAutoSave, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlDefaultCredentials.ResumeLayout(False)
-        Me.pnlDefaultCredentials.PerformLayout()
         Me.pnlRdpReconnectionCount.ResumeLayout(False)
         Me.pnlRdpReconnectionCount.PerformLayout()
         CType(Me.numRdpReconnectionCount, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1345,6 +1359,10 @@ Public Class frmOptions
         Me.tabTabsAndPanels.PerformLayout()
         Me.tabConnections.ResumeLayout(False)
         Me.tabConnections.PerformLayout()
+        Me.tabSQLServer.ResumeLayout(False)
+        Me.tabSQLServer.PerformLayout()
+        Me.pnlDefaultCredentials.ResumeLayout(False)
+        Me.pnlDefaultCredentials.PerformLayout()
         Me.tabUpdates.ResumeLayout(False)
         Me.tabAdvanced.ResumeLayout(False)
         Me.tabAdvanced.PerformLayout()
@@ -1641,8 +1659,6 @@ Public Class frmOptions
         chkShowLogonInfoOnTabs.Visible = False
         chkHostnameLikeDisplayName.Enabled = False
         chkHostnameLikeDisplayName.Visible = False
-        grpExperimental.Enabled = False
-        grpExperimental.Visible = False
         pnlAutoSave.Enabled = False
         pnlAutoSave.Visible = False
         pnlDefaultCredentials.Enabled = False
@@ -1660,8 +1676,9 @@ Public Class frmOptions
         lvPages.Items(1).Text = My.Resources.strTabAppearance
         lvPages.Items(2).Text = My.Resources.strTabsAndPanels.Replace("&&", "&")
         lvPages.Items(3).Text = My.Resources.strConnections
-        lvPages.Items(4).Text = My.Resources.strTabUpdates
-        lvPages.Items(5).Text = My.Resources.strTabAdvanced
+        lvPages.Items(4).Text = My.Resources.strSQLServer
+        lvPages.Items(5).Text = My.Resources.strTabUpdates
+        lvPages.Items(6).Text = My.Resources.strTabAdvanced
         lblUpdatesExplanation.Text = My.Resources.strUpdateCheck
         btnTestProxy.Text = My.Resources.strButtonTestProxy
         lblSeconds.Text = My.Resources.strLabelSeconds
@@ -1695,7 +1712,7 @@ Public Class frmOptions
         chkAlwaysShowPanelSelectionDlg.Text = My.Resources.strAlwaysShowPanelSelection
         chkDoubleClickClosesTab.Text = My.Resources.strDoubleClickTabClosesIt
         chkHostnameLikeDisplayName.Text = My.Resources.strSetHostnameLikeDisplayName
-        grpExperimental.Text = My.Resources.strExperimental.ToUpper
+        lblExperimental.Text = My.Resources.strExperimental.ToUpper
         chkUseSQLServer.Text = My.Resources.strUseSQLServer
         lblSQLInfo.Text = My.Resources.strSQLInfo
         lblSQLUsername.Text = My.Resources.strLabelUsername
@@ -1774,7 +1791,6 @@ Public Class frmOptions
         Me.lblSQLServer.Enabled = chkUseSQLServer.Checked
         Me.lblSQLUsername.Enabled = chkUseSQLServer.Checked
         Me.lblSQLPassword.Enabled = chkUseSQLServer.Checked
-        Me.lblSQLInfo.Enabled = chkUseSQLServer.Checked
         Me.txtSQLServer.Enabled = chkUseSQLServer.Checked
         Me.txtSQLUsername.Enabled = chkUseSQLServer.Checked
         Me.txtSQLPassword.Enabled = chkUseSQLServer.Checked
