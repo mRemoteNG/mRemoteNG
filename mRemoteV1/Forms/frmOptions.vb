@@ -110,13 +110,13 @@ Public Class frmOptions
 
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", 0)
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
-        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
-        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", 3)
-        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", 4)
-        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 5)
-        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 6)
+        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", 0)
+        Dim ListViewItem9 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
+        Dim ListViewItem10 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
+        Dim ListViewItem11 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", 3)
+        Dim ListViewItem12 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", 4)
+        Dim ListViewItem13 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 5)
+        Dim ListViewItem14 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
         Me.btnOK = New System.Windows.Forms.Button
         Me.btnCancel = New System.Windows.Forms.Button
@@ -196,10 +196,6 @@ Public Class frmOptions
         Me.tabAppearance = New System.Windows.Forms.TabPage
         Me.tabTabsAndPanels = New System.Windows.Forms.TabPage
         Me.tabConnections = New System.Windows.Forms.TabPage
-        Me.tabSQLServer = New System.Windows.Forms.TabPage
-        Me.lblExperimental = New System.Windows.Forms.Label
-        Me.chkUseSQLServer = New System.Windows.Forms.CheckBox
-        Me.lblSQLUsername = New System.Windows.Forms.Label
         Me.pnlDefaultCredentials = New System.Windows.Forms.Panel
         Me.radCredentialsCustom = New System.Windows.Forms.RadioButton
         Me.lblDefaultCredentials = New System.Windows.Forms.Label
@@ -211,6 +207,10 @@ Public Class frmOptions
         Me.lblCredentialsPassword = New System.Windows.Forms.Label
         Me.txtCredentialsUsername = New System.Windows.Forms.TextBox
         Me.lblCredentialsDomain = New System.Windows.Forms.Label
+        Me.tabSQLServer = New System.Windows.Forms.TabPage
+        Me.lblExperimental = New System.Windows.Forms.Label
+        Me.chkUseSQLServer = New System.Windows.Forms.CheckBox
+        Me.lblSQLUsername = New System.Windows.Forms.Label
         Me.txtSQLPassword = New System.Windows.Forms.TextBox
         Me.lblSQLInfo = New System.Windows.Forms.Label
         Me.lblSQLServer = New System.Windows.Forms.Label
@@ -235,8 +235,8 @@ Public Class frmOptions
         Me.tabAppearance.SuspendLayout()
         Me.tabTabsAndPanels.SuspendLayout()
         Me.tabConnections.SuspendLayout()
-        Me.tabSQLServer.SuspendLayout()
         Me.pnlDefaultCredentials.SuspendLayout()
+        Me.tabSQLServer.SuspendLayout()
         Me.tabUpdates.SuspendLayout()
         Me.tabAdvanced.SuspendLayout()
         Me.SuspendLayout()
@@ -268,7 +268,7 @@ Public Class frmOptions
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lvPages.FullRowSelect = True
         Me.lvPages.HideSelection = False
-        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7})
+        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem8, ListViewItem9, ListViewItem10, ListViewItem11, ListViewItem12, ListViewItem13, ListViewItem14})
         Me.lvPages.LabelWrap = False
         Me.lvPages.LargeImageList = Me.imgListPages
         Me.lvPages.Location = New System.Drawing.Point(12, 12)
@@ -1037,6 +1037,7 @@ Public Class frmOptions
         Me.tabConnections.Controls.Add(Me.pnlRdpReconnectionCount)
         Me.tabConnections.Controls.Add(Me.chkSingleClickOnConnectionOpensIt)
         Me.tabConnections.Controls.Add(Me.chkHostnameLikeDisplayName)
+        Me.tabConnections.Controls.Add(Me.pnlDefaultCredentials)
         Me.tabConnections.Controls.Add(Me.chkSingleClickOnOpenedConnectionSwitchesToIt)
         Me.tabConnections.Controls.Add(Me.pnlAutoSave)
         Me.tabConnections.Location = New System.Drawing.Point(4, 22)
@@ -1046,12 +1047,127 @@ Public Class frmOptions
         Me.tabConnections.Text = "Connections"
         Me.tabConnections.UseVisualStyleBackColor = True
         '
+        'pnlDefaultCredentials
+        '
+        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsCustom)
+        Me.pnlDefaultCredentials.Controls.Add(Me.lblDefaultCredentials)
+        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsNoInfo)
+        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsWindows)
+        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsDomain)
+        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsUsername)
+        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsPassword)
+        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsPassword)
+        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsUsername)
+        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsDomain)
+        Me.pnlDefaultCredentials.Location = New System.Drawing.Point(3, 142)
+        Me.pnlDefaultCredentials.Name = "pnlDefaultCredentials"
+        Me.pnlDefaultCredentials.Size = New System.Drawing.Size(596, 175)
+        Me.pnlDefaultCredentials.TabIndex = 72
+        '
+        'radCredentialsCustom
+        '
+        Me.radCredentialsCustom.AutoSize = True
+        Me.radCredentialsCustom.Location = New System.Drawing.Point(16, 69)
+        Me.radCredentialsCustom.Name = "radCredentialsCustom"
+        Me.radCredentialsCustom.Size = New System.Drawing.Size(87, 17)
+        Me.radCredentialsCustom.TabIndex = 73
+        Me.radCredentialsCustom.Text = "the following:"
+        Me.radCredentialsCustom.UseVisualStyleBackColor = True
+        '
+        'lblDefaultCredentials
+        '
+        Me.lblDefaultCredentials.AutoSize = True
+        Me.lblDefaultCredentials.Location = New System.Drawing.Point(3, 9)
+        Me.lblDefaultCredentials.Name = "lblDefaultCredentials"
+        Me.lblDefaultCredentials.Size = New System.Drawing.Size(257, 13)
+        Me.lblDefaultCredentials.TabIndex = 80
+        Me.lblDefaultCredentials.Text = "For empty Username, Password or Domain fields use:"
+        '
+        'radCredentialsNoInfo
+        '
+        Me.radCredentialsNoInfo.AutoSize = True
+        Me.radCredentialsNoInfo.Checked = True
+        Me.radCredentialsNoInfo.Location = New System.Drawing.Point(16, 31)
+        Me.radCredentialsNoInfo.Name = "radCredentialsNoInfo"
+        Me.radCredentialsNoInfo.Size = New System.Drawing.Size(91, 17)
+        Me.radCredentialsNoInfo.TabIndex = 71
+        Me.radCredentialsNoInfo.TabStop = True
+        Me.radCredentialsNoInfo.Text = "no information"
+        Me.radCredentialsNoInfo.UseVisualStyleBackColor = True
+        '
+        'radCredentialsWindows
+        '
+        Me.radCredentialsWindows.AutoSize = True
+        Me.radCredentialsWindows.Location = New System.Drawing.Point(16, 50)
+        Me.radCredentialsWindows.Name = "radCredentialsWindows"
+        Me.radCredentialsWindows.Size = New System.Drawing.Size(227, 17)
+        Me.radCredentialsWindows.TabIndex = 72
+        Me.radCredentialsWindows.Text = "my current credentials (windows logon info)"
+        Me.radCredentialsWindows.UseVisualStyleBackColor = True
+        '
+        'txtCredentialsDomain
+        '
+        Me.txtCredentialsDomain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCredentialsDomain.Enabled = False
+        Me.txtCredentialsDomain.Location = New System.Drawing.Point(125, 147)
+        Me.txtCredentialsDomain.Name = "txtCredentialsDomain"
+        Me.txtCredentialsDomain.Size = New System.Drawing.Size(150, 20)
+        Me.txtCredentialsDomain.TabIndex = 76
+        '
+        'lblCredentialsUsername
+        '
+        Me.lblCredentialsUsername.AutoSize = True
+        Me.lblCredentialsUsername.Enabled = False
+        Me.lblCredentialsUsername.Location = New System.Drawing.Point(34, 95)
+        Me.lblCredentialsUsername.Name = "lblCredentialsUsername"
+        Me.lblCredentialsUsername.Size = New System.Drawing.Size(58, 13)
+        Me.lblCredentialsUsername.TabIndex = 120
+        Me.lblCredentialsUsername.Text = "Username:"
+        '
+        'txtCredentialsPassword
+        '
+        Me.txtCredentialsPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCredentialsPassword.Enabled = False
+        Me.txtCredentialsPassword.Location = New System.Drawing.Point(125, 120)
+        Me.txtCredentialsPassword.Name = "txtCredentialsPassword"
+        Me.txtCredentialsPassword.Size = New System.Drawing.Size(150, 20)
+        Me.txtCredentialsPassword.TabIndex = 75
+        Me.txtCredentialsPassword.UseSystemPasswordChar = True
+        '
+        'lblCredentialsPassword
+        '
+        Me.lblCredentialsPassword.AutoSize = True
+        Me.lblCredentialsPassword.Enabled = False
+        Me.lblCredentialsPassword.Location = New System.Drawing.Point(34, 123)
+        Me.lblCredentialsPassword.Name = "lblCredentialsPassword"
+        Me.lblCredentialsPassword.Size = New System.Drawing.Size(56, 13)
+        Me.lblCredentialsPassword.TabIndex = 140
+        Me.lblCredentialsPassword.Text = "Password:"
+        '
+        'txtCredentialsUsername
+        '
+        Me.txtCredentialsUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCredentialsUsername.Enabled = False
+        Me.txtCredentialsUsername.Location = New System.Drawing.Point(125, 93)
+        Me.txtCredentialsUsername.Name = "txtCredentialsUsername"
+        Me.txtCredentialsUsername.Size = New System.Drawing.Size(150, 20)
+        Me.txtCredentialsUsername.TabIndex = 74
+        '
+        'lblCredentialsDomain
+        '
+        Me.lblCredentialsDomain.AutoSize = True
+        Me.lblCredentialsDomain.Enabled = False
+        Me.lblCredentialsDomain.Location = New System.Drawing.Point(34, 150)
+        Me.lblCredentialsDomain.Name = "lblCredentialsDomain"
+        Me.lblCredentialsDomain.Size = New System.Drawing.Size(46, 13)
+        Me.lblCredentialsDomain.TabIndex = 160
+        Me.lblCredentialsDomain.Text = "Domain:"
+        '
         'tabSQLServer
         '
         Me.tabSQLServer.Controls.Add(Me.lblExperimental)
         Me.tabSQLServer.Controls.Add(Me.chkUseSQLServer)
         Me.tabSQLServer.Controls.Add(Me.lblSQLUsername)
-        Me.tabSQLServer.Controls.Add(Me.pnlDefaultCredentials)
         Me.tabSQLServer.Controls.Add(Me.txtSQLPassword)
         Me.tabSQLServer.Controls.Add(Me.lblSQLInfo)
         Me.tabSQLServer.Controls.Add(Me.lblSQLServer)
@@ -1098,123 +1214,6 @@ Public Class frmOptions
         Me.lblSQLUsername.Size = New System.Drawing.Size(58, 13)
         Me.lblSQLUsername.TabIndex = 80
         Me.lblSQLUsername.Text = "Username:"
-        '
-        'pnlDefaultCredentials
-        '
-        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsCustom)
-        Me.pnlDefaultCredentials.Controls.Add(Me.lblDefaultCredentials)
-        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsNoInfo)
-        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsWindows)
-        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsDomain)
-        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsUsername)
-        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsPassword)
-        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsPassword)
-        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsUsername)
-        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsDomain)
-        Me.pnlDefaultCredentials.Location = New System.Drawing.Point(3, 203)
-        Me.pnlDefaultCredentials.Name = "pnlDefaultCredentials"
-        Me.pnlDefaultCredentials.Size = New System.Drawing.Size(596, 175)
-        Me.pnlDefaultCredentials.TabIndex = 72
-        '
-        'radCredentialsCustom
-        '
-        Me.radCredentialsCustom.AutoSize = True
-        Me.radCredentialsCustom.Location = New System.Drawing.Point(21, 69)
-        Me.radCredentialsCustom.Name = "radCredentialsCustom"
-        Me.radCredentialsCustom.Size = New System.Drawing.Size(87, 17)
-        Me.radCredentialsCustom.TabIndex = 73
-        Me.radCredentialsCustom.TabStop = True
-        Me.radCredentialsCustom.Text = "the following:"
-        Me.radCredentialsCustom.UseVisualStyleBackColor = True
-        '
-        'lblDefaultCredentials
-        '
-        Me.lblDefaultCredentials.AutoSize = True
-        Me.lblDefaultCredentials.Location = New System.Drawing.Point(8, 9)
-        Me.lblDefaultCredentials.Name = "lblDefaultCredentials"
-        Me.lblDefaultCredentials.Size = New System.Drawing.Size(257, 13)
-        Me.lblDefaultCredentials.TabIndex = 80
-        Me.lblDefaultCredentials.Text = "For empty Username, Password or Domain fields use:"
-        '
-        'radCredentialsNoInfo
-        '
-        Me.radCredentialsNoInfo.AutoSize = True
-        Me.radCredentialsNoInfo.Location = New System.Drawing.Point(21, 31)
-        Me.radCredentialsNoInfo.Name = "radCredentialsNoInfo"
-        Me.radCredentialsNoInfo.Size = New System.Drawing.Size(91, 17)
-        Me.radCredentialsNoInfo.TabIndex = 71
-        Me.radCredentialsNoInfo.TabStop = True
-        Me.radCredentialsNoInfo.Text = "no information"
-        Me.radCredentialsNoInfo.UseVisualStyleBackColor = True
-        '
-        'radCredentialsWindows
-        '
-        Me.radCredentialsWindows.AutoSize = True
-        Me.radCredentialsWindows.Location = New System.Drawing.Point(21, 50)
-        Me.radCredentialsWindows.Name = "radCredentialsWindows"
-        Me.radCredentialsWindows.Size = New System.Drawing.Size(227, 17)
-        Me.radCredentialsWindows.TabIndex = 72
-        Me.radCredentialsWindows.TabStop = True
-        Me.radCredentialsWindows.Text = "my current credentials (windows logon info)"
-        Me.radCredentialsWindows.UseVisualStyleBackColor = True
-        '
-        'txtCredentialsDomain
-        '
-        Me.txtCredentialsDomain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCredentialsDomain.Enabled = False
-        Me.txtCredentialsDomain.Location = New System.Drawing.Point(130, 147)
-        Me.txtCredentialsDomain.Name = "txtCredentialsDomain"
-        Me.txtCredentialsDomain.Size = New System.Drawing.Size(150, 20)
-        Me.txtCredentialsDomain.TabIndex = 76
-        '
-        'lblCredentialsUsername
-        '
-        Me.lblCredentialsUsername.AutoSize = True
-        Me.lblCredentialsUsername.Enabled = False
-        Me.lblCredentialsUsername.Location = New System.Drawing.Point(39, 95)
-        Me.lblCredentialsUsername.Name = "lblCredentialsUsername"
-        Me.lblCredentialsUsername.Size = New System.Drawing.Size(58, 13)
-        Me.lblCredentialsUsername.TabIndex = 120
-        Me.lblCredentialsUsername.Text = "Username:"
-        '
-        'txtCredentialsPassword
-        '
-        Me.txtCredentialsPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCredentialsPassword.Enabled = False
-        Me.txtCredentialsPassword.Location = New System.Drawing.Point(130, 120)
-        Me.txtCredentialsPassword.Name = "txtCredentialsPassword"
-        Me.txtCredentialsPassword.Size = New System.Drawing.Size(150, 20)
-        Me.txtCredentialsPassword.TabIndex = 75
-        Me.txtCredentialsPassword.UseSystemPasswordChar = True
-        '
-        'lblCredentialsPassword
-        '
-        Me.lblCredentialsPassword.AutoSize = True
-        Me.lblCredentialsPassword.Enabled = False
-        Me.lblCredentialsPassword.Location = New System.Drawing.Point(39, 123)
-        Me.lblCredentialsPassword.Name = "lblCredentialsPassword"
-        Me.lblCredentialsPassword.Size = New System.Drawing.Size(56, 13)
-        Me.lblCredentialsPassword.TabIndex = 140
-        Me.lblCredentialsPassword.Text = "Password:"
-        '
-        'txtCredentialsUsername
-        '
-        Me.txtCredentialsUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCredentialsUsername.Enabled = False
-        Me.txtCredentialsUsername.Location = New System.Drawing.Point(130, 93)
-        Me.txtCredentialsUsername.Name = "txtCredentialsUsername"
-        Me.txtCredentialsUsername.Size = New System.Drawing.Size(150, 20)
-        Me.txtCredentialsUsername.TabIndex = 74
-        '
-        'lblCredentialsDomain
-        '
-        Me.lblCredentialsDomain.AutoSize = True
-        Me.lblCredentialsDomain.Enabled = False
-        Me.lblCredentialsDomain.Location = New System.Drawing.Point(39, 150)
-        Me.lblCredentialsDomain.Name = "lblCredentialsDomain"
-        Me.lblCredentialsDomain.Size = New System.Drawing.Size(46, 13)
-        Me.lblCredentialsDomain.TabIndex = 160
-        Me.lblCredentialsDomain.Text = "Domain:"
         '
         'txtSQLPassword
         '
@@ -1359,10 +1358,10 @@ Public Class frmOptions
         Me.tabTabsAndPanels.PerformLayout()
         Me.tabConnections.ResumeLayout(False)
         Me.tabConnections.PerformLayout()
-        Me.tabSQLServer.ResumeLayout(False)
-        Me.tabSQLServer.PerformLayout()
         Me.pnlDefaultCredentials.ResumeLayout(False)
         Me.pnlDefaultCredentials.PerformLayout()
+        Me.tabSQLServer.ResumeLayout(False)
+        Me.tabSQLServer.PerformLayout()
         Me.tabUpdates.ResumeLayout(False)
         Me.tabAdvanced.ResumeLayout(False)
         Me.tabAdvanced.PerformLayout()
