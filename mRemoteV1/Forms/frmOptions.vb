@@ -289,7 +289,7 @@ Public Class frmOptions
         Me.imgListPages.Images.SetKeyName(1, "Appearance_Icon.ico")
         Me.imgListPages.Images.SetKeyName(2, "Tab_Icon.ico")
         Me.imgListPages.Images.SetKeyName(3, "Root_Icon.ico")
-        Me.imgListPages.Images.SetKeyName(4, "VSProject_database.bmp")
+        Me.imgListPages.Images.SetKeyName(4, "database.bmp")
         Me.imgListPages.Images.SetKeyName(5, "Update_Icon.ico")
         Me.imgListPages.Images.SetKeyName(6, "Config_Icon.ico")
         '

@@ -814,6 +814,7 @@
     <Content Include="Icons\Workstation.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Images\database.bmp" />
     <None Include="Resources\Images\Copy.png" />
     <None Include="Resources\Icons\mRemote_Icon.ico" />
     <None Include="Resources\Icons\Sessions_Icon.ico" />
