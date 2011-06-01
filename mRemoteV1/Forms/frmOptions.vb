@@ -7,209 +7,136 @@ Public Class frmOptions
 #Region "Form Init"
     Friend WithEvents btnCancel As System.Windows.Forms.Button
     Friend WithEvents btnOK As System.Windows.Forms.Button
-    Friend WithEvents tabConnections As Crownwood.Magic.Controls.TabPage
-    Friend WithEvents tabTabs As Crownwood.Magic.Controls.TabPage
-    Friend WithEvents tabUpdates As Crownwood.Magic.Controls.TabPage
-    Friend WithEvents tabAdvanced As Crownwood.Magic.Controls.TabPage
-    Friend WithEvents tabAppearance As Crownwood.Magic.Controls.TabPage
-    Friend WithEvents tabStartupExit As Crownwood.Magic.Controls.TabPage
-    Friend WithEvents chkConfirmExit As System.Windows.Forms.CheckBox
-    Friend WithEvents chkSaveConsOnExit As System.Windows.Forms.CheckBox
-    Friend WithEvents chkShowSystemTrayIcon As System.Windows.Forms.CheckBox
-    Friend WithEvents chkShowDescriptionTooltipsInTree As System.Windows.Forms.CheckBox
-    Friend WithEvents chkShowLogonInfoOnTabs As System.Windows.Forms.CheckBox
-    Friend WithEvents chkOpenNewTabRightOfSelected As System.Windows.Forms.CheckBox
-    Friend WithEvents chkSingleClickOnConnectionOpensIt As System.Windows.Forms.CheckBox
-    Friend WithEvents radCredentialsCustom As System.Windows.Forms.RadioButton
-    Friend WithEvents radCredentialsWindows As System.Windows.Forms.RadioButton
-    Friend WithEvents radCredentialsNoInfo As System.Windows.Forms.RadioButton
-    Friend WithEvents lblDefaultCredentials As System.Windows.Forms.Label
-    Friend WithEvents txtCredentialsDomain As System.Windows.Forms.TextBox
-    Friend WithEvents txtCredentialsPassword As System.Windows.Forms.TextBox
-    Friend WithEvents txtCredentialsUsername As System.Windows.Forms.TextBox
-    Friend WithEvents lblCredentialsDomain As System.Windows.Forms.Label
-    Friend WithEvents lblCredentialsPassword As System.Windows.Forms.Label
-    Friend WithEvents lblCredentialsUsername As System.Windows.Forms.Label
+    Friend WithEvents lvPages As System.Windows.Forms.ListView
+    Friend WithEvents imgListPages As System.Windows.Forms.ImageList
     Friend WithEvents chkWriteLogFile As System.Windows.Forms.CheckBox
-    Friend WithEvents chkUseCustomPuttyPath As System.Windows.Forms.CheckBox
     Friend WithEvents chkAutomaticallyGetSessionInfo As System.Windows.Forms.CheckBox
-    Friend WithEvents btnBrowseCustomPuttyPath As System.Windows.Forms.Button
+    Friend WithEvents lblXulRunnerPath As System.Windows.Forms.Label
+    Friend WithEvents chkEncryptCompleteFile As System.Windows.Forms.CheckBox
+    Friend WithEvents btnBrowseXulRunnerPath As System.Windows.Forms.Button
+    Friend WithEvents chkUseCustomPuttyPath As System.Windows.Forms.CheckBox
+    Friend WithEvents txtXULrunnerPath As System.Windows.Forms.TextBox
     Friend WithEvents txtCustomPuttyPath As System.Windows.Forms.TextBox
+    Friend WithEvents lblUVNCSCPort As System.Windows.Forms.Label
+    Friend WithEvents btnBrowseCustomPuttyPath As System.Windows.Forms.Button
+    Friend WithEvents lblSeconds As System.Windows.Forms.Label
     Friend WithEvents btnLaunchPutty As System.Windows.Forms.Button
+    Friend WithEvents numUVNCSCPort As System.Windows.Forms.NumericUpDown
     Friend WithEvents lblConfigurePuttySessions As System.Windows.Forms.Label
-    Friend WithEvents chkShowFullConnectionsFilePathInTitle As System.Windows.Forms.CheckBox
-    Friend WithEvents chkShowProtocolOnTabs As System.Windows.Forms.CheckBox
-    Friend WithEvents chkUseProxyForAutomaticUpdates As System.Windows.Forms.CheckBox
+    Friend WithEvents numPuttyWaitTime As System.Windows.Forms.NumericUpDown
+    Friend WithEvents chkAutomaticReconnect As System.Windows.Forms.CheckBox
+    Friend WithEvents lblMaximumPuttyWaitTime As System.Windows.Forms.Label
+    Friend WithEvents lblUpdatesExplanation As System.Windows.Forms.Label
+    Friend WithEvents pnlUpdateCheck As System.Windows.Forms.Panel
+    Friend WithEvents btnUpdateCheckNow As System.Windows.Forms.Button
+    Friend WithEvents chkCheckForUpdatesOnStartup As System.Windows.Forms.CheckBox
+    Friend WithEvents cboUpdateCheckFrequency As System.Windows.Forms.ComboBox
+    Friend WithEvents pnlProxy As System.Windows.Forms.Panel
+    Friend WithEvents pnlProxyBasic As System.Windows.Forms.Panel
+    Friend WithEvents lblProxyAddress As System.Windows.Forms.Label
     Friend WithEvents txtProxyAddress As System.Windows.Forms.TextBox
     Friend WithEvents lblProxyPort As System.Windows.Forms.Label
-    Friend WithEvents lblProxyAddress As System.Windows.Forms.Label
+    Friend WithEvents numProxyPort As System.Windows.Forms.NumericUpDown
+    Friend WithEvents chkUseProxyForAutomaticUpdates As System.Windows.Forms.CheckBox
+    Friend WithEvents chkUseProxyAuthentication As System.Windows.Forms.CheckBox
+    Friend WithEvents pnlProxyAuthentication As System.Windows.Forms.Panel
     Friend WithEvents lblProxyUsername As System.Windows.Forms.Label
     Friend WithEvents txtProxyUsername As System.Windows.Forms.TextBox
-    Friend WithEvents chkUseProxyAuthentication As System.Windows.Forms.CheckBox
     Friend WithEvents lblProxyPassword As System.Windows.Forms.Label
     Friend WithEvents txtProxyPassword As System.Windows.Forms.TextBox
-    Friend WithEvents pnlProxyAuthentication As System.Windows.Forms.Panel
-    Friend WithEvents pnlProxyBasic As System.Windows.Forms.Panel
-    Friend WithEvents numProxyPort As System.Windows.Forms.NumericUpDown
-    Friend WithEvents lblSeconds As System.Windows.Forms.Label
-    Friend WithEvents numPuttyWaitTime As System.Windows.Forms.NumericUpDown
-    Friend WithEvents lblMaximumPuttyWaitTime As System.Windows.Forms.Label
-    Friend WithEvents chkReconnectOnStart As System.Windows.Forms.CheckBox
+    Friend WithEvents btnTestProxy As System.Windows.Forms.Button
+    Friend WithEvents pnlRdpReconnectionCount As System.Windows.Forms.Panel
+    Friend WithEvents lblRdpReconnectionCount As System.Windows.Forms.Label
+    Friend WithEvents numRdpReconnectionCount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents chkSingleClickOnConnectionOpensIt As System.Windows.Forms.CheckBox
+    Friend WithEvents pnlDefaultCredentials As System.Windows.Forms.Panel
+    Friend WithEvents radCredentialsCustom As System.Windows.Forms.RadioButton
+    Friend WithEvents lblDefaultCredentials As System.Windows.Forms.Label
+    Friend WithEvents radCredentialsNoInfo As System.Windows.Forms.RadioButton
+    Friend WithEvents radCredentialsWindows As System.Windows.Forms.RadioButton
+    Friend WithEvents txtCredentialsDomain As System.Windows.Forms.TextBox
+    Friend WithEvents lblCredentialsUsername As System.Windows.Forms.Label
+    Friend WithEvents txtCredentialsPassword As System.Windows.Forms.TextBox
+    Friend WithEvents lblCredentialsPassword As System.Windows.Forms.Label
+    Friend WithEvents txtCredentialsUsername As System.Windows.Forms.TextBox
+    Friend WithEvents lblCredentialsDomain As System.Windows.Forms.Label
+    Friend WithEvents chkSingleClickOnOpenedConnectionSwitchesToIt As System.Windows.Forms.CheckBox
+    Friend WithEvents pnlAutoSave As System.Windows.Forms.Panel
+    Friend WithEvents lblAutoSave1 As System.Windows.Forms.Label
     Friend WithEvents numAutoSave As System.Windows.Forms.NumericUpDown
     Friend WithEvents lblAutoSave2 As System.Windows.Forms.Label
-    Friend WithEvents lblAutoSave1 As System.Windows.Forms.Label
+    Friend WithEvents grpExperimental As System.Windows.Forms.GroupBox
     Friend WithEvents chkUseSQLServer As System.Windows.Forms.CheckBox
     Friend WithEvents lblSQLInfo As System.Windows.Forms.Label
-    Friend WithEvents txtSQLPassword As System.Windows.Forms.TextBox
-    Friend WithEvents txtSQLUsername As System.Windows.Forms.TextBox
-    Friend WithEvents txtSQLServer As System.Windows.Forms.TextBox
-    Friend WithEvents lblSQLPassword As System.Windows.Forms.Label
-    Friend WithEvents lblSQLServer As System.Windows.Forms.Label
     Friend WithEvents lblSQLUsername As System.Windows.Forms.Label
-    Friend WithEvents grpExperimental As System.Windows.Forms.GroupBox
-    Friend WithEvents chkSingleInstance As System.Windows.Forms.CheckBox
+    Friend WithEvents txtSQLPassword As System.Windows.Forms.TextBox
+    Friend WithEvents lblSQLServer As System.Windows.Forms.Label
+    Friend WithEvents txtSQLUsername As System.Windows.Forms.TextBox
+    Friend WithEvents lblSQLPassword As System.Windows.Forms.Label
+    Friend WithEvents txtSQLServer As System.Windows.Forms.TextBox
     Friend WithEvents chkHostnameLikeDisplayName As System.Windows.Forms.CheckBox
-    Friend WithEvents chkDoubleClickClosesTab As System.Windows.Forms.CheckBox
-    Friend WithEvents chkAutomaticReconnect As System.Windows.Forms.CheckBox
-    Friend WithEvents chkAlwaysShowPanelSelectionDlg As System.Windows.Forms.CheckBox
-    Friend WithEvents chkMinimizeToSystemTray As System.Windows.Forms.CheckBox
-    Friend WithEvents chkSingleClickOnOpenedConnectionSwitchesToIt As System.Windows.Forms.CheckBox
-    Friend WithEvents btnTestProxy As System.Windows.Forms.Button
-    Friend WithEvents lblUVNCSCPort As System.Windows.Forms.Label
-    Friend WithEvents numUVNCSCPort As System.Windows.Forms.NumericUpDown
-    Friend WithEvents chkProperInstallationOfComponentsAtStartup As System.Windows.Forms.CheckBox
-    Friend WithEvents lblXulRunnerPath As System.Windows.Forms.Label
-    Friend WithEvents btnBrowseXulRunnerPath As System.Windows.Forms.Button
-    Friend WithEvents txtXULrunnerPath As System.Windows.Forms.TextBox
-    Friend WithEvents pnlAutoSave As System.Windows.Forms.Panel
-    Friend WithEvents pnlDefaultCredentials As System.Windows.Forms.Panel
-    Friend WithEvents pnlProxy As System.Windows.Forms.Panel
-    Friend WithEvents chkEncryptCompleteFile As System.Windows.Forms.CheckBox
-    Friend WithEvents pnlStartup As System.Windows.Forms.Panel
-    Friend WithEvents pnlAppearance As System.Windows.Forms.Panel
-    Friend WithEvents pnlTabsAndPanels As System.Windows.Forms.Panel
-    Friend WithEvents pnlConnections As System.Windows.Forms.Panel
-    Friend WithEvents pnlUpdates As System.Windows.Forms.Panel
-    Friend WithEvents pnlAdvanced As System.Windows.Forms.Panel
     Friend WithEvents chkUseOnlyErrorsAndInfosPanel As System.Windows.Forms.CheckBox
     Friend WithEvents lblSwitchToErrorsAndInfos As System.Windows.Forms.Label
     Friend WithEvents chkMCInformation As System.Windows.Forms.CheckBox
     Friend WithEvents chkMCErrors As System.Windows.Forms.CheckBox
     Friend WithEvents chkMCWarnings As System.Windows.Forms.CheckBox
-    Friend WithEvents chkCheckForUpdatesOnStartup As System.Windows.Forms.CheckBox
-    Friend WithEvents cboUpdateCheckFrequency As System.Windows.Forms.ComboBox
-    Friend WithEvents lblUpdatesExplanation As System.Windows.Forms.Label
-    Friend WithEvents pnlUpdateCheck As System.Windows.Forms.Panel
-    Friend WithEvents btnUpdateCheckNow As System.Windows.Forms.Button
-    Friend WithEvents pnlRdpReconnectionCount As System.Windows.Forms.Panel
-    Friend WithEvents lblRdpReconnectionCount As System.Windows.Forms.Label
-    Friend WithEvents numRdpReconnectionCount As System.Windows.Forms.NumericUpDown
+    Friend WithEvents chkOpenNewTabRightOfSelected As System.Windows.Forms.CheckBox
+    Friend WithEvents chkShowProtocolOnTabs As System.Windows.Forms.CheckBox
+    Friend WithEvents chkDoubleClickClosesTab As System.Windows.Forms.CheckBox
+    Friend WithEvents chkShowLogonInfoOnTabs As System.Windows.Forms.CheckBox
+    Friend WithEvents chkAlwaysShowPanelSelectionDlg As System.Windows.Forms.CheckBox
     Friend WithEvents lblLanguageRestartRequired As System.Windows.Forms.Label
     Friend WithEvents cboLanguage As System.Windows.Forms.ComboBox
     Friend WithEvents lblLanguage As System.Windows.Forms.Label
+    Friend WithEvents chkShowDescriptionTooltipsInTree As System.Windows.Forms.CheckBox
+    Friend WithEvents chkMinimizeToSystemTray As System.Windows.Forms.CheckBox
+    Friend WithEvents chkShowSystemTrayIcon As System.Windows.Forms.CheckBox
+    Friend WithEvents chkShowFullConnectionsFilePathInTitle As System.Windows.Forms.CheckBox
     Friend WithEvents chkConfirmCloseConnection As System.Windows.Forms.CheckBox
-    Friend WithEvents lvPages As System.Windows.Forms.ListView
-    Friend WithEvents imgListPages As System.Windows.Forms.ImageList
+    Friend WithEvents chkSaveConsOnExit As System.Windows.Forms.CheckBox
+    Friend WithEvents chkProperInstallationOfComponentsAtStartup As System.Windows.Forms.CheckBox
+    Friend WithEvents chkConfirmExit As System.Windows.Forms.CheckBox
+    Friend WithEvents chkSingleInstance As System.Windows.Forms.CheckBox
+    Friend WithEvents chkReconnectOnStart As System.Windows.Forms.CheckBox
+    Friend WithEvents tcTabControl As System.Windows.Forms.TabControl
+    Friend WithEvents tabStartupExit As System.Windows.Forms.TabPage
+    Friend WithEvents tabAppearance As System.Windows.Forms.TabPage
+    Friend WithEvents tabTabsAndPanels As System.Windows.Forms.TabPage
+    Friend WithEvents tabConnections As System.Windows.Forms.TabPage
+    Friend WithEvents tabUpdates As System.Windows.Forms.TabPage
+    Friend WithEvents tabAdvanced As System.Windows.Forms.TabPage
     Private components As System.ComponentModel.IContainer
-    Friend WithEvents TabController As Crownwood.Magic.Controls.TabControl
 
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", 0)
-        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
-        Dim ListViewItem9 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
-        Dim ListViewItem10 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", 3)
-        Dim ListViewItem11 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 4)
-        Dim ListViewItem12 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 5)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", 0)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
+        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", 3)
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 4)
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 5)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
-        Me.TabController = New Crownwood.Magic.Controls.TabControl
-        Me.tabAdvanced = New Crownwood.Magic.Controls.TabPage
-        Me.pnlAdvanced = New System.Windows.Forms.Panel
-        Me.chkWriteLogFile = New System.Windows.Forms.CheckBox
-        Me.chkAutomaticallyGetSessionInfo = New System.Windows.Forms.CheckBox
-        Me.lblXulRunnerPath = New System.Windows.Forms.Label
-        Me.chkEncryptCompleteFile = New System.Windows.Forms.CheckBox
-        Me.btnBrowseXulRunnerPath = New System.Windows.Forms.Button
-        Me.chkUseCustomPuttyPath = New System.Windows.Forms.CheckBox
-        Me.txtXULrunnerPath = New System.Windows.Forms.TextBox
-        Me.txtCustomPuttyPath = New System.Windows.Forms.TextBox
-        Me.lblUVNCSCPort = New System.Windows.Forms.Label
-        Me.btnBrowseCustomPuttyPath = New System.Windows.Forms.Button
-        Me.lblSeconds = New System.Windows.Forms.Label
-        Me.btnLaunchPutty = New System.Windows.Forms.Button
-        Me.numUVNCSCPort = New System.Windows.Forms.NumericUpDown
-        Me.lblConfigurePuttySessions = New System.Windows.Forms.Label
-        Me.numPuttyWaitTime = New System.Windows.Forms.NumericUpDown
-        Me.chkAutomaticReconnect = New System.Windows.Forms.CheckBox
+        Me.btnOK = New System.Windows.Forms.Button
+        Me.btnCancel = New System.Windows.Forms.Button
+        Me.lvPages = New System.Windows.Forms.ListView
+        Me.imgListPages = New System.Windows.Forms.ImageList(Me.components)
         Me.lblMaximumPuttyWaitTime = New System.Windows.Forms.Label
-        Me.tabStartupExit = New Crownwood.Magic.Controls.TabPage
-        Me.pnlStartup = New System.Windows.Forms.Panel
-        Me.chkConfirmCloseConnection = New System.Windows.Forms.CheckBox
-        Me.chkSaveConsOnExit = New System.Windows.Forms.CheckBox
-        Me.chkProperInstallationOfComponentsAtStartup = New System.Windows.Forms.CheckBox
-        Me.chkConfirmExit = New System.Windows.Forms.CheckBox
-        Me.chkSingleInstance = New System.Windows.Forms.CheckBox
-        Me.chkReconnectOnStart = New System.Windows.Forms.CheckBox
-        Me.tabAppearance = New Crownwood.Magic.Controls.TabPage
-        Me.pnlAppearance = New System.Windows.Forms.Panel
-        Me.lblLanguageRestartRequired = New System.Windows.Forms.Label
-        Me.cboLanguage = New System.Windows.Forms.ComboBox
-        Me.lblLanguage = New System.Windows.Forms.Label
-        Me.chkShowDescriptionTooltipsInTree = New System.Windows.Forms.CheckBox
-        Me.chkMinimizeToSystemTray = New System.Windows.Forms.CheckBox
-        Me.chkShowSystemTrayIcon = New System.Windows.Forms.CheckBox
-        Me.chkShowFullConnectionsFilePathInTitle = New System.Windows.Forms.CheckBox
-        Me.tabTabs = New Crownwood.Magic.Controls.TabPage
-        Me.pnlTabsAndPanels = New System.Windows.Forms.Panel
-        Me.chkUseOnlyErrorsAndInfosPanel = New System.Windows.Forms.CheckBox
-        Me.lblSwitchToErrorsAndInfos = New System.Windows.Forms.Label
-        Me.chkMCInformation = New System.Windows.Forms.CheckBox
-        Me.chkMCErrors = New System.Windows.Forms.CheckBox
-        Me.chkMCWarnings = New System.Windows.Forms.CheckBox
-        Me.chkOpenNewTabRightOfSelected = New System.Windows.Forms.CheckBox
-        Me.chkShowProtocolOnTabs = New System.Windows.Forms.CheckBox
-        Me.chkDoubleClickClosesTab = New System.Windows.Forms.CheckBox
-        Me.chkShowLogonInfoOnTabs = New System.Windows.Forms.CheckBox
-        Me.chkAlwaysShowPanelSelectionDlg = New System.Windows.Forms.CheckBox
-        Me.tabConnections = New Crownwood.Magic.Controls.TabPage
-        Me.pnlConnections = New System.Windows.Forms.Panel
-        Me.pnlRdpReconnectionCount = New System.Windows.Forms.Panel
-        Me.lblRdpReconnectionCount = New System.Windows.Forms.Label
-        Me.numRdpReconnectionCount = New System.Windows.Forms.NumericUpDown
-        Me.chkSingleClickOnConnectionOpensIt = New System.Windows.Forms.CheckBox
-        Me.pnlDefaultCredentials = New System.Windows.Forms.Panel
-        Me.radCredentialsCustom = New System.Windows.Forms.RadioButton
-        Me.lblDefaultCredentials = New System.Windows.Forms.Label
-        Me.radCredentialsNoInfo = New System.Windows.Forms.RadioButton
-        Me.radCredentialsWindows = New System.Windows.Forms.RadioButton
-        Me.txtCredentialsDomain = New System.Windows.Forms.TextBox
-        Me.lblCredentialsUsername = New System.Windows.Forms.Label
-        Me.txtCredentialsPassword = New System.Windows.Forms.TextBox
-        Me.lblCredentialsPassword = New System.Windows.Forms.Label
-        Me.txtCredentialsUsername = New System.Windows.Forms.TextBox
-        Me.lblCredentialsDomain = New System.Windows.Forms.Label
-        Me.chkSingleClickOnOpenedConnectionSwitchesToIt = New System.Windows.Forms.CheckBox
-        Me.pnlAutoSave = New System.Windows.Forms.Panel
-        Me.lblAutoSave1 = New System.Windows.Forms.Label
-        Me.numAutoSave = New System.Windows.Forms.NumericUpDown
-        Me.lblAutoSave2 = New System.Windows.Forms.Label
-        Me.grpExperimental = New System.Windows.Forms.GroupBox
-        Me.chkUseSQLServer = New System.Windows.Forms.CheckBox
-        Me.lblSQLInfo = New System.Windows.Forms.Label
-        Me.lblSQLUsername = New System.Windows.Forms.Label
-        Me.txtSQLPassword = New System.Windows.Forms.TextBox
-        Me.lblSQLServer = New System.Windows.Forms.Label
-        Me.txtSQLUsername = New System.Windows.Forms.TextBox
-        Me.lblSQLPassword = New System.Windows.Forms.Label
-        Me.txtSQLServer = New System.Windows.Forms.TextBox
-        Me.chkHostnameLikeDisplayName = New System.Windows.Forms.CheckBox
-        Me.tabUpdates = New Crownwood.Magic.Controls.TabPage
-        Me.pnlUpdates = New System.Windows.Forms.Panel
-        Me.lblUpdatesExplanation = New System.Windows.Forms.Label
-        Me.pnlUpdateCheck = New System.Windows.Forms.Panel
-        Me.btnUpdateCheckNow = New System.Windows.Forms.Button
-        Me.chkCheckForUpdatesOnStartup = New System.Windows.Forms.CheckBox
-        Me.cboUpdateCheckFrequency = New System.Windows.Forms.ComboBox
+        Me.chkAutomaticReconnect = New System.Windows.Forms.CheckBox
+        Me.numPuttyWaitTime = New System.Windows.Forms.NumericUpDown
+        Me.lblConfigurePuttySessions = New System.Windows.Forms.Label
+        Me.numUVNCSCPort = New System.Windows.Forms.NumericUpDown
+        Me.btnLaunchPutty = New System.Windows.Forms.Button
+        Me.lblSeconds = New System.Windows.Forms.Label
+        Me.btnBrowseCustomPuttyPath = New System.Windows.Forms.Button
+        Me.lblUVNCSCPort = New System.Windows.Forms.Label
+        Me.txtCustomPuttyPath = New System.Windows.Forms.TextBox
+        Me.txtXULrunnerPath = New System.Windows.Forms.TextBox
+        Me.chkUseCustomPuttyPath = New System.Windows.Forms.CheckBox
+        Me.btnBrowseXulRunnerPath = New System.Windows.Forms.Button
+        Me.chkEncryptCompleteFile = New System.Windows.Forms.CheckBox
+        Me.lblXulRunnerPath = New System.Windows.Forms.Label
+        Me.chkAutomaticallyGetSessionInfo = New System.Windows.Forms.CheckBox
+        Me.chkWriteLogFile = New System.Windows.Forms.CheckBox
         Me.pnlProxy = New System.Windows.Forms.Panel
         Me.pnlProxyBasic = New System.Windows.Forms.Panel
         Me.lblProxyAddress = New System.Windows.Forms.Label
@@ -224,200 +151,197 @@ Public Class frmOptions
         Me.lblProxyPassword = New System.Windows.Forms.Label
         Me.txtProxyPassword = New System.Windows.Forms.TextBox
         Me.btnTestProxy = New System.Windows.Forms.Button
-        Me.btnOK = New System.Windows.Forms.Button
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.lvPages = New System.Windows.Forms.ListView
-        Me.imgListPages = New System.Windows.Forms.ImageList(Me.components)
-        Me.TabController.SuspendLayout()
-        Me.tabAdvanced.SuspendLayout()
-        Me.pnlAdvanced.SuspendLayout()
-        CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlUpdateCheck = New System.Windows.Forms.Panel
+        Me.btnUpdateCheckNow = New System.Windows.Forms.Button
+        Me.chkCheckForUpdatesOnStartup = New System.Windows.Forms.CheckBox
+        Me.cboUpdateCheckFrequency = New System.Windows.Forms.ComboBox
+        Me.lblUpdatesExplanation = New System.Windows.Forms.Label
+        Me.chkHostnameLikeDisplayName = New System.Windows.Forms.CheckBox
+        Me.grpExperimental = New System.Windows.Forms.GroupBox
+        Me.chkUseSQLServer = New System.Windows.Forms.CheckBox
+        Me.lblSQLInfo = New System.Windows.Forms.Label
+        Me.lblSQLUsername = New System.Windows.Forms.Label
+        Me.txtSQLPassword = New System.Windows.Forms.TextBox
+        Me.lblSQLServer = New System.Windows.Forms.Label
+        Me.txtSQLUsername = New System.Windows.Forms.TextBox
+        Me.lblSQLPassword = New System.Windows.Forms.Label
+        Me.txtSQLServer = New System.Windows.Forms.TextBox
+        Me.pnlAutoSave = New System.Windows.Forms.Panel
+        Me.lblAutoSave1 = New System.Windows.Forms.Label
+        Me.numAutoSave = New System.Windows.Forms.NumericUpDown
+        Me.lblAutoSave2 = New System.Windows.Forms.Label
+        Me.chkSingleClickOnOpenedConnectionSwitchesToIt = New System.Windows.Forms.CheckBox
+        Me.pnlDefaultCredentials = New System.Windows.Forms.Panel
+        Me.radCredentialsCustom = New System.Windows.Forms.RadioButton
+        Me.lblDefaultCredentials = New System.Windows.Forms.Label
+        Me.radCredentialsNoInfo = New System.Windows.Forms.RadioButton
+        Me.radCredentialsWindows = New System.Windows.Forms.RadioButton
+        Me.txtCredentialsDomain = New System.Windows.Forms.TextBox
+        Me.lblCredentialsUsername = New System.Windows.Forms.Label
+        Me.txtCredentialsPassword = New System.Windows.Forms.TextBox
+        Me.lblCredentialsPassword = New System.Windows.Forms.Label
+        Me.txtCredentialsUsername = New System.Windows.Forms.TextBox
+        Me.lblCredentialsDomain = New System.Windows.Forms.Label
+        Me.chkSingleClickOnConnectionOpensIt = New System.Windows.Forms.CheckBox
+        Me.pnlRdpReconnectionCount = New System.Windows.Forms.Panel
+        Me.lblRdpReconnectionCount = New System.Windows.Forms.Label
+        Me.numRdpReconnectionCount = New System.Windows.Forms.NumericUpDown
+        Me.chkAlwaysShowPanelSelectionDlg = New System.Windows.Forms.CheckBox
+        Me.chkShowLogonInfoOnTabs = New System.Windows.Forms.CheckBox
+        Me.chkDoubleClickClosesTab = New System.Windows.Forms.CheckBox
+        Me.chkShowProtocolOnTabs = New System.Windows.Forms.CheckBox
+        Me.chkOpenNewTabRightOfSelected = New System.Windows.Forms.CheckBox
+        Me.chkMCWarnings = New System.Windows.Forms.CheckBox
+        Me.chkMCErrors = New System.Windows.Forms.CheckBox
+        Me.chkMCInformation = New System.Windows.Forms.CheckBox
+        Me.lblSwitchToErrorsAndInfos = New System.Windows.Forms.Label
+        Me.chkUseOnlyErrorsAndInfosPanel = New System.Windows.Forms.CheckBox
+        Me.chkShowFullConnectionsFilePathInTitle = New System.Windows.Forms.CheckBox
+        Me.chkShowSystemTrayIcon = New System.Windows.Forms.CheckBox
+        Me.chkMinimizeToSystemTray = New System.Windows.Forms.CheckBox
+        Me.chkShowDescriptionTooltipsInTree = New System.Windows.Forms.CheckBox
+        Me.lblLanguage = New System.Windows.Forms.Label
+        Me.cboLanguage = New System.Windows.Forms.ComboBox
+        Me.lblLanguageRestartRequired = New System.Windows.Forms.Label
+        Me.chkReconnectOnStart = New System.Windows.Forms.CheckBox
+        Me.chkSingleInstance = New System.Windows.Forms.CheckBox
+        Me.chkConfirmExit = New System.Windows.Forms.CheckBox
+        Me.chkProperInstallationOfComponentsAtStartup = New System.Windows.Forms.CheckBox
+        Me.chkSaveConsOnExit = New System.Windows.Forms.CheckBox
+        Me.chkConfirmCloseConnection = New System.Windows.Forms.CheckBox
+        Me.tcTabControl = New System.Windows.Forms.TabControl
+        Me.tabStartupExit = New System.Windows.Forms.TabPage
+        Me.tabAppearance = New System.Windows.Forms.TabPage
+        Me.tabTabsAndPanels = New System.Windows.Forms.TabPage
+        Me.tabConnections = New System.Windows.Forms.TabPage
+        Me.tabUpdates = New System.Windows.Forms.TabPage
+        Me.tabAdvanced = New System.Windows.Forms.TabPage
         CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.tabStartupExit.SuspendLayout()
-        Me.pnlStartup.SuspendLayout()
-        Me.tabAppearance.SuspendLayout()
-        Me.pnlAppearance.SuspendLayout()
-        Me.tabTabs.SuspendLayout()
-        Me.pnlTabsAndPanels.SuspendLayout()
-        Me.tabConnections.SuspendLayout()
-        Me.pnlConnections.SuspendLayout()
-        Me.pnlRdpReconnectionCount.SuspendLayout()
-        CType(Me.numRdpReconnectionCount, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.pnlDefaultCredentials.SuspendLayout()
-        Me.pnlAutoSave.SuspendLayout()
-        CType(Me.numAutoSave, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.grpExperimental.SuspendLayout()
-        Me.tabUpdates.SuspendLayout()
-        Me.pnlUpdates.SuspendLayout()
-        Me.pnlUpdateCheck.SuspendLayout()
+        CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProxy.SuspendLayout()
         Me.pnlProxyBasic.SuspendLayout()
         CType(Me.numProxyPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProxyAuthentication.SuspendLayout()
+        Me.pnlUpdateCheck.SuspendLayout()
+        Me.grpExperimental.SuspendLayout()
+        Me.pnlAutoSave.SuspendLayout()
+        CType(Me.numAutoSave, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.pnlDefaultCredentials.SuspendLayout()
+        Me.pnlRdpReconnectionCount.SuspendLayout()
+        CType(Me.numRdpReconnectionCount, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.tcTabControl.SuspendLayout()
+        Me.tabStartupExit.SuspendLayout()
+        Me.tabAppearance.SuspendLayout()
+        Me.tabTabsAndPanels.SuspendLayout()
+        Me.tabConnections.SuspendLayout()
+        Me.tabUpdates.SuspendLayout()
+        Me.tabAdvanced.SuspendLayout()
         Me.SuspendLayout()
         '
-        'TabController
+        'btnOK
         '
-        Me.TabController.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.TabController.Appearance = Crownwood.Magic.Controls.TabControl.VisualAppearance.MultiBox
-        Me.TabController.IDEPixelArea = True
-        Me.TabController.Location = New System.Drawing.Point(172, 12)
-        Me.TabController.Name = "TabController"
-        Me.TabController.SelectedIndex = 3
-        Me.TabController.SelectedTab = Me.tabConnections
-        Me.TabController.Size = New System.Drawing.Size(610, 489)
-        Me.TabController.TabIndex = 10
-        Me.TabController.TabPages.AddRange(New Crownwood.Magic.Controls.TabPage() {Me.tabStartupExit, Me.tabAppearance, Me.tabTabs, Me.tabConnections, Me.tabUpdates, Me.tabAdvanced})
+        Me.btnOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnOK.Location = New System.Drawing.Point(626, 507)
+        Me.btnOK.Name = "btnOK"
+        Me.btnOK.Size = New System.Drawing.Size(75, 23)
+        Me.btnOK.TabIndex = 10000
+        Me.btnOK.Text = "&OK"
+        Me.btnOK.UseVisualStyleBackColor = True
         '
-        'tabAdvanced
+        'btnCancel
         '
-        Me.tabAdvanced.Controls.Add(Me.pnlAdvanced)
-        Me.tabAdvanced.Icon = Global.mRemoteNG.My.Resources.Resources.Config_Icon
-        Me.tabAdvanced.Location = New System.Drawing.Point(0, 0)
-        Me.tabAdvanced.Name = "tabAdvanced"
-        Me.tabAdvanced.Selected = False
-        Me.tabAdvanced.Size = New System.Drawing.Size(610, 459)
-        Me.tabAdvanced.TabIndex = 5000
-        Me.tabAdvanced.Title = "Advanced"
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
+        Me.btnCancel.Location = New System.Drawing.Point(707, 507)
+        Me.btnCancel.Name = "btnCancel"
+        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
+        Me.btnCancel.TabIndex = 11000
+        Me.btnCancel.Text = "&Cancel"
+        Me.btnCancel.UseVisualStyleBackColor = True
         '
-        'pnlAdvanced
+        'lvPages
         '
-        Me.pnlAdvanced.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlAdvanced.AutoScroll = True
-        Me.pnlAdvanced.Controls.Add(Me.chkWriteLogFile)
-        Me.pnlAdvanced.Controls.Add(Me.chkAutomaticallyGetSessionInfo)
-        Me.pnlAdvanced.Controls.Add(Me.lblXulRunnerPath)
-        Me.pnlAdvanced.Controls.Add(Me.chkEncryptCompleteFile)
-        Me.pnlAdvanced.Controls.Add(Me.btnBrowseXulRunnerPath)
-        Me.pnlAdvanced.Controls.Add(Me.chkUseCustomPuttyPath)
-        Me.pnlAdvanced.Controls.Add(Me.txtXULrunnerPath)
-        Me.pnlAdvanced.Controls.Add(Me.txtCustomPuttyPath)
-        Me.pnlAdvanced.Controls.Add(Me.lblUVNCSCPort)
-        Me.pnlAdvanced.Controls.Add(Me.btnBrowseCustomPuttyPath)
-        Me.pnlAdvanced.Controls.Add(Me.lblSeconds)
-        Me.pnlAdvanced.Controls.Add(Me.btnLaunchPutty)
-        Me.pnlAdvanced.Controls.Add(Me.numUVNCSCPort)
-        Me.pnlAdvanced.Controls.Add(Me.lblConfigurePuttySessions)
-        Me.pnlAdvanced.Controls.Add(Me.numPuttyWaitTime)
-        Me.pnlAdvanced.Controls.Add(Me.chkAutomaticReconnect)
-        Me.pnlAdvanced.Controls.Add(Me.lblMaximumPuttyWaitTime)
-        Me.pnlAdvanced.Location = New System.Drawing.Point(3, 3)
-        Me.pnlAdvanced.Name = "pnlAdvanced"
-        Me.pnlAdvanced.Size = New System.Drawing.Size(616, 464)
-        Me.pnlAdvanced.TabIndex = 135
+        Me.lvPages.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+        Me.lvPages.FullRowSelect = True
+        Me.lvPages.HideSelection = False
+        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6})
+        Me.lvPages.LabelWrap = False
+        Me.lvPages.LargeImageList = Me.imgListPages
+        Me.lvPages.Location = New System.Drawing.Point(12, 12)
+        Me.lvPages.MultiSelect = False
+        Me.lvPages.Name = "lvPages"
+        Me.lvPages.Scrollable = False
+        Me.lvPages.Size = New System.Drawing.Size(154, 489)
+        Me.lvPages.TabIndex = 11001
+        Me.lvPages.TileSize = New System.Drawing.Size(154, 30)
+        Me.lvPages.UseCompatibleStateImageBehavior = False
+        Me.lvPages.View = System.Windows.Forms.View.Tile
         '
-        'chkWriteLogFile
+        'imgListPages
         '
-        Me.chkWriteLogFile.AutoSize = True
-        Me.chkWriteLogFile.Location = New System.Drawing.Point(16, 16)
-        Me.chkWriteLogFile.Name = "chkWriteLogFile"
-        Me.chkWriteLogFile.Size = New System.Drawing.Size(199, 20)
-        Me.chkWriteLogFile.TabIndex = 10
-        Me.chkWriteLogFile.Text = "Write log file (mRemoteNG.log)"
-        Me.chkWriteLogFile.UseVisualStyleBackColor = True
+        Me.imgListPages.ImageStream = CType(resources.GetObject("imgListPages.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.imgListPages.TransparentColor = System.Drawing.Color.Transparent
+        Me.imgListPages.Images.SetKeyName(0, "StartupExit_Icon.ico")
+        Me.imgListPages.Images.SetKeyName(1, "Appearance_Icon.ico")
+        Me.imgListPages.Images.SetKeyName(2, "Tab_Icon.ico")
+        Me.imgListPages.Images.SetKeyName(3, "Root_Icon.ico")
+        Me.imgListPages.Images.SetKeyName(4, "Update_Icon.ico")
+        Me.imgListPages.Images.SetKeyName(5, "Config_Icon.ico")
         '
-        'chkAutomaticallyGetSessionInfo
+        'lblMaximumPuttyWaitTime
         '
-        Me.chkAutomaticallyGetSessionInfo.AutoSize = True
-        Me.chkAutomaticallyGetSessionInfo.Location = New System.Drawing.Point(16, 62)
-        Me.chkAutomaticallyGetSessionInfo.Name = "chkAutomaticallyGetSessionInfo"
-        Me.chkAutomaticallyGetSessionInfo.Size = New System.Drawing.Size(233, 20)
-        Me.chkAutomaticallyGetSessionInfo.TabIndex = 20
-        Me.chkAutomaticallyGetSessionInfo.Text = "Automatically get session information"
-        Me.chkAutomaticallyGetSessionInfo.UseVisualStyleBackColor = True
+        Me.lblMaximumPuttyWaitTime.AutoSize = True
+        Me.lblMaximumPuttyWaitTime.Location = New System.Drawing.Point(3, 188)
+        Me.lblMaximumPuttyWaitTime.Name = "lblMaximumPuttyWaitTime"
+        Me.lblMaximumPuttyWaitTime.Size = New System.Drawing.Size(135, 13)
+        Me.lblMaximumPuttyWaitTime.TabIndex = 75
+        Me.lblMaximumPuttyWaitTime.Text = "Maximum PuTTY wait time:"
         '
-        'lblXulRunnerPath
+        'chkAutomaticReconnect
         '
-        Me.lblXulRunnerPath.AutoSize = True
-        Me.lblXulRunnerPath.Location = New System.Drawing.Point(16, 233)
-        Me.lblXulRunnerPath.Name = "lblXulRunnerPath"
-        Me.lblXulRunnerPath.Size = New System.Drawing.Size(93, 15)
-        Me.lblXulRunnerPath.TabIndex = 133
-        Me.lblXulRunnerPath.Text = "XULrunner path:"
+        Me.chkAutomaticReconnect.AutoSize = True
+        Me.chkAutomaticReconnect.Location = New System.Drawing.Point(3, 72)
+        Me.chkAutomaticReconnect.Name = "chkAutomaticReconnect"
+        Me.chkAutomaticReconnect.Size = New System.Drawing.Size(399, 17)
+        Me.chkAutomaticReconnect.TabIndex = 25
+        Me.chkAutomaticReconnect.Text = "Automatically try to reconnect when disconnected from server (RDP && ICA only)"
+        Me.chkAutomaticReconnect.UseVisualStyleBackColor = True
         '
-        'chkEncryptCompleteFile
+        'numPuttyWaitTime
         '
-        Me.chkEncryptCompleteFile.AutoSize = True
-        Me.chkEncryptCompleteFile.Location = New System.Drawing.Point(15, 39)
-        Me.chkEncryptCompleteFile.Name = "chkEncryptCompleteFile"
-        Me.chkEncryptCompleteFile.Size = New System.Drawing.Size(207, 20)
-        Me.chkEncryptCompleteFile.TabIndex = 20
-        Me.chkEncryptCompleteFile.Text = "Encrypt complete connection file"
-        Me.chkEncryptCompleteFile.UseVisualStyleBackColor = True
+        Me.numPuttyWaitTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.numPuttyWaitTime.Location = New System.Drawing.Point(373, 185)
+        Me.numPuttyWaitTime.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
+        Me.numPuttyWaitTime.Name = "numPuttyWaitTime"
+        Me.numPuttyWaitTime.Size = New System.Drawing.Size(49, 20)
+        Me.numPuttyWaitTime.TabIndex = 76
+        Me.numPuttyWaitTime.Value = New Decimal(New Integer() {5, 0, 0, 0})
         '
-        'btnBrowseXulRunnerPath
+        'lblConfigurePuttySessions
         '
-        Me.btnBrowseXulRunnerPath.Location = New System.Drawing.Point(304, 249)
-        Me.btnBrowseXulRunnerPath.Name = "btnBrowseXulRunnerPath"
-        Me.btnBrowseXulRunnerPath.Size = New System.Drawing.Size(75, 23)
-        Me.btnBrowseXulRunnerPath.TabIndex = 132
-        Me.btnBrowseXulRunnerPath.Text = "Browse..."
-        Me.btnBrowseXulRunnerPath.UseVisualStyleBackColor = True
+        Me.lblConfigurePuttySessions.AutoSize = True
+        Me.lblConfigurePuttySessions.Location = New System.Drawing.Point(3, 157)
+        Me.lblConfigurePuttySessions.Name = "lblConfigurePuttySessions"
+        Me.lblConfigurePuttySessions.Size = New System.Drawing.Size(227, 13)
+        Me.lblConfigurePuttySessions.TabIndex = 60
+        Me.lblConfigurePuttySessions.Text = "To configure PuTTY sessions click this button:"
         '
-        'chkUseCustomPuttyPath
+        'numUVNCSCPort
         '
-        Me.chkUseCustomPuttyPath.AutoSize = True
-        Me.chkUseCustomPuttyPath.Location = New System.Drawing.Point(16, 108)
-        Me.chkUseCustomPuttyPath.Name = "chkUseCustomPuttyPath"
-        Me.chkUseCustomPuttyPath.Size = New System.Drawing.Size(162, 20)
-        Me.chkUseCustomPuttyPath.TabIndex = 30
-        Me.chkUseCustomPuttyPath.Text = "Use custom PuTTY path:"
-        Me.chkUseCustomPuttyPath.UseVisualStyleBackColor = True
-        '
-        'txtXULrunnerPath
-        '
-        Me.txtXULrunnerPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtXULrunnerPath.Location = New System.Drawing.Point(34, 251)
-        Me.txtXULrunnerPath.Name = "txtXULrunnerPath"
-        Me.txtXULrunnerPath.Size = New System.Drawing.Size(264, 23)
-        Me.txtXULrunnerPath.TabIndex = 131
-        '
-        'txtCustomPuttyPath
-        '
-        Me.txtCustomPuttyPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCustomPuttyPath.Enabled = False
-        Me.txtCustomPuttyPath.Location = New System.Drawing.Point(34, 131)
-        Me.txtCustomPuttyPath.Name = "txtCustomPuttyPath"
-        Me.txtCustomPuttyPath.Size = New System.Drawing.Size(264, 23)
-        Me.txtCustomPuttyPath.TabIndex = 40
-        '
-        'lblUVNCSCPort
-        '
-        Me.lblUVNCSCPort.AutoSize = True
-        Me.lblUVNCSCPort.Location = New System.Drawing.Point(16, 294)
-        Me.lblUVNCSCPort.Name = "lblUVNCSCPort"
-        Me.lblUVNCSCPort.Size = New System.Drawing.Size(196, 15)
-        Me.lblUVNCSCPort.TabIndex = 120
-        Me.lblUVNCSCPort.Text = "UltraVNC SingleClick Listening Port:"
-        '
-        'btnBrowseCustomPuttyPath
-        '
-        Me.btnBrowseCustomPuttyPath.Enabled = False
-        Me.btnBrowseCustomPuttyPath.Location = New System.Drawing.Point(304, 129)
-        Me.btnBrowseCustomPuttyPath.Name = "btnBrowseCustomPuttyPath"
-        Me.btnBrowseCustomPuttyPath.Size = New System.Drawing.Size(75, 23)
-        Me.btnBrowseCustomPuttyPath.TabIndex = 50
-        Me.btnBrowseCustomPuttyPath.Text = "Browse..."
-        Me.btnBrowseCustomPuttyPath.UseVisualStyleBackColor = True
-        '
-        'lblSeconds
-        '
-        Me.lblSeconds.AutoSize = True
-        Me.lblSeconds.Location = New System.Drawing.Point(441, 202)
-        Me.lblSeconds.Name = "lblSeconds"
-        Me.lblSeconds.Size = New System.Drawing.Size(50, 15)
-        Me.lblSeconds.TabIndex = 77
-        Me.lblSeconds.Text = "seconds"
+        Me.numUVNCSCPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.numUVNCSCPort.Location = New System.Drawing.Point(219, 277)
+        Me.numUVNCSCPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
+        Me.numUVNCSCPort.Name = "numUVNCSCPort"
+        Me.numUVNCSCPort.Size = New System.Drawing.Size(72, 20)
+        Me.numUVNCSCPort.TabIndex = 130
+        Me.numUVNCSCPort.Value = New Decimal(New Integer() {5500, 0, 0, 0})
         '
         'btnLaunchPutty
         '
         Me.btnLaunchPutty.Image = Global.mRemoteNG.My.Resources.Resources.PuttyConfig
         Me.btnLaunchPutty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLaunchPutty.Location = New System.Drawing.Point(304, 166)
+        Me.btnLaunchPutty.Location = New System.Drawing.Point(291, 153)
         Me.btnLaunchPutty.Name = "btnLaunchPutty"
         Me.btnLaunchPutty.Size = New System.Drawing.Size(110, 23)
         Me.btnLaunchPutty.TabIndex = 70
@@ -425,784 +349,108 @@ Public Class frmOptions
         Me.btnLaunchPutty.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnLaunchPutty.UseVisualStyleBackColor = True
         '
-        'numUVNCSCPort
-        '
-        Me.numUVNCSCPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.numUVNCSCPort.Location = New System.Drawing.Point(232, 290)
-        Me.numUVNCSCPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
-        Me.numUVNCSCPort.Name = "numUVNCSCPort"
-        Me.numUVNCSCPort.Size = New System.Drawing.Size(72, 23)
-        Me.numUVNCSCPort.TabIndex = 130
-        Me.numUVNCSCPort.Value = New Decimal(New Integer() {5500, 0, 0, 0})
-        '
-        'lblConfigurePuttySessions
-        '
-        Me.lblConfigurePuttySessions.AutoSize = True
-        Me.lblConfigurePuttySessions.Location = New System.Drawing.Point(16, 170)
-        Me.lblConfigurePuttySessions.Name = "lblConfigurePuttySessions"
-        Me.lblConfigurePuttySessions.Size = New System.Drawing.Size(250, 15)
-        Me.lblConfigurePuttySessions.TabIndex = 60
-        Me.lblConfigurePuttySessions.Text = "To configure PuTTY sessions click this button:"
-        '
-        'numPuttyWaitTime
-        '
-        Me.numPuttyWaitTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.numPuttyWaitTime.Location = New System.Drawing.Point(386, 198)
-        Me.numPuttyWaitTime.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
-        Me.numPuttyWaitTime.Name = "numPuttyWaitTime"
-        Me.numPuttyWaitTime.Size = New System.Drawing.Size(49, 23)
-        Me.numPuttyWaitTime.TabIndex = 76
-        Me.numPuttyWaitTime.Value = New Decimal(New Integer() {5, 0, 0, 0})
-        '
-        'chkAutomaticReconnect
-        '
-        Me.chkAutomaticReconnect.AutoSize = True
-        Me.chkAutomaticReconnect.Location = New System.Drawing.Point(16, 85)
-        Me.chkAutomaticReconnect.Name = "chkAutomaticReconnect"
-        Me.chkAutomaticReconnect.Size = New System.Drawing.Size(456, 20)
-        Me.chkAutomaticReconnect.TabIndex = 25
-        Me.chkAutomaticReconnect.Text = "Automatically try to reconnect when disconnected from server (RDP && ICA only)"
-        Me.chkAutomaticReconnect.UseVisualStyleBackColor = True
-        '
-        'lblMaximumPuttyWaitTime
-        '
-        Me.lblMaximumPuttyWaitTime.AutoSize = True
-        Me.lblMaximumPuttyWaitTime.Location = New System.Drawing.Point(16, 201)
-        Me.lblMaximumPuttyWaitTime.Name = "lblMaximumPuttyWaitTime"
-        Me.lblMaximumPuttyWaitTime.Size = New System.Drawing.Size(154, 15)
-        Me.lblMaximumPuttyWaitTime.TabIndex = 75
-        Me.lblMaximumPuttyWaitTime.Text = "Maximum PuTTY wait time:"
-        '
-        'tabStartupExit
-        '
-        Me.tabStartupExit.Controls.Add(Me.pnlStartup)
-        Me.tabStartupExit.Icon = Global.mRemoteNG.My.Resources.Resources.StartupExit_Icon
-        Me.tabStartupExit.Location = New System.Drawing.Point(0, 0)
-        Me.tabStartupExit.Name = "tabStartupExit"
-        Me.tabStartupExit.Selected = False
-        Me.tabStartupExit.Size = New System.Drawing.Size(610, 459)
-        Me.tabStartupExit.TabIndex = 1000
-        Me.tabStartupExit.Title = "Startup/Exit"
-        '
-        'pnlStartup
-        '
-        Me.pnlStartup.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlStartup.AutoScroll = True
-        Me.pnlStartup.Controls.Add(Me.chkConfirmCloseConnection)
-        Me.pnlStartup.Controls.Add(Me.chkSaveConsOnExit)
-        Me.pnlStartup.Controls.Add(Me.chkProperInstallationOfComponentsAtStartup)
-        Me.pnlStartup.Controls.Add(Me.chkConfirmExit)
-        Me.pnlStartup.Controls.Add(Me.chkSingleInstance)
-        Me.pnlStartup.Controls.Add(Me.chkReconnectOnStart)
-        Me.pnlStartup.Location = New System.Drawing.Point(3, 3)
-        Me.pnlStartup.Name = "pnlStartup"
-        Me.pnlStartup.Size = New System.Drawing.Size(616, 464)
-        Me.pnlStartup.TabIndex = 51
-        '
-        'chkConfirmCloseConnection
-        '
-        Me.chkConfirmCloseConnection.AutoSize = True
-        Me.chkConfirmCloseConnection.Location = New System.Drawing.Point(16, 16)
-        Me.chkConfirmCloseConnection.Name = "chkConfirmCloseConnection"
-        Me.chkConfirmCloseConnection.Size = New System.Drawing.Size(199, 19)
-        Me.chkConfirmCloseConnection.TabIndex = 51
-        Me.chkConfirmCloseConnection.Text = "Confirm closing connection tabs"
-        Me.chkConfirmCloseConnection.UseVisualStyleBackColor = True
-        '
-        'chkSaveConsOnExit
-        '
-        Me.chkSaveConsOnExit.AutoSize = True
-        Me.chkSaveConsOnExit.Location = New System.Drawing.Point(16, 64)
-        Me.chkSaveConsOnExit.Name = "chkSaveConsOnExit"
-        Me.chkSaveConsOnExit.Size = New System.Drawing.Size(156, 19)
-        Me.chkSaveConsOnExit.TabIndex = 10
-        Me.chkSaveConsOnExit.Text = "Save connections on exit"
-        Me.chkSaveConsOnExit.UseVisualStyleBackColor = True
-        '
-        'chkProperInstallationOfComponentsAtStartup
-        '
-        Me.chkProperInstallationOfComponentsAtStartup.AutoSize = True
-        Me.chkProperInstallationOfComponentsAtStartup.Location = New System.Drawing.Point(16, 136)
-        Me.chkProperInstallationOfComponentsAtStartup.Name = "chkProperInstallationOfComponentsAtStartup"
-        Me.chkProperInstallationOfComponentsAtStartup.Size = New System.Drawing.Size(295, 19)
-        Me.chkProperInstallationOfComponentsAtStartup.TabIndex = 50
-        Me.chkProperInstallationOfComponentsAtStartup.Text = "Check proper installation of components at startup"
-        Me.chkProperInstallationOfComponentsAtStartup.UseVisualStyleBackColor = True
-        '
-        'chkConfirmExit
-        '
-        Me.chkConfirmExit.AutoSize = True
-        Me.chkConfirmExit.Location = New System.Drawing.Point(16, 40)
-        Me.chkConfirmExit.Name = "chkConfirmExit"
-        Me.chkConfirmExit.Size = New System.Drawing.Size(248, 19)
-        Me.chkConfirmExit.TabIndex = 20
-        Me.chkConfirmExit.Text = "Confirm exit if there are open connections"
-        Me.chkConfirmExit.UseVisualStyleBackColor = True
-        '
-        'chkSingleInstance
-        '
-        Me.chkSingleInstance.AutoSize = True
-        Me.chkSingleInstance.Location = New System.Drawing.Point(16, 112)
-        Me.chkSingleInstance.Name = "chkSingleInstance"
-        Me.chkSingleInstance.Size = New System.Drawing.Size(414, 19)
-        Me.chkSingleInstance.TabIndex = 50
-        Me.chkSingleInstance.Text = "Allow only a single instance of the application (mRemote restart required)"
-        Me.chkSingleInstance.UseVisualStyleBackColor = True
-        '
-        'chkReconnectOnStart
-        '
-        Me.chkReconnectOnStart.AutoSize = True
-        Me.chkReconnectOnStart.Location = New System.Drawing.Point(16, 88)
-        Me.chkReconnectOnStart.Name = "chkReconnectOnStart"
-        Me.chkReconnectOnStart.Size = New System.Drawing.Size(299, 19)
-        Me.chkReconnectOnStart.TabIndex = 40
-        Me.chkReconnectOnStart.Text = "Reconnect to previously opened sessions on startup"
-        Me.chkReconnectOnStart.UseVisualStyleBackColor = True
-        '
-        'tabAppearance
-        '
-        Me.tabAppearance.Controls.Add(Me.pnlAppearance)
-        Me.tabAppearance.Icon = Global.mRemoteNG.My.Resources.Resources.Appearance_Icon
-        Me.tabAppearance.Location = New System.Drawing.Point(0, 0)
-        Me.tabAppearance.Name = "tabAppearance"
-        Me.tabAppearance.Selected = False
-        Me.tabAppearance.Size = New System.Drawing.Size(610, 459)
-        Me.tabAppearance.TabIndex = 2000
-        Me.tabAppearance.Title = "Appearance"
-        '
-        'pnlAppearance
-        '
-        Me.pnlAppearance.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlAppearance.AutoScroll = True
-        Me.pnlAppearance.Controls.Add(Me.lblLanguageRestartRequired)
-        Me.pnlAppearance.Controls.Add(Me.cboLanguage)
-        Me.pnlAppearance.Controls.Add(Me.lblLanguage)
-        Me.pnlAppearance.Controls.Add(Me.chkShowDescriptionTooltipsInTree)
-        Me.pnlAppearance.Controls.Add(Me.chkMinimizeToSystemTray)
-        Me.pnlAppearance.Controls.Add(Me.chkShowSystemTrayIcon)
-        Me.pnlAppearance.Controls.Add(Me.chkShowFullConnectionsFilePathInTitle)
-        Me.pnlAppearance.Location = New System.Drawing.Point(3, 3)
-        Me.pnlAppearance.Name = "pnlAppearance"
-        Me.pnlAppearance.Size = New System.Drawing.Size(616, 464)
-        Me.pnlAppearance.TabIndex = 41
-        '
-        'lblLanguageRestartRequired
-        '
-        Me.lblLanguageRestartRequired.AutoSize = True
-        Me.lblLanguageRestartRequired.Location = New System.Drawing.Point(16, 72)
-        Me.lblLanguageRestartRequired.Name = "lblLanguageRestartRequired"
-        Me.lblLanguageRestartRequired.Size = New System.Drawing.Size(423, 15)
-        Me.lblLanguageRestartRequired.TabIndex = 43
-        Me.lblLanguageRestartRequired.Text = "mRemoteNG must be restarted before changes to the language will take effect."
-        '
-        'cboLanguage
-        '
-        Me.cboLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboLanguage.FormattingEnabled = True
-        Me.cboLanguage.Location = New System.Drawing.Point(16, 40)
-        Me.cboLanguage.Name = "cboLanguage"
-        Me.cboLanguage.Size = New System.Drawing.Size(304, 23)
-        Me.cboLanguage.Sorted = True
-        Me.cboLanguage.TabIndex = 42
-        '
-        'lblLanguage
-        '
-        Me.lblLanguage.AutoSize = True
-        Me.lblLanguage.Location = New System.Drawing.Point(16, 16)
-        Me.lblLanguage.Name = "lblLanguage"
-        Me.lblLanguage.Size = New System.Drawing.Size(59, 15)
-        Me.lblLanguage.TabIndex = 41
-        Me.lblLanguage.Text = "Language"
-        '
-        'chkShowDescriptionTooltipsInTree
-        '
-        Me.chkShowDescriptionTooltipsInTree.AutoSize = True
-        Me.chkShowDescriptionTooltipsInTree.Location = New System.Drawing.Point(16, 120)
-        Me.chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree"
-        Me.chkShowDescriptionTooltipsInTree.Size = New System.Drawing.Size(259, 19)
-        Me.chkShowDescriptionTooltipsInTree.TabIndex = 10
-        Me.chkShowDescriptionTooltipsInTree.Text = "Show description tooltips in connection tree"
-        Me.chkShowDescriptionTooltipsInTree.UseVisualStyleBackColor = True
-        '
-        'chkMinimizeToSystemTray
-        '
-        Me.chkMinimizeToSystemTray.AutoSize = True
-        Me.chkMinimizeToSystemTray.Location = New System.Drawing.Point(16, 216)
-        Me.chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray"
-        Me.chkMinimizeToSystemTray.Size = New System.Drawing.Size(156, 19)
-        Me.chkMinimizeToSystemTray.TabIndex = 40
-        Me.chkMinimizeToSystemTray.Text = "Minimize to System Tray"
-        Me.chkMinimizeToSystemTray.UseVisualStyleBackColor = True
-        '
-        'chkShowSystemTrayIcon
-        '
-        Me.chkShowSystemTrayIcon.AutoSize = True
-        Me.chkShowSystemTrayIcon.Location = New System.Drawing.Point(16, 192)
-        Me.chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon"
-        Me.chkShowSystemTrayIcon.Size = New System.Drawing.Size(187, 19)
-        Me.chkShowSystemTrayIcon.TabIndex = 30
-        Me.chkShowSystemTrayIcon.Text = "Always show System Tray Icon"
-        Me.chkShowSystemTrayIcon.UseVisualStyleBackColor = True
-        '
-        'chkShowFullConnectionsFilePathInTitle
-        '
-        Me.chkShowFullConnectionsFilePathInTitle.AutoSize = True
-        Me.chkShowFullConnectionsFilePathInTitle.Location = New System.Drawing.Point(16, 144)
-        Me.chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle"
-        Me.chkShowFullConnectionsFilePathInTitle.Size = New System.Drawing.Size(270, 19)
-        Me.chkShowFullConnectionsFilePathInTitle.TabIndex = 20
-        Me.chkShowFullConnectionsFilePathInTitle.Text = "Show full connections file path in window title"
-        Me.chkShowFullConnectionsFilePathInTitle.UseVisualStyleBackColor = True
-        '
-        'tabTabs
-        '
-        Me.tabTabs.Controls.Add(Me.pnlTabsAndPanels)
-        Me.tabTabs.Icon = Global.mRemoteNG.My.Resources.Resources.Tab_Icon
-        Me.tabTabs.Location = New System.Drawing.Point(0, 0)
-        Me.tabTabs.Name = "tabTabs"
-        Me.tabTabs.Selected = False
-        Me.tabTabs.Size = New System.Drawing.Size(610, 459)
-        Me.tabTabs.TabIndex = 3000
-        Me.tabTabs.Title = "Tabs && Panels"
-        '
-        'pnlTabsAndPanels
-        '
-        Me.pnlTabsAndPanels.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlTabsAndPanels.AutoScroll = True
-        Me.pnlTabsAndPanels.Controls.Add(Me.chkUseOnlyErrorsAndInfosPanel)
-        Me.pnlTabsAndPanels.Controls.Add(Me.lblSwitchToErrorsAndInfos)
-        Me.pnlTabsAndPanels.Controls.Add(Me.chkMCInformation)
-        Me.pnlTabsAndPanels.Controls.Add(Me.chkMCErrors)
-        Me.pnlTabsAndPanels.Controls.Add(Me.chkMCWarnings)
-        Me.pnlTabsAndPanels.Controls.Add(Me.chkOpenNewTabRightOfSelected)
-        Me.pnlTabsAndPanels.Controls.Add(Me.chkShowProtocolOnTabs)
-        Me.pnlTabsAndPanels.Controls.Add(Me.chkDoubleClickClosesTab)
-        Me.pnlTabsAndPanels.Controls.Add(Me.chkShowLogonInfoOnTabs)
-        Me.pnlTabsAndPanels.Controls.Add(Me.chkAlwaysShowPanelSelectionDlg)
-        Me.pnlTabsAndPanels.Location = New System.Drawing.Point(3, 3)
-        Me.pnlTabsAndPanels.Name = "pnlTabsAndPanels"
-        Me.pnlTabsAndPanels.Size = New System.Drawing.Size(616, 464)
-        Me.pnlTabsAndPanels.TabIndex = 51
-        '
-        'chkUseOnlyErrorsAndInfosPanel
-        '
-        Me.chkUseOnlyErrorsAndInfosPanel.AutoSize = True
-        Me.chkUseOnlyErrorsAndInfosPanel.Location = New System.Drawing.Point(16, 159)
-        Me.chkUseOnlyErrorsAndInfosPanel.Name = "chkUseOnlyErrorsAndInfosPanel"
-        Me.chkUseOnlyErrorsAndInfosPanel.Size = New System.Drawing.Size(310, 19)
-        Me.chkUseOnlyErrorsAndInfosPanel.TabIndex = 51
-        Me.chkUseOnlyErrorsAndInfosPanel.Text = "Use only Notifications panel (no messagebox popups)"
-        Me.chkUseOnlyErrorsAndInfosPanel.UseVisualStyleBackColor = True
-        '
-        'lblSwitchToErrorsAndInfos
-        '
-        Me.lblSwitchToErrorsAndInfos.AutoSize = True
-        Me.lblSwitchToErrorsAndInfos.Location = New System.Drawing.Point(16, 184)
-        Me.lblSwitchToErrorsAndInfos.Name = "lblSwitchToErrorsAndInfos"
-        Me.lblSwitchToErrorsAndInfos.Size = New System.Drawing.Size(179, 15)
-        Me.lblSwitchToErrorsAndInfos.TabIndex = 52
-        Me.lblSwitchToErrorsAndInfos.Text = "Switch to Notifications panel on:"
-        '
-        'chkMCInformation
-        '
-        Me.chkMCInformation.AutoSize = True
-        Me.chkMCInformation.Enabled = False
-        Me.chkMCInformation.Location = New System.Drawing.Point(32, 204)
-        Me.chkMCInformation.Name = "chkMCInformation"
-        Me.chkMCInformation.Size = New System.Drawing.Size(94, 19)
-        Me.chkMCInformation.TabIndex = 53
-        Me.chkMCInformation.Text = "Informations"
-        Me.chkMCInformation.UseVisualStyleBackColor = True
-        '
-        'chkMCErrors
-        '
-        Me.chkMCErrors.AutoSize = True
-        Me.chkMCErrors.Enabled = False
-        Me.chkMCErrors.Location = New System.Drawing.Point(230, 204)
-        Me.chkMCErrors.Name = "chkMCErrors"
-        Me.chkMCErrors.Size = New System.Drawing.Size(56, 19)
-        Me.chkMCErrors.TabIndex = 55
-        Me.chkMCErrors.Text = "Errors"
-        Me.chkMCErrors.UseVisualStyleBackColor = True
-        '
-        'chkMCWarnings
-        '
-        Me.chkMCWarnings.AutoSize = True
-        Me.chkMCWarnings.Enabled = False
-        Me.chkMCWarnings.Location = New System.Drawing.Point(139, 204)
-        Me.chkMCWarnings.Name = "chkMCWarnings"
-        Me.chkMCWarnings.Size = New System.Drawing.Size(76, 19)
-        Me.chkMCWarnings.TabIndex = 54
-        Me.chkMCWarnings.Text = "Warnings"
-        Me.chkMCWarnings.UseVisualStyleBackColor = True
-        '
-        'chkOpenNewTabRightOfSelected
-        '
-        Me.chkOpenNewTabRightOfSelected.AutoSize = True
-        Me.chkOpenNewTabRightOfSelected.Location = New System.Drawing.Point(16, 16)
-        Me.chkOpenNewTabRightOfSelected.Name = "chkOpenNewTabRightOfSelected"
-        Me.chkOpenNewTabRightOfSelected.Size = New System.Drawing.Size(312, 19)
-        Me.chkOpenNewTabRightOfSelected.TabIndex = 10
-        Me.chkOpenNewTabRightOfSelected.Text = "Open new tab to the right of the currently selected tab"
-        Me.chkOpenNewTabRightOfSelected.UseVisualStyleBackColor = True
-        '
-        'chkShowProtocolOnTabs
-        '
-        Me.chkShowProtocolOnTabs.AutoSize = True
-        Me.chkShowProtocolOnTabs.Location = New System.Drawing.Point(16, 62)
-        Me.chkShowProtocolOnTabs.Name = "chkShowProtocolOnTabs"
-        Me.chkShowProtocolOnTabs.Size = New System.Drawing.Size(183, 19)
-        Me.chkShowProtocolOnTabs.TabIndex = 30
-        Me.chkShowProtocolOnTabs.Text = "Show protocols on tab names"
-        Me.chkShowProtocolOnTabs.UseVisualStyleBackColor = True
-        '
-        'chkDoubleClickClosesTab
-        '
-        Me.chkDoubleClickClosesTab.AutoSize = True
-        Me.chkDoubleClickClosesTab.Location = New System.Drawing.Point(16, 85)
-        Me.chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab"
-        Me.chkDoubleClickClosesTab.Size = New System.Drawing.Size(173, 19)
-        Me.chkDoubleClickClosesTab.TabIndex = 40
-        Me.chkDoubleClickClosesTab.Text = "Double click on tab closes it"
-        Me.chkDoubleClickClosesTab.UseVisualStyleBackColor = True
-        '
-        'chkShowLogonInfoOnTabs
-        '
-        Me.chkShowLogonInfoOnTabs.AutoSize = True
-        Me.chkShowLogonInfoOnTabs.Location = New System.Drawing.Point(16, 39)
-        Me.chkShowLogonInfoOnTabs.Name = "chkShowLogonInfoOnTabs"
-        Me.chkShowLogonInfoOnTabs.Size = New System.Drawing.Size(230, 19)
-        Me.chkShowLogonInfoOnTabs.TabIndex = 20
-        Me.chkShowLogonInfoOnTabs.Text = "Show logon information on tab names"
-        Me.chkShowLogonInfoOnTabs.UseVisualStyleBackColor = True
-        '
-        'chkAlwaysShowPanelSelectionDlg
-        '
-        Me.chkAlwaysShowPanelSelectionDlg.AutoSize = True
-        Me.chkAlwaysShowPanelSelectionDlg.Location = New System.Drawing.Point(16, 108)
-        Me.chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg"
-        Me.chkAlwaysShowPanelSelectionDlg.Size = New System.Drawing.Size(352, 19)
-        Me.chkAlwaysShowPanelSelectionDlg.TabIndex = 50
-        Me.chkAlwaysShowPanelSelectionDlg.Text = "Always show panel selection dialog when opening connectins"
-        Me.chkAlwaysShowPanelSelectionDlg.UseVisualStyleBackColor = True
-        '
-        'tabConnections
-        '
-        Me.tabConnections.Controls.Add(Me.pnlConnections)
-        Me.tabConnections.Icon = Global.mRemoteNG.My.Resources.Resources.Root_Icon
-        Me.tabConnections.Location = New System.Drawing.Point(0, 0)
-        Me.tabConnections.Name = "tabConnections"
-        Me.tabConnections.Size = New System.Drawing.Size(610, 459)
-        Me.tabConnections.TabIndex = 4000
-        Me.tabConnections.Title = "Connections"
-        '
-        'pnlConnections
-        '
-        Me.pnlConnections.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlConnections.AutoScroll = True
-        Me.pnlConnections.Controls.Add(Me.pnlRdpReconnectionCount)
-        Me.pnlConnections.Controls.Add(Me.chkSingleClickOnConnectionOpensIt)
-        Me.pnlConnections.Controls.Add(Me.pnlDefaultCredentials)
-        Me.pnlConnections.Controls.Add(Me.chkSingleClickOnOpenedConnectionSwitchesToIt)
-        Me.pnlConnections.Controls.Add(Me.pnlAutoSave)
-        Me.pnlConnections.Controls.Add(Me.grpExperimental)
-        Me.pnlConnections.Controls.Add(Me.chkHostnameLikeDisplayName)
-        Me.pnlConnections.Location = New System.Drawing.Point(3, 3)
-        Me.pnlConnections.Name = "pnlConnections"
-        Me.pnlConnections.Size = New System.Drawing.Size(616, 464)
-        Me.pnlConnections.TabIndex = 173
-        '
-        'pnlRdpReconnectionCount
-        '
-        Me.pnlRdpReconnectionCount.Controls.Add(Me.lblRdpReconnectionCount)
-        Me.pnlRdpReconnectionCount.Controls.Add(Me.numRdpReconnectionCount)
-        Me.pnlRdpReconnectionCount.Location = New System.Drawing.Point(16, 85)
-        Me.pnlRdpReconnectionCount.Name = "pnlRdpReconnectionCount"
-        Me.pnlRdpReconnectionCount.Size = New System.Drawing.Size(500, 29)
-        Me.pnlRdpReconnectionCount.TabIndex = 40
-        '
-        'lblRdpReconnectionCount
-        '
-        Me.lblRdpReconnectionCount.AutoSize = True
-        Me.lblRdpReconnectionCount.Location = New System.Drawing.Point(3, 9)
-        Me.lblRdpReconnectionCount.Name = "lblRdpReconnectionCount"
-        Me.lblRdpReconnectionCount.Size = New System.Drawing.Size(141, 15)
-        Me.lblRdpReconnectionCount.TabIndex = 40
-        Me.lblRdpReconnectionCount.Text = "RDP Reconnection Count"
-        '
-        'numRdpReconnectionCount
-        '
-        Me.numRdpReconnectionCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.numRdpReconnectionCount.Location = New System.Drawing.Point(168, 6)
-        Me.numRdpReconnectionCount.Maximum = New Decimal(New Integer() {20, 0, 0, 0})
-        Me.numRdpReconnectionCount.Name = "numRdpReconnectionCount"
-        Me.numRdpReconnectionCount.Size = New System.Drawing.Size(53, 23)
-        Me.numRdpReconnectionCount.TabIndex = 41
-        Me.numRdpReconnectionCount.Value = New Decimal(New Integer() {5, 0, 0, 0})
-        '
-        'chkSingleClickOnConnectionOpensIt
-        '
-        Me.chkSingleClickOnConnectionOpensIt.AutoSize = True
-        Me.chkSingleClickOnConnectionOpensIt.Location = New System.Drawing.Point(16, 16)
-        Me.chkSingleClickOnConnectionOpensIt.Name = "chkSingleClickOnConnectionOpensIt"
-        Me.chkSingleClickOnConnectionOpensIt.Size = New System.Drawing.Size(216, 20)
-        Me.chkSingleClickOnConnectionOpensIt.TabIndex = 10
-        Me.chkSingleClickOnConnectionOpensIt.Text = "Single click on connection opens it"
-        Me.chkSingleClickOnConnectionOpensIt.UseVisualStyleBackColor = True
-        '
-        'pnlDefaultCredentials
-        '
-        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsCustom)
-        Me.pnlDefaultCredentials.Controls.Add(Me.lblDefaultCredentials)
-        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsNoInfo)
-        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsWindows)
-        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsDomain)
-        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsUsername)
-        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsPassword)
-        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsPassword)
-        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsUsername)
-        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsDomain)
-        Me.pnlDefaultCredentials.Location = New System.Drawing.Point(16, 308)
-        Me.pnlDefaultCredentials.Name = "pnlDefaultCredentials"
-        Me.pnlDefaultCredentials.Size = New System.Drawing.Size(500, 175)
-        Me.pnlDefaultCredentials.TabIndex = 70
-        '
-        'radCredentialsCustom
-        '
-        Me.radCredentialsCustom.AutoSize = True
-        Me.radCredentialsCustom.Location = New System.Drawing.Point(21, 69)
-        Me.radCredentialsCustom.Name = "radCredentialsCustom"
-        Me.radCredentialsCustom.Size = New System.Drawing.Size(104, 20)
-        Me.radCredentialsCustom.TabIndex = 73
-        Me.radCredentialsCustom.TabStop = True
-        Me.radCredentialsCustom.Text = "the following:"
-        Me.radCredentialsCustom.UseVisualStyleBackColor = True
-        '
-        'lblDefaultCredentials
-        '
-        Me.lblDefaultCredentials.AutoSize = True
-        Me.lblDefaultCredentials.Location = New System.Drawing.Point(8, 9)
-        Me.lblDefaultCredentials.Name = "lblDefaultCredentials"
-        Me.lblDefaultCredentials.Size = New System.Drawing.Size(287, 15)
-        Me.lblDefaultCredentials.TabIndex = 80
-        Me.lblDefaultCredentials.Text = "For empty Username, Password or Domain fields use:"
-        '
-        'radCredentialsNoInfo
-        '
-        Me.radCredentialsNoInfo.AutoSize = True
-        Me.radCredentialsNoInfo.Location = New System.Drawing.Point(21, 31)
-        Me.radCredentialsNoInfo.Name = "radCredentialsNoInfo"
-        Me.radCredentialsNoInfo.Size = New System.Drawing.Size(111, 20)
-        Me.radCredentialsNoInfo.TabIndex = 71
-        Me.radCredentialsNoInfo.TabStop = True
-        Me.radCredentialsNoInfo.Text = "no information"
-        Me.radCredentialsNoInfo.UseVisualStyleBackColor = True
-        '
-        'radCredentialsWindows
-        '
-        Me.radCredentialsWindows.AutoSize = True
-        Me.radCredentialsWindows.Location = New System.Drawing.Point(21, 50)
-        Me.radCredentialsWindows.Name = "radCredentialsWindows"
-        Me.radCredentialsWindows.Size = New System.Drawing.Size(265, 20)
-        Me.radCredentialsWindows.TabIndex = 72
-        Me.radCredentialsWindows.TabStop = True
-        Me.radCredentialsWindows.Text = "my current credentials (windows logon info)"
-        Me.radCredentialsWindows.UseVisualStyleBackColor = True
-        '
-        'txtCredentialsDomain
-        '
-        Me.txtCredentialsDomain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCredentialsDomain.Enabled = False
-        Me.txtCredentialsDomain.Location = New System.Drawing.Point(130, 147)
-        Me.txtCredentialsDomain.Name = "txtCredentialsDomain"
-        Me.txtCredentialsDomain.Size = New System.Drawing.Size(150, 23)
-        Me.txtCredentialsDomain.TabIndex = 76
-        '
-        'lblCredentialsUsername
-        '
-        Me.lblCredentialsUsername.AutoSize = True
-        Me.lblCredentialsUsername.Enabled = False
-        Me.lblCredentialsUsername.Location = New System.Drawing.Point(39, 95)
-        Me.lblCredentialsUsername.Name = "lblCredentialsUsername"
-        Me.lblCredentialsUsername.Size = New System.Drawing.Size(63, 15)
-        Me.lblCredentialsUsername.TabIndex = 120
-        Me.lblCredentialsUsername.Text = "Username:"
-        '
-        'txtCredentialsPassword
-        '
-        Me.txtCredentialsPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCredentialsPassword.Enabled = False
-        Me.txtCredentialsPassword.Location = New System.Drawing.Point(130, 120)
-        Me.txtCredentialsPassword.Name = "txtCredentialsPassword"
-        Me.txtCredentialsPassword.Size = New System.Drawing.Size(150, 23)
-        Me.txtCredentialsPassword.TabIndex = 75
-        Me.txtCredentialsPassword.UseSystemPasswordChar = True
-        '
-        'lblCredentialsPassword
-        '
-        Me.lblCredentialsPassword.AutoSize = True
-        Me.lblCredentialsPassword.Enabled = False
-        Me.lblCredentialsPassword.Location = New System.Drawing.Point(39, 123)
-        Me.lblCredentialsPassword.Name = "lblCredentialsPassword"
-        Me.lblCredentialsPassword.Size = New System.Drawing.Size(60, 15)
-        Me.lblCredentialsPassword.TabIndex = 140
-        Me.lblCredentialsPassword.Text = "Password:"
-        '
-        'txtCredentialsUsername
-        '
-        Me.txtCredentialsUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtCredentialsUsername.Enabled = False
-        Me.txtCredentialsUsername.Location = New System.Drawing.Point(130, 93)
-        Me.txtCredentialsUsername.Name = "txtCredentialsUsername"
-        Me.txtCredentialsUsername.Size = New System.Drawing.Size(150, 23)
-        Me.txtCredentialsUsername.TabIndex = 74
-        '
-        'lblCredentialsDomain
-        '
-        Me.lblCredentialsDomain.AutoSize = True
-        Me.lblCredentialsDomain.Enabled = False
-        Me.lblCredentialsDomain.Location = New System.Drawing.Point(39, 150)
-        Me.lblCredentialsDomain.Name = "lblCredentialsDomain"
-        Me.lblCredentialsDomain.Size = New System.Drawing.Size(52, 15)
-        Me.lblCredentialsDomain.TabIndex = 160
-        Me.lblCredentialsDomain.Text = "Domain:"
-        '
-        'chkSingleClickOnOpenedConnectionSwitchesToIt
-        '
-        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.AutoSize = True
-        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Location = New System.Drawing.Point(16, 39)
-        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Name = "chkSingleClickOnOpenedConnectionSwitchesToIt"
-        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = New System.Drawing.Size(286, 20)
-        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.TabIndex = 20
-        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Text = "Single click on opened connection switches to it"
-        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.UseVisualStyleBackColor = True
-        '
-        'pnlAutoSave
-        '
-        Me.pnlAutoSave.Controls.Add(Me.lblAutoSave1)
-        Me.pnlAutoSave.Controls.Add(Me.numAutoSave)
-        Me.pnlAutoSave.Controls.Add(Me.lblAutoSave2)
-        Me.pnlAutoSave.Location = New System.Drawing.Point(16, 120)
-        Me.pnlAutoSave.Name = "pnlAutoSave"
-        Me.pnlAutoSave.Size = New System.Drawing.Size(500, 29)
-        Me.pnlAutoSave.TabIndex = 50
-        '
-        'lblAutoSave1
-        '
-        Me.lblAutoSave1.AutoSize = True
-        Me.lblAutoSave1.Location = New System.Drawing.Point(3, 9)
-        Me.lblAutoSave1.Name = "lblAutoSave1"
-        Me.lblAutoSave1.Size = New System.Drawing.Size(94, 15)
-        Me.lblAutoSave1.TabIndex = 40
-        Me.lblAutoSave1.Text = "Auto Save every:"
-        '
-        'numAutoSave
-        '
-        Me.numAutoSave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.numAutoSave.Location = New System.Drawing.Point(168, 6)
-        Me.numAutoSave.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
-        Me.numAutoSave.Name = "numAutoSave"
-        Me.numAutoSave.Size = New System.Drawing.Size(53, 23)
-        Me.numAutoSave.TabIndex = 51
-        '
-        'lblAutoSave2
-        '
-        Me.lblAutoSave2.AutoSize = True
-        Me.lblAutoSave2.Location = New System.Drawing.Point(233, 9)
-        Me.lblAutoSave2.Name = "lblAutoSave2"
-        Me.lblAutoSave2.Size = New System.Drawing.Size(152, 15)
-        Me.lblAutoSave2.TabIndex = 60
-        Me.lblAutoSave2.Text = "Minutes (0 means disabled)"
-        '
-        'grpExperimental
-        '
-        Me.grpExperimental.BackColor = System.Drawing.Color.IndianRed
-        Me.grpExperimental.Controls.Add(Me.chkUseSQLServer)
-        Me.grpExperimental.Controls.Add(Me.lblSQLInfo)
-        Me.grpExperimental.Controls.Add(Me.lblSQLUsername)
-        Me.grpExperimental.Controls.Add(Me.txtSQLPassword)
-        Me.grpExperimental.Controls.Add(Me.lblSQLServer)
-        Me.grpExperimental.Controls.Add(Me.txtSQLUsername)
-        Me.grpExperimental.Controls.Add(Me.lblSQLPassword)
-        Me.grpExperimental.Controls.Add(Me.txtSQLServer)
-        Me.grpExperimental.Location = New System.Drawing.Point(16, 155)
-        Me.grpExperimental.Name = "grpExperimental"
-        Me.grpExperimental.Size = New System.Drawing.Size(500, 147)
-        Me.grpExperimental.TabIndex = 60
-        Me.grpExperimental.TabStop = False
-        Me.grpExperimental.Text = "EXPERIMENTAL"
-        '
-        'chkUseSQLServer
-        '
-        Me.chkUseSQLServer.AutoSize = True
-        Me.chkUseSQLServer.Location = New System.Drawing.Point(16, 20)
-        Me.chkUseSQLServer.Name = "chkUseSQLServer"
-        Me.chkUseSQLServer.Size = New System.Drawing.Size(257, 20)
-        Me.chkUseSQLServer.TabIndex = 61
-        Me.chkUseSQLServer.Text = "Use SQL Server to load && save connections"
-        Me.chkUseSQLServer.UseVisualStyleBackColor = True
-        '
-        'lblSQLInfo
-        '
-        Me.lblSQLInfo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.lblSQLInfo.Enabled = False
-        Me.lblSQLInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World)
-        Me.lblSQLInfo.Location = New System.Drawing.Point(291, 11)
-        Me.lblSQLInfo.Name = "lblSQLInfo"
-        Me.lblSQLInfo.Size = New System.Drawing.Size(203, 131)
-        Me.lblSQLInfo.TabIndex = 120
-        Me.lblSQLInfo.Text = "Please see Help - Getting started - SQL Configuration for more Info!"
-        Me.lblSQLInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
-        '
-        'lblSQLUsername
-        '
-        Me.lblSQLUsername.AutoSize = True
-        Me.lblSQLUsername.Enabled = False
-        Me.lblSQLUsername.Location = New System.Drawing.Point(36, 77)
-        Me.lblSQLUsername.Name = "lblSQLUsername"
-        Me.lblSQLUsername.Size = New System.Drawing.Size(63, 15)
-        Me.lblSQLUsername.TabIndex = 80
-        Me.lblSQLUsername.Text = "Username:"
-        '
-        'txtSQLPassword
-        '
-        Me.txtSQLPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSQLPassword.Enabled = False
-        Me.txtSQLPassword.Location = New System.Drawing.Point(126, 101)
-        Me.txtSQLPassword.Name = "txtSQLPassword"
-        Me.txtSQLPassword.Size = New System.Drawing.Size(153, 23)
-        Me.txtSQLPassword.TabIndex = 64
-        Me.txtSQLPassword.UseSystemPasswordChar = True
-        '
-        'lblSQLServer
-        '
-        Me.lblSQLServer.AutoSize = True
-        Me.lblSQLServer.Enabled = False
-        Me.lblSQLServer.Location = New System.Drawing.Point(36, 50)
-        Me.lblSQLServer.Name = "lblSQLServer"
-        Me.lblSQLServer.Size = New System.Drawing.Size(66, 15)
-        Me.lblSQLServer.TabIndex = 60
-        Me.lblSQLServer.Text = "SQL Server:"
-        '
-        'txtSQLUsername
-        '
-        Me.txtSQLUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSQLUsername.Enabled = False
-        Me.txtSQLUsername.Location = New System.Drawing.Point(126, 74)
-        Me.txtSQLUsername.Name = "txtSQLUsername"
-        Me.txtSQLUsername.Size = New System.Drawing.Size(153, 23)
-        Me.txtSQLUsername.TabIndex = 63
-        '
-        'lblSQLPassword
-        '
-        Me.lblSQLPassword.AutoSize = True
-        Me.lblSQLPassword.Enabled = False
-        Me.lblSQLPassword.Location = New System.Drawing.Point(36, 104)
-        Me.lblSQLPassword.Name = "lblSQLPassword"
-        Me.lblSQLPassword.Size = New System.Drawing.Size(60, 15)
-        Me.lblSQLPassword.TabIndex = 100
-        Me.lblSQLPassword.Text = "Password:"
-        '
-        'txtSQLServer
-        '
-        Me.txtSQLServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSQLServer.Enabled = False
-        Me.txtSQLServer.Location = New System.Drawing.Point(126, 47)
-        Me.txtSQLServer.Name = "txtSQLServer"
-        Me.txtSQLServer.Size = New System.Drawing.Size(153, 23)
-        Me.txtSQLServer.TabIndex = 62
-        '
-        'chkHostnameLikeDisplayName
-        '
-        Me.chkHostnameLikeDisplayName.AutoSize = True
-        Me.chkHostnameLikeDisplayName.Location = New System.Drawing.Point(16, 62)
-        Me.chkHostnameLikeDisplayName.Name = "chkHostnameLikeDisplayName"
-        Me.chkHostnameLikeDisplayName.Size = New System.Drawing.Size(369, 20)
-        Me.chkHostnameLikeDisplayName.TabIndex = 30
-        Me.chkHostnameLikeDisplayName.Text = "Set hostname like display name when creating new connections"
-        Me.chkHostnameLikeDisplayName.UseVisualStyleBackColor = True
-        '
-        'tabUpdates
-        '
-        Me.tabUpdates.Controls.Add(Me.pnlUpdates)
-        Me.tabUpdates.Icon = Global.mRemoteNG.My.Resources.Resources.Info_Icon
-        Me.tabUpdates.Location = New System.Drawing.Point(0, 0)
-        Me.tabUpdates.Name = "tabUpdates"
-        Me.tabUpdates.Selected = False
-        Me.tabUpdates.Size = New System.Drawing.Size(610, 459)
-        Me.tabUpdates.TabIndex = 5000
-        Me.tabUpdates.Title = "Updates"
-        '
-        'pnlUpdates
-        '
-        Me.pnlUpdates.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.pnlUpdates.AutoScroll = True
-        Me.pnlUpdates.Controls.Add(Me.lblUpdatesExplanation)
-        Me.pnlUpdates.Controls.Add(Me.pnlUpdateCheck)
-        Me.pnlUpdates.Controls.Add(Me.pnlProxy)
-        Me.pnlUpdates.Location = New System.Drawing.Point(3, 3)
-        Me.pnlUpdates.Name = "pnlUpdates"
-        Me.pnlUpdates.Size = New System.Drawing.Size(616, 464)
-        Me.pnlUpdates.TabIndex = 51
-        '
-        'lblUpdatesExplanation
-        '
-        Me.lblUpdatesExplanation.Location = New System.Drawing.Point(16, 16)
-        Me.lblUpdatesExplanation.Name = "lblUpdatesExplanation"
-        Me.lblUpdatesExplanation.Size = New System.Drawing.Size(536, 40)
-        Me.lblUpdatesExplanation.TabIndex = 136
-        Me.lblUpdatesExplanation.Text = "mRemoteNG can periodically connect to the mRemoteNG website to check for updates " & _
-            "and product announcements."
-        '
-        'pnlUpdateCheck
-        '
-        Me.pnlUpdateCheck.Controls.Add(Me.btnUpdateCheckNow)
-        Me.pnlUpdateCheck.Controls.Add(Me.chkCheckForUpdatesOnStartup)
-        Me.pnlUpdateCheck.Controls.Add(Me.cboUpdateCheckFrequency)
-        Me.pnlUpdateCheck.Location = New System.Drawing.Point(16, 64)
-        Me.pnlUpdateCheck.Name = "pnlUpdateCheck"
-        Me.pnlUpdateCheck.Size = New System.Drawing.Size(536, 120)
-        Me.pnlUpdateCheck.TabIndex = 137
-        '
-        'btnUpdateCheckNow
-        '
-        Me.btnUpdateCheckNow.Location = New System.Drawing.Point(8, 80)
-        Me.btnUpdateCheckNow.Name = "btnUpdateCheckNow"
-        Me.btnUpdateCheckNow.Size = New System.Drawing.Size(100, 32)
-        Me.btnUpdateCheckNow.TabIndex = 136
-        Me.btnUpdateCheckNow.Text = "Check Now"
-        Me.btnUpdateCheckNow.UseVisualStyleBackColor = True
-        '
-        'chkCheckForUpdatesOnStartup
-        '
-        Me.chkCheckForUpdatesOnStartup.AutoSize = True
-        Me.chkCheckForUpdatesOnStartup.Location = New System.Drawing.Point(8, 8)
-        Me.chkCheckForUpdatesOnStartup.Name = "chkCheckForUpdatesOnStartup"
-        Me.chkCheckForUpdatesOnStartup.Size = New System.Drawing.Size(240, 20)
-        Me.chkCheckForUpdatesOnStartup.TabIndex = 31
-        Me.chkCheckForUpdatesOnStartup.Text = "Check for updates and announcements"
-        Me.chkCheckForUpdatesOnStartup.UseVisualStyleBackColor = True
-        '
-        'cboUpdateCheckFrequency
-        '
-        Me.cboUpdateCheckFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cboUpdateCheckFrequency.FormattingEnabled = True
-        Me.cboUpdateCheckFrequency.Location = New System.Drawing.Point(48, 40)
-        Me.cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency"
-        Me.cboUpdateCheckFrequency.Size = New System.Drawing.Size(128, 23)
-        Me.cboUpdateCheckFrequency.TabIndex = 135
+        'lblSeconds
+        '
+        Me.lblSeconds.AutoSize = True
+        Me.lblSeconds.Location = New System.Drawing.Point(428, 189)
+        Me.lblSeconds.Name = "lblSeconds"
+        Me.lblSeconds.Size = New System.Drawing.Size(47, 13)
+        Me.lblSeconds.TabIndex = 77
+        Me.lblSeconds.Text = "seconds"
+        '
+        'btnBrowseCustomPuttyPath
+        '
+        Me.btnBrowseCustomPuttyPath.Enabled = False
+        Me.btnBrowseCustomPuttyPath.Location = New System.Drawing.Point(291, 116)
+        Me.btnBrowseCustomPuttyPath.Name = "btnBrowseCustomPuttyPath"
+        Me.btnBrowseCustomPuttyPath.Size = New System.Drawing.Size(75, 23)
+        Me.btnBrowseCustomPuttyPath.TabIndex = 50
+        Me.btnBrowseCustomPuttyPath.Text = "Browse..."
+        Me.btnBrowseCustomPuttyPath.UseVisualStyleBackColor = True
+        '
+        'lblUVNCSCPort
+        '
+        Me.lblUVNCSCPort.AutoSize = True
+        Me.lblUVNCSCPort.Location = New System.Drawing.Point(3, 281)
+        Me.lblUVNCSCPort.Name = "lblUVNCSCPort"
+        Me.lblUVNCSCPort.Size = New System.Drawing.Size(176, 13)
+        Me.lblUVNCSCPort.TabIndex = 120
+        Me.lblUVNCSCPort.Text = "UltraVNC SingleClick Listening Port:"
+        '
+        'txtCustomPuttyPath
+        '
+        Me.txtCustomPuttyPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCustomPuttyPath.Enabled = False
+        Me.txtCustomPuttyPath.Location = New System.Drawing.Point(21, 118)
+        Me.txtCustomPuttyPath.Name = "txtCustomPuttyPath"
+        Me.txtCustomPuttyPath.Size = New System.Drawing.Size(264, 20)
+        Me.txtCustomPuttyPath.TabIndex = 40
+        '
+        'txtXULrunnerPath
+        '
+        Me.txtXULrunnerPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtXULrunnerPath.Location = New System.Drawing.Point(21, 238)
+        Me.txtXULrunnerPath.Name = "txtXULrunnerPath"
+        Me.txtXULrunnerPath.Size = New System.Drawing.Size(264, 20)
+        Me.txtXULrunnerPath.TabIndex = 131
+        '
+        'chkUseCustomPuttyPath
+        '
+        Me.chkUseCustomPuttyPath.AutoSize = True
+        Me.chkUseCustomPuttyPath.Location = New System.Drawing.Point(3, 95)
+        Me.chkUseCustomPuttyPath.Name = "chkUseCustomPuttyPath"
+        Me.chkUseCustomPuttyPath.Size = New System.Drawing.Size(146, 17)
+        Me.chkUseCustomPuttyPath.TabIndex = 30
+        Me.chkUseCustomPuttyPath.Text = "Use custom PuTTY path:"
+        Me.chkUseCustomPuttyPath.UseVisualStyleBackColor = True
+        '
+        'btnBrowseXulRunnerPath
+        '
+        Me.btnBrowseXulRunnerPath.Location = New System.Drawing.Point(291, 236)
+        Me.btnBrowseXulRunnerPath.Name = "btnBrowseXulRunnerPath"
+        Me.btnBrowseXulRunnerPath.Size = New System.Drawing.Size(75, 23)
+        Me.btnBrowseXulRunnerPath.TabIndex = 132
+        Me.btnBrowseXulRunnerPath.Text = "Browse..."
+        Me.btnBrowseXulRunnerPath.UseVisualStyleBackColor = True
+        '
+        'chkEncryptCompleteFile
+        '
+        Me.chkEncryptCompleteFile.AutoSize = True
+        Me.chkEncryptCompleteFile.Location = New System.Drawing.Point(2, 26)
+        Me.chkEncryptCompleteFile.Name = "chkEncryptCompleteFile"
+        Me.chkEncryptCompleteFile.Size = New System.Drawing.Size(180, 17)
+        Me.chkEncryptCompleteFile.TabIndex = 20
+        Me.chkEncryptCompleteFile.Text = "Encrypt complete connection file"
+        Me.chkEncryptCompleteFile.UseVisualStyleBackColor = True
+        '
+        'lblXulRunnerPath
+        '
+        Me.lblXulRunnerPath.AutoSize = True
+        Me.lblXulRunnerPath.Location = New System.Drawing.Point(3, 220)
+        Me.lblXulRunnerPath.Name = "lblXulRunnerPath"
+        Me.lblXulRunnerPath.Size = New System.Drawing.Size(85, 13)
+        Me.lblXulRunnerPath.TabIndex = 133
+        Me.lblXulRunnerPath.Text = "XULrunner path:"
+        '
+        'chkAutomaticallyGetSessionInfo
+        '
+        Me.chkAutomaticallyGetSessionInfo.AutoSize = True
+        Me.chkAutomaticallyGetSessionInfo.Location = New System.Drawing.Point(3, 49)
+        Me.chkAutomaticallyGetSessionInfo.Name = "chkAutomaticallyGetSessionInfo"
+        Me.chkAutomaticallyGetSessionInfo.Size = New System.Drawing.Size(198, 17)
+        Me.chkAutomaticallyGetSessionInfo.TabIndex = 20
+        Me.chkAutomaticallyGetSessionInfo.Text = "Automatically get session information"
+        Me.chkAutomaticallyGetSessionInfo.UseVisualStyleBackColor = True
+        '
+        'chkWriteLogFile
+        '
+        Me.chkWriteLogFile.AutoSize = True
+        Me.chkWriteLogFile.Location = New System.Drawing.Point(3, 3)
+        Me.chkWriteLogFile.Name = "chkWriteLogFile"
+        Me.chkWriteLogFile.Size = New System.Drawing.Size(171, 17)
+        Me.chkWriteLogFile.TabIndex = 10
+        Me.chkWriteLogFile.Text = "Write log file (mRemoteNG.log)"
+        Me.chkWriteLogFile.UseVisualStyleBackColor = True
         '
         'pnlProxy
         '
@@ -1211,7 +459,7 @@ Public Class frmOptions
         Me.pnlProxy.Controls.Add(Me.chkUseProxyAuthentication)
         Me.pnlProxy.Controls.Add(Me.pnlProxyAuthentication)
         Me.pnlProxy.Controls.Add(Me.btnTestProxy)
-        Me.pnlProxy.Location = New System.Drawing.Point(16, 216)
+        Me.pnlProxy.Location = New System.Drawing.Point(3, 200)
         Me.pnlProxy.Name = "pnlProxy"
         Me.pnlProxy.Size = New System.Drawing.Size(536, 224)
         Me.pnlProxy.TabIndex = 134
@@ -1242,7 +490,7 @@ Public Class frmOptions
         Me.txtProxyAddress.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtProxyAddress.Location = New System.Drawing.Point(104, 8)
         Me.txtProxyAddress.Name = "txtProxyAddress"
-        Me.txtProxyAddress.Size = New System.Drawing.Size(240, 23)
+        Me.txtProxyAddress.Size = New System.Drawing.Size(240, 20)
         Me.txtProxyAddress.TabIndex = 2
         '
         'lblProxyPort
@@ -1261,7 +509,7 @@ Public Class frmOptions
         Me.numProxyPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.numProxyPort.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numProxyPort.Name = "numProxyPort"
-        Me.numProxyPort.Size = New System.Drawing.Size(64, 23)
+        Me.numProxyPort.Size = New System.Drawing.Size(64, 20)
         Me.numProxyPort.TabIndex = 5001
         Me.numProxyPort.Value = New Decimal(New Integer() {80, 0, 0, 0})
         '
@@ -1270,7 +518,7 @@ Public Class frmOptions
         Me.chkUseProxyForAutomaticUpdates.AutoSize = True
         Me.chkUseProxyForAutomaticUpdates.Location = New System.Drawing.Point(8, 8)
         Me.chkUseProxyForAutomaticUpdates.Name = "chkUseProxyForAutomaticUpdates"
-        Me.chkUseProxyForAutomaticUpdates.Size = New System.Drawing.Size(186, 20)
+        Me.chkUseProxyForAutomaticUpdates.Size = New System.Drawing.Size(168, 17)
         Me.chkUseProxyForAutomaticUpdates.TabIndex = 80
         Me.chkUseProxyForAutomaticUpdates.Text = "Use a proxy server to connect"
         Me.chkUseProxyForAutomaticUpdates.UseVisualStyleBackColor = True
@@ -1281,7 +529,7 @@ Public Class frmOptions
         Me.chkUseProxyAuthentication.Enabled = False
         Me.chkUseProxyAuthentication.Location = New System.Drawing.Point(32, 80)
         Me.chkUseProxyAuthentication.Name = "chkUseProxyAuthentication"
-        Me.chkUseProxyAuthentication.Size = New System.Drawing.Size(245, 20)
+        Me.chkUseProxyAuthentication.Size = New System.Drawing.Size(216, 17)
         Me.chkUseProxyAuthentication.TabIndex = 100
         Me.chkUseProxyAuthentication.Text = "This proxy server requires authentication"
         Me.chkUseProxyAuthentication.UseVisualStyleBackColor = True
@@ -1312,7 +560,7 @@ Public Class frmOptions
         Me.txtProxyUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtProxyUsername.Location = New System.Drawing.Point(104, 8)
         Me.txtProxyUsername.Name = "txtProxyUsername"
-        Me.txtProxyUsername.Size = New System.Drawing.Size(240, 23)
+        Me.txtProxyUsername.Size = New System.Drawing.Size(240, 20)
         Me.txtProxyUsername.TabIndex = 2
         '
         'lblProxyPassword
@@ -1329,7 +577,7 @@ Public Class frmOptions
         Me.txtProxyPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtProxyPassword.Location = New System.Drawing.Point(104, 40)
         Me.txtProxyPassword.Name = "txtProxyPassword"
-        Me.txtProxyPassword.Size = New System.Drawing.Size(240, 23)
+        Me.txtProxyPassword.Size = New System.Drawing.Size(240, 20)
         Me.txtProxyPassword.TabIndex = 4
         Me.txtProxyPassword.UseSystemPasswordChar = True
         '
@@ -1342,63 +590,720 @@ Public Class frmOptions
         Me.btnTestProxy.Text = "Test Proxy"
         Me.btnTestProxy.UseVisualStyleBackColor = True
         '
-        'btnOK
+        'pnlUpdateCheck
         '
-        Me.btnOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnOK.Location = New System.Drawing.Point(626, 507)
-        Me.btnOK.Name = "btnOK"
-        Me.btnOK.Size = New System.Drawing.Size(75, 23)
-        Me.btnOK.TabIndex = 10000
-        Me.btnOK.Text = "&OK"
-        Me.btnOK.UseVisualStyleBackColor = True
+        Me.pnlUpdateCheck.Controls.Add(Me.btnUpdateCheckNow)
+        Me.pnlUpdateCheck.Controls.Add(Me.chkCheckForUpdatesOnStartup)
+        Me.pnlUpdateCheck.Controls.Add(Me.cboUpdateCheckFrequency)
+        Me.pnlUpdateCheck.Location = New System.Drawing.Point(3, 48)
+        Me.pnlUpdateCheck.Name = "pnlUpdateCheck"
+        Me.pnlUpdateCheck.Size = New System.Drawing.Size(536, 120)
+        Me.pnlUpdateCheck.TabIndex = 137
         '
-        'btnCancel
+        'btnUpdateCheckNow
         '
-        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-        Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.Location = New System.Drawing.Point(707, 507)
-        Me.btnCancel.Name = "btnCancel"
-        Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 11000
-        Me.btnCancel.Text = "&Cancel"
-        Me.btnCancel.UseVisualStyleBackColor = True
+        Me.btnUpdateCheckNow.Location = New System.Drawing.Point(8, 80)
+        Me.btnUpdateCheckNow.Name = "btnUpdateCheckNow"
+        Me.btnUpdateCheckNow.Size = New System.Drawing.Size(100, 32)
+        Me.btnUpdateCheckNow.TabIndex = 136
+        Me.btnUpdateCheckNow.Text = "Check Now"
+        Me.btnUpdateCheckNow.UseVisualStyleBackColor = True
         '
-        'lvPages
+        'chkCheckForUpdatesOnStartup
         '
-        Me.lvPages.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-        Me.lvPages.FullRowSelect = True
-        Me.lvPages.HideSelection = False
-        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem7, ListViewItem8, ListViewItem9, ListViewItem10, ListViewItem11, ListViewItem12})
-        Me.lvPages.LabelWrap = False
-        Me.lvPages.LargeImageList = Me.imgListPages
-        Me.lvPages.Location = New System.Drawing.Point(12, 12)
-        Me.lvPages.MultiSelect = False
-        Me.lvPages.Name = "lvPages"
-        Me.lvPages.Scrollable = False
-        Me.lvPages.Size = New System.Drawing.Size(154, 489)
-        Me.lvPages.TabIndex = 11001
-        Me.lvPages.TileSize = New System.Drawing.Size(154, 30)
-        Me.lvPages.UseCompatibleStateImageBehavior = False
-        Me.lvPages.View = System.Windows.Forms.View.Tile
+        Me.chkCheckForUpdatesOnStartup.AutoSize = True
+        Me.chkCheckForUpdatesOnStartup.Location = New System.Drawing.Point(8, 8)
+        Me.chkCheckForUpdatesOnStartup.Name = "chkCheckForUpdatesOnStartup"
+        Me.chkCheckForUpdatesOnStartup.Size = New System.Drawing.Size(213, 17)
+        Me.chkCheckForUpdatesOnStartup.TabIndex = 31
+        Me.chkCheckForUpdatesOnStartup.Text = "Check for updates and announcements"
+        Me.chkCheckForUpdatesOnStartup.UseVisualStyleBackColor = True
         '
-        'imgListPages
+        'cboUpdateCheckFrequency
         '
-        Me.imgListPages.ImageStream = CType(resources.GetObject("imgListPages.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.imgListPages.TransparentColor = System.Drawing.Color.Transparent
-        Me.imgListPages.Images.SetKeyName(0, "StartupExit_Icon.ico")
-        Me.imgListPages.Images.SetKeyName(1, "Appearance_Icon.ico")
-        Me.imgListPages.Images.SetKeyName(2, "Tab_Icon.ico")
-        Me.imgListPages.Images.SetKeyName(3, "Root_Icon.ico")
-        Me.imgListPages.Images.SetKeyName(4, "Update_Icon.ico")
-        Me.imgListPages.Images.SetKeyName(5, "Config_Icon.ico")
+        Me.cboUpdateCheckFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboUpdateCheckFrequency.FormattingEnabled = True
+        Me.cboUpdateCheckFrequency.Location = New System.Drawing.Point(48, 40)
+        Me.cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency"
+        Me.cboUpdateCheckFrequency.Size = New System.Drawing.Size(128, 21)
+        Me.cboUpdateCheckFrequency.TabIndex = 135
         '
-        'Options
+        'lblUpdatesExplanation
+        '
+        Me.lblUpdatesExplanation.Location = New System.Drawing.Point(3, 0)
+        Me.lblUpdatesExplanation.Name = "lblUpdatesExplanation"
+        Me.lblUpdatesExplanation.Size = New System.Drawing.Size(536, 40)
+        Me.lblUpdatesExplanation.TabIndex = 136
+        Me.lblUpdatesExplanation.Text = "mRemoteNG can periodically connect to the mRemoteNG website to check for updates " & _
+            "and product announcements."
+        '
+        'chkHostnameLikeDisplayName
+        '
+        Me.chkHostnameLikeDisplayName.AutoSize = True
+        Me.chkHostnameLikeDisplayName.Location = New System.Drawing.Point(3, 49)
+        Me.chkHostnameLikeDisplayName.Name = "chkHostnameLikeDisplayName"
+        Me.chkHostnameLikeDisplayName.Size = New System.Drawing.Size(328, 17)
+        Me.chkHostnameLikeDisplayName.TabIndex = 30
+        Me.chkHostnameLikeDisplayName.Text = "Set hostname like display name when creating new connections"
+        Me.chkHostnameLikeDisplayName.UseVisualStyleBackColor = True
+        '
+        'grpExperimental
+        '
+        Me.grpExperimental.BackColor = System.Drawing.Color.IndianRed
+        Me.grpExperimental.Controls.Add(Me.chkUseSQLServer)
+        Me.grpExperimental.Controls.Add(Me.lblSQLInfo)
+        Me.grpExperimental.Controls.Add(Me.lblSQLUsername)
+        Me.grpExperimental.Controls.Add(Me.txtSQLPassword)
+        Me.grpExperimental.Controls.Add(Me.lblSQLServer)
+        Me.grpExperimental.Controls.Add(Me.txtSQLUsername)
+        Me.grpExperimental.Controls.Add(Me.lblSQLPassword)
+        Me.grpExperimental.Controls.Add(Me.txtSQLServer)
+        Me.grpExperimental.Location = New System.Drawing.Point(3, 142)
+        Me.grpExperimental.Name = "grpExperimental"
+        Me.grpExperimental.Size = New System.Drawing.Size(500, 147)
+        Me.grpExperimental.TabIndex = 60
+        Me.grpExperimental.TabStop = False
+        Me.grpExperimental.Text = "EXPERIMENTAL"
+        '
+        'chkUseSQLServer
+        '
+        Me.chkUseSQLServer.AutoSize = True
+        Me.chkUseSQLServer.Location = New System.Drawing.Point(16, 20)
+        Me.chkUseSQLServer.Name = "chkUseSQLServer"
+        Me.chkUseSQLServer.Size = New System.Drawing.Size(234, 17)
+        Me.chkUseSQLServer.TabIndex = 61
+        Me.chkUseSQLServer.Text = "Use SQL Server to load && save connections"
+        Me.chkUseSQLServer.UseVisualStyleBackColor = True
+        '
+        'lblSQLInfo
+        '
+        Me.lblSQLInfo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.lblSQLInfo.Enabled = False
+        Me.lblSQLInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World)
+        Me.lblSQLInfo.Location = New System.Drawing.Point(291, 11)
+        Me.lblSQLInfo.Name = "lblSQLInfo"
+        Me.lblSQLInfo.Size = New System.Drawing.Size(203, 131)
+        Me.lblSQLInfo.TabIndex = 120
+        Me.lblSQLInfo.Text = "Please see Help - Getting started - SQL Configuration for more Info!"
+        Me.lblSQLInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        '
+        'lblSQLUsername
+        '
+        Me.lblSQLUsername.AutoSize = True
+        Me.lblSQLUsername.Enabled = False
+        Me.lblSQLUsername.Location = New System.Drawing.Point(36, 77)
+        Me.lblSQLUsername.Name = "lblSQLUsername"
+        Me.lblSQLUsername.Size = New System.Drawing.Size(58, 13)
+        Me.lblSQLUsername.TabIndex = 80
+        Me.lblSQLUsername.Text = "Username:"
+        '
+        'txtSQLPassword
+        '
+        Me.txtSQLPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSQLPassword.Enabled = False
+        Me.txtSQLPassword.Location = New System.Drawing.Point(126, 101)
+        Me.txtSQLPassword.Name = "txtSQLPassword"
+        Me.txtSQLPassword.Size = New System.Drawing.Size(153, 20)
+        Me.txtSQLPassword.TabIndex = 64
+        Me.txtSQLPassword.UseSystemPasswordChar = True
+        '
+        'lblSQLServer
+        '
+        Me.lblSQLServer.AutoSize = True
+        Me.lblSQLServer.Enabled = False
+        Me.lblSQLServer.Location = New System.Drawing.Point(36, 50)
+        Me.lblSQLServer.Name = "lblSQLServer"
+        Me.lblSQLServer.Size = New System.Drawing.Size(65, 13)
+        Me.lblSQLServer.TabIndex = 60
+        Me.lblSQLServer.Text = "SQL Server:"
+        '
+        'txtSQLUsername
+        '
+        Me.txtSQLUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSQLUsername.Enabled = False
+        Me.txtSQLUsername.Location = New System.Drawing.Point(126, 74)
+        Me.txtSQLUsername.Name = "txtSQLUsername"
+        Me.txtSQLUsername.Size = New System.Drawing.Size(153, 20)
+        Me.txtSQLUsername.TabIndex = 63
+        '
+        'lblSQLPassword
+        '
+        Me.lblSQLPassword.AutoSize = True
+        Me.lblSQLPassword.Enabled = False
+        Me.lblSQLPassword.Location = New System.Drawing.Point(36, 104)
+        Me.lblSQLPassword.Name = "lblSQLPassword"
+        Me.lblSQLPassword.Size = New System.Drawing.Size(56, 13)
+        Me.lblSQLPassword.TabIndex = 100
+        Me.lblSQLPassword.Text = "Password:"
+        '
+        'txtSQLServer
+        '
+        Me.txtSQLServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSQLServer.Enabled = False
+        Me.txtSQLServer.Location = New System.Drawing.Point(126, 47)
+        Me.txtSQLServer.Name = "txtSQLServer"
+        Me.txtSQLServer.Size = New System.Drawing.Size(153, 20)
+        Me.txtSQLServer.TabIndex = 62
+        '
+        'pnlAutoSave
+        '
+        Me.pnlAutoSave.Controls.Add(Me.lblAutoSave1)
+        Me.pnlAutoSave.Controls.Add(Me.numAutoSave)
+        Me.pnlAutoSave.Controls.Add(Me.lblAutoSave2)
+        Me.pnlAutoSave.Location = New System.Drawing.Point(3, 107)
+        Me.pnlAutoSave.Name = "pnlAutoSave"
+        Me.pnlAutoSave.Size = New System.Drawing.Size(500, 29)
+        Me.pnlAutoSave.TabIndex = 50
+        '
+        'lblAutoSave1
+        '
+        Me.lblAutoSave1.AutoSize = True
+        Me.lblAutoSave1.Location = New System.Drawing.Point(3, 9)
+        Me.lblAutoSave1.Name = "lblAutoSave1"
+        Me.lblAutoSave1.Size = New System.Drawing.Size(89, 13)
+        Me.lblAutoSave1.TabIndex = 40
+        Me.lblAutoSave1.Text = "Auto Save every:"
+        '
+        'numAutoSave
+        '
+        Me.numAutoSave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.numAutoSave.Location = New System.Drawing.Point(168, 6)
+        Me.numAutoSave.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
+        Me.numAutoSave.Name = "numAutoSave"
+        Me.numAutoSave.Size = New System.Drawing.Size(53, 20)
+        Me.numAutoSave.TabIndex = 51
+        '
+        'lblAutoSave2
+        '
+        Me.lblAutoSave2.AutoSize = True
+        Me.lblAutoSave2.Location = New System.Drawing.Point(233, 9)
+        Me.lblAutoSave2.Name = "lblAutoSave2"
+        Me.lblAutoSave2.Size = New System.Drawing.Size(135, 13)
+        Me.lblAutoSave2.TabIndex = 60
+        Me.lblAutoSave2.Text = "Minutes (0 means disabled)"
+        '
+        'chkSingleClickOnOpenedConnectionSwitchesToIt
+        '
+        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.AutoSize = True
+        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Location = New System.Drawing.Point(3, 26)
+        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Name = "chkSingleClickOnOpenedConnectionSwitchesToIt"
+        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = New System.Drawing.Size(254, 17)
+        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.TabIndex = 20
+        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Text = "Single click on opened connection switches to it"
+        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.UseVisualStyleBackColor = True
+        '
+        'pnlDefaultCredentials
+        '
+        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsCustom)
+        Me.pnlDefaultCredentials.Controls.Add(Me.lblDefaultCredentials)
+        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsNoInfo)
+        Me.pnlDefaultCredentials.Controls.Add(Me.radCredentialsWindows)
+        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsDomain)
+        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsUsername)
+        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsPassword)
+        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsPassword)
+        Me.pnlDefaultCredentials.Controls.Add(Me.txtCredentialsUsername)
+        Me.pnlDefaultCredentials.Controls.Add(Me.lblCredentialsDomain)
+        Me.pnlDefaultCredentials.Location = New System.Drawing.Point(3, 295)
+        Me.pnlDefaultCredentials.Name = "pnlDefaultCredentials"
+        Me.pnlDefaultCredentials.Size = New System.Drawing.Size(500, 175)
+        Me.pnlDefaultCredentials.TabIndex = 70
+        '
+        'radCredentialsCustom
+        '
+        Me.radCredentialsCustom.AutoSize = True
+        Me.radCredentialsCustom.Location = New System.Drawing.Point(21, 69)
+        Me.radCredentialsCustom.Name = "radCredentialsCustom"
+        Me.radCredentialsCustom.Size = New System.Drawing.Size(87, 17)
+        Me.radCredentialsCustom.TabIndex = 73
+        Me.radCredentialsCustom.TabStop = True
+        Me.radCredentialsCustom.Text = "the following:"
+        Me.radCredentialsCustom.UseVisualStyleBackColor = True
+        '
+        'lblDefaultCredentials
+        '
+        Me.lblDefaultCredentials.AutoSize = True
+        Me.lblDefaultCredentials.Location = New System.Drawing.Point(8, 9)
+        Me.lblDefaultCredentials.Name = "lblDefaultCredentials"
+        Me.lblDefaultCredentials.Size = New System.Drawing.Size(257, 13)
+        Me.lblDefaultCredentials.TabIndex = 80
+        Me.lblDefaultCredentials.Text = "For empty Username, Password or Domain fields use:"
+        '
+        'radCredentialsNoInfo
+        '
+        Me.radCredentialsNoInfo.AutoSize = True
+        Me.radCredentialsNoInfo.Location = New System.Drawing.Point(21, 31)
+        Me.radCredentialsNoInfo.Name = "radCredentialsNoInfo"
+        Me.radCredentialsNoInfo.Size = New System.Drawing.Size(91, 17)
+        Me.radCredentialsNoInfo.TabIndex = 71
+        Me.radCredentialsNoInfo.TabStop = True
+        Me.radCredentialsNoInfo.Text = "no information"
+        Me.radCredentialsNoInfo.UseVisualStyleBackColor = True
+        '
+        'radCredentialsWindows
+        '
+        Me.radCredentialsWindows.AutoSize = True
+        Me.radCredentialsWindows.Location = New System.Drawing.Point(21, 50)
+        Me.radCredentialsWindows.Name = "radCredentialsWindows"
+        Me.radCredentialsWindows.Size = New System.Drawing.Size(227, 17)
+        Me.radCredentialsWindows.TabIndex = 72
+        Me.radCredentialsWindows.TabStop = True
+        Me.radCredentialsWindows.Text = "my current credentials (windows logon info)"
+        Me.radCredentialsWindows.UseVisualStyleBackColor = True
+        '
+        'txtCredentialsDomain
+        '
+        Me.txtCredentialsDomain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCredentialsDomain.Enabled = False
+        Me.txtCredentialsDomain.Location = New System.Drawing.Point(130, 147)
+        Me.txtCredentialsDomain.Name = "txtCredentialsDomain"
+        Me.txtCredentialsDomain.Size = New System.Drawing.Size(150, 20)
+        Me.txtCredentialsDomain.TabIndex = 76
+        '
+        'lblCredentialsUsername
+        '
+        Me.lblCredentialsUsername.AutoSize = True
+        Me.lblCredentialsUsername.Enabled = False
+        Me.lblCredentialsUsername.Location = New System.Drawing.Point(39, 95)
+        Me.lblCredentialsUsername.Name = "lblCredentialsUsername"
+        Me.lblCredentialsUsername.Size = New System.Drawing.Size(58, 13)
+        Me.lblCredentialsUsername.TabIndex = 120
+        Me.lblCredentialsUsername.Text = "Username:"
+        '
+        'txtCredentialsPassword
+        '
+        Me.txtCredentialsPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCredentialsPassword.Enabled = False
+        Me.txtCredentialsPassword.Location = New System.Drawing.Point(130, 120)
+        Me.txtCredentialsPassword.Name = "txtCredentialsPassword"
+        Me.txtCredentialsPassword.Size = New System.Drawing.Size(150, 20)
+        Me.txtCredentialsPassword.TabIndex = 75
+        Me.txtCredentialsPassword.UseSystemPasswordChar = True
+        '
+        'lblCredentialsPassword
+        '
+        Me.lblCredentialsPassword.AutoSize = True
+        Me.lblCredentialsPassword.Enabled = False
+        Me.lblCredentialsPassword.Location = New System.Drawing.Point(39, 123)
+        Me.lblCredentialsPassword.Name = "lblCredentialsPassword"
+        Me.lblCredentialsPassword.Size = New System.Drawing.Size(56, 13)
+        Me.lblCredentialsPassword.TabIndex = 140
+        Me.lblCredentialsPassword.Text = "Password:"
+        '
+        'txtCredentialsUsername
+        '
+        Me.txtCredentialsUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCredentialsUsername.Enabled = False
+        Me.txtCredentialsUsername.Location = New System.Drawing.Point(130, 93)
+        Me.txtCredentialsUsername.Name = "txtCredentialsUsername"
+        Me.txtCredentialsUsername.Size = New System.Drawing.Size(150, 20)
+        Me.txtCredentialsUsername.TabIndex = 74
+        '
+        'lblCredentialsDomain
+        '
+        Me.lblCredentialsDomain.AutoSize = True
+        Me.lblCredentialsDomain.Enabled = False
+        Me.lblCredentialsDomain.Location = New System.Drawing.Point(39, 150)
+        Me.lblCredentialsDomain.Name = "lblCredentialsDomain"
+        Me.lblCredentialsDomain.Size = New System.Drawing.Size(46, 13)
+        Me.lblCredentialsDomain.TabIndex = 160
+        Me.lblCredentialsDomain.Text = "Domain:"
+        '
+        'chkSingleClickOnConnectionOpensIt
+        '
+        Me.chkSingleClickOnConnectionOpensIt.AutoSize = True
+        Me.chkSingleClickOnConnectionOpensIt.Location = New System.Drawing.Point(3, 3)
+        Me.chkSingleClickOnConnectionOpensIt.Name = "chkSingleClickOnConnectionOpensIt"
+        Me.chkSingleClickOnConnectionOpensIt.Size = New System.Drawing.Size(191, 17)
+        Me.chkSingleClickOnConnectionOpensIt.TabIndex = 10
+        Me.chkSingleClickOnConnectionOpensIt.Text = "Single click on connection opens it"
+        Me.chkSingleClickOnConnectionOpensIt.UseVisualStyleBackColor = True
+        '
+        'pnlRdpReconnectionCount
+        '
+        Me.pnlRdpReconnectionCount.Controls.Add(Me.lblRdpReconnectionCount)
+        Me.pnlRdpReconnectionCount.Controls.Add(Me.numRdpReconnectionCount)
+        Me.pnlRdpReconnectionCount.Location = New System.Drawing.Point(3, 72)
+        Me.pnlRdpReconnectionCount.Name = "pnlRdpReconnectionCount"
+        Me.pnlRdpReconnectionCount.Size = New System.Drawing.Size(500, 29)
+        Me.pnlRdpReconnectionCount.TabIndex = 40
+        '
+        'lblRdpReconnectionCount
+        '
+        Me.lblRdpReconnectionCount.AutoSize = True
+        Me.lblRdpReconnectionCount.Location = New System.Drawing.Point(3, 9)
+        Me.lblRdpReconnectionCount.Name = "lblRdpReconnectionCount"
+        Me.lblRdpReconnectionCount.Size = New System.Drawing.Size(131, 13)
+        Me.lblRdpReconnectionCount.TabIndex = 40
+        Me.lblRdpReconnectionCount.Text = "RDP Reconnection Count"
+        '
+        'numRdpReconnectionCount
+        '
+        Me.numRdpReconnectionCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.numRdpReconnectionCount.Location = New System.Drawing.Point(168, 6)
+        Me.numRdpReconnectionCount.Maximum = New Decimal(New Integer() {20, 0, 0, 0})
+        Me.numRdpReconnectionCount.Name = "numRdpReconnectionCount"
+        Me.numRdpReconnectionCount.Size = New System.Drawing.Size(53, 20)
+        Me.numRdpReconnectionCount.TabIndex = 41
+        Me.numRdpReconnectionCount.Value = New Decimal(New Integer() {5, 0, 0, 0})
+        '
+        'chkAlwaysShowPanelSelectionDlg
+        '
+        Me.chkAlwaysShowPanelSelectionDlg.AutoSize = True
+        Me.chkAlwaysShowPanelSelectionDlg.Location = New System.Drawing.Point(3, 95)
+        Me.chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg"
+        Me.chkAlwaysShowPanelSelectionDlg.Size = New System.Drawing.Size(317, 17)
+        Me.chkAlwaysShowPanelSelectionDlg.TabIndex = 50
+        Me.chkAlwaysShowPanelSelectionDlg.Text = "Always show panel selection dialog when opening connectins"
+        Me.chkAlwaysShowPanelSelectionDlg.UseVisualStyleBackColor = True
+        '
+        'chkShowLogonInfoOnTabs
+        '
+        Me.chkShowLogonInfoOnTabs.AutoSize = True
+        Me.chkShowLogonInfoOnTabs.Location = New System.Drawing.Point(3, 26)
+        Me.chkShowLogonInfoOnTabs.Name = "chkShowLogonInfoOnTabs"
+        Me.chkShowLogonInfoOnTabs.Size = New System.Drawing.Size(203, 17)
+        Me.chkShowLogonInfoOnTabs.TabIndex = 20
+        Me.chkShowLogonInfoOnTabs.Text = "Show logon information on tab names"
+        Me.chkShowLogonInfoOnTabs.UseVisualStyleBackColor = True
+        '
+        'chkDoubleClickClosesTab
+        '
+        Me.chkDoubleClickClosesTab.AutoSize = True
+        Me.chkDoubleClickClosesTab.Location = New System.Drawing.Point(3, 72)
+        Me.chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab"
+        Me.chkDoubleClickClosesTab.Size = New System.Drawing.Size(159, 17)
+        Me.chkDoubleClickClosesTab.TabIndex = 40
+        Me.chkDoubleClickClosesTab.Text = "Double click on tab closes it"
+        Me.chkDoubleClickClosesTab.UseVisualStyleBackColor = True
+        '
+        'chkShowProtocolOnTabs
+        '
+        Me.chkShowProtocolOnTabs.AutoSize = True
+        Me.chkShowProtocolOnTabs.Location = New System.Drawing.Point(3, 49)
+        Me.chkShowProtocolOnTabs.Name = "chkShowProtocolOnTabs"
+        Me.chkShowProtocolOnTabs.Size = New System.Drawing.Size(166, 17)
+        Me.chkShowProtocolOnTabs.TabIndex = 30
+        Me.chkShowProtocolOnTabs.Text = "Show protocols on tab names"
+        Me.chkShowProtocolOnTabs.UseVisualStyleBackColor = True
+        '
+        'chkOpenNewTabRightOfSelected
+        '
+        Me.chkOpenNewTabRightOfSelected.AutoSize = True
+        Me.chkOpenNewTabRightOfSelected.Location = New System.Drawing.Point(3, 3)
+        Me.chkOpenNewTabRightOfSelected.Name = "chkOpenNewTabRightOfSelected"
+        Me.chkOpenNewTabRightOfSelected.Size = New System.Drawing.Size(280, 17)
+        Me.chkOpenNewTabRightOfSelected.TabIndex = 10
+        Me.chkOpenNewTabRightOfSelected.Text = "Open new tab to the right of the currently selected tab"
+        Me.chkOpenNewTabRightOfSelected.UseVisualStyleBackColor = True
+        '
+        'chkMCWarnings
+        '
+        Me.chkMCWarnings.AutoSize = True
+        Me.chkMCWarnings.Enabled = False
+        Me.chkMCWarnings.Location = New System.Drawing.Point(126, 191)
+        Me.chkMCWarnings.Name = "chkMCWarnings"
+        Me.chkMCWarnings.Size = New System.Drawing.Size(71, 17)
+        Me.chkMCWarnings.TabIndex = 54
+        Me.chkMCWarnings.Text = "Warnings"
+        Me.chkMCWarnings.UseVisualStyleBackColor = True
+        '
+        'chkMCErrors
+        '
+        Me.chkMCErrors.AutoSize = True
+        Me.chkMCErrors.Enabled = False
+        Me.chkMCErrors.Location = New System.Drawing.Point(217, 191)
+        Me.chkMCErrors.Name = "chkMCErrors"
+        Me.chkMCErrors.Size = New System.Drawing.Size(53, 17)
+        Me.chkMCErrors.TabIndex = 55
+        Me.chkMCErrors.Text = "Errors"
+        Me.chkMCErrors.UseVisualStyleBackColor = True
+        '
+        'chkMCInformation
+        '
+        Me.chkMCInformation.AutoSize = True
+        Me.chkMCInformation.Enabled = False
+        Me.chkMCInformation.Location = New System.Drawing.Point(19, 191)
+        Me.chkMCInformation.Name = "chkMCInformation"
+        Me.chkMCInformation.Size = New System.Drawing.Size(83, 17)
+        Me.chkMCInformation.TabIndex = 53
+        Me.chkMCInformation.Text = "Informations"
+        Me.chkMCInformation.UseVisualStyleBackColor = True
+        '
+        'lblSwitchToErrorsAndInfos
+        '
+        Me.lblSwitchToErrorsAndInfos.AutoSize = True
+        Me.lblSwitchToErrorsAndInfos.Location = New System.Drawing.Point(3, 171)
+        Me.lblSwitchToErrorsAndInfos.Name = "lblSwitchToErrorsAndInfos"
+        Me.lblSwitchToErrorsAndInfos.Size = New System.Drawing.Size(159, 13)
+        Me.lblSwitchToErrorsAndInfos.TabIndex = 52
+        Me.lblSwitchToErrorsAndInfos.Text = "Switch to Notifications panel on:"
+        '
+        'chkUseOnlyErrorsAndInfosPanel
+        '
+        Me.chkUseOnlyErrorsAndInfosPanel.AutoSize = True
+        Me.chkUseOnlyErrorsAndInfosPanel.Location = New System.Drawing.Point(3, 146)
+        Me.chkUseOnlyErrorsAndInfosPanel.Name = "chkUseOnlyErrorsAndInfosPanel"
+        Me.chkUseOnlyErrorsAndInfosPanel.Size = New System.Drawing.Size(278, 17)
+        Me.chkUseOnlyErrorsAndInfosPanel.TabIndex = 51
+        Me.chkUseOnlyErrorsAndInfosPanel.Text = "Use only Notifications panel (no messagebox popups)"
+        Me.chkUseOnlyErrorsAndInfosPanel.UseVisualStyleBackColor = True
+        '
+        'chkShowFullConnectionsFilePathInTitle
+        '
+        Me.chkShowFullConnectionsFilePathInTitle.AutoSize = True
+        Me.chkShowFullConnectionsFilePathInTitle.Location = New System.Drawing.Point(3, 128)
+        Me.chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle"
+        Me.chkShowFullConnectionsFilePathInTitle.Size = New System.Drawing.Size(239, 17)
+        Me.chkShowFullConnectionsFilePathInTitle.TabIndex = 20
+        Me.chkShowFullConnectionsFilePathInTitle.Text = "Show full connections file path in window title"
+        Me.chkShowFullConnectionsFilePathInTitle.UseVisualStyleBackColor = True
+        '
+        'chkShowSystemTrayIcon
+        '
+        Me.chkShowSystemTrayIcon.AutoSize = True
+        Me.chkShowSystemTrayIcon.Location = New System.Drawing.Point(3, 176)
+        Me.chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon"
+        Me.chkShowSystemTrayIcon.Size = New System.Drawing.Size(172, 17)
+        Me.chkShowSystemTrayIcon.TabIndex = 30
+        Me.chkShowSystemTrayIcon.Text = "Always show System Tray Icon"
+        Me.chkShowSystemTrayIcon.UseVisualStyleBackColor = True
+        '
+        'chkMinimizeToSystemTray
+        '
+        Me.chkMinimizeToSystemTray.AutoSize = True
+        Me.chkMinimizeToSystemTray.Location = New System.Drawing.Point(3, 200)
+        Me.chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray"
+        Me.chkMinimizeToSystemTray.Size = New System.Drawing.Size(139, 17)
+        Me.chkMinimizeToSystemTray.TabIndex = 40
+        Me.chkMinimizeToSystemTray.Text = "Minimize to System Tray"
+        Me.chkMinimizeToSystemTray.UseVisualStyleBackColor = True
+        '
+        'chkShowDescriptionTooltipsInTree
+        '
+        Me.chkShowDescriptionTooltipsInTree.AutoSize = True
+        Me.chkShowDescriptionTooltipsInTree.Location = New System.Drawing.Point(3, 104)
+        Me.chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree"
+        Me.chkShowDescriptionTooltipsInTree.Size = New System.Drawing.Size(231, 17)
+        Me.chkShowDescriptionTooltipsInTree.TabIndex = 10
+        Me.chkShowDescriptionTooltipsInTree.Text = "Show description tooltips in connection tree"
+        Me.chkShowDescriptionTooltipsInTree.UseVisualStyleBackColor = True
+        '
+        'lblLanguage
+        '
+        Me.lblLanguage.AutoSize = True
+        Me.lblLanguage.Location = New System.Drawing.Point(3, 0)
+        Me.lblLanguage.Name = "lblLanguage"
+        Me.lblLanguage.Size = New System.Drawing.Size(55, 13)
+        Me.lblLanguage.TabIndex = 41
+        Me.lblLanguage.Text = "Language"
+        '
+        'cboLanguage
+        '
+        Me.cboLanguage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cboLanguage.FormattingEnabled = True
+        Me.cboLanguage.Location = New System.Drawing.Point(3, 24)
+        Me.cboLanguage.Name = "cboLanguage"
+        Me.cboLanguage.Size = New System.Drawing.Size(304, 21)
+        Me.cboLanguage.Sorted = True
+        Me.cboLanguage.TabIndex = 42
+        '
+        'lblLanguageRestartRequired
+        '
+        Me.lblLanguageRestartRequired.AutoSize = True
+        Me.lblLanguageRestartRequired.Location = New System.Drawing.Point(3, 56)
+        Me.lblLanguageRestartRequired.Name = "lblLanguageRestartRequired"
+        Me.lblLanguageRestartRequired.Size = New System.Drawing.Size(380, 13)
+        Me.lblLanguageRestartRequired.TabIndex = 43
+        Me.lblLanguageRestartRequired.Text = "mRemoteNG must be restarted before changes to the language will take effect."
+        '
+        'chkReconnectOnStart
+        '
+        Me.chkReconnectOnStart.AutoSize = True
+        Me.chkReconnectOnStart.Location = New System.Drawing.Point(3, 75)
+        Me.chkReconnectOnStart.Name = "chkReconnectOnStart"
+        Me.chkReconnectOnStart.Size = New System.Drawing.Size(273, 17)
+        Me.chkReconnectOnStart.TabIndex = 40
+        Me.chkReconnectOnStart.Text = "Reconnect to previously opened sessions on startup"
+        Me.chkReconnectOnStart.UseVisualStyleBackColor = True
+        '
+        'chkSingleInstance
+        '
+        Me.chkSingleInstance.AutoSize = True
+        Me.chkSingleInstance.Location = New System.Drawing.Point(3, 99)
+        Me.chkSingleInstance.Name = "chkSingleInstance"
+        Me.chkSingleInstance.Size = New System.Drawing.Size(366, 17)
+        Me.chkSingleInstance.TabIndex = 50
+        Me.chkSingleInstance.Text = "Allow only a single instance of the application (mRemote restart required)"
+        Me.chkSingleInstance.UseVisualStyleBackColor = True
+        '
+        'chkConfirmExit
+        '
+        Me.chkConfirmExit.AutoSize = True
+        Me.chkConfirmExit.Location = New System.Drawing.Point(3, 27)
+        Me.chkConfirmExit.Name = "chkConfirmExit"
+        Me.chkConfirmExit.Size = New System.Drawing.Size(221, 17)
+        Me.chkConfirmExit.TabIndex = 20
+        Me.chkConfirmExit.Text = "Confirm exit if there are open connections"
+        Me.chkConfirmExit.UseVisualStyleBackColor = True
+        '
+        'chkProperInstallationOfComponentsAtStartup
+        '
+        Me.chkProperInstallationOfComponentsAtStartup.AutoSize = True
+        Me.chkProperInstallationOfComponentsAtStartup.Location = New System.Drawing.Point(3, 123)
+        Me.chkProperInstallationOfComponentsAtStartup.Name = "chkProperInstallationOfComponentsAtStartup"
+        Me.chkProperInstallationOfComponentsAtStartup.Size = New System.Drawing.Size(262, 17)
+        Me.chkProperInstallationOfComponentsAtStartup.TabIndex = 50
+        Me.chkProperInstallationOfComponentsAtStartup.Text = "Check proper installation of components at startup"
+        Me.chkProperInstallationOfComponentsAtStartup.UseVisualStyleBackColor = True
+        '
+        'chkSaveConsOnExit
+        '
+        Me.chkSaveConsOnExit.AutoSize = True
+        Me.chkSaveConsOnExit.Location = New System.Drawing.Point(3, 51)
+        Me.chkSaveConsOnExit.Name = "chkSaveConsOnExit"
+        Me.chkSaveConsOnExit.Size = New System.Drawing.Size(146, 17)
+        Me.chkSaveConsOnExit.TabIndex = 10
+        Me.chkSaveConsOnExit.Text = "Save connections on exit"
+        Me.chkSaveConsOnExit.UseVisualStyleBackColor = True
+        '
+        'chkConfirmCloseConnection
+        '
+        Me.chkConfirmCloseConnection.AutoSize = True
+        Me.chkConfirmCloseConnection.Location = New System.Drawing.Point(3, 3)
+        Me.chkConfirmCloseConnection.Name = "chkConfirmCloseConnection"
+        Me.chkConfirmCloseConnection.Size = New System.Drawing.Size(176, 17)
+        Me.chkConfirmCloseConnection.TabIndex = 51
+        Me.chkConfirmCloseConnection.Text = "Confirm closing connection tabs"
+        Me.chkConfirmCloseConnection.UseVisualStyleBackColor = True
+        '
+        'tcTabControl
+        '
+        Me.tcTabControl.Controls.Add(Me.tabStartupExit)
+        Me.tcTabControl.Controls.Add(Me.tabAppearance)
+        Me.tcTabControl.Controls.Add(Me.tabTabsAndPanels)
+        Me.tcTabControl.Controls.Add(Me.tabConnections)
+        Me.tcTabControl.Controls.Add(Me.tabUpdates)
+        Me.tcTabControl.Controls.Add(Me.tabAdvanced)
+        Me.tcTabControl.Location = New System.Drawing.Point(172, 12)
+        Me.tcTabControl.Name = "tcTabControl"
+        Me.tcTabControl.SelectedIndex = 0
+        Me.tcTabControl.Size = New System.Drawing.Size(610, 489)
+        Me.tcTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
+        Me.tcTabControl.TabIndex = 5001
+        '
+        'tabStartupExit
+        '
+        Me.tabStartupExit.Controls.Add(Me.chkConfirmCloseConnection)
+        Me.tabStartupExit.Controls.Add(Me.chkReconnectOnStart)
+        Me.tabStartupExit.Controls.Add(Me.chkSaveConsOnExit)
+        Me.tabStartupExit.Controls.Add(Me.chkSingleInstance)
+        Me.tabStartupExit.Controls.Add(Me.chkProperInstallationOfComponentsAtStartup)
+        Me.tabStartupExit.Controls.Add(Me.chkConfirmExit)
+        Me.tabStartupExit.Location = New System.Drawing.Point(4, 22)
+        Me.tabStartupExit.Name = "tabStartupExit"
+        Me.tabStartupExit.Size = New System.Drawing.Size(602, 463)
+        Me.tabStartupExit.TabIndex = 0
+        Me.tabStartupExit.Text = "Startup/Exit"
+        Me.tabStartupExit.UseVisualStyleBackColor = True
+        '
+        'tabAppearance
+        '
+        Me.tabAppearance.Controls.Add(Me.lblLanguageRestartRequired)
+        Me.tabAppearance.Controls.Add(Me.cboLanguage)
+        Me.tabAppearance.Controls.Add(Me.lblLanguage)
+        Me.tabAppearance.Controls.Add(Me.chkShowFullConnectionsFilePathInTitle)
+        Me.tabAppearance.Controls.Add(Me.chkShowDescriptionTooltipsInTree)
+        Me.tabAppearance.Controls.Add(Me.chkShowSystemTrayIcon)
+        Me.tabAppearance.Controls.Add(Me.chkMinimizeToSystemTray)
+        Me.tabAppearance.Location = New System.Drawing.Point(4, 22)
+        Me.tabAppearance.Name = "tabAppearance"
+        Me.tabAppearance.Size = New System.Drawing.Size(602, 463)
+        Me.tabAppearance.TabIndex = 1
+        Me.tabAppearance.Text = "Appearance"
+        Me.tabAppearance.UseVisualStyleBackColor = True
+        '
+        'tabTabsAndPanels
+        '
+        Me.tabTabsAndPanels.Controls.Add(Me.chkUseOnlyErrorsAndInfosPanel)
+        Me.tabTabsAndPanels.Controls.Add(Me.chkOpenNewTabRightOfSelected)
+        Me.tabTabsAndPanels.Controls.Add(Me.lblSwitchToErrorsAndInfos)
+        Me.tabTabsAndPanels.Controls.Add(Me.chkAlwaysShowPanelSelectionDlg)
+        Me.tabTabsAndPanels.Controls.Add(Me.chkMCInformation)
+        Me.tabTabsAndPanels.Controls.Add(Me.chkShowLogonInfoOnTabs)
+        Me.tabTabsAndPanels.Controls.Add(Me.chkMCErrors)
+        Me.tabTabsAndPanels.Controls.Add(Me.chkDoubleClickClosesTab)
+        Me.tabTabsAndPanels.Controls.Add(Me.chkMCWarnings)
+        Me.tabTabsAndPanels.Controls.Add(Me.chkShowProtocolOnTabs)
+        Me.tabTabsAndPanels.Location = New System.Drawing.Point(4, 22)
+        Me.tabTabsAndPanels.Name = "tabTabsAndPanels"
+        Me.tabTabsAndPanels.Size = New System.Drawing.Size(602, 463)
+        Me.tabTabsAndPanels.TabIndex = 2
+        Me.tabTabsAndPanels.Text = "Tabs & Panels"
+        Me.tabTabsAndPanels.UseVisualStyleBackColor = True
+        '
+        'tabConnections
+        '
+        Me.tabConnections.Controls.Add(Me.pnlRdpReconnectionCount)
+        Me.tabConnections.Controls.Add(Me.chkSingleClickOnConnectionOpensIt)
+        Me.tabConnections.Controls.Add(Me.chkHostnameLikeDisplayName)
+        Me.tabConnections.Controls.Add(Me.pnlDefaultCredentials)
+        Me.tabConnections.Controls.Add(Me.grpExperimental)
+        Me.tabConnections.Controls.Add(Me.chkSingleClickOnOpenedConnectionSwitchesToIt)
+        Me.tabConnections.Controls.Add(Me.pnlAutoSave)
+        Me.tabConnections.Location = New System.Drawing.Point(4, 22)
+        Me.tabConnections.Name = "tabConnections"
+        Me.tabConnections.Size = New System.Drawing.Size(602, 463)
+        Me.tabConnections.TabIndex = 3
+        Me.tabConnections.Text = "Connections"
+        Me.tabConnections.UseVisualStyleBackColor = True
+        '
+        'tabUpdates
+        '
+        Me.tabUpdates.Controls.Add(Me.lblUpdatesExplanation)
+        Me.tabUpdates.Controls.Add(Me.pnlUpdateCheck)
+        Me.tabUpdates.Controls.Add(Me.pnlProxy)
+        Me.tabUpdates.Location = New System.Drawing.Point(4, 22)
+        Me.tabUpdates.Name = "tabUpdates"
+        Me.tabUpdates.Size = New System.Drawing.Size(602, 463)
+        Me.tabUpdates.TabIndex = 4
+        Me.tabUpdates.Text = "Updates"
+        Me.tabUpdates.UseVisualStyleBackColor = True
+        '
+        'tabAdvanced
+        '
+        Me.tabAdvanced.Controls.Add(Me.chkWriteLogFile)
+        Me.tabAdvanced.Controls.Add(Me.chkAutomaticallyGetSessionInfo)
+        Me.tabAdvanced.Controls.Add(Me.lblXulRunnerPath)
+        Me.tabAdvanced.Controls.Add(Me.lblMaximumPuttyWaitTime)
+        Me.tabAdvanced.Controls.Add(Me.chkEncryptCompleteFile)
+        Me.tabAdvanced.Controls.Add(Me.chkAutomaticReconnect)
+        Me.tabAdvanced.Controls.Add(Me.btnBrowseXulRunnerPath)
+        Me.tabAdvanced.Controls.Add(Me.numPuttyWaitTime)
+        Me.tabAdvanced.Controls.Add(Me.chkUseCustomPuttyPath)
+        Me.tabAdvanced.Controls.Add(Me.lblConfigurePuttySessions)
+        Me.tabAdvanced.Controls.Add(Me.txtXULrunnerPath)
+        Me.tabAdvanced.Controls.Add(Me.numUVNCSCPort)
+        Me.tabAdvanced.Controls.Add(Me.txtCustomPuttyPath)
+        Me.tabAdvanced.Controls.Add(Me.btnLaunchPutty)
+        Me.tabAdvanced.Controls.Add(Me.lblUVNCSCPort)
+        Me.tabAdvanced.Controls.Add(Me.lblSeconds)
+        Me.tabAdvanced.Controls.Add(Me.btnBrowseCustomPuttyPath)
+        Me.tabAdvanced.Location = New System.Drawing.Point(4, 22)
+        Me.tabAdvanced.Name = "tabAdvanced"
+        Me.tabAdvanced.Size = New System.Drawing.Size(602, 463)
+        Me.tabAdvanced.TabIndex = 5
+        Me.tabAdvanced.Text = "Advanced"
+        Me.tabAdvanced.UseVisualStyleBackColor = True
+        '
+        'frmOptions
         '
         Me.CancelButton = Me.btnCancel
         Me.ClientSize = New System.Drawing.Size(794, 542)
+        Me.Controls.Add(Me.tcTabControl)
         Me.Controls.Add(Me.lvPages)
-        Me.Controls.Add(Me.TabController)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOK)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -1406,42 +1311,12 @@ Public Class frmOptions
         Me.Icon = Global.mRemoteNG.My.Resources.Resources.Options_Icon
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "Options"
+        Me.Name = "frmOptions"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Options"
-        Me.TabController.ResumeLayout(False)
-        Me.tabAdvanced.ResumeLayout(False)
-        Me.pnlAdvanced.ResumeLayout(False)
-        Me.pnlAdvanced.PerformLayout()
-        CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.tabStartupExit.ResumeLayout(False)
-        Me.pnlStartup.ResumeLayout(False)
-        Me.pnlStartup.PerformLayout()
-        Me.tabAppearance.ResumeLayout(False)
-        Me.pnlAppearance.ResumeLayout(False)
-        Me.pnlAppearance.PerformLayout()
-        Me.tabTabs.ResumeLayout(False)
-        Me.pnlTabsAndPanels.ResumeLayout(False)
-        Me.pnlTabsAndPanels.PerformLayout()
-        Me.tabConnections.ResumeLayout(False)
-        Me.pnlConnections.ResumeLayout(False)
-        Me.pnlConnections.PerformLayout()
-        Me.pnlRdpReconnectionCount.ResumeLayout(False)
-        Me.pnlRdpReconnectionCount.PerformLayout()
-        CType(Me.numRdpReconnectionCount, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.pnlDefaultCredentials.ResumeLayout(False)
-        Me.pnlDefaultCredentials.PerformLayout()
-        Me.pnlAutoSave.ResumeLayout(False)
-        Me.pnlAutoSave.PerformLayout()
-        CType(Me.numAutoSave, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.grpExperimental.ResumeLayout(False)
-        Me.grpExperimental.PerformLayout()
-        Me.tabUpdates.ResumeLayout(False)
-        Me.pnlUpdates.ResumeLayout(False)
-        Me.pnlUpdateCheck.ResumeLayout(False)
-        Me.pnlUpdateCheck.PerformLayout()
+        CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlProxy.ResumeLayout(False)
         Me.pnlProxy.PerformLayout()
         Me.pnlProxyBasic.ResumeLayout(False)
@@ -1449,6 +1324,30 @@ Public Class frmOptions
         CType(Me.numProxyPort, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlProxyAuthentication.ResumeLayout(False)
         Me.pnlProxyAuthentication.PerformLayout()
+        Me.pnlUpdateCheck.ResumeLayout(False)
+        Me.pnlUpdateCheck.PerformLayout()
+        Me.grpExperimental.ResumeLayout(False)
+        Me.grpExperimental.PerformLayout()
+        Me.pnlAutoSave.ResumeLayout(False)
+        Me.pnlAutoSave.PerformLayout()
+        CType(Me.numAutoSave, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.pnlDefaultCredentials.ResumeLayout(False)
+        Me.pnlDefaultCredentials.PerformLayout()
+        Me.pnlRdpReconnectionCount.ResumeLayout(False)
+        Me.pnlRdpReconnectionCount.PerformLayout()
+        CType(Me.numRdpReconnectionCount, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.tcTabControl.ResumeLayout(False)
+        Me.tabStartupExit.ResumeLayout(False)
+        Me.tabStartupExit.PerformLayout()
+        Me.tabAppearance.ResumeLayout(False)
+        Me.tabAppearance.PerformLayout()
+        Me.tabTabsAndPanels.ResumeLayout(False)
+        Me.tabTabsAndPanels.PerformLayout()
+        Me.tabConnections.ResumeLayout(False)
+        Me.tabConnections.PerformLayout()
+        Me.tabUpdates.ResumeLayout(False)
+        Me.tabAdvanced.ResumeLayout(False)
+        Me.tabAdvanced.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1718,10 +1617,15 @@ Public Class frmOptions
         If App.Editions.Spanlink.Enabled Then
             ApplySpanlinkEdition()
         End If
-        Me.TabController.HideTabsMode = Crownwood.Magic.Controls.TabControl.HideTabsModes.HideAlways
-        Me.TabController.SelectedIndex = 1
-        Me.TabController.SelectedIndex = _initialTab
-        Me.lvPages.Items(_initialTab).Selected = True
+
+        ' Hide the tabs
+        tcTabControl.Appearance = System.Windows.Forms.TabAppearance.FlatButtons
+        tcTabControl.Padding = New Point(0, 0)
+        tcTabControl.ItemSize = New Point(0, 1)
+
+        ' Switch to the _initialTab
+        tcTabControl.SelectedIndex = _initialTab
+        lvPages.Items(_initialTab).Selected = True
     End Sub
 
     Private Sub ApplySpanlinkEdition()
@@ -1759,7 +1663,6 @@ Public Class frmOptions
         lvPages.Items(4).Text = My.Resources.strTabUpdates
         lvPages.Items(5).Text = My.Resources.strTabAdvanced
         lblUpdatesExplanation.Text = My.Resources.strUpdateCheck
-        tabAdvanced.Title = My.Resources.strTabAdvanced
         btnTestProxy.Text = My.Resources.strButtonTestProxy
         lblSeconds.Text = My.Resources.strLabelSeconds
         lblMaximumPuttyWaitTime.Text = My.Resources.strLabelPuttyTimeout
@@ -1776,25 +1679,21 @@ Public Class frmOptions
         chkUseCustomPuttyPath.Text = My.Resources.strCheckboxPuttyPath
         chkAutomaticallyGetSessionInfo.Text = My.Resources.strAutomaticallyGetSessionInfo
         chkWriteLogFile.Text = My.Resources.strWriteLogFile
-        tabStartupExit.Title = My.Resources.strStartupExit
         chkSingleInstance.Text = My.Resources.strAllowOnlySingleInstance
         chkReconnectOnStart.Text = My.Resources.strReconnectAtStartup
         chkCheckForUpdatesOnStartup.Text = My.Resources.strCheckForUpdatesOnStartup
         chkConfirmCloseConnection.Text = My.Resources.strConfirmCloseConnection
         chkConfirmExit.Text = My.Resources.strConfirmExit
         chkSaveConsOnExit.Text = My.Resources.strSaveConsOnExit
-        tabAppearance.Title = My.Resources.strTabAppearance
         chkMinimizeToSystemTray.Text = My.Resources.strMinimizeToSysTray
         chkShowFullConnectionsFilePathInTitle.Text = My.Resources.strShowFullConsFilePath
         chkShowSystemTrayIcon.Text = My.Resources.strAlwaysShowSysTrayIcon
         chkShowDescriptionTooltipsInTree.Text = My.Resources.strShowDescriptionTooltips
-        tabTabs.Title = My.Resources.strTabsAndPanels
         chkShowProtocolOnTabs.Text = My.Resources.strShowProtocolOnTabs
         chkShowLogonInfoOnTabs.Text = My.Resources.strShowLogonInfoOnTabs
         chkOpenNewTabRightOfSelected.Text = My.Resources.strOpenNewTabRight
         chkAlwaysShowPanelSelectionDlg.Text = My.Resources.strAlwaysShowPanelSelection
         chkDoubleClickClosesTab.Text = My.Resources.strDoubleClickTabClosesIt
-        tabConnections.Title = My.Resources.strConnections
         chkHostnameLikeDisplayName.Text = My.Resources.strSetHostnameLikeDisplayName
         grpExperimental.Text = My.Resources.strExperimental.ToUpper
         chkUseSQLServer.Text = My.Resources.strUseSQLServer
@@ -1851,14 +1750,14 @@ Public Class frmOptions
     Private Sub lvPages_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvPages.SelectedIndexChanged
         Dim listView As ListView = sender
         If Not listView.SelectedIndices.Count = 0 Then
-            TabController.SelectedIndex = listView.SelectedIndices(0)
+            tcTabControl.SelectedIndex = listView.SelectedIndices(0)
         End If
     End Sub
 
     Private Sub lvPages_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvPages.MouseUp
         Dim listView As ListView = sender
         If listView.SelectedIndices.Count = 0 Then
-            listView.Items(TabController.SelectedIndex).Selected = True
+            listView.Items(tcTabControl.SelectedIndex).Selected = True
         End If
     End Sub
 
@@ -1966,4 +1865,6 @@ Public Class frmOptions
         End If
     End Sub
 #End Region
+
+
 End Class
