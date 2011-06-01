@@ -112,13 +112,13 @@ Public Class frmOptions
 
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", 0)
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
-        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
-        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", 3)
-        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", 4)
-        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 5)
-        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 6)
+        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", 0)
+        Dim ListViewItem9 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
+        Dim ListViewItem10 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
+        Dim ListViewItem11 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", 3)
+        Dim ListViewItem12 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", 4)
+        Dim ListViewItem13 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 5)
+        Dim ListViewItem14 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
         Me.btnOK = New System.Windows.Forms.Button
         Me.btnCancel = New System.Windows.Forms.Button
@@ -210,6 +210,8 @@ Public Class frmOptions
         Me.txtCredentialsUsername = New System.Windows.Forms.TextBox
         Me.lblCredentialsDomain = New System.Windows.Forms.Label
         Me.tabSQLServer = New System.Windows.Forms.TabPage
+        Me.lblSQLDatabaseName = New System.Windows.Forms.Label
+        Me.txtSQLDatabaseName = New System.Windows.Forms.TextBox
         Me.lblExperimental = New System.Windows.Forms.Label
         Me.chkUseSQLServer = New System.Windows.Forms.CheckBox
         Me.lblSQLUsername = New System.Windows.Forms.Label
@@ -221,8 +223,6 @@ Public Class frmOptions
         Me.lblSQLPassword = New System.Windows.Forms.Label
         Me.tabUpdates = New System.Windows.Forms.TabPage
         Me.tabAdvanced = New System.Windows.Forms.TabPage
-        Me.lblSQLDatabaseName = New System.Windows.Forms.Label
-        Me.txtSQLDatabaseName = New System.Windows.Forms.TextBox
         CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProxy.SuspendLayout()
@@ -251,7 +251,7 @@ Public Class frmOptions
         Me.btnOK.Location = New System.Drawing.Point(626, 507)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(75, 23)
-        Me.btnOK.TabIndex = 10000
+        Me.btnOK.TabIndex = 2
         Me.btnOK.Text = "&OK"
         Me.btnOK.UseVisualStyleBackColor = True
         '
@@ -262,7 +262,7 @@ Public Class frmOptions
         Me.btnCancel.Location = New System.Drawing.Point(707, 507)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(75, 23)
-        Me.btnCancel.TabIndex = 11000
+        Me.btnCancel.TabIndex = 3
         Me.btnCancel.Text = "&Cancel"
         Me.btnCancel.UseVisualStyleBackColor = True
         '
@@ -272,7 +272,7 @@ Public Class frmOptions
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lvPages.FullRowSelect = True
         Me.lvPages.HideSelection = False
-        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7})
+        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem8, ListViewItem9, ListViewItem10, ListViewItem11, ListViewItem12, ListViewItem13, ListViewItem14})
         Me.lvPages.LabelWrap = False
         Me.lvPages.LargeImageList = Me.imgListPages
         Me.lvPages.Location = New System.Drawing.Point(12, 12)
@@ -280,7 +280,7 @@ Public Class frmOptions
         Me.lvPages.Name = "lvPages"
         Me.lvPages.Scrollable = False
         Me.lvPages.Size = New System.Drawing.Size(154, 489)
-        Me.lvPages.TabIndex = 11001
+        Me.lvPages.TabIndex = 0
         Me.lvPages.TileSize = New System.Drawing.Size(154, 30)
         Me.lvPages.UseCompatibleStateImageBehavior = False
         Me.lvPages.View = System.Windows.Forms.View.Tile
@@ -303,7 +303,7 @@ Public Class frmOptions
         Me.lblMaximumPuttyWaitTime.Location = New System.Drawing.Point(3, 188)
         Me.lblMaximumPuttyWaitTime.Name = "lblMaximumPuttyWaitTime"
         Me.lblMaximumPuttyWaitTime.Size = New System.Drawing.Size(135, 13)
-        Me.lblMaximumPuttyWaitTime.TabIndex = 75
+        Me.lblMaximumPuttyWaitTime.TabIndex = 9
         Me.lblMaximumPuttyWaitTime.Text = "Maximum PuTTY wait time:"
         '
         'chkAutomaticReconnect
@@ -312,7 +312,7 @@ Public Class frmOptions
         Me.chkAutomaticReconnect.Location = New System.Drawing.Point(3, 72)
         Me.chkAutomaticReconnect.Name = "chkAutomaticReconnect"
         Me.chkAutomaticReconnect.Size = New System.Drawing.Size(399, 17)
-        Me.chkAutomaticReconnect.TabIndex = 25
+        Me.chkAutomaticReconnect.TabIndex = 3
         Me.chkAutomaticReconnect.Text = "Automatically try to reconnect when disconnected from server (RDP && ICA only)"
         Me.chkAutomaticReconnect.UseVisualStyleBackColor = True
         '
@@ -323,7 +323,7 @@ Public Class frmOptions
         Me.numPuttyWaitTime.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         Me.numPuttyWaitTime.Name = "numPuttyWaitTime"
         Me.numPuttyWaitTime.Size = New System.Drawing.Size(49, 20)
-        Me.numPuttyWaitTime.TabIndex = 76
+        Me.numPuttyWaitTime.TabIndex = 10
         Me.numPuttyWaitTime.Value = New Decimal(New Integer() {5, 0, 0, 0})
         '
         'lblConfigurePuttySessions
@@ -332,7 +332,7 @@ Public Class frmOptions
         Me.lblConfigurePuttySessions.Location = New System.Drawing.Point(3, 157)
         Me.lblConfigurePuttySessions.Name = "lblConfigurePuttySessions"
         Me.lblConfigurePuttySessions.Size = New System.Drawing.Size(227, 13)
-        Me.lblConfigurePuttySessions.TabIndex = 60
+        Me.lblConfigurePuttySessions.TabIndex = 7
         Me.lblConfigurePuttySessions.Text = "To configure PuTTY sessions click this button:"
         '
         'numUVNCSCPort
@@ -342,7 +342,7 @@ Public Class frmOptions
         Me.numUVNCSCPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.numUVNCSCPort.Name = "numUVNCSCPort"
         Me.numUVNCSCPort.Size = New System.Drawing.Size(72, 20)
-        Me.numUVNCSCPort.TabIndex = 130
+        Me.numUVNCSCPort.TabIndex = 16
         Me.numUVNCSCPort.Value = New Decimal(New Integer() {5500, 0, 0, 0})
         '
         'btnLaunchPutty
@@ -352,7 +352,7 @@ Public Class frmOptions
         Me.btnLaunchPutty.Location = New System.Drawing.Point(291, 153)
         Me.btnLaunchPutty.Name = "btnLaunchPutty"
         Me.btnLaunchPutty.Size = New System.Drawing.Size(110, 23)
-        Me.btnLaunchPutty.TabIndex = 70
+        Me.btnLaunchPutty.TabIndex = 8
         Me.btnLaunchPutty.Text = "Launch PuTTY"
         Me.btnLaunchPutty.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         Me.btnLaunchPutty.UseVisualStyleBackColor = True
@@ -363,7 +363,7 @@ Public Class frmOptions
         Me.lblSeconds.Location = New System.Drawing.Point(428, 189)
         Me.lblSeconds.Name = "lblSeconds"
         Me.lblSeconds.Size = New System.Drawing.Size(47, 13)
-        Me.lblSeconds.TabIndex = 77
+        Me.lblSeconds.TabIndex = 11
         Me.lblSeconds.Text = "seconds"
         '
         'btnBrowseCustomPuttyPath
@@ -372,7 +372,7 @@ Public Class frmOptions
         Me.btnBrowseCustomPuttyPath.Location = New System.Drawing.Point(291, 116)
         Me.btnBrowseCustomPuttyPath.Name = "btnBrowseCustomPuttyPath"
         Me.btnBrowseCustomPuttyPath.Size = New System.Drawing.Size(75, 23)
-        Me.btnBrowseCustomPuttyPath.TabIndex = 50
+        Me.btnBrowseCustomPuttyPath.TabIndex = 6
         Me.btnBrowseCustomPuttyPath.Text = "Browse..."
         Me.btnBrowseCustomPuttyPath.UseVisualStyleBackColor = True
         '
@@ -382,7 +382,7 @@ Public Class frmOptions
         Me.lblUVNCSCPort.Location = New System.Drawing.Point(3, 281)
         Me.lblUVNCSCPort.Name = "lblUVNCSCPort"
         Me.lblUVNCSCPort.Size = New System.Drawing.Size(176, 13)
-        Me.lblUVNCSCPort.TabIndex = 120
+        Me.lblUVNCSCPort.TabIndex = 15
         Me.lblUVNCSCPort.Text = "UltraVNC SingleClick Listening Port:"
         '
         'txtCustomPuttyPath
@@ -392,7 +392,7 @@ Public Class frmOptions
         Me.txtCustomPuttyPath.Location = New System.Drawing.Point(21, 118)
         Me.txtCustomPuttyPath.Name = "txtCustomPuttyPath"
         Me.txtCustomPuttyPath.Size = New System.Drawing.Size(264, 20)
-        Me.txtCustomPuttyPath.TabIndex = 40
+        Me.txtCustomPuttyPath.TabIndex = 5
         '
         'txtXULrunnerPath
         '
@@ -400,7 +400,7 @@ Public Class frmOptions
         Me.txtXULrunnerPath.Location = New System.Drawing.Point(21, 238)
         Me.txtXULrunnerPath.Name = "txtXULrunnerPath"
         Me.txtXULrunnerPath.Size = New System.Drawing.Size(264, 20)
-        Me.txtXULrunnerPath.TabIndex = 131
+        Me.txtXULrunnerPath.TabIndex = 13
         '
         'chkUseCustomPuttyPath
         '
@@ -408,7 +408,7 @@ Public Class frmOptions
         Me.chkUseCustomPuttyPath.Location = New System.Drawing.Point(3, 95)
         Me.chkUseCustomPuttyPath.Name = "chkUseCustomPuttyPath"
         Me.chkUseCustomPuttyPath.Size = New System.Drawing.Size(146, 17)
-        Me.chkUseCustomPuttyPath.TabIndex = 30
+        Me.chkUseCustomPuttyPath.TabIndex = 4
         Me.chkUseCustomPuttyPath.Text = "Use custom PuTTY path:"
         Me.chkUseCustomPuttyPath.UseVisualStyleBackColor = True
         '
@@ -417,7 +417,7 @@ Public Class frmOptions
         Me.btnBrowseXulRunnerPath.Location = New System.Drawing.Point(291, 236)
         Me.btnBrowseXulRunnerPath.Name = "btnBrowseXulRunnerPath"
         Me.btnBrowseXulRunnerPath.Size = New System.Drawing.Size(75, 23)
-        Me.btnBrowseXulRunnerPath.TabIndex = 132
+        Me.btnBrowseXulRunnerPath.TabIndex = 14
         Me.btnBrowseXulRunnerPath.Text = "Browse..."
         Me.btnBrowseXulRunnerPath.UseVisualStyleBackColor = True
         '
@@ -427,7 +427,7 @@ Public Class frmOptions
         Me.chkEncryptCompleteFile.Location = New System.Drawing.Point(2, 26)
         Me.chkEncryptCompleteFile.Name = "chkEncryptCompleteFile"
         Me.chkEncryptCompleteFile.Size = New System.Drawing.Size(180, 17)
-        Me.chkEncryptCompleteFile.TabIndex = 20
+        Me.chkEncryptCompleteFile.TabIndex = 1
         Me.chkEncryptCompleteFile.Text = "Encrypt complete connection file"
         Me.chkEncryptCompleteFile.UseVisualStyleBackColor = True
         '
@@ -437,7 +437,7 @@ Public Class frmOptions
         Me.lblXulRunnerPath.Location = New System.Drawing.Point(3, 220)
         Me.lblXulRunnerPath.Name = "lblXulRunnerPath"
         Me.lblXulRunnerPath.Size = New System.Drawing.Size(85, 13)
-        Me.lblXulRunnerPath.TabIndex = 133
+        Me.lblXulRunnerPath.TabIndex = 12
         Me.lblXulRunnerPath.Text = "XULrunner path:"
         '
         'chkAutomaticallyGetSessionInfo
@@ -446,7 +446,7 @@ Public Class frmOptions
         Me.chkAutomaticallyGetSessionInfo.Location = New System.Drawing.Point(3, 49)
         Me.chkAutomaticallyGetSessionInfo.Name = "chkAutomaticallyGetSessionInfo"
         Me.chkAutomaticallyGetSessionInfo.Size = New System.Drawing.Size(198, 17)
-        Me.chkAutomaticallyGetSessionInfo.TabIndex = 20
+        Me.chkAutomaticallyGetSessionInfo.TabIndex = 2
         Me.chkAutomaticallyGetSessionInfo.Text = "Automatically get session information"
         Me.chkAutomaticallyGetSessionInfo.UseVisualStyleBackColor = True
         '
@@ -456,7 +456,7 @@ Public Class frmOptions
         Me.chkWriteLogFile.Location = New System.Drawing.Point(3, 3)
         Me.chkWriteLogFile.Name = "chkWriteLogFile"
         Me.chkWriteLogFile.Size = New System.Drawing.Size(171, 17)
-        Me.chkWriteLogFile.TabIndex = 10
+        Me.chkWriteLogFile.TabIndex = 0
         Me.chkWriteLogFile.Text = "Write log file (mRemoteNG.log)"
         Me.chkWriteLogFile.UseVisualStyleBackColor = True
         '
@@ -470,7 +470,7 @@ Public Class frmOptions
         Me.pnlProxy.Location = New System.Drawing.Point(3, 200)
         Me.pnlProxy.Name = "pnlProxy"
         Me.pnlProxy.Size = New System.Drawing.Size(536, 224)
-        Me.pnlProxy.TabIndex = 134
+        Me.pnlProxy.TabIndex = 2
         '
         'pnlProxyBasic
         '
@@ -482,14 +482,14 @@ Public Class frmOptions
         Me.pnlProxyBasic.Location = New System.Drawing.Point(8, 32)
         Me.pnlProxyBasic.Name = "pnlProxyBasic"
         Me.pnlProxyBasic.Size = New System.Drawing.Size(512, 40)
-        Me.pnlProxyBasic.TabIndex = 90
+        Me.pnlProxyBasic.TabIndex = 1
         '
         'lblProxyAddress
         '
         Me.lblProxyAddress.Location = New System.Drawing.Point(8, 8)
         Me.lblProxyAddress.Name = "lblProxyAddress"
         Me.lblProxyAddress.Size = New System.Drawing.Size(96, 24)
-        Me.lblProxyAddress.TabIndex = 1
+        Me.lblProxyAddress.TabIndex = 0
         Me.lblProxyAddress.Text = "Address:"
         Me.lblProxyAddress.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -499,14 +499,14 @@ Public Class frmOptions
         Me.txtProxyAddress.Location = New System.Drawing.Point(104, 8)
         Me.txtProxyAddress.Name = "txtProxyAddress"
         Me.txtProxyAddress.Size = New System.Drawing.Size(240, 20)
-        Me.txtProxyAddress.TabIndex = 2
+        Me.txtProxyAddress.TabIndex = 1
         '
         'lblProxyPort
         '
         Me.lblProxyPort.Location = New System.Drawing.Point(320, 8)
         Me.lblProxyPort.Name = "lblProxyPort"
         Me.lblProxyPort.Size = New System.Drawing.Size(64, 23)
-        Me.lblProxyPort.TabIndex = 3
+        Me.lblProxyPort.TabIndex = 2
         Me.lblProxyPort.Text = "Port:"
         Me.lblProxyPort.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -518,7 +518,7 @@ Public Class frmOptions
         Me.numProxyPort.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numProxyPort.Name = "numProxyPort"
         Me.numProxyPort.Size = New System.Drawing.Size(64, 20)
-        Me.numProxyPort.TabIndex = 5001
+        Me.numProxyPort.TabIndex = 3
         Me.numProxyPort.Value = New Decimal(New Integer() {80, 0, 0, 0})
         '
         'chkUseProxyForAutomaticUpdates
@@ -527,7 +527,7 @@ Public Class frmOptions
         Me.chkUseProxyForAutomaticUpdates.Location = New System.Drawing.Point(8, 8)
         Me.chkUseProxyForAutomaticUpdates.Name = "chkUseProxyForAutomaticUpdates"
         Me.chkUseProxyForAutomaticUpdates.Size = New System.Drawing.Size(168, 17)
-        Me.chkUseProxyForAutomaticUpdates.TabIndex = 80
+        Me.chkUseProxyForAutomaticUpdates.TabIndex = 0
         Me.chkUseProxyForAutomaticUpdates.Text = "Use a proxy server to connect"
         Me.chkUseProxyForAutomaticUpdates.UseVisualStyleBackColor = True
         '
@@ -538,7 +538,7 @@ Public Class frmOptions
         Me.chkUseProxyAuthentication.Location = New System.Drawing.Point(32, 80)
         Me.chkUseProxyAuthentication.Name = "chkUseProxyAuthentication"
         Me.chkUseProxyAuthentication.Size = New System.Drawing.Size(216, 17)
-        Me.chkUseProxyAuthentication.TabIndex = 100
+        Me.chkUseProxyAuthentication.TabIndex = 2
         Me.chkUseProxyAuthentication.Text = "This proxy server requires authentication"
         Me.chkUseProxyAuthentication.UseVisualStyleBackColor = True
         '
@@ -552,14 +552,14 @@ Public Class frmOptions
         Me.pnlProxyAuthentication.Location = New System.Drawing.Point(8, 104)
         Me.pnlProxyAuthentication.Name = "pnlProxyAuthentication"
         Me.pnlProxyAuthentication.Size = New System.Drawing.Size(512, 72)
-        Me.pnlProxyAuthentication.TabIndex = 110
+        Me.pnlProxyAuthentication.TabIndex = 3
         '
         'lblProxyUsername
         '
         Me.lblProxyUsername.Location = New System.Drawing.Point(8, 8)
         Me.lblProxyUsername.Name = "lblProxyUsername"
         Me.lblProxyUsername.Size = New System.Drawing.Size(96, 24)
-        Me.lblProxyUsername.TabIndex = 1
+        Me.lblProxyUsername.TabIndex = 0
         Me.lblProxyUsername.Text = "Username:"
         Me.lblProxyUsername.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -569,14 +569,14 @@ Public Class frmOptions
         Me.txtProxyUsername.Location = New System.Drawing.Point(104, 8)
         Me.txtProxyUsername.Name = "txtProxyUsername"
         Me.txtProxyUsername.Size = New System.Drawing.Size(240, 20)
-        Me.txtProxyUsername.TabIndex = 2
+        Me.txtProxyUsername.TabIndex = 1
         '
         'lblProxyPassword
         '
         Me.lblProxyPassword.Location = New System.Drawing.Point(8, 40)
         Me.lblProxyPassword.Name = "lblProxyPassword"
         Me.lblProxyPassword.Size = New System.Drawing.Size(96, 24)
-        Me.lblProxyPassword.TabIndex = 3
+        Me.lblProxyPassword.TabIndex = 2
         Me.lblProxyPassword.Text = "Password:"
         Me.lblProxyPassword.TextAlign = System.Drawing.ContentAlignment.MiddleRight
         '
@@ -586,7 +586,7 @@ Public Class frmOptions
         Me.txtProxyPassword.Location = New System.Drawing.Point(104, 40)
         Me.txtProxyPassword.Name = "txtProxyPassword"
         Me.txtProxyPassword.Size = New System.Drawing.Size(240, 20)
-        Me.txtProxyPassword.TabIndex = 4
+        Me.txtProxyPassword.TabIndex = 3
         Me.txtProxyPassword.UseSystemPasswordChar = True
         '
         'btnTestProxy
@@ -594,7 +594,7 @@ Public Class frmOptions
         Me.btnTestProxy.Location = New System.Drawing.Point(8, 184)
         Me.btnTestProxy.Name = "btnTestProxy"
         Me.btnTestProxy.Size = New System.Drawing.Size(100, 32)
-        Me.btnTestProxy.TabIndex = 111
+        Me.btnTestProxy.TabIndex = 4
         Me.btnTestProxy.Text = "Test Proxy"
         Me.btnTestProxy.UseVisualStyleBackColor = True
         '
@@ -606,14 +606,14 @@ Public Class frmOptions
         Me.pnlUpdateCheck.Location = New System.Drawing.Point(3, 48)
         Me.pnlUpdateCheck.Name = "pnlUpdateCheck"
         Me.pnlUpdateCheck.Size = New System.Drawing.Size(536, 120)
-        Me.pnlUpdateCheck.TabIndex = 137
+        Me.pnlUpdateCheck.TabIndex = 1
         '
         'btnUpdateCheckNow
         '
         Me.btnUpdateCheckNow.Location = New System.Drawing.Point(8, 80)
         Me.btnUpdateCheckNow.Name = "btnUpdateCheckNow"
         Me.btnUpdateCheckNow.Size = New System.Drawing.Size(100, 32)
-        Me.btnUpdateCheckNow.TabIndex = 136
+        Me.btnUpdateCheckNow.TabIndex = 2
         Me.btnUpdateCheckNow.Text = "Check Now"
         Me.btnUpdateCheckNow.UseVisualStyleBackColor = True
         '
@@ -623,7 +623,7 @@ Public Class frmOptions
         Me.chkCheckForUpdatesOnStartup.Location = New System.Drawing.Point(8, 8)
         Me.chkCheckForUpdatesOnStartup.Name = "chkCheckForUpdatesOnStartup"
         Me.chkCheckForUpdatesOnStartup.Size = New System.Drawing.Size(213, 17)
-        Me.chkCheckForUpdatesOnStartup.TabIndex = 31
+        Me.chkCheckForUpdatesOnStartup.TabIndex = 0
         Me.chkCheckForUpdatesOnStartup.Text = "Check for updates and announcements"
         Me.chkCheckForUpdatesOnStartup.UseVisualStyleBackColor = True
         '
@@ -634,14 +634,14 @@ Public Class frmOptions
         Me.cboUpdateCheckFrequency.Location = New System.Drawing.Point(48, 40)
         Me.cboUpdateCheckFrequency.Name = "cboUpdateCheckFrequency"
         Me.cboUpdateCheckFrequency.Size = New System.Drawing.Size(128, 21)
-        Me.cboUpdateCheckFrequency.TabIndex = 135
+        Me.cboUpdateCheckFrequency.TabIndex = 1
         '
         'lblUpdatesExplanation
         '
         Me.lblUpdatesExplanation.Location = New System.Drawing.Point(3, 0)
         Me.lblUpdatesExplanation.Name = "lblUpdatesExplanation"
         Me.lblUpdatesExplanation.Size = New System.Drawing.Size(536, 40)
-        Me.lblUpdatesExplanation.TabIndex = 136
+        Me.lblUpdatesExplanation.TabIndex = 0
         Me.lblUpdatesExplanation.Text = "mRemoteNG can periodically connect to the mRemoteNG website to check for updates " & _
             "and product announcements."
         '
@@ -651,7 +651,7 @@ Public Class frmOptions
         Me.chkHostnameLikeDisplayName.Location = New System.Drawing.Point(3, 49)
         Me.chkHostnameLikeDisplayName.Name = "chkHostnameLikeDisplayName"
         Me.chkHostnameLikeDisplayName.Size = New System.Drawing.Size(328, 17)
-        Me.chkHostnameLikeDisplayName.TabIndex = 30
+        Me.chkHostnameLikeDisplayName.TabIndex = 2
         Me.chkHostnameLikeDisplayName.Text = "Set hostname like display name when creating new connections"
         Me.chkHostnameLikeDisplayName.UseVisualStyleBackColor = True
         '
@@ -663,7 +663,7 @@ Public Class frmOptions
         Me.pnlAutoSave.Location = New System.Drawing.Point(3, 107)
         Me.pnlAutoSave.Name = "pnlAutoSave"
         Me.pnlAutoSave.Size = New System.Drawing.Size(500, 29)
-        Me.pnlAutoSave.TabIndex = 50
+        Me.pnlAutoSave.TabIndex = 4
         '
         'lblAutoSave1
         '
@@ -671,7 +671,7 @@ Public Class frmOptions
         Me.lblAutoSave1.Location = New System.Drawing.Point(3, 9)
         Me.lblAutoSave1.Name = "lblAutoSave1"
         Me.lblAutoSave1.Size = New System.Drawing.Size(89, 13)
-        Me.lblAutoSave1.TabIndex = 40
+        Me.lblAutoSave1.TabIndex = 0
         Me.lblAutoSave1.Text = "Auto Save every:"
         '
         'numAutoSave
@@ -681,7 +681,7 @@ Public Class frmOptions
         Me.numAutoSave.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
         Me.numAutoSave.Name = "numAutoSave"
         Me.numAutoSave.Size = New System.Drawing.Size(53, 20)
-        Me.numAutoSave.TabIndex = 51
+        Me.numAutoSave.TabIndex = 1
         '
         'lblAutoSave2
         '
@@ -689,7 +689,7 @@ Public Class frmOptions
         Me.lblAutoSave2.Location = New System.Drawing.Point(233, 9)
         Me.lblAutoSave2.Name = "lblAutoSave2"
         Me.lblAutoSave2.Size = New System.Drawing.Size(135, 13)
-        Me.lblAutoSave2.TabIndex = 60
+        Me.lblAutoSave2.TabIndex = 2
         Me.lblAutoSave2.Text = "Minutes (0 means disabled)"
         '
         'chkSingleClickOnOpenedConnectionSwitchesToIt
@@ -698,7 +698,7 @@ Public Class frmOptions
         Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Location = New System.Drawing.Point(3, 26)
         Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Name = "chkSingleClickOnOpenedConnectionSwitchesToIt"
         Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = New System.Drawing.Size(254, 17)
-        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.TabIndex = 20
+        Me.chkSingleClickOnOpenedConnectionSwitchesToIt.TabIndex = 1
         Me.chkSingleClickOnOpenedConnectionSwitchesToIt.Text = "Single click on opened connection switches to it"
         Me.chkSingleClickOnOpenedConnectionSwitchesToIt.UseVisualStyleBackColor = True
         '
@@ -708,7 +708,7 @@ Public Class frmOptions
         Me.chkSingleClickOnConnectionOpensIt.Location = New System.Drawing.Point(3, 3)
         Me.chkSingleClickOnConnectionOpensIt.Name = "chkSingleClickOnConnectionOpensIt"
         Me.chkSingleClickOnConnectionOpensIt.Size = New System.Drawing.Size(191, 17)
-        Me.chkSingleClickOnConnectionOpensIt.TabIndex = 10
+        Me.chkSingleClickOnConnectionOpensIt.TabIndex = 0
         Me.chkSingleClickOnConnectionOpensIt.Text = "Single click on connection opens it"
         Me.chkSingleClickOnConnectionOpensIt.UseVisualStyleBackColor = True
         '
@@ -719,7 +719,7 @@ Public Class frmOptions
         Me.pnlRdpReconnectionCount.Location = New System.Drawing.Point(3, 72)
         Me.pnlRdpReconnectionCount.Name = "pnlRdpReconnectionCount"
         Me.pnlRdpReconnectionCount.Size = New System.Drawing.Size(500, 29)
-        Me.pnlRdpReconnectionCount.TabIndex = 40
+        Me.pnlRdpReconnectionCount.TabIndex = 3
         '
         'lblRdpReconnectionCount
         '
@@ -727,7 +727,7 @@ Public Class frmOptions
         Me.lblRdpReconnectionCount.Location = New System.Drawing.Point(3, 9)
         Me.lblRdpReconnectionCount.Name = "lblRdpReconnectionCount"
         Me.lblRdpReconnectionCount.Size = New System.Drawing.Size(131, 13)
-        Me.lblRdpReconnectionCount.TabIndex = 40
+        Me.lblRdpReconnectionCount.TabIndex = 0
         Me.lblRdpReconnectionCount.Text = "RDP Reconnection Count"
         '
         'numRdpReconnectionCount
@@ -737,7 +737,7 @@ Public Class frmOptions
         Me.numRdpReconnectionCount.Maximum = New Decimal(New Integer() {20, 0, 0, 0})
         Me.numRdpReconnectionCount.Name = "numRdpReconnectionCount"
         Me.numRdpReconnectionCount.Size = New System.Drawing.Size(53, 20)
-        Me.numRdpReconnectionCount.TabIndex = 41
+        Me.numRdpReconnectionCount.TabIndex = 1
         Me.numRdpReconnectionCount.Value = New Decimal(New Integer() {5, 0, 0, 0})
         '
         'chkAlwaysShowPanelSelectionDlg
@@ -746,7 +746,7 @@ Public Class frmOptions
         Me.chkAlwaysShowPanelSelectionDlg.Location = New System.Drawing.Point(3, 95)
         Me.chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg"
         Me.chkAlwaysShowPanelSelectionDlg.Size = New System.Drawing.Size(317, 17)
-        Me.chkAlwaysShowPanelSelectionDlg.TabIndex = 50
+        Me.chkAlwaysShowPanelSelectionDlg.TabIndex = 4
         Me.chkAlwaysShowPanelSelectionDlg.Text = "Always show panel selection dialog when opening connectins"
         Me.chkAlwaysShowPanelSelectionDlg.UseVisualStyleBackColor = True
         '
@@ -756,7 +756,7 @@ Public Class frmOptions
         Me.chkShowLogonInfoOnTabs.Location = New System.Drawing.Point(3, 26)
         Me.chkShowLogonInfoOnTabs.Name = "chkShowLogonInfoOnTabs"
         Me.chkShowLogonInfoOnTabs.Size = New System.Drawing.Size(203, 17)
-        Me.chkShowLogonInfoOnTabs.TabIndex = 20
+        Me.chkShowLogonInfoOnTabs.TabIndex = 1
         Me.chkShowLogonInfoOnTabs.Text = "Show logon information on tab names"
         Me.chkShowLogonInfoOnTabs.UseVisualStyleBackColor = True
         '
@@ -766,7 +766,7 @@ Public Class frmOptions
         Me.chkDoubleClickClosesTab.Location = New System.Drawing.Point(3, 72)
         Me.chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab"
         Me.chkDoubleClickClosesTab.Size = New System.Drawing.Size(159, 17)
-        Me.chkDoubleClickClosesTab.TabIndex = 40
+        Me.chkDoubleClickClosesTab.TabIndex = 3
         Me.chkDoubleClickClosesTab.Text = "Double click on tab closes it"
         Me.chkDoubleClickClosesTab.UseVisualStyleBackColor = True
         '
@@ -776,7 +776,7 @@ Public Class frmOptions
         Me.chkShowProtocolOnTabs.Location = New System.Drawing.Point(3, 49)
         Me.chkShowProtocolOnTabs.Name = "chkShowProtocolOnTabs"
         Me.chkShowProtocolOnTabs.Size = New System.Drawing.Size(166, 17)
-        Me.chkShowProtocolOnTabs.TabIndex = 30
+        Me.chkShowProtocolOnTabs.TabIndex = 2
         Me.chkShowProtocolOnTabs.Text = "Show protocols on tab names"
         Me.chkShowProtocolOnTabs.UseVisualStyleBackColor = True
         '
@@ -786,7 +786,7 @@ Public Class frmOptions
         Me.chkOpenNewTabRightOfSelected.Location = New System.Drawing.Point(3, 3)
         Me.chkOpenNewTabRightOfSelected.Name = "chkOpenNewTabRightOfSelected"
         Me.chkOpenNewTabRightOfSelected.Size = New System.Drawing.Size(280, 17)
-        Me.chkOpenNewTabRightOfSelected.TabIndex = 10
+        Me.chkOpenNewTabRightOfSelected.TabIndex = 0
         Me.chkOpenNewTabRightOfSelected.Text = "Open new tab to the right of the currently selected tab"
         Me.chkOpenNewTabRightOfSelected.UseVisualStyleBackColor = True
         '
@@ -797,7 +797,7 @@ Public Class frmOptions
         Me.chkMCWarnings.Location = New System.Drawing.Point(126, 191)
         Me.chkMCWarnings.Name = "chkMCWarnings"
         Me.chkMCWarnings.Size = New System.Drawing.Size(71, 17)
-        Me.chkMCWarnings.TabIndex = 54
+        Me.chkMCWarnings.TabIndex = 8
         Me.chkMCWarnings.Text = "Warnings"
         Me.chkMCWarnings.UseVisualStyleBackColor = True
         '
@@ -808,7 +808,7 @@ Public Class frmOptions
         Me.chkMCErrors.Location = New System.Drawing.Point(217, 191)
         Me.chkMCErrors.Name = "chkMCErrors"
         Me.chkMCErrors.Size = New System.Drawing.Size(53, 17)
-        Me.chkMCErrors.TabIndex = 55
+        Me.chkMCErrors.TabIndex = 9
         Me.chkMCErrors.Text = "Errors"
         Me.chkMCErrors.UseVisualStyleBackColor = True
         '
@@ -819,7 +819,7 @@ Public Class frmOptions
         Me.chkMCInformation.Location = New System.Drawing.Point(19, 191)
         Me.chkMCInformation.Name = "chkMCInformation"
         Me.chkMCInformation.Size = New System.Drawing.Size(83, 17)
-        Me.chkMCInformation.TabIndex = 53
+        Me.chkMCInformation.TabIndex = 7
         Me.chkMCInformation.Text = "Informations"
         Me.chkMCInformation.UseVisualStyleBackColor = True
         '
@@ -829,7 +829,7 @@ Public Class frmOptions
         Me.lblSwitchToErrorsAndInfos.Location = New System.Drawing.Point(3, 171)
         Me.lblSwitchToErrorsAndInfos.Name = "lblSwitchToErrorsAndInfos"
         Me.lblSwitchToErrorsAndInfos.Size = New System.Drawing.Size(159, 13)
-        Me.lblSwitchToErrorsAndInfos.TabIndex = 52
+        Me.lblSwitchToErrorsAndInfos.TabIndex = 6
         Me.lblSwitchToErrorsAndInfos.Text = "Switch to Notifications panel on:"
         '
         'chkUseOnlyErrorsAndInfosPanel
@@ -838,7 +838,7 @@ Public Class frmOptions
         Me.chkUseOnlyErrorsAndInfosPanel.Location = New System.Drawing.Point(3, 146)
         Me.chkUseOnlyErrorsAndInfosPanel.Name = "chkUseOnlyErrorsAndInfosPanel"
         Me.chkUseOnlyErrorsAndInfosPanel.Size = New System.Drawing.Size(278, 17)
-        Me.chkUseOnlyErrorsAndInfosPanel.TabIndex = 51
+        Me.chkUseOnlyErrorsAndInfosPanel.TabIndex = 5
         Me.chkUseOnlyErrorsAndInfosPanel.Text = "Use only Notifications panel (no messagebox popups)"
         Me.chkUseOnlyErrorsAndInfosPanel.UseVisualStyleBackColor = True
         '
@@ -848,7 +848,7 @@ Public Class frmOptions
         Me.chkShowFullConnectionsFilePathInTitle.Location = New System.Drawing.Point(3, 128)
         Me.chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle"
         Me.chkShowFullConnectionsFilePathInTitle.Size = New System.Drawing.Size(239, 17)
-        Me.chkShowFullConnectionsFilePathInTitle.TabIndex = 20
+        Me.chkShowFullConnectionsFilePathInTitle.TabIndex = 4
         Me.chkShowFullConnectionsFilePathInTitle.Text = "Show full connections file path in window title"
         Me.chkShowFullConnectionsFilePathInTitle.UseVisualStyleBackColor = True
         '
@@ -858,7 +858,7 @@ Public Class frmOptions
         Me.chkShowSystemTrayIcon.Location = New System.Drawing.Point(3, 176)
         Me.chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon"
         Me.chkShowSystemTrayIcon.Size = New System.Drawing.Size(172, 17)
-        Me.chkShowSystemTrayIcon.TabIndex = 30
+        Me.chkShowSystemTrayIcon.TabIndex = 5
         Me.chkShowSystemTrayIcon.Text = "Always show System Tray Icon"
         Me.chkShowSystemTrayIcon.UseVisualStyleBackColor = True
         '
@@ -868,7 +868,7 @@ Public Class frmOptions
         Me.chkMinimizeToSystemTray.Location = New System.Drawing.Point(3, 200)
         Me.chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray"
         Me.chkMinimizeToSystemTray.Size = New System.Drawing.Size(139, 17)
-        Me.chkMinimizeToSystemTray.TabIndex = 40
+        Me.chkMinimizeToSystemTray.TabIndex = 6
         Me.chkMinimizeToSystemTray.Text = "Minimize to System Tray"
         Me.chkMinimizeToSystemTray.UseVisualStyleBackColor = True
         '
@@ -878,7 +878,7 @@ Public Class frmOptions
         Me.chkShowDescriptionTooltipsInTree.Location = New System.Drawing.Point(3, 104)
         Me.chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree"
         Me.chkShowDescriptionTooltipsInTree.Size = New System.Drawing.Size(231, 17)
-        Me.chkShowDescriptionTooltipsInTree.TabIndex = 10
+        Me.chkShowDescriptionTooltipsInTree.TabIndex = 3
         Me.chkShowDescriptionTooltipsInTree.Text = "Show description tooltips in connection tree"
         Me.chkShowDescriptionTooltipsInTree.UseVisualStyleBackColor = True
         '
@@ -888,7 +888,7 @@ Public Class frmOptions
         Me.lblLanguage.Location = New System.Drawing.Point(3, 0)
         Me.lblLanguage.Name = "lblLanguage"
         Me.lblLanguage.Size = New System.Drawing.Size(55, 13)
-        Me.lblLanguage.TabIndex = 41
+        Me.lblLanguage.TabIndex = 0
         Me.lblLanguage.Text = "Language"
         '
         'cboLanguage
@@ -899,7 +899,7 @@ Public Class frmOptions
         Me.cboLanguage.Name = "cboLanguage"
         Me.cboLanguage.Size = New System.Drawing.Size(304, 21)
         Me.cboLanguage.Sorted = True
-        Me.cboLanguage.TabIndex = 42
+        Me.cboLanguage.TabIndex = 1
         '
         'lblLanguageRestartRequired
         '
@@ -907,7 +907,7 @@ Public Class frmOptions
         Me.lblLanguageRestartRequired.Location = New System.Drawing.Point(3, 56)
         Me.lblLanguageRestartRequired.Name = "lblLanguageRestartRequired"
         Me.lblLanguageRestartRequired.Size = New System.Drawing.Size(380, 13)
-        Me.lblLanguageRestartRequired.TabIndex = 43
+        Me.lblLanguageRestartRequired.TabIndex = 2
         Me.lblLanguageRestartRequired.Text = "mRemoteNG must be restarted before changes to the language will take effect."
         '
         'chkReconnectOnStart
@@ -916,7 +916,7 @@ Public Class frmOptions
         Me.chkReconnectOnStart.Location = New System.Drawing.Point(3, 75)
         Me.chkReconnectOnStart.Name = "chkReconnectOnStart"
         Me.chkReconnectOnStart.Size = New System.Drawing.Size(273, 17)
-        Me.chkReconnectOnStart.TabIndex = 40
+        Me.chkReconnectOnStart.TabIndex = 3
         Me.chkReconnectOnStart.Text = "Reconnect to previously opened sessions on startup"
         Me.chkReconnectOnStart.UseVisualStyleBackColor = True
         '
@@ -926,7 +926,7 @@ Public Class frmOptions
         Me.chkSingleInstance.Location = New System.Drawing.Point(3, 99)
         Me.chkSingleInstance.Name = "chkSingleInstance"
         Me.chkSingleInstance.Size = New System.Drawing.Size(366, 17)
-        Me.chkSingleInstance.TabIndex = 50
+        Me.chkSingleInstance.TabIndex = 4
         Me.chkSingleInstance.Text = "Allow only a single instance of the application (mRemote restart required)"
         Me.chkSingleInstance.UseVisualStyleBackColor = True
         '
@@ -936,7 +936,7 @@ Public Class frmOptions
         Me.chkConfirmExit.Location = New System.Drawing.Point(3, 27)
         Me.chkConfirmExit.Name = "chkConfirmExit"
         Me.chkConfirmExit.Size = New System.Drawing.Size(221, 17)
-        Me.chkConfirmExit.TabIndex = 20
+        Me.chkConfirmExit.TabIndex = 1
         Me.chkConfirmExit.Text = "Confirm exit if there are open connections"
         Me.chkConfirmExit.UseVisualStyleBackColor = True
         '
@@ -946,7 +946,7 @@ Public Class frmOptions
         Me.chkProperInstallationOfComponentsAtStartup.Location = New System.Drawing.Point(3, 123)
         Me.chkProperInstallationOfComponentsAtStartup.Name = "chkProperInstallationOfComponentsAtStartup"
         Me.chkProperInstallationOfComponentsAtStartup.Size = New System.Drawing.Size(262, 17)
-        Me.chkProperInstallationOfComponentsAtStartup.TabIndex = 50
+        Me.chkProperInstallationOfComponentsAtStartup.TabIndex = 5
         Me.chkProperInstallationOfComponentsAtStartup.Text = "Check proper installation of components at startup"
         Me.chkProperInstallationOfComponentsAtStartup.UseVisualStyleBackColor = True
         '
@@ -956,7 +956,7 @@ Public Class frmOptions
         Me.chkSaveConsOnExit.Location = New System.Drawing.Point(3, 51)
         Me.chkSaveConsOnExit.Name = "chkSaveConsOnExit"
         Me.chkSaveConsOnExit.Size = New System.Drawing.Size(146, 17)
-        Me.chkSaveConsOnExit.TabIndex = 10
+        Me.chkSaveConsOnExit.TabIndex = 2
         Me.chkSaveConsOnExit.Text = "Save connections on exit"
         Me.chkSaveConsOnExit.UseVisualStyleBackColor = True
         '
@@ -966,7 +966,7 @@ Public Class frmOptions
         Me.chkConfirmCloseConnection.Location = New System.Drawing.Point(3, 3)
         Me.chkConfirmCloseConnection.Name = "chkConfirmCloseConnection"
         Me.chkConfirmCloseConnection.Size = New System.Drawing.Size(176, 17)
-        Me.chkConfirmCloseConnection.TabIndex = 51
+        Me.chkConfirmCloseConnection.TabIndex = 0
         Me.chkConfirmCloseConnection.Text = "Confirm closing connection tabs"
         Me.chkConfirmCloseConnection.UseVisualStyleBackColor = True
         '
@@ -984,7 +984,8 @@ Public Class frmOptions
         Me.tcTabControl.SelectedIndex = 0
         Me.tcTabControl.Size = New System.Drawing.Size(610, 489)
         Me.tcTabControl.SizeMode = System.Windows.Forms.TabSizeMode.Fixed
-        Me.tcTabControl.TabIndex = 5001
+        Me.tcTabControl.TabIndex = 1
+        Me.tcTabControl.TabStop = False
         '
         'tabStartupExit
         '
@@ -1066,7 +1067,7 @@ Public Class frmOptions
         Me.pnlDefaultCredentials.Location = New System.Drawing.Point(3, 142)
         Me.pnlDefaultCredentials.Name = "pnlDefaultCredentials"
         Me.pnlDefaultCredentials.Size = New System.Drawing.Size(596, 175)
-        Me.pnlDefaultCredentials.TabIndex = 72
+        Me.pnlDefaultCredentials.TabIndex = 5
         '
         'radCredentialsCustom
         '
@@ -1074,7 +1075,7 @@ Public Class frmOptions
         Me.radCredentialsCustom.Location = New System.Drawing.Point(16, 69)
         Me.radCredentialsCustom.Name = "radCredentialsCustom"
         Me.radCredentialsCustom.Size = New System.Drawing.Size(87, 17)
-        Me.radCredentialsCustom.TabIndex = 73
+        Me.radCredentialsCustom.TabIndex = 3
         Me.radCredentialsCustom.Text = "the following:"
         Me.radCredentialsCustom.UseVisualStyleBackColor = True
         '
@@ -1084,7 +1085,7 @@ Public Class frmOptions
         Me.lblDefaultCredentials.Location = New System.Drawing.Point(3, 9)
         Me.lblDefaultCredentials.Name = "lblDefaultCredentials"
         Me.lblDefaultCredentials.Size = New System.Drawing.Size(257, 13)
-        Me.lblDefaultCredentials.TabIndex = 80
+        Me.lblDefaultCredentials.TabIndex = 0
         Me.lblDefaultCredentials.Text = "For empty Username, Password or Domain fields use:"
         '
         'radCredentialsNoInfo
@@ -1094,7 +1095,7 @@ Public Class frmOptions
         Me.radCredentialsNoInfo.Location = New System.Drawing.Point(16, 31)
         Me.radCredentialsNoInfo.Name = "radCredentialsNoInfo"
         Me.radCredentialsNoInfo.Size = New System.Drawing.Size(91, 17)
-        Me.radCredentialsNoInfo.TabIndex = 71
+        Me.radCredentialsNoInfo.TabIndex = 1
         Me.radCredentialsNoInfo.TabStop = True
         Me.radCredentialsNoInfo.Text = "no information"
         Me.radCredentialsNoInfo.UseVisualStyleBackColor = True
@@ -1105,7 +1106,7 @@ Public Class frmOptions
         Me.radCredentialsWindows.Location = New System.Drawing.Point(16, 50)
         Me.radCredentialsWindows.Name = "radCredentialsWindows"
         Me.radCredentialsWindows.Size = New System.Drawing.Size(227, 17)
-        Me.radCredentialsWindows.TabIndex = 72
+        Me.radCredentialsWindows.TabIndex = 2
         Me.radCredentialsWindows.Text = "my current credentials (windows logon info)"
         Me.radCredentialsWindows.UseVisualStyleBackColor = True
         '
@@ -1116,7 +1117,7 @@ Public Class frmOptions
         Me.txtCredentialsDomain.Location = New System.Drawing.Point(125, 147)
         Me.txtCredentialsDomain.Name = "txtCredentialsDomain"
         Me.txtCredentialsDomain.Size = New System.Drawing.Size(150, 20)
-        Me.txtCredentialsDomain.TabIndex = 76
+        Me.txtCredentialsDomain.TabIndex = 9
         '
         'lblCredentialsUsername
         '
@@ -1125,7 +1126,7 @@ Public Class frmOptions
         Me.lblCredentialsUsername.Location = New System.Drawing.Point(34, 95)
         Me.lblCredentialsUsername.Name = "lblCredentialsUsername"
         Me.lblCredentialsUsername.Size = New System.Drawing.Size(58, 13)
-        Me.lblCredentialsUsername.TabIndex = 120
+        Me.lblCredentialsUsername.TabIndex = 4
         Me.lblCredentialsUsername.Text = "Username:"
         '
         'txtCredentialsPassword
@@ -1135,7 +1136,7 @@ Public Class frmOptions
         Me.txtCredentialsPassword.Location = New System.Drawing.Point(125, 120)
         Me.txtCredentialsPassword.Name = "txtCredentialsPassword"
         Me.txtCredentialsPassword.Size = New System.Drawing.Size(150, 20)
-        Me.txtCredentialsPassword.TabIndex = 75
+        Me.txtCredentialsPassword.TabIndex = 7
         Me.txtCredentialsPassword.UseSystemPasswordChar = True
         '
         'lblCredentialsPassword
@@ -1145,7 +1146,7 @@ Public Class frmOptions
         Me.lblCredentialsPassword.Location = New System.Drawing.Point(34, 123)
         Me.lblCredentialsPassword.Name = "lblCredentialsPassword"
         Me.lblCredentialsPassword.Size = New System.Drawing.Size(56, 13)
-        Me.lblCredentialsPassword.TabIndex = 140
+        Me.lblCredentialsPassword.TabIndex = 6
         Me.lblCredentialsPassword.Text = "Password:"
         '
         'txtCredentialsUsername
@@ -1155,7 +1156,7 @@ Public Class frmOptions
         Me.txtCredentialsUsername.Location = New System.Drawing.Point(125, 93)
         Me.txtCredentialsUsername.Name = "txtCredentialsUsername"
         Me.txtCredentialsUsername.Size = New System.Drawing.Size(150, 20)
-        Me.txtCredentialsUsername.TabIndex = 74
+        Me.txtCredentialsUsername.TabIndex = 5
         '
         'lblCredentialsDomain
         '
@@ -1164,7 +1165,7 @@ Public Class frmOptions
         Me.lblCredentialsDomain.Location = New System.Drawing.Point(34, 150)
         Me.lblCredentialsDomain.Name = "lblCredentialsDomain"
         Me.lblCredentialsDomain.Size = New System.Drawing.Size(46, 13)
-        Me.lblCredentialsDomain.TabIndex = 160
+        Me.lblCredentialsDomain.TabIndex = 8
         Me.lblCredentialsDomain.Text = "Domain:"
         '
         'tabSQLServer
@@ -1187,6 +1188,25 @@ Public Class frmOptions
         Me.tabSQLServer.Text = "SQL Server"
         Me.tabSQLServer.UseVisualStyleBackColor = True
         '
+        'lblSQLDatabaseName
+        '
+        Me.lblSQLDatabaseName.AutoSize = True
+        Me.lblSQLDatabaseName.Enabled = False
+        Me.lblSQLDatabaseName.Location = New System.Drawing.Point(23, 132)
+        Me.lblSQLDatabaseName.Name = "lblSQLDatabaseName"
+        Me.lblSQLDatabaseName.Size = New System.Drawing.Size(56, 13)
+        Me.lblSQLDatabaseName.TabIndex = 5
+        Me.lblSQLDatabaseName.Text = "Database:"
+        '
+        'txtSQLDatabaseName
+        '
+        Me.txtSQLDatabaseName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSQLDatabaseName.Enabled = False
+        Me.txtSQLDatabaseName.Location = New System.Drawing.Point(113, 129)
+        Me.txtSQLDatabaseName.Name = "txtSQLDatabaseName"
+        Me.txtSQLDatabaseName.Size = New System.Drawing.Size(153, 20)
+        Me.txtSQLDatabaseName.TabIndex = 6
+        '
         'lblExperimental
         '
         Me.lblExperimental.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
@@ -1197,7 +1217,7 @@ Public Class frmOptions
         Me.lblExperimental.Location = New System.Drawing.Point(3, 0)
         Me.lblExperimental.Name = "lblExperimental"
         Me.lblExperimental.Size = New System.Drawing.Size(596, 25)
-        Me.lblExperimental.TabIndex = 121
+        Me.lblExperimental.TabIndex = 0
         Me.lblExperimental.Text = "EXPERIMENTAL"
         Me.lblExperimental.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -1207,7 +1227,7 @@ Public Class frmOptions
         Me.chkUseSQLServer.Location = New System.Drawing.Point(3, 76)
         Me.chkUseSQLServer.Name = "chkUseSQLServer"
         Me.chkUseSQLServer.Size = New System.Drawing.Size(234, 17)
-        Me.chkUseSQLServer.TabIndex = 61
+        Me.chkUseSQLServer.TabIndex = 2
         Me.chkUseSQLServer.Text = "Use SQL Server to load && save connections"
         Me.chkUseSQLServer.UseVisualStyleBackColor = True
         '
@@ -1218,7 +1238,7 @@ Public Class frmOptions
         Me.lblSQLUsername.Location = New System.Drawing.Point(23, 158)
         Me.lblSQLUsername.Name = "lblSQLUsername"
         Me.lblSQLUsername.Size = New System.Drawing.Size(58, 13)
-        Me.lblSQLUsername.TabIndex = 80
+        Me.lblSQLUsername.TabIndex = 7
         Me.lblSQLUsername.Text = "Username:"
         '
         'txtSQLPassword
@@ -1228,7 +1248,7 @@ Public Class frmOptions
         Me.txtSQLPassword.Location = New System.Drawing.Point(113, 182)
         Me.txtSQLPassword.Name = "txtSQLPassword"
         Me.txtSQLPassword.Size = New System.Drawing.Size(153, 20)
-        Me.txtSQLPassword.TabIndex = 64
+        Me.txtSQLPassword.TabIndex = 10
         Me.txtSQLPassword.UseSystemPasswordChar = True
         '
         'lblSQLInfo
@@ -1241,7 +1261,7 @@ Public Class frmOptions
         Me.lblSQLInfo.Location = New System.Drawing.Point(3, 25)
         Me.lblSQLInfo.Name = "lblSQLInfo"
         Me.lblSQLInfo.Size = New System.Drawing.Size(596, 25)
-        Me.lblSQLInfo.TabIndex = 120
+        Me.lblSQLInfo.TabIndex = 1
         Me.lblSQLInfo.Text = "Please see Help - Getting started - SQL Configuration for more Info!"
         Me.lblSQLInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
@@ -1252,7 +1272,7 @@ Public Class frmOptions
         Me.lblSQLServer.Location = New System.Drawing.Point(23, 106)
         Me.lblSQLServer.Name = "lblSQLServer"
         Me.lblSQLServer.Size = New System.Drawing.Size(65, 13)
-        Me.lblSQLServer.TabIndex = 60
+        Me.lblSQLServer.TabIndex = 3
         Me.lblSQLServer.Text = "SQL Server:"
         '
         'txtSQLUsername
@@ -1262,7 +1282,7 @@ Public Class frmOptions
         Me.txtSQLUsername.Location = New System.Drawing.Point(113, 155)
         Me.txtSQLUsername.Name = "txtSQLUsername"
         Me.txtSQLUsername.Size = New System.Drawing.Size(153, 20)
-        Me.txtSQLUsername.TabIndex = 63
+        Me.txtSQLUsername.TabIndex = 8
         '
         'txtSQLServer
         '
@@ -1271,7 +1291,7 @@ Public Class frmOptions
         Me.txtSQLServer.Location = New System.Drawing.Point(113, 103)
         Me.txtSQLServer.Name = "txtSQLServer"
         Me.txtSQLServer.Size = New System.Drawing.Size(153, 20)
-        Me.txtSQLServer.TabIndex = 62
+        Me.txtSQLServer.TabIndex = 4
         '
         'lblSQLPassword
         '
@@ -1280,7 +1300,7 @@ Public Class frmOptions
         Me.lblSQLPassword.Location = New System.Drawing.Point(23, 185)
         Me.lblSQLPassword.Name = "lblSQLPassword"
         Me.lblSQLPassword.Size = New System.Drawing.Size(56, 13)
-        Me.lblSQLPassword.TabIndex = 100
+        Me.lblSQLPassword.TabIndex = 9
         Me.lblSQLPassword.Text = "Password:"
         '
         'tabUpdates
@@ -1320,25 +1340,6 @@ Public Class frmOptions
         Me.tabAdvanced.TabIndex = 5
         Me.tabAdvanced.Text = "Advanced"
         Me.tabAdvanced.UseVisualStyleBackColor = True
-        '
-        'lblSQLDatabaseName
-        '
-        Me.lblSQLDatabaseName.AutoSize = True
-        Me.lblSQLDatabaseName.Enabled = False
-        Me.lblSQLDatabaseName.Location = New System.Drawing.Point(23, 132)
-        Me.lblSQLDatabaseName.Name = "lblSQLDatabaseName"
-        Me.lblSQLDatabaseName.Size = New System.Drawing.Size(56, 13)
-        Me.lblSQLDatabaseName.TabIndex = 122
-        Me.lblSQLDatabaseName.Text = "Database:"
-        '
-        'txtSQLDatabaseName
-        '
-        Me.txtSQLDatabaseName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtSQLDatabaseName.Enabled = False
-        Me.txtSQLDatabaseName.Location = New System.Drawing.Point(113, 129)
-        Me.txtSQLDatabaseName.Name = "txtSQLDatabaseName"
-        Me.txtSQLDatabaseName.Size = New System.Drawing.Size(153, 20)
-        Me.txtSQLDatabaseName.TabIndex = 123
         '
         'frmOptions
         '
