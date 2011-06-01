@@ -206,24 +206,21 @@ Namespace App
             Public Shared Sub SetDefaultLayout()
                 frmMain.pnlDock.Visible = False
 
-                Windows.configPanel.Show(frmMain.pnlDock, DockState.DockLeft)
+                frmMain.pnlDock.DockLeftPortion = 0.25
+                frmMain.pnlDock.DockRightPortion = 0.25
+                frmMain.pnlDock.DockTopPortion = 0.25
+                frmMain.pnlDock.DockBottomPortion = 0.25
 
                 Windows.treePanel.Show(frmMain.pnlDock, DockState.DockLeft)
-                For Each pane As DockPane In frmMain.pnlDock.Panes
-                    If pane.DockState = DockState.DockLeft Then
-                        Windows.treePanel.DockTo(pane, DockStyle.Top, 0)
-                        Exit For
-                    End If
-                Next
-
-                Windows.errorsPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-
-                Windows.sessionsPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-
-                Windows.screenshotPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-                Windows.screenshotForm.Hide()
+                Windows.configPanel.Show(frmMain.pnlDock)
+                Windows.configPanel.DockTo(Windows.treePanel.Pane, DockStyle.Bottom, -1)
 
                 Windows.quickyPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
+                Windows.screenshotPanel.Show(Windows.quickyPanel.Pane, Windows.quickyPanel)
+                Windows.sessionsPanel.Show(Windows.quickyPanel.Pane, Windows.screenshotPanel)
+                Windows.errorsPanel.Show(Windows.quickyPanel.Pane, Windows.sessionsPanel)
+
+                Windows.screenshotForm.Hide()
                 Windows.quickyForm.Hide()
 
                 frmMain.pnlDock.Visible = True

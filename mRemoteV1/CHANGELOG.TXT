@@ -23,6 +23,7 @@
   Improved loading and saving of window location.
   Removed flickering on start up.
   Changed the Options page into a normal dialog.
+  Improved Reset Layout function.
   Changed to use full four part version numbers with major, minor, build, and revision.
 
 1.66 (2011-05-02):
