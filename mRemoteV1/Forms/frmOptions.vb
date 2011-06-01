@@ -1743,7 +1743,7 @@ Public Class frmOptions
         lblSQLInfo.Text = My.Resources.strSQLInfo
         lblSQLUsername.Text = My.Resources.strLabelUsername
         lblSQLServer.Text = My.Resources.strSQLServer & ":"
-        lblSQLDatabaseName.TabIndex = My.Resources.strLabelSQLServerDatabaseName
+        lblSQLDatabaseName.Text = My.Resources.strLabelSQLServerDatabaseName
         lblSQLPassword.Text = My.Resources.strLabelPassword
         lblRdpReconnectionCount.Text = My.Resources.strRdpReconnectCount
         lblAutoSave2.Text = My.Resources.strAutoSaveMins
