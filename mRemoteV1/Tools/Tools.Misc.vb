@@ -71,13 +71,12 @@ Namespace Tools
                 Dim sqlQuery As SqlCommand
                 Dim sqlRd As SqlDataReader
 
-                Dim sqlDB As String = "mRemote"
                 Dim LastUpdateInDB As Date
 
                 If My.Settings.SQLUser <> "" Then
-                    sqlCon = New SqlConnection("Data Source=" & My.Settings.SQLHost & ";Initial Catalog=" & sqlDB & ";User Id=" & My.Settings.SQLUser & ";Password=" & Security.Crypt.Decrypt(My.Settings.SQLPass, App.Info.General.EncryptionKey))
+                    sqlCon = New SqlConnection("Data Source=" & My.Settings.SQLHost & ";Initial Catalog=" & My.Settings.SQLDatabaseName & ";User Id=" & My.Settings.SQLUser & ";Password=" & Security.Crypt.Decrypt(My.Settings.SQLPass, App.Info.General.EncryptionKey))
                 Else
-                    sqlCon = New SqlConnection("Data Source=" & My.Settings.SQLHost & ";Initial Catalog=" & sqlDB & ";Integrated Security=True")
+                    sqlCon = New SqlConnection("Data Source=" & My.Settings.SQLHost & ";Initial Catalog=" & My.Settings.SQLDatabaseName & ";Integrated Security=True")
                 End If
 
                 sqlCon.Open()

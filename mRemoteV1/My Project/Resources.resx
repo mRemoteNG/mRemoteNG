@@ -2331,4 +2331,7 @@ Error Description: {1}</value>
   <data name="strTabUpdates" xml:space="preserve">
     <value>Updates</value>
   </data>
+  <data name="strLabelSQLDatabaseName" xml:space="preserve">
+    <value>Database:</value>
+  </data>
 </root>

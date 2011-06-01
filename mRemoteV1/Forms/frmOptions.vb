@@ -106,17 +106,19 @@ Public Class frmOptions
     Friend WithEvents lblSQLPassword As System.Windows.Forms.Label
     Friend WithEvents txtSQLServer As System.Windows.Forms.TextBox
     Friend WithEvents lblExperimental As System.Windows.Forms.Label
+    Friend WithEvents lblSQLDatabaseName As System.Windows.Forms.Label
+    Friend WithEvents txtSQLDatabaseName As System.Windows.Forms.TextBox
     Private components As System.ComponentModel.IContainer
 
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", 0)
-        Dim ListViewItem9 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
-        Dim ListViewItem10 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
-        Dim ListViewItem11 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", 3)
-        Dim ListViewItem12 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", 4)
-        Dim ListViewItem13 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 5)
-        Dim ListViewItem14 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 6)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", 0)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
+        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", 3)
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", 4)
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 5)
+        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
         Me.btnOK = New System.Windows.Forms.Button
         Me.btnCancel = New System.Windows.Forms.Button
@@ -219,6 +221,8 @@ Public Class frmOptions
         Me.lblSQLPassword = New System.Windows.Forms.Label
         Me.tabUpdates = New System.Windows.Forms.TabPage
         Me.tabAdvanced = New System.Windows.Forms.TabPage
+        Me.lblSQLDatabaseName = New System.Windows.Forms.Label
+        Me.txtSQLDatabaseName = New System.Windows.Forms.TextBox
         CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProxy.SuspendLayout()
@@ -268,7 +272,7 @@ Public Class frmOptions
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lvPages.FullRowSelect = True
         Me.lvPages.HideSelection = False
-        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem8, ListViewItem9, ListViewItem10, ListViewItem11, ListViewItem12, ListViewItem13, ListViewItem14})
+        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7})
         Me.lvPages.LabelWrap = False
         Me.lvPages.LargeImageList = Me.imgListPages
         Me.lvPages.Location = New System.Drawing.Point(12, 12)
@@ -1165,6 +1169,8 @@ Public Class frmOptions
         '
         'tabSQLServer
         '
+        Me.tabSQLServer.Controls.Add(Me.lblSQLDatabaseName)
+        Me.tabSQLServer.Controls.Add(Me.txtSQLDatabaseName)
         Me.tabSQLServer.Controls.Add(Me.lblExperimental)
         Me.tabSQLServer.Controls.Add(Me.chkUseSQLServer)
         Me.tabSQLServer.Controls.Add(Me.lblSQLUsername)
@@ -1209,7 +1215,7 @@ Public Class frmOptions
         '
         Me.lblSQLUsername.AutoSize = True
         Me.lblSQLUsername.Enabled = False
-        Me.lblSQLUsername.Location = New System.Drawing.Point(23, 133)
+        Me.lblSQLUsername.Location = New System.Drawing.Point(23, 158)
         Me.lblSQLUsername.Name = "lblSQLUsername"
         Me.lblSQLUsername.Size = New System.Drawing.Size(58, 13)
         Me.lblSQLUsername.TabIndex = 80
@@ -1219,7 +1225,7 @@ Public Class frmOptions
         '
         Me.txtSQLPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSQLPassword.Enabled = False
-        Me.txtSQLPassword.Location = New System.Drawing.Point(113, 157)
+        Me.txtSQLPassword.Location = New System.Drawing.Point(113, 182)
         Me.txtSQLPassword.Name = "txtSQLPassword"
         Me.txtSQLPassword.Size = New System.Drawing.Size(153, 20)
         Me.txtSQLPassword.TabIndex = 64
@@ -1253,7 +1259,7 @@ Public Class frmOptions
         '
         Me.txtSQLUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSQLUsername.Enabled = False
-        Me.txtSQLUsername.Location = New System.Drawing.Point(113, 130)
+        Me.txtSQLUsername.Location = New System.Drawing.Point(113, 155)
         Me.txtSQLUsername.Name = "txtSQLUsername"
         Me.txtSQLUsername.Size = New System.Drawing.Size(153, 20)
         Me.txtSQLUsername.TabIndex = 63
@@ -1271,7 +1277,7 @@ Public Class frmOptions
         '
         Me.lblSQLPassword.AutoSize = True
         Me.lblSQLPassword.Enabled = False
-        Me.lblSQLPassword.Location = New System.Drawing.Point(23, 160)
+        Me.lblSQLPassword.Location = New System.Drawing.Point(23, 185)
         Me.lblSQLPassword.Name = "lblSQLPassword"
         Me.lblSQLPassword.Size = New System.Drawing.Size(56, 13)
         Me.lblSQLPassword.TabIndex = 100
@@ -1314,6 +1320,25 @@ Public Class frmOptions
         Me.tabAdvanced.TabIndex = 5
         Me.tabAdvanced.Text = "Advanced"
         Me.tabAdvanced.UseVisualStyleBackColor = True
+        '
+        'lblSQLDatabaseName
+        '
+        Me.lblSQLDatabaseName.AutoSize = True
+        Me.lblSQLDatabaseName.Enabled = False
+        Me.lblSQLDatabaseName.Location = New System.Drawing.Point(23, 132)
+        Me.lblSQLDatabaseName.Name = "lblSQLDatabaseName"
+        Me.lblSQLDatabaseName.Size = New System.Drawing.Size(56, 13)
+        Me.lblSQLDatabaseName.TabIndex = 122
+        Me.lblSQLDatabaseName.Text = "Database:"
+        '
+        'txtSQLDatabaseName
+        '
+        Me.txtSQLDatabaseName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtSQLDatabaseName.Enabled = False
+        Me.txtSQLDatabaseName.Location = New System.Drawing.Point(113, 129)
+        Me.txtSQLDatabaseName.Name = "txtSQLDatabaseName"
+        Me.txtSQLDatabaseName.Size = New System.Drawing.Size(153, 20)
+        Me.txtSQLDatabaseName.TabIndex = 123
         '
         'frmOptions
         '
@@ -1411,6 +1436,7 @@ Public Class frmOptions
 
             Me.chkUseSQLServer.Checked = My.Settings.UseSQLServer
             Me.txtSQLServer.Text = My.Settings.SQLHost
+            Me.txtSQLDatabaseName.Text = My.Settings.SQLDatabaseName
             Me.txtSQLUsername.Text = My.Settings.SQLUser
             Me.txtSQLPassword.Text = mRemoteNG.Security.Crypt.Decrypt(My.Settings.SQLPass, App.Info.General.EncryptionKey)
 
@@ -1535,6 +1561,7 @@ Public Class frmOptions
 
             My.Settings.UseSQLServer = Me.chkUseSQLServer.Checked
             My.Settings.SQLHost = Me.txtSQLServer.Text
+            My.Settings.SQLDatabaseName = Me.txtSQLDatabaseName.Text
             My.Settings.SQLUser = Me.txtSQLUsername.Text
             My.Settings.SQLPass = mRemoteNG.Security.Crypt.Encrypt(Me.txtSQLPassword.Text, App.Info.General.EncryptionKey)
 

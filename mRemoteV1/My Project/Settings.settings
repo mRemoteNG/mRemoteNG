@@ -509,5 +509,8 @@
     <Setting Name="MainFormRestoreLocation" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="SQLDatabaseName" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mRemoteNG</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

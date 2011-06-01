@@ -798,6 +798,7 @@ Namespace App
 
                 conL.UseSQL = My.Settings.UseSQLServer
                 conL.SQLHost = My.Settings.SQLHost
+                conL.SQLDatabaseName = My.Settings.SQLDatabaseName
                 conL.SQLUsername = My.Settings.SQLUser
                 conL.SQLPassword = Security.Crypt.Decrypt(My.Settings.SQLPass, App.Info.General.EncryptionKey)
                 conL.SQLUpdate = Update
@@ -1112,6 +1113,7 @@ Namespace App
                 If My.Settings.UseSQLServer = True Then
                     conS.SaveFormat = Config.Connections.Save.Format.SQL
                     conS.SQLHost = My.Settings.SQLHost
+                    conS.SQLDatabaseName = My.Settings.SQLDatabaseName
                     conS.SQLUsername = My.Settings.SQLUser
                     conS.SQLPassword = Security.Crypt.Decrypt(My.Settings.SQLPass, App.Info.General.EncryptionKey)
                 End If

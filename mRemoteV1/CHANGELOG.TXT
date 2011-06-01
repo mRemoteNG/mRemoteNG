@@ -25,6 +25,7 @@
   Changed the Options page into a normal dialog.
   Improved Reset Layout function.
   Changed to use full four part version numbers with major, minor, build, and revision.
+  Changed hard coded SQL database name into a user configurable setting.
 
 1.66 (2011-05-02):
   Fixed connections not working

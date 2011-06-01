@@ -18,8 +18,6 @@ Namespace Config
             Private sqlQuery As SqlCommand
             Private sqlRd As SqlDataReader
 
-            Private sqlDB As String = "mRemoteNG"
-
             Private selNode As TreeNode
 #End Region
 
@@ -41,6 +39,16 @@ Namespace Config
                 End Get
                 Set(ByVal value As String)
                     _SQLHost = value
+                End Set
+            End Property
+
+            Private _SQLDatabaseName As String
+            Public Property SQLDatabaseName() As String
+                Get
+                    Return _SQLDatabaseName
+                End Get
+                Set(ByVal value As String)
+                    _SQLDatabaseName = value
                 End Set
             End Property
 
@@ -177,9 +185,9 @@ Namespace Config
                     App.Runtime.ConnectionsFileLoaded = False
 
                     If _SQLUsername <> "" Then
-                        sqlCon = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & sqlDB & ";User Id=" & _SQLUsername & ";Password=" & _SQLPassword)
+                        sqlCon = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & _SQLDatabaseName & ";User Id=" & _SQLUsername & ";Password=" & _SQLPassword)
                     Else
-                        sqlCon = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & sqlDB & ";Integrated Security=True")
+                        sqlCon = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & _SQLDatabaseName & ";Integrated Security=True")
                     End If
 
                     sqlCon.Open()

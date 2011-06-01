@@ -24,8 +24,6 @@ Namespace Config
             Private xW As XmlTextWriter
             Private pW As String = App.Info.General.EncryptionKey
 
-            Private sqlDB As String = "mRemote"
-
             Private sqlCon As SqlConnection
             Private sqlQuery As SqlCommand
             Private sqlWr As Integer
@@ -42,6 +40,16 @@ Namespace Config
                 End Get
                 Set(ByVal value As String)
                     _SQLHost = value
+                End Set
+            End Property
+
+            Private _SQLDatabaseName As String
+            Public Property SQLDatabaseName() As String
+                Get
+                    Return _SQLDatabaseName
+                End Get
+                Set(ByVal value As String)
+                    _SQLDatabaseName = value
                 End Set
             End Property
 
@@ -167,9 +175,9 @@ Namespace Config
 #Region "SQL"
             Private Sub SaveToSQL()
                 If _SQLUsername <> "" Then
-                    sqlCon = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & sqlDB & ";User Id=" & _SQLUsername & ";Password=" & _SQLPassword)
+                    sqlCon = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & _SQLDatabaseName & ";User Id=" & _SQLUsername & ";Password=" & _SQLPassword)
                 Else
-                    sqlCon = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & sqlDB & ";Integrated Security=True")
+                    sqlCon = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & _SQLDatabaseName & ";Integrated Security=True")
                 End If
 
                 sqlCon.Open()

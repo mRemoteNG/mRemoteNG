@@ -2862,6 +2862,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Database:.
+        '''</summary>
+        Friend ReadOnly Property strLabelSQLDatabaseName() As String
+            Get
+                Return ResourceManager.GetString("strLabelSQLDatabaseName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Username:.
         '''</summary>
         Friend ReadOnly Property strLabelUsername() As String
