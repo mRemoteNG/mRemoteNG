@@ -1743,6 +1743,7 @@ Public Class frmOptions
         lblSQLInfo.Text = My.Resources.strSQLInfo
         lblSQLUsername.Text = My.Resources.strLabelUsername
         lblSQLServer.Text = My.Resources.strSQLServer & ":"
+        lblSQLDatabaseName.TabIndex = My.Resources.strLabelSQLServerDatabaseName
         lblSQLPassword.Text = My.Resources.strLabelPassword
         lblRdpReconnectionCount.Text = My.Resources.strRdpReconnectCount
         lblAutoSave2.Text = My.Resources.strAutoSaveMins
@@ -1815,9 +1816,11 @@ Public Class frmOptions
 
     Private Sub chkUseSQLServer_CheckedChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles chkUseSQLServer.CheckedChanged
         Me.lblSQLServer.Enabled = chkUseSQLServer.Checked
+        Me.lblSQLDatabaseName.Enabled = chkUseSQLServer.Checked
         Me.lblSQLUsername.Enabled = chkUseSQLServer.Checked
         Me.lblSQLPassword.Enabled = chkUseSQLServer.Checked
         Me.txtSQLServer.Enabled = chkUseSQLServer.Checked
+        Me.txtSQLDatabaseName.Enabled = chkUseSQLServer.Checked
         Me.txtSQLUsername.Enabled = chkUseSQLServer.Checked
         Me.txtSQLPassword.Enabled = chkUseSQLServer.Checked
     End Sub

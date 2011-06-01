@@ -2334,4 +2334,7 @@ Error Description: {1}</value>
   <data name="strLabelSQLDatabaseName" xml:space="preserve">
     <value>Database:</value>
   </data>
+  <data name="strLabelSQLServerDatabaseName" xml:space="preserve">
+    <value>Database:</value>
+  </data>
 </root>
