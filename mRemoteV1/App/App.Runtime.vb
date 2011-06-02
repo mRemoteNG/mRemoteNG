@@ -149,7 +149,7 @@ Namespace App
 
             Public Shared Sub ShowUpdatesTab()
                 Windows.optionsForm = New frmOptions(Windows.optionsPanel)
-                Windows.optionsForm.Show(frmMain.pnlDock, 4)
+                Windows.optionsForm.Show(frmMain.pnlDock, 5)
             End Sub
         End Class
 
