@@ -4,6 +4,7 @@ Imports Crownwood
 Imports System.Threading
 Imports System.Xml
 Imports System.Environment
+Imports System.Management
 
 Namespace App
     Public Class Runtime
@@ -247,8 +248,27 @@ Namespace App
 
             Public Shared Sub CreateLogger()
                 log4net.Config.XmlConfigurator.Configure(New FileInfo("mRemoteNG.exe.config"))
-
                 log = log4net.LogManager.GetLogger("mRemoteNG.Log")
+                Try
+                    Dim servicePack As Integer
+                    For Each managementObject As ManagementObject In New ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem").Get()
+                        servicePack = managementObject.GetPropertyValue("ServicePackMajorVersion")
+                        If servicePack = 0 Then
+                            log.InfoFormat("{0} {1}", managementObject.GetPropertyValue("Caption").Trim, managementObject.GetPropertyValue("OSArchitecture"))
+                        Else
+                            log.InfoFormat("{0} Service Pack {1} {2}", managementObject.GetPropertyValue("Caption").Trim, servicePack.ToString, managementObject.GetPropertyValue("OSArchitecture"))
+                        End If
+                    Next
+                Catch ex As Exception
+                    log.WarnFormat("Error retrieving operating system information from WMI. {0}", ex.Message)
+                End Try
+                log.InfoFormat("Microsoft .NET Framework {0}", System.Environment.Version.ToString)
+#If Not PORTABLE Then
+                log.InfoFormat("{0} {1}", My.Application.Info.ProductName.ToString, My.Application.Info.Version.ToString)
+#Else
+                log.InfoFormat("{0} {1} {2}", My.Application.Info.ProductName.ToString, My.Application.Info.Version.ToString, My.Resources.strLabelPortableEdition)
+#End If
+                log.InfoFormat("System Culture: {0}/{1}", Threading.Thread.CurrentThread.CurrentUICulture.Name, Threading.Thread.CurrentThread.CurrentUICulture.NativeName)
             End Sub
 
             Public Shared Sub UpdateCheck()
