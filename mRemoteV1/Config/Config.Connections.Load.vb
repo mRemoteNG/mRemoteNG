@@ -434,8 +434,6 @@ Namespace Config
                         conI.Domain = .Item("DomainName")
                         conI.DisplayWallpaper = .Item("DisplayWallpaper")
                         conI.DisplayThemes = .Item("DisplayThemes")
-                        conI.EnableFontSmoothing = .Item("EnableFontSmoothing")
-                        conI.EnableDesktopComposition = .Item("EnableDesktopComposition")
                         conI.CacheBitmaps = .Item("CacheBitmaps")
                         conI.UseConsoleSession = .Item("ConnectToConsole")
 
@@ -459,8 +457,6 @@ Namespace Config
                         conI.Inherit.Description = .Item("InheritDescription")
                         conI.Inherit.DisplayThemes = .Item("InheritDisplayThemes")
                         conI.Inherit.DisplayWallpaper = .Item("InheritDisplayWallpaper")
-                        conI.Inherit.EnableFontSmoothing = .Item("InheritEnableFontSmoothing")
-                        conI.Inherit.EnableDesktopComposition = .Item("InheritEnableDesktopComposition")
                         conI.Inherit.Domain = .Item("InheritDomain")
                         conI.Inherit.Icon = .Item("InheritIcon")
                         conI.Inherit.Panel = .Item("InheritPanel")
@@ -555,6 +551,13 @@ Namespace Config
                             conI.Inherit.RDGatewayUsername = .Item("InheritRDGatewayUsername")
                             conI.Inherit.RDGatewayPassword = .Item("InheritRDGatewayPassword")
                             conI.Inherit.RDGatewayDomain = .Item("InheritRDGatewayDomain")
+                        End If
+
+                        If Me.confVersion >= 2.3 Then
+                            conI.EnableFontSmoothing = .Item("EnableFontSmoothing")
+                            conI.EnableDesktopComposition = .Item("EnableDesktopComposition")
+                            conI.Inherit.EnableFontSmoothing = .Item("InheritEnableFontSmoothing")
+                            conI.Inherit.EnableDesktopComposition = .Item("InheritEnableDesktopComposition")
                         End If
 
                         If SQLUpdate = True Then
