@@ -1071,37 +1071,35 @@ Namespace UI
 
             Public Sub AddFolder()
                 Try
-                    Dim nNode As TreeNode = mRemoteNG.Tree.Node.AddNode(mRemoteNG.Tree.Node.Type.Container)
+                    Dim newNode As TreeNode = mRemoteNG.Tree.Node.AddNode(mRemoteNG.Tree.Node.Type.Container)
+                    Dim newContainerInfo As New Container.Info()
+                    newNode.Tag = newContainerInfo
+                    newContainerInfo.TreeNode = newNode
 
-                    If nNode IsNot Nothing Then
-                        Dim nContI As New mRemoteNG.Container.Info()
-                        If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Container Then
-                            nContI.Parent = mRemoteNG.Tree.Node.SelectedNode.Tag
-                        Else
-                            nContI.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
-                        End If
-
-                        nContI.TreeNode = nNode
-                        nContI.ConnectionInfo = New mRemoteNG.Connection.Info(nContI)
-
-                        If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) <> mRemoteNG.Tree.Node.Type.Container Then
-                            nContI.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
-                        End If
-
-                        nNode.Tag = nContI
-                        ctL.Add(nContI)
-
-                        If mRemoteNG.Tree.Node.GetNodeType(Me.tvConnections.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
-                            Me.tvConnections.SelectedNode.Parent.Nodes.Add(nNode)
-                        Else
-                            Me.tvConnections.SelectedNode.Nodes.Add(nNode)
-                        End If
-
-                        Me.tvConnections.SelectedNode = nNode
-                        Me.tvConnections.SelectedNode.BeginEdit()
+                    Dim selectedNode As TreeNode = mRemoteNG.Tree.Node.SelectedNode
+                    Dim parentNode As TreeNode
+                    If mRemoteNG.Tree.Node.GetNodeType(selectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                        parentNode = selectedNode.Parent
+                    Else
+                        parentNode = selectedNode
                     End If
+
+                    ' We can only inherit from a container node, not the root node or connection nodes
+                    If mRemoteNG.Tree.Node.GetNodeType(parentNode) = mRemoteNG.Tree.Node.Type.Container Then
+                        newContainerInfo.Parent = parentNode.Tag
+                    Else
+                        newContainerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
+                    End If
+
+                    newContainerInfo.ConnectionInfo = New mRemoteNG.Connection.Info(newContainerInfo)
+
+                    App.Runtime.containerList.Add(newContainerInfo)
+                    parentNode.Nodes.Add(newNode)
+
+                    Me.tvConnections.SelectedNode = newNode
+                    Me.tvConnections.SelectedNode.BeginEdit()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddFolder (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strErrorAddFolderFailed, ex.Message), True)
                 End Try
             End Sub
 

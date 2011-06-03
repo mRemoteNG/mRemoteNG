@@ -2151,6 +2151,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to AddFolder (UI.Window.Tree) failed. {0}.
+        '''</summary>
+        Friend ReadOnly Property strErrorAddFolderFailed() As String
+            Get
+                Return ResourceManager.GetString("strErrorAddFolderFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Error code {0}..
         '''</summary>
         Friend ReadOnly Property strErrorCode() As String

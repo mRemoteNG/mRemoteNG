@@ -232,7 +232,7 @@ Namespace Tree
                 nContI.TreeNode.Text = strDisplayName
 
                 adCNode.Tag = nContI
-                ctL.Add(nContI)
+                containerList.Add(nContI)
 
 
                 CreateADSubNodes(adCNode, ldapPath)
@@ -331,7 +331,7 @@ Namespace Tree
                     nNode.SelectedImageIndex = Images.Enums.TreeImage.Container
                     nCont.ConnectionInfo.Parent = nCont
 
-                    ctL.Add(nCont)
+                    containerList.Add(nCont)
 
                     tNode.Parent.Nodes.Add(nNode)
 

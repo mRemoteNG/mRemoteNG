@@ -2337,4 +2337,7 @@ Error Description: {1}</value>
   <data name="strLabelSQLServerDatabaseName" xml:space="preserve">
     <value>Database:</value>
   </data>
+  <data name="strErrorAddFolderFailed" xml:space="preserve">
+    <value>AddFolder (UI.Window.Tree) failed. {0}</value>
+  </data>
 </root>
