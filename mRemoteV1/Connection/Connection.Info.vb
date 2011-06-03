@@ -1532,6 +1532,8 @@ Namespace Connection
                 Me._Description = val
                 Me._DisplayThemes = val
                 Me._DisplayWallpaper = val
+                Me._EnableFontSmoothing = val
+                Me._EnableDesktopComposition = val
                 Me._Domain = val
                 Me._Icon = val
                 Me._Password = val
@@ -1612,6 +1614,7 @@ Namespace Connection
                 'LocalizedDisplayName("strPropertyNameInheritAll"), _
                 Get
                     If Me._CacheBitmaps And Me._Colors And Me._Description And Me._DisplayThemes And Me._DisplayWallpaper _
+                    And Me._EnableFontSmoothing And Me._EnableDesktopComposition _
                     And Me._Domain And Me._Icon And Me._Password And Me._Port And Me._Protocol And Me._PuttySession _
                     And Me._RedirectDiskDrives And Me._RedirectKeys And Me._RedirectPorts And Me._RedirectPrinters _
                     And Me._RedirectSmartCards And Me._RedirectSound And Me._Resolution And Me._UseConsoleSession _
