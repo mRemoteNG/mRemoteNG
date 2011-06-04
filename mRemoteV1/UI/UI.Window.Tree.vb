@@ -1053,7 +1053,7 @@ Namespace UI
                         nConI.TreeNode = nNode
 
                         nNode.Tag = nConI
-                        cL.Add(nConI)
+                        connectionList.Add(nConI)
 
                         If mRemoteNG.Tree.Node.GetNodeType(Me.tvConnections.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
                             Me.tvConnections.SelectedNode.Parent.Nodes.Add(nNode)

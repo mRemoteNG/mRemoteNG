@@ -55,7 +55,7 @@ Namespace Tree
         End Function
 
         Public Shared Function GetNodeFromPositionID(ByVal id As Integer) As TreeNode
-            For Each conI As Connection.Info In cL
+            For Each conI As Connection.Info In connectionList
                 If conI.PositionID = id Then
                     If conI.IsContainer Then
                         Return TryCast(conI.Parent, Container.Info).TreeNode
@@ -69,7 +69,7 @@ Namespace Tree
         End Function
 
         Public Shared Function GetNodeFromConstantID(ByVal id As String) As TreeNode
-            For Each conI As Connection.Info In cL
+            For Each conI As Connection.Info In connectionList
                 If conI.ConstantID = id Then
                     If conI.IsContainer Then
                         Return TryCast(conI.Parent, Container.Info).TreeNode
@@ -287,7 +287,7 @@ Namespace Tree
                     nConI.TreeNode = adNode
                     adNode.Tag = nConI 'set the nodes tag to the conI
                     'add connection to connections
-                    cL.Add(nConI)
+                    connectionList.Add(nConI)
 
                     rNode.Nodes.Add(adNode)
                 Next
@@ -296,53 +296,53 @@ Namespace Tree
             End Try
         End Sub
 
-        Public Shared Sub CloneNode(ByVal tNode As TreeNode, Optional ByVal ParentNode As TreeNode = Nothing)
+        Public Shared Sub CloneNode(ByVal oldTreeNode As TreeNode, Optional ByVal parentNode As TreeNode = Nothing)
             Try
-                If GetNodeType(tNode) = Type.Connection Then
-                    Dim conI As Connection.Info = tNode.Tag
+                If GetNodeType(oldTreeNode) = Type.Connection Then
+                    Dim oldConnectionInfo As Connection.Info = oldTreeNode.Tag
 
-                    Dim nConI As Connection.Info = conI.Copy
-                    Dim nInh As Connection.Info.Inheritance = conI.Inherit.Copy()
-                    nConI.Inherit = nInh
+                    Dim newConnectionInfo As Connection.Info = oldConnectionInfo.Copy
+                    Dim newInheritance As Connection.Info.Inheritance = oldConnectionInfo.Inherit.Copy()
+                    newConnectionInfo.Inherit = newInheritance
 
-                    cL.Add(nConI)
+                    connectionList.Add(newConnectionInfo)
 
-                    Dim nNode As New TreeNode(nConI.Name)
-                    nNode.Tag = nConI
-                    nNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
-                    nNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
+                    Dim newTreeNode As New TreeNode(newConnectionInfo.Name)
+                    newTreeNode.Tag = newConnectionInfo
+                    newTreeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
+                    newTreeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
 
-                    nConI.TreeNode = nNode
+                    newConnectionInfo.TreeNode = newTreeNode
 
-                    If ParentNode Is Nothing Then
-                        tNode.Parent.Nodes.Add(nNode)
-                        Tree.Node.TreeView.SelectedNode = nNode
+                    If parentNode Is Nothing Then
+                        oldTreeNode.Parent.Nodes.Add(newTreeNode)
+                        Tree.Node.TreeView.SelectedNode = newTreeNode
                     Else
-                        ParentNode.Nodes.Add(nNode)
+                        parentNode.Nodes.Add(newTreeNode)
                     End If
-                ElseIf GetNodeType(tNode) = Type.Container Then
-                    Dim nCont As Container.Info = TryCast(tNode.Tag, Container.Info).Copy
-                    Dim nConI As Connection.Info = TryCast(tNode.Tag, Container.Info).ConnectionInfo.Copy
-                    nCont.ConnectionInfo = nConI
+                ElseIf GetNodeType(oldTreeNode) = Type.Container Then
+                    Dim newContainerInfo As Container.Info = TryCast(oldTreeNode.Tag, Container.Info).Copy
+                    Dim newConnectionInfo As Connection.Info = TryCast(oldTreeNode.Tag, Container.Info).ConnectionInfo.Copy
+                    newContainerInfo.ConnectionInfo = newConnectionInfo
 
-                    Dim nNode As New TreeNode(nCont.Name)
-                    nNode.Tag = nCont
-                    nNode.ImageIndex = Images.Enums.TreeImage.Container
-                    nNode.SelectedImageIndex = Images.Enums.TreeImage.Container
-                    nCont.ConnectionInfo.Parent = nCont
+                    Dim newTreeNode As New TreeNode(newContainerInfo.Name)
+                    newTreeNode.Tag = newContainerInfo
+                    newTreeNode.ImageIndex = Images.Enums.TreeImage.Container
+                    newTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Container
+                    newContainerInfo.ConnectionInfo.Parent = newContainerInfo
 
-                    containerList.Add(nCont)
+                    containerList.Add(newContainerInfo)
 
-                    tNode.Parent.Nodes.Add(nNode)
+                    oldTreeNode.Parent.Nodes.Add(newTreeNode)
 
-                    Tree.Node.TreeView.SelectedNode = nNode
+                    Tree.Node.TreeView.SelectedNode = newTreeNode
 
-                    For Each cNode As TreeNode In tNode.Nodes
-                        CloneNode(cNode, nNode)
+                    For Each childTreeNode As TreeNode In oldTreeNode.Nodes
+                        CloneNode(childTreeNode, newTreeNode)
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "CloneNode failed (Tree.Node)" & vbNewLine & ex.Message)
+                mC.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strErrorCloneNodeFailed, ex.Message))
             End Try
         End Sub
 

@@ -12,7 +12,7 @@ Namespace App
         Public Shared sL As Config.Settings.Load
         Public Shared sS As Config.Settings.Save
 
-        Public Shared cL As Connection.List
+        Public Shared connectionList As Connection.List
         Public Shared prevCL As Connection.List
         Public Shared containerList As Container.List
         Public Shared prevCTL As Container.List
@@ -673,7 +673,7 @@ Namespace App
 #Region "Connections Loading/Saving"
         Public Shared Sub NewConnections(ByVal filename As String)
             Try
-                cL = New Connection.List
+                connectionList = New Connection.List
                 containerList = New Container.List
 
                 Dim conL As New Config.Connections.Load
@@ -695,7 +695,7 @@ Namespace App
 
                 xW.Close()
 
-                conL.ConnectionList = cL
+                conL.ConnectionList = connectionList
                 conL.ContainerList = containerList
                 conL.Import = False
 
@@ -736,12 +736,12 @@ Namespace App
                     End If
                 End If
 
-                If cL IsNot Nothing And containerList IsNot Nothing Then
-                    prevCL = cL.Copy
+                If connectionList IsNot Nothing And containerList IsNot Nothing Then
+                    prevCL = connectionList.Copy
                     prevCTL = containerList.Copy
                 End If
 
-                cL = New Connection.List
+                connectionList = New Connection.List
                 containerList = New Container.List
 
                 Dim conL As New Config.Connections.Load
@@ -798,7 +798,7 @@ Namespace App
                     End Try
                 End If
 
-                conL.ConnectionList = cL
+                conL.ConnectionList = connectionList
                 conL.ContainerList = containerList
 
                 If prevCL IsNot Nothing And prevCTL IsNot Nothing Then
@@ -865,7 +865,7 @@ Namespace App
                         conL.ConnectionFileName = lD.FileNames(i)
                         conL.RootTreeNode = nNode
                         conL.Import = True
-                        conL.ConnectionList = App.Runtime.cL
+                        conL.ConnectionList = App.Runtime.connectionList
                         conL.ContainerList = App.Runtime.containerList
 
                         conL.Load()
@@ -1003,7 +1003,7 @@ Namespace App
                             nConI.Parent = nNode.Parent.Tag
                         End If
 
-                        cL.Add(nConI)
+                        connectionList.Add(nConI)
                     Next
                 End If
             Catch ex As Exception
@@ -1075,7 +1075,7 @@ Namespace App
                         nConI.Parent = nNode.Parent.Tag
                     End If
 
-                    cL.Add(nConI)
+                    connectionList.Add(nConI)
                 End If
             Next
         End Sub
@@ -1124,7 +1124,7 @@ Namespace App
                     End If
                 End If
 
-                conS.ConnectionList = cL
+                conS.ConnectionList = connectionList
                 conS.ContainerList = containerList
                 conS.Export = False
                 conS.SaveSecurity = New Security.Save(False)
@@ -1194,7 +1194,7 @@ Namespace App
                     End If
                 End If
 
-                conS.ConnectionList = cL
+                conS.ConnectionList = connectionList
                 conS.ContainerList = containerList
                 If RootNode IsNot Windows.treeForm.tvConnections.Nodes(0) Then
                     conS.Export = True
