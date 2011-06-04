@@ -55,7 +55,7 @@
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>None</DebugType>
+    <DebugType>pdbonly</DebugType>
     <DefineDebug>false</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
@@ -65,7 +65,7 @@
     <NoWarn>41999,42016,42017,42018,42019,42032,42036</NoWarn>
     <WarningsAsErrors>
     </WarningsAsErrors>
-    <DebugSymbols>false</DebugSymbols>
+    <DebugSymbols>true</DebugSymbols>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Portable|AnyCPU' ">
@@ -73,9 +73,10 @@
     <OutputPath>bin\Release Portable\</OutputPath>
     <Optimize>true</Optimize>
     <NoWarn>41999,42016,42017,42018,42019,42032,42036</NoWarn>
-    <DebugType>None</DebugType>
+    <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <DefineConstants>PORTABLE</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Portable|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
