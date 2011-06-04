@@ -303,6 +303,7 @@ Namespace Tree
 
                     Dim newConnectionInfo As Connection.Info = oldConnectionInfo.Copy
                     Dim newInheritance As Connection.Info.Inheritance = oldConnectionInfo.Inherit.Copy()
+                    newInheritance.Parent = newConnectionInfo
                     newConnectionInfo.Inherit = newInheritance
 
                     connectionList.Add(newConnectionInfo)
