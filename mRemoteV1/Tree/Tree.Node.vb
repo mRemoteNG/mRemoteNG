@@ -303,6 +303,7 @@ Namespace Tree
 
                     Dim nConI As Connection.Info = conI.Copy
                     Dim nInh As Connection.Info.Inheritance = conI.Inherit.Copy()
+                    nInh.Parent = nConI
                     nConI.Inherit = nInh
 
                     cL.Add(nConI)

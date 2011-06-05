@@ -27,6 +27,7 @@
   Changed to use full four part version numbers with major, minor, build, and revision.
   Changed hard coded SQL database name into a user configurable setting.
   Fixed tab order of controls in Options dialog.
+  Fixed bug 45 - Changing some settings in the config file may not save.
 
 1.66 (2011-05-02):
   Fixed connections not working
