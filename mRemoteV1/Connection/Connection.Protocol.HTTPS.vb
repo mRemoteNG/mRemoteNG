@@ -1,7 +1,4 @@
-﻿Imports System.Windows.Forms
-Imports mRemoteNG.App.Runtime
-
-Namespace Connection
+﻿Namespace Connection
     Namespace Protocol
         Public Class HTTPS
             Inherits Connection.Protocol.HTTPBase

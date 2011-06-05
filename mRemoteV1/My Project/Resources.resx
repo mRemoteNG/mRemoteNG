@@ -2343,13 +2343,13 @@ Error Description: {1}</value>
   <data name="strErrorCloneNodeFailed" xml:space="preserve">
     <value>CloneNode (Tree.Node) failed . {0}</value>
   </data>
-	<data name="strErrorVerifyDatabaseVersionFailed">
-		<value xml:space="preserve">VerifyDatabaseVersion (Config.Connections.Save) failed. {0}</value>
-	</data>
-	<data name="strErrorConnectionListSaveFailed">
-		<value xml:space="preserve">The connection list could not be saved.</value>
-	</data>
-	<data name="strErrorBadDatabaseVersion">
-		<value xml:space="preserve">The database version {0} is not compatible with this version of {1}.</value>
-	</data>
+  <data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
+    <value>VerifyDatabaseVersion (Config.Connections.Save) failed. {0}</value>
+  </data>
+  <data name="strErrorConnectionListSaveFailed" xml:space="preserve">
+    <value>The connection list could not be saved.</value>
+  </data>
+  <data name="strErrorBadDatabaseVersion" xml:space="preserve">
+    <value>The database version {0} is not compatible with this version of {1}.</value>
+  </data>
 </root>

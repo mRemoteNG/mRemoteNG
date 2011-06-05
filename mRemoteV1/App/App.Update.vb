@@ -27,8 +27,6 @@ Namespace App
                 Dim uI As Info = GetUpdateInfo()
 
                 Return uI.InfoOk
-
-                uI = Nothing
             Catch ex As Exception
                 mC.AddMessage(Messages.MessageClass.WarningMsg, "IsProxyOK (App.Update) failed" & vbNewLine & ex.Message, False)
                 Return False

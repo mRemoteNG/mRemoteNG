@@ -1,7 +1,6 @@
 Imports mRemoteNG.App.Runtime
 Imports System.Xml
 Imports System.IO
-Imports mRemoteNG.Tools.WindowPlacement
 
 Namespace Config
     Namespace Settings

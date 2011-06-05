@@ -108,7 +108,6 @@ Namespace Tools
             Try
                 If _FileName = "" Then
                     Throw New Exception("No Filename specified!")
-                    Return Nothing
                 End If
 
                 If _TryIntegrate = True Then

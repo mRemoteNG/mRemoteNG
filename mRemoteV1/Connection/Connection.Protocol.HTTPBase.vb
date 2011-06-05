@@ -1,6 +1,5 @@
 ﻿Imports System.Windows.Forms
 Imports mRemoteNG.App.Runtime
-Imports System.ComponentModel
 Imports mRemoteNG.Tools.LocalizedAttributes
 
 Namespace Connection

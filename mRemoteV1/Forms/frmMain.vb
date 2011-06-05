@@ -2,7 +2,6 @@ Imports mRemoteNG.App.Runtime
 Imports System.Reflection
 Imports Crownwood
 Imports mRemoteNG.App.Native
-Imports System.Runtime.InteropServices
 Imports PSTaskDialog
 
 Public Class frmMain

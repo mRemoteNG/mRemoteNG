@@ -1,7 +1,6 @@
 ﻿Imports mRemoteNG.App.Runtime
 Imports System.Threading
 Imports AxWFICALib
-Imports System.ComponentModel
 Imports mRemoteNG.Tools.LocalizedAttributes
 
 Namespace Connection
