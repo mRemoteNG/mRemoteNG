@@ -185,7 +185,7 @@ Namespace Tools
                 Dim LeftWidth As Integer = sender.TabController.SelectedTab.Width  'Me.Width - (Splitter.SplitterDistance + 16)
                 Dim TopHeight As Integer = sender.TabController.SelectedTab.Height  'Me.Height - (Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 + 2)
 
-                Dim currentFormSize As Size = New Size(LeftWidth, TopHeight)
+                Dim currentFormSize As New Size(LeftWidth, TopHeight)
                 Dim ScreenToBitmap As New Bitmap(LeftWidth, TopHeight)
                 Dim gGraphics As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(ScreenToBitmap)
 

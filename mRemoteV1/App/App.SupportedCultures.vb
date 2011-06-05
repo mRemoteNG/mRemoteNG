@@ -55,7 +55,7 @@
 
         Public Shared ReadOnly Property CultureNativeNames() As List(Of String)
             Get
-                Dim ValueList As List(Of String) = New List(Of String)
+                Dim ValueList As New List(Of String)
                 For Each Value As String In _Instance.Values
                     ValueList.Add(Value)
                 Next

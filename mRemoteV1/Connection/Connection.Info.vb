@@ -1328,7 +1328,7 @@ Namespace Connection
         End Property
 #End Region
 
-        Private _Inherit As Inheritance = New Inheritance(Me)
+        Private _Inherit As New Inheritance(Me)
         <Category(""), _
             Browsable(False)> _
         Public Property Inherit() As Inheritance

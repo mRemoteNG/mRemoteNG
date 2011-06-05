@@ -81,7 +81,7 @@ Namespace Container
             End Set
         End Property
 
-        Private _ConnectionInfo As Connection.Info = New Connection.Info
+        Private _ConnectionInfo As New Connection.Info
         Public Property ConnectionInfo() As Connection.Info
             Get
                 Return Me._ConnectionInfo

@@ -1407,7 +1407,7 @@ Namespace App
 #Region "Opening Connection"
         Public Shared Function CreateQuicky(ByVal ConString As String, Optional ByVal Protocol As Connection.Protocol.Protocols = Connection.Protocol.Protocols.NONE) As Connection.Info
             Try
-                Dim Uri As System.Uri = New System.Uri("dummyscheme" + System.Uri.SchemeDelimiter + ConString)
+                Dim Uri As New System.Uri("dummyscheme" + System.Uri.SchemeDelimiter + ConString)
 
                 If Not String.IsNullOrEmpty(Uri.Host) Then
                     Dim newConnectionInfo As New Connection.Info

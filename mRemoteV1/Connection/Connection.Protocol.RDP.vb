@@ -607,8 +607,8 @@ Namespace Connection
 #End Region
 
             Public Class Versions
-                Public Shared RDC60 As Version = New Version(6, 0, 6000)
-                Public Shared RDC61 As Version = New Version(6, 0, 6001)
+                Public Shared RDC60 As New Version(6, 0, 6000)
+                Public Shared RDC61 As New Version(6, 0, 6001)
             End Class
 
 #Region "Terminal Sessions"

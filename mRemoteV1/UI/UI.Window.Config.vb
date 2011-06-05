@@ -416,7 +416,7 @@ Namespace UI
                     tsCustom.Items.Add(btnIcon)
                     tsCustom.Show()
 
-                    Dim tsDefault As ToolStrip = New ToolStrip
+                    Dim tsDefault As New ToolStrip
 
                     For Each ctrl As System.Windows.Forms.Control In pGrid.Controls
                         Dim tStrip As ToolStrip = TryCast(ctrl, ToolStrip)
@@ -504,7 +504,7 @@ Namespace UI
 
             Private Sub ShowHideGridItems()
                 Try
-                    Dim strHide As List(Of String) = New List(Of String)
+                    Dim strHide As New List(Of String)
 
                     If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
                         Dim conI As mRemoteNG.Connection.Info = pGrid.SelectedObject
