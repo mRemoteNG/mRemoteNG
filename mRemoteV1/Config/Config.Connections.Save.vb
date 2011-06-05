@@ -5,6 +5,7 @@ Imports System.Globalization
 Imports mRemoteNG.App.Runtime
 Imports System.Data.SqlClient
 Imports mRemoteNG.Tools.Misc
+Imports mRemoteNG.My.Resources
 
 Namespace Config
     Namespace Connections
@@ -173,6 +174,44 @@ Namespace Config
 #End Region
 
 #Region "SQL"
+            Private Function VerifyDatabaseVersion(ByVal sqlConnection As SqlConnection) As Boolean
+                Dim isVerified As Boolean = False
+                Dim sqlDataReader As SqlDataReader = Nothing
+                Dim databaseVersion As System.Version = Nothing
+                Try
+                    Dim sqlCommand As New SqlCommand("SELECT * FROM tblRoot", sqlConnection)
+                    sqlDataReader = sqlCommand.ExecuteReader()
+                    sqlDataReader.Read()
+
+                    Dim enCulture As CultureInfo = New CultureInfo("en-US")
+                    databaseVersion = New System.Version(Convert.ToDouble(sqlDataReader.Item("confVersion"), enCulture))
+
+                    sqlDataReader.Close()
+
+                    If databaseVersion.CompareTo(New System.Version(2, 2)) = 0 Then ' 2.2
+                        mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.3"))
+                        sqlCommand = New SqlCommand("ALTER TABLE tblCons ADD EnableFontSmoothing bit NOT NULL DEFAULT 0, EnableDesktopComposition bit NOT NULL DEFAULT 0, InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;", sqlConnection)
+                        sqlCommand.ExecuteNonQuery()
+                        databaseVersion = New System.Version(2, 3)
+                    End If
+
+                    If databaseVersion.CompareTo(New System.Version(2, 3)) = 0 Then ' 2.3
+                        isVerified = True
+                    End If
+
+                    If isVerified = False Then
+                        mC.AddMessage(Messages.MessageClass.WarningMsg, String.Format(strErrorBadDatabaseVersion, databaseVersion.ToString, My.Application.Info.ProductName))
+                    End If
+                Catch ex As Exception
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(strErrorVerifyDatabaseVersionFailed, ex.Message))
+                Finally
+                    If sqlDataReader IsNot Nothing Then
+                        If Not sqlDataReader.IsClosed Then sqlDataReader.Close()
+                    End If
+                End Try
+                Return isVerified
+            End Function
+
             Private Sub SaveToSQL()
                 If _SQLUsername <> "" Then
                     sqlCon = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & _SQLDatabaseName & ";User Id=" & _SQLUsername & ";Password=" & _SQLPassword)
@@ -181,6 +220,11 @@ Namespace Config
                 End If
 
                 sqlCon.Open()
+
+                If Not VerifyDatabaseVersion(sqlCon) Then
+                    mC.AddMessage(Messages.MessageClass.ErrorMsg, strErrorConnectionListSaveFailed)
+                    Return
+                End If
 
                 Dim tN As TreeNode
                 tN = RootTreeNode.Clone
