@@ -2151,6 +2151,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to The database version {0} is not compatible with this version of {1}..
+        '''</summary>
+        Friend ReadOnly Property strErrorBadDatabaseVersion() As String
+            Get
+                Return ResourceManager.GetString("strErrorBadDatabaseVersion", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Error code {0}..
         '''</summary>
         Friend ReadOnly Property strErrorCode() As String
@@ -2160,11 +2169,29 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to The connection list could not be saved..
+        '''</summary>
+        Friend ReadOnly Property strErrorConnectionListSaveFailed() As String
+            Get
+                Return ResourceManager.GetString("strErrorConnectionListSaveFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Errors.
         '''</summary>
         Friend ReadOnly Property strErrors() As String
             Get
                 Return ResourceManager.GetString("strErrors", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to VerifyDatabaseVersion (Config.Connections.Save) failed. {0}.
+        '''</summary>
+        Friend ReadOnly Property strErrorVerifyDatabaseVersionFailed() As String
+            Get
+                Return ResourceManager.GetString("strErrorVerifyDatabaseVersionFailed", resourceCulture)
             End Get
         End Property
         
