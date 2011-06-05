@@ -104,7 +104,7 @@ Namespace UI
                         End If
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CreateButtons (UI.Window.QuickConnect) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CreateButtons (UI.Window.QuickConnect) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -128,7 +128,7 @@ Namespace UI
 
                     Me.Hide()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ProtocolButton_Click (UI.Window.QuickConnect) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ProtocolButton_Click (UI.Window.QuickConnect) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class

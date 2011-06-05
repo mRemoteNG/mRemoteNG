@@ -82,7 +82,7 @@ Namespace Security
                 impersonatedUser = newId.Impersonate()
 
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "Starting Impersonation failed (Sessions feature will not work)" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Starting Impersonation failed (Sessions feature will not work)" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -93,7 +93,7 @@ Namespace Security
             Try
                 impersonatedUser.Undo() ' Stop impersonating the user.
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "Stopping Impersonation failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Stopping Impersonation failed" & vbNewLine & ex.Message, True)
                 Throw ex
             Finally
 

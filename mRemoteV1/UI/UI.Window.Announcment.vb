@@ -77,7 +77,7 @@ Namespace UI
 
                     uT.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForAnnouncement (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForAnnouncement (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -91,7 +91,7 @@ Namespace UI
                         RaiseEvent AnnouncementCheckCompleted(False)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForAnnouncementBG (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForAnnouncementBG (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -100,7 +100,7 @@ Namespace UI
                     wBrowser.Navigate(aN.curAI.URL)
                     My.Settings.LastAnnouncement = aN.curAI.Name
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AnnouncementCheckComplete (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AnnouncementCheckComplete (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class

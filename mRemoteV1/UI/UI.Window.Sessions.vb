@@ -178,7 +178,7 @@ Namespace UI
                     sU = Nothing
                     tS.CloseConnection(tServerHandle)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSessionGetFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSessionGetFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -214,7 +214,7 @@ Namespace UI
 
                     GetSessionsBG()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSessionKillFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSessionKillFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -297,7 +297,7 @@ Namespace UI
                         Me.GetSessions(conI.Hostname, sUser, sPass, sDom)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetSessionsAuto (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "GetSessionsAuto (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -359,7 +359,7 @@ Namespace UI
                     threadSessions.IsBackground = True
                     threadSessions.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetSessions (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "GetSessions (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -402,7 +402,7 @@ Namespace UI
                     threadSessions.IsBackground = True
                     threadSessions.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "KillSession (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "KillSession (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

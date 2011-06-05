@@ -510,8 +510,8 @@ Namespace UI
                     lblCheck1.Text = "RDP (Remote Desktop) " & My.Resources.strCcCheckFailed
                     txtCheck1.Text = My.Resources.strCcRDPFailed
 
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "RDP " & errorMsg, True)
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "RDP " & errorMsg, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
                 End Try
 
                 If RDP IsNot Nothing Then RDP.Dispose()
@@ -538,7 +538,7 @@ Namespace UI
                     lblCheck2.Text = "VNC (Virtual Network Computing) " & My.Resources.strCcCheckFailed
                     txtCheck2.Text = My.Resources.strCcVNCFailed
 
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "VNC " & errorMsg, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "VNC " & errorMsg, True)
                     'mC.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
                 End Try
 
@@ -563,8 +563,8 @@ Namespace UI
                     lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " & My.Resources.strCcCheckFailed
                     txtCheck3.Text = My.Resources.strCcPuttyFailed
 
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "PuTTY " & errorMsg, True)
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "File " & pPath & " does not exist.", True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "PuTTY " & errorMsg, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "File " & pPath & " does not exist.", True)
                 End If
 
 
@@ -590,8 +590,8 @@ Namespace UI
                     lblCheck4.Text = "ICA (Citrix ICA) " & My.Resources.strCcCheckFailed
                     txtCheck4.Text = My.Resources.strCcICAFailed
 
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "ICA " & errorMsg, True)
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ICA " & errorMsg, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
                 End Try
 
                 If ICA IsNot Nothing Then ICA.Dispose()
@@ -622,8 +622,8 @@ Namespace UI
                     lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " & My.Resources.strCcCheckFailed
                     txtCheck5.Text = My.Resources.strCcGeckoFailed
 
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "Gecko " & errorMsg, True)
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " & My.Settings.XULRunnerPath, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Gecko " & errorMsg, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " & My.Settings.XULRunnerPath, True)
                 End If
 
 
@@ -642,8 +642,8 @@ Namespace UI
                     lblCheck6.Text = "(RDP) Sessions " & My.Resources.strCcCheckFailed
                     txtCheck6.Text = My.Resources.strCcEOLFailed
 
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "EOLWTSCOM " & errorMsg, True)
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "EOLWTSCOM " & errorMsg, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
                 End Try
             End Sub
 #End Region

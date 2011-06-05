@@ -37,7 +37,7 @@ Namespace Tools
         End Class
 
 
-        Public Class SysTrayIcon
+        Public Class NotificationAreaIcon
             Private _nI As NotifyIcon
 
             Private _cMen As ContextMenuStrip
@@ -87,7 +87,7 @@ Namespace Tools
                     AddHandler Me._nI.MouseClick, AddressOf nI_MouseClick
                     AddHandler Me._nI.MouseDoubleClick, AddressOf nI_MouseDoubleClick
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new SysTrayIcon failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new SysTrayIcon failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -98,7 +98,7 @@ Namespace Tools
                     Me._cMen.Dispose()
                     Me._Disposed = True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Disposing SysTrayIcon failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Disposing SysTrayIcon failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -135,7 +135,7 @@ Namespace Tools
                         AddHandler tMenItem.MouseDown, AddressOf ConMenItem_MouseDown
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -152,8 +152,8 @@ Namespace Tools
                 frmMain.WindowState = frmMain.prevWindowsState
 
                 If My.Settings.ShowSystemTrayIcon = False Then
-                    App.Runtime.SysTrayIcon.Dispose()
-                    App.Runtime.SysTrayIcon = Nothing
+                    App.Runtime.NotificationAreaIcon.Dispose()
+                    App.Runtime.NotificationAreaIcon = Nothing
                 End If
             End Sub
 

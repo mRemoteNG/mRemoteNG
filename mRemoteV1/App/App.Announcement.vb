@@ -29,7 +29,7 @@ Namespace App
                     Return False
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "IsAnnouncementAvailable failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "IsAnnouncementAvailable failed" & vbNewLine & ex.Message, True)
                 Return False
             End Try
         End Function
@@ -68,7 +68,7 @@ Namespace App
                 _curAI = aI
                 Return aI
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "Getting Announcement info failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Getting Announcement info failed" & vbNewLine & ex.Message, True)
                 Return Nothing
             End Try
         End Function
@@ -87,7 +87,7 @@ Namespace App
 
                 Return strTemp
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "GetAnnouncementFile failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetAnnouncementFile failed" & vbNewLine & ex.Message, True)
                 Return ""
             End Try
         End Function

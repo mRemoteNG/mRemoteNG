@@ -165,11 +165,11 @@ Namespace Connection
                     PuttyHandle = PuttyProcess.MainWindowHandle
 
 
-                    mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strPuttyStuff, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strPuttyStuff, True)
 
-                    mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strPuttyHandle, PuttyHandle.ToString), True)
-                    mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strPuttyTitle, PuttyProcess.MainWindowTitle), True)
-                    mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strPuttyParentHandle, Me.InterfaceControl.Parent.Handle.ToString), True)
+                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strPuttyHandle, PuttyHandle.ToString), True)
+                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strPuttyTitle, PuttyProcess.MainWindowTitle), True)
+                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strPuttyParentHandle, Me.InterfaceControl.Parent.Handle.ToString), True)
 
                     SetParent(PuttyHandle, InterfaceControl.Parent.Handle)
                     ShowWindow(PuttyHandle, SW_SHOWMAXIMIZED)
@@ -178,7 +178,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyConnectionFailed & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyConnectionFailed & vbNewLine & ex.Message)
                     Return False
                 End Try
             End Function
@@ -187,7 +187,7 @@ Namespace Connection
                 Try
                     'SetForegroundWindow(PuttyHandle)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyFocusFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyFocusFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -195,7 +195,7 @@ Namespace Connection
                 Try
                     MoveWindow(PuttyHandle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), Me.InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), Me.InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), True)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyResizeFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyResizeFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -205,13 +205,13 @@ Namespace Connection
                         PuttyProcess.Kill()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyKillFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyKillFailed & vbNewLine & ex.Message, True)
                 End Try
 
                 Try
                     PuttyProcess.Dispose()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyDisposeFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyDisposeFailed & vbNewLine & ex.Message, True)
                 End Try
 
                 MyBase.Close()
@@ -222,7 +222,7 @@ Namespace Connection
                     PostMessage(Me.PuttyHandle, WM_SYSCOMMAND, IDM_RECONF, 0)
                     SetForegroundWindow(Me.PuttyHandle)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyShowSettingsDialogFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyShowSettingsDialogFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -244,7 +244,7 @@ Namespace Connection
 
                     Return arrKeys
                 Catch ex As Exception
-                    App.Runtime.mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strPuttyGetSessionsFailed & vbNewLine & ex.Message, True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strPuttyGetSessionsFailed & vbNewLine & ex.Message, True)
                     Return Nothing
                 End Try
             End Function
@@ -260,7 +260,7 @@ Namespace Connection
 
                     mRemoteNG.Connection.PuttySession.PuttySessions = GetSessions()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyStartFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyStartFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

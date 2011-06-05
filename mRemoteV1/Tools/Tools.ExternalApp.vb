@@ -133,7 +133,7 @@ Namespace Tools
 
                 Return p
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't start external application." & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't start external application." & vbNewLine & ex.Message)
                 Return Nothing
             End Try
         End Function
@@ -193,7 +193,7 @@ Namespace Tools
                     pText = Replace(pText, "%UserField%", "", , , CompareMethod.Text)
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "ParseText failed (Tools.ExternalApp)" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ParseText failed (Tools.ExternalApp)" & vbNewLine & ex.Message, True)
             End Try
 
             Return pText

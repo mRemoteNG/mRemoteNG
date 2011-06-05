@@ -100,7 +100,7 @@ Namespace Tree
                     Return Type.Connection
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't get node type" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't get node type" & vbNewLine & ex.Message, True)
             End Try
 
             Return Type.NONE
@@ -117,7 +117,7 @@ Namespace Tree
                         Return Type.Connection
                 End Select
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't get node type from string" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't get node type from string" & vbNewLine & ex.Message, True)
             End Try
 
             Return Type.NONE
@@ -138,7 +138,7 @@ Namespace Tree
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return Nothing
@@ -159,7 +159,7 @@ Namespace Tree
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return Nothing
@@ -171,7 +171,7 @@ Namespace Tree
                     Return False
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "IsEmpty (Tree.Node) failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "IsEmpty (Tree.Node) failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return True
@@ -204,7 +204,7 @@ Namespace Tree
 
                 Return nNode
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddNode failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNode failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return Nothing
@@ -241,7 +241,7 @@ Namespace Tree
                 SelectedNode.Nodes.Add(adCNode)
                 SelectedNode = SelectedNode.Nodes(SelectedNode.Nodes.Count - 1)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddADNodes failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddADNodes failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -292,7 +292,7 @@ Namespace Tree
                     rNode.Nodes.Add(adNode)
                 Next
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "CreateADSubNodes failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CreateADSubNodes failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -343,7 +343,7 @@ Namespace Tree
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strErrorCloneNodeFailed, ex.Message))
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strErrorCloneNodeFailed, ex.Message))
             End Try
         End Sub
 
@@ -382,7 +382,7 @@ Namespace Tree
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "SetNodeToolTip failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SetNodeToolTip failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -393,7 +393,7 @@ Namespace Tree
 
                 Select Case Tree.Node.GetNodeType(SelectedNode)
                     Case Type.Root
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, "The root item cannot be deleted!")
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "The root item cannot be deleted!")
                     Case Type.Container
                         If Tree.Node.IsEmpty(SelectedNode) = False Then
                             If MsgBox(String.Format(My.Resources.strConfirmDeleteNodeFolder, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
@@ -412,10 +412,10 @@ Namespace Tree
                             SelectedNode.Remove()
                         End If
                     Case Else
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, "Tree item type is unknown so it cannot be deleted!")
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Tree item type is unknown so it cannot be deleted!")
                 End Select
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Deleting selected node failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Deleting selected node failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -448,7 +448,7 @@ Namespace Tree
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeUp failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeUp failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -464,7 +464,7 @@ Namespace Tree
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeDown failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeDown failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -495,7 +495,7 @@ Namespace Tree
                     If GetNodeType(childNode) = Type.Container Then Sort(childNode, sortType)
                 Next
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 

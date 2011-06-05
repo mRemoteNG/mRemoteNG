@@ -182,7 +182,7 @@ Namespace Config
 #Region "SQL"
             Private Sub LoadFromSQL()
                 Try
-                    App.Runtime.ConnectionsFileLoaded = False
+                    App.Runtime.IsConnectionsFileLoaded = False
 
                     If _SQLUsername <> "" Then
                         sqlCon = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & _SQLDatabaseName & ";User Id=" & _SQLUsername & ";Password=" & _SQLPassword)
@@ -264,12 +264,12 @@ Namespace Config
                     AddNodeToTree(rootNode)
                     SetSelectedNode(selNode)
 
-                    App.Runtime.ConnectionsFileLoaded = True
+                    App.Runtime.IsConnectionsFileLoaded = True
                     'App.Runtime.Windows.treeForm.InitialRefresh()
 
                     sqlCon.Close()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLoadFromSqlFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLoadFromSqlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -415,7 +415,7 @@ Namespace Config
                         'AddNodesFromSQL(tNode)
                     End While
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strAddNodesFromSqlFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strAddNodesFromSqlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -567,7 +567,7 @@ Namespace Config
 
                     Return conI
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strGetConnectionInfoFromSqlFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strGetConnectionInfoFromSqlFailed & vbNewLine & ex.Message, True)
                 End Try
 
                 Return Nothing
@@ -624,7 +624,7 @@ Namespace Config
 
             Private Sub LoadFromXML(Optional ByVal cons As String = "")
                 Try
-                    App.Runtime.ConnectionsFileLoaded = False
+                    App.Runtime.IsConnectionsFileLoaded = False
 
                     ' SECTION 1. Create a DOM Document and load the XML data into it.
                     Me.xDom = New XmlDocument()
@@ -638,7 +638,7 @@ Namespace Config
                         Dim enCulture As System.Globalization.CultureInfo = New CultureInfo("en-US")
                         Me.confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes("ConfVersion").Value, enCulture)
                     Else
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strOldConffile)
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strOldConffile)
                     End If
 
                     ' SECTION 2. Initialize the treeview control.
@@ -676,7 +676,7 @@ Namespace Config
                     End If
 
                     If Me._Import = True And imp = False Then
-                        mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strCannotImportNormalSessionFile)
+                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strCannotImportNormalSessionFile)
 
                         Exit Sub
                     End If
@@ -711,11 +711,11 @@ Namespace Config
 
                     Me._RootTreeNode.EnsureVisible()
 
-                    App.Runtime.ConnectionsFileLoaded = True
+                    App.Runtime.IsConnectionsFileLoaded = True
                     App.Runtime.Windows.treeForm.InitialRefresh()
                 Catch ex As Exception
-                    App.Runtime.ConnectionsFileLoaded = False
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLoadFromXmlFailed & vbNewLine & ex.Message, True)
+                    App.Runtime.IsConnectionsFileLoaded = False
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLoadFromXmlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -791,7 +791,7 @@ Namespace Config
                         inTreeNode.Text = inXmlNode.Attributes("Name").Value.Trim
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strAddNodeFromXmlFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strAddNodeFromXmlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1027,7 +1027,7 @@ Namespace Config
                         End If
                     End With
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strGetConnectionInfoFromXmlFailed, conI.Name, Me.ConnectionFileName, ex.Message), False)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strGetConnectionInfoFromXmlFailed, conI.Name, Me.ConnectionFileName, ex.Message), False)
                 End Try
                 Return conI
             End Function

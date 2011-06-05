@@ -1506,7 +1506,7 @@ Public Class frmOptions
 
             Me.txtXULrunnerPath.Text = My.Settings.XULRunnerPath
         Catch ex As Exception
-            mC.AddMessage(Messages.MessageClass.ErrorMsg, "LoadOptions (UI.Window.Options) failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LoadOptions (UI.Window.Options) failed" & vbNewLine & ex.Message, True)
         End Try
     End Sub
 
@@ -1529,13 +1529,13 @@ Public Class frmOptions
             My.Settings.MinimizeToTray = Me.chkMinimizeToSystemTray.Checked
 
             If My.Settings.ShowSystemTrayIcon Then
-                If App.Runtime.SysTrayIcon Is Nothing Then
-                    App.Runtime.SysTrayIcon = New Tools.Controls.SysTrayIcon
+                If App.Runtime.NotificationAreaIcon Is Nothing Then
+                    App.Runtime.NotificationAreaIcon = New Tools.Controls.NotificationAreaIcon
                 End If
             Else
-                If App.Runtime.SysTrayIcon IsNot Nothing Then
-                    App.Runtime.SysTrayIcon.Dispose()
-                    App.Runtime.SysTrayIcon = Nothing
+                If App.Runtime.NotificationAreaIcon IsNot Nothing Then
+                    App.Runtime.NotificationAreaIcon.Dispose()
+                    App.Runtime.NotificationAreaIcon = Nothing
                 End If
             End If
 
@@ -1639,7 +1639,7 @@ Public Class frmOptions
                 App.Runtime.Startup.CreateSQLUpdateHandlerAndStartTimer()
             End If
         Catch ex As Exception
-            mC.AddMessage(Messages.MessageClass.ErrorMsg, "SaveOptions (UI.Window.Options) failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveOptions (UI.Window.Options) failed" & vbNewLine & ex.Message, True)
         End Try
     End Sub
 #End Region

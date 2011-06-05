@@ -227,7 +227,7 @@ Namespace UI
 
                     uT.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateCheckFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateCheckFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -243,7 +243,7 @@ Namespace UI
                         RaiseEvent UpdateCheckCompleted(False)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateCheckFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateCheckFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -285,7 +285,7 @@ Namespace UI
                         SetAvailableVersionText(uI.Version.ToString)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateCheckCompleteFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateCheckCompleteFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -403,7 +403,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDownloadFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDownloadFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -424,7 +424,7 @@ Namespace UI
 
                                 Process.Start(uD.curUI.UpdateLocation)
                             Catch ex As Exception
-                                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateStartFailed & vbNewLine & ex.Message)
+                                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateStartFailed & vbNewLine & ex.Message)
                             End Try
 
                             End
@@ -432,14 +432,14 @@ Namespace UI
                             Try
                                 File.Delete(uD.curUI.UpdateLocation)
                             Catch ex As Exception
-                                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDeleteFailed & vbNewLine & ex.Message)
+                                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDeleteFailed & vbNewLine & ex.Message)
                             End Try
                         End If
                     Else
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDownloadFailed)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDownloadFailed)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDownloadCompleteFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDownloadCompleteFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

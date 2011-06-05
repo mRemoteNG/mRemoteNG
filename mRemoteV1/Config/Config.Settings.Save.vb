@@ -5,27 +5,11 @@ Imports System.IO
 Namespace Config
     Namespace Settings
         Public Class Save
-#Region "Public Properties"
-            Private _MainForm As frmMain
-            Public Property MainForm() As frmMain
-                Get
-                    Return Me._MainForm
-                End Get
-                Set(ByVal value As frmMain)
-                    Me._MainForm = value
-                End Set
-            End Property
-#End Region
-
 #Region "Public Methods"
-            Public Sub New(ByVal MainForm As frmMain)
-                Me._MainForm = MainForm
-            End Sub
-
             Public Sub Save()
                 Try
-                    With Me._MainForm
-                        Dim windowPlacement As New Tools.WindowPlacement(_MainForm)
+                    With frmMain
+                        Dim windowPlacement As New Tools.WindowPlacement(frmMain)
                         If .WindowState = FormWindowState.Minimized And windowPlacement.RestoreToMaximized Then
                             .Opacity = 0
                             .WindowState = FormWindowState.Maximized
@@ -69,7 +53,7 @@ Namespace Config
                     Me.SavePanelsToXML()
                     Me.SaveExternalAppsToXML()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Saving settings failed" & vbNewLine & vbNewLine & ex.Message, False)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Saving settings failed" & vbNewLine & vbNewLine & ex.Message, False)
                 End Try
             End Sub
 
@@ -79,9 +63,9 @@ Namespace Config
                         Directory.CreateDirectory(App.Info.Settings.SettingsPath)
                     End If
 
-                    MainForm.pnlDock.SaveAsXml(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.LayoutFileName)
+                    frmMain.pnlDock.SaveAsXml(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.LayoutFileName)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SavePanelsToXML failed" & vbNewLine & vbNewLine & ex.Message, False)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SavePanelsToXML failed" & vbNewLine & vbNewLine & ex.Message, False)
                 End Try
             End Sub
 
@@ -91,29 +75,29 @@ Namespace Config
                         Directory.CreateDirectory(App.Info.Settings.SettingsPath)
                     End If
 
-                    Dim xW As New XmlTextWriter(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.ExtAppsFilesName, System.Text.Encoding.UTF8)
-                    xW.Formatting = Formatting.Indented
-                    xW.Indentation = 4
+                    Dim xmlTextWriter As New XmlTextWriter(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.ExtAppsFilesName, System.Text.Encoding.UTF8)
+                    xmlTextWriter.Formatting = Formatting.Indented
+                    xmlTextWriter.Indentation = 4
 
-                    xW.WriteStartDocument()
-                    xW.WriteStartElement("Apps")
+                    xmlTextWriter.WriteStartDocument()
+                    xmlTextWriter.WriteStartElement("Apps")
 
-                    For Each extA As Tools.ExternalApp In ExtApps
-                        xW.WriteStartElement("App")
-                        xW.WriteAttributeString("DisplayName", "", extA.DisplayName)
-                        xW.WriteAttributeString("FileName", "", extA.FileName)
-                        xW.WriteAttributeString("Arguments", "", extA.Arguments)
-                        xW.WriteAttributeString("WaitForExit", "", extA.WaitForExit)
-                        xW.WriteAttributeString("TryToIntegrate", "", extA.TryIntegrate)
-                        xW.WriteEndElement()
+                    For Each extA As Tools.ExternalApp In ExternalTools
+                        xmlTextWriter.WriteStartElement("App")
+                        xmlTextWriter.WriteAttributeString("DisplayName", "", extA.DisplayName)
+                        xmlTextWriter.WriteAttributeString("FileName", "", extA.FileName)
+                        xmlTextWriter.WriteAttributeString("Arguments", "", extA.Arguments)
+                        xmlTextWriter.WriteAttributeString("WaitForExit", "", extA.WaitForExit)
+                        xmlTextWriter.WriteAttributeString("TryToIntegrate", "", extA.TryIntegrate)
+                        xmlTextWriter.WriteEndElement()
                     Next
 
-                    xW.WriteEndElement()
-                    xW.WriteEndDocument()
+                    xmlTextWriter.WriteEndElement()
+                    xmlTextWriter.WriteEndDocument()
 
-                    xW.Close()
+                    xmlTextWriter.Close()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SaveExternalAppsToXML failed" & vbNewLine & vbNewLine & ex.Message, False)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveExternalAppsToXML failed" & vbNewLine & vbNewLine & ex.Message, False)
                 End Try
             End Sub
 #End Region

@@ -215,7 +215,7 @@ Namespace UI
                     App.Runtime.SaveConnectionsAs(sS, _TreeNode)
                     Me.Close()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "btnOK_Click (UI.Window.SaveAs) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "btnOK_Click (UI.Window.SaveAs) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

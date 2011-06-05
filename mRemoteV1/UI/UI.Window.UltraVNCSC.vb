@@ -107,7 +107,7 @@ Namespace UI
 
                     'vnc.ListenEx(My.Settings.UVNCSCPort)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "StartListening (UI.Window.UltraVNCSC) failed" & vbNewLine & ex.Message, False)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartListening (UI.Window.UltraVNCSC) failed" & vbNewLine & ex.Message, False)
                     Close()
                 End Try
             End Sub
@@ -118,7 +118,7 @@ Namespace UI
                     'f = GetType(AxHost).GetField("licenseKey", Reflection.BindingFlags.NonPublic Or Reflection.BindingFlags.Instance)
                     'f.SetValue(vnc, "{072169039103041044176252035252117103057101225235137221179204110241121074}")
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "VNC SetupLicense failed (UI.Window.UltraVNCSC)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "VNC SetupLicense failed (UI.Window.UltraVNCSC)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 

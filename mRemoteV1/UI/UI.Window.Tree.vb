@@ -536,7 +536,7 @@ Namespace UI
                     Me.imgListTree.Images.Add(My.Resources.Play)
                     Me.imgListTree.Images.Add(My.Resources.Pause)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "FillImageList (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "FillImageList (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -553,7 +553,7 @@ Namespace UI
                     Me.ShowHideTreeContextMenuItems(e.Node)
                     SaveConnectionsBG()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterLabelEdit (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterLabelEdit (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -577,7 +577,7 @@ Namespace UI
 
                     App.Runtime.LastSelected = mRemoteNG.Tree.Node.GetConstantID(e.Node)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterSelect (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterSelect (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -596,7 +596,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_NodeMouseClick (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_NodeMouseClick (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -610,7 +610,7 @@ Namespace UI
                 Try
                     mRemoteNG.Tree.Node.SetNodeToolTip(e, Me.DescriptionTooltip)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_MouseMove (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_MouseMove (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -624,7 +624,7 @@ Namespace UI
                         Next
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "IsConnectionOpen (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "IsConnectionOpen (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
 
                 Return False
@@ -737,7 +737,7 @@ Namespace UI
                             Me.cMenTree.Enabled = False
                     End Select
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideTreeContextMenuItems (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideTreeContextMenuItems (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -803,7 +803,7 @@ Namespace UI
 
                     SaveConnectionsBG()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragDrop (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragDrop (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -818,7 +818,7 @@ Namespace UI
                         e.Effect = DragDropEffects.None
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragEnter (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragEnter (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -860,7 +860,7 @@ Namespace UI
                     'Currently selected node is a suitable target
                     e.Effect = DragDropEffects.Move
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragOver (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragOver (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -869,7 +869,7 @@ Namespace UI
                     'Set the drag node and initiate the DragDrop 
                     DoDragDrop(e.Item, DragDropEffects.Move)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_ItemDrag (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_ItemDrag (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -1017,7 +1017,7 @@ Namespace UI
                         Me.tvConnections.SelectedNode.BeginEdit()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddConnection (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddConnection (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1051,7 +1051,7 @@ Namespace UI
                     Me.tvConnections.SelectedNode = newNode
                     Me.tvConnections.SelectedNode.BeginEdit()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strErrorAddFolderFailed, ex.Message), True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strErrorAddFolderFailed, ex.Message), True)
                 End Try
             End Sub
 
@@ -1077,7 +1077,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "DisconnectConnection (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "DisconnectConnection (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1092,7 +1092,7 @@ Namespace UI
                     Windows.sshtransferForm.Password = conI.Password
                     Windows.sshtransferForm.Port = conI.Port
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1105,7 +1105,7 @@ Namespace UI
                         Windows.saveasForm.Show(frmMain.pnlDock)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ExportXml (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ExportXml (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1115,7 +1115,7 @@ Namespace UI
                         App.Runtime.ImportConnections()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ImportXML (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportXML (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1125,7 +1125,7 @@ Namespace UI
                         Windows.Show(Type.ADImport)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromAD (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromAD (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1133,7 +1133,7 @@ Namespace UI
                 Try
                     App.Runtime.ImportConnectionsFromRDPFiles()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromRDPFiles (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromRDPFiles (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1143,7 +1143,7 @@ Namespace UI
                         Windows.Show(Type.PortScan, Tools.PortScan.PortScanMode.Import)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromPortScan (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromPortScan (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1153,7 +1153,7 @@ Namespace UI
                     cMenTreeToolsExternalApps.DropDownItems.Clear()
 
                     'add ext apps
-                    For Each extA As Tools.ExternalApp In ExtApps
+                    For Each extA As Tools.ExternalApp In ExternalTools
                         Dim nItem As New ToolStripMenuItem
                         nItem.Text = extA.DisplayName
                         nItem.Tag = extA
@@ -1165,7 +1165,7 @@ Namespace UI
                         cMenTreeToolsExternalApps.DropDownItems.Add(nItem)
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1175,7 +1175,7 @@ Namespace UI
                         ExtA.Start(mRemoteNG.Tree.Node.SelectedNode.Tag)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -1205,7 +1205,7 @@ Namespace UI
                         Me.tvConnections_KeyDown(sender, e)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "txtSearch_KeyDown (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "txtSearch_KeyDown (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1222,7 +1222,7 @@ Namespace UI
                         Me.txtSearch.SelectionStart = Me.txtSearch.TextLength
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_KeyPress (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_KeyPress (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1244,7 +1244,7 @@ Namespace UI
                         Me.txtSearch.SelectionStart = Me.txtSearch.TextLength
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_KeyDown (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_KeyDown (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

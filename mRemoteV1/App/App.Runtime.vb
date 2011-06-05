@@ -1,47 +1,244 @@
-﻿Imports WeifenLuo.WinFormsUI.Docking
+﻿Imports log4net
+Imports mRemoteNG.Messages
+Imports mRemoteNG.Connection
+Imports mRemoteNG.Config.Settings
+Imports mRemoteNG.Tools
+Imports WeifenLuo.WinFormsUI.Docking
 Imports System.IO
 Imports Crownwood
 Imports System.Threading
 Imports System.Xml
 Imports System.Environment
 Imports System.Management
+Imports Timer = System.Timers.Timer
 
 Namespace App
     Public Class Runtime
-#Region "Public Declarations"
-        Public Shared sL As Config.Settings.Load
-        Public Shared sS As Config.Settings.Save
+#Region "Public Properties"
+        'Private Shared _settingsLoad As Config.Settings.Load
+        'Public Shared Property SettingsLoad() As Load
+        '    Get
+        '        Return _settingsLoad
+        '    End Get
+        '    Set(ByVal value As Load)
+        '        _settingsLoad = value
+        '    End Set
+        'End Property
 
-        Public Shared connectionList As Connection.List
-        Public Shared prevCL As Connection.List
-        Public Shared containerList As Container.List
-        Public Shared prevCTL As Container.List
-        Public Shared crL As Credential.List
-        Public Shared prevCRL As Credential.List
+        'Private Shared _settingsSave As Config.Settings.Save
+        'Public Shared Property SettingsSave() As Save
+        '    Get
+        '        Return _settingsSave
+        '    End Get
+        '    Set(ByVal value As Save)
+        '        _settingsSave = value
+        '    End Set
+        'End Property
 
-        Public Shared wL As UI.Window.List
-        Public Shared mC As Messages.Collector
+        Private Shared _connectionList As Connection.List
+        Public Shared Property ConnectionList() As List
+            Get
+                Return _connectionList
+            End Get
+            Set(ByVal value As List)
+                _connectionList = value
+            End Set
+        End Property
 
-        Public Shared SysTrayIcon As Tools.Controls.SysTrayIcon
-        Public Shared SysMenu As Tools.SystemMenu
+        Private Shared _previousConnectionList As Connection.List
+        Public Shared Property PreviousConnectionList() As List
+            Get
+                Return _previousConnectionList
+            End Get
+            Set(ByVal value As List)
+                _previousConnectionList = value
+            End Set
+        End Property
 
-        Public Shared log As log4net.ILog
+        Private Shared _containerList As Container.List
+        Public Shared Property ContainerList() As Container.List
+            Get
+                Return _containerList
+            End Get
+            Set(ByVal value As Container.List)
+                _containerList = value
+            End Set
+        End Property
 
-        Public Shared IsUpdateAvailable As Boolean
-        Public Shared IsAnnouncementAvailable As Boolean
-        Public Shared ConnectionsFileLoaded As Boolean
+        Private Shared _previousContainerList As Container.List
+        Public Shared Property PreviousContainerList() As Container.List
+            Get
+                Return _previousContainerList
+            End Get
+            Set(ByVal value As Container.List)
+                _previousContainerList = value
+            End Set
+        End Property
 
-        Public Shared WithEvents tmrSqlWatcher As Timers.Timer
-        Public Shared LastSQLUpdate As Date
+        Private Shared _credentialList As Credential.List
+        Public Shared Property CredentialList() As Credential.List
+            Get
+                Return _credentialList
+            End Get
+            Set(ByVal value As Credential.List)
+                _credentialList = value
+            End Set
+        End Property
 
-        Public Shared LastSelected As String
+        Private Shared _previousCredentialList As Credential.List
+        Public Shared Property PreviousCredentialList() As Credential.List
+            Get
+                Return _previousCredentialList
+            End Get
+            Set(ByVal value As Credential.List)
+                _previousCredentialList = value
+            End Set
+        End Property
 
-        Public Shared DefaultConnection As mRemoteNG.Connection.Info
-        Public Shared DefaultInheritance As mRemoteNG.Connection.Info.Inheritance
 
-        Public Shared ExtApps As New ArrayList()
+        Private Shared _windowList As UI.Window.List
+        Public Shared Property WindowList() As UI.Window.List
+            Get
+                Return _windowList
+            End Get
+            Set(ByVal value As UI.Window.List)
+                _windowList = value
+            End Set
+        End Property
+
+        Private Shared _messageCollector As Messages.Collector
+        Public Shared Property MessageCollector() As Collector
+            Get
+                Return _messageCollector
+            End Get
+            Set(ByVal value As Collector)
+                _messageCollector = value
+            End Set
+        End Property
+
+        Private Shared _notificationAreaIcon As Tools.Controls.NotificationAreaIcon
+        Public Shared Property NotificationAreaIcon() As Controls.NotificationAreaIcon
+            Get
+                Return _notificationAreaIcon
+            End Get
+            Set(ByVal value As Controls.NotificationAreaIcon)
+                _notificationAreaIcon = value
+            End Set
+        End Property
+
+        Private Shared _systemMenu As Tools.SystemMenu
+        Public Shared Property SystemMenu() As SystemMenu
+            Get
+                Return _systemMenu
+            End Get
+            Set(ByVal value As SystemMenu)
+                _systemMenu = value
+            End Set
+        End Property
+
+        Private Shared _log As log4net.ILog
+        Public Shared Property Log() As ILog
+            Get
+                Return _log
+            End Get
+            Set(ByVal value As ILog)
+                _log = value
+            End Set
+        End Property
+
+        Private Shared _isUpdateAvailable As Boolean
+        Public Shared Property IsUpdateAvailable() As Boolean
+            Get
+                Return _isUpdateAvailable
+            End Get
+            Set(ByVal value As Boolean)
+                _isUpdateAvailable = value
+            End Set
+        End Property
+
+        Private Shared _isAnnouncementAvailable As Boolean
+        Public Shared Property IsAnnouncementAvailable() As Boolean
+            Get
+                Return _isAnnouncementAvailable
+            End Get
+            Set(ByVal value As Boolean)
+                _isAnnouncementAvailable = value
+            End Set
+        End Property
+
+        Private Shared _isConnectionsFileLoaded As Boolean
+        Public Shared Property IsConnectionsFileLoaded() As Boolean
+            Get
+                Return _isConnectionsFileLoaded
+            End Get
+            Set(ByVal value As Boolean)
+                _isConnectionsFileLoaded = value
+            End Set
+        End Property
+
+        Private Shared WithEvents _timerSqlWatcher As Timers.Timer
+        Public Shared Property TimerSqlWatcher() As Timer
+            Get
+                Return _timerSqlWatcher
+            End Get
+            Set(ByVal value As Timer)
+                _timerSqlWatcher = value
+            End Set
+        End Property
+
+        Private Shared _lastSqlUpdate As Date
+        Public Shared Property LastSqlUpdate() As Date
+            Get
+                Return _lastSqlUpdate
+            End Get
+            Set(ByVal value As Date)
+                _lastSqlUpdate = value
+            End Set
+        End Property
+
+        Private Shared _lastSelected As String
+        Public Shared Property LastSelected() As String
+            Get
+                Return _lastSelected
+            End Get
+            Set(ByVal value As String)
+                _lastSelected = value
+            End Set
+        End Property
+
+        Private Shared _defaultConnection As mRemoteNG.Connection.Info
+        Public Shared Property DefaultConnection() As Connection.Info
+            Get
+                Return _defaultConnection
+            End Get
+            Set(ByVal value As Connection.Info)
+                _defaultConnection = value
+            End Set
+        End Property
+
+        Private Shared _defaultInheritance As mRemoteNG.Connection.Info.Inheritance
+        Public Shared Property DefaultInheritance() As Connection.Info.Inheritance
+            Get
+                Return _defaultInheritance
+            End Get
+            Set(ByVal value As Connection.Info.Inheritance)
+                _defaultInheritance = value
+            End Set
+        End Property
+
+        Private Shared _externalTools As New ArrayList()
+        Public Shared Property ExternalTools() As ArrayList
+            Get
+                Return _externalTools
+            End Get
+            Set(ByVal value As ArrayList)
+                _externalTools = value
+            End Set
+        End Property
+
 #End Region
 
+#Region "Classes"
         Public Class Windows
             Public Shared treeForm As UI.Window.Tree
             Public Shared treePanel As New DockContent
@@ -143,7 +340,7 @@ Namespace App
                             Windows.AnnouncementForm.Show(frmMain.pnlDock)
                     End Select
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Show (App.Runtime.Windows) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Show (App.Runtime.Windows) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -248,29 +445,29 @@ Namespace App
 
             Public Shared Sub CreateLogger()
                 log4net.Config.XmlConfigurator.Configure(New FileInfo("mRemoteNG.exe.config"))
-                log = log4net.LogManager.GetLogger("mRemoteNG.Log")
-                log.InfoFormat("{0} started.", My.Application.Info.ProductName)
-                log.InfoFormat("Command Line: {0}", Environment.GetCommandLineArgs)
+                Log = log4net.LogManager.GetLogger("mRemoteNG.Log")
+                Log.InfoFormat("{0} started.", My.Application.Info.ProductName)
+                Log.InfoFormat("Command Line: {0}", Environment.GetCommandLineArgs)
                 Try
                     Dim servicePack As Integer
                     For Each managementObject As ManagementObject In New ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem").Get()
                         servicePack = managementObject.GetPropertyValue("ServicePackMajorVersion")
                         If servicePack = 0 Then
-                            log.InfoFormat("{0} {1}", managementObject.GetPropertyValue("Caption").Trim, managementObject.GetPropertyValue("OSArchitecture"))
+                            Log.InfoFormat("{0} {1}", managementObject.GetPropertyValue("Caption").Trim, managementObject.GetPropertyValue("OSArchitecture"))
                         Else
-                            log.InfoFormat("{0} Service Pack {1} {2}", managementObject.GetPropertyValue("Caption").Trim, servicePack.ToString, managementObject.GetPropertyValue("OSArchitecture"))
+                            Log.InfoFormat("{0} Service Pack {1} {2}", managementObject.GetPropertyValue("Caption").Trim, servicePack.ToString, managementObject.GetPropertyValue("OSArchitecture"))
                         End If
                     Next
                 Catch ex As Exception
-                    log.WarnFormat("Error retrieving operating system information from WMI. {0}", ex.Message)
+                    Log.WarnFormat("Error retrieving operating system information from WMI. {0}", ex.Message)
                 End Try
-                log.InfoFormat("Microsoft .NET Framework {0}", System.Environment.Version.ToString)
+                Log.InfoFormat("Microsoft .NET Framework {0}", System.Environment.Version.ToString)
 #If Not PORTABLE Then
-                log.InfoFormat("{0} {1}", My.Application.Info.ProductName.ToString, My.Application.Info.Version.ToString)
+                Log.InfoFormat("{0} {1}", My.Application.Info.ProductName.ToString, My.Application.Info.Version.ToString)
 #Else
                 log.InfoFormat("{0} {1} {2}", My.Application.Info.ProductName.ToString, My.Application.Info.Version.ToString, My.Resources.strLabelPortableEdition)
 #End If
-                log.InfoFormat("System Culture: {0}/{1}", Threading.Thread.CurrentThread.CurrentUICulture.Name, Threading.Thread.CurrentThread.CurrentUICulture.NativeName)
+                Log.InfoFormat("System Culture: {0}/{1}", Threading.Thread.CurrentThread.CurrentUICulture.Name, Threading.Thread.CurrentThread.CurrentUICulture.NativeName)
             End Sub
 
             Public Shared Sub UpdateCheck()
@@ -391,25 +588,25 @@ Namespace App
                         My.Settings.ResetToolbars = True
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strCommandLineArgsCouldNotBeParsed & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strCommandLineArgsCouldNotBeParsed & vbNewLine & ex.Message)
                 End Try
             End Sub
 
             Public Shared Sub CreateSQLUpdateHandlerAndStartTimer()
                 If My.Settings.UseSQLServer = True Then
                     AddHandler Tools.Misc.SQLUpdateCheckFinished, AddressOf SQLUpdateCheckFinished
-                    tmrSqlWatcher = New Timers.Timer(3000)
-                    tmrSqlWatcher.Start()
+                    TimerSqlWatcher = New Timers.Timer(3000)
+                    TimerSqlWatcher.Start()
                 End If
             End Sub
 
             Public Shared Sub DestroySQLUpdateHandlerAndStopTimer()
                 Try
-                    LastSQLUpdate = Nothing
+                    LastSqlUpdate = Nothing
                     RemoveHandler Tools.Misc.SQLUpdateCheckFinished, AddressOf SQLUpdateCheckFinished
-                    If tmrSqlWatcher IsNot Nothing Then
-                        tmrSqlWatcher.Stop()
-                        tmrSqlWatcher.Close()
+                    If TimerSqlWatcher IsNot Nothing Then
+                        TimerSqlWatcher.Stop()
+                        TimerSqlWatcher.Close()
                     End If
                 Catch ex As Exception
                 End Try
@@ -423,9 +620,9 @@ Namespace App
 
             Public Shared Sub BeforeQuit()
                 Try
-                    If App.Runtime.SysTrayIcon IsNot Nothing Then
-                        If App.Runtime.SysTrayIcon.Disposed = False Then
-                            App.Runtime.SysTrayIcon.Dispose()
+                    If App.Runtime.NotificationAreaIcon IsNot Nothing Then
+                        If App.Runtime.NotificationAreaIcon.Disposed = False Then
+                            App.Runtime.NotificationAreaIcon.Dispose()
                         End If
                     End If
 
@@ -433,12 +630,14 @@ Namespace App
                         SaveConnections()
                     End If
 
-                    sS.Save()
+                    Dim SettingsSave As New Config.Settings.Save()
+                    SettingsSave.Save()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSettingsCouldNotBeSavedOrTrayDispose & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSettingsCouldNotBeSavedOrTrayDispose & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class
+#End Region
 
 #Region "Default Connection"
         Public Shared Function DefaultConnectionFromSettings() As mRemoteNG.Connection.Info
@@ -604,12 +803,12 @@ Namespace App
                 If NoTabber Then
                     TryCast(cForm, UI.Window.Connection).TabController.Dispose()
                 Else
-                    wL.Add(cForm)
+                    WindowList.Add(cForm)
                 End If
 
                 Return cForm
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't add panel" & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't add panel" & vbNewLine & ex.Message)
                 Return Nothing
             End Try
         End Function
@@ -625,7 +824,7 @@ Namespace App
                     conW.SetFormText(nTitle.Replace("&", "&&"))
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't rename panel" & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't rename panel" & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -645,7 +844,7 @@ Namespace App
                     cMenScreens.DropDownItems.Add(cMenScreen)
                 Next
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't enumerate screens" & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't enumerate screens" & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -668,8 +867,8 @@ Namespace App
 #Region "Connections Loading/Saving"
         Public Shared Sub NewConnections(ByVal filename As String)
             Try
-                connectionList = New Connection.List
-                containerList = New Container.List
+                ConnectionList = New Connection.List
+                ContainerList = New Container.List
 
                 Dim conL As New Config.Connections.Load
 
@@ -690,8 +889,8 @@ Namespace App
 
                 xW.Close()
 
-                conL.ConnectionList = connectionList
-                conL.ContainerList = containerList
+                conL.ConnectionList = ConnectionList
+                conL.ContainerList = ContainerList
                 conL.Import = False
 
                 Tree.Node.ResetTree()
@@ -702,43 +901,43 @@ Namespace App
                 conL.ConnectionFileName = filename
                 conL.Load()
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strCouldNotCreateNewConnectionsFile & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strCouldNotCreateNewConnectionsFile & vbNewLine & ex.Message)
             End Try
         End Sub
 
         Private Shared Sub LoadConnectionsBG(Optional ByVal WithDialog As Boolean = False, Optional ByVal Update As Boolean = False)
-            _WithDialog = False
-            _LoadUpdate = True
+            _withDialog = False
+            _loadUpdate = True
 
             Dim t As New Thread(AddressOf LoadConnectionsBGd)
             t.SetApartmentState(Threading.ApartmentState.STA)
             t.Start()
         End Sub
 
-        Private Shared _WithDialog As Boolean = False
-        Private Shared _LoadUpdate As Boolean = False
+        Private Shared _withDialog As Boolean = False
+        Private Shared _loadUpdate As Boolean = False
         Private Shared Sub LoadConnectionsBGd()
-            LoadConnections(_WithDialog, _LoadUpdate)
+            LoadConnections(_withDialog, _loadUpdate)
         End Sub
 
         Public Shared Sub LoadConnections(Optional ByVal WithDialog As Boolean = False, Optional ByVal Update As Boolean = False)
             Try
                 Dim tmrWasEnabled As Boolean
-                If tmrSqlWatcher IsNot Nothing Then
-                    tmrWasEnabled = tmrSqlWatcher.Enabled
+                If TimerSqlWatcher IsNot Nothing Then
+                    tmrWasEnabled = TimerSqlWatcher.Enabled
 
-                    If tmrSqlWatcher.Enabled = True Then
-                        tmrSqlWatcher.Stop()
+                    If TimerSqlWatcher.Enabled = True Then
+                        TimerSqlWatcher.Stop()
                     End If
                 End If
 
-                If connectionList IsNot Nothing And containerList IsNot Nothing Then
-                    prevCL = connectionList.Copy
-                    prevCTL = containerList.Copy
+                If ConnectionList IsNot Nothing And ContainerList IsNot Nothing Then
+                    PreviousConnectionList = ConnectionList.Copy
+                    PreviousContainerList = ContainerList.Copy
                 End If
 
-                connectionList = New Connection.List
-                containerList = New Container.List
+                ConnectionList = New Connection.List
+                ContainerList = New Container.List
 
                 Dim conL As New Config.Connections.Load
 
@@ -776,9 +975,9 @@ Namespace App
 
                     If File.Exists(conL.ConnectionFileName) = False Then
                         If WithDialog Then
-                            mC.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strConnectionsFileCouldNotBeLoaded, conL.ConnectionFileName))
+                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strConnectionsFileCouldNotBeLoaded, conL.ConnectionFileName))
                         Else
-                            mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strConnectionsFileCouldNotBeLoadedNew, conL.ConnectionFileName))
+                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strConnectionsFileCouldNotBeLoadedNew, conL.ConnectionFileName))
                             App.Runtime.NewConnections(conL.ConnectionFileName)
                         End If
 
@@ -788,16 +987,16 @@ Namespace App
                     Try
                         File.Copy(conL.ConnectionFileName, conL.ConnectionFileName & "_BAK", True)
                     Catch ex As Exception
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strConnectionsFileBackupFailed & vbNewLine & vbNewLine & ex.Message)
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strConnectionsFileBackupFailed & vbNewLine & vbNewLine & ex.Message)
                     End Try
                 End If
 
-                conL.ConnectionList = connectionList
-                conL.ContainerList = containerList
+                conL.ConnectionList = ConnectionList
+                conL.ContainerList = ContainerList
 
-                If prevCL IsNot Nothing And prevCTL IsNot Nothing Then
-                    conL.PreviousConnectionList = prevCL
-                    conL.PreviousContainerList = prevCTL
+                If PreviousConnectionList IsNot Nothing And PreviousContainerList IsNot Nothing Then
+                    conL.PreviousConnectionList = PreviousConnectionList
+                    conL.PreviousContainerList = PreviousContainerList
                 End If
 
                 If Update = True Then
@@ -820,14 +1019,14 @@ Namespace App
                 conL.Load()
 
                 If My.Settings.UseSQLServer = True Then
-                    LastSQLUpdate = Now
+                    LastSqlUpdate = Now
                 End If
 
-                If tmrWasEnabled And tmrSqlWatcher IsNot Nothing Then
-                    tmrSqlWatcher.Start()
+                If tmrWasEnabled And TimerSqlWatcher IsNot Nothing Then
+                    TimerSqlWatcher.Start()
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeLoaded & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeLoaded & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -853,14 +1052,14 @@ Namespace App
                         End If
 
                         nNode.Tag = nContI
-                        containerList.Add(nContI)
+                        ContainerList.Add(nContI)
 
                         Dim conL As New Config.Connections.Load
                         conL.ConnectionFileName = lD.FileNames(i)
                         conL.RootTreeNode = nNode
                         conL.Import = True
-                        conL.ConnectionList = App.Runtime.connectionList
-                        conL.ContainerList = App.Runtime.containerList
+                        conL.ConnectionList = App.Runtime.ConnectionList
+                        conL.ContainerList = App.Runtime.ContainerList
 
                         conL.Load()
 
@@ -868,7 +1067,7 @@ Namespace App
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeImported & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeImported & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -997,11 +1196,11 @@ Namespace App
                             nConI.Parent = nNode.Parent.Tag
                         End If
 
-                        connectionList.Add(nConI)
+                        ConnectionList.Add(nConI)
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpFileCouldNotBeImported & vbNewLine & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpFileCouldNotBeImported & vbNewLine & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1069,7 +1268,7 @@ Namespace App
                         nConI.Parent = nNode.Parent.Tag
                     End If
 
-                    connectionList.Add(nConI)
+                    ConnectionList.Add(nConI)
                 End If
             Next
         End Sub
@@ -1079,19 +1278,19 @@ Namespace App
         End Sub
 
         Public Shared Sub SaveConnectionsBG()
-            _SaveUpdate = True
+            _saveUpdate = True
 
             Dim t As New Thread(AddressOf SaveConnectionsBGd)
             t.SetApartmentState(Threading.ApartmentState.STA)
             t.Start()
         End Sub
 
-        Private Shared _SaveUpdate As Boolean = False
-        Private Shared _SaveLock As Object = New Object
+        Private Shared _saveUpdate As Boolean = False
+        Private Shared _saveLock As Object = New Object
         Private Shared Sub SaveConnectionsBGd()
-            Monitor.Enter(_SaveLock)
-            SaveConnections(_SaveUpdate)
-            Monitor.Exit(_SaveLock)
+            Monitor.Enter(_saveLock)
+            SaveConnections(_saveUpdate)
+            Monitor.Exit(_saveLock)
         End Sub
 
         Public Shared Sub SaveConnections(Optional ByVal Update As Boolean = False)
@@ -1102,10 +1301,10 @@ Namespace App
 
                 Dim tmrWasEnabled As Boolean
 
-                If tmrSqlWatcher IsNot Nothing Then
-                    tmrWasEnabled = tmrSqlWatcher.Enabled
-                    If tmrSqlWatcher.Enabled = True Then
-                        tmrSqlWatcher.Stop()
+                If TimerSqlWatcher IsNot Nothing Then
+                    tmrWasEnabled = TimerSqlWatcher.Enabled
+                    If TimerSqlWatcher.Enabled = True Then
+                        TimerSqlWatcher.Stop()
                     End If
                 End If
 
@@ -1119,8 +1318,8 @@ Namespace App
                     End If
                 End If
 
-                conS.ConnectionList = connectionList
-                conS.ContainerList = containerList
+                conS.ConnectionList = ConnectionList
+                conS.ContainerList = ContainerList
                 conS.Export = False
                 conS.SaveSecurity = New Security.Save(False)
                 conS.RootTreeNode = Windows.treeForm.tvConnections.Nodes(0)
@@ -1136,14 +1335,14 @@ Namespace App
                 conS.Save()
 
                 If My.Settings.UseSQLServer = True Then
-                    LastSQLUpdate = Now
+                    LastSqlUpdate = Now
                 End If
 
                 If tmrWasEnabled Then
-                    tmrSqlWatcher.Start()
+                    TimerSqlWatcher.Start()
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeSaved & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeSaved & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1152,10 +1351,10 @@ Namespace App
             Try
                 Dim tmrWasEnabled As Boolean
 
-                If tmrSqlWatcher IsNot Nothing Then
-                    tmrWasEnabled = tmrSqlWatcher.Enabled
-                    If tmrSqlWatcher.Enabled = True Then
-                        tmrSqlWatcher.Stop()
+                If TimerSqlWatcher IsNot Nothing Then
+                    tmrWasEnabled = TimerSqlWatcher.Enabled
+                    If TimerSqlWatcher.Enabled = True Then
+                        TimerSqlWatcher.Stop()
                     End If
                 End If
 
@@ -1189,8 +1388,8 @@ Namespace App
                     End If
                 End If
 
-                conS.ConnectionList = connectionList
-                conS.ContainerList = containerList
+                conS.ConnectionList = ConnectionList
+                conS.ContainerList = ContainerList
                 If RootNode IsNot Windows.treeForm.tvConnections.Nodes(0) Then
                     conS.Export = True
                 End If
@@ -1199,43 +1398,40 @@ Namespace App
 
                 conS.Save()
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strConnectionsFileCouldNotSaveAs, conS.ConnectionFileName) & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strConnectionsFileCouldNotSaveAs, conS.ConnectionFileName) & vbNewLine & ex.Message)
             End Try
 
         End Sub
 #End Region
 
 #Region "Opening Connection"
-        Private Shared nProt As Connection.Protocol.Base
-        Private Shared nCi As Connection.Info
-
         Public Shared Function CreateQuicky(ByVal ConString As String, Optional ByVal Protocol As Connection.Protocol.Protocols = Connection.Protocol.Protocols.NONE) As Connection.Info
             Try
                 Dim Uri As System.Uri = New System.Uri("dummyscheme" + System.Uri.SchemeDelimiter + ConString)
 
                 If Not String.IsNullOrEmpty(Uri.Host) Then
-                    nCi = New Connection.Info
+                    Dim newConnectionInfo As New Connection.Info
 
-                    nCi.Name = String.Format(My.Resources.strQuick, Uri.Host)
-                    nCi.Protocol = Protocol
-                    nCi.Hostname = Uri.Host
+                    newConnectionInfo.Name = String.Format(My.Resources.strQuick, Uri.Host)
+                    newConnectionInfo.Protocol = Protocol
+                    newConnectionInfo.Hostname = Uri.Host
                     If Uri.Port = -1 Then
-                        nCi.Port = Nothing
+                        newConnectionInfo.Port = Nothing
                     Else
-                        nCi.Port = Uri.Port
+                        newConnectionInfo.Port = Uri.Port
                     End If
-                    nCi.IsQuicky = True
+                    newConnectionInfo.IsQuicky = True
 
-                    Windows.quickyForm.ConnectionInfo = nCi
+                    Windows.quickyForm.ConnectionInfo = newConnectionInfo
 
                     If Protocol = Connection.Protocol.Protocols.NONE Then
                         Windows.quickyPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
                     End If
 
-                    Return nCi
+                    Return newConnectionInfo
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strQuickConnectFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strQuickConnectFailed & vbNewLine & ex.Message)
             End Try
 
             Return Nothing
@@ -1245,7 +1441,7 @@ Namespace App
             Try
                 OpenConnection(Connection.Info.Force.None)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1267,7 +1463,7 @@ Namespace App
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1275,7 +1471,7 @@ Namespace App
             Try
                 OpenConnection(ConnectionInfo, Connection.Info.Force.None)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1283,7 +1479,7 @@ Namespace App
             Try
                 OpenConnectionFinal(ConnectionInfo, Connection.Info.Force.None, ConnectionForm)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1291,7 +1487,7 @@ Namespace App
             Try
                 OpenConnectionFinal(ConnectionInfo, Force, ConnectionForm)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1299,57 +1495,58 @@ Namespace App
             Try
                 OpenConnectionFinal(ConnectionInfo, Force, Nothing)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
 
-        Private Shared Sub OpenConnectionFinal(ByVal nCi As mRemoteNG.Connection.Info, ByVal Force As mRemoteNG.Connection.Info.Force, ByVal ConForm As Form)
+        Private Shared Sub OpenConnectionFinal(ByVal newConnectionInfo As mRemoteNG.Connection.Info, ByVal Force As mRemoteNG.Connection.Info.Force, ByVal ConForm As Form)
             Try
-                If nCi.Hostname = "" And nCi.Protocol <> Connection.Protocol.Protocols.IntApp Then
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strConnectionOpenFailedNoHostname)
+                If newConnectionInfo.Hostname = "" And newConnectionInfo.Protocol <> Connection.Protocol.Protocols.IntApp Then
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strConnectionOpenFailedNoHostname)
                     Exit Sub
                 End If
 
-                If nCi.PreExtApp <> "" Then
-                    Dim extA As Tools.ExternalApp = App.Runtime.GetExtAppByName(nCi.PreExtApp)
+                If newConnectionInfo.PreExtApp <> "" Then
+                    Dim extA As Tools.ExternalApp = App.Runtime.GetExtAppByName(newConnectionInfo.PreExtApp)
                     If extA IsNot Nothing Then
-                        extA.Start(nCi)
+                        extA.Start(newConnectionInfo)
                     End If
                 End If
 
                 If (Force And Connection.Info.Force.DoNotJump) <> Connection.Info.Force.DoNotJump Then
-                    If SwitchToOpenConnection(nCi) Then
+                    If SwitchToOpenConnection(newConnectionInfo) Then
                         Exit Sub
                     End If
                 End If
 
+                Dim newProtocol As New Connection.Protocol.Base
                 ' Create connection based on protocol type
-                Select Case nCi.Protocol
+                Select Case newConnectionInfo.Protocol
                     Case Connection.Protocol.Protocols.RDP
-                        nProt = New Connection.Protocol.RDP
+                        newProtocol = New Connection.Protocol.RDP
                     Case Connection.Protocol.Protocols.VNC
-                        nProt = New Connection.Protocol.VNC
+                        newProtocol = New Connection.Protocol.VNC
                     Case Connection.Protocol.Protocols.SSH1
-                        nProt = New Connection.Protocol.SSH1
+                        newProtocol = New Connection.Protocol.SSH1
                     Case Connection.Protocol.Protocols.SSH2
-                        nProt = New Connection.Protocol.SSH2
+                        newProtocol = New Connection.Protocol.SSH2
                     Case Connection.Protocol.Protocols.Telnet
-                        nProt = New Connection.Protocol.Telnet
+                        newProtocol = New Connection.Protocol.Telnet
                     Case Connection.Protocol.Protocols.Rlogin
-                        nProt = New Connection.Protocol.Rlogin
+                        newProtocol = New Connection.Protocol.Rlogin
                     Case Connection.Protocol.Protocols.RAW
-                        nProt = New Connection.Protocol.RAW
+                        newProtocol = New Connection.Protocol.RAW
                     Case Connection.Protocol.Protocols.HTTP
-                        nProt = New Connection.Protocol.HTTP(nCi.RenderingEngine)
+                        newProtocol = New Connection.Protocol.HTTP(newConnectionInfo.RenderingEngine)
                     Case Connection.Protocol.Protocols.HTTPS
-                        nProt = New Connection.Protocol.HTTPS(nCi.RenderingEngine)
+                        newProtocol = New Connection.Protocol.HTTPS(newConnectionInfo.RenderingEngine)
                     Case Connection.Protocol.Protocols.ICA
-                        nProt = New Connection.Protocol.ICA
+                        newProtocol = New Connection.Protocol.ICA
                     Case Connection.Protocol.Protocols.IntApp
-                        nProt = New Connection.Protocol.IntApp
+                        newProtocol = New Connection.Protocol.IntApp
 
-                        If nCi.ExtApp = "" Then
+                        If newConnectionInfo.ExtApp = "" Then
                             Throw New Exception(My.Resources.strNoExtAppDefined)
                         End If
                     Case Else
@@ -1360,7 +1557,7 @@ Namespace App
                 Dim cForm As Form
 
                 Dim cPnl As String
-                If nCi.Panel = "" Or (Force And Connection.Info.Force.OverridePanel) = Connection.Info.Force.OverridePanel Or My.Settings.AlwaysShowPanelSelectionDlg Then
+                If newConnectionInfo.Panel = "" Or (Force And Connection.Info.Force.OverridePanel) = Connection.Info.Force.OverridePanel Or My.Settings.AlwaysShowPanelSelectionDlg Then
                     Dim frmPnl As New frmChoosePanel
                     If frmPnl.ShowDialog = DialogResult.OK Then
                         cPnl = frmPnl.Panel
@@ -1368,11 +1565,11 @@ Namespace App
                         Exit Sub
                     End If
                 Else
-                    cPnl = nCi.Panel
+                    cPnl = newConnectionInfo.Panel
                 End If
 
                 If ConForm Is Nothing Then
-                    cForm = wL.FromString(cPnl)
+                    cForm = WindowList.FromString(cPnl)
                 Else
                     cForm = ConForm
                 End If
@@ -1385,53 +1582,53 @@ Namespace App
                     TryCast(cForm, UI.Window.Connection).Focus()
                 End If
 
-                cContainer = TryCast(cForm, UI.Window.Connection).AddConnectionTab(nCi)
+                cContainer = TryCast(cForm, UI.Window.Connection).AddConnectionTab(newConnectionInfo)
 
-                If nCi.Protocol = Connection.Protocol.Protocols.IntApp Then
-                    If App.Runtime.GetExtAppByName(nCi.ExtApp).Icon IsNot Nothing Then
-                        TryCast(cContainer, Magic.Controls.TabPage).Icon = App.Runtime.GetExtAppByName(nCi.ExtApp).Icon
+                If newConnectionInfo.Protocol = Connection.Protocol.Protocols.IntApp Then
+                    If App.Runtime.GetExtAppByName(newConnectionInfo.ExtApp).Icon IsNot Nothing Then
+                        TryCast(cContainer, Magic.Controls.TabPage).Icon = App.Runtime.GetExtAppByName(newConnectionInfo.ExtApp).Icon
                     End If
                 End If
 
-                AddHandler nProt.Closed, AddressOf TryCast(cForm, UI.Window.Connection).Prot_Event_Closed
+                AddHandler newProtocol.Closed, AddressOf TryCast(cForm, UI.Window.Connection).Prot_Event_Closed
 
-                AddHandler nProt.Disconnected, AddressOf Prot_Event_Disconnected
-                AddHandler nProt.Connected, AddressOf Prot_Event_Connected
-                AddHandler nProt.Closed, AddressOf Prot_Event_Closed
-                AddHandler nProt.ErrorOccured, AddressOf Prot_Event_ErrorOccured
+                AddHandler newProtocol.Disconnected, AddressOf Prot_Event_Disconnected
+                AddHandler newProtocol.Connected, AddressOf Prot_Event_Connected
+                AddHandler newProtocol.Closed, AddressOf Prot_Event_Closed
+                AddHandler newProtocol.ErrorOccured, AddressOf Prot_Event_ErrorOccured
 
-                nProt.InterfaceControl = New Connection.InterfaceControl(cContainer, nProt, nCi)
+                newProtocol.InterfaceControl = New Connection.InterfaceControl(cContainer, newProtocol, newConnectionInfo)
 
-                nProt.Force = Force
+                newProtocol.Force = Force
 
-                If nProt.SetProps() = False Then
-                    nProt.Close()
+                If newProtocol.SetProps() = False Then
+                    newProtocol.Close()
                     Exit Sub
                 End If
 
-                If nProt.Connect() = False Then
-                    nProt.Close()
+                If newProtocol.Connect() = False Then
+                    newProtocol.Close()
                     Exit Sub
                 End If
 
-                nCi.OpenConnections.Add(nProt)
+                newConnectionInfo.OpenConnections.Add(newProtocol)
 
-                If nCi.IsQuicky = False Then
-                    If nCi.Protocol <> Connection.Protocol.Protocols.IntApp Then
-                        Tree.Node.SetNodeImage(nCi.TreeNode, Images.Enums.TreeImage.ConnectionOpen)
+                If newConnectionInfo.IsQuicky = False Then
+                    If newConnectionInfo.Protocol <> Connection.Protocol.Protocols.IntApp Then
+                        Tree.Node.SetNodeImage(newConnectionInfo.TreeNode, Images.Enums.TreeImage.ConnectionOpen)
                     Else
-                        Dim extApp As Tools.ExternalApp = GetExtAppByName(nCi.ExtApp)
+                        Dim extApp As Tools.ExternalApp = GetExtAppByName(newConnectionInfo.ExtApp)
                         If extApp IsNot Nothing Then
                             If extApp.TryIntegrate Then
-                                If nCi.TreeNode IsNot Nothing Then
-                                    Tree.Node.SetNodeImage(nCi.TreeNode, Images.Enums.TreeImage.ConnectionOpen)
+                                If newConnectionInfo.TreeNode IsNot Nothing Then
+                                    Tree.Node.SetNodeImage(newConnectionInfo.TreeNode, Images.Enums.TreeImage.ConnectionOpen)
                                 End If
                             End If
                         End If
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1453,7 +1650,7 @@ Namespace App
 #Region "Event Handlers"
         Public Shared Sub Prot_Event_Disconnected(ByVal sender As Object, ByVal DisconnectedMessage As String)
             Try
-                mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strProtocolEventDisconnected, DisconnectedMessage), True)
+                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strProtocolEventDisconnected, DisconnectedMessage), True)
 
                 Dim Prot As Connection.Protocol.Base = sender
                 If Prot.InterfaceControl.Info.Protocol = Connection.Protocol.Protocols.RDP Then
@@ -1462,14 +1659,14 @@ Namespace App
                     Dim ReasonDescription As String = Reason(1)
                     If ReasonCode > 3 Then
                         If ReasonDescription <> "" Then
-                            mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strRdpDisconnected & vbNewLine & ReasonDescription & vbNewLine & String.Format(My.Resources.strErrorCode, ReasonCode))
+                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strRdpDisconnected & vbNewLine & ReasonDescription & vbNewLine & String.Format(My.Resources.strErrorCode, ReasonCode))
                         Else
-                            mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strRdpDisconnected & vbNewLine & String.Format(My.Resources.strErrorCode, ReasonCode))
+                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strRdpDisconnected & vbNewLine & String.Format(My.Resources.strErrorCode, ReasonCode))
                         End If
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strProtocolEventDisconnectFailed, ex.Message), True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strProtocolEventDisconnectFailed, ex.Message), True)
             End Try
         End Sub
 
@@ -1477,9 +1674,9 @@ Namespace App
             Try
                 Dim Prot As Connection.Protocol.Base = sender
 
-                mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnenctionCloseEvent, True)
+                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnenctionCloseEvent, True)
 
-                mC.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Resources.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString, My.User.Name))
+                MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Resources.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString, My.User.Name))
 
                 Prot.InterfaceControl.Info.OpenConnections.Remove(Prot)
 
@@ -1494,30 +1691,30 @@ Namespace App
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnenctionCloseEventFailed & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnenctionCloseEventFailed & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
         Public Shared Sub Prot_Event_Connected(ByVal sender As Object)
             Dim prot As mRemoteNG.Connection.Protocol.Base = sender
 
-            mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnectionEventConnected, True)
-            mC.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Resources.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString, My.User.Name, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField))
+            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnectionEventConnected, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Resources.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString, My.User.Name, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField))
         End Sub
 
         Public Shared Sub Prot_Event_ErrorOccured(ByVal sender As Object, ByVal ErrorMessage As String)
             Try
-                mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnectionEventErrorOccured, True)
+                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnectionEventErrorOccured, True)
 
                 Dim Prot As Connection.Protocol.Base = sender
 
                 If Prot.InterfaceControl.Info.Protocol = Connection.Protocol.Protocols.RDP Then
                     If ErrorMessage > -1 Then
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strConnectionRdpErrorDetail, ErrorMessage, Connection.Protocol.RDP.FatalErrors.GetError(ErrorMessage)))
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strConnectionRdpErrorDetail, ErrorMessage, Connection.Protocol.RDP.FatalErrors.GetError(ErrorMessage)))
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionEventConnectionFailed & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionEventConnectionFailed & vbNewLine & ex.Message, True)
             End Try
         End Sub
 #End Region
@@ -1525,11 +1722,11 @@ Namespace App
 #Region "External Apps"
         Public Shared Sub GetExtApps()
             Array.Clear(Tools.ExternalAppsTypeConverter.ExternalApps, 0, Tools.ExternalAppsTypeConverter.ExternalApps.Length)
-            Array.Resize(Tools.ExternalAppsTypeConverter.ExternalApps, ExtApps.Count + 1)
+            Array.Resize(Tools.ExternalAppsTypeConverter.ExternalApps, ExternalTools.Count + 1)
 
             Dim i As Integer = 0
 
-            For Each extA As Tools.ExternalApp In ExtApps
+            For Each extA As Tools.ExternalApp In ExternalTools
                 Tools.ExternalAppsTypeConverter.ExternalApps(i) = extA.DisplayName
 
                 i += 1
@@ -1539,7 +1736,7 @@ Namespace App
         End Sub
 
         Public Shared Function GetExtAppByName(ByVal Name As String) As Tools.ExternalApp
-            For Each extA As Tools.ExternalApp In ExtApps
+            For Each extA As Tools.ExternalApp In ExternalTools
                 If extA.DisplayName = Name Then
                     Return extA
                 End If
@@ -1588,7 +1785,7 @@ Namespace App
                 sWr.WriteLine(Text)
                 sWr.Close()
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLogWriteToFileFailed)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLogWriteToFileFailed)
             End Try
         End Sub
 
@@ -1604,7 +1801,7 @@ Namespace App
 
                 Return True
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLogWriteToFileFinalLocationFailed & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLogWriteToFileFinalLocationFailed & vbNewLine & ex.Message, True)
                 Return False
             End Try
         End Function
@@ -1613,7 +1810,7 @@ Namespace App
             Try
                 Dim txt As String = My.Application.Info.ProductName
 
-                If ConnectionFileName <> "" And ConnectionsFileLoaded = True Then
+                If ConnectionFileName <> "" And IsConnectionsFileLoaded = True Then
                     If My.Settings.ShowCompleteConsPathInTitle Then
                         txt &= " - " & ConnectionFileName
                     Else
@@ -1623,7 +1820,7 @@ Namespace App
 
                 ChangeMainFormText(txt)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSettingMainFormTextFailed & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSettingMainFormTextFailed & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -1639,9 +1836,9 @@ Namespace App
 
         Public Shared Function FindConnectionContainer(ByVal ConI As Connection.Info) As Connection.InterfaceControl
             If ConI.OpenConnections.Count > 0 Then
-                For i As Integer = 0 To wL.Count - 1
-                    If TypeOf wL.Items(i) Is UI.Window.Connection Then
-                        Dim conW As UI.Window.Connection = wL.Items(i)
+                For i As Integer = 0 To WindowList.Count - 1
+                    If TypeOf WindowList.Items(i) Is UI.Window.Connection Then
+                        Dim conW As UI.Window.Connection = WindowList.Items(i)
 
                         If conW.TabController IsNot Nothing Then
                             For Each t As Magic.Controls.TabPage In conW.TabController.TabPages
@@ -1675,13 +1872,13 @@ Namespace App
 #End Region
 
 #Region "SQL Watcher"
-        Private Shared Sub tmrSqlWatcher_Elapsed(ByVal sender As Object, ByVal e As System.Timers.ElapsedEventArgs) Handles tmrSqlWatcher.Elapsed
+        Private Shared Sub tmrSqlWatcher_Elapsed(ByVal sender As Object, ByVal e As System.Timers.ElapsedEventArgs) Handles _timerSqlWatcher.Elapsed
             Tools.Misc.IsSQLUpdateAvailableBG()
         End Sub
 
         Private Shared Sub SQLUpdateCheckFinished(ByVal UpdateAvailable As Boolean)
             If UpdateAvailable = True Then
-                mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strSqlUpdateCheckUpdateAvailable, True)
+                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strSqlUpdateCheckUpdateAvailable, True)
                 LoadConnectionsBG()
             End If
         End Sub

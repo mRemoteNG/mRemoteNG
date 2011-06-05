@@ -37,7 +37,7 @@ Namespace Security
 
                 Return Convert.ToBase64String(encdata)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Encryption failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Encryption failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return StrToEncrypt
@@ -74,7 +74,7 @@ Namespace Security
 
                 Return System.Text.Encoding.UTF8.GetString(data, 0, i)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Decryption failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Decryption failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return StrToDecrypt

@@ -189,7 +189,7 @@ Namespace Config
                     sqlDataReader.Close()
 
                     If databaseVersion.CompareTo(New System.Version(2, 2)) = 0 Then ' 2.2
-                        mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.3"))
+                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.3"))
                         sqlCommand = New SqlCommand("ALTER TABLE tblCons ADD EnableFontSmoothing bit NOT NULL DEFAULT 0, EnableDesktopComposition bit NOT NULL DEFAULT 0, InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;", sqlConnection)
                         sqlCommand.ExecuteNonQuery()
                         databaseVersion = New System.Version(2, 3)
@@ -200,10 +200,10 @@ Namespace Config
                     End If
 
                     If isVerified = False Then
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, String.Format(strErrorBadDatabaseVersion, databaseVersion.ToString, My.Application.Info.ProductName))
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(strErrorBadDatabaseVersion, databaseVersion.ToString, My.Application.Info.ProductName))
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(strErrorVerifyDatabaseVersionFailed, ex.Message))
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(strErrorVerifyDatabaseVersionFailed, ex.Message))
                 Finally
                     If sqlDataReader IsNot Nothing Then
                         If Not sqlDataReader.IsClosed Then sqlDataReader.Close()
@@ -222,7 +222,7 @@ Namespace Config
                 sqlCon.Open()
 
                 If Not VerifyDatabaseVersion(sqlCon) Then
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, strErrorConnectionListSaveFailed)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, strErrorConnectionListSaveFailed)
                     Return
                 End If
 
@@ -558,7 +558,7 @@ Namespace Config
 
             Private Sub SaveToXML()
                 Try
-                    If App.Runtime.ConnectionsFileLoaded = False Then
+                    If App.Runtime.IsConnectionsFileLoaded = False Then
                         Exit Sub
                     End If
 
@@ -606,7 +606,7 @@ Namespace Config
                     xW.WriteEndElement()
                     xW.Close()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SaveToXML failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveToXML failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -636,7 +636,7 @@ Namespace Config
                         End If
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "saveNode failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "saveNode failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -854,7 +854,7 @@ Namespace Config
                         xW.WriteAttributeString("InheritRDGatewayDomain", "", False)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SaveConnectionFields failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveConnectionFields failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -863,7 +863,7 @@ Namespace Config
             Private csvWr As StreamWriter
 
             Private Sub SaveTomRCSV()
-                If App.Runtime.ConnectionsFileLoaded = False Then
+                If App.Runtime.IsConnectionsFileLoaded = False Then
                     Exit Sub
                 End If
 
@@ -958,7 +958,7 @@ Namespace Config
 
 #Region "vRD CSV"
             Private Sub SaveTovRDCSV()
-                If App.Runtime.ConnectionsFileLoaded = False Then
+                If App.Runtime.IsConnectionsFileLoaded = False Then
                     Exit Sub
                 End If
 
@@ -1008,7 +1008,7 @@ Namespace Config
 
 #Region "vRD VRE"
             Private Sub SaveToVRE()
-                If App.Runtime.ConnectionsFileLoaded = False Then
+                If App.Runtime.IsConnectionsFileLoaded = False Then
                     Exit Sub
                 End If
 

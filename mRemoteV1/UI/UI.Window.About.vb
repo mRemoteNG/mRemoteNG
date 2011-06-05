@@ -305,7 +305,7 @@ Namespace UI
                         sR.Close()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Loading About failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Loading About failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 

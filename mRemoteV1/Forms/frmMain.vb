@@ -23,11 +23,10 @@ Public Class frmMain
         Startup.CreateLogger()
 
         ' Create gui config load and save objects
-        sL = New Config.Settings.Load(Me)
-        sS = New Config.Settings.Save(Me)
+        Dim SettingsLoad As New Config.Settings.Load(Me)
 
         ' Load GUI Configuration
-        sL.Load()
+        SettingsLoad.Load()
 
         Debug.Print("---------------------------" & vbNewLine & "[START] - " & Now)
 
@@ -37,12 +36,12 @@ Public Class frmMain
 
         fpChainedWindowHandle = SetClipboardViewer(Me.Handle)
 
-        mC = New Messages.Collector(Windows.errorsForm)
+        MessageCollector = New Messages.Collector(Windows.errorsForm)
 
         Connection.Protocol.RDP.Resolutions.AddResolutions()
         Connection.Protocol.PuttyBase.BorderSize = New Size(SystemInformation.FrameBorderSize.Width, SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height) 'Size.Subtract(Me.Size, Me.ClientSize)
 
-        wL = New UI.Window.List
+        WindowList = New UI.Window.List
 
         Startup.GetConnectionIcons()
         Startup.GetPuttySessions()
@@ -145,7 +144,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        If My.Settings.ConfirmExit And wL.Count > 0 Then
+        If My.Settings.ConfirmExit And WindowList.Count > 0 Then
             Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, My.Resources.strConfirmExitMainInstruction, "", "", "", My.Resources.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
             If cTaskDialog.VerificationChecked Then
                 My.Settings.ConfirmExit = False
@@ -158,7 +157,7 @@ Public Class frmMain
 
         _IsClosing = True
 
-        For Each Window As UI.Window.Base In wL
+        For Each Window As UI.Window.Base In WindowList
             Window.Close()
         Next
 
@@ -189,7 +188,7 @@ Public Class frmMain
     End Sub
 
     Private Sub tmrAutoSave_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrAutoSave.Tick
-        mC.AddMessage(Messages.MessageClass.InformationMsg, "Doing AutoSave", True)
+        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Doing AutoSave", True)
         App.Runtime.SaveConnections()
     End Sub
 #End Region
@@ -205,7 +204,7 @@ Public Class frmMain
             tsExtAppsToolbar.Items.Clear()
 
             'add ext apps
-            For Each extA As Tools.ExternalApp In ExtApps
+            For Each extA As Tools.ExternalApp In ExternalTools
                 Dim nItem As New ToolStripButton
                 nItem.Text = extA.DisplayName
                 nItem.Image = extA.Image
@@ -227,7 +226,7 @@ Public Class frmMain
                 tsExtAppsToolbar.Items.Add(nItem)
             Next
         Catch ex As Exception
-            mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddExtAppsToToolbar failed (frmMain)" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddExtAppsToToolbar failed (frmMain)" & vbNewLine & ex.Message, True)
         End Try
     End Sub
 
@@ -317,7 +316,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mMenFileLoad_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileLoad.Click
-        If App.Runtime.ConnectionsFileLoaded Then
+        If App.Runtime.IsConnectionsFileLoaded Then
             Select Case MsgBox(My.Resources.strSaveConnectionsFileBeforeOpeningAnother, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question)
                 Case MsgBoxResult.Yes
                     App.Runtime.SaveConnections()
@@ -370,9 +369,9 @@ Public Class frmMain
 
         Me.mMenViewConnectionPanels.DropDownItems.Clear()
 
-        For i As Integer = 0 To wL.Count - 1
-            Dim tItem As New ToolStripMenuItem(wL(i).Text, wL(i).Icon.ToBitmap, AddressOf ConnectionPanelMenuItem_Click)
-            tItem.Tag = wL(i)
+        For i As Integer = 0 To WindowList.Count - 1
+            Dim tItem As New ToolStripMenuItem(WindowList(i).Text, WindowList(i).Icon.ToBitmap, AddressOf ConnectionPanelMenuItem_Click)
+            tItem.Tag = WindowList(i)
 
             Me.mMenViewConnectionPanels.DropDownItems.Add(tItem)
         Next
@@ -552,7 +551,7 @@ Public Class frmMain
                 End If
             Next
         Catch ex As Exception
-            mC.AddMessage(Messages.MessageClass.ErrorMsg, "CreateButtons (frmMain) failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CreateButtons (frmMain) failed" & vbNewLine & ex.Message, True)
         End Try
     End Sub
 
@@ -574,7 +573,7 @@ Public Class frmMain
 
             App.Runtime.OpenConnection(conI, mRemoteNG.Connection.Info.Force.DoNotJump)
         Catch ex As Exception
-            mC.AddMessage(Messages.MessageClass.ErrorMsg, "QuickyProtocolButton_Click (frmMain) failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "QuickyProtocolButton_Click (frmMain) failed" & vbNewLine & ex.Message, True)
         End Try
     End Sub
 
@@ -665,7 +664,7 @@ Public Class frmMain
                 AddHandler tMenItem.MouseDown, AddressOf ConMenItem_MouseDown
             Next
         Catch ex As Exception
-            mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
         End Try
     End Sub
 
@@ -682,8 +681,8 @@ Public Class frmMain
     Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
         If Me.WindowState = FormWindowState.Minimized Then
             If My.Settings.MinimizeToTray Then
-                If App.Runtime.SysTrayIcon Is Nothing Then
-                    App.Runtime.SysTrayIcon = New Tools.Controls.SysTrayIcon()
+                If App.Runtime.NotificationAreaIcon Is Nothing Then
+                    App.Runtime.NotificationAreaIcon = New Tools.Controls.NotificationAreaIcon()
                 End If
                 Me.Hide()
             End If
@@ -764,20 +763,20 @@ Public Class frmMain
 
     Private SysMenSubItems(50) As Integer
     Private Sub ResetSysMenuItems()
-        SysMenu.Reset()
+        SystemMenu.Reset()
     End Sub
 
     Private Sub AddSysMenuItems()
-        SysMenu = New Tools.SystemMenu(Me.Handle)
-        Dim popMen As IntPtr = SysMenu.CreatePopupMenuItem()
+        SystemMenu = New Tools.SystemMenu(Me.Handle)
+        Dim popMen As IntPtr = SystemMenu.CreatePopupMenuItem()
 
         For i As Integer = 0 To Screen.AllScreens.Length - 1
             SysMenSubItems(i) = 200 + i
-            SysMenu.AppendMenuItem(popMen, Tools.SystemMenu.Flags.MF_STRING, SysMenSubItems(i), My.Resources.strScreen & " " & i + 1)
+            SystemMenu.AppendMenuItem(popMen, Tools.SystemMenu.Flags.MF_STRING, SysMenSubItems(i), My.Resources.strScreen & " " & i + 1)
         Next
 
-        SysMenu.InsertMenuItem(SysMenu.SystemMenuHandle, 0, Tools.SystemMenu.Flags.MF_POPUP Or Tools.SystemMenu.Flags.MF_BYPOSITION, popMen, My.Resources.strSendTo)
-        SysMenu.InsertMenuItem(SysMenu.SystemMenuHandle, 1, Tools.SystemMenu.Flags.MF_BYPOSITION Or Tools.SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, Nothing)
+        SystemMenu.InsertMenuItem(SystemMenu.SystemMenuHandle, 0, Tools.SystemMenu.Flags.MF_POPUP Or Tools.SystemMenu.Flags.MF_BYPOSITION, popMen, My.Resources.strSendTo)
+        SystemMenu.InsertMenuItem(SystemMenu.SystemMenuHandle, 1, Tools.SystemMenu.Flags.MF_BYPOSITION Or Tools.SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, Nothing)
     End Sub
 #End Region
 End Class

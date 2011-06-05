@@ -18,7 +18,7 @@ Namespace Connection
                 Try
                     Me.Control = New AxICAClient
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaControlFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaControlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -75,7 +75,7 @@ Namespace Connection
 
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaSetPropsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaSetPropsFailed & vbNewLine & ex.Message, True)
                     Return False
                 End Try
             End Function
@@ -88,7 +88,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaConnectionFailed & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaConnectionFailed & vbNewLine & ex.Message)
                     Return False
                 End Try
             End Function
@@ -134,7 +134,7 @@ Namespace Connection
                         ICA.Domain = _dom
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaSetCredentialsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaSetCredentialsFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -159,7 +159,7 @@ Namespace Connection
                             ICA.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, RDP.Resolutions.Items(Int(Info.Resolution)).Width, RDP.Resolutions.Items(Int(Info.Resolution)).Height, 0)
                     End Select
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaSetResolutionFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaSetResolutionFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -200,7 +200,7 @@ Namespace Connection
                     AddHandler ICA.OnConnectFailed, AddressOf ICAEvent_OnConnectFailed
                     AddHandler ICA.OnDisconnect, AddressOf ICAEvent_OnDisconnect
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaSetEventHandlersFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strIcaSetEventHandlersFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

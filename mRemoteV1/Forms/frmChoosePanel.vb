@@ -27,8 +27,8 @@ Public Class frmChoosePanel
     Private Sub AddAvailablePanels()
         cbPanels.Items.Clear()
 
-        For i As Integer = 0 To wL.Count - 1
-            cbPanels.Items.Add(wL(i).Text.Replace("&&", "&"))
+        For i As Integer = 0 To WindowList.Count - 1
+            cbPanels.Items.Add(WindowList(i).Text.Replace("&&", "&"))
         Next
 
         If cbPanels.Items.Count > 0 Then

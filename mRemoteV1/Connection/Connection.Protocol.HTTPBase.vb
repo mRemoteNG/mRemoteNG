@@ -26,7 +26,7 @@ Namespace Connection
 
                     NewExtended()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strHttpConnectionFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strHttpConnectionFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -64,7 +64,7 @@ Namespace Connection
 
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strHttpSetPropsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strHttpSetPropsFailed & vbNewLine & ex.Message, True)
                     Return False
                 End Try
             End Function
@@ -107,7 +107,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strHttpConnectFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strHttpConnectFailed & vbNewLine & ex.Message, True)
                     Return False
                 End Try
             End Function
@@ -163,7 +163,7 @@ Namespace Connection
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strHttpDocumentTileChangeFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strHttpDocumentTileChangeFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

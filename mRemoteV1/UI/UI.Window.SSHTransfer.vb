@@ -369,12 +369,12 @@ Namespace UI
 #Region "Private Methods"
             Private Sub StartTransfer(ByVal Protocol As SSHTransferProtocol)
                 If AllFieldsSet() = False Then
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPleaseFillAllFields)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPleaseFillAllFields)
                     Exit Sub
                 End If
 
                 If File.Exists(Me.txtLocalFile.Text) = False Then
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strLocalFileDoesNotExist)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strLocalFileDoesNotExist)
                     Exit Sub
                 End If
 
@@ -399,7 +399,7 @@ Namespace UI
                     t.IsBackground = True
                     t.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHTransferFailed & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHTransferFailed & vbNewLine & ex.Message)
                     Me.sshT.Close()
                 End Try
             End Sub
@@ -412,7 +412,7 @@ Namespace UI
                     DisableButtons()
                     Me.sshT.Put(LocalFile, RemoteFile)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHStartTransferBG & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHStartTransferBG & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -491,7 +491,7 @@ Namespace UI
                     EnableButtons()
                     SetStatus()
 
-                    mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strSSHTransferFailed)
+                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strSSHTransferFailed)
 
                     If Me.sshT IsNot Nothing Then
                         Me.sshT.Close()
@@ -499,7 +499,7 @@ Namespace UI
                         Me.sshT.Close()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHTransferEndFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHTransferEndFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

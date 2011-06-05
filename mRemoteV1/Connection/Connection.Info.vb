@@ -1499,7 +1499,7 @@ Namespace Connection
                         Me._Port = Connection.Protocol.IntApp.Defaults.Port
                 End Select
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionSetDefaultPortFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionSetDefaultPortFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 #End Region

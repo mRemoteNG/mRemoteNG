@@ -88,7 +88,7 @@ Namespace Config
                         End If
 
                         If My.Settings.ShowSystemTrayIcon Then
-                            App.Runtime.SysTrayIcon = New Tools.Controls.SysTrayIcon()
+                            App.Runtime.NotificationAreaIcon = New Tools.Controls.NotificationAreaIcon()
                         End If
 
                         If My.Settings.AutoSaveEveryMinutes > 0 Then
@@ -223,7 +223,7 @@ Namespace Config
                         extA.TryIntegrate = xEl.Attributes("TryToIntegrate").Value
                     End If
 
-                    ExtApps.Add(extA)
+                    ExternalTools.Add(extA)
                 Next
 
                 MainForm.SwitchToolbarText(My.Settings.ExtAppsTBShowText)

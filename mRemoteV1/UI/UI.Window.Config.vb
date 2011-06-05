@@ -390,7 +390,7 @@ Namespace UI
                     Me.ShowHideGridItems()
                     Me.SetHostStatus(Obj)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridObjectFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridObjectFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -431,7 +431,7 @@ Namespace UI
                     tsDefault.Items(tsDefault.Items.Count - 1).Visible = False
                     ToolStripManager.Merge(tsCustom, tsDefault)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigUiLoadFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigUiLoadFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -498,7 +498,7 @@ Namespace UI
                     Me.ShowHideGridItems()
                     App.Runtime.SaveConnectionsBG()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridValueFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridValueFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1123,7 +1123,7 @@ Namespace UI
 
                     Me.pGrid.Refresh()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridHideItemsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridHideItemsFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1205,7 +1205,7 @@ Namespace UI
                         Me.cMenIcons.Show(mPos)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridButtonIconClickFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridButtonIconClickFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1221,7 +1221,7 @@ Namespace UI
                         App.Runtime.SaveConnectionsBG()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridMenuClickFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridMenuClickFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -1282,7 +1282,7 @@ Namespace UI
                     pThread.IsBackground = True
                     pThread.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridSetHostStatusFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridSetHostStatusFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

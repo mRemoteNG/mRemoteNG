@@ -54,7 +54,7 @@ Namespace Tools
 
                 Return myIcon
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" & vbNewLine & ex.Message, True)
                 Return Nothing
             End Try
         End Function
@@ -98,9 +98,9 @@ Namespace Tools
 
                 RaiseEvent SQLUpdateCheckFinished(False)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "IsSQLUpdateAvailable failed (Tools.Misc)" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "IsSQLUpdateAvailable failed (Tools.Misc)" & vbNewLine & ex.Message, True)
             End Try
-            
+
             Return False
         End Function
 
@@ -174,7 +174,7 @@ Namespace Tools
             Next
 
             Dim ex As New Exception(String.Format("Can't convert {0} to {1}", value, t.ToString))
-            mC.AddMessage(Messages.MessageClass.ErrorMsg, "StringToEnum failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StringToEnum failed" & vbNewLine & ex.Message, True)
             Throw ex
         End Function
 
@@ -193,7 +193,7 @@ Namespace Tools
 
                 Return ScreenToBitmap
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Taking Screenshot failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Taking Screenshot failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return Nothing
@@ -315,7 +315,7 @@ Namespace Tools
                         SetWinFullScreen(targetForm.Handle)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Entering Fullscreen failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Entering Fullscreen failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -332,7 +332,7 @@ Namespace Tools
                     targetForm.Bounds = bounds
                     FullscreenActive = False
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Exiting Fullscreen failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Exiting Fullscreen failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -351,7 +351,7 @@ Namespace Tools
                     Dim curScreen As Screen = Screen.FromHandle(targetForm.Handle)
                     SetWindowPos(hwnd, HWND_TOP, curScreen.Bounds.Left, curScreen.Bounds.Top, curScreen.Bounds.Right, curScreen.Bounds.Bottom, SWP_SHOWWINDOW)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SetWindowPos failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SetWindowPos failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class
@@ -439,7 +439,7 @@ Namespace Tools
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new Args failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new Args failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class

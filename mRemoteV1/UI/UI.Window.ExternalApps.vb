@@ -302,7 +302,7 @@ Namespace UI
                 Try
                     lvApps.Items.Clear()
 
-                    For Each extA As Tools.ExternalApp In ExtApps
+                    For Each extA As Tools.ExternalApp In ExternalTools
                         Dim lvItem As New ListViewItem
                         lvItem.Text = extA.DisplayName
                         lvItem.SubItems.Add(extA.FileName)
@@ -322,7 +322,7 @@ Namespace UI
 
                     RefreshToolbar()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "LoadApps failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LoadApps failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -337,7 +337,7 @@ Namespace UI
                         _SelApp = SelApp
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetAppProperties failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "GetAppProperties failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -353,14 +353,14 @@ Namespace UI
                         LoadApps()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SetAppProperties failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SetAppProperties failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub AddNewApp()
                 Try
                     Dim nExtA As New Tools.ExternalApp("New Application")
-                    ExtApps.Add(nExtA)
+                    ExternalTools.Add(nExtA)
                     LoadApps()
                     lvApps.SelectedItems.Clear()
 
@@ -372,7 +372,7 @@ Namespace UI
                         End If
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddNewApp failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNewApp failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -390,7 +390,7 @@ Namespace UI
 
                     If MsgBox(Prompt, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                         For Each lvItem As ListViewItem In lvApps.SelectedItems
-                            ExtApps.Remove(lvItem.Tag)
+                            ExternalTools.Remove(lvItem.Tag)
                             lvItem.Tag = Nothing
                             lvItem.Remove()
                         Next
@@ -398,7 +398,7 @@ Namespace UI
                         RefreshToolbar()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "RemoveApps failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RemoveApps failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -408,7 +408,7 @@ Namespace UI
                         TryCast(lvItem.Tag, mRemoteNG.Tools.ExternalApp).Start()
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "StartApp failed (UI.Window.ExternalApps" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "StartApp failed (UI.Window.ExternalApps" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 

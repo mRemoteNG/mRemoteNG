@@ -180,7 +180,7 @@ Namespace UI
 
                     Me.Show(frmMain.pnlDock)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddScreenshot (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddScreenshot (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -232,7 +232,7 @@ Namespace UI
 
                     nForm.ShowDialog()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "OpenScreenshot (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "OpenScreenshot (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -240,7 +240,7 @@ Namespace UI
                 Try
                     sender.Parent.Dispose()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "btnCloseScreenshot_Click (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "btnCloseScreenshot_Click (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -279,7 +279,7 @@ Namespace UI
                         Next
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SaveAllImages (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveAllImages (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -291,7 +291,7 @@ Namespace UI
                 Try
                     Clipboard.SetImage(TryCast(cMenScreenshot.Tag, PictureBox).Image)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CopyImageToClipboard (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CopyImageToClipboard (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -314,7 +314,7 @@ Namespace UI
                         End Select
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SaveSingleImage (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveSingleImage (UI.Window.ScreenshotManager) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
