@@ -1659,10 +1659,6 @@ Public Class frmOptions
     Private Sub Options_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         ApplyLanguage()
 
-        If App.Editions.Spanlink.Enabled Then
-            ApplySpanlinkEdition()
-        End If
-
         ' Hide the tabs
         tcTabControl.Appearance = System.Windows.Forms.TabAppearance.FlatButtons
         tcTabControl.Padding = New Point(0, 0)
@@ -1671,31 +1667,6 @@ Public Class frmOptions
         ' Switch to the _initialTab
         tcTabControl.SelectedIndex = _initialTab
         lvPages.Items(_initialTab).Selected = True
-    End Sub
-
-    Private Sub ApplySpanlinkEdition()
-        chkSaveConsOnExit.Enabled = False
-        chkSaveConsOnExit.Visible = False
-        chkCheckForUpdatesOnStartup.Enabled = False
-        chkCheckForUpdatesOnStartup.Visible = False
-        chkReconnectOnStart.Enabled = False
-        chkReconnectOnStart.Visible = False
-        chkShowFullConnectionsFilePathInTitle.Enabled = False
-        chkShowFullConnectionsFilePathInTitle.Visible = False
-        chkShowLogonInfoOnTabs.Enabled = False
-        chkShowLogonInfoOnTabs.Visible = False
-        chkHostnameLikeDisplayName.Enabled = False
-        chkHostnameLikeDisplayName.Visible = False
-        pnlAutoSave.Enabled = False
-        pnlAutoSave.Visible = False
-        pnlDefaultCredentials.Enabled = False
-        pnlDefaultCredentials.Visible = False
-        pnlProxy.Enabled = False
-        pnlProxy.Visible = False
-        chkEncryptCompleteFile.Enabled = False
-        chkEncryptCompleteFile.Visible = False
-        chkWriteLogFile.Enabled = False
-        chkWriteLogFile.Visible = False
     End Sub
 
     Private Sub ApplyLanguage()

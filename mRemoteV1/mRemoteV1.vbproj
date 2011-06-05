@@ -169,7 +169,6 @@
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
     <Compile Include="App\App.Announcement.vb" />
-    <Compile Include="App\App.Editions.vb" />
     <Compile Include="App\App.Info.vb" />
     <Compile Include="App\App.Native.vb" />
     <Compile Include="App\App.Runtime.vb" />

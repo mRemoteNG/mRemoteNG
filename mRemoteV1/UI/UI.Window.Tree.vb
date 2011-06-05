@@ -461,38 +461,6 @@ Namespace UI
 #Region "Form Stuff"
             Private Sub Tree_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
                 ApplyLanguage()
-
-                If App.Editions.Spanlink.Enabled = True Then
-                    ApplySpanlinkEdition()
-                End If
-            End Sub
-
-            Private Sub ApplySpanlinkEdition()
-                tvConnections.LabelEdit = False
-
-                cMenTreeSep1.Visible = False
-                cMenTreeAddConnection.ShortcutKeys = Keys.None
-                cMenTreeAddConnection.Visible = False
-                cMenTreeAddFolder.ShortcutKeys = Keys.None
-                cMenTreeAddFolder.Visible = False
-                cMenTreeConnectWithOptionsDontConnectToConsoleSession.ShortcutKeys = Keys.None
-                cMenTreeConnectWithOptionsDontConnectToConsoleSession.Visible = True
-                cMenTreeToolsImportExport.ShortcutKeys = Keys.None
-                cMenTreeToolsImportExport.Visible = False
-                cMenTreeToolsSort.ShortcutKeys = Keys.None
-                cMenTreeToolsSort.Visible = False
-                cMenTreeDuplicate.ShortcutKeys = Keys.None
-                cMenTreeDuplicate.Visible = False
-                cMenTreeRename.ShortcutKeys = Keys.None
-                cMenTreeRename.Visible = False
-                cMenTreeDelete.ShortcutKeys = Keys.None
-                cMenTreeDelete.Visible = False
-                cMenTreeMoveUp.ShortcutKeys = Keys.None
-                cMenTreeMoveUp.Visible = False
-                cMenTreeMoveDown.ShortcutKeys = Keys.None
-                cMenTreeMoveDown.Visible = False
-                cMenTreeSep3.Visible = False
-                cMenTreeSep4.Visible = False
             End Sub
 
             Private Sub ApplyLanguage()
@@ -776,10 +744,6 @@ Namespace UI
 
 #Region "Drag and Drop"
             Private Sub tvConnections_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles tvConnections.DragDrop
-                If App.Editions.Spanlink.Enabled = True Then
-                    Exit Sub
-                End If
-
                 Try
                     'Check that there is a TreeNode being dragged
                     If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) = False Then Exit Sub
@@ -844,10 +808,6 @@ Namespace UI
             End Sub
 
             Private Sub tvConnections_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles tvConnections.DragEnter
-                If App.Editions.Spanlink.Enabled = True Then
-                    Exit Sub
-                End If
-
                 Try
                     'See if there is a TreeNode being dragged
                     If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) Then
@@ -863,10 +823,6 @@ Namespace UI
             End Sub
 
             Private Sub tvConnections_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles tvConnections.DragOver
-                If App.Editions.Spanlink.Enabled = True Then
-                    Exit Sub
-                End If
-
                 Try
                     'Check that there is a TreeNode being dragged 
                     If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) = False Then Exit Sub
@@ -909,10 +865,6 @@ Namespace UI
             End Sub
 
             Private Sub tvConnections_ItemDrag(ByVal sender As Object, ByVal e As System.Windows.Forms.ItemDragEventArgs) Handles tvConnections.ItemDrag
-                If App.Editions.Spanlink.Enabled = True Then
-                    Exit Sub
-                End If
-
                 Try
                     'Set the drag node and initiate the DragDrop 
                     DoDragDrop(e.Item, DragDropEffects.Move)

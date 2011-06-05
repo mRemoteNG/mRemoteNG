@@ -103,13 +103,6 @@ Namespace Messages
                     App.Runtime.log.Info(nMsg.MsgText)
                 End If
 
-                If App.Editions.Spanlink.Enabled Then
-                    App.Runtime.Report(Tools.Misc.LeadingZero(Now.Year) & "-" & Tools.Misc.LeadingZero(Now.Month) & "-" & _
-                                       Tools.Misc.LeadingZero(Now.Day) & " " & Tools.Misc.LeadingZero(Now.Hour) & ":" & _
-                                       Tools.Misc.LeadingZero(Now.Minute) & ":" & Tools.Misc.LeadingZero(Now.Second) & _
-                                       " " & nMsg.MsgText)
-                End If
-
                 Exit Sub
             End If
 

@@ -290,7 +290,7 @@ Namespace App
             End Sub
 
             Public Shared Sub AnnouncementCheck()
-                If My.Settings.CheckForUpdatesAsked And My.Settings.CheckForUpdatesOnStartup And App.Editions.Spanlink.Enabled = False Then
+                If My.Settings.CheckForUpdatesAsked And My.Settings.CheckForUpdatesOnStartup Then
                     If My.Settings.CheckForUpdatesLastCheck < Date.Now.Subtract(TimeSpan.FromDays(My.Settings.CheckForUpdatesFrequencyDays)) Then
                         frmMain.tmrShowUpdate.Enabled = True
                         Windows.AnnouncementForm.CheckForAnnouncement()
@@ -431,13 +431,6 @@ Namespace App
 
                     If My.Settings.SaveConsOnExit Then
                         SaveConnections()
-                    End If
-
-                    If Editions.Spanlink.Enabled Then
-                        If SaveReport() Then
-                            ' ToDo: Change Report.log location
-                            File.Delete(My.Application.Info.DirectoryPath & "\Report.log")
-                        End If
                     End If
 
                     sS.Save()
@@ -792,9 +785,7 @@ Namespace App
                     End If
 
                     Try
-                        If App.Editions.Spanlink.Enabled = False Then
-                            File.Copy(conL.ConnectionFileName, conL.ConnectionFileName & "_BAK", True)
-                        End If
+                        File.Copy(conL.ConnectionFileName, conL.ConnectionFileName & "_BAK", True)
                     Catch ex As Exception
                         mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strConnectionsFileBackupFailed & vbNewLine & vbNewLine & ex.Message)
                     End Try
@@ -1486,11 +1477,7 @@ Namespace App
 
                 mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnenctionCloseEvent, True)
 
-                If App.Editions.Spanlink.Enabled Then
-                    mC.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Resources.strConnenctionClosedByUserDetail, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString, My.User.Name, Prot.InterfaceControl.Info.Description, Prot.InterfaceControl.Info.UserField))
-                Else
-                    mC.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Resources.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString, My.User.Name))
-                End If
+                mC.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Resources.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString, My.User.Name))
 
                 Prot.InterfaceControl.Info.OpenConnections.Remove(Prot)
 
@@ -1624,15 +1611,11 @@ Namespace App
             Try
                 Dim txt As String = My.Application.Info.ProductName
 
-                If App.Editions.Spanlink.Enabled Then
-                    txt &= " | Spanlink Communications"
-                Else
-                    If ConnectionFileName <> "" And ConnectionsFileLoaded = True Then
-                        If My.Settings.ShowCompleteConsPathInTitle Then
-                            txt &= " - " & ConnectionFileName
-                        Else
-                            txt &= " - " & ConnectionFileName.Substring(ConnectionFileName.LastIndexOf("\") + 1)
-                        End If
+                If ConnectionFileName <> "" And ConnectionsFileLoaded = True Then
+                    If My.Settings.ShowCompleteConsPathInTitle Then
+                        txt &= " - " & ConnectionFileName
+                    Else
+                        txt &= " - " & ConnectionFileName.Substring(ConnectionFileName.LastIndexOf("\") + 1)
                     End If
                 End If
 

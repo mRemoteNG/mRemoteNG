@@ -20,9 +20,6 @@ Public Class frmMain
 
 #Region "Startup & Shutdown"
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'insert enable edition code here
-        App.Editions.Spanlink.Enabled = False
-
         Startup.CreateLogger()
 
         ' Create gui config load and save objects
@@ -53,9 +50,6 @@ Public Class frmMain
         Windows.treePanel.Focus()
 
         Tree.Node.TreeView = Windows.treeForm.tvConnections
-
-        'insert new edition code here
-        Dim edSpanlink As New App.Editions.Spanlink
 
         'LoadCredentials()
         LoadConnections()

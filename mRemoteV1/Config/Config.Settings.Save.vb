@@ -61,12 +61,7 @@ Namespace Config
                         End If
                         My.Settings.QuickyTBVisible = .tsQuickConnect.Visible
 
-                        If App.Editions.Spanlink.Enabled = False Then
-                            My.Settings.ConDefaultPassword = Security.Crypt.Encrypt(My.Settings.ConDefaultPassword, App.Info.General.EncryptionKey)
-                        Else
-                            My.Settings.LoadConsFromCustomLocation = False
-                            My.Settings.CustomConsPath = ""
-                        End If
+                        My.Settings.ConDefaultPassword = Security.Crypt.Encrypt(My.Settings.ConDefaultPassword, App.Info.General.EncryptionKey)
 
                         My.Settings.Save()
                     End With

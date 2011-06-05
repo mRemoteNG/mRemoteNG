@@ -264,11 +264,6 @@ Namespace UI
 #If PORTABLE Then
                 lblEdition.Text = My.Resources.strLabelPortableEdition
                 lblEdition.Visible = True
-#Else
-                If App.Editions.Spanlink.Enabled Then
-                    lblEdition.Text = "Spanlink Communications"
-                    lblEdition.Visible = True
-                End If
 #End If
             End Sub
 
