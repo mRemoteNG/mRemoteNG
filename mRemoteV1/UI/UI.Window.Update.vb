@@ -217,8 +217,8 @@ Namespace UI
             Public Sub CheckForUpdate()
                 Try
                     uT = New Thread(AddressOf CheckForUpdateBG)
+                    uT.SetApartmentState(ApartmentState.STA)
                     uT.IsBackground = True
-                    'uT.SetApartmentState(ApartmentState.STA)
 
                     If Me.IsUpdateCheckHandlerDeclared = False Then
                         AddHandler UpdateCheckCompleted, AddressOf UpdateCheckComplete

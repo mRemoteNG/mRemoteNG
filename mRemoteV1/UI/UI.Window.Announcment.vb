@@ -67,8 +67,8 @@ Namespace UI
             Public Sub CheckForAnnouncement()
                 Try
                     uT = New Thread(AddressOf CheckForAnnouncementBG)
+                    uT.SetApartmentState(ApartmentState.STA)
                     uT.IsBackground = True
-                    'uT.SetApartmentState(ApartmentState.STA)
 
                     If Me.IsAnnouncementCheckHandlerDeclared = False Then
                         AddHandler AnnouncementCheckCompleted, AddressOf AnnouncementCheckComplete

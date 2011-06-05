@@ -395,6 +395,7 @@ Namespace Tools
 
             Public Sub StartScan()
                 sThread = New Thread(AddressOf StartScanBG)
+                sThread.SetApartmentState(Threading.ApartmentState.STA)
                 sThread.IsBackground = True
                 sThread.Start()
             End Sub

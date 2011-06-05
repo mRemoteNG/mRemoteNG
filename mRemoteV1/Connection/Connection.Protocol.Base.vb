@@ -98,6 +98,7 @@ Namespace Connection
 
             Public Overridable Sub Close()
                 Dim t As New Thread(AddressOf CloseBG)
+                t.SetApartmentState(Threading.ApartmentState.STA)
                 t.IsBackground = True
                 t.Start()
             End Sub

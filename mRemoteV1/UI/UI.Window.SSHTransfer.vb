@@ -395,9 +395,8 @@ Namespace UI
                     RemoteFile = Me.txtRemoteFile.Text
 
                     Dim t As New Thread(AddressOf StartTransferBG)
-
-                    t.IsBackground = True
                     t.SetApartmentState(ApartmentState.STA)
+                    t.IsBackground = True
                     t.Start()
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHTransferFailed & vbNewLine & ex.Message)

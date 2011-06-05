@@ -355,8 +355,8 @@ Namespace UI
                     tDomain = Domain
 
                     threadSessions = New Threading.Thread(AddressOf GetSessionsBG)
-                    threadSessions.IsBackground = True
                     threadSessions.SetApartmentState(Threading.ApartmentState.STA)
+                    threadSessions.IsBackground = True
                     threadSessions.Start()
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetSessions (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
@@ -398,8 +398,8 @@ Namespace UI
                     tSessionID = SessionID
 
                     threadSessions = New Threading.Thread(AddressOf KillSessionBG)
-                    threadSessions.IsBackground = True
                     threadSessions.SetApartmentState(Threading.ApartmentState.STA)
+                    threadSessions.IsBackground = True
                     threadSessions.Start()
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, "KillSession (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)

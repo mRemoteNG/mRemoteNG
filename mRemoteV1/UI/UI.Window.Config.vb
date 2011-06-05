@@ -1278,6 +1278,7 @@ Namespace UI
                     Me.btnHostStatus.Tag = "checking"
                     HostName = TryCast(ConnectionInfo, mRemoteNG.Connection.Info).Hostname
                     pThread = New Threading.Thread(AddressOf CheckHostAlive)
+                    pThread.SetApartmentState(Threading.ApartmentState.STA)
                     pThread.IsBackground = True
                     pThread.Start()
                 Catch ex As Exception

@@ -62,6 +62,7 @@ Namespace Tools
         Public Shared Event SQLUpdateCheckFinished(ByVal UpdateAvailable As Boolean)
         Public Shared Sub IsSQLUpdateAvailableBG()
             Dim t As New Threading.Thread(AddressOf IsSQLUpdateAvailable)
+            t.SetApartmentState(Threading.ApartmentState.STA)
             t.Start()
         End Sub
 

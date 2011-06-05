@@ -711,6 +711,7 @@ Namespace App
             _LoadUpdate = True
 
             Dim t As New Thread(AddressOf LoadConnectionsBGd)
+            t.SetApartmentState(Threading.ApartmentState.STA)
             t.Start()
         End Sub
 
@@ -1081,6 +1082,7 @@ Namespace App
             _SaveUpdate = True
 
             Dim t As New Thread(AddressOf SaveConnectionsBGd)
+            t.SetApartmentState(Threading.ApartmentState.STA)
             t.Start()
         End Sub
 
