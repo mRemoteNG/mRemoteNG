@@ -249,6 +249,8 @@ Namespace App
             Public Shared Sub CreateLogger()
                 log4net.Config.XmlConfigurator.Configure(New FileInfo("mRemoteNG.exe.config"))
                 log = log4net.LogManager.GetLogger("mRemoteNG.Log")
+                log.InfoFormat("{0} started.", My.Application.Info.ProductName)
+                log.InfoFormat("Command Line: {0}", Environment.GetCommandLineArgs)
                 Try
                     Dim servicePack As Integer
                     For Each managementObject As ManagementObject In New ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem").Get()
