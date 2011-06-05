@@ -94,7 +94,7 @@ Namespace Security
                 impersonatedUser.Undo() ' Stop impersonating the user.
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Stopping Impersonation failed" & vbNewLine & ex.Message, True)
-                Throw ex
+                Throw
             Finally
 
                 If Not System.IntPtr.op_Equality(tokenHandle, IntPtr.Zero) Then CloseHandle(tokenHandle)

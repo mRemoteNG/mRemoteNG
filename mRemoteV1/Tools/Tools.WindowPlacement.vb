@@ -100,7 +100,7 @@ Namespace Tools
                 GetWindowPlacement(_form.Handle, windowPlacement)
                 Return windowPlacement
             Catch ex As Exception
-                Throw ex
+                Throw
             End Try
         End Function
 
@@ -112,7 +112,7 @@ Namespace Tools
             Try
                 Return SetWindowPlacement(_form.Handle, windowPlacement)
             Catch ex As Exception
-                Throw ex
+                Throw
             End Try
         End Function
 #End Region
