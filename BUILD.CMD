@@ -1,6 +1,6 @@
 @echo off
 
-SET VERSIONTAG=RC4
+SET VERSIONTAG=RC5
 
 SET VCVARSALL="%ProgramFiles(x86)%\Microsoft Visual Studio 9.0\VC\vcvarsall.bat"
 SET DEVENV="devenv.exe"
