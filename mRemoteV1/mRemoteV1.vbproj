@@ -617,8 +617,6 @@
     <Content Include="CHANGELOG.TXT">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="My Project\DataSources\mRemote.Language.Base.datasource" />
-    <None Include="My Project\DataSources\mRemote.Language.EN.datasource" />
     <None Include="Notes\PropertyList.csv" />
     <None Include="Resources\Images\PuttyConfig.png" />
     <None Include="Resources\Images\Play_Quick.png" />
@@ -953,6 +951,9 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="My Project\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
