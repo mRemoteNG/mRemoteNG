@@ -274,6 +274,7 @@ Partial Class frmMain
         Me.mMenFileImportExport.Name = "mMenFileImportExport"
         Me.mMenFileImportExport.Size = New System.Drawing.Size(334, 22)
         Me.mMenFileImportExport.Text = "Import/Export Folder"
+        Me.mMenFileImportExport.Visible = False
         '
         'ImportFromXMLFileToolStripMenuItem
         '
@@ -314,6 +315,7 @@ Partial Class frmMain
         '
         Me.mMenFileSep3.Name = "mMenFileSep3"
         Me.mMenFileSep3.Size = New System.Drawing.Size(331, 6)
+        Me.mMenFileSep3.Visible = False
         '
         'mMenFileDelete
         '
