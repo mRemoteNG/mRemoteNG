@@ -14,6 +14,10 @@ Imports Timer = System.Timers.Timer
 
 Namespace App
     Public Class Runtime
+        Private Sub New()
+            ' Fix Warning 292 CA1053 : Microsoft.Design : Because type 'Native' contains only 'static' ('Shared' in Visual Basic) members, add a default private constructor to prevent the compiler from adding a default public constructor.
+        End Sub
+
 #Region "Public Properties"
         'Private Shared _settingsLoad As Config.Settings.Load
         'Public Shared Property SettingsLoad() As Load
@@ -765,10 +769,10 @@ Namespace App
 #End Region
 
 #Region "Panels"
-        Public Shared Function AddPanel(Optional ByVal Title As String = "", Optional ByVal NoTabber As Boolean = False) As Form
+        Public Shared Function AddPanel(Optional ByVal title As String = "", Optional ByVal noTabber As Boolean = False) As Form
             Try
-                If Title = "" Then
-                    Title = My.Resources.strNewPanel
+                If title = "" Then
+                    title = My.Resources.strNewPanel
                 End If
 
                 Dim pnlcForm As New DockContent
@@ -796,11 +800,11 @@ Namespace App
 
                 pnlcForm.TabPageContextMenuStrip = cMen
 
-                TryCast(cForm, UI.Window.Connection).SetFormText(Title.Replace("&", "&&"))
+                TryCast(cForm, UI.Window.Connection).SetFormText(title.Replace("&", "&&"))
 
                 pnlcForm.Show(frmMain.pnlDock, DockState.Document)
 
-                If NoTabber Then
+                If noTabber Then
                     TryCast(cForm, UI.Window.Connection).TabController.Dispose()
                 Else
                     WindowList.Add(cForm)

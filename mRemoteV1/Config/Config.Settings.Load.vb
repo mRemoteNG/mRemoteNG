@@ -226,7 +226,7 @@ Namespace Config
                     ExternalTools.Add(extA)
                 Next
 
-                MainForm.SwitchToolbarText(My.Settings.ExtAppsTBShowText)
+                MainForm.SwitchToolBarText(My.Settings.ExtAppsTBShowText)
 
                 xDom = Nothing
 

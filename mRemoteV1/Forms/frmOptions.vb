@@ -1649,7 +1649,7 @@ Public Class frmOptions
 #End Region
 
 #Region "Public Methods"
-    Public Sub New(ByVal Panel As DockContent)
+    Public Sub New(ByVal panel As DockContent)
         Me.InitializeComponent()
         App.Runtime.FontOverride(Me)
     End Sub
@@ -1747,7 +1747,7 @@ Public Class frmOptions
         lblLanguageRestartRequired.Text = String.Format(My.Resources.strLanguageRestartRequired, My.Application.Info.ProductName)
     End Sub
 
-    Public Shadows Sub Show(ByVal DockPanel As DockPanel, Optional ByVal initialTab As Integer = 0)
+    Public Shadows Sub Show(ByVal dockPanel As DockPanel, Optional ByVal initialTab As Integer = 0)
         Windows.optionsForm.LoadOptions()
 
         _initialTab = initialTab
@@ -1823,7 +1823,7 @@ Public Class frmOptions
             Me.txtCustomPuttyPath.Text = oDlg.FileName
         End If
 
-        oDlg = Nothing
+        oDlg.Dispose()
     End Sub
 
     Private Sub btnBrowseXulRunnerPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseXulRunnerPath.Click
@@ -1834,7 +1834,7 @@ Public Class frmOptions
             Me.txtXULrunnerPath.Text = oDlg.SelectedPath
         End If
 
-        oDlg = Nothing
+        oDlg.Dispose()
     End Sub
 
     Private Sub chkCheckForUpdatesOnStartup_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkCheckForUpdatesOnStartup.CheckedChanged

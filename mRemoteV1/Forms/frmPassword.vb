@@ -29,12 +29,12 @@
 
 
 
-    Public Sub New(Optional ByVal UserAndPass As Boolean = False, Optional ByVal Title As String = "Security")
+    Public Sub New(Optional ByVal UserAndPass As Boolean = False, Optional ByVal title As String = "Security")
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Me.Text = Title
+        Me.Text = title
 
         If UserAndPass = True Then
             _UserAndPass = True

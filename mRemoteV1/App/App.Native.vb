@@ -2,6 +2,10 @@
 
 Namespace App
     Public Class Native
+        Private Sub New()
+            ' Fix Warning 292 CA1053 : Microsoft.Design : Because type 'Native' contains only 'static' ('Shared' in Visual Basic) members, add a default private constructor to prevent the compiler from adding a default public constructor.
+        End Sub
+
 #Region "Dll Imports"
         <DllImport("user32.dll", EntryPoint:="GetWindowThreadProcessId", SetLastError:=True, CharSet:=CharSet.Unicode, ExactSpelling:=True, CallingConvention:=CallingConvention.StdCall)> _
         Public Shared Function GetWindowThreadProcessId(ByVal hWnd As Long, ByVal lpdwProcessId As Long) As Long

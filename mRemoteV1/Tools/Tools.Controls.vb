@@ -149,7 +149,7 @@ Namespace Tools
 
             Private Sub ShowForm()
                 frmMain.Show()
-                frmMain.WindowState = frmMain.prevWindowsState
+                frmMain.WindowState = frmMain.PreviousWindowState
 
                 If My.Settings.ShowSystemTrayIcon = False Then
                     App.Runtime.NotificationAreaIcon.Dispose()
@@ -159,7 +159,7 @@ Namespace Tools
 
             Private Sub HideForm()
                 frmMain.Hide()
-                frmMain.prevWindowsState = frmMain.WindowState
+                frmMain.PreviousWindowState = frmMain.WindowState
             End Sub
 
             Private Sub ConMenItem_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)

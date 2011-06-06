@@ -1,11 +1,20 @@
 Imports mRemoteNG.App.Runtime
 Imports System.Reflection
+Imports System.Runtime.InteropServices
 Imports Crownwood
 Imports mRemoteNG.App.Native
 Imports PSTaskDialog
 
 Public Class frmMain
-    Public prevWindowsState As FormWindowState
+    Private _previousWindowState As FormWindowState
+    Public Property PreviousWindowState As FormWindowState
+        Get
+            Return _previousWindowState
+        End Get
+        Set(value As FormWindowState)
+            _previousWindowState = value
+        End Set
+    End Property
     Public Shared Event clipboardchange()
     Private fpChainedWindowHandle As IntPtr
 
@@ -59,7 +68,7 @@ Public Class frmMain
 
         If Not My.Settings.CheckForUpdatesAsked Then
             Dim CommandButtons() As String = {My.Resources.strAskUpdatesCommandRecommended, My.Resources.strAskUpdatesCommandCustom, My.Resources.strAskUpdatesCommandAskLater}
-            Dim Result As DialogResult = cTaskDialog.ShowTaskDialogBox(Me, My.Application.Info.ProductName, My.Resources.strAskUpdatesMainInstruction, String.Format(My.Resources.strAskUpdatesContent, My.Application.Info.ProductName), "", "", "", "", String.Join("|", CommandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question)
+            cTaskDialog.ShowTaskDialogBox(Me, My.Application.Info.ProductName, My.Resources.strAskUpdatesMainInstruction, String.Format(My.Resources.strAskUpdatesContent, My.Application.Info.ProductName), "", "", "", "", String.Join("|", CommandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question)
             If cTaskDialog.CommandButtonResult = 0 Or cTaskDialog.CommandButtonResult = 1 Then
                 My.Settings.CheckForUpdatesAsked = True
             End If
@@ -195,7 +204,7 @@ Public Class frmMain
 
 #Region "Ext Apps Toolbar"
     Private Sub cMenToolbarShowText_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenToolbarShowText.Click
-        SwitchToolbarText(Not cMenToolbarShowText.Checked)
+        SwitchToolBarText(Not cMenToolbarShowText.Checked)
     End Sub
 
     Public Sub AddExtAppsToToolbar()
@@ -240,9 +249,9 @@ Public Class frmMain
         End If
     End Sub
 
-    Public Sub SwitchToolbarText(ByVal Show As Boolean)
+    Public Sub SwitchToolBarText(ByVal show As Boolean)
         For Each tItem As ToolStripButton In tsExtAppsToolbar.Items
-            If Show = True Then
+            If show = True Then
                 tItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
             Else
                 If tItem.Image IsNot Nothing Then
@@ -253,7 +262,7 @@ Public Class frmMain
             End If
         Next
 
-        cMenToolbarShowText.Checked = Show
+        cMenToolbarShowText.Checked = show
     End Sub
 #End Region
 
@@ -662,6 +671,8 @@ Public Class frmMain
                 End If
 
                 AddHandler tMenItem.MouseDown, AddressOf ConMenItem_MouseDown
+
+                tMenItem.Dispose()
             Next
         Catch ex As Exception
             MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
@@ -687,7 +698,7 @@ Public Class frmMain
                 Me.Hide()
             End If
         Else
-            prevWindowsState = Me.WindowState
+            PreviousWindowState = Me.WindowState
         End If
     End Sub
 
@@ -762,7 +773,7 @@ Public Class frmMain
     End Sub
 
     Private SysMenSubItems(50) As Integer
-    Private Sub ResetSysMenuItems()
+    Private Shared Sub ResetSysMenuItems()
         SystemMenu.Reset()
     End Sub
 

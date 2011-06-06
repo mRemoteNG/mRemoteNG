@@ -8,10 +8,10 @@ Namespace App
         Private wPr As WebProxy
 #End Region
 
-        Private _curAI As Info
-        Public ReadOnly Property curAI() As Info
+        Private _currentAnnouncementInfo As Info
+        Public ReadOnly Property CurrentAnnouncementInfo() As Info
             Get
-                Return _curAI
+                Return _currentAnnouncementInfo
             End Get
         End Property
 
@@ -57,7 +57,7 @@ Namespace App
 
                         strU = strAnnouncement.Substring(strAnnouncement.IndexOf("URL: ") + 5, strAnnouncement.IndexOf(vbNewLine) - 5)
 
-                        aI.URL = strU
+                        aI.Url = strU
                     Catch ex As Exception
                         aI.InfoOk = False
                     End Try
@@ -65,7 +65,7 @@ Namespace App
                     aI.InfoOk = False
                 End If
 
-                _curAI = aI
+                _currentAnnouncementInfo = aI
                 Return aI
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Getting Announcement info failed" & vbNewLine & ex.Message, True)
@@ -109,9 +109,6 @@ Namespace App
             End If
         End Sub
 
-
-
-
         Public Class Info
             Private _Name As String
             Public Property Name() As String
@@ -123,16 +120,15 @@ Namespace App
                 End Set
             End Property
 
-            Private _URL As String
-            Public Property URL() As String
+            Private _url As String
+            Public Property Url() As String
                 Get
-                    Return _URL
+                    Return _url
                 End Get
                 Set(ByVal value As String)
-                    _URL = value
+                    _url = value
                 End Set
             End Property
-
 
             Private _InfoOk As Boolean
             Public Property InfoOk() As Boolean

@@ -97,8 +97,8 @@ Namespace UI
 
             Private Sub AnnouncementCheckComplete(ByVal AnnouncementAvailable As Boolean)
                 Try
-                    wBrowser.Navigate(aN.curAI.URL)
-                    My.Settings.LastAnnouncement = aN.curAI.Name
+                    wBrowser.Navigate(aN.CurrentAnnouncementInfo.Url)
+                    My.Settings.LastAnnouncement = aN.CurrentAnnouncementInfo.Name
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AnnouncementCheckComplete (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
                 End Try
