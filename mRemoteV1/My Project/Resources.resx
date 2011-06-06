@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -2351,5 +2351,8 @@ Error Description: {1}</value>
   </data>
   <data name="strErrorBadDatabaseVersion" xml:space="preserve">
     <value>The database version {0} is not compatible with this version of {1}.</value>
+  </data>
+  <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
+    <value>AddExternalToolsToToolBar (frmMain) failed. {0}</value>
   </data>
 </root>

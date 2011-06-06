@@ -10,7 +10,7 @@ Namespace Connection
 #Region "Private Properties"
             Private IntAppProcessStartInfo As New ProcessStartInfo()
             Private Arguments As String
-            Private ExtApp As Tools.ExternalApp
+            Private ExtApp As Tools.ExternalTool
 #End Region
 
 #Region "Public Properties"

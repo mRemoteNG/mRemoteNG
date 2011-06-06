@@ -3,7 +3,7 @@ Imports System.IO
 Imports System.ComponentModel
 
 Namespace Tools
-    Public Class ExternalApp
+    Public Class ExternalTool
 #Region "Properties"
         Private _DisplayName As String
         Public Property DisplayName() As String

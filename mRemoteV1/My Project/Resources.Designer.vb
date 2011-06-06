@@ -2151,6 +2151,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to AddExternalToolsToToolBar (frmMain) failed. {0}.
+        '''</summary>
+        Friend ReadOnly Property strErrorAddExternalToolsToToolBarFailed() As String
+            Get
+                Return ResourceManager.GetString("strErrorAddExternalToolsToToolBarFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to AddFolder (UI.Window.Tree) failed. {0}.
         '''</summary>
         Friend ReadOnly Property strErrorAddFolderFailed() As String

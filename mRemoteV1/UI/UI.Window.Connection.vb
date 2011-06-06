@@ -706,7 +706,7 @@ Namespace UI
                     cmenTabExternalApps.DropDownItems.Clear()
 
                     'add ext apps
-                    For Each extA As Tools.ExternalApp In ExternalTools
+                    For Each extA As Tools.ExternalTool In ExternalTools
                         Dim nItem As New ToolStripMenuItem
                         nItem.Text = extA.DisplayName
                         nItem.Tag = extA
@@ -722,7 +722,7 @@ Namespace UI
                 End Try
             End Sub
 
-            Private Sub StartExternalApp(ByVal ExtA As Tools.ExternalApp)
+            Private Sub StartExternalApp(ByVal ExtA As Tools.ExternalTool)
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
                         If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then

@@ -294,7 +294,7 @@ Namespace UI
 #End Region
 
 #Region "Private Properties"
-            Private _SelApp As Tools.ExternalApp
+            Private _SelApp As Tools.ExternalTool
 #End Region
 
 #Region "Private Methods"
@@ -302,7 +302,7 @@ Namespace UI
                 Try
                     lvApps.Items.Clear()
 
-                    For Each extA As Tools.ExternalApp In ExternalTools
+                    For Each extA As Tools.ExternalTool In ExternalTools
                         Dim lvItem As New ListViewItem
                         lvItem.Text = extA.DisplayName
                         lvItem.SubItems.Add(extA.FileName)
@@ -326,7 +326,7 @@ Namespace UI
                 End Try
             End Sub
 
-            Private Sub GetAppProperties(ByVal SelApp As Tools.ExternalApp)
+            Private Sub GetAppProperties(ByVal SelApp As Tools.ExternalTool)
                 Try
                     If SelApp IsNot Nothing Then
                         txtDisplayName.Text = SelApp.DisplayName
@@ -341,7 +341,7 @@ Namespace UI
                 End Try
             End Sub
 
-            Private Sub SetAppProperties(ByVal SelApp As Tools.ExternalApp)
+            Private Sub SetAppProperties(ByVal SelApp As Tools.ExternalTool)
                 Try
                     If SelApp IsNot Nothing Then
                         SelApp.DisplayName = txtDisplayName.Text
@@ -359,7 +359,7 @@ Namespace UI
 
             Private Sub AddNewApp()
                 Try
-                    Dim nExtA As New Tools.ExternalApp("New Application")
+                    Dim nExtA As New Tools.ExternalTool("New Application")
                     ExternalTools.Add(nExtA)
                     LoadApps()
                     lvApps.SelectedItems.Clear()
@@ -405,7 +405,7 @@ Namespace UI
             Private Sub StartApp()
                 Try
                     For Each lvItem As ListViewItem In lvApps.SelectedItems
-                        TryCast(lvItem.Tag, mRemoteNG.Tools.ExternalApp).Start()
+                        TryCast(lvItem.Tag, mRemoteNG.Tools.ExternalTool).Start()
                     Next
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "StartApp failed (UI.Window.ExternalApps" & vbNewLine & ex.Message, True)
@@ -413,7 +413,7 @@ Namespace UI
             End Sub
 
             Private Sub RefreshToolbar()
-                frmMain.AddExtAppsToToolbar()
+                frmMain.AddExternalToolsToToolBar()
                 App.Runtime.GetExtApps()
             End Sub
 #End Region

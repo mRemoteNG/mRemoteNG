@@ -107,7 +107,7 @@ Partial Class frmMain
         Me.lblQuickConnect = New System.Windows.Forms.ToolStripLabel
         Me.cmbQuickConnect = New System.Windows.Forms.ToolStripComboBox
         Me.tsContainer = New System.Windows.Forms.ToolStripContainer
-        Me.tsExtAppsToolbar = New System.Windows.Forms.ToolStrip
+        Me.tsExternalTools = New System.Windows.Forms.ToolStrip
         Me.cMenExtAppsToolbar = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.cMenToolbarShowText = New System.Windows.Forms.ToolStripMenuItem
         Me.tsQuickConnect = New System.Windows.Forms.ToolStrip
@@ -678,18 +678,18 @@ Partial Class frmMain
         '
         Me.tsContainer.TopToolStripPanel.Controls.Add(Me.msMain)
         Me.tsContainer.TopToolStripPanel.Controls.Add(Me.tsQuickConnect)
-        Me.tsContainer.TopToolStripPanel.Controls.Add(Me.tsExtAppsToolbar)
+        Me.tsContainer.TopToolStripPanel.Controls.Add(Me.tsExternalTools)
         Me.tsContainer.TopToolStripPanel.Controls.Add(Me.ToolStrip1)
         Me.tsContainer.TopToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
         '
         'tsExtAppsToolbar
         '
-        Me.tsExtAppsToolbar.ContextMenuStrip = Me.cMenExtAppsToolbar
-        Me.tsExtAppsToolbar.Dock = System.Windows.Forms.DockStyle.None
-        Me.tsExtAppsToolbar.Location = New System.Drawing.Point(39, 49)
-        Me.tsExtAppsToolbar.Name = "tsExtAppsToolbar"
-        Me.tsExtAppsToolbar.Size = New System.Drawing.Size(111, 25)
-        Me.tsExtAppsToolbar.TabIndex = 17
+        Me.tsExternalTools.ContextMenuStrip = Me.cMenExtAppsToolbar
+        Me.tsExternalTools.Dock = System.Windows.Forms.DockStyle.None
+        Me.tsExternalTools.Location = New System.Drawing.Point(39, 49)
+        Me.tsExternalTools.Name = "tsExtAppsToolbar"
+        Me.tsExternalTools.Size = New System.Drawing.Size(111, 25)
+        Me.tsExternalTools.TabIndex = 17
         '
         'cMenExtAppsToolbar
         '
@@ -860,7 +860,7 @@ Partial Class frmMain
     Friend WithEvents tmrShowUpdate As System.Windows.Forms.Timer
     Friend WithEvents mMenToolsExternalApps As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tmrAutoSave As System.Windows.Forms.Timer
-    Friend WithEvents tsExtAppsToolbar As System.Windows.Forms.ToolStrip
+    Friend WithEvents tsExternalTools As System.Windows.Forms.ToolStrip
     Friend WithEvents mMenViewExtAppsToolbar As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents cMenExtAppsToolbar As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents cMenToolbarShowText As System.Windows.Forms.ToolStripMenuItem

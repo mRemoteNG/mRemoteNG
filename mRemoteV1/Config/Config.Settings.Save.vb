@@ -32,11 +32,11 @@ Namespace Config
                         My.Settings.ResetToolbars = False
                         My.Settings.NoReconnect = False
 
-                        My.Settings.ExtAppsTBLocation = .tsExtAppsToolbar.Location
-                        If .tsExtAppsToolbar.Parent IsNot Nothing Then
-                            My.Settings.ExtAppsTBParentDock = .tsExtAppsToolbar.Parent.Dock.ToString
+                        My.Settings.ExtAppsTBLocation = .tsExternalTools.Location
+                        If .tsExternalTools.Parent IsNot Nothing Then
+                            My.Settings.ExtAppsTBParentDock = .tsExternalTools.Parent.Dock.ToString
                         End If
-                        My.Settings.ExtAppsTBVisible = .tsExtAppsToolbar.Visible
+                        My.Settings.ExtAppsTBVisible = .tsExternalTools.Visible
                         My.Settings.ExtAppsTBShowText = .cMenToolbarShowText.Checked
 
                         My.Settings.QuickyTBLocation = .tsQuickConnect.Location
@@ -82,7 +82,7 @@ Namespace Config
                     xmlTextWriter.WriteStartDocument()
                     xmlTextWriter.WriteStartElement("Apps")
 
-                    For Each extA As Tools.ExternalApp In ExternalTools
+                    For Each extA As Tools.ExternalTool In ExternalTools
                         xmlTextWriter.WriteStartElement("App")
                         xmlTextWriter.WriteAttributeString("DisplayName", "", extA.DisplayName)
                         xmlTextWriter.WriteAttributeString("FileName", "", extA.FileName)

@@ -207,40 +207,36 @@ Public Class frmMain
         SwitchToolBarText(Not cMenToolbarShowText.Checked)
     End Sub
 
-    Public Sub AddExtAppsToToolbar()
+    Public Sub AddExternalToolsToToolBar()
         Try
-            'clean up
-            tsExtAppsToolbar.Items.Clear()
+            For Each item As ToolStripItem In tsExternalTools.Items
+                item.Dispose()
+            Next
+            tsExternalTools.Items.Clear()
 
-            'add ext apps
-            For Each extA As Tools.ExternalApp In ExternalTools
-                Dim nItem As New ToolStripButton
-                nItem.Text = extA.DisplayName
-                nItem.Image = extA.Image
+            Dim button As ToolStripButton
+            For Each tool As Tools.ExternalTool In ExternalTools
+                button = tsExternalTools.Items.Add(tool.DisplayName, tool.Image, AddressOf tsExtAppEntry_Click)
 
                 If cMenToolbarShowText.Checked = True Then
-                    nItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
+                    button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
                 Else
-                    If nItem.Image IsNot Nothing Then
-                        nItem.DisplayStyle = ToolStripItemDisplayStyle.Image
+                    If button.Image IsNot Nothing Then
+                        button.DisplayStyle = ToolStripItemDisplayStyle.Image
                     Else
-                        nItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
+                        button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
                     End If
                 End If
 
-                nItem.Tag = extA
-
-                AddHandler nItem.Click, AddressOf tsExtAppEntry_Click
-
-                tsExtAppsToolbar.Items.Add(nItem)
+                button.Tag = tool
             Next
         Catch ex As Exception
-            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddExtAppsToToolbar failed (frmMain)" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strErrorAddExternalToolsToToolBarFailed, ex.Message), True)
         End Try
     End Sub
 
     Private Sub tsExtAppEntry_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim extA As Tools.ExternalApp = sender.Tag
+        Dim extA As Tools.ExternalTool = sender.Tag
 
         If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Connection Then
             extA.Start(Tree.Node.SelectedNode.Tag)
@@ -250,7 +246,7 @@ Public Class frmMain
     End Sub
 
     Public Sub SwitchToolBarText(ByVal show As Boolean)
-        For Each tItem As ToolStripButton In tsExtAppsToolbar.Items
+        For Each tItem As ToolStripButton In tsExternalTools.Items
             If show = True Then
                 tItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
             Else
@@ -373,7 +369,7 @@ Public Class frmMain
         Me.mMenViewSessions.Checked = Not Windows.sessionsForm.IsHidden
         Me.mMenViewScreenshotManager.Checked = Not Windows.screenshotForm.IsHidden
 
-        Me.mMenViewExtAppsToolbar.Checked = tsExtAppsToolbar.Visible
+        Me.mMenViewExtAppsToolbar.Checked = tsExternalTools.Visible
         Me.mMenViewQuickConnectToolbar.Checked = tsQuickConnect.Visible
 
         Me.mMenViewConnectionPanels.DropDownItems.Clear()
@@ -479,10 +475,10 @@ Public Class frmMain
 
     Private Sub mMenViewExtAppsToolbar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewExtAppsToolbar.Click
         If mMenViewExtAppsToolbar.Checked = False Then
-            tsExtAppsToolbar.Visible = True
+            tsExternalTools.Visible = True
             mMenViewExtAppsToolbar.Checked = True
         Else
-            tsExtAppsToolbar.Visible = False
+            tsExternalTools.Visible = False
             mMenViewExtAppsToolbar.Checked = False
         End If
     End Sub

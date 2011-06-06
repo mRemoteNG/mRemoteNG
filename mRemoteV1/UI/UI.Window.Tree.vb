@@ -1153,7 +1153,7 @@ Namespace UI
                     cMenTreeToolsExternalApps.DropDownItems.Clear()
 
                     'add ext apps
-                    For Each extA As Tools.ExternalApp In ExternalTools
+                    For Each extA As Tools.ExternalTool In ExternalTools
                         Dim nItem As New ToolStripMenuItem
                         nItem.Text = extA.DisplayName
                         nItem.Tag = extA
@@ -1169,7 +1169,7 @@ Namespace UI
                 End Try
             End Sub
 
-            Private Sub StartExternalApp(ByVal ExtA As Tools.ExternalApp)
+            Private Sub StartExternalApp(ByVal ExtA As Tools.ExternalTool)
                 Try
                     If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
                         ExtA.Start(mRemoteNG.Tree.Node.SelectedNode.Tag)

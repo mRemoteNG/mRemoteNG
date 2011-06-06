@@ -19,26 +19,6 @@ Namespace App
         End Sub
 
 #Region "Public Properties"
-        'Private Shared _settingsLoad As Config.Settings.Load
-        'Public Shared Property SettingsLoad() As Load
-        '    Get
-        '        Return _settingsLoad
-        '    End Get
-        '    Set(ByVal value As Load)
-        '        _settingsLoad = value
-        '    End Set
-        'End Property
-
-        'Private Shared _settingsSave As Config.Settings.Save
-        'Public Shared Property SettingsSave() As Save
-        '    Get
-        '        Return _settingsSave
-        '    End Get
-        '    Set(ByVal value As Save)
-        '        _settingsSave = value
-        '    End Set
-        'End Property
-
         Private Shared _connectionList As Connection.List
         Public Shared Property ConnectionList() As List
             Get
@@ -1512,7 +1492,7 @@ Namespace App
                 End If
 
                 If newConnectionInfo.PreExtApp <> "" Then
-                    Dim extA As Tools.ExternalApp = App.Runtime.GetExtAppByName(newConnectionInfo.PreExtApp)
+                    Dim extA As Tools.ExternalTool = App.Runtime.GetExtAppByName(newConnectionInfo.PreExtApp)
                     If extA IsNot Nothing Then
                         extA.Start(newConnectionInfo)
                     End If
@@ -1621,7 +1601,7 @@ Namespace App
                     If newConnectionInfo.Protocol <> Connection.Protocol.Protocols.IntApp Then
                         Tree.Node.SetNodeImage(newConnectionInfo.TreeNode, Images.Enums.TreeImage.ConnectionOpen)
                     Else
-                        Dim extApp As Tools.ExternalApp = GetExtAppByName(newConnectionInfo.ExtApp)
+                        Dim extApp As Tools.ExternalTool = GetExtAppByName(newConnectionInfo.ExtApp)
                         If extApp IsNot Nothing Then
                             If extApp.TryIntegrate Then
                                 If newConnectionInfo.TreeNode IsNot Nothing Then
@@ -1689,7 +1669,7 @@ Namespace App
                 End If
 
                 If Prot.InterfaceControl.Info.PostExtApp <> "" Then
-                    Dim extA As Tools.ExternalApp = App.Runtime.GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp)
+                    Dim extA As Tools.ExternalTool = App.Runtime.GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp)
                     If extA IsNot Nothing Then
                         extA.Start(Prot.InterfaceControl.Info)
                     End If
@@ -1730,7 +1710,7 @@ Namespace App
 
             Dim i As Integer = 0
 
-            For Each extA As Tools.ExternalApp In ExternalTools
+            For Each extA As Tools.ExternalTool In ExternalTools
                 Tools.ExternalAppsTypeConverter.ExternalApps(i) = extA.DisplayName
 
                 i += 1
@@ -1739,8 +1719,8 @@ Namespace App
             Tools.ExternalAppsTypeConverter.ExternalApps(i) = ""
         End Sub
 
-        Public Shared Function GetExtAppByName(ByVal Name As String) As Tools.ExternalApp
-            For Each extA As Tools.ExternalApp In ExternalTools
+        Public Shared Function GetExtAppByName(ByVal Name As String) As Tools.ExternalTool
+            For Each extA As Tools.ExternalTool In ExternalTools
                 If extA.DisplayName = Name Then
                     Return extA
                 End If
@@ -1794,19 +1774,29 @@ Namespace App
         End Sub
 
         Public Shared Function SaveReport() As Boolean
+            Dim streamReader As StreamReader = Nothing
+            Dim streamWriter As StreamWriter = Nothing
             Try
-                Dim sRd As New StreamReader(My.Application.Info.DirectoryPath & "\Report.log")
-                Dim Text As String = sRd.ReadToEnd
-                sRd.Close()
+                streamReader = New StreamReader(My.Application.Info.DirectoryPath & "\Report.log")
+                Dim text As String = streamReader.ReadToEnd
+                streamReader.Close()
 
-                Dim sWr As New StreamWriter(App.Info.General.ReportingFilePath, True)
-                sWr.Write(Text)
-                sWr.Close()
+                streamWriter = New StreamWriter(App.Info.General.ReportingFilePath, True)
+                streamWriter.Write(text)
 
                 Return True
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLogWriteToFileFinalLocationFailed & vbNewLine & ex.Message, True)
                 Return False
+            Finally
+                If streamReader IsNot Nothing Then
+                    streamReader.Close()
+                    streamReader.Dispose()
+                End If
+                If streamWriter IsNot Nothing Then
+                    streamWriter.Close()
+                    streamWriter.Dispose()
+                End If
             End Try
         End Function
 

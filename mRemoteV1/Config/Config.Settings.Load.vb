@@ -117,8 +117,8 @@ Namespace Config
                 With MainForm
                     ToolStripPanelFromString("top").Join(.tsQuickConnect, New Point(300, 0))
                     .tsQuickConnect.Visible = True
-                    ToolStripPanelFromString("bottom").Join(.tsExtAppsToolbar, New Point(3, 0))
-                    .tsExtAppsToolbar.Visible = False
+                    ToolStripPanelFromString("bottom").Join(.tsExternalTools, New Point(3, 0))
+                    .tsExternalTools.Visible = False
                 End With
             End Sub
 
@@ -143,8 +143,8 @@ Namespace Config
 
             Private Sub AddDynamicPanels()
                 With MainForm
-                    ToolStripPanelFromString(My.Settings.ExtAppsTBParentDock).Join(.tsExtAppsToolbar, My.Settings.ExtAppsTBLocation)
-                    .tsExtAppsToolbar.Visible = My.Settings.ExtAppsTBVisible
+                    ToolStripPanelFromString(My.Settings.ExtAppsTBParentDock).Join(.tsExternalTools, My.Settings.ExtAppsTBLocation)
+                    .tsExternalTools.Visible = My.Settings.ExtAppsTBVisible
                 End With
             End Sub
 
@@ -210,7 +210,7 @@ Namespace Config
                 End If
 
                 For Each xEl As XmlElement In xDom.DocumentElement.ChildNodes
-                    Dim extA As New Tools.ExternalApp
+                    Dim extA As New Tools.ExternalTool
                     extA.DisplayName = xEl.Attributes("DisplayName").Value
                     extA.FileName = xEl.Attributes("FileName").Value
                     extA.Arguments = xEl.Attributes("Arguments").Value
@@ -230,7 +230,7 @@ Namespace Config
 
                 xDom = Nothing
 
-                frmMain.AddExtAppsToToolbar()
+                frmMain.AddExternalToolsToToolBar()
             End Sub
 #End Region
 
