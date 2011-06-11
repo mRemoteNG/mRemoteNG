@@ -613,9 +613,6 @@
     <None Include="Notes\Help.txt" />
     <None Include="Notes\ICA.txt" />
     <None Include="Notes\Misc.txt" />
-    <Content Include="CHANGELOG.TXT">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <None Include="Notes\PropertyList.csv" />
     <None Include="Resources\Images\PuttyConfig.png" />
     <None Include="Resources\Images\Play_Quick.png" />
