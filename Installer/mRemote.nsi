@@ -169,8 +169,11 @@ Section "" ; Install
  
 	; Start Menu
 	CreateDirectory "$SMPROGRAMS\mRemoteNG"
+	CreateShortCut "$SMPROGRAMS\mRemoteNG\$(CreditsLinkName).lnk" "$INSTDIR\CREDITS.TXT"
+	CreateShortCut "$SMPROGRAMS\mRemoteNG\$(CopyingLinkName).lnk" "$INSTDIR\COPYING.TXT"
 	CreateShortCut "$SMPROGRAMS\mRemoteNG\mRemoteNG.lnk" "$INSTDIR\mRemoteNG.exe"
-	CreateShortCut "$SMPROGRAMS\mRemoteNG\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+	CreateShortCut "$SMPROGRAMS\mRemoteNG\$(UninstallLinkName).lnk" "$INSTDIR\Uninstall.exe"
+	CreateShortCut "$SMPROGRAMS\mRemoteNG\$(ChangeLogLinkName).lnk" "$INSTDIR\CHANGELOG.TXT"
 
 	; Registry
 	WriteRegStr HKLM "Software\mRemoteNG" "InstallPath" $INSTDIR
@@ -197,13 +200,9 @@ Section "un.Uninstall"
 
 	; Start Menu
 	SetShellVarContext all
-	Delete "$SMPROGRAMS\mRemoteNG\mRemoteNG.lnk"
-	Delete "$SMPROGRAMS\mRemoteNG\Uninstall.lnk"
-	RMDir "$SMPROGRAMS\mRemoteNG"
+	RMDir /r "$SMPROGRAMS\mRemoteNG"
 	SetShellVarContext current
-	Delete "$SMPROGRAMS\mRemoteNG\mRemoteNG.lnk"
-	Delete "$SMPROGRAMS\mRemoteNG\Uninstall.lnk"
-	RMDir "$SMPROGRAMS\mRemoteNG"
+	RMDir /r "$SMPROGRAMS\mRemoteNG"
 
 	; Registry
 	DeleteRegValue HKLM "Software\mRemoteNG" "InstallPath"

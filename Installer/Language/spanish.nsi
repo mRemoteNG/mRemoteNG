@@ -14,3 +14,9 @@ LangString RequiresNetFramework ${LANG_SPANISH} "mRemoteNG requires Microsoft .N
 
 ; User needs to be Admin
 LangString RequiresAdminUser ${LANG_SPANISH} "You must be a member of the 'Power Users' or 'Administrators' group to install mRemoteNG."
+
+; Start Menu items
+LangString CreditsLinkName ${LANG_SPANISH} "Credits"
+LangString CopyingLinkName ${LANG_SPANISH} "License"
+LangString UninstallLinkName ${LANG_SPANISH} "Uninstall"
+LangString ChangeLogLinkName ${LANG_SPANISH} "Version History"
