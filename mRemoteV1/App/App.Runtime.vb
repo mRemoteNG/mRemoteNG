@@ -10,6 +10,7 @@ Imports System.Threading
 Imports System.Xml
 Imports System.Environment
 Imports System.Management
+Imports Microsoft.Win32
 Imports Timer = System.Timers.Timer
 
 Namespace App
@@ -358,6 +359,25 @@ Namespace App
         End Class
 
         Public Class Startup
+            Public Shared Sub CheckCompatibility()
+                Dim regKey As RegistryKey
+
+                Dim isFipsPolicyEnabled As Boolean = False
+
+                ' Windows XP/Windows Server 2003
+                regKey = Registry.LocalMachine.OpenSubKey("System\CurrentControlSet\Control\Lsa")
+                If Not regKey.GetValue("FIPSAlgorithmPolicy") = 0 Then isFipsPolicyEnabled = True
+
+                ' Windows Vista/Windows Server 2008 and newer
+                regKey = Registry.LocalMachine.OpenSubKey("System\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy")
+                If Not regKey.GetValue("Enabled") = 0 Then isFipsPolicyEnabled = True
+
+                If isFipsPolicyEnabled Then
+                    MessageBox.Show(frmMain, String.Format(My.Resources.strErrorFipsPolicyIncompatible, My.Application.Info.ProductName), My.Application.Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    [Exit](1)
+                End If
+            End Sub
+
             Public Shared Sub CreatePanels()
                 Windows.configForm = New UI.Window.Config(Windows.configPanel)
                 Windows.configPanel = Windows.configForm

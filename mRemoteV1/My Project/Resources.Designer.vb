@@ -2205,6 +2205,37 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Decryption failed. {0}.
+        '''</summary>
+        Friend ReadOnly Property strErrorDecryptionFailed() As String
+            Get
+                Return ResourceManager.GetString("strErrorDecryptionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Encryption failed. {0}.
+        '''</summary>
+        Friend ReadOnly Property strErrorEncryptionFailed() As String
+            Get
+                Return ResourceManager.GetString("strErrorEncryptionFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The Windows security setting, &quot;System cryptography: Use FIPS compliant algorithms for encryption, hashing, and signing&quot;, is enabled. This setting is not compatible with {0}.
+        '''
+        '''See the Microsoft Support article at http://support.microsoft.com/kb/811833 for more information.
+        '''
+        '''{0} will now close..
+        '''</summary>
+        Friend ReadOnly Property strErrorFipsPolicyIncompatible() As String
+            Get
+                Return ResourceManager.GetString("strErrorFipsPolicyIncompatible", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Errors.
         '''</summary>
         Friend ReadOnly Property strErrors() As String

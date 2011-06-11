@@ -29,6 +29,8 @@ Public Class frmMain
 
 #Region "Startup & Shutdown"
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Startup.CheckCompatibility()
+
         Startup.CreateLogger()
 
         ' Create gui config load and save objects
