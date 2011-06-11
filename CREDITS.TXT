@@ -1,6 +1,7 @@
 Contributors
 ============
 
+Wiktor Beryt
 Lionel Caignec
 Felix Deimel
 Holger Henke

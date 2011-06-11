@@ -1,6 +1,7 @@
 1.68 (XXXX-XX-XX):
   Added compatibility check for "Use FIPS compliant algorithms" security setting.
   Improved reporting of errors when encrypting and decrypting connection files.
+  Added partial Polish translation.
 
 1.67 (2011-06-05):
   Fixed migration of external tools configuration and panel layout from Local to Roaming folder.
