@@ -113,13 +113,13 @@ Public Class frmOptions
 
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
-        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", 0)
-        Dim ListViewItem9 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
-        Dim ListViewItem10 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
-        Dim ListViewItem11 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", 3)
-        Dim ListViewItem12 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", 4)
-        Dim ListViewItem13 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 5)
-        Dim ListViewItem14 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 6)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", 0)
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
+        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", 3)
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", 4)
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 5)
+        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
         Me.btnOK = New System.Windows.Forms.Button
         Me.btnCancel = New System.Windows.Forms.Button
@@ -273,7 +273,7 @@ Public Class frmOptions
                     Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lvPages.FullRowSelect = True
         Me.lvPages.HideSelection = False
-        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem8, ListViewItem9, ListViewItem10, ListViewItem11, ListViewItem12, ListViewItem13, ListViewItem14})
+        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7})
         Me.lvPages.LabelWrap = False
         Me.lvPages.LargeImageList = Me.imgListPages
         Me.lvPages.Location = New System.Drawing.Point(12, 12)
@@ -1839,7 +1839,7 @@ Public Class frmOptions
         Me.txtSQLPassword.Enabled = chkUseSQLServer.Checked
     End Sub
 
-    Private Sub chkUseOnlyErrorsAndInfosPanel_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
+    Private Sub chkUseOnlyErrorsAndInfosPanel_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkUseOnlyErrorsAndInfosPanel.CheckedChanged
         Me.chkMCInformation.Enabled = Me.chkUseOnlyErrorsAndInfosPanel.Checked
         Me.chkMCWarnings.Enabled = Me.chkUseOnlyErrorsAndInfosPanel.Checked
         Me.chkMCErrors.Enabled = Me.chkUseOnlyErrorsAndInfosPanel.Checked
