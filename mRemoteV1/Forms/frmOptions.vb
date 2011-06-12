@@ -1406,7 +1406,7 @@ Public Class frmOptions
             Me.chkProperInstallationOfComponentsAtStartup.Checked = My.Settings.StartupComponentsCheck
 
             Me.cboLanguage.Items.Clear()
-            Me.cboLanguage.Items.Add(My.Resources.strLanguageDefault)
+            Me.cboLanguage.Items.Add(My.Language.strLanguageDefault)
 
             For Each CultureNativeName As String In App.SupportedCultures.CultureNativeNames
                 Me.cboLanguage.Items.Add(CultureNativeName)
@@ -1462,9 +1462,9 @@ Public Class frmOptions
             chkCheckForUpdatesOnStartup.Checked = My.Settings.CheckForUpdatesOnStartup
             cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked
             cboUpdateCheckFrequency.Items.Clear()
-            Dim nDaily As Integer = cboUpdateCheckFrequency.Items.Add(My.Resources.strUpdateFrequencyDaily)
-            Dim nWeekly As Integer = cboUpdateCheckFrequency.Items.Add(My.Resources.strUpdateFrequencyWeekly)
-            Dim nMonthly As Integer = cboUpdateCheckFrequency.Items.Add(My.Resources.strUpdateFrequencyMonthly)
+            Dim nDaily As Integer = cboUpdateCheckFrequency.Items.Add(My.Language.strUpdateFrequencyDaily)
+            Dim nWeekly As Integer = cboUpdateCheckFrequency.Items.Add(My.Language.strUpdateFrequencyWeekly)
+            Dim nMonthly As Integer = cboUpdateCheckFrequency.Items.Add(My.Language.strUpdateFrequencyMonthly)
             Select Case My.Settings.CheckForUpdatesFrequencyDays
                 Case Is < 1
                     chkCheckForUpdatesOnStartup.Checked = False
@@ -1476,7 +1476,7 @@ Public Class frmOptions
                 Case 31 ' Monthly
                     cboUpdateCheckFrequency.SelectedIndex = nMonthly
                 Case Else
-                    Dim nCustom As Integer = cboUpdateCheckFrequency.Items.Add(String.Format(My.Resources.strUpdateFrequencyCustom, My.Settings.CheckForUpdatesFrequencyDays))
+                    Dim nCustom As Integer = cboUpdateCheckFrequency.Items.Add(String.Format(My.Language.strUpdateFrequencyCustom, My.Settings.CheckForUpdatesFrequencyDays))
                     cboUpdateCheckFrequency.SelectedIndex = nCustom
             End Select
 
@@ -1585,11 +1585,11 @@ Public Class frmOptions
 
             My.Settings.CheckForUpdatesOnStartup = chkCheckForUpdatesOnStartup.Checked
             Select Case cboUpdateCheckFrequency.SelectedItem.ToString()
-                Case My.Resources.strUpdateFrequencyDaily
+                Case My.Language.strUpdateFrequencyDaily
                     My.Settings.CheckForUpdatesFrequencyDays = 1
-                Case My.Resources.strUpdateFrequencyWeekly
+                Case My.Language.strUpdateFrequencyWeekly
                     My.Settings.CheckForUpdatesFrequencyDays = 7
-                Case My.Resources.strUpdateFrequencyMonthly
+                Case My.Language.strUpdateFrequencyMonthly
                     My.Settings.CheckForUpdatesFrequencyDays = 31
                 Case Else
                     ' Custom so do not change
@@ -1670,81 +1670,81 @@ Public Class frmOptions
     End Sub
 
     Private Sub ApplyLanguage()
-        lvPages.Items(0).Text = My.Resources.strStartupExit
-        lvPages.Items(1).Text = My.Resources.strTabAppearance
-        lvPages.Items(2).Text = My.Resources.strTabsAndPanels.Replace("&&", "&")
-        lvPages.Items(3).Text = My.Resources.strConnections
-        lvPages.Items(4).Text = My.Resources.strSQLServer
-        lvPages.Items(5).Text = My.Resources.strTabUpdates
-        lvPages.Items(6).Text = My.Resources.strTabAdvanced
-        lblUpdatesExplanation.Text = My.Resources.strUpdateCheck
-        btnTestProxy.Text = My.Resources.strButtonTestProxy
-        lblSeconds.Text = My.Resources.strLabelSeconds
-        lblMaximumPuttyWaitTime.Text = My.Resources.strLabelPuttyTimeout
-        chkAutomaticReconnect.Text = My.Resources.strCheckboxAutomaticReconnect
-        lblProxyAddress.Text = My.Resources.strLabelAddress
-        lblProxyPort.Text = My.Resources.strLabelPort
-        lblProxyUsername.Text = My.Resources.strLabelUsername
-        lblProxyPassword.Text = My.Resources.strLabelPassword
-        chkUseProxyAuthentication.Text = My.Resources.strCheckboxProxyAuthentication
-        chkUseProxyForAutomaticUpdates.Text = My.Resources.strCheckboxUpdateUseProxy
-        lblConfigurePuttySessions.Text = My.Resources.strLabelPuttySessionsConfig
-        btnLaunchPutty.Text = My.Resources.strButtonLaunchPutty
-        btnBrowseCustomPuttyPath.Text = My.Resources.strButtonBrowse
-        chkUseCustomPuttyPath.Text = My.Resources.strCheckboxPuttyPath
-        chkAutomaticallyGetSessionInfo.Text = My.Resources.strAutomaticallyGetSessionInfo
-        chkWriteLogFile.Text = My.Resources.strWriteLogFile
-        chkSingleInstance.Text = My.Resources.strAllowOnlySingleInstance
-        chkReconnectOnStart.Text = My.Resources.strReconnectAtStartup
-        chkCheckForUpdatesOnStartup.Text = My.Resources.strCheckForUpdatesOnStartup
-        chkConfirmCloseConnection.Text = My.Resources.strConfirmCloseConnection
-        chkConfirmExit.Text = My.Resources.strConfirmExit
-        chkSaveConsOnExit.Text = My.Resources.strSaveConsOnExit
-        chkMinimizeToSystemTray.Text = My.Resources.strMinimizeToSysTray
-        chkShowFullConnectionsFilePathInTitle.Text = My.Resources.strShowFullConsFilePath
-        chkShowSystemTrayIcon.Text = My.Resources.strAlwaysShowSysTrayIcon
-        chkShowDescriptionTooltipsInTree.Text = My.Resources.strShowDescriptionTooltips
-        chkShowProtocolOnTabs.Text = My.Resources.strShowProtocolOnTabs
-        chkShowLogonInfoOnTabs.Text = My.Resources.strShowLogonInfoOnTabs
-        chkOpenNewTabRightOfSelected.Text = My.Resources.strOpenNewTabRight
-        chkAlwaysShowPanelSelectionDlg.Text = My.Resources.strAlwaysShowPanelSelection
-        chkDoubleClickClosesTab.Text = My.Resources.strDoubleClickTabClosesIt
-        chkHostnameLikeDisplayName.Text = My.Resources.strSetHostnameLikeDisplayName
-        lblExperimental.Text = My.Resources.strExperimental.ToUpper
-        chkUseSQLServer.Text = My.Resources.strUseSQLServer
-        lblSQLInfo.Text = My.Resources.strSQLInfo
-        lblSQLUsername.Text = My.Resources.strLabelUsername
-        lblSQLServer.Text = My.Resources.strSQLServer & ":"
-        lblSQLDatabaseName.Text = My.Resources.strLabelSQLServerDatabaseName
-        lblSQLPassword.Text = My.Resources.strLabelPassword
-        lblRdpReconnectionCount.Text = My.Resources.strRdpReconnectCount
-        lblAutoSave2.Text = My.Resources.strAutoSaveMins
-        lblAutoSave1.Text = My.Resources.strAutoSaveEvery
-        lblCredentialsDomain.Text = My.Resources.strLabelDomain
-        lblCredentialsPassword.Text = My.Resources.strLabelPassword
-        lblCredentialsUsername.Text = My.Resources.strLabelUsername
-        radCredentialsCustom.Text = My.Resources.strTheFollowing & ":"
-        radCredentialsWindows.Text = My.Resources.strMyCurrentWindowsCreds
-        radCredentialsNoInfo.Text = My.Resources.strNoInformation
-        lblDefaultCredentials.Text = My.Resources.strEmptyUsernamePasswordDomainFields
-        chkSingleClickOnOpenedConnectionSwitchesToIt.Text = My.Resources.strSingleClickOnOpenConnectionSwitchesToIt
-        chkSingleClickOnConnectionOpensIt.Text = My.Resources.strSingleClickOnConnectionOpensIt
-        lblSwitchToErrorsAndInfos.Text = My.Resources.strSwitchToErrorsAndInfos & ":"
-        chkMCErrors.Text = My.Resources.strErrors
-        chkMCWarnings.Text = My.Resources.strWarnings
-        chkMCInformation.Text = My.Resources.strInformations
-        chkUseOnlyErrorsAndInfosPanel.Text = My.Resources.strUseOnlyErrorsAndInfosPanel
-        btnOK.Text = My.Resources.strButtonOK
-        btnCancel.Text = My.Resources.strButtonCancel
-        btnUpdateCheckNow.Text = My.Resources.strCheckNow
-        Text = My.Resources.strMenuOptions
-        lblUVNCSCPort.Text = My.Resources.strUltraVNCSCListeningPort & ":"
-        chkProperInstallationOfComponentsAtStartup.Text = My.Resources.strCheckProperInstallationOfComponentsAtStartup
-        lblXulRunnerPath.Text = My.Resources.strXULrunnerPath & ":"
-        btnBrowseXulRunnerPath.Text = My.Resources.strButtonBrowse
-        chkEncryptCompleteFile.Text = My.Resources.strEncryptCompleteConnectionFile
-        lblLanguage.Text = My.Resources.strLanguage
-        lblLanguageRestartRequired.Text = String.Format(My.Resources.strLanguageRestartRequired, My.Application.Info.ProductName)
+        lvPages.Items(0).Text = My.Language.strStartupExit
+        lvPages.Items(1).Text = My.Language.strTabAppearance
+        lvPages.Items(2).Text = My.Language.strTabsAndPanels.Replace("&&", "&")
+        lvPages.Items(3).Text = My.Language.strConnections
+        lvPages.Items(4).Text = My.Language.strSQLServer
+        lvPages.Items(5).Text = My.Language.strTabUpdates
+        lvPages.Items(6).Text = My.Language.strTabAdvanced
+        lblUpdatesExplanation.Text = My.Language.strUpdateCheck
+        btnTestProxy.Text = My.Language.strButtonTestProxy
+        lblSeconds.Text = My.Language.strLabelSeconds
+        lblMaximumPuttyWaitTime.Text = My.Language.strLabelPuttyTimeout
+        chkAutomaticReconnect.Text = My.Language.strCheckboxAutomaticReconnect
+        lblProxyAddress.Text = My.Language.strLabelAddress
+        lblProxyPort.Text = My.Language.strLabelPort
+        lblProxyUsername.Text = My.Language.strLabelUsername
+        lblProxyPassword.Text = My.Language.strLabelPassword
+        chkUseProxyAuthentication.Text = My.Language.strCheckboxProxyAuthentication
+        chkUseProxyForAutomaticUpdates.Text = My.Language.strCheckboxUpdateUseProxy
+        lblConfigurePuttySessions.Text = My.Language.strLabelPuttySessionsConfig
+        btnLaunchPutty.Text = My.Language.strButtonLaunchPutty
+        btnBrowseCustomPuttyPath.Text = My.Language.strButtonBrowse
+        chkUseCustomPuttyPath.Text = My.Language.strCheckboxPuttyPath
+        chkAutomaticallyGetSessionInfo.Text = My.Language.strAutomaticallyGetSessionInfo
+        chkWriteLogFile.Text = My.Language.strWriteLogFile
+        chkSingleInstance.Text = My.Language.strAllowOnlySingleInstance
+        chkReconnectOnStart.Text = My.Language.strReconnectAtStartup
+        chkCheckForUpdatesOnStartup.Text = My.Language.strCheckForUpdatesOnStartup
+        chkConfirmCloseConnection.Text = My.Language.strConfirmCloseConnection
+        chkConfirmExit.Text = My.Language.strConfirmExit
+        chkSaveConsOnExit.Text = My.Language.strSaveConsOnExit
+        chkMinimizeToSystemTray.Text = My.Language.strMinimizeToSysTray
+        chkShowFullConnectionsFilePathInTitle.Text = My.Language.strShowFullConsFilePath
+        chkShowSystemTrayIcon.Text = My.Language.strAlwaysShowSysTrayIcon
+        chkShowDescriptionTooltipsInTree.Text = My.Language.strShowDescriptionTooltips
+        chkShowProtocolOnTabs.Text = My.Language.strShowProtocolOnTabs
+        chkShowLogonInfoOnTabs.Text = My.Language.strShowLogonInfoOnTabs
+        chkOpenNewTabRightOfSelected.Text = My.Language.strOpenNewTabRight
+        chkAlwaysShowPanelSelectionDlg.Text = My.Language.strAlwaysShowPanelSelection
+        chkDoubleClickClosesTab.Text = My.Language.strDoubleClickTabClosesIt
+        chkHostnameLikeDisplayName.Text = My.Language.strSetHostnameLikeDisplayName
+        lblExperimental.Text = My.Language.strExperimental.ToUpper
+        chkUseSQLServer.Text = My.Language.strUseSQLServer
+        lblSQLInfo.Text = My.Language.strSQLInfo
+        lblSQLUsername.Text = My.Language.strLabelUsername
+        lblSQLServer.Text = My.Language.strSQLServer & ":"
+        lblSQLDatabaseName.Text = My.Language.strLabelSQLServerDatabaseName
+        lblSQLPassword.Text = My.Language.strLabelPassword
+        lblRdpReconnectionCount.Text = My.Language.strRdpReconnectCount
+        lblAutoSave2.Text = My.Language.strAutoSaveMins
+        lblAutoSave1.Text = My.Language.strAutoSaveEvery
+        lblCredentialsDomain.Text = My.Language.strLabelDomain
+        lblCredentialsPassword.Text = My.Language.strLabelPassword
+        lblCredentialsUsername.Text = My.Language.strLabelUsername
+        radCredentialsCustom.Text = My.Language.strTheFollowing & ":"
+        radCredentialsWindows.Text = My.Language.strMyCurrentWindowsCreds
+        radCredentialsNoInfo.Text = My.Language.strNoInformation
+        lblDefaultCredentials.Text = My.Language.strEmptyUsernamePasswordDomainFields
+        chkSingleClickOnOpenedConnectionSwitchesToIt.Text = My.Language.strSingleClickOnOpenConnectionSwitchesToIt
+        chkSingleClickOnConnectionOpensIt.Text = My.Language.strSingleClickOnConnectionOpensIt
+        lblSwitchToErrorsAndInfos.Text = My.Language.strSwitchToErrorsAndInfos & ":"
+        chkMCErrors.Text = My.Language.strErrors
+        chkMCWarnings.Text = My.Language.strWarnings
+        chkMCInformation.Text = My.Language.strInformations
+        chkUseOnlyErrorsAndInfosPanel.Text = My.Language.strUseOnlyErrorsAndInfosPanel
+        btnOK.Text = My.Language.strButtonOK
+        btnCancel.Text = My.Language.strButtonCancel
+        btnUpdateCheckNow.Text = My.Language.strCheckNow
+        Text = My.Language.strMenuOptions
+        lblUVNCSCPort.Text = My.Language.strUltraVNCSCListeningPort & ":"
+        chkProperInstallationOfComponentsAtStartup.Text = My.Language.strCheckProperInstallationOfComponentsAtStartup
+        lblXulRunnerPath.Text = My.Language.strXULrunnerPath & ":"
+        btnBrowseXulRunnerPath.Text = My.Language.strButtonBrowse
+        chkEncryptCompleteFile.Text = My.Language.strEncryptCompleteConnectionFile
+        lblLanguage.Text = My.Language.strLanguage
+        lblLanguageRestartRequired.Text = String.Format(My.Language.strLanguageRestartRequired, My.Application.Info.ProductName)
     End Sub
 
     Public Shadows Sub Show(ByVal dockPanel As DockPanel, Optional ByVal initialTab As Integer = 0)
@@ -1814,7 +1814,7 @@ Public Class frmOptions
 
     Private Sub btnBrowseCustomPuttyPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseCustomPuttyPath.Click
         Dim oDlg As New OpenFileDialog()
-        oDlg.Filter = My.Resources.strFilterApplication & "|*.exe|" & My.Resources.strFilterAll & "|*.*"
+        oDlg.Filter = My.Language.strFilterApplication & "|*.exe|" & My.Language.strFilterAll & "|*.*"
         oDlg.FileName = "putty.exe"
         oDlg.CheckFileExists = True
         oDlg.Multiselect = False
@@ -1866,9 +1866,9 @@ Public Class frmOptions
         Dim ud As New App.Update()
 
         If ud.IsProxyOK Then
-            MsgBox(My.Resources.strProxyTestSucceeded, MsgBoxStyle.Information)
+            MsgBox(My.Language.strProxyTestSucceeded, MsgBoxStyle.Information)
         Else
-            MsgBox(My.Resources.strProxyTestFailed, MsgBoxStyle.Exclamation)
+            MsgBox(My.Language.strProxyTestFailed, MsgBoxStyle.Exclamation)
         End If
     End Sub
 

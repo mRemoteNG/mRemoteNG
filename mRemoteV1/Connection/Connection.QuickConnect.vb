@@ -13,7 +13,7 @@ Namespace Connection
                         End If
                     Next
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strQuickConnectHistoryExistsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strQuickConnectHistoryExistsFailed & vbNewLine & ex.Message, True)
                 End Try
 
                 Return False
@@ -23,7 +23,7 @@ Namespace Connection
                 Try
                     qBox.Items.Insert(0, Text)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strQuickConnectAddFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strQuickConnectAddFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class

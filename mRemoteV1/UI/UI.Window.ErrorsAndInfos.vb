@@ -103,7 +103,7 @@ Namespace UI
                 '
                 'clmMessage
                 '
-                Me.clmMessage.Text = My.Resources.strColumnMessage
+                Me.clmMessage.Text = My.Language.strColumnMessage
                 Me.clmMessage.Width = 184
                 '
                 'cMenMC
@@ -120,7 +120,7 @@ Namespace UI
                 Me.cMenMCCopy.Name = "cMenMCCopy"
                 Me.cMenMCCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
                 Me.cMenMCCopy.Size = New System.Drawing.Size(136, 22)
-                Me.cMenMCCopy.Text = My.Resources.strMenuCopy
+                Me.cMenMCCopy.Text = My.Language.strMenuCopy
                 '
                 'cMenMCDelete
                 '
@@ -128,7 +128,7 @@ Namespace UI
                 Me.cMenMCDelete.Name = "cMenMCDelete"
                 Me.cMenMCDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete
                 Me.cMenMCDelete.Size = New System.Drawing.Size(136, 22)
-                Me.cMenMCDelete.Text = My.Resources.strMenuDelete
+                Me.cMenMCDelete.Text = My.Language.strMenuDelete
                 '
                 'imgListMC
                 '
@@ -144,8 +144,8 @@ Namespace UI
                 Me.HideOnClose = True
                 Me.Icon = Global.mRemoteNG.My.Resources.Resources.Info_Icon
                 Me.Name = "ErrorsAndInfos"
-                Me.TabText = My.Resources.strMenuNotifications
-                Me.Text = My.Resources.strMenuNotifications
+                Me.TabText = My.Language.strMenuNotifications
+                Me.Text = My.Language.strMenuNotifications
                 Me.pnlErrorMsg.ResumeLayout(False)
                 Me.pnlErrorMsg.PerformLayout()
                 CType(Me.pbError, System.ComponentModel.ISupportInitialize).EndInit()
@@ -173,11 +173,11 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                clmMessage.Text = My.Resources.strColumnMessage
-                cMenMCCopy.Text = My.Resources.strMenuCopy
-                cMenMCDelete.Text = My.Resources.strMenuDelete
-                TabText = My.Resources.strMenuNotifications
-                Text = My.Resources.strMenuNotifications
+                clmMessage.Text = My.Language.strColumnMessage
+                cMenMCCopy.Text = My.Language.strMenuCopy
+                cMenMCDelete.Text = My.Language.strMenuDelete
+                TabText = My.Language.strMenuNotifications
+                Text = My.Language.strMenuNotifications
             End Sub
 #End Region
 

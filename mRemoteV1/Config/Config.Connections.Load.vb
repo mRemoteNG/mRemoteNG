@@ -269,7 +269,7 @@ Namespace Config
 
                     sqlCon.Close()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLoadFromSqlFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromSqlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -415,7 +415,7 @@ Namespace Config
                         'AddNodesFromSQL(tNode)
                     End While
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strAddNodesFromSqlFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodesFromSqlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -567,7 +567,7 @@ Namespace Config
 
                     Return conI
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strGetConnectionInfoFromSqlFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strGetConnectionInfoFromSqlFailed & vbNewLine & ex.Message, True)
                 End Try
 
                 Return Nothing
@@ -638,7 +638,7 @@ Namespace Config
                         Dim enCulture As System.Globalization.CultureInfo = New CultureInfo("en-US")
                         Me.confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes("ConfVersion").Value, enCulture)
                     Else
-                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strOldConffile)
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strOldConffile)
                     End If
 
                     ' SECTION 2. Initialize the treeview control.
@@ -676,7 +676,7 @@ Namespace Config
                     End If
 
                     If Me._Import = True And imp = False Then
-                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strCannotImportNormalSessionFile)
+                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strCannotImportNormalSessionFile)
 
                         Exit Sub
                     End If
@@ -715,7 +715,7 @@ Namespace Config
                     App.Runtime.Windows.treeForm.InitialRefresh()
                 Catch ex As Exception
                     App.Runtime.IsConnectionsFileLoaded = False
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLoadFromXmlFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -791,7 +791,7 @@ Namespace Config
                         inTreeNode.Text = inXmlNode.Attributes("Name").Value.Trim
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strAddNodeFromXmlFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodeFromXmlFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -931,7 +931,7 @@ Namespace Config
                             conI.Inherit = New Connection.Info.Inheritance(conI, .Attributes("Inherit").Value)
 
                             conI.Icon = .Attributes("Icon").Value.Replace(".ico", "")
-                            conI.Panel = My.Resources.strGeneral
+                            conI.Panel = My.Language.strGeneral
                         End If
 
                         If Me.confVersion > 1.4 Then '1.5
@@ -1027,7 +1027,7 @@ Namespace Config
                         End If
                     End With
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strGetConnectionInfoFromXmlFailed, conI.Name, Me.ConnectionFileName, ex.Message), False)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strGetConnectionInfoFromXmlFailed, conI.Name, Me.ConnectionFileName, ex.Message), False)
                 End Try
                 Return conI
             End Function

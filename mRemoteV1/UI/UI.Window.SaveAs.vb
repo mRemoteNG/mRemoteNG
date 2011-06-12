@@ -167,9 +167,9 @@ Namespace UI
                 Me.InitializeComponent()
 
                 If Export Then
-                    Me.SetFormText(My.Resources.strExport)
+                    Me.SetFormText(My.Language.strExport)
                 Else
-                    Me.SetFormText(My.Resources.strMenuSaveConnectionFileAs)
+                    Me.SetFormText(My.Language.strMenuSaveConnectionFileAs)
                 End If
 
                 Me._Export = Export
@@ -183,16 +183,16 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                lvSecurity.Items(0).Text = My.Resources.strCheckboxUsername
-                lvSecurity.Items(1).Text = My.Resources.strCheckboxPassword
-                lvSecurity.Items(2).Text = My.Resources.strCheckboxDomain
-                lvSecurity.Items(3).Text = My.Resources.strCheckboxInheritance
-                btnCancel.Text = My.Resources.strButtonCancel
-                btnOK.Text = My.Resources.strButtonOK
-                Label1.Text = My.Resources.strUncheckProperties
-                lblMremoteXMLOnly.Text = My.Resources.strPropertiesWillOnlyBeSavedMRemoteXML
-                TabText = My.Resources.strMenuSaveConnectionFileAs
-                Text = My.Resources.strMenuSaveConnectionFileAs
+                lvSecurity.Items(0).Text = My.Language.strCheckboxUsername
+                lvSecurity.Items(1).Text = My.Language.strCheckboxPassword
+                lvSecurity.Items(2).Text = My.Language.strCheckboxDomain
+                lvSecurity.Items(3).Text = My.Language.strCheckboxInheritance
+                btnCancel.Text = My.Language.strButtonCancel
+                btnOK.Text = My.Language.strButtonOK
+                Label1.Text = My.Language.strUncheckProperties
+                lblMremoteXMLOnly.Text = My.Language.strPropertiesWillOnlyBeSavedMRemoteXML
+                TabText = My.Language.strMenuSaveConnectionFileAs
+                Text = My.Language.strMenuSaveConnectionFileAs
             End Sub
 
             Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click

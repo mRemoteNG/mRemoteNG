@@ -63,13 +63,13 @@ Namespace Tools
             Public Sub New()
                 Try
                     Me._cMenCons = New ToolStripMenuItem
-                    Me._cMenCons.Text = My.Resources.strConnections
+                    Me._cMenCons.Text = My.Language.strConnections
                     Me._cMenCons.Image = My.Resources.Root
 
                     Me._cMenSep1 = New ToolStripSeparator
 
                     Me._cMenExit = New ToolStripMenuItem
-                    Me._cMenExit.Text = My.Resources.strMenuExit
+                    Me._cMenExit.Text = My.Language.strMenuExit
                     AddHandler Me._cMenExit.Click, AddressOf cMenExit_Click
 
                     Me._cMen = New ContextMenuStrip
@@ -185,7 +185,7 @@ Namespace Tools
             sDlg.FileName = App.Info.Connections.DefaultConnectionsFile
             sDlg.OverwritePrompt = True
 
-            sDlg.Filter = My.Resources.strFiltermRemoteXML & "|*.xml|" & My.Resources.strFiltermRemoteCSV & "|*.csv|" & My.Resources.strFiltervRD2008CSV & "|*.csv|" & My.Resources.strFilterAll & "|*.*"
+            sDlg.Filter = My.Language.strFiltermRemoteXML & "|*.xml|" & My.Language.strFiltermRemoteCSV & "|*.csv|" & My.Language.strFiltervRD2008CSV & "|*.csv|" & My.Language.strFilterAll & "|*.*"
 
             Return sDlg
         End Function
@@ -194,7 +194,7 @@ Namespace Tools
             Dim lDlg As New OpenFileDialog()
             lDlg.CheckFileExists = True
             lDlg.InitialDirectory = App.Info.Connections.DefaultConnectionsPath
-            lDlg.Filter = My.Resources.strFiltermRemoteXML & "|*.xml|" & My.Resources.strFilterAll & "|*.*"
+            lDlg.Filter = My.Language.strFiltermRemoteXML & "|*.xml|" & My.Language.strFilterAll & "|*.*"
 
             Return lDlg
         End Function
@@ -203,7 +203,7 @@ Namespace Tools
             Dim lDlg As New OpenFileDialog()
             lDlg.CheckFileExists = True
             'lDlg.InitialDirectory = App.Info.Connections.DefaultConnectionsPath
-            lDlg.Filter = My.Resources.strFilterRDP & "|*.rdp|" & My.Resources.strFilterAll & "|*.*"
+            lDlg.Filter = My.Language.strFilterRDP & "|*.rdp|" & My.Language.strFilterAll & "|*.*"
 
             Return lDlg
         End Function

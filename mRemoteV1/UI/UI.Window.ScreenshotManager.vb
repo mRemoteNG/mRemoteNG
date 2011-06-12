@@ -133,14 +133,14 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                mMenFile.Text = My.Resources.strMenuFile
-                mMenFileSaveAll.Text = My.Resources.strSaveAll
-                mMenFileRemoveAll.Text = My.Resources.strRemoveAll
-                cMenScreenshotCopy.Text = My.Resources.strMenuCopy
-                cMenScreenshotSave.Text = My.Resources.strSave
-                dlgSaveSingleImage.Filter = My.Resources.strSaveImageFilter
-                TabText = My.Resources.strScreenshots
-                Text = My.Resources.strScreenshots
+                mMenFile.Text = My.Language.strMenuFile
+                mMenFileSaveAll.Text = My.Language.strSaveAll
+                mMenFileRemoveAll.Text = My.Language.strRemoveAll
+                cMenScreenshotCopy.Text = My.Language.strMenuCopy
+                cMenScreenshotSave.Text = My.Language.strSave
+                dlgSaveSingleImage.Filter = My.Language.strSaveImageFilter
+                TabText = My.Language.strScreenshots
+                Text = My.Language.strScreenshots
             End Sub
 #End Region
 

@@ -200,10 +200,10 @@ Namespace Config
                     End If
 
                     If isVerified = False Then
-                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(strErrorBadDatabaseVersion, databaseVersion.ToString, My.Application.Info.ProductName))
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Language.strErrorBadDatabaseVersion, databaseVersion.ToString, My.Application.Info.ProductName))
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(strErrorVerifyDatabaseVersionFailed, ex.Message))
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorVerifyDatabaseVersionFailed, ex.Message))
                 Finally
                     If sqlDataReader IsNot Nothing Then
                         If Not sqlDataReader.IsClosed Then sqlDataReader.Close()
@@ -222,7 +222,7 @@ Namespace Config
                 sqlCon.Open()
 
                 If Not VerifyDatabaseVersion(sqlCon) Then
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, strErrorConnectionListSaveFailed)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strErrorConnectionListSaveFailed)
                     Return
                 End If
 

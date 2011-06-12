@@ -230,6 +230,11 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Images\Images.Enums.vb" />
+    <Compile Include="Language\Language.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Language.resx</DependentUpon>
+    </Compile>
     <Compile Include="Messages\Messages.Collector.vb" />
     <Compile Include="Messages\Messages.Message.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -342,16 +347,21 @@
       <DependentUpon>frmPassword.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Resources.de.resx">
+    <EmbeddedResource Include="Language\Language.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Resources.en-US.resx">
+    <EmbeddedResource Include="Language\Language.en-US.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Resources.fr.resx">
+    <EmbeddedResource Include="Language\Language.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Language.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My</CustomToolNamespace>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Language\Language.fr.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Resources.pl.resx" />
+    <EmbeddedResource Include="Language\Language.pl.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

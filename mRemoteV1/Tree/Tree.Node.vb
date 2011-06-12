@@ -185,15 +185,15 @@ Namespace Tree
 
                 Select Case NodeType
                     Case Type.Connection
-                        nNode.Text = My.Resources.strNewConnection
+                        nNode.Text = My.Language.strNewConnection
                         nNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
                         nNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
                     Case Type.Container
-                        nNode.Text = My.Resources.strNewFolder
+                        nNode.Text = My.Language.strNewFolder
                         nNode.ImageIndex = Images.Enums.TreeImage.Container
                         nNode.SelectedImageIndex = Images.Enums.TreeImage.Container
                     Case Type.Root
-                        nNode.Text = My.Resources.strNewRoot
+                        nNode.Text = My.Language.strNewRoot
                         nNode.ImageIndex = Images.Enums.TreeImage.Root
                         nNode.SelectedImageIndex = Images.Enums.TreeImage.Root
                 End Select
@@ -343,7 +343,7 @@ Namespace Tree
                     Next
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strErrorCloneNodeFailed, ex.Message))
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Language.strErrorCloneNodeFailed, ex.Message))
             End Try
         End Sub
 
@@ -396,11 +396,11 @@ Namespace Tree
                         MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "The root item cannot be deleted!")
                     Case Type.Container
                         If Tree.Node.IsEmpty(SelectedNode) = False Then
-                            If MsgBox(String.Format(My.Resources.strConfirmDeleteNodeFolder, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+                            If MsgBox(String.Format(My.Language.strConfirmDeleteNodeFolder, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
                                 SelectedNode.Remove()
                             End If
                         Else
-                            If MsgBox(String.Format(My.Resources.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+                            If MsgBox(String.Format(My.Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
                                 For Each tNode As TreeNode In SelectedNode.Nodes
                                     tNode.Remove()
                                 Next
@@ -408,7 +408,7 @@ Namespace Tree
                             End If
                         End If
                     Case Type.Connection
-                        If MsgBox(String.Format(My.Resources.strConfirmDeleteNodeConnection, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+                        If MsgBox(String.Format(My.Language.strConfirmDeleteNodeConnection, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
                             SelectedNode.Remove()
                         End If
                     Case Else
@@ -507,7 +507,7 @@ Namespace Tree
             Else
                 _TreeView.Nodes.Clear()
                 '_TreeView.Nodes.Add("Credentials")
-                _TreeView.Nodes.Add(My.Resources.strConnections)
+                _TreeView.Nodes.Add(My.Language.strConnections)
             End If
         End Sub
 

@@ -254,15 +254,15 @@ Namespace UI
 
 #Region "Private Methods"
             Private Sub ApplyLanguage()
-                lblLicense.Text = My.Resources.strLabelReleasedUnderGPL
-                lblChangeLog.Text = My.Resources.strLabelChangeLog
-                TabText = My.Resources.strAbout
-                Text = My.Resources.strAbout
+                lblLicense.Text = My.Language.strLabelReleasedUnderGPL
+                lblChangeLog.Text = My.Language.strLabelChangeLog
+                TabText = My.Language.strAbout
+                Text = My.Language.strAbout
             End Sub
 
             Private Sub ApplyEditions()
 #If PORTABLE Then
-                lblEdition.Text = My.Resources.strLabelPortableEdition
+                lblEdition.Text = My.Language.strLabelPortableEdition
                 lblEdition.Visible = True
 #End If
             End Sub
@@ -295,9 +295,9 @@ Namespace UI
 
                     Me.lblVersion.Text = "Version " & My.Application.Info.Version.ToString
 
-                    FillLinkLabel(llblFAMFAMFAM, My.Resources.strFAMFAMFAMAttribution, My.Resources.strFAMFAMFAMAttributionURL)
-                    FillLinkLabel(llblMagicLibrary, My.Resources.strMagicLibraryAttribution, My.Resources.strMagicLibraryAttributionURL)
-                    FillLinkLabel(llblWeifenLuo, My.Resources.strWeifenLuoAttribution, My.Resources.strWeifenLuoAttributionURL)
+                    FillLinkLabel(llblFAMFAMFAM, My.Language.strFAMFAMFAMAttribution, My.Language.strFAMFAMFAMAttributionURL)
+                    FillLinkLabel(llblMagicLibrary, My.Language.strMagicLibraryAttribution, My.Language.strMagicLibraryAttributionURL)
+                    FillLinkLabel(llblWeifenLuo, My.Language.strWeifenLuoAttribution, My.Language.strWeifenLuoAttributionURL)
 
                     If File.Exists(My.Application.Info.DirectoryPath & "\CHANGELOG.TXT") Then
                         Dim sR As New StreamReader(My.Application.Info.DirectoryPath & "\CHANGELOG.TXT")
@@ -310,15 +310,15 @@ Namespace UI
             End Sub
 
             Private Sub llblFAMFAMFAM_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llblFAMFAMFAM.LinkClicked
-                App.Runtime.GoToURL(My.Resources.strFAMFAMFAMAttributionURL)
+                App.Runtime.GoToURL(My.Language.strFAMFAMFAMAttributionURL)
             End Sub
 
             Private Sub llblMagicLibrary_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llblMagicLibrary.LinkClicked
-                App.Runtime.GoToURL(My.Resources.strMagicLibraryAttributionURL)
+                App.Runtime.GoToURL(My.Language.strMagicLibraryAttributionURL)
             End Sub
 
             Private Sub llblWeifenLuo_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles llblWeifenLuo.LinkClicked
-                App.Runtime.GoToURL(My.Resources.strWeifenLuoAttributionURL)
+                App.Runtime.GoToURL(My.Language.strWeifenLuoAttributionURL)
             End Sub
 #End Region
         End Class

@@ -24,7 +24,7 @@ Namespace Tools
                     OrderPrefix &= vbTab
                 Next
 
-                Return OrderPrefix & My.Resources.ResourceManager.GetString(value)
+                Return OrderPrefix & My.Language.ResourceManager.GetString(value)
             End Function
         End Class
 
@@ -43,7 +43,7 @@ Namespace Tools
                 Get
                     If Not Me.Localized Then
                         Me.Localized = True
-                        Me.DisplayNameValue = My.Resources.ResourceManager.GetString(Me.DisplayNameValue)
+                        Me.DisplayNameValue = My.Language.ResourceManager.GetString(Me.DisplayNameValue)
                     End If
 
                     Return MyBase.DisplayName
@@ -66,7 +66,7 @@ Namespace Tools
                 Get
                     If Not Me.Localized Then
                         Me.Localized = True
-                        Me.DescriptionValue = My.Resources.ResourceManager.GetString(Me.DescriptionValue)
+                        Me.DescriptionValue = My.Language.ResourceManager.GetString(Me.DescriptionValue)
                     End If
 
                     Return MyBase.Description
@@ -92,7 +92,7 @@ Namespace Tools
                 Get
                     If Not Me.Localized Then
                         Me.Localized = True
-                        Me.DisplayNameValue = String.Format(My.Resources.strFormatInherit, My.Resources.ResourceManager.GetString(Me.DisplayNameValue))
+                        Me.DisplayNameValue = String.Format(My.Language.strFormatInherit, My.Resources.ResourceManager.GetString(Me.DisplayNameValue))
                     End If
 
                     Return MyBase.DisplayName
@@ -116,7 +116,7 @@ Namespace Tools
                 Get
                     If Not Me.Localized Then
                         Me.Localized = True
-                        Me.DescriptionValue = String.Format(My.Resources.strFormatInheritDescription, My.Resources.ResourceManager.GetString(Me.DescriptionValue))
+                        Me.DescriptionValue = String.Format(My.Language.strFormatInheritDescription, My.Resources.ResourceManager.GetString(Me.DescriptionValue))
                     End If
 
                     Return MyBase.Description

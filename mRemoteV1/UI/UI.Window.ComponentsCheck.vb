@@ -461,10 +461,10 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                TabText = My.Resources.strComponentsCheck
-                Text = My.Resources.strComponentsCheck
-                chkAlwaysShow.Text = My.Resources.strCcAlwaysShowScreen
-                btnCheckAgain.Text = My.Resources.strCcCheckAgain
+                TabText = My.Language.strComponentsCheck
+                Text = My.Language.strComponentsCheck
+                chkAlwaysShow.Text = My.Language.strCcAlwaysShowScreen
+                btnCheckAgain.Text = My.Language.strCcCheckAgain
             End Sub
 
             Private Sub btnCheckAgain_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCheckAgain.Click
@@ -479,7 +479,7 @@ Namespace UI
 
 #Region "Private Methods"
             Private Sub CheckComponents()
-                Dim errorMsg As String = My.Resources.strCcNotInstalledProperly
+                Dim errorMsg As String = My.Language.strCcNotInstalledProperly
 
                 pnlCheck1.Visible = True
                 pnlCheck2.Visible = True
@@ -502,13 +502,13 @@ Namespace UI
 
                     pbCheck1.Image = My.Resources.Good_Symbol
                     lblCheck1.ForeColor = Color.DarkOliveGreen
-                    lblCheck1.Text = "RDP (Remote Desktop) " & My.Resources.strCcCheckSucceeded
-                    txtCheck1.Text = String.Format(My.Resources.strCcRDPOK, RDP.Version)
+                    lblCheck1.Text = "RDP (Remote Desktop) " & My.Language.strCcCheckSucceeded
+                    txtCheck1.Text = String.Format(My.Language.strCcRDPOK, RDP.Version)
                 Catch ex As Exception
                     pbCheck1.Image = My.Resources.Bad_Symbol
                     lblCheck1.ForeColor = Color.Firebrick
-                    lblCheck1.Text = "RDP (Remote Desktop) " & My.Resources.strCcCheckFailed
-                    txtCheck1.Text = My.Resources.strCcRDPFailed
+                    lblCheck1.Text = "RDP (Remote Desktop) " & My.Language.strCcCheckFailed
+                    txtCheck1.Text = My.Language.strCcRDPFailed
 
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "RDP " & errorMsg, True)
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
@@ -530,13 +530,13 @@ Namespace UI
 
                     pbCheck2.Image = My.Resources.Good_Symbol
                     lblCheck2.ForeColor = Color.DarkOliveGreen
-                    lblCheck2.Text = "VNC (Virtual Network Computing) " & My.Resources.strCcCheckSucceeded
-                    txtCheck2.Text = String.Format(My.Resources.strCcVNCOK, VNC.ProductVersion)
+                    lblCheck2.Text = "VNC (Virtual Network Computing) " & My.Language.strCcCheckSucceeded
+                    txtCheck2.Text = String.Format(My.Language.strCcVNCOK, VNC.ProductVersion)
                 Catch ex As Exception
                     pbCheck2.Image = My.Resources.Bad_Symbol
                     lblCheck2.ForeColor = Color.Firebrick
-                    lblCheck2.Text = "VNC (Virtual Network Computing) " & My.Resources.strCcCheckFailed
-                    txtCheck2.Text = My.Resources.strCcVNCFailed
+                    lblCheck2.Text = "VNC (Virtual Network Computing) " & My.Language.strCcCheckFailed
+                    txtCheck2.Text = My.Language.strCcVNCFailed
 
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "VNC " & errorMsg, True)
                     'mC.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
@@ -555,13 +555,13 @@ Namespace UI
                 If File.Exists(pPath) Then
                     pbCheck3.Image = My.Resources.Good_Symbol
                     lblCheck3.ForeColor = Color.DarkOliveGreen
-                    lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " & My.Resources.strCcCheckSucceeded
-                    txtCheck3.Text = My.Resources.strCcPuttyOK
+                    lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " & My.Language.strCcCheckSucceeded
+                    txtCheck3.Text = My.Language.strCcPuttyOK
                 Else
                     pbCheck3.Image = My.Resources.Bad_Symbol
                     lblCheck3.ForeColor = Color.Firebrick
-                    lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " & My.Resources.strCcCheckFailed
-                    txtCheck3.Text = My.Resources.strCcPuttyFailed
+                    lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " & My.Language.strCcCheckFailed
+                    txtCheck3.Text = My.Language.strCcPuttyFailed
 
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "PuTTY " & errorMsg, True)
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "File " & pPath & " does not exist.", True)
@@ -582,13 +582,13 @@ Namespace UI
 
                     pbCheck4.Image = My.Resources.Good_Symbol
                     lblCheck4.ForeColor = Color.DarkOliveGreen
-                    lblCheck4.Text = "ICA (Citrix ICA) " & My.Resources.strCcCheckSucceeded
-                    txtCheck4.Text = String.Format(My.Resources.strCcICAOK, ICA.Version)
+                    lblCheck4.Text = "ICA (Citrix ICA) " & My.Language.strCcCheckSucceeded
+                    txtCheck4.Text = String.Format(My.Language.strCcICAOK, ICA.Version)
                 Catch ex As Exception
                     pbCheck4.Image = My.Resources.Bad_Symbol
                     lblCheck4.ForeColor = Color.Firebrick
-                    lblCheck4.Text = "ICA (Citrix ICA) " & My.Resources.strCcCheckFailed
-                    txtCheck4.Text = My.Resources.strCcICAFailed
+                    lblCheck4.Text = "ICA (Citrix ICA) " & My.Language.strCcCheckFailed
+                    txtCheck4.Text = My.Language.strCcICAFailed
 
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ICA " & errorMsg, True)
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
@@ -614,13 +614,13 @@ Namespace UI
                 If GeckoBad = False Then
                     pbCheck5.Image = My.Resources.Good_Symbol
                     lblCheck5.ForeColor = Color.DarkOliveGreen
-                    lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " & My.Resources.strCcCheckSucceeded
-                    txtCheck5.Text = My.Resources.strCcGeckoOK
+                    lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " & My.Language.strCcCheckSucceeded
+                    txtCheck5.Text = My.Language.strCcGeckoOK
                 Else
                     pbCheck5.Image = My.Resources.Bad_Symbol
                     lblCheck5.ForeColor = Color.Firebrick
-                    lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " & My.Resources.strCcCheckFailed
-                    txtCheck5.Text = My.Resources.strCcGeckoFailed
+                    lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " & My.Language.strCcCheckFailed
+                    txtCheck5.Text = My.Language.strCcGeckoFailed
 
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Gecko " & errorMsg, True)
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " & My.Settings.XULRunnerPath, True)
@@ -634,13 +634,13 @@ Namespace UI
 
                     pbCheck6.Image = My.Resources.Good_Symbol
                     lblCheck6.ForeColor = Color.DarkOliveGreen
-                    lblCheck6.Text = "(RDP) Sessions " & My.Resources.strCcCheckSucceeded
-                    txtCheck6.Text = My.Resources.strCcEOLOK
+                    lblCheck6.Text = "(RDP) Sessions " & My.Language.strCcCheckSucceeded
+                    txtCheck6.Text = My.Language.strCcEOLOK
                 Catch ex As Exception
                     pbCheck6.Image = My.Resources.Bad_Symbol
                     lblCheck6.ForeColor = Color.Firebrick
-                    lblCheck6.Text = "(RDP) Sessions " & My.Resources.strCcCheckFailed
-                    txtCheck6.Text = My.Resources.strCcEOLFailed
+                    lblCheck6.Text = "(RDP) Sessions " & My.Language.strCcCheckFailed
+                    txtCheck6.Text = My.Language.strCcEOLFailed
 
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "EOLWTSCOM " & errorMsg, True)
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)

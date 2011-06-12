@@ -105,14 +105,14 @@ Namespace Connection
                     '    VNC.RestrictPixel = False
                     'End If
 
-                    'VNC.ConnectingText = My.Resources.strInheritConnecting & " (SmartCode VNC viewer)"
-                    'VNC.DisconnectedText = My.Resources.strInheritDisconnected
+                    'VNC.ConnectingText = My.Language.strInheritConnecting & " (SmartCode VNC viewer)"
+                    'VNC.DisconnectedText = My.Language.strInheritDisconnected
                     'VNC.MessageBoxes = False
                     'VNC.EndInit()
 
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strVncSetPropsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSetPropsFailed & vbNewLine & ex.Message, True)
                     Return False
                 End Try
             End Function
@@ -123,7 +123,7 @@ Namespace Connection
                 Try
                     VNC.Connect(Me.Info.Hostname, Me.Info.VNCViewOnly, Info.VNCSmartSizeMode <> SmartSizeMode.SmartSNo)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strVncConnectionOpenFailed & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionOpenFailed & vbNewLine & ex.Message)
                     Return False
                 End Try
 
@@ -134,7 +134,7 @@ Namespace Connection
                 Try
                     VNC.Disconnect()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strVncConnectionDisconnectFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionDisconnectFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -147,7 +147,7 @@ Namespace Connection
                             VNC.SendSpecialKeys(SpecialKeys.CtrlEsc)
                     End Select
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strVncSendSpecialKeysFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSendSpecialKeysFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -156,7 +156,7 @@ Namespace Connection
                     SmartSize = Not SmartSize
                     RefreshScreen()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strVncToggleSmartSizeFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncToggleSmartSizeFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -164,7 +164,7 @@ Namespace Connection
                 Try
                     ViewOnly = Not ViewOnly
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strVncToggleViewOnlyFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncToggleViewOnlyFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -177,7 +177,7 @@ Namespace Connection
                     '    mC.AddMessage(Messages.MessageClass.InformationMsg, "VNC Server doesn't support chat")
                     'End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strVncStartChatFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncStartChatFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -197,7 +197,7 @@ Namespace Connection
                 Try
                     VNC.FullScreenUpdate()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strVncRefreshFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncRefreshFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -212,7 +212,7 @@ Namespace Connection
                         VNC.GetPassword = AddressOf VNCEvent_Authenticate
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strVncSetEventHandlersFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSetEventHandlersFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

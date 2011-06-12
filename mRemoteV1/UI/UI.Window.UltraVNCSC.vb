@@ -85,7 +85,7 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                btnDisconnect.Text = My.Resources.strButtonDisconnect
+                btnDisconnect.Text = My.Language.strButtonDisconnect
             End Sub
 
             Private Sub StartListening()
@@ -103,7 +103,7 @@ Namespace UI
                     'vnc.Show()
 
                     'vnc.StretchMode = ViewerX.ScreenStretchMode.SSM_ASPECT
-                    'vnc.ListeningText = My.Resources.strInheritListeningForIncomingVNCConnections & " " & My.Settings.UVNCSCPort
+                    'vnc.ListeningText = My.Language.strInheritListeningForIncomingVNCConnections & " " & My.Settings.UVNCSCPort
 
                     'vnc.ListenEx(My.Settings.UVNCSCPort)
                 Catch ex As Exception

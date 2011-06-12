@@ -464,38 +464,38 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                cMenTreeAddConnection.Text = My.Resources.strAddConnection
-                cMenTreeAddFolder.Text = My.Resources.strAddFolder
-                cMenTreeConnect.Text = My.Resources.strConnect
-                cMenTreeConnectWithOptions.Text = My.Resources.strConnectWithOptions
-                cMenTreeConnectWithOptionsConnectToConsoleSession.Text = My.Resources.strConnectToConsoleSession
-                cMenTreeConnectWithOptionsConnectInFullscreen.Text = My.Resources.strConnectInFullscreen
-                cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = My.Resources.strChoosePanelBeforeConnecting
-                cMenTreeDisconnect.Text = My.Resources.strMenuDisconnect
-                cMenTreeToolsTransferFile.Text = My.Resources.strMenuTransferFile
-                cMenTreeToolsImportExport.Text = My.Resources.strImportExport
-                cMenTreeToolsImportExportExportmRemoteXML.Text = My.Resources.strExportmRemoteXML
-                cMenTreeToolsImportExportImportmRemoteXML.Text = My.Resources.strImportmRemoteXML
-                cMenTreeToolsImportExportImportFromAD.Text = My.Resources.strImportAD
-                cMenTreeToolsImportExportImportFromRDPFiles.Text = My.Resources.strImportRDPFiles
-                cMenTreeToolsImportExportImportFromPortScan.Text = My.Resources.strImportPortScan
-                cMenTreeToolsSort.Text = My.Resources.strSort
-                cMenTreeToolsSortAscending.Text = My.Resources.strSortAsc
-                cMenTreeToolsSortDescending.Text = My.Resources.strSortDesc
-                cMenTreeToolsExternalApps.Text = My.Resources.strMenuExternalTools
-                cMenTreeDuplicate.Text = My.Resources.strDuplicate
-                cMenTreeRename.Text = My.Resources.strRename
-                cMenTreeDelete.Text = My.Resources.strMenuDelete
-                cMenTreeMoveUp.Text = My.Resources.strMoveUp
-                cMenTreeMoveDown.Text = My.Resources.strMoveDown
-                mMenAddConnection.ToolTipText = My.Resources.strAddConnection
-                mMenAddFolder.ToolTipText = My.Resources.strAddFolder
-                mMenView.ToolTipText = My.Resources.strMenuView.Replace("&", "")
-                mMenViewExpandAllFolders.Text = My.Resources.strExpandAllFolders
-                mMenViewCollapseAllFolders.Text = My.Resources.strCollapseAllFolders
-                mMenSortAscending.ToolTipText = My.Resources.strSortAsc
-                TabText = My.Resources.strConnections
-                Text = My.Resources.strConnections
+                cMenTreeAddConnection.Text = My.Language.strAddConnection
+                cMenTreeAddFolder.Text = My.Language.strAddFolder
+                cMenTreeConnect.Text = My.Language.strConnect
+                cMenTreeConnectWithOptions.Text = My.Language.strConnectWithOptions
+                cMenTreeConnectWithOptionsConnectToConsoleSession.Text = My.Language.strConnectToConsoleSession
+                cMenTreeConnectWithOptionsConnectInFullscreen.Text = My.Language.strConnectInFullscreen
+                cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = My.Language.strChoosePanelBeforeConnecting
+                cMenTreeDisconnect.Text = My.Language.strMenuDisconnect
+                cMenTreeToolsTransferFile.Text = My.Language.strMenuTransferFile
+                cMenTreeToolsImportExport.Text = My.Language.strImportExport
+                cMenTreeToolsImportExportExportmRemoteXML.Text = My.Language.strExportmRemoteXML
+                cMenTreeToolsImportExportImportmRemoteXML.Text = My.Language.strImportmRemoteXML
+                cMenTreeToolsImportExportImportFromAD.Text = My.Language.strImportAD
+                cMenTreeToolsImportExportImportFromRDPFiles.Text = My.Language.strImportRDPFiles
+                cMenTreeToolsImportExportImportFromPortScan.Text = My.Language.strImportPortScan
+                cMenTreeToolsSort.Text = My.Language.strSort
+                cMenTreeToolsSortAscending.Text = My.Language.strSortAsc
+                cMenTreeToolsSortDescending.Text = My.Language.strSortDesc
+                cMenTreeToolsExternalApps.Text = My.Language.strMenuExternalTools
+                cMenTreeDuplicate.Text = My.Language.strDuplicate
+                cMenTreeRename.Text = My.Language.strRename
+                cMenTreeDelete.Text = My.Language.strMenuDelete
+                cMenTreeMoveUp.Text = My.Language.strMoveUp
+                cMenTreeMoveDown.Text = My.Language.strMoveDown
+                mMenAddConnection.ToolTipText = My.Language.strAddConnection
+                mMenAddFolder.ToolTipText = My.Language.strAddFolder
+                mMenView.ToolTipText = My.Language.strMenuView.Replace("&", "")
+                mMenViewExpandAllFolders.Text = My.Language.strExpandAllFolders
+                mMenViewCollapseAllFolders.Text = My.Language.strCollapseAllFolders
+                mMenSortAscending.ToolTipText = My.Language.strSortAsc
+                TabText = My.Language.strConnections
+                Text = My.Language.strConnections
             End Sub
 #End Region
 
@@ -543,7 +543,7 @@ Namespace UI
             Private Sub tvConnections_AfterLabelEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.NodeLabelEditEventArgs) Handles tvConnections.AfterLabelEdit
                 Try
                     If My.Settings.SetHostnameLikeDisplayName Then
-                        If e.Node.Text = My.Resources.strNewConnection Then
+                        If e.Node.Text = My.Language.strNewConnection Then
                             TryCast(e.Node.Tag, mRemoteNG.Connection.Info).Hostname = e.Label
                         End If
                     End If
@@ -1051,7 +1051,7 @@ Namespace UI
                     Me.tvConnections.SelectedNode = newNode
                     Me.tvConnections.SelectedNode.BeginEdit()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strErrorAddFolderFailed, ex.Message), True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorAddFolderFailed, ex.Message), True)
                 End Try
             End Sub
 

@@ -373,7 +373,7 @@ Namespace App
                 If Not regKey.GetValue("Enabled") = 0 Then isFipsPolicyEnabled = True
 
                 If isFipsPolicyEnabled Then
-                    MessageBox.Show(frmMain, String.Format(My.Resources.strErrorFipsPolicyIncompatible, My.Application.Info.ProductName), My.Application.Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show(frmMain, String.Format(My.Language.strErrorFipsPolicyIncompatible, My.Application.Info.ProductName), My.Application.Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                     [Exit](1)
                 End If
             End Sub
@@ -469,7 +469,7 @@ Namespace App
 #If Not PORTABLE Then
                 Log.InfoFormat("{0} {1}", My.Application.Info.ProductName.ToString, My.Application.Info.Version.ToString)
 #Else
-                log.InfoFormat("{0} {1} {2}", My.Application.Info.ProductName.ToString, My.Application.Info.Version.ToString, My.Resources.strLabelPortableEdition)
+                log.InfoFormat("{0} {1} {2}", My.Application.Info.ProductName.ToString, My.Application.Info.Version.ToString, My.Language.strLabelPortableEdition)
 #End If
                 Log.InfoFormat("System Culture: {0}/{1}", Threading.Thread.CurrentThread.CurrentUICulture.Name, Threading.Thread.CurrentThread.CurrentUICulture.NativeName)
             End Sub
@@ -592,7 +592,7 @@ Namespace App
                         My.Settings.ResetToolbars = True
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strCommandLineArgsCouldNotBeParsed & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strCommandLineArgsCouldNotBeParsed & vbNewLine & ex.Message)
                 End Try
             End Sub
 
@@ -637,7 +637,7 @@ Namespace App
                     Dim SettingsSave As New Config.Settings.Save()
                     SettingsSave.Save()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSettingsCouldNotBeSavedOrTrayDispose & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSettingsCouldNotBeSavedOrTrayDispose & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class
@@ -772,7 +772,7 @@ Namespace App
         Public Shared Function AddPanel(Optional ByVal title As String = "", Optional ByVal noTabber As Boolean = False) As Form
             Try
                 If title = "" Then
-                    title = My.Resources.strNewPanel
+                    title = My.Language.strNewPanel
                 End If
 
                 Dim pnlcForm As New DockContent
@@ -784,13 +784,13 @@ Namespace App
 
                 'create rename item
                 Dim cMenRen As New ToolStripMenuItem
-                cMenRen.Text = My.Resources.strRename
+                cMenRen.Text = My.Language.strRename
                 cMenRen.Image = My.Resources.Rename
                 cMenRen.Tag = pnlcForm
                 AddHandler cMenRen.Click, AddressOf cMenConnectionPanelRename_Click
 
                 Dim cMenScreens As New ToolStripMenuItem
-                cMenScreens.Text = My.Resources.strSendTo
+                cMenScreens.Text = My.Language.strSendTo
                 cMenScreens.Image = My.Resources.Monitor
                 cMenScreens.Tag = pnlcForm
                 cMenScreens.DropDownItems.Add("Dummy")
@@ -828,7 +828,7 @@ Namespace App
                 Dim conW As UI.Window.Connection
                 conW = sender.Tag
 
-                Dim nTitle As String = InputBox(My.Resources.strNewTitle & ":", , sender.Tag.Text.Replace("&&", "&"))
+                Dim nTitle As String = InputBox(My.Language.strNewTitle & ":", , sender.Tag.Text.Replace("&&", "&"))
 
                 If nTitle <> "" Then
                     conW.SetFormText(nTitle.Replace("&", "&&"))
@@ -844,7 +844,7 @@ Namespace App
                 cMenScreens.DropDownItems.Clear()
 
                 For i As Integer = 0 To Screen.AllScreens.Length - 1
-                    Dim cMenScreen As New ToolStripMenuItem(My.Resources.strScreen & " " & i + 1)
+                    Dim cMenScreen As New ToolStripMenuItem(My.Language.strScreen & " " & i + 1)
                     cMenScreen.Tag = New ArrayList
                     cMenScreen.Image = My.Resources.Monitor_GoTo
                     TryCast(cMenScreen.Tag, ArrayList).Add(Screen.AllScreens(i))
@@ -889,7 +889,7 @@ Namespace App
                 xW.Indentation = 4
 
                 xW.WriteStartDocument()
-                xW.WriteStartElement(My.Resources.strConnections)
+                xW.WriteStartElement(My.Language.strConnections)
                 xW.WriteAttributeString("Export", "", "False")
                 xW.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY")
                 xW.WriteAttributeString("ConfVersion", "", "2.2")
@@ -911,7 +911,7 @@ Namespace App
                 conL.ConnectionFileName = filename
                 conL.Load()
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strCouldNotCreateNewConnectionsFile & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strCouldNotCreateNewConnectionsFile & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -985,9 +985,9 @@ Namespace App
 
                     If File.Exists(conL.ConnectionFileName) = False Then
                         If WithDialog Then
-                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strConnectionsFileCouldNotBeLoaded, conL.ConnectionFileName))
+                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Language.strConnectionsFileCouldNotBeLoaded, conL.ConnectionFileName))
                         Else
-                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strConnectionsFileCouldNotBeLoadedNew, conL.ConnectionFileName))
+                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strConnectionsFileCouldNotBeLoadedNew, conL.ConnectionFileName))
                             App.Runtime.NewConnections(conL.ConnectionFileName)
                         End If
 
@@ -997,7 +997,7 @@ Namespace App
                     Try
                         File.Copy(conL.ConnectionFileName, conL.ConnectionFileName & "_BAK", True)
                     Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strConnectionsFileBackupFailed & vbNewLine & vbNewLine & ex.Message)
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strConnectionsFileBackupFailed & vbNewLine & vbNewLine & ex.Message)
                     End Try
                 End If
 
@@ -1036,7 +1036,7 @@ Namespace App
                     TimerSqlWatcher.Start()
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeLoaded & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeLoaded & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1077,7 +1077,7 @@ Namespace App
                     Next
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeImported & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeImported & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1210,7 +1210,7 @@ Namespace App
                     Next
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpFileCouldNotBeImported & vbNewLine & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpFileCouldNotBeImported & vbNewLine & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1352,7 +1352,7 @@ Namespace App
                     TimerSqlWatcher.Start()
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeSaved & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeSaved & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1408,7 +1408,7 @@ Namespace App
 
                 conS.Save()
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strConnectionsFileCouldNotSaveAs, conS.ConnectionFileName) & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strConnectionsFileCouldNotSaveAs, conS.ConnectionFileName) & vbNewLine & ex.Message)
             End Try
 
         End Sub
@@ -1422,7 +1422,7 @@ Namespace App
                 If Not String.IsNullOrEmpty(Uri.Host) Then
                     Dim newConnectionInfo As New Connection.Info
 
-                    newConnectionInfo.Name = String.Format(My.Resources.strQuick, Uri.Host)
+                    newConnectionInfo.Name = String.Format(My.Language.strQuick, Uri.Host)
                     newConnectionInfo.Protocol = Protocol
                     newConnectionInfo.Hostname = Uri.Host
                     If Uri.Port = -1 Then
@@ -1441,7 +1441,7 @@ Namespace App
                     Return newConnectionInfo
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strQuickConnectFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strQuickConnectFailed & vbNewLine & ex.Message)
             End Try
 
             Return Nothing
@@ -1451,7 +1451,7 @@ Namespace App
             Try
                 OpenConnection(Connection.Info.Force.None)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1473,7 +1473,7 @@ Namespace App
                     Next
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1481,7 +1481,7 @@ Namespace App
             Try
                 OpenConnection(ConnectionInfo, Connection.Info.Force.None)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1489,7 +1489,7 @@ Namespace App
             Try
                 OpenConnectionFinal(ConnectionInfo, Connection.Info.Force.None, ConnectionForm)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1497,7 +1497,7 @@ Namespace App
             Try
                 OpenConnectionFinal(ConnectionInfo, Force, ConnectionForm)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1505,7 +1505,7 @@ Namespace App
             Try
                 OpenConnectionFinal(ConnectionInfo, Force, Nothing)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1513,7 +1513,7 @@ Namespace App
         Private Shared Sub OpenConnectionFinal(ByVal newConnectionInfo As mRemoteNG.Connection.Info, ByVal Force As mRemoteNG.Connection.Info.Force, ByVal ConForm As Form)
             Try
                 If newConnectionInfo.Hostname = "" And newConnectionInfo.Protocol <> Connection.Protocol.Protocols.IntApp Then
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strConnectionOpenFailedNoHostname)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strConnectionOpenFailedNoHostname)
                     Exit Sub
                 End If
 
@@ -1557,7 +1557,7 @@ Namespace App
                         newProtocol = New Connection.Protocol.IntApp
 
                         If newConnectionInfo.ExtApp = "" Then
-                            Throw New Exception(My.Resources.strNoExtAppDefined)
+                            Throw New Exception(My.Language.strNoExtAppDefined)
                         End If
                     Case Else
                         Exit Sub
@@ -1638,7 +1638,7 @@ Namespace App
                     End If
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionOpenFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 
@@ -1660,7 +1660,7 @@ Namespace App
 #Region "Event Handlers"
         Public Shared Sub Prot_Event_Disconnected(ByVal sender As Object, ByVal DisconnectedMessage As String)
             Try
-                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strProtocolEventDisconnected, DisconnectedMessage), True)
+                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strProtocolEventDisconnected, DisconnectedMessage), True)
 
                 Dim Prot As Connection.Protocol.Base = sender
                 If Prot.InterfaceControl.Info.Protocol = Connection.Protocol.Protocols.RDP Then
@@ -1669,14 +1669,14 @@ Namespace App
                     Dim ReasonDescription As String = Reason(1)
                     If ReasonCode > 3 Then
                         If ReasonDescription <> "" Then
-                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strRdpDisconnected & vbNewLine & ReasonDescription & vbNewLine & String.Format(My.Resources.strErrorCode, ReasonCode))
+                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strRdpDisconnected & vbNewLine & ReasonDescription & vbNewLine & String.Format(My.Language.strErrorCode, ReasonCode))
                         Else
-                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strRdpDisconnected & vbNewLine & String.Format(My.Resources.strErrorCode, ReasonCode))
+                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strRdpDisconnected & vbNewLine & String.Format(My.Language.strErrorCode, ReasonCode))
                         End If
                     End If
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strProtocolEventDisconnectFailed, ex.Message), True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strProtocolEventDisconnectFailed, ex.Message), True)
             End Try
         End Sub
 
@@ -1684,9 +1684,9 @@ Namespace App
             Try
                 Dim Prot As Connection.Protocol.Base = sender
 
-                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnenctionCloseEvent, True)
+                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnenctionCloseEvent, True)
 
-                MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Resources.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString, My.User.Name))
+                MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString, My.User.Name))
 
                 Prot.InterfaceControl.Info.OpenConnections.Remove(Prot)
 
@@ -1701,30 +1701,30 @@ Namespace App
                     End If
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnenctionCloseEventFailed & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnenctionCloseEventFailed & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
         Public Shared Sub Prot_Event_Connected(ByVal sender As Object)
             Dim prot As mRemoteNG.Connection.Protocol.Base = sender
 
-            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnectionEventConnected, True)
-            MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Resources.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString, My.User.Name, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField))
+            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnectionEventConnected, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, String.Format(My.Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString, My.User.Name, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField))
         End Sub
 
         Public Shared Sub Prot_Event_ErrorOccured(ByVal sender As Object, ByVal ErrorMessage As String)
             Try
-                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strConnectionEventErrorOccured, True)
+                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnectionEventErrorOccured, True)
 
                 Dim Prot As Connection.Protocol.Base = sender
 
                 If Prot.InterfaceControl.Info.Protocol = Connection.Protocol.Protocols.RDP Then
                     If ErrorMessage > -1 Then
-                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Resources.strConnectionRdpErrorDetail, ErrorMessage, Connection.Protocol.RDP.FatalErrors.GetError(ErrorMessage)))
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Language.strConnectionRdpErrorDetail, ErrorMessage, Connection.Protocol.RDP.FatalErrors.GetError(ErrorMessage)))
                     End If
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionEventConnectionFailed & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionEventConnectionFailed & vbNewLine & ex.Message, True)
             End Try
         End Sub
 #End Region
@@ -1795,7 +1795,7 @@ Namespace App
                 sWr.WriteLine(Text)
                 sWr.Close()
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLogWriteToFileFailed)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLogWriteToFileFailed)
             End Try
         End Sub
 
@@ -1812,7 +1812,7 @@ Namespace App
 
                 Return True
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strLogWriteToFileFinalLocationFailed & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLogWriteToFileFinalLocationFailed & vbNewLine & ex.Message, True)
                 Return False
             Finally
                 If streamReader IsNot Nothing Then
@@ -1840,7 +1840,7 @@ Namespace App
 
                 ChangeMainFormText(txt)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSettingMainFormTextFailed & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSettingMainFormTextFailed & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -1898,7 +1898,7 @@ Namespace App
 
         Private Shared Sub SQLUpdateCheckFinished(ByVal UpdateAvailable As Boolean)
             If UpdateAvailable = True Then
-                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strSqlUpdateCheckUpdateAvailable, True)
+                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strSqlUpdateCheckUpdateAvailable, True)
                 LoadConnectionsBG()
             End If
         End Sub

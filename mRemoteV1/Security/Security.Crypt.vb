@@ -37,7 +37,7 @@ Namespace Security
 
                 Return Convert.ToBase64String(encdata)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strErrorEncryptionFailed, ex.Message))
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorEncryptionFailed, ex.Message))
             End Try
 
             Return StrToEncrypt
@@ -74,7 +74,7 @@ Namespace Security
 
                 Return System.Text.Encoding.UTF8.GetString(data, 0, i)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Resources.strErrorDecryptionFailed, ex.Message))
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorDecryptionFailed, ex.Message))
             End Try
 
             Return StrToDecrypt

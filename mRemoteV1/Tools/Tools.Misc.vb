@@ -261,11 +261,11 @@ Namespace Tools
 
             Public Overloads Overrides Function ConvertFrom(ByVal context As ITypeDescriptorContext, ByVal culture As System.Globalization.CultureInfo, ByVal value As Object) As Object
                 If value.GetType() Is GetType(String) Then
-                    If CStr(value).ToLower() = My.Resources.strYes.ToLower Then
+                    If CStr(value).ToLower() = My.Language.strYes.ToLower Then
                         Return True
                     End If
 
-                    If CStr(value).ToLower() = My.Resources.strNo.ToLower Then
+                    If CStr(value).ToLower() = My.Language.strNo.ToLower Then
                         Return False
                     End If
 
@@ -277,7 +277,7 @@ Namespace Tools
 
             Public Overloads Overrides Function ConvertTo(ByVal context As ITypeDescriptorContext, ByVal culture As System.Globalization.CultureInfo, ByVal value As Object, ByVal destinationType As Type) As Object
                 If destinationType Is GetType(String) Then
-                    Return IIf(CBool(value), My.Resources.strYes, My.Resources.strNo)
+                    Return IIf(CBool(value), My.Language.strYes, My.Language.strNo)
                 End If
 
                 Return MyBase.ConvertTo(context, culture, value, destinationType)

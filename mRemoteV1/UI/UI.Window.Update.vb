@@ -227,7 +227,7 @@ Namespace UI
 
                     uT.Start()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateCheckFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strUpdateCheckFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -243,7 +243,7 @@ Namespace UI
                         RaiseEvent UpdateCheckCompleted(False)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateCheckFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strUpdateCheckFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -255,7 +255,7 @@ Namespace UI
                     If UpdateAvailable = True Then
                         My.Settings.UpdatePending = True
 
-                        SetStatus(Color.OrangeRed, My.Resources.strUpdateAvailable)
+                        SetStatus(Color.OrangeRed, My.Language.strUpdateAvailable)
                         SetVisible(pnlUp, True)
 
                         Dim uI As App.Update.Info = uD.GetUpdateInfo()
@@ -278,14 +278,14 @@ Namespace UI
                     Else
                         My.Settings.UpdatePending = False
 
-                        SetStatus(Color.ForestGreen, My.Resources.strNoUpdateAvailable)
+                        SetStatus(Color.ForestGreen, My.Language.strNoUpdateAvailable)
                         SetVisible(pnlUp, False)
 
                         Dim uI As App.Update.Info = uD.GetUpdateInfo()
                         SetAvailableVersionText(uI.Version.ToString)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateCheckCompleteFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strUpdateCheckCompleteFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -372,15 +372,15 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                btnCheckForUpdate.Text = My.Resources.strCheckForUpdate
-                lblChangeLogLabel.Text = My.Resources.strLabelChangeLog
-                btnDownload.Text = My.Resources.strDownloadAndInstall
-                lblCurrentVersionLabel.Text = My.Resources.strAvailableVersion & ":"
-                lblInstalledVersionLabel.Text = My.Resources.strCurrentVersion & ":"
-                lblAvailableVersion.Text = My.Resources.strVersion
-                lblCurrentVersion.Text = My.Resources.strVersion
-                TabText = My.Resources.strMenuCheckForUpdates
-                Text = My.Resources.strMenuCheckForUpdates
+                btnCheckForUpdate.Text = My.Language.strCheckForUpdate
+                lblChangeLogLabel.Text = My.Language.strLabelChangeLog
+                btnDownload.Text = My.Language.strDownloadAndInstall
+                lblCurrentVersionLabel.Text = My.Language.strAvailableVersion & ":"
+                lblInstalledVersionLabel.Text = My.Language.strCurrentVersion & ":"
+                lblAvailableVersion.Text = My.Language.strVersion
+                lblCurrentVersion.Text = My.Language.strVersion
+                TabText = My.Language.strMenuCheckForUpdates
+                Text = My.Language.strMenuCheckForUpdates
             End Sub
 
             Private Sub btnCheckForUpdate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCheckForUpdate.Click
@@ -403,7 +403,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDownloadFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strUpdateDownloadFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -418,13 +418,13 @@ Namespace UI
                     Me.btnDownload.Enabled = True
 
                     If Success = True Then
-                        If MessageBox.Show(My.Resources.strUpdateDownloadComplete, My.Resources.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = System.Windows.Forms.DialogResult.OK Then
+                        If MessageBox.Show(My.Language.strUpdateDownloadComplete, My.Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = System.Windows.Forms.DialogResult.OK Then
                             Try
                                 App.Runtime.Shutdown.BeforeQuit()
 
                                 Process.Start(uD.curUI.UpdateLocation)
                             Catch ex As Exception
-                                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateStartFailed & vbNewLine & ex.Message)
+                                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strUpdateStartFailed & vbNewLine & ex.Message)
                             End Try
 
                             End
@@ -432,14 +432,14 @@ Namespace UI
                             Try
                                 File.Delete(uD.curUI.UpdateLocation)
                             Catch ex As Exception
-                                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDeleteFailed & vbNewLine & ex.Message)
+                                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strUpdateDeleteFailed & vbNewLine & ex.Message)
                             End Try
                         End If
                     Else
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDownloadFailed)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strUpdateDownloadFailed)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strUpdateDownloadCompleteFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strUpdateDownloadCompleteFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

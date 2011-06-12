@@ -8,7 +8,7 @@ Namespace Connection
     Public Class Info
 #Region "Properties"
 #Region "1 Display"
-        Private _Name As String = My.Resources.strNewConnection
+        Private _Name As String = My.Language.strNewConnection
         <LocalizedCategory("strCategoryDisplay", 1), _
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameName"), _
@@ -75,7 +75,7 @@ Namespace Connection
             End Set
         End Property
 
-        Private _Panel As String = My.Resources.strGeneral
+        Private _Panel As String = My.Language.strGeneral
         <LocalizedCategory("strCategoryDisplay", 1), _
             Browsable(True), _
             LocalizedDisplayName("strPropertyNamePanel"), _
@@ -1499,7 +1499,7 @@ Namespace Connection
                         Me._Port = Connection.Protocol.IntApp.Defaults.Port
                 End Select
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionSetDefaultPortFailed & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionSetDefaultPortFailed & vbNewLine & ex.Message)
             End Try
         End Sub
 #End Region

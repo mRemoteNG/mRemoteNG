@@ -121,7 +121,7 @@ Namespace UI
                 Me.btnBrowse.Name = "btnBrowse"
                 Me.btnBrowse.Size = New System.Drawing.Size(81, 23)
                 Me.btnBrowse.TabIndex = 30
-                Me.btnBrowse.Text = Global.mRemoteNG.My.Resources.Resources.strButtonBrowse
+                Me.btnBrowse.Text = "Browse"
                 Me.btnBrowse.UseVisualStyleBackColor = True
                 '
                 'grpConnection
@@ -290,7 +290,7 @@ Namespace UI
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
                 Me.Name = "SSHTransfer"
-                Me.TabText = Global.mRemoteNG.My.Resources.Resources.strMenuSSHFileTransfer
+                Me.TabText = "SSH File Transfer"
                 Me.Text = "SSH File Transfer"
                 Me.grpFiles.ResumeLayout(False)
                 Me.grpFiles.PerformLayout()
@@ -350,31 +350,31 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                grpFiles.Text = My.Resources.strGroupboxFiles
-                lblLocalFile.Text = My.Resources.strLocalFile & ":"
-                lblRemoteFile.Text = My.Resources.strRemoteFile & ":"
-                btnBrowse.Text = My.Resources.strButtonBrowse
-                grpConnection.Text = My.Resources.strGroupboxConnection
-                lblProtocol.Text = My.Resources.strLabelProtocol
-                lblPassword.Text = My.Resources.strLabelPassword
-                lblUser.Text = My.Resources.strUser & ":"
-                lblPort.Text = My.Resources.strLabelPort
-                lblHost.Text = My.Resources.strHost & ":"
-                btnTransfer.Text = My.Resources.strTransfer
-                TabText = My.Resources.strMenuSSHFileTransfer
-                Text = My.Resources.strMenuSSHFileTransfer
+                grpFiles.Text = My.Language.strGroupboxFiles
+                lblLocalFile.Text = My.Language.strLocalFile & ":"
+                lblRemoteFile.Text = My.Language.strRemoteFile & ":"
+                btnBrowse.Text = My.Language.strButtonBrowse
+                grpConnection.Text = My.Language.strGroupboxConnection
+                lblProtocol.Text = My.Language.strLabelProtocol
+                lblPassword.Text = My.Language.strLabelPassword
+                lblUser.Text = My.Language.strUser & ":"
+                lblPort.Text = My.Language.strLabelPort
+                lblHost.Text = My.Language.strHost & ":"
+                btnTransfer.Text = My.Language.strTransfer
+                TabText = My.Language.strMenuSSHFileTransfer
+                Text = My.Language.strMenuSSHFileTransfer
             End Sub
 #End Region
 
 #Region "Private Methods"
             Private Sub StartTransfer(ByVal Protocol As SSHTransferProtocol)
                 If AllFieldsSet() = False Then
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPleaseFillAllFields)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPleaseFillAllFields)
                     Exit Sub
                 End If
 
                 If File.Exists(Me.txtLocalFile.Text) = False Then
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strLocalFileDoesNotExist)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strLocalFileDoesNotExist)
                     Exit Sub
                 End If
 
@@ -399,7 +399,7 @@ Namespace UI
                     t.IsBackground = True
                     t.Start()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHTransferFailed & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHTransferFailed & vbNewLine & ex.Message)
                     Me.sshT.Close()
                 End Try
             End Sub
@@ -412,14 +412,14 @@ Namespace UI
                     DisableButtons()
                     Me.sshT.Put(LocalFile, RemoteFile)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHStartTransferBG & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHStartTransferBG & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Function AllFieldsSet() As Boolean
                 If Me.txtHost.Text <> "" And Me.txtPort.Text <> "" And Me.txtUser.Text <> "" And Me.txtLocalFile.Text <> "" And Me.txtRemoteFile.Text <> "" Then
                     If Me.txtPassword.Text = "" Then
-                        If MsgBox(My.Resources.strEmptyPasswordContinue, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.No Then
+                        If MsgBox(My.Language.strEmptyPasswordContinue, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.No Then
                             Return False
                         End If
                     End If
@@ -491,7 +491,7 @@ Namespace UI
                     EnableButtons()
                     SetStatus()
 
-                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strSSHTransferFailed)
+                    MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strSSHTransferFailed)
 
                     If Me.sshT IsNot Nothing Then
                         Me.sshT.Close()
@@ -499,7 +499,7 @@ Namespace UI
                         Me.sshT.Close()
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSSHTransferEndFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHTransferEndFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

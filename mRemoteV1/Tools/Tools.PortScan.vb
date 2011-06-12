@@ -271,9 +271,9 @@ Namespace Tools
 
             Private Function BoolToYesNo(ByVal Bool As Boolean) As String
                 If Bool = True Then
-                    Return My.Resources.strYes
+                    Return My.Language.strYes
                 Else
-                    Return My.Resources.strNo
+                    Return My.Language.strNo
                 End If
             End Function
 

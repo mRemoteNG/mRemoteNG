@@ -219,7 +219,7 @@ Namespace UI
             Public Sub New(ByVal Panel As DockContent, Optional ByVal FormText As String = "")
 
                 If FormText = "" Then
-                    FormText = My.Resources.strNewPanel
+                    FormText = My.Language.strNewPanel
                 End If
 
                 Me.WindowType = Type.Connection
@@ -288,27 +288,27 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                cmenTabFullscreen.Text = My.Resources.strMenuFullScreenRDP
-                cmenTabSmartSize.Text = My.Resources.strMenuSmartSize
-                cmenTabViewOnly.Text = My.Resources.strMenuViewOnly
-                cmenTabScreenshot.Text = My.Resources.strMenuScreenshot
-                cmenTabStartChat.Text = My.Resources.strMenuStartChat
-                cmenTabTransferFile.Text = My.Resources.strMenuTransferFile
-                cmenTabRefreshScreen.Text = My.Resources.strMenuRefreshScreen
-                cmenTabSendSpecialKeys.Text = My.Resources.strMenuSendSpecialKeys
-                cmenTabSendSpecialKeysCtrlAltDel.Text = My.Resources.strMenuCtrlAltDel
-                cmenTabSendSpecialKeysCtrlEsc.Text = My.Resources.strMenuCtrlEsc
-                cmenTabExternalApps.Text = My.Resources.strMenuExternalTools
-                cmenTabRenameTab.Text = My.Resources.strMenuRenameTab
-                cmenTabDuplicateTab.Text = My.Resources.strMenuDuplicateTab
-                cmenTabReconnect.Text = My.Resources.strMenuReconnect
-                cmenTabDisconnect.Text = My.Resources.strMenuDisconnect
-                cmenTabPuttySettings.Text = My.Resources.strPuttySettings
+                cmenTabFullscreen.Text = My.Language.strMenuFullScreenRDP
+                cmenTabSmartSize.Text = My.Language.strMenuSmartSize
+                cmenTabViewOnly.Text = My.Language.strMenuViewOnly
+                cmenTabScreenshot.Text = My.Language.strMenuScreenshot
+                cmenTabStartChat.Text = My.Language.strMenuStartChat
+                cmenTabTransferFile.Text = My.Language.strMenuTransferFile
+                cmenTabRefreshScreen.Text = My.Language.strMenuRefreshScreen
+                cmenTabSendSpecialKeys.Text = My.Language.strMenuSendSpecialKeys
+                cmenTabSendSpecialKeysCtrlAltDel.Text = My.Language.strMenuCtrlAltDel
+                cmenTabSendSpecialKeysCtrlEsc.Text = My.Language.strMenuCtrlEsc
+                cmenTabExternalApps.Text = My.Language.strMenuExternalTools
+                cmenTabRenameTab.Text = My.Language.strMenuRenameTab
+                cmenTabDuplicateTab.Text = My.Language.strMenuDuplicateTab
+                cmenTabReconnect.Text = My.Language.strMenuReconnect
+                cmenTabDisconnect.Text = My.Language.strMenuDisconnect
+                cmenTabPuttySettings.Text = My.Language.strPuttySettings
             End Sub
 
             Private Sub Connection_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
                 If Not frmMain.IsClosing And My.Settings.ConfirmCloseConnection And TabController.TabPages.Count > 0 Then
-                    Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Resources.strConfirmCloseConnectionPanelMainInstruction, Me.Text), "", "", "", My.Resources.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                    Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Language.strConfirmCloseConnectionPanelMainInstruction, Me.Text), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                     If cTaskDialog.VerificationChecked Then
                         My.Settings.ConfirmCloseConnection = False
                     End If
@@ -358,7 +358,7 @@ Namespace UI
             Private Sub CloseConnectionTab()
                 Dim SelectedTab As Crownwood.Magic.Controls.TabPage = Me.TabController.SelectedTab
                 If My.Settings.ConfirmCloseConnection Then
-                    Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Resources.strConfirmCloseConnectionMainInstruction, SelectedTab.Title), "", "", "", My.Resources.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                    Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Language.strConfirmCloseConnectionMainInstruction, SelectedTab.Title), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                     If cTaskDialog.VerificationChecked Then
                         My.Settings.ConfirmCloseConnection = False
                     End If
@@ -784,7 +784,7 @@ Namespace UI
 
             Private Sub RenameTab()
                 Try
-                    Dim nTitle As String = InputBox(My.Resources.strNewTitle & ":", , Me.TabController.SelectedTab.Title.Replace("&&", "&"))
+                    Dim nTitle As String = InputBox(My.Language.strNewTitle & ":", , Me.TabController.SelectedTab.Title.Replace("&&", "&"))
 
                     If nTitle <> "" Then
                         Me.TabController.SelectedTab.Title = nTitle.Replace("&", "&&")
