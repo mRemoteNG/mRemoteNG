@@ -802,6 +802,12 @@ Namespace App
 
                 TryCast(cForm, UI.Window.Connection).SetFormText(title.Replace("&", "&&"))
 
+                If frmMain.pnlDock.DocumentsCount > 1 Then
+                    frmMain.pnlDock.DocumentStyle = DocumentStyle.DockingMdi
+                Else
+                    frmMain.pnlDock.DocumentStyle = DocumentStyle.DockingSdi
+                End If
+
                 pnlcForm.Show(frmMain.pnlDock, DockState.Document)
 
                 If noTabber Then

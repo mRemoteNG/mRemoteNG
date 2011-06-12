@@ -2,6 +2,7 @@
   Added compatibility check for "Use FIPS compliant algorithms" security setting.
   Improved reporting of errors when encrypting and decrypting connection files.
   Added partial Polish translation.
+  The panel tabs are now hidden if only one panel is open.
 
 1.67 (2011-06-05):
   Fixed migration of external tools configuration and panel layout from Local to Roaming folder.
