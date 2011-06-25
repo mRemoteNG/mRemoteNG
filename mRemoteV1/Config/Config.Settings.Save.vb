@@ -89,6 +89,7 @@ Namespace Config
                         xmlTextWriter.WriteAttributeString("Arguments", "", extA.Arguments)
                         xmlTextWriter.WriteAttributeString("WaitForExit", "", extA.WaitForExit)
                         xmlTextWriter.WriteAttributeString("TryToIntegrate", "", extA.TryIntegrate)
+                        xmlTextWriter.WriteAttributeString("doURLEncode", "", extA.doURLEncode)
                         xmlTextWriter.WriteEndElement()
                     Next
 

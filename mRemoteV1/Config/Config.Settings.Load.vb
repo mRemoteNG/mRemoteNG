@@ -223,6 +223,11 @@ Namespace Config
                         extA.TryIntegrate = xEl.Attributes("TryToIntegrate").Value
                     End If
 
+                    If xEl.HasAttribute("doURLEncode") Then
+                        extA.doURLEncode = xEl.Attributes("doURLEncode").Value
+                    End If
+
+
                     ExternalTools.Add(extA)
                 Next
 

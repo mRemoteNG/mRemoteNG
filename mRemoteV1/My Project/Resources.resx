@@ -1837,6 +1837,9 @@ Starting with new connections file.</value>
   <data name="strTryIntegrate" xml:space="preserve">
     <value>Try to integrate</value>
   </data>
+  <data name="strdoURLEncode" xml:space="preserve">
+    <value>URL encode username and password</value>
+  </data>
   <data name="strUpdateCheck" xml:space="preserve">
     <value>mRemoteNG can periodically connect to the mRemoteNG website to check for updates and product announcements.</value>
   </data>

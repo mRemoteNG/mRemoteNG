@@ -30,34 +30,36 @@ Namespace UI
             Friend WithEvents Label4 As System.Windows.Forms.Label
             Friend WithEvents chkTryIntegrate As System.Windows.Forms.CheckBox
             Friend WithEvents clmTryIntegrate As System.Windows.Forms.ColumnHeader
+            Friend WithEvents chkdoURLEncode As System.Windows.Forms.CheckBox
             Friend WithEvents lvApps As System.Windows.Forms.ListView
 
             Private Sub InitializeComponent()
-                Me.components = New System.ComponentModel.Container
+                Me.components = New System.ComponentModel.Container()
                 Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ExternalApps))
-                Me.lvApps = New System.Windows.Forms.ListView
-                Me.clmDisplayName = New System.Windows.Forms.ColumnHeader
-                Me.clmFilename = New System.Windows.Forms.ColumnHeader
-                Me.clmArguments = New System.Windows.Forms.ColumnHeader
-                Me.clmWaitForExit = New System.Windows.Forms.ColumnHeader
-                Me.clmTryIntegrate = New System.Windows.Forms.ColumnHeader
+                Me.lvApps = New System.Windows.Forms.ListView()
+                Me.clmDisplayName = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmFilename = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmArguments = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmWaitForExit = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmTryIntegrate = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
                 Me.cMenApps = New System.Windows.Forms.ContextMenuStrip(Me.components)
-                Me.cMenAppsAdd = New System.Windows.Forms.ToolStripMenuItem
-                Me.cMenAppsRemove = New System.Windows.Forms.ToolStripMenuItem
-                Me.cMenAppsSep1 = New System.Windows.Forms.ToolStripSeparator
-                Me.cMenAppsStart = New System.Windows.Forms.ToolStripMenuItem
-                Me.grpEditor = New System.Windows.Forms.GroupBox
-                Me.chkTryIntegrate = New System.Windows.Forms.CheckBox
-                Me.Label4 = New System.Windows.Forms.Label
-                Me.chkWaitForExit = New System.Windows.Forms.CheckBox
-                Me.btnBrowse = New System.Windows.Forms.Button
-                Me.txtArguments = New System.Windows.Forms.TextBox
-                Me.txtFilename = New System.Windows.Forms.TextBox
-                Me.txtDisplayName = New System.Windows.Forms.TextBox
-                Me.Label3 = New System.Windows.Forms.Label
-                Me.Label2 = New System.Windows.Forms.Label
-                Me.Label1 = New System.Windows.Forms.Label
-                Me.dlgOpenFile = New System.Windows.Forms.OpenFileDialog
+                Me.cMenAppsAdd = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenAppsRemove = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenAppsSep1 = New System.Windows.Forms.ToolStripSeparator()
+                Me.cMenAppsStart = New System.Windows.Forms.ToolStripMenuItem()
+                Me.grpEditor = New System.Windows.Forms.GroupBox()
+                Me.chkTryIntegrate = New System.Windows.Forms.CheckBox()
+                Me.Label4 = New System.Windows.Forms.Label()
+                Me.chkWaitForExit = New System.Windows.Forms.CheckBox()
+                Me.btnBrowse = New System.Windows.Forms.Button()
+                Me.txtArguments = New System.Windows.Forms.TextBox()
+                Me.txtFilename = New System.Windows.Forms.TextBox()
+                Me.txtDisplayName = New System.Windows.Forms.TextBox()
+                Me.Label3 = New System.Windows.Forms.Label()
+                Me.Label2 = New System.Windows.Forms.Label()
+                Me.Label1 = New System.Windows.Forms.Label()
+                Me.dlgOpenFile = New System.Windows.Forms.OpenFileDialog()
+                Me.chkdoURLEncode = New System.Windows.Forms.CheckBox()
                 Me.cMenApps.SuspendLayout()
                 Me.grpEditor.SuspendLayout()
                 Me.SuspendLayout()
@@ -145,6 +147,7 @@ Namespace UI
                 '
                 Me.grpEditor.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                Me.grpEditor.Controls.Add(Me.chkdoURLEncode)
                 Me.grpEditor.Controls.Add(Me.chkTryIntegrate)
                 Me.grpEditor.Controls.Add(Me.Label4)
                 Me.grpEditor.Controls.Add(Me.chkWaitForExit)
@@ -267,6 +270,17 @@ Namespace UI
                 '
                 Me.dlgOpenFile.Filter = "All Files (*.*)|*.*"
                 '
+                'chkdoURLEncode
+                '
+                Me.chkdoURLEncode.AutoSize = True
+                Me.chkdoURLEncode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkdoURLEncode.Location = New System.Drawing.Point(378, 97)
+                Me.chkdoURLEncode.Name = "chkdoURLEncode"
+                Me.chkdoURLEncode.Size = New System.Drawing.Size(128, 17)
+                Me.chkdoURLEncode.TabIndex = 72
+                Me.chkdoURLEncode.Text = "URLEncode Variables"
+                Me.chkdoURLEncode.UseVisualStyleBackColor = True
+                '
                 'ExternalApps
                 '
                 Me.ClientSize = New System.Drawing.Size(684, 323)
@@ -309,6 +323,7 @@ Namespace UI
                         lvItem.SubItems.Add(extA.Arguments)
                         lvItem.SubItems.Add(extA.WaitForExit)
                         lvItem.SubItems.Add(extA.TryIntegrate)
+                        lvItem.SubItems.Add(extA.doURLEncode)
                         lvItem.Tag = extA
 
                         lvApps.Items.Add(lvItem)
@@ -334,6 +349,7 @@ Namespace UI
                         txtArguments.Text = SelApp.Arguments
                         chkWaitForExit.Checked = SelApp.WaitForExit
                         chkTryIntegrate.Checked = SelApp.TryIntegrate
+                        chkdoURLEncode.Checked = SelApp.doURLEncode
                         _SelApp = SelApp
                     End If
                 Catch ex As Exception
@@ -349,7 +365,7 @@ Namespace UI
                         SelApp.Arguments = txtArguments.Text
                         SelApp.WaitForExit = chkWaitForExit.Checked
                         SelApp.TryIntegrate = chkTryIntegrate.Checked
-
+                        SelApp.doURLEncode = chkdoURLEncode.Checked
                         LoadApps()
                     End If
                 Catch ex As Exception

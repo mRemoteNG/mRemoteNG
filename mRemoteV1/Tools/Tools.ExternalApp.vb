@@ -54,7 +54,15 @@ Namespace Tools
                 _TryIntegrate = value
             End Set
         End Property
-
+        Private _doURLEncode As Boolean
+        Public Property doURLEncode() As Boolean
+            Get
+                Return _doURLEncode
+            End Get
+            Set(ByVal value As Boolean)
+                _doURLEncode = value
+            End Set
+        End Property
 
 
         Private _ConnectionInfo As Connection.Info
@@ -175,8 +183,13 @@ Namespace Tools
                     pText = Replace(pText, "%Name%", _ConnectionInfo.Name, , , CompareMethod.Text)
                     pText = Replace(pText, "%HostName%", _ConnectionInfo.Hostname, , , CompareMethod.Text)
                     pText = Replace(pText, "%Port%", _ConnectionInfo.Port, , , CompareMethod.Text)
-                    pText = Replace(pText, "%UserName%", _ConnectionInfo.Username, , , CompareMethod.Text)
-                    pText = Replace(pText, "%Password%", _ConnectionInfo.Password, , , CompareMethod.Text)
+                    If _doURLEncode Then
+                        pText = Replace(pText, "%UserName%", System.Web.HttpUtility.UrlEncode(_ConnectionInfo.Username), , , CompareMethod.Text)
+                        pText = Replace(pText, "%Password%", System.Web.HttpUtility.UrlEncode(_ConnectionInfo.Password), , , CompareMethod.Text)
+                    Else
+                        pText = Replace(pText, "%UserName%", _ConnectionInfo.Username, , , CompareMethod.Text)
+                        pText = Replace(pText, "%Password%", _ConnectionInfo.Password, , , CompareMethod.Text)
+                    End If
                     pText = Replace(pText, "%Domain%", _ConnectionInfo.Domain, , , CompareMethod.Text)
                     pText = Replace(pText, "%Description%", _ConnectionInfo.Description, , , CompareMethod.Text)
                     pText = Replace(pText, "%MacAddress%", _ConnectionInfo.MacAddress, , , CompareMethod.Text)

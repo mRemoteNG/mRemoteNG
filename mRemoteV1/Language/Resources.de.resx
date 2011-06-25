@@ -1514,6 +1514,9 @@ Starte mit neuer Datei.</value>
   <data name="strTryIntegrate" xml:space="preserve">
     <value>Integration versuchen</value>
   </data>
+  <data name="strTryIntegrate" xml:space="preserve">
+    <value>URL Encode Username and Password</value>
+  </data>
   <data name="strUpdateCheck" xml:space="preserve">
     <value>mRemoteNG kann periodisch auf der mRemoteNG Webseite nach Aktualisierungen und Neuigkeiten suchen.</value>
   </data>
