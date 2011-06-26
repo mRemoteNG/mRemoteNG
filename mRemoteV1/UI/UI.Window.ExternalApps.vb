@@ -31,6 +31,7 @@ Namespace UI
             Friend WithEvents chkTryIntegrate As System.Windows.Forms.CheckBox
             Friend WithEvents clmTryIntegrate As System.Windows.Forms.ColumnHeader
             Friend WithEvents chkdoURLEncode As System.Windows.Forms.CheckBox
+            Friend WithEvents clmdoURLEncode As System.Windows.Forms.ColumnHeader
             Friend WithEvents lvApps As System.Windows.Forms.ListView
 
             Private Sub InitializeComponent()
@@ -48,6 +49,7 @@ Namespace UI
                 Me.cMenAppsSep1 = New System.Windows.Forms.ToolStripSeparator()
                 Me.cMenAppsStart = New System.Windows.Forms.ToolStripMenuItem()
                 Me.grpEditor = New System.Windows.Forms.GroupBox()
+                Me.chkdoURLEncode = New System.Windows.Forms.CheckBox()
                 Me.chkTryIntegrate = New System.Windows.Forms.CheckBox()
                 Me.Label4 = New System.Windows.Forms.Label()
                 Me.chkWaitForExit = New System.Windows.Forms.CheckBox()
@@ -59,7 +61,7 @@ Namespace UI
                 Me.Label2 = New System.Windows.Forms.Label()
                 Me.Label1 = New System.Windows.Forms.Label()
                 Me.dlgOpenFile = New System.Windows.Forms.OpenFileDialog()
-                Me.chkdoURLEncode = New System.Windows.Forms.CheckBox()
+                Me.clmdoURLEncode = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
                 Me.cMenApps.SuspendLayout()
                 Me.grpEditor.SuspendLayout()
                 Me.SuspendLayout()
@@ -70,7 +72,7 @@ Namespace UI
                             Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lvApps.BorderStyle = System.Windows.Forms.BorderStyle.None
-                Me.lvApps.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmDisplayName, Me.clmFilename, Me.clmArguments, Me.clmWaitForExit, Me.clmTryIntegrate})
+                Me.lvApps.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmDisplayName, Me.clmFilename, Me.clmArguments, Me.clmWaitForExit, Me.clmTryIntegrate, Me.clmdoURLEncode})
                 Me.lvApps.ContextMenuStrip = Me.cMenApps
                 Me.lvApps.FullRowSelect = True
                 Me.lvApps.GridLines = True
@@ -92,7 +94,7 @@ Namespace UI
                 'clmFilename
                 '
                 Me.clmFilename.Text = "Filename"
-                Me.clmFilename.Width = 200
+                Me.clmFilename.Width = 148
                 '
                 'clmArguments
                 '
@@ -166,6 +168,17 @@ Namespace UI
                 Me.grpEditor.TabIndex = 10
                 Me.grpEditor.TabStop = False
                 Me.grpEditor.Text = "Application Editor"
+                '
+                'chkdoURLEncode
+                '
+                Me.chkdoURLEncode.AutoSize = True
+                Me.chkdoURLEncode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+                Me.chkdoURLEncode.Location = New System.Drawing.Point(378, 97)
+                Me.chkdoURLEncode.Name = "chkdoURLEncode"
+                Me.chkdoURLEncode.Size = New System.Drawing.Size(128, 17)
+                Me.chkdoURLEncode.TabIndex = 72
+                Me.chkdoURLEncode.Text = "URLEncode Variables"
+                Me.chkdoURLEncode.UseVisualStyleBackColor = True
                 '
                 'chkTryIntegrate
                 '
@@ -270,16 +283,10 @@ Namespace UI
                 '
                 Me.dlgOpenFile.Filter = "All Files (*.*)|*.*"
                 '
-                'chkdoURLEncode
+                'clmdoURLEncode
                 '
-                Me.chkdoURLEncode.AutoSize = True
-                Me.chkdoURLEncode.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkdoURLEncode.Location = New System.Drawing.Point(378, 97)
-                Me.chkdoURLEncode.Name = "chkdoURLEncode"
-                Me.chkdoURLEncode.Size = New System.Drawing.Size(128, 17)
-                Me.chkdoURLEncode.TabIndex = 72
-                Me.chkdoURLEncode.Text = "URLEncode Variables"
-                Me.chkdoURLEncode.UseVisualStyleBackColor = True
+                Me.clmdoURLEncode.Text = "URLEncode"
+                Me.clmdoURLEncode.Width = 74
                 '
                 'ExternalApps
                 '
@@ -452,6 +459,7 @@ Namespace UI
                 Label4.Text = My.Resources.strLabelOptions
                 chkWaitForExit.Text = My.Resources.strCheckboxWaitForExit
                 chkTryIntegrate.Text = My.Resources.strTryIntegrate
+                chkdoURLEncode.Text = My.Resources.strdoURLEncode
                 btnBrowse.Text = My.Resources.strButtonBrowse
                 Label3.Text = My.Resources.strLabelArguments
                 Label2.Text = My.Resources.strLabelFilename
