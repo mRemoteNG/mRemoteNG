@@ -1,3 +1,8 @@
+1.68 (2011-07-07):
+  Fixed issue #48 - VerifyDatabaseVersion fails with new (empty) database tables.
+  Fixed issue #60 - Can't save connections file
+  Fixed issue #62 - Connection file error upon launch.
+
 1.67 (2011-06-05):
   Fixed migration of external tools configuration and panel layout from Local to Roaming folder.
   Disable ICA Hotkeys for Citrix connections.  Fixes issue with international users.
