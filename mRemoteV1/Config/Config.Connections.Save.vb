@@ -181,6 +181,7 @@ Namespace Config
                 Try
                     Dim sqlCommand As New SqlCommand("SELECT * FROM tblRoot", sqlConnection)
                     sqlDataReader = sqlCommand.ExecuteReader()
+                    If (Not sqlDataReader.HasRows) Then Return True ' assume new empty database
                     sqlDataReader.Read()
 
                     Dim enCulture As CultureInfo = New CultureInfo("en-US")
