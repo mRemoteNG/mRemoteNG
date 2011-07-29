@@ -682,6 +682,7 @@ Namespace App
 
                 My.Settings.LoadConsFromCustomLocation = False
 
+                Directory.CreateDirectory(Path.GetDirectoryName(filename))
                 Dim xW As New XmlTextWriter(filename, System.Text.Encoding.UTF8)
                 xW.Formatting = Formatting.Indented
                 xW.Indentation = 4
