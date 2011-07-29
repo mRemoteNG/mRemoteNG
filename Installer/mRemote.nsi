@@ -26,6 +26,7 @@ RequestExecutionLevel admin
 
 ; Version Information
 VIProductVersion ${PRODUCT_VERSION}
+VIAddVersionKey "CompanyName" "Next Generation Software"
 VIAddVersionKey "ProductName" "mRemoteNG"
 VIAddVersionKey "ProductVersion" ${PRODUCT_VERSION}
 VIAddVersionKey "LegalCopyright" "Copyright © 2007-2009 Felix Deimel, 2010-2011 Riley McArdle"
@@ -175,7 +176,7 @@ Section "" ; Install
 	; Registry
 	WriteRegStr HKLM "Software\mRemoteNG" "InstallPath" $INSTDIR
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayName" "mRemoteNG"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "Publisher" "mRemoteNG"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "Publisher" "Next Generation Software"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayIcon" "$INSTDIR\mRemoteNG.exe"
 	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "EstimatedSize" 6464
 
