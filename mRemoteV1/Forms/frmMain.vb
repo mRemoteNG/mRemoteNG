@@ -65,6 +65,7 @@ Public Class frmMain
             Windows.Show(UI.Window.Type.ComponentsCheck)
         End If
 
+#If Not PORTABLE Then
         If Not My.Settings.CheckForUpdatesAsked Then
             Dim CommandButtons() As String = {My.Resources.strAskUpdatesCommandRecommended, My.Resources.strAskUpdatesCommandCustom, My.Resources.strAskUpdatesCommandAskLater}
             Dim Result As DialogResult = cTaskDialog.ShowTaskDialogBox(Me, My.Application.Info.ProductName, My.Resources.strAskUpdatesMainInstruction, String.Format(My.Resources.strAskUpdatesContent, My.Application.Info.ProductName), "", "", "", "", String.Join("|", CommandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question)
@@ -78,6 +79,12 @@ Public Class frmMain
 
         Startup.UpdateCheck()
         Startup.AnnouncementCheck()
+#Else
+        mMenInfoAnnouncements.Visible = False
+        mMenToolsUpdate.Visible = False
+        mMenInfoSep2.Visible = False
+#End If
+
         Startup.CreateSQLUpdateHandlerAndStartTimer()
 
         AddSysMenuItems()

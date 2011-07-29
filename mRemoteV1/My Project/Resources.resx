@@ -2346,4 +2346,7 @@ Error Description: {1}</value>
 	<data name="strErrorBadDatabaseVersion">
 		<value xml:space="preserve">The database version {0} is not compatible with this version of {1}.</value>
 	</data>
+	<data name="strUpdateCheckPortableEdition">
+		<value xml:space="preserve">mRemoteNG Portable Edition does not currently support automatic updates.</value>
+	</data>
 </root>

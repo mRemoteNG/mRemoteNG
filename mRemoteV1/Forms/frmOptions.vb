@@ -1,4 +1,5 @@
-﻿Imports WeifenLuo.WinFormsUI.Docking
+﻿Imports mRemoteNG.My.Resources
+Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 
 Public Class frmOptions
@@ -1671,6 +1672,14 @@ Public Class frmOptions
         ' Switch to the _initialTab
         tcTabControl.SelectedIndex = _initialTab
         lvPages.Items(_initialTab).Selected = True
+
+#If PORTABLE Then
+        For Each Control As Control In tcTabControl.TabPages(5).Controls
+            If Control IsNot lblUpdatesExplanation Then
+                Control.Visible = False
+            End If
+        Next
+#End If
     End Sub
 
     Private Sub ApplySpanlinkEdition()
@@ -1706,7 +1715,11 @@ Public Class frmOptions
         lvPages.Items(4).Text = My.Resources.strSQLServer
         lvPages.Items(5).Text = My.Resources.strTabUpdates
         lvPages.Items(6).Text = My.Resources.strTabAdvanced
+#If Not PORTABLE Then
         lblUpdatesExplanation.Text = My.Resources.strUpdateCheck
+#Else
+        lblUpdatesExplanation.Text = My.Resources.strUpdateCheckPortableEdition
+#End If
         btnTestProxy.Text = My.Resources.strButtonTestProxy
         lblSeconds.Text = My.Resources.strLabelSeconds
         lblMaximumPuttyWaitTime.Text = My.Resources.strLabelPuttyTimeout
