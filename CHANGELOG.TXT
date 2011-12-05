@@ -1,8 +1,13 @@
-1.68 (XXXX-XX-XX):
+1.69 (XXXX-XX-XX):
   Added compatibility check for "Use FIPS compliant algorithms" security setting.
   Improved reporting of errors when encrypting and decrypting connection files.
   Added partial Polish translation.
   The panel tabs are now hidden if only one panel is open.
+
+1.68 (2011-07-07):
+  Fixed issue #48 - VerifyDatabaseVersion fails with new (empty) database tables.
+  Fixed issue #60 - Can't save connections file
+  Fixed issue #62 - Connection file error upon launch.
 
 1.67 (2011-06-05):
   Fixed migration of external tools configuration and panel layout from Local to Roaming folder.

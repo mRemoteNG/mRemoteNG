@@ -971,17 +971,19 @@ Namespace App
                         If My.Settings.LoadConsFromCustomLocation = False Then
                             Dim oldPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName & "\" & App.Info.Connections.DefaultConnectionsFile
                             Dim newPath As String = App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile
-                            If File.Exists(newPath) Then
-                                conL.ConnectionFileName = newPath
 #If Not PORTABLE Then
-                            ElseIf File.Exists(oldPath) Then
+                            If File.Exists(oldPath) Then
                                 conL.ConnectionFileName = oldPath
-#End If
+                            Else
+                                conL.ConnectionFileName = newPath
                             End If
+#Else
+                            conL.ConnectionFileName = newPath
+#End If
                         Else
                             conL.ConnectionFileName = My.Settings.CustomConsPath
+                            End If
                         End If
-                    End If
 
                     If File.Exists(conL.ConnectionFileName) = False Then
                         If WithDialog Then
