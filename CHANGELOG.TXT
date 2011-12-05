@@ -3,6 +3,10 @@
   Improved reporting of errors when encrypting and decrypting connection files.
   Added partial Polish translation.
   The panel tabs are now hidden if only one panel is open.
+  Fixed issue #66 - Fresh Install Fails to Create Config
+  Disabled automatic updates in the portable edition
+  Updated PuTTY to version 0.61
+  Binaries are now digitally signed
 
 1.68 (2011-07-07):
   Fixed issue #48 - VerifyDatabaseVersion fails with new (empty) database tables.

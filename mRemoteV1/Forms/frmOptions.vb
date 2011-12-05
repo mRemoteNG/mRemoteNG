@@ -1,4 +1,5 @@
-﻿Imports WeifenLuo.WinFormsUI.Docking
+﻿Imports mRemoteNG.My.Resources
+Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 
 Public Class frmOptions
@@ -1667,6 +1668,14 @@ Public Class frmOptions
         ' Switch to the _initialTab
         tcTabControl.SelectedIndex = _initialTab
         lvPages.Items(_initialTab).Selected = True
+
+#If PORTABLE Then
+        For Each Control As Control In tcTabControl.TabPages(5).Controls
+            If Control IsNot lblUpdatesExplanation Then
+                Control.Visible = False
+            End If
+        Next
+#End If
     End Sub
 
     Private Sub ApplyLanguage()
@@ -1677,7 +1686,11 @@ Public Class frmOptions
         lvPages.Items(4).Text = My.Language.strSQLServer
         lvPages.Items(5).Text = My.Language.strTabUpdates
         lvPages.Items(6).Text = My.Language.strTabAdvanced
+#If Not PORTABLE Then
         lblUpdatesExplanation.Text = My.Language.strUpdateCheck
+#Else
+        lblUpdatesExplanation.Text = My.Language.strUpdateCheckPortableEdition
+#End If
         btnTestProxy.Text = My.Language.strButtonTestProxy
         lblSeconds.Text = My.Language.strLabelSeconds
         lblMaximumPuttyWaitTime.Text = My.Language.strLabelPuttyTimeout

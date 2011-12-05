@@ -11,7 +11,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("mRemoteNG")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("")> 
+<Assembly: AssemblyCompany("Next Generation Software")> 
 <Assembly: AssemblyProduct("mRemoteNG")> 
 <Assembly: AssemblyCopyright("Copyright © 2007-2009 Felix Deimel, 2010-2011 Riley McArdle")> 
 <Assembly: AssemblyTrademark("")> 
@@ -32,6 +32,6 @@ Imports System.Runtime.InteropServices
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("1.68.*")> 
+<Assembly: AssemblyVersion("1.69.*")> 
 
 <Assembly: NeutralResourcesLanguageAttribute("en")> 
