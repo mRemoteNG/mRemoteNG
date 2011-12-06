@@ -729,6 +729,8 @@ Namespace App
         End Sub
 
         Public Shared Sub LoadConnections(Optional ByVal WithDialog As Boolean = False, Optional ByVal Update As Boolean = False)
+            Dim conL As New Config.Connections.Load
+
             Try
                 Dim tmrWasEnabled As Boolean
                 If tmrSqlWatcher IsNot Nothing Then
@@ -747,41 +749,18 @@ Namespace App
                 cL = New Connection.List
                 ctL = New Container.List
 
-                Dim conL As New Config.Connections.Load
-
                 If My.Settings.UseSQLServer = False Then
                     If WithDialog Then
                         Dim lD As OpenFileDialog = Tools.Controls.ConnectionsLoadDialog
 
                         If lD.ShowDialog = System.Windows.Forms.DialogResult.OK Then
                             conL.ConnectionFileName = lD.FileName
-
-                            If conL.ConnectionFileName = App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile Then
-                                My.Settings.LoadConsFromCustomLocation = False
-                            Else
-                                My.Settings.LoadConsFromCustomLocation = True
-                                My.Settings.CustomConsPath = conL.ConnectionFileName
-                            End If
                         Else
                             Exit Sub
                         End If
                     Else
-                        If My.Settings.LoadConsFromCustomLocation = False Then
-                            Dim oldPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName & "\" & App.Info.Connections.DefaultConnectionsFile
-                            Dim newPath As String = App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile
-#If Not PORTABLE Then
-                            If File.Exists(oldPath) Then
-                                conL.ConnectionFileName = oldPath
-                            Else
-                                conL.ConnectionFileName = newPath
-                            End If
-#Else
-                            conL.ConnectionFileName = newPath
-#End If
-                        Else
-                            conL.ConnectionFileName = My.Settings.CustomConsPath
-                            End If
-                        End If
+                        conL.ConnectionFileName = GetStartupConnectionFileName()
+                    End If
 
                     If File.Exists(conL.ConnectionFileName) = False Then
                         If WithDialog Then
@@ -832,6 +811,13 @@ Namespace App
 
                 If My.Settings.UseSQLServer = True Then
                     LastSQLUpdate = Now
+                Else
+                    If conL.ConnectionFileName = App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile Then
+                        My.Settings.LoadConsFromCustomLocation = False
+                    Else
+                        My.Settings.LoadConsFromCustomLocation = True
+                        My.Settings.CustomConsPath = conL.ConnectionFileName
+                    End If
                 End If
 
                 If tmrWasEnabled And tmrSqlWatcher IsNot Nothing Then
@@ -839,8 +825,39 @@ Namespace App
                 End If
             Catch ex As Exception
                 mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConnectionsFileCouldNotBeLoaded & vbNewLine & ex.Message)
+                If My.Settings.UseSQLServer = False Then
+                    If Not conL.ConnectionFileName = GetStartupConnectionFileName() Then
+                        LoadConnections()
+                        Exit Sub
+                    Else
+                        MsgBox(String.Format(My.Resources.strErrorStartupConnectionFileLoad, vbNewLine, Application.ProductName, GetStartupConnectionFileName(), ex.Message), MsgBoxStyle.OkOnly + MsgBoxStyle.Critical)
+                        Application.Exit()
+                    End If
+                End If
             End Try
         End Sub
+
+        Protected Shared Function GetStartupConnectionFileName() As String
+            Dim fileName As New String("")
+
+            If My.Settings.LoadConsFromCustomLocation = False Then
+                Dim oldPath As String = GetFolderPath(SpecialFolder.LocalApplicationData) & "\" & My.Application.Info.ProductName & "\" & App.Info.Connections.DefaultConnectionsFile
+                Dim newPath As String = App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile
+#If Not PORTABLE Then
+                If File.Exists(oldPath) Then
+                    fileName = oldPath
+                Else
+                    fileName = newPath
+                End If
+#Else
+                fileName = newPath
+#End If
+            Else
+                fileName = My.Settings.CustomConsPath
+            End If
+
+            Return fileName
+        End Function
 
         Public Shared Sub ImportConnections()
             Try

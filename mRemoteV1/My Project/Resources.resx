@@ -2349,4 +2349,7 @@ Error Description: {1}</value>
 	<data name="strUpdateCheckPortableEdition">
 		<value xml:space="preserve">mRemoteNG Portable Edition does not currently support automatic updates.</value>
 	</data>
+  <data name="strErrorStartupConnectionFileLoad">
+    <value xml:space="preserve">The startup connection file could not be loaded.{0}{0}{2}{0}{3}{0}{0}In order to prevent data loss, {1} will now exit.</value>
+  </data>
 </root>
