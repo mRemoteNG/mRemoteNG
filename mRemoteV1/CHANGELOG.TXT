@@ -2,6 +2,7 @@
   Fixed issue #66 - Fresh Install Fails to Create Config
   Fixed issue #67 - Connection file gets erased
   Disabled automatic updates in the portable edition
+  Fixed file name in window title changing when exporting an XML file.
   Updated PuTTY to version 0.61
   Binaries are now digitally signed
 
