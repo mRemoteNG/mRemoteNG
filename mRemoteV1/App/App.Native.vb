@@ -98,6 +98,17 @@ Namespace App
         <DllImport("user32")> _
         Public Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal wMsg As Integer, ByVal wParam As Integer, ByVal lParam As Integer) As Long
         End Function
+
+        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+        Public Shared Function FindWindowEx(ByVal parentHandle As IntPtr, _
+                     ByVal childAfter As IntPtr, _
+                     ByVal lclassName As String, _
+                     ByVal windowTitle As String) As IntPtr
+        End Function
+
+        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+        Public Shared Function SetFocus(ByVal hwnd As IntPtr) As IntPtr
+        End Function
 #End Region
 
 #Region "Constants"

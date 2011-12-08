@@ -1,3 +1,5 @@
+Imports System.Runtime.InteropServices
+Imports System.ComponentModel
 Imports mRemoteNG.App.Native
 Imports System.Threading
 Imports Microsoft.Win32
@@ -139,6 +141,8 @@ Namespace Connection
                                 .Arguments = "-load " & """" & Me.InterfaceControl.Info.PuttySession & """" & " -" & Me._PuttyProtocol.ToString & " -P " & Me.InterfaceControl.Info.Port & " """ & Me.InterfaceControl.Info.Hostname & """"
                         End Select
 
+                        .Arguments = .Arguments & " -hwndparent " & Me.InterfaceControl.Handle.ToString()
+
                         'REMOVE IN RELEASE!
                         'mC.AddMessage(Messages.MessageClass.InformationMsg, "PuTTY Arguments: " & .Arguments, True)
                     End With
@@ -149,21 +153,7 @@ Namespace Connection
                     PuttyProcess.Start()
                     PuttyProcess.WaitForInputIdle()
 
-                    Dim TryCount As Integer = 0
-                    Do Until PuttyProcess.MainWindowHandle <> IntPtr.Zero And Me.InterfaceControl.Handle <> IntPtr.Zero And Me.PuttyProcess.MainWindowTitle <> "Default IME"
-                        If TryCount >= My.Settings.MaxPuttyWaitTime * 2 Then
-                            Exit Do
-                        End If
-
-                        PuttyProcess.Refresh()
-
-                        Thread.Sleep(500)
-
-                        TryCount += 1
-                    Loop
-
-                    PuttyHandle = PuttyProcess.MainWindowHandle
-
+                    PuttyHandle = FindWindowEx(Me.InterfaceControl.Handle, 0, vbNullString, vbNullString)
 
                     mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strPuttyStuff, True)
 
@@ -171,8 +161,6 @@ Namespace Connection
                     mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strPuttyTitle, PuttyProcess.MainWindowTitle), True)
                     mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strPuttyParentHandle, Me.InterfaceControl.Parent.Handle.ToString), True)
 
-                    SetParent(PuttyHandle, InterfaceControl.Parent.Handle)
-                    ShowWindow(PuttyHandle, SW_SHOWMAXIMIZED)
                     Resize()
 
                     MyBase.Connect()
@@ -185,7 +173,7 @@ Namespace Connection
 
             Public Overrides Sub Focus()
                 Try
-                    'SetForegroundWindow(PuttyHandle)
+                    SetFocus(PuttyHandle)
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyFocusFailed & vbNewLine & ex.Message, True)
                 End Try
@@ -193,7 +181,7 @@ Namespace Connection
 
             Public Overrides Sub Resize()
                 Try
-                    MoveWindow(PuttyHandle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), Me.InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), Me.InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), True)
+                    MoveWindow(PuttyHandle, 0, 0, Me.InterfaceControl.Width, Me.InterfaceControl.Height, True)
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyResizeFailed & vbNewLine & ex.Message, True)
                 End Try
@@ -279,7 +267,6 @@ Namespace Connection
                 ssh2 = 2
             End Enum
 #End Region
-
         End Class
     End Namespace
 End Namespace
