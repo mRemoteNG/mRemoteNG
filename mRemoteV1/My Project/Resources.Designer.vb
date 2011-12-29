@@ -753,9 +753,6 @@ Namespace My.Resources
             End Get
         End Property
         
-            End Get
-        End Property
-        
         '''<summary>
         '''  Looks up a localized string similar to The startup connection file could not be loaded.{0}{0}{2}{0}{3}{0}{0}In order to prevent data loss, {1} will now exit..
         '''</summary>
@@ -771,10 +768,13 @@ Namespace My.Resources
         Friend ReadOnly Property strUpdateCheckPortableEdition() As String
             Get
                 Return ResourceManager.GetString("strUpdateCheckPortableEdition", resourceCulture)
+            End Get
+        End Property
+
         Friend ReadOnly Property Tab_Icon() As System.Drawing.Icon
             Get
                 Dim obj As Object = ResourceManager.GetObject("Tab_Icon", resourceCulture)
-                Return CType(obj,System.Drawing.Icon)
+                Return CType(obj, System.Drawing.Icon)
             End Get
         End Property
         
