@@ -4,6 +4,8 @@
   Added partial Polish translation.
   The panel tabs are now hidden if only one panel is open.
   Updated PuTTY to version 0.62
+  Fix issue MR-77 - VerifyDatabaseVersion (Config.Connections.Save) failed. Version string portion was too short or too long.
+  Fix issue MR-93 - Regional settings problem when using SQL connection in mRemoteNG
 
 1.69 (2011-12-09):
   Fixed issue #66 - Fresh Install Fails to Create Config

@@ -206,8 +206,7 @@ Namespace Config
                         sqlRd.Read()
                     End If
 
-                    Dim enCulture As CultureInfo = New CultureInfo("en-US")
-                    Me.confVersion = Convert.ToDouble(sqlRd.Item("confVersion"), enCulture)
+                    Me.confVersion = Convert.ToDouble(sqlRd.Item("confVersion"), CultureInfo.InvariantCulture)
 
                     Dim rootNode As TreeNode
                     rootNode = New TreeNode(sqlRd.Item("Name"))
@@ -635,8 +634,7 @@ Namespace Config
                     End If
 
                     If xDom.DocumentElement.HasAttribute("ConfVersion") Then
-                        Dim enCulture As System.Globalization.CultureInfo = New CultureInfo("en-US")
-                        Me.confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes("ConfVersion").Value, enCulture)
+                        Me.confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes("ConfVersion").Value, CultureInfo.InvariantCulture)
                     Else
                         MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strOldConffile)
                     End If

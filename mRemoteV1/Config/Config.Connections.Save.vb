@@ -178,8 +178,7 @@ Namespace Config
                     If (Not sqlDataReader.HasRows) Then Return True ' assume new empty database
                     sqlDataReader.Read()
 
-                    Dim enCulture As CultureInfo = New CultureInfo("en-US")
-                    databaseVersion = New System.Version(Convert.ToDouble(sqlDataReader.Item("confVersion"), enCulture))
+                    databaseVersion = New System.Version(Convert.ToDouble(sqlDataReader.Item("confVersion"), CultureInfo.InvariantCulture))
 
                     sqlDataReader.Close()
 
@@ -239,8 +238,7 @@ Namespace Config
                 sqlQuery = New SqlCommand("DELETE FROM tblRoot", sqlCon)
                 sqlWr = sqlQuery.ExecuteNonQuery
 
-                Dim enCulture As CultureInfo = New CultureInfo("en-US")
-                sqlQuery = New SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES('" & PrepareValueForDB(tN.Text) & "', 0, '" & strProtected & "'," & App.Info.Connections.ConnectionFileVersion.ToString(enCulture) & ")", sqlCon)
+                sqlQuery = New SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES('" & PrepareValueForDB(tN.Text) & "', 0, '" & strProtected & "'," & App.Info.Connections.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) & ")", sqlCon)
                 sqlWr = sqlQuery.ExecuteNonQuery
 
                 sqlQuery = New SqlCommand("DELETE FROM tblCons", sqlCon)
@@ -590,8 +588,7 @@ Namespace Config
                         End If
                     End If
 
-                    Dim enCulture As System.Globalization.CultureInfo = New CultureInfo("en-US")
-                    xW.WriteAttributeString("ConfVersion", "", App.Info.Connections.ConnectionFileVersion.ToString(enCulture))
+                    xW.WriteAttributeString("ConfVersion", "", App.Info.Connections.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture))
 
                     Dim tNC As TreeNodeCollection
                     tNC = tN.Nodes
