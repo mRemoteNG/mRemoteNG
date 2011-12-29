@@ -11,7 +11,7 @@ Imports System.Runtime.InteropServices
 
 <Assembly: AssemblyTitle("mRemoteNG")> 
 <Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Next Generation Software")> 
+<Assembly: AssemblyCompany("")> 
 <Assembly: AssemblyProduct("mRemoteNG")> 
 <Assembly: AssemblyCopyright("Copyright © 2007-2009 Felix Deimel, 2010-2011 Riley McArdle")> 
 <Assembly: AssemblyTrademark("")> 

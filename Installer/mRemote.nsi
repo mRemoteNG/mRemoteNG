@@ -1,4 +1,4 @@
-﻿!include "MUI.nsh"
+!include "MUI.nsh"
 !include "WordFunc.nsh"
 !insertmacro VersionCompare
 
@@ -181,7 +181,7 @@ Section "" ; Install
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayName" "mRemoteNG"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "Publisher" "Next Generation Software"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayIcon" "$INSTDIR\mRemoteNG.exe"
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "EstimatedSize" 7180
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "EstimatedSize" 7080
 
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayVersion" ${PRODUCT_VERSION}
 	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "VersionMajor" ${PRODUCT_VERSION_MAJOR}

@@ -716,6 +716,7 @@ Namespace Config
                 Catch ex As Exception
                     App.Runtime.IsConnectionsFileLoaded = False
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed & vbNewLine & ex.Message, True)
+                    Throw
                 End Try
             End Sub
 

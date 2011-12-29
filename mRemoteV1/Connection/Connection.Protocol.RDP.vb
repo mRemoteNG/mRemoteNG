@@ -98,6 +98,8 @@ Namespace Connection
 
                     RDP.ConnectingText = My.Language.strConnecting
 
+                    Control.Anchor = AnchorStyles.None
+
                     Return True
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPropsFailed & vbNewLine & ex.Message, True)
@@ -152,6 +154,12 @@ Namespace Connection
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpFocusFailed & vbNewLine & ex.Message, True)
                 End Try
+            End Sub
+
+            Public Overrides Sub Resize()
+                Control.Location = InterfaceControl.Location
+                Control.Size = InterfaceControl.Size
+                MyBase.Resize()
             End Sub
 #End Region
 

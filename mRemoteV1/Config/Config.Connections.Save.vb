@@ -157,18 +157,12 @@ Namespace Config
                         SaveToVRE()
                     Case Format.vRDCSV
                         SaveTovRDCSV()
-                    Case Format.mRXML Or Format.None
-                        SaveToXML()
-                        If My.Settings.EncryptCompleteConnectionsFile Then
-                            EncryptCompleteFile()
-                        End If
-                        SetMainFormText(_ConnectionFileName)
                     Case Else
                         SaveToXML()
                         If My.Settings.EncryptCompleteConnectionsFile Then
                             EncryptCompleteFile()
                         End If
-                        SetMainFormText(_ConnectionFileName)
+                        If Not _Export Then SetMainFormText(_ConnectionFileName)
                 End Select
             End Sub
 #End Region
