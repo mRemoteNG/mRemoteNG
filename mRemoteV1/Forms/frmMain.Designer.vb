@@ -135,7 +135,7 @@ Partial Class frmMain
         '
         Me.pnlDock.ActiveAutoHideContent = Nothing
         Me.pnlDock.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.pnlDock.DockBackColor = System.Drawing.SystemColors.Control
+        Me.pnlDock.DockBackColor = System.Drawing.SystemColors.AppWorkspace
         Me.pnlDock.DockLeftPortion = 230
         Me.pnlDock.DockRightPortion = 230
         Me.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow
