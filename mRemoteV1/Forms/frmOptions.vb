@@ -1,4 +1,4 @@
-﻿Imports mRemoteNG.My.Resources
+Imports mRemoteNG.My.Resources
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 
@@ -109,6 +109,7 @@ Public Class frmOptions
     Friend WithEvents lblExperimental As System.Windows.Forms.Label
     Friend WithEvents lblSQLDatabaseName As System.Windows.Forms.Label
     Friend WithEvents txtSQLDatabaseName As System.Windows.Forms.TextBox
+    Friend WithEvents chkRdpCredSspSupport As System.Windows.Forms.CheckBox
     Private components As System.ComponentModel.IContainer
 
     Private Sub InitializeComponent()
@@ -224,6 +225,7 @@ Public Class frmOptions
         Me.lblSQLPassword = New System.Windows.Forms.Label
         Me.tabUpdates = New System.Windows.Forms.TabPage
         Me.tabAdvanced = New System.Windows.Forms.TabPage
+        Me.chkRdpCredSspSupport = New System.Windows.Forms.CheckBox()
         CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProxy.SuspendLayout()
@@ -301,7 +303,7 @@ Public Class frmOptions
         'lblMaximumPuttyWaitTime
         '
         Me.lblMaximumPuttyWaitTime.AutoSize = True
-        Me.lblMaximumPuttyWaitTime.Location = New System.Drawing.Point(3, 188)
+        Me.lblMaximumPuttyWaitTime.Location = New System.Drawing.Point(3, 216)
         Me.lblMaximumPuttyWaitTime.Name = "lblMaximumPuttyWaitTime"
         Me.lblMaximumPuttyWaitTime.Size = New System.Drawing.Size(135, 13)
         Me.lblMaximumPuttyWaitTime.TabIndex = 9
@@ -310,7 +312,7 @@ Public Class frmOptions
         'chkAutomaticReconnect
         '
         Me.chkAutomaticReconnect.AutoSize = True
-        Me.chkAutomaticReconnect.Location = New System.Drawing.Point(3, 72)
+        Me.chkAutomaticReconnect.Location = New System.Drawing.Point(3, 75)
         Me.chkAutomaticReconnect.Name = "chkAutomaticReconnect"
         Me.chkAutomaticReconnect.Size = New System.Drawing.Size(399, 17)
         Me.chkAutomaticReconnect.TabIndex = 3
@@ -320,7 +322,7 @@ Public Class frmOptions
         'numPuttyWaitTime
         '
         Me.numPuttyWaitTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.numPuttyWaitTime.Location = New System.Drawing.Point(373, 185)
+        Me.numPuttyWaitTime.Location = New System.Drawing.Point(373, 213)
         Me.numPuttyWaitTime.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         Me.numPuttyWaitTime.Name = "numPuttyWaitTime"
         Me.numPuttyWaitTime.Size = New System.Drawing.Size(49, 20)
@@ -330,7 +332,7 @@ Public Class frmOptions
         'lblConfigurePuttySessions
         '
         Me.lblConfigurePuttySessions.AutoSize = True
-        Me.lblConfigurePuttySessions.Location = New System.Drawing.Point(3, 157)
+        Me.lblConfigurePuttySessions.Location = New System.Drawing.Point(3, 185)
         Me.lblConfigurePuttySessions.Name = "lblConfigurePuttySessions"
         Me.lblConfigurePuttySessions.Size = New System.Drawing.Size(227, 13)
         Me.lblConfigurePuttySessions.TabIndex = 7
@@ -339,7 +341,7 @@ Public Class frmOptions
         'numUVNCSCPort
         '
         Me.numUVNCSCPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.numUVNCSCPort.Location = New System.Drawing.Point(219, 277)
+        Me.numUVNCSCPort.Location = New System.Drawing.Point(219, 305)
         Me.numUVNCSCPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.numUVNCSCPort.Name = "numUVNCSCPort"
         Me.numUVNCSCPort.Size = New System.Drawing.Size(72, 20)
@@ -350,7 +352,7 @@ Public Class frmOptions
         '
         Me.btnLaunchPutty.Image = Global.mRemoteNG.My.Resources.Resources.PuttyConfig
         Me.btnLaunchPutty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLaunchPutty.Location = New System.Drawing.Point(291, 153)
+        Me.btnLaunchPutty.Location = New System.Drawing.Point(291, 181)
         Me.btnLaunchPutty.Name = "btnLaunchPutty"
         Me.btnLaunchPutty.Size = New System.Drawing.Size(110, 23)
         Me.btnLaunchPutty.TabIndex = 8
@@ -361,7 +363,7 @@ Public Class frmOptions
         'lblSeconds
         '
         Me.lblSeconds.AutoSize = True
-        Me.lblSeconds.Location = New System.Drawing.Point(428, 189)
+        Me.lblSeconds.Location = New System.Drawing.Point(428, 217)
         Me.lblSeconds.Name = "lblSeconds"
         Me.lblSeconds.Size = New System.Drawing.Size(47, 13)
         Me.lblSeconds.TabIndex = 11
@@ -370,7 +372,7 @@ Public Class frmOptions
         'btnBrowseCustomPuttyPath
         '
         Me.btnBrowseCustomPuttyPath.Enabled = False
-        Me.btnBrowseCustomPuttyPath.Location = New System.Drawing.Point(291, 116)
+        Me.btnBrowseCustomPuttyPath.Location = New System.Drawing.Point(291, 144)
         Me.btnBrowseCustomPuttyPath.Name = "btnBrowseCustomPuttyPath"
         Me.btnBrowseCustomPuttyPath.Size = New System.Drawing.Size(75, 23)
         Me.btnBrowseCustomPuttyPath.TabIndex = 6
@@ -380,7 +382,7 @@ Public Class frmOptions
         'lblUVNCSCPort
         '
         Me.lblUVNCSCPort.AutoSize = True
-        Me.lblUVNCSCPort.Location = New System.Drawing.Point(3, 281)
+        Me.lblUVNCSCPort.Location = New System.Drawing.Point(3, 309)
         Me.lblUVNCSCPort.Name = "lblUVNCSCPort"
         Me.lblUVNCSCPort.Size = New System.Drawing.Size(176, 13)
         Me.lblUVNCSCPort.TabIndex = 15
@@ -390,7 +392,7 @@ Public Class frmOptions
         '
         Me.txtCustomPuttyPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCustomPuttyPath.Enabled = False
-        Me.txtCustomPuttyPath.Location = New System.Drawing.Point(21, 118)
+        Me.txtCustomPuttyPath.Location = New System.Drawing.Point(21, 146)
         Me.txtCustomPuttyPath.Name = "txtCustomPuttyPath"
         Me.txtCustomPuttyPath.Size = New System.Drawing.Size(264, 20)
         Me.txtCustomPuttyPath.TabIndex = 5
@@ -398,7 +400,7 @@ Public Class frmOptions
         'txtXULrunnerPath
         '
         Me.txtXULrunnerPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtXULrunnerPath.Location = New System.Drawing.Point(21, 238)
+        Me.txtXULrunnerPath.Location = New System.Drawing.Point(21, 266)
         Me.txtXULrunnerPath.Name = "txtXULrunnerPath"
         Me.txtXULrunnerPath.Size = New System.Drawing.Size(264, 20)
         Me.txtXULrunnerPath.TabIndex = 13
@@ -406,7 +408,7 @@ Public Class frmOptions
         'chkUseCustomPuttyPath
         '
         Me.chkUseCustomPuttyPath.AutoSize = True
-        Me.chkUseCustomPuttyPath.Location = New System.Drawing.Point(3, 95)
+        Me.chkUseCustomPuttyPath.Location = New System.Drawing.Point(3, 123)
         Me.chkUseCustomPuttyPath.Name = "chkUseCustomPuttyPath"
         Me.chkUseCustomPuttyPath.Size = New System.Drawing.Size(146, 17)
         Me.chkUseCustomPuttyPath.TabIndex = 4
@@ -415,7 +417,7 @@ Public Class frmOptions
         '
         'btnBrowseXulRunnerPath
         '
-        Me.btnBrowseXulRunnerPath.Location = New System.Drawing.Point(291, 236)
+        Me.btnBrowseXulRunnerPath.Location = New System.Drawing.Point(291, 264)
         Me.btnBrowseXulRunnerPath.Name = "btnBrowseXulRunnerPath"
         Me.btnBrowseXulRunnerPath.Size = New System.Drawing.Size(75, 23)
         Me.btnBrowseXulRunnerPath.TabIndex = 14
@@ -425,7 +427,7 @@ Public Class frmOptions
         'chkEncryptCompleteFile
         '
         Me.chkEncryptCompleteFile.AutoSize = True
-        Me.chkEncryptCompleteFile.Location = New System.Drawing.Point(2, 26)
+        Me.chkEncryptCompleteFile.Location = New System.Drawing.Point(3, 27)
         Me.chkEncryptCompleteFile.Name = "chkEncryptCompleteFile"
         Me.chkEncryptCompleteFile.Size = New System.Drawing.Size(180, 17)
         Me.chkEncryptCompleteFile.TabIndex = 1
@@ -435,7 +437,7 @@ Public Class frmOptions
         'lblXulRunnerPath
         '
         Me.lblXulRunnerPath.AutoSize = True
-        Me.lblXulRunnerPath.Location = New System.Drawing.Point(3, 220)
+        Me.lblXulRunnerPath.Location = New System.Drawing.Point(3, 248)
         Me.lblXulRunnerPath.Name = "lblXulRunnerPath"
         Me.lblXulRunnerPath.Size = New System.Drawing.Size(85, 13)
         Me.lblXulRunnerPath.TabIndex = 12
@@ -444,7 +446,7 @@ Public Class frmOptions
         'chkAutomaticallyGetSessionInfo
         '
         Me.chkAutomaticallyGetSessionInfo.AutoSize = True
-        Me.chkAutomaticallyGetSessionInfo.Location = New System.Drawing.Point(3, 49)
+        Me.chkAutomaticallyGetSessionInfo.Location = New System.Drawing.Point(3, 51)
         Me.chkAutomaticallyGetSessionInfo.Name = "chkAutomaticallyGetSessionInfo"
         Me.chkAutomaticallyGetSessionInfo.Size = New System.Drawing.Size(198, 17)
         Me.chkAutomaticallyGetSessionInfo.TabIndex = 2
@@ -1318,6 +1320,7 @@ Public Class frmOptions
         '
         'tabAdvanced
         '
+        Me.tabAdvanced.Controls.Add(Me.chkRdpCredSspSupport)
         Me.tabAdvanced.Controls.Add(Me.chkWriteLogFile)
         Me.tabAdvanced.Controls.Add(Me.chkAutomaticallyGetSessionInfo)
         Me.tabAdvanced.Controls.Add(Me.lblXulRunnerPath)
@@ -1341,6 +1344,19 @@ Public Class frmOptions
         Me.tabAdvanced.TabIndex = 5
         Me.tabAdvanced.Text = "Advanced"
         Me.tabAdvanced.UseVisualStyleBackColor = True
+        '
+        'chkRdpCredSspSupport
+        '
+        Me.chkRdpCredSspSupport.AutoSize = True
+        Me.chkRdpCredSspSupport.Checked = Global.mRemoteNG.My.MySettings.Default.RdpCredSspSupport
+        Me.chkRdpCredSspSupport.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.mRemoteNG.My.MySettings.Default, "RdpCredSspSupport", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+        Me.chkRdpCredSspSupport.Location = New System.Drawing.Point(3, 99)
+        Me.chkRdpCredSspSupport.Name = "chkRdpCredSspSupport"
+        Me.chkRdpCredSspSupport.Size = New System.Drawing.Size(480, 17)
+        Me.chkRdpCredSspSupport.TabIndex = 17
+        Me.chkRdpCredSspSupport.Text = "Use Credential Security Support Provider (CredSSP) for authentication if it is av" & _
+    "ailable (RDP only)"
+        Me.chkRdpCredSspSupport.UseVisualStyleBackColor = True
         '
         'frmOptions
         '
@@ -1485,6 +1501,7 @@ Public Class frmOptions
             Me.chkEncryptCompleteFile.Checked = My.Settings.EncryptCompleteConnectionsFile
             Me.chkAutomaticallyGetSessionInfo.Checked = My.Settings.AutomaticallyGetSessionInfo
             Me.chkAutomaticReconnect.Checked = My.Settings.ReconnectOnDisconnect
+            Me.chkRdpCredSspSupport.Checked = My.Settings.RdpCredSspSupport
             Me.chkSingleInstance.Checked = My.Settings.SingleInstance
             Me.chkUseCustomPuttyPath.Checked = My.Settings.UseCustomPuttyPath
             Me.txtCustomPuttyPath.Text = My.Settings.CustomPuttyPath
@@ -1600,6 +1617,7 @@ Public Class frmOptions
             My.Settings.EncryptCompleteConnectionsFile = Me.chkEncryptCompleteFile.Checked
             My.Settings.AutomaticallyGetSessionInfo = Me.chkAutomaticallyGetSessionInfo.Checked
             My.Settings.ReconnectOnDisconnect = Me.chkAutomaticReconnect.Checked
+            My.Settings.RdpCredSspSupport = Me.chkRdpCredSspSupport.Checked
             My.Settings.SingleInstance = Me.chkSingleInstance.Checked
             My.Settings.UseCustomPuttyPath = Me.chkUseCustomPuttyPath.Checked
             My.Settings.CustomPuttyPath = Me.txtCustomPuttyPath.Text
