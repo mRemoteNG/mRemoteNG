@@ -79,7 +79,7 @@ Namespace Connection
                     RDP.AdvancedSettings2.keepAliveInterval = 60000 'in milliseconds (10.000 = 10 seconds)
                     RDP.AdvancedSettings5.AuthenticationLevel = 0
                     RDP.AdvancedSettings.EncryptionEnabled = 1
-                    RDP.AdvancedSettings7.EnableCredSspSupport = True
+                    RDP.AdvancedSettings7.EnableCredSspSupport = My.Settings.RdpCredSspSupport
 
                     RDP.AdvancedSettings2.overallConnectionTimeout = 20
 
