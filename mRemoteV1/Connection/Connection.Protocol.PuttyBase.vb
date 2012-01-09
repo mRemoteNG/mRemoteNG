@@ -155,6 +155,8 @@ Namespace Connection
 
                     PuttyHandle = FindWindowEx(Me.InterfaceControl.Handle, 0, vbNullString, vbNullString)
 
+                    'SetParent(PuttyHandle, InterfaceControl.Handle)
+
                     mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strPuttyStuff, True)
 
                     mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strPuttyHandle, PuttyHandle.ToString), True)
@@ -173,7 +175,7 @@ Namespace Connection
 
             Public Overrides Sub Focus()
                 Try
-                    SetFocus(PuttyHandle)
+                    SetForegroundWindow(PuttyHandle)
                 Catch ex As Exception
                     mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPuttyFocusFailed & vbNewLine & ex.Message, True)
                 End Try

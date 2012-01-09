@@ -706,9 +706,7 @@ Public Class frmMain
         End If
     End Sub
 
-    Private bWmGetTextFlag As Boolean = False
-    Private bWmWindowPosChangedFlag As Boolean = False
-
+    Private _inSizeMove As Boolean = False
     Protected Overloads Overrides Sub WndProc(ByRef m As Message)
         Try
 #If Config = "Debug" Then
@@ -716,19 +714,15 @@ Public Class frmMain
 #End If
 
             Select Case m.Msg
-                Case WM_GETTEXT
-                    bWmGetTextFlag = True
+                Case WM_ENTERSIZEMOVE
+                    _inSizeMove = True
+                Case WM_EXITSIZEMOVE
+                    _inSizeMove = False
+                    ActivateConnection()
                 Case WM_WINDOWPOSCHANGED
-                    If bWmGetTextFlag Then
-                        ActivateConnection()
-                    End If
-
-                    bWmGetTextFlag = False
-                    bWmWindowPosChangedFlag = True
+                    If Not _inSizeMove Then ActivateConnection()
                 Case WM_ACTIVATEAPP
-                    If bWmWindowPosChangedFlag Then
-                        ActivateConnection()
-                    End If
+                    If Not _inSizeMove Then ActivateConnection()
                 Case WM_SYSCOMMAND
                     For i As Integer = 0 To SysMenSubItems.Length - 1
                         If SysMenSubItems(i) = m.WParam Then
@@ -743,9 +737,6 @@ Public Class frmMain
                     'Send to the next window
                     SendMessage(fpChainedWindowHandle, m.Msg, m.LParam, m.WParam)
                     fpChainedWindowHandle = m.LParam
-                Case Else
-                    bWmGetTextFlag = False
-                    bWmWindowPosChangedFlag = False
             End Select
         Catch ex As Exception
         End Try

@@ -136,6 +136,9 @@ Namespace App
         Public Const MF_BYPOSITION As Integer = &H400
         Public Const MF_POPUP As Integer = &H10
 
+        Public Const WM_ENTERSIZEMOVE As Integer = &H231
+        Public Const WM_EXITSIZEMOVE As Integer = &H232
+
         Public Const WM_GETTEXT As Integer = &HD
         Public Const WM_ACTIVATEAPP As Integer = &H1C
         Public Const WM_WINDOWPOSCHANGED As Integer = &H47
