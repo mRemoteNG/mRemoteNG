@@ -3,6 +3,8 @@
   Improved reporting of errors when encrypting and decrypting connection files.
   Added partial Polish translation.
   The panel tabs are now hidden if only one panel is open.
+  Fix focus issue with RDP connections when changing tabs.
+  Show changes live as connection tabs are being dragged around to change their order.
   Updated PuTTY to version 0.62
   Fix issue MR-77 - VerifyDatabaseVersion (Config.Connections.Save) failed. Version string portion was too short or too long.
   Fix issue MR-93 - Regional settings problem when using SQL connection in mRemoteNG

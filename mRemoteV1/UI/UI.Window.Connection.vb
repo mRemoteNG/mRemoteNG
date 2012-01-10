@@ -67,6 +67,7 @@ Namespace UI
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.TabController.Appearance = Crownwood.Magic.Controls.TabControl.VisualAppearance.MultiDocument
                 Me.TabController.Cursor = System.Windows.Forms.Cursors.Hand
+                Me.TabController.DragFromControl = False
                 Me.TabController.IDEPixelArea = True
                 Me.TabController.IDEPixelBorder = False
                 Me.TabController.Location = New System.Drawing.Point(0, -1)
@@ -890,68 +891,42 @@ Namespace UI
 #End Region
 
 #Region "Tab drag and drop"
-            Dim TabDragging As Boolean
-
-            Private Sub TabController_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabController.MouseLeave
-                Try
-                    If TabDragging = True Then
-                        TabDragging = False
-                        Me.Cursor = Cursors.Default
-                    End If
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseLeave (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
-                End Try
+            Private Sub TabController_PageDragStart(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.PageDragEnd, TabController.PageDragStart
+                Cursor = Cursors.SizeWE
             End Sub
 
-            Private Sub TabController_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles TabController.MouseMove
-                Try
-                    If e.Button = Forms.MouseButtons.Left Then
-                        TabDragging = True
-                        Me.Cursor = Cursors.SizeWE
-                    ElseIf e.Button = Forms.MouseButtons.None Then
-                        If TabDragging = True Then
-                            TabDragging = False
-                            Me.Cursor = Cursors.Default
-                        End If
-                    End If
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseMove (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
-                End Try
+            Private Sub TabController_PageDragEnd(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.PageDragEnd, TabController.PageDragQuit
+                Cursor = Cursors.Default
             End Sub
 
-            Private Sub TabController_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles TabController.MouseUp
+            Private Sub TabController_PageDragMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.PageDragMove
+                Dim sourceTab As Magic.Controls.TabPage = TabController.SelectedTab
+                Dim destinationTab As Magic.Controls.TabPage = TabController.TabPageFromPoint(e.Location)
+
+                If Not TabController.TabPages.Contains(destinationTab) Or sourceTab Is destinationTab Then Return
+
+                Dim targetIndex As Integer = TabController.TabPages.IndexOf(destinationTab)
+
+                TabController.TabPages.SuspendEvents()
+                TabController.TabPages.Remove(sourceTab)
+                TabController.TabPages.Insert(targetIndex, sourceTab)
+                TabController.SelectedTab = sourceTab
+                TabController.TabPages.ResumeEvents()
+            End Sub
+
+            Private Sub TabController_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.MouseUp
+                Debug.Print("UI.Window.Connection.TabController_MouseUp()")
                 Try
-                    If e.Button = Forms.MouseButtons.Left Then
-                        If TabDragging = True Then
-                            Dim sourceTab As Crownwood.Magic.Controls.TabPage = TabController.SelectedTab
-                            Dim targetTab As Crownwood.Magic.Controls.TabPage = TabController.TabPageFromPoint(e.Location)
-                            Dim targetIndex As Integer = -1
-
-                            For i As Integer = 0 To TabController.TabPages.Count - 1
-                                If TabController.TabPages(i) Is targetTab Then
-                                    targetIndex = i
-                                End If
-                            Next
-
-                            If sourceTab IsNot targetTab And targetIndex > -1 Then
-                                TabController.TabPages.Remove(sourceTab)
-                                TabController.TabPages.Insert(targetIndex, sourceTab)
-                                TabController.SelectedTab = sourceTab
-                            End If
-                        Else
-                            Me.FocusIC()
-                        End If
-                    ElseIf e.Button = Forms.MouseButtons.Middle Then
-                        If TabDragging = False Then
-                            Me.TabController.SelectedTab = Me.TabController.TabPageFromPoint(e.Location)
-                            Me.CloseConnectionTab()
-                        End If
-                    ElseIf e.Button = Forms.MouseButtons.Right Then
-                        If TabDragging = False Then
-                            Me.ShowHideMenuButtons()
-                            Me.cmenTab.Show(Me.TabController, e.Location)
-                        End If
-                    End If
+                    Select Case e.Button
+                        Case MouseButtons.Left
+                            FocusIC()
+                        Case MouseButtons.Middle
+                            TabController.SelectedTab = TabController.TabPageFromPoint(e.Location)
+                            CloseConnectionTab()
+                        Case MouseButtons.Right
+                            ShowHideMenuButtons()
+                            cmenTab.Show(TabController, e.Location)
+                    End Select
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseUp (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
