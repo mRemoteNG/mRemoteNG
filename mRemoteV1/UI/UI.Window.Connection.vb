@@ -1,6 +1,7 @@
 Imports System
 Imports System.Windows
 Imports System.Windows.Forms
+Imports mRemoteNG.App
 Imports Crownwood
 Imports WeifenLuo.WinFormsUI.Docking
 Imports PSTaskDialog
@@ -869,7 +870,8 @@ Namespace UI
 #Region "Window Overrides"
             Protected Overloads Overrides Sub WndProc(ByRef WndMsg As Message)
                 Try
-                    If WndMsg.Msg = 33 Then
+                    If WndMsg.Msg = Native.WM_MOUSEACTIVATE Then
+
                         Dim curTab As Magic.Controls.TabPage = Me.TabController.SelectedTab
                         Dim curRect As Rectangle = curTab.RectangleToScreen(curTab.ClientRectangle)
 
@@ -882,6 +884,7 @@ Namespace UI
                                 End If
                             End If
                         End If
+                        Return ' Do not pass to base class
                     End If
                 Catch ex As Exception
                 End Try

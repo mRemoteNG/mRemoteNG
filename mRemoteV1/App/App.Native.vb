@@ -131,6 +131,7 @@ Namespace App
 
         Public Const WM_GETTEXT As Integer = &HD
         Public Const WM_ACTIVATEAPP As Integer = &H1C
+        Public Const WM_MOUSEACTIVATE As Integer = &H21
         Public Const WM_WINDOWPOSCHANGED As Integer = &H47
 
         Public Const WM_SYSCOMMAND As Integer = &H112
