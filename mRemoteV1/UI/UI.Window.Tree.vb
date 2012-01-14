@@ -461,73 +461,41 @@ Namespace UI
 #Region "Form Stuff"
             Private Sub Tree_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
                 ApplyLanguage()
-
-                If App.Editions.Spanlink.Enabled = True Then
-                    ApplySpanlinkEdition()
-                End If
-            End Sub
-
-            Private Sub ApplySpanlinkEdition()
-                tvConnections.LabelEdit = False
-
-                cMenTreeSep1.Visible = False
-                cMenTreeAddConnection.ShortcutKeys = Keys.None
-                cMenTreeAddConnection.Visible = False
-                cMenTreeAddFolder.ShortcutKeys = Keys.None
-                cMenTreeAddFolder.Visible = False
-                cMenTreeConnectWithOptionsDontConnectToConsoleSession.ShortcutKeys = Keys.None
-                cMenTreeConnectWithOptionsDontConnectToConsoleSession.Visible = True
-                cMenTreeToolsImportExport.ShortcutKeys = Keys.None
-                cMenTreeToolsImportExport.Visible = False
-                cMenTreeToolsSort.ShortcutKeys = Keys.None
-                cMenTreeToolsSort.Visible = False
-                cMenTreeDuplicate.ShortcutKeys = Keys.None
-                cMenTreeDuplicate.Visible = False
-                cMenTreeRename.ShortcutKeys = Keys.None
-                cMenTreeRename.Visible = False
-                cMenTreeDelete.ShortcutKeys = Keys.None
-                cMenTreeDelete.Visible = False
-                cMenTreeMoveUp.ShortcutKeys = Keys.None
-                cMenTreeMoveUp.Visible = False
-                cMenTreeMoveDown.ShortcutKeys = Keys.None
-                cMenTreeMoveDown.Visible = False
-                cMenTreeSep3.Visible = False
-                cMenTreeSep4.Visible = False
             End Sub
 
             Private Sub ApplyLanguage()
-                cMenTreeAddConnection.Text = My.Resources.strAddConnection
-                cMenTreeAddFolder.Text = My.Resources.strAddFolder
-                cMenTreeConnect.Text = My.Resources.strConnect
-                cMenTreeConnectWithOptions.Text = My.Resources.strConnectWithOptions
-                cMenTreeConnectWithOptionsConnectToConsoleSession.Text = My.Resources.strConnectToConsoleSession
-                cMenTreeConnectWithOptionsConnectInFullscreen.Text = My.Resources.strConnectInFullscreen
-                cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = My.Resources.strChoosePanelBeforeConnecting
-                cMenTreeDisconnect.Text = My.Resources.strMenuDisconnect
-                cMenTreeToolsTransferFile.Text = My.Resources.strMenuTransferFile
-                cMenTreeToolsImportExport.Text = My.Resources.strImportExport
-                cMenTreeToolsImportExportExportmRemoteXML.Text = My.Resources.strExportmRemoteXML
-                cMenTreeToolsImportExportImportmRemoteXML.Text = My.Resources.strImportmRemoteXML
-                cMenTreeToolsImportExportImportFromAD.Text = My.Resources.strImportAD
-                cMenTreeToolsImportExportImportFromRDPFiles.Text = My.Resources.strImportRDPFiles
-                cMenTreeToolsImportExportImportFromPortScan.Text = My.Resources.strImportPortScan
-                cMenTreeToolsSort.Text = My.Resources.strSort
-                cMenTreeToolsSortAscending.Text = My.Resources.strSortAsc
-                cMenTreeToolsSortDescending.Text = My.Resources.strSortDesc
-                cMenTreeToolsExternalApps.Text = My.Resources.strMenuExternalTools
-                cMenTreeDuplicate.Text = My.Resources.strDuplicate
-                cMenTreeRename.Text = My.Resources.strRename
-                cMenTreeDelete.Text = My.Resources.strMenuDelete
-                cMenTreeMoveUp.Text = My.Resources.strMoveUp
-                cMenTreeMoveDown.Text = My.Resources.strMoveDown
-                mMenAddConnection.ToolTipText = My.Resources.strAddConnection
-                mMenAddFolder.ToolTipText = My.Resources.strAddFolder
-                mMenView.ToolTipText = My.Resources.strMenuView.Replace("&", "")
-                mMenViewExpandAllFolders.Text = My.Resources.strExpandAllFolders
-                mMenViewCollapseAllFolders.Text = My.Resources.strCollapseAllFolders
-                mMenSortAscending.ToolTipText = My.Resources.strSortAsc
-                TabText = My.Resources.strConnections
-                Text = My.Resources.strConnections
+                cMenTreeAddConnection.Text = My.Language.strAddConnection
+                cMenTreeAddFolder.Text = My.Language.strAddFolder
+                cMenTreeConnect.Text = My.Language.strConnect
+                cMenTreeConnectWithOptions.Text = My.Language.strConnectWithOptions
+                cMenTreeConnectWithOptionsConnectToConsoleSession.Text = My.Language.strConnectToConsoleSession
+                cMenTreeConnectWithOptionsConnectInFullscreen.Text = My.Language.strConnectInFullscreen
+                cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = My.Language.strChoosePanelBeforeConnecting
+                cMenTreeDisconnect.Text = My.Language.strMenuDisconnect
+                cMenTreeToolsTransferFile.Text = My.Language.strMenuTransferFile
+                cMenTreeToolsImportExport.Text = My.Language.strImportExport
+                cMenTreeToolsImportExportExportmRemoteXML.Text = My.Language.strExportmRemoteXML
+                cMenTreeToolsImportExportImportmRemoteXML.Text = My.Language.strImportmRemoteXML
+                cMenTreeToolsImportExportImportFromAD.Text = My.Language.strImportAD
+                cMenTreeToolsImportExportImportFromRDPFiles.Text = My.Language.strImportRDPFiles
+                cMenTreeToolsImportExportImportFromPortScan.Text = My.Language.strImportPortScan
+                cMenTreeToolsSort.Text = My.Language.strSort
+                cMenTreeToolsSortAscending.Text = My.Language.strSortAsc
+                cMenTreeToolsSortDescending.Text = My.Language.strSortDesc
+                cMenTreeToolsExternalApps.Text = My.Language.strMenuExternalTools
+                cMenTreeDuplicate.Text = My.Language.strDuplicate
+                cMenTreeRename.Text = My.Language.strRename
+                cMenTreeDelete.Text = My.Language.strMenuDelete
+                cMenTreeMoveUp.Text = My.Language.strMoveUp
+                cMenTreeMoveDown.Text = My.Language.strMoveDown
+                mMenAddConnection.ToolTipText = My.Language.strAddConnection
+                mMenAddFolder.ToolTipText = My.Language.strAddFolder
+                mMenView.ToolTipText = My.Language.strMenuView.Replace("&", "")
+                mMenViewExpandAllFolders.Text = My.Language.strExpandAllFolders
+                mMenViewCollapseAllFolders.Text = My.Language.strCollapseAllFolders
+                mMenSortAscending.ToolTipText = My.Language.strSortAsc
+                TabText = My.Language.strConnections
+                Text = My.Language.strConnections
             End Sub
 #End Region
 
@@ -568,14 +536,14 @@ Namespace UI
                     Me.imgListTree.Images.Add(My.Resources.Play)
                     Me.imgListTree.Images.Add(My.Resources.Pause)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "FillImageList (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "FillImageList (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub tvConnections_AfterLabelEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.NodeLabelEditEventArgs) Handles tvConnections.AfterLabelEdit
                 Try
                     If My.Settings.SetHostnameLikeDisplayName Then
-                        If e.Node.Text = My.Resources.strNewConnection Then
+                        If e.Node.Text = My.Language.strNewConnection Then
                             TryCast(e.Node.Tag, mRemoteNG.Connection.Info).Hostname = e.Label
                         End If
                     End If
@@ -585,7 +553,7 @@ Namespace UI
                     Me.ShowHideTreeContextMenuItems(e.Node)
                     SaveConnectionsBG()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterLabelEdit (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterLabelEdit (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -609,7 +577,7 @@ Namespace UI
 
                     App.Runtime.LastSelected = mRemoteNG.Tree.Node.GetConstantID(e.Node)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterSelect (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterSelect (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -628,7 +596,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_NodeMouseClick (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_NodeMouseClick (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -642,7 +610,7 @@ Namespace UI
                 Try
                     mRemoteNG.Tree.Node.SetNodeToolTip(e, Me.DescriptionTooltip)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_MouseMove (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_MouseMove (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -656,7 +624,7 @@ Namespace UI
                         Next
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "IsConnectionOpen (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "IsConnectionOpen (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
 
                 Return False
@@ -769,17 +737,13 @@ Namespace UI
                             Me.cMenTree.Enabled = False
                     End Select
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideTreeContextMenuItems (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideTreeContextMenuItems (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
 
 #Region "Drag and Drop"
             Private Sub tvConnections_DragDrop(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles tvConnections.DragDrop
-                If App.Editions.Spanlink.Enabled = True Then
-                    Exit Sub
-                End If
-
                 Try
                     'Check that there is a TreeNode being dragged
                     If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) = False Then Exit Sub
@@ -839,15 +803,11 @@ Namespace UI
 
                     SaveConnectionsBG()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragDrop (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragDrop (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub tvConnections_DragEnter(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles tvConnections.DragEnter
-                If App.Editions.Spanlink.Enabled = True Then
-                    Exit Sub
-                End If
-
                 Try
                     'See if there is a TreeNode being dragged
                     If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) Then
@@ -858,15 +818,11 @@ Namespace UI
                         e.Effect = DragDropEffects.None
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragEnter (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragEnter (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub tvConnections_DragOver(ByVal sender As Object, ByVal e As System.Windows.Forms.DragEventArgs) Handles tvConnections.DragOver
-                If App.Editions.Spanlink.Enabled = True Then
-                    Exit Sub
-                End If
-
                 Try
                     'Check that there is a TreeNode being dragged 
                     If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) = False Then Exit Sub
@@ -904,20 +860,16 @@ Namespace UI
                     'Currently selected node is a suitable target
                     e.Effect = DragDropEffects.Move
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragOver (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragOver (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub tvConnections_ItemDrag(ByVal sender As Object, ByVal e As System.Windows.Forms.ItemDragEventArgs) Handles tvConnections.ItemDrag
-                If App.Editions.Spanlink.Enabled = True Then
-                    Exit Sub
-                End If
-
                 Try
                     'Set the drag node and initiate the DragDrop 
                     DoDragDrop(e.Item, DragDropEffects.Move)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_ItemDrag (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_ItemDrag (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -1053,7 +1005,7 @@ Namespace UI
                         nConI.TreeNode = nNode
 
                         nNode.Tag = nConI
-                        cL.Add(nConI)
+                        connectionList.Add(nConI)
 
                         If mRemoteNG.Tree.Node.GetNodeType(Me.tvConnections.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
                             Me.tvConnections.SelectedNode.Parent.Nodes.Add(nNode)
@@ -1065,43 +1017,41 @@ Namespace UI
                         Me.tvConnections.SelectedNode.BeginEdit()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddConnection (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddConnection (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Public Sub AddFolder()
                 Try
-                    Dim nNode As TreeNode = mRemoteNG.Tree.Node.AddNode(mRemoteNG.Tree.Node.Type.Container)
+                    Dim newNode As TreeNode = mRemoteNG.Tree.Node.AddNode(mRemoteNG.Tree.Node.Type.Container)
+                    Dim newContainerInfo As New Container.Info()
+                    newNode.Tag = newContainerInfo
+                    newContainerInfo.TreeNode = newNode
 
-                    If nNode IsNot Nothing Then
-                        Dim nContI As New mRemoteNG.Container.Info()
-                        If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Container Then
-                            nContI.Parent = mRemoteNG.Tree.Node.SelectedNode.Tag
-                        Else
-                            nContI.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
-                        End If
-
-                        nContI.TreeNode = nNode
-                        nContI.ConnectionInfo = New mRemoteNG.Connection.Info(nContI)
-
-                        If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) <> mRemoteNG.Tree.Node.Type.Container Then
-                            nContI.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
-                        End If
-
-                        nNode.Tag = nContI
-                        ctL.Add(nContI)
-
-                        If mRemoteNG.Tree.Node.GetNodeType(Me.tvConnections.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
-                            Me.tvConnections.SelectedNode.Parent.Nodes.Add(nNode)
-                        Else
-                            Me.tvConnections.SelectedNode.Nodes.Add(nNode)
-                        End If
-
-                        Me.tvConnections.SelectedNode = nNode
-                        Me.tvConnections.SelectedNode.BeginEdit()
+                    Dim selectedNode As TreeNode = mRemoteNG.Tree.Node.SelectedNode
+                    Dim parentNode As TreeNode
+                    If mRemoteNG.Tree.Node.GetNodeType(selectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                        parentNode = selectedNode.Parent
+                    Else
+                        parentNode = selectedNode
                     End If
+
+                    ' We can only inherit from a container node, not the root node or connection nodes
+                    If mRemoteNG.Tree.Node.GetNodeType(parentNode) = mRemoteNG.Tree.Node.Type.Container Then
+                        newContainerInfo.Parent = parentNode.Tag
+                    Else
+                        newContainerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
+                    End If
+
+                    newContainerInfo.ConnectionInfo = New mRemoteNG.Connection.Info(newContainerInfo)
+
+                    App.Runtime.containerList.Add(newContainerInfo)
+                    parentNode.Nodes.Add(newNode)
+
+                    Me.tvConnections.SelectedNode = newNode
+                    Me.tvConnections.SelectedNode.BeginEdit()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddFolder (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorAddFolderFailed, ex.Message), True)
                 End Try
             End Sub
 
@@ -1127,7 +1077,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "DisconnectConnection (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "DisconnectConnection (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1142,7 +1092,7 @@ Namespace UI
                     Windows.sshtransferForm.Password = conI.Password
                     Windows.sshtransferForm.Port = conI.Port
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1155,7 +1105,7 @@ Namespace UI
                         Windows.saveasForm.Show(frmMain.pnlDock)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ExportXml (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ExportXml (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1165,7 +1115,7 @@ Namespace UI
                         App.Runtime.ImportConnections()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ImportXML (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportXML (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1175,7 +1125,7 @@ Namespace UI
                         Windows.Show(Type.ADImport)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromAD (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromAD (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1183,7 +1133,7 @@ Namespace UI
                 Try
                     App.Runtime.ImportConnectionsFromRDPFiles()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromRDPFiles (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromRDPFiles (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1193,7 +1143,7 @@ Namespace UI
                         Windows.Show(Type.PortScan, Tools.PortScan.PortScanMode.Import)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromPortScan (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromPortScan (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1203,7 +1153,7 @@ Namespace UI
                     cMenTreeToolsExternalApps.DropDownItems.Clear()
 
                     'add ext apps
-                    For Each extA As Tools.ExternalApp In ExtApps
+                    For Each extA As Tools.ExternalTool In ExternalTools
                         Dim nItem As New ToolStripMenuItem
                         nItem.Text = extA.DisplayName
                         nItem.Tag = extA
@@ -1215,17 +1165,17 @@ Namespace UI
                         cMenTreeToolsExternalApps.DropDownItems.Add(nItem)
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
-            Private Sub StartExternalApp(ByVal ExtA As Tools.ExternalApp)
+            Private Sub StartExternalApp(ByVal ExtA As Tools.ExternalTool)
                 Try
                     If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
                         ExtA.Start(mRemoteNG.Tree.Node.SelectedNode.Tag)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -1255,7 +1205,7 @@ Namespace UI
                         Me.tvConnections_KeyDown(sender, e)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "txtSearch_KeyDown (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "txtSearch_KeyDown (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1272,7 +1222,7 @@ Namespace UI
                         Me.txtSearch.SelectionStart = Me.txtSearch.TextLength
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_KeyPress (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_KeyPress (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1294,7 +1244,7 @@ Namespace UI
                         Me.txtSearch.SelectionStart = Me.txtSearch.TextLength
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_KeyDown (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_KeyDown (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

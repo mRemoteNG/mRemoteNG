@@ -33,7 +33,7 @@ Namespace UI
                 Me.btnCancel.Size = New System.Drawing.Size(75, 23)
                 Me.btnCancel.TabIndex = 20
                 Me.btnCancel.TabStop = False
-                Me.btnCancel.Text = My.Resources.strButtonCancel
+                Me.btnCancel.Text = My.Language.strButtonCancel
                 Me.btnCancel.UseVisualStyleBackColor = True
                 '
                 'QuickConnect
@@ -45,8 +45,8 @@ Namespace UI
                 Me.HideOnClose = True
                 Me.Icon = Global.mRemoteNG.My.Resources.Resources.Play_Quick_Icon
                 Me.Name = "QuickConnect"
-                Me.TabText = My.Resources.strQuickConnect
-                Me.Text = My.Resources.strQuickConnect
+                Me.TabText = My.Language.strQuickConnect
+                Me.Text = My.Language.strQuickConnect
                 Me.ResumeLayout(False)
 
             End Sub
@@ -85,9 +85,9 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                btnCancel.Text = My.Resources.strButtonCancel
-                TabText = My.Resources.strQuickConnect
-                Text = My.Resources.strQuickConnect
+                btnCancel.Text = My.Language.strButtonCancel
+                TabText = My.Language.strQuickConnect
+                Text = My.Language.strQuickConnect
             End Sub
 
             Private Sub CreateButtons()
@@ -104,7 +104,7 @@ Namespace UI
                         End If
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CreateButtons (UI.Window.QuickConnect) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CreateButtons (UI.Window.QuickConnect) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -128,7 +128,7 @@ Namespace UI
 
                     Me.Hide()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ProtocolButton_Click (UI.Window.QuickConnect) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ProtocolButton_Click (UI.Window.QuickConnect) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class

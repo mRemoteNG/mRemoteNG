@@ -15,3 +15,9 @@ LangString RequiresNetFramework ${LANG_THAI} "mRemoteNG มีความต้
 
 ; User needs to be Admin
 LangString RequiresAdminUser ${LANG_THAI} "คุณต้องเป็นสมาชิกในกลุ่มของ 'Power Users' หรือ 'Administrators' เพื่อการติดตั้ง mRemoteNG"
+
+; Start Menu items
+LangString CreditsLinkName ${LANG_THAI} "Credits"
+LangString CopyingLinkName ${LANG_THAI} "License"
+LangString UninstallLinkName ${LANG_THAI} "Uninstall"
+LangString ChangeLogLinkName ${LANG_THAI} "Version History"

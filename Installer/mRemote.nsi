@@ -1,4 +1,4 @@
-﻿!include "MUI.nsh"
+!include "MUI.nsh"
 !include "WordFunc.nsh"
 !insertmacro VersionCompare
 
@@ -170,15 +170,18 @@ Section "" ; Install
  
 	; Start Menu
 	CreateDirectory "$SMPROGRAMS\mRemoteNG"
+	CreateShortCut "$SMPROGRAMS\mRemoteNG\$(CreditsLinkName).lnk" "$INSTDIR\CREDITS.TXT"
+	CreateShortCut "$SMPROGRAMS\mRemoteNG\$(CopyingLinkName).lnk" "$INSTDIR\COPYING.TXT"
 	CreateShortCut "$SMPROGRAMS\mRemoteNG\mRemoteNG.lnk" "$INSTDIR\mRemoteNG.exe"
-	CreateShortCut "$SMPROGRAMS\mRemoteNG\Uninstall.lnk" "$INSTDIR\Uninstall.exe"
+	CreateShortCut "$SMPROGRAMS\mRemoteNG\$(UninstallLinkName).lnk" "$INSTDIR\Uninstall.exe"
+	CreateShortCut "$SMPROGRAMS\mRemoteNG\$(ChangeLogLinkName).lnk" "$INSTDIR\CHANGELOG.TXT"
 
 	; Registry
 	WriteRegStr HKLM "Software\mRemoteNG" "InstallPath" $INSTDIR
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayName" "mRemoteNG"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "Publisher" "Next Generation Software"
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayIcon" "$INSTDIR\mRemoteNG.exe"
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "EstimatedSize" 6464
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "EstimatedSize" 7080
 
 	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayVersion" ${PRODUCT_VERSION}
 	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "VersionMajor" ${PRODUCT_VERSION_MAJOR}
@@ -198,13 +201,9 @@ Section "un.Uninstall"
 
 	; Start Menu
 	SetShellVarContext all
-	Delete "$SMPROGRAMS\mRemoteNG\mRemoteNG.lnk"
-	Delete "$SMPROGRAMS\mRemoteNG\Uninstall.lnk"
-	RMDir "$SMPROGRAMS\mRemoteNG"
+	RMDir /r "$SMPROGRAMS\mRemoteNG"
 	SetShellVarContext current
-	Delete "$SMPROGRAMS\mRemoteNG\mRemoteNG.lnk"
-	Delete "$SMPROGRAMS\mRemoteNG\Uninstall.lnk"
-	RMDir "$SMPROGRAMS\mRemoteNG"
+	RMDir /r "$SMPROGRAMS\mRemoteNG"
 
 	; Registry
 	DeleteRegValue HKLM "Software\mRemoteNG" "InstallPath"

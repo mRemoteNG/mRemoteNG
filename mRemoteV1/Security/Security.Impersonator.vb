@@ -66,14 +66,14 @@ Namespace Security
                 If 0 = returnValue Then
                     Dim errCode As Integer = Marshal.GetLastWin32Error()
                     Dim errMsg As String = "LogonUser failed with error code: " + errCode.ToString() + "(" + GetErrorMessage(errCode) + ")"
-                    Dim exLogon As Exception = New System.Exception(errMsg)
+                    Dim exLogon As New ApplicationException(errMsg)
                     Throw exLogon
                 End If
 
                 returnValue = DuplicateToken(tokenHandle, SecurityImpersonation, dupeTokenHandle)
                 If 0 = returnValue Then
                     CloseHandle(tokenHandle)
-                    Throw New System.Exception("Error trying to duplicate handle.")
+                    Throw New ApplicationException("Error trying to duplicate handle.")
                 End If
 
                 ' The token that is passed to the following constructor must
@@ -82,7 +82,7 @@ Namespace Security
                 impersonatedUser = newId.Impersonate()
 
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "Starting Impersonation failed (Sessions feature will not work)" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Starting Impersonation failed (Sessions feature will not work)" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -93,8 +93,8 @@ Namespace Security
             Try
                 impersonatedUser.Undo() ' Stop impersonating the user.
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "Stopping Impersonation failed" & vbNewLine & ex.Message, True)
-                Throw ex
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Stopping Impersonation failed" & vbNewLine & ex.Message, True)
+                Throw
             Finally
 
                 If Not System.IntPtr.op_Equality(tokenHandle, IntPtr.Zero) Then CloseHandle(tokenHandle)

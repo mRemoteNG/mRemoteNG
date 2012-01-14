@@ -63,12 +63,12 @@ Namespace Config
 
                 Public Overrides Function GetPropertyValues(ByVal context As SettingsContext, ByVal props As SettingsPropertyCollection) As SettingsPropertyValueCollection
                     'Create new collection of values
-                    Dim values As SettingsPropertyValueCollection = New SettingsPropertyValueCollection()
+                    Dim values As New SettingsPropertyValueCollection()
 
                     'Iterate through the settings to be retrieved
                     For Each setting As SettingsProperty In props
 
-                        Dim value As SettingsPropertyValue = New SettingsPropertyValue(setting)
+                        Dim value As New SettingsPropertyValue(setting)
                         value.IsDirty = False
                         value.SerializedValue = GetValue(setting)
                         values.Add(value)

@@ -51,16 +51,16 @@ Namespace UI
                 '
                 'clmSesUsername
                 '
-                Me.clmSesUsername.Text = My.Resources.strColumnUsername
+                Me.clmSesUsername.Text = My.Language.strColumnUsername
                 Me.clmSesUsername.Width = 80
                 '
                 'clmSesActivity
                 '
-                Me.clmSesActivity.Text = My.Resources.strActivity
+                Me.clmSesActivity.Text = My.Language.strActivity
                 '
                 'clmSesType
                 '
-                Me.clmSesType.Text = My.Resources.strType
+                Me.clmSesType.Text = My.Language.strType
                 Me.clmSesType.Width = 80
                 '
                 'cMenSession
@@ -74,14 +74,14 @@ Namespace UI
                 Me.cMenSessionRefresh.Image = Global.mRemoteNG.My.Resources.Resources.Refresh
                 Me.cMenSessionRefresh.Name = "cMenSessionRefresh"
                 Me.cMenSessionRefresh.Size = New System.Drawing.Size(123, 22)
-                Me.cMenSessionRefresh.Text = My.Resources.strRefresh
+                Me.cMenSessionRefresh.Text = My.Language.strRefresh
                 '
                 'cMenSessionLogOff
                 '
                 Me.cMenSessionLogOff.Image = Global.mRemoteNG.My.Resources.Resources.Session_LogOff
                 Me.cMenSessionLogOff.Name = "cMenSessionLogOff"
                 Me.cMenSessionLogOff.Size = New System.Drawing.Size(123, 22)
-                Me.cMenSessionLogOff.Text = My.Resources.strLogOff
+                Me.cMenSessionLogOff.Text = My.Language.strLogOff
                 '
                 'Sessions
                 '
@@ -90,8 +90,8 @@ Namespace UI
                 Me.HideOnClose = True
                 Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
                 Me.Name = "Sessions"
-                Me.TabText = My.Resources.strMenuSessions
-                Me.Text = My.Resources.strMenuSessions
+                Me.TabText = My.Language.strMenuSessions
+                Me.Text = My.Language.strMenuSessions
                 Me.cMenSession.ResumeLayout(False)
                 Me.ResumeLayout(False)
 
@@ -127,13 +127,13 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                clmSesUsername.Text = My.Resources.strColumnUsername
-                clmSesActivity.Text = My.Resources.strActivity
-                clmSesType.Text = My.Resources.strType
-                cMenSessionRefresh.Text = My.Resources.strRefresh
-                cMenSessionLogOff.Text = My.Resources.strLogOff
-                TabText = My.Resources.strMenuSessions
-                Text = My.Resources.strMenuSessions
+                clmSesUsername.Text = My.Language.strColumnUsername
+                clmSesActivity.Text = My.Language.strActivity
+                clmSesType.Text = My.Language.strType
+                cMenSessionRefresh.Text = My.Language.strRefresh
+                cMenSessionLogOff.Text = My.Language.strLogOff
+                TabText = My.Language.strMenuSessions
+                Text = My.Language.strMenuSessions
             End Sub
 #End Region
 
@@ -178,7 +178,7 @@ Namespace UI
                     sU = Nothing
                     tS.CloseConnection(tServerHandle)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSessionGetFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSessionGetFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -214,7 +214,7 @@ Namespace UI
 
                     GetSessionsBG()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strSessionKillFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSessionKillFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -297,7 +297,7 @@ Namespace UI
                         Me.GetSessions(conI.Hostname, sUser, sPass, sDom)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetSessionsAuto (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "GetSessionsAuto (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -355,11 +355,11 @@ Namespace UI
                     tDomain = Domain
 
                     threadSessions = New Threading.Thread(AddressOf GetSessionsBG)
-                    threadSessions.IsBackground = True
                     threadSessions.SetApartmentState(Threading.ApartmentState.STA)
+                    threadSessions.IsBackground = True
                     threadSessions.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetSessions (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "GetSessions (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -398,11 +398,11 @@ Namespace UI
                     tSessionID = SessionID
 
                     threadSessions = New Threading.Thread(AddressOf KillSessionBG)
-                    threadSessions.IsBackground = True
                     threadSessions.SetApartmentState(Threading.ApartmentState.STA)
+                    threadSessions.IsBackground = True
                     threadSessions.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "KillSession (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "KillSession (UI.Window.Sessions) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

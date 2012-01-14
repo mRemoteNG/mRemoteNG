@@ -294,7 +294,7 @@ Namespace UI
 #End Region
 
 #Region "Private Properties"
-            Private _SelApp As Tools.ExternalApp
+            Private _SelApp As Tools.ExternalTool
 #End Region
 
 #Region "Private Methods"
@@ -302,7 +302,7 @@ Namespace UI
                 Try
                     lvApps.Items.Clear()
 
-                    For Each extA As Tools.ExternalApp In ExtApps
+                    For Each extA As Tools.ExternalTool In ExternalTools
                         Dim lvItem As New ListViewItem
                         lvItem.Text = extA.DisplayName
                         lvItem.SubItems.Add(extA.FileName)
@@ -322,11 +322,11 @@ Namespace UI
 
                     RefreshToolbar()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "LoadApps failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LoadApps failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
-            Private Sub GetAppProperties(ByVal SelApp As Tools.ExternalApp)
+            Private Sub GetAppProperties(ByVal SelApp As Tools.ExternalTool)
                 Try
                     If SelApp IsNot Nothing Then
                         txtDisplayName.Text = SelApp.DisplayName
@@ -337,11 +337,11 @@ Namespace UI
                         _SelApp = SelApp
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetAppProperties failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "GetAppProperties failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
-            Private Sub SetAppProperties(ByVal SelApp As Tools.ExternalApp)
+            Private Sub SetAppProperties(ByVal SelApp As Tools.ExternalTool)
                 Try
                     If SelApp IsNot Nothing Then
                         SelApp.DisplayName = txtDisplayName.Text
@@ -353,14 +353,14 @@ Namespace UI
                         LoadApps()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SetAppProperties failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SetAppProperties failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub AddNewApp()
                 Try
-                    Dim nExtA As New Tools.ExternalApp("New Application")
-                    ExtApps.Add(nExtA)
+                    Dim nExtA As New Tools.ExternalTool("New Application")
+                    ExternalTools.Add(nExtA)
                     LoadApps()
                     lvApps.SelectedItems.Clear()
 
@@ -372,7 +372,7 @@ Namespace UI
                         End If
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddNewApp failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNewApp failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -383,14 +383,14 @@ Namespace UI
                         Case Is < 1
                             Exit Sub
                         Case Is = 1
-                            Prompt = String.Format(My.Resources.strConfirmDeleteExternalTool, lvApps.SelectedItems(0).Text)
+                            Prompt = String.Format(My.Language.strConfirmDeleteExternalTool, lvApps.SelectedItems(0).Text)
                         Case Is > 1
-                            Prompt = String.Format(My.Resources.strConfirmDeleteExternalToolMultiple, lvApps.SelectedItems.Count)
+                            Prompt = String.Format(My.Language.strConfirmDeleteExternalToolMultiple, lvApps.SelectedItems.Count)
                     End Select
 
                     If MsgBox(Prompt, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
                         For Each lvItem As ListViewItem In lvApps.SelectedItems
-                            ExtApps.Remove(lvItem.Tag)
+                            ExternalTools.Remove(lvItem.Tag)
                             lvItem.Tag = Nothing
                             lvItem.Remove()
                         Next
@@ -398,22 +398,22 @@ Namespace UI
                         RefreshToolbar()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "RemoveApps failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RemoveApps failed (UI.Window.ExternalApps)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub StartApp()
                 Try
                     For Each lvItem As ListViewItem In lvApps.SelectedItems
-                        TryCast(lvItem.Tag, mRemoteNG.Tools.ExternalApp).Start()
+                        TryCast(lvItem.Tag, mRemoteNG.Tools.ExternalTool).Start()
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "StartApp failed (UI.Window.ExternalApps" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "StartApp failed (UI.Window.ExternalApps" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub RefreshToolbar()
-                frmMain.AddExtAppsToToolbar()
+                frmMain.AddExternalToolsToToolBar()
                 App.Runtime.GetExtApps()
             End Sub
 #End Region
@@ -425,24 +425,24 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                clmDisplayName.Text = My.Resources.strColumnDisplayName
-                clmFilename.Text = My.Resources.strColumnFilename
-                clmArguments.Text = My.Resources.strColumnArguments
-                clmWaitForExit.Text = My.Resources.strColumnWaitForExit
-                cMenAppsAdd.Text = My.Resources.strMenuNewExternalTool
-                cMenAppsRemove.Text = My.Resources.strMenuDeleteExternalTool
-                cMenAppsStart.Text = My.Resources.strMenuLaunchExternalTool
-                grpEditor.Text = My.Resources.strGroupboxExternalToolProperties
-                Label4.Text = My.Resources.strLabelOptions
-                chkWaitForExit.Text = My.Resources.strCheckboxWaitForExit
-                chkTryIntegrate.Text = My.Resources.strTryIntegrate
-                btnBrowse.Text = My.Resources.strButtonBrowse
-                Label3.Text = My.Resources.strLabelArguments
-                Label2.Text = My.Resources.strLabelFilename
-                Label1.Text = My.Resources.strLabelDisplayName
-                dlgOpenFile.Filter = My.Resources.strFilterApplication & "|*.exe|" & My.Resources.strFilterAll & "|*.*"
-                TabText = My.Resources.strMenuExternalTools
-                Text = My.Resources.strMenuExternalTools
+                clmDisplayName.Text = My.Language.strColumnDisplayName
+                clmFilename.Text = My.Language.strColumnFilename
+                clmArguments.Text = My.Language.strColumnArguments
+                clmWaitForExit.Text = My.Language.strColumnWaitForExit
+                cMenAppsAdd.Text = My.Language.strMenuNewExternalTool
+                cMenAppsRemove.Text = My.Language.strMenuDeleteExternalTool
+                cMenAppsStart.Text = My.Language.strMenuLaunchExternalTool
+                grpEditor.Text = My.Language.strGroupboxExternalToolProperties
+                Label4.Text = My.Language.strLabelOptions
+                chkWaitForExit.Text = My.Language.strCheckboxWaitForExit
+                chkTryIntegrate.Text = My.Language.strTryIntegrate
+                btnBrowse.Text = My.Language.strButtonBrowse
+                Label3.Text = My.Language.strLabelArguments
+                Label2.Text = My.Language.strLabelFilename
+                Label1.Text = My.Language.strLabelDisplayName
+                dlgOpenFile.Filter = My.Language.strFilterApplication & "|*.exe|" & My.Language.strFilterAll & "|*.*"
+                TabText = My.Language.strMenuExternalTools
+                Text = My.Language.strMenuExternalTools
             End Sub
 
             Private Sub lvApps_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lvApps.DoubleClick

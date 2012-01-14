@@ -103,7 +103,7 @@ Namespace UI
                 '
                 'clmMessage
                 '
-                Me.clmMessage.Text = My.Resources.strColumnMessage
+                Me.clmMessage.Text = My.Language.strColumnMessage
                 Me.clmMessage.Width = 184
                 '
                 'cMenMC
@@ -120,7 +120,7 @@ Namespace UI
                 Me.cMenMCCopy.Name = "cMenMCCopy"
                 Me.cMenMCCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
                 Me.cMenMCCopy.Size = New System.Drawing.Size(136, 22)
-                Me.cMenMCCopy.Text = My.Resources.strMenuCopy
+                Me.cMenMCCopy.Text = My.Language.strMenuCopy
                 '
                 'cMenMCDelete
                 '
@@ -128,7 +128,7 @@ Namespace UI
                 Me.cMenMCDelete.Name = "cMenMCDelete"
                 Me.cMenMCDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete
                 Me.cMenMCDelete.Size = New System.Drawing.Size(136, 22)
-                Me.cMenMCDelete.Text = My.Resources.strMenuDelete
+                Me.cMenMCDelete.Text = My.Language.strMenuDelete
                 '
                 'imgListMC
                 '
@@ -144,8 +144,8 @@ Namespace UI
                 Me.HideOnClose = True
                 Me.Icon = Global.mRemoteNG.My.Resources.Resources.Info_Icon
                 Me.Name = "ErrorsAndInfos"
-                Me.TabText = My.Resources.strMenuNotifications
-                Me.Text = My.Resources.strMenuNotifications
+                Me.TabText = My.Language.strMenuNotifications
+                Me.Text = My.Language.strMenuNotifications
                 Me.pnlErrorMsg.ResumeLayout(False)
                 Me.pnlErrorMsg.PerformLayout()
                 CType(Me.pbError, System.ComponentModel.ISupportInitialize).EndInit()
@@ -173,11 +173,11 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                clmMessage.Text = My.Resources.strColumnMessage
-                cMenMCCopy.Text = My.Resources.strMenuCopy
-                cMenMCDelete.Text = My.Resources.strMenuDelete
-                TabText = My.Resources.strMenuNotifications
-                Text = My.Resources.strMenuNotifications
+                clmMessage.Text = My.Language.strColumnMessage
+                cMenMCCopy.Text = My.Language.strMenuCopy
+                cMenMCDelete.Text = My.Language.strMenuDelete
+                TabText = My.Language.strMenuNotifications
+                Text = My.Language.strMenuNotifications
             End Sub
 #End Region
 
@@ -213,7 +213,7 @@ Namespace UI
 
                     Me._Layout = ControlLayout.Vertical
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "LayoutVertical (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LayoutVertical (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -229,7 +229,7 @@ Namespace UI
 
                     Me._Layout = ControlLayout.Horizontal
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "LayoutHorizontal (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LayoutHorizontal (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -247,7 +247,7 @@ Namespace UI
 
                     Me.lvErrorCollector.Columns(0).Width = Me.lvErrorCollector.Width - 20
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ErrorsAndInfos_Resize (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ErrorsAndInfos_Resize (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -259,7 +259,7 @@ Namespace UI
                     Me.txtMsgText.BackColor = Color.FromKnownColor(KnownColor.Control)
                     Me.lblMsgDate.Text = ""
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "pnlErrorMsg_ResetDefaultStyle (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "pnlErrorMsg_ResetDefaultStyle (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -276,7 +276,7 @@ Namespace UI
                         End Try
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "MC_KeyDown (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MC_KeyDown (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -307,7 +307,7 @@ Namespace UI
                     Me.lblMsgDate.Text = eMsg.MsgDate
                     Me.txtMsgText.Text = eMsg.MsgText
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "lvErrorCollector_SelectedIndexChanged (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "lvErrorCollector_SelectedIndexChanged (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -331,7 +331,7 @@ Namespace UI
                         Clipboard.SetText(strCopyText)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CopyMessageToClipboard (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CopyMessageToClipboard (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -347,7 +347,7 @@ Namespace UI
                         Next
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "DeleteMessages (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "DeleteMessages (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

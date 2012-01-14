@@ -59,7 +59,7 @@ Namespace Connection
                             System.Windows.Forms.Application.DoEvents()
                         Loop
                     Catch comEx As System.Runtime.InteropServices.COMException
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpControlCreationFailed & vbNewLine & vbNewLine & comEx.Message)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpControlCreationFailed & vbNewLine & vbNewLine & comEx.Message)
                         RDP.Dispose()
                         Return False
                     End Try
@@ -96,13 +96,13 @@ Namespace Connection
 
                     Me.SetPerformanceFlags()
 
-                    RDP.ConnectingText = My.Resources.strConnecting
+                    RDP.ConnectingText = My.Language.strConnecting
 
                     Control.Anchor = AnchorStyles.None
 
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetPropsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPropsFailed & vbNewLine & ex.Message, True)
                     Return False
                 End Try
             End Function
@@ -115,7 +115,7 @@ Namespace Connection
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpConnectionOpenFailed & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpConnectionOpenFailed & vbNewLine & ex.Message)
                 End Try
 
                 Return False
@@ -125,7 +125,7 @@ Namespace Connection
                 Try
                     RDP.Disconnect()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpDisconnectFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpDisconnectFailed & vbNewLine & ex.Message, True)
                     MyBase.Close()
                 End Try
             End Sub
@@ -134,7 +134,7 @@ Namespace Connection
                 Try
                     Me.Fullscreen = Not Me.Fullscreen
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpToggleFullscreenFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpToggleFullscreenFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -142,7 +142,7 @@ Namespace Connection
                 Try
                     Me.SmartSize = Not Me.SmartSize
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpToggleSmartSizeFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpToggleSmartSizeFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -152,7 +152,7 @@ Namespace Connection
                         RDP.Focus()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpFocusFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpFocusFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -167,7 +167,7 @@ Namespace Connection
             Private Sub SetRDGateway()
                 Try
                     If RDP.TransportSettings.GatewayIsSupported = 1 Then
-                        mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strRdpGatewayIsSupported, True)
+                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strRdpGatewayIsSupported, True)
                         If Me.Info.RDGatewayUsageMethod <> RDGatewayUsageMethod.Never Then
                             RDP.TransportSettings2.GatewayProfileUsageMethod = 1
                             RDP.TransportSettings.GatewayUsageMethod = Me.Info.RDGatewayUsageMethod
@@ -183,10 +183,10 @@ Namespace Connection
                             End If
                         End If
                     Else
-                        mC.AddMessage(Messages.MessageClass.InformationMsg, My.Resources.strRdpGatewayNotSupported, True)
+                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strRdpGatewayNotSupported, True)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetGatewayFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetGatewayFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -194,31 +194,31 @@ Namespace Connection
                 Try
                     If (Me.Force And Connection.Info.Force.UseConsoleSession) = Connection.Info.Force.UseConsoleSession Then
                         If RDPVersion < Versions.RDC61 Then
-                            mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strRdpSetConsoleSwitch, "6.0"), True)
+                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.0"), True)
                             RDP.AdvancedSettings2.ConnectToServerConsole = True
                         Else
-                            mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strRdpSetConsoleSwitch, "6.1"), True)
+                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.1"), True)
                             RDP.AdvancedSettings6.ConnectToAdministerServer = True
                         End If
                     ElseIf (Me.Force And Connection.Info.Force.DontUseConsoleSession) = Connection.Info.Force.DontUseConsoleSession Then
                         If RDPVersion < Versions.RDC61 Then
-                            mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strRdpSetConsoleSwitch, "6.0"), True)
+                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.0"), True)
                             RDP.AdvancedSettings2.ConnectToServerConsole = False
                         Else
-                            mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strRdpSetConsoleSwitch, "6.1"), True)
+                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.1"), True)
                             RDP.AdvancedSettings6.ConnectToAdministerServer = False
                         End If
                     Else
                         If RDPVersion < Versions.RDC61 Then
-                            mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strRdpSetConsoleSwitch, "6.0"), True)
+                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.0"), True)
                             RDP.AdvancedSettings2.ConnectToServerConsole = Me.Info.UseConsoleSession
                         Else
-                            mC.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Resources.strRdpSetConsoleSwitch, "6.1"), True)
+                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.1"), True)
                             RDP.AdvancedSettings6.ConnectToAdministerServer = Me.Info.UseConsoleSession
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetConsoleSessionFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetConsoleSessionFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -261,7 +261,7 @@ Namespace Connection
                         RDP.Domain = _dom
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetCredentialsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetCredentialsFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -292,7 +292,7 @@ Namespace Connection
                             RDP.DesktopHeight = Resolutions.Items(Int(Me.Info.Resolution)).Height
                     End Select
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetResolutionFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetResolutionFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -302,7 +302,7 @@ Namespace Connection
                         RDP.AdvancedSettings2.RDPPort = Me.Info.Port
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetPortFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPortFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -315,7 +315,7 @@ Namespace Connection
                         RDP.FullScreen = True
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetRedirectKeysFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectKeysFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -327,7 +327,7 @@ Namespace Connection
                     RDP.AdvancedSettings2.RedirectSmartCards = Me.Info.RedirectSmartCards
                     RDP.SecuredSettings2.AudioRedirectionMode = Int(Me.Info.RedirectSound)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetRedirectionFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectionFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -352,7 +352,7 @@ Namespace Connection
 
                     RDP.AdvancedSettings.PerformanceFlags = pFlags
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetPerformanceFlagsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPerformanceFlagsFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -360,7 +360,7 @@ Namespace Connection
                 Try
                     RDP.AdvancedSettings5.AuthenticationLevel = Me.Info.RDPAuthenticationLevel
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetAuthenticationLevelFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetAuthenticationLevelFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -372,7 +372,7 @@ Namespace Connection
                     AddHandler RDP.OnDisconnected, AddressOf RDPEvent_OnDisconnected
                     AddHandler RDP.OnLeaveFullScreenMode, AddressOf RDPEvent_OnLeaveFullscreenMode
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpSetEventHandlersFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetEventHandlersFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -579,7 +579,7 @@ Namespace Connection
                             End If
                         Next
                     Catch ex As Exception
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpAddResolutionsFailed & vbNewLine & ex.Message, True)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpAddResolutionsFailed & vbNewLine & ex.Message, True)
                     End Try
                 End Sub
 
@@ -606,7 +606,7 @@ Namespace Connection
 
                         Return nRes
                     Catch ex As Exception
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpAddResolutionFailed & vbNewLine & ex.Message, True)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpAddResolutionFailed & vbNewLine & ex.Message, True)
                     End Try
 
                     Return Nothing
@@ -615,8 +615,8 @@ Namespace Connection
 #End Region
 
             Public Class Versions
-                Public Shared RDC60 As Version = New Version(6, 0, 6000)
-                Public Shared RDC61 As Version = New Version(6, 0, 6001)
+                Public Shared RDC60 As New Version(6, 0, 6000)
+                Public Shared RDC61 As New Version(6, 0, 6001)
             End Class
 
 #Region "Terminal Sessions"
@@ -634,7 +634,7 @@ Namespace Connection
                             Return True
                         End If
                     Catch ex As Exception
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpOpenConnectionFailed & vbNewLine & ex.Message, True)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpOpenConnectionFailed & vbNewLine & ex.Message, True)
                     End Try
 
                     Return False
@@ -645,7 +645,7 @@ Namespace Connection
                         oWTSCOM.WTSCloseServer(ServerHandle)
                         ServerHandle = 0
                     Catch ex As Exception
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpCloseConnectionFailed & vbNewLine & ex.Message, True)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpCloseConnectionFailed & vbNewLine & ex.Message, True)
                     End Try
                 End Sub
 
@@ -668,14 +668,14 @@ Namespace Connection
 
                             If SessionUser <> "" Then
                                 If SessionState = 0 Then
-                                    colSessions.Add(SessionID, My.Resources.strActive, SessionUser, SessionName)
+                                    colSessions.Add(SessionID, My.Language.strActive, SessionUser, SessionName)
                                 Else
-                                    colSessions.Add(SessionID, My.Resources.strInactive, SessionUser, SessionName)
+                                    colSessions.Add(SessionID, My.Language.strInactive, SessionUser, SessionName)
                                 End If
                             End If
                         Next
                     Catch ex As Exception
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpGetSessionsFailed & vbNewLine & ex.Message, True)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpGetSessionsFailed & vbNewLine & ex.Message, True)
                     End Try
 
                     Return colSessions
@@ -714,7 +714,7 @@ Namespace Connection
 
                         List.Add(newSes)
                     Catch ex As Exception
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpAddSessionFailed & vbNewLine & ex.Message, True)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpAddSessionFailed & vbNewLine & ex.Message, True)
                     End Try
 
                     Return newSes
@@ -773,23 +773,23 @@ Namespace Connection
 #Region "Fatal Errors"
             Public Class FatalErrors
                 Protected Shared _description() As String = { _
-                    0 = My.Resources.strRdpErrorUnknown, _
-                    1 = My.Resources.strRdpErrorCode1, _
-                    2 = My.Resources.strRdpErrorOutOfMemory, _
-                    3 = My.Resources.strRdpErrorWindowCreation, _
-                    4 = My.Resources.strRdpErrorCode2, _
-                    5 = My.Resources.strRdpErrorCode3, _
-                    6 = My.Resources.strRdpErrorCode4, _
-                    7 = My.Resources.strRdpErrorConnection, _
-                    100 = My.Resources.strRdpErrorWinsock _
+                    0 = My.Language.strRdpErrorUnknown, _
+                    1 = My.Language.strRdpErrorCode1, _
+                    2 = My.Language.strRdpErrorOutOfMemory, _
+                    3 = My.Language.strRdpErrorWindowCreation, _
+                    4 = My.Language.strRdpErrorCode2, _
+                    5 = My.Language.strRdpErrorCode3, _
+                    6 = My.Language.strRdpErrorCode4, _
+                    7 = My.Language.strRdpErrorConnection, _
+                    100 = My.Language.strRdpErrorWinsock _
                 }
 
                 Public Shared Function GetError(ByVal id As String) As String
                     Try
                         Return (_description(id))
                     Catch ex As Exception
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strRdpErrorGetFailure & vbNewLine & ex.Message, True)
-                        Return String.Format(My.Resources.strRdpErrorUnknown, id)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpErrorGetFailure & vbNewLine & ex.Message, True)
+                        Return String.Format(My.Language.strRdpErrorUnknown, id)
                     End Try
                 End Function
             End Class

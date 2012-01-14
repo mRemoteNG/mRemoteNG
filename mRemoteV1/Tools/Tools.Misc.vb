@@ -54,7 +54,7 @@ Namespace Tools
 
                 Return myIcon
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" & vbNewLine & ex.Message, True)
                 Return Nothing
             End Try
         End Function
@@ -62,6 +62,7 @@ Namespace Tools
         Public Shared Event SQLUpdateCheckFinished(ByVal UpdateAvailable As Boolean)
         Public Shared Sub IsSQLUpdateAvailableBG()
             Dim t As New Threading.Thread(AddressOf IsSQLUpdateAvailable)
+            t.SetApartmentState(Threading.ApartmentState.STA)
             t.Start()
         End Sub
 
@@ -97,9 +98,9 @@ Namespace Tools
 
                 RaiseEvent SQLUpdateCheckFinished(False)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "IsSQLUpdateAvailable failed (Tools.Misc)" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "IsSQLUpdateAvailable failed (Tools.Misc)" & vbNewLine & ex.Message, True)
             End Try
-            
+
             Return False
         End Function
 
@@ -173,7 +174,7 @@ Namespace Tools
             Next
 
             Dim ex As New Exception(String.Format("Can't convert {0} to {1}", value, t.ToString))
-            mC.AddMessage(Messages.MessageClass.ErrorMsg, "StringToEnum failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StringToEnum failed" & vbNewLine & ex.Message, True)
             Throw ex
         End Function
 
@@ -184,7 +185,7 @@ Namespace Tools
                 Dim LeftWidth As Integer = sender.TabController.SelectedTab.Width  'Me.Width - (Splitter.SplitterDistance + 16)
                 Dim TopHeight As Integer = sender.TabController.SelectedTab.Height  'Me.Height - (Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 + 2)
 
-                Dim currentFormSize As Size = New Size(LeftWidth, TopHeight)
+                Dim currentFormSize As New Size(LeftWidth, TopHeight)
                 Dim ScreenToBitmap As New Bitmap(LeftWidth, TopHeight)
                 Dim gGraphics As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(ScreenToBitmap)
 
@@ -192,7 +193,7 @@ Namespace Tools
 
                 Return ScreenToBitmap
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Taking Screenshot failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Taking Screenshot failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return Nothing
@@ -260,11 +261,11 @@ Namespace Tools
 
             Public Overloads Overrides Function ConvertFrom(ByVal context As ITypeDescriptorContext, ByVal culture As System.Globalization.CultureInfo, ByVal value As Object) As Object
                 If value.GetType() Is GetType(String) Then
-                    If CStr(value).ToLower() = My.Resources.strYes.ToLower Then
+                    If CStr(value).ToLower() = My.Language.strYes.ToLower Then
                         Return True
                     End If
 
-                    If CStr(value).ToLower() = My.Resources.strNo.ToLower Then
+                    If CStr(value).ToLower() = My.Language.strNo.ToLower Then
                         Return False
                     End If
 
@@ -276,7 +277,7 @@ Namespace Tools
 
             Public Overloads Overrides Function ConvertTo(ByVal context As ITypeDescriptorContext, ByVal culture As System.Globalization.CultureInfo, ByVal value As Object, ByVal destinationType As Type) As Object
                 If destinationType Is GetType(String) Then
-                    Return IIf(CBool(value), My.Resources.strYes, My.Resources.strNo)
+                    Return IIf(CBool(value), My.Language.strYes, My.Language.strNo)
                 End If
 
                 Return MyBase.ConvertTo(context, culture, value, destinationType)
@@ -314,7 +315,7 @@ Namespace Tools
                         SetWinFullScreen(targetForm.Handle)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Entering Fullscreen failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Entering Fullscreen failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -331,7 +332,7 @@ Namespace Tools
                     targetForm.Bounds = bounds
                     FullscreenActive = False
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Exiting Fullscreen failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Exiting Fullscreen failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -350,7 +351,7 @@ Namespace Tools
                     Dim curScreen As Screen = Screen.FromHandle(targetForm.Handle)
                     SetWindowPos(hwnd, HWND_TOP, curScreen.Bounds.Left, curScreen.Bounds.Top, curScreen.Bounds.Right, curScreen.Bounds.Bottom, SWP_SHOWWINDOW)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SetWindowPos failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SetWindowPos failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class
@@ -438,7 +439,7 @@ Namespace Tools
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new Args failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new Args failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class

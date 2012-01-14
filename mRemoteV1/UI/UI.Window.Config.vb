@@ -390,7 +390,7 @@ Namespace UI
                     Me.ShowHideGridItems()
                     Me.SetHostStatus(Obj)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridObjectFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridObjectFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -416,7 +416,7 @@ Namespace UI
                     tsCustom.Items.Add(btnIcon)
                     tsCustom.Show()
 
-                    Dim tsDefault As ToolStrip = New ToolStrip
+                    Dim tsDefault As New ToolStrip
 
                     For Each ctrl As System.Windows.Forms.Control In pGrid.Controls
                         Dim tStrip As ToolStrip = TryCast(ctrl, ToolStrip)
@@ -431,37 +431,37 @@ Namespace UI
                     tsDefault.Items(tsDefault.Items.Count - 1).Visible = False
                     ToolStripManager.Merge(tsCustom, tsDefault)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigUiLoadFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigUiLoadFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub ApplyLanguage()
-                btnShowInheritance.Text = My.Resources.strButtonInheritance
-                btnShowDefaultInheritance.Text = My.Resources.strButtonDefaultInheritance
-                btnShowProperties.Text = My.Resources.strButtonProperties
-                btnShowDefaultProperties.Text = My.Resources.strButtonDefaultProperties
-                btnIcon.Text = My.Resources.strButtonIcon
-                btnHostStatus.Text = My.Resources.strStatus
-                Text = My.Resources.strMenuConfig
-                TabText = My.Resources.strMenuConfig
+                btnShowInheritance.Text = My.Language.strButtonInheritance
+                btnShowDefaultInheritance.Text = My.Language.strButtonDefaultInheritance
+                btnShowProperties.Text = My.Language.strButtonProperties
+                btnShowDefaultProperties.Text = My.Language.strButtonDefaultProperties
+                btnIcon.Text = My.Language.strButtonIcon
+                btnHostStatus.Text = My.Language.strStatus
+                Text = My.Language.strMenuConfig
+                TabText = My.Language.strMenuConfig
             End Sub
 
             Private Sub pGrid_PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs) Handles pGrid.PropertyValueChanged
                 Try
                     If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
                         Select Case e.ChangedItem.Label
-                            Case My.Resources.strPropertyNameProtocol
+                            Case My.Language.strPropertyNameProtocol
                                 TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).SetDefaultPort()
-                            Case My.Resources.strPropertyNameName
+                            Case My.Language.strPropertyNameName
                                 App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Text = Me.pGrid.SelectedObject.Name
-                            Case My.Resources.strPropertyNameIcon
+                            Case My.Language.strPropertyNameIcon
                                 Dim conIcon As Icon = mRemoteNG.Connection.Icon.FromString(TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).Icon)
                                 If conIcon IsNot Nothing Then
                                     Me.btnIcon.Image = conIcon.ToBitmap
                                 End If
-                            Case My.Resources.strPropertyNamePuttySession
+                            Case My.Language.strPropertyNamePuttySession
                                 mRemoteNG.Connection.PuttySession.PuttySessions = mRemoteNG.Connection.Protocol.PuttyBase.GetSessions()
-                            Case My.Resources.strPropertyNameAddress
+                            Case My.Language.strPropertyNameAddress
                                 Me.SetHostStatus(Me.pGrid.SelectedObject)
                         End Select
 
@@ -474,7 +474,7 @@ Namespace UI
                         Dim rInfo As mRemoteNG.Root.Info = Me.pGrid.SelectedObject
 
                         Select Case e.ChangedItem.Label
-                            Case My.Resources.strPasswordProtect
+                            Case My.Language.strPasswordProtect
                                 If rInfo.Password = True Then
                                     Dim pw As String = Tools.Misc.PasswordDialog
 
@@ -484,7 +484,7 @@ Namespace UI
                                         rInfo.Password = False
                                     End If
                                 End If
-                            Case My.Resources.strPropertyNameName
+                            Case My.Language.strPropertyNameName
                                 App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Text = Me.pGrid.SelectedObject.Name
                         End Select
                     End If
@@ -498,13 +498,13 @@ Namespace UI
                     Me.ShowHideGridItems()
                     App.Runtime.SaveConnectionsBG()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridValueFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridValueFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub ShowHideGridItems()
                 Try
-                    Dim strHide As List(Of String) = New List(Of String)
+                    Dim strHide As New List(Of String)
 
                     If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
                         Dim conI As mRemoteNG.Connection.Info = pGrid.SelectedObject
@@ -1123,7 +1123,7 @@ Namespace UI
 
                     Me.pGrid.Refresh()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridHideItemsFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridHideItemsFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1205,7 +1205,7 @@ Namespace UI
                         Me.cMenIcons.Show(mPos)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridButtonIconClickFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridButtonIconClickFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -1221,7 +1221,7 @@ Namespace UI
                         App.Runtime.SaveConnectionsBG()
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridMenuClickFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridMenuClickFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -1278,10 +1278,11 @@ Namespace UI
                     Me.btnHostStatus.Tag = "checking"
                     HostName = TryCast(ConnectionInfo, mRemoteNG.Connection.Info).Hostname
                     pThread = New Threading.Thread(AddressOf CheckHostAlive)
+                    pThread.SetApartmentState(Threading.ApartmentState.STA)
                     pThread.IsBackground = True
                     pThread.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strConfigPropertyGridSetHostStatusFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridSetHostStatusFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

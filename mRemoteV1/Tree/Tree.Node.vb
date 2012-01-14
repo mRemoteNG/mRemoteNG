@@ -55,7 +55,7 @@ Namespace Tree
         End Function
 
         Public Shared Function GetNodeFromPositionID(ByVal id As Integer) As TreeNode
-            For Each conI As Connection.Info In cL
+            For Each conI As Connection.Info In connectionList
                 If conI.PositionID = id Then
                     If conI.IsContainer Then
                         Return TryCast(conI.Parent, Container.Info).TreeNode
@@ -69,7 +69,7 @@ Namespace Tree
         End Function
 
         Public Shared Function GetNodeFromConstantID(ByVal id As String) As TreeNode
-            For Each conI As Connection.Info In cL
+            For Each conI As Connection.Info In connectionList
                 If conI.ConstantID = id Then
                     If conI.IsContainer Then
                         Return TryCast(conI.Parent, Container.Info).TreeNode
@@ -100,7 +100,7 @@ Namespace Tree
                     Return Type.Connection
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't get node type" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't get node type" & vbNewLine & ex.Message, True)
             End Try
 
             Return Type.NONE
@@ -117,7 +117,7 @@ Namespace Tree
                         Return Type.Connection
                 End Select
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't get node type from string" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't get node type from string" & vbNewLine & ex.Message, True)
             End Try
 
             Return Type.NONE
@@ -138,7 +138,7 @@ Namespace Tree
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return Nothing
@@ -159,7 +159,7 @@ Namespace Tree
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return Nothing
@@ -171,7 +171,7 @@ Namespace Tree
                     Return False
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "IsEmpty (Tree.Node) failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "IsEmpty (Tree.Node) failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return True
@@ -185,15 +185,15 @@ Namespace Tree
 
                 Select Case NodeType
                     Case Type.Connection
-                        nNode.Text = My.Resources.strNewConnection
+                        nNode.Text = My.Language.strNewConnection
                         nNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
                         nNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
                     Case Type.Container
-                        nNode.Text = My.Resources.strNewFolder
+                        nNode.Text = My.Language.strNewFolder
                         nNode.ImageIndex = Images.Enums.TreeImage.Container
                         nNode.SelectedImageIndex = Images.Enums.TreeImage.Container
                     Case Type.Root
-                        nNode.Text = My.Resources.strNewRoot
+                        nNode.Text = My.Language.strNewRoot
                         nNode.ImageIndex = Images.Enums.TreeImage.Root
                         nNode.SelectedImageIndex = Images.Enums.TreeImage.Root
                 End Select
@@ -204,7 +204,7 @@ Namespace Tree
 
                 Return nNode
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddNode failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNode failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return Nothing
@@ -232,7 +232,7 @@ Namespace Tree
                 nContI.TreeNode.Text = strDisplayName
 
                 adCNode.Tag = nContI
-                ctL.Add(nContI)
+                containerList.Add(nContI)
 
 
                 CreateADSubNodes(adCNode, ldapPath)
@@ -241,7 +241,7 @@ Namespace Tree
                 SelectedNode.Nodes.Add(adCNode)
                 SelectedNode = SelectedNode.Nodes(SelectedNode.Nodes.Count - 1)
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddADNodes failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddADNodes failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -287,63 +287,63 @@ Namespace Tree
                     nConI.TreeNode = adNode
                     adNode.Tag = nConI 'set the nodes tag to the conI
                     'add connection to connections
-                    cL.Add(nConI)
+                    connectionList.Add(nConI)
 
                     rNode.Nodes.Add(adNode)
                 Next
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "CreateADSubNodes failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CreateADSubNodes failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
-        Public Shared Sub CloneNode(ByVal tNode As TreeNode, Optional ByVal ParentNode As TreeNode = Nothing)
+        Public Shared Sub CloneNode(ByVal oldTreeNode As TreeNode, Optional ByVal parentNode As TreeNode = Nothing)
             Try
-                If GetNodeType(tNode) = Type.Connection Then
-                    Dim conI As Connection.Info = tNode.Tag
+                If GetNodeType(oldTreeNode) = Type.Connection Then
+                    Dim oldConnectionInfo As Connection.Info = oldTreeNode.Tag
 
-                    Dim nConI As Connection.Info = conI.Copy
-                    Dim nInh As Connection.Info.Inheritance = conI.Inherit.Copy()
-                    nInh.Parent = nConI
-                    nConI.Inherit = nInh
+                    Dim newConnectionInfo As Connection.Info = oldConnectionInfo.Copy
+                    Dim newInheritance As Connection.Info.Inheritance = oldConnectionInfo.Inherit.Copy()
+                    newInheritance.Parent = newConnectionInfo
+                    newConnectionInfo.Inherit = newInheritance
 
-                    cL.Add(nConI)
+                    connectionList.Add(newConnectionInfo)
 
-                    Dim nNode As New TreeNode(nConI.Name)
-                    nNode.Tag = nConI
-                    nNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
-                    nNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
+                    Dim newTreeNode As New TreeNode(newConnectionInfo.Name)
+                    newTreeNode.Tag = newConnectionInfo
+                    newTreeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
+                    newTreeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
 
-                    nConI.TreeNode = nNode
+                    newConnectionInfo.TreeNode = newTreeNode
 
-                    If ParentNode Is Nothing Then
-                        tNode.Parent.Nodes.Add(nNode)
-                        Tree.Node.TreeView.SelectedNode = nNode
+                    If parentNode Is Nothing Then
+                        oldTreeNode.Parent.Nodes.Add(newTreeNode)
+                        Tree.Node.TreeView.SelectedNode = newTreeNode
                     Else
-                        ParentNode.Nodes.Add(nNode)
+                        parentNode.Nodes.Add(newTreeNode)
                     End If
-                ElseIf GetNodeType(tNode) = Type.Container Then
-                    Dim nCont As Container.Info = TryCast(tNode.Tag, Container.Info).Copy
-                    Dim nConI As Connection.Info = TryCast(tNode.Tag, Container.Info).ConnectionInfo.Copy
-                    nCont.ConnectionInfo = nConI
+                ElseIf GetNodeType(oldTreeNode) = Type.Container Then
+                    Dim newContainerInfo As Container.Info = TryCast(oldTreeNode.Tag, Container.Info).Copy
+                    Dim newConnectionInfo As Connection.Info = TryCast(oldTreeNode.Tag, Container.Info).ConnectionInfo.Copy
+                    newContainerInfo.ConnectionInfo = newConnectionInfo
 
-                    Dim nNode As New TreeNode(nCont.Name)
-                    nNode.Tag = nCont
-                    nNode.ImageIndex = Images.Enums.TreeImage.Container
-                    nNode.SelectedImageIndex = Images.Enums.TreeImage.Container
-                    nCont.ConnectionInfo.Parent = nCont
+                    Dim newTreeNode As New TreeNode(newContainerInfo.Name)
+                    newTreeNode.Tag = newContainerInfo
+                    newTreeNode.ImageIndex = Images.Enums.TreeImage.Container
+                    newTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Container
+                    newContainerInfo.ConnectionInfo.Parent = newContainerInfo
 
-                    ctL.Add(nCont)
+                    containerList.Add(newContainerInfo)
 
-                    tNode.Parent.Nodes.Add(nNode)
+                    oldTreeNode.Parent.Nodes.Add(newTreeNode)
 
-                    Tree.Node.TreeView.SelectedNode = nNode
+                    Tree.Node.TreeView.SelectedNode = newTreeNode
 
-                    For Each cNode As TreeNode In tNode.Nodes
-                        CloneNode(cNode, nNode)
+                    For Each childTreeNode As TreeNode In oldTreeNode.Nodes
+                        CloneNode(childTreeNode, newTreeNode)
                     Next
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "CloneNode failed (Tree.Node)" & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Language.strErrorCloneNodeFailed, ex.Message))
             End Try
         End Sub
 
@@ -382,7 +382,7 @@ Namespace Tree
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "SetNodeToolTip failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SetNodeToolTip failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -393,14 +393,14 @@ Namespace Tree
 
                 Select Case Tree.Node.GetNodeType(SelectedNode)
                     Case Type.Root
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, "The root item cannot be deleted!")
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "The root item cannot be deleted!")
                     Case Type.Container
                         If Tree.Node.IsEmpty(SelectedNode) = False Then
-                            If MsgBox(String.Format(My.Resources.strConfirmDeleteNodeFolder, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+                            If MsgBox(String.Format(My.Language.strConfirmDeleteNodeFolder, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
                                 SelectedNode.Remove()
                             End If
                         Else
-                            If MsgBox(String.Format(My.Resources.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+                            If MsgBox(String.Format(My.Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
                                 For Each tNode As TreeNode In SelectedNode.Nodes
                                     tNode.Remove()
                                 Next
@@ -408,14 +408,14 @@ Namespace Tree
                             End If
                         End If
                     Case Type.Connection
-                        If MsgBox(String.Format(My.Resources.strConfirmDeleteNodeConnection, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
+                        If MsgBox(String.Format(My.Language.strConfirmDeleteNodeConnection, SelectedNode.Text), MsgBoxStyle.YesNo Or MsgBoxStyle.Question) = MsgBoxResult.Yes Then
                             SelectedNode.Remove()
                         End If
                     Case Else
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, "Tree item type is unknown so it cannot be deleted!")
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Tree item type is unknown so it cannot be deleted!")
                 End Select
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Deleting selected node failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Deleting selected node failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -448,7 +448,7 @@ Namespace Tree
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeUp failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeUp failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -464,7 +464,7 @@ Namespace Tree
                     End If
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeDown failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeDown failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -495,7 +495,7 @@ Namespace Tree
                     If GetNodeType(childNode) = Type.Container Then Sort(childNode, sortType)
                 Next
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 
@@ -507,7 +507,7 @@ Namespace Tree
             Else
                 _TreeView.Nodes.Clear()
                 '_TreeView.Nodes.Add("Credentials")
-                _TreeView.Nodes.Add(My.Resources.strConnections)
+                _TreeView.Nodes.Add(My.Language.strConnections)
             End If
         End Sub
 

@@ -64,7 +64,7 @@ Partial Class frmPassword
         Me.lblPassword.Name = "lblPassword"
         Me.lblPassword.Size = New System.Drawing.Size(56, 13)
         Me.lblPassword.TabIndex = 2
-        Me.lblPassword.Text = My.Resources.strLabelPassword
+        Me.lblPassword.Text = My.Language.strLabelPassword
         '
         'lblVerify
         '
@@ -73,7 +73,7 @@ Partial Class frmPassword
         Me.lblVerify.Name = "lblVerify"
         Me.lblVerify.Size = New System.Drawing.Size(36, 13)
         Me.lblVerify.TabIndex = 3
-        Me.lblVerify.Text = My.Resources.strLabelVerify
+        Me.lblVerify.Text = My.Language.strLabelVerify
         '
         'btnOK
         '
@@ -83,7 +83,7 @@ Partial Class frmPassword
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(69, 23)
         Me.btnOK.TabIndex = 4
-        Me.btnOK.Text = My.Resources.strButtonOK
+        Me.btnOK.Text = My.Language.strButtonOK
         Me.btnOK.UseVisualStyleBackColor = True
         '
         'btnCancel
@@ -95,7 +95,7 @@ Partial Class frmPassword
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(69, 23)
         Me.btnCancel.TabIndex = 5
-        Me.btnCancel.Text = My.Resources.strButtonCancel
+        Me.btnCancel.Text = My.Language.strButtonCancel
         Me.btnCancel.UseVisualStyleBackColor = True
         '
         'lblStatus
@@ -152,7 +152,7 @@ Partial Class frmPassword
         Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
-        Me.Text = My.Resources.strTitlePassword
+        Me.Text = My.Language.strTitlePassword
         CType(Me.pbLock, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlImage.ResumeLayout(False)
         Me.pnlImage.PerformLayout()

@@ -103,13 +103,6 @@ Namespace Messages
                     App.Runtime.log.Info(nMsg.MsgText)
                 End If
 
-                If App.Editions.Spanlink.Enabled Then
-                    App.Runtime.Report(Tools.Misc.LeadingZero(Now.Year) & "-" & Tools.Misc.LeadingZero(Now.Month) & "-" & _
-                                       Tools.Misc.LeadingZero(Now.Day) & " " & Tools.Misc.LeadingZero(Now.Hour) & ":" & _
-                                       Tools.Misc.LeadingZero(Now.Minute) & ":" & Tools.Misc.LeadingZero(Now.Second) & _
-                                       " " & nMsg.MsgText)
-                End If
-
                 Exit Sub
             End If
 
@@ -138,11 +131,11 @@ Namespace Messages
         Private Shared Sub ShowMessageBox(ByVal Msg As Messages.Message)
             Select Case Msg.MsgClass
                 Case Messages.MessageClass.InformationMsg
-                    MessageBox.Show(Msg.MsgText, String.Format(My.Resources.strTitleInformation, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Information)
+                    MessageBox.Show(Msg.MsgText, String.Format(My.Language.strTitleInformation, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Information)
                 Case Messages.MessageClass.WarningMsg
-                    MessageBox.Show(Msg.MsgText, String.Format(My.Resources.strTitleWarning, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                    MessageBox.Show(Msg.MsgText, String.Format(My.Language.strTitleWarning, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Warning)
                 Case Messages.MessageClass.ErrorMsg
-                    MessageBox.Show(Msg.MsgText, String.Format(My.Resources.strTitleError, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    MessageBox.Show(Msg.MsgText, String.Format(My.Language.strTitleError, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Select
         End Sub
 

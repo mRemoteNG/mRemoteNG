@@ -37,7 +37,7 @@ Namespace Tools
         End Class
 
 
-        Public Class SysTrayIcon
+        Public Class NotificationAreaIcon
             Private _nI As NotifyIcon
 
             Private _cMen As ContextMenuStrip
@@ -63,13 +63,13 @@ Namespace Tools
             Public Sub New()
                 Try
                     Me._cMenCons = New ToolStripMenuItem
-                    Me._cMenCons.Text = My.Resources.strConnections
+                    Me._cMenCons.Text = My.Language.strConnections
                     Me._cMenCons.Image = My.Resources.Root
 
                     Me._cMenSep1 = New ToolStripSeparator
 
                     Me._cMenExit = New ToolStripMenuItem
-                    Me._cMenExit.Text = My.Resources.strMenuExit
+                    Me._cMenExit.Text = My.Language.strMenuExit
                     AddHandler Me._cMenExit.Click, AddressOf cMenExit_Click
 
                     Me._cMen = New ContextMenuStrip
@@ -87,7 +87,7 @@ Namespace Tools
                     AddHandler Me._nI.MouseClick, AddressOf nI_MouseClick
                     AddHandler Me._nI.MouseDoubleClick, AddressOf nI_MouseDoubleClick
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new SysTrayIcon failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new SysTrayIcon failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -98,7 +98,7 @@ Namespace Tools
                     Me._cMen.Dispose()
                     Me._Disposed = True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Disposing SysTrayIcon failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Disposing SysTrayIcon failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -135,7 +135,7 @@ Namespace Tools
                         AddHandler tMenItem.MouseDown, AddressOf ConMenItem_MouseDown
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -149,17 +149,17 @@ Namespace Tools
 
             Private Sub ShowForm()
                 frmMain.Show()
-                frmMain.WindowState = frmMain.prevWindowsState
+                frmMain.WindowState = frmMain.PreviousWindowState
 
                 If My.Settings.ShowSystemTrayIcon = False Then
-                    App.Runtime.SysTrayIcon.Dispose()
-                    App.Runtime.SysTrayIcon = Nothing
+                    App.Runtime.NotificationAreaIcon.Dispose()
+                    App.Runtime.NotificationAreaIcon = Nothing
                 End If
             End Sub
 
             Private Sub HideForm()
                 frmMain.Hide()
-                frmMain.prevWindowsState = frmMain.WindowState
+                frmMain.PreviousWindowState = frmMain.WindowState
             End Sub
 
             Private Sub ConMenItem_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
@@ -185,7 +185,7 @@ Namespace Tools
             sDlg.FileName = App.Info.Connections.DefaultConnectionsFile
             sDlg.OverwritePrompt = True
 
-            sDlg.Filter = My.Resources.strFiltermRemoteXML & "|*.xml|" & My.Resources.strFiltermRemoteCSV & "|*.csv|" & My.Resources.strFiltervRD2008CSV & "|*.csv|" & My.Resources.strFilterAll & "|*.*"
+            sDlg.Filter = My.Language.strFiltermRemoteXML & "|*.xml|" & My.Language.strFiltermRemoteCSV & "|*.csv|" & My.Language.strFiltervRD2008CSV & "|*.csv|" & My.Language.strFilterAll & "|*.*"
 
             Return sDlg
         End Function
@@ -194,7 +194,7 @@ Namespace Tools
             Dim lDlg As New OpenFileDialog()
             lDlg.CheckFileExists = True
             lDlg.InitialDirectory = App.Info.Connections.DefaultConnectionsPath
-            lDlg.Filter = My.Resources.strFiltermRemoteXML & "|*.xml|" & My.Resources.strFilterAll & "|*.*"
+            lDlg.Filter = My.Language.strFiltermRemoteXML & "|*.xml|" & My.Language.strFilterAll & "|*.*"
 
             Return lDlg
         End Function
@@ -203,7 +203,7 @@ Namespace Tools
             Dim lDlg As New OpenFileDialog()
             lDlg.CheckFileExists = True
             'lDlg.InitialDirectory = App.Info.Connections.DefaultConnectionsPath
-            lDlg.Filter = My.Resources.strFilterRDP & "|*.rdp|" & My.Resources.strFilterAll & "|*.*"
+            lDlg.Filter = My.Language.strFilterRDP & "|*.rdp|" & My.Language.strFilterAll & "|*.*"
 
             Return lDlg
         End Function

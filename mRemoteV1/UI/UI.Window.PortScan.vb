@@ -385,24 +385,24 @@ Namespace UI
                         cbProtocol.SelectedIndex = 0
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, My.Resources.strPortScanCouldNotLoadPanel & vbNewLine & vbNewLine & ex.Message)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPortScanCouldNotLoadPanel & vbNewLine & vbNewLine & ex.Message)
                 End Try
             End Sub
 
             Private Sub ApplyLanguage()
-                lblStartIP.Text = My.Resources.strStartIP & ":"
-                lblEndIP.Text = My.Resources.strEndIP & ":"
-                btnScan.Text = My.Resources.strButtonScan
-                btnCancel.Text = My.Resources.strButtonCancel
-                btnImport.Text = My.Resources.strButtonImport
-                lblOnlyImport.Text = My.Resources.strProtocolToImport & ":"
-                clmHost.Text = My.Resources.strColumnHostnameIP
-                clmOpenPorts.Text = My.Resources.strOpenPorts
-                clmClosedPorts.Text = My.Resources.strClosedPorts
-                Label2.Text = My.Resources.strEndPort & ":"
-                Label1.Text = My.Resources.strStartPort & ":"
-                TabText = My.Resources.strMenuPortScan
-                Text = My.Resources.strMenuPortScan
+                lblStartIP.Text = My.Language.strStartIP & ":"
+                lblEndIP.Text = My.Language.strEndIP & ":"
+                btnScan.Text = My.Language.strButtonScan
+                btnCancel.Text = My.Language.strButtonCancel
+                btnImport.Text = My.Language.strButtonImport
+                lblOnlyImport.Text = My.Language.strProtocolToImport & ":"
+                clmHost.Text = My.Language.strColumnHostnameIP
+                clmOpenPorts.Text = My.Language.strOpenPorts
+                clmClosedPorts.Text = My.Language.strClosedPorts
+                Label2.Text = My.Language.strEndPort & ":"
+                Label1.Text = My.Language.strStartPort & ":"
+                TabText = My.Language.strMenuPortScan
+                Text = My.Language.strMenuPortScan
             End Sub
 
             Private Sub btnScan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnScan.Click
@@ -412,7 +412,7 @@ Namespace UI
                     If ipOK() Then
                         StartScan()
                     Else
-                        mC.AddMessage(Messages.MessageClass.WarningMsg, My.Resources.strCannotStartPortScan)
+                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strCannotStartPortScan)
                     End If
                 End If
             End Sub
@@ -456,9 +456,9 @@ Namespace UI
                     Me.Invoke(d)
                 Else
                     If scanning = True Then
-                        btnScan.Text = My.Resources.strButtonStop
+                        btnScan.Text = My.Language.strButtonStop
                     Else
-                        btnScan.Text = My.Resources.strButtonScan
+                        btnScan.Text = My.Language.strButtonScan
                     End If
                 End If
             End Sub
@@ -495,7 +495,7 @@ Namespace UI
 
                     pScanner.StartScan()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "StartScan failed (UI.Window.PortScan)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartScan failed (UI.Window.PortScan)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -522,11 +522,11 @@ Namespace UI
 
 #Region "Event Handlers"
             Private Sub Event_BeginHostScan(ByVal Host As String)
-                mC.AddMessage(Messages.MessageClass.InformationMsg, "Scanning " & Host, True)
+                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Scanning " & Host, True)
             End Sub
 
             Private Sub Event_HostScanned(ByVal Host As Tools.PortScan.ScanHost, ByVal AlreadyScanned As Integer, ByVal ToBeScanned As Integer)
-                mC.AddMessage(Messages.MessageClass.InformationMsg, "Host scanned " & Host.HostIP, True)
+                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Host scanned " & Host.HostIP, True)
 
                 Dim lvI As ListViewItem = Host.ToListViewItem(psMode)
                 AddListViewItem(lvI)
@@ -537,7 +537,7 @@ Namespace UI
             Private Sub Event_ScanComplete(ByVal Hosts As ArrayList)
                 scanning = False
                 SwitchButtonText()
-                mC.AddMessage(Messages.MessageClass.InformationMsg, "Scan complete!")
+                MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Scan complete!")
             End Sub
 #End Region
         End Class

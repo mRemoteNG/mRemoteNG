@@ -1,12 +1,20 @@
 Imports mRemoteNG.App.Runtime
 Imports System.Reflection
+Imports System.Runtime.InteropServices
 Imports Crownwood
 Imports mRemoteNG.App.Native
-Imports System.Runtime.InteropServices
 Imports PSTaskDialog
 
 Public Class frmMain
-    Public prevWindowsState As FormWindowState
+    Private _previousWindowState As FormWindowState
+    Public Property PreviousWindowState As FormWindowState
+        Get
+            Return _previousWindowState
+        End Get
+        Set(value As FormWindowState)
+            _previousWindowState = value
+        End Set
+    End Property
     Public Shared Event clipboardchange()
     Private fpChainedWindowHandle As IntPtr
 
@@ -21,17 +29,15 @@ Public Class frmMain
 
 #Region "Startup & Shutdown"
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-        'insert enable edition code here
-        App.Editions.Spanlink.Enabled = False
+        Startup.CheckCompatibility()
 
         Startup.CreateLogger()
 
         ' Create gui config load and save objects
-        sL = New Config.Settings.Load(Me)
-        sS = New Config.Settings.Save(Me)
+        Dim SettingsLoad As New Config.Settings.Load(Me)
 
         ' Load GUI Configuration
-        sL.Load()
+        SettingsLoad.Load()
 
         Debug.Print("---------------------------" & vbNewLine & "[START] - " & Now)
 
@@ -41,12 +47,12 @@ Public Class frmMain
 
         fpChainedWindowHandle = SetClipboardViewer(Me.Handle)
 
-        mC = New Messages.Collector(Windows.errorsForm)
+        MessageCollector = New Messages.Collector(Windows.errorsForm)
 
         Connection.Protocol.RDP.Resolutions.AddResolutions()
         Connection.Protocol.PuttyBase.BorderSize = New Size(SystemInformation.FrameBorderSize.Width, SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height) 'Size.Subtract(Me.Size, Me.ClientSize)
 
-        wL = New UI.Window.List
+        WindowList = New UI.Window.List
 
         Startup.GetConnectionIcons()
         Startup.GetPuttySessions()
@@ -54,9 +60,6 @@ Public Class frmMain
         Windows.treePanel.Focus()
 
         Tree.Node.TreeView = Windows.treeForm.tvConnections
-
-        'insert new edition code here
-        Dim edSpanlink As New App.Editions.Spanlink
 
         'LoadCredentials()
         LoadConnections()
@@ -67,8 +70,8 @@ Public Class frmMain
 
 #If Not PORTABLE Then
         If Not My.Settings.CheckForUpdatesAsked Then
-            Dim CommandButtons() As String = {My.Resources.strAskUpdatesCommandRecommended, My.Resources.strAskUpdatesCommandCustom, My.Resources.strAskUpdatesCommandAskLater}
-            Dim Result As DialogResult = cTaskDialog.ShowTaskDialogBox(Me, My.Application.Info.ProductName, My.Resources.strAskUpdatesMainInstruction, String.Format(My.Resources.strAskUpdatesContent, My.Application.Info.ProductName), "", "", "", "", String.Join("|", CommandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question)
+            Dim CommandButtons() As String = {My.Language.strAskUpdatesCommandRecommended, My.Language.strAskUpdatesCommandCustom, My.Language.strAskUpdatesCommandAskLater}
+            cTaskDialog.ShowTaskDialogBox(Me, My.Application.Info.ProductName, My.Language.strAskUpdatesMainInstruction, String.Format(My.Language.strAskUpdatesContent, My.Application.Info.ProductName), "", "", "", "", String.Join("|", CommandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question)
             If cTaskDialog.CommandButtonResult = 0 Or cTaskDialog.CommandButtonResult = 1 Then
                 My.Settings.CheckForUpdatesAsked = True
             End If
@@ -94,73 +97,73 @@ Public Class frmMain
     End Sub
 
     Private Sub ApplyLanguage()
-        mMenFile.Text = My.Resources.strMenuFile
-        mMenFileNew.Text = My.Resources.strMenuNewConnectionFile
-        mMenFileNewConnection.Text = My.Resources.strNewConnection
-        mMenFileNewFolder.Text = My.Resources.strNewFolder
-        mMenFileLoad.Text = My.Resources.strMenuOpenConnectionFile
-        mMenFileSave.Text = My.Resources.strMenuSaveConnectionFile
-        mMenFileSaveAs.Text = My.Resources.strMenuSaveConnectionFileAs
-        mMenFileImportExport.Text = My.Resources.strImportExport
-        ImportFromActiveDirectoryToolStripMenuItem.Text = My.Resources.strImportAD
-        ImportFromPortScanToolStripMenuItem.Text = My.Resources.strImportPortScan
-        ImportFromRDPFileToolStripMenuItem.Text = My.Resources.strImportRDPFiles
-        ImportFromXMLFileToolStripMenuItem.Text = My.Resources.strImportmRemoteXML
-        ExportToXMLFileToolStripMenuItem.Text = My.Resources.strExportmRemoteXML
-        mMenFileExit.Text = My.Resources.strMenuExit
+        mMenFile.Text = My.Language.strMenuFile
+        mMenFileNew.Text = My.Language.strMenuNewConnectionFile
+        mMenFileNewConnection.Text = My.Language.strNewConnection
+        mMenFileNewFolder.Text = My.Language.strNewFolder
+        mMenFileLoad.Text = My.Language.strMenuOpenConnectionFile
+        mMenFileSave.Text = My.Language.strMenuSaveConnectionFile
+        mMenFileSaveAs.Text = My.Language.strMenuSaveConnectionFileAs
+        mMenFileImportExport.Text = My.Language.strImportExport
+        ImportFromActiveDirectoryToolStripMenuItem.Text = My.Language.strImportAD
+        ImportFromPortScanToolStripMenuItem.Text = My.Language.strImportPortScan
+        ImportFromRDPFileToolStripMenuItem.Text = My.Language.strImportRDPFiles
+        ImportFromXMLFileToolStripMenuItem.Text = My.Language.strImportmRemoteXML
+        ExportToXMLFileToolStripMenuItem.Text = My.Language.strExportmRemoteXML
+        mMenFileExit.Text = My.Language.strMenuExit
 
-        mMenView.Text = My.Resources.strMenuView
-        mMenViewAddConnectionPanel.Text = My.Resources.strMenuAddConnectionPanel
-        mMenViewConnectionPanels.Text = My.Resources.strMenuConnectionPanels
-        mMenViewConnections.Text = My.Resources.strMenuConnections
-        mMenViewConfig.Text = My.Resources.strMenuConfig
-        mMenViewSessions.Text = My.Resources.strMenuSessions
-        mMenViewErrorsAndInfos.Text = My.Resources.strMenuNotifications
-        mMenViewScreenshotManager.Text = My.Resources.strMenuScreenshotManager
-        mMenViewJumpTo.Text = My.Resources.strMenuJumpTo
-        mMenViewJumpToConnectionsConfig.Text = My.Resources.strMenuConnectionsAndConfig
-        mMenViewJumpToSessionsScreenshots.Text = My.Resources.strMenuSessionsAndScreenshots
-        mMenViewJumpToErrorsInfos.Text = My.Resources.strMenuNotifications
-        mMenViewResetLayout.Text = My.Resources.strMenuResetLayout
-        mMenViewQuickConnectToolbar.Text = My.Resources.strMenuQuickConnectToolbar
-        mMenViewExtAppsToolbar.Text = My.Resources.strMenuExternalToolsToolbar
-        mMenViewFullscreen.Text = My.Resources.strMenuFullScreen
+        mMenView.Text = My.Language.strMenuView
+        mMenViewAddConnectionPanel.Text = My.Language.strMenuAddConnectionPanel
+        mMenViewConnectionPanels.Text = My.Language.strMenuConnectionPanels
+        mMenViewConnections.Text = My.Language.strMenuConnections
+        mMenViewConfig.Text = My.Language.strMenuConfig
+        mMenViewSessions.Text = My.Language.strMenuSessions
+        mMenViewErrorsAndInfos.Text = My.Language.strMenuNotifications
+        mMenViewScreenshotManager.Text = My.Language.strMenuScreenshotManager
+        mMenViewJumpTo.Text = My.Language.strMenuJumpTo
+        mMenViewJumpToConnectionsConfig.Text = My.Language.strMenuConnectionsAndConfig
+        mMenViewJumpToSessionsScreenshots.Text = My.Language.strMenuSessionsAndScreenshots
+        mMenViewJumpToErrorsInfos.Text = My.Language.strMenuNotifications
+        mMenViewResetLayout.Text = My.Language.strMenuResetLayout
+        mMenViewQuickConnectToolbar.Text = My.Language.strMenuQuickConnectToolbar
+        mMenViewExtAppsToolbar.Text = My.Language.strMenuExternalToolsToolbar
+        mMenViewFullscreen.Text = My.Language.strMenuFullScreen
 
-        mMenTools.Text = My.Resources.strMenuTools
-        mMenToolsSSHTransfer.Text = My.Resources.strMenuSSHFileTransfer
-        mMenToolsExternalApps.Text = My.Resources.strMenuExternalTools
-        mMenToolsPortScan.Text = My.Resources.strMenuPortScan
-        mMenToolsComponentsCheck.Text = My.Resources.strComponentsCheck
-        mMenToolsUpdate.Text = My.Resources.strMenuCheckForUpdates
-        mMenToolsOptions.Text = My.Resources.strMenuOptions
+        mMenTools.Text = My.Language.strMenuTools
+        mMenToolsSSHTransfer.Text = My.Language.strMenuSSHFileTransfer
+        mMenToolsExternalApps.Text = My.Language.strMenuExternalTools
+        mMenToolsPortScan.Text = My.Language.strMenuPortScan
+        mMenToolsComponentsCheck.Text = My.Language.strComponentsCheck
+        mMenToolsUpdate.Text = My.Language.strMenuCheckForUpdates
+        mMenToolsOptions.Text = My.Language.strMenuOptions
 
-        mMenInfo.Text = My.Resources.strMenuHelp
-        mMenInfoHelp.Text = My.Resources.strMenuHelpContents
-        mMenInfoForum.Text = My.Resources.strMenuSupportForum
-        mMenInfoBugReport.Text = My.Resources.strMenuReportBug
-        mMenInfoDonate.Text = My.Resources.strMenuDonate
-        mMenInfoWebsite.Text = My.Resources.strMenuWebsite
-        mMenInfoAbout.Text = My.Resources.strMenuAbout
-        mMenInfoAnnouncements.Text = My.Resources.strMenuAnnouncements
+        mMenInfo.Text = My.Language.strMenuHelp
+        mMenInfoHelp.Text = My.Language.strMenuHelpContents
+        mMenInfoForum.Text = My.Language.strMenuSupportForum
+        mMenInfoBugReport.Text = My.Language.strMenuReportBug
+        mMenInfoDonate.Text = My.Language.strMenuDonate
+        mMenInfoWebsite.Text = My.Language.strMenuWebsite
+        mMenInfoAbout.Text = My.Language.strMenuAbout
+        mMenInfoAnnouncements.Text = My.Language.strMenuAnnouncements
 
-        lblQuickConnect.Text = My.Resources.strLabelConnect
-        btnQuickyPlay.Text = My.Resources.strMenuConnect
-        mMenQuickyCon.Text = My.Resources.strMenuConnections
+        lblQuickConnect.Text = My.Language.strLabelConnect
+        btnQuickyPlay.Text = My.Language.strMenuConnect
+        mMenQuickyCon.Text = My.Language.strMenuConnections
 
-        cMenToolbarShowText.Text = My.Resources.strMenuShowText
+        cMenToolbarShowText.Text = My.Language.strMenuShowText
 
-        ToolStripButton1.Text = My.Resources.strConnect
-        ToolStripButton2.Text = My.Resources.strScreenshot
-        ToolStripButton3.Text = My.Resources.strRefresh
+        ToolStripButton1.Text = My.Language.strConnect
+        ToolStripButton2.Text = My.Language.strScreenshot
+        ToolStripButton3.Text = My.Language.strRefresh
 
-        ToolStripSplitButton1.Text = My.Resources.strSpecialKeys
-        ToolStripMenuItem1.Text = My.Resources.strKeysCtrlAltDel
-        ToolStripMenuItem2.Text = My.Resources.strKeysCtrlEsc
+        ToolStripSplitButton1.Text = My.Language.strSpecialKeys
+        ToolStripMenuItem1.Text = My.Language.strKeysCtrlAltDel
+        ToolStripMenuItem2.Text = My.Language.strKeysCtrlEsc
     End Sub
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        If My.Settings.ConfirmExit And wL.Count > 0 Then
-            Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, My.Resources.strConfirmExitMainInstruction, "", "", "", My.Resources.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+        If My.Settings.ConfirmExit And WindowList.Count > 0 Then
+            Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, My.Language.strConfirmExitMainInstruction, "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
             If cTaskDialog.VerificationChecked Then
                 My.Settings.ConfirmExit = False
             End If
@@ -172,7 +175,7 @@ Public Class frmMain
 
         _IsClosing = True
 
-        For Each Window As UI.Window.Base In wL
+        For Each Window As UI.Window.Base In WindowList
             Window.Close()
         Next
 
@@ -203,50 +206,46 @@ Public Class frmMain
     End Sub
 
     Private Sub tmrAutoSave_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrAutoSave.Tick
-        mC.AddMessage(Messages.MessageClass.InformationMsg, "Doing AutoSave", True)
+        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Doing AutoSave", True)
         App.Runtime.SaveConnections()
     End Sub
 #End Region
 
 #Region "Ext Apps Toolbar"
     Private Sub cMenToolbarShowText_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenToolbarShowText.Click
-        SwitchToolbarText(Not cMenToolbarShowText.Checked)
+        SwitchToolBarText(Not cMenToolbarShowText.Checked)
     End Sub
 
-    Public Sub AddExtAppsToToolbar()
+    Public Sub AddExternalToolsToToolBar()
         Try
-            'clean up
-            tsExtAppsToolbar.Items.Clear()
+            For Each item As ToolStripItem In tsExternalTools.Items
+                item.Dispose()
+            Next
+            tsExternalTools.Items.Clear()
 
-            'add ext apps
-            For Each extA As Tools.ExternalApp In ExtApps
-                Dim nItem As New ToolStripButton
-                nItem.Text = extA.DisplayName
-                nItem.Image = extA.Image
+            Dim button As ToolStripButton
+            For Each tool As Tools.ExternalTool In ExternalTools
+                button = tsExternalTools.Items.Add(tool.DisplayName, tool.Image, AddressOf tsExtAppEntry_Click)
 
                 If cMenToolbarShowText.Checked = True Then
-                    nItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
+                    button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
                 Else
-                    If nItem.Image IsNot Nothing Then
-                        nItem.DisplayStyle = ToolStripItemDisplayStyle.Image
+                    If button.Image IsNot Nothing Then
+                        button.DisplayStyle = ToolStripItemDisplayStyle.Image
                     Else
-                        nItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
+                        button.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
                     End If
                 End If
 
-                nItem.Tag = extA
-
-                AddHandler nItem.Click, AddressOf tsExtAppEntry_Click
-
-                tsExtAppsToolbar.Items.Add(nItem)
+                button.Tag = tool
             Next
         Catch ex As Exception
-            mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddExtAppsToToolbar failed (frmMain)" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorAddExternalToolsToToolBarFailed, ex.Message), True)
         End Try
     End Sub
 
     Private Sub tsExtAppEntry_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Dim extA As Tools.ExternalApp = sender.Tag
+        Dim extA As Tools.ExternalTool = sender.Tag
 
         If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Connection Then
             extA.Start(Tree.Node.SelectedNode.Tag)
@@ -255,9 +254,9 @@ Public Class frmMain
         End If
     End Sub
 
-    Public Sub SwitchToolbarText(ByVal Show As Boolean)
-        For Each tItem As ToolStripButton In tsExtAppsToolbar.Items
-            If Show = True Then
+    Public Sub SwitchToolBarText(ByVal show As Boolean)
+        For Each tItem As ToolStripButton In tsExternalTools.Items
+            If show = True Then
                 tItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText
             Else
                 If tItem.Image IsNot Nothing Then
@@ -268,7 +267,7 @@ Public Class frmMain
             End If
         Next
 
-        cMenToolbarShowText.Checked = Show
+        cMenToolbarShowText.Checked = show
     End Sub
 #End Region
 
@@ -281,33 +280,33 @@ Public Class frmMain
                 mMenFileDelete.Enabled = False
                 mMenFileRename.Enabled = True
                 mMenFileDuplicate.Enabled = False
-                mMenFileDelete.Text = My.Resources.strMenuDelete
-                mMenFileRename.Text = My.Resources.strMenuRenameFolder
-                mMenFileDuplicate.Text = My.Resources.strMenuDuplicate
+                mMenFileDelete.Text = My.Language.strMenuDelete
+                mMenFileRename.Text = My.Language.strMenuRenameFolder
+                mMenFileDuplicate.Text = My.Language.strMenuDuplicate
             Case Tree.Node.Type.Container
                 mMenFileImportExport.Enabled = True
                 mMenFileDelete.Enabled = True
                 mMenFileRename.Enabled = True
                 mMenFileDuplicate.Enabled = True
-                mMenFileDelete.Text = My.Resources.strMenuDeleteFolder
-                mMenFileRename.Text = My.Resources.strMenuRenameFolder
-                mMenFileDuplicate.Text = My.Resources.strMenuDuplicateFolder
+                mMenFileDelete.Text = My.Language.strMenuDeleteFolder
+                mMenFileRename.Text = My.Language.strMenuRenameFolder
+                mMenFileDuplicate.Text = My.Language.strMenuDuplicateFolder
             Case Tree.Node.Type.Connection
                 mMenFileImportExport.Enabled = False
                 mMenFileDelete.Enabled = True
                 mMenFileRename.Enabled = True
                 mMenFileDuplicate.Enabled = True
-                mMenFileDelete.Text = My.Resources.strMenuDeleteConnection
-                mMenFileRename.Text = My.Resources.strMenuRenameConnection
-                mMenFileDuplicate.Text = My.Resources.strMenuDuplicateConnection
+                mMenFileDelete.Text = My.Language.strMenuDeleteConnection
+                mMenFileRename.Text = My.Language.strMenuRenameConnection
+                mMenFileDuplicate.Text = My.Language.strMenuDuplicateConnection
             Case Else
                 mMenFileImportExport.Enabled = False
                 mMenFileDelete.Enabled = False
                 mMenFileRename.Enabled = False
                 mMenFileDuplicate.Enabled = False
-                mMenFileDelete.Text = My.Resources.strMenuDelete
-                mMenFileRename.Text = My.Resources.strMenuRename
-                mMenFileDuplicate.Text = My.Resources.strMenuDuplicate
+                mMenFileDelete.Text = My.Language.strMenuDelete
+                mMenFileRename.Text = My.Language.strMenuRename
+                mMenFileDuplicate.Text = My.Language.strMenuDuplicate
         End Select
     End Sub
 
@@ -331,8 +330,8 @@ Public Class frmMain
     End Sub
 
     Private Sub mMenFileLoad_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileLoad.Click
-        If App.Runtime.ConnectionsFileLoaded Then
-            Select Case MsgBox(My.Resources.strSaveConnectionsFileBeforeOpeningAnother, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question)
+        If App.Runtime.IsConnectionsFileLoaded Then
+            Select Case MsgBox(My.Language.strSaveConnectionsFileBeforeOpeningAnother, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question)
                 Case MsgBoxResult.Yes
                     App.Runtime.SaveConnections()
                 Case MsgBoxResult.Cancel
@@ -379,14 +378,14 @@ Public Class frmMain
         Me.mMenViewSessions.Checked = Not Windows.sessionsForm.IsHidden
         Me.mMenViewScreenshotManager.Checked = Not Windows.screenshotForm.IsHidden
 
-        Me.mMenViewExtAppsToolbar.Checked = tsExtAppsToolbar.Visible
+        Me.mMenViewExtAppsToolbar.Checked = tsExternalTools.Visible
         Me.mMenViewQuickConnectToolbar.Checked = tsQuickConnect.Visible
 
         Me.mMenViewConnectionPanels.DropDownItems.Clear()
 
-        For i As Integer = 0 To wL.Count - 1
-            Dim tItem As New ToolStripMenuItem(wL(i).Text, wL(i).Icon.ToBitmap, AddressOf ConnectionPanelMenuItem_Click)
-            tItem.Tag = wL(i)
+        For i As Integer = 0 To WindowList.Count - 1
+            Dim tItem As New ToolStripMenuItem(WindowList(i).Text, WindowList(i).Icon.ToBitmap, AddressOf ConnectionPanelMenuItem_Click)
+            tItem.Tag = WindowList(i)
 
             Me.mMenViewConnectionPanels.DropDownItems.Add(tItem)
         Next
@@ -474,7 +473,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mMenViewResetLayout_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewResetLayout.Click
-        If MsgBox(My.Resources.strConfirmResetLayout, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
+        If MsgBox(My.Language.strConfirmResetLayout, MsgBoxStyle.Question Or MsgBoxStyle.YesNo) = MsgBoxResult.Yes Then
             App.Runtime.Startup.SetDefaultLayout()
         End If
     End Sub
@@ -485,10 +484,10 @@ Public Class frmMain
 
     Private Sub mMenViewExtAppsToolbar_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewExtAppsToolbar.Click
         If mMenViewExtAppsToolbar.Checked = False Then
-            tsExtAppsToolbar.Visible = True
+            tsExternalTools.Visible = True
             mMenViewExtAppsToolbar.Checked = True
         Else
-            tsExtAppsToolbar.Visible = False
+            tsExternalTools.Visible = False
             mMenViewExtAppsToolbar.Checked = False
         End If
     End Sub
@@ -566,7 +565,7 @@ Public Class frmMain
                 End If
             Next
         Catch ex As Exception
-            mC.AddMessage(Messages.MessageClass.ErrorMsg, "CreateButtons (frmMain) failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CreateButtons (frmMain) failed" & vbNewLine & ex.Message, True)
         End Try
     End Sub
 
@@ -588,7 +587,7 @@ Public Class frmMain
 
             App.Runtime.OpenConnection(conI, mRemoteNG.Connection.Info.Force.DoNotJump)
         Catch ex As Exception
-            mC.AddMessage(Messages.MessageClass.ErrorMsg, "QuickyProtocolButton_Click (frmMain) failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "QuickyProtocolButton_Click (frmMain) failed" & vbNewLine & ex.Message, True)
         End Try
     End Sub
 
@@ -677,9 +676,11 @@ Public Class frmMain
                 End If
 
                 AddHandler tMenItem.MouseDown, AddressOf ConMenItem_MouseDown
+
+                tMenItem.Dispose()
             Next
         Catch ex As Exception
-            mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
         End Try
     End Sub
 
@@ -696,13 +697,13 @@ Public Class frmMain
     Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
         If Me.WindowState = FormWindowState.Minimized Then
             If My.Settings.MinimizeToTray Then
-                If App.Runtime.SysTrayIcon Is Nothing Then
-                    App.Runtime.SysTrayIcon = New Tools.Controls.SysTrayIcon()
+                If App.Runtime.NotificationAreaIcon Is Nothing Then
+                    App.Runtime.NotificationAreaIcon = New Tools.Controls.NotificationAreaIcon()
                 End If
                 Me.Hide()
             End If
         Else
-            prevWindowsState = Me.WindowState
+            PreviousWindowState = Me.WindowState
         End If
     End Sub
 
@@ -768,21 +769,21 @@ Public Class frmMain
     End Sub
 
     Private SysMenSubItems(50) As Integer
-    Private Sub ResetSysMenuItems()
-        SysMenu.Reset()
+    Private Shared Sub ResetSysMenuItems()
+        SystemMenu.Reset()
     End Sub
 
     Private Sub AddSysMenuItems()
-        SysMenu = New Tools.SystemMenu(Me.Handle)
-        Dim popMen As IntPtr = SysMenu.CreatePopupMenuItem()
+        SystemMenu = New Tools.SystemMenu(Me.Handle)
+        Dim popMen As IntPtr = SystemMenu.CreatePopupMenuItem()
 
         For i As Integer = 0 To Screen.AllScreens.Length - 1
             SysMenSubItems(i) = 200 + i
-            SysMenu.AppendMenuItem(popMen, Tools.SystemMenu.Flags.MF_STRING, SysMenSubItems(i), My.Resources.strScreen & " " & i + 1)
+            SystemMenu.AppendMenuItem(popMen, Tools.SystemMenu.Flags.MF_STRING, SysMenSubItems(i), My.Language.strScreen & " " & i + 1)
         Next
 
-        SysMenu.InsertMenuItem(SysMenu.SystemMenuHandle, 0, Tools.SystemMenu.Flags.MF_POPUP Or Tools.SystemMenu.Flags.MF_BYPOSITION, popMen, My.Resources.strSendTo)
-        SysMenu.InsertMenuItem(SysMenu.SystemMenuHandle, 1, Tools.SystemMenu.Flags.MF_BYPOSITION Or Tools.SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, Nothing)
+        SystemMenu.InsertMenuItem(SystemMenu.SystemMenuHandle, 0, Tools.SystemMenu.Flags.MF_POPUP Or Tools.SystemMenu.Flags.MF_BYPOSITION, popMen, My.Language.strSendTo)
+        SystemMenu.InsertMenuItem(SystemMenu.SystemMenuHandle, 1, Tools.SystemMenu.Flags.MF_BYPOSITION Or Tools.SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, Nothing)
     End Sub
 #End Region
 End Class

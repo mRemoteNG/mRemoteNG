@@ -37,7 +37,7 @@ Namespace Connection
                 Me.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
                 InitializeComponent()
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't create new InterfaceControl" & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't create new InterfaceControl" & vbNewLine & ex.Message)
             End Try
         End Sub
 #End Region

@@ -223,7 +223,7 @@ Namespace Tools
                 Try
                     Return "SSH: " & _SSH & " Telnet: " & _Telnet & " HTTP: " & _HTTP & " HTTPS: " & _HTTPS & " Rlogin: " & _Rlogin & " RDP: " & _RDP & " VNC: " & _VNC
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "ToString failed (Tools.PortScan)", True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ToString failed (Tools.PortScan)", True)
                     Return ""
                 End Try
             End Function
@@ -264,16 +264,16 @@ Namespace Tools
 
                     Return lvI
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "ToString failed (Tools.PortScan)", True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ToString failed (Tools.PortScan)", True)
                     Return Nothing
                 End Try
             End Function
 
             Private Function BoolToYesNo(ByVal Bool As Boolean) As String
                 If Bool = True Then
-                    Return My.Resources.strYes
+                    Return My.Language.strYes
                 Else
-                    Return My.Resources.strNo
+                    Return My.Language.strNo
                 End If
             End Function
 
@@ -395,6 +395,7 @@ Namespace Tools
 
             Public Sub StartScan()
                 sThread = New Thread(AddressOf StartScanBG)
+                sThread.SetApartmentState(Threading.ApartmentState.STA)
                 sThread.IsBackground = True
                 sThread.Start()
             End Sub
@@ -475,7 +476,7 @@ Namespace Tools
 
                     RaiseEvent ScanComplete(_ScannedHosts)
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "StartScanBG failed (Tools.PortScan)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "StartScanBG failed (Tools.PortScan)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -526,7 +527,7 @@ Namespace Tools
 
                     Return arrIPs
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "GetIPRange failed (Tools.PortScan)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIPRange failed (Tools.PortScan)" & vbNewLine & ex.Message, True)
                     Return Nothing
                 End Try
             End Function
@@ -546,7 +547,7 @@ Namespace Tools
                     Next
                     Return True
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.WarningMsg, "matchIP failed (Tools.PortScan)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "matchIP failed (Tools.PortScan)" & vbNewLine & ex.Message, True)
                     Return False
                 End Try
             End Function

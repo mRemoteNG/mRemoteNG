@@ -1,0 +1,935 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strUpdateFrequencyCustom" xml:space="preserve">
+    <value>Co {0} dni</value>
+  </data>
+  <data name="strUpdateFrequencyDaily" xml:space="preserve">
+    <value>Codziennie</value>
+  </data>
+  <data name="strUpdateFrequencyMonthly" xml:space="preserve">
+    <value>Miesięcznie</value>
+  </data>
+  <data name="strUpdateFrequencyWeekly" xml:space="preserve">
+    <value>Tygodniowo</value>
+  </data>
+  <data name="strFAMFAMFAMAttribution" xml:space="preserve">
+    <value>Zawiera ikony ze strony [FAMFAMFAM]</value>
+  </data>
+  <data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
+    <value>http://www.famfamfam.com/</value>
+  </data>
+  <data name="strMagicLibraryAttribution" xml:space="preserve">
+    <value>Program korzysta z bibliotek "Magic library" [Crownwood Software]</value>
+  </data>
+  <data name="strMagicLibraryAttributionURL" xml:space="preserve">
+    <value>http://www.dotnetmagic.com/</value>
+  </data>
+  <data name="strAbout" xml:space="preserve">
+    <value>O programie</value>
+  </data>
+  <data name="strLabelChangeLog" xml:space="preserve">
+    <value>Historia wersji:</value>
+  </data>
+  <data name="strLabelReleasedUnderGPL" xml:space="preserve">
+    <value>Wydane na licencji GNU General Public License (GPL)</value>
+  </data>
+  <data name="strConfirmResetLayout" xml:space="preserve">
+    <value>Czy jesteś pewien, że chcesz powrócić z ustawieniami paneli do ich domyślego wyglądu?</value>
+  </data>
+  <data name="strConfirmExitMainInstruction" xml:space="preserve">
+    <value>Czy chcesz zamknąć wszystkie otwarte połączenia?</value>
+  </data>
+  <data name="strCheckboxDoNotShowThisMessageAgain" xml:space="preserve">
+    <value>Nie pokazuj więcej tej informacji.</value>
+  </data>
+  <data name="strLabelPortableEdition" xml:space="preserve">
+    <value>Wersja przenośna.</value>
+  </data>
+  <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
+    <value>Czy jesteś pewien, że chcesz usunąć połączenie, "{0}"?</value>
+  </data>
+  <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
+    <value>Czy jesteś pewien, że chcesz usunąć pusty folder, "{0}"?</value>
+  </data>
+  <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
+    <value>Czy jesteś pewien, że chcesz usunąć folder, "{0}"? Wszystkie foldery oraz połączenia które zawiera także zostaną usunięte.</value>
+  </data>
+  <data name="strMenuDelete" xml:space="preserve">
+    <value>Usuń...</value>
+  </data>
+  <data name="strMenuDeleteConnection" xml:space="preserve">
+    <value>Usuń połączenie...</value>
+  </data>
+  <data name="strMenuDeleteFolder" xml:space="preserve">
+    <value>Usuń folder...</value>
+  </data>
+  <data name="strMenuDuplicate" xml:space="preserve">
+    <value>Duplikuj</value>
+  </data>
+  <data name="strMenuDuplicateConnection" xml:space="preserve">
+    <value>Duplikuj połączenie</value>
+  </data>
+  <data name="strMenuDuplicateFolder" xml:space="preserve">
+    <value>Duplikuj folder</value>
+  </data>
+  <data name="strMenuRename" xml:space="preserve">
+    <value>Zmień nazwę</value>
+  </data>
+  <data name="strMenuRenameConnection" xml:space="preserve">
+    <value>Zmień nazwę połączenia</value>
+  </data>
+  <data name="strMenuRenameFolder" xml:space="preserve">
+    <value>Zmień nazwę folderu</value>
+  </data>
+  <data name="strButtonCancel" xml:space="preserve">
+    <value>&amp;Anuluj</value>
+  </data>
+  <data name="strButtonClose" xml:space="preserve">
+    <value>&amp;Zamknij</value>
+  </data>
+  <data name="strButtonImport" xml:space="preserve">
+    <value>&amp;Import</value>
+  </data>
+  <data name="strButtonNew" xml:space="preserve">
+    <value>&amp;Nowy</value>
+  </data>
+  <data name="strButtonOK" xml:space="preserve">
+    <value>&amp;OK</value>
+  </data>
+  <data name="strButtonScan" xml:space="preserve">
+    <value>&amp;Skanuj</value>
+  </data>
+  <data name="strButtonStop" xml:space="preserve">
+    <value>&amp;Stop</value>
+  </data>
+  <data name="strPropertyNameColors" xml:space="preserve">
+    <value>Kolory</value>
+  </data>
+  <data name="strInactive" xml:space="preserve">
+    <value>Bezczynny</value>
+  </data>
+  <data name="strLabelConnect" xml:space="preserve">
+    <value>&amp;Połącz</value>
+  </data>
+  <data name="strLabelPassword" xml:space="preserve">
+    <value>Hasło:</value>
+  </data>
+  <data name="strLabelVerify" xml:space="preserve">
+    <value>Sprawdź:</value>
+  </data>
+  <data name="strMenuAbout" xml:space="preserve">
+    <value>O programie</value>
+  </data>
+  <data name="strMenuCheckForUpdates" xml:space="preserve">
+    <value>Sprawdź aktualizacje</value>
+  </data>
+  <data name="strMenuConfig" xml:space="preserve">
+    <value>Konfiguracja</value>
+  </data>
+  <data name="strMenuConnect" xml:space="preserve">
+    <value>Połącz</value>
+  </data>
+  <data name="strMenuConnectionPanels" xml:space="preserve">
+    <value>Panele połączeń</value>
+  </data>
+  <data name="strMenuConnections" xml:space="preserve">
+    <value>Połączenia</value>
+  </data>
+  <data name="strMenuConnectionsAndConfig" xml:space="preserve">
+    <value>Połączenia i konfiguracja</value>
+  </data>
+  <data name="strMenuDonate" xml:space="preserve">
+    <value>Darowizna</value>
+  </data>
+  <data name="strMenuExit" xml:space="preserve">
+    <value>Wyjście</value>
+  </data>
+  <data name="strMenuExternalTools" xml:space="preserve">
+    <value>Narzędzia zewnętrzne</value>
+  </data>
+  <data name="strMenuExternalToolsToolbar" xml:space="preserve">
+    <value>Pasek narzędzi zewnętrznych</value>
+  </data>
+  <data name="strMenuFile" xml:space="preserve">
+    <value>&amp;Plik</value>
+  </data>
+  <data name="strMenuFullScreen" xml:space="preserve">
+    <value>Pełen ekran</value>
+  </data>
+  <data name="strMenuFullScreenRDP" xml:space="preserve">
+    <value>Pełen ekran (RDP)</value>
+  </data>
+  <data name="strMenuHelp" xml:space="preserve">
+    <value>&amp;Pomoc</value>
+  </data>
+  <data name="strMenuHelpContents" xml:space="preserve">
+    <value>Pomoc mRemoteNG</value>
+  </data>
+  <data name="strMenuJumpTo" xml:space="preserve">
+    <value>Idz do</value>
+  </data>
+  <data name="strMenuOptions" xml:space="preserve">
+    <value>Opcje</value>
+  </data>
+  <data name="strMenuPortScan" xml:space="preserve">
+    <value>Skaner portów</value>
+  </data>
+  <data name="strMenuSaveConnectionFile" xml:space="preserve">
+    <value>Zapisz plik połączeń</value>
+  </data>
+  <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
+    <value>Zapisz plik połączeń jako ...</value>
+  </data>
+  <data name="strMenuScreenshotManager" xml:space="preserve">
+    <value>Menager zrzutów ekranów</value>
+  </data>
+  <data name="strMenuSessions" xml:space="preserve">
+    <value>Sesje</value>
+  </data>
+  <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
+    <value>Sesje i zrzuty ekranów</value>
+  </data>
+  <data name="strMenuShowText" xml:space="preserve">
+    <value>Pokarz tekst</value>
+  </data>
+  <data name="strMenuSSHFileTransfer" xml:space="preserve">
+    <value>Transfer plików poprzez SSH</value>
+  </data>
+  <data name="strMenuSupportForum" xml:space="preserve">
+    <value>Forum pomocy</value>
+  </data>
+  <data name="strMenuTools" xml:space="preserve">
+    <value>&amp;Narzędzia</value>
+  </data>
+  <data name="strMenuView" xml:space="preserve">
+    <value>&amp;Widok</value>
+  </data>
+  <data name="strMenuWebsite" xml:space="preserve">
+    <value>Strona WWW</value>
+  </data>
+  <data name="strStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="strTitlePassword" xml:space="preserve">
+    <value>Hasło</value>
+  </data>
+  <data name="strTitleSelectPanel" xml:space="preserve">
+    <value>Wybierz panel</value>
+  </data>
+  <data name="strButtonLaunchPutty" xml:space="preserve">
+    <value>Uruchom PuTTY</value>
+  </data>
+  <data name="strMenuCtrlAltDel" xml:space="preserve">
+    <value>Ctrl-Alt-Del</value>
+  </data>
+  <data name="strMenuCtrlEsc" xml:space="preserve">
+    <value>Ctrl-Esc</value>
+  </data>
+  <data name="strTabAdvanced" xml:space="preserve">
+    <value>Zaawansowane</value>
+  </data>
+  <data name="strButtonChange" xml:space="preserve">
+    <value>Zmiana</value>
+  </data>
+  <data name="strConnections" xml:space="preserve">
+    <value>Połączenia</value>
+  </data>
+  <data name="strFilterAll" xml:space="preserve">
+    <value>Wszystkie pliki (*.*)</value>
+  </data>
+  <data name="strFilterApplication" xml:space="preserve">
+    <value>Pliki programów (*.exe)</value>
+  </data>
+  <data name="strFiltermRemoteCSV" xml:space="preserve">
+    <value>Pliki CSV mRemote (*.csv)</value>
+  </data>
+  <data name="strFiltermRemoteXML" xml:space="preserve">
+    <value>Pliki XML mRemote (*.xml)</value>
+  </data>
+  <data name="strFilterRDP" xml:space="preserve">
+    <value>Pliki RDP (*.rdp)</value>
+  </data>
+  <data name="strFiltervRD2008CSV" xml:space="preserve">
+    <value>Pliki CSV visionapp Remote Desktop 2008 (*.csv)</value>
+  </data>
+  <data name="strGroupboxAutomaticReconnect" xml:space="preserve">
+    <value>Połącz automatycznie</value>
+  </data>
+  <data name="strGroupboxConnection" xml:space="preserve">
+    <value>Połączenie</value>
+  </data>
+  <data name="strGroupboxFiles" xml:space="preserve">
+    <value>Pliki</value>
+  </data>
+  <data name="strLabelServerStatus" xml:space="preserve">
+    <value>Status serwera:</value>
+  </data>
+  <data name="strNewConnection" xml:space="preserve">
+    <value>Nowe połączenie</value>
+  </data>
+  <data name="strNewFolder" xml:space="preserve">
+    <value>Nowy folder</value>
+  </data>
+  <data name="strNewRoot" xml:space="preserve">
+    <value>Nowe drzewo</value>
+  </data>
+  <data name="strNo" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="strTitleError" xml:space="preserve">
+    <value>Błąd ({0})</value>
+  </data>
+  <data name="strTitleInformation" xml:space="preserve">
+    <value>Informacja ({0})</value>
+  </data>
+  <data name="strTitleWarning" xml:space="preserve">
+    <value>Ostrzeżenie ({0})</value>
+  </data>
+  <data name="strYes" xml:space="preserve">
+    <value>Tak</value>
+  </data>
+  <data name="strButtonBrowse" xml:space="preserve">
+    <value>&amp;Wybierz...</value>
+  </data>
+  <data name="strButtonDefaultInheritance" xml:space="preserve">
+    <value>Dziedziczenie domyślne</value>
+  </data>
+  <data name="strButtonDefaultProperties" xml:space="preserve">
+    <value>Ustawienia domyślne</value>
+  </data>
+  <data name="strButtonDisconnect" xml:space="preserve">
+    <value>Rozłącz</value>
+  </data>
+  <data name="strButtonInheritance" xml:space="preserve">
+    <value>Dziedziczenie</value>
+  </data>
+  <data name="strButtonProperties" xml:space="preserve">
+    <value>Ustawienia</value>
+  </data>
+  <data name="strCheckboxDomain" xml:space="preserve">
+    <value>Domena</value>
+  </data>
+  <data name="strCheckboxInheritance" xml:space="preserve">
+    <value>Dziedziczenie</value>
+  </data>
+  <data name="strCheckboxPassword" xml:space="preserve">
+    <value>Hasło</value>
+  </data>
+  <data name="strCheckboxUsername" xml:space="preserve">
+    <value>Użytkownik</value>
+  </data>
+  <data name="strColumnFilename" xml:space="preserve">
+    <value>Nazwa pliku</value>
+  </data>
+  <data name="strColumnMessage" xml:space="preserve">
+    <value>Wiadomość</value>
+  </data>
+  <data name="strPropertyNameDomain" xml:space="preserve">
+    <value>Domena</value>
+  </data>
+  <data name="strPropertyNameIcon" xml:space="preserve">
+    <value>Ikona</value>
+  </data>
+  <data name="strPropertyNameName" xml:space="preserve">
+    <value>Nazwa</value>
+  </data>
+  <data name="strPropertyNamePassword" xml:space="preserve">
+    <value>Hasło</value>
+  </data>
+  <data name="strColumnUsername" xml:space="preserve">
+    <value>Użytkownik</value>
+  </data>
+  <data name="strLabelDomain" xml:space="preserve">
+    <value>Domena:</value>
+  </data>
+  <data name="strLabelUsername" xml:space="preserve">
+    <value>Użytkownik:</value>
+  </data>
+  <data name="strPropertyDescriptionDomain" xml:space="preserve">
+    <value>Podaj domenę.</value>
+  </data>
+  <data name="strPropertyDescriptionUsername" xml:space="preserve">
+    <value>Nazwa użytkownika.</value>
+  </data>
+  <data name="strPropertyNameDescription" xml:space="preserve">
+    <value>Opis</value>
+  </data>
+  <data name="strPropertyNameUsername" xml:space="preserve">
+    <value>Użytkownik</value>
+  </data>
+  <data name="strPropertyNamePuttySession" xml:space="preserve">
+    <value>Sesja PuTTY</value>
+  </data>
+  <data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
+    <value>Użytkownik bramy</value>
+  </data>
+  <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
+    <value>Użyj innego loginu użytkownika i hasła</value>
+  </data>
+  <data name="strErrorCode" xml:space="preserve">
+    <value>Kod błędu {0}.</value>
+  </data>
+  <data name="strConnectionRdpErrorDetail" xml:space="preserve">
+    <value>Błąd RDP!
+Kod błędu: {0}
+Opis błędu: {1}</value>
+  </data>
+  <data name="strPuttySettings" xml:space="preserve">
+    <value>Ustawienia PuTTY</value>
+  </data>
+  <data name="strLanguage" xml:space="preserve">
+    <value>Język</value>
+  </data>
+  <data name="strLabelDisplayName" xml:space="preserve">
+    <value>Widoczna nazwa</value>
+  </data>
+  <data name="strLabelFilename" xml:space="preserve">
+    <value>Nazwa pliku:</value>
+  </data>
+  <data name="strLabelOptions" xml:space="preserve">
+    <value>Opcje:</value>
+  </data>
+  <data name="strMenuCopy" xml:space="preserve">
+    <value>Kopiuj</value>
+  </data>
+  <data name="strMenuDisconnect" xml:space="preserve">
+    <value>Rozłącz</value>
+  </data>
+  <data name="strMenuDuplicateTab" xml:space="preserve">
+    <value>Duplikuj zakładkę</value>
+  </data>
+  <data name="strDuplicate" xml:space="preserve">
+    <value>Duplikuj</value>
+  </data>
+  <data name="strButtonIcon" xml:space="preserve">
+    <value>Ikona</value>
+  </data>
+  <data name="strCategoryDisplay" xml:space="preserve">
+    <value>Wyświetl</value>
+  </data>
+  <data name="strCategoryGateway" xml:space="preserve">
+    <value>Brama</value>
+  </data>
+  <data name="strScreenshots" xml:space="preserve">
+    <value>Zrzuty ekranów</value>
+  </data>
+  <data name="strNoCompression" xml:space="preserve">
+    <value>Bez kompresji</value>
+  </data>
+  <data name="strFree" xml:space="preserve">
+    <value>Wolne</value>
+  </data>
+  <data name="strNewPanel" xml:space="preserve">
+    <value>Nowy panel</value>
+  </data>
+  <data name="strRename" xml:space="preserve">
+    <value>Zmień nazwę</value>
+  </data>
+  <data name="strSendTo" xml:space="preserve">
+    <value>Wyślij do...</value>
+  </data>
+  <data name="strNewTitle" xml:space="preserve">
+    <value>Nowy tytuł</value>
+  </data>
+  <data name="strPanelName" xml:space="preserve">
+    <value>Nazwa panelu</value>
+  </data>
+  <data name="strUser" xml:space="preserve">
+    <value>Użytkownik</value>
+  </data>
+  <data name="strType" xml:space="preserve">
+    <value>Typ</value>
+  </data>
+  <data name="strRefresh" xml:space="preserve">
+    <value>Odświerz</value>
+  </data>
+  <data name="strLogOff" xml:space="preserve">
+    <value>Wyloguj</value>
+  </data>
+  <data name="strErrors" xml:space="preserve">
+    <value>Błędy</value>
+  </data>
+  <data name="strWarnings" xml:space="preserve">
+    <value>Ostrzeżenia</value>
+  </data>
+  <data name="strInformations" xml:space="preserve">
+    <value>Informacje</value>
+  </data>
+  <data name="strProxyTestSucceeded" xml:space="preserve">
+    <value>Test proxy powiódł się!</value>
+  </data>
+  <data name="strProxyTestFailed" xml:space="preserve">
+    <value>Test proxy nie powiódł się!</value>
+  </data>
+  <data name="strAddConnection" xml:space="preserve">
+    <value>Nowe połączenie</value>
+  </data>
+  <data name="strAddFolder" xml:space="preserve">
+    <value>Nowy folder</value>
+  </data>
+  <data name="strConnect" xml:space="preserve">
+    <value>Połącz</value>
+  </data>
+  <data name="strConnectInFullscreen" xml:space="preserve">
+    <value>Połącz w trybie pełnego ekranu</value>
+  </data>
+  <data name="strChoosePanelBeforeConnecting" xml:space="preserve">
+    <value>Przed połączeniem wybierz panel</value>
+  </data>
+  <data name="strImportExport" xml:space="preserve">
+    <value>Importuj/Eksportuj</value>
+  </data>
+  <data name="strImportAD" xml:space="preserve">
+    <value>Importów z Active Directory</value>
+  </data>
+  <data name="strSort" xml:space="preserve">
+    <value>Sortuj</value>
+  </data>
+  <data name="strSortAsc" xml:space="preserve">
+    <value>Rosnąco (A-Z)</value>
+  </data>
+  <data name="strSortDesc" xml:space="preserve">
+    <value>Malejąco (Z-A)</value>
+  </data>
+  <data name="strMoveUp" xml:space="preserve">
+    <value>Idź w górę</value>
+  </data>
+  <data name="strMoveDown" xml:space="preserve">
+    <value>Idź w dół</value>
+  </data>
+  <data name="strExpandAllFolders" xml:space="preserve">
+    <value>Rozwiń wszystkie foldery</value>
+  </data>
+  <data name="strCollapseAllFolders" xml:space="preserve">
+    <value>Zwiń wszystkie foldery</value>
+  </data>
+  <data name="strInheritNewConnection" xml:space="preserve">
+    <value>mRemoteNG jest w najnowszej wersji</value>
+  </data>
+  <data name="strNoUpdateAvailable" xml:space="preserve">
+    <value>Brak aktualizacji</value>
+  </data>
+  <data name="strCheckForUpdate" xml:space="preserve">
+    <value>Sprawdź ponownie</value>
+  </data>
+  <data name="strDownloadAndInstall" xml:space="preserve">
+    <value>Ściągnij i zainstaluj</value>
+  </data>
+  <data name="strAvailableVersion" xml:space="preserve">
+    <value>Aktualna wersja</value>
+  </data>
+  <data name="strCurrentVersion" xml:space="preserve">
+    <value>Zainstalowana wersja</value>
+  </data>
+  <data name="strVersion" xml:space="preserve">
+    <value>Wersja</value>
+  </data>
+  <data name="strScreenshot" xml:space="preserve">
+    <value>Zrzut ekranu</value>
+  </data>
+  <data name="strSpecialKeys" xml:space="preserve">
+    <value>Znaki specjalne</value>
+  </data>
+  <data name="strKeysCtrlAltDel" xml:space="preserve">
+    <value>CTRL-ALT-DEL</value>
+  </data>
+  <data name="strKeysCtrlEsc" xml:space="preserve">
+    <value>CTRL-ESC</value>
+  </data>
+  <data name="strRDP65536Colors" xml:space="preserve">
+    <value>65536 Kolorów (16-bit)</value>
+  </data>
+  <data name="strRDP16777216Colors" xml:space="preserve">
+    <value>16777216 Kolorów (24-bir)</value>
+  </data>
+  <data name="strRDP4294967296Colors" xml:space="preserve">
+    <value>16777216 Kolorów (32-bit)</value>
+  </data>
+  <data name="strRDPDisableWallpaper" xml:space="preserve">
+    <value>Wyłącz tapetę</value>
+  </data>
+  <data name="strRDPDisableMenuAnimations" xml:space="preserve">
+    <value>Wyłącz animacje menu</value>
+  </data>
+  <data name="strRDPDisableThemes" xml:space="preserve">
+    <value>Wyłącz tematy</value>
+  </data>
+  <data name="strRDPDisableCursorShadow" xml:space="preserve">
+    <value>Wyłącz cień kursora</value>
+  </data>
+  <data name="strRDPDisableCursorblinking" xml:space="preserve">
+    <value>Wyłącz miganie kursora</value>
+  </data>
+  <data name="strNever" xml:space="preserve">
+    <value>Nigdy</value>
+  </data>
+  <data name="strAlways" xml:space="preserve">
+    <value>Zawsze</value>
+  </data>
+  <data name="strDetect" xml:space="preserve">
+    <value>Wykryj</value>
+  </data>
+  <data name="strTransfer" xml:space="preserve">
+    <value>Transfer</value>
+  </data>
+  <data name="strSocks5" xml:space="preserve">
+    <value>Socks 5</value>
+  </data>
+  <data name="strHttp" xml:space="preserve">
+    <value>HTTP</value>
+  </data>
+  <data name="strVnc" xml:space="preserve">
+    <value>VNC</value>
+  </data>
+  <data name="strWindows" xml:space="preserve">
+    <value>Windows</value>
+  </data>
+  <data name="strRDP" xml:space="preserve">
+    <value>RDP</value>
+  </data>
+  <data name="strSsh1" xml:space="preserve">
+    <value>SSH wersja 1</value>
+  </data>
+  <data name="strSsh2" xml:space="preserve">
+    <value>SSH wersja 2</value>
+  </data>
+  <data name="strTelnet" xml:space="preserve">
+    <value>Telnet</value>
+  </data>
+  <data name="strRlogin" xml:space="preserve">
+    <value>Rlogin</value>
+  </data>
+  <data name="strRAW" xml:space="preserve">
+    <value>RAW</value>
+  </data>
+  <data name="strICA" xml:space="preserve">
+    <value>ICA</value>
+  </data>
+  <data name="strHttps" xml:space="preserve">
+    <value>HTTPS</value>
+  </data>
+  <data name="strHttpGecko" xml:space="preserve">
+    <value>Gecko (Firefox)</value>
+  </data>
+  <data name="strEnc40Bit" xml:space="preserve">
+    <value>40-bit</value>
+  </data>
+  <data name="strEnc56Bit" xml:space="preserve">
+    <value>56-bit</value>
+  </data>
+  <data name="strEnc128Bit" xml:space="preserve">
+    <value>128-bit</value>
+  </data>
+  <data name="strIntAppConnectionFailed" xml:space="preserve">
+    <value>Połączenie nieudane</value>
+  </data>
+  <data name="strGeneral" xml:space="preserve">
+    <value>Ogólne</value>
+  </data>
+  <data name="strLanguageDefault" xml:space="preserve">
+    <value>(Wykryj automatycznie)</value>
+  </data>
+  <data name="strAskUpdatesCommandAskLater" xml:space="preserve">
+    <value>Zapytaj mnie znów później</value>
+  </data>
+  <data name="strAskUpdatesMainInstruction" xml:space="preserve">
+    <value>Ustawienia automatycznej aktualizacji</value>
+  </data>
+  <data name="strRDP32768Colors" xml:space="preserve">
+    <value>32768 Kolorów (15-bit)</value>
+  </data>
+  <data name="strPropertyNameEnableFontSmoothing" xml:space="preserve">
+    <value>Wygładzenie czcionki</value>
+  </data>
+  <data name="strTabUpdates" xml:space="preserve">
+    <value>Aktualizacje</value>
+  </data>
+  <data name="strLabelSQLDatabaseName" xml:space="preserve">
+    <value>Baza danych:</value>
+  </data>
+  <data name="strLabelSQLServerDatabaseName" xml:space="preserve">
+    <value>Baza danych:</value>
+  </data>
+  <data name="strSQLServer" xml:space="preserve">
+    <value>Serwer SQL</value>
+  </data>
+  <data name="strAutoSaveMins" xml:space="preserve">
+    <value>Minuty (0 oznacza wyłączony)</value>
+  </data>
+  <data name="strAutoSaveEvery" xml:space="preserve">
+    <value>Automatyczny zapis co:</value>
+  </data>
+  <data name="strStartIP" xml:space="preserve">
+    <value>Początkowe IP</value>
+  </data>
+  <data name="strEndIP" xml:space="preserve">
+    <value>Końcowe IP</value>
+  </data>
+  <data name="strOpenPorts" xml:space="preserve">
+    <value>Porty otwarte</value>
+  </data>
+  <data name="strClosedPorts" xml:space="preserve">
+    <value>Porty zamknięte</value>
+  </data>
+  <data name="strEndPort" xml:space="preserve">
+    <value>Port końcowy</value>
+  </data>
+  <data name="strStartPort" xml:space="preserve">
+    <value>Port początkowy</value>
+  </data>
+  <data name="strQuickConnect" xml:space="preserve">
+    <value>Szybkie połączenie</value>
+  </data>
+  <data name="strLocalFile" xml:space="preserve">
+    <value>Plik lokalny</value>
+  </data>
+  <data name="strRemoteFile" xml:space="preserve">
+    <value>Plik zdalny</value>
+  </data>
+  <data name="strSaveAll" xml:space="preserve">
+    <value>Zapisz wszystkie</value>
+  </data>
+  <data name="strRemoveAll" xml:space="preserve">
+    <value>Usuń wszystkie</value>
+  </data>
+  <data name="strSave" xml:space="preserve">
+    <value>Zapisz</value>
+  </data>
+  <data name="strPropertyNameRedirectPorts" xml:space="preserve">
+    <value>Porty</value>
+  </data>
+  <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
+    <value>Drukarki</value>
+  </data>
+  <data name="strPropertyNameRedirectSounds" xml:space="preserve">
+    <value>Dźwięki</value>
+  </data>
+  <data name="strPropertyNameResolution" xml:space="preserve">
+    <value>Rozdzielczość</value>
+  </data>
+  <data name="strPropertyNameViewOnly" xml:space="preserve">
+    <value>Tylko podgląd</value>
+  </data>
+  <data name="strPropertyNamePanel" xml:space="preserve">
+    <value>Panel</value>
+  </data>
+  <data name="strPropertyNamePort" xml:space="preserve">
+    <value>Port</value>
+  </data>
+  <data name="strPropertyNameProtocol" xml:space="preserve">
+    <value>Protokół</value>
+  </data>
+  <data name="strTabAppearance" xml:space="preserve">
+    <value>Wygląd</value>
+  </data>
+  <data name="strCategoryGeneral" xml:space="preserve">
+    <value>Ogólny</value>
+  </data>
+  <data name="strMenuPaste" xml:space="preserve">
+    <value>Wklej</value>
+  </data>
+  <data name="strMenuScreenshot" xml:space="preserve">
+    <value>Zrzut ekranu</value>
+  </data>
+  <data name="strMenuStartChat" xml:space="preserve">
+    <value>Zacznij Chat (VNC)</value>
+  </data>
+  <data name="strCategoryAppearance" xml:space="preserve">
+    <value>Wygląd</value>
+  </data>
+  <data name="strCategoryConnection" xml:space="preserve">
+    <value>Połączenie</value>
+  </data>
+  <data name="strCategoryProtocol" xml:space="preserve">
+    <value>Protokół</value>
+  </data>
+  <data name="strLabelPort" xml:space="preserve">
+    <value>Port:</value>
+  </data>
+  <data name="strLabelProtocol" xml:space="preserve">
+    <value>Protokół</value>
+  </data>
+  <data name="strPropertyNameCompression" xml:space="preserve">
+    <value>Kompresja</value>
+  </data>
+  <data name="strPropertyNameDisplayThemes" xml:space="preserve">
+    <value>Wyświetlaj motywy</value>
+  </data>
+  <data name="strPropertyNameDisplayWallpaper" xml:space="preserve">
+    <value>Wyświetl tapetę</value>
+  </data>
+  <data name="strPropertyNameEncoding" xml:space="preserve">
+    <value>Kodowanie</value>
+  </data>
+  <data name="strPropertyNameAll" xml:space="preserve">
+    <value>Wszystkie</value>
+  </data>
+  <data name="strPropertyNameMACAddress" xml:space="preserve">
+    <value>Adres MAC</value>
+  </data>
+  <data name="strPropertyNameRedirectDrives" xml:space="preserve">
+    <value>Dyski</value>
+  </data>
+  <data name="strPropertyNameVNCProxyAddress" xml:space="preserve">
+    <value>Adres proxy</value>
+  </data>
+  <data name="strPropertyNameVNCProxyPassword" xml:space="preserve">
+    <value>Hasło proxy</value>
+  </data>
+  <data name="strPropertyNameVNCProxyPort" xml:space="preserve">
+    <value>Port proxy</value>
+  </data>
+  <data name="strPropertyNameVNCProxyType" xml:space="preserve">
+    <value>Typ proxy</value>
+  </data>
+  <data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
+    <value>Użytkownik proxy</value>
+  </data>
+  <data name="strCcCheckAgain" xml:space="preserve">
+    <value>Odświerz</value>
+  </data>
+  <data name="strConnecting" xml:space="preserve">
+    <value>Łączenie...</value>
+  </data>
+  <data name="strRDP256Colors" xml:space="preserve">
+    <value>256 Kolorów (8-bit)</value>
+  </data>
+  <data name="strFullscreen" xml:space="preserve">
+    <value>Pełen ekran</value>
+  </data>
+  <data name="strRDPSmartSize" xml:space="preserve">
+    <value>Mądry rozmiar</value>
+  </data>
+  <data name="strPropertyNameRDGatewayUsageMethod" xml:space="preserve">
+    <value>Użyj bramy</value>
+  </data>
+  <data name="strExport" xml:space="preserve">
+    <value>Eksport</value>
+  </data>
+  <data name="strCheckNow" xml:space="preserve">
+    <value>Sprawdź teraz</value>
+  </data>
+  <data name="strUpdateCheckFailed" xml:space="preserve">
+    <value>Sprawdzanie aktualizacji nie powiodło się!</value>
+  </data>
+  <data name="strPuttyConnectionFailed" xml:space="preserve">
+    <value>Nieudane połączenie!</value>
+  </data>
+</root>

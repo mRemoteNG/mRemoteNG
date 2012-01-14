@@ -67,8 +67,8 @@ Namespace UI
             Public Sub CheckForAnnouncement()
                 Try
                     uT = New Thread(AddressOf CheckForAnnouncementBG)
+                    uT.SetApartmentState(ApartmentState.STA)
                     uT.IsBackground = True
-                    'uT.SetApartmentState(ApartmentState.STA)
 
                     If Me.IsAnnouncementCheckHandlerDeclared = False Then
                         AddHandler AnnouncementCheckCompleted, AddressOf AnnouncementCheckComplete
@@ -77,7 +77,7 @@ Namespace UI
 
                     uT.Start()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForAnnouncement (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForAnnouncement (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -91,16 +91,16 @@ Namespace UI
                         RaiseEvent AnnouncementCheckCompleted(False)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForAnnouncementBG (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CheckForAnnouncementBG (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub AnnouncementCheckComplete(ByVal AnnouncementAvailable As Boolean)
                 Try
-                    wBrowser.Navigate(aN.curAI.URL)
-                    My.Settings.LastAnnouncement = aN.curAI.Name
+                    wBrowser.Navigate(aN.CurrentAnnouncementInfo.Url)
+                    My.Settings.LastAnnouncement = aN.CurrentAnnouncementInfo.Name
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AnnouncementCheckComplete (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AnnouncementCheckComplete (UI.Window.Announcement) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
         End Class

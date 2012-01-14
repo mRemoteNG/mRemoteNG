@@ -17,18 +17,18 @@ Public Class frmChoosePanel
     End Sub
 
     Private Sub ApplyLanguage()
-        btnOK.Text = My.Resources.strButtonOK
-        lblDescription.Text = My.Resources.strLabelSelectPanel
-        btnNew.Text = My.Resources.strButtonNew
-        btnCancel.Text = My.Resources.strButtonCancel
-        Text = My.Resources.strTitleSelectPanel
+        btnOK.Text = My.Language.strButtonOK
+        lblDescription.Text = My.Language.strLabelSelectPanel
+        btnNew.Text = My.Language.strButtonNew
+        btnCancel.Text = My.Language.strButtonCancel
+        Text = My.Language.strTitleSelectPanel
     End Sub
 
     Private Sub AddAvailablePanels()
         cbPanels.Items.Clear()
 
-        For i As Integer = 0 To wL.Count - 1
-            cbPanels.Items.Add(wL(i).Text.Replace("&&", "&"))
+        For i As Integer = 0 To WindowList.Count - 1
+            cbPanels.Items.Add(WindowList(i).Text.Replace("&&", "&"))
         Next
 
         If cbPanels.Items.Count > 0 Then
@@ -42,7 +42,7 @@ Public Class frmChoosePanel
     End Sub
 
     Private Sub btnNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnNew.Click
-        Dim pnlName As String = InputBox(My.Resources.strPanelName & ":", My.Resources.strNewPanel, My.Resources.strNewPanel)
+        Dim pnlName As String = InputBox(My.Language.strPanelName & ":", My.Language.strNewPanel, My.Language.strNewPanel)
 
         If pnlName <> "" Then
             AddPanel(pnlName)

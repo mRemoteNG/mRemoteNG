@@ -3,18 +3,23 @@ Imports mRemoteNG.App.Runtime
 
 Namespace App
     Public Class Announcement
-#Region "Private Properties"
-        Private wCl As WebClient
-        Private wPr As WebProxy
+        Implements IDisposable
+
+#Region "Private Variables"
+        Private webClient As WebClient
+        Private webProxy As WebProxy
 #End Region
 
-        Private _curAI As Info
-        Public ReadOnly Property curAI() As Info
+#Region "Public Properties"
+        Private _currentAnnouncementInfo As Info
+        Public ReadOnly Property CurrentAnnouncementInfo() As Info
             Get
-                Return _curAI
+                Return _currentAnnouncementInfo
             End Get
         End Property
+#End Region
 
+#Region "Public Methods"
         Public Function IsAnnouncementAvailable() As Boolean
             Try
                 Dim aI As Info = GetAnnouncementInfo()
@@ -29,7 +34,7 @@ Namespace App
                     Return False
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "IsAnnouncementAvailable failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "IsAnnouncementAvailable failed" & vbNewLine & ex.Message, True)
                 Return False
             End Try
         End Function
@@ -57,7 +62,7 @@ Namespace App
 
                         strU = strAnnouncement.Substring(strAnnouncement.IndexOf("URL: ") + 5, strAnnouncement.IndexOf(vbNewLine) - 5)
 
-                        aI.URL = strU
+                        aI.Url = strU
                     Catch ex As Exception
                         aI.InfoOk = False
                     End Try
@@ -65,10 +70,10 @@ Namespace App
                     aI.InfoOk = False
                 End If
 
-                _curAI = aI
+                _currentAnnouncementInfo = aI
                 Return aI
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "Getting Announcement info failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Getting Announcement info failed" & vbNewLine & ex.Message, True)
                 Return Nothing
             End Try
         End Function
@@ -80,37 +85,35 @@ Namespace App
                 Dim strTemp As String
 
                 Try
-                    strTemp = wCl.DownloadString(App.Info.General.URLAnnouncement)
+                    strTemp = webClient.DownloadString(App.Info.General.URLAnnouncement)
                 Catch ex As Exception
                     strTemp = ""
                 End Try
 
                 Return strTemp
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "GetAnnouncementFile failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetAnnouncementFile failed" & vbNewLine & ex.Message, True)
                 Return ""
             End Try
         End Function
 
         Private Sub CreateWebClient()
-            wCl = New WebClient()
+            webClient = New WebClient()
 
             If My.Settings.UpdateUseProxy Then
-                wPr = New WebProxy(My.Settings.UpdateProxyAddress, My.Settings.UpdateProxyPort)
+                webProxy = New WebProxy(My.Settings.UpdateProxyAddress, My.Settings.UpdateProxyPort)
 
                 If My.Settings.UpdateProxyUseAuthentication Then
                     Dim cred As ICredentials
                     cred = New NetworkCredential(My.Settings.UpdateProxyAuthUser, Security.Crypt.Decrypt(My.Settings.UpdateProxyAuthPass, App.Info.General.EncryptionKey))
 
-                    wPr.Credentials = cred
+                    webProxy.Credentials = cred
                 End If
 
-                wCl.Proxy = wPr
+                webClient.Proxy = webProxy
             End If
         End Sub
-
-
-
+#End Region
 
         Public Class Info
             Private _Name As String
@@ -123,16 +126,15 @@ Namespace App
                 End Set
             End Property
 
-            Private _URL As String
-            Public Property URL() As String
+            Private _url As String
+            Public Property Url() As String
                 Get
-                    Return _URL
+                    Return _url
                 End Get
                 Set(ByVal value As String)
-                    _URL = value
+                    _url = value
                 End Set
             End Property
-
 
             Private _InfoOk As Boolean
             Public Property InfoOk() As Boolean
@@ -144,5 +146,36 @@ Namespace App
                 End Set
             End Property
         End Class
+
+#Region "IDisposable Support"
+        Private disposedValue As Boolean ' To detect redundant calls
+
+        ' IDisposable
+        Protected Overridable Sub Dispose(disposing As Boolean)
+            If Not Me.disposedValue Then
+                If disposing Then
+                    If webClient IsNot Nothing Then webClient.Dispose()
+                End If
+
+                ' TODO: free unmanaged resources (unmanaged objects) and override Finalize() below.
+                ' TODO: set large fields to null.
+            End If
+            Me.disposedValue = True
+        End Sub
+
+        ' TODO: override Finalize() only if Dispose(ByVal disposing As Boolean) above has code to free unmanaged resources.
+        'Protected Overrides Sub Finalize()
+        '    ' Do not change this code.  Put cleanup code in Dispose(ByVal disposing As Boolean) above.
+        '    Dispose(False)
+        '    MyBase.Finalize()
+        'End Sub
+
+        ' This code added by Visual Basic to correctly implement the disposable pattern.
+        Public Sub Dispose() Implements IDisposable.Dispose
+            ' Do not change this code.  Put cleanup code in Dispose(ByVal disposing As Boolean) above.
+            Dispose(True)
+            GC.SuppressFinalize(Me)
+        End Sub
+#End Region
     End Class
 End Namespace

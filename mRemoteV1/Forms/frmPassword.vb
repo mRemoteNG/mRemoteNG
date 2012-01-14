@@ -29,12 +29,12 @@
 
 
 
-    Public Sub New(Optional ByVal UserAndPass As Boolean = False, Optional ByVal Title As String = "Security")
+    Public Sub New(Optional ByVal UserAndPass As Boolean = False, Optional ByVal title As String = "Security")
         ' This call is required by the Windows Form Designer.
         InitializeComponent()
 
         ' Add any initialization after the InitializeComponent() call.
-        Me.Text = Title
+        Me.Text = title
 
         If UserAndPass = True Then
             _UserAndPass = True
@@ -86,12 +86,12 @@
     End Sub
 
     Private Sub ApplyLanguage()
-        lblPassword.Text = My.Resources.strLabelPassword
-        lblVerify.Text = My.Resources.strLabelVerify
-        btnOK.Text = My.Resources.strButtonOK
-        btnCancel.Text = My.Resources.strButtonCancel
+        lblPassword.Text = My.Language.strLabelPassword
+        lblVerify.Text = My.Language.strLabelVerify
+        btnOK.Text = My.Language.strButtonOK
+        btnCancel.Text = My.Language.strButtonCancel
         lblStatus.Text = "Status"
-        Text = My.Resources.strTitlePassword
+        Text = My.Language.strTitlePassword
     End Sub
 
     Private Sub txtPassword_GotFocus(ByVal sender As Object, ByVal e As System.EventArgs) Handles txtPassword.GotFocus

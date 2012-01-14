@@ -1,6 +1,7 @@
 Imports System
 Imports System.Windows
 Imports System.Windows.Forms
+Imports mRemoteNG.App
 Imports Crownwood
 Imports WeifenLuo.WinFormsUI.Docking
 Imports PSTaskDialog
@@ -67,6 +68,7 @@ Namespace UI
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.TabController.Appearance = Crownwood.Magic.Controls.TabControl.VisualAppearance.MultiDocument
                 Me.TabController.Cursor = System.Windows.Forms.Cursors.Hand
+                Me.TabController.DragFromControl = False
                 Me.TabController.IDEPixelArea = True
                 Me.TabController.IDEPixelBorder = False
                 Me.TabController.Location = New System.Drawing.Point(0, -1)
@@ -219,7 +221,7 @@ Namespace UI
             Public Sub New(ByVal Panel As DockContent, Optional ByVal FormText As String = "")
 
                 If FormText = "" Then
-                    FormText = My.Resources.strNewPanel
+                    FormText = My.Language.strNewPanel
                 End If
 
                 Me.WindowType = Type.Connection
@@ -275,7 +277,7 @@ Namespace UI
 
                     Return nTab
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "AddConnectionTab (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddConnectionTab (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
 
                 Return Nothing
@@ -288,27 +290,27 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                cmenTabFullscreen.Text = My.Resources.strMenuFullScreenRDP
-                cmenTabSmartSize.Text = My.Resources.strMenuSmartSize
-                cmenTabViewOnly.Text = My.Resources.strMenuViewOnly
-                cmenTabScreenshot.Text = My.Resources.strMenuScreenshot
-                cmenTabStartChat.Text = My.Resources.strMenuStartChat
-                cmenTabTransferFile.Text = My.Resources.strMenuTransferFile
-                cmenTabRefreshScreen.Text = My.Resources.strMenuRefreshScreen
-                cmenTabSendSpecialKeys.Text = My.Resources.strMenuSendSpecialKeys
-                cmenTabSendSpecialKeysCtrlAltDel.Text = My.Resources.strMenuCtrlAltDel
-                cmenTabSendSpecialKeysCtrlEsc.Text = My.Resources.strMenuCtrlEsc
-                cmenTabExternalApps.Text = My.Resources.strMenuExternalTools
-                cmenTabRenameTab.Text = My.Resources.strMenuRenameTab
-                cmenTabDuplicateTab.Text = My.Resources.strMenuDuplicateTab
-                cmenTabReconnect.Text = My.Resources.strMenuReconnect
-                cmenTabDisconnect.Text = My.Resources.strMenuDisconnect
-                cmenTabPuttySettings.Text = My.Resources.strPuttySettings
+                cmenTabFullscreen.Text = My.Language.strMenuFullScreenRDP
+                cmenTabSmartSize.Text = My.Language.strMenuSmartSize
+                cmenTabViewOnly.Text = My.Language.strMenuViewOnly
+                cmenTabScreenshot.Text = My.Language.strMenuScreenshot
+                cmenTabStartChat.Text = My.Language.strMenuStartChat
+                cmenTabTransferFile.Text = My.Language.strMenuTransferFile
+                cmenTabRefreshScreen.Text = My.Language.strMenuRefreshScreen
+                cmenTabSendSpecialKeys.Text = My.Language.strMenuSendSpecialKeys
+                cmenTabSendSpecialKeysCtrlAltDel.Text = My.Language.strMenuCtrlAltDel
+                cmenTabSendSpecialKeysCtrlEsc.Text = My.Language.strMenuCtrlEsc
+                cmenTabExternalApps.Text = My.Language.strMenuExternalTools
+                cmenTabRenameTab.Text = My.Language.strMenuRenameTab
+                cmenTabDuplicateTab.Text = My.Language.strMenuDuplicateTab
+                cmenTabReconnect.Text = My.Language.strMenuReconnect
+                cmenTabDisconnect.Text = My.Language.strMenuDisconnect
+                cmenTabPuttySettings.Text = My.Language.strPuttySettings
             End Sub
 
             Private Sub Connection_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
                 If Not frmMain.IsClosing And My.Settings.ConfirmCloseConnection And TabController.TabPages.Count > 0 Then
-                    Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Resources.strConfirmCloseConnectionPanelMainInstruction, Me.Text), "", "", "", My.Resources.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                    Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Language.strConfirmCloseConnectionPanelMainInstruction, Me.Text), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                     If cTaskDialog.VerificationChecked Then
                         My.Settings.ConfirmCloseConnection = False
                     End If
@@ -326,7 +328,7 @@ Namespace UI
                         End If
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Connection_FormClosing (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Connection_FormClosing (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -341,7 +343,7 @@ Namespace UI
                         End If
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Connection_Resize (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Connection_Resize (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -358,7 +360,7 @@ Namespace UI
             Private Sub CloseConnectionTab()
                 Dim SelectedTab As Crownwood.Magic.Controls.TabPage = Me.TabController.SelectedTab
                 If My.Settings.ConfirmCloseConnection Then
-                    Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Resources.strConfirmCloseConnectionMainInstruction, SelectedTab.Title), "", "", "", My.Resources.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                    Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Language.strConfirmCloseConnectionMainInstruction, SelectedTab.Title), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                     If cTaskDialog.VerificationChecked Then
                         My.Settings.ConfirmCloseConnection = False
                     End If
@@ -375,7 +377,7 @@ Namespace UI
                         Me.CloseTab(SelectedTab)
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CloseConnectionTab (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CloseConnectionTab (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -461,7 +463,7 @@ Namespace UI
 
                     AddExternalApps()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideMenuButtons (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideMenuButtons (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -545,7 +547,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleSmartSize (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleSmartSize (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -563,7 +565,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "TransferFile (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TransferFile (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -581,7 +583,7 @@ Namespace UI
                     Windows.sshtransferForm.Password = conI.Password
                     Windows.sshtransferForm.Port = conI.Port
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -591,7 +593,7 @@ Namespace UI
                     Dim vnc As mRemoteNG.Connection.Protocol.VNC = IC.Protocol
                     vnc.StartFileTransfer()
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "VNCTransferFile (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "VNCTransferFile (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -610,7 +612,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleViewOnly (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleViewOnly (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -627,7 +629,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "StartChat (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartChat (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -644,7 +646,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshScreen (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshScreen (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -661,7 +663,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "SendSpecialKeys (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SendSpecialKeys (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -678,7 +680,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleFullscreen (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleFullscreen (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -696,7 +698,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "ShowPuttySettingsDialog (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowPuttySettingsDialog (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -706,7 +708,7 @@ Namespace UI
                     cmenTabExternalApps.DropDownItems.Clear()
 
                     'add ext apps
-                    For Each extA As Tools.ExternalApp In ExtApps
+                    For Each extA As Tools.ExternalTool In ExternalTools
                         Dim nItem As New ToolStripMenuItem
                         nItem.Text = extA.DisplayName
                         nItem.Tag = extA
@@ -718,11 +720,11 @@ Namespace UI
                         cmenTabExternalApps.DropDownItems.Add(nItem)
                     Next
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
-            Private Sub StartExternalApp(ByVal ExtA As Tools.ExternalApp)
+            Private Sub StartExternalApp(ByVal ExtA As Tools.ExternalTool)
                 Try
                     If Me.TabController.SelectedTab IsNot Nothing Then
                         If TypeOf Me.TabController.SelectedTab.Tag Is mRemoteNG.Connection.InterfaceControl Then
@@ -733,7 +735,7 @@ Namespace UI
                     End If
 
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "cmenTabExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cmenTabExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -747,7 +749,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "CloseTabMenu (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CloseTabMenu (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -761,7 +763,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "DuplicateTab (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "DuplicateTab (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -778,19 +780,19 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "Reconnect (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Reconnect (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub RenameTab()
                 Try
-                    Dim nTitle As String = InputBox(My.Resources.strNewTitle & ":", , Me.TabController.SelectedTab.Title.Replace("&&", "&"))
+                    Dim nTitle As String = InputBox(My.Language.strNewTitle & ":", , Me.TabController.SelectedTab.Title.Replace("&&", "&"))
 
                     If nTitle <> "" Then
                         Me.TabController.SelectedTab.Title = nTitle.Replace("&", "&&")
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "RenameTab (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RenameTab (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -813,7 +815,7 @@ Namespace UI
                     Catch comEx As System.Runtime.InteropServices.COMException
                         Me.TabController.Invoke(s, TabToBeClosed)
                     Catch ex As Exception
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.Message, True)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.Message, True)
                     End Try
                 Else
                     Try
@@ -821,7 +823,7 @@ Namespace UI
                     Catch comEx As System.Runtime.InteropServices.COMException
                         CloseTab(TabToBeClosed)
                     Catch ex As Exception
-                        mC.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.Message, True)
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't close tab" & vbNewLine & ex.Message, True)
                     End Try
 
                     If Me.TabController.TabPages.Count = 0 Then
@@ -844,7 +846,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "FocusIC (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "FocusIC (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -860,7 +862,7 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshIC (UI.Window.Connection) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshIC (UI.Window.Connection) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
@@ -868,7 +870,8 @@ Namespace UI
 #Region "Window Overrides"
             Protected Overloads Overrides Sub WndProc(ByRef WndMsg As Message)
                 Try
-                    If WndMsg.Msg = 33 Then
+                    If WndMsg.Msg = Native.WM_MOUSEACTIVATE Then
+
                         Dim curTab As Magic.Controls.TabPage = Me.TabController.SelectedTab
                         Dim curRect As Rectangle = curTab.RectangleToScreen(curTab.ClientRectangle)
 
@@ -881,6 +884,7 @@ Namespace UI
                                 End If
                             End If
                         End If
+                        Return ' Do not pass to base class
                     End If
                 Catch ex As Exception
                 End Try
@@ -890,70 +894,44 @@ Namespace UI
 #End Region
 
 #Region "Tab drag and drop"
-            Dim TabDragging As Boolean
-
-            Private Sub TabController_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabController.MouseLeave
-                Try
-                    If TabDragging = True Then
-                        TabDragging = False
-                        Me.Cursor = Cursors.Default
-                    End If
-                Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseLeave (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
-                End Try
+            Private Sub TabController_PageDragStart(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.PageDragEnd, TabController.PageDragStart
+                Cursor = Cursors.SizeWE
             End Sub
 
-            Private Sub TabController_MouseMove(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles TabController.MouseMove
-                Try
-                    If e.Button = Forms.MouseButtons.Left Then
-                        TabDragging = True
-                        Me.Cursor = Cursors.SizeWE
-                    ElseIf e.Button = Forms.MouseButtons.None Then
-                        If TabDragging = True Then
-                            TabDragging = False
-                            Me.Cursor = Cursors.Default
-                        End If
-                    End If
-                Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseMove (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
-                End Try
+            Private Sub TabController_PageDragEnd(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.PageDragEnd, TabController.PageDragQuit
+                Cursor = Cursors.Default
             End Sub
 
-            Private Sub TabController_MouseUp(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles TabController.MouseUp
+            Private Sub TabController_PageDragMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.PageDragMove
+                Dim sourceTab As Magic.Controls.TabPage = TabController.SelectedTab
+                Dim destinationTab As Magic.Controls.TabPage = TabController.TabPageFromPoint(e.Location)
+
+                If Not TabController.TabPages.Contains(destinationTab) Or sourceTab Is destinationTab Then Return
+
+                Dim targetIndex As Integer = TabController.TabPages.IndexOf(destinationTab)
+
+                TabController.TabPages.SuspendEvents()
+                TabController.TabPages.Remove(sourceTab)
+                TabController.TabPages.Insert(targetIndex, sourceTab)
+                TabController.SelectedTab = sourceTab
+                TabController.TabPages.ResumeEvents()
+            End Sub
+
+            Private Sub TabController_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.MouseUp
+                Debug.Print("UI.Window.Connection.TabController_MouseUp()")
                 Try
-                    If e.Button = Forms.MouseButtons.Left Then
-                        If TabDragging = True Then
-                            Dim sourceTab As Crownwood.Magic.Controls.TabPage = TabController.SelectedTab
-                            Dim targetTab As Crownwood.Magic.Controls.TabPage = TabController.TabPageFromPoint(e.Location)
-                            Dim targetIndex As Integer = -1
-
-                            For i As Integer = 0 To TabController.TabPages.Count - 1
-                                If TabController.TabPages(i) Is targetTab Then
-                                    targetIndex = i
-                                End If
-                            Next
-
-                            If sourceTab IsNot targetTab And targetIndex > -1 Then
-                                TabController.TabPages.Remove(sourceTab)
-                                TabController.TabPages.Insert(targetIndex, sourceTab)
-                                TabController.SelectedTab = sourceTab
-                            End If
-                        Else
-                            Me.FocusIC()
-                        End If
-                    ElseIf e.Button = Forms.MouseButtons.Middle Then
-                        If TabDragging = False Then
-                            Me.TabController.SelectedTab = Me.TabController.TabPageFromPoint(e.Location)
-                            Me.CloseConnectionTab()
-                        End If
-                    ElseIf e.Button = Forms.MouseButtons.Right Then
-                        If TabDragging = False Then
-                            Me.ShowHideMenuButtons()
-                            Me.cmenTab.Show(Me.TabController, e.Location)
-                        End If
-                    End If
+                    Select Case e.Button
+                        Case MouseButtons.Left
+                            FocusIC()
+                        Case MouseButtons.Middle
+                            TabController.SelectedTab = TabController.TabPageFromPoint(e.Location)
+                            CloseConnectionTab()
+                        Case MouseButtons.Right
+                            ShowHideMenuButtons()
+                            cmenTab.Show(TabController, e.Location)
+                    End Select
                 Catch ex As Exception
-                    mC.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseUp (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseUp (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

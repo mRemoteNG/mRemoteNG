@@ -27,10 +27,8 @@ Namespace App
                 Dim uI As Info = GetUpdateInfo()
 
                 Return uI.InfoOk
-
-                uI = Nothing
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "IsProxyOK (App.Update) failed" & vbNewLine & ex.Message, False)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "IsProxyOK (App.Update) failed" & vbNewLine & ex.Message, False)
                 Return False
             End Try
         End Function
@@ -49,7 +47,7 @@ Namespace App
                     Return False
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "IsUpdateAvailable failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "IsUpdateAvailable failed" & vbNewLine & ex.Message, True)
                 Return False
             End Try
         End Function
@@ -99,7 +97,7 @@ Namespace App
                             Dim strImgURLLink As String = strUpdate.Substring(strUpdate.IndexOf("imgURLLink: ") + 12, strUpdate.IndexOf(vbNewLine) - 12)
                             uI.ImageURLLink = strImgURLLink
                         Catch ex As Exception
-                            mC.AddMessage(Messages.MessageClass.WarningMsg, "Update Image Info could not be read." & vbNewLine & ex.Message, True)
+                            MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Update Image Info could not be read." & vbNewLine & ex.Message, True)
                         End Try
                     Catch ex As Exception
                         uI.InfoOk = False
@@ -111,7 +109,7 @@ Namespace App
                 _curUI = uI
                 Return uI
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "Getting update info failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Getting update info failed" & vbNewLine & ex.Message, True)
                 Return Nothing
             End Try
         End Function
@@ -125,10 +123,10 @@ Namespace App
 
                 _curUI.UpdateLocation = My.Computer.FileSystem.SpecialDirectories.Temp & "\mRemote_Update.exe"
                 wCl.DownloadFileAsync(New Uri(dURL), _curUI.UpdateLocation)
-                
+
                 Return True
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "Update download failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Update download failed" & vbNewLine & ex.Message, True)
                 Return False
             End Try
         End Function
@@ -166,7 +164,7 @@ Namespace App
 
                 Return strTemp
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "GetUpdateFile failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetUpdateFile failed" & vbNewLine & ex.Message, True)
                 Return ""
             End Try
         End Function
@@ -186,7 +184,7 @@ Namespace App
                     RaiseEvent DownloadCompleted(sender, e, False)
                 End If
             Catch ex As Exception
-                mC.AddMessage(Messages.MessageClass.WarningMsg, "DLCompleted failed" & vbNewLine & ex.Message, True)
+                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "DLCompleted failed" & vbNewLine & ex.Message, True)
             End Try
         End Sub
 #End Region

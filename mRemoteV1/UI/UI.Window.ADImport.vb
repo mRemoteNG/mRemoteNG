@@ -30,7 +30,7 @@ Namespace UI
                 Me.btnOK.Name = "btnOK"
                 Me.btnOK.Size = New System.Drawing.Size(75, 23)
                 Me.btnOK.TabIndex = 100
-                Me.btnOK.Text = Global.mRemoteNG.My.Resources.Resources.strButtonOK
+                Me.btnOK.Text = "OK"
                 Me.btnOK.UseVisualStyleBackColor = True
                 '
                 'btnCancel
@@ -42,7 +42,7 @@ Namespace UI
                 Me.btnCancel.Name = "btnCancel"
                 Me.btnCancel.Size = New System.Drawing.Size(75, 23)
                 Me.btnCancel.TabIndex = 110
-                Me.btnCancel.Text = Global.mRemoteNG.My.Resources.Resources.strButtonCancel
+                Me.btnCancel.Text = "Cancel"
                 Me.btnCancel.UseVisualStyleBackColor = True
                 '
                 'txtDomain
@@ -72,7 +72,7 @@ Namespace UI
                 Me.btnChangeDomain.Name = "btnChangeDomain"
                 Me.btnChangeDomain.Size = New System.Drawing.Size(75, 23)
                 Me.btnChangeDomain.TabIndex = 40
-                Me.btnChangeDomain.Text = Global.mRemoteNG.My.Resources.Resources.strButtonChange
+                Me.btnChangeDomain.Text = "Change"
                 Me.btnChangeDomain.UseVisualStyleBackColor = True
                 '
                 'AD
@@ -124,10 +124,10 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                btnOK.Text = My.Resources.strButtonOK
-                btnCancel.Text = My.Resources.strButtonCancel
-                lblDomain.Text = My.Resources.strLabelDomain
-                btnChangeDomain.Text = My.Resources.strButtonChange
+                btnOK.Text = My.Language.strButtonOK
+                btnCancel.Text = My.Language.strButtonCancel
+                lblDomain.Text = My.Language.strLabelDomain
+                btnChangeDomain.Text = My.Language.strButtonChange
             End Sub
 #End Region
 
