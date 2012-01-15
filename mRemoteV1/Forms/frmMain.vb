@@ -707,7 +707,9 @@ Public Class frmMain
         End If
     End Sub
 
+    Private _inMouseActivate As Boolean = False
     Private _inSizeMove As Boolean = False
+
     Protected Overloads Overrides Sub WndProc(ByRef m As Message)
         Try
 #If Config = "Debug" Then
@@ -715,15 +717,36 @@ Public Class frmMain
 #End If
 
             Select Case m.Msg
+                Case WM_MOUSEACTIVATE
+                    _inMouseActivate = True
+                Case WM_ACTIVATEAPP
+                    _inMouseActivate = False
+                Case WM_ACTIVATE
+                    ' Ingore this message if it wasn't triggered by a click
+                    If Not LOWORD(m.WParam) = WA_CLICKACTIVE Then Exit Select
+
+                    Dim control As Control = FromChildHandle(WindowFromPoint(MousePosition))
+                    If Not IsNothing(control) Then
+                        ' If the click was on a selectable child control, let it take focus
+                        If control.CanSelect Then Exit Select
+                    End If
+
+                    ' This handles activations from clicks that did not start a size/move operation
+                    ActivateConnection()
                 Case WM_ENTERSIZEMOVE
                     _inSizeMove = True
                 Case WM_EXITSIZEMOVE
                     _inSizeMove = False
+
+                    ' This handles activations from clicks that started a size/move operation
                     ActivateConnection()
                 Case WM_WINDOWPOSCHANGED
-                    If Not _inSizeMove Then ActivateConnection()
-                Case WM_ACTIVATEAPP
-                    If Not _inSizeMove Then ActivateConnection()
+                    ' Ignore this message if the window wasn't activated
+                    Dim windowPos As WINDOWPOS = Marshal.PtrToStructure(m.LParam, GetType(WINDOWPOS))
+                    If (Not (windowPos.flags And SWP_NOACTIVATE) = 0) Then Exit Select
+
+                    ' This handles all other activations
+                    If Not _inMouseActivate And Not _inSizeMove Then ActivateConnection()
                 Case WM_SYSCOMMAND
                     For i As Integer = 0 To SysMenSubItems.Length - 1
                         If SysMenSubItems(i) = m.WParam Then
