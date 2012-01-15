@@ -1,5 +1,6 @@
 Imports System.Runtime.InteropServices
 Imports System.ComponentModel
+Imports mRemoteNG.Messages
 Imports mRemoteNG.App.Native
 Imports System.Threading
 Imports Microsoft.Win32
@@ -16,6 +17,7 @@ Namespace Connection
 #End Region
 
 #Region "Private Properties"
+            Dim _isPuttyNg As Boolean
 #End Region
 
 #Region "Public Properties"
@@ -105,8 +107,9 @@ Namespace Connection
 
             Public Overrides Function Connect() As Boolean
                 Try
-                    PuttyProcess = New Process
+                    _isPuttyNg = IsFilePuttyNg(PuttyPath)
 
+                    PuttyProcess = New Process
                     With PuttyProcess.StartInfo
                         .FileName = _PuttyPath
 
@@ -141,7 +144,9 @@ Namespace Connection
                                 .Arguments = "-load " & """" & Me.InterfaceControl.Info.PuttySession & """" & " -" & Me._PuttyProtocol.ToString & " -P " & Me.InterfaceControl.Info.Port & " """ & Me.InterfaceControl.Info.Hostname & """"
                         End Select
 
-                        .Arguments = .Arguments & " -hwndparent " & Me.InterfaceControl.Handle.ToString()
+                        If _isPuttyNg Then
+                            .Arguments = .Arguments & " -hwndparent " & Me.InterfaceControl.Handle.ToString()
+                        End If
 
                         'REMOVE IN RELEASE!
                         'mC.AddMessage(Messages.MessageClass.InformationMsg, "PuTTY Arguments: " & .Arguments, True)
@@ -153,9 +158,12 @@ Namespace Connection
                     PuttyProcess.Start()
                     PuttyProcess.WaitForInputIdle()
 
-                    PuttyHandle = FindWindowEx(Me.InterfaceControl.Handle, 0, vbNullString, vbNullString)
-
-                    'SetParent(PuttyHandle, InterfaceControl.Handle)
+                    If _isPuttyNg Then
+                        PuttyHandle = FindWindowEx(Me.InterfaceControl.Handle, 0, vbNullString, vbNullString)
+                    Else
+                        PuttyHandle = PuttyProcess.MainWindowHandle
+                        SetParent(PuttyHandle, InterfaceControl.Handle)
+                    End If
 
                     MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strPuttyStuff, True)
 
@@ -183,7 +191,11 @@ Namespace Connection
 
             Public Overrides Sub Resize()
                 Try
-                    MoveWindow(PuttyHandle, 0, 0, Me.InterfaceControl.Width, Me.InterfaceControl.Height, True)
+                    If _isPuttyNg Then
+                        MoveWindow(PuttyHandle, 0, 0, Me.InterfaceControl.Width, Me.InterfaceControl.Height, True)
+                    Else
+                        MoveWindow(PuttyHandle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), True)
+                    End If
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyResizeFailed & vbNewLine & ex.Message, True)
                 End Try
@@ -237,6 +249,17 @@ Namespace Connection
                     App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strPuttyGetSessionsFailed & vbNewLine & ex.Message, True)
                     Return Nothing
                 End Try
+            End Function
+
+            Public Shared Function IsFilePuttyNg(file As String) As Boolean
+                Dim isPuttyNg As Boolean
+                Try
+                    isPuttyNg = FileVersionInfo.GetVersionInfo(file).InternalName.Contains("PuTTYNG")
+                Catch
+                    isPuttyNg = False
+                End Try
+                MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format("IsFilePuttyNg(""{0}"") = {1}", file, isPuttyNg), False)
+                Return isPuttyNg
             End Function
 
             Public Shared Sub StartPutty()
