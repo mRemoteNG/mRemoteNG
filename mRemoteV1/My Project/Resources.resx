@@ -1741,6 +1741,9 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
     <value>Use a different username and password</value>
   </data>
+  <data name="strUseSmartCard" xml:space="preserve">
+    <value>Use a Smart Card</value>
+  </data>
   <data name="strUseSameUsernameAndPassword" xml:space="preserve">
     <value>Use the same username and password</value>
   </data>
