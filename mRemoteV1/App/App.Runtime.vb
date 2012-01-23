@@ -1031,7 +1031,7 @@ Namespace App
                         LoadConnections()
                         Exit Sub
                     Else
-                        MsgBox(String.Format(My.Resources.strErrorStartupConnectionFileLoad, vbNewLine, Application.ProductName, GetStartupConnectionFileName(), ex.Message), MsgBoxStyle.OkOnly + MsgBoxStyle.Critical)
+                        MsgBox(String.Format(My.Language.strErrorStartupConnectionFileLoad, vbNewLine, Application.ProductName, GetStartupConnectionFileName(), ex.Message), MsgBoxStyle.OkOnly + MsgBoxStyle.Critical)
                         Application.Exit()
                     End If
                 End If

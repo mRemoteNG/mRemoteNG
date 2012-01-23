@@ -1556,6 +1556,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to The startup connection file could not be loaded.{0}{0}{2}{0}{3}{0}{0}In order to prevent data loss, {1} will now exit..
+        '''</summary>
+        Friend Shared ReadOnly Property strErrorStartupConnectionFileLoad() As String
+            Get
+                Return ResourceManager.GetString("strErrorStartupConnectionFileLoad", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to VerifyDatabaseVersion (Config.Connections.Save) failed. {0}.
         '''</summary>
         Friend Shared ReadOnly Property strErrorVerifyDatabaseVersionFailed() As String
@@ -5480,6 +5489,15 @@ Namespace My
         Friend Shared ReadOnly Property strUpdateCheckFailed() As String
             Get
                 Return ResourceManager.GetString("strUpdateCheckFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to mRemoteNG Portable Edition does not currently support automatic updates..
+        '''</summary>
+        Friend Shared ReadOnly Property strUpdateCheckPortableEdition() As String
+            Get
+                Return ResourceManager.GetString("strUpdateCheckPortableEdition", resourceCulture)
             End Get
         End Property
         
