@@ -1030,10 +1030,14 @@ Namespace UI
 
                     Dim selectedNode As TreeNode = mRemoteNG.Tree.Node.SelectedNode
                     Dim parentNode As TreeNode
-                    If mRemoteNG.Tree.Node.GetNodeType(selectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
-                        parentNode = selectedNode.Parent
+                    If selectedNode Is Nothing Then
+                        parentNode = tvConnections.Nodes(0)
                     Else
-                        parentNode = selectedNode
+                        If mRemoteNG.Tree.Node.GetNodeType(selectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                            parentNode = selectedNode.Parent
+                        Else
+                            parentNode = selectedNode
+                        End If
                     End If
 
                     ' We can only inherit from a container node, not the root node or connection nodes
@@ -1045,7 +1049,7 @@ Namespace UI
 
                     newContainerInfo.ConnectionInfo = New mRemoteNG.Connection.Info(newContainerInfo)
 
-                    App.Runtime.containerList.Add(newContainerInfo)
+                    App.Runtime.ContainerList.Add(newContainerInfo)
                     parentNode.Nodes.Add(newNode)
 
                     Me.tvConnections.SelectedNode = newNode

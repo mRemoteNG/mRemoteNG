@@ -573,7 +573,7 @@ Namespace Config
 
                     xW.WriteStartDocument()
 
-                    xW.WriteStartElement("Connections")
+                    xW.WriteStartElement("Connections") ' Do not localize
                     xW.WriteAttributeString("Name", "", tN.Text)
                     xW.WriteAttributeString("Export", "", exp)
 

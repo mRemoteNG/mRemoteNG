@@ -890,10 +890,11 @@ Namespace App
                 xW.Indentation = 4
 
                 xW.WriteStartDocument()
-                xW.WriteStartElement(My.Language.strConnections)
+                xW.WriteStartElement("Connections") ' Do not localize
+                xW.WriteAttributeString("Name", My.Language.strConnections)
                 xW.WriteAttributeString("Export", "", "False")
                 xW.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY")
-                xW.WriteAttributeString("ConfVersion", "", "2.2")
+                xW.WriteAttributeString("ConfVersion", "", "2.3")
 
                 xW.WriteEndElement()
                 xW.WriteEndDocument()
@@ -911,6 +912,8 @@ Namespace App
                 ' Load config
                 conL.ConnectionFileName = filename
                 conL.Load()
+
+                Windows.treeForm.tvConnections.SelectedNode = conL.RootTreeNode
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strCouldNotCreateNewConnectionsFile & vbNewLine & ex.Message)
             End Try

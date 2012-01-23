@@ -237,7 +237,7 @@ Namespace Config
 
                     ' SECTION 3. Populate the TreeView with the DOM nodes.
                     AddNodesFromSQL(rootNode)
-                    'AddNodeFromXML(xDom.DocumentElement, Me._RootTreeNode)
+                    'AddNodeFromXml(xDom.DocumentElement, Me._RootTreeNode)
 
                     rootNode.Expand()
 
@@ -314,7 +314,7 @@ Namespace Config
                         If Tree.Node.GetNodeTypeFromString(sqlRd.Item("Type")) = Tree.Node.Type.Connection Then
                             Dim conI As Connection.Info = GetConnectionInfoFromSQL()
                             conI.TreeNode = tNode
-                            'conI.Parent = prevCont 'NEW
+                            'conI.Parent = _previousContainer 'NEW
 
                             Me._ConnectionList.Add(conI)
 
@@ -355,7 +355,7 @@ Namespace Config
                             '        contI.Parent = tNode.Parent.Tag
                             '    End If
                             'End If
-                            'prevCont = contI 'NEW
+                            '_previousContainer = contI 'NEW
                             contI.TreeNode = tNode
 
                             contI.Name = sqlRd.Item("Name")
@@ -642,11 +642,13 @@ Namespace Config
                     ' SECTION 2. Initialize the treeview control.
                     Dim rootNode As TreeNode
 
-                    Try
-                        rootNode = New TreeNode(xDom.DocumentElement.Attributes("Name").Value)
-                    Catch ex As Exception
+                    Dim rootNodeName As String = ""
+                    If xDom.DocumentElement.HasAttribute("Name") Then rootNodeName = xDom.DocumentElement.Attributes("Name").Value.Trim()
+                    If Not String.IsNullOrEmpty(rootNodeName) Then
+                        rootNode = New TreeNode(rootNodeName)
+                    Else
                         rootNode = New TreeNode(xDom.DocumentElement.Name)
-                    End Try
+                    End If
 
                     Dim rInfo As New Root.Info(Root.Info.RootType.Connection)
                     rInfo.Name = rootNode.Text
@@ -659,7 +661,7 @@ Namespace Config
                             If Authenticate(xDom.DocumentElement.Attributes("Protected").Value, False, rInfo) = False Then
                                 My.Settings.LoadConsFromCustomLocation = False
                                 My.Settings.CustomConsPath = ""
-                                rootNode.Remove()
+                                _RootTreeNode.Remove()
                                 Exit Sub
                             End If
                         End If
@@ -709,6 +711,7 @@ Namespace Config
 
                     Me._RootTreeNode.EnsureVisible()
 
+
                     App.Runtime.IsConnectionsFileLoaded = True
                     App.Runtime.Windows.treeForm.InitialRefresh()
                 Catch ex As Exception
@@ -718,79 +721,79 @@ Namespace Config
                 End Try
             End Sub
 
-            Private prevCont As Container.Info
-            Private Sub AddNodeFromXML(ByRef inXmlNode As XmlNode, ByRef inTreeNode As TreeNode)
+            Private _previousContainer As Container.Info
+            Private Sub AddNodeFromXml(ByRef parentXmlNode As XmlNode, ByRef parentTreeNode As TreeNode)
                 Try
-                    Dim i As Integer
-
-                    Dim xNode As XmlNode
-                    Dim xNodeList As XmlNodeList
-                    Dim tNode As TreeNode
-
                     ' Loop through the XML nodes until the leaf is reached.
                     ' Add the nodes to the TreeView during the looping process.
-                    If inXmlNode.HasChildNodes() Then
-                        xNodeList = inXmlNode.ChildNodes
-                        For i = 0 To xNodeList.Count - 1
-                            xNode = xNodeList(i)
-                            inTreeNode.Nodes.Add(New TreeNode(xNode.Attributes("Name").Value))
-                            tNode = inTreeNode.Nodes(i)
+                    If parentXmlNode.HasChildNodes() Then
+                        For Each xmlNode As XmlNode In parentXmlNode.ChildNodes
+                            Dim treeNode As TreeNode = New TreeNode(xmlNode.Attributes("Name").Value)
+                            parentTreeNode.Nodes.Add(TreeNode)
 
-                            If Tree.Node.GetNodeTypeFromString(xNode.Attributes("Type").Value) = Tree.Node.Type.Connection Then 'connection info
-                                Dim conI As Connection.Info = GetConnectionInfoFromXml(xNode)
-                                conI.TreeNode = tNode
-                                conI.Parent = prevCont 'NEW
+                            If Tree.Node.GetNodeTypeFromString(xmlNode.Attributes("Type").Value) = Tree.Node.Type.Connection Then 'connection info
+                                Dim connectionInfo As Connection.Info = GetConnectionInfoFromXml(xmlNode)
+                                connectionInfo.TreeNode = treeNode
+                                connectionInfo.Parent = _previousContainer 'NEW
 
-                                Me._ConnectionList.Add(conI)
+                                ConnectionList.Add(connectionInfo)
 
-                                tNode.Tag = conI
-                                tNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
-                                tNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
-                            ElseIf Tree.Node.GetNodeTypeFromString(xNode.Attributes("Type").Value) = Tree.Node.Type.Container Then  'container info
-                                Dim contI As New Container.Info
-                                If tNode.Parent IsNot Nothing Then
-                                    If Tree.Node.GetNodeType(tNode.Parent) = Tree.Node.Type.Container Then
-                                        contI.Parent = tNode.Parent.Tag
+                                treeNode.Tag = connectionInfo
+                                treeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
+                                treeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
+                            ElseIf Tree.Node.GetNodeTypeFromString(xmlNode.Attributes("Type").Value) = Tree.Node.Type.Container Then  'container info
+                                Dim containerInfo As New Container.Info
+                                If treeNode.Parent IsNot Nothing Then
+                                    If Tree.Node.GetNodeType(treeNode.Parent) = Tree.Node.Type.Container Then
+                                        containerInfo.Parent = treeNode.Parent.Tag
                                     End If
                                 End If
-                                prevCont = contI 'NEW
-                                contI.TreeNode = tNode
+                                _previousContainer = containerInfo 'NEW
+                                containerInfo.TreeNode = treeNode
 
-                                contI.Name = xNode.Attributes("Name").Value
+                                containerInfo.Name = xmlNode.Attributes("Name").Value
 
-                                If Me.confVersion > 0.7 Then '0.8
-                                    If xNode.Attributes("Expanded").Value = "True" Then
-                                        contI.IsExpanded = True
+                                If confVersion >= 0.8 Then
+                                    If xmlNode.Attributes("Expanded").Value = "True" Then
+                                        containerInfo.IsExpanded = True
                                     Else
-                                        contI.IsExpanded = False
+                                        containerInfo.IsExpanded = False
                                     End If
                                 End If
 
-                                Dim conI As Connection.Info
-                                If Me.confVersion > 0.8 Then '0.9
-                                    conI = GetConnectionInfoFromXml(xNode)
+                                Dim connectionInfo As Connection.Info
+                                If confVersion >= 0.9 Then
+                                    connectionInfo = GetConnectionInfoFromXml(xmlNode)
                                 Else
-                                    conI = New Connection.Info
+                                    connectionInfo = New Connection.Info
                                 End If
 
-                                conI.Parent = contI
-                                conI.IsContainer = True
-                                contI.ConnectionInfo = conI
+                                connectionInfo.Parent = containerInfo
+                                connectionInfo.IsContainer = True
+                                containerInfo.ConnectionInfo = connectionInfo
 
-                                Me._ContainerList.Add(contI)
+                                ContainerList.Add(containerInfo)
 
-                                tNode.Tag = contI
-                                tNode.ImageIndex = Images.Enums.TreeImage.Container
-                                tNode.SelectedImageIndex = Images.Enums.TreeImage.Container
+                                treeNode.Tag = containerInfo
+                                treeNode.ImageIndex = Images.Enums.TreeImage.Container
+                                treeNode.SelectedImageIndex = Images.Enums.TreeImage.Container
                             End If
 
-                            AddNodeFromXML(xNode, tNode)
+                            AddNodeFromXml(xmlNode, treeNode)
                         Next
                     Else
-                        inTreeNode.Text = inXmlNode.Attributes("Name").Value.Trim
+                        Dim nodeName As String = ""
+                        Dim nameAttribute As XmlAttribute = parentXmlNode.Attributes("Name")
+                        If Not IsNothing(nameAttribute) Then nodeName = nameAttribute.Value.Trim()
+                        If Not String.IsNullOrEmpty(nodeName) Then
+                            parentTreeNode.Text = nodeName
+                        Else
+                            parentTreeNode.Text = parentXmlNode.Name
+                        End If
                     End If
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodeFromXmlFailed & vbNewLine & ex.Message, True)
+                    Throw
                 End Try
             End Sub
 
