@@ -132,14 +132,8 @@
   <data name="strFAMFAMFAMAttribution" xml:space="preserve">
     <value>Zawiera ikony ze strony [FAMFAMFAM]</value>
   </data>
-  <data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
-    <value>http://www.famfamfam.com/</value>
-  </data>
   <data name="strMagicLibraryAttribution" xml:space="preserve">
     <value>Program korzysta z bibliotek "Magic library" [Crownwood Software]</value>
-  </data>
-  <data name="strMagicLibraryAttributionURL" xml:space="preserve">
-    <value>http://www.dotnetmagic.com/</value>
   </data>
   <data name="strAbout" xml:space="preserve">
     <value>O programie</value>
@@ -204,20 +198,11 @@
   <data name="strButtonClose" xml:space="preserve">
     <value>&amp;Zamknij</value>
   </data>
-  <data name="strButtonImport" xml:space="preserve">
-    <value>&amp;Import</value>
-  </data>
   <data name="strButtonNew" xml:space="preserve">
     <value>&amp;Nowy</value>
   </data>
-  <data name="strButtonOK" xml:space="preserve">
-    <value>&amp;OK</value>
-  </data>
   <data name="strButtonScan" xml:space="preserve">
     <value>&amp;Skanuj</value>
-  </data>
-  <data name="strButtonStop" xml:space="preserve">
-    <value>&amp;Stop</value>
   </data>
   <data name="strPropertyNameColors" xml:space="preserve">
     <value>Kolory</value>
@@ -324,9 +309,6 @@
   <data name="strMenuWebsite" xml:space="preserve">
     <value>Strona WWW</value>
   </data>
-  <data name="strStatus" xml:space="preserve">
-    <value>Status</value>
-  </data>
   <data name="strTitlePassword" xml:space="preserve">
     <value>Hasło</value>
   </data>
@@ -335,12 +317,6 @@
   </data>
   <data name="strButtonLaunchPutty" xml:space="preserve">
     <value>Uruchom PuTTY</value>
-  </data>
-  <data name="strMenuCtrlAltDel" xml:space="preserve">
-    <value>Ctrl-Alt-Del</value>
-  </data>
-  <data name="strMenuCtrlEsc" xml:space="preserve">
-    <value>Ctrl-Esc</value>
   </data>
   <data name="strTabAdvanced" xml:space="preserve">
     <value>Zaawansowane</value>
@@ -647,12 +623,6 @@ Opis błędu: {1}</value>
   <data name="strSpecialKeys" xml:space="preserve">
     <value>Znaki specjalne</value>
   </data>
-  <data name="strKeysCtrlAltDel" xml:space="preserve">
-    <value>CTRL-ALT-DEL</value>
-  </data>
-  <data name="strKeysCtrlEsc" xml:space="preserve">
-    <value>CTRL-ESC</value>
-  </data>
   <data name="strRDP65536Colors" xml:space="preserve">
     <value>65536 Kolorów (16-bit)</value>
   </data>
@@ -686,56 +656,11 @@ Opis błędu: {1}</value>
   <data name="strDetect" xml:space="preserve">
     <value>Wykryj</value>
   </data>
-  <data name="strTransfer" xml:space="preserve">
-    <value>Transfer</value>
-  </data>
-  <data name="strSocks5" xml:space="preserve">
-    <value>Socks 5</value>
-  </data>
-  <data name="strHttp" xml:space="preserve">
-    <value>HTTP</value>
-  </data>
-  <data name="strVnc" xml:space="preserve">
-    <value>VNC</value>
-  </data>
-  <data name="strWindows" xml:space="preserve">
-    <value>Windows</value>
-  </data>
-  <data name="strRDP" xml:space="preserve">
-    <value>RDP</value>
-  </data>
   <data name="strSsh1" xml:space="preserve">
     <value>SSH wersja 1</value>
   </data>
   <data name="strSsh2" xml:space="preserve">
     <value>SSH wersja 2</value>
-  </data>
-  <data name="strTelnet" xml:space="preserve">
-    <value>Telnet</value>
-  </data>
-  <data name="strRlogin" xml:space="preserve">
-    <value>Rlogin</value>
-  </data>
-  <data name="strRAW" xml:space="preserve">
-    <value>RAW</value>
-  </data>
-  <data name="strICA" xml:space="preserve">
-    <value>ICA</value>
-  </data>
-  <data name="strHttps" xml:space="preserve">
-    <value>HTTPS</value>
-  </data>
-  <data name="strHttpGecko" xml:space="preserve">
-    <value>Gecko (Firefox)</value>
-  </data>
-  <data name="strEnc40Bit" xml:space="preserve">
-    <value>40-bit</value>
-  </data>
-  <data name="strEnc56Bit" xml:space="preserve">
-    <value>56-bit</value>
-  </data>
-  <data name="strEnc128Bit" xml:space="preserve">
-    <value>128-bit</value>
   </data>
   <data name="strIntAppConnectionFailed" xml:space="preserve">
     <value>Połączenie nieudane</value>
@@ -768,7 +693,7 @@ Opis błędu: {1}</value>
     <value>Baza danych:</value>
   </data>
   <data name="strSQLServer" xml:space="preserve">
-    <value>Serwer SQL</value>
+    <value>Serwer SQL:</value>
   </data>
   <data name="strAutoSaveMins" xml:space="preserve">
     <value>Minuty (0 oznacza wyłączony)</value>
@@ -827,12 +752,6 @@ Opis błędu: {1}</value>
   <data name="strPropertyNameViewOnly" xml:space="preserve">
     <value>Tylko podgląd</value>
   </data>
-  <data name="strPropertyNamePanel" xml:space="preserve">
-    <value>Panel</value>
-  </data>
-  <data name="strPropertyNamePort" xml:space="preserve">
-    <value>Port</value>
-  </data>
   <data name="strPropertyNameProtocol" xml:space="preserve">
     <value>Protokół</value>
   </data>
@@ -859,9 +778,6 @@ Opis błędu: {1}</value>
   </data>
   <data name="strCategoryProtocol" xml:space="preserve">
     <value>Protokół</value>
-  </data>
-  <data name="strLabelPort" xml:space="preserve">
-    <value>Port:</value>
   </data>
   <data name="strLabelProtocol" xml:space="preserve">
     <value>Protokół</value>

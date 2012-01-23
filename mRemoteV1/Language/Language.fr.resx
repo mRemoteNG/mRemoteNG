@@ -327,9 +327,6 @@
   <data name="strLabelSelectPanel" xml:space="preserve">
     <value>Sélectionnez un groupe dans la liste ci-dessous ou cliquez sur Nouveau pour en ajouter un nouveau. Cliquez sur OK pour continuer.</value>
   </data>
-  <data name="strSmartSizeModeFree" xml:space="preserve">
-    <value>Free</value>
-  </data>
   <data name="strStatus" xml:space="preserve">
     <value>Statut</value>
   </data>
@@ -414,9 +411,6 @@
   <data name="strTitleError" xml:space="preserve">
     <value>Erreur ({0})</value>
   </data>
-  <data name="strTitleInformation" xml:space="preserve">
-    <value>Information ({0})</value>
-  </data>
   <data name="strTitleWarning" xml:space="preserve">
     <value>Avertissement ({0})</value>
   </data>
@@ -473,9 +467,6 @@
   </data>
   <data name="strLabelFilename" xml:space="preserve">
     <value>Nom du fichier:</value>
-  </data>
-  <data name="strLabelOptions" xml:space="preserve">
-    <value>Options:</value>
   </data>
   <data name="strMenuCopy" xml:space="preserve">
     <value>Copier</value>
@@ -547,7 +538,7 @@
     <value>Rediriger</value>
   </data>
   <data name="strColumnHostnameIP" xml:space="preserve">
-    <value>Nom d'hôte / IP</value>
+    <value>Nom d'hôte/IP</value>
   </data>
   <data name="strColumnUsername" xml:space="preserve">
     <value>Nom d'utilisateur</value>
@@ -924,12 +915,6 @@
   <data name="strNone" xml:space="preserve">
     <value>Aucun</value>
   </data>
-  <data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
-    <value>http://www.famfamfam.com/</value>
-  </data>
-  <data name="strMagicLibraryAttributionURL" xml:space="preserve">
-    <value>http://www.dotnetmagic.com/</value>
-  </data>
   <data name="strActive" xml:space="preserve">
     <value>Actif</value>
   </data>
@@ -953,9 +938,6 @@
   </data>
   <data name="strUser" xml:space="preserve">
     <value>Utilisateur</value>
-  </data>
-  <data name="strHost" xml:space="preserve">
-    <value>Host</value>
   </data>
   <data name="strSSHTransferFailed" xml:space="preserve">
     <value>Transfert</value>
@@ -994,7 +976,7 @@
     <value>Vérifiez l'installation correcte des composants au démarrage</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
-    <value>Chemin de XULRunner</value>
+    <value>Chemin de XULRunner:</value>
   </data>
   <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
     <value>Crypter complètement le fichier de connexion</value>
@@ -1415,5 +1397,8 @@
   </data>
   <data name="strRDP32768Colors" xml:space="preserve">
     <value>32768 couleurs (15 bits)</value>
+  </data>
+  <data name="strLabelHostname">
+    <value xml:space="preserve">Nom d'hôte:</value>
   </data>
 </root>

@@ -138,20 +138,14 @@
   <data name="strButtonScan" xml:space="preserve">
     <value>&amp;Scannen</value>
   </data>
-  <data name="strButtonStop" xml:space="preserve">
-    <value>&amp;Stop</value>
-  </data>
   <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
     <value>Sind Sie sicher dass Sie die Verbindung "{0}" entfernen möchten?</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
     <value>Sind Sie sicher dass Sie den leeren Ordner "{0}" entfernen möchten?</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>Sind Sie sicher dass Sie den Ordner "{0}" entfernen möchten? Jeder Ordner und jede Verbindung in diesem Ordner werden ebenfalls gelöscht.</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>Möchten Sie alle offenen Verbindungen schließen?</value>
@@ -176,7 +170,6 @@
   </data>
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>Veränderungsprotokoll:</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Direkt Verbinden:</value>
@@ -253,9 +246,6 @@
   <data name="strMenuOptions" xml:space="preserve">
     <value>Optionen</value>
   </data>
-  <data name="strMenuPortScan" xml:space="preserve">
-    <value>Port Scan</value>
-  </data>
   <data name="strMenuQuickConnectToolbar" xml:space="preserve">
     <value>Direkt Verbinden Symbolleiste</value>
   </data>
@@ -295,14 +285,8 @@
   <data name="strSmartSizeModeAspect" xml:space="preserve">
     <value>Aspekt</value>
   </data>
-  <data name="strSmartSizeModeFree" xml:space="preserve">
-    <value>Free</value>
-  </data>
   <data name="strSmartSizeModeNone" xml:space="preserve">
     <value>Kein SmartSize</value>
-  </data>
-  <data name="strStatus" xml:space="preserve">
-    <value>Status</value>
   </data>
   <data name="strTitlePassword" xml:space="preserve">
     <value>Passwort</value>
@@ -330,10 +314,6 @@
   </data>
   <data name="strLabelAddress" xml:space="preserve">
     <value>Addresse:</value>
-  </data>
-  <data name="strLabelPortableEdition" xml:space="preserve">
-    <value>Portable Edition</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strLabelPuttySessionsConfig" xml:space="preserve">
     <value>Klicken Sie hier um die PuTTY Sitzung zu konfigurieren:</value>
@@ -370,7 +350,6 @@
   </data>
   <data name="strFilterApplication" xml:space="preserve">
     <value>Application Dateien (*.exe)</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strFiltermRemoteCSV" xml:space="preserve">
     <value>mRemote CSV Dateien (*.csv)</value>
@@ -393,9 +372,6 @@
   <data name="strGroupboxFiles" xml:space="preserve">
     <value>Dateien</value>
   </data>
-  <data name="strLabelServerStatus" xml:space="preserve">
-    <value>Server Status:</value>
-  </data>
   <data name="strNewConnection" xml:space="preserve">
     <value>Neue Verbindung</value>
   </data>
@@ -411,27 +387,20 @@
   <data name="strTitleError" xml:space="preserve">
     <value>Fehler ({0})</value>
   </data>
-  <data name="strTitleInformation" xml:space="preserve">
-    <value>Information ({0})</value>
-  </data>
   <data name="strTitleWarning" xml:space="preserve">
     <value>Warnung ({0})</value>
   </data>
   <data name="strUpdateFrequencyCustom" xml:space="preserve">
     <value>Alle {0} Tage</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strUpdateFrequencyDaily" xml:space="preserve">
     <value>Täglich</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strUpdateFrequencyMonthly" xml:space="preserve">
     <value>Monatlich</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strUpdateFrequencyWeekly" xml:space="preserve">
     <value>Wöchentlich</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strYes" xml:space="preserve">
     <value>Ja</value>
@@ -486,11 +455,9 @@
   </data>
   <data name="strConfirmDeleteExternalTool" xml:space="preserve">
     <value>Sind Sie sicher dass Sie das extene Programm "{0}" entfernen möchten?</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
     <value>Sind Sie sicher dass Sie die {0} selektierten externen Programme entfernen möchten?</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strGroupboxExternalToolProperties" xml:space="preserve">
     <value>Eigenschaften des externen Programmes</value>
@@ -543,9 +510,6 @@
   <data name="strMenuSendSpecialKeys" xml:space="preserve">
     <value>Tastenkombination senden (VNC)</value>
   </data>
-  <data name="strMenuSmartSize" xml:space="preserve">
-    <value>SmartSize (RDP/VNC)</value>
-  </data>
   <data name="strMenuStartChat" xml:space="preserve">
     <value>Chat starten (VNC)</value>
   </data>
@@ -558,9 +522,6 @@
   <data name="strPropertyDescriptionAddress" xml:space="preserve">
     <value>Der Hostname oder die IP zu der eine Verbinung aufgebaut werden soll.</value>
   </data>
-  <data name="strPropertyNameAddress" xml:space="preserve">
-    <value>Hostname/IP</value>
-  </data>
   <data name="strButtonIcon" xml:space="preserve">
     <value>Symbol</value>
   </data>
@@ -572,14 +533,9 @@
   </data>
   <data name="strCategoryCredentials" xml:space="preserve">
     <value>Anmeldedaten</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strCategoryDisplay" xml:space="preserve">
     <value>Anzeige</value>
-  </data>
-  <data name="strCategoryGateway" xml:space="preserve">
-    <value>Gateway</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strCategoryMiscellaneous" xml:space="preserve">
     <value>Verschiedenes</value>
@@ -590,17 +546,11 @@
   <data name="strCategoryRedirect" xml:space="preserve">
     <value>Umleitung</value>
   </data>
-  <data name="strColumnHostnameIP" xml:space="preserve">
-    <value>Hostname/IP</value>
-  </data>
   <data name="strColumnUsername" xml:space="preserve">
     <value>Benutzername</value>
   </data>
   <data name="strLabelDomain" xml:space="preserve">
     <value>Domäne:</value>
-  </data>
-  <data name="strLabelPort" xml:space="preserve">
-    <value>Port:</value>
   </data>
   <data name="strLabelProtocol" xml:space="preserve">
     <value>Protokoll:</value>
@@ -644,17 +594,8 @@
   <data name="strPropertyNameIcon" xml:space="preserve">
     <value>Symbol</value>
   </data>
-  <data name="strPropertyNameName" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="strPropertyNamePanel" xml:space="preserve">
-    <value>Panel</value>
-  </data>
   <data name="strPropertyNamePassword" xml:space="preserve">
     <value>Passwort</value>
-  </data>
-  <data name="strPropertyNamePort" xml:space="preserve">
-    <value>Port</value>
   </data>
   <data name="strPropertyNameProtocol" xml:space="preserve">
     <value>Protokoll</value>
@@ -694,15 +635,12 @@
   </data>
   <data name="strPropertyDescriptionExternalTool" xml:space="preserve">
     <value>Wählen Sie die zu startende externe Applikation.</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strPropertyDescriptionExternalToolAfter" xml:space="preserve">
     <value>Wählen Sie eine externe Applikation, die gestartet werden soll nachdem die Verbindung zum Remote Host getrennt wurde.</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strPropertyDescriptionExternalToolBefore" xml:space="preserve">
     <value>Wählen Sie eine externe Applikation die gestartet werden soll bevor die Verbindung zum Remote Host aufgebaut wurde.</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strPropertyDescriptionMACAddress" xml:space="preserve">
     <value>Geben Sie die MAC Adresse des Remote Hosts ein (kann für externe Applikationen verwendet werden).</value>
@@ -748,7 +686,6 @@
   </data>
   <data name="strPropertyDescriptionVNCProxyAddress" xml:space="preserve">
     <value>Geben Sie die IP des Proxy Servers ein.</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strPropertyDescriptionVNCProxyPassword" xml:space="preserve">
     <value>Geben Sie Ihr Passwort ein.</value>
@@ -767,7 +704,6 @@
   </data>
   <data name="strPropertyNameAuthenticationMode" xml:space="preserve">
     <value>Authentifizierungs Modus</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strPropertyNameCacheBitmaps" xml:space="preserve">
     <value>Bitmaps zwischenspeichern</value>
@@ -789,15 +725,12 @@
   </data>
   <data name="strPropertyNameExternalTool" xml:space="preserve">
     <value>Externes Programm</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strPropertyNameExternalToolAfter" xml:space="preserve">
     <value>Externes Programm nachher</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strPropertyNameExternalToolBefore" xml:space="preserve">
     <value>Externes Programm vorher</value>
-    <comment>Need translation</comment>
   </data>
   <data name="strPropertyNameAll" xml:space="preserve">
     <value>Alles</value>
@@ -814,20 +747,11 @@
   <data name="strPropertyNameRedirectKeys" xml:space="preserve">
     <value>Tastenkombinationen</value>
   </data>
-  <data name="strPropertyNameRedirectPorts" xml:space="preserve">
-    <value>Ports</value>
-  </data>
   <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
     <value>Drucker</value>
   </data>
-  <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
-    <value>Smart Cards</value>
-  </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Töne</value>
-  </data>
-  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
-    <value>Rendering Engine</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Auflösung</value>
@@ -844,15 +768,8 @@
   <data name="strPropertyNameViewOnly" xml:space="preserve">
     <value>View-Only</value>
   </data>
-  <data name="strPropertyNameVNCProxyAddress" xml:space="preserve">
-    <value>Proxy Address</value>
-    <comment>Need translation</comment>
-  </data>
   <data name="strPropertyNameVNCProxyPassword" xml:space="preserve">
     <value>Proxy Passwort</value>
-  </data>
-  <data name="strPropertyNameVNCProxyPort" xml:space="preserve">
-    <value>Proxy Port</value>
   </data>
   <data name="strPropertyNameVNCProxyType" xml:space="preserve">
     <value>Proxy Typ</value>
@@ -898,9 +815,6 @@
   </data>
   <data name="strMenuRenameFolder" xml:space="preserve">
     <value>Ordner umbenennen</value>
-  </data>
-  <data name="strButtonOK" xml:space="preserve">
-    <value>&amp;OK</value>
   </data>
   <data name="strMenuConnectionsAndConfig" xml:space="preserve">
     <value>Verbindungen and Konfiguration</value>
@@ -1073,7 +987,7 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
     <value>Für mehr Informationen bitte Hilfeeintrag lesen (Info - Help - Getting started - SQL Configuration)</value>
   </data>
   <data name="strSQLServer" xml:space="preserve">
-    <value>SQL Server</value>
+    <value>SQL Server:</value>
   </data>
   <data name="strAutoSaveMins" xml:space="preserve">
     <value>Minuten (0 bedeutet deaktiviert)</value>
@@ -1084,17 +998,11 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
   <data name="strStartIP" xml:space="preserve">
     <value>Anfangs IP</value>
   </data>
-  <data name="strEndIP" xml:space="preserve">
-    <value>End IP</value>
-  </data>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Offene Ports</value>
   </data>
   <data name="strClosedPorts" xml:space="preserve">
     <value>Geschlossene Ports</value>
-  </data>
-  <data name="strEndPort" xml:space="preserve">
-    <value>End Port</value>
   </data>
   <data name="strStartPort" xml:space="preserve">
     <value>Anfangs Port</value>
@@ -1144,9 +1052,6 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
   <data name="strActivity" xml:space="preserve">
     <value>Aktivität</value>
   </data>
-  <data name="strPropertyNameRDGatewayHostname" xml:space="preserve">
-    <value>Gateway Hostname</value>
-  </data>
   <data name="strPropertyDescriptionRDGatewayHostname" xml:space="preserve">
     <value>Gibt den Namen des Remote Desktop Gateway Servers an.</value>
   </data>
@@ -1167,9 +1072,6 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
   </data>
   <data name="strNone" xml:space="preserve">
     <value>Keine Angabe</value>
-  </data>
-  <data name="strNormal" xml:space="preserve">
-    <value>Normal</value>
   </data>
   <data name="strNoSmartSize" xml:space="preserve">
     <value>Keine automatische Größenanpassung (SmartSize)</value>
@@ -1195,14 +1097,8 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
   <data name="strScreen" xml:space="preserve">
     <value>Bildschirm</value>
   </data>
-  <data name="strPanelName" xml:space="preserve">
-    <value>Panel Name</value>
-  </data>
   <data name="strUser" xml:space="preserve">
     <value>Benutzer</value>
-  </data>
-  <data name="strHost" xml:space="preserve">
-    <value>Host</value>
   </data>
   <data name="strTransfer" xml:space="preserve">
     <value>Übertragen</value>
@@ -1212,9 +1108,6 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
   </data>
   <data name="strEmptyPasswordContinue" xml:space="preserve">
     <value>Wollen Sie ohne Passwort fortfahren?</value>
-  </data>
-  <data name="strExport" xml:space="preserve">
-    <value>Export</value>
   </data>
   <data name="strUncheckProperties" xml:space="preserve">
     <value>Deaktivieren Sie alle Eigenschaften die nicht gespeichert werden sollen.</value>
@@ -1229,7 +1122,7 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
     <value>Abmelden</value>
   </data>
   <data name="strTheFollowing" xml:space="preserve">
-    <value>die folgenden</value>
+    <value>die folgenden:</value>
   </data>
   <data name="strMyCurrentWindowsCreds" xml:space="preserve">
     <value>meine aktuellen (Windows Anmelde Informationen)</value>
@@ -1244,7 +1137,7 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
     <value>Ein einzelner Klick auf eine Verbindung öffnet diese</value>
   </data>
   <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
-    <value>Öffne das Fehler &amp;&amp; Infos Panel bei</value>
+    <value>Öffne das Fehler &amp;&amp; Infos Panel bei:</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>Fehler</value>
@@ -1259,13 +1152,13 @@ Wenn Sie noch immer Probleme mit der (RDP) Sitzungs Funktion in mRemoteNG haben,
     <value>Nur Fehler &amp;&amp; Informations Panel benutzen (Keine Popups)</value>
   </data>
   <data name="strUltraVNCSCListeningPort" xml:space="preserve">
-    <value>UltraVNC SingleClick Port</value>
+    <value>UltraVNC SingleClick Port:</value>
   </data>
   <data name="strCheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
     <value>Überprüfe die Installation aller Komponenten beim Start</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
-    <value>XULrunner Pfad</value>
+    <value>XULrunner Pfad:</value>
   </data>
   <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
     <value>Verbindungsdaten Datei vollständig verschlüsseln</value>
@@ -1547,23 +1440,8 @@ Starte mit neuer Datei.</value>
   <data name="strUltraVncRepeater" xml:space="preserve">
     <value>Ultra Vnc Repeater</value>
   </data>
-  <data name="strSocks5" xml:space="preserve">
-    <value>Socks 5</value>
-  </data>
-  <data name="strHttp" xml:space="preserve">
-    <value>HTTP</value>
-  </data>
-  <data name="strVnc" xml:space="preserve">
-    <value>VNC</value>
-  </data>
-  <data name="strWindows" xml:space="preserve">
-    <value>Windows</value>
-  </data>
   <data name="strExtApp" xml:space="preserve">
     <value>Externes Programm</value>
-  </data>
-  <data name="strRDP" xml:space="preserve">
-    <value>RDP</value>
   </data>
   <data name="strSsh1" xml:space="preserve">
     <value>SSH Version 1</value>
@@ -1571,20 +1449,8 @@ Starte mit neuer Datei.</value>
   <data name="strSsh2" xml:space="preserve">
     <value>SSH Version 2</value>
   </data>
-  <data name="strTelnet" xml:space="preserve">
-    <value>Telnet</value>
-  </data>
-  <data name="strRlogin" xml:space="preserve">
-    <value>Rlogin</value>
-  </data>
   <data name="strRAW" xml:space="preserve">
     <value>Rohdaten (RAW)</value>
-  </data>
-  <data name="strICA" xml:space="preserve">
-    <value>ICA</value>
-  </data>
-  <data name="strHttps" xml:space="preserve">
-    <value>HTTPS</value>
   </data>
   <data name="strRdpErrorGetFailure" xml:space="preserve">
     <value>Fehler beim Auslesen der Fehlermeldung!</value>
@@ -1709,12 +1575,6 @@ Starte mit neuer Datei.</value>
   <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
     <value>Ändern des Webseiten Titels fehlgeschlagen!</value>
   </data>
-  <data name="strHttpGecko" xml:space="preserve">
-    <value>Gecko (Firefox)</value>
-  </data>
-  <data name="strHttpInternetExplorer" xml:space="preserve">
-    <value>Internet Explorer</value>
-  </data>
   <data name="strIcaConnectionFailed" xml:space="preserve">
     <value>ICA Verbindung fehlgeschlagen!</value>
   </data>
@@ -1760,9 +1620,6 @@ Starte mit neuer Datei.</value>
   <data name="strIntAppTitle" xml:space="preserve">
     <value>Internes Programm Titel: {0}</value>
   </data>
-  <data name="strIntAppParentHandle" xml:space="preserve">
-    <value>Panel Handle: {0}</value>
-  </data>
   <data name="strIntAppFocusFailed" xml:space="preserve">
     <value>Setzen des Fokus fehlgeschlagen!</value>
   </data>
@@ -1777,15 +1634,6 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="strPuttyStuff" xml:space="preserve">
     <value>--- PuTTY ---</value>
-  </data>
-  <data name="strPuttyHandle" xml:space="preserve">
-    <value>Putty Handle: {0}</value>
-  </data>
-  <data name="strPuttyTitle" xml:space="preserve">
-    <value>PuTTY Title: {0}</value>
-  </data>
-  <data name="strPuttyParentHandle" xml:space="preserve">
-    <value>Panel Handle: {0}</value>
   </data>
   <data name="strPuttyConnectionFailed" xml:space="preserve">
     <value>Verbindung fehlgeschlagen!</value>
@@ -1937,7 +1785,7 @@ Fehler Beschreibung: {1}</value>
     <value>PuTTY Einstellungen</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
-    <value>RDP Verbindungsversuche</value>
+    <value>RDP Verbindungsversuche:</value>
   </data>
   <data name="strWeifenLuoAttribution" xml:space="preserve">
     <value>Benutzt die DockPanel Suite von [Weifen Luo]</value>
