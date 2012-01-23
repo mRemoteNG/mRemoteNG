@@ -1782,7 +1782,7 @@ Message:
     <value>Kill Session Background failed</value>
   </data>
   <data name="strSetHostnameLikeDisplayName" xml:space="preserve">
-    <value>Set hostname like display name when creating new connections</value>
+    <value>Set hostname like display name when creating or renaming connections</value>
   </data>
   <data name="strSettingMainFormTextFailed" xml:space="preserve">
     <value>Setting main form text failed</value>

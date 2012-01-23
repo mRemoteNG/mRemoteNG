@@ -543,8 +543,8 @@ Namespace UI
             Private Sub tvConnections_AfterLabelEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.NodeLabelEditEventArgs) Handles tvConnections.AfterLabelEdit
                 Try
                     If My.Settings.SetHostnameLikeDisplayName Then
-                        If e.Node.Text = My.Language.strNewConnection Then
-                            TryCast(e.Node.Tag, mRemoteNG.Connection.Info).Hostname = e.Label
+                        If TypeOf e.Node.Tag Is mRemoteNG.Connection.Info Then
+                            DirectCast(e.Node.Tag, mRemoteNG.Connection.Info).Hostname = e.Label
                         End If
                     End If
 

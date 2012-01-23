@@ -5016,7 +5016,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Set hostname like display name when creating new connections.
+        '''  Looks up a localized string similar to Set hostname like display name when creating or renaming connections.
         '''</summary>
         Friend Shared ReadOnly Property strSetHostnameLikeDisplayName() As String
             Get
