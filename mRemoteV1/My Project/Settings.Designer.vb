@@ -2093,7 +2093,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("de,en,en-US,fr,pl")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("de,en,en-US,es,fr,nl,pl,ru,uk")>  _
         Public ReadOnly Property SupportedUICultures() As String
             Get
                 Return CType(Me("SupportedUICultures"),String)
