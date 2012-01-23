@@ -440,11 +440,15 @@ Namespace Tree
             Try
                 If SelectedNode IsNot Nothing Then
                     If Not (SelectedNode.PrevNode Is Nothing) Then
-                        Dim oldParent As TreeNode = SelectedNode.Parent
-                        Dim nNode As TreeNode = SelectedNode.Clone
-                        SelectedNode.Parent.Nodes.Insert(SelectedNode.Index - 1, nNode)
+                        TreeView.BeginUpdate()
+                        TreeView.Sorted = False
+
+                        Dim newNode As TreeNode = SelectedNode.Clone
+                        SelectedNode.Parent.Nodes.Insert(SelectedNode.Index - 1, newNode)
                         SelectedNode.Remove()
-                        SelectedNode = nNode
+                        SelectedNode = newNode
+
+                        TreeView.EndUpdate()
                     End If
                 End If
             Catch ex As Exception
@@ -456,11 +460,15 @@ Namespace Tree
             Try
                 If SelectedNode IsNot Nothing Then
                     If Not (SelectedNode.NextNode Is Nothing) Then
-                        Dim oldParent As TreeNode = SelectedNode.Parent
-                        Dim nNode As TreeNode = SelectedNode.Clone
-                        SelectedNode.Parent.Nodes.Insert(SelectedNode.Index + 2, nNode)
+                        TreeView.BeginUpdate()
+                        TreeView.Sorted = False
+
+                        Dim newNode As TreeNode = SelectedNode.Clone
+                        SelectedNode.Parent.Nodes.Insert(SelectedNode.Index + 2, newNode)
                         SelectedNode.Remove()
-                        SelectedNode = nNode
+                        SelectedNode = newNode
+
+                        TreeView.EndUpdate()
                     End If
                 End If
             Catch ex As Exception
@@ -469,47 +477,54 @@ Namespace Tree
         End Sub
 
         Public Shared Sub ExpandAllNodes()
-            _TreeView.ExpandAll()
+            TreeView.BeginUpdate()
+            TreeView.ExpandAll()
+            TreeView.EndUpdate()
         End Sub
 
         Public Shared Sub CollapseAllNodes()
-            For Each tNode As TreeNode In _TreeView.Nodes(0).Nodes
-                tNode.Collapse(False)
+            TreeView.BeginUpdate()
+            For Each treeNode As TreeNode In TreeView.Nodes(0).Nodes
+                treeNode.Collapse(False)
             Next
+            TreeView.EndUpdate()
         End Sub
 
         Public Shared Sub Sort(ByVal treeNode As TreeNode, ByVal sortType As Tools.Controls.TreeNodeSorter.SortType)
             Try
+                TreeView.BeginUpdate()
                 If treeNode Is Nothing Then
-                    treeNode = _TreeView.Nodes.Item(0)
+                    treeNode = TreeView.Nodes.Item(0)
                 ElseIf Tree.Node.GetNodeType(treeNode) = Type.Connection Then
                     treeNode = treeNode.Parent
                 End If
 
                 Dim ns As New Tools.Controls.TreeNodeSorter(treeNode, sortType)
 
-                _TreeView.TreeViewNodeSorter = ns
-                _TreeView.Sort()
+                TreeView.TreeViewNodeSorter = ns
+                TreeView.Sort()
 
                 For Each childNode As TreeNode In treeNode.Nodes
                     If GetNodeType(childNode) = Type.Container Then Sort(childNode, sortType)
                 Next
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" & vbNewLine & ex.Message, True)
+            Finally
+                TreeView.EndUpdate()
             End Try
         End Sub
 
-        Private Delegate Sub ResetTreeCB()
+        Private Delegate Sub ResetTreeDelegate()
         Public Shared Sub ResetTree()
-            If _TreeView.InvokeRequired Then
-                Dim d As New ResetTreeCB(AddressOf ResetTree)
-                Windows.treeForm.Invoke(d)
+            If TreeView.InvokeRequired Then
+                Dim resetTreeDelegate As New ResetTreeDelegate(AddressOf ResetTree)
+                Windows.treeForm.Invoke(resetTreeDelegate)
             Else
-                _TreeView.Nodes.Clear()
-                '_TreeView.Nodes.Add("Credentials")
-                _TreeView.Nodes.Add(My.Language.strConnections)
+                TreeView.BeginUpdate()
+                TreeView.Nodes.Clear()
+                TreeView.Nodes.Add(My.Language.strConnections)
+                TreeView.EndUpdate()
             End If
         End Sub
-
     End Class
 End Namespace
