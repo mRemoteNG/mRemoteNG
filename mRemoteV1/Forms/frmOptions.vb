@@ -1,4 +1,4 @@
-﻿Imports mRemoteNG.My.Resources
+﻿Imports mRemoteNG.My
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 
@@ -112,7 +112,7 @@ Public Class frmOptions
     Private components As System.ComponentModel.IContainer
 
     Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
+        Me.components = New System.ComponentModel.Container()
         Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", 0)
         Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
         Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
@@ -121,109 +121,109 @@ Public Class frmOptions
         Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 5)
         Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 6)
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
-        Me.btnOK = New System.Windows.Forms.Button
-        Me.btnCancel = New System.Windows.Forms.Button
-        Me.lvPages = New System.Windows.Forms.ListView
+        Me.btnOK = New System.Windows.Forms.Button()
+        Me.btnCancel = New System.Windows.Forms.Button()
+        Me.lvPages = New System.Windows.Forms.ListView()
         Me.imgListPages = New System.Windows.Forms.ImageList(Me.components)
-        Me.lblMaximumPuttyWaitTime = New System.Windows.Forms.Label
-        Me.chkAutomaticReconnect = New System.Windows.Forms.CheckBox
-        Me.numPuttyWaitTime = New System.Windows.Forms.NumericUpDown
-        Me.lblConfigurePuttySessions = New System.Windows.Forms.Label
-        Me.numUVNCSCPort = New System.Windows.Forms.NumericUpDown
-        Me.btnLaunchPutty = New System.Windows.Forms.Button
-        Me.lblSeconds = New System.Windows.Forms.Label
-        Me.btnBrowseCustomPuttyPath = New System.Windows.Forms.Button
-        Me.lblUVNCSCPort = New System.Windows.Forms.Label
-        Me.txtCustomPuttyPath = New System.Windows.Forms.TextBox
-        Me.txtXULrunnerPath = New System.Windows.Forms.TextBox
-        Me.chkUseCustomPuttyPath = New System.Windows.Forms.CheckBox
-        Me.btnBrowseXulRunnerPath = New System.Windows.Forms.Button
-        Me.chkEncryptCompleteFile = New System.Windows.Forms.CheckBox
-        Me.lblXulRunnerPath = New System.Windows.Forms.Label
-        Me.chkAutomaticallyGetSessionInfo = New System.Windows.Forms.CheckBox
-        Me.chkWriteLogFile = New System.Windows.Forms.CheckBox
-        Me.pnlProxy = New System.Windows.Forms.Panel
-        Me.pnlProxyBasic = New System.Windows.Forms.Panel
-        Me.lblProxyAddress = New System.Windows.Forms.Label
-        Me.txtProxyAddress = New System.Windows.Forms.TextBox
-        Me.lblProxyPort = New System.Windows.Forms.Label
-        Me.numProxyPort = New System.Windows.Forms.NumericUpDown
-        Me.chkUseProxyForAutomaticUpdates = New System.Windows.Forms.CheckBox
-        Me.chkUseProxyAuthentication = New System.Windows.Forms.CheckBox
-        Me.pnlProxyAuthentication = New System.Windows.Forms.Panel
-        Me.lblProxyUsername = New System.Windows.Forms.Label
-        Me.txtProxyUsername = New System.Windows.Forms.TextBox
-        Me.lblProxyPassword = New System.Windows.Forms.Label
-        Me.txtProxyPassword = New System.Windows.Forms.TextBox
-        Me.btnTestProxy = New System.Windows.Forms.Button
-        Me.pnlUpdateCheck = New System.Windows.Forms.Panel
-        Me.btnUpdateCheckNow = New System.Windows.Forms.Button
-        Me.chkCheckForUpdatesOnStartup = New System.Windows.Forms.CheckBox
-        Me.cboUpdateCheckFrequency = New System.Windows.Forms.ComboBox
-        Me.lblUpdatesExplanation = New System.Windows.Forms.Label
-        Me.chkHostnameLikeDisplayName = New System.Windows.Forms.CheckBox
-        Me.pnlAutoSave = New System.Windows.Forms.Panel
-        Me.lblAutoSave1 = New System.Windows.Forms.Label
-        Me.numAutoSave = New System.Windows.Forms.NumericUpDown
-        Me.lblAutoSave2 = New System.Windows.Forms.Label
-        Me.chkSingleClickOnOpenedConnectionSwitchesToIt = New System.Windows.Forms.CheckBox
-        Me.chkSingleClickOnConnectionOpensIt = New System.Windows.Forms.CheckBox
-        Me.pnlRdpReconnectionCount = New System.Windows.Forms.Panel
-        Me.lblRdpReconnectionCount = New System.Windows.Forms.Label
-        Me.numRdpReconnectionCount = New System.Windows.Forms.NumericUpDown
-        Me.chkAlwaysShowPanelSelectionDlg = New System.Windows.Forms.CheckBox
-        Me.chkShowLogonInfoOnTabs = New System.Windows.Forms.CheckBox
-        Me.chkDoubleClickClosesTab = New System.Windows.Forms.CheckBox
-        Me.chkShowProtocolOnTabs = New System.Windows.Forms.CheckBox
-        Me.chkOpenNewTabRightOfSelected = New System.Windows.Forms.CheckBox
-        Me.chkMCWarnings = New System.Windows.Forms.CheckBox
-        Me.chkMCErrors = New System.Windows.Forms.CheckBox
-        Me.chkMCInformation = New System.Windows.Forms.CheckBox
-        Me.lblSwitchToErrorsAndInfos = New System.Windows.Forms.Label
-        Me.chkUseOnlyErrorsAndInfosPanel = New System.Windows.Forms.CheckBox
-        Me.chkShowFullConnectionsFilePathInTitle = New System.Windows.Forms.CheckBox
-        Me.chkShowSystemTrayIcon = New System.Windows.Forms.CheckBox
-        Me.chkMinimizeToSystemTray = New System.Windows.Forms.CheckBox
-        Me.chkShowDescriptionTooltipsInTree = New System.Windows.Forms.CheckBox
-        Me.lblLanguage = New System.Windows.Forms.Label
-        Me.cboLanguage = New System.Windows.Forms.ComboBox
-        Me.lblLanguageRestartRequired = New System.Windows.Forms.Label
-        Me.chkReconnectOnStart = New System.Windows.Forms.CheckBox
-        Me.chkSingleInstance = New System.Windows.Forms.CheckBox
-        Me.chkConfirmExit = New System.Windows.Forms.CheckBox
-        Me.chkProperInstallationOfComponentsAtStartup = New System.Windows.Forms.CheckBox
-        Me.chkSaveConsOnExit = New System.Windows.Forms.CheckBox
-        Me.chkConfirmCloseConnection = New System.Windows.Forms.CheckBox
-        Me.tcTabControl = New System.Windows.Forms.TabControl
-        Me.tabStartupExit = New System.Windows.Forms.TabPage
-        Me.tabAppearance = New System.Windows.Forms.TabPage
-        Me.tabTabsAndPanels = New System.Windows.Forms.TabPage
-        Me.tabConnections = New System.Windows.Forms.TabPage
-        Me.pnlDefaultCredentials = New System.Windows.Forms.Panel
-        Me.radCredentialsCustom = New System.Windows.Forms.RadioButton
-        Me.lblDefaultCredentials = New System.Windows.Forms.Label
-        Me.radCredentialsNoInfo = New System.Windows.Forms.RadioButton
-        Me.radCredentialsWindows = New System.Windows.Forms.RadioButton
-        Me.txtCredentialsDomain = New System.Windows.Forms.TextBox
-        Me.lblCredentialsUsername = New System.Windows.Forms.Label
-        Me.txtCredentialsPassword = New System.Windows.Forms.TextBox
-        Me.lblCredentialsPassword = New System.Windows.Forms.Label
-        Me.txtCredentialsUsername = New System.Windows.Forms.TextBox
-        Me.lblCredentialsDomain = New System.Windows.Forms.Label
-        Me.tabSQLServer = New System.Windows.Forms.TabPage
-        Me.lblSQLDatabaseName = New System.Windows.Forms.Label
-        Me.txtSQLDatabaseName = New System.Windows.Forms.TextBox
-        Me.lblExperimental = New System.Windows.Forms.Label
-        Me.chkUseSQLServer = New System.Windows.Forms.CheckBox
-        Me.lblSQLUsername = New System.Windows.Forms.Label
-        Me.txtSQLPassword = New System.Windows.Forms.TextBox
-        Me.lblSQLInfo = New System.Windows.Forms.Label
-        Me.lblSQLServer = New System.Windows.Forms.Label
-        Me.txtSQLUsername = New System.Windows.Forms.TextBox
-        Me.txtSQLServer = New System.Windows.Forms.TextBox
-        Me.lblSQLPassword = New System.Windows.Forms.Label
-        Me.tabUpdates = New System.Windows.Forms.TabPage
-        Me.tabAdvanced = New System.Windows.Forms.TabPage
+        Me.lblMaximumPuttyWaitTime = New System.Windows.Forms.Label()
+        Me.chkAutomaticReconnect = New System.Windows.Forms.CheckBox()
+        Me.numPuttyWaitTime = New System.Windows.Forms.NumericUpDown()
+        Me.lblConfigurePuttySessions = New System.Windows.Forms.Label()
+        Me.numUVNCSCPort = New System.Windows.Forms.NumericUpDown()
+        Me.btnLaunchPutty = New System.Windows.Forms.Button()
+        Me.lblSeconds = New System.Windows.Forms.Label()
+        Me.btnBrowseCustomPuttyPath = New System.Windows.Forms.Button()
+        Me.lblUVNCSCPort = New System.Windows.Forms.Label()
+        Me.txtCustomPuttyPath = New System.Windows.Forms.TextBox()
+        Me.txtXULrunnerPath = New System.Windows.Forms.TextBox()
+        Me.chkUseCustomPuttyPath = New System.Windows.Forms.CheckBox()
+        Me.btnBrowseXulRunnerPath = New System.Windows.Forms.Button()
+        Me.chkEncryptCompleteFile = New System.Windows.Forms.CheckBox()
+        Me.lblXulRunnerPath = New System.Windows.Forms.Label()
+        Me.chkAutomaticallyGetSessionInfo = New System.Windows.Forms.CheckBox()
+        Me.chkWriteLogFile = New System.Windows.Forms.CheckBox()
+        Me.pnlProxy = New System.Windows.Forms.Panel()
+        Me.pnlProxyBasic = New System.Windows.Forms.Panel()
+        Me.lblProxyAddress = New System.Windows.Forms.Label()
+        Me.txtProxyAddress = New System.Windows.Forms.TextBox()
+        Me.lblProxyPort = New System.Windows.Forms.Label()
+        Me.numProxyPort = New System.Windows.Forms.NumericUpDown()
+        Me.chkUseProxyForAutomaticUpdates = New System.Windows.Forms.CheckBox()
+        Me.chkUseProxyAuthentication = New System.Windows.Forms.CheckBox()
+        Me.pnlProxyAuthentication = New System.Windows.Forms.Panel()
+        Me.lblProxyUsername = New System.Windows.Forms.Label()
+        Me.txtProxyUsername = New System.Windows.Forms.TextBox()
+        Me.lblProxyPassword = New System.Windows.Forms.Label()
+        Me.txtProxyPassword = New System.Windows.Forms.TextBox()
+        Me.btnTestProxy = New System.Windows.Forms.Button()
+        Me.pnlUpdateCheck = New System.Windows.Forms.Panel()
+        Me.btnUpdateCheckNow = New System.Windows.Forms.Button()
+        Me.chkCheckForUpdatesOnStartup = New System.Windows.Forms.CheckBox()
+        Me.cboUpdateCheckFrequency = New System.Windows.Forms.ComboBox()
+        Me.lblUpdatesExplanation = New System.Windows.Forms.Label()
+        Me.chkHostnameLikeDisplayName = New System.Windows.Forms.CheckBox()
+        Me.pnlAutoSave = New System.Windows.Forms.Panel()
+        Me.lblAutoSave1 = New System.Windows.Forms.Label()
+        Me.numAutoSave = New System.Windows.Forms.NumericUpDown()
+        Me.lblAutoSave2 = New System.Windows.Forms.Label()
+        Me.chkSingleClickOnOpenedConnectionSwitchesToIt = New System.Windows.Forms.CheckBox()
+        Me.chkSingleClickOnConnectionOpensIt = New System.Windows.Forms.CheckBox()
+        Me.pnlRdpReconnectionCount = New System.Windows.Forms.Panel()
+        Me.lblRdpReconnectionCount = New System.Windows.Forms.Label()
+        Me.numRdpReconnectionCount = New System.Windows.Forms.NumericUpDown()
+        Me.chkAlwaysShowPanelSelectionDlg = New System.Windows.Forms.CheckBox()
+        Me.chkShowLogonInfoOnTabs = New System.Windows.Forms.CheckBox()
+        Me.chkDoubleClickClosesTab = New System.Windows.Forms.CheckBox()
+        Me.chkShowProtocolOnTabs = New System.Windows.Forms.CheckBox()
+        Me.chkOpenNewTabRightOfSelected = New System.Windows.Forms.CheckBox()
+        Me.chkMCWarnings = New System.Windows.Forms.CheckBox()
+        Me.chkMCErrors = New System.Windows.Forms.CheckBox()
+        Me.chkMCInformation = New System.Windows.Forms.CheckBox()
+        Me.lblSwitchToErrorsAndInfos = New System.Windows.Forms.Label()
+        Me.chkUseOnlyErrorsAndInfosPanel = New System.Windows.Forms.CheckBox()
+        Me.chkShowFullConnectionsFilePathInTitle = New System.Windows.Forms.CheckBox()
+        Me.chkShowSystemTrayIcon = New System.Windows.Forms.CheckBox()
+        Me.chkMinimizeToSystemTray = New System.Windows.Forms.CheckBox()
+        Me.chkShowDescriptionTooltipsInTree = New System.Windows.Forms.CheckBox()
+        Me.lblLanguage = New System.Windows.Forms.Label()
+        Me.cboLanguage = New System.Windows.Forms.ComboBox()
+        Me.lblLanguageRestartRequired = New System.Windows.Forms.Label()
+        Me.chkReconnectOnStart = New System.Windows.Forms.CheckBox()
+        Me.chkSingleInstance = New System.Windows.Forms.CheckBox()
+        Me.chkConfirmExit = New System.Windows.Forms.CheckBox()
+        Me.chkProperInstallationOfComponentsAtStartup = New System.Windows.Forms.CheckBox()
+        Me.chkSaveConsOnExit = New System.Windows.Forms.CheckBox()
+        Me.chkConfirmCloseConnection = New System.Windows.Forms.CheckBox()
+        Me.tcTabControl = New System.Windows.Forms.TabControl()
+        Me.tabStartupExit = New System.Windows.Forms.TabPage()
+        Me.tabAppearance = New System.Windows.Forms.TabPage()
+        Me.tabTabsAndPanels = New System.Windows.Forms.TabPage()
+        Me.tabConnections = New System.Windows.Forms.TabPage()
+        Me.pnlDefaultCredentials = New System.Windows.Forms.Panel()
+        Me.radCredentialsCustom = New System.Windows.Forms.RadioButton()
+        Me.lblDefaultCredentials = New System.Windows.Forms.Label()
+        Me.radCredentialsNoInfo = New System.Windows.Forms.RadioButton()
+        Me.radCredentialsWindows = New System.Windows.Forms.RadioButton()
+        Me.txtCredentialsDomain = New System.Windows.Forms.TextBox()
+        Me.lblCredentialsUsername = New System.Windows.Forms.Label()
+        Me.txtCredentialsPassword = New System.Windows.Forms.TextBox()
+        Me.lblCredentialsPassword = New System.Windows.Forms.Label()
+        Me.txtCredentialsUsername = New System.Windows.Forms.TextBox()
+        Me.lblCredentialsDomain = New System.Windows.Forms.Label()
+        Me.tabSQLServer = New System.Windows.Forms.TabPage()
+        Me.lblSQLDatabaseName = New System.Windows.Forms.Label()
+        Me.txtSQLDatabaseName = New System.Windows.Forms.TextBox()
+        Me.lblExperimental = New System.Windows.Forms.Label()
+        Me.chkUseSQLServer = New System.Windows.Forms.CheckBox()
+        Me.lblSQLUsername = New System.Windows.Forms.Label()
+        Me.txtSQLPassword = New System.Windows.Forms.TextBox()
+        Me.lblSQLInfo = New System.Windows.Forms.Label()
+        Me.lblSQLServer = New System.Windows.Forms.Label()
+        Me.txtSQLUsername = New System.Windows.Forms.TextBox()
+        Me.txtSQLServer = New System.Windows.Forms.TextBox()
+        Me.lblSQLPassword = New System.Windows.Forms.Label()
+        Me.tabUpdates = New System.Windows.Forms.TabPage()
+        Me.tabAdvanced = New System.Windows.Forms.TabPage()
         CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProxy.SuspendLayout()
@@ -270,7 +270,7 @@ Public Class frmOptions
         'lvPages
         '
         Me.lvPages.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lvPages.FullRowSelect = True
         Me.lvPages.HideSelection = False
         Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7})
@@ -300,12 +300,12 @@ Public Class frmOptions
         '
         'lblMaximumPuttyWaitTime
         '
-        Me.lblMaximumPuttyWaitTime.AutoSize = True
         Me.lblMaximumPuttyWaitTime.Location = New System.Drawing.Point(3, 188)
         Me.lblMaximumPuttyWaitTime.Name = "lblMaximumPuttyWaitTime"
-        Me.lblMaximumPuttyWaitTime.Size = New System.Drawing.Size(135, 13)
+        Me.lblMaximumPuttyWaitTime.Size = New System.Drawing.Size(364, 13)
         Me.lblMaximumPuttyWaitTime.TabIndex = 9
         Me.lblMaximumPuttyWaitTime.Text = "Maximum PuTTY wait time:"
+        Me.lblMaximumPuttyWaitTime.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'chkAutomaticReconnect
         '
@@ -320,7 +320,7 @@ Public Class frmOptions
         'numPuttyWaitTime
         '
         Me.numPuttyWaitTime.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.numPuttyWaitTime.Location = New System.Drawing.Point(373, 185)
+        Me.numPuttyWaitTime.Location = New System.Drawing.Point(373, 186)
         Me.numPuttyWaitTime.Maximum = New Decimal(New Integer() {999, 0, 0, 0})
         Me.numPuttyWaitTime.Name = "numPuttyWaitTime"
         Me.numPuttyWaitTime.Size = New System.Drawing.Size(49, 20)
@@ -329,17 +329,17 @@ Public Class frmOptions
         '
         'lblConfigurePuttySessions
         '
-        Me.lblConfigurePuttySessions.AutoSize = True
         Me.lblConfigurePuttySessions.Location = New System.Drawing.Point(3, 157)
         Me.lblConfigurePuttySessions.Name = "lblConfigurePuttySessions"
-        Me.lblConfigurePuttySessions.Size = New System.Drawing.Size(227, 13)
+        Me.lblConfigurePuttySessions.Size = New System.Drawing.Size(364, 13)
         Me.lblConfigurePuttySessions.TabIndex = 7
         Me.lblConfigurePuttySessions.Text = "To configure PuTTY sessions click this button:"
+        Me.lblConfigurePuttySessions.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'numUVNCSCPort
         '
         Me.numUVNCSCPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.numUVNCSCPort.Location = New System.Drawing.Point(219, 277)
+        Me.numUVNCSCPort.Location = New System.Drawing.Point(373, 279)
         Me.numUVNCSCPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.numUVNCSCPort.Name = "numUVNCSCPort"
         Me.numUVNCSCPort.Size = New System.Drawing.Size(72, 20)
@@ -350,7 +350,7 @@ Public Class frmOptions
         '
         Me.btnLaunchPutty.Image = Global.mRemoteNG.My.Resources.Resources.PuttyConfig
         Me.btnLaunchPutty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnLaunchPutty.Location = New System.Drawing.Point(291, 153)
+        Me.btnLaunchPutty.Location = New System.Drawing.Point(373, 152)
         Me.btnLaunchPutty.Name = "btnLaunchPutty"
         Me.btnLaunchPutty.Size = New System.Drawing.Size(110, 23)
         Me.btnLaunchPutty.TabIndex = 8
@@ -361,7 +361,7 @@ Public Class frmOptions
         'lblSeconds
         '
         Me.lblSeconds.AutoSize = True
-        Me.lblSeconds.Location = New System.Drawing.Point(428, 189)
+        Me.lblSeconds.Location = New System.Drawing.Point(428, 188)
         Me.lblSeconds.Name = "lblSeconds"
         Me.lblSeconds.Size = New System.Drawing.Size(47, 13)
         Me.lblSeconds.TabIndex = 11
@@ -370,7 +370,7 @@ Public Class frmOptions
         'btnBrowseCustomPuttyPath
         '
         Me.btnBrowseCustomPuttyPath.Enabled = False
-        Me.btnBrowseCustomPuttyPath.Location = New System.Drawing.Point(291, 116)
+        Me.btnBrowseCustomPuttyPath.Location = New System.Drawing.Point(373, 116)
         Me.btnBrowseCustomPuttyPath.Name = "btnBrowseCustomPuttyPath"
         Me.btnBrowseCustomPuttyPath.Size = New System.Drawing.Size(75, 23)
         Me.btnBrowseCustomPuttyPath.TabIndex = 6
@@ -379,12 +379,12 @@ Public Class frmOptions
         '
         'lblUVNCSCPort
         '
-        Me.lblUVNCSCPort.AutoSize = True
         Me.lblUVNCSCPort.Location = New System.Drawing.Point(3, 281)
         Me.lblUVNCSCPort.Name = "lblUVNCSCPort"
-        Me.lblUVNCSCPort.Size = New System.Drawing.Size(176, 13)
+        Me.lblUVNCSCPort.Size = New System.Drawing.Size(364, 13)
         Me.lblUVNCSCPort.TabIndex = 15
         Me.lblUVNCSCPort.Text = "UltraVNC SingleClick Listening Port:"
+        Me.lblUVNCSCPort.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtCustomPuttyPath
         '
@@ -392,7 +392,7 @@ Public Class frmOptions
         Me.txtCustomPuttyPath.Enabled = False
         Me.txtCustomPuttyPath.Location = New System.Drawing.Point(21, 118)
         Me.txtCustomPuttyPath.Name = "txtCustomPuttyPath"
-        Me.txtCustomPuttyPath.Size = New System.Drawing.Size(264, 20)
+        Me.txtCustomPuttyPath.Size = New System.Drawing.Size(346, 20)
         Me.txtCustomPuttyPath.TabIndex = 5
         '
         'txtXULrunnerPath
@@ -400,7 +400,7 @@ Public Class frmOptions
         Me.txtXULrunnerPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtXULrunnerPath.Location = New System.Drawing.Point(21, 238)
         Me.txtXULrunnerPath.Name = "txtXULrunnerPath"
-        Me.txtXULrunnerPath.Size = New System.Drawing.Size(264, 20)
+        Me.txtXULrunnerPath.Size = New System.Drawing.Size(346, 20)
         Me.txtXULrunnerPath.TabIndex = 13
         '
         'chkUseCustomPuttyPath
@@ -415,7 +415,7 @@ Public Class frmOptions
         '
         'btnBrowseXulRunnerPath
         '
-        Me.btnBrowseXulRunnerPath.Location = New System.Drawing.Point(291, 236)
+        Me.btnBrowseXulRunnerPath.Location = New System.Drawing.Point(373, 236)
         Me.btnBrowseXulRunnerPath.Name = "btnBrowseXulRunnerPath"
         Me.btnBrowseXulRunnerPath.Size = New System.Drawing.Size(75, 23)
         Me.btnBrowseXulRunnerPath.TabIndex = 14
@@ -487,7 +487,7 @@ Public Class frmOptions
         '
         'lblProxyAddress
         '
-        Me.lblProxyAddress.Location = New System.Drawing.Point(8, 8)
+        Me.lblProxyAddress.Location = New System.Drawing.Point(8, 4)
         Me.lblProxyAddress.Name = "lblProxyAddress"
         Me.lblProxyAddress.Size = New System.Drawing.Size(96, 24)
         Me.lblProxyAddress.TabIndex = 0
@@ -504,7 +504,7 @@ Public Class frmOptions
         '
         'lblProxyPort
         '
-        Me.lblProxyPort.Location = New System.Drawing.Point(320, 8)
+        Me.lblProxyPort.Location = New System.Drawing.Point(350, 5)
         Me.lblProxyPort.Name = "lblProxyPort"
         Me.lblProxyPort.Size = New System.Drawing.Size(64, 23)
         Me.lblProxyPort.TabIndex = 2
@@ -514,7 +514,7 @@ Public Class frmOptions
         'numProxyPort
         '
         Me.numProxyPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.numProxyPort.Location = New System.Drawing.Point(384, 8)
+        Me.numProxyPort.Location = New System.Drawing.Point(420, 8)
         Me.numProxyPort.Maximum = New Decimal(New Integer() {65535, 0, 0, 0})
         Me.numProxyPort.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
         Me.numProxyPort.Name = "numProxyPort"
@@ -557,7 +557,7 @@ Public Class frmOptions
         '
         'lblProxyUsername
         '
-        Me.lblProxyUsername.Location = New System.Drawing.Point(8, 8)
+        Me.lblProxyUsername.Location = New System.Drawing.Point(8, 4)
         Me.lblProxyUsername.Name = "lblProxyUsername"
         Me.lblProxyUsername.Size = New System.Drawing.Size(96, 24)
         Me.lblProxyUsername.TabIndex = 0
@@ -574,7 +574,7 @@ Public Class frmOptions
         '
         'lblProxyPassword
         '
-        Me.lblProxyPassword.Location = New System.Drawing.Point(8, 40)
+        Me.lblProxyPassword.Location = New System.Drawing.Point(8, 36)
         Me.lblProxyPassword.Name = "lblProxyPassword"
         Me.lblProxyPassword.Size = New System.Drawing.Size(96, 24)
         Me.lblProxyPassword.TabIndex = 2
@@ -594,7 +594,7 @@ Public Class frmOptions
         '
         Me.btnTestProxy.Location = New System.Drawing.Point(8, 184)
         Me.btnTestProxy.Name = "btnTestProxy"
-        Me.btnTestProxy.Size = New System.Drawing.Size(100, 32)
+        Me.btnTestProxy.Size = New System.Drawing.Size(120, 32)
         Me.btnTestProxy.TabIndex = 4
         Me.btnTestProxy.Text = "Test Proxy"
         Me.btnTestProxy.UseVisualStyleBackColor = True
@@ -613,7 +613,7 @@ Public Class frmOptions
         '
         Me.btnUpdateCheckNow.Location = New System.Drawing.Point(8, 80)
         Me.btnUpdateCheckNow.Name = "btnUpdateCheckNow"
-        Me.btnUpdateCheckNow.Size = New System.Drawing.Size(100, 32)
+        Me.btnUpdateCheckNow.Size = New System.Drawing.Size(120, 32)
         Me.btnUpdateCheckNow.TabIndex = 2
         Me.btnUpdateCheckNow.Text = "Check Now"
         Me.btnUpdateCheckNow.UseVisualStyleBackColor = True
@@ -644,7 +644,7 @@ Public Class frmOptions
         Me.lblUpdatesExplanation.Size = New System.Drawing.Size(536, 40)
         Me.lblUpdatesExplanation.TabIndex = 0
         Me.lblUpdatesExplanation.Text = "mRemoteNG can periodically connect to the mRemoteNG website to check for updates " & _
-            "and product announcements."
+    "and product announcements."
         '
         'chkHostnameLikeDisplayName
         '
@@ -668,17 +668,17 @@ Public Class frmOptions
         '
         'lblAutoSave1
         '
-        Me.lblAutoSave1.AutoSize = True
-        Me.lblAutoSave1.Location = New System.Drawing.Point(3, 9)
+        Me.lblAutoSave1.Location = New System.Drawing.Point(6, 9)
         Me.lblAutoSave1.Name = "lblAutoSave1"
-        Me.lblAutoSave1.Size = New System.Drawing.Size(89, 13)
+        Me.lblAutoSave1.Size = New System.Drawing.Size(288, 13)
         Me.lblAutoSave1.TabIndex = 0
         Me.lblAutoSave1.Text = "Auto Save every:"
+        Me.lblAutoSave1.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'numAutoSave
         '
         Me.numAutoSave.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.numAutoSave.Location = New System.Drawing.Point(168, 6)
+        Me.numAutoSave.Location = New System.Drawing.Point(300, 7)
         Me.numAutoSave.Maximum = New Decimal(New Integer() {9999, 0, 0, 0})
         Me.numAutoSave.Name = "numAutoSave"
         Me.numAutoSave.Size = New System.Drawing.Size(53, 20)
@@ -687,7 +687,7 @@ Public Class frmOptions
         'lblAutoSave2
         '
         Me.lblAutoSave2.AutoSize = True
-        Me.lblAutoSave2.Location = New System.Drawing.Point(233, 9)
+        Me.lblAutoSave2.Location = New System.Drawing.Point(359, 9)
         Me.lblAutoSave2.Name = "lblAutoSave2"
         Me.lblAutoSave2.Size = New System.Drawing.Size(135, 13)
         Me.lblAutoSave2.TabIndex = 2
@@ -724,17 +724,17 @@ Public Class frmOptions
         '
         'lblRdpReconnectionCount
         '
-        Me.lblRdpReconnectionCount.AutoSize = True
-        Me.lblRdpReconnectionCount.Location = New System.Drawing.Point(3, 9)
+        Me.lblRdpReconnectionCount.Location = New System.Drawing.Point(6, 9)
         Me.lblRdpReconnectionCount.Name = "lblRdpReconnectionCount"
-        Me.lblRdpReconnectionCount.Size = New System.Drawing.Size(131, 13)
+        Me.lblRdpReconnectionCount.Size = New System.Drawing.Size(288, 13)
         Me.lblRdpReconnectionCount.TabIndex = 0
         Me.lblRdpReconnectionCount.Text = "RDP Reconnection Count"
+        Me.lblRdpReconnectionCount.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'numRdpReconnectionCount
         '
         Me.numRdpReconnectionCount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.numRdpReconnectionCount.Location = New System.Drawing.Point(168, 6)
+        Me.numRdpReconnectionCount.Location = New System.Drawing.Point(300, 7)
         Me.numRdpReconnectionCount.Maximum = New Decimal(New Integer() {20, 0, 0, 0})
         Me.numRdpReconnectionCount.Name = "numRdpReconnectionCount"
         Me.numRdpReconnectionCount.Size = New System.Drawing.Size(53, 20)
@@ -795,7 +795,7 @@ Public Class frmOptions
         '
         Me.chkMCWarnings.AutoSize = True
         Me.chkMCWarnings.Enabled = False
-        Me.chkMCWarnings.Location = New System.Drawing.Point(126, 191)
+        Me.chkMCWarnings.Location = New System.Drawing.Point(19, 214)
         Me.chkMCWarnings.Name = "chkMCWarnings"
         Me.chkMCWarnings.Size = New System.Drawing.Size(71, 17)
         Me.chkMCWarnings.TabIndex = 8
@@ -806,7 +806,7 @@ Public Class frmOptions
         '
         Me.chkMCErrors.AutoSize = True
         Me.chkMCErrors.Enabled = False
-        Me.chkMCErrors.Location = New System.Drawing.Point(217, 191)
+        Me.chkMCErrors.Location = New System.Drawing.Point(19, 237)
         Me.chkMCErrors.Name = "chkMCErrors"
         Me.chkMCErrors.Size = New System.Drawing.Size(53, 17)
         Me.chkMCErrors.TabIndex = 9
@@ -1115,26 +1115,26 @@ Public Class frmOptions
         '
         Me.txtCredentialsDomain.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCredentialsDomain.Enabled = False
-        Me.txtCredentialsDomain.Location = New System.Drawing.Point(125, 147)
+        Me.txtCredentialsDomain.Location = New System.Drawing.Point(140, 147)
         Me.txtCredentialsDomain.Name = "txtCredentialsDomain"
         Me.txtCredentialsDomain.Size = New System.Drawing.Size(150, 20)
         Me.txtCredentialsDomain.TabIndex = 9
         '
         'lblCredentialsUsername
         '
-        Me.lblCredentialsUsername.AutoSize = True
         Me.lblCredentialsUsername.Enabled = False
-        Me.lblCredentialsUsername.Location = New System.Drawing.Point(34, 95)
+        Me.lblCredentialsUsername.Location = New System.Drawing.Point(37, 95)
         Me.lblCredentialsUsername.Name = "lblCredentialsUsername"
-        Me.lblCredentialsUsername.Size = New System.Drawing.Size(58, 13)
+        Me.lblCredentialsUsername.Size = New System.Drawing.Size(97, 13)
         Me.lblCredentialsUsername.TabIndex = 4
         Me.lblCredentialsUsername.Text = "Username:"
+        Me.lblCredentialsUsername.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtCredentialsPassword
         '
         Me.txtCredentialsPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCredentialsPassword.Enabled = False
-        Me.txtCredentialsPassword.Location = New System.Drawing.Point(125, 120)
+        Me.txtCredentialsPassword.Location = New System.Drawing.Point(140, 120)
         Me.txtCredentialsPassword.Name = "txtCredentialsPassword"
         Me.txtCredentialsPassword.Size = New System.Drawing.Size(150, 20)
         Me.txtCredentialsPassword.TabIndex = 7
@@ -1142,32 +1142,32 @@ Public Class frmOptions
         '
         'lblCredentialsPassword
         '
-        Me.lblCredentialsPassword.AutoSize = True
         Me.lblCredentialsPassword.Enabled = False
         Me.lblCredentialsPassword.Location = New System.Drawing.Point(34, 123)
         Me.lblCredentialsPassword.Name = "lblCredentialsPassword"
-        Me.lblCredentialsPassword.Size = New System.Drawing.Size(56, 13)
+        Me.lblCredentialsPassword.Size = New System.Drawing.Size(100, 13)
         Me.lblCredentialsPassword.TabIndex = 6
         Me.lblCredentialsPassword.Text = "Password:"
+        Me.lblCredentialsPassword.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtCredentialsUsername
         '
         Me.txtCredentialsUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtCredentialsUsername.Enabled = False
-        Me.txtCredentialsUsername.Location = New System.Drawing.Point(125, 93)
+        Me.txtCredentialsUsername.Location = New System.Drawing.Point(140, 93)
         Me.txtCredentialsUsername.Name = "txtCredentialsUsername"
         Me.txtCredentialsUsername.Size = New System.Drawing.Size(150, 20)
         Me.txtCredentialsUsername.TabIndex = 5
         '
         'lblCredentialsDomain
         '
-        Me.lblCredentialsDomain.AutoSize = True
         Me.lblCredentialsDomain.Enabled = False
         Me.lblCredentialsDomain.Location = New System.Drawing.Point(34, 150)
         Me.lblCredentialsDomain.Name = "lblCredentialsDomain"
-        Me.lblCredentialsDomain.Size = New System.Drawing.Size(46, 13)
+        Me.lblCredentialsDomain.Size = New System.Drawing.Size(100, 13)
         Me.lblCredentialsDomain.TabIndex = 8
         Me.lblCredentialsDomain.Text = "Domain:"
+        Me.lblCredentialsDomain.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'tabSQLServer
         '
@@ -1191,19 +1191,19 @@ Public Class frmOptions
         '
         'lblSQLDatabaseName
         '
-        Me.lblSQLDatabaseName.AutoSize = True
         Me.lblSQLDatabaseName.Enabled = False
         Me.lblSQLDatabaseName.Location = New System.Drawing.Point(23, 132)
         Me.lblSQLDatabaseName.Name = "lblSQLDatabaseName"
-        Me.lblSQLDatabaseName.Size = New System.Drawing.Size(56, 13)
+        Me.lblSQLDatabaseName.Size = New System.Drawing.Size(111, 13)
         Me.lblSQLDatabaseName.TabIndex = 5
         Me.lblSQLDatabaseName.Text = "Database:"
+        Me.lblSQLDatabaseName.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtSQLDatabaseName
         '
         Me.txtSQLDatabaseName.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSQLDatabaseName.Enabled = False
-        Me.txtSQLDatabaseName.Location = New System.Drawing.Point(113, 129)
+        Me.txtSQLDatabaseName.Location = New System.Drawing.Point(140, 130)
         Me.txtSQLDatabaseName.Name = "txtSQLDatabaseName"
         Me.txtSQLDatabaseName.Size = New System.Drawing.Size(153, 20)
         Me.txtSQLDatabaseName.TabIndex = 6
@@ -1211,8 +1211,8 @@ Public Class frmOptions
         'lblExperimental
         '
         Me.lblExperimental.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblExperimental.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World)
         Me.lblExperimental.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.lblExperimental.Location = New System.Drawing.Point(3, 0)
@@ -1234,19 +1234,19 @@ Public Class frmOptions
         '
         'lblSQLUsername
         '
-        Me.lblSQLUsername.AutoSize = True
         Me.lblSQLUsername.Enabled = False
         Me.lblSQLUsername.Location = New System.Drawing.Point(23, 158)
         Me.lblSQLUsername.Name = "lblSQLUsername"
-        Me.lblSQLUsername.Size = New System.Drawing.Size(58, 13)
+        Me.lblSQLUsername.Size = New System.Drawing.Size(111, 13)
         Me.lblSQLUsername.TabIndex = 7
         Me.lblSQLUsername.Text = "Username:"
+        Me.lblSQLUsername.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtSQLPassword
         '
         Me.txtSQLPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSQLPassword.Enabled = False
-        Me.txtSQLPassword.Location = New System.Drawing.Point(113, 182)
+        Me.txtSQLPassword.Location = New System.Drawing.Point(140, 182)
         Me.txtSQLPassword.Name = "txtSQLPassword"
         Me.txtSQLPassword.Size = New System.Drawing.Size(153, 20)
         Me.txtSQLPassword.TabIndex = 10
@@ -1255,8 +1255,8 @@ Public Class frmOptions
         'lblSQLInfo
         '
         Me.lblSQLInfo.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.lblSQLInfo.Font = New System.Drawing.Font("Segoe UI", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World)
         Me.lblSQLInfo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(192, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer))
         Me.lblSQLInfo.Location = New System.Drawing.Point(3, 25)
@@ -1268,19 +1268,19 @@ Public Class frmOptions
         '
         'lblSQLServer
         '
-        Me.lblSQLServer.AutoSize = True
         Me.lblSQLServer.Enabled = False
         Me.lblSQLServer.Location = New System.Drawing.Point(23, 106)
         Me.lblSQLServer.Name = "lblSQLServer"
-        Me.lblSQLServer.Size = New System.Drawing.Size(65, 13)
+        Me.lblSQLServer.Size = New System.Drawing.Size(111, 13)
         Me.lblSQLServer.TabIndex = 3
         Me.lblSQLServer.Text = "SQL Server:"
+        Me.lblSQLServer.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'txtSQLUsername
         '
         Me.txtSQLUsername.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSQLUsername.Enabled = False
-        Me.txtSQLUsername.Location = New System.Drawing.Point(113, 155)
+        Me.txtSQLUsername.Location = New System.Drawing.Point(140, 156)
         Me.txtSQLUsername.Name = "txtSQLUsername"
         Me.txtSQLUsername.Size = New System.Drawing.Size(153, 20)
         Me.txtSQLUsername.TabIndex = 8
@@ -1289,20 +1289,20 @@ Public Class frmOptions
         '
         Me.txtSQLServer.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.txtSQLServer.Enabled = False
-        Me.txtSQLServer.Location = New System.Drawing.Point(113, 103)
+        Me.txtSQLServer.Location = New System.Drawing.Point(140, 103)
         Me.txtSQLServer.Name = "txtSQLServer"
         Me.txtSQLServer.Size = New System.Drawing.Size(153, 20)
         Me.txtSQLServer.TabIndex = 4
         '
         'lblSQLPassword
         '
-        Me.lblSQLPassword.AutoSize = True
         Me.lblSQLPassword.Enabled = False
-        Me.lblSQLPassword.Location = New System.Drawing.Point(23, 185)
+        Me.lblSQLPassword.Location = New System.Drawing.Point(23, 184)
         Me.lblSQLPassword.Name = "lblSQLPassword"
-        Me.lblSQLPassword.Size = New System.Drawing.Size(56, 13)
+        Me.lblSQLPassword.Size = New System.Drawing.Size(111, 13)
         Me.lblSQLPassword.TabIndex = 9
         Me.lblSQLPassword.Text = "Password:"
+        Me.lblSQLPassword.TextAlign = System.Drawing.ContentAlignment.TopRight
         '
         'tabUpdates
         '
@@ -1374,7 +1374,6 @@ Public Class frmOptions
         Me.pnlAutoSave.PerformLayout()
         CType(Me.numAutoSave, System.ComponentModel.ISupportInitialize).EndInit()
         Me.pnlRdpReconnectionCount.ResumeLayout(False)
-        Me.pnlRdpReconnectionCount.PerformLayout()
         CType(Me.numRdpReconnectionCount, System.ComponentModel.ISupportInitialize).EndInit()
         Me.tcTabControl.ResumeLayout(False)
         Me.tabStartupExit.ResumeLayout(False)
@@ -1727,7 +1726,7 @@ Public Class frmOptions
         chkUseSQLServer.Text = My.Language.strUseSQLServer
         lblSQLInfo.Text = My.Language.strSQLInfo
         lblSQLUsername.Text = My.Language.strLabelUsername
-        lblSQLServer.Text = My.Language.strSQLServer & ":"
+        lblSQLServer.Text = Language.strLabelHostname
         lblSQLDatabaseName.Text = My.Language.strLabelSQLServerDatabaseName
         lblSQLPassword.Text = My.Language.strLabelPassword
         lblRdpReconnectionCount.Text = My.Language.strRdpReconnectCount
@@ -1736,13 +1735,13 @@ Public Class frmOptions
         lblCredentialsDomain.Text = My.Language.strLabelDomain
         lblCredentialsPassword.Text = My.Language.strLabelPassword
         lblCredentialsUsername.Text = My.Language.strLabelUsername
-        radCredentialsCustom.Text = My.Language.strTheFollowing & ":"
+        radCredentialsCustom.Text = My.Language.strTheFollowing
         radCredentialsWindows.Text = My.Language.strMyCurrentWindowsCreds
         radCredentialsNoInfo.Text = My.Language.strNoInformation
         lblDefaultCredentials.Text = My.Language.strEmptyUsernamePasswordDomainFields
         chkSingleClickOnOpenedConnectionSwitchesToIt.Text = My.Language.strSingleClickOnOpenConnectionSwitchesToIt
         chkSingleClickOnConnectionOpensIt.Text = My.Language.strSingleClickOnConnectionOpensIt
-        lblSwitchToErrorsAndInfos.Text = My.Language.strSwitchToErrorsAndInfos & ":"
+        lblSwitchToErrorsAndInfos.Text = My.Language.strSwitchToErrorsAndInfos
         chkMCErrors.Text = My.Language.strErrors
         chkMCWarnings.Text = My.Language.strWarnings
         chkMCInformation.Text = My.Language.strInformations
@@ -1751,9 +1750,9 @@ Public Class frmOptions
         btnCancel.Text = My.Language.strButtonCancel
         btnUpdateCheckNow.Text = My.Language.strCheckNow
         Text = My.Language.strMenuOptions
-        lblUVNCSCPort.Text = My.Language.strUltraVNCSCListeningPort & ":"
+        lblUVNCSCPort.Text = My.Language.strUltraVNCSCListeningPort
         chkProperInstallationOfComponentsAtStartup.Text = My.Language.strCheckProperInstallationOfComponentsAtStartup
-        lblXulRunnerPath.Text = My.Language.strXULrunnerPath & ":"
+        lblXulRunnerPath.Text = My.Language.strXULrunnerPath
         btnBrowseXulRunnerPath.Text = My.Language.strButtonBrowse
         chkEncryptCompleteFile.Text = My.Language.strEncryptCompleteConnectionFile
         lblLanguage.Text = My.Language.strLanguage
@@ -1897,4 +1896,7 @@ Public Class frmOptions
 #End Region
 
 
+    Private Sub lblProxyPort_Click(sender As System.Object, e As System.EventArgs) Handles lblProxyPort.Click
+
+    End Sub
 End Class
