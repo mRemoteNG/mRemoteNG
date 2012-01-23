@@ -1028,7 +1028,7 @@ Namespace App
                     TimerSqlWatcher.Start()
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeLoaded & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strConnectionsFileCouldNotBeLoaded & vbNewLine & ex.Message & ex.StackTrace, conL.ConnectionFileName))
                 If My.Settings.UseSQLServer = False Then
                     If Not conL.ConnectionFileName = GetStartupConnectionFileName() Then
                         LoadConnections()

@@ -716,7 +716,7 @@ Namespace Config
                     App.Runtime.Windows.treeForm.InitialRefresh()
                 Catch ex As Exception
                     App.Runtime.IsConnectionsFileLoaded = False
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed & vbNewLine & ex.Message & ex.StackTrace, True)
                     Throw
                 End Try
             End Sub
@@ -792,7 +792,7 @@ Namespace Config
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodeFromXmlFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodeFromXmlFailed & vbNewLine & ex.Message & ex.StackTrace, True)
                     Throw
                 End Try
             End Sub
