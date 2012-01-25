@@ -1830,7 +1830,7 @@ Message:
     <value>Descending (Z-A)</value>
   </data>
   <data name="strSpecialKeys" xml:space="preserve">
-    <value>Speical Keys</value>
+    <value>Special Keys</value>
   </data>
   <data name="strSQLInfo" xml:space="preserve">
     <value>Please see Help - Getting started - SQL Configuration for more Info!</value>
