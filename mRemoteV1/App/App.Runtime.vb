@@ -1052,8 +1052,8 @@ Namespace App
         End Sub
 
         Protected Shared Sub PruneBackupFiles(ByVal baseName As String)
-            Dim fileName = Path.GetFileName(baseName)
-            Dim directoryName = Path.GetDirectoryName(baseName)
+            Dim fileName As String = Path.GetFileName(baseName)
+            Dim directoryName As String = Path.GetDirectoryName(baseName)
 
             If String.IsNullOrEmpty(fileName) Or String.IsNullOrEmpty(directoryName) Then Return
 
