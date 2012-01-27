@@ -2253,6 +2253,34 @@ Namespace My
                 Me("SQLDatabaseName") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("10"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property BackupFileKeepCount() As Integer
+            Get
+                Return CType(Me("BackupFileKeepCount"),Integer)
+            End Get
+            Set
+                Me("BackupFileKeepCount") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("{0}.{1:yyyyMMdd-HHmmssffff}.backup"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property BackupFileNameFormat() As String
+            Get
+                Return CType(Me("BackupFileNameFormat"),String)
+            End Get
+            Set
+                Me("BackupFileNameFormat") = value
+            End Set
+        End Property
     End Class
 End Namespace
 
