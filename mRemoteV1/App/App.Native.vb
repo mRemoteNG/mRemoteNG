@@ -90,6 +90,14 @@ Namespace App
 #End Region
 
 #Region "Helpers"
+        Public Shared Function MAKELONG(ByRef wLow As Int32, ByRef wHigh As Int32) As Int32
+            Return wLow Or wHigh << 16
+        End Function
+
+        Public Shared Function MAKELPARAM(ByRef wLow As Int32, ByRef wHigh As Int32) As Int32
+            Return MAKELONG(wLow, wHigh)
+        End Function
+
         Public Shared Function LOWORD(ByRef value As Int32) As Int32
             Return value And &HFFFF
         End Function
@@ -105,6 +113,7 @@ Namespace App
         Public Shared Function HIWORD(ByRef value As IntPtr) As Int32
             Return HIWORD(value.ToInt32)
         End Function
+
 #End Region
 
 #Region "Constants"
@@ -117,6 +126,9 @@ Namespace App
         Public Const MF_STRING As Integer = &H0
         Public Const MF_POPUP As Integer = &H10
         Public Const MF_SEPARATOR As Integer = &H800
+
+        ' WM_LBUTTONDOWN / WM_LBUTTONUP
+        Public Const MK_LBUTTON As Integer = &H1
 
         ' ShowWindow
         Public Const SW_SHOWMAXIMIZED As Integer = 3
