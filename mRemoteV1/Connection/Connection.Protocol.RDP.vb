@@ -176,6 +176,9 @@ Namespace Connection
                                 RDP.TransportSettings.GatewayUsername = Me.Info.Username
                                 RDP.TransportSettings.GatewayPassword = Me.Info.Password
                                 RDP.TransportSettings.GatewayDomain = Me.Info.Domain
+                            ElseIf Info.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard Then
+                                RDP.TransportSettings2.GatewayCredsSource = 1 ' TSC_PROXY_CREDS_MODE_SMARTCARD
+                                RDP.TransportSettings2.GatewayCredSharing = 0
                             Else
                                 RDP.TransportSettings.GatewayUsername = Me.Info.RDGatewayUsername
                                 RDP.TransportSettings.GatewayPassword = Me.Info.RDGatewayPassword
@@ -533,6 +536,8 @@ Namespace Connection
                 No = 0
                 <LocalizedDescription("strUseSameUsernameAndPassword")> _
                 Yes = 1
+                <LocalizedDescription("strUseSmartCard")> _
+                SmartCard = 2
             End Enum
 #End Region
 

@@ -1119,6 +1119,9 @@
   <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
     <value>Utilisez un autre nom d'utilisateur et mot de passe</value>
   </data>
+  <data name="strUseSmartCard" xml:space="preserve">
+    <value>Utilisez une carte à puce</value>
+  </data>
   <data name="strUseSameUsernameAndPassword" xml:space="preserve">
     <value>Utilisez le même nom d'utilisateur et mot de passe</value>
   </data>

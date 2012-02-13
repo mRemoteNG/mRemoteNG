@@ -721,7 +721,7 @@
     <value>Seleccione si las impresoras locales deben ser mostradas en el host remoto.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
-    <value>Seleccione si las Smart Cards locales deben estar disponibles en el host remoto.</value>
+    <value>Seleccione si las smart cards locales deben estar disponibles en el host remoto.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Seleccione cómo deberá ser redireccionado el sonido remoto.</value>

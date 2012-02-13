@@ -2055,4 +2055,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strUpdateCheckPortableEdition" xml:space="preserve">
     <value>mRemoteNG Portable Edition does not currently support automatic updates.</value>
   </data>
+  <data name="strUseSmartCard" xml:space="preserve">
+    <value>Use a smart card</value>
+  </data>
 </root>

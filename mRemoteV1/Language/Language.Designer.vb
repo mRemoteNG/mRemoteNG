@@ -5620,6 +5620,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Use a smart card.
+        '''</summary>
+        Friend Shared ReadOnly Property strUseSmartCard() As String
+            Get
+                Return ResourceManager.GetString("strUseSmartCard", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Use SQL Server to load &amp;&amp; save connections.
         '''</summary>
         Friend Shared ReadOnly Property strUseSQLServer() As String

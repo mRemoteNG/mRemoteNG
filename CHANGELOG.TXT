@@ -17,6 +17,7 @@
   Improved error handling when loading connection files.
   Fixed bugs with creating a new connection file.
   A backup of the connection file is saved when it is loaded. The most recent ten backup copies are kept.
+  Added the option to use a smart card for RD Gateway credentials
 
 1.69 (2011-12-09):
   Fixed issue #66 - Fresh Install Fails to Create Config
