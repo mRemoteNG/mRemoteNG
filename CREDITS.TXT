@@ -1,6 +1,7 @@
 Contributors
 ============
 
+Jason Barbier
 Wiktor Beryt
 Lionel Caignec
 Felix Deimel

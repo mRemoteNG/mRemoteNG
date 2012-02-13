@@ -6,6 +6,7 @@
   Fix issue MR-97 - Integrate Dutch translation
   Fix issue MR-98 - Integrate Russian and Ukranian translations
   Fix issue MR-99 - Integrate Spanish translation
+  Fix issue MR-131 - RD Gateway does not respect setting for use different credentials
   Added compatibility check for "Use FIPS compliant algorithms" security setting.
   Improved reporting of errors when encrypting and decrypting connection files.
   Added partial Polish translation.

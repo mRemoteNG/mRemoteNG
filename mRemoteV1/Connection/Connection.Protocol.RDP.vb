@@ -180,6 +180,7 @@ Namespace Connection
                                 RDP.TransportSettings.GatewayUsername = Me.Info.RDGatewayUsername
                                 RDP.TransportSettings.GatewayPassword = Me.Info.RDGatewayPassword
                                 RDP.TransportSettings.GatewayDomain = Me.Info.RDGatewayDomain
+                                RDP.TransportSettings2.GatewayCredSharing = 0
                             End If
                         End If
                     Else
