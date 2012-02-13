@@ -2093,7 +2093,7 @@ Namespace My
         
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("de,en,en-US,fr,pl")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("de,en,en-US,es,fr,nl,pl,ru,uk")>  _
         Public ReadOnly Property SupportedUICultures() As String
             Get
                 Return CType(Me("SupportedUICultures"),String)
@@ -2251,6 +2251,34 @@ Namespace My
             End Get
             Set
                 Me("SQLDatabaseName") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("10"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property BackupFileKeepCount() As Integer
+            Get
+                Return CType(Me("BackupFileKeepCount"),Integer)
+            End Get
+            Set
+                Me("BackupFileKeepCount") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("{0}.{1:yyyyMMdd-HHmmssffff}.backup"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property BackupFileNameFormat() As String
+            Get
+                Return CType(Me("BackupFileNameFormat"),String)
+            End Get
+            Set
+                Me("BackupFileNameFormat") = value
             End Set
         End Property
     End Class

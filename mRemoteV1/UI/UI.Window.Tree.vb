@@ -543,8 +543,8 @@ Namespace UI
             Private Sub tvConnections_AfterLabelEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.NodeLabelEditEventArgs) Handles tvConnections.AfterLabelEdit
                 Try
                     If My.Settings.SetHostnameLikeDisplayName Then
-                        If e.Node.Text = My.Language.strNewConnection Then
-                            TryCast(e.Node.Tag, mRemoteNG.Connection.Info).Hostname = e.Label
+                        If TypeOf e.Node.Tag Is mRemoteNG.Connection.Info Then
+                            DirectCast(e.Node.Tag, mRemoteNG.Connection.Info).Hostname = e.Label
                         End If
                     End If
 
@@ -1030,10 +1030,14 @@ Namespace UI
 
                     Dim selectedNode As TreeNode = mRemoteNG.Tree.Node.SelectedNode
                     Dim parentNode As TreeNode
-                    If mRemoteNG.Tree.Node.GetNodeType(selectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
-                        parentNode = selectedNode.Parent
+                    If selectedNode Is Nothing Then
+                        parentNode = tvConnections.Nodes(0)
                     Else
-                        parentNode = selectedNode
+                        If mRemoteNG.Tree.Node.GetNodeType(selectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                            parentNode = selectedNode.Parent
+                        Else
+                            parentNode = selectedNode
+                        End If
                     End If
 
                     ' We can only inherit from a container node, not the root node or connection nodes
@@ -1045,7 +1049,7 @@ Namespace UI
 
                     newContainerInfo.ConnectionInfo = New mRemoteNG.Connection.Info(newContainerInfo)
 
-                    App.Runtime.containerList.Add(newContainerInfo)
+                    App.Runtime.ContainerList.Add(newContainerInfo)
                     parentNode.Nodes.Add(newNode)
 
                     Me.tvConnections.SelectedNode = newNode

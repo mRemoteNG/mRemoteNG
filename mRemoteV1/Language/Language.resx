@@ -151,7 +151,7 @@
     <value>Always show panel selection dialog when opening connections</value>
   </data>
   <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
-    <value>Always show System Tray Icon</value>
+    <value>Always show notification area icon</value>
   </data>
   <data name="strAskUpdatesCommandAskLater" xml:space="preserve">
     <value>Ask me again later</value>
@@ -175,7 +175,7 @@
     <value>Automatically get session information</value>
   </data>
   <data name="strAutoSaveEvery" xml:space="preserve">
-    <value>Auto Save every:</value>
+    <value>Auto save every:</value>
   </data>
   <data name="strAutoSaveMins" xml:space="preserve">
     <value>Minutes (0 means disabled)</value>
@@ -851,7 +851,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>To configure PuTTY sessions click this button:</value>
   </data>
   <data name="strLabelPuttyTimeout" xml:space="preserve">
-    <value>Max. PuTTY &amp;&amp; Integrated Ext. Apps wait time:</value>
+    <value>Maximum PuTTY and integrated external tools wait time:</value>
   </data>
   <data name="strLabelReleasedUnderGPL" xml:space="preserve">
     <value>Released under the GNU General Public License (GPL)</value>
@@ -1109,7 +1109,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Website</value>
   </data>
   <data name="strMinimizeToSysTray" xml:space="preserve">
-    <value>Minimize to System Tray</value>
+    <value>Minimize to notification area</value>
   </data>
   <data name="strMoveDown" xml:space="preserve">
     <value>Move down</value>
@@ -1674,7 +1674,7 @@ Message:
     <value>Open RDP Connectin failed!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
-    <value>RDP Reconnection Count</value>
+    <value>RDP reconnection count:</value>
   </data>
   <data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
     <value>RDP SetAuthenticationLevel failed!</value>
@@ -1782,7 +1782,7 @@ Message:
     <value>Kill Session Background failed</value>
   </data>
   <data name="strSetHostnameLikeDisplayName" xml:space="preserve">
-    <value>Set hostname like display name when creating new connections</value>
+    <value>Set hostname like display name when creating or renaming connections</value>
   </data>
   <data name="strSettingMainFormTextFailed" xml:space="preserve">
     <value>Setting main form text failed</value>
@@ -1830,7 +1830,7 @@ Message:
     <value>Descending (Z-A)</value>
   </data>
   <data name="strSpecialKeys" xml:space="preserve">
-    <value>Speical Keys</value>
+    <value>Special Keys</value>
   </data>
   <data name="strSQLInfo" xml:space="preserve">
     <value>Please see Help - Getting started - SQL Configuration for more Info!</value>
@@ -1872,7 +1872,7 @@ Message:
     <value>Status</value>
   </data>
   <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
-    <value>Switch to Notifications panel on</value>
+    <value>Switch to Notifications panel on:</value>
   </data>
   <data name="strTabAdvanced" xml:space="preserve">
     <value>Advanced</value>
@@ -1890,7 +1890,7 @@ Message:
     <value>Telnet</value>
   </data>
   <data name="strTheFollowing" xml:space="preserve">
-    <value>The follwing</value>
+    <value>The following:</value>
   </data>
   <data name="strTitleError" xml:space="preserve">
     <value>Error ({0})</value>
@@ -1923,7 +1923,7 @@ Message:
     <value>Ultra VNC Repeater</value>
   </data>
   <data name="strUltraVNCSCListeningPort" xml:space="preserve">
-    <value>UltraVNC SingleClick Port</value>
+    <value>UltraVNC SingleClick port:</value>
   </data>
   <data name="strUncheckProperties" xml:space="preserve">
     <value>Uncheck the properties you want not to be saved!</value>
@@ -2035,10 +2035,19 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Write log file (mRemoteNG.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
-    <value>XULrunner path</value>
+    <value>XULrunner path:</value>
   </data>
   <data name="strYes" xml:space="preserve">
     <value>Yes</value>
+  </data>
+  <data name="strLabelHostname">
+    <value xml:space="preserve">Hostname:</value>
+  </data>
+  <data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
+    <value>The startup connection file could not be loaded.{0}{0}{2}{0}{3}{0}{0}In order to prevent data loss, {1} will now exit.</value>
+  </data>
+  <data name="strUpdateCheckPortableEdition" xml:space="preserve">
+    <value>mRemoteNG Portable Edition does not currently support automatic updates.</value>
   </data>
   <data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
     <value>The startup connection file could not be loaded.{0}{0}{2}{0}{3}{0}{0}In order to prevent data loss, {1} will now exit.</value>

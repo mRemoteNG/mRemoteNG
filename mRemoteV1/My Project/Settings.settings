@@ -474,7 +474,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="SupportedUICultures" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">de,en,en-US,fr,pl</Value>
+      <Value Profile="(Default)">de,en,en-US,es,fr,nl,pl,ru,uk</Value>
     </Setting>
     <Setting Name="ConDefaultRDGatewayHostname" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
@@ -511,6 +511,12 @@
     </Setting>
     <Setting Name="SQLDatabaseName" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)">mRemoteNG</Value>
+    </Setting>
+    <Setting Name="BackupFileKeepCount" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="BackupFileNameFormat" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{0}.{1:yyyyMMdd-HHmmssffff}.backup</Value>
     </Setting>
   </Settings>
 </SettingsFile>

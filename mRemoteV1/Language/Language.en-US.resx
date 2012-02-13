@@ -123,18 +123,6 @@
   <data name="strPropertyNameColors" xml:space="preserve">
     <value>Colors</value>
   </data>
-  <data name="strComponentsCheck" xml:space="preserve">
-    <value>Components Check</value>
-  </data>
-  <data name="strCcAlwaysShowScreen" xml:space="preserve">
-    <value>Always show this screen at startup</value>
-  </data>
-  <data name="strCcCheckAgain" xml:space="preserve">
-    <value>Refresh</value>
-  </data>
-  <data name="strConnecting" xml:space="preserve">
-    <value>Connecting...</value>
-  </data>
   <data name="strRDP16777216Colors" xml:space="preserve">
     <value>16777216 Colors (24-bit)</value>
   </data>

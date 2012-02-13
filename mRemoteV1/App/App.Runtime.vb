@@ -890,10 +890,11 @@ Namespace App
                 xW.Indentation = 4
 
                 xW.WriteStartDocument()
-                xW.WriteStartElement(My.Language.strConnections)
+                xW.WriteStartElement("Connections") ' Do not localize
+                xW.WriteAttributeString("Name", My.Language.strConnections)
                 xW.WriteAttributeString("Export", "", "False")
                 xW.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY")
-                xW.WriteAttributeString("ConfVersion", "", "2.2")
+                xW.WriteAttributeString("ConfVersion", "", "2.3")
 
                 xW.WriteEndElement()
                 xW.WriteEndDocument()
@@ -911,6 +912,8 @@ Namespace App
                 ' Load config
                 conL.ConnectionFileName = filename
                 conL.Load()
+
+                Windows.treeForm.tvConnections.SelectedNode = conL.RootTreeNode
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strCouldNotCreateNewConnectionsFile & vbNewLine & ex.Message)
             End Try
@@ -976,11 +979,7 @@ Namespace App
                         Exit Sub
                     End If
 
-                    Try
-                        File.Copy(conL.ConnectionFileName, conL.ConnectionFileName & "_BAK", True)
-                    Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strConnectionsFileBackupFailed & vbNewLine & vbNewLine & ex.Message)
-                    End Try
+                    CreateBackupFile(conL.ConnectionFileName)
                 End If
 
                 conL.ConnectionList = ConnectionList
@@ -1025,7 +1024,7 @@ Namespace App
                     TimerSqlWatcher.Start()
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeLoaded & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strConnectionsFileCouldNotBeLoaded & vbNewLine & ex.Message & ex.StackTrace, conL.ConnectionFileName))
                 If My.Settings.UseSQLServer = False Then
                     If Not conL.ConnectionFileName = GetStartupConnectionFileName() Then
                         LoadConnections()
@@ -1036,6 +1035,39 @@ Namespace App
                     End If
                 End If
             End Try
+        End Sub
+
+        Protected Shared Sub CreateBackupFile(ByVal fileName As String)
+            ' This intentionally doesn't prune any existing backup files. We just assume the user doesn't want any new ones created.
+            If My.Settings.BackupFileKeepCount = 0 Then Return
+
+            Try
+                Dim backupFileName As String = String.Format(My.Settings.BackupFileNameFormat, fileName, DateTime.UtcNow)
+                File.Copy(fileName, backupFileName)
+                PruneBackupFiles(fileName)
+            Catch ex As Exception
+                MessageCollector.AddMessage(MessageClass.WarningMsg, My.Language.strConnectionsFileBackupFailed & vbNewLine & vbNewLine & ex.Message)
+                Throw
+            End Try
+        End Sub
+
+        Protected Shared Sub PruneBackupFiles(ByVal baseName As String)
+            Dim fileName As String = Path.GetFileName(baseName)
+            Dim directoryName As String = Path.GetDirectoryName(baseName)
+
+            If String.IsNullOrEmpty(fileName) Or String.IsNullOrEmpty(directoryName) Then Return
+
+            Dim searchPattern As String = String.Format(My.Settings.BackupFileNameFormat, fileName, "*")
+            Dim files As String() = Directory.GetFiles(directoryName, searchPattern)
+
+            If files.Length <= My.Settings.BackupFileKeepCount Then Return
+
+            Array.Sort(files)
+            Array.Resize(files, files.Length - My.Settings.BackupFileKeepCount)
+
+            For Each file As String In files
+                IO.File.Delete(file)
+            Next
         End Sub
 
         Protected Shared Function GetStartupConnectionFileName() As String

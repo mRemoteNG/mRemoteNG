@@ -164,7 +164,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Always show System Tray Icon.
+        '''  Looks up a localized string similar to Always show notification area icon.
         '''</summary>
         Friend Shared ReadOnly Property strAlwaysShowSysTrayIcon() As String
             Get
@@ -236,7 +236,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Auto Save every:.
+        '''  Looks up a localized string similar to Auto save every:.
         '''</summary>
         Friend Shared ReadOnly Property strAutoSaveEvery() As String
             Get
@@ -2168,6 +2168,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Hostname:.
+        '''</summary>
+        Friend Shared ReadOnly Property strLabelHostname() As String
+            Get
+                Return ResourceManager.GetString("strLabelHostname", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Options:.
         '''</summary>
         Friend Shared ReadOnly Property strLabelOptions() As String
@@ -2222,7 +2231,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Max. PuTTY &amp;&amp; Integrated Ext. Apps wait time:.
+        '''  Looks up a localized string similar to Maximum PuTTY and integrated external tools wait time:.
         '''</summary>
         Friend Shared ReadOnly Property strLabelPuttyTimeout() As String
             Get
@@ -2996,7 +3005,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Minimize to System Tray.
+        '''  Looks up a localized string similar to Minimize to notification area.
         '''</summary>
         Friend Shared ReadOnly Property strMinimizeToSysTray() As String
             Get
@@ -4683,7 +4692,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to RDP Reconnection Count.
+        '''  Looks up a localized string similar to RDP reconnection count:.
         '''</summary>
         Friend Shared ReadOnly Property strRdpReconnectCount() As String
             Get
@@ -5007,7 +5016,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Set hostname like display name when creating new connections.
+        '''  Looks up a localized string similar to Set hostname like display name when creating or renaming connections.
         '''</summary>
         Friend Shared ReadOnly Property strSetHostnameLikeDisplayName() As String
             Get
@@ -5277,7 +5286,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Switch to Notifications panel on.
+        '''  Looks up a localized string similar to Switch to Notifications panel on:.
         '''</summary>
         Friend Shared ReadOnly Property strSwitchToErrorsAndInfos() As String
             Get
@@ -5331,7 +5340,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The follwing.
+        '''  Looks up a localized string similar to The following:.
         '''</summary>
         Friend Shared ReadOnly Property strTheFollowing() As String
             Get
@@ -5430,7 +5439,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to UltraVNC SingleClick Port.
+        '''  Looks up a localized string similar to UltraVNC SingleClick port:.
         '''</summary>
         Friend Shared ReadOnly Property strUltraVNCSCListeningPort() As String
             Get
@@ -5773,7 +5782,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to XULrunner path.
+        '''  Looks up a localized string similar to XULrunner path:.
         '''</summary>
         Friend Shared ReadOnly Property strXULrunnerPath() As String
             Get

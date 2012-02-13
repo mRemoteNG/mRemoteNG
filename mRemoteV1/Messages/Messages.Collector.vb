@@ -81,9 +81,8 @@ Namespace Messages
             If My.Settings.SwitchToMCOnError And nMsg.MsgClass = Messages.MessageClass.ErrorMsg Then
                 Debug.Print("Error: " & nMsg.MsgText)
 
-                If My.Settings.WriteLogFile Then
-                    App.Runtime.log.Error(nMsg.MsgText)
-                End If
+                ' Always log error messages
+                App.Runtime.Log.Error(nMsg.MsgText)
 
                 If OnlyLog Then
                     Exit Sub
@@ -100,7 +99,7 @@ Namespace Messages
                 Debug.Print("Report: " & nMsg.MsgText)
 
                 If My.Settings.WriteLogFile Then
-                    App.Runtime.log.Info(nMsg.MsgText)
+                    App.Runtime.Log.Info(nMsg.MsgText)
                 End If
 
                 Exit Sub

@@ -454,6 +454,12 @@ Namespace UI
                                 TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).SetDefaultPort()
                             Case My.Language.strPropertyNameName
                                 App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Text = Me.pGrid.SelectedObject.Name
+                                If My.Settings.SetHostnameLikeDisplayName And TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
+                                    Dim connectionInfo As mRemoteNG.Connection.Info = DirectCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info)
+                                    If Not String.IsNullOrEmpty(connectionInfo.Name) Then
+                                        connectionInfo.Hostname = connectionInfo.Name
+                                    End If
+                                End If
                             Case My.Language.strPropertyNameIcon
                                 Dim conIcon As Icon = mRemoteNG.Connection.Icon.FromString(TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).Icon)
                                 If conIcon IsNot Nothing Then
