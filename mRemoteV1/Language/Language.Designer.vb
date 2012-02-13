@@ -3555,7 +3555,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Select whether local Smart Cards should be available on the remote host..
+        '''  Looks up a localized string similar to Select whether local smart cards should be available on the remote host..
         '''</summary>
         Friend Shared ReadOnly Property strPropertyDescriptionRedirectSmartCards() As String
             Get
@@ -5160,7 +5160,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Speical Keys.
+        '''  Looks up a localized string similar to Special Keys.
         '''</summary>
         Friend Shared ReadOnly Property strSpecialKeys() As String
             Get

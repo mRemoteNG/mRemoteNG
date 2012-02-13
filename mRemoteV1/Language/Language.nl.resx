@@ -682,7 +682,7 @@
     <value>Selecteer of lokale printers getoond moeten worden op de externe host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
-    <value>Selecteer of de lokale Smart Cards moet beschikbaar zijn op de externe host.</value>
+    <value>Selecteer of de lokale smart cards moet beschikbaar zijn op de externe host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Selecteer hoe externe geluiden moeten worden doorgestuurd.</value>

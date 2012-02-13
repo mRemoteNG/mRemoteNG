@@ -1293,7 +1293,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>Select whether local printers should be shown on the remote host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
-    <value>Select whether local Smart Cards should be available on the remote host.</value>
+    <value>Select whether local smart cards should be available on the remote host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Select how remote sound should be redirected.</value>

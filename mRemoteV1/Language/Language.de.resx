@@ -661,7 +661,7 @@
     <value>Wählen Sie, ob ihre lokalen Drucker auf dem entfernten System zur Verfügung stehen sollen.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
-    <value>Wählen Sie, ob Ihre lokalen Smart Cards auf dem entfernten System zur Verfügung stehen sollen.</value>
+    <value>Wählen Sie, ob Ihre lokalen smart Cards auf dem entfernten System zur Verfügung stehen sollen.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Wählen Sie, wie Töne auf dem entfernten System wiedergegeben werden sollen.</value>
