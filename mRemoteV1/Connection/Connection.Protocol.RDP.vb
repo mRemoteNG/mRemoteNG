@@ -168,21 +168,21 @@ Namespace Connection
                 Try
                     If RDP.TransportSettings.GatewayIsSupported = 1 Then
                         MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strRdpGatewayIsSupported, True)
-                        If Me.Info.RDGatewayUsageMethod <> RDGatewayUsageMethod.Never Then
+                        If Info.RDGatewayUsageMethod <> RDGatewayUsageMethod.Never Then
                             RDP.TransportSettings2.GatewayProfileUsageMethod = 1
-                            RDP.TransportSettings.GatewayUsageMethod = Me.Info.RDGatewayUsageMethod
-                            RDP.TransportSettings.GatewayHostname = Me.Info.RDGatewayHostname
-                            If Me.Info.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes Then
-                                RDP.TransportSettings.GatewayUsername = Me.Info.Username
-                                RDP.TransportSettings.GatewayPassword = Me.Info.Password
-                                RDP.TransportSettings.GatewayDomain = Me.Info.Domain
+                            RDP.TransportSettings.GatewayUsageMethod = Info.RDGatewayUsageMethod
+                            RDP.TransportSettings.GatewayHostname = Info.RDGatewayHostname
+                            If Info.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes Then
+                                RDP.TransportSettings.GatewayUsername = Info.Username
+                                RDP.TransportSettings.GatewayPassword = Info.Password
+                                RDP.TransportSettings.GatewayDomain = Info.Domain
                             ElseIf Info.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard Then
                                 RDP.TransportSettings2.GatewayCredsSource = 1 ' TSC_PROXY_CREDS_MODE_SMARTCARD
                                 RDP.TransportSettings2.GatewayCredSharing = 0
                             Else
-                                RDP.TransportSettings.GatewayUsername = Me.Info.RDGatewayUsername
-                                RDP.TransportSettings.GatewayPassword = Me.Info.RDGatewayPassword
-                                RDP.TransportSettings.GatewayDomain = Me.Info.RDGatewayDomain
+                                RDP.TransportSettings.GatewayUsername = Info.RDGatewayUsername
+                                RDP.TransportSettings.GatewayPassword = Info.RDGatewayPassword
+                                RDP.TransportSettings.GatewayDomain = Info.RDGatewayDomain
                                 RDP.TransportSettings2.GatewayCredSharing = 0
                             End If
                         End If
