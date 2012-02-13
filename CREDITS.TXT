@@ -81,8 +81,8 @@ MiniTabControl 1.0
 Copyright © 2008 Felix Deimel
 http://www.appjuice.org/
 
-PuTTY 0.60
-Copyright © 1997-2007 Simon Tatham
+PuTTY 0.62
+Copyright © 1997-2011 Simon Tatham
 MIT License
 http://www.chiark.greenend.org.uk/~sgtatham/putty/
 
