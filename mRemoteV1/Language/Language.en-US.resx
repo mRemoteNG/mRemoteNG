@@ -129,13 +129,13 @@
   <data name="strRDP256Colors" xml:space="preserve">
     <value>256 Colors (8-bit)</value>
   </data>
+  <data name="strRDP32768Colors" xml:space="preserve">
+    <value>32768 Colors (15-bit)</value>
+  </data>
   <data name="strRDP4294967296Colors" xml:space="preserve">
     <value>16777216 Colors (32-bit)</value>
   </data>
   <data name="strRDP65536Colors" xml:space="preserve">
     <value>65536 Colors (16-bit)</value>
-  </data>
-  <data name="strRDP32768Colors" xml:space="preserve">
-    <value>32768 Colors (15-bit)</value>
   </data>
 </root>
