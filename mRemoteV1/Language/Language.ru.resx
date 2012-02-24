@@ -1779,9 +1779,6 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="strWarnings" xml:space="preserve">
     <value>Предупреждения</value>
   </data>
-  <data name="strWindows" xml:space="preserve">
-    <value>ОС Windows</value>
-  </data>
   <data name="strWriteLogFile" xml:space="preserve">
     <value>Запись в лог-файл (mRemoteNG.log)</value>
   </data>
