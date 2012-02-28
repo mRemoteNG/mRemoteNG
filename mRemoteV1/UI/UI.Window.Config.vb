@@ -569,6 +569,7 @@ Namespace UI
                                 strHide.Add("RenderingEngine")
                                 strHide.Add("Resolution")
                                 strHide.Add("UseConsoleSession")
+                                strHide.Add("UseCredSsp")
                                 If conI.VNCAuthMode = mRemoteNG.Connection.Protocol.VNC.AuthMode.AuthVNC Then
                                     strHide.Add("Username;Domain")
                                 End If
@@ -604,6 +605,7 @@ Namespace UI
                                 strHide.Add("RenderingEngine")
                                 strHide.Add("Resolution")
                                 strHide.Add("UseConsoleSession")
+                                strHide.Add("UseCredSsp")
                                 strHide.Add("VNCAuthMode")
                                 strHide.Add("VNCColors")
                                 strHide.Add("VNCCompression")
@@ -641,6 +643,7 @@ Namespace UI
                                 strHide.Add("RenderingEngine")
                                 strHide.Add("Resolution")
                                 strHide.Add("UseConsoleSession")
+                                strHide.Add("UseCredSsp")
                                 strHide.Add("VNCAuthMode")
                                 strHide.Add("VNCColors")
                                 strHide.Add("VNCCompression")
@@ -679,6 +682,7 @@ Namespace UI
                                 strHide.Add("RenderingEngine")
                                 strHide.Add("Resolution")
                                 strHide.Add("UseConsoleSession")
+                                strHide.Add("UseCredSsp")
                                 strHide.Add("Username")
                                 strHide.Add("VNCAuthMode")
                                 strHide.Add("VNCColors")
@@ -718,6 +722,7 @@ Namespace UI
                                 strHide.Add("RenderingEngine")
                                 strHide.Add("Resolution")
                                 strHide.Add("UseConsoleSession")
+                                strHide.Add("UseCredSsp")
                                 strHide.Add("Username")
                                 strHide.Add("VNCAuthMode")
                                 strHide.Add("VNCColors")
@@ -757,6 +762,7 @@ Namespace UI
                                 strHide.Add("RenderingEngine")
                                 strHide.Add("Resolution")
                                 strHide.Add("UseConsoleSession")
+                                strHide.Add("UseCredSsp")
                                 strHide.Add("Username")
                                 strHide.Add("VNCAuthMode")
                                 strHide.Add("VNCColors")
@@ -795,6 +801,7 @@ Namespace UI
                                 strHide.Add("RedirectSound")
                                 strHide.Add("Resolution")
                                 strHide.Add("UseConsoleSession")
+                                strHide.Add("UseCredSsp")
                                 strHide.Add("VNCAuthMode")
                                 strHide.Add("VNCColors")
                                 strHide.Add("VNCCompression")
@@ -831,6 +838,7 @@ Namespace UI
                                 strHide.Add("RedirectSmartCards")
                                 strHide.Add("RedirectSound;Resolution")
                                 strHide.Add("UseConsoleSession")
+                                strHide.Add("UseCredSsp")
                                 strHide.Add("VNCAuthMode")
                                 strHide.Add("VNCColors")
                                 strHide.Add("VNCCompression")
@@ -865,6 +873,7 @@ Namespace UI
                                 strHide.Add("RedirectSound")
                                 strHide.Add("RenderingEngine")
                                 strHide.Add("UseConsoleSession")
+                                strHide.Add("UseCredSsp")
                                 strHide.Add("VNCAuthMode")
                                 strHide.Add("VNCColors")
                                 strHide.Add("VNCCompression")
@@ -902,6 +911,7 @@ Namespace UI
                                 strHide.Add("RenderingEngine")
                                 strHide.Add("Resolution")
                                 strHide.Add("UseConsoleSession")
+                                strHide.Add("UseCredSsp")
                                 strHide.Add("VNCAuthMode")
                                 strHide.Add("VNCColors")
                                 strHide.Add("VNCCompression")
@@ -999,6 +1009,10 @@ Namespace UI
 
                                 If .UseConsoleSession Then
                                     strHide.Add("UseConsoleSession")
+                                End If
+
+                                If .UseCredSsp Then
+                                    strHide.Add("UseCredSsp")
                                 End If
 
                                 If .RenderingEngine Then

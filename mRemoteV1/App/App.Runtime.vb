@@ -663,6 +663,7 @@ Namespace App
                 My.Settings.ConDefaultICAEncryptionStrength = .ICAEncryption.ToString
                 My.Settings.ConDefaultRDPAuthenticationLevel = .RDPAuthenticationLevel.ToString
                 My.Settings.ConDefaultUseConsoleSession = .UseConsoleSession
+                My.Settings.ConDefaultUseCredSsp = .UseCredSsp
                 My.Settings.ConDefaultRenderingEngine = .RenderingEngine.ToString
                 My.Settings.ConDefaultResolution = .Resolution.ToString
                 My.Settings.ConDefaultColors = .Colors.ToString
@@ -723,6 +724,7 @@ Namespace App
                 My.Settings.InhDefaultPort = .Port
                 My.Settings.InhDefaultPuttySession = .PuttySession
                 My.Settings.InhDefaultUseConsoleSession = .UseConsoleSession
+                My.Settings.InhDefaultUseCredSsp = .UseCredSsp
                 My.Settings.InhDefaultRenderingEngine = .RenderingEngine
                 My.Settings.InhDefaultICAEncryptionStrength = .ICAEncryption
                 My.Settings.InhDefaultRDPAuthenticationLevel = .RDPAuthenticationLevel
@@ -894,7 +896,7 @@ Namespace App
                 xW.WriteAttributeString("Name", My.Language.strConnections)
                 xW.WriteAttributeString("Export", "", "False")
                 xW.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY")
-                xW.WriteAttributeString("ConfVersion", "", "2.3")
+                xW.WriteAttributeString("ConfVersion", "", "2.4")
 
                 xW.WriteEndElement()
                 xW.WriteEndDocument()

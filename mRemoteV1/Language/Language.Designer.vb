@@ -3609,6 +3609,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Use the Credential Security Support Provider (CredSSP) for authentication if it is available..
+        '''</summary>
+        Friend Shared ReadOnly Property strPropertyDescriptionUseCredSsp() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionUseCredSsp", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Feel free to enter any information you need here..
         '''</summary>
         Friend Shared ReadOnly Property strPropertyDescriptionUser1() As String
@@ -4055,6 +4064,15 @@ Namespace My
         Friend Shared ReadOnly Property strPropertyNameUseConsoleSession() As String
             Get
                 Return ResourceManager.GetString("strPropertyNameUseConsoleSession", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Use CredSSP.
+        '''</summary>
+        Friend Shared ReadOnly Property strPropertyNameUseCredSsp() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameUseCredSsp", resourceCulture)
             End Get
         End Property
         

@@ -410,6 +410,33 @@ Namespace Connection
                 _RenderingEngine = value
             End Set
         End Property
+
+        Private _useCredSsp As Boolean = My.Settings.ConDefaultUseCredSsp
+        <LocalizedCategory("strCategoryProtocol", 3), _
+            Browsable(True), _
+            LocalizedDisplayName("strPropertyNameUseCredSsp"), _
+            LocalizedDescription("strPropertyDescriptionUseCredSsp"), _
+            TypeConverter(GetType(mRemoteNG.Tools.Misc.YesNoTypeConverter))> _
+        Public Property UseCredSsp() As Boolean
+            Get
+                If Me._Inherit.UseCredSsp And Me._Parent IsNot Nothing Then
+                    Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
+
+                    If Me._IsContainer = True Then
+                        Dim curCont As Container.Info = Me._Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.UseCredSsp
+                Else
+                    Return Me._useCredSsp
+                End If
+            End Get
+            Set(ByVal value As Boolean)
+                Me._useCredSsp = value
+            End Set
+        End Property
 #End Region
 #Region "4 RD Gateway"
         Private _RDGatewayUsageMethod As mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod = Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDGatewayUsageMethod), My.Settings.ConDefaultRDGatewayUsageMethod)
@@ -1038,7 +1065,7 @@ Namespace Connection
             LocalizedDisplayName("strPropertyNameCompression"), _
             LocalizedDescription("strPropertyDescriptionCompression"), _
            TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
-       Public Property VNCCompression() As mRemoteNG.Connection.Protocol.VNC.Compression
+        Public Property VNCCompression() As mRemoteNG.Connection.Protocol.VNC.Compression
             Get
                 If Me._Inherit.VNCCompression And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -1252,7 +1279,7 @@ Namespace Connection
             LocalizedDisplayName("strPropertyNameColors"), _
             LocalizedDescription("strPropertyDescriptionColors"), _
             TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
-       Public Property VNCColors() As mRemoteNG.Connection.Protocol.VNC.Colors
+        Public Property VNCColors() As mRemoteNG.Connection.Protocol.VNC.Colors
             Get
                 If Me._Inherit.VNCColors And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -1548,6 +1575,7 @@ Namespace Connection
                 Me._RedirectSound = val
                 Me._Resolution = val
                 Me._UseConsoleSession = val
+                _useCredSsp = val
                 Me._RenderingEngine = val
                 Me._Username = val
                 Me._Panel = val
@@ -1617,7 +1645,7 @@ Namespace Connection
                     And Me._EnableFontSmoothing And Me._EnableDesktopComposition _
                     And Me._Domain And Me._Icon And Me._Password And Me._Port And Me._Protocol And Me._PuttySession _
                     And Me._RedirectDiskDrives And Me._RedirectKeys And Me._RedirectPorts And Me._RedirectPrinters _
-                    And Me._RedirectSmartCards And Me._RedirectSound And Me._Resolution And Me._UseConsoleSession _
+                    And Me._RedirectSmartCards And Me._RedirectSound And Me._Resolution And Me._UseConsoleSession And _useCredSsp _
                     And Me._RenderingEngine And Me._UserField And Me._ExtApp And Me._Username And Me._Panel And Me._ICAEncryption And Me._RDPAuthenticationLevel And Me._PreExtApp And Me._PostExtApp _
                     And Me._MacAddress And Me._VNCAuthMode And Me._VNCColors And Me._VNCCompression And Me._VNCEncoding And Me._VNCProxyIP _
                     And Me._VNCProxyPassword And Me._VNCProxyPort And Me._VNCProxyType And Me._VNCProxyUsername Then
@@ -1845,6 +1873,21 @@ Namespace Connection
                 End Get
                 Set(ByVal value As Boolean)
                     Me._UseConsoleSession = value
+                End Set
+            End Property
+
+            Private _useCredSsp As Boolean = My.Settings.InhDefaultUseCredSsp
+            <LocalizedCategory("strCategoryProtocol", 4), _
+                Browsable(True), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameUseCredSsp"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionUseCredSsp"), _
+                TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+            Public Property UseCredSsp() As Boolean
+                Get
+                    Return _useCredSsp
+                End Get
+                Set(ByVal value As Boolean)
+                    _useCredSsp = value
                 End Set
             End Property
 #End Region

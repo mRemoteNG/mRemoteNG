@@ -559,6 +559,11 @@ Namespace Config
                             conI.Inherit.EnableDesktopComposition = .Item("InheritEnableDesktopComposition")
                         End If
 
+                        If confVersion >= 2.4 Then
+                            conI.UseCredSsp = .Item("UseCredSsp")
+                            conI.Inherit.UseCredSsp = .Item("InheritUseCredSsp")
+                        End If
+
                         If SQLUpdate = True Then
                             conI.PleaseConnect = .Item("Connected")
                         End If
@@ -1026,6 +1031,11 @@ Namespace Config
                             ' Get inheritance settings
                             conI.Inherit.EnableFontSmoothing = .Attributes("InheritEnableFontSmoothing").Value
                             conI.Inherit.EnableDesktopComposition = .Attributes("InheritEnableDesktopComposition").Value
+                        End If
+
+                        If confVersion >= 2.4 Then
+                            conI.UseCredSsp = .Attributes("UseCredSsp").Value
+                            conI.Inherit.UseCredSsp = .Attributes("InheritUseCredSsp").Value
                         End If
                     End With
                 Catch ex As Exception

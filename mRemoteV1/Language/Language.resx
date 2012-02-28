@@ -1316,6 +1316,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
     <value>Connect to the console session of the remote host.</value>
   </data>
+  <data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
+    <value>Use the Credential Security Support Provider (CredSSP) for authentication if it is available.</value>
+  </data>
   <data name="strPropertyDescriptionUser1" xml:space="preserve">
     <value>Feel free to enter any information you need here.</value>
   </data>
@@ -1465,6 +1468,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>Use Console Session</value>
+  </data>
+  <data name="strPropertyNameUseCredSsp" xml:space="preserve">
+    <value>Use CredSSP</value>
   </data>
   <data name="strPropertyNameUser1" xml:space="preserve">
     <value>User Field</value>
