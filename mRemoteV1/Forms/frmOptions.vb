@@ -1606,7 +1606,7 @@ Public Class frmOptions
             If My.Settings.UseCustomPuttyPath Then
                 mRemoteNG.Connection.Protocol.PuttyBase.PuttyPath = My.Settings.CustomPuttyPath
             Else
-                mRemoteNG.Connection.Protocol.PuttyBase.PuttyPath = My.Application.Info.DirectoryPath & "\putty.exe"
+                mRemoteNG.Connection.Protocol.PuttyBase.PuttyPath = My.Application.Info.DirectoryPath & "\PuTTYNG.exe"
             End If
 
             My.Settings.MaxPuttyWaitTime = Me.numPuttyWaitTime.Value
@@ -1827,7 +1827,7 @@ Public Class frmOptions
     Private Sub btnBrowseCustomPuttyPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseCustomPuttyPath.Click
         Dim oDlg As New OpenFileDialog()
         oDlg.Filter = My.Language.strFilterApplication & "|*.exe|" & My.Language.strFilterAll & "|*.*"
-        oDlg.FileName = "putty.exe"
+        oDlg.FileName = "PuTTYNG.exe"
         oDlg.CheckFileExists = True
         oDlg.Multiselect = False
 

@@ -547,7 +547,7 @@ Namespace UI
 
                 Dim pPath As String = ""
                 If My.Settings.UseCustomPuttyPath = False Then
-                    pPath = My.Application.Info.DirectoryPath & "\putty.exe"
+                    pPath = My.Application.Info.DirectoryPath & "\PuTTYNG.exe"
                 Else
                     pPath = My.Settings.CustomPuttyPath
                 End If

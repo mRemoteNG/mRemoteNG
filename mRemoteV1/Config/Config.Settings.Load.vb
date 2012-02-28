@@ -84,7 +84,7 @@ Namespace Config
                         If My.Settings.UseCustomPuttyPath Then
                             Connection.Protocol.PuttyBase.PuttyPath = My.Settings.CustomPuttyPath
                         Else
-                            Connection.Protocol.PuttyBase.PuttyPath = My.Application.Info.DirectoryPath & "\Putty.exe"
+                            Connection.Protocol.PuttyBase.PuttyPath = My.Application.Info.DirectoryPath & "\PuTTYNG.exe"
                         End If
 
                         If My.Settings.ShowSystemTrayIcon Then
