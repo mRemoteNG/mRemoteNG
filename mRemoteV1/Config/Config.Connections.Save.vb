@@ -400,7 +400,7 @@ Namespace Config
                     End If
 
                     If Me._SaveSecurity.Password = True Then
-                        sqlQuery.CommandText &= "'" & .RDGatewayPassword & "',"
+                        sqlQuery.CommandText &= "'" & Security.Crypt.Encrypt(.RDGatewayPassword, pW) & "',"
                     Else
                         sqlQuery.CommandText &= "'" & "" & "',"
                     End If
