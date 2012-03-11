@@ -739,7 +739,7 @@ Namespace Config
                     End If
 
                     If Me._SaveSecurity.Password = True Then
-                        xW.WriteAttributeString("RDGatewayPassword", "", curConI.RDGatewayPassword)
+                        xW.WriteAttributeString("RDGatewayPassword", "", Security.Crypt.Encrypt(curConI.RDGatewayPassword, pW))
                     Else
                         xW.WriteAttributeString("RDGatewayPassword", "", "")
                     End If
