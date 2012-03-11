@@ -172,11 +172,11 @@ Public Class frmMain
 
         _IsClosing = True
 
+        App.Runtime.Shutdown.BeforeQuit()
+
         For Each Window As UI.Window.Base In wL
             Window.Close()
         Next
-
-        App.Runtime.Shutdown.BeforeQuit()
 
         Debug.Print("[END] - " & Now)
     End Sub
