@@ -254,7 +254,6 @@ Namespace Connection
                 Catch
                     isPuttyNg = False
                 End Try
-                MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format("IsFilePuttyNg(""{0}"") = {1}", file, isPuttyNg), False)
                 Return isPuttyNg
             End Function
 
