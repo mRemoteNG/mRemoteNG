@@ -366,13 +366,13 @@ Namespace App
 
                 ' Windows XP/Windows Server 2003
                 regKey = Registry.LocalMachine.OpenSubKey("System\CurrentControlSet\Control\Lsa")
-                If Not IsNothing(regKey) Then
+                If regKey IsNot Nothing Then
                     If Not regKey.GetValue("FIPSAlgorithmPolicy") = 0 Then isFipsPolicyEnabled = True
                 End If
 
                 ' Windows Vista/Windows Server 2008 and newer
                 regKey = Registry.LocalMachine.OpenSubKey("System\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy")
-                If Not IsNothing(regKey) Then
+                If regKey IsNot Nothing Then
                     If Not regKey.GetValue("Enabled") = 0 Then isFipsPolicyEnabled = True
                 End If
 
