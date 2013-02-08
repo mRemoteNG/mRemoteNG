@@ -9,7 +9,6 @@
   Fix issue MR-99 - Integrate Spanish translation
   Fix issue MR-131 - RD Gateway does not respect setting for use different credentials
   Fix issue MR-277 - Inheritance configuration button not appear in configuration tab 
-  Fix issue MR-306 - Fatal .NET exception on program start
   Added compatibility check for "Use FIPS compliant algorithms" security setting.
   Improved reporting of errors when encrypting and decrypting connection files.
   Added partial Polish translation.
