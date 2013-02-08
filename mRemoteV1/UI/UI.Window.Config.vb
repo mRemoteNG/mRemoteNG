@@ -1,3 +1,4 @@
+Imports mRemoteNG.My
 Imports WeifenLuo.WinFormsUI.Docking
 Imports System.Net.NetworkInformation
 Imports mRemoteNG.App.Runtime
@@ -437,6 +438,11 @@ Namespace UI
                         End If
                     Next
 
+                    If toolStrip Is Nothing Then
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strCouldNotFindToolStripInFilteredPropertyGrid, True)
+                        Return
+                    End If
+
                     If Not _originalPropertyGridToolStripItemCountValid Then
                         _originalPropertyGridToolStripItemCount = propertyGridToolStrip.Items.Count
                         _originalPropertyGridToolStripItemCountValid = True
@@ -452,7 +458,7 @@ Namespace UI
                         ToolStripManager.Merge(customToolStrip, propertyGridToolStrip)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigUiLoadFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strConfigUiLoadFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 

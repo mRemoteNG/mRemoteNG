@@ -2055,4 +2055,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strYes" xml:space="preserve">
     <value>Yes</value>
   </data>
+  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+    <value>Could not find ToolStrip control in FilteredPropertyGrid.</value>
+  </data>
 </root>
