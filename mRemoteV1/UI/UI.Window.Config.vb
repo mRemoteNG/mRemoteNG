@@ -19,22 +19,22 @@ Namespace UI
             Private components As System.ComponentModel.IContainer
             Friend WithEvents pGrid As Azuria.Common.Controls.FilteredPropertyGrid
             Private Sub InitializeComponent()
-                Me.components = New System.ComponentModel.Container
-                Me.pGrid = New Azuria.Common.Controls.FilteredPropertyGrid
-                Me.btnShowInheritance = New System.Windows.Forms.ToolStripButton
-                Me.btnShowDefaultInheritance = New System.Windows.Forms.ToolStripButton
-                Me.btnShowProperties = New System.Windows.Forms.ToolStripButton
-                Me.btnShowDefaultProperties = New System.Windows.Forms.ToolStripButton
-                Me.btnIcon = New System.Windows.Forms.ToolStripButton
-                Me.btnHostStatus = New System.Windows.Forms.ToolStripButton
+                Me.components = New System.ComponentModel.Container()
+                Me.pGrid = New Azuria.Common.Controls.FilteredPropertyGrid()
+                Me.btnShowInheritance = New System.Windows.Forms.ToolStripButton()
+                Me.btnShowDefaultInheritance = New System.Windows.Forms.ToolStripButton()
+                Me.btnShowProperties = New System.Windows.Forms.ToolStripButton()
+                Me.btnShowDefaultProperties = New System.Windows.Forms.ToolStripButton()
+                Me.btnIcon = New System.Windows.Forms.ToolStripButton()
+                Me.btnHostStatus = New System.Windows.Forms.ToolStripButton()
                 Me.cMenIcons = New System.Windows.Forms.ContextMenuStrip(Me.components)
                 Me.SuspendLayout()
                 '
                 'pGrid
                 '
                 Me.pGrid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pGrid.BrowsableProperties = Nothing
                 Me.pGrid.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.pGrid.HiddenAttributes = Nothing
@@ -400,41 +400,6 @@ Namespace UI
 #End Region
 
 #Region "Private Methods"
-            Private tsCustom As ToolStrip = Nothing
-
-            Private Sub Config_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-                ApplyLanguage()
-
-                Try
-                    'Show PropertyGrid Toolbar buttons
-                    tsCustom = New ToolStrip
-                    tsCustom.Items.Add(btnShowProperties)
-                    tsCustom.Items.Add(btnShowInheritance)
-                    tsCustom.Items.Add(btnShowDefaultProperties)
-                    tsCustom.Items.Add(btnShowDefaultInheritance)
-                    tsCustom.Items.Add(btnHostStatus)
-                    tsCustom.Items.Add(btnIcon)
-                    tsCustom.Show()
-
-                    Dim tsDefault As New ToolStrip
-
-                    For Each ctrl As System.Windows.Forms.Control In pGrid.Controls
-                        Dim tStrip As ToolStrip = TryCast(ctrl, ToolStrip)
-
-                        If tStrip IsNot Nothing Then
-                            tsDefault = tStrip
-                            Exit For
-                        End If
-                    Next
-
-                    tsDefault.AllowMerge = True
-                    tsDefault.Items(tsDefault.Items.Count - 1).Visible = False
-                    ToolStripManager.Merge(tsCustom, tsDefault)
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigUiLoadFailed & vbNewLine & ex.Message, True)
-                End Try
-            End Sub
-
             Private Sub ApplyLanguage()
                 btnShowInheritance.Text = My.Language.strButtonInheritance
                 btnShowDefaultInheritance.Text = My.Language.strButtonDefaultInheritance
@@ -444,6 +409,60 @@ Namespace UI
                 btnHostStatus.Text = My.Language.strStatus
                 Text = My.Language.strMenuConfig
                 TabText = My.Language.strMenuConfig
+            End Sub
+
+            Private _originalPropertyGridToolStripItemCountValid As Boolean
+            Private _originalPropertyGridToolStripItemCount As Integer
+
+            Private Sub AddToolStripItems()
+                Try
+                    Dim customToolStrip As ToolStrip = New ToolStrip
+                    customToolStrip.Items.Add(btnShowProperties)
+                    customToolStrip.Items.Add(btnShowInheritance)
+                    customToolStrip.Items.Add(btnShowDefaultProperties)
+                    customToolStrip.Items.Add(btnShowDefaultInheritance)
+                    customToolStrip.Items.Add(btnHostStatus)
+                    customToolStrip.Items.Add(btnIcon)
+                    customToolStrip.Show()
+
+                    Dim propertyGridToolStrip As New ToolStrip
+
+                    Dim toolStrip As ToolStrip
+                    For Each control As System.Windows.Forms.Control In pGrid.Controls
+                        toolStrip = TryCast(control, ToolStrip)
+
+                        If toolStrip IsNot Nothing Then
+                            propertyGridToolStrip = toolStrip
+                            Exit For
+                        End If
+                    Next
+
+                    If Not _originalPropertyGridToolStripItemCountValid Then
+                        _originalPropertyGridToolStripItemCount = propertyGridToolStrip.Items.Count
+                        _originalPropertyGridToolStripItemCountValid = True
+                    End If
+                    Debug.Assert(_originalPropertyGridToolStripItemCount = 5)
+
+                    ' Hide the "Property Pages" button
+                    propertyGridToolStrip.Items(_originalPropertyGridToolStripItemCount - 1).Visible = False
+
+                    Dim expectedToolStripItemCount As Integer = _originalPropertyGridToolStripItemCount + customToolStrip.Items.Count
+                    If propertyGridToolStrip.Items.Count <> expectedToolStripItemCount Then
+                        propertyGridToolStrip.AllowMerge = True
+                        ToolStripManager.Merge(customToolStrip, propertyGridToolStrip)
+                    End If
+                Catch ex As Exception
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigUiLoadFailed & vbNewLine & ex.Message, True)
+                End Try
+            End Sub
+
+            Private Sub Config_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+                ApplyLanguage()
+                AddToolStripItems()
+            End Sub
+
+            Private Sub Config_SystemColorsChanged(sender As System.Object, e As System.EventArgs) Handles MyBase.SystemColorsChanged
+                AddToolStripItems()
             End Sub
 
             Private Sub pGrid_PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs) Handles pGrid.PropertyValueChanged
@@ -1306,7 +1325,6 @@ Namespace UI
                 End Try
             End Sub
 #End Region
-
         End Class
     End Namespace
 End Namespace
