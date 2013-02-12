@@ -92,7 +92,7 @@ Namespace Tools
                 Get
                     If Not Me.Localized Then
                         Me.Localized = True
-                        Me.DisplayNameValue = String.Format(My.Language.strFormatInherit, My.Resources.ResourceManager.GetString(Me.DisplayNameValue))
+                        Me.DisplayNameValue = String.Format(My.Language.strFormatInherit, My.Language.ResourceManager.GetString(Me.DisplayNameValue))
                     End If
 
                     Return MyBase.DisplayName
@@ -116,7 +116,7 @@ Namespace Tools
                 Get
                     If Not Me.Localized Then
                         Me.Localized = True
-                        Me.DescriptionValue = String.Format(My.Language.strFormatInheritDescription, My.Resources.ResourceManager.GetString(Me.DescriptionValue))
+                        Me.DescriptionValue = String.Format(My.Language.strFormatInheritDescription, My.Language.ResourceManager.GetString(Me.DescriptionValue))
                     End If
 
                     Return MyBase.Description
