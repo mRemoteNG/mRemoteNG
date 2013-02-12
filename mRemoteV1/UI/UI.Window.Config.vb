@@ -428,7 +428,7 @@ Namespace UI
 
                     Dim propertyGridToolStrip As New ToolStrip
 
-                    Dim toolStrip As ToolStrip
+                    Dim toolStrip As ToolStrip = Nothing
                     For Each control As System.Windows.Forms.Control In pGrid.Controls
                         toolStrip = TryCast(control, ToolStrip)
 
