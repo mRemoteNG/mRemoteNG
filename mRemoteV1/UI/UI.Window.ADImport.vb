@@ -81,7 +81,7 @@ Namespace UI
                 Me.AD.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                             Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.AD.Domain = "akane"
+                Me.AD.Domain = ""
                 Me.AD.Location = New System.Drawing.Point(0, 0)
                 Me.AD.Name = "AD"
                 Me.AD.SelectedNode = Nothing
