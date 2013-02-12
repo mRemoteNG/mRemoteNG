@@ -659,7 +659,7 @@ Namespace Config
                     End If
 
                     If Me._SaveSecurity.Password = True Then
-                        _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", curConI.RDGatewayPassword)
+                        _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", Security.Crypt.Encrypt(curConI.RDGatewayPassword, _password))
                     Else
                         _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", "")
                     End If
