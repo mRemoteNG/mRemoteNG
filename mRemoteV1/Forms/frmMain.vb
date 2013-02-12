@@ -173,13 +173,13 @@ Public Class frmMain
             End If
         End If
 
+        Shutdown.BeforeQuit()
+
         _IsClosing = True
 
         For Each Window As UI.Window.Base In WindowList
             Window.Close()
         Next
-
-        App.Runtime.Shutdown.BeforeQuit()
 
         Debug.Print("[END] - " & Now)
     End Sub
