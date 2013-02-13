@@ -215,49 +215,123 @@ Namespace UI
             End Sub
 
             ' Main form handle command key events
+            ' Adapted from http://kiwigis.blogspot.com/2009/05/adding-tab-key-support-to-propertygrid.html
             Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
-#If Config = "Debug" Then
-                Debug.Print("key: " & keyData.ToString)
-                Debug.Print("msg: " & msg.Msg)
-                Debug.Print("hwnd: " & msg.HWnd.ToString)
-                Debug.Print("lparam: " & msg.LParam.ToString)
-                Debug.Print("wparam: " & msg.WParam.ToString)
-                Debug.Print("result: " & msg.Result.ToString)
-#End If
-                If keyData = Keys.Tab Then
-                    Dim curGridItemLabel As String = pGrid.SelectedGridItem.Label
-                    Dim gridItemIndex As Integer
+                If (keyData And Keys.Tab) = Keys.Tab Then
+                    Dim selectedItem As GridItem = pGrid.SelectedGridItem
+                    Dim gridRoot As GridItem = selectedItem
+                    While gridRoot.GridItemType <> GridItemType.Root
+                        gridRoot = gridRoot.Parent
+                    End While
 
-                    For gridItemIndex = 0 To pGrid.SelectedGridItem.Parent.GridItems.Count
-                        If pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex).Label = curGridItemLabel Then
-                            Exit For
-                        End If
-                    Next
+                    Dim gridItems As New List(Of GridItem)
+                    FindChildGridItems(gridRoot, gridItems)
 
-                    If pGrid.SelectedGridItem.Parent.GridItems.Count > gridItemIndex + 1 Then
-                        pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex + 1).Select()
-                    Else
-                        pGrid.SelectedGridItem.Parent.GridItems(0).Select()
+                    If Not ContainsGridItemProperty(gridItems) Then Return True
+
+                    Dim newItem As GridItem = selectedItem
+
+                    If keyData = (Keys.Tab Or Keys.Shift) Then
+                        newItem = FindPreviousGridItemProperty(gridItems, selectedItem)
+                    ElseIf keyData = Keys.Tab Then
+                        newItem = FindNextGridItemProperty(gridItems, selectedItem)
                     End If
-                End If
-                If keyData = (Keys.Tab Or Keys.Shift) Then
-                    Dim curGridItemLabel As String = pGrid.SelectedGridItem.Label
-                    Dim gridItemIndex As Integer
 
-                    For gridItemIndex = 0 To pGrid.SelectedGridItem.Parent.GridItems.Count
-                        If pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex).Label = curGridItemLabel Then
-                            Exit For
-                        End If
+                    pGrid.SelectedGridItem = newItem
+
+                    Return True ' Handled
+                Else
+                    Return MyBase.ProcessCmdKey(msg, keyData)
+                End If
+            End Function
+
+            Private Sub FindChildGridItems(item As GridItem, ByRef gridItems As List(Of GridItem))
+                gridItems.Add(item)
+
+                If Not item.Expandable Or item.Expanded Then
+                    For Each child As GridItem In item.GridItems
+                        FindChildGridItems(child, gridItems)
                     Next
+                End If
+            End Sub
 
-                    If gridItemIndex - 1 >= 0 Then
-                        pGrid.SelectedGridItem.Parent.GridItems(gridItemIndex - 1).Select()
-                    Else
-                        pGrid.SelectedGridItem.Parent.GridItems(pGrid.SelectedGridItem.Parent.GridItems.Count - 1).Select()
-                    End If
+            Private Function ContainsGridItemProperty(gridItems As List(Of GridItem)) As Boolean
+                For Each item As GridItem In gridItems
+                    If item.GridItemType = GridItemType.Property Then Return True
+                Next
+                Return False
+            End Function
+
+            Private Function FindPreviousGridItemProperty(gridItems As List(Of GridItem), startItem As GridItem) As GridItem
+                If gridItems.Count = 0 Then Return Nothing
+                If startItem Is Nothing Then Return Nothing
+
+                Dim startIndex As Integer = gridItems.IndexOf(startItem)
+
+                If startItem.GridItemType = GridItemType.Property Then
+                    startIndex = startIndex - 1
+                    If startIndex < 0 Then startIndex = gridItems.Count - 1
                 End If
 
-                Return MyBase.ProcessCmdKey(msg, keyData)
+                Dim previousIndex As Integer = 0
+                Dim previousIndexValid As Boolean = False
+                For index As Integer = startIndex To 0 Step -1
+                    If gridItems(index).GridItemType = GridItemType.Property Then
+                        previousIndex = index
+                        previousIndexValid = True
+                        Exit For
+                    End If
+                Next
+
+                If previousIndexValid Then Return gridItems(previousIndex)
+
+                For index As Integer = gridItems.Count - 1 To startIndex + 1 Step -1
+                    If gridItems(index).GridItemType = GridItemType.Property Then
+                        previousIndex = index
+                        previousIndexValid = True
+                        Exit For
+                    End If
+                Next
+
+                If Not previousIndexValid Then Return Nothing
+
+                Return gridItems(previousIndex)
+            End Function
+
+            Private Function FindNextGridItemProperty(gridItems As List(Of GridItem), startItem As GridItem) As GridItem
+                If gridItems.Count = 0 Then Return Nothing
+                If startItem Is Nothing Then Return Nothing
+
+                Dim startIndex As Integer = gridItems.IndexOf(startItem)
+
+                If startItem.GridItemType = GridItemType.Property Then
+                    startIndex = startIndex + 1
+                    If startIndex >= gridItems.Count Then startIndex = 0
+                End If
+
+                Dim nextIndex As Integer = 0
+                Dim nextIndexValid As Boolean = False
+                For index As Integer = startIndex To gridItems.Count - 1
+                    If gridItems(index).GridItemType = GridItemType.Property Then
+                        nextIndex = index
+                        nextIndexValid = True
+                        Exit For
+                    End If
+                Next
+
+                If nextIndexValid Then Return gridItems(nextIndex)
+
+                For index As Integer = 0 To startIndex - 1
+                    If gridItems(index).GridItemType = GridItemType.Property Then
+                        nextIndex = index
+                        nextIndexValid = True
+                        Exit For
+                    End If
+                Next
+
+                If Not nextIndexValid Then Return Nothing
+
+                Return gridItems(nextIndex)
             End Function
 
             Public Sub SetPropertyGridObject(ByVal Obj As Object)
