@@ -997,33 +997,35 @@ Namespace UI
 #Region "Context Menu Actions"
             Public Sub AddConnection()
                 Try
-                    Dim nNode As TreeNode = mRemoteNG.Tree.Node.AddNode(mRemoteNG.Tree.Node.Type.Connection)
+                    If tvConnections.SelectedNode Is Nothing Then tvConnections.SelectedNode = tvConnections.Nodes.Item(0)
 
-                    If nNode IsNot Nothing Then
-                        Dim nConI As New mRemoteNG.Connection.Info()
-                        If Me.tvConnections.SelectedNode Is Nothing Then Me.tvConnections.SelectedNode = Me.tvConnections.Nodes.Item(0)
-                        If TypeOf Me.tvConnections.SelectedNode.Tag Is mRemoteNG.Container.Info Then
-                            nConI.Parent = Me.tvConnections.SelectedNode.Tag
-                        Else
-                            nConI.Inherit.TurnOffInheritanceCompletely()
-                        End If
-
-                        nConI.TreeNode = nNode
-
-                        nNode.Tag = nConI
-                        ConnectionList.Add(nConI)
-
-                        If mRemoteNG.Tree.Node.GetNodeType(Me.tvConnections.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
-                            Me.tvConnections.SelectedNode.Parent.Nodes.Add(nNode)
-                        Else
-                            Me.tvConnections.SelectedNode.Nodes.Add(nNode)
-                        End If
-
-                        Me.tvConnections.SelectedNode = nNode
-                        Me.tvConnections.SelectedNode.BeginEdit()
+                    Dim newTreeNode As TreeNode = mRemoteNG.Tree.Node.AddNode(mRemoteNG.Tree.Node.Type.Connection)
+                    If newTreeNode Is Nothing Then
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Tree.AddConnection() failed." & vbNewLine & "mRemoteNG.Tree.Node.AddNode() returned Nothing.", True)
+                        Return
                     End If
+
+                    Dim newConnectionInfo As New mRemoteNG.Connection.Info()
+                    If mRemoteNG.Tree.Node.GetNodeType(tvConnections.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                        newConnectionInfo.Parent = tvConnections.SelectedNode.Parent.Tag
+                    Else
+                        newConnectionInfo.Parent = tvConnections.SelectedNode.Tag
+                    End If
+
+                    newConnectionInfo.TreeNode = newTreeNode
+                    newTreeNode.Tag = newConnectionInfo
+                    ConnectionList.Add(newConnectionInfo)
+
+                    If mRemoteNG.Tree.Node.GetNodeType(tvConnections.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                        tvConnections.SelectedNode.Parent.Nodes.Add(newTreeNode)
+                    Else
+                        tvConnections.SelectedNode.Nodes.Add(newTreeNode)
+                    End If
+
+                    tvConnections.SelectedNode = newTreeNode
+                    tvConnections.SelectedNode.BeginEdit()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddConnection (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Tree.AddConnection() failed." & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
