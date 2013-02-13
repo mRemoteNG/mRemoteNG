@@ -1196,7 +1196,9 @@ Namespace UI
             End Sub
 
             Private Sub mMenViewCollapseAllFolders_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewCollapseAllFolders.Click
-                If Me.tvConnections.SelectedNode.IsEditing Then Me.tvConnections.SelectedNode.EndEdit(False)
+                If tvConnections.SelectedNode IsNot Nothing Then
+                    If tvConnections.SelectedNode.IsEditing Then tvConnections.SelectedNode.EndEdit(False)
+                End If
                 mRemoteNG.Tree.Node.CollapseAllNodes()
             End Sub
 #End Region

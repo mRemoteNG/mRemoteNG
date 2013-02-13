@@ -7,6 +7,7 @@
   Fix issue MR-97 - Integrate Dutch translation
   Fix issue MR-98 - Integrate Russian and Ukranian translations
   Fix issue MR-99 - Integrate Spanish translation
+  Fix issue MR-101 - Collapse all folders causes a NullReferenceException
   Fix issue MR-131 - RD Gateway does not respect setting for use different credentials
   Fix issue MR-172 - RDGatewayPassword is unencrypted in confCons.xml file
   Fix issue MR-176 - Del key while editing connection name triggers 'Delete Connection'
