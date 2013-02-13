@@ -3,6 +3,7 @@
   Fix issue MR-77 - VerifyDatabaseVersion (Config.Connections.Save) failed. Version string portion was too short or too long.
   Fix issue MR-78 - Renaming Connections
   Fix issue MR-79 - MoveUp/Down item doesn't work + Sort button broken
+  Fix issue MR-80 - Reconnect previous sessions
   Fix issue MR-93 - Regional settings problem when using SQL connection in mRemoteNG
   Fix issue MR-97 - Integrate Dutch translation
   Fix issue MR-98 - Integrate Russian and Ukranian translations
