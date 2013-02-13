@@ -138,7 +138,7 @@ Partial Class frmMain
         Me.pnlDock.DockBackColor = System.Drawing.SystemColors.Control
         Me.pnlDock.DockLeftPortion = 230
         Me.pnlDock.DockRightPortion = 230
-        Me.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingWindow
+        Me.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi
         Me.pnlDock.Location = New System.Drawing.Point(0, 0)
         Me.pnlDock.Name = "pnlDock"
         Me.pnlDock.Size = New System.Drawing.Size(842, 424)
