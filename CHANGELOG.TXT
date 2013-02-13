@@ -1,4 +1,5 @@
 1.70 (XXXX-XX-XX):
+  Fix issue MR-54 - Error When disconnecting from SSL channel RDP
   Fix issue MR-68 - Config Window Loses Options
   Fix issue MR-77 - VerifyDatabaseVersion (Config.Connections.Save) failed. Version string portion was too short or too long.
   Fix issue MR-78 - Renaming Connections

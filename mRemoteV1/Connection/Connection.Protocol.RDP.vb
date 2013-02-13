@@ -386,9 +386,12 @@ Namespace Connection
                 MyBase.Event_ErrorOccured(Me, e.errorCode)
             End Sub
 
-            Private Sub RDPEvent_OnDisconnected(ByVal sender As Object, ByVal e As AxMSTSCLib.IMsTscAxEvents_OnDisconnectedEvent)
-                Dim Reason As String = RDP.GetErrorDescription(e.discReason, RDP.ExtendedDisconnectReason)
-                MyBase.Event_Disconnected(Me, e.discReason & vbCrLf & Reason)
+            Private Sub RDPEvent_OnDisconnected(ByVal sender As Object, ByVal e As IMsTscAxEvents_OnDisconnectedEvent)
+                Const UI_ERR_NORMAL_DISCONNECT As Integer = &HB08
+                If Not e.discReason = UI_ERR_NORMAL_DISCONNECT Then
+                    Dim reason As String = RDP.GetErrorDescription(e.discReason, RDP.ExtendedDisconnectReason)
+                    Event_Disconnected(Me, e.discReason & vbCrLf & reason)
+                End If
 
                 If My.Settings.ReconnectOnDisconnect Then
                     ReconnectGroup = New ReconnectGroup
@@ -398,7 +401,7 @@ Namespace Connection
                     ReconnectGroup.Show()
                     tmrReconnect.Enabled = True
                 Else
-                    MyBase.Close()
+                    Close()
                 End If
             End Sub
 
