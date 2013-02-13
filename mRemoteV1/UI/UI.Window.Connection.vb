@@ -262,6 +262,8 @@ Namespace UI
                         nTab.Title &= ")"
                     End If
 
+                    nTab.Title = nTab.Title.Replace("&", "&&")
+
                     Dim conIcon As Icon = mRemoteNG.Connection.Icon.FromString(conI.Icon)
                     If conIcon IsNot Nothing Then
                         nTab.Icon = conIcon
