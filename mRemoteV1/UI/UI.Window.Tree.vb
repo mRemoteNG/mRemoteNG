@@ -540,8 +540,14 @@ Namespace UI
                 End Try
             End Sub
 
+            Private Sub tvConnections_BeforeLabelEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.NodeLabelEditEventArgs) Handles tvConnections.BeforeLabelEdit
+                cMenTreeDelete.ShortcutKeys = Keys.None
+            End Sub
+
             Private Sub tvConnections_AfterLabelEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.NodeLabelEditEventArgs) Handles tvConnections.AfterLabelEdit
                 Try
+                    cMenTreeDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete
+
                     If My.Settings.SetHostnameLikeDisplayName Then
                         If TypeOf e.Node.Tag Is mRemoteNG.Connection.Info Then
                             DirectCast(e.Node.Tag, mRemoteNG.Connection.Info).Hostname = e.Label
@@ -1005,7 +1011,7 @@ Namespace UI
                         nConI.TreeNode = nNode
 
                         nNode.Tag = nConI
-                        connectionList.Add(nConI)
+                        ConnectionList.Add(nConI)
 
                         If mRemoteNG.Tree.Node.GetNodeType(Me.tvConnections.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
                             Me.tvConnections.SelectedNode.Parent.Nodes.Add(nNode)
