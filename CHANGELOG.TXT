@@ -1,6 +1,7 @@
 1.70 (XXXX-XX-XX):
   Fix issue MR-54 - Error When disconnecting from SSL channel RDP
   Fix issue MR-68 - Config Window Loses Options
+  Fix issue MR-71 - Minimizing mRemoteNG causes temporary re-size of Putty sessions (windows)
   Fix issue MR-77 - VerifyDatabaseVersion (Config.Connections.Save) failed. Version string portion was too short or too long.
   Fix issue MR-78 - Renaming Connections
   Fix issue MR-79 - MoveUp/Down item doesn't work + Sort button broken
@@ -16,9 +17,11 @@
   Fix issue MR-172 - RDGatewayPassword is unencrypted in confCons.xml file
   Fix issue MR-176 - Del key while editing connection name triggers 'Delete Connection'
   Fix issue MR-181 - Sessions on startup
+  Fix issue MR-199 - when using screen inside putty, screen becomes dead when reduce mremoteNG
   Fix issue MR-202 - The Connection "Tab" show Ampersands as underscores.
   Fix issue MR-214 - Hostname/IP reset
   Fix issue MR-277 - Inheritance configuration button not appear in configuration tab 
+  Fix issue MR-284 - SSH: Text not showing properly
   Added compatibility check for "Use FIPS compliant algorithms" security setting.
   Improved reporting of errors when encrypting and decrypting connection files.
   Added partial Polish translation.
