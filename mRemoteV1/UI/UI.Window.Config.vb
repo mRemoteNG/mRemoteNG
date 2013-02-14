@@ -217,7 +217,7 @@ Namespace UI
             ' Main form handle command key events
             ' Adapted from http://kiwigis.blogspot.com/2009/05/adding-tab-key-support-to-propertygrid.html
             Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
-                If (keyData And Keys.Tab) = Keys.Tab Then
+                If (keyData And Keys.KeyCode) = Keys.Tab Then
                     Dim selectedItem As GridItem = pGrid.SelectedGridItem
                     Dim gridRoot As GridItem = selectedItem
                     While gridRoot.GridItemType <> GridItemType.Root
