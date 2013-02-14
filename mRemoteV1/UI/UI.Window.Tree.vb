@@ -1,3 +1,4 @@
+Imports mRemoteNG.Connection
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 
@@ -547,12 +548,6 @@ Namespace UI
             Private Sub tvConnections_AfterLabelEdit(ByVal sender As Object, ByVal e As System.Windows.Forms.NodeLabelEditEventArgs) Handles tvConnections.AfterLabelEdit
                 Try
                     cMenTreeDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete
-
-                    If My.Settings.SetHostnameLikeDisplayName Then
-                        If TypeOf e.Node.Tag Is mRemoteNG.Connection.Info Then
-                            DirectCast(e.Node.Tag, mRemoteNG.Connection.Info).Hostname = e.Label
-                        End If
-                    End If
 
                     mRemoteNG.Tree.Node.FinishRenameSelectedNode(e.Label)
                     Windows.configForm.pGrid_SelectedObjectChanged()

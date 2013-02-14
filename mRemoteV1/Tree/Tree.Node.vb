@@ -420,18 +420,20 @@ Namespace Tree
         End Sub
 
         Public Shared Sub StartRenameSelectedNode()
-            If SelectedNode IsNot Nothing Then
-                Windows.treeForm.cMenTreeDelete.ShortcutKeys = Keys.None
-                SelectedNode.BeginEdit()
-            End If
+            If SelectedNode IsNot Nothing Then SelectedNode.BeginEdit()
         End Sub
 
-        Public Shared Sub FinishRenameSelectedNode(ByVal NewName As String)
-            Windows.treeForm.cMenTreeDelete.ShortcutKeys = Keys.Delete
+        Public Shared Sub FinishRenameSelectedNode(ByVal newName As String)
+            If newName Is Nothing Then Return
 
-            If NewName IsNot Nothing Then
-                If NewName.Length > 0 Then
-                    SelectedNode.Tag.Name = NewName
+            If newName.Length > 0 Then
+                SelectedNode.Tag.Name = newName
+
+                If My.Settings.SetHostnameLikeDisplayName Then
+                    Dim connectionInfo As Connection.Info = TryCast(SelectedNode.Tag, Connection.Info)
+                    If (connectionInfo IsNot Nothing) Then
+                        connectionInfo.Hostname = newName
+                    End If
                 End If
             End If
         End Sub

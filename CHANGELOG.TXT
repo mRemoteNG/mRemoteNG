@@ -17,6 +17,7 @@
   Fix issue MR-176 - Del key while editing connection name triggers 'Delete Connection'
   Fix issue MR-181 - Sessions on startup
   Fix issue MR-202 - The Connection "Tab" show Ampersands as underscores.
+  Fix issue MR-214 - Hostname/IP reset
   Fix issue MR-277 - Inheritance configuration button not appear in configuration tab 
   Added compatibility check for "Use FIPS compliant algorithms" security setting.
   Improved reporting of errors when encrypting and decrypting connection files.
