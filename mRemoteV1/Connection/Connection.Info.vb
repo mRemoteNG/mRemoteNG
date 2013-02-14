@@ -1478,7 +1478,9 @@ Namespace Connection
 
 #Region "Methods"
         Public Function Copy() As Connection.Info
-            Return Me.MemberwiseClone
+            Dim newConnectionInfo As Connection.Info = MemberwiseClone()
+            newConnectionInfo._OpenConnections = New Connection.Protocol.List
+            Return newConnectionInfo
         End Function
 
         Public Sub New()
