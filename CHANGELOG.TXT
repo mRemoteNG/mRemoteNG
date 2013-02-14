@@ -7,6 +7,7 @@
   Fix issue MR-78 - Renaming Connections
   Fix issue MR-79 - MoveUp/Down item doesn't work + Sort button broken
   Fix issue MR-80 - Reconnect previous sessions
+  Fix issue MR-81 - Problem Duplicating Folder w/ Sub-Folders
   Fix issue MR-93 - Regional settings problem when using SQL connection in mRemoteNG
   Fix issue MR-96 - When pressing SHIFT+F4 to create a new connection inside a folder, the new connections doesn't inherit any properties from its parent
   Fix issue MR-97 - Integrate Dutch translation

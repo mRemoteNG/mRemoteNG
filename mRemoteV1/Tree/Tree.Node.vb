@@ -306,7 +306,7 @@ Namespace Tree
                     newInheritance.Parent = newConnectionInfo
                     newConnectionInfo.Inherit = newInheritance
 
-                    connectionList.Add(newConnectionInfo)
+                    ConnectionList.Add(newConnectionInfo)
 
                     Dim newTreeNode As New TreeNode(newConnectionInfo.Name)
                     newTreeNode.Tag = newConnectionInfo
@@ -316,8 +316,8 @@ Namespace Tree
                     newConnectionInfo.TreeNode = newTreeNode
 
                     If parentNode Is Nothing Then
-                        oldTreeNode.Parent.Nodes.Add(newTreeNode)
-                        Tree.Node.TreeView.SelectedNode = newTreeNode
+                        oldTreeNode.Parent.Nodes.Insert(oldTreeNode.Index + 1, newTreeNode)
+                        TreeView.SelectedNode = newTreeNode
                     Else
                         parentNode.Nodes.Add(newTreeNode)
                     End If
@@ -332,15 +332,20 @@ Namespace Tree
                     newTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Container
                     newContainerInfo.ConnectionInfo.Parent = newContainerInfo
 
-                    containerList.Add(newContainerInfo)
+                    ContainerList.Add(newContainerInfo)
 
-                    oldTreeNode.Parent.Nodes.Add(newTreeNode)
-
-                    Tree.Node.TreeView.SelectedNode = newTreeNode
+                    If parentNode Is Nothing Then
+                        oldTreeNode.Parent.Nodes.Insert(oldTreeNode.Index + 1, newTreeNode)
+                        TreeView.SelectedNode = newTreeNode
+                    Else
+                        parentNode.Nodes.Add(newTreeNode)
+                    End If
 
                     For Each childTreeNode As TreeNode In oldTreeNode.Nodes
                         CloneNode(childTreeNode, newTreeNode)
                     Next
+
+                    newTreeNode.Expand()
                 End If
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Language.strErrorCloneNodeFailed, ex.Message))
