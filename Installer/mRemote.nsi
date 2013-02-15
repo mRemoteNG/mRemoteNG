@@ -96,7 +96,8 @@ Function .onInit
 	Win9x:
 	doit:
 		# We can install
-		Call SelectLanguage
+		IfSilent +2
+			Call SelectLanguage
 		Goto end
 	noop:
 		MessageBox MB_OK "$(RequiresAdminUser)"

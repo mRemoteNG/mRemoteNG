@@ -1,4 +1,5 @@
 1.70 (XXXX-XX-XX):
+  Fix issue MR-47 - Silent Installation Prompts for Language
   Fix issue MR-54 - Error When disconnecting from SSL channel RDP
   Fix issue MR-58 - Bug when duplicating connection in connection view 
   Fix issue MR-68 - Config Window Loses Options
