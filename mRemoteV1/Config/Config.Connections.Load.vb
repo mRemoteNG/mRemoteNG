@@ -639,7 +639,7 @@ Namespace Config
                     End If
 
                     If xDom.DocumentElement.HasAttribute("ConfVersion") Then
-                        Me.confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes("ConfVersion").Value, CultureInfo.InvariantCulture)
+                        Me.confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes("ConfVersion").Value.Replace(",", "."), CultureInfo.InvariantCulture)
                     Else
                         MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strOldConffile)
                     End If
@@ -721,7 +721,7 @@ Namespace Config
                     App.Runtime.Windows.treeForm.InitialRefresh()
                 Catch ex As Exception
                     App.Runtime.IsConnectionsFileLoaded = False
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed & vbNewLine & ex.Message & ex.StackTrace, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed & vbNewLine & ex.Message & vbNewLine & ex.StackTrace, True)
                     Throw
                 End Try
             End Sub
