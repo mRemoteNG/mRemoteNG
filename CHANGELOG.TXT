@@ -23,6 +23,7 @@
   Fix issue MR-199 - when using screen inside putty, screen becomes dead when reduce mremoteNG
   Fix issue MR-202 - The Connection "Tab" show Ampersands as underscores.
   Fix issue MR-214 - Hostname/IP reset
+  Fix issue MR-233 - Backslash at end of password prevents success of putty invocation and corresponding auto-logon
   Fix issue MR-277 - Inheritance configuration button not appear in configuration tab 
   Fix issue MR-284 - SSH: Text not showing properly
   Added compatibility check for "Use FIPS compliant algorithms" security setting.
