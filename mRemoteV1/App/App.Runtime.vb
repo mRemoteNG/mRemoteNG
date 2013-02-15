@@ -239,8 +239,8 @@ Namespace App
             Public Shared quickyPanel As New DockContent
             Public Shared optionsForm As frmOptions
             Public Shared optionsPanel As New DockContent
-            Public Shared saveasForm As UI.Window.SaveAs
-            Public Shared saveasPanel As New DockContent
+            Public Shared exportForm As UI.Window.Export
+            Public Shared exportPanel As New DockContent
             Public Shared aboutForm As UI.Window.About
             Public Shared aboutPanel As New DockContent
             Public Shared updateForm As UI.Window.Update
@@ -278,11 +278,11 @@ Namespace App
                         Case UI.Window.Type.Options
                             Windows.optionsForm = New frmOptions(Windows.optionsPanel)
                             Windows.optionsForm.Show(frmMain.pnlDock)
-                        Case UI.Window.Type.SaveAs
-                            Windows.saveasForm = New UI.Window.SaveAs(Windows.saveasPanel)
-                            Windows.saveasPanel = Windows.saveasForm
+                        Case UI.Window.Type.Export
+                            Windows.exportForm = New UI.Window.Export(Windows.exportPanel)
+                            Windows.exportPanel = Windows.exportForm
 
-                            Windows.saveasForm.Show(frmMain.pnlDock)
+                            Windows.exportForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.SSHTransfer
                             Windows.sshtransferForm = New UI.Window.SSHTransfer(Windows.sshtransferPanel)
                             Windows.sshtransferPanel = Windows.sshtransferForm
@@ -1356,18 +1356,16 @@ Namespace App
         End Sub
 
         Public Shared Sub SaveConnections(Optional ByVal Update As Boolean = False)
+            Dim previousTimerState As Boolean = False
+
             Try
                 If Update = True And My.Settings.UseSQLServer = False Then
                     Exit Sub
                 End If
 
-                Dim tmrWasEnabled As Boolean
-
                 If TimerSqlWatcher IsNot Nothing Then
-                    tmrWasEnabled = TimerSqlWatcher.Enabled
-                    If TimerSqlWatcher.Enabled = True Then
-                        TimerSqlWatcher.Stop()
-                    End If
+                    previousTimerState = TimerSqlWatcher.Enabled
+                    TimerSqlWatcher.Enabled = False
                 End If
 
                 Dim conS As New Config.Connections.Save
@@ -1399,70 +1397,78 @@ Namespace App
                 If My.Settings.UseSQLServer = True Then
                     LastSqlUpdate = Now
                 End If
-
-                If tmrWasEnabled Then
-                    TimerSqlWatcher.Start()
-                End If
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeSaved & vbNewLine & ex.Message)
+            Finally
+                If TimerSqlWatcher IsNot Nothing Then
+                    TimerSqlWatcher.Enabled = previousTimerState
+                End If
             End Try
         End Sub
 
-        Public Shared Sub SaveConnectionsAs(ByVal SaveSecurity As Security.Save, ByVal RootNode As TreeNode)
-            Dim conS As New Config.Connections.Save
-            Try
-                Dim tmrWasEnabled As Boolean
+        Public Shared Sub SaveConnectionsAs(Optional ByVal rootNode As TreeNode = Nothing, Optional ByVal saveSecurity As Security.Save = Nothing)
+            Dim connectionsSave As New Config.Connections.Save
+            Dim previousTimerState As Boolean = False
 
+            Try
                 If TimerSqlWatcher IsNot Nothing Then
-                    tmrWasEnabled = TimerSqlWatcher.Enabled
-                    If TimerSqlWatcher.Enabled = True Then
-                        TimerSqlWatcher.Stop()
-                    End If
+                    previousTimerState = TimerSqlWatcher.Enabled
+                    TimerSqlWatcher.Enabled = False
                 End If
 
+                Dim export As Boolean = False
+                Dim saveAsDialog As SaveFileDialog
+                If rootNode Is Nothing Then
+                    rootNode = Windows.treeForm.tvConnections.Nodes(0)
+                    saveAsDialog = Controls.ConnectionsSaveAsDialog
+                Else
+                    export = True
+                    saveAsDialog = Controls.ConnectionsExportDialog
+                End If
 
-                Dim sD As SaveFileDialog = Tools.Controls.ConnectionsSaveAsDialog
-
-                If sD.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-                    conS.ConnectionFileName = sD.FileName
+                If saveAsDialog.ShowDialog = System.Windows.Forms.DialogResult.OK Then
+                    connectionsSave.ConnectionFileName = saveAsDialog.FileName
                 Else
                     Exit Sub
                 End If
 
-                Select Case sD.FilterIndex
-                    Case 1
-                        conS.SaveFormat = Config.Connections.Save.Format.mRXML
-                    Case 2
-                        conS.SaveFormat = Config.Connections.Save.Format.mRCSV
-                    Case 3
-                        conS.SaveFormat = Config.Connections.Save.Format.vRDCSV
-                End Select
+                If export Then
+                    Select Case saveAsDialog.FilterIndex
+                        Case 1
+                            connectionsSave.SaveFormat = Config.Connections.Save.Format.mRXML
+                        Case 2
+                            connectionsSave.SaveFormat = Config.Connections.Save.Format.mRCSV
+                        Case 3
+                            connectionsSave.SaveFormat = Config.Connections.Save.Format.vRDCSV
+                    End Select
+                Else
+                    connectionsSave.SaveFormat = Config.Connections.Save.Format.mRXML
 
-                If RootNode Is Windows.treeForm.tvConnections.Nodes(0) Then
-                    If conS.SaveFormat <> Config.Connections.Save.Format.mRXML And conS.SaveFormat <> Config.Connections.Save.Format.None Then
+                    If connectionsSave.ConnectionFileName = Info.Connections.DefaultConnectionsPath & "\" & Info.Connections.DefaultConnectionsFile Then
+                        My.Settings.LoadConsFromCustomLocation = False
                     Else
-                        If conS.ConnectionFileName = App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile Then
-                            My.Settings.LoadConsFromCustomLocation = False
-                        Else
-                            My.Settings.LoadConsFromCustomLocation = True
-                            My.Settings.CustomConsPath = conS.ConnectionFileName
-                        End If
+                        My.Settings.LoadConsFromCustomLocation = True
+                        My.Settings.CustomConsPath = connectionsSave.ConnectionFileName
                     End If
                 End If
 
-                conS.ConnectionList = ConnectionList
-                conS.ContainerList = ContainerList
-                If RootNode IsNot Windows.treeForm.tvConnections.Nodes(0) Then
-                    conS.Export = True
-                End If
-                conS.SaveSecurity = SaveSecurity
-                conS.RootTreeNode = RootNode
+                connectionsSave.ConnectionList = ConnectionList
+                connectionsSave.ContainerList = ContainerList
+                connectionsSave.RootTreeNode = rootNode
 
-                conS.Save()
+                connectionsSave.Export = export
+
+                If saveSecurity Is Nothing Then saveSecurity = New Security.Save
+                connectionsSave.SaveSecurity = saveSecurity
+
+                connectionsSave.Save()
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strConnectionsFileCouldNotSaveAs, conS.ConnectionFileName) & vbNewLine & ex.Message)
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, String.Format(My.Language.strConnectionsFileCouldNotSaveAs, connectionsSave.ConnectionFileName) & vbNewLine & ex.Message)
+            Finally
+                If TimerSqlWatcher IsNot Nothing Then
+                    TimerSqlWatcher.Enabled = previousTimerState
+                End If
             End Try
-
         End Sub
 #End Region
 

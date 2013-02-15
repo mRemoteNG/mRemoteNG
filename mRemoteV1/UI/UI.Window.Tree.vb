@@ -723,7 +723,7 @@ Namespace UI
                             Me.cMenTreeToolsTransferFile.Enabled = False
 
                             Me.cMenTreeToolsImportExport.Enabled = True
-                            Me.cMenTreeToolsImportExportExportmRemoteXML.Enabled = False
+                            Me.cMenTreeToolsImportExportExportmRemoteXML.Enabled = True
                             Me.cMenTreeToolsImportExportImportFromAD.Enabled = True
                             Me.cMenTreeToolsImportExportImportmRemoteXML.Enabled = True
 
@@ -1106,10 +1106,10 @@ Namespace UI
             Private Sub ExportXML()
                 Try
                     If Me.tvConnections.SelectedNode IsNot Nothing Then
-                        Windows.saveasForm = New UI.Window.SaveAs(Windows.saveasPanel, True, Me.tvConnections.SelectedNode)
-                        Windows.saveasPanel = Windows.saveasForm
+                        Windows.exportForm = New UI.Window.Export(Windows.exportPanel, Me.tvConnections.SelectedNode)
+                        Windows.exportPanel = Windows.exportForm
 
-                        Windows.saveasForm.Show(frmMain.pnlDock)
+                        Windows.exportForm.Show(frmMain.pnlDock)
                     End If
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ExportXml (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)

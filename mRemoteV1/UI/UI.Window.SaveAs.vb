@@ -3,7 +3,7 @@ Imports mRemoteNG.App.Runtime
 
 Namespace UI
     Namespace Window
-        Public Class SaveAs
+        Public Class Export
             Inherits UI.Window.Base
 
 #Region "Form Init"
@@ -112,7 +112,7 @@ Namespace UI
                 Me.PictureBox1.TabIndex = 112
                 Me.PictureBox1.TabStop = False
                 '
-                'SaveAs
+                'Export
                 '
                 Me.AcceptButton = Me.btnOK
                 Me.CancelButton = Me.btnCancel
@@ -124,9 +124,9 @@ Namespace UI
                 Me.Controls.Add(Me.btnCancel)
                 Me.Controls.Add(Me.btnOK)
                 Me.Icon = Global.mRemoteNG.My.Resources.Resources.Connections_SaveAs_Icon
-                Me.Name = "SaveAs"
-                Me.TabText = "Save Connections As"
-                Me.Text = "Save Connections As"
+                Me.Name = "Export"
+                Me.TabText = "Export Connections"
+                Me.Text = "Export Connections"
                 CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
                 Me.ResumeLayout(False)
                 Me.PerformLayout()
@@ -135,50 +135,33 @@ Namespace UI
 #End Region
 
 #Region "Public Properties"
-            Private _Export As Boolean
-            Public Property Export() As Boolean
-                Get
-                    Return _Export
-                End Get
-                Set(ByVal value As Boolean)
-                    _Export = value
-                End Set
-            End Property
-
-            Private _TreeNode As TreeNode
+            Private _treeNode As TreeNode
             Public Property TreeNode() As TreeNode
                 Get
-                    Return _TreeNode
+                    Return _treeNode
                 End Get
                 Set(ByVal value As TreeNode)
-                    _TreeNode = value
+                    _treeNode = value
                 End Set
             End Property
 #End Region
 
 #Region "Public Methods"
-            Public Sub New(ByVal Panel As DockContent)
-                Me.New(Panel, False, Nothing)
+            Public Sub New(ByVal panel As DockContent)
+                Me.New(panel, Nothing)
             End Sub
 
-            Public Sub New(ByVal Panel As DockContent, ByVal Export As Boolean, ByVal TreeNode As TreeNode)
-                Me.WindowType = Type.SaveAs
-                Me.DockPnl = Panel
-                Me.InitializeComponent()
+            Public Sub New(ByVal panel As DockContent, ByVal treeNode As TreeNode)
+                WindowType = Type.Export
+                DockPnl = panel
+                InitializeComponent()
 
-                If Export Then
-                    Me.SetFormText(My.Language.strExport)
-                Else
-                    Me.SetFormText(My.Language.strMenuSaveConnectionFileAs)
-                End If
-
-                Me._Export = Export
-                Me._TreeNode = TreeNode
+                _treeNode = treeNode
             End Sub
 #End Region
 
 #Region "Form Stuff"
-            Private Sub SaveAs_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+            Private Sub Export_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
                 ApplyLanguage()
             End Sub
 
@@ -191,8 +174,8 @@ Namespace UI
                 btnOK.Text = My.Language.strButtonOK
                 Label1.Text = My.Language.strUncheckProperties
                 lblMremoteXMLOnly.Text = My.Language.strPropertiesWillOnlyBeSavedMRemoteXML
-                TabText = My.Language.strMenuSaveConnectionFileAs
-                Text = My.Language.strMenuSaveConnectionFileAs
+                TabText = My.Language.strExport
+                Text = My.Language.strExport
             End Sub
 
             Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
@@ -201,21 +184,21 @@ Namespace UI
 
             Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
                 Try
-                    If _TreeNode Is Nothing Then
-                        _TreeNode = App.Runtime.Windows.treeForm.tvConnections.Nodes(0)
+                    If _treeNode Is Nothing Then
+                        _treeNode = Windows.treeForm.tvConnections.Nodes(0)
                     End If
 
-                    Dim sS As New Security.Save()
+                    Dim saveSecurity As New Security.Save()
 
-                    sS.Username = Me.lvSecurity.Items(0).Checked
-                    sS.Password = Me.lvSecurity.Items(1).Checked
-                    sS.Domain = Me.lvSecurity.Items(2).Checked
-                    sS.Inheritance = Me.lvSecurity.Items(3).Checked
+                    saveSecurity.Username = lvSecurity.Items(0).Checked
+                    saveSecurity.Password = lvSecurity.Items(1).Checked
+                    saveSecurity.Domain = lvSecurity.Items(2).Checked
+                    saveSecurity.Inheritance = lvSecurity.Items(3).Checked
 
-                    App.Runtime.SaveConnectionsAs(sS, _TreeNode)
-                    Me.Close()
+                    SaveConnectionsAs(_treeNode, saveSecurity)
+                    Close()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "btnOK_Click (UI.Window.SaveAs) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Export.btnOK_Click() failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region

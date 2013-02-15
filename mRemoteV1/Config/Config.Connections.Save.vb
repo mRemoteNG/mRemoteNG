@@ -471,14 +471,12 @@ Namespace Config
                     If IsConnectionsFileLoaded = False Then Exit Sub
 
                     Dim treeNode As TreeNode
-                    Dim isExport As Boolean = False
 
                     If Tree.Node.GetNodeType(RootTreeNode) = Tree.Node.Type.Root Then
                         treeNode = RootTreeNode.Clone
                     Else
                         treeNode = New TreeNode("mR|Export (" + Tools.Misc.DBDate(Now) + ")")
                         treeNode.Nodes.Add(RootTreeNode.Clone)
-                        isExport = True
                     End If
 
                     Dim tempFileName As String = Path.GetTempFileName()
@@ -491,9 +489,9 @@ Namespace Config
 
                     _xmlTextWriter.WriteStartElement("Connections") ' Do not localize
                     _xmlTextWriter.WriteAttributeString("Name", "", treeNode.Text)
-                    _xmlTextWriter.WriteAttributeString("Export", "", isExport)
+                    _xmlTextWriter.WriteAttributeString("Export", "", Export)
 
-                    If isExport Then
+                    If Export Then
                         _xmlTextWriter.WriteAttributeString("Protected", "", Security.Crypt.Encrypt("ThisIsNotProtected", _password))
                     Else
                         If TryCast(treeNode.Tag, Root.Info).Password = True Then
@@ -514,12 +512,14 @@ Namespace Config
                     _xmlTextWriter.WriteEndElement()
                     _xmlTextWriter.Close()
 
-                    Dim backupFileName As String = ConnectionFileName & ".backup"
-                    File.Delete(backupFileName)
-                    File.Move(ConnectionFileName, backupFileName)
+                    If Not Export And File.Exists(ConnectionFileName) Then
+                        Dim backupFileName As String = ConnectionFileName & ".backup"
+                        File.Delete(backupFileName)
+                        File.Move(ConnectionFileName, backupFileName)
+                    End If
                     File.Move(tempFileName, ConnectionFileName)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveToXml failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveToXml failed" & vbNewLine & ex.Message, False)
                 End Try
             End Sub
 

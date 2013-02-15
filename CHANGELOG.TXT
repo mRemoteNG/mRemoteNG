@@ -19,6 +19,7 @@
   Fix issue MR-172 - RDGatewayPassword is unencrypted in confCons.xml file
   Fix issue MR-176 - Del key while editing connection name triggers 'Delete Connection'
   Fix issue MR-181 - Sessions on startup
+  Fix issue MR-196 - Cannot export list without usernames and passwords
   Fix issue MR-199 - when using screen inside putty, screen becomes dead when reduce mremoteNG
   Fix issue MR-202 - The Connection "Tab" show Ampersands as underscores.
   Fix issue MR-214 - Hostname/IP reset

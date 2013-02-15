@@ -179,15 +179,27 @@ Namespace Tools
         End Class
 
         Public Shared Function ConnectionsSaveAsDialog() As SaveFileDialog
-            Dim sDlg As New SaveFileDialog()
-            sDlg.CheckPathExists = True
-            sDlg.InitialDirectory = App.Info.Connections.DefaultConnectionsPath
-            sDlg.FileName = App.Info.Connections.DefaultConnectionsFile
-            sDlg.OverwritePrompt = True
+            Dim saveFileDialog As New SaveFileDialog()
+            saveFileDialog.CheckPathExists = True
+            saveFileDialog.InitialDirectory = App.Info.Connections.DefaultConnectionsPath
+            saveFileDialog.FileName = App.Info.Connections.DefaultConnectionsFile
+            saveFileDialog.OverwritePrompt = True
 
-            sDlg.Filter = My.Language.strFiltermRemoteXML & "|*.xml|" & My.Language.strFiltermRemoteCSV & "|*.csv|" & My.Language.strFiltervRD2008CSV & "|*.csv|" & My.Language.strFilterAll & "|*.*"
+            saveFileDialog.Filter = My.Language.strFiltermRemoteXML & "|*.xml|" & My.Language.strFilterAll & "|*.*"
 
-            Return sDlg
+            Return saveFileDialog
+        End Function
+
+        Public Shared Function ConnectionsExportDialog() As SaveFileDialog
+            Dim saveFileDialog As New SaveFileDialog()
+            saveFileDialog.CheckPathExists = True
+            saveFileDialog.InitialDirectory = App.Info.Connections.DefaultConnectionsPath
+            saveFileDialog.FileName = App.Info.Connections.DefaultConnectionsFile
+            saveFileDialog.OverwritePrompt = True
+
+            saveFileDialog.Filter = My.Language.strFiltermRemoteXML & "|*.xml|" & My.Language.strFiltermRemoteCSV & "|*.csv|" & My.Language.strFiltervRD2008CSV & "|*.csv|" & My.Language.strFilterAll & "|*.*"
+
+            Return saveFileDialog
         End Function
 
         Public Shared Function ConnectionsLoadDialog() As OpenFileDialog

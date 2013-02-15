@@ -347,7 +347,7 @@ Public Class frmMain
     End Sub
 
     Private Sub mMenFileSaveAs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileSaveAs.Click
-        App.Runtime.Windows.Show(UI.Window.Type.SaveAs)
+        SaveConnectionsAs()
     End Sub
 
     Private Sub mMenFileExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileExit.Click

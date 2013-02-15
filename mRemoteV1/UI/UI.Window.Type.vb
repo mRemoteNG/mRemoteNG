@@ -8,7 +8,7 @@ Namespace UI
             ErrorsAndInfos = 4
             ScreenshotManager = 5
             Options = 6
-            SaveAs = 7
+            Export = 7
             About = 8
             Update = 9
             SSHTransfer = 10
