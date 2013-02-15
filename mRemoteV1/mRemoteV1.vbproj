@@ -316,7 +316,7 @@
     <Compile Include="UI\UI.Window.QuickConnect.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.SaveAs.vb">
+    <Compile Include="UI\UI.Window.Export.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UI.Window.ScreenshotManager.vb">
@@ -440,8 +440,8 @@
       <DependentUpon>UI.Window.QuickConnect.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.SaveAs.resx">
-      <DependentUpon>UI.Window.SaveAs.vb</DependentUpon>
+    <EmbeddedResource Include="UI\UI.Window.Export.resx">
+      <DependentUpon>UI.Window.Export.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UI.Window.ScreenshotManager.resx">
