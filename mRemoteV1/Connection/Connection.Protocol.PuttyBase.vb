@@ -158,10 +158,17 @@ Namespace Connection
                     PuttyProcess.Start()
                     PuttyProcess.WaitForInputIdle()
 
-                    If _isPuttyNg Then
-                        PuttyHandle = FindWindowEx(InterfaceControl.Handle, 0, vbNullString, vbNullString)
-                    Else
-                        PuttyHandle = PuttyProcess.MainWindowHandle
+                    Dim startTicks As Integer = Environment.TickCount
+                    While PuttyHandle.ToInt32 = 0 And Environment.TickCount < startTicks + 5000
+                        If _isPuttyNg Then
+                            PuttyHandle = FindWindowEx(InterfaceControl.Handle, 0, vbNullString, vbNullString)
+                        Else
+                            PuttyHandle = PuttyProcess.MainWindowHandle
+                        End If
+                        If PuttyHandle.ToInt32 = 0 Then Thread.Sleep(0)
+                    End While
+
+                    If Not _isPuttyNg Then
                         SetParent(PuttyHandle, InterfaceControl.Handle)
                     End If
 
