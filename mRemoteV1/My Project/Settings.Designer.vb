@@ -2282,19 +2282,6 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.ApplicationScopedSettingAttribute(), _
-         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)), _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")> _
-        Public Property ConDefaultUseCredSsp() As Boolean
-            Get
-                Return CType(Me("ConDefaultUseCredSsp"), Boolean)
-            End Get
-            Set(value As Boolean)
-                Me("ConDefaultUseCredSsp") = value
-            End Set
-        End Property
-        
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -2305,6 +2292,19 @@ Namespace My
             End Get
             Set
                 Me("InhDefaultUseCredSsp") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property ConDefaultUseCredSsp() As Boolean
+            Get
+                Return CType(Me("ConDefaultUseCredSsp"),Boolean)
+            End Get
+            Set
+                Me("ConDefaultUseCredSsp") = value
             End Set
         End Property
     End Class
