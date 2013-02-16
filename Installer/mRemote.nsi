@@ -143,7 +143,7 @@ Function SelectLanguage
 
 	StrCpy $0 $0 "" 1 # skip "v"
 
-	${VersionCompare} $0 "2.0" $1
+	${VersionCompare} $0 "3.0" $1
 	${If} $1 == 2
 		StrCpy $InstallDotNET "Yes"
 	${EndIf}

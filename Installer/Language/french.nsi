@@ -10,7 +10,7 @@ LangString InstallerLanguage ${LANG_FRENCH} "Installer Language"
 LangString SelectInstallerLanguage ${LANG_FRENCH} "Please select the language of the installer"
 
 ; Requires .NET Framework
-LangString RequiresNetFramework ${LANG_FRENCH} "mRemoteNG requires Microsoft .NET Framework 2.0."
+LangString RequiresNetFramework ${LANG_FRENCH} "mRemoteNG requires Microsoft .NET Framework 3.0."
 
 ; User needs to be Admin
 LangString RequiresAdminUser ${LANG_FRENCH} "You must be a member of the 'Power Users' or 'Administrators' group to install mRemoteNG."

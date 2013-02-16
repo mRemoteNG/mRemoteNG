@@ -11,7 +11,7 @@ LangString InstallerLanguage ${LANG_THAI} "ภาษาสำหรับกา�
 LangString SelectInstallerLanguage ${LANG_THAI} "กรุณาเลือกภาษาสำหรับการติดตั้ง"
 
 ; Requires .NET Framework
-LangString RequiresNetFramework ${LANG_THAI} "mRemoteNG มีความต้องการ  Microsoft .NET Framework 2.0. เป็นพื้นฐาน"
+LangString RequiresNetFramework ${LANG_THAI} "mRemoteNG มีความต้องการ  Microsoft .NET Framework 3.0. เป็นพื้นฐาน"
 
 ; User needs to be Admin
 LangString RequiresAdminUser ${LANG_THAI} "คุณต้องเป็นสมาชิกในกลุ่มของ 'Power Users' หรือ 'Administrators' เพื่อการติดตั้ง mRemoteNG"

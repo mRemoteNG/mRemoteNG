@@ -9,6 +9,8 @@
   Fix issue MR-79 - MoveUp/Down item doesn't work + Sort button broken
   Fix issue MR-80 - Reconnect previous sessions
   Fix issue MR-81 - Problem Duplicating Folder w/ Sub-Folders
+  Fix issue MR-85 - Microsoft .NET Framework warning
+  Fix issue MR-86 - Citrix GDI+ Error when screen is locked
   Fix issue MR-93 - Regional settings problem when using SQL connection in mRemoteNG
   Fix issue MR-96 - When pressing SHIFT+F4 to create a new connection inside a folder, the new connections doesn't inherit any properties from its parent
   Fix issue MR-97 - Integrate Dutch translation
@@ -28,6 +30,8 @@
   Fix issue MR-233 - Backslash at end of password prevents success of putty invocation and corresponding auto-logon
   Fix issue MR-277 - Inheritance configuration button not appear in configuration tab 
   Fix issue MR-284 - SSH: Text not showing properly
+  Fix issue MR-299 - mRemoteNG crashes while using remotely (Windows XP remote desktop)
+  mRemoteNG now requires .NET Framework 3.0 instead of 2.0
   Added compatibility check for "Use FIPS compliant algorithms" security setting.
   Improved reporting of errors when encrypting and decrypting connection files.
   Added partial Polish translation.
