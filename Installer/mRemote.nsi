@@ -29,7 +29,7 @@ VIProductVersion ${PRODUCT_VERSION}
 VIAddVersionKey "CompanyName" "Next Generation Software"
 VIAddVersionKey "ProductName" "mRemoteNG"
 VIAddVersionKey "ProductVersion" ${PRODUCT_VERSION}
-VIAddVersionKey "LegalCopyright" "Copyright © 2007-2009 Felix Deimel, 2010-2011 Riley McArdle"
+VIAddVersionKey "LegalCopyright" "Copyright © 2007-2009 Felix Deimel, 2010-2013 Riley McArdle"
 VIAddVersionKey "FileDescription" "mRemoteNG ${PRODUCT_VERSION_FRIENDLY} Installer"
 VIAddVersionKey "FileVersion" ${PRODUCT_VERSION}
 
