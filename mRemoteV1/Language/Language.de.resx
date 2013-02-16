@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -105,14 +105,14 @@
       </xsd:complexType>
     </xsd:element>
   </xsd:schema>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
     <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -219,11 +219,17 @@
   <data name="strButtonNew" xml:space="preserve">
     <value>&amp;Neu</value>
   </data>
+  <data name="strButtonOK" xml:space="preserve">
+    <value>&amp;Okay</value>
+  </data>
   <data name="strButtonProperties" xml:space="preserve">
     <value>Eigenschaften</value>
   </data>
   <data name="strButtonScan" xml:space="preserve">
     <value>&amp;Scannen</value>
+  </data>
+  <data name="strButtonStop" xml:space="preserve">
+    <value>&amp;Halt</value>
   </data>
   <data name="strButtonTestProxy" xml:space="preserve">
     <value>Proxy prüfen</value>
@@ -246,6 +252,9 @@ Bitte verwenden Sie Datei - Verbindungen laden für normale Verbindungs Dateien!
   </data>
   <data name="strCategoryDisplay" xml:space="preserve">
     <value>Anzeige</value>
+  </data>
+  <data name="strCategoryGateway" xml:space="preserve">
+    <value>Gateway</value>
   </data>
   <data name="strCategoryGeneral" xml:space="preserve">
     <value>Allgemein</value>
@@ -390,6 +399,9 @@ VncSharpNG Control Version {0}</value>
   <data name="strColumnFilename" xml:space="preserve">
     <value>Dateiname</value>
   </data>
+  <data name="strColumnHostnameIP" xml:space="preserve">
+    <value>Hostname/IP</value>
+  </data>
   <data name="strColumnMessage" xml:space="preserve">
     <value>Nachricht</value>
   </data>
@@ -425,6 +437,15 @@ VncSharpNG Control Version {0}</value>
   </data>
   <data name="strConfigUiLoadFailed" xml:space="preserve">
     <value>Konfigurationsfenster laden fehlgeschlagen!</value>
+  </data>
+  <data name="strConfirmCloseConnection" xml:space="preserve">
+    <value>Bestätigen Sie das schließen der Verbindungstabs</value>
+  </data>
+  <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
+    <value>Möchten Sie die Verbindung "{0}" schließen?</value>
+  </data>
+  <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
+    <value>Sind sie sicher, dass Sie das Panel "{0}" schließen möchten? Alle Verbindung , die es enthält, werden ebenfalls geschlossen.</value>
   </data>
   <data name="strConfirmDeleteExternalTool" xml:space="preserve">
     <value>Sind Sie sicher dass Sie das extene Programm "{0}" entfernen möchten?</value>
@@ -570,17 +591,56 @@ Starte mit neuer Datei.</value>
   <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
     <value>Verbindungsdaten Datei vollständig verschlüsseln</value>
   </data>
+  <data name="strEndIP" xml:space="preserve">
+    <value>Letzte IP</value>
+  </data>
+  <data name="strEndPort" xml:space="preserve">
+    <value>letzte Port</value>
+  </data>
+  <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
+    <value>AddExternalToolsToToolBar (FrmMain) ist fehlgeschlagen. {0}</value>
+  </data>
+  <data name="strErrorAddFolderFailed" xml:space="preserve">
+    <value>AddFolder (UI.Window.Tree) fehlgeschlagen. {0}</value>
+  </data>
+  <data name="strErrorBadDatabaseVersion" xml:space="preserve">
+    <value>Die Datenbankversion {0} ist nicht kompatibel mit dieser Version von {1}.</value>
+  </data>
+  <data name="strErrorCloneNodeFailed" xml:space="preserve">
+    <value>CloneNode (Tree.Node) fehlgeschlagen. {0}</value>
+  </data>
   <data name="strErrorCode" xml:space="preserve">
     <value>Fehler Nummer {0}.</value>
   </data>
+  <data name="strErrorConnectionListSaveFailed" xml:space="preserve">
+    <value>Die Verbindungsliste konnte nicht gespeichert werden.</value>
+  </data>
+  <data name="strErrorDecryptionFailed" xml:space="preserve">
+    <value>Entschlüsselung ist gescheitert. {0}</value>
+  </data>
+  <data name="strErrorEncryptionFailed" xml:space="preserve">
+    <value>Verschlüsselung fehlgeschlagen. {0}</value>
+  </data>
+  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
+    <value>Die Sicherheitseinstellung von Windows "Systemkryptografie: Verwenden sie FIPS-konformen Algorithmus für Verschlüsselung, hashing und Signatur", ist aktiviert. Diese Einstellung ist nicht kompatibel mit {0}. Weitere Informationen finden sie im Microsoft Support-Artikel unter http://support.microsoft.com/kb/811833 .  {0} wird jetzt beendet.</value>
+  </data>
   <data name="strErrors" xml:space="preserve">
     <value>Fehler</value>
+  </data>
+  <data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
+    <value>Die Verbindungseinstellungen konnten nicht geladen werden.{0}{0}{2}{0}{3}{0}{0}Um Datenverlust zu vermeiden, wird {1} jetzt beendet.</value>
+  </data>
+  <data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
+    <value>VerifyDatabaseVersion (Config.Connections.Save) ist fehlgeschlagen. {0}</value>
   </data>
   <data name="strExpandAllFolders" xml:space="preserve">
     <value>Alle Ordner erweitern</value>
   </data>
   <data name="strExperimental" xml:space="preserve">
     <value>Experimentell</value>
+  </data>
+  <data name="strExport" xml:space="preserve">
+    <value>Exportieren</value>
   </data>
   <data name="strExportmRemoteXML" xml:space="preserve">
     <value>mRemote/mRemoteNG XML exportieren</value>
@@ -627,6 +687,9 @@ Starte mit neuer Datei.</value>
   <data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
     <value>Verbindungs Daten von SQL laden ist fehlgeschlagen!</value>
   </data>
+  <data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
+    <value>Fehler beim Laden des Verbindungseintrag für "{0}" von "{1}". {2}</value>
+  </data>
   <data name="strGroupboxAutomaticReconnect" xml:space="preserve">
     <value>Automatisches wiederverbinden</value>
   </data>
@@ -638,6 +701,9 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="strGroupboxFiles" xml:space="preserve">
     <value>Dateien</value>
+  </data>
+  <data name="strHost" xml:space="preserve">
+    <value>Host</value>
   </data>
   <data name="strHttpConnectFailed" xml:space="preserve">
     <value>Verbindung mit HTTP fehlgeschlagen!</value>
@@ -708,6 +774,9 @@ Starte mit neuer Datei.</value>
   <data name="strIntAppKillFailed" xml:space="preserve">
     <value>Beenden des Internen Programmes fehlgeschlagen!</value>
   </data>
+  <data name="strIntAppParentHandle" xml:space="preserve">
+    <value>Panel Handle: {0}</value>
+  </data>
   <data name="strIntAppResizeFailed" xml:space="preserve">
     <value>Internes Programm Größenanpassung fehlgeschlagen!</value>
   </data>
@@ -744,11 +813,20 @@ Starte mit neuer Datei.</value>
   <data name="strLabelFilename" xml:space="preserve">
     <value>Dateiname:</value>
   </data>
+  <data name="strLabelHostname" xml:space="preserve">
+    <value>Hostname:</value>
+  </data>
   <data name="strLabelOptions" xml:space="preserve">
     <value>Optionen:</value>
   </data>
   <data name="strLabelPassword" xml:space="preserve">
     <value>Passwort:</value>
+  </data>
+  <data name="strLabelPort" xml:space="preserve">
+    <value>Port:</value>
+  </data>
+  <data name="strLabelPortableEdition" xml:space="preserve">
+    <value>Portable Edition</value>
   </data>
   <data name="strLabelProtocol" xml:space="preserve">
     <value>Protokoll:</value>
@@ -767,6 +845,15 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="strLabelSelectPanel" xml:space="preserve">
     <value>Wählen Sie ein Panel aus der Liste oder klicken Sie auf Neu um ein neues zu erstellen. Klickeen Sie OK um fortzufahren.</value>
+  </data>
+  <data name="strLabelServerStatus" xml:space="preserve">
+    <value>Server Status:</value>
+  </data>
+  <data name="strLabelSQLDatabaseName" xml:space="preserve">
+    <value>Datenbank:</value>
+  </data>
+  <data name="strLabelSQLServerDatabaseName" xml:space="preserve">
+    <value>Datenbank:</value>
   </data>
   <data name="strLabelUsername" xml:space="preserve">
     <value>Benutzername:</value>
@@ -921,6 +1008,9 @@ Starte mit neuer Datei.</value>
   <data name="strMenuPaste" xml:space="preserve">
     <value>Einfügen</value>
   </data>
+  <data name="strMenuPortScan" xml:space="preserve">
+    <value>Port Scan</value>
+  </data>
   <data name="strMenuQuickConnectToolbar" xml:space="preserve">
     <value>Direkt Verbinden Symbolleiste</value>
   </data>
@@ -971,6 +1061,9 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="strMenuShowText" xml:space="preserve">
     <value>Text anzeigen</value>
+  </data>
+  <data name="strMenuSmartSize" xml:space="preserve">
+    <value>SmartSize (RDP/VNC)</value>
   </data>
   <data name="strMenuSSHFileTransfer" xml:space="preserve">
     <value>SSH Datei Übertragung</value>
@@ -1041,6 +1134,9 @@ Starte mit neuer Datei.</value>
   <data name="strNone" xml:space="preserve">
     <value>Keine Angabe</value>
   </data>
+  <data name="strNormal" xml:space="preserve">
+    <value>Normal</value>
+  </data>
   <data name="strNoSmartSize" xml:space="preserve">
     <value>Keine automatische Größenanpassung (SmartSize)</value>
   </data>
@@ -1056,6 +1152,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   </data>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Offene Ports</value>
+  </data>
+  <data name="strPanelName" xml:space="preserve">
+    <value>Panel Name</value>
   </data>
   <data name="strPasswordProtect" xml:space="preserve">
     <value>Passwort Schutz</value>
@@ -1101,6 +1200,12 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   </data>
   <data name="strPropertyDescriptionDomain" xml:space="preserve">
     <value>Geben Sie hier ihre Domäne ein.</value>
+  </data>
+  <data name="strPropertyDescriptionEnableDesktopComposition" xml:space="preserve">
+    <value>Wählen, ob die Desktopgestaltung genutzt werden soll.</value>
+  </data>
+  <data name="strPropertyDescriptionEnableFontSmoothing" xml:space="preserve">
+    <value>Wählen Sie, ob eine Schriftglättung genutzt werden soll oder nicht.</value>
   </data>
   <data name="strPropertyDescriptionEncoding" xml:space="preserve">
     <value>Wählen Sie die zu verwendende Codierung.</value>
@@ -1169,7 +1274,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
     <value>Wählen Sie, ob ihre lokalen Drucker auf dem entfernten System zur Verfügung stehen sollen.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
-    <value>Wählen Sie, ob Ihre lokalen smart Cards auf dem entfernten System zur Verfügung stehen sollen.</value>
+    <value>Wählen Sie, ob lokale Smartcards auf dem Remotehost verfügbar sein sollen.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Wählen Sie, wie Töne auf dem entfernten System wiedergegeben werden sollen.</value>
@@ -1210,6 +1315,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strPropertyDescriptionVNCProxyUsername" xml:space="preserve">
     <value>Geben Sie Ihren Benutzernamen ein.</value>
   </data>
+  <data name="strPropertyNameAddress" xml:space="preserve">
+    <value>Hostname/IP</value>
+  </data>
   <data name="strPropertyNameAll" xml:space="preserve">
     <value>Alles</value>
   </data>
@@ -1240,6 +1348,12 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strPropertyNameDomain" xml:space="preserve">
     <value>Domäne</value>
   </data>
+  <data name="strPropertyNameEnableDesktopComposition" xml:space="preserve">
+    <value>Desktopgestaltung</value>
+  </data>
+  <data name="strPropertyNameEnableFontSmoothing" xml:space="preserve">
+    <value>Schriftglättung</value>
+  </data>
   <data name="strPropertyNameEncoding" xml:space="preserve">
     <value>Codierung</value>
   </data>
@@ -1261,8 +1375,17 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strPropertyNameMACAddress" xml:space="preserve">
     <value>MAC Adresse</value>
   </data>
+  <data name="strPropertyNameName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="strPropertyNamePanel" xml:space="preserve">
+    <value>Panel</value>
+  </data>
   <data name="strPropertyNamePassword" xml:space="preserve">
     <value>Passwort</value>
+  </data>
+  <data name="strPropertyNamePort" xml:space="preserve">
+    <value>Port</value>
   </data>
   <data name="strPropertyNameProtocol" xml:space="preserve">
     <value>Protokoll</value>
@@ -1272,6 +1395,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   </data>
   <data name="strPropertyNameRDGatewayDomain" xml:space="preserve">
     <value>Gateway Domäne</value>
+  </data>
+  <data name="strPropertyNameRDGatewayHostname" xml:space="preserve">
+    <value>Gateway-Hostname</value>
   </data>
   <data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
     <value>Gateway Passwort</value>
@@ -1291,11 +1417,20 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strPropertyNameRedirectKeys" xml:space="preserve">
     <value>Tastenkombinationen</value>
   </data>
+  <data name="strPropertyNameRedirectPorts" xml:space="preserve">
+    <value>Ports</value>
+  </data>
   <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
     <value>Drucker</value>
   </data>
+  <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
+    <value>Smartcards</value>
+  </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Töne</value>
+  </data>
+  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
+    <value>Rendering-Engine</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Auflösung</value>
@@ -1315,8 +1450,14 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strPropertyNameViewOnly" xml:space="preserve">
     <value>View-Only</value>
   </data>
+  <data name="strPropertyNameVNCProxyAddress" xml:space="preserve">
+    <value>Proxy-Adresse</value>
+  </data>
   <data name="strPropertyNameVNCProxyPassword" xml:space="preserve">
     <value>Proxy Passwort</value>
+  </data>
+  <data name="strPropertyNameVNCProxyPort" xml:space="preserve">
+    <value>Proxy Port</value>
   </data>
   <data name="strPropertyNameVNCProxyType" xml:space="preserve">
     <value>Proxy Typ</value>
@@ -1353,8 +1494,14 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strPuttyGetSessionsFailed" xml:space="preserve">
     <value>Auslesen der PuTTY Verbindungsliste fehlgeschlagen!</value>
   </data>
+  <data name="strPuttyHandle" xml:space="preserve">
+    <value>Putty Handle: {0}</value>
+  </data>
   <data name="strPuttyKillFailed" xml:space="preserve">
     <value>Beenden von PuTTY fehlgeschlagen!</value>
+  </data>
+  <data name="strPuttyParentHandle" xml:space="preserve">
+    <value>Panel Handle: {0}</value>
   </data>
   <data name="strPuttyResizeFailed" xml:space="preserve">
     <value>Ändern der Größe fehlgschlagen!</value>
@@ -1370,6 +1517,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   </data>
   <data name="strPuttyStuff" xml:space="preserve">
     <value>--- PuTTY ---</value>
+  </data>
+  <data name="strPuttyTitle" xml:space="preserve">
+    <value>Putty Title: {0}</value>
   </data>
   <data name="strQuick" xml:space="preserve">
     <value>Direkt: {0}</value>
@@ -1388,6 +1538,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   </data>
   <data name="strRAW" xml:space="preserve">
     <value>Rohdaten (RAW)</value>
+  </data>
+  <data name="strRDP" xml:space="preserve">
+    <value>RDP</value>
   </data>
   <data name="strRDP16777216Colors" xml:space="preserve">
     <value>16777216 Farben (24Bit)</value>
@@ -1572,6 +1725,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strRename" xml:space="preserve">
     <value>Umbenennen</value>
   </data>
+  <data name="strRlogin" xml:space="preserve">
+    <value>Rlogin</value>
+  </data>
   <data name="strSave" xml:space="preserve">
     <value>Speichern</value>
   </data>
@@ -1635,8 +1791,14 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strSmartSizeModeAspect" xml:space="preserve">
     <value>Aspekt</value>
   </data>
+  <data name="strSmartSizeModeFree" xml:space="preserve">
+    <value>verfügbar</value>
+  </data>
   <data name="strSmartSizeModeNone" xml:space="preserve">
     <value>Kein SmartSize</value>
+  </data>
+  <data name="strSocks5" xml:space="preserve">
+    <value>Socks 5</value>
   </data>
   <data name="strSort" xml:space="preserve">
     <value>Sortieren</value>
@@ -1648,7 +1810,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
     <value>Absteigend (Z-A)</value>
   </data>
   <data name="strSpecialKeys" xml:space="preserve">
-    <value>Spezielle Tastenkombinationen</value>
+    <value>spezielle Tasten</value>
   </data>
   <data name="strSQLInfo" xml:space="preserve">
     <value>Für mehr Informationen bitte Hilfeeintrag lesen (Info - Help - Getting started - SQL Configuration)</value>
@@ -1686,6 +1848,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strStartupExit" xml:space="preserve">
     <value>Anfang/Ende</value>
   </data>
+  <data name="strStatus" xml:space="preserve">
+    <value>Status</value>
+  </data>
   <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
     <value>Öffne das Fehler &amp;&amp; Infos Panel bei:</value>
   </data>
@@ -1698,11 +1863,20 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strTabsAndPanels" xml:space="preserve">
     <value>Tabs &amp;&amp; Panele</value>
   </data>
+  <data name="strTabUpdates" xml:space="preserve">
+    <value>Aktualisierungen</value>
+  </data>
+  <data name="strTelnet" xml:space="preserve">
+    <value>Telnet</value>
+  </data>
   <data name="strTheFollowing" xml:space="preserve">
     <value>die folgenden:</value>
   </data>
   <data name="strTitleError" xml:space="preserve">
     <value>Fehler ({0})</value>
+  </data>
+  <data name="strTitleInformation" xml:space="preserve">
+    <value>Informationen ({0})</value>
   </data>
   <data name="strTitlePassword" xml:space="preserve">
     <value>Passwort</value>
@@ -1746,6 +1920,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strUpdateCheckFailed" xml:space="preserve">
     <value>Prüfung auf Aktualisierung ist fehlgeschlagen!</value>
   </data>
+  <data name="strUpdateCheckPortableEdition" xml:space="preserve">
+    <value>mRemoteNG Portable Edition unterstützt derzeit keine automatische Updates.</value>
+  </data>
   <data name="strUpdateDeleteFailed" xml:space="preserve">
     <value>Löschen der Aktualisierungsdatei ist gehlgeschlagen!</value>
   </data>
@@ -1787,10 +1964,16 @@ mRemoteNG wird nun geschlossen und die Installation gestartet.</value>
     <value>Selben Benutzer und Passwort verwenden</value>
   </data>
   <data name="strUseSmartCard" xml:space="preserve">
-    <value>Verwenden einer smart Card</value>
+    <value>Verwenden sie eine Smartcard</value>
   </data>
   <data name="strUseSQLServer" xml:space="preserve">
     <value>SQL Server für das Laden &amp;&amp; Speichern der Verbindungen verwenden</value>
+  </data>
+  <data name="strVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="strVnc" xml:space="preserve">
+    <value>VNC</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>Trennen der VNC Verbindung fehlgeschlagen!</value>

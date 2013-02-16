@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -105,14 +105,14 @@
       </xsd:complexType>
     </xsd:element>
   </xsd:schema>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
     <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -167,6 +167,9 @@
   </data>
   <data name="strAskUpdatesMainInstruction" xml:space="preserve">
     <value>Параметры автоматического обновления</value>
+  </data>
+  <data name="strAspect" xml:space="preserve">
+    <value>Вид</value>
   </data>
   <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
     <value>Автоматически получать информацию о сессии</value>
@@ -244,11 +247,17 @@
   <data name="strCategoryConnection" xml:space="preserve">
     <value>Подключение</value>
   </data>
+  <data name="strCategoryCredentials" xml:space="preserve">
+    <value>Учетные данные</value>
+  </data>
   <data name="strCategoryDisplay" xml:space="preserve">
     <value>Вид</value>
   </data>
   <data name="strCategoryGateway" xml:space="preserve">
     <value>Шлюз</value>
+  </data>
+  <data name="strCategoryGeneral" xml:space="preserve">
+    <value>Общие</value>
   </data>
   <data name="strCategoryMiscellaneous" xml:space="preserve">
     <value>Разное</value>
@@ -407,6 +416,27 @@
   </data>
   <data name="strComponentsCheck" xml:space="preserve">
     <value>Проверка компонентов</value>
+  </data>
+  <data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
+    <value>Ошибка btnIcon_Click!</value>
+  </data>
+  <data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
+    <value>Ошибка ShowHideGridItems!</value>
+  </data>
+  <data name="strConfigPropertyGridMenuClickFailed" xml:space="preserve">
+    <value>Ошибка IconMenu_Click!</value>
+  </data>
+  <data name="strConfigPropertyGridObjectFailed" xml:space="preserve">
+    <value>Ошибка свойства Grid opject!</value>
+  </data>
+  <data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
+    <value>Ошибка SetHostStatus!</value>
+  </data>
+  <data name="strConfigPropertyGridValueFailed" xml:space="preserve">
+    <value>Ошибка pGrid_PopertyValueChanged!</value>
+  </data>
+  <data name="strConfigUiLoadFailed" xml:space="preserve">
+    <value>Ошибка загрузки Config UI!</value>
   </data>
   <data name="strConfirmCloseConnection" xml:space="preserve">
     <value>Запрашивать подтверждение при закрытии вкладки подключения</value>
@@ -567,8 +597,17 @@
   <data name="strEndPort" xml:space="preserve">
     <value>Конечн. порт</value>
   </data>
+  <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
+    <value>Ошибка добавления внешнего приложения на Панель (frmMain). {0}</value>
+  </data>
+  <data name="strErrorAddFolderFailed" xml:space="preserve">
+    <value>Ошибка AddFolder (UI.Window.Tree). {0}</value>
+  </data>
   <data name="strErrorBadDatabaseVersion" xml:space="preserve">
     <value>Версия базы данных {0} не совместима с этой версией {1}.</value>
+  </data>
+  <data name="strErrorCloneNodeFailed" xml:space="preserve">
+    <value>Ошибка CloneNode (Tree.Node). {0}</value>
   </data>
   <data name="strErrorCode" xml:space="preserve">
     <value>Код ошибки {0}.</value>
@@ -592,6 +631,12 @@
   <data name="strErrors" xml:space="preserve">
     <value>Ошибки</value>
   </data>
+  <data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
+    <value>Ошибка загрузки файла соединения.{0}{0}{2}{0}{3}{0}{0}Для предотвращения потери данных, {1} будет выполнен выход.</value>
+  </data>
+  <data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
+    <value>Ошибка VerifyDatabaseVersion (Config.Connections.Save). {0}</value>
+  </data>
   <data name="strExpandAllFolders" xml:space="preserve">
     <value>Раскрыть все папки</value>
   </data>
@@ -603,6 +648,9 @@
   </data>
   <data name="strExportmRemoteXML" xml:space="preserve">
     <value>Экспорт mRemote / mRemoteNG XML</value>
+  </data>
+  <data name="strExtApp" xml:space="preserve">
+    <value>Внешнее Приложение</value>
   </data>
   <data name="strFAMFAMFAMAttribution" xml:space="preserve">
     <value>Использованы значки [FAMFAMFAM]</value>
@@ -630,6 +678,9 @@
   </data>
   <data name="strFormatInheritDescription" xml:space="preserve">
     <value>Описание наследованного свойства: {0}</value>
+  </data>
+  <data name="strFree" xml:space="preserve">
+    <value>Free</value>
   </data>
   <data name="strFullscreen" xml:space="preserve">
     <value>Во весь экран</value>
@@ -667,11 +718,26 @@
   <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
     <value>Изменение HTTP документа не удалось!</value>
   </data>
+  <data name="strHttpSetPropsFailed" xml:space="preserve">
+    <value>Не удалось задать параметры HTTP!</value>
+  </data>
   <data name="strIcaConnectionFailed" xml:space="preserve">
     <value>Не удается создать новое подключение ICA!</value>
   </data>
   <data name="strIcaControlFailed" xml:space="preserve">
     <value>Не удалось загрузить ICA-плагин!</value>
+  </data>
+  <data name="strIcaSetCredentialsFailed" xml:space="preserve">
+    <value>Ошибка установки учетных данных ICA!</value>
+  </data>
+  <data name="strIcaSetEventHandlersFailed" xml:space="preserve">
+    <value>Не удалось установить обработчик событий ICA!</value>
+  </data>
+  <data name="strIcaSetPropsFailed" xml:space="preserve">
+    <value>Не удалось задать параметры ICA!</value>
+  </data>
+  <data name="strIcaSetResolutionFailed" xml:space="preserve">
+    <value>Ошибка установки разрешений ICA!</value>
   </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Импорт из Active Directory</value>
@@ -700,8 +766,35 @@
   <data name="strIntAppConnectionFailed" xml:space="preserve">
     <value>Подключение не удалось!</value>
   </data>
+  <data name="strIntAppDisposeFailed" xml:space="preserve">
+    <value>Не удалось завершить процесс внутреннего приложения!</value>
+  </data>
+  <data name="strIntAppFocusFailed" xml:space="preserve">
+    <value>Внутренний инструмент: Ошибка получения фокуса!</value>
+  </data>
+  <data name="strIntAppHandle" xml:space="preserve">
+    <value>Обработчик Внутр. инструментов: {0}</value>
+  </data>
+  <data name="strIntAppKillFailed" xml:space="preserve">
+    <value>Не удалось завершить процесс внутреннего приложения!</value>
+  </data>
+  <data name="strIntAppParentHandle" xml:space="preserve">
+    <value>Панель обработчика событий: {0}</value>
+  </data>
+  <data name="strIntAppResizeFailed" xml:space="preserve">
+    <value>Внутренний инструмент: Ошибка изменения размера!</value>
+  </data>
+  <data name="strIntAppStuff" xml:space="preserve">
+    <value>--- Внутреннее приложение ---</value>
+  </data>
+  <data name="strIntAppTitle" xml:space="preserve">
+    <value>Заголовок внешнего инструмента: {0}</value>
+  </data>
   <data name="strKeysCtrlAltDel" xml:space="preserve">
     <value>CTRL+ALT+DEL</value>
+  </data>
+  <data name="strKeysCtrlEsc" xml:space="preserve">
+    <value>CTRL-ESC</value>
   </data>
   <data name="strLabelAddress" xml:space="preserve">
     <value>Адрес:</value>
@@ -735,6 +828,9 @@
   </data>
   <data name="strLabelPort" xml:space="preserve">
     <value>Порт:</value>
+  </data>
+  <data name="strLabelPortableEdition" xml:space="preserve">
+    <value>Portable Edition</value>
   </data>
   <data name="strLabelProtocol" xml:space="preserve">
     <value>Протокол:</value>
@@ -799,6 +895,9 @@
   <data name="strLogWriteToFileFinalLocationFailed" xml:space="preserve">
     <value>Невозможно сохранить отчет в папке назначения.</value>
   </data>
+  <data name="strMagicLibraryAttribution" xml:space="preserve">
+    <value>Использовано Magic library от [Crownwood Software]</value>
+  </data>
   <data name="strMenuAbout" xml:space="preserve">
     <value>О программе</value>
   </data>
@@ -828,6 +927,12 @@
   </data>
   <data name="strMenuCopy" xml:space="preserve">
     <value>Копировать</value>
+  </data>
+  <data name="strMenuCtrlAltDel" xml:space="preserve">
+    <value>Ctrl-Alt-Del</value>
+  </data>
+  <data name="strMenuCtrlEsc" xml:space="preserve">
+    <value>Ctrl-Esc</value>
   </data>
   <data name="strMenuDelete" xml:space="preserve">
     <value>Удалить...</value>
@@ -1012,6 +1117,9 @@
   <data name="strNewPanel" xml:space="preserve">
     <value>Новая панель</value>
   </data>
+  <data name="strNewRoot" xml:space="preserve">
+    <value>Новый корень</value>
+  </data>
   <data name="strNewTitle" xml:space="preserve">
     <value>Новое название</value>
   </data>
@@ -1021,6 +1129,9 @@
   <data name="strNoCompression" xml:space="preserve">
     <value>Без сжатия</value>
   </data>
+  <data name="strNoExtAppDefined" xml:space="preserve">
+    <value>Не указано внешнее приложение.</value>
+  </data>
   <data name="strNoInformation" xml:space="preserve">
     <value>Нет</value>
   </data>
@@ -1029,6 +1140,9 @@
   </data>
   <data name="strNormal" xml:space="preserve">
     <value>Нормальный</value>
+  </data>
+  <data name="strNoSmartSize" xml:space="preserve">
+    <value>SmartSize недоступен</value>
   </data>
   <data name="strNoUpdateAvailable" xml:space="preserve">
     <value>Нет доступных обновлений</value>
@@ -1253,6 +1367,12 @@
   <data name="strPropertyNameExternalTool" xml:space="preserve">
     <value>Внешний инструмент</value>
   </data>
+  <data name="strPropertyNameExternalToolAfter" xml:space="preserve">
+    <value>Внеш. Инстр. После </value>
+  </data>
+  <data name="strPropertyNameExternalToolBefore" xml:space="preserve">
+    <value>Внеш. Инстр. До</value>
+  </data>
   <data name="strPropertyNameIcon" xml:space="preserve">
     <value>Значок</value>
   </data>
@@ -1379,8 +1499,17 @@
   <data name="strPuttyGetSessionsFailed" xml:space="preserve">
     <value>Получить сессию Putty не удалось!</value>
   </data>
+  <data name="strPuttyHandle" xml:space="preserve">
+    <value>Обработчик Putty: {0}</value>
+  </data>
   <data name="strPuttyKillFailed" xml:space="preserve">
     <value>Убить процесс Putty не удалось!</value>
+  </data>
+  <data name="strPuttyParentHandle" xml:space="preserve">
+    <value>Панель обработчиков: {0}</value>
+  </data>
+  <data name="strPuttyResizeFailed" xml:space="preserve">
+    <value>Ошибка изменения размера окна Putty!</value>
   </data>
   <data name="strPuttySettings" xml:space="preserve">
     <value>Настройки PuTTY</value>
@@ -1390,6 +1519,12 @@
   </data>
   <data name="strPuttyStartFailed" xml:space="preserve">
     <value>Не удалось запустить Putty!</value>
+  </data>
+  <data name="strPuttyStuff" xml:space="preserve">
+    <value>--- PuTTY ---</value>
+  </data>
+  <data name="strPuttyTitle" xml:space="preserve">
+    <value>Заголовок PuTTY: {0}</value>
   </data>
   <data name="strQuick" xml:space="preserve">
     <value>Быстрое: {0}</value>
@@ -1405,6 +1540,12 @@
   </data>
   <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
     <value>Ошибка истории Быстрых подключений!</value>
+  </data>
+  <data name="strRAW" xml:space="preserve">
+    <value>RAW</value>
+  </data>
+  <data name="strRDP" xml:space="preserve">
+    <value>RDP</value>
   </data>
   <data name="strRDP16777216Colors" xml:space="preserve">
     <value>16777216 цв. (24-бит)</value>
@@ -1478,6 +1619,9 @@
   <data name="strRdpErrorConnection" xml:space="preserve">
     <value>Произошла неисправимая ошибка во время подключения клиента.</value>
   </data>
+  <data name="strRdpErrorGetFailure" xml:space="preserve">
+    <value>Невозможно получить GetError (Критическая ошибка)</value>
+  </data>
   <data name="strRdpErrorGetUnknown" xml:space="preserve">
     <value>Произошла неизвестная критическая ошибка RDP. Код ошибки {0}.</value>
   </data>
@@ -1499,11 +1643,17 @@
   <data name="strRDPFitToPanel" xml:space="preserve">
     <value>В окне</value>
   </data>
+  <data name="strRdpFocusFailed" xml:space="preserve">
+    <value>RDP: Ошибка получения фокуса!</value>
+  </data>
   <data name="strRdpGatewayIsSupported" xml:space="preserve">
     <value>Шлюз Служб терминалов поддерживается.</value>
   </data>
   <data name="strRdpGatewayNotSupported" xml:space="preserve">
     <value>Шлюз Служб терминалов не поддерживается!</value>
+  </data>
+  <data name="strRdpGetSessionsFailed" xml:space="preserve">
+    <value>Ошибка сессии!</value>
   </data>
   <data name="strRdpOpenConnectionFailed" xml:space="preserve">
     <value>Открыть подключение RDP  не удалось!</value>
@@ -1511,8 +1661,44 @@
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>К-ство переподключений RDP:</value>
   </data>
+  <data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
+    <value>RDP: Установить уровень проверки подлинности не удалась!</value>
+  </data>
+  <data name="strRdpSetConsoleSessionFailed" xml:space="preserve">
+    <value>RDP: Не удалось использование консольную сессию!</value>
+  </data>
   <data name="strRdpSetConsoleSwitch" xml:space="preserve">
     <value>Настройка переключения консолей для RDC {0}.</value>
+  </data>
+  <data name="strRdpSetCredentialsFailed" xml:space="preserve">
+    <value>Ошибка установки учетных данных RDP!</value>
+  </data>
+  <data name="strRdpSetEventHandlersFailed" xml:space="preserve">
+    <value>Ошибка RDP SetEventHandlers!</value>
+  </data>
+  <data name="strRdpSetGatewayFailed" xml:space="preserve">
+    <value>Ошибка установки шлюза RDP!</value>
+  </data>
+  <data name="strRdpSetPerformanceFlagsFailed" xml:space="preserve">
+    <value>Ошибка RDP SetPerformanceFlags!</value>
+  </data>
+  <data name="strRdpSetPortFailed" xml:space="preserve">
+    <value>Не удалось задать порт RDP!</value>
+  </data>
+  <data name="strRdpSetPropsFailed" xml:space="preserve">
+    <value>Не удалось задать параметры RDP!</value>
+  </data>
+  <data name="strRdpSetRedirectionFailed" xml:space="preserve">
+    <value>Установить перенаправление в RDP не удалось!</value>
+  </data>
+  <data name="strRdpSetRedirectKeysFailed" xml:space="preserve">
+    <value>Установить перенаправление клавиш в RDP не удалось!</value>
+  </data>
+  <data name="strRdpSetResolutionFailed" xml:space="preserve">
+    <value>Ошибка установки разрешения RDP!</value>
+  </data>
+  <data name="strRDPSmartSize" xml:space="preserve">
+    <value>Smart Size</value>
   </data>
   <data name="strRDPSoundBringToThisComputer" xml:space="preserve">
     <value>Передать на этот компьютер</value>
@@ -1522,6 +1708,12 @@
   </data>
   <data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
     <value>Оставить на удаленном компьютере</value>
+  </data>
+  <data name="strRdpToggleFullscreenFailed" xml:space="preserve">
+    <value>Не удалось переключить RDP в режим Fullscreen!</value>
+  </data>
+  <data name="strRdpToggleSmartSizeFailed" xml:space="preserve">
+    <value>Не удалось переключить RDP в режим SmartSize!</value>
   </data>
   <data name="strReconnectAtStartup" xml:space="preserve">
     <value>При запуске подключаться к предыдущим сессиям</value>
@@ -1537,6 +1729,9 @@
   </data>
   <data name="strRename" xml:space="preserve">
     <value>Переименовать</value>
+  </data>
+  <data name="strRlogin" xml:space="preserve">
+    <value>Rlogin</value>
   </data>
   <data name="strSave" xml:space="preserve">
     <value>Сохранить</value>
@@ -1598,6 +1793,18 @@
   <data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value>Один клик по открытому подключению переключается на него</value>
   </data>
+  <data name="strSmartSizeModeAspect" xml:space="preserve">
+    <value>Вид</value>
+  </data>
+  <data name="strSmartSizeModeFree" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="strSmartSizeModeNone" xml:space="preserve">
+    <value>SmartSize недоступен</value>
+  </data>
+  <data name="strSocks5" xml:space="preserve">
+    <value>Socks 5</value>
+  </data>
   <data name="strSort" xml:space="preserve">
     <value>Сортировать</value>
   </data>
@@ -1607,6 +1814,9 @@
   <data name="strSortDesc" xml:space="preserve">
     <value>По убыванию (Z-A)</value>
   </data>
+  <data name="strSpecialKeys" xml:space="preserve">
+    <value>Специальные клавиши</value>
+  </data>
   <data name="strSQLInfo" xml:space="preserve">
     <value>Для дополнительной информации см. справку - Начало работы - конфигурация SQL!</value>
   </data>
@@ -1615,6 +1825,12 @@
   </data>
   <data name="strSqlUpdateCheckUpdateAvailable" xml:space="preserve">
     <value>Доступно обновление для SQL! Обновите подключения.</value>
+  </data>
+  <data name="strSsh1" xml:space="preserve">
+    <value>SSH version 1</value>
+  </data>
+  <data name="strSsh2" xml:space="preserve">
+    <value>SSH version 2</value>
   </data>
   <data name="strSSHStartTransferBG" xml:space="preserve">
     <value>Фоновая передача по SSH - не удалась!</value>
@@ -1655,6 +1871,9 @@
   <data name="strTabUpdates" xml:space="preserve">
     <value>Обновления</value>
   </data>
+  <data name="strTelnet" xml:space="preserve">
+    <value>Telnet</value>
+  </data>
   <data name="strTheFollowing" xml:space="preserve">
     <value>Установить вручную:</value>
   </data>
@@ -1685,6 +1904,9 @@
   <data name="strType" xml:space="preserve">
     <value>Тип</value>
   </data>
+  <data name="strUltraVncRepeater" xml:space="preserve">
+    <value>Ultra VNC Repeater</value>
+  </data>
   <data name="strUltraVNCSCListeningPort" xml:space="preserve">
     <value>Порт UltraVNC SingleClick:</value>
   </data>
@@ -1702,6 +1924,9 @@
   </data>
   <data name="strUpdateCheckFailed" xml:space="preserve">
     <value>Не удалось проверить наличие обновлений!</value>
+  </data>
+  <data name="strUpdateCheckPortableEdition" xml:space="preserve">
+    <value>mRemoteNG Portable Edition не поддерживает автообновление.</value>
   </data>
   <data name="strUpdateDeleteFailed" xml:space="preserve">
     <value>Ошибка при удалении файла обновления!</value>
@@ -1743,11 +1968,17 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="strUseSameUsernameAndPassword" xml:space="preserve">
     <value>Использовать те же имя пользователя и пароль</value>
   </data>
+  <data name="strUseSmartCard" xml:space="preserve">
+    <value>Использовать смарт-карты</value>
+  </data>
   <data name="strUseSQLServer" xml:space="preserve">
     <value>Использовать SQL Server для загрузки и сохранения подключений</value>
   </data>
   <data name="strVersion" xml:space="preserve">
     <value>Версия</value>
+  </data>
+  <data name="strVnc" xml:space="preserve">
+    <value>VNC</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>Не удалось отключить VNC!</value>
@@ -1764,6 +1995,9 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   <data name="strVncSetEventHandlersFailed" xml:space="preserve">
     <value>Не удалось установить обработчик событий VNC!</value>
   </data>
+  <data name="strVncSetPropsFailed" xml:space="preserve">
+    <value>Не удалось задать параметры VNC!</value>
+  </data>
   <data name="strVncStartChatFailed" xml:space="preserve">
     <value>Не удалось начать VNC-чат!</value>
   </data>
@@ -1778,6 +2012,12 @@ mRemoteNG сейчас прекратит работу и начнет проц�
   </data>
   <data name="strWarnings" xml:space="preserve">
     <value>Предупреждения</value>
+  </data>
+  <data name="strWeifenLuoAttribution" xml:space="preserve">
+    <value>Использовано DockPanel Suite от [Weifen Luo]</value>
+  </data>
+  <data name="strWeifenLuoAttributionURL" xml:space="preserve">
+    <value>http://sourceforge.net/projects/dockpanelsuite/</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
     <value>Запись в лог-файл (mRemoteNG.log)</value>

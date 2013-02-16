@@ -359,12 +359,15 @@
     <EmbeddedResource Include="Language\Language.en-US.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Language\Language.es-AR.resx" />
     <EmbeddedResource Include="Language\Language.es.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Language\Language.it.resx" />
     <EmbeddedResource Include="Language\Language.nl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Language\Language.pt.resx" />
     <EmbeddedResource Include="Language\Language.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.Designer.vb</LastGenOutput>
@@ -383,6 +386,7 @@
     <EmbeddedResource Include="Language\Language.uk.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Language\Language.zh-CN.resx" />
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>

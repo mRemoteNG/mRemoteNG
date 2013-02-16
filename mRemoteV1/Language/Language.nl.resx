@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -105,14 +105,14 @@
       </xsd:complexType>
     </xsd:element>
   </xsd:schema>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
     <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -131,6 +131,9 @@
   </data>
   <data name="strAddFolder" xml:space="preserve">
     <value>Nieuwe map</value>
+  </data>
+  <data name="strAddNodeFromXmlFailed" xml:space="preserve">
+    <value>AddNodeFromXML mislukt!</value>
   </data>
   <data name="strAddNodesFromSqlFailed" xml:space="preserve">
     <value>Knooppunten toevoegen van XML mislukt!</value>
@@ -165,6 +168,9 @@
   <data name="strAskUpdatesMainInstruction" xml:space="preserve">
     <value>Automatisch bijwerken instellingen</value>
   </data>
+  <data name="strAspect" xml:space="preserve">
+    <value>Verhouding</value>
+  </data>
   <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
     <value>Automatisch ophalen sessie informatie</value>
   </data>
@@ -182,6 +188,9 @@
   </data>
   <data name="strButtonCancel" xml:space="preserve">
     <value>&amp;Annuleren</value>
+  </data>
+  <data name="strButtonChange" xml:space="preserve">
+    <value>Wijzig</value>
   </data>
   <data name="strButtonClose" xml:space="preserve">
     <value>&amp;Sluiten</value>
@@ -210,8 +219,20 @@
   <data name="strButtonNew" xml:space="preserve">
     <value>&amp;Nieuw</value>
   </data>
+  <data name="strButtonOK" xml:space="preserve">
+    <value>&amp;OK</value>
+  </data>
   <data name="strButtonProperties" xml:space="preserve">
     <value>Eigenschapen</value>
+  </data>
+  <data name="strButtonScan" xml:space="preserve">
+    <value>&amp;Scan</value>
+  </data>
+  <data name="strButtonStop" xml:space="preserve">
+    <value>&amp;Stop</value>
+  </data>
+  <data name="strButtonTestProxy" xml:space="preserve">
+    <value>Test Proxy</value>
   </data>
   <data name="strCannotImportNormalSessionFile" xml:space="preserve">
     <value>U kunt geen normale connectie bestand importeren.
@@ -232,11 +253,17 @@ Gebruik dan Bestand - Laad Connecties voor normale connectie bestanden!</value>
   <data name="strCategoryDisplay" xml:space="preserve">
     <value>Scherm</value>
   </data>
+  <data name="strCategoryGateway" xml:space="preserve">
+    <value>Gateway</value>
+  </data>
   <data name="strCategoryGeneral" xml:space="preserve">
     <value>Algemeen</value>
   </data>
   <data name="strCategoryMiscellaneous" xml:space="preserve">
     <value>Diversen</value>
+  </data>
+  <data name="strCategoryProtocol" xml:space="preserve">
+    <value>Protocol</value>
   </data>
   <data name="strCategoryRedirect" xml:space="preserve">
     <value>Verwijzing</value>
@@ -546,6 +573,9 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Voor lege gebruikersnaam, wachtwoord of domein velden gebruiken:</value>
   </data>
+  <data name="strEnc128Bit" xml:space="preserve">
+    <value>128-bit</value>
+  </data>
   <data name="strEnc128BitLogonOnly" xml:space="preserve">
     <value>128-bit (aanmelding alleen)</value>
   </data>
@@ -560,6 +590,9 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="strEndPort" xml:space="preserve">
     <value>Eind Poort</value>
+  </data>
+  <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
+    <value>AddExternalToolsToToolBar (frmMain) is mislukt. {0}</value>
   </data>
   <data name="strErrorAddFolderFailed" xml:space="preserve">
     <value>Map toevoegen (UI.Window.Tree) is mislukt. {0}</value>
@@ -576,8 +609,24 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="strErrorConnectionListSaveFailed" xml:space="preserve">
     <value>De connectie lijst kan niet worden opgeslagen..</value>
   </data>
+  <data name="strErrorDecryptionFailed" xml:space="preserve">
+    <value>Decryptie is mislukt. {0}</value>
+  </data>
+  <data name="strErrorEncryptionFailed" xml:space="preserve">
+    <value>Encryptie is mislukt. {0}</value>
+  </data>
+  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
+    <value>De beveiligingsinstelling voor Windows, "Systeemcryptografie: gebruik FIPS-compatibele algoritmes voor codering, hashing en ondertekening", is ingeschakeld. Deze instelling is niet compatibel met {0}.
+
+Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor meer informatie.  
+
+{0} wordt nu gesloten.</value>
+  </data>
   <data name="strErrors" xml:space="preserve">
     <value>Foutmeldingen</value>
+  </data>
+  <data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
+    <value>Het verbindingsopstartbestand kon niet worden geladen. {0}{0}{2}{0}{3}{0}{0} Om dataverlies te voorkomen zal {1} nu worden afgesloten.</value>
   </data>
   <data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
     <value>Controleer Database Versie (Config.Connections.Save) is mislukt. {0}</value>
@@ -650,6 +699,9 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="strGroupboxFiles" xml:space="preserve">
     <value>Bestanden</value>
+  </data>
+  <data name="strHost" xml:space="preserve">
+    <value>Host</value>
   </data>
   <data name="strHttpConnectFailed" xml:space="preserve">
     <value>HTTP verbinding mislukt!</value>
@@ -732,6 +784,12 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="strIntAppTitle" xml:space="preserve">
     <value>Interne Applicatie naam: {0}</value>
   </data>
+  <data name="strKeysCtrlAltDel" xml:space="preserve">
+    <value>CTRL-ALT-DEL</value>
+  </data>
+  <data name="strKeysCtrlEsc" xml:space="preserve">
+    <value>CTRL-ESC</value>
+  </data>
   <data name="strLabelAddress" xml:space="preserve">
     <value>Adres:</value>
   </data>
@@ -768,6 +826,9 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="strLabelPortableEdition" xml:space="preserve">
     <value>Mobiele Editie</value>
   </data>
+  <data name="strLabelProtocol" xml:space="preserve">
+    <value>Protocol:</value>
+  </data>
   <data name="strLabelPuttySessionsConfig" xml:space="preserve">
     <value>Om PuTTY Sessies te configureren klik op deze knop:</value>
   </data>
@@ -782,6 +843,15 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="strLabelSelectPanel" xml:space="preserve">
     <value>Selecteer een paneel uit de onderstaande lijst of klik op Nieuw om een nieuwe toe te voegen. Klik op OK om verder te gaan.</value>
+  </data>
+  <data name="strLabelServerStatus" xml:space="preserve">
+    <value>Server Status:</value>
+  </data>
+  <data name="strLabelSQLDatabaseName" xml:space="preserve">
+    <value>Database:</value>
+  </data>
+  <data name="strLabelSQLServerDatabaseName" xml:space="preserve">
+    <value>Database:</value>
   </data>
   <data name="strLabelUsername" xml:space="preserve">
     <value>Gebruikersnaam:</value>
@@ -852,6 +922,12 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="strMenuCopy" xml:space="preserve">
     <value>Kopiëren</value>
   </data>
+  <data name="strMenuCtrlAltDel" xml:space="preserve">
+    <value>Ctrl-Alt-Del</value>
+  </data>
+  <data name="strMenuCtrlEsc" xml:space="preserve">
+    <value>CTRL-Esc</value>
+  </data>
   <data name="strMenuDelete" xml:space="preserve">
     <value>Verwijder...</value>
   </data>
@@ -899,6 +975,12 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="strMenuFullScreenRDP" xml:space="preserve">
     <value>Volledig Scherm (RDP)</value>
+  </data>
+  <data name="strMenuHelp" xml:space="preserve">
+    <value>&amp;Help</value>
+  </data>
+  <data name="strMenuHelpContents" xml:space="preserve">
+    <value>mRemoteNG Help</value>
   </data>
   <data name="strMenuJumpTo" xml:space="preserve">
     <value>Ga naar</value>
@@ -951,11 +1033,17 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="strMenuReportBug" xml:space="preserve">
     <value>Meld een bug</value>
   </data>
+  <data name="strMenuResetLayout" xml:space="preserve">
+    <value>Herstel lay-out</value>
+  </data>
   <data name="strMenuSaveConnectionFile" xml:space="preserve">
     <value>Opslaan Connectie bestand</value>
   </data>
   <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
     <value>Opslaan Connectie bestand Als...</value>
+  </data>
+  <data name="strMenuScreenshot" xml:space="preserve">
+    <value>Schermafbeelding</value>
   </data>
   <data name="strMenuScreenshotManager" xml:space="preserve">
     <value>Screenshot beheerder</value>
@@ -972,8 +1060,14 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="strMenuShowText" xml:space="preserve">
     <value>Toon tekst</value>
   </data>
+  <data name="strMenuSmartSize" xml:space="preserve">
+    <value>SmartSize (RDP/VNC)</value>
+  </data>
   <data name="strMenuSSHFileTransfer" xml:space="preserve">
     <value>SSH Bestandsoverdracht</value>
+  </data>
+  <data name="strMenuStartChat" xml:space="preserve">
+    <value>Start Chat (VNC)</value>
   </data>
   <data name="strMenuSupportForum" xml:space="preserve">
     <value>Ondersteunings Forum</value>
@@ -989,6 +1083,9 @@ Beginnen met nieuwe Connectie bestand.</value>
   </data>
   <data name="strMenuViewOnly" xml:space="preserve">
     <value>Alleen bekijken (VNC)</value>
+  </data>
+  <data name="strMenuWebsite" xml:space="preserve">
+    <value>Website</value>
   </data>
   <data name="strMinimizeToSysTray" xml:space="preserve">
     <value>Minimaliseer naar het systeemvak</value>
@@ -1162,6 +1259,9 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="strPropertyDescriptionRDGatewayUsername" xml:space="preserve">
     <value>Hiermee geeft u de gebruikersnaam op waarmee een gebruiker verbinding kan maken met de RD-gateway-server.</value>
   </data>
+  <data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
+    <value>Selecteer of lokale schijfstations op de externe host moeten worden weergegeven.</value>
+  </data>
   <data name="strPropertyDescriptionRedirectKeys" xml:space="preserve">
     <value>Selecteer of toetscombinaties (b.v. Alt-Tab) moeten worden doorgestuurd naar de externe host.</value>
   </data>
@@ -1172,7 +1272,7 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
     <value>Selecteer of lokale printers getoond moeten worden op de externe host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
-    <value>Selecteer of de lokale smart cards moet beschikbaar zijn op de externe host.</value>
+    <value>Selecteer of lokale smartcards beschikbaar moeten zijn op de externe host.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Selecteer hoe externe geluiden moeten worden doorgestuurd.</value>
@@ -1224,6 +1324,9 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   </data>
   <data name="strPropertyNameAuthenticationMode" xml:space="preserve">
     <value>Authenticatie Modus</value>
+  </data>
+  <data name="strPropertyNameCacheBitmaps" xml:space="preserve">
+    <value>Cache Bitmapafbeeldingen</value>
   </data>
   <data name="strPropertyNameColors" xml:space="preserve">
     <value>Kleuren</value>
@@ -1282,6 +1385,9 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="strPropertyNamePort" xml:space="preserve">
     <value>Poort</value>
   </data>
+  <data name="strPropertyNameProtocol" xml:space="preserve">
+    <value>Protocol</value>
+  </data>
   <data name="strPropertyNamePuttySession" xml:space="preserve">
     <value>PuTTY Sessie</value>
   </data>
@@ -1312,11 +1418,23 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="strPropertyNameRedirectPorts" xml:space="preserve">
     <value>Poorten</value>
   </data>
+  <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
+    <value>Printers</value>
+  </data>
+  <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
+    <value>Smartcards</value>
+  </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Geluiden</value>
   </data>
+  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
+    <value>Rendering Engine</value>
+  </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Resolutie</value>
+  </data>
+  <data name="strPropertyNameSmartSizeMode" xml:space="preserve">
+    <value>SmartSize Modus</value>
   </data>
   <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>Gebruik consolesessie</value>
@@ -1338,6 +1456,9 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   </data>
   <data name="strPropertyNameVNCProxyPort" xml:space="preserve">
     <value>Proxy Poort</value>
+  </data>
+  <data name="strPropertyNameVNCProxyType" xml:space="preserve">
+    <value>Proxy-type</value>
   </data>
   <data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
     <value>Proxy Gebruikersnaam</value>
@@ -1413,6 +1534,12 @@ Bericht:
   </data>
   <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
     <value>Snelle Connectie geschiedenis bestaat mislukt!</value>
+  </data>
+  <data name="strRAW" xml:space="preserve">
+    <value>RAW</value>
+  </data>
+  <data name="strRDP" xml:space="preserve">
+    <value>RDP</value>
   </data>
   <data name="strRDP16777216Colors" xml:space="preserve">
     <value>16777216 Kleuren (24-bit)</value>
@@ -1564,6 +1691,9 @@ Bericht:
   <data name="strRdpSetResolutionFailed" xml:space="preserve">
     <value>RDP instellen resolutie mislukt!</value>
   </data>
+  <data name="strRDPSmartSize" xml:space="preserve">
+    <value>Smart Size</value>
+  </data>
   <data name="strRDPSoundBringToThisComputer" xml:space="preserve">
     <value>Afspelen op deze computer</value>
   </data>
@@ -1594,6 +1724,9 @@ Bericht:
   <data name="strRename" xml:space="preserve">
     <value>Hernoemen</value>
   </data>
+  <data name="strRlogin" xml:space="preserve">
+    <value>Rlogin</value>
+  </data>
   <data name="strSave" xml:space="preserve">
     <value>Opslaan</value>
   </data>
@@ -1611,6 +1744,12 @@ Bericht:
   </data>
   <data name="strScreen" xml:space="preserve">
     <value>Scherm</value>
+  </data>
+  <data name="strScreenshot" xml:space="preserve">
+    <value>Schermafbeelding</value>
+  </data>
+  <data name="strScreenshots" xml:space="preserve">
+    <value>Schermafbeeldingen</value>
   </data>
   <data name="strSendTo" xml:space="preserve">
     <value>Verstuur naar...</value>
@@ -1648,11 +1787,17 @@ Bericht:
   <data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
     <value>Enkele klik om naar geopende verbinding om te schakelen</value>
   </data>
+  <data name="strSmartSizeModeAspect" xml:space="preserve">
+    <value>Verhouding</value>
+  </data>
   <data name="strSmartSizeModeFree" xml:space="preserve">
     <value>Vrij</value>
   </data>
   <data name="strSmartSizeModeNone" xml:space="preserve">
     <value>Geen SmartSize</value>
+  </data>
+  <data name="strSocks5" xml:space="preserve">
+    <value>Socks 5</value>
   </data>
   <data name="strSort" xml:space="preserve">
     <value>Sorteer</value>
@@ -1693,11 +1838,17 @@ Bericht:
   <data name="strSSHTransferFailed" xml:space="preserve">
     <value>Overdracht</value>
   </data>
+  <data name="strStartIP" xml:space="preserve">
+    <value>Start IP</value>
+  </data>
   <data name="strStartPort" xml:space="preserve">
     <value>Start Poort</value>
   </data>
   <data name="strStartupExit" xml:space="preserve">
     <value>Opstarten/Afsluiten</value>
+  </data>
+  <data name="strStatus" xml:space="preserve">
+    <value>Status</value>
   </data>
   <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
     <value>Schakel Notificatiepaneel in:</value>
@@ -1710,6 +1861,12 @@ Bericht:
   </data>
   <data name="strTabsAndPanels" xml:space="preserve">
     <value>Tabbladen &amp;&amp; Panelen</value>
+  </data>
+  <data name="strTabUpdates" xml:space="preserve">
+    <value>Updates</value>
+  </data>
+  <data name="strTelnet" xml:space="preserve">
+    <value>Telnet</value>
   </data>
   <data name="strTheFollowing" xml:space="preserve">
     <value>De volgende:</value>
@@ -1738,6 +1895,12 @@ Bericht:
   <data name="strTryIntegrate" xml:space="preserve">
     <value>Probeer te integreren</value>
   </data>
+  <data name="strType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="strUltraVncRepeater" xml:space="preserve">
+    <value>UltraVNC Repeater</value>
+  </data>
   <data name="strUltraVNCSCListeningPort" xml:space="preserve">
     <value>Ultra VNC Enkele Klik Poort:</value>
   </data>
@@ -1755,6 +1918,9 @@ Bericht:
   </data>
   <data name="strUpdateCheckFailed" xml:space="preserve">
     <value>Controleren op update mislukt!</value>
+  </data>
+  <data name="strUpdateCheckPortableEdition" xml:space="preserve">
+    <value>mRemoteNG Portable Edition ondersteunt momenteel geen automatische updates.</value>
   </data>
   <data name="strUpdateDeleteFailed" xml:space="preserve">
     <value>Fout bij verwijderen van update-bestand!</value>
@@ -1796,11 +1962,17 @@ mRemoteNG zal nu worden gesloten en beginnen met de installatie.</value>
   <data name="strUseSameUsernameAndPassword" xml:space="preserve">
     <value>Gebruik dezelfde gebruikersnaam en wachtwoord</value>
   </data>
+  <data name="strUseSmartCard" xml:space="preserve">
+    <value>Gebruik een SmartCard</value>
+  </data>
   <data name="strUseSQLServer" xml:space="preserve">
     <value>Gebruik SQL Server om te connecties te laden en op te slaan</value>
   </data>
   <data name="strVersion" xml:space="preserve">
     <value>Versie</value>
+  </data>
+  <data name="strVnc" xml:space="preserve">
+    <value>VNC</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>VNC Sluiten connectie mislukt!</value>

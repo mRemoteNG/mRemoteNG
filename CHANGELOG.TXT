@@ -31,10 +31,11 @@
   Fix issue MR-277 - Inheritance configuration button not appear in configuration tab 
   Fix issue MR-284 - SSH: Text not showing properly
   Fix issue MR-299 - mRemoteNG crashes while using remotely (Windows XP remote desktop)
-  mRemoteNG now requires .NET Framework 3.0 instead of 2.0
+  mRemoteNG now requires .NET Framework 3.0 instead of 2.0.
   Added compatibility check for "Use FIPS compliant algorithms" security setting.
   Improved reporting of errors when encrypting and decrypting connection files.
-  Added partial Polish translation.
+  Updated translations.
+  Added translations for Spanish (Argentina), Italian, Polish, Portuguese, Chinese (Simplified).
   The panel tabs are now hidden if only one panel is open.
   Fix focus issue with RDP connections when changing tabs.
   Show changes live as connection tabs are being dragged around to change their order.

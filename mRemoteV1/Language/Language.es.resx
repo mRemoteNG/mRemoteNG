@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -59,7 +59,7 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -105,14 +105,14 @@
       </xsd:complexType>
     </xsd:element>
   </xsd:schema>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
     <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -219,6 +219,9 @@
   <data name="strButtonNew" xml:space="preserve">
     <value>&amp;Nuevo</value>
   </data>
+  <data name="strButtonOK" xml:space="preserve">
+    <value>&amp;OK</value>
+  </data>
   <data name="strButtonProperties" xml:space="preserve">
     <value>Propiedades</value>
   </data>
@@ -252,6 +255,9 @@
   </data>
   <data name="strCategoryGateway" xml:space="preserve">
     <value>Puerta de Enlace</value>
+  </data>
+  <data name="strCategoryGeneral" xml:space="preserve">
+    <value>General</value>
   </data>
   <data name="strCategoryMiscellaneous" xml:space="preserve">
     <value>Varios</value>
@@ -413,6 +419,9 @@ Versión de Control {0} de VNCSharpNG</value>
   <data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
     <value>No se pudo definir el estado del host!</value>
   </data>
+  <data name="strConfigUiLoadFailed" xml:space="preserve">
+    <value>Error al Cargar la Interfaz de Configuración de Usuario</value>
+  </data>
   <data name="strConfirmCloseConnection" xml:space="preserve">
     <value>Confirme el cierre de las pestañas de conexiones</value>
   </data>
@@ -454,6 +463,9 @@ Versión de Control {0} de VNCSharpNG</value>
   </data>
   <data name="strConnecting" xml:space="preserve">
     <value>Conectando...</value>
+  </data>
+  <data name="strConnectionEventConnected" xml:space="preserve">
+    <value>Se lanzó el evento Connected en Protocol</value>
   </data>
   <data name="strConnectionEventConnectedDetail" xml:space="preserve">
     <value>Connexión a "{0}" via "{1}" establecida por el usuario "{2}" (Descripción: "{3}"; Campo de Usuario: "{4}")</value>
@@ -512,6 +524,9 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="strConnenctionClosedByUserDetail" xml:space="preserve">
     <value>Connexión a {0} via {1} cerrada por el usuario {2}.  (Descripción: "{3}"; Campo de Usuario: "{4}")</value>
   </data>
+  <data name="strConnenctionCloseEventFailed" xml:space="preserve">
+    <value>¡Ha fallado el evento Closed en Connection!</value>
+  </data>
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>¡No se pudo crear un nuevo archivo de conexiones!</value>
   </data>
@@ -539,8 +554,14 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="strEmptyUsernamePasswordDomainFields" xml:space="preserve">
     <value>Para campos de Nombre de Usuario, Contraseña y Dominio vacíos usar:</value>
   </data>
+  <data name="strEnc128Bit" xml:space="preserve">
+    <value>128-bit</value>
+  </data>
   <data name="strEnc128BitLogonOnly" xml:space="preserve">
     <value>128-bit (sólo inicio de sesión)</value>
+  </data>
+  <data name="strEncBasic" xml:space="preserve">
+    <value>Básico</value>
   </data>
   <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
     <value>Cifrar por completo el archivo de conexión</value>
@@ -554,17 +575,45 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="strErrorAddFolderFailed" xml:space="preserve">
     <value>Añadir Carpeta (UI.Window.Tree) fallida. {0}</value>
   </data>
+  <data name="strErrorBadDatabaseVersion" xml:space="preserve">
+    <value>La versión de Base de Datos {0} No es compatible con esta versión de {1}.</value>
+  </data>
   <data name="strErrorCloneNodeFailed" xml:space="preserve">
     <value>Clonado de Nodo (Tree.Node) fallido. {0}</value>
   </data>
   <data name="strErrorCode" xml:space="preserve">
     <value>Código de error {0}.</value>
   </data>
+  <data name="strErrorConnectionListSaveFailed" xml:space="preserve">
+    <value>La lista de conexiones no ha podido ser grabada.</value>
+  </data>
+  <data name="strErrorDecryptionFailed" xml:space="preserve">
+    <value>Descifrado fallido. {0}</value>
+  </data>
+  <data name="strErrorEncryptionFailed" xml:space="preserve">
+    <value>Cifrado fallido. {0}</value>
+  </data>
+  <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
+    <value>La configuración de Seguridad de Windows, "Criptografia del sistema: Usar Algoritmos compatibles FIPS para Encripción, Hashing y Firma", esta habilitada. Esta configuración es incompatible con {0}.
+
+Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/811833 Para más información.
+
+{0} Se Cerrará.</value>
+  </data>
   <data name="strErrors" xml:space="preserve">
     <value>Errores</value>
   </data>
+  <data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
+    <value>No ha podido cargarse el archivo de conexión inicial.{0}{0}{2}{0}{3}{0}{0}Para evitar la pérdida de datos, {1} se cerrará ahora.</value>
+  </data>
+  <data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
+    <value>Error.{0} en Proceso VerifyDatabaseVersion (Config.Connections.Save)</value>
+  </data>
   <data name="strExpandAllFolders" xml:space="preserve">
     <value>Expandir todas las carpetas</value>
+  </data>
+  <data name="strExperimental" xml:space="preserve">
+    <value>Experimental</value>
   </data>
   <data name="strExport" xml:space="preserve">
     <value>Exportar</value>
@@ -602,8 +651,14 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="strFormatInheritDescription" xml:space="preserve">
     <value>Descripción de la propiedad heredada: {0}</value>
   </data>
+  <data name="strFree" xml:space="preserve">
+    <value>Gratis</value>
+  </data>
   <data name="strFullscreen" xml:space="preserve">
     <value>Pantalla Completa</value>
+  </data>
+  <data name="strGeneral" xml:space="preserve">
+    <value>General</value>
   </data>
   <data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
     <value>Adquisición de Información de la Conexión desde SQL fallida</value>
@@ -622,6 +677,9 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="strGroupboxFiles" xml:space="preserve">
     <value>Archivos</value>
+  </data>
+  <data name="strHost" xml:space="preserve">
+    <value>Servidor</value>
   </data>
   <data name="strHttpConnectFailed" xml:space="preserve">
     <value>¡Conexión HTTP Fallida!</value>
@@ -679,6 +737,21 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="strIntAppConnectionFailed" xml:space="preserve">
     <value>¡Conexión fallida!</value>
+  </data>
+  <data name="strIntAppDisposeFailed" xml:space="preserve">
+    <value>¡La liberación del proceso Int App ha fallado!</value>
+  </data>
+  <data name="strIntAppFocusFailed" xml:space="preserve">
+    <value>¡No se pudo centrar el foco en Int App!</value>
+  </data>
+  <data name="strIntAppTitle" xml:space="preserve">
+    <value>Título Int App: {0}</value>
+  </data>
+  <data name="strKeysCtrlAltDel" xml:space="preserve">
+    <value>CTRL-ALT-DEL</value>
+  </data>
+  <data name="strKeysCtrlEsc" xml:space="preserve">
+    <value>CTRL-ESC</value>
   </data>
   <data name="strLabelAddress" xml:space="preserve">
     <value>Dirección:</value>
@@ -811,6 +884,12 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="strMenuCopy" xml:space="preserve">
     <value>Copiar</value>
+  </data>
+  <data name="strMenuCtrlAltDel" xml:space="preserve">
+    <value>Ctrl-Alt-Del</value>
+  </data>
+  <data name="strMenuCtrlEsc" xml:space="preserve">
+    <value>Ctrl-Esc</value>
   </data>
   <data name="strMenuDelete" xml:space="preserve">
     <value>Borrar...</value>
@@ -998,6 +1077,9 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="strNewTitle" xml:space="preserve">
     <value>Nuevo Título</value>
   </data>
+  <data name="strNo" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="strNoCompression" xml:space="preserve">
     <value>Sin Compresión</value>
   </data>
@@ -1009,6 +1091,9 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="strNone" xml:space="preserve">
     <value>Ninguno</value>
+  </data>
+  <data name="strNormal" xml:space="preserve">
+    <value>Normal</value>
   </data>
   <data name="strNoSmartSize" xml:space="preserve">
     <value>Sin SmartSize</value>
@@ -1147,7 +1232,7 @@ Arrancando con un nuevo archivo de conexiones.</value>
     <value>Seleccione si las impresoras locales deben ser mostradas en el host remoto.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
-    <value>Seleccione si las smart cards locales deben estar disponibles en el host remoto.</value>
+    <value>Seleccione si las tarjetas inteligentes deben presentarse a la máquina remota.</value>
   </data>
   <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
     <value>Seleccione cómo deberá ser redireccionado el sonido remoto.</value>
@@ -1251,6 +1336,9 @@ Arrancando con un nuevo archivo de conexiones.</value>
   <data name="strPropertyNameName" xml:space="preserve">
     <value>Nombre</value>
   </data>
+  <data name="strPropertyNamePanel" xml:space="preserve">
+    <value>Panel</value>
+  </data>
   <data name="strPropertyNamePassword" xml:space="preserve">
     <value>Contraseña</value>
   </data>
@@ -1292,6 +1380,9 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
     <value>Impresoras</value>
+  </data>
+  <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
+    <value>Tarjetas Inteligentes</value>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Sonidos</value>
@@ -1381,6 +1472,12 @@ Mensaje:
   </data>
   <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
     <value>¡Fallo en el Histórico de Conexiones Rápidas!</value>
+  </data>
+  <data name="strRAW" xml:space="preserve">
+    <value>RAW</value>
+  </data>
+  <data name="strRDP" xml:space="preserve">
+    <value>RDP</value>
   </data>
   <data name="strRDP16777216Colors" xml:space="preserve">
     <value>16777216 Colores (24-bit)</value>
@@ -1529,6 +1626,9 @@ Mensaje:
   <data name="strRdpSetResolutionFailed" xml:space="preserve">
     <value>¡RDP Asignación de Resolución fallida!</value>
   </data>
+  <data name="strRDPSmartSize" xml:space="preserve">
+    <value>Tamaño inteligente</value>
+  </data>
   <data name="strRDPSoundBringToThisComputer" xml:space="preserve">
     <value>Traer a este equipo</value>
   </data>
@@ -1559,6 +1659,9 @@ Mensaje:
   <data name="strRename" xml:space="preserve">
     <value>Renombrar</value>
   </data>
+  <data name="strRlogin" xml:space="preserve">
+    <value>Rlogin</value>
+  </data>
   <data name="strSave" xml:space="preserve">
     <value>Guardar</value>
   </data>
@@ -1582,6 +1685,12 @@ Mensaje:
   </data>
   <data name="strSendTo" xml:space="preserve">
     <value>Enviar a...</value>
+  </data>
+  <data name="strSessionGetFailed" xml:space="preserve">
+    <value>Falla al iniciar sesiones en Fondo</value>
+  </data>
+  <data name="strSessionKillFailed" xml:space="preserve">
+    <value>Fallo al detener sesión en Fondo</value>
   </data>
   <data name="strSetHostnameLikeDisplayName" xml:space="preserve">
     <value>Usar el nombre del host como nombre a mostrar cuando se creen nuevas conexiones</value>
@@ -1619,6 +1728,9 @@ Mensaje:
   <data name="strSmartSizeModeNone" xml:space="preserve">
     <value>Sin SmartSize</value>
   </data>
+  <data name="strSocks5" xml:space="preserve">
+    <value>Socks 5</value>
+  </data>
   <data name="strSort" xml:space="preserve">
     <value>Ordenar</value>
   </data>
@@ -1629,7 +1741,7 @@ Mensaje:
     <value>Descendente (Z-A)</value>
   </data>
   <data name="strSpecialKeys" xml:space="preserve">
-    <value>Teclas Especiales</value>
+    <value>Teclas especiales</value>
   </data>
   <data name="strSQLInfo" xml:space="preserve">
     <value>¡Por favor, mire en Ayuda - Comenzando - Configuración SQL para más información!</value>
@@ -1664,6 +1776,9 @@ Mensaje:
   <data name="strStartPort" xml:space="preserve">
     <value>Puerto Inicial</value>
   </data>
+  <data name="strStartupExit" xml:space="preserve">
+    <value>Inicio/Salir</value>
+  </data>
   <data name="strStatus" xml:space="preserve">
     <value>Estado</value>
   </data>
@@ -1682,8 +1797,14 @@ Mensaje:
   <data name="strTabUpdates" xml:space="preserve">
     <value>Actualizaciones</value>
   </data>
+  <data name="strTelnet" xml:space="preserve">
+    <value>Telnet</value>
+  </data>
   <data name="strTheFollowing" xml:space="preserve">
     <value>El siguiente:</value>
+  </data>
+  <data name="strTitleError" xml:space="preserve">
+    <value>Error ({0})</value>
   </data>
   <data name="strTitleInformation" xml:space="preserve">
     <value>Información ({0})</value>
@@ -1709,6 +1830,9 @@ Mensaje:
   <data name="strType" xml:space="preserve">
     <value>Tipo</value>
   </data>
+  <data name="strUltraVncRepeater" xml:space="preserve">
+    <value>Repetidor de Ultra VNC</value>
+  </data>
   <data name="strUltraVNCSCListeningPort" xml:space="preserve">
     <value>Puerto SingleClick de UltraVNC:</value>
   </data>
@@ -1726,6 +1850,9 @@ Mensaje:
   </data>
   <data name="strUpdateCheckFailed" xml:space="preserve">
     <value>¡Comprobación de actualizaciones fallida!</value>
+  </data>
+  <data name="strUpdateCheckPortableEdition" xml:space="preserve">
+    <value>mRemoteNG Portable Edition no soporta por el momento actualizaciones automáticas.</value>
   </data>
   <data name="strUpdateDeleteFailed" xml:space="preserve">
     <value>¡Error borrando el archivo de actualización!</value>
@@ -1767,11 +1894,17 @@ mRemoteNG ahora se cerrará y comenzará la instalación.</value>
   <data name="strUseSameUsernameAndPassword" xml:space="preserve">
     <value>Usar el mismo nombre de usuario y contraseña</value>
   </data>
+  <data name="strUseSmartCard" xml:space="preserve">
+    <value>Usar una tarjeta inteligente</value>
+  </data>
   <data name="strUseSQLServer" xml:space="preserve">
     <value>Emplear SQL Server para cargar &amp;&amp; guardar las conexiones</value>
   </data>
   <data name="strVersion" xml:space="preserve">
     <value>Versión</value>
+  </data>
+  <data name="strVnc" xml:space="preserve">
+    <value>VNC</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
     <value>¡Desconexión VNC fallida!</value>
@@ -1808,6 +1941,9 @@ mRemoteNG ahora se cerrará y comenzará la instalación.</value>
   </data>
   <data name="strWeifenLuoAttribution" xml:space="preserve">
     <value>Emplea el DockPanel Suite de [Weifen Luo]</value>
+  </data>
+  <data name="strWeifenLuoAttributionURL" xml:space="preserve">
+    <value>http://sourceforge.net/projects/dockpanelsuite/</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
     <value>Escribir archivo de log (mRemoteNG.log)</value>
