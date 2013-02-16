@@ -21,6 +21,11 @@ Copyright © 2002 Richard Lopes
 MIT License
 http://www.codeproject.com/KB/recipes/command_line.aspx
 
+DotNetVer
+Copyright © 2010 David Grinberg
+Copyright © 2010-2011 Brandon Hansen
+http://nsis.sourceforge.net/DotNetVer
+
 
 Included Components
 ===================

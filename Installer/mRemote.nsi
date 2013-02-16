@@ -2,6 +2,7 @@
 !include "WordFunc.nsh"
 !insertmacro VersionCompare
 
+!include "DotNetVer.nsh"
 !include "..\Release\Version.nsh"
 
 ; This will be passed in using the /D switch by BUILD.CMD
@@ -12,9 +13,6 @@
 	!define PRODUCT_VERSION_FRIENDLY "${PRODUCT_VERSION_SHORT}"
 	!define PRODUCT_VERSION_TAGGED "${PRODUCT_VERSION_SHORT}"
 !endif
-
-; Global Variables
-Var InstallDotNET
 
 ; Basic Config
 Name "mRemoteNG ${PRODUCT_VERSION_FRIENDLY}"
@@ -133,22 +131,7 @@ Function SelectLanguage
 		Abort
 
 	; Check .NET version
-	StrCpy $InstallDotNET "No"
-	Call GetDotNETVersion
-	Pop $0
-
-	${If} $0 == "not found"
-		StrCpy $InstallDotNET "Yes"
-	${EndIf}
-
-	StrCpy $0 $0 "" 1 # skip "v"
-
-	${VersionCompare} $0 "3.0" $1
-	${If} $1 == 2
-		StrCpy $InstallDotNET "Yes"
-	${EndIf}
-
-	${If} $InstallDotNET == "Yes"
+	${IfNot} ${HasDotNet3.0}
 		MessageBox MB_OK|MB_ICONEXCLAMATION "$(RequiresNetFramework)"
 		Quit
 	${EndIf}
@@ -212,15 +195,3 @@ Section "un.Uninstall"
 	DeleteRegKey /ifempty HKCU "Software\mRemoteNG"
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG"
 SectionEnd
-
-Function GetDotNETVersion
-	Push $0
-	Push $1
-
-	System::Call "mscoree::GetCORVersion(w .r0, i ${NSIS_MAX_STRLEN}, *i) i .r1"
-	StrCmp $1 "error" 0 +2
-	StrCpy $0 "not found"
-
-	Pop $1
-	Exch $0
-FunctionEnd
