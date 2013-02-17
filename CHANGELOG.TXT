@@ -29,6 +29,7 @@
   Fix issue MR-202 - The Connection "Tab" show Ampersands as underscores.
   Fix issue MR-214 - Hostname/IP reset
   Fix issue MR-233 - Backslash at end of password prevents success of putty invocation and corresponding auto-logon
+  Fix issue MR-235 - Config file gets corrupted when leaving the password entry box with ESC
   Fix issue MR-277 - Inheritance configuration button not appear in configuration tab 
   Fix issue MR-284 - SSH: Text not showing properly
   Fix issue MR-299 - mRemoteNG crashes while using remotely (Windows XP remote desktop)

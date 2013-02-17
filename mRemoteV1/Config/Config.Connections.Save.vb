@@ -468,7 +468,7 @@ Namespace Config
 
             Private Sub SaveToXml()
                 Try
-                    If IsConnectionsFileLoaded = False Then Exit Sub
+                    If Not IsConnectionsFileLoaded Then Exit Sub
 
                     Dim treeNode As TreeNode
 

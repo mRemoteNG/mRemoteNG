@@ -1356,6 +1356,8 @@ Namespace App
         End Sub
 
         Public Shared Sub SaveConnections(Optional ByVal Update As Boolean = False)
+            If Not IsConnectionsFileLoaded Then Exit Sub
+
             Dim previousTimerState As Boolean = False
 
             Try

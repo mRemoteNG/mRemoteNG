@@ -38,6 +38,7 @@ Public Class frmMain
 
         ' Load GUI Configuration
         SettingsLoad.Load()
+        If Not IsConnectionsFileLoaded Then Close()
 
         Debug.Print("---------------------------" & vbNewLine & "[START] - " & Now)
 
