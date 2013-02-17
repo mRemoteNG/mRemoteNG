@@ -109,10 +109,10 @@ Namespace Connection
             LocalizedDescription("strPropertyDescriptionAddress")> _
         Public Property Hostname() As String
             Get
-                Return Me._Hostname
+                Return Me._Hostname.Trim()
             End Get
             Set(ByVal value As String)
-                Me._Hostname = value
+                Me._Hostname = value.Trim()
             End Set
         End Property
 
@@ -132,13 +132,13 @@ Namespace Connection
                         parCon = parCont.ConnectionInfo
                     End If
 
-                    Return parCon.Username
+                    Return parCon.Username.Trim()
                 Else
-                    Return Me._Username
+                    Return Me._Username.Trim()
                 End If
             End Get
             Set(ByVal value As String)
-                Me._Username = value
+                Me._Username = value.Trim()
             End Set
         End Property
 
@@ -185,13 +185,13 @@ Namespace Connection
                         parCon = parCont.ConnectionInfo
                     End If
 
-                    Return parCon.Domain
+                    Return parCon.Domain.Trim()
                 Else
-                    Return Me._Domain
+                    Return Me._Domain.Trim()
                 End If
             End Get
             Set(ByVal value As String)
-                Me._Domain = value
+                Me._Domain = value.Trim()
             End Set
         End Property
 #End Region
@@ -482,13 +482,13 @@ Namespace Connection
                         parCon = parCont.ConnectionInfo
                     End If
 
-                    Return parCon.RDGatewayHostname
+                    Return parCon.RDGatewayHostname.Trim()
                 Else
-                    Return Me._RDGatewayHostname
+                    Return Me._RDGatewayHostname.Trim()
                 End If
             End Get
             Set(ByVal value As String)
-                Me._RDGatewayHostname = value
+                Me._RDGatewayHostname = value.Trim()
             End Set
         End Property
 
@@ -535,13 +535,13 @@ Namespace Connection
                         parCon = parCont.ConnectionInfo
                     End If
 
-                    Return parCon.RDGatewayUsername
+                    Return parCon.RDGatewayUsername.Trim()
                 Else
-                    Return Me._RDGatewayUsername
+                    Return Me._RDGatewayUsername.Trim()
                 End If
             End Get
             Set(ByVal value As String)
-                Me._RDGatewayUsername = value
+                Me._RDGatewayUsername = value.Trim()
             End Set
         End Property
 
@@ -588,13 +588,13 @@ Namespace Connection
                         parCon = parCont.ConnectionInfo
                     End If
 
-                    Return parCon.RDGatewayDomain
+                    Return parCon.RDGatewayDomain.Trim()
                 Else
-                    Return Me._RDGatewayDomain
+                    Return Me._RDGatewayDomain.Trim()
                 End If
             End Get
             Set(ByVal value As String)
-                Me._RDGatewayDomain = value
+                Me._RDGatewayDomain = value.Trim()
             End Set
         End Property
 #End Region

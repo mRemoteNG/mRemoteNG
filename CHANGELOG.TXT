@@ -21,6 +21,7 @@
   Fix issue MR-165 - Can't close About window if it is the last tab
   Fix issue MR-166 - Inheritance button is disabled on some connections
   Fix issue MR-172 - RDGatewayPassword is unencrypted in confCons.xml file
+  Fix issue MR-174 - Trailing Space on a Hostname/IP will cause the connection not to happen.
   Fix issue MR-176 - Del key while editing connection name triggers 'Delete Connection'
   Fix issue MR-181 - Sessions on startup
   Fix issue MR-196 - Cannot export list without usernames and passwords
