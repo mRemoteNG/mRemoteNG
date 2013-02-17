@@ -150,6 +150,10 @@ Var /GLOBAL __DONTNET_FOUNDVER
     ; Check for .NET 1.0 to 3.5
     ReadRegDWORD $3 HKLM "SOFTWARE\Microsoft\NET Framework Setup\NDP\$1" "Install"
     ReadRegDWORD $4 HKLM "SOFTWARE\Microsoft\NET Framework Setup\NDP\$1" "SP"
+    IntCmp $3 1 dotnetcheck.skipalt
+    ; Alternate check for versions that don't set the Install key
+    ReadRegDWORD $3 HKLM "SOFTWARE\Microsoft\NET Framework Setup\NDP\$1\Setup" "InstallSuccess"
+    dotnetcheck.skipalt:
     ; This is a sanity check that works on .NET 1.0 to 3.5
     ; if it fails check for dotnet 4
     IntCmp $3 0 dotnetcheck.40
