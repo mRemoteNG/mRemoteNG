@@ -38,7 +38,6 @@ Public Class frmMain
 
         ' Load GUI Configuration
         SettingsLoad.Load()
-        If Not IsConnectionsFileLoaded Then Close()
 
         Debug.Print("---------------------------" & vbNewLine & "[START] - " & Now)
 
@@ -64,6 +63,10 @@ Public Class frmMain
 
         'LoadCredentials()
         LoadConnections()
+        If Not IsConnectionsFileLoaded Then
+            Application.Exit()
+            Return
+        End If
 
         If My.Settings.StartupComponentsCheck Then
             Windows.Show(UI.Window.Type.ComponentsCheck)
@@ -163,14 +166,16 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        If My.Settings.ConfirmExit And WindowList.Count > 0 Then
-            Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, My.Language.strConfirmExitMainInstruction, "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
-            If cTaskDialog.VerificationChecked Then
-                My.Settings.ConfirmExit = False
-            End If
-            If Result = DialogResult.No Then
-                e.Cancel = True
-                Exit Sub
+        If WindowList IsNot Nothing Then
+            If My.Settings.ConfirmExit And WindowList.Count > 0 Then
+                Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, My.Language.strConfirmExitMainInstruction, "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                If cTaskDialog.VerificationChecked Then
+                    My.Settings.ConfirmExit = False
+                End If
+                If result = DialogResult.No Then
+                    e.Cancel = True
+                    Exit Sub
+                End If
             End If
         End If
 
@@ -178,9 +183,11 @@ Public Class frmMain
 
         _IsClosing = True
 
-        For Each Window As UI.Window.Base In WindowList
-            Window.Close()
-        Next
+        If WindowList IsNot Nothing Then
+            For Each window As UI.Window.Base In WindowList
+                window.Close()
+            Next
+        End If
 
         Debug.Print("[END] - " & Now)
     End Sub
