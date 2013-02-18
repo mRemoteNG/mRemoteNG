@@ -1,29 +1,24 @@
-1.70 (XXXX-XX-XX):
+1.70 Beta 2 (XXXX-XX-XX):
   Fix issue MR-47 - Silent Installation Prompts for Language
   Fix issue MR-54 - Error When disconnecting from SSL channel RDP
   Fix issue MR-58 - Bug when duplicating connection in connection view 
   Fix issue MR-68 - Config Window Loses Options
   Fix issue MR-71 - Minimizing mRemoteNG causes temporary re-size of Putty sessions (windows)
-  Fix issue MR-77 - VerifyDatabaseVersion (Config.Connections.Save) failed. Version string portion was too short or too long.
-  Fix issue MR-78 - Renaming Connections
-  Fix issue MR-79 - MoveUp/Down item doesn't work + Sort button broken
   Fix issue MR-80 - Reconnect previous sessions
   Fix issue MR-81 - Problem Duplicating Folder w/ Sub-Folders
   Fix issue MR-85 - Microsoft .NET Framework warning
   Fix issue MR-86 - Citrix GDI+ Error when screen is locked
-  Fix issue MR-93 - Regional settings problem when using SQL connection in mRemoteNG
   Fix issue MR-96 - When pressing SHIFT+F4 to create a new connection inside a folder, the new connections doesn't inherit any properties from its parent
-  Fix issue MR-97 - Integrate Dutch translation
-  Fix issue MR-98 - Integrate Russian and Ukranian translations
-  Fix issue MR-99 - Integrate Spanish translation
   Fix issue MR-101 - Collapse all folders causes a NullReferenceException
-  Fix issue MR-131 - RD Gateway does not respect setting for use different credentials
   Fix issue MR-165 - Can't close About window if it is the last tab
   Fix issue MR-166 - Inheritance button is disabled on some connections
+  Fix issue MR-167 - Name and description of properties not show in inheritance list
+  Fix issue MR-171 - Inherit configuration not showing friendly names for each inherit component
   Fix issue MR-172 - RDGatewayPassword is unencrypted in confCons.xml file
   Fix issue MR-174 - Trailing Space on a Hostname/IP will cause the connection not to happen.
   Fix issue MR-175 - Problem with focus when 2 or more PuTTY sessions opened
   Fix issue MR-176 - Del key while editing connection name triggers 'Delete Connection'
+  Fix issue MR-178 - 3 different panels crashes all connections
   Fix issue MR-181 - Sessions on startup
   Fix issue MR-190 - Can't click on tab/session
   Fix issue MR-196 - Cannot export list without usernames and passwords
@@ -33,14 +28,30 @@
   Fix issue MR-224 - Session tabs become un-clickable after duplicating a tab or opening a new one in the same panel
   Fix issue MR-233 - Backslash at end of password prevents success of putty invocation and corresponding auto-logon
   Fix issue MR-235 - Config file gets corrupted when leaving the password entry box with ESC
-  Fix issue MR-277 - Inheritance configuration button not appear in configuration tab 
+  Fix issue MR-264 - Windows 8 support
+  Fix issue MR-277 - Inheritance configuration button not appear in configuration tab
   Fix issue MR-284 - SSH: Text not showing properly
   Fix issue MR-299 - mRemoteNG crashes while using remotely (Windows XP remote desktop)
+  Fix issue MR-306 - Fatal .NET exception on program start
+  Fix issue MR-313 - PuTTY window not maximized when loading from saved session
   mRemoteNG now requires .NET Framework 3.0 instead of 2.0.
-  Added compatibility check for "Use FIPS compliant algorithms" security setting.
-  Improved reporting of errors when encrypting and decrypting connection files.
   Updated translations.
   Added translations for Spanish (Argentina), Italian, Polish, Portuguese, Chinese (Simplified).
+  Improved the use of Tab and Shift-Tab to cycle through entries in the Config grid.
+  Improved loading of XML files from older versions of mRemote/mRemoteNG
+
+1.70 Beta 1 (2012-02-27):
+  Fix issue MR-77 - VerifyDatabaseVersion (Config.Connections.Save) failed. Version string portion was too short or too long.
+  Fix issue MR-78 - Renaming Connections
+  Fix issue MR-79 - MoveUp/Down item doesn't work + Sort button broken
+  Fix issue MR-93 - Regional settings problem when using SQL connection in mRemoteNG
+  Fix issue MR-97 - Integrate Dutch translation
+  Fix issue MR-98 - Integrate Russian and Ukranian translations
+  Fix issue MR-99 - Integrate Spanish translation
+  Fix issue MR-131 - RD Gateway does not respect setting for use different credentials
+  Added compatibility check for "Use FIPS compliant algorithms" security setting.
+  Improved reporting of errors when encrypting and decrypting connection files.
+  Added partial Polish translation.
   The panel tabs are now hidden if only one panel is open.
   Fix focus issue with RDP connections when changing tabs.
   Show changes live as connection tabs are being dragged around to change their order.
@@ -52,7 +63,6 @@
   Made the use of CredSSP for RDP connections optional.
   Updated VncSharpNG to version 1.2.4440.36644.
   Added debugging symbols for VncSharpNG.
-  Improved the use of Tab and Shift-Tab to cycle through entries in the Config grid.
 
 1.69 (2011-12-09):
   Fixed issue #66 - Fresh Install Fails to Create Config
