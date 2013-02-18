@@ -1,4 +1,4 @@
-1.70 Beta 2 (XXXX-XX-XX):
+1.70 Beta 2 (2013-02-18):
   Fix issue MR-47 - Silent Installation Prompts for Language
   Fix issue MR-54 - Error When disconnecting from SSL channel RDP
   Fix issue MR-58 - Bug when duplicating connection in connection view 
@@ -38,7 +38,7 @@
   Updated translations.
   Added translations for Spanish (Argentina), Italian, Polish, Portuguese, Chinese (Simplified).
   Improved the use of Tab and Shift-Tab to cycle through entries in the Config grid.
-  Improved loading of XML files from older versions of mRemote/mRemoteNG
+  Improved loading of XML files from older versions of mRemote/mRemoteNG.
 
 1.70 Beta 1 (2012-02-27):
   Fix issue MR-77 - VerifyDatabaseVersion (Config.Connections.Save) failed. Version string portion was too short or too long.
