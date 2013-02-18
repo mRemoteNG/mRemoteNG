@@ -920,8 +920,13 @@ Namespace UI
             End Sub
 
             Private Sub TabController_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.MouseUp
-                Debug.Print("UI.Window.Connection.TabController_MouseUp()")
                 Try
+                    Dim clickedTab As Magic.Controls.TabPage = TabController.TabPageFromPoint(e.Location)
+                    If clickedTab IsNot Nothing And TabController.SelectedTab IsNot clickedTab Then
+                        TabController.SelectedTab = clickedTab
+                        Return
+                    End If
+
                     Select Case e.Button
                         Case MouseButtons.Left
                             FocusIC()
