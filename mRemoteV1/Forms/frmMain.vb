@@ -1,3 +1,4 @@
+Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 Imports System.Reflection
 Imports System.Runtime.InteropServices
@@ -799,6 +800,32 @@ Public Class frmMain
 
     Private Sub pnlDock_ActiveDocumentChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlDock.ActiveDocumentChanged
         ActivateConnection()
+    End Sub
+
+    Public Sub ShowHidePanelTabs(Optional closingDocument As DockContent = Nothing)
+        Dim newDocumentStyle As DocumentStyle = pnlDock.DocumentStyle
+
+        If My.Settings.AlwaysShowPanelTabs Then
+            newDocumentStyle = DocumentStyle.DockingWindow ' Show the panel tabs
+        Else
+            Dim nonConnectionPanelCount As Integer = 0
+            For Each document As DockContent In pnlDock.Documents
+                If (closingDocument Is Nothing OrElse document IsNot closingDocument) And Not TypeOf document Is UI.Window.Connection Then
+                    nonConnectionPanelCount = nonConnectionPanelCount + 1
+                End If
+            Next
+
+            If nonConnectionPanelCount = 0 Then
+                newDocumentStyle = DocumentStyle.DockingSdi ' Hide the panel tabs
+            Else
+                newDocumentStyle = DocumentStyle.DockingWindow ' Show the panel tabs
+            End If
+        End If
+
+        If Not pnlDock.DocumentStyle = newDocumentStyle Then
+            pnlDock.DocumentStyle = newDocumentStyle
+            pnlDock.Size = New Size(1, 1)
+        End If
     End Sub
 #End Region
 

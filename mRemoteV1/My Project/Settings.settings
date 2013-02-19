@@ -524,5 +524,8 @@
     <Setting Name="ConDefaultUseCredSsp" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="AlwaysShowPanelTabs" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

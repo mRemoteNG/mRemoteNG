@@ -109,6 +109,7 @@ Public Class frmOptions
     Friend WithEvents lblExperimental As System.Windows.Forms.Label
     Friend WithEvents lblSQLDatabaseName As System.Windows.Forms.Label
     Friend WithEvents txtSQLDatabaseName As System.Windows.Forms.TextBox
+    Friend WithEvents chkAlwaysShowPanelTabs As System.Windows.Forms.CheckBox
     Private components As System.ComponentModel.IContainer
 
     Private Sub InitializeComponent()
@@ -224,6 +225,7 @@ Public Class frmOptions
         Me.lblSQLPassword = New System.Windows.Forms.Label()
         Me.tabUpdates = New System.Windows.Forms.TabPage()
         Me.tabAdvanced = New System.Windows.Forms.TabPage()
+        Me.chkAlwaysShowPanelTabs = New System.Windows.Forms.CheckBox()
         CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProxy.SuspendLayout()
@@ -846,7 +848,7 @@ Public Class frmOptions
         'chkShowFullConnectionsFilePathInTitle
         '
         Me.chkShowFullConnectionsFilePathInTitle.AutoSize = True
-        Me.chkShowFullConnectionsFilePathInTitle.Location = New System.Drawing.Point(3, 128)
+        Me.chkShowFullConnectionsFilePathInTitle.Location = New System.Drawing.Point(3, 151)
         Me.chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle"
         Me.chkShowFullConnectionsFilePathInTitle.Size = New System.Drawing.Size(239, 17)
         Me.chkShowFullConnectionsFilePathInTitle.TabIndex = 4
@@ -856,7 +858,7 @@ Public Class frmOptions
         'chkShowSystemTrayIcon
         '
         Me.chkShowSystemTrayIcon.AutoSize = True
-        Me.chkShowSystemTrayIcon.Location = New System.Drawing.Point(3, 176)
+        Me.chkShowSystemTrayIcon.Location = New System.Drawing.Point(3, 199)
         Me.chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon"
         Me.chkShowSystemTrayIcon.Size = New System.Drawing.Size(172, 17)
         Me.chkShowSystemTrayIcon.TabIndex = 5
@@ -866,7 +868,7 @@ Public Class frmOptions
         'chkMinimizeToSystemTray
         '
         Me.chkMinimizeToSystemTray.AutoSize = True
-        Me.chkMinimizeToSystemTray.Location = New System.Drawing.Point(3, 200)
+        Me.chkMinimizeToSystemTray.Location = New System.Drawing.Point(3, 223)
         Me.chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray"
         Me.chkMinimizeToSystemTray.Size = New System.Drawing.Size(139, 17)
         Me.chkMinimizeToSystemTray.TabIndex = 6
@@ -876,7 +878,7 @@ Public Class frmOptions
         'chkShowDescriptionTooltipsInTree
         '
         Me.chkShowDescriptionTooltipsInTree.AutoSize = True
-        Me.chkShowDescriptionTooltipsInTree.Location = New System.Drawing.Point(3, 104)
+        Me.chkShowDescriptionTooltipsInTree.Location = New System.Drawing.Point(3, 127)
         Me.chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree"
         Me.chkShowDescriptionTooltipsInTree.Size = New System.Drawing.Size(231, 17)
         Me.chkShowDescriptionTooltipsInTree.TabIndex = 3
@@ -1005,6 +1007,7 @@ Public Class frmOptions
         '
         'tabAppearance
         '
+        Me.tabAppearance.Controls.Add(Me.chkAlwaysShowPanelTabs)
         Me.tabAppearance.Controls.Add(Me.lblLanguageRestartRequired)
         Me.tabAppearance.Controls.Add(Me.cboLanguage)
         Me.tabAppearance.Controls.Add(Me.lblLanguage)
@@ -1342,6 +1345,16 @@ Public Class frmOptions
         Me.tabAdvanced.Text = "Advanced"
         Me.tabAdvanced.UseVisualStyleBackColor = True
         '
+        'chkAlwaysShowPanelTabs
+        '
+        Me.chkAlwaysShowPanelTabs.AutoSize = True
+        Me.chkAlwaysShowPanelTabs.Location = New System.Drawing.Point(3, 104)
+        Me.chkAlwaysShowPanelTabs.Name = "chkAlwaysShowPanelTabs"
+        Me.chkAlwaysShowPanelTabs.Size = New System.Drawing.Size(139, 17)
+        Me.chkAlwaysShowPanelTabs.TabIndex = 7
+        Me.chkAlwaysShowPanelTabs.Text = "Always show panel tabs"
+        Me.chkAlwaysShowPanelTabs.UseVisualStyleBackColor = True
+        '
         'frmOptions
         '
         Me.CancelButton = Me.btnCancel
@@ -1418,6 +1431,7 @@ Public Class frmOptions
                 Me.cboLanguage.SelectedIndex = 0
             End If
 
+            chkAlwaysShowPanelTabs.Checked = Settings.AlwaysShowPanelTabs
             Me.chkShowDescriptionTooltipsInTree.Checked = My.Settings.ShowDescriptionTooltipsInTree
             Me.chkShowSystemTrayIcon.Checked = My.Settings.ShowSystemTrayIcon
             Me.chkMinimizeToSystemTray.Checked = My.Settings.MinimizeToTray
@@ -1523,6 +1537,9 @@ Public Class frmOptions
             Else
                 My.Settings.OverrideUICulture = ""
             End If
+
+            Settings.AlwaysShowPanelTabs = chkAlwaysShowPanelTabs.Checked
+            frmMain.ShowHidePanelTabs()
 
             My.Settings.ShowDescriptionTooltipsInTree = Me.chkShowDescriptionTooltipsInTree.Checked
             My.Settings.ShowSystemTrayIcon = Me.chkShowSystemTrayIcon.Checked
@@ -1715,6 +1732,7 @@ Public Class frmOptions
         chkMinimizeToSystemTray.Text = My.Language.strMinimizeToSysTray
         chkShowFullConnectionsFilePathInTitle.Text = My.Language.strShowFullConsFilePath
         chkShowSystemTrayIcon.Text = My.Language.strAlwaysShowSysTrayIcon
+        chkAlwaysShowPanelTabs.Text = My.Language.strAlwaysShowPanelTabs
         chkShowDescriptionTooltipsInTree.Text = My.Language.strShowDescriptionTooltips
         chkShowProtocolOnTabs.Text = My.Language.strShowProtocolOnTabs
         chkShowLogonInfoOnTabs.Text = My.Language.strShowLogonInfoOnTabs

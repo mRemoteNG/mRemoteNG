@@ -36,26 +36,11 @@ Namespace UI
 
 #Region "Private Methods"
             Private Sub Base_Load(sender As System.Object, e As System.EventArgs) Handles MyBase.Load
-                If TypeOf Me Is Connection Then
-                    frmMain.pnlDock.DocumentStyle = DocumentStyle.DockingSdi
-                Else
-                    frmMain.pnlDock.DocumentStyle = DocumentStyle.DockingWindow
-                End If
+                frmMain.ShowHidePanelTabs()
             End Sub
 
             Private Sub Base_FormClosed(sender As System.Object, e As System.Windows.Forms.FormClosedEventArgs) Handles MyBase.FormClosed
-                Dim nonConnectionPanelCount As Integer = 0
-                For Each document As DockContent In frmMain.pnlDock.Documents
-                    If document IsNot Me And Not TypeOf document Is Connection Then
-                        nonConnectionPanelCount = nonConnectionPanelCount + 1
-                    End If
-                Next
-
-                If nonConnectionPanelCount = 0 Then
-                    frmMain.pnlDock.DocumentStyle = DocumentStyle.DockingSdi
-                Else
-                    frmMain.pnlDock.DocumentStyle = DocumentStyle.DockingWindow
-                End If
+                frmMain.ShowHidePanelTabs(Me)
             End Sub
 #End Region
         End Class

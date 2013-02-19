@@ -2307,6 +2307,20 @@ Namespace My
                 Me("ConDefaultUseCredSsp") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property AlwaysShowPanelTabs() As Boolean
+            Get
+                Return CType(Me("AlwaysShowPanelTabs"),Boolean)
+            End Get
+            Set
+                Me("AlwaysShowPanelTabs") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

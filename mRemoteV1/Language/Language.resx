@@ -2058,4 +2058,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
     <value>Could not find ToolStrip control in FilteredPropertyGrid.</value>
   </data>
+  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
+    <value>Always show panel tabs</value>
+  </data>
 </root>

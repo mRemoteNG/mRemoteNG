@@ -101,6 +101,10 @@ Namespace Config
                         Me.LoadPanelsFromXML()
                         Me.LoadExternalAppsFromXML()
 
+                        If My.Settings.AlwaysShowPanelTabs Then
+                            frmMain.pnlDock.DocumentStyle = DocumentStyle.DockingWindow
+                        End If
+
                         If My.Settings.ResetToolbars = False Then
                             LoadToolbarsFromSettings()
                         Else

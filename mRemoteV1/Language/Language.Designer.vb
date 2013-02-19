@@ -164,6 +164,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Always show panel tabs.
+        '''</summary>
+        Friend Shared ReadOnly Property strAlwaysShowPanelTabs() As String
+            Get
+                Return ResourceManager.GetString("strAlwaysShowPanelTabs", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Always show notification area icon.
         '''</summary>
         Friend Shared ReadOnly Property strAlwaysShowSysTrayIcon() As String
