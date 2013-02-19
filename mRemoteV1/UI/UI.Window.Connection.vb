@@ -834,9 +834,37 @@ Namespace UI
                 End If
             End Sub
 
+            Private _selectedTabChanged As Boolean = False
             Private Sub TabController_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabController.SelectionChanged
-                Me.FocusIC()
-                Me.RefreshIC()
+                _selectedTabChanged = True
+                FocusIC()
+                RefreshIC()
+            End Sub
+
+            Private Sub TabController_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.MouseUp
+                Try
+                    If Not Native.GetForegroundWindow() = frmMain.Handle And Not _selectedTabChanged Then
+                        Dim clickedTab As Magic.Controls.TabPage = TabController.TabPageFromPoint(e.Location)
+                        If clickedTab IsNot Nothing And TabController.SelectedTab IsNot clickedTab Then
+                            Native.SetForegroundWindow(Handle)
+                            TabController.SelectedTab = clickedTab
+                        End If
+                    End If
+                    _selectedTabChanged = False
+
+                    Select Case e.Button
+                        Case MouseButtons.Left
+                            FocusIC()
+                        Case MouseButtons.Middle
+                            CloseConnectionTab()
+                        Case MouseButtons.Right
+                            ShowHideMenuButtons()
+                            Native.SetForegroundWindow(Handle)
+                            cmenTab.Show(TabController, e.Location)
+                    End Select
+                Catch ex As Exception
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseUp (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                End Try
             End Sub
 
             Private Sub FocusIC()
@@ -917,29 +945,6 @@ Namespace UI
                 TabController.TabPages.Insert(targetIndex, sourceTab)
                 TabController.SelectedTab = sourceTab
                 TabController.TabPages.ResumeEvents()
-            End Sub
-
-            Private Sub TabController_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.MouseUp
-                Try
-                    Dim clickedTab As Magic.Controls.TabPage = TabController.TabPageFromPoint(e.Location)
-                    If clickedTab IsNot Nothing And TabController.SelectedTab IsNot clickedTab Then
-                        TabController.SelectedTab = clickedTab
-                        Return
-                    End If
-
-                    Select Case e.Button
-                        Case MouseButtons.Left
-                            FocusIC()
-                        Case MouseButtons.Middle
-                            TabController.SelectedTab = TabController.TabPageFromPoint(e.Location)
-                            CloseConnectionTab()
-                        Case MouseButtons.Right
-                            ShowHideMenuButtons()
-                            cmenTab.Show(TabController, e.Location)
-                    End Select
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseUp (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
-                End Try
             End Sub
 #End Region
         End Class

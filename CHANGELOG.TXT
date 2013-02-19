@@ -1,4 +1,6 @@
   Fix issue MR-225 - Tabs do not open in a panel until multiple panels are displayed.
+  Fix issue MR-317 - Difficulty right-clicking on Tab
+  Fix issue MR-318 - Wrong tab gets selected when tab names overflow on the tab bar
   Fix issue MR-321 - New connection panel doesn't get panel header if its the only one or is moved
   Added option to always show panel tabs
 
