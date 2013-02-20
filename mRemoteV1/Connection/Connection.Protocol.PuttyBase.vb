@@ -159,7 +159,7 @@ Namespace Connection
                     PuttyProcess.WaitForInputIdle()
 
                     Dim startTicks As Integer = Environment.TickCount
-                    While PuttyHandle.ToInt32 = 0 And Environment.TickCount < startTicks + 5000
+                    While PuttyHandle.ToInt32 = 0 And Environment.TickCount < startTicks + (My.Settings.MaxPuttyWaitTime * 1000)
                         If _isPuttyNg Then
                             PuttyHandle = FindWindowEx(InterfaceControl.Handle, 0, vbNullString, vbNullString)
                         Else
