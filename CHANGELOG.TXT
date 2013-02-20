@@ -1,3 +1,4 @@
+  Fix issue MR-183 - Error trying to save connections when using SQL - Invalid column name _parentConstantId
   Fix issue MR-225 - Tabs do not open in a panel until multiple panels are displayed.
   Fix issue MR-317 - Difficulty right-clicking on Tab
   Fix issue MR-318 - Wrong tab gets selected when tab names overflow on the tab bar
