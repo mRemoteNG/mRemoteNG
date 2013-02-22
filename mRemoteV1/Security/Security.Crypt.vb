@@ -74,7 +74,10 @@ Namespace Security
 
                 Return System.Text.Encoding.UTF8.GetString(data, 0, i)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorDecryptionFailed, ex.Message))
+                ' Ignore CryptographicException "Padding is invalid and cannot be removed." when password is incorrect.
+                If Not TypeOf ex Is CryptographicException Then
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorDecryptionFailed, ex.Message))
+                End If
             End Try
 
             Return StrToDecrypt

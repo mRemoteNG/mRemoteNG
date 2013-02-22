@@ -4,6 +4,7 @@
   Fix issue MR-318 - Wrong tab gets selected when tab names overflow on the tab bar
   Fix issue MR-321 - New connection panel doesn't get panel header if its the only one or is moved
   Added option to always show panel tabs
+  Fixed "Decryption failed. Padding is invalid and cannot be removed." notification.
 
 1.70 Beta 2 (2013-02-18):
   Fix issue MR-47 - Silent Installation Prompts for Language
