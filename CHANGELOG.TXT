@@ -1,47 +1,47 @@
-  Fix issue MR-183 - Error trying to save connections when using SQL - Invalid column name _parentConstantId
-  Fix issue MR-225 - Tabs do not open in a panel until multiple panels are displayed.
-  Fix issue MR-317 - Difficulty right-clicking on Tab
-  Fix issue MR-318 - Wrong tab gets selected when tab names overflow on the tab bar
-  Fix issue MR-321 - New connection panel doesn't get panel header if its the only one or is moved
+  Fixed issue MR-183 - Error trying to save connections when using SQL - Invalid column name _parentConstantId
+  Fixed issue MR-225 - Tabs do not open in a panel until multiple panels are displayed.
+  Fixed issue MR-317 - Difficulty right-clicking on Tab
+  Fixed issue MR-318 - Wrong tab gets selected when tab names overflow on the tab bar
+  Fixed issue MR-321 - New connection panel doesn't get panel header if its the only one or is moved
   Added option to always show panel tabs
   Fixed "Decryption failed. Padding is invalid and cannot be removed." notification.
 
 1.70 Beta 2 (2013-02-18):
-  Fix issue MR-47 - Silent Installation Prompts for Language
-  Fix issue MR-54 - Error When disconnecting from SSL channel RDP
-  Fix issue MR-58 - Bug when duplicating connection in connection view 
-  Fix issue MR-68 - Config Window Loses Options
-  Fix issue MR-71 - Minimizing mRemoteNG causes temporary re-size of Putty sessions (windows)
-  Fix issue MR-80 - Reconnect previous sessions
-  Fix issue MR-81 - Problem Duplicating Folder w/ Sub-Folders
-  Fix issue MR-85 - Microsoft .NET Framework warning
-  Fix issue MR-86 - Citrix GDI+ Error when screen is locked
-  Fix issue MR-96 - When pressing SHIFT+F4 to create a new connection inside a folder, the new connections doesn't inherit any properties from its parent
-  Fix issue MR-101 - Collapse all folders causes a NullReferenceException
-  Fix issue MR-165 - Can't close About window if it is the last tab
-  Fix issue MR-166 - Inheritance button is disabled on some connections
-  Fix issue MR-167 - Name and description of properties not show in inheritance list
-  Fix issue MR-171 - Inherit configuration not showing friendly names for each inherit component
-  Fix issue MR-172 - RDGatewayPassword is unencrypted in confCons.xml file
-  Fix issue MR-174 - Trailing Space on a Hostname/IP will cause the connection not to happen.
-  Fix issue MR-175 - Problem with focus when 2 or more PuTTY sessions opened
-  Fix issue MR-176 - Del key while editing connection name triggers 'Delete Connection'
-  Fix issue MR-178 - 3 different panels crashes all connections
-  Fix issue MR-181 - Sessions on startup
-  Fix issue MR-190 - Can't click on tab/session
-  Fix issue MR-196 - Cannot export list without usernames and passwords
-  Fix issue MR-199 - when using screen inside putty, screen becomes dead when reduce mremoteNG
-  Fix issue MR-202 - The Connection "Tab" show Ampersands as underscores.
-  Fix issue MR-214 - Hostname/IP reset
-  Fix issue MR-224 - Session tabs become un-clickable after duplicating a tab or opening a new one in the same panel
-  Fix issue MR-233 - Backslash at end of password prevents success of putty invocation and corresponding auto-logon
-  Fix issue MR-235 - Config file gets corrupted when leaving the password entry box with ESC
-  Fix issue MR-264 - Windows 8 support
-  Fix issue MR-277 - Inheritance configuration button not appear in configuration tab
-  Fix issue MR-284 - SSH: Text not showing properly
-  Fix issue MR-299 - mRemoteNG crashes while using remotely (Windows XP remote desktop)
-  Fix issue MR-306 - Fatal .NET exception on program start
-  Fix issue MR-313 - PuTTY window not maximized when loading from saved session
+  Fixed issue MR-47 - Silent Installation Prompts for Language
+  Fixed issue MR-54 - Error When disconnecting from SSL channel RDP
+  Fixed issue MR-58 - Bug when duplicating connection in connection view 
+  Fixed issue MR-68 - Config Window Loses Options
+  Fixed issue MR-71 - Minimizing mRemoteNG causes temporary re-size of Putty sessions (windows)
+  Fixed issue MR-80 - Reconnect previous sessions
+  Fixed issue MR-81 - Problem Duplicating Folder w/ Sub-Folders
+  Fixed issue MR-85 - Microsoft .NET Framework warning
+  Fixed issue MR-86 - Citrix GDI+ Error when screen is locked
+  Fixed issue MR-96 - When pressing SHIFT+F4 to create a new connection inside a folder, the new connections doesn't inherit any properties from its parent
+  Fixed issue MR-101 - Collapse all folders causes a NullReferenceException
+  Fixed issue MR-165 - Can't close About window if it is the last tab
+  Fixed issue MR-166 - Inheritance button is disabled on some connections
+  Fixed issue MR-167 - Name and description of properties not show in inheritance list
+  Fixed issue MR-171 - Inherit configuration not showing friendly names for each inherit component
+  Fixed issue MR-172 - RDGatewayPassword is unencrypted in confCons.xml file
+  Fixed issue MR-174 - Trailing Space on a Hostname/IP will cause the connection not to happen.
+  Fixed issue MR-175 - Problem with focus when 2 or more PuTTY sessions opened
+  Fixed issue MR-176 - Del key while editing connection name triggers 'Delete Connection'
+  Fixed issue MR-178 - 3 different panels crashes all connections
+  Fixed issue MR-181 - Sessions on startup
+  Fixed issue MR-190 - Can't click on tab/session
+  Fixed issue MR-196 - Cannot export list without usernames and passwords
+  Fixed issue MR-199 - when using screen inside putty, screen becomes dead when reduce mremoteNG
+  Fixed issue MR-202 - The Connection "Tab" show Ampersands as underscores.
+  Fixed issue MR-214 - Hostname/IP reset
+  Fixed issue MR-224 - Session tabs become un-clickable after duplicating a tab or opening a new one in the same panel
+  Fixed issue MR-233 - Backslash at end of password prevents success of putty invocation and corresponding auto-logon
+  Fixed issue MR-235 - Config file gets corrupted when leaving the password entry box with ESC
+  Fixed issue MR-264 - Windows 8 support
+  Fixed issue MR-277 - Inheritance configuration button not appear in configuration tab
+  Fixed issue MR-284 - SSH: Text not showing properly
+  Fixed issue MR-299 - mRemoteNG crashes while using remotely (Windows XP remote desktop)
+  Fixed issue MR-306 - Fatal .NET exception on program start
+  Fixed issue MR-313 - PuTTY window not maximized when loading from saved session
   mRemoteNG now requires .NET Framework 3.0 instead of 2.0.
   Updated translations.
   Added translations for Spanish (Argentina), Italian, Polish, Portuguese, Chinese (Simplified).
@@ -49,14 +49,14 @@
   Improved loading of XML files from older versions of mRemote/mRemoteNG.
 
 1.70 Beta 1 (2012-02-27):
-  Fix issue MR-77 - VerifyDatabaseVersion (Config.Connections.Save) failed. Version string portion was too short or too long.
-  Fix issue MR-78 - Renaming Connections
-  Fix issue MR-79 - MoveUp/Down item doesn't work + Sort button broken
-  Fix issue MR-93 - Regional settings problem when using SQL connection in mRemoteNG
-  Fix issue MR-97 - Integrate Dutch translation
-  Fix issue MR-98 - Integrate Russian and Ukranian translations
-  Fix issue MR-99 - Integrate Spanish translation
-  Fix issue MR-131 - RD Gateway does not respect setting for use different credentials
+  Fixed issue MR-77 - VerifyDatabaseVersion (Config.Connections.Save) failed. Version string portion was too short or too long.
+  Fixed issue MR-78 - Renaming Connections
+  Fixed issue MR-79 - MoveUp/Down item doesn't work + Sort button broken
+  Fixed issue MR-93 - Regional settings problem when using SQL connection in mRemoteNG
+  Fixed issue MR-97 - Integrate Dutch translation
+  Fixed issue MR-98 - Integrate Russian and Ukranian translations
+  Fixed issue MR-99 - Integrate Spanish translation
+  Fixed issue MR-131 - RD Gateway does not respect setting for use different credentials
   Added compatibility check for "Use FIPS compliant algorithms" security setting.
   Improved reporting of errors when encrypting and decrypting connection files.
   Added partial Polish translation.
