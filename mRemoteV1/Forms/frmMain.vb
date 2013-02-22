@@ -685,8 +685,6 @@ Public Class frmMain
                 End If
 
                 AddHandler tMenItem.MouseDown, AddressOf ConMenItem_MouseDown
-
-                tMenItem.Dispose()
             Next
         Catch ex As Exception
             MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)

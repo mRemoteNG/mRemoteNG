@@ -3,6 +3,7 @@
   Fixed issue MR-317 - Difficulty right-clicking on Tab
   Fixed issue MR-318 - Wrong tab gets selected when tab names overflow on the tab bar
   Fixed issue MR-321 - New connection panel doesn't get panel header if its the only one or is moved
+  Fixed issue MR-322 - Connection Button not listing servers
   Added option to always show panel tabs
   Fixed "Decryption failed. Padding is invalid and cannot be removed." notification.
 
