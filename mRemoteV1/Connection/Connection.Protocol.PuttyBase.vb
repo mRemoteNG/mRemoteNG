@@ -156,7 +156,7 @@ Namespace Connection
                     AddHandler PuttyProcess.Exited, AddressOf ProcessExited
 
                     PuttyProcess.Start()
-                    PuttyProcess.WaitForInputIdle()
+                    PuttyProcess.WaitForInputIdle(My.Settings.MaxPuttyWaitTime * 1000)
 
                     Dim startTicks As Integer = Environment.TickCount
                     While PuttyHandle.ToInt32 = 0 And Environment.TickCount < startTicks + (My.Settings.MaxPuttyWaitTime * 1000)
