@@ -8,6 +8,7 @@
   Fixed issue MR-322 - Connection Button not listing servers
   Added option to always show panel tabs
   Fixed "Decryption failed. Padding is invalid and cannot be removed." notification.
+  Fixed KiTTY opening in a separate window when using a saved session.
 
 1.70 Beta 2 (2013-02-18):
   Fixed issue MR-47 - Silent Installation Prompts for Language

@@ -163,6 +163,7 @@ Namespace Connection
                         If _isPuttyNg Then
                             PuttyHandle = FindWindowEx(InterfaceControl.Handle, 0, vbNullString, vbNullString)
                         Else
+                            PuttyProcess.Refresh()
                             PuttyHandle = PuttyProcess.MainWindowHandle
                         End If
                         If PuttyHandle.ToInt32 = 0 Then Thread.Sleep(0)
