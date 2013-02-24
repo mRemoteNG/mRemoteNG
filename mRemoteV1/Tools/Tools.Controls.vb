@@ -223,39 +223,26 @@ Namespace Tools
         Public Class TreeNodeSorter
             Implements IComparer
 
-            Private _nodeToSort As TreeNode
-            Private _sortType As SortType
+            Public Property Sorting As System.Windows.Forms.SortOrder
 
-            Public Sub New(ByVal node As TreeNode, ByVal sortType As SortType)
+            Public Sub New(Optional ByVal sortOrder As SortOrder = SortOrder.None)
                 MyBase.New()
-
-                Me._nodeToSort = node
-                Me._sortType = sortType
+                Sorting = sortOrder
             End Sub
 
             Public Function Compare(ByVal x As Object, ByVal y As Object) As Integer Implements IComparer.Compare
                 Dim tx As TreeNode = CType(x, TreeNode)
                 Dim ty As TreeNode = CType(y, TreeNode)
 
-                If ((tx.Parent Is Me._nodeToSort) AndAlso (ty.Parent Is Me._nodeToSort)) Then
-                    ' Ascending
-                    If (Me._sortType = SortType.Ascending) Then
+                Select Case Sorting
+                    Case SortOrder.Ascending
                         Return String.Compare(tx.Text, ty.Text)
-                    End If
-
-                    ' Descending
-                    If (Me._sortType = SortType.Descending) Then
+                    Case SortOrder.Descending
                         Return String.Compare(ty.Text, tx.Text)
-                    End If
-                End If
-
-                Return 0
+                    Case Else
+                        Return 0
+                End Select
             End Function
-
-            Public Enum SortType
-                Ascending = 0
-                Descending = 1
-            End Enum
         End Class
     End Class
 End Namespace

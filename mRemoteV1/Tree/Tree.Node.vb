@@ -501,27 +501,52 @@ Namespace Tree
             TreeView.EndUpdate()
         End Sub
 
-        Public Shared Sub Sort(ByVal treeNode As TreeNode, ByVal sortType As Tools.Controls.TreeNodeSorter.SortType)
-            Try
-                TreeView.BeginUpdate()
-                If treeNode Is Nothing Then
+        Public Shared Sub Sort(ByVal treeNode As TreeNode, ByVal sorting As System.Windows.Forms.SortOrder)
+            If TreeView Is Nothing Then Return
+
+            TreeView.BeginUpdate()
+
+            If treeNode Is Nothing Then
+                If TreeView.Nodes.Count > 0 Then
                     treeNode = TreeView.Nodes.Item(0)
-                ElseIf Tree.Node.GetNodeType(treeNode) = Type.Connection Then
-                    treeNode = treeNode.Parent
+                Else
+                    Return
                 End If
+            ElseIf GetNodeType(treeNode) = Type.Connection Then
+                treeNode = treeNode.Parent
+                If treeNode Is Nothing Then Return
+            End If
 
-                Dim ns As New Tools.Controls.TreeNodeSorter(treeNode, sortType)
+            Sort(treeNode, New Tools.Controls.TreeNodeSorter(sorting))
 
-                TreeView.TreeViewNodeSorter = ns
-                TreeView.Sort()
+            TreeView.EndUpdate()
+        End Sub
 
-                For Each childNode As TreeNode In treeNode.Nodes
-                    If GetNodeType(childNode) = Type.Container Then Sort(childNode, sortType)
+        ' Adapted from http://www.codeproject.com/Tips/252234/ASP-NET-TreeView-Sort
+        Private Shared Sub Sort(ByVal treeNode As TreeNode, ByVal nodeSorter As Tools.Controls.TreeNodeSorter)
+            For Each childNode As TreeNode In treeNode.Nodes
+                Sort(childNode, nodeSorter)
+            Next
+
+            Try
+                Dim sortedNodes As New List(Of TreeNode)
+                Dim currentNode As TreeNode = Nothing
+                While (treeNode.Nodes.Count > 0)
+                    For Each childNode As TreeNode In treeNode.Nodes
+                        If (currentNode Is Nothing OrElse nodeSorter.Compare(childNode, currentNode) < 0) Then
+                            currentNode = childNode
+                        End If
+                    Next
+                    treeNode.Nodes.Remove(currentNode)
+                    sortedNodes.Add(currentNode)
+                    currentNode = Nothing
+                End While
+
+                For Each childNode As TreeNode In sortedNodes
+                    treeNode.Nodes.Add(childNode)
                 Next
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" & vbNewLine & ex.Message, True)
-            Finally
-                TreeView.EndUpdate()
             End Try
         End Sub
 

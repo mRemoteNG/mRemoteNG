@@ -1,3 +1,4 @@
+  Fixed issue MR-67 - Sort does not recursively sort
   Fixed issue MR-121 - Config pane not sorting properties correctly when switching between alphabetical and categorized view
   Fixed issue MR-130 - Issues duplicating folders
   Fixed issue MR-158 - Password field not accepting Pipe

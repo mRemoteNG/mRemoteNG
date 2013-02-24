@@ -934,24 +934,24 @@ Namespace UI
                 Me.ImportFromPortScan()
             End Sub
 
-            Private Sub mMenSortAscending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenSortAscending.Click
-                Me.tvConnections.BeginUpdate()
-                mRemoteNG.Tree.Node.Sort(Me.tvConnections.Nodes.Item(0), Tools.Controls.TreeNodeSorter.SortType.Ascending)
-                Me.tvConnections.EndUpdate()
+            Private Sub mMenSortAscending_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenSortAscending.Click
+                tvConnections.BeginUpdate()
+                mRemoteNG.Tree.Node.Sort(tvConnections.Nodes.Item(0), System.Windows.Forms.SortOrder.Ascending)
+                tvConnections.EndUpdate()
                 SaveConnectionsBG()
             End Sub
 
-            Private Sub cMenTreeToolsSortAscending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeToolsSortAscending.Click
-                Me.tvConnections.BeginUpdate()
-                mRemoteNG.Tree.Node.Sort(Me.tvConnections.SelectedNode, Tools.Controls.TreeNodeSorter.SortType.Ascending)
-                Me.tvConnections.EndUpdate()
+            Private Sub cMenTreeToolsSortAscending_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeToolsSortAscending.Click
+                tvConnections.BeginUpdate()
+                mRemoteNG.Tree.Node.Sort(tvConnections.SelectedNode, System.Windows.Forms.SortOrder.Ascending)
+                tvConnections.EndUpdate()
                 SaveConnectionsBG()
             End Sub
 
-            Private Sub cMenTreeToolsSortDescending_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeToolsSortDescending.Click
-                Me.tvConnections.BeginUpdate()
-                mRemoteNG.Tree.Node.Sort(Me.tvConnections.SelectedNode, Tools.Controls.TreeNodeSorter.SortType.Descending)
-                Me.tvConnections.EndUpdate()
+            Private Sub cMenTreeToolsSortDescending_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeToolsSortDescending.Click
+                tvConnections.BeginUpdate()
+                mRemoteNG.Tree.Node.Sort(tvConnections.SelectedNode, System.Windows.Forms.SortOrder.Descending)
+                tvConnections.EndUpdate()
                 SaveConnectionsBG()
             End Sub
 
