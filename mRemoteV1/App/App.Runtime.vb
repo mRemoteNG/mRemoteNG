@@ -1,7 +1,6 @@
 ﻿Imports log4net
 Imports mRemoteNG.Messages
 Imports mRemoteNG.Connection
-Imports mRemoteNG.Config.Settings
 Imports mRemoteNG.Tools
 Imports WeifenLuo.WinFormsUI.Docking
 Imports System.IO
@@ -452,30 +451,55 @@ Namespace App
             End Sub
 
             Public Shared Sub CreateLogger()
-                log4net.Config.XmlConfigurator.Configure(New FileInfo("mRemoteNG.exe.config"))
-                Log = log4net.LogManager.GetLogger("mRemoteNG.Log")
-                Log.InfoFormat("{0} started.", My.Application.Info.ProductName)
-                Log.InfoFormat("Command Line: {0}", Environment.GetCommandLineArgs)
-                Try
-                    Dim servicePack As Integer
-                    For Each managementObject As ManagementObject In New ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem").Get()
-                        servicePack = managementObject.GetPropertyValue("ServicePackMajorVersion")
-                        If servicePack = 0 Then
-                            Log.InfoFormat("{0} {1}", managementObject.GetPropertyValue("Caption").Trim, managementObject.GetPropertyValue("OSArchitecture"))
-                        Else
-                            Log.InfoFormat("{0} Service Pack {1} {2}", managementObject.GetPropertyValue("Caption").Trim, servicePack.ToString, managementObject.GetPropertyValue("OSArchitecture"))
-                        End If
-                    Next
-                Catch ex As Exception
-                    Log.WarnFormat("Error retrieving operating system information from WMI. {0}", ex.Message)
-                End Try
-                Log.InfoFormat("Microsoft .NET Framework {0}", System.Environment.Version.ToString)
+                log4net.Config.XmlConfigurator.Configure()
+
+                Dim logFilePath As String
 #If Not PORTABLE Then
-                Log.InfoFormat("{0} {1}", My.Application.Info.ProductName.ToString, My.Application.Info.Version.ToString)
+                logFilePath = Path.Combine(GetFolderPath(SpecialFolder.LocalApplicationData), Application.ProductName)
 #Else
-                log.InfoFormat("{0} {1} {2}", My.Application.Info.ProductName.ToString, My.Application.Info.Version.ToString, My.Language.strLabelPortableEdition)
+                logFilePath = Application.StartupPath
 #End If
-                Log.InfoFormat("System Culture: {0}/{1}", Threading.Thread.CurrentThread.CurrentUICulture.Name, Threading.Thread.CurrentThread.CurrentUICulture.NativeName)
+                Dim logFileName As String = Path.ChangeExtension(Application.ProductName, ".log")
+                Dim logFile As String = Path.Combine(logFilePath, logFileName)
+
+                Dim repository As Repository.ILoggerRepository = LogManager.GetRepository()
+                Dim appenders As Appender.IAppender() = repository.GetAppenders()
+                Dim fileAppender As Appender.FileAppender
+                For Each appender As Appender.IAppender In appenders
+                    fileAppender = TryCast(appender, Appender.FileAppender)
+                    If Not (fileAppender Is Nothing OrElse Not fileAppender.Name = "LogFileAppender") Then
+                        fileAppender.File = logFile
+                        fileAppender.ActivateOptions()
+                    End If
+                Next
+
+                Log = LogManager.GetLogger("Logger")
+
+                If My.Settings.WriteLogFile Then
+#If Not PORTABLE Then
+                    Log.InfoFormat("{0} {1} starting.", Application.ProductName, Application.ProductVersion)
+#Else
+                    Log.InfoFormat("{0} {1} {2} starting.", Application.ProductName, Application.ProductVersion, My.Language.strLabelPortableEdition)
+#End If
+                    Log.InfoFormat("Command Line: {0}", Environment.GetCommandLineArgs)
+
+                    Try
+                        Dim servicePack As Integer
+                        For Each managementObject As ManagementObject In New ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem").Get()
+                            servicePack = managementObject.GetPropertyValue("ServicePackMajorVersion")
+                            If servicePack = 0 Then
+                                Log.InfoFormat("{0} {1}", managementObject.GetPropertyValue("Caption").Trim, managementObject.GetPropertyValue("OSArchitecture"))
+                            Else
+                                Log.InfoFormat("{0} Service Pack {1} {2}", managementObject.GetPropertyValue("Caption").Trim, servicePack.ToString, managementObject.GetPropertyValue("OSArchitecture"))
+                            End If
+                        Next
+                    Catch ex As Exception
+                        Log.WarnFormat("Error retrieving operating system information from WMI. {0}", ex.Message)
+                    End Try
+
+                    Log.InfoFormat("Microsoft .NET CLR {0}", Version.ToString)
+                    Log.InfoFormat("System Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName)
+                End If
             End Sub
 
             Public Shared Sub UpdateCheck()
