@@ -1482,7 +1482,12 @@ Namespace App
                 If Not String.IsNullOrEmpty(Uri.Host) Then
                     Dim newConnectionInfo As New Connection.Info
 
-                    newConnectionInfo.Name = String.Format(My.Language.strQuick, Uri.Host)
+                    If My.Settings.IdentifyQuickConnectTabs Then
+                        newConnectionInfo.Name = String.Format(My.Language.strQuick, Uri.Host)
+                    Else
+                        newConnectionInfo.Name = Uri.Host
+                    End If
+
                     newConnectionInfo.Protocol = Protocol
                     newConnectionInfo.Hostname = Uri.Host
                     If Uri.Port = -1 Then

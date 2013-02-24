@@ -1952,6 +1952,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Identify quick connect tabs by adding the prefix &quot;Quick:&quot;.
+        '''</summary>
+        Friend Shared ReadOnly Property strIdentifyQuickConnectTabs() As String
+            Get
+                Return ResourceManager.GetString("strIdentifyQuickConnectTabs", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Import from Active Directory.
         '''</summary>
         Friend Shared ReadOnly Property strImportAD() As String

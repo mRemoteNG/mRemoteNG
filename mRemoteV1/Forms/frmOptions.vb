@@ -110,6 +110,7 @@ Public Class frmOptions
     Friend WithEvents lblSQLDatabaseName As System.Windows.Forms.Label
     Friend WithEvents txtSQLDatabaseName As System.Windows.Forms.TextBox
     Friend WithEvents chkAlwaysShowPanelTabs As System.Windows.Forms.CheckBox
+    Friend WithEvents chkIdentifyQuickConnectTabs As System.Windows.Forms.CheckBox
     Private components As System.ComponentModel.IContainer
 
     Private Sub InitializeComponent()
@@ -198,6 +199,7 @@ Public Class frmOptions
         Me.tcTabControl = New System.Windows.Forms.TabControl()
         Me.tabStartupExit = New System.Windows.Forms.TabPage()
         Me.tabAppearance = New System.Windows.Forms.TabPage()
+        Me.chkAlwaysShowPanelTabs = New System.Windows.Forms.CheckBox()
         Me.tabTabsAndPanels = New System.Windows.Forms.TabPage()
         Me.tabConnections = New System.Windows.Forms.TabPage()
         Me.pnlDefaultCredentials = New System.Windows.Forms.Panel()
@@ -225,7 +227,7 @@ Public Class frmOptions
         Me.lblSQLPassword = New System.Windows.Forms.Label()
         Me.tabUpdates = New System.Windows.Forms.TabPage()
         Me.tabAdvanced = New System.Windows.Forms.TabPage()
-        Me.chkAlwaysShowPanelTabs = New System.Windows.Forms.CheckBox()
+        Me.chkIdentifyQuickConnectTabs = New System.Windows.Forms.CheckBox()
         CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProxy.SuspendLayout()
@@ -746,7 +748,7 @@ Public Class frmOptions
         'chkAlwaysShowPanelSelectionDlg
         '
         Me.chkAlwaysShowPanelSelectionDlg.AutoSize = True
-        Me.chkAlwaysShowPanelSelectionDlg.Location = New System.Drawing.Point(3, 95)
+        Me.chkAlwaysShowPanelSelectionDlg.Location = New System.Drawing.Point(3, 118)
         Me.chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg"
         Me.chkAlwaysShowPanelSelectionDlg.Size = New System.Drawing.Size(317, 17)
         Me.chkAlwaysShowPanelSelectionDlg.TabIndex = 4
@@ -766,7 +768,7 @@ Public Class frmOptions
         'chkDoubleClickClosesTab
         '
         Me.chkDoubleClickClosesTab.AutoSize = True
-        Me.chkDoubleClickClosesTab.Location = New System.Drawing.Point(3, 72)
+        Me.chkDoubleClickClosesTab.Location = New System.Drawing.Point(3, 95)
         Me.chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab"
         Me.chkDoubleClickClosesTab.Size = New System.Drawing.Size(159, 17)
         Me.chkDoubleClickClosesTab.TabIndex = 3
@@ -797,7 +799,7 @@ Public Class frmOptions
         '
         Me.chkMCWarnings.AutoSize = True
         Me.chkMCWarnings.Enabled = False
-        Me.chkMCWarnings.Location = New System.Drawing.Point(19, 214)
+        Me.chkMCWarnings.Location = New System.Drawing.Point(19, 237)
         Me.chkMCWarnings.Name = "chkMCWarnings"
         Me.chkMCWarnings.Size = New System.Drawing.Size(71, 17)
         Me.chkMCWarnings.TabIndex = 8
@@ -808,7 +810,7 @@ Public Class frmOptions
         '
         Me.chkMCErrors.AutoSize = True
         Me.chkMCErrors.Enabled = False
-        Me.chkMCErrors.Location = New System.Drawing.Point(19, 237)
+        Me.chkMCErrors.Location = New System.Drawing.Point(19, 260)
         Me.chkMCErrors.Name = "chkMCErrors"
         Me.chkMCErrors.Size = New System.Drawing.Size(53, 17)
         Me.chkMCErrors.TabIndex = 9
@@ -819,7 +821,7 @@ Public Class frmOptions
         '
         Me.chkMCInformation.AutoSize = True
         Me.chkMCInformation.Enabled = False
-        Me.chkMCInformation.Location = New System.Drawing.Point(19, 191)
+        Me.chkMCInformation.Location = New System.Drawing.Point(19, 214)
         Me.chkMCInformation.Name = "chkMCInformation"
         Me.chkMCInformation.Size = New System.Drawing.Size(83, 17)
         Me.chkMCInformation.TabIndex = 7
@@ -829,7 +831,7 @@ Public Class frmOptions
         'lblSwitchToErrorsAndInfos
         '
         Me.lblSwitchToErrorsAndInfos.AutoSize = True
-        Me.lblSwitchToErrorsAndInfos.Location = New System.Drawing.Point(3, 171)
+        Me.lblSwitchToErrorsAndInfos.Location = New System.Drawing.Point(3, 194)
         Me.lblSwitchToErrorsAndInfos.Name = "lblSwitchToErrorsAndInfos"
         Me.lblSwitchToErrorsAndInfos.Size = New System.Drawing.Size(159, 13)
         Me.lblSwitchToErrorsAndInfos.TabIndex = 6
@@ -838,7 +840,7 @@ Public Class frmOptions
         'chkUseOnlyErrorsAndInfosPanel
         '
         Me.chkUseOnlyErrorsAndInfosPanel.AutoSize = True
-        Me.chkUseOnlyErrorsAndInfosPanel.Location = New System.Drawing.Point(3, 146)
+        Me.chkUseOnlyErrorsAndInfosPanel.Location = New System.Drawing.Point(3, 169)
         Me.chkUseOnlyErrorsAndInfosPanel.Name = "chkUseOnlyErrorsAndInfosPanel"
         Me.chkUseOnlyErrorsAndInfosPanel.Size = New System.Drawing.Size(278, 17)
         Me.chkUseOnlyErrorsAndInfosPanel.TabIndex = 5
@@ -1022,8 +1024,19 @@ Public Class frmOptions
         Me.tabAppearance.Text = "Appearance"
         Me.tabAppearance.UseVisualStyleBackColor = True
         '
+        'chkAlwaysShowPanelTabs
+        '
+        Me.chkAlwaysShowPanelTabs.AutoSize = True
+        Me.chkAlwaysShowPanelTabs.Location = New System.Drawing.Point(3, 104)
+        Me.chkAlwaysShowPanelTabs.Name = "chkAlwaysShowPanelTabs"
+        Me.chkAlwaysShowPanelTabs.Size = New System.Drawing.Size(139, 17)
+        Me.chkAlwaysShowPanelTabs.TabIndex = 7
+        Me.chkAlwaysShowPanelTabs.Text = "Always show panel tabs"
+        Me.chkAlwaysShowPanelTabs.UseVisualStyleBackColor = True
+        '
         'tabTabsAndPanels
         '
+        Me.tabTabsAndPanels.Controls.Add(Me.chkIdentifyQuickConnectTabs)
         Me.tabTabsAndPanels.Controls.Add(Me.chkUseOnlyErrorsAndInfosPanel)
         Me.tabTabsAndPanels.Controls.Add(Me.chkOpenNewTabRightOfSelected)
         Me.tabTabsAndPanels.Controls.Add(Me.lblSwitchToErrorsAndInfos)
@@ -1345,15 +1358,15 @@ Public Class frmOptions
         Me.tabAdvanced.Text = "Advanced"
         Me.tabAdvanced.UseVisualStyleBackColor = True
         '
-        'chkAlwaysShowPanelTabs
+        'chkIdentifyQuickConnectTabs
         '
-        Me.chkAlwaysShowPanelTabs.AutoSize = True
-        Me.chkAlwaysShowPanelTabs.Location = New System.Drawing.Point(3, 104)
-        Me.chkAlwaysShowPanelTabs.Name = "chkAlwaysShowPanelTabs"
-        Me.chkAlwaysShowPanelTabs.Size = New System.Drawing.Size(139, 17)
-        Me.chkAlwaysShowPanelTabs.TabIndex = 7
-        Me.chkAlwaysShowPanelTabs.Text = "Always show panel tabs"
-        Me.chkAlwaysShowPanelTabs.UseVisualStyleBackColor = True
+        Me.chkIdentifyQuickConnectTabs.AutoSize = True
+        Me.chkIdentifyQuickConnectTabs.Location = New System.Drawing.Point(3, 72)
+        Me.chkIdentifyQuickConnectTabs.Name = "chkIdentifyQuickConnectTabs"
+        Me.chkIdentifyQuickConnectTabs.Size = New System.Drawing.Size(293, 17)
+        Me.chkIdentifyQuickConnectTabs.TabIndex = 10
+        Me.chkIdentifyQuickConnectTabs.Text = Language.strIdentifyQuickConnectTabs
+        Me.chkIdentifyQuickConnectTabs.UseVisualStyleBackColor = True
         '
         'frmOptions
         '
@@ -1439,6 +1452,7 @@ Public Class frmOptions
             Me.chkOpenNewTabRightOfSelected.Checked = My.Settings.OpenTabsRightOfSelected
             Me.chkShowLogonInfoOnTabs.Checked = My.Settings.ShowLogonInfoOnTabs
             Me.chkShowProtocolOnTabs.Checked = My.Settings.ShowProtocolOnTabs
+            chkIdentifyQuickConnectTabs.Checked = Settings.IdentifyQuickConnectTabs
             Me.chkShowFullConnectionsFilePathInTitle.Checked = My.Settings.ShowCompleteConsPathInTitle
             Me.chkDoubleClickClosesTab.Checked = My.Settings.DoubleClickOnTabClosesIt
             Me.chkAlwaysShowPanelSelectionDlg.Checked = My.Settings.AlwaysShowPanelSelectionDlg
@@ -1561,6 +1575,7 @@ Public Class frmOptions
             My.Settings.OpenTabsRightOfSelected = Me.chkOpenNewTabRightOfSelected.Checked
             My.Settings.ShowLogonInfoOnTabs = Me.chkShowLogonInfoOnTabs.Checked
             My.Settings.ShowProtocolOnTabs = Me.chkShowProtocolOnTabs.Checked
+            Settings.IdentifyQuickConnectTabs = chkIdentifyQuickConnectTabs.Checked
             My.Settings.DoubleClickOnTabClosesIt = Me.chkDoubleClickClosesTab.Checked
             My.Settings.AlwaysShowPanelSelectionDlg = Me.chkAlwaysShowPanelSelectionDlg.Checked
 
@@ -1735,6 +1750,7 @@ Public Class frmOptions
         chkAlwaysShowPanelTabs.Text = My.Language.strAlwaysShowPanelTabs
         chkShowDescriptionTooltipsInTree.Text = My.Language.strShowDescriptionTooltips
         chkShowProtocolOnTabs.Text = My.Language.strShowProtocolOnTabs
+        chkIdentifyQuickConnectTabs.Text = Language.strIdentifyQuickConnectTabs
         chkShowLogonInfoOnTabs.Text = My.Language.strShowLogonInfoOnTabs
         chkOpenNewTabRightOfSelected.Text = My.Language.strOpenNewTabRight
         chkAlwaysShowPanelSelectionDlg.Text = My.Language.strAlwaysShowPanelSelection
