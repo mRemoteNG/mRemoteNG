@@ -167,8 +167,17 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        If WindowList IsNot Nothing Then
-            If My.Settings.ConfirmExit And WindowList.Count > 0 Then
+        If My.Settings.ConfirmExit And Not (WindowList Is Nothing OrElse WindowList.Count = 0) Then
+            Dim connectionWindow As UI.Window.Connection
+            Dim openConnections As Integer = 0
+            For Each window As UI.Window.Base In WindowList
+                connectionWindow = TryCast(window, UI.Window.Connection)
+                If connectionWindow IsNot Nothing Then
+                    openConnections = openConnections + connectionWindow.TabController.TabPages.Count
+                End If
+            Next
+
+            If openConnections > 0 Then
                 Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, My.Language.strConfirmExitMainInstruction, "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                 If cTaskDialog.VerificationChecked Then
                     My.Settings.ConfirmExit = False
