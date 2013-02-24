@@ -607,6 +607,12 @@ Namespace UI
                 End Try
             End Sub
 
+            Private Sub pGrid_PropertySortChanged(ByVal sender As Object, ByVal e As EventArgs) Handles pGrid.PropertySortChanged
+                If pGrid.PropertySort = PropertySort.CategorizedAlphabetical Then
+                    pGrid.PropertySort = PropertySort.Categorized
+                End If
+            End Sub
+
             Private Sub ShowHideGridItems()
                 Try
                     Dim strHide As New List(Of String)
