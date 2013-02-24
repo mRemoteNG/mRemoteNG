@@ -1,4 +1,5 @@
-  Fixed issue MR-333 -  Unnecessary prompt for 'close all open connections?'
+  Fixed issue MR-158 - Password field not accepting Pipe
+  Fixed issue MR-333 - Unnecessary prompt for 'close all open connections?'
 
 1.70 (2013-02-22):
   Fixed issue MR-183 - Error trying to save connections when using SQL - Invalid column name _parentConstantId

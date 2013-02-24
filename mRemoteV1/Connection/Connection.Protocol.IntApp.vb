@@ -1,6 +1,7 @@
 ﻿Imports mRemoteNG.App.Native
 Imports System.Threading
 Imports mRemoteNG.App.Runtime
+Imports mRemoteNG.Tools
 
 Namespace Connection
     Namespace Protocol
@@ -87,7 +88,7 @@ Namespace Connection
                     End If
 
                     IntAppProcessStartInfo.FileName = _IntAppPath
-                    IntAppProcessStartInfo.Arguments = Arguments
+                    IntAppProcessStartInfo.Arguments = ExternalTool.EscapeArguments(Arguments)
 
                     IntAppProcess = Process.Start(IntAppProcessStartInfo)
                     IntAppProcess.EnableRaisingEvents = True

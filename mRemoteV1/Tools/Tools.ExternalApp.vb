@@ -121,7 +121,7 @@ Namespace Tools
                 Dim pI As New ProcessStartInfo()
 
                 pI.FileName = ParseText(_FileName)
-                pI.Arguments = ParseText(_Arguments)
+                pI.Arguments = EscapeArguments(ParseText(_Arguments))
 
                 p.StartInfo = pI
 
@@ -197,6 +197,16 @@ Namespace Tools
             End Try
 
             Return pText
+        End Function
+
+        Public Shared Function EscapeArguments(ByVal arguments As String) As String
+            Dim escapedArguments As String = arguments
+            escapedArguments = escapedArguments.Replace("^", "^^")
+            escapedArguments = escapedArguments.Replace("&", "^&")
+            escapedArguments = escapedArguments.Replace("<", "^<")
+            escapedArguments = escapedArguments.Replace(">", "^>")
+            escapedArguments = escapedArguments.Replace("|", "^|")
+            Return escapedArguments
         End Function
     End Class
 
