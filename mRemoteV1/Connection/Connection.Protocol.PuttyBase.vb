@@ -156,13 +156,14 @@ Namespace Connection
                     AddHandler PuttyProcess.Exited, AddressOf ProcessExited
 
                     PuttyProcess.Start()
-                    PuttyProcess.WaitForInputIdle()
+                    PuttyProcess.WaitForInputIdle(My.Settings.MaxPuttyWaitTime * 1000)
 
                     Dim startTicks As Integer = Environment.TickCount
                     While PuttyHandle.ToInt32 = 0 And Environment.TickCount < startTicks + (My.Settings.MaxPuttyWaitTime * 1000)
                         If _isPuttyNg Then
                             PuttyHandle = FindWindowEx(InterfaceControl.Handle, 0, vbNullString, vbNullString)
                         Else
+                            PuttyProcess.Refresh()
                             PuttyHandle = PuttyProcess.MainWindowHandle
                         End If
                         If PuttyHandle.ToInt32 = 0 Then Thread.Sleep(0)
@@ -265,6 +266,9 @@ Namespace Connection
             End Function
 
             Public Shared Function IsFilePuttyNg(file As String) As Boolean
+                ' PuTTYNG enhancements are not yet compatible with Windows 8
+                If Environment.OSVersion.Version.CompareTo(New Version(6, 2)) >= 0 Then Return False
+
                 Dim isPuttyNg As Boolean
                 Try
                     isPuttyNg = FileVersionInfo.GetVersionInfo(file).InternalName.Contains("PuTTYNG")
