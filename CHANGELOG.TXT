@@ -1,3 +1,4 @@
+1.70 (2013-02-22):
   Fixed issue MR-183 - Error trying to save connections when using SQL - Invalid column name _parentConstantId
   Fixed issue MR-225 - Tabs do not open in a panel until multiple panels are displayed.
   Fixed issue MR-229 - Integrated PuTTY doesn't work in Windows 8 RP
@@ -6,7 +7,7 @@
   Fixed issue MR-318 - Wrong tab gets selected when tab names overflow on the tab bar
   Fixed issue MR-321 - New connection panel doesn't get panel header if its the only one or is moved
   Fixed issue MR-322 - Connection Button not listing servers
-  Added option to always show panel tabs
+  Added option to always show panel tabs.
   Fixed "Decryption failed. Padding is invalid and cannot be removed." notification.
   Fixed KiTTY opening in a separate window when using a saved session.
 
