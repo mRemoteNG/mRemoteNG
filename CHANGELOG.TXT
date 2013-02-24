@@ -1,3 +1,4 @@
+  Fixed issue MR-130 - Issues duplicating folders
   Fixed issue MR-158 - Password field not accepting Pipe
   Fixed issue MR-333 - Unnecessary prompt for 'close all open connections?'
 

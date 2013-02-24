@@ -319,6 +319,10 @@ Namespace Tree
                         oldTreeNode.Parent.Nodes.Insert(oldTreeNode.Index + 1, newTreeNode)
                         TreeView.SelectedNode = newTreeNode
                     Else
+                        Dim parentContainerInfo As Container.Info = TryCast(parentNode.Tag, Container.Info)
+                        If parentContainerInfo IsNot Nothing Then
+                            newConnectionInfo.Parent = parentContainerInfo
+                        End If
                         parentNode.Nodes.Add(newTreeNode)
                     End If
                 ElseIf GetNodeType(oldTreeNode) = Type.Container Then
