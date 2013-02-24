@@ -4,6 +4,7 @@
   Fixed issue MR-130 - Issues duplicating folders
   Fixed issue MR-158 - Password field not accepting Pipe
   Fixed issue MR-330 - Portable version saves log to user's profile folder
+  Fixed issue MR-332 - Can't select different tab with one click after disconnecting existing tab
   Fixed issue MR-333 - Unnecessary prompt for 'close all open connections?'
 
 1.70 (2013-02-22):
