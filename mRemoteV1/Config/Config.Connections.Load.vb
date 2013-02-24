@@ -5,6 +5,7 @@ Imports mRemoteNG.App.Runtime
 Imports System.Data
 Imports System.Data.SqlClient
 Imports System.IO
+Imports PSTaskDialog
 
 Namespace Config
     Namespace Connections
@@ -206,7 +207,12 @@ Namespace Config
                         sqlRd.Read()
                     End If
 
-                    Me.confVersion = Convert.ToDouble(sqlRd.Item("confVersion"), CultureInfo.InvariantCulture)
+                    confVersion = Convert.ToDouble(sqlRd.Item("confVersion"), CultureInfo.InvariantCulture)
+                    Const maxSupportedSchemaVersion As Double = 2.4
+                    If confVersion > maxSupportedSchemaVersion Then
+                        cTaskDialog.ShowTaskDialogBox(frmMain, Application.ProductName, "Incompatible database schema", String.Format("The database schema on the server is not supported. Please upgrade to a newer version of {0}.", Application.ProductName), String.Format("Schema Version: {1}{0}Highest Supported Version: {2}", vbNewLine, confVersion.ToString(), maxSupportedSchemaVersion.ToString()), "", "", "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
+                        Throw New Exception(String.Format("Incompatible database schema (schema version {0}).", confVersion))
+                    End If
 
                     Dim rootNode As TreeNode
                     rootNode = New TreeNode(sqlRd.Item("Name"))
@@ -265,10 +271,12 @@ Namespace Config
 
                     App.Runtime.IsConnectionsFileLoaded = True
                     'App.Runtime.Windows.treeForm.InitialRefresh()
-
-                    sqlCon.Close()
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromSqlFailed & vbNewLine & ex.Message, True)
+                Finally
+                    If sqlCon IsNot Nothing Then
+                        sqlCon.Close()
+                    End If
                 End Try
             End Sub
 
@@ -642,6 +650,12 @@ Namespace Config
                         Me.confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes("ConfVersion").Value.Replace(",", "."), CultureInfo.InvariantCulture)
                     Else
                         MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strOldConffile)
+                    End If
+
+                    Const maxSupportedConfVersion As Double = 2.4
+                    If confVersion > maxSupportedConfVersion Then
+                        cTaskDialog.ShowTaskDialogBox(frmMain, Application.ProductName, "Incompatible connection file format", String.Format("The format of this connection file is not supported. Please upgrade to a newer version of {0}.", Application.ProductName), String.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", vbNewLine, ConnectionFileName, confVersion.ToString(), maxSupportedConfVersion.ToString()), "", "", "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
+                        Throw New Exception(String.Format("Incompatible connection file format (file format version {0}).", confVersion))
                     End If
 
                     ' SECTION 2. Initialize the treeview control.

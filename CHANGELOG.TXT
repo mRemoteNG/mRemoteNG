@@ -6,6 +6,7 @@
   Fixed issue MR-330 - Portable version saves log to user's profile folder
   Fixed issue MR-332 - Can't select different tab with one click after disconnecting existing tab
   Fixed issue MR-333 - Unnecessary prompt for 'close all open connections?'
+  Added detection of newer versions of connection files and database schemata. mRemoteNG will now refuse to open them to avoid data loss.
 
 1.70 (2013-02-22):
   Fixed issue MR-183 - Error trying to save connections when using SQL - Invalid column name _parentConstantId
