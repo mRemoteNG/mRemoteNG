@@ -1,4 +1,5 @@
 Imports mRemoteNG.Connection
+Imports mRemoteNG.My
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 
@@ -501,7 +502,7 @@ Namespace UI
                 mMenViewExpandAllFolders.Text = My.Language.strExpandAllFolders
                 mMenViewCollapseAllFolders.Text = My.Language.strCollapseAllFolders
                 mMenSortAscending.ToolTipText = My.Language.strSortAsc
-                txtSearch.Text = "Search"
+                txtSearch.Text = Language.strSearchPrompt
                 TabText = My.Language.strConnections
                 Text = My.Language.strConnections
             End Sub
@@ -1210,7 +1211,7 @@ Namespace UI
 #Region "Search"
             Private Sub txtSearch_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles txtSearch.GotFocus
                 txtSearch.ForeColor = SystemColors.WindowText
-                If txtSearch.Text = "Search" Then
+                If txtSearch.Text = Language.strSearchPrompt Then
                     txtSearch.Text = ""
                 End If
             End Sub
@@ -1218,7 +1219,7 @@ Namespace UI
             Private Sub txtSearch_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles txtSearch.LostFocus
                 If txtSearch.Text = "" Then
                     txtSearch.ForeColor = SystemColors.GrayText
-                    txtSearch.Text = "Search"
+                    txtSearch.Text = Language.strSearchPrompt
                 End If
             End Sub
 

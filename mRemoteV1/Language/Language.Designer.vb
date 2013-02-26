@@ -5034,6 +5034,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Search.
+        '''</summary>
+        Friend Shared ReadOnly Property strSearchPrompt() As String
+            Get
+                Return ResourceManager.GetString("strSearchPrompt", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Send To....
         '''</summary>
         Friend Shared ReadOnly Property strSendTo() As String

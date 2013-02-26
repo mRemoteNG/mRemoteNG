@@ -2064,4 +2064,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
     <value>Identify quick connect tabs by adding the prefix "Quick:"</value>
   </data>
+  <data name="strSearchPrompt" xml:space="preserve">
+    <value>Search</value>
+  </data>
 </root>
