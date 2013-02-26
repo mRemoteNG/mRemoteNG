@@ -1,3 +1,5 @@
+  Fixed issue MR-332 - Can't select different tab with one click after disconnecting existing tab
+
 1.70 (2013-02-22):
   Fixed issue MR-183 - Error trying to save connections when using SQL - Invalid column name _parentConstantId
   Fixed issue MR-225 - Tabs do not open in a panel until multiple panels are displayed.

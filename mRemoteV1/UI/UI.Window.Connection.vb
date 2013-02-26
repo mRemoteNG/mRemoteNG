@@ -276,6 +276,7 @@ Namespace UI
                     End If
 
                     nTab.Selected = True
+                    _ignoreChangeSelectedTabClick = False
 
                     Return nTab
                 Catch ex As Exception
@@ -762,6 +763,7 @@ Namespace UI
                             Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
 
                             App.Runtime.OpenConnection(IC.Info, mRemoteNG.Connection.Info.Force.DoNotJump)
+                            _ignoreChangeSelectedTabClick = False
                         End If
                     End If
                 Catch ex As Exception
@@ -822,6 +824,7 @@ Namespace UI
                 Else
                     Try
                         Me.TabController.TabPages.Remove(TabToBeClosed)
+                        _ignoreChangeSelectedTabClick = False
                     Catch comEx As System.Runtime.InteropServices.COMException
                         CloseTab(TabToBeClosed)
                     Catch ex As Exception
@@ -834,23 +837,25 @@ Namespace UI
                 End If
             End Sub
 
-            Private _selectedTabChanged As Boolean = False
+            Private _ignoreChangeSelectedTabClick As Boolean = False
             Private Sub TabController_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabController.SelectionChanged
-                _selectedTabChanged = True
+                _ignoreChangeSelectedTabClick = True
                 FocusIC()
                 RefreshIC()
             End Sub
 
             Private Sub TabController_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.MouseUp
+                Debug.Print("TabController_MouseUp()")
+                Debug.Print("_ignoreChangeSelectedTabClick = {0}", _ignoreChangeSelectedTabClick)
                 Try
-                    If Not Native.GetForegroundWindow() = frmMain.Handle And Not _selectedTabChanged Then
+                    If Not Native.GetForegroundWindow() = frmMain.Handle And Not _ignoreChangeSelectedTabClick Then
                         Dim clickedTab As Magic.Controls.TabPage = TabController.TabPageFromPoint(e.Location)
                         If clickedTab IsNot Nothing And TabController.SelectedTab IsNot clickedTab Then
                             Native.SetForegroundWindow(Handle)
                             TabController.SelectedTab = clickedTab
                         End If
                     End If
-                    _selectedTabChanged = False
+                    _ignoreChangeSelectedTabClick = False
 
                     Select Case e.Button
                         Case MouseButtons.Left
