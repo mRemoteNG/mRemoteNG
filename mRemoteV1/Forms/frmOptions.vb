@@ -199,6 +199,7 @@ Public Class frmOptions
         Me.tabStartupExit = New System.Windows.Forms.TabPage()
         Me.tabAppearance = New System.Windows.Forms.TabPage()
         Me.tabTabsAndPanels = New System.Windows.Forms.TabPage()
+        Me.chkAlwaysShowPanelTabs = New System.Windows.Forms.CheckBox()
         Me.tabConnections = New System.Windows.Forms.TabPage()
         Me.pnlDefaultCredentials = New System.Windows.Forms.Panel()
         Me.radCredentialsCustom = New System.Windows.Forms.RadioButton()
@@ -225,7 +226,6 @@ Public Class frmOptions
         Me.lblSQLPassword = New System.Windows.Forms.Label()
         Me.tabUpdates = New System.Windows.Forms.TabPage()
         Me.tabAdvanced = New System.Windows.Forms.TabPage()
-        Me.chkAlwaysShowPanelTabs = New System.Windows.Forms.CheckBox()
         CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProxy.SuspendLayout()
@@ -746,7 +746,7 @@ Public Class frmOptions
         'chkAlwaysShowPanelSelectionDlg
         '
         Me.chkAlwaysShowPanelSelectionDlg.AutoSize = True
-        Me.chkAlwaysShowPanelSelectionDlg.Location = New System.Drawing.Point(3, 95)
+        Me.chkAlwaysShowPanelSelectionDlg.Location = New System.Drawing.Point(3, 118)
         Me.chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg"
         Me.chkAlwaysShowPanelSelectionDlg.Size = New System.Drawing.Size(317, 17)
         Me.chkAlwaysShowPanelSelectionDlg.TabIndex = 4
@@ -756,7 +756,7 @@ Public Class frmOptions
         'chkShowLogonInfoOnTabs
         '
         Me.chkShowLogonInfoOnTabs.AutoSize = True
-        Me.chkShowLogonInfoOnTabs.Location = New System.Drawing.Point(3, 26)
+        Me.chkShowLogonInfoOnTabs.Location = New System.Drawing.Point(3, 49)
         Me.chkShowLogonInfoOnTabs.Name = "chkShowLogonInfoOnTabs"
         Me.chkShowLogonInfoOnTabs.Size = New System.Drawing.Size(203, 17)
         Me.chkShowLogonInfoOnTabs.TabIndex = 1
@@ -766,7 +766,7 @@ Public Class frmOptions
         'chkDoubleClickClosesTab
         '
         Me.chkDoubleClickClosesTab.AutoSize = True
-        Me.chkDoubleClickClosesTab.Location = New System.Drawing.Point(3, 72)
+        Me.chkDoubleClickClosesTab.Location = New System.Drawing.Point(3, 95)
         Me.chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab"
         Me.chkDoubleClickClosesTab.Size = New System.Drawing.Size(159, 17)
         Me.chkDoubleClickClosesTab.TabIndex = 3
@@ -776,7 +776,7 @@ Public Class frmOptions
         'chkShowProtocolOnTabs
         '
         Me.chkShowProtocolOnTabs.AutoSize = True
-        Me.chkShowProtocolOnTabs.Location = New System.Drawing.Point(3, 49)
+        Me.chkShowProtocolOnTabs.Location = New System.Drawing.Point(3, 72)
         Me.chkShowProtocolOnTabs.Name = "chkShowProtocolOnTabs"
         Me.chkShowProtocolOnTabs.Size = New System.Drawing.Size(166, 17)
         Me.chkShowProtocolOnTabs.TabIndex = 2
@@ -786,7 +786,7 @@ Public Class frmOptions
         'chkOpenNewTabRightOfSelected
         '
         Me.chkOpenNewTabRightOfSelected.AutoSize = True
-        Me.chkOpenNewTabRightOfSelected.Location = New System.Drawing.Point(3, 3)
+        Me.chkOpenNewTabRightOfSelected.Location = New System.Drawing.Point(3, 26)
         Me.chkOpenNewTabRightOfSelected.Name = "chkOpenNewTabRightOfSelected"
         Me.chkOpenNewTabRightOfSelected.Size = New System.Drawing.Size(280, 17)
         Me.chkOpenNewTabRightOfSelected.TabIndex = 0
@@ -797,7 +797,7 @@ Public Class frmOptions
         '
         Me.chkMCWarnings.AutoSize = True
         Me.chkMCWarnings.Enabled = False
-        Me.chkMCWarnings.Location = New System.Drawing.Point(19, 214)
+        Me.chkMCWarnings.Location = New System.Drawing.Point(19, 233)
         Me.chkMCWarnings.Name = "chkMCWarnings"
         Me.chkMCWarnings.Size = New System.Drawing.Size(71, 17)
         Me.chkMCWarnings.TabIndex = 8
@@ -808,7 +808,7 @@ Public Class frmOptions
         '
         Me.chkMCErrors.AutoSize = True
         Me.chkMCErrors.Enabled = False
-        Me.chkMCErrors.Location = New System.Drawing.Point(19, 237)
+        Me.chkMCErrors.Location = New System.Drawing.Point(19, 256)
         Me.chkMCErrors.Name = "chkMCErrors"
         Me.chkMCErrors.Size = New System.Drawing.Size(53, 17)
         Me.chkMCErrors.TabIndex = 9
@@ -819,7 +819,7 @@ Public Class frmOptions
         '
         Me.chkMCInformation.AutoSize = True
         Me.chkMCInformation.Enabled = False
-        Me.chkMCInformation.Location = New System.Drawing.Point(19, 191)
+        Me.chkMCInformation.Location = New System.Drawing.Point(19, 210)
         Me.chkMCInformation.Name = "chkMCInformation"
         Me.chkMCInformation.Size = New System.Drawing.Size(83, 17)
         Me.chkMCInformation.TabIndex = 7
@@ -829,7 +829,7 @@ Public Class frmOptions
         'lblSwitchToErrorsAndInfos
         '
         Me.lblSwitchToErrorsAndInfos.AutoSize = True
-        Me.lblSwitchToErrorsAndInfos.Location = New System.Drawing.Point(3, 171)
+        Me.lblSwitchToErrorsAndInfos.Location = New System.Drawing.Point(3, 190)
         Me.lblSwitchToErrorsAndInfos.Name = "lblSwitchToErrorsAndInfos"
         Me.lblSwitchToErrorsAndInfos.Size = New System.Drawing.Size(159, 13)
         Me.lblSwitchToErrorsAndInfos.TabIndex = 6
@@ -838,7 +838,7 @@ Public Class frmOptions
         'chkUseOnlyErrorsAndInfosPanel
         '
         Me.chkUseOnlyErrorsAndInfosPanel.AutoSize = True
-        Me.chkUseOnlyErrorsAndInfosPanel.Location = New System.Drawing.Point(3, 146)
+        Me.chkUseOnlyErrorsAndInfosPanel.Location = New System.Drawing.Point(3, 165)
         Me.chkUseOnlyErrorsAndInfosPanel.Name = "chkUseOnlyErrorsAndInfosPanel"
         Me.chkUseOnlyErrorsAndInfosPanel.Size = New System.Drawing.Size(278, 17)
         Me.chkUseOnlyErrorsAndInfosPanel.TabIndex = 5
@@ -848,7 +848,7 @@ Public Class frmOptions
         'chkShowFullConnectionsFilePathInTitle
         '
         Me.chkShowFullConnectionsFilePathInTitle.AutoSize = True
-        Me.chkShowFullConnectionsFilePathInTitle.Location = New System.Drawing.Point(3, 151)
+        Me.chkShowFullConnectionsFilePathInTitle.Location = New System.Drawing.Point(3, 141)
         Me.chkShowFullConnectionsFilePathInTitle.Name = "chkShowFullConnectionsFilePathInTitle"
         Me.chkShowFullConnectionsFilePathInTitle.Size = New System.Drawing.Size(239, 17)
         Me.chkShowFullConnectionsFilePathInTitle.TabIndex = 4
@@ -858,7 +858,7 @@ Public Class frmOptions
         'chkShowSystemTrayIcon
         '
         Me.chkShowSystemTrayIcon.AutoSize = True
-        Me.chkShowSystemTrayIcon.Location = New System.Drawing.Point(3, 199)
+        Me.chkShowSystemTrayIcon.Location = New System.Drawing.Point(3, 187)
         Me.chkShowSystemTrayIcon.Name = "chkShowSystemTrayIcon"
         Me.chkShowSystemTrayIcon.Size = New System.Drawing.Size(172, 17)
         Me.chkShowSystemTrayIcon.TabIndex = 5
@@ -868,7 +868,7 @@ Public Class frmOptions
         'chkMinimizeToSystemTray
         '
         Me.chkMinimizeToSystemTray.AutoSize = True
-        Me.chkMinimizeToSystemTray.Location = New System.Drawing.Point(3, 223)
+        Me.chkMinimizeToSystemTray.Location = New System.Drawing.Point(3, 210)
         Me.chkMinimizeToSystemTray.Name = "chkMinimizeToSystemTray"
         Me.chkMinimizeToSystemTray.Size = New System.Drawing.Size(139, 17)
         Me.chkMinimizeToSystemTray.TabIndex = 6
@@ -878,7 +878,7 @@ Public Class frmOptions
         'chkShowDescriptionTooltipsInTree
         '
         Me.chkShowDescriptionTooltipsInTree.AutoSize = True
-        Me.chkShowDescriptionTooltipsInTree.Location = New System.Drawing.Point(3, 127)
+        Me.chkShowDescriptionTooltipsInTree.Location = New System.Drawing.Point(3, 118)
         Me.chkShowDescriptionTooltipsInTree.Name = "chkShowDescriptionTooltipsInTree"
         Me.chkShowDescriptionTooltipsInTree.Size = New System.Drawing.Size(231, 17)
         Me.chkShowDescriptionTooltipsInTree.TabIndex = 3
@@ -1007,7 +1007,6 @@ Public Class frmOptions
         '
         'tabAppearance
         '
-        Me.tabAppearance.Controls.Add(Me.chkAlwaysShowPanelTabs)
         Me.tabAppearance.Controls.Add(Me.lblLanguageRestartRequired)
         Me.tabAppearance.Controls.Add(Me.cboLanguage)
         Me.tabAppearance.Controls.Add(Me.lblLanguage)
@@ -1024,6 +1023,7 @@ Public Class frmOptions
         '
         'tabTabsAndPanels
         '
+        Me.tabTabsAndPanels.Controls.Add(Me.chkAlwaysShowPanelTabs)
         Me.tabTabsAndPanels.Controls.Add(Me.chkUseOnlyErrorsAndInfosPanel)
         Me.tabTabsAndPanels.Controls.Add(Me.chkOpenNewTabRightOfSelected)
         Me.tabTabsAndPanels.Controls.Add(Me.lblSwitchToErrorsAndInfos)
@@ -1040,6 +1040,16 @@ Public Class frmOptions
         Me.tabTabsAndPanels.TabIndex = 2
         Me.tabTabsAndPanels.Text = "Tabs & Panels"
         Me.tabTabsAndPanels.UseVisualStyleBackColor = True
+        '
+        'chkAlwaysShowPanelTabs
+        '
+        Me.chkAlwaysShowPanelTabs.AutoSize = True
+        Me.chkAlwaysShowPanelTabs.Location = New System.Drawing.Point(3, 3)
+        Me.chkAlwaysShowPanelTabs.Name = "chkAlwaysShowPanelTabs"
+        Me.chkAlwaysShowPanelTabs.Size = New System.Drawing.Size(139, 17)
+        Me.chkAlwaysShowPanelTabs.TabIndex = 7
+        Me.chkAlwaysShowPanelTabs.Text = "Always show panel tabs"
+        Me.chkAlwaysShowPanelTabs.UseVisualStyleBackColor = True
         '
         'tabConnections
         '
@@ -1344,16 +1354,6 @@ Public Class frmOptions
         Me.tabAdvanced.TabIndex = 5
         Me.tabAdvanced.Text = "Advanced"
         Me.tabAdvanced.UseVisualStyleBackColor = True
-        '
-        'chkAlwaysShowPanelTabs
-        '
-        Me.chkAlwaysShowPanelTabs.AutoSize = True
-        Me.chkAlwaysShowPanelTabs.Location = New System.Drawing.Point(3, 104)
-        Me.chkAlwaysShowPanelTabs.Name = "chkAlwaysShowPanelTabs"
-        Me.chkAlwaysShowPanelTabs.Size = New System.Drawing.Size(139, 17)
-        Me.chkAlwaysShowPanelTabs.TabIndex = 7
-        Me.chkAlwaysShowPanelTabs.Text = "Always show panel tabs"
-        Me.chkAlwaysShowPanelTabs.UseVisualStyleBackColor = True
         '
         'frmOptions
         '
@@ -1912,9 +1912,4 @@ Public Class frmOptions
         End If
     End Sub
 #End Region
-
-
-    Private Sub lblProxyPort_Click(sender As System.Object, e As System.EventArgs) Handles lblProxyPort.Click
-
-    End Sub
 End Class
