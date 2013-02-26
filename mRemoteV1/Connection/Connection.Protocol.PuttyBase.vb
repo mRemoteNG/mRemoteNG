@@ -266,9 +266,6 @@ Namespace Connection
             End Function
 
             Public Shared Function IsFilePuttyNg(file As String) As Boolean
-                ' PuTTYNG enhancements are not yet compatible with Windows 8
-                If Environment.OSVersion.Version.CompareTo(New Version(6, 2)) >= 0 Then Return False
-
                 Dim isPuttyNg As Boolean
                 Try
                     isPuttyNg = FileVersionInfo.GetVersionInfo(file).InternalName.Contains("PuTTYNG")
