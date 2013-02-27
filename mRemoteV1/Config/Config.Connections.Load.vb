@@ -241,6 +241,8 @@ Namespace Config
 
                     sqlRd.Close()
 
+                    Windows.treeForm.tvConnections.BeginUpdate()
+
                     ' SECTION 3. Populate the TreeView with the DOM nodes.
                     AddNodesFromSQL(rootNode)
                     'AddNodeFromXml(xDom.DocumentElement, Me._RootTreeNode)
@@ -253,6 +255,8 @@ Namespace Config
                             contI.TreeNode.Expand()
                         End If
                     Next
+
+                    Windows.treeForm.tvConnections.EndUpdate()
 
                     'open connections from last mremote session
                     If My.Settings.OpenConsFromLastSession = True And My.Settings.NoReconnect = False Then
@@ -707,6 +711,8 @@ Namespace Config
                         Me._RootTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Root
                     End If
 
+                    Windows.treeForm.tvConnections.BeginUpdate()
+
                     ' SECTION 3. Populate the TreeView with the DOM nodes.
                     AddNodeFromXML(xDom.DocumentElement, Me._RootTreeNode)
 
@@ -718,6 +724,8 @@ Namespace Config
                             contI.TreeNode.Expand()
                         End If
                     Next
+
+                    Windows.treeForm.tvConnections.EndUpdate()
 
                     'open connections from last mremote session
                     If My.Settings.OpenConsFromLastSession = True And My.Settings.NoReconnect = False Then
