@@ -1008,22 +1008,23 @@ Namespace UI
                         Return
                     End If
 
-                    Dim newConnectionInfo As New mRemoteNG.Connection.Info()
-                    If mRemoteNG.Tree.Node.GetNodeType(tvConnections.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
-                        newConnectionInfo.Parent = tvConnections.SelectedNode.Parent.Tag
+                    Dim containerNode As TreeNode = tvConnections.SelectedNode
+                    If mRemoteNG.Tree.Node.GetNodeType(containerNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                        containerNode = containerNode.Parent
+                    End If
+
+                    Dim newConnectionInfo As New Info()
+                    If mRemoteNG.Tree.Node.GetNodeType(containerNode) = mRemoteNG.Tree.Node.Type.Root Then
+                        newConnectionInfo.Inherit.TurnOffInheritanceCompletely()
                     Else
-                        newConnectionInfo.Parent = tvConnections.SelectedNode.Tag
+                        newConnectionInfo.Parent = containerNode.Tag
                     End If
 
                     newConnectionInfo.TreeNode = newTreeNode
                     newTreeNode.Tag = newConnectionInfo
                     ConnectionList.Add(newConnectionInfo)
 
-                    If mRemoteNG.Tree.Node.GetNodeType(tvConnections.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
-                        tvConnections.SelectedNode.Parent.Nodes.Add(newTreeNode)
-                    Else
-                        tvConnections.SelectedNode.Nodes.Add(newTreeNode)
-                    End If
+                    containerNode.Nodes.Add(newTreeNode)
 
                     tvConnections.SelectedNode = newTreeNode
                     tvConnections.SelectedNode.BeginEdit()
@@ -1051,14 +1052,14 @@ Namespace UI
                         End If
                     End If
 
+                    newContainerInfo.ConnectionInfo = New Info(newContainerInfo)
+
                     ' We can only inherit from a container node, not the root node or connection nodes
                     If mRemoteNG.Tree.Node.GetNodeType(parentNode) = mRemoteNG.Tree.Node.Type.Container Then
                         newContainerInfo.Parent = parentNode.Tag
                     Else
                         newContainerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
                     End If
-
-                    newContainerInfo.ConnectionInfo = New mRemoteNG.Connection.Info(newContainerInfo)
 
                     App.Runtime.ContainerList.Add(newContainerInfo)
                     parentNode.Nodes.Add(newNode)

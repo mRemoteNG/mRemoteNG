@@ -8,6 +8,9 @@
   Added detection of newer versions of connection files and database schemata. mRemoteNG will now refuse to open them to avoid data loss.
   Improved appearance and discoverability of the connection search box.
 
+  Fixed issue MR-340 - Object reference not set to an instance of an object.
+  Fixed issue MR-344 - Move "Always show panel tabs" option
+
 1.70 (2013-02-25):
   Fixed issue MR-332 - Can't select different tab with one click after disconnecting existing tab
   Fixed issue MR-338 - PuTTYNG crashing on fresh install of mRemoteNG
