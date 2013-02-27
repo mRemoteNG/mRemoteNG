@@ -390,6 +390,8 @@ Namespace UI
                                 Me.btnIcon.Enabled = True
                                 Me.btnHostStatus.Enabled = True
                             ElseIf Me.DefaultInheritanceVisible Then 'Default Inhertiance selected
+                                pGrid.SelectedObject = Obj
+
                                 Me.btnShowProperties.Enabled = True
                                 Me.btnShowInheritance.Enabled = True
                                 Me.btnShowDefaultProperties.Enabled = False

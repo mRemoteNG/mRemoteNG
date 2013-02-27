@@ -6,6 +6,7 @@
   Fixed issue MR-158 - Password field not accepting Pipe
   Fixed issue MR-330 - Portable version saves log to user's profile folder
   Fixed issue MR-333 - Unnecessary prompt for 'close all open connections?'
+  Fixed issue MR-342 - Incorrect view in config pane of new connection after viewing default inheritance
   Added detection of newer versions of connection files and database schemata. mRemoteNG will now refuse to open them to avoid data loss.
   Improved appearance and discoverability of the connection search box.
 
