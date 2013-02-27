@@ -1,3 +1,4 @@
+  Fixed issue MR-339 - Connection group collapses with just one click
   Fixed issue MR-340 - Object reference not set to an instance of an object.
   Fixed issue MR-344 - Move "Always show panel tabs" option
   Fixed tabs not closing on double-click when the active tab is a PuTTY connection.
