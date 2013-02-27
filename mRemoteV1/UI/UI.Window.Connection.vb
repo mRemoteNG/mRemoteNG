@@ -385,6 +385,7 @@ Namespace UI
             End Sub
 
             Private Sub TabController_DoubleClickTab(ByVal sender As Crownwood.Magic.Controls.TabControl, ByVal page As Crownwood.Magic.Controls.TabPage) Handles TabController.DoubleClickTab
+                _lastMouseUp = 0
                 If My.Settings.DoubleClickOnTabClosesIt Then
                     Me.CloseConnectionTab()
                 End If
@@ -844,6 +845,7 @@ Namespace UI
                 RefreshIC()
             End Sub
 
+            Private _lastMouseUp As Integer = 0
             Private Sub TabController_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.MouseUp
                 Debug.Print("TabController_MouseUp()")
                 Debug.Print("_ignoreChangeSelectedTabClick = {0}", _ignoreChangeSelectedTabClick)
@@ -859,7 +861,14 @@ Namespace UI
 
                     Select Case e.Button
                         Case MouseButtons.Left
-                            FocusIC()
+                            Dim currentTicks As Integer = Environment.TickCount
+                            Dim elapsedTicks As Integer = currentTicks - _lastMouseUp
+                            If elapsedTicks > SystemInformation.DoubleClickTime Then
+                                _lastMouseUp = currentTicks
+                                FocusIC()
+                            Else
+                                TabController.OnDoubleClickTab(TabController.SelectedTab)
+                            End If
                         Case MouseButtons.Middle
                             CloseConnectionTab()
                         Case MouseButtons.Right
