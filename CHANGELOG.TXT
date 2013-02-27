@@ -1,5 +1,6 @@
   Fixed issue MR-340 - Object reference not set to an instance of an object.
   Fixed issue MR-344 - Move "Always show panel tabs" option
+  Fixed tabs not closing on double-click when the active tab is a PuTTY connection.
 
 1.70 (2013-02-25):
   Fixed issue MR-332 - Can't select different tab with one click after disconnecting existing tab
