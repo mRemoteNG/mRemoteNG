@@ -80,7 +80,7 @@ Namespace Config
                     If (Not sqlDataReader.HasRows) Then Return True ' assume new empty database
                     sqlDataReader.Read()
 
-                    databaseVersion = New System.Version(Convert.ToDouble(sqlDataReader.Item("confVersion"), CultureInfo.InvariantCulture))
+                    databaseVersion = New Version(Convert.ToString(sqlDataReader.Item("confVersion"), CultureInfo.InvariantCulture))
 
                     sqlDataReader.Close()
 
