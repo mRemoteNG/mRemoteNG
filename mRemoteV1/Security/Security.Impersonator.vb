@@ -10,7 +10,7 @@ Namespace Security
     Public Class Impersonator
 #Region "Logon API"
         Private Const LOGON32_PROVIDER_DEFAULT As Integer = 0
-        Private Const LOGON32_LOGON_INTERACTIVE As Integer = 2 ' This parameter causes LogonUser to create a primary token.
+        Private Const LOGON32_LOGON_NEW_CREDENTIALS As Integer = 9
 
         Private Const SecurityImpersonation As Integer = 2
 
@@ -37,7 +37,6 @@ Namespace Security
 #End Region
 
         Private tokenHandle As New IntPtr(0)
-        Private dupeTokenHandle As New IntPtr(0)
         Private impersonatedUser As WindowsImpersonationContext = Nothing
 
         ' GetErrorMessage formats and returns an error message corresponding to the input errorCode.
@@ -59,9 +58,8 @@ Namespace Security
                 If Not (impersonatedUser Is Nothing) Then Throw New Exception("Already impersonating a user.")
 
                 tokenHandle = IntPtr.Zero
-                dupeTokenHandle = IntPtr.Zero
 
-                Dim returnValue As Integer = LogonUser(UserName, DomainName, Password, LOGON32_LOGON_INTERACTIVE, LOGON32_PROVIDER_DEFAULT, tokenHandle)
+                Dim returnValue As Integer = LogonUser(UserName, DomainName, Password, LOGON32_LOGON_NEW_CREDENTIALS, LOGON32_PROVIDER_DEFAULT, tokenHandle)
 
                 If 0 = returnValue Then
                     Dim errCode As Integer = Marshal.GetLastWin32Error()
@@ -70,17 +68,8 @@ Namespace Security
                     Throw exLogon
                 End If
 
-                returnValue = DuplicateToken(tokenHandle, SecurityImpersonation, dupeTokenHandle)
-                If 0 = returnValue Then
-                    CloseHandle(tokenHandle)
-                    Throw New ApplicationException("Error trying to duplicate handle.")
-                End If
-
-                ' The token that is passed to the following constructor must
-                ' be a primary token in order to use it for impersonation.
-                Dim newId As New WindowsIdentity(dupeTokenHandle)
+                Dim newId As New WindowsIdentity(tokenHandle)
                 impersonatedUser = newId.Impersonate()
-
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Starting Impersonation failed (Sessions feature will not work)" & vbNewLine & ex.Message, True)
             End Try
@@ -98,7 +87,6 @@ Namespace Security
             Finally
 
                 If Not System.IntPtr.op_Equality(tokenHandle, IntPtr.Zero) Then CloseHandle(tokenHandle)
-                If Not System.IntPtr.op_Equality(dupeTokenHandle, IntPtr.Zero) Then CloseHandle(dupeTokenHandle)
 
                 impersonatedUser = Nothing
             End Try
