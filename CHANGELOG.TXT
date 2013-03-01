@@ -11,6 +11,7 @@
   Added detection of newer versions of connection files and database schemata. mRemoteNG will now refuse to open them to avoid data loss.
   Improved appearance and discoverability of the connection search box.
   If RDC 7.0 or higher is installed, the connection bar is no longer briefly shown when connecting to an RDP connection with redirect key combinations enabled.
+  If RDC 8.0 or higher is installed, RDP connections automatically adjust their size when the window is resized or when toggling full screen mode.
 
   Fixed issue MR-339 - Connection group collapses with just one click
   Fixed issue MR-340 - Object reference not set to an instance of an object.

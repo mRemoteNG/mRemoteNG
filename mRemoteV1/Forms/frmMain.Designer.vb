@@ -689,6 +689,7 @@ Partial Class frmMain
         Me.tsExternalTools.Location = New System.Drawing.Point(39, 49)
         Me.tsExternalTools.Name = "tsExtAppsToolbar"
         Me.tsExternalTools.Size = New System.Drawing.Size(111, 25)
+        Me.tsExternalTools.MaximumSize = New System.Drawing.Size(0, 25)
         Me.tsExternalTools.TabIndex = 17
         '
         'cMenExtAppsToolbar
@@ -712,6 +713,7 @@ Partial Class frmMain
         Me.tsQuickConnect.Location = New System.Drawing.Point(3, 24)
         Me.tsQuickConnect.Name = "tsQuickConnect"
         Me.tsQuickConnect.Size = New System.Drawing.Size(331, 25)
+        Me.tsQuickConnect.MaximumSize = New System.Drawing.Size(0, 25)
         Me.tsQuickConnect.TabIndex = 18
         '
         'btnQuickyPlay
@@ -741,6 +743,7 @@ Partial Class frmMain
         Me.ToolStrip1.Location = New System.Drawing.Point(3, 74)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Size = New System.Drawing.Size(264, 25)
+        Me.ToolStrip1.MaximumSize = New System.Drawing.Size(0, 25)
         Me.ToolStrip1.TabIndex = 19
         Me.ToolStrip1.Visible = False
         '

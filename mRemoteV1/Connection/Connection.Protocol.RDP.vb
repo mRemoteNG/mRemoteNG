@@ -28,7 +28,8 @@ Namespace Connection
                     Return Me.RDP.FullScreen
                 End Get
                 Set(ByVal value As Boolean)
-                    Me.RDP.FullScreen = value
+                    RDP.FullScreen = value
+                    ReconnectForResize()
                 End Set
             End Property
 #End Region
@@ -156,14 +157,55 @@ Namespace Connection
                 End Try
             End Sub
 
-            Public Overrides Sub Resize()
-                Control.Location = InterfaceControl.Location
-                Control.Size = InterfaceControl.Size
-                MyBase.Resize()
+            Private _controlBeginningSize As New Size
+            Public Overrides Sub ResizeBegin(ByVal sender As Object, ByVal e As EventArgs)
+                _controlBeginningSize = Control.Size
+            End Sub
+
+            Public Overrides Sub Resize(ByVal sender As Object, ByVal e As EventArgs)
+                If DoResize() And _controlBeginningSize.IsEmpty Then
+                    ReconnectForResize()
+                End If
+                MyBase.Resize(sender, e)
+            End Sub
+
+            Public Overrides Sub ResizeEnd(ByVal sender As Object, ByVal e As EventArgs)
+                DoResize()
+                If Not Control.Size = _controlBeginningSize Then
+                    ReconnectForResize()
+                End If
+                _controlBeginningSize = Size.Empty
             End Sub
 #End Region
 
 #Region "Private Methods"
+            Private Function DoResize() As Boolean
+                Control.Location = InterfaceControl.Location
+                If Not Control.Size = InterfaceControl.Size And Not InterfaceControl.Size = Size.Empty Then
+                    Control.Size = InterfaceControl.Size
+                    Return True
+                Else
+                    Return False
+                End If
+            End Function
+
+            Private Sub ReconnectForResize()
+                If RDPVersion < Versions.RDC80 Then Return
+
+                If Not (InterfaceControl.Info.Resolution = RDPResolutions.FitToWindow Or _
+                        InterfaceControl.Info.Resolution = RDPResolutions.Fullscreen) Then Return
+
+                Dim size As Size
+                If Not Fullscreen Then
+                    size = Control.Size
+                Else
+                    size = Screen.FromControl(Control).Bounds.Size
+                End If
+
+                Dim msRdpClient8 As MSTSCLib.IMsRdpClient8 = RDP.GetOcx()
+                msRdpClient8.Reconnect(size.Width, size.Height)
+            End Sub
+
             Private Sub SetRDGateway()
                 Try
                     If RDP.TransportSettings.GatewayIsSupported = 1 Then
@@ -420,6 +462,7 @@ Namespace Connection
             End Sub
 
             Private Sub RDPEvent_OnLeaveFullscreenMode(ByVal sender As Object, ByVal e As System.EventArgs)
+                Fullscreen = False
                 RaiseEvent LeaveFullscreen(Me, e)
             End Sub
 #End Region
@@ -633,6 +676,7 @@ Namespace Connection
                 Public Shared RDC60 As New Version(6, 0, 6000)
                 Public Shared RDC61 As New Version(6, 0, 6001)
                 Public Shared RDC70 As New Version(6, 1, 7600)
+                Public Shared RDC80 As New Version(6, 2, 9200)
             End Class
 
 #Region "Terminal Sessions"
@@ -825,7 +869,6 @@ Namespace Connection
                 End If
             End Sub
 #End Region
-            
         End Class
     End Namespace
 End Namespace

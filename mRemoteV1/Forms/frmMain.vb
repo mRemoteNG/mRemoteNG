@@ -710,22 +710,32 @@ Public Class frmMain
 #End Region
 
 #Region "Window Overrides and DockPanel Stuff"
-    Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
-        If Me.WindowState = FormWindowState.Minimized Then
+    Private _inSizeMove As Boolean = False
+    Private Sub frmMain_ResizeBegin(ByVal sender As Object, ByVal e As EventArgs) Handles Me.ResizeBegin
+        _inSizeMove = True
+    End Sub
+
+    Private Sub frmMain_Resize(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Resize
+        If WindowState = FormWindowState.Minimized Then
             If My.Settings.MinimizeToTray Then
-                If App.Runtime.NotificationAreaIcon Is Nothing Then
-                    App.Runtime.NotificationAreaIcon = New Tools.Controls.NotificationAreaIcon()
+                If NotificationAreaIcon Is Nothing Then
+                    NotificationAreaIcon = New Tools.Controls.NotificationAreaIcon()
                 End If
-                Me.Hide()
+                Hide()
             End If
         Else
-            PreviousWindowState = Me.WindowState
+            PreviousWindowState = WindowState
         End If
     End Sub
 
-    Private _inMouseActivate As Boolean = False
-    Private _inSizeMove As Boolean = False
+    Private Sub frmMain_ResizeEnd(ByVal sender As Object, ByVal e As EventArgs) Handles Me.ResizeEnd
+        _inSizeMove = False
 
+        ' This handles activations from clicks that started a size/move operation
+        ActivateConnection()
+    End Sub
+
+    Private _inMouseActivate As Boolean = False
     Protected Overloads Overrides Sub WndProc(ByRef m As Message)
         Try
 #If Config = "Debug" Then
@@ -757,13 +767,6 @@ Public Class frmMain
                     End If
 
                     ' This handles activations from clicks that did not start a size/move operation
-                    ActivateConnection()
-                Case WM_ENTERSIZEMOVE
-                    _inSizeMove = True
-                Case WM_EXITSIZEMOVE
-                    _inSizeMove = False
-
-                    ' This handles activations from clicks that started a size/move operation
                     ActivateConnection()
                 Case WM_WINDOWPOSCHANGED
                     ' Ignore this message if the window wasn't activated

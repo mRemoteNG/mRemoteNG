@@ -17,14 +17,24 @@ Namespace Connection
                 End Set
             End Property
 
-
-            Private _InterfaceControl As Connection.InterfaceControl
-            Public Property InterfaceControl() As Connection.InterfaceControl
+            Private WithEvents _connectionWindow As UI.Window.Connection
+            Public Property ConnectionWindow As UI.Window.Connection
                 Get
-                    Return Me._InterfaceControl
+                    Return _connectionWindow
                 End Get
-                Set(ByVal value As Connection.InterfaceControl)
-                    Me._InterfaceControl = value
+                Set(value As UI.Window.Connection)
+                    _connectionWindow = value
+                End Set
+            End Property
+
+            Private _interfaceControl As InterfaceControl
+            Public Property InterfaceControl() As InterfaceControl
+                Get
+                    Return _interfaceControl
+                End Get
+                Set(ByVal value As InterfaceControl)
+                    _interfaceControl = value
+                    ConnectionWindow = TryCast(_interfaceControl.GetContainerControl(), UI.Window.Connection)
                 End Set
             End Property
 
@@ -62,17 +72,29 @@ Namespace Connection
                 End Try
             End Sub
 
+            Public Overridable Sub ResizeBegin(ByVal sender As System.Object, ByVal e As EventArgs) Handles _connectionWindow.ResizeBegin
+
+            End Sub
+
+            Public Overridable Sub Resize(ByVal sender As System.Object, ByVal e As EventArgs) Handles _connectionWindow.Resize
+
+            End Sub
+
+            Public Overridable Sub ResizeEnd(ByVal sender As System.Object, ByVal e As EventArgs) Handles _connectionWindow.ResizeEnd
+
+            End Sub
+
             Public Overridable Function SetProps() As Boolean
                 Try
-                    Me._InterfaceControl.Parent.Tag = Me._InterfaceControl
-                    Me._InterfaceControl.Show()
+                    Me._interfaceControl.Parent.Tag = Me._interfaceControl
+                    Me._interfaceControl.Show()
 
                     If Me._Control IsNot Nothing Then
                         Me._Control.Name = Me._Name
-                        Me._Control.Parent = Me._InterfaceControl
-                        Me._Control.Location = Me._InterfaceControl.Location
+                        Me._Control.Parent = Me._interfaceControl
+                        Me._Control.Location = Me._interfaceControl.Location
                         Me._Control.Size = Me.InterfaceControl.Size
-                        Me._Control.Anchor = Me._InterfaceControl.Anchor
+                        Me._Control.Anchor = Me._interfaceControl.Anchor
                     End If
 
                     Return True
@@ -90,10 +112,6 @@ Namespace Connection
 
             Public Overridable Sub Disconnect()
                 Me.Close()
-            End Sub
-
-            Public Overridable Sub Resize()
-
             End Sub
 
             Public Overridable Sub Close()

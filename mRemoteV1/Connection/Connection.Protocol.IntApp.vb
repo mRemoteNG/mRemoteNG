@@ -121,7 +121,7 @@ Namespace Connection
                     SetWindowLong(Me.IntAppHandle, 0, WS_VISIBLE)
                     ShowWindow(Me.IntAppHandle, SW_SHOWMAXIMIZED)
 
-                    Resize()
+                    Resize(Me, New EventArgs)
 
                     MyBase.Connect()
                     Return True
@@ -140,8 +140,9 @@ Namespace Connection
                 End Try
             End Sub
 
-            Public Overrides Sub Resize()
+            Public Overrides Sub Resize(ByVal sender As Object, ByVal e As EventArgs)
                 Try
+                    If InterfaceControl.Size = Size.Empty Then Return
                     MoveWindow(IntAppHandle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), Me.InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), Me.InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), True)
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIntAppResizeFailed & vbNewLine & ex.Message, True)

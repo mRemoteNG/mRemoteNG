@@ -179,7 +179,7 @@ Namespace Connection
                     MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strPuttyTitle, PuttyProcess.MainWindowTitle), True)
                     MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strPuttyParentHandle, InterfaceControl.Parent.Handle.ToString), True)
 
-                    Resize()
+                    Resize(Me, New EventArgs)
 
                     MyBase.Connect()
                     Return True
@@ -205,10 +205,9 @@ Namespace Connection
                 End Try
             End Sub
 
-            Public Overrides Sub Resize()
+            Public Overrides Sub Resize(ByVal sender As Object, ByVal e As EventArgs)
                 Try
-                    If frmMain.WindowState = FormWindowState.Minimized Then Return
-
+                    If InterfaceControl.Size = Size.Empty Then Return
                     MoveWindow(PuttyHandle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), True)
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyResizeFailed & vbNewLine & ex.Message, True)

@@ -292,6 +292,30 @@ Namespace UI
                 ApplyLanguage()
             End Sub
 
+            Private _documentHandlersAdded As Boolean = False
+            Private _floatHandlersAdded As Boolean = False
+            Private Sub Connection_DockStateChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles Me.DockStateChanged
+                If DockState = DockState.Float Then
+                    If _documentHandlersAdded Then
+                        RemoveHandler frmMain.ResizeBegin, AddressOf Connection_ResizeBegin
+                        RemoveHandler frmMain.ResizeEnd, AddressOf Connection_ResizeEnd
+                        _documentHandlersAdded = False
+                    End If
+                    AddHandler DockHandler.FloatPane.FloatWindow.ResizeBegin, AddressOf Connection_ResizeBegin
+                    AddHandler DockHandler.FloatPane.FloatWindow.ResizeEnd, AddressOf Connection_ResizeEnd
+                    _floatHandlersAdded = True
+                ElseIf DockState = DockState.Document Then
+                    If _floatHandlersAdded Then
+                        RemoveHandler DockHandler.FloatPane.FloatWindow.ResizeBegin, AddressOf Connection_ResizeBegin
+                        RemoveHandler DockHandler.FloatPane.FloatWindow.ResizeEnd, AddressOf Connection_ResizeEnd
+                        _floatHandlersAdded = False
+                    End If
+                    AddHandler frmMain.ResizeBegin, AddressOf Connection_ResizeBegin
+                    AddHandler frmMain.ResizeEnd, AddressOf Connection_ResizeEnd
+                    _documentHandlersAdded = True
+                End If
+            End Sub
+
             Private Sub ApplyLanguage()
                 cmenTabFullscreen.Text = My.Language.strMenuFullScreenRDP
                 cmenTabSmartSize.Text = My.Language.strMenuSmartSize
@@ -335,19 +359,14 @@ Namespace UI
                 End Try
             End Sub
 
-            Private Sub Connection_Resize(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Resize
-                Try
-                    For Each tabP As Magic.Controls.TabPage In Me.TabController.TabPages
-                        If tabP.Tag IsNot Nothing Then
-                            If TypeOf tabP.Tag Is mRemoteNG.Connection.InterfaceControl Then
-                                Dim IC As mRemoteNG.Connection.InterfaceControl = tabP.Tag
-                                IC.Protocol.Resize()
-                            End If
-                        End If
-                    Next
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Connection_Resize (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
-                End Try
+            Public Shadows Event ResizeBegin As EventHandler
+            Private Sub Connection_ResizeBegin(ByVal sender As System.Object, ByVal e As EventArgs)
+                RaiseEvent ResizeBegin(Me, e)
+            End Sub
+
+            Public Shadows Event ResizeEnd As EventHandler
+            Public Sub Connection_ResizeEnd(ByVal sender As System.Object, ByVal e As EventArgs)
+                RaiseEvent ResizeEnd(sender, e)
             End Sub
 #End Region
 
