@@ -316,6 +316,12 @@ Namespace Connection
                         RDP.AdvancedSettings2.ContainerHandledFullScreen = 1
                         RDP.AdvancedSettings2.DisplayConnectionBar = False
                         RDP.AdvancedSettings2.PinConnectionBar = False
+
+                        If RDPVersion >= Versions.RDC70 Then
+                            Dim msRdpClientNonScriptable As MSTSCLib.IMsRdpClientNonScriptable5 = RDP.GetOcx()
+                            msRdpClientNonScriptable.DisableConnectionBar = True
+                        End If
+
                         RDP.FullScreen = True
                     End If
                 Catch ex As Exception
@@ -626,6 +632,7 @@ Namespace Connection
             Public Class Versions
                 Public Shared RDC60 As New Version(6, 0, 6000)
                 Public Shared RDC61 As New Version(6, 0, 6001)
+                Public Shared RDC70 As New Version(6, 1, 7600)
             End Class
 
 #Region "Terminal Sessions"

@@ -10,6 +10,7 @@
   Fixed issue MR-342 - Incorrect view in config pane of new connection after viewing default inheritance
   Added detection of newer versions of connection files and database schemata. mRemoteNG will now refuse to open them to avoid data loss.
   Improved appearance and discoverability of the connection search box.
+  If RDC 7.0 or higher is installed, the connection bar is no longer briefly shown when connecting to an RDP connection with redirect key combinations enabled.
 
   Fixed issue MR-339 - Connection group collapses with just one click
   Fixed issue MR-340 - Object reference not set to an instance of an object.
