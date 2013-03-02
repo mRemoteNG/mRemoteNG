@@ -6,6 +6,8 @@ Imports System.Threading
 Imports Microsoft.Win32
 Imports System.Drawing
 Imports mRemoteNG.App.Runtime
+Imports System.Text.RegularExpressions
+Imports mRemoteNG.Tools
 
 Namespace Connection
     Namespace Protocol
@@ -111,45 +113,53 @@ Namespace Connection
 
                     PuttyProcess = New Process
                     With PuttyProcess.StartInfo
+                        .UseShellExecute = False
                         .FileName = _PuttyPath
 
-                        Select Case _PuttyProtocol
-                            Case Putty_Protocol.raw
-                                .Arguments = "-load " & """" & PuttyEscapeArgument(InterfaceControl.Info.PuttySession) & """" & " -" & _PuttyProtocol.ToString & " -P " & InterfaceControl.Info.Port & " """ & InterfaceControl.Info.Hostname & """"
-                            Case Putty_Protocol.rlogin
-                                .Arguments = "-load " & """" & PuttyEscapeArgument(InterfaceControl.Info.PuttySession) & """" & " -" & _PuttyProtocol.ToString & " -P " & InterfaceControl.Info.Port & " """ & InterfaceControl.Info.Hostname & """"
-                            Case Putty_Protocol.ssh
-                                Dim userArgument As String = ""
-                                Dim passwordArgument As String = ""
+                        Dim arguments As New CommandLineArguments
+                        arguments.EscapeForShell = False
 
+                        arguments.Add("-load", InterfaceControl.Info.PuttySession)
+                        arguments.Add("-" & _PuttyProtocol.ToString)
+
+                        If _PuttyProtocol = Putty_Protocol.ssh Then
+                            Dim username As String = ""
+                            Dim password As String = ""
+
+                            If Not String.IsNullOrEmpty(InterfaceControl.Info.Username) Then
+                                username = InterfaceControl.Info.Username
+                            Else
                                 If My.Settings.EmptyCredentials = "windows" Then
-                                    userArgument = " -l """ & Environment.UserName & """"
+                                    username = Environment.UserName
                                 ElseIf My.Settings.EmptyCredentials = "custom" Then
-                                    userArgument = " -l """ & My.Settings.DefaultUsername & """"
-                                    passwordArgument = " -pw """ & PuttyEscapeArgument(Security.Crypt.Decrypt(My.Settings.DefaultPassword, App.Info.General.EncryptionKey)) & """"
+                                    username = My.Settings.DefaultUsername
                                 End If
+                            End If
 
-                                If InterfaceControl.Info.Username <> "" Then
-                                    userArgument = " -l """ & InterfaceControl.Info.Username & """"
+                            If Not String.IsNullOrEmpty(InterfaceControl.Info.Password) Then
+                                password = InterfaceControl.Info.Password
+                            Else
+                                If My.Settings.EmptyCredentials = "custom" Then
+                                    password = Security.Crypt.Decrypt(My.Settings.DefaultPassword, App.Info.General.EncryptionKey)
                                 End If
+                            End If
 
-                                If InterfaceControl.Info.Password <> "" Then
-                                    passwordArgument = " -pw """ & PuttyEscapeArgument(InterfaceControl.Info.Password) & """"
-                                End If
-
-                                .Arguments = "-load " & """" & PuttyEscapeArgument(InterfaceControl.Info.PuttySession) & """" & " -" & _PuttyProtocol.ToString & " -" & _PuttySSHVersion & userArgument & passwordArgument & " -P " & InterfaceControl.Info.Port & " """ & InterfaceControl.Info.Hostname & """"
-                            Case Putty_Protocol.telnet
-                                .Arguments = "-load " & """" & PuttyEscapeArgument(InterfaceControl.Info.PuttySession) & """" & " -" & _PuttyProtocol.ToString & " -P " & InterfaceControl.Info.Port & " """ & InterfaceControl.Info.Hostname & """"
-                            Case Putty_Protocol.serial
-                                .Arguments = "-load " & """" & PuttyEscapeArgument(InterfaceControl.Info.PuttySession) & """" & " -" & _PuttyProtocol.ToString & " -P " & InterfaceControl.Info.Port & " """ & InterfaceControl.Info.Hostname & """"
-                        End Select
-
-                        If _isPuttyNg Then
-                            .Arguments = .Arguments & " -hwndparent " & InterfaceControl.Handle.ToString()
+                            arguments.Add("-" & _PuttySSHVersion)
+                            arguments.Add("-l", username)
+                            arguments.Add("-pw", password)
                         End If
 
+                        arguments.Add("-P", InterfaceControl.Info.Port.ToString)
+                        arguments.Add(InterfaceControl.Info.Hostname)
+
+                        If _isPuttyNg Then
+                            arguments.Add("-hwndparent", InterfaceControl.Handle.ToString())
+                        End If
+
+                        .Arguments = arguments.ToString
+
                         'REMOVE IN RELEASE!
-                        'MessageCollector.AddMessage(MessageClass.InformationMsg, "PuTTY Arguments: " & .Arguments, True)
+                        MessageCollector.AddMessage(MessageClass.InformationMsg, "PuTTY Arguments: " & .Arguments, True)
                     End With
 
                     PuttyProcess.EnableRaisingEvents = True
@@ -187,14 +197,6 @@ Namespace Connection
                     MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyConnectionFailed & vbNewLine & ex.Message)
                     Return False
                 End Try
-            End Function
-
-            ' Due to the way PuTTY handles command line arguments, backslashes followed by a quotation mark will be removed.
-            ' Since all the strings we send to PuTTY are surrounded by quotation marks, we need to escape any trailing
-            ' backslashes by adding another. See split_into_argv() in WINDOWS\WINUTILS.C of the PuTTY source for more info.
-            Private Shared Function PuttyEscapeArgument(ByVal argument As String) As String
-                If argument.EndsWith("\") Then argument = argument & "\"
-                Return argument
             End Function
 
             Public Overrides Sub Focus()

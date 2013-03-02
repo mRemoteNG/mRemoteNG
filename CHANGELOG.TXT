@@ -8,6 +8,7 @@
   Fixed issue MR-330 - Portable version saves log to user's profile folder
   Fixed issue MR-333 - Unnecessary prompt for 'close all open connections?'
   Fixed issue MR-342 - Incorrect view in config pane of new connection after viewing default inheritance
+  Fixed issue MR-352 - Passwords with " (quotation mark) and # (hash key) characters make mRemoteNG to open PuttyNG dialog
   Added detection of newer versions of connection files and database schemata. mRemoteNG will now refuse to open them to avoid data loss.
   Improved appearance and discoverability of the connection search box.
   If RDC 7.0 or higher is installed, the connection bar is no longer briefly shown when connecting to an RDP connection with redirect key combinations enabled.

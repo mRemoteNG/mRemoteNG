@@ -213,6 +213,7 @@
     <Compile Include="Connection\Connection.Protocol.VNC.vb" />
     <Compile Include="Connection\Connection.PuttySession.vb" />
     <Compile Include="Connection\Connection.QuickConnect.vb" />
+    <Compile Include="Tools\CommandLineArguments.vb" />
     <Compile Include="Container\Container.Info.vb" />
     <Compile Include="Container\Container.List.vb" />
     <Compile Include="Credential\Credential.Info.vb" />

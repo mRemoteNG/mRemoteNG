@@ -117,21 +117,21 @@ Namespace Tools
 
                 _ConnectionInfo = ConnectionInfo
 
-                Dim p As New Process()
-                Dim pI As New ProcessStartInfo()
+                Dim process As New Process()
+                With process.StartInfo
+                    .UseShellExecute = False
+                    .FileName = ParseText(_FileName)
 
-                pI.FileName = ParseText(_FileName)
-                pI.Arguments = EscapeArguments(ParseText(_Arguments))
+                    .Arguments = CommandLineArguments.EscapeBackslashes(_Arguments)
+                End With
 
-                p.StartInfo = pI
-
-                p.Start()
+                process.Start()
 
                 If _WaitForExit Then
-                    p.WaitForExit()
+                    process.WaitForExit()
                 End If
 
-                Return p
+                Return process
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't start external application." & vbNewLine & ex.Message)
                 Return Nothing
@@ -197,16 +197,6 @@ Namespace Tools
             End Try
 
             Return pText
-        End Function
-
-        Public Shared Function EscapeArguments(ByVal arguments As String) As String
-            Dim escapedArguments As String = arguments
-            escapedArguments = escapedArguments.Replace("^", "^^")
-            escapedArguments = escapedArguments.Replace("&", "^&")
-            escapedArguments = escapedArguments.Replace("<", "^<")
-            escapedArguments = escapedArguments.Replace(">", "^>")
-            escapedArguments = escapedArguments.Replace("|", "^|")
-            Return escapedArguments
         End Function
     End Class
 

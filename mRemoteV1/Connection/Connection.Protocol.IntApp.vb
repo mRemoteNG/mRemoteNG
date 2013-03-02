@@ -87,8 +87,9 @@ Namespace Connection
                         Return Nothing
                     End If
 
+                    IntAppProcessStartInfo.UseShellExecute = False
                     IntAppProcessStartInfo.FileName = _IntAppPath
-                    IntAppProcessStartInfo.Arguments = ExternalTool.EscapeArguments(Arguments)
+                    IntAppProcessStartInfo.Arguments = CommandLineArguments.EscapeBackslashes(Arguments)
 
                     IntAppProcess = Process.Start(IntAppProcessStartInfo)
                     IntAppProcess.EnableRaisingEvents = True
