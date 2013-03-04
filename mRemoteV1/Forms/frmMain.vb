@@ -124,7 +124,7 @@ Public Class frmMain
         mMenViewConfig.Text = My.Language.strMenuConfig
         mMenViewSessions.Text = My.Language.strMenuSessions
         mMenViewErrorsAndInfos.Text = My.Language.strMenuNotifications
-        mMenViewScreenshotManager.Text = My.Language.strMenuScreenshotManager
+        mMenViewScreenshotManager.Text = My.Language.strScreenshots
         mMenViewJumpTo.Text = My.Language.strMenuJumpTo
         mMenViewJumpToConnectionsConfig.Text = My.Language.strMenuConnectionsAndConfig
         mMenViewJumpToSessionsScreenshots.Text = My.Language.strMenuSessionsAndScreenshots
