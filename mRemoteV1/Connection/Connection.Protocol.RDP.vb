@@ -12,24 +12,49 @@ Namespace Connection
             Inherits Connection.Protocol.Base
 
 #Region "Properties"
-            Private _SmartSize As Boolean
             Public Property SmartSize() As Boolean
                 Get
-                    Return Me.RDP.AdvancedSettings4.SmartSizing
+                    Return RDP.AdvancedSettings4.SmartSizing
                 End Get
                 Set(ByVal value As Boolean)
-                    Me.RDP.AdvancedSettings4.SmartSizing = value
+                    RDP.AdvancedSettings4.SmartSizing = value
+                    ReconnectForResize()
                 End Set
             End Property
 
-            Private _Fullscreen As Boolean
             Public Property Fullscreen() As Boolean
                 Get
-                    Return Me.RDP.FullScreen
+                    Return RDP.FullScreen
                 End Get
                 Set(ByVal value As Boolean)
                     RDP.FullScreen = value
                     ReconnectForResize()
+                End Set
+            End Property
+
+            Private _redirectKeys As Boolean = False
+            Public Property RedirectKeys As Boolean
+                Get
+                    Return _redirectKeys
+                End Get
+                Set(value As Boolean)
+                    _redirectKeys = value
+                    Try
+                        If Not _redirectKeys Then Return
+
+                        RDP.AdvancedSettings2.ContainerHandledFullScreen = 1
+                        RDP.AdvancedSettings2.DisplayConnectionBar = False
+                        RDP.AdvancedSettings2.PinConnectionBar = False
+
+                        If RDPVersion >= Versions.RDC70 Then
+                            Dim msRdpClientNonScriptable As MSTSCLib.IMsRdpClientNonScriptable5 = RDP.GetOcx()
+                            msRdpClientNonScriptable.DisableConnectionBar = True
+                        End If
+
+                        RDP.FullScreen = True
+                    Catch ex As Exception
+                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectKeysFailed & vbNewLine & ex.Message, True)
+                    End Try
                 End Set
             End Property
 #End Region
@@ -88,7 +113,7 @@ Namespace Connection
 
                     Me.SetUseConsoleSession()
                     Me.SetPort()
-                    Me.SetRedirectKeys()
+                    RedirectKeys = Info.RedirectKeys
                     Me.SetRedirection()
                     Me.SetAuthenticationLevel()
                     Me.SetRDGateway()
@@ -193,10 +218,11 @@ Namespace Connection
                 If RDPVersion < Versions.RDC80 Then Return
 
                 If Not (InterfaceControl.Info.Resolution = RDPResolutions.FitToWindow Or _
-                        InterfaceControl.Info.Resolution = RDPResolutions.Fullscreen) Then Return
+                        InterfaceControl.Info.Resolution = RDPResolutions.Fullscreen) Or _
+                    SmartSize Then Return
 
                 Dim size As Size
-                If Not Fullscreen Then
+                If RedirectKeys Or Not Fullscreen Then
                     size = Control.Size
                 Else
                     size = Screen.FromControl(Control).Bounds.Size
@@ -349,25 +375,6 @@ Namespace Connection
                     End If
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPortFailed & vbNewLine & ex.Message, True)
-                End Try
-            End Sub
-
-            Private Sub SetRedirectKeys()
-                Try
-                    If Me.Info.RedirectKeys Then
-                        RDP.AdvancedSettings2.ContainerHandledFullScreen = 1
-                        RDP.AdvancedSettings2.DisplayConnectionBar = False
-                        RDP.AdvancedSettings2.PinConnectionBar = False
-
-                        If RDPVersion >= Versions.RDC70 Then
-                            Dim msRdpClientNonScriptable As MSTSCLib.IMsRdpClientNonScriptable5 = RDP.GetOcx()
-                            msRdpClientNonScriptable.DisableConnectionBar = True
-                        End If
-
-                        RDP.FullScreen = True
-                    End If
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectKeysFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 

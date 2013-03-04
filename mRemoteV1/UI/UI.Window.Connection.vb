@@ -443,15 +443,20 @@ Namespace UI
                     End If
 
                     If IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Then
-                        Me.cmenTabFullscreen.Enabled = True
-                        Me.cmenTabSmartSize.Enabled = True
-
                         Dim rdp As mRemoteNG.Connection.Protocol.RDP = IC.Protocol
-                        Me.cmenTabSmartSize.Checked = rdp.SmartSize
-                        Me.cmenTabFullscreen.Checked = rdp.Fullscreen
+
+                        If rdp.RedirectKeys Then
+                            cmenTabFullscreen.Enabled = False
+                        Else
+                            cmenTabFullscreen.Enabled = True
+                            cmenTabFullscreen.Checked = rdp.Fullscreen
+                        End If
+
+                        cmenTabSmartSize.Enabled = True
+                        cmenTabSmartSize.Checked = rdp.SmartSize
                     Else
-                        Me.cmenTabFullscreen.Enabled = False
-                        Me.cmenTabSmartSize.Enabled = False
+                        cmenTabFullscreen.Enabled = False
+                        cmenTabSmartSize.Enabled = False
                     End If
 
                     If IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.VNC Then
