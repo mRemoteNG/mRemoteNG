@@ -2335,6 +2335,16 @@ Namespace My
                 Me("IdentifyQuickConnectTabs") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("release")>  _
+        Public ReadOnly Property UpdateChannel() As String
+            Get
+                Return CType(Me("UpdateChannel"),String)
+            End Get
+        End Property
     End Class
 End Namespace
 

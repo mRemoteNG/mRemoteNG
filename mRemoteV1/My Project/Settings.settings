@@ -530,5 +530,8 @@
     <Setting Name="IdentifyQuickConnectTabs" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="UpdateChannel" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">release</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

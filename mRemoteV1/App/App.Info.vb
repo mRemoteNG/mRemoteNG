@@ -25,11 +25,18 @@ Namespace App
 
         Public Class Update
             Public Shared ReadOnly URL As String = "http://update.mremoteng.org/"
-#If DEBUG Then
-            Public Shared ReadOnly File As String = "update-debug.txt"
-#Else
-            Public Shared ReadOnly File As String = "update.txt"
-#End If
+            Public Shared ReadOnly Property File As String
+                Get
+                    Select Case My.Settings.UpdateChannel.ToLowerInvariant()
+                        Case "beta"
+                            Return "update-beta.txt"
+                        Case "debug"
+                            Return "update-debug.txt"
+                        Case Else
+                            Return "update.txt"
+                    End Select
+                End Get
+            End Property
         End Class
 
         Public Class Connections
