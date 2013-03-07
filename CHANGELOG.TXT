@@ -1,3 +1,4 @@
+1.70 (2013-03-07):  
   Fixed issue MR-339 - Connection group collapses with just one click
   Fixed issue MR-340 - Object reference not set to an instance of an object.
   Fixed issue MR-344 - Move "Always show panel tabs" option
@@ -5,7 +6,7 @@
   Fixed issue MR-355 - Moving sub folders to top level causes property loss
   Fixed tabs not closing on double-click when the active tab is a PuTTY connection.
 
-1.70 (2013-02-25):
+1.70 Release Candidate 2 (2013-02-25):
   Fixed issue MR-332 - Can't select different tab with one click after disconnecting existing tab
   Fixed issue MR-338 - PuTTYNG crashing on fresh install of mRemoteNG
   Re-enabled PuTTYNG integration enhancements on Windows 8
