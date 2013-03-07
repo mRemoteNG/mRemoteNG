@@ -774,7 +774,6 @@ Namespace UI
                         Exit Sub
                     End If
 
-
                     If dropNode Is targetNode.Parent Then
                         Exit Sub
                     End If
@@ -798,9 +797,9 @@ Namespace UI
                         ElseIf mRemoteNG.Tree.Node.GetNodeType(dropNode.Parent) = mRemoteNG.Tree.Node.Type.Root Then
                             dropNode.Tag.Parent = Nothing
                             If mRemoteNG.Tree.Node.GetNodeType(dropNode) = mRemoteNG.Tree.Node.Type.Connection Then
-                                dropNode.Tag.Inherit = New mRemoteNG.Connection.Info.Inheritance(dropNode.Tag, False)
+                                dropNode.Tag.Inherit.TurnOffInheritanceCompletely()
                             ElseIf mRemoteNG.Tree.Node.GetNodeType(dropNode) = mRemoteNG.Tree.Node.Type.Container Then
-                                dropNode.Tag.ConnectionInfo.Inherit = New mRemoteNG.Connection.Info.Inheritance(dropNode.Tag.ConnectionInfo, False)
+                                dropNode.Tag.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
                             End If
                         End If
                     End If
