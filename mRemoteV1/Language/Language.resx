@@ -2067,4 +2067,13 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strSearchPrompt" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
+    <value>Copy All</value>
+  </data>
+  <data name="strMenuNotificationsDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+    <value>Delete All</value>
+  </data>
 </root>

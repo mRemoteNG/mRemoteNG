@@ -2762,6 +2762,33 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Copy All.
+        '''</summary>
+        Friend Shared ReadOnly Property strMenuNotificationsCopyAll() As String
+            Get
+                Return ResourceManager.GetString("strMenuNotificationsCopyAll", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Delete.
+        '''</summary>
+        Friend Shared ReadOnly Property strMenuNotificationsDelete() As String
+            Get
+                Return ResourceManager.GetString("strMenuNotificationsDelete", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Delete All.
+        '''</summary>
+        Friend Shared ReadOnly Property strMenuNotificationsDeleteAll() As String
+            Get
+                Return ResourceManager.GetString("strMenuNotificationsDeleteAll", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Open Connection File....
         '''</summary>
         Friend Shared ReadOnly Property strMenuOpenConnectionFile() As String

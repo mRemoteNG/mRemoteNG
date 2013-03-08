@@ -1,3 +1,4 @@
+Imports System.Text
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 
@@ -19,16 +20,16 @@ Namespace UI
             Friend WithEvents cMenMCDelete As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents pnlErrorMsg As System.Windows.Forms.Panel
             Private Sub InitializeComponent()
-                Me.components = New System.ComponentModel.Container
-                Me.pnlErrorMsg = New System.Windows.Forms.Panel
-                Me.txtMsgText = New System.Windows.Forms.TextBox
-                Me.lblMsgDate = New System.Windows.Forms.Label
-                Me.pbError = New System.Windows.Forms.PictureBox
-                Me.lvErrorCollector = New System.Windows.Forms.ListView
-                Me.clmMessage = New System.Windows.Forms.ColumnHeader
+                Me.components = New System.ComponentModel.Container()
+                Me.pnlErrorMsg = New System.Windows.Forms.Panel()
+                Me.txtMsgText = New System.Windows.Forms.TextBox()
+                Me.lblMsgDate = New System.Windows.Forms.Label()
+                Me.pbError = New System.Windows.Forms.PictureBox()
+                Me.lvErrorCollector = New System.Windows.Forms.ListView()
+                Me.clmMessage = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
                 Me.cMenMC = New System.Windows.Forms.ContextMenuStrip(Me.components)
-                Me.cMenMCCopy = New System.Windows.Forms.ToolStripMenuItem
-                Me.cMenMCDelete = New System.Windows.Forms.ToolStripMenuItem
+                Me.cMenMCCopy = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenMCDelete = New System.Windows.Forms.ToolStripMenuItem()
                 Me.imgListMC = New System.Windows.Forms.ImageList(Me.components)
                 Me.pnlErrorMsg.SuspendLayout()
                 CType(Me.pbError, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -38,7 +39,7 @@ Namespace UI
                 'pnlErrorMsg
                 '
                 Me.pnlErrorMsg.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlErrorMsg.BackColor = System.Drawing.SystemColors.Control
                 Me.pnlErrorMsg.Controls.Add(Me.txtMsgText)
                 Me.pnlErrorMsg.Controls.Add(Me.lblMsgDate)
@@ -51,8 +52,8 @@ Namespace UI
                 'txtMsgText
                 '
                 Me.txtMsgText.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.txtMsgText.BorderStyle = System.Windows.Forms.BorderStyle.None
                 Me.txtMsgText.Location = New System.Drawing.Point(40, 20)
                 Me.txtMsgText.Multiline = True
@@ -65,7 +66,7 @@ Namespace UI
                 'lblMsgDate
                 '
                 Me.lblMsgDate.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lblMsgDate.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblMsgDate.Location = New System.Drawing.Point(40, 5)
                 Me.lblMsgDate.Name = "lblMsgDate"
@@ -84,8 +85,8 @@ Namespace UI
                 'lvErrorCollector
                 '
                 Me.lvErrorCollector.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lvErrorCollector.BorderStyle = System.Windows.Forms.BorderStyle.None
                 Me.lvErrorCollector.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.clmMessage})
                 Me.lvErrorCollector.ContextMenuStrip = Me.cMenMC
@@ -103,7 +104,7 @@ Namespace UI
                 '
                 'clmMessage
                 '
-                Me.clmMessage.Text = My.Language.strColumnMessage
+                Me.clmMessage.Text = Global.mRemoteNG.My.Language.strColumnMessage
                 Me.clmMessage.Width = 184
                 '
                 'cMenMC
@@ -112,23 +113,23 @@ Namespace UI
                 Me.cMenMC.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenMCCopy, Me.cMenMCDelete})
                 Me.cMenMC.Name = "cMenMC"
                 Me.cMenMC.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-                Me.cMenMC.Size = New System.Drawing.Size(137, 48)
+                Me.cMenMC.Size = New System.Drawing.Size(153, 70)
                 '
                 'cMenMCCopy
                 '
                 Me.cMenMCCopy.Image = Global.mRemoteNG.My.Resources.Resources.Copy
                 Me.cMenMCCopy.Name = "cMenMCCopy"
                 Me.cMenMCCopy.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-                Me.cMenMCCopy.Size = New System.Drawing.Size(136, 22)
-                Me.cMenMCCopy.Text = My.Language.strMenuCopy
+                Me.cMenMCCopy.Size = New System.Drawing.Size(152, 22)
+                Me.cMenMCCopy.Text = Global.mRemoteNG.My.Language.strMenuCopy
                 '
                 'cMenMCDelete
                 '
                 Me.cMenMCDelete.Image = Global.mRemoteNG.My.Resources.Resources.Delete
                 Me.cMenMCDelete.Name = "cMenMCDelete"
                 Me.cMenMCDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete
-                Me.cMenMCDelete.Size = New System.Drawing.Size(136, 22)
-                Me.cMenMCDelete.Text = My.Language.strMenuDelete
+                Me.cMenMCDelete.Size = New System.Drawing.Size(152, 22)
+                Me.cMenMCDelete.Text = Global.mRemoteNG.My.Language.strMenuDelete
                 '
                 'imgListMC
                 '
@@ -141,11 +142,12 @@ Namespace UI
                 Me.ClientSize = New System.Drawing.Size(617, 233)
                 Me.Controls.Add(Me.lvErrorCollector)
                 Me.Controls.Add(Me.pnlErrorMsg)
+                Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.HideOnClose = True
                 Me.Icon = Global.mRemoteNG.My.Resources.Resources.Info_Icon
                 Me.Name = "ErrorsAndInfos"
-                Me.TabText = My.Language.strMenuNotifications
-                Me.Text = My.Language.strMenuNotifications
+                Me.TabText = Global.mRemoteNG.My.Language.strMenuNotifications
+                Me.Text = "Notifications"
                 Me.pnlErrorMsg.ResumeLayout(False)
                 Me.pnlErrorMsg.PerformLayout()
                 CType(Me.pbError, System.ComponentModel.ISupportInitialize).EndInit()
@@ -174,8 +176,8 @@ Namespace UI
 
             Private Sub ApplyLanguage()
                 clmMessage.Text = My.Language.strColumnMessage
-                cMenMCCopy.Text = My.Language.strMenuCopy
-                cMenMCDelete.Text = My.Language.strMenuDelete
+                cMenMCCopy.Text = My.Language.strMenuNotificationsCopyAll
+                cMenMCDelete.Text = My.Language.strMenuNotificationsDeleteAll
                 TabText = My.Language.strMenuNotifications
                 Text = My.Language.strMenuNotifications
             End Sub
@@ -311,43 +313,80 @@ Namespace UI
                 End Try
             End Sub
 
-            Private Sub cMenMCCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenMCCopy.Click
-                Me.CopyMessageToClipboard()
+            Private Sub cMenMC_Opening(sender As System.Object, e As System.ComponentModel.CancelEventArgs) Handles cMenMC.Opening
+                If lvErrorCollector.Items.Count Then
+                    cMenMCCopy.Enabled = True
+                    cMenMCDelete.Enabled = True
+                Else
+                    cMenMCCopy.Enabled = False
+                    cMenMCDelete.Enabled = False
+                End If
+
+                If lvErrorCollector.SelectedItems.Count Then
+                    cMenMCCopy.Text = My.Language.strMenuCopy
+                    cMenMCDelete.Text = My.Language.strMenuNotificationsDelete
+                Else
+                    cMenMCCopy.Text = My.Language.strMenuNotificationsCopyAll
+                    cMenMCDelete.Text = My.Language.strMenuNotificationsDeleteAll
+                End If
             End Sub
 
-            Private Sub CopyMessageToClipboard()
+            Private Sub cMenMCCopy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenMCCopy.Click
+                CopyMessagesToClipboard()
+            End Sub
+
+            Private Sub CopyMessagesToClipboard()
                 Try
-                    If Me.lvErrorCollector.SelectedItems.Count > 0 Then
-                        Dim strCopyText As String
-                        strCopyText = "----------" & vbNewLine
-
-                        For Each lvItem As ListViewItem In Me.lvErrorCollector.SelectedItems
-                            strCopyText &= TryCast(lvItem.Tag, Messages.Message).MsgClass.ToString & vbNewLine
-                            strCopyText &= TryCast(lvItem.Tag, Messages.Message).MsgDate & vbNewLine
-                            strCopyText &= TryCast(lvItem.Tag, Messages.Message).MsgText & vbNewLine
-                            strCopyText &= "----------" & vbNewLine
-                        Next
-
-                        Clipboard.SetText(strCopyText)
+                    Dim items As IEnumerable
+                    If lvErrorCollector.SelectedItems.Count Then
+                        items = lvErrorCollector.SelectedItems
+                    Else
+                        items = lvErrorCollector.Items
                     End If
+
+                    Dim stringBuilder As New StringBuilder
+                    stringBuilder.AppendLine("----------")
+
+                    lvErrorCollector.BeginUpdate()
+
+                    Dim message As Messages.Message
+                    For Each item As ListViewItem In items
+                        message = TryCast(item.Tag, Messages.Message)
+                        If message Is Nothing Then Continue For
+
+                        stringBuilder.AppendLine(message.MsgClass.ToString)
+                        stringBuilder.AppendLine(message.MsgDate)
+                        stringBuilder.AppendLine(message.MsgText)
+                        stringBuilder.AppendLine("----------")
+                    Next
+
+                    Clipboard.SetText(stringBuilder.ToString)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CopyMessageToClipboard (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.ErrorsAndInfos.CopyMessagesToClipboard() failed." & vbNewLine & ex.Message, True)
+                Finally
+                    lvErrorCollector.EndUpdate()
                 End Try
             End Sub
 
             Private Sub cMenMCDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenMCDelete.Click
-                Me.DeleteMessages()
+                DeleteMessages()
             End Sub
 
             Private Sub DeleteMessages()
                 Try
-                    If Me.lvErrorCollector.SelectedItems.Count > 0 Then
-                        For Each lvItem As ListViewItem In Me.lvErrorCollector.SelectedItems
-                            lvItem.Remove()
+                    lvErrorCollector.BeginUpdate()
+
+                    If lvErrorCollector.SelectedItems.Count Then
+                        For Each item As ListViewItem In lvErrorCollector.SelectedItems
+                            item.Remove()
                         Next
+                    Else
+                        lvErrorCollector.Items.Clear()
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "DeleteMessages (UI.Window.ErrorsAndInfos) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.ErrorsAndInfos.DeleteMessages() failed" & vbNewLine & ex.Message, True)
+                Finally
+                    lvErrorCollector.EndUpdate()
                 End Try
             End Sub
 #End Region
