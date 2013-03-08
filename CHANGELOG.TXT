@@ -1,3 +1,4 @@
+  Fixed issue MR-379 - Connection variables not working with external tools
   The username and domain settings are now hidden for VNC connections since they are not supported.
   Changed "Automatically get session information" to be disabled by default.
 

@@ -122,7 +122,7 @@ Namespace Tools
                     .UseShellExecute = False
                     .FileName = ParseText(_FileName)
 
-                    .Arguments = CommandLineArguments.EscapeBackslashes(_Arguments)
+                    .Arguments = CommandLineArguments.EscapeBackslashes(ParseText(_Arguments))
                 End With
 
                 process.Start()
