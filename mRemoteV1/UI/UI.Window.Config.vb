@@ -678,7 +678,8 @@ Namespace UI
                                 strHide.Add("UseConsoleSession")
                                 strHide.Add("UseCredSsp")
                                 If conI.VNCAuthMode = mRemoteNG.Connection.Protocol.VNC.AuthMode.AuthVNC Then
-                                    strHide.Add("Username;Domain")
+                                    strHide.Add("Username")
+                                    strHide.Add("Domain")
                                 End If
                                 If conI.VNCProxyType = mRemoteNG.Connection.Protocol.VNC.ProxyType.ProxyNone Then
                                     strHide.Add("VNCProxyIP")
