@@ -261,70 +261,88 @@ Namespace App
             Public Shared AnnouncementForm As UI.Window.Announcement
             Public Shared AnnouncementPanel As New DockContent
 
-            Public Shared Sub Show(ByVal WindowType As UI.Window.Type, Optional ByVal PortScanMode As Tools.PortScan.PortScanMode = Tools.PortScan.PortScanMode.Normal)
+            Public Shared Sub Show(ByVal windowType As UI.Window.Type, Optional ByVal portScanMode As PortScan.PortScanMode = PortScan.PortScanMode.Normal)
                 Try
-                    Select Case WindowType
+                    Select Case windowType
                         Case UI.Window.Type.About
-                            Windows.aboutForm = New UI.Window.About(Windows.aboutPanel)
-                            Windows.aboutPanel = Windows.aboutForm
+                            If aboutForm Is Nothing OrElse aboutForm.IsDisposed Then
+                                aboutForm = New UI.Window.About(aboutPanel)
+                                aboutPanel = aboutForm
+                            End If
 
-                            Windows.aboutForm.Show(frmMain.pnlDock)
+                            aboutForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.ADImport
-                            Windows.adimportForm = New UI.Window.ADImport(Windows.adimportPanel)
-                            Windows.adimportPanel = Windows.adimportForm
+                            If adimportForm Is Nothing OrElse adimportForm.IsDisposed Then
+                                adimportForm = New UI.Window.ADImport(adimportPanel)
+                                adimportPanel = adimportForm
+                            End If
 
-                            Windows.adimportPanel.Show(frmMain.pnlDock)
+                            adimportPanel.Show(frmMain.pnlDock)
                         Case UI.Window.Type.Options
-                            Windows.optionsForm = New frmOptions(Windows.optionsPanel)
-                            Windows.optionsForm.Show(frmMain.pnlDock)
+                            optionsForm = New frmOptions(optionsPanel)
+                            optionsForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.Export
-                            Windows.exportForm = New UI.Window.Export(Windows.exportPanel)
-                            Windows.exportPanel = Windows.exportForm
+                            If exportForm Is Nothing OrElse exportForm.IsDisposed Then
+                                exportForm = New UI.Window.Export(exportPanel)
+                                exportPanel = exportForm
+                            End If
 
-                            Windows.exportForm.Show(frmMain.pnlDock)
+                            exportForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.SSHTransfer
-                            Windows.sshtransferForm = New UI.Window.SSHTransfer(Windows.sshtransferPanel)
-                            Windows.sshtransferPanel = Windows.sshtransferForm
+                            sshtransferForm = New UI.Window.SSHTransfer(sshtransferPanel)
+                            sshtransferPanel = sshtransferForm
 
-                            Windows.sshtransferForm.Show(frmMain.pnlDock)
+                            sshtransferForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.Update
-                            Windows.updateForm = New UI.Window.Update(Windows.updatePanel)
-                            Windows.updatePanel = Windows.updateForm
+                            If updateForm Is Nothing OrElse updateForm.IsDisposed Then
+                                updateForm = New UI.Window.Update(updatePanel)
+                                updatePanel = updateForm
+                            End If
 
-                            Windows.updateForm.Show(frmMain.pnlDock)
+                            updateForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.Help
-                            Windows.helpForm = New UI.Window.Help(Windows.helpPanel)
-                            Windows.helpPanel = Windows.helpForm
+                            If helpForm Is Nothing OrElse helpForm.IsDisposed Then
+                                helpForm = New UI.Window.Help(helpPanel)
+                                helpPanel = helpForm
+                            End If
 
-                            Windows.helpForm.Show(frmMain.pnlDock)
+                            helpForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.ExternalApps
-                            Windows.externalappsForm = New UI.Window.ExternalApps(Windows.externalappsPanel)
-                            Windows.externalappsPanel = Windows.externalappsForm
+                            If externalappsForm Is Nothing OrElse externalappsForm.IsDisposed Then
+                                externalappsForm = New UI.Window.ExternalApps(externalappsPanel)
+                                externalappsPanel = externalappsForm
+                            End If
 
-                            Windows.externalappsForm.Show(frmMain.pnlDock)
+                            externalappsForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.PortScan
-                            Windows.portscanForm = New UI.Window.PortScan(Windows.portscanPanel, PortScanMode)
-                            Windows.portscanPanel = Windows.portscanForm
+                            portscanForm = New UI.Window.PortScan(portscanPanel, portScanMode)
+                            portscanPanel = portscanForm
 
-                            Windows.portscanForm.Show(frmMain.pnlDock)
+                            portscanForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.UltraVNCSC
-                            Windows.ultravncscForm = New UI.Window.UltraVNCSC(Windows.ultravncscPanel)
-                            Windows.ultravncscPanel = Windows.ultravncscForm
+                            If ultravncscForm Is Nothing OrElse ultravncscForm.IsDisposed Then
+                                ultravncscForm = New UI.Window.UltraVNCSC(ultravncscPanel)
+                                ultravncscPanel = ultravncscForm
+                            End If
 
-                            Windows.ultravncscForm.Show(frmMain.pnlDock)
+                            ultravncscForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.ComponentsCheck
-                            Windows.componentscheckForm = New UI.Window.ComponentsCheck(Windows.componentscheckPanel)
-                            Windows.componentscheckPanel = Windows.componentscheckForm
+                            If componentscheckForm Is Nothing OrElse componentscheckForm.IsDisposed Then
+                                componentscheckForm = New UI.Window.ComponentsCheck(componentscheckPanel)
+                                componentscheckPanel = componentscheckForm
+                            End If
 
-                            Windows.componentscheckForm.Show(frmMain.pnlDock)
+                            componentscheckForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.Announcement
-                            Windows.AnnouncementForm = New UI.Window.Announcement(AnnouncementPanel)
-                            Windows.AnnouncementPanel = Windows.AnnouncementForm
+                            If AnnouncementForm Is Nothing OrElse AnnouncementForm.IsDisposed Then
+                                AnnouncementForm = New UI.Window.Announcement(AnnouncementPanel)
+                                AnnouncementPanel = AnnouncementForm
+                            End If
 
-                            Windows.AnnouncementForm.Show(frmMain.pnlDock)
+                            AnnouncementForm.Show(frmMain.pnlDock)
                     End Select
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Show (App.Runtime.Windows) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(MessageClass.ErrorMsg, "App.Runtime.Windows.Show() failed." & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
