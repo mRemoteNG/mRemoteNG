@@ -1,3 +1,6 @@
+  The username and domain settings are now hidden for VNC connections since they are not supported.
+  Changed "Automatically get session information" to be disabled by default.
+
 1.71 Beta 1 (2013-03-04):
   Added feature MR-329 - Create Option to disable the "Quick: " prefix
   Fixed issue MR-67 - Sort does not recursively sort
@@ -15,8 +18,6 @@
   Improved appearance and discoverability of the connection search box.
   If RDC 7.0 or higher is installed, the connection bar is no longer briefly shown when connecting to an RDP connection with redirect key combinations enabled.
   If RDC 8.0 or higher is installed, RDP connections automatically adjust their size when the window is resized or when toggling full screen mode.
-  The username and domain settings are now hidden for VNC connections since they are not supported.
-  Changed "Automatically get session information" to be disabled by default.
 
 1.70 (2013-03-07):  
   Fixed issue MR-339 - Connection group collapses with just one click
