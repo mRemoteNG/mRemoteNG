@@ -37,12 +37,16 @@ Namespace Tools
         End Function
 
         Public Shared Function PrefixFileName(ByVal argument As String) As String
+            If String.IsNullOrEmpty(argument) Then Return argument
+
             If argument.StartsWith("-") Then argument = ".\" & argument
 
             Return argument
         End Function
 
         Public Shared Function EscapeBackslashes(ByVal argument As String) As String
+            If String.IsNullOrEmpty(argument) Then Return argument
+
             ' Sequence of backslashes followed by a double quote:
             '     double up all the backslashes and escape the double quote
             Return Regex.Replace(argument, "(\\*)""", "$1$1\""")
@@ -54,12 +58,16 @@ Namespace Tools
             ' Sequence of backslashes followed by the end of the string
             ' (which will become a double quote):
             '     double up all the backslashes
-            argument = Regex.Replace(argument, "(\\*)$", "$1$1")
+            If Not String.IsNullOrEmpty(argument) Then
+                argument = Regex.Replace(argument, "(\\*)$", "$1$1")
+            End If
 
             Return """" & argument & """"
         End Function
 
         Public Shared Function EscapeShellMetacharacters(ByVal argument As String) As String
+            If String.IsNullOrEmpty(argument) Then Return argument
+
             Return Regex.Replace(argument, "([()%!^""<>&|])", "^$1")
         End Function
 #End Region
