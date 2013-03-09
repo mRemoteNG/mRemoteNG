@@ -185,6 +185,7 @@
     <Compile Include="Config\Config.Settings.Load.vb" />
     <Compile Include="Config\Config.Settings.Providers.vb" />
     <Compile Include="Config\Config.Settings.Save.vb" />
+    <Compile Include="Config\ConfirmClose.vb" />
     <Compile Include="Connection\Connection.Icon.vb" />
     <Compile Include="Connection\Connection.Info.vb" />
     <Compile Include="Connection\Connection.InterfaceControl.Designer.vb">

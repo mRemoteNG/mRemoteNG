@@ -44,9 +44,6 @@
     <Setting Name="SaveConsOnExit" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="ConfirmExit" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
-    </Setting>
     <Setting Name="CheckForUpdatesOnStartup" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -500,8 +497,8 @@
     <Setting Name="InhDefaultEnableDesktopComposition" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="ConfirmCloseConnection" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="ConfirmCloseConnection" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
     </Setting>
     <Setting Name="MainFormRestoreSize" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Drawing.Size" Scope="User">
       <Value Profile="(Default)" />

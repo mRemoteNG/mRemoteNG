@@ -5,6 +5,7 @@ Imports System.Runtime.InteropServices
 Imports Crownwood
 Imports mRemoteNG.App.Native
 Imports PSTaskDialog
+Imports mRemoteNG.Config
 
 Public Class frmMain
     Private _previousWindowState As FormWindowState
@@ -167,7 +168,7 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-        If My.Settings.ConfirmExit And Not (WindowList Is Nothing OrElse WindowList.Count = 0) Then
+        If Not (WindowList Is Nothing OrElse WindowList.Count = 0) Then
             Dim connectionWindow As UI.Window.Connection
             Dim openConnections As Integer = 0
             For Each window As UI.Window.Base In WindowList
@@ -177,10 +178,13 @@ Public Class frmMain
                 End If
             Next
 
-            If openConnections > 0 Then
+            If openConnections > 0 And _
+                    (My.Settings.ConfirmCloseConnection = ConfirmClose.All Or _
+                    (My.Settings.ConfirmCloseConnection = ConfirmClose.Multiple And openConnections > 1) Or _
+                     My.Settings.ConfirmCloseConnection = ConfirmClose.Exit) Then
                 Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, My.Language.strConfirmExitMainInstruction, "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                 If cTaskDialog.VerificationChecked Then
-                    My.Settings.ConfirmExit = False
+                    My.Settings.ConfirmCloseConnection = My.Settings.ConfirmCloseConnection - 1
                 End If
                 If result = DialogResult.No Then
                     e.Cancel = True

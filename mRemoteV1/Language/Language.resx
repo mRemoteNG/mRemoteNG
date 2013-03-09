@@ -438,9 +438,6 @@ VncSharpNG Control Version {0}</value>
   <data name="strConfigUiLoadFailed" xml:space="preserve">
     <value>Config UI load failed!</value>
   </data>
-  <data name="strConfirmCloseConnection" xml:space="preserve">
-    <value>Confirm closing connection tabs</value>
-  </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
     <value>Do you want to close the connection, "{0}"?</value>
   </data>
@@ -461,9 +458,6 @@ VncSharpNG Control Version {0}</value>
   </data>
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>Are you sure you want to delete the folder, "{0}"? Any folders or connections that it contains will also be deleted.</value>
-  </data>
-  <data name="strConfirmExit" xml:space="preserve">
-    <value>Confirm exit if there are open connections</value>
   </data>
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>Do you want to close all open connections?</value>
@@ -2075,5 +2069,20 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
     <value>Delete All</value>
+  </data>
+  <data name="strLabelClosingConnections" xml:space="preserve">
+    <value>When closing connections:</value>
+  </data>
+  <data name="strRadioCloseWarnAll" xml:space="preserve">
+    <value>&amp;Warn me when closing connections</value>
+  </data>
+  <data name="strRadioCloseWarnExit" xml:space="preserve">
+    <value>Warn me only when e&amp;xiting mRemoteNG</value>
+  </data>
+  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
+    <value>Warn me only when closing &amp;multiple connections</value>
+  </data>
+  <data name="strRadioCloseWarnNever" xml:space="preserve">
+    <value>Do &amp;not warn me when closing connections</value>
   </data>
 </root>

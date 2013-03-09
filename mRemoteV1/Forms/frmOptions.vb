@@ -73,10 +73,8 @@ Public Class frmOptions
     Friend WithEvents chkMinimizeToSystemTray As System.Windows.Forms.CheckBox
     Friend WithEvents chkShowSystemTrayIcon As System.Windows.Forms.CheckBox
     Friend WithEvents chkShowFullConnectionsFilePathInTitle As System.Windows.Forms.CheckBox
-    Friend WithEvents chkConfirmCloseConnection As System.Windows.Forms.CheckBox
     Friend WithEvents chkSaveConsOnExit As System.Windows.Forms.CheckBox
     Friend WithEvents chkProperInstallationOfComponentsAtStartup As System.Windows.Forms.CheckBox
-    Friend WithEvents chkConfirmExit As System.Windows.Forms.CheckBox
     Friend WithEvents chkSingleInstance As System.Windows.Forms.CheckBox
     Friend WithEvents chkReconnectOnStart As System.Windows.Forms.CheckBox
     Friend WithEvents tcTabControl As System.Windows.Forms.TabControl
@@ -111,6 +109,12 @@ Public Class frmOptions
     Friend WithEvents txtSQLDatabaseName As System.Windows.Forms.TextBox
     Friend WithEvents chkAlwaysShowPanelTabs As System.Windows.Forms.CheckBox
     Friend WithEvents chkIdentifyQuickConnectTabs As System.Windows.Forms.CheckBox
+    Friend WithEvents pnlConfirmCloseConnection As System.Windows.Forms.Panel
+    Friend WithEvents lblClosingConnections As System.Windows.Forms.Label
+    Friend WithEvents radCloseWarnAll As System.Windows.Forms.RadioButton
+    Friend WithEvents radCloseWarnMultiple As System.Windows.Forms.RadioButton
+    Friend WithEvents radCloseWarnExit As System.Windows.Forms.RadioButton
+    Friend WithEvents radCloseWarnNever As System.Windows.Forms.RadioButton
     Private components As System.ComponentModel.IContainer
 
     Private Sub InitializeComponent()
@@ -192,15 +196,13 @@ Public Class frmOptions
         Me.lblLanguageRestartRequired = New System.Windows.Forms.Label()
         Me.chkReconnectOnStart = New System.Windows.Forms.CheckBox()
         Me.chkSingleInstance = New System.Windows.Forms.CheckBox()
-        Me.chkConfirmExit = New System.Windows.Forms.CheckBox()
         Me.chkProperInstallationOfComponentsAtStartup = New System.Windows.Forms.CheckBox()
         Me.chkSaveConsOnExit = New System.Windows.Forms.CheckBox()
-        Me.chkConfirmCloseConnection = New System.Windows.Forms.CheckBox()
         Me.tcTabControl = New System.Windows.Forms.TabControl()
         Me.tabStartupExit = New System.Windows.Forms.TabPage()
         Me.tabAppearance = New System.Windows.Forms.TabPage()
-        Me.chkAlwaysShowPanelTabs = New System.Windows.Forms.CheckBox()
         Me.tabTabsAndPanels = New System.Windows.Forms.TabPage()
+        Me.chkAlwaysShowPanelTabs = New System.Windows.Forms.CheckBox()
         Me.chkIdentifyQuickConnectTabs = New System.Windows.Forms.CheckBox()
         Me.tabConnections = New System.Windows.Forms.TabPage()
         Me.pnlDefaultCredentials = New System.Windows.Forms.Panel()
@@ -214,6 +216,12 @@ Public Class frmOptions
         Me.lblCredentialsPassword = New System.Windows.Forms.Label()
         Me.txtCredentialsUsername = New System.Windows.Forms.TextBox()
         Me.lblCredentialsDomain = New System.Windows.Forms.Label()
+        Me.pnlConfirmCloseConnection = New System.Windows.Forms.Panel()
+        Me.lblClosingConnections = New System.Windows.Forms.Label()
+        Me.radCloseWarnAll = New System.Windows.Forms.RadioButton()
+        Me.radCloseWarnMultiple = New System.Windows.Forms.RadioButton()
+        Me.radCloseWarnExit = New System.Windows.Forms.RadioButton()
+        Me.radCloseWarnNever = New System.Windows.Forms.RadioButton()
         Me.tabSQLServer = New System.Windows.Forms.TabPage()
         Me.lblSQLDatabaseName = New System.Windows.Forms.Label()
         Me.txtSQLDatabaseName = New System.Windows.Forms.TextBox()
@@ -245,6 +253,7 @@ Public Class frmOptions
         Me.tabTabsAndPanels.SuspendLayout()
         Me.tabConnections.SuspendLayout()
         Me.pnlDefaultCredentials.SuspendLayout()
+        Me.pnlConfirmCloseConnection.SuspendLayout()
         Me.tabSQLServer.SuspendLayout()
         Me.tabUpdates.SuspendLayout()
         Me.tabAdvanced.SuspendLayout()
@@ -667,7 +676,7 @@ Public Class frmOptions
         Me.pnlAutoSave.Controls.Add(Me.lblAutoSave2)
         Me.pnlAutoSave.Location = New System.Drawing.Point(3, 107)
         Me.pnlAutoSave.Name = "pnlAutoSave"
-        Me.pnlAutoSave.Size = New System.Drawing.Size(500, 29)
+        Me.pnlAutoSave.Size = New System.Drawing.Size(596, 29)
         Me.pnlAutoSave.TabIndex = 4
         '
         'lblAutoSave1
@@ -723,7 +732,7 @@ Public Class frmOptions
         Me.pnlRdpReconnectionCount.Controls.Add(Me.numRdpReconnectionCount)
         Me.pnlRdpReconnectionCount.Location = New System.Drawing.Point(3, 72)
         Me.pnlRdpReconnectionCount.Name = "pnlRdpReconnectionCount"
-        Me.pnlRdpReconnectionCount.Size = New System.Drawing.Size(500, 29)
+        Me.pnlRdpReconnectionCount.Size = New System.Drawing.Size(596, 29)
         Me.pnlRdpReconnectionCount.TabIndex = 3
         '
         'lblRdpReconnectionCount
@@ -918,7 +927,7 @@ Public Class frmOptions
         'chkReconnectOnStart
         '
         Me.chkReconnectOnStart.AutoSize = True
-        Me.chkReconnectOnStart.Location = New System.Drawing.Point(3, 75)
+        Me.chkReconnectOnStart.Location = New System.Drawing.Point(3, 27)
         Me.chkReconnectOnStart.Name = "chkReconnectOnStart"
         Me.chkReconnectOnStart.Size = New System.Drawing.Size(273, 17)
         Me.chkReconnectOnStart.TabIndex = 3
@@ -928,27 +937,17 @@ Public Class frmOptions
         'chkSingleInstance
         '
         Me.chkSingleInstance.AutoSize = True
-        Me.chkSingleInstance.Location = New System.Drawing.Point(3, 99)
+        Me.chkSingleInstance.Location = New System.Drawing.Point(3, 51)
         Me.chkSingleInstance.Name = "chkSingleInstance"
         Me.chkSingleInstance.Size = New System.Drawing.Size(366, 17)
         Me.chkSingleInstance.TabIndex = 4
         Me.chkSingleInstance.Text = "Allow only a single instance of the application (mRemote restart required)"
         Me.chkSingleInstance.UseVisualStyleBackColor = True
         '
-        'chkConfirmExit
-        '
-        Me.chkConfirmExit.AutoSize = True
-        Me.chkConfirmExit.Location = New System.Drawing.Point(3, 27)
-        Me.chkConfirmExit.Name = "chkConfirmExit"
-        Me.chkConfirmExit.Size = New System.Drawing.Size(221, 17)
-        Me.chkConfirmExit.TabIndex = 1
-        Me.chkConfirmExit.Text = "Confirm exit if there are open connections"
-        Me.chkConfirmExit.UseVisualStyleBackColor = True
-        '
         'chkProperInstallationOfComponentsAtStartup
         '
         Me.chkProperInstallationOfComponentsAtStartup.AutoSize = True
-        Me.chkProperInstallationOfComponentsAtStartup.Location = New System.Drawing.Point(3, 123)
+        Me.chkProperInstallationOfComponentsAtStartup.Location = New System.Drawing.Point(3, 75)
         Me.chkProperInstallationOfComponentsAtStartup.Name = "chkProperInstallationOfComponentsAtStartup"
         Me.chkProperInstallationOfComponentsAtStartup.Size = New System.Drawing.Size(262, 17)
         Me.chkProperInstallationOfComponentsAtStartup.TabIndex = 5
@@ -958,22 +957,12 @@ Public Class frmOptions
         'chkSaveConsOnExit
         '
         Me.chkSaveConsOnExit.AutoSize = True
-        Me.chkSaveConsOnExit.Location = New System.Drawing.Point(3, 51)
+        Me.chkSaveConsOnExit.Location = New System.Drawing.Point(3, 3)
         Me.chkSaveConsOnExit.Name = "chkSaveConsOnExit"
         Me.chkSaveConsOnExit.Size = New System.Drawing.Size(146, 17)
         Me.chkSaveConsOnExit.TabIndex = 2
         Me.chkSaveConsOnExit.Text = "Save connections on exit"
         Me.chkSaveConsOnExit.UseVisualStyleBackColor = True
-        '
-        'chkConfirmCloseConnection
-        '
-        Me.chkConfirmCloseConnection.AutoSize = True
-        Me.chkConfirmCloseConnection.Location = New System.Drawing.Point(3, 3)
-        Me.chkConfirmCloseConnection.Name = "chkConfirmCloseConnection"
-        Me.chkConfirmCloseConnection.Size = New System.Drawing.Size(176, 17)
-        Me.chkConfirmCloseConnection.TabIndex = 0
-        Me.chkConfirmCloseConnection.Text = "Confirm closing connection tabs"
-        Me.chkConfirmCloseConnection.UseVisualStyleBackColor = True
         '
         'tcTabControl
         '
@@ -994,12 +983,10 @@ Public Class frmOptions
         '
         'tabStartupExit
         '
-        Me.tabStartupExit.Controls.Add(Me.chkConfirmCloseConnection)
         Me.tabStartupExit.Controls.Add(Me.chkReconnectOnStart)
         Me.tabStartupExit.Controls.Add(Me.chkSaveConsOnExit)
         Me.tabStartupExit.Controls.Add(Me.chkSingleInstance)
         Me.tabStartupExit.Controls.Add(Me.chkProperInstallationOfComponentsAtStartup)
-        Me.tabStartupExit.Controls.Add(Me.chkConfirmExit)
         Me.tabStartupExit.Location = New System.Drawing.Point(4, 22)
         Me.tabStartupExit.Name = "tabStartupExit"
         Me.tabStartupExit.Size = New System.Drawing.Size(602, 463)
@@ -1023,16 +1010,6 @@ Public Class frmOptions
         Me.tabAppearance.Text = "Appearance"
         Me.tabAppearance.UseVisualStyleBackColor = True
         '
-        'chkAlwaysShowPanelTabs
-        '
-        Me.chkAlwaysShowPanelTabs.AutoSize = True
-        Me.chkAlwaysShowPanelTabs.Location = New System.Drawing.Point(3, 3)
-        Me.chkAlwaysShowPanelTabs.Name = "chkAlwaysShowPanelTabs"
-        Me.chkAlwaysShowPanelTabs.Size = New System.Drawing.Size(139, 17)
-        Me.chkAlwaysShowPanelTabs.TabIndex = 7
-        Me.chkAlwaysShowPanelTabs.Text = "Always show panel tabs"
-        Me.chkAlwaysShowPanelTabs.UseVisualStyleBackColor = True
-        '
         'tabTabsAndPanels
         '
         Me.tabTabsAndPanels.Controls.Add(Me.chkAlwaysShowPanelTabs)
@@ -1054,6 +1031,16 @@ Public Class frmOptions
         Me.tabTabsAndPanels.Text = "Tabs & Panels"
         Me.tabTabsAndPanels.UseVisualStyleBackColor = True
         '
+        'chkAlwaysShowPanelTabs
+        '
+        Me.chkAlwaysShowPanelTabs.AutoSize = True
+        Me.chkAlwaysShowPanelTabs.Location = New System.Drawing.Point(3, 3)
+        Me.chkAlwaysShowPanelTabs.Name = "chkAlwaysShowPanelTabs"
+        Me.chkAlwaysShowPanelTabs.Size = New System.Drawing.Size(139, 17)
+        Me.chkAlwaysShowPanelTabs.TabIndex = 7
+        Me.chkAlwaysShowPanelTabs.Text = "Always show panel tabs"
+        Me.chkAlwaysShowPanelTabs.UseVisualStyleBackColor = True
+        '
         'chkIdentifyQuickConnectTabs
         '
         Me.chkIdentifyQuickConnectTabs.AutoSize = True
@@ -1072,6 +1059,7 @@ Public Class frmOptions
         Me.tabConnections.Controls.Add(Me.pnlDefaultCredentials)
         Me.tabConnections.Controls.Add(Me.chkSingleClickOnOpenedConnectionSwitchesToIt)
         Me.tabConnections.Controls.Add(Me.pnlAutoSave)
+        Me.tabConnections.Controls.Add(Me.pnlConfirmCloseConnection)
         Me.tabConnections.Location = New System.Drawing.Point(4, 22)
         Me.tabConnections.Name = "tabConnections"
         Me.tabConnections.Size = New System.Drawing.Size(602, 463)
@@ -1194,6 +1182,71 @@ Public Class frmOptions
         Me.lblCredentialsDomain.TabIndex = 8
         Me.lblCredentialsDomain.Text = "Domain:"
         Me.lblCredentialsDomain.TextAlign = System.Drawing.ContentAlignment.TopRight
+        '
+        'pnlConfirmCloseConnection
+        '
+        Me.pnlConfirmCloseConnection.Controls.Add(Me.lblClosingConnections)
+        Me.pnlConfirmCloseConnection.Controls.Add(Me.radCloseWarnAll)
+        Me.pnlConfirmCloseConnection.Controls.Add(Me.radCloseWarnMultiple)
+        Me.pnlConfirmCloseConnection.Controls.Add(Me.radCloseWarnExit)
+        Me.pnlConfirmCloseConnection.Controls.Add(Me.radCloseWarnNever)
+        Me.pnlConfirmCloseConnection.Location = New System.Drawing.Point(3, 323)
+        Me.pnlConfirmCloseConnection.Name = "pnlConfirmCloseConnection"
+        Me.pnlConfirmCloseConnection.Size = New System.Drawing.Size(596, 137)
+        Me.pnlConfirmCloseConnection.TabIndex = 10
+        '
+        'lblClosingConnections
+        '
+        Me.lblClosingConnections.AutoSize = True
+        Me.lblClosingConnections.Location = New System.Drawing.Point(3, 9)
+        Me.lblClosingConnections.Name = "lblClosingConnections"
+        Me.lblClosingConnections.Size = New System.Drawing.Size(136, 13)
+        Me.lblClosingConnections.TabIndex = 12
+        Me.lblClosingConnections.Text = "When closing connections:"
+        '
+        'radCloseWarnAll
+        '
+        Me.radCloseWarnAll.AutoSize = True
+        Me.radCloseWarnAll.Location = New System.Drawing.Point(16, 31)
+        Me.radCloseWarnAll.Name = "radCloseWarnAll"
+        Me.radCloseWarnAll.Size = New System.Drawing.Size(194, 17)
+        Me.radCloseWarnAll.TabIndex = 11
+        Me.radCloseWarnAll.TabStop = True
+        Me.radCloseWarnAll.Text = "Warn me when closing connections"
+        Me.radCloseWarnAll.UseVisualStyleBackColor = True
+        '
+        'radCloseWarnMultiple
+        '
+        Me.radCloseWarnMultiple.AutoSize = True
+        Me.radCloseWarnMultiple.Location = New System.Drawing.Point(16, 54)
+        Me.radCloseWarnMultiple.Name = "radCloseWarnMultiple"
+        Me.radCloseWarnMultiple.Size = New System.Drawing.Size(254, 17)
+        Me.radCloseWarnMultiple.TabIndex = 10
+        Me.radCloseWarnMultiple.TabStop = True
+        Me.radCloseWarnMultiple.Text = "Warn me only when closing multiple connections"
+        Me.radCloseWarnMultiple.UseVisualStyleBackColor = True
+        '
+        'radCloseWarnExit
+        '
+        Me.radCloseWarnExit.AutoSize = True
+        Me.radCloseWarnExit.Location = New System.Drawing.Point(16, 77)
+        Me.radCloseWarnExit.Name = "radCloseWarnExit"
+        Me.radCloseWarnExit.Size = New System.Drawing.Size(216, 17)
+        Me.radCloseWarnExit.TabIndex = 9
+        Me.radCloseWarnExit.TabStop = True
+        Me.radCloseWarnExit.Text = "Warn me only when exiting mRemoteNG"
+        Me.radCloseWarnExit.UseVisualStyleBackColor = True
+        '
+        'radCloseWarnNever
+        '
+        Me.radCloseWarnNever.AutoSize = True
+        Me.radCloseWarnNever.Location = New System.Drawing.Point(16, 100)
+        Me.radCloseWarnNever.Name = "radCloseWarnNever"
+        Me.radCloseWarnNever.Size = New System.Drawing.Size(226, 17)
+        Me.radCloseWarnNever.TabIndex = 8
+        Me.radCloseWarnNever.TabStop = True
+        Me.radCloseWarnNever.Text = "Do not warn me when closing connections"
+        Me.radCloseWarnNever.UseVisualStyleBackColor = True
         '
         'tabSQLServer
         '
@@ -1412,6 +1465,8 @@ Public Class frmOptions
         Me.tabConnections.PerformLayout()
         Me.pnlDefaultCredentials.ResumeLayout(False)
         Me.pnlDefaultCredentials.PerformLayout()
+        Me.pnlConfirmCloseConnection.ResumeLayout(False)
+        Me.pnlConfirmCloseConnection.PerformLayout()
         Me.tabSQLServer.ResumeLayout(False)
         Me.tabSQLServer.PerformLayout()
         Me.tabUpdates.ResumeLayout(False)
@@ -1426,8 +1481,16 @@ Public Class frmOptions
     Private Sub LoadOptions()
         Try
             Me.chkSaveConsOnExit.Checked = My.Settings.SaveConsOnExit
-            Me.chkConfirmCloseConnection.Checked = My.Settings.ConfirmCloseConnection
-            Me.chkConfirmExit.Checked = My.Settings.ConfirmExit
+            Select Case Settings.ConfirmCloseConnection
+                Case Config.ConfirmClose.Never
+                    radCloseWarnNever.Checked = True
+                Case Config.ConfirmClose.Exit
+                    radCloseWarnExit.Checked = True
+                Case Config.ConfirmClose.Multiple
+                    radCloseWarnMultiple.Checked = True
+                Case Else
+                    radCloseWarnAll.Checked = True
+            End Select
             Me.chkReconnectOnStart.Checked = My.Settings.OpenConsFromLastSession
             Me.chkProperInstallationOfComponentsAtStartup.Checked = My.Settings.StartupComponentsCheck
 
@@ -1541,8 +1604,10 @@ Public Class frmOptions
     Private Sub SaveOptions()
         Try
             My.Settings.SaveConsOnExit = Me.chkSaveConsOnExit.Checked
-            My.Settings.ConfirmCloseConnection = Me.chkConfirmCloseConnection.Checked
-            My.Settings.ConfirmExit = Me.chkConfirmExit.Checked
+            If radCloseWarnAll.Checked Then Settings.ConfirmCloseConnection = Config.ConfirmClose.All
+            If radCloseWarnMultiple.Checked Then Settings.ConfirmCloseConnection = Config.ConfirmClose.Multiple
+            If radCloseWarnExit.Checked Then Settings.ConfirmCloseConnection = Config.ConfirmClose.Exit
+            If radCloseWarnNever.Checked Then Settings.ConfirmCloseConnection = Config.ConfirmClose.Never
             My.Settings.OpenConsFromLastSession = Me.chkReconnectOnStart.Checked
             My.Settings.StartupComponentsCheck = Me.chkProperInstallationOfComponentsAtStartup.Checked
 
@@ -1741,8 +1806,6 @@ Public Class frmOptions
         chkSingleInstance.Text = My.Language.strAllowOnlySingleInstance
         chkReconnectOnStart.Text = My.Language.strReconnectAtStartup
         chkCheckForUpdatesOnStartup.Text = My.Language.strCheckForUpdatesOnStartup
-        chkConfirmCloseConnection.Text = My.Language.strConfirmCloseConnection
-        chkConfirmExit.Text = My.Language.strConfirmExit
         chkSaveConsOnExit.Text = My.Language.strSaveConsOnExit
         chkMinimizeToSystemTray.Text = My.Language.strMinimizeToSysTray
         chkShowFullConnectionsFilePathInTitle.Text = My.Language.strShowFullConsFilePath
@@ -1773,6 +1836,11 @@ Public Class frmOptions
         radCredentialsWindows.Text = My.Language.strMyCurrentWindowsCreds
         radCredentialsNoInfo.Text = My.Language.strNoInformation
         lblDefaultCredentials.Text = My.Language.strEmptyUsernamePasswordDomainFields
+        lblClosingConnections.Text = Language.strLabelClosingConnections
+        radCloseWarnAll.Text = Language.strRadioCloseWarnAll
+        radCloseWarnMultiple.Text = Language.strRadioCloseWarnMultiple
+        radCloseWarnExit.Text = Language.strRadioCloseWarnExit
+        radCloseWarnNever.Text = Language.strRadioCloseWarnNever
         chkSingleClickOnOpenedConnectionSwitchesToIt.Text = My.Language.strSingleClickOnOpenConnectionSwitchesToIt
         chkSingleClickOnConnectionOpensIt.Text = My.Language.strSingleClickOnConnectionOpensIt
         lblSwitchToErrorsAndInfos.Text = My.Language.strSwitchToErrorsAndInfos
@@ -1928,9 +1996,4 @@ Public Class frmOptions
         End If
     End Sub
 #End Region
-
-
-    Private Sub lblProxyPort_Click(sender As System.Object, e As System.EventArgs) Handles lblProxyPort.Click
-
-    End Sub
 End Class

@@ -6,6 +6,7 @@ Imports Crownwood
 Imports WeifenLuo.WinFormsUI.Docking
 Imports PSTaskDialog
 Imports mRemoteNG.App.Runtime
+Imports mRemoteNG.Config
 
 Namespace UI
     Namespace Window
@@ -335,13 +336,15 @@ Namespace UI
                 cmenTabPuttySettings.Text = My.Language.strPuttySettings
             End Sub
 
-            Private Sub Connection_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
-                If Not frmMain.IsClosing And My.Settings.ConfirmCloseConnection And TabController.TabPages.Count > 0 Then
-                    Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Language.strConfirmCloseConnectionPanelMainInstruction, Me.Text), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+            Private Sub Connection_FormClosing(ByVal sender As Object, ByVal e As FormClosingEventArgs) Handles Me.FormClosing
+                If Not frmMain.IsClosing And ( _
+                        (My.Settings.ConfirmCloseConnection = ConfirmClose.All And TabController.TabPages.Count > 0) Or _
+                        (My.Settings.ConfirmCloseConnection = ConfirmClose.Multiple And TabController.TabPages.Count > 1)) Then
+                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Language.strConfirmCloseConnectionPanelMainInstruction, Me.Text), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                     If cTaskDialog.VerificationChecked Then
-                        My.Settings.ConfirmCloseConnection = False
+                        My.Settings.ConfirmCloseConnection = My.Settings.ConfirmCloseConnection - 1
                     End If
-                    If Result = DialogResult.No Then
+                    If result = DialogResult.No Then
                         e.Cancel = True
                         Exit Sub
                     End If
@@ -350,12 +353,12 @@ Namespace UI
                 Try
                     For Each tabP As Magic.Controls.TabPage In Me.TabController.TabPages
                         If tabP.Tag IsNot Nothing Then
-                            Dim IC As mRemoteNG.Connection.InterfaceControl = tabP.Tag
-                            IC.Protocol.Close()
+                            Dim interfaceControl As mRemoteNG.Connection.InterfaceControl = tabP.Tag
+                            interfaceControl.Protocol.Close()
                         End If
                     Next
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Connection_FormClosing (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.Connection_FormClosing() failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
@@ -380,26 +383,26 @@ Namespace UI
             End Sub
 
             Private Sub CloseConnectionTab()
-                Dim SelectedTab As Crownwood.Magic.Controls.TabPage = Me.TabController.SelectedTab
-                If My.Settings.ConfirmCloseConnection Then
-                    Dim Result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Language.strConfirmCloseConnectionMainInstruction, SelectedTab.Title), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
+                Dim selectedTab As Magic.Controls.TabPage = TabController.SelectedTab
+                If My.Settings.ConfirmCloseConnection = ConfirmClose.All Then
+                    Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Language.strConfirmCloseConnectionMainInstruction, selectedTab.Title), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                     If cTaskDialog.VerificationChecked Then
                         My.Settings.ConfirmCloseConnection = False
                     End If
-                    If Result = DialogResult.No Then
+                    If result = DialogResult.No Then
                         Exit Sub
                     End If
                 End If
 
                 Try
-                    If SelectedTab.Tag IsNot Nothing Then
-                        Dim IC As mRemoteNG.Connection.InterfaceControl = SelectedTab.Tag
-                        IC.Protocol.Close()
+                    If selectedTab.Tag IsNot Nothing Then
+                        Dim interfaceControl As mRemoteNG.Connection.InterfaceControl = selectedTab.Tag
+                        interfaceControl.Protocol.Close()
                     Else
-                        Me.CloseTab(SelectedTab)
+                        CloseTab(selectedTab)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CloseConnectionTab (UI.Window.Connections) failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.CloseConnectionTab() failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 

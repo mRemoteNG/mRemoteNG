@@ -238,19 +238,6 @@ Namespace My
          Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property ConfirmExit() As Boolean
-            Get
-                Return CType(Me("ConfirmExit"),Boolean)
-            End Get
-            Set
-                Me("ConfirmExit") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
         Public Property CheckForUpdatesOnStartup() As Boolean
             Get
                 Return CType(Me("CheckForUpdatesOnStartup"),Boolean)
@@ -2207,10 +2194,10 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
-        Public Property ConfirmCloseConnection() As Boolean
+         Global.System.Configuration.DefaultSettingValueAttribute("4")>  _
+        Public Property ConfirmCloseConnection() As Integer
             Get
-                Return CType(Me("ConfirmCloseConnection"),Boolean)
+                Return CType(Me("ConfirmCloseConnection"),Integer)
             End Get
             Set
                 Me("ConfirmCloseConnection") = value

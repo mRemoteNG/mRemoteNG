@@ -1000,15 +1000,6 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Confirm closing connection tabs.
-        '''</summary>
-        Friend Shared ReadOnly Property strConfirmCloseConnection() As String
-            Get
-                Return ResourceManager.GetString("strConfirmCloseConnection", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
         '''  Looks up a localized string similar to Do you want to close the connection, &quot;{0}&quot;?.
         '''</summary>
         Friend Shared ReadOnly Property strConfirmCloseConnectionMainInstruction() As String
@@ -1068,15 +1059,6 @@ Namespace My
         Friend Shared ReadOnly Property strConfirmDeleteNodeFolderNotEmpty() As String
             Get
                 Return ResourceManager.GetString("strConfirmDeleteNodeFolderNotEmpty", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Confirm exit if there are open connections.
-        '''</summary>
-        Friend Shared ReadOnly Property strConfirmExit() As String
-            Get
-                Return ResourceManager.GetString("strConfirmExit", resourceCulture)
             End Get
         End Property
         
@@ -2155,6 +2137,15 @@ Namespace My
         Friend Shared ReadOnly Property strLabelChangeLog() As String
             Get
                 Return ResourceManager.GetString("strLabelChangeLog", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to When closing connections:.
+        '''</summary>
+        Friend Shared ReadOnly Property strLabelClosingConnections() As String
+            Get
+                Return ResourceManager.GetString("strLabelClosingConnections", resourceCulture)
             End Get
         End Property
         
@@ -4409,6 +4400,42 @@ Namespace My
         Friend Shared ReadOnly Property strQuickConnectHistoryExistsFailed() As String
             Get
                 Return ResourceManager.GetString("strQuickConnectHistoryExistsFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Warn me when closing connections.
+        '''</summary>
+        Friend Shared ReadOnly Property strRadioCloseWarnAll() As String
+            Get
+                Return ResourceManager.GetString("strRadioCloseWarnAll", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Warn me only when e&amp;xiting mRemoteNG.
+        '''</summary>
+        Friend Shared ReadOnly Property strRadioCloseWarnExit() As String
+            Get
+                Return ResourceManager.GetString("strRadioCloseWarnExit", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Warn me only when closing &amp;multiple connections.
+        '''</summary>
+        Friend Shared ReadOnly Property strRadioCloseWarnMultiple() As String
+            Get
+                Return ResourceManager.GetString("strRadioCloseWarnMultiple", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Do &amp;not warn me when closing connections.
+        '''</summary>
+        Friend Shared ReadOnly Property strRadioCloseWarnNever() As String
+            Get
+                Return ResourceManager.GetString("strRadioCloseWarnNever", resourceCulture)
             End Get
         End Property
         
