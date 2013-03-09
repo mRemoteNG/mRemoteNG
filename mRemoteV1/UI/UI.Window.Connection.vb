@@ -407,7 +407,7 @@ Namespace UI
             End Sub
 
             Private Sub TabController_DoubleClickTab(ByVal sender As Crownwood.Magic.Controls.TabControl, ByVal page As Crownwood.Magic.Controls.TabPage) Handles TabController.DoubleClickTab
-                _lastMouseUp = 0
+                _firstClickTicks = 0
                 If My.Settings.DoubleClickOnTabClosesIt Then
                     Me.CloseConnectionTab()
                 End If
@@ -872,10 +872,9 @@ Namespace UI
                 RefreshIC()
             End Sub
 
-            Private _lastMouseUp As Integer = 0
+            Private _firstClickTicks As Integer = 0
+            Private _doubleClickRectangle As Rectangle
             Private Sub TabController_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.MouseUp
-                Debug.Print("TabController_MouseUp()")
-                Debug.Print("_ignoreChangeSelectedTabClick = {0}", _ignoreChangeSelectedTabClick)
                 Try
                     If Not Native.GetForegroundWindow() = frmMain.Handle And Not _ignoreChangeSelectedTabClick Then
                         Dim clickedTab As Magic.Controls.TabPage = TabController.TabPageFromPoint(e.Location)
@@ -889,9 +888,10 @@ Namespace UI
                     Select Case e.Button
                         Case MouseButtons.Left
                             Dim currentTicks As Integer = Environment.TickCount
-                            Dim elapsedTicks As Integer = currentTicks - _lastMouseUp
-                            If elapsedTicks > SystemInformation.DoubleClickTime Then
-                                _lastMouseUp = currentTicks
+                            Dim elapsedTicks As Integer = currentTicks - _firstClickTicks
+                            If elapsedTicks > SystemInformation.DoubleClickTime Or Not _doubleClickRectangle.Contains(MousePosition) Then
+                                _firstClickTicks = currentTicks
+                                _doubleClickRectangle = New Rectangle(MousePosition.X - (SystemInformation.DoubleClickSize.Width / 2), MousePosition.Y - (SystemInformation.DoubleClickSize.Height / 2), SystemInformation.DoubleClickSize.Width, SystemInformation.DoubleClickSize.Height)
                                 FocusIC()
                             Else
                                 TabController.OnDoubleClickTab(TabController.SelectedTab)
@@ -942,7 +942,6 @@ Namespace UI
             Protected Overloads Overrides Sub WndProc(ByRef WndMsg As Message)
                 Try
                     If WndMsg.Msg = Native.WM_MOUSEACTIVATE Then
-
                         Dim curTab As Magic.Controls.TabPage = Me.TabController.SelectedTab
                         Dim curRect As Rectangle = curTab.RectangleToScreen(curTab.ClientRectangle)
 
@@ -965,15 +964,14 @@ Namespace UI
 #End Region
 
 #Region "Tab drag and drop"
+            Public Property InTabDrag As Boolean = False
             Private Sub TabController_PageDragStart(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.PageDragEnd, TabController.PageDragStart
                 Cursor = Cursors.SizeWE
             End Sub
 
-            Private Sub TabController_PageDragEnd(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.PageDragEnd, TabController.PageDragQuit
-                Cursor = Cursors.Default
-            End Sub
-
             Private Sub TabController_PageDragMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.PageDragMove
+                InTabDrag = True ' For some reason PageDragStart gets raised again after PageDragEnd so set this here instead
+
                 Dim sourceTab As Magic.Controls.TabPage = TabController.SelectedTab
                 Dim destinationTab As Magic.Controls.TabPage = TabController.TabPageFromPoint(e.Location)
 
@@ -986,6 +984,13 @@ Namespace UI
                 TabController.TabPages.Insert(targetIndex, sourceTab)
                 TabController.SelectedTab = sourceTab
                 TabController.TabPages.ResumeEvents()
+            End Sub
+
+            Private Sub TabController_PageDragEnd(ByVal sender As Object, ByVal e As MouseEventArgs) Handles TabController.PageDragEnd, TabController.PageDragQuit
+                Cursor = Cursors.Default
+                InTabDrag = False
+                Dim interfaceControl As mRemoteNG.Connection.InterfaceControl = TryCast(TabController.SelectedTab.Tag, mRemoteNG.Connection.InterfaceControl)
+                If interfaceControl IsNot Nothing Then interfaceControl.Protocol.Focus()
             End Sub
 #End Region
         End Class

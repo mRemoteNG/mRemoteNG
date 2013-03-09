@@ -201,6 +201,7 @@ Namespace Connection
 
             Public Overrides Sub Focus()
                 Try
+                    If ConnectionWindow.InTabDrag Then Return
                     SetForegroundWindow(PuttyHandle)
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyFocusFailed & vbNewLine & ex.Message, True)
