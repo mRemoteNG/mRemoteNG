@@ -387,7 +387,7 @@ Namespace UI
                 If My.Settings.ConfirmCloseConnection = ConfirmClose.All Then
                     Dim result As DialogResult = cTaskDialog.MessageBox(Me, My.Application.Info.ProductName, String.Format(My.Language.strConfirmCloseConnectionMainInstruction, selectedTab.Title), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, Nothing)
                     If cTaskDialog.VerificationChecked Then
-                        My.Settings.ConfirmCloseConnection = False
+                        My.Settings.ConfirmCloseConnection = My.Settings.ConfirmCloseConnection - 1
                     End If
                     If result = DialogResult.No Then
                         Exit Sub
