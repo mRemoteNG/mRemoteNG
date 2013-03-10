@@ -1,4 +1,5 @@
-﻿Imports mRemoteNG.My
+﻿Imports System.IO
+Imports mRemoteNG.My
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 
@@ -115,17 +116,23 @@ Public Class frmOptions
     Friend WithEvents radCloseWarnMultiple As System.Windows.Forms.RadioButton
     Friend WithEvents radCloseWarnExit As System.Windows.Forms.RadioButton
     Friend WithEvents radCloseWarnNever As System.Windows.Forms.RadioButton
+    Friend WithEvents tabTheme As System.Windows.Forms.TabPage
+    Friend WithEvents ColorsPropertyGrid As System.Windows.Forms.PropertyGrid
+    Friend WithEvents dlgColor As System.Windows.Forms.ColorDialog
+    Friend WithEvents btnThemeSave As System.Windows.Forms.Button
+    Friend WithEvents cboTheme As System.Windows.Forms.ComboBox
     Private components As System.ComponentModel.IContainer
 
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", 0)
-        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", 1)
-        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", 2)
-        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", 3)
-        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", 4)
-        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", 5)
-        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", 6)
+        Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", "StartupExit_Icon.ico")
+        Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", "Panels_Icon.ico")
+        Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", "Tab_Icon.ico")
+        Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", "Root_Icon.ico")
+        Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", "database.bmp")
+        Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", "Update_Icon.ico")
+        Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", "Config_Icon.ico")
+        Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Theme", "Appearance_Icon.ico")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
         Me.btnOK = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
@@ -236,6 +243,11 @@ Public Class frmOptions
         Me.lblSQLPassword = New System.Windows.Forms.Label()
         Me.tabUpdates = New System.Windows.Forms.TabPage()
         Me.tabAdvanced = New System.Windows.Forms.TabPage()
+        Me.tabTheme = New System.Windows.Forms.TabPage()
+        Me.ColorsPropertyGrid = New System.Windows.Forms.PropertyGrid()
+        Me.dlgColor = New System.Windows.Forms.ColorDialog()
+        Me.cboTheme = New System.Windows.Forms.ComboBox()
+        Me.btnThemeSave = New System.Windows.Forms.Button()
         CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProxy.SuspendLayout()
@@ -257,6 +269,7 @@ Public Class frmOptions
         Me.tabSQLServer.SuspendLayout()
         Me.tabUpdates.SuspendLayout()
         Me.tabAdvanced.SuspendLayout()
+        Me.tabTheme.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnOK
@@ -286,7 +299,7 @@ Public Class frmOptions
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lvPages.FullRowSelect = True
         Me.lvPages.HideSelection = False
-        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7})
+        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8})
         Me.lvPages.LabelWrap = False
         Me.lvPages.LargeImageList = Me.imgListPages
         Me.lvPages.Location = New System.Drawing.Point(12, 12)
@@ -304,12 +317,13 @@ Public Class frmOptions
         Me.imgListPages.ImageStream = CType(resources.GetObject("imgListPages.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.imgListPages.TransparentColor = System.Drawing.Color.Fuchsia
         Me.imgListPages.Images.SetKeyName(0, "StartupExit_Icon.ico")
-        Me.imgListPages.Images.SetKeyName(1, "Appearance_Icon.ico")
+        Me.imgListPages.Images.SetKeyName(1, "Panels_Icon.ico")
         Me.imgListPages.Images.SetKeyName(2, "Tab_Icon.ico")
         Me.imgListPages.Images.SetKeyName(3, "Root_Icon.ico")
         Me.imgListPages.Images.SetKeyName(4, "database.bmp")
         Me.imgListPages.Images.SetKeyName(5, "Update_Icon.ico")
         Me.imgListPages.Images.SetKeyName(6, "Config_Icon.ico")
+        Me.imgListPages.Images.SetKeyName(7, "Appearance_Icon.ico")
         '
         'lblMaximumPuttyWaitTime
         '
@@ -973,6 +987,7 @@ Public Class frmOptions
         Me.tcTabControl.Controls.Add(Me.tabSQLServer)
         Me.tcTabControl.Controls.Add(Me.tabUpdates)
         Me.tcTabControl.Controls.Add(Me.tabAdvanced)
+        Me.tcTabControl.Controls.Add(Me.tabTheme)
         Me.tcTabControl.Location = New System.Drawing.Point(172, 12)
         Me.tcTabControl.Name = "tcTabControl"
         Me.tcTabControl.SelectedIndex = 0
@@ -1421,6 +1436,46 @@ Public Class frmOptions
         Me.tabAdvanced.Text = "Advanced"
         Me.tabAdvanced.UseVisualStyleBackColor = True
         '
+        'tabTheme
+        '
+        Me.tabTheme.Controls.Add(Me.btnThemeSave)
+        Me.tabTheme.Controls.Add(Me.cboTheme)
+        Me.tabTheme.Controls.Add(Me.ColorsPropertyGrid)
+        Me.tabTheme.Location = New System.Drawing.Point(4, 22)
+        Me.tabTheme.Name = "tabTheme"
+        Me.tabTheme.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabTheme.Size = New System.Drawing.Size(602, 463)
+        Me.tabTheme.TabIndex = 7
+        Me.tabTheme.Text = "Theme"
+        Me.tabTheme.UseVisualStyleBackColor = True
+        '
+        'ColorsPropertyGrid
+        '
+        Me.ColorsPropertyGrid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.ColorsPropertyGrid.Location = New System.Drawing.Point(3, 34)
+        Me.ColorsPropertyGrid.Name = "ColorsPropertyGrid"
+        Me.ColorsPropertyGrid.Size = New System.Drawing.Size(596, 426)
+        Me.ColorsPropertyGrid.TabIndex = 3
+        '
+        'cboTheme
+        '
+        Me.cboTheme.FormattingEnabled = True
+        Me.cboTheme.Location = New System.Drawing.Point(6, 7)
+        Me.cboTheme.Name = "cboTheme"
+        Me.cboTheme.Size = New System.Drawing.Size(509, 21)
+        Me.cboTheme.TabIndex = 5
+        '
+        'btnThemeSave
+        '
+        Me.btnThemeSave.Location = New System.Drawing.Point(521, 5)
+        Me.btnThemeSave.Name = "btnThemeSave"
+        Me.btnThemeSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnThemeSave.TabIndex = 6
+        Me.btnThemeSave.Text = "Save"
+        Me.btnThemeSave.UseVisualStyleBackColor = True
+        '
         'frmOptions
         '
         Me.CancelButton = Me.btnCancel
@@ -1472,6 +1527,7 @@ Public Class frmOptions
         Me.tabUpdates.ResumeLayout(False)
         Me.tabAdvanced.ResumeLayout(False)
         Me.tabAdvanced.PerformLayout()
+        Me.tabTheme.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1596,6 +1652,9 @@ Public Class frmOptions
             Me.numUVNCSCPort.Value = My.Settings.UVNCSCPort
 
             Me.txtXULrunnerPath.Text = My.Settings.XULRunnerPath
+
+            cboTheme.Items.Add(Windows.Theme.Name)
+            cboTheme.Text = Windows.Theme.Name
         Catch ex As Exception
             MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LoadOptions (UI.Window.Options) failed" & vbNewLine & ex.Message, True)
         End Try
@@ -1722,6 +1781,7 @@ Public Class frmOptions
 
             My.Settings.XULRunnerPath = Me.txtXULrunnerPath.Text
 
+            Config.ThemeSerializer.SaveToXmlFile(Windows.Theme, Path.Combine(App.Info.Settings.SettingsPath, "Theme.xml"))
 
             If My.Settings.LoadConsFromCustomLocation = False Then
                 App.Runtime.SetMainFormText(App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile)
@@ -1772,6 +1832,9 @@ Public Class frmOptions
             End If
         Next
 #End If
+
+        ColorsPropertyGrid.PropertySort = PropertySort.Categorized
+        ColorsPropertyGrid.SelectedObject = Windows.Theme
     End Sub
 
     Private Sub ApplyLanguage()

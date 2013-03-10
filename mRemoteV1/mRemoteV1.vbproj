@@ -161,6 +161,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -186,6 +187,7 @@
     <Compile Include="Config\Config.Settings.Providers.vb" />
     <Compile Include="Config\Config.Settings.Save.vb" />
     <Compile Include="Config\ConfirmClose.vb" />
+    <Compile Include="Config\ThemeSerializer.vb" />
     <Compile Include="Connection\Connection.Icon.vb" />
     <Compile Include="Connection\Connection.Info.vb" />
     <Compile Include="Connection\Connection.InterfaceControl.Designer.vb">
@@ -214,6 +216,7 @@
     <Compile Include="Connection\Connection.Protocol.VNC.vb" />
     <Compile Include="Connection\Connection.PuttySession.vb" />
     <Compile Include="Connection\Connection.QuickConnect.vb" />
+    <Compile Include="Config\Theme.vb" />
     <Compile Include="Tools\CommandLineArguments.vb" />
     <Compile Include="Container\Container.Info.vb" />
     <Compile Include="Container\Container.List.vb" />

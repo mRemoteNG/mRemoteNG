@@ -1,3 +1,4 @@
+Imports System.IO
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 Imports System.Reflection
@@ -46,6 +47,14 @@ Public Class frmMain
         Startup.ParseCommandLineArgs()
 
         ApplyLanguage()
+
+        Try
+            AddHandler Windows.Theme.ColorChanged, AddressOf ApplyColors
+            Dim themes As List(Of Theme) = ThemeSerializer.LoadFromXmlFile(Path.Combine(App.Info.Settings.SettingsPath, "Theme.xml"))
+            If themes.Count Then Windows.Theme.FromTheme(themes(0))
+        Catch ex As Exception
+            Debug.Print(ex.Message)
+        End Try
 
         fpChainedWindowHandle = SetClipboardViewer(Me.Handle)
 
@@ -165,6 +174,46 @@ Public Class frmMain
         ToolStripSplitButton1.Text = My.Language.strSpecialKeys
         ToolStripMenuItem1.Text = My.Language.strKeysCtrlAltDel
         ToolStripMenuItem2.Text = My.Language.strKeysCtrlEsc
+    End Sub
+
+    Public Sub ApplyColors()
+        With Windows.Theme
+            pnlDock.DockBackColor = .WindowBackground
+            tsContainer.BackColor = .ToolbarBackground
+            tsContainer.ForeColor = .ToolbarText
+            tsContainer.TopToolStripPanel.BackColor = .ToolbarBackground
+            tsContainer.TopToolStripPanel.ForeColor = .ToolbarText
+            tsContainer.BottomToolStripPanel.BackColor = .ToolbarBackground
+            tsContainer.BottomToolStripPanel.ForeColor = .ToolbarText
+            tsContainer.LeftToolStripPanel.BackColor = .ToolbarBackground
+            tsContainer.LeftToolStripPanel.ForeColor = .ToolbarText
+            tsContainer.RightToolStripPanel.BackColor = .ToolbarBackground
+            tsContainer.RightToolStripPanel.ForeColor = .ToolbarText
+            tsContainer.ContentPanel.BackColor = .ToolbarBackground
+            tsContainer.ContentPanel.ForeColor = .ToolbarText
+            msMain.BackColor = .ToolbarBackground
+            msMain.ForeColor = .ToolbarText
+            ApplyMenuColors(msMain.Items)
+            tsExternalTools.BackColor = .ToolbarBackground
+            tsExternalTools.ForeColor = .ToolbarText
+            tsQuickConnect.BackColor = .ToolbarBackground
+            tsQuickConnect.ForeColor = .ToolbarText
+        End With
+    End Sub
+
+    Private Sub ApplyMenuColors(itemCollection As ToolStripItemCollection)
+        With Windows.Theme
+            Dim menuItem As ToolStripMenuItem
+            For Each item As ToolStripItem In itemCollection
+                item.BackColor = .MenuBackground
+                item.ForeColor = .MenuText
+
+                menuItem = TryCast(item, ToolStripMenuItem)
+                If menuItem IsNot Nothing Then
+                    ApplyMenuColors(menuItem.DropDownItems)
+                End If
+            Next
+        End With
     End Sub
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing

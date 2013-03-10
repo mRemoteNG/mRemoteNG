@@ -488,6 +488,19 @@ Namespace UI
                 TabText = My.Language.strMenuConfig
             End Sub
 
+            Private Sub ApplyColors()
+                With Windows.Theme
+                    pGrid.BackColor = .ToolbarBackground
+                    pGrid.ForeColor = .ToolbarText
+                    pGrid.ViewBackColor = .ConfigPanelBackground
+                    pGrid.ViewForeColor = .ConfigPanelText
+                    pGrid.LineColor = .ConfigPanelGridLines
+                    pGrid.HelpBackColor = .ConfigPanelHelpBackground
+                    pGrid.HelpForeColor = .ConfigPanelHelpText
+                    pGrid.CategoryForeColor = .ConfigPanelCategoryText
+                End With
+            End Sub
+
             Private _originalPropertyGridToolStripItemCountValid As Boolean
             Private _originalPropertyGridToolStripItemCount As Integer
 
@@ -540,6 +553,10 @@ Namespace UI
 
             Private Sub Config_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
                 ApplyLanguage()
+
+                AddHandler Windows.Theme.ColorChanged, AddressOf ApplyColors
+                ApplyColors()
+
                 AddToolStripItems()
             End Sub
 

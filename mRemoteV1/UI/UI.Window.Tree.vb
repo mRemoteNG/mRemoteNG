@@ -465,6 +465,10 @@ Namespace UI
 #Region "Form Stuff"
             Private Sub Tree_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
                 ApplyLanguage()
+
+                AddHandler Windows.Theme.ColorChanged, AddressOf ApplyColors
+                ApplyColors()
+
                 txtSearch.Multiline = True
                 txtSearch.MinimumSize = New Size(0, 14)
                 txtSearch.Size = New Size(txtSearch.Size.Width, 14)
@@ -505,6 +509,19 @@ Namespace UI
                 txtSearch.Text = Language.strSearchPrompt
                 TabText = My.Language.strConnections
                 Text = My.Language.strConnections
+            End Sub
+
+            Public Sub ApplyColors()
+                With Windows.Theme
+                    msMain.BackColor = .ToolbarBackground
+                    msMain.ForeColor = .ToolbarText
+                    tvConnections.BackColor = .ConnectionsPanelBackground
+                    tvConnections.ForeColor = .ConnectionsPanelText
+                    tvConnections.LineColor = .ConnectionsPanelTreeLines
+                    BackColor = .ToolbarBackground
+                    txtSearch.BackColor = .SearchBoxBackground
+                    txtSearch.ForeColor = .SearchBoxTextUnfocused
+                End With
             End Sub
 #End Region
 
@@ -1210,7 +1227,7 @@ Namespace UI
 
 #Region "Search"
             Private Sub txtSearch_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles txtSearch.GotFocus
-                txtSearch.ForeColor = SystemColors.WindowText
+                txtSearch.ForeColor = Windows.Theme.SearchBoxTextFocused
                 If txtSearch.Text = Language.strSearchPrompt Then
                     txtSearch.Text = ""
                 End If
@@ -1218,7 +1235,7 @@ Namespace UI
 
             Private Sub txtSearch_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles txtSearch.LostFocus
                 If txtSearch.Text = "" Then
-                    txtSearch.ForeColor = SystemColors.GrayText
+                    txtSearch.ForeColor = Windows.Theme.SearchBoxTextUnfocused
                     txtSearch.Text = Language.strSearchPrompt
                 End If
             End Sub
