@@ -26,14 +26,14 @@ Namespace Config
 
         Public Sub EndUpdate()
             _inUpdate = False
-            RaiseColorChanged()
+            RaiseThemeChanged()
         End Sub
 #End Region
 
 #Region "Events"
-        Public Event ColorChanged()
-        Protected Sub RaiseColorChanged()
-            If Not _inUpdate Then RaiseEvent ColorChanged()
+        Public Event ThemeChanged()
+        Protected Sub RaiseThemeChanged()
+            If Not _inUpdate Then RaiseEvent ThemeChanged()
         End Sub
 #End Region
 
@@ -48,7 +48,6 @@ Namespace Config
 #Region "General"
         Private _windowBackground As Color = SystemColors.AppWorkspace
         <Category(vbTab & "General"), _
-            Browsable(True), _
             DisplayNameAttribute("Window Background"), _
             DescriptionAttribute("Description")> _
         Public Property WindowBackground() As Color
@@ -58,13 +57,13 @@ Namespace Config
             Set(value As Color)
                 If _windowBackground = value Then Return
                 _windowBackground = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
         Private _menuBackground As Color = SystemColors.Control
         <Category(vbTab & "General"),
-            Browsable(True),
+            Browsable(False),
             DisplayNameAttribute("Menu Background"),
             DescriptionAttribute("Description")>
         Public Property MenuBackground() As Color
@@ -74,13 +73,13 @@ Namespace Config
             Set(value As Color)
                 If _menuBackground = value Then Return
                 _menuBackground = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
         Private _menuText As Color = SystemColors.ControlText
         <Category(vbTab & "General"),
-            Browsable(True),
+            Browsable(False),
             DisplayNameAttribute("Menu Text"),
             DescriptionAttribute("Description")>
         Public Property MenuText() As Color
@@ -90,13 +89,13 @@ Namespace Config
             Set(value As Color)
                 If _menuText = value Then Return
                 _menuText = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
         Private _toolbarBackground As Color = SystemColors.Control
         <Category(vbTab & "General"), _
-            Browsable(True), _
+            Browsable(False), _
             DisplayNameAttribute("Toolbar Background"), _
             DescriptionAttribute("Description")> _
         Public Property ToolbarBackground() As Color
@@ -106,13 +105,13 @@ Namespace Config
             Set(value As Color)
                 If _toolbarBackground = value Then Return
                 _toolbarBackground = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
         Private _toolbarText As Color = SystemColors.ControlText
         <Category(vbTab & "General"), _
-            Browsable(True), _
+            Browsable(False), _
             DisplayNameAttribute("Toolbar Text"), _
             DescriptionAttribute("Description")> _
         Public Property ToolbarText() As Color
@@ -122,7 +121,7 @@ Namespace Config
             Set(value As Color)
                 If _toolbarText = value Then Return
                 _toolbarText = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 #End Region
@@ -130,7 +129,6 @@ Namespace Config
 #Region "Connections Panel"
         Private _connectionsPanelBackground As Color = SystemColors.Window
         <Category("Connections Panel"), _
-            Browsable(True), _
             DisplayNameAttribute("Connections Panel Background"), _
             DescriptionAttribute("Description")> _
         Public Property ConnectionsPanelBackground() As Color
@@ -138,15 +136,14 @@ Namespace Config
                 Return _connectionsPanelBackground
             End Get
             Set(value As Color)
-                If _connectionsPanelBackground = value Then Return
+                If _connectionsPanelBackground = value Or value = Color.Transparent Then Return
                 _connectionsPanelBackground = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
         Private _connectionsPanelText As Color = SystemColors.WindowText
         <Category("Connections Panel"),
-            Browsable(True),
             DisplayNameAttribute("Connections Panel Text"),
             DescriptionAttribute("Description")>
         Public Property ConnectionsPanelText() As Color
@@ -156,13 +153,12 @@ Namespace Config
             Set(value As Color)
                 If _connectionsPanelText = value Then Return
                 _connectionsPanelText = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
         Private _connectionsPanelTreeLines As Color = Color.Black
         <Category("Connections Panel"),
-            Browsable(True),
             DisplayNameAttribute("Connections Panel Tree Lines"),
             DescriptionAttribute("Description")>
         Public Property ConnectionsPanelTreeLines() As Color
@@ -172,13 +168,12 @@ Namespace Config
             Set(value As Color)
                 If _connectionsPanelTreeLines = value Then Return
                 _connectionsPanelTreeLines = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
         Private _searchBoxBackground As Color = SystemColors.Window
         <Category("Connections Panel"), _
-            Browsable(True), _
             DisplayNameAttribute("Search Box Background"), _
             DescriptionAttribute("Description")> _
         Public Property SearchBoxBackground() As Color
@@ -186,41 +181,39 @@ Namespace Config
                 Return _searchBoxBackground
             End Get
             Set(value As Color)
-                If _searchBoxBackground = value Then Return
+                If _searchBoxBackground = value Or value = Color.Transparent Then Return
                 _searchBoxBackground = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
-        Private _searchBoxTextUnfocused As Color = SystemColors.GrayText
+        Private _searchBoxTextPrompt As Color = SystemColors.GrayText
         <Category("Connections Panel"), _
-            Browsable(True), _
-            DisplayNameAttribute("Search Box Text Unfocused"), _
+            DisplayNameAttribute("Search Box Text Prompt"), _
             DescriptionAttribute("Description")> _
-        Public Property SearchBoxTextUnfocused() As Color
+        Public Property SearchBoxTextPrompt() As Color
             Get
-                Return _searchBoxTextUnfocused
+                Return _searchBoxTextPrompt
             End Get
             Set(value As Color)
-                If _searchBoxTextUnfocused = value Then Return
-                _searchBoxTextUnfocused = value
-                RaiseColorChanged()
+                If _searchBoxTextPrompt = value Then Return
+                _searchBoxTextPrompt = value
+                RaiseThemeChanged()
             End Set
         End Property
 
-        Private _searchBoxTextFocused As Color = SystemColors.WindowText
+        Private _searchBoxText As Color = SystemColors.WindowText
         <Category("Connections Panel"), _
-            Browsable(True), _
-            DisplayNameAttribute("Search Box Text Focused"), _
+            DisplayNameAttribute("Search Box Text"), _
             DescriptionAttribute("Description")> _
-        Public Property SearchBoxTextFocused() As Color
+        Public Property SearchBoxText() As Color
             Get
-                Return _searchBoxTextFocused
+                Return _searchBoxText
             End Get
             Set(value As Color)
-                If _searchBoxTextFocused = value Then Return
-                _searchBoxTextFocused = value
-                RaiseColorChanged()
+                If _searchBoxText = value Then Return
+                _searchBoxText = value
+                RaiseThemeChanged()
             End Set
         End Property
 #End Region
@@ -228,7 +221,6 @@ Namespace Config
 #Region "Config Panel"
         Private _configPanelBackground As Color = SystemColors.Window
         <Category("Config Panel"), _
-            Browsable(True), _
             DisplayNameAttribute("Config Panel Background"), _
             DescriptionAttribute("Description")> _
         Public Property ConfigPanelBackground() As Color
@@ -236,15 +228,14 @@ Namespace Config
                 Return _configPanelBackground
             End Get
             Set(value As Color)
-                If _configPanelBackground = value Then Return
+                If _configPanelBackground = value Or value = Color.Transparent Then Return
                 _configPanelBackground = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
         Private _configPanelText As Color = SystemColors.WindowText
         <Category("Config Panel"), _
-            Browsable(True), _
             DisplayNameAttribute("Config Panel Text"), _
             DescriptionAttribute("Description")> _
         Public Property ConfigPanelText() As Color
@@ -254,13 +245,12 @@ Namespace Config
             Set(value As Color)
                 If _configPanelText = value Then Return
                 _configPanelText = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
         Private _configPanelCategoryText As Color = SystemColors.ControlText
         <Category("Config Panel"), _
-            Browsable(True), _
             DisplayNameAttribute("Config Panel Category Text"), _
             DescriptionAttribute("Description")> _
         Public Property ConfigPanelCategoryText() As Color
@@ -270,13 +260,12 @@ Namespace Config
             Set(value As Color)
                 If _configPanelCategoryText = value Then Return
                 _configPanelCategoryText = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
         Private _configPanelHelpBackground As Color = SystemColors.Control
         <Category("Config Panel"), _
-            Browsable(True), _
             DisplayNameAttribute("Config Panel Help Background"), _
             DescriptionAttribute("Description")> _
         Public Property ConfigPanelHelpBackground() As Color
@@ -284,15 +273,14 @@ Namespace Config
                 Return _configPanelHelpBackground
             End Get
             Set(value As Color)
-                If _configPanelHelpBackground = value Then Return
+                If _configPanelHelpBackground = value Or value = Color.Transparent Then Return
                 _configPanelHelpBackground = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
         Private _configPanelHelpText As Color = SystemColors.ControlText
         <Category("Config Panel"), _
-            Browsable(True), _
             DisplayNameAttribute("Config Panel Help Text"), _
             DescriptionAttribute("Description")> _
         Public Property ConfigPanelHelpText() As Color
@@ -302,13 +290,12 @@ Namespace Config
             Set(value As Color)
                 If _configPanelHelpText = value Then Return
                 _configPanelHelpText = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 
         Private _configPanelGridLines As Color = SystemColors.InactiveBorder
         <Category("Config Panel"), _
-            Browsable(True), _
             DisplayNameAttribute("Config Panel Grid Lines"), _
             DescriptionAttribute("Description")> _
         Public Property ConfigPanelGridLines() As Color
@@ -318,7 +305,7 @@ Namespace Config
             Set(value As Color)
                 If _configPanelGridLines = value Then Return
                 _configPanelGridLines = value
-                RaiseColorChanged()
+                RaiseThemeChanged()
             End Set
         End Property
 #End Region

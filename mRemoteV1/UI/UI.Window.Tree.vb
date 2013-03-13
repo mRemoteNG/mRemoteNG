@@ -466,8 +466,8 @@ Namespace UI
             Private Sub Tree_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
                 ApplyLanguage()
 
-                AddHandler Windows.Theme.ColorChanged, AddressOf ApplyColors
-                ApplyColors()
+                AddHandler Windows.Theme.ThemeChanged, AddressOf ApplyTheme
+                ApplyTheme()
 
                 txtSearch.Multiline = True
                 txtSearch.MinimumSize = New Size(0, 14)
@@ -511,7 +511,7 @@ Namespace UI
                 Text = My.Language.strConnections
             End Sub
 
-            Public Sub ApplyColors()
+            Public Sub ApplyTheme()
                 With Windows.Theme
                     msMain.BackColor = .ToolbarBackground
                     msMain.ForeColor = .ToolbarText
@@ -520,7 +520,7 @@ Namespace UI
                     tvConnections.LineColor = .ConnectionsPanelTreeLines
                     BackColor = .ToolbarBackground
                     txtSearch.BackColor = .SearchBoxBackground
-                    txtSearch.ForeColor = .SearchBoxTextUnfocused
+                    txtSearch.ForeColor = .SearchBoxTextPrompt
                 End With
             End Sub
 #End Region
@@ -1227,7 +1227,7 @@ Namespace UI
 
 #Region "Search"
             Private Sub txtSearch_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles txtSearch.GotFocus
-                txtSearch.ForeColor = Windows.Theme.SearchBoxTextFocused
+                txtSearch.ForeColor = Windows.Theme.SearchBoxText
                 If txtSearch.Text = Language.strSearchPrompt Then
                     txtSearch.Text = ""
                 End If
@@ -1235,7 +1235,7 @@ Namespace UI
 
             Private Sub txtSearch_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles txtSearch.LostFocus
                 If txtSearch.Text = "" Then
-                    txtSearch.ForeColor = Windows.Theme.SearchBoxTextUnfocused
+                    txtSearch.ForeColor = Windows.Theme.SearchBoxTextPrompt
                     txtSearch.Text = Language.strSearchPrompt
                 End If
             End Sub

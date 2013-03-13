@@ -488,7 +488,7 @@ Namespace UI
                 TabText = My.Language.strMenuConfig
             End Sub
 
-            Private Sub ApplyColors()
+            Private Sub ApplyTheme()
                 With Windows.Theme
                     pGrid.BackColor = .ToolbarBackground
                     pGrid.ForeColor = .ToolbarText
@@ -554,8 +554,8 @@ Namespace UI
             Private Sub Config_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
                 ApplyLanguage()
 
-                AddHandler Windows.Theme.ColorChanged, AddressOf ApplyColors
-                ApplyColors()
+                AddHandler Windows.Theme.ThemeChanged, AddressOf ApplyTheme
+                ApplyTheme()
 
                 AddToolStripItems()
             End Sub

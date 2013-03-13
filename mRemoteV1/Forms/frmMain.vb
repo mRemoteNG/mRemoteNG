@@ -49,7 +49,7 @@ Public Class frmMain
         ApplyLanguage()
 
         Try
-            AddHandler Windows.Theme.ColorChanged, AddressOf ApplyColors
+            AddHandler Windows.Theme.ThemeChanged, AddressOf ApplyThemes
             Dim themes As List(Of Theme) = ThemeSerializer.LoadFromXmlFile(Path.Combine(App.Info.Settings.SettingsPath, "Theme.xml"))
             If themes.Count Then Windows.Theme.FromTheme(themes(0))
         Catch ex As Exception
@@ -176,7 +176,7 @@ Public Class frmMain
         ToolStripMenuItem2.Text = My.Language.strKeysCtrlEsc
     End Sub
 
-    Public Sub ApplyColors()
+    Public Sub ApplyThemes()
         With Windows.Theme
             pnlDock.DockBackColor = .WindowBackground
             tsContainer.BackColor = .ToolbarBackground

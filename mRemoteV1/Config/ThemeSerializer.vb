@@ -90,7 +90,7 @@ Namespace Config
                     colorName = colorNode.Attributes("Name").Value
                     colorValue = colorNode.Attributes("Value").Value
                     propertyInfo = themeType.GetProperty(colorName)
-                    If Not propertyInfo.PropertyType Is colorType Then Continue For
+                    If propertyInfo Is Nothing OrElse Not propertyInfo.PropertyType Is colorType Then Continue For
                     propertyInfo.SetValue(theme, Color.FromName(colorValue), Nothing)
                 Next
                 themes.Add(theme)
