@@ -21,6 +21,7 @@ Namespace App
 #End If
             Public Shared ReadOnly LayoutFileName As String = "pnlLayout.xml"
             Public Shared ReadOnly ExtAppsFilesName As String = "extApps.xml"
+            Public Const ThemesFileName As String = "Themes.xml"
         End Class
 
         Public Class Update

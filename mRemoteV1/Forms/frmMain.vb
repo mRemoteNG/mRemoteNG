@@ -50,7 +50,7 @@ Public Class frmMain
 
         Try
             AddHandler Windows.Theme.ThemeChanged, AddressOf ApplyThemes
-            Dim themes As List(Of Theme) = ThemeSerializer.LoadFromXmlFile(Path.Combine(App.Info.Settings.SettingsPath, "Theme.xml"))
+            Dim themes As List(Of Theme) = ThemeSerializer.LoadFromXmlFile(Path.Combine(App.Info.Settings.SettingsPath, App.Info.Settings.ThemesFileName))
             If themes.Count Then Windows.Theme.FromTheme(themes(0))
         Catch ex As Exception
             Debug.Print(ex.Message)

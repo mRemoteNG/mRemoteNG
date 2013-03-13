@@ -1781,7 +1781,7 @@ Public Class frmOptions
 
             My.Settings.XULRunnerPath = Me.txtXULrunnerPath.Text
 
-            Config.ThemeSerializer.SaveToXmlFile(Windows.Theme, Path.Combine(App.Info.Settings.SettingsPath, "Theme.xml"))
+            Config.ThemeSerializer.SaveToXmlFile(Windows.Theme, Path.Combine(App.Info.Settings.SettingsPath, App.Info.Settings.ThemesFileName))
 
             If My.Settings.LoadConsFromCustomLocation = False Then
                 App.Runtime.SetMainFormText(App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile)
