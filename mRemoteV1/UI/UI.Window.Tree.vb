@@ -466,7 +466,7 @@ Namespace UI
             Private Sub Tree_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
                 ApplyLanguage()
 
-                AddHandler Windows.Theme.ThemeChanged, AddressOf ApplyTheme
+                AddHandler Themes.ThemeManager.ThemeChanged, AddressOf ApplyTheme
                 ApplyTheme()
 
                 txtSearch.Multiline = True
@@ -512,15 +512,15 @@ Namespace UI
             End Sub
 
             Public Sub ApplyTheme()
-                With Windows.Theme
-                    msMain.BackColor = .ToolbarBackground
-                    msMain.ForeColor = .ToolbarText
-                    tvConnections.BackColor = .ConnectionsPanelBackground
-                    tvConnections.ForeColor = .ConnectionsPanelText
-                    tvConnections.LineColor = .ConnectionsPanelTreeLines
-                    BackColor = .ToolbarBackground
-                    txtSearch.BackColor = .SearchBoxBackground
-                    txtSearch.ForeColor = .SearchBoxTextPrompt
+                With Themes.ThemeManager.ActiveTheme
+                    msMain.BackColor = .ToolbarBackgroundColor
+                    msMain.ForeColor = .ToolbarTextColor
+                    tvConnections.BackColor = .ConnectionsPanelBackgroundColor
+                    tvConnections.ForeColor = .ConnectionsPanelTextColor
+                    tvConnections.LineColor = .ConnectionsPanelTreeLineColor
+                    BackColor = .ToolbarBackgroundColor
+                    txtSearch.BackColor = .SearchBoxBackgroundColor
+                    txtSearch.ForeColor = .SearchBoxTextPromptColor
                 End With
             End Sub
 #End Region
@@ -1227,7 +1227,7 @@ Namespace UI
 
 #Region "Search"
             Private Sub txtSearch_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles txtSearch.GotFocus
-                txtSearch.ForeColor = Windows.Theme.SearchBoxText
+                txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextColor
                 If txtSearch.Text = Language.strSearchPrompt Then
                     txtSearch.Text = ""
                 End If
@@ -1235,7 +1235,7 @@ Namespace UI
 
             Private Sub txtSearch_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles txtSearch.LostFocus
                 If txtSearch.Text = "" Then
-                    txtSearch.ForeColor = Windows.Theme.SearchBoxTextPrompt
+                    txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextPromptColor
                     txtSearch.Text = Language.strSearchPrompt
                 End If
             End Sub

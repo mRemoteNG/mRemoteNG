@@ -2,15 +2,15 @@
 Imports System.Xml
 Imports System.Reflection
 
-Namespace Config
+Namespace Themes
     Public Class ThemeSerializer
-        Public Shared Sub SaveToXmlFile(theme As Theme, filename As String)
-            Dim themeList As New List(Of Theme)
-            themeList.Add(theme)
+        Public Shared Sub SaveToXmlFile(themeInfo As ThemeInfo, filename As String)
+            Dim themeList As New List(Of ThemeInfo)
+            themeList.Add(ThemeInfo)
             SaveToXmlFile(themeList, filename)
         End Sub
 
-        Public Shared Sub SaveToXmlFile(themes As List(Of Theme), filename As String)
+        Public Shared Sub SaveToXmlFile(themes As List(Of ThemeInfo), filename As String)
             Dim tempFileName As String = Path.GetTempFileName()
             Dim xmlTextWriter As New XmlTextWriter(tempFileName, System.Text.Encoding.UTF8)
 
@@ -27,16 +27,16 @@ Namespace Config
             xmlTextWriter.WriteElementString("FileTypeVersion", "1.0")
             xmlTextWriter.WriteEndElement() ' FileInfo
 
-            Dim themeType As Type = (New Theme).GetType()
+            Dim themeType As Type = (New ThemeInfo).GetType()
             Dim colorType As Type = (New Color).GetType()
             Dim color As Color
-            For Each theme As Theme In themes
+            For Each themeInfo As ThemeInfo In themes
                 xmlTextWriter.WriteStartElement("Theme")
-                xmlTextWriter.WriteAttributeString("Name", theme.Name)
+                xmlTextWriter.WriteAttributeString("Name", themeInfo.Name)
 
                 For Each propertyInfo As PropertyInfo In themeType.GetProperties()
                     If Not propertyInfo.PropertyType Is colorType Then Continue For
-                    color = propertyInfo.GetValue(theme, Nothing)
+                    color = propertyInfo.GetValue(themeInfo, Nothing)
                     xmlTextWriter.WriteStartElement("Color")
                     xmlTextWriter.WriteAttributeString("Name", propertyInfo.Name)
                     xmlTextWriter.WriteAttributeString("Value", color.Name)
@@ -54,7 +54,7 @@ Namespace Config
             File.Move(tempFileName, filename)
         End Sub
 
-        Public Shared Function LoadFromXmlFile(filename As String) As List(Of Theme)
+        Public Shared Function LoadFromXmlFile(filename As String) As List(Of ThemeInfo)
             Dim xmlDocument As New XmlDocument()
             xmlDocument.Load(filename)
 
@@ -76,24 +76,24 @@ Namespace Config
             End If
 
             Dim themeNodes As XmlNodeList = xmlDocument.SelectNodes("/mRemoteNG/Theme")
-            Dim themes As New List(Of Theme)
-            Dim theme As Theme
-            Dim themeType As Type = (New Theme).GetType()
+            Dim themes As New List(Of ThemeInfo)
+            Dim themeInfo As ThemeInfo
+            Dim themeType As Type = (New ThemeInfo).GetType()
             Dim colorType As Type = (New Color).GetType()
             Dim colorName As String
             Dim colorValue As String
             Dim propertyInfo As PropertyInfo
             For Each themeNode As XmlNode In themeNodes
-                theme = New Theme
-                theme.Name = themeNode.Attributes("Name").Value
+                themeInfo = New ThemeInfo
+                themeInfo.Name = themeNode.Attributes("Name").Value
                 For Each colorNode As XmlNode In themeNode.SelectNodes("./Color")
                     colorName = colorNode.Attributes("Name").Value
                     colorValue = colorNode.Attributes("Value").Value
                     propertyInfo = themeType.GetProperty(colorName)
                     If propertyInfo Is Nothing OrElse Not propertyInfo.PropertyType Is colorType Then Continue For
-                    propertyInfo.SetValue(theme, Color.FromName(colorValue), Nothing)
+                    propertyInfo.SetValue(themeInfo, Color.FromName(colorValue), Nothing)
                 Next
-                themes.Add(theme)
+                themes.Add(themeInfo)
             Next
 
             Return themes

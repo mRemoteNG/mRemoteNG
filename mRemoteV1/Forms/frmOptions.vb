@@ -1,7 +1,9 @@
 ﻿Imports System.IO
+Imports System.ComponentModel
 Imports mRemoteNG.My
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
+Imports mRemoteNG.Themes
 
 Public Class frmOptions
     Inherits System.Windows.Forms.Form
@@ -119,7 +121,7 @@ Public Class frmOptions
     Friend WithEvents tabTheme As System.Windows.Forms.TabPage
     Friend WithEvents ThemePropertyGrid As System.Windows.Forms.PropertyGrid
     Friend WithEvents dlgColor As System.Windows.Forms.ColorDialog
-    Friend WithEvents btnThemeSave As System.Windows.Forms.Button
+    Friend WithEvents btnThemeNew As System.Windows.Forms.Button
     Friend WithEvents cboTheme As System.Windows.Forms.ComboBox
     Friend WithEvents btnThemeDelete As System.Windows.Forms.Button
     Private components As System.ComponentModel.IContainer
@@ -246,7 +248,7 @@ Public Class frmOptions
         Me.tabAdvanced = New System.Windows.Forms.TabPage()
         Me.tabTheme = New System.Windows.Forms.TabPage()
         Me.btnThemeDelete = New System.Windows.Forms.Button()
-        Me.btnThemeSave = New System.Windows.Forms.Button()
+        Me.btnThemeNew = New System.Windows.Forms.Button()
         Me.cboTheme = New System.Windows.Forms.ComboBox()
         Me.ThemePropertyGrid = New System.Windows.Forms.PropertyGrid()
         Me.dlgColor = New System.Windows.Forms.ColorDialog()
@@ -1441,7 +1443,7 @@ Public Class frmOptions
         'tabTheme
         '
         Me.tabTheme.Controls.Add(Me.btnThemeDelete)
-        Me.tabTheme.Controls.Add(Me.btnThemeSave)
+        Me.tabTheme.Controls.Add(Me.btnThemeNew)
         Me.tabTheme.Controls.Add(Me.cboTheme)
         Me.tabTheme.Controls.Add(Me.ThemePropertyGrid)
         Me.tabTheme.Location = New System.Drawing.Point(4, 22)
@@ -1454,28 +1456,28 @@ Public Class frmOptions
         '
         'btnThemeDelete
         '
-        Me.btnThemeDelete.Location = New System.Drawing.Point(521, 5)
+        Me.btnThemeDelete.Location = New System.Drawing.Point(524, 5)
         Me.btnThemeDelete.Name = "btnThemeDelete"
         Me.btnThemeDelete.Size = New System.Drawing.Size(75, 23)
         Me.btnThemeDelete.TabIndex = 2
         Me.btnThemeDelete.Text = "&Delete"
         Me.btnThemeDelete.UseVisualStyleBackColor = True
         '
-        'btnThemeSave
+        'btnThemeNew
         '
-        Me.btnThemeSave.Location = New System.Drawing.Point(440, 5)
-        Me.btnThemeSave.Name = "btnThemeSave"
-        Me.btnThemeSave.Size = New System.Drawing.Size(75, 23)
-        Me.btnThemeSave.TabIndex = 1
-        Me.btnThemeSave.Text = "&Save"
-        Me.btnThemeSave.UseVisualStyleBackColor = True
+        Me.btnThemeNew.Location = New System.Drawing.Point(443, 5)
+        Me.btnThemeNew.Name = "btnThemeNew"
+        Me.btnThemeNew.Size = New System.Drawing.Size(75, 23)
+        Me.btnThemeNew.TabIndex = 1
+        Me.btnThemeNew.Text = "&New"
+        Me.btnThemeNew.UseVisualStyleBackColor = True
         '
         'cboTheme
         '
         Me.cboTheme.FormattingEnabled = True
-        Me.cboTheme.Location = New System.Drawing.Point(6, 7)
+        Me.cboTheme.Location = New System.Drawing.Point(3, 7)
         Me.cboTheme.Name = "cboTheme"
-        Me.cboTheme.Size = New System.Drawing.Size(428, 21)
+        Me.cboTheme.Size = New System.Drawing.Size(434, 21)
         Me.cboTheme.TabIndex = 0
         '
         'ThemePropertyGrid
@@ -1665,15 +1667,14 @@ Public Class frmOptions
 
             Me.txtXULrunnerPath.Text = My.Settings.XULRunnerPath
 
-            _themes = Config.ThemeSerializer.LoadFromXmlFile(Path.Combine(App.Info.Settings.SettingsPath, App.Info.Settings.ThemesFileName))
-            cboTheme.DisplayMember = "Name"
-            cboTheme.Items.Add(_defaultTheme)
-            For Each theme As Config.Theme In _themes
-                cboTheme.Items.Add(theme)
-            Next
-            cboTheme.Text = Windows.Theme.Name
+            _themeList = New BindingList(Of ThemeInfo)(ThemeManager.LoadThemes())
+            cboTheme.DataSource = _themeList
+            cboTheme.SelectedItem = ThemeManager.ActiveTheme
             cboTheme_SelectionChangeCommitted(Me, New EventArgs())
 
+            ThemePropertyGrid.PropertySort = PropertySort.Categorized
+
+            _originalTheme = ThemeManager.ActiveTheme
         Catch ex As Exception
             MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "LoadOptions (UI.Window.Options) failed" & vbNewLine & ex.Message, True)
         End Try
@@ -1800,7 +1801,7 @@ Public Class frmOptions
 
             My.Settings.XULRunnerPath = Me.txtXULrunnerPath.Text
 
-            btnThemeSave_Click(Me, New EventArgs())
+            ThemeManager.SaveThemes(_themeList)
 
             If My.Settings.LoadConsFromCustomLocation = False Then
                 App.Runtime.SetMainFormText(App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile)
@@ -1822,8 +1823,8 @@ Public Class frmOptions
 
 #Region "Private Variables"
     Private _initialTab As Integer = 0
-    Private _themes As List(Of Config.Theme)
-    Private ReadOnly _defaultTheme As New Config.Theme
+    Private _themeList As BindingList(Of ThemeInfo)
+    Private _originalTheme As ThemeInfo
 #End Region
 
 #Region "Public Methods"
@@ -1853,9 +1854,6 @@ Public Class frmOptions
             End If
         Next
 #End If
-
-        ThemePropertyGrid.PropertySort = PropertySort.Categorized
-        ThemePropertyGrid.SelectedObject = Windows.Theme
     End Sub
 
     Private Sub ApplyLanguage()
@@ -1943,8 +1941,6 @@ Public Class frmOptions
         chkEncryptCompleteFile.Text = My.Language.strEncryptCompleteConnectionFile
         lblLanguage.Text = My.Language.strLanguage
         lblLanguageRestartRequired.Text = String.Format(My.Language.strLanguageRestartRequired, My.Application.Info.ProductName)
-
-        _defaultTheme.Name = "(Default Theme)"
     End Sub
 
     Public Shadows Sub Show(ByVal dockPanel As DockPanel, Optional ByVal initialTab As Integer = 0)
@@ -1954,8 +1950,9 @@ Public Class frmOptions
         MyBase.ShowDialog(frmMain)
     End Sub
 
-    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnCancel.Click
-        Me.Close()
+    Private Sub btnCancel_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnCancel.Click
+        ThemeManager.ActiveTheme = _originalTheme
+        Close()
     End Sub
 
     Private Sub btnOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOK.Click
@@ -2082,76 +2079,49 @@ Public Class frmOptions
         End If
     End Sub
 
-    Private Sub cboTheme_TextChanged(ByVal sender As Object, ByVal e As EventArgs) Handles cboTheme.TextChanged
-        If cboTheme.Text = "" Or cboTheme.Text = _defaultTheme.Name Then
-            btnThemeSave.Enabled = False
-            btnThemeDelete.Enabled = False
-        Else
-            btnThemeSave.Enabled = True
-            btnThemeDelete.Enabled = True
-            Windows.Theme.Name = cboTheme.Text
-        End If
+    Private Sub cboTheme_DropDown(ByVal sender As Object, ByVal e As EventArgs) Handles cboTheme.DropDown, cboTheme.LostFocus
+        If ThemeManager.ActiveTheme Is ThemeManager.DefaultTheme Then Return
+        ThemeManager.ActiveTheme.Name = cboTheme.Text
     End Sub
 
     Private Sub cboTheme_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs) Handles cboTheme.SelectionChangeCommitted ', cboTheme.SelectedIndexChanged, cboTheme.SelectedValueChanged
-        If cboTheme.SelectedItem Is Nothing OrElse cboTheme.SelectedItem Is _defaultTheme Then
-            btnThemeSave.Enabled = False
+        If cboTheme.SelectedItem Is Nothing Then cboTheme.SelectedItem = ThemeManager.DefaultTheme
+
+        If cboTheme.SelectedItem Is ThemeManager.DefaultTheme Then
+            cboTheme.DropDownStyle = ComboBoxStyle.DropDownList
             btnThemeDelete.Enabled = False
+            ThemePropertyGrid.Enabled = False
         Else
-            btnThemeSave.Enabled = True
+            cboTheme.DropDownStyle = ComboBoxStyle.DropDown
             btnThemeDelete.Enabled = True
+            ThemePropertyGrid.Enabled = True
         End If
-        If cboTheme.SelectedItem Is Nothing Then Return
-        Windows.Theme.FromTheme(cboTheme.SelectedItem)
+
+        ThemeManager.ActiveTheme = cboTheme.SelectedItem
+        ThemePropertyGrid.SelectedObject = ThemeManager.ActiveTheme
         ThemePropertyGrid.Refresh()
     End Sub
 
-    Private Sub ThemePropertyGrid_Enter(ByVal sender As Object, ByVal e As EventArgs) Handles ThemePropertyGrid.Enter
-        If cboTheme.SelectedItem Is _defaultTheme Then
-            Dim newTheme As New Config.Theme
-            btnThemeSave.Enabled = True
-            btnThemeDelete.Enabled = True
-            cboTheme.Text = ""
-            Windows.Theme.FromTheme(newTheme)
-            ThemePropertyGrid.Refresh()
-        End If
-    End Sub
+    Private Sub btnThemeNew_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnThemeNew.Click
+        Dim newTheme As ThemeInfo = ThemeManager.ActiveTheme.Clone()
+        newTheme.Name = "Unnamed Theme"
 
-    Private Sub btnThemeSave_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnThemeSave.Click
-        If cboTheme.SelectedItem Is _defaultTheme Then Return
-        If cboTheme.Text = "" Then
-            cboTheme.Focus()
-            Return
-        End If
+        _themeList.Add(newTheme)
 
-        Dim found As Boolean = False
-        For Each theme As Config.Theme In _themes
-            If Not theme.Name = cboTheme.Text Then Continue For
+        cboTheme.SelectedItem = newTheme
+        cboTheme_SelectionChangeCommitted(Me, New EventArgs())
 
-            theme.FromTheme(Windows.Theme)
-            found = True
-            Exit For
-        Next
-
-        If Not found Then
-            Dim newTheme As New Config.Theme
-            newTheme.FromTheme(Windows.Theme)
-            newTheme.Name = cboTheme.Text
-            _themes.Add(newTheme)
-            cboTheme.Items.Add(newTheme)
-        End If
-
-        Config.ThemeSerializer.SaveToXmlFile(_themes, Path.Combine(App.Info.Settings.SettingsPath, App.Info.Settings.ThemesFileName))
+        cboTheme.Focus()
     End Sub
 
     Private Sub btnThemeDelete_Click(sender As System.Object, e As EventArgs) Handles btnThemeDelete.Click
-        Dim theme As Config.Theme = cboTheme.SelectedItem
-        If theme Is Nothing OrElse Not cboTheme.Text = theme.Name Then Return
-        cboTheme.Focus()
-        cboTheme.Items.Remove(theme)
-        cboTheme.SelectedItem = cboTheme.Items.Item(0)
+        Dim theme As ThemeInfo = cboTheme.SelectedItem
+        If theme Is Nothing Then Return
+
+        _themeList.Remove(theme)
+
+        cboTheme.SelectedItem = ThemeManager.DefaultTheme
         cboTheme_SelectionChangeCommitted(Me, New EventArgs())
-        _themes.Remove(theme)
     End Sub
 #End Region
 End Class

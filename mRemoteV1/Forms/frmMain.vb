@@ -7,6 +7,7 @@ Imports Crownwood
 Imports mRemoteNG.App.Native
 Imports PSTaskDialog
 Imports mRemoteNG.Config
+Imports mRemoteNG.Themes
 
 Public Class frmMain
     Private _previousWindowState As FormWindowState
@@ -36,6 +37,14 @@ Public Class frmMain
 
         Startup.CreateLogger()
 
+        Try
+            ThemeManager.LoadThemes()
+            ThemeManager.ActiveTheme = ThemeManager.DefaultTheme
+            AddHandler ThemeManager.ThemeChanged, AddressOf ApplyThemes
+        Catch ex As Exception
+            Debug.Print(ex.Message)
+        End Try
+
         ' Create gui config load and save objects
         Dim SettingsLoad As New Config.Settings.Load(Me)
 
@@ -47,14 +56,7 @@ Public Class frmMain
         Startup.ParseCommandLineArgs()
 
         ApplyLanguage()
-
-        Try
-            AddHandler Windows.Theme.ThemeChanged, AddressOf ApplyThemes
-            Dim themes As List(Of Theme) = ThemeSerializer.LoadFromXmlFile(Path.Combine(App.Info.Settings.SettingsPath, App.Info.Settings.ThemesFileName))
-            If themes.Count Then Windows.Theme.FromTheme(themes(0))
-        Catch ex As Exception
-            Debug.Print(ex.Message)
-        End Try
+        ApplyThemes()
 
         fpChainedWindowHandle = SetClipboardViewer(Me.Handle)
 
@@ -177,36 +179,36 @@ Public Class frmMain
     End Sub
 
     Public Sub ApplyThemes()
-        With Windows.Theme
-            pnlDock.DockBackColor = .WindowBackground
-            tsContainer.BackColor = .ToolbarBackground
-            tsContainer.ForeColor = .ToolbarText
-            tsContainer.TopToolStripPanel.BackColor = .ToolbarBackground
-            tsContainer.TopToolStripPanel.ForeColor = .ToolbarText
-            tsContainer.BottomToolStripPanel.BackColor = .ToolbarBackground
-            tsContainer.BottomToolStripPanel.ForeColor = .ToolbarText
-            tsContainer.LeftToolStripPanel.BackColor = .ToolbarBackground
-            tsContainer.LeftToolStripPanel.ForeColor = .ToolbarText
-            tsContainer.RightToolStripPanel.BackColor = .ToolbarBackground
-            tsContainer.RightToolStripPanel.ForeColor = .ToolbarText
-            tsContainer.ContentPanel.BackColor = .ToolbarBackground
-            tsContainer.ContentPanel.ForeColor = .ToolbarText
-            msMain.BackColor = .ToolbarBackground
-            msMain.ForeColor = .ToolbarText
+        With ThemeManager.ActiveTheme
+            pnlDock.DockBackColor = .WindowBackgroundColor
+            tsContainer.BackColor = .ToolbarBackgroundColor
+            tsContainer.ForeColor = .ToolbarTextColor
+            tsContainer.TopToolStripPanel.BackColor = .ToolbarBackgroundColor
+            tsContainer.TopToolStripPanel.ForeColor = .ToolbarTextColor
+            tsContainer.BottomToolStripPanel.BackColor = .ToolbarBackgroundColor
+            tsContainer.BottomToolStripPanel.ForeColor = .ToolbarTextColor
+            tsContainer.LeftToolStripPanel.BackColor = .ToolbarBackgroundColor
+            tsContainer.LeftToolStripPanel.ForeColor = .ToolbarTextColor
+            tsContainer.RightToolStripPanel.BackColor = .ToolbarBackgroundColor
+            tsContainer.RightToolStripPanel.ForeColor = .ToolbarTextColor
+            tsContainer.ContentPanel.BackColor = .ToolbarBackgroundColor
+            tsContainer.ContentPanel.ForeColor = .ToolbarTextColor
+            msMain.BackColor = .ToolbarBackgroundColor
+            msMain.ForeColor = .ToolbarTextColor
             ApplyMenuColors(msMain.Items)
-            tsExternalTools.BackColor = .ToolbarBackground
-            tsExternalTools.ForeColor = .ToolbarText
-            tsQuickConnect.BackColor = .ToolbarBackground
-            tsQuickConnect.ForeColor = .ToolbarText
+            tsExternalTools.BackColor = .ToolbarBackgroundColor
+            tsExternalTools.ForeColor = .ToolbarTextColor
+            tsQuickConnect.BackColor = .ToolbarBackgroundColor
+            tsQuickConnect.ForeColor = .ToolbarTextColor
         End With
     End Sub
 
     Private Sub ApplyMenuColors(itemCollection As ToolStripItemCollection)
-        With Windows.Theme
+        With ThemeManager.ActiveTheme
             Dim menuItem As ToolStripMenuItem
             For Each item As ToolStripItem In itemCollection
-                item.BackColor = .MenuBackground
-                item.ForeColor = .MenuText
+                item.BackColor = .MenuBackgroundColor
+                item.ForeColor = .MenuTextColor
 
                 menuItem = TryCast(item, ToolStripMenuItem)
                 If menuItem IsNot Nothing Then

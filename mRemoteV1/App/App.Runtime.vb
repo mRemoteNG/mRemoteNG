@@ -261,8 +261,6 @@ Namespace App
             Public Shared AnnouncementForm As UI.Window.Announcement
             Public Shared AnnouncementPanel As New DockContent
 
-            Public Shared Property Theme As New Config.Theme
-
             Public Shared Sub Show(ByVal windowType As UI.Window.Type, Optional ByVal portScanMode As PortScan.PortScanMode = PortScan.PortScanMode.Normal)
                 Try
                     Select Case windowType

@@ -489,15 +489,15 @@ Namespace UI
             End Sub
 
             Private Sub ApplyTheme()
-                With Windows.Theme
-                    pGrid.BackColor = .ToolbarBackground
-                    pGrid.ForeColor = .ToolbarText
-                    pGrid.ViewBackColor = .ConfigPanelBackground
-                    pGrid.ViewForeColor = .ConfigPanelText
-                    pGrid.LineColor = .ConfigPanelGridLines
-                    pGrid.HelpBackColor = .ConfigPanelHelpBackground
-                    pGrid.HelpForeColor = .ConfigPanelHelpText
-                    pGrid.CategoryForeColor = .ConfigPanelCategoryText
+                With Themes.ThemeManager.ActiveTheme
+                    pGrid.BackColor = .ToolbarBackgroundColor
+                    pGrid.ForeColor = .ToolbarTextColor
+                    pGrid.ViewBackColor = .ConfigPanelBackgroundColor
+                    pGrid.ViewForeColor = .ConfigPanelTextColor
+                    pGrid.LineColor = .ConfigPanelGridLineColor
+                    pGrid.HelpBackColor = .ConfigPanelHelpBackgroundColor
+                    pGrid.HelpForeColor = .ConfigPanelHelpTextColor
+                    pGrid.CategoryForeColor = .ConfigPanelCategoryTextColor
                 End With
             End Sub
 
@@ -554,7 +554,7 @@ Namespace UI
             Private Sub Config_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
                 ApplyLanguage()
 
-                AddHandler Windows.Theme.ThemeChanged, AddressOf ApplyTheme
+                AddHandler Themes.ThemeManager.ThemeChanged, AddressOf ApplyTheme
                 ApplyTheme()
 
                 AddToolStripItems()
