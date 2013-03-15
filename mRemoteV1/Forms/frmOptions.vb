@@ -1865,6 +1865,7 @@ Public Class frmOptions
         lvPages.Items(4).Text = My.Language.strSQLServer
         lvPages.Items(5).Text = My.Language.strTabUpdates
         lvPages.Items(6).Text = My.Language.strTabAdvanced
+        lvPages.Items(7).Text = Language.strOptionsTabTheme
 #If Not PORTABLE Then
         lblUpdatesExplanation.Text = My.Language.strUpdateCheck
 #Else
@@ -1942,6 +1943,8 @@ Public Class frmOptions
         chkEncryptCompleteFile.Text = My.Language.strEncryptCompleteConnectionFile
         lblLanguage.Text = My.Language.strLanguage
         lblLanguageRestartRequired.Text = String.Format(My.Language.strLanguageRestartRequired, My.Application.Info.ProductName)
+        btnThemeDelete.Text = Language.strOptionsThemeButtonDelete
+        btnThemeNew.Text = Language.strOptionsThemeButtonNew
     End Sub
 
     Public Shadows Sub Show(ByVal dockPanel As DockPanel, Optional ByVal initialTab As Integer = 0)
@@ -2105,7 +2108,7 @@ Public Class frmOptions
 
     Private Sub btnThemeNew_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnThemeNew.Click
         Dim newTheme As ThemeInfo = ThemeManager.ActiveTheme.Clone()
-        newTheme.Name = "Unnamed Theme"
+        newTheme.Name = Language.strUnnamedTheme
 
         _themeList.Add(newTheme)
 

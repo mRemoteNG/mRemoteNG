@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports mRemoteNG.Tools.LocalizedAttributes
 Imports mRemoteNG.My
 
 Namespace Themes
@@ -42,7 +43,7 @@ Namespace Themes
 #End Region
 
 #Region "Properties"
-        Private _name As String = "Unnamed Theme"
+        Private _name As String = Language.strUnnamedTheme
         <Browsable(False)> _
         Public Property Name As String
             Get
@@ -57,9 +58,9 @@ Namespace Themes
 
 #Region "General"
         Private _windowBackgroundColor As Color = SystemColors.AppWorkspace
-        <Category(vbTab & "General"), _
-            DisplayNameAttribute("Window Background Color"), _
-            DescriptionAttribute("Description")> _
+        <LocalizedCategory("strThemeCategoryGeneral", 1), _
+            LocalizedDisplayName("strThemeNameWindowBackgroundColor"), _
+            LocalizedDescription("strThemeDescriptionWindowBackgroundColor")> _
         Public Property WindowBackgroundColor() As Color
             Get
                 Return (_windowBackgroundColor)
@@ -72,10 +73,10 @@ Namespace Themes
         End Property
 
         Private _menuBackgroundColor As Color = SystemColors.Control
-        <Category(vbTab & "General"),
+        <LocalizedCategory("strThemeCategoryGeneral", 1), _
             Browsable(False),
-            DisplayNameAttribute("Menu Background Color"),
-            DescriptionAttribute("Description")>
+            LocalizedDisplayName("strThemeNameMenuBackgroundColor"),
+            LocalizedDescription("strThemeDescriptionMenuBackgroundColor")>
         Public Property MenuBackgroundColor() As Color
             Get
                 Return _menuBackgroundColor
@@ -88,10 +89,10 @@ Namespace Themes
         End Property
 
         Private _menuTextColor As Color = SystemColors.ControlText
-        <Category(vbTab & "General"),
+        <LocalizedCategory("strThemeCategoryGeneral", 1), _
             Browsable(False),
-            DisplayNameAttribute("Menu Text Color"),
-            DescriptionAttribute("Description")>
+            LocalizedDisplayName("strThemeNameMenuTextColor"),
+            LocalizedDescription("strThemeDescriptionMenuTextColor")>
         Public Property MenuTextColor() As Color
             Get
                 Return _menuTextColor
@@ -104,10 +105,10 @@ Namespace Themes
         End Property
 
         Private _toolbarBackgroundColor As Color = SystemColors.Control
-        <Category(vbTab & "General"), _
+        <LocalizedCategory("strThemeCategoryGeneral", 1), _
             Browsable(False), _
-            DisplayNameAttribute("Toolbar Background Color"), _
-            DescriptionAttribute("Description")> _
+            LocalizedDisplayName("strThemeNameToolbarBackgroundColor"), _
+            LocalizedDescription("strThemeDescriptionToolbarBackgroundColor")> _
         Public Property ToolbarBackgroundColor() As Color
             Get
                 Return _toolbarBackgroundColor
@@ -120,10 +121,10 @@ Namespace Themes
         End Property
 
         Private _toolbarTextColor As Color = SystemColors.ControlText
-        <Category(vbTab & "General"), _
+        <LocalizedCategory("strThemeCategoryGeneral", 1), _
             Browsable(False), _
-            DisplayNameAttribute("Toolbar Text Color"), _
-            DescriptionAttribute("Description")> _
+            LocalizedDisplayName("strThemeNameToolbarTextColor"), _
+            LocalizedDescription("strThemeDescriptionToolbarTextColor")> _
         Public Property ToolbarTextColor() As Color
             Get
                 Return _toolbarTextColor
@@ -138,9 +139,9 @@ Namespace Themes
 
 #Region "Connections Panel"
         Private _connectionsPanelBackgroundColor As Color = SystemColors.Window
-        <Category("Connections Panel"), _
-            DisplayNameAttribute("Connections Panel Background Color"), _
-            DescriptionAttribute("Description")> _
+        <LocalizedCategory("strThemeCategoryConnectionsPanel", 2), _
+            LocalizedDisplayName("strThemeNameConnectionsPanelBackgroundColor"), _
+            LocalizedDescription("strThemeDescriptionConnectionsPanelBackgroundColor")> _
         Public Property ConnectionsPanelBackgroundColor() As Color
             Get
                 Return _connectionsPanelBackgroundColor
@@ -153,9 +154,9 @@ Namespace Themes
         End Property
 
         Private _connectionsPanelTextColor As Color = SystemColors.WindowText
-        <Category("Connections Panel Color"),
-            DisplayNameAttribute("Connections Panel Text"),
-            DescriptionAttribute("Description")>
+        <LocalizedCategory("strThemeCategoryConnectionsPanel", 2),
+            LocalizedDisplayName("strThemeNameConnectionsPanelTextColor"),
+            LocalizedDescription("strThemeDescriptionConnectionsPanelTextColor")>
         Public Property ConnectionsPanelTextColor() As Color
             Get
                 Return _connectionsPanelTextColor
@@ -168,9 +169,9 @@ Namespace Themes
         End Property
 
         Private _connectionsPanelTreeLineColor As Color = Color.Black
-        <Category("Connections Panel"),
-            DisplayNameAttribute("Connections Panel Tree Line Color"),
-            DescriptionAttribute("Description")>
+        <LocalizedCategory("strThemeCategoryConnectionsPanel", 2),
+            LocalizedDisplayName("strThemeNameConnectionsPanelTreeLineColor"),
+            LocalizedDescription("strThemeDescriptionConnectionsPanelTreeLineColor")>
         Public Property ConnectionsPanelTreeLineColor() As Color
             Get
                 Return _connectionsPanelTreeLineColor
@@ -183,9 +184,9 @@ Namespace Themes
         End Property
 
         Private _searchBoxBackgroundColor As Color = SystemColors.Window
-        <Category("Connections Panel"), _
-            DisplayNameAttribute("Search Box Background Color"), _
-            DescriptionAttribute("Description")> _
+        <LocalizedCategory("strThemeCategoryConnectionsPanel", 2), _
+            LocalizedDisplayName("strThemeNameSearchBoxBackgroundColor"), _
+            LocalizedDescription("strThemeDescriptionSearchBoxBackgroundColor")> _
         Public Property SearchBoxBackgroundColor() As Color
             Get
                 Return _searchBoxBackgroundColor
@@ -198,9 +199,9 @@ Namespace Themes
         End Property
 
         Private _searchBoxTextPromptColor As Color = SystemColors.GrayText
-        <Category("Connections Panel"), _
-            DisplayNameAttribute("Search Box Text Prompt Color"), _
-            DescriptionAttribute("Description")> _
+        <LocalizedCategory("strThemeCategoryConnectionsPanel", 2), _
+            LocalizedDisplayName("strThemeNameSearchBoxTextPromptColor"), _
+            LocalizedDescription("strThemeDescriptionSearchBoxTextPromptColor")> _
         Public Property SearchBoxTextPromptColor() As Color
             Get
                 Return _searchBoxTextPromptColor
@@ -213,9 +214,9 @@ Namespace Themes
         End Property
 
         Private _searchBoxTextColor As Color = SystemColors.WindowText
-        <Category("Connections Panel"), _
-            DisplayNameAttribute("Search Box Text Color"), _
-            DescriptionAttribute("Description")> _
+        <LocalizedCategory("strThemeCategoryConnectionsPanel", 2), _
+            LocalizedDisplayName("strThemeNameSearchBoxTextColor"), _
+            LocalizedDescription("strThemeDescriptionSearchBoxTextColor")> _
         Public Property SearchBoxTextColor() As Color
             Get
                 Return _searchBoxTextColor
@@ -230,9 +231,9 @@ Namespace Themes
 
 #Region "Config Panel"
         Private _configPanelBackgroundColor As Color = SystemColors.Window
-        <Category("Config Panel"), _
-            DisplayNameAttribute("Config Panel Background Color"), _
-            DescriptionAttribute("Description")> _
+        <LocalizedCategory("strThemeCategoryConfigPanel", 3), _
+            LocalizedDisplayName("strThemeNameConfigPanelBackgroundColor"), _
+            LocalizedDescription("strThemeDescriptionConfigPanelBackgroundColor")> _
         Public Property ConfigPanelBackgroundColor() As Color
             Get
                 Return _configPanelBackgroundColor
@@ -245,9 +246,9 @@ Namespace Themes
         End Property
 
         Private _configPanelTextColor As Color = SystemColors.WindowText
-        <Category("Config Panel"), _
-            DisplayNameAttribute("Config Panel Text Color"), _
-            DescriptionAttribute("Description")> _
+        <LocalizedCategory("strThemeCategoryConfigPanel", 3), _
+            LocalizedDisplayName("strThemeNameConfigPanelTextColor"), _
+            LocalizedDescription("strThemeDescriptionConfigPanelTextColor")> _
         Public Property ConfigPanelTextColor() As Color
             Get
                 Return _configPanelTextColor
@@ -260,9 +261,9 @@ Namespace Themes
         End Property
 
         Private _configPanelCategoryTextColor As Color = SystemColors.ControlText
-        <Category("Config Panel"), _
-            DisplayNameAttribute("Config Panel Category Text Color"), _
-            DescriptionAttribute("Description")> _
+        <LocalizedCategory("strThemeCategoryConfigPanel", 3), _
+            LocalizedDisplayName("strThemeNameConfigPanelCategoryTextColor"), _
+            LocalizedDescription("strThemeDescriptionConfigPanelCategoryTextColor")> _
         Public Property ConfigPanelCategoryTextColor() As Color
             Get
                 Return _configPanelCategoryTextColor
@@ -275,9 +276,9 @@ Namespace Themes
         End Property
 
         Private _configPanelHelpBackgroundColor As Color = SystemColors.Control
-        <Category("Config Panel"), _
-            DisplayNameAttribute("Config Panel Help Background Color"), _
-            DescriptionAttribute("Description")> _
+        <LocalizedCategory("strThemeCategoryConfigPanel", 3), _
+            LocalizedDisplayName("strThemeNameConfigPanelHelpBackgroundColor"), _
+            LocalizedDescription("strThemeDescriptionConfigPanelHelpBackgroundColor")> _
         Public Property ConfigPanelHelpBackgroundColor() As Color
             Get
                 Return _configPanelHelpBackgroundColor
@@ -290,9 +291,9 @@ Namespace Themes
         End Property
 
         Private _configPanelHelpTextColor As Color = SystemColors.ControlText
-        <Category("Config Panel"), _
-            DisplayNameAttribute("Config Panel Help Text Color"), _
-            DescriptionAttribute("Description")> _
+        <LocalizedCategory("strThemeCategoryConfigPanel", 3), _
+            LocalizedDisplayName("strThemeNameConfigPanelHelpTextColor"), _
+            LocalizedDescription("strThemeDescriptionConfigPanelHelpTextColor")> _
         Public Property ConfigPanelHelpTextColor() As Color
             Get
                 Return _configPanelHelpTextColor
@@ -305,9 +306,9 @@ Namespace Themes
         End Property
 
         Private _configPanelGridLineColor As Color = SystemColors.InactiveBorder
-        <Category("Config Panel"), _
-            DisplayNameAttribute("Config Panel Grid Line Color"), _
-            DescriptionAttribute("Description")> _
+        <LocalizedCategory("strThemeCategoryConfigPanel", 3), _
+            LocalizedDisplayName("strThemeNameConfigPanelGridLineColor"), _
+            LocalizedDescription("strThemeDescriptionConfigPanelGridLineColor")> _
         Public Property ConfigPanelGridLineColor() As Color
             Get
                 Return _configPanelGridLineColor

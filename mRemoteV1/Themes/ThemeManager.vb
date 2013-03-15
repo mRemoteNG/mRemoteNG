@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.ComponentModel
+Imports mRemoteNG.My
 
 Namespace Themes
     Public Class ThemeManager
@@ -53,7 +54,7 @@ Namespace Themes
 
 #Region "Properties"
         ' ReSharper disable InconsistentNaming
-        Private Shared ReadOnly _defaultTheme As New ThemeInfo("(Default Theme)")
+        Private Shared ReadOnly _defaultTheme As New ThemeInfo(Language.strDefaultTheme)
         ' ReSharper restore InconsistentNaming
         Public Shared ReadOnly Property DefaultTheme As ThemeInfo
             Get

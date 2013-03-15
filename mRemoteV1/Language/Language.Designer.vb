@@ -1327,6 +1327,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Default Theme.
+        '''</summary>
+        Friend Shared ReadOnly Property strDefaultTheme() As String
+            Get
+                Return ResourceManager.GetString("strDefaultTheme", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Detect.
         '''</summary>
         Friend Shared ReadOnly Property strDetect() As String
@@ -3236,6 +3245,33 @@ Namespace My
         Friend Shared ReadOnly Property strOpenPorts() As String
             Get
                 Return ResourceManager.GetString("strOpenPorts", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Theme.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsTabTheme() As String
+            Get
+                Return ResourceManager.GetString("strOptionsTabTheme", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Delete.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsThemeButtonDelete() As String
+            Get
+                Return ResourceManager.GetString("strOptionsThemeButtonDelete", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;New.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsThemeButtonNew() As String
+            Get
+                Return ResourceManager.GetString("strOptionsThemeButtonNew", resourceCulture)
             End Get
         End Property
         
@@ -5457,6 +5493,339 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Config Panel.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeCategoryConfigPanel() As String
+            Get
+                Return ResourceManager.GetString("strThemeCategoryConfigPanel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Connections Panel.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeCategoryConnectionsPanel() As String
+            Get
+                Return ResourceManager.GetString("strThemeCategoryConnectionsPanel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to General.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeCategoryGeneral() As String
+            Get
+                Return ResourceManager.GetString("strThemeCategoryGeneral", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The background color of the config panel..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionConfigPanelBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionConfigPanelBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The color of the category text in the config panel..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionConfigPanelCategoryTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionConfigPanelCategoryTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The color of the grid lines in the config panel.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionConfigPanelGridLineColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionConfigPanelGridLineColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The background color of the help area of the config panel..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionConfigPanelHelpBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionConfigPanelHelpBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The color of the text in the help area of the config panel..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionConfigPanelHelpTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionConfigPanelHelpTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The color of the text in the config panel..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionConfigPanelTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionConfigPanelTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The background color of the connections panel..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionConnectionsPanelBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionConnectionsPanelBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The color of the text in the connections panel..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionConnectionsPanelTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionConnectionsPanelTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The color of the tree lines in the connections panel..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionConnectionsPanelTreeLineColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionConnectionsPanelTreeLineColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The background color of the menus..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionMenuBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionMenuBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The color of the text in the menus..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionMenuTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionMenuTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The background color of the search box..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionSearchBoxBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionSearchBoxBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The color of the text in the search box..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionSearchBoxTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionSearchBoxTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The color of the prompt text in the search box..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionSearchBoxTextPromptColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionSearchBoxTextPromptColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The background color of the toolbars..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionToolbarBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionToolbarBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The color of the text in the toolbars..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionToolbarTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionToolbarTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The background color of the main window..
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeDescriptionWindowBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeDescriptionWindowBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Config Panel Background Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameConfigPanelBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameConfigPanelBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Config Panel Category Text Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameConfigPanelCategoryTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameConfigPanelCategoryTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Config Panel Grid Line Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameConfigPanelGridLineColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameConfigPanelGridLineColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Config Panel Help Background Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameConfigPanelHelpBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameConfigPanelHelpBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Config Panel Help Text Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameConfigPanelHelpTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameConfigPanelHelpTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Config Panel Text Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameConfigPanelTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameConfigPanelTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Connections Panel Background Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameConnectionsPanelBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameConnectionsPanelBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Connections Panel Text Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameConnectionsPanelTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameConnectionsPanelTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Connections Panel Tree Line Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameConnectionsPanelTreeLineColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameConnectionsPanelTreeLineColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Menu Background Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameMenuBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameMenuBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Menu Text Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameMenuTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameMenuTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Search Box Background Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameSearchBoxBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameSearchBoxBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Search Box Text Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameSearchBoxTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameSearchBoxTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Search Box Text Prompt Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameSearchBoxTextPromptColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameSearchBoxTextPromptColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Toolbar Background Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameToolbarBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameToolbarBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Toolbar Text Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameToolbarTextColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameToolbarTextColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Window Background Color.
+        '''</summary>
+        Friend Shared ReadOnly Property strThemeNameWindowBackgroundColor() As String
+            Get
+                Return ResourceManager.GetString("strThemeNameWindowBackgroundColor", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Error ({0}).
         '''</summary>
         Friend Shared ReadOnly Property strTitleError() As String
@@ -5561,6 +5930,15 @@ Namespace My
         Friend Shared ReadOnly Property strUncheckProperties() As String
             Get
                 Return ResourceManager.GetString("strUncheckProperties", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Unnamed Theme.
+        '''</summary>
+        Friend Shared ReadOnly Property strUnnamedTheme() As String
+            Get
+                Return ResourceManager.GetString("strUnnamedTheme", resourceCulture)
             End Get
         End Property
         
