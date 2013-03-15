@@ -16,6 +16,22 @@ Namespace Themes
         Public Overrides Function ToString() As String
             Return Name
         End Function
+
+        Public Overrides Function Equals(obj As Object) As Boolean
+            Dim otherTheme As ThemeInfo = TryCast(obj, ThemeInfo)
+            If otherTheme Is Nothing Then Return False
+
+            Dim themeInfoType As Type = (New ThemeInfo).GetType()
+            Dim myProperty As Object
+            Dim otherProperty As Object
+            For Each propertyInfo As Reflection.PropertyInfo In themeInfoType.GetProperties()
+                myProperty = propertyInfo.GetValue(Me, Nothing)
+                otherProperty = propertyInfo.GetValue(otherTheme, Nothing)
+                If Not myProperty.Equals(otherProperty) Then Return False
+            Next
+
+            Return True
+        End Function
 #End Region
 
 #Region "Events"

@@ -37,14 +37,6 @@ Public Class frmMain
 
         Startup.CreateLogger()
 
-        Try
-            ThemeManager.LoadThemes()
-            ThemeManager.ActiveTheme = ThemeManager.DefaultTheme
-            AddHandler ThemeManager.ThemeChanged, AddressOf ApplyThemes
-        Catch ex As Exception
-            Debug.Print(ex.Message)
-        End Try
-
         ' Create gui config load and save objects
         Dim SettingsLoad As New Config.Settings.Load(Me)
 
@@ -56,6 +48,8 @@ Public Class frmMain
         Startup.ParseCommandLineArgs()
 
         ApplyLanguage()
+
+        AddHandler ThemeManager.ThemeChanged, AddressOf ApplyThemes
         ApplyThemes()
 
         fpChainedWindowHandle = SetClipboardViewer(Me.Handle)

@@ -4,6 +4,22 @@ Imports System.ComponentModel
 Namespace Themes
     Public Class ThemeManager
 #Region "Public Methods"
+        Public Shared Function LoadTheme(ByVal themeName As String, Optional ByVal setActive As Boolean = True) As ThemeInfo
+            Dim loadedTheme As ThemeInfo = DefaultTheme
+
+            If Not String.IsNullOrEmpty(themeName) Then
+                For Each theme As ThemeInfo In LoadThemes()
+                    If theme.Name = themeName Then
+                        loadedTheme = theme
+                        Exit For
+                    End If
+                Next
+            End If
+
+            If setActive Then ActiveTheme = loadedTheme
+            Return loadedTheme
+        End Function
+
         Public Shared Function LoadThemes() As List(Of ThemeInfo)
             Dim themes As New List(Of ThemeInfo)
             themes.Add(DefaultTheme)

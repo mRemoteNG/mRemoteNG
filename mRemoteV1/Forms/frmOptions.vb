@@ -1802,6 +1802,7 @@ Public Class frmOptions
             My.Settings.XULRunnerPath = Me.txtXULrunnerPath.Text
 
             ThemeManager.SaveThemes(_themeList)
+            Settings.ThemeName = ThemeManager.ActiveTheme.Name
 
             If My.Settings.LoadConsFromCustomLocation = False Then
                 App.Runtime.SetMainFormText(App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile)

@@ -530,5 +530,8 @@
     <Setting Name="UpdateChannel" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="Application">
       <Value Profile="(Default)">release</Value>
     </Setting>
+    <Setting Name="ThemeName" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
   </Settings>
 </SettingsFile>

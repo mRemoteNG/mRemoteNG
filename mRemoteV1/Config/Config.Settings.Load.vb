@@ -44,6 +44,8 @@ Namespace Config
                             log.InfoFormat("Override Culture: {0}/{1}", Threading.Thread.CurrentThread.CurrentUICulture.Name, Threading.Thread.CurrentThread.CurrentUICulture.NativeName)
                         End If
 
+                        Themes.ThemeManager.LoadTheme(My.Settings.ThemeName)
+
                         .WindowState = FormWindowState.Normal
                         If My.Settings.MainFormState = FormWindowState.Normal Then
                             If Not My.Settings.MainFormLocation.IsEmpty Then .Location = My.Settings.MainFormLocation
