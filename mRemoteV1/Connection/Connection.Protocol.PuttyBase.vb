@@ -157,9 +157,6 @@ Namespace Connection
                         End If
 
                         .Arguments = arguments.ToString
-
-                        'REMOVE IN RELEASE!
-                        MessageCollector.AddMessage(MessageClass.InformationMsg, "PuTTY Arguments: " & .Arguments, True)
                     End With
 
                     PuttyProcess.EnableRaisingEvents = True
