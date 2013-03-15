@@ -5520,7 +5520,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The background color of the config panel..
+        '''  Looks up a localized string similar to The background colour of the config panel..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionConfigPanelBackgroundColor() As String
             Get
@@ -5529,7 +5529,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The color of the category text in the config panel..
+        '''  Looks up a localized string similar to The colour of the category text in the config panel..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionConfigPanelCategoryTextColor() As String
             Get
@@ -5538,7 +5538,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The color of the grid lines in the config panel.
+        '''  Looks up a localized string similar to The colour of the grid lines in the config panel.
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionConfigPanelGridLineColor() As String
             Get
@@ -5547,7 +5547,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The background color of the help area of the config panel..
+        '''  Looks up a localized string similar to The background colour of the help area of the config panel..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionConfigPanelHelpBackgroundColor() As String
             Get
@@ -5556,7 +5556,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The color of the text in the help area of the config panel..
+        '''  Looks up a localized string similar to The colour of the text in the help area of the config panel..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionConfigPanelHelpTextColor() As String
             Get
@@ -5565,7 +5565,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The color of the text in the config panel..
+        '''  Looks up a localized string similar to The colour of the text in the config panel..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionConfigPanelTextColor() As String
             Get
@@ -5574,7 +5574,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The background color of the connections panel..
+        '''  Looks up a localized string similar to The background colour of the connections panel..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionConnectionsPanelBackgroundColor() As String
             Get
@@ -5583,7 +5583,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The color of the text in the connections panel..
+        '''  Looks up a localized string similar to The colour of the text in the connections panel..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionConnectionsPanelTextColor() As String
             Get
@@ -5592,7 +5592,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The color of the tree lines in the connections panel..
+        '''  Looks up a localized string similar to The colour of the tree lines in the connections panel..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionConnectionsPanelTreeLineColor() As String
             Get
@@ -5601,7 +5601,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The background color of the menus..
+        '''  Looks up a localized string similar to The background colour of the menus..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionMenuBackgroundColor() As String
             Get
@@ -5610,7 +5610,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The color of the text in the menus..
+        '''  Looks up a localized string similar to The colour of the text in the menus..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionMenuTextColor() As String
             Get
@@ -5619,7 +5619,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The background color of the search box..
+        '''  Looks up a localized string similar to The background colour of the search box..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionSearchBoxBackgroundColor() As String
             Get
@@ -5628,7 +5628,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The color of the text in the search box..
+        '''  Looks up a localized string similar to The colour of the text in the search box..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionSearchBoxTextColor() As String
             Get
@@ -5637,7 +5637,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The color of the prompt text in the search box..
+        '''  Looks up a localized string similar to The colour of the prompt text in the search box..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionSearchBoxTextPromptColor() As String
             Get
@@ -5646,7 +5646,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The background color of the toolbars..
+        '''  Looks up a localized string similar to The background colour of the toolbars..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionToolbarBackgroundColor() As String
             Get
@@ -5655,7 +5655,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The color of the text in the toolbars..
+        '''  Looks up a localized string similar to The colour of the text in the toolbars..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionToolbarTextColor() As String
             Get
@@ -5664,7 +5664,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The background color of the main window..
+        '''  Looks up a localized string similar to The background colour of the main window..
         '''</summary>
         Friend Shared ReadOnly Property strThemeDescriptionWindowBackgroundColor() As String
             Get
@@ -5673,7 +5673,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Config Panel Background Color.
+        '''  Looks up a localized string similar to Config Panel Background Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameConfigPanelBackgroundColor() As String
             Get
@@ -5682,7 +5682,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Config Panel Category Text Color.
+        '''  Looks up a localized string similar to Config Panel Category Text Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameConfigPanelCategoryTextColor() As String
             Get
@@ -5691,7 +5691,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Config Panel Grid Line Color.
+        '''  Looks up a localized string similar to Config Panel Grid Line Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameConfigPanelGridLineColor() As String
             Get
@@ -5700,7 +5700,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Config Panel Help Background Color.
+        '''  Looks up a localized string similar to Config Panel Help Background Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameConfigPanelHelpBackgroundColor() As String
             Get
@@ -5709,7 +5709,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Config Panel Help Text Color.
+        '''  Looks up a localized string similar to Config Panel Help Text Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameConfigPanelHelpTextColor() As String
             Get
@@ -5718,7 +5718,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Config Panel Text Color.
+        '''  Looks up a localized string similar to Config Panel Text Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameConfigPanelTextColor() As String
             Get
@@ -5727,7 +5727,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Connections Panel Background Color.
+        '''  Looks up a localized string similar to Connections Panel Background Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameConnectionsPanelBackgroundColor() As String
             Get
@@ -5736,7 +5736,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Connections Panel Text Color.
+        '''  Looks up a localized string similar to Connections Panel Text Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameConnectionsPanelTextColor() As String
             Get
@@ -5745,7 +5745,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Connections Panel Tree Line Color.
+        '''  Looks up a localized string similar to Connections Panel Tree Line Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameConnectionsPanelTreeLineColor() As String
             Get
@@ -5754,7 +5754,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Menu Background Color.
+        '''  Looks up a localized string similar to Menu Background Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameMenuBackgroundColor() As String
             Get
@@ -5763,7 +5763,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Menu Text Color.
+        '''  Looks up a localized string similar to Menu Text Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameMenuTextColor() As String
             Get
@@ -5772,7 +5772,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Search Box Background Color.
+        '''  Looks up a localized string similar to Search Box Background Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameSearchBoxBackgroundColor() As String
             Get
@@ -5781,7 +5781,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Search Box Text Color.
+        '''  Looks up a localized string similar to Search Box Text Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameSearchBoxTextColor() As String
             Get
@@ -5790,7 +5790,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Search Box Text Prompt Color.
+        '''  Looks up a localized string similar to Search Box Text Prompt Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameSearchBoxTextPromptColor() As String
             Get
@@ -5799,7 +5799,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Toolbar Background Color.
+        '''  Looks up a localized string similar to Toolbar Background Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameToolbarBackgroundColor() As String
             Get
@@ -5808,7 +5808,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Toolbar Text Color.
+        '''  Looks up a localized string similar to Toolbar Text Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameToolbarTextColor() As String
             Get
@@ -5817,7 +5817,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Window Background Color.
+        '''  Looks up a localized string similar to Window Background Colour.
         '''</summary>
         Friend Shared ReadOnly Property strThemeNameWindowBackgroundColor() As String
             Get
