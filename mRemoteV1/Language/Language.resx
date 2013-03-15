@@ -2211,4 +2211,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
     <value>Window Background Colour</value>
   </data>
+  <data name="strMenuShowHelpText" xml:space="preserve">
+    <value>&amp;Show Help Text</value>
+  </data>
 </root>

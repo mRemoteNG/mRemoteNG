@@ -2969,6 +2969,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to &amp;Show Help Text.
+        '''</summary>
+        Friend Shared ReadOnly Property strMenuShowHelpText() As String
+            Get
+                Return ResourceManager.GetString("strMenuShowHelpText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Show Text.
         '''</summary>
         Friend Shared ReadOnly Property strMenuShowText() As String

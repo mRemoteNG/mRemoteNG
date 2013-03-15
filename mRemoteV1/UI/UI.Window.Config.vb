@@ -18,6 +18,8 @@ Namespace UI
             Friend WithEvents btnHostStatus As System.Windows.Forms.ToolStripButton
             Friend WithEvents cMenIcons As System.Windows.Forms.ContextMenuStrip
             Private components As System.ComponentModel.IContainer
+            Friend WithEvents propertyGridContextMenu As System.Windows.Forms.ContextMenuStrip
+            Friend WithEvents propertyGridContextMenuShowHelpText As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents pGrid As Azuria.Common.Controls.FilteredPropertyGrid
             Private Sub InitializeComponent()
                 Me.components = New System.ComponentModel.Container()
@@ -29,6 +31,9 @@ Namespace UI
                 Me.btnIcon = New System.Windows.Forms.ToolStripButton()
                 Me.btnHostStatus = New System.Windows.Forms.ToolStripButton()
                 Me.cMenIcons = New System.Windows.Forms.ContextMenuStrip(Me.components)
+                Me.propertyGridContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+                Me.propertyGridContextMenuShowHelpText = New System.Windows.Forms.ToolStripMenuItem()
+                Me.propertyGridContextMenu.SuspendLayout()
                 Me.SuspendLayout()
                 '
                 'pGrid
@@ -37,6 +42,7 @@ Namespace UI
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pGrid.BrowsableProperties = Nothing
+                Me.pGrid.ContextMenuStrip = Me.propertyGridContextMenu
                 Me.pGrid.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.pGrid.HiddenAttributes = Nothing
                 Me.pGrid.HiddenProperties = Nothing
@@ -110,6 +116,18 @@ Namespace UI
                 Me.cMenIcons.Name = "cMenIcons"
                 Me.cMenIcons.Size = New System.Drawing.Size(61, 4)
                 '
+                'propertyGridContextMenu
+                '
+                Me.propertyGridContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.propertyGridContextMenuShowHelpText})
+                Me.propertyGridContextMenu.Name = "propertyGridContextMenu"
+                Me.propertyGridContextMenu.Size = New System.Drawing.Size(157, 26)
+                '
+                'propertyGridContextMenuShowHelpText
+                '
+                Me.propertyGridContextMenuShowHelpText.Name = "ContextMenuShowHelpText"
+                Me.propertyGridContextMenuShowHelpText.Size = New System.Drawing.Size(156, 22)
+                Me.propertyGridContextMenuShowHelpText.Text = "&Show Help Text"
+                '
                 'Config
                 '
                 Me.ClientSize = New System.Drawing.Size(226, 530)
@@ -120,6 +138,7 @@ Namespace UI
                 Me.Name = "Config"
                 Me.TabText = "Config"
                 Me.Text = "Config"
+                Me.propertyGridContextMenu.ResumeLayout(False)
                 Me.ResumeLayout(False)
 
             End Sub
@@ -486,6 +505,7 @@ Namespace UI
                 btnHostStatus.Text = My.Language.strStatus
                 Text = My.Language.strMenuConfig
                 TabText = My.Language.strMenuConfig
+                propertyGridContextMenuShowHelpText.Text = Language.strMenuShowHelpText
             End Sub
 
             Private Sub ApplyTheme()
@@ -558,6 +578,8 @@ Namespace UI
                 ApplyTheme()
 
                 AddToolStripItems()
+
+                pGrid.HelpVisible = Settings.ShowConfigHelpText
             End Sub
 
             Private Sub Config_SystemColorsChanged(sender As System.Object, e As System.EventArgs) Handles MyBase.SystemColorsChanged
@@ -1431,6 +1453,19 @@ Namespace UI
                 End Try
             End Sub
 #End Region
+
+            Private Sub propertyGridContextMenu_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles propertyGridContextMenu.Opening
+                propertyGridContextMenuShowHelpText.Checked = Settings.ShowConfigHelpText
+            End Sub
+
+            Private Sub propertyGridContextMenu_Click(sender As Object, e As EventArgs) Handles propertyGridContextMenuShowHelpText.Click
+                propertyGridContextMenuShowHelpText.Checked = Not propertyGridContextMenuShowHelpText.Checked
+            End Sub
+
+            Private Sub propertyGridContextMenu_CheckedChanged(sender As Object, e As EventArgs) Handles propertyGridContextMenuShowHelpText.CheckedChanged
+                Settings.ShowConfigHelpText = propertyGridContextMenuShowHelpText.Checked
+                pGrid.HelpVisible = propertyGridContextMenuShowHelpText.Checked
+            End Sub
         End Class
     End Namespace
 End Namespace
