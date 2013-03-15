@@ -1376,19 +1376,28 @@ Namespace UI
                 End Try
             End Sub
 
-            Private Sub IconMenu_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+            Private Sub IconMenu_Click(ByVal sender As Object, ByVal e As EventArgs)
                 Try
-                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
-                        TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).Icon = TryCast(sender, ToolStripMenuItem).Text
-                        Dim conIcon As Icon = mRemoteNG.Connection.Icon.FromString(TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).Icon)
-                        If conIcon IsNot Nothing Then
-                            Me.btnIcon.Image = conIcon.ToBitmap
-                        End If
+                    Dim connectionInfo As mRemoteNG.Connection.Info = TryCast(pGrid.SelectedObject, mRemoteNG.Connection.Info)
+                    If connectionInfo Is Nothing Then Return
 
-                        App.Runtime.SaveConnectionsBG()
-                    End If
+                    Dim selectedMenuItem As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+                    If selectedMenuItem Is Nothing Then Return
+
+                    Dim iconName As String = selectedMenuItem.Text
+                    If String.IsNullOrEmpty(iconName) Then Return
+
+                    Dim connectionIcon As Icon = mRemoteNG.Connection.Icon.FromString(iconName)
+                    If connectionIcon Is Nothing Then Return
+
+                    btnIcon.Image = connectionIcon.ToBitmap()
+
+                    connectionInfo.Icon = iconName
+                    pGrid.Refresh()
+
+                    SaveConnectionsBG()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridMenuClickFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strConfigPropertyGridMenuClickFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 #End Region
