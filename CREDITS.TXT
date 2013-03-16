@@ -13,6 +13,12 @@ Andreas Rehm
 David Vidmar
 
 
+Translators
+===========
+
+Emanuel Silva
+
+
 Included Source Code
 ====================
 
