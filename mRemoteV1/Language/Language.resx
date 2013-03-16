@@ -716,7 +716,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Couldn't create new HTTP Connection!</value>
   </data>
   <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
-    <value>Changeing HTTP Document Tile Failed!</value>
+    <value>Changing HTTP Document Tile Failed!</value>
   </data>
   <data name="strHttpGecko" xml:space="preserve">
     <value>Gecko (Firefox)</value>

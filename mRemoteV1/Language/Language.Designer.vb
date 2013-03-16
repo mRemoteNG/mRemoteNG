@@ -1835,7 +1835,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Changeing HTTP Document Tile Failed!.
+        '''  Looks up a localized string similar to Changing HTTP Document Tile Failed!.
         '''</summary>
         Friend Shared ReadOnly Property strHttpDocumentTileChangeFailed() As String
             Get
