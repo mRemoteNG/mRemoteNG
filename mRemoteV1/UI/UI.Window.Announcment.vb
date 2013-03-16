@@ -16,7 +16,6 @@ Namespace UI
                 '
                 'wBrowser
                 '
-                Me.wBrowser.AllowWebBrowserDrop = False
                 Me.wBrowser.Dock = System.Windows.Forms.DockStyle.Fill
                 Me.wBrowser.Location = New System.Drawing.Point(0, 0)
                 Me.wBrowser.MinimumSize = New System.Drawing.Size(20, 20)
@@ -54,6 +53,11 @@ Namespace UI
 
             Private Sub ApplyLanguage()
 
+            End Sub
+
+            Private Sub Announcement_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+                ' This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
+                wBrowser.AllowWebBrowserDrop = False
             End Sub
 #End Region
 

@@ -52,7 +52,6 @@ Namespace UI
                 '
                 'wbHelp
                 '
-                Me.wbHelp.AllowWebBrowserDrop = False
                 Me.wbHelp.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
                             Or System.Windows.Forms.AnchorStyles.Left) _
                             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
@@ -224,6 +223,11 @@ Namespace UI
                 Me.tvIndex.SelectedNode = Me.tvIndex.Nodes(0).Nodes(0)
             End Sub
 
+            Private Sub Help_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+                ' This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
+                wbHelp.AllowWebBrowserDrop = False
+            End Sub
+            
             Private Sub tvIndex_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles tvIndex.NodeMouseClick
                 Me.tvIndex.SelectedNode = e.Node
             End Sub

@@ -55,9 +55,9 @@ Namespace Connection
                         Dim objWebBrowser As WebBrowser = TryCast(wBrowser, WebBrowser)
                         Dim objAxWebBrowser As SHDocVw.WebBrowser = DirectCast(objWebBrowser.ActiveXInstance, SHDocVw.WebBrowser)
 
-                        objWebBrowser.AllowWebBrowserDrop = False
                         objWebBrowser.ScrollBarsEnabled = True
 
+                        AddHandler objWebBrowser.Navigated, AddressOf wBrowser_Navigated
                         AddHandler objWebBrowser.DocumentTitleChanged, AddressOf wBrowser_DocumentTitleChanged
                         AddHandler objAxWebBrowser.NewWindow3, AddressOf wBrowser_NewWindow3
                     End If
@@ -118,8 +118,14 @@ Namespace Connection
 #End Region
 
 #Region "Events"
-            Private Sub gex_CreateWindow(ByVal sender As Object, ByVal e As Skybound.Gecko.GeckoCreateWindowEventArgs)
-                e.WebBrowser = Me.wBrowser
+            Private Sub wBrowser_Navigated(sender As Object, e As System.Windows.Forms.WebBrowserNavigatedEventArgs)
+                Dim objWebBrowser As WebBrowser = TryCast(wBrowser, WebBrowser)
+                If objWebBrowser Is Nothing Then Return
+
+                ' This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
+                objWebBrowser.AllowWebBrowserDrop = False
+
+                RemoveHandler objWebBrowser.Navigated, AddressOf wBrowser_Navigated
             End Sub
 
             Private Sub wBrowser_NewWindow3(ByRef ppDisp As Object, ByRef Cancel As Boolean, ByVal dwFlags As Long, ByVal bstrUrlContext As String, ByVal bstrUrl As String)
@@ -177,6 +183,7 @@ Namespace Connection
             End Enum
 
             Private Enum NWMF
+                ' ReSharper disable InconsistentNaming
                 NWMF_UNLOADING = &H1
                 NWMF_USERINITED = &H2
                 NWMF_FIRST = &H4
@@ -191,6 +198,7 @@ Namespace Connection
                 NWMF_SUGGESTWINDOW = &H40000
                 NWMF_SUGGESTTAB = &H80000
                 NWMF_INACTIVETAB = &H100000
+                ' ReSharper restore InconsistentNaming
             End Enum
 #End Region
         End Class
