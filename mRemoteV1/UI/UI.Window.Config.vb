@@ -377,7 +377,7 @@ Namespace UI
                                 End If
                                 Me.btnShowDefaultProperties.Enabled = False
                                 Me.btnShowDefaultInheritance.Enabled = False
-                                Me.btnIcon.Enabled = True
+                                btnIcon.Enabled = True
                                 Me.btnHostStatus.Enabled = True
                             ElseIf Me.DefaultPropertiesVisible Then 'Defaults selected
                                 Me.pGrid.SelectedObject = Obj
@@ -441,17 +441,31 @@ Namespace UI
                         If conIcon IsNot Nothing Then
                             Me.btnIcon.Image = conIcon.ToBitmap
                         End If
-                    ElseIf TypeOf Obj Is mRemoteNG.Root.Info Then 'ROOT
-                        Me.PropertiesVisible = True
-                        Me.DefaultPropertiesVisible = False
-                        Me.btnShowProperties.Enabled = True
-                        Me.btnShowInheritance.Enabled = False
-                        Me.btnShowDefaultProperties.Enabled = True
-                        Me.btnShowDefaultInheritance.Enabled = True
-                        Me.btnIcon.Enabled = False
-                        Me.btnHostStatus.Enabled = False
-
-                        Me.pGrid.SelectedObject = Obj
+                    ElseIf TypeOf Obj Is Root.Info Then 'ROOT
+                        Dim rootInfo As Root.Info = CType(Obj, Root.Info)
+                        Select Case rootInfo.Type
+                            Case Root.Info.RootType.Connection
+                                PropertiesVisible = True
+                                DefaultPropertiesVisible = False
+                                btnShowProperties.Enabled = True
+                                btnShowInheritance.Enabled = False
+                                btnShowDefaultProperties.Enabled = True
+                                btnShowDefaultInheritance.Enabled = True
+                                btnIcon.Enabled = False
+                                btnHostStatus.Enabled = False
+                            Case Root.Info.RootType.Credential
+                                Throw New NotImplementedException
+                            Case Root.Info.RootType.PuttySessions
+                                PropertiesVisible = True
+                                DefaultPropertiesVisible = False
+                                btnShowProperties.Enabled = True
+                                btnShowInheritance.Enabled = False
+                                btnShowDefaultProperties.Enabled = False
+                                btnShowDefaultInheritance.Enabled = False
+                                btnIcon.Enabled = False
+                                btnHostStatus.Enabled = False
+                        End Select
+                        pGrid.SelectedObject = Obj
                     ElseIf TypeOf Obj Is mRemoteNG.Connection.Info.Inheritance Then 'INHERITANCE
                         Me.pGrid.SelectedObject = Obj
 
@@ -605,8 +619,6 @@ Namespace UI
                                 If conIcon IsNot Nothing Then
                                     Me.btnIcon.Image = conIcon.ToBitmap
                                 End If
-                            Case My.Language.strPropertyNamePuttySession
-                                mRemoteNG.Connection.PuttySession.PuttySessions = mRemoteNG.Connection.Protocol.PuttyBase.GetSessions()
                             Case My.Language.strPropertyNameAddress
                                 Me.SetHostStatus(Me.pGrid.SelectedObject)
                         End Select
@@ -616,7 +628,16 @@ Namespace UI
                         End If
                     End If
 
-                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Then
+                    If TypeOf pGrid.SelectedObject Is Root.PuttySessions.Info Then
+                        Dim puttyRootInfo As Root.PuttySessions.Info = pGrid.SelectedObject
+                        Select Case e.ChangedItem.PropertyDescriptor.Name
+                            Case "Name"
+                                puttyRootInfo.TreeNode.Text = puttyRootInfo.Name
+                                Settings.PuttySavedSessionsName = puttyRootInfo.Name
+                            Case "Panel"
+                                Settings.PuttySavedSessionsPanel = puttyRootInfo.Panel
+                        End Select
+                    ElseIf TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Then
                         Dim rInfo As mRemoteNG.Root.Info = Me.pGrid.SelectedObject
 
                         Select Case e.ChangedItem.Label
@@ -1282,8 +1303,11 @@ Namespace UI
                             strHide.Add("Hostname")
                             strHide.Add("Name")
                         End If
-                    ElseIf TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Then
-                        strHide.Add("TreeNode")
+                    ElseIf TypeOf pGrid.SelectedObject Is Root.Info Then
+                        Dim rootInfo As Root.Info = CType(pGrid.SelectedObject, Root.Info)
+                        If rootInfo.Type = Root.Info.RootType.PuttySessions Then
+                            strHide.Add("Password")
+                        End If
                     End If
 
                     Me.pGrid.HiddenProperties = strHide.ToArray
@@ -1356,7 +1380,8 @@ Namespace UI
 
             Private Sub btnIcon_Click(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles btnIcon.MouseUp
                 Try
-                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
+                    If TypeOf pGrid.SelectedObject Is mRemoteNG.Connection.Info And _
+                       Not TypeOf pGrid.SelectedObject Is mRemoteNG.Connection.PuttySession.Info Then
                         Me.cMenIcons.Items.Clear()
 
                         For Each iStr As String In mRemoteNG.Connection.Icon.Icons

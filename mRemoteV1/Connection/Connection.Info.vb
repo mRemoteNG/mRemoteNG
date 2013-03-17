@@ -13,7 +13,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameName"), _
             LocalizedDescription("strPropertyDescriptionName")> _
-        Public Property Name() As String
+        Public Overridable Property Name() As String
             Get
                 Return Me._Name
             End Get
@@ -27,7 +27,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameDescription"), _
             LocalizedDescription("strPropertyDescriptionDescription")> _
-        Public Property Description() As String
+        Public Overridable Property Description() As String
             Get
                 If Me._Inherit.Description And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -54,7 +54,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameIcon"), _
             LocalizedDescription("strPropertyDescriptionIcon")> _
-        Public Property Icon() As String
+        Public Overridable Property Icon() As String
             Get
                 If Me._Inherit.Icon And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -80,7 +80,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNamePanel"), _
             LocalizedDescription("strPropertyDescriptionPanel")> _
-            Public Property Panel() As String
+        Public Overridable Property Panel() As String
             Get
                 If Me._Inherit.Panel And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -107,7 +107,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameAddress"), _
             LocalizedDescription("strPropertyDescriptionAddress")> _
-        Public Property Hostname() As String
+        Public Overridable Property Hostname() As String
             Get
                 Return Me._Hostname.Trim()
             End Get
@@ -121,7 +121,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameUsername"), _
             LocalizedDescription("strPropertyDescriptionUsername")> _
-        Public Property Username() As String
+        Public Overridable Property Username() As String
             Get
                 If Me._Inherit.Username And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -148,7 +148,7 @@ Namespace Connection
             LocalizedDisplayName("strPropertyNamePassword"), _
             LocalizedDescription("strPropertyDescriptionPassword"), _
             PasswordPropertyText(True)> _
-        Public Property Password() As String
+        Public Overridable Property Password() As String
             Get
                 If Me._Inherit.Password And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -202,7 +202,7 @@ Namespace Connection
             LocalizedDisplayName("strPropertyNameProtocol"), _
             LocalizedDescription("strPropertyDescriptionProtocol"), _
             TypeConverter(GetType(Tools.Misc.EnumTypeConverter))> _
-        Public Property Protocol() As Connection.Protocol.Protocols
+        Public Overridable Property Protocol() As Connection.Protocol.Protocols
             Get
                 If Me._Inherit.Protocol And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -255,7 +255,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNamePort"), _
             LocalizedDescription("strPropertyDescriptionPort")> _
-        Public Property Port() As Integer
+        Public Overridable Property Port() As Integer
             Get
                 If Me._Inherit.Port And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -281,8 +281,8 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNamePuttySession"), _
             LocalizedDescription("strPropertyDescriptionPuttySession"), _
-            TypeConverter(GetType(mRemoteNG.Connection.PuttySession))> _
-        Public Property PuttySession() As String
+            TypeConverter(GetType(Config.PuttySessions.SessionList))> _
+        Public Overridable Property PuttySession() As String
             Get
                 If Me._Inherit.PuttySession And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -958,7 +958,7 @@ Namespace Connection
             LocalizedDisplayName("strPropertyNameExternalToolBefore"), _
             LocalizedDescription("strPropertyDescriptionExternalToolBefore"), _
             TypeConverter(GetType(Tools.ExternalAppsTypeConverter))> _
-        Public Property PreExtApp() As String
+        Public Overridable Property PreExtApp() As String
             Get
                 If Me._Inherit.PreExtApp And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -985,7 +985,7 @@ Namespace Connection
             LocalizedDisplayName("strPropertyNameExternalToolAfter"), _
             LocalizedDescription("strPropertyDescriptionExternalToolAfter"), _
             TypeConverter(GetType(Tools.ExternalAppsTypeConverter))> _
-        Public Property PostExtApp() As String
+        Public Overridable Property PostExtApp() As String
             Get
                 If Me._Inherit.PostExtApp And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -1011,7 +1011,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameMACAddress"), _
             LocalizedDescription("strPropertyDescriptionMACAddress")> _
-        Public Property MacAddress() As String
+        Public Overridable Property MacAddress() As String
             Get
                 If Me._Inherit.MacAddress And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo
@@ -1037,7 +1037,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameUser1"), _
             LocalizedDescription("strPropertyDescriptionUser1")> _
-        Public Property UserField() As String
+        Public Overridable Property UserField() As String
             Get
                 If Me._Inherit.UserField And Me._Parent IsNot Nothing Then
                     Dim parCon As Connection.Info = TryCast(Me._Parent, Container.Info).ConnectionInfo

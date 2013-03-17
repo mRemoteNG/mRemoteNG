@@ -5,6 +5,7 @@ Namespace Images
             Container = 1
             ConnectionOpen = 2
             ConnectionClosed = 3
+            PuttySessions = 4
         End Enum
 
         Public Enum ErrorImage

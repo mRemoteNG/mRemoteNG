@@ -2214,4 +2214,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strMenuShowHelpText" xml:space="preserve">
     <value>&amp;Show Help Text</value>
   </data>
+  <data name="strPuttySavedSessionsRootName" xml:space="preserve">
+    <value>PuTTY Saved Sessions</value>
+  </data>
 </root>

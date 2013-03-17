@@ -4359,6 +4359,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to PuTTY Saved Sessions.
+        '''</summary>
+        Friend Shared ReadOnly Property strPuttySavedSessionsRootName() As String
+            Get
+                Return ResourceManager.GetString("strPuttySavedSessionsRootName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to PuTTY Settings.
         '''</summary>
         Friend Shared ReadOnly Property strPuttySettings() As String

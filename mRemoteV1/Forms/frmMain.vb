@@ -62,7 +62,6 @@ Public Class frmMain
         WindowList = New UI.Window.List
 
         Startup.GetConnectionIcons()
-        Startup.GetPuttySessions()
         App.Runtime.GetExtApps()
         Windows.treePanel.Focus()
 
@@ -74,6 +73,8 @@ Public Class frmMain
             Application.Exit()
             Return
         End If
+
+        PuttySessions.AddSessionsToTree(Tree.Node.TreeView)
 
         If My.Settings.StartupComponentsCheck Then
             Windows.Show(UI.Window.Type.ComponentsCheck)
@@ -314,7 +315,8 @@ Public Class frmMain
     Private Sub tsExtAppEntry_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Dim extA As Tools.ExternalTool = sender.Tag
 
-        If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Connection Then
+        If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Connection Or _
+           Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.PuttySession Then
             extA.Start(Tree.Node.SelectedNode.Tag)
         Else
             extA.Start()
@@ -341,8 +343,10 @@ Public Class frmMain
 #Region "Menu"
 #Region "File"
     Private Sub mMenFile_DropDownOpening(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFile.DropDownOpening
-        Select Case Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode)
+        Select Case Tree.Node.GetNodeType(Tree.Node.SelectedNode)
             Case Tree.Node.Type.Root
+                mMenFileNewConnection.Enabled = True
+                mMenFileNewFolder.Enabled = True
                 mMenFileImportExport.Enabled = True
                 mMenFileDelete.Enabled = False
                 mMenFileRename.Enabled = True
@@ -351,6 +355,8 @@ Public Class frmMain
                 mMenFileRename.Text = My.Language.strMenuRenameFolder
                 mMenFileDuplicate.Text = My.Language.strMenuDuplicate
             Case Tree.Node.Type.Container
+                mMenFileNewConnection.Enabled = True
+                mMenFileNewFolder.Enabled = True
                 mMenFileImportExport.Enabled = True
                 mMenFileDelete.Enabled = True
                 mMenFileRename.Enabled = True
@@ -359,6 +365,8 @@ Public Class frmMain
                 mMenFileRename.Text = My.Language.strMenuRenameFolder
                 mMenFileDuplicate.Text = My.Language.strMenuDuplicateFolder
             Case Tree.Node.Type.Connection
+                mMenFileNewConnection.Enabled = True
+                mMenFileNewFolder.Enabled = True
                 mMenFileImportExport.Enabled = False
                 mMenFileDelete.Enabled = True
                 mMenFileRename.Enabled = True
@@ -366,7 +374,19 @@ Public Class frmMain
                 mMenFileDelete.Text = My.Language.strMenuDeleteConnection
                 mMenFileRename.Text = My.Language.strMenuRenameConnection
                 mMenFileDuplicate.Text = My.Language.strMenuDuplicateConnection
+            Case Tree.Node.Type.PuttyRoot, Tree.Node.Type.PuttySession
+                mMenFileNewConnection.Enabled = False
+                mMenFileNewFolder.Enabled = False
+                mMenFileImportExport.Enabled = False
+                mMenFileDelete.Enabled = False
+                mMenFileRename.Enabled = False
+                mMenFileDuplicate.Enabled = False
+                mMenFileDelete.Text = My.Language.strMenuDelete
+                mMenFileRename.Text = My.Language.strMenuRename
+                mMenFileDuplicate.Text = My.Language.strMenuDuplicate
             Case Else
+                mMenFileNewConnection.Enabled = True
+                mMenFileNewFolder.Enabled = True
                 mMenFileImportExport.Enabled = False
                 mMenFileDelete.Enabled = False
                 mMenFileRename.Enabled = False
@@ -735,7 +755,8 @@ Public Class frmMain
 
                     menToolStrip.DropDownItems.Add(tMenItem)
                     AddNodeToMenu(tNode.Nodes, tMenItem)
-                ElseIf Tree.Node.GetNodeType(tNode) = Tree.Node.Type.Connection Then
+                ElseIf Tree.Node.GetNodeType(tNode) = Tree.Node.Type.Connection Or _
+                       Tree.Node.GetNodeType(tNode) = Tree.Node.Type.PuttySession Then
                     tMenItem.Image = Windows.treeForm.imgListTree.Images(tNode.ImageIndex)
                     tMenItem.Tag = tNode.Tag
 

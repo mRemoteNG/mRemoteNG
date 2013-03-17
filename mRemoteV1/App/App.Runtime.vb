@@ -464,10 +464,6 @@ Namespace App
                 Next
             End Sub
 
-            Public Shared Sub GetPuttySessions()
-                Connection.PuttySession.PuttySessions = Connection.Protocol.PuttyBase.GetSessions()
-            End Sub
-
             Public Shared Sub CreateLogger()
                 log4net.Config.XmlConfigurator.Configure()
 
@@ -1568,11 +1564,13 @@ Namespace App
                     Exit Sub
                 End If
 
-                If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Connection Then
+                If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Connection Or _
+                   Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.PuttySession Then
                     OpenConnection(Windows.treeForm.tvConnections.SelectedNode.Tag, Force)
                 ElseIf Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Container Then
                     For Each tNode As TreeNode In Tree.Node.SelectedNode.Nodes
-                        If Tree.Node.GetNodeType(tNode) = Tree.Node.Type.Connection Then
+                        If Tree.Node.GetNodeType(tNode) = Tree.Node.Type.Connection Or _
+                           Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.PuttySession Then
                             If tNode.Tag IsNot Nothing Then
                                 OpenConnection(tNode.Tag, Force)
                             End If

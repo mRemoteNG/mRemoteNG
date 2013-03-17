@@ -243,27 +243,6 @@ Namespace Connection
 #End Region
 
 #Region "Public Shared Methods"
-            Public Shared Function GetSessions() As Array
-                Try
-                    Dim regKey As RegistryKey
-                    regKey = Registry.CurrentUser.OpenSubKey("Software\SimonTatham\PuTTY\Sessions")
-
-                    Dim arrKeys() As String
-                    arrKeys = regKey.GetSubKeyNames()
-                    Array.Resize(arrKeys, arrKeys.Length + 1)
-                    arrKeys(arrKeys.Length - 1) = "Default Settings"
-
-                    For i As Integer = 0 To arrKeys.Length - 1
-                        arrKeys(i) = System.Web.HttpUtility.UrlDecode(arrKeys(i))
-                    Next
-
-                    Return arrKeys
-                Catch ex As Exception
-                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strPuttyGetSessionsFailed & vbNewLine & ex.Message, True)
-                    Return Nothing
-                End Try
-            End Function
-
             Public Shared Function IsFilePuttyNg(file As String) As Boolean
                 Dim isPuttyNg As Boolean
                 Try
@@ -282,8 +261,6 @@ Namespace Connection
 
                     p = Process.Start(pSI)
                     p.WaitForExit()
-
-                    mRemoteNG.Connection.PuttySession.PuttySessions = GetSessions()
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyStartFailed & vbNewLine & ex.Message, True)
                 End Try

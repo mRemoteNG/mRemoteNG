@@ -5,10 +5,12 @@ Imports System.DirectoryServices
 Namespace Tree
     Public Class Node
         Public Enum Type
-            Root = 0
-            Container = 1
-            Connection = 2
-            NONE = 66
+            None = 0
+            Root = 1
+            Container = 2
+            Connection = 3
+            PuttyRoot = 4
+            PuttySession = 5
         End Enum
 
         Private Shared _TreeView As TreeView
@@ -92,10 +94,14 @@ Namespace Tree
                     Return Type.NONE
                 End If
 
-                If TypeOf treeNode.Tag Is Root.Info Then
+                If TypeOf treeNode.Tag Is Root.PuttySessions.Info Then
+                    Return Type.PuttyRoot
+                ElseIf TypeOf treeNode.Tag Is Root.Info Then
                     Return Type.Root
                 ElseIf TypeOf treeNode.Tag Is Container.Info Then
                     Return Type.Container
+                ElseIf TypeOf treeNode.Tag Is Connection.PuttySession.Info Then
+                    Return Type.PuttySession
                 ElseIf TypeOf treeNode.Tag Is Connection.Info Then
                     Return Type.Connection
                 End If
@@ -184,7 +190,7 @@ Namespace Tree
                 Dim nNode As New TreeNode
 
                 Select Case NodeType
-                    Case Type.Connection
+                    Case Type.Connection Or Type.PuttySession
                         nNode.Text = My.Language.strNewConnection
                         nNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
                         nNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed

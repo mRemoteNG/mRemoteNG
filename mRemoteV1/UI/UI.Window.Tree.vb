@@ -1,4 +1,4 @@
-Imports mRemoteNG.Connection
+Imports mRemoteNG
 Imports mRemoteNG.My
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
@@ -557,10 +557,11 @@ Namespace UI
 #Region "Private Methods"
             Private Sub FillImageList()
                 Try
-                    Me.imgListTree.Images.Add(My.Resources.Root)
-                    Me.imgListTree.Images.Add(My.Resources.Folder)
-                    Me.imgListTree.Images.Add(My.Resources.Play)
-                    Me.imgListTree.Images.Add(My.Resources.Pause)
+                    imgListTree.Images.Add(Resources.Root)
+                    imgListTree.Images.Add(Resources.Folder)
+                    imgListTree.Images.Add(Resources.Play)
+                    imgListTree.Images.Add(Resources.Pause)
+                    imgListTree.Images.Add(Resources.PuttySessions)
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "FillImageList (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
@@ -586,22 +587,22 @@ Namespace UI
             Private Sub tvConnections_AfterSelect(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles tvConnections.AfterSelect
                 Try
                     Select Case mRemoteNG.Tree.Node.GetNodeType(e.Node)
-                        Case mRemoteNG.Tree.Node.Type.Connection
+                        Case mRemoteNG.Tree.Node.Type.Connection, mRemoteNG.Tree.Node.Type.PuttySession
                             Windows.configForm.SetPropertyGridObject(e.Node.Tag)
                             Windows.sessionsForm.CurrentHost = TryCast(e.Node.Tag, mRemoteNG.Connection.Info).Hostname
                         Case mRemoteNG.Tree.Node.Type.Container
-                            Windows.configForm.SetPropertyGridObject(TryCast(e.Node.Tag, mRemoteNG.Container.Info).ConnectionInfo)
-                        Case mRemoteNG.Tree.Node.Type.Root
+                            Windows.configForm.SetPropertyGridObject(TryCast(e.Node.Tag, Container.Info).ConnectionInfo)
+                        Case mRemoteNG.Tree.Node.Type.Root, mRemoteNG.Tree.Node.Type.PuttyRoot
                             Windows.configForm.SetPropertyGridObject(e.Node.Tag)
                         Case Else
                             Exit Sub
                     End Select
 
                     Windows.configForm.pGrid_SelectedObjectChanged()
-                    Me.ShowHideTreeContextMenuItems(e.Node)
+                    ShowHideTreeContextMenuItems(e.Node)
                     Windows.sessionsForm.GetSessionsAuto()
 
-                    App.Runtime.LastSelected = mRemoteNG.Tree.Node.GetConstantID(e.Node)
+                    LastSelected = mRemoteNG.Tree.Node.GetConstantID(e.Node)
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterSelect (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
@@ -613,8 +614,10 @@ Namespace UI
                     Me.tvConnections.SelectedNode = e.Node
 
                     If e.Button = System.Windows.Forms.MouseButtons.Left Then
-                        If My.Settings.SingleClickOnConnectionOpensIt And mRemoteNG.Tree.Node.GetNodeType(e.Node) = mRemoteNG.Tree.Node.Type.Connection Then
-                            App.Runtime.OpenConnection()
+                        If Settings.SingleClickOnConnectionOpensIt And _
+                            (mRemoteNG.Tree.Node.GetNodeType(e.Node) = mRemoteNG.Tree.Node.Type.Connection Or _
+                             mRemoteNG.Tree.Node.GetNodeType(e.Node) = mRemoteNG.Tree.Node.Type.PuttySession) Then
+                            OpenConnection()
                         End If
 
                         If My.Settings.SingleClickSwitchesToOpenConnection And mRemoteNG.Tree.Node.GetNodeType(e.Node) = mRemoteNG.Tree.Node.Type.Connection Then
@@ -627,8 +630,9 @@ Namespace UI
             End Sub
 
             Private Sub tvConnections_NodeMouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles tvConnections.NodeMouseDoubleClick
-                If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
-                    App.Runtime.OpenConnection()
+                If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Or _
+                   mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.PuttySession Then
+                    OpenConnection()
                 End If
             End Sub
 
@@ -656,111 +660,119 @@ Namespace UI
                 Return False
             End Function
 
-            Private Sub ShowHideTreeContextMenuItems(ByVal tNode As TreeNode)
-                Try
-                    Me.cMenTree.Enabled = True
-
-                    If tNode Is Nothing Then
-                        Exit Sub
+            Private Sub EnableMenuItemsRecursive(ByVal items As ToolStripItemCollection, Optional ByVal enable As Boolean = True)
+                Dim menuItem As ToolStripMenuItem
+                For Each item As ToolStripItem In items
+                    menuItem = TryCast(item, ToolStripMenuItem)
+                    If menuItem Is Nothing Then Continue For
+                    menuItem.Enabled = enable
+                    If menuItem.HasDropDownItems Then
+                        EnableMenuItemsRecursive(menuItem.DropDownItems, enable)
                     End If
+                Next
+            End Sub
 
-                    Select Case mRemoteNG.Tree.Node.GetNodeType(tNode)
+            Private Sub ShowHideTreeContextMenuItems(ByVal selectedNode As TreeNode)
+                If selectedNode Is Nothing Then Return
+
+                Try
+                    cMenTree.Enabled = True
+                    EnableMenuItemsRecursive(cMenTree.Items)
+
+                    Select Case mRemoteNG.Tree.Node.GetNodeType(selectedNode)
                         Case mRemoteNG.Tree.Node.Type.Connection
-                            Dim conI As mRemoteNG.Connection.Info = tNode.Tag
+                            Dim connectionInfo As mRemoteNG.Connection.Info = selectedNode.Tag
 
-                            Me.cMenTreeConnect.Enabled = True
-                            Me.cMenTreeConnectWithOptions.Enabled = True
-
-                            If TryCast(tNode.Tag, mRemoteNG.Connection.Info).OpenConnections.Count > 0 Then
-                                Me.cMenTreeDisconnect.Enabled = True
-                            Else
-                                Me.cMenTreeDisconnect.Enabled = False
+                            If connectionInfo.OpenConnections.Count = 0 Then
+                                cMenTreeDisconnect.Enabled = False
                             End If
 
-                            If conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH1 Or conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH2 Then
-                                Me.cMenTreeToolsTransferFile.Enabled = True
-                            Else
-                                Me.cMenTreeToolsTransferFile.Enabled = False
+                            If Not (connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH1 Or _
+                                    connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH2) Then
+                                cMenTreeToolsTransferFile.Enabled = False
                             End If
 
-                            If conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Then
-                                Me.cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = True
-                                Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = True
-                            ElseIf conI.Protocol = mRemoteNG.Connection.Protocol.Protocols.ICA Then
-                                Me.cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = True
-                                Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
-                            Else
-                                Me.cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
-                                Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
+                            If Not (connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Or _
+                                    connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.ICA) Then
+                                cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
+                                cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
                             End If
 
-                            Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = True
+                            cMenTreeToolsImportExport.Enabled = False
+                        Case mRemoteNG.Tree.Node.Type.PuttySession
+                            Dim puttySessionInfo As mRemoteNG.Connection.PuttySession.Info = selectedNode.Tag
 
-                            Me.cMenTreeToolsImportExport.Enabled = False
+                            cMenTreeAddConnection.Enabled = False
+                            cMenTreeAddFolder.Enabled = False
 
-                            Me.cMenTreeToolsExternalApps.Enabled = True
+                            If puttySessionInfo.OpenConnections.Count = 0 Then
+                                cMenTreeDisconnect.Enabled = False
+                            End If
 
-                            Me.cMenTreeDuplicate.Enabled = True
-                            Me.cMenTreeDelete.Enabled = True
+                            If Not (puttySessionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH1 Or _
+                                    puttySessionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH2) Then
+                                cMenTreeToolsTransferFile.Enabled = False
+                            End If
 
-                            Me.cMenTreeMoveUp.Enabled = True
-                            Me.cMenTreeMoveDown.Enabled = True
+                            cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
+                            cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
+                            cMenTreeToolsImportExport.Enabled = False
+                            cMenTreeToolsSort.Enabled = False
+                            cMenTreeDuplicate.Enabled = False
+                            cMenTreeRename.Enabled = False
+                            cMenTreeDelete.Enabled = False
+                            cMenTreeMoveUp.Enabled = False
+                            cMenTreeMoveDown.Enabled = False
                         Case mRemoteNG.Tree.Node.Type.Container
-                            Me.cMenTreeConnect.Enabled = True
-                            Me.cMenTreeConnectWithOptions.Enabled = True
-                            Me.cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
-                            Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
-                            Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = True
-                            Me.cMenTreeDisconnect.Enabled = False
+                            cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
+                            cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
+                            cMenTreeDisconnect.Enabled = False
 
-                            For Each n As TreeNode In tNode.Nodes
-                                If TypeOf n.Tag Is mRemoteNG.Connection.Info Then
-                                    Dim cI As mRemoteNG.Connection.Info = n.Tag
-                                    If cI.OpenConnections.Count > 0 Then
-                                        Me.cMenTreeDisconnect.Enabled = True
-                                        Exit For
-                                    End If
+                            Dim openConnections As Integer = 0
+                            Dim connectionInfo As mRemoteNG.Connection.Info
+                            For Each node As TreeNode In selectedNode.Nodes
+                                If TypeOf node.Tag Is mRemoteNG.Connection.Info Then
+                                    connectionInfo = node.Tag
+                                    openConnections = openConnections + connectionInfo.OpenConnections.Count
                                 End If
                             Next
+                            If openConnections = 0 Then
+                                cMenTreeDisconnect.Enabled = False
+                            End If
 
-                            Me.cMenTreeToolsTransferFile.Enabled = False
-
-                            Me.cMenTreeToolsImportExport.Enabled = True
-                            Me.cMenTreeToolsImportExportExportmRemoteXML.Enabled = True
-                            Me.cMenTreeToolsImportExportImportFromAD.Enabled = True
-                            Me.cMenTreeToolsImportExportImportmRemoteXML.Enabled = True
-
-                            Me.cMenTreeToolsExternalApps.Enabled = False
-
-                            Me.cMenTreeDuplicate.Enabled = True
-                            Me.cMenTreeDelete.Enabled = True
-
-                            Me.cMenTreeMoveUp.Enabled = True
-                            Me.cMenTreeMoveDown.Enabled = True
+                            cMenTreeToolsTransferFile.Enabled = False
+                            cMenTreeToolsExternalApps.Enabled = False
                         Case mRemoteNG.Tree.Node.Type.Root
-                            Me.cMenTreeConnect.Enabled = False
-                            Me.cMenTreeConnectWithOptions.Enabled = False
-                            Me.cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
-                            Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
-                            Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = False
-                            Me.cMenTreeDisconnect.Enabled = False
-
-                            Me.cMenTreeToolsTransferFile.Enabled = False
-
-                            Me.cMenTreeToolsImportExport.Enabled = True
-                            Me.cMenTreeToolsImportExportExportmRemoteXML.Enabled = True
-                            Me.cMenTreeToolsImportExportImportFromAD.Enabled = True
-                            Me.cMenTreeToolsImportExportImportmRemoteXML.Enabled = True
-
-                            Me.cMenTreeToolsExternalApps.Enabled = False
-
-                            Me.cMenTreeDuplicate.Enabled = False
-                            Me.cMenTreeDelete.Enabled = False
-
-                            Me.cMenTreeMoveUp.Enabled = False
-                            Me.cMenTreeMoveDown.Enabled = False
+                            cMenTreeConnect.Enabled = False
+                            cMenTreeConnectWithOptions.Enabled = False
+                            cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
+                            cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
+                            cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = False
+                            cMenTreeDisconnect.Enabled = False
+                            cMenTreeToolsTransferFile.Enabled = False
+                            cMenTreeToolsExternalApps.Enabled = False
+                            cMenTreeDuplicate.Enabled = False
+                            cMenTreeDelete.Enabled = False
+                            cMenTreeMoveUp.Enabled = False
+                            cMenTreeMoveDown.Enabled = False
+                        Case mRemoteNG.Tree.Node.Type.PuttyRoot
+                            cMenTreeAddConnection.Enabled = False
+                            cMenTreeAddFolder.Enabled = False
+                            cMenTreeConnect.Enabled = False
+                            cMenTreeConnectWithOptions.Enabled = False
+                            cMenTreeDisconnect.Enabled = False
+                            cMenTreeToolsTransferFile.Enabled = False
+                            cMenTreeConnectWithOptions.Enabled = False
+                            cMenTreeToolsImportExport.Enabled = False
+                            cMenTreeToolsSort.Enabled = False
+                            cMenTreeToolsExternalApps.Enabled = False
+                            cMenTreeDuplicate.Enabled = False
+                            cMenTreeRename.Enabled = False
+                            cMenTreeDelete.Enabled = False
+                            cMenTreeMoveUp.Enabled = False
+                            cMenTreeMoveDown.Enabled = False
                         Case Else
-                            Me.cMenTree.Enabled = False
+                            cMenTree.Enabled = False
                     End Select
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideTreeContextMenuItems (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
@@ -861,26 +873,23 @@ Namespace UI
                     Dim pt As Point = CType(sender, TreeView).PointToClient(New Point(e.X, e.Y))
                     Dim targetNode As TreeNode = selectedTreeview.GetNodeAt(pt)
 
-                    'See if the targetNode is currently selected, 
-                    'if so no need to validate again
-                    If Not (selectedTreeview.SelectedNode Is targetNode) Then
-                        'Select the node currently under the cursor
-                        selectedTreeview.SelectedNode = targetNode
+                    'Select the node currently under the cursor
+                    selectedTreeview.SelectedNode = targetNode
 
-                        'Check that the selected node is not the dropNode and
-                        'also that it is not a child of the dropNode and 
-                        'therefore an invalid target
-                        Dim dropNode As TreeNode = CType(e.Data.GetData("System.Windows.Forms.TreeNode"), TreeNode)
+                    'Check that the selected node is not the dropNode and
+                    'also that it is not a child of the dropNode and 
+                    'therefore an invalid target
+                    Dim dropNode As TreeNode = CType(e.Data.GetData("System.Windows.Forms.TreeNode"), TreeNode)
 
-                        Do Until targetNode Is Nothing
-                            If targetNode Is dropNode Then
-                                e.Effect = DragDropEffects.None
-                                Exit Sub
-                            End If
-
-                            targetNode = targetNode.Parent
-                        Loop
-                    End If
+                    Dim puttyRootInfo As Root.PuttySessions.Info
+                    Do Until targetNode Is Nothing
+                        puttyRootInfo = TryCast(targetNode.Tag, Root.PuttySessions.Info)
+                        If puttyRootInfo IsNot Nothing Or targetNode Is dropNode Then
+                            e.Effect = DragDropEffects.None
+                            Return
+                        End If
+                        targetNode = targetNode.Parent
+                    Loop
 
                     'Currently selected node is a suitable target
                     e.Effect = DragDropEffects.Move
@@ -891,6 +900,17 @@ Namespace UI
 
             Private Sub tvConnections_ItemDrag(ByVal sender As Object, ByVal e As System.Windows.Forms.ItemDragEventArgs) Handles tvConnections.ItemDrag
                 Try
+                    Dim dragTreeNode As TreeNode = TryCast(e.Item, TreeNode)
+                    If dragTreeNode Is Nothing Then Return
+
+                    If dragTreeNode.Tag Is Nothing Then Return
+                    If TypeOf dragTreeNode.Tag Is mRemoteNG.Connection.PuttySession.Info Or _
+                       Not (TypeOf dragTreeNode.Tag Is mRemoteNG.Connection.Info Or _
+                            TypeOf dragTreeNode.Tag Is Container.Info) Then
+                        tvConnections.SelectedNode = dragTreeNode
+                        Return
+                    End If
+
                     'Set the drag node and initiate the DragDrop 
                     DoDragDrop(e.Item, DragDropEffects.Move)
                 Catch ex As Exception
@@ -1029,7 +1049,7 @@ Namespace UI
                         containerNode = containerNode.Parent
                     End If
 
-                    Dim newConnectionInfo As New Info()
+                    Dim newConnectionInfo As New mRemoteNG.Connection.Info()
                     If mRemoteNG.Tree.Node.GetNodeType(containerNode) = mRemoteNG.Tree.Node.Type.Root Then
                         newConnectionInfo.Inherit.TurnOffInheritanceCompletely()
                     Else
@@ -1068,7 +1088,7 @@ Namespace UI
                         End If
                     End If
 
-                    newContainerInfo.ConnectionInfo = New Info(newContainerInfo)
+                    newContainerInfo.ConnectionInfo = New mRemoteNG.Connection.Info(newContainerInfo)
 
                     ' We can only inherit from a container node, not the root node or connection nodes
                     If mRemoteNG.Tree.Node.GetNodeType(parentNode) = mRemoteNG.Tree.Node.Type.Container Then
@@ -1203,7 +1223,8 @@ Namespace UI
 
             Private Sub StartExternalApp(ByVal ExtA As Tools.ExternalTool)
                 Try
-                    If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                    If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Or _
+                       mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.PuttySession Then
                         ExtA.Start(mRemoteNG.Tree.Node.SelectedNode.Tag)
                     End If
                 Catch ex As Exception

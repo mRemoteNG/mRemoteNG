@@ -2358,6 +2358,32 @@ Namespace My
                 Me("ShowConfigHelpText") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property PuttySavedSessionsName() As String
+            Get
+                Return CType(Me("PuttySavedSessionsName"),String)
+            End Get
+            Set
+                Me("PuttySavedSessionsName") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property PuttySavedSessionsPanel() As String
+            Get
+                Return CType(Me("PuttySavedSessionsPanel"),String)
+            End Get
+            Set
+                Me("PuttySavedSessionsPanel") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -20,7 +20,7 @@ Namespace Root
             LocalizedDisplayName("strPropertyNameName"), _
             LocalizedDescription("strPropertyDescriptionName"), _
             Attributes.Root()> _
-        Public Property Name() As String
+        Public Overridable Property Name() As String
             Get
                 Return Me._Name
             End Get
@@ -104,6 +104,7 @@ Namespace Root
         Public Enum RootType
             Connection
             Credential
+            PuttySessions
         End Enum
 
         Public Class Attributes
