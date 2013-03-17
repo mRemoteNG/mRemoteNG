@@ -456,7 +456,7 @@ Public Class frmOptions
         'chkEncryptCompleteFile
         '
         Me.chkEncryptCompleteFile.AutoSize = True
-        Me.chkEncryptCompleteFile.Location = New System.Drawing.Point(2, 26)
+        Me.chkEncryptCompleteFile.Location = New System.Drawing.Point(3, 26)
         Me.chkEncryptCompleteFile.Name = "chkEncryptCompleteFile"
         Me.chkEncryptCompleteFile.Size = New System.Drawing.Size(180, 17)
         Me.chkEncryptCompleteFile.TabIndex = 1
