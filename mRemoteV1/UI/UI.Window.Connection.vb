@@ -448,12 +448,8 @@ Namespace UI
                     If IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Then
                         Dim rdp As mRemoteNG.Connection.Protocol.RDP = IC.Protocol
 
-                        If rdp.RedirectKeys Then
-                            cmenTabFullscreen.Enabled = False
-                        Else
-                            cmenTabFullscreen.Enabled = True
-                            cmenTabFullscreen.Checked = rdp.Fullscreen
-                        End If
+                        cmenTabFullscreen.Enabled = True
+                        cmenTabFullscreen.Checked = rdp.Fullscreen
 
                         cmenTabSmartSize.Enabled = True
                         cmenTabSmartSize.Checked = rdp.SmartSize

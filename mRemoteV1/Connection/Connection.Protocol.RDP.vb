@@ -42,16 +42,9 @@ Namespace Connection
                     Try
                         If Not _redirectKeys Then Return
 
-                        RDP.AdvancedSettings2.ContainerHandledFullScreen = 1
-                        RDP.AdvancedSettings2.DisplayConnectionBar = False
-                        RDP.AdvancedSettings2.PinConnectionBar = False
-
-                        If RDPVersion >= Versions.RDC70 Then
-                            Dim msRdpClientNonScriptable As MSTSCLib.IMsRdpClientNonScriptable5 = RDP.GetOcx()
-                            msRdpClientNonScriptable.DisableConnectionBar = True
-                        End If
-
-                        RDP.FullScreen = True
+                        Debug.Assert(RDP.SecuredSettingsEnabled)
+                        Dim msRdpClientSecuredSettings As MSTSCLib.IMsRdpClientSecuredSettings = RDP.SecuredSettings2
+                        msRdpClientSecuredSettings.KeyboardHookMode = 1 ' Apply key combinations at the remote server.
                     Catch ex As Exception
                         MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectKeysFailed & vbNewLine & ex.Message, True)
                     End Try
@@ -104,7 +97,7 @@ Namespace Connection
                     RDP.AdvancedSettings3.MaxReconnectAttempts = My.Settings.RdpReconnectionCount
                     RDP.AdvancedSettings2.keepAliveInterval = 60000 'in milliseconds (10.000 = 10 seconds)
                     RDP.AdvancedSettings5.AuthenticationLevel = 0
-                    RDP.AdvancedSettings.EncryptionEnabled = 1
+                    RDP.AdvancedSettings2.EncryptionEnabled = 1
 
                     RDP.AdvancedSettings2.overallConnectionTimeout = 20
 
@@ -222,7 +215,7 @@ Namespace Connection
                     SmartSize Then Return
 
                 Dim size As Size
-                If RedirectKeys Or Not Fullscreen Then
+                If Not Fullscreen Then
                     size = Control.Size
                 Else
                     size = Screen.FromControl(Control).Bounds.Size

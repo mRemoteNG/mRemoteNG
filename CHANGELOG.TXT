@@ -8,6 +8,7 @@
   Fixed issue MR-381 - Notifications panel - whitespace context menu allows Copy and Delete on nothing
   The username and domain settings are now hidden for VNC connections since they are not supported.
   Changed "Automatically get session information" to be disabled by default.
+  RDP connections can now be switched to full screen mode when redirect key combinations is enabled.
 
 1.71 Beta 1 (2013-03-04):
   Added feature MR-329 - Create Option to disable the "Quick: " prefix
