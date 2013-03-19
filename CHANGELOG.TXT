@@ -1,3 +1,4 @@
+1.71 Beta 2 (2013-03-19):
   Added feature MR-345 - Two separate options for confirming closure of Tabs and Connection Panels
   Added feature MR-346 - Option to show/hide the description box at the bottom of the Config panel
   Added feature MR-351 - Import connections from PuTTY
