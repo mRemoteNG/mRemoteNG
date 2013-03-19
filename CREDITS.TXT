@@ -16,7 +16,10 @@ David Vidmar
 Translators
 ===========
 
+Eugenio "Ryo567" Martínez
+Mathieu Pape
 Emanuel Silva
+Robert Siwiec
 
 
 Included Source Code
