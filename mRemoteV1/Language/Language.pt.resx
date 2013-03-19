@@ -150,6 +150,9 @@
   <data name="strAlwaysShowPanelSelection" xml:space="preserve">
     <value>Mostrar sempre a caixa de diálogo de seleção do painel ao abrir ligações</value>
   </data>
+  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
+    <value>Sempre Mostrar painel abas</value>
+  </data>
   <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>Mostrar sempre o ícone da área de notificação</value>
   </data>
@@ -420,9 +423,6 @@
   <data name="strConfigUiLoadFailed" xml:space="preserve">
     <value>Config UI carregamento falhado!</value>
   </data>
-  <data name="strConfirmCloseConnection" xml:space="preserve">
-    <value>Confira o fecho de ligações ativas</value>
-  </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
     <value>Pretende fechar a ligação, "{0}"?</value>
   </data>
@@ -443,9 +443,6 @@
   </data>
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>Tem certeza que deseja excluir a pasta, "{0}"? Pastas ou ligações que ele contém também serão excluídas.</value>
-  </data>
-  <data name="strConfirmExit" xml:space="preserve">
-    <value>Confirmar saída se houver ligações abertas</value>
   </data>
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>Pretende fechar todas as ligações abertas?</value>
@@ -530,8 +527,14 @@ Descrição do erro: {1}</value>
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Impossível criar novo arquivo de ligações!</value>
   </data>
+  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+    <value>Não foi possível encontrar o controlo ToolStrip em FilteredPropertyGrid.</value>
+  </data>
   <data name="strCurrentVersion" xml:space="preserve">
     <value>Versão instalada</value>
+  </data>
+  <data name="strDefaultTheme" xml:space="preserve">
+    <value>Tema padrão</value>
   </data>
   <data name="strDetect" xml:space="preserve">
     <value>Detetar</value>
@@ -687,7 +690,7 @@ Descrição do erro: {1}</value>
     <value>Impossível criar nova ligação HTTP!</value>
   </data>
   <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
-    <value>Telha de alteração de documento HTTP falhou!</value>
+    <value>Alteração da aba HTTP falhou!</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Falhou configuração de props HTTP!</value>
@@ -709,6 +712,9 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strIcaSetResolutionFailed" xml:space="preserve">
     <value>Configuração de resolução ICA falhou!</value>
+  </data>
+  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
+    <value>Identificar guias de ligação rápida, adicionando o prefixo "rápido:"</value>
   </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Importar do Active Directory</value>
@@ -775,6 +781,9 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>Log de alterações:</value>
+  </data>
+  <data name="strLabelClosingConnections" xml:space="preserve">
+    <value>Ao fechar ligações:</value>
   </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Ligar:</value>
@@ -974,6 +983,15 @@ Descrição do erro: {1}</value>
   <data name="strMenuNotifications" xml:space="preserve">
     <value>Notificações</value>
   </data>
+  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
+    <value>Copie todos</value>
+  </data>
+  <data name="strMenuNotificationsDelete" xml:space="preserve">
+    <value>Excluir</value>
+  </data>
+  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+    <value>Apagar tudo</value>
+  </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
     <value>Abrir arquivo de ligações...</value>
   </data>
@@ -1127,6 +1145,15 @@ Descrição do erro: {1}</value>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Portas abertas</value>
   </data>
+  <data name="strOptionsTabTheme" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
+    <value>&amp;Excluir</value>
+  </data>
+  <data name="strOptionsThemeButtonNew" xml:space="preserve">
+    <value>&amp;Novo</value>
+  </data>
   <data name="strPanelName" xml:space="preserve">
     <value>Nome do painel</value>
   </data>
@@ -1264,6 +1291,9 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
     <value>ligar-se à sessão consola do host remoto.</value>
+  </data>
+  <data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
+    <value>Use o Credential Security Support Provider (CredSSP) para autenticação, se ele estiver disponível.</value>
   </data>
   <data name="strPropertyDescriptionUser1" xml:space="preserve">
     <value>Insira qualquer informação que necessite aqui.</value>
@@ -1415,6 +1445,9 @@ Descrição do erro: {1}</value>
   <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>Use a sessão de Consola</value>
   </data>
+  <data name="strPropertyNameUseCredSsp" xml:space="preserve">
+    <value>Utilize o CredSSP</value>
+  </data>
   <data name="strPropertyNameUser1" xml:space="preserve">
     <value>Campo de utilizador</value>
   </data>
@@ -1507,6 +1540,18 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
     <value>Histórico de Ligação rápida falhou!</value>
+  </data>
+  <data name="strRadioCloseWarnAll" xml:space="preserve">
+    <value>&amp;Avisar-me quando fechar ligações</value>
+  </data>
+  <data name="strRadioCloseWarnExit" xml:space="preserve">
+    <value>Avisar-me apenas ao &amp;sair do mRemoteNG</value>
+  </data>
+  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
+    <value>Avisar-me somente ao fechar ligações múltiplas</value>
+  </data>
+  <data name="strRadioCloseWarnNever" xml:space="preserve">
+    <value>&amp;Não avisar ao fechar ligações</value>
   </data>
   <data name="strRAW" xml:space="preserve">
     <value>RAW</value>
@@ -1724,6 +1769,9 @@ Descrição do erro: {1}</value>
   <data name="strScreenshots" xml:space="preserve">
     <value>Imagens do ecrã</value>
   </data>
+  <data name="strSearchPrompt" xml:space="preserve">
+    <value>Pesquisa</value>
+  </data>
   <data name="strSendTo" xml:space="preserve">
     <value>Enviar para...</value>
   </data>
@@ -1844,6 +1892,93 @@ Descrição do erro: {1}</value>
   <data name="strTheFollowing" xml:space="preserve">
     <value>A seguir:</value>
   </data>
+  <data name="strThemeCategoryConfigPanel" xml:space="preserve">
+    <value>Painel de configuração</value>
+  </data>
+  <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
+    <value>Painel de ligações</value>
+  </data>
+  <data name="strThemeCategoryGeneral" xml:space="preserve">
+    <value>Geral</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+    <value>A cor de fundo do painel de configuração.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>A cor do texto no painel de configuração de categoria.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
+    <value>A cor das linhas de grade do painel de configuração</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>A cor de fundo da área de ajuda do painel de configuração.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
+    <value>A cor do texto na área de ajuda do painel de configuração.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
+    <value>A cor do texto no painel de configuração.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>A cor de fundo do painel de ligações.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
+    <value>A cor do texto no painel de ligações.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>A cor das linhas de árvore no painel de ligações.</value>
+  </data>
+  <data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
+    <value>A cor de fundo dos menus.</value>
+  </data>
+  <data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
+    <value>A cor do texto nos menus.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
+    <value>A cor de fundo da caixa de pesquisa.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
+    <value>A cor do texto na caixa de pesquisa.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
+    <value>A cor do texto na caixa de pesquisa rápida.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
+    <value>A cor de fundo das barras de ferramentas.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
+    <value>A cor do texto em barras de ferramentas.</value>
+  </data>
+  <data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
+    <value>A cor de fundo da janela principal.</value>
+  </data>
+  <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Cor de fundo do painel de configuração</value>
+  </data>
+  <data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>Cor do texto da categoria do Painel de configuração</value>
+  </data>
+  <data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
+    <value>Cor de linha de grade do painel de configuração</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>Cor de fundo do painel de configuração ajuda</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
+    <value>Cor do texto do painel de configuração ajuda</value>
+  </data>
+  <data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
+    <value>Cor do texto do painel de configuração</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>Cor de fundo de painel de ligações</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
+    <value>Cor de texto de painel de ligações</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>Cor linha da da árvore do painel de ligações</value>
+  </data>
   <data name="strTitleError" xml:space="preserve">
     <value>Erro ({0})</value>
   </data>
@@ -1879,6 +2014,9 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strUncheckProperties" xml:space="preserve">
     <value>Desmarcar as propriedades que não deseja salvar!</value>
+  </data>
+  <data name="strUnnamedTheme" xml:space="preserve">
+    <value>Tema sem nome</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
     <value>mRemoteNG requer uma atualização</value>
@@ -1930,6 +2068,9 @@ Descrição do erro: {1}</value>
   </data>
   <data name="strUser" xml:space="preserve">
     <value>Utilizador</value>
+  </data>
+  <data name="strUseSameUsernameAndPassword" xml:space="preserve">
+    <value>Use o mesmo nome de utilizador e senha</value>
   </data>
   <data name="strUseSmartCard" xml:space="preserve">
     <value>Usar um smart card</value>

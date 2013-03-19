@@ -150,6 +150,9 @@
   <data name="strAlwaysShowPanelSelection" xml:space="preserve">
     <value>Altijd Paneel dialoogvenster tonen bij het openen van verbindingen</value>
   </data>
+  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
+    <value>Altijd tabbladen tonen</value>
+  </data>
   <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>Altijd het icoon in het systeemvak tonen</value>
   </data>
@@ -438,9 +441,6 @@ VncSharpNG Versie {0}</value>
   <data name="strConfigUiLoadFailed" xml:space="preserve">
     <value>Configuratie UI laden mislukt!</value>
   </data>
-  <data name="strConfirmCloseConnection" xml:space="preserve">
-    <value>Bevestig sluiten connectie tab</value>
-  </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
     <value>Wilt u de verbinding sluiten, "{0}"?</value>
   </data>
@@ -461,9 +461,6 @@ VncSharpNG Versie {0}</value>
   </data>
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>Weet u het zeker dat u de map wilt verwijderen, "{0}"? Alle mappen of connecties daaronder zullen ook worden verwijderd.</value>
-  </data>
-  <data name="strConfirmExit" xml:space="preserve">
-    <value>Bevestig afsluiten als er geopende verbindingen zijn</value>
   </data>
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>Wilt u alle geopende verbindingen sluiten?</value>
@@ -549,8 +546,14 @@ Beginnen met nieuwe Connectie bestand.</value>
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Kon geen nieuwe connectie bestand aanmaken!</value>
   </data>
+  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+    <value>Kan geen ToolStrip vinden in FilteredPropertyGrid.</value>
+  </data>
   <data name="strCurrentVersion" xml:space="preserve">
     <value>Geïnstalleerde versie</value>
+  </data>
+  <data name="strDefaultTheme" xml:space="preserve">
+    <value>Standaard thema</value>
   </data>
   <data name="strDetect" xml:space="preserve">
     <value>Detecteer</value>
@@ -710,7 +713,7 @@ Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor
     <value>Kon geen nieuwe HTTP verbinding aanmaken!</value>
   </data>
   <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
-    <value>Aanpassen HTTP Document Tegel mislukt!</value>
+    <value>Verandering van HTTP document tegel  niet gelukt!</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Instellen HTTP Eigenschappen mislukt!</value>
@@ -732,6 +735,9 @@ Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor
   </data>
   <data name="strIcaSetResolutionFailed" xml:space="preserve">
     <value>ICA Instellen Resolutie mislukt!</value>
+  </data>
+  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
+    <value>Vindt de Snel aansluit tabs met het voorzetsel "Quick"</value>
   </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Importeer van Active Directory</value>
@@ -798,6 +804,9 @@ Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor
   </data>
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>Veranderingen:</value>
+  </data>
+  <data name="strLabelClosingConnections" xml:space="preserve">
+    <value>Bij het sluiten van connecties:</value>
   </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Verbind:</value>
@@ -997,6 +1006,15 @@ Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor
   <data name="strMenuNotifications" xml:space="preserve">
     <value>Notificaties</value>
   </data>
+  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
+    <value>Kopieër alles</value>
+  </data>
+  <data name="strMenuNotificationsDelete" xml:space="preserve">
+    <value>Verwijder</value>
+  </data>
+  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+    <value>Verwijder alles</value>
+  </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
     <value>Open Connectie Bestand...</value>
   </data>
@@ -1056,6 +1074,9 @@ Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor
   </data>
   <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
     <value>Sessies en Screenshots</value>
+  </data>
+  <data name="strMenuShowHelpText" xml:space="preserve">
+    <value>&amp;Laat hulp zien</value>
   </data>
   <data name="strMenuShowText" xml:space="preserve">
     <value>Toon tekst</value>
@@ -1150,6 +1171,15 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   </data>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Open Poorten</value>
+  </data>
+  <data name="strOptionsTabTheme" xml:space="preserve">
+    <value>Thema</value>
+  </data>
+  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
+    <value>&amp;Verwijder</value>
+  </data>
+  <data name="strOptionsThemeButtonNew" xml:space="preserve">
+    <value>&amp;Nieuw</value>
   </data>
   <data name="strPanelName" xml:space="preserve">
     <value>Paneel Naam</value>
@@ -1288,6 +1318,9 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   </data>
   <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
     <value>Verbinding maken met de console sessie van de remote host.</value>
+  </data>
+  <data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
+    <value>Gebruik, indien beschikbaar, de Credential Security Support Provider (CredSSP) voor authenticatie.</value>
   </data>
   <data name="strPropertyDescriptionUser1" xml:space="preserve">
     <value>Voel je vrij om alle informatie die u nodig heeft hier in te voeren.</value>
@@ -1439,6 +1472,9 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
   <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>Gebruik consolesessie</value>
   </data>
+  <data name="strPropertyNameUseCredSsp" xml:space="preserve">
+    <value>Gebruik CredSSP</value>
+  </data>
   <data name="strPropertyNameUser1" xml:space="preserve">
     <value>Gebruiker veld</value>
   </data>
@@ -1534,6 +1570,18 @@ Bericht:
   </data>
   <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
     <value>Snelle Connectie geschiedenis bestaat mislukt!</value>
+  </data>
+  <data name="strRadioCloseWarnAll" xml:space="preserve">
+    <value>&amp;Waarschuw bij het sluiten van connecties</value>
+  </data>
+  <data name="strRadioCloseWarnExit" xml:space="preserve">
+    <value>&amp;xWaarschuw alleen bij het sluiten van mRemoteNG</value>
+  </data>
+  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
+    <value>Waarschuw alleen bij het sluiten van &amp;meerdere connecties</value>
+  </data>
+  <data name="strRadioCloseWarnNever" xml:space="preserve">
+    <value>Waarschuw &amp;niet bij het sluiten van connecties</value>
   </data>
   <data name="strRAW" xml:space="preserve">
     <value>RAW</value>
@@ -1751,6 +1799,9 @@ Bericht:
   <data name="strScreenshots" xml:space="preserve">
     <value>Schermafbeeldingen</value>
   </data>
+  <data name="strSearchPrompt" xml:space="preserve">
+    <value>Zoek</value>
+  </data>
   <data name="strSendTo" xml:space="preserve">
     <value>Verstuur naar...</value>
   </data>
@@ -1871,6 +1922,117 @@ Bericht:
   <data name="strTheFollowing" xml:space="preserve">
     <value>De volgende:</value>
   </data>
+  <data name="strThemeCategoryConfigPanel" xml:space="preserve">
+    <value>Configuratie paneel</value>
+  </data>
+  <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
+    <value>Connectie paneel</value>
+  </data>
+  <data name="strThemeCategoryGeneral" xml:space="preserve">
+    <value>Algemeen</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+    <value>De achtergrondkleur van het configuratie paneel.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>De kleur van de categorie tekst in het configuratie paneel.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
+    <value>De kleur van de gridlijnen in het configuratiepaneel</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>De achtergrondkleur van de helptekst in het configuratiepaneel.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
+    <value>De tekst kleur ven de help in het configurateipaneel.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
+    <value>De tekstkleur van het configuratiepaneel.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>De achtergrondkleur van het connectie paneel.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
+    <value>De tekstkleur van het connectie paneel.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>De boomstructuur lijnen kleur in het connectie paneel.</value>
+  </data>
+  <data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
+    <value>De achtergrondkleur van de menu's.</value>
+  </data>
+  <data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
+    <value>De tekstkleur in de menu's.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
+    <value>De achtergrondkleur van de zoekboks.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
+    <value>De tekstkleur in de zoekboks.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
+    <value>De prompttekst kleur in de zoekboks.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
+    <value>De achtergrondkleur van de gereedschapsbalk.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
+    <value>De tekstkleur in de gereedschapsbalk.</value>
+  </data>
+  <data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
+    <value>De achtergrondkleur van het hoofdwindow.</value>
+  </data>
+  <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Achtergrondkleur configuratiepaneel</value>
+  </data>
+  <data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>Categorie tekst kleur in het configuratiepaneel</value>
+  </data>
+  <data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
+    <value>Lijnenkleur in het configuratiepaneel</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>Help achtergrondkleur van het configuratiepaneel</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
+    <value>Help tekstkleur van het configuratiepaneel</value>
+  </data>
+  <data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
+    <value>Configuratiepaneel tekstkleur</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>Achtergrondkleur connectie paneel</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
+    <value>Tekstkleur connectiepaneel</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>Boomstructuur lijnen kleur connectiepaneel</value>
+  </data>
+  <data name="strThemeNameMenuBackgroundColor" xml:space="preserve">
+    <value>Menu achtergrondkleur</value>
+  </data>
+  <data name="strThemeNameMenuTextColor" xml:space="preserve">
+    <value>Tekstkleur menu</value>
+  </data>
+  <data name="strThemeNameSearchBoxBackgroundColor" xml:space="preserve">
+    <value>Achtergrondkleur zoekboks</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
+    <value>Tekstkleur zoekboks</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
+    <value>Prompt tekstkleur zoekboks</value>
+  </data>
+  <data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
+    <value>Achtergrondkleur gereedschapsbalk</value>
+  </data>
+  <data name="strThemeNameToolbarTextColor" xml:space="preserve">
+    <value>Tekstkleur gereedschapskleur</value>
+  </data>
+  <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
+    <value>Achtergrondkleur window</value>
+  </data>
   <data name="strTitleError" xml:space="preserve">
     <value>Fout ({0})</value>
   </data>
@@ -1906,6 +2068,9 @@ Bericht:
   </data>
   <data name="strUncheckProperties" xml:space="preserve">
     <value>Verwijder het vinkje bij eigenschappen die u niet wil opslaan!</value>
+  </data>
+  <data name="strUnnamedTheme" xml:space="preserve">
+    <value>Thema zonder naam</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
     <value>Er is een update voor mRemoteNG beschikbaar</value>

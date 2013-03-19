@@ -150,6 +150,9 @@
   <data name="strAlwaysShowPanelSelection" xml:space="preserve">
     <value>在打开连接时总是显示面板选择对话框</value>
   </data>
+  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
+    <value>始终显示标签面板</value>
+  </data>
   <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>始终显示通知区域图标</value>
   </data>
@@ -433,9 +436,6 @@ VncSharpNG 版本 {0}</value>
   <data name="strConfigUiLoadFailed" xml:space="preserve">
     <value>无法加载配置界面。</value>
   </data>
-  <data name="strConfirmCloseConnection" xml:space="preserve">
-    <value>关闭连接选项卡时确认。</value>
-  </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
     <value>确定要关闭连接“{0}”？</value>
   </data>
@@ -456,9 +456,6 @@ VncSharpNG 版本 {0}</value>
   </data>
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>确定要删除目录，"{0}"？目录下所有目录及连接都将被删除。</value>
-  </data>
-  <data name="strConfirmExit" xml:space="preserve">
-    <value>退出时如有已打开的连接，需进行确认。</value>
   </data>
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>确认要关闭所有已打开的连接吗？</value>
@@ -546,6 +543,9 @@ VncSharpNG 版本 {0}</value>
   </data>
   <data name="strCurrentVersion" xml:space="preserve">
     <value>已安装版本</value>
+  </data>
+  <data name="strDefaultTheme" xml:space="preserve">
+    <value>默认主题</value>
   </data>
   <data name="strDetect" xml:space="preserve">
     <value>检测</value>
@@ -702,9 +702,6 @@ VncSharpNG 版本 {0}</value>
   <data name="strHttpConnectionFailed" xml:space="preserve">
     <value>无法创建新的 HTTP 连接！</value>
   </data>
-  <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
-    <value>更改HTTP文档标题失败！</value>
-  </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>设置 HTTP 属性失败！</value>
   </data>
@@ -791,6 +788,9 @@ VncSharpNG 版本 {0}</value>
   </data>
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>更新记录：</value>
+  </data>
+  <data name="strLabelClosingConnections" xml:space="preserve">
+    <value>当关闭连接时：</value>
   </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>连接(&amp;C)</value>
@@ -990,6 +990,15 @@ VncSharpNG 版本 {0}</value>
   <data name="strMenuNotifications" xml:space="preserve">
     <value>通知</value>
   </data>
+  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
+    <value>复制全部</value>
+  </data>
+  <data name="strMenuNotificationsDelete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+    <value>删除全部</value>
+  </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
     <value>打开连接配置文件…</value>
   </data>
@@ -1049,6 +1058,9 @@ VncSharpNG 版本 {0}</value>
   </data>
   <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
     <value>会话和屏幕截图</value>
+  </data>
+  <data name="strMenuShowHelpText" xml:space="preserve">
+    <value>显示（&amp;S）帮助文本</value>
   </data>
   <data name="strMenuShowText" xml:space="preserve">
     <value>显示文本</value>
@@ -1142,6 +1154,15 @@ VncSharpNG 版本 {0}</value>
   </data>
   <data name="strOpenPorts" xml:space="preserve">
     <value>打开端口</value>
+  </data>
+  <data name="strOptionsTabTheme" xml:space="preserve">
+    <value>主题</value>
+  </data>
+  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
+    <value>删除(&amp;D)</value>
+  </data>
+  <data name="strOptionsThemeButtonNew" xml:space="preserve">
+    <value>新建（&amp;N）</value>
   </data>
   <data name="strPanelName" xml:space="preserve">
     <value>面板名称</value>
@@ -1527,6 +1548,18 @@ VncSharpNG 版本 {0}</value>
   <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
     <value>快速连接历史记录检测失败 ！</value>
   </data>
+  <data name="strRadioCloseWarnAll" xml:space="preserve">
+    <value>（&amp;W）关闭连接时确认</value>
+  </data>
+  <data name="strRadioCloseWarnExit" xml:space="preserve">
+    <value>退出（&amp;e）mRemoteNG时确认</value>
+  </data>
+  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
+    <value>关闭多个（&amp;m）连接时确认</value>
+  </data>
+  <data name="strRadioCloseWarnNever" xml:space="preserve">
+    <value>关闭连接时不需确认</value>
+  </data>
   <data name="strRAW" xml:space="preserve">
     <value>RAW</value>
   </data>
@@ -1743,6 +1776,9 @@ VncSharpNG 版本 {0}</value>
   <data name="strScreenshots" xml:space="preserve">
     <value>屏幕截图</value>
   </data>
+  <data name="strSearchPrompt" xml:space="preserve">
+    <value>搜索</value>
+  </data>
   <data name="strSendTo" xml:space="preserve">
     <value>发送到…</value>
   </data>
@@ -1863,6 +1899,66 @@ VncSharpNG 版本 {0}</value>
   <data name="strTheFollowing" xml:space="preserve">
     <value>以下：</value>
   </data>
+  <data name="strThemeCategoryConfigPanel" xml:space="preserve">
+    <value>配置面板</value>
+  </data>
+  <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
+    <value>连接面板</value>
+  </data>
+  <data name="strThemeCategoryGeneral" xml:space="preserve">
+    <value>常规</value>
+  </data>
+  <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+    <value>配置面板背景色</value>
+  </data>
+  <data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>配置面板类别文本颜色</value>
+  </data>
+  <data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
+    <value>配置面板网格线颜色</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>配置面板帮助背景颜色</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
+    <value>配置面板帮助文本颜色</value>
+  </data>
+  <data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
+    <value>配置面板文本颜色</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>连接面板背景色</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
+    <value>连接面板文本颜色</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>连接面板树线颜色</value>
+  </data>
+  <data name="strThemeNameMenuBackgroundColor" xml:space="preserve">
+    <value>菜单背景颜色</value>
+  </data>
+  <data name="strThemeNameMenuTextColor" xml:space="preserve">
+    <value>菜单文本颜色</value>
+  </data>
+  <data name="strThemeNameSearchBoxBackgroundColor" xml:space="preserve">
+    <value>搜索栏背景颜色</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
+    <value>搜索栏文本颜色</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
+    <value>搜索栏提示文本颜色</value>
+  </data>
+  <data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
+    <value>工具栏背景颜色</value>
+  </data>
+  <data name="strThemeNameToolbarTextColor" xml:space="preserve">
+    <value>工具栏文本颜色</value>
+  </data>
+  <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
+    <value>窗口背景颜色</value>
+  </data>
   <data name="strTitleError" xml:space="preserve">
     <value>错误 ({0})</value>
   </data>
@@ -1898,6 +1994,9 @@ VncSharpNG 版本 {0}</value>
   </data>
   <data name="strUncheckProperties" xml:space="preserve">
     <value>请勾去您不想保存的属性！</value>
+  </data>
+  <data name="strUnnamedTheme" xml:space="preserve">
+    <value>未命名主题</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
     <value>mRemoteNG 需要更新</value>

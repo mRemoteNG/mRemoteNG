@@ -150,6 +150,9 @@
   <data name="strAlwaysShowPanelSelection" xml:space="preserve">
     <value>Toujours afficher la sélection de panneau à l'ouverture d'une connexion</value>
   </data>
+  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
+    <value>Toujours afficher les onglets du panneau</value>
+  </data>
   <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>Toujours afficher l'icone dans la zone de notification</value>
   </data>
@@ -424,9 +427,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="strConfigUiLoadFailed" xml:space="preserve">
     <value>Fenêtre de configuration échec du chargement!</value>
   </data>
-  <data name="strConfirmCloseConnection" xml:space="preserve">
-    <value>Confirmez la fermeture de l'onglet des connexions</value>
-  </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
     <value>Voulez-vous fermer la connexion, "{0}"?</value>
   </data>
@@ -447,9 +447,6 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   </data>
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>Etes-vous sûr de vouloir supprimer le dossier, "{0}"? Tous les dossiers ou les connexions qu'il contient seront également supprimés.</value>
-  </data>
-  <data name="strConfirmExit" xml:space="preserve">
-    <value>Confirmer la sortie si des connexions sont ouvertes</value>
   </data>
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>Voulez-vous de fermer toutes les connexions ouvertes?</value>
@@ -532,8 +529,14 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Impossible de créer le nouveau fichier de connexions!</value>
   </data>
+  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+    <value>Le contrôle ToolStrip est introuvable dans le FilteredPropertyGrid.</value>
+  </data>
   <data name="strCurrentVersion" xml:space="preserve">
     <value>Version installée</value>
+  </data>
+  <data name="strDefaultTheme" xml:space="preserve">
+    <value>Thème par défaut</value>
   </data>
   <data name="strDetect" xml:space="preserve">
     <value>Détecter</value>
@@ -715,6 +718,9 @@ Allez sur l'article du support de Microsoft pour plus d'informations http://supp
   <data name="strIcaSetResolutionFailed" xml:space="preserve">
     <value>Échec de ICA Set Resolution !</value>
   </data>
+  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
+    <value>Identifier les onglets de connexion rapide en ajoutant le préfix "Rapide."</value>
+  </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Importer à partir d'Active Directory</value>
   </data>
@@ -780,6 +786,9 @@ Allez sur l'article du support de Microsoft pour plus d'informations http://supp
   </data>
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>Historique des changements:</value>
+  </data>
+  <data name="strLabelClosingConnections" xml:space="preserve">
+    <value>Lors de la fermeture des connexions :</value>
   </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Connecter:</value>
@@ -979,6 +988,15 @@ Allez sur l'article du support de Microsoft pour plus d'informations http://supp
   <data name="strMenuNotifications" xml:space="preserve">
     <value>Notifications</value>
   </data>
+  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
+    <value>Copiez tout</value>
+  </data>
+  <data name="strMenuNotificationsDelete" xml:space="preserve">
+    <value>Supprimer</value>
+  </data>
+  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+    <value>Supprimer tout</value>
+  </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
     <value>Ouvrir un fichier de connexion...</value>
   </data>
@@ -1038,6 +1056,9 @@ Allez sur l'article du support de Microsoft pour plus d'informations http://supp
   </data>
   <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
     <value>Sessions et capture d'ecran</value>
+  </data>
+  <data name="strMenuShowHelpText" xml:space="preserve">
+    <value>&amp;Afficher le texte d'aide</value>
   </data>
   <data name="strMenuShowText" xml:space="preserve">
     <value>Afficher le texte</value>
@@ -1132,6 +1153,15 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   </data>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Ports ouverts</value>
+  </data>
+  <data name="strOptionsTabTheme" xml:space="preserve">
+    <value>Thème</value>
+  </data>
+  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
+    <value>&amp;Supprimer</value>
+  </data>
+  <data name="strOptionsThemeButtonNew" xml:space="preserve">
+    <value>&amp;Nouveau</value>
   </data>
   <data name="strPanelName" xml:space="preserve">
     <value>Nom du panneau</value>
@@ -1270,6 +1300,9 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   </data>
   <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
     <value>Connexion à la console de l'hôte distant.</value>
+  </data>
+  <data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
+    <value>Utilisez les informations d'identification Security Support Provider (CredSSP) pour l'authentification si elle est disponible.</value>
   </data>
   <data name="strPropertyDescriptionUser1" xml:space="preserve">
     <value>N'hésitez pas à entrer toutes les informations dont vous avez besoin ici.</value>
@@ -1421,6 +1454,9 @@ Si vous rencontrez une erreur, créez un nouveau fichier de connexion s'il vous 
   <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>Utilisez la session console</value>
   </data>
+  <data name="strPropertyNameUseCredSsp" xml:space="preserve">
+    <value>Utiliser CredSSP</value>
+  </data>
   <data name="strPropertyNameUser1" xml:space="preserve">
     <value>Champ utilisateur</value>
   </data>
@@ -1515,6 +1551,18 @@ Message:
   </data>
   <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
     <value>Échec d'Existence d'Historique de Connexion Rapide !</value>
+  </data>
+  <data name="strRadioCloseWarnAll" xml:space="preserve">
+    <value>&amp;M'avertir lors de la fermeture des connexions</value>
+  </data>
+  <data name="strRadioCloseWarnExit" xml:space="preserve">
+    <value>M'avertir uniquement lorsque mRemoteNG se f&amp;erme</value>
+  </data>
+  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
+    <value>M'avertir seulement lors de la fermeture de connexions &amp;multiples</value>
+  </data>
+  <data name="strRadioCloseWarnNever" xml:space="preserve">
+    <value>&amp;Ne pas m'avertir lors de la fermeture des connexions</value>
   </data>
   <data name="strRAW" xml:space="preserve">
     <value>RAW</value>
@@ -1732,6 +1780,9 @@ Message:
   <data name="strScreenshots" xml:space="preserve">
     <value>Captures d'écran</value>
   </data>
+  <data name="strSearchPrompt" xml:space="preserve">
+    <value>Rechercher</value>
+  </data>
   <data name="strSendTo" xml:space="preserve">
     <value>Envoyer à ...</value>
   </data>
@@ -1852,6 +1903,117 @@ Message:
   <data name="strTheFollowing" xml:space="preserve">
     <value>Ce qui suit :</value>
   </data>
+  <data name="strThemeCategoryConfigPanel" xml:space="preserve">
+    <value>Panneau de configuration</value>
+  </data>
+  <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
+    <value>Panneau de connexions</value>
+  </data>
+  <data name="strThemeCategoryGeneral" xml:space="preserve">
+    <value>Générale</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+    <value>La couleur de fond du panneau de configuration.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>La couleur du texte catégorie dans le panneau de configuration.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
+    <value>La couleur du quadrillage dans le panneau de configuration</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>La couleur de fond de la section d'aide du panneau de configuration.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
+    <value>La couleur du texte dans la section d'aide du panneau de configuration.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
+    <value>La couleur du texte dans le panneau de configuration.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>La couleur de fond du panneau des connexions.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
+    <value>La couleur du texte dans le panneau des connexions.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>La couleur des lignes d'arborescence dans le panneau des connexions.</value>
+  </data>
+  <data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
+    <value>La couleur de fond des menus.</value>
+  </data>
+  <data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
+    <value>La couleur du texte dans les menus.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
+    <value>La couleur de fond de la boîte de recherche.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
+    <value>La couleur du texte dans la zone Rechercher.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
+    <value>La couleur du texte dans la zone de recherche rapide.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
+    <value>La couleur de fond des barres d'outils.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
+    <value>La couleur du texte dans les barres d'outils.</value>
+  </data>
+  <data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
+    <value>La couleur d'arrière-plan de la fenêtre principale.</value>
+  </data>
+  <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Couleur de fond de panneau de configuration</value>
+  </data>
+  <data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>Couleur de texte pour le panneau de configuration</value>
+  </data>
+  <data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
+    <value>Couleur des ligne de la grille du panneau de configuration</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>Couleur de Fond de l'Aide du Panneau de Configuration</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
+    <value>Couleur du Texte de l'Aide du Panneau de Configuration</value>
+  </data>
+  <data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
+    <value>Couleur du Texte du Panneau de Configuration</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>Couleur de Fond du Panneau des Connexions</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
+    <value>Couleur du Texte du Panneau de Connexions</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>Couleur de l'arbre des connections dans le menu</value>
+  </data>
+  <data name="strThemeNameMenuBackgroundColor" xml:space="preserve">
+    <value>Couleur de Fond du Menu</value>
+  </data>
+  <data name="strThemeNameMenuTextColor" xml:space="preserve">
+    <value>Couleur de texte du menu</value>
+  </data>
+  <data name="strThemeNameSearchBoxBackgroundColor" xml:space="preserve">
+    <value>Couleur de fond de la boite de recherche</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
+    <value>Couleur du texte pour la boite de recherche</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
+    <value>Couleur du Texte de la Boîte de Recherche</value>
+  </data>
+  <data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
+    <value>Couleur de fond de barre d'outils</value>
+  </data>
+  <data name="strThemeNameToolbarTextColor" xml:space="preserve">
+    <value>Couleur du texte pour la barre d'outils</value>
+  </data>
+  <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
+    <value>Couleur de fond de la fenêtre</value>
+  </data>
   <data name="strTitleError" xml:space="preserve">
     <value>Erreur ({0})</value>
   </data>
@@ -1887,6 +2049,9 @@ Message:
   </data>
   <data name="strUncheckProperties" xml:space="preserve">
     <value>Décochez les propriétés que vous souhaitez ne pas être enregistrer!</value>
+  </data>
+  <data name="strUnnamedTheme" xml:space="preserve">
+    <value>Thème sans nom</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
     <value>mRemoteNG nécessite une mise à jour</value>

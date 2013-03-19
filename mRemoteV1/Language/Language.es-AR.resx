@@ -244,9 +244,6 @@ VncSharpNG Control {0}</value>
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>¿Está seguro que desea eliminar la carpeta "{0}"? También se eliminará cualquier carpetas o conexiones que contiene.</value>
   </data>
-  <data name="strConfirmExit" xml:space="preserve">
-    <value>Confirmar salida si hay conexiones abiertas</value>
-  </data>
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>¿Desea cerrar todas las conexiones abiertas?</value>
   </data>

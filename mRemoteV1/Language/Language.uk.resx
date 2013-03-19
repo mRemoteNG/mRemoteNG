@@ -438,9 +438,6 @@ VncSharpNG Control Version {0}</value>
   <data name="strConfigUiLoadFailed" xml:space="preserve">
     <value>Помилка завантаження Config UI!</value>
   </data>
-  <data name="strConfirmCloseConnection" xml:space="preserve">
-    <value>Запитувати підтвердження при закритті вкладки з'єднання</value>
-  </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
     <value>Хочете закрити з'єднання, "{0}"?</value>
   </data>
@@ -461,9 +458,6 @@ VncSharpNG Control Version {0}</value>
   </data>
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>Хочете видалити папку "{0}"? Будь-які папки або з'єднання, які вона містить також будуть видалені.</value>
-  </data>
-  <data name="strConfirmExit" xml:space="preserve">
-    <value>Підтвердження при виході, якщо є відкриті з'єднання</value>
   </data>
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>Хочете закрити всі відкриті з'єднання?</value>
@@ -714,9 +708,6 @@ VncSharpNG Control Version {0}</value>
   </data>
   <data name="strHttpConnectionFailed" xml:space="preserve">
     <value>Не вдається створити нове з'єднання HTTP!</value>
-  </data>
-  <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
-    <value>Змінити HTTP документ не вдалося!</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Не вдалося задати параметри HTTP!</value>

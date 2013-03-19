@@ -150,6 +150,9 @@
   <data name="strAlwaysShowPanelSelection" xml:space="preserve">
     <value>Всегда показывать диалог выбора панели при открытии подключения</value>
   </data>
+  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
+    <value>Всегда показывать панель закладок</value>
+  </data>
   <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>Всегда показывать значок в системном трее</value>
   </data>
@@ -438,9 +441,6 @@
   <data name="strConfigUiLoadFailed" xml:space="preserve">
     <value>Ошибка загрузки Config UI!</value>
   </data>
-  <data name="strConfirmCloseConnection" xml:space="preserve">
-    <value>Запрашивать подтверждение при закрытии вкладки подключения</value>
-  </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
     <value>Хотите закрыть подключение, "{0}"?</value>
   </data>
@@ -461,9 +461,6 @@
   </data>
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>Хотите удалить папку "{0}"? Любые папки или подключения, которые она содержит также будут удалены.</value>
-  </data>
-  <data name="strConfirmExit" xml:space="preserve">
-    <value>Подтверждение при выходе, если есть открытые подключения</value>
   </data>
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>Хотите закрыть все открытые подключения?</value>
@@ -549,8 +546,14 @@
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Не удается создать новый файл подключений!</value>
   </data>
+  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+    <value>Не удалось найти элемент управления ToolStrip в FilteredPropertyGrid.</value>
+  </data>
   <data name="strCurrentVersion" xml:space="preserve">
     <value>Установленная версия</value>
+  </data>
+  <data name="strDefaultTheme" xml:space="preserve">
+    <value>Тема по умолчанию</value>
   </data>
   <data name="strDetect" xml:space="preserve">
     <value>Обнаружение</value>
@@ -739,6 +742,9 @@
   <data name="strIcaSetResolutionFailed" xml:space="preserve">
     <value>Ошибка установки разрешений ICA!</value>
   </data>
+  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
+    <value>Определить вкладки быстрых подключений, добавляя префикс «Quick:»</value>
+  </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Импорт из Active Directory</value>
   </data>
@@ -804,6 +810,9 @@
   </data>
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>История версий:</value>
+  </data>
+  <data name="strLabelClosingConnections" xml:space="preserve">
+    <value>При закрытии подключений:</value>
   </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Подключение:</value>
@@ -1003,6 +1012,15 @@
   <data name="strMenuNotifications" xml:space="preserve">
     <value>Уведомления</value>
   </data>
+  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
+    <value>Скопировать все</value>
+  </data>
+  <data name="strMenuNotificationsDelete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+    <value>Удалить все</value>
+  </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
     <value>Открыть файл подключения...</value>
   </data>
@@ -1062,6 +1080,9 @@
   </data>
   <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
     <value>Сессии и скриншоты</value>
+  </data>
+  <data name="strMenuShowHelpText" xml:space="preserve">
+    <value>Показать текст справки</value>
   </data>
   <data name="strMenuShowText" xml:space="preserve">
     <value>Показать текст</value>
@@ -1156,6 +1177,15 @@
   </data>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Открытые порты</value>
+  </data>
+  <data name="strOptionsTabTheme" xml:space="preserve">
+    <value>Тема</value>
+  </data>
+  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="strOptionsThemeButtonNew" xml:space="preserve">
+    <value>Новая</value>
   </data>
   <data name="strPanelName" xml:space="preserve">
     <value>Название группы</value>
@@ -1294,6 +1324,9 @@
   </data>
   <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
     <value>Подключение к текущему сеансу удаленного пользователя.</value>
+  </data>
+  <data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
+    <value>Использовать поставщика поддержки безопасности (CredSSP) для проверки подлинности учетных данных, если он доступен.</value>
   </data>
   <data name="strPropertyDescriptionUser1" xml:space="preserve">
     <value>Введите любую информацию.</value>
@@ -1445,6 +1478,9 @@
   <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>Сеанс консоли</value>
   </data>
+  <data name="strPropertyNameUseCredSsp" xml:space="preserve">
+    <value>Использовать проверку подлинности CredSSP</value>
+  </data>
   <data name="strPropertyNameUser1" xml:space="preserve">
     <value>Дополнительно</value>
   </data>
@@ -1540,6 +1576,18 @@
   </data>
   <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
     <value>Ошибка истории Быстрых подключений!</value>
+  </data>
+  <data name="strRadioCloseWarnAll" xml:space="preserve">
+    <value>Предупреждать при закрытии подключений</value>
+  </data>
+  <data name="strRadioCloseWarnExit" xml:space="preserve">
+    <value>Предупреждать меня только при выходе из mRemoteNG</value>
+  </data>
+  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
+    <value>Предупреждать меня только при закрытии нескольких подключений</value>
+  </data>
+  <data name="strRadioCloseWarnNever" xml:space="preserve">
+    <value>Не предупреждать при закрытии подключений</value>
   </data>
   <data name="strRAW" xml:space="preserve">
     <value>RAW</value>
@@ -1665,7 +1713,7 @@
     <value>RDP: Установить уровень проверки подлинности не удалась!</value>
   </data>
   <data name="strRdpSetConsoleSessionFailed" xml:space="preserve">
-    <value>RDP: Не удалось использование консольную сессию!</value>
+    <value>RDP: Не удалось использовать консольную сессию!</value>
   </data>
   <data name="strRdpSetConsoleSwitch" xml:space="preserve">
     <value>Настройка переключения консолей для RDC {0}.</value>
@@ -1756,6 +1804,9 @@
   </data>
   <data name="strScreenshots" xml:space="preserve">
     <value>Скриншоты</value>
+  </data>
+  <data name="strSearchPrompt" xml:space="preserve">
+    <value>Поиск</value>
   </data>
   <data name="strSendTo" xml:space="preserve">
     <value>Отправить...</value>
@@ -1877,6 +1928,117 @@
   <data name="strTheFollowing" xml:space="preserve">
     <value>Установить вручную:</value>
   </data>
+  <data name="strThemeCategoryConfigPanel" xml:space="preserve">
+    <value>Конфигурация</value>
+  </data>
+  <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
+    <value>Подключения</value>
+  </data>
+  <data name="strThemeCategoryGeneral" xml:space="preserve">
+    <value>Общие</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Цвет фона панели конфигурации.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>Цвет текста категории на панели конфигурации.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
+    <value>Цвет линий сетки на панели конфигурации</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>Цвет фона области справки панели конфигурации.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
+    <value>Цвет текста в области справки панели конфигурации.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
+    <value>Цвет текста в панели конфигурации.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>Цвет фона панели подключений.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
+    <value>Цвет текста в панели подключений.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>Цвет линий дерева на панели подключений.</value>
+  </data>
+  <data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
+    <value>Цвет фона меню.</value>
+  </data>
+  <data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
+    <value>Цвет текста в меню.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
+    <value>Цвет фона поля поиска.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
+    <value>Цвет текста в поле поиска.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
+    <value>Цвет текста подсказки в поле поиска.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
+    <value>Цвет фона панели инструментов.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
+    <value>Цвет текста в панели инструментов.</value>
+  </data>
+  <data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
+    <value>Цвет фона главного окна.</value>
+  </data>
+  <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Цвет фона панели конфигурации</value>
+  </data>
+  <data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>Цвет текста категории панели конфигурации</value>
+  </data>
+  <data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
+    <value>Цвет линий сетки панели конфигурации</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>Цвет фона справки панели конфигурации</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
+    <value>Цвет текста справки панели конфигурации</value>
+  </data>
+  <data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
+    <value>Цвет текста панели конфигурации</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>Цвет фона панели подключений</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
+    <value>Цвет текста панели подключений</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>Цвет линий дерева панели подключений</value>
+  </data>
+  <data name="strThemeNameMenuBackgroundColor" xml:space="preserve">
+    <value>Цвет фона меню</value>
+  </data>
+  <data name="strThemeNameMenuTextColor" xml:space="preserve">
+    <value>Цвет текста меню</value>
+  </data>
+  <data name="strThemeNameSearchBoxBackgroundColor" xml:space="preserve">
+    <value>Цвет фона поля поиска</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
+    <value>Цвет текста поля поиска</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
+    <value>Цвет текста подсказки поля поиска</value>
+  </data>
+  <data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
+    <value>Цвет фона панели инструментов</value>
+  </data>
+  <data name="strThemeNameToolbarTextColor" xml:space="preserve">
+    <value>Цвет текста панели инструментов</value>
+  </data>
+  <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
+    <value>Цвет фона окна</value>
+  </data>
   <data name="strTitleError" xml:space="preserve">
     <value>Ошибка ({0})</value>
   </data>
@@ -1912,6 +2074,9 @@
   </data>
   <data name="strUncheckProperties" xml:space="preserve">
     <value>Снимите свойства, которые не хотите сохранять!</value>
+  </data>
+  <data name="strUnnamedTheme" xml:space="preserve">
+    <value>Безымянный тема</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
     <value>Требуется обновление mRemoteNG</value>

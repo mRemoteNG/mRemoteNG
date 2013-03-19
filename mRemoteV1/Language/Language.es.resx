@@ -150,6 +150,9 @@
   <data name="strAlwaysShowPanelSelection" xml:space="preserve">
     <value>Mostrar siempre el diálogo de selección de panel cuando se abran conexiones</value>
   </data>
+  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
+    <value>Mostrar las pestañas del panel siempre</value>
+  </data>
   <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>Mostrar siempre el Icono de la Bandeja del Sistema</value>
   </data>
@@ -422,9 +425,6 @@ Versión de Control {0} de VNCSharpNG</value>
   <data name="strConfigUiLoadFailed" xml:space="preserve">
     <value>Error al Cargar la Interfaz de Configuración de Usuario</value>
   </data>
-  <data name="strConfirmCloseConnection" xml:space="preserve">
-    <value>Confirme el cierre de las pestañas de conexiones</value>
-  </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
     <value>Desea cerrar la conexión, "{0}"?</value>
   </data>
@@ -445,9 +445,6 @@ Versión de Control {0} de VNCSharpNG</value>
   </data>
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>¿Está seguro de querer eliminar la carpeta, "{0}"? Cualquier carpeta o conexión que contenga será también eliminada.</value>
-  </data>
-  <data name="strConfirmExit" xml:space="preserve">
-    <value>Confirmar al salir si hay conexiones abiertas</value>
   </data>
   <data name="strConfirmExitMainInstruction" xml:space="preserve">
     <value>¿Quiere cerrar todas las conexiones abiertas?</value>
@@ -532,6 +529,9 @@ Arrancando con un nuevo archivo de conexiones.</value>
   </data>
   <data name="strCurrentVersion" xml:space="preserve">
     <value>Versión Instalada</value>
+  </data>
+  <data name="strDefaultTheme" xml:space="preserve">
+    <value>Tema por defecto</value>
   </data>
   <data name="strDetect" xml:space="preserve">
     <value>Detectar</value>
@@ -687,9 +687,6 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
   <data name="strHttpConnectionFailed" xml:space="preserve">
     <value>¡No se pudo crear una nueva conexión HTTP!</value>
   </data>
-  <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
-    <value>¡Fallo en el cambio de HTTP Document Tile!</value>
-  </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>¡Asignación de Propiedades HTTP fallida!</value>
   </data>
@@ -761,6 +758,9 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
   </data>
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>Registro de cambios:</value>
+  </data>
+  <data name="strLabelClosingConnections" xml:space="preserve">
+    <value>Al cerrar las conexiones:</value>
   </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Conectar:</value>
@@ -960,6 +960,15 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
   <data name="strMenuNotifications" xml:space="preserve">
     <value>Notificaciones</value>
   </data>
+  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
+    <value>Copiar todo</value>
+  </data>
+  <data name="strMenuNotificationsDelete" xml:space="preserve">
+    <value>Eliminar</value>
+  </data>
+  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+    <value>Eliminar todo</value>
+  </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
     <value>Abrir Archivo de Conexión...</value>
   </data>
@@ -1110,6 +1119,15 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
   </data>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Puertos Abiertos</value>
+  </data>
+  <data name="strOptionsTabTheme" xml:space="preserve">
+    <value>Tema</value>
+  </data>
+  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
+    <value>&amp;Eliminar</value>
+  </data>
+  <data name="strOptionsThemeButtonNew" xml:space="preserve">
+    <value>&amp;Nuevo</value>
   </data>
   <data name="strPanelName" xml:space="preserve">
     <value>Nombre del Panel</value>
@@ -1399,6 +1417,9 @@ Ver el articulo de soporte de Microsoft en http://support.microsoft.com/kb/81183
   <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>Usar Sesión de Consola</value>
   </data>
+  <data name="strPropertyNameUseCredSsp" xml:space="preserve">
+    <value>Usar CredSSP</value>
+  </data>
   <data name="strPropertyNameUser1" xml:space="preserve">
     <value>Campo de Usuario</value>
   </data>
@@ -1472,6 +1493,9 @@ Mensaje:
   </data>
   <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
     <value>¡Fallo en el Histórico de Conexiones Rápidas!</value>
+  </data>
+  <data name="strRadioCloseWarnAll" xml:space="preserve">
+    <value>&amp;Avisarme al cerrar conexiones</value>
   </data>
   <data name="strRAW" xml:space="preserve">
     <value>RAW</value>
@@ -1683,6 +1707,9 @@ Mensaje:
   <data name="strScreenshots" xml:space="preserve">
     <value>Volcados de Pantalla</value>
   </data>
+  <data name="strSearchPrompt" xml:space="preserve">
+    <value>Buscar</value>
+  </data>
   <data name="strSendTo" xml:space="preserve">
     <value>Enviar a...</value>
   </data>
@@ -1803,6 +1830,30 @@ Mensaje:
   <data name="strTheFollowing" xml:space="preserve">
     <value>El siguiente:</value>
   </data>
+  <data name="strThemeCategoryConfigPanel" xml:space="preserve">
+    <value>Panel de configuración</value>
+  </data>
+  <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
+    <value>Panel de conexiones</value>
+  </data>
+  <data name="strThemeCategoryGeneral" xml:space="preserve">
+    <value>General</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+    <value>El color de fondo del panel de configuración.</value>
+  </data>
+  <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Color de fondo del panel de configuración</value>
+  </data>
+  <data name="strThemeNameMenuTextColor" xml:space="preserve">
+    <value>Color del texto del menú</value>
+  </data>
+  <data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
+    <value>Color de fondo de la barra de herramientas</value>
+  </data>
+  <data name="strThemeNameToolbarTextColor" xml:space="preserve">
+    <value>Color del texto de la barra de herramientas</value>
+  </data>
   <data name="strTitleError" xml:space="preserve">
     <value>Error ({0})</value>
   </data>
@@ -1838,6 +1889,9 @@ Mensaje:
   </data>
   <data name="strUncheckProperties" xml:space="preserve">
     <value>¡Desmarque las propiedades que no quiera que sean guardadas!</value>
+  </data>
+  <data name="strUnnamedTheme" xml:space="preserve">
+    <value>Tema sin nombre</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
     <value>Actualización de mRemoteNG disponible</value>
