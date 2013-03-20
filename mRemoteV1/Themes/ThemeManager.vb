@@ -24,7 +24,11 @@ Namespace Themes
         Public Shared Function LoadThemes() As List(Of ThemeInfo)
             Dim themes As New List(Of ThemeInfo)
             themes.Add(DefaultTheme)
-            themes.AddRange(ThemeSerializer.LoadFromXmlFile(Path.Combine(App.Info.Settings.SettingsPath, App.Info.Settings.ThemesFileName)))
+            Try
+                themes.AddRange(ThemeSerializer.LoadFromXmlFile(Path.Combine(App.Info.Settings.SettingsPath, App.Info.Settings.ThemesFileName)))
+            Catch ex As FileNotFoundException
+            End Try
+
             Return themes
         End Function
 
