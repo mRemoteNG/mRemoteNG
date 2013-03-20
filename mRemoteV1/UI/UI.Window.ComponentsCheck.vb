@@ -539,7 +539,6 @@ Namespace UI
                     txtCheck2.Text = My.Language.strCcVNCFailed
 
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "VNC " & errorMsg, True)
-                    'mC.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
                 End Try
 
                 If VNC IsNot Nothing Then VNC.Dispose()

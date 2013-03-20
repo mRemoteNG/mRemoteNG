@@ -114,8 +114,7 @@ Namespace Config
                         End If
                     End With
                 Catch ex As Exception
-                    App.Runtime.log.Error("Loading settings failed" & vbNewLine & ex.Message)
-                    'mC.AddMessage(Messages.MessageClass.ErrorMsg, "Loading settings failed" & vbNewLine & ex.Message, True)
+                    Log.Error("Loading settings failed" & vbNewLine & ex.Message)
                 End Try
             End Sub
 
@@ -196,8 +195,7 @@ Namespace Config
                         End If
                     End With
                 Catch ex As Exception
-                    App.Runtime.log.Error("LoadPanelsFromXML failed" & vbNewLine & ex.Message)
-                    'mC.AddMessage(Messages.MessageClass.ErrorMsg, "LoadPanelsFromXML failed" & vbNewLine & ex.Message, True)
+                    Log.Error("LoadPanelsFromXML failed" & vbNewLine & ex.Message)
                 End Try
             End Sub
 
@@ -268,8 +266,7 @@ Namespace Config
                         Return Windows.screenshotPanel
                     End If
                 Catch ex As Exception
-                    App.Runtime.log.Error("GetContentFromPersistString failed" & vbNewLine & ex.Message)
-                    'mC.AddMessage(Messages.MessageClass.ErrorMsg, "GetContentFromPersistString failed" & vbNewLine & ex.Message, True)
+                    Log.Error("GetContentFromPersistString failed" & vbNewLine & ex.Message)
                 End Try
 
                 Return Nothing
