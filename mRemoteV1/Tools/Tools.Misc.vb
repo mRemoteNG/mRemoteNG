@@ -311,14 +311,14 @@ Namespace Tools
                 Get
                     Return _value
                 End Get
-                Set(value As Boolean)
-                    If _value = value Then Return
+                Set(newValue As Boolean)
+                    If _value = newValue Then Return
                     If Not _value Then
                         EnterFullscreen()
                     Else
                         ExitFullscreen()
                     End If
-                    _value = value
+                    _value = newValue
                 End Set
             End Property
 
@@ -327,7 +327,6 @@ Namespace Tools
                 _savedWindowState = _handledForm.WindowState
                 _savedBounds = _handledForm.Bounds
 
-                _handledForm.TopMost = True
                 _handledForm.FormBorderStyle = FormBorderStyle.None
                 If _handledForm.WindowState = FormWindowState.Maximized Then
                     _handledForm.WindowState = FormWindowState.Normal
