@@ -190,7 +190,7 @@ Namespace Tree
                 Dim nNode As New TreeNode
 
                 Select Case NodeType
-                    Case Type.Connection Or Type.PuttySession
+                    Case Type.Connection, Type.PuttySession
                         nNode.Text = My.Language.strNewConnection
                         nNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
                         nNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed

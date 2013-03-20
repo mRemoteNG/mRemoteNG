@@ -1,5 +1,6 @@
   Fixed issue MR-406 - Items disappear from External Tools toolbar when accessing External Tools panel
   Fixed issue MR-410 - Unhandled exception when clicking New button under Theme
+  Fixed new connections having a globe icon.
 
 1.71 Beta 2 (2013-03-19):
   Added feature MR-336 - Customizable background color for the windows/panels
