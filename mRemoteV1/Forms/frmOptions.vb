@@ -1489,6 +1489,7 @@ Public Class frmOptions
         Me.ThemePropertyGrid.Name = "ThemePropertyGrid"
         Me.ThemePropertyGrid.Size = New System.Drawing.Size(596, 426)
         Me.ThemePropertyGrid.TabIndex = 3
+        Me.ThemePropertyGrid.UseCompatibleTextRendering = True
         '
         'frmOptions
         '
