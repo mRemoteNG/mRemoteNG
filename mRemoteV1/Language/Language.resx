@@ -2217,4 +2217,10 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strPuttySavedSessionsRootName" xml:space="preserve">
     <value>PuTTY Saved Sessions</value>
   </data>
+  <data name="strCompatibilityProblemDetected" xml:space="preserve">
+    <value>Compatibility problem detected</value>
+  </data>
+  <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+    <value>{0} has detected the Lenovo Auto Scroll Utility running on this system. This utility is known to cause problems with {0}. It is recommended that you disable or uninstall it.</value>
+  </data>
 </root>

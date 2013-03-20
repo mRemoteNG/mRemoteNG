@@ -928,6 +928,24 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to {0} has detected the Lenovo Auto Scroll Utility running on this system. This utility is known to cause problems with {0}. It is recommended that you disable or uninstall it..
+        '''</summary>
+        Friend Shared ReadOnly Property strCompatibilityLenovoAutoScrollUtilityDetected() As String
+            Get
+                Return ResourceManager.GetString("strCompatibilityLenovoAutoScrollUtilityDetected", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Compatibility problem detected.
+        '''</summary>
+        Friend Shared ReadOnly Property strCompatibilityProblemDetected() As String
+            Get
+                Return ResourceManager.GetString("strCompatibilityProblemDetected", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Components Check.
         '''</summary>
         Friend Shared ReadOnly Property strComponentsCheck() As String

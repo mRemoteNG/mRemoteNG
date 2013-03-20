@@ -542,5 +542,8 @@
     <Setting Name="PuttySavedSessionsPanel" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="CompatibilityWarnLenovoAutoScrollUtility" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

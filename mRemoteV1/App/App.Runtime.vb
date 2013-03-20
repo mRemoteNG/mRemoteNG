@@ -2,6 +2,8 @@
 Imports mRemoteNG.Messages
 Imports mRemoteNG.Connection
 Imports mRemoteNG.Tools
+Imports mRemoteNG.My
+Imports PSTaskDialog
 Imports WeifenLuo.WinFormsUI.Docking
 Imports System.IO
 Imports Crownwood
@@ -377,6 +379,11 @@ Namespace App
 
         Public Class Startup
             Public Shared Sub CheckCompatibility()
+                CheckFipsPolicy()
+                CheckLenovoAutoScrollUtility()
+            End Sub
+
+            Private Shared Sub CheckFipsPolicy()
                 Dim regKey As RegistryKey
 
                 Dim isFipsPolicyEnabled As Boolean = False
@@ -396,6 +403,22 @@ Namespace App
                 If isFipsPolicyEnabled Then
                     MessageBox.Show(frmMain, String.Format(My.Language.strErrorFipsPolicyIncompatible, My.Application.Info.ProductName), My.Application.Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
                     [Exit](1)
+                End If
+            End Sub
+
+            Private Shared Sub CheckLenovoAutoScrollUtility()
+                If Not Settings.CompatibilityWarnLenovoAutoScrollUtility Then Return
+
+                Dim proccesses() As Process = {}
+                Try
+                    proccesses = Process.GetProcessesByName("virtscrl")
+                Catch
+                End Try
+                If proccesses.Length = 0 Then Return
+
+                cTaskDialog.MessageBox(System.Windows.Forms.Application.ProductName, Language.strCompatibilityProblemDetected, String.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected, System.Windows.Forms.Application.ProductName), "", "", Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.OK, eSysIcons.Warning, Nothing)
+                If cTaskDialog.VerificationChecked Then
+                    Settings.CompatibilityWarnLenovoAutoScrollUtility = False
                 End If
             End Sub
 
