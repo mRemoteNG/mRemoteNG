@@ -55,14 +55,18 @@ Namespace Config
             treeView.EndUpdate()
         End Sub
 
-        Protected Shared Function GetSessionNames(Optional ByVal addDefaultSettings As Boolean = False) As String()
+        Protected Shared Function GetSessionNames(Optional ByVal raw As Boolean = False) As String()
             Dim sessionsKey As RegistryKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey)
             If sessionsKey Is Nothing Then Return New String() {}
 
             Dim sessionNames As New List(Of String)
-            If addDefaultSettings Then sessionNames.Add("Default Settings")
+            If Not raw Then sessionNames.Add("Default Settings") ' Do not localize
             For Each sessionName As String In sessionsKey.GetSubKeyNames()
-                sessionNames.Add(Web.HttpUtility.UrlDecode(sessionName))
+                If raw Then
+                    sessionNames.Add(sessionName)
+                Else
+                    sessionNames.Add(Web.HttpUtility.UrlDecode(sessionName))
+                End If
             Next
             Return sessionNames.ToArray()
         End Function
@@ -70,7 +74,7 @@ Namespace Config
         Protected Shared Function LoadSessions() As Connection.PuttySession.Info()
             Dim sessionList As New List(Of Connection.PuttySession.Info)
             Dim sessionInfo As Connection.Info
-            For Each sessionName As String In GetSessionNames()
+            For Each sessionName As String In GetSessionNames(True)
                 sessionInfo = SessionToConnectionInfo(sessionName)
                 If sessionInfo Is Nothing Then Continue For
                 sessionList.Add(sessionInfo)
@@ -84,6 +88,8 @@ Namespace Config
 
             Dim sessionKey As RegistryKey = sessionsKey.OpenSubKey(sessionName)
             If sessionKey Is Nothing Then Return Nothing
+
+            sessionName = Web.HttpUtility.UrlDecode(sessionName)
 
             Dim sessionInfo As New Connection.PuttySession.Info
             With sessionInfo
@@ -122,7 +128,7 @@ Namespace Config
 
             Public Shared ReadOnly Property Names() As String()
                 Get
-                    Return GetSessionNames(True)
+                    Return GetSessionNames()
                 End Get
             End Property
 

@@ -7,6 +7,7 @@
   Fixed issue MR-413 - Can't use aplication
   Fixed new connections having a globe icon.
   Fixed the category names in the themes tab of the options dialog on Windows XP not showing correctly.
+  Fixed PuTTY saved sessions with spaces or special characters not being listed.
 
 1.71 Beta 2 (2013-03-19):
   Added feature MR-336 - Customizable background color for the windows/panels
