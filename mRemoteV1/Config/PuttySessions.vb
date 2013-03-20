@@ -57,7 +57,7 @@ Namespace Config
 
         Protected Shared Function GetSessionNames(Optional ByVal addDefaultSettings As Boolean = False) As String()
             Dim sessionsKey As RegistryKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey)
-            If sessionsKey Is Nothing Then Return Nothing
+            If sessionsKey Is Nothing Then Return New String() {}
 
             Dim sessionNames As New List(Of String)
             If addDefaultSettings Then sessionNames.Add("Default Settings")
