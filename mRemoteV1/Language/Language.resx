@@ -1863,7 +1863,7 @@ Message:
     <value>SSH Transfer End (UI.Window.SSHTransfer) failed!</value>
   </data>
   <data name="strSSHTransferFailed" xml:space="preserve">
-    <value>Transfer</value>
+    <value>SSH transfer failed.</value>
   </data>
   <data name="strStartIP" xml:space="preserve">
     <value>Start IP</value>

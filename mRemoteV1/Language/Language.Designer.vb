@@ -5421,7 +5421,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Transfer.
+        '''  Looks up a localized string similar to SSH transfer failed..
         '''</summary>
         Friend Shared ReadOnly Property strSSHTransferFailed() As String
             Get
