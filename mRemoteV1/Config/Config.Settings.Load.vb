@@ -80,7 +80,8 @@ Namespace Config
                         .Location = newBounds.Location
 
                         If My.Settings.MainFormKiosk = True Then
-                            Tools.Misc.Fullscreen.EnterFullscreen()
+                            .Fullscreen.Value = True
+                            .mMenViewFullscreen.Checked = True
                         End If
 
                         If My.Settings.UseCustomPuttyPath Then

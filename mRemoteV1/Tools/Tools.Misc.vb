@@ -297,62 +297,48 @@ Namespace Tools
         End Class
 
         Public Class Fullscreen
-            Private Shared winState As FormWindowState
-            Private Shared brdStyle As FormBorderStyle
-            Private Shared topMost As Boolean
-            Private Shared bounds As Rectangle
+            Public Sub New(ByVal handledForm As Form)
+                _handledForm = handledForm
+            End Sub
 
-            Public Shared targetForm As Form = frmMain
-            Public Shared FullscreenActive As Boolean = False
+            Private ReadOnly _handledForm As Form
+            Private _savedWindowState As FormWindowState
+            Private _savedBorderStyle As FormBorderStyle
+            Private _savedBounds As Rectangle
 
-            Public Shared Sub EnterFullscreen()
-                Try
-                    If Not FullscreenActive Then
-                        FullscreenActive = True
-                        Save()
-                        targetForm.WindowState = FormWindowState.Maximized
-                        targetForm.FormBorderStyle = FormBorderStyle.None
-                        SetWinFullScreen(targetForm.Handle)
+            Private _value As Boolean = False
+            Public Property Value() As Boolean
+                Get
+                    Return _value
+                End Get
+                Set(value As Boolean)
+                    If _value = value Then Return
+                    If Not _value Then
+                        EnterFullscreen()
+                    Else
+                        ExitFullscreen()
                     End If
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Entering Fullscreen failed" & vbNewLine & ex.Message, True)
-                End Try
+                    _value = value
+                End Set
+            End Property
+
+            Private Sub EnterFullscreen()
+                _savedBorderStyle = _handledForm.FormBorderStyle
+                _savedWindowState = _handledForm.WindowState
+                _savedBounds = _handledForm.Bounds
+
+                _handledForm.TopMost = True
+                _handledForm.FormBorderStyle = FormBorderStyle.None
+                If _handledForm.WindowState = FormWindowState.Maximized Then
+                    _handledForm.WindowState = FormWindowState.Normal
+                End If
+                _handledForm.WindowState = FormWindowState.Maximized
             End Sub
 
-            Public Shared Sub Save()
-                winState = targetForm.WindowState
-                brdStyle = targetForm.FormBorderStyle
-                bounds = targetForm.Bounds
-            End Sub
-
-            Public Shared Sub ExitFullscreen()
-                Try
-                    targetForm.WindowState = winState
-                    targetForm.FormBorderStyle = brdStyle
-                    targetForm.Bounds = bounds
-                    FullscreenActive = False
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Exiting Fullscreen failed" & vbNewLine & ex.Message, True)
-                End Try
-            End Sub
-
-            <DllImport("user32.dll", EntryPoint:="GetSystemMetrics")> Public Shared Function GetSystemMetrics(ByVal which As Integer) As Integer
-            End Function
-
-            <DllImport("user32.dll")> Public Shared Sub SetWindowPos(ByVal hwnd As IntPtr, ByVal hwndInsertAfter As IntPtr, ByVal X As Integer, ByVal Y As Integer, ByVal width As Integer, ByVal height As Integer, ByVal flags As UInteger)
-            End Sub
-
-            Private Shared HWND_TOP As IntPtr = IntPtr.Zero
-            Private Const SWP_SHOWWINDOW As Integer = 64
-            ' 0×0040
-
-            Public Shared Sub SetWinFullScreen(ByVal hwnd As IntPtr)
-                Try
-                    Dim curScreen As Screen = Screen.FromHandle(targetForm.Handle)
-                    SetWindowPos(hwnd, HWND_TOP, curScreen.Bounds.Left, curScreen.Bounds.Top, curScreen.Bounds.Right, curScreen.Bounds.Bottom, SWP_SHOWWINDOW)
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SetWindowPos failed" & vbNewLine & ex.Message, True)
-                End Try
+            Private Sub ExitFullscreen()
+                _handledForm.FormBorderStyle = _savedBorderStyle
+                _handledForm.WindowState = _savedWindowState
+                _handledForm.Bounds = _savedBounds
             End Sub
         End Class
 

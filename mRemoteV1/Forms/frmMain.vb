@@ -589,14 +589,10 @@ Public Class frmMain
         End If
     End Sub
 
+    Public Fullscreen As New Tools.Misc.Fullscreen(Me)
     Private Sub mMenViewFullscreen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewFullscreen.Click
-        If Tools.Misc.Fullscreen.FullscreenActive Then
-            Tools.Misc.Fullscreen.ExitFullscreen()
-            Me.mMenViewFullscreen.Checked = False
-        Else
-            Tools.Misc.Fullscreen.EnterFullscreen()
-            Me.mMenViewFullscreen.Checked = True
-        End If
+        Fullscreen.Value = Not Fullscreen.Value
+        mMenViewFullscreen.Checked = Fullscreen.Value
     End Sub
 #End Region
 

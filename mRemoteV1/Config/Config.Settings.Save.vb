@@ -25,7 +25,7 @@ Namespace Config
 
                         My.Settings.MainFormState = .WindowState
 
-                        My.Settings.MainFormKiosk = Tools.Misc.Fullscreen.FullscreenActive
+                        My.Settings.MainFormKiosk = .Fullscreen.Value
 
                         My.Settings.FirstStart = False
                         My.Settings.ResetPanels = False
