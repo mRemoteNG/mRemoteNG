@@ -2,7 +2,6 @@
 Imports mRemoteNG.Messages
 Imports mRemoteNG.Connection
 Imports mRemoteNG.Tools
-Imports mRemoteNG.My
 Imports PSTaskDialog
 Imports WeifenLuo.WinFormsUI.Docking
 Imports System.IO
@@ -407,7 +406,7 @@ Namespace App
             End Sub
 
             Private Shared Sub CheckLenovoAutoScrollUtility()
-                If Not Settings.CompatibilityWarnLenovoAutoScrollUtility Then Return
+                If Not My.Settings.CompatibilityWarnLenovoAutoScrollUtility Then Return
 
                 Dim proccesses() As Process = {}
                 Try
@@ -416,9 +415,9 @@ Namespace App
                 End Try
                 If proccesses.Length = 0 Then Return
 
-                cTaskDialog.MessageBox(System.Windows.Forms.Application.ProductName, Language.strCompatibilityProblemDetected, String.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected, System.Windows.Forms.Application.ProductName), "", "", Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.OK, eSysIcons.Warning, Nothing)
+                cTaskDialog.MessageBox(Application.ProductName, My.Language.strCompatibilityProblemDetected, String.Format(My.Language.strCompatibilityLenovoAutoScrollUtilityDetected, System.Windows.Forms.Application.ProductName), "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.OK, eSysIcons.Warning, Nothing)
                 If cTaskDialog.VerificationChecked Then
-                    Settings.CompatibilityWarnLenovoAutoScrollUtility = False
+                    My.Settings.CompatibilityWarnLenovoAutoScrollUtility = False
                 End If
             End Sub
 
