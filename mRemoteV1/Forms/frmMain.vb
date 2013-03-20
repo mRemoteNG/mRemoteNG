@@ -286,8 +286,8 @@ Public Class frmMain
 
     Public Sub AddExternalToolsToToolBar()
         Try
-            For Each item As ToolStripItem In tsExternalTools.Items
-                item.Dispose()
+            For index As Integer = tsExternalTools.Items.Count - 1 To 0 Step -1
+                tsExternalTools.Items(index).Dispose()
             Next
             tsExternalTools.Items.Clear()
 
