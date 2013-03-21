@@ -39,7 +39,7 @@ Namespace Themes
                     color = propertyInfo.GetValue(themeInfo, Nothing)
                     xmlTextWriter.WriteStartElement("Color")
                     xmlTextWriter.WriteAttributeString("Name", propertyInfo.Name)
-                    xmlTextWriter.WriteAttributeString("Value", color.Name)
+                    xmlTextWriter.WriteAttributeString("Value", EncodeColorName(color))
                     xmlTextWriter.WriteEndElement() ' Color
                 Next
 
@@ -91,12 +91,32 @@ Namespace Themes
                     colorValue = colorNode.Attributes("Value").Value
                     propertyInfo = themeType.GetProperty(colorName)
                     If propertyInfo Is Nothing OrElse Not propertyInfo.PropertyType Is colorType Then Continue For
-                    propertyInfo.SetValue(themeInfo, Color.FromName(colorValue), Nothing)
+                    propertyInfo.SetValue(themeInfo, DecodeColorName(colorValue), Nothing)
                 Next
                 themes.Add(themeInfo)
             Next
 
             Return themes
+        End Function
+
+        Private Shared Function EncodeColorName(ByVal color As Color) As String
+            If color.IsNamedColor Then
+                Return color.Name
+            Else
+                Dim argb As Integer = color.ToArgb()
+                Dim hexValue As String = Hex(argb)
+                Dim paddedHex As String = hexValue.PadLeft(8, "0")
+                Return paddedHex
+            End If
+        End Function
+
+        Private Shared Function DecodeColorName(ByVal name As String) As Color
+            Dim regex As New System.Text.RegularExpressions.Regex("^[0-9a-fA-F]{8}$")
+            If regex.Match(name).Success Then
+                Return Color.FromArgb(Convert.ToInt32(name, 16))
+            Else
+                Return Color.FromName(name)
+            End If
         End Function
     End Class
 End Namespace

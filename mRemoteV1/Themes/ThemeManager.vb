@@ -73,16 +73,21 @@ Namespace Themes
                 Return _activeTheme
             End Get
             Set(value As ThemeInfo)
-                If _activeTheme Is Nothing OrElse Not _activeTheme.Equals(value) Then
-                    If _activeThemeHandlerSet Then RemoveHandler _activeTheme.PropertyChanged, AddressOf NotifyThemeChanged
-
-                    _activeTheme = value
-
-                    AddHandler _activeTheme.PropertyChanged, AddressOf NotifyThemeChanged
-                    _activeThemeHandlerSet = True
-
-                    NotifyThemeChanged(_activeTheme, New PropertyChangedEventArgs(""))
+                ' We need to set ActiveTheme to the new theme to make sure it references the right object.
+                ' However, if both themes have the same properties, we don't need to raise a notification event.
+                Dim needNotify As Boolean = True
+                If _activeTheme IsNot Nothing Then
+                    If _activeTheme.Equals(value) Then needNotify = False
                 End If
+
+                If _activeThemeHandlerSet Then RemoveHandler _activeTheme.PropertyChanged, AddressOf NotifyThemeChanged
+
+                _activeTheme = value
+
+                AddHandler _activeTheme.PropertyChanged, AddressOf NotifyThemeChanged
+                _activeThemeHandlerSet = True
+
+                If needNotify Then NotifyThemeChanged(_activeTheme, New PropertyChangedEventArgs(""))
             End Set
         End Property
 #End Region

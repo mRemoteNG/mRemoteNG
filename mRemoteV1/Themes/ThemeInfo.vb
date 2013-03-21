@@ -114,7 +114,7 @@ Namespace Themes
                 Return _toolbarBackgroundColor
             End Get
             Set(value As Color)
-                If _toolbarBackgroundColor = value Then Return
+                If _toolbarBackgroundColor = value Or value.A < 255 Then Return
                 _toolbarBackgroundColor = value
                 NotifyPropertyChanged("ToolbarBackgroundColor")
             End Set
@@ -147,7 +147,7 @@ Namespace Themes
                 Return _connectionsPanelBackgroundColor
             End Get
             Set(value As Color)
-                If _connectionsPanelBackgroundColor = value Or value = Color.Transparent Then Return
+                If _connectionsPanelBackgroundColor = value Or value.A < 255 Then Return
                 _connectionsPanelBackgroundColor = value
                 NotifyPropertyChanged("ConnectionsPanelBackgroundColor")
             End Set
@@ -192,7 +192,7 @@ Namespace Themes
                 Return _searchBoxBackgroundColor
             End Get
             Set(value As Color)
-                If _searchBoxBackgroundColor = value Or value = Color.Transparent Then Return
+                If _searchBoxBackgroundColor = value Or value.A < 255 Then Return
                 _searchBoxBackgroundColor = value
                 NotifyPropertyChanged("SearchBoxBackgroundColor")
             End Set
@@ -239,7 +239,7 @@ Namespace Themes
                 Return _configPanelBackgroundColor
             End Get
             Set(value As Color)
-                If _configPanelBackgroundColor = value Or value = Color.Transparent Then Return
+                If _configPanelBackgroundColor = value Or value.A < 255 Then Return
                 _configPanelBackgroundColor = value
                 NotifyPropertyChanged("ConfigPanelBackgroundColor")
             End Set
@@ -284,7 +284,7 @@ Namespace Themes
                 Return _configPanelHelpBackgroundColor
             End Get
             Set(value As Color)
-                If _configPanelHelpBackgroundColor = value Or value = Color.Transparent Then Return
+                If _configPanelHelpBackgroundColor = value Or value.A < 255 Then Return
                 _configPanelHelpBackgroundColor = value
                 NotifyPropertyChanged("ConfigPanelHelpBackgroundColor")
             End Set
