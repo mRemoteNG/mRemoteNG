@@ -103,10 +103,7 @@ Namespace Themes
             If color.IsNamedColor Then
                 Return color.Name
             Else
-                Dim argb As Integer = color.ToArgb()
-                Dim hexValue As String = Hex(argb)
-                Dim paddedHex As String = hexValue.PadLeft(8, "0")
-                Return paddedHex
+                Return Hex(color.ToArgb()).PadLeft(8, "0")
             End If
         End Function
 
