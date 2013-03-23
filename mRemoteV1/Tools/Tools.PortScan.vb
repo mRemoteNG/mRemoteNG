@@ -81,43 +81,30 @@ Namespace Tools
                 End Set
             End Property
 
-
-
-            Private _HostName As String
+            Private _hostName As String = ""
             Public Property HostName() As String
                 Get
-                    Return _HostName
+                    Return _hostName
                 End Get
                 Set(ByVal value As String)
-                    _HostName = value
+                    _hostName = value
                 End Set
             End Property
 
             Public ReadOnly Property HostNameWithoutDomain() As String
                 Get
-                    If _HostName <> _HostIP Then
-                        If _HostName IsNot Nothing Then
-                            If _HostName.Contains(".") Then
-                                Return _HostName.Substring(0, _HostName.IndexOf("."))
-                            Else
-                                Return _HostName
-                            End If
-                        Else
-                            Return _HostIP
-                        End If
-                    Else
-                        Return _HostIP
-                    End If
+                    If String.IsNullOrEmpty(HostName) OrElse HostName = HostIp Then Return HostIp
+                    Return HostName.Split(".")(0)
                 End Get
             End Property
 
-            Private _HostIP As String
-            Public Property HostIP() As String
+            Private _hostIp As String
+            Public Property HostIp() As String
                 Get
-                    Return _HostIP
+                    Return _hostIp
                 End Get
                 Set(ByVal value As String)
-                    _HostIP = value
+                    _hostIp = value
                 End Set
             End Property
 
@@ -214,7 +201,7 @@ Namespace Tools
 
 #Region "Methods"
             Public Sub New(ByVal host As String)
-                _HostIP = host
+                _hostIp = host
                 _OpenPorts = New ArrayList
                 _ClosedPorts = New ArrayList
             End Sub
@@ -232,10 +219,10 @@ Namespace Tools
                 Try
                     Dim lvI As New ListViewItem
                     lvI.Tag = Me
-                    If _HostName <> "" Then
-                        lvI.Text = _HostName
+                    If _hostName <> "" Then
+                        lvI.Text = _hostName
                     Else
-                        lvI.Text = _HostIP
+                        lvI.Text = _hostIp
                     End If
 
                     If Mode = PortScanMode.Import Then
@@ -463,12 +450,11 @@ Namespace Tools
                             Next
                         End If
 
-                        If HostAlive = True Then
-                            Try
-                                sHost.HostName = Net.Dns.GetHostEntry(sHost.HostIP).HostName
-                            Catch ex As Exception
-                            End Try
-                        End If
+                        Try
+                            sHost.HostName = Net.Dns.GetHostEntry(sHost.HostIp).HostName
+                        Catch ex As Exception
+                        End Try
+                        If String.IsNullOrEmpty(sHost.HostName) Then sHost.HostName = sHost.HostIp
 
                         _ScannedHosts.Add(sHost)
                         RaiseEvent HostScanned(sHost, hCount, Hosts.Count)

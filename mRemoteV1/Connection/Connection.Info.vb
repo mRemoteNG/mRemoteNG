@@ -102,17 +102,18 @@ Namespace Connection
         End Property
 #End Region
 #Region "2 Connection"
-        Private _Hostname As String = ""
+        Private _hostname As String = ""
         <LocalizedCategory("strCategoryConnection", 2), _
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameAddress"), _
             LocalizedDescription("strPropertyDescriptionAddress")> _
         Public Overridable Property Hostname() As String
             Get
-                Return Me._Hostname.Trim()
+                Return _hostname.Trim()
             End Get
             Set(ByVal value As String)
-                Me._Hostname = value.Trim()
+                If String.IsNullOrEmpty(value) Then _hostname = ""
+                _hostname = value.Trim()
             End Set
         End Property
 
