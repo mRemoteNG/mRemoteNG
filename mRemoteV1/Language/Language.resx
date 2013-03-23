@@ -1677,7 +1677,7 @@ Message:
     <value>GetSessions failed!</value>
   </data>
   <data name="strRdpOpenConnectionFailed" xml:space="preserve">
-    <value>Open RDP Connectin failed!</value>
+    <value>Open RDP Connection failed!</value>
   </data>
   <data name="strRdpReconnectCount" xml:space="preserve">
     <value>RDP reconnection count:</value>
@@ -2222,5 +2222,8 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
     <value>{0} has detected the Lenovo Auto Scroll Utility running on this system. This utility is known to cause problems with {0}. It is recommended that you disable or uninstall it.</value>
+  </data>
+  <data name="strMenuSessionRetrieve" xml:space="preserve">
+    <value>Retrieve</value>
   </data>
 </root>

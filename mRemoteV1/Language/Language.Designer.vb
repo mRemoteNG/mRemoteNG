@@ -2969,6 +2969,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Retrieve.
+        '''</summary>
+        Friend Shared ReadOnly Property strMenuSessionRetrieve() As String
+            Get
+                Return ResourceManager.GetString("strMenuSessionRetrieve", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Sessions.
         '''</summary>
         Friend Shared ReadOnly Property strMenuSessions() As String
@@ -4854,7 +4863,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Open RDP Connectin failed!.
+        '''  Looks up a localized string similar to Open RDP Connection failed!.
         '''</summary>
         Friend Shared ReadOnly Property strRdpOpenConnectionFailed() As String
             Get

@@ -331,6 +331,9 @@
     <Compile Include="UI\UI.Window.ScreenshotManager.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\UI.Window.Sessions.Designer.vb">
+      <DependentUpon>UI.Window.Sessions.vb</DependentUpon>
+    </Compile>
     <Compile Include="UI\UI.Window.Sessions.vb">
       <SubType>Form</SubType>
     </Compile>

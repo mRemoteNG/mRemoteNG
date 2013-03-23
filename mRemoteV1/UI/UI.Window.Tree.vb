@@ -589,7 +589,6 @@ Namespace UI
                     Select Case mRemoteNG.Tree.Node.GetNodeType(e.Node)
                         Case mRemoteNG.Tree.Node.Type.Connection, mRemoteNG.Tree.Node.Type.PuttySession
                             Windows.configForm.SetPropertyGridObject(e.Node.Tag)
-                            Windows.sessionsForm.CurrentHost = TryCast(e.Node.Tag, mRemoteNG.Connection.Info).Hostname
                         Case mRemoteNG.Tree.Node.Type.Container
                             Windows.configForm.SetPropertyGridObject(TryCast(e.Node.Tag, Container.Info).ConnectionInfo)
                         Case mRemoteNG.Tree.Node.Type.Root, mRemoteNG.Tree.Node.Type.PuttyRoot
@@ -600,7 +599,7 @@ Namespace UI
 
                     Windows.configForm.pGrid_SelectedObjectChanged()
                     ShowHideTreeContextMenuItems(e.Node)
-                    Windows.sessionsForm.GetSessionsAuto()
+                    Windows.sessionsForm.GetSessions(True)
 
                     LastSelected = mRemoteNG.Tree.Node.GetConstantID(e.Node)
                 Catch ex As Exception
