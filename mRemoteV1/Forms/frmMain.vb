@@ -57,7 +57,6 @@ Public Class frmMain
         MessageCollector = New Messages.Collector(Windows.errorsForm)
 
         Connection.Protocol.RDP.Resolutions.AddResolutions()
-        Connection.Protocol.PuttyBase.BorderSize = New Size(SystemInformation.FrameBorderSize.Width, SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height) 'Size.Subtract(Me.Size, Me.ClientSize)
 
         WindowList = New UI.Window.List
 

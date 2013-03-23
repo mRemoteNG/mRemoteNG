@@ -73,18 +73,6 @@ Namespace Connection
                 End Set
             End Property
 
-            'Private borderWidth As Integer = frmMain.Size.Width - frmMain.ClientSize.Width
-            'Private borderHeight As Integer = frmMain.Size.Height - frmMain.ClientSize.Height
-            Private Shared _BorderSize As Size
-            Public Shared Property BorderSize() As Size
-                Get
-                    Return _BorderSize
-                End Get
-                Set(ByVal value As Size)
-                    _BorderSize = value
-                End Set
-            End Property
-
             Public ReadOnly Property Focused() As Boolean
                 Get
                     If GetForegroundWindow() = PuttyHandle Then
