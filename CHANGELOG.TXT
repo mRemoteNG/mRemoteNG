@@ -1,3 +1,4 @@
+  Fixed issue MR-422 - Gives error Object reference not set to an instance of an object.
   Fixed an exception or crash when choosing unnamed colors for themes.
   Fixed possible error "Control does not support transparent background colors" when modifying themes.
   Fixed changes to the active theme not being saved reliably.

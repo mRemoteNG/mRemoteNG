@@ -98,6 +98,7 @@ Namespace Config
                 .Hostname = sessionKey.GetValue("HostName")
                 .Username = sessionKey.GetValue("UserName")
                 Dim protocol As String = sessionKey.GetValue("Protocol")
+                If protocol Is Nothing Then Return Nothing
                 Select Case protocol.ToLowerInvariant()
                     Case "raw"
                         .Protocol = Protocols.RAW
