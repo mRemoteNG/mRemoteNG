@@ -217,16 +217,31 @@ Namespace UI
             End Sub
 
             Private Sub menuSession_Opening(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs)
-                If _retrieved Then
-                    sessionMenuRetrieve.Text = Language.strRefresh
-                Else
+                Dim connectionInfo As mRemoteNG.Connection.Info = TryCast(mRemoteNG.Tree.Node.SelectedNode.Tag, mRemoteNG.Connection.Info)
+                If connectionInfo Is Nothing Then
+                    sessionMenuLogoff.Enabled = False
+                    sessionMenuRetrieve.Enabled = False
                     sessionMenuRetrieve.Text = Language.strMenuSessionRetrieve
+                    Return
                 End If
 
-                If sessionList.SelectedItems.Count = 0 Then
-                    sessionMenuLogoff.Enabled = False
-                Else
+                If connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP And sessionList.SelectedItems.Count > 0 Then
                     sessionMenuLogoff.Enabled = True
+                Else
+                    sessionMenuLogoff.Enabled = False
+                End If
+
+                If connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Or _
+                   connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.ICA Then
+                    sessionMenuRetrieve.Enabled = True
+                Else
+                    sessionMenuRetrieve.Enabled = False
+                End If
+
+                If Not _retrieved Then
+                    sessionMenuRetrieve.Text = Language.strMenuSessionRetrieve
+                Else
+                    sessionMenuRetrieve.Text = Language.strRefresh
                 End If
             End Sub
 
