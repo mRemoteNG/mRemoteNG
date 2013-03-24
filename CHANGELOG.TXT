@@ -4,6 +4,7 @@
   Fixed an exception or crash when choosing unnamed colors for themes.
   Fixed possible error "Control does not support transparent background colors" when modifying themes.
   Fixed changes to the active theme not being saved reliably.
+  Changed Internet Explorer to no longer force IE7 compatibility mode.
 
 1.71 Beta 3 (2013-03-20):
   Fixed issue MR-397 - Putty disappears from the screen

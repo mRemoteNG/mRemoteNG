@@ -270,6 +270,7 @@
     <Compile Include="Security\Security.Crypt.vb" />
     <Compile Include="Security\Security.Impersonator.vb" />
     <Compile Include="Security\Security.Save.vb" />
+    <Compile Include="Tools\IeBrowserEmulation.vb" />
     <Compile Include="Tools\ReconnectGroup.Designer.vb">
       <DependentUpon>ReconnectGroup.vb</DependentUpon>
     </Compile>

@@ -60,8 +60,10 @@ Public Class frmMain
 
         WindowList = New UI.Window.List
 
+        Tools.IeBrowserEmulation.Register()
+
         Startup.GetConnectionIcons()
-        App.Runtime.GetExtApps()
+        GetExtApps()
         Windows.treePanel.Focus()
 
         Tree.Node.TreeView = Windows.treeForm.tvConnections

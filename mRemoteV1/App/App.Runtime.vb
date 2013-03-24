@@ -700,6 +700,8 @@ Namespace App
 
                     Dim SettingsSave As New Config.Settings.Save()
                     SettingsSave.Save()
+
+                    IeBrowserEmulation.Unregister()
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSettingsCouldNotBeSavedOrTrayDispose & vbNewLine & ex.Message, True)
                 End Try
