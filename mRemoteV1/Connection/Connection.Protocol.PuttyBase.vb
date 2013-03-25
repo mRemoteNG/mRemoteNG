@@ -240,19 +240,6 @@ Namespace Connection
                 End Try
                 Return isPuttyNg
             End Function
-
-            Public Shared Sub StartPutty()
-                Try
-                    Dim p As Process
-                    Dim pSI As New ProcessStartInfo
-                    pSI.FileName = PuttyPath
-
-                    p = Process.Start(pSI)
-                    p.WaitForExit()
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyStartFailed & vbNewLine & ex.Message, True)
-                End Try
-            End Sub
 #End Region
 
 #Region "Enums"

@@ -11,6 +11,7 @@ Namespace App
             Public Shared ReadOnly HomePath As String = My.Application.Info.DirectoryPath
             Public Shared EncryptionKey As String = "mR3m"
             Public Shared ReportingFilePath As String = ""
+            Public Shared ReadOnly PuttyPath As String = My.Application.Info.DirectoryPath & "\PuTTYNG.exe"
         End Class
 
         Public Class Settings

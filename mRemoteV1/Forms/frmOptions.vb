@@ -1,5 +1,6 @@
 ﻿Imports System.IO
 Imports System.ComponentModel
+Imports mRemoteNG.Messages
 Imports mRemoteNG.My
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
@@ -1647,9 +1648,11 @@ Public Class frmOptions
             Me.chkAutomaticallyGetSessionInfo.Checked = My.Settings.AutomaticallyGetSessionInfo
             Me.chkAutomaticReconnect.Checked = My.Settings.ReconnectOnDisconnect
             Me.chkSingleInstance.Checked = My.Settings.SingleInstance
-            Me.chkUseCustomPuttyPath.Checked = My.Settings.UseCustomPuttyPath
-            Me.txtCustomPuttyPath.Text = My.Settings.CustomPuttyPath
             Me.numPuttyWaitTime.Value = My.Settings.MaxPuttyWaitTime
+
+            chkUseCustomPuttyPath.Checked = Settings.UseCustomPuttyPath
+            txtCustomPuttyPath.Text = Settings.CustomPuttyPath
+            SetPuttyLaunchButtonEnabled()
 
             Me.chkUseProxyForAutomaticUpdates.Checked = My.Settings.UpdateUseProxy
             Me.btnTestProxy.Enabled = My.Settings.UpdateUseProxy
@@ -1780,10 +1783,10 @@ Public Class frmOptions
             My.Settings.UseCustomPuttyPath = Me.chkUseCustomPuttyPath.Checked
             My.Settings.CustomPuttyPath = Me.txtCustomPuttyPath.Text
 
-            If My.Settings.UseCustomPuttyPath Then
-                mRemoteNG.Connection.Protocol.PuttyBase.PuttyPath = My.Settings.CustomPuttyPath
+            If Settings.UseCustomPuttyPath Then
+                Connection.Protocol.PuttyBase.PuttyPath = Settings.CustomPuttyPath
             Else
-                mRemoteNG.Connection.Protocol.PuttyBase.PuttyPath = My.Application.Info.DirectoryPath & "\PuTTYNG.exe"
+                Connection.Protocol.PuttyBase.PuttyPath = App.Info.General.PuttyPath
             End If
 
             My.Settings.MaxPuttyWaitTime = Me.numPuttyWaitTime.Value
@@ -2006,26 +2009,70 @@ Public Class frmOptions
     End Sub
 
     Private Sub chkUseCustomPuttyPath_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkUseCustomPuttyPath.CheckedChanged
-        Me.txtCustomPuttyPath.Enabled = Me.chkUseCustomPuttyPath.Checked
-        Me.btnBrowseCustomPuttyPath.Enabled = Me.chkUseCustomPuttyPath.Checked
+        txtCustomPuttyPath.Enabled = chkUseCustomPuttyPath.Checked
+        btnBrowseCustomPuttyPath.Enabled = chkUseCustomPuttyPath.Checked
+        SetPuttyLaunchButtonEnabled()
+    End Sub
+
+    Private Sub txtCustomPuttyPath_TextChanged(sender As Object, e As System.EventArgs) Handles txtCustomPuttyPath.TextChanged
+        SetPuttyLaunchButtonEnabled()
+    End Sub
+
+    Private Sub btnBrowseCustomPuttyPath_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnBrowseCustomPuttyPath.Click
+        Using openFileDialog As New OpenFileDialog()
+            With openFileDialog
+                .Filter = String.Format("{0}|*.exe|{1}|*.*", Language.strFilterApplication, Language.strFilterAll)
+                .FileName = Path.GetFileName(App.Info.General.PuttyPath)
+                .CheckFileExists = True
+                .Multiselect = False
+
+                If .ShowDialog = System.Windows.Forms.DialogResult.OK Then
+                    txtCustomPuttyPath.Text = .FileName
+                    SetPuttyLaunchButtonEnabled()
+                End If
+            End With
+        End Using
+    End Sub
+
+    Private Sub SetPuttyLaunchButtonEnabled()
+        Dim puttyPath As String
+        If chkUseCustomPuttyPath.Checked Then
+            puttyPath = txtCustomPuttyPath.Text
+        Else
+            puttyPath = App.Info.General.PuttyPath
+        End If
+
+        Dim exists As Boolean = False
+        Try
+            exists = File.Exists(puttyPath)
+        Catch
+        End Try
+
+        If exists Then
+            lblConfigurePuttySessions.Enabled = True
+            btnLaunchPutty.Enabled = True
+        Else
+            lblConfigurePuttySessions.Enabled = False
+            btnLaunchPutty.Enabled = False
+        End If
     End Sub
 
     Private Sub btnLaunchPutty_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLaunchPutty.Click
-        mRemoteNG.Connection.Protocol.PuttyBase.StartPutty()
-    End Sub
-
-    Private Sub btnBrowseCustomPuttyPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseCustomPuttyPath.Click
-        Dim oDlg As New OpenFileDialog()
-        oDlg.Filter = My.Language.strFilterApplication & "|*.exe|" & My.Language.strFilterAll & "|*.*"
-        oDlg.FileName = "PuTTYNG.exe"
-        oDlg.CheckFileExists = True
-        oDlg.Multiselect = False
-
-        If oDlg.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-            Me.txtCustomPuttyPath.Text = oDlg.FileName
-        End If
-
-        oDlg.Dispose()
+        Try
+            Dim process As New Process
+            With process.StartInfo
+                .UseShellExecute = False
+                If chkUseCustomPuttyPath.Checked Then
+                    .FileName = txtCustomPuttyPath.Text
+                Else
+                    .FileName = App.Info.General.PuttyPath
+                End If
+            End With
+            process.Start()
+            process.WaitForExit()
+        Catch ex As Exception
+            MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strPuttyStartFailed & vbNewLine & ex.Message, True)
+        End Try
     End Sub
 
     Private Sub btnBrowseXulRunnerPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBrowseXulRunnerPath.Click
