@@ -108,37 +108,40 @@ Namespace Connection
                         arguments.EscapeForShell = False
 
                         arguments.Add("-load", InterfaceControl.Info.PuttySession)
-                        arguments.Add("-" & _PuttyProtocol.ToString)
 
-                        If _PuttyProtocol = Putty_Protocol.ssh Then
-                            Dim username As String = ""
-                            Dim password As String = ""
+                        If Not TypeOf InterfaceControl.Info Is PuttySession.Info Then
+                            arguments.Add("-" & _PuttyProtocol.ToString)
 
-                            If Not String.IsNullOrEmpty(InterfaceControl.Info.Username) Then
-                                username = InterfaceControl.Info.Username
-                            Else
-                                If My.Settings.EmptyCredentials = "windows" Then
-                                    username = Environment.UserName
-                                ElseIf My.Settings.EmptyCredentials = "custom" Then
-                                    username = My.Settings.DefaultUsername
+                            If _PuttyProtocol = Putty_Protocol.ssh Then
+                                Dim username As String = ""
+                                Dim password As String = ""
+
+                                If Not String.IsNullOrEmpty(InterfaceControl.Info.Username) Then
+                                    username = InterfaceControl.Info.Username
+                                Else
+                                    If My.Settings.EmptyCredentials = "windows" Then
+                                        username = Environment.UserName
+                                    ElseIf My.Settings.EmptyCredentials = "custom" Then
+                                        username = My.Settings.DefaultUsername
+                                    End If
                                 End If
+
+                                If Not String.IsNullOrEmpty(InterfaceControl.Info.Password) Then
+                                    password = InterfaceControl.Info.Password
+                                Else
+                                    If My.Settings.EmptyCredentials = "custom" Then
+                                        password = Security.Crypt.Decrypt(My.Settings.DefaultPassword, App.Info.General.EncryptionKey)
+                                    End If
+                                End If
+
+                                arguments.Add("-" & _PuttySSHVersion)
+                                arguments.Add("-l", username)
+                                arguments.Add("-pw", password)
                             End If
 
-                            If Not String.IsNullOrEmpty(InterfaceControl.Info.Password) Then
-                                password = InterfaceControl.Info.Password
-                            Else
-                                If My.Settings.EmptyCredentials = "custom" Then
-                                    password = Security.Crypt.Decrypt(My.Settings.DefaultPassword, App.Info.General.EncryptionKey)
-                                End If
-                            End If
-
-                            arguments.Add("-" & _PuttySSHVersion)
-                            arguments.Add("-l", username)
-                            arguments.Add("-pw", password)
+                            arguments.Add("-P", InterfaceControl.Info.Port.ToString)
+                            arguments.Add(InterfaceControl.Info.Hostname)
                         End If
-
-                        arguments.Add("-P", InterfaceControl.Info.Port.ToString)
-                        arguments.Add(InterfaceControl.Info.Hostname)
 
                         If _isPuttyNg Then
                             arguments.Add("-hwndparent", InterfaceControl.Handle.ToString())
