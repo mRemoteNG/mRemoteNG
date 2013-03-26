@@ -1,9 +1,11 @@
   Fixed issue MR-392 - Sessions Panel - context menu entries need to be context aware
   Fixed issue MR-422 - Gives error Object reference not set to an instance of an object.
   Fixed issue MR-424 - Import of a few Linux SSH2 hosts discovered via the port scan tool results in a UE
+  Added PuTTY Session Settings command to the Config panel for PuTTY Saved Sessions.
   Fixed an exception or crash when choosing unnamed colors for themes.
   Fixed possible error "Control does not support transparent background colors" when modifying themes.
   Fixed changes to the active theme not being saved reliably.
+  Fixed handling of the plus (+) character in PuTTY session names.
   Changed Internet Explorer to no longer force IE7 compatibility mode.
   Changed the "Launch PuTTY" button in the "Options" dialog to open PuTTY from the path the user has currently set, instead of what was previously saved.
 

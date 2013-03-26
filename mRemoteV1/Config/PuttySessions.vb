@@ -65,7 +65,7 @@ Namespace Config
                 If raw Then
                     sessionNames.Add(sessionName)
                 Else
-                    sessionNames.Add(Web.HttpUtility.UrlDecode(sessionName))
+                    sessionNames.Add(Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B")))
                 End If
             Next
             Return sessionNames.ToArray()
@@ -89,7 +89,7 @@ Namespace Config
             Dim sessionKey As RegistryKey = sessionsKey.OpenSubKey(sessionName)
             If sessionKey Is Nothing Then Return Nothing
 
-            sessionName = Web.HttpUtility.UrlDecode(sessionName)
+            sessionName = Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"))
 
             Dim sessionInfo As New Connection.PuttySession.Info
             With sessionInfo

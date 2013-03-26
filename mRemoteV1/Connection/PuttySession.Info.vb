@@ -13,22 +13,19 @@ Namespace Connection
 
 #Region "Commands"
             <Command(),
-                DisplayName("Edit in PuTTY")> _
-            Public Sub LaunchPutty()
+                LocalizedDisplayName("strPuttySessionSettings")> _
+            Public Sub SessionSettings()
                 Try
-                    Dim process As New Process
-                    With process.StartInfo
-                        .UseShellExecute = False
-                        If Settings.UseCustomPuttyPath Then
-                            .FileName = Settings.CustomPuttyPath
-                        Else
-                            .FileName = App.Info.General.PuttyPath
-                        End If
-                    End With
-                    process.Start()
-                    process.WaitForExit()
+                    Dim puttyProcess As New PuttyProcessController
+                    If Not puttyProcess.Start() Then Return
+                    If puttyProcess.SelectListBoxItem(PuttySession) Then
+                        puttyProcess.ClickButton("&Load")
+                    End If
+                    puttyProcess.SetControlText("Button", "&Cancel", "&Close")
+                    puttyProcess.SetControlVisible("Button", "&Open", False)
+                    puttyProcess.WaitForExit()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strPuttyStartFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorCouldNotLaunchPutty & vbNewLine & ex.Message, False)
                 End Try
             End Sub
 #End Region

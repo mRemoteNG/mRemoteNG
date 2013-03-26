@@ -1543,6 +1543,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to PuTTY could not be launched..
+        '''</summary>
+        Friend Shared ReadOnly Property strErrorCouldNotLaunchPutty() As String
+            Get
+                Return ResourceManager.GetString("strErrorCouldNotLaunchPutty", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Decryption failed. {0}.
         '''</summary>
         Friend Shared ReadOnly Property strErrorDecryptionFailed() As String
@@ -4391,6 +4400,15 @@ Namespace My
         Friend Shared ReadOnly Property strPuttySavedSessionsRootName() As String
             Get
                 Return ResourceManager.GetString("strPuttySavedSessionsRootName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to PuTTY Session Settings.
+        '''</summary>
+        Friend Shared ReadOnly Property strPuttySessionSettings() As String
+            Get
+                Return ResourceManager.GetString("strPuttySessionSettings", resourceCulture)
             End Get
         End Property
         

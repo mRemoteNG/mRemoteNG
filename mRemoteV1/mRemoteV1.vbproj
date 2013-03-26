@@ -188,6 +188,7 @@
     <Compile Include="Config\Config.Settings.Save.vb" />
     <Compile Include="Config\ConfirmClose.vb" />
     <Compile Include="Config\PuttySessions.vb" />
+    <Compile Include="Tools\EnumWindows.vb" />
     <Compile Include="Tools\PropertyGridCommandSite.vb" />
     <Compile Include="Connection\PuttySession.Info.vb" />
     <Compile Include="Root\PuttySessions.Info.vb" />
@@ -272,6 +273,8 @@
     <Compile Include="Security\Security.Impersonator.vb" />
     <Compile Include="Security\Security.Save.vb" />
     <Compile Include="Tools\IeBrowserEmulation.vb" />
+    <Compile Include="Tools\ProcessController.vb" />
+    <Compile Include="Tools\PuttyProcessController.vb" />
     <Compile Include="Tools\ReconnectGroup.Designer.vb">
       <DependentUpon>ReconnectGroup.vb</DependentUpon>
     </Compile>

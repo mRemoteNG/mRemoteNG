@@ -2,6 +2,8 @@
 Imports System.ComponentModel
 Imports mRemoteNG.Messages
 Imports mRemoteNG.My
+Imports mRemoteNG.Tools
+Imports PSTaskDialog
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 Imports mRemoteNG.Themes
@@ -2059,19 +2061,19 @@ Public Class frmOptions
 
     Private Sub btnLaunchPutty_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnLaunchPutty.Click
         Try
-            Dim process As New Process
-            With process.StartInfo
-                .UseShellExecute = False
-                If chkUseCustomPuttyPath.Checked Then
-                    .FileName = txtCustomPuttyPath.Text
-                Else
-                    .FileName = App.Info.General.PuttyPath
-                End If
-            End With
-            process.Start()
-            process.WaitForExit()
+            Dim puttyProcess As New PuttyProcessController
+            Dim fileName As String
+            If chkUseCustomPuttyPath.Checked Then
+                fileName = txtCustomPuttyPath.Text
+            Else
+                fileName = App.Info.General.PuttyPath
+            End If
+            puttyProcess.Start(fileName)
+            puttyProcess.SetControlText("Button", "&Cancel", "&Close")
+            puttyProcess.SetControlVisible("Button", "&Open", False)
+            puttyProcess.WaitForExit()
         Catch ex As Exception
-            MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strPuttyStartFailed & vbNewLine & ex.Message, True)
+            cTaskDialog.MessageBox(Application.Info.ProductName, Language.strErrorCouldNotLaunchPutty, "", ex.Message, "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
         End Try
     End Sub
 
