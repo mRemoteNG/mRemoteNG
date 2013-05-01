@@ -186,7 +186,7 @@ Public Class frmMain
         End With
     End Sub
 
-    Private Sub ApplyMenuColors(itemCollection As ToolStripItemCollection)
+    Private Shared Sub ApplyMenuColors(itemCollection As ToolStripItemCollection)
         With ThemeManager.ActiveTheme
             Dim menuItem As ToolStripMenuItem
             For Each item As ToolStripItem In itemCollection

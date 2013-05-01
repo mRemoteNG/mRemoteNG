@@ -1,7 +1,6 @@
 ﻿Namespace UI
     Namespace Window
         Partial Public Class Sessions
-            Inherits Base
 #Region " Windows Form Designer generated code "
             Private components As System.ComponentModel.IContainer
             Friend WithEvents sessionMenuRetrieve As System.Windows.Forms.ToolStripMenuItem
