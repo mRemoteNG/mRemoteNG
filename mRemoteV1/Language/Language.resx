@@ -105,14 +105,14 @@
       </xsd:complexType>
     </xsd:element>
   </xsd:schema>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
     <value>2.0</value>
-  </resheader>
-  <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
@@ -149,6 +149,9 @@
   </data>
   <data name="strAlwaysShowPanelSelection" xml:space="preserve">
     <value>Always show panel selection dialog when opening connections</value>
+  </data>
+  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
+    <value>Always show panel tabs</value>
   </data>
   <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>Always show notification area icon</value>
@@ -414,6 +417,12 @@ VncSharpNG Control Version {0}</value>
   <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Couldn't parse command line args!</value>
   </data>
+  <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+    <value>{0} has detected the Lenovo Auto Scroll Utility running on this system. This utility is known to cause problems with {0}. It is recommended that you disable or uninstall it.</value>
+  </data>
+  <data name="strCompatibilityProblemDetected" xml:space="preserve">
+    <value>Compatibility problem detected</value>
+  </data>
   <data name="strComponentsCheck" xml:space="preserve">
     <value>Components Check</value>
   </data>
@@ -543,8 +552,14 @@ Starting with new connections file.</value>
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Couldn't create new connections file!</value>
   </data>
+  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+    <value>Could not find ToolStrip control in FilteredPropertyGrid.</value>
+  </data>
   <data name="strCurrentVersion" xml:space="preserve">
     <value>Installed version</value>
+  </data>
+  <data name="strDefaultTheme" xml:space="preserve">
+    <value>Default Theme</value>
   </data>
   <data name="strDetect" xml:space="preserve">
     <value>Detect</value>
@@ -608,6 +623,9 @@ Starting with new connections file.</value>
   </data>
   <data name="strErrorConnectionListSaveFailed" xml:space="preserve">
     <value>The connection list could not be saved.</value>
+  </data>
+  <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
+    <value>PuTTY could not be launched.</value>
   </data>
   <data name="strErrorDecryptionFailed" xml:space="preserve">
     <value>Decryption failed. {0}</value>
@@ -751,6 +769,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="strIcaSetResolutionFailed" xml:space="preserve">
     <value>ICA Set Resolution Failed!</value>
   </data>
+  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
+    <value>Identify quick connect tabs by adding the prefix "Quick:"</value>
+  </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Import from Active Directory</value>
   </data>
@@ -816,6 +837,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>Change Log:</value>
+  </data>
+  <data name="strLabelClosingConnections" xml:space="preserve">
+    <value>When closing connections:</value>
   </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Connect:</value>
@@ -1018,6 +1042,15 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="strMenuNotifications" xml:space="preserve">
     <value>Notifications</value>
   </data>
+  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
+    <value>Copy All</value>
+  </data>
+  <data name="strMenuNotificationsDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+    <value>Delete All</value>
+  </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
     <value>Open Connection File...</value>
   </data>
@@ -1072,11 +1105,17 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="strMenuSendSpecialKeys" xml:space="preserve">
     <value>Send Special Keys (VNC)</value>
   </data>
+  <data name="strMenuSessionRetrieve" xml:space="preserve">
+    <value>Retrieve</value>
+  </data>
   <data name="strMenuSessions" xml:space="preserve">
     <value>Sessions</value>
   </data>
   <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
     <value>Sessions and Screenshots</value>
+  </data>
+  <data name="strMenuShowHelpText" xml:space="preserve">
+    <value>&amp;Show Help Text</value>
   </data>
   <data name="strMenuShowText" xml:space="preserve">
     <value>Show Text</value>
@@ -1171,6 +1210,18 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Open Ports</value>
+  </data>
+  <data name="strOptionsProxyTesting" xml:space="preserve">
+    <value>Testing...</value>
+  </data>
+  <data name="strOptionsTabTheme" xml:space="preserve">
+    <value>Theme</value>
+  </data>
+  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
+    <value>&amp;Delete</value>
+  </data>
+  <data name="strOptionsThemeButtonNew" xml:space="preserve">
+    <value>&amp;New</value>
   </data>
   <data name="strPanelName" xml:space="preserve">
     <value>Panel Name</value>
@@ -1532,6 +1583,12 @@ Message:
   <data name="strPuttyResizeFailed" xml:space="preserve">
     <value>Putty Resize Failed!</value>
   </data>
+  <data name="strPuttySavedSessionsRootName" xml:space="preserve">
+    <value>PuTTY Saved Sessions</value>
+  </data>
+  <data name="strPuttySessionSettings" xml:space="preserve">
+    <value>PuTTY Session Settings</value>
+  </data>
   <data name="strPuttySettings" xml:space="preserve">
     <value>PuTTY Settings</value>
   </data>
@@ -1561,6 +1618,18 @@ Message:
   </data>
   <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
     <value>Quick Connect History Exists Failed!</value>
+  </data>
+  <data name="strRadioCloseWarnAll" xml:space="preserve">
+    <value>&amp;Warn me when closing connections</value>
+  </data>
+  <data name="strRadioCloseWarnExit" xml:space="preserve">
+    <value>Warn me only when e&amp;xiting mRemoteNG</value>
+  </data>
+  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
+    <value>Warn me only when closing &amp;multiple connections</value>
+  </data>
+  <data name="strRadioCloseWarnNever" xml:space="preserve">
+    <value>Do &amp;not warn me when closing connections</value>
   </data>
   <data name="strRAW" xml:space="preserve">
     <value>RAW</value>
@@ -1778,6 +1847,9 @@ Message:
   <data name="strScreenshots" xml:space="preserve">
     <value>Screenshots</value>
   </data>
+  <data name="strSearchPrompt" xml:space="preserve">
+    <value>Search</value>
+  </data>
   <data name="strSendTo" xml:space="preserve">
     <value>Send To...</value>
   </data>
@@ -1898,207 +1970,14 @@ Message:
   <data name="strTheFollowing" xml:space="preserve">
     <value>The following:</value>
   </data>
-  <data name="strTitleError" xml:space="preserve">
-    <value>Error ({0})</value>
-  </data>
-  <data name="strTitleInformation" xml:space="preserve">
-    <value>Information ({0})</value>
-  </data>
-  <data name="strTitlePassword" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="strTitleSelectPanel" xml:space="preserve">
-    <value>Select Panel</value>
-  </data>
-  <data name="strTitleWarning" xml:space="preserve">
-    <value>Warning ({0})</value>
-  </data>
-  <data name="strTransfer" xml:space="preserve">
-    <value>Transfer</value>
-  </data>
-  <data name="strTransferFailed" xml:space="preserve">
-    <value>Transfer failed!</value>
-  </data>
-  <data name="strTryIntegrate" xml:space="preserve">
-    <value>Try to integrate</value>
-  </data>
-  <data name="strType" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="strUltraVncRepeater" xml:space="preserve">
-    <value>Ultra VNC Repeater</value>
-  </data>
-  <data name="strUltraVNCSCListeningPort" xml:space="preserve">
-    <value>UltraVNC SingleClick port:</value>
-  </data>
-  <data name="strUncheckProperties" xml:space="preserve">
-    <value>Uncheck the properties you want not to be saved!</value>
-  </data>
-  <data name="strUpdateAvailable" xml:space="preserve">
-    <value>mRemoteNG requires an update</value>
-  </data>
-  <data name="strUpdateCheck" xml:space="preserve">
-    <value>mRemoteNG can periodically connect to the mRemoteNG website to check for updates and product announcements.</value>
-  </data>
-  <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
-    <value>The update information could not be downloaded.</value>
-  </data>
-  <data name="strUpdateCheckPortableEdition" xml:space="preserve">
-    <value>mRemoteNG Portable Edition does not currently support automatic updates.</value>
-  </data>
-  <data name="strUpdateDownloadComplete" xml:space="preserve">
-    <value>Download complete!
-mRemoteNG will now quit and begin with the installation.</value>
-  </data>
-  <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
-    <value>The update could not be downloaded.</value>
-  </data>
-  <data name="strUpdateDownloadFailed" xml:space="preserve">
-    <value>The update download could not be initiated.</value>
-  </data>
-  <data name="strUpdateFrequencyCustom" xml:space="preserve">
-    <value>Every {0} days</value>
-  </data>
-  <data name="strUpdateFrequencyDaily" xml:space="preserve">
-    <value>Daily</value>
-  </data>
-  <data name="strUpdateFrequencyMonthly" xml:space="preserve">
-    <value>Monthly</value>
-  </data>
-  <data name="strUpdateFrequencyWeekly" xml:space="preserve">
-    <value>Weekly</value>
-  </data>
-  <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
-    <value>Use a different username and password</value>
-  </data>
-  <data name="strUseOnlyErrorsAndInfosPanel" xml:space="preserve">
-    <value>Use only Notifications panel (no messagebox popups)</value>
-  </data>
-  <data name="strUser" xml:space="preserve">
-    <value>User</value>
-  </data>
-  <data name="strUseSameUsernameAndPassword" xml:space="preserve">
-    <value>Use the same username and password</value>
-  </data>
-  <data name="strUseSmartCard" xml:space="preserve">
-    <value>Use a smart card</value>
-  </data>
-  <data name="strUseSQLServer" xml:space="preserve">
-    <value>Use SQL Server to load &amp;&amp; save connections</value>
-  </data>
-  <data name="strVersion" xml:space="preserve">
-    <value>Version</value>
-  </data>
-  <data name="strVnc" xml:space="preserve">
-    <value>VNC</value>
-  </data>
-  <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
-    <value>VNC disconnect failed!</value>
-  </data>
-  <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>Opening connection failed!</value>
-  </data>
-  <data name="strVncRefreshFailed" xml:space="preserve">
-    <value>VNC Refresh Screen Failed!</value>
-  </data>
-  <data name="strVncSendSpecialKeysFailed" xml:space="preserve">
-    <value>VNC SendSpecialKeys failed!</value>
-  </data>
-  <data name="strVncSetEventHandlersFailed" xml:space="preserve">
-    <value>VNC Set Event Handlers failed!</value>
-  </data>
-  <data name="strVncSetPropsFailed" xml:space="preserve">
-    <value>VNC Set Props Failed!</value>
-  </data>
-  <data name="strVncStartChatFailed" xml:space="preserve">
-    <value>VNC Start Chat Failed!</value>
-  </data>
-  <data name="strVncToggleSmartSizeFailed" xml:space="preserve">
-    <value>VNC Toggle SmartSize Failed!</value>
-  </data>
-  <data name="strVncToggleViewOnlyFailed" xml:space="preserve">
-    <value>VNC Toggle ViewOnly Failed!</value>
-  </data>
-  <data name="strWarnIfAuthFails" xml:space="preserve">
-    <value>Warn me if authentication fails</value>
-  </data>
-  <data name="strWarnings" xml:space="preserve">
-    <value>Warnings</value>
-  </data>
-  <data name="strWeifenLuoAttribution" xml:space="preserve">
-    <value>Uses the DockPanel Suite by [Weifen Luo]</value>
-  </data>
-  <data name="strWeifenLuoAttributionURL" xml:space="preserve">
-    <value>http://sourceforge.net/projects/dockpanelsuite/</value>
-  </data>
-  <data name="strWriteLogFile" xml:space="preserve">
-    <value>Write log file (mRemoteNG.log)</value>
-  </data>
-  <data name="strXULrunnerPath" xml:space="preserve">
-    <value>XULrunner path:</value>
-  </data>
-  <data name="strYes" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
-    <value>Could not find ToolStrip control in FilteredPropertyGrid.</value>
-  </data>
-  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
-    <value>Always show panel tabs</value>
-  </data>
-  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
-    <value>Identify quick connect tabs by adding the prefix "Quick:"</value>
-  </data>
-  <data name="strSearchPrompt" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
-    <value>Copy All</value>
-  </data>
-  <data name="strMenuNotificationsDelete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
-    <value>Delete All</value>
-  </data>
-  <data name="strLabelClosingConnections" xml:space="preserve">
-    <value>When closing connections:</value>
-  </data>
-  <data name="strRadioCloseWarnAll" xml:space="preserve">
-    <value>&amp;Warn me when closing connections</value>
-  </data>
-  <data name="strRadioCloseWarnExit" xml:space="preserve">
-    <value>Warn me only when e&amp;xiting mRemoteNG</value>
-  </data>
-  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
-    <value>Warn me only when closing &amp;multiple connections</value>
-  </data>
-  <data name="strRadioCloseWarnNever" xml:space="preserve">
-    <value>Do &amp;not warn me when closing connections</value>
-  </data>
-  <data name="strThemeCategoryGeneral" xml:space="preserve">
-    <value>General</value>
-  </data>
   <data name="strThemeCategoryConfigPanel" xml:space="preserve">
     <value>Config Panel</value>
   </data>
   <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
     <value>Connections Panel</value>
   </data>
-  <data name="strDefaultTheme" xml:space="preserve">
-    <value>Default Theme</value>
-  </data>
-  <data name="strOptionsTabTheme" xml:space="preserve">
-    <value>Theme</value>
-  </data>
-  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
-    <value>&amp;Delete</value>
-  </data>
-  <data name="strOptionsThemeButtonNew" xml:space="preserve">
-    <value>&amp;New</value>
-  </data>
-  <data name="strUnnamedTheme" xml:space="preserve">
-    <value>Unnamed Theme</value>
+  <data name="strThemeCategoryGeneral" xml:space="preserve">
+    <value>General</value>
   </data>
   <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
     <value>The background colour of the config panel.</value>
@@ -2202,40 +2081,161 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
     <value>Window Background Colour</value>
   </data>
-  <data name="strMenuShowHelpText" xml:space="preserve">
-    <value>&amp;Show Help Text</value>
+  <data name="strTitleError" xml:space="preserve">
+    <value>Error ({0})</value>
   </data>
-  <data name="strPuttySavedSessionsRootName" xml:space="preserve">
-    <value>PuTTY Saved Sessions</value>
+  <data name="strTitleInformation" xml:space="preserve">
+    <value>Information ({0})</value>
   </data>
-  <data name="strCompatibilityProblemDetected" xml:space="preserve">
-    <value>Compatibility problem detected</value>
+  <data name="strTitlePassword" xml:space="preserve">
+    <value>Password</value>
   </data>
-  <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
-    <value>{0} has detected the Lenovo Auto Scroll Utility running on this system. This utility is known to cause problems with {0}. It is recommended that you disable or uninstall it.</value>
+  <data name="strTitleSelectPanel" xml:space="preserve">
+    <value>Select Panel</value>
   </data>
-  <data name="strMenuSessionRetrieve" xml:space="preserve">
-    <value>Retrieve</value>
+  <data name="strTitleWarning" xml:space="preserve">
+    <value>Warning ({0})</value>
   </data>
-  <data name="strPuttySessionSettings" xml:space="preserve">
-    <value>PuTTY Session Settings</value>
+  <data name="strTransfer" xml:space="preserve">
+    <value>Transfer</value>
   </data>
-  <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
-    <value>PuTTY could not be launched.</value>
+  <data name="strTransferFailed" xml:space="preserve">
+    <value>Transfer failed!</value>
   </data>
-  <data name="strOptionsProxyTesting" xml:space="preserve">
-    <value>Testing...</value>
+  <data name="strTryIntegrate" xml:space="preserve">
+    <value>Try to integrate</value>
   </data>
-  <data name="strUpdateCheckingLabel" xml:space="preserve">
-    <value>Checking for updates...</value>
+  <data name="strType" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="strUltraVncRepeater" xml:space="preserve">
+    <value>Ultra VNC Repeater</value>
+  </data>
+  <data name="strUltraVNCSCListeningPort" xml:space="preserve">
+    <value>UltraVNC SingleClick port:</value>
+  </data>
+  <data name="strUncheckProperties" xml:space="preserve">
+    <value>Uncheck the properties you want not to be saved!</value>
+  </data>
+  <data name="strUnnamedTheme" xml:space="preserve">
+    <value>Unnamed Theme</value>
+  </data>
+  <data name="strUpdateAvailable" xml:space="preserve">
+    <value>mRemoteNG requires an update</value>
+  </data>
+  <data name="strUpdateCheck" xml:space="preserve">
+    <value>mRemoteNG can periodically connect to the mRemoteNG website to check for updates and product announcements.</value>
+  </data>
+  <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
+    <value>The update information could not be downloaded.</value>
   </data>
   <data name="strUpdateCheckFailedLabel" xml:space="preserve">
     <value>Check failed</value>
   </data>
-  <data name="strUpdateGetChangeLogFailed" xml:space="preserve">
-    <value>The change log could not be downloaded.</value>
+  <data name="strUpdateCheckingLabel" xml:space="preserve">
+    <value>Checking for updates...</value>
+  </data>
+  <data name="strUpdateCheckPortableEdition" xml:space="preserve">
+    <value>mRemoteNG Portable Edition does not currently support automatic updates.</value>
+  </data>
+  <data name="strUpdateDownloadComplete" xml:space="preserve">
+    <value>Download complete!
+mRemoteNG will now quit and begin with the installation.</value>
+  </data>
+  <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
+    <value>The update could not be downloaded.</value>
+  </data>
+  <data name="strUpdateDownloadFailed" xml:space="preserve">
+    <value>The update download could not be initiated.</value>
+  </data>
+  <data name="strUpdateFrequencyCustom" xml:space="preserve">
+    <value>Every {0} days</value>
+  </data>
+  <data name="strUpdateFrequencyDaily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="strUpdateFrequencyMonthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="strUpdateFrequencyWeekly" xml:space="preserve">
+    <value>Weekly</value>
   </data>
   <data name="strUpdateGetAnnouncementInfoFailed" xml:space="preserve">
     <value>The announcement information could not be downloaded.</value>
+  </data>
+  <data name="strUpdateGetChangeLogFailed" xml:space="preserve">
+    <value>The change log could not be downloaded.</value>
+  </data>
+  <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
+    <value>Use a different username and password</value>
+  </data>
+  <data name="strUseOnlyErrorsAndInfosPanel" xml:space="preserve">
+    <value>Use only Notifications panel (no messagebox popups)</value>
+  </data>
+  <data name="strUser" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="strUseSameUsernameAndPassword" xml:space="preserve">
+    <value>Use the same username and password</value>
+  </data>
+  <data name="strUseSmartCard" xml:space="preserve">
+    <value>Use a smart card</value>
+  </data>
+  <data name="strUseSQLServer" xml:space="preserve">
+    <value>Use SQL Server to load &amp;&amp; save connections</value>
+  </data>
+  <data name="strVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="strVnc" xml:space="preserve">
+    <value>VNC</value>
+  </data>
+  <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
+    <value>VNC disconnect failed!</value>
+  </data>
+  <data name="strVncConnectionOpenFailed" xml:space="preserve">
+    <value>Opening connection failed!</value>
+  </data>
+  <data name="strVncRefreshFailed" xml:space="preserve">
+    <value>VNC Refresh Screen Failed!</value>
+  </data>
+  <data name="strVncSendSpecialKeysFailed" xml:space="preserve">
+    <value>VNC SendSpecialKeys failed!</value>
+  </data>
+  <data name="strVncSetEventHandlersFailed" xml:space="preserve">
+    <value>VNC Set Event Handlers failed!</value>
+  </data>
+  <data name="strVncSetPropsFailed" xml:space="preserve">
+    <value>VNC Set Props Failed!</value>
+  </data>
+  <data name="strVncStartChatFailed" xml:space="preserve">
+    <value>VNC Start Chat Failed!</value>
+  </data>
+  <data name="strVncToggleSmartSizeFailed" xml:space="preserve">
+    <value>VNC Toggle SmartSize Failed!</value>
+  </data>
+  <data name="strVncToggleViewOnlyFailed" xml:space="preserve">
+    <value>VNC Toggle ViewOnly Failed!</value>
+  </data>
+  <data name="strWarnIfAuthFails" xml:space="preserve">
+    <value>Warn me if authentication fails</value>
+  </data>
+  <data name="strWarnings" xml:space="preserve">
+    <value>Warnings</value>
+  </data>
+  <data name="strWeifenLuoAttribution" xml:space="preserve">
+    <value>Uses the DockPanel Suite by [Weifen Luo]</value>
+  </data>
+  <data name="strWeifenLuoAttributionURL" xml:space="preserve">
+    <value>http://sourceforge.net/projects/dockpanelsuite/</value>
+  </data>
+  <data name="strWriteLogFile" xml:space="preserve">
+    <value>Write log file (mRemoteNG.log)</value>
+  </data>
+  <data name="strXULrunnerPath" xml:space="preserve">
+    <value>XULrunner path:</value>
+  </data>
+  <data name="strYes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>
