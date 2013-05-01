@@ -1,4 +1,5 @@
 Imports System.Environment
+Imports System.Threading
 
 Namespace App
     Namespace Info
@@ -7,11 +8,27 @@ Namespace App
             Public Shared ReadOnly URLDonate As String = "http://donate.mremoteng.org/"
             Public Shared ReadOnly URLForum As String = "http://forum.mremoteng.org/"
             Public Shared ReadOnly URLBugs As String = "http://bugs.mremoteng.org/"
-            Public Shared ReadOnly URLAnnouncement As String = "http://update.mremoteng.org/announcement.txt"
             Public Shared ReadOnly HomePath As String = My.Application.Info.DirectoryPath
             Public Shared EncryptionKey As String = "mR3m"
             Public Shared ReportingFilePath As String = ""
             Public Shared ReadOnly PuttyPath As String = My.Application.Info.DirectoryPath & "\PuTTYNG.exe"
+            Public Shared ReadOnly Property UserAgent As String
+                Get
+                    Dim details As New List(Of String)
+                    details.Add("compatible")
+                    If OSVersion.Platform = PlatformID.Win32NT Then
+                        details.Add(String.Format("Windows NT {0}.{1}", OSVersion.Version.Major, OSVersion.Version.Minor))
+                    Else
+                        details.Add(OSVersion.VersionString)
+                    End If
+                    If Tools.EnvironmentInfo.IsWow64 Then details.Add("WOW64")
+                    details.Add(Thread.CurrentThread.CurrentUICulture.Name)
+                    details.Add(String.Format(".NET CLR {0}", Version.ToString()))
+                    Dim detailsString As String = String.Join("; ", details.ToArray())
+
+                    Return String.Format("Mozilla/4.0 ({0}) {1}/{2}", detailsString, Application.ProductName, Application.ProductVersion)
+                End Get
+            End Property
         End Class
 
         Public Class Settings
@@ -26,8 +43,7 @@ Namespace App
         End Class
 
         Public Class Update
-            Public Shared ReadOnly URL As String = "http://update.mremoteng.org/"
-            Public Shared ReadOnly Property File As String
+            Public Shared ReadOnly Property FileName As String
                 Get
                     Select Case My.Settings.UpdateChannel.ToLowerInvariant()
                         Case "beta"

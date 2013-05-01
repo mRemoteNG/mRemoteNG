@@ -263,7 +263,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Current Version.
+        '''  Looks up a localized string similar to Latest version.
         '''</summary>
         Friend Shared ReadOnly Property strAvailableVersion() As String
             Get
@@ -3294,6 +3294,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Testing....
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsProxyTesting() As String
+            Get
+                Return ResourceManager.GetString("strOptionsProxyTesting", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Theme.
         '''</summary>
         Friend Shared ReadOnly Property strOptionsTabTheme() As String
@@ -6024,7 +6033,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Check for update completion failed!.
+        '''  Looks up a localized string similar to The update information could not be downloaded..
         '''</summary>
         Friend Shared ReadOnly Property strUpdateCheckCompleteFailed() As String
             Get
@@ -6033,11 +6042,20 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Check For Update failed!.
+        '''  Looks up a localized string similar to Check failed.
         '''</summary>
-        Friend Shared ReadOnly Property strUpdateCheckFailed() As String
+        Friend Shared ReadOnly Property strUpdateCheckFailedLabel() As String
             Get
-                Return ResourceManager.GetString("strUpdateCheckFailed", resourceCulture)
+                Return ResourceManager.GetString("strUpdateCheckFailedLabel", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Checking for updates....
+        '''</summary>
+        Friend Shared ReadOnly Property strUpdateCheckingLabel() As String
+            Get
+                Return ResourceManager.GetString("strUpdateCheckingLabel", resourceCulture)
             End Get
         End Property
         
@@ -6047,15 +6065,6 @@ Namespace My
         Friend Shared ReadOnly Property strUpdateCheckPortableEdition() As String
             Get
                 Return ResourceManager.GetString("strUpdateCheckPortableEdition", resourceCulture)
-            End Get
-        End Property
-        
-        '''<summary>
-        '''  Looks up a localized string similar to Error deleting update file!.
-        '''</summary>
-        Friend Shared ReadOnly Property strUpdateDeleteFailed() As String
-            Get
-                Return ResourceManager.GetString("strUpdateDeleteFailed", resourceCulture)
             End Get
         End Property
         
@@ -6070,7 +6079,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Download complete failed!.
+        '''  Looks up a localized string similar to The update could not be downloaded..
         '''</summary>
         Friend Shared ReadOnly Property strUpdateDownloadCompleteFailed() As String
             Get
@@ -6079,7 +6088,7 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Download Update failed!.
+        '''  Looks up a localized string similar to The update download could not be initiated..
         '''</summary>
         Friend Shared ReadOnly Property strUpdateDownloadFailed() As String
             Get
@@ -6124,11 +6133,20 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Error starting update!.
+        '''  Looks up a localized string similar to The announcement information could not be downloaded..
         '''</summary>
-        Friend Shared ReadOnly Property strUpdateStartFailed() As String
+        Friend Shared ReadOnly Property strUpdateGetAnnouncementInfoFailed() As String
             Get
-                Return ResourceManager.GetString("strUpdateStartFailed", resourceCulture)
+                Return ResourceManager.GetString("strUpdateGetAnnouncementInfoFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The change log could not be downloaded..
+        '''</summary>
+        Friend Shared ReadOnly Property strUpdateGetChangeLogFailed() As String
+            Get
+                Return ResourceManager.GetString("strUpdateGetChangeLogFailed", resourceCulture)
             End Get
         End Property
         

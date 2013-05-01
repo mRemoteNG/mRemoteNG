@@ -181,7 +181,7 @@
     <value>Minutes (0 means disabled)</value>
   </data>
   <data name="strAvailableVersion" xml:space="preserve">
-    <value>Current Version</value>
+    <value>Latest version</value>
   </data>
   <data name="strButtonBrowse" xml:space="preserve">
     <value>&amp;Browse...</value>
@@ -1941,26 +1941,20 @@ Message:
     <value>mRemoteNG can periodically connect to the mRemoteNG website to check for updates and product announcements.</value>
   </data>
   <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
-    <value>Check for update completion failed!</value>
-  </data>
-  <data name="strUpdateCheckFailed" xml:space="preserve">
-    <value>Check For Update failed!</value>
+    <value>The update information could not be downloaded.</value>
   </data>
   <data name="strUpdateCheckPortableEdition" xml:space="preserve">
     <value>mRemoteNG Portable Edition does not currently support automatic updates.</value>
-  </data>
-  <data name="strUpdateDeleteFailed" xml:space="preserve">
-    <value>Error deleting update file!</value>
   </data>
   <data name="strUpdateDownloadComplete" xml:space="preserve">
     <value>Download complete!
 mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
-    <value>Download complete failed!</value>
+    <value>The update could not be downloaded.</value>
   </data>
   <data name="strUpdateDownloadFailed" xml:space="preserve">
-    <value>Download Update failed!</value>
+    <value>The update download could not be initiated.</value>
   </data>
   <data name="strUpdateFrequencyCustom" xml:space="preserve">
     <value>Every {0} days</value>
@@ -1973,9 +1967,6 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strUpdateFrequencyWeekly" xml:space="preserve">
     <value>Weekly</value>
-  </data>
-  <data name="strUpdateStartFailed" xml:space="preserve">
-    <value>Error starting update!</value>
   </data>
   <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
     <value>Use a different username and password</value>
@@ -2231,5 +2222,20 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
     <value>PuTTY could not be launched.</value>
+  </data>
+  <data name="strOptionsProxyTesting" xml:space="preserve">
+    <value>Testing...</value>
+  </data>
+  <data name="strUpdateCheckingLabel" xml:space="preserve">
+    <value>Checking for updates...</value>
+  </data>
+  <data name="strUpdateCheckFailedLabel" xml:space="preserve">
+    <value>Check failed</value>
+  </data>
+  <data name="strUpdateGetChangeLogFailed" xml:space="preserve">
+    <value>The change log could not be downloaded.</value>
+  </data>
+  <data name="strUpdateGetAnnouncementInfoFailed" xml:space="preserve">
+    <value>The announcement information could not be downloaded.</value>
   </data>
 </root>

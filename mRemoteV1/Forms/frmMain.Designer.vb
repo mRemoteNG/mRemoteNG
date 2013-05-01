@@ -120,7 +120,6 @@ Partial Class frmMain
         Me.ToolStripSplitButton1 = New System.Windows.Forms.ToolStripDropDownButton
         Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem
-        Me.tmrShowUpdate = New System.Windows.Forms.Timer(Me.components)
         Me.tmrAutoSave = New System.Windows.Forms.Timer(Me.components)
         Me.msMain.SuspendLayout()
         Me.tsContainer.ContentPanel.SuspendLayout()
@@ -793,11 +792,6 @@ Partial Class frmMain
         Me.ToolStripMenuItem2.Size = New System.Drawing.Size(135, 22)
         Me.ToolStripMenuItem2.Text = "Ctrl-Esc"
         '
-        'tmrShowUpdate
-        '
-        Me.tmrShowUpdate.Enabled = True
-        Me.tmrShowUpdate.Interval = 5000
-        '
         'tmrAutoSave
         '
         Me.tmrAutoSave.Interval = 10000
@@ -860,7 +854,6 @@ Partial Class frmMain
     Friend WithEvents mMenViewFullscreen As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenToolsSSHTransfer As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tsContainer As System.Windows.Forms.ToolStripContainer
-    Friend WithEvents tmrShowUpdate As System.Windows.Forms.Timer
     Friend WithEvents mMenToolsExternalApps As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents tmrAutoSave As System.Windows.Forms.Timer
     Friend WithEvents tsExternalTools As System.Windows.Forms.ToolStrip

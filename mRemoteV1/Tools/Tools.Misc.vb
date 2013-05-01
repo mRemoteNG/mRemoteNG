@@ -178,6 +178,15 @@ Namespace Tools
             Throw ex
         End Function
 
+        Public Shared Function GetExceptionMessageRecursive(ByVal ex As Exception, Optional ByVal separator As String = vbNewLine) As String
+            Dim message As String = ex.Message
+            If ex.InnerException IsNot Nothing Then
+                Dim innerMessage As String = GetExceptionMessageRecursive(ex.InnerException, separator)
+                message = String.Join(separator, New String() {message, innerMessage})
+            End If
+            Return message
+        End Function
+
         Public Shared Function TakeScreenshot(ByVal sender As UI.Window.Connection) As Image
             Try
                 Dim LeftStart As Integer = sender.TabController.SelectedTab.PointToScreen(New Point(sender.TabController.SelectedTab.Left)).X  'Me.Left + Splitter.SplitterDistance + 11

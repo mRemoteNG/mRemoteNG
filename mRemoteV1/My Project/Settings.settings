@@ -545,5 +545,11 @@
     <Setting Name="CompatibilityWarnLenovoAutoScrollUtility" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="AnnouncementAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://update.mremoteng.org/announcement-beta.txt</Value>
+    </Setting>
+    <Setting Name="UpdateAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://update.mremoteng.org/</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

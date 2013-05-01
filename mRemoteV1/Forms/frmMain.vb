@@ -1,4 +1,3 @@
-Imports System.IO
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 Imports System.Reflection
@@ -33,6 +32,8 @@ Public Class frmMain
 
 #Region "Startup & Shutdown"
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        MainForm = Me
+
         Startup.CheckCompatibility()
 
         Startup.CreateLogger()
@@ -81,21 +82,7 @@ Public Class frmMain
             Windows.Show(UI.Window.Type.ComponentsCheck)
         End If
 
-#If Not PORTABLE Then
-        If Not My.Settings.CheckForUpdatesAsked Then
-            Dim CommandButtons() As String = {My.Language.strAskUpdatesCommandRecommended, My.Language.strAskUpdatesCommandCustom, My.Language.strAskUpdatesCommandAskLater}
-            cTaskDialog.ShowTaskDialogBox(Me, My.Application.Info.ProductName, My.Language.strAskUpdatesMainInstruction, String.Format(My.Language.strAskUpdatesContent, My.Application.Info.ProductName), "", "", "", "", String.Join("|", CommandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question)
-            If cTaskDialog.CommandButtonResult = 0 Or cTaskDialog.CommandButtonResult = 1 Then
-                My.Settings.CheckForUpdatesAsked = True
-            End If
-            If cTaskDialog.CommandButtonResult = 1 Then
-                Windows.ShowUpdatesTab()
-            End If
-        End If
-
-        Startup.UpdateCheck()
-        Startup.AnnouncementCheck()
-#Else
+#If PORTABLE Then
         mMenInfoAnnouncements.Visible = False
         mMenToolsUpdate.Visible = False
         mMenInfoSep2.Visible = False
@@ -214,6 +201,28 @@ Public Class frmMain
         End With
     End Sub
 
+    Private Sub frmMain_Shown(sender As Object, e As EventArgs) Handles Me.Shown
+#If Not PORTABLE Then
+        If Not My.Settings.CheckForUpdatesAsked Then
+            Dim commandButtons() As String = {My.Language.strAskUpdatesCommandRecommended, My.Language.strAskUpdatesCommandCustom, My.Language.strAskUpdatesCommandAskLater}
+            cTaskDialog.ShowTaskDialogBox(Me, My.Application.Info.ProductName, My.Language.strAskUpdatesMainInstruction, String.Format(My.Language.strAskUpdatesContent, My.Application.Info.ProductName), "", "", "", "", String.Join("|", commandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question)
+            If cTaskDialog.CommandButtonResult = 0 Or cTaskDialog.CommandButtonResult = 1 Then
+                My.Settings.CheckForUpdatesAsked = True
+            End If
+            If cTaskDialog.CommandButtonResult = 1 Then
+                Windows.ShowUpdatesTab()
+            End If
+        End If
+
+        Dim nextUpdateCheck As Date = My.Settings.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(My.Settings.CheckForUpdatesFrequencyDays))
+        If My.Settings.UpdatePending Or Date.UtcNow > nextUpdateCheck Then
+            If Not IsHandleCreated Then CreateHandle() ' Make sure the handle is created so that InvokeRequired returns the correct result
+            Startup.CheckForUpdate()
+            Startup.CheckForAnnouncement()
+        End If
+#End If
+    End Sub
+
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
         If Not (WindowList Is Nothing OrElse WindowList.Count = 0) Then
             Dim connectionWindow As UI.Window.Connection
@@ -255,25 +264,6 @@ Public Class frmMain
 #End Region
 
 #Region "Timer"
-    Private tmrRuns As Integer = 0
-    Private Sub tmrShowUpdate_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrShowUpdate.Tick
-        If tmrRuns = 5 Then
-            Me.tmrShowUpdate.Enabled = False
-        End If
-
-        If App.Runtime.IsUpdateAvailable Then
-            App.Runtime.Windows.Show(UI.Window.Type.Update)
-            Me.tmrShowUpdate.Enabled = False
-        End If
-
-        If App.Runtime.IsAnnouncementAvailable Then
-            App.Runtime.Windows.Show(UI.Window.Type.Announcement)
-            Me.tmrShowUpdate.Enabled = False
-        End If
-
-        tmrRuns += 1
-    End Sub
-
     Private Sub tmrAutoSave_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmrAutoSave.Tick
         MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Doing AutoSave", True)
         App.Runtime.SaveConnections()

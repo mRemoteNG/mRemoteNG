@@ -2397,6 +2397,29 @@ Namespace My
                 Me("CompatibilityWarnLenovoAutoScrollUtility") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://update.mremoteng.org/announcement-beta.txt")>  _
+        Public ReadOnly Property AnnouncementAddress() As String
+            Get
+                Return CType(Me("AnnouncementAddress"),String)
+            End Get
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://update.mremoteng.org/")>  _
+        Public Property UpdateAddress() As String
+            Get
+                Return CType(Me("UpdateAddress"),String)
+            End Get
+            Set
+                Me("UpdateAddress") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

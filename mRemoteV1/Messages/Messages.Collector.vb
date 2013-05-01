@@ -113,6 +113,10 @@ Namespace Messages
             AddToList(lvItem)
         End Sub
 
+        Public Sub AddExceptionMessage(ByVal message As String, ByVal ex As Exception, Optional ByVal msgClass As MessageClass = MessageClass.ErrorMsg, Optional ByVal logOnly As Boolean = False)
+            AddMessage(msgClass, message & vbNewLine & Tools.Misc.GetExceptionMessageRecursive(ex), logOnly)
+        End Sub
+
         Private Sub SwitchTimerTick(ByVal sender As Object, ByVal e As System.EventArgs)
             Me.SwitchToMessage()
             Me.ECTimer.Enabled = False

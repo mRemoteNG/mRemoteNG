@@ -1,4 +1,5 @@
-﻿Imports log4net
+﻿Imports System.ComponentModel
+Imports log4net
 Imports mRemoteNG.Messages
 Imports mRemoteNG.Connection
 Imports mRemoteNG.Tools
@@ -20,6 +21,8 @@ Namespace App
         End Sub
 
 #Region "Public Properties"
+        Public Shared Property MainForm As frmMain
+
         Private Shared _connectionList As Connection.List
         Public Shared Property ConnectionList() As List
             Get
@@ -128,26 +131,6 @@ Namespace App
             End Get
             Set(ByVal value As ILog)
                 _log = value
-            End Set
-        End Property
-
-        Private Shared _isUpdateAvailable As Boolean
-        Public Shared Property IsUpdateAvailable() As Boolean
-            Get
-                Return _isUpdateAvailable
-            End Get
-            Set(ByVal value As Boolean)
-                _isUpdateAvailable = value
-            End Set
-        End Property
-
-        Private Shared _isAnnouncementAvailable As Boolean
-        Public Shared Property IsAnnouncementAvailable() As Boolean
-            Get
-                Return _isAnnouncementAvailable
-            End Get
-            Set(ByVal value As Boolean)
-                _isAnnouncementAvailable = value
             End Set
         End Property
 
@@ -538,35 +521,66 @@ Namespace App
                 End If
             End Sub
 
-            Public Shared Sub UpdateCheck()
-                If My.Settings.CheckForUpdatesAsked And My.Settings.CheckForUpdatesOnStartup Then
-                    If My.Settings.UpdatePending Or My.Settings.CheckForUpdatesLastCheck < Date.Now.Subtract(TimeSpan.FromDays(My.Settings.CheckForUpdatesFrequencyDays)) Then
-                        frmMain.tmrShowUpdate.Enabled = True
-                        Windows.updateForm.CheckForUpdate()
-                        AddHandler Windows.updateForm.UpdateCheckCompleted, AddressOf UpdateCheckComplete
-                    End If
+            Private Shared _appUpdate As Update
+            Public Shared Sub CheckForUpdate()
+                If _appUpdate Is Nothing Then
+                    _appUpdate = New Update
+                ElseIf _appUpdate.IsGetUpdateInfoRunning Then
+                    Return
                 End If
+
+                Dim nextUpdateCheck As Date = My.Settings.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(My.Settings.CheckForUpdatesFrequencyDays))
+                If Not My.Settings.UpdatePending And Date.UtcNow < nextUpdateCheck Then Return
+
+                AddHandler _appUpdate.GetUpdateInfoCompletedEvent, AddressOf GetUpdateInfoCompleted
+                _appUpdate.GetUpdateInfoAsync()
             End Sub
 
-            Private Shared Sub UpdateCheckComplete(ByVal UpdateAvailable As Boolean)
-                My.Settings.CheckForUpdatesLastCheck = Date.Now
-                My.Settings.UpdatePending = UpdateAvailable
-                IsUpdateAvailable = UpdateAvailable
-            End Sub
-
-            Public Shared Sub AnnouncementCheck()
-                If My.Settings.CheckForUpdatesAsked And My.Settings.CheckForUpdatesOnStartup Then
-                    If My.Settings.CheckForUpdatesLastCheck < Date.Now.Subtract(TimeSpan.FromDays(My.Settings.CheckForUpdatesFrequencyDays)) Then
-                        frmMain.tmrShowUpdate.Enabled = True
-                        Windows.AnnouncementForm.CheckForAnnouncement()
-                        AddHandler Windows.AnnouncementForm.AnnouncementCheckCompleted, AddressOf AnnouncementCheckComplete
-                    End If
+            Private Shared Sub GetUpdateInfoCompleted(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs)
+                If MainForm.InvokeRequired Then
+                    MainForm.Invoke(New AsyncCompletedEventHandler(AddressOf GetUpdateInfoCompleted), New Object() {sender, e})
+                    Return
                 End If
+
+                Try
+                    RemoveHandler _appUpdate.GetUpdateInfoCompletedEvent, AddressOf GetUpdateInfoCompleted
+
+                    If e.Cancelled Then Return
+                    If e.Error IsNot Nothing Then Throw e.Error
+
+                    If _appUpdate.IsUpdateAvailable() Then Windows.Show(UI.Window.Type.Update)
+                Catch ex As Exception
+                    MessageCollector.AddExceptionMessage("GetUpdateInfoCompleted() failed.", ex, MessageClass.ErrorMsg, True)
+                End Try
             End Sub
 
-            Private Shared Sub AnnouncementCheckComplete(ByVal AnnouncementAvailable As Boolean)
-                My.Settings.CheckForUpdatesLastCheck = Date.Now
-                IsAnnouncementAvailable = AnnouncementAvailable
+            Public Shared Sub CheckForAnnouncement()
+                If _appUpdate Is Nothing Then
+                    _appUpdate = New Update
+                ElseIf _appUpdate.IsGetAnnouncementInfoRunning Then
+                    Return
+                End If
+
+                AddHandler _appUpdate.GetAnnouncementInfoCompletedEvent, AddressOf GetAnnouncementInfoCompleted
+                _appUpdate.GetAnnouncementInfoAsync()
+            End Sub
+
+            Private Shared Sub GetAnnouncementInfoCompleted(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs)
+                If MainForm.InvokeRequired Then
+                    MainForm.Invoke(New AsyncCompletedEventHandler(AddressOf GetAnnouncementInfoCompleted), New Object() {sender, e})
+                    Return
+                End If
+
+                Try
+                    RemoveHandler _appUpdate.GetAnnouncementInfoCompletedEvent, AddressOf GetAnnouncementInfoCompleted
+
+                    If e.Cancelled Then Return
+                    If e.Error IsNot Nothing Then Throw e.Error
+
+                    If _appUpdate.IsAnnouncementAvailable() Then Windows.Show(UI.Window.Type.Announcement)
+                Catch ex As Exception
+                    MessageCollector.AddExceptionMessage("GetAnnouncementInfoCompleted() failed.", ex, MessageClass.ErrorMsg, True)
+                End Try
             End Sub
 
             Public Shared Sub ParseCommandLineArgs()

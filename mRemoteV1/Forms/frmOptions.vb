@@ -1828,8 +1828,9 @@ Public Class frmOptions
     End Sub
 #End Region
 
-#Region "Private Variables"
+#Region "Private Fields"
     Private _initialTab As Integer = 0
+    Private _appUpdate As App.Update
     Private _themeList As BindingList(Of ThemeInfo)
     Private _originalTheme As ThemeInfo
 #End Region
@@ -2113,14 +2114,41 @@ Public Class frmOptions
     End Sub
 
     Private Sub btnTestProxy_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTestProxy.Click
-        SaveOptions()
-        Dim ud As New App.Update()
-
-        If ud.IsProxyOK Then
-            MsgBox(My.Language.strProxyTestSucceeded, MsgBoxStyle.Information)
-        Else
-            MsgBox(My.Language.strProxyTestFailed, MsgBoxStyle.Exclamation)
+        If _appUpdate IsNot Nothing Then
+            If _appUpdate.IsGetUpdateInfoRunning Then Return
         End If
+
+        _appUpdate = New App.Update
+        _appUpdate.SetProxySettings(chkUseProxyForAutomaticUpdates.Checked, txtProxyAddress.Text, numProxyPort.Value, chkUseProxyAuthentication.Checked, txtProxyUsername.Text, txtProxyPassword.Text)
+
+        btnTestProxy.Enabled = False
+        btnTestProxy.Text = Language.strOptionsProxyTesting
+
+        AddHandler _appUpdate.GetUpdateInfoCompletedEvent, AddressOf GetUpdateInfoCompleted
+
+        _appUpdate.GetUpdateInfoAsync()
+    End Sub
+
+    Private Sub GetUpdateInfoCompleted(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs)
+        If InvokeRequired Then
+            Dim myDelegate As New AsyncCompletedEventHandler(AddressOf GetUpdateInfoCompleted)
+            Invoke(myDelegate, New Object() {sender, e})
+            Return
+        End If
+
+        Try
+            RemoveHandler _appUpdate.GetUpdateInfoCompletedEvent, AddressOf GetUpdateInfoCompleted
+
+            btnTestProxy.Enabled = True
+            btnTestProxy.Text = Language.strButtonTestProxy
+
+            If e.Cancelled Then Return
+            If e.Error IsNot Nothing Then Throw e.Error
+
+            cTaskDialog.ShowCommandBox(Me, Application.Info.ProductName, Language.strProxyTestSucceeded, "", Language.strButtonOK, False)
+        Catch ex As Exception
+            cTaskDialog.ShowCommandBox(Me, Application.Info.ProductName, Language.strProxyTestFailed, Misc.GetExceptionMessageRecursive(ex), "", "", "", "", False, eSysIcons.Error, 0)
+        End Try
     End Sub
 
     Private Sub chkUseProxyAuthentication_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles chkUseProxyAuthentication.CheckedChanged

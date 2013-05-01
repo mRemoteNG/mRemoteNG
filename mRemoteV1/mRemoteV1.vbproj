@@ -175,7 +175,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="App\App.Announcement.vb" />
     <Compile Include="App\App.Info.vb" />
     <Compile Include="App\App.Native.vb" />
     <Compile Include="App\App.Runtime.vb" />
@@ -188,7 +187,9 @@
     <Compile Include="Config\Config.Settings.Save.vb" />
     <Compile Include="Config\ConfirmClose.vb" />
     <Compile Include="Config\PuttySessions.vb" />
+    <Compile Include="Tools\Authenticode.vb" />
     <Compile Include="Tools\EnumWindows.vb" />
+    <Compile Include="Tools\EnvironmentInfo.vb" />
     <Compile Include="Tools\PropertyGridCommandSite.vb" />
     <Compile Include="Connection\PuttySession.Info.vb" />
     <Compile Include="Root\PuttySessions.Info.vb" />
@@ -296,7 +297,10 @@
     <Compile Include="UI\UI.Window.ADImport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Announcment.vb">
+    <Compile Include="UI\UI.Window.Announcement.Designer.vb">
+      <DependentUpon>UI.Window.Announcement.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI.Window.Announcement.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UI.Window.Base.vb">
@@ -351,6 +355,9 @@
     <Compile Include="UI\UI.Window.Type.vb" />
     <Compile Include="UI\UI.Window.UltraVNCSC.vb">
       <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\UI.Window.Update.Designer.vb">
+      <DependentUpon>UI.Window.Update.vb</DependentUpon>
     </Compile>
     <Compile Include="UI\UI.Window.Update.vb">
       <SubType>Form</SubType>
@@ -421,8 +428,8 @@
       <DependentUpon>UI.Window.ADImport.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.Announcment.resx">
-      <DependentUpon>UI.Window.Announcment.vb</DependentUpon>
+    <EmbeddedResource Include="UI\UI.Window.Announcement.resx">
+      <DependentUpon>UI.Window.Announcement.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UI.Window.ComponentsCheck.resx">
