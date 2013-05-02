@@ -276,7 +276,7 @@ Namespace Config
                     App.Runtime.IsConnectionsFileLoaded = True
                     'App.Runtime.Windows.treeForm.InitialRefresh()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromSqlFailed & vbNewLine & ex.Message, True)
+                    Throw
                 Finally
                     If sqlCon IsNot Nothing Then
                         sqlCon.Close()

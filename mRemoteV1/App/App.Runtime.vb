@@ -1100,14 +1100,31 @@ Namespace App
                     TimerSqlWatcher.Start()
                 End If
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strConnectionsFileCouldNotBeLoaded & vbNewLine & ex.Message & ex.StackTrace, conL.ConnectionFileName))
-                If My.Settings.UseSQLServer = False Then
+                If My.Settings.UseSQLServer Then
+                    MessageCollector.AddExceptionMessage(My.Language.strLoadFromSqlFailed, ex)
+                    Dim commandButtons As String = String.Join("|", {My.Language.strCommandTryAgain, My.Language.strCommandOpenConnectionFile, String.Format(My.Language.strCommandExitProgram, Application.ProductName)})
+                    cTaskDialog.ShowCommandBox(Application.ProductName, My.Language.strLoadFromSqlFailed, My.Language.strLoadFromSqlFailedContent, Misc.GetExceptionMessageRecursive(ex), "", "", commandButtons, False, eSysIcons.Error, Nothing)
+                    Select Case cTaskDialog.CommandButtonResult
+                        Case 0
+                            LoadConnections(WithDialog, Update)
+                            Return
+                        Case 1
+                            My.Settings.UseSQLServer = False
+                            LoadConnections(True, Update)
+                            Return
+                        Case Else
+                            Application.Exit()
+                            Return
+                    End Select
+                Else
+                    MessageCollector.AddExceptionMessage(String.Format(My.Language.strConnectionsFileCouldNotBeLoaded, conL.ConnectionFileName), ex)
                     If Not conL.ConnectionFileName = GetStartupConnectionFileName() Then
-                        LoadConnections()
-                        Exit Sub
+                        LoadConnections(WithDialog, Update)
+                        Return
                     Else
-                        MsgBox(String.Format(My.Language.strErrorStartupConnectionFileLoad, vbNewLine, Application.ProductName, GetStartupConnectionFileName(), ex.Message), MsgBoxStyle.OkOnly + MsgBoxStyle.Critical)
+                        MsgBox(String.Format(My.Language.strErrorStartupConnectionFileLoad, vbNewLine, Application.ProductName, GetStartupConnectionFileName(), Misc.GetExceptionMessageRecursive(ex)), MsgBoxStyle.OkOnly + MsgBoxStyle.Critical)
                         Application.Exit()
+                        Return
                     End If
                 End If
             End Try

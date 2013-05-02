@@ -2,6 +2,7 @@
   Fixed issue MR-392 - Sessions Panel - context menu entries need to be context aware
   Fixed issue MR-422 - Gives error Object reference not set to an instance of an object.
   Fixed issue MR-424 - Import of a few Linux SSH2 hosts discovered via the port scan tool results in a UE
+  Fixed issue MR-439 - MRemoteNG 1.70 does not start
   Added PuTTY Session Settings command to the Config panel for PuTTY Saved Sessions.
   Fixed an exception or crash when choosing unnamed colors for themes.
   Fixed possible error "Control does not support transparent background colors" when modifying themes.

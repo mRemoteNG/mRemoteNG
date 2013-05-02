@@ -414,8 +414,17 @@ VncSharpNG Control Version {0}</value>
   <data name="strColumnWaitForExit" xml:space="preserve">
     <value>Wait For Exit</value>
   </data>
+  <data name="strCommandExitProgram" xml:space="preserve">
+    <value>E&amp;xit {0}</value>
+  </data>
   <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Couldn't parse command line args!</value>
+  </data>
+  <data name="strCommandOpenConnectionFile" xml:space="preserve">
+    <value>&amp;Open a connection file</value>
+  </data>
+  <data name="strCommandTryAgain" xml:space="preserve">
+    <value>&amp;Try again</value>
   </data>
   <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
     <value>{0} has detected the Lenovo Auto Scroll Utility running on this system. This utility is known to cause problems with {0}. It is recommended that you disable or uninstall it.</value>
@@ -911,7 +920,10 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>{0} must be restarted before changes to the language will take effect.</value>
   </data>
   <data name="strLoadFromSqlFailed" xml:space="preserve">
-    <value>Load From SQL failed!</value>
+    <value>Load from SQL failed</value>
+  </data>
+  <data name="strLoadFromSqlFailedContent" xml:space="preserve">
+    <value>The connection information could not be loaded from the SQL server.</value>
   </data>
   <data name="strLoadFromXmlFailed" xml:space="preserve">
     <value>Load From XML failed!</value>

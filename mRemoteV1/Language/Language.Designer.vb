@@ -919,11 +919,38 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to E&amp;xit {0}.
+        '''</summary>
+        Friend Shared ReadOnly Property strCommandExitProgram() As String
+            Get
+                Return ResourceManager.GetString("strCommandExitProgram", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Couldn&apos;t parse command line args!.
         '''</summary>
         Friend Shared ReadOnly Property strCommandLineArgsCouldNotBeParsed() As String
             Get
                 Return ResourceManager.GetString("strCommandLineArgsCouldNotBeParsed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Open a connection file.
+        '''</summary>
+        Friend Shared ReadOnly Property strCommandOpenConnectionFile() As String
+            Get
+                Return ResourceManager.GetString("strCommandOpenConnectionFile", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Try again.
+        '''</summary>
+        Friend Shared ReadOnly Property strCommandTryAgain() As String
+            Get
+                Return ResourceManager.GetString("strCommandTryAgain", resourceCulture)
             End Get
         End Property
         
@@ -2393,11 +2420,20 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to Load From SQL failed!.
+        '''  Looks up a localized string similar to Load from SQL failed.
         '''</summary>
         Friend Shared ReadOnly Property strLoadFromSqlFailed() As String
             Get
                 Return ResourceManager.GetString("strLoadFromSqlFailed", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The connection information could not be loaded from the SQL server..
+        '''</summary>
+        Friend Shared ReadOnly Property strLoadFromSqlFailedContent() As String
+            Get
+                Return ResourceManager.GetString("strLoadFromSqlFailedContent", resourceCulture)
             End Get
         End Property
         
