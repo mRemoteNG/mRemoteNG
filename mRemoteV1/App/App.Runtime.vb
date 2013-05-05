@@ -979,7 +979,6 @@ Namespace App
 
                 conL.ConnectionList = ConnectionList
                 conL.ContainerList = ContainerList
-                conL.Import = False
 
                 Tree.Node.ResetTree()
 
@@ -987,7 +986,7 @@ Namespace App
 
                 ' Load config
                 conL.ConnectionFileName = filename
-                conL.Load()
+                conL.Load(False)
 
                 Windows.treeForm.tvConnections.SelectedNode = conL.RootTreeNode
             Catch ex As Exception
@@ -1070,8 +1069,6 @@ Namespace App
                     conL.PreviousSelected = LastSelected
                 End If
 
-                conL.Import = False
-
                 Tree.Node.ResetTree()
 
                 conL.RootTreeNode = Windows.treeForm.tvConnections.Nodes(0)
@@ -1083,7 +1080,7 @@ Namespace App
                 conL.SQLPassword = Security.Crypt.Decrypt(My.Settings.SQLPass, App.Info.General.EncryptionKey)
                 conL.SQLUpdate = Update
 
-                conL.Load()
+                conL.Load(False)
 
                 If My.Settings.UseSQLServer = True Then
                     LastSqlUpdate = Now
@@ -1212,11 +1209,10 @@ Namespace App
                         Dim conL As New Config.Connections.Load
                         conL.ConnectionFileName = lD.FileNames(i)
                         conL.RootTreeNode = nNode
-                        conL.Import = True
                         conL.ConnectionList = App.Runtime.ConnectionList
                         conL.ContainerList = App.Runtime.ContainerList
 
-                        conL.Load()
+                        conL.Load(True)
 
                         Windows.treeForm.tvConnections.SelectedNode.Nodes.Add(nNode)
                     Next

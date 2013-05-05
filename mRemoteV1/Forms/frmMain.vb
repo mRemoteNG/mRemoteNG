@@ -76,8 +76,6 @@ Public Class frmMain
             Return
         End If
 
-        PuttySessions.AddSessionsToTree(Tree.Node.TreeView)
-
         If My.Settings.StartupComponentsCheck Then
             Windows.Show(UI.Window.Type.ComponentsCheck)
         End If

@@ -113,16 +113,6 @@ Namespace Config
                 End Set
             End Property
 
-            Private _Import As Boolean
-            Public Property Import() As Boolean
-                Get
-                    Return Me._Import
-                End Get
-                Set(ByVal value As Boolean)
-                    Me._Import = value
-                End Set
-            End Property
-
             Private _ConnectionList As Connection.List
             Public Property ConnectionList() As Connection.List
                 Get
@@ -165,17 +155,18 @@ Namespace Config
 #End Region
 
 #Region "Public Methods"
-            Public Sub Load()
+            Public Sub Load(ByVal import As Boolean)
                 If _UseSQL = True Then
                     LoadFromSQL()
                     SetMainFormText("SQL Server")
                 Else
                     Dim strCons As String = DecryptCompleteFile()
-                    LoadFromXML(strCons)
+                    LoadFromXML(strCons, import)
                 End If
 
-                If Import = False Then
+                If import = False Then
                     SetMainFormText(ConnectionFileName)
+                    PuttySessions.AddSessionsToTree(Tree.Node.TreeView)
                 End If
             End Sub
 #End Region
@@ -638,7 +629,7 @@ Namespace Config
                 Return ""
             End Function
 
-            Private Sub LoadFromXML(Optional ByVal cons As String = "")
+            Private Sub LoadFromXML(ByVal cons As String, ByVal import As Boolean)
                 Try
                     App.Runtime.IsConnectionsFileLoaded = False
 
@@ -690,31 +681,29 @@ Namespace Config
                         End If
                     End If
 
-                    Dim imp As Boolean = False
-
-                    If Me.confVersion > 0.9 Then '1.0
+                    Dim isExportFile As Boolean = False
+                    If confVersion >= 1.0 Then
                         If xDom.DocumentElement.Attributes("Export").Value = True Then
-                            imp = True
+                            isExportFile = True
                         End If
                     End If
 
-                    If Me._Import = True And imp = False Then
+                    If import And Not isExportFile Then
                         MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strCannotImportNormalSessionFile)
-
-                        Exit Sub
+                        Return
                     End If
 
-                    If imp = False Then
-                        Me._RootTreeNode.Text = rootNode.Text
-                        Me._RootTreeNode.Tag = rootNode.Tag
-                        Me._RootTreeNode.ImageIndex = Images.Enums.TreeImage.Root
-                        Me._RootTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Root
+                    If Not isExportFile Then
+                        _RootTreeNode.Text = rootNode.Text
+                        _RootTreeNode.Tag = rootNode.Tag
+                        _RootTreeNode.ImageIndex = Images.Enums.TreeImage.Root
+                        _RootTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Root
                     End If
 
                     Windows.treeForm.tvConnections.BeginUpdate()
 
                     ' SECTION 3. Populate the TreeView with the DOM nodes.
-                    AddNodeFromXML(xDom.DocumentElement, Me._RootTreeNode)
+                    AddNodeFromXml(xDom.DocumentElement, _RootTreeNode)
 
                     Me._RootTreeNode.Expand()
 
