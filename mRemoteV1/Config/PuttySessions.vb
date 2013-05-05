@@ -60,7 +60,6 @@ Namespace Config
             If sessionsKey Is Nothing Then Return New String() {}
 
             Dim sessionNames As New List(Of String)
-            If Not raw Then sessionNames.Add("Default Settings") ' Do not localize
             For Each sessionName As String In sessionsKey.GetSubKeyNames()
                 If raw Then
                     sessionNames.Add(sessionName)
@@ -68,6 +67,17 @@ Namespace Config
                     sessionNames.Add(Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B")))
                 End If
             Next
+
+            If raw Then
+                If Not sessionNames.Contains("Default%20Settings") Then ' Do not localize
+                    sessionNames.Insert(0, "Default%20Settings")
+                End If
+            Else
+                If Not sessionNames.Contains("Default Settings") Then
+                    sessionNames.Insert(0, "Default Settings")
+                End If
+            End If
+
             Return sessionNames.ToArray()
         End Function
 
@@ -75,6 +85,7 @@ Namespace Config
             Dim sessionList As New List(Of Connection.PuttySession.Info)
             Dim sessionInfo As Connection.Info
             For Each sessionName As String In GetSessionNames(True)
+                If sessionName = "Default%20Settings" Then Continue For ' Do not localize
                 sessionInfo = SessionToConnectionInfo(sessionName)
                 If sessionInfo Is Nothing Then Continue For
                 sessionList.Add(sessionInfo)
