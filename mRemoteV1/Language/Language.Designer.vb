@@ -561,10 +561,10 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to The (RDP) Sessions feature requires that you have a registered copy of eolwtscom.dll on your system.
-        '''mRemoteNG ships with this component but will not register it automatically unless you run the setup package.
-        '''To do register it manually do this: Open up the run dialog (Start - Run) and enter the following: regsvr32 &quot;c:\Program Files\mRemoteNG\eolwtscom.dll&quot; (Where c:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation).
-        '''If you are still not able to pass this check or use the (RDP) Session [rest of string was truncated]&quot;;.
+        '''  Looks up a localized string similar to The (RDP) Sessions feature requires that you have a copy of eolwtscom.dll registered on your system.
+        '''mRemoteNG ships with this component but it is not registered automatically if you do not use the mRemoteNG Installer.
+        '''To register it manually, run the following command from an elevated command prompt: regsvr32 &quot;C:\Program Files\mRemoteNG\eolwtscom.dll&quot; (where C:\Program Files\mRemoteNG\ is the path to your mRemoteNG installation).
+        '''If this check still fails or you are unable to use the (RDP) Sessions feat [rest of string was truncated]&quot;;.
         '''</summary>
         Friend Shared ReadOnly Property strCcEOLFailed() As String
             Get
