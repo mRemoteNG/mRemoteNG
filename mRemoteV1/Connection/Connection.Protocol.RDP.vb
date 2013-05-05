@@ -3,31 +3,32 @@ Imports System.Threading
 Imports AxMSTSCLib
 Imports EOLWTSCOM
 Imports System.ComponentModel
+Imports mRemoteNG.Messages
 Imports mRemoteNG.App.Runtime
 Imports mRemoteNG.Tools.LocalizedAttributes
+Imports MSTSCLib
 
 Namespace Connection
     Namespace Protocol
         Public Class RDP
-            Inherits Connection.Protocol.Base
-
+            Inherits Base
 #Region "Properties"
             Public Property SmartSize() As Boolean
                 Get
-                    Return RDP.AdvancedSettings4.SmartSizing
+                    Return _rdpClient.AdvancedSettings2.SmartSizing
                 End Get
                 Set(ByVal value As Boolean)
-                    RDP.AdvancedSettings4.SmartSizing = value
+                    _rdpClient.AdvancedSettings2.SmartSizing = value
                     ReconnectForResize()
                 End Set
             End Property
 
             Public Property Fullscreen() As Boolean
                 Get
-                    Return RDP.FullScreen
+                    Return _rdpClient.FullScreen
                 End Get
                 Set(ByVal value As Boolean)
-                    RDP.FullScreen = value
+                    _rdpClient.FullScreen = value
                     ReconnectForResize()
                 End Set
             End Property
@@ -42,8 +43,8 @@ Namespace Connection
                     Try
                         If Not _redirectKeys Then Return
 
-                        Debug.Assert(RDP.SecuredSettingsEnabled)
-                        Dim msRdpClientSecuredSettings As MSTSCLib.IMsRdpClientSecuredSettings = RDP.SecuredSettings2
+                        Debug.Assert(_rdpClient.SecuredSettingsEnabled)
+                        Dim msRdpClientSecuredSettings As MSTSCLib.IMsRdpClientSecuredSettings = _rdpClient.SecuredSettings2
                         msRdpClientSecuredSettings.KeyboardHookMode = 1 ' Apply key combinations at the remote server.
                     Catch ex As Exception
                         MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectKeysFailed & vbNewLine & ex.Message, True)
@@ -53,69 +54,112 @@ Namespace Connection
 #End Region
 
 #Region "Private Declarations"
-            Private RDP As AxMsRdpClient6NotSafeForScripting
-            Private Info As Connection.Info
-            Private RDPVersion As Version
+            Private _rdpClient As MsRdpClient5NotSafeForScripting
+            Private ReadOnly _rdpInterfaceVersion As Integer
+            Private _rdpVersion As Version
+            Private _connectionInfo As Info
 #End Region
 
 #Region "Public Methods"
             Public Sub New()
-                Me.Control = New AxMsRdpClient6NotSafeForScripting
+                Try
+                    Control = New AxMsRdpClient8NotSafeForScripting
+                    _rdpInterfaceVersion = 8
+                Catch ex As Exception
+                End Try
+
+                Try
+                    If Control Is Nothing Then
+                        Control = New AxMsRdpClient7NotSafeForScripting
+                        _rdpInterfaceVersion = 7
+                    End If
+                Catch ex As Exception
+                End Try
+
+                Try
+                    If Control Is Nothing Then
+                        Control = New AxMsRdpClient6NotSafeForScripting
+                        _rdpInterfaceVersion = 6
+                    End If
+                Catch ex As Exception
+                End Try
+
+                Try
+                    If Control Is Nothing Then
+                        Control = New AxMsRdpClient5NotSafeForScripting
+                        _rdpInterfaceVersion = 5
+                    End If
+                Catch ex As Exception
+                    MessageCollector.AddExceptionMessage(My.Language.strRdpControlCreationFailed, ex)
+                End Try
             End Sub
 
             Public Overrides Function SetProps() As Boolean
                 MyBase.SetProps()
 
                 Try
-                    RDP = Me.Control
-                    Info = Me.InterfaceControl.Info
+                    Control.CreateControl()
+                    _connectionInfo = InterfaceControl.Info
 
                     Try
-                        RDP.CreateControl()
-
-                        Do Until Me.RDP.Created
-                            Thread.Sleep(10)
+                        Do Until Control.Created
+                            Thread.Sleep(0)
                             System.Windows.Forms.Application.DoEvents()
                         Loop
-                    Catch comEx As System.Runtime.InteropServices.COMException
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpControlCreationFailed & vbNewLine & vbNewLine & comEx.Message)
-                        RDP.Dispose()
+
+                        Select Case _rdpInterfaceVersion
+                            Case 8
+                                _rdpClient = CType(Control, AxMsRdpClient8NotSafeForScripting).GetOcx()
+                            Case 7
+                                _rdpClient = CType(Control, AxMsRdpClient7NotSafeForScripting).GetOcx()
+                            Case 6
+                                _rdpClient = CType(Control, AxMsRdpClient6NotSafeForScripting).GetOcx()
+                            Case 5
+                                _rdpClient = CType(Control, AxMsRdpClient5NotSafeForScripting).GetOcx()
+                            Case Else
+                                Debug.Assert(False)
+                        End Select
+                    Catch ex As Runtime.InteropServices.COMException
+                        MessageCollector.AddExceptionMessage(My.Language.strRdpControlCreationFailed, ex)
+                        Control.Dispose()
                         Return False
                     End Try
 
-                    Me.RDPVersion = New Version(RDP.Version)
+                    _rdpVersion = New Version(_rdpClient.Version)
 
-                    RDP.Server = Me.Info.Hostname
+                    _rdpClient.Server = Me._connectionInfo.Hostname
 
                     Me.SetCredentials()
                     Me.SetResolution()
-                    Me.RDP.FullScreenTitle = Me.Info.Name
+                    Me._rdpClient.FullScreenTitle = Me._connectionInfo.Name
 
                     'not user changeable
-                    RDP.AdvancedSettings2.GrabFocusOnConnect = True
-                    RDP.AdvancedSettings3.EnableAutoReconnect = True
-                    RDP.AdvancedSettings3.MaxReconnectAttempts = My.Settings.RdpReconnectionCount
-                    RDP.AdvancedSettings2.keepAliveInterval = 60000 'in milliseconds (10.000 = 10 seconds)
-                    RDP.AdvancedSettings5.AuthenticationLevel = 0
-                    RDP.AdvancedSettings2.EncryptionEnabled = 1
+                    _rdpClient.AdvancedSettings2.GrabFocusOnConnect = True
+                    _rdpClient.AdvancedSettings3.EnableAutoReconnect = True
+                    _rdpClient.AdvancedSettings3.MaxReconnectAttempts = My.Settings.RdpReconnectionCount
+                    _rdpClient.AdvancedSettings2.keepAliveInterval = 60000 'in milliseconds (10.000 = 10 seconds)
+                    _rdpClient.AdvancedSettings5.AuthenticationLevel = 0
+                    _rdpClient.AdvancedSettings2.EncryptionEnabled = 1
 
-                    RDP.AdvancedSettings2.overallConnectionTimeout = 20
+                    _rdpClient.AdvancedSettings2.overallConnectionTimeout = 20
 
-                    RDP.AdvancedSettings2.BitmapPeristence = Me.Info.CacheBitmaps
-                    RDP.AdvancedSettings7.EnableCredSspSupport = Info.UseCredSsp
+                    _rdpClient.AdvancedSettings2.BitmapPeristence = Me._connectionInfo.CacheBitmaps
+                    If _rdpVersion >= Versions.RDC60 Then
+                        _rdpClient.AdvancedSettings7.EnableCredSspSupport = _connectionInfo.UseCredSsp
+                    End If
 
                     Me.SetUseConsoleSession()
                     Me.SetPort()
-                    RedirectKeys = Info.RedirectKeys
+                    RedirectKeys = _connectionInfo.RedirectKeys
                     Me.SetRedirection()
                     Me.SetAuthenticationLevel()
-                    Me.SetRDGateway()
+                    Me.SetRdGateway()
 
-                    RDP.ColorDepth = Int(Me.Info.Colors)
+                    _rdpClient.ColorDepth = Int(Me._connectionInfo.Colors)
 
                     Me.SetPerformanceFlags()
 
-                    RDP.ConnectingText = My.Language.strConnecting
+                    _rdpClient.ConnectingText = My.Language.strConnecting
 
                     Control.Anchor = AnchorStyles.None
 
@@ -130,7 +174,7 @@ Namespace Connection
                 Me.SetEventHandlers()
 
                 Try
-                    RDP.Connect()
+                    _rdpClient.Connect()
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
@@ -142,7 +186,7 @@ Namespace Connection
 
             Public Overrides Sub Disconnect()
                 Try
-                    RDP.Disconnect()
+                    _rdpClient.Disconnect()
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpDisconnectFailed & vbNewLine & ex.Message, True)
                     MyBase.Close()
@@ -167,8 +211,8 @@ Namespace Connection
 
             Public Overrides Sub Focus()
                 Try
-                    If RDP.ContainsFocus = False Then
-                        RDP.Focus()
+                    If Control.ContainsFocus = False Then
+                        Control.Focus()
                     End If
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpFocusFailed & vbNewLine & ex.Message, True)
@@ -208,7 +252,7 @@ Namespace Connection
             End Function
 
             Private Sub ReconnectForResize()
-                If RDPVersion < Versions.RDC80 Then Return
+                If _rdpVersion < Versions.RDC80 Then Return
 
                 If Not (InterfaceControl.Info.Resolution = RDPResolutions.FitToWindow Or _
                         InterfaceControl.Info.Resolution = RDPResolutions.Fullscreen) Or _
@@ -221,109 +265,102 @@ Namespace Connection
                     size = Screen.FromControl(Control).Bounds.Size
                 End If
 
-                Dim msRdpClient8 As MSTSCLib.IMsRdpClient8 = RDP.GetOcx()
+                Dim msRdpClient8 As IMsRdpClient8 = _rdpClient
                 msRdpClient8.Reconnect(size.Width, size.Height)
             End Sub
 
-            Private Sub SetRDGateway()
+            Private Sub SetRdGateway()
+                If Not _rdpClient.TransportSettings.GatewayIsSupported Then Return
                 Try
-                    If RDP.TransportSettings.GatewayIsSupported = 1 Then
-                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strRdpGatewayIsSupported, True)
-                        If Info.RDGatewayUsageMethod <> RDGatewayUsageMethod.Never Then
-                            RDP.TransportSettings2.GatewayProfileUsageMethod = 1
-                            RDP.TransportSettings.GatewayUsageMethod = Info.RDGatewayUsageMethod
-                            RDP.TransportSettings.GatewayHostname = Info.RDGatewayHostname
-                            If Info.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes Then
-                                RDP.TransportSettings.GatewayUsername = Info.Username
-                                RDP.TransportSettings.GatewayPassword = Info.Password
-                                RDP.TransportSettings.GatewayDomain = Info.Domain
-                            ElseIf Info.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard Then
-                                RDP.TransportSettings2.GatewayCredsSource = 1 ' TSC_PROXY_CREDS_MODE_SMARTCARD
-                                RDP.TransportSettings2.GatewayCredSharing = 0
+                    MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strRdpGatewayIsSupported, True)
+                    If Not _connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Never Then
+                        _rdpClient.TransportSettings.GatewayUsageMethod = _connectionInfo.RDGatewayUsageMethod
+                        _rdpClient.TransportSettings.GatewayHostname = _connectionInfo.RDGatewayHostname
+                        If _rdpVersion >= Versions.RDC60 Then
+                            _rdpClient.TransportSettings2.GatewayProfileUsageMethod = 1
+                            If _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes Then
+                                _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.Username
+                                _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.Password
+                                _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.Domain
+                            ElseIf _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard Then
+                                _rdpClient.TransportSettings2.GatewayCredsSource = 1 ' TSC_PROXY_CREDS_MODE_SMARTCARD
+                                _rdpClient.TransportSettings2.GatewayCredSharing = 0
                             Else
-                                RDP.TransportSettings.GatewayUsername = Info.RDGatewayUsername
-                                RDP.TransportSettings.GatewayPassword = Info.RDGatewayPassword
-                                RDP.TransportSettings.GatewayDomain = Info.RDGatewayDomain
-                                RDP.TransportSettings2.GatewayCredSharing = 0
+                                _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.RDGatewayUsername
+                                _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.RDGatewayPassword
+                                _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.RDGatewayDomain
+                                _rdpClient.TransportSettings2.GatewayCredSharing = 0
                             End If
                         End If
                     Else
-                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strRdpGatewayNotSupported, True)
+                        MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strRdpGatewayNotSupported, True)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetGatewayFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strRdpSetGatewayFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
             Private Sub SetUseConsoleSession()
                 Try
-                    If (Me.Force And Connection.Info.Force.UseConsoleSession) = Connection.Info.Force.UseConsoleSession Then
-                        If RDPVersion < Versions.RDC61 Then
-                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.0"), True)
-                            RDP.AdvancedSettings2.ConnectToServerConsole = True
-                        Else
-                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.1"), True)
-                            RDP.AdvancedSettings6.ConnectToAdministerServer = True
-                        End If
-                    ElseIf (Me.Force And Connection.Info.Force.DontUseConsoleSession) = Connection.Info.Force.DontUseConsoleSession Then
-                        If RDPVersion < Versions.RDC61 Then
-                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.0"), True)
-                            RDP.AdvancedSettings2.ConnectToServerConsole = False
-                        Else
-                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.1"), True)
-                            RDP.AdvancedSettings6.ConnectToAdministerServer = False
-                        End If
+                    Dim value As Boolean
+
+                    If (Force And Info.Force.UseConsoleSession) = Info.Force.UseConsoleSession Then
+                        value = True
+                    ElseIf (Force And Info.Force.DontUseConsoleSession) = Info.Force.DontUseConsoleSession Then
+                        value = False
                     Else
-                        If RDPVersion < Versions.RDC61 Then
-                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.0"), True)
-                            RDP.AdvancedSettings2.ConnectToServerConsole = Me.Info.UseConsoleSession
-                        Else
-                            MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.1"), True)
-                            RDP.AdvancedSettings6.ConnectToAdministerServer = Me.Info.UseConsoleSession
-                        End If
+                        value = _connectionInfo.UseConsoleSession
+                    End If
+
+                    If _rdpVersion >= Versions.RDC61 Then
+                        MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.1"), True)
+                        _rdpClient.AdvancedSettings7.ConnectToAdministerServer = value
+                    Else
+                        MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strRdpSetConsoleSwitch, "6.0"), True)
+                        _rdpClient.AdvancedSettings2.ConnectToServerConsole = value
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetConsoleSessionFailed & vbNewLine & ex.Message, True)
+                    MessageCollector.AddExceptionMessage(My.Language.strRdpSetConsoleSessionFailed, ex, MessageClass.ErrorMsg, True)
                 End Try
             End Sub
 
             Private Sub SetCredentials()
                 Try
-                    Dim _user As String = Me.Info.Username
-                    Dim _pass As String = Me.Info.Password
-                    Dim _dom As String = Me.Info.Domain
+                    Dim userName As String = _connectionInfo.Username
+                    Dim password As String = _connectionInfo.Password
+                    Dim domain As String = _connectionInfo.Domain
 
-                    If _user = "" Then
+                    If userName = "" Then
                         Select Case My.Settings.EmptyCredentials
                             Case "windows"
-                                RDP.UserName = Environment.UserName
+                                _rdpClient.UserName = Environment.UserName
                             Case "custom"
-                                RDP.UserName = My.Settings.DefaultUsername
+                                _rdpClient.UserName = My.Settings.DefaultUsername
                         End Select
                     Else
-                        RDP.UserName = _user
+                        _rdpClient.UserName = userName
                     End If
 
-                    If _pass = "" Then
+                    If password = "" Then
                         Select Case My.Settings.EmptyCredentials
                             Case "custom"
                                 If My.Settings.DefaultPassword <> "" Then
-                                    RDP.AdvancedSettings2.ClearTextPassword = Security.Crypt.Decrypt(My.Settings.DefaultPassword, App.Info.General.EncryptionKey)
+                                    _rdpClient.AdvancedSettings2.ClearTextPassword = Security.Crypt.Decrypt(My.Settings.DefaultPassword, App.Info.General.EncryptionKey)
                                 End If
                         End Select
                     Else
-                        RDP.AdvancedSettings2.ClearTextPassword = _pass
+                        _rdpClient.AdvancedSettings2.ClearTextPassword = password
                     End If
 
-                    If _dom = "" Then
+                    If domain = "" Then
                         Select Case My.Settings.EmptyCredentials
                             Case "windows"
-                                RDP.Domain = Environment.UserDomainName
+                                _rdpClient.Domain = Environment.UserDomainName
                             Case "custom"
-                                RDP.Domain = My.Settings.DefaultDomain
+                                _rdpClient.Domain = My.Settings.DefaultDomain
                         End Select
                     Else
-                        RDP.Domain = _dom
+                        _rdpClient.Domain = domain
                     End If
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetCredentialsFailed & vbNewLine & ex.Message, True)
@@ -333,28 +370,28 @@ Namespace Connection
             Private Sub SetResolution()
                 Try
                     If (Me.Force And Connection.Info.Force.Fullscreen) = Connection.Info.Force.Fullscreen Then
-                        RDP.FullScreen = True
-                        RDP.DesktopWidth = Screen.FromControl(frmMain).Bounds.Width
-                        RDP.DesktopHeight = Screen.FromControl(frmMain).Bounds.Height
+                        _rdpClient.FullScreen = True
+                        _rdpClient.DesktopWidth = Screen.FromControl(frmMain).Bounds.Width
+                        _rdpClient.DesktopHeight = Screen.FromControl(frmMain).Bounds.Height
 
                         Exit Sub
                     End If
 
                     Select Case Me.InterfaceControl.Info.Resolution
                         Case RDPResolutions.FitToWindow
-                            RDP.DesktopWidth = Me.InterfaceControl.Size.Width
-                            RDP.DesktopHeight = Me.InterfaceControl.Size.Height
+                            _rdpClient.DesktopWidth = Me.InterfaceControl.Size.Width
+                            _rdpClient.DesktopHeight = Me.InterfaceControl.Size.Height
                         Case RDPResolutions.SmartSize
-                            RDP.AdvancedSettings.SmartSizing = True
-                            RDP.DesktopWidth = Me.InterfaceControl.Size.Width
-                            RDP.DesktopHeight = Me.InterfaceControl.Size.Height
+                            _rdpClient.AdvancedSettings2.SmartSizing = True
+                            _rdpClient.DesktopWidth = Me.InterfaceControl.Size.Width
+                            _rdpClient.DesktopHeight = Me.InterfaceControl.Size.Height
                         Case RDPResolutions.Fullscreen
-                            RDP.FullScreen = True
-                            RDP.DesktopWidth = Screen.FromControl(frmMain).Bounds.Width
-                            RDP.DesktopHeight = Screen.FromControl(frmMain).Bounds.Height
+                            _rdpClient.FullScreen = True
+                            _rdpClient.DesktopWidth = Screen.FromControl(frmMain).Bounds.Width
+                            _rdpClient.DesktopHeight = Screen.FromControl(frmMain).Bounds.Height
                         Case Else
-                            RDP.DesktopWidth = Resolutions.Items(Int(Me.Info.Resolution)).Width
-                            RDP.DesktopHeight = Resolutions.Items(Int(Me.Info.Resolution)).Height
+                            _rdpClient.DesktopWidth = Resolutions.Items(Int(Me._connectionInfo.Resolution)).Width
+                            _rdpClient.DesktopHeight = Resolutions.Items(Int(Me._connectionInfo.Resolution)).Height
                     End Select
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetResolutionFailed & vbNewLine & ex.Message, True)
@@ -363,8 +400,8 @@ Namespace Connection
 
             Private Sub SetPort()
                 Try
-                    If Me.Info.Port <> Connection.Protocol.RDP.Defaults.Port Then
-                        RDP.AdvancedSettings2.RDPPort = Me.Info.Port
+                    If _connectionInfo.Port <> Defaults.Port Then
+                        _rdpClient.AdvancedSettings2.RDPPort = _connectionInfo.Port
                     End If
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPortFailed & vbNewLine & ex.Message, True)
@@ -373,11 +410,11 @@ Namespace Connection
 
             Private Sub SetRedirection()
                 Try
-                    RDP.AdvancedSettings2.RedirectDrives = Me.Info.RedirectDiskDrives
-                    RDP.AdvancedSettings2.RedirectPorts = Me.Info.RedirectPorts
-                    RDP.AdvancedSettings2.RedirectPrinters = Me.Info.RedirectPrinters
-                    RDP.AdvancedSettings2.RedirectSmartCards = Me.Info.RedirectSmartCards
-                    RDP.SecuredSettings2.AudioRedirectionMode = Int(Me.Info.RedirectSound)
+                    _rdpClient.AdvancedSettings2.RedirectDrives = Me._connectionInfo.RedirectDiskDrives
+                    _rdpClient.AdvancedSettings2.RedirectPorts = Me._connectionInfo.RedirectPorts
+                    _rdpClient.AdvancedSettings2.RedirectPrinters = Me._connectionInfo.RedirectPrinters
+                    _rdpClient.AdvancedSettings2.RedirectSmartCards = Me._connectionInfo.RedirectSmartCards
+                    _rdpClient.SecuredSettings2.AudioRedirectionMode = Int(Me._connectionInfo.RedirectSound)
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectionFailed & vbNewLine & ex.Message, True)
                 End Try
@@ -386,23 +423,23 @@ Namespace Connection
             Private Sub SetPerformanceFlags()
                 Try
                     Dim pFlags As Integer
-                    If Me.Info.DisplayThemes = False Then
+                    If Me._connectionInfo.DisplayThemes = False Then
                         pFlags += Int(Connection.Protocol.RDP.RDPPerformanceFlags.DisableThemes)
                     End If
 
-                    If Me.Info.DisplayWallpaper = False Then
+                    If Me._connectionInfo.DisplayWallpaper = False Then
                         pFlags += Int(Connection.Protocol.RDP.RDPPerformanceFlags.DisableWallpaper)
                     End If
 
-                    If Me.Info.EnableFontSmoothing Then
+                    If Me._connectionInfo.EnableFontSmoothing Then
                         pFlags += Int(Connection.Protocol.RDP.RDPPerformanceFlags.EnableFontSmoothing)
                     End If
 
-                    If Me.Info.EnableDesktopComposition Then
+                    If Me._connectionInfo.EnableDesktopComposition Then
                         pFlags += Int(Connection.Protocol.RDP.RDPPerformanceFlags.EnableDesktopComposition)
                     End If
 
-                    RDP.AdvancedSettings.PerformanceFlags = pFlags
+                    _rdpClient.AdvancedSettings2.PerformanceFlags = pFlags
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPerformanceFlagsFailed & vbNewLine & ex.Message, True)
                 End Try
@@ -410,7 +447,7 @@ Namespace Connection
 
             Private Sub SetAuthenticationLevel()
                 Try
-                    RDP.AdvancedSettings5.AuthenticationLevel = Me.Info.RDPAuthenticationLevel
+                    _rdpClient.AdvancedSettings5.AuthenticationLevel = Me._connectionInfo.RDPAuthenticationLevel
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetAuthenticationLevelFailed & vbNewLine & ex.Message, True)
                 End Try
@@ -418,11 +455,11 @@ Namespace Connection
 
             Private Sub SetEventHandlers()
                 Try
-                    AddHandler RDP.OnConnecting, AddressOf RDPEvent_OnConnecting
-                    AddHandler RDP.OnConnected, AddressOf RDPEvent_OnConnected
-                    AddHandler RDP.OnFatalError, AddressOf RDPEvent_OnFatalError
-                    AddHandler RDP.OnDisconnected, AddressOf RDPEvent_OnDisconnected
-                    AddHandler RDP.OnLeaveFullScreenMode, AddressOf RDPEvent_OnLeaveFullscreenMode
+                    AddHandler _rdpClient.OnConnecting, AddressOf RDPEvent_OnConnecting
+                    AddHandler _rdpClient.OnConnected, AddressOf RDPEvent_OnConnected
+                    AddHandler _rdpClient.OnFatalError, AddressOf RDPEvent_OnFatalError
+                    AddHandler _rdpClient.OnDisconnected, AddressOf RDPEvent_OnDisconnected
+                    AddHandler _rdpClient.OnLeaveFullScreenMode, AddressOf RDPEvent_OnLeaveFullscreenMode
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetEventHandlersFailed & vbNewLine & ex.Message, True)
                 End Try
@@ -430,15 +467,15 @@ Namespace Connection
 #End Region
 
 #Region "Private Events & Handlers"
-            Private Sub RDPEvent_OnFatalError(ByVal sender As Object, ByVal e As AxMSTSCLib.IMsTscAxEvents_OnFatalErrorEvent)
-                MyBase.Event_ErrorOccured(Me, e.errorCode)
+            Private Sub RDPEvent_OnFatalError(ByVal errorCode As Integer)
+                Event_ErrorOccured(Me, errorCode)
             End Sub
 
-            Private Sub RDPEvent_OnDisconnected(ByVal sender As Object, ByVal e As IMsTscAxEvents_OnDisconnectedEvent)
+            Private Sub RDPEvent_OnDisconnected(ByVal discReason As Integer)
                 Const UI_ERR_NORMAL_DISCONNECT As Integer = &HB08
-                If Not e.discReason = UI_ERR_NORMAL_DISCONNECT Then
-                    Dim reason As String = RDP.GetErrorDescription(e.discReason, RDP.ExtendedDisconnectReason)
-                    Event_Disconnected(Me, e.discReason & vbCrLf & reason)
+                If Not discReason = UI_ERR_NORMAL_DISCONNECT Then
+                    Dim reason As String = _rdpClient.GetErrorDescription(discReason, _rdpClient.ExtendedDisconnectReason)
+                    Event_Disconnected(Me, discReason & vbCrLf & reason)
                 End If
 
                 If My.Settings.ReconnectOnDisconnect Then
@@ -453,17 +490,17 @@ Namespace Connection
                 End If
             End Sub
 
-            Private Sub RDPEvent_OnConnecting(ByVal sender As Object, ByVal e As System.EventArgs)
-                MyBase.Event_Connecting(Me)
+            Private Sub RDPEvent_OnConnecting()
+                Event_Connecting(Me)
             End Sub
 
-            Private Sub RDPEvent_OnConnected(ByVal sender As Object, ByVal e As System.EventArgs)
-                MyBase.Event_Connected(Me)
+            Private Sub RDPEvent_OnConnected()
+                Event_Connected(Me)
             End Sub
 
-            Private Sub RDPEvent_OnLeaveFullscreenMode(ByVal sender As Object, ByVal e As System.EventArgs)
+            Private Sub RDPEvent_OnLeaveFullscreenMode()
                 Fullscreen = False
-                RaiseEvent LeaveFullscreen(Me, e)
+                RaiseEvent LeaveFullscreen(Me, New EventArgs())
             End Sub
 #End Region
 
@@ -857,7 +894,7 @@ Namespace Connection
 
 #Region "Reconnect Stuff"
             Private Sub tmrReconnect_Elapsed(ByVal sender As Object, ByVal e As System.Timers.ElapsedEventArgs) Handles tmrReconnect.Elapsed
-                Dim srvReady As Boolean = Tools.PortScan.Scanner.IsPortOpen(Info.Hostname, Info.Port)
+                Dim srvReady As Boolean = Tools.PortScan.Scanner.IsPortOpen(_connectionInfo.Hostname, _connectionInfo.Port)
 
                 ReconnectGroup.ServerReady = srvReady
 
@@ -865,7 +902,7 @@ Namespace Connection
                     tmrReconnect.Enabled = False
                     ReconnectGroup.DisposeReconnectGroup()
                     'SetProps()
-                    RDP.Connect()
+                    _rdpClient.Connect()
                 End If
             End Sub
 #End Region
