@@ -322,9 +322,8 @@ Please make sure that either you have the Putty.exe in your mRemoteNG directory 
     <value>The PuTTY executable was found and should be ready to use.</value>
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
-    <value>For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services Client) 6.1 installed. You can get it here: http://support.microsoft.com/kb/951616
-If you have RDP 6.1 installed and the check still fails, try to register mstscax.dll manually. To do this open up the run dialog (Start - Run) and enter the following: regsvr32 "c:\windows\system32\mstscax.dll" (Where c:\ is your system drive).
-If you still have trouble getting RDP to work please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
+    <value>For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services) Client 6.0 installed. You can download it here: http://support.microsoft.com/kb/925876
+If this check still fails or you are unable to use RDP, please consult the mRemoteNG Forum at http://forum.mremoteng.org/.</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
     <value>All RDP components were found and seem to be registered properly.

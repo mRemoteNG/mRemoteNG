@@ -652,9 +652,8 @@ Namespace My
         End Property
         
         '''<summary>
-        '''  Looks up a localized string similar to For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services Client) 6.1 installed. You can get it here: http://support.microsoft.com/kb/951616
-        '''If you have RDP 6.1 installed and the check still fails, try to register mstscax.dll manually. To do this open up the run dialog (Start - Run) and enter the following: regsvr32 &quot;c:\windows\system32\mstscax.dll&quot; (Where c:\ is your system drive).
-        '''If you still have trouble getting RDP to work please consult the mRemoteNG Forum at ht [rest of string was truncated]&quot;;.
+        '''  Looks up a localized string similar to For RDP to work properly you need to have at least Remote Desktop Connection (Terminal Services) Client 6.0 installed. You can download it here: http://support.microsoft.com/kb/925876
+        '''If this check still fails or you are unable to use RDP, please consult the mRemoteNG Forum at http://forum.mremoteng.org/..
         '''</summary>
         Friend Shared ReadOnly Property strCcRDPFailed() As String
             Get

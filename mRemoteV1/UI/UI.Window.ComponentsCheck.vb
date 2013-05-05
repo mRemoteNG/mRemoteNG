@@ -489,21 +489,25 @@ Namespace UI
                 pnlCheck6.Visible = True
 
 
-                Dim RDP As AxMSTSCLib.AxMsRdpClient6NotSafeForScripting = Nothing
+                Dim rdpClient As AxMSTSCLib.AxMsRdpClient8NotSafeForScripting = Nothing
 
                 Try
-                    RDP = New AxMSTSCLib.AxMsRdpClient6NotSafeForScripting
-                    RDP.CreateControl()
+                    rdpClient = New AxMSTSCLib.AxMsRdpClient8NotSafeForScripting
+                    rdpClient.CreateControl()
 
-                    Do Until RDP.Created
-                        Thread.Sleep(10)
+                    Do Until rdpClient.Created
+                        Thread.Sleep(0)
                         System.Windows.Forms.Application.DoEvents()
                     Loop
+
+                    If Not New Version(rdpClient.Version) >= mRemoteNG.Connection.Protocol.RDP.Versions.RDC60 Then
+                        Throw New Exception(String.Format("Found RDC Client version {0} but version {1} or higher is required.", rdpClient.Version, mRemoteNG.Connection.Protocol.RDP.Versions.RDC60))
+                    End If
 
                     pbCheck1.Image = My.Resources.Good_Symbol
                     lblCheck1.ForeColor = Color.DarkOliveGreen
                     lblCheck1.Text = "RDP (Remote Desktop) " & My.Language.strCcCheckSucceeded
-                    txtCheck1.Text = String.Format(My.Language.strCcRDPOK, RDP.Version)
+                    txtCheck1.Text = String.Format(My.Language.strCcRDPOK, rdpClient.Version)
                 Catch ex As Exception
                     pbCheck1.Image = My.Resources.Bad_Symbol
                     lblCheck1.ForeColor = Color.Firebrick
@@ -514,7 +518,7 @@ Namespace UI
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
                 End Try
 
-                If RDP IsNot Nothing Then RDP.Dispose()
+                If rdpClient IsNot Nothing Then rdpClient.Dispose()
 
 
                 Dim VNC As VncSharp.RemoteDesktop = Nothing

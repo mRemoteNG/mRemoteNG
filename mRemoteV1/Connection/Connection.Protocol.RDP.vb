@@ -55,43 +55,13 @@ Namespace Connection
 
 #Region "Private Declarations"
             Private _rdpClient As MsRdpClient5NotSafeForScripting
-            Private ReadOnly _rdpInterfaceVersion As Integer
             Private _rdpVersion As Version
             Private _connectionInfo As Info
 #End Region
 
 #Region "Public Methods"
             Public Sub New()
-                Try
-                    Control = New AxMsRdpClient8NotSafeForScripting
-                    _rdpInterfaceVersion = 8
-                Catch ex As Exception
-                End Try
-
-                Try
-                    If Control Is Nothing Then
-                        Control = New AxMsRdpClient7NotSafeForScripting
-                        _rdpInterfaceVersion = 7
-                    End If
-                Catch ex As Exception
-                End Try
-
-                Try
-                    If Control Is Nothing Then
-                        Control = New AxMsRdpClient6NotSafeForScripting
-                        _rdpInterfaceVersion = 6
-                    End If
-                Catch ex As Exception
-                End Try
-
-                Try
-                    If Control Is Nothing Then
-                        Control = New AxMsRdpClient5NotSafeForScripting
-                        _rdpInterfaceVersion = 5
-                    End If
-                Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(My.Language.strRdpControlCreationFailed, ex)
-                End Try
+                Control = New AxMsRdpClient8NotSafeForScripting
             End Sub
 
             Public Overrides Function SetProps() As Boolean
@@ -107,18 +77,7 @@ Namespace Connection
                             System.Windows.Forms.Application.DoEvents()
                         Loop
 
-                        Select Case _rdpInterfaceVersion
-                            Case 8
-                                _rdpClient = CType(Control, AxMsRdpClient8NotSafeForScripting).GetOcx()
-                            Case 7
-                                _rdpClient = CType(Control, AxMsRdpClient7NotSafeForScripting).GetOcx()
-                            Case 6
-                                _rdpClient = CType(Control, AxMsRdpClient6NotSafeForScripting).GetOcx()
-                            Case 5
-                                _rdpClient = CType(Control, AxMsRdpClient5NotSafeForScripting).GetOcx()
-                            Case Else
-                                Debug.Assert(False)
-                        End Select
+                        _rdpClient = CType(Control, AxMsRdpClient8NotSafeForScripting).GetOcx()
                     Catch ex As Runtime.InteropServices.COMException
                         MessageCollector.AddExceptionMessage(My.Language.strRdpControlCreationFailed, ex)
                         Control.Dispose()
