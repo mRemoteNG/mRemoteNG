@@ -1182,7 +1182,7 @@ Namespace UI
 
             Private Sub ImportFromRDPFiles()
                 Try
-                    App.Runtime.ImportConnectionsFromRDPFiles()
+                    App.Runtime.ImportConnectionsRdpFile()
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromRDPFiles (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try

@@ -1226,136 +1226,139 @@ Namespace App
             End Try
         End Sub
 
-        Public Shared Sub ImportConnectionsFromRDPFiles()
+        Public Shared Sub ImportConnectionsRdpFile()
             Try
-                Dim lD As OpenFileDialog = Tools.Controls.ConnectionsRDPImportDialog
-                lD.Multiselect = True
+                Dim openFileDialog As OpenFileDialog = Controls.ImportConnectionsRdpFileDialog
+                If Not openFileDialog.ShowDialog = DialogResult.OK Then Return
 
-                If lD.ShowDialog = DialogResult.OK Then
-                    For i As Integer = 0 To lD.FileNames.Length - 1
-                        Dim lines As String() = File.ReadAllLines(lD.FileNames(i))
+                For Each fileName As String In openFileDialog.FileNames
+                    Dim lines As String() = File.ReadAllLines(fileName)
 
-                        Dim nNode As TreeNode = Tree.Node.AddNode(Tree.Node.Type.Connection, Path.GetFileNameWithoutExtension(lD.FileNames(i)))
+                    Dim treeNode As TreeNode = Tree.Node.AddNode(Tree.Node.Type.Connection, Path.GetFileNameWithoutExtension(fileName))
 
-                        Dim nConI As New mRemoteNG.Connection.Info()
-                        nConI.Inherit = New Connection.Info.Inheritance(nConI)
+                    Dim connectionInfo As New Connection.Info()
+                    connectionInfo.Inherit = New Connection.Info.Inheritance(connectionInfo)
 
-                        nConI.Name = nNode.Text
+                    connectionInfo.Name = treeNode.Text
 
-                        For Each l As String In lines
-                            Dim pName As String = l.Substring(0, l.IndexOf(":"))
-                            Dim pValue As String = l.Substring(l.LastIndexOf(":") + 1)
+                    For Each line As String In lines
+                        Dim parts() As String = line.Split(New Char() {":"}, 3)
+                        If parts.Length < 3 Then Continue For
 
-                            Select Case LCase(pName)
-                                Case "full address"
-                                    nConI.Hostname = pValue
-                                Case "server port"
-                                    nConI.Port = pValue
-                                Case "username"
-                                    nConI.Username = pValue
-                                Case "domain"
-                                    nConI.Domain = pValue
-                                Case "session bpp"
-                                    Select Case pValue
-                                        Case 8
-                                            nConI.Colors = Connection.Protocol.RDP.RDPColors.Colors256
-                                        Case 15
-                                            nConI.Colors = Connection.Protocol.RDP.RDPColors.Colors15Bit
-                                        Case 16
-                                            nConI.Colors = Connection.Protocol.RDP.RDPColors.Colors16Bit
-                                        Case 24
-                                            nConI.Colors = Connection.Protocol.RDP.RDPColors.Colors24Bit
-                                        Case 32
-                                            nConI.Colors = Connection.Protocol.RDP.RDPColors.Colors32Bit
-                                    End Select
-                                Case "bitmapcachepersistenable"
-                                    If pValue = 1 Then
-                                        nConI.CacheBitmaps = True
-                                    Else
-                                        nConI.CacheBitmaps = False
-                                    End If
-                                Case "screen mode id"
-                                    If pValue = 2 Then
-                                        nConI.Resolution = Connection.Protocol.RDP.RDPResolutions.Fullscreen
-                                    Else
-                                        nConI.Resolution = Connection.Protocol.RDP.RDPResolutions.FitToWindow
-                                    End If
-                                Case "connect to console"
-                                    If pValue = 1 Then
-                                        nConI.UseConsoleSession = True
-                                    End If
-                                Case "disable wallpaper"
-                                    If pValue = 1 Then
-                                        nConI.DisplayWallpaper = True
-                                    Else
-                                        nConI.DisplayWallpaper = False
-                                    End If
-                                Case "disable themes"
-                                    If pValue = 1 Then
-                                        nConI.DisplayThemes = True
-                                    Else
-                                        nConI.DisplayThemes = False
-                                    End If
-                                Case "allow font smoothing"
-                                    If pValue = 1 Then
-                                        nConI.EnableFontSmoothing = True
-                                    Else
-                                        nConI.EnableFontSmoothing = False
-                                    End If
-                                Case "allow desktop composition"
-                                    If pValue = 1 Then
-                                        nConI.EnableDesktopComposition = True
-                                    Else
-                                        nConI.EnableDesktopComposition = False
-                                    End If
-                                Case "redirectsmartcards"
-                                    If pValue = 1 Then
-                                        nConI.RedirectSmartCards = True
-                                    Else
-                                        nConI.RedirectSmartCards = False
-                                    End If
-                                Case "redirectdrives"
-                                    If pValue = 1 Then
-                                        nConI.RedirectDiskDrives = True
-                                    Else
-                                        nConI.RedirectDiskDrives = False
-                                    End If
-                                Case "redirectcomports"
-                                    If pValue = 1 Then
-                                        nConI.RedirectPorts = True
-                                    Else
-                                        nConI.RedirectPorts = False
-                                    End If
-                                Case "redirectprinters"
-                                    If pValue = 1 Then
-                                        nConI.RedirectPrinters = True
-                                    Else
-                                        nConI.RedirectPrinters = False
-                                    End If
-                                Case "audiomode"
-                                    Select Case pValue
-                                        Case 0
-                                            nConI.RedirectSound = Connection.Protocol.RDP.RDPSounds.BringToThisComputer
-                                        Case 1
-                                            nConI.RedirectSound = Connection.Protocol.RDP.RDPSounds.LeaveAtRemoteComputer
-                                        Case 2
-                                            nConI.RedirectSound = Connection.Protocol.RDP.RDPSounds.DoNotPlay
-                                    End Select
-                            End Select
-                        Next
+                        Dim key As String = parts(0)
+                        Dim value As String = parts(2)
 
-                        nNode.Tag = nConI
-                        Windows.treeForm.tvConnections.SelectedNode.Nodes.Add(nNode)
-
-                        If Tree.Node.GetNodeType(nNode.Parent) = Tree.Node.Type.Container Then
-                            nConI.Parent = nNode.Parent.Tag
-                        End If
-
-                        ConnectionList.Add(nConI)
+                        Select Case LCase(key)
+                            Case "full address"
+                                Dim uri As New Uri("dummyscheme" + uri.SchemeDelimiter + value)
+                                If Not String.IsNullOrEmpty(uri.Host) Then connectionInfo.Hostname = uri.Host
+                                If Not uri.Port = -1 Then connectionInfo.Port = uri.Port
+                            Case "server port"
+                                connectionInfo.Port = value
+                            Case "username"
+                                connectionInfo.Username = value
+                            Case "domain"
+                                connectionInfo.Domain = value
+                            Case "session bpp"
+                                Select Case value
+                                    Case 8
+                                        connectionInfo.Colors = Protocol.RDP.RDPColors.Colors256
+                                    Case 15
+                                        connectionInfo.Colors = Protocol.RDP.RDPColors.Colors15Bit
+                                    Case 16
+                                        connectionInfo.Colors = Protocol.RDP.RDPColors.Colors16Bit
+                                    Case 24
+                                        connectionInfo.Colors = Protocol.RDP.RDPColors.Colors24Bit
+                                    Case 32
+                                        connectionInfo.Colors = Protocol.RDP.RDPColors.Colors32Bit
+                                End Select
+                            Case "bitmapcachepersistenable"
+                                If value = 1 Then
+                                    connectionInfo.CacheBitmaps = True
+                                Else
+                                    connectionInfo.CacheBitmaps = False
+                                End If
+                            Case "screen mode id"
+                                If value = 2 Then
+                                    connectionInfo.Resolution = Protocol.RDP.RDPResolutions.Fullscreen
+                                Else
+                                    connectionInfo.Resolution = Protocol.RDP.RDPResolutions.FitToWindow
+                                End If
+                            Case "connect to console"
+                                If value = 1 Then
+                                    connectionInfo.UseConsoleSession = True
+                                End If
+                            Case "disable wallpaper"
+                                If value = 1 Then
+                                    connectionInfo.DisplayWallpaper = True
+                                Else
+                                    connectionInfo.DisplayWallpaper = False
+                                End If
+                            Case "disable themes"
+                                If value = 1 Then
+                                    connectionInfo.DisplayThemes = True
+                                Else
+                                    connectionInfo.DisplayThemes = False
+                                End If
+                            Case "allow font smoothing"
+                                If value = 1 Then
+                                    connectionInfo.EnableFontSmoothing = True
+                                Else
+                                    connectionInfo.EnableFontSmoothing = False
+                                End If
+                            Case "allow desktop composition"
+                                If value = 1 Then
+                                    connectionInfo.EnableDesktopComposition = True
+                                Else
+                                    connectionInfo.EnableDesktopComposition = False
+                                End If
+                            Case "redirectsmartcards"
+                                If value = 1 Then
+                                    connectionInfo.RedirectSmartCards = True
+                                Else
+                                    connectionInfo.RedirectSmartCards = False
+                                End If
+                            Case "redirectdrives"
+                                If value = 1 Then
+                                    connectionInfo.RedirectDiskDrives = True
+                                Else
+                                    connectionInfo.RedirectDiskDrives = False
+                                End If
+                            Case "redirectcomports"
+                                If value = 1 Then
+                                    connectionInfo.RedirectPorts = True
+                                Else
+                                    connectionInfo.RedirectPorts = False
+                                End If
+                            Case "redirectprinters"
+                                If value = 1 Then
+                                    connectionInfo.RedirectPrinters = True
+                                Else
+                                    connectionInfo.RedirectPrinters = False
+                                End If
+                            Case "audiomode"
+                                Select Case value
+                                    Case 0
+                                        connectionInfo.RedirectSound = Protocol.RDP.RDPSounds.BringToThisComputer
+                                    Case 1
+                                        connectionInfo.RedirectSound = Protocol.RDP.RDPSounds.LeaveAtRemoteComputer
+                                    Case 2
+                                        connectionInfo.RedirectSound = Protocol.RDP.RDPSounds.DoNotPlay
+                                End Select
+                        End Select
                     Next
-                End If
+
+                    treeNode.Tag = connectionInfo
+                    Windows.treeForm.tvConnections.SelectedNode.Nodes.Add(treeNode)
+
+                    If Tree.Node.GetNodeType(treeNode.Parent) = Tree.Node.Type.Container Then
+                        connectionInfo.Parent = treeNode.Parent.Tag
+                    End If
+
+                    ConnectionList.Add(connectionInfo)
+                Next
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpFileCouldNotBeImported & vbNewLine & vbNewLine & ex.Message)
+                MessageCollector.AddExceptionMessage(My.Language.strRdpFileCouldNotBeImported, ex)
             End Try
         End Sub
 

@@ -211,13 +211,13 @@ Namespace Tools
             Return lDlg
         End Function
 
-        Public Shared Function ConnectionsRDPImportDialog() As OpenFileDialog
-            Dim lDlg As New OpenFileDialog()
-            lDlg.CheckFileExists = True
-            'lDlg.InitialDirectory = App.Info.Connections.DefaultConnectionsPath
-            lDlg.Filter = My.Language.strFilterRDP & "|*.rdp|" & My.Language.strFilterAll & "|*.*"
-
-            Return lDlg
+        Public Shared Function ImportConnectionsRdpFileDialog() As OpenFileDialog
+            Dim openFileDialog As New OpenFileDialog()
+            openFileDialog.CheckFileExists = True
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal)
+            openFileDialog.Filter = String.Join("|", {My.Language.strFilterRDP, "*.rdp", My.Language.strFilterAll, "*.*"})
+            openFileDialog.Multiselect = True
+            Return openFileDialog
         End Function
 
         Public Class TreeNodeSorter
