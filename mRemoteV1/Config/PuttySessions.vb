@@ -85,9 +85,8 @@ Namespace Config
             Dim sessionList As New List(Of Connection.PuttySession.Info)
             Dim sessionInfo As Connection.Info
             For Each sessionName As String In GetSessionNames(True)
-                If sessionName = "Default%20Settings" Then Continue For ' Do not localize
                 sessionInfo = SessionToConnectionInfo(sessionName)
-                If sessionInfo Is Nothing Then Continue For
+                If sessionInfo Is Nothing OrElse String.IsNullOrEmpty(sessionInfo.Hostname) Then Continue For
                 sessionList.Add(sessionInfo)
             Next
             Return sessionList.ToArray()
@@ -109,7 +108,7 @@ Namespace Config
                 .Hostname = sessionKey.GetValue("HostName")
                 .Username = sessionKey.GetValue("UserName")
                 Dim protocol As String = sessionKey.GetValue("Protocol")
-                If protocol Is Nothing Then Return Nothing
+                If protocol Is Nothing Then protocol = "ssh"
                 Select Case protocol.ToLowerInvariant()
                     Case "raw"
                         .Protocol = Protocols.RAW
@@ -118,11 +117,16 @@ Namespace Config
                     Case "serial"
                         Return Nothing
                     Case "ssh"
-                        Dim sshVersion As Integer = sessionKey.GetValue("SshProt")
-                        If sshVersion >= 2 Then
-                            .Protocol = Protocols.SSH2
+                        Dim sshVersionObject As Object = sessionKey.GetValue("SshProt")
+                        If sshVersionObject IsNot Nothing Then
+                            Dim sshVersion As Integer = CType(sshVersionObject, Integer)
+                            If sshVersion >= 2 Then
+                                .Protocol = Protocols.SSH2
+                            Else
+                                .Protocol = Protocols.SSH1
+                            End If
                         Else
-                            .Protocol = Protocols.SSH1
+                            .Protocol = Protocols.SSH2
                         End If
                     Case "telnet"
                         .Protocol = Protocols.Telnet
