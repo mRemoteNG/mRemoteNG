@@ -16,6 +16,7 @@
   Changed Internet Explorer to no longer force IE7 compatibility mode.
   Changed the "Launch PuTTY" button in the "Options" dialog to open PuTTY from the path the user has currently set, instead of what was previously saved.
   Improved update and announcement checking.
+  Improved the PuTTY Saved Sessions list to update automatically when any changes are made.
   Lowered required version of RDC from 6.1 to 6.0.
 
 1.71 Beta 3 (2013-03-20):

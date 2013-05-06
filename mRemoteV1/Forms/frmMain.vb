@@ -76,6 +76,8 @@ Public Class frmMain
             Return
         End If
 
+        PuttySessions.StartWatcher()
+
         If My.Settings.StartupComponentsCheck Then
             Windows.Show(UI.Window.Type.ComponentsCheck)
         End If
@@ -246,6 +248,8 @@ Public Class frmMain
                 End If
             End If
         End If
+
+        PuttySessions.StopWatcher()
 
         Shutdown.BeforeQuit()
 
