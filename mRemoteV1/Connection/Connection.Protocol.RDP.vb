@@ -337,20 +337,17 @@ Namespace Connection
                     End If
 
                     Select Case Me.InterfaceControl.Info.Resolution
-                        Case RDPResolutions.FitToWindow
-                            _rdpClient.DesktopWidth = Me.InterfaceControl.Size.Width
-                            _rdpClient.DesktopHeight = Me.InterfaceControl.Size.Height
-                        Case RDPResolutions.SmartSize
-                            _rdpClient.AdvancedSettings2.SmartSizing = True
-                            _rdpClient.DesktopWidth = Me.InterfaceControl.Size.Width
-                            _rdpClient.DesktopHeight = Me.InterfaceControl.Size.Height
+                        Case RDPResolutions.FitToWindow, RDPResolutions.SmartSize
+                            _rdpClient.DesktopWidth = InterfaceControl.Size.Width
+                            _rdpClient.DesktopHeight = InterfaceControl.Size.Height
                         Case RDPResolutions.Fullscreen
                             _rdpClient.FullScreen = True
                             _rdpClient.DesktopWidth = Screen.FromControl(frmMain).Bounds.Width
                             _rdpClient.DesktopHeight = Screen.FromControl(frmMain).Bounds.Height
                         Case Else
-                            _rdpClient.DesktopWidth = Resolutions.Items(Int(Me._connectionInfo.Resolution)).Width
-                            _rdpClient.DesktopHeight = Resolutions.Items(Int(Me._connectionInfo.Resolution)).Height
+                            Dim resolution As Rectangle = GetResolutionRectangle(_connectionInfo.Resolution)
+                            _rdpClient.DesktopWidth = resolution.Width
+                            _rdpClient.DesktopHeight = resolution.Height
                     End Select
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetResolutionFailed & vbNewLine & ex.Message, True)
@@ -590,82 +587,19 @@ Namespace Connection
 #End Region
 
 #Region "Resolution"
-            Public Class Resolution
-                Private _Width As Integer
-                Public Property Width() As Integer
-                    Get
-                        Return Me._Width
-                    End Get
-                    Set(ByVal value As Integer)
-                        Me._Width = value
-                    End Set
-                End Property
-
-                Private _Height As Integer
-                Public Property Height() As Integer
-                    Get
-                        Return Me._Height
-                    End Get
-                    Set(ByVal value As Integer)
-                        Me._Height = value
-                    End Set
-                End Property
-
-                Public Sub New(ByVal Width As Integer, ByVal Height As Integer)
-                    Me._Width = Width
-                    Me._Height = Height
-                End Sub
-            End Class
-
-            Public Class Resolutions
-                Public Shared List As New Collection
-
-                Public Shared Sub AddResolutions()
-                    Try
-                        For Each RDPResolution As RDPResolutions In [Enum].GetValues(GetType(RDPResolutions))
-                            If RDPResolution = RDPResolutions.FitToWindow Or RDPResolution = RDPResolutions.SmartSize Or RDPResolution = RDPResolutions.Fullscreen Then
-                                Resolutions.Add(New Resolution(0, 0))
-                            Else
-                                Dim ResSize() As String = Split([Enum].GetName(GetType(RDPResolutions), RDPResolution), "x")
-                                Dim ResWidth As String = ResSize(0).Substring(3)
-                                Dim ResHeight As String = ResSize(1)
-                                Resolutions.Add(New Resolution(ResWidth, ResHeight))
-                            End If
-                        Next
-                    Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpAddResolutionsFailed & vbNewLine & ex.Message, True)
-                    End Try
-                End Sub
-
-
-                Public Shared ReadOnly Property Items(ByVal Index As Object) As Resolution
-                    Get
-                        If TypeOf Index Is Resolution Then
-                            Return Index
-                        Else
-                            Return CType(List.Item(Index + 1), Resolution)
-                        End If
-                    End Get
-                End Property
-
-                Public Shared ReadOnly Property ItemsCount() As Integer
-                    Get
-                        Return List.Count
-                    End Get
-                End Property
-
-                Public Shared Function Add(ByVal nRes As Resolution) As Resolution
-                    Try
-                        List.Add(nRes)
-
-                        Return nRes
-                    Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpAddResolutionFailed & vbNewLine & ex.Message, True)
-                    End Try
-
-                    Return Nothing
-                End Function
-            End Class
+            Public Shared Function GetResolutionRectangle(ByVal resolution As RDPResolutions) As Rectangle
+                Dim resolutionParts() As String = Nothing
+                If Not resolution = RDPResolutions.FitToWindow And _
+                   Not resolution = RDPResolutions.Fullscreen And _
+                   Not resolution = RDPResolutions.SmartSize Then
+                    resolutionParts = resolution.ToString.Replace("Res", "").Split("x")
+                End If
+                If resolutionParts Is Nothing OrElse Not resolutionParts.Length = 2 Then
+                    Return New Rectangle(0, 0, 0, 0)
+                Else
+                    Return New Rectangle(0, 0, resolutionParts(0), resolutionParts(1))
+                End If
+            End Function
 #End Region
 
             Public Class Versions

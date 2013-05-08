@@ -57,8 +57,6 @@ Public Class frmMain
 
         MessageCollector = New Messages.Collector(Windows.errorsForm)
 
-        Connection.Protocol.RDP.Resolutions.AddResolutions()
-
         WindowList = New UI.Window.List
 
         Tools.IeBrowserEmulation.Register()

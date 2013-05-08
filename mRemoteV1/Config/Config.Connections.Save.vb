@@ -5,7 +5,6 @@ Imports System.Globalization
 Imports mRemoteNG.App.Runtime
 Imports System.Data.SqlClient
 Imports mRemoteNG.Tools.Misc
-Imports mRemoteNG.My.Resources
 
 Namespace Config
     Namespace Connections
@@ -1040,7 +1039,7 @@ Namespace Config
 
                 'Smart Size
                 _xmlTextWriter.WriteStartElement("AutoSize")
-                _xmlTextWriter.WriteValue(IIf(con.Resolution = Connection.Protocol.RDP.RDPResolutions.SmartSize, True, False))
+                _xmlTextWriter.WriteValue(con.Resolution = Connection.Protocol.RDP.RDPResolutions.SmartSize)
                 _xmlTextWriter.WriteEndElement()
 
                 'SeparateResolutionX
@@ -1053,26 +1052,18 @@ Namespace Config
                 _xmlTextWriter.WriteValue("768")
                 _xmlTextWriter.WriteEndElement()
 
+                Dim resolution As Rectangle = Connection.Protocol.RDP.GetResolutionRectangle(con.Resolution)
+                If resolution.Width = 0 Then resolution.Width = 1024
+                If resolution.Height = 0 Then resolution.Height = 768
+
                 'TabResolutionX
                 _xmlTextWriter.WriteStartElement("TabResolutionX")
-                If con.Resolution <> Connection.Protocol.RDP.RDPResolutions.FitToWindow And _
-                con.Resolution <> Connection.Protocol.RDP.RDPResolutions.Fullscreen And _
-                con.Resolution <> Connection.Protocol.RDP.RDPResolutions.SmartSize Then
-                    _xmlTextWriter.WriteValue(con.Resolution.ToString.Remove(con.Resolution.ToString.IndexOf("x")))
-                Else
-                    _xmlTextWriter.WriteValue("1024")
-                End If
+                _xmlTextWriter.WriteValue(resolution.Width)
                 _xmlTextWriter.WriteEndElement()
 
                 'TabResolutionY
                 _xmlTextWriter.WriteStartElement("TabResolutionY")
-                If con.Resolution <> Connection.Protocol.RDP.RDPResolutions.FitToWindow And _
-                con.Resolution <> Connection.Protocol.RDP.RDPResolutions.Fullscreen And _
-                con.Resolution <> Connection.Protocol.RDP.RDPResolutions.SmartSize Then
-                    _xmlTextWriter.WriteValue(con.Resolution.ToString.Remove(0, con.Resolution.ToString.IndexOf("x")))
-                Else
-                    _xmlTextWriter.WriteValue("768")
-                End If
+                _xmlTextWriter.WriteValue(resolution.Height)
                 _xmlTextWriter.WriteEndElement()
 
                 'RDPColorDepth

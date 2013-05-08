@@ -156,7 +156,8 @@ Namespace Connection
                             ICA.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(frmMain).Bounds.Width, Screen.FromControl(frmMain).Bounds.Height, 0)
                             ICA.FullScreenWindow()
                         Case Else
-                            ICA.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, RDP.Resolutions.Items(Int(Info.Resolution)).Width, RDP.Resolutions.Items(Int(Info.Resolution)).Height, 0)
+                            Dim resolution As Rectangle = RDP.GetResolutionRectangle(Info.Resolution)
+                            ICA.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, resolution.Width, resolution.Height, 0)
                     End Select
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetResolutionFailed & vbNewLine & ex.Message, True)
