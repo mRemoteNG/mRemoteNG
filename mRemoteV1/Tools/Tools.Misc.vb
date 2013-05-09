@@ -116,25 +116,8 @@ Namespace Tools
             End If
         End Function
 
-        Private Shared rndNums As New ArrayList
         Public Shared Function CreateConstantID() As String
-            Dim cID As String
-            Dim rnd As New Random(Now.Second)
-            Dim iRnd As Integer
-            Dim NewFound As Boolean = False
-
-            Do Until NewFound
-                iRnd = rnd.Next(10000, 99999)
-
-                If rndNums.Contains(iRnd) = False Then
-                    rndNums.Add(iRnd)
-                    NewFound = True
-                End If
-            Loop
-
-            cID = Now.Year & LeadingZero(Now.Month) & LeadingZero(Now.Day) & LeadingZero(Now.Hour) & LeadingZero(Now.Minute) & LeadingZero(Now.Second) & LeadingZero(Now.Millisecond & iRnd)
-
-            Return cID
+            Return Guid.NewGuid().ToString()
         End Function
 
         Public Shared Function LeadingZero(ByVal Number As String) As String
@@ -167,15 +150,7 @@ Namespace Tools
         End Function
 
         Public Shared Function StringToEnum(ByVal t As Type, ByVal value As String) As Object
-            For Each fI As FieldInfo In t.GetFields
-                If fI.Name = value Then
-                    Return fI.GetValue(vbNull)
-                End If
-            Next
-
-            Dim ex As New Exception(String.Format("Can't convert {0} to {1}", value, t.ToString))
-            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StringToEnum failed" & vbNewLine & ex.Message, True)
-            Throw ex
+            Return [Enum].Parse(t, value)
         End Function
 
         Public Shared Function GetExceptionMessageRecursive(ByVal ex As Exception, Optional ByVal separator As String = vbNewLine) As String
