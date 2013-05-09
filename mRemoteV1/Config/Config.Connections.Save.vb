@@ -97,7 +97,14 @@ Namespace Config
                         databaseVersion = New Version(2, 4)
                     End If
 
-                    If databaseVersion.CompareTo(New System.Version(2, 4)) = 0 Then ' 2.4
+                    If databaseVersion.CompareTo(New Version(2, 4)) = 0 Then ' 2.4
+                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.5"))
+                        sqlCommand = New SqlCommand("ALTER TABLE tblCons ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, AutomaticResize bit NOT NULL DEFAULT 1 InheritLoadBalanceInfo bit NOT NULL DEFAULT 0, InheritAutomaticResize bit NOT NULL DEFAULT 0;", sqlConnection)
+                        sqlCommand.ExecuteNonQuery()
+                        databaseVersion = New Version(2, 5)
+                    End If
+
+                    If databaseVersion.CompareTo(New Version(2, 5)) = 0 Then ' 2.5
                         isVerified = True
                     End If
 
@@ -172,7 +179,7 @@ Namespace Config
                     Dim curConI As Connection.Info
                     _sqlQuery = New SqlCommand("INSERT INTO tblCons (Name, Type, Expanded, Description, Icon, Panel, Username, " & _
                                                "DomainName, Password, Hostname, Protocol, PuttySession, " & _
-                                               "Port, ConnectToConsole, RenderingEngine, ICAEncryptionStrength, RDPAuthenticationLevel, Colors, Resolution, DisplayWallpaper, " & _
+                                               "Port, ConnectToConsole, RenderingEngine, ICAEncryptionStrength, RDPAuthenticationLevel, LoadBalanceInfo, Colors, Resolution, AutomaticResize, DisplayWallpaper, " & _
                                                "DisplayThemes, EnableFontSmoothing, EnableDesktopComposition, CacheBitmaps, RedirectDiskDrives, RedirectPorts, " & _
                                                "RedirectPrinters, RedirectSmartCards, RedirectSound, RedirectKeys, " & _
                                                "Connected, PreExtApp, PostExtApp, MacAddress, UserField, ExtApp, VNCCompression, VNCEncoding, VNCAuthMode, " & _
@@ -185,8 +192,8 @@ Namespace Config
                                                "InheritIcon, InheritPanel, InheritPassword, InheritPort, " & _
                                                "InheritProtocol, InheritPuttySession, InheritRedirectDiskDrives, " & _
                                                "InheritRedirectKeys, InheritRedirectPorts, InheritRedirectPrinters, " & _
-                                               "InheritRedirectSmartCards, InheritRedirectSound, InheritResolution, " & _
-                                               "InheritUseConsoleSession, InheritRenderingEngine, InheritUsername, InheritICAEncryptionStrength, InheritRDPAuthenticationLevel, " & _
+                                               "InheritRedirectSmartCards, InheritRedirectSound, InheritResolution, InheritAutomaticResize" & _
+                                               "InheritUseConsoleSession, InheritRenderingEngine, InheritUsername, InheritICAEncryptionStrength, InheritRDPAuthenticationLevel, InheritLoadBalanceInfo" & _
                                                "InheritPreExtApp, InheritPostExtApp, InheritMacAddress, InheritUserField, InheritExtApp, InheritVNCCompression, InheritVNCEncoding, " & _
                                                "InheritVNCAuthMode, InheritVNCProxyType, InheritVNCProxyIP, InheritVNCProxyPort, " & _
                                                "InheritVNCProxyUsername, InheritVNCProxyPassword, InheritVNCColors, " & _
@@ -259,8 +266,10 @@ Namespace Config
                     _sqlQuery.CommandText &= "'" & .RenderingEngine.ToString & "',"
                     _sqlQuery.CommandText &= "'" & .ICAEncryption.ToString & "',"
                     _sqlQuery.CommandText &= "'" & .RDPAuthenticationLevel.ToString & "',"
+                    _sqlQuery.CommandText &= "'" & .LoadBalanceInfo & "',"
                     _sqlQuery.CommandText &= "'" & .Colors.ToString & "',"
                     _sqlQuery.CommandText &= "'" & .Resolution.ToString & "',"
+                    _sqlQuery.CommandText &= "'" & .AutomaticResize & "',"
                     _sqlQuery.CommandText &= "'" & .DisplayWallpaper & "',"
                     _sqlQuery.CommandText &= "'" & .DisplayThemes & "',"
                     _sqlQuery.CommandText &= "'" & .EnableFontSmoothing & "',"
@@ -344,11 +353,13 @@ Namespace Config
                             _sqlQuery.CommandText &= "'" & .RedirectSmartCards & "',"
                             _sqlQuery.CommandText &= "'" & .RedirectSound & "',"
                             _sqlQuery.CommandText &= "'" & .Resolution & "',"
+                            _sqlQuery.CommandText &= "'" & .AutomaticResize & "',"
                             _sqlQuery.CommandText &= "'" & .UseConsoleSession & "',"
                             _sqlQuery.CommandText &= "'" & .RenderingEngine & "',"
                             _sqlQuery.CommandText &= "'" & .Username & "',"
                             _sqlQuery.CommandText &= "'" & .ICAEncryption & "',"
                             _sqlQuery.CommandText &= "'" & .RDPAuthenticationLevel & "',"
+                            _sqlQuery.CommandText &= "'" & .LoadBalanceInfo & "',"
                             _sqlQuery.CommandText &= "'" & .PreExtApp & "',"
                             _sqlQuery.CommandText &= "'" & .PostExtApp & "',"
                             _sqlQuery.CommandText &= "'" & .MacAddress & "',"
@@ -397,9 +408,13 @@ Namespace Config
                             _sqlQuery.CommandText &= "'" & False & "',"
                             _sqlQuery.CommandText &= "'" & False & "',"
                             _sqlQuery.CommandText &= "'" & False & "',"
+                            _sqlQuery.CommandText &= "'" & False & "'," ' .AutomaticResize
                             _sqlQuery.CommandText &= "'" & False & "',"
                             _sqlQuery.CommandText &= "'" & False & "',"
                             _sqlQuery.CommandText &= "'" & False & "',"
+                            _sqlQuery.CommandText &= "'" & False & "',"
+                            _sqlQuery.CommandText &= "'" & False & "',"
+                            _sqlQuery.CommandText &= "'" & False & "'," ' .LoadBalanceInfo
                             _sqlQuery.CommandText &= "'" & False & "',"
                             _sqlQuery.CommandText &= "'" & False & "',"
                             _sqlQuery.CommandText &= "'" & False & "',"
@@ -596,9 +611,13 @@ Namespace Config
 
                     _xmlTextWriter.WriteAttributeString("RDPAuthenticationLevel", "", curConI.RDPAuthenticationLevel.ToString)
 
+                    _xmlTextWriter.WriteAttributeString("LoadBalanceInfo", "", curConI.LoadBalanceInfo)
+
                     _xmlTextWriter.WriteAttributeString("Colors", "", curConI.Colors.ToString)
 
                     _xmlTextWriter.WriteAttributeString("Resolution", "", curConI.Resolution.ToString)
+
+                    _xmlTextWriter.WriteAttributeString("AutomaticResize", "", curConI.AutomaticResize)
 
                     _xmlTextWriter.WriteAttributeString("DisplayWallpaper", "", curConI.DisplayWallpaper)
 
@@ -691,12 +710,14 @@ Namespace Config
                         _xmlTextWriter.WriteAttributeString("InheritRedirectSmartCards", "", curConI.Inherit.RedirectSmartCards)
                         _xmlTextWriter.WriteAttributeString("InheritRedirectSound", "", curConI.Inherit.RedirectSound)
                         _xmlTextWriter.WriteAttributeString("InheritResolution", "", curConI.Inherit.Resolution)
+                        _xmlTextWriter.WriteAttributeString("InheritAutomaticResize", "", curConI.Inherit.AutomaticResize)
                         _xmlTextWriter.WriteAttributeString("InheritUseConsoleSession", "", curConI.Inherit.UseConsoleSession)
                         _xmlTextWriter.WriteAttributeString("InheritUseCredSsp", "", curConI.Inherit.UseCredSsp)
                         _xmlTextWriter.WriteAttributeString("InheritRenderingEngine", "", curConI.Inherit.RenderingEngine)
                         _xmlTextWriter.WriteAttributeString("InheritUsername", "", curConI.Inherit.Username)
                         _xmlTextWriter.WriteAttributeString("InheritICAEncryptionStrength", "", curConI.Inherit.ICAEncryption)
                         _xmlTextWriter.WriteAttributeString("InheritRDPAuthenticationLevel", "", curConI.Inherit.RDPAuthenticationLevel)
+                        _xmlTextWriter.WriteAttributeString("InheritLoadBalanceInfo", "", curConI.Inherit.LoadBalanceInfo)
                         _xmlTextWriter.WriteAttributeString("InheritPreExtApp", "", curConI.Inherit.PreExtApp)
                         _xmlTextWriter.WriteAttributeString("InheritPostExtApp", "", curConI.Inherit.PostExtApp)
                         _xmlTextWriter.WriteAttributeString("InheritMacAddress", "", curConI.Inherit.MacAddress)
@@ -741,12 +762,14 @@ Namespace Config
                         _xmlTextWriter.WriteAttributeString("InheritRedirectSmartCards", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritRedirectSound", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritResolution", "", False)
+                        _xmlTextWriter.WriteAttributeString("InheritAutomaticResize", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritUseConsoleSession", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritUseCredSsp", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritRenderingEngine", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritUsername", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritICAEncryptionStrength", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritRDPAuthenticationLevel", "", False)
+                        _xmlTextWriter.WriteAttributeString("InheritLoadBalanceInfo", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritPreExtApp", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritPostExtApp", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritMacAddress", "", False)
@@ -808,10 +831,10 @@ Namespace Config
                     csvLn += "Domain;"
                 End If
 
-                csvLn += "Hostname;Protocol;PuttySession;Port;ConnectToConsole;UseCredSsp;RenderingEngine;ICAEncryptionStrength;RDPAuthenticationLevel;Colors;Resolution;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;RedirectKeys;PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                csvLn += "Hostname;Protocol;PuttySession;Port;ConnectToConsole;UseCredSsp;RenderingEngine;ICAEncryptionStrength;RDPAuthenticationLevel;LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;RedirectKeys;PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
 
                 If SaveSecurity.Inheritance Then
-                    csvLn += "InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;InheritProtocol;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritUseConsoleSession;InheritUseCredSsp;InheritRenderingEngine;InheritUsername;InheritICAEncryptionStrength;InheritRDPAuthenticationLevel;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;InheritRDGatewayUsageMethod;InheritRDGatewayHostname;InheritRDGatewayUseConnectionCredentials;InheritRDGatewayUsername;InheritRDGatewayPassword;InheritRDGatewayDomain"
+                    csvLn += "InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;InheritProtocol;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;InheritUseConsoleSession;InheritUseCredSsp;InheritRenderingEngine;InheritUsername;InheritICAEncryptionStrength;InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;InheritRDGatewayUsageMethod;InheritRDGatewayHostname;InheritRDGatewayUseConnectionCredentials;InheritRDGatewayUsername;InheritRDGatewayPassword;InheritRDGatewayDomain"
                 End If
 
                 csvWr.WriteLine(csvLn)
@@ -862,10 +885,10 @@ Namespace Config
                     csvLn += con.Domain & ";"
                 End If
 
-                csvLn += con.Hostname & ";" & con.Protocol.ToString & ";" & con.PuttySession & ";" & con.Port & ";" & con.UseConsoleSession & ";" & con.UseCredSsp & ";" & con.RenderingEngine.ToString & ";" & con.ICAEncryption.ToString & ";" & con.RDPAuthenticationLevel.ToString & ";" & con.Colors.ToString & ";" & con.Resolution.ToString & ";" & con.DisplayWallpaper & ";" & con.DisplayThemes & ";" & con.EnableFontSmoothing & ";" & con.EnableDesktopComposition & ";" & con.CacheBitmaps & ";" & con.RedirectDiskDrives & ";" & con.RedirectPorts & ";" & con.RedirectPrinters & ";" & con.RedirectSmartCards & ";" & con.RedirectSound.ToString & ";" & con.RedirectKeys & ";" & con.PreExtApp & ";" & con.PostExtApp & ";" & con.MacAddress & ";" & con.UserField & ";" & con.ExtApp & ";" & con.VNCCompression.ToString & ";" & con.VNCEncoding.ToString & ";" & con.VNCAuthMode.ToString & ";" & con.VNCProxyType.ToString & ";" & con.VNCProxyIP & ";" & con.VNCProxyPort & ";" & con.VNCProxyUsername & ";" & con.VNCProxyPassword & ";" & con.VNCColors.ToString & ";" & con.VNCSmartSizeMode.ToString & ";" & con.VNCViewOnly & ";"
+                csvLn += con.Hostname & ";" & con.Protocol.ToString & ";" & con.PuttySession & ";" & con.Port & ";" & con.UseConsoleSession & ";" & con.UseCredSsp & ";" & con.RenderingEngine.ToString & ";" & con.ICAEncryption.ToString & ";" & con.RDPAuthenticationLevel.ToString & ";" & con.LoadBalanceInfo & ";" & con.Colors.ToString & ";" & con.Resolution.ToString & ";" & con.AutomaticResize & ";" & con.DisplayWallpaper & ";" & con.DisplayThemes & ";" & con.EnableFontSmoothing & ";" & con.EnableDesktopComposition & ";" & con.CacheBitmaps & ";" & con.RedirectDiskDrives & ";" & con.RedirectPorts & ";" & con.RedirectPrinters & ";" & con.RedirectSmartCards & ";" & con.RedirectSound.ToString & ";" & con.RedirectKeys & ";" & con.PreExtApp & ";" & con.PostExtApp & ";" & con.MacAddress & ";" & con.UserField & ";" & con.ExtApp & ";" & con.VNCCompression.ToString & ";" & con.VNCEncoding.ToString & ";" & con.VNCAuthMode.ToString & ";" & con.VNCProxyType.ToString & ";" & con.VNCProxyIP & ";" & con.VNCProxyPort & ";" & con.VNCProxyUsername & ";" & con.VNCProxyPassword & ";" & con.VNCColors.ToString & ";" & con.VNCSmartSizeMode.ToString & ";" & con.VNCViewOnly & ";"
 
                 If SaveSecurity.Inheritance Then
-                    csvLn += con.Inherit.CacheBitmaps & ";" & con.Inherit.Colors & ";" & con.Inherit.Description & ";" & con.Inherit.DisplayThemes & ";" & con.Inherit.DisplayWallpaper & ";" & con.Inherit.EnableFontSmoothing & ";" & con.Inherit.EnableDesktopComposition & ";" & con.Inherit.Domain & ";" & con.Inherit.Icon & ";" & con.Inherit.Panel & ";" & con.Inherit.Password & ";" & con.Inherit.Port & ";" & con.Inherit.Protocol & ";" & con.Inherit.PuttySession & ";" & con.Inherit.RedirectDiskDrives & ";" & con.Inherit.RedirectKeys & ";" & con.Inherit.RedirectPorts & ";" & con.Inherit.RedirectPrinters & ";" & con.Inherit.RedirectSmartCards & ";" & con.Inherit.RedirectSound & ";" & con.Inherit.Resolution & ";" & con.Inherit.UseConsoleSession & ";" & con.Inherit.UseCredSsp & ";" & con.Inherit.RenderingEngine & ";" & con.Inherit.Username & ";" & con.Inherit.ICAEncryption & ";" & con.Inherit.RDPAuthenticationLevel & ";" & con.Inherit.PreExtApp & ";" & con.Inherit.PostExtApp & ";" & con.Inherit.MacAddress & ";" & con.Inherit.UserField & ";" & con.Inherit.ExtApp & ";" & con.Inherit.VNCCompression & ";" & con.Inherit.VNCEncoding & ";" & con.Inherit.VNCAuthMode & ";" & con.Inherit.VNCProxyType & ";" & con.Inherit.VNCProxyIP & ";" & con.Inherit.VNCProxyPort & ";" & con.Inherit.VNCProxyUsername & ";" & con.Inherit.VNCProxyPassword & ";" & con.Inherit.VNCColors & ";" & con.Inherit.VNCSmartSizeMode & ";" & con.Inherit.VNCViewOnly
+                    csvLn += con.Inherit.CacheBitmaps & ";" & con.Inherit.Colors & ";" & con.Inherit.Description & ";" & con.Inherit.DisplayThemes & ";" & con.Inherit.DisplayWallpaper & ";" & con.Inherit.EnableFontSmoothing & ";" & con.Inherit.EnableDesktopComposition & ";" & con.Inherit.Domain & ";" & con.Inherit.Icon & ";" & con.Inherit.Panel & ";" & con.Inherit.Password & ";" & con.Inherit.Port & ";" & con.Inherit.Protocol & ";" & con.Inherit.PuttySession & ";" & con.Inherit.RedirectDiskDrives & ";" & con.Inherit.RedirectKeys & ";" & con.Inherit.RedirectPorts & ";" & con.Inherit.RedirectPrinters & ";" & con.Inherit.RedirectSmartCards & ";" & con.Inherit.RedirectSound & ";" & con.Inherit.Resolution & ";" & con.Inherit.AutomaticResize & ";" & con.Inherit.UseConsoleSession & ";" & con.Inherit.UseCredSsp & ";" & con.Inherit.RenderingEngine & ";" & con.Inherit.Username & ";" & con.Inherit.ICAEncryption & ";" & con.Inherit.RDPAuthenticationLevel & ";" & con.Inherit.LoadBalanceInfo & ";" & con.Inherit.PreExtApp & ";" & con.Inherit.PostExtApp & ";" & con.Inherit.MacAddress & ";" & con.Inherit.UserField & ";" & con.Inherit.ExtApp & ";" & con.Inherit.VNCCompression & ";" & con.Inherit.VNCEncoding & ";" & con.Inherit.VNCAuthMode & ";" & con.Inherit.VNCProxyType & ";" & con.Inherit.VNCProxyIP & ";" & con.Inherit.VNCProxyPort & ";" & con.Inherit.VNCProxyUsername & ";" & con.Inherit.VNCProxyPassword & ";" & con.Inherit.VNCColors & ";" & con.Inherit.VNCSmartSizeMode & ";" & con.Inherit.VNCViewOnly
                 End If
 
                 csvWr.WriteLine(csvLn)

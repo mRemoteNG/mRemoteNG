@@ -742,10 +742,12 @@ Namespace App
                 My.Settings.ConDefaultPuttySession = .PuttySession
                 My.Settings.ConDefaultICAEncryptionStrength = .ICAEncryption.ToString
                 My.Settings.ConDefaultRDPAuthenticationLevel = .RDPAuthenticationLevel.ToString
+                My.Settings.ConDefaultLoadBalanceInfo = .LoadBalanceInfo
                 My.Settings.ConDefaultUseConsoleSession = .UseConsoleSession
                 My.Settings.ConDefaultUseCredSsp = .UseCredSsp
                 My.Settings.ConDefaultRenderingEngine = .RenderingEngine.ToString
                 My.Settings.ConDefaultResolution = .Resolution.ToString
+                My.Settings.ConDefaultAutomaticResize = .AutomaticResize
                 My.Settings.ConDefaultColors = .Colors.ToString
                 My.Settings.ConDefaultCacheBitmaps = .CacheBitmaps
                 My.Settings.ConDefaultDisplayWallpaper = .DisplayWallpaper
@@ -808,7 +810,9 @@ Namespace App
                 My.Settings.InhDefaultRenderingEngine = .RenderingEngine
                 My.Settings.InhDefaultICAEncryptionStrength = .ICAEncryption
                 My.Settings.InhDefaultRDPAuthenticationLevel = .RDPAuthenticationLevel
+                My.Settings.InhDefaultLoadBalanceInfo = .LoadBalanceInfo
                 My.Settings.InhDefaultResolution = .Resolution
+                My.Settings.InhDefaultAutomaticResize = .AutomaticResize
                 My.Settings.InhDefaultColors = .Colors
                 My.Settings.InhDefaultCacheBitmaps = .CacheBitmaps
                 My.Settings.InhDefaultDisplayWallpaper = .DisplayWallpaper
@@ -970,7 +974,7 @@ Namespace App
                 xW.WriteAttributeString("Name", My.Language.strConnections)
                 xW.WriteAttributeString("Export", "", "False")
                 xW.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY")
-                xW.WriteAttributeString("ConfVersion", "", "2.4")
+                xW.WriteAttributeString("ConfVersion", "", "2.5")
 
                 xW.WriteEndElement()
                 xW.WriteEndDocument()

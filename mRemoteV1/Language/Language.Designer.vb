@@ -3446,6 +3446,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Select whether to automatically resize the connection when the window is resized or when fullscreen mode is toggled. Requires RDC 8.0 or higher..
+        '''</summary>
+        Friend Shared ReadOnly Property strPropertyDescriptionAutomaticResize() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionAutomaticResize", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Select whether to use bitmap caching or not..
         '''</summary>
         Friend Shared ReadOnly Property strPropertyDescriptionCacheBitmaps() As String
@@ -3577,6 +3586,15 @@ Namespace My
         Friend Shared ReadOnly Property strPropertyDescriptionIcon() As String
             Get
                 Return ResourceManager.GetString("strPropertyDescriptionIcon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Specifies the load balancing information for use by load balancing routers to choose the best server..
+        '''</summary>
+        Friend Shared ReadOnly Property strPropertyDescriptionLoadBalanceInfo() As String
+            Get
+                Return ResourceManager.GetString("strPropertyDescriptionLoadBalanceInfo", resourceCulture)
             End Get
         End Property
         
@@ -3896,6 +3914,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Automatic Resize.
+        '''</summary>
+        Friend Shared ReadOnly Property strPropertyNameAutomaticResize() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameAutomaticResize", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Cache Bitmaps.
         '''</summary>
         Friend Shared ReadOnly Property strPropertyNameCacheBitmaps() As String
@@ -4027,6 +4054,15 @@ Namespace My
         Friend Shared ReadOnly Property strPropertyNameIcon() As String
             Get
                 Return ResourceManager.GetString("strPropertyNameIcon", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Load Balance Info.
+        '''</summary>
+        Friend Shared ReadOnly Property strPropertyNameLoadBalanceInfo() As String
+            Get
+                Return ResourceManager.GetString("strPropertyNameLoadBalanceInfo", resourceCulture)
             End Get
         End Property
         

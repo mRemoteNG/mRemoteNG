@@ -199,7 +199,7 @@ Namespace Config
                     End If
 
                     confVersion = Convert.ToDouble(sqlRd.Item("confVersion"), CultureInfo.InvariantCulture)
-                    Const maxSupportedSchemaVersion As Double = 2.4
+                    Const maxSupportedSchemaVersion As Double = 2.5
                     If confVersion > maxSupportedSchemaVersion Then
                         cTaskDialog.ShowTaskDialogBox(frmMain, Application.ProductName, "Incompatible database schema", String.Format("The database schema on the server is not supported. Please upgrade to a newer version of {0}.", Application.ProductName), String.Format("Schema Version: {1}{0}Highest Supported Version: {2}", vbNewLine, confVersion.ToString(), maxSupportedSchemaVersion.ToString()), "", "", "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
                         Throw New Exception(String.Format("Incompatible database schema (schema version {0}).", confVersion))
@@ -567,6 +567,13 @@ Namespace Config
                             conI.Inherit.UseCredSsp = .Item("InheritUseCredSsp")
                         End If
 
+                        If confVersion >= 2.5 Then
+                            conI.LoadBalanceInfo = .Item("LoadBalanceInfo")
+                            conI.AutomaticResize = .Item("AutomaticResize")
+                            conI.Inherit.LoadBalanceInfo = .Item("InheritLoadBalanceInfo")
+                            conI.Inherit.AutomaticResize = .Item("InheritAutomaticResize")
+                        End If
+
                         If SQLUpdate = True Then
                             conI.PleaseConnect = .Item("Connected")
                         End If
@@ -647,7 +654,7 @@ Namespace Config
                         MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strOldConffile)
                     End If
 
-                    Const maxSupportedConfVersion As Double = 2.4
+                    Const maxSupportedConfVersion As Double = 2.5
                     If confVersion > maxSupportedConfVersion Then
                         cTaskDialog.ShowTaskDialogBox(frmMain, Application.ProductName, "Incompatible connection file format", String.Format("The format of this connection file is not supported. Please upgrade to a newer version of {0}.", Application.ProductName), String.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", vbNewLine, ConnectionFileName, confVersion.ToString(), maxSupportedConfVersion.ToString()), "", "", "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
                         Throw New Exception(String.Format("Incompatible connection file format (file format version {0}).", confVersion))
@@ -1047,6 +1054,13 @@ Namespace Config
                         If confVersion >= 2.4 Then
                             conI.UseCredSsp = .Attributes("UseCredSsp").Value
                             conI.Inherit.UseCredSsp = .Attributes("InheritUseCredSsp").Value
+                        End If
+
+                        If confVersion >= 2.5 Then
+                            conI.LoadBalanceInfo = .Attributes("LoadBalanceInfo").Value
+                            conI.AutomaticResize = .Attributes("AutomaticResize").Value
+                            conI.Inherit.LoadBalanceInfo = .Attributes("InheritLoadBalanceInfo").Value
+                            conI.Inherit.AutomaticResize = .Attributes("InheritAutomaticResize").Value
                         End If
                     End With
                 Catch ex As Exception

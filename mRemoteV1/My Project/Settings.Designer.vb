@@ -2420,6 +2420,58 @@ Namespace My
                 Me("UpdateAddress") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
+        Public Property ConDefaultLoadBalanceInfo() As String
+            Get
+                Return CType(Me("ConDefaultLoadBalanceInfo"),String)
+            End Get
+            Set
+                Me("ConDefaultLoadBalanceInfo") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("True")>  _
+        Public Property ConDefaultAutomaticResize() As Boolean
+            Get
+                Return CType(Me("ConDefaultAutomaticResize"),Boolean)
+            End Get
+            Set
+                Me("ConDefaultAutomaticResize") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property InhDefaultLoadBalanceInfo() As Boolean
+            Get
+                Return CType(Me("InhDefaultLoadBalanceInfo"),Boolean)
+            End Get
+            Set
+                Me("InhDefaultLoadBalanceInfo") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property InhDefaultAutomaticResize() As Boolean
+            Get
+                Return CType(Me("InhDefaultAutomaticResize"),Boolean)
+            End Get
+            Set
+                Me("InhDefaultAutomaticResize") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

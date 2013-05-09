@@ -7,6 +7,8 @@
   Fixed issue MR-440 - RDP import with non-standard port
   Fixed issue MR-443 - Instructions for eolwtscom.dll registration for Portable version are inaccurate
   Fixed issue MR-446 - Putty saved sessions show in connection panel
+  Fixed issue MR-459 - Maximized -> Minimized -> Restored results in mangled active display
+  Fixed issue MR-463 - Add support for LoadBalanceInfo to RDP
   Fixed issue MR-471 - PuTTY Saved Sessions disappears from connection list
   Added PuTTY Session Settings command to the Config panel for PuTTY Saved Sessions.
   Fixed an exception or crash when choosing unnamed colors for themes.

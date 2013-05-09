@@ -385,6 +385,32 @@ Namespace Connection
             End Set
         End Property
 
+        Private _loadBalanceInfo As String = My.Settings.ConDefaultLoadBalanceInfo
+        <LocalizedCategory("strCategoryProtocol", 3), _
+            Browsable(True), _
+            LocalizedDisplayName("strPropertyNameLoadBalanceInfo"), _
+            LocalizedDescription("strPropertyDescriptionLoadBalanceInfo")> _
+        Public Property LoadBalanceInfo() As String
+            Get
+                If _Inherit.LoadBalanceInfo And _Parent IsNot Nothing Then
+                    Dim parCon As Info = TryCast(_Parent, Container.Info).ConnectionInfo
+
+                    If _IsContainer = True Then
+                        Dim curCont As Container.Info = _Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.LoadBalanceInfo.Trim()
+                Else
+                    Return _loadBalanceInfo.Trim()
+                End If
+            End Get
+            Set(ByVal value As String)
+                _loadBalanceInfo = value.Trim()
+            End Set
+        End Property
+
         Private _RenderingEngine As Connection.Protocol.HTTPBase.RenderingEngine = Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.HTTPBase.RenderingEngine), My.Settings.ConDefaultRenderingEngine)
         <LocalizedCategory("strCategoryProtocol", 3), _
             Browsable(True), _
@@ -624,6 +650,33 @@ Namespace Connection
             End Get
             Set(ByVal value As Connection.Protocol.RDP.RDPResolutions)
                 Me._Resolution = value
+            End Set
+        End Property
+
+        Private _automaticResize As Boolean = My.Settings.ConDefaultAutomaticResize
+        <LocalizedCategory("strCategoryAppearance", 5), _
+            Browsable(True), _
+            LocalizedDisplayName("strPropertyNameAutomaticResize"), _
+            LocalizedDescription("strPropertyDescriptionAutomaticResize"), _
+            TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+        Public Property AutomaticResize() As Boolean
+            Get
+                If _Inherit.CacheBitmaps And _Parent IsNot Nothing Then
+                    Dim parCon As Info = TryCast(_Parent, Container.Info).ConnectionInfo
+
+                    If _IsContainer = True Then
+                        Dim curCont As Container.Info = _Parent
+                        Dim parCont As Container.Info = curCont.Parent
+                        parCon = parCont.ConnectionInfo
+                    End If
+
+                    Return parCon.AutomaticResize
+                Else
+                    Return _automaticResize
+                End If
+            End Get
+            Set(ByVal value As Boolean)
+                _automaticResize = value
             End Set
         End Property
 
@@ -1849,6 +1902,21 @@ Namespace Connection
                 End Set
             End Property
 
+            Private _loadBalanceInfo As Boolean = My.Settings.InhDefaultLoadBalanceInfo
+            <LocalizedCategory("strCategoryProtocol", 4), _
+                Browsable(True), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameLoadBalanceInfo"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionLoadBalanceInfo"), _
+                TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+            Public Property LoadBalanceInfo() As Boolean
+                Get
+                    Return _loadBalanceInfo
+                End Get
+                Set(ByVal value As Boolean)
+                    _loadBalanceInfo = value
+                End Set
+            End Property
+
             Private _RenderingEngine As Boolean = My.Settings.InhDefaultRenderingEngine
             <LocalizedCategory("strCategoryProtocol", 4), _
                 Browsable(True), _
@@ -1998,6 +2066,21 @@ Namespace Connection
                 End Get
                 Set(ByVal value As Boolean)
                     Me._Resolution = value
+                End Set
+            End Property
+
+            Private _automaticResize As Boolean = My.Settings.InhDefaultAutomaticResize
+            <LocalizedCategory("strCategoryAppearance", 6), _
+                Browsable(True), _
+                LocalizedDisplayNameInheritAttribute("strPropertyNameAutomaticResize"), _
+                LocalizedDescriptionInheritAttribute("strPropertyDescriptionAutomaticResize"), _
+                TypeConverter(GetType(Tools.Misc.YesNoTypeConverter))> _
+            Public Property AutomaticResize() As Boolean
+                Get
+                    Return _automaticResize
+                End Get
+                Set(ByVal value As Boolean)
+                    _automaticResize = value
                 End Set
             End Property
 

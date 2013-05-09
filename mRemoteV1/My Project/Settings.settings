@@ -551,5 +551,17 @@
     <Setting Name="UpdateAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
       <Value Profile="(Default)">https://update.mremoteng.org/</Value>
     </Setting>
+    <Setting Name="ConDefaultLoadBalanceInfo" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultAutomaticResize" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="InhDefaultLoadBalanceInfo" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultAutomaticResize" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

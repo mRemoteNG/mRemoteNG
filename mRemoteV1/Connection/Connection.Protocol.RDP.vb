@@ -112,6 +112,7 @@ Namespace Connection
                     RedirectKeys = _connectionInfo.RedirectKeys
                     Me.SetRedirection()
                     Me.SetAuthenticationLevel()
+                    SetLoadBalanceInfo()
                     Me.SetRdGateway()
 
                     _rdpClient.ColorDepth = Int(Me._connectionInfo.Colors)
@@ -213,9 +214,12 @@ Namespace Connection
             Private Sub ReconnectForResize()
                 If _rdpVersion < Versions.RDC80 Then Return
 
+                If Not InterfaceControl.Info.AutomaticResize Then Return
+
                 If Not (InterfaceControl.Info.Resolution = RDPResolutions.FitToWindow Or _
-                        InterfaceControl.Info.Resolution = RDPResolutions.Fullscreen) Or _
-                    SmartSize Then Return
+                        InterfaceControl.Info.Resolution = RDPResolutions.Fullscreen) Then Return
+
+                If SmartSize Then Return
 
                 Dim size As Size
                 If Not Fullscreen Then
@@ -406,6 +410,15 @@ Namespace Connection
                     _rdpClient.AdvancedSettings5.AuthenticationLevel = Me._connectionInfo.RDPAuthenticationLevel
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetAuthenticationLevelFailed & vbNewLine & ex.Message, True)
+                End Try
+            End Sub
+
+            Private Sub SetLoadBalanceInfo()
+                If String.IsNullOrEmpty(_connectionInfo.LoadBalanceInfo) Then Return
+                Try
+                    _rdpClient.AdvancedSettings2.LoadBalanceInfo = _connectionInfo.LoadBalanceInfo
+                Catch ex As Exception
+                    MessageCollector.AddExceptionMessage("Unable to set load balance info.", ex)
                 End Try
             End Sub
 

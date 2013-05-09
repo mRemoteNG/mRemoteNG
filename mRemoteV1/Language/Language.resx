@@ -1261,6 +1261,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
     <value>Select how you want to authenticate against the VNC server.</value>
   </data>
+  <data name="strPropertyDescriptionAutomaticResize" xml:space="preserve">
+    <value>Select whether to automatically resize the connection when the window is resized or when fullscreen mode is toggled. Requires RDC 8.0 or higher.</value>
+  </data>
   <data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
     <value>Select whether to use bitmap caching or not.</value>
   </data>
@@ -1305,6 +1308,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strPropertyDescriptionIcon" xml:space="preserve">
     <value>Choose a icon that will be displayed when connected to the host.</value>
+  </data>
+  <data name="strPropertyDescriptionLoadBalanceInfo" xml:space="preserve">
+    <value>Specifies the load balancing information for use by load balancing routers to choose the best server.</value>
   </data>
   <data name="strPropertyDescriptionMACAddress" xml:space="preserve">
     <value>Enter the MAC address of the remote host if you wish to use it in an external tool.</value>
@@ -1411,6 +1417,9 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPropertyNameAuthenticationMode" xml:space="preserve">
     <value>Authentication Mode</value>
   </data>
+  <data name="strPropertyNameAutomaticResize" xml:space="preserve">
+    <value>Automatic Resize</value>
+  </data>
   <data name="strPropertyNameCacheBitmaps" xml:space="preserve">
     <value>Cache Bitmaps</value>
   </data>
@@ -1455,6 +1464,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strPropertyNameIcon" xml:space="preserve">
     <value>Icon</value>
+  </data>
+  <data name="strPropertyNameLoadBalanceInfo" xml:space="preserve">
+    <value>Load Balance Info</value>
   </data>
   <data name="strPropertyNameMACAddress" xml:space="preserve">
     <value>MAC Address</value>
