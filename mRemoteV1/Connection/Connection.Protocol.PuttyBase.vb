@@ -135,8 +135,12 @@ Namespace Connection
                                 End If
 
                                 arguments.Add("-" & _PuttySSHVersion)
-                                arguments.Add("-l", username)
-                                arguments.Add("-pw", password)
+                                If Not String.IsNullOrEmpty(username) Then
+                                    arguments.Add("-l", username)
+                                End If
+                                If Not String.IsNullOrEmpty(password) Then
+                                    arguments.Add("-pw", password)
+                                End If
                             End If
 
                             arguments.Add("-P", InterfaceControl.Info.Port.ToString)
