@@ -8,7 +8,7 @@ set VCVARSALL="%ProgramFiles(x86)%\Microsoft Visual Studio 10.0\VC\vcvarsall.bat
 set DEVENV="devenv.exe"
 set MAKENSIS="%ProgramFiles(x86)%\NSIS\Unicode\makensis.exe"
 set RAR="%ProgramFiles%\WinRAR\WinRAR.exe"
-set SIGNCMD=signtool.exe sign /n "Next Generation Software" /sha1 "c4ece717747eb7d0cac824f6c7431e5237138b02" /t http://timestamp.verisign.com/scripts/timstamp.dll
+set SIGNCMD=signtool.exe sign /n "Astrospark Technologies, LLC" /sha1 "1cbd910dbd6e77f26506e7f600736972f700673f" /tr http://timestamp.comodoca.com/rfc3161
 
 rem Windows Sysinternals Sigcheck from http://technet.microsoft.com/en-us/sysinternals/bb897441
 set SIGCHECK="%ProgramFiles(x86)%\Sigcheck\sigcheck.exe"
