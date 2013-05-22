@@ -417,6 +417,12 @@ VncSharpNG Versie {0}</value>
   <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Kan opdrachtprompt argumenten niet parsen!</value>
   </data>
+  <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+    <value>{0} heeft de Lenovo Auto Scroll Utility op het systeem ontdekt. Deze utility staat bekend om problemen met {0}. Het wordt aangeraden om het uit te schakelen of te deïnstalleren.</value>
+  </data>
+  <data name="strCompatibilityProblemDetected" xml:space="preserve">
+    <value>Compatibiliteits probleem ontdekt</value>
+  </data>
   <data name="strComponentsCheck" xml:space="preserve">
     <value>Controle Componenten</value>
   </data>
@@ -1541,6 +1547,9 @@ Bericht:
   <data name="strPuttyResizeFailed" xml:space="preserve">
     <value>PuTTy Formaat Wijzigen Mislukt!</value>
   </data>
+  <data name="strPuttySavedSessionsRootName" xml:space="preserve">
+    <value>PuTTY opgeslagen sessies</value>
+  </data>
   <data name="strPuttySettings" xml:space="preserve">
     <value>PuTTY Instellingen</value>
   </data>
@@ -1887,7 +1896,7 @@ Bericht:
     <value>SSH Overdracht (UI.Window.SSHTransfer) mislukt!</value>
   </data>
   <data name="strSSHTransferFailed" xml:space="preserve">
-    <value>Overdracht</value>
+    <value>SSH overdracht heeft gefaald.</value>
   </data>
   <data name="strStartIP" xml:space="preserve">
     <value>Start IP</value>

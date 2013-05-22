@@ -1863,9 +1863,6 @@ VncSharpNG 版本 {0}</value>
   <data name="strSSHTransferEndFailed" xml:space="preserve">
     <value>SSH 传输结束(UI.Window.SSHTransfer）失败！</value>
   </data>
-  <data name="strSSHTransferFailed" xml:space="preserve">
-    <value>传输</value>
-  </data>
   <data name="strStartIP" xml:space="preserve">
     <value>起始IP</value>
   </data>

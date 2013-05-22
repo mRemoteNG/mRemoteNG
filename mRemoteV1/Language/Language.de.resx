@@ -1827,9 +1827,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strSSHTransferEndFailed" xml:space="preserve">
     <value>SSH Abschluss der Übertragung fehlgeschlagen!</value>
   </data>
-  <data name="strSSHTransferFailed" xml:space="preserve">
-    <value>Übertragung fehlgeschlagen!</value>
-  </data>
   <data name="strStartIP" xml:space="preserve">
     <value>Anfangs IP</value>
   </data>

@@ -1856,9 +1856,6 @@ Descrição do erro: {1}</value>
   <data name="strSSHTransferEndFailed" xml:space="preserve">
     <value>SSH transferência final (interface do usuário.Window.SSHTransfer) falhou!</value>
   </data>
-  <data name="strSSHTransferFailed" xml:space="preserve">
-    <value>Transferência</value>
-  </data>
   <data name="strStartIP" xml:space="preserve">
     <value>IP de início</value>
   </data>

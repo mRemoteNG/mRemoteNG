@@ -417,6 +417,12 @@
   <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Невозможно разобрать аргументы командной строки!</value>
   </data>
+  <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+    <value>{0} обнаружено что на этой системе работает утилита Lenovo Auto Scroll. Известно, что эта утилита вызвает проблемы с {0}. Рекомендуется отключить или удалить ее.</value>
+  </data>
+  <data name="strCompatibilityProblemDetected" xml:space="preserve">
+    <value>Обнаружена проблема совместимости</value>
+  </data>
   <data name="strComponentsCheck" xml:space="preserve">
     <value>Проверка компонентов</value>
   </data>
@@ -1547,6 +1553,9 @@
   <data name="strPuttyResizeFailed" xml:space="preserve">
     <value>Ошибка изменения размера окна Putty!</value>
   </data>
+  <data name="strPuttySavedSessionsRootName" xml:space="preserve">
+    <value>Сохраненные сессии PuTTY</value>
+  </data>
   <data name="strPuttySettings" xml:space="preserve">
     <value>Настройки PuTTY</value>
   </data>
@@ -1893,7 +1902,7 @@
     <value>Передача по SSH завершена с ошибкой (UI.Window.SSHTransfer)!</value>
   </data>
   <data name="strSSHTransferFailed" xml:space="preserve">
-    <value>Передача</value>
+    <value>SSH ошибка передачи.</value>
   </data>
   <data name="strStartIP" xml:space="preserve">
     <value>Начальный IP</value>

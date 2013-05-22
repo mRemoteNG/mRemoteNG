@@ -133,7 +133,7 @@
     <value>Nowy folder</value>
   </data>
   <data name="strAddNodeFromXmlFailed" xml:space="preserve">
-    <value>Dodanie węzła z XML nie powiodło się!</value>
+    <value>Wykonanie fukcji AddNodeFromXML nie powiodło się!</value>
   </data>
   <data name="strAddNodesFromSqlFailed" xml:space="preserve">
     <value>Wykonanie fukcji AddNodesFromSQL nie powiodło się!</value>
@@ -146,6 +146,12 @@
   </data>
   <data name="strAlwaysConnectEvenIfAuthFails" xml:space="preserve">
     <value>Łącz zawsze, nawet jeśli uwierzytelnianie się nie powiedzie</value>
+  </data>
+  <data name="strAlwaysShowPanelSelection" xml:space="preserve">
+    <value>Pozwól wybrać panel przed każdym połączeniem</value>
+  </data>
+  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
+    <value>Zawsze pokazuj zakładki paneli</value>
   </data>
   <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>Zawsze pokazuj ikonę w obszarze powiadomień</value>
@@ -272,7 +278,7 @@ Proszę użyć opcji Plik - Wgraj Połączenia aby wgrać zwykłe pliki połącz
     <value>Odświerz</value>
   </data>
   <data name="strCcCheckFailed" xml:space="preserve">
-    <value>Sprawdzanie nie powiodło się!</value>
+    <value>Sprawdzenie nie powiodło się!</value>
   </data>
   <data name="strCcCheckSucceeded" xml:space="preserve">
     <value>Sprawdzenie powiodło się!</value>
@@ -285,8 +291,14 @@ Jeśli nadal nie można sprawdzić lub użyć fukcji Sesji (RDP) skonsultuj to n
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM został znaleziony i wydaje się być poprawnie zarejestrowany.</value>
   </data>
+  <data name="strCcGeckoFailed" xml:space="preserve">
+    <value>Aby użyć Gecko Rendering Engine, musisz mieć XULrunner 1.8.1.x oraz podać ścieżkę instalacji w opcjach. XULrunner 1.8.1.3 możesz pobrać ze ftp: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/ Po zakończeniu pobierania wypakuj pakiet do właściwego katalogu. Następnie w mRemoteNG przejdź do menu Narzędzia - Opcje - Zaawansowane i wprowadź poprawną ścieżkę w polu Ścieżka XULrunner. Jeśli to nadal nie pomogło prosimy o kontakt na mRemoteNG Forum na stronie http://forum.mremoteng.org/</value>
+  </data>
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>XULrunner został znaleziony i wydaje się być zainstalowany prawidłowo.</value>
+  </data>
+  <data name="strCcICAFailed" xml:space="preserve">
+    <value>ICA wymaga zainstalowania wtyczki Online XenDesktop, i aby była zarejestrowana biblioteka wfica.ocx. Możesz pobrać klienta tutaj: http://www.citrix.com/download/ Jeżeli masz zainstalowany Plugin Online XenDesktop a nadal nie działa, spróbuj ręcznie zarejestrować bibliotekę wfica.ocx. Aby to zrobić wybierz polecenie Uruchom (Start - Uruchom) i wprowadź w linii komend: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (gdzie c:\Program Files\Citrix\ICA Client\ jest ścieżką instalacji XenDesktop Online Plugin). Jeśli nadal nie można użyć ICA w mRemoteNG prosimy o kontakt mRemoteNG Forum na http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
     <value>Wszystkie składniki ICA zostały znalezione i wydają się być poprawnie zarejestrowane. 
@@ -302,16 +314,20 @@ Proszę upewnić się, że albo masz Putty.exe w katalogu mRemoteNG (domyślnie:
   <data name="strCcPuttyOK" xml:space="preserve">
     <value>Aplikacja PuTTY została odnaleziona i powinna być gotowa do użytku.</value>
   </data>
+  <data name="strCcRDPFailed" xml:space="preserve">
+    <value>Aby połączenia RDP działały poprawnie trzeba mieć zainstalowane Podłączanie Pulpitu Zdalnego (Klient Usług Terminalowych) w wersji 6.1. Można go pobrać ze strony: http://support.microsoft.com/kb/951616. Jeśli RDP 6.1 jest już zainstalowany i nadal nie działają połączenia RDP, spróbuj ręcznie zarejestrować plik mstscax.dll. Aby zarejestrować plik wybierz Uruchom (Start - Uruchom) i wprowadź w linii polecń: regsvr32 "c:\windows\system32\mstscax.dll" (gdzie c:\ jest dyskiem systemowym). Jeśli nadal masz problemy z połączeniem RDP skonsultuj się z mRemoteNG Forum na http://forum.mremoteng.org/</value>
+  </data>
   <data name="strCcRDPOK" xml:space="preserve">
-    <value>Wszystkie składniki RDP zostały znalezione i wydają się być poprawnie zarejestrowane. 
-Podłączanie pulpitu zdalnego sterowania wersja {0}</value>
+    <value>Wszystkie składniki RDP zostały znalezione i wydają się być poprawnie zarejestrowane. Wersja Podłączanie Pulpitu Zdalnego {0}</value>
+  </data>
+  <data name="strCcVNCFailed" xml:space="preserve">
+    <value>VNC wymaga, aby biblioteka VncSharpNG.dll znajdowała się w folderze instalacji mRemoteNG. Upewnij się, że masz plik VncSharpNG.dll w folderze aplikacji mRemoteNG (domyślnie C:\Program Files\mRemoteNG\). Jeśli nadal nie można użyć VNC w mRemoteNG prosimy o kontakt mRemoteNG Forum na http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
-    <value>Wszystkie składniki VNC zostały znalezione i wydają się być poprawnie zarejestrowane. 
-VncSharpNG wersja {0}</value>
+    <value>Wszystkie składniki VNC zostały znalezione i wydają się być poprawnie zarejestrowane. Wersja VncSharpNG {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Automatycznie Spróbuj ponownie, gdy odłączony od serwera (tylko RDP &amp;&amp; ICA)</value>
+    <value>Automatycznie połącz ponownie jeśli nastąpi odłączenie od serwera (tylko RDP &amp;&amp; ICA)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Domena</value>
@@ -347,7 +363,7 @@ VncSharpNG wersja {0}</value>
     <value>Sprawdź ponownie</value>
   </data>
   <data name="strCheckForUpdatesOnStartup" xml:space="preserve">
-    <value>Sprawdź aktualizacje i ogłoszenia podczas startu</value>
+    <value>Sprawdź aktualizacje i powiadomienia podczas startu</value>
   </data>
   <data name="strCheckNow" xml:space="preserve">
     <value>Sprawdź teraz</value>
@@ -386,19 +402,31 @@ VncSharpNG wersja {0}</value>
     <value>Czekaj na wyjście</value>
   </data>
   <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
-    <value>Nie można zanalizować argumentów wejściowych!</value>
+    <value>Nie można przeanalizować argumentów wejściowych!</value>
+  </data>
+  <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+    <value>{0} wykrył, że w systemie działa Lenovo Auto Scroll Utility. To narzędzie jest znane jako przyczyna problemów z {0}. Zaleca się, wyłączyć lub odinstalować ten program.</value>
+  </data>
+  <data name="strCompatibilityProblemDetected" xml:space="preserve">
+    <value>Wykryto problem z kompatybilnością</value>
   </data>
   <data name="strComponentsCheck" xml:space="preserve">
     <value>Sprawdzenie komponentów</value>
   </data>
   <data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
-    <value>btnIcon_Click nie powiodło się!</value>
+    <value>Wykonanie btnIcon_Click nie powiodło się!</value>
   </data>
   <data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
-    <value>ShowHideGridItems nie powiodło się!</value>
+    <value>Wykonanie ShowHideGridItems nie powiodło się!</value>
   </data>
   <data name="strConfigPropertyGridMenuClickFailed" xml:space="preserve">
-    <value>IconMenu_Click nie powiodło się!</value>
+    <value>Wykonanie IconMenu_Click nie powiodło się!</value>
+  </data>
+  <data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
+    <value>Wykonanie SetHostStatus nie powiodło się!</value>
+  </data>
+  <data name="strConfigPropertyGridValueFailed" xml:space="preserve">
+    <value>Wykonanie pGrid_PopertyValueChanged nie powiodło się!</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
     <value>Czy chcesz zamknąć połączenie, "{0}"?</value>
@@ -493,8 +521,14 @@ Załadowano nowy plik połączeń.</value>
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Nie można utworzyć nowego pliku połączeń!</value>
   </data>
+  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+    <value>Nie można odnaleźć ToolStrip w FilteredPropertyGrid.</value>
+  </data>
   <data name="strCurrentVersion" xml:space="preserve">
     <value>Zainstalowana wersja</value>
+  </data>
+  <data name="strDefaultTheme" xml:space="preserve">
+    <value>Domyślny motyw</value>
   </data>
   <data name="strDetect" xml:space="preserve">
     <value>Wykryj</value>
@@ -521,7 +555,7 @@ Załadowano nowy plik połączeń.</value>
     <value>128-bit</value>
   </data>
   <data name="strEnc128BitLogonOnly" xml:space="preserve">
-    <value>128-bit (logowanie tylko)</value>
+    <value>128-bit (tylko logowanie)</value>
   </data>
   <data name="strEncBasic" xml:space="preserve">
     <value>Podstawowe</value>
@@ -535,8 +569,17 @@ Załadowano nowy plik połączeń.</value>
   <data name="strEndPort" xml:space="preserve">
     <value>Port końcowy</value>
   </data>
+  <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
+    <value>Wykonanie AddExternalToolsToToolBar (frmMain) nie powiodło się. {0}</value>
+  </data>
+  <data name="strErrorAddFolderFailed" xml:space="preserve">
+    <value>Wykonanie AddFolder (UI.Window.Tree) nie powiodło się. {0}</value>
+  </data>
   <data name="strErrorBadDatabaseVersion" xml:space="preserve">
     <value>Wersja bazy danych {0} nie jest zgodna z wersją {1}.</value>
+  </data>
+  <data name="strErrorCloneNodeFailed" xml:space="preserve">
+    <value>Wykonanie CloneNode (Tree.Node) nie powiodło się. {0}</value>
   </data>
   <data name="strErrorCode" xml:space="preserve">
     <value>Kod błędu {0}.</value>
@@ -548,13 +591,16 @@ Załadowano nowy plik połączeń.</value>
     <value>Odszyfrowywanie nie powiodło się. {0}</value>
   </data>
   <data name="strErrorEncryptionFailed" xml:space="preserve">
-    <value>Odszyfrowywanie nie powiodło się. {0}</value>
+    <value>Szyfrowywanie nie powiodło się. {0}</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>Błędy</value>
   </data>
+  <data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
+    <value>Nie można załadować pliku startowego połączenia.{0}{0}{2}{0}{3}{0}{0}Aby zapobiec utracie danych, {1} zakończy teraz działanie.</value>
+  </data>
   <data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
-    <value>VerifyDatabaseVersion (Config.Connections.Save) nie powiodło się. {0}</value>
+    <value>Wykonanie VerifyDatabaseVersion (Config.Connections.Save) nie powiodło się. {0}</value>
   </data>
   <data name="strExpandAllFolders" xml:space="preserve">
     <value>Rozwiń wszystkie foldery</value>
@@ -569,7 +615,7 @@ Załadowano nowy plik połączeń.</value>
     <value>Eksport mRemote/mRemoteNG XML</value>
   </data>
   <data name="strExtApp" xml:space="preserve">
-    <value>Aplikacja wew.</value>
+    <value>Aplikacja zewnętrzna</value>
   </data>
   <data name="strFAMFAMFAMAttribution" xml:space="preserve">
     <value>Zawiera ikony ze strony [FAMFAMFAM]</value>
@@ -605,7 +651,7 @@ Załadowano nowy plik połączeń.</value>
     <value>Ogólne</value>
   </data>
   <data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
-    <value>Uzyskanie informacji na temat połączenia z SQL nie powiodło się</value>
+    <value>Pobranie danych połączenia z SQL nie powiodło się</value>
   </data>
   <data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
     <value>Wystąpił błąd podczas ładowania wpisu połączenia dla "{0}" z "{1}". {2}</value>
@@ -631,14 +677,20 @@ Załadowano nowy plik połączeń.</value>
   <data name="strHttpConnectionFailed" xml:space="preserve">
     <value>Nie można utworzyć nowego połączenia HTTP!</value>
   </data>
+  <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
+    <value>Zmiana tytułu dokumentu HTTP nie powiodła się!</value>
+  </data>
+  <data name="strHttpSetPropsFailed" xml:space="preserve">
+    <value>Konfiguracja ustawień HTTP nie powiodła się!</value>
+  </data>
   <data name="strIcaConnectionFailed" xml:space="preserve">
     <value>Nie można utworzyć nowego połączenia ICA!</value>
   </data>
   <data name="strIcaControlFailed" xml:space="preserve">
-    <value>Ładowanie pluginu ICA nie powiodło się!</value>
+    <value>Ładowanie wtyczki ICA nie powiodło się!</value>
   </data>
   <data name="strIcaSetCredentialsFailed" xml:space="preserve">
-    <value>ICA SetCredentials nie powiodło się!</value>
+    <value>Wykonanie ICA SetCredentials nie powiodło się!</value>
   </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Importów z Active Directory</value>
@@ -682,6 +734,9 @@ Załadowano nowy plik połączeń.</value>
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>Historia wersji:</value>
   </data>
+  <data name="strLabelClosingConnections" xml:space="preserve">
+    <value>Przy zamykaniu połączeń:</value>
+  </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Połącz</value>
   </data>
@@ -721,6 +776,9 @@ Załadowano nowy plik połączeń.</value>
   <data name="strLabelSeconds" xml:space="preserve">
     <value>sekund</value>
   </data>
+  <data name="strLabelSelectPanel" xml:space="preserve">
+    <value>Wybierz panel z poniższej listy lub kliknij przycisk Nowy, aby dodać nowy. Aby kontynuować, kliknij przycisk OK.</value>
+  </data>
   <data name="strLabelServerStatus" xml:space="preserve">
     <value>Status serwera:</value>
   </data>
@@ -741,6 +799,9 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="strLanguageDefault" xml:space="preserve">
     <value>(Wykryj automatycznie)</value>
+  </data>
+  <data name="strLanguageRestartRequired" xml:space="preserve">
+    <value>{0} musi być ponownie uruchomiony aby zmiany języka zaczęły obowiązywać.</value>
   </data>
   <data name="strLoadFromSqlFailed" xml:space="preserve">
     <value>Import z SQL nie powiódł się!</value>
@@ -860,16 +921,25 @@ Załadowano nowy plik połączeń.</value>
     <value>Idz do</value>
   </data>
   <data name="strMenuLaunchExternalTool" xml:space="preserve">
-    <value>Uruchom zewnętrzne narzędzie</value>
+    <value>Uruchom narzędzie zewnętrzne</value>
   </data>
   <data name="strMenuNewConnectionFile" xml:space="preserve">
-    <value>Nowy plik połączenia</value>
+    <value>Nowy plik połączeń</value>
   </data>
   <data name="strMenuNewExternalTool" xml:space="preserve">
-    <value>Nowe zewnętrzne zewnętrzne</value>
+    <value>Nowe narzędzie zewnętrzne</value>
   </data>
   <data name="strMenuNotifications" xml:space="preserve">
     <value>Powiadomienia</value>
+  </data>
+  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
+    <value>Kopiuj wszystko</value>
+  </data>
+  <data name="strMenuNotificationsDelete" xml:space="preserve">
+    <value>Usuń</value>
+  </data>
+  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+    <value>Usuń wszystko</value>
   </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
     <value>Otwórz plik połączenia...</value>
@@ -905,7 +975,7 @@ Załadowano nowy plik połączeń.</value>
     <value>Zmień nazwę zakładki</value>
   </data>
   <data name="strMenuReportBug" xml:space="preserve">
-    <value>Zaraportuj błąd</value>
+    <value>Zgłoś błąd</value>
   </data>
   <data name="strMenuSaveConnectionFile" xml:space="preserve">
     <value>Zapisz plik połączeń</value>
@@ -920,7 +990,7 @@ Załadowano nowy plik połączeń.</value>
     <value>Menager zrzutów ekranów</value>
   </data>
   <data name="strMenuSendSpecialKeys" xml:space="preserve">
-    <value>Wyślij specjalne klawisze (VNC)</value>
+    <value>Wyślij klawisze specjalne (VNC)</value>
   </data>
   <data name="strMenuSessions" xml:space="preserve">
     <value>Sesje</value>
@@ -928,8 +998,14 @@ Załadowano nowy plik połączeń.</value>
   <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
     <value>Sesje i zrzuty ekranów</value>
   </data>
+  <data name="strMenuShowHelpText" xml:space="preserve">
+    <value>&amp;Pokaż tekst pomocy</value>
+  </data>
   <data name="strMenuShowText" xml:space="preserve">
     <value>Pokarz tekst</value>
+  </data>
+  <data name="strMenuSmartSize" xml:space="preserve">
+    <value>Dopasuj (RDP/VNC)</value>
   </data>
   <data name="strMenuSSHFileTransfer" xml:space="preserve">
     <value>Transfer plików poprzez SSH</value>
@@ -949,8 +1025,14 @@ Załadowano nowy plik połączeń.</value>
   <data name="strMenuView" xml:space="preserve">
     <value>&amp;Widok</value>
   </data>
+  <data name="strMenuViewOnly" xml:space="preserve">
+    <value>Tylko pogląd (VNC)</value>
+  </data>
   <data name="strMenuWebsite" xml:space="preserve">
     <value>Strona WWW</value>
+  </data>
+  <data name="strMinimizeToSysTray" xml:space="preserve">
+    <value>Minimalizuj do obszaru powiadomień</value>
   </data>
   <data name="strMoveDown" xml:space="preserve">
     <value>Idź w dół</value>
@@ -982,6 +1064,9 @@ Załadowano nowy plik połączeń.</value>
   <data name="strNoCompression" xml:space="preserve">
     <value>Bez kompresji</value>
   </data>
+  <data name="strNoExtAppDefined" xml:space="preserve">
+    <value>Nie wskazano zewnętrznej aplikacji.</value>
+  </data>
   <data name="strNoInformation" xml:space="preserve">
     <value>Żaden</value>
   </data>
@@ -989,13 +1074,31 @@ Załadowano nowy plik połączeń.</value>
     <value>Żaden</value>
   </data>
   <data name="strNormal" xml:space="preserve">
-    <value>W normie</value>
+    <value>Normalny</value>
+  </data>
+  <data name="strNoSmartSize" xml:space="preserve">
+    <value>Wyłącz dopasowanie</value>
   </data>
   <data name="strNoUpdateAvailable" xml:space="preserve">
     <value>Brak aktualizacji</value>
   </data>
+  <data name="strOldConffile" xml:space="preserve">
+    <value>Próbujesz załadować plik połączenia, który utworzono przy użyciu bardzo wczesnej wersji mRemote - to może spowodować poważne błędy działania programu. Jeśli napotkasz na taki błąd, należy utworzyć nowy plik połączenia!</value>
+  </data>
+  <data name="strOpenNewTabRight" xml:space="preserve">
+    <value>Otwórz nową zakładkę na prawo od aktualnie zaznaczonej</value>
+  </data>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Porty otwarte</value>
+  </data>
+  <data name="strOptionsTabTheme" xml:space="preserve">
+    <value>Motyw</value>
+  </data>
+  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
+    <value>&amp;Usuń</value>
+  </data>
+  <data name="strOptionsThemeButtonNew" xml:space="preserve">
+    <value>&amp;Nowy</value>
   </data>
   <data name="strPanelName" xml:space="preserve">
     <value>Nazwa panelu</value>
@@ -1006,11 +1109,80 @@ Załadowano nowy plik połączeń.</value>
   <data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Nie można załadować panelu skanowania portów!</value>
   </data>
+  <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
+    <value>(Te właściwości zostaną zapisane tylko gdy wybierzesz wyjściowy format pliku jako mRemote/mRemoteNG XML!)</value>
+  </data>
+  <data name="strPropertyDescriptionAddress" xml:space="preserve">
+    <value>Wpisz nazwę hosta lub IP, do którego chcesz się połączyć.</value>
+  </data>
+  <data name="strPropertyDescriptionAuthenticationMode" xml:space="preserve">
+    <value>Wybierz sposób uwierzytelnienia serwera VNC.</value>
+  </data>
+  <data name="strPropertyDescriptionCacheBitmaps" xml:space="preserve">
+    <value>Wybierz czy bitmapy mają być przechowywane w pamięci podręcznej czy nie.</value>
+  </data>
+  <data name="strPropertyDescriptionColors" xml:space="preserve">
+    <value>Wybierz jaką jakość kolorów używać.</value>
+  </data>
+  <data name="strPropertyDescriptionCompression" xml:space="preserve">
+    <value>Wybierz jaką wartość kompresji użyć.</value>
+  </data>
+  <data name="strPropertyDescriptionDisplayThemes" xml:space="preserve">
+    <value>Wybierz "Tak" jeśli motyw ma być wyświetlany na zdalnym komputerze.</value>
+  </data>
   <data name="strPropertyDescriptionDomain" xml:space="preserve">
     <value>Podaj domenę.</value>
   </data>
+  <data name="strPropertyDescriptionPassword" xml:space="preserve">
+    <value>Wpisz swoje hasło.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectDrives" xml:space="preserve">
+    <value>Wybierz, czy lokalne dyski powinny być dostępne na zdalnym hoście.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectKeys" xml:space="preserve">
+    <value>Wybierz, czy kombinacje klawiszy (np. Alt-Tab) powinny być przekierowane do komputera zdalnego.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectSmartCards" xml:space="preserve">
+    <value>Wybierz, czy lokalne karty inteligentne powinny być dostępne na zdalnym hoście.</value>
+  </data>
+  <data name="strPropertyDescriptionRedirectSounds" xml:space="preserve">
+    <value>Wybierz jak dźwięk z zdalnego komputera powinien być przekierowany.</value>
+  </data>
+  <data name="strPropertyDescriptionRenderingEngine" xml:space="preserve">
+    <value>Wybierz jeden z silników renderowania, który będzie używany do wyświetlania stron HTML.</value>
+  </data>
+  <data name="strPropertyDescriptionResolution" xml:space="preserve">
+    <value>Wybierz rozdzielczość lub tryb, w którym otworzy się połączenie.</value>
+  </data>
+  <data name="strPropertyDescriptionSmartSizeMode" xml:space="preserve">
+    <value>Wybierz typ dopasowania jaki ma być użyty.</value>
+  </data>
+  <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
+    <value>Połącz z sesją konsoli hosta zdalnego.</value>
+  </data>
+  <data name="strPropertyDescriptionUser1" xml:space="preserve">
+    <value>Tu możesz wpisać wszelkie informacje jakich potrzebujesz.</value>
+  </data>
   <data name="strPropertyDescriptionUsername" xml:space="preserve">
     <value>Nazwa użytkownika.</value>
+  </data>
+  <data name="strPropertyDescriptionViewOnly" xml:space="preserve">
+    <value>Jeśli chcesz nawiązać połączenie tylko do podglądu, wybierz Tak.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyAddress" xml:space="preserve">
+    <value>Wprowadź jaki adres serwera proxy będzie używany.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyPassword" xml:space="preserve">
+    <value>Wprowadź hasło uwierzytelniania poprzez proxy.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyPort" xml:space="preserve">
+    <value>Wpisz numer portu na którym nasłuchuje proxy.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyType" xml:space="preserve">
+    <value>Jeśli do połączenia z VNC korzystasz z serwera proxy, wybierz typ typ tunerowania.</value>
+  </data>
+  <data name="strPropertyDescriptionVNCProxyUsername" xml:space="preserve">
+    <value>Wprowadź nazwę użytkownika dla uwierzytelniania poprzez proxy.</value>
   </data>
   <data name="strPropertyNameAddress" xml:space="preserve">
     <value>Nazwa hosta/IP</value>
@@ -1023,6 +1195,9 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="strPropertyNameAuthenticationMode" xml:space="preserve">
     <value>Tryb autentykacji</value>
+  </data>
+  <data name="strPropertyNameCacheBitmaps" xml:space="preserve">
+    <value>Przechowuj bitmapy w pamięci podręcznej</value>
   </data>
   <data name="strPropertyNameColors" xml:space="preserve">
     <value>Kolory</value>
@@ -1042,6 +1217,9 @@ Załadowano nowy plik połączeń.</value>
   <data name="strPropertyNameDomain" xml:space="preserve">
     <value>Domena</value>
   </data>
+  <data name="strPropertyNameEnableDesktopComposition" xml:space="preserve">
+    <value>Kompozycja pulpitu</value>
+  </data>
   <data name="strPropertyNameEnableFontSmoothing" xml:space="preserve">
     <value>Wygładzenie czcionki</value>
   </data>
@@ -1053,6 +1231,12 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="strPropertyNameExternalTool" xml:space="preserve">
     <value>Zewnętrzne narzędzie</value>
+  </data>
+  <data name="strPropertyNameExternalToolAfter" xml:space="preserve">
+    <value>Zewnętrzne narzędzie po</value>
+  </data>
+  <data name="strPropertyNameExternalToolBefore" xml:space="preserve">
+    <value>Zewnętrzne narzędzie przed</value>
   </data>
   <data name="strPropertyNameIcon" xml:space="preserve">
     <value>Ikona</value>
@@ -1078,8 +1262,20 @@ Załadowano nowy plik połączeń.</value>
   <data name="strPropertyNamePuttySession" xml:space="preserve">
     <value>Sesja PuTTY</value>
   </data>
+  <data name="strPropertyNameRDGatewayDomain" xml:space="preserve">
+    <value>Domena bramy</value>
+  </data>
+  <data name="strPropertyNameRDGatewayHostname" xml:space="preserve">
+    <value>Nazwa hosta bramy</value>
+  </data>
+  <data name="strPropertyNameRDGatewayPassword" xml:space="preserve">
+    <value>Hasło bramy zdalnego pulpitu</value>
+  </data>
   <data name="strPropertyNameRDGatewayUsageMethod" xml:space="preserve">
     <value>Użyj bramy</value>
+  </data>
+  <data name="strPropertyNameRDGatewayUseConnectionCredentials" xml:space="preserve">
+    <value>Poświadczenia bramy</value>
   </data>
   <data name="strPropertyNameRDGatewayUsername" xml:space="preserve">
     <value>Użytkownik bramy</value>
@@ -1087,20 +1283,35 @@ Załadowano nowy plik połączeń.</value>
   <data name="strPropertyNameRedirectDrives" xml:space="preserve">
     <value>Dyski</value>
   </data>
+  <data name="strPropertyNameRedirectKeys" xml:space="preserve">
+    <value>Kombinacja klawiszy</value>
+  </data>
   <data name="strPropertyNameRedirectPorts" xml:space="preserve">
     <value>Porty</value>
   </data>
   <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
     <value>Drukarki</value>
   </data>
+  <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
+    <value>Karty inteligentne</value>
+  </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
     <value>Dźwięki</value>
+  </data>
+  <data name="strPropertyNameRenderingEngine" xml:space="preserve">
+    <value>Silnik renderujący</value>
   </data>
   <data name="strPropertyNameResolution" xml:space="preserve">
     <value>Rozdzielczość</value>
   </data>
+  <data name="strPropertyNameSmartSizeMode" xml:space="preserve">
+    <value>Tryb dopasowania</value>
+  </data>
   <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>Użyj konsoli sesji</value>
+  </data>
+  <data name="strPropertyNameUseCredSsp" xml:space="preserve">
+    <value>Użyj CredSSP</value>
   </data>
   <data name="strPropertyNameUser1" xml:space="preserve">
     <value>Pole użytkownika</value>
@@ -1126,6 +1337,9 @@ Załadowano nowy plik połączeń.</value>
   <data name="strPropertyNameVNCProxyUsername" xml:space="preserve">
     <value>Użytkownik proxy</value>
   </data>
+  <data name="strProtocolToImport" xml:space="preserve">
+    <value>Protokół do zaimportowania</value>
+  </data>
   <data name="strProxyTestFailed" xml:space="preserve">
     <value>Test proxy nie powiódł się!</value>
   </data>
@@ -1135,11 +1349,35 @@ Załadowano nowy plik połączeń.</value>
   <data name="strPuttyConnectionFailed" xml:space="preserve">
     <value>Nieudane połączenie!</value>
   </data>
+  <data name="strPuttyFocusFailed" xml:space="preserve">
+    <value>Nie można ustawić ostrości!</value>
+  </data>
+  <data name="strPuttyGetSessionsFailed" xml:space="preserve">
+    <value>Nie uzyskano sesji Putty!</value>
+  </data>
+  <data name="strPuttyKillFailed" xml:space="preserve">
+    <value>Zamknięcie procesu Putty nie powiodło się!</value>
+  </data>
+  <data name="strPuttyResizeFailed" xml:space="preserve">
+    <value>Zmiana rozmiaru Putty nie powiodła się!</value>
+  </data>
   <data name="strPuttySettings" xml:space="preserve">
     <value>Ustawienia PuTTY</value>
   </data>
+  <data name="strPuttyStartFailed" xml:space="preserve">
+    <value>Nie udało się uruchomić Putty!</value>
+  </data>
   <data name="strQuickConnect" xml:space="preserve">
     <value>Szybkie połączenie</value>
+  </data>
+  <data name="strRadioCloseWarnAll" xml:space="preserve">
+    <value>&amp;Ostrzegaj przed zamknięciem połączenia</value>
+  </data>
+  <data name="strRAW" xml:space="preserve">
+    <value>RAW</value>
+  </data>
+  <data name="strRDP" xml:space="preserve">
+    <value>RDP</value>
   </data>
   <data name="strRDP16777216Colors" xml:space="preserve">
     <value>16777216 Kolorów (24-bir)</value>
@@ -1156,6 +1394,21 @@ Załadowano nowy plik połączeń.</value>
   <data name="strRDP65536Colors" xml:space="preserve">
     <value>65536 Kolorów (16-bit)</value>
   </data>
+  <data name="strRdpAddResolutionFailed" xml:space="preserve">
+    <value>Nie dodano rozdzielczości RDP!</value>
+  </data>
+  <data name="strRdpAddResolutionsFailed" xml:space="preserve">
+    <value>Nie dodano rozdzielczości RDP!</value>
+  </data>
+  <data name="strRdpAddSessionFailed" xml:space="preserve">
+    <value>Nie dodano sesji</value>
+  </data>
+  <data name="strRdpCloseConnectionFailed" xml:space="preserve">
+    <value>Nie udało się zamknąć połączenia RDP!</value>
+  </data>
+  <data name="strRdpConnectionOpenFailed" xml:space="preserve">
+    <value>Nie udało się nawiązać połączenia!</value>
+  </data>
   <data name="strRDPDisableCursorblinking" xml:space="preserve">
     <value>Wyłącz miganie kursora</value>
   </data>
@@ -1171,17 +1424,98 @@ Załadowano nowy plik połączeń.</value>
   <data name="strRDPDisableWallpaper" xml:space="preserve">
     <value>Wyłącz tapetę</value>
   </data>
+  <data name="strRdpDisconnected" xml:space="preserve">
+    <value>Rozłączono RDP!</value>
+  </data>
+  <data name="strRdpDisconnectFailed" xml:space="preserve">
+    <value>Nie udało sie rozłączyć RDP, spróbuj zamknąć!</value>
+  </data>
   <data name="strRdpErrorCode1" xml:space="preserve">
     <value>Wewnętrzny kod błędu 1.</value>
   </data>
   <data name="strRdpErrorCode2" xml:space="preserve">
     <value>Wewnętrzny kod błędu 2.</value>
   </data>
+  <data name="strRdpErrorCode3" xml:space="preserve">
+    <value>Błąd wewnętrzny: kod 3. To nie tak miało być...</value>
+  </data>
   <data name="strRdpErrorCode4" xml:space="preserve">
     <value>Wewnętrzny kod błędu 4.</value>
   </data>
+  <data name="strRdpErrorGetFailure" xml:space="preserve">
+    <value>Błąd pobrania kodu błędu (FatalErrors)</value>
+  </data>
+  <data name="strRdpErrorWinsock" xml:space="preserve">
+    <value>Inicjalizacja Winsock nie powiodła się.</value>
+  </data>
+  <data name="strRdpFileCouldNotBeImported" xml:space="preserve">
+    <value>Nie można zaimportować pliku rdp!</value>
+  </data>
+  <data name="strRDPFitToPanel" xml:space="preserve">
+    <value>Dostosuj do panelu</value>
+  </data>
+  <data name="strRdpGatewayIsSupported" xml:space="preserve">
+    <value>Brama zdalnego pulpitu jest wspierana.</value>
+  </data>
+  <data name="strRdpGatewayNotSupported" xml:space="preserve">
+    <value>Brama zdalnego pulpitu nie jest wspierana!</value>
+  </data>
+  <data name="strRdpGetSessionsFailed" xml:space="preserve">
+    <value>Wykonanie GetSessions nie powiodło się!</value>
+  </data>
+  <data name="strRdpOpenConnectionFailed" xml:space="preserve">
+    <value>Nawiązanie połączenia RDP nie powiodło się!</value>
+  </data>
+  <data name="strRdpReconnectCount" xml:space="preserve">
+    <value>Liczba ponownych połączeń RDP:</value>
+  </data>
+  <data name="strRdpSetAuthenticationLevelFailed" xml:space="preserve">
+    <value>Wykonanie RDP SetAuthenticationLevel nie powiodło się!</value>
+  </data>
+  <data name="strRdpSetConsoleSessionFailed" xml:space="preserve">
+    <value>Wykonanie RDP SetUseConsoleSession nie powiodło się!</value>
+  </data>
+  <data name="strRdpSetCredentialsFailed" xml:space="preserve">
+    <value>Wykonanie RDP SetCredentials nie powiodło się!</value>
+  </data>
+  <data name="strRdpSetEventHandlersFailed" xml:space="preserve">
+    <value>Wykonanie RDP SetEventHandlers nie powiodło się!</value>
+  </data>
+  <data name="strRdpSetGatewayFailed" xml:space="preserve">
+    <value>Wykonanie RDP SetRDGateway nie powiodło się!</value>
+  </data>
+  <data name="strRdpSetPerformanceFlagsFailed" xml:space="preserve">
+    <value>Wykonanie RDP SetPerformanceFlags nie powiodło się!</value>
+  </data>
+  <data name="strRdpSetPortFailed" xml:space="preserve">
+    <value>Wykonanie RDP SetPort nie powiodło się!</value>
+  </data>
+  <data name="strRdpSetPropsFailed" xml:space="preserve">
+    <value>Wykonanie RDP SetProps nie powiodło się!</value>
+  </data>
+  <data name="strRdpSetResolutionFailed" xml:space="preserve">
+    <value>Wykonanie RDP SetResolution nie powiodło się!</value>
+  </data>
   <data name="strRDPSmartSize" xml:space="preserve">
-    <value>Mądry rozmiar</value>
+    <value>Dopasuj rozmiar</value>
+  </data>
+  <data name="strRDPSoundBringToThisComputer" xml:space="preserve">
+    <value>Przenieś na ten komputer</value>
+  </data>
+  <data name="strRDPSoundDoNotPlay" xml:space="preserve">
+    <value>Nie odtwarzaj</value>
+  </data>
+  <data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
+    <value>Zostaw na komputerze zdalnym</value>
+  </data>
+  <data name="strRdpToggleFullscreenFailed" xml:space="preserve">
+    <value>Wykonanie RDP ToggleFullscreen nie powiodło się!</value>
+  </data>
+  <data name="strRdpToggleSmartSizeFailed" xml:space="preserve">
+    <value>Wykonanie RDP ToggleSmartSize nie powiodło się!</value>
+  </data>
+  <data name="strReconnectAtStartup" xml:space="preserve">
+    <value>Przy otwarciu programu podłącz ostatnio otwarte połączenia</value>
   </data>
   <data name="strRefresh" xml:space="preserve">
     <value>Odświerz</value>
@@ -1195,11 +1529,26 @@ Załadowano nowy plik połączeń.</value>
   <data name="strRename" xml:space="preserve">
     <value>Zmień nazwę</value>
   </data>
+  <data name="strRlogin" xml:space="preserve">
+    <value>Rlogin</value>
+  </data>
   <data name="strSave" xml:space="preserve">
     <value>Zapisz</value>
   </data>
   <data name="strSaveAll" xml:space="preserve">
     <value>Zapisz wszystkie</value>
+  </data>
+  <data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
+    <value>Czy chcesz zapisać bieżący plik połączeń przed załadowaniem kolejnego?</value>
+  </data>
+  <data name="strSaveConsOnExit" xml:space="preserve">
+    <value>Zapisz połączenia przy wyjściu</value>
+  </data>
+  <data name="strSaveImageFilter" xml:space="preserve">
+    <value>GIF(.gif)|*.gif|JPEG(.jpeg)|*.jpeg|JPEG(.jpg)|*.jpg|PNG(.png)|*.png</value>
+  </data>
+  <data name="strScreen" xml:space="preserve">
+    <value>Ekran</value>
   </data>
   <data name="strScreenshot" xml:space="preserve">
     <value>Zrzut ekranu</value>
@@ -1207,8 +1556,50 @@ Załadowano nowy plik połączeń.</value>
   <data name="strScreenshots" xml:space="preserve">
     <value>Zrzuty ekranów</value>
   </data>
+  <data name="strSearchPrompt" xml:space="preserve">
+    <value>Szukaj</value>
+  </data>
   <data name="strSendTo" xml:space="preserve">
     <value>Wyślij do...</value>
+  </data>
+  <data name="strSessionGetFailed" xml:space="preserve">
+    <value>Wyświetlenie tła sesji nie powiodło się</value>
+  </data>
+  <data name="strSessionKillFailed" xml:space="preserve">
+    <value>Usunięcie tła sesji nie powiodło się</value>
+  </data>
+  <data name="strSetHostnameLikeDisplayName" xml:space="preserve">
+    <value>Ustaw nawę hosta taką samą jak wyświetlaną nazwę gdy tworzysz lub zmieniasz nazwę połączeń</value>
+  </data>
+  <data name="strShowDescriptionTooltips" xml:space="preserve">
+    <value>Pokaż opisy podpowiedzi w drzewie połączenia</value>
+  </data>
+  <data name="strShowFullConsFilePath" xml:space="preserve">
+    <value>Pokaż pełną ścieżkę pliku połączenia w tytule okna</value>
+  </data>
+  <data name="strShowLogonInfoOnTabs" xml:space="preserve">
+    <value>Pokaż informacje logowania na zakładce nazwy</value>
+  </data>
+  <data name="strShowProtocolOnTabs" xml:space="preserve">
+    <value>Pokaż nazwy protokołów na zakładkach</value>
+  </data>
+  <data name="strSingleClickOnConnectionOpensIt" xml:space="preserve">
+    <value>Pojedyncze kliknięcie na połączeniu otwiera je</value>
+  </data>
+  <data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
+    <value>Pojedyncze klikniknięcie na otwarym połączeniu przełącza na nie</value>
+  </data>
+  <data name="strSmartSizeModeAspect" xml:space="preserve">
+    <value>Propocjonalnie</value>
+  </data>
+  <data name="strSmartSizeModeFree" xml:space="preserve">
+    <value>Dowolnie</value>
+  </data>
+  <data name="strSmartSizeModeNone" xml:space="preserve">
+    <value>Wyłącz dopasowanie ekranu</value>
+  </data>
+  <data name="strSocks5" xml:space="preserve">
+    <value>Socks 5</value>
   </data>
   <data name="strSort" xml:space="preserve">
     <value>Sortuj</value>
@@ -1222,8 +1613,14 @@ Załadowano nowy plik połączeń.</value>
   <data name="strSpecialKeys" xml:space="preserve">
     <value>Znaki specjalne</value>
   </data>
+  <data name="strSQLInfo" xml:space="preserve">
+    <value>Aby więcej się dowiedzieć sprawdź w systemie pomocy: Rozpocznij Pracę - Konfiguracja SQL.</value>
+  </data>
   <data name="strSQLServer" xml:space="preserve">
     <value>Serwer SQL:</value>
+  </data>
+  <data name="strSqlUpdateCheckUpdateAvailable" xml:space="preserve">
+    <value>Sprawdzenie aktualizacji SQL zakończone - jest dostępna nowa aktualizacja. Zamierzam odświeżyć połączenia.</value>
   </data>
   <data name="strSsh1" xml:space="preserve">
     <value>SSH wersja 1</value>
@@ -1231,11 +1628,26 @@ Załadowano nowy plik połączeń.</value>
   <data name="strSsh2" xml:space="preserve">
     <value>SSH wersja 2</value>
   </data>
+  <data name="strSSHStartTransferBG" xml:space="preserve">
+    <value>Transfer SSH w tle nie powiódł się!</value>
+  </data>
+  <data name="strSSHTranferSuccessful" xml:space="preserve">
+    <value>Transfer zakończony sukcesem!</value>
+  </data>
+  <data name="strSSHTransferFailed" xml:space="preserve">
+    <value>Transfer SSH nie powiódł się.</value>
+  </data>
   <data name="strStartIP" xml:space="preserve">
     <value>Początkowe IP</value>
   </data>
   <data name="strStartPort" xml:space="preserve">
     <value>Port początkowy</value>
+  </data>
+  <data name="strStartupExit" xml:space="preserve">
+    <value>Uruchomienie/Wyjście</value>
+  </data>
+  <data name="strStatus" xml:space="preserve">
+    <value>Stan</value>
   </data>
   <data name="strTabAdvanced" xml:space="preserve">
     <value>Zaawansowane</value>
@@ -1245,6 +1657,120 @@ Załadowano nowy plik połączeń.</value>
   </data>
   <data name="strTabUpdates" xml:space="preserve">
     <value>Aktualizacje</value>
+  </data>
+  <data name="strTelnet" xml:space="preserve">
+    <value>Telnet</value>
+  </data>
+  <data name="strThemeCategoryConfigPanel" xml:space="preserve">
+    <value>Panel konfiguracji</value>
+  </data>
+  <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
+    <value>Panel połączeń</value>
+  </data>
+  <data name="strThemeCategoryGeneral" xml:space="preserve">
+    <value>Ogólne</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Kolor tła panelu konfiguracji.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>Kolor tekstu kategorii w panelu konfiguracji.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
+    <value>Kolor linii siatki w panelu konfiguracji</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>Kolor tła obszaru pomocy w panelu konfiguracji.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
+    <value>Kolor tekstu w obszarze pomocy w panelu konfiguracji.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
+    <value>Kolor tekstu w panelu konfiguracji.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>Kolor tła panelu konfiguracji.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
+    <value>Kolor tekstu w panelu konfiguracji.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>Kolor linii drzewa w panelu konfiguracji.</value>
+  </data>
+  <data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
+    <value>Kolor tła menu.</value>
+  </data>
+  <data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
+    <value>Kolor tekstu menu.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
+    <value>Kolor tła pola wyszukiwania.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
+    <value>Kolor tekstu w polu wyszukiwania.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
+    <value>Kolor tekstu zachęty w polu wyszukiwania.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
+    <value>Kolor tła pasków narzędzi.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
+    <value>Kolor tekstu w paskach narzędzi.</value>
+  </data>
+  <data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
+    <value>Kolor tła okna głównego.</value>
+  </data>
+  <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Kolor tła panelu konfiguracji</value>
+  </data>
+  <data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>Kolor tekstu kategori panelu konfiguracji</value>
+  </data>
+  <data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
+    <value>Kolor linii siatki panelu konfiguracji</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>Kolor tła pomocy panelu konfiguracji</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
+    <value>Kolor tekstu pomocy panelu konfiguracji</value>
+  </data>
+  <data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
+    <value>Kolor tekstu panelu konfiguracji</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>Kolor tła panelu konfiguracji</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
+    <value>Kolor tekstu panelu konfiguracji</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>Kolor linii drzewa panelu konfiguracji</value>
+  </data>
+  <data name="strThemeNameMenuBackgroundColor" xml:space="preserve">
+    <value>Kolor tła menu</value>
+  </data>
+  <data name="strThemeNameMenuTextColor" xml:space="preserve">
+    <value>Kolor tekstu menu</value>
+  </data>
+  <data name="strThemeNameSearchBoxBackgroundColor" xml:space="preserve">
+    <value>Kolor tła pola wyszukiwania</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
+    <value>Kolor tekstu w polu wyszukiwania</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
+    <value>Kolor tekstu zachęty z polu wyszukiwania</value>
+  </data>
+  <data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
+    <value>Kolor tła paska narzędzi</value>
+  </data>
+  <data name="strThemeNameToolbarTextColor" xml:space="preserve">
+    <value>Kolor tekstu paska narzędzi</value>
+  </data>
+  <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
+    <value>Kolor tła okna</value>
   </data>
   <data name="strTitleError" xml:space="preserve">
     <value>Błąd ({0})</value>
@@ -1261,11 +1787,51 @@ Załadowano nowy plik połączeń.</value>
   <data name="strTitleWarning" xml:space="preserve">
     <value>Ostrzeżenie ({0})</value>
   </data>
+  <data name="strTransfer" xml:space="preserve">
+    <value>Transfer</value>
+  </data>
+  <data name="strTransferFailed" xml:space="preserve">
+    <value>Transfer nieudany!</value>
+  </data>
+  <data name="strTryIntegrate" xml:space="preserve">
+    <value>Spróbuj zintegrować</value>
+  </data>
   <data name="strType" xml:space="preserve">
     <value>Typ</value>
   </data>
+  <data name="strUltraVncRepeater" xml:space="preserve">
+    <value>Ultra VNC Repeater</value>
+  </data>
+  <data name="strUnnamedTheme" xml:space="preserve">
+    <value>Nienazwany motyw</value>
+  </data>
+  <data name="strUpdateAvailable" xml:space="preserve">
+    <value>mRemoteNG wymaga aktualizacji</value>
+  </data>
+  <data name="strUpdateCheck" xml:space="preserve">
+    <value>mRemoteNG może okresowo łączyć się do strony mRemoteNG, aby sprawdzić dostępność aktualizacji i zapowiedzi produktów.</value>
+  </data>
+  <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
+    <value>Sprawdzenie aktualizacji nie powiodło się!</value>
+  </data>
   <data name="strUpdateCheckFailed" xml:space="preserve">
     <value>Sprawdzanie aktualizacji nie powiodło się!</value>
+  </data>
+  <data name="strUpdateCheckPortableEdition" xml:space="preserve">
+    <value>mRemoteNG Portable Edition nie obsługuje obecnie automatycznych aktualizacji.</value>
+  </data>
+  <data name="strUpdateDeleteFailed" xml:space="preserve">
+    <value>Błąd usuwania pliku aktualizacji!</value>
+  </data>
+  <data name="strUpdateDownloadComplete" xml:space="preserve">
+    <value>Pobranie zakończone! 
+mRemoteNG zostanie teraz zamknięty i rozpocznie instalację.</value>
+  </data>
+  <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
+    <value>Pobieranie nie powiodło się!</value>
+  </data>
+  <data name="strUpdateDownloadFailed" xml:space="preserve">
+    <value>Pobieranie aktualizacji nie powiodło się!</value>
   </data>
   <data name="strUpdateFrequencyCustom" xml:space="preserve">
     <value>Co {0} dni</value>
@@ -1279,17 +1845,59 @@ Załadowano nowy plik połączeń.</value>
   <data name="strUpdateFrequencyWeekly" xml:space="preserve">
     <value>Tygodniowo</value>
   </data>
+  <data name="strUpdateStartFailed" xml:space="preserve">
+    <value>Nie udało się uruchomić aktualizacji!</value>
+  </data>
   <data name="strUseDifferentUsernameAndPassword" xml:space="preserve">
     <value>Użyj innego loginu użytkownika i hasła</value>
+  </data>
+  <data name="strUseOnlyErrorsAndInfosPanel" xml:space="preserve">
+    <value>Używaj tylko panelu powiadomień (okienka z komunikatami nie pojawią się więcej)</value>
   </data>
   <data name="strUser" xml:space="preserve">
     <value>Użytkownik</value>
   </data>
+  <data name="strUseSameUsernameAndPassword" xml:space="preserve">
+    <value>Użyj tego samego użytkownika i hasła</value>
+  </data>
+  <data name="strUseSmartCard" xml:space="preserve">
+    <value>Użyj karty inteligentnej</value>
+  </data>
+  <data name="strUseSQLServer" xml:space="preserve">
+    <value>Użyj serwera SQL aby przechowywać konfigurację połączeń</value>
+  </data>
   <data name="strVersion" xml:space="preserve">
     <value>Wersja</value>
   </data>
+  <data name="strVnc" xml:space="preserve">
+    <value>VNC</value>
+  </data>
+  <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
+    <value>Odłączenie VNC nie powiodło się!</value>
+  </data>
+  <data name="strVncConnectionOpenFailed" xml:space="preserve">
+    <value>Otwarcie połączenia nie powiodło się!</value>
+  </data>
+  <data name="strVncRefreshFailed" xml:space="preserve">
+    <value>Odświeżenie ekranu VNC nie powiodło się!</value>
+  </data>
+  <data name="strVncSendSpecialKeysFailed" xml:space="preserve">
+    <value>VNC SendSpecialKeys nie powiodło się!</value>
+  </data>
+  <data name="strVncStartChatFailed" xml:space="preserve">
+    <value>Uruchomienie czatu VNC nie powiodło się!</value>
+  </data>
+  <data name="strWarnIfAuthFails" xml:space="preserve">
+    <value>Ostrzegaj, jeśli uwierzytelnianie nie powiedzie się</value>
+  </data>
   <data name="strWarnings" xml:space="preserve">
     <value>Ostrzeżenia</value>
+  </data>
+  <data name="strWriteLogFile" xml:space="preserve">
+    <value>Zapisz plik logu (mRemoteNG.log)</value>
+  </data>
+  <data name="strXULrunnerPath" xml:space="preserve">
+    <value>Ścieżka XULrunner:</value>
   </data>
   <data name="strYes" xml:space="preserve">
     <value>Tak</value>

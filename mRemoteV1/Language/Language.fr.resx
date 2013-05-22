@@ -148,7 +148,7 @@
     <value>Toujours se connecter, même si l'authentification échoue</value>
   </data>
   <data name="strAlwaysShowPanelSelection" xml:space="preserve">
-    <value>Toujours afficher la sélection de panneau à l'ouverture d'une connexion</value>
+    <value>Toujours demander la sélection d'un panneau lors de l'ouverture d'une connexion</value>
   </data>
   <data name="strAlwaysShowPanelTabs" xml:space="preserve">
     <value>Toujours afficher les onglets du panneau</value>
@@ -403,6 +403,12 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Impossible de parcourir les arguments de la ligne de commande !</value>
   </data>
+  <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+    <value>{0} a détecté que l'utilitaire Lenovo Auto Scroll Utility est executé sur le système. Cet utilitaire est connu pour générer des problèmes avec {0}. Il est recommandé de le désactiver ou de le désinstaller.</value>
+  </data>
+  <data name="strCompatibilityProblemDetected" xml:space="preserve">
+    <value>Problème de compatibilité détecté</value>
+  </data>
   <data name="strComponentsCheck" xml:space="preserve">
     <value>Vérifiez les composants</value>
   </data>
@@ -603,7 +609,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
   </data>
   <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
     <value>Les paramètres de sécurité Windows, "Système de cryptographie: Utilise FIPS, algorithmes compatible pour le cryptage, hachage et signature", est activé. Ce paramètre n'est pas compatible avec {0}.
-Allez sur l'article du support de Microsoft pour plus d'informations http://support.microsoft.com/kb/811833 for more information.
+Consultez l'article du support de Microsoft pour plus d'informations http://support.microsoft.com/kb/811833
 
 {0} va maintenant fermer.</value>
   </data>
@@ -719,7 +725,7 @@ Allez sur l'article du support de Microsoft pour plus d'informations http://supp
     <value>Échec de ICA Set Resolution !</value>
   </data>
   <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
-    <value>Identifier les onglets de connexion rapide en ajoutant le préfix "Rapide."</value>
+    <value>Identifier les onglets de connexion rapide en ajoutant le préfixe "Rapide."</value>
   </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Importer à partir d'Active Directory</value>
@@ -776,7 +782,7 @@ Allez sur l'article du support de Microsoft pour plus d'informations http://supp
     <value>CTRL-ALT-DEL</value>
   </data>
   <data name="strKeysCtrlEsc" xml:space="preserve">
-    <value>CTRL-ESC</value>
+    <value>CTRL-Echap</value>
   </data>
   <data name="strLabelAddress" xml:space="preserve">
     <value>Adresse:</value>
@@ -989,7 +995,7 @@ Allez sur l'article du support de Microsoft pour plus d'informations http://supp
     <value>Notifications</value>
   </data>
   <data name="strMenuNotificationsCopyAll" xml:space="preserve">
-    <value>Copiez tout</value>
+    <value>Tout copier</value>
   </data>
   <data name="strMenuNotificationsDelete" xml:space="preserve">
     <value>Supprimer</value>
@@ -1522,6 +1528,9 @@ Message:
   <data name="strPuttyResizeFailed" xml:space="preserve">
     <value>Échec du redimensionnement de Putty !</value>
   </data>
+  <data name="strPuttySavedSessionsRootName" xml:space="preserve">
+    <value>Sessions PuTTY sauvegardées</value>
+  </data>
   <data name="strPuttySettings" xml:space="preserve">
     <value>Paramètres PuTTY</value>
   </data>
@@ -1868,7 +1877,7 @@ Message:
     <value>Échec de SSH Transfer End (UI.Window.SSHTransfer)!</value>
   </data>
   <data name="strSSHTransferFailed" xml:space="preserve">
-    <value>Transfert</value>
+    <value>Echec du transfert SSH échoué.</value>
   </data>
   <data name="strStartIP" xml:space="preserve">
     <value>IP de début</value>
@@ -1964,7 +1973,7 @@ Message:
     <value>La couleur d'arrière-plan de la fenêtre principale.</value>
   </data>
   <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
-    <value>Couleur de fond de panneau de configuration</value>
+    <value>Couleur de fond du panneau de configuration</value>
   </data>
   <data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
     <value>Couleur de texte pour le panneau de configuration</value>
@@ -2000,16 +2009,16 @@ Message:
     <value>Couleur de fond de la boite de recherche</value>
   </data>
   <data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
-    <value>Couleur du texte pour la boite de recherche</value>
+    <value>Couleur du texte de la recherche</value>
   </data>
   <data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
     <value>Couleur du Texte de la Boîte de Recherche</value>
   </data>
   <data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
-    <value>Couleur de fond de barre d'outils</value>
+    <value>Couleur de fond de la barre d'outils</value>
   </data>
   <data name="strThemeNameToolbarTextColor" xml:space="preserve">
-    <value>Couleur du texte pour la barre d'outils</value>
+    <value>Couleur du texte de la barre d'outils</value>
   </data>
   <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
     <value>Couleur de fond de la fenêtre</value>

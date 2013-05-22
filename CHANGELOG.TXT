@@ -12,6 +12,8 @@
   Fixed issue MR-470 - Quick Connect to Linux server uses invalid credentials
   Fixed issue MR-471 - PuTTY Saved Sessions disappears from connection list
   Added PuTTY Session Settings command to the Config panel for PuTTY Saved Sessions.
+  Updated translations.
+  Added Norwegian (Bokmål) and Portuguese (Brazil) translations.
   Added Spanish translation to the installer.
   Fixed an exception or crash when choosing unnamed colors for themes.
   Fixed possible error "Control does not support transparent background colors" when modifying themes.
