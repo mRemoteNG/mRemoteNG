@@ -32,9 +32,11 @@ echo Signing binaries...
 	"%~dp0\mRemoteV1\bin\Release\es-AR\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\fr\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\it\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteV1\bin\Release\nb-NO\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\nl\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\pl\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\pt\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteV1\bin\Release\pt-BR\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\ru\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\uk\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\zh-CN\mRemoteNG.resources.dll" ^
@@ -51,9 +53,11 @@ echo Signing binaries...
 	"%~dp0\mRemoteV1\bin\Release Portable\es-AR\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\fr\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\it\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteV1\bin\Release Portable\nb-NO\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\nl\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\pl\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\pt\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteV1\bin\Release Portable\pt-BR\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\ru\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\uk\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\zh-CN\mRemoteNG.resources.dll" ^
