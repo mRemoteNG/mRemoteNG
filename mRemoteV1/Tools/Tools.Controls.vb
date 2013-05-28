@@ -125,14 +125,15 @@ Namespace Tools
 
                             menToolStrip.DropDownItems.Add(tMenItem)
                             AddNodeToMenu(tNode.Nodes, tMenItem)
-                        Else
-                            tMenItem.Image = My.Resources.Play
+                        ElseIf Tree.Node.GetNodeType(tNode) = Tree.Node.Type.Connection Or _
+                               Tree.Node.GetNodeType(tNode) = Tree.Node.Type.PuttySession Then
+                            tMenItem.Image = Windows.treeForm.imgListTree.Images(tNode.ImageIndex)
                             tMenItem.Tag = tNode.Tag
 
                             menToolStrip.DropDownItems.Add(tMenItem)
                         End If
 
-                        AddHandler tMenItem.MouseDown, AddressOf ConMenItem_MouseDown
+                        AddHandler tMenItem.MouseUp, AddressOf ConMenItem_MouseUp
                     Next
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
@@ -162,12 +163,10 @@ Namespace Tools
                 frmMain.PreviousWindowState = frmMain.WindowState
             End Sub
 
-            Private Sub ConMenItem_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+            Private Sub ConMenItem_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
                 If e.Button = MouseButtons.Left Then
-                    If TypeOf sender.Tag Is mRemoteNG.Connection.Info Then
-                        If frmMain.Visible = False Then
-                            ShowForm()
-                        End If
+                    If TypeOf sender.Tag Is Connection.Info Then
+                        If frmMain.Visible = False Then ShowForm()
                         App.Runtime.OpenConnection(sender.Tag)
                     End If
                 End If

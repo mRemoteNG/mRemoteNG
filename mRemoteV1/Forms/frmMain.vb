@@ -729,7 +729,7 @@ Public Class frmMain
         Next
     End Sub
 
-    Private Sub AddNodeToMenu(ByVal tnc As TreeNodeCollection, ByVal menToolStrip As ToolStripMenuItem)
+    Private Shared Sub AddNodeToMenu(ByVal tnc As TreeNodeCollection, ByVal menToolStrip As ToolStripMenuItem)
         Try
             For Each tNode As TreeNode In tnc
                 Dim tMenItem As New ToolStripMenuItem()
@@ -750,16 +750,16 @@ Public Class frmMain
                     menToolStrip.DropDownItems.Add(tMenItem)
                 End If
 
-                AddHandler tMenItem.MouseDown, AddressOf ConMenItem_MouseDown
+                AddHandler tMenItem.MouseUp, AddressOf ConMenItem_MouseUp
             Next
         Catch ex As Exception
             MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
         End Try
     End Sub
 
-    Private Sub ConMenItem_MouseDown(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+    Private Shared Sub ConMenItem_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         If e.Button = MouseButtons.Left Then
-            If TypeOf sender.Tag Is mRemoteNG.Connection.Info Then
+            If TypeOf sender.Tag Is Connection.Info Then
                 App.Runtime.OpenConnection(sender.Tag)
             End If
         End If

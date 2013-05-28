@@ -11,6 +11,7 @@
   Fixed issue MR-463 - Add support for LoadBalanceInfo to RDP
   Fixed issue MR-470 - Quick Connect to Linux server uses invalid credentials
   Fixed issue MR-471 - PuTTY Saved Sessions disappears from connection list
+  Fixed issue MR-487 - Initiate connections on MouseUp event
   Added PuTTY Session Settings command to the Config panel for PuTTY Saved Sessions.
   Updated translations.
   Added Norwegian (Bokmål) and Portuguese (Brazil) translations.
