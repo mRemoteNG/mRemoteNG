@@ -1,3 +1,4 @@
+1.71 Beta 4 (2013-05-28):
   Added feature MR-435 - Add digital signature check to updater
   Fixed issue MR-255 - The version of the RDP AX client should be updated to 7
   Fixed issue MR-392 - Sessions Panel - context menu entries need to be context aware
