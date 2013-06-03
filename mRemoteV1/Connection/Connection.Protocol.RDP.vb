@@ -61,7 +61,7 @@ Namespace Connection
 
 #Region "Public Methods"
             Public Sub New()
-                Control = New AxMsRdpClient8NotSafeForScripting
+                Control = New AxMsRdpClient5NotSafeForScripting
             End Sub
 
             Public Overrides Function SetProps() As Boolean
@@ -77,7 +77,7 @@ Namespace Connection
                             System.Windows.Forms.Application.DoEvents()
                         Loop
 
-                        _rdpClient = CType(Control, AxMsRdpClient8NotSafeForScripting).GetOcx()
+                        _rdpClient = CType(Control, AxMsRdpClient5NotSafeForScripting).GetOcx()
                     Catch ex As Runtime.InteropServices.COMException
                         MessageCollector.AddExceptionMessage(My.Language.strRdpControlCreationFailed, ex)
                         Control.Dispose()
@@ -103,7 +103,7 @@ Namespace Connection
                     _rdpClient.AdvancedSettings2.overallConnectionTimeout = 20
 
                     _rdpClient.AdvancedSettings2.BitmapPeristence = Me._connectionInfo.CacheBitmaps
-                    If _rdpVersion >= Versions.RDC60 Then
+                    If _rdpVersion >= Versions.RDC61 Then
                         _rdpClient.AdvancedSettings7.EnableCredSspSupport = _connectionInfo.UseCredSsp
                     End If
 
@@ -239,7 +239,7 @@ Namespace Connection
                     If Not _connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Never Then
                         _rdpClient.TransportSettings.GatewayUsageMethod = _connectionInfo.RDGatewayUsageMethod
                         _rdpClient.TransportSettings.GatewayHostname = _connectionInfo.RDGatewayHostname
-                        If _rdpVersion >= Versions.RDC60 Then
+                        If _rdpVersion >= Versions.RDC61 Then
                             _rdpClient.TransportSettings2.GatewayProfileUsageMethod = 1
                             If _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes Then
                                 _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.Username

@@ -1,3 +1,5 @@
+  Fixed issue MR-491 - Could not start RDP Connection
+
 1.71 Beta 4 (2013-05-28):
   Added feature MR-435 - Add digital signature check to updater
   Fixed issue MR-255 - The version of the RDP AX client should be updated to 7
