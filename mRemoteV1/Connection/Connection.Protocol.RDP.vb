@@ -233,20 +233,22 @@ Namespace Connection
             End Sub
 
             Private Sub SetRdGateway()
-                If Not _rdpClient.TransportSettings.GatewayIsSupported Then Return
                 Try
+                    If Not _rdpClient.TransportSettings.GatewayIsSupported Then Return
                     MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strRdpGatewayIsSupported, True)
                     If Not _connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Never Then
                         _rdpClient.TransportSettings.GatewayUsageMethod = _connectionInfo.RDGatewayUsageMethod
                         _rdpClient.TransportSettings.GatewayHostname = _connectionInfo.RDGatewayHostname
+                        _rdpClient.TransportSettings.GatewayProfileUsageMethod = 1 ' TSC_PROXY_PROFILE_MODE_EXPLICIT
+                        If _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard Then
+                            _rdpClient.TransportSettings.GatewayCredsSource = 1 ' TSC_PROXY_CREDS_MODE_SMARTCARD
+                        End If
                         If _rdpVersion >= Versions.RDC61 Then
-                            _rdpClient.TransportSettings2.GatewayProfileUsageMethod = 1
                             If _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes Then
                                 _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.Username
                                 _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.Password
                                 _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.Domain
                             ElseIf _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard Then
-                                _rdpClient.TransportSettings2.GatewayCredsSource = 1 ' TSC_PROXY_CREDS_MODE_SMARTCARD
                                 _rdpClient.TransportSettings2.GatewayCredSharing = 0
                             Else
                                 _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.RDGatewayUsername
