@@ -234,7 +234,7 @@ Namespace Connection
 
             Private Sub SetRdGateway()
                 Try
-                    If Not _rdpClient.TransportSettings.GatewayIsSupported Then Return
+                    If _rdpClient.TransportSettings.GatewayIsSupported = 0 Then Return
                     MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strRdpGatewayIsSupported, True)
                     If Not _connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Never Then
                         _rdpClient.TransportSettings.GatewayUsageMethod = _connectionInfo.RDGatewayUsageMethod
