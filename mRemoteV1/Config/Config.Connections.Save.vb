@@ -99,7 +99,7 @@ Namespace Config
 
                     If databaseVersion.CompareTo(New Version(2, 4)) = 0 Then ' 2.4
                         MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.5"))
-                        sqlCommand = New SqlCommand("ALTER TABLE tblCons ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, AutomaticResize bit NOT NULL DEFAULT 1 InheritLoadBalanceInfo bit NOT NULL DEFAULT 0, InheritAutomaticResize bit NOT NULL DEFAULT 0;", sqlConnection)
+                        sqlCommand = New SqlCommand("ALTER TABLE tblCons ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, AutomaticResize bit NOT NULL DEFAULT 1, InheritLoadBalanceInfo bit NOT NULL DEFAULT 0, InheritAutomaticResize bit NOT NULL DEFAULT 0;", sqlConnection)
                         sqlCommand.ExecuteNonQuery()
                         databaseVersion = New Version(2, 5)
                     End If
@@ -192,8 +192,8 @@ Namespace Config
                                                "InheritIcon, InheritPanel, InheritPassword, InheritPort, " & _
                                                "InheritProtocol, InheritPuttySession, InheritRedirectDiskDrives, " & _
                                                "InheritRedirectKeys, InheritRedirectPorts, InheritRedirectPrinters, " & _
-                                               "InheritRedirectSmartCards, InheritRedirectSound, InheritResolution, InheritAutomaticResize" & _
-                                               "InheritUseConsoleSession, InheritRenderingEngine, InheritUsername, InheritICAEncryptionStrength, InheritRDPAuthenticationLevel, InheritLoadBalanceInfo" & _
+                                               "InheritRedirectSmartCards, InheritRedirectSound, InheritResolution, InheritAutomaticResize, " & _
+                                               "InheritUseConsoleSession, InheritRenderingEngine, InheritUsername, InheritICAEncryptionStrength, InheritRDPAuthenticationLevel, InheritLoadBalanceInfo, " & _
                                                "InheritPreExtApp, InheritPostExtApp, InheritMacAddress, InheritUserField, InheritExtApp, InheritVNCCompression, InheritVNCEncoding, " & _
                                                "InheritVNCAuthMode, InheritVNCProxyType, InheritVNCProxyIP, InheritVNCProxyPort, " & _
                                                "InheritVNCProxyUsername, InheritVNCProxyPassword, InheritVNCColors, " & _
