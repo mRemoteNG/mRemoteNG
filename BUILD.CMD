@@ -18,6 +18,20 @@ call %VCVARSALL% x86
 rmdir /s /q "%~dp0\mRemoteV1\bin" > nul 2>&1
 rmdir /s /q "%~dp0\mRemoteV1\obj" > nul 2>&1
 
+if exist "%~dp0\mRemoteV1\bin" goto ERROR_RMDIR
+if exist "%~dp0\mRemoteV1\obj" goto ERROR_RMDIR
+goto NOERROR_RMDIR
+
+:ERROR_RMDIR
+echo.
+echo Could not clean output directories.
+echo.
+echo Build process failed.
+echo.
+goto END
+
+:NOERROR_RMDIR
+
 echo Building release version...
 %DEVENV% "%~dp0\mRemoteV1.sln" /build "Release"
 
@@ -68,6 +82,9 @@ echo Signing binaries...
 	"%~dp0\mRemoteV1\bin\Release Portable\Interop.ShDocVw.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\Interop.WFICALib.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\mRemoteNG.exe" ^
+
+
+rem Do not remove the two blank lines above this line.
 
 mkdir "%~dp0\Release" > nul 2>&1
 
@@ -121,4 +138,6 @@ del /f /q %PORTABLEZIP% > nul 2>&1
 echo.
 echo Build process complete.
 echo.
+
+:END
 pause
