@@ -24,3 +24,4 @@ UpgradeLog.XML
 *.sdf
 *.opensdf
 *.ipch
+xulrunner/
