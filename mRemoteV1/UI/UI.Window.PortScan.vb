@@ -38,34 +38,34 @@ Namespace UI
 
             Private Sub InitializeComponent()
                 Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PortScan))
-                Me.ipStart = New IPTextBox.IPTextBox
-                Me.ipEnd = New IPTextBox.IPTextBox
-                Me.lblStartIP = New System.Windows.Forms.Label
-                Me.lblEndIP = New System.Windows.Forms.Label
-                Me.btnScan = New System.Windows.Forms.Button
-                Me.pnlDivider = New System.Windows.Forms.Panel
-                Me.splContainer = New System.Windows.Forms.SplitContainer
-                Me.lvHosts = New System.Windows.Forms.ListView
-                Me.btnCancel = New System.Windows.Forms.Button
-                Me.btnImport = New System.Windows.Forms.Button
-                Me.cbProtocol = New System.Windows.Forms.ComboBox
-                Me.lblOnlyImport = New System.Windows.Forms.Label
-                Me.clmHost = New System.Windows.Forms.ColumnHeader
-                Me.clmSSH = New System.Windows.Forms.ColumnHeader
-                Me.clmTelnet = New System.Windows.Forms.ColumnHeader
-                Me.clmHTTP = New System.Windows.Forms.ColumnHeader
-                Me.clmHTTPS = New System.Windows.Forms.ColumnHeader
-                Me.clmRlogin = New System.Windows.Forms.ColumnHeader
-                Me.clmRDP = New System.Windows.Forms.ColumnHeader
-                Me.clmVNC = New System.Windows.Forms.ColumnHeader
-                Me.clmOpenPorts = New System.Windows.Forms.ColumnHeader
-                Me.clmClosedPorts = New System.Windows.Forms.ColumnHeader
-                Me.prgBar = New System.Windows.Forms.ProgressBar
-                Me.pnlPorts = New System.Windows.Forms.Panel
-                Me.portEnd = New System.Windows.Forms.NumericUpDown
-                Me.portStart = New System.Windows.Forms.NumericUpDown
-                Me.Label2 = New System.Windows.Forms.Label
-                Me.Label1 = New System.Windows.Forms.Label
+                Me.ipStart = New IPTextBox.IPTextBox()
+                Me.ipEnd = New IPTextBox.IPTextBox()
+                Me.lblStartIP = New System.Windows.Forms.Label()
+                Me.lblEndIP = New System.Windows.Forms.Label()
+                Me.btnScan = New System.Windows.Forms.Button()
+                Me.pnlDivider = New System.Windows.Forms.Panel()
+                Me.splContainer = New System.Windows.Forms.SplitContainer()
+                Me.lvHosts = New System.Windows.Forms.ListView()
+                Me.btnCancel = New System.Windows.Forms.Button()
+                Me.btnImport = New System.Windows.Forms.Button()
+                Me.cbProtocol = New System.Windows.Forms.ComboBox()
+                Me.lblOnlyImport = New System.Windows.Forms.Label()
+                Me.clmHost = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmSSH = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmTelnet = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmHTTP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmHTTPS = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmRlogin = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmRDP = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmVNC = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmOpenPorts = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.clmClosedPorts = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+                Me.prgBar = New System.Windows.Forms.ProgressBar()
+                Me.pnlPorts = New System.Windows.Forms.Panel()
+                Me.portEnd = New System.Windows.Forms.NumericUpDown()
+                Me.portStart = New System.Windows.Forms.NumericUpDown()
+                Me.Label2 = New System.Windows.Forms.Label()
+                Me.Label1 = New System.Windows.Forms.Label()
                 Me.splContainer.Panel1.SuspendLayout()
                 Me.splContainer.Panel2.SuspendLayout()
                 Me.splContainer.SuspendLayout()
@@ -125,7 +125,7 @@ Namespace UI
                 'pnlDivider
                 '
                 Me.pnlDivider.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlDivider.BackColor = System.Drawing.Color.DimGray
                 Me.pnlDivider.Location = New System.Drawing.Point(0, 0)
                 Me.pnlDivider.Name = "pnlDivider"
@@ -135,8 +135,8 @@ Namespace UI
                 'splContainer
                 '
                 Me.splContainer.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.splContainer.FixedPanel = System.Windows.Forms.FixedPanel.Panel2
                 Me.splContainer.IsSplitterFixed = True
                 Me.splContainer.Location = New System.Drawing.Point(0, 74)
@@ -161,8 +161,8 @@ Namespace UI
                 'lvHosts
                 '
                 Me.lvHosts.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lvHosts.BorderStyle = System.Windows.Forms.BorderStyle.None
                 Me.lvHosts.FullRowSelect = True
                 Me.lvHosts.GridLines = True
@@ -271,7 +271,7 @@ Namespace UI
                 'prgBar
                 '
                 Me.prgBar.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.prgBar.Location = New System.Drawing.Point(7, 50)
                 Me.prgBar.Name = "prgBar"
                 Me.prgBar.Size = New System.Drawing.Size(432, 16)
@@ -338,6 +338,7 @@ Namespace UI
                 Me.Controls.Add(Me.lblStartIP)
                 Me.Controls.Add(Me.ipEnd)
                 Me.Controls.Add(Me.ipStart)
+                Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
                 Me.Name = "PortScan"
                 Me.TabText = "Port Scan"
@@ -460,6 +461,7 @@ Namespace UI
                     Else
                         btnScan.Text = My.Language.strButtonScan
                     End If
+                    SetPrgBar(0, 100)
                 End If
             End Sub
 
@@ -480,13 +482,15 @@ Namespace UI
                 Try
                     scanning = True
                     SwitchButtonText()
-                    SetPrgBar(0, 100)
                     lvHosts.Items.Clear()
 
+                    Dim ipAddressStart As Net.IPAddress = Net.IPAddress.Parse(ipStart.Text)
+                    Dim ipAddressEnd As Net.IPAddress = Net.IPAddress.Parse(ipEnd.Text)
+
                     If psMode = Tools.PortScan.PortScanMode.Import Then
-                        pScanner = New Tools.PortScan.Scanner(ipStart.Text, ipEnd.Text)
+                        pScanner = New Tools.PortScan.Scanner(ipAddressStart, ipAddressEnd)
                     Else
-                        pScanner = New Tools.PortScan.Scanner(ipStart.Text, ipEnd.Text, portStart.Value, portEnd.Value)
+                        pScanner = New Tools.PortScan.Scanner(ipAddressStart, ipAddressEnd, portStart.Value, portEnd.Value)
                     End If
 
                     AddHandler pScanner.BeginHostScan, AddressOf Event_BeginHostScan
@@ -500,7 +504,7 @@ Namespace UI
             End Sub
 
             Private Sub StopScan()
-                pScanner.StopScan()
+                If pScanner IsNot Nothing Then pScanner.StopScan()
                 scanning = False
                 SwitchButtonText()
             End Sub
@@ -534,10 +538,18 @@ Namespace UI
                 SetPrgBar(AlreadyScanned, ToBeScanned)
             End Sub
 
-            Private Sub Event_ScanComplete(ByVal Hosts As ArrayList)
+            Private Sub Event_ScanComplete(ByVal hosts As List(Of Tools.PortScan.ScanHost))
                 scanning = False
                 SwitchButtonText()
                 MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Scan complete!")
+            End Sub
+
+            Private Sub portStart_Enter(sender As System.Object, e As EventArgs) Handles portStart.Enter
+                portStart.Select(0, portStart.Text.Length)
+            End Sub
+
+            Private Sub portEnd_Enter(sender As System.Object, e As System.EventArgs) Handles portEnd.Enter
+                portEnd.Select(0, portEnd.Text.Length)
             End Sub
 #End Region
         End Class

@@ -1,6 +1,7 @@
 ﻿Imports System.Threading
 Imports mRemoteNG.App.Runtime
 Imports System.Net.NetworkInformation
+Imports System.Net
 
 Namespace Tools
     Namespace PortScan
@@ -108,7 +109,7 @@ Namespace Tools
                 End Set
             End Property
 
-            Private _OpenPorts As New ArrayList
+            Private _openPorts As New ArrayList
             Public Property OpenPorts() As ArrayList
                 Get
                     Return _OpenPorts
@@ -118,7 +119,7 @@ Namespace Tools
                 End Set
             End Property
 
-            Private _ClosedPorts As ArrayList
+            Private _closedPorts As ArrayList
             Public Property ClosedPorts() As ArrayList
                 Get
                     Return _ClosedPorts
@@ -215,7 +216,7 @@ Namespace Tools
                 End Try
             End Function
 
-            Public Function ToListViewItem(ByVal Mode As PortScanMode) As ListViewItem
+            Public Function ToListViewItem(ByVal mode As PortScanMode) As ListViewItem
                 Try
                     Dim lvI As New ListViewItem
                     lvI.Tag = Me
@@ -237,11 +238,11 @@ Namespace Tools
                         Dim strOpen As String = ""
                         Dim strClosed As String = ""
 
-                        For Each p As Integer In _OpenPorts
+                        For Each p As Integer In _openPorts
                             strOpen &= p & ", "
                         Next
 
-                        For Each p As Integer In _ClosedPorts
+                        For Each p As Integer In _closedPorts
                             strClosed &= p & ", "
                         Next
 
@@ -256,224 +257,159 @@ Namespace Tools
                 End Try
             End Function
 
-            Private Function BoolToYesNo(ByVal Bool As Boolean) As String
-                If Bool = True Then
+            Private Function BoolToYesNo(ByVal value As Boolean) As String
+                If value Then
                     Return My.Language.strYes
                 Else
                     Return My.Language.strNo
                 End If
             End Function
 
-            Public Sub SetAllProtocols(ByVal Open As Boolean)
-                _VNC = False
-                _Telnet = False
-                _SSH = False
-                _Rlogin = False
-                _RDP = False
-                _HTTPS = False
-                _HTTP = False
+            Public Sub SetAllProtocols(ByVal value As Boolean)
+                _VNC = value
+                _Telnet = value
+                _SSH = value
+                _Rlogin = value
+                _RDP = value
+                _HTTPS = value
+                _HTTP = value
             End Sub
 #End Region
         End Class
 
         Public Class Scanner
-#Region "Properties"
-            Private _StartIP As String
-            Public Property StartIP() As String
-                Get
-                    Return _StartIP
-                End Get
-                Set(ByVal value As String)
-                    _StartIP = value
-                End Set
-            End Property
+#Region "Private Members"
+            Private ReadOnly _ipAddresses As New List(Of IPAddress)
+            Private ReadOnly _ports As New List(Of Integer)
 
-            Private _EndIP As String
-            Public Property EndIP() As String
-                Get
-                    Return _EndIP
-                End Get
-                Set(ByVal value As String)
-                    _EndIP = value
-                End Set
-            End Property
-
-            Private _StartPort As Integer
-            Public Property StartPort() As Integer
-                Get
-                    Return _StartPort
-                End Get
-                Set(ByVal value As Integer)
-                    _StartPort = value
-                End Set
-            End Property
-
-            Private _EndPort As Integer
-            Public Property EndPort() As Integer
-                Get
-                    Return _EndPort
-                End Get
-                Set(ByVal value As Integer)
-                    _EndPort = value
-                End Set
-            End Property
-
-
-
-            Private _ScannedHosts As ArrayList
-            Public Property ScannedHosts() As ArrayList
-                Get
-                    Return _ScannedHosts
-                End Get
-                Set(ByVal value As ArrayList)
-                    _ScannedHosts = value
-                End Set
-            End Property
+            Private _scanThread As Thread
+            Private ReadOnly _scannedHosts As New List(Of ScanHost)
 #End Region
 
-#Region "Methods"
-            Public Sub New(ByVal startIP As String, ByVal endIP As String)
-                Mode = PortScanMode.Import
+#Region "Public Methods"
+            Public Sub New(ByVal ipAddress1 As IPAddress, ByVal ipAddress2 As IPAddress)
+                Dim ipAddressStart As IPAddress = IpAddressMin(ipAddress1, ipAddress2)
+                Dim ipAddressEnd As IPAddress = IpAddressMax(ipAddress1, ipAddress2)
 
-                _StartIP = startIP
-                _EndIP = endIP
-
-                Ports = New ArrayList()
-                Ports.AddRange(New Integer() {ScanHost.SSHPort, ScanHost.TelnetPort, ScanHost.HTTPPort, _
+                _ports.Clear()
+                _ports.AddRange(New Integer() {ScanHost.SSHPort, ScanHost.TelnetPort, ScanHost.HTTPPort, _
                                               ScanHost.HTTPSPort, ScanHost.RloginPort, ScanHost.RDPPort, _
                                               ScanHost.VNCPort})
 
-                Hosts = GetIPRange(_StartIP, _EndIP)
+                _ipAddresses.Clear()
+                _ipAddresses.AddRange(IpAddressArrayFromRange(ipAddressStart, ipAddressEnd))
 
-                _ScannedHosts = New ArrayList()
+                _scannedHosts.Clear()
             End Sub
 
-            Public Sub New(ByVal startIP As String, ByVal endIP As String, ByVal startPort As String, ByVal endPort As String)
-                Mode = PortScanMode.Normal
+            Public Sub New(ByVal ipAddress1 As IPAddress, ByVal ipAddress2 As IPAddress, ByVal port1 As Integer, ByVal port2 As Integer)
+                Me.New(ipAddress1, ipAddress2)
 
-                _StartIP = startIP
-                _EndIP = endIP
+                Dim portStart As Integer = Math.Min(port1, port2)
+                Dim portEnd As Integer= Math.Max(port1, port2)
 
-                _StartPort = startPort
-                _EndPort = endPort
-
-                Ports = New ArrayList()
-                For p As Integer = startPort To endPort
-                    Ports.Add(p)
+                _ports.Clear()
+                For port As Integer = portStart To portEnd
+                    _ports.Add(port)
                 Next
-
-                Hosts = GetIPRange(_StartIP, _EndIP)
-
-                _ScannedHosts = New ArrayList()
             End Sub
-
-            Public Event BeginHostScan(ByVal Host As String)
-            Public Event HostScanned(ByVal SHost As ScanHost, ByVal HostsAlreadyScanned As Integer, ByVal HostsToBeScanned As Integer)
-            Public Event ScanComplete(ByVal Hosts As ArrayList)
-
-
-            Private Hosts As ArrayList
-            Private Ports As ArrayList
-
-            Private Mode As PortScanMode
-
-            Private sThread As Thread
-
 
             Public Sub StartScan()
-                sThread = New Thread(AddressOf StartScanBG)
-                sThread.SetApartmentState(Threading.ApartmentState.STA)
-                sThread.IsBackground = True
-                sThread.Start()
+                _scanThread = New Thread(AddressOf ScanAsync)
+                _scanThread.SetApartmentState(ApartmentState.STA)
+                _scanThread.IsBackground = True
+                _scanThread.Start()
             End Sub
 
             Public Sub StopScan()
-                sThread.Abort()
+                _scanThread.Abort()
             End Sub
 
-            Public Shared Function IsPortOpen(ByVal Hostname As String, ByVal Port As String) As Boolean
+            Public Shared Function IsPortOpen(ByVal hostname As String, ByVal port As String) As Boolean
                 Try
-                    Dim tcpClient As New System.Net.Sockets.TcpClient(Hostname, Port)
+                    ' ReSharper disable UnusedVariable
+                    Dim tcpClient As New Sockets.TcpClient(hostname, port)
+                    ' ReSharper restore UnusedVariable
                     Return True
                 Catch ex As Exception
                     Return False
                 End Try
             End Function
+#End Region
 
-            Private Sub StartScanBG()
+#Region "Private Methods"
+            Private Sub ScanAsync()
                 Try
-                    Dim hCount As Integer = 0
+                    Dim hostCount As Integer = 0
 
-                    For Each Host As String In Hosts
-                        RaiseEvent BeginHostScan(Host)
+                    For Each ipAddress As IPAddress In _ipAddresses
+                        RaiseEvent BeginHostScan(ipAddress.ToString())
 
-                        Dim sHost As New ScanHost(Host)
-                        hCount += 1
+                        Dim scanHost As New ScanHost(ipAddress.ToString())
+                        hostCount += 1
 
-                        Dim HostAlive As Boolean = False
-
-                        HostAlive = IsHostAlive(Host)
-
-                        If HostAlive = False Then
-                            sHost.ClosedPorts.AddRange(Ports)
-                            sHost.SetAllProtocols(False)
+                        If Not IsHostAlive(ipAddress) Then
+                            scanHost.ClosedPorts.AddRange(_ports)
+                            scanHost.SetAllProtocols(False)
                         Else
-                            For Each Port As Integer In Ports
-                                Dim err As Boolean = False
+                            For Each port As Integer In _ports
+                                Dim isPortOpen As Boolean
 
                                 Try
-                                    Dim tcpClient As New System.Net.Sockets.TcpClient(Host, Port)
+                                    ' ReSharper disable UnusedVariable
+                                    Dim tcpClient As New Sockets.TcpClient(ipAddress.ToString, port)
+                                    ' ReSharper restore UnusedVariable
 
-                                    err = False
-                                    sHost.OpenPorts.Add(Port)
+                                    isPortOpen = True
+                                    scanHost.OpenPorts.Add(port)
                                 Catch ex As Exception
-                                    err = True
-                                    sHost.ClosedPorts.Add(Port)
+                                    isPortOpen = False
+                                    scanHost.ClosedPorts.Add(port)
                                 End Try
 
-                                Select Case Port
+                                Select Case port
                                     Case ScanHost.SSHPort
-                                        sHost.SSH = Not err
+                                        scanHost.SSH = isPortOpen
                                     Case ScanHost.TelnetPort
-                                        sHost.Telnet = Not err
+                                        scanHost.Telnet = isPortOpen
                                     Case ScanHost.HTTPPort
-                                        sHost.HTTP = Not err
+                                        scanHost.HTTP = isPortOpen
                                     Case ScanHost.HTTPSPort
-                                        sHost.HTTPS = Not err
+                                        scanHost.HTTPS = isPortOpen
                                     Case ScanHost.RloginPort
-                                        sHost.Rlogin = Not err
+                                        scanHost.Rlogin = isPortOpen
                                     Case ScanHost.RDPPort
-                                        sHost.RDP = Not err
+                                        scanHost.RDP = isPortOpen
                                     Case ScanHost.VNCPort
-                                        sHost.VNC = Not err
+                                        scanHost.VNC = isPortOpen
                                 End Select
                             Next
                         End If
 
                         Try
-                            sHost.HostName = Net.Dns.GetHostEntry(sHost.HostIp).HostName
+                            scanHost.HostName = Dns.GetHostEntry(scanHost.HostIp).HostName
                         Catch ex As Exception
                         End Try
-                        If String.IsNullOrEmpty(sHost.HostName) Then sHost.HostName = sHost.HostIp
+                        If String.IsNullOrEmpty(scanHost.HostName) Then scanHost.HostName = scanHost.HostIp
 
-                        _ScannedHosts.Add(sHost)
-                        RaiseEvent HostScanned(sHost, hCount, Hosts.Count)
+                        _scannedHosts.Add(scanHost)
+                        RaiseEvent HostScanned(scanHost, hostCount, _ipAddresses.Count)
                     Next
 
-                    RaiseEvent ScanComplete(_ScannedHosts)
+                    RaiseEvent ScanComplete(_scannedHosts)
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "StartScanBG failed (Tools.PortScan)" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 
-            Private Function IsHostAlive(ByVal Host As String) As Boolean
+            Private Shared Function IsHostAlive(ByVal ipAddress As IPAddress) As Boolean
                 Dim pingSender As New Ping
-                Dim pReply As PingReply
+                Dim pingReply As PingReply
 
                 Try
-                    pReply = pingSender.Send(Host)
+                    pingReply = pingSender.Send(ipAddress)
 
-                    If pReply.Status = IPStatus.Success Then
+                    If pingReply.Status = IPStatus.Success Then
                         Return True
                     Else
                         Return False
@@ -483,60 +419,67 @@ Namespace Tools
                 End Try
             End Function
 
+            Private Shared Function IpAddressArrayFromRange(ByVal ipAddress1 As IPAddress, ByVal ipAddress2 As IPAddress) As IPAddress()
+                Dim startIpAddress As IPAddress = IpAddressMin(ipAddress1, ipAddress2)
+                Dim endIpAddress As IPAddress = IpAddressMax(ipAddress1, ipAddress2)
 
-            Private Function GetIPRange(ByVal fromIP As String, ByVal toIP As String) As ArrayList
-                Try
-                    Dim arrIPs As New ArrayList
+                Dim startAddress As Int32 = IpAddressToInt32(startIpAddress)
+                Dim endAddress As Int32 = IpAddressToInt32(endIpAddress)
+                Dim addressCount As Integer = endAddress - startAddress
 
-                    Dim ipFrom As String() = fromIP.Split(".")
-                    Dim ipTo As String() = toIP.Split(".")
+                Dim addressArray(addressCount) As IPAddress
+                Dim index As Integer = 0
+                For address As Int32 = startAddress To endAddress
+                    addressArray(index) = IpAddressFromInt32(address)
+                    index = index + 1
+                Next
 
-                    While Not matchIP(ipFrom, ipTo)
-                        arrIPs.Add(String.Format("{0}.{1}.{2}.{3}", ipFrom(0), ipFrom(1), ipFrom(2), ipFrom(3)))
-                        ipFrom(3) += 1
-                        If ipFrom(3) > 255 Then
-                            ipFrom(3) = 0
-                            ipFrom(2) += 1
-                            If ipFrom(2) > 255 Then
-                                ipFrom(2) = 0
-                                ipFrom(1) += 1
-                                If ipFrom(1) > 255 Then
-                                    ipFrom(1) = 0
-                                    ipFrom(0) += 1
-                                    If ipFrom(0) > 255 Then
-                                        ipFrom(0) = 0
-                                    End If
-                                End If
-                            End If
-                        End If
-                    End While
-
-                    Return arrIPs
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIPRange failed (Tools.PortScan)" & vbNewLine & ex.Message, True)
-                    Return Nothing
-                End Try
+                Return addressArray
             End Function
 
-            Private Function matchIP(ByVal fromIP As String(), ByVal toIP As String()) As Boolean
-                Try
-                    For c As Integer = 0 To fromIP.Length - 1
-                        If c = fromIP.Length - 1 Then
-                            If Not fromIP(c) = toIP(c) + 1 Then
-                                Return False
-                            End If
-                        Else
-                            If Not fromIP(c) = toIP(c) Then
-                                Return False
-                            End If
-                        End If
-                    Next
-                    Return True
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "matchIP failed (Tools.PortScan)" & vbNewLine & ex.Message, True)
-                    Return False
-                End Try
+            Private Shared Function IpAddressMin(ByVal ipAddress1 As IPAddress, ByVal ipAddress2 As IPAddress) As IPAddress
+                If (IpAddressCompare(ipAddress1, ipAddress2) < 0) Then ' ipAddress1 < ipAddress2
+                    Return ipAddress1
+                Else
+                    Return ipAddress2
+                End If
             End Function
+
+            Private Shared Function IpAddressMax(ByVal ipAddress1 As IPAddress, ByVal ipAddress2 As IPAddress) As IPAddress
+                If (IpAddressCompare(ipAddress1, ipAddress2) > 0) Then ' ipAddress1 > ipAddress2
+                    Return ipAddress1
+                Else
+                    Return ipAddress2
+                End If
+            End Function
+
+            Private Shared Function IpAddressCompare(ByVal ipAddress1 As IPAddress, ByVal ipAddress2 As IPAddress) As Integer
+                Return IpAddressToInt32(ipAddress1) - IpAddressToInt32(ipAddress2)
+            End Function
+
+            Private Shared Function IpAddressToInt32(ByVal ipAddress As IPAddress) As Int32
+                If Not ipAddress.AddressFamily = Sockets.AddressFamily.InterNetwork Then Throw New ArgumentException("ipAddress")
+
+                Dim addressBytes As Byte() = ipAddress.GetAddressBytes() ' in network order (big-endian)
+                If BitConverter.IsLittleEndian Then Array.Reverse(addressBytes) ' to host order (little-endian)
+                Debug.Assert(addressBytes.Length = 4)
+
+                Return BitConverter.ToInt32(addressBytes, 0)
+            End Function
+
+            Private Shared Function IpAddressFromInt32(ByVal ipAddress As Int32) As IPAddress
+                Dim addressBytes As Byte() = BitConverter.GetBytes(ipAddress) ' in host order
+                If BitConverter.IsLittleEndian Then Array.Reverse(addressBytes) ' to network order (big-endian)
+                Debug.Assert(addressBytes.Length = 4)
+
+                Return New IPAddress(addressBytes)
+            End Function
+#End Region
+
+#Region "Events"
+            Public Event BeginHostScan(ByVal host As String)
+            Public Event HostScanned(ByVal scanHost As ScanHost, ByVal scannedHostCount As Integer, ByVal totalHostCount As Integer)
+            Public Event ScanComplete(ByVal hosts As List(Of ScanHost))
 #End Region
         End Class
     End Namespace
