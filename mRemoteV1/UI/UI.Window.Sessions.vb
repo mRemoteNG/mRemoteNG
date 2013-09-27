@@ -217,7 +217,13 @@ Namespace UI
             End Sub
 
             Private Sub menuSession_Opening(ByVal sender As Object, ByVal e As System.ComponentModel.CancelEventArgs)
-                Dim connectionInfo As mRemoteNG.Connection.Info = TryCast(mRemoteNG.Tree.Node.SelectedNode.Tag, mRemoteNG.Connection.Info)
+                Dim connectionInfo As mRemoteNG.Connection.Info
+                If (mRemoteNG.Tree.Node.TreeView Is Nothing OrElse mRemoteNG.Tree.Node.SelectedNode Is Nothing) Then
+                    connectionInfo = Nothing
+                Else
+                    connectionInfo = TryCast(mRemoteNG.Tree.Node.SelectedNode.Tag, mRemoteNG.Connection.Info)
+                End If
+
                 If connectionInfo Is Nothing Then
                     sessionMenuLogoff.Enabled = False
                     sessionMenuRetrieve.Enabled = False
