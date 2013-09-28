@@ -29,7 +29,11 @@ Namespace Config
                     With Me._MainForm
                         ' Migrate settings from previous version
                         If My.Settings.DoUpgrade Then
-                            My.Settings.Upgrade()
+                            Try
+                                My.Settings.Upgrade()
+                            Catch ex As Exception
+                                Log.Error("My.Settings.Upgrade() failed" & vbNewLine & ex.Message)
+                            End Try
                             My.Settings.DoUpgrade = False
 
                             ' Clear pending update flag

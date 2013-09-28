@@ -70,6 +70,7 @@ Namespace Themes
         Private Shared _activeThemeHandlerSet As Boolean = False
         Public Shared Property ActiveTheme As ThemeInfo
             Get
+                If _activeTheme Is Nothing Then Return DefaultTheme
                 Return _activeTheme
             End Get
             Set(value As ThemeInfo)
