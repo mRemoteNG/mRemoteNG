@@ -2147,7 +2147,7 @@ Public Class frmOptions
 
             cTaskDialog.ShowCommandBox(Me, Application.Info.ProductName, Language.strProxyTestSucceeded, "", Language.strButtonOK, False)
         Catch ex As Exception
-            cTaskDialog.ShowCommandBox(Me, Application.Info.ProductName, Language.strProxyTestFailed, Misc.GetExceptionMessageRecursive(ex), "", "", "", "", False, eSysIcons.Error, 0)
+            cTaskDialog.ShowCommandBox(Me, Application.Info.ProductName, Language.strProxyTestFailed, Misc.GetExceptionMessageRecursive(ex), "", "", "", Language.strButtonOK, False, eSysIcons.Error, 0)
         End Try
     End Sub
 
