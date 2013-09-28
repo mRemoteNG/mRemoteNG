@@ -57,6 +57,7 @@ Namespace Connection
             Private _rdpClient As MsRdpClient5NotSafeForScripting
             Private _rdpVersion As Version
             Private _connectionInfo As Info
+            Private _loginComplete As Boolean
 #End Region
 
 #Region "Public Methods"
@@ -131,7 +132,8 @@ Namespace Connection
             End Function
 
             Public Overrides Function Connect() As Boolean
-                Me.SetEventHandlers()
+                _loginComplete = False
+                SetEventHandlers()
 
                 Try
                     _rdpClient.Connect()
@@ -213,6 +215,8 @@ Namespace Connection
 
             Private Sub ReconnectForResize()
                 If _rdpVersion < Versions.RDC80 Then Return
+
+                If Not _loginComplete Then Return
 
                 If Not InterfaceControl.Info.AutomaticResize Then Return
 
@@ -428,6 +432,7 @@ Namespace Connection
                 Try
                     AddHandler _rdpClient.OnConnecting, AddressOf RDPEvent_OnConnecting
                     AddHandler _rdpClient.OnConnected, AddressOf RDPEvent_OnConnected
+                    AddHandler _rdpClient.OnLoginComplete, AddressOf RDPEvent_OnLoginComplete
                     AddHandler _rdpClient.OnFatalError, AddressOf RDPEvent_OnFatalError
                     AddHandler _rdpClient.OnDisconnected, AddressOf RDPEvent_OnDisconnected
                     AddHandler _rdpClient.OnLeaveFullScreenMode, AddressOf RDPEvent_OnLeaveFullscreenMode
@@ -467,6 +472,10 @@ Namespace Connection
 
             Private Sub RDPEvent_OnConnected()
                 Event_Connected(Me)
+            End Sub
+
+            Private Sub RDPEvent_OnLoginComplete()
+                _loginComplete = True
             End Sub
 
             Private Sub RDPEvent_OnLeaveFullscreenMode()
