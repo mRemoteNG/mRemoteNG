@@ -1769,7 +1769,6 @@ Namespace App
                 AddHandler newProtocol.Connected, AddressOf Prot_Event_Connected
                 AddHandler newProtocol.Closed, AddressOf Prot_Event_Closed
                 AddHandler newProtocol.ErrorOccured, AddressOf Prot_Event_ErrorOccured
-
                 newProtocol.InterfaceControl = New Connection.InterfaceControl(cContainer, newProtocol, newConnectionInfo)
 
                 newProtocol.Force = Force
