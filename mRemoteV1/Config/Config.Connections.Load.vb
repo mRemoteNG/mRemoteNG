@@ -396,7 +396,10 @@ Namespace Config
                             tNode.SelectedImageIndex = Images.Enums.TreeImage.Container
                         End If
 
-                        If sqlRd.Item("ParentID") <> 0 Then
+                        Dim parentId = sqlRd.Item("ParentID").ToString().Trim()
+                        If String.IsNullOrEmpty(parentId) Or parentId = "0" Then
+                            baseNode.Nodes.Add(tNode)
+                        Else
                             Dim pNode As TreeNode = Tree.Node.GetNodeFromConstantID(sqlRd.Item("ParentID"))
 
                             If pNode IsNot Nothing Then
@@ -410,8 +413,6 @@ Namespace Config
                             Else
                                 baseNode.Nodes.Add(tNode)
                             End If
-                        Else
-                            baseNode.Nodes.Add(tNode)
                         End If
 
                         'AddNodesFromSQL(tNode)

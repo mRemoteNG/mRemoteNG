@@ -118,7 +118,11 @@ CREATE TABLE [dbo].[tblCons] (
 	[InheritRDGatewayUseConnectionCredentials] [bit] NOT NULL ,
 	[InheritRDGatewayUsername] [bit] NOT NULL ,
 	[InheritRDGatewayPassword] [bit] NOT NULL ,
-	[InheritRDGatewayDomain] [bit] NOT NULL
+	[InheritRDGatewayDomain] [bit] NOT NULL ,
+	[LoadBalanceInfo] [varchar] (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[AutomaticResize] [bit] NOT NULL DEFAULT 1 ,
+	[InheritLoadBalanceInfo] [bit] NOT NULL DEFAULT 0 ,
+	[InheritAutomaticResize] [bit] NOT NULL DEFAULT 0
 ) ON [PRIMARY]
 GO
  
@@ -131,7 +135,7 @@ CREATE TABLE [dbo].[tblRoot] (
 GO
  
 CREATE TABLE [dbo].[tblUpdate] (
-                [LastUpdate] [datetime] NULL 
+	[LastUpdate] [datetime] NULL 
 ) ON [PRIMARY]
 GO
 

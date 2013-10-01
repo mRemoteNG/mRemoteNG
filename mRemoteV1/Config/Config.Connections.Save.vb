@@ -460,7 +460,7 @@ Namespace Config
                         End If
                     End If
 
-                    _sqlQuery.CommandText &= _currentNodeIndex & "," & _parentConstantId & "," & .ConstantID & ",'" & Tools.Misc.DBDate(Now) & "')"
+                    _sqlQuery.CommandText &= _currentNodeIndex & ",'" & _parentConstantId & "','" & .ConstantID & "','" & Tools.Misc.DBDate(Now) & "')"
                 End With
             End Sub
 #End Region
