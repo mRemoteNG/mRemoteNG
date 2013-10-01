@@ -46,11 +46,14 @@ Namespace Config
                 _rootTreeNode.Tag = puttyRootInfo
                 _rootTreeNode.ImageIndex = Images.Enums.TreeImage.PuttySessions
                 _rootTreeNode.SelectedImageIndex = Images.Enums.TreeImage.PuttySessions
-                treeView.Nodes.Add(_rootTreeNode)
+            End If
+
+            If Not treeView.Nodes.Contains(_rootTreeNode) Then
                 If Not inUpdate Then
                     treeView.BeginUpdate()
                     inUpdate = True
                 End If
+                treeView.Nodes.Add(_rootTreeNode)
             End If
 
             puttyRootInfo.TreeNode = _rootTreeNode
