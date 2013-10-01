@@ -172,7 +172,14 @@ Namespace Config
 #End Region
 
 #Region "SQL"
+            Private Delegate Sub LoadFromSqlDelegate()
             Private Sub LoadFromSQL()
+                If Windows.treeForm Is Nothing OrElse Windows.treeForm.tvConnections Is Nothing Then Return
+                If Windows.treeForm.tvConnections.InvokeRequired Then
+                    Windows.treeForm.tvConnections.Invoke(New LoadFromSqlDelegate(AddressOf LoadFromSQL))
+                    Return
+                End If
+
                 Try
                     App.Runtime.IsConnectionsFileLoaded = False
 

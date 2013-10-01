@@ -6,6 +6,7 @@
   Fixed issue MR-535 - SQL error saving Connections
   Fixed issue MR-538 - RDP loses connection when hiding config or connections pane
   Made minor improvements to the port scan functionality.
+  Fixed possible cross-thread operation exception when loading connections from SQL
 
 1.71 Beta 5 (2013-06-09):
   Fixed issue MR-491 - Could not start RDP Connection
