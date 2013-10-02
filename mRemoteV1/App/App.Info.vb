@@ -45,6 +45,9 @@ Namespace App
         Public Class Update
             Public Shared ReadOnly Property FileName As String
                 Get
+#If DEBUG Then
+                    Return "update-debug.txt"
+#End If
                     Select Case My.Settings.UpdateChannel.ToLowerInvariant()
                         Case "beta"
                             Return "update-beta.txt"
