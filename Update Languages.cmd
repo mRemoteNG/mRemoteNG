@@ -28,6 +28,7 @@ mkdir %TEMP_FOLDER%
 %RAR% x -o+ %ZIP_FILE% *.* %TEMP_FOLDER%
 
 %SORTRESX% %TEMP_FOLDER%\ar\Language.ar.resx "%~dp0\mRemoteV1\Language\Language.ar.resx"
+%SORTRESX% %TEMP_FOLDER%\bg\Language.bg.resx "%~dp0\mRemoteV1\Language\Language.bg.resx"
 %SORTRESX% %TEMP_FOLDER%\de\Language.de.resx "%~dp0\mRemoteV1\Language\Language.de.resx"
 %SORTRESX% %TEMP_FOLDER%\el\Language.el.resx "%~dp0\mRemoteV1\Language\Language.el.resx"
 %SORTRESX% %TEMP_FOLDER%\en-US\Language.en.resx "%~dp0\mRemoteV1\Language\Language.en-US.resx"
@@ -45,6 +46,7 @@ mkdir %TEMP_FOLDER%
 %SORTRESX% %TEMP_FOLDER%\ru\Language.ru.resx "%~dp0\mRemoteV1\Language\Language.ru.resx"
 %SORTRESX% %TEMP_FOLDER%\uk\Language.uk.resx "%~dp0\mRemoteV1\Language\Language.uk.resx"
 %SORTRESX% %TEMP_FOLDER%\zh-CN\Language.zh.resx "%~dp0\mRemoteV1\Language\Language.zh-CN.resx"
+%SORTRESX% %TEMP_FOLDER%\zh-TW\Language.zh.resx "%~dp0\mRemoteV1\Language\Language.zh-TW.resx"
 
 rmdir /s /q %TEMP_FOLDER%
 
