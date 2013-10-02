@@ -36,7 +36,7 @@
   Fixed issue MR-487 - Initiate connections on MouseUp event
   Added PuTTY Session Settings command to the Config panel for PuTTY Saved Sessions.
   Updated translations.
-  Added Norwegian (Bokmål) and Portuguese (Brazil) translations.
+  Added Norwegian (Bokmal) and Portuguese (Brazil) translations.
   Added Spanish translation to the installer.
   Fixed an exception or crash when choosing unnamed colors for themes.
   Fixed possible error "Control does not support transparent background colors" when modifying themes.

@@ -2,7 +2,7 @@
 
 setlocal enabledelayedexpansion
 
-set VERSIONTAG=Beta4
+set VERSIONTAG=
 
 set VCVARSALL="%ProgramFiles(x86)%\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
 set DEVENV="devenv.exe"
