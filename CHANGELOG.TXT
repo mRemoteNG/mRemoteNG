@@ -1,4 +1,4 @@
-1.71:
+1.71 (2013-10-01):
   Fixed issue MR-495 - Having a negative range in port scan creates memory exhaustion.
   Fixed issue MR-514 - Window Proxy test failed without close button
   Fixed issue MR-521 - Right-Clicking in "Sessions" panel crashes mRemoteNG
