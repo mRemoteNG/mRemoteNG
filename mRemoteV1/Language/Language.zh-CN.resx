@@ -412,6 +412,12 @@ VncSharpNG 版本 {0}</value>
   <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>无法解析命令行参数！</value>
   </data>
+  <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+    <value>{0} 检测到联想Auto Scroll程序在本机上运行。该程序程序明确会导致问题 {0} 的出现。建议您禁用或卸载该程序。</value>
+  </data>
+  <data name="strCompatibilityProblemDetected" xml:space="preserve">
+    <value>检测到系统存在兼容性问题</value>
+  </data>
   <data name="strComponentsCheck" xml:space="preserve">
     <value>组件检查</value>
   </data>
@@ -540,6 +546,9 @@ VncSharpNG 版本 {0}</value>
   </data>
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>无法新建连接配置文件！</value>
+  </data>
+  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+    <value>在 FilteredPropertyGrid 中找不到 ToolStrip 控件。</value>
   </data>
   <data name="strCurrentVersion" xml:space="preserve">
     <value>已安装版本</value>
@@ -701,6 +710,9 @@ VncSharpNG 版本 {0}</value>
   </data>
   <data name="strHttpConnectionFailed" xml:space="preserve">
     <value>无法创建新的 HTTP 连接！</value>
+  </data>
+  <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
+    <value>更改HTTP文档标题失败！</value>
   </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>设置 HTTP 属性失败！</value>
@@ -1452,6 +1464,9 @@ VncSharpNG 版本 {0}</value>
   <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>使用控制台会话。</value>
   </data>
+  <data name="strPropertyNameUseCredSsp" xml:space="preserve">
+    <value>使用CredSSP方式</value>
+  </data>
   <data name="strPropertyNameUser1" xml:space="preserve">
     <value>自定义信息</value>
   </data>
@@ -1517,6 +1532,9 @@ VncSharpNG 版本 {0}</value>
   </data>
   <data name="strPuttyResizeFailed" xml:space="preserve">
     <value>Putty 窗口大小调整失败！</value>
+  </data>
+  <data name="strPuttySavedSessionsRootName" xml:space="preserve">
+    <value>PuTTY 会话已保存</value>
   </data>
   <data name="strPuttySettings" xml:space="preserve">
     <value>PuTTY 设置</value>
@@ -1862,6 +1880,9 @@ VncSharpNG 版本 {0}</value>
   </data>
   <data name="strSSHTransferEndFailed" xml:space="preserve">
     <value>SSH 传输结束(UI.Window.SSHTransfer）失败！</value>
+  </data>
+  <data name="strSSHTransferFailed" xml:space="preserve">
+    <value>SSH 传输失败。</value>
   </data>
   <data name="strStartIP" xml:space="preserve">
     <value>起始IP</value>

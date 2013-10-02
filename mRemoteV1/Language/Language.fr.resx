@@ -401,7 +401,7 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
     <value>Attendre avant de quitter</value>
   </data>
   <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
-    <value>Impossible de parcourir les arguments de la ligne de commande !</value>
+    <value>Impossible de convertir les arguments de la ligne de commande !</value>
   </data>
   <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
     <value>{0} a détecté que l'utilitaire Lenovo Auto Scroll Utility est executé sur le système. Cet utilitaire est connu pour générer des problèmes avec {0}. Il est recommandé de le désactiver ou de le désinstaller.</value>

@@ -139,7 +139,7 @@
     <value>AddNodesFromSQL falhou!</value>
   </data>
   <data name="strAllowOnlySingleInstance" xml:space="preserve">
-    <value>Permitir apenas uma única instância do aplicativo (mRemoteNG é necessário reiniciar)</value>
+    <value>Permitir apenas uma única instância do aplicativo (É necessário reiniciar o mRemoteNG)</value>
   </data>
   <data name="strAlways" xml:space="preserve">
     <value>Sempre</value>
@@ -252,6 +252,9 @@
   <data name="strCategoryDisplay" xml:space="preserve">
     <value>Mostrar</value>
   </data>
+  <data name="strCategoryGateway" xml:space="preserve">
+    <value>Gateway</value>
+  </data>
   <data name="strCategoryGeneral" xml:space="preserve">
     <value>Geral</value>
   </data>
@@ -276,8 +279,43 @@
   <data name="strCcCheckSucceeded" xml:space="preserve">
     <value>Verificação com sucesso!</value>
   </data>
+  <data name="strCcEOLFailed" xml:space="preserve">
+    <value>O recurso de sessões (RDP) requer que você tenha uma cópia registrada do eolwtscom.dll no seu sistema. 
+mRemoteNG vem com este componente mas não o registra automaticamente a menos que você instale o pacote. 
+Para registrá-lo manualmente faça isso: Abra a caixa de diálogo Executar (Iniciar - Executar) e digite o seguinte: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (onde c:\Program Files\mRemoteNG\ é o caminho para a instalação de mRemoteNG). 
+Se você ainda não conseguir passar por esta verificação ou não conseguir usar o recurso de sessões (RDP) no mRemoteNG, por favor, consulte o fórum de mRemoteNG em http://forum.mremoteng.org/</value>
+  </data>
+  <data name="strCcEOLOK" xml:space="preserve">
+    <value>EOLWTSCOM foi encontrada e parece ser registrado corretamente.</value>
+  </data>
+  <data name="strCcGeckoFailed" xml:space="preserve">
+    <value>Para usar o motor de renderização Gecko, você precisa ter o XULrunner 1.8.1.x e o caminho para a instalação do conjunto em suas opções. 
+Você pode baixar o XULrunner 1.8.1.3 em: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/ 
+Quando terminar de baixar o pacote, extraia o pacote para um caminho de sua escolha. 
+Em seguida, emtre no mRemoteNG e vá em ferramentas - opções - avançadas e digite o caminho correto no campo caminho XULrunner. 
+Se ainda não conseguir passar esta verificação ou usar o motor Gecko em mRemoteNG por favor consultar o fórum de mRemoteNG em http://forum.mremoteng.org/</value>
+  </data>
+  <data name="strCcGeckoOK" xml:space="preserve">
+    <value>XULrunner foi encontrado e aparenta estar instalado corretamente.</value>
+  </data>
+  <data name="strCcICAFailed" xml:space="preserve">
+    <value>ICA requer que o XenDesktop Online Plugin esteja instalado e a biblioteca wfica.ocs registrada. Você pode baixar o cliente aqui: http://www.citrix.com/download/ 
+Se você tiver o Plugin Online XenDesktop instalado e a verificação ainda falhar, tente registrar manualmente o wfica.ocx 
+Para fazer isso abra a caixa de diálogo Executar (Iniciar - Executar) e digite o seguinte: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (onde c:\Program Files\Citrix\ICA Client\ é o caminho para a instalação do Plugin Online do XenDesktop). 
+Se você ainda não puder passar por esta verificação ou usar ICA em mRemoteNG, por favor, consulte o fórum de mRemoteNG no http://forum.mremoteng.org/"</value>
+  </data>
+  <data name="strCcICAOK" xml:space="preserve">
+    <value>Todos os componentes de ICA, foram encontrados e parecem ser registrado corretamente. Citrix ICA cliente controle versão {0}</value>
+  </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
     <value>não instalado corretamente</value>
+  </data>
+  <data name="strCcPuttyFailed" xml:space="preserve">
+    <value>O SSH, Telnet, Rlogin e protocolos RAW precisam PuTTY para trabalhar. PuTTY vem com cada pacote de mRemoteNG e está localizado no caminho de instalação. 
+Por favor, certifique-se de que você tem o Putty.exe em seu diretório mRemoteNG (padrão: c:\Program Files\mRemoteNG\) ou que você tenha especificado um caminho válido para seu executável PuTTY nas opções (ferramentas - opções - avançadas - caminho personalizado PuTTY)</value>
+  </data>
+  <data name="strCcPuttyOK" xml:space="preserve">
+    <value>O executável PuTTY foi encontrado e está pronto para usar.</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Domínio</value>
@@ -310,7 +348,7 @@
     <value>Esperar para sair</value>
   </data>
   <data name="strCheckForUpdate" xml:space="preserve">
-    <value>Verifique novamente</value>
+    <value>Verificar novamente</value>
   </data>
   <data name="strCheckForUpdatesOnStartup" xml:space="preserve">
     <value>Verificar se há atualizações e anúncios na inicialização</value>
@@ -345,7 +383,108 @@
   <data name="strColumnWaitForExit" xml:space="preserve">
     <value>Esperar para sair</value>
   </data>
+  <data name="strComponentsCheck" xml:space="preserve">
+    <value>Validação de componentes</value>
+  </data>
+  <data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
+    <value>btnIcon_Click falhou!</value>
+  </data>
+  <data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
+    <value>ShowHideGridItems falhou!</value>
+  </data>
+  <data name="strConfigPropertyGridMenuClickFailed" xml:space="preserve">
+    <value>IconMenu_Click falhou!</value>
+  </data>
+  <data name="strConfigPropertyGridObjectFailed" xml:space="preserve">
+    <value>Propriedade do Objeto de grade falhou!</value>
+  </data>
+  <data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
+    <value>SetHostStatus falhou!</value>
+  </data>
   <data name="strConfigPropertyGridValueFailed" xml:space="preserve">
     <value>pGrid_PopertyValueChanged falhou!</value>
+  </data>
+  <data name="strConfigUiLoadFailed" xml:space="preserve">
+    <value>Config UI carregamento falhou!</value>
+  </data>
+  <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
+    <value>Você quer fechar a conexão, "{0}"?</value>
+  </data>
+  <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
+    <value>Tem certeza que deseja fechar o painel, "{0}"? Todas as ligações ativas serão fechadas.</value>
+  </data>
+  <data name="strConfirmDeleteExternalTool" xml:space="preserve">
+    <value>Tem certeza que deseja excluir a ferramenta externa, "{0}"?</value>
+  </data>
+  <data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
+    <value>Tem certeza que deseja excluir as ferramentas externas {0} selecionadas?</value>
+  </data>
+  <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
+    <value>Tem certeza que deseja excluir a ligação, "{0}"?</value>
+  </data>
+  <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
+    <value>Tem certeza que deseja excluir a pasta vazia, "{0}"?</value>
+  </data>
+  <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
+    <value>Tem certeza que deseja excluir a pasta, "{0}"? Pastas ou ligações que ele contém também serão excluídas.</value>
+  </data>
+  <data name="strConfirmExitMainInstruction" xml:space="preserve">
+    <value>Você quer fechar todas as conexões abertas?</value>
+  </data>
+  <data name="strConfirmResetLayout" xml:space="preserve">
+    <value>Tem certeza de que deseja redefinir os painéis para o layout padrão?</value>
+  </data>
+  <data name="strConnect" xml:space="preserve">
+    <value>Conectar-se</value>
+  </data>
+  <data name="strConnectInFullscreen" xml:space="preserve">
+    <value>Se conectar em modo fullscreen</value>
+  </data>
+  <data name="strConnecting" xml:space="preserve">
+    <value>Conectando...</value>
+  </data>
+  <data name="strConnectionEventConnected" xml:space="preserve">
+    <value>Protocolo evento conectado</value>
+  </data>
+  <data name="strConnectionEventConnectedDetail" xml:space="preserve">
+    <value>Conexão para "{0}" via "{1}" estabelecido pelo usuário "{2}" (Descrição: "{3}"; Campo usuário: "{4}")</value>
+  </data>
+  <data name="strConnectionEventConnectionFailed" xml:space="preserve">
+    <value>Conexão falhou!</value>
+  </data>
+  <data name="strConnectionEventErrorOccured" xml:space="preserve">
+    <value>Erro no evento de protocolo</value>
+  </data>
+  <data name="strConnectionOpenFailed" xml:space="preserve">
+    <value>Abrir conexão falhou!</value>
+  </data>
+  <data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
+    <value>Não é possível abrir a conexão: nenhum nome de host especificado!</value>
+  </data>
+  <data name="strConnectionRdpErrorDetail" xml:space="preserve">
+    <value>Erro RDP!
+Código de erro: {0}
+Descrição do erro: {1}</value>
+  </data>
+  <data name="strConnections" xml:space="preserve">
+    <value>Conexões</value>
+  </data>
+  <data name="strConnectionSetDefaultPortFailed" xml:space="preserve">
+    <value>Impossível definir porta padrão!</value>
+  </data>
+  <data name="strConnectionsFileBackupFailed" xml:space="preserve">
+    <value>Não foi possível criar o backup do arquivo de conexões!</value>
+  </data>
+  <data name="strConnectionsFileCouldNotBeImported" xml:space="preserve">
+    <value>Falha na importação do arquivo de conexões!</value>
+  </data>
+  <data name="strConnectionsFileCouldNotBeLoaded" xml:space="preserve">
+    <value>Arquivo de conexões "{0}" não pôde ser carregado!</value>
+  </data>
+  <data name="strConnectionsFileCouldNotBeLoadedNew" xml:space="preserve">
+    <value>Arquivo de conexões "{0}" não pôde ser carregado! Começando com o novo arquivo de conexões.</value>
+  </data>
+  <data name="strConnectionsFileCouldNotBeSaved" xml:space="preserve">
+    <value>Não consegui salvar o arquivo de conexões!</value>
   </data>
 </root>

@@ -1139,6 +1139,9 @@ VncSharpNG Control Version {0}</value>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Відкриті порти</value>
   </data>
+  <data name="strOptionsTabTheme" xml:space="preserve">
+    <value>Тема</value>
+  </data>
   <data name="strPanelName" xml:space="preserve">
     <value>Назва групи</value>
   </data>
@@ -1813,6 +1816,9 @@ VncSharpNG Control Version {0}</value>
   </data>
   <data name="strSSHTransferEndFailed" xml:space="preserve">
     <value>Передача по SSH завершена с ошибкой (UI.Window.SSHTransfer)!</value>
+  </data>
+  <data name="strSSHTransferFailed" xml:space="preserve">
+    <value>Помилка передавання SSH.</value>
   </data>
   <data name="strStartIP" xml:space="preserve">
     <value>Початковий IP</value>

@@ -150,6 +150,9 @@
   <data name="strAlwaysShowPanelSelection" xml:space="preserve">
     <value>Panel Auswahl Dialog immer anzeigen</value>
   </data>
+  <data name="strAlwaysShowPanelTabs" xml:space="preserve">
+    <value>Palettenregister immer anzeigen</value>
+  </data>
   <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
     <value>System Tray Icon immer anzeigen</value>
   </data>
@@ -414,6 +417,12 @@ VncSharpNG Control Version {0}</value>
   <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
     <value>Die Kommandozeilen Parameter kontnen nicht ausgewertet werden!</value>
   </data>
+  <data name="strCompatibilityLenovoAutoScrollUtilityDetected" xml:space="preserve">
+    <value>{0} hat festgestellt, dass das Lenovo Auto Scroll Utility auf diesem Computer ausgeführt wird. Dieses Dienstprogramm ist dafür bekannt, dass es Probleme mit {0} verursacht. Es wird empfohlen, dass Sie es deaktivieren oder deinstallieren.</value>
+  </data>
+  <data name="strCompatibilityProblemDetected" xml:space="preserve">
+    <value>Kompatibilitätsproblem entdeckt</value>
+  </data>
   <data name="strComponentsCheck" xml:space="preserve">
     <value>Komponenten Überprüfung</value>
   </data>
@@ -442,7 +451,7 @@ VncSharpNG Control Version {0}</value>
     <value>Möchten Sie die Verbindung "{0}" schließen?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
-    <value>Sind sie sicher, dass Sie das Panel "{0}" schließen möchten? Alle Verbindung , die es enthält, werden ebenfalls geschlossen.</value>
+    <value>Sind sie sicher, dass Sie das Panel "{0}" schließen möchten? Alle Verbindungen, die es enthält, werden ebenfalls geschlossen.</value>
   </data>
   <data name="strConfirmDeleteExternalTool" xml:space="preserve">
     <value>Sind Sie sicher dass Sie das extene Programm "{0}" entfernen möchten?</value>
@@ -543,8 +552,14 @@ Starte mit neuer Datei.</value>
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Kann keine neue Verbindungsdatei erstellen!</value>
   </data>
+  <data name="strCouldNotFindToolStripInFilteredPropertyGrid" xml:space="preserve">
+    <value>Das ToolStrip-Steuerelement konnte in FilteredPropertyGrid nicht gefunden werden.</value>
+  </data>
   <data name="strCurrentVersion" xml:space="preserve">
     <value>Aktuelle Version</value>
+  </data>
+  <data name="strDefaultTheme" xml:space="preserve">
+    <value>Standard-Aussehen</value>
   </data>
   <data name="strDetect" xml:space="preserve">
     <value>Erkennen</value>
@@ -616,7 +631,7 @@ Starte mit neuer Datei.</value>
     <value>Verschlüsselung fehlgeschlagen. {0}</value>
   </data>
   <data name="strErrorFipsPolicyIncompatible" xml:space="preserve">
-    <value>Die Sicherheitseinstellung von Windows "Systemkryptografie: Verwenden sie FIPS-konformen Algorithmus für Verschlüsselung, hashing und Signatur", ist aktiviert. Diese Einstellung ist nicht kompatibel mit {0}. Weitere Informationen finden sie im Microsoft Support-Artikel unter http://support.microsoft.com/kb/811833 .  {0} wird jetzt beendet.</value>
+    <value>Die Sicherheitseinstellung von Windows "Systemkryptografie: Verwenden sie FIPS-konformen Algorithmus für Verschlüsselung, Hashing und Signatur" ist aktiviert. Diese Einstellung ist nicht kompatibel mit {0}. Weitere Informationen finden sie im Microsoft Support-Artikel unter http://support.microsoft.com/kb/811833. {0} wird jetzt beendet.</value>
   </data>
   <data name="strErrors" xml:space="preserve">
     <value>Fehler</value>
@@ -682,7 +697,7 @@ Starte mit neuer Datei.</value>
     <value>Verbindungs Daten von SQL laden ist fehlgeschlagen!</value>
   </data>
   <data name="strGetConnectionInfoFromXmlFailed" xml:space="preserve">
-    <value>Fehler beim Laden des Verbindungseintrag für "{0}" von "{1}". {2}</value>
+    <value>Fehler beim Laden des Verbindungseintrags für "{0}" von "{1}". {2}</value>
   </data>
   <data name="strGroupboxAutomaticReconnect" xml:space="preserve">
     <value>Automatisches wiederverbinden</value>
@@ -705,6 +720,9 @@ Starte mit neuer Datei.</value>
   <data name="strHttpConnectionFailed" xml:space="preserve">
     <value>Erstellen der HTTP Verbindung fehlgeschlagen!</value>
   </data>
+  <data name="strHttpDocumentTileChangeFailed" xml:space="preserve">
+    <value>Fehler beim Ändern des HTTP-Dokumentfensters!</value>
+  </data>
   <data name="strHttpSetPropsFailed" xml:space="preserve">
     <value>Setzen der HTTP Parameter fehlgeschlagen!</value>
   </data>
@@ -725,6 +743,9 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="strIcaSetResolutionFailed" xml:space="preserve">
     <value>Setzen der Auflösung fehlgschlagen!</value>
+  </data>
+  <data name="strIdentifyQuickConnectTabs" xml:space="preserve">
+    <value>Quick connect Registerkarten identifizieren, indem das Präfix "Quick:" benutzt wird</value>
   </data>
   <data name="strImportAD" xml:space="preserve">
     <value>Aus Active Directory importieren</value>
@@ -792,6 +813,9 @@ Starte mit neuer Datei.</value>
   <data name="strLabelChangeLog" xml:space="preserve">
     <value>Veränderungsprotokoll:</value>
   </data>
+  <data name="strLabelClosingConnections" xml:space="preserve">
+    <value>Beim Schliessen der Verbindungen:</value>
+  </data>
   <data name="strLabelConnect" xml:space="preserve">
     <value>&amp;Direkt Verbinden:</value>
   </data>
@@ -838,7 +862,7 @@ Starte mit neuer Datei.</value>
     <value>Wählen Sie ein Panel aus der Liste oder klicken Sie auf Neu um ein neues zu erstellen. Klickeen Sie OK um fortzufahren.</value>
   </data>
   <data name="strLabelServerStatus" xml:space="preserve">
-    <value>Server Status:</value>
+    <value>Serverstatus:</value>
   </data>
   <data name="strLabelSQLDatabaseName" xml:space="preserve">
     <value>Datenbank:</value>
@@ -990,6 +1014,15 @@ Starte mit neuer Datei.</value>
   <data name="strMenuNotifications" xml:space="preserve">
     <value>Meldungen</value>
   </data>
+  <data name="strMenuNotificationsCopyAll" xml:space="preserve">
+    <value>Alle Kopieren</value>
+  </data>
+  <data name="strMenuNotificationsDelete" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
+    <value>Alle Löschen</value>
+  </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
     <value>Konfigurations Datei öffnen...</value>
   </data>
@@ -1000,7 +1033,7 @@ Starte mit neuer Datei.</value>
     <value>Einfügen</value>
   </data>
   <data name="strMenuPortScan" xml:space="preserve">
-    <value>Port Scan</value>
+    <value>Port-Scan</value>
   </data>
   <data name="strMenuQuickConnectToolbar" xml:space="preserve">
     <value>Direkt Verbinden Symbolleiste</value>
@@ -1049,6 +1082,9 @@ Starte mit neuer Datei.</value>
   </data>
   <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
     <value>Sitzungen and Bildschirmschnappschüsse</value>
+  </data>
+  <data name="strMenuShowHelpText" xml:space="preserve">
+    <value>&amp;Hilfetext anzeigen</value>
   </data>
   <data name="strMenuShowText" xml:space="preserve">
     <value>Text anzeigen</value>
@@ -1143,6 +1179,15 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   </data>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Offene Ports</value>
+  </data>
+  <data name="strOptionsTabTheme" xml:space="preserve">
+    <value>Aussehen</value>
+  </data>
+  <data name="strOptionsThemeButtonDelete" xml:space="preserve">
+    <value>&amp;Löschen</value>
+  </data>
+  <data name="strOptionsThemeButtonNew" xml:space="preserve">
+    <value>&amp;Neu</value>
   </data>
   <data name="strPanelName" xml:space="preserve">
     <value>Panel Name</value>
@@ -1281,6 +1326,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   </data>
   <data name="strPropertyDescriptionUseConsoleSession" xml:space="preserve">
     <value>Zur Konsolen Sitzung des entfernten Hosts verbinden.</value>
+  </data>
+  <data name="strPropertyDescriptionUseCredSsp" xml:space="preserve">
+    <value>Verwenden Sie den Anmeldeinformationen Security Support Provider (CredSSP) für die Authentifizierung, wenn er verfügbar ist.</value>
   </data>
   <data name="strPropertyDescriptionUser1" xml:space="preserve">
     <value>Dieses Feld ist frei beschreibbar.</value>
@@ -1432,6 +1480,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strPropertyNameUseConsoleSession" xml:space="preserve">
     <value>Verwende Konsole</value>
   </data>
+  <data name="strPropertyNameUseCredSsp" xml:space="preserve">
+    <value>Verwenden Sie CredSSP</value>
+  </data>
   <data name="strPropertyNameUser1" xml:space="preserve">
     <value>Benutzer Feld</value>
   </data>
@@ -1448,7 +1499,7 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
     <value>Proxy Passwort</value>
   </data>
   <data name="strPropertyNameVNCProxyPort" xml:space="preserve">
-    <value>Proxy Port</value>
+    <value>Proxy-Port</value>
   </data>
   <data name="strPropertyNameVNCProxyType" xml:space="preserve">
     <value>Proxy Typ</value>
@@ -1497,6 +1548,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strPuttyResizeFailed" xml:space="preserve">
     <value>Ändern der Größe fehlgschlagen!</value>
   </data>
+  <data name="strPuttySavedSessionsRootName" xml:space="preserve">
+    <value>PuTTY gespeicherte Sitzungen</value>
+  </data>
   <data name="strPuttySettings" xml:space="preserve">
     <value>PuTTY Einstellungen</value>
   </data>
@@ -1526,6 +1580,18 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   </data>
   <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
     <value>Prüfung auf Direkt Verbindungs Historie fehlgeschlagen!</value>
+  </data>
+  <data name="strRadioCloseWarnAll" xml:space="preserve">
+    <value>&amp;Warnen wenn Verbindungen beendet werden</value>
+  </data>
+  <data name="strRadioCloseWarnExit" xml:space="preserve">
+    <value>Warne mich nur beim B&amp;eenden von mRemoteNG</value>
+  </data>
+  <data name="strRadioCloseWarnMultiple" xml:space="preserve">
+    <value>Nur beim Beenden &amp;mehrerer Verbindungen warnen</value>
+  </data>
+  <data name="strRadioCloseWarnNever" xml:space="preserve">
+    <value>Nicht warnen, wenn Verbindungen beendet werden</value>
   </data>
   <data name="strRAW" xml:space="preserve">
     <value>Rohdaten (RAW)</value>
@@ -1743,6 +1809,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strScreenshots" xml:space="preserve">
     <value>Bilschirmschnappschüsse</value>
   </data>
+  <data name="strSearchPrompt" xml:space="preserve">
+    <value>Suche</value>
+  </data>
   <data name="strSendTo" xml:space="preserve">
     <value>Senden an...</value>
   </data>
@@ -1827,6 +1896,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strSSHTransferEndFailed" xml:space="preserve">
     <value>SSH Abschluss der Übertragung fehlgeschlagen!</value>
   </data>
+  <data name="strSSHTransferFailed" xml:space="preserve">
+    <value>SSH-Übertragung fehlgeschlagen.</value>
+  </data>
   <data name="strStartIP" xml:space="preserve">
     <value>Anfangs IP</value>
   </data>
@@ -1859,6 +1931,117 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   </data>
   <data name="strTheFollowing" xml:space="preserve">
     <value>die folgenden:</value>
+  </data>
+  <data name="strThemeCategoryConfigPanel" xml:space="preserve">
+    <value>Config-Panel</value>
+  </data>
+  <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
+    <value>Connections Panel</value>
+  </data>
+  <data name="strThemeCategoryGeneral" xml:space="preserve">
+    <value>Allgemein</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Die Hintergrundfarbe des Config panels.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>Die Farbe des Textes im Bedienfeld "Config".</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
+    <value>Die Farbe der Rasterlinien im Configpanel</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>Die Hintergrundfarbe des Bereichs Hilfe des Configpanel.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
+    <value>Die Farbe des Textes auf den Link "Hilfe" des Bereichs Config.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
+    <value>Die Farbe des Textes im Configpanel.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>Die Hintergrundfarbe des Fensters Verbindungen.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
+    <value>Die Farbe des Textes im Bereich Verbindungen.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>Die Farbe der Strukturlinien im Bereich Verbindungen.</value>
+  </data>
+  <data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
+    <value>Die Hintergrundfarbe der Menüs.</value>
+  </data>
+  <data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
+    <value>Die Farbe des Textes in den Menüs.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
+    <value>Die Hintergrundfarbe des Suchfelds.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
+    <value>Die Farbe des Textes in das Suchfeld.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
+    <value>Die Farbe des Textes der Eingabeaufforderung in das Suchfeld.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
+    <value>Die Hintergrundfarbe der Symbolleisten.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
+    <value>Die Farbe des Textes in den Symbolleisten.</value>
+  </data>
+  <data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
+    <value>Die Hintergrundfarbe des Hauptfensters.</value>
+  </data>
+  <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Config-Panel-Hintergrundfarbe</value>
+  </data>
+  <data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>Config-Panel Kategorie Textfarbe</value>
+  </data>
+  <data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
+    <value>Config-Panel-Grid-Linienfarbe</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>Config-Panel Hilfe Hintergrundfarbe</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
+    <value>Config-Panel Hilfe Textfarbe</value>
+  </data>
+  <data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
+    <value>Config-Panel-Textfarbe</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>Verbindungen-Panel-Hintergrund-Farbe</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
+    <value>Verbindungen-Panel-Textfarbe</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>Verbindungen Panel Baumgrenze Farbe</value>
+  </data>
+  <data name="strThemeNameMenuBackgroundColor" xml:space="preserve">
+    <value>Menü-Hintergrund-Farbe</value>
+  </data>
+  <data name="strThemeNameMenuTextColor" xml:space="preserve">
+    <value>Menü-Textfarbe</value>
+  </data>
+  <data name="strThemeNameSearchBoxBackgroundColor" xml:space="preserve">
+    <value>Suchfeld Hintergrundfarbe</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
+    <value>Suchfeld Textfarbe</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
+    <value>Suchfeld Prompt Textfarbe</value>
+  </data>
+  <data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
+    <value>Symbolleiste-Hintergrundfarbe</value>
+  </data>
+  <data name="strThemeNameToolbarTextColor" xml:space="preserve">
+    <value>Symbolleiste Textfarbe</value>
+  </data>
+  <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
+    <value>Fenster-Hintergrundfarbe</value>
   </data>
   <data name="strTitleError" xml:space="preserve">
     <value>Fehler ({0})</value>
@@ -1895,6 +2078,9 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   </data>
   <data name="strUncheckProperties" xml:space="preserve">
     <value>Deaktivieren Sie alle Eigenschaften die nicht gespeichert werden sollen.</value>
+  </data>
+  <data name="strUnnamedTheme" xml:space="preserve">
+    <value>Unbenanntes Aussehen</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
     <value>mRemoteNG  Update verfügbar!</value>
