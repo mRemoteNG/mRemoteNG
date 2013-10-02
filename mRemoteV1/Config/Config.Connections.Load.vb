@@ -403,7 +403,7 @@ Namespace Config
                             tNode.SelectedImageIndex = Images.Enums.TreeImage.Container
                         End If
 
-                        Dim parentId = sqlRd.Item("ParentID").ToString().Trim()
+                        Dim parentId As String = sqlRd.Item("ParentID").ToString().Trim()
                         If String.IsNullOrEmpty(parentId) Or parentId = "0" Then
                             baseNode.Nodes.Add(tNode)
                         Else
