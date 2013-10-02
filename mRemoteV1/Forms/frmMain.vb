@@ -1,3 +1,4 @@
+Imports SharedLibraryNG
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 Imports System.Reflection
@@ -29,6 +30,8 @@ Public Class frmMain
         End Get
     End Property
 #End Region
+
+    Private _keyboardHook As New KeyboardHook
 
 #Region "Startup & Shutdown"
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
@@ -92,6 +95,8 @@ Public Class frmMain
         AddHandler Microsoft.Win32.SystemEvents.DisplaySettingsChanged, AddressOf DisplayChanged
 
         Me.Opacity = 1
+
+        RequestKeyNotifications()
     End Sub
 
     Private Sub ApplyLanguage()
@@ -197,6 +202,11 @@ Public Class frmMain
                 End If
             Next
         End With
+    End Sub
+
+    Private Sub RequestKeyNotifications()
+        KeyboardHook.RequestKeyNotification(Handle, Win32.VK_TAB, KeyboardHook.ModifierKeys.Control, True)
+        KeyboardHook.RequestKeyNotification(Handle, Win32.VK_TAB, KeyboardHook.ModifierKeys.Control + KeyboardHook.ModifierKeys.Shift, True)
     End Sub
 
     Private Sub frmMain_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -842,6 +852,15 @@ Public Class frmMain
                     'Send to the next window
                     SendMessage(fpChainedWindowHandle, m.Msg, m.LParam, m.WParam)
                     fpChainedWindowHandle = m.LParam
+                Case KeyboardHook.HookKeyMsg
+                    Dim msgData As KeyboardHook.HookKeyMsgData = Marshal.PtrToStructure(m.LParam, GetType(KeyboardHook.HookKeyMsgData))
+                    If m.WParam.ToInt32() = Win32.WM_KEYDOWN And msgData.KeyCode = Win32.VK_TAB And (msgData.ModifierKeys And KeyboardHook.ModifierKeys.Control) Then
+                        If msgData.ModifierKeys And KeyboardHook.ModifierKeys.Shift Then
+                            SelectTabRelative(-1)
+                        Else
+                            SelectTabRelative(1)
+                        End If
+                    End If
             End Select
         Catch ex As Exception
         End Try
@@ -889,6 +908,21 @@ Public Class frmMain
             pnlDock.DocumentStyle = newDocumentStyle
             pnlDock.Size = New Size(1, 1)
         End If
+    End Sub
+
+    Private Sub SelectTabRelative(ByVal relativeIndex As Integer)
+        If Not TypeOf pnlDock.ActiveDocument Is UI.Window.Connection Then Return
+
+        Dim connectionWindow As UI.Window.Connection = pnlDock.ActiveDocument
+        Dim tabController As Magic.Controls.TabControl = connectionWindow.TabController
+
+        Dim newIndex As Integer = tabController.SelectedIndex + relativeIndex
+        While newIndex < 0 Or newIndex >= tabController.TabPages.Count
+            If newIndex < 0 Then newIndex = tabController.TabPages.Count + newIndex
+            If newIndex >= tabController.TabPages.Count Then newIndex = newIndex - tabController.TabPages.Count
+        End While
+
+        tabController.SelectedIndex = newIndex
     End Sub
 #End Region
 

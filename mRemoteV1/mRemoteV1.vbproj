@@ -1029,6 +1029,12 @@
   <ItemGroup>
     <Folder Include="My Project\DataSources\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\SharedLibraryNG\SharedLibraryNG\SharedLibraryNG.csproj">
+      <Project>{0F615504-5F30-4CF2-8341-1DE7FEC95A23}</Project>
+      <Name>SharedLibraryNG</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
