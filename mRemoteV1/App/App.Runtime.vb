@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports mRemoteNG.Config
 Imports log4net
 Imports mRemoteNG.Messages
 Imports mRemoteNG.Connection
@@ -696,30 +697,48 @@ Namespace App
         End Class
 
         Public Class Shutdown
-            Public Shared Sub Quit()
+            Public Shared Sub Quit(Optional ByVal updateFilePath As String = Nothing)
+                _updateFilePath = updateFilePath
                 frmMain.Close()
             End Sub
 
-            Public Shared Sub BeforeQuit()
+            Public Shared Sub Cleanup()
                 Try
-                    If App.Runtime.NotificationAreaIcon IsNot Nothing Then
-                        If App.Runtime.NotificationAreaIcon.Disposed = False Then
-                            App.Runtime.NotificationAreaIcon.Dispose()
+                    PuttySessions.StopWatcher()
+
+                    If NotificationAreaIcon IsNot Nothing Then
+                        If NotificationAreaIcon.Disposed = False Then
+                            NotificationAreaIcon.Dispose()
                         End If
                     End If
 
-                    If My.Settings.SaveConsOnExit Then
-                        SaveConnections()
-                    End If
+                    If My.Settings.SaveConsOnExit Then SaveConnections()
 
-                    Dim SettingsSave As New Config.Settings.Save()
-                    SettingsSave.Save()
+                    Dim saveSettings As New Settings.Save()
+                    saveSettings.Save()
 
                     IeBrowserEmulation.Unregister()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSettingsCouldNotBeSavedOrTrayDispose & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strSettingsCouldNotBeSavedOrTrayDispose & vbNewLine & ex.Message, True)
                 End Try
             End Sub
+
+            Public Shared Sub StartUpdate()
+                If Not UpdatePending() Then Return
+                Try
+                    Process.Start(_updateFilePath)
+                Catch ex As Exception
+                    MessageCollector.AddMessage(MessageClass.ErrorMsg, "The update could not be started." & vbNewLine & ex.Message, True)
+                End Try
+            End Sub
+
+            Private Shared _updateFilePath As String = Nothing
+
+            Public Shared ReadOnly Property UpdatePending() As Boolean
+                Get
+                    Return Not String.IsNullOrEmpty(_updateFilePath)
+                End Get
+            End Property
         End Class
 #End Region
 

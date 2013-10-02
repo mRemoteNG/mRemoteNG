@@ -190,10 +190,7 @@ Namespace UI
                     If e.Error IsNot Nothing Then Throw e.Error
 
                     If MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) = System.Windows.Forms.DialogResult.OK Then
-                        Shutdown.BeforeQuit()
-
-                        Process.Start(_appUpdate.CurrentUpdateInfo.UpdateFilePath)
-                        System.Windows.Forms.Application.Exit()
+                        Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath)
                         Return
                     Else
                         File.Delete(_appUpdate.CurrentUpdateInfo.UpdateFilePath)
