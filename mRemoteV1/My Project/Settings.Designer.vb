@@ -2401,7 +2401,7 @@ Namespace My
         <Global.System.Configuration.ApplicationScopedSettingAttribute(),  _
          Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("https://update.mremoteng.org/announcement-beta.txt")>  _
+         Global.System.Configuration.DefaultSettingValueAttribute("https://update.mremoteng.org/announcement.txt")>  _
         Public ReadOnly Property AnnouncementAddress() As String
             Get
                 Return CType(Me("AnnouncementAddress"),String)
