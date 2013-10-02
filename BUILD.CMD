@@ -41,10 +41,12 @@ echo Building portable version...
 echo Signing binaries...
 %SIGNCMD% ^
 	"%~dp0\mRemoteV1\bin\Release\de\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteV1\bin\Release\el\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\en-US\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\es\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\es-AR\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\fr\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteV1\bin\Release\hu\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\it\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\nb-NO\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\nl\mRemoteNG.resources.dll" ^
@@ -54,6 +56,7 @@ echo Signing binaries...
 	"%~dp0\mRemoteV1\bin\Release\ru\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\uk\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\zh-CN\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteV1\bin\Release\zh-TW\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\AxInterop.MSTSCLib.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\AxInterop.WFICALib.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\Interop.EOLWTSCOM.dll" ^
@@ -62,10 +65,12 @@ echo Signing binaries...
 	"%~dp0\mRemoteV1\bin\Release\Interop.WFICALib.dll" ^
 	"%~dp0\mRemoteV1\bin\Release\mRemoteNG.exe" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\de\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteV1\bin\Release Portable\el\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\en-US\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\es\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\es-AR\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\fr\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteV1\bin\Release Portable\hu\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\it\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\nb-NO\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\nl\mRemoteNG.resources.dll" ^
@@ -75,6 +80,7 @@ echo Signing binaries...
 	"%~dp0\mRemoteV1\bin\Release Portable\ru\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\uk\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\zh-CN\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteV1\bin\Release Portable\zh-TW\mRemoteNG.resources.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\AxInterop.MSTSCLib.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\AxInterop.WFICALib.dll" ^
 	"%~dp0\mRemoteV1\bin\Release Portable\Interop.EOLWTSCOM.dll" ^
