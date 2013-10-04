@@ -127,6 +127,16 @@ Public Class frmOptions
     Friend WithEvents btnThemeNew As System.Windows.Forms.Button
     Friend WithEvents cboTheme As System.Windows.Forms.ComboBox
     Friend WithEvents btnThemeDelete As System.Windows.Forms.Button
+    Friend WithEvents tabKeyboard As System.Windows.Forms.TabPage
+    Friend WithEvents HotkeyControl1 As exscape.HotkeyControl
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label3 As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents HotkeyControl3 As exscape.HotkeyControl
+    Friend WithEvents Label2 As System.Windows.Forms.Label
+    Friend WithEvents HotkeyControl4 As exscape.HotkeyControl
+    Friend WithEvents HotkeyControl2 As exscape.HotkeyControl
     Private components As System.ComponentModel.IContainer
 
     Private Sub InitializeComponent()
@@ -139,6 +149,7 @@ Public Class frmOptions
         Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", "Update_Icon.ico")
         Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", "Config_Icon.ico")
         Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Theme", "Appearance_Icon.ico")
+        Dim ListViewItem9 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Keyboard", "Keyboard.png")
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
         Me.btnOK = New System.Windows.Forms.Button()
         Me.btnCancel = New System.Windows.Forms.Button()
@@ -254,7 +265,17 @@ Public Class frmOptions
         Me.btnThemeNew = New System.Windows.Forms.Button()
         Me.cboTheme = New System.Windows.Forms.ComboBox()
         Me.ThemePropertyGrid = New System.Windows.Forms.PropertyGrid()
+        Me.tabKeyboard = New System.Windows.Forms.TabPage()
+        Me.HotkeyControl1 = New exscape.HotkeyControl()
         Me.dlgColor = New System.Windows.Forms.ColorDialog()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.HotkeyControl2 = New exscape.HotkeyControl()
+        Me.HotkeyControl3 = New exscape.HotkeyControl()
+        Me.HotkeyControl4 = New exscape.HotkeyControl()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
         CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.pnlProxy.SuspendLayout()
@@ -277,6 +298,8 @@ Public Class frmOptions
         Me.tabUpdates.SuspendLayout()
         Me.tabAdvanced.SuspendLayout()
         Me.tabTheme.SuspendLayout()
+        Me.tabKeyboard.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.SuspendLayout()
         '
         'btnOK
@@ -306,7 +329,7 @@ Public Class frmOptions
             Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
         Me.lvPages.FullRowSelect = True
         Me.lvPages.HideSelection = False
-        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8})
+        Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8, ListViewItem9})
         Me.lvPages.LabelWrap = False
         Me.lvPages.LargeImageList = Me.imgListPages
         Me.lvPages.Location = New System.Drawing.Point(12, 12)
@@ -331,6 +354,7 @@ Public Class frmOptions
         Me.imgListPages.Images.SetKeyName(5, "Update_Icon.ico")
         Me.imgListPages.Images.SetKeyName(6, "Config_Icon.ico")
         Me.imgListPages.Images.SetKeyName(7, "Appearance_Icon.ico")
+        Me.imgListPages.Images.SetKeyName(8, "Keyboard.png")
         '
         'lblMaximumPuttyWaitTime
         '
@@ -995,6 +1019,7 @@ Public Class frmOptions
         Me.tcTabControl.Controls.Add(Me.tabUpdates)
         Me.tcTabControl.Controls.Add(Me.tabAdvanced)
         Me.tcTabControl.Controls.Add(Me.tabTheme)
+        Me.tcTabControl.Controls.Add(Me.tabKeyboard)
         Me.tcTabControl.Location = New System.Drawing.Point(172, 12)
         Me.tcTabControl.Name = "tcTabControl"
         Me.tcTabControl.SelectedIndex = 0
@@ -1494,6 +1519,122 @@ Public Class frmOptions
         Me.ThemePropertyGrid.TabIndex = 3
         Me.ThemePropertyGrid.UseCompatibleTextRendering = True
         '
+        'tabKeyboard
+        '
+        Me.tabKeyboard.Controls.Add(Me.GroupBox1)
+        Me.tabKeyboard.Location = New System.Drawing.Point(4, 22)
+        Me.tabKeyboard.Name = "tabKeyboard"
+        Me.tabKeyboard.Padding = New System.Windows.Forms.Padding(3)
+        Me.tabKeyboard.Size = New System.Drawing.Size(602, 463)
+        Me.tabKeyboard.TabIndex = 8
+        Me.tabKeyboard.Text = "Keyboard"
+        Me.tabKeyboard.UseVisualStyleBackColor = True
+        '
+        'HotkeyControl1
+        '
+        Me.HotkeyControl1.AcceptsReturn = True
+        Me.HotkeyControl1.AcceptsTab = True
+        Me.HotkeyControl1.Hotkey = System.Windows.Forms.Keys.None
+        Me.HotkeyControl1.HotkeyModifiers = System.Windows.Forms.Keys.None
+        Me.HotkeyControl1.Location = New System.Drawing.Point(101, 84)
+        Me.HotkeyControl1.Name = "HotkeyControl1"
+        Me.HotkeyControl1.ShortcutsEnabled = False
+        Me.HotkeyControl1.Size = New System.Drawing.Size(151, 20)
+        Me.HotkeyControl1.TabIndex = 0
+        Me.HotkeyControl1.Text = "None"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(44, 87)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(51, 13)
+        Me.Label1.TabIndex = 1
+        Me.Label1.Text = "Next Tab"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(25, 48)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(70, 13)
+        Me.Label2.TabIndex = 2
+        Me.Label2.Text = "Previous Tab"
+        '
+        'HotkeyControl2
+        '
+        Me.HotkeyControl2.AcceptsReturn = True
+        Me.HotkeyControl2.AcceptsTab = True
+        Me.HotkeyControl2.Hotkey = System.Windows.Forms.Keys.None
+        Me.HotkeyControl2.HotkeyModifiers = System.Windows.Forms.Keys.None
+        Me.HotkeyControl2.Location = New System.Drawing.Point(101, 45)
+        Me.HotkeyControl2.Name = "HotkeyControl2"
+        Me.HotkeyControl2.ShortcutsEnabled = False
+        Me.HotkeyControl2.Size = New System.Drawing.Size(151, 20)
+        Me.HotkeyControl2.TabIndex = 3
+        Me.HotkeyControl2.Text = "None"
+        '
+        'HotkeyControl3
+        '
+        Me.HotkeyControl3.AcceptsReturn = True
+        Me.HotkeyControl3.AcceptsTab = True
+        Me.HotkeyControl3.Hotkey = System.Windows.Forms.Keys.None
+        Me.HotkeyControl3.HotkeyModifiers = System.Windows.Forms.Keys.None
+        Me.HotkeyControl3.Location = New System.Drawing.Point(258, 45)
+        Me.HotkeyControl3.Name = "HotkeyControl3"
+        Me.HotkeyControl3.ShortcutsEnabled = False
+        Me.HotkeyControl3.Size = New System.Drawing.Size(151, 20)
+        Me.HotkeyControl3.TabIndex = 5
+        Me.HotkeyControl3.Text = "None"
+        '
+        'HotkeyControl4
+        '
+        Me.HotkeyControl4.AcceptsReturn = True
+        Me.HotkeyControl4.AcceptsTab = True
+        Me.HotkeyControl4.Hotkey = System.Windows.Forms.Keys.None
+        Me.HotkeyControl4.HotkeyModifiers = System.Windows.Forms.Keys.None
+        Me.HotkeyControl4.Location = New System.Drawing.Point(258, 84)
+        Me.HotkeyControl4.Name = "HotkeyControl4"
+        Me.HotkeyControl4.ShortcutsEnabled = False
+        Me.HotkeyControl4.Size = New System.Drawing.Size(151, 20)
+        Me.HotkeyControl4.TabIndex = 4
+        Me.HotkeyControl4.Text = "None"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(98, 29)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(41, 13)
+        Me.Label3.TabIndex = 6
+        Me.Label3.Text = "Primary"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(255, 29)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(49, 13)
+        Me.Label4.TabIndex = 7
+        Me.Label4.Text = "Alternate"
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.Label4)
+        Me.GroupBox1.Controls.Add(Me.HotkeyControl1)
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.HotkeyControl3)
+        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Controls.Add(Me.HotkeyControl4)
+        Me.GroupBox1.Controls.Add(Me.HotkeyControl2)
+        Me.GroupBox1.Location = New System.Drawing.Point(6, 6)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(446, 137)
+        Me.GroupBox1.TabIndex = 8
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Keyboard Shortcuts"
+        '
         'frmOptions
         '
         Me.CancelButton = Me.btnCancel
@@ -1546,6 +1687,9 @@ Public Class frmOptions
         Me.tabAdvanced.ResumeLayout(False)
         Me.tabAdvanced.PerformLayout()
         Me.tabTheme.ResumeLayout(False)
+        Me.tabKeyboard.ResumeLayout(False)
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

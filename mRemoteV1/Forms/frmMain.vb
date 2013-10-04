@@ -205,8 +205,8 @@ Public Class frmMain
     End Sub
 
     Private Sub RequestKeyNotifications()
-        KeyboardHook.RequestKeyNotification(Handle, Win32.VK_TAB, KeyboardHook.ModifierKeys.Control, True)
-        KeyboardHook.RequestKeyNotification(Handle, Win32.VK_TAB, KeyboardHook.ModifierKeys.Control + KeyboardHook.ModifierKeys.Shift, True)
+        KeyboardHook.RequestKeyNotification(Handle, Win32.VK_PRIOR, KeyboardHook.ModifierKeys.Control, False)
+        KeyboardHook.RequestKeyNotification(Handle, Win32.VK_NEXT, KeyboardHook.ModifierKeys.Control, False)
     End Sub
 
     Private Sub frmMain_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -854,8 +854,8 @@ Public Class frmMain
                     fpChainedWindowHandle = m.LParam
                 Case KeyboardHook.HookKeyMsg
                     Dim msgData As KeyboardHook.HookKeyMsgData = Marshal.PtrToStructure(m.LParam, GetType(KeyboardHook.HookKeyMsgData))
-                    If m.WParam.ToInt32() = Win32.WM_KEYDOWN And msgData.KeyCode = Win32.VK_TAB And (msgData.ModifierKeys And KeyboardHook.ModifierKeys.Control) Then
-                        If msgData.ModifierKeys And KeyboardHook.ModifierKeys.Shift Then
+                    If m.WParam.ToInt32() = Win32.WM_KEYDOWN And (msgData.KeyCode = Win32.VK_PRIOR Or msgData.KeyCode = Win32.VK_NEXT) And (msgData.ModifierKeys And KeyboardHook.ModifierKeys.Control) Then
+                        If msgData.KeyCode = Win32.VK_PRIOR Then
                             SelectTabRelative(-1)
                         Else
                             SelectTabRelative(1)
