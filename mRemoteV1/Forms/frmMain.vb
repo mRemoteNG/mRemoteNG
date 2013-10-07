@@ -23,10 +23,10 @@ Public Class frmMain
     Private fpChainedWindowHandle As IntPtr
 
 #Region "Properties"
-    Private _IsClosing As Boolean = False
+    Private _isClosing As Boolean = False
     Public ReadOnly Property IsClosing() As Boolean
         Get
-            Return _IsClosing
+            Return _isClosing
         End Get
     End Property
 #End Region
@@ -252,22 +252,22 @@ Public Class frmMain
                 End If
                 If result = DialogResult.No Then
                     e.Cancel = True
-                    Exit Sub
+                    Return
                 End If
             End If
         End If
 
-        PuttySessions.StopWatcher()
+        Shutdown.Cleanup()
 
-        Shutdown.BeforeQuit()
-
-        _IsClosing = True
+        _isClosing = True
 
         If WindowList IsNot Nothing Then
             For Each window As UI.Window.Base In WindowList
                 window.Close()
             Next
         End If
+
+        Shutdown.StartUpdate()
 
         Debug.Print("[END] - " & Now)
     End Sub
