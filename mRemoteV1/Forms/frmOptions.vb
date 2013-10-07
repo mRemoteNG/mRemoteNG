@@ -4,6 +4,7 @@ Imports mRemoteNG.Messages
 Imports mRemoteNG.My
 Imports mRemoteNG.Tools
 Imports PSTaskDialog
+Imports SharedLibraryNG
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 Imports mRemoteNG.Themes
@@ -128,15 +129,15 @@ Public Class frmOptions
     Friend WithEvents cboTheme As System.Windows.Forms.ComboBox
     Friend WithEvents btnThemeDelete As System.Windows.Forms.Button
     Friend WithEvents tabKeyboard As System.Windows.Forms.TabPage
-    Friend WithEvents HotkeyControl1 As exscape.HotkeyControl
+    Friend WithEvents HotkeyControl1 As HotkeyControl
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents HotkeyControl3 As exscape.HotkeyControl
+    Friend WithEvents HotkeyControl3 As HotkeyControl
     Friend WithEvents Label2 As System.Windows.Forms.Label
-    Friend WithEvents HotkeyControl4 As exscape.HotkeyControl
-    Friend WithEvents HotkeyControl2 As exscape.HotkeyControl
+    Friend WithEvents HotkeyControl4 As HotkeyControl
+    Friend WithEvents HotkeyControl2 As HotkeyControl
     Private components As System.ComponentModel.IContainer
 
     Private Sub InitializeComponent()
@@ -266,13 +267,13 @@ Public Class frmOptions
         Me.cboTheme = New System.Windows.Forms.ComboBox()
         Me.ThemePropertyGrid = New System.Windows.Forms.PropertyGrid()
         Me.tabKeyboard = New System.Windows.Forms.TabPage()
-        Me.HotkeyControl1 = New exscape.HotkeyControl()
+        Me.HotkeyControl1 = New HotkeyControl()
         Me.dlgColor = New System.Windows.Forms.ColorDialog()
         Me.Label1 = New System.Windows.Forms.Label()
         Me.Label2 = New System.Windows.Forms.Label()
-        Me.HotkeyControl2 = New exscape.HotkeyControl()
-        Me.HotkeyControl3 = New exscape.HotkeyControl()
-        Me.HotkeyControl4 = New exscape.HotkeyControl()
+        Me.HotkeyControl2 = New HotkeyControl()
+        Me.HotkeyControl3 = New HotkeyControl()
+        Me.HotkeyControl4 = New HotkeyControl()
         Me.Label3 = New System.Windows.Forms.Label()
         Me.Label4 = New System.Windows.Forms.Label()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
