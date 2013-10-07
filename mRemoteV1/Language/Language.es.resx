@@ -1554,9 +1554,6 @@ Mensaje:
   <data name="strQuickConnectFailed" xml:space="preserve">
     <value>Creación de conexión rápida fallida</value>
   </data>
-  <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-    <value>¡Fallo en el Histórico de Conexiones Rápidas!</value>
-  </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
     <value>&amp;Avisarme al cerrar conexiones</value>
   </data>

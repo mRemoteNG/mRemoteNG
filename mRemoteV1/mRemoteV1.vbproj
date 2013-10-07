@@ -187,6 +187,12 @@
     <Compile Include="Config\Config.Settings.Save.vb" />
     <Compile Include="Config\ConfirmClose.vb" />
     <Compile Include="Config\PuttySessions.vb" />
+    <Compile Include="Controls\QuickConnectComboBox.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Controls\ToolStripSplitButton.vb">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Tools\Authenticode.vb" />
     <Compile Include="Tools\EnumWindows.vb" />
     <Compile Include="Tools\EnvironmentInfo.vb" />
@@ -221,7 +227,6 @@
     <Compile Include="Connection\Connection.Protocol.SSH2.vb" />
     <Compile Include="Connection\Connection.Protocol.Telnet.vb" />
     <Compile Include="Connection\Connection.Protocol.VNC.vb" />
-    <Compile Include="Connection\Connection.QuickConnect.vb" />
     <Compile Include="Themes\ThemeInfo.vb" />
     <Compile Include="Tools\CommandLineArguments.vb" />
     <Compile Include="Container\Container.Info.vb" />
@@ -331,9 +336,6 @@
     <Compile Include="UI\UI.Window.PortScan.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.QuickConnect.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UI\UI.Window.Export.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -388,13 +390,19 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Language\Language.hu.resx" />
-    <EmbeddedResource Include="Language\Language.it.resx" />
-    <EmbeddedResource Include="Language\Language.nb-NO.resx" />
+    <EmbeddedResource Include="Language\Language.it.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Language\Language.nb-NO.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Language\Language.nl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Language\Language.pt-BR.resx" />
-    <EmbeddedResource Include="Language\Language.pt.resx" />
+    <EmbeddedResource Include="Language\Language.pt.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Language\Language.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.Designer.vb</LastGenOutput>
@@ -413,8 +421,12 @@
     <EmbeddedResource Include="Language\Language.uk.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.zh-CN.resx" />
-    <EmbeddedResource Include="Language\Language.zh-TW.resx" />
+    <EmbeddedResource Include="Language\Language.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Language\Language.zh-TW.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
@@ -467,10 +479,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UI.Window.PortScan.resx">
       <DependentUpon>UI.Window.PortScan.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.QuickConnect.resx">
-      <DependentUpon>UI.Window.QuickConnect.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UI.Window.Export.resx">

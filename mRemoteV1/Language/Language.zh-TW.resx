@@ -1545,9 +1545,6 @@ VncSharpNG Control 版本 {0}</value>
   <data name="strQuickConnectFailed" xml:space="preserve">
     <value>Creating quick connect 失敗</value>
   </data>
-  <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-    <value>Quick Connect History Exists 失敗!</value>
-  </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
     <value>關閉連線時警告(&amp;W)</value>
   </data>

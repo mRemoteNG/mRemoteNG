@@ -2472,6 +2472,20 @@ Namespace My
                 Me("InhDefaultAutomaticResize") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("RDP"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property QuickConnectProtocol() As String
+            Get
+                Return CType(Me("QuickConnectProtocol"),String)
+            End Get
+            Set
+                Me("QuickConnectProtocol") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

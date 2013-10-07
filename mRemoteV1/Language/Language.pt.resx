@@ -1538,9 +1538,6 @@ Descrição do erro: {1}</value>
   <data name="strQuickConnectFailed" xml:space="preserve">
     <value>Criação ligação rápida falhou</value>
   </data>
-  <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-    <value>Histórico de Ligação rápida falhou!</value>
-  </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
     <value>&amp;Avisar-me quando fechar ligações</value>
   </data>

@@ -1558,9 +1558,6 @@ Message:
   <data name="strQuickConnectFailed" xml:space="preserve">
     <value>La connexion rapide à échoué</value>
   </data>
-  <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-    <value>Échec d'Existence d'Historique de Connexion Rapide !</value>
-  </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
     <value>&amp;M'avertir lors de la fermeture des connexions</value>
   </data>
