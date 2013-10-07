@@ -1,6 +1,7 @@
 1.72:
   Fixed issue MR-141 - Add a default protocol option
   Fixed issue MR-367 - Make the 'Connect' button on the 'Quick Connect' toolbar a forced dropdown
+  Fixed misleading log messages about RD Gateway support.
 
 1.71 (2013-10-01):
   Fixed issue MR-495 - Having a negative range in port scan creates memory exhaustion.

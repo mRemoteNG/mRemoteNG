@@ -238,8 +238,13 @@ Namespace Connection
 
             Private Sub SetRdGateway()
                 Try
-                    If _rdpClient.TransportSettings.GatewayIsSupported = 0 Then Return
-                    MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strRdpGatewayIsSupported, True)
+                    If _rdpClient.TransportSettings.GatewayIsSupported = 0 Then
+                        MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strRdpGatewayNotSupported, True)
+                        Return
+                    Else
+                        MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strRdpGatewayIsSupported, True)
+                    End If
+
                     If Not _connectionInfo.RDGatewayUsageMethod = RDGatewayUsageMethod.Never Then
                         _rdpClient.TransportSettings.GatewayUsageMethod = _connectionInfo.RDGatewayUsageMethod
                         _rdpClient.TransportSettings.GatewayHostname = _connectionInfo.RDGatewayHostname
@@ -261,8 +266,6 @@ Namespace Connection
                                 _rdpClient.TransportSettings2.GatewayCredSharing = 0
                             End If
                         End If
-                    Else
-                        MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strRdpGatewayNotSupported, True)
                     End If
                 Catch ex As Exception
                     MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strRdpSetGatewayFailed & vbNewLine & ex.Message, True)
