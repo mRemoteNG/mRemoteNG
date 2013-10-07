@@ -563,5 +563,8 @@
     <Setting Name="InhDefaultAutomaticResize" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="QuickConnectProtocol" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RDP</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

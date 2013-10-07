@@ -106,11 +106,11 @@ Namespace App
         End Property
 
         Private Shared _notificationAreaIcon As Tools.Controls.NotificationAreaIcon
-        Public Shared Property NotificationAreaIcon() As Controls.NotificationAreaIcon
+        Public Shared Property NotificationAreaIcon() As Tools.Controls.NotificationAreaIcon
             Get
                 Return _notificationAreaIcon
             End Get
-            Set(ByVal value As Controls.NotificationAreaIcon)
+            Set(ByVal value As Tools.Controls.NotificationAreaIcon)
                 _notificationAreaIcon = value
             End Set
         End Property
@@ -219,8 +219,6 @@ Namespace App
             Public Shared sessionsPanel As New DockContent
             Public Shared screenshotForm As UI.Window.ScreenshotManager
             Public Shared screenshotPanel As New DockContent
-            Public Shared quickyForm As UI.Window.QuickConnect
-            Public Shared quickyPanel As New DockContent
             Public Shared optionsForm As frmOptions
             Public Shared optionsPanel As New DockContent
             Public Shared exportForm As UI.Window.Export
@@ -422,9 +420,6 @@ Namespace App
                 Windows.screenshotForm = New UI.Window.ScreenshotManager(Windows.screenshotPanel)
                 Windows.screenshotPanel = Windows.screenshotForm
 
-                Windows.quickyForm = New UI.Window.QuickConnect(Windows.quickyPanel)
-                Windows.quickyPanel = Windows.quickyForm
-
                 Windows.updateForm = New UI.Window.Update(Windows.updatePanel)
                 Windows.updatePanel = Windows.updateForm
 
@@ -444,13 +439,7 @@ Namespace App
                 Windows.configPanel.Show(frmMain.pnlDock)
                 Windows.configPanel.DockTo(Windows.treePanel.Pane, DockStyle.Bottom, -1)
 
-                Windows.quickyPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-                Windows.screenshotPanel.Show(Windows.quickyPanel.Pane, Windows.quickyPanel)
-                Windows.sessionsPanel.Show(Windows.quickyPanel.Pane, Windows.screenshotPanel)
-                Windows.errorsPanel.Show(Windows.quickyPanel.Pane, Windows.sessionsPanel)
-
                 Windows.screenshotForm.Hide()
-                Windows.quickyForm.Hide()
 
                 frmMain.pnlDock.Visible = True
             End Sub
@@ -1247,7 +1236,7 @@ Namespace App
 
         Public Shared Sub ImportConnectionsRdpFile()
             Try
-                Dim openFileDialog As OpenFileDialog = Controls.ImportConnectionsRdpFileDialog
+                Dim openFileDialog As OpenFileDialog = Tools.Controls.ImportConnectionsRdpFileDialog
                 If Not openFileDialog.ShowDialog = DialogResult.OK Then Return
 
                 For Each fileName As String In openFileDialog.FileNames
@@ -1537,10 +1526,10 @@ Namespace App
                 Dim saveAsDialog As SaveFileDialog
                 If rootNode Is Nothing Then
                     rootNode = Windows.treeForm.tvConnections.Nodes(0)
-                    saveAsDialog = Controls.ConnectionsSaveAsDialog
+                    saveAsDialog = Tools.Controls.ConnectionsSaveAsDialog
                 Else
                     export = True
-                    saveAsDialog = Controls.ConnectionsExportDialog
+                    saveAsDialog = Tools.Controls.ConnectionsExportDialog
                 End If
 
                 If saveAsDialog.ShowDialog = System.Windows.Forms.DialogResult.OK Then
@@ -1590,41 +1579,34 @@ Namespace App
 #End Region
 
 #Region "Opening Connection"
-        Public Shared Function CreateQuicky(ByVal ConString As String, Optional ByVal Protocol As Connection.Protocol.Protocols = Connection.Protocol.Protocols.NONE) As Connection.Info
+        Public Shared Function CreateQuickConnect(ByVal connectionString As String, ByVal protocol As Protocol.Protocols) As Connection.Info
             Try
-                Dim Uri As New System.Uri("dummyscheme" + System.Uri.SchemeDelimiter + ConString)
+                Dim uri As New Uri("dummyscheme" & uri.SchemeDelimiter & connectionString)
 
-                If Not String.IsNullOrEmpty(Uri.Host) Then
-                    Dim newConnectionInfo As New Connection.Info
+                If String.IsNullOrEmpty(uri.Host) Then Return Nothing
 
-                    If My.Settings.IdentifyQuickConnectTabs Then
-                        newConnectionInfo.Name = String.Format(My.Language.strQuick, Uri.Host)
-                    Else
-                        newConnectionInfo.Name = Uri.Host
-                    End If
+                Dim newConnectionInfo As New Connection.Info
 
-                    newConnectionInfo.Protocol = Protocol
-                    newConnectionInfo.Hostname = Uri.Host
-                    If Uri.Port = -1 Then
-                        newConnectionInfo.Port = Nothing
-                    Else
-                        newConnectionInfo.Port = Uri.Port
-                    End If
-                    newConnectionInfo.IsQuicky = True
-
-                    Windows.quickyForm.ConnectionInfo = newConnectionInfo
-
-                    If Protocol = Connection.Protocol.Protocols.NONE Then
-                        Windows.quickyPanel.Show(frmMain.pnlDock, DockState.DockBottomAutoHide)
-                    End If
-
-                    Return newConnectionInfo
+                If My.Settings.IdentifyQuickConnectTabs Then
+                    newConnectionInfo.Name = String.Format(My.Language.strQuick, uri.Host)
+                Else
+                    newConnectionInfo.Name = uri.Host
                 End If
-            Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strQuickConnectFailed & vbNewLine & ex.Message)
-            End Try
 
-            Return Nothing
+                newConnectionInfo.Protocol = protocol
+                newConnectionInfo.Hostname = uri.Host
+                If uri.Port = -1 Then
+                    newConnectionInfo.SetDefaultPort()
+                Else
+                    newConnectionInfo.Port = uri.Port
+                End If
+                newConnectionInfo.IsQuickConnect = True
+
+                Return newConnectionInfo
+            Catch ex As Exception
+                MessageCollector.AddExceptionMessage(My.Language.strQuickConnectFailed, ex, MessageClass.ErrorMsg)
+                Return Nothing
+            End Try
         End Function
 
         Public Shared Sub OpenConnection()
@@ -1691,7 +1673,6 @@ Namespace App
             End Try
         End Sub
 
-
         Private Shared Sub OpenConnectionFinal(ByVal newConnectionInfo As mRemoteNG.Connection.Info, ByVal Force As mRemoteNG.Connection.Info.Force, ByVal ConForm As Form)
             Try
                 If newConnectionInfo.Hostname = "" And newConnectionInfo.Protocol <> Connection.Protocol.Protocols.IntApp Then
@@ -1712,31 +1693,31 @@ Namespace App
                     End If
                 End If
 
-                Dim newProtocol As New Connection.Protocol.Base
+                Dim newProtocol As Protocol.Base
                 ' Create connection based on protocol type
                 Select Case newConnectionInfo.Protocol
-                    Case Connection.Protocol.Protocols.RDP
-                        newProtocol = New Connection.Protocol.RDP
-                    Case Connection.Protocol.Protocols.VNC
-                        newProtocol = New Connection.Protocol.VNC
-                    Case Connection.Protocol.Protocols.SSH1
-                        newProtocol = New Connection.Protocol.SSH1
-                    Case Connection.Protocol.Protocols.SSH2
-                        newProtocol = New Connection.Protocol.SSH2
-                    Case Connection.Protocol.Protocols.Telnet
-                        newProtocol = New Connection.Protocol.Telnet
-                    Case Connection.Protocol.Protocols.Rlogin
-                        newProtocol = New Connection.Protocol.Rlogin
-                    Case Connection.Protocol.Protocols.RAW
-                        newProtocol = New Connection.Protocol.RAW
-                    Case Connection.Protocol.Protocols.HTTP
-                        newProtocol = New Connection.Protocol.HTTP(newConnectionInfo.RenderingEngine)
-                    Case Connection.Protocol.Protocols.HTTPS
-                        newProtocol = New Connection.Protocol.HTTPS(newConnectionInfo.RenderingEngine)
-                    Case Connection.Protocol.Protocols.ICA
-                        newProtocol = New Connection.Protocol.ICA
-                    Case Connection.Protocol.Protocols.IntApp
-                        newProtocol = New Connection.Protocol.IntApp
+                    Case Protocol.Protocols.RDP
+                        newProtocol = New Protocol.RDP
+                    Case Protocol.Protocols.VNC
+                        newProtocol = New Protocol.VNC
+                    Case Protocol.Protocols.SSH1
+                        newProtocol = New Protocol.SSH1
+                    Case Protocol.Protocols.SSH2
+                        newProtocol = New Protocol.SSH2
+                    Case Protocol.Protocols.Telnet
+                        newProtocol = New Protocol.Telnet
+                    Case Protocol.Protocols.Rlogin
+                        newProtocol = New Protocol.Rlogin
+                    Case Protocol.Protocols.RAW
+                        newProtocol = New Protocol.RAW
+                    Case Protocol.Protocols.HTTP
+                        newProtocol = New Protocol.HTTP(newConnectionInfo.RenderingEngine)
+                    Case Protocol.Protocols.HTTPS
+                        newProtocol = New Protocol.HTTPS(newConnectionInfo.RenderingEngine)
+                    Case Protocol.Protocols.ICA
+                        newProtocol = New Protocol.ICA
+                    Case Protocol.Protocols.IntApp
+                        newProtocol = New Protocol.IntApp
 
                         If newConnectionInfo.ExtApp = "" Then
                             Throw New Exception(My.Language.strNoExtAppDefined)
@@ -1805,7 +1786,7 @@ Namespace App
 
                 newConnectionInfo.OpenConnections.Add(newProtocol)
 
-                If newConnectionInfo.IsQuicky = False Then
+                If newConnectionInfo.IsQuickConnect = False Then
                     If newConnectionInfo.Protocol <> Connection.Protocol.Protocols.IntApp Then
                         Tree.Node.SetNodeImage(newConnectionInfo.TreeNode, Images.Enums.TreeImage.ConnectionOpen)
                     Else
@@ -1872,7 +1853,7 @@ Namespace App
 
                 Prot.InterfaceControl.Info.OpenConnections.Remove(Prot)
 
-                If Prot.InterfaceControl.Info.OpenConnections.Count < 1 And Prot.InterfaceControl.Info.IsQuicky = False Then
+                If Prot.InterfaceControl.Info.OpenConnections.Count < 1 And Prot.InterfaceControl.Info.IsQuickConnect = False Then
                     Tree.Node.SetNodeImage(Prot.InterfaceControl.Info.TreeNode, Images.Enums.TreeImage.ConnectionClosed)
                 End If
 
@@ -1950,7 +1931,7 @@ Namespace App
                 cI.Protocol = Connection.Protocol.Protocols.HTTP
             End If
             cI.SetDefaultPort()
-            cI.IsQuicky = True
+            cI.IsQuickConnect = True
 
             App.Runtime.OpenConnection(cI, mRemoteNG.Connection.Info.Force.DoNotJump)
         End Sub

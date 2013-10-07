@@ -1639,9 +1639,6 @@ Message:
   <data name="strQuickConnectFailed" xml:space="preserve">
     <value>Creating quick connect failed</value>
   </data>
-  <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-    <value>Quick Connect History Exists Failed!</value>
-  </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
     <value>&amp;Warn me when closing connections</value>
   </data>

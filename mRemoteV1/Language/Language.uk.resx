@@ -1520,9 +1520,6 @@ VncSharpNG Control Version {0}</value>
   <data name="strQuickConnectFailed" xml:space="preserve">
     <value>Створити швидке з'єднання не вдалося</value>
   </data>
-  <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-    <value>Помилка історії Швидких з'єднань!</value>
-  </data>
   <data name="strRAW" xml:space="preserve">
     <value>RAW</value>
   </data>

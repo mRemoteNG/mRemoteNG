@@ -1505,15 +1505,15 @@ Namespace Connection
             End Set
         End Property
 
-        Private _IsQuicky As Boolean = False
+        Private _isQuickConnect As Boolean = False
         <Category(""), _
             Browsable(False)> _
-        Public Property IsQuicky() As Boolean
+        Public Property IsQuickConnect() As Boolean
             Get
-                Return Me._IsQuicky
+                Return _isQuickConnect
             End Get
             Set(ByVal value As Boolean)
-                Me._IsQuicky = value
+                _isQuickConnect = value
             End Set
         End Property
 
@@ -1555,35 +1555,43 @@ Namespace Connection
             End If
         End Sub
 
-        Public Sub SetDefaultPort()
+        Protected Shared Function GetDefaultPort(ByVal protocol As Protocol.Protocols) As Integer
             Try
-                Select Case Me._Protocol
+                Select Case protocol
                     Case Connection.Protocol.Protocols.RDP
-                        Me._Port = Connection.Protocol.RDP.Defaults.Port
+                        Return Connection.Protocol.RDP.Defaults.Port
                     Case Connection.Protocol.Protocols.VNC
-                        Me._Port = Connection.Protocol.VNC.Defaults.Port
+                        Return Connection.Protocol.VNC.Defaults.Port
                     Case Connection.Protocol.Protocols.SSH1
-                        Me._Port = Connection.Protocol.SSH1.Defaults.Port
+                        Return Connection.Protocol.SSH1.Defaults.Port
                     Case Connection.Protocol.Protocols.SSH2
-                        Me._Port = Connection.Protocol.SSH2.Defaults.Port
+                        Return Connection.Protocol.SSH2.Defaults.Port
                     Case Connection.Protocol.Protocols.Telnet
-                        Me._Port = Connection.Protocol.Telnet.Defaults.Port
+                        Return Connection.Protocol.Telnet.Defaults.Port
                     Case Connection.Protocol.Protocols.Rlogin
-                        Me._Port = Connection.Protocol.Rlogin.Defaults.Port
+                        Return Connection.Protocol.Rlogin.Defaults.Port
                     Case Connection.Protocol.Protocols.RAW
-                        Me._Port = Connection.Protocol.RAW.Defaults.Port
+                        Return Connection.Protocol.RAW.Defaults.Port
                     Case Connection.Protocol.Protocols.HTTP
-                        Me._Port = Connection.Protocol.HTTP.Defaults.Port
+                        Return Connection.Protocol.HTTP.Defaults.Port
                     Case Connection.Protocol.Protocols.HTTPS
-                        Me._Port = Connection.Protocol.HTTPS.Defaults.Port
+                        Return Connection.Protocol.HTTPS.Defaults.Port
                     Case Connection.Protocol.Protocols.ICA
-                        Me._Port = Connection.Protocol.ICA.Defaults.Port
+                        Return Connection.Protocol.ICA.Defaults.Port
                     Case Connection.Protocol.Protocols.IntApp
-                        Me._Port = Connection.Protocol.IntApp.Defaults.Port
+                        Return Connection.Protocol.IntApp.Defaults.Port
                 End Select
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionSetDefaultPortFailed & vbNewLine & ex.Message)
+                MessageCollector.AddExceptionMessage(My.Language.strConnectionSetDefaultPortFailed, ex, Messages.MessageClass.ErrorMsg)
             End Try
+        End Function
+
+        Public Function GetDefaultPort() As Integer
+            Return GetDefaultPort(_Protocol)
+        End Function
+
+        Public Sub SetDefaultPort()
+            _Port = GetDefaultPort()
         End Sub
 #End Region
 

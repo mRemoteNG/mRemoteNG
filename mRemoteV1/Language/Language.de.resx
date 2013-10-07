@@ -1578,9 +1578,6 @@ Wenn Sie Fehler feststellen, dann sollten Sie eine neue Verbindungs Datei erstel
   <data name="strQuickConnectFailed" xml:space="preserve">
     <value>Direkte Verbindung fehlgeschlagen!</value>
   </data>
-  <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-    <value>Prüfung auf Direkt Verbindungs Historie fehlgeschlagen!</value>
-  </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
     <value>&amp;Warnen wenn Verbindungen beendet werden</value>
   </data>

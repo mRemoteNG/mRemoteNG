@@ -1583,9 +1583,6 @@
   <data name="strQuickConnectFailed" xml:space="preserve">
     <value>Созданить быстрое подключение не удалось</value>
   </data>
-  <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-    <value>Ошибка истории Быстрых подключений!</value>
-  </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
     <value>Предупреждать при закрытии подключений</value>
   </data>

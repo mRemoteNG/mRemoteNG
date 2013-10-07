@@ -1577,9 +1577,6 @@ Bericht:
   <data name="strQuickConnectFailed" xml:space="preserve">
     <value>Het aanmaken van een snelle connectie is mislukt</value>
   </data>
-  <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-    <value>Snelle Connectie geschiedenis bestaat mislukt!</value>
-  </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
     <value>&amp;Waarschuw bij het sluiten van connecties</value>
   </data>

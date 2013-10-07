@@ -52,6 +52,7 @@ Public Class frmMain
         Startup.ParseCommandLineArgs()
 
         ApplyLanguage()
+        PopulateQuickConnectProtocolMenu()
 
         AddHandler ThemeManager.ThemeChanged, AddressOf ApplyThemes
         ApplyThemes()
@@ -150,8 +151,8 @@ Public Class frmMain
         mMenInfoAnnouncements.Text = My.Language.strMenuAnnouncements
 
         lblQuickConnect.Text = My.Language.strLabelConnect
-        btnQuickyPlay.Text = My.Language.strMenuConnect
-        mMenQuickyCon.Text = My.Language.strMenuConnections
+        btnQuickConnect.Text = My.Language.strMenuConnect
+        btnConnections.Text = My.Language.strMenuConnections
 
         cMenToolbarShowText.Text = My.Language.strMenuShowText
 
@@ -628,75 +629,67 @@ Public Class frmMain
 #End Region
 
 #Region "Quick Connect"
-    Private Sub btnQuickyPlay_ButtonClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnQuickyPlay.ButtonClick
-        CreateQuicky(QuickyText)
-    End Sub
-
-    Private Sub btnQuickyPlay_DropDownOpening(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnQuickyPlay.DropDownOpening
-        CreateQuickyButtons()
-    End Sub
-
-    Private Sub CreateQuickyButtons()
+    Private Sub PopulateQuickConnectProtocolMenu()
         Try
-            btnQuickyPlay.DropDownItems.Clear()
-
-            For Each fI As FieldInfo In GetType(mRemoteNG.Connection.Protocol.Protocols).GetFields
-                If fI.Name <> "value__" And fI.Name <> "NONE" And fI.Name <> "IntApp" Then
-                    Dim nBtn As New ToolStripMenuItem
-                    nBtn.Text = fI.Name
-                    btnQuickyPlay.DropDownItems.Add(nBtn)
-                    AddHandler nBtn.Click, AddressOf QuickyProtocolButton_Click
+            mnuQuickConnectProtocol.Items.Clear()
+            For Each fieldInfo As FieldInfo In GetType(Connection.Protocol.Protocols).GetFields
+                If Not (fieldInfo.Name = "value__" Or fieldInfo.Name = "IntApp") Then
+                    Dim menuItem As New ToolStripMenuItem(fieldInfo.Name)
+                    If fieldInfo.Name = My.Settings.QuickConnectProtocol Then
+                        menuItem.Checked = True
+                        btnQuickConnect.Text = My.Settings.QuickConnectProtocol
+                    End If
+                    mnuQuickConnectProtocol.Items.Add(menuItem)
                 End If
             Next
         Catch ex As Exception
-            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CreateButtons (frmMain) failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddExceptionMessage("PopulateQuickConnectProtocolMenu() failed.", ex, Messages.MessageClass.ErrorMsg, True)
         End Try
     End Sub
 
-    Private Sub QuickyProtocolButton_Click(ByVal sender As Object, ByVal e As System.EventArgs)
+    Private Sub lblQuickConnect_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles lblQuickConnect.Click
+        cmbQuickConnect.Focus()
+    End Sub
+
+    Private Sub cmbQuickConnect_ConnectRequested(ByVal sender As Object, ByVal e As Controls.QuickConnectComboBox.ConnectRequestedEventArgs) Handles cmbQuickConnect.ConnectRequested
+        btnQuickConnect_ButtonClick(sender, e)
+    End Sub
+
+    Private Sub btnQuickConnect_ButtonClick(ByVal sender As Object, ByVal e As EventArgs) Handles btnQuickConnect.ButtonClick
         Try
-            Dim conI As Connection.Info = CreateQuicky(QuickyText, Tools.Misc.StringToEnum(GetType(mRemoteNG.Connection.Protocol.Protocols), sender.Text))
-
-            If conI.Port = 0 Then
-                conI.SetDefaultPort()
-
-                If mRemoteNG.Connection.QuickConnect.History.Exists(conI.Hostname) = False Then
-                    mRemoteNG.Connection.QuickConnect.History.Add(conI.Hostname)
-                End If
-            Else
-                If mRemoteNG.Connection.QuickConnect.History.Exists(conI.Hostname) = False Then
-                    mRemoteNG.Connection.QuickConnect.History.Add(conI.Hostname & ":" & conI.Port)
-                End If
+            Dim connectionInfo As Connection.Info = CreateQuickConnect(cmbQuickConnect.Text.Trim(), Connection.Protocol.Converter.StringToProtocol(My.Settings.QuickConnectProtocol))
+            If connectionInfo Is Nothing Then
+                cmbQuickConnect.Focus()
+                Return
             End If
 
-            App.Runtime.OpenConnection(conI, mRemoteNG.Connection.Info.Force.DoNotJump)
+            cmbQuickConnect.Add(connectionInfo)
+
+            OpenConnection(connectionInfo, Connection.Info.Force.DoNotJump)
         Catch ex As Exception
-            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "QuickyProtocolButton_Click (frmMain) failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddExceptionMessage("btnQuickConnect_ButtonClick() failed.", ex, Messages.MessageClass.ErrorMsg, True)
         End Try
     End Sub
 
-    Private Sub cmbQuickConnect_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles cmbQuickConnect.KeyDown
-        If e.KeyCode = Keys.Enter Then
-            CreateQuicky(QuickyText)
-        End If
+    Private Sub cmbQuickConnect_ProtocolChanged(ByVal sender As Object, ByVal e As Controls.QuickConnectComboBox.ProtocolChangedEventArgs) Handles cmbQuickConnect.ProtocolChanged
+        SetQuickConnectProtocol(Connection.Protocol.Converter.ProtocolToString(e.Protocol))
     End Sub
 
-    Private Sub lblQuickConnect_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lblQuickConnect.Click
-        Me.cmbQuickConnect.Focus()
+    Private Sub btnQuickConnect_DropDownItemClicked(sender As System.Object, e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles btnQuickConnect.DropDownItemClicked
+        SetQuickConnectProtocol(e.ClickedItem.Text)
     End Sub
 
-    Private Function QuickyText() As String
-        Dim txt As String
-
-        txt = cmbQuickConnect.Text
-
-        If txt.StartsWith(" ") Or txt.EndsWith(" ") Then
-            txt = txt.Replace(" ", "")
-            cmbQuickConnect.Text = txt
-        End If
-
-        Return txt
-    End Function
+    Private Sub SetQuickConnectProtocol(ByVal protocol As String)
+        My.Settings.QuickConnectProtocol = protocol
+        btnQuickConnect.Text = protocol
+        For Each menuItem As ToolStripMenuItem In mnuQuickConnectProtocol.Items
+            If menuItem.Text = protocol Then
+                menuItem.Checked = True
+            Else
+                menuItem.Checked = False
+            End If
+        Next
+    End Sub
 #End Region
 
 #Region "Info"
@@ -731,43 +724,43 @@ Public Class frmMain
 #End Region
 
 #Region "Connections DropDown"
-    Private Sub mMenQuickyCon_DropDownOpening(ByVal sender As Object, ByVal e As System.EventArgs) Handles mMenQuickyCon.DropDownOpening
-        mMenQuickyCon.DropDownItems.Clear()
+    Private Sub btnConnections_DropDownOpening(ByVal sender As Object, ByVal e As EventArgs) Handles btnConnections.DropDownOpening
+        btnConnections.DropDownItems.Clear()
 
-        For Each tNode As TreeNode In App.Runtime.Windows.treeForm.tvConnections.Nodes
-            AddNodeToMenu(tNode.Nodes, mMenQuickyCon)
+        For Each treeNode As TreeNode In Windows.treeForm.tvConnections.Nodes
+            AddNodeToMenu(treeNode.Nodes, btnConnections)
         Next
     End Sub
 
-    Private Shared Sub AddNodeToMenu(ByVal tnc As TreeNodeCollection, ByVal menToolStrip As ToolStripMenuItem)
+    Private Shared Sub AddNodeToMenu(ByVal treeNodeCollection As TreeNodeCollection, ByVal toolStripMenuItem As ToolStripDropDownItem)
         Try
-            For Each tNode As TreeNode In tnc
-                Dim tMenItem As New ToolStripMenuItem()
-                tMenItem.Text = tNode.Text
-                tMenItem.Tag = tNode
+            For Each treeNode As TreeNode In treeNodeCollection
+                Dim menuItem As New ToolStripMenuItem()
+                menuItem.Text = treeNode.Text
+                menuItem.Tag = treeNode
 
-                If Tree.Node.GetNodeType(tNode) = Tree.Node.Type.Container Then
-                    tMenItem.Image = My.Resources.Folder
-                    tMenItem.Tag = tNode.Tag
+                If Tree.Node.GetNodeType(treeNode) = Tree.Node.Type.Container Then
+                    menuItem.Image = My.Resources.Folder
+                    menuItem.Tag = treeNode.Tag
 
-                    menToolStrip.DropDownItems.Add(tMenItem)
-                    AddNodeToMenu(tNode.Nodes, tMenItem)
-                ElseIf Tree.Node.GetNodeType(tNode) = Tree.Node.Type.Connection Or _
-                       Tree.Node.GetNodeType(tNode) = Tree.Node.Type.PuttySession Then
-                    tMenItem.Image = Windows.treeForm.imgListTree.Images(tNode.ImageIndex)
-                    tMenItem.Tag = tNode.Tag
+                    toolStripMenuItem.DropDownItems.Add(menuItem)
+                    AddNodeToMenu(treeNode.Nodes, menuItem)
+                ElseIf Tree.Node.GetNodeType(treeNode) = Tree.Node.Type.Connection Or _
+                       Tree.Node.GetNodeType(treeNode) = Tree.Node.Type.PuttySession Then
+                    menuItem.Image = Windows.treeForm.imgListTree.Images(treeNode.ImageIndex)
+                    menuItem.Tag = treeNode.Tag
 
-                    menToolStrip.DropDownItems.Add(tMenItem)
+                    toolStripMenuItem.DropDownItems.Add(menuItem)
                 End If
 
-                AddHandler tMenItem.MouseUp, AddressOf ConMenItem_MouseUp
+                AddHandler menuItem.MouseUp, AddressOf ConnectionsMenuItem_MouseUp
             Next
         Catch ex As Exception
-            MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" & vbNewLine & ex.Message, True)
+            MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex, Messages.MessageClass.ErrorMsg, True)
         End Try
     End Sub
 
-    Private Shared Sub ConMenItem_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
+    Private Shared Sub ConnectionsMenuItem_MouseUp(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs)
         If e.Button = MouseButtons.Left Then
             If TypeOf sender.Tag Is Connection.Info Then
                 App.Runtime.OpenConnection(sender.Tag)

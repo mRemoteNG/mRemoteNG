@@ -1576,9 +1576,6 @@ Melding:
   <data name="strQuickConnectFailed" xml:space="preserve">
     <value>Oppretting av hurtigtilkobling mislyktes</value>
   </data>
-  <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-    <value>Hurtigtilkoblingshistorikk finnes fra før!</value>
-  </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
     <value>&amp;Advar meg når tilkoblinger lukkes</value>
   </data>

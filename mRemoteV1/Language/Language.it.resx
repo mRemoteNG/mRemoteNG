@@ -1558,9 +1558,6 @@ Messaggio:
   <data name="strQuickConnectFailed" xml:space="preserve">
     <value>Operazione Creating Quick Connect fallita</value>
   </data>
-  <data name="strQuickConnectHistoryExistsFailed" xml:space="preserve">
-    <value>Operazione Quick Connect History Exists fallita!</value>
-  </data>
   <data name="strRadioCloseWarnAll" xml:space="preserve">
     <value>&amp;Avvisami alla chiusura delle connessioni</value>
   </data>
