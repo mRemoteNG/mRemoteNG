@@ -606,7 +606,7 @@ Descrição do erro: {1}</value>
     <value>Erros</value>
   </data>
   <data name="strErrorStartupConnectionFileLoad" xml:space="preserve">
-    <value>O arquivo de inicialização de ligação não pôde ser carregado.{0}{0}(2){0}{3}{0}{0}A fim de evitar perda de dados, {1} vai sair agora.</value>
+    <value>O arquivo de inicialização de ligação não pôde ser carregado.{0}{0}{2}{0}{3}{0}{0}A fim de evitar perda de dados, {1} vai sair agora.</value>
   </data>
   <data name="strErrorVerifyDatabaseVersionFailed" xml:space="preserve">
     <value>VerifyDatabaseVersion (Config.Connections.Save) falhou. {0}</value>
