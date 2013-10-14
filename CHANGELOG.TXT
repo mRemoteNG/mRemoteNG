@@ -1,5 +1,6 @@
 1.71 (XXXX-XX-XX):
   Fixed issue MR-560 - Cannot Auto-Update With Open Connections: Unable to find an entry point named 'TaskDialogIndirect' in DLL 'ComCtl32'
+  Fixed issue MR-566 - Typo in German UI Automatic Update Settings
 
 1.71 Release Candidate 1 (2013-10-01):
   Fixed issue MR-495 - Having a negative range in port scan creates memory exhaustion.
