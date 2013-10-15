@@ -1088,6 +1088,7 @@ Namespace UI
                     End If
 
                     newContainerInfo.ConnectionInfo = New mRemoteNG.Connection.Info(newContainerInfo)
+                    newContainerInfo.ConnectionInfo.Name = newNode.Text
 
                     ' We can only inherit from a container node, not the root node or connection nodes
                     If mRemoteNG.Tree.Node.GetNodeType(parentNode) = mRemoteNG.Tree.Node.Type.Container Then
