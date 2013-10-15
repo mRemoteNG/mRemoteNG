@@ -8,17 +8,17 @@ Namespace Connection
     Public Class Info
 #Region "Properties"
 #Region "1 Display"
-        Private _Name As String = My.Language.strNewConnection
+        Private _name As String = My.Language.strNewConnection
         <LocalizedCategory("strCategoryDisplay", 1), _
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameName"), _
             LocalizedDescription("strPropertyDescriptionName")> _
         Public Overridable Property Name() As String
             Get
-                Return Me._Name
+                Return _name
             End Get
             Set(ByVal value As String)
-                Me._Name = value
+                _name = value
             End Set
         End Property
 

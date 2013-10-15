@@ -6,7 +6,6 @@ Namespace Container
     <DefaultProperty("Name")> _
     Public Class Info
 #Region "Properties"
-        Private _Name As String = "New Container"
         <LocalizedCategory("strCategoryDisplay", 1), _
             Browsable(True), _
             [ReadOnly](False), _
@@ -18,10 +17,10 @@ Namespace Container
             Attributes.Container()> _
         Public Property Name() As String
             Get
-                Return Me._ConnectionInfo.Name
+                Return ConnectionInfo.Name
             End Get
             Set(ByVal value As String)
-                Me._ConnectionInfo.Name = value
+                ConnectionInfo.Name = value
             End Set
         End Property
 
