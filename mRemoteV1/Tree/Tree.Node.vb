@@ -305,9 +305,9 @@ Namespace Tree
         Public Shared Sub CloneNode(ByVal oldTreeNode As TreeNode, Optional ByVal parentNode As TreeNode = Nothing)
             Try
                 If GetNodeType(oldTreeNode) = Type.Connection Then
-                    Dim oldConnectionInfo As Connection.Info = oldTreeNode.Tag
+                    Dim oldConnectionInfo As Connection.Info = DirectCast(oldTreeNode.Tag, Connection.Info)
 
-                    Dim newConnectionInfo As Connection.Info = oldConnectionInfo.Copy
+                    Dim newConnectionInfo As Connection.Info = oldConnectionInfo.Copy()
                     Dim newInheritance As Connection.Info.Inheritance = oldConnectionInfo.Inherit.Copy()
                     newInheritance.Parent = newConnectionInfo
                     newConnectionInfo.Inherit = newInheritance
@@ -332,8 +332,10 @@ Namespace Tree
                         parentNode.Nodes.Add(newTreeNode)
                     End If
                 ElseIf GetNodeType(oldTreeNode) = Type.Container Then
-                    Dim newContainerInfo As Container.Info = TryCast(oldTreeNode.Tag, Container.Info).Copy
-                    Dim newConnectionInfo As Connection.Info = TryCast(oldTreeNode.Tag, Container.Info).ConnectionInfo.Copy
+                    Dim oldContainerInfo As Container.Info = DirectCast(oldTreeNode.Tag, Container.Info)
+
+                    Dim newContainerInfo As Container.Info = oldContainerInfo.Copy()
+                    Dim newConnectionInfo As Connection.Info = oldContainerInfo.ConnectionInfo.Copy()
                     newContainerInfo.ConnectionInfo = newConnectionInfo
 
                     Dim newTreeNode As New TreeNode(newContainerInfo.Name)

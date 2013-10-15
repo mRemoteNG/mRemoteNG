@@ -1531,9 +1531,10 @@ Namespace Connection
 #End Region
 
 #Region "Methods"
-        Public Function Copy() As Connection.Info
-            Dim newConnectionInfo As Connection.Info = MemberwiseClone()
-            newConnectionInfo._OpenConnections = New Connection.Protocol.List
+        Public Function Copy() As Info
+            Dim newConnectionInfo As Info = MemberwiseClone()
+            newConnectionInfo.ConstantID = Tools.Misc.CreateConstantID()
+            newConnectionInfo._OpenConnections = New Protocol.List
             Return newConnectionInfo
         End Function
 
@@ -1597,8 +1598,8 @@ Namespace Connection
                 End If
             End Sub
 
-            Public Function Copy() As Connection.Info.Inheritance
-                Return Me.MemberwiseClone
+            Public Function Copy() As Inheritance
+                Return MemberwiseClone()
             End Function
 
             Public Sub TurnOnInheritanceCompletely()
