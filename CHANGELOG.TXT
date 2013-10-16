@@ -3,7 +3,7 @@
   Fixed issue MR-367 - Make the 'Connect' button on the 'Quick Connect' toolbar a forced dropdown
   Fixed misleading log messages about RD Gateway support.
 
-1.71 (XXXX-XX-XX):
+1.71 (2013-10-16):
   Fixed issue MR-560 - Cannot Auto-Update With Open Connections: Unable to find an entry point named 'TaskDialogIndirect' in DLL 'ComCtl32'
   Fixed issue MR-565 - Double Folder keep heritage on the initial Folder
   Fixed issue MR-566 - Typo in German UI Automatic Update Settings
