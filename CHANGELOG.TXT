@@ -2,6 +2,7 @@
   Fixed issue MR-141 - Add a default protocol option
   Fixed issue MR-367 - Make the 'Connect' button on the 'Quick Connect' toolbar a forced dropdown
   Fixed misleading log messages about RD Gateway support.
+  Removed invalid "Site" configuration option from PuTTY Saved Sessions
 
 1.71 (2013-10-16):
   Fixed issue MR-560 - Cannot Auto-Update With Open Connections: Unable to find an entry point named 'TaskDialogIndirect' in DLL 'ComCtl32'

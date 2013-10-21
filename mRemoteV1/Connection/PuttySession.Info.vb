@@ -100,6 +100,7 @@ Namespace Connection
 #End Region
 
 #Region "IComponent"
+            <Browsable(False)> _
             Public Property Site() As ISite Implements IComponent.Site
                 Get
                     Return New PropertyGridCommandSite(Me)
