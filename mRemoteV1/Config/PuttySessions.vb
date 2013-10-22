@@ -23,7 +23,14 @@ Namespace Config
             End If
 
             Dim savedSessions As New List(Of Connection.Info)(LoadSessions())
-            If savedSessions Is Nothing OrElse savedSessions.Count = 0 Then Return
+            If savedSessions Is Nothing Or savedSessions.Count = 0 Then
+                If _rootTreeNode IsNot Nothing AndAlso treeView.Nodes.Contains(_rootTreeNode) Then
+                    treeView.BeginUpdate()
+                    treeView.Nodes.Remove(_rootTreeNode)
+                    treeView.EndUpdate()
+                End If
+                Return
+            End If
 
             Dim puttyRootInfo As New Root.PuttySessions.Info()
             If String.IsNullOrEmpty(My.Settings.PuttySavedSessionsName) Then
