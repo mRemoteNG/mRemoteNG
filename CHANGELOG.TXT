@@ -1,6 +1,6 @@
 1.72:
-  Fixed issue MR-141 - Add a default protocol option
-  Fixed issue MR-367 - Make the 'Connect' button on the 'Quick Connect' toolbar a forced dropdown
+  Added feature MR-141 - Add a default protocol option
+  Made improvement MR-367 - Make the 'Connect' button on the 'Quick Connect' toolbar a forced dropdown
   Fixed misleading log messages about RD Gateway support.
   Removed invalid "Site" configuration option from PuTTY Saved Sessions
   Fixed PuTTY Saved Sessions still showing if all saved sessions are removed
