@@ -635,77 +635,91 @@ Namespace Connection
 
 #Region "Terminal Sessions"
             Public Class TerminalSessions
-                Dim oWTSCOM As New WTSCOM
-                Dim oWTSSessions As New WTSSessions
-                Dim oWTSSession As New WTSSession
-                Public ServerHandle As Long
+                Private ReadOnly _wtsCom As WTSCOM
 
-                Public Function OpenConnection(ByVal SrvName As String) As Boolean
+                Public Sub New()
                     Try
-                        ServerHandle = oWTSCOM.WTSOpenServer(SrvName)
-
-                        If ServerHandle <> 0 Then
-                            Return True
-                        End If
+                        _wtsCom = New WTSCOM
                     Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpOpenConnectionFailed & vbNewLine & ex.Message, True)
-                    End Try
-
-                    Return False
-                End Function
-
-                Public Sub CloseConnection(ByVal SrvHandle As Long)
-                    Try
-                        oWTSCOM.WTSCloseServer(ServerHandle)
-                        ServerHandle = 0
-                    Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpCloseConnectionFailed & vbNewLine & ex.Message, True)
+                        MessageCollector.AddExceptionMessage("TerminalSessions.New() failed.", ex, MessageClass.ErrorMsg, True)
                     End Try
                 End Sub
 
-                Public Function GetSessions() As Sessions
-                    Dim colSessions As New Sessions
+                Public Function OpenConnection(ByVal hostname As String) As Long
+                    If _wtsCom Is Nothing Then Return 0
 
                     Try
-                        oWTSSessions = oWTSCOM.WTSEnumerateSessions(ServerHandle)
+                        Return _wtsCom.WTSOpenServer(hostname)
+                    Catch ex As Exception
+                        MessageCollector.AddExceptionMessage(My.Language.strRdpOpenConnectionFailed, ex, MessageClass.ErrorMsg, True)
+                    End Try
+                End Function
 
-                        Dim SessionID As Long
-                        Dim SessionUser As String
-                        Dim SessionState As Long
-                        Dim SessionName As String
+                Public Sub CloseConnection(ByVal serverHandle As Long)
+                    If _wtsCom Is Nothing Then Return
 
-                        For Each oWTSSession In oWTSSessions
-                            SessionID = oWTSSession.SessionId
-                            SessionUser = oWTSCOM.WTSQuerySessionInformation(ServerHandle, oWTSSession.SessionId, 5) 'WFUsername = 5
-                            SessionState = oWTSSession.State & vbCrLf
-                            SessionName = oWTSSession.WinStationName & vbCrLf
+                    Try
+                        _wtsCom.WTSCloseServer(serverHandle)
+                    Catch ex As Exception
+                        MessageCollector.AddExceptionMessage(My.Language.strRdpCloseConnectionFailed, ex, MessageClass.ErrorMsg, True)
+                    End Try
+                End Sub
 
-                            If SessionUser <> "" Then
-                                If SessionState = 0 Then
-                                    colSessions.Add(SessionID, My.Language.strActive, SessionUser, SessionName)
+                Public Function GetSessions(ByVal serverHandle As Long) As SessionsCollection
+                    If _wtsCom Is Nothing Then Return New SessionsCollection()
+
+                    Dim sessions As New SessionsCollection()
+
+                    Try
+                        Dim wtsSessions As WTSSessions = _wtsCom.WTSEnumerateSessions(serverHandle)
+
+                        Dim sessionId As Long
+                        Dim sessionUser As String
+                        Dim sessionState As Long
+                        Dim sessionName As String
+
+                        For Each wtsSession As WTSSession In wtsSessions
+                            sessionId = wtsSession.SessionId
+                            sessionUser = _wtsCom.WTSQuerySessionInformation(serverHandle, wtsSession.SessionId, 5) ' WFUsername = 5
+                            sessionState = wtsSession.State & vbCrLf
+                            sessionName = wtsSession.WinStationName & vbCrLf
+
+                            If Not String.IsNullOrEmpty(sessionUser) Then
+                                If sessionState = 0 Then
+                                    sessions.Add(sessionId, My.Language.strActive, sessionUser, sessionName)
                                 Else
-                                    colSessions.Add(SessionID, My.Language.strInactive, SessionUser, SessionName)
+                                    sessions.Add(sessionId, My.Language.strInactive, sessionUser, sessionName)
                                 End If
                             End If
                         Next
                     Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpGetSessionsFailed & vbNewLine & ex.Message, True)
+                        MessageCollector.AddExceptionMessage(My.Language.strRdpGetSessionsFailed, ex, MessageClass.ErrorMsg, True)
                     End Try
 
-                    Return colSessions
+                    Return sessions
                 End Function
 
-                Public Function KillSession(ByVal SessionID As Long) As Boolean
-                    Return oWTSCOM.WTSLogoffSession(ServerHandle, SessionID, True)
+                Public Function KillSession(ByVal serverHandle As Long, ByVal sessionId As Long) As Boolean
+                    If _wtsCom Is Nothing Then Return False
+
+                    Dim result As Boolean = False
+
+                    Try
+                        result = _wtsCom.WTSLogoffSession(serverHandle, sessionId, True)
+                    Catch ex As Exception
+                        MessageCollector.AddExceptionMessage("TerminalSessions.KillSession() failed.", ex, MessageClass.ErrorMsg, True)
+                    End Try
+
+                    Return result
                 End Function
             End Class
 
-            Public Class Sessions
+            Public Class SessionsCollection
                 Inherits CollectionBase
 
-                Default Public ReadOnly Property Items(ByVal Index As Integer) As Session
+                Default Public ReadOnly Property Items(ByVal index As Integer) As Session
                     Get
-                        Return CType(List.Item(Index), Session)
+                        Return CType(List.Item(index), Session)
                     End Get
                 End Property
 
@@ -715,23 +729,23 @@ Namespace Connection
                     End Get
                 End Property
 
-                Public Function Add(ByVal SessionID As Long, ByVal SessionState As String, ByVal SessionUser As String, ByVal SessionName As String) As Session
-                    Dim newSes As New Session
+                Public Overloads Function Add(ByVal sessionId As Long, ByVal sessionState As String, ByVal sessionUser As String, ByVal sessionName As String) As Session
+                    Dim newSession As New Session
 
                     Try
-                        With newSes
-                            .SessionID = SessionID
-                            .SessionState = SessionState
-                            .SessionUser = SessionUser
-                            .SessionName = SessionName
+                        With newSession
+                            .SessionId = sessionId
+                            .SessionState = sessionState
+                            .SessionUser = sessionUser
+                            .SessionName = sessionName
                         End With
 
-                        List.Add(newSes)
+                        List.Add(newSession)
                     Catch ex As Exception
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpAddSessionFailed & vbNewLine & ex.Message, True)
+                        MessageCollector.AddExceptionMessage(My.Language.strRdpAddSessionFailed, ex, MessageClass.ErrorMsg, True)
                     End Try
 
-                    Return newSes
+                    Return newSession
                 End Function
 
                 Public Sub ClearSessions()
@@ -742,45 +756,10 @@ Namespace Connection
             Public Class Session
                 Inherits CollectionBase
 
-                Private lngSessionID As Long
-                Public Property SessionID() As Long
-                    Get
-                        Return lngSessionID
-                    End Get
-                    Set(ByVal Value As Long)
-                        lngSessionID = Value
-                    End Set
-                End Property
-
-                Private lngSessionState As String
+                Public Property SessionId() As Long
                 Public Property SessionState() As String
-                    Get
-                        Return lngSessionState
-                    End Get
-                    Set(ByVal Value As String)
-                        lngSessionState = Value
-                    End Set
-                End Property
-
-                Private strSessionUser As String
                 Public Property SessionUser() As String
-                    Get
-                        Return strSessionUser
-                    End Get
-                    Set(ByVal Value As String)
-                        strSessionUser = Value
-                    End Set
-                End Property
-
-                Private strSessionName As String
                 Public Property SessionName() As String
-                    Get
-                        Return strSessionName
-                    End Get
-                    Set(ByVal Value As String)
-                        strSessionName = Value
-                    End Set
-                End Property
             End Class
 #End Region
 
