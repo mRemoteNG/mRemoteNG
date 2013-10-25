@@ -1,11 +1,12 @@
 1.71 (XXXX-XX-XX):
   Fixed issue MR-574 - Crash when retrieving RDP session list if eolwtscom.dll is not registered
+  Fixed log file not showing operating system version on Windows XP and Windows Server 2003.
 
 1.71 Release Candidate 2 (2013-10-16):
   Fixed issue MR-560 - Cannot Auto-Update With Open Connections: Unable to find an entry point named 'TaskDialogIndirect' in DLL 'ComCtl32'
   Fixed issue MR-565 - Double Folder keep heritage on the initial Folder
   Fixed issue MR-566 - Typo in German UI Automatic Update Settings
-  Fixed duplicated folders possibly being named "New Connection" instead of the original folder's name
+  Fixed duplicated folders possibly being named "New Connection" instead of the original folder's name.
 
 1.71 Release Candidate 1 (2013-10-01):
   Fixed issue MR-495 - Having a negative range in port scan creates memory exhaustion.
