@@ -492,19 +492,29 @@ Namespace App
 #End If
                     Log.InfoFormat("Command Line: {0}", Environment.GetCommandLineArgs)
 
+                    Dim osVersion As String = String.Empty
+                    Dim servicePack As String = String.Empty
                     Try
-                        Dim servicePack As Integer
-                        For Each managementObject As ManagementObject In New ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem").Get()
-                            servicePack = managementObject.GetPropertyValue("ServicePackMajorVersion")
-                            If servicePack = 0 Then
-                                Log.InfoFormat("{0} {1}", managementObject.GetPropertyValue("Caption").Trim, managementObject.GetPropertyValue("OSArchitecture"))
-                            Else
-                                Log.InfoFormat("{0} Service Pack {1} {2}", managementObject.GetPropertyValue("Caption").Trim, servicePack.ToString, managementObject.GetPropertyValue("OSArchitecture"))
-                            End If
+                        For Each managementObject As ManagementObject In New ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem WHERE Primary=True").Get()
+                            osVersion = managementObject.GetPropertyValue("Caption").Trim()
+                            Dim servicePackNumber As Integer = managementObject.GetPropertyValue("ServicePackMajorVersion")
+                            If Not servicePackNumber = 0 Then servicePack = String.Format("Service Pack {0}", servicePackNumber)
                         Next
                     Catch ex As Exception
                         Log.WarnFormat("Error retrieving operating system information from WMI. {0}", ex.Message)
                     End Try
+
+                    Dim architecture As String = String.Empty
+                    Try
+                        For Each managementObject As ManagementObject In New ManagementObjectSearcher("SELECT * FROM Win32_Processor WHERE DeviceID='CPU0'").Get()
+                            Dim addressWidth As Integer = managementObject.GetPropertyValue("AddressWidth")
+                            architecture = String.Format("{0}-bit", addressWidth)
+                        Next
+                    Catch ex As Exception
+                        Log.WarnFormat("Error retrieving operating system address width from WMI. {0}", ex.Message)
+                    End Try
+
+                    Log.InfoFormat(String.Join(" ", Array.FindAll(New String() {osVersion, servicePack, architecture}, Function(s) Not String.IsNullOrEmpty(s))))
 
                     Log.InfoFormat("Microsoft .NET CLR {0}", Version.ToString)
                     Log.InfoFormat("System Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName)

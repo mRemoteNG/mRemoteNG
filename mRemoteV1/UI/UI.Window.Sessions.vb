@@ -129,10 +129,10 @@ Namespace UI
                     With data
                         impersonator.StartImpersonation(.Domain, .Username, .Password)
 
-                        If Not terminalSessions.OpenConnection(.Hostname) Then Return
-                        serverHandle = terminalSessions.ServerHandle
+                        serverHandle = terminalSessions.OpenConnection(.Hostname)
+                        If serverHandle = 0 Then Return
 
-                        GetSessions(terminalSessions)
+                        GetSessions(terminalSessions, serverHandle)
                     End With
 
                     _retrieved = True
@@ -149,11 +149,11 @@ Namespace UI
             End Sub
 
             ' Get sessions from an already impersonated and connected TerminalSessions object
-            Private Sub GetSessions(ByVal terminalSessions As mRemoteNG.Connection.Protocol.RDP.TerminalSessions)
-                Dim rdpSessions As mRemoteNG.Connection.Protocol.RDP.Sessions = terminalSessions.GetSessions
+            Private Sub GetSessions(ByVal terminalSessions As mRemoteNG.Connection.Protocol.RDP.TerminalSessions, ByVal serverHandle As Long)
+                Dim rdpSessions As mRemoteNG.Connection.Protocol.RDP.SessionsCollection = terminalSessions.GetSessions(serverHandle)
                 For Each session As mRemoteNG.Connection.Protocol.RDP.Session In rdpSessions
                     Dim item As New ListViewItem
-                    item.Tag = session.SessionID
+                    item.Tag = session.SessionId
                     item.Text = session.SessionUser
                     item.SubItems.Add(session.SessionState)
                     item.SubItems.Add(Replace(session.SessionName, vbNewLine, ""))
@@ -174,13 +174,13 @@ Namespace UI
 
                         impersonator.StartImpersonation(.Domain, .Username, .Password)
 
-                        If terminalSessions.OpenConnection(.Hostname) Then
-                            serverHandle = terminalSessions.ServerHandle
-                            terminalSessions.KillSession(.SessionId)
+                        serverHandle = terminalSessions.OpenConnection(.Hostname)
+                        If Not serverHandle = 0 Then
+                            terminalSessions.KillSession(serverHandle, .SessionId)
                         End If
 
                         ClearList()
-                        GetSessions(terminalSessions)
+                        GetSessions(terminalSessions, serverHandle)
 
                         _retrieved = True
                     End With
