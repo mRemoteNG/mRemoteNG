@@ -1810,11 +1810,7 @@ Public Class frmOptions
             ThemeManager.SaveThemes(_themeList)
             Settings.ThemeName = ThemeManager.ActiveTheme.Name
 
-            If My.Settings.LoadConsFromCustomLocation = False Then
-                App.Runtime.SetMainFormText(App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile)
-            Else
-                App.Runtime.SetMainFormText(My.Settings.CustomConsPath)
-            End If
+            SetMainFormText(GetStartupConnectionFileName())
 
             App.Runtime.Startup.DestroySQLUpdateHandlerAndStopTimer()
 

@@ -67,6 +67,12 @@ Public Class frmMain
 
         Tree.Node.TreeView = Windows.treeForm.tvConnections
 
+        If My.Settings.FirstStart And _
+                Not My.Settings.LoadConsFromCustomLocation And _
+                Not IO.File.Exists(GetStartupConnectionFileName()) Then
+            NewConnections(GetStartupConnectionFileName())
+        End If
+
         'LoadCredentials()
         LoadConnections()
         If Not IsConnectionsFileLoaded Then
