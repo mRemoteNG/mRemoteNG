@@ -10,7 +10,8 @@ Namespace Root
                 MyBase.New(RootType.PuttySessions)
             End Sub
 
-            Private _name As String
+            Private _name As String = Language.strPuttySavedSessionsRootName
+            <LocalizedDefaultValue("strPuttySavedSessionsRootName")> _
             Public Overrides Property Name() As String
                 Get
                     Return _name

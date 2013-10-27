@@ -19,7 +19,7 @@ Namespace Config
             Private sqlQuery As SqlCommand
             Private sqlRd As SqlDataReader
 
-            Private selNode As TreeNode
+            Private _selectedTreeNode As TreeNode
 #End Region
 
 #Region "Public Properties"
@@ -103,25 +103,9 @@ Namespace Config
                 End Set
             End Property
 
-            Private _RootTreeNode As TreeNode
             Public Property RootTreeNode() As TreeNode
-                Get
-                    Return Me._RootTreeNode
-                End Get
-                Set(ByVal value As TreeNode)
-                    Me._RootTreeNode = value
-                End Set
-            End Property
 
-            Private _ConnectionList As Connection.List
             Public Property ConnectionList() As Connection.List
-                Get
-                    Return Me._ConnectionList
-                End Get
-                Set(ByVal value As Connection.List)
-                    Me._ConnectionList = value
-                End Set
-            End Property
 
             Private _ContainerList As Container.List
             Public Property ContainerList() As Container.List
@@ -181,7 +165,7 @@ Namespace Config
                 End If
 
                 Try
-                    App.Runtime.IsConnectionsFileLoaded = False
+                    IsConnectionsFileLoaded = False
 
                     If _SQLUsername <> "" Then
                         sqlCon = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & _SQLDatabaseName & ";User Id=" & _SQLUsername & ";Password=" & _SQLPassword)
@@ -197,7 +181,7 @@ Namespace Config
                     sqlRd.Read()
 
                     If sqlRd.HasRows = False Then
-                        App.Runtime.SaveConnections()
+                        SaveConnections()
 
                         sqlQuery = New SqlCommand("SELECT * FROM tblRoot", sqlCon)
                         sqlRd = sqlQuery.ExecuteReader(CommandBehavior.CloseConnection)
@@ -212,40 +196,33 @@ Namespace Config
                         Throw New Exception(String.Format("Incompatible database schema (schema version {0}).", confVersion))
                     End If
 
-                    Dim rootNode As TreeNode
-                    rootNode = New TreeNode(sqlRd.Item("Name"))
+                    RootTreeNode.Name = sqlRd.Item("Name")
 
-                    Dim rInfo As New Root.Info(Root.Info.RootType.Connection)
-                    rInfo.Name = rootNode.Text
-                    rInfo.TreeNode = rootNode
+                    Dim rootInfo As New Root.Info(Root.Info.RootType.Connection)
+                    rootInfo.Name = RootTreeNode.Name
+                    rootInfo.TreeNode = RootTreeNode
 
-                    rootNode.Tag = rInfo
-                    rootNode.ImageIndex = Images.Enums.TreeImage.Root
-                    rootNode.SelectedImageIndex = Images.Enums.TreeImage.Root
+                    RootTreeNode.Tag = rootInfo
+                    RootTreeNode.ImageIndex = Images.Enums.TreeImage.Root
+                    RootTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Root
 
                     If Security.Crypt.Decrypt(sqlRd.Item("Protected"), pW) <> "ThisIsNotProtected" Then
-                        If Authenticate(sqlRd.Item("Protected"), False, rInfo) = False Then
+                        If Authenticate(sqlRd.Item("Protected"), False, rootInfo) = False Then
                             My.Settings.LoadConsFromCustomLocation = False
                             My.Settings.CustomConsPath = ""
-                            rootNode.Remove()
+                            RootTreeNode.Remove()
                             Exit Sub
                         End If
                     End If
-
-                    'Me._RootTreeNode.Text = rootNode.Text
-                    'Me._RootTreeNode.Tag = rootNode.Tag
-                    'Me._RootTreeNode.ImageIndex = Images.Enums.TreeImage.Root
-                    'Me._RootTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Root
 
                     sqlRd.Close()
 
                     Windows.treeForm.tvConnections.BeginUpdate()
 
                     ' SECTION 3. Populate the TreeView with the DOM nodes.
-                    AddNodesFromSQL(rootNode)
-                    'AddNodeFromXml(xDom.DocumentElement, Me._RootTreeNode)
+                    AddNodesFromSQL(RootTreeNode)
 
-                    rootNode.Expand()
+                    RootTreeNode.Expand()
 
                     'expand containers
                     For Each contI As Container.Info In Me._ContainerList
@@ -258,21 +235,16 @@ Namespace Config
 
                     'open connections from last mremote session
                     If My.Settings.OpenConsFromLastSession = True And My.Settings.NoReconnect = False Then
-                        For Each conI As Connection.Info In Me._ConnectionList
+                        For Each conI As Connection.Info In ConnectionList
                             If conI.PleaseConnect = True Then
-                                App.Runtime.OpenConnection(conI)
+                                OpenConnection(conI)
                             End If
                         Next
                     End If
 
-                    'Tree.Node.TreeView.Nodes.Clear()
-                    'Tree.Node.TreeView.Nodes.Add(rootNode)
-
-                    AddNodeToTree(rootNode)
-                    SetSelectedNode(selNode)
-
-                    App.Runtime.IsConnectionsFileLoaded = True
-                    'App.Runtime.Windows.treeForm.InitialRefresh()
+                    IsConnectionsFileLoaded = True
+                    Windows.treeForm.InitialRefresh()
+                    SetSelectedNode(_selectedTreeNode)
                 Catch ex As Exception
                     Throw
                 Finally
@@ -282,28 +254,14 @@ Namespace Config
                 End Try
             End Sub
 
-            Private Delegate Sub AddNodeToTreeCB(ByVal TreeNode As TreeNode)
-            Private Sub AddNodeToTree(ByVal TreeNode As TreeNode)
-                If Tree.Node.TreeView.InvokeRequired Then
-                    Dim d As New AddNodeToTreeCB(AddressOf AddNodeToTree)
-                    App.Runtime.Windows.treeForm.Invoke(d, New Object() {TreeNode})
-                Else
-                    App.Runtime.Windows.treeForm.tvConnections.Nodes.Clear()
-                    App.Runtime.Windows.treeForm.tvConnections.Nodes.Add(TreeNode)
-                    App.Runtime.Windows.treeForm.InitialRefresh()
+            Private Delegate Sub SetSelectedNodeDelegate(ByVal treeNode As TreeNode)
+            Private Shared Sub SetSelectedNode(ByVal treeNode As TreeNode)
+                If Tree.Node.TreeView IsNot Nothing AndAlso Tree.Node.TreeView.InvokeRequired Then
+                    Windows.treeForm.Invoke(New SetSelectedNodeDelegate(AddressOf SetSelectedNode), New Object() {treeNode})
+                    Return
                 End If
+                Windows.treeForm.tvConnections.SelectedNode = treeNode
             End Sub
-
-            Private Delegate Sub SetSelectedNodeCB(ByVal TreeNode As TreeNode)
-            Private Sub SetSelectedNode(ByVal TreeNode As TreeNode)
-                If Tree.Node.TreeView.InvokeRequired Then
-                    Dim d As New SetSelectedNodeCB(AddressOf SetSelectedNode)
-                    App.Runtime.Windows.treeForm.Invoke(d, New Object() {TreeNode})
-                Else
-                    App.Runtime.Windows.treeForm.tvConnections.SelectedNode = TreeNode
-                End If
-            End Sub
-
 
             Private Sub AddNodesFromSQL(ByVal baseNode As TreeNode)
                 Try
@@ -352,7 +310,7 @@ Namespace Config
                                 End If
 
                                 If conI.ConstantID = _PreviousSelected Then
-                                    selNode = tNode
+                                    _selectedTreeNode = tNode
                                 End If
                             Else
                                 tNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
@@ -385,7 +343,7 @@ Namespace Config
                                 End If
 
                                 If conI.ConstantID = _PreviousSelected Then
-                                    selNode = tNode
+                                    _selectedTreeNode = tNode
                                 End If
                             Else
                                 If sqlRd.Item("Expanded") = True Then
@@ -669,28 +627,27 @@ Namespace Config
                     End If
 
                     ' SECTION 2. Initialize the treeview control.
-                    Dim rootNode As TreeNode
-
                     Dim rootNodeName As String = ""
                     If xDom.DocumentElement.HasAttribute("Name") Then rootNodeName = xDom.DocumentElement.Attributes("Name").Value.Trim()
                     If Not String.IsNullOrEmpty(rootNodeName) Then
-                        rootNode = New TreeNode(rootNodeName)
+                        RootTreeNode.Name = rootNodeName
                     Else
-                        rootNode = New TreeNode(xDom.DocumentElement.Name)
+                        RootTreeNode.Name = xDom.DocumentElement.Name
                     End If
+                    RootTreeNode.Text = RootTreeNode.Name
 
-                    Dim rInfo As New Root.Info(Root.Info.RootType.Connection)
-                    rInfo.Name = rootNode.Text
-                    rInfo.TreeNode = rootNode
+                    Dim rootInfo As New Root.Info(Root.Info.RootType.Connection)
+                    rootInfo.Name = RootTreeNode.Name
+                    rootInfo.TreeNode = RootTreeNode
 
-                    rootNode.Tag = rInfo
+                    RootTreeNode.Tag = rootInfo
 
                     If Me.confVersion > 1.3 Then '1.4
                         If Security.Crypt.Decrypt(xDom.DocumentElement.Attributes("Protected").Value, pW) <> "ThisIsNotProtected" Then
-                            If Authenticate(xDom.DocumentElement.Attributes("Protected").Value, False, rInfo) = False Then
+                            If Authenticate(xDom.DocumentElement.Attributes("Protected").Value, False, rootInfo) = False Then
                                 My.Settings.LoadConsFromCustomLocation = False
                                 My.Settings.CustomConsPath = ""
-                                _RootTreeNode.Remove()
+                                RootTreeNode.Remove()
                                 Exit Sub
                             End If
                         End If
@@ -709,18 +666,16 @@ Namespace Config
                     End If
 
                     If Not isExportFile Then
-                        _RootTreeNode.Text = rootNode.Text
-                        _RootTreeNode.Tag = rootNode.Tag
-                        _RootTreeNode.ImageIndex = Images.Enums.TreeImage.Root
-                        _RootTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Root
+                        RootTreeNode.ImageIndex = Images.Enums.TreeImage.Root
+                        RootTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Root
                     End If
 
                     Windows.treeForm.tvConnections.BeginUpdate()
 
                     ' SECTION 3. Populate the TreeView with the DOM nodes.
-                    AddNodeFromXml(xDom.DocumentElement, _RootTreeNode)
+                    AddNodeFromXml(xDom.DocumentElement, RootTreeNode)
 
-                    Me._RootTreeNode.Expand()
+                    RootTreeNode.Expand()
 
                     'expand containers
                     For Each contI As Container.Info In Me._ContainerList
@@ -733,18 +688,18 @@ Namespace Config
 
                     'open connections from last mremote session
                     If My.Settings.OpenConsFromLastSession = True And My.Settings.NoReconnect = False Then
-                        For Each conI As Connection.Info In Me._ConnectionList
+                        For Each conI As Connection.Info In _ConnectionList
                             If conI.PleaseConnect = True Then
-                                App.Runtime.OpenConnection(conI)
+                                OpenConnection(conI)
                             End If
                         Next
                     End If
 
-                    Me._RootTreeNode.EnsureVisible()
+                    RootTreeNode.EnsureVisible()
 
-
-                    App.Runtime.IsConnectionsFileLoaded = True
-                    App.Runtime.Windows.treeForm.InitialRefresh()
+                    IsConnectionsFileLoaded = True
+                    Windows.treeForm.InitialRefresh()
+                    SetSelectedNode(RootTreeNode)
                 Catch ex As Exception
                     App.Runtime.IsConnectionsFileLoaded = False
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed & vbNewLine & ex.Message & vbNewLine & ex.StackTrace, True)
@@ -760,7 +715,7 @@ Namespace Config
                     If parentXmlNode.HasChildNodes() Then
                         For Each xmlNode As XmlNode In parentXmlNode.ChildNodes
                             Dim treeNode As TreeNode = New TreeNode(xmlNode.Attributes("Name").Value)
-                            parentTreeNode.Nodes.Add(TreeNode)
+                            parentTreeNode.Nodes.Add(treeNode)
 
                             If Tree.Node.GetNodeTypeFromString(xmlNode.Attributes("Type").Value) = Tree.Node.Type.Connection Then 'connection info
                                 Dim connectionInfo As Connection.Info = GetConnectionInfoFromXml(xmlNode)

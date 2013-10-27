@@ -74,6 +74,23 @@ Namespace Tools
             End Property
         End Class
 
+        <AttributeUsage(AttributeTargets.All, AllowMultiple:=False, Inherited:=True)> _
+        Public Class LocalizedDefaultValueAttribute
+            Inherits DefaultValueAttribute
+
+            Public Sub New(ByVal name As String)
+                MyBase.New(My.Language.ResourceManager.GetString(name))
+            End Sub
+
+            ' This allows localized attributes in a derived class to override a matching
+            ' non-localized attribute inherited from its base class
+            Public Overrides ReadOnly Property TypeId() As Object
+                Get
+                    Return GetType(DefaultValueAttribute)
+                End Get
+            End Property
+        End Class
+
 #Region "Special localization - with String.Format"
 
         <AttributeUsage(AttributeTargets.All, AllowMultiple:=False, Inherited:=True)> _

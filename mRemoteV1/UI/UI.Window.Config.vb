@@ -1,5 +1,7 @@
+Imports mRemoteNG.Messages
 Imports mRemoteNG.My
 Imports mRemoteNG.Connection.Protocol
+Imports mRemoteNG.Root
 Imports WeifenLuo.WinFormsUI.Docking
 Imports System.Net.NetworkInformation
 Imports mRemoteNG.App.Runtime
@@ -21,10 +23,16 @@ Namespace UI
             Private components As System.ComponentModel.IContainer
             Friend WithEvents propertyGridContextMenu As System.Windows.Forms.ContextMenuStrip
             Friend WithEvents propertyGridContextMenuShowHelpText As System.Windows.Forms.ToolStripMenuItem
+            Friend WithEvents propertyGridContextMenuReset As System.Windows.Forms.ToolStripMenuItem
+            Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
             Friend WithEvents pGrid As Azuria.Common.Controls.FilteredPropertyGrid
             Private Sub InitializeComponent()
                 Me.components = New System.ComponentModel.Container()
                 Me.pGrid = New Azuria.Common.Controls.FilteredPropertyGrid()
+                Me.propertyGridContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+                Me.propertyGridContextMenuReset = New System.Windows.Forms.ToolStripMenuItem()
+                Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+                Me.propertyGridContextMenuShowHelpText = New System.Windows.Forms.ToolStripMenuItem()
                 Me.btnShowInheritance = New System.Windows.Forms.ToolStripButton()
                 Me.btnShowDefaultInheritance = New System.Windows.Forms.ToolStripButton()
                 Me.btnShowProperties = New System.Windows.Forms.ToolStripButton()
@@ -32,8 +40,6 @@ Namespace UI
                 Me.btnIcon = New System.Windows.Forms.ToolStripButton()
                 Me.btnHostStatus = New System.Windows.Forms.ToolStripButton()
                 Me.cMenIcons = New System.Windows.Forms.ContextMenuStrip(Me.components)
-                Me.propertyGridContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-                Me.propertyGridContextMenuShowHelpText = New System.Windows.Forms.ToolStripMenuItem()
                 Me.propertyGridContextMenu.SuspendLayout()
                 Me.SuspendLayout()
                 '
@@ -53,6 +59,29 @@ Namespace UI
                 Me.pGrid.Size = New System.Drawing.Size(226, 530)
                 Me.pGrid.TabIndex = 0
                 Me.pGrid.UseCompatibleTextRendering = True
+                '
+                'propertyGridContextMenu
+                '
+                Me.propertyGridContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.propertyGridContextMenuReset, Me.ToolStripSeparator1, Me.propertyGridContextMenuShowHelpText})
+                Me.propertyGridContextMenu.Name = "propertyGridContextMenu"
+                Me.propertyGridContextMenu.Size = New System.Drawing.Size(157, 76)
+                '
+                'propertyGridContextMenuReset
+                '
+                Me.propertyGridContextMenuReset.Name = "propertyGridContextMenuReset"
+                Me.propertyGridContextMenuReset.Size = New System.Drawing.Size(156, 22)
+                Me.propertyGridContextMenuReset.Text = "&Reset"
+                '
+                'ToolStripSeparator1
+                '
+                Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+                Me.ToolStripSeparator1.Size = New System.Drawing.Size(153, 6)
+                '
+                'propertyGridContextMenuShowHelpText
+                '
+                Me.propertyGridContextMenuShowHelpText.Name = "propertyGridContextMenuShowHelpText"
+                Me.propertyGridContextMenuShowHelpText.Size = New System.Drawing.Size(156, 22)
+                Me.propertyGridContextMenuShowHelpText.Text = "&Show Help Text"
                 '
                 'btnShowInheritance
                 '
@@ -116,18 +145,6 @@ Namespace UI
                 '
                 Me.cMenIcons.Name = "cMenIcons"
                 Me.cMenIcons.Size = New System.Drawing.Size(61, 4)
-                '
-                'propertyGridContextMenu
-                '
-                Me.propertyGridContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.propertyGridContextMenuShowHelpText})
-                Me.propertyGridContextMenu.Name = "propertyGridContextMenu"
-                Me.propertyGridContextMenu.Size = New System.Drawing.Size(157, 26)
-                '
-                'propertyGridContextMenuShowHelpText
-                '
-                Me.propertyGridContextMenuShowHelpText.Name = "ContextMenuShowHelpText"
-                Me.propertyGridContextMenuShowHelpText.Size = New System.Drawing.Size(156, 22)
-                Me.propertyGridContextMenuShowHelpText.Text = "&Show Help Text"
                 '
                 'Config
                 '
@@ -629,22 +646,21 @@ Namespace UI
                         End If
                     End If
 
-                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Then
-                        Dim rInfo As mRemoteNG.Root.Info = Me.pGrid.SelectedObject
+                    Dim rootInfo As Info = TryCast(pGrid.SelectedObject, Info)
+                    If (rootInfo IsNot Nothing) Then
+                        Select Case e.ChangedItem.PropertyDescriptor.Name
+                            Case "Password"
+                                If rootInfo.Password = True Then
+                                    Dim password As String = Tools.Misc.PasswordDialog
 
-                        Select Case e.ChangedItem.Label
-                            Case My.Language.strPasswordProtect
-                                If rInfo.Password = True Then
-                                    Dim pw As String = Tools.Misc.PasswordDialog
-
-                                    If pw <> "" Then
-                                        rInfo.PasswordString = pw
+                                    If String.IsNullOrEmpty(password) Then
+                                        rootInfo.Password = False
                                     Else
-                                        rInfo.Password = False
+                                        rootInfo.PasswordString = password
                                     End If
                                 End If
-                            Case My.Language.strPropertyNameName
-                                App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Text = Me.pGrid.SelectedObject.Name
+                            Case "Name"
+                                'Windows.treeForm.tvConnections.SelectedNode.Text = pGrid.SelectedObject.Name
                         End Select
                     End If
 
@@ -1505,14 +1521,37 @@ Namespace UI
 #End Region
 
             Private Sub propertyGridContextMenu_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles propertyGridContextMenu.Opening
-                propertyGridContextMenuShowHelpText.Checked = Settings.ShowConfigHelpText
+                Try
+                    propertyGridContextMenuShowHelpText.Checked = Settings.ShowConfigHelpText
+                    Dim gridItem As GridItem = pGrid.SelectedGridItem
+                    propertyGridContextMenuReset.Enabled = (pGrid.SelectedObject IsNot Nothing AndAlso _
+                                                            gridItem IsNot Nothing AndAlso _
+                                                            gridItem.PropertyDescriptor IsNot Nothing AndAlso _
+                                                            gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject))
+                Catch ex As Exception
+                    MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenu_Opening() failed.", ex, MessageClass.ErrorMsg, True)
+                End Try
             End Sub
 
-            Private Sub propertyGridContextMenu_Click(sender As Object, e As EventArgs) Handles propertyGridContextMenuShowHelpText.Click
+            Private Sub propertyGridContextMenuReset_Click(sender As System.Object, e As EventArgs) Handles propertyGridContextMenuReset.Click
+                Try
+                    Dim gridItem As GridItem = pGrid.SelectedGridItem
+                    If pGrid.SelectedObject IsNot Nothing AndAlso _
+                            gridItem IsNot Nothing AndAlso _
+                            gridItem.PropertyDescriptor IsNot Nothing AndAlso _
+                            gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject) Then
+                        pGrid.ResetSelectedProperty()
+                    End If
+                Catch ex As Exception
+                    MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenuReset_Click() failed.", ex, MessageClass.ErrorMsg, True)
+                End Try
+            End Sub
+
+            Private Sub propertyGridContextMenuShowHelpText_Click(sender As Object, e As EventArgs) Handles propertyGridContextMenuShowHelpText.Click
                 propertyGridContextMenuShowHelpText.Checked = Not propertyGridContextMenuShowHelpText.Checked
             End Sub
 
-            Private Sub propertyGridContextMenu_CheckedChanged(sender As Object, e As EventArgs) Handles propertyGridContextMenuShowHelpText.CheckedChanged
+            Private Sub propertyGridContextMenuShowHelpText_CheckedChanged(sender As Object, e As EventArgs) Handles propertyGridContextMenuShowHelpText.CheckedChanged
                 Settings.ShowConfigHelpText = propertyGridContextMenuShowHelpText.Checked
                 pGrid.HelpVisible = propertyGridContextMenuShowHelpText.Checked
             End Sub

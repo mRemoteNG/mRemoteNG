@@ -2,9 +2,11 @@
   Added feature MR-141 - Add a default protocol option
   Added feature MR-547 - Add support for Xming Portable PuTTY
   Made improvement MR-367 - Make the 'Connect' button on the 'Quick Connect' toolbar a forced dropdown
-  Fixed misleading log messages about RD Gateway support.
-  Removed invalid "Site" configuration option from PuTTY Saved Sessions
-  Fixed PuTTY Saved Sessions still showing if all saved sessions are removed
+  Added "Reset" to config panel context menu to allow resetting some config settings to their default value.
+  Removed misleading log messages about RD Gateway support.
+  Removed invalid "Site" configuration option from PuTTY Saved Sessions.
+  Fixed PuTTY Saved Sessions still showing if all saved sessions are removed.
+  Fixed config panel showing settings from previously loaded connection file after loading a new one.
 
 1.71 (XXXX-XX-XX):
   Fixed issue MR-574 - Crash when retrieving RDP session list if eolwtscom.dll is not registered
