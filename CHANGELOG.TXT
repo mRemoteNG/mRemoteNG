@@ -3,6 +3,7 @@
   Fixed issue MR-578 - Connections file is reset
   Fixed log file not showing operating system version on Windows XP and Windows Server 2003.
   Fixed the wrong connections file opening on startup under certain conditions.
+  Fixed checking for updates even when disabled.
   Improved error reporting when loading connections files.
   Removed warning message when mRemoteNG is started for the first time about new connections file being created.
 
