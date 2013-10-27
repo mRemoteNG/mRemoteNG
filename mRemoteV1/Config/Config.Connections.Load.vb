@@ -166,7 +166,7 @@ Namespace Config
 
                 If import = False Then
                     SetMainFormText(ConnectionFileName)
-                    PuttySessions.AddSessionsToTree()
+                    Putty.Sessions.AddSessionsToTree()
                 End If
             End Sub
 #End Region

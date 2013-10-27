@@ -2,6 +2,7 @@ Imports System.Windows.Forms
 Imports System.ComponentModel
 Imports mRemoteNG.Tools.LocalizedAttributes
 Imports mRemoteNG.App.Runtime
+Imports mRemoteNG.Config
 
 Namespace Connection
     <DefaultProperty("Name")> _
@@ -282,7 +283,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNamePuttySession"), _
             LocalizedDescription("strPropertyDescriptionPuttySession"), _
-            TypeConverter(GetType(Config.PuttySessions.SessionList))> _
+            TypeConverter(GetType(Putty.Sessions.SessionList))> _
         Public Overridable Property PuttySession() As String
             Get
                 If Me._Inherit.PuttySession And Me._Parent IsNot Nothing Then

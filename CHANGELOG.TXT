@@ -1,5 +1,6 @@
 1.72:
   Added feature MR-141 - Add a default protocol option
+  Added feature MR-547 - Add support for Xming Portable PuTTY
   Made improvement MR-367 - Make the 'Connect' button on the 'Quick Connect' toolbar a forced dropdown
   Fixed misleading log messages about RD Gateway support.
   Removed invalid "Site" configuration option from PuTTY Saved Sessions

@@ -766,7 +766,7 @@ Namespace UI
                             cMenTreeToolsSort.Enabled = False
                             cMenTreeToolsExternalApps.Enabled = False
                             cMenTreeDuplicate.Enabled = False
-                            cMenTreeRename.Enabled = False
+                            cMenTreeRename.Enabled = True
                             cMenTreeDelete.Enabled = False
                             cMenTreeMoveUp.Enabled = False
                             cMenTreeMoveDown.Enabled = False

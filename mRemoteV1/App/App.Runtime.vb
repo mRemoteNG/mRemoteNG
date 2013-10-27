@@ -5,6 +5,7 @@ Imports mRemoteNG.Messages
 Imports mRemoteNG.Connection
 Imports mRemoteNG.Tools
 Imports PSTaskDialog
+Imports mRemoteNG.Config.Putty
 Imports WeifenLuo.WinFormsUI.Docking
 Imports System.IO
 Imports Crownwood
@@ -370,13 +371,13 @@ Namespace App
                 Dim isFipsPolicyEnabled As Boolean = False
 
                 ' Windows XP/Windows Server 2003
-                regKey = Registry.LocalMachine.OpenSubKey("System\CurrentControlSet\Control\Lsa")
+                regKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("System\CurrentControlSet\Control\Lsa")
                 If regKey IsNot Nothing Then
                     If Not regKey.GetValue("FIPSAlgorithmPolicy") = 0 Then isFipsPolicyEnabled = True
                 End If
 
                 ' Windows Vista/Windows Server 2008 and newer
-                regKey = Registry.LocalMachine.OpenSubKey("System\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy")
+                regKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("System\CurrentControlSet\Control\Lsa\FIPSAlgorithmPolicy")
                 If regKey IsNot Nothing Then
                     If Not regKey.GetValue("Enabled") = 0 Then isFipsPolicyEnabled = True
                 End If
@@ -703,7 +704,7 @@ Namespace App
 
             Public Shared Sub Cleanup()
                 Try
-                    PuttySessions.StopWatcher()
+                    Putty.Sessions.StopWatcher()
 
                     If NotificationAreaIcon IsNot Nothing Then
                         If NotificationAreaIcon.Disposed = False Then

@@ -75,7 +75,7 @@ Public Class frmMain
             Return
         End If
 
-        PuttySessions.StartWatcher()
+        Putty.Sessions.StartWatcher()
 
         If My.Settings.StartupComponentsCheck Then
             Windows.Show(UI.Window.Type.ComponentsCheck)

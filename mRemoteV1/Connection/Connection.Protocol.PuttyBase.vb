@@ -97,7 +97,7 @@ Namespace Connection
 
             Public Overrides Function Connect() As Boolean
                 Try
-                    _isPuttyNg = IsFilePuttyNg(PuttyPath)
+                    _isPuttyNg = (PuttyTypeDetector.GetPuttyType() = PuttyTypeDetector.PuttyType.PuttyNg)
 
                     PuttyProcess = New Process
                     With PuttyProcess.StartInfo
@@ -235,18 +235,6 @@ Namespace Connection
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyShowSettingsDialogFailed & vbNewLine & ex.Message, True)
                 End Try
             End Sub
-#End Region
-
-#Region "Public Shared Methods"
-            Public Shared Function IsFilePuttyNg(file As String) As Boolean
-                Dim isPuttyNg As Boolean
-                Try
-                    isPuttyNg = FileVersionInfo.GetVersionInfo(file).InternalName.Contains("PuTTYNG")
-                Catch
-                    isPuttyNg = False
-                End Try
-                Return isPuttyNg
-            End Function
 #End Region
 
 #Region "Enums"

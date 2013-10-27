@@ -629,16 +629,7 @@ Namespace UI
                         End If
                     End If
 
-                    If TypeOf pGrid.SelectedObject Is Root.PuttySessions.Info Then
-                        Dim puttyRootInfo As Root.PuttySessions.Info = pGrid.SelectedObject
-                        Select Case e.ChangedItem.PropertyDescriptor.Name
-                            Case "Name"
-                                puttyRootInfo.TreeNode.Text = puttyRootInfo.Name
-                                Settings.PuttySavedSessionsName = puttyRootInfo.Name
-                            Case "Panel"
-                                Settings.PuttySavedSessionsPanel = puttyRootInfo.Panel
-                        End Select
-                    ElseIf TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Then
+                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Then
                         Dim rInfo As mRemoteNG.Root.Info = Me.pGrid.SelectedObject
 
                         Select Case e.ChangedItem.Label
