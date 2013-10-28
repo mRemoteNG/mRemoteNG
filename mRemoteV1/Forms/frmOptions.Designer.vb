@@ -1653,6 +1653,7 @@ Namespace Forms
             '
             'frmOptions
             '
+            Me.AcceptButton = Me.btnOK
             Me.CancelButton = Me.btnCancel
             Me.ClientSize = New System.Drawing.Size(794, 542)
             Me.Controls.Add(Me.tcTabControl)
