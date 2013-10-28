@@ -304,6 +304,9 @@ Namespace Forms
         Private _appUpdate As App.Update
         Private _themeList As BindingList(Of ThemeInfo)
         Private _originalTheme As ThemeInfo
+        Private _tabsListViewGroup As ListViewGroup
+        Private _previousTabListViewItem As ListViewItem
+        Private _nextTabListViewItem As ListViewItem
 #End Region
 
 #Region "Public Methods"
@@ -316,9 +319,10 @@ Namespace Forms
 #Region "Form Stuff"
         Private Sub Options_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
             ApplyLanguage()
+            InitializeKeyboardPage()
 
             ' Hide the tabs
-            tcTabControl.Appearance = System.Windows.Forms.TabAppearance.FlatButtons
+            tcTabControl.Appearance = Windows.Forms.TabAppearance.FlatButtons
             tcTabControl.Padding = New Point(0, 0)
             tcTabControl.ItemSize = New Point(0, 1)
 
@@ -423,6 +427,20 @@ Namespace Forms
             lblLanguageRestartRequired.Text = String.Format(Language.strLanguageRestartRequired, Application.Info.ProductName)
             btnThemeDelete.Text = Language.strOptionsThemeButtonDelete
             btnThemeNew.Text = Language.strOptionsThemeButtonNew
+
+        End Sub
+
+        Private Sub InitializeKeyboardPage()
+            ' TODO: Localize
+            _tabsListViewGroup = New ListViewGroup("Tabs")
+            _previousTabListViewItem = New ListViewItem("Previous Tab", _tabsListViewGroup)
+            _nextTabListViewItem = New ListViewItem("Next Tab", _tabsListViewGroup)
+
+            lvKeyboardCommands.Groups.Add(_tabsListViewGroup)
+            lvKeyboardCommands.Items.Add(_previousTabListViewItem)
+            lvKeyboardCommands.Items.Add(_nextTabListViewItem)
+
+            EnableKeyboardShortcutControls(False)
         End Sub
 
         Public Overloads Sub Show(ByVal dockPanel As DockPanel, Optional ByVal initialTab As Integer = 0)
@@ -443,17 +461,26 @@ Namespace Forms
         End Sub
 
         Private Sub lvPages_SelectedIndexChanged(ByVal sender As Object, ByVal e As EventArgs) Handles lvPages.SelectedIndexChanged
-            Dim listView As ListView = sender
-            If Not listView.SelectedIndices.Count = 0 Then
-                tcTabControl.SelectedIndex = listView.SelectedIndices(0)
+            If tcTabControl.TabPages.Count < 1 Then Return
+            If lvPages.SelectedIndices.Count > 0 AndAlso Not tcTabControl.SelectedIndex = lvPages.SelectedIndices(0) Then
+                tcTabControl.SelectedIndex = lvPages.SelectedIndices(0)
             End If
+            SelectNextControl(tcTabControl.SelectedTab, True, True, True, True)
         End Sub
 
         Private Sub lvPages_MouseUp(ByVal sender As Object, ByVal e As MouseEventArgs) Handles lvPages.MouseUp
-            Dim listView As ListView = sender
-            If listView.SelectedIndices.Count = 0 Then
-                listView.Items(tcTabControl.SelectedIndex).Selected = True
+            If lvPages.SelectedIndices.Count = 0 Then
+                lvPages.Items(tcTabControl.SelectedIndex).Selected = True
             End If
+        End Sub
+
+        Private Sub tcTabControl_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles tcTabControl.SelectedIndexChanged
+            If lvPages.Items.Count < 1 Then Return
+            If lvPages.SelectedIndices.Count > 0 Then
+                If lvPages.SelectedIndices(0) = tcTabControl.SelectedIndex Then Return
+                lvPages.SelectedIndices.Clear()
+            End If
+            lvPages.SelectedIndices.Add(tcTabControl.SelectedIndex)
         End Sub
 
         Private Sub radCredentialsCustom_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles radCredentialsCustom.CheckedChanged
@@ -677,5 +704,54 @@ Namespace Forms
             cboTheme_SelectionChangeCommitted(Me, New EventArgs())
         End Sub
 #End Region
+
+        Private Sub lvKeyboardCommands_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles lvKeyboardCommands.SelectedIndexChanged
+            Dim itemSelected As Boolean = (lvKeyboardCommands.SelectedItems.Count = 1)
+            EnableKeyboardShortcutControls(itemSelected)
+            If Not itemSelected Then Return
+
+            Dim selectedItem As ListViewItem = lvKeyboardCommands.SelectedItems(0)
+
+            lblKeyboardCommand.Text = selectedItem.Text
+        End Sub
+
+        Private Sub EnableKeyboardShortcutControls(Optional ByVal enable As Boolean = True)
+            lblKeyboardCommand.Visible = enable
+            lblKeyboardShortcuts.Enabled = enable
+            lstKeyboardShortcuts.Enabled = enable
+            btnNewKeyboardShortcut.Enabled = enable
+            btnResetKeyboardShortcuts.Enabled = enable
+
+            If Not enable Then
+                btnDeleteKeyboardShortcut.Enabled = False
+                grpModifyKeyboardShortcut.Enabled = False
+                hotModifyKeyboardShortcut.Enabled = False
+            End If
+        End Sub
+
+        Private Sub lstKeyboardShortcuts_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles lstKeyboardShortcuts.SelectedIndexChanged
+            Dim itemSelected As Boolean = (lstKeyboardShortcuts.SelectedItems.Count = 1)
+            btnDeleteKeyboardShortcut.Enabled = itemSelected
+            grpModifyKeyboardShortcut.Enabled = itemSelected
+            hotModifyKeyboardShortcut.Enabled = itemSelected
+        End Sub
+
+        Private Sub btnNewKeyboardShortcut_Click(sender As System.Object, e As EventArgs) Handles btnNewKeyboardShortcut.Click
+            If lstKeyboardShortcuts.Items.Contains("None") Then Return
+            Dim itemIndex As Integer = lstKeyboardShortcuts.Items.Add("None")
+            lstKeyboardShortcuts.SelectedIndex = itemIndex
+        End Sub
+
+        Private Sub btnDeleteKeyboardShortcut_Click(sender As System.Object, e As EventArgs) Handles btnDeleteKeyboardShortcut.Click
+            lstKeyboardShortcuts.Items.Remove(lstKeyboardShortcuts.SelectedItem)
+        End Sub
+
+        Private Sub btnResetKeyboardShortcuts_Click(sender As System.Object, e As EventArgs) Handles btnResetKeyboardShortcuts.Click
+            lstKeyboardShortcuts.Items.Clear()
+        End Sub
+
+        Private Sub hotModifyKeyboardShortcut_TextChanged(sender As System.Object, e As EventArgs) Handles hotModifyKeyboardShortcut.TextChanged
+            lstKeyboardShortcuts.Items(lstKeyboardShortcuts.SelectedIndex) = hotModifyKeyboardShortcut.Text
+        End Sub
     End Class
 End Namespace

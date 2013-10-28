@@ -1,4 +1,5 @@
-﻿Imports SharedLibraryNG
+﻿Imports mRemoteNG.Controls
+Imports SharedLibraryNG
 
 Namespace Forms
 
@@ -8,7 +9,7 @@ Namespace Forms
 
         Friend WithEvents btnCancel As System.Windows.Forms.Button
         Friend WithEvents btnOK As System.Windows.Forms.Button
-        Friend WithEvents lvPages As System.Windows.Forms.ListView
+        Friend WithEvents lvPages As Controls.ListView
         Friend WithEvents imgListPages As System.Windows.Forms.ImageList
         Friend WithEvents chkWriteLogFile As System.Windows.Forms.CheckBox
         Friend WithEvents chkAutomaticallyGetSessionInfo As System.Windows.Forms.CheckBox
@@ -122,32 +123,25 @@ Namespace Forms
         Friend WithEvents cboTheme As System.Windows.Forms.ComboBox
         Friend WithEvents btnThemeDelete As System.Windows.Forms.Button
         Friend WithEvents tabKeyboard As System.Windows.Forms.TabPage
-        Friend WithEvents HotkeyControl1 As HotkeyControl
-        Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
-        Friend WithEvents Label3 As System.Windows.Forms.Label
-        Friend WithEvents Label4 As System.Windows.Forms.Label
-        Friend WithEvents Label1 As System.Windows.Forms.Label
-        Friend WithEvents HotkeyControl3 As HotkeyControl
-        Friend WithEvents Label2 As System.Windows.Forms.Label
-        Friend WithEvents HotkeyControl4 As HotkeyControl
-        Friend WithEvents HotkeyControl2 As HotkeyControl
         Private components As System.ComponentModel.IContainer
 
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
-            Dim ListViewItem10 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", "StartupExit_Icon.ico")
-            Dim ListViewItem11 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", "Panels_Icon.ico")
-            Dim ListViewItem12 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", "Tab_Icon.ico")
-            Dim ListViewItem13 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", "Root_Icon.ico")
-            Dim ListViewItem14 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", "database.bmp")
-            Dim ListViewItem15 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", "Update_Icon.ico")
-            Dim ListViewItem16 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", "Config_Icon.ico")
-            Dim ListViewItem17 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Theme", "Appearance_Icon.ico")
-            Dim ListViewItem18 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Keyboard", "Keyboard.png")
+            Dim linKeyboardCommand As Microsoft.VisualBasic.PowerPacks.LineShape
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
+            Dim Alignment1 As mRemoteNG.Controls.Alignment = New mRemoteNG.Controls.Alignment()
+            Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", "StartupExit_Icon.ico")
+            Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", "Panels_Icon.ico")
+            Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", "Tab_Icon.ico")
+            Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", "Root_Icon.ico")
+            Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", "database.bmp")
+            Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", "Update_Icon.ico")
+            Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", "Config_Icon.ico")
+            Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Theme", "Appearance_Icon.ico")
+            Dim ListViewItem9 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Keyboard", "Keyboard.png")
+            Dim Alignment2 As mRemoteNG.Controls.Alignment = New mRemoteNG.Controls.Alignment()
             Me.btnOK = New System.Windows.Forms.Button()
             Me.btnCancel = New System.Windows.Forms.Button()
-            Me.lvPages = New System.Windows.Forms.ListView()
             Me.imgListPages = New System.Windows.Forms.ImageList(Me.components)
             Me.lblMaximumPuttyWaitTime = New System.Windows.Forms.Label()
             Me.chkAutomaticReconnect = New System.Windows.Forms.CheckBox()
@@ -260,16 +254,19 @@ Namespace Forms
             Me.cboTheme = New System.Windows.Forms.ComboBox()
             Me.ThemePropertyGrid = New System.Windows.Forms.PropertyGrid()
             Me.tabKeyboard = New System.Windows.Forms.TabPage()
-            Me.GroupBox1 = New System.Windows.Forms.GroupBox()
-            Me.Label3 = New System.Windows.Forms.Label()
-            Me.Label4 = New System.Windows.Forms.Label()
-            Me.HotkeyControl1 = New SharedLibraryNG.HotkeyControl()
-            Me.Label1 = New System.Windows.Forms.Label()
-            Me.HotkeyControl3 = New SharedLibraryNG.HotkeyControl()
-            Me.Label2 = New System.Windows.Forms.Label()
-            Me.HotkeyControl4 = New SharedLibraryNG.HotkeyControl()
-            Me.HotkeyControl2 = New SharedLibraryNG.HotkeyControl()
+            Me.btnResetKeyboardShortcuts = New System.Windows.Forms.Button()
+            Me.btnDeleteKeyboardShortcut = New System.Windows.Forms.Button()
+            Me.btnNewKeyboardShortcut = New System.Windows.Forms.Button()
+            Me.grpModifyKeyboardShortcut = New System.Windows.Forms.GroupBox()
+            Me.hotModifyKeyboardShortcut = New SharedLibraryNG.HotkeyControl()
+            Me.lblKeyboardCommand = New System.Windows.Forms.Label()
+            Me.lstKeyboardShortcuts = New System.Windows.Forms.ListBox()
+            Me.lblKeyboardShortcuts = New System.Windows.Forms.Label()
+            Me.ShapeContainer1 = New Microsoft.VisualBasic.PowerPacks.ShapeContainer()
+            Me.lvKeyboardCommands = New mRemoteNG.Controls.ListView()
             Me.dlgColor = New System.Windows.Forms.ColorDialog()
+            Me.lvPages = New mRemoteNG.Controls.ListView()
+            linKeyboardCommand = New Microsoft.VisualBasic.PowerPacks.LineShape()
             CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.pnlProxy.SuspendLayout()
@@ -293,8 +290,16 @@ Namespace Forms
             Me.tabAdvanced.SuspendLayout()
             Me.tabTheme.SuspendLayout()
             Me.tabKeyboard.SuspendLayout()
-            Me.GroupBox1.SuspendLayout()
+            Me.grpModifyKeyboardShortcut.SuspendLayout()
             Me.SuspendLayout()
+            '
+            'linKeyboardCommand
+            '
+            linKeyboardCommand.Name = "linKeyboardCommand"
+            linKeyboardCommand.X1 = 213
+            linKeyboardCommand.X2 = 593
+            linKeyboardCommand.Y1 = 25
+            linKeyboardCommand.Y2 = 25
             '
             'btnOK
             '
@@ -316,25 +321,6 @@ Namespace Forms
             Me.btnCancel.TabIndex = 3
             Me.btnCancel.Text = "&Cancel"
             Me.btnCancel.UseVisualStyleBackColor = True
-            '
-            'lvPages
-            '
-            Me.lvPages.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-            Me.lvPages.FullRowSelect = True
-            Me.lvPages.HideSelection = False
-            Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem10, ListViewItem11, ListViewItem12, ListViewItem13, ListViewItem14, ListViewItem15, ListViewItem16, ListViewItem17, ListViewItem18})
-            Me.lvPages.LabelWrap = False
-            Me.lvPages.LargeImageList = Me.imgListPages
-            Me.lvPages.Location = New System.Drawing.Point(12, 12)
-            Me.lvPages.MultiSelect = False
-            Me.lvPages.Name = "lvPages"
-            Me.lvPages.Scrollable = False
-            Me.lvPages.Size = New System.Drawing.Size(154, 489)
-            Me.lvPages.TabIndex = 0
-            Me.lvPages.TileSize = New System.Drawing.Size(154, 30)
-            Me.lvPages.UseCompatibleStateImageBehavior = False
-            Me.lvPages.View = System.Windows.Forms.View.Tile
             '
             'imgListPages
             '
@@ -799,7 +785,7 @@ Namespace Forms
             Me.chkAlwaysShowPanelSelectionDlg.Location = New System.Drawing.Point(3, 141)
             Me.chkAlwaysShowPanelSelectionDlg.Name = "chkAlwaysShowPanelSelectionDlg"
             Me.chkAlwaysShowPanelSelectionDlg.Size = New System.Drawing.Size(317, 17)
-            Me.chkAlwaysShowPanelSelectionDlg.TabIndex = 4
+            Me.chkAlwaysShowPanelSelectionDlg.TabIndex = 6
             Me.chkAlwaysShowPanelSelectionDlg.Text = "Always show panel selection dialog when opening connectins"
             Me.chkAlwaysShowPanelSelectionDlg.UseVisualStyleBackColor = True
             '
@@ -809,7 +795,7 @@ Namespace Forms
             Me.chkShowLogonInfoOnTabs.Location = New System.Drawing.Point(3, 49)
             Me.chkShowLogonInfoOnTabs.Name = "chkShowLogonInfoOnTabs"
             Me.chkShowLogonInfoOnTabs.Size = New System.Drawing.Size(203, 17)
-            Me.chkShowLogonInfoOnTabs.TabIndex = 1
+            Me.chkShowLogonInfoOnTabs.TabIndex = 2
             Me.chkShowLogonInfoOnTabs.Text = "Show logon information on tab names"
             Me.chkShowLogonInfoOnTabs.UseVisualStyleBackColor = True
             '
@@ -819,7 +805,7 @@ Namespace Forms
             Me.chkDoubleClickClosesTab.Location = New System.Drawing.Point(3, 118)
             Me.chkDoubleClickClosesTab.Name = "chkDoubleClickClosesTab"
             Me.chkDoubleClickClosesTab.Size = New System.Drawing.Size(159, 17)
-            Me.chkDoubleClickClosesTab.TabIndex = 3
+            Me.chkDoubleClickClosesTab.TabIndex = 5
             Me.chkDoubleClickClosesTab.Text = "Double click on tab closes it"
             Me.chkDoubleClickClosesTab.UseVisualStyleBackColor = True
             '
@@ -829,7 +815,7 @@ Namespace Forms
             Me.chkShowProtocolOnTabs.Location = New System.Drawing.Point(3, 72)
             Me.chkShowProtocolOnTabs.Name = "chkShowProtocolOnTabs"
             Me.chkShowProtocolOnTabs.Size = New System.Drawing.Size(166, 17)
-            Me.chkShowProtocolOnTabs.TabIndex = 2
+            Me.chkShowProtocolOnTabs.TabIndex = 3
             Me.chkShowProtocolOnTabs.Text = "Show protocols on tab names"
             Me.chkShowProtocolOnTabs.UseVisualStyleBackColor = True
             '
@@ -839,7 +825,7 @@ Namespace Forms
             Me.chkOpenNewTabRightOfSelected.Location = New System.Drawing.Point(3, 26)
             Me.chkOpenNewTabRightOfSelected.Name = "chkOpenNewTabRightOfSelected"
             Me.chkOpenNewTabRightOfSelected.Size = New System.Drawing.Size(280, 17)
-            Me.chkOpenNewTabRightOfSelected.TabIndex = 0
+            Me.chkOpenNewTabRightOfSelected.TabIndex = 1
             Me.chkOpenNewTabRightOfSelected.Text = "Open new tab to the right of the currently selected tab"
             Me.chkOpenNewTabRightOfSelected.UseVisualStyleBackColor = True
             '
@@ -850,7 +836,7 @@ Namespace Forms
             Me.chkMCWarnings.Location = New System.Drawing.Point(19, 256)
             Me.chkMCWarnings.Name = "chkMCWarnings"
             Me.chkMCWarnings.Size = New System.Drawing.Size(71, 17)
-            Me.chkMCWarnings.TabIndex = 8
+            Me.chkMCWarnings.TabIndex = 10
             Me.chkMCWarnings.Text = "Warnings"
             Me.chkMCWarnings.UseVisualStyleBackColor = True
             '
@@ -861,7 +847,7 @@ Namespace Forms
             Me.chkMCErrors.Location = New System.Drawing.Point(19, 279)
             Me.chkMCErrors.Name = "chkMCErrors"
             Me.chkMCErrors.Size = New System.Drawing.Size(53, 17)
-            Me.chkMCErrors.TabIndex = 9
+            Me.chkMCErrors.TabIndex = 11
             Me.chkMCErrors.Text = "Errors"
             Me.chkMCErrors.UseVisualStyleBackColor = True
             '
@@ -872,7 +858,7 @@ Namespace Forms
             Me.chkMCInformation.Location = New System.Drawing.Point(19, 233)
             Me.chkMCInformation.Name = "chkMCInformation"
             Me.chkMCInformation.Size = New System.Drawing.Size(83, 17)
-            Me.chkMCInformation.TabIndex = 7
+            Me.chkMCInformation.TabIndex = 9
             Me.chkMCInformation.Text = "Informations"
             Me.chkMCInformation.UseVisualStyleBackColor = True
             '
@@ -882,7 +868,7 @@ Namespace Forms
             Me.lblSwitchToErrorsAndInfos.Location = New System.Drawing.Point(3, 213)
             Me.lblSwitchToErrorsAndInfos.Name = "lblSwitchToErrorsAndInfos"
             Me.lblSwitchToErrorsAndInfos.Size = New System.Drawing.Size(159, 13)
-            Me.lblSwitchToErrorsAndInfos.TabIndex = 6
+            Me.lblSwitchToErrorsAndInfos.TabIndex = 8
             Me.lblSwitchToErrorsAndInfos.Text = "Switch to Notifications panel on:"
             '
             'chkUseOnlyErrorsAndInfosPanel
@@ -891,7 +877,7 @@ Namespace Forms
             Me.chkUseOnlyErrorsAndInfosPanel.Location = New System.Drawing.Point(3, 188)
             Me.chkUseOnlyErrorsAndInfosPanel.Name = "chkUseOnlyErrorsAndInfosPanel"
             Me.chkUseOnlyErrorsAndInfosPanel.Size = New System.Drawing.Size(278, 17)
-            Me.chkUseOnlyErrorsAndInfosPanel.TabIndex = 5
+            Me.chkUseOnlyErrorsAndInfosPanel.TabIndex = 7
             Me.chkUseOnlyErrorsAndInfosPanel.Text = "Use only Notifications panel (no messagebox popups)"
             Me.chkUseOnlyErrorsAndInfosPanel.UseVisualStyleBackColor = True
             '
@@ -1078,7 +1064,7 @@ Namespace Forms
             Me.chkAlwaysShowPanelTabs.Location = New System.Drawing.Point(3, 3)
             Me.chkAlwaysShowPanelTabs.Name = "chkAlwaysShowPanelTabs"
             Me.chkAlwaysShowPanelTabs.Size = New System.Drawing.Size(139, 17)
-            Me.chkAlwaysShowPanelTabs.TabIndex = 7
+            Me.chkAlwaysShowPanelTabs.TabIndex = 0
             Me.chkAlwaysShowPanelTabs.Text = "Always show panel tabs"
             Me.chkAlwaysShowPanelTabs.UseVisualStyleBackColor = True
             '
@@ -1088,7 +1074,7 @@ Namespace Forms
             Me.chkIdentifyQuickConnectTabs.Location = New System.Drawing.Point(3, 95)
             Me.chkIdentifyQuickConnectTabs.Name = "chkIdentifyQuickConnectTabs"
             Me.chkIdentifyQuickConnectTabs.Size = New System.Drawing.Size(293, 17)
-            Me.chkIdentifyQuickConnectTabs.TabIndex = 10
+            Me.chkIdentifyQuickConnectTabs.TabIndex = 4
             Me.chkIdentifyQuickConnectTabs.Text = Global.mRemoteNG.My.Language.strIdentifyQuickConnectTabs
             Me.chkIdentifyQuickConnectTabs.UseVisualStyleBackColor = True
             '
@@ -1234,7 +1220,7 @@ Namespace Forms
             Me.pnlConfirmCloseConnection.Location = New System.Drawing.Point(3, 323)
             Me.pnlConfirmCloseConnection.Name = "pnlConfirmCloseConnection"
             Me.pnlConfirmCloseConnection.Size = New System.Drawing.Size(596, 137)
-            Me.pnlConfirmCloseConnection.TabIndex = 10
+            Me.pnlConfirmCloseConnection.TabIndex = 6
             '
             'lblClosingConnections
             '
@@ -1242,7 +1228,7 @@ Namespace Forms
             Me.lblClosingConnections.Location = New System.Drawing.Point(3, 9)
             Me.lblClosingConnections.Name = "lblClosingConnections"
             Me.lblClosingConnections.Size = New System.Drawing.Size(136, 13)
-            Me.lblClosingConnections.TabIndex = 12
+            Me.lblClosingConnections.TabIndex = 0
             Me.lblClosingConnections.Text = "When closing connections:"
             '
             'radCloseWarnAll
@@ -1251,7 +1237,7 @@ Namespace Forms
             Me.radCloseWarnAll.Location = New System.Drawing.Point(16, 31)
             Me.radCloseWarnAll.Name = "radCloseWarnAll"
             Me.radCloseWarnAll.Size = New System.Drawing.Size(194, 17)
-            Me.radCloseWarnAll.TabIndex = 11
+            Me.radCloseWarnAll.TabIndex = 1
             Me.radCloseWarnAll.TabStop = True
             Me.radCloseWarnAll.Text = "Warn me when closing connections"
             Me.radCloseWarnAll.UseVisualStyleBackColor = True
@@ -1262,7 +1248,7 @@ Namespace Forms
             Me.radCloseWarnMultiple.Location = New System.Drawing.Point(16, 54)
             Me.radCloseWarnMultiple.Name = "radCloseWarnMultiple"
             Me.radCloseWarnMultiple.Size = New System.Drawing.Size(254, 17)
-            Me.radCloseWarnMultiple.TabIndex = 10
+            Me.radCloseWarnMultiple.TabIndex = 2
             Me.radCloseWarnMultiple.TabStop = True
             Me.radCloseWarnMultiple.Text = "Warn me only when closing multiple connections"
             Me.radCloseWarnMultiple.UseVisualStyleBackColor = True
@@ -1273,7 +1259,7 @@ Namespace Forms
             Me.radCloseWarnExit.Location = New System.Drawing.Point(16, 77)
             Me.radCloseWarnExit.Name = "radCloseWarnExit"
             Me.radCloseWarnExit.Size = New System.Drawing.Size(216, 17)
-            Me.radCloseWarnExit.TabIndex = 9
+            Me.radCloseWarnExit.TabIndex = 3
             Me.radCloseWarnExit.TabStop = True
             Me.radCloseWarnExit.Text = "Warn me only when exiting mRemoteNG"
             Me.radCloseWarnExit.UseVisualStyleBackColor = True
@@ -1284,7 +1270,7 @@ Namespace Forms
             Me.radCloseWarnNever.Location = New System.Drawing.Point(16, 100)
             Me.radCloseWarnNever.Name = "radCloseWarnNever"
             Me.radCloseWarnNever.Size = New System.Drawing.Size(226, 17)
-            Me.radCloseWarnNever.TabIndex = 8
+            Me.radCloseWarnNever.TabIndex = 4
             Me.radCloseWarnNever.TabStop = True
             Me.radCloseWarnNever.Text = "Do not warn me when closing connections"
             Me.radCloseWarnNever.UseVisualStyleBackColor = True
@@ -1515,7 +1501,15 @@ Namespace Forms
             '
             'tabKeyboard
             '
-            Me.tabKeyboard.Controls.Add(Me.GroupBox1)
+            Me.tabKeyboard.Controls.Add(Me.btnResetKeyboardShortcuts)
+            Me.tabKeyboard.Controls.Add(Me.btnDeleteKeyboardShortcut)
+            Me.tabKeyboard.Controls.Add(Me.btnNewKeyboardShortcut)
+            Me.tabKeyboard.Controls.Add(Me.grpModifyKeyboardShortcut)
+            Me.tabKeyboard.Controls.Add(Me.lblKeyboardCommand)
+            Me.tabKeyboard.Controls.Add(Me.lstKeyboardShortcuts)
+            Me.tabKeyboard.Controls.Add(Me.lblKeyboardShortcuts)
+            Me.tabKeyboard.Controls.Add(Me.ShapeContainer1)
+            Me.tabKeyboard.Controls.Add(Me.lvKeyboardCommands)
             Me.tabKeyboard.Location = New System.Drawing.Point(4, 22)
             Me.tabKeyboard.Name = "tabKeyboard"
             Me.tabKeyboard.Padding = New System.Windows.Forms.Padding(3)
@@ -1524,110 +1518,138 @@ Namespace Forms
             Me.tabKeyboard.Text = "Keyboard"
             Me.tabKeyboard.UseVisualStyleBackColor = True
             '
-            'GroupBox1
+            'btnResetKeyboardShortcuts
             '
-            Me.GroupBox1.Controls.Add(Me.Label3)
-            Me.GroupBox1.Controls.Add(Me.Label4)
-            Me.GroupBox1.Controls.Add(Me.HotkeyControl1)
-            Me.GroupBox1.Controls.Add(Me.Label1)
-            Me.GroupBox1.Controls.Add(Me.HotkeyControl3)
-            Me.GroupBox1.Controls.Add(Me.Label2)
-            Me.GroupBox1.Controls.Add(Me.HotkeyControl4)
-            Me.GroupBox1.Controls.Add(Me.HotkeyControl2)
-            Me.GroupBox1.Location = New System.Drawing.Point(6, 6)
-            Me.GroupBox1.Name = "GroupBox1"
-            Me.GroupBox1.Size = New System.Drawing.Size(446, 137)
-            Me.GroupBox1.TabIndex = 8
-            Me.GroupBox1.TabStop = False
-            Me.GroupBox1.Text = "Keyboard Shortcuts"
+            Me.btnResetKeyboardShortcuts.Location = New System.Drawing.Point(476, 158)
+            Me.btnResetKeyboardShortcuts.Name = "btnResetKeyboardShortcuts"
+            Me.btnResetKeyboardShortcuts.Size = New System.Drawing.Size(120, 23)
+            Me.btnResetKeyboardShortcuts.TabIndex = 7
+            Me.btnResetKeyboardShortcuts.Text = "&Reset to Default"
+            Me.btnResetKeyboardShortcuts.UseVisualStyleBackColor = True
             '
-            'Label3
+            'btnDeleteKeyboardShortcut
             '
-            Me.Label3.AutoSize = True
-            Me.Label3.Location = New System.Drawing.Point(98, 29)
-            Me.Label3.Name = "Label3"
-            Me.Label3.Size = New System.Drawing.Size(41, 13)
-            Me.Label3.TabIndex = 6
-            Me.Label3.Text = "Primary"
+            Me.btnDeleteKeyboardShortcut.Location = New System.Drawing.Point(297, 158)
+            Me.btnDeleteKeyboardShortcut.Name = "btnDeleteKeyboardShortcut"
+            Me.btnDeleteKeyboardShortcut.Size = New System.Drawing.Size(75, 23)
+            Me.btnDeleteKeyboardShortcut.TabIndex = 6
+            Me.btnDeleteKeyboardShortcut.Text = "&Delete"
+            Me.btnDeleteKeyboardShortcut.UseVisualStyleBackColor = True
             '
-            'Label4
+            'btnNewKeyboardShortcut
             '
-            Me.Label4.AutoSize = True
-            Me.Label4.Location = New System.Drawing.Point(255, 29)
-            Me.Label4.Name = "Label4"
-            Me.Label4.Size = New System.Drawing.Size(49, 13)
-            Me.Label4.TabIndex = 7
-            Me.Label4.Text = "Alternate"
+            Me.btnNewKeyboardShortcut.Location = New System.Drawing.Point(216, 158)
+            Me.btnNewKeyboardShortcut.Name = "btnNewKeyboardShortcut"
+            Me.btnNewKeyboardShortcut.Size = New System.Drawing.Size(75, 23)
+            Me.btnNewKeyboardShortcut.TabIndex = 5
+            Me.btnNewKeyboardShortcut.Text = "&New"
+            Me.btnNewKeyboardShortcut.UseVisualStyleBackColor = True
             '
-            'HotkeyControl1
+            'grpModifyKeyboardShortcut
             '
-            Me.HotkeyControl1.AcceptsReturn = True
-            Me.HotkeyControl1.AcceptsTab = True
-            Me.HotkeyControl1.Hotkey = System.Windows.Forms.Keys.None
-            Me.HotkeyControl1.HotkeyModifiers = System.Windows.Forms.Keys.None
-            Me.HotkeyControl1.Location = New System.Drawing.Point(101, 84)
-            Me.HotkeyControl1.Name = "HotkeyControl1"
-            Me.HotkeyControl1.ShortcutsEnabled = False
-            Me.HotkeyControl1.Size = New System.Drawing.Size(151, 20)
-            Me.HotkeyControl1.TabIndex = 0
-            Me.HotkeyControl1.Text = "None"
+            Me.grpModifyKeyboardShortcut.Controls.Add(Me.hotModifyKeyboardShortcut)
+            Me.grpModifyKeyboardShortcut.Location = New System.Drawing.Point(216, 187)
+            Me.grpModifyKeyboardShortcut.Name = "grpModifyKeyboardShortcut"
+            Me.grpModifyKeyboardShortcut.Size = New System.Drawing.Size(380, 103)
+            Me.grpModifyKeyboardShortcut.TabIndex = 8
+            Me.grpModifyKeyboardShortcut.TabStop = False
+            Me.grpModifyKeyboardShortcut.Text = "Modify Shortcut"
             '
-            'Label1
+            'hotModifyKeyboardShortcut
             '
-            Me.Label1.AutoSize = True
-            Me.Label1.Location = New System.Drawing.Point(44, 87)
-            Me.Label1.Name = "Label1"
-            Me.Label1.Size = New System.Drawing.Size(51, 13)
-            Me.Label1.TabIndex = 1
-            Me.Label1.Text = "Next Tab"
+            Me.hotModifyKeyboardShortcut.Hotkey = System.Windows.Forms.Keys.None
+            Me.hotModifyKeyboardShortcut.HotkeyModifiers = System.Windows.Forms.Keys.None
+            Me.hotModifyKeyboardShortcut.Location = New System.Drawing.Point(26, 41)
+            Me.hotModifyKeyboardShortcut.Name = "hotModifyKeyboardShortcut"
+            Me.hotModifyKeyboardShortcut.Size = New System.Drawing.Size(329, 20)
+            Me.hotModifyKeyboardShortcut.TabIndex = 0
+            Me.hotModifyKeyboardShortcut.Text = "None"
             '
-            'HotkeyControl3
+            'lblKeyboardCommand
             '
-            Me.HotkeyControl3.AcceptsReturn = True
-            Me.HotkeyControl3.AcceptsTab = True
-            Me.HotkeyControl3.Hotkey = System.Windows.Forms.Keys.None
-            Me.HotkeyControl3.HotkeyModifiers = System.Windows.Forms.Keys.None
-            Me.HotkeyControl3.Location = New System.Drawing.Point(258, 45)
-            Me.HotkeyControl3.Name = "HotkeyControl3"
-            Me.HotkeyControl3.ShortcutsEnabled = False
-            Me.HotkeyControl3.Size = New System.Drawing.Size(151, 20)
-            Me.HotkeyControl3.TabIndex = 5
-            Me.HotkeyControl3.Text = "None"
+            Me.lblKeyboardCommand.AutoSize = True
+            Me.lblKeyboardCommand.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+            Me.lblKeyboardCommand.Location = New System.Drawing.Point(213, 7)
+            Me.lblKeyboardCommand.Name = "lblKeyboardCommand"
+            Me.lblKeyboardCommand.Size = New System.Drawing.Size(71, 17)
+            Me.lblKeyboardCommand.TabIndex = 2
+            Me.lblKeyboardCommand.Text = "Command"
             '
-            'Label2
+            'lstKeyboardShortcuts
             '
-            Me.Label2.AutoSize = True
-            Me.Label2.Location = New System.Drawing.Point(25, 48)
-            Me.Label2.Name = "Label2"
-            Me.Label2.Size = New System.Drawing.Size(70, 13)
-            Me.Label2.TabIndex = 2
-            Me.Label2.Text = "Previous Tab"
+            Me.lstKeyboardShortcuts.FormattingEnabled = True
+            Me.lstKeyboardShortcuts.Location = New System.Drawing.Point(216, 57)
+            Me.lstKeyboardShortcuts.Name = "lstKeyboardShortcuts"
+            Me.lstKeyboardShortcuts.Size = New System.Drawing.Size(380, 95)
+            Me.lstKeyboardShortcuts.TabIndex = 4
             '
-            'HotkeyControl4
+            'lblKeyboardShortcuts
             '
-            Me.HotkeyControl4.AcceptsReturn = True
-            Me.HotkeyControl4.AcceptsTab = True
-            Me.HotkeyControl4.Hotkey = System.Windows.Forms.Keys.None
-            Me.HotkeyControl4.HotkeyModifiers = System.Windows.Forms.Keys.None
-            Me.HotkeyControl4.Location = New System.Drawing.Point(258, 84)
-            Me.HotkeyControl4.Name = "HotkeyControl4"
-            Me.HotkeyControl4.ShortcutsEnabled = False
-            Me.HotkeyControl4.Size = New System.Drawing.Size(151, 20)
-            Me.HotkeyControl4.TabIndex = 4
-            Me.HotkeyControl4.Text = "None"
+            Me.lblKeyboardShortcuts.AutoSize = True
+            Me.lblKeyboardShortcuts.Location = New System.Drawing.Point(213, 41)
+            Me.lblKeyboardShortcuts.Name = "lblKeyboardShortcuts"
+            Me.lblKeyboardShortcuts.Size = New System.Drawing.Size(100, 13)
+            Me.lblKeyboardShortcuts.TabIndex = 3
+            Me.lblKeyboardShortcuts.Text = "Keyboard Shortcuts"
             '
-            'HotkeyControl2
+            'ShapeContainer1
             '
-            Me.HotkeyControl2.AcceptsReturn = True
-            Me.HotkeyControl2.AcceptsTab = True
-            Me.HotkeyControl2.Hotkey = System.Windows.Forms.Keys.None
-            Me.HotkeyControl2.HotkeyModifiers = System.Windows.Forms.Keys.None
-            Me.HotkeyControl2.Location = New System.Drawing.Point(101, 45)
-            Me.HotkeyControl2.Name = "HotkeyControl2"
-            Me.HotkeyControl2.ShortcutsEnabled = False
-            Me.HotkeyControl2.Size = New System.Drawing.Size(151, 20)
-            Me.HotkeyControl2.TabIndex = 3
-            Me.HotkeyControl2.Text = "None"
+            Me.ShapeContainer1.Location = New System.Drawing.Point(3, 3)
+            Me.ShapeContainer1.Margin = New System.Windows.Forms.Padding(0)
+            Me.ShapeContainer1.Name = "ShapeContainer1"
+            Me.ShapeContainer1.Shapes.AddRange(New Microsoft.VisualBasic.PowerPacks.Shape() {linKeyboardCommand})
+            Me.ShapeContainer1.Size = New System.Drawing.Size(596, 457)
+            Me.ShapeContainer1.TabIndex = 0
+            Me.ShapeContainer1.TabStop = False
+            '
+            'lvKeyboardCommands
+            '
+            Me.lvKeyboardCommands.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+            Me.lvKeyboardCommands.HideSelection = False
+            Me.lvKeyboardCommands.InactiveHighlightBackColor = System.Drawing.SystemColors.Highlight
+            Me.lvKeyboardCommands.InactiveHighlightBorderColor = System.Drawing.SystemColors.HotTrack
+            Me.lvKeyboardCommands.InactiveHighlightForeColor = System.Drawing.SystemColors.HighlightText
+            Alignment1.Horizontal = mRemoteNG.Controls.HorizontalAlignment.Left
+            Alignment1.Vertical = mRemoteNG.Controls.VerticalAlignment.Middle
+            Me.lvKeyboardCommands.LabelAlignment = Alignment1
+            Me.lvKeyboardCommands.LabelWrap = False
+            Me.lvKeyboardCommands.Location = New System.Drawing.Point(7, 7)
+            Me.lvKeyboardCommands.MultiSelect = False
+            Me.lvKeyboardCommands.Name = "lvKeyboardCommands"
+            Me.lvKeyboardCommands.OwnerDraw = True
+            Me.lvKeyboardCommands.Size = New System.Drawing.Size(200, 450)
+            Me.lvKeyboardCommands.TabIndex = 1
+            Me.lvKeyboardCommands.TileSize = New System.Drawing.Size(196, 20)
+            Me.lvKeyboardCommands.UseCompatibleStateImageBehavior = False
+            Me.lvKeyboardCommands.View = System.Windows.Forms.View.Tile
+            '
+            'lvPages
+            '
+            Me.lvPages.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+            Me.lvPages.FullRowSelect = True
+            Me.lvPages.HideSelection = False
+            Me.lvPages.InactiveHighlightBackColor = System.Drawing.SystemColors.Highlight
+            Me.lvPages.InactiveHighlightBorderColor = System.Drawing.SystemColors.HotTrack
+            Me.lvPages.InactiveHighlightForeColor = System.Drawing.SystemColors.HighlightText
+            Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8, ListViewItem9})
+            Alignment2.Horizontal = mRemoteNG.Controls.HorizontalAlignment.Left
+            Alignment2.Vertical = mRemoteNG.Controls.VerticalAlignment.Middle
+            Me.lvPages.LabelAlignment = Alignment2
+            Me.lvPages.LabelWrap = False
+            Me.lvPages.LargeImageList = Me.imgListPages
+            Me.lvPages.Location = New System.Drawing.Point(12, 12)
+            Me.lvPages.MultiSelect = False
+            Me.lvPages.Name = "lvPages"
+            Me.lvPages.OwnerDraw = True
+            Me.lvPages.Scrollable = False
+            Me.lvPages.ShowFocusCues = False
+            Me.lvPages.Size = New System.Drawing.Size(154, 489)
+            Me.lvPages.TabIndex = 0
+            Me.lvPages.TabStop = False
+            Me.lvPages.TileSize = New System.Drawing.Size(150, 30)
+            Me.lvPages.UseCompatibleStateImageBehavior = False
+            Me.lvPages.View = System.Windows.Forms.View.Tile
             '
             'frmOptions
             '
@@ -1682,10 +1704,21 @@ Namespace Forms
             Me.tabAdvanced.PerformLayout()
             Me.tabTheme.ResumeLayout(False)
             Me.tabKeyboard.ResumeLayout(False)
-            Me.GroupBox1.ResumeLayout(False)
-            Me.GroupBox1.PerformLayout()
+            Me.tabKeyboard.PerformLayout()
+            Me.grpModifyKeyboardShortcut.ResumeLayout(False)
+            Me.grpModifyKeyboardShortcut.PerformLayout()
             Me.ResumeLayout(False)
 
         End Sub
+        Friend WithEvents lvKeyboardCommands As Controls.ListView
+        Friend WithEvents lblKeyboardCommand As System.Windows.Forms.Label
+        Friend WithEvents lstKeyboardShortcuts As System.Windows.Forms.ListBox
+        Friend WithEvents btnResetKeyboardShortcuts As System.Windows.Forms.Button
+        Friend WithEvents btnDeleteKeyboardShortcut As System.Windows.Forms.Button
+        Friend WithEvents btnNewKeyboardShortcut As System.Windows.Forms.Button
+        Friend WithEvents hotModifyKeyboardShortcut As SharedLibraryNG.HotkeyControl
+        Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
+        Friend WithEvents grpModifyKeyboardShortcut As System.Windows.Forms.GroupBox
+        Friend WithEvents lblKeyboardShortcuts As System.Windows.Forms.Label
     End Class
 End Namespace
