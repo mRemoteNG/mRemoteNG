@@ -1068,7 +1068,7 @@ Namespace App
 
                 If Not My.Settings.UseSQLServer Then
                     If withDialog Then
-                        Dim loadDialog As OpenFileDialog = Controls.ConnectionsLoadDialog
+                        Dim loadDialog As OpenFileDialog = Tools.Controls.ConnectionsLoadDialog
 
                         If loadDialog.ShowDialog = System.Windows.Forms.DialogResult.OK Then
                             connectionsLoad.ConnectionFileName = loadDialog.FileName
