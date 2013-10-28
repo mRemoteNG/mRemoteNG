@@ -196,6 +196,9 @@
     <Compile Include="Controls\ToolStripSplitButton.vb">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\frmOptions.Designer.vb">
+      <DependentUpon>frmOptions.vb</DependentUpon>
+    </Compile>
     <Compile Include="Tools\Authenticode.vb" />
     <Compile Include="Tools\EnumWindows.vb" />
     <Compile Include="Tools\EnvironmentInfo.vb" />

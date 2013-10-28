@@ -263,7 +263,7 @@ Namespace App
 
                             adimportPanel.Show(frmMain.pnlDock)
                         Case UI.Window.Type.Options
-                            optionsForm = New frmOptions(optionsPanel)
+                            optionsForm = New frmOptions()
                             optionsForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.Export
                             If exportForm Is Nothing OrElse exportForm.IsDisposed Then
@@ -331,7 +331,7 @@ Namespace App
             End Sub
 
             Public Shared Sub ShowUpdatesTab()
-                Windows.optionsForm = New frmOptions(Windows.optionsPanel)
+                Windows.optionsForm = New frmOptions()
                 Windows.optionsForm.Show(frmMain.pnlDock, 5)
             End Sub
         End Class
