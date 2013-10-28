@@ -3,21 +3,7 @@ Imports mRemoteNG.Tools
 
 Namespace Config.Putty
     Public Class Sessions
-        Private Shared _providers As List(Of Provider)
-        Private Shared ReadOnly Property Providers() As List(Of Provider)
-            Get
-                If _providers Is Nothing OrElse _providers.Count = 0 Then AddProviders()
-                Return _providers
-            End Get
-        End Property
-
-        Private Shared Sub AddProviders()
-            _providers = New List(Of Provider)()
-            _providers.Add(New DefaultSettingsProvider())
-            _providers.Add(New RegistryProvider())
-            _providers.Add(New XmingProvider())
-        End Sub
-
+#Region "Public Methods"
         Private Delegate Sub AddSessionsToTreeDelegate()
         Public Shared Sub AddSessionsToTree()
             Dim treeView As TreeView = Tree.Node.TreeView
@@ -27,22 +13,12 @@ Namespace Config.Putty
                 Return
             End If
 
-            Dim puttyType As PuttyTypeDetector.PuttyType = PuttyTypeDetector.GetPuttyType()
-
             For Each provider As Provider In Providers
-                Dim enabled As Boolean = True
-                Select Case puttyType
-                    Case PuttyTypeDetector.PuttyType.Xming
-                        If TypeOf (provider) Is RegistryProvider Then enabled = False
-                    Case Else
-                        If TypeOf (provider) Is XmingProvider Then enabled = False
-                End Select
-
                 Dim rootTreeNode As TreeNode = provider.RootTreeNode
                 Dim inUpdate As Boolean = False
 
                 Dim savedSessions As New List(Of Connection.Info)(provider.GetSessions())
-                If Not enabled Or savedSessions Is Nothing OrElse savedSessions.Count = 0 Then
+                If Not IsProviderEnabled(provider) Or savedSessions Is Nothing OrElse savedSessions.Count = 0 Then
                     If rootTreeNode IsNot Nothing AndAlso treeView.Nodes.Contains(rootTreeNode) Then
                         treeView.BeginUpdate()
                         treeView.Nodes.Remove(rootTreeNode)
@@ -110,14 +86,6 @@ Namespace Config.Putty
             Next
         End Sub
 
-        Protected Shared Function GetSessionNames(Optional ByVal raw As Boolean = False) As String()
-            Dim sessionNames As New List(Of String)
-            For Each provider As Provider In Providers
-                sessionNames.AddRange(provider.GetSessionNames())
-            Next
-            Return sessionNames.ToArray()
-        End Function
-
         Public Shared Sub StartWatcher()
             For Each provider As Provider In Providers
                 provider.StartWatcher()
@@ -135,7 +103,45 @@ Namespace Config.Putty
         Public Shared Sub SessionChanged(ByVal sender As Object, ByVal e As Provider.SessionChangedEventArgs)
             AddSessionsToTree()
         End Sub
+#End Region
 
+#Region "Private Methods"
+        Private Shared _providers As List(Of Provider)
+        Private Shared ReadOnly Property Providers() As List(Of Provider)
+            Get
+                If _providers Is Nothing OrElse _providers.Count = 0 Then AddProviders()
+                Return _providers
+            End Get
+        End Property
+
+        Private Shared Sub AddProviders()
+            _providers = New List(Of Provider)()
+            _providers.Add(New RegistryProvider())
+            _providers.Add(New XmingProvider())
+        End Sub
+
+        Private Shared Function GetSessionNames(Optional ByVal raw As Boolean = False) As String()
+            Dim sessionNames As New List(Of String)
+            For Each provider As Provider In Providers
+                If Not IsProviderEnabled(provider) Then Continue For
+                sessionNames.AddRange(provider.GetSessionNames(raw))
+            Next
+            Return sessionNames.ToArray()
+        End Function
+
+        Private Shared Function IsProviderEnabled(ByVal provider As Provider) As Boolean
+            Dim enabled As Boolean = True
+            Select Case PuttyTypeDetector.GetPuttyType()
+                Case PuttyTypeDetector.PuttyType.Xming
+                    If TypeOf (provider) Is RegistryProvider Then enabled = False
+                Case Else
+                    If TypeOf (provider) Is XmingProvider Then enabled = False
+            End Select
+            Return enabled
+        End Function
+#End Region
+
+#Region "Public Classes"
         Public Class SessionList
             Inherits StringConverter
 
@@ -157,5 +163,6 @@ Namespace Config.Putty
                 Return True
             End Function
         End Class
+#End Region
     End Class
 End Namespace

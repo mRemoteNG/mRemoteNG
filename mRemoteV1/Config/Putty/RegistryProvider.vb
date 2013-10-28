@@ -9,9 +9,7 @@ Namespace Config.Putty
     Public Class RegistryProvider
         Inherits Provider
 
-        Private Const PuttySessionsKey As String = "Software\SimonTatham\PuTTY\Sessions"
-        Private Shared _eventWatcher As ManagementEventWatcher
-
+#Region "Public Methods"
         Public Overrides Function GetSessionNames(Optional ByVal raw As Boolean = False) As String()
             Dim sessionsKey As RegistryKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey)
             If sessionsKey Is Nothing Then Return New String() {}
@@ -25,11 +23,14 @@ Namespace Config.Putty
                 End If
             Next
 
-            If sessionNames.Contains("Default%20Settings") Then ' Do not localize
-                sessionNames.Remove("Default%20Settings")
-            End If
-            If sessionNames.Contains("Default Settings") Then
-                sessionNames.Remove("Default Settings")
+            If raw Then
+                If Not sessionNames.Contains("Default%20Settings") Then ' Do not localize
+                    sessionNames.Insert(0, "Default%20Settings")
+                End If
+            Else
+                If Not sessionNames.Contains("Default Settings") Then
+                    sessionNames.Insert(0, "Default Settings")
+                End If
             End If
 
             Return sessionNames.ToArray()
@@ -103,10 +104,18 @@ Namespace Config.Putty
             _eventWatcher.Dispose()
             _eventWatcher = Nothing
         End Sub
+#End Region
 
+#Region "Private Fields"
+        Private Const PuttySessionsKey As String = "Software\SimonTatham\PuTTY\Sessions"
+        Private Shared _eventWatcher As ManagementEventWatcher
+#End Region
+
+#Region "Private Methods"
         Private Sub OnManagementEventArrived(ByVal sender As Object, ByVal e As EventArrivedEventArgs)
             OnSessionChanged(New SessionChangedEventArgs())
         End Sub
+#End Region
     End Class
 End Namespace
 

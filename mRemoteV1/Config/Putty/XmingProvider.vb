@@ -2,30 +2,13 @@
 Imports mRemoteNG.App
 Imports mRemoteNG.Messages
 Imports mRemoteNG.Connection.Protocol
+Imports System.Text.RegularExpressions
 
 Namespace Config.Putty
     Public Class XmingProvider
         Inherits Provider
 
-        Private Shared _eventWatcher As FileSystemWatcher
-
-        Private Shared Function GetPuttyConfPath() As String
-            Dim puttyPath As String
-            If My.Settings.UseCustomPuttyPath Then
-                puttyPath = My.Settings.CustomPuttyPath
-            Else
-                puttyPath = Info.General.PuttyPath
-            End If
-            Return Path.Combine(Path.GetDirectoryName(puttyPath), "putty.conf")
-        End Function
-
-        Private Shared Function GetSessionsFolderPath() As String
-            Dim puttyConfPath As String = GetPuttyConfPath()
-            Dim sessionFileReader As New PuttyConfFileReader(puttyConfPath)
-            Dim basePath As String = Environment.ExpandEnvironmentVariables(sessionFileReader.GetValue("sshk&sess"))
-            Return Path.Combine(basePath, "sessions")
-        End Function
-
+#Region "Public Methods"
         Public Overrides Function GetSessionNames(Optional ByVal raw As Boolean = False) As String()
             Dim sessionsFolderPath As String = GetSessionsFolderPath()
             If Not Directory.Exists(sessionsFolderPath) Then Return New String() {}
@@ -40,17 +23,33 @@ Namespace Config.Putty
                 End If
             Next
 
-            If sessionNames.Contains("Default%20Settings") Then ' Do not localize
-                sessionNames.Remove("Default%20Settings")
+            If raw Then
+                If Not sessionNames.Contains("Default%20Settings") Then ' Do not localize
+                    sessionNames.Insert(0, "Default%20Settings")
+                End If
+            Else
+                If Not sessionNames.Contains("Default Settings") Then
+                    sessionNames.Insert(0, "Default Settings")
+                End If
             End If
-            If sessionNames.Contains("Default Settings") Then
-                sessionNames.Remove("Default Settings")
-            End If
+
+            Dim registrySessionNames As New List(Of String)
+            For Each sessionName As String In RegistryProvider.GetSessionNames(raw)
+                registrySessionNames.Add(String.Format(RegistrySessionNameFormat, sessionName))
+            Next
+
+            sessionNames.AddRange(registrySessionNames)
+            sessionNames.Sort()
 
             Return sessionNames.ToArray()
         End Function
 
         Public Overrides Function GetSession(ByVal sessionName As String) As Connection.PuttySession.Info
+            Dim registrySessionName As String = GetRegistrySessionName(sessionName)
+            If Not String.IsNullOrEmpty(registrySessionName) Then
+                Return ModifyRegistrySessionInfo(RegistryProvider.GetSession(registrySessionName))
+            End If
+
             Dim sessionsFolderPath As String = GetSessionsFolderPath()
             If Not Directory.Exists(sessionsFolderPath) Then Return Nothing
 
@@ -99,6 +98,9 @@ Namespace Config.Putty
         End Function
 
         Public Overrides Sub StartWatcher()
+            RegistryProvider.StartWatcher()
+            AddHandler RegistryProvider.SessionChanged, AddressOf OnRegistrySessionChanged
+
             If _eventWatcher IsNot Nothing Then Return
 
             Try
@@ -115,16 +117,70 @@ Namespace Config.Putty
         End Sub
 
         Public Overrides Sub StopWatcher()
+            RegistryProvider.StopWatcher()
+            RemoveHandler RegistryProvider.SessionChanged, AddressOf OnRegistrySessionChanged
+
             If _eventWatcher Is Nothing Then Return
             _eventWatcher.EnableRaisingEvents = False
             _eventWatcher.Dispose()
             _eventWatcher = Nothing
         End Sub
+#End Region
+
+#Region "Private Fields"
+        Private Const RegistrySessionNameFormat As String = "{0} [registry]"
+        Private Const RegistrySessionNamePattern As String = "(.*)\ \[registry\]"
+
+        Private Shared ReadOnly RegistryProvider As New RegistryProvider
+        Private Shared _eventWatcher As FileSystemWatcher
+#End Region
+
+#Region "Private Methods"
+        Private Shared Function GetPuttyConfPath() As String
+            Dim puttyPath As String
+            If My.Settings.UseCustomPuttyPath Then
+                puttyPath = My.Settings.CustomPuttyPath
+            Else
+                puttyPath = Info.General.PuttyPath
+            End If
+            Return Path.Combine(Path.GetDirectoryName(puttyPath), "putty.conf")
+        End Function
+
+        Private Shared Function GetSessionsFolderPath() As String
+            Dim puttyConfPath As String = GetPuttyConfPath()
+            Dim sessionFileReader As New PuttyConfFileReader(puttyConfPath)
+            Dim basePath As String = Environment.ExpandEnvironmentVariables(sessionFileReader.GetValue("sshk&sess"))
+            Return Path.Combine(basePath, "sessions")
+        End Function
+
+        Private Shared Function GetRegistrySessionName(ByVal sessionName As String) As String
+            Dim regex As New Regex(RegistrySessionNamePattern)
+
+            Dim matches As MatchCollection = regex.Matches(sessionName)
+            If matches.Count < 1 Then Return String.Empty
+
+            Dim groups As GroupCollection = matches(0).Groups
+            If groups.Count < 1 Then Return String.Empty ' This should always include at least one item, but check anyway
+
+            Return groups(1).Value
+        End Function
+
+        Private Shared Function ModifyRegistrySessionInfo(ByVal sessionInfo As Connection.PuttySession.Info) As Connection.PuttySession.Info
+            sessionInfo.Name = String.Format(RegistrySessionNameFormat, sessionInfo.Name)
+            sessionInfo.PuttySession = String.Format(RegistrySessionNameFormat, sessionInfo.PuttySession)
+            Return sessionInfo
+        End Function
 
         Private Sub OnFileSystemEventArrived(ByVal sender As Object, ByVal e As FileSystemEventArgs)
             OnSessionChanged(New SessionChangedEventArgs())
         End Sub
 
+        Private Sub OnRegistrySessionChanged(ByVal sender As Object, ByVal e As SessionChangedEventArgs)
+            OnSessionChanged(New SessionChangedEventArgs())
+        End Sub
+#End Region
+
+#Region "Private Classes"
         Private Class PuttyConfFileReader
             Public Sub New(ByVal puttyConfFile As String)
                 _puttyConfFile = puttyConfFile
@@ -198,5 +254,6 @@ Namespace Config.Putty
                 Return _sessionInfo(setting)
             End Function
         End Class
+#End Region
     End Class
 End Namespace
