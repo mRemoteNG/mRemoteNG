@@ -1927,13 +1927,23 @@ Public Class frmOptions
             My.Settings.AutomaticallyGetSessionInfo = Me.chkAutomaticallyGetSessionInfo.Checked
             My.Settings.ReconnectOnDisconnect = Me.chkAutomaticReconnect.Checked
             My.Settings.SingleInstance = Me.chkSingleInstance.Checked
-            My.Settings.UseCustomPuttyPath = Me.chkUseCustomPuttyPath.Checked
-            My.Settings.CustomPuttyPath = Me.txtCustomPuttyPath.Text
 
-            If Settings.UseCustomPuttyPath Then
-                Connection.Protocol.PuttyBase.PuttyPath = Settings.CustomPuttyPath
-            Else
-                Connection.Protocol.PuttyBase.PuttyPath = App.Info.General.PuttyPath
+            Dim puttyPathChanged As Boolean = False
+            If Not Settings.CustomPuttyPath = txtCustomPuttyPath.Text Then
+                puttyPathChanged = True
+                Settings.CustomPuttyPath = txtCustomPuttyPath.Text
+            End If
+            If Not Settings.UseCustomPuttyPath = chkUseCustomPuttyPath.Checked Then
+                puttyPathChanged = True
+                Settings.UseCustomPuttyPath = chkUseCustomPuttyPath.Checked
+            End If
+            If puttyPathChanged Then
+                If Settings.UseCustomPuttyPath Then
+                    Connection.Protocol.PuttyBase.PuttyPath = Settings.CustomPuttyPath
+                Else
+                    Connection.Protocol.PuttyBase.PuttyPath = App.Info.General.PuttyPath
+                End If
+                Config.Putty.Sessions.AddSessionsToTree()
             End If
 
             My.Settings.MaxPuttyWaitTime = Me.numPuttyWaitTime.Value
@@ -1955,11 +1965,7 @@ Public Class frmOptions
             ThemeManager.SaveThemes(_themeList)
             Settings.ThemeName = ThemeManager.ActiveTheme.Name
 
-            If My.Settings.LoadConsFromCustomLocation = False Then
-                App.Runtime.SetMainFormText(App.Info.Connections.DefaultConnectionsPath & "\" & App.Info.Connections.DefaultConnectionsFile)
-            Else
-                App.Runtime.SetMainFormText(My.Settings.CustomConsPath)
-            End If
+            SetMainFormText(GetStartupConnectionFileName())
 
             App.Runtime.Startup.DestroySQLUpdateHandlerAndStopTimer()
 

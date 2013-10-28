@@ -2,23 +2,24 @@ Imports System.Windows.Forms
 Imports System.ComponentModel
 Imports mRemoteNG.Tools.LocalizedAttributes
 Imports mRemoteNG.App.Runtime
+Imports mRemoteNG.Config
 
 Namespace Connection
     <DefaultProperty("Name")> _
     Public Class Info
 #Region "Properties"
 #Region "1 Display"
-        Private _Name As String = My.Language.strNewConnection
+        Private _name As String = My.Language.strNewConnection
         <LocalizedCategory("strCategoryDisplay", 1), _
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameName"), _
             LocalizedDescription("strPropertyDescriptionName")> _
         Public Overridable Property Name() As String
             Get
-                Return Me._Name
+                Return _name
             End Get
             Set(ByVal value As String)
-                Me._Name = value
+                _name = value
             End Set
         End Property
 
@@ -282,7 +283,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNamePuttySession"), _
             LocalizedDescription("strPropertyDescriptionPuttySession"), _
-            TypeConverter(GetType(Config.PuttySessions.SessionList))> _
+            TypeConverter(GetType(Putty.Sessions.SessionList))> _
         Public Overridable Property PuttySession() As String
             Get
                 If Me._Inherit.PuttySession And Me._Parent IsNot Nothing Then
@@ -1531,9 +1532,10 @@ Namespace Connection
 #End Region
 
 #Region "Methods"
-        Public Function Copy() As Connection.Info
-            Dim newConnectionInfo As Connection.Info = MemberwiseClone()
-            newConnectionInfo._OpenConnections = New Connection.Protocol.List
+        Public Function Copy() As Info
+            Dim newConnectionInfo As Info = MemberwiseClone()
+            newConnectionInfo.ConstantID = Tools.Misc.CreateConstantID()
+            newConnectionInfo._OpenConnections = New Protocol.List
             Return newConnectionInfo
         End Function
 
@@ -1605,8 +1607,8 @@ Namespace Connection
                 End If
             End Sub
 
-            Public Function Copy() As Connection.Info.Inheritance
-                Return Me.MemberwiseClone
+            Public Function Copy() As Inheritance
+                Return MemberwiseClone()
             End Function
 
             Public Sub TurnOnInheritanceCompletely()

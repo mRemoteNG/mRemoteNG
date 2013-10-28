@@ -163,7 +163,7 @@
     <value>Einstellungen jetzt anpassen</value>
   </data>
   <data name="strAskUpdatesCommandRecommended" xml:space="preserve">
-    <value>Verwende die empflohlenen Einstellungen</value>
+    <value>Verwende die empfohlenen Einstellungen</value>
   </data>
   <data name="strAskUpdatesContent" xml:space="preserve">
     <value>{0} kann automatisch nach Updates suchen die neue Funktionen und Bug Fixes enthalten können. Es wird empfohlen, dass Sie {0} erlauben wöchentlich nach Updates zu suchen.</value>

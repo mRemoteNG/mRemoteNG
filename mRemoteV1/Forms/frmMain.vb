@@ -71,6 +71,12 @@ Public Class frmMain
 
         Tree.Node.TreeView = Windows.treeForm.tvConnections
 
+        If My.Settings.FirstStart And _
+                Not My.Settings.LoadConsFromCustomLocation And _
+                Not IO.File.Exists(GetStartupConnectionFileName()) Then
+            NewConnections(GetStartupConnectionFileName())
+        End If
+
         'LoadCredentials()
         LoadConnections()
         If Not IsConnectionsFileLoaded Then
@@ -78,7 +84,7 @@ Public Class frmMain
             Return
         End If
 
-        PuttySessions.StartWatcher()
+        Putty.Sessions.StartWatcher()
 
         If My.Settings.StartupComponentsCheck Then
             Windows.Show(UI.Window.Type.ComponentsCheck)
@@ -211,7 +217,9 @@ Public Class frmMain
     End Sub
 
     Private Sub frmMain_Shown(sender As Object, e As EventArgs) Handles Me.Shown
-#If Not PORTABLE Then
+#If PORTABLE Then
+        Return
+#End If
         If Not My.Settings.CheckForUpdatesAsked Then
             Dim commandButtons() As String = {My.Language.strAskUpdatesCommandRecommended, My.Language.strAskUpdatesCommandCustom, My.Language.strAskUpdatesCommandAskLater}
             cTaskDialog.ShowTaskDialogBox(Me, My.Application.Info.ProductName, My.Language.strAskUpdatesMainInstruction, String.Format(My.Language.strAskUpdatesContent, My.Application.Info.ProductName), "", "", "", "", String.Join("|", commandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question)
@@ -221,7 +229,10 @@ Public Class frmMain
             If cTaskDialog.CommandButtonResult = 1 Then
                 Windows.ShowUpdatesTab()
             End If
+            Return
         End If
+
+        If Not My.Settings.CheckForUpdatesOnStartup Then Return
 
         Dim nextUpdateCheck As Date = My.Settings.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(My.Settings.CheckForUpdatesFrequencyDays))
         If My.Settings.UpdatePending Or Date.UtcNow > nextUpdateCheck Then
@@ -229,7 +240,6 @@ Public Class frmMain
             Startup.CheckForUpdate()
             Startup.CheckForAnnouncement()
         End If
-#End If
     End Sub
 
     Private Sub frmMain_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing

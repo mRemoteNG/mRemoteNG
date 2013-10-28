@@ -186,7 +186,10 @@
     <Compile Include="Config\Config.Settings.Providers.vb" />
     <Compile Include="Config\Config.Settings.Save.vb" />
     <Compile Include="Config\ConfirmClose.vb" />
-    <Compile Include="Config\PuttySessions.vb" />
+    <Compile Include="Config\Putty\RegistryProvider.vb" />
+    <Compile Include="Config\Putty\XmingProvider.vb" />
+    <Compile Include="Config\Putty\Sessions.vb" />
+    <Compile Include="Config\Putty\Provider.vb" />
     <Compile Include="Controls\QuickConnectComboBox.vb">
       <SubType>Component</SubType>
     </Compile>
@@ -280,6 +283,7 @@
     <Compile Include="Security\Security.Save.vb" />
     <Compile Include="Tools\IeBrowserEmulation.vb" />
     <Compile Include="Tools\ProcessController.vb" />
+    <Compile Include="Tools\PuttyTypeDetector.vb" />
     <Compile Include="Tools\PuttyProcessController.vb" />
     <Compile Include="Tools\ReconnectGroup.Designer.vb">
       <DependentUpon>ReconnectGroup.vb</DependentUpon>
