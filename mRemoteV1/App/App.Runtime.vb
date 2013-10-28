@@ -1,4 +1,5 @@
 ﻿Imports System.ComponentModel
+Imports mRemoteNG.Forms
 Imports mRemoteNG.Config
 Imports log4net
 Imports mRemoteNG.Messages
