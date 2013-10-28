@@ -472,6 +472,7 @@ Namespace Forms
             If lvPages.SelectedIndices.Count = 0 Then
                 lvPages.Items(tcTabControl.SelectedIndex).Selected = True
             End If
+            SelectNextControl(tcTabControl.SelectedTab, True, True, True, True)
         End Sub
 
         Private Sub tcTabControl_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles tcTabControl.SelectedIndexChanged
