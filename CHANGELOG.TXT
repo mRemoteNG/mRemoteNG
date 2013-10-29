@@ -1,4 +1,4 @@
-1.71 (XXXX-XX-XX):
+1.71 (2013-10-29):
   Fixed issue MR-574 - Crash when retrieving RDP session list if eolwtscom.dll is not registered
   Fixed issue MR-578 - Connections file is reset
   Fixed log file not showing operating system version on Windows XP and Windows Server 2003.
