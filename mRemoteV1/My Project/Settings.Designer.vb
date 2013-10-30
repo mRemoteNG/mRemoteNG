@@ -2486,6 +2486,34 @@ Namespace My
                 Me("QuickConnectProtocol") = value
             End Set
         End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("9/9, 33/8"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property KeysPreviousTab() As String
+            Get
+                Return CType(Me("KeysPreviousTab"),String)
+            End Get
+            Set
+                Me("KeysPreviousTab") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Configuration.SettingsProviderAttribute(GetType(mRemoteNG.Config.Settings.Providers.ChooseProvider)),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("9/8, 34/8"),  _
+         Global.System.Configuration.SettingsManageabilityAttribute(Global.System.Configuration.SettingsManageability.Roaming)>  _
+        Public Property KeysNextTab() As String
+            Get
+                Return CType(Me("KeysNextTab"),String)
+            End Get
+            Set
+                Me("KeysNextTab") = value
+            End Set
+        End Property
     End Class
 End Namespace
 

@@ -31,8 +31,6 @@ Public Class frmMain
     End Property
 #End Region
 
-    Private _keyboardHook As New KeyboardHook
-
 #Region "Startup & Shutdown"
     Private Sub frmMain_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
         MainForm = Me
@@ -103,7 +101,7 @@ Public Class frmMain
 
         Me.Opacity = 1
 
-        RequestKeyNotifications()
+        KeyboardShortcuts.RequestKeyNotifications(Handle)
     End Sub
 
     Private Sub ApplyLanguage()
@@ -209,11 +207,6 @@ Public Class frmMain
                 End If
             Next
         End With
-    End Sub
-
-    Private Sub RequestKeyNotifications()
-        KeyboardHook.RequestKeyNotification(Handle, Win32.VK_PRIOR, KeyboardHook.ModifierKeys.Control, False)
-        KeyboardHook.RequestKeyNotification(Handle, Win32.VK_NEXT, KeyboardHook.ModifierKeys.Control, False)
     End Sub
 
     Private Sub frmMain_Shown(sender As Object, e As EventArgs) Handles Me.Shown
@@ -856,14 +849,14 @@ Public Class frmMain
                     SendMessage(fpChainedWindowHandle, m.Msg, m.LParam, m.WParam)
                     fpChainedWindowHandle = m.LParam
                 Case KeyboardHook.HookKeyMsg
-                    Dim msgData As KeyboardHook.HookKeyMsgData = Marshal.PtrToStructure(m.LParam, GetType(KeyboardHook.HookKeyMsgData))
-                    If m.WParam.ToInt32() = Win32.WM_KEYDOWN And (msgData.KeyCode = Win32.VK_PRIOR Or msgData.KeyCode = Win32.VK_NEXT) And (msgData.ModifierKeys And KeyboardHook.ModifierKeys.Control) Then
-                        If msgData.KeyCode = Win32.VK_PRIOR Then
+                    If Not m.WParam.ToInt32() = Win32.WM_KEYDOWN Then Exit Select
+
+                    Select Case KeyboardShortcuts.CommandFromHookKeyMessage(m)
+                        Case KeyboardShortcuts.Command.PreviousTab
                             SelectTabRelative(-1)
-                        Else
+                        Case KeyboardShortcuts.Command.NextTab
                             SelectTabRelative(1)
-                        End If
-                    End If
+                    End Select
             End Select
         Catch ex As Exception
         End Try

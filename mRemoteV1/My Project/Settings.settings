@@ -566,5 +566,11 @@
     <Setting Name="QuickConnectProtocol" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.String" Scope="User">
       <Value Profile="(Default)">RDP</Value>
     </Setting>
+    <Setting Name="KeysPreviousTab" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">9/9, 33/8</Value>
+    </Setting>
+    <Setting Name="KeysNextTab" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">9/8, 34/8</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
