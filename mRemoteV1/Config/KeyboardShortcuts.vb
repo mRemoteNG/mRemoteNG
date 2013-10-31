@@ -20,6 +20,59 @@ Namespace Config
             My.Settings.KeysPreviousTab = GetShortcutKeysString(Command.PreviousTab)
             My.Settings.KeysNextTab = GetShortcutKeysString(Command.NextTab)
         End Sub
+
+        Public Shared Function GetShortcutKeys(ByVal command As Command) As ShortcutKey()
+            Dim shortcutKeys As New List(Of ShortcutKey)
+            For Each keyValuePair As KeyValuePair(Of ShortcutKey, Command) In Mappings
+                If keyValuePair.Value = command Then shortcutKeys.Add(keyValuePair.Key)
+            Next
+            Return shortcutKeys.ToArray()
+        End Function
+#End Region
+
+#Region "Public Classes"
+        Public Class ShortcutKey
+            Public Property KeyCode As Int32
+            Public Property ModifierKeys As KeyboardHook.ModifierKeys
+
+            Public Sub New(ByVal keyCode As Int32, ByVal modifierKeys As KeyboardHook.ModifierKeys)
+                Me.KeyCode = keyCode
+                Me.ModifierKeys = modifierKeys
+            End Sub
+
+            Public Sub New(ByVal keysValue As Keys)
+                KeyCode = keysValue And Keys.KeyCode
+                If Not (keysValue And Keys.Shift) = 0 Then ModifierKeys = ModifierKeys Or KeyboardHook.ModifierKeys.Shift
+                If Not (keysValue And Keys.Control) = 0 Then ModifierKeys = ModifierKeys Or KeyboardHook.ModifierKeys.Control
+                If Not (keysValue And Keys.Alt) = 0 Then ModifierKeys = ModifierKeys Or KeyboardHook.ModifierKeys.Alt
+            End Sub
+
+            Public Function ToKeys() As Keys
+                Dim keysValue As Keys = KeyCode And Keys.KeyCode
+                If Not (ModifierKeys And KeyboardHook.ModifierKeys.Shift) = 0 Then keysValue = keysValue Or Keys.Shift
+                If Not (ModifierKeys And KeyboardHook.ModifierKeys.Control) = 0 Then keysValue = keysValue Or Keys.Control
+                If Not (ModifierKeys And KeyboardHook.ModifierKeys.Alt) = 0 Then keysValue = keysValue Or Keys.Alt
+                Return keysValue
+            End Function
+
+            Public Shared Function FromKeys(ByVal keysValue As Keys) As ShortcutKey
+                Return New ShortcutKey(keysValue)
+            End Function
+
+            Public Function ToConfigString() As String
+                Return String.Join("/", New String() {KeyCode, Convert.ToInt32(ModifierKeys)})
+            End Function
+
+            Public Shared Function FromConfigString(ByVal shortcutKeyString As String) As ShortcutKey
+                Dim parts As String() = shortcutKeyString.Split(New Char() {"/"}, 2)
+                If Not parts.Length = 2 Then Throw New ArgumentException(String.Format("ShortcutKey.FromString({0}) failed. parts.Length != 2", shortcutKeyString), shortcutKeyString)
+                Return New ShortcutKey(Convert.ToInt32(parts(0)), Convert.ToInt32(parts(1)))
+            End Function
+
+            Public Overrides Function ToString() As String
+                Return HotkeyControl.KeysToString(ToKeys())
+            End Function
+        End Class
 #End Region
 
 #Region "Public Enumerations"
@@ -68,7 +121,7 @@ Namespace Config
             Dim shortcutKeys As New List(Of ShortcutKey)
             For Each shortcutKeyString As String In shortcutKeysString.Split(New Char() {","}, StringSplitOptions.RemoveEmptyEntries)
                 Try
-                    shortcutKeys.Add(ShortcutKey.FromString(shortcutKeyString.Trim))
+                    shortcutKeys.Add(ShortcutKey.FromConfigString(shortcutKeyString.Trim))
                 Catch ex As Exception
                     MessageCollector.AddExceptionMessage(String.Format("KeyboardShortcuts.ParseString({0}) failed.", shortcutKeysString), ex, , True)
                     Continue For
@@ -96,40 +149,10 @@ Namespace Config
         Private Shared Function GetShortcutKeysString(ByVal command As Command) As String
             Dim parts As New List(Of String)
             For Each shortcutKey As ShortcutKey In GetShortcutKeys(command)
-                parts.Add(shortcutKey.ToString())
+                parts.Add(shortcutKey.ToConfigString())
             Next
             Return String.Join(", ", parts.ToArray())
         End Function
-
-        Private Shared Function GetShortcutKeys(ByVal command As Command) As ShortcutKey()
-            Dim shortcutKeys As New List(Of ShortcutKey)
-            For Each keyValuePair As KeyValuePair(Of ShortcutKey, Command) In Mappings
-                If keyValuePair.Value = command Then shortcutKeys.Add(keyValuePair.Key)
-            Next
-            Return shortcutKeys.ToArray()
-        End Function
-#End Region
-
-#Region "Private Classes"
-        Private Class ShortcutKey
-            Public Property KeyCode As Int32
-            Public Property ModifierKeys As KeyboardHook.ModifierKeys
-
-            Public Sub New(ByVal keyCode As Int32, ByVal modifierKeys As KeyboardHook.ModifierKeys)
-                Me.KeyCode = keyCode
-                Me.ModifierKeys = modifierKeys
-            End Sub
-
-            Public Overrides Function ToString() As String
-                Return String.Join("/", New String() {KeyCode, Convert.ToInt32(ModifierKeys)})
-            End Function
-
-            Public Shared Function FromString(ByVal shortcutKeyString As String) As ShortcutKey
-                Dim parts As String() = shortcutKeyString.Split(New Char() {"/"}, 2)
-                If Not parts.Length = 2 Then Throw New ArgumentException(String.Format("ShortcutKey.FromString({0}) failed. parts.Length != 2", shortcutKeyString), shortcutKeyString)
-                Return New ShortcutKey(Convert.ToInt32(parts(0)), Convert.ToInt32(parts(1)))
-            End Function
-        End Class
 #End Region
     End Class
 End Namespace

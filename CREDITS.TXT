@@ -35,6 +35,10 @@ Copyright © 2010 David Grinberg
 Copyright © 2010-2011 Brandon Hansen
 http://nsis.sourceforge.net/DotNetVer
 
+Hotkey Selection Control for .NET
+Copyright © 2006 Thomas Backman
+http://www.codeproject.com/Articles/15085/A-simple-hotkey-selection-control-for-NET
+
 
 Included Components
 ===================

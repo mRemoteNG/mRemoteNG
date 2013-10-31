@@ -1557,8 +1557,8 @@ Namespace Forms
             '
             'hotModifyKeyboardShortcut
             '
-            Me.hotModifyKeyboardShortcut.Hotkey = System.Windows.Forms.Keys.None
             Me.hotModifyKeyboardShortcut.HotkeyModifiers = System.Windows.Forms.Keys.None
+            Me.hotModifyKeyboardShortcut.KeyCode = System.Windows.Forms.Keys.None
             Me.hotModifyKeyboardShortcut.Location = New System.Drawing.Point(26, 41)
             Me.hotModifyKeyboardShortcut.Name = "hotModifyKeyboardShortcut"
             Me.hotModifyKeyboardShortcut.Size = New System.Drawing.Size(329, 20)

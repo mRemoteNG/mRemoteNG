@@ -439,6 +439,7 @@ Namespace Forms
             lvKeyboardCommands.Groups.Add(_tabsListViewGroup)
             lvKeyboardCommands.Items.Add(_previousTabListViewItem)
             lvKeyboardCommands.Items.Add(_nextTabListViewItem)
+            _previousTabListViewItem.Selected = True
 
             EnableKeyboardShortcutControls(False)
         End Sub
@@ -707,13 +708,23 @@ Namespace Forms
 #End Region
 
         Private Sub lvKeyboardCommands_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles lvKeyboardCommands.SelectedIndexChanged
-            Dim itemSelected As Boolean = (lvKeyboardCommands.SelectedItems.Count = 1)
-            EnableKeyboardShortcutControls(itemSelected)
-            If Not itemSelected Then Return
+            Dim isItemSelected As Boolean = (lvKeyboardCommands.SelectedItems.Count = 1)
+            EnableKeyboardShortcutControls(isItemSelected)
+
+            If Not isItemSelected Then Return
 
             Dim selectedItem As ListViewItem = lvKeyboardCommands.SelectedItems(0)
 
             lblKeyboardCommand.Text = selectedItem.Text
+            lstKeyboardShortcuts.Items.Clear()
+
+            If selectedItem Is _previousTabListViewItem Then
+                lstKeyboardShortcuts.Items.AddRange(KeyboardShortcuts.GetShortcutKeys(KeyboardShortcuts.Command.PreviousTab))
+            ElseIf selectedItem Is _nextTabListViewItem Then
+                lstKeyboardShortcuts.Items.AddRange(KeyboardShortcuts.GetShortcutKeys(KeyboardShortcuts.Command.NextTab))
+            End If
+
+            If lstKeyboardShortcuts.Items.Count > 0 Then lstKeyboardShortcuts.SelectedIndex = 0
         End Sub
 
         Private Sub EnableKeyboardShortcutControls(Optional ByVal enable As Boolean = True)
@@ -727,32 +738,77 @@ Namespace Forms
                 btnDeleteKeyboardShortcut.Enabled = False
                 grpModifyKeyboardShortcut.Enabled = False
                 hotModifyKeyboardShortcut.Enabled = False
+
+                lstKeyboardShortcuts.Items.Clear()
+                hotModifyKeyboardShortcut.Text = String.Empty
             End If
         End Sub
 
         Private Sub lstKeyboardShortcuts_SelectedIndexChanged(sender As System.Object, e As EventArgs) Handles lstKeyboardShortcuts.SelectedIndexChanged
-            Dim itemSelected As Boolean = (lstKeyboardShortcuts.SelectedItems.Count = 1)
-            btnDeleteKeyboardShortcut.Enabled = itemSelected
-            grpModifyKeyboardShortcut.Enabled = itemSelected
-            hotModifyKeyboardShortcut.Enabled = itemSelected
+            Dim isItemSelected As Boolean = (lstKeyboardShortcuts.SelectedItems.Count = 1)
+
+            btnDeleteKeyboardShortcut.Enabled = isItemSelected
+            grpModifyKeyboardShortcut.Enabled = isItemSelected
+            hotModifyKeyboardShortcut.Enabled = isItemSelected
+
+            If Not isItemSelected Then
+                hotModifyKeyboardShortcut.Text = String.Empty
+                Return
+            End If
+
+            Dim selectedItem As Object = lstKeyboardShortcuts.SelectedItems(0)
+            Dim shortcutKey As KeyboardShortcuts.ShortcutKey = TryCast(selectedItem, KeyboardShortcuts.ShortcutKey)
+            If shortcutKey Is Nothing Then Return
+
+            Dim keysValue As Keys = shortcutKey.ToKeys()
+            Dim keyCode As Keys = keysValue And Keys.KeyCode
+            Dim modifiers As Keys = keysValue And Keys.Modifiers
+
+            _ignoreKeyboardShortcutTextChanged = True
+            hotModifyKeyboardShortcut.KeyCode = keyCode
+            hotModifyKeyboardShortcut.HotkeyModifiers = modifiers
+            _ignoreKeyboardShortcutTextChanged = False
         End Sub
 
         Private Sub btnNewKeyboardShortcut_Click(sender As System.Object, e As EventArgs) Handles btnNewKeyboardShortcut.Click
-            If lstKeyboardShortcuts.Items.Contains("None") Then Return
-            Dim itemIndex As Integer = lstKeyboardShortcuts.Items.Add("None")
-            lstKeyboardShortcuts.SelectedIndex = itemIndex
+            For Each item As Object In lstKeyboardShortcuts.Items
+                Dim shortcutKey As KeyboardShortcuts.ShortcutKey = TryCast(item, KeyboardShortcuts.ShortcutKey)
+                If shortcutKey Is Nothing Then Continue For
+                If shortcutKey.ToKeys() = 0 Then
+                    lstKeyboardShortcuts.SelectedItem = item
+                    Return
+                End If
+            Next
+
+            lstKeyboardShortcuts.SelectedIndex = lstKeyboardShortcuts.Items.Add(New KeyboardShortcuts.ShortcutKey(Keys.None))
         End Sub
 
         Private Sub btnDeleteKeyboardShortcut_Click(sender As System.Object, e As EventArgs) Handles btnDeleteKeyboardShortcut.Click
+            Dim selectedIndex As Integer = lstKeyboardShortcuts.SelectedIndex
             lstKeyboardShortcuts.Items.Remove(lstKeyboardShortcuts.SelectedItem)
+            If selectedIndex >= lstKeyboardShortcuts.Items.Count Then selectedIndex = lstKeyboardShortcuts.Items.Count - 1
+            lstKeyboardShortcuts.SelectedIndex = selectedIndex
         End Sub
 
         Private Sub btnResetKeyboardShortcuts_Click(sender As System.Object, e As EventArgs) Handles btnResetKeyboardShortcuts.Click
             lstKeyboardShortcuts.Items.Clear()
         End Sub
 
+        Private _ignoreKeyboardShortcutTextChanged As Boolean = False
         Private Sub hotModifyKeyboardShortcut_TextChanged(sender As System.Object, e As EventArgs) Handles hotModifyKeyboardShortcut.TextChanged
-            lstKeyboardShortcuts.Items(lstKeyboardShortcuts.SelectedIndex) = hotModifyKeyboardShortcut.Text
+            If _ignoreKeyboardShortcutTextChanged Or _
+                lstKeyboardShortcuts.SelectedIndex < 0 Or _
+                lstKeyboardShortcuts.SelectedIndex >= lstKeyboardShortcuts.Items.Count Then Return
+
+            Dim keysValue As Keys = (hotModifyKeyboardShortcut.KeyCode And Keys.KeyCode) Or _
+                                    (hotModifyKeyboardShortcut.HotkeyModifiers And Keys.Modifiers)
+
+            Dim hadFocus As Boolean = hotModifyKeyboardShortcut.ContainsFocus
+            lstKeyboardShortcuts.Items(lstKeyboardShortcuts.SelectedIndex) = New KeyboardShortcuts.ShortcutKey(keysValue)
+            If hadFocus Then
+                hotModifyKeyboardShortcut.Focus()
+                hotModifyKeyboardShortcut.Select(hotModifyKeyboardShortcut.TextLength, 0)
+            End If
         End Sub
     End Class
 End Namespace
