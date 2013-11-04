@@ -852,9 +852,9 @@ Public Class frmMain
                     If Not m.WParam.ToInt32() = Win32.WM_KEYDOWN Then Exit Select
 
                     Select Case KeyboardShortcuts.CommandFromHookKeyMessage(m)
-                        Case KeyboardShortcuts.Command.PreviousTab
+                        Case ShortcutCommand.PreviousTab
                             SelectTabRelative(-1)
-                        Case KeyboardShortcuts.Command.NextTab
+                        Case ShortcutCommand.NextTab
                             SelectTabRelative(1)
                     End Select
             End Select

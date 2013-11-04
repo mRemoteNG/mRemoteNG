@@ -285,6 +285,8 @@ Namespace Forms
                 ThemeManager.SaveThemes(_themeList)
                 MySettingsProperty.Settings.ThemeName = ThemeManager.ActiveTheme.Name
 
+                KeyboardShortcuts.Map = _keyboardShortcutMap
+
                 Runtime.SetMainFormText(Runtime.GetStartupConnectionFileName())
 
                 Runtime.Startup.DestroySQLUpdateHandlerAndStopTimer()
@@ -304,9 +306,11 @@ Namespace Forms
         Private _appUpdate As App.Update
         Private _themeList As BindingList(Of ThemeInfo)
         Private _originalTheme As ThemeInfo
+        Private _keyboardShortcutMap As KeyboardShortcutMap
         Private _tabsListViewGroup As ListViewGroup
         Private _previousTabListViewItem As ListViewItem
         Private _nextTabListViewItem As ListViewItem
+        Private _ignoreKeyboardShortcutTextChanged As Boolean = False
 #End Region
 
 #Region "Public Methods"
@@ -349,7 +353,7 @@ Namespace Forms
             lvPages.Items(6).Text = Language.strTabAdvanced
             lvPages.Items(7).Text = Language.strOptionsTabTheme
 #If Not PORTABLE Then
-            lblUpdatesExplanation.Text = My.Language.strUpdateCheck
+            lblUpdatesExplanation.Text = Language.strUpdateCheck
 #Else
             lblUpdatesExplanation.Text = Language.strUpdateCheckPortableEdition
 #End If
@@ -428,13 +432,21 @@ Namespace Forms
             btnThemeDelete.Text = Language.strOptionsThemeButtonDelete
             btnThemeNew.Text = Language.strOptionsThemeButtonNew
 
+            ' Keyboard Page
+            lvPages.Items(8).Text = Language.strOptionsTabKeyboard
+            lblKeyboardShortcuts.Text = Language.strOptionsKeyboardLabelKeyboardShortcuts
+            btnNewKeyboardShortcut.Text = Language.strOptionsKeyboardButtonNew
+            btnDeleteKeyboardShortcut.Text = Language.strOptionsKeyboardButtonDelete
+            btnResetKeyboardShortcuts.Text = Language.strOptionsKeyboardButtonReset
+            grpModifyKeyboardShortcut.Text = Language.strOptionsKeyboardGroupModifyShortcut
+            btnResetAllKeyboardShortcuts.Text = Language.strOptionsKeyboardButtonResetAll
+            _tabsListViewGroup = New ListViewGroup(Language.strOptionsKeyboardCommandsGroupTabs)
+            _previousTabListViewItem = New ListViewItem(Language.strOptionsKeyboardCommandsPreviousTab, _tabsListViewGroup)
+            _nextTabListViewItem = New ListViewItem(Language.strOptionsKeyboardCommandsNextTab, _tabsListViewGroup)
         End Sub
 
         Private Sub InitializeKeyboardPage()
-            ' TODO: Localize
-            _tabsListViewGroup = New ListViewGroup("Tabs")
-            _previousTabListViewItem = New ListViewItem("Previous Tab", _tabsListViewGroup)
-            _nextTabListViewItem = New ListViewItem("Next Tab", _tabsListViewGroup)
+            _keyboardShortcutMap = KeyboardShortcuts.Map.Clone()
 
             lvKeyboardCommands.Groups.Add(_tabsListViewGroup)
             lvKeyboardCommands.Items.Add(_previousTabListViewItem)
@@ -718,14 +730,21 @@ Namespace Forms
             lblKeyboardCommand.Text = selectedItem.Text
             lstKeyboardShortcuts.Items.Clear()
 
-            If selectedItem Is _previousTabListViewItem Then
-                lstKeyboardShortcuts.Items.AddRange(KeyboardShortcuts.GetShortcutKeys(KeyboardShortcuts.Command.PreviousTab))
-            ElseIf selectedItem Is _nextTabListViewItem Then
-                lstKeyboardShortcuts.Items.AddRange(KeyboardShortcuts.GetShortcutKeys(KeyboardShortcuts.Command.NextTab))
-            End If
+            lstKeyboardShortcuts.Items.AddRange(_keyboardShortcutMap.GetShortcutKeys(GetSelectedShortcutCommand()))
 
             If lstKeyboardShortcuts.Items.Count > 0 Then lstKeyboardShortcuts.SelectedIndex = 0
         End Sub
+
+        Private Function GetSelectedShortcutCommand() As ShortcutCommand
+            If Not (lvKeyboardCommands.SelectedItems.Count = 1) Then Return ShortcutCommand.None
+
+            Dim selectedItem As ListViewItem = lvKeyboardCommands.SelectedItems(0)
+            If selectedItem Is _previousTabListViewItem Then
+                Return ShortcutCommand.PreviousTab
+            ElseIf selectedItem Is _nextTabListViewItem Then
+                Return ShortcutCommand.NextTab
+            End If
+        End Function
 
         Private Sub EnableKeyboardShortcutControls(Optional ByVal enable As Boolean = True)
             lblKeyboardCommand.Visible = enable
@@ -757,10 +776,10 @@ Namespace Forms
             End If
 
             Dim selectedItem As Object = lstKeyboardShortcuts.SelectedItems(0)
-            Dim shortcutKey As KeyboardShortcuts.ShortcutKey = TryCast(selectedItem, KeyboardShortcuts.ShortcutKey)
+            Dim shortcutKey As ShortcutKey = TryCast(selectedItem, ShortcutKey)
             If shortcutKey Is Nothing Then Return
 
-            Dim keysValue As Keys = shortcutKey.ToKeys()
+            Dim keysValue As Keys = shortcutKey
             Dim keyCode As Keys = keysValue And Keys.KeyCode
             Dim modifiers As Keys = keysValue And Keys.Modifiers
 
@@ -772,29 +791,45 @@ Namespace Forms
 
         Private Sub btnNewKeyboardShortcut_Click(sender As System.Object, e As EventArgs) Handles btnNewKeyboardShortcut.Click
             For Each item As Object In lstKeyboardShortcuts.Items
-                Dim shortcutKey As KeyboardShortcuts.ShortcutKey = TryCast(item, KeyboardShortcuts.ShortcutKey)
+                Dim shortcutKey As ShortcutKey = TryCast(item, ShortcutKey)
                 If shortcutKey Is Nothing Then Continue For
-                If shortcutKey.ToKeys() = 0 Then
+                If shortcutKey = 0 Then
                     lstKeyboardShortcuts.SelectedItem = item
                     Return
                 End If
             Next
 
-            lstKeyboardShortcuts.SelectedIndex = lstKeyboardShortcuts.Items.Add(New KeyboardShortcuts.ShortcutKey(Keys.None))
+            lstKeyboardShortcuts.SelectedIndex = lstKeyboardShortcuts.Items.Add(New ShortcutKey(Keys.None))
+            hotModifyKeyboardShortcut.Focus()
         End Sub
 
         Private Sub btnDeleteKeyboardShortcut_Click(sender As System.Object, e As EventArgs) Handles btnDeleteKeyboardShortcut.Click
             Dim selectedIndex As Integer = lstKeyboardShortcuts.SelectedIndex
+
+            Dim command As ShortcutCommand = GetSelectedShortcutCommand()
+            Dim key As ShortcutKey = TryCast(lstKeyboardShortcuts.SelectedItem, ShortcutKey)
+            If Not command = ShortcutCommand.None And key IsNot Nothing Then
+                _keyboardShortcutMap.Remove(GetSelectedShortcutCommand(), key)
+            End If
+
             lstKeyboardShortcuts.Items.Remove(lstKeyboardShortcuts.SelectedItem)
+
             If selectedIndex >= lstKeyboardShortcuts.Items.Count Then selectedIndex = lstKeyboardShortcuts.Items.Count - 1
             lstKeyboardShortcuts.SelectedIndex = selectedIndex
         End Sub
 
-        Private Sub btnResetKeyboardShortcuts_Click(sender As System.Object, e As EventArgs) Handles btnResetKeyboardShortcuts.Click
-            lstKeyboardShortcuts.Items.Clear()
+        Private Sub btnResetAllKeyboardShortcuts_Click(sender As System.Object, e As System.EventArgs) Handles btnResetAllKeyboardShortcuts.Click
+            _keyboardShortcutMap = KeyboardShortcuts.DefaultMap.Clone()
+            lvKeyboardCommands_SelectedIndexChanged(Me, New EventArgs())
         End Sub
 
-        Private _ignoreKeyboardShortcutTextChanged As Boolean = False
+        Private Sub btnResetKeyboardShortcuts_Click(sender As System.Object, e As EventArgs) Handles btnResetKeyboardShortcuts.Click
+            Dim command As ShortcutCommand = GetSelectedShortcutCommand()
+            If command = ShortcutCommand.None Then Return
+            _keyboardShortcutMap.SetShortcutKeys(command, KeyboardShortcuts.DefaultMap.GetShortcutKeys(command))
+            lvKeyboardCommands_SelectedIndexChanged(Me, New EventArgs())
+        End Sub
+
         Private Sub hotModifyKeyboardShortcut_TextChanged(sender As System.Object, e As EventArgs) Handles hotModifyKeyboardShortcut.TextChanged
             If _ignoreKeyboardShortcutTextChanged Or _
                 lstKeyboardShortcuts.SelectedIndex < 0 Or _
@@ -804,7 +839,20 @@ Namespace Forms
                                     (hotModifyKeyboardShortcut.HotkeyModifiers And Keys.Modifiers)
 
             Dim hadFocus As Boolean = hotModifyKeyboardShortcut.ContainsFocus
-            lstKeyboardShortcuts.Items(lstKeyboardShortcuts.SelectedIndex) = New KeyboardShortcuts.ShortcutKey(keysValue)
+
+            Dim command As ShortcutCommand = GetSelectedShortcutCommand()
+            Dim newShortcutKey As New ShortcutKey(keysValue)
+
+            If Not command = ShortcutCommand.None Then
+                Dim oldShortcutKey As ShortcutKey = TryCast(lstKeyboardShortcuts.SelectedItem, ShortcutKey)
+                If oldShortcutKey IsNot Nothing Then
+                    _keyboardShortcutMap.Remove(command, oldShortcutKey)
+                End If
+                _keyboardShortcutMap.Add(command, newShortcutKey)
+            End If
+
+            lstKeyboardShortcuts.Items(lstKeyboardShortcuts.SelectedIndex) = newShortcutKey
+
             If hadFocus Then
                 hotModifyKeyboardShortcut.Focus()
                 hotModifyKeyboardShortcut.Select(hotModifyKeyboardShortcut.TextLength, 0)

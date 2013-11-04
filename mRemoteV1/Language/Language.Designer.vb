@@ -3329,11 +3329,101 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to &amp;Delete.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsKeyboardButtonDelete() As String
+            Get
+                Return ResourceManager.GetString("strOptionsKeyboardButtonDelete", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;New.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsKeyboardButtonNew() As String
+            Get
+                Return ResourceManager.GetString("strOptionsKeyboardButtonNew", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to &amp;Reset to Default.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsKeyboardButtonReset() As String
+            Get
+                Return ResourceManager.GetString("strOptionsKeyboardButtonReset", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Reset &amp;All to Default.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsKeyboardButtonResetAll() As String
+            Get
+                Return ResourceManager.GetString("strOptionsKeyboardButtonResetAll", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Tabs.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsKeyboardCommandsGroupTabs() As String
+            Get
+                Return ResourceManager.GetString("strOptionsKeyboardCommandsGroupTabs", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Next Tab.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsKeyboardCommandsNextTab() As String
+            Get
+                Return ResourceManager.GetString("strOptionsKeyboardCommandsNextTab", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Previous Tab.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsKeyboardCommandsPreviousTab() As String
+            Get
+                Return ResourceManager.GetString("strOptionsKeyboardCommandsPreviousTab", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Modify Shortcut.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsKeyboardGroupModifyShortcut() As String
+            Get
+                Return ResourceManager.GetString("strOptionsKeyboardGroupModifyShortcut", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Keyboard Shortcuts.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsKeyboardLabelKeyboardShortcuts() As String
+            Get
+                Return ResourceManager.GetString("strOptionsKeyboardLabelKeyboardShortcuts", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Testing....
         '''</summary>
         Friend Shared ReadOnly Property strOptionsProxyTesting() As String
             Get
                 Return ResourceManager.GetString("strOptionsProxyTesting", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Keyboard.
+        '''</summary>
+        Friend Shared ReadOnly Property strOptionsTabKeyboard() As String
+            Get
+                Return ResourceManager.GetString("strOptionsTabKeyboard", resourceCulture)
             End Get
         End Property
         

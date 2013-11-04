@@ -129,17 +129,17 @@ Namespace Forms
             Me.components = New System.ComponentModel.Container()
             Dim linKeyboardCommand As Microsoft.VisualBasic.PowerPacks.LineShape
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmOptions))
-            Dim Alignment1 As mRemoteNG.Controls.Alignment = New mRemoteNG.Controls.Alignment()
-            Dim ListViewItem1 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", "StartupExit_Icon.ico")
-            Dim ListViewItem2 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", "Panels_Icon.ico")
-            Dim ListViewItem3 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", "Tab_Icon.ico")
-            Dim ListViewItem4 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", "Root_Icon.ico")
-            Dim ListViewItem5 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", "database.bmp")
-            Dim ListViewItem6 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", "Update_Icon.ico")
-            Dim ListViewItem7 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", "Config_Icon.ico")
-            Dim ListViewItem8 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Theme", "Appearance_Icon.ico")
-            Dim ListViewItem9 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Keyboard", "Keyboard.png")
-            Dim Alignment2 As mRemoteNG.Controls.Alignment = New mRemoteNG.Controls.Alignment()
+            Dim Alignment3 As mRemoteNG.Controls.Alignment = New mRemoteNG.Controls.Alignment()
+            Dim ListViewItem10 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Startup/Exit", "StartupExit_Icon.ico")
+            Dim ListViewItem11 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Appearance", "Panels_Icon.ico")
+            Dim ListViewItem12 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Tabs & Panels", "Tab_Icon.ico")
+            Dim ListViewItem13 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Connections", "Root_Icon.ico")
+            Dim ListViewItem14 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("SQL Server", "database.bmp")
+            Dim ListViewItem15 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Updates", "Update_Icon.ico")
+            Dim ListViewItem16 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Advanced", "Config_Icon.ico")
+            Dim ListViewItem17 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Theme", "Appearance_Icon.ico")
+            Dim ListViewItem18 As System.Windows.Forms.ListViewItem = New System.Windows.Forms.ListViewItem("Keyboard", "Keyboard.png")
+            Dim Alignment4 As mRemoteNG.Controls.Alignment = New mRemoteNG.Controls.Alignment()
             Me.btnOK = New System.Windows.Forms.Button()
             Me.btnCancel = New System.Windows.Forms.Button()
             Me.imgListPages = New System.Windows.Forms.ImageList(Me.components)
@@ -266,6 +266,7 @@ Namespace Forms
             Me.lvKeyboardCommands = New mRemoteNG.Controls.ListView()
             Me.dlgColor = New System.Windows.Forms.ColorDialog()
             Me.lvPages = New mRemoteNG.Controls.ListView()
+            Me.btnResetAllKeyboardShortcuts = New System.Windows.Forms.Button()
             linKeyboardCommand = New Microsoft.VisualBasic.PowerPacks.LineShape()
             CType(Me.numPuttyWaitTime, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.numUVNCSCPort, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1501,6 +1502,7 @@ Namespace Forms
             '
             'tabKeyboard
             '
+            Me.tabKeyboard.Controls.Add(Me.btnResetAllKeyboardShortcuts)
             Me.tabKeyboard.Controls.Add(Me.btnResetKeyboardShortcuts)
             Me.tabKeyboard.Controls.Add(Me.btnDeleteKeyboardShortcut)
             Me.tabKeyboard.Controls.Add(Me.btnNewKeyboardShortcut)
@@ -1609,15 +1611,15 @@ Namespace Forms
             Me.lvKeyboardCommands.InactiveHighlightBackColor = System.Drawing.SystemColors.Highlight
             Me.lvKeyboardCommands.InactiveHighlightBorderColor = System.Drawing.SystemColors.HotTrack
             Me.lvKeyboardCommands.InactiveHighlightForeColor = System.Drawing.SystemColors.HighlightText
-            Alignment1.Horizontal = mRemoteNG.Controls.HorizontalAlignment.Left
-            Alignment1.Vertical = mRemoteNG.Controls.VerticalAlignment.Middle
-            Me.lvKeyboardCommands.LabelAlignment = Alignment1
+            Alignment3.Horizontal = mRemoteNG.Controls.HorizontalAlignment.Left
+            Alignment3.Vertical = mRemoteNG.Controls.VerticalAlignment.Middle
+            Me.lvKeyboardCommands.LabelAlignment = Alignment3
             Me.lvKeyboardCommands.LabelWrap = False
             Me.lvKeyboardCommands.Location = New System.Drawing.Point(7, 7)
             Me.lvKeyboardCommands.MultiSelect = False
             Me.lvKeyboardCommands.Name = "lvKeyboardCommands"
             Me.lvKeyboardCommands.OwnerDraw = True
-            Me.lvKeyboardCommands.Size = New System.Drawing.Size(200, 450)
+            Me.lvKeyboardCommands.Size = New System.Drawing.Size(200, 421)
             Me.lvKeyboardCommands.TabIndex = 1
             Me.lvKeyboardCommands.TileSize = New System.Drawing.Size(196, 20)
             Me.lvKeyboardCommands.UseCompatibleStateImageBehavior = False
@@ -1632,10 +1634,10 @@ Namespace Forms
             Me.lvPages.InactiveHighlightBackColor = System.Drawing.SystemColors.Highlight
             Me.lvPages.InactiveHighlightBorderColor = System.Drawing.SystemColors.HotTrack
             Me.lvPages.InactiveHighlightForeColor = System.Drawing.SystemColors.HighlightText
-            Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem1, ListViewItem2, ListViewItem3, ListViewItem4, ListViewItem5, ListViewItem6, ListViewItem7, ListViewItem8, ListViewItem9})
-            Alignment2.Horizontal = mRemoteNG.Controls.HorizontalAlignment.Left
-            Alignment2.Vertical = mRemoteNG.Controls.VerticalAlignment.Middle
-            Me.lvPages.LabelAlignment = Alignment2
+            Me.lvPages.Items.AddRange(New System.Windows.Forms.ListViewItem() {ListViewItem10, ListViewItem11, ListViewItem12, ListViewItem13, ListViewItem14, ListViewItem15, ListViewItem16, ListViewItem17, ListViewItem18})
+            Alignment4.Horizontal = mRemoteNG.Controls.HorizontalAlignment.Left
+            Alignment4.Vertical = mRemoteNG.Controls.VerticalAlignment.Middle
+            Me.lvPages.LabelAlignment = Alignment4
             Me.lvPages.LabelWrap = False
             Me.lvPages.LargeImageList = Me.imgListPages
             Me.lvPages.Location = New System.Drawing.Point(12, 12)
@@ -1650,6 +1652,15 @@ Namespace Forms
             Me.lvPages.TileSize = New System.Drawing.Size(150, 30)
             Me.lvPages.UseCompatibleStateImageBehavior = False
             Me.lvPages.View = System.Windows.Forms.View.Tile
+            '
+            'btnResetAllKeyboardShortcuts
+            '
+            Me.btnResetAllKeyboardShortcuts.Location = New System.Drawing.Point(7, 434)
+            Me.btnResetAllKeyboardShortcuts.Name = "btnResetAllKeyboardShortcuts"
+            Me.btnResetAllKeyboardShortcuts.Size = New System.Drawing.Size(120, 23)
+            Me.btnResetAllKeyboardShortcuts.TabIndex = 9
+            Me.btnResetAllKeyboardShortcuts.Text = "Reset &All to Default"
+            Me.btnResetAllKeyboardShortcuts.UseVisualStyleBackColor = True
             '
             'frmOptions
             '
@@ -1721,5 +1732,6 @@ Namespace Forms
         Friend WithEvents ShapeContainer1 As Microsoft.VisualBasic.PowerPacks.ShapeContainer
         Friend WithEvents grpModifyKeyboardShortcut As System.Windows.Forms.GroupBox
         Friend WithEvents lblKeyboardShortcuts As System.Windows.Forms.Label
+        Friend WithEvents btnResetAllKeyboardShortcuts As System.Windows.Forms.Button
     End Class
 End Namespace
