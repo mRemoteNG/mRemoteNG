@@ -7,7 +7,7 @@ Namespace Forms.OptionsPages
     Public Class SqlServerPage
         Public Overrides Property PageName() As String
             Get
-                Return Language.strSQLServer
+                Return Language.strSQLServer.TrimEnd(":")
             End Get
             Set(value As String)
             End Set
