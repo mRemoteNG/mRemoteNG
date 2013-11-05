@@ -5,6 +5,7 @@ Imports log4net
 Imports mRemoteNG.Messages
 Imports mRemoteNG.Connection
 Imports mRemoteNG.Tools
+Imports mRemoteNG.Forms.OptionsPages
 Imports PSTaskDialog
 Imports mRemoteNG.Config.Putty
 Imports WeifenLuo.WinFormsUI.Docking
@@ -221,8 +222,6 @@ Namespace App
             Public Shared sessionsPanel As New DockContent
             Public Shared screenshotForm As UI.Window.ScreenshotManager
             Public Shared screenshotPanel As New DockContent
-            Public Shared optionsForm As frmOptions
-            Public Shared optionsPanel As New DockContent
             Public Shared exportForm As UI.Window.Export
             Public Shared exportPanel As New DockContent
             Public Shared aboutForm As UI.Window.About
@@ -264,8 +263,9 @@ Namespace App
 
                             adimportPanel.Show(frmMain.pnlDock)
                         Case UI.Window.Type.Options
-                            optionsForm = New frmOptions()
-                            optionsForm.Show(frmMain.pnlDock)
+                            Using optionsForm As New OptionsForm()
+                                optionsForm.ShowDialog(frmMain)
+                            End Using
                         Case UI.Window.Type.Export
                             If exportForm Is Nothing OrElse exportForm.IsDisposed Then
                                 exportForm = New UI.Window.Export(exportPanel)
@@ -332,8 +332,9 @@ Namespace App
             End Sub
 
             Public Shared Sub ShowUpdatesTab()
-                Windows.optionsForm = New frmOptions()
-                Windows.optionsForm.Show(frmMain.pnlDock, 5)
+                Using optionsForm As New OptionsForm()
+                    optionsForm.ShowDialog(frmMain, GetType(UpdatesPage))
+                End Using
             End Sub
         End Class
 
@@ -875,7 +876,7 @@ Namespace App
 #End Region
 
 #Region "Panels"
-        Public Shared Function AddPanel(Optional ByVal title As String = "", Optional ByVal noTabber As Boolean = False) As Form
+        Public Shared Function AddPanel(Optional ByVal title As String = "", Optional ByVal noTabber As Boolean = False) As System.Windows.Forms.Form
             Try
                 If title = "" Then
                     title = My.Language.strNewPanel
@@ -1662,7 +1663,7 @@ Namespace App
             End Try
         End Sub
 
-        Public Shared Sub OpenConnection(ByVal ConnectionInfo As mRemoteNG.Connection.Info, ByVal ConnectionForm As Form)
+        Public Shared Sub OpenConnection(ByVal ConnectionInfo As mRemoteNG.Connection.Info, ByVal ConnectionForm As System.Windows.Forms.Form)
             Try
                 OpenConnectionFinal(ConnectionInfo, Connection.Info.Force.None, ConnectionForm)
             Catch ex As Exception
@@ -1670,7 +1671,7 @@ Namespace App
             End Try
         End Sub
 
-        Public Shared Sub OpenConnection(ByVal ConnectionInfo As mRemoteNG.Connection.Info, ByVal ConnectionForm As Form, ByVal Force As Connection.Info.Force)
+        Public Shared Sub OpenConnection(ByVal ConnectionInfo As mRemoteNG.Connection.Info, ByVal ConnectionForm As System.Windows.Forms.Form, ByVal Force As Connection.Info.Force)
             Try
                 OpenConnectionFinal(ConnectionInfo, Force, ConnectionForm)
             Catch ex As Exception
@@ -1686,7 +1687,7 @@ Namespace App
             End Try
         End Sub
 
-        Private Shared Sub OpenConnectionFinal(ByVal newConnectionInfo As mRemoteNG.Connection.Info, ByVal Force As mRemoteNG.Connection.Info.Force, ByVal ConForm As Form)
+        Private Shared Sub OpenConnectionFinal(ByVal newConnectionInfo As mRemoteNG.Connection.Info, ByVal Force As mRemoteNG.Connection.Info.Force, ByVal ConForm As System.Windows.Forms.Form)
             Try
                 If newConnectionInfo.Hostname = "" And newConnectionInfo.Protocol <> Connection.Protocol.Protocols.IntApp Then
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strConnectionOpenFailedNoHostname)
@@ -1740,7 +1741,7 @@ Namespace App
                 End Select
 
                 Dim cContainer As Control
-                Dim cForm As Form
+                Dim cForm As System.Windows.Forms.Form
 
                 Dim cPnl As String
                 If newConnectionInfo.Panel = "" Or (Force And Connection.Info.Force.OverridePanel) = Connection.Info.Force.OverridePanel Or My.Settings.AlwaysShowPanelSelectionDlg Then

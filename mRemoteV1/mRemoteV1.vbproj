@@ -200,10 +200,70 @@
     <Compile Include="Controls\ToolStripSplitButton.vb">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Forms\frmOptions.Designer.vb">
-      <DependentUpon>frmOptions.vb</DependentUpon>
-    </Compile>
     <Compile Include="Config\KeyboardShortcuts.vb" />
+    <Compile Include="Forms\OptionsPages\AdvancedPage.Designer.vb">
+      <DependentUpon>AdvancedPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\AdvancedPage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\AppearancePage.Designer.vb">
+      <DependentUpon>AppearancePage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\AppearancePage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\ConnectionsPage.Designer.vb">
+      <DependentUpon>ConnectionsPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\ConnectionsPage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsForm.Designer.vb">
+      <DependentUpon>OptionsForm.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsForm.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\KeyboardPage.Designer.vb">
+      <DependentUpon>KeyboardPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\KeyboardPage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\OptionsPage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\SqlServerPage.Designer.vb">
+      <DependentUpon>SqlServerPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\SqlServerPage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\StartupExitPage.Designer.vb">
+      <DependentUpon>StartupExitPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\StartupExitPage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\TabsPanelsPage.Designer.vb">
+      <DependentUpon>TabsPanelsPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\TabsPanelsPage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\ThemePage.Designer.vb">
+      <DependentUpon>ThemePage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\ThemePage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\UpdatesPage.Designer.vb">
+      <DependentUpon>UpdatesPage.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\OptionsPages\UpdatesPage.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Tools\Authenticode.vb" />
     <Compile Include="Tools\EnumWindows.vb" />
     <Compile Include="Tools\EnvironmentInfo.vb" />
@@ -342,9 +402,6 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UI.Window.List.vb" />
-    <Compile Include="Forms\frmOptions.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UI\UI.Window.PortScan.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -389,6 +446,36 @@
     <EmbeddedResource Include="Forms\frmPassword.resx">
       <DependentUpon>frmPassword.vb</DependentUpon>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsPages\AdvancedPage.resx">
+      <DependentUpon>AdvancedPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsPages\AppearancePage.resx">
+      <DependentUpon>AppearancePage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsPages\ConnectionsPage.resx">
+      <DependentUpon>ConnectionsPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsForm.resx">
+      <DependentUpon>OptionsForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsPages\KeyboardPage.resx">
+      <DependentUpon>KeyboardPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsPages\SqlServerPage.resx">
+      <DependentUpon>SqlServerPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsPages\StartupExitPage.resx">
+      <DependentUpon>StartupExitPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsPages\TabsPanelsPage.resx">
+      <DependentUpon>TabsPanelsPage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsPages\ThemePage.resx">
+      <DependentUpon>ThemePage.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\OptionsPages\UpdatesPage.resx">
+      <DependentUpon>UpdatesPage.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Language\Language.de.resx">
       <SubType>Designer</SubType>
@@ -483,10 +570,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UI.Window.Help.resx">
       <DependentUpon>UI.Window.Help.vb</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmOptions.resx">
-      <DependentUpon>frmOptions.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UI.Window.PortScan.resx">

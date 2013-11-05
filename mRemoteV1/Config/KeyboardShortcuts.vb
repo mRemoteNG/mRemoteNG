@@ -71,6 +71,7 @@ Namespace Config
         End Sub
 
         Private Shared Sub Save()
+            If _map Is Nothing Then Return
             My.Settings.KeysPreviousTab = _map.GetConfigString(ShortcutCommand.PreviousTab)
             My.Settings.KeysNextTab = _map.GetConfigString(ShortcutCommand.NextTab)
         End Sub
