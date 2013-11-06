@@ -433,10 +433,10 @@ Namespace App
             Public Shared Sub SetDefaultLayout()
                 frmMain.pnlDock.Visible = False
 
-                frmMain.pnlDock.DockLeftPortion = 0.25
-                frmMain.pnlDock.DockRightPortion = 0.25
-                frmMain.pnlDock.DockTopPortion = 0.25
-                frmMain.pnlDock.DockBottomPortion = 0.25
+                frmMain.pnlDock.DockLeftPortion = frmMain.pnlDock.Width * 0.2
+                frmMain.pnlDock.DockRightPortion = frmMain.pnlDock.Width * 0.2
+                frmMain.pnlDock.DockTopPortion = frmMain.pnlDock.Height * 0.25
+                frmMain.pnlDock.DockBottomPortion = frmMain.pnlDock.Height * 0.25
 
                 Windows.treePanel.Show(frmMain.pnlDock, DockState.DockLeft)
                 Windows.configPanel.Show(frmMain.pnlDock)

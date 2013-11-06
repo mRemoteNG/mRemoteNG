@@ -3,6 +3,7 @@
   Added feature MR-141 - Add a default protocol option
   Added feature MR-547 - Add support for Xming Portable PuTTY
   Made improvement MR-367 - Make the 'Connect' button on the 'Quick Connect' toolbar a forced dropdown
+  Made improvement MR-590 - Make panels docked to the edge of the window keep their size
   Added "Reset" to config panel context menu to allow resetting some config settings to their default value.
   Removed misleading log messages about RD Gateway support.
   Removed invalid "Site" configuration option from PuTTY Saved Sessions.
