@@ -23,7 +23,6 @@ Namespace Root
                 Return _name
             End Get
             Set(ByVal value As String)
-                Debug.Print("Root.Info.Name.Set({0})", value)
                 If _name = value Then Return
                 _name = value
                 If TreeNode IsNot Nothing Then
