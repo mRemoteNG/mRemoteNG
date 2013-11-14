@@ -1,4 +1,4 @@
-1.72:
+1.73:
   Added feature MR-16 - Add keyboard shortcuts to switch between tabs
   Added feature MR-141 - Add a default protocol option
   Added feature MR-547 - Add support for Xming Portable PuTTY
@@ -10,7 +10,12 @@
   Fixed PuTTY Saved Sessions still showing if all saved sessions are removed.
   Fixed config panel showing settings from previously loaded connection file after loading a new one.
 
+1.72 (2013-11-13):
+  Fixed issue MR-592 - Unable to run VBS script as an external tool
+  Fixed issue MR-596 - Incorrect escaping of quotation marks in external tool arguments
+
 1.71 (2013-10-29):
+  Fixed issue MR-574 - Crash when retrieving RDP session list if eolwtscom.dll is not registered
   Fixed issue MR-578 - Connections file is reset
   Fixed log file not showing operating system version on Windows XP and Windows Server 2003.
   Fixed the wrong connections file opening on startup under certain conditions.

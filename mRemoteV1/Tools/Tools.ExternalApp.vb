@@ -119,10 +119,10 @@ Namespace Tools
 
                 Dim process As New Process()
                 With process.StartInfo
-                    .UseShellExecute = False
+                    .UseShellExecute = True
                     .FileName = ParseText(_FileName)
 
-                    .Arguments = CommandLineArguments.EscapeBackslashes(ParseText(_Arguments))
+                    .Arguments = ParseText(_Arguments)
                 End With
 
                 process.Start()
