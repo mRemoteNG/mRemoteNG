@@ -158,6 +158,7 @@
             Me.numUVNCSCPort.Size = New System.Drawing.Size(72, 20)
             Me.numUVNCSCPort.TabIndex = 33
             Me.numUVNCSCPort.Value = New Decimal(New Integer() {5500, 0, 0, 0})
+            Me.numUVNCSCPort.Visible = False
             '
             'txtCustomPuttyPath
             '
@@ -188,6 +189,7 @@
             Me.lblUVNCSCPort.TabIndex = 32
             Me.lblUVNCSCPort.Text = "UltraVNC SingleClick Listening Port:"
             Me.lblUVNCSCPort.TextAlign = System.Drawing.ContentAlignment.TopRight
+            Me.lblUVNCSCPort.Visible = False
             '
             'lblSeconds
             '
