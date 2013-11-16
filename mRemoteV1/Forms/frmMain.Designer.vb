@@ -216,7 +216,7 @@ Partial Class frmMain
         '
         Me.mMenFileNewConnection.Image = Global.mRemoteNG.My.Resources.Resources.Connection_Add
         Me.mMenFileNewConnection.Name = "mMenFileNewConnection"
-        Me.mMenFileNewConnection.ShortcutKeys = CType((System.Windows.Forms.Keys.Shift Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
+        Me.mMenFileNewConnection.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
         Me.mMenFileNewConnection.Size = New System.Drawing.Size(281, 22)
         Me.mMenFileNewConnection.Text = "New Connection"
         '
@@ -224,7 +224,8 @@ Partial Class frmMain
         '
         Me.mMenFileNewFolder.Image = Global.mRemoteNG.My.Resources.Resources.Folder_Add
         Me.mMenFileNewFolder.Name = "mMenFileNewFolder"
-        Me.mMenFileNewFolder.ShortcutKeys = System.Windows.Forms.Keys.F7
+        Me.mMenFileNewFolder.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
+            Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
         Me.mMenFileNewFolder.Size = New System.Drawing.Size(281, 22)
         Me.mMenFileNewFolder.Text = "New Folder"
         '
@@ -237,7 +238,6 @@ Partial Class frmMain
         '
         Me.mMenFileNew.Image = Global.mRemoteNG.My.Resources.Resources.Connections_New
         Me.mMenFileNew.Name = "mMenFileNew"
-        Me.mMenFileNew.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
         Me.mMenFileNew.Size = New System.Drawing.Size(281, 22)
         Me.mMenFileNew.Text = "New Connection File"
         '
