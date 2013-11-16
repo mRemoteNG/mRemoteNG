@@ -1,6 +1,7 @@
 1.73:
   Added feature MR-16 - Add keyboard shortcuts to switch between tabs
   Added feature MR-141 - Add a default protocol option
+  Added feature MR-212 - Add option to connect without credentials
   Added feature MR-547 - Add support for Xming Portable PuTTY
   Made improvement MR-367 - Make the 'Connect' button on the 'Quick Connect' toolbar a forced dropdown
   Made improvement MR-590 - Make panels docked to the edge of the window keep their size

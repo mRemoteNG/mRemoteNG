@@ -24,6 +24,7 @@ Namespace UI
             Friend WithEvents cMenTreeConnect As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeConnectWithOptions As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeConnectWithOptionsConnectToConsoleSession As System.Windows.Forms.ToolStripMenuItem
+            Friend WithEvents cMenTreeConnectWithOptionsNoCredentials As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeConnectWithOptionsConnectInFullscreen As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeDisconnect As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeSep2 As System.Windows.Forms.ToolStripSeparator
@@ -66,6 +67,7 @@ Namespace UI
                 Me.cMenTreeConnectWithOptionsConnectToConsoleSession = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenTreeConnectWithOptionsNoCredentials = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeDisconnect = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeSep2 = New System.Windows.Forms.ToolStripSeparator()
@@ -132,7 +134,7 @@ Namespace UI
                 Me.cMenTree.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeAddConnection, Me.cMenTreeAddFolder, Me.cMenTreeSep1, Me.cMenTreeConnect, Me.cMenTreeConnectWithOptions, Me.cMenTreeDisconnect, Me.cMenTreeSep2, Me.cMenTreeToolsTransferFile, Me.cMenTreeToolsImportExport, Me.cMenTreeToolsSort, Me.cMenTreeToolsExternalApps, Me.cMenTreeSep3, Me.cMenTreeDuplicate, Me.cMenTreeRename, Me.cMenTreeDelete, Me.cMenTreeSep4, Me.cMenTreeMoveUp, Me.cMenTreeMoveDown})
                 Me.cMenTree.Name = "cMenTree"
                 Me.cMenTree.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-                Me.cMenTree.Size = New System.Drawing.Size(187, 336)
+                Me.cMenTree.Size = New System.Drawing.Size(187, 358)
                 '
                 'cMenTreeAddConnection
                 '
@@ -164,7 +166,7 @@ Namespace UI
                 '
                 'cMenTreeConnectWithOptions
                 '
-                Me.cMenTreeConnectWithOptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeConnectWithOptionsConnectToConsoleSession, Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession, Me.cMenTreeConnectWithOptionsConnectInFullscreen, Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting})
+                Me.cMenTreeConnectWithOptions.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeConnectWithOptionsConnectToConsoleSession, Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession, Me.cMenTreeConnectWithOptionsConnectInFullscreen, Me.cMenTreeConnectWithOptionsNoCredentials, Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting})
                 Me.cMenTreeConnectWithOptions.Name = "cMenTreeConnectWithOptions"
                 Me.cMenTreeConnectWithOptions.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeConnectWithOptions.Text = "Connect (with options)"
@@ -188,6 +190,13 @@ Namespace UI
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Name = "cMenTreeConnectWithOptionsConnectInFullscreen"
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Size = New System.Drawing.Size(231, 22)
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Text = "Connect in fullscreen"
+                '
+                'cMenTreeConnectWithOptionsNoCredentials
+                '
+                Me.cMenTreeConnectWithOptionsNoCredentials.Image = Global.mRemoteNG.My.Resources.Resources.key_delete
+                Me.cMenTreeConnectWithOptionsNoCredentials.Name = "cMenTreeConnectWithOptionsNoCredentials"
+                Me.cMenTreeConnectWithOptionsNoCredentials.Size = New System.Drawing.Size(231, 22)
+                Me.cMenTreeConnectWithOptionsNoCredentials.Text = "Connect without credentials"
                 '
                 'cMenTreeConnectWithOptionsChoosePanelBeforeConnecting
                 '
@@ -481,6 +490,7 @@ Namespace UI
                 cMenTreeConnect.Text = My.Language.strConnect
                 cMenTreeConnectWithOptions.Text = My.Language.strConnectWithOptions
                 cMenTreeConnectWithOptionsConnectToConsoleSession.Text = My.Language.strConnectToConsoleSession
+                cMenTreeConnectWithOptionsNoCredentials.Text = My.Language.strConnectNoCredentials
                 cMenTreeConnectWithOptionsConnectInFullscreen.Text = My.Language.strConnectInFullscreen
                 cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = My.Language.strChoosePanelBeforeConnecting
                 cMenTreeDisconnect.Text = My.Language.strMenuDisconnect
@@ -695,6 +705,10 @@ Namespace UI
                                     connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.ICA) Then
                                 cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
                                 cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
+                            End If
+
+                            If (connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.IntApp) Then
+                                cMenTreeConnectWithOptionsNoCredentials.Enabled = False
                             End If
 
                             cMenTreeToolsImportExport.Enabled = False
@@ -935,6 +949,10 @@ Namespace UI
 
             Private Sub cMenTreeConnectWithOptionsConnectToConsoleSession_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeConnectWithOptionsConnectToConsoleSession.Click
                 App.Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.UseConsoleSession Or mRemoteNG.Connection.Info.Force.DoNotJump)
+            End Sub
+
+            Private Sub cMenTreeConnectWithOptionsNoCredentials_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeConnectWithOptionsNoCredentials.Click
+                App.Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.NoCredentials)
             End Sub
 
             Private Sub cMenTreeConnectWithOptionsDontConnectToConsoleSession_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeConnectWithOptionsDontConnectToConsoleSession.Click

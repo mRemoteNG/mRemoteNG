@@ -2514,6 +2514,7 @@ Namespace Connection
             DoNotJump = 4
             OverridePanel = 8
             DontUseConsoleSession = 16
+            NoCredentials = 32
         End Enum
     End Class
 End Namespace

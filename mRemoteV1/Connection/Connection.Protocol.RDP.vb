@@ -252,7 +252,7 @@ Namespace Connection
                         If _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.SmartCard Then
                             _rdpClient.TransportSettings.GatewayCredsSource = 1 ' TSC_PROXY_CREDS_MODE_SMARTCARD
                         End If
-                        If _rdpVersion >= Versions.RDC61 Then
+                        If _rdpVersion >= Versions.RDC61 And Not ((Force And Info.Force.NoCredentials) = Info.Force.NoCredentials) Then
                             If _connectionInfo.RDGatewayUseConnectionCredentials = RDGatewayUseConnectionCredentials.Yes Then
                                 _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.Username
                                 _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.Password
@@ -298,6 +298,8 @@ Namespace Connection
 
             Private Sub SetCredentials()
                 Try
+                    If (Force And Info.Force.NoCredentials) = Info.Force.NoCredentials Then Return
+
                     Dim userName As String = _connectionInfo.Username
                     Dim password As String = _connectionInfo.Password
                     Dim domain As String = _connectionInfo.Domain

@@ -97,6 +97,8 @@ Namespace Connection
 #Region "Private Methods"
             Private Sub SetCredentials()
                 Try
+                    If (Force And Info.Force.NoCredentials) = Info.Force.NoCredentials Then Return
+
                     Dim _user As String = Me.Info.Username
                     Dim _pass As String = Me.Info.Password
                     Dim _dom As String = Me.Info.Domain

@@ -777,6 +777,7 @@
     <Content Include="Help\Update.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\key_delete.png" />
     <None Include="Resources\Images\PuttySessions.png" />
     <None Include="Notes\Help.txt" />
     <None Include="Notes\ICA.txt" />

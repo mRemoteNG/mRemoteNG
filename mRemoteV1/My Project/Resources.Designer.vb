@@ -410,6 +410,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property key_delete() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("key_delete", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property Keyboard() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Keyboard", resourceCulture)

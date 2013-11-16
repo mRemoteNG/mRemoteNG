@@ -1290,6 +1290,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Connect without credentials.
+        '''</summary>
+        Friend Shared ReadOnly Property strConnectNoCredentials() As String
+            Get
+                Return ResourceManager.GetString("strConnectNoCredentials", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Connect to console session.
         '''</summary>
         Friend Shared ReadOnly Property strConnectToConsoleSession() As String

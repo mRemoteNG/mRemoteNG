@@ -539,6 +539,9 @@ Starting with new connections file.</value>
   <data name="strConnectionsFileCouldNotSaveAs" xml:space="preserve">
     <value>Couldn't save connections file as "{0}"!</value>
   </data>
+  <data name="strConnectNoCredentials" xml:space="preserve">
+    <value>Connect without credentials</value>
+  </data>
   <data name="strConnectToConsoleSession" xml:space="preserve">
     <value>Connect to console session</value>
   </data>

@@ -208,7 +208,7 @@ Namespace Connection
                     AddHandler VNC.ConnectComplete, AddressOf VNCEvent_Connected
                     AddHandler VNC.ConnectionLost, AddressOf VNCEvent_Disconnected
                     AddHandler mRemoteNG.frmMain.clipboardchange, AddressOf VNCEvent_ClipboardChanged
-                    If Not String.IsNullOrEmpty(Info.Password) Then
+                    If Not ((Force And Info.Force.NoCredentials) = Info.Force.NoCredentials) And Not String.IsNullOrEmpty(Info.Password) Then
                         VNC.GetPassword = AddressOf VNCEvent_Authenticate
                     End If
                 Catch ex As Exception

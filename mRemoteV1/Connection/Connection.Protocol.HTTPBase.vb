@@ -74,7 +74,7 @@ Namespace Connection
                     Dim strHost As String = Me.InterfaceControl.Info.Hostname
                     Dim strAuth As String = ""
 
-                    If Me.InterfaceControl.Info.Username <> "" And Me.InterfaceControl.Info.Password <> "" Then
+                    If Not ((Force And Info.Force.NoCredentials) = Info.Force.NoCredentials) And Not String.IsNullOrEmpty(InterfaceControl.Info.Username) And Not String.IsNullOrEmpty(InterfaceControl.Info.Password) Then
                         strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(Me.InterfaceControl.Info.Username & ":" & Me.InterfaceControl.Info.Password)) & vbNewLine
                     End If
 

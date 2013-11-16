@@ -4,6 +4,7 @@ Contributors
 Jason Barbier
 Wiktor Beryt
 Lionel Caignec
+Ruben d'Arco
 Felix Deimel
 Holger Henke
 Tom Hiller
