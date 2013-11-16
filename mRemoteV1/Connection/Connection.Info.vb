@@ -230,7 +230,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameExternalTool"), _
             LocalizedDescription("strPropertyDescriptionExternalTool"), _
-            TypeConverter(GetType(Tools.ExternalAppsTypeConverter))> _
+            TypeConverter(GetType(Tools.ExternalToolsTypeConverter))> _
         Public Property ExtApp() As String
             Get
                 If Me._Inherit.ExtApp And Me._Parent IsNot Nothing Then
@@ -1012,7 +1012,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameExternalToolBefore"), _
             LocalizedDescription("strPropertyDescriptionExternalToolBefore"), _
-            TypeConverter(GetType(Tools.ExternalAppsTypeConverter))> _
+            TypeConverter(GetType(Tools.ExternalToolsTypeConverter))> _
         Public Overridable Property PreExtApp() As String
             Get
                 If Me._Inherit.PreExtApp And Me._Parent IsNot Nothing Then
@@ -1039,7 +1039,7 @@ Namespace Connection
             Browsable(True), _
             LocalizedDisplayName("strPropertyNameExternalToolAfter"), _
             LocalizedDescription("strPropertyDescriptionExternalToolAfter"), _
-            TypeConverter(GetType(Tools.ExternalAppsTypeConverter))> _
+            TypeConverter(GetType(Tools.ExternalToolsTypeConverter))> _
         Public Overridable Property PostExtApp() As String
             Get
                 If Me._Inherit.PostExtApp And Me._Parent IsNot Nothing Then
@@ -1581,7 +1581,7 @@ Namespace Connection
                     Case Connection.Protocol.Protocols.ICA
                         Return Connection.Protocol.ICA.Defaults.Port
                     Case Connection.Protocol.Protocols.IntApp
-                        Return Connection.Protocol.IntApp.Defaults.Port
+                        Return Connection.Protocol.IntegratedProgram.Defaults.Port
                 End Select
             Catch ex As Exception
                 MessageCollector.AddExceptionMessage(My.Language.strConnectionSetDefaultPortFailed, ex, Messages.MessageClass.ErrorMsg)

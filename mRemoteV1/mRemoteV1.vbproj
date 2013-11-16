@@ -286,7 +286,7 @@
     <Compile Include="Connection\Connection.Protocol.HTTPBase.vb" />
     <Compile Include="Connection\Connection.Protocol.HTTPS.vb" />
     <Compile Include="Connection\Connection.Protocol.ICA.vb" />
-    <Compile Include="Connection\Connection.Protocol.IntApp.vb" />
+    <Compile Include="Connection\Connection.Protocol.IntegratedProgram.vb" />
     <Compile Include="Connection\Connection.Protocol.List.vb" />
     <Compile Include="Connection\Connection.Protocol.Protocols.vb" />
     <Compile Include="Connection\Connection.Protocol.PuttyBase.vb" />
@@ -361,7 +361,7 @@
     </Compile>
     <Compile Include="Tools\Tools.Controls.vb">
     </Compile>
-    <Compile Include="Tools\Tools.ExternalApp.vb" />
+    <Compile Include="Tools\ExternalTool.vb" />
     <Compile Include="Tools\Tools.LocalizedAttributes.vb" />
     <Compile Include="Tools\Tools.Misc.vb" />
     <Compile Include="Tools\Tools.PortScan.vb" />
@@ -636,7 +636,7 @@
     <Content Include="Help\PortScan.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\ExternalApps.htm">
+    <Content Include="Help\ExternalTools.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Help\ErrorsAndInfos.htm">
@@ -723,28 +723,28 @@
     <Content Include="Help\Screenshots\Configuration\17.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Apps\01.png">
+    <Content Include="Help\Screenshots\External Tools\01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Apps\02.png">
+    <Content Include="Help\Screenshots\External Tools\02.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Apps\03.png">
+    <Content Include="Help\Screenshots\External Tools\03.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Apps\04.png">
+    <Content Include="Help\Screenshots\External Tools\04.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Apps\05.png">
+    <Content Include="Help\Screenshots\External Tools\05.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Apps\06.png">
+    <Content Include="Help\Screenshots\External Tools\06.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Apps\07.png">
+    <Content Include="Help\Screenshots\External Tools\07.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Apps\08.png">
+    <Content Include="Help\Screenshots\External Tools\08.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Help\Screenshots\Main Menu\File.png">

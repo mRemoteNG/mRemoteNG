@@ -131,8 +131,8 @@ Namespace UI
                 TreeNode20.Tag = "ImportFromAD"
                 TreeNode20.Text = "Import From Active Directory"
                 TreeNode21.Name = "Node1"
-                TreeNode21.Tag = "ExternalApps"
-                TreeNode21.Text = "External Applications"
+                TreeNode21.Tag = "ExternalTools"
+                TreeNode21.Text = "External Tools"
                 TreeNode22.Name = "Node0"
                 TreeNode22.Tag = "PortScan"
                 TreeNode22.Text = "Port Scan"
@@ -218,9 +218,9 @@ Namespace UI
 #End Region
 
 #Region "Private Methods"
-            Private Sub Help_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
-                Me.tvIndex.Nodes(0).Expand()
-                Me.tvIndex.SelectedNode = Me.tvIndex.Nodes(0).Nodes(0)
+            Private Sub Help_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+                tvIndex.Nodes(0).ExpandAll()
+                tvIndex.SelectedNode = tvIndex.Nodes(0).Nodes(0)
             End Sub
 
             Private Sub Help_Shown(sender As Object, e As EventArgs) Handles Me.Shown

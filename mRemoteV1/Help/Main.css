@@ -107,6 +107,25 @@ a:hover
 
 
 
+/* TABLES */
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th,td {
+    padding: 5px;
+}
+
+th {
+    background-color: lightgrey;
+    text-align: left;
+}
+
 
 /* MISC STYLES */
 
@@ -117,4 +136,13 @@ a:hover
 	color: #000000;
 	font-family: 'Courier New' , Monospace;
 	background-color: #C1C1C1;
+}
+
+.monospace {
+    white-space: nowrap;
+    font-family: 'Courier New', monospace;
+}
+
+.nowrap {
+    white-space: nowrap
 }

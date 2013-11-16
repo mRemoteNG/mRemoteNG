@@ -52,17 +52,19 @@ Namespace Tools
             Return Regex.Replace(argument, "(\\*)""", "$1$1\""")
         End Function
 
-        Public Shared Function QuoteArgument(ByVal argument As String, Optional ByVal forceQuotes As Boolean = False) As String
-            If Not forceQuotes And Not String.IsNullOrEmpty(argument) And Not argument.Contains(" ") Then Return argument
+        Public Shared Function EscapeBackslashesForTrailingQuote(ByVal argument As String) As String
+            If String.IsNullOrEmpty(argument) Then Return argument
 
             ' Sequence of backslashes followed by the end of the string
             ' (which will become a double quote):
             '     double up all the backslashes
-            If Not String.IsNullOrEmpty(argument) Then
-                argument = Regex.Replace(argument, "(\\*)$", "$1$1")
-            End If
+            Return Regex.Replace(argument, "(\\*)$", "$1$1")
+        End Function
 
-            Return """" & argument & """"
+        Public Shared Function QuoteArgument(ByVal argument As String, Optional ByVal forceQuotes As Boolean = False) As String
+            If Not forceQuotes And Not String.IsNullOrEmpty(argument) And Not argument.Contains(" ") Then Return argument
+
+            Return """" & EscapeBackslashesForTrailingQuote(argument) & """"
         End Function
 
         Public Shared Function EscapeShellMetacharacters(ByVal argument As String) As String

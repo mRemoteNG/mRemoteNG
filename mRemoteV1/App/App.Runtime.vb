@@ -1731,7 +1731,7 @@ Namespace App
                     Case Protocol.Protocols.ICA
                         newProtocol = New Protocol.ICA
                     Case Protocol.Protocols.IntApp
-                        newProtocol = New Protocol.IntApp
+                        newProtocol = New Protocol.IntegratedProgram
 
                         If newConnectionInfo.ExtApp = "" Then
                             Throw New Exception(My.Language.strNoExtAppDefined)
@@ -1908,18 +1908,18 @@ Namespace App
 
 #Region "External Apps"
         Public Shared Sub GetExtApps()
-            Array.Clear(Tools.ExternalAppsTypeConverter.ExternalApps, 0, Tools.ExternalAppsTypeConverter.ExternalApps.Length)
-            Array.Resize(Tools.ExternalAppsTypeConverter.ExternalApps, ExternalTools.Count + 1)
+            Array.Clear(Tools.ExternalToolsTypeConverter.ExternalTools, 0, Tools.ExternalToolsTypeConverter.ExternalTools.Length)
+            Array.Resize(Tools.ExternalToolsTypeConverter.ExternalTools, ExternalTools.Count + 1)
 
             Dim i As Integer = 0
 
             For Each extA As Tools.ExternalTool In ExternalTools
-                Tools.ExternalAppsTypeConverter.ExternalApps(i) = extA.DisplayName
+                Tools.ExternalToolsTypeConverter.ExternalTools(i) = extA.DisplayName
 
                 i += 1
             Next
 
-            Tools.ExternalAppsTypeConverter.ExternalApps(i) = ""
+            Tools.ExternalToolsTypeConverter.ExternalTools(i) = ""
         End Sub
 
         Public Shared Function GetExtAppByName(ByVal Name As String) As Tools.ExternalTool

@@ -368,15 +368,16 @@ Namespace Tree
             SetNodeImageIndex(treeNode, Img)
         End Sub
 
-        Private Delegate Sub SetNodeImageIndexCB(ByVal tNode As TreeNode, ByVal ImgIndex As Integer)
-        Private Shared Sub SetNodeImageIndex(ByVal tNode As TreeNode, ByVal ImgIndex As Integer)
-            If _TreeView.InvokeRequired Then
-                Dim s As New SetNodeImageIndexCB(AddressOf SetNodeImageIndex)
-                _TreeView.Invoke(s, New Object() {tNode, ImgIndex})
-            Else
-                tNode.ImageIndex = ImgIndex
-                tNode.SelectedImageIndex = ImgIndex
+        Private Delegate Sub SetNodeImageIndexDelegate(ByVal treeNode As TreeNode, ByVal imageIndex As Integer)
+        Private Shared Sub SetNodeImageIndex(ByVal treeNode As TreeNode, ByVal imageIndex As Integer)
+            If treeNode Is Nothing OrElse treeNode.TreeView Is Nothing Then Return
+            If treeNode.TreeView.InvokeRequired Then
+                treeNode.TreeView.Invoke(New SetNodeImageIndexDelegate(AddressOf SetNodeImageIndex), New Object() {treeNode, imageIndex})
+                Return
             End If
+
+            treeNode.ImageIndex = imageIndex
+            treeNode.SelectedImageIndex = imageIndex
         End Sub
 
         Public Shared Sub SetNodeToolTip(ByVal e As MouseEventArgs, ByVal tTip As ToolTip)

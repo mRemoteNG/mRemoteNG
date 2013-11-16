@@ -9,6 +9,7 @@
   Removed invalid "Site" configuration option from PuTTY Saved Sessions.
   Fixed PuTTY Saved Sessions still showing if all saved sessions are removed.
   Fixed config panel showing settings from previously loaded connection file after loading a new one.
+  Improved handling of variables in external tool arguments.
 
 1.72 (2013-11-13):
   Fixed issue MR-592 - Unable to run VBS script as an external tool
