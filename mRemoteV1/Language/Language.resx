@@ -1225,8 +1225,38 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Open Ports</value>
   </data>
+  <data name="strOptionsKeyboardButtonDelete" xml:space="preserve">
+    <value>&amp;Delete</value>
+  </data>
+  <data name="strOptionsKeyboardButtonNew" xml:space="preserve">
+    <value>&amp;New</value>
+  </data>
+  <data name="strOptionsKeyboardButtonReset" xml:space="preserve">
+    <value>&amp;Reset to Default</value>
+  </data>
+  <data name="strOptionsKeyboardButtonResetAll" xml:space="preserve">
+    <value>Reset &amp;All to Default</value>
+  </data>
+  <data name="strOptionsKeyboardCommandsGroupTabs" xml:space="preserve">
+    <value>Tabs</value>
+  </data>
+  <data name="strOptionsKeyboardCommandsNextTab" xml:space="preserve">
+    <value>Next Tab</value>
+  </data>
+  <data name="strOptionsKeyboardCommandsPreviousTab" xml:space="preserve">
+    <value>Previous Tab</value>
+  </data>
+  <data name="strOptionsKeyboardGroupModifyShortcut" xml:space="preserve">
+    <value>Modify Shortcut</value>
+  </data>
+  <data name="strOptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
+    <value>Keyboard Shortcuts</value>
+  </data>
   <data name="strOptionsProxyTesting" xml:space="preserve">
     <value>Testing...</value>
+  </data>
+  <data name="strOptionsTabKeyboard" xml:space="preserve">
+    <value>Keyboard</value>
   </data>
   <data name="strOptionsTabTheme" xml:space="preserve">
     <value>Theme</value>
@@ -2260,35 +2290,5 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strYes" xml:space="preserve">
     <value>Yes</value>
-  </data>
-  <data name="strOptionsKeyboardCommandsGroupTabs" xml:space="preserve">
-    <value>Tabs</value>
-  </data>
-  <data name="strOptionsKeyboardCommandsPreviousTab" xml:space="preserve">
-    <value>Previous Tab</value>
-  </data>
-  <data name="strOptionsKeyboardCommandsNextTab" xml:space="preserve">
-    <value>Next Tab</value>
-  </data>
-  <data name="strOptionsTabKeyboard" xml:space="preserve">
-    <value>Keyboard</value>
-  </data>
-  <data name="strOptionsKeyboardLabelKeyboardShortcuts" xml:space="preserve">
-    <value>Keyboard Shortcuts</value>
-  </data>
-  <data name="strOptionsKeyboardButtonNew" xml:space="preserve">
-    <value>&amp;New</value>
-  </data>
-  <data name="strOptionsKeyboardButtonDelete" xml:space="preserve">
-    <value>&amp;Delete</value>
-  </data>
-  <data name="strOptionsKeyboardButtonReset" xml:space="preserve">
-    <value>&amp;Reset to Default</value>
-  </data>
-  <data name="strOptionsKeyboardGroupModifyShortcut" xml:space="preserve">
-    <value>Modify Shortcut</value>
-  </data>
-  <data name="strOptionsKeyboardButtonResetAll" xml:space="preserve">
-    <value>Reset &amp;All to Default</value>
   </data>
 </root>
