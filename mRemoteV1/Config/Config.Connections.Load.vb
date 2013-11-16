@@ -5,6 +5,7 @@ Imports mRemoteNG.App.Runtime
 Imports System.Data
 Imports System.Data.SqlClient
 Imports System.IO
+Imports mRemoteNG.My
 Imports PSTaskDialog
 
 Namespace Config
@@ -1033,9 +1034,16 @@ Namespace Config
             End Function
 
             Private Function Authenticate(ByVal Value As String, ByVal CompareToOriginalValue As Boolean, Optional ByVal RootInfo As mRemoteNG.Root.Info = Nothing) As Boolean
+                Dim passwordName As String
+                If UseSQL Then
+                    passwordName = Language.strSQLServer.TrimEnd(":")
+                Else
+                    passwordName = Path.GetFileName(ConnectionFileName)
+                End If
+
                 If CompareToOriginalValue Then
                     Do Until Security.Crypt.Decrypt(Value, pW) <> Value
-                        pW = Tools.Misc.PasswordDialog(False)
+                        pW = Tools.Misc.PasswordDialog(passwordName, False)
 
                         If pW = "" Then
                             Return False
@@ -1043,7 +1051,7 @@ Namespace Config
                     Loop
                 Else
                     Do Until Security.Crypt.Decrypt(Value, pW) = "ThisIsProtected"
-                        pW = Tools.Misc.PasswordDialog(False)
+                        pW = Tools.Misc.PasswordDialog(passwordName, False)
 
                         If pW = "" Then
                             Return False

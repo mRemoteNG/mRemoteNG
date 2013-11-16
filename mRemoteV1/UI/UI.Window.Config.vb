@@ -1,3 +1,4 @@
+Imports System.IO
 Imports mRemoteNG.Messages
 Imports mRemoteNG.My
 Imports mRemoteNG.Connection.Protocol
@@ -651,7 +652,14 @@ Namespace UI
                         Select Case e.ChangedItem.PropertyDescriptor.Name
                             Case "Password"
                                 If rootInfo.Password = True Then
-                                    Dim password As String = Tools.Misc.PasswordDialog
+                                    Dim passwordName As String
+                                    If Settings.UseSQLServer Then
+                                        passwordName = Language.strSQLServer.TrimEnd(":")
+                                    Else
+                                        passwordName = Path.GetFileName(GetStartupConnectionFileName())
+                                    End If
+
+                                    Dim password As String = Tools.Misc.PasswordDialog(passwordName)
 
                                     If String.IsNullOrEmpty(password) Then
                                         rootInfo.Password = False

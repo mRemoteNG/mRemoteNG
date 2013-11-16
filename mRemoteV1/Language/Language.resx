@@ -1273,6 +1273,12 @@ If you run into such an error, please create a new connection file!</value>
   <data name="strPasswordProtect" xml:space="preserve">
     <value>Password protect</value>
   </data>
+  <data name="strPasswordStatusMustMatch" xml:space="preserve">
+    <value>Both passwords must match.</value>
+  </data>
+  <data name="strPasswordStatusTooShort" xml:space="preserve">
+    <value>The password must be at least 3 characters long.</value>
+  </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
     <value>Please fill all fields</value>
   </data>
@@ -2142,6 +2148,9 @@ Message:
   </data>
   <data name="strTitlePassword" xml:space="preserve">
     <value>Password</value>
+  </data>
+  <data name="strTitlePasswordWithName" xml:space="preserve">
+    <value>Password for {0}</value>
   </data>
   <data name="strTitleSelectPanel" xml:space="preserve">
     <value>Select Panel</value>

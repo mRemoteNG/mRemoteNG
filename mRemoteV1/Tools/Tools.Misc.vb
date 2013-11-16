@@ -3,6 +3,7 @@ Imports System.ComponentModel
 Imports System.Runtime.InteropServices
 Imports System.Collections.Specialized
 Imports System.Text.RegularExpressions
+Imports mRemoteNG.Forms
 Imports mRemoteNG.App.Runtime
 Imports System.IO
 Imports System.Data.SqlClient
@@ -104,13 +105,11 @@ Namespace Tools
             Return False
         End Function
 
-        Public Shared Function PasswordDialog(Optional ByVal Verify As Boolean = True) As String
-            Dim nPwFrm As New frmPassword()
+        Public Shared Function PasswordDialog(Optional ByVal passwordName As String = Nothing, Optional ByVal verify As Boolean = True) As String
+            Dim passwordForm As New PasswordForm(passwordName, verify)
 
-            nPwFrm.Verify = Verify
-
-            If nPwFrm.ShowDialog = DialogResult.OK Then
-                Return nPwFrm.Password
+            If passwordForm.ShowDialog = DialogResult.OK Then
+                Return passwordForm.Password
             Else
                 Return ""
             End If

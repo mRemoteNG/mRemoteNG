@@ -3482,6 +3482,24 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Both passwords must match..
+        '''</summary>
+        Friend Shared ReadOnly Property strPasswordStatusMustMatch() As String
+            Get
+                Return ResourceManager.GetString("strPasswordStatusMustMatch", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to The password must be at least 3 characters long..
+        '''</summary>
+        Friend Shared ReadOnly Property strPasswordStatusTooShort() As String
+            Get
+                Return ResourceManager.GetString("strPasswordStatusTooShort", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Please fill all fields.
         '''</summary>
         Friend Shared ReadOnly Property strPleaseFillAllFields() As String
@@ -6082,6 +6100,15 @@ Namespace My
         Friend Shared ReadOnly Property strTitlePassword() As String
             Get
                 Return ResourceManager.GetString("strTitlePassword", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Password for {0}.
+        '''</summary>
+        Friend Shared ReadOnly Property strTitlePasswordWithName() As String
+            Get
+                Return ResourceManager.GetString("strTitlePasswordWithName", resourceCulture)
             End Get
         End Property
         
