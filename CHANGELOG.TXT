@@ -6,6 +6,7 @@
   Made improvement MR-367 - Make the 'Connect' button on the 'Quick Connect' toolbar a forced dropdown
   Made improvement MR-590 - Make panels docked to the edge of the window keep their size
   Added "Reset" to config panel context menu to allow resetting some config settings to their default value.
+  Added and improved menu icons.
   Removed misleading log messages about RD Gateway support.
   Removed invalid "Site" configuration option from PuTTY Saved Sessions.
   Fixed PuTTY Saved Sessions still showing if all saved sessions are removed.

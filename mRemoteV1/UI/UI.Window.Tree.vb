@@ -173,12 +173,14 @@ Namespace UI
                 '
                 'cMenTreeConnectWithOptionsConnectToConsoleSession
                 '
+                Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Image = Global.mRemoteNG.My.Resources.Resources.monitor_go
                 Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Name = "cMenTreeConnectWithOptionsConnectToConsoleSession"
                 Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Size = New System.Drawing.Size(231, 22)
                 Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Text = "Connect to console session"
                 '
                 'cMenTreeConnectWithOptionsDontConnectToConsoleSession
                 '
+                Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Image = Global.mRemoteNG.My.Resources.Resources.monitor_delete
                 Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Name = "cMenTreeConnectWithOptionsDontConnectToConsoleSession"
                 Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Size = New System.Drawing.Size(231, 22)
                 Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text = "Don't connect to console session"
@@ -186,7 +188,7 @@ Namespace UI
                 '
                 'cMenTreeConnectWithOptionsConnectInFullscreen
                 '
-                Me.cMenTreeConnectWithOptionsConnectInFullscreen.Image = Global.mRemoteNG.My.Resources.Resources.Fullscreen
+                Me.cMenTreeConnectWithOptionsConnectInFullscreen.Image = Global.mRemoteNG.My.Resources.Resources.arrow_out
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Name = "cMenTreeConnectWithOptionsConnectInFullscreen"
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Size = New System.Drawing.Size(231, 22)
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Text = "Connect in fullscreen"
@@ -294,7 +296,7 @@ Namespace UI
                 '
                 'cMenTreeToolsExternalApps
                 '
-                Me.cMenTreeToolsExternalApps.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp
+                Me.cMenTreeToolsExternalApps.Image = Global.mRemoteNG.My.Resources.Resources.application_link
                 Me.cMenTreeToolsExternalApps.Name = "cMenTreeToolsExternalApps"
                 Me.cMenTreeToolsExternalApps.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeToolsExternalApps.Text = "External Applications"
@@ -306,7 +308,7 @@ Namespace UI
                 '
                 'cMenTreeDuplicate
                 '
-                Me.cMenTreeDuplicate.Image = Global.mRemoteNG.My.Resources.Resources.Connection_Duplicate
+                Me.cMenTreeDuplicate.Image = Global.mRemoteNG.My.Resources.Resources.page_copy
                 Me.cMenTreeDuplicate.Name = "cMenTreeDuplicate"
                 Me.cMenTreeDuplicate.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
                 Me.cMenTreeDuplicate.Size = New System.Drawing.Size(186, 22)

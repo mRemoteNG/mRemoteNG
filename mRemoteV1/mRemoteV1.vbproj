@@ -777,7 +777,14 @@
     <Content Include="Help\Update.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\key_delete.png" />
+    <Content Include="Resources\Images_FamFamFam\Config.png" />
+    <Content Include="Resources\Images_FamFamFam\database.png" />
+    <Content Include="Resources\Images_FamFamFam\Link.png" />
+    <Content Include="Resources\Images_FamFamFam\page_copy.png" />
+    <None Include="Resources\Images_FamFamFam\monitor_go.png" />
+    <None Include="Resources\Images_FamFamFam\monitor_delete.png" />
+    <None Include="Resources\Images_FamFamFam\user_comment.png" />
+    <None Include="Resources\Images_FamFamFam\key_delete.png" />
     <None Include="Resources\Images\PuttySessions.png" />
     <None Include="Notes\Help.txt" />
     <None Include="Notes\ICA.txt" />
@@ -982,6 +989,13 @@
     <Content Include="Icons\Workstation.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\Images_FamFamFam\application_link.png" />
+    <None Include="Resources\Images_FamFamFam\application_side_tree.png" />
+    <None Include="Resources\Images_FamFamFam\arrow_out.png" />
+    <None Include="Resources\Images_FamFamFam\cog_error.png" />
+    <Content Include="Resources\Icons_FamFamFam\database.ico" />
+    <Content Include="Resources\Icons_FamFamFam\keyboard.ico" />
+    <Content Include="Resources\Images_FamFamFam\cog.png" />
     <Content Include="Resources\Images\database.bmp" />
     <None Include="Resources\Images\Copy.png" />
     <None Include="Resources\Icons\mRemote_Icon.ico" />
