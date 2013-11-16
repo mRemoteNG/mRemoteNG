@@ -5,6 +5,7 @@
   Added feature MR-547 - Add support for Xming Portable PuTTY
   Made improvement MR-367 - Make the 'Connect' button on the 'Quick Connect' toolbar a forced dropdown
   Made improvement MR-419 - Password prompt dialog should have a meaningful window title
+  Made improvement MR-486 - Allow escaping of variable names for external tools
   Made improvement MR-590 - Make panels docked to the edge of the window keep their size
   Fixed issue MR-187 - F7 keyboard shortcut for New Folder conflicts with remote connections
   Added "Reset" to config panel context menu to allow resetting some config settings to their default value.
