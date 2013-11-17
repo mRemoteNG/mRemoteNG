@@ -192,6 +192,7 @@
     <Compile Include="Config\Putty\XmingProvider.vb" />
     <Compile Include="Config\Putty\Sessions.vb" />
     <Compile Include="Config\Putty\Provider.vb" />
+    <Compile Include="Connection\Connection.Info.Inheritance.vb" />
     <Compile Include="Controls\ListView.vb">
       <SubType>Component</SubType>
     </Compile>
