@@ -1640,6 +1640,7 @@ Namespace Connection
                 Me._RedirectSmartCards = val
                 Me._RedirectSound = val
                 Me._Resolution = val
+                AutomaticResize = val
                 Me._UseConsoleSession = val
                 _useCredSsp = val
                 Me._RenderingEngine = val
@@ -1647,6 +1648,7 @@ Namespace Connection
                 Me._Panel = val
                 Me._ICAEncryption = val
                 Me._RDPAuthenticationLevel = val
+                LoadBalanceInfo = val
                 Me._PreExtApp = val
                 Me._PostExtApp = val
                 Me._MacAddress = val
@@ -1711,8 +1713,8 @@ Namespace Connection
                     And Me._EnableFontSmoothing And Me._EnableDesktopComposition _
                     And Me._Domain And Me._Icon And Me._Password And Me._Port And Me._Protocol And Me._PuttySession _
                     And Me._RedirectDiskDrives And Me._RedirectKeys And Me._RedirectPorts And Me._RedirectPrinters _
-                    And Me._RedirectSmartCards And Me._RedirectSound And Me._Resolution And Me._UseConsoleSession And _useCredSsp _
-                    And Me._RenderingEngine And Me._UserField And Me._ExtApp And Me._Username And Me._Panel And Me._ICAEncryption And Me._RDPAuthenticationLevel And Me._PreExtApp And Me._PostExtApp _
+                    And Me._RedirectSmartCards And Me._RedirectSound And Me._Resolution And AutomaticResize And Me._UseConsoleSession And _useCredSsp _
+                    And Me._RenderingEngine And Me._UserField And Me._ExtApp And Me._Username And Me._Panel And Me._ICAEncryption And Me._RDPAuthenticationLevel And LoadBalanceInfo And Me._PreExtApp And Me._PostExtApp _
                     And Me._MacAddress And Me._VNCAuthMode And Me._VNCColors And Me._VNCCompression And Me._VNCEncoding And Me._VNCProxyIP _
                     And Me._VNCProxyPassword And Me._VNCProxyPort And Me._VNCProxyType And Me._VNCProxyUsername Then
                         Return True

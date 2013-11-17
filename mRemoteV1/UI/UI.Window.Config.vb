@@ -1215,6 +1215,8 @@ Namespace UI
                                     strHide.Add("Resolution")
                                 End If
 
+                                If .AutomaticResize Then strHide.Add("AutomaticResize")
+
                                 If .UseConsoleSession Then
                                     strHide.Add("UseConsoleSession")
                                 End If
@@ -1234,6 +1236,8 @@ Namespace UI
                                 If .RDPAuthenticationLevel Then
                                     strHide.Add("RDPAuthenticationLevel")
                                 End If
+
+                                If .LoadBalanceInfo Then strHide.Add("LoadBalanceInfo")
 
                                 If .Username Then
                                     strHide.Add("Username")
