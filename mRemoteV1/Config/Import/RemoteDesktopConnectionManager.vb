@@ -2,6 +2,7 @@
 Imports System.IO
 Imports System.Runtime.InteropServices
 Imports mRemoteNG.Connection.Protocol
+Imports mRemoteNG.App.Runtime
 
 Namespace Config.Import
     Public Class RemoteDesktopConnectionManager
@@ -285,6 +286,7 @@ Namespace Config.Import
 
                 Return New String(plaintextArray)
             Catch ex As Exception
+                MessageCollector.AddExceptionMessage("RemoteDesktopConnectionManager.DecryptPassword() failed.", ex, , True)
                 Return Nothing
             Finally
                 If gcHandle.IsAllocated Then gcHandle.Free()
