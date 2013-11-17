@@ -424,6 +424,9 @@
     <Compile Include="UI\UI.Window.SSHTransfer.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\UI.Window.Tree.Designer.vb">
+      <DependentUpon>UI.Window.Tree.vb</DependentUpon>
+    </Compile>
     <Compile Include="UI\UI.Window.Tree.vb">
       <SubType>Form</SubType>
     </Compile>
