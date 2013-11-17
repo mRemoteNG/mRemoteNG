@@ -1744,6 +1744,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Remote Desktop Connection Manager files (*.rdg).
+        '''</summary>
+        Friend Shared ReadOnly Property strFilterRdgFiles() As String
+            Get
+                Return ResourceManager.GetString("strFilterRdgFiles", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to RDP Files (*.rdp).
         '''</summary>
         Friend Shared ReadOnly Property strFilterRDP() As String

@@ -53,10 +53,12 @@ Namespace UI
             Friend WithEvents mMenSortAscending As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents mMenAddConnection As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents mMenAddFolder As System.Windows.Forms.ToolStripMenuItem
+            Friend WithEvents cMenTreeToolsImportExportImportFromRDGFiles As System.Windows.Forms.ToolStripMenuItem
             Public WithEvents tvConnections As System.Windows.Forms.TreeView
             Private Sub InitializeComponent()
                 Me.components = New System.ComponentModel.Container()
                 Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Connections")
+                Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Tree))
                 Me.tvConnections = New System.Windows.Forms.TreeView()
                 Me.cMenTree = New System.Windows.Forms.ContextMenuStrip(Me.components)
                 Me.cMenTreeAddConnection = New System.Windows.Forms.ToolStripMenuItem()
@@ -78,6 +80,7 @@ Namespace UI
                 Me.cMenTreeToolsImportExportSep1 = New System.Windows.Forms.ToolStripSeparator()
                 Me.cMenTreeToolsImportExportImportFromAD = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeToolsImportExportImportFromRDPFiles = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenTreeToolsImportExportImportFromRDGFiles = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeToolsImportExportImportFromPortScan = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeToolsSort = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeToolsSortAscending = New System.Windows.Forms.ToolStripMenuItem()
@@ -228,7 +231,7 @@ Namespace UI
                 '
                 'cMenTreeToolsImportExport
                 '
-                Me.cMenTreeToolsImportExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeToolsImportExportExportmRemoteXML, Me.cMenTreeToolsImportExportImportmRemoteXML, Me.cMenTreeToolsImportExportSep1, Me.cMenTreeToolsImportExportImportFromAD, Me.cMenTreeToolsImportExportImportFromRDPFiles, Me.cMenTreeToolsImportExportImportFromPortScan})
+                Me.cMenTreeToolsImportExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeToolsImportExportExportmRemoteXML, Me.cMenTreeToolsImportExportImportmRemoteXML, Me.cMenTreeToolsImportExportSep1, Me.cMenTreeToolsImportExportImportFromAD, Me.cMenTreeToolsImportExportImportFromPortScan, Me.cMenTreeToolsImportExportImportFromRDPFiles, Me.cMenTreeToolsImportExportImportFromRDGFiles})
                 Me.cMenTreeToolsImportExport.Name = "cMenTreeToolsImportExport"
                 Me.cMenTreeToolsImportExport.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeToolsImportExport.Text = "Import/Export"
@@ -265,6 +268,13 @@ Namespace UI
                 Me.cMenTreeToolsImportExportImportFromRDPFiles.Name = "cMenTreeToolsImportExportImportFromRDPFiles"
                 Me.cMenTreeToolsImportExportImportFromRDPFiles.Size = New System.Drawing.Size(204, 22)
                 Me.cMenTreeToolsImportExportImportFromRDPFiles.Text = "Import from .RDP file(s)"
+                '
+                'cMenTreeToolsImportExportImportFromRDGFiles
+                '
+                Me.cMenTreeToolsImportExportImportFromRDGFiles.Image = CType(resources.GetObject("cMenTreeToolsImportExportImportFromRDGFiles.Image"), System.Drawing.Image)
+                Me.cMenTreeToolsImportExportImportFromRDGFiles.Name = "cMenTreeToolsImportExportImportFromRDGFiles"
+                Me.cMenTreeToolsImportExportImportFromRDGFiles.Size = New System.Drawing.Size(204, 22)
+                Me.cMenTreeToolsImportExportImportFromRDGFiles.Text = "Import from .RDG file(s)"
                 '
                 'cMenTreeToolsImportExportImportFromPortScan
                 '
@@ -991,6 +1001,30 @@ Namespace UI
 
             Private Sub cMenTreeToolsImportExportImportFromRDPFiles_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeToolsImportExportImportFromRDPFiles.Click
                 Me.ImportFromRDPFiles()
+            End Sub
+
+            Private Sub cMenTreeToolsImportExportImportFromRDGFiles_Click(sender As System.Object, e As EventArgs) Handles cMenTreeToolsImportExportImportFromRDGFiles.Click
+                Try
+                    Using openFileDialog As New OpenFileDialog()
+                        With openFileDialog
+                            .CheckFileExists = True
+                            .InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal)
+                            .Filter = String.Join("|", {Language.strFilterRdgFiles, "*.rdg", Language.strFilterAll, "*.*"})
+                            .Multiselect = True
+                        End With
+
+                        If Not openFileDialog.ShowDialog = DialogResult.OK Then Return
+
+                        Dim rootNode As TreeNode = tvConnections.Nodes(0)
+                        Dim rootInfo As Root.Info = CType(rootNode.Tag, Root.Info)
+
+                        For Each fileName As String In openFileDialog.FileNames
+                            mRemoteNG.Config.Import.RemoteDesktopConnectionManager.Import(fileName, rootInfo)
+                        Next
+                    End Using
+                Catch ex As Exception
+                    MessageCollector.AddExceptionMessage("UI.Window.Tree.cMenTreeToolsImportExportImportFromRDGFiles_Click failed.", ex, , True)
+                End Try
             End Sub
 
             Private Sub cMenTreeToolsImportExportImportFromPortScan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cMenTreeToolsImportExportImportFromPortScan.Click

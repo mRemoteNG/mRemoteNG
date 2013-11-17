@@ -693,6 +693,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="strFiltermRemoteXML" xml:space="preserve">
     <value>mRemote XML Files (*.xml)</value>
   </data>
+  <data name="strFilterRdgFiles" xml:space="preserve">
+    <value>Remote Desktop Connection Manager files (*.rdg)</value>
+  </data>
   <data name="strFilterRDP" xml:space="preserve">
     <value>RDP Files (*.rdp)</value>
   </data>

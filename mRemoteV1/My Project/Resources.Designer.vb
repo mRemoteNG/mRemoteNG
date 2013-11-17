@@ -662,6 +662,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property RDCMan_Icon() As System.Drawing.Icon
+            Get
+                Dim obj As Object = ResourceManager.GetObject("RDCMan_Icon", resourceCulture)
+                Return CType(obj,System.Drawing.Icon)
+            End Get
+        End Property
+        
         Friend ReadOnly Property RDP() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("RDP", resourceCulture)

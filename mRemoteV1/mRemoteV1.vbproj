@@ -187,6 +187,7 @@
     <Compile Include="Config\Config.Settings.Providers.vb" />
     <Compile Include="Config\Config.Settings.Save.vb" />
     <Compile Include="Config\ConfirmClose.vb" />
+    <Compile Include="Config\Import\RemoteDesktopConnectionManager.vb" />
     <Compile Include="Config\Putty\RegistryProvider.vb" />
     <Compile Include="Config\Putty\XmingProvider.vb" />
     <Compile Include="Config\Putty\Sessions.vb" />
@@ -780,6 +781,7 @@
     <Content Include="Help\Update.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Icons\RDCMan_Icon.ico" />
     <Content Include="Resources\Images_FamFamFam\Config.png" />
     <Content Include="Resources\Images_FamFamFam\database.png" />
     <Content Include="Resources\Images_FamFamFam\Link.png" />
