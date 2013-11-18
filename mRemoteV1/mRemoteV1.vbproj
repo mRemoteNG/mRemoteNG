@@ -400,6 +400,9 @@
     <Compile Include="UI\UI.Window.ErrorsAndInfos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\UI.Window.Export.Designer.vb">
+      <DependentUpon>UI.Window.Export.vb</DependentUpon>
+    </Compile>
     <Compile Include="UI\UI.Window.ExternalApps.vb">
       <SubType>Form</SubType>
     </Compile>

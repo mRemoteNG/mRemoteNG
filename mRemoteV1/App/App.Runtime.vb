@@ -1527,7 +1527,7 @@ Namespace App
         End Sub
 
         Public Shared Sub SaveConnectionsAs(Optional ByVal rootNode As TreeNode = Nothing, Optional ByVal saveSecurity As Security.Save = Nothing)
-            Dim connectionsSave As New Config.Connections.Save
+            Dim connectionsSave As New Connections.Save
             Dim previousTimerState As Boolean = False
 
             Try
@@ -1546,23 +1546,21 @@ Namespace App
                     saveAsDialog = Tools.Controls.ConnectionsExportDialog
                 End If
 
-                If saveAsDialog.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-                    connectionsSave.ConnectionFileName = saveAsDialog.FileName
-                Else
-                    Exit Sub
-                End If
+                If Not saveAsDialog.ShowDialog() = DialogResult.OK Then Return
+
+                connectionsSave.ConnectionFileName = saveAsDialog.FileName
 
                 If export Then
                     Select Case saveAsDialog.FilterIndex
                         Case 1
-                            connectionsSave.SaveFormat = Config.Connections.Save.Format.mRXML
+                            connectionsSave.SaveFormat = Connections.Save.Format.mRXML
                         Case 2
-                            connectionsSave.SaveFormat = Config.Connections.Save.Format.mRCSV
+                            connectionsSave.SaveFormat = Connections.Save.Format.mRCSV
                         Case 3
-                            connectionsSave.SaveFormat = Config.Connections.Save.Format.vRDCSV
+                            connectionsSave.SaveFormat = Connections.Save.Format.vRDCSV
                     End Select
                 Else
-                    connectionsSave.SaveFormat = Config.Connections.Save.Format.mRXML
+                    connectionsSave.SaveFormat = Connections.Save.Format.mRXML
 
                     If connectionsSave.ConnectionFileName = GetDefaultStartupConnectionFileName() Then
                         My.Settings.LoadConsFromCustomLocation = False
@@ -1583,7 +1581,7 @@ Namespace App
 
                 connectionsSave.Save()
             Catch ex As Exception
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, String.Format(My.Language.strConnectionsFileCouldNotSaveAs, connectionsSave.ConnectionFileName) & vbNewLine & ex.Message)
+                MessageCollector.AddExceptionMessage(String.Format(My.Language.strConnectionsFileCouldNotSaveAs, connectionsSave.ConnectionFileName), ex)
             Finally
                 If TimerSqlWatcher IsNot Nothing Then
                     TimerSqlWatcher.Enabled = previousTimerState
