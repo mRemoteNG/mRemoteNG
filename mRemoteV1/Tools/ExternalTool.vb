@@ -57,7 +57,7 @@ Namespace Tools
                 Dim process As New Process()
                 With process.StartInfo
                     .UseShellExecute = True
-                    .FileName = FileName
+                    .FileName = ParseArguments(FileName)
                     .Arguments = ParseArguments(Arguments)
                 End With
 

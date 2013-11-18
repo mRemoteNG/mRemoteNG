@@ -29,7 +29,7 @@ Namespace Connection
 
                     With _process.StartInfo
                         .UseShellExecute = True
-                        .FileName = _externalTool.FileName
+                        .FileName = _externalTool.ParseArguments(_externalTool.FileName)
                         .Arguments = _externalTool.ParseArguments(_externalTool.Arguments)
                     End With
 
