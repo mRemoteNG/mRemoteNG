@@ -424,6 +424,10 @@ Namespace UI
                 LoadApps()
             End Sub
 
+            Private Shared Sub ExternalApps_FormClosed(sender As System.Object, e As FormClosedEventArgs) Handles MyBase.FormClosed
+                mRemoteNG.Config.Settings.Save.SaveExternalAppsToXML()
+            End Sub
+
             Private Sub ApplyLanguage()
                 clmDisplayName.Text = My.Language.strColumnDisplayName
                 clmFilename.Text = My.Language.strColumnFilename

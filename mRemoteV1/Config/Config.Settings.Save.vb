@@ -6,7 +6,7 @@ Namespace Config
     Namespace Settings
         Public Class Save
 #Region "Public Methods"
-            Public Sub Save()
+            Public Shared Sub Save()
                 Try
                     With frmMain
                         Dim windowPlacement As New Tools.WindowPlacement(frmMain)
@@ -50,14 +50,14 @@ Namespace Config
                         My.Settings.Save()
                     End With
 
-                    Me.SavePanelsToXML()
-                    Me.SaveExternalAppsToXML()
+                    SavePanelsToXML()
+                    SaveExternalAppsToXML()
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Saving settings failed" & vbNewLine & vbNewLine & ex.Message, False)
                 End Try
             End Sub
 
-            Public Sub SavePanelsToXML()
+            Public Shared Sub SavePanelsToXML()
                 Try
                     If Directory.Exists(App.Info.Settings.SettingsPath) = False Then
                         Directory.CreateDirectory(App.Info.Settings.SettingsPath)
@@ -69,7 +69,7 @@ Namespace Config
                 End Try
             End Sub
 
-            Public Sub SaveExternalAppsToXML()
+            Public Shared Sub SaveExternalAppsToXML()
                 Try
                     If Directory.Exists(App.Info.Settings.SettingsPath) = False Then
                         Directory.CreateDirectory(App.Info.Settings.SettingsPath)

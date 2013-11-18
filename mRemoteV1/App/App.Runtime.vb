@@ -716,8 +716,7 @@ Namespace App
 
                     If My.Settings.SaveConsOnExit Then SaveConnections()
 
-                    Dim saveSettings As New Settings.Save()
-                    saveSettings.Save()
+                    Settings.Save.Save()
 
                     IeBrowserEmulation.Unregister()
                 Catch ex As Exception

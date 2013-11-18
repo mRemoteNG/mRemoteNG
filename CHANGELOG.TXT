@@ -9,6 +9,7 @@
   Made improvement MR-486 - Allow escaping of variable names for external tools
   Made improvement MR-590 - Make panels docked to the edge of the window keep their size
   Fixed issue MR-187 - F7 keyboard shortcut for New Folder conflicts with remote connections
+  Fixed issue MR-523 - Changes to external tools are not saved until exiting the program
   Fixed issue MR-556 - Export fails when overwriting an existing file
   Fixed issue MR-594 - Crash on startup if write access is denied to the IE browser emulation registry key
   Fixed issue MR-603 - Some configuration options are still shown even when inheritance is enabled
