@@ -65,22 +65,22 @@
     </Reference>
     <Reference Include="Interop.EOLWTSCOM">
       <HintPath>..\mRemoteV1\obj\Debug\Interop.EOLWTSCOM.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
     <Reference Include="Interop.MSTSCLib">
       <HintPath>..\mRemoteV1\obj\Debug\Interop.MSTSCLib.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
     <Reference Include="Interop.SHDocVw">
       <HintPath>..\mRemoteV1\obj\Debug\Interop.SHDocVw.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
     <Reference Include="Interop.WFICALib">
       <HintPath>..\mRemoteV1\obj\Debug\Interop.WFICALib.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
       <Private>True</Private>
     </Reference>
     <Reference Include="IPTextBox">
@@ -110,7 +110,7 @@
       <HintPath>..\mRemoteV1\References\Skybound.Gecko.dll</HintPath>
     </Reference>
     <Reference Include="stdole, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
