@@ -526,10 +526,14 @@ Namespace Config
                     _xmlTextWriter.WriteEndElement()
                     _xmlTextWriter.Close()
 
-                    If Not Export And File.Exists(ConnectionFileName) Then
-                        Dim backupFileName As String = ConnectionFileName & ".backup"
-                        File.Delete(backupFileName)
-                        File.Move(ConnectionFileName, backupFileName)
+                    If File.Exists(ConnectionFileName) Then
+                        If Export Then
+                            File.Delete(ConnectionFileName)
+                        Else
+                            Dim backupFileName As String = ConnectionFileName & ".backup"
+                            File.Delete(backupFileName)
+                            File.Move(ConnectionFileName, backupFileName)
+                        End If
                     End If
                     File.Move(tempFileName, ConnectionFileName)
                 Catch ex As Exception
