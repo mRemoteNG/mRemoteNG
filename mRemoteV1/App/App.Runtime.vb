@@ -234,7 +234,7 @@ Namespace App
             Public Shared adimportPanel As New DockContent
             Public Shared helpForm As UI.Window.Help
             Public Shared helpPanel As New DockContent
-            Public Shared externalappsForm As UI.Window.ExternalApps
+            Public Shared externalappsForm As UI.Window.ExternalTools
             Public Shared externalappsPanel As New DockContent
             Public Shared portscanForm As UI.Window.PortScan
             Public Shared portscanPanel As New DockContent
@@ -294,7 +294,7 @@ Namespace App
                             helpForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.ExternalApps
                             If externalappsForm Is Nothing OrElse externalappsForm.IsDisposed Then
-                                externalappsForm = New UI.Window.ExternalApps(externalappsPanel)
+                                externalappsForm = New UI.Window.ExternalTools(externalappsPanel)
                                 externalappsPanel = externalappsForm
                             End If
 
@@ -1904,21 +1904,6 @@ Namespace App
 #End Region
 
 #Region "External Apps"
-        Public Shared Sub GetExtApps()
-            Array.Clear(Tools.ExternalToolsTypeConverter.ExternalTools, 0, Tools.ExternalToolsTypeConverter.ExternalTools.Length)
-            Array.Resize(Tools.ExternalToolsTypeConverter.ExternalTools, ExternalTools.Count + 1)
-
-            Dim i As Integer = 0
-
-            For Each extA As Tools.ExternalTool In ExternalTools
-                Tools.ExternalToolsTypeConverter.ExternalTools(i) = extA.DisplayName
-
-                i += 1
-            Next
-
-            Tools.ExternalToolsTypeConverter.ExternalTools(i) = ""
-        End Sub
-
         Public Shared Function GetExtAppByName(ByVal Name As String) As Tools.ExternalTool
             For Each extA As Tools.ExternalTool In ExternalTools
                 If extA.DisplayName = Name Then

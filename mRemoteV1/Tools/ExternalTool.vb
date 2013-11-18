@@ -280,7 +280,20 @@ Namespace Tools
     Public Class ExternalToolsTypeConverter
         Inherits StringConverter
 
-        Public Shared ExternalTools As String() = New String() {}
+        Public Shared ReadOnly Property ExternalTools As String()
+            Get
+                Dim externalToolList As New List(Of String)
+
+                ' Add a blank entry to signify that no external tool is selected
+                externalToolList.Add(String.Empty)
+
+                For Each externalTool As ExternalTool In App.Runtime.ExternalTools
+                    externalToolList.Add(externalTool.DisplayName)
+                Next
+
+                Return externalToolList.ToArray()
+            End Get
+        End Property
 
         Public Overloads Overrides Function GetStandardValues(ByVal context As System.ComponentModel.ITypeDescriptorContext) As System.ComponentModel.TypeConverter.StandardValuesCollection
             Return New StandardValuesCollection(ExternalTools)

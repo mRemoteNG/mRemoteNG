@@ -64,7 +64,6 @@ Public Class frmMain
         Tools.IeBrowserEmulation.Register()
 
         Startup.GetConnectionIcons()
-        GetExtApps()
         Windows.treePanel.Focus()
 
         Tree.Node.TreeView = Windows.treeForm.tvConnections

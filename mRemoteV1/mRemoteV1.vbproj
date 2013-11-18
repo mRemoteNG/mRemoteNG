@@ -403,7 +403,10 @@
     <Compile Include="UI\UI.Window.Export.Designer.vb">
       <DependentUpon>UI.Window.Export.vb</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.ExternalApps.vb">
+    <Compile Include="UI\UI.Window.ExternalTools.Designer.vb">
+      <DependentUpon>UI.Window.ExternalTools.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI.Window.ExternalTools.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UI.Window.Help.vb">
@@ -575,8 +578,8 @@
       <DependentUpon>UI.Window.ErrorsAndInfos.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.ExternalApps.resx">
-      <DependentUpon>UI.Window.ExternalApps.vb</DependentUpon>
+    <EmbeddedResource Include="UI\UI.Window.ExternalTools.resx">
+      <DependentUpon>UI.Window.ExternalTools.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UI.Window.Help.resx">
@@ -1001,7 +1004,6 @@
     <Content Include="Icons\Workstation.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <None Include="Resources\Images_FamFamFam\application_link.png" />
     <None Include="Resources\Images_FamFamFam\application_side_tree.png" />
     <None Include="Resources\Images_FamFamFam\arrow_out.png" />
     <None Include="Resources\Images_FamFamFam\cog_error.png" />

@@ -216,6 +216,9 @@
   <data name="strButtonInheritance" xml:space="preserve">
     <value>Inheritance</value>
   </data>
+  <data name="strButtonLaunch" xml:space="preserve">
+    <value>&amp;Launch</value>
+  </data>
   <data name="strButtonLaunchPutty" xml:space="preserve">
     <value>Launch PuTTY</value>
   </data>
@@ -674,6 +677,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="strExtApp" xml:space="preserve">
     <value>Ext. App</value>
+  </data>
+  <data name="strExternalToolDefaultName" xml:space="preserve">
+    <value>New External Tool</value>
   </data>
   <data name="strFAMFAMFAMAttribution" xml:space="preserve">
     <value>Includes icons by [FAMFAMFAM]</value>

@@ -362,6 +362,15 @@ Namespace My
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to &amp;Launch.
+        '''</summary>
+        Friend Shared ReadOnly Property strButtonLaunch() As String
+            Get
+                Return ResourceManager.GetString("strButtonLaunch", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to Launch PuTTY.
         '''</summary>
         Friend Shared ReadOnly Property strButtonLaunchPutty() As String
@@ -1686,6 +1695,15 @@ Namespace My
         Friend Shared ReadOnly Property strExtApp() As String
             Get
                 Return ResourceManager.GetString("strExtApp", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to New External Tool.
+        '''</summary>
+        Friend Shared ReadOnly Property strExternalToolDefaultName() As String
+            Get
+                Return ResourceManager.GetString("strExternalToolDefaultName", resourceCulture)
             End Get
         End Property
         

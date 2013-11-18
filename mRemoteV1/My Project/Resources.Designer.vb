@@ -88,13 +88,6 @@ Namespace My.Resources
             End Get
         End Property
         
-        Friend ReadOnly Property application_link() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("application_link", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
         Friend ReadOnly Property application_side_tree() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("application_side_tree", resourceCulture)

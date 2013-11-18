@@ -300,7 +300,7 @@
                 '
                 'cMenTreeToolsExternalApps
                 '
-                Me.cMenTreeToolsExternalApps.Image = Global.mRemoteNG.My.Resources.Resources.application_link
+                Me.cMenTreeToolsExternalApps.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp
                 Me.cMenTreeToolsExternalApps.Name = "cMenTreeToolsExternalApps"
                 Me.cMenTreeToolsExternalApps.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeToolsExternalApps.Text = "External Applications"

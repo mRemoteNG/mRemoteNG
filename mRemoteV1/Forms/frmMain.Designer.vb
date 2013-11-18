@@ -484,7 +484,7 @@ Partial Class frmMain
         '
         'mMenViewExtAppsToolbar
         '
-        Me.mMenViewExtAppsToolbar.Image = Global.mRemoteNG.My.Resources.Resources.application_link
+        Me.mMenViewExtAppsToolbar.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp
         Me.mMenViewExtAppsToolbar.Name = "mMenViewExtAppsToolbar"
         Me.mMenViewExtAppsToolbar.Size = New System.Drawing.Size(228, 22)
         Me.mMenViewExtAppsToolbar.Text = "External Applications Toolbar"
@@ -526,7 +526,7 @@ Partial Class frmMain
         '
         'mMenToolsExternalApps
         '
-        Me.mMenToolsExternalApps.Image = Global.mRemoteNG.My.Resources.Resources.application_link
+        Me.mMenToolsExternalApps.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp
         Me.mMenToolsExternalApps.Name = "mMenToolsExternalApps"
         Me.mMenToolsExternalApps.Size = New System.Drawing.Size(184, 22)
         Me.mMenToolsExternalApps.Text = "External Applications"

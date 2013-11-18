@@ -735,7 +735,7 @@ Namespace UI
                     cmenTabExternalApps.DropDownItems.Clear()
 
                     'add ext apps
-                    For Each extA As Tools.ExternalTool In ExternalTools
+                    For Each extA As Tools.ExternalTool In Runtime.ExternalTools
                         Dim nItem As New ToolStripMenuItem
                         nItem.Text = extA.DisplayName
                         nItem.Tag = extA
