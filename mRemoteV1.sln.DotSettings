@@ -3,4 +3,5 @@
 	<s:String x:Key="/Default/CodeStyle/Naming/VBNaming/Abbreviations/=ID/@EntryIndexedValue">ID</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/VBNaming/Abbreviations/=IP/@EntryIndexedValue">IP</s:String>
 	<s:String x:Key="/Default/CodeStyle/Naming/VBNaming/Abbreviations/=RDP/@EntryIndexedValue">RDP</s:String>
-	<s:String x:Key="/Default/CodeStyle/Naming/VBNaming/Abbreviations/=VNC/@EntryIndexedValue">VNC</s:String></wpf:ResourceDictionary>
+	<s:String x:Key="/Default/CodeStyle/Naming/VBNaming/Abbreviations/=VNC/@EntryIndexedValue">VNC</s:String>
+	<s:String x:Key="/Default/CodeStyle/Naming/VBNaming/Abbreviations/=XML/@EntryIndexedValue">XML</s:String></wpf:ResourceDictionary>
