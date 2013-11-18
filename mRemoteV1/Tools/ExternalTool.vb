@@ -47,12 +47,12 @@ Namespace Tools
             Try
                 If String.IsNullOrEmpty(_FileName) Then Throw New InvalidOperationException("FileName cannot be blank.")
 
+                ConnectionInfo = startConnectionInfo
+
                 If TryIntegrate Then
-                    StartIntegrated(startConnectionInfo)
+                    StartIntegrated()
                     Return
                 End If
-
-                ConnectionInfo = startConnectionInfo
 
                 Dim process As New Process()
                 With process.StartInfo
@@ -70,27 +70,21 @@ Namespace Tools
         End Sub
 
         ' Start external app integrated
-        Public Sub StartIntegrated(Optional ByVal startConnectionInfo As Connection.Info = Nothing)
+        Public Sub StartIntegrated()
             Try
-                ConnectionInfo = startConnectionInfo
+                Dim newConnectionInfo As Connection.Info
+                If ConnectionInfo Is Nothing Then
+                    newConnectionInfo = New Connection.Info
+                Else
+                    newConnectionInfo = ConnectionInfo.Copy()
+                End If
 
-                Dim newConnectionInfo As New Connection.Info
-
-                newConnectionInfo.Protocol = Connection.Protocol.Protocols.IntApp
-                newConnectionInfo.ExtApp = DisplayName
-                newConnectionInfo.Name = DisplayName
-                newConnectionInfo.Panel = "Int. Apps"
-                newConnectionInfo.Hostname = ConnectionInfo.Hostname
-                newConnectionInfo.Port = ConnectionInfo.Port
-                newConnectionInfo.Username = ConnectionInfo.Username
-                newConnectionInfo.Password = ConnectionInfo.Password
-                newConnectionInfo.Domain = ConnectionInfo.Domain
-                newConnectionInfo.Description = ConnectionInfo.Description
-                newConnectionInfo.MacAddress = ConnectionInfo.MacAddress
-                newConnectionInfo.UserField = ConnectionInfo.UserField
-                newConnectionInfo.Description = ConnectionInfo.Description
-                newConnectionInfo.PreExtApp = ConnectionInfo.PreExtApp
-                newConnectionInfo.PostExtApp = ConnectionInfo.PostExtApp
+                With newConnectionInfo
+                    .Protocol = Connection.Protocol.Protocols.IntApp
+                    .ExtApp = DisplayName
+                    .Name = DisplayName
+                    .Panel = My.Language.strMenuExternalTools
+                End With
 
                 OpenConnection(newConnectionInfo)
             Catch ex As Exception
