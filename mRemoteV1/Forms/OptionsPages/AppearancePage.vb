@@ -55,6 +55,7 @@ Namespace Forms.OptionsPages
 
             Settings.ShowDescriptionTooltipsInTree = chkShowDescriptionTooltipsInTree.Checked
             Settings.ShowCompleteConsPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked
+            frmMain.ShowFullPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked
 
             Settings.ShowSystemTrayIcon = chkShowSystemTrayIcon.Checked
             If Settings.ShowSystemTrayIcon Then

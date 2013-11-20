@@ -4,6 +4,7 @@
   Added feature MR-212 - Add option to connect without credentials
   Added feature MR-512 - Add support for importing files from Remote Desktop Connection Manager
   Added feature MR-547 - Add support for Xming Portable PuTTY
+  Made improvement MR-250 - Show the name of the selected connection tab in the title of the window
   Made improvement MR-367 - Make the 'Connect' button on the 'Quick Connect' toolbar a forced dropdown
   Made improvement MR-419 - Password prompt dialog should have a meaningful window title
   Made improvement MR-486 - Allow escaping of variable names for external tools

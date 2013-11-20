@@ -46,11 +46,9 @@ Namespace Forms.OptionsPages
             My.Settings.SQLPass = Crypt.Encrypt(txtSQLPassword.Text, General.EncryptionKey)
 
             Runtime.Startup.DestroySQLUpdateHandlerAndStopTimer()
+            frmMain.UsingSqlServer = My.Settings.UseSQLServer
             If My.Settings.UseSQLServer Then
-                Runtime.SetMainFormText("SQL Server")
                 Runtime.Startup.CreateSQLUpdateHandlerAndStartTimer()
-            Else
-                Runtime.SetMainFormText(Runtime.GetStartupConnectionFileName())
             End If
         End Sub
 

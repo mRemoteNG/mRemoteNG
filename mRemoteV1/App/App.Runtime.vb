@@ -1811,6 +1811,8 @@ Namespace App
                         End If
                     End If
                 End If
+
+                frmMain.SelectedConnection = newConnectionInfo
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed & vbNewLine & ex.Message)
             End Try
@@ -1984,34 +1986,6 @@ Namespace App
                 End If
             End Try
         End Function
-
-        Public Shared Sub SetMainFormText(Optional ByVal ConnectionFileName As String = "")
-            Try
-                Dim txt As String = My.Application.Info.ProductName
-
-                If ConnectionFileName <> "" And IsConnectionsFileLoaded = True Then
-                    If My.Settings.ShowCompleteConsPathInTitle Then
-                        txt &= " - " & ConnectionFileName
-                    Else
-                        txt &= " - " & ConnectionFileName.Substring(ConnectionFileName.LastIndexOf("\") + 1)
-                    End If
-                End If
-
-                ChangeMainFormText(txt)
-            Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSettingMainFormTextFailed & vbNewLine & ex.Message, True)
-            End Try
-        End Sub
-
-        Private Delegate Sub ChangeMainFormTextCB(ByVal Text As String)
-        Private Shared Sub ChangeMainFormText(ByVal Text As String)
-            If frmMain.InvokeRequired = True Then
-                Dim d As New ChangeMainFormTextCB(AddressOf ChangeMainFormText)
-                frmMain.Invoke(d, New Object() {Text})
-            Else
-                frmMain.Text = Text
-            End If
-        End Sub
 
         Public Shared Function FindConnectionContainer(ByVal ConI As Connection.Info) As Connection.InterfaceControl
             If ConI.OpenConnections.Count > 0 Then

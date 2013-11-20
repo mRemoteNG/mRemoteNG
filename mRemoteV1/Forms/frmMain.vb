@@ -1,4 +1,7 @@
+Imports System.IO
+Imports mRemoteNG.My
 Imports SharedLibraryNG
+Imports System.Text
 Imports WeifenLuo.WinFormsUI.Docking
 Imports mRemoteNG.App.Runtime
 Imports System.Reflection
@@ -28,6 +31,54 @@ Public Class frmMain
         Get
             Return _isClosing
         End Get
+    End Property
+
+    Private _usingSqlServer As Boolean = False
+    Public Property UsingSqlServer As Boolean
+        Get
+            Return _usingSqlServer
+        End Get
+        Set(value As Boolean)
+            If _usingSqlServer = value Then Return
+            _usingSqlServer = value
+            UpdateWindowTitle()
+        End Set
+    End Property
+
+    Private _connectionsFileName As String = Nothing
+    Public Property ConnectionsFileName As String
+        Get
+            Return _connectionsFileName
+        End Get
+        Set(value As String)
+            If _connectionsFileName = value Then Return
+            _connectionsFileName = value
+            UpdateWindowTitle()
+        End Set
+    End Property
+
+    Private _showFullPathInTitle As Boolean = My.Settings.ShowCompleteConsPathInTitle
+    Public Property ShowFullPathInTitle As Boolean
+        Get
+            Return _showFullPathInTitle
+        End Get
+        Set(value As Boolean)
+            If _showFullPathInTitle = value Then Return
+            _showFullPathInTitle = value
+            UpdateWindowTitle()
+        End Set
+    End Property
+
+    Private _selectedConnection As Connection.Info = Nothing
+    Public Property SelectedConnection As Connection.Info
+        Get
+            Return _selectedConnection
+        End Get
+        Set(value As Connection.Info)
+            If _selectedConnection Is value Then Return
+            _selectedConnection = value
+            UpdateWindowTitle()
+        End Set
     End Property
 #End Region
 
@@ -77,7 +128,7 @@ Public Class frmMain
         'LoadCredentials()
         LoadConnections()
         If Not IsConnectionsFileLoaded Then
-            Application.Exit()
+            System.Windows.Forms.Application.Exit()
             Return
         End If
 
@@ -875,8 +926,43 @@ Public Class frmMain
         End If
     End Sub
 
-    Private Sub pnlDock_ActiveDocumentChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles pnlDock.ActiveDocumentChanged
+    Private Sub pnlDock_ActiveDocumentChanged(ByVal sender As Object, ByVal e As EventArgs) Handles pnlDock.ActiveDocumentChanged
         ActivateConnection()
+        Dim connectionWindow As UI.Window.Connection = TryCast(pnlDock.ActiveDocument, UI.Window.Connection)
+        If connectionWindow IsNot Nothing Then connectionWindow.UpdateSelectedConnection()
+    End Sub
+
+    Private Sub UpdateWindowTitle()
+        If InvokeRequired Then
+            Invoke(New MethodInvoker(AddressOf UpdateWindowTitle))
+            Return
+        End If
+
+        Dim titleBuilder As New StringBuilder(Application.Info.ProductName)
+        Const separator As String = " - "
+
+        If IsConnectionsFileLoaded Then
+            If UsingSqlServer Then
+                titleBuilder.Append(separator)
+                titleBuilder.Append(Language.strSQLServer.TrimEnd(":"))
+            Else
+                If Not String.IsNullOrEmpty(ConnectionsFileName) Then
+                    titleBuilder.Append(separator)
+                    If My.Settings.ShowCompleteConsPathInTitle Then
+                        titleBuilder.Append(ConnectionsFileName)
+                    Else
+                        titleBuilder.Append(Path.GetFileName(ConnectionsFileName))
+                    End If
+                End If
+            End If
+        End If
+
+        If Not (SelectedConnection Is Nothing OrElse String.IsNullOrEmpty(SelectedConnection.Name)) Then
+            titleBuilder.Append(separator)
+            titleBuilder.Append(SelectedConnection.Name)
+        End If
+
+        Text = titleBuilder.ToString()
     End Sub
 
     Public Sub ShowHidePanelTabs(Optional closingDocument As DockContent = Nothing)

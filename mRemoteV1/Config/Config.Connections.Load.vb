@@ -141,18 +141,17 @@ Namespace Config
 
 #Region "Public Methods"
             Public Sub Load(ByVal import As Boolean)
-                If _UseSQL = True Then
+                If UseSQL Then
                     LoadFromSQL()
-                    SetMainFormText("SQL Server")
                 Else
-                    Dim strCons As String = DecryptCompleteFile()
-                    LoadFromXML(strCons, import)
+                    Dim connections As String = DecryptCompleteFile()
+                    LoadFromXML(connections, import)
                 End If
 
-                If import = False Then
-                    SetMainFormText(ConnectionFileName)
-                    Putty.Sessions.AddSessionsToTree()
-                End If
+                frmMain.UsingSqlServer = UseSQL
+                frmMain.ConnectionsFileName = ConnectionFileName
+
+                If Not import Then Putty.Sessions.AddSessionsToTree()
             End Sub
 #End Region
 

@@ -1,6 +1,7 @@
 Imports System
 Imports System.Windows
 Imports System.Windows.Forms
+Imports mRemoteNG.Connection
 Imports mRemoteNG.App
 Imports Crownwood
 Imports WeifenLuo.WinFormsUI.Docking
@@ -265,7 +266,7 @@ Namespace UI
 
                     nTab.Title = nTab.Title.Replace("&", "&&")
 
-                    Dim conIcon As Icon = mRemoteNG.Connection.Icon.FromString(conI.Icon)
+                    Dim conIcon As Drawing.Icon = mRemoteNG.Connection.Icon.FromString(conI.Icon)
                     If conIcon IsNot Nothing Then
                         nTab.Icon = conIcon
                     End If
@@ -286,6 +287,21 @@ Namespace UI
 
                 Return Nothing
             End Function
+#End Region
+
+#Region "Private Methods"
+            Public Sub UpdateSelectedConnection()
+                If TabController.SelectedTab Is Nothing Then
+                    frmMain.SelectedConnection = Nothing
+                Else
+                    Dim interfaceControl As InterfaceControl = TryCast(TabController.SelectedTab.Tag, InterfaceControl)
+                    If interfaceControl Is Nothing Then
+                        frmMain.SelectedConnection = Nothing
+                    Else
+                        frmMain.SelectedConnection = interfaceControl.Info
+                    End If
+                End If
+            End Sub
 #End Region
 
 #Region "Form"
@@ -404,6 +420,8 @@ Namespace UI
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.CloseConnectionTab() failed" & vbNewLine & ex.Message, True)
                 End Try
+
+                UpdateSelectedConnection()
             End Sub
 
             Private Sub TabController_DoubleClickTab(ByVal sender As Crownwood.Magic.Controls.TabControl, ByVal page As Crownwood.Magic.Controls.TabPage) Handles TabController.DoubleClickTab
@@ -862,8 +880,9 @@ Namespace UI
             End Sub
 
             Private _ignoreChangeSelectedTabClick As Boolean = False
-            Private Sub TabController_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles TabController.SelectionChanged
+            Private Sub TabController_SelectionChanged(ByVal sender As Object, ByVal e As EventArgs) Handles TabController.SelectionChanged
                 _ignoreChangeSelectedTabClick = True
+                UpdateSelectedConnection()
                 FocusIC()
                 RefreshIC()
             End Sub

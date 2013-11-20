@@ -51,7 +51,6 @@ Namespace Config
                 Select Case SaveFormat
                     Case Format.SQL
                         SaveToSQL()
-                        SetMainFormText("SQL Server")
                     Case Format.mRCSV
                         SaveTomRCSV()
                     Case Format.vRDvRE
@@ -63,8 +62,9 @@ Namespace Config
                         If My.Settings.EncryptCompleteConnectionsFile Then
                             EncryptCompleteFile()
                         End If
-                        If Not _Export Then SetMainFormText(ConnectionFileName)
+                        If Not Export Then frmMain.ConnectionsFileName = ConnectionFileName
                 End Select
+                frmMain.UsingSqlServer = (SaveFormat = Format.SQL)
             End Sub
 #End Region
 
