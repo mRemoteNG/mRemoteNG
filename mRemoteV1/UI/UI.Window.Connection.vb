@@ -954,27 +954,28 @@ Namespace UI
 #End Region
 
 #Region "Window Overrides"
-            Protected Overloads Overrides Sub WndProc(ByRef WndMsg As Message)
+            Protected Overloads Overrides Sub WndProc(ByRef m As Message)
                 Try
-                    If WndMsg.Msg = Native.WM_MOUSEACTIVATE Then
-                        Dim curTab As Magic.Controls.TabPage = Me.TabController.SelectedTab
-                        Dim curRect As Rectangle = curTab.RectangleToScreen(curTab.ClientRectangle)
-
-                        If curRect.Contains(Form.MousePosition) Then
-                            If curTab IsNot Nothing Then
-                                Dim IC As mRemoteNG.Connection.InterfaceControl = Me.TabController.SelectedTab.Tag
-
-                                If IC.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Then
-                                    IC.Protocol.Focus()
+                    If m.Msg = Native.WM_MOUSEACTIVATE Then
+                        Dim selectedTab As Magic.Controls.TabPage = TabController.SelectedTab
+                        If selectedTab IsNot Nothing Then
+                            Dim tabClientRectangle As Rectangle = selectedTab.RectangleToScreen(selectedTab.ClientRectangle)
+                            If tabClientRectangle.Contains(MousePosition) Then
+                                Dim interfaceControl As InterfaceControl = TryCast(TabController.SelectedTab.Tag, InterfaceControl)
+                                If interfaceControl IsNot Nothing AndAlso interfaceControl.Info IsNot Nothing Then
+                                    If interfaceControl.Info.Protocol = Protocol.Protocols.RDP Then
+                                        interfaceControl.Protocol.Focus()
+                                        Return ' Do not pass to base class
+                                    End If
                                 End If
                             End If
                         End If
-                        Return ' Do not pass to base class
                     End If
                 Catch ex As Exception
+                    MessageCollector.AddExceptionMessage("UI.Window.Connection.WndProc() failed.", ex, , True)
                 End Try
 
-                MyBase.WndProc(WndMsg)
+                MyBase.WndProc(m)
             End Sub
 #End Region
 
