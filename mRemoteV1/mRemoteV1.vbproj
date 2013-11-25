@@ -1162,7 +1162,7 @@
     <Folder Include="My Project\DataSources\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SharedLibraryNG\SharedLibraryNG\SharedLibraryNG.csproj">
+    <ProjectReference Include="..\SharedLibraryNG\SharedLibraryNG.csproj">
       <Project>{0F615504-5F30-4CF2-8341-1DE7FEC95A23}</Project>
       <Name>SharedLibraryNG</Name>
     </ProjectReference>
