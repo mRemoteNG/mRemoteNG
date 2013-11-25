@@ -1,3 +1,6 @@
+1.73 Beta 2 ():
+  Fixed issue MR-619 - Keyboard shortcuts stop working after locking the screen with Win+L
+
 1.73 Beta 1 (2013-11-19):
   Added feature MR-16 - Add keyboard shortcuts to switch between tabs
   Added feature MR-141 - Add a default protocol option
