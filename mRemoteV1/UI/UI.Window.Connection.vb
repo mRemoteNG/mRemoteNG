@@ -87,7 +87,7 @@ Namespace UI
                 '
                 'cmenTabFullscreen
                 '
-                Me.cmenTabFullscreen.Image = Global.mRemoteNG.My.Resources.Resources.Fullscreen
+                Me.cmenTabFullscreen.Image = Global.mRemoteNG.My.Resources.Resources.arrow_out
                 Me.cmenTabFullscreen.Name = "cmenTabFullscreen"
                 Me.cmenTabFullscreen.Size = New System.Drawing.Size(201, 22)
                 Me.cmenTabFullscreen.Text = "Fullscreen (RDP)"
