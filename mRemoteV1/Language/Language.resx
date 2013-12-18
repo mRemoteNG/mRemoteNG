@@ -123,6 +123,9 @@
   <data name="strActive" xml:space="preserve">
     <value>Active</value>
   </data>
+  <data name="strActiveDirectory" xml:space="preserve">
+    <value>Active Directory</value>
+  </data>
   <data name="strActivity" xml:space="preserve">
     <value>Activity</value>
   </data>
@@ -578,6 +581,9 @@ Starting with new connections file.</value>
   <data name="strDetect" xml:space="preserve">
     <value>Detect</value>
   </data>
+  <data name="strDontConnectToConsoleSessionMenuItem" xml:space="preserve">
+    <value>Don't connect to console session</value>
+  </data>
   <data name="strDontConnectWhenAuthFails" xml:space="preserve">
     <value>Don't connect if authentication fails</value>
   </data>
@@ -672,8 +678,29 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="strExport" xml:space="preserve">
     <value>Export</value>
   </data>
+  <data name="strExportEverything" xml:space="preserve">
+    <value>Export everything</value>
+  </data>
+  <data name="strExportFile" xml:space="preserve">
+    <value>Export File</value>
+  </data>
+  <data name="strExportItems" xml:space="preserve">
+    <value>Export Items</value>
+  </data>
   <data name="strExportmRemoteXML" xml:space="preserve">
     <value>Export mRemote/mRemoteNG XML</value>
+  </data>
+  <data name="strExportProperties" xml:space="preserve">
+    <value>Export Properties</value>
+  </data>
+  <data name="strExportSelectedConnection" xml:space="preserve">
+    <value>Export the currently selected connection</value>
+  </data>
+  <data name="strExportSelectedFolder" xml:space="preserve">
+    <value>Export the currently selected folder</value>
+  </data>
+  <data name="strExportToFileMenuItem" xml:space="preserve">
+    <value>&amp;Export to File...</value>
   </data>
   <data name="strExtApp" xml:space="preserve">
     <value>Ext. App</value>
@@ -687,8 +714,14 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="strFAMFAMFAMAttributionURL" xml:space="preserve">
     <value>http://www.famfamfam.com/</value>
   </data>
+  <data name="strFileFormatLabel" xml:space="preserve">
+    <value>File &amp;Format:</value>
+  </data>
   <data name="strFilterAll" xml:space="preserve">
     <value>All Files (*.*)</value>
+  </data>
+  <data name="strFilterAllImportable" xml:space="preserve">
+    <value>All importable files</value>
   </data>
   <data name="strFilterApplication" xml:space="preserve">
     <value>Application Files (*.exe)</value>
@@ -698,6 +731,9 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="strFiltermRemoteXML" xml:space="preserve">
     <value>mRemote XML Files (*.xml)</value>
+  </data>
+  <data name="strFilterPuttyConnectionManager" xml:space="preserve">
+    <value>PuTTY Connection Manager files</value>
   </data>
   <data name="strFilterRdgFiles" xml:space="preserve">
     <value>Remote Desktop Connection Manager files (*.rdg)</value>
@@ -797,6 +833,27 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   </data>
   <data name="strImportExport" xml:space="preserve">
     <value>Import/Export</value>
+  </data>
+  <data name="strImportFileFailedContent" xml:space="preserve">
+    <value>An error occurred while importing the file, "{0}".</value>
+  </data>
+  <data name="strImportFileFailedMainInstruction" xml:space="preserve">
+    <value>Import failed</value>
+  </data>
+  <data name="strImportFromFileMenuItem" xml:space="preserve">
+    <value>Import from &amp;File...</value>
+  </data>
+  <data name="strImportLocationCommandButtons" xml:space="preserve">
+    <value>Under the root{0}{1}|Under the selected folder{0}{2}</value>
+  </data>
+  <data name="strImportLocationContent" xml:space="preserve">
+    <value>Where would you like the imported items to be placed?</value>
+  </data>
+  <data name="strImportLocationMainInstruction" xml:space="preserve">
+    <value>Import location</value>
+  </data>
+  <data name="strImportMenuItem" xml:space="preserve">
+    <value>&amp;Import</value>
   </data>
   <data name="strImportmRemoteXML" xml:space="preserve">
     <value>Import mRemote/mRemoteNG XML</value>
@@ -1179,6 +1236,12 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="strMoveUp" xml:space="preserve">
     <value>Move up</value>
   </data>
+  <data name="strMremoteNgCsv" xml:space="preserve">
+    <value>mRemoteNG CSV</value>
+  </data>
+  <data name="strMremoteNgXml" xml:space="preserve">
+    <value>mRemoteNG XML</value>
+  </data>
   <data name="strMyCurrentWindowsCreds" xml:space="preserve">
     <value>My current credentials (Windows logon information)</value>
   </data>
@@ -1290,6 +1353,9 @@ If you run into such an error, please create a new connection file!</value>
   </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
     <value>Please fill all fields</value>
+  </data>
+  <data name="strPortScanComplete" xml:space="preserve">
+    <value>Port scan complete.</value>
   </data>
   <data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Couldn't load PortScan panel!</value>
@@ -2257,6 +2323,9 @@ mRemoteNG will now quit and begin with the installation.</value>
   </data>
   <data name="strVersion" xml:space="preserve">
     <value>Version</value>
+  </data>
+  <data name="strVisionAppRemoteDesktopCsv" xml:space="preserve">
+    <value>visionapp Remote Desktop 2008 CSV</value>
   </data>
   <data name="strVnc" xml:space="preserve">
     <value>VNC</value>

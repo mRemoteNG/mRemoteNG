@@ -23,11 +23,6 @@
             Friend WithEvents cMenTreeDisconnect As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeSep2 As System.Windows.Forms.ToolStripSeparator
             Friend WithEvents cMenTreeToolsTransferFile As System.Windows.Forms.ToolStripMenuItem
-            Friend WithEvents cMenTreeToolsImportExport As System.Windows.Forms.ToolStripMenuItem
-            Friend WithEvents cMenTreeToolsImportExportExportmRemoteXML As System.Windows.Forms.ToolStripMenuItem
-            Friend WithEvents cMenTreeToolsImportExportImportmRemoteXML As System.Windows.Forms.ToolStripMenuItem
-            Friend WithEvents cMenTreeToolsImportExportSep1 As System.Windows.Forms.ToolStripSeparator
-            Friend WithEvents cMenTreeToolsImportExportImportFromAD As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeToolsSort As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeToolsSortAscending As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeToolsSortDescending As System.Windows.Forms.ToolStripMenuItem
@@ -38,26 +33,19 @@
             Friend WithEvents cMenTreeMoveUp As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeMoveDown As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-            Friend WithEvents cMenTreeToolsImportExportImportFromRDPFiles As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeToolsExternalApps As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeDuplicate As System.Windows.Forms.ToolStripMenuItem
-            Friend WithEvents cMenTreeToolsImportExportImportFromPortScan As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeConnectWithOptionsChoosePanelBeforeConnecting As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents cMenTreeConnectWithOptionsDontConnectToConsoleSession As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents mMenSortAscending As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents mMenAddConnection As System.Windows.Forms.ToolStripMenuItem
             Friend WithEvents mMenAddFolder As System.Windows.Forms.ToolStripMenuItem
-            Friend WithEvents cMenTreeToolsImportExportImportFromRDGFiles As System.Windows.Forms.ToolStripMenuItem
             Public WithEvents tvConnections As System.Windows.Forms.TreeView
             Private Sub InitializeComponent()
                 Me.components = New System.ComponentModel.Container()
                 Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Connections")
-                Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Tree))
                 Me.tvConnections = New System.Windows.Forms.TreeView()
                 Me.cMenTree = New System.Windows.Forms.ContextMenuStrip(Me.components)
-                Me.cMenTreeAddConnection = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeAddFolder = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeSep1 = New System.Windows.Forms.ToolStripSeparator()
                 Me.cMenTreeConnect = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeConnectWithOptions = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeConnectWithOptionsConnectToConsoleSession = New System.Windows.Forms.ToolStripMenuItem()
@@ -66,25 +54,26 @@
                 Me.cMenTreeConnectWithOptionsNoCredentials = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeDisconnect = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeSep2 = New System.Windows.Forms.ToolStripSeparator()
-                Me.cMenTreeToolsTransferFile = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeToolsImportExport = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeToolsImportExportExportmRemoteXML = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeToolsImportExportImportmRemoteXML = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeToolsImportExportSep1 = New System.Windows.Forms.ToolStripSeparator()
-                Me.cMenTreeToolsImportExportImportFromAD = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeToolsImportExportImportFromPortScan = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeToolsImportExportImportFromRDPFiles = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeToolsImportExportImportFromRDGFiles = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeToolsSort = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeToolsSortAscending = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeToolsSortDescending = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenTreeSep1 = New System.Windows.Forms.ToolStripSeparator()
                 Me.cMenTreeToolsExternalApps = New System.Windows.Forms.ToolStripMenuItem()
-                Me.cMenTreeSep3 = New System.Windows.Forms.ToolStripSeparator()
+                Me.cMenTreeToolsTransferFile = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenTreeSep2 = New System.Windows.Forms.ToolStripSeparator()
                 Me.cMenTreeDuplicate = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeRename = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeDelete = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenTreeSep3 = New System.Windows.Forms.ToolStripSeparator()
+                Me.cMenTreeImport = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenTreeImportFile = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenTreeImportActiveDirectory = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenTreeImportPortScan = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenTreeExportFile = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeSep4 = New System.Windows.Forms.ToolStripSeparator()
+                Me.cMenTreeAddConnection = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenTreeAddFolder = New System.Windows.Forms.ToolStripMenuItem()
+                Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
+                Me.cMenTreeToolsSort = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenTreeToolsSortAscending = New System.Windows.Forms.ToolStripMenuItem()
+                Me.cMenTreeToolsSortDescending = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeMoveUp = New System.Windows.Forms.ToolStripMenuItem()
                 Me.cMenTreeMoveDown = New System.Windows.Forms.ToolStripMenuItem()
                 Me.imgListTree = New System.Windows.Forms.ImageList(Me.components)
@@ -128,29 +117,10 @@
                 'cMenTree
                 '
                 Me.cMenTree.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.cMenTree.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeAddConnection, Me.cMenTreeAddFolder, Me.cMenTreeSep1, Me.cMenTreeConnect, Me.cMenTreeConnectWithOptions, Me.cMenTreeDisconnect, Me.cMenTreeSep2, Me.cMenTreeToolsTransferFile, Me.cMenTreeToolsImportExport, Me.cMenTreeToolsSort, Me.cMenTreeToolsExternalApps, Me.cMenTreeSep3, Me.cMenTreeDuplicate, Me.cMenTreeRename, Me.cMenTreeDelete, Me.cMenTreeSep4, Me.cMenTreeMoveUp, Me.cMenTreeMoveDown})
+                Me.cMenTree.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeConnect, Me.cMenTreeConnectWithOptions, Me.cMenTreeDisconnect, Me.cMenTreeSep1, Me.cMenTreeToolsExternalApps, Me.cMenTreeToolsTransferFile, Me.cMenTreeSep2, Me.cMenTreeDuplicate, Me.cMenTreeRename, Me.cMenTreeDelete, Me.cMenTreeSep3, Me.cMenTreeImport, Me.cMenTreeExportFile, Me.cMenTreeSep4, Me.cMenTreeAddConnection, Me.cMenTreeAddFolder, Me.ToolStripSeparator1, Me.cMenTreeToolsSort, Me.cMenTreeMoveUp, Me.cMenTreeMoveDown})
                 Me.cMenTree.Name = "cMenTree"
                 Me.cMenTree.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional
-                Me.cMenTree.Size = New System.Drawing.Size(187, 358)
-                '
-                'cMenTreeAddConnection
-                '
-                Me.cMenTreeAddConnection.Image = Global.mRemoteNG.My.Resources.Resources.Connection_Add
-                Me.cMenTreeAddConnection.Name = "cMenTreeAddConnection"
-                Me.cMenTreeAddConnection.Size = New System.Drawing.Size(186, 22)
-                Me.cMenTreeAddConnection.Text = "New Connection"
-                '
-                'cMenTreeAddFolder
-                '
-                Me.cMenTreeAddFolder.Image = Global.mRemoteNG.My.Resources.Resources.Folder_Add
-                Me.cMenTreeAddFolder.Name = "cMenTreeAddFolder"
-                Me.cMenTreeAddFolder.Size = New System.Drawing.Size(186, 22)
-                Me.cMenTreeAddFolder.Text = "New Folder"
-                '
-                'cMenTreeSep1
-                '
-                Me.cMenTreeSep1.Name = "cMenTreeSep1"
-                Me.cMenTreeSep1.Size = New System.Drawing.Size(183, 6)
+                Me.cMenTree.Size = New System.Drawing.Size(187, 386)
                 '
                 'cMenTreeConnect
                 '
@@ -211,92 +181,10 @@
                 Me.cMenTreeDisconnect.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeDisconnect.Text = "Disconnect"
                 '
-                'cMenTreeSep2
+                'cMenTreeSep1
                 '
-                Me.cMenTreeSep2.Name = "cMenTreeSep2"
-                Me.cMenTreeSep2.Size = New System.Drawing.Size(183, 6)
-                '
-                'cMenTreeToolsTransferFile
-                '
-                Me.cMenTreeToolsTransferFile.Image = Global.mRemoteNG.My.Resources.Resources.SSHTransfer
-                Me.cMenTreeToolsTransferFile.Name = "cMenTreeToolsTransferFile"
-                Me.cMenTreeToolsTransferFile.Size = New System.Drawing.Size(186, 22)
-                Me.cMenTreeToolsTransferFile.Text = "Transfer File (SSH)"
-                '
-                'cMenTreeToolsImportExport
-                '
-                Me.cMenTreeToolsImportExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeToolsImportExportExportmRemoteXML, Me.cMenTreeToolsImportExportImportmRemoteXML, Me.cMenTreeToolsImportExportSep1, Me.cMenTreeToolsImportExportImportFromAD, Me.cMenTreeToolsImportExportImportFromPortScan, Me.cMenTreeToolsImportExportImportFromRDPFiles, Me.cMenTreeToolsImportExportImportFromRDGFiles})
-                Me.cMenTreeToolsImportExport.Name = "cMenTreeToolsImportExport"
-                Me.cMenTreeToolsImportExport.Size = New System.Drawing.Size(186, 22)
-                Me.cMenTreeToolsImportExport.Text = "Import/Export"
-                '
-                'cMenTreeToolsImportExportExportmRemoteXML
-                '
-                Me.cMenTreeToolsImportExportExportmRemoteXML.Image = Global.mRemoteNG.My.Resources.Resources.Connections_SaveAs
-                Me.cMenTreeToolsImportExportExportmRemoteXML.Name = "cMenTreeToolsImportExportExportmRemoteXML"
-                Me.cMenTreeToolsImportExportExportmRemoteXML.Size = New System.Drawing.Size(204, 22)
-                Me.cMenTreeToolsImportExportExportmRemoteXML.Text = "Export mRemote XML"
-                '
-                'cMenTreeToolsImportExportImportmRemoteXML
-                '
-                Me.cMenTreeToolsImportExportImportmRemoteXML.Image = Global.mRemoteNG.My.Resources.Resources.Connections_Load
-                Me.cMenTreeToolsImportExportImportmRemoteXML.Name = "cMenTreeToolsImportExportImportmRemoteXML"
-                Me.cMenTreeToolsImportExportImportmRemoteXML.Size = New System.Drawing.Size(204, 22)
-                Me.cMenTreeToolsImportExportImportmRemoteXML.Text = "Import mRemote XML"
-                '
-                'cMenTreeToolsImportExportSep1
-                '
-                Me.cMenTreeToolsImportExportSep1.Name = "cMenTreeToolsImportExportSep1"
-                Me.cMenTreeToolsImportExportSep1.Size = New System.Drawing.Size(201, 6)
-                '
-                'cMenTreeToolsImportExportImportFromAD
-                '
-                Me.cMenTreeToolsImportExportImportFromAD.Image = Global.mRemoteNG.My.Resources.Resources.ActiveDirectory
-                Me.cMenTreeToolsImportExportImportFromAD.Name = "cMenTreeToolsImportExportImportFromAD"
-                Me.cMenTreeToolsImportExportImportFromAD.Size = New System.Drawing.Size(204, 22)
-                Me.cMenTreeToolsImportExportImportFromAD.Text = "Import from Active Directory"
-                '
-                'cMenTreeToolsImportExportImportFromPortScan
-                '
-                Me.cMenTreeToolsImportExportImportFromPortScan.Image = Global.mRemoteNG.My.Resources.Resources.PortScan
-                Me.cMenTreeToolsImportExportImportFromPortScan.Name = "cMenTreeToolsImportExportImportFromPortScan"
-                Me.cMenTreeToolsImportExportImportFromPortScan.Size = New System.Drawing.Size(204, 22)
-                Me.cMenTreeToolsImportExportImportFromPortScan.Text = "Import from Port Scan"
-                '
-                'cMenTreeToolsImportExportImportFromRDPFiles
-                '
-                Me.cMenTreeToolsImportExportImportFromRDPFiles.Image = Global.mRemoteNG.My.Resources.Resources.RDP
-                Me.cMenTreeToolsImportExportImportFromRDPFiles.Name = "cMenTreeToolsImportExportImportFromRDPFiles"
-                Me.cMenTreeToolsImportExportImportFromRDPFiles.Size = New System.Drawing.Size(204, 22)
-                Me.cMenTreeToolsImportExportImportFromRDPFiles.Text = "Import from .RDP file(s)"
-                '
-                'cMenTreeToolsImportExportImportFromRDGFiles
-                '
-                Me.cMenTreeToolsImportExportImportFromRDGFiles.Image = CType(resources.GetObject("cMenTreeToolsImportExportImportFromRDGFiles.Image"), System.Drawing.Image)
-                Me.cMenTreeToolsImportExportImportFromRDGFiles.Name = "cMenTreeToolsImportExportImportFromRDGFiles"
-                Me.cMenTreeToolsImportExportImportFromRDGFiles.Size = New System.Drawing.Size(204, 22)
-                Me.cMenTreeToolsImportExportImportFromRDGFiles.Text = "Import from .RDG file(s)"
-                '
-                'cMenTreeToolsSort
-                '
-                Me.cMenTreeToolsSort.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeToolsSortAscending, Me.cMenTreeToolsSortDescending})
-                Me.cMenTreeToolsSort.Name = "cMenTreeToolsSort"
-                Me.cMenTreeToolsSort.Size = New System.Drawing.Size(186, 22)
-                Me.cMenTreeToolsSort.Text = "Sort"
-                '
-                'cMenTreeToolsSortAscending
-                '
-                Me.cMenTreeToolsSortAscending.Image = Global.mRemoteNG.My.Resources.Resources.Sort_AZ
-                Me.cMenTreeToolsSortAscending.Name = "cMenTreeToolsSortAscending"
-                Me.cMenTreeToolsSortAscending.Size = New System.Drawing.Size(157, 22)
-                Me.cMenTreeToolsSortAscending.Text = "Ascending (A-Z)"
-                '
-                'cMenTreeToolsSortDescending
-                '
-                Me.cMenTreeToolsSortDescending.Image = Global.mRemoteNG.My.Resources.Resources.Sort_ZA
-                Me.cMenTreeToolsSortDescending.Name = "cMenTreeToolsSortDescending"
-                Me.cMenTreeToolsSortDescending.Size = New System.Drawing.Size(157, 22)
-                Me.cMenTreeToolsSortDescending.Text = "Descending (Z-A)"
+                Me.cMenTreeSep1.Name = "cMenTreeSep1"
+                Me.cMenTreeSep1.Size = New System.Drawing.Size(183, 6)
                 '
                 'cMenTreeToolsExternalApps
                 '
@@ -305,10 +193,17 @@
                 Me.cMenTreeToolsExternalApps.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeToolsExternalApps.Text = "External Applications"
                 '
-                'cMenTreeSep3
+                'cMenTreeToolsTransferFile
                 '
-                Me.cMenTreeSep3.Name = "cMenTreeSep3"
-                Me.cMenTreeSep3.Size = New System.Drawing.Size(183, 6)
+                Me.cMenTreeToolsTransferFile.Image = Global.mRemoteNG.My.Resources.Resources.SSHTransfer
+                Me.cMenTreeToolsTransferFile.Name = "cMenTreeToolsTransferFile"
+                Me.cMenTreeToolsTransferFile.Size = New System.Drawing.Size(186, 22)
+                Me.cMenTreeToolsTransferFile.Text = "Transfer File (SSH)"
+                '
+                'cMenTreeSep2
+                '
+                Me.cMenTreeSep2.Name = "cMenTreeSep2"
+                Me.cMenTreeSep2.Size = New System.Drawing.Size(183, 6)
                 '
                 'cMenTreeDuplicate
                 '
@@ -334,10 +229,86 @@
                 Me.cMenTreeDelete.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeDelete.Text = "Delete"
                 '
+                'cMenTreeSep3
+                '
+                Me.cMenTreeSep3.Name = "cMenTreeSep3"
+                Me.cMenTreeSep3.Size = New System.Drawing.Size(183, 6)
+                '
+                'cMenTreeImport
+                '
+                Me.cMenTreeImport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeImportFile, Me.cMenTreeImportActiveDirectory, Me.cMenTreeImportPortScan})
+                Me.cMenTreeImport.Name = "cMenTreeImport"
+                Me.cMenTreeImport.Size = New System.Drawing.Size(186, 22)
+                Me.cMenTreeImport.Text = "&Import"
+                '
+                'cMenTreeImportFile
+                '
+                Me.cMenTreeImportFile.Name = "cMenTreeImportFile"
+                Me.cMenTreeImportFile.Size = New System.Drawing.Size(213, 22)
+                Me.cMenTreeImportFile.Text = "Import from &File..."
+                '
+                'cMenTreeImportActiveDirectory
+                '
+                Me.cMenTreeImportActiveDirectory.Name = "cMenTreeImportActiveDirectory"
+                Me.cMenTreeImportActiveDirectory.Size = New System.Drawing.Size(213, 22)
+                Me.cMenTreeImportActiveDirectory.Text = "Import from &Active Directory..."
+                '
+                'cMenTreeImportPortScan
+                '
+                Me.cMenTreeImportPortScan.Name = "cMenTreeImportPortScan"
+                Me.cMenTreeImportPortScan.Size = New System.Drawing.Size(213, 22)
+                Me.cMenTreeImportPortScan.Text = "Import from &Port Scan..."
+                '
+                'cMenTreeExportFile
+                '
+                Me.cMenTreeExportFile.Name = "cMenTreeExportFile"
+                Me.cMenTreeExportFile.Size = New System.Drawing.Size(186, 22)
+                Me.cMenTreeExportFile.Text = "&Export to File..."
+                '
                 'cMenTreeSep4
                 '
                 Me.cMenTreeSep4.Name = "cMenTreeSep4"
                 Me.cMenTreeSep4.Size = New System.Drawing.Size(183, 6)
+                '
+                'cMenTreeAddConnection
+                '
+                Me.cMenTreeAddConnection.Image = Global.mRemoteNG.My.Resources.Resources.Connection_Add
+                Me.cMenTreeAddConnection.Name = "cMenTreeAddConnection"
+                Me.cMenTreeAddConnection.Size = New System.Drawing.Size(186, 22)
+                Me.cMenTreeAddConnection.Text = "New Connection"
+                '
+                'cMenTreeAddFolder
+                '
+                Me.cMenTreeAddFolder.Image = Global.mRemoteNG.My.Resources.Resources.Folder_Add
+                Me.cMenTreeAddFolder.Name = "cMenTreeAddFolder"
+                Me.cMenTreeAddFolder.Size = New System.Drawing.Size(186, 22)
+                Me.cMenTreeAddFolder.Text = "New Folder"
+                '
+                'ToolStripSeparator1
+                '
+                Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+                Me.ToolStripSeparator1.Size = New System.Drawing.Size(183, 6)
+                '
+                'cMenTreeToolsSort
+                '
+                Me.cMenTreeToolsSort.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.cMenTreeToolsSortAscending, Me.cMenTreeToolsSortDescending})
+                Me.cMenTreeToolsSort.Name = "cMenTreeToolsSort"
+                Me.cMenTreeToolsSort.Size = New System.Drawing.Size(186, 22)
+                Me.cMenTreeToolsSort.Text = "Sort"
+                '
+                'cMenTreeToolsSortAscending
+                '
+                Me.cMenTreeToolsSortAscending.Image = Global.mRemoteNG.My.Resources.Resources.Sort_AZ
+                Me.cMenTreeToolsSortAscending.Name = "cMenTreeToolsSortAscending"
+                Me.cMenTreeToolsSortAscending.Size = New System.Drawing.Size(157, 22)
+                Me.cMenTreeToolsSortAscending.Text = "Ascending (A-Z)"
+                '
+                'cMenTreeToolsSortDescending
+                '
+                Me.cMenTreeToolsSortDescending.Image = Global.mRemoteNG.My.Resources.Resources.Sort_ZA
+                Me.cMenTreeToolsSortDescending.Name = "cMenTreeToolsSortDescending"
+                Me.cMenTreeToolsSortDescending.Size = New System.Drawing.Size(157, 22)
+                Me.cMenTreeToolsSortDescending.Text = "Descending (Z-A)"
                 '
                 'cMenTreeMoveUp
                 '
@@ -475,6 +446,12 @@
                 Me.PerformLayout()
 
             End Sub
+            Friend WithEvents cMenTreeImport As System.Windows.Forms.ToolStripMenuItem
+            Friend WithEvents cMenTreeExportFile As System.Windows.Forms.ToolStripMenuItem
+            Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+            Friend WithEvents cMenTreeImportFile As System.Windows.Forms.ToolStripMenuItem
+            Friend WithEvents cMenTreeImportActiveDirectory As System.Windows.Forms.ToolStripMenuItem
+            Friend WithEvents cMenTreeImportPortScan As System.Windows.Forms.ToolStripMenuItem
 #End Region
         End Class
     End Namespace

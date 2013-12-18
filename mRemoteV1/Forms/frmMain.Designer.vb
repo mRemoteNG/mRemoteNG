@@ -23,21 +23,21 @@ Partial Class frmMain
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
-        Dim DockPanelSkin1 As WeifenLuo.WinFormsUI.Docking.DockPanelSkin = New WeifenLuo.WinFormsUI.Docking.DockPanelSkin()
-        Dim AutoHideStripSkin1 As WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin = New WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin()
-        Dim DockPanelGradient1 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient()
-        Dim TabGradient1 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
-        Dim DockPaneStripSkin1 As WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin = New WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin()
-        Dim DockPaneStripGradient1 As WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient = New WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient()
-        Dim TabGradient2 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
-        Dim DockPanelGradient2 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient()
-        Dim TabGradient3 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
-        Dim DockPaneStripToolWindowGradient1 As WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient = New WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient()
-        Dim TabGradient4 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
-        Dim TabGradient5 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
-        Dim DockPanelGradient3 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient()
-        Dim TabGradient6 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
-        Dim TabGradient7 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim DockPanelSkin2 As WeifenLuo.WinFormsUI.Docking.DockPanelSkin = New WeifenLuo.WinFormsUI.Docking.DockPanelSkin()
+        Dim AutoHideStripSkin2 As WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin = New WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin()
+        Dim DockPanelGradient4 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient()
+        Dim TabGradient8 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim DockPaneStripSkin2 As WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin = New WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin()
+        Dim DockPaneStripGradient2 As WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient = New WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient()
+        Dim TabGradient9 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim DockPanelGradient5 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient()
+        Dim TabGradient10 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim DockPaneStripToolWindowGradient2 As WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient = New WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient()
+        Dim TabGradient11 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim TabGradient12 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim DockPanelGradient6 As WeifenLuo.WinFormsUI.Docking.DockPanelGradient = New WeifenLuo.WinFormsUI.Docking.DockPanelGradient()
+        Dim TabGradient13 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
+        Dim TabGradient14 As WeifenLuo.WinFormsUI.Docking.TabGradient = New WeifenLuo.WinFormsUI.Docking.TabGradient()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmMain))
         Me.pnlDock = New WeifenLuo.WinFormsUI.Docking.DockPanel()
         Me.msMain = New System.Windows.Forms.MenuStrip()
@@ -50,13 +50,11 @@ Partial Class frmMain
         Me.mMenFileSave = New System.Windows.Forms.ToolStripMenuItem()
         Me.mMenFileSaveAs = New System.Windows.Forms.ToolStripMenuItem()
         Me.mMenFileSep2 = New System.Windows.Forms.ToolStripSeparator()
-        Me.mMenFileImportExport = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImportFromXMLFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImportFromRDPFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImportFromActiveDirectoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ImportFromPortScanToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-        Me.ExportToXMLFileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mMenFileImport = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mMenFileImportFromFile = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mMenFileImportFromActiveDirectory = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mMenFileImportFromPortScan = New System.Windows.Forms.ToolStripMenuItem()
+        Me.mMenFileExport = New System.Windows.Forms.ToolStripMenuItem()
         Me.mMenFileSep3 = New System.Windows.Forms.ToolStripSeparator()
         Me.mMenFileDelete = New System.Windows.Forms.ToolStripMenuItem()
         Me.mMenFileRename = New System.Windows.Forms.ToolStripMenuItem()
@@ -143,52 +141,52 @@ Partial Class frmMain
         Me.pnlDock.Location = New System.Drawing.Point(0, 0)
         Me.pnlDock.Name = "pnlDock"
         Me.pnlDock.Size = New System.Drawing.Size(842, 449)
-        DockPanelGradient1.EndColor = System.Drawing.SystemColors.ControlLight
-        DockPanelGradient1.StartColor = System.Drawing.SystemColors.ControlLight
-        AutoHideStripSkin1.DockStripGradient = DockPanelGradient1
-        TabGradient1.EndColor = System.Drawing.SystemColors.Control
-        TabGradient1.StartColor = System.Drawing.SystemColors.Control
-        TabGradient1.TextColor = System.Drawing.SystemColors.ControlDarkDark
-        AutoHideStripSkin1.TabGradient = TabGradient1
-        AutoHideStripSkin1.TextFont = New System.Drawing.Font("Segoe UI", 9.0!)
-        DockPanelSkin1.AutoHideStripSkin = AutoHideStripSkin1
-        TabGradient2.EndColor = System.Drawing.SystemColors.ControlLightLight
-        TabGradient2.StartColor = System.Drawing.SystemColors.ControlLightLight
-        TabGradient2.TextColor = System.Drawing.SystemColors.ControlText
-        DockPaneStripGradient1.ActiveTabGradient = TabGradient2
-        DockPanelGradient2.EndColor = System.Drawing.SystemColors.Control
-        DockPanelGradient2.StartColor = System.Drawing.SystemColors.Control
-        DockPaneStripGradient1.DockStripGradient = DockPanelGradient2
-        TabGradient3.EndColor = System.Drawing.SystemColors.ControlLight
-        TabGradient3.StartColor = System.Drawing.SystemColors.ControlLight
-        TabGradient3.TextColor = System.Drawing.SystemColors.ControlText
-        DockPaneStripGradient1.InactiveTabGradient = TabGradient3
-        DockPaneStripSkin1.DocumentGradient = DockPaneStripGradient1
-        DockPaneStripSkin1.TextFont = New System.Drawing.Font("Segoe UI", 9.0!)
-        TabGradient4.EndColor = System.Drawing.SystemColors.ActiveCaption
-        TabGradient4.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical
-        TabGradient4.StartColor = System.Drawing.SystemColors.GradientActiveCaption
-        TabGradient4.TextColor = System.Drawing.SystemColors.ActiveCaptionText
-        DockPaneStripToolWindowGradient1.ActiveCaptionGradient = TabGradient4
-        TabGradient5.EndColor = System.Drawing.SystemColors.Control
-        TabGradient5.StartColor = System.Drawing.SystemColors.Control
-        TabGradient5.TextColor = System.Drawing.SystemColors.ControlText
-        DockPaneStripToolWindowGradient1.ActiveTabGradient = TabGradient5
-        DockPanelGradient3.EndColor = System.Drawing.SystemColors.ControlLight
-        DockPanelGradient3.StartColor = System.Drawing.SystemColors.ControlLight
-        DockPaneStripToolWindowGradient1.DockStripGradient = DockPanelGradient3
-        TabGradient6.EndColor = System.Drawing.SystemColors.GradientInactiveCaption
-        TabGradient6.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical
-        TabGradient6.StartColor = System.Drawing.SystemColors.GradientInactiveCaption
-        TabGradient6.TextColor = System.Drawing.SystemColors.ControlText
-        DockPaneStripToolWindowGradient1.InactiveCaptionGradient = TabGradient6
-        TabGradient7.EndColor = System.Drawing.Color.Transparent
-        TabGradient7.StartColor = System.Drawing.Color.Transparent
-        TabGradient7.TextColor = System.Drawing.SystemColors.ControlDarkDark
-        DockPaneStripToolWindowGradient1.InactiveTabGradient = TabGradient7
-        DockPaneStripSkin1.ToolWindowGradient = DockPaneStripToolWindowGradient1
-        DockPanelSkin1.DockPaneStripSkin = DockPaneStripSkin1
-        Me.pnlDock.Skin = DockPanelSkin1
+        DockPanelGradient4.EndColor = System.Drawing.SystemColors.ControlLight
+        DockPanelGradient4.StartColor = System.Drawing.SystemColors.ControlLight
+        AutoHideStripSkin2.DockStripGradient = DockPanelGradient4
+        TabGradient8.EndColor = System.Drawing.SystemColors.Control
+        TabGradient8.StartColor = System.Drawing.SystemColors.Control
+        TabGradient8.TextColor = System.Drawing.SystemColors.ControlDarkDark
+        AutoHideStripSkin2.TabGradient = TabGradient8
+        AutoHideStripSkin2.TextFont = New System.Drawing.Font("Segoe UI", 9.0!)
+        DockPanelSkin2.AutoHideStripSkin = AutoHideStripSkin2
+        TabGradient9.EndColor = System.Drawing.SystemColors.ControlLightLight
+        TabGradient9.StartColor = System.Drawing.SystemColors.ControlLightLight
+        TabGradient9.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripGradient2.ActiveTabGradient = TabGradient9
+        DockPanelGradient5.EndColor = System.Drawing.SystemColors.Control
+        DockPanelGradient5.StartColor = System.Drawing.SystemColors.Control
+        DockPaneStripGradient2.DockStripGradient = DockPanelGradient5
+        TabGradient10.EndColor = System.Drawing.SystemColors.ControlLight
+        TabGradient10.StartColor = System.Drawing.SystemColors.ControlLight
+        TabGradient10.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripGradient2.InactiveTabGradient = TabGradient10
+        DockPaneStripSkin2.DocumentGradient = DockPaneStripGradient2
+        DockPaneStripSkin2.TextFont = New System.Drawing.Font("Segoe UI", 9.0!)
+        TabGradient11.EndColor = System.Drawing.SystemColors.ActiveCaption
+        TabGradient11.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical
+        TabGradient11.StartColor = System.Drawing.SystemColors.GradientActiveCaption
+        TabGradient11.TextColor = System.Drawing.SystemColors.ActiveCaptionText
+        DockPaneStripToolWindowGradient2.ActiveCaptionGradient = TabGradient11
+        TabGradient12.EndColor = System.Drawing.SystemColors.Control
+        TabGradient12.StartColor = System.Drawing.SystemColors.Control
+        TabGradient12.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripToolWindowGradient2.ActiveTabGradient = TabGradient12
+        DockPanelGradient6.EndColor = System.Drawing.SystemColors.ControlLight
+        DockPanelGradient6.StartColor = System.Drawing.SystemColors.ControlLight
+        DockPaneStripToolWindowGradient2.DockStripGradient = DockPanelGradient6
+        TabGradient13.EndColor = System.Drawing.SystemColors.GradientInactiveCaption
+        TabGradient13.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical
+        TabGradient13.StartColor = System.Drawing.SystemColors.GradientInactiveCaption
+        TabGradient13.TextColor = System.Drawing.SystemColors.ControlText
+        DockPaneStripToolWindowGradient2.InactiveCaptionGradient = TabGradient13
+        TabGradient14.EndColor = System.Drawing.Color.Transparent
+        TabGradient14.StartColor = System.Drawing.Color.Transparent
+        TabGradient14.TextColor = System.Drawing.SystemColors.ControlDarkDark
+        DockPaneStripToolWindowGradient2.InactiveTabGradient = TabGradient14
+        DockPaneStripSkin2.ToolWindowGradient = DockPaneStripToolWindowGradient2
+        DockPanelSkin2.DockPaneStripSkin = DockPaneStripSkin2
+        Me.pnlDock.Skin = DockPanelSkin2
         Me.pnlDock.TabIndex = 13
         '
         'msMain
@@ -207,7 +205,7 @@ Partial Class frmMain
         '
         'mMenFile
         '
-        Me.mMenFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenFileNewConnection, Me.mMenFileNewFolder, Me.mMenFileSep1, Me.mMenFileNew, Me.mMenFileLoad, Me.mMenFileSave, Me.mMenFileSaveAs, Me.mMenFileSep2, Me.mMenFileImportExport, Me.mMenFileSep3, Me.mMenFileDelete, Me.mMenFileRename, Me.mMenFileDuplicate, Me.mMenFileSep4, Me.mMenFileExit})
+        Me.mMenFile.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenFileNewConnection, Me.mMenFileNewFolder, Me.mMenFileSep1, Me.mMenFileNew, Me.mMenFileLoad, Me.mMenFileSave, Me.mMenFileSaveAs, Me.mMenFileSep2, Me.mMenFileDelete, Me.mMenFileRename, Me.mMenFileDuplicate, Me.mMenFileSep3, Me.mMenFileImport, Me.mMenFileExport, Me.mMenFileSep4, Me.mMenFileExit})
         Me.mMenFile.Name = "mMenFile"
         Me.mMenFile.Size = New System.Drawing.Size(37, 20)
         Me.mMenFile.Text = "&File"
@@ -271,54 +269,41 @@ Partial Class frmMain
         Me.mMenFileSep2.Name = "mMenFileSep2"
         Me.mMenFileSep2.Size = New System.Drawing.Size(278, 6)
         '
-        'mMenFileImportExport
+        'mMenFileImport
         '
-        Me.mMenFileImportExport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ImportFromXMLFileToolStripMenuItem, Me.ImportFromRDPFileToolStripMenuItem, Me.ImportFromActiveDirectoryToolStripMenuItem, Me.ImportFromPortScanToolStripMenuItem, Me.ToolStripSeparator6, Me.ExportToXMLFileToolStripMenuItem})
-        Me.mMenFileImportExport.Name = "mMenFileImportExport"
-        Me.mMenFileImportExport.Size = New System.Drawing.Size(281, 22)
-        Me.mMenFileImportExport.Text = "Import/Export Folder"
-        Me.mMenFileImportExport.Visible = False
+        Me.mMenFileImport.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenFileImportFromFile, Me.mMenFileImportFromActiveDirectory, Me.mMenFileImportFromPortScan})
+        Me.mMenFileImport.Name = "mMenFileImport"
+        Me.mMenFileImport.Size = New System.Drawing.Size(281, 22)
+        Me.mMenFileImport.Text = "&Import"
         '
-        'ImportFromXMLFileToolStripMenuItem
+        'mMenFileImportFromFile
         '
-        Me.ImportFromXMLFileToolStripMenuItem.Name = "ImportFromXMLFileToolStripMenuItem"
-        Me.ImportFromXMLFileToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
-        Me.ImportFromXMLFileToolStripMenuItem.Text = "Import from XML File..."
+        Me.mMenFileImportFromFile.Name = "mMenFileImportFromFile"
+        Me.mMenFileImportFromFile.Size = New System.Drawing.Size(235, 22)
+        Me.mMenFileImportFromFile.Text = "Import from &File..."
         '
-        'ImportFromRDPFileToolStripMenuItem
+        'mMenFileImportFromActiveDirectory
         '
-        Me.ImportFromRDPFileToolStripMenuItem.Name = "ImportFromRDPFileToolStripMenuItem"
-        Me.ImportFromRDPFileToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
-        Me.ImportFromRDPFileToolStripMenuItem.Text = "Import from RDP File..."
+        Me.mMenFileImportFromActiveDirectory.Name = "mMenFileImportFromActiveDirectory"
+        Me.mMenFileImportFromActiveDirectory.Size = New System.Drawing.Size(235, 22)
+        Me.mMenFileImportFromActiveDirectory.Text = "Import from &Active Directory..."
         '
-        'ImportFromActiveDirectoryToolStripMenuItem
+        'mMenFileImportFromPortScan
         '
-        Me.ImportFromActiveDirectoryToolStripMenuItem.Name = "ImportFromActiveDirectoryToolStripMenuItem"
-        Me.ImportFromActiveDirectoryToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
-        Me.ImportFromActiveDirectoryToolStripMenuItem.Text = "Import from Active Directory..."
+        Me.mMenFileImportFromPortScan.Name = "mMenFileImportFromPortScan"
+        Me.mMenFileImportFromPortScan.Size = New System.Drawing.Size(235, 22)
+        Me.mMenFileImportFromPortScan.Text = "Import from &Port Scan..."
         '
-        'ImportFromPortScanToolStripMenuItem
+        'mMenFileExport
         '
-        Me.ImportFromPortScanToolStripMenuItem.Name = "ImportFromPortScanToolStripMenuItem"
-        Me.ImportFromPortScanToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
-        Me.ImportFromPortScanToolStripMenuItem.Text = "Import from Port Scan..."
-        '
-        'ToolStripSeparator6
-        '
-        Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(232, 6)
-        '
-        'ExportToXMLFileToolStripMenuItem
-        '
-        Me.ExportToXMLFileToolStripMenuItem.Name = "ExportToXMLFileToolStripMenuItem"
-        Me.ExportToXMLFileToolStripMenuItem.Size = New System.Drawing.Size(235, 22)
-        Me.ExportToXMLFileToolStripMenuItem.Text = "Export to XML File..."
+        Me.mMenFileExport.Name = "mMenFileExport"
+        Me.mMenFileExport.Size = New System.Drawing.Size(281, 22)
+        Me.mMenFileExport.Text = "&Export to File..."
         '
         'mMenFileSep3
         '
         Me.mMenFileSep3.Name = "mMenFileSep3"
         Me.mMenFileSep3.Size = New System.Drawing.Size(278, 6)
-        Me.mMenFileSep3.Visible = False
         '
         'mMenFileDelete
         '
@@ -910,13 +895,6 @@ Partial Class frmMain
     Friend WithEvents mMenFileSep2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mMenFileNewConnection As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenFileNewFolder As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mMenFileImportExport As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ImportFromXMLFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ImportFromRDPFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ImportFromActiveDirectoryToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ImportFromPortScanToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator6 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents ExportToXMLFileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenFileSep3 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents mMenFileDelete As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents mMenFileRename As System.Windows.Forms.ToolStripMenuItem
@@ -931,5 +909,10 @@ Partial Class frmMain
     Friend WithEvents mnuQuickConnectProtocol As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents btnConnections As System.Windows.Forms.ToolStripDropDownButton
     Friend WithEvents mnuConnections As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents mMenFileExport As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileImportFromFile As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileImportFromActiveDirectory As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileImportFromPortScan As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mMenFileImport As System.Windows.Forms.ToolStripMenuItem
 
 End Class

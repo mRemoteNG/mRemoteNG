@@ -1,4 +1,5 @@
 Imports System.IO
+Imports mRemoteNG.App
 Imports mRemoteNG.My
 Imports SharedLibraryNG
 Imports System.Text
@@ -162,12 +163,11 @@ Public Class frmMain
         mMenFileLoad.Text = My.Language.strMenuOpenConnectionFile
         mMenFileSave.Text = My.Language.strMenuSaveConnectionFile
         mMenFileSaveAs.Text = My.Language.strMenuSaveConnectionFileAs
-        mMenFileImportExport.Text = My.Language.strImportExport
-        ImportFromActiveDirectoryToolStripMenuItem.Text = My.Language.strImportAD
-        ImportFromPortScanToolStripMenuItem.Text = My.Language.strImportPortScan
-        ImportFromRDPFileToolStripMenuItem.Text = My.Language.strImportRDPFiles
-        ImportFromXMLFileToolStripMenuItem.Text = My.Language.strImportmRemoteXML
-        ExportToXMLFileToolStripMenuItem.Text = My.Language.strExportmRemoteXML
+        mMenFileImport.Text = Language.strImportMenuItem
+        mMenFileImportFromFile.Text = Language.strImportFromFileMenuItem
+        mMenFileImportFromActiveDirectory.Text = Language.strImportAD
+        mMenFileImportFromPortScan.Text = Language.strImportPortScan
+        mMenFileExport.Text = Language.strExportToFileMenuItem
         mMenFileExit.Text = My.Language.strMenuExit
 
         mMenView.Text = My.Language.strMenuView
@@ -402,7 +402,6 @@ Public Class frmMain
             Case Tree.Node.Type.Root
                 mMenFileNewConnection.Enabled = True
                 mMenFileNewFolder.Enabled = True
-                mMenFileImportExport.Enabled = True
                 mMenFileDelete.Enabled = False
                 mMenFileRename.Enabled = True
                 mMenFileDuplicate.Enabled = False
@@ -412,7 +411,6 @@ Public Class frmMain
             Case Tree.Node.Type.Container
                 mMenFileNewConnection.Enabled = True
                 mMenFileNewFolder.Enabled = True
-                mMenFileImportExport.Enabled = True
                 mMenFileDelete.Enabled = True
                 mMenFileRename.Enabled = True
                 mMenFileDuplicate.Enabled = True
@@ -422,7 +420,6 @@ Public Class frmMain
             Case Tree.Node.Type.Connection
                 mMenFileNewConnection.Enabled = True
                 mMenFileNewFolder.Enabled = True
-                mMenFileImportExport.Enabled = False
                 mMenFileDelete.Enabled = True
                 mMenFileRename.Enabled = True
                 mMenFileDuplicate.Enabled = True
@@ -432,7 +429,6 @@ Public Class frmMain
             Case Tree.Node.Type.PuttyRoot, Tree.Node.Type.PuttySession
                 mMenFileNewConnection.Enabled = False
                 mMenFileNewFolder.Enabled = False
-                mMenFileImportExport.Enabled = False
                 mMenFileDelete.Enabled = False
                 mMenFileRename.Enabled = False
                 mMenFileDuplicate.Enabled = False
@@ -442,7 +438,6 @@ Public Class frmMain
             Case Else
                 mMenFileNewConnection.Enabled = True
                 mMenFileNewFolder.Enabled = True
-                mMenFileImportExport.Enabled = False
                 mMenFileDelete.Enabled = False
                 mMenFileRename.Enabled = False
                 mMenFileDuplicate.Enabled = False
@@ -452,63 +447,77 @@ Public Class frmMain
         End Select
     End Sub
 
-    Private Sub mMenFileNewConnection_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileNewConnection.Click
-        App.Runtime.Windows.treeForm.AddConnection()
+    Private Shared Sub mMenFileNewConnection_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileNewConnection.Click
+        Windows.treeForm.AddConnection()
         SaveConnectionsBG()
     End Sub
 
-    Private Sub mMenFileNewFolder_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileNewFolder.Click
-        App.Runtime.Windows.treeForm.AddFolder()
+    Private Shared Sub mMenFileNewFolder_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileNewFolder.Click
+        Windows.treeForm.AddFolder()
         SaveConnectionsBG()
     End Sub
 
-    Private Sub mMenFileNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileNew.Click
-        Dim lD As SaveFileDialog = Tools.Controls.ConnectionsSaveAsDialog
-        If lD.ShowDialog = System.Windows.Forms.DialogResult.OK Then
-            NewConnections(lD.FileName)
-        Else
-            Exit Sub
-        End If
+    Private Shared Sub mMenFileNew_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileNew.Click
+        Dim saveFileDialog As SaveFileDialog = Tools.Controls.ConnectionsSaveAsDialog
+        If Not saveFileDialog.ShowDialog() = DialogResult.OK Then Return
+
+        NewConnections(saveFileDialog.FileName)
     End Sub
 
-    Private Sub mMenFileLoad_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileLoad.Click
-        If App.Runtime.IsConnectionsFileLoaded Then
-            Select Case MsgBox(My.Language.strSaveConnectionsFileBeforeOpeningAnother, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question)
+    Private Shared Sub mMenFileLoad_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileLoad.Click
+        If IsConnectionsFileLoaded Then
+            Select Case MsgBox(Language.strSaveConnectionsFileBeforeOpeningAnother, MsgBoxStyle.YesNoCancel Or MsgBoxStyle.Question)
                 Case MsgBoxResult.Yes
-                    App.Runtime.SaveConnections()
+                    SaveConnections()
                 Case MsgBoxResult.Cancel
-                    Exit Sub
+                    Return
             End Select
         End If
 
         LoadConnections(True)
     End Sub
 
-    Private Sub mMenFileSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileSave.Click
+    Private Shared Sub mMenFileSave_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileSave.Click
         SaveConnections()
     End Sub
 
-    Private Sub mMenFileSaveAs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileSaveAs.Click
+    Private Shared Sub mMenFileSaveAs_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileSaveAs.Click
         SaveConnectionsAs()
     End Sub
 
-    Private Sub mMenFileExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileExit.Click
-        App.Runtime.Shutdown.Quit()
-    End Sub
-
-    Private Sub mMenFileDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileDelete.Click
+    Private Shared Sub mMenFileDelete_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileDelete.Click
         Tree.Node.DeleteSelectedNode()
         SaveConnectionsBG()
     End Sub
 
-    Private Sub mMenFileRename_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileRename.Click
+    Private Shared Sub mMenFileRename_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileRename.Click
         Tree.Node.StartRenameSelectedNode()
         SaveConnectionsBG()
     End Sub
 
-    Private Sub mMenFileDuplicate_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenFileDuplicate.Click
+    Private Shared Sub mMenFileDuplicate_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileDuplicate.Click
         Tree.Node.CloneNode(Tree.Node.SelectedNode)
         SaveConnectionsBG()
+    End Sub
+
+    Private Shared Sub mMenFileImportFromFile_Click(sender As System.Object, e As EventArgs) Handles mMenFileImportFromFile.Click
+        Import.ImportFromFile(Windows.treeForm.tvConnections.Nodes(0), Windows.treeForm.tvConnections.SelectedNode)
+    End Sub
+
+    Private Shared Sub mMenFileImportFromActiveDirectory_Click(sender As System.Object, e As EventArgs) Handles mMenFileImportFromActiveDirectory.Click
+        Windows.Show(UI.Window.Type.ActiveDirectoryImport)
+    End Sub
+
+    Private Shared Sub mMenFileImportFromPortScan_Click(sender As System.Object, e As EventArgs) Handles mMenFileImportFromPortScan.Click
+        Windows.Show(UI.Window.Type.PortScan, True)
+    End Sub
+
+    Private Shared Sub mMenFileExport_Click(sender As System.Object, e As EventArgs) Handles mMenFileExport.Click
+        Export.ExportToFile(Windows.treeForm.tvConnections.Nodes(0), Windows.treeForm.tvConnections.SelectedNode)
+    End Sub
+
+    Private Shared Sub mMenFileExit_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenFileExit.Click
+        Shutdown.Quit()
     End Sub
 #End Region
 
@@ -668,8 +677,8 @@ Public Class frmMain
         App.Runtime.Windows.Show(UI.Window.Type.ExternalApps)
     End Sub
 
-    Private Sub mMenToolsPortScan_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenToolsPortScan.Click
-        App.Runtime.Windows.Show(UI.Window.Type.PortScan, Tools.PortScan.PortScanMode.Normal)
+    Private Sub mMenToolsPortScan_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenToolsPortScan.Click
+        App.Runtime.Windows.Show(UI.Window.Type.PortScan, False)
     End Sub
 
     Private Sub mMenToolsComponentsCheck_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenToolsComponentsCheck.Click

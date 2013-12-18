@@ -7,7 +7,6 @@ Imports mRemoteNG.Connection
 Imports mRemoteNG.Tools
 Imports mRemoteNG.Forms.OptionsPages
 Imports PSTaskDialog
-Imports mRemoteNG.Config.Putty
 Imports WeifenLuo.WinFormsUI.Docking
 Imports System.IO
 Imports Crownwood
@@ -222,7 +221,7 @@ Namespace App
             Public Shared sessionsPanel As New DockContent
             Public Shared screenshotForm As UI.Window.ScreenshotManager
             Public Shared screenshotPanel As New DockContent
-            Public Shared exportForm As UI.Window.Export
+            Public Shared exportForm As ExportForm
             Public Shared exportPanel As New DockContent
             Public Shared aboutForm As UI.Window.About
             Public Shared aboutPanel As New DockContent
@@ -230,7 +229,7 @@ Namespace App
             Public Shared updatePanel As New DockContent
             Public Shared sshtransferForm As UI.Window.SSHTransfer
             Public Shared sshtransferPanel As New DockContent
-            Public Shared adimportForm As UI.Window.ADImport
+            Public Shared adimportForm As UI.Window.ActiveDirectoryImport
             Public Shared adimportPanel As New DockContent
             Public Shared helpForm As UI.Window.Help
             Public Shared helpPanel As New DockContent
@@ -245,7 +244,7 @@ Namespace App
             Public Shared AnnouncementForm As UI.Window.Announcement
             Public Shared AnnouncementPanel As New DockContent
 
-            Public Shared Sub Show(ByVal windowType As UI.Window.Type, Optional ByVal portScanMode As PortScan.PortScanMode = PortScan.PortScanMode.Normal)
+            Public Shared Sub Show(ByVal windowType As UI.Window.Type, Optional ByVal portScanImport As Boolean = False)
                 Try
                     Select Case windowType
                         Case UI.Window.Type.About
@@ -255,9 +254,9 @@ Namespace App
                             End If
 
                             aboutForm.Show(frmMain.pnlDock)
-                        Case UI.Window.Type.ADImport
+                        Case UI.Window.Type.ActiveDirectoryImport
                             If adimportForm Is Nothing OrElse adimportForm.IsDisposed Then
-                                adimportForm = New UI.Window.ADImport(adimportPanel)
+                                adimportForm = New UI.Window.ActiveDirectoryImport(adimportPanel)
                                 adimportPanel = adimportForm
                             End If
 
@@ -266,13 +265,6 @@ Namespace App
                             Using optionsForm As New OptionsForm()
                                 optionsForm.ShowDialog(frmMain)
                             End Using
-                        Case UI.Window.Type.Export
-                            If exportForm Is Nothing OrElse exportForm.IsDisposed Then
-                                exportForm = New UI.Window.Export(exportPanel)
-                                exportPanel = exportForm
-                            End If
-
-                            exportForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.SSHTransfer
                             sshtransferForm = New UI.Window.SSHTransfer(sshtransferPanel)
                             sshtransferPanel = sshtransferForm
@@ -300,7 +292,7 @@ Namespace App
 
                             externalappsForm.Show(frmMain.pnlDock)
                         Case UI.Window.Type.PortScan
-                            portscanForm = New UI.Window.PortScan(portscanPanel, portScanMode)
+                            portscanForm = New UI.Window.PortScan(portscanPanel, portScanImport)
                             portscanPanel = portscanForm
 
                             portscanForm.Show(frmMain.pnlDock)
@@ -1211,255 +1203,6 @@ Namespace App
             End If
         End Function
 
-        Public Shared Sub ImportConnections()
-            Try
-                Dim lD As OpenFileDialog = Tools.Controls.ConnectionsLoadDialog
-                lD.Multiselect = True
-
-                If lD.ShowDialog = DialogResult.OK Then
-                    Dim nNode As TreeNode = Nothing
-
-                    For i As Integer = 0 To lD.FileNames.Length - 1
-                        nNode = Tree.Node.AddNode(Tree.Node.Type.Container, "Import #" & i)
-
-                        Dim nContI As New mRemoteNG.Container.Info()
-                        nContI.TreeNode = nNode
-                        nContI.ConnectionInfo = New mRemoteNG.Connection.Info(nContI)
-
-                        If Tree.Node.SelectedNode IsNot Nothing Then
-                            If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Container Then
-                                nContI.Parent = Tree.Node.SelectedNode.Tag
-                            End If
-                        End If
-
-                        nNode.Tag = nContI
-                        ContainerList.Add(nContI)
-
-                        Dim conL As New Config.Connections.Load
-                        conL.ConnectionFileName = lD.FileNames(i)
-                        conL.RootTreeNode = nNode
-                        conL.ConnectionList = App.Runtime.ConnectionList
-                        conL.ContainerList = App.Runtime.ContainerList
-
-                        conL.Load(True)
-
-                        Windows.treeForm.tvConnections.SelectedNode.Nodes.Add(nNode)
-                    Next
-                End If
-            Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeImported & vbNewLine & ex.Message)
-            End Try
-        End Sub
-
-        Public Shared Sub ImportConnectionsRdpFile()
-            Try
-                Dim openFileDialog As OpenFileDialog = Tools.Controls.ImportConnectionsRdpFileDialog
-                If Not openFileDialog.ShowDialog = DialogResult.OK Then Return
-
-                For Each fileName As String In openFileDialog.FileNames
-                    Dim lines As String() = File.ReadAllLines(fileName)
-
-                    Dim treeNode As TreeNode = Tree.Node.AddNode(Tree.Node.Type.Connection, Path.GetFileNameWithoutExtension(fileName))
-
-                    Dim connectionInfo As New Connection.Info()
-                    connectionInfo.Inherit = New Connection.Info.Inheritance(connectionInfo)
-
-                    connectionInfo.Name = treeNode.Text
-
-                    For Each line As String In lines
-                        Dim parts() As String = line.Split(New Char() {":"}, 3)
-                        If parts.Length < 3 Then Continue For
-
-                        Dim key As String = parts(0)
-                        Dim value As String = parts(2)
-
-                        Select Case LCase(key)
-                            Case "full address"
-                                Dim uri As New Uri("dummyscheme" + uri.SchemeDelimiter + value)
-                                If Not String.IsNullOrEmpty(uri.Host) Then connectionInfo.Hostname = uri.Host
-                                If Not uri.Port = -1 Then connectionInfo.Port = uri.Port
-                            Case "server port"
-                                connectionInfo.Port = value
-                            Case "username"
-                                connectionInfo.Username = value
-                            Case "domain"
-                                connectionInfo.Domain = value
-                            Case "session bpp"
-                                Select Case value
-                                    Case 8
-                                        connectionInfo.Colors = Protocol.RDP.RDPColors.Colors256
-                                    Case 15
-                                        connectionInfo.Colors = Protocol.RDP.RDPColors.Colors15Bit
-                                    Case 16
-                                        connectionInfo.Colors = Protocol.RDP.RDPColors.Colors16Bit
-                                    Case 24
-                                        connectionInfo.Colors = Protocol.RDP.RDPColors.Colors24Bit
-                                    Case 32
-                                        connectionInfo.Colors = Protocol.RDP.RDPColors.Colors32Bit
-                                End Select
-                            Case "bitmapcachepersistenable"
-                                If value = 1 Then
-                                    connectionInfo.CacheBitmaps = True
-                                Else
-                                    connectionInfo.CacheBitmaps = False
-                                End If
-                            Case "screen mode id"
-                                If value = 2 Then
-                                    connectionInfo.Resolution = Protocol.RDP.RDPResolutions.Fullscreen
-                                Else
-                                    connectionInfo.Resolution = Protocol.RDP.RDPResolutions.FitToWindow
-                                End If
-                            Case "connect to console"
-                                If value = 1 Then
-                                    connectionInfo.UseConsoleSession = True
-                                End If
-                            Case "disable wallpaper"
-                                If value = 1 Then
-                                    connectionInfo.DisplayWallpaper = True
-                                Else
-                                    connectionInfo.DisplayWallpaper = False
-                                End If
-                            Case "disable themes"
-                                If value = 1 Then
-                                    connectionInfo.DisplayThemes = True
-                                Else
-                                    connectionInfo.DisplayThemes = False
-                                End If
-                            Case "allow font smoothing"
-                                If value = 1 Then
-                                    connectionInfo.EnableFontSmoothing = True
-                                Else
-                                    connectionInfo.EnableFontSmoothing = False
-                                End If
-                            Case "allow desktop composition"
-                                If value = 1 Then
-                                    connectionInfo.EnableDesktopComposition = True
-                                Else
-                                    connectionInfo.EnableDesktopComposition = False
-                                End If
-                            Case "redirectsmartcards"
-                                If value = 1 Then
-                                    connectionInfo.RedirectSmartCards = True
-                                Else
-                                    connectionInfo.RedirectSmartCards = False
-                                End If
-                            Case "redirectdrives"
-                                If value = 1 Then
-                                    connectionInfo.RedirectDiskDrives = True
-                                Else
-                                    connectionInfo.RedirectDiskDrives = False
-                                End If
-                            Case "redirectcomports"
-                                If value = 1 Then
-                                    connectionInfo.RedirectPorts = True
-                                Else
-                                    connectionInfo.RedirectPorts = False
-                                End If
-                            Case "redirectprinters"
-                                If value = 1 Then
-                                    connectionInfo.RedirectPrinters = True
-                                Else
-                                    connectionInfo.RedirectPrinters = False
-                                End If
-                            Case "audiomode"
-                                Select Case value
-                                    Case 0
-                                        connectionInfo.RedirectSound = Protocol.RDP.RDPSounds.BringToThisComputer
-                                    Case 1
-                                        connectionInfo.RedirectSound = Protocol.RDP.RDPSounds.LeaveAtRemoteComputer
-                                    Case 2
-                                        connectionInfo.RedirectSound = Protocol.RDP.RDPSounds.DoNotPlay
-                                End Select
-                        End Select
-                    Next
-
-                    treeNode.Tag = connectionInfo
-                    Windows.treeForm.tvConnections.SelectedNode.Nodes.Add(treeNode)
-
-                    If Tree.Node.GetNodeType(treeNode.Parent) = Tree.Node.Type.Container Then
-                        connectionInfo.Parent = treeNode.Parent.Tag
-                    End If
-
-                    ConnectionList.Add(connectionInfo)
-                Next
-            Catch ex As Exception
-                MessageCollector.AddExceptionMessage(My.Language.strRdpFileCouldNotBeImported, ex)
-            End Try
-        End Sub
-
-        Public Shared Sub ImportConnectionsFromPortScan(ByVal Hosts As ArrayList, ByVal Protocol As mRemoteNG.Connection.Protocol.Protocols)
-            For Each Host As Tools.PortScan.ScanHost In Hosts
-                Dim finalProt As mRemoteNG.Connection.Protocol.Protocols
-                Dim protOK As Boolean = False
-
-                Dim nNode As TreeNode = Tree.Node.AddNode(Tree.Node.Type.Connection, Host.HostNameWithoutDomain)
-
-                Dim nConI As New mRemoteNG.Connection.Info()
-                nConI.Inherit = New Connection.Info.Inheritance(nConI)
-
-                nConI.Name = Host.HostNameWithoutDomain
-                nConI.Hostname = Host.HostName
-
-                Select Case Protocol
-                    Case Connection.Protocol.Protocols.SSH2
-                        If Host.SSH Then
-                            finalProt = Connection.Protocol.Protocols.SSH2
-                            protOK = True
-                        End If
-                    Case Connection.Protocol.Protocols.Telnet
-                        If Host.Telnet Then
-                            finalProt = Connection.Protocol.Protocols.Telnet
-                            protOK = True
-                        End If
-                    Case Connection.Protocol.Protocols.HTTP
-                        If Host.HTTP Then
-                            finalProt = Connection.Protocol.Protocols.HTTP
-                            protOK = True
-                        End If
-                    Case Connection.Protocol.Protocols.HTTPS
-                        If Host.HTTPS Then
-                            finalProt = Connection.Protocol.Protocols.HTTPS
-                            protOK = True
-                        End If
-                    Case Connection.Protocol.Protocols.Rlogin
-                        If Host.Rlogin Then
-                            finalProt = Connection.Protocol.Protocols.Rlogin
-                            protOK = True
-                        End If
-                    Case Connection.Protocol.Protocols.RDP
-                        If Host.RDP Then
-                            finalProt = Connection.Protocol.Protocols.RDP
-                            protOK = True
-                        End If
-                    Case Connection.Protocol.Protocols.VNC
-                        If Host.VNC Then
-                            finalProt = Connection.Protocol.Protocols.VNC
-                            protOK = True
-                        End If
-                End Select
-
-                If protOK = False Then
-                    nConI = Nothing
-                Else
-                    nConI.Protocol = finalProt
-                    nConI.SetDefaultPort()
-
-                    nNode.Tag = nConI
-                    Windows.treeForm.tvConnections.SelectedNode.Nodes.Add(nNode)
-
-                    If Tree.Node.GetNodeType(nNode.Parent) = Tree.Node.Type.Container Then
-                        nConI.Parent = nNode.Parent.Tag
-                    End If
-
-                    ConnectionList.Add(nConI)
-                End If
-            Next
-        End Sub
-
-        Public Shared Sub ImportConnectionsFromCSV()
-
-        End Sub
-
         Public Shared Sub SaveConnectionsBG()
             _saveUpdate = True
 
@@ -1525,9 +1268,9 @@ Namespace App
             End Try
         End Sub
 
-        Public Shared Sub SaveConnectionsAs(Optional ByVal rootNode As TreeNode = Nothing, Optional ByVal saveSecurity As Security.Save = Nothing)
-            Dim connectionsSave As New Connections.Save
+        Public Shared Sub SaveConnectionsAs()
             Dim previousTimerState As Boolean = False
+            Dim connectionsSave As New Connections.Save
 
             Try
                 If TimerSqlWatcher IsNot Nothing Then
@@ -1535,50 +1278,41 @@ Namespace App
                     TimerSqlWatcher.Enabled = False
                 End If
 
-                Dim export As Boolean = False
-                Dim saveAsDialog As SaveFileDialog
-                If rootNode Is Nothing Then
-                    rootNode = Windows.treeForm.tvConnections.Nodes(0)
-                    saveAsDialog = Tools.Controls.ConnectionsSaveAsDialog
-                Else
-                    export = True
-                    saveAsDialog = Tools.Controls.ConnectionsExportDialog
-                End If
+                Using saveFileDialog As New SaveFileDialog()
+                    With saveFileDialog
+                        .CheckPathExists = True
+                        .InitialDirectory = Info.Connections.DefaultConnectionsPath
+                        .FileName = Info.Connections.DefaultConnectionsFile
+                        .OverwritePrompt = True
 
-                If Not saveAsDialog.ShowDialog() = DialogResult.OK Then Return
+                        Dim fileTypes As New List(Of String)
+                        fileTypes.AddRange({My.Language.strFiltermRemoteXML, "*.xml"})
+                        fileTypes.AddRange({My.Language.strFilterAll, "*.*"})
 
-                connectionsSave.ConnectionFileName = saveAsDialog.FileName
+                        .Filter = String.Join("|", fileTypes.ToArray())
+                    End With
 
-                If export Then
-                    Select Case saveAsDialog.FilterIndex
-                        Case 1
-                            connectionsSave.SaveFormat = Connections.Save.Format.mRXML
-                        Case 2
-                            connectionsSave.SaveFormat = Connections.Save.Format.mRCSV
-                        Case 3
-                            connectionsSave.SaveFormat = Connections.Save.Format.vRDCSV
-                    End Select
-                Else
-                    connectionsSave.SaveFormat = Connections.Save.Format.mRXML
+                    If Not saveFileDialog.ShowDialog(frmMain) = DialogResult.OK Then Return
 
-                    If connectionsSave.ConnectionFileName = GetDefaultStartupConnectionFileName() Then
+                    With connectionsSave
+                        .SaveFormat = Connections.Save.Format.mRXML
+                        .ConnectionFileName = saveFileDialog.FileName
+                        .Export = False
+                        .SaveSecurity = New Security.Save()
+                        .ConnectionList = ConnectionList
+                        .ContainerList = ContainerList
+                        .RootTreeNode = Windows.treeForm.tvConnections.Nodes(0)
+                    End With
+
+                    connectionsSave.Save()
+
+                    If saveFileDialog.FileName = GetDefaultStartupConnectionFileName() Then
                         My.Settings.LoadConsFromCustomLocation = False
                     Else
                         My.Settings.LoadConsFromCustomLocation = True
-                        My.Settings.CustomConsPath = connectionsSave.ConnectionFileName
+                        My.Settings.CustomConsPath = saveFileDialog.FileName
                     End If
-                End If
-
-                connectionsSave.ConnectionList = ConnectionList
-                connectionsSave.ContainerList = ContainerList
-                connectionsSave.RootTreeNode = rootNode
-
-                connectionsSave.Export = export
-
-                If saveSecurity Is Nothing Then saveSecurity = New Security.Save
-                connectionsSave.SaveSecurity = saveSecurity
-
-                connectionsSave.Save()
+                End Using
             Catch ex As Exception
                 MessageCollector.AddExceptionMessage(String.Format(My.Language.strConnectionsFileCouldNotSaveAs, connectionsSave.ConnectionFileName), ex)
             Finally

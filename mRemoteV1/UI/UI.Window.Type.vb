@@ -8,11 +8,10 @@ Namespace UI
             ErrorsAndInfos = 4
             ScreenshotManager = 5
             Options = 6
-            Export = 7
             About = 8
             Update = 9
             SSHTransfer = 10
-            ADImport = 11
+            ActiveDirectoryImport = 11
             Help = 12
             ExternalApps = 13
             PortScan = 14

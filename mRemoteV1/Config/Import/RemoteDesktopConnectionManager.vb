@@ -6,7 +6,7 @@ Imports mRemoteNG.App.Runtime
 
 Namespace Config.Import
     Public Class RemoteDesktopConnectionManager
-        Public Shared Sub Import(ByVal fileName As String, ByVal rootInfo As Root.Info)
+        Public Shared Sub Import(ByVal fileName As String, ByVal parentTreeNode As TreeNode)
             Dim xmlDocument As New XmlDocument()
             xmlDocument.Load(fileName)
 
@@ -18,53 +18,22 @@ Namespace Config.Import
 
             Dim versionNode As XmlNode = rdcManNode.SelectSingleNode("./version")
             Dim version As New Version(versionNode.InnerText)
-            If Not version = New Version(2.2) Then
+            If Not version = New Version(2, 2) Then
                 Throw New FileFormatException(String.Format("Unsupported file version ({0}).", version))
             End If
 
             Dim fileNode As XmlNode = rdcManNode.SelectSingleNode("./file")
-            ImportFileOrGroup(fileNode, rootInfo)
+            ImportFileOrGroup(fileNode, parentTreeNode)
         End Sub
 
-        Private Shared Sub ImportFileOrGroup(ByVal xmlNode As XmlNode, ByVal parentInfo As Object)
-            Dim parentTreeNode As TreeNode
-            Dim childNodePath As String
-            Select Case xmlNode.Name
-                Case "file"
-                    Dim rootInfo As Root.Info = TryCast(parentInfo, Root.Info)
-                    If rootInfo Is Nothing Then
-                        ' ReSharper disable once LocalizableElement
-                        Throw New ArgumentException("Argument must be a Root.Info object.", "parentInfo")
-                    End If
-                    parentTreeNode = rootInfo.TreeNode
-                    childNodePath = "./group"
-                Case "group"
-                    Dim parentContainerInfo As Container.Info = TryCast(parentInfo, Container.Info)
-                    If parentContainerInfo Is Nothing Then
-                        ' ReSharper disable once LocalizableElement
-                        Throw New ArgumentException("Argument must be a Container.Info object.", "parentInfo")
-                    End If
-                    parentTreeNode = parentContainerInfo.TreeNode
-                    childNodePath = "./server"
-                Case Else
-                    ' ReSharper disable once LocalizableElement
-                    Throw New ArgumentException("Argument must be either a file or a group node.", "xmlNode")
-            End Select
-
-            If parentTreeNode Is Nothing Then
-                Throw New InvalidOperationException("parentInfo.TreeNode must not be null.")
-            End If
-
-            Debug.Assert(Not String.IsNullOrEmpty(childNodePath))
-
+        Private Shared Sub ImportFileOrGroup(ByVal xmlNode As XmlNode, ByVal parentTreeNode As TreeNode)
             Dim propertiesNode As XmlNode = xmlNode.SelectSingleNode("./properties")
             Dim name As String = propertiesNode.SelectSingleNode("./name").InnerText
 
-            Dim treeNode As TreeNode = New TreeNode(name)
+            Dim treeNode As New TreeNode(name)
             parentTreeNode.Nodes.Add(treeNode)
 
             Dim containerInfo As New Container.Info
-            containerInfo.Parent = parentInfo
             containerInfo.TreeNode = treeNode
             containerInfo.Name = name
 
@@ -73,38 +42,48 @@ Namespace Config.Import
             connectionInfo.IsContainer = True
             containerInfo.ConnectionInfo = connectionInfo
 
+            ' We can only inherit from a container node, not the root node or connection nodes
+            If Tree.Node.GetNodeType(parentTreeNode) = Tree.Node.Type.Container Then
+                containerInfo.Parent = parentTreeNode.Tag
+            Else
+                connectionInfo.Inherit.TurnOffInheritanceCompletely()
+            End If
+
+            treeNode.Name = name
             treeNode.Tag = containerInfo
             treeNode.ImageIndex = Images.Enums.TreeImage.Container
             treeNode.SelectedImageIndex = Images.Enums.TreeImage.Container
 
-            For Each childNode As XmlNode In xmlNode.SelectNodes(childNodePath)
+            For Each childNode As XmlNode In xmlNode.SelectNodes("./group|./server")
                 Select Case childNode.Name
                     Case "group"
-                        ImportFileOrGroup(childNode, containerInfo)
+                        ImportFileOrGroup(childNode, treeNode)
                     Case "server"
-                        ImportServer(childNode, containerInfo)
+                        ImportServer(childNode, treeNode)
                 End Select
             Next
 
             containerInfo.IsExpanded = propertiesNode.SelectSingleNode("./expanded").InnerText
             If containerInfo.IsExpanded Then treeNode.Expand()
+
+            ContainerList.Add(containerInfo)
         End Sub
 
-        Private Shared Sub ImportServer(ByVal serverNode As XmlNode, ByVal parentContainerInfo As Container.Info)
-            Dim parentTreeNode As TreeNode = parentContainerInfo.TreeNode
-
-            Dim displayName As String = serverNode.SelectSingleNode("./displayName").InnerText
-            Dim treeNode As TreeNode = New TreeNode(displayName)
+        Private Shared Sub ImportServer(ByVal serverNode As XmlNode, ByVal parentTreeNode As TreeNode)
+            Dim name As String = serverNode.SelectSingleNode("./displayName").InnerText
+            Dim treeNode As New TreeNode(name)
             parentTreeNode.Nodes.Add(treeNode)
 
             Dim connectionInfo As Connection.Info = ConnectionInfoFromXml(serverNode)
             connectionInfo.TreeNode = treeNode
-            connectionInfo.Parent = parentContainerInfo
-            connectionInfo.Name = displayName
+            connectionInfo.Parent = parentTreeNode.Tag
 
+            treeNode.Name = name
             treeNode.Tag = connectionInfo
             treeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
             treeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
+
+            ConnectionList.Add(connectionInfo)
         End Sub
 
         Private Shared Function ConnectionInfoFromXml(ByVal xmlNode As XmlNode) As Connection.Info

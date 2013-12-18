@@ -1,5 +1,7 @@
 1.73 Beta 2 ():
   Fixed issue MR-619 - Keyboard shortcuts stop working after locking the screen with Win+L
+  Added support for importing files from PuTTY Connection Manager.
+  Improved the import and export functionality.
 
 1.73 Beta 1 (2013-11-19):
   Added feature MR-16 - Add keyboard shortcuts to switch between tabs

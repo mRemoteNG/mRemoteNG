@@ -185,122 +185,40 @@ Namespace Tree
 
 
 
-        Public Shared Function AddNode(ByVal NodeType As Tree.Node.Type, Optional ByVal Text As String = "") As TreeNode
+        Public Shared Function AddNode(ByVal nodeType As Type, Optional ByVal name As String = Nothing) As TreeNode
             Try
-                Dim nNode As New TreeNode
+                Dim treeNode As New TreeNode
+                Dim defaultName As String = ""
 
-                Select Case NodeType
+                Select Case nodeType
                     Case Type.Connection, Type.PuttySession
-                        nNode.Text = My.Language.strNewConnection
-                        nNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
-                        nNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
+                        defaultName = My.Language.strNewConnection
+                        treeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
+                        treeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
                     Case Type.Container
-                        nNode.Text = My.Language.strNewFolder
-                        nNode.ImageIndex = Images.Enums.TreeImage.Container
-                        nNode.SelectedImageIndex = Images.Enums.TreeImage.Container
+                        defaultName = My.Language.strNewFolder
+                        treeNode.ImageIndex = Images.Enums.TreeImage.Container
+                        treeNode.SelectedImageIndex = Images.Enums.TreeImage.Container
                     Case Type.Root
-                        nNode.Text = My.Language.strNewRoot
-                        nNode.ImageIndex = Images.Enums.TreeImage.Root
-                        nNode.SelectedImageIndex = Images.Enums.TreeImage.Root
+                        defaultName = My.Language.strNewRoot
+                        treeNode.ImageIndex = Images.Enums.TreeImage.Root
+                        treeNode.SelectedImageIndex = Images.Enums.TreeImage.Root
                 End Select
 
-                If Text <> "" Then
-                    nNode.Text = Text
+                If Not String.IsNullOrEmpty(name) Then
+                    treeNode.Name = name
+                Else
+                    treeNode.Name = defaultName
                 End If
+                treeNode.Text = treeNode.Name
 
-                Return nNode
+                Return treeNode
             Catch ex As Exception
                 MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNode failed" & vbNewLine & ex.Message, True)
             End Try
 
             Return Nothing
         End Function
-
-        Public Shared Sub AddADNodes(ByVal ldapPath As String)
-            Try
-                Dim adCNode As TreeNode = Tree.Node.AddNode(Type.Container)
-
-                Dim nContI As New mRemoteNG.Container.Info()
-                nContI.TreeNode = adCNode
-                nContI.ConnectionInfo = New mRemoteNG.Connection.Info(nContI)
-
-                If Tree.Node.SelectedNode IsNot Nothing Then
-                    If Tree.Node.GetNodeType(Tree.Node.SelectedNode) = Tree.Node.Type.Container Then
-                        nContI.Parent = Tree.Node.SelectedNode.Tag
-                    End If
-                End If
-
-                Dim strDisplayName As String
-                strDisplayName = ldapPath.Remove(0, ldapPath.IndexOf("OU=") + 3)
-                strDisplayName = strDisplayName.Substring(0, strDisplayName.IndexOf(","))
-
-                nContI.Name = strDisplayName
-                nContI.TreeNode.Text = strDisplayName
-
-                adCNode.Tag = nContI
-                containerList.Add(nContI)
-
-
-                CreateADSubNodes(adCNode, ldapPath)
-
-
-                SelectedNode.Nodes.Add(adCNode)
-                SelectedNode = SelectedNode.Nodes(SelectedNode.Nodes.Count - 1)
-            Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddADNodes failed" & vbNewLine & ex.Message, True)
-            End Try
-        End Sub
-
-        Private Shared Sub CreateADSubNodes(ByVal rNode As TreeNode, ByVal ldapPath As String)
-            Try
-                Dim strDisplayName, strDescription, strHostName As String
-
-                Dim ldapFilter As String = "(objectClass=computer)" '"sAMAccountName=*"
-
-                Dim ldapSearcher As New DirectorySearcher
-                Dim ldapResults As SearchResultCollection
-                Dim ldapResult As SearchResult
-
-                Dim ResultFields() As String = {"securityEquals", "cn"}
-
-                With ldapSearcher
-                    .SearchRoot = New DirectoryEntry(ldapPath)
-                    .PropertiesToLoad.AddRange(ResultFields)
-                    .Filter = ldapFilter
-                    .SearchScope = SearchScope.OneLevel
-                    ldapResults = .FindAll
-                End With
-
-                For Each ldapResult In ldapResults
-                    With ldapResult.GetDirectoryEntry()
-                        strDisplayName = .Properties("cn").Value
-                        strDescription = .Properties("Description").Value
-                        strHostName = .Properties("dNSHostName").Value
-                    End With
-
-                    Dim adNode As TreeNode = Tree.Node.AddNode(Type.Connection, strDisplayName)
-
-                    Dim nConI As New mRemoteNG.Connection.Info()
-                    Dim nInh As New mRemoteNG.Connection.Info.Inheritance(nConI, True)
-                    nInh.Description = False
-                    If TypeOf rNode.Tag Is mRemoteNG.Container.Info Then
-                        nConI.Parent = rNode.Tag
-                    End If
-                    nConI.Inherit = nInh
-                    nConI.Name = strDisplayName
-                    nConI.Hostname = strHostName
-                    nConI.Description = strDescription
-                    nConI.TreeNode = adNode
-                    adNode.Tag = nConI 'set the nodes tag to the conI
-                    'add connection to connections
-                    connectionList.Add(nConI)
-
-                    rNode.Nodes.Add(adNode)
-                Next
-            Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CreateADSubNodes failed" & vbNewLine & ex.Message, True)
-            End Try
-        End Sub
 
         Public Shared Sub CloneNode(ByVal oldTreeNode As TreeNode, Optional ByVal parentNode As TreeNode = Nothing)
             Try

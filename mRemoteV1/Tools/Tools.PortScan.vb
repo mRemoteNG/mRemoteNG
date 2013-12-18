@@ -5,11 +5,6 @@ Imports System.Net
 
 Namespace Tools
     Namespace PortScan
-        Public Enum PortScanMode
-            Normal = 1
-            Import = 2
-        End Enum
-
         Public Class ScanHost
 #Region "Properties"
             Private Shared _SSHPort As Integer = Connection.Protocol.SSH1.Defaults.Port
@@ -112,20 +107,20 @@ Namespace Tools
             Private _openPorts As New ArrayList
             Public Property OpenPorts() As ArrayList
                 Get
-                    Return _OpenPorts
+                    Return _openPorts
                 End Get
                 Set(ByVal value As ArrayList)
-                    _OpenPorts = value
+                    _openPorts = value
                 End Set
             End Property
 
             Private _closedPorts As ArrayList
             Public Property ClosedPorts() As ArrayList
                 Get
-                    Return _ClosedPorts
+                    Return _closedPorts
                 End Get
                 Set(ByVal value As ArrayList)
-                    _ClosedPorts = value
+                    _closedPorts = value
                 End Set
             End Property
 
@@ -203,8 +198,8 @@ Namespace Tools
 #Region "Methods"
             Public Sub New(ByVal host As String)
                 _hostIp = host
-                _OpenPorts = New ArrayList
-                _ClosedPorts = New ArrayList
+                _openPorts = New ArrayList
+                _closedPorts = New ArrayList
             End Sub
 
             Public Overrides Function ToString() As String
@@ -216,24 +211,24 @@ Namespace Tools
                 End Try
             End Function
 
-            Public Function ToListViewItem(ByVal mode As PortScanMode) As ListViewItem
+            Public Function ToListViewItem(ByVal import As Boolean) As ListViewItem
                 Try
-                    Dim lvI As New ListViewItem
-                    lvI.Tag = Me
+                    Dim listViewItem As New ListViewItem
+                    listViewItem.Tag = Me
                     If _hostName <> "" Then
-                        lvI.Text = _hostName
+                        listViewItem.Text = _hostName
                     Else
-                        lvI.Text = _hostIp
+                        listViewItem.Text = _hostIp
                     End If
 
-                    If Mode = PortScanMode.Import Then
-                        lvI.SubItems.Add(BoolToYesNo(_SSH))
-                        lvI.SubItems.Add(BoolToYesNo(_Telnet))
-                        lvI.SubItems.Add(BoolToYesNo(_HTTP))
-                        lvI.SubItems.Add(BoolToYesNo(_HTTPS))
-                        lvI.SubItems.Add(BoolToYesNo(_Rlogin))
-                        lvI.SubItems.Add(BoolToYesNo(_RDP))
-                        lvI.SubItems.Add(BoolToYesNo(_VNC))
+                    If import Then
+                        listViewItem.SubItems.Add(BoolToYesNo(_SSH))
+                        listViewItem.SubItems.Add(BoolToYesNo(_Telnet))
+                        listViewItem.SubItems.Add(BoolToYesNo(_HTTP))
+                        listViewItem.SubItems.Add(BoolToYesNo(_HTTPS))
+                        listViewItem.SubItems.Add(BoolToYesNo(_Rlogin))
+                        listViewItem.SubItems.Add(BoolToYesNo(_RDP))
+                        listViewItem.SubItems.Add(BoolToYesNo(_VNC))
                     Else
                         Dim strOpen As String = ""
                         Dim strClosed As String = ""
@@ -246,13 +241,13 @@ Namespace Tools
                             strClosed &= p & ", "
                         Next
 
-                        lvI.SubItems.Add(strOpen.Substring(0, IIf(strOpen.Length > 0, strOpen.Length - 2, strOpen.Length)))
-                        lvI.SubItems.Add(strClosed.Substring(0, IIf(strClosed.Length > 0, strClosed.Length - 2, strClosed.Length)))
+                        listViewItem.SubItems.Add(strOpen.Substring(0, IIf(strOpen.Length > 0, strOpen.Length - 2, strOpen.Length)))
+                        listViewItem.SubItems.Add(strClosed.Substring(0, IIf(strClosed.Length > 0, strClosed.Length - 2, strClosed.Length)))
                     End If
 
-                    Return lvI
+                    Return listViewItem
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ToString failed (Tools.PortScan)", True)
+                    MessageCollector.AddExceptionMessage("Tools.PortScan.ToListViewItem() failed.", ex, Messages.MessageClass.WarningMsg, True)
                     Return Nothing
                 End Try
             End Function

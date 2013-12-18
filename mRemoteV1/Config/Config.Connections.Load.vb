@@ -604,7 +604,7 @@ Namespace Config
 
             Private Sub LoadFromXML(ByVal cons As String, ByVal import As Boolean)
                 Try
-                    App.Runtime.IsConnectionsFileLoaded = False
+                    If Not import Then IsConnectionsFileLoaded = False
 
                     ' SECTION 1. Create a DOM Document and load the XML data into it.
                     Me.xDom = New XmlDocument()
@@ -627,20 +627,25 @@ Namespace Config
                     End If
 
                     ' SECTION 2. Initialize the treeview control.
-                    Dim rootNodeName As String = ""
-                    If xDom.DocumentElement.HasAttribute("Name") Then rootNodeName = xDom.DocumentElement.Attributes("Name").Value.Trim()
-                    If Not String.IsNullOrEmpty(rootNodeName) Then
-                        RootTreeNode.Name = rootNodeName
+                    Dim rootInfo As Root.Info
+                    If import Then
+                        rootInfo = Nothing
                     Else
-                        RootTreeNode.Name = xDom.DocumentElement.Name
+                        Dim rootNodeName As String = ""
+                        If xDom.DocumentElement.HasAttribute("Name") Then rootNodeName = xDom.DocumentElement.Attributes("Name").Value.Trim()
+                        If Not String.IsNullOrEmpty(rootNodeName) Then
+                            RootTreeNode.Name = rootNodeName
+                        Else
+                            RootTreeNode.Name = xDom.DocumentElement.Name
+                        End If
+                        RootTreeNode.Text = RootTreeNode.Name
+
+                        rootInfo = New Root.Info(Root.Info.RootType.Connection)
+                        rootInfo.Name = RootTreeNode.Name
+                        rootInfo.TreeNode = RootTreeNode
+
+                        RootTreeNode.Tag = rootInfo
                     End If
-                    RootTreeNode.Text = RootTreeNode.Name
-
-                    Dim rootInfo As New Root.Info(Root.Info.RootType.Connection)
-                    rootInfo.Name = RootTreeNode.Name
-                    rootInfo.TreeNode = RootTreeNode
-
-                    RootTreeNode.Tag = rootInfo
 
                     If Me.confVersion > 1.3 Then '1.4
                         If Security.Crypt.Decrypt(xDom.DocumentElement.Attributes("Protected").Value, pW) <> "ThisIsNotProtected" Then
@@ -697,7 +702,7 @@ Namespace Config
 
                     RootTreeNode.EnsureVisible()
 
-                    IsConnectionsFileLoaded = True
+                    If Not import Then IsConnectionsFileLoaded = True
                     Windows.treeForm.InitialRefresh()
                     SetSelectedNode(RootTreeNode)
                 Catch ex As Exception
@@ -1032,7 +1037,7 @@ Namespace Config
                 Return conI
             End Function
 
-            Private Function Authenticate(ByVal Value As String, ByVal CompareToOriginalValue As Boolean, Optional ByVal RootInfo As mRemoteNG.Root.Info = Nothing) As Boolean
+            Private Function Authenticate(ByVal Value As String, ByVal CompareToOriginalValue As Boolean, Optional ByVal rootInfo As Root.Info = Nothing) As Boolean
                 Dim passwordName As String
                 If UseSQL Then
                     passwordName = Language.strSQLServer.TrimEnd(":")
@@ -1057,8 +1062,10 @@ Namespace Config
                         End If
                     Loop
 
-                    RootInfo.Password = True
-                    RootInfo.PasswordString = pW
+                    If rootInfo IsNot Nothing Then
+                        rootInfo.Password = True
+                        rootInfo.PasswordString = pW
+                    End If
                 End If
 
                 Return True

@@ -21,40 +21,48 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                cMenTreeAddConnection.Text = Language.strAddConnection
-                cMenTreeAddFolder.Text = Language.strAddFolder
-                cMenTreeConnect.Text = Language.strConnect
-                cMenTreeConnectWithOptions.Text = Language.strConnectWithOptions
-                cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.strConnectToConsoleSession
-                cMenTreeConnectWithOptionsNoCredentials.Text = Language.strConnectNoCredentials
-                cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.strConnectInFullscreen
-                cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.strChoosePanelBeforeConnecting
-                cMenTreeDisconnect.Text = Language.strMenuDisconnect
-                cMenTreeToolsTransferFile.Text = Language.strMenuTransferFile
-                cMenTreeToolsImportExport.Text = Language.strImportExport
-                cMenTreeToolsImportExportExportmRemoteXML.Text = Language.strExportmRemoteXML
-                cMenTreeToolsImportExportImportmRemoteXML.Text = Language.strImportmRemoteXML
-                cMenTreeToolsImportExportImportFromAD.Text = Language.strImportAD
-                cMenTreeToolsImportExportImportFromRDPFiles.Text = Language.strImportRDPFiles
-                cMenTreeToolsImportExportImportFromPortScan.Text = Language.strImportPortScan
-                cMenTreeToolsSort.Text = Language.strSort
-                cMenTreeToolsSortAscending.Text = Language.strSortAsc
-                cMenTreeToolsSortDescending.Text = Language.strSortDesc
-                cMenTreeToolsExternalApps.Text = Language.strMenuExternalTools
-                cMenTreeDuplicate.Text = Language.strDuplicate
-                cMenTreeRename.Text = Language.strRename
-                cMenTreeDelete.Text = Language.strMenuDelete
-                cMenTreeMoveUp.Text = Language.strMoveUp
-                cMenTreeMoveDown.Text = Language.strMoveDown
+                Text = Language.strConnections
+                TabText = Language.strConnections
+
                 mMenAddConnection.ToolTipText = Language.strAddConnection
                 mMenAddFolder.ToolTipText = Language.strAddFolder
                 mMenView.ToolTipText = Language.strMenuView.Replace("&", "")
                 mMenViewExpandAllFolders.Text = Language.strExpandAllFolders
                 mMenViewCollapseAllFolders.Text = Language.strCollapseAllFolders
                 mMenSortAscending.ToolTipText = Language.strSortAsc
+
+                cMenTreeConnect.Text = Language.strConnect
+                cMenTreeConnectWithOptions.Text = Language.strConnectWithOptions
+                cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.strConnectToConsoleSession
+                cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text = Language.strDontConnectToConsoleSessionMenuItem
+                cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.strConnectInFullscreen
+                cMenTreeConnectWithOptionsNoCredentials.Text = Language.strConnectNoCredentials
+                cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.strChoosePanelBeforeConnecting
+                cMenTreeDisconnect.Text = Language.strMenuDisconnect
+
+                cMenTreeToolsExternalApps.Text = Language.strMenuExternalTools
+                cMenTreeToolsTransferFile.Text = Language.strMenuTransferFile
+
+                cMenTreeDuplicate.Text = Language.strDuplicate
+                cMenTreeRename.Text = Language.strRename
+                cMenTreeDelete.Text = Language.strMenuDelete
+
+                cMenTreeImport.Text = Language.strImportMenuItem
+                cMenTreeImportFile.Text = Language.strImportFromFileMenuItem
+                cMenTreeImportActiveDirectory.Text = Language.strImportAD
+                cMenTreeImportPortScan.Text = Language.strImportPortScan
+                cMenTreeExportFile.Text = Language.strExportToFileMenuItem
+
+                cMenTreeAddConnection.Text = Language.strAddConnection
+                cMenTreeAddFolder.Text = Language.strAddFolder
+
+                cMenTreeToolsSort.Text = Language.strSort
+                cMenTreeToolsSortAscending.Text = Language.strSortAsc
+                cMenTreeToolsSortDescending.Text = Language.strSortDesc
+                cMenTreeMoveUp.Text = Language.strMoveUp
+                cMenTreeMoveDown.Text = Language.strMoveDown
+
                 txtSearch.Text = Language.strSearchPrompt
-                TabText = Language.strConnections
-                Text = Language.strConnections
             End Sub
 
             Public Sub ApplyTheme()
@@ -222,8 +230,6 @@ Namespace UI
                             If (connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.IntApp) Then
                                 cMenTreeConnectWithOptionsNoCredentials.Enabled = False
                             End If
-
-                            cMenTreeToolsImportExport.Enabled = False
                         Case mRemoteNG.Tree.Node.Type.PuttySession
                             Dim puttySessionInfo As mRemoteNG.Connection.PuttySession.Info = selectedNode.Tag
 
@@ -241,7 +247,6 @@ Namespace UI
 
                             cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
                             cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
-                            cMenTreeToolsImportExport.Enabled = False
                             cMenTreeToolsSort.Enabled = False
                             cMenTreeDuplicate.Enabled = False
                             cMenTreeRename.Enabled = False
@@ -288,7 +293,6 @@ Namespace UI
                             cMenTreeDisconnect.Enabled = False
                             cMenTreeToolsTransferFile.Enabled = False
                             cMenTreeConnectWithOptions.Enabled = False
-                            cMenTreeToolsImportExport.Enabled = False
                             cMenTreeToolsSort.Enabled = False
                             cMenTreeToolsExternalApps.Enabled = False
                             cMenTreeDuplicate.Enabled = False
@@ -487,50 +491,6 @@ Namespace UI
                 SshTransferFile()
             End Sub
 
-            Private Sub cMenTreeToolsImportExportExportmRemoteXML_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeToolsImportExportExportmRemoteXML.Click
-                ExportXml()
-            End Sub
-
-            Private Sub cMenTreeToolsImportExportImportmRemoteXML_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeToolsImportExportImportmRemoteXML.Click
-                ImportXml()
-            End Sub
-
-            Private Sub cMenTreeToolsImportExportImportFromAD_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeToolsImportExportImportFromAD.Click
-                ImportFromActiveDirectory()
-            End Sub
-
-            Private Shared Sub cMenTreeToolsImportExportImportFromRDPFiles_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeToolsImportExportImportFromRDPFiles.Click
-                ImportFromRdpFiles()
-            End Sub
-
-            Private Sub cMenTreeToolsImportExportImportFromRDGFiles_Click(sender As System.Object, e As EventArgs) Handles cMenTreeToolsImportExportImportFromRDGFiles.Click
-                Try
-                    Using openFileDialog As New OpenFileDialog()
-                        With openFileDialog
-                            .CheckFileExists = True
-                            .InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal)
-                            .Filter = String.Join("|", {Language.strFilterRdgFiles, "*.rdg", Language.strFilterAll, "*.*"})
-                            .Multiselect = True
-                        End With
-
-                        If Not openFileDialog.ShowDialog = DialogResult.OK Then Return
-
-                        Dim rootNode As TreeNode = tvConnections.Nodes(0)
-                        Dim rootInfo As Root.Info = CType(rootNode.Tag, Root.Info)
-
-                        For Each fileName As String In openFileDialog.FileNames
-                            mRemoteNG.Config.Import.RemoteDesktopConnectionManager.Import(fileName, rootInfo)
-                        Next
-                    End Using
-                Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("UI.Window.Tree.cMenTreeToolsImportExportImportFromRDGFiles_Click failed.", ex, , True)
-                End Try
-            End Sub
-
-            Private Sub cMenTreeToolsImportExportImportFromPortScan_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeToolsImportExportImportFromPortScan.Click
-                ImportFromPortScan()
-            End Sub
-
             Private Sub mMenSortAscending_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenSortAscending.Click
                 tvConnections.BeginUpdate()
                 mRemoteNG.Tree.Node.Sort(tvConnections.Nodes.Item(0), SortOrder.Ascending)
@@ -575,6 +535,21 @@ Namespace UI
                 SaveConnectionsBG()
             End Sub
 
+            Private Shared Sub cMenTreeImportFile_Click(sender As System.Object, e As EventArgs) Handles cMenTreeImportFile.Click
+                Import.ImportFromFile(Windows.treeForm.tvConnections.Nodes(0), Windows.treeForm.tvConnections.SelectedNode, True)
+            End Sub
+
+            Private Shared Sub cMenTreeImportActiveDirectory_Click(sender As System.Object, e As EventArgs) Handles cMenTreeImportActiveDirectory.Click
+                Windows.Show(Type.ActiveDirectoryImport)
+            End Sub
+
+            Private Shared Sub cMenTreeImportPortScan_Click(sender As System.Object, e As EventArgs) Handles cMenTreeImportPortScan.Click
+                Windows.Show(UI.Window.Type.PortScan, True)
+            End Sub
+
+            Private Shared Sub cMenTreeExportFile_Click(sender As System.Object, e As EventArgs) Handles cMenTreeExportFile.Click
+                Export.ExportToFile(Windows.treeForm.tvConnections.Nodes(0), Windows.treeForm.tvConnections.SelectedNode)
+            End Sub
             Private Shared Sub cMenTreeMoveUp_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeMoveUp.Click
                 mRemoteNG.Tree.Node.MoveNodeUp()
                 SaveConnectionsBG()
@@ -699,57 +674,6 @@ Namespace UI
                     Windows.sshtransferForm.Port = conI.Port
                 Catch ex As Exception
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
-                End Try
-            End Sub
-
-            Private Sub ExportXml()
-                Try
-                    If tvConnections.SelectedNode IsNot Nothing Then
-                        Windows.exportForm = New Export(Windows.exportPanel, tvConnections.SelectedNode)
-                        Windows.exportPanel = Windows.exportForm
-
-                        Windows.exportForm.Show(frmMain.pnlDock)
-                    End If
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ExportXml (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
-                End Try
-            End Sub
-
-            Private Sub ImportXml()
-                Try
-                    If tvConnections.SelectedNode IsNot Nothing Then
-                        ImportConnections()
-                    End If
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportXML (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
-                End Try
-            End Sub
-
-            Private Sub ImportFromActiveDirectory()
-                Try
-                    If tvConnections.SelectedNode IsNot Nothing Then
-                        Windows.Show(Type.ADImport)
-                    End If
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromAD (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
-                End Try
-            End Sub
-
-            Private Shared Sub ImportFromRdpFiles()
-                Try
-                    ImportConnectionsRdpFile()
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromRDPFiles (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
-                End Try
-            End Sub
-
-            Private Sub ImportFromPortScan()
-                Try
-                    If tvConnections.SelectedNode IsNot Nothing Then
-                        Windows.Show(Type.PortScan, Tools.PortScan.PortScanMode.Import)
-                    End If
-                Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ImportFromPortScan (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
                 End Try
             End Sub
 

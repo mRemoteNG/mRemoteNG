@@ -181,12 +181,19 @@
     <Compile Include="App\App.Runtime.vb" />
     <Compile Include="App\App.SupportedCultures.vb" />
     <Compile Include="App\App.Update.vb" />
+    <Compile Include="App\Export.vb" />
+    <Compile Include="App\Import.vb" />
     <Compile Include="Config\Config.Connections.Load.vb" />
     <Compile Include="Config\Config.Connections.Save.vb" />
     <Compile Include="Config\Config.Settings.Load.vb" />
     <Compile Include="Config\Config.Settings.Providers.vb" />
     <Compile Include="Config\Config.Settings.Save.vb" />
     <Compile Include="Config\ConfirmClose.vb" />
+    <Compile Include="Config\Import\ActiveDirectory.vb" />
+    <Compile Include="Config\Import\mRemoteNG.vb" />
+    <Compile Include="Config\Import\PortScan.vb" />
+    <Compile Include="Config\Import\PuttyConnectionManager.vb" />
+    <Compile Include="Config\Import\RemoteDesktopConnection.vb" />
     <Compile Include="Config\Import\RemoteDesktopConnectionManager.vb" />
     <Compile Include="Config\Putty\RegistryProvider.vb" />
     <Compile Include="Config\Putty\XmingProvider.vb" />
@@ -376,7 +383,10 @@
     <Compile Include="UI\UI.Window.About.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.ADImport.vb">
+    <Compile Include="UI\UI.Window.ActiveDirectoryImport.Designer.vb">
+      <DependentUpon>UI.Window.ActiveDirectoryImport.vb</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UI.Window.ActiveDirectoryImport.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UI.Window.Announcement.Designer.vb">
@@ -400,8 +410,8 @@
     <Compile Include="UI\UI.Window.ErrorsAndInfos.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Export.Designer.vb">
-      <DependentUpon>UI.Window.Export.vb</DependentUpon>
+    <Compile Include="Forms\ExportForm.Designer.vb">
+      <DependentUpon>ExportForm.vb</DependentUpon>
     </Compile>
     <Compile Include="UI\UI.Window.ExternalTools.Designer.vb">
       <DependentUpon>UI.Window.ExternalTools.vb</DependentUpon>
@@ -413,10 +423,13 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UI.Window.List.vb" />
+    <Compile Include="UI\UI.Window.PortScan.Designer.vb">
+      <DependentUpon>UI.Window.PortScan.vb</DependentUpon>
+    </Compile>
     <Compile Include="UI\UI.Window.PortScan.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Export.vb">
+    <Compile Include="Forms\ExportForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UI.Window.ScreenshotManager.vb">
@@ -554,8 +567,8 @@
       <DependentUpon>UI.Window.About.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.ADImport.resx">
-      <DependentUpon>UI.Window.ADImport.vb</DependentUpon>
+    <EmbeddedResource Include="UI\UI.Window.ActiveDirectoryImport.resx">
+      <DependentUpon>UI.Window.ActiveDirectoryImport.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UI.Window.Announcement.resx">
@@ -590,8 +603,8 @@
       <DependentUpon>UI.Window.PortScan.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.Export.resx">
-      <DependentUpon>UI.Window.Export.vb</DependentUpon>
+    <EmbeddedResource Include="Forms\ExportForm.resx">
+      <DependentUpon>ExportForm.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UI.Window.ScreenshotManager.resx">
@@ -796,6 +809,7 @@
     <Content Include="Resources\Images_FamFamFam\database.png" />
     <Content Include="Resources\Images_FamFamFam\Link.png" />
     <Content Include="Resources\Images_FamFamFam\page_copy.png" />
+    <None Include="Resources\Images\puttycm.png" />
     <None Include="Resources\Images_FamFamFam\monitor_go.png" />
     <None Include="Resources\Images_FamFamFam\monitor_delete.png" />
     <None Include="Resources\Images_FamFamFam\user_comment.png" />
