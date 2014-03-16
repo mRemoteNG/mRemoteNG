@@ -18,6 +18,7 @@ Namespace UI
             UltraVNCSC = 16
             ComponentsCheck = 17
             Announcement = 18
+            SSHCommands = 19
         End Enum
     End Namespace
 End Namespace
