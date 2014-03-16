@@ -219,8 +219,6 @@ Namespace App
             Public Shared errorsPanel As New DockContent
             Public Shared sessionsForm As UI.Window.Sessions
             Public Shared sessionsPanel As New DockContent
-            Public Shared sshsForm As UI.Window.SSHCommands
-            Public Shared sshsPanel As New DockContent
             Public Shared screenshotForm As UI.Window.ScreenshotManager
             Public Shared screenshotPanel As New DockContent
             Public Shared exportForm As ExportForm
@@ -413,11 +411,6 @@ Namespace App
 
                 Windows.sessionsForm = New UI.Window.Sessions(Windows.sessionsPanel)
                 Windows.sessionsPanel = Windows.sessionsForm
-
-                Windows.sshsForm = New UI.Window.SSHCommands(Windows.sshsPanel)
-                Windows.sshsPanel = Windows.sshsForm
-
-
 
                 Windows.screenshotForm = New UI.Window.ScreenshotManager(Windows.screenshotPanel)
                 Windows.screenshotPanel = Windows.screenshotForm

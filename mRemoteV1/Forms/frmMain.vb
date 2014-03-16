@@ -1040,14 +1040,4 @@ Public Class frmMain
         SystemMenu.InsertMenuItem(SystemMenu.SystemMenuHandle, 1, Tools.SystemMenu.Flags.MF_BYPOSITION Or Tools.SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, Nothing)
     End Sub
 #End Region
-
-    Private Sub mMenViewMultiPuttyCommand_Click(sender As Object, e As EventArgs) Handles mMenViewMultiPuttyCommand.Click
-        If Me.mMenViewMultiPuttyCommand.Checked = False Then
-            Windows.sshsPanel.Show(Me.pnlDock)
-            Me.mMenViewMultiPuttyCommand.Checked = True
-        Else
-            Windows.sshsPanel.Hide()
-            Me.mMenViewMultiPuttyCommand.Checked = False
-        End If
-    End Sub
 End Class

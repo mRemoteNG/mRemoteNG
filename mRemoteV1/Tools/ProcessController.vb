@@ -137,7 +137,7 @@ Namespace Tools
 
 #Region "Win32"
         ' ReSharper disable ClassNeverInstantiated.Local
-        Public Class Win32
+        Private Class Win32
             ' ReSharper restore ClassNeverInstantiated.Local
             ' ReSharper disable InconsistentNaming
             ' ReSharper disable UnusedMethodReturnValue.Local
@@ -167,7 +167,6 @@ Namespace Tools
             Public Const WM_SETTEXT As Integer = &HC
             Public Const WM_GETTEXT As Integer = &HD
             Public Const WM_COMMAND As Integer = &H111
-            Public Const WM_KEYDOWN As Integer = &H100
 
             Public Const SW_HIDE As Integer = 0
             Public Const SW_SHOW As Integer = 5
