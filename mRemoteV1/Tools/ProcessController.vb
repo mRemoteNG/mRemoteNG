@@ -168,6 +168,8 @@ Namespace Tools
             Public Const WM_GETTEXT As Integer = &HD
             Public Const WM_COMMAND As Integer = &H111
             Public Const WM_KEYDOWN As Integer = &H100
+            Public Const WM_KEYUP As Integer = &H101
+            Public Const WM_CHAR As Integer = &H102
 
             Public Const SW_HIDE As Integer = 0
             Public Const SW_SHOW As Integer = 5
