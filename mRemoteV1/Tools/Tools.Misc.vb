@@ -279,6 +279,50 @@ Namespace Tools
             End Function
         End Class
 
+
+
+        Public Class TextboxEditorType
+            Inherits PropertyEditorBase
+
+            Protected Overrides Function GetEditControl(PropertyName As String, CurrentValue As Object) As Control
+                Dim UcTextbox As ucTextbox
+                Dim Value As String
+
+                If TypeOf CurrentValue Is String Then
+                    Value = CStr(CurrentValue)
+                Else
+                    Value = ""
+                End If
+
+                UcTextbox = New ucTextbox
+                UcTextbox.Text = CurrentValue
+                Return UcTextbox
+
+            End Function
+
+            Public Overrides Function EditValue(ByVal context As ITypeDescriptorContext, ByVal provider As IServiceProvider, ByVal value As Object) As Object
+                Return MyBase.EditValue(context, provider, value)
+            End Function
+
+            Protected Overrides Function GetEditedValue(EditControl As Control, PropertyName As String, OldValue As Object) As Object
+                Dim Value As Object = OldValue
+                Dim UcTextbox As ucTextbox = TryCast(EditControl, ucTextbox)
+
+
+                If UcTextbox IsNot Nothing Then
+                    If UcTextbox.IsOk Then
+                        Value = UcTextbox.Text
+                    End If
+
+                    UcTextbox.Dispose()
+                    UcTextbox = Nothing
+                End If
+                Return Value
+            End Function
+        End Class
+
+
+
         Public Class Fullscreen
             Public Sub New(ByVal handledForm As Form)
                 _handledForm = handledForm

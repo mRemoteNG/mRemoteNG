@@ -1,9 +1,11 @@
 Imports System.Windows.Forms
 Imports System.ComponentModel
+Imports System.ComponentModel.EditorAttribute
 Imports mRemoteNG.Tools.LocalizedAttributes
 Imports mRemoteNG.App.Runtime
 Imports mRemoteNG.Config
 Imports System.Reflection
+Imports mRemoteNG.Tools
 
 Namespace Connection
     <DefaultProperty("Name")> _
@@ -577,7 +579,8 @@ Namespace Connection
         Private _userField As String = My.Settings.ConDefaultUserField
         <LocalizedCategory("strCategoryMiscellaneous", 7), _
             LocalizedDisplayName("strPropertyNameUser1"), _
-            LocalizedDescription("strPropertyDescriptionUser1")> _
+            LocalizedDescription("strPropertyDescriptionUser1"),
+            EditorAttribute(GetType(Misc.TextboxEditorType), GetType(System.Drawing.Design.UITypeEditor))>
         Public Overridable Property UserField() As String
             Get
                 Return GetInheritedPropertyValue("UserField", _userField)
