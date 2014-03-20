@@ -31,16 +31,16 @@ Namespace UI
                 For Each _connection As mRemoteNG.Connection.Info In mRemoteNG.App.Runtime.ConnectionList
                     For Each _base As mRemoteNG.Connection.Protocol.Base In _connection.OpenConnections
                         If _base.InterfaceControl.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH2 Then
-                            Dim bb As mRemoteNG.Connection.Protocol.SSH2 = _base
-                            Win32.PostMessage(bb.PuttyHandle, Win32.WM_KEYDOWN, e.KeyData, 0)
+                            Dim _processHandler As mRemoteNG.Connection.Protocol.SSH2 = _base
+                            Win32.PostMessage(_processHandler.PuttyHandle, Win32.WM_KEYDOWN, e.KeyData, 0)
                         End If
                     Next
                 Next
                 For Each _connection As mRemoteNG.Connection.Info In mRemoteNG.App.Runtime.ConnectionList
                     For Each _base As mRemoteNG.Connection.Protocol.Base In _connection.OpenConnections
                         If _base.InterfaceControl.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH1 Then
-                            Dim bb As mRemoteNG.Connection.Protocol.SSH1 = _base
-                            Win32.PostMessage(bb.PuttyHandle, Win32.WM_KEYDOWN, e.KeyData, 0)
+                            Dim _processHandler As mRemoteNG.Connection.Protocol.SSH1 = _base
+                            Win32.PostMessage(_processHandler.PuttyHandle, Win32.WM_KEYDOWN, e.KeyData, 0)
                         End If
                     Next
                 Next
