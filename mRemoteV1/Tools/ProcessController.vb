@@ -148,6 +148,9 @@ Namespace Tools
             <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
             Public Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
             End Function
+            <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+            Public Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+            End Function
 
             <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
             Public Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As System.Text.StringBuilder) As IntPtr

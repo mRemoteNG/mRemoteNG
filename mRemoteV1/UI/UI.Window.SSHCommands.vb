@@ -28,25 +28,11 @@ Namespace UI
             End Sub
 
             Private Sub txtSSHCommand_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSSHCommand.KeyDown
-                System.Console.WriteLine("keycode:" + Str(e.KeyCode) + "-keydata:" + Str(e.KeyData) + "keyvalue:" + Str(e.KeyValue) + "-modidfiers:" + Str(e.Modifiers))
-                If e.Alt And e.KeyValue = Keys.Alt Then Return
-                If e.Control And e.KeyValue = Keys.Control Then Return
-                If e.Shift And e.KeyValue = Keys.ShiftKey Then Return
-
-               
-
                 For Each _connection As mRemoteNG.Connection.Info In mRemoteNG.App.Runtime.ConnectionList
                     For Each _base As mRemoteNG.Connection.Protocol.Base In _connection.OpenConnections
                         If _base.InterfaceControl.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH2 Then
                             Dim bb As mRemoteNG.Connection.Protocol.SSH2 = _base
-                            If e.KeyCode = Keys.Oem102 Then
-                                Win32.SendMessage(bb.PuttyHandle, Win32.WM_CHAR, Keys.OemPipe, 0)
-                            End If
-                            If Not e.Shift Then
-                                Win32.SendMessage(bb.PuttyHandle, Win32.WM_KEYDOWN, e.KeyData, 0)
-                            Else
-                                Win32.SendMessage(bb.PuttyHandle, Win32.WM_CHAR, e.KeyData, 0)
-                            End If
+                            Win32.PostMessage(bb.PuttyHandle, Win32.WM_KEYDOWN, e.KeyData, 0)
                         End If
                     Next
                 Next
@@ -54,15 +40,10 @@ Namespace UI
                     For Each _base As mRemoteNG.Connection.Protocol.Base In _connection.OpenConnections
                         If _base.InterfaceControl.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH1 Then
                             Dim bb As mRemoteNG.Connection.Protocol.SSH1 = _base
-                            If Not e.Shift Then
-                                Win32.SendMessage(bb.PuttyHandle, Win32.WM_KEYDOWN, e.KeyData, 0)
-                            Else
-                                Win32.SendMessage(bb.PuttyHandle, Win32.WM_CHAR, e.KeyData, 0)
-                            End If
+                            Win32.PostMessage(bb.PuttyHandle, Win32.WM_KEYDOWN, e.KeyData, 0)
                         End If
                     Next
                 Next
-
             End Sub
 
             Private Sub txtSSHCommand_KeyUp(sender As Object, e As KeyEventArgs) Handles txtSSHCommand.KeyUp
