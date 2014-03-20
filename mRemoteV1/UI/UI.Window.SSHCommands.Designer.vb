@@ -12,9 +12,11 @@
                 'txtSSHCommand
                 '
                 Me.txtSSHCommand.Dock = System.Windows.Forms.DockStyle.Fill
+                Me.txtSSHCommand.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.txtSSHCommand.Location = New System.Drawing.Point(0, 0)
                 Me.txtSSHCommand.Multiline = True
                 Me.txtSSHCommand.Name = "txtSSHCommand"
+                Me.txtSSHCommand.ShortcutsEnabled = False
                 Me.txtSSHCommand.Size = New System.Drawing.Size(242, 173)
                 Me.txtSSHCommand.TabIndex = 0
                 '
