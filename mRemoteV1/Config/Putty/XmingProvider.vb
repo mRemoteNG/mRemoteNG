@@ -102,18 +102,21 @@ Namespace Config.Putty
             AddHandler RegistryProvider.SessionChanged, AddressOf OnRegistrySessionChanged
 
             If _eventWatcher IsNot Nothing Then Return
+            Dim SessionFolderPath As String = GetSessionsFolderPath()
+            If IO.Directory.Exists(SessionFolderPath) Then
+                Try
 
-            Try
-                _eventWatcher = New FileSystemWatcher(GetSessionsFolderPath())
-                _eventWatcher.NotifyFilter = (NotifyFilters.FileName Or NotifyFilters.LastWrite)
-                AddHandler _eventWatcher.Changed, AddressOf OnFileSystemEventArrived
-                AddHandler _eventWatcher.Created, AddressOf OnFileSystemEventArrived
-                AddHandler _eventWatcher.Deleted, AddressOf OnFileSystemEventArrived
-                AddHandler _eventWatcher.Renamed, AddressOf OnFileSystemEventArrived
-                _eventWatcher.EnableRaisingEvents = True
-            Catch ex As Exception
-                Runtime.MessageCollector.AddExceptionMessage("XmingPortablePuttySessions.Watcher.StartWatching() failed.", ex, MessageClass.WarningMsg, True)
-            End Try
+                    _eventWatcher = New FileSystemWatcher(SessionFolderPath)
+                    _eventWatcher.NotifyFilter = (NotifyFilters.FileName Or NotifyFilters.LastWrite)
+                    AddHandler _eventWatcher.Changed, AddressOf OnFileSystemEventArrived
+                    AddHandler _eventWatcher.Created, AddressOf OnFileSystemEventArrived
+                    AddHandler _eventWatcher.Deleted, AddressOf OnFileSystemEventArrived
+                    AddHandler _eventWatcher.Renamed, AddressOf OnFileSystemEventArrived
+                    _eventWatcher.EnableRaisingEvents = True
+                Catch ex As Exception
+                    Runtime.MessageCollector.AddExceptionMessage("XmingPortablePuttySessions.Watcher.StartWatching() failed.", ex, MessageClass.WarningMsg, True)
+                End Try
+            End If
         End Sub
 
         Public Overrides Sub StopWatcher()

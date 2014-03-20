@@ -1479,7 +1479,9 @@ Namespace UI
                 Dim pingSender As New Ping
                 Dim pReply As PingReply
 
-                Try
+                If Not String.IsNullOrEmpty(HostName) Then
+                    Try
+
                     pReply = pingSender.Send(HostName)
 
                     If pReply.Status = IPStatus.Success Then
@@ -1495,7 +1497,8 @@ Namespace UI
                     If Me.btnHostStatus.Tag = "checking" Then
                         ShowStatusImage(My.Resources.HostStatus_Off)
                     End If
-                End Try
+                    End Try
+                End If
             End Sub
 
             Delegate Sub ShowStatusImageCB(ByVal [Image] As Image)
