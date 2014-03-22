@@ -20,7 +20,8 @@ Namespace Tools
         Private Shared Function IsPutty(ByVal filename As String) As Boolean
             Dim result As Boolean
             Try
-                result = FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY")
+                result = IO.File.Exists(filename) AndAlso
+                    FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY")
             Catch
                 result = False
             End Try
@@ -30,7 +31,8 @@ Namespace Tools
         Private Shared Function IsPuttyNg(filename As String) As Boolean
             Dim result As Boolean
             Try
-                result = FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTYNG")
+                result = IO.File.Exists(filename) AndAlso
+                    FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTYNG")
             Catch
                 result = False
             End Try
@@ -40,8 +42,9 @@ Namespace Tools
         Private Shared Function IsKitty(filename As String) As Boolean
             Dim result As Boolean
             Try
-                result = FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY") _
-                    And FileVersionInfo.GetVersionInfo(filename).Comments.Contains("KiTTY")
+                result = IO.File.Exists(filename) AndAlso
+                    FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY") AndAlso
+                    FileVersionInfo.GetVersionInfo(filename).Comments.Contains("KiTTY")
             Catch
                 result = False
             End Try
@@ -51,8 +54,9 @@ Namespace Tools
         Private Shared Function IsXming(filename As String) As Boolean
             Dim result As Boolean
             Try
-                result = FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY") _
-                    And FileVersionInfo.GetVersionInfo(filename).ProductVersion.Contains("Xming")
+                result = IO.File.Exists(filename) AndAlso
+                    FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY") AndAlso
+                    FileVersionInfo.GetVersionInfo(filename).ProductVersion.Contains("Xming")
             Catch
                 result = False
             End Try

@@ -279,6 +279,7 @@
     <Compile Include="Tools\Authenticode.vb" />
     <Compile Include="Tools\EnumWindows.vb" />
     <Compile Include="Tools\EnvironmentInfo.vb" />
+    <Compile Include="Tools\PropertyEditorBase.vb" />
     <Compile Include="Tools\PropertyGridCommandSite.vb" />
     <Compile Include="Connection\PuttySession.Info.vb" />
     <Compile Include="Root\PuttySessions.Info.vb" />
@@ -363,6 +364,12 @@
     <Compile Include="Security\Security.Save.vb" />
     <Compile Include="Tools\IeBrowserEmulation.vb" />
     <Compile Include="Tools\ProcessController.vb" />
+    <Compile Include="Tools\PropertyGridEditors\ucTextbox.Designer.vb">
+      <DependentUpon>ucTextbox.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\PropertyGridEditors\ucTextbox.vb">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="Tools\PuttyTypeDetector.vb" />
     <Compile Include="Tools\PuttyProcessController.vb" />
     <Compile Include="Tools\ReconnectGroup.Designer.vb">
@@ -558,6 +565,9 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\PropertyGridEditors\ucTextbox.resx">
+      <DependentUpon>ucTextbox.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\ReconnectGroup.resx">
       <DependentUpon>ReconnectGroup.vb</DependentUpon>
