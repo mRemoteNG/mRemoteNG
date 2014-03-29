@@ -270,6 +270,9 @@ Namespace Config
                     If persistString = GetType(UI.Window.ScreenshotManager).ToString Then
                         Return Windows.screenshotPanel
                     End If
+                    If persistString = GetType(UI.Window.SSHCommands).ToString Then
+                        Return Windows.sshsPanel
+                    End If
                 Catch ex As Exception
                     Log.Error("GetContentFromPersistString failed" & vbNewLine & ex.Message)
                 End Try

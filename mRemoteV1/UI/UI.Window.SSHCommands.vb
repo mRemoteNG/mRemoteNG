@@ -6,13 +6,15 @@ Imports System.Runtime.InteropServices
 Imports System.Text
 Imports System.Windows
 Imports mRemoteNG.Tools.ProcessController
+Imports mRemoteNG.Connection.Protocol
 
 Namespace UI
     Namespace Window
         Public Class SSHCommands
-            Inherits Base
+            Inherits UI.Window.Base
 #Region "Private Fields"
             Private lastKeyEvent As KeyEventArgs = New KeyEventArgs(Keys.BrowserBack)
+            Private processHandlers() As PuttyBase
 #End Region
 
 #Region "Public Methods"
@@ -24,6 +26,32 @@ Namespace UI
 #End Region
             Private Sub SSHCommands_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
                 txtSSHCommand.ContextMenu = New ContextMenu()
+            End Sub
+
+            Private Sub txtSSHCommand_GotFocus(sender As Object, e As EventArgs) Handles txtSSHCommand.GotFocus
+                Dim count As Integer
+
+                For Each _connection As mRemoteNG.Connection.Info In mRemoteNG.App.Runtime.ConnectionList
+                    For Each _base As mRemoteNG.Connection.Protocol.Base In _connection.OpenConnections
+                        If _base.GetType().IsSubclassOf(GetType(mRemoteNG.Connection.Protocol.PuttyBase)) Then
+                            Dim _processHandler As mRemoteNG.Connection.Protocol.SSH2 = _base
+                            count = count + 1
+                        End If
+                    Next
+                Next
+                If count > 0 Then
+                    ReDim processHandlers(count - 1)
+                    Dim index As Integer
+                    For Each _connection As mRemoteNG.Connection.Info In mRemoteNG.App.Runtime.ConnectionList
+                        For Each _base As mRemoteNG.Connection.Protocol.Base In _connection.OpenConnections
+                            If _base.GetType().IsSubclassOf(GetType(mRemoteNG.Connection.Protocol.PuttyBase)) Then
+                                processHandlers(index) = _base
+                                index = index + 1
+                            End If
+                        Next
+                    Next
+                End If
+                gotoEndOfText()
             End Sub
 
             Private Sub txtSSHCommand_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSSHCommand.KeyDown
@@ -38,24 +66,20 @@ Namespace UI
                         e.SuppressKeyPress = True
                     End If
                 End If
-                For Each _connection As mRemoteNG.Connection.Info In mRemoteNG.App.Runtime.ConnectionList
-                    For Each _base As mRemoteNG.Connection.Protocol.Base In _connection.OpenConnections
-                        If _base.InterfaceControl.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH2 Then
-                            Dim _processHandler As mRemoteNG.Connection.Protocol.SSH2 = _base
-                            Win32.PostMessage(_processHandler.PuttyHandle, Win32.WM_KEYDOWN, e.KeyData, 0)
-                        End If
-                    Next
-                Next
-                For Each _connection As mRemoteNG.Connection.Info In mRemoteNG.App.Runtime.ConnectionList
-                    For Each _base As mRemoteNG.Connection.Protocol.Base In _connection.OpenConnections
-                        If _base.InterfaceControl.Info.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH1 Then
-                            Dim _processHandler As mRemoteNG.Connection.Protocol.SSH1 = _base
-                            Win32.PostMessage(_processHandler.PuttyHandle, Win32.WM_KEYDOWN, e.KeyData, 0)
-                        End If
-                    Next
+                For Each proc1 As PuttyBase In processHandlers
+                    Win32.PostMessage(proc1.PuttyHandle, Win32.WM_KEYDOWN, e.KeyData, 0)
                 Next
             End Sub
 
+            Private Sub txtSSHCommand_MouseClick(sender As Object, e As MouseEventArgs) Handles txtSSHCommand.MouseClick
+                gotoEndOfText()
+            End Sub
+
+            Private Sub gotoEndOfText()
+                txtSSHCommand.SelectionStart = txtSSHCommand.TextLength
+                txtSSHCommand.SelectionLength = 0
+                txtSSHCommand.ScrollToCaret()
+            End Sub
         End Class
     End Namespace
 End Namespace

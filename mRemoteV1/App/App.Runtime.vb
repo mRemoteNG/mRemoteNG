@@ -417,8 +417,6 @@ Namespace App
                 Windows.sshsForm = New UI.Window.SSHCommands(Windows.sshsPanel)
                 Windows.sshsPanel = Windows.sshsForm
 
-
-
                 Windows.screenshotForm = New UI.Window.ScreenshotManager(Windows.screenshotPanel)
                 Windows.screenshotPanel = Windows.screenshotForm
 

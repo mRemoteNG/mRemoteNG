@@ -528,6 +528,7 @@ Public Class frmMain
         Me.mMenViewErrorsAndInfos.Checked = Not Windows.errorsForm.IsHidden
         Me.mMenViewSessions.Checked = Not Windows.sessionsForm.IsHidden
         Me.mMenViewScreenshotManager.Checked = Not Windows.screenshotForm.IsHidden
+        Me.mMenViewMultiPuttyCommand.Checked = Not Windows.sshsPanel.IsHidden
 
         Me.mMenViewExtAppsToolbar.Checked = tsExternalTools.Visible
         Me.mMenViewQuickConnectToolbar.Checked = tsQuickConnect.Visible
@@ -657,6 +658,16 @@ Public Class frmMain
     Private Sub mMenViewFullscreen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mMenViewFullscreen.Click
         Fullscreen.Value = Not Fullscreen.Value
         mMenViewFullscreen.Checked = Fullscreen.Value
+    End Sub
+
+    Private Sub mMenViewMultiPuttyCommand_Click(sender As Object, e As EventArgs) Handles mMenViewMultiPuttyCommand.Click
+        If Me.mMenViewMultiPuttyCommand.Checked = False Then
+            Windows.sshsPanel.Show(Me.pnlDock, DockState.DockBottom)
+            Me.mMenViewMultiPuttyCommand.Checked = True
+        Else
+            Windows.sshsPanel.Hide()
+            Me.mMenViewMultiPuttyCommand.Checked = False
+        End If
     End Sub
 #End Region
 
@@ -1041,13 +1052,4 @@ Public Class frmMain
     End Sub
 #End Region
 
-    Private Sub mMenViewMultiPuttyCommand_Click(sender As Object, e As EventArgs) Handles mMenViewMultiPuttyCommand.Click
-        If Me.mMenViewMultiPuttyCommand.Checked = False Then
-            Windows.sshsPanel.Show(Me.pnlDock)
-            Me.mMenViewMultiPuttyCommand.Checked = True
-        Else
-            Windows.sshsPanel.Hide()
-            Me.mMenViewMultiPuttyCommand.Checked = False
-        End If
-    End Sub
 End Class
