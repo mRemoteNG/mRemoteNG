@@ -1,13 +1,13 @@
-@echo off
+@echo on
 
 setlocal enabledelayedexpansion
 
 set VERSIONTAG=
 
-set VCVARSALL="%ProgramFiles(x86)%\Microsoft Visual Studio 10.0\VC\vcvarsall.bat"
-set DEVENV="devenv.exe"
-set MAKENSIS="%ProgramFiles(x86)%\NSIS\Unicode\makensis.exe"
-set RAR="%ProgramFiles%\WinRAR\WinRAR.exe"
+set VCVARSALL="%ProgramFiles(x86)%\Microsoft Visual Studio 12.0\VC\vcvarsall.bat"
+set DEVENV="wdexpress.exe"
+set MAKENSIS="%ProgramFiles(x86)%\NSIS\makensis.exe"
+set RAR="%ProgramFiles%\7-zip\7z.exe"
 set SIGNCMD=signtool.exe sign /n "Astrospark Technologies, LLC" /sha1 "1cbd910dbd6e77f26506e7f600736972f700673f" /tr http://timestamp.comodoca.com/rfc3161
 
 rem Windows Sysinternals Sigcheck from http://technet.microsoft.com/en-us/sysinternals/bb897441
@@ -131,15 +131,15 @@ echo Signing installer package...
 
 echo Creating release ZIP file...
 del /f /q %BINARYZIP% > nul 2>&1
-%RAR% a -m5 -r -ep1 -afzip -inul %BINARYZIP% "%~dp0\mRemoteV1\bin\Release\*.*"
-%RAR% a -m5 -r -ep1 -afzip -inul %BINARYZIP% "%~dp0\Installer\Dependencies\*.*"
-%RAR% a -m5 -ep -afzip -inul %BINARYZIP% "%~dp0\*.TXT"
+%RAR% a %BINARYZIP% "%~dp0\mRemoteV1\bin\Release\*.*"
+%RAR% a %BINARYZIP% "%~dp0\Installer\Dependencies\*.*"
+%RAR% a %BINARYZIP% "%~dp0\*.TXT"
 
 echo Creating portable ZIP file...
 del /f /q %PORTABLEZIP% > nul 2>&1
-%RAR% a -m5 -r -ep1 -afzip -inul %PORTABLEZIP% "%~dp0\mRemoteV1\bin\Release Portable\*.*"
-%RAR% a -m5 -r -ep1 -afzip -inul %PORTABLEZIP% "%~dp0\Installer\Dependencies\*.*"
-%RAR% a -m5 -ep -afzip -inul %PORTABLEZIP% "%~dp0\*.TXT"
+%RAR% a %PORTABLEZIP% "%~dp0\mRemoteV1\bin\Release Portable\*.*"
+%RAR% a %PORTABLEZIP% "%~dp0\Installer\Dependencies\*.*"
+%RAR% a %PORTABLEZIP% "%~dp0\*.TXT"
 
 echo.
 echo Build process complete.

@@ -13,7 +13,6 @@ Namespace UI
         Public Class SSHCommands
             Inherits UI.Window.Base
 #Region "Private Fields"
-            Private lastKeyEvent As KeyEventArgs = New KeyEventArgs(Keys.BrowserBack)
             Private processHandlers() As PuttyBase
 #End Region
 
