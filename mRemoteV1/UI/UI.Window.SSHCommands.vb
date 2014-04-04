@@ -29,29 +29,33 @@ Namespace UI
             End Sub
 
             Private Sub txtSSHCommand_GotFocus(sender As Object, e As EventArgs) Handles txtSSHCommand.GotFocus
-                Dim count As Integer
+                Try
+                    Dim count As Integer
 
-                For Each _connection As mRemoteNG.Connection.Info In mRemoteNG.App.Runtime.ConnectionList
-                    For Each _base As mRemoteNG.Connection.Protocol.Base In _connection.OpenConnections
-                        If _base.GetType().IsSubclassOf(GetType(mRemoteNG.Connection.Protocol.PuttyBase)) Then
-                            Dim _processHandler As mRemoteNG.Connection.Protocol.SSH2 = _base
-                            count = count + 1
-                        End If
-                    Next
-                Next
-                If count > 0 Then
-                    ReDim processHandlers(count - 1)
-                    Dim index As Integer
                     For Each _connection As mRemoteNG.Connection.Info In mRemoteNG.App.Runtime.ConnectionList
                         For Each _base As mRemoteNG.Connection.Protocol.Base In _connection.OpenConnections
                             If _base.GetType().IsSubclassOf(GetType(mRemoteNG.Connection.Protocol.PuttyBase)) Then
-                                processHandlers(index) = _base
-                                index = index + 1
+                                Dim _processHandler As mRemoteNG.Connection.Protocol.SSH2 = _base
+                                count = count + 1
                             End If
                         Next
                     Next
-                End If
-                gotoEndOfText()
+                    If count > 0 Then
+                        ReDim processHandlers(count - 1)
+                        Dim index As Integer
+                        For Each _connection As mRemoteNG.Connection.Info In mRemoteNG.App.Runtime.ConnectionList
+                            For Each _base As mRemoteNG.Connection.Protocol.Base In _connection.OpenConnections
+                                If _base.GetType().IsSubclassOf(GetType(mRemoteNG.Connection.Protocol.PuttyBase)) Then
+                                    processHandlers(index) = _base
+                                    index = index + 1
+                                End If
+                            Next
+                        Next
+                    End If
+                    gotoEndOfText()
+                Catch ex As Exception
+
+                End Try
             End Sub
 
             Private Sub txtSSHCommand_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSSHCommand.KeyDown
@@ -95,24 +99,6 @@ Namespace UI
                 txtSSHCommand.SelectionLength = 0
                 txtSSHCommand.ScrollToCaret()
             End Sub
-
-            Private Sub txtSSHCommand_TextChanged(sender As Object, e As EventArgs) Handles txtSSHCommand.TextChanged
-
-            End Sub
-            Private Function Get_Text_From_ClipBoard()
-                Try
-                    If My.Computer.Clipboard.ContainsText() Then
-                        Dim ClipText As String
-                        ClipText = My.Computer.Clipboard.GetText
-                        Return ClipText
-                    Else
-                        MsgBox("No Text in ClipBoard")
-                    End If
-                Catch ex As Exception
-                    MsgBox(ex.Message)
-                End Try
-            End Function
-
         End Class
     End Namespace
 End Namespace
