@@ -16,7 +16,7 @@
                 Me.txtSSHCommand.Location = New System.Drawing.Point(0, 0)
                 Me.txtSSHCommand.Multiline = True
                 Me.txtSSHCommand.Name = "txtSSHCommand"
-                Me.txtSSHCommand.ShortcutsEnabled = False
+                Me.txtSSHCommand.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
                 Me.txtSSHCommand.Size = New System.Drawing.Size(242, 173)
                 Me.txtSSHCommand.TabIndex = 0
                 '

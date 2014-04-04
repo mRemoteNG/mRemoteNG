@@ -13,7 +13,7 @@ Namespace UI
         Public Class SSHCommands
             Inherits UI.Window.Base
 #Region "Private Fields"
-            Private processHandlers() As PuttyBase
+            Private processHandlers() As PuttyBase = Nothing
 #End Region
 
 #Region "Public Methods"
@@ -24,7 +24,8 @@ Namespace UI
             End Sub
 #End Region
             Private Sub SSHCommands_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
-                txtSSHCommand.ContextMenu = New ContextMenu()
+                'txtSSHCommand.ContextMenu = New ContextMenu()
+                Control.CheckForIllegalCrossThreadCalls = False
             End Sub
 
             Private Sub txtSSHCommand_GotFocus(sender As Object, e As EventArgs) Handles txtSSHCommand.GotFocus
@@ -54,6 +55,10 @@ Namespace UI
             End Sub
 
             Private Sub txtSSHCommand_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSSHCommand.KeyDown
+                If processHandlers Is Nothing Then
+                    e.SuppressKeyPress = True
+                    Return
+                End If
                 If e.KeyCode = Keys.Up Then
                     e.SuppressKeyPress = True
                 End If
@@ -61,13 +66,24 @@ Namespace UI
                     Dim index As Integer = txtSSHCommand.SelectionStart
                     Dim currentLine As Integer = txtSSHCommand.GetLineFromCharIndex(index)
                     Dim currentColumn As Integer = index - txtSSHCommand.GetFirstCharIndexFromLine(currentLine)
-                    If currentColumn <> 1 Then
+                    If currentColumn = 0 Then
                         e.SuppressKeyPress = True
                     End If
                 End If
-                For Each proc1 As PuttyBase In processHandlers
-                    Win32.PostMessage(proc1.PuttyHandle, Win32.WM_KEYDOWN, e.KeyData, 0)
-                Next
+
+                If e.KeyCode = Keys.Enter Then
+                    Dim line As Integer = txtSSHCommand.GetLineFromCharIndex(txtSSHCommand.SelectionStart)
+                    Dim strLine As String = txtSSHCommand.Lines(line)
+                    For Each chr1 As Char In strLine
+                        Dim keyData As Byte = Convert.ToByte(chr1)
+                        For Each proc1 As PuttyBase In processHandlers
+                            Win32.PostMessage(proc1.PuttyHandle, Win32.WM_CHAR, keyData, 0)
+                        Next
+                    Next
+                    For Each proc1 As PuttyBase In processHandlers
+                        Win32.PostMessage(proc1.PuttyHandle, Win32.WM_KEYDOWN, Keys.Enter, 0)
+                    Next
+                End If
             End Sub
 
             Private Sub txtSSHCommand_MouseClick(sender As Object, e As MouseEventArgs) Handles txtSSHCommand.MouseClick
@@ -79,6 +95,24 @@ Namespace UI
                 txtSSHCommand.SelectionLength = 0
                 txtSSHCommand.ScrollToCaret()
             End Sub
+
+            Private Sub txtSSHCommand_TextChanged(sender As Object, e As EventArgs) Handles txtSSHCommand.TextChanged
+
+            End Sub
+            Private Function Get_Text_From_ClipBoard()
+                Try
+                    If My.Computer.Clipboard.ContainsText() Then
+                        Dim ClipText As String
+                        ClipText = My.Computer.Clipboard.GetText
+                        Return ClipText
+                    Else
+                        MsgBox("No Text in ClipBoard")
+                    End If
+                Catch ex As Exception
+                    MsgBox(ex.Message)
+                End Try
+            End Function
+
         End Class
     End Namespace
 End Namespace
