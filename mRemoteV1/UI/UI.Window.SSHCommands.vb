@@ -63,8 +63,22 @@ Namespace UI
                     e.SuppressKeyPress = True
                     Return
                 End If
-                If e.KeyCode = Keys.Up Then
+
+                If e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.V Then
+                    txtSSHCommand.Clear()
+                    Dim str As String = Clipboard.GetText(TextDataFormat.Text)
+                    str = str.Replace(vbCr, "").Replace(vbLf, "")
+                    txtSSHCommand.Text += str
+                    gotoEndOfText()
+                    e.Handled = True
+                End If
+
+                If e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Then
                     e.SuppressKeyPress = True
+                    sendAllKey(Win32.WM_KEYDOWN, e.KeyValue)
+                End If
+                If e.Control = True And e.KeyCode <> Keys.V Then
+                    sendAllKey(Win32.WM_KEYDOWN, e.KeyValue)
                 End If
                 If e.KeyCode = Keys.Back Then
                     Dim index As Integer = txtSSHCommand.SelectionStart
@@ -76,17 +90,20 @@ Namespace UI
                 End If
 
                 If e.KeyCode = Keys.Enter Then
-                    Dim line As Integer = txtSSHCommand.GetLineFromCharIndex(txtSSHCommand.SelectionStart)
-                    Dim strLine As String = txtSSHCommand.Lines(line)
-                    For Each chr1 As Char In strLine
-                        Dim keyData As Byte = Convert.ToByte(chr1)
-                        For Each proc1 As PuttyBase In processHandlers
-                            Win32.PostMessage(proc1.PuttyHandle, Win32.WM_CHAR, keyData, 0)
+                    If txtSSHCommand.SelectionStart > 0 Then
+                        Dim line As Integer = txtSSHCommand.GetLineFromCharIndex(txtSSHCommand.SelectionStart)
+                        If line > txtSSHCommand.Lines.Length Then
+                            line = txtSSHCommand.Lines.Length - 1
+                        End If
+                        Dim strLine As String = txtSSHCommand.Lines(line)
+                        For Each chr1 As Char In strLine
+                            Dim keyData As Byte = Convert.ToByte(chr1)
+                            sendAllKey(Win32.WM_CHAR, keyData)
                         Next
-                    Next
-                    For Each proc1 As PuttyBase In processHandlers
-                        Win32.PostMessage(proc1.PuttyHandle, Win32.WM_KEYDOWN, Keys.Enter, 0)
-                    Next
+                    End If
+                    sendAllKey(Win32.WM_KEYDOWN, Keys.Enter)
+                    txtSSHCommand.Clear()
+                    gotoEndOfText()
                 End If
             End Sub
 
@@ -98,6 +115,15 @@ Namespace UI
                 txtSSHCommand.SelectionStart = txtSSHCommand.TextLength
                 txtSSHCommand.SelectionLength = 0
                 txtSSHCommand.ScrollToCaret()
+            End Sub
+            Private Sub sendAllKey(keyType As Integer, keyData As Byte)
+                For Each proc1 As PuttyBase In processHandlers
+                    Win32.PostMessage(proc1.PuttyHandle, keyType, keyData, 0)
+                Next
+            End Sub
+
+            Private Sub txtSSHCommand_TextChanged(sender As Object, e As EventArgs) Handles txtSSHCommand.TextChanged
+
             End Sub
         End Class
     End Namespace
