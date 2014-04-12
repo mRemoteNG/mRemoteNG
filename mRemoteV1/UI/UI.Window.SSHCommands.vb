@@ -65,12 +65,12 @@ Namespace UI
                 End If
 
                 If e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.V Then
-                    txtSSHCommand.Clear()
                     Dim str As String = Clipboard.GetText(TextDataFormat.Text)
-                    str = str.Replace(vbCr, "").Replace(vbLf, "")
-                    txtSSHCommand.Text += str
-                    gotoEndOfText()
-                    e.Handled = True
+                    If str.Contains(Environment.NewLine) Then
+                        gotoEndOfText()
+                        e.SuppressKeyPress = True
+                        Return
+                    End If
                 End If
 
                 If e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Then
@@ -102,7 +102,6 @@ Namespace UI
                         Next
                     End If
                     sendAllKey(Win32.WM_KEYDOWN, Keys.Enter)
-                    txtSSHCommand.Clear()
                     gotoEndOfText()
                 End If
             End Sub
@@ -112,6 +111,9 @@ Namespace UI
             End Sub
 
             Private Sub gotoEndOfText()
+                txtSSHCommand.Clear()
+                txtSSHCommand.Text = "Write the command down" + Environment.NewLine
+                Application.DoEvents()
                 txtSSHCommand.SelectionStart = txtSSHCommand.TextLength
                 txtSSHCommand.SelectionLength = 0
                 txtSSHCommand.ScrollToCaret()
@@ -123,6 +125,11 @@ Namespace UI
             End Sub
 
             Private Sub txtSSHCommand_TextChanged(sender As Object, e As EventArgs) Handles txtSSHCommand.TextChanged
+
+            End Sub
+
+            Private Sub txtSSHCommand_KeyUp(sender As Object, e As KeyEventArgs)
+                gotoEndOfText()
 
             End Sub
         End Class
