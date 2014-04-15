@@ -29,6 +29,7 @@
                 Me.lstCommands.Name = "lstCommands"
                 Me.lstCommands.Size = New System.Drawing.Size(120, 378)
                 Me.lstCommands.TabIndex = 1
+                Me.lstCommands.Visible = False
                 '
                 'SSHCommands
                 '
