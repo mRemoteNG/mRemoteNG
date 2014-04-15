@@ -52,7 +52,6 @@ Namespace UI
                             Next
                         Next
                     End If
-                    gotoEndOfText()
                 Catch ex As Exception
 
                 End Try
@@ -64,59 +63,43 @@ Namespace UI
                     Return
                 End If
 
-                If e.Modifiers = Keys.Control AndAlso e.KeyCode = Keys.V Then
-                    Dim str As String = Clipboard.GetText(TextDataFormat.Text)
-                    If str.Contains(Environment.NewLine) Then
-                        gotoEndOfText()
-                        e.SuppressKeyPress = True
-                        Return
-                    End If
-                End If
-
                 If e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Then
                     e.SuppressKeyPress = True
                     sendAllKey(Win32.WM_KEYDOWN, e.KeyValue)
+                    Dim lastCommand As String = ""
+                    If lstCommands.SelectedIndex = lstCommands.Items.Count Then
+                        lastCommand = lstCommands.Items(lstCommands.Items.Count)
+                    End If
+                    If e.KeyCode = Keys.Up And lstCommands.SelectedIndex - 1 > -1 And lstCommands.SelectedItem = txtSSHCommand.Text Then
+                        lstCommands.SelectedIndex = lstCommands.SelectedIndex - 1
+                    End If
+                    If e.KeyCode = Keys.Down And lstCommands.SelectedIndex + 1 < lstCommands.Items.Count Then
+                        lstCommands.SelectedIndex = lstCommands.SelectedIndex + 1
+                    End If
+                    lastCommand = lstCommands.SelectedItem
+                    txtSSHCommand.Text = lastCommand
+                    txtSSHCommand.Select(txtSSHCommand.TextLength, 0)
                 End If
                 If e.Control = True And e.KeyCode <> Keys.V Then
                     sendAllKey(Win32.WM_KEYDOWN, e.KeyValue)
                 End If
-                If e.KeyCode = Keys.Back Then
-                    Dim index As Integer = txtSSHCommand.SelectionStart
-                    Dim currentLine As Integer = txtSSHCommand.GetLineFromCharIndex(index)
-                    Dim currentColumn As Integer = index - txtSSHCommand.GetFirstCharIndexFromLine(currentLine)
-                    If currentColumn = 0 Then
-                        e.SuppressKeyPress = True
-                    End If
-                End If
 
                 If e.KeyCode = Keys.Enter Then
-                    If txtSSHCommand.SelectionStart > 0 Then
-                        Dim line As Integer = txtSSHCommand.GetLineFromCharIndex(txtSSHCommand.SelectionStart)
-                        If line > txtSSHCommand.Lines.Length Then
-                            line = txtSSHCommand.Lines.Length - 1
-                        End If
-                        Dim strLine As String = txtSSHCommand.Lines(line)
-                        For Each chr1 As Char In strLine
-                            Dim keyData As Byte = Convert.ToByte(chr1)
-                            sendAllKey(Win32.WM_CHAR, keyData)
-                        Next
-                    End If
+                    Dim strLine As String = txtSSHCommand.Text
+                    For Each chr1 As Char In strLine
+                        Dim keyData As Byte = Convert.ToByte(chr1)
+                        sendAllKey(Win32.WM_CHAR, keyData)
+                    Next
                     sendAllKey(Win32.WM_KEYDOWN, Keys.Enter)
-                    gotoEndOfText()
                 End If
-            End Sub
-
-            Private Sub txtSSHCommand_MouseClick(sender As Object, e As MouseEventArgs) Handles txtSSHCommand.MouseClick
-                gotoEndOfText()
             End Sub
 
             Private Sub gotoEndOfText()
+                If txtSSHCommand.Text.Trim() <> "" Then
+                    lstCommands.Items.Add(txtSSHCommand.Text.Trim())
+                End If
+                lstCommands.SelectedIndex = lstCommands.Items.Count - 1
                 txtSSHCommand.Clear()
-                txtSSHCommand.Text = "Write the command down" + Environment.NewLine
-                Application.DoEvents()
-                txtSSHCommand.SelectionStart = txtSSHCommand.TextLength
-                txtSSHCommand.SelectionLength = 0
-                txtSSHCommand.ScrollToCaret()
             End Sub
             Private Sub sendAllKey(keyType As Integer, keyData As Byte)
                 For Each proc1 As PuttyBase In processHandlers
@@ -124,13 +107,10 @@ Namespace UI
                 Next
             End Sub
 
-            Private Sub txtSSHCommand_TextChanged(sender As Object, e As EventArgs) Handles txtSSHCommand.TextChanged
-
-            End Sub
-
-            Private Sub txtSSHCommand_KeyUp(sender As Object, e As KeyEventArgs)
-                gotoEndOfText()
-
+            Private Sub txtSSHCommand_KeyUp(sender As Object, e As KeyEventArgs) Handles txtSSHCommand.KeyUp
+                If e.KeyCode = Keys.Enter Then
+                    gotoEndOfText()
+                End If
             End Sub
         End Class
     End Namespace
