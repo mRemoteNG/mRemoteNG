@@ -58,6 +58,7 @@ Namespace UI
             End Sub
 
             Private Sub txtSSHCommand_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSSHCommand.KeyDown
+                'System.Console.WriteLine("e.KeyCode:" + Convert.ToString(e.KeyCode) + "e.Alt:" + Convert.ToString(e.Alt) + "e.Control:" + Convert.ToString(e.Control) + "e.Modifiers:" + Convert.ToString(e.Modifiers))
                 If processHandlers Is Nothing Then
                     e.SuppressKeyPress = True
                     Return
@@ -65,7 +66,6 @@ Namespace UI
 
                 If e.KeyCode = Keys.Up Or e.KeyCode = Keys.Down Then
                     e.SuppressKeyPress = True
-                    sendAllKey(Win32.WM_KEYDOWN, e.KeyValue)
                     Dim lastCommand As String = ""
                     If lstCommands.SelectedIndex = lstCommands.Items.Count Then
                         lastCommand = lstCommands.Items(lstCommands.Items.Count)
@@ -80,11 +80,15 @@ Namespace UI
                     txtSSHCommand.Text = lastCommand
                     txtSSHCommand.Select(txtSSHCommand.TextLength, 0)
                 End If
-                If e.Control = True And e.KeyCode <> Keys.V Then
+
+                If e.Control = True And e.KeyCode <> Keys.V And e.Alt = False Then
                     sendAllKey(Win32.WM_KEYDOWN, e.KeyValue)
                 End If
 
                 If e.KeyCode = Keys.Enter Then
+                    ''TODO: before sending any command ctrl+u will be nice
+                    'sendAllKey(Win32.WM_CHAR, Keys.Control)
+                    'sendAllKey(Win32.WM_CHAR, Keys.U)
                     Dim strLine As String = txtSSHCommand.Text
                     For Each chr1 As Char In strLine
                         Dim keyData As Byte = Convert.ToByte(chr1)
@@ -101,7 +105,10 @@ Namespace UI
                 lstCommands.SelectedIndex = lstCommands.Items.Count - 1
                 txtSSHCommand.Clear()
             End Sub
-            Private Sub sendAllKey(keyType As Integer, keyData As Byte)
+            Private Sub sendAllKey(keyType As Integer, keyData As IntPtr)
+                If processHandlers Is Nothing Then
+                    Return
+                End If
                 For Each proc1 As PuttyBase In processHandlers
                     Win32.PostMessage(proc1.PuttyHandle, keyType, keyData, 0)
                 Next
@@ -111,6 +118,18 @@ Namespace UI
                 If e.KeyCode = Keys.Enter Then
                     gotoEndOfText()
                 End If
+            End Sub
+
+            Private Sub txtSSHCommand_PreviewKeyDown(sender As Object, e As PreviewKeyDownEventArgs) Handles txtSSHCommand.PreviewKeyDown
+                ''TODO: if putty out can be read then we can take that string to the scene
+                'If e.KeyCode = Keys.Tab Then
+                '    Dim strLine As String = txtSSHCommand.Text
+                '    For Each chr1 As Char In strLine
+                '        Dim keyData As Byte = Convert.ToByte(chr1)
+                '        sendAllKey(Win32.WM_CHAR, keyData)
+                '    Next
+                '    sendAllKey(Win32.WM_KEYDOWN, e.KeyValue)
+                'End If
             End Sub
         End Class
     End Namespace
