@@ -28,8 +28,8 @@ namespace SharedLibraryNG
         [return: MarshalAs(UnmanagedType.Bool)]
         public static extern bool GetGUIThreadInfo(Int32 idThread, GUITHREADINFO lpgui);
 
-		[DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-		public static extern IntPtr GetAncestor(IntPtr hwnd, UInt32 gaFlags);
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern IntPtr GetAncestor(IntPtr hwnd, UInt32 gaFlags);
 
         [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
         public static extern Int16 GetAsyncKeyState(Int32 vKey);
@@ -86,8 +86,8 @@ namespace SharedLibraryNG
 
         #region Constants
 
-		// GetAncestor
-	    public const int GA_ROOT = 2;
+        // GetAncestor
+        public const int GA_ROOT = 2;
 
         // SetWindowsHookEx
         public const int WH_KEYBOARD_LL = 13;

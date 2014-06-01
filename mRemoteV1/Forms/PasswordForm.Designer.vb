@@ -40,7 +40,7 @@
             Me.lblPassword.Location = New System.Drawing.Point(82, 12)
             Me.lblPassword.Name = "lblPassword"
             Me.lblPassword.Size = New System.Drawing.Size(56, 13)
-            Me.lblPassword.TabIndex = 1
+            Me.lblPassword.TabIndex = 0
             Me.lblPassword.Text = "Password:"
             '
             'lblVerify
@@ -49,16 +49,16 @@
             Me.lblVerify.Location = New System.Drawing.Point(82, 51)
             Me.lblVerify.Name = "lblVerify"
             Me.lblVerify.Size = New System.Drawing.Size(36, 13)
-            Me.lblVerify.TabIndex = 3
+            Me.lblVerify.TabIndex = 2
             Me.lblVerify.Text = "Verify:"
             '
             'btnOK
             '
             Me.btnOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-            Me.btnOK.Location = New System.Drawing.Point(291, 119)
+            Me.btnOK.Location = New System.Drawing.Point(210, 119)
             Me.btnOK.Name = "btnOK"
             Me.btnOK.Size = New System.Drawing.Size(75, 23)
-            Me.btnOK.TabIndex = 7
+            Me.btnOK.TabIndex = 5
             Me.btnOK.Text = Global.mRemoteNG.My.Language.strButtonOK
             Me.btnOK.UseVisualStyleBackColor = True
             '
@@ -66,7 +66,7 @@
             '
             Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
             Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-            Me.btnCancel.Location = New System.Drawing.Point(210, 119)
+            Me.btnCancel.Location = New System.Drawing.Point(291, 119)
             Me.btnCancel.Name = "btnCancel"
             Me.btnCancel.Size = New System.Drawing.Size(75, 23)
             Me.btnCancel.TabIndex = 6
@@ -81,7 +81,7 @@
             Me.lblStatus.Location = New System.Drawing.Point(85, 90)
             Me.lblStatus.Name = "lblStatus"
             Me.lblStatus.Size = New System.Drawing.Size(281, 13)
-            Me.lblStatus.TabIndex = 5
+            Me.lblStatus.TabIndex = 4
             Me.lblStatus.Text = "Status"
             Me.lblStatus.TextAlign = System.Drawing.ContentAlignment.TopRight
             Me.lblStatus.Visible = False
@@ -104,7 +104,7 @@
             Me.txtVerify.Name = "txtVerify"
             Me.txtVerify.SelectAllOnFocus = True
             Me.txtVerify.Size = New System.Drawing.Size(281, 20)
-            Me.txtVerify.TabIndex = 4
+            Me.txtVerify.TabIndex = 3
             Me.txtVerify.UseSystemPasswordChar = True
             '
             'txtPassword
@@ -115,10 +115,10 @@
             Me.txtPassword.Name = "txtPassword"
             Me.txtPassword.SelectAllOnFocus = True
             Me.txtPassword.Size = New System.Drawing.Size(281, 20)
-            Me.txtPassword.TabIndex = 2
+            Me.txtPassword.TabIndex = 1
             Me.txtPassword.UseSystemPasswordChar = True
             '
-            'frmPassword
+            'PasswordForm
             '
             Me.AcceptButton = Me.btnOK
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)

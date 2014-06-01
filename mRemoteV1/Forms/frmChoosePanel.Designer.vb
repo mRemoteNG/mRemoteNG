@@ -32,17 +32,16 @@ Partial Class frmChoosePanel
         'cbPanels
         '
         Me.cbPanels.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
-        Me.cbPanels.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.cbPanels.FormattingEnabled = True
-        Me.cbPanels.Location = New System.Drawing.Point(79, 45)
+        Me.cbPanels.Location = New System.Drawing.Point(73, 48)
         Me.cbPanels.Name = "cbPanels"
-        Me.cbPanels.Size = New System.Drawing.Size(157, 21)
+        Me.cbPanels.Size = New System.Drawing.Size(168, 21)
         Me.cbPanels.TabIndex = 10
         '
         'btnOK
         '
-        Me.btnOK.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnOK.Location = New System.Drawing.Point(167, 74)
+        Me.btnOK.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btnOK.Location = New System.Drawing.Point(97, 85)
         Me.btnOK.Name = "btnOK"
         Me.btnOK.Size = New System.Drawing.Size(69, 23)
         Me.btnOK.TabIndex = 20
@@ -53,18 +52,17 @@ Partial Class frmChoosePanel
         '
         Me.lblDescription.Location = New System.Drawing.Point(7, 8)
         Me.lblDescription.Name = "lblDescription"
-        Me.lblDescription.Size = New System.Drawing.Size(229, 29)
+        Me.lblDescription.Size = New System.Drawing.Size(234, 29)
         Me.lblDescription.TabIndex = 0
         Me.lblDescription.Text = My.Language.strLabelSelectPanel
         '
         'btnNew
         '
-        Me.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btnNew.Image = Global.mRemoteNG.My.Resources.Resources.Panel_Add
         Me.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
-        Me.btnNew.Location = New System.Drawing.Point(10, 44)
+        Me.btnNew.Location = New System.Drawing.Point(10, 45)
         Me.btnNew.Name = "btnNew"
-        Me.btnNew.Size = New System.Drawing.Size(57, 23)
+        Me.btnNew.Size = New System.Drawing.Size(57, 27)
         Me.btnNew.TabIndex = 40
         Me.btnNew.Text = My.Language.strButtonNew
         Me.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight
@@ -72,9 +70,9 @@ Partial Class frmChoosePanel
         '
         'btnCancel
         '
+        Me.btnCancel.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel
-        Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btnCancel.Location = New System.Drawing.Point(92, 74)
+        Me.btnCancel.Location = New System.Drawing.Point(172, 85)
         Me.btnCancel.Name = "btnCancel"
         Me.btnCancel.Size = New System.Drawing.Size(69, 23)
         Me.btnCancel.TabIndex = 30
@@ -87,17 +85,19 @@ Partial Class frmChoosePanel
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnCancel
-        Me.ClientSize = New System.Drawing.Size(245, 107)
+        Me.ClientSize = New System.Drawing.Size(253, 120)
+        Me.ControlBox = False
         Me.Controls.Add(Me.lblDescription)
         Me.Controls.Add(Me.btnNew)
         Me.Controls.Add(Me.btnCancel)
         Me.Controls.Add(Me.btnOK)
         Me.Controls.Add(Me.cbPanels)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = Global.mRemoteNG.My.Resources.Resources.Panels_Icon
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "frmChoosePanel"
+        Me.ShowIcon = False
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = My.Language.strTitleSelectPanel
