@@ -532,7 +532,9 @@ Namespace App
                         Log.WarnFormat("Error retrieving operating system address width from WMI. {0}", ex.Message)
                     End Try
 
-                    Log.InfoFormat(String.Join(" ", Array.FindAll(New String() {osVersion, servicePack, architecture}, Function(s) Not String.IsNullOrEmpty(s))))
+                    Dim s() As String = New String() {osVersion, servicePack, architecture}
+                    Dim searchResult As String = Array.FindAll(s)
+                    Log.InfoFormat(String.Join(" ", searchResult))
 
                     Log.InfoFormat("Microsoft .NET CLR {0}", Version.ToString)
                     Log.InfoFormat("System Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName)
