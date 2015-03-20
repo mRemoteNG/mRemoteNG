@@ -23,6 +23,13 @@ Namespace App
 
 #Region "Public Properties"
         Public Shared Property MainForm As frmMain
+            Get
+                Return MainForm
+            End Get
+            Set(ByVal value As MainForm)
+                MainForm = value
+            End Set
+        End Property
 
         Private Shared _connectionList As Connection.List
         Public Shared Property ConnectionList() As List
