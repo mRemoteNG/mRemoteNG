@@ -33,17 +33,94 @@ Namespace Config
 
 #Region "Public Properties"
             Public Property SQLHost As String
+                Get
+                    Return SQLHost
+                End Get
+                Set(ByVal value As SQLHost)
+                    SQLHost = value
+                End Set
+            End Property
             Public Property SQLDatabaseName As String
+                Get
+                    Return SQLDatabaseName
+                End Get
+                Set(ByVal value As SQLDatabaseName)
+                    SQLDatabaseName = value
+                End Set
+            End Property
             Public Property SQLUsername As String
+                Get
+                    Return SQLUsername
+                End Get
+                Set(ByVal value As SQLUsername)
+                    SQLUsername = value
+                End Set
+            End Property
             Public Property SQLPassword As String
+                Get
+                    Return SQLPassword
+                End Get
+                Set(ByVal value As SQLPassword)
+                    SQLPassword = value
+                End Set
+            End Property
 
             Public Property ConnectionFileName As String
+                Get
+                    Return ConnectionFileName
+                End Get
+                Set(ByVal value As ConnectionFileName)
+                    ConnectionFileName = value
+                End Set
+            End Property
             Public Property RootTreeNode As TreeNode
+                Get
+                    Return RootTreeNode
+                End Get
+                Set(ByVal value As RootTreeNode)
+                    RootTreeNode = value
+                End Set
+            End Property
             Public Property Export As Boolean
+                Get
+                    Return Export
+                End Get
+                Set(ByVal value As Export)
+                    Export = value
+                End Set
+            End Property
             Public Property SaveFormat As Format
+                Get
+                    Return SaveFormat
+                End Get
+                Set(ByVal value As SaveFormat)
+                    SaveFormat = value
+                End Set
+            End Property
             Public Property SaveSecurity As Security.Save
+                Get
+                    Return SaveSecurity
+                End Get
+                Set(ByVal value As SaveSecurity)
+                    SaveSecurity = value
+                End Set
+            End Property
             Public Property ConnectionList As Connection.List
+                Get
+                    Return ConnectionList
+                End Get
+                Set(ByVal value As ConnectionList)
+                    ConnectionList = value
+                End Set
+            End Property
             Public Property ContainerList As Container.List
+                Get
+                    Return ContainerList
+                End Get
+                Set(ByVal value As ContainerList)
+                    ContainerList = value
+                End Set
+            End Property
 #End Region
 
 #Region "Public Methods"

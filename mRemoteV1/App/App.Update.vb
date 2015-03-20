@@ -302,13 +302,69 @@ Namespace App
         Public Class UpdateInfo
 #Region "Public Properties"
             Public Property IsValid As Boolean
+                Get
+                    Return IsValid
+                End Get
+                Set(ByVal value As IsValid)
+                    IsValid = value
+                End Set
+            End Property
             Public Property Version As Version
+                Get
+                    Return Version
+                End Get
+                Set(ByVal value As Version)
+                    Version = value
+                End Set
+            End Property
             Public Property DownloadAddress As Uri
+                Get
+                    Return DownloadAddress
+                End Get
+                Set(ByVal value As DownloadAddress)
+                    DownloadAddress = value
+                End Set
+            End Property
             Public Property UpdateFilePath As String
+                Get
+                    Return UpdateFilePath
+                End Get
+                Set(ByVal value As UpdateFilePath)
+                    UpdateFilePath = value
+                End Set
+            End Property
             Public Property ChangeLogAddress As Uri
+                Get
+                    Return ChangeLogAddress
+                End Get
+                Set(ByVal value As ChangeLogAddress)
+                    ChangeLogAddress = value
+                End Set
+            End Property
             Public Property ImageAddress As Uri
+                Get
+                    Return ImageAddress
+                End Get
+                Set(ByVal value As ImageAddress)
+                    ImageAddress = value
+                End Set
+            End Property
             Public Property ImageLinkAddress As Uri
+                Get
+                    Return ImageLinkAddress
+                End Get
+                Set(ByVal value As ImageLinkAddress)
+                    ImageLinkAddress = value
+                End Set
+            End Property
             Public Property CertificateThumbprint As String
+                Get
+                    Return CertificateThumbprint
+                End Get
+                Set(ByVal value As CertificateThumbprint)
+                    CertificateThumbprint = value
+                End Set
+            End Property
 #End Region
 
 #Region "Public Methods"
@@ -336,8 +392,29 @@ Namespace App
         Public Class AnnouncementInfo
 #Region "Public Properties"
             Public Property IsValid As Boolean
+                Get
+                    Return IsValid
+                End Get
+                Set(ByVal value As IsValid)
+                    IsValid = value
+                End Set
+            End Property
             Public Property Name As String
+                Get
+                    Return Name
+                End Get
+                Set(ByVal value As Name)
+                    Name = value
+                End Set
+            End Property
             Public Property Address As Uri
+                Get
+                    Return Address
+                End Get
+                Set(ByVal value As Address)
+                    Address = value
+                End Set
+            End Property
 #End Region
 
 #Region "Public Methods"
