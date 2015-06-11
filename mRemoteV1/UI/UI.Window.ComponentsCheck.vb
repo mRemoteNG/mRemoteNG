@@ -35,36 +35,44 @@ Namespace UI
             Friend WithEvents txtCheck6 As System.Windows.Forms.TextBox
             Friend WithEvents lblCheck6 As System.Windows.Forms.Label
             Friend WithEvents pbCheck6 As System.Windows.Forms.PictureBox
+            Friend WithEvents pnlCheck7 As System.Windows.Forms.Panel
+            Friend WithEvents txtCheck7 As System.Windows.Forms.TextBox
+            Friend WithEvents lblCheck7 As System.Windows.Forms.Label
+            Friend WithEvents pbCheck7 As System.Windows.Forms.PictureBox
             Friend WithEvents pnlCheck1 As System.Windows.Forms.Panel
 
             Private Sub InitializeComponent()
-                Me.pnlCheck1 = New System.Windows.Forms.Panel
-                Me.txtCheck1 = New System.Windows.Forms.TextBox
-                Me.lblCheck1 = New System.Windows.Forms.Label
-                Me.pbCheck1 = New System.Windows.Forms.PictureBox
-                Me.pnlCheck2 = New System.Windows.Forms.Panel
-                Me.txtCheck2 = New System.Windows.Forms.TextBox
-                Me.lblCheck2 = New System.Windows.Forms.Label
-                Me.pbCheck2 = New System.Windows.Forms.PictureBox
-                Me.pnlCheck3 = New System.Windows.Forms.Panel
-                Me.txtCheck3 = New System.Windows.Forms.TextBox
-                Me.lblCheck3 = New System.Windows.Forms.Label
-                Me.pbCheck3 = New System.Windows.Forms.PictureBox
-                Me.pnlCheck4 = New System.Windows.Forms.Panel
-                Me.txtCheck4 = New System.Windows.Forms.TextBox
-                Me.lblCheck4 = New System.Windows.Forms.Label
-                Me.pbCheck4 = New System.Windows.Forms.PictureBox
-                Me.pnlCheck5 = New System.Windows.Forms.Panel
-                Me.txtCheck5 = New System.Windows.Forms.TextBox
-                Me.lblCheck5 = New System.Windows.Forms.Label
-                Me.pbCheck5 = New System.Windows.Forms.PictureBox
-                Me.btnCheckAgain = New System.Windows.Forms.Button
-                Me.chkAlwaysShow = New System.Windows.Forms.CheckBox
-                Me.pnlChecks = New System.Windows.Forms.Panel
-                Me.pnlCheck6 = New System.Windows.Forms.Panel
-                Me.txtCheck6 = New System.Windows.Forms.TextBox
-                Me.lblCheck6 = New System.Windows.Forms.Label
-                Me.pbCheck6 = New System.Windows.Forms.PictureBox
+                Me.pnlCheck1 = New System.Windows.Forms.Panel()
+                Me.txtCheck1 = New System.Windows.Forms.TextBox()
+                Me.lblCheck1 = New System.Windows.Forms.Label()
+                Me.pbCheck1 = New System.Windows.Forms.PictureBox()
+                Me.pnlCheck2 = New System.Windows.Forms.Panel()
+                Me.txtCheck2 = New System.Windows.Forms.TextBox()
+                Me.lblCheck2 = New System.Windows.Forms.Label()
+                Me.pbCheck2 = New System.Windows.Forms.PictureBox()
+                Me.pnlCheck3 = New System.Windows.Forms.Panel()
+                Me.txtCheck3 = New System.Windows.Forms.TextBox()
+                Me.lblCheck3 = New System.Windows.Forms.Label()
+                Me.pbCheck3 = New System.Windows.Forms.PictureBox()
+                Me.pnlCheck4 = New System.Windows.Forms.Panel()
+                Me.txtCheck4 = New System.Windows.Forms.TextBox()
+                Me.lblCheck4 = New System.Windows.Forms.Label()
+                Me.pbCheck4 = New System.Windows.Forms.PictureBox()
+                Me.pnlCheck5 = New System.Windows.Forms.Panel()
+                Me.txtCheck5 = New System.Windows.Forms.TextBox()
+                Me.lblCheck5 = New System.Windows.Forms.Label()
+                Me.pbCheck5 = New System.Windows.Forms.PictureBox()
+                Me.btnCheckAgain = New System.Windows.Forms.Button()
+                Me.chkAlwaysShow = New System.Windows.Forms.CheckBox()
+                Me.pnlChecks = New System.Windows.Forms.Panel()
+                Me.pnlCheck6 = New System.Windows.Forms.Panel()
+                Me.txtCheck6 = New System.Windows.Forms.TextBox()
+                Me.lblCheck6 = New System.Windows.Forms.Label()
+                Me.pbCheck6 = New System.Windows.Forms.PictureBox()
+                Me.pnlCheck7 = New System.Windows.Forms.Panel()
+                Me.txtCheck7 = New System.Windows.Forms.TextBox()
+                Me.lblCheck7 = New System.Windows.Forms.Label()
+                Me.pbCheck7 = New System.Windows.Forms.PictureBox()
                 Me.pnlCheck1.SuspendLayout()
                 CType(Me.pbCheck1, System.ComponentModel.ISupportInitialize).BeginInit()
                 Me.pnlCheck2.SuspendLayout()
@@ -78,12 +86,14 @@ Namespace UI
                 Me.pnlChecks.SuspendLayout()
                 Me.pnlCheck6.SuspendLayout()
                 CType(Me.pbCheck6, System.ComponentModel.ISupportInitialize).BeginInit()
+                Me.pnlCheck7.SuspendLayout()
+                CType(Me.pbCheck7, System.ComponentModel.ISupportInitialize).BeginInit()
                 Me.SuspendLayout()
                 '
                 'pnlCheck1
                 '
                 Me.pnlCheck1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlCheck1.Controls.Add(Me.txtCheck1)
                 Me.pnlCheck1.Controls.Add(Me.lblCheck1)
                 Me.pnlCheck1.Controls.Add(Me.pbCheck1)
@@ -96,8 +106,8 @@ Namespace UI
                 'txtCheck1
                 '
                 Me.txtCheck1.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.txtCheck1.BackColor = System.Drawing.SystemColors.Control
                 Me.txtCheck1.BorderStyle = System.Windows.Forms.BorderStyle.None
                 Me.txtCheck1.Location = New System.Drawing.Point(129, 29)
@@ -110,7 +120,7 @@ Namespace UI
                 'lblCheck1
                 '
                 Me.lblCheck1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lblCheck1.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblCheck1.ForeColor = System.Drawing.SystemColors.ControlText
                 Me.lblCheck1.Location = New System.Drawing.Point(108, 3)
@@ -122,7 +132,7 @@ Namespace UI
                 'pbCheck1
                 '
                 Me.pbCheck1.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
                 Me.pbCheck1.Location = New System.Drawing.Point(3, 3)
                 Me.pbCheck1.Name = "pbCheck1"
                 Me.pbCheck1.Size = New System.Drawing.Size(72, 123)
@@ -132,7 +142,7 @@ Namespace UI
                 'pnlCheck2
                 '
                 Me.pnlCheck2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlCheck2.Controls.Add(Me.txtCheck2)
                 Me.pnlCheck2.Controls.Add(Me.lblCheck2)
                 Me.pnlCheck2.Controls.Add(Me.pbCheck2)
@@ -145,8 +155,8 @@ Namespace UI
                 'txtCheck2
                 '
                 Me.txtCheck2.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.txtCheck2.BackColor = System.Drawing.SystemColors.Control
                 Me.txtCheck2.BorderStyle = System.Windows.Forms.BorderStyle.None
                 Me.txtCheck2.Location = New System.Drawing.Point(129, 29)
@@ -159,7 +169,7 @@ Namespace UI
                 'lblCheck2
                 '
                 Me.lblCheck2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lblCheck2.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblCheck2.Location = New System.Drawing.Point(112, 3)
                 Me.lblCheck2.Name = "lblCheck2"
@@ -170,7 +180,7 @@ Namespace UI
                 'pbCheck2
                 '
                 Me.pbCheck2.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
                 Me.pbCheck2.Location = New System.Drawing.Point(3, 3)
                 Me.pbCheck2.Name = "pbCheck2"
                 Me.pbCheck2.Size = New System.Drawing.Size(72, 123)
@@ -180,7 +190,7 @@ Namespace UI
                 'pnlCheck3
                 '
                 Me.pnlCheck3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlCheck3.Controls.Add(Me.txtCheck3)
                 Me.pnlCheck3.Controls.Add(Me.lblCheck3)
                 Me.pnlCheck3.Controls.Add(Me.pbCheck3)
@@ -193,8 +203,8 @@ Namespace UI
                 'txtCheck3
                 '
                 Me.txtCheck3.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.txtCheck3.BackColor = System.Drawing.SystemColors.Control
                 Me.txtCheck3.BorderStyle = System.Windows.Forms.BorderStyle.None
                 Me.txtCheck3.Location = New System.Drawing.Point(129, 29)
@@ -207,7 +217,7 @@ Namespace UI
                 'lblCheck3
                 '
                 Me.lblCheck3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lblCheck3.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblCheck3.Location = New System.Drawing.Point(112, 3)
                 Me.lblCheck3.Name = "lblCheck3"
@@ -218,7 +228,7 @@ Namespace UI
                 'pbCheck3
                 '
                 Me.pbCheck3.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
                 Me.pbCheck3.Location = New System.Drawing.Point(3, 3)
                 Me.pbCheck3.Name = "pbCheck3"
                 Me.pbCheck3.Size = New System.Drawing.Size(72, 123)
@@ -228,7 +238,7 @@ Namespace UI
                 'pnlCheck4
                 '
                 Me.pnlCheck4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlCheck4.Controls.Add(Me.txtCheck4)
                 Me.pnlCheck4.Controls.Add(Me.lblCheck4)
                 Me.pnlCheck4.Controls.Add(Me.pbCheck4)
@@ -241,8 +251,8 @@ Namespace UI
                 'txtCheck4
                 '
                 Me.txtCheck4.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.txtCheck4.BackColor = System.Drawing.SystemColors.Control
                 Me.txtCheck4.BorderStyle = System.Windows.Forms.BorderStyle.None
                 Me.txtCheck4.Location = New System.Drawing.Point(129, 30)
@@ -255,7 +265,7 @@ Namespace UI
                 'lblCheck4
                 '
                 Me.lblCheck4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lblCheck4.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblCheck4.Location = New System.Drawing.Point(112, 3)
                 Me.lblCheck4.Name = "lblCheck4"
@@ -266,7 +276,7 @@ Namespace UI
                 'pbCheck4
                 '
                 Me.pbCheck4.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
                 Me.pbCheck4.Location = New System.Drawing.Point(3, 3)
                 Me.pbCheck4.Name = "pbCheck4"
                 Me.pbCheck4.Size = New System.Drawing.Size(72, 123)
@@ -276,7 +286,7 @@ Namespace UI
                 'pnlCheck5
                 '
                 Me.pnlCheck5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlCheck5.Controls.Add(Me.txtCheck5)
                 Me.pnlCheck5.Controls.Add(Me.lblCheck5)
                 Me.pnlCheck5.Controls.Add(Me.pbCheck5)
@@ -289,8 +299,8 @@ Namespace UI
                 'txtCheck5
                 '
                 Me.txtCheck5.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.txtCheck5.BackColor = System.Drawing.SystemColors.Control
                 Me.txtCheck5.BorderStyle = System.Windows.Forms.BorderStyle.None
                 Me.txtCheck5.Location = New System.Drawing.Point(129, 29)
@@ -303,7 +313,7 @@ Namespace UI
                 'lblCheck5
                 '
                 Me.lblCheck5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lblCheck5.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblCheck5.Location = New System.Drawing.Point(112, 3)
                 Me.lblCheck5.Name = "lblCheck5"
@@ -314,7 +324,7 @@ Namespace UI
                 'pbCheck5
                 '
                 Me.pbCheck5.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
                 Me.pbCheck5.Location = New System.Drawing.Point(3, 3)
                 Me.pbCheck5.Name = "pbCheck5"
                 Me.pbCheck5.Size = New System.Drawing.Size(72, 123)
@@ -325,7 +335,7 @@ Namespace UI
                 '
                 Me.btnCheckAgain.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.btnCheckAgain.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.btnCheckAgain.Location = New System.Drawing.Point(476, 842)
+                Me.btnCheckAgain.Location = New System.Drawing.Point(476, 967)
                 Me.btnCheckAgain.Name = "btnCheckAgain"
                 Me.btnCheckAgain.Size = New System.Drawing.Size(104, 23)
                 Me.btnCheckAgain.TabIndex = 0
@@ -337,7 +347,7 @@ Namespace UI
                 Me.chkAlwaysShow.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
                 Me.chkAlwaysShow.AutoSize = True
                 Me.chkAlwaysShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-                Me.chkAlwaysShow.Location = New System.Drawing.Point(12, 846)
+                Me.chkAlwaysShow.Location = New System.Drawing.Point(12, 971)
                 Me.chkAlwaysShow.Name = "chkAlwaysShow"
                 Me.chkAlwaysShow.Size = New System.Drawing.Size(185, 17)
                 Me.chkAlwaysShow.TabIndex = 51
@@ -347,9 +357,10 @@ Namespace UI
                 'pnlChecks
                 '
                 Me.pnlChecks.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlChecks.AutoScroll = True
+                Me.pnlChecks.Controls.Add(Me.pnlCheck7)
                 Me.pnlChecks.Controls.Add(Me.pnlCheck1)
                 Me.pnlChecks.Controls.Add(Me.pnlCheck2)
                 Me.pnlChecks.Controls.Add(Me.pnlCheck3)
@@ -358,13 +369,13 @@ Namespace UI
                 Me.pnlChecks.Controls.Add(Me.pnlCheck4)
                 Me.pnlChecks.Location = New System.Drawing.Point(12, 12)
                 Me.pnlChecks.Name = "pnlChecks"
-                Me.pnlChecks.Size = New System.Drawing.Size(568, 824)
+                Me.pnlChecks.Size = New System.Drawing.Size(568, 949)
                 Me.pnlChecks.TabIndex = 52
                 '
                 'pnlCheck6
                 '
                 Me.pnlCheck6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.pnlCheck6.Controls.Add(Me.txtCheck6)
                 Me.pnlCheck6.Controls.Add(Me.lblCheck6)
                 Me.pnlCheck6.Controls.Add(Me.pbCheck6)
@@ -377,8 +388,8 @@ Namespace UI
                 'txtCheck6
                 '
                 Me.txtCheck6.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.txtCheck6.BackColor = System.Drawing.SystemColors.Control
                 Me.txtCheck6.BorderStyle = System.Windows.Forms.BorderStyle.None
                 Me.txtCheck6.Location = New System.Drawing.Point(129, 29)
@@ -391,7 +402,7 @@ Namespace UI
                 'lblCheck6
                 '
                 Me.lblCheck6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
                 Me.lblCheck6.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.lblCheck6.Location = New System.Drawing.Point(112, 3)
                 Me.lblCheck6.Name = "lblCheck6"
@@ -402,19 +413,68 @@ Namespace UI
                 'pbCheck6
                 '
                 Me.pbCheck6.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
                 Me.pbCheck6.Location = New System.Drawing.Point(3, 3)
                 Me.pbCheck6.Name = "pbCheck6"
                 Me.pbCheck6.Size = New System.Drawing.Size(72, 123)
                 Me.pbCheck6.TabIndex = 0
                 Me.pbCheck6.TabStop = False
                 '
+                'pnlCheck7
+                '
+                Me.pnlCheck7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                Me.pnlCheck7.Controls.Add(Me.txtCheck7)
+                Me.pnlCheck7.Controls.Add(Me.lblCheck7)
+                Me.pnlCheck7.Controls.Add(Me.pbCheck7)
+                Me.pnlCheck7.Location = New System.Drawing.Point(3, 815)
+                Me.pnlCheck7.Name = "pnlCheck7"
+                Me.pnlCheck7.Size = New System.Drawing.Size(562, 130)
+                Me.pnlCheck7.TabIndex = 51
+                Me.pnlCheck7.Visible = False
+                '
+                'txtCheck7
+                '
+                Me.txtCheck7.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                Me.txtCheck7.BackColor = System.Drawing.SystemColors.Control
+                Me.txtCheck7.BorderStyle = System.Windows.Forms.BorderStyle.None
+                Me.txtCheck7.Location = New System.Drawing.Point(129, 29)
+                Me.txtCheck7.Multiline = True
+                Me.txtCheck7.Name = "txtCheck7"
+                Me.txtCheck7.ReadOnly = True
+                Me.txtCheck7.Size = New System.Drawing.Size(430, 97)
+                Me.txtCheck7.TabIndex = 2
+                '
+                'lblCheck7
+                '
+                Me.lblCheck7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
+                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                Me.lblCheck7.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.lblCheck7.Location = New System.Drawing.Point(112, 3)
+                Me.lblCheck7.Name = "lblCheck7"
+                Me.lblCheck7.Size = New System.Drawing.Size(447, 23)
+                Me.lblCheck7.TabIndex = 1
+                Me.lblCheck7.Text = "RDP check succeeded!"
+                '
+                'pbCheck7
+                '
+                Me.pbCheck7.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+                    Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+                Me.pbCheck7.Location = New System.Drawing.Point(3, 3)
+                Me.pbCheck7.Name = "pbCheck7"
+                Me.pbCheck7.Size = New System.Drawing.Size(72, 123)
+                Me.pbCheck7.TabIndex = 0
+                Me.pbCheck7.TabStop = False
+                '
                 'ComponentsCheck
                 '
-                Me.ClientSize = New System.Drawing.Size(592, 877)
+                Me.ClientSize = New System.Drawing.Size(592, 1002)
                 Me.Controls.Add(Me.pnlChecks)
                 Me.Controls.Add(Me.chkAlwaysShow)
                 Me.Controls.Add(Me.btnCheckAgain)
+                Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.Icon = Global.mRemoteNG.My.Resources.Resources.ComponentsCheck_Icon
                 Me.Name = "ComponentsCheck"
                 Me.TabText = "Components Check"
@@ -438,6 +498,9 @@ Namespace UI
                 Me.pnlCheck6.ResumeLayout(False)
                 Me.pnlCheck6.PerformLayout()
                 CType(Me.pbCheck6, System.ComponentModel.ISupportInitialize).EndInit()
+                Me.pnlCheck7.ResumeLayout(False)
+                Me.pnlCheck7.PerformLayout()
+                CType(Me.pbCheck7, System.ComponentModel.ISupportInitialize).EndInit()
                 Me.ResumeLayout(False)
                 Me.PerformLayout()
 
@@ -487,6 +550,7 @@ Namespace UI
                 pnlCheck4.Visible = True
                 pnlCheck5.Visible = True
                 pnlCheck6.Visible = True
+                pnlCheck7.Visible = True
 
 
                 Dim rdpClient As AxMSTSCLib.AxMsRdpClient5NotSafeForScripting = Nothing
@@ -648,6 +712,23 @@ Namespace UI
                     MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "EOLWTSCOM " & errorMsg, True)
                     MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, True)
                 End Try
+
+                If File.Exists("C:\Program Files (x86)\VMware\Infrastructure\Virtual Infrastructure Client\Launcher\VpxClient.exe") Then
+                    pbCheck7.Image = My.Resources.Good_Symbol
+                    lblCheck7.ForeColor = Color.DarkOliveGreen
+                    lblCheck7.Text = "VMware vSphere " & My.Language.strCcCheckSucceeded
+                    txtCheck7.Text = My.Language.strCcVSphereOK
+                Else
+                    pbCheck7.Image = My.Resources.Bad_Symbol
+                    lblCheck7.ForeColor = Color.Firebrick
+                    lblCheck7.Text = "VMware vSphere " & My.Language.strCcCheckFailed
+                    txtCheck7.Text = My.Language.strCcVSphereFailed
+
+                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "vSphere " & errorMsg, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "File " & pPath & " does not exist.", True)
+                End If
+
+
             End Sub
 #End Region
 

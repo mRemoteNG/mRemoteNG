@@ -23,9 +23,10 @@
     <OptionStrict>Off</OptionStrict>
     <ManifestCertificateThumbprint>B249710A6BB08171F8E75082CF2355AE2890911A</ManifestCertificateThumbprint>
     <ManifestKeyFile>mRemoteV1_TemporaryKey.pfx</ManifestKeyFile>
-    <GenerateManifests>true</GenerateManifests>
+    <GenerateManifests>false</GenerateManifests>
     <SignManifests>false</SignManifests>
     <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -41,7 +42,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -93,6 +93,9 @@
     <PlatformTarget>x86</PlatformTarget>
     <DefineConstants>PORTABLE</DefineConstants>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ADTree, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -181,6 +184,7 @@
     <Compile Include="App\App.Runtime.vb" />
     <Compile Include="App\App.SupportedCultures.vb" />
     <Compile Include="App\App.Update.vb" />
+    <Compile Include="App\App.Utils.vb" />
     <Compile Include="App\Export.vb" />
     <Compile Include="App\Import.vb" />
     <Compile Include="Config\Config.Connections.Load.vb" />
@@ -200,6 +204,7 @@
     <Compile Include="Config\Putty\Sessions.vb" />
     <Compile Include="Config\Putty\Provider.vb" />
     <Compile Include="Connection\Connection.Info.Inheritance.vb" />
+    <Compile Include="Connection\Connection.Protocol.vSphere.vb" />
     <Compile Include="Controls\ListView.vb">
       <SubType>Component</SubType>
     </Compile>

@@ -874,6 +874,8 @@ Namespace Connection
                         Return Connection.Protocol.HTTPS.Defaults.Port
                     Case Connection.Protocol.Protocols.ICA
                         Return Connection.Protocol.ICA.Defaults.Port
+                    Case Connection.Protocol.Protocols.VSphere
+                        Return Connection.Protocol.vSphere.Defaults.Port
                     Case Connection.Protocol.Protocols.IntApp
                         Return Connection.Protocol.IntegratedProgram.Defaults.Port
                 End Select
