@@ -1461,6 +1461,8 @@ Namespace App
                         newProtocol = New Protocol.HTTPS(newConnectionInfo.RenderingEngine)
                     Case Protocol.Protocols.ICA
                         newProtocol = New Protocol.ICA
+                    Case Protocol.Protocols.VSphere
+                        newProtocol = New Protocol.vSphere
                     Case Protocol.Protocols.IntApp
                         newProtocol = New Protocol.IntegratedProgram
 
