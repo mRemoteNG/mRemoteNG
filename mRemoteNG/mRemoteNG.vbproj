@@ -115,10 +115,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MagicLibrary, Version=1.7.4.0, Culture=neutral, PublicKeyToken=3a6eb82f876a49bc">
+    <Reference Include="MagicLibrary, Version=1.7.0.0, Culture=neutral, PublicKeyToken=3a6eb82f876a49bc">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\MagicLibrary.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="MiniGeckoBrowser, Version=1.0.3142.33318, Culture=neutral, processorArchitecture=MSIL">
@@ -150,17 +149,12 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tamir.SharpSSH, Version=1.1.1.13, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Tamir.SharpSSH">
       <HintPath>References\Tamir.SharpSSH.dll</HintPath>
     </Reference>
     <Reference Include="VncSharpNG, Version=1.1.2.0, Culture=neutral, PublicKeyToken=61974755c7bfea7c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\VncSharpNG.dll</HintPath>
-    </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.2.2864.18696, Culture=neutral, PublicKeyToken=d481317c817cec47, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -1176,6 +1170,10 @@
     <Folder Include="My Project\DataSources\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Included Components\dockpanelsuite\WinFormsUI\WinFormsUI.csproj">
+      <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
+      <Name>WinFormsUI</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SharedLibraryNG\SharedLibraryNG.csproj">
       <Project>{0F615504-5F30-4CF2-8341-1DE7FEC95A23}</Project>
       <Name>SharedLibraryNG</Name>

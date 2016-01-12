@@ -13,10 +13,10 @@ echo.
 
 rmdir /s /q %TEMP_FOLDER%
 mkdir %TEMP_FOLDER%
-copy "%~dp0\mRemoteV1\Language\*.resx" %TEMP_FOLDER%
+copy "%~dp0\mRemoteNG\Language\*.resx" %TEMP_FOLDER%
 
 pushd %TEMP_FOLDER%
-for %%f in (*) do %SORTRESX% %TEMP_FOLDER%\%%f "%~dp0\mRemoteV1\Language\%%f"
+for %%f in (*) do %SORTRESX% %TEMP_FOLDER%\%%f "%~dp0\mRemoteNG\Language\%%f"
 popd
 
 rmdir /s /q %TEMP_FOLDER%

@@ -163,7 +163,7 @@
     <Shadow Include="Test References\mRemoteNG.accessor" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\mRemoteV1\mRemoteV1.vbproj">
+    <ProjectReference Include="..\mRemoteNG\mRemoteNG.vbproj">
       <Project>{4934A491-40BC-4E5B-9166-EA1169A220F6}</Project>
       <Name>mRemoteV1</Name>
     </ProjectReference>

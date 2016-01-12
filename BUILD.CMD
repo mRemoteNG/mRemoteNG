@@ -15,11 +15,11 @@ set SIGCHECK="%ProgramFiles(x86)%\Sigcheck\sigcheck.exe"
 
 call %VCVARSALL% x86
 
-rmdir /s /q "%~dp0\mRemoteV1\bin" > nul 2>&1
-rmdir /s /q "%~dp0\mRemoteV1\obj" > nul 2>&1
+rmdir /s /q "%~dp0\mRemoteNG\bin" > nul 2>&1
+rmdir /s /q "%~dp0\mRemoteNG\obj" > nul 2>&1
 
-if exist "%~dp0\mRemoteV1\bin" goto ERROR_RMDIR
-if exist "%~dp0\mRemoteV1\obj" goto ERROR_RMDIR
+if exist "%~dp0\mRemoteNG\bin" goto ERROR_RMDIR
+if exist "%~dp0\mRemoteNG\obj" goto ERROR_RMDIR
 goto NOERROR_RMDIR
 
 :ERROR_RMDIR
@@ -33,61 +33,61 @@ goto END
 :NOERROR_RMDIR
 
 echo Building release version...
-%DEVENV% "%~dp0\mRemoteV1.sln" /build "Release"
+%DEVENV% "%~dp0\mRemoteNG.sln" /build "Release"
 
 echo Building portable version...
-%DEVENV% "%~dp0\mRemoteV1.sln" /build "Release Portable"
+%DEVENV% "%~dp0\mRemoteNG.sln" /build "Release Portable"
 
 echo Signing binaries...
 %SIGNCMD% ^
-	"%~dp0\mRemoteV1\bin\Release\de\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\el\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\en-US\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\es\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\es-AR\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\fr\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\hu\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\it\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\nb-NO\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\nl\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\pl\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\pt\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\pt-BR\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\ru\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\uk\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\zh-CN\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\zh-TW\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\AxInterop.MSTSCLib.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\AxInterop.WFICALib.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\Interop.EOLWTSCOM.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\Interop.MSTSCLib.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\Interop.ShDocVw.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\Interop.WFICALib.dll" ^
-	"%~dp0\mRemoteV1\bin\Release\mRemoteNG.exe" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\de\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\el\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\en-US\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\es\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\es-AR\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\fr\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\hu\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\it\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\nb-NO\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\nl\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\pl\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\pt\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\pt-BR\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\ru\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\uk\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\zh-CN\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\zh-TW\mRemoteNG.resources.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\AxInterop.MSTSCLib.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\AxInterop.WFICALib.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\Interop.EOLWTSCOM.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\Interop.MSTSCLib.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\Interop.ShDocVw.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\Interop.WFICALib.dll" ^
-	"%~dp0\mRemoteV1\bin\Release Portable\mRemoteNG.exe" ^
+	"%~dp0\mRemoteNG\bin\Release\de\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\el\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\en-US\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\es\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\es-AR\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\fr\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\hu\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\it\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\nb-NO\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\nl\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\pl\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\pt\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\pt-BR\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\ru\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\uk\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\zh-CN\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\zh-TW\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\AxInterop.MSTSCLib.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\AxInterop.WFICALib.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\Interop.EOLWTSCOM.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\Interop.MSTSCLib.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\Interop.ShDocVw.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\Interop.WFICALib.dll" ^
+	"%~dp0\mRemoteNG\bin\Release\mRemoteNG.exe" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\de\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\el\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\en-US\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\es\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\es-AR\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\fr\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\hu\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\it\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\nb-NO\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\nl\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\pl\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\pt\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\pt-BR\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\ru\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\uk\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\zh-CN\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\zh-TW\mRemoteNG.resources.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\AxInterop.MSTSCLib.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\AxInterop.WFICALib.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\Interop.EOLWTSCOM.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\Interop.MSTSCLib.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\Interop.ShDocVw.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\Interop.WFICALib.dll" ^
+	"%~dp0\mRemoteNG\bin\Release Portable\mRemoteNG.exe" ^
 
 
 rem Do not remove the two blank lines above this line.
@@ -100,7 +100,7 @@ set SIGCHECK=!SIGCHECK:"=^"!
 set SIGCHECK=!SIGCHECK: =^^ !
 set SIGCHECK=!SIGCHECK:(=^^(!
 set SIGCHECK=!SIGCHECK:)=^^)!
-for /F "usebackq delims=. tokens=1-4" %%i in (`!SIGCHECK! /accepteula -q -n "%~dp0\mRemoteV1\bin\Release\mRemoteNG.exe"`) do (
+for /F "usebackq delims=. tokens=1-4" %%i in (`!SIGCHECK! /accepteula -q -n "%~dp0\mRemoteNG\bin\Release\mRemoteNG.exe"`) do (
    set PRODUCT_VERSION_SHORT=%%i.%%j
    echo ^^!define PRODUCT_VERSION "%%i.%%j.%%k.%%l" > %VERSIONNSH%
    echo ^^!define PRODUCT_VERSION_SHORT "%%i.%%j" >> %VERSIONNSH%
@@ -131,13 +131,13 @@ echo Signing installer package...
 
 echo Creating release ZIP file...
 del /f /q %BINARYZIP% > nul 2>&1
-%RAR% a -m5 -r -ep1 -afzip -inul %BINARYZIP% "%~dp0\mRemoteV1\bin\Release\*.*"
+%RAR% a -m5 -r -ep1 -afzip -inul %BINARYZIP% "%~dp0\mRemoteNG\bin\Release\*.*"
 %RAR% a -m5 -r -ep1 -afzip -inul %BINARYZIP% "%~dp0\Installer\Dependencies\*.*"
 %RAR% a -m5 -ep -afzip -inul %BINARYZIP% "%~dp0\*.TXT"
 
 echo Creating portable ZIP file...
 del /f /q %PORTABLEZIP% > nul 2>&1
-%RAR% a -m5 -r -ep1 -afzip -inul %PORTABLEZIP% "%~dp0\mRemoteV1\bin\Release Portable\*.*"
+%RAR% a -m5 -r -ep1 -afzip -inul %PORTABLEZIP% "%~dp0\mRemoteNG\bin\Release Portable\*.*"
 %RAR% a -m5 -r -ep1 -afzip -inul %PORTABLEZIP% "%~dp0\Installer\Dependencies\*.*"
 %RAR% a -m5 -ep -afzip -inul %PORTABLEZIP% "%~dp0\*.TXT"
 
