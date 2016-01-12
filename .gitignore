@@ -24,6 +24,3 @@ UpgradeLog.XML
 *.sdf
 *.opensdf
 *.ipch
-mRemoteNG/bin/Debug Portable/confCons.xml
-*.backup
-mRemoteNG/bin/Debug Portable/mRemoteNG.vshost.application
