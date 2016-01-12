@@ -25,7 +25,7 @@
     <ManifestKeyFile>mRemoteV1_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>false</SignManifests>
-    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -99,10 +99,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\ADTree.dll</HintPath>
     </Reference>
-    <Reference Include="DiffieHellman, Version=0.0.0.0, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\DiffieHellman.dll</HintPath>
-    </Reference>
     <Reference Include="FilteredPropertyGrid, Version=1.0.2258.31541, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\FilteredPropertyGrid.dll</HintPath>
@@ -115,10 +111,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\log4net.dll</HintPath>
     </Reference>
-    <Reference Include="MagicLibrary, Version=1.7.0.0, Culture=neutral, PublicKeyToken=3a6eb82f876a49bc">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\MagicLibrary.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="MiniGeckoBrowser, Version=1.0.3142.33318, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -127,10 +119,6 @@
     <Reference Include="MiniTabControl, Version=1.0.3142.32770, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\MiniTabControl.dll</HintPath>
-    </Reference>
-    <Reference Include="Org.Mentalis.Security, Version=1.0.13.715, Culture=neutral">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\Org.Mentalis.Security.dll</HintPath>
     </Reference>
     <Reference Include="PSTaskDialog, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -149,9 +137,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="Tamir.SharpSSH">
-      <HintPath>References\Tamir.SharpSSH.dll</HintPath>
-    </Reference>
     <Reference Include="VncSharpNG, Version=1.1.2.0, Culture=neutral, PublicKeyToken=61974755c7bfea7c, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\VncSharpNG.dll</HintPath>
@@ -374,86 +359,52 @@
     <Compile Include="Tools\Tools.SystemMenu.vb" />
     <Compile Include="Tools\Tools.WindowPlacement.vb" />
     <Compile Include="Tree\Tree.Node.vb" />
-    <Compile Include="UI\UI.Window.About.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="UI\UI.Window.About.vb" />
     <Compile Include="UI\UI.Window.ActiveDirectoryImport.Designer.vb">
       <DependentUpon>UI.Window.ActiveDirectoryImport.vb</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.ActiveDirectoryImport.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="UI\UI.Window.ActiveDirectoryImport.vb" />
     <Compile Include="UI\UI.Window.Announcement.Designer.vb">
       <DependentUpon>UI.Window.Announcement.vb</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.Announcement.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\UI.Window.Base.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\UI.Window.ComponentsCheck.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\UI.Window.Config.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\UI.Window.Connection.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\UI.Window.ErrorsAndInfos.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="UI\UI.Window.Announcement.vb" />
+    <Compile Include="UI\UI.Window.Base.vb" />
+    <Compile Include="UI\UI.Window.ComponentsCheck.vb" />
+    <Compile Include="UI\UI.Window.Config.vb" />
+    <Compile Include="UI\UI.Window.Connection.vb" />
+    <Compile Include="UI\UI.Window.ErrorsAndInfos.vb" />
     <Compile Include="Forms\ExportForm.Designer.vb">
       <DependentUpon>ExportForm.vb</DependentUpon>
     </Compile>
     <Compile Include="UI\UI.Window.ExternalTools.Designer.vb">
       <DependentUpon>UI.Window.ExternalTools.vb</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.ExternalTools.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\UI.Window.Help.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="UI\UI.Window.ExternalTools.vb" />
+    <Compile Include="UI\UI.Window.Help.vb" />
     <Compile Include="UI\UI.Window.List.vb" />
     <Compile Include="UI\UI.Window.PortScan.Designer.vb">
       <DependentUpon>UI.Window.PortScan.vb</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.PortScan.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="UI\UI.Window.PortScan.vb" />
     <Compile Include="Forms\ExportForm.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.ScreenshotManager.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="UI\UI.Window.ScreenshotManager.vb" />
     <Compile Include="UI\UI.Window.Sessions.Designer.vb">
       <DependentUpon>UI.Window.Sessions.vb</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.Sessions.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\UI.Window.SSHTransfer.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="UI\UI.Window.Sessions.vb" />
+    <Compile Include="UI\UI.Window.SSHTransfer.vb" />
     <Compile Include="UI\UI.Window.Tree.Designer.vb">
       <DependentUpon>UI.Window.Tree.vb</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.Tree.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="UI\UI.Window.Tree.vb" />
     <Compile Include="UI\UI.Window.Type.vb" />
-    <Compile Include="UI\UI.Window.UltraVNCSC.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="UI\UI.Window.UltraVNCSC.vb" />
     <Compile Include="UI\UI.Window.Update.Designer.vb">
       <DependentUpon>UI.Window.Update.vb</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.Update.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="UI\UI.Window.Update.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Forms\frmChoosePanel.resx">
@@ -803,6 +754,7 @@
     <Content Include="Resources\Images_FamFamFam\database.png" />
     <Content Include="Resources\Images_FamFamFam\Link.png" />
     <Content Include="Resources\Images_FamFamFam\page_copy.png" />
+    <None Include="packages.config" />
     <None Include="Resources\Images\puttycm.png" />
     <None Include="Resources\Images_FamFamFam\monitor_go.png" />
     <None Include="Resources\Images_FamFamFam\monitor_delete.png" />
@@ -1170,9 +1122,21 @@
     <Folder Include="My Project\DataSources\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Included Components\CefSharp\CefSharp\CefSharp.csproj">
+      <Project>{a55848cc-10e7-40cb-addb-04740b16dd43}</Project>
+      <Name>CefSharp</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Included Components\dockpanelsuite\WinFormsUI\WinFormsUI.csproj">
       <Project>{c75532c4-765b-418e-b09b-46d36b2abdb1}</Project>
       <Name>WinFormsUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Included Components\Enhanced-SharpSSH\EnhancedSharpSSH\SharpSSH-1.1.1.13.src\SharpSSH\SharpSSH.csproj">
+      <Project>{d27cf69d-4681-492a-be4d-d3d209104423}</Project>
+      <Name>SharpSSH</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Included Components\magicdock\Source\MagicLibrary\MagicLibrary.csproj">
+      <Project>{f284392f-6873-4be5-99ba-24793532d930}</Project>
+      <Name>MagicLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharedLibraryNG\SharedLibraryNG.csproj">
       <Project>{0F615504-5F30-4CF2-8341-1DE7FEC95A23}</Project>

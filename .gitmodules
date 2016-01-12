@@ -1,9 +1,12 @@
-[submodule "Included Components\\dockpanelsuite"]
-	path = Included Components\\dockpanelsuite
+[submodule "Included Components/dockpanelsuite"]
+	path = Included Components/dockpanelsuite
 	url = https://github.com/dockpanelsuite/dockpanelsuite.git
-[submodule "Included Components\\CefSharp"]
-	path = Included Components\\CefSharp
+[submodule "Included Components/CefSharp"]
+	path = Included Components/CefSharp
 	url = https://github.com/cefsharp/CefSharp.git
-[submodule "Included Components\\magicdock"]
-	path = Included Components\\magicdock
-	url = https://github.com/gentoouser/magicdock.git
+[submodule "Included Components/magicdock"]
+	path = Included Components/magicdock
+	url = https://github.com/esar/magicdock.git
+[submodule "Included Components/Enhanced-SharpSSH"]
+	path = Included Components/Enhanced-SharpSSH
+	url = https://github.com/lhr0909/Enhanced-SharpSSH.git

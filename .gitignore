@@ -1,7 +1,7 @@
 Release/
-mRemoteV1/bin/
-mRemoteV1/obj/
-mRemoteV1/publish/
+mRemoteNG/bin/
+mRemoteNG/obj/
+mRemoteNG/publish/
 *.pfx
 *.suo
 *.vbproj.user
