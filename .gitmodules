@@ -10,3 +10,6 @@
 [submodule "Included Components/Enhanced-SharpSSH"]
 	path = Included Components/Enhanced-SharpSSH
 	url = https://github.com/lhr0909/Enhanced-SharpSSH.git
+[submodule "Included Components\\VNCShartNG"]
+	path = Included Components\\VNCShartNG
+	url = https://github.com/rmcardle/VncSharpNG.git
