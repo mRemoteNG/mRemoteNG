@@ -15,7 +15,9 @@ Localize PropertyGrid:
 
 ToDo:
 	Attribute for roaming settings: "Global.System.Configuration.SettingsManageabilityAttribute(Configuration.SettingsManageability.Roaming), _"
-
+	Add Feature to Send enter key for RDP on connect. (This will bypass log on message if their is one)
+	Fix RDP Reconnect issue
+	
 PuTTY Problem:
 	http://connect.microsoft.com/VisualStudio/feedback/ViewFeedback.aspx?FeedbackID=96485
 	http://forums.microsoft.com/MSDN/ShowPost.aspx?PostID=1652917&SiteID=1

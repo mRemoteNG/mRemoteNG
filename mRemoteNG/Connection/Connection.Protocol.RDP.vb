@@ -636,6 +636,8 @@ Namespace Connection
                 Public Shared RDC61 As New Version(6, 0, 6001)
                 Public Shared RDC70 As New Version(6, 1, 7600)
                 Public Shared RDC80 As New Version(6, 2, 9200)
+                Public Shared RDC81 As New Version(6, 3, 9600)
+                Public Shared RDC10 As New Version(10, 0, 10240)
             End Class
 
 #Region "Terminal Sessions"
@@ -800,10 +802,26 @@ Namespace Connection
                 ReconnectGroup.ServerReady = srvReady
 
                 If ReconnectGroup.ReconnectWhenReady And srvReady Then
-                    tmrReconnect.Enabled = False
-                    ReconnectGroup.DisposeReconnectGroup()
+                    'tmrReconnect.Enabled = False
+                    'ReconnectGroup.DisposeReconnectGroup()
                     'SetProps()
-                    _rdpClient.Connect()
+                    '_rdpClient.Connect()
+                    Try
+                        tmrReconnect.Enabled = False
+                        ReconnectGroup.DisposeReconnectGroup()
+                        'SetProps()
+                        _rdpClient.Connect()
+                    Catch ex As Exception
+                        'MessageBox.Show("Error Trying to Reconnect: " & ex.Message & vbCrLf & "Source: " & ex.Source & " Stack Trace: " & ex.StackTrace)
+
+                        _rdpClient.Disconnect()
+                        Threading.Thread.Sleep(5000)
+
+                        'tmrReconnect.Enabled = False
+                        'ReconnectGroup.DisposeReconnectGroup()
+                        'SetProps()
+                        _rdpClient.Connect()
+                    End Try
                 End If
             End Sub
 #End Region

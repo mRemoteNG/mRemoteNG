@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PSTaskDialog", "PSTaskDialog\PSTaskDialog.csproj", "{0253E98B-6374-48AA-8740-89BC2939FF77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskDialogTest", "TaskDialogTest\TaskDialogTest.csproj", "{FF5202E7-D0A5-499B-ABB9-9B29C814CB2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0253E98B-6374-48AA-8740-89BC2939FF77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0253E98B-6374-48AA-8740-89BC2939FF77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0253E98B-6374-48AA-8740-89BC2939FF77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0253E98B-6374-48AA-8740-89BC2939FF77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF5202E7-D0A5-499B-ABB9-9B29C814CB2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF5202E7-D0A5-499B-ABB9-9B29C814CB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF5202E7-D0A5-499B-ABB9-9B29C814CB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF5202E7-D0A5-499B-ABB9-9B29C814CB2E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

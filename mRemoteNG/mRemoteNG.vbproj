@@ -26,6 +26,7 @@
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>false</SignManifests>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -37,11 +38,10 @@
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
     <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>1.64.0.%2a</ApplicationVersion>
+    <ApplicationVersion>1.74.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -99,10 +99,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\ADTree.dll</HintPath>
     </Reference>
-    <Reference Include="FilteredPropertyGrid, Version=1.0.2258.31541, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\FilteredPropertyGrid.dll</HintPath>
-    </Reference>
     <Reference Include="IPTextBox, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\IPTextBox.dll</HintPath>
@@ -120,10 +116,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\MiniTabControl.dll</HintPath>
     </Reference>
-    <Reference Include="PSTaskDialog, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\PSTaskDialog.dll</HintPath>
-    </Reference>
     <Reference Include="Skybound.Gecko, Version=1.8.1.4, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Skybound.Gecko.dll</HintPath>
@@ -137,10 +129,6 @@
     <Reference Include="System.Web" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
-    <Reference Include="VncSharpNG, Version=1.1.2.0, Culture=neutral, PublicKeyToken=61974755c7bfea7c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\VncSharpNG.dll</HintPath>
-    </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -1134,9 +1122,21 @@
       <Project>{d27cf69d-4681-492a-be4d-d3d209104423}</Project>
       <Name>SharpSSH</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Included Components\FilteredPropertyGrid_src\FilteredPropertyGrid\FilteredPropertyGrid.csproj">
+      <Project>{c74b67ee-e6e9-40be-a76e-434ef1b4c78a}</Project>
+      <Name>FilteredPropertyGrid</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Included Components\magicdock\Source\MagicLibrary\MagicLibrary.csproj">
       <Project>{f284392f-6873-4be5-99ba-24793532d930}</Project>
       <Name>MagicLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Included Components\PSTaskDialog\PSTaskDialog\PSTaskDialog.csproj">
+      <Project>{0253e98b-6374-48aa-8740-89bc2939ff77}</Project>
+      <Name>PSTaskDialog</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Included Components\VNCShartNG\VncSharp\VncSharp.csproj">
+      <Project>{e0695f0f-0faf-44bc-ae55-a1fcbfe70271}</Project>
+      <Name>VncSharp</Name>
     </ProjectReference>
     <ProjectReference Include="..\SharedLibraryNG\SharedLibraryNG.csproj">
       <Project>{0F615504-5F30-4CF2-8341-1DE7FEC95A23}</Project>
