@@ -13,3 +13,6 @@
 [submodule "Included Components/VNCShartNG"]
 	path = Included Components/VNCShartNG
 	url = https://github.com/rmcardle/VncSharpNG.git
+[submodule "Included Components/log4net"]
+	path = Included Components/log4net
+	url = https://github.com/apache/log4net.git

@@ -103,18 +103,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\IPTextBox.dll</HintPath>
     </Reference>
-    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="MiniGeckoBrowser, Version=1.0.3142.33318, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\MiniGeckoBrowser.dll</HintPath>
-    </Reference>
-    <Reference Include="MiniTabControl, Version=1.0.3142.32770, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\MiniTabControl.dll</HintPath>
     </Reference>
     <Reference Include="Skybound.Gecko, Version=1.8.1.4, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -1125,6 +1117,10 @@
     <ProjectReference Include="..\Included Components\FilteredPropertyGrid_src\FilteredPropertyGrid\FilteredPropertyGrid.csproj">
       <Project>{c74b67ee-e6e9-40be-a76e-434ef1b4c78a}</Project>
       <Name>FilteredPropertyGrid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Included Components\log4net\src\log4net.vs2008.csproj">
+      <Project>{181fe707-e161-4722-9f38-6aaab6faa106}</Project>
+      <Name>log4net.vs2008</Name>
     </ProjectReference>
     <ProjectReference Include="..\Included Components\magicdock\Source\MagicLibrary\MagicLibrary.csproj">
       <Project>{f284392f-6873-4be5-99ba-24793532d930}</Project>
