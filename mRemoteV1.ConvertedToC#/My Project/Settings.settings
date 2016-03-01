@@ -1,0 +1,576 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="My" GeneratedClassName="MySettings" UseMySettingsClassName="true">
+  <Profiles />
+  <Settings>
+    <Setting Name="MainFormLocation" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MainFormSize" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MainFormState" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Windows.Forms.FormWindowState" Scope="User">
+      <Value Profile="(Default)">Normal</Value>
+    </Setting>
+    <Setting Name="MainFormKiosk" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DoUpgrade" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CustomPuttyPath" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ShowNoMessageBoxes" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SwitchToMCOnInformation" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SwitchToMCOnWarning" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SwitchToMCOnError" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AutomaticallyGetSessionInfo" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LoadConsFromCustomLocation" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CustomConsPath" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SaveConsOnExit" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="CheckForUpdatesOnStartup" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowDescriptionTooltipsInTree" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ShowSystemTrayIcon" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OpenTabsRightOfSelected" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowLogonInfoOnTabs" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SingleClickOnConnectionOpensIt" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EmptyCredentials" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">noinfo</Value>
+    </Setting>
+    <Setting Name="DefaultUsername" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultPassword" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DefaultDomain" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="WriteLogFile" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseCustomPuttyPath" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ShowCompleteConsPathInTitle" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FirstStart" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ShowProtocolOnTabs" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ResetPanels" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpdateUseProxy" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpdateProxyAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UpdateProxyPort" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">80</Value>
+    </Setting>
+    <Setting Name="UpdateProxyUseAuthentication" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpdateProxyAuthUser" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="UpdateProxyAuthPass" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultDescription" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultUsername" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultPassword" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultDomain" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultProtocol" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RDP</Value>
+    </Setting>
+    <Setting Name="ConDefaultPuttySession" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Default Settings</Value>
+    </Setting>
+    <Setting Name="ConDefaultUseConsoleSession" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultResolution" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">FitToWindow</Value>
+    </Setting>
+    <Setting Name="ConDefaultColors" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Colors16Bit</Value>
+    </Setting>
+    <Setting Name="ConDefaultCacheBitmaps" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ConDefaultDisplayWallpaper" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultDisplayThemes" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectKeys" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectDiskDrives" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectPrinters" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectPorts" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectSmartCards" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRedirectSound" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">DoNotPlay</Value>
+    </Setting>
+    <Setting Name="MaxPuttyWaitTime" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="SingleInstance" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="OpenConsFromLastSession" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="NoReconnect" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AutoSaveEveryMinutes" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ExtAppsTBVisible" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ExtAppsTBShowText" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ExtAppsTBLocation" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="ExtAppsTBParentDock" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Bottom</Value>
+    </Setting>
+    <Setting Name="QuickyTBVisible" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="QuickyTBLocation" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">3, 24</Value>
+    </Setting>
+    <Setting Name="QuickyTBParentDock" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Top</Value>
+    </Setting>
+    <Setting Name="ResetToolbars" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UseSQLServer" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SQLHost" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SQLUser" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SQLPass" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultCacheBitmaps" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultColors" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultDescription" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultDisplayThemes" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultDisplayWallpaper" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultDomain" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultIcon" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultPassword" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultPort" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultProtocol" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultPuttySession" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectDiskDrives" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectKeys" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectPorts" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectPrinters" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectSmartCards" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRedirectSound" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultResolution" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultUseConsoleSession" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultUsername" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultPanel" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultICAEncryptionStrength" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EncrBasic</Value>
+    </Setting>
+    <Setting Name="InhDefaultICAEncryptionStrength" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultPreExtApp" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultPostExtApp" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultPreExtApp" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultPostExtApp" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SetHostnameLikeDisplayName" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DoubleClickOnTabClosesIt" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="ReconnectOnDisconnect" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AlwaysShowPanelSelectionDlg" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCAuthMode" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">AuthVNC</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCColors" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ColNormal</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCSmartSizeMode" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">SmartSAspect</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCViewOnly" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCCompression" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CompNone</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCEncoding" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EncHextile</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCProxyIP" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultVNCProxyPassword" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultVNCProxyPort" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCProxyType" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ProxyNone</Value>
+    </Setting>
+    <Setting Name="ConDefaultVNCProxyUsername" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultVNCAuthMode" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCColors" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCSmartSizeMode" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCViewOnly" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCCompression" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCEncoding" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCProxyIP" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCProxyPassword" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCProxyPort" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCProxyType" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultVNCProxyUsername" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MinimizeToTray" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="SingleClickSwitchesToOpenConnection" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDPAuthenticationLevel" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">NoAuth</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDPAuthenticationLevel" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UVNCSCPort" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5500</Value>
+    </Setting>
+    <Setting Name="StartupComponentsCheck" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="XULRunnerPath" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRenderingEngine" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">IE</Value>
+    </Setting>
+    <Setting Name="InhDefaultRenderingEngine" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultMacAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultMacAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="EncryptCompleteConnectionsFile" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultUserField" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultUserField" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultExtApp" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="InhDefaultExtApp" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LastAnnouncement" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CheckForUpdatesAsked" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CheckForUpdatesFrequencyDays" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="CheckForUpdatesLastCheck" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.DateTime" Scope="User">
+      <Value Profile="(Default)">1980-01-01</Value>
+    </Setting>
+    <Setting Name="UpdatePending" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayUsageMethod" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Never</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayUseConnectionCredentials" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Yes</Value>
+    </Setting>
+    <Setting Name="ConDefaultIcon" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mRemoteNG</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayUsageMethod" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayHostname" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayUsername" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayPassword" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayDomain" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultRDGatewayUseConnectionCredentials" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="RdpReconnectionCount" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="OverrideUICulture" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SupportedUICultures" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">de,el,en,en-US,es-AR,es,fr,hu,it,nb-NO,nl,pt,pt-BR,pl,ru,uk,zh-CN,zh-TW</Value>
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayHostname" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayUsername" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayPassword" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultRDGatewayDomain" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultEnableFontSmoothing" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultEnableFontSmoothing" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultEnableDesktopComposition" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultEnableDesktopComposition" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConfirmCloseConnection" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="MainFormRestoreSize" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="MainFormRestoreLocation" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SQLDatabaseName" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">mRemoteNG</Value>
+    </Setting>
+    <Setting Name="BackupFileKeepCount" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="BackupFileNameFormat" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{0}.{1:yyyyMMdd-HHmmssffff}.backup</Value>
+    </Setting>
+    <Setting Name="InhDefaultUseCredSsp" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ConDefaultUseCredSsp" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AlwaysShowPanelTabs" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="IdentifyQuickConnectTabs" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="UpdateChannel" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">release</Value>
+    </Setting>
+    <Setting Name="ThemeName" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ShowConfigHelpText" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="PuttySavedSessionsName" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="PuttySavedSessionsPanel" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="CompatibilityWarnLenovoAutoScrollUtility" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="AnnouncementAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">https://update.mremoteng.org/announcement.txt</Value>
+    </Setting>
+    <Setting Name="UpdateAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)">https://update.mremoteng.org/</Value>
+    </Setting>
+    <Setting Name="ConDefaultLoadBalanceInfo" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ConDefaultAutomaticResize" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="InhDefaultLoadBalanceInfo" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="InhDefaultAutomaticResize" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="QuickConnectProtocol" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RDP</Value>
+    </Setting>
+    <Setting Name="KeysPreviousTab" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">9/9, 33/8</Value>
+    </Setting>
+    <Setting Name="KeysNextTab" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Roaming="true" Type="System.String" Scope="User">
+      <Value Profile="(Default)">9/8, 34/8</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

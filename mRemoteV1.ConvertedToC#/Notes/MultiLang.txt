@@ -1,0 +1,1 @@
+﻿all UI.Window.* -> ApplyLanguage
