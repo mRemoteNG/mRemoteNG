@@ -1,0 +1,190 @@
+﻿[Introduction]
+Introduction:
+mRemote is a multi-protocol remote connections manager.
+As of Version 1.00 it supports the RDP, VNC, ICA, SSH, Telnet, RAW, Rlogin and HTTP/S protocols.
+The main goal is to minimize window clutter and to provide a easy gui for managing all your remote connections.
+
+Features:
+Free and Open Source, released under the GPL
+Panels and tabs allow to group certain connections together, dock them to any side of the window or completely undock them and move them to another screen for example
+Multiple supported protocols (RDP, VNC, ICA, SSH, Telnet, RAW, Rlogin and HTTP/S)
+Easy to organize and maintain list of connections
+Inheritance makes it possible to store most properties on folder basis and let the underlying connections inherit this info
+Support for importing connections from Active Directory
+Allows creating nested containers (folders) to categorize connections
+"Quick Connect" feature to quickly open a connection without creating an entry
+"Quick Search" feature to quickly find a connection while typing
+Support for SCP/SFTP (SSH) file transfers
+Assign icons to connections to easily identify purpose
+Screenshot manager allows to collect multiple screenshots and save them all together or copy them to the clipboard
+View remote session info and log off sessions (RDP)
+Portable (with the use of command line switches)
+"Auto-Update" feature
+Show description tooltips when hoovering over connections
+System tray icon with connection menu
+Fullscreen (Kiosk) mode
+Assign global credentials to use when no information is provided on connection basis
+Host Up/Down (Ping) feature shows if the selected host answers to a ping
+    
+License:
+The application is released under the GPL (V2)
+Binary and source code packages are available for download.
+
+[[Getting Started]]
+[Prerequisites]
+WinXP; Vista -> x86
+Win7 -> x86,x64
+Terminal Services Client 6.0
+Citrix Client for ICA (Registered wfica.ocx)
+
+[Installation]
+Setup Package
+Bin Package
+Source Package
+
+[Configuration]
+Introduction
+Connections & Config Panel
+Options
+
+[Command Line Switches]
+/cons (/c)
+
+/resetpos (/rp)
+
+[[User Interface]]
+[Main Menu]
+File
+  New Connections
+  Open Connections
+  --
+  Save Connections
+  Save Connections As
+  --
+  Exit
+View
+  Add Connection Panel
+  Connection Panels
+  --
+  Connections
+  Config
+  Errors and Infos
+  Sessions
+  Screenshot Manager
+  --
+  Fullscreen
+Tools
+  Update
+  SSH File Transfer
+  --
+  Options
+Quick Connect
+  Textfield
+  Button
+Info
+  Help
+  Website
+  --
+  About
+
+[Connections]
+Toolbar
+  Expand all Folders
+  Collapse all Folders
+Tree
+  Connections
+  Folders
+  Drag and Drop
+Context Menu
+  Add Connection
+  Add Folder
+  --
+  Connect
+  Connect with options
+    Connect to console session
+    Connect in fullscreen
+  Disconnect
+  --
+  Tools
+    Transfer File (SSH)
+    Import/Export
+      Export mRemote XML
+      Import mRemote XML
+      --
+      Import from Active Directory
+    Sort
+      Ascending (A-Z)
+      Descending (Z-A)
+  --
+  Rename
+  Delete
+  --
+  Move up
+  Move down
+Search
+  How
+  ESC Shortcut
+  
+[Config]
+Toolbar
+  Categorized
+  Alphabethical
+  --
+  Properties
+  Inheritance
+  --
+  Icon
+  Status
+Properties
+Inheritance
+Categories
+  Display
+    Name
+    Description
+    Icon
+    Panel
+  Connection
+    Hostname
+    Username
+    Password
+    Domain
+  Protocol
+    Protocol
+    Port
+    Use console session
+  Appearance
+    Resolution
+    Colors
+    Cache Bitmaps
+    Display Wallpaper
+    Display Themes
+  Redirect
+    Key combinations
+    Disk Drives
+    Printers
+    Ports
+    Smart Cards
+    Sound
+    
+[Errors and Infos]
+
+[Save As / Export]
+
+[Sessions]
+
+[Screenshot Manager]
+
+[Connection]
+
+[Options]
+
+[Update]
+
+[SSH File Transfer]
+
+[Quick Connect]
+
+[Import from Active Directory]
+
+[Quick Reference]
+Screenshot with descriptions

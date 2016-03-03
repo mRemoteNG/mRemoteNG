@@ -205,12 +205,12 @@ namespace mRemoteNG.Config
 					string newPath = mRemoteNG.App.Info.Settings.SettingsPath + "\\" + mRemoteNG.App.Info.Settings.LayoutFileName;
 					if (File.Exists(newPath)) {
 						_with6.pnlDock.LoadFromXml(newPath, GetContentFromPersistString);
-						#if Not PORTABLE
+						#if !PORTABLE
 					} else if (File.Exists(oldPath)) {
 						_with6.pnlDock.LoadFromXml(oldPath, GetContentFromPersistString);
 						#endif
 					} else {
-						Startup.SetDefaultLayout();
+						mRemoteNG.App.Runtime.Startup.SetDefaultLayout();
 					}
 				} catch (Exception ex) {
 					mRemoteNG.App.Runtime.Log.Error("LoadPanelsFromXML failed" + Constants.vbNewLine + ex.Message);

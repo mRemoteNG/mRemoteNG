@@ -343,6 +343,11 @@ editbin.exe /LARGEADDRESSAWARE "$(TargetPath)"</PostBuildEvent>
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
     <Compile Include="Root\PuttySessions.Info.cs" />
     <Compile Include="Root\Root.Info.cs" />
     <Compile Include="Security\Security.Crypt.cs" />
@@ -636,6 +641,7 @@ editbin.exe /LARGEADDRESSAWARE "$(TargetPath)"</PostBuildEvent>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="My Project\app.manifest" />
     <None Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
@@ -653,6 +659,10 @@ editbin.exe /LARGEADDRESSAWARE "$(TargetPath)"</PostBuildEvent>
     <None Include="Notes\MultiUserCons.txt" />
     <None Include="Notes\PropertyList.csv" />
     <None Include="Notes\PropertyList.txt" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
     <None Include="Resources\Announcement\mRemote_Announcement.txt" />
     <None Include="Resources\Icons\ActiveDirectory_Icon.ico" />
     <None Include="Resources\Icons\ComponentsCheck_Icon.ico" />

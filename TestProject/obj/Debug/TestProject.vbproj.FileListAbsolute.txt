@@ -1,0 +1,130 @@
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\CMDSwitches.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Config.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Configuration.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Connection.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Connections.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\ConfigurationSQL.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Index.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\PortScan.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\ExternalTools.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\ErrorsAndInfos.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\ImportFromAD.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Installation.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Introduction.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\MainMenu.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Options.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Prerequisites.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\QuickConnect.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\QuickReference.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\SaveAsExport.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\ScreenshotManager.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\01.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\02.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\03.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\04.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\05.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\06.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\07.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\08.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\09.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\10.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\11.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\12.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\13.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\14.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\15.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\16.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Configuration\17.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\External Tools\01.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\External Tools\02.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\External Tools\03.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\External Tools\04.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\External Tools\05.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\External Tools\06.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\External Tools\07.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\External Tools\08.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Main Menu\File.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Main Menu\Info.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Main Menu\QuickConnect.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Main Menu\Tools.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Main Menu\View.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Screenshots\Reference\01.png
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Sessions.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\SQLScript.txt
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\SSHFileTransfer.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Update.htm
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Help\Main.css
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Anti Virus.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Backup.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Build Server.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Database.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Domain Controller.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\ESX.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Fax.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\File Server.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Finance.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Firewall.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Linux.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Log.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Mail Server.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\mRemote.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\mRemoteNG.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\PuTTY.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Remote Desktop.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Router.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\SharePoint.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\SSH.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Switch.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Tel.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Telnet.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Terminal Server.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Test Server.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Virtual Machine.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Web Server.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\WiFi.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Windows.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Icons\Workstation.ico
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\TestProject.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\TestProject.pdb
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\TestProject.xml
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\ADTree.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\DiffieHellman.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\FilteredPropertyGrid.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\IPTextBox.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\log4net.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\MiniGeckoBrowser.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\MiniTabControl.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\mRemoteNG.exe
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Org.Mentalis.Security.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\PSTaskDialog.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Skybound.Gecko.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\Tamir.SharpSSH.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\VncSharpNG.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\WeifenLuo.WinFormsUI.Docking.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\SharedLibraryNG.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\mRemoteNG.pdb
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\VncSharpNG.pdb
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\SharedLibraryNG.pdb
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\de\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\el\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\en-US\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\es\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\es-AR\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\fr\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\hu\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\it\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\nb-NO\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\nl\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\pl\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\pt\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\pt-BR\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\ru\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\uk\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\zh-CN\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\zh-TW\mRemoteNG.resources.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\mRemoteNG_Accessor.exe
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\bin\Debug\mRemoteNG_Accessor.pdb
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\obj\Debug\TestProject.vbprojResolveAssemblyReference.cache
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\obj\Debug\TestProject.dll
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\obj\Debug\TestProject.xml
+C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\TestProject\obj\Debug\TestProject.pdb

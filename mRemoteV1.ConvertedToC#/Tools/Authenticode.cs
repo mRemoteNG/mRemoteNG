@@ -29,7 +29,7 @@ namespace mRemoteNG.Tools
 			IntPtr trustDataPointer = default(IntPtr);
 			try {
 				FileInfo fileInfo = new FileInfo(FilePath);
-				if (!fileInfo.Exists()) {
+				if (!fileInfo.Exists) {
 					_status = StatusValue.FileNotExist;
 					return _status;
 				}
@@ -60,13 +60,13 @@ namespace mRemoteNG.Tools
 
 				Win32.WINTRUST_DATA trustData = new Win32.WINTRUST_DATA();
 				var _with1 = trustData;
-				_with1.dwUIChoice = Display;
+				_with1.dwUIChoice = (uint)Display;
 				_with1.fdwRevocationChecks = Win32.WTD_REVOKE_WHOLECHAIN;
 				_with1.dwUnionChoice = Win32.WTD_CHOICE_FILE;
 				_with1.pFile = trustFileInfoPointer;
 				_with1.dwStateAction = Win32.WTD_STATEACTION_IGNORE;
 				_with1.dwProvFlags = Win32.WTD_DISABLE_MD2_MD4;
-				_with1.dwUIContext = DisplayContext;
+				_with1.dwUIContext = (uint)DisplayContext;
 				trustDataPointer = Marshal.AllocCoTaskMem(Marshal.SizeOf(trustData));
 				Marshal.StructureToPtr(trustData, trustDataPointer, false);
 
@@ -95,7 +95,7 @@ namespace mRemoteNG.Tools
 				return _status;
 			} catch (CryptographicException ex) {
 				PropertyInfo hResultProperty = ex.GetType().GetProperty("HResult", BindingFlags.NonPublic | BindingFlags.Instance);
-				int hResult = hResultProperty.GetValue(ex, null);
+				int hResult = (int)hResultProperty.GetValue(ex, null);
 				if (hResult == Win32.CRYPT_E_NO_MATCH) {
 					_status = StatusValue.NoSignature;
 					return _status;
@@ -170,7 +170,7 @@ namespace mRemoteNG.Tools
 		#endregion
 
 		#region "Public Enums"
-		public enum DisplayValue : UInt32
+		public enum DisplayValue : uint
 		{
 			Unknown = 0,
 			All = Win32.WTD_UI_ALL,
@@ -179,7 +179,7 @@ namespace mRemoteNG.Tools
 			NoGood = Win32.WTD_UI_NOGOOD
 		}
 
-		public enum DisplayContextValue : UInt32
+        public enum DisplayContextValue : uint
 		{
 			Execute = Win32.WTD_UICONTEXT_EXECUTE,
 			Install = Win32.WTD_UICONTEXT_INSTALL
@@ -212,7 +212,7 @@ IntPtr pWVTData);
 			[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
 			public class WINTRUST_DATA
 			{
-				public UInt32 cbStruct = Marshal.SizeOf(typeof(WINTRUST_DATA));
+				public UInt32 cbStruct = (uint)Marshal.SizeOf(typeof(WINTRUST_DATA));
 				public IntPtr pPolicyCallbackData;
 				public IntPtr pSIPClientData;
 				public UInt32 dwUIChoice;
@@ -229,7 +229,7 @@ IntPtr pWVTData);
 			[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
 			public class WINTRUST_FILE_INFO
 			{
-				public UInt32 cbStruct = Marshal.SizeOf(typeof(WINTRUST_FILE_INFO));
+				public UInt32 cbStruct = (uint)Marshal.SizeOf(typeof(WINTRUST_FILE_INFO));
 				[MarshalAs(UnmanagedType.LPTStr)]
 				public string pcwszFilePath;
 				public IntPtr hFile;
@@ -237,10 +237,10 @@ IntPtr pWVTData);
 			}
 
 
-			public const int CRYPT_E_NO_MATCH = 0x80092009;
-			public const int TRUST_E_SUBJECT_NOT_TRUSTED = 0x800b0004;
+			public const int CRYPT_E_NO_MATCH = (int)0x80092009;
+			public const int TRUST_E_SUBJECT_NOT_TRUSTED = (int)0x800b0004;
 
-			public const int TRUST_E_NOSIGNATURE = 0x800b0100;
+			public const int TRUST_E_NOSIGNATURE = (int)0x800b0100;
 
 			public static readonly Guid WINTRUST_ACTION_GENERIC_VERIFY_V2 = new Guid("{00AAC56B-CD44-11d0-8CC2-00C04FC295EE}");
 			public const UInt32 WTD_CHOICE_FILE = 1;

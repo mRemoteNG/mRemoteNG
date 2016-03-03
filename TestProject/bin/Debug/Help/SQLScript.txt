@@ -1,0 +1,141 @@
+﻿if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[tblCons]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[tblCons]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[tblRoot]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[tblRoot]
+GO
+
+if exists (select * from dbo.sysobjects where id = object_id(N'[dbo].[tblUpdate]') and OBJECTPROPERTY(id, N'IsUserTable') = 1)
+drop table [dbo].[tblUpdate]
+GO
+
+CREATE TABLE [dbo].[tblCons] (
+	[ID] [int] IDENTITY (1001, 1) NOT NULL ,
+	[ConstantID] [varchar] (128) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[PositionID] [int] NOT NULL ,
+	[ParentID] [varchar] (128) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[LastChange] [datetime] NOT NULL ,
+	[Name] [varchar] (128) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[Type] [varchar] (32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[Expanded] [bit] NOT NULL ,
+	[Description] [varchar] (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[Icon] [varchar] (128) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[Panel] [varchar] (128) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[Username] [varchar] (512) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[DomainName] [varchar] (512) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[Password] [varchar] (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[Hostname] [varchar] (512) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[Protocol] [varchar] (32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[PuttySession] [varchar] (128) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[Port] [int] NOT NULL ,
+	[ConnectToConsole] [bit] NOT NULL ,
+	[UseCredSsp] [bit] NOT NULL ,
+	[RenderingEngine] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[ICAEncryptionStrength] [varchar] (32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[RDPAuthenticationLevel] [varchar] (32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[Colors] [varchar] (32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[Resolution] [varchar] (32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[DisplayWallpaper] [bit] NOT NULL ,
+	[DisplayThemes] [bit] NOT NULL ,
+	[EnableFontSmoothing] [bit] NOT NULL ,
+	[EnableDesktopComposition] [bit] NOT NULL ,
+	[CacheBitmaps] [bit] NOT NULL ,
+	[RedirectDiskDrives] [bit] NOT NULL ,
+	[RedirectPorts] [bit] NOT NULL ,
+	[RedirectPrinters] [bit] NOT NULL ,
+	[RedirectSmartCards] [bit] NOT NULL ,
+	[RedirectSound] [varchar] (64) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[RedirectKeys] [bit] NOT NULL ,
+	[Connected] [bit] NOT NULL ,
+	[PreExtApp] [varchar] (256) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[PostExtApp] [varchar] (256) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[MacAddress] [varchar] (32) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[UserField] [varchar] (256) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[ExtApp] [varchar] (256) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[VNCCompression] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[VNCEncoding] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[VNCAuthMode] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[VNCProxyType] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[VNCProxyIP] [varchar] (128) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[VNCProxyPort] [int] NULL ,
+	[VNCProxyUsername] [varchar] (512) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[VNCProxyPassword] [varchar] (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[VNCColors] [varchar] (10) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[VNCSmartSizeMode] [varchar] (20) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[VNCViewOnly] [bit] NOT NULL ,
+	[RDGatewayUsageMethod] [varchar] (32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[RDGatewayHostname] [varchar] (512) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[RDGatewayUseConnectionCredentials] [varchar] (32) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[RDGatewayUsername] [varchar] (512) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[RDGatewayPassword] [varchar] (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[RDGatewayDomain] [varchar] (512) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[InheritCacheBitmaps] [bit] NOT NULL ,
+	[InheritColors] [bit] NOT NULL ,
+	[InheritDescription] [bit] NOT NULL ,
+	[InheritDisplayThemes] [bit] NOT NULL ,
+	[InheritDisplayWallpaper] [bit] NOT NULL ,
+	[InheritEnableFontSmoothing] [bit] NOT NULL ,
+	[InheritEnableDesktopComposition] [bit] NOT NULL ,
+	[InheritDomain] [bit] NOT NULL ,
+	[InheritIcon] [bit] NOT NULL ,
+	[InheritPanel] [bit] NOT NULL ,
+	[InheritPassword] [bit] NOT NULL ,
+	[InheritPort] [bit] NOT NULL ,
+	[InheritProtocol] [bit] NOT NULL ,
+	[InheritPuttySession] [bit] NOT NULL ,
+	[InheritRedirectDiskDrives] [bit] NOT NULL ,
+	[InheritRedirectKeys] [bit] NOT NULL ,
+	[InheritRedirectPorts] [bit] NOT NULL ,
+	[InheritRedirectPrinters] [bit] NOT NULL ,
+	[InheritRedirectSmartCards] [bit] NOT NULL ,
+	[InheritRedirectSound] [bit] NOT NULL ,
+	[InheritResolution] [bit] NOT NULL ,
+	[InheritUseConsoleSession] [bit] NOT NULL ,
+	[InheritUseCredSsp] [bit] NOT NULL ,
+	[InheritRenderingEngine] [bit] NOT NULL ,
+	[InheritICAEncryptionStrength] [bit] NOT NULL ,
+	[InheritRDPAuthenticationLevel] [bit] NOT NULL ,
+	[InheritUsername] [bit] NOT NULL ,
+	[InheritPreExtApp] [bit] NOT NULL ,
+	[InheritPostExtApp] [bit] NOT NULL ,
+	[InheritMacAddress] [bit] NOT NULL ,
+	[InheritUserField] [bit] NOT NULL ,
+	[InheritExtApp] [bit] NOT NULL ,
+	[InheritVNCCompression] [bit] NOT NULL, 
+	[InheritVNCEncoding] [bit] NOT NULL ,
+	[InheritVNCAuthMode] [bit] NOT NULL ,
+	[InheritVNCProxyType] [bit] NOT NULL ,
+	[InheritVNCProxyIP] [bit] NOT NULL ,
+	[InheritVNCProxyPort] [bit] NOT NULL ,
+	[InheritVNCProxyUsername] [bit] NOT NULL ,
+	[InheritVNCProxyPassword] [bit] NOT NULL ,
+	[InheritVNCColors] [bit] NOT NULL ,
+	[InheritVNCSmartSizeMode] [bit] NOT NULL ,
+	[InheritVNCViewOnly] [bit] NOT NULL ,
+	[InheritRDGatewayUsageMethod] [bit] NOT NULL ,
+	[InheritRDGatewayHostname] [bit] NOT NULL ,
+	[InheritRDGatewayUseConnectionCredentials] [bit] NOT NULL ,
+	[InheritRDGatewayUsername] [bit] NOT NULL ,
+	[InheritRDGatewayPassword] [bit] NOT NULL ,
+	[InheritRDGatewayDomain] [bit] NOT NULL ,
+	[LoadBalanceInfo] [varchar] (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL ,
+	[AutomaticResize] [bit] NOT NULL DEFAULT 1 ,
+	[InheritLoadBalanceInfo] [bit] NOT NULL DEFAULT 0 ,
+	[InheritAutomaticResize] [bit] NOT NULL DEFAULT 0
+) ON [PRIMARY]
+GO
+ 
+CREATE TABLE [dbo].[tblRoot] (
+	[Name] [varchar] (2048) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[Export] [bit] NOT NULL ,
+	[Protected] [varchar] (4048) COLLATE SQL_Latin1_General_CP1_CI_AS NOT NULL ,
+	[ConfVersion] [float] NOT NULL 
+) ON [PRIMARY]
+GO
+ 
+CREATE TABLE [dbo].[tblUpdate] (
+	[LastUpdate] [datetime] NULL 
+) ON [PRIMARY]
+GO
+
