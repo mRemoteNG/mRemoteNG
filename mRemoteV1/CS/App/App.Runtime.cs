@@ -43,7 +43,7 @@ namespace mRemoteNG.App
 		public static frmMain MainForm {get; set;}
 			
 		private static Connection.List _connectionList;
-        public static List ConnectionList
+        public static Connection.List ConnectionList
 		{
 			get
 			{
@@ -56,7 +56,7 @@ namespace mRemoteNG.App
 		}
 			
 		private static Connection.List _previousConnectionList;
-        public static List PreviousConnectionList
+        public static Connection.List PreviousConnectionList
 		{
 			get
 			{
@@ -320,104 +320,101 @@ namespace mRemoteNG.App
 			{
 				try
 				{
-					switch (windowType)
-					{
-						case UI.Window.Type.About:
-							if (aboutForm == null || aboutForm.IsDisposed)
-							{
-								aboutForm = new UI.Window.About(aboutPanel);
-								aboutPanel = aboutForm;
-							}
-								
-							aboutForm.Show(frmMain.Default.pnlDock);
-							break;
-						case UI.Window.Type.ActiveDirectoryImport:
-							if (adimportForm == null || adimportForm.IsDisposed)
-							{
-								adimportForm = new UI.Window.ActiveDirectoryImport(adimportPanel);
-								adimportPanel = adimportForm;
-							}
-								
-							adimportPanel.Show(frmMain.Default.pnlDock);
-							break;
-						case UI.Window.Type.Options:
-							using (OptionsForm optionsForm = new OptionsForm())
-							{
-								optionsForm.ShowDialog(frmMain);
-							}
-								
-							break;
-						case UI.Window.Type.SSHTransfer:
-							sshtransferForm = new UI.Window.SSHTransfer(sshtransferPanel);
-							sshtransferPanel = sshtransferForm;
-								
-							sshtransferForm.Show(frmMain.Default.pnlDock);
-							break;
-						case UI.Window.Type.Update:
-							if (updateForm == null || updateForm.IsDisposed)
-							{
-								updateForm = new UI.Window.Update(updatePanel);
-								updatePanel = updateForm;
-							}
-								
-							updateForm.Show(frmMain.Default.pnlDock);
-							break;
-						case UI.Window.Type.Help:
-							if (helpForm == null || helpForm.IsDisposed)
-							{
-								helpForm = new UI.Window.Help(helpPanel);
-								helpPanel = helpForm;
-							}
-								
-							helpForm.Show(frmMain.Default.pnlDock);
-							break;
-						case UI.Window.Type.ExternalApps:
-							if (externalappsForm == null || externalappsForm.IsDisposed)
-							{
-								externalappsForm = new UI.Window.ExternalTools(externalappsPanel);
-								externalappsPanel = externalappsForm;
-							}
-								
-							externalappsForm.Show(frmMain.Default.pnlDock);
-							break;
-						case UI.Window.Type.PortScan:
-							portscanForm = new UI.Window.PortScan(portscanPanel, portScanImport);
-							portscanPanel = portscanForm;
-								
-							portscanForm.Show(frmMain.Default.pnlDock);
-							break;
-						case UI.Window.Type.UltraVNCSC:
-							if (ultravncscForm == null || ultravncscForm.IsDisposed)
-							{
-								ultravncscForm = new UI.Window.UltraVNCSC(ultravncscPanel);
-								ultravncscPanel = ultravncscForm;
-							}
-								
-							ultravncscForm.Show(frmMain.Default.pnlDock);
-							break;
-						case UI.Window.Type.ComponentsCheck:
-							if (componentscheckForm == null || componentscheckForm.IsDisposed)
-							{
-								componentscheckForm = new UI.Window.ComponentsCheck(componentscheckPanel);
-								componentscheckPanel = componentscheckForm;
-							}
-								
-							componentscheckForm.Show(frmMain.Default.pnlDock);
-							break;
-						case UI.Window.Type.Announcement:
-							if (AnnouncementForm == null || AnnouncementForm.IsDisposed)
-							{
-								AnnouncementForm = new UI.Window.Announcement(AnnouncementPanel);
-								AnnouncementPanel = AnnouncementForm;
-							}
-								
-							AnnouncementForm.Show(frmMain.Default.pnlDock);
-							break;
-					}
+                    if (windowType.Equals(UI.Window.Type.About))
+                    {
+                        if (aboutForm == null || aboutForm.IsDisposed)
+                        {
+                            aboutForm = new UI.Window.About(aboutPanel);
+                            aboutPanel = aboutForm;
+                        }
+                        aboutForm.Show(frmMain.Default.pnlDock);
+                    }
+                    else if (windowType.Equals(UI.Window.Type.ActiveDirectoryImport))
+                    {
+                        if (adimportForm == null || adimportForm.IsDisposed)
+                        {
+                            adimportForm = new UI.Window.ActiveDirectoryImport(adimportPanel);
+                            adimportPanel = adimportForm;
+                        }
+                        adimportPanel.Show(frmMain.Default.pnlDock);
+                    }
+                    else if (windowType.Equals(UI.Window.Type.Options))
+                    {
+                        using (OptionsForm optionsForm = new OptionsForm())
+                        {
+                            optionsForm.ShowDialog(frmMain);
+                        }
+                    }
+                    else if (windowType.Equals(UI.Window.Type.SSHTransfer))
+                    {
+                        sshtransferForm = new UI.Window.SSHTransfer(sshtransferPanel);
+                        sshtransferPanel = sshtransferForm;
+                        sshtransferForm.Show(frmMain.Default.pnlDock);
+                    }
+                    else if (windowType.Equals(UI.Window.Type.Update))
+                    {
+                        if (updateForm == null || updateForm.IsDisposed)
+                        {
+                            updateForm = new UI.Window.Update(updatePanel);
+                            updatePanel = updateForm;
+                        }
+                        updateForm.Show(frmMain.Default.pnlDock);
+                    }
+                    else if (windowType.Equals(UI.Window.Type.Help))
+                    {
+                        if (helpForm == null || helpForm.IsDisposed)
+						{
+							helpForm = new UI.Window.Help(helpPanel);
+							helpPanel = helpForm;
+						}
+						helpForm.Show(frmMain.Default.pnlDock);
+                    }
+                    else if (windowType.Equals(UI.Window.Type.ExternalApps))
+                    {
+                        if (externalappsForm == null || externalappsForm.IsDisposed)
+						{
+							externalappsForm = new UI.Window.ExternalTools(externalappsPanel);
+							externalappsPanel = externalappsForm;
+						}
+						externalappsForm.Show(frmMain.Default.pnlDock);
+                    }
+                    else if (windowType.Equals(UI.Window.Type.PortScan))
+                    {
+                        portscanForm = new UI.Window.PortScan(portscanPanel, portScanImport);
+						portscanPanel = portscanForm;
+						portscanForm.Show(frmMain.Default.pnlDock);
+                    }
+                    else if (windowType.Equals(UI.Window.Type.UltraVNCSC))
+                    {
+                        if (ultravncscForm == null || ultravncscForm.IsDisposed)
+                        {
+                            ultravncscForm = new UI.Window.UltraVNCSC(ultravncscPanel);
+                            ultravncscPanel = ultravncscForm;
+                        }
+                        ultravncscForm.Show(frmMain.Default.pnlDock);
+                    }
+                    else if (windowType.Equals(UI.Window.Type.ComponentsCheck))
+                    {
+                        if (componentscheckForm == null || componentscheckForm.IsDisposed)
+                        {
+                            componentscheckForm = new UI.Window.ComponentsCheck(componentscheckPanel);
+                            componentscheckPanel = componentscheckForm;
+                        }
+                        componentscheckForm.Show(frmMain.Default.pnlDock);
+                    }
+                    else if (windowType.Equals(UI.Window.Type.Announcement))
+                    {
+                        if (AnnouncementForm == null || AnnouncementForm.IsDisposed)
+                        {
+                            AnnouncementForm = new UI.Window.Announcement(AnnouncementPanel);
+                            AnnouncementPanel = AnnouncementForm;
+                        }
+                        AnnouncementForm.Show(frmMain.Default.pnlDock);
+                    }
 				}
 				catch (Exception ex)
 				{
-					MessageCollector.AddMessage(MessageClass.ErrorMsg, "App.Runtime.Windows.Show() failed." + Constants.vbNewLine + ex.Message, true);
+					Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "App.Runtime.Windows.Show() failed." + Constants.vbNewLine + ex.Message, true);
 				}
 			}
 				
@@ -715,7 +712,7 @@ namespace mRemoteNG.App
 				}
 				catch (Exception ex)
 				{
-					MessageCollector.AddExceptionMessage("GetUpdateInfoCompleted() failed.", ex, MessageClass.ErrorMsg, true);
+					Runtime.MessageCollector.AddExceptionMessage("GetUpdateInfoCompleted() failed.", ex, MessageClass.ErrorMsg, true);
 				}
 			}
 				
@@ -762,7 +759,7 @@ namespace mRemoteNG.App
 				}
 				catch (Exception ex)
 				{
-					MessageCollector.AddExceptionMessage("GetAnnouncementInfoCompleted() failed.", ex, MessageClass.ErrorMsg, true);
+					Runtime.MessageCollector.AddExceptionMessage("GetAnnouncementInfoCompleted() failed.", ex, MessageClass.ErrorMsg, true);
 				}
 			}
 				
@@ -879,7 +876,7 @@ namespace mRemoteNG.App
 				}
 				catch (Exception ex)
 				{
-					MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strCommandLineArgsCouldNotBeParsed + Constants.vbNewLine + ex.Message);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strCommandLineArgsCouldNotBeParsed + Constants.vbNewLine + ex.Message);
 				}
 			}
 				
@@ -944,7 +941,7 @@ namespace mRemoteNG.App
 				}
 				catch (Exception ex)
 				{
-					MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strSettingsCouldNotBeSavedOrTrayDispose + Constants.vbNewLine + ex.Message, true);
+					Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strSettingsCouldNotBeSavedOrTrayDispose + Constants.vbNewLine + ex.Message, true);
 				}
 			}
 				
@@ -960,7 +957,7 @@ namespace mRemoteNG.App
 				}
 				catch (Exception ex)
 				{
-					MessageCollector.AddMessage(MessageClass.ErrorMsg, "The update could not be started." + Constants.vbNewLine + ex.Message, true);
+					Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "The update could not be started." + Constants.vbNewLine + ex.Message, true);
 				}
 			}
 				
@@ -1159,7 +1156,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t add panel" + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t add panel" + Constants.vbNewLine + ex.Message);
 				return null;
 			}
 		}
@@ -1180,7 +1177,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t rename panel" + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t rename panel" + Constants.vbNewLine + ex.Message);
 			}
 		}
 			
@@ -1205,7 +1202,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t enumerate screens" + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t enumerate screens" + Constants.vbNewLine + ex.Message);
 			}
 		}
 			
@@ -1292,7 +1289,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddExceptionMessage(My.Language.strCouldNotCreateNewConnectionsFile, ex, MessageClass.ErrorMsg);
+				Runtime.MessageCollector.AddExceptionMessage(My.Language.strCouldNotCreateNewConnectionsFile, ex, MessageClass.ErrorMsg);
 			}
 		}
 			
@@ -1415,7 +1412,7 @@ namespace mRemoteNG.App
 			{
 				if (My.Settings.Default.UseSQLServer)
 				{
-					MessageCollector.AddExceptionMessage(My.Language.strLoadFromSqlFailed, ex);
+					Runtime.MessageCollector.AddExceptionMessage(My.Language.strLoadFromSqlFailed, ex);
 					string commandButtons = string.Join("|", new[] {My.Language.strCommandTryAgain, My.Language.strCommandOpenConnectionFile, string.Format(My.Language.strCommandExitProgram, System.Windows.Forms.Application.ProductName)});
 					cTaskDialog.ShowCommandBox(System.Windows.Forms.Application.ProductName, My.Language.strLoadFromSqlFailed, My.Language.strLoadFromSqlFailedContent, Misc.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, eSysIcons.Error, null);
 					switch (cTaskDialog.CommandButtonResult)
@@ -1436,12 +1433,12 @@ namespace mRemoteNG.App
 				{
 					if (ex is FileNotFoundException&& !withDialog)
 					{
-						MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoad.ConnectionFileName), ex, MessageClass.InformationMsg);
+						Runtime.MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoad.ConnectionFileName), ex, MessageClass.InformationMsg);
 						NewConnections(System.Convert.ToString(connectionsLoad.ConnectionFileName));
 						return ;
 					}
 						
-					MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotBeLoaded, connectionsLoad.ConnectionFileName), ex);
+					Runtime.MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotBeLoaded, connectionsLoad.ConnectionFileName), ex);
 					if (!(connectionsLoad.ConnectionFileName == GetStartupConnectionFileName()))
 					{
 						LoadConnections(withDialog, update);
@@ -1473,7 +1470,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddExceptionMessage(My.Language.strConnectionsFileBackupFailed, ex, MessageClass.WarningMsg);
+				Runtime.MessageCollector.AddExceptionMessage(My.Language.strConnectionsFileBackupFailed, ex, MessageClass.WarningMsg);
 				throw;
 			}
 		}
@@ -1601,7 +1598,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeSaved + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeSaved + Constants.vbNewLine + ex.Message);
 			}
 			finally
 			{
@@ -1667,7 +1664,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotSaveAs, connectionsSave.ConnectionFileName), ex);
+				Runtime.MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotSaveAs, connectionsSave.ConnectionFileName), ex);
 			}
 			finally
 			{
@@ -1718,7 +1715,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddExceptionMessage(My.Language.strQuickConnectFailed, ex, MessageClass.ErrorMsg);
+				Runtime.MessageCollector.AddExceptionMessage(My.Language.strQuickConnectFailed, ex, MessageClass.ErrorMsg);
 				return null;
 			}
 		}
@@ -1731,7 +1728,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
 			}
 		}
 			
@@ -1764,7 +1761,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
 			}
 		}
 			
@@ -1776,7 +1773,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
 			}
 		}
 			
@@ -1788,7 +1785,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
 			}
 		}
 			
@@ -1800,7 +1797,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
 			}
 		}
 			
@@ -1812,7 +1809,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
 			}
 		}
 			
@@ -1822,7 +1819,7 @@ namespace mRemoteNG.App
 			{
 				if (newConnectionInfo.Hostname == "" && newConnectionInfo.Protocol != Connection.Protocol.Protocols.IntApp)
 				{
-					MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strConnectionOpenFailedNoHostname);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strConnectionOpenFailedNoHostname);
 					return;
 				}
 					
@@ -1995,7 +1992,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Constants.vbNewLine + ex.Message);
 			}
 		}
 			
@@ -2021,7 +2018,7 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(My.Language.strProtocolEventDisconnected, DisconnectedMessage), true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(My.Language.strProtocolEventDisconnected, DisconnectedMessage), true);
 					
 				Connection.Protocol.Base Prot = sender;
 				if (Prot.InterfaceControl.Info.Protocol == Connection.Protocol.Protocols.RDP)
@@ -2033,18 +2030,18 @@ namespace mRemoteNG.App
 					{
 						if (!string.IsNullOrEmpty(ReasonDescription))
 						{
-							MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strRdpDisconnected + Constants.vbNewLine + ReasonDescription + Constants.vbNewLine + string.Format(My.Language.strErrorCode, ReasonCode));
+							Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strRdpDisconnected + Constants.vbNewLine + ReasonDescription + Constants.vbNewLine + string.Format(My.Language.strErrorCode, ReasonCode));
 						}
 						else
 						{
-							MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strRdpDisconnected + Constants.vbNewLine + string.Format(My.Language.strErrorCode, ReasonCode));
+							Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strRdpDisconnected + Constants.vbNewLine + string.Format(My.Language.strErrorCode, ReasonCode));
 						}
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(My.Language.strProtocolEventDisconnectFailed, ex.Message), true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(My.Language.strProtocolEventDisconnectFailed, ex.Message), true);
 			}
 		}
 			
@@ -2054,9 +2051,9 @@ namespace mRemoteNG.App
 			{
 				Connection.Protocol.Base Prot = sender;
 					
-				MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnenctionCloseEvent, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnenctionCloseEvent, true);
 					
-				MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, string.Format(My.Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), (new Microsoft.VisualBasic.ApplicationServices.User()).Name));
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, string.Format(My.Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), (new Microsoft.VisualBasic.ApplicationServices.User()).Name));
 					
 				Prot.InterfaceControl.Info.OpenConnections.Remove(Prot);
 					
@@ -2076,7 +2073,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnenctionCloseEventFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnenctionCloseEventFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 			
@@ -2084,15 +2081,15 @@ namespace mRemoteNG.App
 		{
 			mRemoteNG.Connection.Protocol.Base prot = sender;
 				
-			MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnectionEventConnected, true);
-			MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, string.Format(My.Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString(), (new Microsoft.VisualBasic.ApplicationServices.User()).Name, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
+			Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnectionEventConnected, true);
+			Runtime.MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, string.Format(My.Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString(), (new Microsoft.VisualBasic.ApplicationServices.User()).Name, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
 		}
 			
 		public static void Prot_Event_ErrorOccured(object sender, string ErrorMessage)
 		{
 			try
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnectionEventErrorOccured, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnectionEventErrorOccured, true);
 					
 				Connection.Protocol.Base Prot = sender;
 					
@@ -2100,13 +2097,13 @@ namespace mRemoteNG.App
 				{
 					if (ErrorMessage > -1)
 					{
-						MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, string.Format(My.Language.strConnectionRdpErrorDetail, ErrorMessage, Connection.Protocol.RDP.FatalErrors.GetError(ErrorMessage)));
+						Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, string.Format(My.Language.strConnectionRdpErrorDetail, ErrorMessage, Connection.Protocol.RDP.FatalErrors.GetError(ErrorMessage)));
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionEventConnectionFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionEventConnectionFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -2177,7 +2174,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLogWriteToFileFailed);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLogWriteToFileFailed);
 			}
 		}
 			
@@ -2198,7 +2195,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLogWriteToFileFinalLocationFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLogWriteToFileFinalLocationFailed + Constants.vbNewLine + ex.Message, true);
 				return false;
 			}
 			finally
@@ -2276,7 +2273,7 @@ namespace mRemoteNG.App
 		{
 			if (UpdateAvailable == true)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strSqlUpdateCheckUpdateAvailable, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strSqlUpdateCheckUpdateAvailable, true);
 				LoadConnectionsBG();
 			}
 		}

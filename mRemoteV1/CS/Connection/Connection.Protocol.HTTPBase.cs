@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -10,9 +9,7 @@ using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.Tools;
-// End of VB project level imports
-
-//using mRemoteNG.App.Runtime;
+using mRemoteNG.App;
 //using mRemoteNG.Tools.LocalizedAttributes;
 
 
@@ -20,15 +17,14 @@ namespace mRemoteNG.Connection.Protocol
 {
 	public class HTTPBase : Base
 	{
-				
-#region Private Properties
+        #region Private Properties
 		private Control wBrowser;
 		public string httpOrS;
 		public int defaultPort;
 		private string tabTitle;
-#endregion
+        #endregion
 				
-#region Public Methods
+        #region Public Methods
 		public HTTPBase(RenderingEngine RenderingEngine)
 		{
 			try
@@ -47,7 +43,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectionFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectionFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 				
@@ -96,7 +92,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpSetPropsFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpSetPropsFailed + Constants.vbNewLine + ex.Message, true);
 				return false;
 			}
 		}
@@ -162,16 +158,16 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectFailed + Constants.vbNewLine + ex.Message, true);
 				return false;
 			}
 		}
-#endregion
+        #endregion
 				
-#region Private Methods
-#endregion
+        #region Private Methods
+        #endregion
 				
-#region Events
+        #region Events
 		private void wBrowser_Navigated(object sender, System.Windows.Forms.WebBrowserNavigatedEventArgs e)
 		{
 			WebBrowser objWebBrowser = wBrowser as WebBrowser;
@@ -249,12 +245,12 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
-#endregion
+        #endregion
 				
-#region Enums
+        #region Enums
 		public enum RenderingEngine
 		{
             [LocalizedAttributes.LocalizedDescription("strHttpInternetExplorer")]
@@ -282,6 +278,6 @@ namespace mRemoteNG.Connection.Protocol
 			NWMF_INACTIVETAB = 0x100000
 			// ReSharper restore InconsistentNaming
 		}
-#endregion
+        #endregion
 	}
 }

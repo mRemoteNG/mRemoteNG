@@ -427,7 +427,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodesFromSqlFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodesFromSqlFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 				
@@ -604,7 +604,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strGetConnectionInfoFromSqlFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strGetConnectionInfoFromSqlFailed + Constants.vbNewLine + ex.Message, true);
 			}
 					
 			return null;
@@ -701,7 +701,7 @@ namespace mRemoteNG.Config.Connections
 				}
 				else
 				{
-					MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strOldConffile);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strOldConffile);
 				}
 						
 				const double maxSupportedConfVersion = 2.5;
@@ -766,7 +766,7 @@ namespace mRemoteNG.Config.Connections
 						
 				if (import && !isExportFile)
 				{
-					MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strCannotImportNormalSessionFile);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strCannotImportNormalSessionFile);
 					return ;
 				}
 						
@@ -818,7 +818,7 @@ namespace mRemoteNG.Config.Connections
 			catch (Exception ex)
 			{
 				App.Runtime.IsConnectionsFileLoaded = false;
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed + Constants.vbNewLine + ex.Message + Constants.vbNewLine + ex.StackTrace, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed + Constants.vbNewLine + ex.Message + Constants.vbNewLine + ex.StackTrace, true);
 				throw;
 			}
 		}
@@ -920,7 +920,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodeFromXmlFailed + Constants.vbNewLine + ex.Message + ex.StackTrace, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodeFromXmlFailed + Constants.vbNewLine + ex.Message + ex.StackTrace, true);
 				throw;
 			}
 		}
@@ -1224,7 +1224,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(My.Language.strGetConnectionInfoFromXmlFailed, conI.Name, this.ConnectionFileName, ex.Message), false);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(My.Language.strGetConnectionInfoFromXmlFailed, conI.Name, this.ConnectionFileName, ex.Message), false);
 			}
 			return conI;
 		}

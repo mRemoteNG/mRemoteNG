@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,9 +8,7 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
-//using mRemoteNG.App.Runtime;
+using mRemoteNG.App;
 using System.Threading;
 using mRemoteNG.Tools;
 //using mRemoteNG.Tools.LocalizedAttributes;
@@ -21,9 +18,7 @@ namespace mRemoteNG.Connection.Protocol
 {
 	public class ICA : Base
 	{
-				
-#region Default Instance
-				
+        #region Default Instance
 		private static ICA defaultInstance;
 				
 		/// <summary>
@@ -51,15 +46,14 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			defaultInstance = null;
 		}
+        #endregion
 				
-#endregion
-				
-#region Private Properties
+        #region Private Properties
 		private AxICAClient ICA_Renamed;
 		private Connection.Info Info;
-#endregion
+        #endregion
 				
-#region Public Methods
+        #region Public Methods
 		public ICA()
 		{
 			try
@@ -68,7 +62,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaControlFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaControlFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 				
@@ -130,7 +124,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetPropsFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetPropsFailed + Constants.vbNewLine + ex.Message, true);
 				return false;
 			}
 		}
@@ -147,13 +141,13 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaConnectionFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaConnectionFailed + Constants.vbNewLine + ex.Message);
 				return false;
 			}
 		}
-#endregion
+        #endregion
 				
-#region Private Methods
+        #region Private Methods
 		private void SetCredentials()
 		{
 			try
@@ -216,7 +210,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetCredentialsFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetCredentialsFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 				
@@ -253,7 +247,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetResolutionFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetResolutionFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 				
@@ -310,12 +304,12 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetEventHandlersFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetEventHandlersFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
-#endregion
+        #endregion
 				
-#region Private Events & Handlers
+        #region Private Events & Handlers
 		private void ICAEvent_OnConnecting(object sender, System.EventArgs e)
 		{
 			base.Event_Connecting(this);
@@ -350,9 +344,9 @@ namespace mRemoteNG.Connection.Protocol
 				base.Close();
 			}
 		}
-#endregion
+        #endregion
 				
-#region Reconnect Stuff
+        #region Reconnect Stuff
 		public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
 			bool srvReady = Tools.PortScan.Scanner.IsPortOpen(Info.Hostname, System.Convert.ToString(Info.Port));
@@ -366,9 +360,9 @@ namespace mRemoteNG.Connection.Protocol
 				ICA_Renamed.Default.Connect();
 			}
 		}
-#endregion
+        #endregion
 				
-#region Enums
+        #region Enums
 		public enum Defaults
 		{
 			Port = 1494,
@@ -388,6 +382,6 @@ namespace mRemoteNG.Connection.Protocol
             [LocalizedAttributes.LocalizedDescription("strEnc128Bit")]
             Encr128Bit = 128
 		}
-#endregion
+        #endregion
 	}
 }

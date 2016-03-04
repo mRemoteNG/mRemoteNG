@@ -60,16 +60,16 @@ namespace mRemoteNG.App
 								switch (DetermineFileType(fileName))
 								{
 									case FileType.mRemoteXml:
-										Config.import.mRemoteNG.Import(fileName, parentTreeNode);
+										Config.Import.mRemoteNG.Import(fileName, parentTreeNode);
 										break;
 									case FileType.RemoteDesktopConnection:
-										Config.import.RemoteDesktopConnection.Import(fileName, parentTreeNode);
+                                        Config.Import.RemoteDesktopConnection.Import(fileName, parentTreeNode);
 										break;
 									case FileType.RemoteDesktopConnectionManager:
-										Config.import.RemoteDesktopConnectionManager.Import(fileName, parentTreeNode);
+                                        Config.Import.RemoteDesktopConnectionManager.Import(fileName, parentTreeNode);
 										break;
 									case FileType.PuttyConnectionManager:
-										Config.import.PuttyConnectionManager.Import(fileName, parentTreeNode);
+                                        Config.Import.PuttyConnectionManager.Import(fileName, parentTreeNode);
 										break;
 									default:
 										throw (new FileFormatException("Unrecognized file format."));
@@ -95,7 +95,7 @@ namespace mRemoteNG.App
 				}
 				catch (Exception ex)
 				{
-					MessageCollector.AddExceptionMessage(message: "App.Import.ImportFromFile() failed.", ex: ex, logOnly: true);
+					Runtime.MessageCollector.AddExceptionMessage(message: "App.Import.ImportFromFile() failed.", ex: ex, logOnly: true);
 				}
 			}
 			
@@ -112,7 +112,7 @@ namespace mRemoteNG.App
 						return ;
 					}
 					
-					Config.import.ActiveDirectory.Import(ldapPath, parentTreeNode);
+					Config.Import.ActiveDirectory.Import(ldapPath, parentTreeNode);
 					
 					parentTreeNode.Expand();
 					Container.Info parentContainer = parentTreeNode.Tag as Container.Info;
@@ -125,11 +125,11 @@ namespace mRemoteNG.App
 				}
 				catch (Exception ex)
 				{
-					MessageCollector.AddExceptionMessage(message: "App.Import.ImportFromActiveDirectory() failed.", ex: ex, logOnly: true);
+                    Runtime.MessageCollector.AddExceptionMessage(message: "App.Import.ImportFromActiveDirectory() failed.", ex: ex, logOnly: true);
 				}
 			}
 			
-			public static void ImportFromPortScan(IEnumerable hosts, Protocol.Protocol.Protocols protocol)
+			public static void ImportFromPortScan(IEnumerable hosts, Connection.Protocol.Protocols protocol)
 			{
 				try
 				{
@@ -155,7 +155,7 @@ namespace mRemoteNG.App
 				}
 				catch (Exception ex)
 				{
-					MessageCollector.AddExceptionMessage(message: "App.Import.ImportFromPortScan() failed.", ex: ex, logOnly: true);
+                    Runtime.MessageCollector.AddExceptionMessage(message: "App.Import.ImportFromPortScan() failed.", ex: ex, logOnly: true);
 				}
 			}
 #endregion

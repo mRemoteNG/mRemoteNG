@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,107 +8,105 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
 using mRemoteNG.Forms;
-//using mRemoteNG.App.Runtime;
+using mRemoteNG.App;
 
 
 namespace mRemoteNG.App
 {
 	public class Export
+	{
+		public static void ExportToFile(TreeNode rootTreeNode, TreeNode selectedTreeNode)
 		{
-			public static void ExportToFile(TreeNode rootTreeNode, TreeNode selectedTreeNode)
+			try
 			{
-				try
-				{
-					TreeNode exportTreeNode = default(TreeNode);
-					Security.Save saveSecurity = new Security.Save();
+				TreeNode exportTreeNode = default(TreeNode);
+				Security.Save saveSecurity = new Security.Save();
 					
-					using (ExportForm exportForm = new ExportForm())
+				using (ExportForm exportForm = new ExportForm())
+				{
+					if (Tree.Node.GetNodeType(selectedTreeNode) == Tree.Node.Type.Container)
 					{
-						if (Tree.Node.GetNodeType(selectedTreeNode) == Tree.Node.Type.Container)
-						{
-							exportForm.SelectedFolder = selectedTreeNode;
-						}
-						else if (Tree.Node.GetNodeType(selectedTreeNode) == Tree.Node.Type.Connection)
-						{
-							if (Tree.Node.GetNodeType(selectedTreeNode.Parent) == Tree.Node.Type.Container)
-							{
-								exportForm.SelectedFolder = selectedTreeNode.Parent;
-							}
-							exportForm.SelectedConnection = selectedTreeNode;
-						}
-						
-						if (!(exportForm.ShowDialog(frmMain) == DialogResult.OK))
-						{
-							return ;
-						}
-						
-						switch (exportForm.Scope)
-						{
-							case exportForm.ExportScope.SelectedFolder:
-								exportTreeNode = exportForm.SelectedFolder;
-								break;
-							case exportForm.ExportScope.SelectedConnection:
-								exportTreeNode = exportForm.SelectedConnection;
-								break;
-							default:
-								exportTreeNode = rootTreeNode;
-								break;
-						}
-						
-						saveSecurity.Username = exportForm.IncludeUsername;
-						saveSecurity.Password = exportForm.IncludePassword;
-						saveSecurity.Domain = exportForm.IncludeDomain;
-						saveSecurity.Inheritance = exportForm.IncludeInheritance;
-						
-						SaveExportFile(exportForm.FileName, exportForm.SaveFormat, exportTreeNode, saveSecurity);
+						exportForm.SelectedFolder = selectedTreeNode;
 					}
+					else if (Tree.Node.GetNodeType(selectedTreeNode) == Tree.Node.Type.Connection)
+					{
+						if (Tree.Node.GetNodeType(selectedTreeNode.Parent) == Tree.Node.Type.Container)
+						{
+							exportForm.SelectedFolder = selectedTreeNode.Parent;
+						}
+						exportForm.SelectedConnection = selectedTreeNode;
+					}
+						
+					if (!(exportForm.ShowDialog(frmMain) == DialogResult.OK))
+					{
+						return ;
+					}
+						
+					switch (exportForm.Scope)
+					{
+						case exportForm.ExportScope.SelectedFolder:
+							exportTreeNode = exportForm.SelectedFolder;
+							break;
+						case exportForm.ExportScope.SelectedConnection:
+							exportTreeNode = exportForm.SelectedConnection;
+							break;
+						default:
+							exportTreeNode = rootTreeNode;
+							break;
+					}
+						
+					saveSecurity.Username = exportForm.IncludeUsername;
+					saveSecurity.Password = exportForm.IncludePassword;
+					saveSecurity.Domain = exportForm.IncludeDomain;
+					saveSecurity.Inheritance = exportForm.IncludeInheritance;
+						
+					SaveExportFile(exportForm.FileName, exportForm.SaveFormat, exportTreeNode, saveSecurity);
+				}
 					
-				}
-				catch (Exception ex)
-				{
-					MessageCollector.AddExceptionMessage(message: "App.Export.ExportToFile() failed.", ex: ex, logOnly: true);
-				}
 			}
-			
-			private static void SaveExportFile(string fileName, mRemoteNG.Config.Connections.Save.Format saveFormat, TreeNode rootNode, Security.Save saveSecurity)
+			catch (Exception ex)
 			{
-				bool previousTimerEnabled = false;
+                Runtime.MessageCollector.AddExceptionMessage(message: "App.Export.ExportToFile() failed.", ex: ex, logOnly: true);
+			}
+		}
+			
+		private static void SaveExportFile(string fileName, mRemoteNG.Config.Connections.Save.Format saveFormat, TreeNode rootNode, Security.Save saveSecurity)
+		{
+			bool previousTimerEnabled = false;
 				
-				try
+			try
+			{
+				if (TimerSqlWatcher != null)
 				{
-					if (TimerSqlWatcher != null)
-					{
-						previousTimerEnabled = TimerSqlWatcher.Enabled;
-						TimerSqlWatcher.Enabled = false;
-					}
-					
-					Config.Connections.Save connectionsSave = new Config.Connections.Save();
-					connectionsSave.Export = true;
-					connectionsSave.ConnectionFileName = fileName;
-					connectionsSave.SaveFormat = saveFormat;
-					
-					connectionsSave.ConnectionList = ConnectionList;
-					connectionsSave.ContainerList = ContainerList;
-					connectionsSave.RootTreeNode = rootNode;
-					
-					connectionsSave.SaveSecurity = saveSecurity;
-					
-					connectionsSave.Save_Renamed();
+					previousTimerEnabled = TimerSqlWatcher.Enabled;
+					TimerSqlWatcher.Enabled = false;
 				}
-				catch (Exception ex)
+					
+				Config.Connections.Save connectionsSave = new Config.Connections.Save();
+				connectionsSave.Export = true;
+				connectionsSave.ConnectionFileName = fileName;
+				connectionsSave.SaveFormat = saveFormat;
+					
+				connectionsSave.ConnectionList = ConnectionList;
+				connectionsSave.ContainerList = ContainerList;
+				connectionsSave.RootTreeNode = rootNode;
+					
+				connectionsSave.SaveSecurity = saveSecurity;
+					
+				connectionsSave.Save_Renamed();
+			}
+			catch (Exception ex)
+			{
+				Runtime.MessageCollector.AddExceptionMessage(string.Format("Export.SaveExportFile(\"{0}\") failed.", fileName), ex);
+			}
+			finally
+			{
+				if (TimerSqlWatcher != null)
 				{
-					MessageCollector.AddExceptionMessage(string.Format("Export.SaveExportFile(\"{0}\") failed.", fileName), ex);
-				}
-				finally
-				{
-					if (TimerSqlWatcher != null)
-					{
-						TimerSqlWatcher.Enabled = previousTimerEnabled;
-					}
+					TimerSqlWatcher.Enabled = previousTimerEnabled;
 				}
 			}
 		}
+	}
 }

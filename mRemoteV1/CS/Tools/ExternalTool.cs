@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,9 +8,7 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
-//using mRemoteNG.App.Runtime;
+using mRemoteNG.App;
 using System.IO;
 using System.ComponentModel;
 
@@ -20,7 +17,7 @@ namespace mRemoteNG.Tools
 {
 	public class ExternalTool
 	{
-#region Public Properties
+        #region Public Properties
 		public string DisplayName {get; set;}
 		public string FileName {get; set;}
 		public bool WaitForExit {get; set;}
@@ -57,18 +54,18 @@ namespace mRemoteNG.Tools
 				}
 			}
 		}
-#endregion
+        #endregion
 			
-#region Constructors
+        #region Constructors
 		public ExternalTool(string displayName = "", string fileName = "", string arguments = "")
 		{
 			this.DisplayName = displayName;
 			this.FileName = fileName;
 			this.Arguments = arguments;
 		}
-#endregion
+        #endregion
 			
-#region Public Methods
+        #region Public Methods
 		// Start external app
 		public void Start(Connection.Info startConnectionInfo = null)
 		{
@@ -101,7 +98,7 @@ namespace mRemoteNG.Tools
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddExceptionMessage("ExternalApp.Start() failed.", ex);
+				Runtime.MessageCollector.AddExceptionMessage("ExternalApp.Start() failed.", ex);
 			}
 		}
 			
@@ -129,7 +126,7 @@ namespace mRemoteNG.Tools
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddExceptionMessage(message: "ExternalApp.StartIntegrated() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(message: "ExternalApp.StartIntegrated() failed.", ex: ex, logOnly: true);
 			}
 		}
 			
@@ -319,9 +316,9 @@ namespace mRemoteNG.Tools
 				
 			return result;
 		}
-#endregion
+        #endregion
 			
-#region Private Methods
+        #region Private Methods
 		private string GetVariableReplacement(string variable, string original)
 		{
 			string replacement = "";
@@ -424,43 +421,43 @@ namespace mRemoteNG.Tools
 			}
 			return replacement;
 		}
-#endregion
+        #endregion
 	}
 		
 	public class ExternalToolsTypeConverter : StringConverter
+	{
+			
+        public static string[] ExternalTools
 		{
-			
-            public static string[] ExternalTools
+			get
 			{
-				get
+				List<string> externalToolList = new List<string>();
+					
+				// Add a blank entry to signify that no external tool is selected
+				externalToolList.Add(string.Empty);
+					
+				foreach (ExternalTool externalTool in App.Runtime.ExternalTools)
 				{
-					List<string> externalToolList = new List<string>();
-					
-					// Add a blank entry to signify that no external tool is selected
-					externalToolList.Add(string.Empty);
-					
-					foreach (ExternalTool externalTool in App.Runtime.ExternalTools)
-					{
-						externalToolList.Add(externalTool.DisplayName);
-					}
-					
-					return externalToolList.ToArray();
+					externalToolList.Add(externalTool.DisplayName);
 				}
-			}
-			
-			public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(System.ComponentModel.ITypeDescriptorContext context)
-			{
-				return new StandardValuesCollection(ExternalTools);
-			}
-			
-			public override bool GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext context)
-			{
-				return true;
-			}
-			
-			public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
-			{
-				return true;
+					
+				return externalToolList.ToArray();
 			}
 		}
+			
+		public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(System.ComponentModel.ITypeDescriptorContext context)
+		{
+			return new StandardValuesCollection(ExternalTools);
+		}
+			
+		public override bool GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext context)
+		{
+			return true;
+		}
+			
+		public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
+		{
+			return true;
+		}
+	}
 }

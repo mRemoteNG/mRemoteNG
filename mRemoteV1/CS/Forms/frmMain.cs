@@ -968,7 +968,7 @@ namespace mRemoteNG
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddExceptionMessage("btnQuickConnect_ButtonClick() failed.", ex, Messages.MessageClass.ErrorMsg, true);
+				Runtime.MessageCollector.AddExceptionMessage("btnQuickConnect_ButtonClick() failed.", ex, Messages.MessageClass.ErrorMsg, true);
 			}
 		}
 								
@@ -1080,7 +1080,7 @@ namespace mRemoteNG
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex, Messages.MessageClass.ErrorMsg, true);
+				Runtime.MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex, Messages.MessageClass.ErrorMsg, true);
 			}
 		}
 								

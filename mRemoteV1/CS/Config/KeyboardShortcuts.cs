@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,11 +8,9 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
 using System.Runtime.InteropServices;
 using System.ComponentModel;
-//using mRemoteNG.App.Runtime;
+using mRemoteNG.App;
 using SharedLibraryNG;
 
 
@@ -21,9 +18,9 @@ namespace mRemoteNG.Config
 {
 	public class KeyboardShortcuts
 	{
-#region Public Properties
+        #region Public Properties
 		private static KeyboardShortcutMap _defaultMap = null;
-public static KeyboardShortcutMap DefaultMap
+        public static KeyboardShortcutMap DefaultMap
 		{
 			get
 			{
@@ -33,7 +30,7 @@ public static KeyboardShortcutMap DefaultMap
 		}
 			
 		private static KeyboardShortcutMap _map;
-public static KeyboardShortcutMap Map
+        public static KeyboardShortcutMap Map
 		{
 			get
 			{
@@ -48,9 +45,9 @@ public static KeyboardShortcutMap Map
 				RequestKeyNotifications(_handle);
 			}
 		}
-#endregion
+        #endregion
 			
-#region Public Methods
+        #region Public Methods
 		public static void RequestKeyNotifications(IntPtr handle)
 		{
 			// ReSharper disable LocalizableElement
@@ -75,16 +72,16 @@ public static KeyboardShortcutMap Map
 			KeyboardHook.HookKeyMsgData msgData = Marshal.PtrToStructure(m.LParam, typeof(KeyboardHook.HookKeyMsgData));
 			return Map.GetCommand(msgData.KeyCode, msgData.ModifierKeys);
 		}
-#endregion
+        #endregion
 			
-#region Private Fields
+        #region Private Fields
 		// ReSharper disable once UnusedMember.Local
 		private static KeyboardHook _keyboardHook = new KeyboardHook();
 		private static bool _mapLoaded = false;
 		private static IntPtr _handle = IntPtr.Zero;
-#endregion
+        #endregion
 			
-#region Private Methods
+        #region Private Methods
 		private static void LoadDefaultMap()
 		{
 			if (_defaultMap != null)
@@ -129,24 +126,24 @@ public static KeyboardShortcutMap Map
 				KeyboardHook.CancelKeyNotification(_handle, shortcutMapping.Key.KeyCode, shortcutMapping.Key.ModifierKeys, false);
 			}
 		}
-#endregion
+        #endregion
 	}
 		
 	public class KeyboardShortcutMap : ICloneable
 	{
 			
-#region Public Properties
+        #region Public Properties
 		private List<ShortcutMapping> _mappings;
-public List<ShortcutMapping> Mappings
+        public List<ShortcutMapping> Mappings
 		{
 			get
 			{
 				return _mappings;
 			}
 		}
-#endregion
+        #endregion
 			
-#region Constructors
+        #region Constructors
 		public KeyboardShortcutMap()
 		{
 			_mappings = new List<ShortcutMapping>();
@@ -156,9 +153,9 @@ public List<ShortcutMapping> Mappings
 		{
 			_mappings = mappings;
 		}
-#endregion
+        #endregion
 			
-#region Public Methods
+        #region Public Methods
 		public void Add(ShortcutCommand command, ShortcutKey shortcutKey)
 		{
 			if (Mappings.Contains(new ShortcutMapping(command, shortcutKey)))
@@ -229,9 +226,9 @@ public List<ShortcutMapping> Mappings
 			newMappings.AddRange(Mappings);
 			return new KeyboardShortcutMap(newMappings);
 		}
-#endregion
+        #endregion
 			
-#region Private Methods
+        #region Private Methods
 		private static ShortcutKey[] ParseConfigString(string shortcutKeysString)
 		{
 			List<ShortcutKey> shortcutKeys = new List<ShortcutKey>();
@@ -243,7 +240,7 @@ public List<ShortcutMapping> Mappings
 				}
 				catch (Exception ex)
 				{
-					MessageCollector.AddExceptionMessage(message: string.Format("KeyboardShortcuts.ParseShortcutKeysString({0}) failed at {1}.", shortcutKeysString, shortcutKeyString), ex: ex, logOnly: true);
+					Runtime.MessageCollector.AddExceptionMessage(message: string.Format("KeyboardShortcuts.ParseShortcutKeysString({0}) failed at {1}.", shortcutKeysString, shortcutKeyString), ex: ex, logOnly: true);
 					continue;
 				}
 			}
@@ -288,15 +285,15 @@ public List<ShortcutMapping> Mappings
 				Mappings.Remove(mapping);
 			}
 		}
-#endregion
+        #endregion
 	}
 		
-	[ImmutableObject(true)]public class ShortcutMapping : IEquatable<ShortcutMapping>
+	[ImmutableObject(true)]
+    public class ShortcutMapping : IEquatable<ShortcutMapping>
 	{
-			
-#region Public Properties
+        #region Public Properties
 		private ShortcutCommand _command;
-public ShortcutCommand Command
+        public ShortcutCommand Command
 		{
 			get
 			{
@@ -305,24 +302,24 @@ public ShortcutCommand Command
 		}
 			
 		private ShortcutKey _key;
-public ShortcutKey Key
+        public ShortcutKey Key
 		{
 			get
 			{
 				return _key;
 			}
 		}
-#endregion
+        #endregion
 			
-#region Constructors
+        #region Constructors
 		public ShortcutMapping(ShortcutCommand command, ShortcutKey key)
 		{
 			_command = command;
 			_key = key;
 		}
-#endregion
+        #endregion
 			
-#region Public Methods
+        #region Public Methods
 		public bool Equals(ShortcutMapping other)
 		{
 			if (!(Command == other.Command))
@@ -335,15 +332,15 @@ public ShortcutKey Key
 			}
 			return true;
 		}
-#endregion
+        #endregion
 	}
 		
-	[ImmutableObject(true)]public class ShortcutKey : IEquatable<ShortcutKey>
+	[ImmutableObject(true)]
+    public class ShortcutKey : IEquatable<ShortcutKey>
 	{
-			
-#region Public Properties
+        #region Public Properties
 		private int _keyCode;
-public int KeyCode
+        public int KeyCode
 		{
 			get
 			{
@@ -352,16 +349,16 @@ public int KeyCode
 		}
 			
 		private KeyboardHook.ModifierKeys _modifierKeys;
-public KeyboardHook.ModifierKeys ModifierKeys
+        public KeyboardHook.ModifierKeys ModifierKeys
 		{
 			get
 			{
 				return _modifierKeys;
 			}
 		}
-#endregion
+        #endregion
 			
-#region Constructors
+        #region Constructors
 		public ShortcutKey(int keyCode, KeyboardHook.ModifierKeys modifierKeys)
 		{
 			_keyCode = keyCode;
@@ -384,9 +381,9 @@ public KeyboardHook.ModifierKeys ModifierKeys
 				_modifierKeys = _modifierKeys | KeyboardHook.ModifierKeys.Alt;
 			}
 		}
-#endregion
+        #endregion
 			
-#region Public Methods
+        #region Public Methods
 		public string ToConfigString()
 		{
 			return string.Join("/", new string[] {KeyCode, Convert.ToInt32(ModifierKeys)});
@@ -419,9 +416,9 @@ public KeyboardHook.ModifierKeys ModifierKeys
 			}
 			return true;
 		}
-#endregion
+        #endregion
 			
-#region Operators
+        #region Operators
 		public static bool operator ==(ShortcutKey shortcutKey1, ShortcutKey shortcutKey2)
 		{
 			return shortcutKey1.Equals(shortcutKey2);
@@ -455,13 +452,13 @@ public KeyboardHook.ModifierKeys ModifierKeys
 		{
 			return new ShortcutKey(keys);
 		}
-#endregion
+        #endregion
 	}
 		
 	public enum ShortcutCommand
-		{
-			None = 0,
-			PreviousTab,
-			NextTab
-		}
+	{
+		None = 0,
+		PreviousTab,
+		NextTab
+	}
 }

@@ -17,10 +17,11 @@ using mRemoteNG.App;
 
 namespace mRemoteNG.Connection
 {
-	[DefaultProperty("Name")]public partial class Info
+	[DefaultProperty("Name")]
+    public partial class Info
 	{
-#region Public Properties
-#region Display
+        #region Public Properties
+        #region Display
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
@@ -74,8 +75,8 @@ namespace mRemoteNG.Connection
 				_panel = value;
 			}
 		}
-#endregion
-#region Connection
+        #endregion
+        #region Connection
 		private string _hostname = string.Empty;
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameAddress"),
@@ -147,8 +148,8 @@ namespace mRemoteNG.Connection
 				_domain = value.Trim();
 			}
 		}
-#endregion
-#region Protocol
+        #endregion
+        #region Protocol
 		private Protocol.Protocols _protocol; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameProtocol"),
@@ -316,8 +317,8 @@ namespace mRemoteNG.Connection
 				_useCredSsp = value;
 			}
 		}
-#endregion
-#region RD Gateway
+        #endregion
+        #region RD Gateway
 		private Protocol.RDP.RDGatewayUsageMethod _rdGatewayUsageMethod; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 4),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayUsageMethod"),
@@ -416,8 +417,8 @@ namespace mRemoteNG.Connection
 				_rdGatewayDomain = value.Trim();
 			}
 		}
-#endregion
-#region Appearance
+        #endregion
+        #region Appearance
 		private Protocol.RDP.RDPResolutions _resolution; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameResolution"),
@@ -553,8 +554,8 @@ namespace mRemoteNG.Connection
 				_enableDesktopComposition = value;
 			}
 		}
-#endregion
-#region Redirect
+        #endregion
+        #region Redirect
 		private bool _redirectKeys; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectKeys"),
@@ -656,8 +657,8 @@ namespace mRemoteNG.Connection
 				_redirectSound = value;
 			}
 		}
-#endregion
-#region Misc
+        #endregion
+        #region Misc
 		private string _preExtApp; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalToolBefore"),
@@ -723,8 +724,8 @@ namespace mRemoteNG.Connection
 				_userField = value;
 			}
 		}
-#endregion
-#region VNC
+        #endregion
+        #region VNC
 		private Protocol.VNC.Compression _vncCompression; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5), 
             Browsable(false),
@@ -918,10 +919,11 @@ namespace mRemoteNG.Connection
 				_vncViewOnly = value;
 			}
 		}
-#endregion
-			
-		[Browsable(false)]private Inheritance _Inherit =
-@privateprivate ;Inheritance Inherit
+        #endregion
+
+        [Browsable(false)]
+        private Inheritance _Inherit;
+        public Inheritance Inherit
 		{
 			get
 			{
@@ -932,9 +934,10 @@ namespace mRemoteNG.Connection
 				_Inherit = value;
 			}
 		}
-			
-		[Browsable(false)]private Protocol.List _OpenConnections =
-@privateprivate ;Protocol.List OpenConnections
+
+        [Browsable(false)]
+        private Protocol.List _OpenConnections = new Protocol.List();
+        public Protocol.List OpenConnections
 		{
 			get
 			{
@@ -946,8 +949,9 @@ namespace mRemoteNG.Connection
 			}
 		}
 			
-		[Browsable(false)]private bool _IsContainer = false;
-        private bool IsContainer
+		[Browsable(false)]
+        private bool _IsContainer = false;
+        public bool IsContainer
 		{
 			get
 			{
@@ -959,8 +963,9 @@ namespace mRemoteNG.Connection
 			}
 		}
 			
-		[Browsable(false)]private bool _IsDefault = false;
-        private bool IsDefault
+		[Browsable(false)]
+        private bool _IsDefault = false;
+        public bool IsDefault
 		{
 			get
 			{
@@ -972,10 +977,12 @@ namespace mRemoteNG.Connection
 			}
 		}
 			
-		[Browsable(false)]public Container.Info Parent {get; set;}
+		[Browsable(false)]
+        public Container.Info Parent {get; set;}
 			
-		[Browsable(false)]private int _PositionID = 0;
-        private int PositionID
+		[Browsable(false)]
+        private int _PositionID = 0;
+        public int PositionID
 		{
 			get
 			{
@@ -987,12 +994,15 @@ namespace mRemoteNG.Connection
 			}
 		}
 			
-		[Browsable(false)]public string ConstantID {get; set;}
+		[Browsable(false)]
+        public string ConstantID {get; set;}
 			
-		[Browsable(false)]public TreeNode TreeNode {get; set;}
+		[Browsable(false)]
+        public TreeNode TreeNode {get; set;}
 			
-		[Browsable(false)]private bool _IsQuickConnect = false;
-        private bool IsQuickConnect
+		[Browsable(false)]
+        private bool _IsQuickConnect = false;
+        public bool IsQuickConnect
 		{
 			get
 			{
@@ -1004,8 +1014,9 @@ namespace mRemoteNG.Connection
 			}
 		}
 			
-		[Browsable(false)]private bool _PleaseConnect = false;
-        private bool PleaseConnect
+		[Browsable(false)]
+        private bool _PleaseConnect = false;
+        public bool PleaseConnect
 		{
 			get
 			{
@@ -1018,7 +1029,7 @@ namespace mRemoteNG.Connection
 		}
 #endregion
 			
-#region Constructors
+        #region Constructors
 		public Info()
 		{
 			// VBConversions Note: Non-static class variable initialization is below.  Class variables cannot be initially assigned non-static values in C#.
@@ -1034,9 +1045,9 @@ namespace mRemoteNG.Connection
 			IsContainer = true;
 			this.Parent = parent;
 		}
-#endregion
+        #endregion
 			
-#region Public Methods
+        #region Public Methods
 		public Info Copy()
 		{
 			Info newConnectionInfo = (Info)MemberwiseClone();
@@ -1062,9 +1073,9 @@ namespace mRemoteNG.Connection
 		{
 			Port = GetDefaultPort();
 		}
-#endregion
+        #endregion
 			
-#region Public Enumerations
+        #region Public Enumerations
 		[Flags()]public enum Force
 		{
 			None = 0,
@@ -1075,9 +1086,9 @@ namespace mRemoteNG.Connection
 			DontUseConsoleSession = 16,
 			NoCredentials = 32
 		}
-#endregion
+        #endregion
 			
-#region Private Methods
+        #region Private Methods
 		private TPropertyType GetInheritedPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
 		{
 			Type inheritType = Inherit.GetType();
@@ -1162,6 +1173,6 @@ namespace mRemoteNG.Connection
                 Runtime.MessageCollector.AddExceptionMessage(My.Language.strConnectionSetDefaultPortFailed, ex, Messages.MessageClass.ErrorMsg);
 			}
 		}
-#endregion
+        #endregion
 	}
 }

@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,15 +8,13 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using mRemoteNG.Messages;
 //using mRemoteNG.App.Native;
 using System.Threading;
 using Microsoft.Win32;
-//using mRemoteNG.App.Runtime;
+using mRemoteNG.App;
 using System.Text.RegularExpressions;
 using mRemoteNG.Tools;
 
@@ -25,19 +22,18 @@ using mRemoteNG.Tools;
 namespace mRemoteNG.Connection.Protocol
 {
 	public class PuttyBase : Base
-	{
-				
-#region Constants
+	{	
+        #region Constants
 		private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
-#endregion
+        #endregion
 				
-#region Private Properties
+        #region Private Properties
 		bool _isPuttyNg;
-#endregion
+        #endregion
 				
-#region Public Properties
+        #region Public Properties
 		private Putty_Protocol _PuttyProtocol;
-public Putty_Protocol PuttyProtocol
+        public Putty_Protocol PuttyProtocol
 		{
 			get
 			{
@@ -50,7 +46,7 @@ public Putty_Protocol PuttyProtocol
 		}
 				
 		private Putty_SSHVersion _PuttySSHVersion;
-public Putty_SSHVersion PuttySSHVersion
+        public Putty_SSHVersion PuttySSHVersion
 		{
 			get
 			{
@@ -63,7 +59,7 @@ public Putty_SSHVersion PuttySSHVersion
 		}
 				
 		private IntPtr _PuttyHandle;
-public IntPtr PuttyHandle
+        public IntPtr PuttyHandle
 		{
 			get
 			{
@@ -76,7 +72,7 @@ public IntPtr PuttyHandle
 		}
 				
 		private Process _PuttyProcess;
-public Process PuttyProcess
+        public Process PuttyProcess
 		{
 			get
 			{
@@ -89,7 +85,7 @@ public Process PuttyProcess
 		}
 				
 		private static string _PuttyPath;
-public static string PuttyPath
+        public static string PuttyPath
 		{
 			get
 			{
@@ -101,7 +97,7 @@ public static string PuttyPath
 			}
 		}
 				
-public bool Focused
+        public bool Focused
 		{
 			get
 			{
@@ -115,16 +111,16 @@ public bool Focused
 				}
 			}
 		}
-#endregion
+        #endregion
 				
-#region Private Events & Handlers
+        #region Private Events & Handlers
 		private void ProcessExited(object sender, System.EventArgs e)
 		{
 			base.EVENT_CLOSED(this);
 		}
-#endregion
+        #endregion
 				
-#region Public Methods
+        #region Public Methods
 		public PuttyBase()
 		{
 					
@@ -237,11 +233,11 @@ public bool Focused
 					SetParent(PuttyHandle, InterfaceControl.Handle);
 				}
 						
-				MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strPuttyStuff, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strPuttyStuff, true);
 						
-				MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(My.Language.strPuttyHandle, PuttyHandle.ToString()), true);
-				MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(My.Language.strPuttyTitle, PuttyProcess.MainWindowTitle), true);
-				MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(My.Language.strPuttyParentHandle, InterfaceControl.Parent.Handle.ToString()), true);
+				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(My.Language.strPuttyHandle, PuttyHandle.ToString()), true);
+				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(My.Language.strPuttyTitle, PuttyProcess.MainWindowTitle), true);
+				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(My.Language.strPuttyParentHandle, InterfaceControl.Parent.Handle.ToString()), true);
 						
 				Resize(this, new EventArgs());
 						
@@ -250,7 +246,7 @@ public bool Focused
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyConnectionFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyConnectionFailed + Constants.vbNewLine + ex.Message);
 				return false;
 			}
 		}
@@ -267,7 +263,7 @@ public bool Focused
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyFocusFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyFocusFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 				
@@ -283,7 +279,7 @@ public bool Focused
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyResizeFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyResizeFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 				
@@ -298,7 +294,7 @@ public bool Focused
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyKillFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyKillFailed + Constants.vbNewLine + ex.Message, true);
 			}
 					
 			try
@@ -307,7 +303,7 @@ public bool Focused
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyDisposeFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyDisposeFailed + Constants.vbNewLine + ex.Message, true);
 			}
 					
 			base.Close();
@@ -322,12 +318,12 @@ public bool Focused
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyShowSettingsDialogFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyShowSettingsDialogFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
-#endregion
+        #endregion
 				
-#region Enums
+        #region Enums
 		public enum Putty_Protocol
 		{
 			ssh = 0,
@@ -342,6 +338,6 @@ public bool Focused
 			ssh1 = 1,
 			ssh2 = 2
 		}
-#endregion
+        #endregion
 	}
 }

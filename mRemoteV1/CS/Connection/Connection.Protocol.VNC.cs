@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,9 +8,7 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
-//using mRemoteNG.App.Runtime;
+using mRemoteNG.App;
 using System.ComponentModel;
 using mRemoteNG.Tools;
 //using mRemoteNG.Tools.LocalizedAttributes;
@@ -21,8 +18,7 @@ namespace mRemoteNG.Connection.Protocol
 {
 	public class VNC : Base
 	{
-				
-#region Properties
+        #region Properties
         public bool SmartSize
 		{
 			get { return VNC_Renamed.Scaled; }
@@ -34,14 +30,14 @@ namespace mRemoteNG.Connection.Protocol
 			get { return VNC_Renamed.ViewOnly; }
 			set { VNC_Renamed.ViewOnly = value; }
 		}
-#endregion
+        #endregion
 				
-#region Private Declarations
+        #region Private Declarations
 		private VncSharp.RemoteDesktop VNC_Renamed;
 		private Connection.Info Info;
-#endregion
+        #endregion
 				
-#region Public Methods
+        #region Public Methods
 		public VNC()
 		{
 			this.Control = new VncSharp.RemoteDesktop();
@@ -126,7 +122,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSetPropsFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSetPropsFailed + Constants.vbNewLine + ex.Message, true);
 				return false;
 			}
 		}
@@ -141,7 +137,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionOpenFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionOpenFailed + Constants.vbNewLine + ex.Message);
 				return false;
 			}
 					
@@ -156,7 +152,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionDisconnectFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionDisconnectFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 				
@@ -176,7 +172,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSendSpecialKeysFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSendSpecialKeysFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 				
@@ -189,7 +185,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncToggleSmartSizeFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncToggleSmartSizeFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 				
@@ -201,7 +197,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncToggleViewOnlyFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncToggleViewOnlyFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 				
@@ -218,7 +214,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncStartChatFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncStartChatFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
 				
@@ -246,130 +242,130 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncRefreshFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncRefreshFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
-#endregion
+        #endregion
 				
-#region Private Methods
-				private void SetEventHandlers()
+        #region Private Methods
+		private void SetEventHandlers()
+		{
+			try
+			{
+				VNC_Renamed.ConnectComplete += VNCEvent_Connected;
+				VNC_Renamed.ConnectionLost += VNCEvent_Disconnected;
+				mRemoteNG.frmMain.clipboardchange += VNCEvent_ClipboardChanged;
+				if (!((Force & Info.Force.NoCredentials) == (int) Info.Force.NoCredentials) && !string.IsNullOrEmpty(Info.Password))
 				{
-					try
-					{
-						VNC_Renamed.ConnectComplete += VNCEvent_Connected;
-						VNC_Renamed.ConnectionLost += VNCEvent_Disconnected;
-						mRemoteNG.frmMain.clipboardchange += VNCEvent_ClipboardChanged;
-						if (!((Force & Info.Force.NoCredentials) == (int) Info.Force.NoCredentials) && !string.IsNullOrEmpty(Info.Password))
-						{
-							VNC_Renamed.GetPassword = new System.EventHandler(VNCEvent_Authenticate);
-						}
-					}
-					catch (Exception ex)
-					{
-						MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSetEventHandlersFailed + Constants.vbNewLine + ex.Message, true);
-					}
+					VNC_Renamed.GetPassword = new System.EventHandler(VNCEvent_Authenticate);
 				}
-#endregion
-				
-#region Private Events & Handlers
-				private void VNCEvent_Connected(object sender, EventArgs e)
-				{
-					base.Event_Connected(this);
-					VNC_Renamed.AutoScroll = Info.VNCSmartSizeMode == SmartSizeMode.SmartSNo;
-				}
-				
-				private void VNCEvent_Disconnected(object sender, EventArgs e)
-				{
-					base.Event_Disconnected(sender, e.ToString());
-					base.Close();
-				}
-				
-				private void VNCEvent_ClipboardChanged()
-				{
-					this.VNC_Renamed.FillServerClipboard();
-				}
-				
-				private string VNCEvent_Authenticate()
-				{
-					return Info.Password;
-				}
-#endregion
-				
-#region Enums
-				public enum Defaults
-				{
-					Port = 5900
-				}
-				
-				public enum SpecialKeys
-				{
-					CtrlAltDel,
-					CtrlEsc
-				}
-				
-				public enum Compression
-				{
-                    [LocalizedAttributes.LocalizedDescription("strNoCompression")]CompNone = 99,
-					[Description("0")]Comp0 = 0,
-					[Description("1")]Comp1 = 1,
-					[Description("2")]Comp2 = 2,
-					[Description("3")]Comp3 = 3,
-					[Description("4")]Comp4 = 4,
-					[Description("5")]Comp5 = 5,
-					[Description("6")]Comp6 = 6,
-					[Description("7")]Comp7 = 7,
-					[Description("8")]Comp8 = 8,
-					[Description("9")]Comp9 = 9
-				}
-				
-				public enum Encoding
-				{
-					[Description("Raw")]EncRaw,
-					[Description("RRE")]EncRRE,
-					[Description("CoRRE")]EncCorre,
-					[Description("Hextile")]EncHextile,
-					[Description("Zlib")]EncZlib,
-					[Description("Tight")]EncTight,
-					[Description("ZlibHex")]EncZLibHex,
-					[Description("ZRLE")]EncZRLE
-				}
-				
-				public enum AuthMode
-				{
-                    [LocalizedAttributes.LocalizedDescription("VNC")]
-                    AuthVNC,
-                    [LocalizedAttributes.LocalizedDescription("Windows")]
-                    AuthWin
-				}
-				
-				public enum ProxyType
-				{
-                    [LocalizedAttributes.LocalizedDescription("strNone")]
-                    ProxyNone,
-                    [LocalizedAttributes.LocalizedDescription("strHttp")]
-                    ProxyHTTP,
-                    [LocalizedAttributes.LocalizedDescription("strSocks5")]
-                    ProxySocks5,
-                    [LocalizedAttributes.LocalizedDescription("strUltraVncRepeater")]
-                    ProxyUltra
-				}
-				
-				public enum Colors
-				{
-                    [LocalizedAttributes.LocalizedDescription("strNormal")]
-                    ColNormal,
-					[Description("8-bit")]Col8Bit
-				}
-				
-				public enum SmartSizeMode
-				{
-                    [LocalizedAttributes.LocalizedDescription("strNoSmartSize")]
-                    SmartSNo,
-                    [LocalizedAttributes.LocalizedDescription("strFree")]
-                    SmartSFree,
-                    [LocalizedAttributes.LocalizedDescription("strAspect")]
-                    SmartSAspect
-				}
-#endregion
 			}
+			catch (Exception ex)
+			{
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSetEventHandlersFailed + Constants.vbNewLine + ex.Message, true);
+			}
+		}
+        #endregion
+				
+        #region Private Events & Handlers
+		private void VNCEvent_Connected(object sender, EventArgs e)
+		{
+			base.Event_Connected(this);
+			VNC_Renamed.AutoScroll = Info.VNCSmartSizeMode == SmartSizeMode.SmartSNo;
+		}
+				
+		private void VNCEvent_Disconnected(object sender, EventArgs e)
+		{
+			base.Event_Disconnected(sender, e.ToString());
+			base.Close();
+		}
+				
+		private void VNCEvent_ClipboardChanged()
+		{
+			this.VNC_Renamed.FillServerClipboard();
+		}
+				
+		private string VNCEvent_Authenticate()
+		{
+			return Info.Password;
+		}
+        #endregion
+				
+        #region Enums
+		public enum Defaults
+		{
+			Port = 5900
+		}
+				
+		public enum SpecialKeys
+		{
+			CtrlAltDel,
+			CtrlEsc
+		}
+				
+		public enum Compression
+		{
+            [LocalizedAttributes.LocalizedDescription("strNoCompression")]CompNone = 99,
+			[Description("0")]Comp0 = 0,
+			[Description("1")]Comp1 = 1,
+			[Description("2")]Comp2 = 2,
+			[Description("3")]Comp3 = 3,
+			[Description("4")]Comp4 = 4,
+			[Description("5")]Comp5 = 5,
+			[Description("6")]Comp6 = 6,
+			[Description("7")]Comp7 = 7,
+			[Description("8")]Comp8 = 8,
+			[Description("9")]Comp9 = 9
+		}
+				
+		public enum Encoding
+		{
+			[Description("Raw")]EncRaw,
+			[Description("RRE")]EncRRE,
+			[Description("CoRRE")]EncCorre,
+			[Description("Hextile")]EncHextile,
+			[Description("Zlib")]EncZlib,
+			[Description("Tight")]EncTight,
+			[Description("ZlibHex")]EncZLibHex,
+			[Description("ZRLE")]EncZRLE
+		}
+				
+		public enum AuthMode
+		{
+            [LocalizedAttributes.LocalizedDescription("VNC")]
+            AuthVNC,
+            [LocalizedAttributes.LocalizedDescription("Windows")]
+            AuthWin
+		}
+				
+		public enum ProxyType
+		{
+            [LocalizedAttributes.LocalizedDescription("strNone")]
+            ProxyNone,
+            [LocalizedAttributes.LocalizedDescription("strHttp")]
+            ProxyHTTP,
+            [LocalizedAttributes.LocalizedDescription("strSocks5")]
+            ProxySocks5,
+            [LocalizedAttributes.LocalizedDescription("strUltraVncRepeater")]
+            ProxyUltra
+		}
+				
+		public enum Colors
+		{
+            [LocalizedAttributes.LocalizedDescription("strNormal")]
+            ColNormal,
+			[Description("8-bit")]Col8Bit
+		}
+				
+		public enum SmartSizeMode
+		{
+            [LocalizedAttributes.LocalizedDescription("strNoSmartSize")]
+            SmartSNo,
+            [LocalizedAttributes.LocalizedDescription("strFree")]
+            SmartSFree,
+            [LocalizedAttributes.LocalizedDescription("strAspect")]
+            SmartSAspect
+		}
+        #endregion
+	}
 }

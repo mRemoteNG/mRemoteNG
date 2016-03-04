@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,22 +8,20 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
 
 
 namespace mRemoteNG.Connection
 {
 	public class List : CollectionBase
 	{
-			
-#region Public Properties
-public Connection.Info this[object Index]
+        #region Public Properties
+        public Connection.Info this[object Index]
 		{
 			get
 			{
 				if (Index is Connection.Info)
 				{
-					return Index;
+					return (Connection.Info)Index;
 				}
 				else
 				{
@@ -33,16 +30,13 @@ public Connection.Info this[object Index]
 			}
 		}
 			
-public new int Count
+        public new int Count
 		{
-			get
-			{
-				return List.Count;
-			}
+			get { return List.Count; }
 		}
-#endregion
+        #endregion
 			
-#region Public Methods
+        #region Public Methods
 		public Connection.Info Add(Connection.Info cInfo)
 		{
 			this.List.Add(cInfo);
@@ -80,7 +74,7 @@ public new int Count
 		{
 			try
 			{
-				return this.MemberwiseClone();
+                return (Connection.List)this.MemberwiseClone();
 			}
 			catch (Exception)
 			{
@@ -93,6 +87,6 @@ public new int Count
 		{
 			this.List.Clear();
 		}
-#endregion
+        #endregion
 	}
 }
