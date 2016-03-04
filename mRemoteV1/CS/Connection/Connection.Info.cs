@@ -12,6 +12,7 @@ using System.ComponentModel;
 using mRemoteNG.Config;
 using mRemoteNG.Tools;
 using System.Reflection;
+using mRemoteNG.App;
 
 
 namespace mRemoteNG.Connection
@@ -658,10 +659,11 @@ namespace mRemoteNG.Connection
 #endregion
 #region Misc
 		private string _preExtApp; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
-[LocalizedCategory("strCategoryMiscellaneous", 7), 
-LocalizedDisplayName("strPropertyNameExternalToolBefore"), 
-LocalizedDescription("strPropertyDescriptionExternalToolBefore"), 
-TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]public virtual string PreExtApp
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalToolBefore"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionExternalToolBefore"), 
+            TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]
+        public virtual string PreExtApp
 		{
 			get
 			{
@@ -674,10 +676,11 @@ TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]public virtual string Pr
 		}
 			
 		private string _postExtApp; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
-[LocalizedCategory("strCategoryMiscellaneous", 7), 
-LocalizedDisplayName("strPropertyNameExternalToolAfter"), 
-LocalizedDescription("strPropertyDescriptionExternalToolAfter"), 
-TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]public virtual string PostExtApp
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalToolAfter"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionExternalToolAfter"), 
+            TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]
+        public virtual string PostExtApp
 		{
 			get
 			{
@@ -690,9 +693,10 @@ TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]public virtual string Po
 		}
 			
 		private string _macAddress; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
-[LocalizedCategory("strCategoryMiscellaneous", 7), 
-LocalizedDisplayName("strPropertyNameMACAddress"), 
-LocalizedDescription("strPropertyDescriptionMACAddress")]public virtual string MacAddress
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameMACAddress"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionMACAddress")]
+        public virtual string MacAddress
 		{
 			get
 			{
@@ -705,9 +709,10 @@ LocalizedDescription("strPropertyDescriptionMACAddress")]public virtual string M
 		}
 			
 		private string _userField; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
-[LocalizedCategory("strCategoryMiscellaneous", 7), 
-LocalizedDisplayName("strPropertyNameUser1"), 
-LocalizedDescription("strPropertyDescriptionUser1")]public virtual string UserField
+        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameUser1"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUser1")]
+        public virtual string UserField
 		{
 			get
 			{
@@ -1154,8 +1159,7 @@ LocalizedDescription("strPropertyDescriptionUser1")]public virtual string UserFi
 			}
 			catch (Exception ex)
 			{
-                mRemoteNG.Messages.Collector
-				MessageCollector.AddExceptionMessage(My.Language.strConnectionSetDefaultPortFailed, ex, Messages.MessageClass.ErrorMsg);
+                Runtime.MessageCollector.AddExceptionMessage(My.Language.strConnectionSetDefaultPortFailed, ex, Messages.MessageClass.ErrorMsg);
 			}
 		}
 #endregion

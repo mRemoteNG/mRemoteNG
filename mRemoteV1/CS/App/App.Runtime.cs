@@ -26,6 +26,7 @@ using System.Xml;
 //using System.Environment;
 using System.Management;
 using Microsoft.Win32;
+using mRemoteNG.Connection.Protocol;
 //using Timer = System.Timers.Timer;
 
 
@@ -1679,7 +1680,7 @@ namespace mRemoteNG.App
         #endregion
 			
         #region Opening Connection
-		public static Connection.Info CreateQuickConnect(string connectionString, Protocol.Protocols protocol)
+		public static Connection.Info CreateQuickConnect(string connectionString, Protocols protocol)
 		{
 			try
 			{
@@ -1842,46 +1843,46 @@ namespace mRemoteNG.App
 					}
 				}
 					
-				Protocol.Base newProtocol = default(Protocol.Base);
+				Base newProtocol = default(Base);
 				// Create connection based on protocol type
 				switch (newConnectionInfo.Protocol)
 				{
-					case Protocol.Protocols.RDP:
-						newProtocol = new Protocol.RDP();
+					case Protocols.RDP:
+						newProtocol = new RDP();
 						((RDP) newProtocol).tmrReconnect.Elapsed += ((RDP) newProtocol).tmrReconnect_Elapsed;
 						((RDP) newProtocol).tmrReconnect.Elapsed += ((RDP) newProtocol).tmrReconnect_Elapsed;
 						break;
-					case Protocol.Protocols.VNC:
-						newProtocol = new Protocol.VNC();
+					case Protocols.VNC:
+						newProtocol = new VNC();
 						break;
-					case Protocol.Protocols.SSH1:
-						newProtocol = new Protocol.SSH1();
+					case Protocols.SSH1:
+						newProtocol = new SSH1();
 						break;
-					case Protocol.Protocols.SSH2:
-						newProtocol = new Protocol.SSH2();
+					case Protocols.SSH2:
+						newProtocol = new SSH2();
 						break;
-					case Protocol.Protocols.Telnet:
-						newProtocol = new Protocol.Telnet();
+					case Protocols.Telnet:
+						newProtocol = new Telnet();
 						break;
-					case Protocol.Protocols.Rlogin:
-						newProtocol = new Protocol.Rlogin();
+					case Protocols.Rlogin:
+						newProtocol = new Rlogin();
 						break;
-					case Protocol.Protocols.RAW:
-						newProtocol = new Protocol.RAW();
+					case Protocols.RAW:
+						newProtocol = new RAW();
 						break;
-					case Protocol.Protocols.HTTP:
-						newProtocol = new Protocol.HTTP(newConnectionInfo.RenderingEngine);
+					case Protocols.HTTP:
+						newProtocol = new HTTP(newConnectionInfo.RenderingEngine);
 						break;
-					case Protocol.Protocols.HTTPS:
-						newProtocol = new Protocol.HTTPS(newConnectionInfo.RenderingEngine);
+					case Protocols.HTTPS:
+						newProtocol = new HTTPS(newConnectionInfo.RenderingEngine);
 						break;
-					case Protocol.Protocols.ICA:
-						newProtocol = new Protocol.ICA();
+					case Protocols.ICA:
+						newProtocol = new ICA();
 						((ICA) newProtocol).tmrReconnect.Elapsed += ((ICA) newProtocol).tmrReconnect_Elapsed;
 						((ICA) newProtocol).tmrReconnect.Elapsed += ((ICA) newProtocol).tmrReconnect_Elapsed;
 						break;
-					case Protocol.Protocols.IntApp:
-						newProtocol = new Protocol.IntegratedProgram();
+					case Protocols.IntApp:
+						newProtocol = new IntegratedProgram();
 							
 						if (newConnectionInfo.ExtApp == "")
 						{

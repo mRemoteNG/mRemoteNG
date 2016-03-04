@@ -59,3 +59,11 @@ C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1.ConvertedToC#
 C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1.ConvertedToC#\obj\Debug Portable\mRemoteNG.Language.Language.zh-TW.resources
 C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1.ConvertedToC#\obj\Debug Portable\mRemoteV1.Converted.csproj.GenerateResource.Cache
 C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1.ConvertedToC#\obj\Debug Portable\mRemoteNG.Properties.Resources.resources
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1.ConvertedToC#\bin\Debug Portable\mRemoteNG.exe.config
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1.ConvertedToC#\obj\Debug Portable\Interop.EOLWTSCOM.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1.ConvertedToC#\obj\Debug Portable\Interop.MSTSCLib.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1.ConvertedToC#\obj\Debug Portable\Interop.SHDocVw.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1.ConvertedToC#\obj\Debug Portable\Interop.WFICALib.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1.ConvertedToC#\obj\Debug Portable\AxInterop.MSTSCLib.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1.ConvertedToC#\obj\Debug Portable\AxInterop.WFICALib.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1.ConvertedToC#\obj\Debug Portable\mRemoteV1.Converted.csproj.ResolveComReference.cache

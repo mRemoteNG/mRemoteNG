@@ -93,7 +93,6 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="mscorlib" />
-    <Reference Include="C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\SharedLibraryNG\bin\Debug\SharedLibraryNG.dll" />
     <Reference Include="ADTree, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\ADTree.dll</HintPath>
@@ -281,9 +280,7 @@
     <Compile Include="Connection\Connection.InterfaceControl.Designer.cs">
       <DependentUpon>Connection.InterfaceControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Connection\Connection.InterfaceControl.cs">
-      <SubType>Component</SubType>
-    </Compile>
+    <Compile Include="Connection\Connection.InterfaceControl.cs" />
     <Compile Include="Connection\Connection.List.cs" />
     <Compile Include="Connection\Connection.Protocol.Base.cs" />
     <Compile Include="Connection\Connection.Protocol.HTTP.cs" />
@@ -372,15 +369,21 @@
     <Compile Include="Tools\Tools.SystemMenu.cs" />
     <Compile Include="Tools\Tools.WindowPlacement.cs" />
     <Compile Include="Tree\Tree.Node.cs" />
-    <Compile Include="UI\UI.Window.About.cs" />
+    <Compile Include="UI\UI.Window.About.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\UI.Window.ActiveDirectoryImport.Designer.cs">
       <DependentUpon>UI.Window.ActiveDirectoryImport.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.ActiveDirectoryImport.cs" />
+    <Compile Include="UI\UI.Window.ActiveDirectoryImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\UI.Window.Announcement.Designer.cs">
       <DependentUpon>UI.Window.Announcement.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.Announcement.cs" />
+    <Compile Include="UI\UI.Window.Announcement.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\UI.Window.Base.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -390,7 +393,9 @@
     <Compile Include="UI\UI.Window.Config.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Connection.cs" />
+    <Compile Include="UI\UI.Window.Connection.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="UI\UI.Window.ErrorsAndInfos.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -1159,7 +1164,12 @@
       <Isolated>False</Isolated>
     </COMReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\..\SharedLibraryNG\SharedLibraryNG.csproj">
+      <Project>{0f615504-5f30-4cf2-8341-1de7fec95a23}</Project>
+      <Name>SharedLibraryNG</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="mscorlib" />
