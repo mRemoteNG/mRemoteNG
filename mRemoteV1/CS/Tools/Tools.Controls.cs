@@ -20,14 +20,8 @@ namespace mRemoteNG.Tools
 			private string _Text;
             public string Text
 			{
-				get
-				{
-					return this._Text;
-				}
-				set
-				{
-					this._Text = value;
-				}
+				get { return this._Text; }
+				set { this._Text = value; }
 			}
 				
 			private object _Tag;
@@ -169,7 +163,7 @@ namespace mRemoteNG.Tools
 						}
 						else if (Tree.Node.GetNodeType(tNode) == Tree.Node.Type.Connection | Tree.Node.GetNodeType(tNode) == Tree.Node.Type.PuttySession)
 						{
-							tMenItem.Image = Windows.treeForm.imgListTree.Images[tNode.ImageIndex];
+							tMenItem.Image = Runtime.Windows.treeForm.imgListTree.Images[tNode.ImageIndex];
 							tMenItem.Tag = tNode.Tag;
 								
 							menToolStrip.DropDownItems.Add(tMenItem);

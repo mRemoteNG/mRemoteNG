@@ -208,7 +208,7 @@ namespace mRemoteNG.UI.Window
 		}
 				
 		// Get sessions from an already impersonated and connected TerminalSessions object
-		private void GetSessions(mRemoteNG.Protocol.Protocol.RDP.TerminalSessions terminalSessions, long serverHandle)
+        private void GetSessions(mRemoteNG.Connection.Protocol.RDP.TerminalSessions terminalSessions, long serverHandle)
 		{
 			mRemoteNG.Connection.Protocol.RDP.SessionsCollection rdpSessions = terminalSessions.GetSessions(serverHandle);
 			foreach (mRemoteNG.Connection.Protocol.RDP.Session session in rdpSessions)

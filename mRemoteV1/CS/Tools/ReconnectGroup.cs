@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,7 +8,6 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
 
 
 namespace mRemoteNG
@@ -21,7 +19,7 @@ namespace mRemoteNG
 			InitializeComponent();
 		}
 		private bool _ServerReady;
-public bool ServerReady
+        public bool ServerReady
 		{
 			get
 			{
@@ -62,7 +60,7 @@ public bool ServerReady
 		}
 		
 		private bool _ReconnectWhenReady;
-public bool ReconnectWhenReady
+        public bool ReconnectWhenReady
 		{
 			get
 			{
@@ -157,5 +155,4 @@ public bool ReconnectWhenReady
 			chkReconnectWhenReady.Text = My.Language.strCheckboxReconnectWhenReady;
 		}
 	}
-	
 }

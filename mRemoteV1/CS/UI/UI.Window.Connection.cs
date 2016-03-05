@@ -271,8 +271,8 @@ namespace mRemoteNG.UI.Window
 			this.Text = FormText;
 			this.TabText = FormText;
 		}
-				
-		public Crownwood.Magic.Controls.TabPage AddConnectionTab(Protocol.Info conI)
+
+        public Crownwood.Magic.Controls.TabPage AddConnectionTab(mRemoteNG.Connection.Info conI)
 		{
 			try
 			{
@@ -897,8 +897,8 @@ namespace mRemoteNG.UI.Window
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshScreen (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
 			}
 		}
-				
-		private void SendSpecialKeys(mRemoteNG.Protocol.Protocol.VNC.SpecialKeys Keys)
+
+        private void SendSpecialKeys(mRemoteNG.Connection.Protocol.VNC.SpecialKeys Keys)
 		{
 			try
 			{

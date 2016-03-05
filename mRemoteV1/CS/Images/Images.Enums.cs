@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,31 +8,26 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
 
 
-namespace mRemoteNG
+namespace mRemoteNG.Images
 {
-	namespace Images
+	public class Enums
 	{
-		public class Enums
+		public enum TreeImage
 		{
-			public enum TreeImage
-			{
-				Root = 0,
-				Container = 1,
-				ConnectionOpen = 2,
-				ConnectionClosed = 3,
-				PuttySessions = 4
-			}
+			Root = 0,
+			Container = 1,
+			ConnectionOpen = 2,
+			ConnectionClosed = 3,
+			PuttySessions = 4
+		}
 			
-			public enum ErrorImage
-			{
-				_Information = 0,
-				_Warning = 1,
-				_Error = 2
-			}
+		public enum ErrorImage
+		{
+			_Information = 0,
+			_Warning = 1,
+			_Error = 2
 		}
 	}
-	
 }

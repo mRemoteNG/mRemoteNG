@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace My.Resources {
+namespace My {
     using System;
     
     

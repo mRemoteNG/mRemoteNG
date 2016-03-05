@@ -1,4 +1,4 @@
-// VBConversions Note: VB project level imports
+
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,7 +9,6 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
 
 
 namespace mRemoteNG.Tools
@@ -23,7 +22,6 @@ namespace mRemoteNG.Tools
 			MF_BYCOMMAND = App.Native.MF_BYCOMMAND,
 			MF_BYPOSITION = App.Native.MF_BYPOSITION,
 			MF_POPUP = App.Native.MF_POPUP,
-				
 			WM_SYSCOMMAND = App.Native.WM_SYSCOMMAND
 		}
 			
@@ -40,10 +38,10 @@ namespace mRemoteNG.Tools
 		{
 			SystemMenuHandle = App.Native.GetSystemMenu(FormHandle, true);
 		}
-			
-		public void AppendMenuItem(IntPtr ParentMenu, Flags Flags, int ID, string Text)
+
+        public void AppendMenuItem(IntPtr ParentMenu, Flags Flags, IntPtr ID, string Text)
 		{
-			App.Native.AppendMenu(ParentMenu, Flags, ID, Text);
+			App.Native.AppendMenu(ParentMenu, (int)Flags, ID, Text);
 		}
 			
 		public IntPtr CreatePopupMenuItem()
@@ -53,12 +51,12 @@ namespace mRemoteNG.Tools
 			
 		public bool InsertMenuItem(IntPtr SysMenu, int Position, Flags Flags, IntPtr SubMenu, string Text)
 		{
-			return App.Native.InsertMenu(SysMenu, Position, Flags, SubMenu, Text);
+			return App.Native.InsertMenu(SysMenu, Position, (int)Flags, SubMenu, Text);
 		}
 			
 		public IntPtr SetBitmap(IntPtr Menu, int Position, Flags Flags, Bitmap Bitmap)
 		{
-			return App.Native.SetMenuItemBitmaps(Menu, Position, Flags, Bitmap.GetHbitmap(), Bitmap.GetHbitmap());
+			return App.Native.SetMenuItemBitmaps(Menu, Position, (int)Flags, Bitmap.GetHbitmap(), Bitmap.GetHbitmap());
 		}
 	}
 }

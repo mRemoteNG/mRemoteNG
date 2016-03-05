@@ -19,108 +19,60 @@ namespace mRemoteNG.Tools.PortScan
 	public class ScanHost
 	{
         #region Properties
-		private static int _SSHPort = Connection.Protocol.SSH1.Defaults.Port;
+		private static int _SSHPort = (int)Connection.Protocol.SSH1.Defaults.Port;
         public static int SSHPort
 		{
-			get
-			{
-				return _SSHPort;
-			}
-			set
-			{
-				_SSHPort = value;
-			}
+			get { return _SSHPort; }
+			set { _SSHPort = value; }
 		}
-				
-		private static int _TelnetPort = Connection.Protocol.Telnet.Defaults.Port;
+
+        private static int _TelnetPort = (int)Connection.Protocol.Telnet.Defaults.Port;
         public static int TelnetPort
 		{
-			get
-			{
-				return _TelnetPort;
-			}
-			set
-			{
-				_TelnetPort = value;
-			}
+			get { return _TelnetPort; }
+			set { _TelnetPort = value; }
 		}
-				
-		private static int _HTTPPort = Connection.Protocol.HTTP.Defaults.Port;
+
+        private static int _HTTPPort = (int)Connection.Protocol.HTTP.Defaults.Port;
         public static int HTTPPort
 		{
-			get
-			{
-				return _HTTPPort;
-			}
-			set
-			{
-				_HTTPPort = value;
-			}
+			get { return _HTTPPort; }
+			set { _HTTPPort = value; }
 		}
-				
-		private static int _HTTPSPort = Connection.Protocol.HTTPS.Defaults.Port;
+
+        private static int _HTTPSPort = (int)Connection.Protocol.HTTPS.Defaults.Port;
         public static int HTTPSPort
 		{
-			get
-			{
-				return _HTTPSPort;
-			}
-			set
-			{
-				_HTTPSPort = value;
-			}
+			get { return _HTTPSPort; }
+			set { _HTTPSPort = value; }
 		}
-				
-		private static int _RloginPort = Connection.Protocol.Rlogin.Defaults.Port;
+
+        private static int _RloginPort = (int)Connection.Protocol.Rlogin.Defaults.Port;
         public static int RloginPort
 		{
-			get
-			{
-				return _RloginPort;
-			}
-			set
-			{
-				_RloginPort = value;
-			}
+			get { return _RloginPort; }
+			set { _RloginPort = value; }
 		}
-				
-		private static int _RDPPort = Connection.Protocol.RDP.Defaults.Port;
+
+        private static int _RDPPort = (int)Connection.Protocol.RDP.Defaults.Port;
         public static int RDPPort
 		{
-			get
-			{
-				return _RDPPort;
-			}
-			set
-			{
-				_RDPPort = value;
-			}
+			get { return _RDPPort; }
+			set { _RDPPort = value; }
 		}
-				
-		private static int _VNCPort = Connection.Protocol.VNC.Defaults.Port;
+
+        private static int _VNCPort = (int)Connection.Protocol.VNC.Defaults.Port;
         public static int VNCPort
 		{
-			get
-			{
-				return _VNCPort;
-			}
-			set
-			{
-				_VNCPort = value;
-			}
+			get { return _VNCPort; }
+			set { _VNCPort = value; }
 		}
 				
 		private string _hostName = "";
         public string HostName
 		{
-			get
-			{
-				return _hostName;
-			}
-			set
-			{
-				_hostName = value;
-			}
+			get { return _hostName; }
+			set { _hostName = value; }
 		}
 				
         public string HostNameWithoutDomain
@@ -138,131 +90,71 @@ namespace mRemoteNG.Tools.PortScan
 		private string _hostIp;
         public string HostIp
 		{
-			get
-			{
-				return _hostIp;
-			}
-			set
-			{
-				_hostIp = value;
-			}
+			get { return _hostIp; }
+			set { _hostIp = value; }
 		}
 				
 		private ArrayList _openPorts = new ArrayList();
         public ArrayList OpenPorts
 		{
-			get
-			{
-				return _openPorts;
-			}
-			set
-			{
-				_openPorts = value;
-			}
+			get { return _openPorts; }
+			set { _openPorts = value; }
 		}
 				
 		private ArrayList _closedPorts;
         public ArrayList ClosedPorts
 		{
-			get
-			{
-				return _closedPorts;
-			}
-			set
-			{
-				_closedPorts = value;
-			}
+			get { return _closedPorts; }
+			set { _closedPorts = value; }
 		}
 				
 		private bool _RDP;
         public bool RDP
 		{
-			get
-			{
-				return _RDP;
-			}
-			set
-			{
-				_RDP = value;
-			}
+			get { return _RDP; }
+			set { _RDP = value; }
 		}
 				
 		private bool _VNC;
         public bool VNC
 		{
-			get
-			{
-				return _VNC;
-			}
-			set
-			{
-				_VNC = value;
-			}
+			get { return _VNC; }
+			set { _VNC = value; }
 		}
 				
 		private bool _SSH;
         public bool SSH
 		{
-			get
-			{
-				return _SSH;
-			}
-			set
-			{
-				_SSH = value;
-			}
+			get { return _SSH; }
+			set { _SSH = value; }
 		}
 				
 		private bool _Telnet;
         public bool Telnet
 		{
-			get
-			{
-				return _Telnet;
-			}
-			set
-			{
-				_Telnet = value;
-			}
+			get { return _Telnet; }
+			set { _Telnet = value; }
 		}
 				
 		private bool _Rlogin;
         public bool Rlogin
 		{
-			get
-			{
-				return _Rlogin;
-			}
-			set
-			{
-				_Rlogin = value;
-			}
+			get { return _Rlogin; }
+			set { _Rlogin = value; }
 		}
 				
 		private bool _HTTP;
         public bool HTTP
 		{
-			get
-			{
-				return _HTTP;
-			}
-			set
-			{
-				_HTTP = value;
-			}
+			get { return _HTTP; }
+			set { _HTTP = value; }
 		}
 				
 		private bool _HTTPS;
         public bool HTTPS
 		{
-			get
-			{
-				return _HTTPS;
-			}
-			set
-			{
-				_HTTPS = value;
-			}
+			get { return _HTTPS; }
+			set { _HTTPS = value; }
 		}
         #endregion
 				
@@ -370,7 +262,6 @@ namespace mRemoteNG.Tools.PortScan
         #region Private Members
 		private List<IPAddress> _ipAddresses = new List<IPAddress>();
 		private List<int> _ports = new List<int>();
-				
 		private Thread _scanThread;
 		private List<ScanHost> _scannedHosts = new List<ScanHost>();
         #endregion
@@ -382,14 +273,14 @@ namespace mRemoteNG.Tools.PortScan
 			IPAddress ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
 					
 			_ports.Clear();
-			_ports.AddRange(new int[] {scanHost.SSHPort, scanHost.TelnetPort, scanHost.HTTPPort, scanHost.HTTPSPort, scanHost.RloginPort, scanHost.RDPPort, scanHost.VNCPort});
+            _ports.AddRange(new int[] { ScanHost.SSHPort, ScanHost.TelnetPort, ScanHost.HTTPPort, ScanHost.HTTPSPort, ScanHost.RloginPort, ScanHost.RDPPort, ScanHost.VNCPort });
 					
 			_ipAddresses.Clear();
 			_ipAddresses.AddRange(IpAddressArrayFromRange(ipAddressStart, ipAddressEnd));
 					
 			_scannedHosts.Clear();
 		}
-				
+		
 		public Scanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2) : this(ipAddress1, ipAddress2)
 		{
 					
@@ -420,9 +311,7 @@ namespace mRemoteNG.Tools.PortScan
 		{
 			try
 			{
-				// ReSharper disable UnusedVariable
-				System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(hostname, (int) port);
-				// ReSharper restore UnusedVariable
+				System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(hostname, System.Convert.ToInt32(port));
 				return true;
 			}
 			catch (Exception)
@@ -438,7 +327,6 @@ namespace mRemoteNG.Tools.PortScan
 			try
 			{
 				int hostCount = 0;
-						
 				foreach (IPAddress ipAddress in _ipAddresses)
 				{
 					if (BeginHostScanEvent != null)
@@ -457,13 +345,9 @@ namespace mRemoteNG.Tools.PortScan
 						foreach (int port in _ports)
 						{
 							bool isPortOpen = false;
-									
 							try
 							{
-								// ReSharper disable UnusedVariable
 								System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(ipAddress.ToString(), port);
-								// ReSharper restore UnusedVariable
-										
 								isPortOpen = true;
 								scanHost.OpenPorts.Add(port);
 							}
@@ -472,32 +356,32 @@ namespace mRemoteNG.Tools.PortScan
 								isPortOpen = false;
 								scanHost.ClosedPorts.Add(port);
 							}
-									
-							if (port == scanHost.SSHPort)
+							
+							if (port == ScanHost.SSHPort)
 							{
 								scanHost.SSH = isPortOpen;
 							}
-							else if (port == scanHost.TelnetPort)
+                            else if (port == ScanHost.TelnetPort)
 							{
 								scanHost.Telnet = isPortOpen;
 							}
-							else if (port == scanHost.HTTPPort)
+                            else if (port == ScanHost.HTTPPort)
 							{
 								scanHost.HTTP = isPortOpen;
 							}
-							else if (port == scanHost.HTTPSPort)
+                            else if (port == ScanHost.HTTPSPort)
 							{
 								scanHost.HTTPS = isPortOpen;
 							}
-							else if (port == scanHost.RloginPort)
+                            else if (port == ScanHost.RloginPort)
 							{
 								scanHost.Rlogin = isPortOpen;
 							}
-							else if (port == scanHost.RDPPort)
+                            else if (port == ScanHost.RDPPort)
 							{
 								scanHost.RDP = isPortOpen;
 							}
-							else if (port == scanHost.VNCPort)
+                            else if (port == ScanHost.VNCPort)
 							{
 								scanHost.VNC = isPortOpen;
 							}
@@ -628,8 +512,8 @@ namespace mRemoteNG.Tools.PortScan
 				Array.Reverse(addressBytes); // to network order (big-endian)
 			}
 			Debug.Assert(addressBytes.Length == 4);
-					
-			return new ipAddress(addressBytes);
+
+            return new IPAddress(addressBytes);
 		}
         #endregion
 				

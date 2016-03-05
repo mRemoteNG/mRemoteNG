@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,8 +8,6 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
 using System.Configuration;
 using System.Collections.Specialized;
 using System.Xml;
@@ -20,22 +17,20 @@ namespace mRemoteNG.Config.Settings.Providers
 {
 	public class ChooseProvider : PortableSettingsProvider
 	{
-#if !PORTABLE
-#else
-#endif
+        #if !PORTABLE
+        #else
+        #endif
 	}
 				
 	public class PortableSettingsProvider : SettingsProvider
 	{
-					
 		const string SETTINGSROOT = "Settings"; //XML Root Node
-					
 		public override void Initialize(string name, NameValueCollection col)
 		{
 			base.Initialize(this.ApplicationName, col);
 		}
 					
-public override string ApplicationName
+        public override string ApplicationName
 		{
 			get
 			{
@@ -106,7 +101,7 @@ public override string ApplicationName
 					
 		private System.Xml.XmlDocument m_SettingsXML = null;
 					
-private System.Xml.XmlDocument SettingsXML
+        private System.Xml.XmlDocument SettingsXML
 		{
 			get
 			{
@@ -132,7 +127,6 @@ private System.Xml.XmlDocument SettingsXML
 						m_SettingsXML.AppendChild(nodeRoot);
 					}
 				}
-							
 				return m_SettingsXML;
 			}
 		}
@@ -151,7 +145,6 @@ private System.Xml.XmlDocument SettingsXML
 				{
 					ret = SettingsXML.SelectSingleNode(SETTINGSROOT + "/" + (new Microsoft.VisualBasic.Devices.Computer()).Name + "/" + setting.Name).InnerText;
 				}
-							
 			}
 			catch (Exception)
 			{
@@ -164,13 +157,11 @@ private System.Xml.XmlDocument SettingsXML
 					ret = "";
 				}
 			}
-						
 			return ret;
 		}
 					
 		private void SetValue(SettingsPropertyValue propVal)
 		{
-						
 			System.Xml.XmlElement MachineNode = default(System.Xml.XmlElement);
 			System.Xml.XmlElement SettingNode = default(System.Xml.XmlElement);
 						
@@ -241,8 +232,6 @@ private System.Xml.XmlDocument SettingsXML
 					MachineNode.AppendChild(SettingNode);
 				}
 			}
-						
-						
 		}
 					
 		private bool IsRoaming(SettingsProperty prop)

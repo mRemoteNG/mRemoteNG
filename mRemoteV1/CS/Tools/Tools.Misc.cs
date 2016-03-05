@@ -28,12 +28,14 @@ namespace mRemoteNG.Tools
 			public IntPtr hIcon; // : icon
 			public int iIcon; // : icondex
 			public int dwAttributes; // : SFGAO_ flags
-			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]public string szDisplayName;
-			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]public string szTypeName;
+			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
+            public string szDisplayName;
+			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
+            public string szTypeName;
 		}
 			
-		[DllImport("shell32.dll")]private static  extern IntPtr SHGetFileInfo(string pszPath, int dwFileAttributes, ref SHFILEINFO psfi, int cbFileInfo, int uFlags);
-			
+		[DllImport("shell32.dll")]
+        private static  extern IntPtr SHGetFileInfo(string pszPath, int dwFileAttributes, ref SHFILEINFO psfi, int cbFileInfo, int uFlags);
 		private const int SHGFI_ICON = 0x100;
 		private const int SHGFI_SMALLICON = 0x1;
 		//Private Const SHGFI_LARGEICON = &H0    ' Large icon
@@ -92,7 +94,8 @@ namespace mRemoteNG.Tools
 			
 		public static void IsSQLUpdateAvailableBG()
 		{
-			System.Threading.Thread t = new System.Threading.Thread(new System.Threading.ThreadStart(IsSQLUpdateAvailable));
+            System.Threading.ThreadStart threadDelegate = new System.Threading.ThreadStart(IsSQLUpdateAvailable);
+			System.Threading.Thread t = new System.Threading.Thread(threadDelegate);
 			t.SetApartmentState(System.Threading.ApartmentState.STA);
 			t.Start();
 		}
@@ -127,7 +130,7 @@ namespace mRemoteNG.Tools
 				{
 					LastUpdateInDB = System.Convert.ToDateTime(sqlRd["LastUpdate"]);
 						
-					if (LastUpdateInDB > LastSqlUpdate)
+					if (LastUpdateInDB > Runtime.LastSqlUpdate)
 					{
 						if (SQLUpdateCheckFinishedEvent != null)
 							SQLUpdateCheckFinishedEvent(true);
@@ -167,7 +170,7 @@ namespace mRemoteNG.Tools
 			
 		public static string LeadingZero(string Number)
 		{
-			if (Number < 10)
+			if (System.Convert.ToInt32(Number) < 10)
 			{
 				return "0" + Number;
 			}

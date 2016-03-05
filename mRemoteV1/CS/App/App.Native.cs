@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,8 +8,6 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
 using System.Runtime.InteropServices;
 
 
@@ -18,44 +15,62 @@ namespace mRemoteNG.App
 {
 	public static class Native
 	{
-#region Functions
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern bool AppendMenu(IntPtr hMenu, int uFlags, IntPtr uIDNewItem, string lpNewItem);
+        #region Functions
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern bool AppendMenu(IntPtr hMenu, int uFlags, IntPtr uIDNewItem, string lpNewItem);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern IntPtr CreatePopupMenu();
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr CreatePopupMenu();
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern IntPtr GetForegroundWindow();
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr GetForegroundWindow();
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr GetSystemMenu(IntPtr hWnd, bool bRevert);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern bool InsertMenu(IntPtr hMenu, int uPosition, int uFlags, IntPtr uIDNewItem, string lpNewItem);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern bool InsertMenu(IntPtr hMenu, int uPosition, int uFlags, IntPtr uIDNewItem, string lpNewItem);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern int IsIconic(IntPtr hWnd);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int IsIconic(IntPtr hWnd);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern bool MoveWindow(IntPtr hWnd, int x, int y, int cx, int cy, bool repaint);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern bool MoveWindow(IntPtr hWnd, int x, int y, int cx, int cy, bool repaint);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern bool PostMessage(IntPtr hWnd, UInt32 Msg, int wParam, int lParam);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern bool PostMessage(IntPtr hWnd, UInt32 Msg, int wParam, int lParam);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern int SendMessage(IntPtr hWnd, int msg, int wparam, int lparam);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int SendMessage(IntPtr hWnd, int msg, int wparam, int lparam);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern bool SetForegroundWindow(IntPtr hWnd);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern bool SetMenuItemBitmaps(IntPtr hMenu, int uPosition, int uFlags, IntPtr hBitmapUnchecked, IntPtr hBitmapChecked);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern bool SetMenuItemBitmaps(IntPtr hMenu, int uPosition, int uFlags, IntPtr hBitmapUnchecked, IntPtr hBitmapChecked);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern long SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern long SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern int SetWindowLong(IntPtr hWnd, int nIndex, long dwNewLong);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int SetWindowLong(IntPtr hWnd, int nIndex, long dwNewLong);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern int ShowWindow(IntPtr hWnd, int nCmdShow);
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int ShowWindow(IntPtr hWnd, int nCmdShow);
 			
-		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]public static  extern IntPtr WindowFromPoint(Point point);
-#endregion
+		[DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr WindowFromPoint(Point point);
+        #endregion
 			
-#region Structures
-		[StructLayout(LayoutKind.Sequential)]public struct WINDOWPOS
+        #region Structures
+		[StructLayout(LayoutKind.Sequential)]
+        public struct WINDOWPOS
 		{
 			public IntPtr hwnd;
 			public IntPtr hwndInsertAfter;
@@ -65,9 +80,9 @@ namespace mRemoteNG.App
 			public int cy;
 			public int flags;
 		}
-#endregion
+        #endregion
 			
-#region Helpers
+        #region Helpers
 		public static int MAKELONG(int wLow, int wHigh)
 		{
 			return wLow | wHigh << 16;
@@ -97,10 +112,9 @@ namespace mRemoteNG.App
 		{
 			return HIWORD(value.ToInt32());
 		}
+        #endregion
 			
-#endregion
-			
-#region Constants
+        #region Constants
 		// GetWindowLong
 		public const int GWL_STYLE = (-16);
 			
@@ -178,6 +192,6 @@ namespace mRemoteNG.App
 		// Virtual Key Codes
 		public const int VK_CONTROL = 0x11;
 		public const int VK_C = 0x67;
-#endregion
+        #endregion
 	}
 }

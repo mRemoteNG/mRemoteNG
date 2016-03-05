@@ -283,18 +283,18 @@ namespace mRemoteNG.Tree
 					case Type.Connection:
 					case Type.PuttySession:
 						defaultName = My.Language.strNewConnection;
-						treeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed;
-						treeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed;
+                        treeNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+                        treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
 						break;
 					case Type.Container:
 						defaultName = My.Language.strNewFolder;
-						treeNode.ImageIndex = Images.Enums.TreeImage.Container;
-						treeNode.SelectedImageIndex = Images.Enums.TreeImage.Container;
+                        treeNode.ImageIndex = (int)Images.Enums.TreeImage.Container;
+                        treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Container;
 						break;
 					case Type.Root:
 						defaultName = My.Language.strNewRoot;
-						treeNode.ImageIndex = Images.Enums.TreeImage.Root;
-						treeNode.SelectedImageIndex = Images.Enums.TreeImage.Root;
+                        treeNode.ImageIndex = (int)Images.Enums.TreeImage.Root;
+                        treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Root;
 						break;
 				}
 					
@@ -335,8 +335,8 @@ namespace mRemoteNG.Tree
 						
 					TreeNode newTreeNode = new TreeNode(newConnectionInfo.Name);
 					newTreeNode.Tag = newConnectionInfo;
-					newTreeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed;
-					newTreeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed;
+                    newTreeNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+                    newTreeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
 						
 					newConnectionInfo.TreeNode = newTreeNode;
 						
@@ -365,8 +365,8 @@ namespace mRemoteNG.Tree
 						
 					TreeNode newTreeNode = new TreeNode(newContainerInfo.Name);
 					newTreeNode.Tag = newContainerInfo;
-					newTreeNode.ImageIndex = Images.Enums.TreeImage.Container;
-					newTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Container;
+                    newTreeNode.ImageIndex = (int)Images.Enums.TreeImage.Container;
+                    newTreeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Container;
 					newContainerInfo.ConnectionInfo.Parent = newContainerInfo;
 
                     Runtime.ContainerList.Add(newContainerInfo);
@@ -397,7 +397,7 @@ namespace mRemoteNG.Tree
 			
 		public static void SetNodeImage(TreeNode treeNode, Images.Enums.TreeImage Img)
 		{
-			SetNodeImageIndex(treeNode, Img);
+			SetNodeImageIndex(treeNode, (int)Img);
 		}
 			
 		private delegate void SetNodeImageIndexDelegate(TreeNode treeNode, int imageIndex);
@@ -684,7 +684,7 @@ namespace mRemoteNG.Tree
 			if (TreeView.InvokeRequired)
 			{
 				ResetTreeDelegate resetTreeDelegate = new ResetTreeDelegate(ResetTree);
-				Windows.treeForm.Invoke(resetTreeDelegate);
+				Runtime.Windows.treeForm.Invoke(resetTreeDelegate);
 			}
 			else
 			{

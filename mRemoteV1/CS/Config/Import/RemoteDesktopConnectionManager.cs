@@ -113,8 +113,8 @@ namespace mRemoteNG.Config.Import
 				
 			Runtime.ConnectionList.Add(connectionInfo);
 		}
-			
-		private static Protocol.Info ConnectionInfoFromXml(XmlNode xmlNode)
+
+        private static Connection.Info ConnectionInfoFromXml(XmlNode xmlNode)
 		{
 			Connection.Info connectionInfo = new Connection.Info();
 			connectionInfo.Inherit = new Connection.Info.Inheritance(connectionInfo);

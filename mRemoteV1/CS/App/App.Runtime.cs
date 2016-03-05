@@ -342,7 +342,7 @@ namespace mRemoteNG.App
                     {
                         using (OptionsForm optionsForm = new OptionsForm())
                         {
-                            optionsForm.ShowDialog(frmMain);
+                            optionsForm.ShowDialog(frmMain.Default);
                         }
                     }
                     else if (windowType.Equals(UI.Window.Type.SSHTransfer))
@@ -422,7 +422,7 @@ namespace mRemoteNG.App
 			{
 				using (OptionsForm optionsForm = new OptionsForm())
 				{
-					optionsForm.ShowDialog(frmMain, typeof(UpdatesPage));
+					optionsForm.ShowDialog(frmMain.Default, typeof(UpdatesPage));
 				}
 					
 			}
@@ -492,7 +492,7 @@ namespace mRemoteNG.App
 					
 				if (isFipsPolicyEnabled)
 				{
-					MessageBox.Show(frmMain, string.Format(My.Language.strErrorFipsPolicyIncompatible, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName), (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					MessageBox.Show(frmMain.Default, string.Format(My.Language.strErrorFipsPolicyIncompatible, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName), (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					System.Environment.Exit(1);
 				}
 			}
@@ -1635,7 +1635,7 @@ namespace mRemoteNG.App
 						
 					saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
 						
-					if (!(saveFileDialog.ShowDialog(frmMain) == DialogResult.OK))
+					if (!(saveFileDialog.ShowDialog(frmMain.Default) == DialogResult.OK))
 					{
 						return ;
 					}

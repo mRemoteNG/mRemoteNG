@@ -106,7 +106,7 @@ namespace mRemoteNG.UI.Window
 				private System.Windows.Forms.TextBox txtDomain;
 				private System.Windows.Forms.Label lblDomain;
 				private System.Windows.Forms.Button btnChangeDomain;
-				private ADTree.ADTree ActiveDirectoryTree;
+				private ADTree.ADtree ActiveDirectoryTree;
 #endregion
 			}
 }

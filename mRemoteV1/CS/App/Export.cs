@@ -38,7 +38,7 @@ namespace mRemoteNG.App
 						exportForm.SelectedConnection = selectedTreeNode;
 					}
 						
-					if (!(exportForm.ShowDialog(frmMain) == DialogResult.OK))
+					if (!(exportForm.ShowDialog(frmMain.Default) == DialogResult.OK))
 					{
 						return ;
 					}

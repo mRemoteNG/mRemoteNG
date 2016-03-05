@@ -185,7 +185,20 @@ namespace mRemoteNG.Config.Connections
 				const double maxSupportedSchemaVersion = 2.5;
 				if (confVersion > maxSupportedSchemaVersion)
 				{
-					cTaskDialog.ShowTaskDialogBox(frmMain, System.Windows.Forms.Application.ProductName, "Incompatible database schema", string.Format("The database schema on the server is not supported. Please upgrade to a newer version of {0}.", System.Windows.Forms.Application.ProductName), string.Format("Schema Version: {1}{0}Highest Supported Version: {2}", Constants.vbNewLine, confVersion.ToString(), maxSupportedSchemaVersion.ToString()), "", "", "", "", eTaskDialogButtons.OK, eSysIcons.Error, null);
+                    cTaskDialog.ShowTaskDialogBox(
+                        frmMain.Default, 
+                        System.Windows.Forms.Application.ProductName, 
+                        "Incompatible database schema", 
+                        string.Format("The database schema on the server is not supported. Please upgrade to a newer version of {0}.", System.Windows.Forms.Application.ProductName), 
+                        string.Format("Schema Version: {1}{0}Highest Supported Version: {2}", Constants.vbNewLine, confVersion.ToString(), maxSupportedSchemaVersion.ToString()), 
+                        "", 
+                        "", 
+                        "", 
+                        "", 
+                        eTaskDialogButtons.OK, 
+                        eSysIcons.Error, 
+                        eSysIcons.Error
+                    );
 					throw (new Exception(string.Format("Incompatible database schema (schema version {0}).", confVersion)));
 				}
 						
@@ -196,8 +209,8 @@ namespace mRemoteNG.Config.Connections
 				rootInfo.TreeNode = RootTreeNode;
 						
 				RootTreeNode.Tag = rootInfo;
-				RootTreeNode.ImageIndex = Images.Enums.TreeImage.Root;
-				RootTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Root;
+				RootTreeNode.ImageIndex = (int)Images.Enums.TreeImage.Root;
+                RootTreeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Root;
 						
 				if (Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["Protected"]), pW) != "ThisIsNotProtected")
 				{
@@ -296,7 +309,7 @@ namespace mRemoteNG.Config.Connections
 						conI.TreeNode = tNode;
 						//conI.Parent = _previousContainer 'NEW
 								
-						this._ConnectionList.Add(conI);
+						this.ConnectionList.Add(conI);
 								
 						tNode.Tag = conI;
 								
@@ -314,19 +327,19 @@ namespace mRemoteNG.Config.Connections
 										
 								if (conI.OpenConnections.Count > 0)
 								{
-									tNode.ImageIndex = Images.Enums.TreeImage.ConnectionOpen;
-									tNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionOpen;
+                                    tNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionOpen;
+                                    tNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionOpen;
 								}
 								else
 								{
-									tNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed;
-									tNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed;
+                                    tNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+                                    tNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
 								}
 							}
 							else
 							{
-								tNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed;
-								tNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed;
+                                tNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+                                tNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
 							}
 									
 							if (conI.ConstantID == _PreviousSelected)
@@ -336,8 +349,8 @@ namespace mRemoteNG.Config.Connections
 						}
 						else
 						{
-							tNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed;
-							tNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed;
+                            tNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+                            tNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
 						}
 					}
 					else if (Tree.Node.GetNodeTypeFromString(System.Convert.ToString(sqlRd["Type"])) == Tree.Node.Type.Container)
@@ -376,7 +389,7 @@ namespace mRemoteNG.Config.Connections
 						}
 						else
 						{
-							if (sqlRd["Expanded"] == true)
+							if (System.Convert.ToBoolean(sqlRd["Expanded"]) == true)
 							{
 								contI.IsExpanded = true;
 							}
@@ -387,11 +400,11 @@ namespace mRemoteNG.Config.Connections
 						}
 								
 						this._ContainerList.Add(contI);
-						this._ConnectionList.Add(conI);
+						this.ConnectionList.Add(conI);
 								
 						tNode.Tag = contI;
-						tNode.ImageIndex = Images.Enums.TreeImage.Container;
-						tNode.SelectedImageIndex = Images.Enums.TreeImage.Container;
+                        tNode.ImageIndex = (int)Images.Enums.TreeImage.Container;
+                        tNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Container;
 					}
 							
 					string parentId = System.Convert.ToString(sqlRd["ParentID"].ToString().Trim());
@@ -409,7 +422,7 @@ namespace mRemoteNG.Config.Connections
 									
 							if (Tree.Node.GetNodeType(tNode) == Tree.Node.Type.Connection)
 							{
-								(tNode.Tag as Connection.Info).Parent = pNode.Tag;
+								(tNode.Tag as Connection.Info).Parent = (mRemoteNG.Container.Info)pNode.Tag;
 							}
 							else if (Tree.Node.GetNodeType(tNode) == Tree.Node.Type.Container)
 							{
@@ -455,14 +468,14 @@ namespace mRemoteNG.Config.Connections
 				conI.RedirectPorts = System.Convert.ToBoolean(sqlRd["RedirectPorts"]);
 				conI.RedirectSmartCards = System.Convert.ToBoolean(sqlRd["RedirectSmartCards"]);
 				conI.RedirectKeys = System.Convert.ToBoolean(sqlRd["RedirectKeys"]);
-				conI.RedirectSound = Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPSounds), System.Convert.ToString(sqlRd["RedirectSound"]));
-						
-				conI.Protocol = Tools.Misc.StringToEnum(typeof(Connection.Protocol.Protocols), System.Convert.ToString(sqlRd["Protocol"]));
+                conI.RedirectSound = (Connection.Protocol.RDP.RDPSounds)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPSounds), System.Convert.ToString(sqlRd["RedirectSound"]));
+
+                conI.Protocol = (Connection.Protocol.Protocols)Tools.Misc.StringToEnum(typeof(Connection.Protocol.Protocols), System.Convert.ToString(sqlRd["Protocol"]));
 				conI.Port = System.Convert.ToInt32(sqlRd["Port"]);
 				conI.PuttySession = System.Convert.ToString(sqlRd["PuttySession"]);
-						
-				conI.Colors = Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPColors), System.Convert.ToString(sqlRd["Colors"]));
-				conI.Resolution = Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPResolutions), System.Convert.ToString(sqlRd["Resolution"]));
+
+                conI.Colors = (Connection.Protocol.RDP.RDPColors)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPColors), System.Convert.ToString(sqlRd["Colors"]));
+                conI.Resolution = (Connection.Protocol.RDP.RDPResolutions)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPResolutions), System.Convert.ToString(sqlRd["Resolution"]));
 						
 				conI.Inherit = new Connection.Info.Inheritance(conI);
 				conI.Inherit.CacheBitmaps = System.Convert.ToBoolean(sqlRd["InheritCacheBitmaps"]);
@@ -492,7 +505,7 @@ namespace mRemoteNG.Config.Connections
 						
 				if (this.confVersion > 1.5) //1.6
 				{
-					conI.ICAEncryption = Tools.Misc.StringToEnum(typeof(Connection.Protocol.ICA.EncryptionStrength), System.Convert.ToString(sqlRd["ICAEncryptionStrength"]));
+                    conI.ICAEncryption = (Connection.Protocol.ICA.EncryptionStrength)Tools.Misc.StringToEnum(typeof(Connection.Protocol.ICA.EncryptionStrength), System.Convert.ToString(sqlRd["ICAEncryptionStrength"]));
 					conI.Inherit.ICAEncryption = System.Convert.ToBoolean(sqlRd["InheritICAEncryptionStrength"]);
 							
 					conI.PreExtApp = System.Convert.ToString(sqlRd["PreExtApp"]);
@@ -503,16 +516,16 @@ namespace mRemoteNG.Config.Connections
 						
 				if (this.confVersion > 1.6) //1.7
 				{
-					conI.VNCCompression = Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.Compression), System.Convert.ToString(sqlRd["VNCCompression"]));
-					conI.VNCEncoding = Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.Encoding), System.Convert.ToString(sqlRd["VNCEncoding"]));
-					conI.VNCAuthMode = Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.AuthMode), System.Convert.ToString(sqlRd["VNCAuthMode"]));
-					conI.VNCProxyType = Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.ProxyType), System.Convert.ToString(sqlRd["VNCProxyType"]));
+                    conI.VNCCompression = (Connection.Protocol.VNC.Compression)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.Compression), System.Convert.ToString(sqlRd["VNCCompression"]));
+                    conI.VNCEncoding = (Connection.Protocol.VNC.Encoding)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.Encoding), System.Convert.ToString(sqlRd["VNCEncoding"]));
+                    conI.VNCAuthMode = (Connection.Protocol.VNC.AuthMode)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.AuthMode), System.Convert.ToString(sqlRd["VNCAuthMode"]));
+                    conI.VNCProxyType = (Connection.Protocol.VNC.ProxyType)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.ProxyType), System.Convert.ToString(sqlRd["VNCProxyType"]));
 					conI.VNCProxyIP = System.Convert.ToString(sqlRd["VNCProxyIP"]);
 					conI.VNCProxyPort = System.Convert.ToInt32(sqlRd["VNCProxyPort"]);
 					conI.VNCProxyUsername = System.Convert.ToString(sqlRd["VNCProxyUsername"]);
 					conI.VNCProxyPassword = Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["VNCProxyPassword"]), pW);
-					conI.VNCColors = Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.Colors), System.Convert.ToString(sqlRd["VNCColors"]));
-					conI.VNCSmartSizeMode = Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.SmartSizeMode), System.Convert.ToString(sqlRd["VNCSmartSizeMode"]));
+                    conI.VNCColors = (Connection.Protocol.VNC.Colors)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.Colors), System.Convert.ToString(sqlRd["VNCColors"]));
+                    conI.VNCSmartSizeMode = (Connection.Protocol.VNC.SmartSizeMode)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.SmartSizeMode), System.Convert.ToString(sqlRd["VNCSmartSizeMode"]));
 					conI.VNCViewOnly = System.Convert.ToBoolean(sqlRd["VNCViewOnly"]);
 							
 					conI.Inherit.VNCCompression = System.Convert.ToBoolean(sqlRd["InheritVNCCompression"]);
@@ -530,14 +543,14 @@ namespace mRemoteNG.Config.Connections
 						
 				if (this.confVersion > 1.7) //1.8
 				{
-					conI.RDPAuthenticationLevel = Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.AuthenticationLevel), System.Convert.ToString(sqlRd["RDPAuthenticationLevel"]));
+                    conI.RDPAuthenticationLevel = (Connection.Protocol.RDP.AuthenticationLevel)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.AuthenticationLevel), System.Convert.ToString(sqlRd["RDPAuthenticationLevel"]));
 							
 					conI.Inherit.RDPAuthenticationLevel = System.Convert.ToBoolean(sqlRd["InheritRDPAuthenticationLevel"]);
 				}
 						
 				if (this.confVersion > 1.8) //1.9
 				{
-					conI.RenderingEngine = Tools.Misc.StringToEnum(typeof(Connection.Protocol.HTTPBase.RenderingEngine), System.Convert.ToString(sqlRd["RenderingEngine"]));
+                    conI.RenderingEngine = (Connection.Protocol.HTTPBase.RenderingEngine)Tools.Misc.StringToEnum(typeof(Connection.Protocol.HTTPBase.RenderingEngine), System.Convert.ToString(sqlRd["RenderingEngine"]));
 					conI.MacAddress = System.Convert.ToString(sqlRd["MacAddress"]);
 							
 					conI.Inherit.RenderingEngine = System.Convert.ToBoolean(sqlRd["InheritRenderingEngine"]);
@@ -560,9 +573,9 @@ namespace mRemoteNG.Config.Connections
 						
 				if (this.confVersion >= 2.2)
 				{
-					conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), System.Convert.ToString(sqlRd["RDGatewayUsageMethod"]));
+                    conI.RDGatewayUsageMethod = (mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), System.Convert.ToString(sqlRd["RDGatewayUsageMethod"]));
 					conI.RDGatewayHostname = System.Convert.ToString(sqlRd["RDGatewayHostname"]);
-					conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), System.Convert.ToString(sqlRd["RDGatewayUseConnectionCredentials"]));
+                    conI.RDGatewayUseConnectionCredentials = (mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), System.Convert.ToString(sqlRd["RDGatewayUseConnectionCredentials"]));
 					conI.RDGatewayUsername = System.Convert.ToString(sqlRd["RDGatewayUsername"]);
 					conI.RDGatewayPassword = Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["RDGatewayPassword"]), pW);
 					conI.RDGatewayDomain = System.Convert.ToString(sqlRd["RDGatewayDomain"]);
@@ -681,7 +694,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if (!import)
 				{
-					IsConnectionsFileLoaded = false;
+					Runtime.IsConnectionsFileLoaded = false;
 				}
 						
 				// SECTION 1. Create a DOM Document and load the XML data into it.
@@ -707,7 +720,20 @@ namespace mRemoteNG.Config.Connections
 				const double maxSupportedConfVersion = 2.5;
 				if (confVersion > maxSupportedConfVersion)
 				{
-					cTaskDialog.ShowTaskDialogBox(frmMain, System.Windows.Forms.Application.ProductName, "Incompatible connection file format", string.Format("The format of this connection file is not supported. Please upgrade to a newer version of {0}.", System.Windows.Forms.Application.ProductName), string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Constants.vbNewLine, ConnectionFileName, confVersion.ToString(), maxSupportedConfVersion.ToString()), "", "", "", "", eTaskDialogButtons.OK, eSysIcons.Error, null);
+                    cTaskDialog.ShowTaskDialogBox(
+                        frmMain.Default,
+                        System.Windows.Forms.Application.ProductName, 
+                        "Incompatible connection file format", 
+                        string.Format("The format of this connection file is not supported. Please upgrade to a newer version of {0}.", System.Windows.Forms.Application.ProductName), 
+                        string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Constants.vbNewLine, ConnectionFileName, confVersion.ToString(), maxSupportedConfVersion.ToString()),
+                        "", 
+                        "", 
+                        "", 
+                        "", 
+                        eTaskDialogButtons.OK, 
+                        eSysIcons.Error,
+                        eSysIcons.Error
+                    );
 					throw (new Exception(string.Format("Incompatible connection file format (file format version {0}).", confVersion)));
 				}
 						
@@ -758,7 +784,7 @@ namespace mRemoteNG.Config.Connections
 				bool isExportFile = false;
 				if (confVersion >= 1.0)
 				{
-					if (xDom.DocumentElement.Attributes["Export"].Value == true)
+					if (System.Convert.ToBoolean(xDom.DocumentElement.Attributes["Export"].Value) == true)
 					{
 						isExportFile = true;
 					}
@@ -772,11 +798,11 @@ namespace mRemoteNG.Config.Connections
 						
 				if (!isExportFile)
 				{
-					RootTreeNode.ImageIndex = Images.Enums.TreeImage.Root;
-					RootTreeNode.SelectedImageIndex = Images.Enums.TreeImage.Root;
+                    RootTreeNode.ImageIndex = (int)Images.Enums.TreeImage.Root;
+                    RootTreeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Root;
 				}
-						
-				Windows.treeForm.tvConnections.BeginUpdate();
+
+                Runtime.Windows.treeForm.tvConnections.BeginUpdate();
 						
 				// SECTION 3. Populate the TreeView with the DOM nodes.
 				AddNodeFromXml(xDom.DocumentElement, RootTreeNode);
@@ -791,8 +817,8 @@ namespace mRemoteNG.Config.Connections
 						contI.TreeNode.Expand();
 					}
 				}
-						
-				Windows.treeForm.tvConnections.EndUpdate();
+
+                Runtime.Windows.treeForm.tvConnections.EndUpdate();
 						
 				//open connections from last mremote session
 				if (My.Settings.Default.OpenConsFromLastSession == true && My.Settings.Default.NoReconnect == false)
@@ -801,7 +827,7 @@ namespace mRemoteNG.Config.Connections
 					{
 						if (conI.PleaseConnect == true)
 						{
-							OpenConnection(conI);
+							Runtime.OpenConnection(conI);
 						}
 					}
 				}
@@ -810,9 +836,9 @@ namespace mRemoteNG.Config.Connections
 						
 				if (!import)
 				{
-					IsConnectionsFileLoaded = true;
+                    Runtime.IsConnectionsFileLoaded = true;
 				}
-				Windows.treeForm.InitialRefresh();
+                Runtime.Windows.treeForm.InitialRefresh();
 				SetSelectedNode(RootTreeNode);
 			}
 			catch (Exception ex)
@@ -846,8 +872,8 @@ namespace mRemoteNG.Config.Connections
 							ConnectionList.Add(connectionInfo);
 									
 							treeNode.Tag = connectionInfo;
-							treeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed;
-							treeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed;
+                            treeNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+                            treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
 						}
 						else if (Tree.Node.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == Tree.Node.Type.Container) //container info
 						{
@@ -893,8 +919,8 @@ namespace mRemoteNG.Config.Connections
 							ContainerList.Add(containerInfo);
 									
 							treeNode.Tag = containerInfo;
-							treeNode.ImageIndex = Images.Enums.TreeImage.Container;
-							treeNode.SelectedImageIndex = Images.Enums.TreeImage.Container;
+                            treeNode.ImageIndex = (int)Images.Enums.TreeImage.Container;
+                            treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Container;
 						}
 								
 						AddNodeFromXml(xmlNode, treeNode);
@@ -928,25 +954,24 @@ namespace mRemoteNG.Config.Connections
 		private Connection.Info GetConnectionInfoFromXml(XmlNode xxNode)
 		{
 			Connection.Info conI = new Connection.Info();
-					
 			try
 			{
-				XmlNode with_1 = xxNode;
+				XmlNode xmlnode = xxNode;
 				if (this.confVersion > 0.1) //0.2
 				{
-					conI.Name = with_1.Attributes["Name"].Value;
-					conI.Description = with_1.Attributes["Descr"].Value;
-					conI.Hostname = with_1.Attributes["Hostname"].Value;
-					conI.Username = with_1.Attributes["Username"].Value;
-					conI.Password = Security.Crypt.Decrypt(with_1.Attributes["Password"].Value, pW);
-					conI.Domain = with_1.Attributes["Domain"].Value;
-					conI.DisplayWallpaper = bool.Parse(with_1.Attributes["DisplayWallpaper"].Value);
-					conI.DisplayThemes = bool.Parse(with_1.Attributes["DisplayThemes"].Value);
-					conI.CacheBitmaps = bool.Parse(with_1.Attributes["CacheBitmaps"].Value);
+					conI.Name = xmlnode.Attributes["Name"].Value;
+					conI.Description = xmlnode.Attributes["Descr"].Value;
+					conI.Hostname = xmlnode.Attributes["Hostname"].Value;
+					conI.Username = xmlnode.Attributes["Username"].Value;
+					conI.Password = Security.Crypt.Decrypt(xmlnode.Attributes["Password"].Value, pW);
+					conI.Domain = xmlnode.Attributes["Domain"].Value;
+					conI.DisplayWallpaper = bool.Parse(xmlnode.Attributes["DisplayWallpaper"].Value);
+					conI.DisplayThemes = bool.Parse(xmlnode.Attributes["DisplayThemes"].Value);
+					conI.CacheBitmaps = bool.Parse(xmlnode.Attributes["CacheBitmaps"].Value);
 							
 					if (this.confVersion < 1.1) //1.0 - 0.1
 					{
-						if (with_1.Attributes["Fullscreen"].Value == true)
+						if (System.Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value) == true)
 						{
 							conI.Resolution = Connection.Protocol.RDP.RDPResolutions.Fullscreen;
 						}
@@ -961,10 +986,10 @@ namespace mRemoteNG.Config.Connections
 				{
 					if (this.confVersion < 0.7)
 					{
-						if (System.Convert.ToBoolean(with_1.Attributes["UseVNC"].Value) == true)
+						if (System.Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
 						{
 							conI.Protocol = Connection.Protocol.Protocols.VNC;
-							conI.Port = (int) (with_1.Attributes["VNCPort"].Value);
+							conI.Port = System.Convert.ToInt32(xmlnode.Attributes["VNCPort"].Value);
 						}
 						else
 						{
@@ -974,7 +999,7 @@ namespace mRemoteNG.Config.Connections
 				}
 				else
 				{
-					conI.Port = Connection.Protocol.RDP.Defaults.Port;
+					conI.Port = (int)Connection.Protocol.RDP.Defaults.Port;
 					conI.Protocol = Connection.Protocol.Protocols.RDP;
 				}
 						
@@ -982,29 +1007,29 @@ namespace mRemoteNG.Config.Connections
 				{
 					if (this.confVersion < 0.7)
 					{
-						if (System.Convert.ToBoolean(with_1.Attributes["UseVNC"].Value) == true)
+						if (System.Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
 						{
-							conI.Port = (int) (with_1.Attributes["VNCPort"].Value);
+                            conI.Port = System.Convert.ToInt32(xmlnode.Attributes["VNCPort"].Value);
 						}
 						else
 						{
-							conI.Port = (int) (with_1.Attributes["RDPPort"].Value);
+                            conI.Port = System.Convert.ToInt32(xmlnode.Attributes["RDPPort"].Value);
 						}
 					}
 							
-					conI.UseConsoleSession = bool.Parse(with_1.Attributes["ConnectToConsole"].Value);
+					conI.UseConsoleSession = bool.Parse(xmlnode.Attributes["ConnectToConsole"].Value);
 				}
 				else
 				{
 					if (this.confVersion < 0.7)
 					{
-						if (System.Convert.ToBoolean(with_1.Attributes["UseVNC"].Value) == true)
+						if (System.Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
 						{
-							conI.Port = Connection.Protocol.VNC.Defaults.Port;
+							conI.Port = (int)Connection.Protocol.VNC.Defaults.Port;
 						}
 						else
 						{
-							conI.Port = Connection.Protocol.RDP.Defaults.Port;
+							conI.Port = (int)Connection.Protocol.RDP.Defaults.Port;
 						}
 					}
 					conI.UseConsoleSession = false;
@@ -1012,10 +1037,10 @@ namespace mRemoteNG.Config.Connections
 						
 				if (this.confVersion > 0.4) //0.5 and 0.6
 				{
-					conI.RedirectDiskDrives = bool.Parse(with_1.Attributes["RedirectDiskDrives"].Value);
-					conI.RedirectPrinters = bool.Parse(with_1.Attributes["RedirectPrinters"].Value);
-					conI.RedirectPorts = bool.Parse(with_1.Attributes["RedirectPorts"].Value);
-					conI.RedirectSmartCards = bool.Parse(with_1.Attributes["RedirectSmartCards"].Value);
+					conI.RedirectDiskDrives = bool.Parse(xmlnode.Attributes["RedirectDiskDrives"].Value);
+					conI.RedirectPrinters = bool.Parse(xmlnode.Attributes["RedirectPrinters"].Value);
+					conI.RedirectPorts = bool.Parse(xmlnode.Attributes["RedirectPorts"].Value);
+					conI.RedirectSmartCards = bool.Parse(xmlnode.Attributes["RedirectSmartCards"].Value);
 				}
 				else
 				{
@@ -1027,29 +1052,29 @@ namespace mRemoteNG.Config.Connections
 						
 				if (this.confVersion > 0.6) //0.7
 				{
-					conI.Protocol = Tools.Misc.StringToEnum(typeof(Connection.Protocol.Protocols), with_1.Attributes["Protocol"].Value);
-					conI.Port = (int) (with_1.Attributes["Port"].Value);
+                    conI.Protocol = (Connection.Protocol.Protocols)Tools.Misc.StringToEnum(typeof(Connection.Protocol.Protocols), xmlnode.Attributes["Protocol"].Value);
+                    conI.Port = System.Convert.ToInt32(xmlnode.Attributes["Port"].Value);
 				}
 						
 				if (this.confVersion > 0.9) //1.0
 				{
-					conI.RedirectKeys = bool.Parse(with_1.Attributes["RedirectKeys"].Value);
+					conI.RedirectKeys = bool.Parse(xmlnode.Attributes["RedirectKeys"].Value);
 				}
 						
 				if (this.confVersion > 1.1) //1.2
 				{
-					conI.PuttySession = with_1.Attributes["PuttySession"].Value;
+					conI.PuttySession = xmlnode.Attributes["PuttySession"].Value;
 				}
 						
 				if (this.confVersion > 1.2) //1.3
 				{
-					conI.Colors = Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPColors), with_1.Attributes["Colors"].Value);
-					conI.Resolution = Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPResolutions), System.Convert.ToString(with_1.Attributes["Resolution"].Value));
-					conI.RedirectSound = Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPSounds), System.Convert.ToString(with_1.Attributes["RedirectSound"].Value));
+                    conI.Colors = (Connection.Protocol.RDP.RDPColors)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPColors), xmlnode.Attributes["Colors"].Value);
+                    conI.Resolution = (Connection.Protocol.RDP.RDPResolutions)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPResolutions), System.Convert.ToString(xmlnode.Attributes["Resolution"].Value));
+                    conI.RedirectSound = (Connection.Protocol.RDP.RDPSounds)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPSounds), System.Convert.ToString(xmlnode.Attributes["RedirectSound"].Value));
 				}
 				else
 				{
-					switch (with_1.Attributes["Colors"].Value)
+					switch (System.Convert.ToInt32(xmlnode.Attributes["Colors"].Value))
 					{
 						case 0:
 							conI.Colors = Connection.Protocol.RDP.RDPColors.Colors256;
@@ -1068,158 +1093,158 @@ namespace mRemoteNG.Config.Connections
 							break;
 					}
 							
-					conI.RedirectSound = with_1.Attributes["RedirectSound"].Value;
+					conI.RedirectSound = (Connection.Protocol.RDP.RDPSounds) System.Convert.ToInt32(xmlnode.Attributes["RedirectSound"].Value);
 				}
 						
 				if (this.confVersion > 1.2) //1.3
 				{
 					conI.Inherit = new Connection.Info.Inheritance(conI);
-					conI.Inherit.CacheBitmaps = bool.Parse(with_1.Attributes["InheritCacheBitmaps"].Value);
-					conI.Inherit.Colors = bool.Parse(with_1.Attributes["InheritColors"].Value);
-					conI.Inherit.Description = bool.Parse(with_1.Attributes["InheritDescription"].Value);
-					conI.Inherit.DisplayThemes = bool.Parse(with_1.Attributes["InheritDisplayThemes"].Value);
-					conI.Inherit.DisplayWallpaper = bool.Parse(with_1.Attributes["InheritDisplayWallpaper"].Value);
-					conI.Inherit.Domain = bool.Parse(with_1.Attributes["InheritDomain"].Value);
-					conI.Inherit.Icon = bool.Parse(with_1.Attributes["InheritIcon"].Value);
-					conI.Inherit.Panel = bool.Parse(with_1.Attributes["InheritPanel"].Value);
-					conI.Inherit.Password = bool.Parse(with_1.Attributes["InheritPassword"].Value);
-					conI.Inherit.Port = bool.Parse(with_1.Attributes["InheritPort"].Value);
-					conI.Inherit.Protocol = bool.Parse(with_1.Attributes["InheritProtocol"].Value);
-					conI.Inherit.PuttySession = bool.Parse(with_1.Attributes["InheritPuttySession"].Value);
-					conI.Inherit.RedirectDiskDrives = bool.Parse(with_1.Attributes["InheritRedirectDiskDrives"].Value);
-					conI.Inherit.RedirectKeys = bool.Parse(with_1.Attributes["InheritRedirectKeys"].Value);
-					conI.Inherit.RedirectPorts = bool.Parse(with_1.Attributes["InheritRedirectPorts"].Value);
-					conI.Inherit.RedirectPrinters = bool.Parse(with_1.Attributes["InheritRedirectPrinters"].Value);
-					conI.Inherit.RedirectSmartCards = bool.Parse(with_1.Attributes["InheritRedirectSmartCards"].Value);
-					conI.Inherit.RedirectSound = bool.Parse(with_1.Attributes["InheritRedirectSound"].Value);
-					conI.Inherit.Resolution = bool.Parse(with_1.Attributes["InheritResolution"].Value);
-					conI.Inherit.UseConsoleSession = bool.Parse(with_1.Attributes["InheritUseConsoleSession"].Value);
-					conI.Inherit.Username = bool.Parse(with_1.Attributes["InheritUsername"].Value);
+					conI.Inherit.CacheBitmaps = bool.Parse(xmlnode.Attributes["InheritCacheBitmaps"].Value);
+					conI.Inherit.Colors = bool.Parse(xmlnode.Attributes["InheritColors"].Value);
+					conI.Inherit.Description = bool.Parse(xmlnode.Attributes["InheritDescription"].Value);
+					conI.Inherit.DisplayThemes = bool.Parse(xmlnode.Attributes["InheritDisplayThemes"].Value);
+					conI.Inherit.DisplayWallpaper = bool.Parse(xmlnode.Attributes["InheritDisplayWallpaper"].Value);
+					conI.Inherit.Domain = bool.Parse(xmlnode.Attributes["InheritDomain"].Value);
+					conI.Inherit.Icon = bool.Parse(xmlnode.Attributes["InheritIcon"].Value);
+					conI.Inherit.Panel = bool.Parse(xmlnode.Attributes["InheritPanel"].Value);
+					conI.Inherit.Password = bool.Parse(xmlnode.Attributes["InheritPassword"].Value);
+					conI.Inherit.Port = bool.Parse(xmlnode.Attributes["InheritPort"].Value);
+					conI.Inherit.Protocol = bool.Parse(xmlnode.Attributes["InheritProtocol"].Value);
+					conI.Inherit.PuttySession = bool.Parse(xmlnode.Attributes["InheritPuttySession"].Value);
+					conI.Inherit.RedirectDiskDrives = bool.Parse(xmlnode.Attributes["InheritRedirectDiskDrives"].Value);
+					conI.Inherit.RedirectKeys = bool.Parse(xmlnode.Attributes["InheritRedirectKeys"].Value);
+					conI.Inherit.RedirectPorts = bool.Parse(xmlnode.Attributes["InheritRedirectPorts"].Value);
+					conI.Inherit.RedirectPrinters = bool.Parse(xmlnode.Attributes["InheritRedirectPrinters"].Value);
+					conI.Inherit.RedirectSmartCards = bool.Parse(xmlnode.Attributes["InheritRedirectSmartCards"].Value);
+					conI.Inherit.RedirectSound = bool.Parse(xmlnode.Attributes["InheritRedirectSound"].Value);
+					conI.Inherit.Resolution = bool.Parse(xmlnode.Attributes["InheritResolution"].Value);
+					conI.Inherit.UseConsoleSession = bool.Parse(xmlnode.Attributes["InheritUseConsoleSession"].Value);
+					conI.Inherit.Username = bool.Parse(xmlnode.Attributes["InheritUsername"].Value);
 							
-					conI.Icon = with_1.Attributes["Icon"].Value;
-					conI.Panel = with_1.Attributes["Panel"].Value;
+					conI.Icon = xmlnode.Attributes["Icon"].Value;
+					conI.Panel = xmlnode.Attributes["Panel"].Value;
 				}
 				else
 				{
-					conI.Inherit = new Connection.Info.Inheritance(conI, with_1.Attributes["Inherit"].Value);
+                    conI.Inherit = new Connection.Info.Inheritance(conI, System.Convert.ToBoolean(xmlnode.Attributes["Inherit"].Value));
 							
-					conI.Icon = System.Convert.ToString(with_1.Attributes["Icon"].Value.Replace(".ico", ""));
+					conI.Icon = System.Convert.ToString(xmlnode.Attributes["Icon"].Value.Replace(".ico", ""));
 					conI.Panel = My.Language.strGeneral;
 				}
 						
 				if (this.confVersion > 1.4) //1.5
 				{
-					conI.PleaseConnect = bool.Parse(with_1.Attributes["Connected"].Value);
+					conI.PleaseConnect = bool.Parse(xmlnode.Attributes["Connected"].Value);
 				}
 						
 				if (this.confVersion > 1.5) //1.6
 				{
-					conI.ICAEncryption = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.ICA.EncryptionStrength), with_1.Attributes["ICAEncryptionStrength"].Value);
-					conI.Inherit.ICAEncryption = bool.Parse(with_1.Attributes["InheritICAEncryptionStrength"].Value);
+                    conI.ICAEncryption = (mRemoteNG.Connection.Protocol.ICA.EncryptionStrength)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.ICA.EncryptionStrength), xmlnode.Attributes["ICAEncryptionStrength"].Value);
+					conI.Inherit.ICAEncryption = bool.Parse(xmlnode.Attributes["InheritICAEncryptionStrength"].Value);
 							
-					conI.PreExtApp = with_1.Attributes["PreExtApp"].Value;
-					conI.PostExtApp = with_1.Attributes["PostExtApp"].Value;
-					conI.Inherit.PreExtApp = bool.Parse(with_1.Attributes["InheritPreExtApp"].Value);
-					conI.Inherit.PostExtApp = bool.Parse(with_1.Attributes["InheritPostExtApp"].Value);
+					conI.PreExtApp = xmlnode.Attributes["PreExtApp"].Value;
+					conI.PostExtApp = xmlnode.Attributes["PostExtApp"].Value;
+					conI.Inherit.PreExtApp = bool.Parse(xmlnode.Attributes["InheritPreExtApp"].Value);
+					conI.Inherit.PostExtApp = bool.Parse(xmlnode.Attributes["InheritPostExtApp"].Value);
 				}
 						
 				if (this.confVersion > 1.6) //1.7
 				{
-					conI.VNCCompression = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.VNC.Compression), with_1.Attributes["VNCCompression"].Value);
-					conI.VNCEncoding = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.VNC.Encoding), System.Convert.ToString(with_1.Attributes["VNCEncoding"].Value));
-					conI.VNCAuthMode = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.VNC.AuthMode), with_1.Attributes["VNCAuthMode"].Value);
-					conI.VNCProxyType = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.VNC.ProxyType), with_1.Attributes["VNCProxyType"].Value);
-					conI.VNCProxyIP = with_1.Attributes["VNCProxyIP"].Value;
-					conI.VNCProxyPort = (int) (with_1.Attributes["VNCProxyPort"].Value);
-					conI.VNCProxyUsername = with_1.Attributes["VNCProxyUsername"].Value;
-					conI.VNCProxyPassword = Security.Crypt.Decrypt(with_1.Attributes["VNCProxyPassword"].Value, pW);
-					conI.VNCColors = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.VNC.Colors), with_1.Attributes["VNCColors"].Value);
-					conI.VNCSmartSizeMode = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.VNC.SmartSizeMode), with_1.Attributes["VNCSmartSizeMode"].Value);
-					conI.VNCViewOnly = bool.Parse(with_1.Attributes["VNCViewOnly"].Value);
+                    conI.VNCCompression = (mRemoteNG.Connection.Protocol.VNC.Compression)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.VNC.Compression), xmlnode.Attributes["VNCCompression"].Value);
+                    conI.VNCEncoding = (mRemoteNG.Connection.Protocol.VNC.Encoding)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.VNC.Encoding), System.Convert.ToString(xmlnode.Attributes["VNCEncoding"].Value));
+                    conI.VNCAuthMode = (mRemoteNG.Connection.Protocol.VNC.AuthMode)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.VNC.AuthMode), xmlnode.Attributes["VNCAuthMode"].Value);
+                    conI.VNCProxyType = (mRemoteNG.Connection.Protocol.VNC.ProxyType)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.VNC.ProxyType), xmlnode.Attributes["VNCProxyType"].Value);
+					conI.VNCProxyIP = xmlnode.Attributes["VNCProxyIP"].Value;
+                    conI.VNCProxyPort = System.Convert.ToInt32(xmlnode.Attributes["VNCProxyPort"].Value);
+					conI.VNCProxyUsername = xmlnode.Attributes["VNCProxyUsername"].Value;
+					conI.VNCProxyPassword = Security.Crypt.Decrypt(xmlnode.Attributes["VNCProxyPassword"].Value, pW);
+                    conI.VNCColors = (mRemoteNG.Connection.Protocol.VNC.Colors)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.VNC.Colors), xmlnode.Attributes["VNCColors"].Value);
+                    conI.VNCSmartSizeMode = (mRemoteNG.Connection.Protocol.VNC.SmartSizeMode)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.VNC.SmartSizeMode), xmlnode.Attributes["VNCSmartSizeMode"].Value);
+					conI.VNCViewOnly = bool.Parse(xmlnode.Attributes["VNCViewOnly"].Value);
 							
-					conI.Inherit.VNCCompression = bool.Parse(with_1.Attributes["InheritVNCCompression"].Value);
-					conI.Inherit.VNCEncoding = bool.Parse(with_1.Attributes["InheritVNCEncoding"].Value);
-					conI.Inherit.VNCAuthMode = bool.Parse(with_1.Attributes["InheritVNCAuthMode"].Value);
-					conI.Inherit.VNCProxyType = bool.Parse(with_1.Attributes["InheritVNCProxyType"].Value);
-					conI.Inherit.VNCProxyIP = bool.Parse(with_1.Attributes["InheritVNCProxyIP"].Value);
-					conI.Inherit.VNCProxyPort = bool.Parse(with_1.Attributes["InheritVNCProxyPort"].Value);
-					conI.Inherit.VNCProxyUsername = bool.Parse(with_1.Attributes["InheritVNCProxyUsername"].Value);
-					conI.Inherit.VNCProxyPassword = bool.Parse(with_1.Attributes["InheritVNCProxyPassword"].Value);
-					conI.Inherit.VNCColors = bool.Parse(with_1.Attributes["InheritVNCColors"].Value);
-					conI.Inherit.VNCSmartSizeMode = bool.Parse(with_1.Attributes["InheritVNCSmartSizeMode"].Value);
-					conI.Inherit.VNCViewOnly = bool.Parse(with_1.Attributes["InheritVNCViewOnly"].Value);
+					conI.Inherit.VNCCompression = bool.Parse(xmlnode.Attributes["InheritVNCCompression"].Value);
+					conI.Inherit.VNCEncoding = bool.Parse(xmlnode.Attributes["InheritVNCEncoding"].Value);
+					conI.Inherit.VNCAuthMode = bool.Parse(xmlnode.Attributes["InheritVNCAuthMode"].Value);
+					conI.Inherit.VNCProxyType = bool.Parse(xmlnode.Attributes["InheritVNCProxyType"].Value);
+					conI.Inherit.VNCProxyIP = bool.Parse(xmlnode.Attributes["InheritVNCProxyIP"].Value);
+					conI.Inherit.VNCProxyPort = bool.Parse(xmlnode.Attributes["InheritVNCProxyPort"].Value);
+					conI.Inherit.VNCProxyUsername = bool.Parse(xmlnode.Attributes["InheritVNCProxyUsername"].Value);
+					conI.Inherit.VNCProxyPassword = bool.Parse(xmlnode.Attributes["InheritVNCProxyPassword"].Value);
+					conI.Inherit.VNCColors = bool.Parse(xmlnode.Attributes["InheritVNCColors"].Value);
+					conI.Inherit.VNCSmartSizeMode = bool.Parse(xmlnode.Attributes["InheritVNCSmartSizeMode"].Value);
+					conI.Inherit.VNCViewOnly = bool.Parse(xmlnode.Attributes["InheritVNCViewOnly"].Value);
 				}
 						
 				if (this.confVersion > 1.7) //1.8
 				{
-					conI.RDPAuthenticationLevel = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.AuthenticationLevel), with_1.Attributes["RDPAuthenticationLevel"].Value);
+                    conI.RDPAuthenticationLevel = (mRemoteNG.Connection.Protocol.RDP.AuthenticationLevel)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.AuthenticationLevel), xmlnode.Attributes["RDPAuthenticationLevel"].Value);
 							
-					conI.Inherit.RDPAuthenticationLevel = bool.Parse(with_1.Attributes["InheritRDPAuthenticationLevel"].Value);
+					conI.Inherit.RDPAuthenticationLevel = bool.Parse(xmlnode.Attributes["InheritRDPAuthenticationLevel"].Value);
 				}
 						
 				if (this.confVersion > 1.8) //1.9
 				{
-					conI.RenderingEngine = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.HTTPBase.RenderingEngine), with_1.Attributes["RenderingEngine"].Value);
-					conI.MacAddress = with_1.Attributes["MacAddress"].Value;
+                    conI.RenderingEngine = (mRemoteNG.Connection.Protocol.HTTPBase.RenderingEngine)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.HTTPBase.RenderingEngine), xmlnode.Attributes["RenderingEngine"].Value);
+					conI.MacAddress = xmlnode.Attributes["MacAddress"].Value;
 							
-					conI.Inherit.RenderingEngine = bool.Parse(with_1.Attributes["InheritRenderingEngine"].Value);
-					conI.Inherit.MacAddress = bool.Parse(with_1.Attributes["InheritMacAddress"].Value);
+					conI.Inherit.RenderingEngine = bool.Parse(xmlnode.Attributes["InheritRenderingEngine"].Value);
+					conI.Inherit.MacAddress = bool.Parse(xmlnode.Attributes["InheritMacAddress"].Value);
 				}
 						
 				if (this.confVersion > 1.9) //2.0
 				{
-					conI.UserField = with_1.Attributes["UserField"].Value;
-					conI.Inherit.UserField = bool.Parse(with_1.Attributes["InheritUserField"].Value);
+					conI.UserField = xmlnode.Attributes["UserField"].Value;
+					conI.Inherit.UserField = bool.Parse(xmlnode.Attributes["InheritUserField"].Value);
 				}
 						
 				if (this.confVersion > 2.0) //2.1
 				{
-					conI.ExtApp = with_1.Attributes["ExtApp"].Value;
-					conI.Inherit.ExtApp = bool.Parse(with_1.Attributes["InheritExtApp"].Value);
+					conI.ExtApp = xmlnode.Attributes["ExtApp"].Value;
+					conI.Inherit.ExtApp = bool.Parse(xmlnode.Attributes["InheritExtApp"].Value);
 				}
 						
 				if (this.confVersion > 2.1) //2.2
 				{
 					// Get settings
-					conI.RDGatewayUsageMethod = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), System.Convert.ToString(with_1.Attributes["RDGatewayUsageMethod"].Value));
-					conI.RDGatewayHostname = with_1.Attributes["RDGatewayHostname"].Value;
-					conI.RDGatewayUseConnectionCredentials = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), System.Convert.ToString(with_1.Attributes["RDGatewayUseConnectionCredentials"].Value));
-					conI.RDGatewayUsername = with_1.Attributes["RDGatewayUsername"].Value;
-					conI.RDGatewayPassword = Security.Crypt.Decrypt(System.Convert.ToString(with_1.Attributes["RDGatewayPassword"].Value), pW);
-					conI.RDGatewayDomain = with_1.Attributes["RDGatewayDomain"].Value;
+                    conI.RDGatewayUsageMethod = (mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), System.Convert.ToString(xmlnode.Attributes["RDGatewayUsageMethod"].Value));
+					conI.RDGatewayHostname = xmlnode.Attributes["RDGatewayHostname"].Value;
+                    conI.RDGatewayUseConnectionCredentials = (mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), System.Convert.ToString(xmlnode.Attributes["RDGatewayUseConnectionCredentials"].Value));
+					conI.RDGatewayUsername = xmlnode.Attributes["RDGatewayUsername"].Value;
+					conI.RDGatewayPassword = Security.Crypt.Decrypt(System.Convert.ToString(xmlnode.Attributes["RDGatewayPassword"].Value), pW);
+					conI.RDGatewayDomain = xmlnode.Attributes["RDGatewayDomain"].Value;
 							
 					// Get inheritance settings
-					conI.Inherit.RDGatewayUsageMethod = bool.Parse(with_1.Attributes["InheritRDGatewayUsageMethod"].Value);
-					conI.Inherit.RDGatewayHostname = bool.Parse(with_1.Attributes["InheritRDGatewayHostname"].Value);
-					conI.Inherit.RDGatewayUseConnectionCredentials = bool.Parse(with_1.Attributes["InheritRDGatewayUseConnectionCredentials"].Value);
-					conI.Inherit.RDGatewayUsername = bool.Parse(with_1.Attributes["InheritRDGatewayUsername"].Value);
-					conI.Inherit.RDGatewayPassword = bool.Parse(with_1.Attributes["InheritRDGatewayPassword"].Value);
-					conI.Inherit.RDGatewayDomain = bool.Parse(with_1.Attributes["InheritRDGatewayDomain"].Value);
+					conI.Inherit.RDGatewayUsageMethod = bool.Parse(xmlnode.Attributes["InheritRDGatewayUsageMethod"].Value);
+					conI.Inherit.RDGatewayHostname = bool.Parse(xmlnode.Attributes["InheritRDGatewayHostname"].Value);
+					conI.Inherit.RDGatewayUseConnectionCredentials = bool.Parse(xmlnode.Attributes["InheritRDGatewayUseConnectionCredentials"].Value);
+					conI.Inherit.RDGatewayUsername = bool.Parse(xmlnode.Attributes["InheritRDGatewayUsername"].Value);
+					conI.Inherit.RDGatewayPassword = bool.Parse(xmlnode.Attributes["InheritRDGatewayPassword"].Value);
+					conI.Inherit.RDGatewayDomain = bool.Parse(xmlnode.Attributes["InheritRDGatewayDomain"].Value);
 				}
 						
 				if (this.confVersion > 2.2) //2.3
 				{
 					// Get settings
-					conI.EnableFontSmoothing = bool.Parse(with_1.Attributes["EnableFontSmoothing"].Value);
-					conI.EnableDesktopComposition = bool.Parse(with_1.Attributes["EnableDesktopComposition"].Value);
+					conI.EnableFontSmoothing = bool.Parse(xmlnode.Attributes["EnableFontSmoothing"].Value);
+					conI.EnableDesktopComposition = bool.Parse(xmlnode.Attributes["EnableDesktopComposition"].Value);
 							
 					// Get inheritance settings
-					conI.Inherit.EnableFontSmoothing = bool.Parse(with_1.Attributes["InheritEnableFontSmoothing"].Value);
-					conI.Inherit.EnableDesktopComposition = bool.Parse(with_1.Attributes["InheritEnableDesktopComposition"].Value);
+					conI.Inherit.EnableFontSmoothing = bool.Parse(xmlnode.Attributes["InheritEnableFontSmoothing"].Value);
+					conI.Inherit.EnableDesktopComposition = bool.Parse(xmlnode.Attributes["InheritEnableDesktopComposition"].Value);
 				}
 						
 				if (confVersion >= 2.4)
 				{
-					conI.UseCredSsp = bool.Parse(with_1.Attributes["UseCredSsp"].Value);
-					conI.Inherit.UseCredSsp = bool.Parse(with_1.Attributes["InheritUseCredSsp"].Value);
+					conI.UseCredSsp = bool.Parse(xmlnode.Attributes["UseCredSsp"].Value);
+					conI.Inherit.UseCredSsp = bool.Parse(xmlnode.Attributes["InheritUseCredSsp"].Value);
 				}
 						
 				if (confVersion >= 2.5)
 				{
-					conI.LoadBalanceInfo = with_1.Attributes["LoadBalanceInfo"].Value;
-					conI.AutomaticResize = bool.Parse(with_1.Attributes["AutomaticResize"].Value);
-					conI.Inherit.LoadBalanceInfo = bool.Parse(with_1.Attributes["InheritLoadBalanceInfo"].Value);
-					conI.Inherit.AutomaticResize = bool.Parse(with_1.Attributes["InheritAutomaticResize"].Value);
+					conI.LoadBalanceInfo = xmlnode.Attributes["LoadBalanceInfo"].Value;
+					conI.AutomaticResize = bool.Parse(xmlnode.Attributes["AutomaticResize"].Value);
+					conI.Inherit.LoadBalanceInfo = bool.Parse(xmlnode.Attributes["InheritLoadBalanceInfo"].Value);
+					conI.Inherit.AutomaticResize = bool.Parse(xmlnode.Attributes["InheritAutomaticResize"].Value);
 				}
 			}
 			catch (Exception ex)
