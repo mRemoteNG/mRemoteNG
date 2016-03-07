@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,17 +8,16 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
 using mRemoteNG.Tools;
 using System.ComponentModel;
-//using mRemoteNG.Tools.LocalizedAttributes;
 
 
 namespace mRemoteNG.Root
 {
-	[DefaultProperty("Name")]public class Info
+	[DefaultProperty("Name")]
+    public class Info
 	{
-#region Constructors
+        #region Constructors
 		public Info(RootType rootType)
 		{
 			// VBConversions Note: Non-static class variable initialization is below.  Class variables cannot be initially assigned non-static values in C#.
@@ -27,9 +25,9 @@ namespace mRemoteNG.Root
 				
 			Type = rootType;
 		}
-#endregion
+        #endregion
 			
-#region Public Properties
+        #region Public Properties
 		private string _name; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1), 
             Browsable(true),
@@ -63,20 +61,23 @@ namespace mRemoteNG.Root
             TypeConverter(typeof(Tools.Misc.YesNoTypeConverter))]
         public bool Password { get; set; }
 			
-		[Browsable(false)]public string PasswordString {get; set;}
+		[Browsable(false)]
+        public string PasswordString {get; set;}
 			
-		[Browsable(false)]public RootType Type {get; set;}
+		[Browsable(false)]
+        public RootType Type {get; set;}
 			
-		[Browsable(false)]public TreeNode TreeNode {get; set;}
-#endregion
+		[Browsable(false)]
+        public TreeNode TreeNode {get; set;}
+        #endregion
 			
-#region Public Enumerations
+        #region Public Enumerations
 		public enum RootType
 		{
 			Connection,
 			Credential,
 			PuttySessions
 		}
-#endregion
+        #endregion
 	}
 }

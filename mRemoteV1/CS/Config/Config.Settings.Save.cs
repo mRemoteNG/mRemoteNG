@@ -109,7 +109,7 @@ namespace mRemoteNG.Config.Settings
 				xmlTextWriter.WriteStartDocument();
 				xmlTextWriter.WriteStartElement("Apps");
 						
-				foreach (Tools.ExternalTool extA in ExternalTools)
+				foreach (Tools.ExternalTool extA in Runtime.ExternalTools)
 				{
 					xmlTextWriter.WriteStartElement("App");
 					xmlTextWriter.WriteAttributeString("DisplayName", "", extA.DisplayName);

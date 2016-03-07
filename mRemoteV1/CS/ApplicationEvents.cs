@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,8 +8,6 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace mRemoteNG.My
@@ -23,75 +20,75 @@ namespace mRemoteNG.My
 	// StartupNextInstance: Raised when launching a single-instance application and the application is already active.
 	// NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
 	partial class MyApplication : global::Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase
+	{
+		public System.Threading.Mutex mutex;
+			
+		private void MyApplication_Startup(object sender, Microsoft.VisualBasic.ApplicationServices.StartupEventArgs e)
 		{
-			public System.Threading.Mutex mutex;
-			
-			private void MyApplication_Startup(object sender, Microsoft.VisualBasic.ApplicationServices.StartupEventArgs e)
+			if (My.Settings.Default.SingleInstance)
 			{
-				if (My.Settings.Default.SingleInstance)
+				string mutexID = "mRemoteNG_SingleInstanceMutex";
+					
+				mutex = new System.Threading.Mutex(false, mutexID);
+					
+				if (!mutex.WaitOne(0, false))
 				{
-					string mutexID = "mRemoteNG_SingleInstanceMutex";
-					
-					mutex = new System.Threading.Mutex(false, mutexID);
-					
-					if (!mutex.WaitOne(0, false))
+					try
 					{
-						try
-						{
-							SwitchToCurrentInstance();
-						}
-						catch (Exception)
-						{
-						}
+						SwitchToCurrentInstance();
+					}
+					catch (Exception)
+					{
+					}
 						
-						ProjectData.EndApp();
-					}
+					ProjectData.EndApp();
+				}
 					
-					GC.KeepAlive(mutex);
-				}
-			}
-			
-			private IntPtr GetCurrentInstanceWindowHandle()
-			{
-				IntPtr hWnd = IntPtr.Zero;
-				Process curProc = Process.GetCurrentProcess();
-				
-				foreach (Process proc in Process.GetProcessesByName(curProc.ProcessName))
-				{
-					if (proc.Id != curProc.Id && proc.MainModule.FileName == curProc.MainModule.FileName && proc.MainWindowHandle != IntPtr.Zero)
-					{
-						hWnd = proc.MainWindowHandle;
-						break;
-					}
-				}
-				
-				return hWnd;
-			}
-			
-			private void SwitchToCurrentInstance()
-			{
-				IntPtr hWnd = GetCurrentInstanceWindowHandle();
-				
-				if (hWnd != IntPtr.Zero)
-				{
-					//Restore window if minimized. Do not restore if already in
-					//normal or maximised window state, since we don't want to
-					//change the current state of the window.
-					if (App.Native.IsIconic(hWnd) != 0)
-					{
-						App.Native.ShowWindow(hWnd, App.Native.SW_RESTORE);
-					}
-					
-					App.Native.SetForegroundWindow(hWnd);
-				}
-			}
-			
-			private void MyApplication_Shutdown(object sender, System.EventArgs e)
-			{
-				if (mutex != null)
-				{
-					mutex.Close();
-				}
+				GC.KeepAlive(mutex);
 			}
 		}
+			
+		private IntPtr GetCurrentInstanceWindowHandle()
+		{
+			IntPtr hWnd = IntPtr.Zero;
+			Process curProc = Process.GetCurrentProcess();
+				
+			foreach (Process proc in Process.GetProcessesByName(curProc.ProcessName))
+			{
+				if (proc.Id != curProc.Id && proc.MainModule.FileName == curProc.MainModule.FileName && proc.MainWindowHandle != IntPtr.Zero)
+				{
+					hWnd = proc.MainWindowHandle;
+					break;
+				}
+			}
+				
+			return hWnd;
+		}
+			
+		private void SwitchToCurrentInstance()
+		{
+			IntPtr hWnd = GetCurrentInstanceWindowHandle();
+				
+			if (hWnd != IntPtr.Zero)
+			{
+				//Restore window if minimized. Do not restore if already in
+				//normal or maximised window state, since we don't want to
+				//change the current state of the window.
+				if (App.Native.IsIconic(hWnd) != 0)
+				{
+					App.Native.ShowWindow(hWnd, App.Native.SW_RESTORE);
+				}
+					
+				App.Native.SetForegroundWindow(hWnd);
+			}
+		}
+			
+		private void MyApplication_Shutdown(object sender, System.EventArgs e)
+		{
+			if (mutex != null)
+			{
+				mutex.Close();
+			}
+		}
+	}
 }

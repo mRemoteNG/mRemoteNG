@@ -136,7 +136,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//cMenMCCopy
 			//
-			this.cMenMCCopy.Image = global::My.Resources.Resources.Copy;
+			this.cMenMCCopy.Image = My.Resources.Copy;
 			this.cMenMCCopy.Name = "cMenMCCopy";
 			this.cMenMCCopy.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C);
 			this.cMenMCCopy.Size = new System.Drawing.Size(152, 22);
@@ -144,7 +144,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//cMenMCDelete
 			//
-			this.cMenMCDelete.Image = global::My.Resources.Resources.Delete;
+			this.cMenMCDelete.Image = My.Resources.Delete;
 			this.cMenMCDelete.Name = "cMenMCDelete";
 			this.cMenMCDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
 			this.cMenMCDelete.Size = new System.Drawing.Size(152, 22);
@@ -163,7 +163,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.pnlErrorMsg);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.HideOnClose = true;
-			this.Icon = global::My.Resources.Resources.Info_Icon;
+			this.Icon = My.Resources.Info_Icon;
 			this.Name = "ErrorsAndInfos";
 			this.TabText = global::mRemoteNG.My.Language.strMenuNotifications;
 			this.Text = "Notifications";
@@ -221,9 +221,9 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
 		private void FillImageList()
 		{
-			this.imgListMC.Images.Add(global::My.Resources.InformationSmall);
-			this.imgListMC.Images.Add(global::My.Resources.WarningSmall);
-			this.imgListMC.Images.Add(global::My.Resources.ErrorSmall);
+			this.imgListMC.Images.Add(My.Resources.InformationSmall);
+			this.imgListMC.Images.Add(My.Resources.WarningSmall);
+			this.imgListMC.Images.Add(My.Resources.ErrorSmall);
 		}
 				
 				
@@ -351,21 +351,21 @@ namespace mRemoteNG.UI.Window
 				}
 						
 				ListViewItem sItem = this.lvErrorCollector.SelectedItems[0];
-				Messages.Message eMsg = sItem.Tag;
+                Messages.Message eMsg = (Messages.Message)sItem.Tag;
 				switch (eMsg.MsgClass)
 				{
 					case Messages.MessageClass.InformationMsg:
-						this.pbError.Image = global::My.Resources.Information;
+						this.pbError.Image = My.Resources.Information;
 						this.pnlErrorMsg.BackColor = Color.LightSteelBlue;
 						this.txtMsgText.BackColor = Color.LightSteelBlue;
 						break;
 					case Messages.MessageClass.WarningMsg:
-						this.pbError.Image = global::My.Resources.Warning;
+						this.pbError.Image = My.Resources.Warning;
 						this.pnlErrorMsg.BackColor = Color.Gold;
 						this.txtMsgText.BackColor = Color.Gold;
 						break;
 					case Messages.MessageClass.ErrorMsg:
-						this.pbError.Image = global::My.Resources._Error;
+						this.pbError.Image = My.Resources._Error;
 						this.pnlErrorMsg.BackColor = Color.IndianRed;
 						this.txtMsgText.BackColor = Color.IndianRed;
 						break;
@@ -382,7 +382,7 @@ namespace mRemoteNG.UI.Window
 				
 		private void cMenMC_Opening(System.Object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			if (lvErrorCollector.Items.Count)
+			if (lvErrorCollector.Items.Count > 0)
 			{
 				cMenMCCopy.Enabled = true;
 				cMenMCDelete.Enabled = true;
@@ -393,7 +393,7 @@ namespace mRemoteNG.UI.Window
 				cMenMCDelete.Enabled = false;
 			}
 					
-			if (lvErrorCollector.SelectedItems.Count)
+			if (lvErrorCollector.SelectedItems.Count > 0)
 			{
 				cMenMCCopy.Text = My.Language.strMenuCopy;
 				cMenMCDelete.Text = My.Language.strMenuNotificationsDelete;
@@ -415,7 +415,7 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				IEnumerable items = default(IEnumerable);
-				if (lvErrorCollector.SelectedItems.Count)
+				if (lvErrorCollector.SelectedItems.Count > 0)
 				{
 					items = lvErrorCollector.SelectedItems;
 				}
@@ -467,7 +467,7 @@ namespace mRemoteNG.UI.Window
 			{
 				lvErrorCollector.BeginUpdate();
 						
-				if (lvErrorCollector.SelectedItems.Count)
+				if (lvErrorCollector.SelectedItems.Count > 0)
 				{
 					foreach (ListViewItem item in lvErrorCollector.SelectedItems)
 					{

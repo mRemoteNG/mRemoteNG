@@ -10,8 +10,6 @@ using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
-//using mRemoteNG.Tools.LocalizedAttributes;
-
 
 namespace mRemoteNG.Connection.Protocol
 {
@@ -72,7 +70,6 @@ namespace mRemoteNG.Connection.Protocol
 				if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 				{
 					MiniGeckoBrowser.MiniGeckoBrowser objMiniGeckoBrowser = wBrowser as MiniGeckoBrowser.MiniGeckoBrowser;
-							
 					objMiniGeckoBrowser.TitleChanged += wBrowser_DocumentTitleChanged;
 					objMiniGeckoBrowser.LastTabRemoved += wBrowser_LastTabRemoved;
 				}
@@ -80,9 +77,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					WebBrowser objWebBrowser = wBrowser as WebBrowser;
 					SHDocVw.WebBrowser objAxWebBrowser = (SHDocVw.WebBrowser) objWebBrowser.ActiveXInstance;
-							
 					objWebBrowser.ScrollBarsEnabled = true;
-							
 					objWebBrowser.Navigated += wBrowser_Navigated;
 					objWebBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
 					objAxWebBrowser.NewWindow3 += wBrowser_NewWindow3;
@@ -103,8 +98,8 @@ namespace mRemoteNG.Connection.Protocol
 			{
 				string strHost = System.Convert.ToString(this.InterfaceControl.Info.Hostname);
 				string strAuth = "";
-						
-				if (!((Force & Info.Force.NoCredentials) == (int) Info.Force.NoCredentials) && !string.IsNullOrEmpty(InterfaceControl.Info.Username) && !string.IsNullOrEmpty(InterfaceControl.Info.Password))
+
+                if (!(((int)Force & (int)Info.Force.NoCredentials) == (int)Info.Force.NoCredentials) && !string.IsNullOrEmpty(InterfaceControl.Info.Username) && !string.IsNullOrEmpty(InterfaceControl.Info.Password))
 				{
 					strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(this.InterfaceControl.Info.Username + ":" + this.InterfaceControl.Info.Password)) + Constants.vbNewLine;
 				}
@@ -123,14 +118,11 @@ namespace mRemoteNG.Connection.Protocol
 							
 					if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 					{
-						(wBrowser as MiniGeckoBrowser.MiniGeckoBrowser).Navigate(strHost + ":" + this.InterfaceControl.Info.Port);
+                        ((MiniGeckoBrowser.MiniGeckoBrowser)wBrowser).Navigate(strHost + ":" + this.InterfaceControl.Info.Port);
 					}
 					else
 					{
-						object temp_Flags = null;
-						object temp_TargetFrameName = null;
-						object null_object = null;
-						(wBrowser as WebBrowser).Navigate(strHost + ":" + this.InterfaceControl.Info.Port, ref temp_Flags, ref temp_TargetFrameName, ref strAuth, ref null_object);
+                        ((WebBrowser)wBrowser).Navigate(strHost + ":" + this.InterfaceControl.Info.Port);
 					}
 				}
 				else
@@ -146,10 +138,7 @@ namespace mRemoteNG.Connection.Protocol
 					}
 					else
 					{
-						object temp_Flags2 = null;
-						object temp_TargetFrameName2 = null;
-						object null_object2 = null;
-						(wBrowser as WebBrowser).Navigate(strHost, ref temp_Flags2, ref temp_TargetFrameName2, ref strAuth, ref null_object2);
+                        ((WebBrowser)wBrowser).Navigate(strHost);
 					}
 				}
 						
@@ -184,7 +173,7 @@ namespace mRemoteNG.Connection.Protocol
 				
 		private void wBrowser_NewWindow3(object ppDisp, ref bool Cancel, long dwFlags, string bstrUrlContext, string bstrUrl)
 		{
-			if (dwFlags & NWMF.NWMF_OVERRIDEKEY)
+			if ((dwFlags & (long)NWMF.NWMF_OVERRIDEKEY) > 0)
 			{
 				Cancel = false;
 			}

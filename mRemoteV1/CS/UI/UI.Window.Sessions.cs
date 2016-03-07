@@ -37,7 +37,7 @@ namespace mRemoteNG.UI.Window
 			if (Auto)
 			{
 				_retrieved = false;
-				if (!Settings.AutomaticallyGetSessionInfo)
+				if (!Settings.Default.AutomaticallyGetSessionInfo)
 				{
 					return ;
 				}
@@ -62,21 +62,21 @@ namespace mRemoteNG.UI.Window
 				data.Password = connectionInfo.Password;
 				data.Domain = connectionInfo.Domain;
 						
-				if (Settings.EmptyCredentials == "custom")
+				if (Settings.Default.EmptyCredentials == "custom")
 				{
 					if (string.IsNullOrEmpty(data.Username))
 					{
-						data.Username = Settings.DefaultUsername;
+                        data.Username = Settings.Default.DefaultUsername;
 					}
 							
 					if (string.IsNullOrEmpty(data.Password))
 					{
-						data.Password = Security.Crypt.Decrypt(Settings.DefaultPassword, App.Info.General.EncryptionKey);
+                        data.Password = Security.Crypt.Decrypt(Settings.Default.DefaultPassword, App.Info.General.EncryptionKey);
 					}
 							
 					if (string.IsNullOrEmpty(data.Domain))
 					{
-						data.Domain = Settings.DefaultDomain;
+                        data.Domain = Settings.Default.DefaultDomain;
 					}
 				}
 						
@@ -131,7 +131,7 @@ namespace mRemoteNG.UI.Window
 				data.Username = username;
 				data.Password = password;
 				data.Domain = domain;
-				data.SessionId = long.Parse(sessionId);
+				data.SessionId = int.Parse(sessionId);
 						
 				Thread thread = new Thread(new System.Threading.ThreadStart(KillSessionBackground));
 				thread.SetApartmentState(ApartmentState.STA);
@@ -174,7 +174,7 @@ namespace mRemoteNG.UI.Window
 					
 			Security.Impersonator impersonator = new Security.Impersonator();
 			mRemoteNG.Connection.Protocol.RDP.TerminalSessions terminalSessions = new mRemoteNG.Connection.Protocol.RDP.TerminalSessions();
-			long serverHandle = 0;
+			int serverHandle = 0;
 			try
 			{
 				impersonator.StartImpersonation(data.Domain, data.Username, data.Password);
@@ -208,7 +208,7 @@ namespace mRemoteNG.UI.Window
 		}
 				
 		// Get sessions from an already impersonated and connected TerminalSessions object
-        private void GetSessions(mRemoteNG.Connection.Protocol.RDP.TerminalSessions terminalSessions, long serverHandle)
+        private void GetSessions(mRemoteNG.Connection.Protocol.RDP.TerminalSessions terminalSessions, int serverHandle)
 		{
 			mRemoteNG.Connection.Protocol.RDP.SessionsCollection rdpSessions = terminalSessions.GetSessions(serverHandle);
 			foreach (mRemoteNG.Connection.Protocol.RDP.Session session in rdpSessions)
@@ -232,7 +232,7 @@ namespace mRemoteNG.UI.Window
 					
 			Security.Impersonator impersonator = new Security.Impersonator();
 			mRemoteNG.Connection.Protocol.RDP.TerminalSessions terminalSessions = new mRemoteNG.Connection.Protocol.RDP.TerminalSessions();
-			long serverHandle = 0;
+			int serverHandle = 0;
 			try
 			{
 				if (string.IsNullOrEmpty(data.Username) || string.IsNullOrEmpty(data.Password))
@@ -245,7 +245,8 @@ namespace mRemoteNG.UI.Window
 				serverHandle = terminalSessions.OpenConnection(data.Hostname);
 				if (!(serverHandle == 0))
 				{
-					terminalSessions.KillSession(serverHandle, data.SessionId);
+					terminalSessions.KillSession(
+                        serverHandle, data.SessionId);
 				}
 						
 				ClearList();
@@ -365,7 +366,7 @@ namespace mRemoteNG.UI.Window
 			public string Username;
 			public string Password;
 			public string Domain;
-			public long SessionId;
+			public int SessionId;
 		}
         #endregion
 	}

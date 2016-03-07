@@ -111,7 +111,7 @@ namespace mRemoteNG.UI.Window
 			//btnShowInheritance
 			//
 			this.btnShowInheritance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnShowInheritance.Image = global::My.Resources.Resources.Inheritance;
+			this.btnShowInheritance.Image = My.Resources.Inheritance;
 			this.btnShowInheritance.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnShowInheritance.Name = "btnShowInheritance";
 			this.btnShowInheritance.Size = new System.Drawing.Size(23, 22);
@@ -120,7 +120,7 @@ namespace mRemoteNG.UI.Window
 			//btnShowDefaultInheritance
 			//
 			this.btnShowDefaultInheritance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnShowDefaultInheritance.Image = global::My.Resources.Resources.Inheritance_Default;
+			this.btnShowDefaultInheritance.Image = My.Resources.Inheritance_Default;
 			this.btnShowDefaultInheritance.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnShowDefaultInheritance.Name = "btnShowDefaultInheritance";
 			this.btnShowDefaultInheritance.Size = new System.Drawing.Size(23, 22);
@@ -131,7 +131,7 @@ namespace mRemoteNG.UI.Window
 			this.btnShowProperties.Checked = true;
 			this.btnShowProperties.CheckState = System.Windows.Forms.CheckState.Checked;
 			this.btnShowProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnShowProperties.Image = global::My.Resources.Resources.Properties;
+			this.btnShowProperties.Image = My.Resources.Properties;
 			this.btnShowProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnShowProperties.Name = "btnShowProperties";
 			this.btnShowProperties.Size = new System.Drawing.Size(23, 22);
@@ -140,7 +140,7 @@ namespace mRemoteNG.UI.Window
 			//btnShowDefaultProperties
 			//
 			this.btnShowDefaultProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnShowDefaultProperties.Image = global::My.Resources.Resources.Properties_Default;
+			this.btnShowDefaultProperties.Image = My.Resources.Properties_Default;
 			this.btnShowDefaultProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnShowDefaultProperties.Name = "btnShowDefaultProperties";
 			this.btnShowDefaultProperties.Size = new System.Drawing.Size(23, 22);
@@ -159,7 +159,7 @@ namespace mRemoteNG.UI.Window
 			//
 			this.btnHostStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
 			this.btnHostStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnHostStatus.Image = global::My.Resources.Resources.HostStatus_Check;
+			this.btnHostStatus.Image = My.Resources.HostStatus_Check;
 			this.btnHostStatus.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnHostStatus.Name = "btnHostStatus";
 			this.btnHostStatus.Size = new System.Drawing.Size(23, 22);
@@ -177,7 +177,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.pGrid);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.HideOnClose = true;
-			this.Icon = global::My.Resources.Resources.Config_Icon;
+			this.Icon = My.Resources.Config_Icon;
 			this.Name = "Config";
 			this.TabText = "Config";
 			this.Text = "Config";
@@ -1800,14 +1800,14 @@ namespace mRemoteNG.UI.Window
 				{
 					if ((string) this.btnHostStatus.Tag == "checking")
 					{
-						ShowStatusImage(global::My.Resources.HostStatus_On);
+						ShowStatusImage(My.Resources.HostStatus_On);
 					}
 				}
 				else
 				{
 					if ((string) this.btnHostStatus.Tag == "checking")
 					{
-						ShowStatusImage(global::My.Resources.HostStatus_Off);
+						ShowStatusImage(My.Resources.HostStatus_Off);
 					}
 				}
 			}
@@ -1815,7 +1815,7 @@ namespace mRemoteNG.UI.Window
 			{
 				if ((string) this.btnHostStatus.Tag == "checking")
 				{
-					ShowStatusImage(global::My.Resources.HostStatus_Off);
+					ShowStatusImage(My.Resources.HostStatus_Off);
 				}
 			}
 		}
@@ -1839,7 +1839,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				this.btnHostStatus.Image = global::My.Resources.HostStatus_Check;
+				this.btnHostStatus.Image = My.Resources.HostStatus_Check;
 						
 				// To check status, ConnectionInfo must be an mRemoteNG.Connection.Info that is not a container
 				if (ConnectionInfo is mRemoteNG.Connection.Info)

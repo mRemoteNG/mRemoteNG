@@ -21,23 +21,14 @@ namespace mRemoteNG.Connection.Protocol
 		private string _Name;
         public string Name
 		{
-			get
-			{
-				return this._Name;
-			}
-			set
-			{
-				this._Name = value;
-			}
+			get { return this._Name; }
+			set { this._Name = value; }
 		}
 				
 		private UI.Window.Connection _connectionWindow;
         public UI.Window.Connection ConnectionWindow
 		{
-			get
-			{
-				return _connectionWindow;
-			}
+			get { return _connectionWindow; }
 			set
 			{
 				_connectionWindow = value;
@@ -78,14 +69,8 @@ namespace mRemoteNG.Connection.Protocol
 		private mRemoteNG.Connection.Info.Force _Force;
         public mRemoteNG.Connection.Info.Force Force
 		{
-			get
-			{
-				return this._Force;
-			}
-			set
-			{
-				this._Force = value;
-			}
+			get { return this._Force; }
+			set { this._Force = value; }
 		}
 				
 		public System.Timers.Timer tmrReconnect = new System.Timers.Timer(2000);
@@ -149,9 +134,13 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			if (InterfaceControl.Info.Protocol != Protocols.RDP)
 			{
-				if (ConnectedEvent != null)
-					ConnectedEvent(this);
+                if (ConnectedEvent != null)
+                {
+                    ConnectedEvent(this);
+                    return true;
+                }
 			}
+            return false;
 		}
 				
 		public virtual void Disconnect()

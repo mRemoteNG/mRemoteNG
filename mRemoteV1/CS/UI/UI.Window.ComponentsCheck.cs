@@ -429,7 +429,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.pnlChecks);
 			this.Controls.Add(this.chkAlwaysShow);
 			this.Controls.Add(this.btnCheckAgain);
-			this.Icon = global::My.Resources.Resources.ComponentsCheck_Icon;
+			this.Icon = My.Resources.ComponentsCheck_Icon;
 			this.Name = "ComponentsCheck";
 			this.TabText = "Components Check";
 			this.Text = "Components Check";
@@ -527,14 +527,14 @@ namespace mRemoteNG.UI.Window
 					throw (new Exception(string.Format("Found RDC Client version {0} but version {1} or higher is required.", rdpClient.Version, mRemoteNG.Connection.Protocol.RDP.Versions.RDC60)));
 				}
 						
-				pbCheck1.Image = global::My.Resources.Good_Symbol;
+				pbCheck1.Image = My.Resources.Good_Symbol;
 				lblCheck1.ForeColor = Color.DarkOliveGreen;
 				lblCheck1.Text = "RDP (Remote Desktop) " + My.Language.strCcCheckSucceeded;
 				txtCheck1.Text = string.Format(My.Language.strCcRDPOK, rdpClient.Version);
 			}
 			catch (Exception ex)
 			{
-				pbCheck1.Image = global::My.Resources.Bad_Symbol;
+				pbCheck1.Image = My.Resources.Bad_Symbol;
 				lblCheck1.ForeColor = Color.Firebrick;
 				lblCheck1.Text = "RDP (Remote Desktop) " + My.Language.strCcCheckFailed;
 				txtCheck1.Text = My.Language.strCcRDPFailed;
@@ -562,14 +562,14 @@ namespace mRemoteNG.UI.Window
 					System.Windows.Forms.Application.DoEvents();
 				}
 						
-				pbCheck2.Image = global::My.Resources.Good_Symbol;
+				pbCheck2.Image = My.Resources.Good_Symbol;
 				lblCheck2.ForeColor = Color.DarkOliveGreen;
 				lblCheck2.Text = "VNC (Virtual Network Computing) " + My.Language.strCcCheckSucceeded;
 				txtCheck2.Text = string.Format(My.Language.strCcVNCOK, VNC.ProductVersion);
 			}
 			catch (Exception)
 			{
-				pbCheck2.Image = global::My.Resources.Bad_Symbol;
+				pbCheck2.Image = My.Resources.Bad_Symbol;
 				lblCheck2.ForeColor = Color.Firebrick;
 				lblCheck2.Text = "VNC (Virtual Network Computing) " + My.Language.strCcCheckFailed;
 				txtCheck2.Text = My.Language.strCcVNCFailed;
@@ -595,14 +595,14 @@ namespace mRemoteNG.UI.Window
 					
 			if (File.Exists(pPath))
 			{
-				pbCheck3.Image = global::My.Resources.Good_Symbol;
+				pbCheck3.Image = My.Resources.Good_Symbol;
 				lblCheck3.ForeColor = Color.DarkOliveGreen;
 				lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + My.Language.strCcCheckSucceeded;
 				txtCheck3.Text = My.Language.strCcPuttyOK;
 			}
 			else
 			{
-				pbCheck3.Image = global::My.Resources.Bad_Symbol;
+				pbCheck3.Image = My.Resources.Bad_Symbol;
 				lblCheck3.ForeColor = Color.Firebrick;
 				lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + My.Language.strCcCheckFailed;
 				txtCheck3.Text = My.Language.strCcPuttyFailed;
@@ -626,14 +626,14 @@ namespace mRemoteNG.UI.Window
 					System.Windows.Forms.Application.DoEvents();
 				}
 						
-				pbCheck4.Image = global::My.Resources.Good_Symbol;
+				pbCheck4.Image = My.Resources.Good_Symbol;
 				lblCheck4.ForeColor = Color.DarkOliveGreen;
 				lblCheck4.Text = "ICA (Citrix ICA) " + My.Language.strCcCheckSucceeded;
 				txtCheck4.Text = string.Format(My.Language.strCcICAOK, ICA.Version);
 			}
 			catch (Exception ex)
 			{
-				pbCheck4.Image = global::My.Resources.Bad_Symbol;
+				pbCheck4.Image = My.Resources.Bad_Symbol;
 				lblCheck4.ForeColor = Color.Firebrick;
 				lblCheck4.Text = "ICA (Citrix ICA) " + My.Language.strCcCheckFailed;
 				txtCheck4.Text = My.Language.strCcICAFailed;
@@ -669,14 +669,14 @@ namespace mRemoteNG.UI.Window
 					
 			if (GeckoBad == false)
 			{
-				pbCheck5.Image = global::My.Resources.Good_Symbol;
+				pbCheck5.Image = My.Resources.Good_Symbol;
 				lblCheck5.ForeColor = Color.DarkOliveGreen;
 				lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " + My.Language.strCcCheckSucceeded;
 				txtCheck5.Text = My.Language.strCcGeckoOK;
 			}
 			else
 			{
-				pbCheck5.Image = global::My.Resources.Bad_Symbol;
+				pbCheck5.Image = My.Resources.Bad_Symbol;
 				lblCheck5.ForeColor = Color.Firebrick;
 				lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " + My.Language.strCcCheckFailed;
 				txtCheck5.Text = My.Language.strCcGeckoFailed;
@@ -692,14 +692,14 @@ namespace mRemoteNG.UI.Window
 			{
 				eol = new EOLWTSCOM.WTSCOM();
 						
-				pbCheck6.Image = global::My.Resources.Good_Symbol;
+				pbCheck6.Image = My.Resources.Good_Symbol;
 				lblCheck6.ForeColor = Color.DarkOliveGreen;
 				lblCheck6.Text = "(RDP) Sessions " + My.Language.strCcCheckSucceeded;
 				txtCheck6.Text = My.Language.strCcEOLOK;
 			}
 			catch (Exception ex)
 			{
-				pbCheck6.Image = global::My.Resources.Bad_Symbol;
+				pbCheck6.Image = My.Resources.Bad_Symbol;
 				lblCheck6.ForeColor = Color.Firebrick;
 				lblCheck6.Text = "(RDP) Sessions " + My.Language.strCcCheckFailed;
 				txtCheck6.Text = My.Language.strCcEOLFailed;

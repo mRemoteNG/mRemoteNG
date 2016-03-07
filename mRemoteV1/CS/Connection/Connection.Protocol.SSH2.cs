@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,23 +8,22 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
 
 
 namespace mRemoteNG.Connection.Protocol
 {
 	public class SSH2 : PuttyBase
-			{
+	{
 				
-				public SSH2()
-				{
-					this.PuttyProtocol = Putty_Protocol.ssh;
-					this.PuttySSHVersion = Putty_SSHVersion.ssh2;
-				}
+		public SSH2()
+		{
+			this.PuttyProtocol = Putty_Protocol.ssh;
+			this.PuttySSHVersion = Putty_SSHVersion.ssh2;
+		}
 				
-				public enum Defaults
-				{
-					Port = 22
-				}
-			}
+		public enum Defaults
+		{
+			Port = 22
+		}
+	}
 }

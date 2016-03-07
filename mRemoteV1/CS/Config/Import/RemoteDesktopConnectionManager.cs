@@ -25,7 +25,7 @@ namespace mRemoteNG.Config.Import
 			xmlDocument.Load(fileName);
 				
 			XmlNode rdcManNode = xmlDocument.SelectSingleNode("/RDCMan");
-			int schemaVersion = (int) (rdcManNode.Attributes["schemaVersion"].Value);
+			int schemaVersion = System.Convert.ToInt32(rdcManNode.Attributes["schemaVersion"].Value);
 			if (!(schemaVersion == 1))
 			{
 				throw (new FileFormatException(string.Format("Unsupported schema version ({0}).", schemaVersion)));
@@ -71,8 +71,8 @@ namespace mRemoteNG.Config.Import
 				
 			treeNode.Name = name;
 			treeNode.Tag = containerInfo;
-			treeNode.ImageIndex = Images.Enums.TreeImage.Container;
-			treeNode.SelectedImageIndex = Images.Enums.TreeImage.Container;
+			treeNode.ImageIndex = (int)Images.Enums.TreeImage.Container;
+			treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Container;
 				
 			foreach (XmlNode childNode in xmlNode.SelectNodes("./group|./server"))
 			{
@@ -104,12 +104,12 @@ namespace mRemoteNG.Config.Import
 				
 			Connection.Info connectionInfo = ConnectionInfoFromXml(serverNode);
 			connectionInfo.TreeNode = treeNode;
-			connectionInfo.Parent = parentTreeNode.Tag;
+			connectionInfo.Parent = (Container.Info)parentTreeNode.Tag;
 				
 			treeNode.Name = name;
 			treeNode.Tag = connectionInfo;
-			treeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed;
-			treeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed;
+			treeNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+			treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
 				
 			Runtime.ConnectionList.Add(connectionInfo);
 		}
@@ -166,7 +166,7 @@ namespace mRemoteNG.Config.Import
 				connectionInfo.UseConsoleSession = bool.Parse(connectionSettingsNode.SelectSingleNode("./connectToConsole").InnerText);
 				// ./startProgram
 				// ./workingDir
-				connectionInfo.Port = (int) (connectionSettingsNode.SelectSingleNode("./port").InnerText);
+				connectionInfo.Port = System.Convert.ToInt32(connectionSettingsNode.SelectSingleNode("./port").InnerText);
 			}
 			else
 			{
@@ -219,7 +219,7 @@ namespace mRemoteNG.Config.Import
 				string resolutionString = System.Convert.ToString(remoteDesktopNode.SelectSingleNode("./size").InnerText.Replace(" ", ""));
 				try
 				{
-					connectionInfo.Resolution = "Res" + System.Convert.ToString(Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPResolutions), resolutionString));
+                    connectionInfo.Resolution = (Connection.Protocol.RDP.RDPResolutions)Enum.Parse(typeof(Connection.Protocol.RDP.RDPResolutions), "Res" + resolutionString);
 				}
 				catch (ArgumentException)
 				{
@@ -235,8 +235,9 @@ namespace mRemoteNG.Config.Import
 				{
 					connectionInfo.Resolution = RDP.RDPResolutions.Fullscreen;
 				}
-					
-				connectionInfo.Colors = remoteDesktopNode.SelectSingleNode("./colorDepth").InnerText;
+
+
+                connectionInfo.Colors = (Connection.Protocol.RDP.RDPColors)Enum.Parse(typeof(Connection.Protocol.RDP.RDPColors), remoteDesktopNode.SelectSingleNode("./colorDepth").InnerText);
 			}
 			else
 			{
@@ -249,13 +250,13 @@ namespace mRemoteNG.Config.Import
 			{
 				switch (localResourcesNode.SelectSingleNode("./audioRedirection").InnerText)
 				{
-					case 0: // Bring to this computer
+					case "0": // Bring to this computer
 						connectionInfo.RedirectSound = RDP.RDPSounds.BringToThisComputer;
 						break;
-					case 1: // Leave at remote computer
+					case "1": // Leave at remote computer
 						connectionInfo.RedirectSound = RDP.RDPSounds.LeaveAtRemoteComputer;
 						break;
-					case 2: // Do not play
+					case "2": // Do not play
 						connectionInfo.RedirectSound = RDP.RDPSounds.DoNotPlay;
 						break;
 				}
@@ -265,13 +266,13 @@ namespace mRemoteNG.Config.Import
 					
 				switch (localResourcesNode.SelectSingleNode("./keyboardHook").InnerText)
 				{
-					case 0: // On the local computer
+					case "0": // On the local computer
 						connectionInfo.RedirectKeys = false;
 						break;
-					case 1: // On the remote computer
+					case "1": // On the remote computer
 						connectionInfo.RedirectKeys = true;
 						break;
-					case 2: // In full screen mode only
+					case "2": // In full screen mode only
 						connectionInfo.RedirectKeys = false;
 						break;
 				}
@@ -297,13 +298,13 @@ namespace mRemoteNG.Config.Import
 			{
 				switch (securitySettingsNode.SelectSingleNode("./authentication").InnerText)
 				{
-					case 0: // No authentication
+					case "0": // No authentication
 						connectionInfo.RDPAuthenticationLevel = RDP.AuthenticationLevel.NoAuth;
 						break;
-					case 1: // Do not connect if authentication fails
+					case "1": // Do not connect if authentication fails
 						connectionInfo.RDPAuthenticationLevel = RDP.AuthenticationLevel.AuthRequired;
 						break;
-					case 2: // Warn if authentication fails
+					case "2": // Warn if authentication fails
 						connectionInfo.RDPAuthenticationLevel = RDP.AuthenticationLevel.WarnOnFailedAuth;
 						break;
 				}
@@ -337,10 +338,10 @@ namespace mRemoteNG.Config.Import
 				Win32.DATA_BLOB ciphertextData = new Win32.DATA_BLOB();
 				ciphertextData.cbData = ciphertextArray.Length;
 				ciphertextData.pbData = gcHandle.AddrOfPinnedObject();
-					
-				Win32.DATA_BLOB temp_optionalEntropy = null;
-				IntPtr temp_promptStruct = null;
-				if (!Win32.CryptUnprotectData(ref ciphertextData, null, ref temp_optionalEntropy, null, ref temp_promptStruct, 0, ref plaintextData))
+
+                Win32.DATA_BLOB temp_optionalEntropy = new Win32.DATA_BLOB();
+				IntPtr temp_promptStruct = IntPtr.Zero;
+				if (!Win32.CryptUnprotectData(ref ciphertextData, null, ref temp_optionalEntropy, IntPtr.Zero, ref temp_promptStruct, 0, ref plaintextData))
 				{
 					return null;
 				}

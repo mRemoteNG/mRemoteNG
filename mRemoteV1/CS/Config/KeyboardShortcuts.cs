@@ -69,7 +69,7 @@ namespace mRemoteNG.Config
 			
 		public static ShortcutCommand CommandFromHookKeyMessage(Message m)
 		{
-			KeyboardHook.HookKeyMsgData msgData = Marshal.PtrToStructure(m.LParam, typeof(KeyboardHook.HookKeyMsgData));
+            KeyboardHook.HookKeyMsgData msgData = (SharedLibraryNG.KeyboardHook.HookKeyMsgData)Marshal.PtrToStructure(m.LParam, typeof(KeyboardHook.HookKeyMsgData));
 			return Map.GetCommand(msgData.KeyCode, msgData.ModifierKeys);
 		}
         #endregion
@@ -386,7 +386,7 @@ namespace mRemoteNG.Config
         #region Public Methods
 		public string ToConfigString()
 		{
-			return string.Join("/", new string[] {KeyCode, Convert.ToInt32(ModifierKeys)});
+			return string.Join("/", new string[] {KeyCode.ToString(), (Convert.ToInt32(ModifierKeys)).ToString()});
 		}
 			
 		public static ShortcutKey FromConfigString(string shortcutKeyString)
@@ -396,12 +396,12 @@ namespace mRemoteNG.Config
 			{
 				throw (new ArgumentException(string.Format("ShortcutKey.FromString({0}) failed. parts.Length != 2", shortcutKeyString), shortcutKeyString));
 			}
-			return new ShortcutKey(Convert.ToInt32(parts[0]), Convert.ToInt32(parts[1]));
+			return new ShortcutKey(Convert.ToInt32(parts[0]), (SharedLibraryNG.KeyboardHook.ModifierKeys)Convert.ToInt32(parts[1]));
 		}
 			
 		public override string ToString()
 		{
-			return HotkeyControl.KeysToString(this);
+			return HotkeyControl.KeysToString((System.Windows.Forms.Keys)this.KeyCode);
 		}
 			
 		public bool Equals(ShortcutKey other)

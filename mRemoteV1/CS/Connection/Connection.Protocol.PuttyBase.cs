@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 using mRemoteNG.Messages;
-//using mRemoteNG.App.Native;
 using System.Threading;
 using Microsoft.Win32;
 using mRemoteNG.App;
@@ -101,7 +100,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			get
 			{
-				if (GetForegroundWindow() == PuttyHandle)
+				if (Native.GetForegroundWindow() == PuttyHandle)
 				{
 					return true;
 				}
@@ -116,7 +115,7 @@ namespace mRemoteNG.Connection.Protocol
         #region Private Events & Handlers
 		private void ProcessExited(object sender, System.EventArgs e)
 		{
-			base.EVENT_CLOSED(this);
+            base.Event_Closed(this);
 		}
         #endregion
 				
@@ -180,7 +179,7 @@ namespace mRemoteNG.Connection.Protocol
 								
 						arguments.Add("-" + System.Convert.ToString(_PuttySSHVersion));
 								
-						if (!((Force & Info.Force.NoCredentials) == (int) Info.Force.NoCredentials))
+						if (!(((int)Force & (int)Info.Force.NoCredentials) == (int)Info.Force.NoCredentials))
 						{
 							if (!string.IsNullOrEmpty(username))
 							{
@@ -215,7 +214,8 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					if (_isPuttyNg)
 					{
-						PuttyHandle = FindWindowEx(InterfaceControl.Handle, 0, Constants.vbNullString, Constants.vbNullString);
+						PuttyHandle = Native.FindWindowEx(
+                            InterfaceControl.Handle, new IntPtr(0), Constants.vbNullString, Constants.vbNullString);
 					}
 					else
 					{
@@ -230,17 +230,15 @@ namespace mRemoteNG.Connection.Protocol
 						
 				if (!_isPuttyNg)
 				{
-					SetParent(PuttyHandle, InterfaceControl.Handle);
+					Native.SetParent(PuttyHandle, InterfaceControl.Handle);
 				}
 						
 				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strPuttyStuff, true);
-						
 				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(My.Language.strPuttyHandle, PuttyHandle.ToString()), true);
 				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(My.Language.strPuttyTitle, PuttyProcess.MainWindowTitle), true);
 				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(My.Language.strPuttyParentHandle, InterfaceControl.Parent.Handle.ToString()), true);
 						
 				Resize(this, new EventArgs());
-						
 				base.Connect();
 				return true;
 			}
@@ -259,7 +257,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return ;
 				}
-				SetForegroundWindow(PuttyHandle);
+				Native.SetForegroundWindow(PuttyHandle);
 			}
 			catch (Exception ex)
 			{
@@ -275,7 +273,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return ;
 				}
-				MoveWindow(PuttyHandle, System.Convert.ToInt32(- SystemInformation.FrameBorderSize.Width), System.Convert.ToInt32(- (SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
+                Native.MoveWindow(PuttyHandle, System.Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), System.Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
 			}
 			catch (Exception ex)
 			{
@@ -313,8 +311,8 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				PostMessage(this.PuttyHandle, WM_SYSCOMMAND, IDM_RECONF, 0);
-				SetForegroundWindow(this.PuttyHandle);
+                Native.PostMessage(this.PuttyHandle, Native.WM_SYSCOMMAND, IDM_RECONF, 0);
+                Native.SetForegroundWindow(this.PuttyHandle);
 			}
 			catch (Exception ex)
 			{

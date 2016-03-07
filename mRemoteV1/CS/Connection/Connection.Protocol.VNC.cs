@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using System.ComponentModel;
 using mRemoteNG.Tools;
-//using mRemoteNG.Tools.LocalizedAttributes;
 
 
 namespace mRemoteNG.Connection.Protocol
@@ -21,19 +20,19 @@ namespace mRemoteNG.Connection.Protocol
         #region Properties
         public bool SmartSize
 		{
-			get { return VNC_Renamed.Scaled; }
-			set { VNC_Renamed.Scaled = value; }
+			get { return _VNC.Scaled; }
+			set { _VNC.Scaled = value; }
 		}
 				
         public bool ViewOnly
 		{
-			get { return VNC_Renamed.ViewOnly; }
-			set { VNC_Renamed.ViewOnly = value; }
+			get { return _VNC.ViewOnly; }
+			set { _VNC.ViewOnly = value; }
 		}
         #endregion
 				
         #region Private Declarations
-		private VncSharp.RemoteDesktop VNC_Renamed;
+		private VncSharp.RemoteDesktop _VNC;
 		private Connection.Info Info;
         #endregion
 				
@@ -49,11 +48,11 @@ namespace mRemoteNG.Connection.Protocol
 					
 			try
 			{
-				VNC_Renamed = this.Control;
+                _VNC = (VncSharp.RemoteDesktop)this.Control;
 						
 				Info = this.InterfaceControl.Info;
 						
-				VNC_Renamed.VncPort = this.Info.Port;
+				_VNC.VncPort = this.Info.Port;
 						
 				//If Info.VNCCompression <> Compression.CompNone Then
 				//    VNC.JPEGCompression = True
@@ -133,7 +132,7 @@ namespace mRemoteNG.Connection.Protocol
 					
 			try
 			{
-				VNC_Renamed.Connect(this.Info.Hostname, this.Info.VNCViewOnly, Info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
+				_VNC.Connect(this.Info.Hostname, this.Info.VNCViewOnly, Info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
 			}
 			catch (Exception ex)
 			{
@@ -148,7 +147,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				VNC_Renamed.Disconnect();
+				_VNC.Disconnect();
 			}
 			catch (Exception ex)
 			{
@@ -162,11 +161,11 @@ namespace mRemoteNG.Connection.Protocol
 			{
 				switch (Keys)
 				{
-					case SpecialKeys.CtrlAltDel:
-						VNC_Renamed.SendSpecialKeys(SpecialKeys.CtrlAltDel);
+					case Connection.Protocol.VNC.SpecialKeys.CtrlAltDel:
+						_VNC.SendSpecialKeys(VncSharp.SpecialKeys.CtrlAltDel);
 						break;
-					case SpecialKeys.CtrlEsc:
-						VNC_Renamed.SendSpecialKeys(SpecialKeys.CtrlEsc);
+					case Connection.Protocol.VNC.SpecialKeys.CtrlEsc:
+						_VNC.SendSpecialKeys(VncSharp.SpecialKeys.CtrlEsc);
 						break;
 				}
 			}
@@ -238,7 +237,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				VNC_Renamed.FullScreenUpdate();
+				_VNC.FullScreenUpdate();
 			}
 			catch (Exception ex)
 			{
@@ -252,12 +251,12 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				VNC_Renamed.ConnectComplete += VNCEvent_Connected;
-				VNC_Renamed.ConnectionLost += VNCEvent_Disconnected;
+				_VNC.ConnectComplete += VNCEvent_Connected;
+				_VNC.ConnectionLost += VNCEvent_Disconnected;
 				mRemoteNG.frmMain.clipboardchange += VNCEvent_ClipboardChanged;
-				if (!((Force & Info.Force.NoCredentials) == (int) Info.Force.NoCredentials) && !string.IsNullOrEmpty(Info.Password))
+				if (!(((int)Force & (int)Info.Force.NoCredentials) == (int)Info.Force.NoCredentials) && !string.IsNullOrEmpty(Info.Password))
 				{
-					VNC_Renamed.GetPassword = new System.EventHandler(VNCEvent_Authenticate);
+					_VNC.GetPassword = VNCEvent_Authenticate;
 				}
 			}
 			catch (Exception ex)
@@ -271,7 +270,7 @@ namespace mRemoteNG.Connection.Protocol
 		private void VNCEvent_Connected(object sender, EventArgs e)
 		{
 			base.Event_Connected(this);
-			VNC_Renamed.AutoScroll = Info.VNCSmartSizeMode == SmartSizeMode.SmartSNo;
+			_VNC.AutoScroll = Info.VNCSmartSizeMode == SmartSizeMode.SmartSNo;
 		}
 				
 		private void VNCEvent_Disconnected(object sender, EventArgs e)
@@ -282,7 +281,7 @@ namespace mRemoteNG.Connection.Protocol
 				
 		private void VNCEvent_ClipboardChanged()
 		{
-			this.VNC_Renamed.FillServerClipboard();
+			this._VNC.FillServerClipboard();
 		}
 				
 		private string VNCEvent_Authenticate()

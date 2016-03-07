@@ -8,7 +8,6 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-//using mRemoteNG.App.Native;
 using System.Threading;
 using mRemoteNG.App;
 using mRemoteNG.Tools;
@@ -23,7 +22,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			if (InterfaceControl.Info != null)
 			{
-				_externalTool = GetExtAppByName(System.Convert.ToString(InterfaceControl.Info.ExtApp));
+				_externalTool = Runtime.GetExtAppByName(System.Convert.ToString(InterfaceControl.Info.ExtApp));
 				_externalTool.ConnectionInfo = InterfaceControl.Info;
 			}
 					
@@ -38,7 +37,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					_externalTool.Start(InterfaceControl.Info);
 					Close();
-					return null;
+					return false;
 				}
 						
 				_process = new Process();
@@ -67,16 +66,13 @@ namespace mRemoteNG.Connection.Protocol
 					}
 				}
 						
-				SetParent(_handle, InterfaceControl.Handle);
-						
+				Native.SetParent(_handle, InterfaceControl.Handle);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strIntAppStuff, true);
-						
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(My.Language.strIntAppHandle, _handle.ToString()), true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(My.Language.strIntAppTitle, _process.MainWindowTitle), true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(My.Language.strIntAppParentHandle, InterfaceControl.Parent.Handle.ToString()), true);
 						
 				Resize(this, new EventArgs());
-						
 				base.Connect();
 				return true;
 			}
@@ -95,7 +91,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return ;
 				}
-				SetForegroundWindow(_handle);
+				Native.SetForegroundWindow(_handle);
 			}
 			catch (Exception ex)
 			{
@@ -111,7 +107,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return ;
 				}
-				MoveWindow(_handle, System.Convert.ToInt32(- SystemInformation.FrameBorderSize.Width), System.Convert.ToInt32(- (SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
+                Native.MoveWindow(_handle, System.Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), System.Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
 			}
 			catch (Exception ex)
 			{

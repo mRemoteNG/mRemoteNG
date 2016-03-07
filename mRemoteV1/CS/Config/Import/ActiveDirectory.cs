@@ -54,7 +54,7 @@ namespace mRemoteNG.Config.Import
 				treeNode.Text = name;
 				treeNode.Name = name;
 				treeNode.Tag = containerInfo;
-				ContainerList.Add(containerInfo);
+                Runtime.ContainerList.Add(containerInfo);
 					
 				ImportComputers(ldapPath, treeNode);
 					
@@ -102,7 +102,7 @@ namespace mRemoteNG.Config.Import
 					inheritanceInfo.Description = false;
 					if (parentTreeNode.Tag is Container.Info)
 					{
-						connectionInfo.Parent = parentTreeNode.Tag;
+						connectionInfo.Parent = (Container.Info)parentTreeNode.Tag;
 					}
 					connectionInfo.Inherit = inheritanceInfo;
 					connectionInfo.Name = strDisplayName;
@@ -112,7 +112,7 @@ namespace mRemoteNG.Config.Import
 					treeNode.Name = strDisplayName;
 					treeNode.Tag = connectionInfo; //set the nodes tag to the conI
 					//add connection to connections
-					ConnectionList.Add(connectionInfo);
+                    Runtime.ConnectionList.Add(connectionInfo);
 						
 					parentTreeNode.Nodes.Add(treeNode);
 				}

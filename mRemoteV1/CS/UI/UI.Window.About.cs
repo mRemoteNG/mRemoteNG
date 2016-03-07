@@ -85,7 +85,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//pbLogo
 			//
-			this.pbLogo.Image = global::My.Resources.Resources.Logo;
+			this.pbLogo.Image = My.Resources.Logo;
 			this.pbLogo.Location = new System.Drawing.Point(8, 8);
 			this.pbLogo.Name = "pbLogo";
 			this.pbLogo.Size = new System.Drawing.Size(492, 128);
@@ -243,7 +243,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.pnlBottom);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.Icon = global::My.Resources.Resources.mRemote_Icon;
+			this.Icon = My.Resources.mRemote_Icon;
 			this.MaximumSize = new System.Drawing.Size(20000, 10000);
 			this.Name = "About";
 			this.TabText = "About";

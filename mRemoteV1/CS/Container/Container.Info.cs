@@ -17,7 +17,7 @@ namespace mRemoteNG.Container
 	[DefaultProperty("Name")]
     public class Info
 	{
-#region Properties
+        #region Properties
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1), 
             Browsable(true), 
             ReadOnly(false), 
@@ -60,7 +60,8 @@ namespace mRemoteNG.Container
 			
 		private object _Parent;
         [Category(""), 
-            Browsable(false)]public object Parent
+            Browsable(false)]
+        public object Parent
 		{
 			get
 			{
@@ -115,9 +116,9 @@ namespace mRemoteNG.Container
 				this._ConnectionInfo = value;
 			}
 		}
-#endregion
+        #endregion
 			
-#region Methods
+        #region Methods
 		public Container.Info Copy()
 		{
 			return (Info)this.MemberwiseClone();
@@ -135,7 +136,7 @@ namespace mRemoteNG.Container
 				this.IsExpanded = true;
 			}
 		}
-#endregion
+        #endregion
 			
 		public class Attributes
 		{

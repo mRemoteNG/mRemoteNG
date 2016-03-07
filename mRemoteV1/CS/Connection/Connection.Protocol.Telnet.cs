@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,22 +8,21 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
 
 
 namespace mRemoteNG.Connection.Protocol
 {
 	public class Telnet : PuttyBase
-			{
+	{
 				
-				public Telnet()
-				{
-					this.PuttyProtocol = Putty_Protocol.telnet;
-				}
+		public Telnet()
+		{
+			this.PuttyProtocol = Putty_Protocol.telnet;
+		}
 				
-				public enum Defaults
-				{
-					Port = 23
-				}
-			}
+		public enum Defaults
+		{
+			Port = 23
+		}
+	}
 }

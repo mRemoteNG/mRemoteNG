@@ -11,7 +11,6 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.My;
 using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.App;
 
 
 namespace mRemoteNG.UI.Window
@@ -143,9 +142,9 @@ namespace mRemoteNG.UI.Window
 				cMenTreeDelete.ShortcutKeys = Keys.Delete;
 						
 				mRemoteNG.Tree.Node.FinishRenameSelectedNode(e.Label);
-				Windows.configForm.pGrid_SelectedObjectChanged();
+                Runtime.Windows.configForm.pGrid_SelectedObjectChanged();
 				ShowHideTreeContextMenuItems(e.Node);
-				SaveConnectionsBG();
+                Runtime.SaveConnectionsBG();
 			}
 			catch (Exception ex)
 			{
@@ -159,26 +158,26 @@ namespace mRemoteNG.UI.Window
 			{
 				if ((mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.Node.Type.Connection) || (mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.Node.Type.PuttySession))
 				{
-					Windows.configForm.SetPropertyGridObject(e.Node.Tag);
+                    Runtime.Windows.configForm.SetPropertyGridObject(e.Node.Tag);
 				}
 				else if (mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.Node.Type.Container)
 				{
-					Windows.configForm.SetPropertyGridObject((e.Node.Tag as Container.Info).ConnectionInfo);
+                    Runtime.Windows.configForm.SetPropertyGridObject((e.Node.Tag as Container.Info).ConnectionInfo);
 				}
 				else if ((mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.Node.Type.Root) || (mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.Node.Type.PuttyRoot))
 				{
-					Windows.configForm.SetPropertyGridObject(e.Node.Tag);
+                    Runtime.Windows.configForm.SetPropertyGridObject(e.Node.Tag);
 				}
 				else
 				{
 					return;
 				}
-						
-				Windows.configForm.pGrid_SelectedObjectChanged();
+
+                Runtime.Windows.configForm.pGrid_SelectedObjectChanged();
 				ShowHideTreeContextMenuItems(e.Node);
-				Windows.sessionsForm.GetSessions(true);
-						
-				LastSelected = mRemoteNG.Tree.Node.GetConstantID(e.Node);
+                Runtime.Windows.sessionsForm.GetSessions(true);
+
+                Runtime.LastSelected = mRemoteNG.Tree.Node.GetConstantID(e.Node);
 			}
 			catch (Exception ex)
 			{
@@ -195,16 +194,16 @@ namespace mRemoteNG.UI.Window
 						
 				if (e.Button == MouseButtons.Left)
 				{
-					if (Settings.SingleClickOnConnectionOpensIt && 
+					if (My.Settings.Default.SingleClickOnConnectionOpensIt && 
 						(mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.Node.Type.Connection | 
 						mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.Node.Type.PuttySession))
 					{
-						OpenConnection();
+						Runtime.OpenConnection();
 					}
 							
-					if (Settings.SingleClickSwitchesToOpenConnection && mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.Node.Type.Connection)
+					if (My.Settings.Default.SingleClickSwitchesToOpenConnection && mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.Node.Type.Connection)
 					{
-						SwitchToOpenConnection(e.Node.Tag);
+                        Runtime.SwitchToOpenConnection((mRemoteNG.Connection.Info)e.Node.Tag);
 					}
 				}
 			}
@@ -219,7 +218,7 @@ namespace mRemoteNG.UI.Window
 			if (mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) == mRemoteNG.Tree.Node.Type.Connection | 
 				mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) == mRemoteNG.Tree.Node.Type.PuttySession)
 			{
-				OpenConnection();
+                Runtime.OpenConnection();
 			}
 		}
 				
@@ -267,7 +266,7 @@ namespace mRemoteNG.UI.Window
 						
 				if (mRemoteNG.Tree.Node.GetNodeType(selectedNode) == mRemoteNG.Tree.Node.Type.Connection)
 				{
-					mRemoteNG.Connection.Info connectionInfo = selectedNode.Tag;
+                    mRemoteNG.Connection.Info connectionInfo = (mRemoteNG.Connection.Info)selectedNode.Tag;
 							
 					if (connectionInfo.OpenConnections.Count == 0)
 					{
@@ -293,7 +292,7 @@ namespace mRemoteNG.UI.Window
 				}
 				else if (mRemoteNG.Tree.Node.GetNodeType(selectedNode) == mRemoteNG.Tree.Node.Type.PuttySession)
 				{
-					mRemoteNG.Connection.PuttySession.Info puttySessionInfo = selectedNode.Tag;
+                    mRemoteNG.Connection.PuttySession.Info puttySessionInfo = (mRemoteNG.Connection.PuttySession.Info)selectedNode.Tag;
 							
 					cMenTreeAddConnection.Enabled = false;
 					cMenTreeAddFolder.Enabled = false;
@@ -329,7 +328,7 @@ namespace mRemoteNG.UI.Window
 					{
 						if (node.Tag is mRemoteNG.Connection.Info)
 						{
-							connectionInfo = node.Tag;
+                            connectionInfo = (mRemoteNG.Connection.Info)node.Tag;
 							openConnections = openConnections + connectionInfo.OpenConnections.Count;
 						}
 					}
@@ -440,18 +439,19 @@ namespace mRemoteNG.UI.Window
 				{
 					if (mRemoteNG.Tree.Node.GetNodeType(dropNode.Parent) == mRemoteNG.Tree.Node.Type.Container)
 					{
-						dropNode.Tag.Parent = dropNode.Parent.Tag;
+                        ((mRemoteNG.Container.Info)dropNode.Tag).Parent = (mRemoteNG.Container.Info)dropNode.Parent.Tag;
 					}
 					else if (mRemoteNG.Tree.Node.GetNodeType(dropNode.Parent) == mRemoteNG.Tree.Node.Type.Root)
 					{
-						dropNode.Tag.Parent = null;
 						if (mRemoteNG.Tree.Node.GetNodeType(dropNode) == mRemoteNG.Tree.Node.Type.Connection)
 						{
-							dropNode.Tag.Inherit.TurnOffInheritanceCompletely();
+                            ((mRemoteNG.Connection.Info)dropNode.Tag).Parent = null;
+							((mRemoteNG.Connection.Info)dropNode.Tag).Inherit.TurnOffInheritanceCompletely();
 						}
 						else if (mRemoteNG.Tree.Node.GetNodeType(dropNode) == mRemoteNG.Tree.Node.Type.Container)
 						{
-							dropNode.Tag.ConnectionInfo.Inherit.TurnOffInheritanceCompletely();
+                            ((mRemoteNG.Container.Info)dropNode.Tag).Parent = null;
+							((mRemoteNG.Container.Info)dropNode.Tag).ConnectionInfo.Inherit.TurnOffInheritanceCompletely();
 						}
 					}
 				}
@@ -460,8 +460,8 @@ namespace mRemoteNG.UI.Window
 				//the user and select it
 				dropNode.EnsureVisible();
 				selectedTreeview.SelectedNode = dropNode;
-						
-				SaveConnectionsBG();
+
+                Runtime.SaveConnectionsBG();
 			}
 			catch (Exception ex)
 			{
@@ -573,43 +573,43 @@ namespace mRemoteNG.UI.Window
 		public void cMenTreeAddConnection_Click(System.Object sender, EventArgs e)
 		{
 			AddConnection();
-			SaveConnectionsBG();
+            Runtime.SaveConnectionsBG();
 		}
 				
 		public void cMenTreeAddFolder_Click(System.Object sender, EventArgs e)
 		{
 			AddFolder();
-			SaveConnectionsBG();
+            Runtime.SaveConnectionsBG();
 		}
 				
 		static public void cMenTreeConnect_Click(System.Object sender, EventArgs e)
 		{
-			OpenConnection(mRemoteNG.Connection.Info.Force.DoNotJump);
+            Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.DoNotJump);
 		}
 				
 		static public void cMenTreeConnectWithOptionsConnectToConsoleSession_Click(System.Object sender, EventArgs e)
 		{
-			OpenConnection(mRemoteNG.Connection.Info.Force.UseConsoleSession | mRemoteNG.Connection.Info.Force.DoNotJump);
+            Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.UseConsoleSession | mRemoteNG.Connection.Info.Force.DoNotJump);
 		}
 				
 		static public void cMenTreeConnectWithOptionsNoCredentials_Click(System.Object sender, EventArgs e)
 		{
-			OpenConnection(mRemoteNG.Connection.Info.Force.NoCredentials);
+            Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.NoCredentials);
 		}
 				
 		static public void cMenTreeConnectWithOptionsDontConnectToConsoleSession_Click(System.Object sender, EventArgs e)
 		{
-			OpenConnection(mRemoteNG.Connection.Info.Force.DontUseConsoleSession | mRemoteNG.Connection.Info.Force.DoNotJump);
+            Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.DontUseConsoleSession | mRemoteNG.Connection.Info.Force.DoNotJump);
 		}
 				
 		static public void cMenTreeConnectWithOptionsConnectInFullscreen_Click(System.Object sender, EventArgs e)
 		{
-			OpenConnection(mRemoteNG.Connection.Info.Force.Fullscreen | mRemoteNG.Connection.Info.Force.DoNotJump);
+            Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.Fullscreen | mRemoteNG.Connection.Info.Force.DoNotJump);
 		}
 				
 		static public void cMenTreeConnectWithOptionsChoosePanelBeforeConnecting_Click(System.Object sender, EventArgs e)
 		{
-			OpenConnection(mRemoteNG.Connection.Info.Force.OverridePanel | mRemoteNG.Connection.Info.Force.DoNotJump);
+            Runtime.OpenConnection(mRemoteNG.Connection.Info.Force.OverridePanel | mRemoteNG.Connection.Info.Force.DoNotJump);
 		}
 				
 		public void cMenTreeDisconnect_Click(System.Object sender, EventArgs e)
@@ -627,7 +627,7 @@ namespace mRemoteNG.UI.Window
 			tvConnections.BeginUpdate();
 			mRemoteNG.Tree.Node.Sort(tvConnections.Nodes[0], SortOrder.Ascending);
 			tvConnections.EndUpdate();
-			SaveConnectionsBG();
+            Runtime.SaveConnectionsBG();
 		}
 				
 		public void cMenTreeToolsSortAscending_Click(System.Object sender, EventArgs e)
@@ -635,7 +635,7 @@ namespace mRemoteNG.UI.Window
 			tvConnections.BeginUpdate();
 			mRemoteNG.Tree.Node.Sort(tvConnections.SelectedNode, SortOrder.Ascending);
 			tvConnections.EndUpdate();
-			SaveConnectionsBG();
+            Runtime.SaveConnectionsBG();
 		}
 				
 		public void cMenTreeToolsSortDescending_Click(System.Object sender, EventArgs e)
@@ -643,7 +643,7 @@ namespace mRemoteNG.UI.Window
 			tvConnections.BeginUpdate();
 			mRemoteNG.Tree.Node.Sort(tvConnections.SelectedNode, SortOrder.Descending);
 			tvConnections.EndUpdate();
-			SaveConnectionsBG();
+            Runtime.SaveConnectionsBG();
 		}
 				
 		public void cMenTree_DropDownOpening(object sender, EventArgs e)
@@ -653,56 +653,56 @@ namespace mRemoteNG.UI.Window
 				
 		private static void cMenTreeToolsExternalAppsEntry_Click(object sender, EventArgs e)
 		{
-			StartExternalApp(sender.Tag);
+			StartExternalApp((mRemoteNG.Tools.ExternalTool)((System.Windows.Forms.Control)sender).Tag);
 		}
 				
 		public void cMenTreeDuplicate_Click(System.Object sender, EventArgs e)
 		{
 			mRemoteNG.Tree.Node.CloneNode(tvConnections.SelectedNode);
-			SaveConnectionsBG();
+            Runtime.SaveConnectionsBG();
 		}
 				
 		static public void cMenTreeRename_Click(System.Object sender, EventArgs e)
 		{
 			mRemoteNG.Tree.Node.StartRenameSelectedNode();
-			SaveConnectionsBG();
+            Runtime.SaveConnectionsBG();
 		}
 				
 		static public void cMenTreeDelete_Click(System.Object sender, EventArgs e)
 		{
 			mRemoteNG.Tree.Node.DeleteSelectedNode();
-			SaveConnectionsBG();
+            Runtime.SaveConnectionsBG();
 		}
 				
 		static public void cMenTreeImportFile_Click(System.Object sender, EventArgs e)
 		{
-			Import.ImportFromFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode, true);
+            Import.ImportFromFile(Runtime.Windows.treeForm.tvConnections.Nodes[0], Runtime.Windows.treeForm.tvConnections.SelectedNode, true);
 		}
 				
 		static public void cMenTreeImportActiveDirectory_Click(System.Object sender, EventArgs e)
 		{
-			Windows.Show(Type.ActiveDirectoryImport);
+            Runtime.Windows.Show(Type.ActiveDirectoryImport);
 		}
 				
 		static public void cMenTreeImportPortScan_Click(System.Object sender, EventArgs e)
 		{
-			Windows.Show(UI.Window.Type.PortScan, true);
+            Runtime.Windows.Show(UI.Window.Type.PortScan, true);
 		}
 				
 		static public void cMenTreeExportFile_Click(System.Object sender, EventArgs e)
 		{
-			Export.ExportToFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode);
+            Export.ExportToFile(Runtime.Windows.treeForm.tvConnections.Nodes[0], Runtime.Windows.treeForm.tvConnections.SelectedNode);
 		}
 		static public void cMenTreeMoveUp_Click(System.Object sender, EventArgs e)
 		{
 			mRemoteNG.Tree.Node.MoveNodeUp();
-			SaveConnectionsBG();
+            Runtime.SaveConnectionsBG();
 		}
 				
 		static public void cMenTreeMoveDown_Click(System.Object sender, EventArgs e)
 		{
 			mRemoteNG.Tree.Node.MoveNodeDown();
-			SaveConnectionsBG();
+            Runtime.SaveConnectionsBG();
 		}
         #endregion
 				
@@ -736,12 +736,12 @@ namespace mRemoteNG.UI.Window
 				}
 				else
 				{
-					newConnectionInfo.Parent = containerNode.Tag;
+                    newConnectionInfo.Parent = (mRemoteNG.Container.Info)containerNode.Tag;
 				}
 						
 				newConnectionInfo.TreeNode = newTreeNode;
 				newTreeNode.Tag = newConnectionInfo;
-				ConnectionList.Add(newConnectionInfo);
+                Runtime.ConnectionList.Add(newConnectionInfo);
 						
 				containerNode.Nodes.Add(newTreeNode);
 						
@@ -793,8 +793,8 @@ namespace mRemoteNG.UI.Window
 				{
 					newContainerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely();
 				}
-						
-				ContainerList.Add(newContainerInfo);
+
+                Runtime.ContainerList.Add(newContainerInfo);
 				parentNode.Nodes.Add(newNode);
 						
 				tvConnections.SelectedNode = newNode;
@@ -814,7 +814,7 @@ namespace mRemoteNG.UI.Window
 				{
 					if (tvConnections.SelectedNode.Tag is mRemoteNG.Connection.Info)
 					{
-						mRemoteNG.Connection.Info conI = tvConnections.SelectedNode.Tag;
+                        mRemoteNG.Connection.Info conI = (mRemoteNG.Connection.Info)tvConnections.SelectedNode.Tag;
 						for (int i = 0; i <= conI.OpenConnections.Count - 1; i++)
 						{
 							conI.OpenConnections[i].Disconnect();
@@ -827,7 +827,7 @@ namespace mRemoteNG.UI.Window
 						{
 							if (n.Tag is mRemoteNG.Connection.Info)
 							{
-								mRemoteNG.Connection.Info conI = n.Tag;
+                                mRemoteNG.Connection.Info conI = (mRemoteNG.Connection.Info)n.Tag;
 								for (int i = 0; i <= conI.OpenConnections.Count - 1; i++)
 								{
 									conI.OpenConnections[i].Disconnect();
@@ -847,14 +847,14 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				Windows.Show(Type.SSHTransfer);
-						
-				mRemoteNG.Connection.Info conI = mRemoteNG.Tree.Node.SelectedNode.Tag;
-						
-				Windows.sshtransferForm.Hostname = conI.Hostname;
-				Windows.sshtransferForm.Username = conI.Username;
-				Windows.sshtransferForm.Password = conI.Password;
-				Windows.sshtransferForm.Port = System.Convert.ToString(conI.Port);
+                Runtime.Windows.Show(Type.SSHTransfer);
+
+                mRemoteNG.Connection.Info conI = (mRemoteNG.Connection.Info)mRemoteNG.Tree.Node.SelectedNode.Tag;
+
+                Runtime.Windows.sshtransferForm.Hostname = conI.Hostname;
+                Runtime.Windows.sshtransferForm.Username = conI.Username;
+                Runtime.Windows.sshtransferForm.Password = conI.Password;
+                Runtime.Windows.sshtransferForm.Port = System.Convert.ToString(conI.Port);
 			}
 			catch (Exception ex)
 			{
@@ -895,7 +895,7 @@ namespace mRemoteNG.UI.Window
 			{
 				if (mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) == mRemoteNG.Tree.Node.Type.Connection | mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) == mRemoteNG.Tree.Node.Type.PuttySession)
 				{
-					externalTool.Start(mRemoteNG.Tree.Node.SelectedNode.Tag);
+					externalTool.Start((mRemoteNG.Connection.Info)mRemoteNG.Tree.Node.SelectedNode.Tag);
 				}
 			}
 			catch (Exception ex)
@@ -1003,7 +1003,7 @@ namespace mRemoteNG.UI.Window
 					if (tvConnections.SelectedNode.Tag is mRemoteNG.Connection.Info)
 					{
 						e.Handled = true;
-						OpenConnection();
+                        Runtime.OpenConnection();
 					}
 					else
 					{

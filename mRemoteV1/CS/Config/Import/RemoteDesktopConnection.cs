@@ -31,13 +31,13 @@ namespace mRemoteNG.Config.Import
 				
 			if (treeNode.Parent.Tag is Container.Info)
 			{
-				connectionInfo.Parent = treeNode.Parent.Tag;
+                connectionInfo.Parent = (Container.Info)treeNode.Parent.Tag;
 			}
 				
 			treeNode.Name = name;
 			treeNode.Tag = connectionInfo;
-			treeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed;
-			treeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed;
+			treeNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+			treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
 				
 			foreach (string line in lines)
 			{
@@ -53,7 +53,7 @@ namespace mRemoteNG.Config.Import
 				SetConnectionInfoParameter(connectionInfo, key, value);
 			}
 				
-			ConnectionList.Add(connectionInfo);
+			Runtime.ConnectionList.Add(connectionInfo);
 		}
 			
 		private static void SetConnectionInfoParameter(Connection.Info connectionInfo, string key, string value)
@@ -72,7 +72,7 @@ namespace mRemoteNG.Config.Import
 					}
 					break;
 				case "server port":
-					connectionInfo.Port = value;
+					connectionInfo.Port = System.Convert.ToInt32(value);
 					break;
 				case "username":
 					connectionInfo.Username = value;

@@ -9,7 +9,6 @@ using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using System.ComponentModel;
-using mRemoteNG.Config;
 using mRemoteNG.Tools;
 using System.Reflection;
 using mRemoteNG.App;
@@ -203,8 +202,8 @@ namespace mRemoteNG.Connection
 		private string _puttySession; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNamePuttySession"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPuttySession"), 
-            TypeConverter(typeof(Putty.Sessions.SessionList))]
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPuttySession"),
+            TypeConverter(typeof(Config.Putty.Sessions.SessionList))]
         public virtual string PuttySession
 		{
 			get
@@ -1100,7 +1099,7 @@ namespace mRemoteNG.Connection
 				Info parentConnectionInfo = default(Info);
 				if (IsContainer)
 				{
-					parentConnectionInfo = Parent.Parent.ConnectionInfo;
+					parentConnectionInfo = ((Container.Info)Parent.Parent).ConnectionInfo;
 				}
 				else
 				{
@@ -1109,7 +1108,7 @@ namespace mRemoteNG.Connection
 					
 				Type connectionInfoType = parentConnectionInfo.GetType();
 				PropertyInfo parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
-				TPropertyType parentPropertyValue = parentPropertyInfo.GetValue(parentConnectionInfo, BindingFlags.GetProperty, null, null, null);
+                TPropertyType parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(parentConnectionInfo, BindingFlags.GetProperty, null, null, null);
 					
 				return parentPropertyValue;
 			}
@@ -1167,10 +1166,12 @@ namespace mRemoteNG.Connection
 				{
                     return (int)Connection.Protocol.IntegratedProgram.Defaults.Port;
 				}
+                return 0;
 			}
 			catch (Exception ex)
 			{
                 Runtime.MessageCollector.AddExceptionMessage(My.Language.strConnectionSetDefaultPortFailed, ex, Messages.MessageClass.ErrorMsg);
+                return 0;
 			}
 		}
         #endregion

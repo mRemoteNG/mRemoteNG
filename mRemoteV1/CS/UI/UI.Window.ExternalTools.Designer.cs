@@ -153,7 +153,7 @@ namespace mRemoteNG.UI.Window
 					//
 					//NewToolMenuItem
 					//
-					this.NewToolMenuItem.Image = global::My.Resources.Resources.ExtApp_Add;
+					this.NewToolMenuItem.Image = My.Resources.ExtApp_Add;
 					this.NewToolMenuItem.Name = "NewToolMenuItem";
 					this.NewToolMenuItem.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Shift | System.Windows.Forms.Keys.F4);
 					this.NewToolMenuItem.Size = new System.Drawing.Size(220, 22);
@@ -161,7 +161,7 @@ namespace mRemoteNG.UI.Window
 					//
 					//DeleteToolMenuItem
 					//
-					this.DeleteToolMenuItem.Image = global::My.Resources.Resources.ExtApp_Delete;
+					this.DeleteToolMenuItem.Image = My.Resources.ExtApp_Delete;
 					this.DeleteToolMenuItem.Name = "DeleteToolMenuItem";
 					this.DeleteToolMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete;
 					this.DeleteToolMenuItem.Size = new System.Drawing.Size(220, 22);
@@ -174,7 +174,7 @@ namespace mRemoteNG.UI.Window
 					//
 					//LaunchToolMenuItem
 					//
-					this.LaunchToolMenuItem.Image = global::My.Resources.Resources.ExtApp_Start;
+					this.LaunchToolMenuItem.Image = My.Resources.ExtApp_Start;
 					this.LaunchToolMenuItem.Name = "LaunchToolMenuItem";
 					this.LaunchToolMenuItem.Size = new System.Drawing.Size(220, 22);
 					this.LaunchToolMenuItem.Text = "Launch External Tool";
@@ -329,7 +329,7 @@ namespace mRemoteNG.UI.Window
 					//
 					//NewToolToolstripButton
 					//
-					this.NewToolToolstripButton.Image = global::My.Resources.Resources.ExtApp_Add;
+					this.NewToolToolstripButton.Image = My.Resources.ExtApp_Add;
 					this.NewToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 					this.NewToolToolstripButton.Name = "NewToolToolstripButton";
 					this.NewToolToolstripButton.Size = new System.Drawing.Size(51, 22);
@@ -337,7 +337,7 @@ namespace mRemoteNG.UI.Window
 					//
 					//DeleteToolToolstripButton
 					//
-					this.DeleteToolToolstripButton.Image = global::My.Resources.Resources.ExtApp_Delete;
+					this.DeleteToolToolstripButton.Image = My.Resources.ExtApp_Delete;
 					this.DeleteToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 					this.DeleteToolToolstripButton.Name = "DeleteToolToolstripButton";
 					this.DeleteToolToolstripButton.Size = new System.Drawing.Size(60, 22);
@@ -350,7 +350,7 @@ namespace mRemoteNG.UI.Window
 					//
 					//LaunchToolToolstripButton
 					//
-					this.LaunchToolToolstripButton.Image = global::My.Resources.Resources.ExtApp_Start;
+					this.LaunchToolToolstripButton.Image = My.Resources.ExtApp_Start;
 					this.LaunchToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 					this.LaunchToolToolstripButton.Name = "LaunchToolToolstripButton";
 					this.LaunchToolToolstripButton.Size = new System.Drawing.Size(66, 22);

@@ -67,7 +67,7 @@ namespace mRemoteNG.UI.Window
 			this.ClientSize = new System.Drawing.Size(446, 362);
 			this.Controls.Add(this.pnlContainer);
 			this.Controls.Add(this.tsMain);
-			this.Icon = global::My.Resources.UVNC_SC_Icon;
+			this.Icon = My.Resources.UVNC_SC_Icon;
 			this.Name = "UltraVNCSC";
 			this.TabText = "UltraVNC SC";
 			this.Text = "UltraVNC SC";

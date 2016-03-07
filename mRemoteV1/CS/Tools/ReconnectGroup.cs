@@ -29,11 +29,11 @@ namespace mRemoteNG
 			{
 				if (value == true)
 				{
-					SetStatusImage(global::My.Resources.HostStatus_On);
+					SetStatusImage(My.Resources.HostStatus_On);
 				}
 				else
 				{
-					SetStatusImage(global::My.Resources.HostStatus_Off);
+					SetStatusImage(My.Resources.HostStatus_Off);
 				}
 				
 				_ServerReady = value;

@@ -68,13 +68,13 @@ namespace mRemoteNG.Tools
 				Marshal.StructureToPtr(trustFileInfo, trustFileInfoPointer, false);
 					
 				Win32.WINTRUST_DATA trustData = new Win32.WINTRUST_DATA();
-				trustData.dwUIChoice = Display;
+				trustData.dwUIChoice = (uint)Display;
 				trustData.fdwRevocationChecks = Win32.WTD_REVOKE_WHOLECHAIN;
 				trustData.dwUnionChoice = Win32.WTD_CHOICE_FILE;
 				trustData.pFile = trustFileInfoPointer;
 				trustData.dwStateAction = Win32.WTD_STATEACTION_IGNORE;
 				trustData.dwProvFlags = Win32.WTD_DISABLE_MD2_MD4;
-				trustData.dwUIContext = DisplayContext;
+				trustData.dwUIContext = (uint)DisplayContext;
 				trustDataPointer = Marshal.AllocCoTaskMem(Marshal.SizeOf(trustData));
 				Marshal.StructureToPtr(trustData, trustDataPointer, false);
 					

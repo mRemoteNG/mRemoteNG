@@ -32,22 +32,13 @@ namespace mRemoteNG.Tree
         private static TreeView _TreeView;
         public static TreeView TreeView
 		{
-			get
-			{
-				return _TreeView;
-			}
-			set
-			{
-				_TreeView = value;
-			}
+			get { return _TreeView; }
+			set { _TreeView = value; }
 		}
 			
         public static TreeNode SelectedNode
 		{
-			get
-			{
-				return _TreeView.SelectedNode;
-			}
+			get { return _TreeView.SelectedNode; }
 			set
 			{
 				treeNodeToBeSelected = value;
@@ -71,7 +62,6 @@ namespace mRemoteNG.Tree
 				_TreeView.SelectedNode = treeNodeToBeSelected;
 			}
 		}
-			
 			
 		public static string GetConstantID(TreeNode node)
 		{
@@ -525,7 +515,7 @@ namespace mRemoteNG.Tree
 				
 			if (newName.Length > 0)
 			{
-				SelectedNode.Tag.Name = newName;
+				((Connection.Info)SelectedNode.Tag).Name = newName;
 					
 				if (My.Settings.Default.SetHostnameLikeDisplayName)
 				{

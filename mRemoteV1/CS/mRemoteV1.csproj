@@ -191,82 +191,83 @@
     <Compile Include="Config\Putty\Sessions.cs" />
     <Compile Include="Config\Putty\Provider.cs" />
     <Compile Include="Connection\Connection.Info.Inheritance.cs" />
-    <Compile Include="Controls\ListView.cs">
+    <Compile Include="UI\Controls\ListView.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\QuickConnectComboBox.cs">
+    <Compile Include="UI\Controls\QuickConnectComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\TextBox.cs">
+    <Compile Include="UI\Controls\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Controls\ToolStripSplitButton.cs">
+    <Compile Include="UI\Controls\ToolStripSplitButton.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Config\KeyboardShortcuts.cs" />
-    <Compile Include="Forms\OptionsPages\AdvancedPage.Designer.cs">
+    <Compile Include="UI\Forms\OptionsPages\AdvancedPage.Designer.cs">
       <DependentUpon>AdvancedPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OptionsPages\AdvancedPage.cs">
+    <Compile Include="UI\Forms\OptionsPages\AdvancedPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\OptionsPages\AppearancePage.Designer.cs">
+    <Compile Include="UI\Forms\OptionsPages\AppearancePage.Designer.cs">
       <DependentUpon>AppearancePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OptionsPages\AppearancePage.cs">
+    <Compile Include="UI\Forms\OptionsPages\AppearancePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\OptionsPages\ConnectionsPage.Designer.cs">
+    <Compile Include="UI\Forms\OptionsPages\ConnectionsPage.Designer.cs">
       <DependentUpon>ConnectionsPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OptionsPages\ConnectionsPage.cs">
+    <Compile Include="UI\Forms\OptionsPages\ConnectionsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\OptionsForm.Designer.cs">
+    <Compile Include="UI\Forms\OptionsForm.Designer.cs">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OptionsForm.cs">
+    <Compile Include="UI\Forms\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\OptionsPages\KeyboardPage.Designer.cs">
+    <Compile Include="UI\Forms\OptionsPages\KeyboardPage.Designer.cs">
       <DependentUpon>KeyboardPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OptionsPages\KeyboardPage.cs">
+    <Compile Include="UI\Forms\OptionsPages\KeyboardPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\OptionsPages\OptionsPage.cs">
+    <Compile Include="UI\Forms\OptionsPages\OptionsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\OptionsPages\SqlServerPage.Designer.cs">
+    <Compile Include="UI\Forms\OptionsPages\SqlServerPage.Designer.cs">
       <DependentUpon>SqlServerPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OptionsPages\SqlServerPage.cs">
+    <Compile Include="UI\Forms\OptionsPages\SqlServerPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\OptionsPages\StartupExitPage.Designer.cs">
+    <Compile Include="UI\Forms\OptionsPages\StartupExitPage.Designer.cs">
       <DependentUpon>StartupExitPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OptionsPages\StartupExitPage.cs">
+    <Compile Include="UI\Forms\OptionsPages\StartupExitPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\OptionsPages\TabsPanelsPage.Designer.cs">
+    <Compile Include="UI\Forms\OptionsPages\TabsPanelsPage.Designer.cs">
       <DependentUpon>TabsPanelsPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OptionsPages\TabsPanelsPage.cs">
+    <Compile Include="UI\Forms\OptionsPages\TabsPanelsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\OptionsPages\ThemePage.Designer.cs">
+    <Compile Include="UI\Forms\OptionsPages\ThemePage.Designer.cs">
       <DependentUpon>ThemePage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OptionsPages\ThemePage.cs">
+    <Compile Include="UI\Forms\OptionsPages\ThemePage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Forms\OptionsPages\UpdatesPage.Designer.cs">
+    <Compile Include="UI\Forms\OptionsPages\UpdatesPage.Designer.cs">
       <DependentUpon>UpdatesPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\OptionsPages\UpdatesPage.cs">
+    <Compile Include="UI\Forms\OptionsPages\UpdatesPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
+    <Compile Include="Settings.cs" />
     <Compile Include="Tools\Authenticode.cs" />
     <Compile Include="Tools\EnumWindows.cs" />
     <Compile Include="Tools\EnvironmentInfo.cs" />
@@ -280,7 +281,9 @@
     <Compile Include="Connection\Connection.InterfaceControl.Designer.cs">
       <DependentUpon>Connection.InterfaceControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Connection\Connection.InterfaceControl.cs" />
+    <Compile Include="Connection\Connection.InterfaceControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Connection\Connection.List.cs" />
     <Compile Include="Connection\Connection.Protocol.Base.cs" />
     <Compile Include="Connection\Connection.Protocol.HTTP.cs" />
@@ -305,22 +308,22 @@
     <Compile Include="Container\Container.List.cs" />
     <Compile Include="Credential\Credential.Info.cs" />
     <Compile Include="Credential\Credential.List.cs" />
-    <Compile Include="Forms\frmChoosePanel.Designer.cs">
+    <Compile Include="UI\Forms\frmChoosePanel.Designer.cs">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmChoosePanel.cs">
+    <Compile Include="UI\Forms\frmChoosePanel.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmMain.Designer.cs">
+    <Compile Include="UI\Forms\frmMain.Designer.cs">
       <DependentUpon>frmMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\frmMain.cs">
+    <Compile Include="UI\Forms\frmMain.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\PasswordForm.Designer.cs">
+    <Compile Include="UI\Forms\PasswordForm.Designer.cs">
       <DependentUpon>PasswordForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\PasswordForm.cs">
+    <Compile Include="UI\Forms\PasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Images\Images.Enums.cs" />
@@ -399,7 +402,7 @@
     <Compile Include="UI\UI.Window.ErrorsAndInfos.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ExportForm.Designer.cs">
+    <Compile Include="UI\Forms\ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\UI.Window.ExternalTools.Designer.cs">
@@ -418,7 +421,7 @@
     <Compile Include="UI\UI.Window.PortScan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ExportForm.cs">
+    <Compile Include="UI\Forms\ExportForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UI.Window.ScreenshotManager.cs">
@@ -451,46 +454,46 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Forms\frmChoosePanel.resx">
+    <EmbeddedResource Include="UI\Forms\frmChoosePanel.resx">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\frmMain.resx">
+    <EmbeddedResource Include="UI\Forms\frmMain.resx">
       <DependentUpon>frmMain.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\PasswordForm.resx">
+    <EmbeddedResource Include="UI\Forms\PasswordForm.resx">
       <DependentUpon>PasswordForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OptionsPages\AdvancedPage.resx">
+    <EmbeddedResource Include="UI\Forms\OptionsPages\AdvancedPage.resx">
       <DependentUpon>AdvancedPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OptionsPages\AppearancePage.resx">
+    <EmbeddedResource Include="UI\Forms\OptionsPages\AppearancePage.resx">
       <DependentUpon>AppearancePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OptionsPages\ConnectionsPage.resx">
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ConnectionsPage.resx">
       <DependentUpon>ConnectionsPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OptionsForm.resx">
+    <EmbeddedResource Include="UI\Forms\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OptionsPages\KeyboardPage.resx">
+    <EmbeddedResource Include="UI\Forms\OptionsPages\KeyboardPage.resx">
       <DependentUpon>KeyboardPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OptionsPages\SqlServerPage.resx">
+    <EmbeddedResource Include="UI\Forms\OptionsPages\SqlServerPage.resx">
       <DependentUpon>SqlServerPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OptionsPages\StartupExitPage.resx">
+    <EmbeddedResource Include="UI\Forms\OptionsPages\StartupExitPage.resx">
       <DependentUpon>StartupExitPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OptionsPages\TabsPanelsPage.resx">
+    <EmbeddedResource Include="UI\Forms\OptionsPages\TabsPanelsPage.resx">
       <DependentUpon>TabsPanelsPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OptionsPages\ThemePage.resx">
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ThemePage.resx">
       <DependentUpon>ThemePage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\OptionsPages\UpdatesPage.resx">
+    <EmbeddedResource Include="UI\Forms\OptionsPages\UpdatesPage.resx">
       <DependentUpon>UpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Language\Language.de.resx">
@@ -521,7 +524,7 @@
     <EmbeddedResource Include="Language\Language.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>My</CustomToolNamespace>
+      <CustomToolNamespace>mRemoteNG.My</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Language\Language.fr.resx">
@@ -545,7 +548,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <CustomToolNamespace>mRemoteNG.My</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\ReconnectGroup.resx">
@@ -592,7 +595,7 @@
       <DependentUpon>UI.Window.PortScan.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ExportForm.resx">
+    <EmbeddedResource Include="UI\Forms\ExportForm.resx">
       <DependentUpon>ExportForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -1020,7 +1023,7 @@
     <None Include="Resources\Icons\Info_Icon.ico" />
     <None Include="app.config" />
     <None Include="Properties\Settings.settings">
-      <CustomToolNamespace>My</CustomToolNamespace>
+      <CustomToolNamespace>mRemoteNG.My</CustomToolNamespace>
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>

@@ -8,7 +8,6 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-//using mRemoteNG.Tools.PortScan;
 using mRemoteNG.My;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
@@ -136,20 +135,18 @@ namespace mRemoteNG.UI.Window
 				
 		public void btnImport_Click(System.Object sender, EventArgs e)
 		{
-			mRemoteNG.Connection.Protocol.Protocols protocol = Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.Protocols), System.Convert.ToString(cbProtocol.SelectedItem));
+            mRemoteNG.Connection.Protocol.Protocols protocol = (mRemoteNG.Connection.Protocol.Protocols)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.Protocols), System.Convert.ToString(cbProtocol.SelectedItem));
 					
 			List<Tools.PortScan.ScanHost> hosts = new List<Tools.PortScan.ScanHost>();
 			foreach (ListViewItem item in lvHosts.SelectedItems)
 			{
-				Tools.PortScan.ScanHost scanHost = item.Tag as Tools.PortScan.ScanHost;
+                Tools.PortScan.ScanHost scanHost = (Tools.PortScan.ScanHost)item.Tag;
 				if (scanHost != null)
 				{
-					hosts.Add(item.Tag);
+					hosts.Add(scanHost);
 				}
 			}
-					
 			App.Import.ImportFromPortScan(hosts, protocol);
-					
 			DialogResult = DialogResult.OK;
 			Close();
 		}

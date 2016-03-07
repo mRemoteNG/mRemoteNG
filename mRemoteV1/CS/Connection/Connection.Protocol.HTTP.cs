@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,29 +8,28 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
 
 
 namespace mRemoteNG.Connection.Protocol
 {
 	public class HTTP : HTTPBase
-			{
+	{
 				
-				public HTTP(RenderingEngine RenderingEngine) : base(RenderingEngine)
-				{
-				}
+		public HTTP(RenderingEngine RenderingEngine) : base(RenderingEngine)
+		{
+		}
 				
-				public override void NewExtended()
-				{
-					base.NewExtended();
+		public override void NewExtended()
+		{
+			base.NewExtended();
 					
-					httpOrS = "http";
-					defaultPort = Defaults.Port;
-				}
+			httpOrS = "http";
+			defaultPort = (int)Defaults.Port;
+		}
 				
-				public enum Defaults
-				{
-					Port = 80
-				}
-			}
+		public enum Defaults
+		{
+			Port = 80
+		}
+	}
 }

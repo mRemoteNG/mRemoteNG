@@ -329,12 +329,12 @@ namespace mRemoteNG.App
 		private static DownloadStringCompletedEventArgs NewDownloadStringCompletedEventArgs(string result, Exception exception, bool cancelled, object userToken)
 		{
 			Type type = typeof(DownloadStringCompletedEventArgs);
-			const BindingFlags bindingFlags = bindingFlags.NonPublic | bindingFlags.Instance;
+            const BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
 			Type[] argumentTypes = new Type[] {typeof(string), typeof(Exception), typeof(bool), typeof(object)};
 			ConstructorInfo constructor = type.GetConstructor(bindingFlags, null, argumentTypes, null);
 			object[] arguments = new object[] {result, exception, cancelled, userToken};
-				
-			return constructor.Invoke(arguments);
+
+            return (DownloadStringCompletedEventArgs)constructor.Invoke(arguments);
 		}
 			
 		private DownloadStringCompletedEventArgs DownloadString(Uri address)
@@ -430,7 +430,7 @@ namespace mRemoteNG.App
 					updateAuthenticode.RequireThumbprintMatch = true;
 					updateAuthenticode.ThumbprintToMatch = _currentUpdateInfo.CertificateThumbprint;
 						
-					if (!(updateAuthenticode.Verify() == (int) Authenticode.StatusValue.Verified))
+					if (!(updateAuthenticode.Verify() == Authenticode.StatusValue.Verified))
 					{
 						if (updateAuthenticode.Status == Authenticode.StatusValue.UnhandledException)
 						{
@@ -566,17 +566,17 @@ namespace mRemoteNG.App
 					string[] lines = content.Split(lineSeparators.ToString().ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 					foreach (string line in lines)
 					{
-						line = line.Trim();
-						if (line.Length == 0)
+						string trimmedLine = line.Trim();
+                        if (trimmedLine.Length == 0)
 						{
 							continue;
 						}
-						if (!(line.Substring(0, 1).IndexOfAny(commentCharacters.ToString().ToCharArray()) == -1))
+                        if (!(trimmedLine.Substring(0, 1).IndexOfAny(commentCharacters.ToString().ToCharArray()) == -1))
 						{
 							continue;
 						}
-							
-						string[] parts = line.Split(keyValueSeparators.ToString().ToCharArray(), 2);
+
+                        string[] parts = trimmedLine.Split(keyValueSeparators.ToString().ToCharArray(), 2);
 						if (!(parts.Length == 2))
 						{
 							continue;
@@ -597,7 +597,7 @@ namespace mRemoteNG.App
 				{
 					return string.Empty;
 				}
-				return this[key];
+				return this._items[key];
 			}
 				
 			public Version GetVersion(string key)

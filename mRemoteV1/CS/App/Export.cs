@@ -45,10 +45,10 @@ namespace mRemoteNG.App
 						
 					switch (exportForm.Scope)
 					{
-						case exportForm.ExportScope.SelectedFolder:
+						case mRemoteNG.Forms.ExportForm.ExportScope.SelectedFolder:
 							exportTreeNode = exportForm.SelectedFolder;
 							break;
-						case exportForm.ExportScope.SelectedConnection:
+                        case mRemoteNG.Forms.ExportForm.ExportScope.SelectedConnection:
 							exportTreeNode = exportForm.SelectedConnection;
 							break;
 						default:
@@ -77,19 +77,19 @@ namespace mRemoteNG.App
 				
 			try
 			{
-				if (TimerSqlWatcher != null)
+				if (Runtime.TimerSqlWatcher != null)
 				{
-					previousTimerEnabled = TimerSqlWatcher.Enabled;
-					TimerSqlWatcher.Enabled = false;
+                    previousTimerEnabled = Runtime.TimerSqlWatcher.Enabled;
+                    Runtime.TimerSqlWatcher.Enabled = false;
 				}
 					
 				Config.Connections.Save connectionsSave = new Config.Connections.Save();
 				connectionsSave.Export = true;
 				connectionsSave.ConnectionFileName = fileName;
 				connectionsSave.SaveFormat = saveFormat;
-					
-				connectionsSave.ConnectionList = ConnectionList;
-				connectionsSave.ContainerList = ContainerList;
+
+                connectionsSave.ConnectionList = Runtime.ConnectionList;
+                connectionsSave.ContainerList = Runtime.ContainerList;
 				connectionsSave.RootTreeNode = rootNode;
 					
 				connectionsSave.SaveSecurity = saveSecurity;
@@ -102,9 +102,9 @@ namespace mRemoteNG.App
 			}
 			finally
 			{
-				if (TimerSqlWatcher != null)
+                if (Runtime.TimerSqlWatcher != null)
 				{
-					TimerSqlWatcher.Enabled = previousTimerEnabled;
+                    Runtime.TimerSqlWatcher.Enabled = previousTimerEnabled;
 				}
 			}
 		}

@@ -275,7 +275,7 @@ namespace mRemoteNG.UI.Window
 			//
 			this.btnTransfer.Anchor = (System.Windows.Forms.AnchorStyles) (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right);
 			this.btnTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnTransfer.Image = global::My.Resources.Resources.SSHTransfer;
+			this.btnTransfer.Image = My.Resources.SSHTransfer;
 			this.btnTransfer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnTransfer.Location = new System.Drawing.Point(597, 382);
 			this.btnTransfer.Name = "btnTransfer";
@@ -424,7 +424,7 @@ namespace mRemoteNG.UI.Window
 				sshT.OnTransferProgress += SshTransfer_Progress;
 				sshT.OnTransferEnd += SshTransfer_End;
 						
-				this.sshT.Connect((int) this.txtPort.Text);
+				this.sshT.Connect(System.Convert.ToInt32(this.txtPort.Text));
 						
 				LocalFile = this.txtLocalFile.Text;
 				RemoteFile = this.txtRemoteFile.Text;
@@ -483,8 +483,8 @@ namespace mRemoteNG.UI.Window
 		}
 				
 				
-		private long maxVal;
-		private long curVal;
+		private int maxVal;
+        private int curVal;
 				
 		delegate void SetStatusCB();
 		private void SetStatus()

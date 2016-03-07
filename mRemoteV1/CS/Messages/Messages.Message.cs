@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,7 +8,6 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
 
 
 namespace mRemoteNG.Messages
@@ -23,44 +21,44 @@ namespace mRemoteNG.Messages
 	}
 		
 	public class Message
+	{
+		private MessageClass _MsgClass;
+        public MessageClass MsgClass
 		{
-			private MessageClass _MsgClass;
-public MessageClass MsgClass
+			get
 			{
-				get
-				{
-					return _MsgClass;
-				}
-				set
-				{
-					_MsgClass = value;
-				}
+				return _MsgClass;
 			}
-			
-			private string _MsgText;
-public string MsgText
+			set
 			{
-				get
-				{
-					return _MsgText;
-				}
-				set
-				{
-					_MsgText = value;
-				}
-			}
-			
-			private DateTime _MsgDate;
-public DateTime MsgDate
-			{
-				get
-				{
-					return _MsgDate;
-				}
-				set
-				{
-					_MsgDate = value;
-				}
+				_MsgClass = value;
 			}
 		}
+			
+		private string _MsgText;
+        public string MsgText
+		{
+			get
+			{
+				return _MsgText;
+			}
+			set
+			{
+				_MsgText = value;
+			}
+		}
+			
+		private DateTime _MsgDate;
+        public DateTime MsgDate
+		{
+			get
+			{
+				return _MsgDate;
+			}
+			set
+			{
+				_MsgDate = value;
+			}
+		}
+	}
 }

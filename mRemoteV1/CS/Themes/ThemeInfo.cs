@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,10 +8,7 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
 using System.ComponentModel;
-//using mRemoteNG.Tools.LocalizedAttributes;
 using mRemoteNG.My;
 using mRemoteNG.Tools;
 
@@ -21,7 +17,7 @@ namespace mRemoteNG.Themes
 {
 	public class ThemeInfo : ICloneable, INotifyPropertyChanged
 	{
-#region Public Methods
+        #region Public Methods
 		public ThemeInfo(string themeName = null)
 		{
 			// VBConversions Note: Non-static class variable initialization is below.  Class variables cannot be initially assigned non-static values in C#.
@@ -66,9 +62,9 @@ namespace mRemoteNG.Themes
 				
 			return true;
 		}
-#endregion
+        #endregion
 			
-#region Events
+        #region Events
 		public event PropertyChangedEventHandler PropertyChanged;
 		protected void NotifyPropertyChanged(string propertyName)
 		{
@@ -76,9 +72,9 @@ namespace mRemoteNG.Themes
 				(PropertyChanged != null)
 				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
-#endregion
+        #endregion
 			
-#region Properties
+        #region Properties
 		private string _name; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [Browsable(false)]
         public string Name
@@ -98,7 +94,7 @@ namespace mRemoteNG.Themes
 			}
 		}
 			
-#region General
+        #region General
 		private Color _windowBackgroundColor; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strThemeCategoryGeneral", 1),
             LocalizedAttributes.LocalizedDisplayName("strThemeNameWindowBackgroundColor"),
@@ -204,9 +200,9 @@ namespace mRemoteNG.Themes
 				NotifyPropertyChanged("ToolbarTextColor");
 			}
 		}
-#endregion
+        #endregion
 			
-#region Connections Panel
+        #region Connections Panel
 		private Color _connectionsPanelBackgroundColor; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strThemeCategoryConnectionsPanel", 2),
             LocalizedAttributes.LocalizedDisplayName("strThemeNameConnectionsPanelBackgroundColor"),
@@ -332,9 +328,9 @@ namespace mRemoteNG.Themes
 				NotifyPropertyChanged("SearchBoxTextColor");
 			}
 		}
-#endregion
+        #endregion
 			
-#region Config Panel
+        #region Config Panel
 		private Color _configPanelBackgroundColor; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strThemeCategoryConfigPanel", 3),
             LocalizedAttributes.LocalizedDisplayName("strThemeNameConfigPanelBackgroundColor"),
@@ -460,7 +456,7 @@ namespace mRemoteNG.Themes
 				NotifyPropertyChanged("ConfigPanelGridLineColor");
 			}
 		}
-#endregion
-#endregion
+        #endregion
+        #endregion
 	}
 }

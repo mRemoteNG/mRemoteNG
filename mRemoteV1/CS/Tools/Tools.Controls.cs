@@ -86,7 +86,7 @@ namespace mRemoteNG.Tools
 				{
 					this._cMenCons = new ToolStripMenuItem();
 					this._cMenCons.Text = My.Language.strConnections;
-					this._cMenCons.Image = global::My.Resources.Root;
+					this._cMenCons.Image = My.Resources.Root;
 						
 					this._cMenSep1 = new ToolStripSeparator();
 						
@@ -102,7 +102,7 @@ namespace mRemoteNG.Tools
 					this._nI = new NotifyIcon();
 					this._nI.Text = "mRemote";
 					this._nI.BalloonTipText = "mRemote";
-					this._nI.Icon = global::My.Resources.mRemote_Icon;
+					this._nI.Icon = My.Resources.mRemote_Icon;
 					this._nI.ContextMenuStrip = this._cMen;
 					this._nI.Visible = true;
 						
@@ -155,7 +155,7 @@ namespace mRemoteNG.Tools
 							
 						if (Tree.Node.GetNodeType(tNode) == Tree.Node.Type.Container)
 						{
-							tMenItem.Image = global::My.Resources.Folder;
+							tMenItem.Image = My.Resources.Folder;
 							tMenItem.Tag = tNode.Tag;
 								
 							menToolStrip.DropDownItems.Add(tMenItem);

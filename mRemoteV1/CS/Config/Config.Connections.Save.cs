@@ -13,7 +13,7 @@ using System.IO;
 using System.Globalization;
 using mRemoteNG.App;
 using System.Data.SqlClient;
-//using mRemoteNG.Tools.Misc;
+using mRemoteNG.Tools;
 
 
 namespace mRemoteNG.Config.Connections
@@ -59,7 +59,7 @@ namespace mRemoteNG.Config.Connections
         #endregion
 				
         #region Public Methods
-		public void Save_Renamed()
+		public void Save()
 		{
 			switch (SaveFormat)
 			{
@@ -182,7 +182,7 @@ namespace mRemoteNG.Config.Connections
 			}
 					
 			TreeNode tN = default(TreeNode);
-			tN = RootTreeNode.Clone();
+			tN = (TreeNode)RootTreeNode.Clone();
 					
 			string strProtected = "";
 			if (tN.Tag != null)
@@ -204,8 +204,8 @@ namespace mRemoteNG.Config.Connections
 					
 			_sqlQuery = new SqlCommand("DELETE FROM tblRoot", _sqlConnection);
 			_sqlQuery.ExecuteNonQuery();
-					
-			_sqlQuery = new SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" + PrepareValueForDB(tN.Text) + "\', 0, \'" + strProtected + "\'," + App.Info.Connections.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")", _sqlConnection);
+
+            _sqlQuery = new SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" + Misc.PrepareValueForDB(tN.Text) + "\', 0, \'" + strProtected + "\'," + App.Info.Connections.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")", _sqlConnection);
 			_sqlQuery.ExecuteNonQuery();
 					
 			_sqlQuery = new SqlCommand("DELETE FROM tblCons", _sqlConnection);
@@ -238,14 +238,14 @@ namespace mRemoteNG.Config.Connections
 				if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Connection | Tree.Node.GetNodeType(node) == Tree.Node.Type.Container)
 				{
 					//_xmlTextWriter.WriteStartElement("Node")
-					_sqlQuery.CommandText += "\'" + PrepareValueForDB(node.Text) + "\',"; //Name
+					_sqlQuery.CommandText += "\'" + Misc.PrepareValueForDB(node.Text) + "\',"; //Name
 					_sqlQuery.CommandText += "\'" + Tree.Node.GetNodeType(node).ToString() + "\',"; //Type
 				}
 						
 				if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Container) //container
 				{
-					_sqlQuery.CommandText += "\'" + this._ContainerList[node.Tag].IsExpanded + "\',"; //Expanded
-					curConI = this._ContainerList[node.Tag].ConnectionInfo;
+					_sqlQuery.CommandText += "\'" + this.ContainerList[node.Tag].IsExpanded + "\',"; //Expanded
+					curConI = this.ContainerList[node.Tag].ConnectionInfo;
 					SaveConnectionFieldsSQL(curConI);
 							
 					_sqlQuery.CommandText = Tools.Misc.PrepareForDB(_sqlQuery.CommandText);
@@ -258,7 +258,7 @@ namespace mRemoteNG.Config.Connections
 				if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Connection)
 				{
 					_sqlQuery.CommandText += "\'" + System.Convert.ToString(false) + "\',";
-					curConI = this._ConnectionList[node.Tag];
+					curConI = this.ConnectionList[node.Tag];
 					SaveConnectionFieldsSQL(curConI);
 					//_xmlTextWriter.WriteEndElement()
 					_sqlQuery.CommandText = Tools.Misc.PrepareForDB(_sqlQuery.CommandText);
@@ -272,40 +272,40 @@ namespace mRemoteNG.Config.Connections
 		private void SaveConnectionFieldsSQL(Connection.Info curConI)
 		{
 			Connection.Info with_1 = curConI;
-			_sqlQuery.CommandText += "\'" + PrepareValueForDB(with_1.Description) + "\',";
-			_sqlQuery.CommandText += "\'" + PrepareValueForDB(with_1.Icon) + "\',";
-			_sqlQuery.CommandText += "\'" + PrepareValueForDB(with_1.Panel) + "\',";
+            _sqlQuery.CommandText += "\'" + Misc.PrepareValueForDB(with_1.Description) + "\',";
+            _sqlQuery.CommandText += "\'" + Misc.PrepareValueForDB(with_1.Icon) + "\',";
+            _sqlQuery.CommandText += "\'" + Misc.PrepareValueForDB(with_1.Panel) + "\',";
 					
-			if (this._SaveSecurity.Username == true)
+			if (this.SaveSecurity.Username == true)
 			{
-				_sqlQuery.CommandText += "\'" + PrepareValueForDB(with_1.Username) + "\',";
+                _sqlQuery.CommandText += "\'" + Misc.PrepareValueForDB(with_1.Username) + "\',";
 			}
 			else
 			{
 				_sqlQuery.CommandText += "\'" + "" + "\',";
 			}
 					
-			if (this._SaveSecurity.Domain == true)
+			if (this.SaveSecurity.Domain == true)
 			{
-				_sqlQuery.CommandText += "\'" + PrepareValueForDB(with_1.Domain) + "\',";
+                _sqlQuery.CommandText += "\'" + Misc.PrepareValueForDB(with_1.Domain) + "\',";
 			}
 			else
 			{
 				_sqlQuery.CommandText += "\'" + "" + "\',";
 			}
 					
-			if (this._SaveSecurity.Password == true)
+			if (this.SaveSecurity.Password == true)
 			{
-				_sqlQuery.CommandText += "\'" + PrepareValueForDB(Security.Crypt.Encrypt(with_1.Password, _password)) + "\',";
+                _sqlQuery.CommandText += "\'" + Misc.PrepareValueForDB(Security.Crypt.Encrypt(with_1.Password, _password)) + "\',";
 			}
 			else
 			{
 				_sqlQuery.CommandText += "\'" + "" + "\',";
 			}
-					
-			_sqlQuery.CommandText += "\'" + PrepareValueForDB(with_1.Hostname) + "\',";
+
+            _sqlQuery.CommandText += "\'" + Misc.PrepareValueForDB(with_1.Hostname) + "\',";
 			_sqlQuery.CommandText += "\'" + with_1.Protocol.ToString() + "\',";
-			_sqlQuery.CommandText += "\'" + PrepareValueForDB(with_1.PuttySession) + "\',";
+            _sqlQuery.CommandText += "\'" + Misc.PrepareValueForDB(with_1.PuttySession) + "\',";
 			_sqlQuery.CommandText += "\'" + System.Convert.ToString(with_1.Port) + "\',";
 			_sqlQuery.CommandText += "\'" + System.Convert.ToString(with_1.UseConsoleSession) + "\',";
 			_sqlQuery.CommandText += "\'" + with_1.RenderingEngine.ToString() + "\',";
@@ -358,7 +358,7 @@ namespace mRemoteNG.Config.Connections
 			_sqlQuery.CommandText += "\'" + with_1.RDGatewayHostname + "\',";
 			_sqlQuery.CommandText += "\'" + with_1.RDGatewayUseConnectionCredentials.ToString() + "\',";
 					
-			if (this._SaveSecurity.Username == true)
+			if (this.SaveSecurity.Username == true)
 			{
 				_sqlQuery.CommandText += "\'" + with_1.RDGatewayUsername + "\',";
 			}
@@ -367,7 +367,7 @@ namespace mRemoteNG.Config.Connections
 				_sqlQuery.CommandText += "\'" + "" + "\',";
 			}
 					
-			if (this._SaveSecurity.Password == true)
+			if (this.SaveSecurity.Password == true)
 			{
 				_sqlQuery.CommandText += "\'" + Security.Crypt.Encrypt(with_1.RDGatewayPassword, _password) + "\',";
 			}
@@ -376,7 +376,7 @@ namespace mRemoteNG.Config.Connections
 				_sqlQuery.CommandText += "\'" + "" + "\',";
 			}
 					
-			if (this._SaveSecurity.Domain == true)
+			if (this.SaveSecurity.Domain == true)
 			{
 				_sqlQuery.CommandText += "\'" + with_1.RDGatewayDomain + "\',";
 			}
@@ -387,7 +387,7 @@ namespace mRemoteNG.Config.Connections
 					
 			_sqlQuery.CommandText += "\'" + System.Convert.ToString(with_1.UseCredSsp) + "\',";
 					
-			if (this._SaveSecurity.Inheritance == true)
+			if (this.SaveSecurity.Inheritance == true)
 			{
 				_sqlQuery.CommandText += "\'" + System.Convert.ToString(with_1.Inherit.CacheBitmaps) + "\',";
 				_sqlQuery.CommandText += "\'" + System.Convert.ToString(with_1.Inherit.Colors) + "\',";
@@ -552,7 +552,7 @@ namespace mRemoteNG.Config.Connections
 		{
 			try
 			{
-				if (!IsConnectionsFileLoaded)
+				if (!Runtime.IsConnectionsFileLoaded)
 				{
 					return;
 				}
@@ -561,7 +561,7 @@ namespace mRemoteNG.Config.Connections
 						
 				if (Tree.Node.GetNodeType(RootTreeNode) == Tree.Node.Type.Root)
 				{
-					treeNode = RootTreeNode.Clone();
+					treeNode = (TreeNode)RootTreeNode.Clone();
 				}
 				else
 				{
@@ -646,8 +646,8 @@ namespace mRemoteNG.Config.Connections
 							
 					if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Container) //container
 					{
-						_xmlTextWriter.WriteAttributeString("Expanded", "", System.Convert.ToString(this._ContainerList[node.Tag].TreeNode.IsExpanded));
-						curConI = this._ContainerList[node.Tag].ConnectionInfo;
+						_xmlTextWriter.WriteAttributeString("Expanded", "", System.Convert.ToString(this.ContainerList[node.Tag].TreeNode.IsExpanded));
+						curConI = this.ContainerList[node.Tag].ConnectionInfo;
 						SaveConnectionFields(curConI);
 						SaveNode(node.Nodes);
 						_xmlTextWriter.WriteEndElement();
@@ -655,7 +655,7 @@ namespace mRemoteNG.Config.Connections
 							
 					if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Connection)
 					{
-						curConI = this._ConnectionList[node.Tag];
+						curConI = this.ConnectionList[node.Tag];
 						SaveConnectionFields(curConI);
 						_xmlTextWriter.WriteEndElement();
 					}
@@ -677,7 +677,7 @@ namespace mRemoteNG.Config.Connections
 						
 				_xmlTextWriter.WriteAttributeString("Panel", "", curConI.Panel);
 						
-				if (this._SaveSecurity.Username == true)
+				if (this.SaveSecurity.Username == true)
 				{
 					_xmlTextWriter.WriteAttributeString("Username", "", curConI.Username);
 				}
@@ -686,7 +686,7 @@ namespace mRemoteNG.Config.Connections
 					_xmlTextWriter.WriteAttributeString("Username", "", "");
 				}
 						
-				if (this._SaveSecurity.Domain == true)
+				if (this.SaveSecurity.Domain == true)
 				{
 					_xmlTextWriter.WriteAttributeString("Domain", "", curConI.Domain);
 				}
@@ -695,7 +695,7 @@ namespace mRemoteNG.Config.Connections
 					_xmlTextWriter.WriteAttributeString("Domain", "", "");
 				}
 						
-				if (this._SaveSecurity.Password == true)
+				if (this.SaveSecurity.Password == true)
 				{
 					_xmlTextWriter.WriteAttributeString("Password", "", Security.Crypt.Encrypt(curConI.Password, _password));
 				}
@@ -784,7 +784,7 @@ namespace mRemoteNG.Config.Connections
 						
 				_xmlTextWriter.WriteAttributeString("RDGatewayUseConnectionCredentials", "", curConI.RDGatewayUseConnectionCredentials.ToString());
 						
-				if (this._SaveSecurity.Username == true)
+				if (this.SaveSecurity.Username == true)
 				{
 					_xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", curConI.RDGatewayUsername);
 				}
@@ -793,7 +793,7 @@ namespace mRemoteNG.Config.Connections
 					_xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", "");
 				}
 						
-				if (this._SaveSecurity.Password == true)
+				if (this.SaveSecurity.Password == true)
 				{
 					_xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", Security.Crypt.Encrypt(curConI.RDGatewayPassword, _password));
 				}
@@ -802,7 +802,7 @@ namespace mRemoteNG.Config.Connections
 					_xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", "");
 				}
 						
-				if (this._SaveSecurity.Domain == true)
+				if (this.SaveSecurity.Domain == true)
 				{
 					_xmlTextWriter.WriteAttributeString("RDGatewayDomain", "", curConI.RDGatewayDomain);
 				}
@@ -811,7 +811,7 @@ namespace mRemoteNG.Config.Connections
 					_xmlTextWriter.WriteAttributeString("RDGatewayDomain", "", "");
 				}
 						
-				if (this._SaveSecurity.Inheritance == true)
+				if (this.SaveSecurity.Inheritance == true)
 				{
 					_xmlTextWriter.WriteAttributeString("InheritCacheBitmaps", "", System.Convert.ToString(curConI.Inherit.CacheBitmaps));
 					_xmlTextWriter.WriteAttributeString("InheritColors", "", System.Convert.ToString(curConI.Inherit.Colors));
@@ -937,7 +937,7 @@ namespace mRemoteNG.Config.Connections
 			}
 					
 			TreeNode tN = default(TreeNode);
-			tN = RootTreeNode.Clone();
+			tN = (TreeNode)RootTreeNode.Clone();
 					
 			TreeNodeCollection tNC = default(TreeNodeCollection);
 			tNC = tN.Nodes;
@@ -984,7 +984,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Connection)
 				{
-					Connection.Info curConI = node.Tag;
+					Connection.Info curConI = (Connection.Info)node.Tag;
 							
 					WritemRCSVLine(curConI);
 				}
@@ -1052,7 +1052,7 @@ namespace mRemoteNG.Config.Connections
 			}
 					
 			TreeNode tN = default(TreeNode);
-			tN = RootTreeNode.Clone();
+			tN = (TreeNode)RootTreeNode.Clone();
 					
 			TreeNodeCollection tNC = default(TreeNodeCollection);
 			tNC = tN.Nodes;
@@ -1070,7 +1070,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Connection)
 				{
-					Connection.Info curConI = node.Tag;
+					Connection.Info curConI = (Connection.Info)node.Tag;
 							
 					if (curConI.Protocol == Connection.Protocol.Protocols.RDP)
 					{
@@ -1114,7 +1114,7 @@ namespace mRemoteNG.Config.Connections
 			}
 					
 			TreeNode tN = default(TreeNode);
-			tN = RootTreeNode.Clone();
+			tN = (TreeNode)RootTreeNode.Clone();
 					
 			TreeNodeCollection tNC = default(TreeNodeCollection);
 			tNC = tN.Nodes;
@@ -1143,7 +1143,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Connection)
 				{
-					Connection.Info curConI = node.Tag;
+					Connection.Info curConI = (Connection.Info)node.Tag;
 							
 					if (curConI.Protocol == Connection.Protocol.Protocols.RDP)
 					{

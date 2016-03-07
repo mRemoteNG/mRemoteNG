@@ -297,13 +297,13 @@ namespace mRemoteNG.App
 			public static DockContent exportPanel = new DockContent();
             public static UI.Window.About aboutForm;
 			public static DockContent aboutPanel = new DockContent();
-			public static Update updateForm;
+			public static UI.Window.Update updateForm;
 			public static DockContent updatePanel = new DockContent();
 			public static UI.Window.SSHTransfer sshtransferForm;
 			public static DockContent sshtransferPanel = new DockContent();
             public static UI.Window.ActiveDirectoryImport adimportForm;
 			public static DockContent adimportPanel = new DockContent();
-			public static Help helpForm;
+			public static UI.Window.Help helpForm;
 			public static DockContent helpPanel = new DockContent();
             public static UI.Window.ExternalTools externalappsForm;
 			public static DockContent externalappsPanel = new DockContent();
@@ -316,7 +316,7 @@ namespace mRemoteNG.App
             public static UI.Window.Announcement AnnouncementForm;
 			public static DockContent AnnouncementPanel = new DockContent();
 				
-			public static void Show(Type windowType, bool portScanImport = false)
+			public static void Show(UI.Window.Type windowType, bool portScanImport = false)
 			{
 				try
 				{
@@ -516,8 +516,8 @@ namespace mRemoteNG.App
 				{
 					return ;
 				}
-					
-				cTaskDialog.MessageBox(System.Windows.Forms.Application.ProductName, My.Language.strCompatibilityProblemDetected, string.Format(My.Language.strCompatibilityLenovoAutoScrollUtilityDetected, System.Windows.Forms.Application.ProductName), "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.OK, eSysIcons.Warning, null);
+
+                cTaskDialog.MessageBox(System.Windows.Forms.Application.ProductName, My.Language.strCompatibilityProblemDetected, string.Format(My.Language.strCompatibilityLenovoAutoScrollUtilityDetected, System.Windows.Forms.Application.ProductName), "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.OK, eSysIcons.Warning, eSysIcons.Warning);
 				if (cTaskDialog.VerificationChecked)
 				{
 					My.Settings.Default.CompatibilityWarnLenovoAutoScrollUtility = false;
@@ -628,7 +628,7 @@ namespace mRemoteNG.App
 					{
 						foreach (ManagementObject managementObject in new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem WHERE Primary=True").Get())
 						{
-							osVersion = System.Convert.ToString(managementObject.GetPropertyValue("Caption").Trim());
+                            osVersion = System.Convert.ToString(managementObject.GetPropertyValue("Caption")).Trim();
 							int servicePackNumber = System.Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"));
 							if (!(servicePackNumber == 0))
 							{
@@ -894,7 +894,7 @@ namespace mRemoteNG.App
 			{
 				try
 				{
-					LastSqlUpdate = null;
+					//LastSqlUpdate = null;
 					Tools.Misc.SQLUpdateCheckFinished -= SQLUpdateCheckFinished;
 					if (TimerSqlWatcher != null)
 					{
@@ -1124,13 +1124,13 @@ namespace mRemoteNG.App
 				//create rename item
 				ToolStripMenuItem cMenRen = new ToolStripMenuItem();
 				cMenRen.Text = My.Language.strRename;
-				cMenRen.Image = global::My.Resources.Rename;
+				cMenRen.Image = My.Resources.Rename;
 				cMenRen.Tag = pnlcForm;
 				cMenRen.Click += cMenConnectionPanelRename_Click;
 					
 				ToolStripMenuItem cMenScreens = new ToolStripMenuItem();
 				cMenScreens.Text = My.Language.strSendTo;
-				cMenScreens.Image = global::My.Resources.Monitor;
+				cMenScreens.Image = My.Resources.Monitor;
 				cMenScreens.Tag = pnlcForm;
 				cMenScreens.DropDownItems.Add("Dummy");
 				cMenScreens.DropDownOpening += cMenConnectionPanelScreens_DropDownOpening;
@@ -1166,9 +1166,9 @@ namespace mRemoteNG.App
 			try
 			{
 				UI.Window.Connection conW = default(UI.Window.Connection);
-				conW = sender.Tag;
-					
-				string nTitle = Interaction.InputBox(Prompt: My.Language.strNewTitle + ":", DefaultResponse: System.Convert.ToString(sender.Tag.Text.Replace("&&", "&")));
+                conW = (UI.Window.Connection)((System.Windows.Forms.Control)sender).Tag;
+
+                string nTitle = Interaction.InputBox(Prompt: My.Language.strNewTitle + ":", DefaultResponse: System.Convert.ToString(((System.Windows.Forms.Control)((System.Windows.Forms.Control)sender).Tag).Text.Replace("&&", "&")));
 					
 				if (!string.IsNullOrEmpty(nTitle))
 				{
@@ -1185,18 +1185,17 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-				ToolStripMenuItem cMenScreens = sender;
+                ToolStripMenuItem cMenScreens = (ToolStripMenuItem)sender;
 				cMenScreens.DropDownItems.Clear();
 					
 				for (int i = 0; i <= Screen.AllScreens.Length - 1; i++)
 				{
 					ToolStripMenuItem cMenScreen = new ToolStripMenuItem(My.Language.strScreen + " " + System.Convert.ToString(i + 1));
 					cMenScreen.Tag = new ArrayList();
-					cMenScreen.Image = global::My.Resources.Monitor_GoTo;
+					cMenScreen.Image = My.Resources.Monitor_GoTo;
 					(cMenScreen.Tag as ArrayList).Add(Screen.AllScreens[i]);
 					(cMenScreen.Tag as ArrayList).Add(cMenScreens.Tag);
 					cMenScreen.Click += cMenConnectionPanelScreen_Click;
-						
 					cMenScreens.DropDownItems.Add(cMenScreen);
 				}
 			}
@@ -1210,8 +1209,8 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-				Screen screen = (sender as ToolStripMenuItem).Tag(0);
-				DockContent panel = (sender as ToolStripMenuItem).Tag(1);
+                Screen screen = ((ToolStripMenuItem)sender).Tag(0);
+                DockContent panel = ((ToolStripMenuItem)sender).Tag(1);
 				Screens.SendPanelToScreen(panel, screen);
 			}
 			catch (Exception)
@@ -1235,7 +1234,7 @@ namespace mRemoteNG.App
 				ConnectionList = new Connection.List();
 				ContainerList = new Container.List();
 					
-				Config.Connections.Load connectionsLoad = new Config.Connections.Load();
+				mRemoteNG.Config.Connections.Load connectionsLoad = new Config.Connections.Load();
 					
 				if (filename == GetDefaultStartupConnectionFileName())
 				{
@@ -1312,7 +1311,7 @@ namespace mRemoteNG.App
 			
 		public static void LoadConnections(bool withDialog = false, bool update = false)
 		{
-			Connections.Load connectionsLoad = new Connections.Load();
+            mRemoteNG.Config.Connections.Load connectionsLoad = new mRemoteNG.Config.Connections.Load();
 				
 			try
 			{
@@ -1414,7 +1413,7 @@ namespace mRemoteNG.App
 				{
 					Runtime.MessageCollector.AddExceptionMessage(My.Language.strLoadFromSqlFailed, ex);
 					string commandButtons = string.Join("|", new[] {My.Language.strCommandTryAgain, My.Language.strCommandOpenConnectionFile, string.Format(My.Language.strCommandExitProgram, System.Windows.Forms.Application.ProductName)});
-					cTaskDialog.ShowCommandBox(System.Windows.Forms.Application.ProductName, My.Language.strLoadFromSqlFailed, My.Language.strLoadFromSqlFailedContent, Misc.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, eSysIcons.Error, null);
+                    cTaskDialog.ShowCommandBox(System.Windows.Forms.Application.ProductName, My.Language.strLoadFromSqlFailed, My.Language.strLoadFromSqlFailedContent, Misc.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, eSysIcons.Error, eSysIcons.Error);
 					switch (cTaskDialog.CommandButtonResult)
 					{
 						case 0:
@@ -1589,7 +1588,7 @@ namespace mRemoteNG.App
 					conS.SQLPassword = Security.Crypt.Decrypt(System.Convert.ToString(My.Settings.Default.SQLPass), App.Info.General.EncryptionKey);
 				}
 					
-				conS.Save_Renamed();
+				conS.Save();
 					
 				if (My.Settings.Default.UseSQLServer == true)
 				{
@@ -1612,7 +1611,7 @@ namespace mRemoteNG.App
 		public static void SaveConnectionsAs()
 		{
 			bool previousTimerState = false;
-			Connections.Save connectionsSave = new Connections.Save();
+            mRemoteNG.Config.Connections.Save connectionsSave = new mRemoteNG.Config.Connections.Save();
 				
 			try
 			{
@@ -1639,8 +1638,8 @@ namespace mRemoteNG.App
 					{
 						return ;
 					}
-						
-					connectionsSave.SaveFormat = Connections.Save.Format.mRXML;
+
+                    connectionsSave.SaveFormat = mRemoteNG.Config.Connections.Save.Format.mRXML;
 					connectionsSave.ConnectionFileName = saveFileDialog.FileName;
 					connectionsSave.Export = false;
 					connectionsSave.SaveSecurity = new Security.Save();
@@ -1743,7 +1742,7 @@ namespace mRemoteNG.App
 					
 				if (Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.Connection | Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.PuttySession)
 				{
-					OpenConnection(Windows.treeForm.tvConnections.SelectedNode.Tag, Force);
+					OpenConnection((mRemoteNG.Connection.Info)Windows.treeForm.tvConnections.SelectedNode.Tag, Force);
 				}
 				else if (Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.Container)
 				{
@@ -1753,7 +1752,7 @@ namespace mRemoteNG.App
 						{
 							if (tNode.Tag != null)
 							{
-								OpenConnection(tNode.Tag, Force);
+								OpenConnection((mRemoteNG.Connection.Info)tNode.Tag, Force);
 							}
 						}
 					}
@@ -2019,14 +2018,14 @@ namespace mRemoteNG.App
 			try
 			{
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(My.Language.strProtocolEventDisconnected, DisconnectedMessage), true);
-					
-				Connection.Protocol.Base Prot = sender;
+
+                Connection.Protocol.Base Prot = (Connection.Protocol.Base)sender;
 				if (Prot.InterfaceControl.Info.Protocol == Connection.Protocol.Protocols.RDP)
 				{
-					string[] Reason = DisconnectedMessage.Split("\r\n");
+					string[] Reason = DisconnectedMessage.Split("\r\n".ToCharArray());
 					string ReasonCode = Reason[0];
 					string ReasonDescription = Reason[1];
-					if (ReasonCode > 3)
+					if (System.Convert.ToInt32(ReasonCode) > 3)
 					{
 						if (!string.IsNullOrEmpty(ReasonDescription))
 						{
@@ -2049,7 +2048,7 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-				Connection.Protocol.Base Prot = sender;
+                Connection.Protocol.Base Prot = (Connection.Protocol.Base)sender;
 					
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnenctionCloseEvent, true);
 					
@@ -2079,7 +2078,7 @@ namespace mRemoteNG.App
 			
 		public static void Prot_Event_Connected(object sender)
 		{
-			mRemoteNG.Connection.Protocol.Base prot = sender;
+            mRemoteNG.Connection.Protocol.Base prot = (Connection.Protocol.Base)sender;
 				
 			Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnectionEventConnected, true);
 			Runtime.MessageCollector.AddMessage(Messages.MessageClass.ReportMsg, string.Format(My.Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString(), (new Microsoft.VisualBasic.ApplicationServices.User()).Name, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
@@ -2090,12 +2089,12 @@ namespace mRemoteNG.App
 			try
 			{
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strConnectionEventErrorOccured, true);
-					
-				Connection.Protocol.Base Prot = sender;
+
+                Connection.Protocol.Base Prot = (Connection.Protocol.Base)sender;
 					
 				if (Prot.InterfaceControl.Info.Protocol == Connection.Protocol.Protocols.RDP)
 				{
-					if (ErrorMessage > -1)
+					if (System.Convert.ToInt32(ErrorMessage) > -1)
 					{
 						Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, string.Format(My.Language.strConnectionRdpErrorDetail, ErrorMessage, Connection.Protocol.RDP.FatalErrors.GetError(ErrorMessage)));
 					}
@@ -2221,7 +2220,7 @@ namespace mRemoteNG.App
 				{
 					if (WindowList[i] is UI.Window.Connection)
 					{
-						UI.Window.Connection conW = WindowList[i];
+                        UI.Window.Connection conW = (UI.Window.Connection)WindowList[i];
 							
 						if (conW.TabController != null)
 						{
@@ -2231,7 +2230,7 @@ namespace mRemoteNG.App
 								{
 									if (t.Controls[0] is Connection.InterfaceControl)
 									{
-										Connection.InterfaceControl IC = t.Controls[0];
+                                        Connection.InterfaceControl IC = (Connection.InterfaceControl)t.Controls[0];
 										if (IC.Info == ConI)
 										{
 											return IC;

@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,11 +8,8 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
 using mRemoteNG.My;
 using mRemoteNG.Tools;
-//using mRemoteNG.Tools.LocalizedAttributes;
 
 
 namespace mRemoteNG.Root.PuttySessions
@@ -25,7 +21,6 @@ namespace mRemoteNG.Root.PuttySessions
 			// VBConversions Note: Non-static class variable initialization is below.  Class variables cannot be initially assigned non-static values in C#.
 			_name = Language.strPuttySavedSessionsRootName;
 			_panel = My.Language.strGeneral;
-					
 		}
 				
 		private string _name; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
@@ -47,7 +42,7 @@ namespace mRemoteNG.Root.PuttySessions
 				{
 					TreeNode.Text = value;
 				}
-				Settings.PuttySavedSessionsName = value;
+                My.Settings.Default.PuttySavedSessionsName = value;
 			}
 		}
 				
@@ -68,7 +63,7 @@ namespace mRemoteNG.Root.PuttySessions
 					return ;
 				}
 				_panel = value;
-				Settings.PuttySavedSessionsPanel = value;
+				My.Settings.Default.PuttySavedSessionsPanel = value;
 			}
 		}
 	}

@@ -213,7 +213,7 @@ namespace mRemoteNG.UI.Window
 					//
 					this.ClientSize = new System.Drawing.Size(542, 323);
 					this.Controls.Add(this.pnlSplitter);
-					this.Icon = global::My.Resources.Resources.Help_Icon;
+					this.Icon = My.Resources.Help_Icon;
 					this.Name = "Help";
 					this.TabText = "Help";
 					this.Text = "Help";
@@ -271,9 +271,9 @@ namespace mRemoteNG.UI.Window
 				
 				private void FillImageList()
 				{
-					this.imgListHelp.Images.Add("File", global::My.Resources.Page);
-					this.imgListHelp.Images.Add("Folder", global::My.Resources.Folder);
-					this.imgListHelp.Images.Add("Help", global::My.Resources.Help);
+					this.imgListHelp.Images.Add("File", My.Resources.Page);
+					this.imgListHelp.Images.Add("Folder", My.Resources.Folder);
+					this.imgListHelp.Images.Add("Help", My.Resources.Help);
 				}
 				
 				private void SetImages(TreeNode node)

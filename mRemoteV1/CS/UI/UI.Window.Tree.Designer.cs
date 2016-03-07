@@ -183,7 +183,7 @@ namespace mRemoteNG.UI.Window
 					//
 					//cMenTreeConnect
 					//
-					this.cMenTreeConnect.Image = global::My.Resources.Resources.Play;
+					this.cMenTreeConnect.Image = My.Resources.Play;
 					this.cMenTreeConnect.Name = "cMenTreeConnect";
 					this.cMenTreeConnect.ShortcutKeys = (System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
 						| System.Windows.Forms.Keys.C);
@@ -199,14 +199,14 @@ namespace mRemoteNG.UI.Window
 					//
 					//cMenTreeConnectWithOptionsConnectToConsoleSession
 					//
-					this.cMenTreeConnectWithOptionsConnectToConsoleSession.Image = global::My.Resources.Resources.monitor_go;
+					this.cMenTreeConnectWithOptionsConnectToConsoleSession.Image = My.Resources.monitor_go;
 					this.cMenTreeConnectWithOptionsConnectToConsoleSession.Name = "cMenTreeConnectWithOptionsConnectToConsoleSession";
 					this.cMenTreeConnectWithOptionsConnectToConsoleSession.Size = new System.Drawing.Size(231, 22);
 					this.cMenTreeConnectWithOptionsConnectToConsoleSession.Text = "Connect to console session";
 					//
 					//cMenTreeConnectWithOptionsDontConnectToConsoleSession
 					//
-					this.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Image = global::My.Resources.Resources.monitor_delete;
+					this.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Image = My.Resources.monitor_delete;
 					this.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Name = "cMenTreeConnectWithOptionsDontConnectToConsoleSession";
 					this.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Size = new System.Drawing.Size(231, 22);
 					this.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text = "Don\'t connect to console session";
@@ -214,28 +214,28 @@ namespace mRemoteNG.UI.Window
 					//
 					//cMenTreeConnectWithOptionsConnectInFullscreen
 					//
-					this.cMenTreeConnectWithOptionsConnectInFullscreen.Image = global::My.Resources.Resources.arrow_out;
+					this.cMenTreeConnectWithOptionsConnectInFullscreen.Image = My.Resources.arrow_out;
 					this.cMenTreeConnectWithOptionsConnectInFullscreen.Name = "cMenTreeConnectWithOptionsConnectInFullscreen";
 					this.cMenTreeConnectWithOptionsConnectInFullscreen.Size = new System.Drawing.Size(231, 22);
 					this.cMenTreeConnectWithOptionsConnectInFullscreen.Text = "Connect in fullscreen";
 					//
 					//cMenTreeConnectWithOptionsNoCredentials
 					//
-					this.cMenTreeConnectWithOptionsNoCredentials.Image = global::My.Resources.Resources.key_delete;
+					this.cMenTreeConnectWithOptionsNoCredentials.Image = My.Resources.key_delete;
 					this.cMenTreeConnectWithOptionsNoCredentials.Name = "cMenTreeConnectWithOptionsNoCredentials";
 					this.cMenTreeConnectWithOptionsNoCredentials.Size = new System.Drawing.Size(231, 22);
 					this.cMenTreeConnectWithOptionsNoCredentials.Text = "Connect without credentials";
 					//
 					//cMenTreeConnectWithOptionsChoosePanelBeforeConnecting
 					//
-					this.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Image = global::My.Resources.Resources.Panels;
+					this.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Image = My.Resources.Panels;
 					this.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Name = "cMenTreeConnectWithOptionsChoosePanelBeforeConnecting";
 					this.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Size = new System.Drawing.Size(231, 22);
 					this.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = "Choose panel before connecting";
 					//
 					//cMenTreeDisconnect
 					//
-					this.cMenTreeDisconnect.Image = global::My.Resources.Resources.Pause;
+					this.cMenTreeDisconnect.Image = My.Resources.Pause;
 					this.cMenTreeDisconnect.Name = "cMenTreeDisconnect";
 					this.cMenTreeDisconnect.Size = new System.Drawing.Size(186, 22);
 					this.cMenTreeDisconnect.Text = "Disconnect";
@@ -247,14 +247,14 @@ namespace mRemoteNG.UI.Window
 					//
 					//cMenTreeToolsExternalApps
 					//
-					this.cMenTreeToolsExternalApps.Image = global::My.Resources.Resources.ExtApp;
+					this.cMenTreeToolsExternalApps.Image = My.Resources.ExtApp;
 					this.cMenTreeToolsExternalApps.Name = "cMenTreeToolsExternalApps";
 					this.cMenTreeToolsExternalApps.Size = new System.Drawing.Size(186, 22);
 					this.cMenTreeToolsExternalApps.Text = "External Applications";
 					//
 					//cMenTreeToolsTransferFile
 					//
-					this.cMenTreeToolsTransferFile.Image = global::My.Resources.Resources.SSHTransfer;
+					this.cMenTreeToolsTransferFile.Image = My.Resources.SSHTransfer;
 					this.cMenTreeToolsTransferFile.Name = "cMenTreeToolsTransferFile";
 					this.cMenTreeToolsTransferFile.Size = new System.Drawing.Size(186, 22);
 					this.cMenTreeToolsTransferFile.Text = "Transfer File (SSH)";
@@ -266,7 +266,7 @@ namespace mRemoteNG.UI.Window
 					//
 					//cMenTreeDuplicate
 					//
-					this.cMenTreeDuplicate.Image = global::My.Resources.Resources.page_copy;
+					this.cMenTreeDuplicate.Image = My.Resources.page_copy;
 					this.cMenTreeDuplicate.Name = "cMenTreeDuplicate";
 					this.cMenTreeDuplicate.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D);
 					this.cMenTreeDuplicate.Size = new System.Drawing.Size(186, 22);
@@ -274,7 +274,7 @@ namespace mRemoteNG.UI.Window
 					//
 					//cMenTreeRename
 					//
-					this.cMenTreeRename.Image = global::My.Resources.Resources.Rename;
+					this.cMenTreeRename.Image = My.Resources.Rename;
 					this.cMenTreeRename.Name = "cMenTreeRename";
 					this.cMenTreeRename.ShortcutKeys = System.Windows.Forms.Keys.F2;
 					this.cMenTreeRename.Size = new System.Drawing.Size(186, 22);
@@ -282,7 +282,7 @@ namespace mRemoteNG.UI.Window
 					//
 					//cMenTreeDelete
 					//
-					this.cMenTreeDelete.Image = global::My.Resources.Resources.Delete;
+					this.cMenTreeDelete.Image = My.Resources.Delete;
 					this.cMenTreeDelete.Name = "cMenTreeDelete";
 					this.cMenTreeDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
 					this.cMenTreeDelete.Size = new System.Drawing.Size(186, 22);
@@ -331,14 +331,14 @@ namespace mRemoteNG.UI.Window
 					//
 					//cMenTreeAddConnection
 					//
-					this.cMenTreeAddConnection.Image = global::My.Resources.Resources.Connection_Add;
+					this.cMenTreeAddConnection.Image = My.Resources.Connection_Add;
 					this.cMenTreeAddConnection.Name = "cMenTreeAddConnection";
 					this.cMenTreeAddConnection.Size = new System.Drawing.Size(186, 22);
 					this.cMenTreeAddConnection.Text = "New Connection";
 					//
 					//cMenTreeAddFolder
 					//
-					this.cMenTreeAddFolder.Image = global::My.Resources.Resources.Folder_Add;
+					this.cMenTreeAddFolder.Image = My.Resources.Folder_Add;
 					this.cMenTreeAddFolder.Name = "cMenTreeAddFolder";
 					this.cMenTreeAddFolder.Size = new System.Drawing.Size(186, 22);
 					this.cMenTreeAddFolder.Text = "New Folder";
@@ -357,21 +357,21 @@ namespace mRemoteNG.UI.Window
 					//
 					//cMenTreeToolsSortAscending
 					//
-					this.cMenTreeToolsSortAscending.Image = global::My.Resources.Resources.Sort_AZ;
+					this.cMenTreeToolsSortAscending.Image = My.Resources.Sort_AZ;
 					this.cMenTreeToolsSortAscending.Name = "cMenTreeToolsSortAscending";
 					this.cMenTreeToolsSortAscending.Size = new System.Drawing.Size(157, 22);
 					this.cMenTreeToolsSortAscending.Text = "Ascending (A-Z)";
 					//
 					//cMenTreeToolsSortDescending
 					//
-					this.cMenTreeToolsSortDescending.Image = global::My.Resources.Resources.Sort_ZA;
+					this.cMenTreeToolsSortDescending.Image = My.Resources.Sort_ZA;
 					this.cMenTreeToolsSortDescending.Name = "cMenTreeToolsSortDescending";
 					this.cMenTreeToolsSortDescending.Size = new System.Drawing.Size(157, 22);
 					this.cMenTreeToolsSortDescending.Text = "Descending (Z-A)";
 					//
 					//cMenTreeMoveUp
 					//
-					this.cMenTreeMoveUp.Image = global::My.Resources.Resources.Arrow_Up;
+					this.cMenTreeMoveUp.Image = My.Resources.Arrow_Up;
 					this.cMenTreeMoveUp.Name = "cMenTreeMoveUp";
 					this.cMenTreeMoveUp.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Up);
 					this.cMenTreeMoveUp.Size = new System.Drawing.Size(186, 22);
@@ -379,7 +379,7 @@ namespace mRemoteNG.UI.Window
 					//
 					//cMenTreeMoveDown
 					//
-					this.cMenTreeMoveDown.Image = global::My.Resources.Resources.Arrow_Down;
+					this.cMenTreeMoveDown.Image = My.Resources.Arrow_Down;
 					this.cMenTreeMoveDown.Name = "cMenTreeMoveDown";
 					this.cMenTreeMoveDown.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Down);
 					this.cMenTreeMoveDown.Size = new System.Drawing.Size(186, 22);
@@ -407,7 +407,7 @@ namespace mRemoteNG.UI.Window
 					//PictureBox1
 					//
 					this.PictureBox1.Anchor = (System.Windows.Forms.AnchorStyles) (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left);
-					this.PictureBox1.Image = global::My.Resources.Resources.Search;
+					this.PictureBox1.Image = My.Resources.Search;
 					this.PictureBox1.Location = new System.Drawing.Point(2, 412);
 					this.PictureBox1.Name = "PictureBox1";
 					this.PictureBox1.Size = new System.Drawing.Size(16, 16);
@@ -443,14 +443,14 @@ namespace mRemoteNG.UI.Window
 					//mMenAddConnection
 					//
 					this.mMenAddConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-					this.mMenAddConnection.Image = global::My.Resources.Resources.Connection_Add;
+					this.mMenAddConnection.Image = My.Resources.Connection_Add;
 					this.mMenAddConnection.Name = "mMenAddConnection";
 					this.mMenAddConnection.Size = new System.Drawing.Size(28, 20);
 					//
 					//mMenAddFolder
 					//
 					this.mMenAddFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-					this.mMenAddFolder.Image = global::My.Resources.Resources.Folder_Add;
+					this.mMenAddFolder.Image = My.Resources.Folder_Add;
 					this.mMenAddFolder.Name = "mMenAddFolder";
 					this.mMenAddFolder.Size = new System.Drawing.Size(28, 20);
 					//
@@ -458,21 +458,21 @@ namespace mRemoteNG.UI.Window
 					//
 					this.mMenView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 					this.mMenView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenViewExpandAllFolders, this.mMenViewCollapseAllFolders});
-					this.mMenView.Image = global::My.Resources.Resources.View;
+					this.mMenView.Image = My.Resources.View;
 					this.mMenView.Name = "mMenView";
 					this.mMenView.Size = new System.Drawing.Size(28, 20);
 					this.mMenView.Text = "&View";
 					//
 					//mMenViewExpandAllFolders
 					//
-					this.mMenViewExpandAllFolders.Image = global::My.Resources.Resources.Expand;
+					this.mMenViewExpandAllFolders.Image = My.Resources.Expand;
 					this.mMenViewExpandAllFolders.Name = "mMenViewExpandAllFolders";
 					this.mMenViewExpandAllFolders.Size = new System.Drawing.Size(161, 22);
 					this.mMenViewExpandAllFolders.Text = "Expand all folders";
 					//
 					//mMenViewCollapseAllFolders
 					//
-					this.mMenViewCollapseAllFolders.Image = global::My.Resources.Resources.Collapse;
+					this.mMenViewCollapseAllFolders.Image = My.Resources.Collapse;
 					this.mMenViewCollapseAllFolders.Name = "mMenViewCollapseAllFolders";
 					this.mMenViewCollapseAllFolders.Size = new System.Drawing.Size(161, 22);
 					this.mMenViewCollapseAllFolders.Text = "Collapse all folders";
@@ -480,7 +480,7 @@ namespace mRemoteNG.UI.Window
 					//mMenSortAscending
 					//
 					this.mMenSortAscending.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-					this.mMenSortAscending.Image = global::My.Resources.Resources.Sort_AZ;
+					this.mMenSortAscending.Image = My.Resources.Sort_AZ;
 					this.mMenSortAscending.Name = "mMenSortAscending";
 					this.mMenSortAscending.Size = new System.Drawing.Size(28, 20);
 					//
@@ -491,7 +491,7 @@ namespace mRemoteNG.UI.Window
 					this.Controls.Add(this.pnlConnections);
 					this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 					this.HideOnClose = true;
-					this.Icon = global::My.Resources.Resources.Root_Icon;
+					this.Icon = My.Resources.Root_Icon;
 					this.Name = "Tree";
 					this.TabText = "Connections";
 					this.Text = "Connections";

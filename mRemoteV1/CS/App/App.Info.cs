@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,9 +8,6 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
-//using System.Environment;
 using System.Threading;
 
 
@@ -27,7 +23,7 @@ namespace mRemoteNG.App.Info
 		public static string EncryptionKey = "mR3m";
 		public static string ReportingFilePath = "";
 		public static readonly string PuttyPath = (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\PuTTYNG.exe";
-public static string UserAgent
+        public static string UserAgent
 		{
 			get
 			{
@@ -46,7 +42,7 @@ public static string UserAgent
 					details.Add("WOW64");
 				}
 				details.Add(Thread.CurrentThread.CurrentUICulture.Name);
-				details.Add(string.Format(".NET CLR {0}", Version.ToString()));
+				details.Add(string.Format(".NET CLR {0}", System.Environment.Version));
 				string detailsString = string.Join("; ", details.ToArray());
 						
 				return string.Format("Mozilla/4.0 ({0}) {1}/{2}", detailsString, System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion);
@@ -56,11 +52,11 @@ public static string UserAgent
 			
 	public class Settings
 	{
-#if !PORTABLE
+        #if !PORTABLE
 		public static readonly string SettingsPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.ApplicationData) + "\\" + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName;
-#else
+        #else
 		public static readonly string SettingsPath = (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath;
-#endif
+        #endif
 		public static readonly string LayoutFileName = "pnlLayout.xml";
 		public static readonly string ExtAppsFilesName = "extApps.xml";
 		public const string ThemesFileName = "Themes.xml";
@@ -68,29 +64,25 @@ public static string UserAgent
 			
 	public class Update
 	{
-public static string FileName
+        public static string FileName
 		{
 			get
 			{
-#if DEBUG
+                #if DEBUG
 				return "update-debug.txt";
-#endif
-//						
-//						if ((string) (My.Settings.Default.UpdateChannel.ToLowerInvariant()) == "beta")
-//						{
-//							return "update-beta.txt";
-//							}
-//							else if ((string) (My.Settings.Default.UpdateChannel.ToLowerInvariant()) == "debug")
-//							{
-//								return "update-debug.txt";
-//								}
-//								else
-//								{
-//									return "update.txt";
-//									}
-						}
-					}
+                #else
+                if ((string) (My.Settings.Default.UpdateChannel.ToLowerInvariant()) == "debug")
+				{
+					return "update-debug.txt";
 				}
+				else
+				{
+					return "update.txt";
+				}
+                #endif
+			}
+		}
+	}
 						
 	public class Connections
 	{

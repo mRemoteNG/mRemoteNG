@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -10,11 +9,8 @@ using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.Tools;
-// End of VB project level imports
-
 using System.ComponentModel;
 using mRemoteNG.Tools;
-//using mRemoteNG.Tools.LocalizedAttributes;
 
 
 namespace mRemoteNG.Connection
@@ -23,8 +19,8 @@ namespace mRemoteNG.Connection
 	{
 		public class Inheritance
 		{
-#region Public Properties
-#region General
+            #region Public Properties
+            #region General
             [LocalizedAttributes.LocalizedCategory("strCategoryGeneral", 1),
                 LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameAll"),
                 LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionAll"), 
@@ -55,8 +51,8 @@ namespace mRemoteNG.Connection
 					SetAllValues(value);
 				}
 			}
-#endregion
-#region Display
+            #endregion
+            #region Display
 			[LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 2), 
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameDescription"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionDescription"), 
@@ -71,8 +67,8 @@ namespace mRemoteNG.Connection
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNamePanel"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionPanel"), 
 			TypeConverter(typeof(Tools.Misc.YesNoTypeConverter))]public bool Panel {get; set;}
-#endregion
-#region Connection
+            #endregion
+            #region Connection
 			[LocalizedAttributes.LocalizedCategory("strCategoryConnection", 3), 
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUsername"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUsername"), 
@@ -87,8 +83,8 @@ namespace mRemoteNG.Connection
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameDomain"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionDomain"), 
 			TypeConverter(typeof(Tools.Misc.YesNoTypeConverter))]public bool Domain {get; set;}
-#endregion
-#region Protocol
+            #endregion
+            #region Protocol
 			[LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameProtocol"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionProtocol"), 
@@ -138,8 +134,8 @@ namespace mRemoteNG.Connection
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUseCredSsp"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUseCredSsp"), 
 			TypeConverter(typeof(Tools.Misc.YesNoTypeConverter))]public bool UseCredSsp {get; set;}
-#endregion
-#region RD Gateway
+            #endregion
+            #region RD Gateway
 			[LocalizedAttributes.LocalizedCategory("strCategoryGateway", 5),
                 LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRDGatewayUsageMethod"),
                 LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDGatewayUsageMethod"), 
@@ -175,8 +171,8 @@ namespace mRemoteNG.Connection
 				LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRDGatewayDomain"), 
 				TypeConverter(typeof(Tools.Misc.YesNoTypeConverter))]
             public bool RDGatewayDomain {get; set;}
-#endregion
-#region Appearance
+            #endregion
+            #region Appearance
 			[LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 6), 
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameResolution"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionResolution"), 
@@ -216,8 +212,8 @@ namespace mRemoteNG.Connection
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameEnableDesktopComposition"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionEnableEnableDesktopComposition"), 
 			TypeConverter(typeof(Tools.Misc.YesNoTypeConverter))]public bool EnableDesktopComposition {get; set;}
-#endregion
-#region Redirect
+            #endregion
+            #region Redirect
 			[LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 7), 
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectKeys"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectKeys"), 
@@ -247,8 +243,8 @@ namespace mRemoteNG.Connection
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameRedirectSounds"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionRedirectSounds"), 
 			TypeConverter(typeof(Tools.Misc.YesNoTypeConverter))]public bool RedirectSound {get; set;}
-#endregion
-#region Misc
+            #endregion
+            #region Misc
 			[LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 8), 
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameExternalToolBefore"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionExternalToolBefore"), 
@@ -268,8 +264,8 @@ namespace mRemoteNG.Connection
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameUser1"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionUser1"), 
 			TypeConverter(typeof(Tools.Misc.YesNoTypeConverter))]public bool UserField {get; set;}
-#endregion
-#region VNC
+            #endregion
+            #region VNC
 			[LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 9), 
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameCompression"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionCompression"), 
@@ -324,14 +320,16 @@ namespace mRemoteNG.Connection
 			LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameViewOnly"), 
 			LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionViewOnly"), 
 			TypeConverter(typeof(Tools.Misc.YesNoTypeConverter))]public bool VNCViewOnly {get; set;}
-#endregion
+            #endregion
 				
-			[Browsable(false)]public object Parent {get; set;}
+			[Browsable(false)]
+            public object Parent {get; set;}
 				
-			[Browsable(false)]public bool IsDefault {get; set;}
-#endregion
+			[Browsable(false)]
+            public bool IsDefault {get; set;}
+            #endregion
 				
-#region Constructors
+            #region Constructors
 			public Inheritance(object parent, bool inheritEverything = false)
 			{
 				this.Parent = parent;
@@ -340,9 +338,9 @@ namespace mRemoteNG.Connection
 					TurnOnInheritanceCompletely();
 				}
 			}
-#endregion
+            #endregion
 				
-#region Public Methods
+            #region Public Methods
 			public Inheritance Copy()
 			{
 				return (Inheritance)MemberwiseClone();
@@ -357,9 +355,9 @@ namespace mRemoteNG.Connection
 			{
 				SetAllValues(false);
 			}
-#endregion
+            #endregion
 				
-#region Private Methods
+            #region Private Methods
 			private void SetAllValues(bool value)
 			{
 				// Display
@@ -429,7 +427,7 @@ namespace mRemoteNG.Connection
 				VNCSmartSizeMode = value;
 				VNCViewOnly = value;
 			}
-#endregion
+            #endregion
 		}
 	}
 }

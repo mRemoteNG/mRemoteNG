@@ -13,7 +13,6 @@ using EOLWTSCOM;
 using System.ComponentModel;
 using mRemoteNG.Messages;
 using mRemoteNG.App;
-//using mRemoteNG.Tools.LocalizedAttributes;
 using MSTSCLib;
 using mRemoteNG.Tools;
 
@@ -107,8 +106,8 @@ namespace mRemoteNG.Connection.Protocol
 						Thread.Sleep(0);
 						System.Windows.Forms.Application.DoEvents();
 					}
-							
-					_rdpClient = ((AxMsRdpClient5NotSafeForScripting) Control).GetOcx();
+
+                    _rdpClient = (MsRdpClient5NotSafeForScripting)((AxMsRdpClient5NotSafeForScripting)Control).GetOcx();
 				}
 				catch (System.Runtime.InteropServices.COMException ex)
 				{
@@ -135,7 +134,7 @@ namespace mRemoteNG.Connection.Protocol
 						
 				_rdpClient.AdvancedSettings2.overallConnectionTimeout = 20;
 						
-				_rdpClient.AdvancedSettings2.BitmapPeristence = this._connectionInfo.CacheBitmaps;
+				_rdpClient.AdvancedSettings2.BitmapPeristence = System.Convert.ToInt32(this._connectionInfo.CacheBitmaps);
 				if (_rdpVersion >= Versions.RDC61)
 				{
 					_rdpClient.AdvancedSettings7.EnableCredSspSupport = _connectionInfo.UseCredSsp;
@@ -314,9 +313,9 @@ namespace mRemoteNG.Connection.Protocol
 			{
 				size = Screen.FromControl(Control).Bounds.Size;
 			}
-					
-			IMsRdpClient8 msRdpClient8 = _rdpClient;
-			msRdpClient8.Reconnect(size.Width, size.Height);
+
+            IMsRdpClient8 msRdpClient8 = (IMsRdpClient8)_rdpClient;
+			msRdpClient8.Reconnect((uint)size.Width, (uint)size.Height);
 		}
 				
 		private void SetRdGateway()
@@ -335,7 +334,7 @@ namespace mRemoteNG.Connection.Protocol
 						
 				if (!(_connectionInfo.RDGatewayUsageMethod == RDGatewayUsageMethod.Never))
 				{
-					_rdpClient.TransportSettings.GatewayUsageMethod = _connectionInfo.RDGatewayUsageMethod;
+					_rdpClient.TransportSettings.GatewayUsageMethod = (uint)_connectionInfo.RDGatewayUsageMethod;
 					_rdpClient.TransportSettings.GatewayHostname = _connectionInfo.RDGatewayHostname;
 					_rdpClient.TransportSettings.GatewayProfileUsageMethod = 1; // TSC_PROXY_PROFILE_MODE_EXPLICIT
 					if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
@@ -513,7 +512,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				if (_connectionInfo.Port != Defaults.Port)
+				if (_connectionInfo.Port != (int)Defaults.Port)
 				{
 					_rdpClient.AdvancedSettings2.RDPPort = _connectionInfo.Port;
 				}
@@ -577,7 +576,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				_rdpClient.AdvancedSettings5.AuthenticationLevel = this._connectionInfo.RDPAuthenticationLevel;
+				_rdpClient.AdvancedSettings5.AuthenticationLevel = (uint)this._connectionInfo.RDPAuthenticationLevel;
 			}
 			catch (Exception ex)
 			{
@@ -630,7 +629,7 @@ namespace mRemoteNG.Connection.Protocol
 			const int UI_ERR_NORMAL_DISCONNECT = 0xB08;
 			if (!(discReason == UI_ERR_NORMAL_DISCONNECT))
 			{
-				string reason = _rdpClient.GetErrorDescription(discReason, (System.UInt32) _rdpClient.ExtendedDisconnectReason);
+				string reason = _rdpClient.GetErrorDescription((uint)discReason, (System.UInt32) _rdpClient.ExtendedDisconnectReason);
 				Event_Disconnected(this, discReason + "\r\n" + reason);
 			}
 					
@@ -800,7 +799,7 @@ namespace mRemoteNG.Connection.Protocol
 			string[] resolutionParts = null;
 			if (!(resolution == RDPResolutions.FitToWindow) & !(resolution == RDPResolutions.Fullscreen) & !(resolution == RDPResolutions.SmartSize))
 			{
-				resolutionParts = resolution.ToString().Replace("Res", "").Split("x");
+				resolutionParts = resolution.ToString().Replace("Res", "").Split('x');
 			}
 			if (resolutionParts == null || !(resolutionParts.Length == 2))
 			{
@@ -808,7 +807,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			else
 			{
-				return new Rectangle(0, 0, (int) (resolutionParts[0]), (int) (resolutionParts[1]));
+                return new Rectangle(0, 0, System.Convert.ToInt32(resolutionParts[0]), System.Convert.ToInt32(resolutionParts[1]));
 			}
 		}
         #endregion
@@ -838,7 +837,7 @@ namespace mRemoteNG.Connection.Protocol
 				}
 			}
 					
-			public long OpenConnection(string hostname)
+			public int OpenConnection(string hostname)
 			{
 				if (_wtsCom == null)
 				{
@@ -853,9 +852,10 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					Runtime.MessageCollector.AddExceptionMessage(My.Language.strRdpOpenConnectionFailed, ex, MessageClass.ErrorMsg, true);
 				}
+                return 0;
 			}
 					
-			public void CloseConnection(long serverHandle)
+			public void CloseConnection(int serverHandle)
 			{
 				if (_wtsCom == null)
 				{
@@ -871,8 +871,8 @@ namespace mRemoteNG.Connection.Protocol
 					Runtime.MessageCollector.AddExceptionMessage(My.Language.strRdpCloseConnectionFailed, ex, MessageClass.ErrorMsg, true);
 				}
 			}
-					
-			public SessionsCollection GetSessions(long serverHandle)
+
+            public SessionsCollection GetSessions(int serverHandle)
 			{
 				if (_wtsCom == null)
 				{
@@ -885,7 +885,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					WTSSessions wtsSessions = _wtsCom.WTSEnumerateSessions(serverHandle);
 							
-					long sessionId = 0;
+					int sessionId = 0;
 					string sessionUser = "";
 					long sessionState;
 					string sessionName = "";
@@ -917,8 +917,8 @@ namespace mRemoteNG.Connection.Protocol
 						
 				return sessions;
 			}
-					
-			public bool KillSession(long serverHandle, long sessionId)
+
+            public bool KillSession(int serverHandle, int sessionId)
 			{
 				if (_wtsCom == null)
 				{
@@ -955,11 +955,11 @@ namespace mRemoteNG.Connection.Protocol
 			{
 				get
 				{
-					return List.Count();
+					return List.Count;
 				}
 			}
 					
-			public Session Add(long sessionId, string sessionState, string sessionUser, string sessionName)
+			public Session Add(int sessionId, string sessionState, string sessionUser, string sessionName)
 			{
 				Session newSession = new Session();
 						
@@ -989,7 +989,7 @@ namespace mRemoteNG.Connection.Protocol
 		public class Session : CollectionBase
 		{
 					
-			public long SessionId {get; set;}
+			public int SessionId {get; set;}
 			public string SessionState {get; set;}
 			public string SessionUser {get; set;}
 			public string SessionName {get; set;}
@@ -999,19 +999,30 @@ namespace mRemoteNG.Connection.Protocol
         #region Fatal Errors
 		public class FatalErrors
 		{
-			public FatalErrors()
-			{
-				// VBConversions Note: Non-static class variable initialization is below.  Class variables cannot be initially assigned non-static values in C#.
-				_description = new string[] {System.Convert.ToString(0 == My.Language.strRdpErrorUnknown), System.Convert.ToString(1 == My.Language.strRdpErrorCode1), System.Convert.ToString(2 == My.Language.strRdpErrorOutOfMemory), System.Convert.ToString(3 == My.Language.strRdpErrorWindowCreation), System.Convert.ToString(4 == My.Language.strRdpErrorCode2), System.Convert.ToString(5 == My.Language.strRdpErrorCode3), System.Convert.ToString(6 == My.Language.strRdpErrorCode4), System.Convert.ToString(7 == My.Language.strRdpErrorConnection), System.Convert.ToString(100 == My.Language.strRdpErrorWinsock)};
-						
-			}
-			protected static string[] _description; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
+            protected static Hashtable _description;
+            protected static void InitDescription()
+            {
+                _description = new Hashtable();
+                _description.Add("0", "My.Language.strRdpErrorUnknown");
+                _description.Add("1", "My.Language.strRdpErrorCode1");
+                _description.Add("2", "My.Language.strRdpErrorOutOfMemory");
+                _description.Add("3", "My.Language.strRdpErrorWindowCreation");
+                _description.Add("4", "My.Language.strRdpErrorCode2");
+                _description.Add("5", "My.Language.strRdpErrorCode3");
+                _description.Add("6", "My.Language.strRdpErrorCode4");
+                _description.Add("7", "My.Language.strRdpErrorConnection");
+                _description.Add("100", "My.Language.strRdpErrorWinsock");
+            }
 					
 			public static string GetError(string id)
 			{
+                if (_description == null)
+                {
+                    InitDescription();
+                }
 				try
 				{
-					return (_description[int.Parse(id)]);
+					return ((string)_description[id]);
 				}
 				catch (Exception ex)
 				{

@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,7 +8,7 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
+using mRemoteNG.My;
 
 
 
@@ -17,28 +16,28 @@ namespace mRemoteNG.Messages
 {
 	public class Collector
     {
-#region Constructors
+        #region Constructors
         public Collector(UI.Window.ErrorsAndInfos MessageCollectorForm)
         {
             this._MCForm = MessageCollectorForm;
             CreateTimer();
         }
-#endregion
+        #endregion
 
-#region Private Properties
+        #region Private Properties
         private Timer ECTimer;
         private UI.Window.ErrorsAndInfos _MCForm;
-#endregion
+        #endregion
 
-#region Public Properties
+        #region Public Properties
         public UI.Window.ErrorsAndInfos MCForm
 		{
 			get { return this._MCForm; }
 			set { this._MCForm = value; }
 		}
-#endregion
+        #endregion
 
-#region Public Methods
+        #region Public Methods
         public void AddMessage(Messages.MessageClass MsgClass, string MsgText, bool OnlyLog = false)
         {
             Messages.Message nMsg = new Messages.Message();
@@ -46,10 +45,10 @@ namespace mRemoteNG.Messages
             nMsg.MsgText = MsgText;
             nMsg.MsgDate = DateTime.Now;
 
-            if (My.Settings.Default.SwitchToMCOnInformation && nMsg.MsgClass == Messages.MessageClass.InformationMsg)
+            if (Settings.Default.SwitchToMCOnInformation && nMsg.MsgClass == Messages.MessageClass.InformationMsg)
             {
                 Debug.Print("Info: " + nMsg.MsgText);
-                if (My.Settings.Default.WriteLogFile)
+                if (Settings.Default.WriteLogFile)
                 {
                     App.Runtime.Log.Info(nMsg.MsgText);
                 }
@@ -59,7 +58,7 @@ namespace mRemoteNG.Messages
                     return;
                 }
 
-                if (My.Settings.Default.ShowNoMessageBoxes)
+                if (Settings.Default.ShowNoMessageBoxes)
                 {
                     ECTimer.Enabled = true;
                 }
@@ -69,10 +68,10 @@ namespace mRemoteNG.Messages
                 }
             }
 
-            if (My.Settings.Default.SwitchToMCOnWarning && nMsg.MsgClass == Messages.MessageClass.WarningMsg)
+            if (Settings.Default.SwitchToMCOnWarning && nMsg.MsgClass == Messages.MessageClass.WarningMsg)
             {
                 Debug.Print("Warning: " + nMsg.MsgText);
-                if (My.Settings.Default.WriteLogFile)
+                if (Settings.Default.WriteLogFile)
                 {
                     App.Runtime.Log.Warn(nMsg.MsgText);
                 }
@@ -82,7 +81,7 @@ namespace mRemoteNG.Messages
                     return;
                 }
 
-                if (My.Settings.Default.ShowNoMessageBoxes)
+                if (Settings.Default.ShowNoMessageBoxes)
                 {
                     ECTimer.Enabled = true;
                 }
@@ -92,7 +91,7 @@ namespace mRemoteNG.Messages
                 }
             }
 
-            if (My.Settings.Default.SwitchToMCOnError && nMsg.MsgClass == Messages.MessageClass.ErrorMsg)
+            if (Settings.Default.SwitchToMCOnError && nMsg.MsgClass == Messages.MessageClass.ErrorMsg)
             {
                 Debug.Print("Error: " + nMsg.MsgText);
 
@@ -104,7 +103,7 @@ namespace mRemoteNG.Messages
                     return;
                 }
 
-                if (My.Settings.Default.ShowNoMessageBoxes)
+                if (Settings.Default.ShowNoMessageBoxes)
                 {
                     ECTimer.Enabled = true;
                 }
@@ -118,7 +117,7 @@ namespace mRemoteNG.Messages
             {
                 Debug.Print("Report: " + nMsg.MsgText);
 
-                if (My.Settings.Default.WriteLogFile)
+                if (Settings.Default.WriteLogFile)
                 {
                     App.Runtime.Log.Info(nMsg.MsgText);
                 }
@@ -140,7 +139,7 @@ namespace mRemoteNG.Messages
         }
 #endregion
 
-#region Private Methods
+        #region Private Methods
         private void CreateTimer()
         {
             ECTimer = new Timer();
@@ -157,7 +156,7 @@ namespace mRemoteNG.Messages
 
         private void SwitchToMessage()
         {
-            this._MCForm.PreviousActiveForm = frmMain.Default.pnlDock.ActiveContent;
+            this._MCForm.PreviousActiveForm = (WeifenLuo.WinFormsUI.Docking.DockContent)frmMain.Default.pnlDock.ActiveContent;
             this.ShowMCForm();
             this._MCForm.lvErrorCollector.Focus();
             this._MCForm.lvErrorCollector.SelectedItems.Clear();
@@ -180,9 +179,9 @@ namespace mRemoteNG.Messages
                     break;
             }
         }
-#endregion
+        #endregion
 		
-#region Delegates
+        #region Delegates
 		private delegate void ShowMCFormCB();
 		private void ShowMCForm()
 		{
@@ -210,6 +209,6 @@ namespace mRemoteNG.Messages
                 this._MCForm.lvErrorCollector.Items.Insert(0, lvItem);
             }
         }
-#endregion
+        #endregion
 	}
 }

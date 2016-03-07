@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -9,8 +8,6 @@ using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
-// End of VB project level imports
-
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Reflection;
@@ -20,14 +17,13 @@ namespace mRemoteNG.Tools
 {
 	public class PropertyGridCommandSite : IMenuCommandService, ISite
 	{
-			
 		protected object TheObject;
 		public PropertyGridCommandSite(object @object)
 		{
 			TheObject = @object;
 		}
 			
-public DesignerVerbCollection Verbs
+        public DesignerVerbCollection Verbs
 		{
 			get
 			{
@@ -121,7 +117,7 @@ public DesignerVerbCollection Verbs
 			}
 		}
 			
-public System.ComponentModel.IComponent Component
+        public System.ComponentModel.IComponent Component
 		{
 			get
 			{
@@ -129,7 +125,7 @@ public System.ComponentModel.IComponent Component
 			}
 		}
 			
-public System.ComponentModel.IContainer Container
+        public System.ComponentModel.IContainer Container
 		{
 			get
 			{
@@ -137,7 +133,7 @@ public System.ComponentModel.IContainer Container
 			}
 		}
 			
-public bool DesignMode
+        public bool DesignMode
 		{
 			get
 			{
@@ -145,7 +141,7 @@ public bool DesignMode
 			}
 		}
 			
-public string Name
+        public string Name
 		{
 			get
 			{
@@ -195,22 +191,22 @@ public string Name
 	}
 		
 	public class CommandAttribute : Attribute
+	{
+		private bool _Command = false;
+        public bool Command
 		{
-			private bool _Command = false;
-public bool Command
+			get
 			{
-				get
-				{
-					return _Command;
-				}
-				set
-				{
-					_Command = value;
-				}
+				return _Command;
 			}
-			public CommandAttribute(bool isCommand = true)
+			set
 			{
-				Command = isCommand;
+				_Command = value;
 			}
 		}
+		public CommandAttribute(bool isCommand = true)
+		{
+			Command = isCommand;
+		}
+	}
 }

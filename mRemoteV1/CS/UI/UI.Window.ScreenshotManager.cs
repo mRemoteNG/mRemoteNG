@@ -78,21 +78,21 @@ namespace mRemoteNG.UI.Window
 			//mMenFile
 			//
 			this.mMenFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenFileSaveAll, this.mMenFileRemoveAll});
-			this.mMenFile.Image = global::My.Resources.Resources.File;
+			this.mMenFile.Image = My.Resources.File;
 			this.mMenFile.Name = "mMenFile";
 			this.mMenFile.Size = new System.Drawing.Size(51, 20);
 			this.mMenFile.Text = "&File";
 			//
 			//mMenFileSaveAll
 			//
-			this.mMenFileSaveAll.Image = global::My.Resources.Resources.Screenshot_Save;
+			this.mMenFileSaveAll.Image = My.Resources.Screenshot_Save;
 			this.mMenFileSaveAll.Name = "mMenFileSaveAll";
 			this.mMenFileSaveAll.Size = new System.Drawing.Size(128, 22);
 			this.mMenFileSaveAll.Text = "Save All";
 			//
 			//mMenFileRemoveAll
 			//
-			this.mMenFileRemoveAll.Image = global::My.Resources.Resources.Screenshot_Delete;
+			this.mMenFileRemoveAll.Image = My.Resources.Screenshot_Delete;
 			this.mMenFileRemoveAll.Name = "mMenFileRemoveAll";
 			this.mMenFileRemoveAll.Size = new System.Drawing.Size(128, 22);
 			this.mMenFileRemoveAll.Text = "Remove All";
@@ -105,14 +105,14 @@ namespace mRemoteNG.UI.Window
 			//
 			//cMenScreenshotCopy
 			//
-			this.cMenScreenshotCopy.Image = global::My.Resources.Resources.Screenshot_Copy;
+			this.cMenScreenshotCopy.Image = My.Resources.Screenshot_Copy;
 			this.cMenScreenshotCopy.Name = "cMenScreenshotCopy";
 			this.cMenScreenshotCopy.Size = new System.Drawing.Size(99, 22);
 			this.cMenScreenshotCopy.Text = "Copy";
 			//
 			//cMenScreenshotSave
 			//
-			this.cMenScreenshotSave.Image = global::My.Resources.Resources.Screenshot_Save;
+			this.cMenScreenshotSave.Image = My.Resources.Screenshot_Save;
 			this.cMenScreenshotSave.Name = "cMenScreenshotSave";
 			this.cMenScreenshotSave.Size = new System.Drawing.Size(99, 22);
 			this.cMenScreenshotSave.Text = "Save";
@@ -130,7 +130,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.flpScreenshots);
 			this.Controls.Add(this.msMain);
 			this.HideOnClose = true;
-			this.Icon = global::My.Resources.Resources.Screenshot_Icon;
+			this.Icon = My.Resources.Screenshot_Icon;
 			this.MainMenuStrip = this.msMain;
 			this.Name = "ScreenshotManager";
 			this.TabText = "Screenshots";
@@ -212,7 +212,7 @@ namespace mRemoteNG.UI.Window
 					
 			if (e.Button == System.Windows.Forms.MouseButtons.Left)
 			{
-				this.OpenScreenshot(sender);
+				this.OpenScreenshot((System.Windows.Forms.PictureBox)sender);
 			}
 		}
 				
@@ -220,7 +220,7 @@ namespace mRemoteNG.UI.Window
 		{
 			if (e.Button == System.Windows.Forms.MouseButtons.Left)
 			{
-				this.CloseOpenedScreenshot(sender.Parent);
+				this.CloseOpenedScreenshot((System.Windows.Forms.Form)((Control)sender).Parent);
 			}
 		}
 				
@@ -269,7 +269,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				sender.Parent.Dispose();
+				((Control)sender).Parent.Dispose();
 			}
 			catch (Exception ex)
 			{

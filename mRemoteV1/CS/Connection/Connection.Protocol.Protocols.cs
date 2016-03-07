@@ -1,4 +1,3 @@
-// VBConversions Note: VB project level imports
 using System.Collections.Generic;
 using System;
 using AxWFICALib;
@@ -10,9 +9,6 @@ using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.Tools;
-// End of VB project level imports
-
-//using mRemoteNG.Tools.LocalizedAttributes;
 
 
 namespace mRemoteNG.Connection.Protocol
