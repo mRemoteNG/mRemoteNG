@@ -59,7 +59,7 @@ namespace mRemoteNG.Config.Connections
         #endregion
 				
         #region Public Methods
-		public void Save()
+		public void SaveConnections()
 		{
 			switch (SaveFormat)
 			{

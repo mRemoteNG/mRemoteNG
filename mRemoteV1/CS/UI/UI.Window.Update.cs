@@ -25,7 +25,7 @@ namespace mRemoteNG.UI.Window
 			WindowType = Type.Update;
 			DockPnl = panel;
 			InitializeComponent();
-			FontOverride(this);
+			Runtime.FontOverride(this);
 		}
         #endregion
 				
@@ -81,7 +81,7 @@ namespace mRemoteNG.UI.Window
 			if (_appUpdate == null)
 			{
 				_appUpdate = new App.Update();
-				_appUpdate.Load += _appUpdate.Update_Load;
+				//_appUpdate.Load += _appUpdate.Update_Load;
 			}
 			else if (_appUpdate.IsGetUpdateInfoRunning)
 			{
@@ -114,8 +114,8 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				_appUpdate.GetUpdateInfoCompletedEvent -= GetUpdateInfoCompleted;
-						
-				lblInstalledVersion.Text = System.Convert.ToString(Application.Info.Version.ToString());
+				
+				lblInstalledVersion.Text = Application.ProductVersion;
 				lblInstalledVersion.Visible = true;
 				lblInstalledVersionLabel.Visible = true;
 				btnCheckForUpdate.Visible = true;
@@ -260,7 +260,7 @@ namespace mRemoteNG.UI.Window
 						
 				if (MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.OK)
 				{
-					Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
+					Runtime.Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
 					return ;
 				}
 				else

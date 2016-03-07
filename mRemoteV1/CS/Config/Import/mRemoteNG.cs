@@ -56,7 +56,7 @@ namespace mRemoteNG.Config.Import
             connectionsLoad.ConnectionList = Runtime.ConnectionList;
             connectionsLoad.ContainerList = Runtime.ContainerList;
 				
-			connectionsLoad.Load_Renamed(true);
+			connectionsLoad.LoadConnections(true);
 				
 			Runtime.ContainerList.Add(containerInfo);
 		}

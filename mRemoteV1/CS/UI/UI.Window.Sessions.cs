@@ -87,7 +87,7 @@ namespace mRemoteNG.UI.Window
 						_getSessionsThread.Abort();
 					}
 				}
-				_getSessionsThread = new Thread(new System.Threading.ThreadStart(GetSessionsBackground));
+                _getSessionsThread = new Thread(GetSessionsAsync);
 				_getSessionsThread.SetApartmentState(ApartmentState.STA);
 				_getSessionsThread.IsBackground = true;
 				_getSessionsThread.Start(data);
@@ -133,7 +133,7 @@ namespace mRemoteNG.UI.Window
 				data.Domain = domain;
 				data.SessionId = int.Parse(sessionId);
 						
-				Thread thread = new Thread(new System.Threading.ThreadStart(KillSessionBackground));
+				Thread thread = new Thread(KillSessionAsync);
 				thread.SetApartmentState(ApartmentState.STA);
 				thread.IsBackground = true;
 				thread.Start(data);
@@ -164,7 +164,7 @@ namespace mRemoteNG.UI.Window
 		}
         #endregion
 				
-		private void GetSessionsBackground(object dataObject)
+		private void GetSessionsAsync(object dataObject)
 		{
 			BackgroundData data = dataObject as BackgroundData;
 			if (data == null)
@@ -222,7 +222,7 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		private void KillSessionBackground(object dataObject)
+		private void KillSessionAsync(object dataObject)
 		{
 			BackgroundData data = dataObject as BackgroundData;
 			if (data == null)

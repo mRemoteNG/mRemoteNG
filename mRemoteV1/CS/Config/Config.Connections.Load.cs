@@ -115,7 +115,7 @@ namespace mRemoteNG.Config.Connections
         #endregion
 				
         #region Public Methods
-		public void Load(bool import)
+		public void LoadConnections(bool import)
 		{
 			if (UseSQL)
 			{

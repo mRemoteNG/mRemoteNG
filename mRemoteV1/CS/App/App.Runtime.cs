@@ -1207,11 +1207,26 @@ namespace mRemoteNG.App
 			
 		private static void cMenConnectionPanelScreen_Click(object sender, System.EventArgs e)
 		{
+            System.Windows.Forms.Screen screen = null;
+            WeifenLuo.WinFormsUI.Docking.DockContent panel = null;
 			try
 			{
-                Screen screen = ((ToolStripMenuItem)sender).Tag(0);
-                DockContent panel = ((ToolStripMenuItem)sender).Tag(1);
-				Screens.SendPanelToScreen(panel, screen);
+                IEnumerable tagEnumeration = (IEnumerable)((ToolStripMenuItem)sender).Tag;
+                if (tagEnumeration != null)
+                {
+                    foreach (Object obj in tagEnumeration) 
+                    {
+                        if (obj is System.Windows.Forms.Screen)
+                        {
+                            screen = (System.Windows.Forms.Screen)obj;
+                        }
+                        else if (obj is WeifenLuo.WinFormsUI.Docking.DockContent)
+                        {
+                            panel = (WeifenLuo.WinFormsUI.Docking.DockContent)obj;
+                        }
+                    }
+                    Screens.SendPanelToScreen(panel, screen);
+                }
 			}
 			catch (Exception)
 			{
@@ -1282,7 +1297,7 @@ namespace mRemoteNG.App
 					
 				// Load config
 				connectionsLoad.ConnectionFileName = filename;
-				connectionsLoad.Load(false);
+				connectionsLoad.LoadConnections(false);
 					
 				Windows.treeForm.tvConnections.SelectedNode = connectionsLoad.RootTreeNode;
 			}
@@ -1383,7 +1398,7 @@ namespace mRemoteNG.App
 				connectionsLoad.SQLPassword = Security.Crypt.Decrypt(System.Convert.ToString(My.Settings.Default.SQLPass), Info.General.EncryptionKey);
 				connectionsLoad.SQLUpdate = update;
 					
-				connectionsLoad.Load(false);
+				connectionsLoad.LoadConnections(false);
 					
 				if (My.Settings.Default.UseSQLServer == true)
 				{
@@ -1588,7 +1603,7 @@ namespace mRemoteNG.App
 					conS.SQLPassword = Security.Crypt.Decrypt(System.Convert.ToString(My.Settings.Default.SQLPass), App.Info.General.EncryptionKey);
 				}
 					
-				conS.Save();
+				conS.SaveConnections();
 					
 				if (My.Settings.Default.UseSQLServer == true)
 				{
@@ -1647,7 +1662,7 @@ namespace mRemoteNG.App
 					connectionsSave.ContainerList = ContainerList;
 					connectionsSave.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
 						
-					connectionsSave.Save();
+					connectionsSave.SaveConnections();
 						
 					if (saveFileDialog.FileName == GetDefaultStartupConnectionFileName())
 					{
@@ -2265,7 +2280,7 @@ namespace mRemoteNG.App
         #region SQL Watcher
 		private static void tmrSqlWatcher_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
-			Tools.Misc.IsSQLUpdateAvailableBG();
+			Tools.Misc.IsSQLUpdateAvailableAsync();
 		}
 			
 		private static void SQLUpdateCheckFinished(bool UpdateAvailable)

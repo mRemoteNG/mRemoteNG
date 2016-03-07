@@ -122,7 +122,7 @@ namespace mRemoteNG.Tools
 				newConnectionInfo.Name = DisplayName;
 				newConnectionInfo.Panel = My.Language.strMenuExternalTools;
 					
-				OpenConnection(newConnectionInfo);
+				Runtime.OpenConnection(newConnectionInfo);
 			}
 			catch (Exception ex)
 			{
@@ -139,16 +139,32 @@ namespace mRemoteNG.Tools
 			
 		private struct Replacement
 		{
+            private int _Start;
+            private int _Length;
+            private string _Value;
+
 			public Replacement(int start, int length, string value)
 			{
-				this.Start = start;
-				this.Length = length;
-				this.Value = value;
+				this._Start = start;
+				this._Length = length;
+				this._Value = value;
 			}
 				
-			public int Start {get; set;}
-			public int Length {get; set;}
-			public string Value {get; set;}
+			public int Start 
+            {
+                get { return _Start; }
+                set { _Start = value; }
+            }
+			public int Length
+            {
+                get { return _Length; }
+                set { _Length = value; }
+            }
+			public string Value
+            {
+                get { return _Value; }
+                set { _Value = value; }
+            }
 		}
 			
 		public string ParseArguments(string input)
@@ -181,8 +197,8 @@ namespace mRemoteNG.Tools
 					
 				if (tokenStart > 0)
 				{
-					char tokenStartPrefix = input.Substring(tokenStart - 1, 1);
-					char tokenEndPrefix = input.Substring(tokenEnd - 1, 1);
+					char tokenStartPrefix = input.Substring(tokenStart - 1, 1).ToCharArray()[0];
+                    char tokenEndPrefix = input.Substring(tokenEnd - 1, 1).ToCharArray()[0];
 						
 					if (tokenStartPrefix == '\\' && tokenEndPrefix == '\\')
 					{
@@ -267,11 +283,11 @@ namespace mRemoteNG.Tools
 					char trailing = '\0';
 					if (tokenEnd + 2 <= input.Length)
 					{
-						trailing = input.Substring(tokenEnd + 1, 1);
+                        trailing = input.Substring(tokenEnd + 1, 1).ToCharArray()[0];
 					}
 					else
 					{
-						trailing = string.Empty;
+						trailing = string.Empty.ToCharArray()[0];
 					}
 						
 					if (escape == EscapeType.All)

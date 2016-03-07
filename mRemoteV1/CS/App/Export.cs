@@ -94,7 +94,7 @@ namespace mRemoteNG.App
 					
 				connectionsSave.SaveSecurity = saveSecurity;
 					
-				connectionsSave.Save_Renamed();
+				connectionsSave.SaveConnections();
 			}
 			catch (Exception ex)
 			{

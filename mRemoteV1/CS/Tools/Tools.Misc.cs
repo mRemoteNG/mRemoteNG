@@ -92,14 +92,18 @@ namespace mRemoteNG.Tools
 			}
 		}
 			
-		public static void IsSQLUpdateAvailableBG()
+		public static void IsSQLUpdateAvailableAsync()
 		{
-            System.Threading.ThreadStart threadDelegate = new System.Threading.ThreadStart(IsSQLUpdateAvailable);
-			System.Threading.Thread t = new System.Threading.Thread(threadDelegate);
+            System.Threading.Thread t = new System.Threading.Thread(IsSQLUpdateAvailableDelegate);
 			t.SetApartmentState(System.Threading.ApartmentState.STA);
 			t.Start();
 		}
-			
+
+        private static void IsSQLUpdateAvailableDelegate()
+        {
+            IsSQLUpdateAvailable();
+        }
+
 		public static bool IsSQLUpdateAvailable()
 		{
 			try
@@ -132,14 +136,18 @@ namespace mRemoteNG.Tools
 						
 					if (LastUpdateInDB > Runtime.LastSqlUpdate)
 					{
-						if (SQLUpdateCheckFinishedEvent != null)
-							SQLUpdateCheckFinishedEvent(true);
+                        if (SQLUpdateCheckFinishedEvent != null)
+                        {
+                            SQLUpdateCheckFinishedEvent(true);
+                        }
 						return true;
 					}
 				}
 					
 				if (SQLUpdateCheckFinishedEvent != null)
+                {
 					SQLUpdateCheckFinishedEvent(false);
+                }
 			}
 			catch (Exception ex)
 			{

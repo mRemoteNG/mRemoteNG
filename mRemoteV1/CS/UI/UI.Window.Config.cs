@@ -774,7 +774,7 @@ namespace mRemoteNG.UI.Window
 					
 			AddToolStripItems();
 					
-			pGrid.HelpVisible = Settings.ShowConfigHelpText;
+			pGrid.HelpVisible = My.Settings.Default.ShowConfigHelpText;
 		}
 				
 		private void Config_SystemColorsChanged(System.Object sender, System.EventArgs e)
@@ -794,7 +794,7 @@ namespace mRemoteNG.UI.Window
 					}
 					else if (e.ChangedItem.Label == My.Language.strPropertyNameName)
 					{
-						App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Text = System.Convert.ToString(this.pGrid.SelectedObject.Name);
+						App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Text = System.Convert.ToString(((System.Windows.Forms.Control)this.pGrid.SelectedObject).Name);
 						if (My.Settings.Default.SetHostnameLikeDisplayName && this.pGrid.SelectedObject is mRemoteNG.Connection.Info)
 						{
 							mRemoteNG.Connection.Info connectionInfo = (mRemoteNG.Connection.Info) this.pGrid.SelectedObject;
@@ -832,20 +832,20 @@ namespace mRemoteNG.UI.Window
 							if (rootInfo.Password == true)
 							{
 								string passwordName = "";
-								if (Settings.UseSQLServer)
+								if (My.Settings.Default.UseSQLServer)
 								{
 									passwordName = Language.strSQLServer.TrimEnd(':');
 								}
 								else
 								{
-									passwordName = Path.GetFileName(GetStartupConnectionFileName());
+									passwordName = Path.GetFileName(Runtime.GetStartupConnectionFileName());
 								}
 										
 								string password = Tools.Misc.PasswordDialog(passwordName);
 										
 								if (string.IsNullOrEmpty(password))
 								{
-									rootInfo.Password = System.Convert.ToString(false);
+									rootInfo.Password = false;
 								}
 								else
 								{
@@ -892,7 +892,7 @@ namespace mRemoteNG.UI.Window
 						
 				if (this.pGrid.SelectedObject is mRemoteNG.Connection.Info)
 				{
-					mRemoteNG.Connection.Info conI = pGrid.SelectedObject;
+                    mRemoteNG.Connection.Info conI = (mRemoteNG.Connection.Info)pGrid.SelectedObject;
 							
 					switch (conI.Protocol)
 					{
@@ -920,7 +920,7 @@ namespace mRemoteNG.UI.Window
 								strHide.Add("RDGatewayUseConnectionCredentials");
 								strHide.Add("RDGatewayUsername");
 							}
-							else if (conI.RDGatewayUseConnectionCredentials)
+                            else if (conI.RDGatewayUseConnectionCredentials == mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials.Yes)
 							{
 								strHide.Add("RDGatewayDomain");
 								strHide.Add("RDGatewayPassword");
@@ -1730,8 +1730,7 @@ namespace mRemoteNG.UI.Window
 								
 						this.cMenIcons.Items.Add(tI);
 					}
-							
-					Point mPos = new Point(PointToScreen(new Point(e.Location.X + this.pGrid.Width - 100, e.Location.Y)));
+					Point mPos = new Point(new System.Drawing.Size(PointToScreen(new Point(e.Location.X + this.pGrid.Width - 100, e.Location.Y))));
 					this.cMenIcons.Show(mPos);
 				}
 			}
@@ -1774,7 +1773,7 @@ namespace mRemoteNG.UI.Window
 				connectionInfo.Icon = iconName;
 				pGrid.Refresh();
 						
-				SaveConnectionsBG();
+				Runtime.SaveConnectionsBG();
 			}
 			catch (Exception ex)
 			{
@@ -1872,7 +1871,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				propertyGridContextMenuShowHelpText.Checked = Settings.ShowConfigHelpText;
+				propertyGridContextMenuShowHelpText.Checked = My.Settings.Default.ShowConfigHelpText;
 				GridItem gridItem = pGrid.SelectedGridItem;
 				propertyGridContextMenuReset.Enabled = System.Convert.ToBoolean(pGrid.SelectedObject != null && gridItem != null && gridItem.PropertyDescriptor != null && gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject));
 			}
@@ -1905,7 +1904,7 @@ namespace mRemoteNG.UI.Window
 				
 		private void propertyGridContextMenuShowHelpText_CheckedChanged(object sender, EventArgs e)
 		{
-			Settings.ShowConfigHelpText = propertyGridContextMenuShowHelpText.Checked;
+			My.Settings.Default.ShowConfigHelpText = propertyGridContextMenuShowHelpText.Checked;
 			pGrid.HelpVisible = propertyGridContextMenuShowHelpText.Checked;
 		}
 	}

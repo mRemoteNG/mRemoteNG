@@ -77,7 +77,7 @@ namespace mRemoteNG.UI.Window
 		{
 			this.CleanUp();
 					
-			for (int i = 0; i <= this.List.Count() - 1; i++)
+			for (int i = 0; i <= this.List.Count - 1; i++)
 			{
 				if (this[i].Text == uiWindow.Replace("&", "&&"))
 				{

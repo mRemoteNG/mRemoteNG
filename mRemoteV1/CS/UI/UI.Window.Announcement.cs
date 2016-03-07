@@ -58,7 +58,7 @@ namespace mRemoteNG.UI.Window
 			if (_appUpdate == null)
 			{
 				_appUpdate = new App.Update();
-				_appUpdate.Load += _appUpdate.Update_Load;
+				//_appUpdate.Load += _appUpdate.Update_Load;
 			}
 			else if (_appUpdate.IsGetAnnouncementInfoRunning)
 			{

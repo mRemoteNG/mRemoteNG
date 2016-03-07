@@ -70,19 +70,19 @@ namespace mRemoteNG.Connection.Protocol
 				if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 				{
 					MiniGeckoBrowser.MiniGeckoBrowser objMiniGeckoBrowser = wBrowser as MiniGeckoBrowser.MiniGeckoBrowser;
-					objMiniGeckoBrowser.TitleChanged += wBrowser_DocumentTitleChanged;
+                    objMiniGeckoBrowser.TitleChanged += geckoBrowser_DocumentTitleChanged;
 					objMiniGeckoBrowser.LastTabRemoved += wBrowser_LastTabRemoved;
 				}
 				else
 				{
-					WebBrowser objWebBrowser = wBrowser as WebBrowser;
-					SHDocVw.WebBrowser objAxWebBrowser = (SHDocVw.WebBrowser) objWebBrowser.ActiveXInstance;
+                    WebBrowser objWebBrowser = (WebBrowser)wBrowser;
+                    SHDocVw.WebBrowserClass objAxWebBrowser = (SHDocVw.WebBrowserClass)objWebBrowser.ActiveXInstance;
 					objWebBrowser.ScrollBarsEnabled = true;
 					objWebBrowser.Navigated += wBrowser_Navigated;
 					objWebBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
 					objAxWebBrowser.NewWindow3 += wBrowser_NewWindow3;
 				}
-						
+				
 				return true;
 			}
 			catch (Exception ex)
@@ -170,8 +170,8 @@ namespace mRemoteNG.Connection.Protocol
 					
 			objWebBrowser.Navigated -= wBrowser_Navigated;
 		}
-				
-		private void wBrowser_NewWindow3(object ppDisp, ref bool Cancel, long dwFlags, string bstrUrlContext, string bstrUrl)
+
+        private void wBrowser_NewWindow3(ref object ppDisp, ref bool Cancel, uint dwFlags, string bstrUrlContext, string bstrUrl)
 		{
 			if ((dwFlags & (long)NWMF.NWMF_OVERRIDEKEY) > 0)
 			{
@@ -237,6 +237,57 @@ namespace mRemoteNG.Connection.Protocol
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed + Constants.vbNewLine + ex.Message, true);
 			}
 		}
+
+
+        private void geckoBrowser_DocumentTitleChanged(System.Object sender, string e)
+        {
+            try
+            {
+                Crownwood.Magic.Controls.TabPage tabP = default(Crownwood.Magic.Controls.TabPage);
+                tabP = InterfaceControl.Parent as Crownwood.Magic.Controls.TabPage;
+
+                if (tabP != null)
+                {
+                    string shortTitle = "";
+
+                    if (this.InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+                    {
+                        if ((wBrowser as MiniGeckoBrowser.MiniGeckoBrowser).Title.Length >= 30)
+                        {
+                            shortTitle = (wBrowser as MiniGeckoBrowser.MiniGeckoBrowser).Title.Substring(0, 29) + " ...";
+                        }
+                        else
+                        {
+                            shortTitle = (wBrowser as MiniGeckoBrowser.MiniGeckoBrowser).Title;
+                        }
+                    }
+                    else
+                    {
+                        if ((wBrowser as WebBrowser).DocumentTitle.Length >= 30)
+                        {
+                            shortTitle = (wBrowser as WebBrowser).DocumentTitle.Substring(0, 29) + " ...";
+                        }
+                        else
+                        {
+                            shortTitle = (wBrowser as WebBrowser).DocumentTitle;
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(this.tabTitle))
+                    {
+                        tabP.Title = tabTitle + " - " + shortTitle;
+                    }
+                    else
+                    {
+                        tabP.Title = shortTitle;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed + Constants.vbNewLine + ex.Message, true);
+            }
+        }
         #endregion
 				
         #region Enums

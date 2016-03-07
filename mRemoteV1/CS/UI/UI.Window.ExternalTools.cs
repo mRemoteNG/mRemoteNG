@@ -260,8 +260,8 @@ namespace mRemoteNG.UI.Window
 					listViewItem.Text = externalTool.DisplayName;
 					listViewItem.SubItems.Add(externalTool.FileName);
 					listViewItem.SubItems.Add(externalTool.Arguments);
-					listViewItem.SubItems.Add(externalTool.WaitForExit);
-					listViewItem.SubItems.Add(externalTool.TryIntegrate);
+					listViewItem.SubItems.Add(externalTool.WaitForExit.ToString());
+					listViewItem.SubItems.Add(externalTool.TryIntegrate.ToString());
 					listViewItem.Tag = externalTool;
 							
 					ToolsListView.Items.Add(listViewItem);

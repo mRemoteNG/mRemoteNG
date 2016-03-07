@@ -109,7 +109,7 @@ namespace mRemoteNG.Security
 			finally
 			{
 					
-				if (!System.IntPtr.op_Equality(tokenHandle, IntPtr.Zero))
+				if (!System.IntPtr.Equals(tokenHandle, IntPtr.Zero))
 				{
 					CloseHandle(tokenHandle);
 				}

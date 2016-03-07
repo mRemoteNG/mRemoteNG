@@ -241,7 +241,7 @@ namespace mRemoteNG.Controls
 			Horizontal = horizontalAlignment;
 		}
 			
-		[NotifyParentProperty(true), DefaultValue(VerticalAlignment.Top)]
+		[DefaultValue(VerticalAlignment.Top)]
         private VerticalAlignment _Vertical = VerticalAlignment.Top;
         public VerticalAlignment Vertical
 	    {
@@ -255,7 +255,7 @@ namespace mRemoteNG.Controls
 		    }
 	    }
 			
-		[NotifyParentProperty(true), DefaultValue(HorizontalAlignment.Left)]
+		[DefaultValue(HorizontalAlignment.Left)]
         private HorizontalAlignment _Horizontal = HorizontalAlignment.Left;
         public HorizontalAlignment Horizontal
 		{

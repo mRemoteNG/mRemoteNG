@@ -17,7 +17,7 @@ namespace mRemoteNG.UI.Window
 	{
 		public Base()
 		{
-			InitializeComponent();
+			//InitializeComponent();
 					
 			//Added to support default instance behavour in C#
 			if (defaultInstance == null)
