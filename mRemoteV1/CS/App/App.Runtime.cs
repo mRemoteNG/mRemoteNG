@@ -1,18 +1,13 @@
 using System.Collections.Generic;
 using System;
-using AxWFICALib;
 using System.Drawing;
 using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using System.ComponentModel;
 using mRemoteNG.Forms;
-using mRemoteNG.Config;
 using log4net;
-using mRemoteNG;
 using mRemoteNG.Messages;
 using mRemoteNG.Connection;
 using mRemoteNG.Tools;
@@ -20,14 +15,11 @@ using mRemoteNG.Forms.OptionsPages;
 using PSTaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
-using Crownwood;
 using System.Threading;
 using System.Xml;
-//using System.Environment;
 using System.Management;
 using Microsoft.Win32;
 using mRemoteNG.Connection.Protocol;
-//using Timer = System.Timers.Timer;
 
 
 namespace mRemoteNG.App

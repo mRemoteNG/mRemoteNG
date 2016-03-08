@@ -1179,8 +1179,8 @@
     <Reference Include="C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\SharedLibraryNG\bin\Debug\SharedLibraryNG.dll" />
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>call "$(DevEnvDir)..\tools\vsvars32.bat"
-editbin.exe /LARGEADDRESSAWARE "$(TargetPath)"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

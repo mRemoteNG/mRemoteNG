@@ -133,3 +133,154 @@ C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Po
 C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\mRemoteNG.Language.Language.zh-CN.resources
 C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\mRemoteNG.Language.Language.zh-TW.resources
 C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\mRemoteV1.csproj.GenerateResource.Cache
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\CMDSwitches.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Config.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Configuration.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Connection.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Connections.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\ConfigurationSQL.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Index.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\PortScan.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\ExternalTools.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\ErrorsAndInfos.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\ImportFromAD.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Installation.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Introduction.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\MainMenu.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Options.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Prerequisites.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\QuickConnect.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\QuickReference.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\SaveAsExport.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\ScreenshotManager.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\01.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\02.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\03.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\04.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\05.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\06.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\07.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\08.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\09.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\10.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\11.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\12.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\13.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\14.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\15.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\16.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Configuration\17.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\External Tools\01.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\External Tools\02.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\External Tools\03.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\External Tools\04.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\External Tools\05.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\External Tools\06.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\External Tools\07.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\External Tools\08.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Main Menu\File.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Main Menu\Info.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Main Menu\QuickConnect.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Main Menu\Tools.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Main Menu\View.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Screenshots\Reference\01.png
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Sessions.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\SQLScript.txt
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\SSHFileTransfer.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Update.htm
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Help\Main.css
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Anti Virus.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Backup.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Build Server.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Database.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Domain Controller.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\ESX.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Fax.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\File Server.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Finance.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Firewall.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Linux.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Log.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Mail Server.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\mRemote.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\mRemoteNG.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\PuTTY.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Remote Desktop.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Router.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\SharePoint.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\SSH.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Switch.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Tel.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Telnet.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Terminal Server.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Test Server.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Virtual Machine.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Web Server.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\WiFi.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Windows.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Icons\Workstation.ico
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\mRemoteNG.exe.manifest
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\mRemoteNG.application
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\mRemoteNG.exe
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\mRemoteNG.pdb
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\de\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\el\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\en-US\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\es-AR\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\es\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\hu\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\it\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\nb-NO\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\nl\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\pt-BR\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\pt\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\fr\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\pl\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\ru\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\uk\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\zh-CN\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\zh-TW\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\ADTree.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\DiffieHellman.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\FilteredPropertyGrid.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\IPTextBox.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\log4net.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\MagicLibrary.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\MiniGeckoBrowser.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\MiniTabControl.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Org.Mentalis.Security.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\PSTaskDialog.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\SharedLibraryNG.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Skybound.Gecko.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Tamir.SharpSSH.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\VncSharpNG.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\WeifenLuo.WinFormsUI.Docking.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\SharedLibraryNG.pdb
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\VncSharpNG.pdb
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Interop.EOLWTSCOM.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Interop.MSTSCLib.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Interop.SHDocVw.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\Interop.WFICALib.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\AxInterop.MSTSCLib.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\bin\Debug Portable\AxInterop.WFICALib.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\de\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\el\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\en-US\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\es-AR\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\es\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\hu\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\it\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\nb-NO\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\nl\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\pt-BR\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\pt\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\fr\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\pl\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\ru\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\uk\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\zh-CN\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\zh-TW\mRemoteNG.resources.dll
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\mRemoteNG.exe.manifest
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\mRemoteNG.application
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\mRemoteNG.exe
+C:\Users\David\Documents\Repositories\mRemoteNG_MyFork\mRemoteV1\CS\obj\Debug Portable\mRemoteNG.pdb

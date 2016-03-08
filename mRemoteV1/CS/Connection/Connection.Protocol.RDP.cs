@@ -78,7 +78,7 @@ namespace mRemoteNG.Connection.Protocol
         #endregion
 				
         #region Private Declarations
-		private MSTSCLib.MsRdpClient5NotSafeForScripting _rdpClient;
+		private MSTSCLib.MsRdpClient6NotSafeForScripting _rdpClient;
 		private Version _rdpVersion;
 		private Info _connectionInfo;
 		private bool _loginComplete;
@@ -107,7 +107,7 @@ namespace mRemoteNG.Connection.Protocol
 						System.Windows.Forms.Application.DoEvents();
 					}
 
-                    _rdpClient = (MsRdpClient5NotSafeForScripting)((AxMsRdpClient5NotSafeForScripting)Control).GetOcx();
+                    _rdpClient = (MsRdpClient6NotSafeForScripting)((AxMsRdpClient6NotSafeForScripting)Control).GetOcx();
 				}
 				catch (System.Runtime.InteropServices.COMException ex)
 				{
