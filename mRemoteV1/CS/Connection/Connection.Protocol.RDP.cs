@@ -1,9 +1,6 @@
-using System.Collections.Generic;
 using System;
-using AxWFICALib;
 using System.Drawing;
 using System.Diagnostics;
-using System.Data;
 using AxMSTSCLib;
 using Microsoft.VisualBasic;
 using System.Collections;

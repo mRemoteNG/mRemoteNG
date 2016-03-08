@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4934A491-40BC-4E5B-9166-EA1169A220F6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>mRemoteNG.My.MyApplication</StartupObject>
+    <StartupObject>mRemoteNG.ProgramRoot</StartupObject>
     <RootNamespace>mRemoteNG</RootNamespace>
     <AssemblyName>mRemoteNG</AssemblyName>
     <MyType>WindowsForms</MyType>
@@ -26,6 +26,7 @@
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>false</SignManifests>
     <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -41,7 +42,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -191,6 +191,7 @@
     <Compile Include="Config\Putty\Sessions.cs" />
     <Compile Include="Config\Putty\Provider.cs" />
     <Compile Include="Connection\Connection.Info.Inheritance.cs" />
+    <Compile Include="ProgramRoot.cs" />
     <Compile Include="UI\Controls\ListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -273,7 +274,7 @@
     <Compile Include="Tools\EnvironmentInfo.cs" />
     <Compile Include="Tools\PropertyGridCommandSite.cs" />
     <Compile Include="Connection\PuttySession.Info.cs" />
-    <Compile Include="Root\PuttySessions.Info.cs" />
+    <Compile Include="Tree\Root\PuttySessions.Info.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Themes\ThemeSerializer.cs" />
     <Compile Include="Connection\Connection.Icon.cs" />
@@ -327,7 +328,7 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Images\Images.Enums.cs" />
-    <Compile Include="Language\Language.Designer.cs">
+    <Compile Include="Resources\Language\Language.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Language.resx</DependentUpon>
@@ -349,7 +350,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Root\Root.Info.cs" />
+    <Compile Include="Tree\Root\Root.Info.cs" />
     <Compile Include="Security\Security.Crypt.cs" />
     <Compile Include="Security\Security.Impersonator.cs" />
     <Compile Include="Security\Security.Save.cs" />
@@ -496,53 +497,53 @@
     <EmbeddedResource Include="UI\Forms\OptionsPages\UpdatesPage.resx">
       <DependentUpon>UpdatesPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.de.resx">
+    <EmbeddedResource Include="Resources\Language\Language.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.el.resx" />
-    <EmbeddedResource Include="Language\Language.en-US.resx">
+    <EmbeddedResource Include="Resources\Language\Language.el.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.en-US.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.es-AR.resx" />
-    <EmbeddedResource Include="Language\Language.es.resx">
+    <EmbeddedResource Include="Resources\Language\Language.es-AR.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.es.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.hu.resx" />
-    <EmbeddedResource Include="Language\Language.it.resx">
+    <EmbeddedResource Include="Resources\Language\Language.hu.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.it.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.nb-NO.resx">
+    <EmbeddedResource Include="Resources\Language\Language.nb-NO.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.nl.resx">
+    <EmbeddedResource Include="Resources\Language\Language.nl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.pt-BR.resx" />
-    <EmbeddedResource Include="Language\Language.pt.resx">
+    <EmbeddedResource Include="Resources\Language\Language.pt-BR.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.pt.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.resx">
+    <EmbeddedResource Include="Resources\Language\Language.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.Designer.cs</LastGenOutput>
       <CustomToolNamespace>mRemoteNG.My</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.fr.resx">
+    <EmbeddedResource Include="Resources\Language\Language.fr.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.pl.resx">
+    <EmbeddedResource Include="Resources\Language\Language.pl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.ru.resx">
+    <EmbeddedResource Include="Resources\Language\Language.ru.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.uk.resx">
+    <EmbeddedResource Include="Resources\Language\Language.uk.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.zh-CN.resx">
+    <EmbeddedResource Include="Resources\Language\Language.zh-CN.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Language\Language.zh-TW.resx">
+    <EmbeddedResource Include="Resources\Language\Language.zh-TW.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

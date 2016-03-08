@@ -1,12 +1,4 @@
-using System.Collections.Generic;
 using System;
-using AxWFICALib;
-using System.Drawing;
-using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
-using Microsoft.VisualBasic;
-using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.Config;
 using mRemoteNG.My;
@@ -117,7 +109,7 @@ namespace mRemoteNG.Forms.OptionsPages
 				return ;
 			}
 				
-			Keys keysValue = System.Windows.Forms.Keys.A;
+			//Keys keysValue = System.Windows.Forms.Keys.A;
 			Keys keyCode = System.Windows.Forms.Keys.A;
 			Keys modifiers = System.Windows.Forms.Keys.A;
 				

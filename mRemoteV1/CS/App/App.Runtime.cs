@@ -927,7 +927,7 @@ namespace mRemoteNG.App
 						SaveConnections();
 					}
 						
-					Config.Settings.Save.Save_Renamed();
+					Config.Settings.Save.SaveSettings();
 						
 					IeBrowserEmulation.Unregister();
 				}
@@ -970,7 +970,6 @@ namespace mRemoteNG.App
 		{
 			DefaultConnection = new mRemoteNG.Connection.Info();
 			DefaultConnection.IsDefault = true;
-				
 			return DefaultConnection;
 		}
 			
@@ -1512,11 +1511,11 @@ namespace mRemoteNG.App
 		{
 			string newPath = App.Info.Connections.DefaultConnectionsPath + "\\" + Info.Connections.DefaultConnectionsFile;
             #if !PORTABLE
-			    string oldPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "\\" + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName + "\\" + Info.Connections.DefaultConnectionsFile;
-			    if (File.Exists(oldPath))
-			    {
-				    return oldPath;
-			    }
+			string oldPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "\\" + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName + "\\" + Info.Connections.DefaultConnectionsFile;
+			if (File.Exists(oldPath))
+			{
+				return oldPath;
+			}
             #endif
 			return newPath;
 		}

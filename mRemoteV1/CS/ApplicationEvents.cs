@@ -1,13 +1,5 @@
-using System.Collections.Generic;
 using System;
-using AxWFICALib;
-using System.Drawing;
 using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
-using Microsoft.VisualBasic;
-using System.Collections;
-using System.Windows.Forms;
 using Microsoft.VisualBasic.CompilerServices;
 
 namespace mRemoteNG.My
@@ -19,7 +11,7 @@ namespace mRemoteNG.My
 	// UnhandledException: Raised if the application encounters an unhandled exception.
 	// StartupNextInstance: Raised when launching a single-instance application and the application is already active.
 	// NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
-	partial class MyApplication : global::Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase
+	partial class MyApplication : Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase
 	{
 		public System.Threading.Mutex mutex;
 			
@@ -28,7 +20,6 @@ namespace mRemoteNG.My
 			if (My.Settings.Default.SingleInstance)
 			{
 				string mutexID = "mRemoteNG_SingleInstanceMutex";
-					
 				mutex = new System.Threading.Mutex(false, mutexID);
 					
 				if (!mutex.WaitOne(0, false))
@@ -52,7 +43,6 @@ namespace mRemoteNG.My
 		{
 			IntPtr hWnd = IntPtr.Zero;
 			Process curProc = Process.GetCurrentProcess();
-				
 			foreach (Process proc in Process.GetProcessesByName(curProc.ProcessName))
 			{
 				if (proc.Id != curProc.Id && proc.MainModule.FileName == curProc.MainModule.FileName && proc.MainWindowHandle != IntPtr.Zero)
@@ -61,14 +51,12 @@ namespace mRemoteNG.My
 					break;
 				}
 			}
-				
 			return hWnd;
 		}
 			
 		private void SwitchToCurrentInstance()
 		{
 			IntPtr hWnd = GetCurrentInstanceWindowHandle();
-				
 			if (hWnd != IntPtr.Zero)
 			{
 				//Restore window if minimized. Do not restore if already in
@@ -78,7 +66,6 @@ namespace mRemoteNG.My
 				{
 					App.Native.ShowWindow(hWnd, App.Native.SW_RESTORE);
 				}
-					
 				App.Native.SetForegroundWindow(hWnd);
 			}
 		}

@@ -1,20 +1,11 @@
-using System.Collections.Generic;
 using System;
-using AxWFICALib;
 using System.Drawing;
 using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
 using Microsoft.VisualBasic;
-using System.Collections;
 using System.Windows.Forms;
-using System.Runtime.InteropServices;
-using System.ComponentModel;
 using mRemoteNG.Messages;
 using System.Threading;
-using Microsoft.Win32;
 using mRemoteNG.App;
-using System.Text.RegularExpressions;
 using mRemoteNG.Tools;
 
 

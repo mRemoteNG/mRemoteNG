@@ -55,7 +55,6 @@ namespace mRemoteNG.Config.Import
 				default:
 					// ReSharper disable once LocalizableElement
 					throw (new ArgumentException("Argument must be either a root or a container node.", "xmlNode"));
-					break;
 			}
 				
 			if (parentTreeNode == null)
@@ -104,7 +103,6 @@ namespace mRemoteNG.Config.Import
 						break;
 					default:
 						throw (new FileFormatException(string.Format("Unrecognized child node ({0}).", childNode.Name)));
-						break;
 				}
 			}
 				
@@ -167,7 +165,6 @@ namespace mRemoteNG.Config.Import
 					break;
 				default:
 					throw (new FileFormatException(string.Format("Unrecognized protocol ({0}).", protocol)));
-					break;
 			}
 				
 			connectionInfo.Hostname = connectionInfoNode.SelectSingleNode("./host").InnerText;

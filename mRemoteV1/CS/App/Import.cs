@@ -64,7 +64,6 @@ namespace mRemoteNG.App
 									break;
 								default:
 									throw (new FileFormatException("Unrecognized file format."));
-									break;
 							}
 						}
 						catch (Exception ex)
@@ -74,7 +73,7 @@ namespace mRemoteNG.App
 					}
 						
 					parentTreeNode.Expand();
-					Container.Info parentContainer = parentTreeNode.Tag as Container.Info;
+                    Container.Info parentContainer = (Container.Info)parentTreeNode.Tag;
 					if (parentContainer != null)
 					{
 						parentContainer.IsExpanded = true;
@@ -106,7 +105,7 @@ namespace mRemoteNG.App
 				Config.Import.ActiveDirectory.Import(ldapPath, parentTreeNode);
 					
 				parentTreeNode.Expand();
-				Container.Info parentContainer = parentTreeNode.Tag as Container.Info;
+                Container.Info parentContainer = (Container.Info)parentTreeNode.Tag;
 				if (parentContainer != null)
 				{
 					parentContainer.IsExpanded = true;
@@ -136,7 +135,7 @@ namespace mRemoteNG.App
 				Config.Import.PortScan.Import(hosts, protocol, parentTreeNode);
 					
 				parentTreeNode.Expand();
-				Container.Info parentContainer = parentTreeNode.Tag as Container.Info;
+                Container.Info parentContainer = (Container.Info)parentTreeNode.Tag;
 				if (parentContainer != null)
 				{
 					parentContainer.IsExpanded = true;

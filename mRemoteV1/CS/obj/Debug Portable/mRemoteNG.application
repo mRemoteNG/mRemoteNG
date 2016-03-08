@@ -4,14 +4,14 @@
   <description asmv2:publisher="mRemoteNG" asmv2:product="mRemoteNG" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <deployment install="true" mapFileExtensions="true" />
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="mRemoteNG.exe.manifest" size="65477">
+    <dependentAssembly dependencyType="install" codebase="mRemoteNG.exe.manifest" size="65791">
       <assemblyIdentity name="mRemoteNG.exe" version="1.64.0.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="x86" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>j5P2fRwRg9Q7Wa3nowmAFQ94WPE=</dsig:DigestValue>
+        <dsig:DigestValue>rjdCTo/lj8mLzsHIoT933QV3DbU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

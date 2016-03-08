@@ -1,12 +1,5 @@
-using System.Collections.Generic;
 using System;
-using AxWFICALib;
-using System.Drawing;
-using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
 using Microsoft.VisualBasic;
-using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using System.Xml;
@@ -18,7 +11,7 @@ namespace mRemoteNG.Config.Settings
 	public class Save
 	{
         #region Public Methods
-		public static void Save_Renamed()
+		public static void SaveSettings()
 		{
 			try
 			{

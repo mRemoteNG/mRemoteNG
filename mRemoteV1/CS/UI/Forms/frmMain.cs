@@ -1,12 +1,7 @@
-using System.Collections.Generic;
 using System;
-using AxWFICALib;
 using System.Drawing;
 using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
 using Microsoft.VisualBasic;
-using System.Collections;
 using System.Windows.Forms;
 using System.IO;
 using mRemoteNG.App;
@@ -16,7 +11,6 @@ using System.Text;
 using WeifenLuo.WinFormsUI.Docking;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using Crownwood;
 using PSTaskDialog;
 using mRemoteNG.Config;
 using mRemoteNG.Themes;
@@ -24,22 +18,22 @@ using mRemoteNG.Themes;
 namespace mRemoteNG
 {
 	public partial class frmMain
-	{
-		public frmMain()
+    {
+        #region Constructors
+        public frmMain()
 		{
 			// VBConversions Note: Non-static class variable initialization is below.  Class variables cannot be initially assigned non-static values in C#.
 			_showFullPathInTitle = System.Convert.ToBoolean(Settings.Default.ShowCompleteConsPathInTitle);
-			
 			InitializeComponent();
-			
 			//Added to support default instance behavour in C#
 			if (defaultInstance == null)
 				defaultInstance = this;
 		}
-		
+        #endregion
+
         #region Default Instance
-		
-		private static frmMain defaultInstance;
+
+        private static frmMain defaultInstance;
 		
 		/// <summary>
 		/// Added by the VB.Net to C# Converter to support default instance behavour in C#
@@ -66,20 +60,15 @@ namespace mRemoteNG
 		{
 			defaultInstance = null;
 		}
-		
         #endregion
+
 		private FormWindowState _previousWindowState;
         public FormWindowState PreviousWindowState
 		{
-			get
-			{
-				return _previousWindowState;
-			}
-			set
-			{
-				_previousWindowState = value;
-			}
+			get { return _previousWindowState; }
+			set { _previousWindowState = value; }
 		}
+
 		public delegate void clipboardchangeEventHandler();
 		private static clipboardchangeEventHandler clipboardchangeEvent;
 		
@@ -191,7 +180,7 @@ namespace mRemoteNG
 			Config.Settings.Load SettingsLoad = new Config.Settings.Load(this);
 			
 			// Load GUI Configuration
-			SettingsLoad.Load_Renamed();
+			SettingsLoad.LoadSettings();
 			
 			Debug.Print("---------------------------" + Constants.vbNewLine + "[START] - " + System.Convert.ToString(DateTime.Now));
             Runtime.Startup.ParseCommandLineArgs();

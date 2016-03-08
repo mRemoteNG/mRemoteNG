@@ -1,12 +1,4 @@
-using System.Collections.Generic;
 using System;
-using AxWFICALib;
-using System.Drawing;
-using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
-using Microsoft.VisualBasic;
-using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.Tools;
 using System.ComponentModel;
@@ -25,18 +17,11 @@ namespace mRemoteNG.Container
             DefaultValue(""), 
             DesignOnly(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName"), 
-            Attributes.Container()]
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
         public string Name
 		{
-			get
-			{
-				return ConnectionInfo.Name;
-			}
-			set
-			{
-				ConnectionInfo.Name = value;
-			}
+			get { return ConnectionInfo.Name; }
+			set { ConnectionInfo.Name = value; }
 		}
 			
 		private TreeNode _TreeNode;
@@ -48,14 +33,8 @@ namespace mRemoteNG.Container
             DesignOnly(false)]
         public TreeNode TreeNode
 		{
-			get
-			{
-				return this._TreeNode;
-			}
-			set
-			{
-				this._TreeNode = value;
-			}
+			get { return this._TreeNode; }
+			set { this._TreeNode = value; }
 		}
 			
 		private object _Parent;
@@ -63,14 +42,8 @@ namespace mRemoteNG.Container
             Browsable(false)]
         public object Parent
 		{
-			get
-			{
-				return this._Parent;
-			}
-			set
-			{
-				this._Parent = value;
-			}
+			get { return this._Parent; }
+			set { this._Parent = value; }
 		}
 			
 		//Private _GlobalID As Integer = 0
@@ -94,27 +67,15 @@ namespace mRemoteNG.Container
             DesignOnly(false)]
         public bool IsExpanded
 		{
-			get
-			{
-				return this._IsExpanded;
-			}
-			set
-			{
-				this._IsExpanded = value;
-			}
+			get { return this._IsExpanded; }
+			set { this._IsExpanded = value; }
 		}
 			
 		private Connection.Info _ConnectionInfo = new Connection.Info();
         public Connection.Info ConnectionInfo
 		{
-			get
-			{
-				return this._ConnectionInfo;
-			}
-			set
-			{
-				this._ConnectionInfo = value;
-			}
+			get { return this._ConnectionInfo; }
+			set { this._ConnectionInfo = value; }
 		}
         #endregion
 			
@@ -137,12 +98,5 @@ namespace mRemoteNG.Container
 			}
 		}
         #endregion
-			
-		public class Attributes
-		{
-			public class Container : Attribute
-			{
-			}
-		}
 	}
 }
