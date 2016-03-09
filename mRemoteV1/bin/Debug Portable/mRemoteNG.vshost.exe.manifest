@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Resources\Icons\mRemote_Icon.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="mRemoteNG" version="1.73.5910.20996" language="neutral" processorArchitecture="x86" />
+    <assemblyIdentity name="mRemoteNG" version="1.73.5912.27924" language="neutral" processorArchitecture="x86" />
     <commandLine file="mRemoteNG.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -76,7 +76,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>9EGiZHuXvcSF2vHIzLX89aXCy7I=</dsig:DigestValue>
+        <dsig:DigestValue>XhjSaypjXi5Zlk5dNYNCxcVIfwU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -88,7 +88,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>xYQvomzivCqJIiNLX95buRW5wV4=</dsig:DigestValue>
+        <dsig:DigestValue>nCEUNTjzjgkZ5ZIYPfRYPG5FvrI=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -124,7 +124,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>5oQA/1NmzsmjKGPv8FQQcYoJrko=</dsig:DigestValue>
+        <dsig:DigestValue>9Al7vMd8ZwfxRO/3e3DFDdKgbeg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -136,7 +136,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>cbfSzV060gLV+uz5ofaV66gpEj0=</dsig:DigestValue>
+        <dsig:DigestValue>lkCRjKJltuObwHU3ea20hfFf6Gw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -148,7 +148,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>wSDSQRGU4kxtkEvU14XWQjv4/9c=</dsig:DigestValue>
+        <dsig:DigestValue>QwYlNMI4EXZO9dzuGHbyanuEMw4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -160,7 +160,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>szqWhWZwTQppAcA8tw2AKp57fsU=</dsig:DigestValue>
+        <dsig:DigestValue>pDqJNp/ooZqjh1h4xzQYko0+Fnc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -225,218 +225,218 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="mRemoteNG.exe" size="1462272">
-      <assemblyIdentity name="mRemoteNG" version="1.73.5910.20996" language="neutral" processorArchitecture="x86" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="mRemoteNG.exe" size="1301504">
+      <assemblyIdentity name="mRemoteNG" version="1.73.5912.27924" language="neutral" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>bMw767A7Zf6D+616McPKf1gqJw4=</dsig:DigestValue>
+        <dsig:DigestValue>uS5FEJZHWBWERMzvA9tLjsrPz7s=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="de\mRemoteNG.resources.dll" size="81920">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="de" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="de" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>rc6aPU//n7SHvCjMbZ0ADuaOVSM=</dsig:DigestValue>
+        <dsig:DigestValue>5PbjiOgizT8jFZics3cjfS6w+w8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="el\mRemoteNG.resources.dll" size="14848">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="el" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="el" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>jZTMKJbyjp3JvflCBna8onFcg6k=</dsig:DigestValue>
+        <dsig:DigestValue>YgJyE24JpMz3fgKz6xpmgS2gYJ8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="en-US\mRemoteNG.resources.dll" size="8192">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="en-US" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="en-US" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>CRrCJ6XTJ9V3Qs4XP27wPDdj7y4=</dsig:DigestValue>
+        <dsig:DigestValue>oa8wCwOooZeDqQM9sC9feStFdik=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="es\mRemoteNG.resources.dll" size="77824">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="es" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="es" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>aXqJJlpw0S39XvaSxiYhf0IDTJ8=</dsig:DigestValue>
+        <dsig:DigestValue>cyPbkRqC6lYTOkiPUS0nXQ8kVpk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="es-AR\mRemoteNG.resources.dll" size="12288">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="es-AR" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="es-AR" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>56IXvZ7/Ya8qYH+/TQReatbkdVo=</dsig:DigestValue>
+        <dsig:DigestValue>v6jDU9x06xmulyRp8pwhsAUThAQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="fr\mRemoteNG.resources.dll" size="81920">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="fr" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="fr" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>9lOXQayE2tYvols8OC6yiGEXE8s=</dsig:DigestValue>
+        <dsig:DigestValue>qQZaNrFwY6h4D2vEy49EgL7GTwA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="hu\mRemoteNG.resources.dll" size="10752">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="hu" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="hu" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>h4FfKhWjA7rmkhqBPRV3Lo9r+i8=</dsig:DigestValue>
+        <dsig:DigestValue>jXOt6FVhLkEH0l04/8FyPEzRyN0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="it\mRemoteNG.resources.dll" size="81920">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="it" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="it" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>zfhCYaTzKf9HFbEVWP3QapWNGNE=</dsig:DigestValue>
+        <dsig:DigestValue>P89+imTUl8HjhaLJicS9GFF2e50=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="nb-NO\mRemoteNG.resources.dll" size="81920">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="nb-NO" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="nb-NO" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>KH/GLL2K5RIlytVadDXo6kPz6XQ=</dsig:DigestValue>
+        <dsig:DigestValue>mBA0Xv2a+H6wGhJUfvbeVnETW68=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="nl\mRemoteNG.resources.dll" size="81920">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="nl" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="nl" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>csijvkWvSUICY7MDJTLnWgdV5Ww=</dsig:DigestValue>
+        <dsig:DigestValue>hhK33f0JAYWq+nSpVD5YOq2G3ec=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="pl\mRemoteNG.resources.dll" size="69632">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="pl" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="pl" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>xM/timueyR2W6YHajuVl3wvBYAE=</dsig:DigestValue>
+        <dsig:DigestValue>VJSoO/GXx2ch+6r3/WvBSNYKLTE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="pt\mRemoteNG.resources.dll" size="77824">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="pt" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="pt" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>x39c5XzTvw4CjGfVqQ7CdL0/JRI=</dsig:DigestValue>
+        <dsig:DigestValue>v83xozdfn9ToBjgUsFYgDkkQX2U=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="pt-BR\mRemoteNG.resources.dll" size="16896">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="pt-BR" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="pt-BR" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>wVeC6sd3kDSGMNBqTU8sVSh6dr0=</dsig:DigestValue>
+        <dsig:DigestValue>MYwlWqB9PohONl7ZzshA82TwP2c=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ru\mRemoteNG.resources.dll" size="94208">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="ru" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="ru" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>PY2hJcrKJ/1J7a1i6Y4Z73XAg5s=</dsig:DigestValue>
+        <dsig:DigestValue>KpHKE6PROeTg6C0EmvpzO5axzcE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="uk\mRemoteNG.resources.dll" size="86016">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="uk" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="uk" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>f25JxUv/ZUOVD5LeTi19kBdMobg=</dsig:DigestValue>
+        <dsig:DigestValue>ugY06N9Ldw+IvAmONutYcYwh+jo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="zh-CN\mRemoteNG.resources.dll" size="73728">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="zh-CN" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="zh-CN" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>mKrIZnac7e30xPbybf9GVA+T8gY=</dsig:DigestValue>
+        <dsig:DigestValue>A8P0QCcnKUayq2BRzV8eHaSsIpU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
     <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="zh-TW\mRemoteNG.resources.dll" size="73728">
-      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5910.20996" language="zh-TW" processorArchitecture="x86" />
+      <assemblyIdentity name="mRemoteNG.resources" version="1.73.5912.27924" language="zh-TW" processorArchitecture="x86" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-        <dsig:DigestValue>Q2E5bcZUXSKO8jT8KmDimp6t8H8=</dsig:DigestValue>
+        <dsig:DigestValue>U0l9a29HqkTUSOvAcjIV7UvZAxk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1298,13 +1298,13 @@
       <dsig:DigestValue>Y6Q02Yh15EGqerg+VB8EjE7MFag=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="mRemoteNG.exe.config" size="28315">
+  <file name="mRemoteNG.exe.config" size="53754">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
-      <dsig:DigestValue>+9nN63Z0RAe5jzEZuZwDNVtKUJY=</dsig:DigestValue>
+      <dsig:DigestValue>IlyIr324Y6E/W4mLPD26CfJCSmM=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Resources\Icons\mRemote_Icon.ico" size="60771">
