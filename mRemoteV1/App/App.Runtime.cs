@@ -1687,7 +1687,6 @@ namespace mRemoteNG.App
 			try
 			{
 				Uri uri = new Uri("dummyscheme" + System.Uri.SchemeDelimiter + connectionString);
-					
 				if (string.IsNullOrEmpty(uri.Host))
 				{
 					return null;

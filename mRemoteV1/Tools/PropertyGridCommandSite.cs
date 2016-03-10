@@ -110,38 +110,23 @@ namespace mRemoteNG.Tools
 			
         public System.ComponentModel.IComponent Component
 		{
-			get
-			{
-				throw (new NotImplementedException());
-			}
+			get { throw (new NotImplementedException()); }
 		}
 			
         public System.ComponentModel.IContainer Container
 		{
-			get
-			{
-				return null;
-			}
+			get { return null; }
 		}
 			
         public bool DesignMode
 		{
-			get
-			{
-				return true;
-			}
+			get { return true; }
 		}
 			
         public string Name
 		{
-			get
-			{
-				throw (new NotImplementedException());
-			}
-			set
-			{
-				throw (new NotImplementedException());
-			}
+			get { throw (new NotImplementedException()); }
+			set { throw (new NotImplementedException()); }
 		}
 			
 		public void AddCommand(MenuCommand command)
@@ -186,14 +171,8 @@ namespace mRemoteNG.Tools
 		private bool _Command = false;
         public bool Command
 		{
-			get
-			{
-				return _Command;
-			}
-			set
-			{
-				_Command = value;
-			}
+			get { return _Command; }
+			set { _Command = value; }
 		}
 		public CommandAttribute(bool isCommand = true)
 		{

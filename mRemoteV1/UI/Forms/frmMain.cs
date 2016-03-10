@@ -938,9 +938,7 @@ namespace mRemoteNG
 					cmbQuickConnect.Focus();
 					return ;
 				}
-										
 				cmbQuickConnect.Add(connectionInfo);
-										
 				Runtime.OpenConnection(connectionInfo, Connection.Info.Force.DoNotJump);
 			}
 			catch (Exception ex)
@@ -948,17 +946,17 @@ namespace mRemoteNG
 				Runtime.MessageCollector.AddExceptionMessage("btnQuickConnect_ButtonClick() failed.", ex, Messages.MessageClass.ErrorMsg, true);
 			}
 		}
-								
+		
 		public void cmbQuickConnect_ProtocolChanged(object sender, Controls.QuickConnectComboBox.ProtocolChangedEventArgs e)
 		{
 			SetQuickConnectProtocol(Connection.Protocol.Converter.ProtocolToString(e.Protocol));
 		}
-								
+	    
 		public void btnQuickConnect_DropDownItemClicked(System.Object sender, System.Windows.Forms.ToolStripItemClickedEventArgs e)
 		{
 			SetQuickConnectProtocol(e.ClickedItem.Text);
 		}
-								
+		
 		private void SetQuickConnectProtocol(string protocol)
 		{
 			My.Settings.Default.QuickConnectProtocol = protocol;
@@ -1077,7 +1075,7 @@ namespace mRemoteNG
 		{
 			_inSizeMove = true;
 		}
-								
+	    
 		public void frmMain_Resize(object sender, EventArgs e)
 		{
 			if (WindowState == FormWindowState.Minimized)
@@ -1096,7 +1094,7 @@ namespace mRemoteNG
 				PreviousWindowState = WindowState;
 			}
 		}
-								
+		
 		public void frmMain_ResizeEnd(object sender, EventArgs e)
 		{
 			_inSizeMove = false;			
@@ -1104,7 +1102,6 @@ namespace mRemoteNG
 			ActivateConnection();
 		}				
 		
-        /*
 		protected override void WndProc(ref Message m)
 		{
             // Listen for and handle operating system messages
@@ -1207,13 +1204,12 @@ namespace mRemoteNG
 									
 			base.WndProc(ref m);
 		}
-        */
-								
+        
 		private void ActivateConnection()
 		{
 			if (pnlDock.ActiveDocument is UI.Window.Connection)
 			{
-                UI.Window.Connection cW = (UI.Window.Connection)pnlDock.ActiveDocument;
+                UI.Window.Connection cW = pnlDock.ActiveDocument as UI.Window.Connection;
 				if (cW.TabController.SelectedTab != null)
 				{
 					Crownwood.Magic.Controls.TabPage tab = cW.TabController.SelectedTab;
@@ -1223,17 +1219,17 @@ namespace mRemoteNG
 				}
 			}
 		}
-								
+		
 		public void pnlDock_ActiveDocumentChanged(object sender, EventArgs e)
 		{
 			ActivateConnection();
-            UI.Window.Connection connectionWindow = (UI.Window.Connection)pnlDock.ActiveDocument;
+            UI.Window.Connection connectionWindow = pnlDock.ActiveDocument as UI.Window.Connection;
 			if (connectionWindow != null)
 			{
 				connectionWindow.UpdateSelectedConnection();
 			}
 		}
-								
+		
 		private void UpdateWindowTitle()
 		{
 			if (InvokeRequired)
@@ -1277,7 +1273,7 @@ namespace mRemoteNG
 		    
             this.Text = titleBuilder.ToString();
 		}
-								
+		
 		public void ShowHidePanelTabs(DockContent closingDocument = null)
 		{
 			DocumentStyle newDocumentStyle = pnlDock.DocumentStyle;
@@ -1313,7 +1309,7 @@ namespace mRemoteNG
 				pnlDock.Size = new Size(1, 1);
 			}
 		}
-								
+		
 		private void SelectTabRelative(int relativeIndex)
 		{
 			if (!(pnlDock.ActiveDocument is UI.Window.Connection))

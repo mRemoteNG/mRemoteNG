@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4934A491-40BC-4E5B-9166-EA1169A220F6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>mRemoteNG.My.MyApplication</StartupObject>
+    <StartupObject>mRemoteNG.ProgramRoot</StartupObject>
     <RootNamespace>mRemoteNG</RootNamespace>
     <AssemblyName>mRemoteNG</AssemblyName>
     <MyType>WindowsForms</MyType>
@@ -166,7 +166,7 @@
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationEvents.cs" />
+    <Compile Include="App\ApplicationEvents.cs" />
     <Compile Include="App\App.Info.cs" />
     <Compile Include="App\App.Native.cs" />
     <Compile Include="App\App.Runtime.cs" />
@@ -186,12 +186,12 @@
     <Compile Include="Config\Import\PuttyConnectionManager.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnection.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnectionManager.cs" />
-    <Compile Include="Config\Putty\RegistryProvider.cs" />
-    <Compile Include="Config\Putty\XmingProvider.cs" />
-    <Compile Include="Config\Putty\Sessions.cs" />
-    <Compile Include="Config\Putty\Provider.cs" />
+    <Compile Include="Config\Putty\Config.Putty.RegistryProvider.cs" />
+    <Compile Include="Config\Putty\Config.Putty.XmingProvider.cs" />
+    <Compile Include="Config\Putty\Config.Putty.Sessions.cs" />
+    <Compile Include="Config\Putty\Config.Putty.Provider.cs" />
     <Compile Include="Connection\Connection.Info.Inheritance.cs" />
-    <Compile Include="ProgramRoot.cs" />
+    <Compile Include="App\ProgramRoot.cs" />
     <Compile Include="UI\Controls\ListView.cs">
       <SubType>Component</SubType>
     </Compile>

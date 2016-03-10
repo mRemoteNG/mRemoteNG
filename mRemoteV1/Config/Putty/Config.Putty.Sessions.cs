@@ -80,11 +80,11 @@ namespace mRemoteNG.Config.Putty
 						treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
 						isNewNode = true;
 					}
-						
+					
 					sessionInfo.RootPuttySessionsInfo = provider.RootInfo;
 					sessionInfo.TreeNode = treeNode;
 					sessionInfo.Inherit.TurnOffInheritanceCompletely();
-						
+					
 					treeNode.Tag = sessionInfo;
 						
 					if (isNewNode)

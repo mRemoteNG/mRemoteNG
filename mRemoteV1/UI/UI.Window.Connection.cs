@@ -251,7 +251,6 @@ namespace mRemoteNG.UI.Window
         #region Public Methods
 		public Connection(DockContent Panel, string FormText = "")
 		{
-					
 			if (FormText == "")
 			{
 				FormText = My.Language.strNewPanel;
