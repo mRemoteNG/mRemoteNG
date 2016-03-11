@@ -291,15 +291,17 @@ namespace mRemoteNG.UI.Window
 			}
 		}
         #endregion
-		
+
+        #region Constructors
+        public Config(DockContent Panel)
+        {
+            this.WindowType = Type.Config;
+            this.DockPnl = Panel;
+            this.InitializeComponent();
+        }
+        #endregion
+
         #region Public Methods
-		public Config(DockContent Panel)
-		{
-			this.WindowType = Type.Config;
-			this.DockPnl = Panel;
-			this.InitializeComponent();
-		}
-				
 		// Main form handle command key events
 		// Adapted from http://kiwigis.blogspot.com/2009/05/adding-tab-key-support-to-propertygrid.html
 		protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, System.Windows.Forms.Keys keyData)
@@ -759,12 +761,9 @@ namespace mRemoteNG.UI.Window
 		private void Config_Load(object sender, System.EventArgs e)
 		{
 			ApplyLanguage();
-					
 			Themes.ThemeManager.ThemeChanged += ApplyTheme;
 			ApplyTheme();
-					
 			AddToolStripItems();
-					
 			pGrid.HelpVisible = My.Settings.Default.ShowConfigHelpText;
 		}
 				
@@ -1785,7 +1784,6 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				pReply = pingSender.Send(HostName);
-						
 				if (pReply.Status == IPStatus.Success)
 				{
 					if ((string) this.btnHostStatus.Tag == "checking")

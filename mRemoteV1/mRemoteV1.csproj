@@ -373,84 +373,84 @@
     <Compile Include="Tools\Tools.SystemMenu.cs" />
     <Compile Include="Tools\Tools.WindowPlacement.cs" />
     <Compile Include="Tree\Tree.Node.cs" />
-    <Compile Include="UI\UI.Window.About.cs">
+    <Compile Include="UI\Windows\UI.Window.About.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.ActiveDirectoryImport.Designer.cs">
+    <Compile Include="UI\Windows\UI.Window.ActiveDirectoryImport.Designer.cs">
       <DependentUpon>UI.Window.ActiveDirectoryImport.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.ActiveDirectoryImport.cs">
+    <Compile Include="UI\Windows\UI.Window.ActiveDirectoryImport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Announcement.Designer.cs">
+    <Compile Include="UI\Windows\UI.Window.Announcement.Designer.cs">
       <DependentUpon>UI.Window.Announcement.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.Announcement.cs">
+    <Compile Include="UI\Windows\UI.Window.Announcement.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Base.cs">
+    <Compile Include="UI\Windows\UI.Window.Base.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.ComponentsCheck.cs">
+    <Compile Include="UI\Windows\UI.Window.ComponentsCheck.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Config.cs">
+    <Compile Include="UI\Windows\UI.Window.Config.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Connection.cs">
+    <Compile Include="UI\Windows\UI.Window.Connection.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.ErrorsAndInfos.cs">
+    <Compile Include="UI\Windows\UI.Window.ErrorsAndInfos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.ExternalTools.Designer.cs">
+    <Compile Include="UI\Windows\UI.Window.ExternalTools.Designer.cs">
       <DependentUpon>UI.Window.ExternalTools.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.ExternalTools.cs">
+    <Compile Include="UI\Windows\UI.Window.ExternalTools.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Help.cs">
+    <Compile Include="UI\Windows\UI.Window.Help.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UI.Window.List.cs" />
-    <Compile Include="UI\UI.Window.PortScan.Designer.cs">
+    <Compile Include="UI\Windows\UI.Window.PortScan.Designer.cs">
       <DependentUpon>UI.Window.PortScan.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.PortScan.cs">
+    <Compile Include="UI\Windows\UI.Window.PortScan.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\ExportForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.ScreenshotManager.cs">
+    <Compile Include="UI\Windows\UI.Window.ScreenshotManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Sessions.Designer.cs">
+    <Compile Include="UI\Windows\UI.Window.Sessions.Designer.cs">
       <DependentUpon>UI.Window.Sessions.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.Sessions.cs">
+    <Compile Include="UI\Windows\UI.Window.Sessions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.SSHTransfer.cs">
+    <Compile Include="UI\Windows\UI.Window.SSHTransfer.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Tree.Designer.cs">
+    <Compile Include="UI\Windows\UI.Window.Tree.Designer.cs">
       <DependentUpon>UI.Window.Tree.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.Tree.cs">
+    <Compile Include="UI\Windows\UI.Window.Tree.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\UI.Window.Type.cs" />
-    <Compile Include="UI\UI.Window.UltraVNCSC.cs">
+    <Compile Include="UI\Windows\UI.Window.UltraVNCSC.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Update.Designer.cs">
+    <Compile Include="UI\Windows\UI.Window.Update.Designer.cs">
       <DependentUpon>UI.Window.Update.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\UI.Window.Update.cs">
+    <Compile Include="UI\Windows\UI.Window.Update.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -556,43 +556,43 @@
       <DependentUpon>ReconnectGroup.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.About.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.About.resx">
       <DependentUpon>UI.Window.About.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.ActiveDirectoryImport.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.ActiveDirectoryImport.resx">
       <DependentUpon>UI.Window.ActiveDirectoryImport.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.Announcement.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.Announcement.resx">
       <DependentUpon>UI.Window.Announcement.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.ComponentsCheck.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.ComponentsCheck.resx">
       <DependentUpon>UI.Window.ComponentsCheck.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.Config.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.Config.resx">
       <SubType>Designer</SubType>
       <DependentUpon>UI.Window.Config.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.Connection.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.Connection.resx">
       <DependentUpon>UI.Window.Connection.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.ErrorsAndInfos.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.ErrorsAndInfos.resx">
       <DependentUpon>UI.Window.ErrorsAndInfos.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.ExternalTools.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.ExternalTools.resx">
       <DependentUpon>UI.Window.ExternalTools.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.Help.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.Help.resx">
       <DependentUpon>UI.Window.Help.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.PortScan.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.PortScan.resx">
       <DependentUpon>UI.Window.PortScan.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -600,27 +600,27 @@
       <DependentUpon>ExportForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.ScreenshotManager.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.ScreenshotManager.resx">
       <DependentUpon>UI.Window.ScreenshotManager.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.Sessions.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.Sessions.resx">
       <DependentUpon>UI.Window.Sessions.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.SSHTransfer.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.SSHTransfer.resx">
       <DependentUpon>UI.Window.SSHTransfer.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.Tree.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.Tree.resx">
       <DependentUpon>UI.Window.Tree.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.UltraVNCSC.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.UltraVNCSC.resx">
       <DependentUpon>UI.Window.UltraVNCSC.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\UI.Window.Update.resx">
+    <EmbeddedResource Include="UI\Windows\UI.Window.Update.resx">
       <DependentUpon>UI.Window.Update.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>

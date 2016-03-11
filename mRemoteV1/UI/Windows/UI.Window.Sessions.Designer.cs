@@ -47,7 +47,7 @@ namespace mRemoteNG.UI.Window
 			this.sessionMenuLogoff.Image = My.Resources.Session_LogOff;
 			this.sessionMenuLogoff.Name = "sessionMenuLogoff";
 			this.sessionMenuLogoff.Size = new System.Drawing.Size(152, 22);
-			this.sessionMenuLogoff.Text = global::mRemoteNG.My.Language.strLogOff;
+			this.sessionMenuLogoff.Text = My.Language.strLogOff;
 			//
 			//sessionList
 			//
@@ -71,16 +71,16 @@ namespace mRemoteNG.UI.Window
 			//
 			//sessionUsernameColumn
 			//
-			this.sessionUsernameColumn.Text = global::mRemoteNG.My.Language.strColumnUsername;
+			this.sessionUsernameColumn.Text = My.Language.strColumnUsername;
 			this.sessionUsernameColumn.Width = 80;
 			//
 			//sessionActivityColumn
 			//
-			this.sessionActivityColumn.Text = global::mRemoteNG.My.Language.strActivity;
+			this.sessionActivityColumn.Text = My.Language.strActivity;
 			//
 			//sessionTypeColumn
 			//
-			this.sessionTypeColumn.Text = global::mRemoteNG.My.Language.strType;
+			this.sessionTypeColumn.Text = My.Language.strType;
 			this.sessionTypeColumn.Width = 80;
 			//
 			//Sessions
@@ -91,7 +91,7 @@ namespace mRemoteNG.UI.Window
 			this.HideOnClose = true;
 			this.Icon = (System.Drawing.Icon) (resources.GetObject("$this.Icon"));
 			this.Name = "Sessions";
-			this.TabText = global::mRemoteNG.My.Language.strMenuSessions;
+			this.TabText = My.Language.strMenuSessions;
 			this.Text = "Sessions";
 			sessionMenu.ResumeLayout(false);
 			this.ResumeLayout(false);
