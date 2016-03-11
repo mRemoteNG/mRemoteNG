@@ -6,66 +6,49 @@ using System.ComponentModel;
 namespace mRemoteNG.Controls
 {
 	public class ListView : System.Windows.Forms.ListView
-	{
+    {
+        #region Private Variables
+        private bool _ShowFocusCues;
+        private Alignment _LabelAlignment;
+        #endregion
+
         #region Public Properties
-		[Category("Appearance"), DefaultValue(typeof(Color), "HighlightText")]
-        public Color HighlightForeColor {get; set;}
+        [Category("Appearance"), DefaultValue(typeof(Color), "HighlightText")]
+        public Color HighlightForeColor { get; set; }
 			
 		[Category("Appearance"), DefaultValue(typeof(Color), "Highlight")]
-        public Color HighlightBackColor {get; set;}
+        public Color HighlightBackColor { get; set; }
 			
 		[Category("Appearance"), DefaultValue(typeof(Color), "HotTrack")]
-        public Color HighlightBorderColor {get; set;}
+        public Color HighlightBorderColor { get; set; }
 			
 		[Category("Appearance"), DefaultValue(typeof(Color), "ControlText")]
-        public Color InactiveHighlightForeColor {get; set;}
+        public Color InactiveHighlightForeColor { get; set; }
 			
 		[Category("Appearance"), DefaultValue(typeof(Color), "Control")]
-        public Color InactiveHighlightBackColor {get; set;}
+        public Color InactiveHighlightBackColor { get; set; }
 			
 		[Category("Appearance"), DefaultValue(typeof(Color), "ControlDark")]
-        public Color InactiveHighlightBorderColor {get; set;}
-			
-		[Category("Appearance"), DefaultValue(true)]
-        private bool _ShowFocusCues = true;
-        public new bool ShowFocusCues
-		{
-			get
-			{
-				return _ShowFocusCues;
-			}
-			set
-			{
-				_ShowFocusCues = value;
-			}
-		}
-			
-		[Category("Appearance")]
-        private Alignment _LabelAlignment = new Alignment(VerticalAlignment.Top, HorizontalAlignment.Left);
-        public Alignment LabelAlignment
-		{
-			get
-			{
-				return _LabelAlignment;
-			}
-			set
-			{
-				_LabelAlignment = value;
-			}
-		}
+        public Color InactiveHighlightBorderColor { get; set; }
+
+        [Category("Appearance"), DefaultValue(true)]
+        public new bool ShowFocusCues { get; set; }
+
+        [Category("Appearance")]
+        public Alignment LabelAlignment { get; set; }
         #endregion
 			
         #region Constructors
 		public ListView()
 		{
-			// VBConversions Note: Non-static class variable initialization is below.  Class variables cannot be initially assigned non-static values in C#.
+            ShowFocusCues = true;
+            LabelAlignment = new Alignment(VerticalAlignment.Top, HorizontalAlignment.Left);
 			HighlightForeColor = SystemColors.HighlightText;
 			HighlightBackColor = SystemColors.Highlight;
 			HighlightBorderColor = SystemColors.HotTrack;
 			InactiveHighlightForeColor = SystemColors.ControlText;
 			InactiveHighlightBackColor = SystemColors.Control;
 			InactiveHighlightBorderColor = SystemColors.ControlDark;
-				
 			OwnerDraw = true;
 		}
         #endregion
@@ -172,7 +155,6 @@ namespace mRemoteNG.Controls
 		private StringFormat GetStringFormat()
 		{
 			StringFormat format = StringFormat.GenericDefault;
-				
 			switch (LabelAlignment.Vertical)
 			{
 				case VerticalAlignment.Top:
@@ -213,7 +195,7 @@ namespace mRemoteNG.Controls
 			{
 				format.FormatFlags = (System.Drawing.StringFormatFlags) (format.FormatFlags | StringFormatFlags.NoWrap);
 			}
-				
+			
 			return format;
 		}
         #endregion
@@ -221,53 +203,52 @@ namespace mRemoteNG.Controls
 		
 	[TypeConverter(typeof(ExpandableObjectConverter))]
     public class Alignment
-	{
-		public Alignment()
+    {
+        #region Private Properties
+        [DefaultValue(VerticalAlignment.Top)]
+        private VerticalAlignment _Vertical = VerticalAlignment.Top;
+        [DefaultValue(HorizontalAlignment.Left)]
+        private HorizontalAlignment _Horizontal = HorizontalAlignment.Left;
+
+        #endregion
+
+        #region Constructors
+        public Alignment()
 		{
 			
 		}
-			
-		public Alignment(VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
+        #endregion
+
+        #region Public Properties
+        public Alignment(VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
 		{
 			Vertical = verticalAlignment;
 			Horizontal = horizontalAlignment;
 		}
-			
-		[DefaultValue(VerticalAlignment.Top)]
-        private VerticalAlignment _Vertical = VerticalAlignment.Top;
+		
         public VerticalAlignment Vertical
 	    {
-		    get
-		    {
-			    return _Vertical;
-		    }
-		    set
-		    {
-			    _Vertical = value;
-		    }
+		    get { return _Vertical; }
+		    set { _Vertical = value; }
 	    }
-			
-		[DefaultValue(HorizontalAlignment.Left)]
-        private HorizontalAlignment _Horizontal = HorizontalAlignment.Left;
+		
         public HorizontalAlignment Horizontal
 		{
-			get
-			{
-				return _Horizontal;
-			}
-			set
-			{
-				_Horizontal = value;
-			}
+			get { return _Horizontal; }
+			set { _Horizontal = value; }
 		}
-			
-		public override string ToString()
+        #endregion
+
+        #region Public Methods
+        public override string ToString()
 		{
 			return string.Format("{0}, {1}", Vertical, Horizontal);
-		}
-	}
-		
-	public enum VerticalAlignment
+        }
+        #endregion
+    }
+
+    #region Enums
+    public enum VerticalAlignment
 	{
 		Top,
 		Middle,
@@ -280,4 +261,5 @@ namespace mRemoteNG.Controls
 		Center,
 		Right
 	}
+    #endregion
 }

@@ -1,25 +1,26 @@
-using System.Windows.Forms;
 using mRemoteNG.Tools;
 using System.ComponentModel;
+using System.Windows.Forms;
 
 
 namespace mRemoteNG.Root
 {
 	[DefaultProperty("Name")]
     public class Info
-	{
+    {
+        #region Private Properties
+        private string _name;
+        #endregion
+
         #region Constructors
-		public Info(RootType rootType)
+        public Info(RootType rootType)
 		{
-			// VBConversions Note: Non-static class variable initialization is below.  Class variables cannot be initially assigned non-static values in C#.
 			_name = My.Language.strConnections;
-				
 			Type = rootType;
 		}
         #endregion
 			
         #region Public Properties
-		private string _name; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1), 
             Browsable(true),
             LocalizedAttributes.LocalizedDefaultValue("strConnections"),
@@ -27,10 +28,7 @@ namespace mRemoteNG.Root
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
         public virtual string Name
 		{
-			get
-			{
-				return _name;
-			}
+			get { return _name; }
 			set
 			{
 				if (_name == value)

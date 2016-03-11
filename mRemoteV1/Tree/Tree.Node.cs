@@ -1,8 +1,8 @@
-using System.Collections.Generic;
-using System;
 using Microsoft.VisualBasic;
-using System.Windows.Forms;
 using mRemoteNG.App;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 
 namespace mRemoteNG.Tree
@@ -19,6 +19,11 @@ namespace mRemoteNG.Tree
 			PuttyRoot = 4,
 			PuttySession = 5
 		}
+        #endregion
+
+        #region Private Variables
+        private static TreeNode SetNodeToolTip_old_node = null;
+        private static TreeNode treeNodeToBeSelected;
         #endregion
 
         #region Public Properties
@@ -41,21 +46,6 @@ namespace mRemoteNG.Tree
         #endregion
 
         #region Public Methods
-        private static TreeNode treeNodeToBeSelected;
-		private delegate void SelectNodeCB();
-		private static void SelectNode()
-		{
-			if (_TreeView.InvokeRequired == true)
-			{
-				SelectNodeCB d = new SelectNodeCB(SelectNode);
-				_TreeView.Invoke(d);
-			}
-			else
-			{
-				_TreeView.SelectedNode = treeNodeToBeSelected;
-			}
-		}
-			
 		public static string GetConstantID(TreeNode node)
 		{
 			if (GetNodeType(node) == Type.Connection)
@@ -69,7 +59,7 @@ namespace mRemoteNG.Tree
 				
 			return null;
 		}
-			
+		
 		public static TreeNode GetNodeFromPositionID(int id)
 		{
 			foreach (Connection.Info conI in Runtime.ConnectionList)
@@ -89,7 +79,7 @@ namespace mRemoteNG.Tree
 				
 			return null;
 		}
-			
+		
 		public static TreeNode GetNodeFromConstantID(string id)
 		{
             foreach (Connection.Info conI in Runtime.ConnectionList)
@@ -109,7 +99,7 @@ namespace mRemoteNG.Tree
 				
 			return null;
 		}
-			
+		
 		public static Tree.Node.Type GetNodeType(TreeNode treeNode)
 		{
 			try
@@ -152,7 +142,7 @@ namespace mRemoteNG.Tree
 				
 			return Type.None;
 		}
-			
+		
 		public static Tree.Node.Type GetNodeTypeFromString(string str)
 		{
 			try
@@ -174,7 +164,7 @@ namespace mRemoteNG.Tree
 				
 			return Type.None;
 		}
-			
+		
 		public static TreeNode Find(TreeNode treeNode, string searchFor)
 		{
 			TreeNode tmpNode = default(TreeNode);
@@ -204,7 +194,7 @@ namespace mRemoteNG.Tree
 				
 			return null;
 		}
-			
+		
 		public static TreeNode Find(TreeNode treeNode, Connection.Info conInfo)
 		{
 			TreeNode tmpNode = default(TreeNode);
@@ -234,7 +224,7 @@ namespace mRemoteNG.Tree
 				
 			return null;
 		}
-			
+		
 		public static bool IsEmpty(TreeNode treeNode)
 		{
 			try
@@ -251,9 +241,7 @@ namespace mRemoteNG.Tree
 				
 			return true;
 		}
-			
-			
-			
+		
 		public static TreeNode AddNode(Type nodeType, string name = null)
 		{
 			try
@@ -300,7 +288,7 @@ namespace mRemoteNG.Tree
 				
 			return null;
 		}
-			
+		
 		public static void CloneNode(TreeNode oldTreeNode, TreeNode parentNode = null)
 		{
 			try
@@ -377,31 +365,12 @@ namespace mRemoteNG.Tree
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, string.Format(My.Language.strErrorCloneNodeFailed, ex.Message));
 			}
 		}
-			
+		
 		public static void SetNodeImage(TreeNode treeNode, Images.Enums.TreeImage Img)
 		{
 			SetNodeImageIndex(treeNode, (int)Img);
 		}
-			
-		private delegate void SetNodeImageIndexDelegate(TreeNode treeNode, int imageIndex);
-		private static void SetNodeImageIndex(TreeNode treeNode, int imageIndex)
-		{
-			if (treeNode == null || treeNode.TreeView == null)
-			{
-				return ;
-			}
-			if (treeNode.TreeView.InvokeRequired)
-			{
-				treeNode.TreeView.Invoke(new SetNodeImageIndexDelegate(SetNodeImageIndex), new object[] {treeNode, imageIndex});
-				return ;
-			}
-				
-			treeNode.ImageIndex = imageIndex;
-			treeNode.SelectedImageIndex = imageIndex;
-		}
-			
-		// VBConversions Note: Former VB static variables moved to class level because they aren't supported in C#.
-		static TreeNode SetNodeToolTip_old_node = default(TreeNode);
+		
 		public static void SetNodeToolTip(MouseEventArgs e, ToolTip tTip)
 		{
 			try
@@ -409,9 +378,8 @@ namespace mRemoteNG.Tree
 				if (My.Settings.Default.ShowDescriptionTooltipsInTree)
 				{
 					//Find the node under the mouse.
-					// static TreeNode old_node = default(TreeNode); VBConversions Note: Static variable moved to class level and renamed SetNodeToolTip_old_node. Local static variables are not supported in C#.
 					TreeNode new_node = _TreeView.GetNodeAt(e.X, e.Y);
-					if (new_node == SetNodeToolTip_old_node)
+					if (new_node.Equals(SetNodeToolTip_old_node))
 					{
 						return;
 					}
@@ -437,8 +405,7 @@ namespace mRemoteNG.Tree
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SetNodeToolTip failed" + Constants.vbNewLine + ex.Message, true);
 			}
 		}
-			
-			
+		
 		public static void DeleteSelectedNode()
 		{
 			try
@@ -490,7 +457,7 @@ namespace mRemoteNG.Tree
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Deleting selected node failed" + Constants.vbNewLine + ex.Message, true);
 			}
 		}
-			
+		
 		public static void StartRenameSelectedNode()
 		{
 			if (SelectedNode != null)
@@ -498,7 +465,7 @@ namespace mRemoteNG.Tree
 				SelectedNode.BeginEdit();
 			}
 		}
-			
+		
 		public static void FinishRenameSelectedNode(string newName)
 		{
 			if (newName == null)
@@ -520,7 +487,7 @@ namespace mRemoteNG.Tree
 				}
 			}
 		}
-			
+		
 		public static void MoveNodeUp()
 		{
 			try
@@ -546,7 +513,7 @@ namespace mRemoteNG.Tree
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeUp failed" + Constants.vbNewLine + ex.Message, true);
 			}
 		}
-			
+		
 		public static void MoveNodeDown()
 		{
 			try
@@ -572,14 +539,14 @@ namespace mRemoteNG.Tree
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeDown failed" + Constants.vbNewLine + ex.Message, true);
 			}
 		}
-			
+		
 		public static void ExpandAllNodes()
 		{
 			TreeView.BeginUpdate();
 			TreeView.ExpandAll();
 			TreeView.EndUpdate();
 		}
-			
+		
 		public static void CollapseAllNodes()
 		{
 			TreeView.BeginUpdate();
@@ -589,7 +556,7 @@ namespace mRemoteNG.Tree
 			}
 			TreeView.EndUpdate();
 		}
-			
+		
 		public static void Sort(TreeNode treeNode, System.Windows.Forms.SortOrder sorting)
 		{
 			if (TreeView == null)
@@ -623,44 +590,7 @@ namespace mRemoteNG.Tree
 				
 			TreeView.EndUpdate();
 		}
-			
-		// Adapted from http://www.codeproject.com/Tips/252234/ASP-NET-TreeView-Sort
-		private static void Sort(TreeNode treeNode, Tools.Controls.TreeNodeSorter nodeSorter)
-		{
-			foreach (TreeNode childNode in treeNode.Nodes)
-			{
-				Sort(childNode, nodeSorter);
-			}
-				
-			try
-			{
-				List<TreeNode> sortedNodes = new List<TreeNode>();
-				TreeNode currentNode = null;
-				while (treeNode.Nodes.Count > 0)
-				{
-					foreach (TreeNode childNode in treeNode.Nodes)
-					{
-						if (currentNode == null || nodeSorter.Compare(childNode, currentNode) < 0)
-						{
-							currentNode = childNode;
-						}
-					}
-					treeNode.Nodes.Remove(currentNode);
-					sortedNodes.Add(currentNode);
-					currentNode = null;
-				}
-					
-				foreach (TreeNode childNode in sortedNodes)
-				{
-					treeNode.Nodes.Add(childNode);
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" + Constants.vbNewLine + ex.Message, true);
-			}
-		}
-			
+		
 		private delegate void ResetTreeDelegate();
 		public static void ResetTree()
 		{
@@ -676,6 +606,76 @@ namespace mRemoteNG.Tree
 				TreeView.Nodes.Add(My.Language.strConnections);
 				TreeView.EndUpdate();
 			}
+        }
+        #endregion
+
+        #region Private Methods
+        private delegate void SelectNodeCB();
+        private static void SelectNode()
+        {
+            if (_TreeView.InvokeRequired == true)
+            {
+                SelectNodeCB d = new SelectNodeCB(SelectNode);
+                _TreeView.Invoke(d);
+            }
+            else
+            {
+                _TreeView.SelectedNode = treeNodeToBeSelected;
+            }
+        }
+
+        private delegate void SetNodeImageIndexDelegate(TreeNode treeNode, int imageIndex);
+        private static void SetNodeImageIndex(TreeNode treeNode, int imageIndex)
+        {
+            if (treeNode == null || treeNode.TreeView == null)
+            {
+                return;
+            }
+            if (treeNode.TreeView.InvokeRequired)
+            {
+                treeNode.TreeView.Invoke(new SetNodeImageIndexDelegate(SetNodeImageIndex), new object[] { treeNode, imageIndex });
+                return;
+            }
+
+            treeNode.ImageIndex = imageIndex;
+            treeNode.SelectedImageIndex = imageIndex;
+        }
+
+        // Adapted from http://www.codeproject.com/Tips/252234/ASP-NET-TreeView-Sort
+        private static void Sort(TreeNode treeNode, Tools.Controls.TreeNodeSorter nodeSorter)
+        {
+            foreach (TreeNode childNode in treeNode.Nodes)
+            {
+                Sort(childNode, nodeSorter);
+            }
+
+            try
+            {
+                List<TreeNode> sortedNodes = new List<TreeNode>();
+                TreeNode currentNode = null;
+                while (treeNode.Nodes.Count > 0)
+                {
+                    foreach (TreeNode childNode in treeNode.Nodes)
+                    {
+                        if (currentNode == null || nodeSorter.Compare(childNode, currentNode) < 0)
+                        {
+                            currentNode = childNode;
+                        }
+                    }
+                    treeNode.Nodes.Remove(currentNode);
+                    sortedNodes.Add(currentNode);
+                    currentNode = null;
+                }
+
+                foreach (TreeNode childNode in sortedNodes)
+                {
+                    treeNode.Nodes.Add(childNode);
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" + Constants.vbNewLine + ex.Message, true);
+            }
         }
         #endregion
     }

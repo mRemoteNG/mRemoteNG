@@ -632,169 +632,169 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Help\CMDSwitches.htm">
+    <Content Include="Resources\Help\CMDSwitches.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Config.htm">
+    <Content Include="Resources\Help\Config.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Configuration.htm">
+    <Content Include="Resources\Help\Configuration.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Connection.htm">
+    <Content Include="Resources\Help\Connection.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Connections.htm">
+    <Content Include="Resources\Help\Connections.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\ConfigurationSQL.htm">
+    <Content Include="Resources\Help\ConfigurationSQL.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Index.htm">
+    <Content Include="Resources\Help\Index.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\PortScan.htm">
+    <Content Include="Resources\Help\PortScan.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\ExternalTools.htm">
+    <Content Include="Resources\Help\ExternalTools.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\ErrorsAndInfos.htm">
+    <Content Include="Resources\Help\ErrorsAndInfos.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\ImportFromAD.htm">
+    <Content Include="Resources\Help\ImportFromAD.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Installation.htm">
+    <Content Include="Resources\Help\Installation.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Introduction.htm">
+    <Content Include="Resources\Help\Introduction.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\MainMenu.htm">
+    <Content Include="Resources\Help\MainMenu.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Options.htm">
+    <Content Include="Resources\Help\Options.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Prerequisites.htm">
+    <Content Include="Resources\Help\Prerequisites.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\QuickConnect.htm">
+    <Content Include="Resources\Help\QuickConnect.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\QuickReference.htm">
+    <Content Include="Resources\Help\QuickReference.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\SaveAsExport.htm">
+    <Content Include="Resources\Help\SaveAsExport.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\ScreenshotManager.htm">
+    <Content Include="Resources\Help\ScreenshotManager.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\01.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\02.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\02.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\03.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\03.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\04.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\04.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\05.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\05.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\06.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\06.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\07.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\07.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\08.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\08.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\09.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\09.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\10.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\10.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\11.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\11.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\12.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\12.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\13.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\13.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\14.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\14.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\15.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\15.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\16.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\16.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Configuration\17.png">
+    <Content Include="Resources\Help\Screenshots\Configuration\17.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Tools\01.png">
+    <Content Include="Resources\Help\Screenshots\External Tools\01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Tools\02.png">
+    <Content Include="Resources\Help\Screenshots\External Tools\02.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Tools\03.png">
+    <Content Include="Resources\Help\Screenshots\External Tools\03.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Tools\04.png">
+    <Content Include="Resources\Help\Screenshots\External Tools\04.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Tools\05.png">
+    <Content Include="Resources\Help\Screenshots\External Tools\05.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Tools\06.png">
+    <Content Include="Resources\Help\Screenshots\External Tools\06.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Tools\07.png">
+    <Content Include="Resources\Help\Screenshots\External Tools\07.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\External Tools\08.png">
+    <Content Include="Resources\Help\Screenshots\External Tools\08.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Main Menu\File.png">
+    <Content Include="Resources\Help\Screenshots\Main Menu\File.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Main Menu\Info.png">
+    <Content Include="Resources\Help\Screenshots\Main Menu\Info.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Main Menu\QuickConnect.png">
+    <Content Include="Resources\Help\Screenshots\Main Menu\QuickConnect.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Main Menu\Tools.png">
+    <Content Include="Resources\Help\Screenshots\Main Menu\Tools.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Main Menu\View.png">
+    <Content Include="Resources\Help\Screenshots\Main Menu\View.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Screenshots\Reference\01.png">
+    <Content Include="Resources\Help\Screenshots\Reference\01.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Sessions.htm">
+    <Content Include="Resources\Help\Sessions.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\SQLScript.txt">
+    <Content Include="Resources\Help\SQLScript.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\SSHFileTransfer.htm">
+    <Content Include="Resources\Help\SSHFileTransfer.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Help\Update.htm">
+    <Content Include="Resources\Help\Update.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\RDCMan_Icon.ico" />
@@ -808,10 +808,10 @@
     <None Include="Resources\Images_FamFamFam\user_comment.png" />
     <None Include="Resources\Images_FamFamFam\key_delete.png" />
     <None Include="Resources\Images\PuttySessions.png" />
-    <None Include="Notes\Help.txt" />
-    <None Include="Notes\ICA.txt" />
-    <None Include="Notes\Misc.txt" />
-    <None Include="Notes\PropertyList.csv" />
+    <None Include="Resources\Notes\Help.txt" />
+    <None Include="Resources\Notes\ICA.txt" />
+    <None Include="Resources\Notes\Misc.txt" />
+    <None Include="Resources\Notes\PropertyList.csv" />
     <None Include="Resources\Images\PuttyConfig.png" />
     <None Include="Resources\Images\Play_Quick.png" />
     <None Include="Resources\Icons\Play_Quick_Icon.ico" />
@@ -838,8 +838,8 @@
     <None Include="Resources\Images\Duplicate.png" />
     <None Include="Resources\Images\PortScan.png" />
     <None Include="Resources\Icons\PortScan_Icon.ico" />
-    <None Include="Notes\MultiLang.txt" />
-    <None Include="Notes\MultiUserCons.txt" />
+    <None Include="Resources\Notes\MultiLang.txt" />
+    <None Include="Resources\Notes\MultiUserCons.txt" />
     <None Include="Resources\Images_FamFamFam\Copy.png" />
     <None Include="Resources\Images_FamFamFam\Delete.png" />
     <None Include="Resources\Icons_FamFamFam\Config_Icon.ico" />
@@ -905,7 +905,7 @@
     <None Include="Resources\Images_FamFamFam\Chat.png" />
     <None Include="Resources\Icons_FamFamFam\Panels_Icon.ico" />
     <None Include="Resources\Images_FamFamFam\JumpTo.png" />
-    <None Include="Notes\PropertyList.txt" />
+    <None Include="Resources\Notes\PropertyList.txt" />
     <None Include="Resources\Images_FamFamFam\Monitor_GoTo.png" />
     <None Include="Resources\Images_FamFamFam\Monitor.png" />
     <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
@@ -918,7 +918,7 @@
     <None Include="Resources\Images_FamFamFam\News.png" />
     <None Include="Resources\Announcement\mRemote_Announcement.txt" />
     <None Include="Resources\Update\mRemote_Update.txt" />
-    <Content Include="Help\Main.css">
+    <Content Include="Resources\Help\Main.css">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icons\Anti Virus.ico">

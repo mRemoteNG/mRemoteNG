@@ -1,24 +1,34 @@
-using System.Collections.Generic;
-using System;
-using System.Windows.Forms;
-using mRemoteNG.Forms.OptionsPages;
 using mRemoteNG.App;
+using mRemoteNG.Forms.OptionsPages;
 using mRemoteNG.My;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 
 namespace mRemoteNG.Forms
 {
 	public partial class OptionsForm
 	{
+        #region Private Fields
+        private Dictionary<OptionsPage, PageInfo> _pages;
+        private ImageList _pageIconImageList;
+        private OptionsPage _startPage;
+        private OptionsPage _selectedPage;
+        #endregion
+
         #region Constructors
 		public OptionsForm()
 		{
 			// This call is required by the designer.
 			InitializeComponent();
 			// Add any initialization after the InitializeComponent() call.
-				
-			Runtime.FontOverride(this);
-				
+			
+            _pages = new Dictionary<OptionsPage, PageInfo>();
+            _pageIconImageList = new ImageList();
+            _selectedPage = null;
+
+            Runtime.FontOverride(this);
 			_pages.Add(new Forms.OptionsPages.StartupExitPage(), new PageInfo());
 			_pages.Add(new AppearancePage(), new PageInfo());
 			_pages.Add(new TabsPanelsPage(), new PageInfo());
@@ -28,9 +38,7 @@ namespace mRemoteNG.Forms
 			_pages.Add(new ThemePage(), new PageInfo());
 			_pages.Add(new KeyboardPage(), new PageInfo());
 			_pages.Add(new AdvancedPage(), new PageInfo());
-				
 			_startPage = GetPageFromType(typeof(Forms.OptionsPages.StartupExitPage));
-				
 			_pageIconImageList.ColorDepth = ColorDepth.Depth32Bit;
 			PageListView.LargeImageList = _pageIconImageList;
 		}
@@ -43,15 +51,7 @@ namespace mRemoteNG.Forms
 			return ShowDialog(ownerWindow);
 		}
         #endregion
-			
-        #region Private Fields
-		private Dictionary<OptionsPage, PageInfo> _pages = new Dictionary<OptionsPage, PageInfo>();
-		private ImageList _pageIconImageList = new ImageList();
-			
-		private OptionsPage _startPage;
-		private OptionsPage _selectedPage = null;
-        #endregion
-			
+		
         #region Private Methods
         #region Event Handlers
 		public void OptionsForm_Load(System.Object sender, EventArgs e)
@@ -63,10 +63,8 @@ namespace mRemoteNG.Forms
 				_pageIconImageList.Images.Add(pageInfo.IconKey, page.PageIcon);
 				pageInfo.ListViewItem = PageListView.Items.Add(page.PageName, pageInfo.IconKey);
 			}
-				
 			ApplyLanguage();
 			LoadSettings();
-				
 			ShowPage(_startPage);
 		}
 			

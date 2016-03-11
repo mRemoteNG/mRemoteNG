@@ -491,66 +491,14 @@ namespace mRemoteNG.Connection
 			get { return GetInheritedPropertyValue("MacAddress", _macAddress); }
 			set { _macAddress = value; }
 		}
-		
+
         [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameUser1"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUser1")]
         public virtual string UserField
-		{
-			get { return GetInheritedPropertyValue("UserField", _userField); }
-			set { _userField = value; }
-		}
-
-        public Inheritance Inherit
         {
-            get { return _Inherit; }
-            set { _Inherit = value; }
-        }
-
-        public Protocol.List OpenConnections
-        {
-            get { return _OpenConnections; }
-            set { _OpenConnections = value; }
-        }
-
-        public bool IsContainer
-        {
-            get { return _IsContainer; }
-            set { _IsContainer = value; }
-        }
-
-        public bool IsDefault
-        {
-            get { return _IsDefault; }
-            set { _IsDefault = value; }
-        }
-
-        public Container.Info Parent { get; set; }
-
-        public int PositionID
-        {
-            get { return _PositionID; }
-            set { _PositionID = value; }
-        }
-
-        public string ConstantID
-        {
-            get { return _constantId; }
-            set { _constantId = value; }
-        }
-
-        public TreeNode TreeNode { get; set; }
-
-        public bool IsQuickConnect
-        {
-            get { return _IsQuickConnect; }
-            set { _IsQuickConnect = value; }
-        }
-
-        public bool PleaseConnect
-        {
-            get { return _PleaseConnect; }
-            set { _PleaseConnect = value; }
+            get { return GetInheritedPropertyValue("UserField", _userField); }
+            set { _userField = value; }
         }
         #endregion
         #region VNC
@@ -670,10 +618,73 @@ namespace mRemoteNG.Connection
 			set { _vncViewOnly = value; }
 		}
         #endregion
+        #region Non-browsable public properties
+        [Browsable(false)]
+        public Inheritance Inherit
+        {
+            get { return _Inherit; }
+            set { _Inherit = value; }
+        }
+        
+        [Browsable(false)]
+        public Protocol.List OpenConnections
+        {
+            get { return _OpenConnections; }
+            set { _OpenConnections = value; }
+        }
+
+        [Browsable(false)]
+        public bool IsContainer
+        {
+            get { return _IsContainer; }
+            set { _IsContainer = value; }
+        }
+
+        [Browsable(false)]
+        public bool IsDefault
+        {
+            get { return _IsDefault; }
+            set { _IsDefault = value; }
+        }
+
+        [Browsable(false)]
+        public Container.Info Parent { get; set; }
+
+        [Browsable(false)]
+        public int PositionID
+        {
+            get { return _PositionID; }
+            set { _PositionID = value; }
+        }
+
+        [Browsable(false)]
+        public string ConstantID
+        {
+            get { return _constantId; }
+            set { _constantId = value; }
+        }
+
+        [Browsable(false)]
+        public TreeNode TreeNode { get; set; }
+
+        [Browsable(false)]
+        public bool IsQuickConnect
+        {
+            get { return _IsQuickConnect; }
+            set { _IsQuickConnect = value; }
+        }
+
+        [Browsable(false)]
+        public bool PleaseConnect
+        {
+            get { return _PleaseConnect; }
+            set { _PleaseConnect = value; }
+        }
         #endregion
-			
+        #endregion
+
         #region Constructors
-		public Info()
+        public Info()
 		{
             // initialize default values for all standard instance members
             SetTreeDisplayDefaults();
@@ -684,6 +695,7 @@ namespace mRemoteNG.Connection
             SetRedirectDefaults();
             SetMiscDefaults();
             SetVNCDefaults();
+            SetNonBrowsablePropertiesDefaults();
             SetDefaults();
 		}
 			
@@ -873,13 +885,6 @@ namespace mRemoteNG.Connection
             _postExtApp = My.Settings.Default.ConDefaultPostExtApp;
             _macAddress = My.Settings.Default.ConDefaultMacAddress;
             _userField = My.Settings.Default.ConDefaultUserField;
-            _Inherit = new Inheritance(this);
-            _OpenConnections = new Protocol.List();
-            _IsContainer = false;
-            _IsDefault = false;
-            _PositionID = 0;
-            _IsQuickConnect = false;
-            _PleaseConnect = false;
         }
 
         private void SetVNCDefaults()
@@ -895,6 +900,17 @@ namespace mRemoteNG.Connection
             _vncColors = (Protocol.VNC.Colors)System.Enum.Parse(typeof(Protocol.VNC.Colors),My.Settings.Default.ConDefaultVNCColors);
             _vncSmartSizeMode = (Protocol.VNC.SmartSizeMode)System.Enum.Parse(typeof(Protocol.VNC.SmartSizeMode),My.Settings.Default.ConDefaultVNCSmartSizeMode);
             _vncViewOnly = My.Settings.Default.ConDefaultVNCViewOnly;
+        }
+
+        private void SetNonBrowsablePropertiesDefaults()
+        {
+            _Inherit = new Inheritance(this);
+            _OpenConnections = new Protocol.List();
+            _IsContainer = false;
+            _IsDefault = false;
+            _PositionID = 0;
+            _IsQuickConnect = false;
+            _PleaseConnect = false;
         }
         #endregion
 	}

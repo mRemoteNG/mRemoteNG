@@ -241,10 +241,9 @@ namespace mRemoteNG.Tools
 			{
 				public WINTRUST_DATA()
 				{
-					// VBConversions Note: Non-static class variable initialization is below.  Class variables cannot be initially assigned non-static values in C#.
 					cbStruct = (uint)Marshal.SizeOf(typeof(WINTRUST_DATA));
 				}
-				public UInt32 cbStruct; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
+				public UInt32 cbStruct;
 				public IntPtr pPolicyCallbackData;
 				public IntPtr pSIPClientData;
 				public UInt32 dwUIChoice;
@@ -263,10 +262,9 @@ namespace mRemoteNG.Tools
 			{
 				public WINTRUST_FILE_INFO()
 				{
-					// VBConversions Note: Non-static class variable initialization is below.  Class variables cannot be initially assigned non-static values in C#.
 					cbStruct = (uint)Marshal.SizeOf(typeof(WINTRUST_FILE_INFO));
 				}
-				public UInt32 cbStruct; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
+				public UInt32 cbStruct;
 				[MarshalAs(UnmanagedType.LPTStr)]public string pcwszFilePath;
 				public IntPtr hFile;
 				public IntPtr pgKnownSubject;

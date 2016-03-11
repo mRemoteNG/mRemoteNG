@@ -1,27 +1,30 @@
-using System.Windows.Forms;
 using mRemoteNG.My;
 using mRemoteNG.Tools;
+using System.Windows.Forms;
 
 
 namespace mRemoteNG.Root.PuttySessions
 {
 	public class Info : Root.Info
-	{
-		public Info() : base(RootType.PuttySessions)
+    {
+        #region Private Variables
+        private string _name;
+        private string _panel;
+        #endregion
+
+        #region Constructors
+        public Info() : base(RootType.PuttySessions)
 		{
-			// VBConversions Note: Non-static class variable initialization is below.  Class variables cannot be initially assigned non-static values in C#.
 			_name = Language.strPuttySavedSessionsRootName;
 			_panel = My.Language.strGeneral;
 		}
-				
-		private string _name; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
+        #endregion
+
+        #region Public Properties
         [LocalizedAttributes.LocalizedDefaultValue("strPuttySavedSessionsRootName")]
         public override string Name
 		{
-			get
-			{
-				return _name;
-			}
+			get { return _name; }
 			set
 			{
 				if (_name == value)
@@ -37,16 +40,12 @@ namespace mRemoteNG.Root.PuttySessions
 			}
 		}
 				
-		private string _panel; // VBConversions Note: Initial value cannot be assigned here since it is non-static.  Assignment has been moved to the class constructors.
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNamePanel"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPanel")]
         public string Panel
 		{
-			get
-			{
-				return _panel;
-			}
+			get { return _panel; }
 			set
 			{
 				if (_panel == value)
@@ -56,6 +55,7 @@ namespace mRemoteNG.Root.PuttySessions
 				_panel = value;
 				My.Settings.Default.PuttySavedSessionsPanel = value;
 			}
-		}
-	}
+        }
+        #endregion
+    }
 }

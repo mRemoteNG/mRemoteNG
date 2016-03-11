@@ -7,12 +7,17 @@ using System.IO;
 namespace mRemoteNG.Themes
 {
 	public class ThemeManager
-	{
+    {
+        #region Private Variables
+        private static readonly ThemeInfo _defaultTheme = new ThemeInfo(Language.strDefaultTheme);
+        private static ThemeInfo _activeTheme;
+        private static bool _activeThemeHandlerSet = false;
+        #endregion
+
         #region Public Methods
-		public static ThemeInfo LoadTheme(string themeName, bool setActive = true)
+        public static ThemeInfo LoadTheme(string themeName, bool setActive = true)
 		{
 			ThemeInfo loadedTheme = DefaultTheme;
-				
 			if (!string.IsNullOrEmpty(themeName))
 			{
 				foreach (ThemeInfo theme in LoadThemes())
@@ -72,14 +77,8 @@ namespace mRemoteNG.Themes
 			
 		public static event ThemeChangedEventHandler ThemeChanged
 		{
-			add
-			{
-				ThemeChangedEvent = (ThemeChangedEventHandler) System.Delegate.Combine(ThemeChangedEvent, value);
-			}
-			remove
-			{
-				ThemeChangedEvent = (ThemeChangedEventHandler) System.Delegate.Remove(ThemeChangedEvent, value);
-			}
+			add { ThemeChangedEvent = (ThemeChangedEventHandler) System.Delegate.Combine(ThemeChangedEvent, value); }
+			remove { ThemeChangedEvent = (ThemeChangedEventHandler) System.Delegate.Remove(ThemeChangedEvent, value); }
 		}
 			
 		protected static void NotifyThemeChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
@@ -94,19 +93,11 @@ namespace mRemoteNG.Themes
         #endregion
 			
         #region Properties
-		// ReSharper disable InconsistentNaming
-		private static readonly ThemeInfo _defaultTheme = new ThemeInfo(Language.strDefaultTheme);
-		// ReSharper restore InconsistentNaming
         public static ThemeInfo DefaultTheme
 		{
-			get
-			{
-				return _defaultTheme;
-			}
+			get { return _defaultTheme; }
 		}
-			
-		private static ThemeInfo _activeTheme;
-		private static bool _activeThemeHandlerSet = false;
+		
         public static ThemeInfo ActiveTheme
 		{
 			get
