@@ -73,14 +73,7 @@ namespace mRemoteNG.UI.Window
 				
 		public void ApplyTheme()
 		{
-			msMain.BackColor = Themes.ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			msMain.ForeColor = Themes.ThemeManager.ActiveTheme.ToolbarTextColor;
-			tvConnections.BackColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelBackgroundColor;
-			tvConnections.ForeColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelTextColor;
-			tvConnections.LineColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelTreeLineColor;
-			BackColor = Themes.ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			txtSearch.BackColor = Themes.ThemeManager.ActiveTheme.SearchBoxBackgroundColor;
-			txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextPromptColor;
+			Themes.ThemeManager.ActiveTheme.ApplyTheme();
 		}
         #endregion
 				

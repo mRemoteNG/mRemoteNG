@@ -19,15 +19,11 @@ namespace mRemoteNG.Forms.OptionsPages
 			{
 				return Language.strOptionsTabTheme;
 			}
-			set
-			{
-			}
 		}
-			
+		
 		public override void ApplyLanguage()
 		{
 			base.ApplyLanguage();
-				
 			btnThemeDelete.Text = Language.strOptionsThemeButtonDelete;
 			btnThemeNew.Text = Language.strOptionsThemeButtonNew;
 		}
@@ -35,21 +31,17 @@ namespace mRemoteNG.Forms.OptionsPages
 		public override void LoadSettings()
 		{
 			base.SaveSettings();
-				
-			_themeList = new BindingList<ThemeInfo>(ThemeManager.LoadThemes());
+			_themeList = new BindingList<Theme>(ThemeManager.LoadThemes());
 			cboTheme.DataSource = _themeList;
 			cboTheme.SelectedItem = ThemeManager.ActiveTheme;
 			cboTheme_SelectionChangeCommitted(this, new EventArgs());
-				
 			ThemePropertyGrid.PropertySort = PropertySort.Categorized;
-				
 			_originalTheme = ThemeManager.ActiveTheme;
 		}
 			
 		public override void SaveSettings()
 		{
 			base.SaveSettings();
-				
 			ThemeManager.SaveThemes(_themeList);
 			My.Settings.Default.ThemeName = ThemeManager.ActiveTheme.Name;
 		}
@@ -60,8 +52,8 @@ namespace mRemoteNG.Forms.OptionsPages
 		}
 			
         #region Private Fields
-		private BindingList<ThemeInfo> _themeList;
-		private ThemeInfo _originalTheme;
+		private BindingList<Theme> _themeList;
+		private Theme _originalTheme;
         #endregion
 			
         #region Private Methods
@@ -95,14 +87,14 @@ namespace mRemoteNG.Forms.OptionsPages
 				ThemePropertyGrid.Enabled = true;
 			}
 				
-			ThemeManager.ActiveTheme = (ThemeInfo)cboTheme.SelectedItem;
+			ThemeManager.ActiveTheme = (Theme)cboTheme.SelectedItem;
 			ThemePropertyGrid.SelectedObject = ThemeManager.ActiveTheme;
 			ThemePropertyGrid.Refresh();
 		}
 			
 		public void btnThemeNew_Click(object sender, EventArgs e)
 		{
-            ThemeInfo newTheme = (ThemeInfo)ThemeManager.ActiveTheme.Clone();
+            Theme newTheme = (Theme)ThemeManager.ActiveTheme.Clone();
 			newTheme.Name = Language.strUnnamedTheme;
 				
 			_themeList.Add(newTheme);
@@ -115,7 +107,7 @@ namespace mRemoteNG.Forms.OptionsPages
 			
 		public void btnThemeDelete_Click(object sender, EventArgs e)
 		{
-            ThemeInfo theme = (ThemeInfo)cboTheme.SelectedItem;
+            Theme theme = (Theme)cboTheme.SelectedItem;
 			if (theme == null)
 			{
 				return ;
