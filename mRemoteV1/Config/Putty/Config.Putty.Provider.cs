@@ -48,7 +48,7 @@ namespace mRemoteNG.Config.Putty
 		public virtual Connection.PuttySession.Info[] GetSessions()
 		{
 			List<Connection.PuttySession.Info> sessionList = new List<Connection.PuttySession.Info>();
-            Connection.PuttySession.Info sessionInfo = (Connection.PuttySession.Info)default(Connection.Info);
+            Connection.PuttySession.Info sessionInfo = (Connection.PuttySession.Info)default(Connection.ConnectionRecordImp);
 			foreach (string sessionName in GetSessionNames(true))
 			{
 				sessionInfo = GetSession(sessionName);

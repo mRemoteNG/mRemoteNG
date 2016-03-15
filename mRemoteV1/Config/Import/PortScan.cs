@@ -24,8 +24,8 @@ namespace mRemoteNG.Config.Import
 					
 				TreeNode treeNode = Tree.Node.AddNode(Tree.Node.Type.Connection, host.HostNameWithoutDomain);
 					
-				Connection.Info connectionInfo = new Connection.Info();
-				connectionInfo.Inherit = new Connection.Info.Inheritance(connectionInfo);
+				Connection.ConnectionRecordImp connectionInfo = new Connection.ConnectionRecordImp();
+				connectionInfo.Inherit = new Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp(connectionInfo);
 					
 				connectionInfo.Name = host.HostNameWithoutDomain;
 				connectionInfo.Hostname = host.HostName;

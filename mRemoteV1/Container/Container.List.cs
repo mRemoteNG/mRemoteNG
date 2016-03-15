@@ -50,7 +50,7 @@ namespace mRemoteNG.Container
 		{
 			foreach (Container.Info contI in List)
 			{
-				if (contI.ConnectionInfo.ConstantID == id)
+				if (contI.ConnectionRecord.MetaData.ConstantID == id)
 				{
 					return contI;
 				}

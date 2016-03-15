@@ -34,7 +34,7 @@ namespace mRemoteNG
         private bool _usingSqlServer = false;
         private string _connectionsFileName = null;
         private bool _showFullPathInTitle;
-        private Connection.Info _selectedConnection = null;
+        private Connection.ConnectionRecordImp _selectedConnection = null;
         public Tools.Misc.Fullscreen _fullscreen;
         #endregion
 
@@ -151,7 +151,7 @@ namespace mRemoteNG
 			}
 		}
 		
-        public Connection.Info SelectedConnection
+        public Connection.ConnectionRecordImp SelectedConnection
 		{
 			get { return _selectedConnection; }
 			set
@@ -481,7 +481,7 @@ namespace mRemoteNG
 									
 			if (Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.Connection | Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.PuttySession)
 			{
-				extA.Start((Connection.Info)Tree.Node.SelectedNode.Tag);
+				extA.Start((Connection.ConnectionRecordImp)Tree.Node.SelectedNode.Tag);
 			}
 			else
 			{
@@ -932,14 +932,14 @@ namespace mRemoteNG
 		{
 			try
 			{
-				Connection.Info connectionInfo = Runtime.CreateQuickConnect(cmbQuickConnect.Text.Trim(), Connection.Protocol.Converter.StringToProtocol(System.Convert.ToString(My.Settings.Default.QuickConnectProtocol)));
+				Connection.ConnectionRecordImp connectionInfo = Runtime.CreateQuickConnect(cmbQuickConnect.Text.Trim(), Connection.Protocol.ProtocolManagerImp.StringToProtocol(System.Convert.ToString(My.Settings.Default.QuickConnectProtocol)));
 				if (connectionInfo == null)
 				{
 					cmbQuickConnect.Focus();
 					return ;
 				}
 				cmbQuickConnect.Add(connectionInfo);
-				Runtime.OpenConnection(connectionInfo, Connection.Info.Force.DoNotJump);
+				Runtime.OpenConnection(connectionInfo, Connection.ConnectionRecordImp.Force.DoNotJump);
 			}
 			catch (Exception ex)
 			{
@@ -949,7 +949,7 @@ namespace mRemoteNG
 		
 		public void cmbQuickConnect_ProtocolChanged(object sender, Controls.QuickConnectComboBox.ProtocolChangedEventArgs e)
 		{
-			SetQuickConnectProtocol(Connection.Protocol.Converter.ProtocolToString(e.Protocol));
+			SetQuickConnectProtocol(Connection.Protocol.ProtocolManagerImp.ProtocolToString(e.Protocol));
 		}
 	    
 		public void btnQuickConnect_DropDownItemClicked(System.Object sender, System.Windows.Forms.ToolStripItemClickedEventArgs e)
@@ -1062,9 +1062,9 @@ namespace mRemoteNG
 		{
 			if (e.Button == MouseButtons.Left)
 			{
-                if (((System.Windows.Forms.Control)sender).Tag is Connection.Info)
+                if (((System.Windows.Forms.Control)sender).Tag is Connection.ConnectionRecordImp)
 				{
-                    Runtime.OpenConnection((Connection.Info)((System.Windows.Forms.Control)sender).Tag);
+                    Runtime.OpenConnection((Connection.ConnectionRecordImp)((System.Windows.Forms.Control)sender).Tag);
 				}
 			}
 		}

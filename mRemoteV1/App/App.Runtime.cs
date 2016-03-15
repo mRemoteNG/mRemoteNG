@@ -34,8 +34,8 @@ namespace mRemoteNG.App
         #region Public Properties
 		public static frmMain MainForm {get; set;}
 			
-		private static Connection.List _connectionList;
-        public static Connection.List ConnectionList
+		private static Connection.ConnectionList _connectionList;
+        public static Connection.ConnectionList ConnectionList
 		{
 			get
 			{
@@ -47,8 +47,8 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		private static Connection.List _previousConnectionList;
-        public static Connection.List PreviousConnectionList
+		private static Connection.ConnectionList _previousConnectionList;
+        public static Connection.ConnectionList PreviousConnectionList
 		{
 			get
 			{
@@ -231,8 +231,8 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		private static Connection.Info _defaultConnection;
-        public static Connection.Info DefaultConnection
+		private static Connection.ConnectionRecordImp _defaultConnection;
+        public static Connection.ConnectionRecordImp DefaultConnection
 		{
 			get
 			{
@@ -244,8 +244,8 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		private static Connection.Info.Inheritance _defaultInheritance;
-        public static Connection.Info.Inheritance DefaultInheritance
+		private static ConnectionRecordInheritanceImp _defaultInheritance;
+        public static ConnectionRecordInheritanceImp DefaultInheritance
 		{
 			get
 			{
@@ -966,9 +966,9 @@ namespace mRemoteNG.App
         #endregion
 			
         #region Default Connection
-		public static mRemoteNG.Connection.Info DefaultConnectionFromSettings()
+		public static mRemoteNG.Connection.ConnectionRecordImp DefaultConnectionFromSettings()
 		{
-			DefaultConnection = new mRemoteNG.Connection.Info();
+			DefaultConnection = new mRemoteNG.Connection.ConnectionRecordImp();
 			DefaultConnection.IsDefault = true;
 			return DefaultConnection;
 		}
@@ -1028,11 +1028,10 @@ namespace mRemoteNG.App
         #endregion
 			
         #region Default Inheritance
-		public static mRemoteNG.Connection.Info.Inheritance DefaultInheritanceFromSettings()
+		public static ConnectionRecordInheritanceController DefaultInheritanceFromSettings()
 		{
-			DefaultInheritance = new mRemoteNG.Connection.Info.Inheritance(null);
+			DefaultInheritance = new ConnectionRecordInheritanceImp(null);
 			DefaultInheritance.IsDefault = true;
-				
 			return DefaultInheritance;
 		}
 			
@@ -1237,7 +1236,7 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-				ConnectionList = new Connection.List();
+				ConnectionList = new Connection.ConnectionList();
 				ContainerList = new Container.List();
 					
 				mRemoteNG.Config.Connections.Load connectionsLoad = new Config.Connections.Load();
@@ -1338,7 +1337,7 @@ namespace mRemoteNG.App
 					PreviousContainerList = ContainerList.Copy();
 				}
 					
-				ConnectionList = new Connection.List();
+				ConnectionList = new Connection.ConnectionList();
 				ContainerList = new Container.List();
 					
 				if (!My.Settings.Default.UseSQLServer)
@@ -1634,7 +1633,7 @@ namespace mRemoteNG.App
 					saveFileDialog.FileName = Info.Connections.DefaultConnectionsFile;
 					saveFileDialog.OverwritePrompt = true;
 						
-					List<string> fileTypes = new List<string>();
+					ConnectionList<string> fileTypes = new List<string>();
 					fileTypes.AddRange(new[] {My.Language.strFiltermRemoteXML, "*.xml"});
 					fileTypes.AddRange(new[] {My.Language.strFilterAll, "*.*"});
 						
@@ -1682,7 +1681,7 @@ namespace mRemoteNG.App
         #endregion
 			
         #region Opening Connection
-		public static Connection.Info CreateQuickConnect(string connectionString, Protocols protocol)
+		public static Connection.ConnectionRecordImp CreateQuickConnect(string connectionString, Protocols protocol)
 		{
 			try
 			{
@@ -1692,7 +1691,7 @@ namespace mRemoteNG.App
 					return null;
 				}
 					
-				Connection.Info newConnectionInfo = new Connection.Info();
+				Connection.ConnectionRecordImp newConnectionInfo = new Connection.ConnectionRecordImp();
 					
 				if (My.Settings.Default.IdentifyQuickConnectTabs)
 				{
@@ -1728,7 +1727,7 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-				OpenConnection(Connection.Info.Force.None);
+				OpenConnection(Connection.ConnectionRecordImp.Force.None);
 			}
 			catch (Exception ex)
 			{
@@ -1736,7 +1735,7 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		public static void OpenConnection(mRemoteNG.Connection.Info.Force Force)
+		public static void OpenConnection(mRemoteNG.Connection.ConnectionRecordImp.Force Force)
 		{
 			try
 			{
@@ -1747,7 +1746,7 @@ namespace mRemoteNG.App
 					
 				if (Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.Connection | Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.PuttySession)
 				{
-					OpenConnection((mRemoteNG.Connection.Info)Windows.treeForm.tvConnections.SelectedNode.Tag, Force);
+					OpenConnection((mRemoteNG.Connection.ConnectionRecordImp)Windows.treeForm.tvConnections.SelectedNode.Tag, Force);
 				}
 				else if (Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.Container)
 				{
@@ -1757,7 +1756,7 @@ namespace mRemoteNG.App
 						{
 							if (tNode.Tag != null)
 							{
-								OpenConnection((mRemoteNG.Connection.Info)tNode.Tag, Force);
+								OpenConnection((mRemoteNG.Connection.ConnectionRecordImp)tNode.Tag, Force);
 							}
 						}
 					}
@@ -1769,11 +1768,11 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		public static void OpenConnection(mRemoteNG.Connection.Info ConnectionInfo)
+		public static void OpenConnection(mRemoteNG.Connection.ConnectionRecordImp ConnectionInfo)
 		{
 			try
 			{
-				OpenConnection(ConnectionInfo, Connection.Info.Force.None);
+				OpenConnection(ConnectionInfo, Connection.ConnectionRecordImp.Force.None);
 			}
 			catch (Exception ex)
 			{
@@ -1781,11 +1780,11 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		public static void OpenConnection(mRemoteNG.Connection.Info ConnectionInfo, System.Windows.Forms.Form ConnectionForm)
+		public static void OpenConnection(mRemoteNG.Connection.ConnectionRecordImp ConnectionInfo, System.Windows.Forms.Form ConnectionForm)
 		{
 			try
 			{
-				OpenConnectionFinal(ConnectionInfo, Connection.Info.Force.None, ConnectionForm);
+				OpenConnectionFinal(ConnectionInfo, Connection.ConnectionRecordImp.Force.None, ConnectionForm);
 			}
 			catch (Exception ex)
 			{
@@ -1793,7 +1792,7 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		public static void OpenConnection(mRemoteNG.Connection.Info ConnectionInfo, System.Windows.Forms.Form ConnectionForm, Connection.Info.Force Force)
+		public static void OpenConnection(mRemoteNG.Connection.ConnectionRecordImp ConnectionInfo, System.Windows.Forms.Form ConnectionForm, Connection.ConnectionRecordImp.Force Force)
 		{
 			try
 			{
@@ -1805,7 +1804,7 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		public static void OpenConnection(mRemoteNG.Connection.Info ConnectionInfo, mRemoteNG.Connection.Info.Force Force)
+		public static void OpenConnection(mRemoteNG.Connection.ConnectionRecordImp ConnectionInfo, mRemoteNG.Connection.ConnectionRecordImp.Force Force)
 		{
 			try
 			{
@@ -1817,7 +1816,7 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		private static void OpenConnectionFinal(mRemoteNG.Connection.Info newConnectionInfo, mRemoteNG.Connection.Info.Force Force, System.Windows.Forms.Form ConForm)
+		private static void OpenConnectionFinal(mRemoteNG.Connection.ConnectionRecordImp newConnectionInfo, mRemoteNG.Connection.ConnectionRecordImp.Force Force, System.Windows.Forms.Form ConForm)
 		{
 			try
 			{
@@ -1836,7 +1835,7 @@ namespace mRemoteNG.App
 					}
 				}
 					
-				if ((Force & Connection.Info.Force.DoNotJump) != Connection.Info.Force.DoNotJump)
+				if ((Force & Connection.ConnectionRecordImp.Force.DoNotJump) != Connection.ConnectionRecordImp.Force.DoNotJump)
 				{
 					if (SwitchToOpenConnection(newConnectionInfo))
 					{
@@ -1898,7 +1897,7 @@ namespace mRemoteNG.App
 				System.Windows.Forms.Form cForm = default(System.Windows.Forms.Form);
 					
 				string cPnl = "";
-				if (newConnectionInfo.Panel == "" || (Force & Connection.Info.Force.OverridePanel) == Connection.Info.Force.OverridePanel | My.Settings.Default.AlwaysShowPanelSelectionDlg)
+				if (newConnectionInfo.Panel == "" || (Force & Connection.ConnectionRecordImp.Force.OverridePanel) == Connection.ConnectionRecordImp.Force.OverridePanel | My.Settings.Default.AlwaysShowPanelSelectionDlg)
 				{
 					frmChoosePanel frmPnl = new frmChoosePanel();
 					if (frmPnl.ShowDialog() == DialogResult.OK)
@@ -2000,7 +1999,7 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		public static bool SwitchToOpenConnection(Connection.Info nCi)
+		public static bool SwitchToOpenConnection(Connection.ConnectionRecordImp nCi)
 		{
 			mRemoteNG.Connection.InterfaceControl IC = FindConnectionContainer(nCi);
 				
@@ -2130,7 +2129,7 @@ namespace mRemoteNG.App
         #region Misc
 		public static void GoToURL(string URL)
 		{
-			mRemoteNG.Connection.Info cI = new mRemoteNG.Connection.Info();
+			mRemoteNG.Connection.ConnectionRecordImp cI = new mRemoteNG.Connection.ConnectionRecordImp();
 				
 			cI.Name = "";
 			cI.Hostname = URL;
@@ -2145,7 +2144,7 @@ namespace mRemoteNG.App
 			cI.SetDefaultPort();
 			cI.IsQuickConnect = true;
 				
-			App.Runtime.OpenConnection(cI, mRemoteNG.Connection.Info.Force.DoNotJump);
+			App.Runtime.OpenConnection(cI, mRemoteNG.Connection.ConnectionRecordImp.Force.DoNotJump);
 		}
 			
 		public static void GoToWebsite()
@@ -2217,7 +2216,7 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		public static Connection.InterfaceControl FindConnectionContainer(Connection.Info ConI)
+		public static Connection.InterfaceControl FindConnectionContainer(Connection.ConnectionRecordImp ConI)
 		{
 			if (ConI.OpenConnections.Count > 0)
 			{

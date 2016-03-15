@@ -496,16 +496,16 @@ namespace mRemoteNG.UI.Window
 						
 				this.btnIcon.Image = null;
 						
-				if (Obj is mRemoteNG.Connection.Info) //CONNECTION INFO
+				if (Obj is mRemoteNG.Connection.ConnectionRecordImp) //CONNECTION INFO
 				{
-                    if (((mRemoteNG.Connection.Info)Obj).IsContainer == false) //NO CONTAINER
+                    if (((mRemoteNG.Connection.ConnectionRecordImp)Obj).IsContainer == false) //NO CONTAINER
 					{
 						if (this.PropertiesVisible) //Properties selected
 						{
 							this.pGrid.SelectedObject = Obj;
 									
 							this.btnShowProperties.Enabled = true;
-                            if (((mRemoteNG.Connection.Info)Obj).Parent != null)
+                            if (((mRemoteNG.Connection.ConnectionRecordImp)Obj).Parent != null)
 							{
 								this.btnShowInheritance.Enabled = true;
 							}
@@ -522,7 +522,7 @@ namespace mRemoteNG.UI.Window
 						{
 							this.pGrid.SelectedObject = Obj;
 
-                            if (((mRemoteNG.Connection.Info)Obj).IsDefault) //Is the default connection
+                            if (((mRemoteNG.Connection.ConnectionRecordImp)Obj).IsDefault) //Is the default connection
 							{
 								this.btnShowProperties.Enabled = true;
 								this.btnShowInheritance.Enabled = false;
@@ -545,7 +545,7 @@ namespace mRemoteNG.UI.Window
 						}
 						else if (this.InheritanceVisible) //Inheritance selected
 						{
-                            this.pGrid.SelectedObject = ((mRemoteNG.Connection.Info)Obj).Inherit;
+                            this.pGrid.SelectedObject = ((mRemoteNG.Connection.ConnectionRecordImp)Obj).Inherit;
 									
 							this.btnShowProperties.Enabled = true;
 							this.btnShowInheritance.Enabled = true;
@@ -568,12 +568,12 @@ namespace mRemoteNG.UI.Window
 							this.PropertiesVisible = true;
 						}
 					}
-                    else if (((mRemoteNG.Connection.Info)Obj).IsContainer) //CONTAINER
+                    else if (((mRemoteNG.Connection.ConnectionRecordImp)Obj).IsContainer) //CONTAINER
 					{
 						this.pGrid.SelectedObject = Obj;
 								
 						this.btnShowProperties.Enabled = true;
-                        if (((mRemoteNG.Container.Info)((mRemoteNG.Connection.Info)Obj).Parent).Parent != null)
+                        if (((mRemoteNG.Container.Info)((mRemoteNG.Connection.ConnectionRecordImp)Obj).Parent).Parent != null)
 						{
 							this.btnShowInheritance.Enabled = true;
 						}
@@ -589,7 +589,7 @@ namespace mRemoteNG.UI.Window
 						this.PropertiesVisible = true;
 					}
 
-                    Icon conIcon = mRemoteNG.Connection.Icon.FromString(System.Convert.ToString(((mRemoteNG.Connection.Info)Obj).Icon));
+                    Icon conIcon = mRemoteNG.Connection.Icon.FromString(System.Convert.ToString(((mRemoteNG.Connection.ConnectionRecordImp)Obj).Icon));
 					if (conIcon != null)
 					{
 						this.btnIcon.Image = conIcon.ToBitmap();
@@ -625,7 +625,7 @@ namespace mRemoteNG.UI.Window
 					}
 					pGrid.SelectedObject = Obj;
 				}
-				else if (Obj is mRemoteNG.Connection.Info.Inheritance) //INHERITANCE
+				else if (Obj is mRemoteNG.Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp) //INHERITANCE
 				{
 					this.pGrid.SelectedObject = Obj;
 							
@@ -637,9 +637,9 @@ namespace mRemoteNG.UI.Window
 						this.btnShowDefaultProperties.Enabled = false;
 						this.btnShowDefaultInheritance.Enabled = false;
 						this.btnIcon.Enabled = true;
-                        this.btnHostStatus.Enabled = !((mRemoteNG.Connection.Info)((mRemoteNG.Connection.Info.Inheritance)Obj).Parent).IsContainer;
+                        this.btnHostStatus.Enabled = !((mRemoteNG.Connection.ConnectionRecordImp)((mRemoteNG.Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp)Obj).Parent).IsContainer;
 						this.InheritanceVisible = true;
-                        Icon conIcon = mRemoteNG.Connection.Icon.FromString(System.Convert.ToString(((mRemoteNG.Connection.Info)((mRemoteNG.Connection.Info.Inheritance)Obj).Parent).Icon));
+                        Icon conIcon = mRemoteNG.Connection.Icon.FromString(System.Convert.ToString(((mRemoteNG.Connection.ConnectionRecordImp)((mRemoteNG.Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp)Obj).Parent).Icon));
 						if (conIcon != null)
 						{
 							this.btnIcon.Image = conIcon.ToBitmap();
@@ -776,18 +776,18 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				if (this.pGrid.SelectedObject is mRemoteNG.Connection.Info)
+				if (this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionRecordImp)
 				{
 					if (e.ChangedItem.Label == My.Language.strPropertyNameProtocol)
 					{
-                        ((mRemoteNG.Connection.Info)this.pGrid.SelectedObject).SetDefaultPort();
+                        ((mRemoteNG.Connection.ConnectionRecordImp)this.pGrid.SelectedObject).SetDefaultPort();
 					}
 					else if (e.ChangedItem.Label == My.Language.strPropertyNameName)
 					{
 						App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Text = System.Convert.ToString(((System.Windows.Forms.Control)this.pGrid.SelectedObject).Name);
-						if (My.Settings.Default.SetHostnameLikeDisplayName && this.pGrid.SelectedObject is mRemoteNG.Connection.Info)
+						if (My.Settings.Default.SetHostnameLikeDisplayName && this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionRecordImp)
 						{
-							mRemoteNG.Connection.Info connectionInfo = (mRemoteNG.Connection.Info) this.pGrid.SelectedObject;
+							mRemoteNG.Connection.ConnectionRecordImp connectionInfo = (mRemoteNG.Connection.ConnectionRecordImp) this.pGrid.SelectedObject;
 							if (!string.IsNullOrEmpty(connectionInfo.Name))
 							{
 								connectionInfo.Hostname = connectionInfo.Name;
@@ -796,7 +796,7 @@ namespace mRemoteNG.UI.Window
 					}
 					else if (e.ChangedItem.Label == My.Language.strPropertyNameIcon)
 					{
-                        Icon conIcon = mRemoteNG.Connection.Icon.FromString(System.Convert.ToString(((mRemoteNG.Connection.Info)this.pGrid.SelectedObject).Icon));
+                        Icon conIcon = mRemoteNG.Connection.Icon.FromString(System.Convert.ToString(((mRemoteNG.Connection.ConnectionRecordImp)this.pGrid.SelectedObject).Icon));
 						if (conIcon != null)
 						{
 							this.btnIcon.Image = conIcon.ToBitmap();
@@ -807,7 +807,7 @@ namespace mRemoteNG.UI.Window
 						this.SetHostStatus(this.pGrid.SelectedObject);
 					}
 
-                    if (((mRemoteNG.Connection.Info)this.pGrid.SelectedObject).IsDefault)
+                    if (((mRemoteNG.Connection.ConnectionRecordImp)this.pGrid.SelectedObject).IsDefault)
 					{
 						App.Runtime.DefaultConnectionToSettings();
 					}
@@ -849,9 +849,9 @@ namespace mRemoteNG.UI.Window
 					}
 				}
 						
-				if (this.pGrid.SelectedObject is mRemoteNG.Connection.Info.Inheritance)
+				if (this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp)
 				{
-                    if (((mRemoteNG.Connection.Info.Inheritance)this.pGrid.SelectedObject).IsDefault)
+                    if (((mRemoteNG.Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp)this.pGrid.SelectedObject).IsDefault)
 					{
 						App.Runtime.DefaultInheritanceToSettings();
 					}
@@ -880,9 +880,9 @@ namespace mRemoteNG.UI.Window
 			{
 				System.Collections.Generic.List<string> strHide = new System.Collections.Generic.List<string>();
 						
-				if (this.pGrid.SelectedObject is mRemoteNG.Connection.Info)
+				if (this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionRecordImp)
 				{
-                    mRemoteNG.Connection.Info conI = (mRemoteNG.Connection.Info)pGrid.SelectedObject;
+                    mRemoteNG.Connection.ConnectionRecordImp conI = (mRemoteNG.Connection.ConnectionRecordImp)pGrid.SelectedObject;
 							
 					switch (conI.Protocol)
 					{
@@ -1630,9 +1630,9 @@ namespace mRemoteNG.UI.Window
 				
 		private void btnShowProperties_Click(object sender, System.EventArgs e)
 		{
-			if (this.pGrid.SelectedObject is mRemoteNG.Connection.Info.Inheritance)
+			if (this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp)
 			{
-				if (((mRemoteNG.Connection.Info.Inheritance)this.pGrid.SelectedObject).IsDefault)
+				if (((mRemoteNG.Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp)this.pGrid.SelectedObject).IsDefault)
 				{
 					this.PropertiesVisible = true;
 					this.InheritanceVisible = false;
@@ -1646,12 +1646,12 @@ namespace mRemoteNG.UI.Window
 					this.InheritanceVisible = false;
 					this.DefaultPropertiesVisible = false;
 					this.DefaultInheritanceVisible = false;
-                    this.SetPropertyGridObject(((mRemoteNG.Connection.Info.Inheritance)this.pGrid.SelectedObject).Parent);
+                    this.SetPropertyGridObject(((mRemoteNG.Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp)this.pGrid.SelectedObject).Parent);
 				}
 			}
-			else if (this.pGrid.SelectedObject is mRemoteNG.Connection.Info)
+			else if (this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionRecordImp)
 			{
-                if (((mRemoteNG.Connection.Info)this.pGrid.SelectedObject).IsDefault)
+                if (((mRemoteNG.Connection.ConnectionRecordImp)this.pGrid.SelectedObject).IsDefault)
 				{
 					this.PropertiesVisible = true;
 					this.InheritanceVisible = false;
@@ -1664,7 +1664,7 @@ namespace mRemoteNG.UI.Window
 				
 		private void btnShowDefaultProperties_Click(object sender, System.EventArgs e)
 		{
-			if (this.pGrid.SelectedObject is mRemoteNG.Root.Info|| this.pGrid.SelectedObject is mRemoteNG.Connection.Info.Inheritance)
+			if (this.pGrid.SelectedObject is mRemoteNG.Root.Info|| this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp)
 			{
 				this.PropertiesVisible = false;
 				this.InheritanceVisible = false;
@@ -1676,19 +1676,19 @@ namespace mRemoteNG.UI.Window
 				
 		private void btnShowInheritance_Click(object sender, System.EventArgs e)
 		{
-			if (this.pGrid.SelectedObject is mRemoteNG.Connection.Info)
+			if (this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionRecordImp)
 			{
 				this.PropertiesVisible = false;
 				this.InheritanceVisible = true;
 				this.DefaultPropertiesVisible = false;
 				this.DefaultInheritanceVisible = false;
-				this.SetPropertyGridObject(((mRemoteNG.Connection.Info)this.pGrid.SelectedObject).Inherit);
+				this.SetPropertyGridObject(((mRemoteNG.Connection.ConnectionRecordImp)this.pGrid.SelectedObject).Inherit);
 			}
 		}
 				
 		private void btnShowDefaultInheritance_Click(object sender, System.EventArgs e)
 		{
-			if (this.pGrid.SelectedObject is mRemoteNG.Root.Info|| this.pGrid.SelectedObject is mRemoteNG.Connection.Info)
+			if (this.pGrid.SelectedObject is mRemoteNG.Root.Info|| this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionRecordImp)
 			{
 				this.PropertiesVisible = false;
 				this.InheritanceVisible = false;
@@ -1707,7 +1707,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				if (pGrid.SelectedObject is mRemoteNG.Connection.Info&& !(pGrid.SelectedObject is mRemoteNG.Connection.PuttySession.Info))
+				if (pGrid.SelectedObject is mRemoteNG.Connection.ConnectionRecordImp&& !(pGrid.SelectedObject is mRemoteNG.Connection.PuttySession.Info))
 				{
 					this.cMenIcons.Items.Clear();
 							
@@ -1734,7 +1734,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				mRemoteNG.Connection.Info connectionInfo = (mRemoteNG.Connection.Info)pGrid.SelectedObject;
+				mRemoteNG.Connection.ConnectionRecordImp connectionInfo = (mRemoteNG.Connection.ConnectionRecordImp)pGrid.SelectedObject;
 				if (connectionInfo == null)
 				{
 					return ;
@@ -1829,9 +1829,9 @@ namespace mRemoteNG.UI.Window
 			{
 				this.btnHostStatus.Image = My.Resources.HostStatus_Check;
 				// To check status, ConnectionInfo must be an mRemoteNG.Connection.Info that is not a container
-				if (ConnectionInfo is mRemoteNG.Connection.Info)
+				if (ConnectionInfo is mRemoteNG.Connection.ConnectionRecordImp)
 				{
-                    if (((mRemoteNG.Connection.Info)ConnectionInfo).IsContainer)
+                    if (((mRemoteNG.Connection.ConnectionRecordImp)ConnectionInfo).IsContainer)
 					{
 						return;
 					}
@@ -1842,7 +1842,7 @@ namespace mRemoteNG.UI.Window
 				}
 						
 				this.btnHostStatus.Tag = "checking";
-                HostName = ((mRemoteNG.Connection.Info)ConnectionInfo).Hostname;
+                HostName = ((mRemoteNG.Connection.ConnectionRecordImp)ConnectionInfo).Hostname;
 				pThread = new System.Threading.Thread(new System.Threading.ThreadStart(CheckHostAlive));
 				pThread.SetApartmentState(System.Threading.ApartmentState.STA);
 				pThread.IsBackground = true;

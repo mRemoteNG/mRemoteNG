@@ -44,7 +44,7 @@ namespace mRemoteNG.Connection.Protocol
 		
         #region Private Properties
 		private AxICAClient _ICAClient;
-		private Connection.Info _Info;
+		private Connection.ConnectionRecordImp _Info;
         #endregion
 				
         #region Public Methods
@@ -140,7 +140,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-                if (((int)Force & (int)Connection.Info.Force.NoCredentials) == (int)Connection.Info.Force.NoCredentials)
+                if (((int)Force & (int)Connection.ConnectionRecordImp.Force.NoCredentials) == (int)Connection.ConnectionRecordImp.Force.NoCredentials)
 				{
 					return ;
 				}
@@ -206,7 +206,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				if ((this.Force & Connection.Info.Force.Fullscreen) == Connection.Info.Force.Fullscreen)
+				if ((this.Force & Connection.ConnectionRecordImp.Force.Fullscreen) == Connection.ConnectionRecordImp.Force.Fullscreen)
 				{
                     _ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(frmMain.Default).Bounds.Width, Screen.FromControl(frmMain.Default).Bounds.Height, 0);
 					_ICAClient.FullScreenWindow();

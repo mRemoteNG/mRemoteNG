@@ -206,13 +206,13 @@ namespace mRemoteNG.Tools
 			{
 				if (e.Button == MouseButtons.Left)
 				{
-					if (((System.Windows.Forms.Control)sender).Tag is Connection.Info)
+					if (((System.Windows.Forms.Control)sender).Tag is Connection.ConnectionRecordImp)
 					{
 						if (frmMain.Default.Visible == false)
 						{
 							ShowForm();
 						}
-                        App.Runtime.OpenConnection((mRemoteNG.Connection.Info)((System.Windows.Forms.Control)sender).Tag);
+                        App.Runtime.OpenConnection((mRemoteNG.Connection.ConnectionRecordImp)((System.Windows.Forms.Control)sender).Tag);
 					}
 				}
 			}

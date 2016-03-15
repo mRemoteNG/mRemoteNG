@@ -54,10 +54,10 @@ namespace mRemoteNG.Config.Import
 			containerInfo.TreeNode = treeNode;
 			containerInfo.Name = name;
 				
-			Connection.Info connectionInfo = ConnectionInfoFromXml(propertiesNode);
+			Connection.ConnectionRecordImp connectionInfo = ConnectionInfoFromXml(propertiesNode);
 			connectionInfo.Parent = containerInfo;
 			connectionInfo.IsContainer = true;
-			containerInfo.ConnectionInfo = connectionInfo;
+			containerInfo.ConnectionRecord = connectionInfo;
 				
 			// We can only inherit from a container node, not the root node or connection nodes
 			if (Tree.Node.GetNodeType(parentTreeNode) == Tree.Node.Type.Container)
@@ -102,7 +102,7 @@ namespace mRemoteNG.Config.Import
 			TreeNode treeNode = new TreeNode(name);
 			parentTreeNode.Nodes.Add(treeNode);
 				
-			Connection.Info connectionInfo = ConnectionInfoFromXml(serverNode);
+			Connection.ConnectionRecordImp connectionInfo = ConnectionInfoFromXml(serverNode);
 			connectionInfo.TreeNode = treeNode;
 			connectionInfo.Parent = (Container.Info)parentTreeNode.Tag;
 				
@@ -114,10 +114,10 @@ namespace mRemoteNG.Config.Import
 			Runtime.ConnectionList.Add(connectionInfo);
 		}
 
-        private static Connection.Info ConnectionInfoFromXml(XmlNode xmlNode)
+        private static Connection.ConnectionRecordImp ConnectionInfoFromXml(XmlNode xmlNode)
 		{
-			Connection.Info connectionInfo = new Connection.Info();
-			connectionInfo.Inherit = new Connection.Info.Inheritance(connectionInfo);
+			Connection.ConnectionRecordImp connectionInfo = new Connection.ConnectionRecordImp();
+			connectionInfo.Inherit = new Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp(connectionInfo);
 				
 			string name = xmlNode.SelectSingleNode("./name").InnerText;
 				

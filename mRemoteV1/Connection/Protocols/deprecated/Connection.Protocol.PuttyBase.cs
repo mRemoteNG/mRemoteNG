@@ -170,7 +170,7 @@ namespace mRemoteNG.Connection.Protocol
 								
 						arguments.Add("-" + System.Convert.ToString(_PuttySSHVersion));
 								
-						if (!(((int)Force & (int)Info.Force.NoCredentials) == (int)Info.Force.NoCredentials))
+						if (!(((int)Force & (int)ConnectionRecordImp.Force.NoCredentials) == (int)ConnectionRecordImp.Force.NoCredentials))
 						{
 							if (!string.IsNullOrEmpty(username))
 							{

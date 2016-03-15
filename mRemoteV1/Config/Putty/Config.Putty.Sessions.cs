@@ -36,7 +36,7 @@ namespace mRemoteNG.Config.Putty
 				TreeNode rootTreeNode = provider.RootTreeNode;
 				bool inUpdate = false;
 					
-				List<Connection.Info> savedSessions = new List<Connection.Info>(provider.GetSessions());
+				List<Connection.ConnectionRecordImp> savedSessions = new List<Connection.ConnectionRecordImp>(provider.GetSessions());
 				if (!IsProviderEnabled(provider) || savedSessions == null || savedSessions.Count == 0)
 				{
 					if (rootTreeNode != null && treeView.Nodes.Contains(rootTreeNode))
@@ -95,7 +95,7 @@ namespace mRemoteNG.Config.Putty
 					
 				foreach (TreeNode treeNode in rootTreeNode.Nodes)
 				{
-					if (!savedSessions.Contains((Connection.Info)treeNode.Tag))
+					if (!savedSessions.Contains((Connection.ConnectionRecordImp)treeNode.Tag))
 					{
 						if (!inUpdate)
 						{

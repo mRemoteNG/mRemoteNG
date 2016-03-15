@@ -263,7 +263,7 @@ namespace mRemoteNG.UI.Window
 			this.TabText = FormText;
 		}
 
-        public Crownwood.Magic.Controls.TabPage AddConnectionTab(mRemoteNG.Connection.Info conI)
+        public Crownwood.Magic.Controls.TabPage AddConnectionTab(mRemoteNG.Connection.ConnectionRecordImp conI)
 		{
 			try
 			{
@@ -547,7 +547,7 @@ namespace mRemoteNG.UI.Window
 		{
 			if (e.Data.GetDataPresent("System.Windows.Forms.TreeNode", true))
 			{
-                App.Runtime.OpenConnection((mRemoteNG.Connection.Info)((System.Windows.Forms.TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode", true)).Tag, this, mRemoteNG.Connection.Info.Force.DoNotJump);
+                App.Runtime.OpenConnection((mRemoteNG.Connection.ConnectionRecordImp)((System.Windows.Forms.TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode", true)).Tag, this, mRemoteNG.Connection.ConnectionRecordImp.Force.DoNotJump);
 			}
 		}
 				
@@ -788,7 +788,7 @@ namespace mRemoteNG.UI.Window
 
                 Runtime.Windows.Show(Type.SSHTransfer);
 						
-				mRemoteNG.Connection.Info conI = IC.Info;
+				mRemoteNG.Connection.ConnectionRecordImp conI = IC.Info;
 
                 Runtime.Windows.sshtransferForm.Hostname = conI.Hostname;
                 Runtime.Windows.sshtransferForm.Username = conI.Username;
@@ -1040,7 +1040,7 @@ namespace mRemoteNG.UI.Window
 					{
                         mRemoteNG.Connection.InterfaceControl IC = (mRemoteNG.Connection.InterfaceControl)this.TabController.SelectedTab.Tag;
 								
-						App.Runtime.OpenConnection(IC.Info, mRemoteNG.Connection.Info.Force.DoNotJump);
+						App.Runtime.OpenConnection(IC.Info, mRemoteNG.Connection.ConnectionRecordImp.Force.DoNotJump);
 						_ignoreChangeSelectedTabClick = false;
 					}
 				}
@@ -1060,11 +1060,11 @@ namespace mRemoteNG.UI.Window
 					if (this.TabController.SelectedTab.Tag is mRemoteNG.Connection.InterfaceControl)
 					{
                         mRemoteNG.Connection.InterfaceControl IC = (mRemoteNG.Connection.InterfaceControl)this.TabController.SelectedTab.Tag;
-						mRemoteNG.Connection.Info conI = IC.Info;
+						mRemoteNG.Connection.ConnectionRecordImp conI = IC.Info;
 								
 						IC.Protocol.Close();
 								
-						App.Runtime.OpenConnection(conI, mRemoteNG.Connection.Info.Force.DoNotJump);
+						App.Runtime.OpenConnection(conI, mRemoteNG.Connection.ConnectionRecordImp.Force.DoNotJump);
 					}
 				}
 			}

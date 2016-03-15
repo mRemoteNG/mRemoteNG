@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using mRemoteNG.Tools;
 using System.ComponentModel;
+using mRemoteNG.Connection;
 
 
 namespace mRemoteNG.Container
@@ -20,8 +21,8 @@ namespace mRemoteNG.Container
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
         public string Name
 		{
-			get { return ConnectionInfo.Name; }
-			set { ConnectionInfo.Name = value; }
+			get { return ConnectionRecord.Name; }
+			set { ConnectionRecord.Name = value; }
 		}
 			
 		private TreeNode _TreeNode;
@@ -70,9 +71,9 @@ namespace mRemoteNG.Container
 			get { return this._IsExpanded; }
 			set { this._IsExpanded = value; }
 		}
-			
-		private Connection.Info _ConnectionInfo = new Connection.Info();
-        public Connection.Info ConnectionInfo
+
+        private ConnectionRecord _ConnectionInfo = new ConnectionRecordImp();
+        public ConnectionRecord ConnectionRecord
 		{
 			get { return this._ConnectionInfo; }
 			set { this._ConnectionInfo = value; }

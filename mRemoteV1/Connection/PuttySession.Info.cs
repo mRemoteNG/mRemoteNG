@@ -9,7 +9,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection.PuttySession
 {
-	public class Info : Connection.Info, IComponent
+	public class Info : Connection.ConnectionRecordImp, IComponent
 	{	
         #region Commands
 		[Command(),LocalizedAttributes.LocalizedDisplayName("strPuttySessionSettings")]

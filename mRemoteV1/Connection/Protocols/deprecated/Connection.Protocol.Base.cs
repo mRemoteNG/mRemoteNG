@@ -13,7 +13,7 @@ namespace mRemoteNG.Connection.Protocol
         private UI.Window.Connection _connectionWindow;
         private InterfaceControl _interfaceControl;
         private Control _Control;
-        private mRemoteNG.Connection.Info.Force _Force;
+        private mRemoteNG.Connection.ConnectionRecordImp.Force _Force;
         private ConnectingEventHandler ConnectingEvent;
         private ConnectedEventHandler ConnectedEvent;
         private DisconnectedEventHandler DisconnectedEvent;
@@ -59,7 +59,7 @@ namespace mRemoteNG.Connection.Protocol
 		}
         #endregion
 		
-        public mRemoteNG.Connection.Info.Force Force
+        public mRemoteNG.Connection.ConnectionRecordImp.Force Force
 		{
 			get { return this._Force; }
 			set { this._Force = value; }

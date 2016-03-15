@@ -190,8 +190,33 @@
     <Compile Include="Config\Putty\Config.Putty.XmingProvider.cs" />
     <Compile Include="Config\Putty\Config.Putty.Sessions.cs" />
     <Compile Include="Config\Putty\Config.Putty.Provider.cs" />
-    <Compile Include="Connection\Connection.Info.Inheritance.cs" />
+    <Compile Include="Connection\Protocols\HttpConnectionProtocol.cs" />
+    <Compile Include="Connection\Protocols\HttpsConnectionProtocol.cs" />
+    <Compile Include="Connection\Protocols\ICAConnectionProtocol.cs" />
+    <Compile Include="Connection\Protocols\OtherConnectionProtocol.cs" />
+    <Compile Include="Connection\Protocols\RAWConnectionProtocol.cs" />
+    <Compile Include="Connection\Protocols\RloginConnectionProtocol.cs" />
+    <Compile Include="Connection\Protocols\SSH1ConnectionProtocol.cs" />
+    <Compile Include="Connection\Protocols\SSH2ConnectionProtocol.cs" />
+    <Compile Include="Connection\Protocols\TelnetConnectionProtocol.cs" />
+    <Compile Include="Connection\Protocols\VNCConnectionProtocol.cs" />
+    <Compile Include="Connection\Protocols\RDPConnectionProtocol.cs" />
+    <Compile Include="Connection\ExternalToolRecordImp.cs" />
+    <Compile Include="Connection\Interfaces\ConnectionProtocol.cs" />
+    <Compile Include="Connection\Interfaces\ConnectionProtocolOptions.cs" />
+    <Compile Include="Connection\ConnectionRecordInheritanceImp.cs" />
     <Compile Include="App\ProgramRoot.cs" />
+    <Compile Include="Connection\Interfaces\ConnectionRecord.cs" />
+    <Compile Include="Connection\Interfaces\ConnectionRecordInheritanceController.cs" />
+    <Compile Include="Connection\ConnectionRecordMetaDataImp.cs" />
+    <Compile Include="Connection\Interfaces\ConnectionRecordMetaData.cs" />
+    <Compile Include="Connection\Interfaces\ExternalToolRecord.cs" />
+    <Compile Include="Connection\Interfaces\Record.cs" />
+    <Compile Include="Connection\ProtocolEnum.cs" />
+    <Compile Include="Connection\Interfaces\ProtocolManager.cs" />
+    <Compile Include="Connection\RDPProtocolOptionsImp.cs" />
+    <Compile Include="Credential\CredentialRecord.cs" />
+    <Compile Include="Tools\GenericEnum.cs" />
     <Compile Include="UI\Controls\ListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -278,36 +303,36 @@
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Themes\ThemeSerializer.cs" />
     <Compile Include="Connection\Connection.Icon.cs" />
-    <Compile Include="Connection\Connection.Info.cs" />
+    <Compile Include="Connection\ConnectionRecordImp.cs" />
     <Compile Include="Connection\Connection.InterfaceControl.Designer.cs">
       <DependentUpon>Connection.InterfaceControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Connection\Connection.InterfaceControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Connection\Connection.List.cs" />
-    <Compile Include="Connection\Connection.Protocol.Base.cs" />
-    <Compile Include="Connection\Connection.Protocol.HTTP.cs" />
-    <Compile Include="Connection\Connection.Protocol.HTTPBase.cs" />
-    <Compile Include="Connection\Connection.Protocol.HTTPS.cs" />
-    <Compile Include="Connection\Connection.Protocol.ICA.cs" />
-    <Compile Include="Connection\Connection.Protocol.IntegratedProgram.cs" />
-    <Compile Include="Connection\Connection.Protocol.List.cs" />
-    <Compile Include="Connection\Connection.Protocol.Protocols.cs" />
-    <Compile Include="Connection\Connection.Protocol.PuttyBase.cs" />
-    <Compile Include="Connection\Connection.Protocol.RAW.cs" />
-    <Compile Include="Connection\Connection.Protocol.RDP.cs" />
-    <Compile Include="Connection\Connection.Protocol.Rlogin.cs" />
-    <Compile Include="Connection\Connection.Protocol.Serial.cs" />
-    <Compile Include="Connection\Connection.Protocol.SSH1.cs" />
-    <Compile Include="Connection\Connection.Protocol.SSH2.cs" />
-    <Compile Include="Connection\Connection.Protocol.Telnet.cs" />
-    <Compile Include="Connection\Connection.Protocol.VNC.cs" />
+    <Compile Include="Connection\ConnectionList.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.Base.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.HTTP.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.HTTPBase.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.HTTPS.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.ICA.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.IntegratedProgram.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.List.cs" />
+    <Compile Include="Connection\ProtocolManagerImp.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.PuttyBase.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.RAW.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.RDP.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.Rlogin.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.Serial.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.SSH1.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.SSH2.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.Telnet.cs" />
+    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.VNC.cs" />
     <Compile Include="Themes\ThemeInfo.cs" />
     <Compile Include="Tools\CommandLineArguments.cs" />
     <Compile Include="Container\Container.Info.cs" />
     <Compile Include="Container\Container.List.cs" />
-    <Compile Include="Credential\Credential.Info.cs" />
+    <Compile Include="Credential\CredentialRecordImp.cs" />
     <Compile Include="Credential\Credential.List.cs" />
     <Compile Include="UI\Forms\frmChoosePanel.Designer.cs">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>

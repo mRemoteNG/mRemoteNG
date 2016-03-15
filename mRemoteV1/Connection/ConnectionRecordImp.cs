@@ -1,82 +1,104 @@
-using System;
-using System.Windows.Forms;
-using System.ComponentModel;
-using mRemoteNG.Tools;
-using System.Reflection;
 using mRemoteNG.App;
+using mRemoteNG.Tools;
+using System;
+using System.ComponentModel;
+using System.Reflection;
+using System.Windows.Forms;
+using mRemoteNG.Credential;
 
 
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public partial class Info
+    public partial class ConnectionRecordImp : ConnectionRecord
     {
         #region Private Properties
-        // Private properties with public get/set
+        ConnectionRecordMetaData _metaData;
+        CredentialRecord _credential;
+        ExternalToolRecord _externalTool;
+        ConnectionProtocol _protocol;
+        private string _constantId;
+
+        // Meta data
+        //private Protocol.Protocols _protocol;
+        private ConnectionRecordInheritanceImp _Inherit;
+        private Protocol.List _OpenConnections;
+        
+
+        // Display
         private string _name;
         private string _description;
         private string _icon;
         private string _panel;
+
+        // Connection
         private string _hostname;
-        private string _username;
-        private string _password;
-        private string _domain;
-        private Protocol.Protocols _protocol;
-        private string _extApp;
+        private string _username; // Not used in: VNC, Telnet, Rlogin, RAW
+        private string _password; // Not used in: Telnet, Rlogin, RAW
+        private string _domain; // Not used in: VNC, SSH, Telnet, Rlogin, RAW, Http/Https, ExtApp
+        
+        // Common to all protocols except ICA
         private int _port;
-        private string _puttySession;
-        private Protocol.ICA.EncryptionStrength _icaEncryption;
-        private bool _useConsoleSession;
-        private Protocol.RDP.AuthenticationLevel _rdpAuthenticationLevel;
-        private string _loadBalanceInfo;
-        private Protocol.HTTPBase.RenderingEngine _renderingEngine;
-        private bool _useCredSsp;
-        private Protocol.RDP.RDGatewayUsageMethod _rdGatewayUsageMethod;
-        private string _rdGatewayHostname;
-        private Protocol.RDP.RDGatewayUseConnectionCredentials _rdGatewayUseConnectionCredentials;
-        private string _rdGatewayUsername;
-        private string _rdGatewayPassword;
-        private string _rdGatewayDomain;
-        private Protocol.RDP.RDPResolutions _resolution;
-        private bool _automaticResize;
-        private Protocol.RDP.RDPColors _colors;
-        private bool _cacheBitmaps;
-        private bool _displayWallpaper;
-        private bool _displayThemes;
-        private bool _enableFontSmoothing;
-        private bool _enableDesktopComposition;
-        private bool _redirectKeys;
-        private bool _redirectDiskDrives;
-        private bool _redirectPrinters;
-        private bool _redirectPorts;
-        private bool _redirectSmartCards;
-        private Protocol.RDP.RDPSounds _redirectSound;
-        private string _preExtApp;
-        private string _postExtApp;
-        private string _macAddress;
-        private string _userField;
+
+        // VNC
         private Protocol.VNC.Compression _vncCompression;
         private Protocol.VNC.Encoding _vncEncoding;
         private Protocol.VNC.AuthMode _vncAuthMode;
         private Protocol.VNC.ProxyType _vncProxyType;
+        private Protocol.VNC.Colors _vncColors;
+        private Protocol.VNC.SmartSizeMode _vncSmartSizeMode;
+        private bool _vncViewOnly;
         private string _vncProxyIP;
         private int _vncProxyPort;
         private string _vncProxyUsername;
         private string _vncProxyPassword;
-        private Protocol.VNC.Colors _vncColors;
-        private Protocol.VNC.SmartSizeMode _vncSmartSizeMode;
-        private bool _vncViewOnly;
-        private Inheritance _Inherit;
-        private Protocol.List _OpenConnections;
-        private bool _IsContainer;
-        private bool _IsDefault;
-        private int _PositionID;
-        private bool _IsQuickConnect;
-        private bool _PleaseConnect;
-        private string _constantId;
+        
+        // SSH, Telnet, Rlogin, RAW
+        private string _puttySession;
+
+        // Http/Https
+        private Protocol.HTTPBase.RenderingEngine _renderingEngine;
+
+        // ICA
+        private Protocol.ICA.EncryptionStrength _icaEncryption;
+
+        // External App
+        private string _extApp;
         #endregion
 
         #region Public Properties
+        [Browsable(false)]
+        public ConnectionRecordMetaData MetaData
+        {
+            get 
+            {
+                return _metaData;
+            }
+        }
+        
+        [Browsable(false)]
+        public ConnectionRecordInheritanceController Inherit
+        {
+            get { return _Inherit; }
+        }
+
+        [Browsable(false)]
+        public CredentialRecord Credential
+        {
+            get { return _credential; }
+            set { _credential = value; }
+        }
+
+        [Browsable(false)]
+        public string ConstantID
+        {
+            get { return _constantId; }
+            set { _constantId = value; }
+        }
+
+        [Browsable(false)]
+        public ConnectionRecord Parent { get; set; }
+
         #region Display
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
@@ -125,13 +147,9 @@ namespace mRemoteNG.Connection
 			set
 			{
 				if (string.IsNullOrEmpty(value))
-				{
 					_hostname = string.Empty;
-				}
 				else
-				{
 					_hostname = value.Trim();
-				}
 			}
 		}
 			
@@ -462,45 +480,6 @@ namespace mRemoteNG.Connection
 			set { _redirectSound = value; }
 		}
         #endregion
-        #region Misc
-        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalToolBefore"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionExternalToolBefore"), 
-            TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]
-        public virtual string PreExtApp
-		{
-			get { return GetInheritedPropertyValue("PreExtApp", _preExtApp); }
-			set { _preExtApp = value; }
-		}
-		
-        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalToolAfter"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionExternalToolAfter"), 
-            TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]
-        public virtual string PostExtApp
-		{
-			get { return GetInheritedPropertyValue("PostExtApp", _postExtApp); }
-			set { _postExtApp = value; }
-		}
-		
-        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameMACAddress"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionMACAddress")]
-        public virtual string MacAddress
-		{
-			get { return GetInheritedPropertyValue("MacAddress", _macAddress); }
-			set { _macAddress = value; }
-		}
-
-        [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameUser1"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUser1")]
-        public virtual string UserField
-        {
-            get { return GetInheritedPropertyValue("UserField", _userField); }
-            set { _userField = value; }
-        }
-        #endregion
         #region VNC
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5), 
             Browsable(false),
@@ -618,116 +597,64 @@ namespace mRemoteNG.Connection
 			set { _vncViewOnly = value; }
 		}
         #endregion
+
         #region Non-browsable public properties
-        [Browsable(false)]
-        public Inheritance Inherit
-        {
-            get { return _Inherit; }
-            set { _Inherit = value; }
-        }
-        
         [Browsable(false)]
         public Protocol.List OpenConnections
         {
             get { return _OpenConnections; }
             set { _OpenConnections = value; }
         }
-
-        [Browsable(false)]
-        public bool IsContainer
-        {
-            get { return _IsContainer; }
-            set { _IsContainer = value; }
-        }
-
-        [Browsable(false)]
-        public bool IsDefault
-        {
-            get { return _IsDefault; }
-            set { _IsDefault = value; }
-        }
-
-        [Browsable(false)]
-        public Container.Info Parent { get; set; }
-
-        [Browsable(false)]
-        public int PositionID
-        {
-            get { return _PositionID; }
-            set { _PositionID = value; }
-        }
-
-        [Browsable(false)]
-        public string ConstantID
-        {
-            get { return _constantId; }
-            set { _constantId = value; }
-        }
-
+        
         [Browsable(false)]
         public TreeNode TreeNode { get; set; }
-
-        [Browsable(false)]
-        public bool IsQuickConnect
-        {
-            get { return _IsQuickConnect; }
-            set { _IsQuickConnect = value; }
-        }
-
-        [Browsable(false)]
-        public bool PleaseConnect
-        {
-            get { return _PleaseConnect; }
-            set { _PleaseConnect = value; }
-        }
         #endregion
         #endregion
-
+        
         #region Constructors
-        public Info()
+        public ConnectionRecordImp(Protocols protocol)
 		{
-            // initialize default values for all standard instance members
+            this.ConstantID = Tools.Misc.CreateConstantID();
+            _metaData = new ConnectionRecordMetaDataImp();
+            _credential = new CredentialRecordImp();
+            _externalTool = new ExternalToolRecordImp();
+            _protocol = ProtocolManagerImp.GetConnectionProtocol(protocol);
+            SetDefaults();
+		}
+		
+		public ConnectionRecordImp(Container.Info parent) : this()
+		{
+			this.MetaData.IsContainer = true;
+			this.Parent = parent;
+		}
+        #endregion
+		
+        #region Public Methods
+		public object Clone()
+		{
+			ConnectionRecordImp newConnectionInfo = (ConnectionRecordImp) this.MemberwiseClone();
+			newConnectionInfo.ConstantID = Tools.Misc.CreateConstantID();
+			newConnectionInfo._OpenConnections = new Protocol.List();
+			return newConnectionInfo;
+		}
+		
+		public void SetDefaults()
+		{
             SetTreeDisplayDefaults();
             SetConnectionDefaults();
             SetProtocolDefaults();
             SetRDGatewayDefaults();
             SetAppearanceDefaults();
             SetRedirectDefaults();
-            SetMiscDefaults();
             SetVNCDefaults();
             SetNonBrowsablePropertiesDefaults();
-            SetDefaults();
 		}
-			
-		public Info(Container.Info parent) : this()
-		{
-			IsContainer = true;
-			this.Parent = parent;
-		}
-        #endregion
-			
-        #region Public Methods
-		public Info Copy()
-		{
-			Info newConnectionInfo = (Info)MemberwiseClone();
-			newConnectionInfo.ConstantID = Tools.Misc.CreateConstantID();
-			newConnectionInfo._OpenConnections = new Protocol.List();
-			return newConnectionInfo;
-		}
-			
-		public void SetDefaults()
-		{
-			if (this.Port == 0)
-			{
-				SetDefaultPort();
-			}
-		}
-			
+		
 		public int GetDefaultPort()
 		{
 			return GetDefaultPort(Protocol);
 		}
-			
+		
 		public void SetDefaultPort()
 		{
 			this.Port = GetDefaultPort();
@@ -735,7 +662,8 @@ namespace mRemoteNG.Connection
         #endregion
 			
         #region Public Enumerations
-		[Flags()]public enum Force
+		[Flags()]
+        public enum Force
 		{
 			None = 0,
 			UseConsoleSession = 1,
@@ -756,14 +684,14 @@ namespace mRemoteNG.Connection
 				
 			if (inheritPropertyValue && Parent != null)
 			{
-				Info parentConnectionInfo = default(Info);
-				if (IsContainer)
+				ConnectionRecord parentConnectionInfo = default(ConnectionRecord);
+				if (this.MetaData.IsContainer)
 				{
-					parentConnectionInfo = ((Container.Info)Parent.Parent).ConnectionInfo;
+					parentConnectionInfo = ((Container.Info)Parent.Parent).ConnectionRecord;
 				}
 				else
 				{
-					parentConnectionInfo = Parent.ConnectionInfo;
+					parentConnectionInfo = Parent;
 				}
 					
 				Type connectionInfoType = parentConnectionInfo.GetType();
@@ -778,7 +706,7 @@ namespace mRemoteNG.Connection
 			}
 		}
 			
-		private static int GetDefaultPort(Protocol.Protocols protocol)
+		private static int GetDefaultPort(Protocols protocol)
 		{
 			try
 			{
@@ -878,15 +806,6 @@ namespace mRemoteNG.Connection
             _redirectSound = (Protocol.RDP.RDPSounds)System.Enum.Parse(typeof(Protocol.RDP.RDPSounds), My.Settings.Default.ConDefaultRedirectSound);
         }
 
-        private void SetMiscDefaults()
-        {
-            _constantId = Tools.Misc.CreateConstantID();
-            _preExtApp = My.Settings.Default.ConDefaultPreExtApp;
-            _postExtApp = My.Settings.Default.ConDefaultPostExtApp;
-            _macAddress = My.Settings.Default.ConDefaultMacAddress;
-            _userField = My.Settings.Default.ConDefaultUserField;
-        }
-
         private void SetVNCDefaults()
         {
             _vncCompression = (Protocol.VNC.Compression)System.Enum.Parse(typeof(Protocol.VNC.Compression),My.Settings.Default.ConDefaultVNCCompression);
@@ -904,13 +823,9 @@ namespace mRemoteNG.Connection
 
         private void SetNonBrowsablePropertiesDefaults()
         {
-            _Inherit = new Inheritance(this);
+            _constantId = Tools.Misc.CreateConstantID();
+            _Inherit = new ConnectionRecordInheritanceImp(this);
             _OpenConnections = new Protocol.List();
-            _IsContainer = false;
-            _IsDefault = false;
-            _PositionID = 0;
-            _IsQuickConnect = false;
-            _PleaseConnect = false;
         }
         #endregion
 	}

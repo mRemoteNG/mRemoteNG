@@ -2,6 +2,7 @@ using Microsoft.VisualBasic;
 using mRemoteNG.App;
 using System;
 using System.Collections.Generic;
+using mRemoteNG.Connection;
 using System.Windows.Forms;
 
 
@@ -50,11 +51,11 @@ namespace mRemoteNG.Tree
 		{
 			if (GetNodeType(node) == Type.Connection)
 			{
-				return (node.Tag as mRemoteNG.Connection.Info).ConstantID;
+				return (node.Tag as ConnectionRecord).MetaData.ConstantID;
 			}
 			else if (GetNodeType(node) == Type.Container)
 			{
-				return (node.Tag as mRemoteNG.Container.Info).ConnectionInfo.ConstantID;
+				return (node.Tag as mRemoteNG.Container.Info).ConnectionRecord.MetaData.ConstantID;
 			}
 				
 			return null;
@@ -62,11 +63,11 @@ namespace mRemoteNG.Tree
 		
 		public static TreeNode GetNodeFromPositionID(int id)
 		{
-			foreach (Connection.Info conI in Runtime.ConnectionList)
+			foreach (Connection.ConnectionRecord conI in Runtime.ConnectionList)
 			{
-				if (conI.PositionID == id)
+				if (conI.MetaData.PositionID == id)
 				{
-					if (conI.IsContainer)
+					if (conI.MetaData.IsContainer)
 					{
 						return (conI.Parent as Container.Info).TreeNode;
 					}
@@ -82,11 +83,11 @@ namespace mRemoteNG.Tree
 		
 		public static TreeNode GetNodeFromConstantID(string id)
 		{
-            foreach (Connection.Info conI in Runtime.ConnectionList)
+            foreach (Connection.ConnectionRecord conI in Runtime.ConnectionList)
 			{
-				if (conI.ConstantID == id)
+				if (conI.MetaData.ConstantID == id)
 				{
-					if (conI.IsContainer)
+					if (conI.MetaData.IsContainer)
 					{
 						return (conI.Parent as Container.Info).TreeNode;
 					}
@@ -130,7 +131,7 @@ namespace mRemoteNG.Tree
 				{
 					return Type.PuttySession;
 				}
-				else if (treeNode.Tag is Connection.Info)
+				else if (treeNode.Tag is Connection.ConnectionRecordImp)
 				{
 					return Type.Connection;
 				}
@@ -195,7 +196,7 @@ namespace mRemoteNG.Tree
 			return null;
 		}
 		
-		public static TreeNode Find(TreeNode treeNode, Connection.Info conInfo)
+		public static TreeNode Find(TreeNode treeNode, Connection.ConnectionRecordImp conInfo)
 		{
 			TreeNode tmpNode = default(TreeNode);
 				
@@ -295,10 +296,10 @@ namespace mRemoteNG.Tree
 			{
 				if (GetNodeType(oldTreeNode) == Type.Connection)
 				{
-					Connection.Info oldConnectionInfo = (Connection.Info) oldTreeNode.Tag;
+					Connection.ConnectionRecordImp oldConnectionInfo = (Connection.ConnectionRecordImp) oldTreeNode.Tag;
 						
-					Connection.Info newConnectionInfo = oldConnectionInfo.Copy();
-					Connection.Info.Inheritance newInheritance = oldConnectionInfo.Inherit.Copy();
+					Connection.ConnectionRecordImp newConnectionInfo = oldConnectionInfo.Clone();
+					Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp newInheritance = oldConnectionInfo.Inherit.Copy();
 					newInheritance.Parent = newConnectionInfo;
 					newConnectionInfo.Inherit = newInheritance;
 
@@ -331,14 +332,14 @@ namespace mRemoteNG.Tree
 					Container.Info oldContainerInfo = (Container.Info) oldTreeNode.Tag;
 						
 					Container.Info newContainerInfo = oldContainerInfo.Copy();
-					Connection.Info newConnectionInfo = oldContainerInfo.ConnectionInfo.Copy();
-					newContainerInfo.ConnectionInfo = newConnectionInfo;
+					Connection.ConnectionRecordImp newConnectionInfo = oldContainerInfo.ConnectionRecord.Clone();
+					newContainerInfo.ConnectionRecord = newConnectionInfo;
 						
 					TreeNode newTreeNode = new TreeNode(newContainerInfo.Name);
 					newTreeNode.Tag = newContainerInfo;
                     newTreeNode.ImageIndex = (int)Images.Enums.TreeImage.Container;
                     newTreeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Container;
-					newContainerInfo.ConnectionInfo.Parent = newContainerInfo;
+					newContainerInfo.ConnectionRecord.Parent = newContainerInfo;
 
                     Runtime.ContainerList.Add(newContainerInfo);
 						
@@ -395,7 +396,7 @@ namespace mRemoteNG.Tree
 						//Get this node's object data.
 						if (GetNodeType(SetNodeToolTip_old_node) == Type.Connection)
 						{
-							tTip.SetToolTip(_TreeView, (SetNodeToolTip_old_node.Tag as mRemoteNG.Connection.Info).Description);
+							tTip.SetToolTip(_TreeView, (SetNodeToolTip_old_node.Tag as mRemoteNG.Connection.ConnectionRecordImp).Description);
 						}
 					}
 				}
@@ -475,11 +476,11 @@ namespace mRemoteNG.Tree
 				
 			if (newName.Length > 0)
 			{
-				((Connection.Info)SelectedNode.Tag).Name = newName;
+				((Connection.ConnectionRecordImp)SelectedNode.Tag).Name = newName;
 					
 				if (My.Settings.Default.SetHostnameLikeDisplayName)
 				{
-					Connection.Info connectionInfo = SelectedNode.Tag as Connection.Info;
+					Connection.ConnectionRecordImp connectionInfo = SelectedNode.Tag as Connection.ConnectionRecordImp;
 					if (connectionInfo != null)
 					{
 						connectionInfo.Hostname = newName;
@@ -651,7 +652,7 @@ namespace mRemoteNG.Tree
 
             try
             {
-                List<TreeNode> sortedNodes = new List<TreeNode>();
+                ConnectionList<TreeNode> sortedNodes = new List<TreeNode>();
                 TreeNode currentNode = null;
                 while (treeNode.Nodes.Count > 0)
                 {

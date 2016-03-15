@@ -17,8 +17,8 @@ namespace mRemoteNG.Connection
 			set { this._Protocol = value; }
 		}
 			
-		private Info _Info;
-        public Info Info
+		private ConnectionRecordImp _Info;
+        public ConnectionRecordImp Info
 		{
 			get { return this._Info; }
 			set { this._Info = value; }
@@ -26,7 +26,7 @@ namespace mRemoteNG.Connection
         #endregion
 			
         #region Methods
-		public InterfaceControl(Control Parent, Connection.Protocol.Base Protocol, Connection.Info Info)
+		public InterfaceControl(Control Parent, Connection.Protocol.Base Protocol, Connection.ConnectionRecordImp Info)
 		{
 			try
 			{

@@ -26,7 +26,7 @@ namespace mRemoteNG.Config.Import
 					
 				Container.Info containerInfo = new Container.Info();
 				containerInfo.TreeNode = treeNode;
-				containerInfo.ConnectionInfo = new Connection.Info(containerInfo);
+				containerInfo.ConnectionRecord = new Connection.ConnectionRecordImp(containerInfo);
 					
 				string name = "";
 				Match match = Regex.Match(ldapPath, "ou=([^,]*)", RegexOptions.IgnoreCase);
@@ -48,7 +48,7 @@ namespace mRemoteNG.Config.Import
 				}
 				else
 				{
-					containerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely();
+					containerInfo.ConnectionRecord.Inherit.TurnOffInheritanceCompletely();
 				}
 					
 				treeNode.Text = name;
@@ -97,8 +97,8 @@ namespace mRemoteNG.Config.Import
 						
 					TreeNode treeNode = Tree.Node.AddNode(Tree.Node.Type.Connection, strDisplayName);
 						
-					Connection.Info connectionInfo = new Connection.Info();
-					Connection.Info.Inheritance inheritanceInfo = new Connection.Info.Inheritance(connectionInfo, true);
+					Connection.ConnectionRecordImp connectionInfo = new Connection.ConnectionRecordImp();
+					Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp inheritanceInfo = new Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp(connectionInfo, true);
 					inheritanceInfo.Description = false;
 					if (parentTreeNode.Tag is Container.Info)
 					{

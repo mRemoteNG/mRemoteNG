@@ -1,6 +1,5 @@
 using System;
 using System.Data;
-using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using System.Xml;
 using System.Globalization;
@@ -8,6 +7,7 @@ using mRemoteNG.App;
 using System.Data.SqlClient;
 using System.IO;
 using mRemoteNG.My;
+using mRemoteNG.Connection;
 using PSTaskDialog;
 
 
@@ -84,7 +84,7 @@ namespace mRemoteNG.Config.Connections
 				
 		public TreeNode RootTreeNode {get; set;}
 				
-		public Connection.List ConnectionList {get; set;}
+		public Connection.ConnectionList ConnectionList {get; set;}
 				
 		private Container.List _ContainerList;
         public Container.List ContainerList
@@ -93,8 +93,8 @@ namespace mRemoteNG.Config.Connections
 			set { this._ContainerList = value; }
 		}
 				
-		private Connection.List _PreviousConnectionList;
-        public Connection.List PreviousConnectionList
+		private Connection.ConnectionList _PreviousConnectionList;
+        public Connection.ConnectionList PreviousConnectionList
 		{
 			get { return _PreviousConnectionList; }
 			set { _PreviousConnectionList = value; }
@@ -184,7 +184,7 @@ namespace mRemoteNG.Config.Connections
                         System.Windows.Forms.Application.ProductName, 
                         "Incompatible database schema", 
                         string.Format("The database schema on the server is not supported. Please upgrade to a newer version of {0}.", System.Windows.Forms.Application.ProductName), 
-                        string.Format("Schema Version: {1}{0}Highest Supported Version: {2}", Constants.vbNewLine, confVersion.ToString(), maxSupportedSchemaVersion.ToString()), 
+                        string.Format("Schema Version: {1}{0}Highest Supported Version: {2}", System.Environment.NewLine, confVersion.ToString(), maxSupportedSchemaVersion.ToString()), 
                         "", 
                         "", 
                         "", 
@@ -240,11 +240,11 @@ namespace mRemoteNG.Config.Connections
 				//open connections from last mremote session
 				if (My.Settings.Default.OpenConsFromLastSession == true && My.Settings.Default.NoReconnect == false)
 				{
-					foreach (Connection.Info conI in ConnectionList)
+					foreach (ConnectionRecordImp connectionRecord in ConnectionList)
 					{
-						if (conI.PleaseConnect == true)
+						if (connectionRecord.MetaData.PleaseConnect == true)
 						{
-                            Runtime.OpenConnection(conI);
+                            Runtime.OpenConnection(connectionRecord);
 						}
 					}
 				}
@@ -299,27 +299,27 @@ namespace mRemoteNG.Config.Connections
 							
 					if (Tree.Node.GetNodeTypeFromString(System.Convert.ToString(sqlRd["Type"])) == Tree.Node.Type.Connection)
 					{
-						Connection.Info conI = GetConnectionInfoFromSQL();
-						conI.TreeNode = tNode;
+						ConnectionRecord connectionRecord = GetConnectionInfoFromSQL();
+						connectionRecord.TreeNode = tNode;
 						//conI.Parent = _previousContainer 'NEW
 								
-						this.ConnectionList.Add(conI);
+						this.ConnectionList.Add(connectionRecord);
 								
-						tNode.Tag = conI;
+						tNode.Tag = connectionRecord;
 								
 						if (SQLUpdate == true)
 						{
-							Connection.Info prevCon = PreviousConnectionList.FindByConstantID(conI.ConstantID);
+							ConnectionRecord prevCon = PreviousConnectionList.FindByConstantID(connectionRecord.ConstantID);
 									
 							if (prevCon != null)
 							{
-								foreach (Connection.Protocol.Base prot in prevCon.OpenConnections)
+								foreach (Connection.Protocol.Base prot in ((ConnectionRecordImp)prevCon).OpenConnections)
 								{
-									prot.InterfaceControl.Info = conI;
-									conI.OpenConnections.Add(prot);
+									prot.InterfaceControl.Info = connectionRecord;
+									connectionRecord.OpenConnections.Add(prot);
 								}
 										
-								if (conI.OpenConnections.Count > 0)
+								if (connectionRecord.OpenConnections.Count > 0)
 								{
                                     tNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionOpen;
                                     tNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionOpen;
@@ -336,7 +336,7 @@ namespace mRemoteNG.Config.Connections
                                 tNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
 							}
 									
-							if (conI.ConstantID == _PreviousSelected)
+							if (connectionRecord.ConstantID == _PreviousSelected)
 							{
 								_selectedTreeNode = tNode;
 							}
@@ -349,34 +349,34 @@ namespace mRemoteNG.Config.Connections
 					}
 					else if (Tree.Node.GetNodeTypeFromString(System.Convert.ToString(sqlRd["Type"])) == Tree.Node.Type.Container)
 					{
-						Container.Info contI = new Container.Info();
+						Container.Info containerRecord = new Container.Info();
 						//If tNode.Parent IsNot Nothing Then
 						//    If Tree.Node.GetNodeType(tNode.Parent) = Tree.Node.Type.Container Then
 						//        contI.Parent = tNode.Parent.Tag
 						//    End If
 						//End If
 						//_previousContainer = contI 'NEW
-						contI.TreeNode = tNode;
+						containerRecord.TreeNode = tNode;
 								
-						contI.Name = System.Convert.ToString(sqlRd["Name"]);
+						containerRecord.Name = System.Convert.ToString(sqlRd["Name"]);
 								
-						Connection.Info conI = default(Connection.Info);
+						ConnectionRecord connectionRecord = default(ConnectionRecordImp);
 								
-						conI = GetConnectionInfoFromSQL();
+						connectionRecord = GetConnectionInfoFromSQL();
 								
-						conI.Parent = contI;
-						conI.IsContainer = true;
-						contI.ConnectionInfo = conI;
+						connectionRecord.Parent = containerRecord;
+						connectionRecord.MetaData.IsContainer = true;
+						containerRecord.ConnectionRecord = connectionRecord;
 								
 						if (SQLUpdate == true)
 						{
-							Container.Info prevCont = PreviousContainerList.FindByConstantID(conI.ConstantID);
+							Container.Info prevCont = PreviousContainerList.FindByConstantID(connectionRecord.ConstantID);
 							if (prevCont != null)
 							{
-								contI.IsExpanded = prevCont.IsExpanded;
+								containerRecord.IsExpanded = prevCont.IsExpanded;
 							}
 									
-							if (conI.ConstantID == _PreviousSelected)
+							if (connectionRecord.ConstantID == _PreviousSelected)
 							{
 								_selectedTreeNode = tNode;
 							}
@@ -384,23 +384,19 @@ namespace mRemoteNG.Config.Connections
 						else
 						{
 							if (System.Convert.ToBoolean(sqlRd["Expanded"]) == true)
-							{
-								contI.IsExpanded = true;
-							}
+								containerRecord.IsExpanded = true;
 							else
-							{
-								contI.IsExpanded = false;
-							}
+								containerRecord.IsExpanded = false;
 						}
-								
-						this._ContainerList.Add(contI);
-						this.ConnectionList.Add(conI);
-								
-						tNode.Tag = contI;
+						
+						this._ContainerList.Add(containerRecord);
+						this.ConnectionList.Add(connectionRecord);
+						
+						tNode.Tag = containerRecord;
                         tNode.ImageIndex = (int)Images.Enums.TreeImage.Container;
                         tNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Container;
 					}
-							
+					
 					string parentId = System.Convert.ToString(sqlRd["ParentID"].ToString().Trim());
 					if (string.IsNullOrEmpty(parentId) || parentId == "0")
 					{
@@ -409,14 +405,14 @@ namespace mRemoteNG.Config.Connections
 					else
 					{
 						TreeNode pNode = Tree.Node.GetNodeFromConstantID(System.Convert.ToString(sqlRd["ParentID"]));
-								
+						
 						if (pNode != null)
 						{
 							pNode.Nodes.Add(tNode);
 									
 							if (Tree.Node.GetNodeType(tNode) == Tree.Node.Type.Connection)
 							{
-								(tNode.Tag as Connection.Info).Parent = (mRemoteNG.Container.Info)pNode.Tag;
+								(tNode.Tag as Connection.ConnectionRecordImp).Parent = (mRemoteNG.Container.Info)pNode.Tag;
 							}
 							else if (Tree.Node.GetNodeType(tNode) == Tree.Node.Type.Container)
 							{
@@ -428,192 +424,192 @@ namespace mRemoteNG.Config.Connections
 							baseNode.Nodes.Add(tNode);
 						}
 					}
-							
+					
 					//AddNodesFromSQL(tNode)
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodesFromSqlFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodesFromSqlFailed + System.Environment.NewLine + ex.Message, true);
 			}
 		}
-				
-		private Connection.Info GetConnectionInfoFromSQL()
+		
+		private ConnectionRecord GetConnectionInfoFromSQL()
 		{
 			try
 			{
-				Connection.Info conI = new Connection.Info();
-						
-				conI.PositionID = System.Convert.ToInt32(sqlRd["PositionID"]);
-				conI.ConstantID = System.Convert.ToString(sqlRd["ConstantID"]);
-				conI.Name = System.Convert.ToString(sqlRd["Name"]);
-				conI.Description = System.Convert.ToString(sqlRd["Description"]);
-				conI.Hostname = System.Convert.ToString(sqlRd["Hostname"]);
-				conI.Username = System.Convert.ToString(sqlRd["Username"]);
-				conI.Password = Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["Password"]), pW);
-				conI.Domain = System.Convert.ToString(sqlRd["DomainName"]);
-				conI.DisplayWallpaper = System.Convert.ToBoolean(sqlRd["DisplayWallpaper"]);
-				conI.DisplayThemes = System.Convert.ToBoolean(sqlRd["DisplayThemes"]);
-				conI.CacheBitmaps = System.Convert.ToBoolean(sqlRd["CacheBitmaps"]);
-				conI.UseConsoleSession = System.Convert.ToBoolean(sqlRd["ConnectToConsole"]);
-						
-				conI.RedirectDiskDrives = System.Convert.ToBoolean(sqlRd["RedirectDiskDrives"]);
-				conI.RedirectPrinters = System.Convert.ToBoolean(sqlRd["RedirectPrinters"]);
-				conI.RedirectPorts = System.Convert.ToBoolean(sqlRd["RedirectPorts"]);
-				conI.RedirectSmartCards = System.Convert.ToBoolean(sqlRd["RedirectSmartCards"]);
-				conI.RedirectKeys = System.Convert.ToBoolean(sqlRd["RedirectKeys"]);
-                conI.RedirectSound = (Connection.Protocol.RDP.RDPSounds)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPSounds), System.Convert.ToString(sqlRd["RedirectSound"]));
+				ConnectionRecord connectionRecord = new Connection.ConnectionRecordImp();
+				
+				connectionRecord.MetaData.PositionID = System.Convert.ToInt32(sqlRd["PositionID"]);
+				connectionRecord.ConstantID = System.Convert.ToString(sqlRd["ConstantID"]);
+				connectionRecord.Name = System.Convert.ToString(sqlRd["Name"]);
+				connectionRecord.Description = System.Convert.ToString(sqlRd["Description"]);
+				connectionRecord.Hostname = System.Convert.ToString(sqlRd["Hostname"]);
+				connectionRecord.Credential.Username = System.Convert.ToString(sqlRd["Username"]);
+				connectionRecord.Credential.Password = Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["Password"]), pW);
+				connectionRecord.Credential.Domain = System.Convert.ToString(sqlRd["DomainName"]);
+				connectionRecord.DisplayWallpaper = System.Convert.ToBoolean(sqlRd["DisplayWallpaper"]);
+				connectionRecord.DisplayThemes = System.Convert.ToBoolean(sqlRd["DisplayThemes"]);
+				connectionRecord.CacheBitmaps = System.Convert.ToBoolean(sqlRd["CacheBitmaps"]);
+				connectionRecord.UseConsoleSession = System.Convert.ToBoolean(sqlRd["ConnectToConsole"]);
+				
+				connectionRecord.RedirectDiskDrives = System.Convert.ToBoolean(sqlRd["RedirectDiskDrives"]);
+				connectionRecord.RedirectPrinters = System.Convert.ToBoolean(sqlRd["RedirectPrinters"]);
+				connectionRecord.RedirectPorts = System.Convert.ToBoolean(sqlRd["RedirectPorts"]);
+				connectionRecord.RedirectSmartCards = System.Convert.ToBoolean(sqlRd["RedirectSmartCards"]);
+				connectionRecord.RedirectKeys = System.Convert.ToBoolean(sqlRd["RedirectKeys"]);
+                connectionRecord.RedirectSound = (Connection.Protocol.RDP.RDPSounds)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPSounds), System.Convert.ToString(sqlRd["RedirectSound"]));
 
-                conI.Protocol = (Connection.Protocol.Protocols)Tools.Misc.StringToEnum(typeof(Connection.Protocol.Protocols), System.Convert.ToString(sqlRd["Protocol"]));
-				conI.Port = System.Convert.ToInt32(sqlRd["Port"]);
-				conI.PuttySession = System.Convert.ToString(sqlRd["PuttySession"]);
-
-                conI.Colors = (Connection.Protocol.RDP.RDPColors)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPColors), System.Convert.ToString(sqlRd["Colors"]));
-                conI.Resolution = (Connection.Protocol.RDP.RDPResolutions)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPResolutions), System.Convert.ToString(sqlRd["Resolution"]));
+                connectionRecord.Protocol = (Connection.Protocol.Protocols)Tools.Misc.StringToEnum(typeof(Connection.Protocol.Protocols), System.Convert.ToString(sqlRd["Protocol"]));
+				connectionRecord.Port = System.Convert.ToInt32(sqlRd["Port"]);
+				connectionRecord.PuttySession = System.Convert.ToString(sqlRd["PuttySession"]);
+                
+                connectionRecord.Colors = (Connection.Protocol.RDP.RDPColors)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPColors), System.Convert.ToString(sqlRd["Colors"]));
+                connectionRecord.Resolution = (Connection.Protocol.RDP.RDPResolutions)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPResolutions), System.Convert.ToString(sqlRd["Resolution"]));
+				
+				connectionRecord.Inherit = new ConnectionRecordInheritanceImp(connectionRecord);
+				connectionRecord.Inherit.CacheBitmaps = System.Convert.ToBoolean(sqlRd["InheritCacheBitmaps"]);
+				connectionRecord.Inherit.Colors = System.Convert.ToBoolean(sqlRd["InheritColors"]);
+				connectionRecord.Inherit.Description = System.Convert.ToBoolean(sqlRd["InheritDescription"]);
+				connectionRecord.Inherit.DisplayThemes = System.Convert.ToBoolean(sqlRd["InheritDisplayThemes"]);
+				connectionRecord.Inherit.DisplayWallpaper = System.Convert.ToBoolean(sqlRd["InheritDisplayWallpaper"]);
+				connectionRecord.Inherit.Domain = System.Convert.ToBoolean(sqlRd["InheritDomain"]);
+				connectionRecord.Inherit.Icon = System.Convert.ToBoolean(sqlRd["InheritIcon"]);
+				connectionRecord.Inherit.Panel = System.Convert.ToBoolean(sqlRd["InheritPanel"]);
+				connectionRecord.Inherit.Password = System.Convert.ToBoolean(sqlRd["InheritPassword"]);
+				connectionRecord.Inherit.Port = System.Convert.ToBoolean(sqlRd["InheritPort"]);
+				connectionRecord.Inherit.Protocol = System.Convert.ToBoolean(sqlRd["InheritProtocol"]);
+				connectionRecord.Inherit.PuttySession = System.Convert.ToBoolean(sqlRd["InheritPuttySession"]);
+				connectionRecord.Inherit.RedirectDiskDrives = System.Convert.ToBoolean(sqlRd["InheritRedirectDiskDrives"]);
+				connectionRecord.Inherit.RedirectKeys = System.Convert.ToBoolean(sqlRd["InheritRedirectKeys"]);
+				connectionRecord.Inherit.RedirectPorts = System.Convert.ToBoolean(sqlRd["InheritRedirectPorts"]);
+				connectionRecord.Inherit.RedirectPrinters = System.Convert.ToBoolean(sqlRd["InheritRedirectPrinters"]);
+				connectionRecord.Inherit.RedirectSmartCards = System.Convert.ToBoolean(sqlRd["InheritRedirectSmartCards"]);
+				connectionRecord.Inherit.RedirectSound = System.Convert.ToBoolean(sqlRd["InheritRedirectSound"]);
+				connectionRecord.Inherit.Resolution = System.Convert.ToBoolean(sqlRd["InheritResolution"]);
+				connectionRecord.Inherit.UseConsoleSession = System.Convert.ToBoolean(sqlRd["InheritUseConsoleSession"]);
+				connectionRecord.Inherit.Username = System.Convert.ToBoolean(sqlRd["InheritUsername"]);
 						
-				conI.Inherit = new Connection.Info.Inheritance(conI);
-				conI.Inherit.CacheBitmaps = System.Convert.ToBoolean(sqlRd["InheritCacheBitmaps"]);
-				conI.Inherit.Colors = System.Convert.ToBoolean(sqlRd["InheritColors"]);
-				conI.Inherit.Description = System.Convert.ToBoolean(sqlRd["InheritDescription"]);
-				conI.Inherit.DisplayThemes = System.Convert.ToBoolean(sqlRd["InheritDisplayThemes"]);
-				conI.Inherit.DisplayWallpaper = System.Convert.ToBoolean(sqlRd["InheritDisplayWallpaper"]);
-				conI.Inherit.Domain = System.Convert.ToBoolean(sqlRd["InheritDomain"]);
-				conI.Inherit.Icon = System.Convert.ToBoolean(sqlRd["InheritIcon"]);
-				conI.Inherit.Panel = System.Convert.ToBoolean(sqlRd["InheritPanel"]);
-				conI.Inherit.Password = System.Convert.ToBoolean(sqlRd["InheritPassword"]);
-				conI.Inherit.Port = System.Convert.ToBoolean(sqlRd["InheritPort"]);
-				conI.Inherit.Protocol = System.Convert.ToBoolean(sqlRd["InheritProtocol"]);
-				conI.Inherit.PuttySession = System.Convert.ToBoolean(sqlRd["InheritPuttySession"]);
-				conI.Inherit.RedirectDiskDrives = System.Convert.ToBoolean(sqlRd["InheritRedirectDiskDrives"]);
-				conI.Inherit.RedirectKeys = System.Convert.ToBoolean(sqlRd["InheritRedirectKeys"]);
-				conI.Inherit.RedirectPorts = System.Convert.ToBoolean(sqlRd["InheritRedirectPorts"]);
-				conI.Inherit.RedirectPrinters = System.Convert.ToBoolean(sqlRd["InheritRedirectPrinters"]);
-				conI.Inherit.RedirectSmartCards = System.Convert.ToBoolean(sqlRd["InheritRedirectSmartCards"]);
-				conI.Inherit.RedirectSound = System.Convert.ToBoolean(sqlRd["InheritRedirectSound"]);
-				conI.Inherit.Resolution = System.Convert.ToBoolean(sqlRd["InheritResolution"]);
-				conI.Inherit.UseConsoleSession = System.Convert.ToBoolean(sqlRd["InheritUseConsoleSession"]);
-				conI.Inherit.Username = System.Convert.ToBoolean(sqlRd["InheritUsername"]);
-						
-				conI.Icon = System.Convert.ToString(sqlRd["Icon"]);
-				conI.Panel = System.Convert.ToString(sqlRd["Panel"]);
-						
+				connectionRecord.Icon = System.Convert.ToString(sqlRd["Icon"]);
+				connectionRecord.Panel = System.Convert.ToString(sqlRd["Panel"]);
+				
 				if (this.confVersion > 1.5) //1.6
 				{
-                    conI.ICAEncryption = (Connection.Protocol.ICA.EncryptionStrength)Tools.Misc.StringToEnum(typeof(Connection.Protocol.ICA.EncryptionStrength), System.Convert.ToString(sqlRd["ICAEncryptionStrength"]));
-					conI.Inherit.ICAEncryption = System.Convert.ToBoolean(sqlRd["InheritICAEncryptionStrength"]);
+                    connectionRecord.ICAEncryption = (Connection.Protocol.ICA.EncryptionStrength)Tools.Misc.StringToEnum(typeof(Connection.Protocol.ICA.EncryptionStrength), System.Convert.ToString(sqlRd["ICAEncryptionStrength"]));
+					connectionRecord.Inherit.ICAEncryption = System.Convert.ToBoolean(sqlRd["InheritICAEncryptionStrength"]);
 							
-					conI.PreExtApp = System.Convert.ToString(sqlRd["PreExtApp"]);
-					conI.PostExtApp = System.Convert.ToString(sqlRd["PostExtApp"]);
-					conI.Inherit.PreExtApp = System.Convert.ToBoolean(sqlRd["InheritPreExtApp"]);
-					conI.Inherit.PostExtApp = System.Convert.ToBoolean(sqlRd["InheritPostExtApp"]);
+					connectionRecord.ExternalTool.PreExtApp = System.Convert.ToString(sqlRd["PreExtApp"]);
+                    connectionRecord.ExternalTool.PostExtApp = System.Convert.ToString(sqlRd["PostExtApp"]);
+					connectionRecord.Inherit.PreExtApp = System.Convert.ToBoolean(sqlRd["InheritPreExtApp"]);
+					connectionRecord.Inherit.PostExtApp = System.Convert.ToBoolean(sqlRd["InheritPostExtApp"]);
 				}
-						
+				
 				if (this.confVersion > 1.6) //1.7
 				{
-                    conI.VNCCompression = (Connection.Protocol.VNC.Compression)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.Compression), System.Convert.ToString(sqlRd["VNCCompression"]));
-                    conI.VNCEncoding = (Connection.Protocol.VNC.Encoding)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.Encoding), System.Convert.ToString(sqlRd["VNCEncoding"]));
-                    conI.VNCAuthMode = (Connection.Protocol.VNC.AuthMode)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.AuthMode), System.Convert.ToString(sqlRd["VNCAuthMode"]));
-                    conI.VNCProxyType = (Connection.Protocol.VNC.ProxyType)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.ProxyType), System.Convert.ToString(sqlRd["VNCProxyType"]));
-					conI.VNCProxyIP = System.Convert.ToString(sqlRd["VNCProxyIP"]);
-					conI.VNCProxyPort = System.Convert.ToInt32(sqlRd["VNCProxyPort"]);
-					conI.VNCProxyUsername = System.Convert.ToString(sqlRd["VNCProxyUsername"]);
-					conI.VNCProxyPassword = Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["VNCProxyPassword"]), pW);
-                    conI.VNCColors = (Connection.Protocol.VNC.Colors)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.Colors), System.Convert.ToString(sqlRd["VNCColors"]));
-                    conI.VNCSmartSizeMode = (Connection.Protocol.VNC.SmartSizeMode)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.SmartSizeMode), System.Convert.ToString(sqlRd["VNCSmartSizeMode"]));
-					conI.VNCViewOnly = System.Convert.ToBoolean(sqlRd["VNCViewOnly"]);
+                    connectionRecord.VNCCompression = (Connection.Protocol.VNC.Compression)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.Compression), System.Convert.ToString(sqlRd["VNCCompression"]));
+                    connectionRecord.VNCEncoding = (Connection.Protocol.VNC.Encoding)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.Encoding), System.Convert.ToString(sqlRd["VNCEncoding"]));
+                    connectionRecord.VNCAuthMode = (Connection.Protocol.VNC.AuthMode)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.AuthMode), System.Convert.ToString(sqlRd["VNCAuthMode"]));
+                    connectionRecord.VNCProxyType = (Connection.Protocol.VNC.ProxyType)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.ProxyType), System.Convert.ToString(sqlRd["VNCProxyType"]));
+					connectionRecord.VNCProxyIP = System.Convert.ToString(sqlRd["VNCProxyIP"]);
+					connectionRecord.VNCProxyPort = System.Convert.ToInt32(sqlRd["VNCProxyPort"]);
+					connectionRecord.VNCProxyUsername = System.Convert.ToString(sqlRd["VNCProxyUsername"]);
+					connectionRecord.VNCProxyPassword = Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["VNCProxyPassword"]), pW);
+                    connectionRecord.VNCColors = (Connection.Protocol.VNC.Colors)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.Colors), System.Convert.ToString(sqlRd["VNCColors"]));
+                    connectionRecord.VNCSmartSizeMode = (Connection.Protocol.VNC.SmartSizeMode)Tools.Misc.StringToEnum(typeof(Connection.Protocol.VNC.SmartSizeMode), System.Convert.ToString(sqlRd["VNCSmartSizeMode"]));
+					connectionRecord.VNCViewOnly = System.Convert.ToBoolean(sqlRd["VNCViewOnly"]);
 							
-					conI.Inherit.VNCCompression = System.Convert.ToBoolean(sqlRd["InheritVNCCompression"]);
-					conI.Inherit.VNCEncoding = System.Convert.ToBoolean(sqlRd["InheritVNCEncoding"]);
-					conI.Inherit.VNCAuthMode = System.Convert.ToBoolean(sqlRd["InheritVNCAuthMode"]);
-					conI.Inherit.VNCProxyType = System.Convert.ToBoolean(sqlRd["InheritVNCProxyType"]);
-					conI.Inherit.VNCProxyIP = System.Convert.ToBoolean(sqlRd["InheritVNCProxyIP"]);
-					conI.Inherit.VNCProxyPort = System.Convert.ToBoolean(sqlRd["InheritVNCProxyPort"]);
-					conI.Inherit.VNCProxyUsername = System.Convert.ToBoolean(sqlRd["InheritVNCProxyUsername"]);
-					conI.Inherit.VNCProxyPassword = System.Convert.ToBoolean(sqlRd["InheritVNCProxyPassword"]);
-					conI.Inherit.VNCColors = System.Convert.ToBoolean(sqlRd["InheritVNCColors"]);
-					conI.Inherit.VNCSmartSizeMode = System.Convert.ToBoolean(sqlRd["InheritVNCSmartSizeMode"]);
-					conI.Inherit.VNCViewOnly = System.Convert.ToBoolean(sqlRd["InheritVNCViewOnly"]);
+					connectionRecord.Inherit.VNCCompression = System.Convert.ToBoolean(sqlRd["InheritVNCCompression"]);
+					connectionRecord.Inherit.VNCEncoding = System.Convert.ToBoolean(sqlRd["InheritVNCEncoding"]);
+					connectionRecord.Inherit.VNCAuthMode = System.Convert.ToBoolean(sqlRd["InheritVNCAuthMode"]);
+					connectionRecord.Inherit.VNCProxyType = System.Convert.ToBoolean(sqlRd["InheritVNCProxyType"]);
+					connectionRecord.Inherit.VNCProxyIP = System.Convert.ToBoolean(sqlRd["InheritVNCProxyIP"]);
+					connectionRecord.Inherit.VNCProxyPort = System.Convert.ToBoolean(sqlRd["InheritVNCProxyPort"]);
+					connectionRecord.Inherit.VNCProxyUsername = System.Convert.ToBoolean(sqlRd["InheritVNCProxyUsername"]);
+					connectionRecord.Inherit.VNCProxyPassword = System.Convert.ToBoolean(sqlRd["InheritVNCProxyPassword"]);
+					connectionRecord.Inherit.VNCColors = System.Convert.ToBoolean(sqlRd["InheritVNCColors"]);
+					connectionRecord.Inherit.VNCSmartSizeMode = System.Convert.ToBoolean(sqlRd["InheritVNCSmartSizeMode"]);
+					connectionRecord.Inherit.VNCViewOnly = System.Convert.ToBoolean(sqlRd["InheritVNCViewOnly"]);
 				}
-						
+				
 				if (this.confVersion > 1.7) //1.8
 				{
-                    conI.RDPAuthenticationLevel = (Connection.Protocol.RDP.AuthenticationLevel)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.AuthenticationLevel), System.Convert.ToString(sqlRd["RDPAuthenticationLevel"]));
+                    connectionRecord.RDPAuthenticationLevel = (Connection.Protocol.RDP.AuthenticationLevel)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.AuthenticationLevel), System.Convert.ToString(sqlRd["RDPAuthenticationLevel"]));
 							
-					conI.Inherit.RDPAuthenticationLevel = System.Convert.ToBoolean(sqlRd["InheritRDPAuthenticationLevel"]);
+					connectionRecord.Inherit.RDPAuthenticationLevel = System.Convert.ToBoolean(sqlRd["InheritRDPAuthenticationLevel"]);
 				}
-						
+				
 				if (this.confVersion > 1.8) //1.9
 				{
-                    conI.RenderingEngine = (Connection.Protocol.HTTPBase.RenderingEngine)Tools.Misc.StringToEnum(typeof(Connection.Protocol.HTTPBase.RenderingEngine), System.Convert.ToString(sqlRd["RenderingEngine"]));
-					conI.MacAddress = System.Convert.ToString(sqlRd["MacAddress"]);
+                    connectionRecord.RenderingEngine = (Connection.Protocol.HTTPBase.RenderingEngine)Tools.Misc.StringToEnum(typeof(Connection.Protocol.HTTPBase.RenderingEngine), System.Convert.ToString(sqlRd["RenderingEngine"]));
+                    connectionRecord.ExternalTool.MacAddress = System.Convert.ToString(sqlRd["MacAddress"]);
 							
-					conI.Inherit.RenderingEngine = System.Convert.ToBoolean(sqlRd["InheritRenderingEngine"]);
-					conI.Inherit.MacAddress = System.Convert.ToBoolean(sqlRd["InheritMacAddress"]);
+					connectionRecord.Inherit.RenderingEngine = System.Convert.ToBoolean(sqlRd["InheritRenderingEngine"]);
+					connectionRecord.Inherit.MacAddress = System.Convert.ToBoolean(sqlRd["InheritMacAddress"]);
 				}
-						
+				
 				if (this.confVersion > 1.9) //2.0
 				{
-					conI.UserField = System.Convert.ToString(sqlRd["UserField"]);
+                    connectionRecord.ExternalTool.UserField = System.Convert.ToString(sqlRd["UserField"]);
 							
-					conI.Inherit.UserField = System.Convert.ToBoolean(sqlRd["InheritUserField"]);
+					connectionRecord.Inherit.UserField = System.Convert.ToBoolean(sqlRd["InheritUserField"]);
 				}
-						
+				
 				if (this.confVersion > 2.0) //2.1
 				{
-					conI.ExtApp = System.Convert.ToString(sqlRd["ExtApp"]);
+					connectionRecord.ExtApp = System.Convert.ToString(sqlRd["ExtApp"]);
 							
-					conI.Inherit.ExtApp = System.Convert.ToBoolean(sqlRd["InheritExtApp"]);
+					connectionRecord.Inherit.ExtApp = System.Convert.ToBoolean(sqlRd["InheritExtApp"]);
 				}
-						
+				
 				if (this.confVersion >= 2.2)
 				{
-                    conI.RDGatewayUsageMethod = (mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), System.Convert.ToString(sqlRd["RDGatewayUsageMethod"]));
-					conI.RDGatewayHostname = System.Convert.ToString(sqlRd["RDGatewayHostname"]);
-                    conI.RDGatewayUseConnectionCredentials = (mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), System.Convert.ToString(sqlRd["RDGatewayUseConnectionCredentials"]));
-					conI.RDGatewayUsername = System.Convert.ToString(sqlRd["RDGatewayUsername"]);
-					conI.RDGatewayPassword = Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["RDGatewayPassword"]), pW);
-					conI.RDGatewayDomain = System.Convert.ToString(sqlRd["RDGatewayDomain"]);
-					conI.Inherit.RDGatewayUsageMethod = System.Convert.ToBoolean(sqlRd["InheritRDGatewayUsageMethod"]);
-					conI.Inherit.RDGatewayHostname = System.Convert.ToBoolean(sqlRd["InheritRDGatewayHostname"]);
-					conI.Inherit.RDGatewayUsername = System.Convert.ToBoolean(sqlRd["InheritRDGatewayUsername"]);
-					conI.Inherit.RDGatewayPassword = System.Convert.ToBoolean(sqlRd["InheritRDGatewayPassword"]);
-					conI.Inherit.RDGatewayDomain = System.Convert.ToBoolean(sqlRd["InheritRDGatewayDomain"]);
+                    connectionRecord.RDGatewayUsageMethod = (mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), System.Convert.ToString(sqlRd["RDGatewayUsageMethod"]));
+					connectionRecord.RDGatewayHostname = System.Convert.ToString(sqlRd["RDGatewayHostname"]);
+                    connectionRecord.RDGatewayUseConnectionCredentials = (mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), System.Convert.ToString(sqlRd["RDGatewayUseConnectionCredentials"]));
+					connectionRecord.RDGatewayUsername = System.Convert.ToString(sqlRd["RDGatewayUsername"]);
+					connectionRecord.RDGatewayPassword = Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["RDGatewayPassword"]), pW);
+					connectionRecord.RDGatewayDomain = System.Convert.ToString(sqlRd["RDGatewayDomain"]);
+					connectionRecord.Inherit.RDGatewayUsageMethod = System.Convert.ToBoolean(sqlRd["InheritRDGatewayUsageMethod"]);
+					connectionRecord.Inherit.RDGatewayHostname = System.Convert.ToBoolean(sqlRd["InheritRDGatewayHostname"]);
+					connectionRecord.Inherit.RDGatewayUsername = System.Convert.ToBoolean(sqlRd["InheritRDGatewayUsername"]);
+					connectionRecord.Inherit.RDGatewayPassword = System.Convert.ToBoolean(sqlRd["InheritRDGatewayPassword"]);
+					connectionRecord.Inherit.RDGatewayDomain = System.Convert.ToBoolean(sqlRd["InheritRDGatewayDomain"]);
 				}
-						
+				
 				if (this.confVersion >= 2.3)
 				{
-					conI.EnableFontSmoothing = System.Convert.ToBoolean(sqlRd["EnableFontSmoothing"]);
-					conI.EnableDesktopComposition = System.Convert.ToBoolean(sqlRd["EnableDesktopComposition"]);
-					conI.Inherit.EnableFontSmoothing = System.Convert.ToBoolean(sqlRd["InheritEnableFontSmoothing"]);
-					conI.Inherit.EnableDesktopComposition = System.Convert.ToBoolean(sqlRd["InheritEnableDesktopComposition"]);
+					connectionRecord.EnableFontSmoothing = System.Convert.ToBoolean(sqlRd["EnableFontSmoothing"]);
+					connectionRecord.EnableDesktopComposition = System.Convert.ToBoolean(sqlRd["EnableDesktopComposition"]);
+					connectionRecord.Inherit.EnableFontSmoothing = System.Convert.ToBoolean(sqlRd["InheritEnableFontSmoothing"]);
+					connectionRecord.Inherit.EnableDesktopComposition = System.Convert.ToBoolean(sqlRd["InheritEnableDesktopComposition"]);
 				}
-						
+				
 				if (confVersion >= 2.4)
 				{
-					conI.UseCredSsp = System.Convert.ToBoolean(sqlRd["UseCredSsp"]);
-					conI.Inherit.UseCredSsp = System.Convert.ToBoolean(sqlRd["InheritUseCredSsp"]);
+					connectionRecord.UseCredSsp = System.Convert.ToBoolean(sqlRd["UseCredSsp"]);
+					connectionRecord.Inherit.UseCredSsp = System.Convert.ToBoolean(sqlRd["InheritUseCredSsp"]);
 				}
-						
+				
 				if (confVersion >= 2.5)
 				{
-					conI.LoadBalanceInfo = System.Convert.ToString(sqlRd["LoadBalanceInfo"]);
-					conI.AutomaticResize = System.Convert.ToBoolean(sqlRd["AutomaticResize"]);
-					conI.Inherit.LoadBalanceInfo = System.Convert.ToBoolean(sqlRd["InheritLoadBalanceInfo"]);
-					conI.Inherit.AutomaticResize = System.Convert.ToBoolean(sqlRd["InheritAutomaticResize"]);
+					connectionRecord.LoadBalanceInfo = System.Convert.ToString(sqlRd["LoadBalanceInfo"]);
+					connectionRecord.AutomaticResize = System.Convert.ToBoolean(sqlRd["AutomaticResize"]);
+					connectionRecord.Inherit.LoadBalanceInfo = System.Convert.ToBoolean(sqlRd["InheritLoadBalanceInfo"]);
+					connectionRecord.Inherit.AutomaticResize = System.Convert.ToBoolean(sqlRd["InheritAutomaticResize"]);
 				}
-						
+				
 				if (SQLUpdate == true)
 				{
-					conI.PleaseConnect = System.Convert.ToBoolean(sqlRd["Connected"]);
+					connectionRecord.PleaseConnect = System.Convert.ToBoolean(sqlRd["Connected"]);
 				}
-						
-				return conI;
+				
+				return connectionRecord;
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strGetConnectionInfoFromSqlFailed + Constants.vbNewLine + ex.Message, true);
 			}
-					
+			
 			return null;
 		}
         #endregion
@@ -817,7 +813,7 @@ namespace mRemoteNG.Config.Connections
 				//open connections from last mremote session
 				if (My.Settings.Default.OpenConsFromLastSession == true && My.Settings.Default.NoReconnect == false)
 				{
-					foreach (Connection.Info conI in ConnectionList)
+					foreach (Connection.ConnectionRecordImp conI in ConnectionList)
 					{
 						if (conI.PleaseConnect == true)
 						{
@@ -859,7 +855,7 @@ namespace mRemoteNG.Config.Connections
 								
 						if (Tree.Node.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == Tree.Node.Type.Connection) //connection info
 						{
-							Connection.Info connectionInfo = GetConnectionInfoFromXml(xmlNode);
+							Connection.ConnectionRecordImp connectionInfo = GetConnectionInfoFromXml(xmlNode);
 							connectionInfo.TreeNode = treeNode;
 							connectionInfo.Parent = _previousContainer; //NEW
 									
@@ -896,19 +892,19 @@ namespace mRemoteNG.Config.Connections
 								}
 							}
 									
-							Connection.Info connectionInfo = default(Connection.Info);
+							Connection.ConnectionRecordImp connectionInfo = default(Connection.ConnectionRecordImp);
 							if (confVersion >= 0.9)
 							{
 								connectionInfo = GetConnectionInfoFromXml(xmlNode);
 							}
 							else
 							{
-								connectionInfo = new Connection.Info();
+								connectionInfo = new Connection.ConnectionRecordImp();
 							}
 									
 							connectionInfo.Parent = containerInfo;
 							connectionInfo.IsContainer = true;
-							containerInfo.ConnectionInfo = connectionInfo;
+							containerInfo.ConnectionRecord = connectionInfo;
 									
 							ContainerList.Add(containerInfo);
 									
@@ -945,9 +941,9 @@ namespace mRemoteNG.Config.Connections
 			}
 		}
 				
-		private Connection.Info GetConnectionInfoFromXml(XmlNode xxNode)
+		private Connection.ConnectionRecordImp GetConnectionInfoFromXml(XmlNode xxNode)
 		{
-			Connection.Info conI = new Connection.Info();
+			Connection.ConnectionRecordImp conI = new Connection.ConnectionRecordImp();
 			try
 			{
 				XmlNode xmlnode = xxNode;
@@ -1092,7 +1088,7 @@ namespace mRemoteNG.Config.Connections
 						
 				if (this.confVersion > 1.2) //1.3
 				{
-					conI.Inherit = new Connection.Info.Inheritance(conI);
+					conI.Inherit = new Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp(conI);
 					conI.Inherit.CacheBitmaps = bool.Parse(xmlnode.Attributes["InheritCacheBitmaps"].Value);
 					conI.Inherit.Colors = bool.Parse(xmlnode.Attributes["InheritColors"].Value);
 					conI.Inherit.Description = bool.Parse(xmlnode.Attributes["InheritDescription"].Value);
@@ -1120,7 +1116,7 @@ namespace mRemoteNG.Config.Connections
 				}
 				else
 				{
-                    conI.Inherit = new Connection.Info.Inheritance(conI, System.Convert.ToBoolean(xmlnode.Attributes["Inherit"].Value));
+                    conI.Inherit = new Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp(conI, System.Convert.ToBoolean(xmlnode.Attributes["Inherit"].Value));
 							
 					conI.Icon = System.Convert.ToString(xmlnode.Attributes["Icon"].Value.Replace(".ico", ""));
 					conI.Panel = My.Language.strGeneral;

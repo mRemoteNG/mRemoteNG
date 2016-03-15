@@ -111,7 +111,7 @@ namespace mRemoteNG.Controls
 		private struct HistoryItem : IEquatable<HistoryItem>
 		{
 				
-			public Info ConnectionInfo {get; set;}
+			public ConnectionRecordImp ConnectionInfo {get; set;}
 				
 			public bool Equals(HistoryItem other)
 			{
@@ -170,7 +170,7 @@ namespace mRemoteNG.Controls
 			return false;
 		}
 			
-		public void Add(Info connectionInfo)
+		public void Add(ConnectionRecordImp connectionInfo)
 		{
 			try
 			{

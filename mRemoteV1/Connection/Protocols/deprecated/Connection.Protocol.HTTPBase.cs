@@ -92,7 +92,7 @@ namespace mRemoteNG.Connection.Protocol
 				string strHost = System.Convert.ToString(this.InterfaceControl.Info.Hostname);
 				string strAuth = "";
 
-                if (!(((int)Force & (int)Info.Force.NoCredentials) == (int)Info.Force.NoCredentials) && !string.IsNullOrEmpty(InterfaceControl.Info.Username) && !string.IsNullOrEmpty(InterfaceControl.Info.Password))
+                if (!(((int)Force & (int)ConnectionRecordImp.Force.NoCredentials) == (int)ConnectionRecordImp.Force.NoCredentials) && !string.IsNullOrEmpty(InterfaceControl.Info.Username) && !string.IsNullOrEmpty(InterfaceControl.Info.Password))
 				{
 					strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(this.InterfaceControl.Info.Username + ":" + this.InterfaceControl.Info.Password)) + Constants.vbNewLine;
 				}

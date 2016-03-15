@@ -38,7 +38,7 @@ namespace mRemoteNG.UI.Window
 					
 			try
 			{
-				mRemoteNG.Connection.Info connectionInfo = mRemoteNG.Tree.Node.SelectedNode.Tag as mRemoteNG.Connection.Info;
+				mRemoteNG.Connection.ConnectionRecordImp connectionInfo = mRemoteNG.Tree.Node.SelectedNode.Tag as mRemoteNG.Connection.ConnectionRecordImp;
 				if (connectionInfo == null)
 				{
 					return ;
@@ -98,7 +98,7 @@ namespace mRemoteNG.UI.Window
 				return ;
 			}
 					
-			mRemoteNG.Connection.Info connectionInfo = mRemoteNG.Tree.Node.SelectedNode.Tag as mRemoteNG.Connection.Info;
+			mRemoteNG.Connection.ConnectionRecordImp connectionInfo = mRemoteNG.Tree.Node.SelectedNode.Tag as mRemoteNG.Connection.ConnectionRecordImp;
 			if (connectionInfo == null)
 			{
 				return ;
@@ -295,14 +295,14 @@ namespace mRemoteNG.UI.Window
 				
 		private void menuSession_Opening(object sender, System.ComponentModel.CancelEventArgs e)
 		{
-			mRemoteNG.Connection.Info connectionInfo = default(mRemoteNG.Connection.Info);
+			mRemoteNG.Connection.ConnectionRecordImp connectionInfo = default(mRemoteNG.Connection.ConnectionRecordImp);
 			if (mRemoteNG.Tree.Node.TreeView == null || mRemoteNG.Tree.Node.SelectedNode == null)
 			{
 				connectionInfo = null;
 			}
 			else
 			{
-				connectionInfo = mRemoteNG.Tree.Node.SelectedNode.Tag as mRemoteNG.Connection.Info;
+				connectionInfo = mRemoteNG.Tree.Node.SelectedNode.Tag as mRemoteNG.Connection.ConnectionRecordImp;
 			}
 					
 			if (connectionInfo == null)

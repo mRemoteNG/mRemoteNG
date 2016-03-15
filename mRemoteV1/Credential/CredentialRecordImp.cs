@@ -4,7 +4,7 @@ using System.ComponentModel;
 
 namespace mRemoteNG.Credential
 {
-	public class Info
+	public class CredentialRecordImp : CredentialRecord
 	{
         #region 1 Display
 		private string _Name;
@@ -43,7 +43,11 @@ namespace mRemoteNG.Credential
         #endregion
         
         #region 2 Credentials
-		private string _Username;
+        private string _Username;
+        private string _Password;
+        private string _Domain;
+
+
         [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2), 
             Browsable(true),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameUsername"),
@@ -59,13 +63,13 @@ namespace mRemoteNG.Credential
 				_Username = value;
 			}
 		}
-			
-		private string _Password;
+		
         [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2), 
             Browsable(true),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNamePassword"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPassword"), 
-            PasswordPropertyText(true)]public string Password
+            PasswordPropertyText(true)]
+        public string Password
 		{
 			get
 			{
@@ -76,8 +80,7 @@ namespace mRemoteNG.Credential
 				_Password = value;
 			}
 		}
-			
-		private string _Domain;
+		
         [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2), 
             Browsable(true),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameDomain"),

@@ -77,7 +77,7 @@ namespace mRemoteNG.Connection.Protocol
         #region Private Declarations
 		private MSTSCLib.MsRdpClient6NotSafeForScripting _rdpClient;
 		private Version _rdpVersion;
-		private Info _connectionInfo;
+		private ConnectionRecordImp _connectionInfo;
 		private bool _loginComplete;
         #endregion
 				
@@ -338,7 +338,7 @@ namespace mRemoteNG.Connection.Protocol
 					{
 						_rdpClient.TransportSettings.GatewayCredsSource = 1; // TSC_PROXY_CREDS_MODE_SMARTCARD
 					}
-					if (_rdpVersion >= Versions.RDC61 && !((Force & Info.Force.NoCredentials) == Info.Force.NoCredentials))
+					if (_rdpVersion >= Versions.RDC61 && !((Force & ConnectionRecordImp.Force.NoCredentials) == ConnectionRecordImp.Force.NoCredentials))
 					{
 						if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes)
 						{
@@ -372,11 +372,11 @@ namespace mRemoteNG.Connection.Protocol
 			{
 				bool value = false;
 						
-				if ((Force & Info.Force.UseConsoleSession) == Info.Force.UseConsoleSession)
+				if ((Force & ConnectionRecordImp.Force.UseConsoleSession) == ConnectionRecordImp.Force.UseConsoleSession)
 				{
 					value = true;
 				}
-				else if ((Force & Info.Force.DontUseConsoleSession) == Info.Force.DontUseConsoleSession)
+				else if ((Force & ConnectionRecordImp.Force.DontUseConsoleSession) == ConnectionRecordImp.Force.DontUseConsoleSession)
 				{
 					value = false;
 				}
@@ -406,7 +406,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				if ((Force & Info.Force.NoCredentials) == Info.Force.NoCredentials)
+				if ((Force & ConnectionRecordImp.Force.NoCredentials) == ConnectionRecordImp.Force.NoCredentials)
 				{
 					return ;
 				}
@@ -472,7 +472,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-				if ((this.Force & Connection.Info.Force.Fullscreen) == Connection.Info.Force.Fullscreen)
+				if ((this.Force & Connection.ConnectionRecordImp.Force.Fullscreen) == Connection.ConnectionRecordImp.Force.Fullscreen)
 				{
 					_rdpClient.FullScreen = true;
                     _rdpClient.DesktopWidth = Screen.FromControl(frmMain.Default).Bounds.Width;

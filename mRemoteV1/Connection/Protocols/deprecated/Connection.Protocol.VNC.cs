@@ -25,7 +25,7 @@ namespace mRemoteNG.Connection.Protocol
 				
         #region Private Declarations
 		private VncSharp.RemoteDesktop _VNC;
-		private Connection.Info Info;
+		private Connection.ConnectionRecordImp Info;
         #endregion
 				
         #region Public Methods
@@ -246,7 +246,7 @@ namespace mRemoteNG.Connection.Protocol
 				_VNC.ConnectComplete += VNCEvent_Connected;
 				_VNC.ConnectionLost += VNCEvent_Disconnected;
 				mRemoteNG.frmMain.clipboardchange += VNCEvent_ClipboardChanged;
-				if (!(((int)Force & (int)Info.Force.NoCredentials) == (int)Info.Force.NoCredentials) && !string.IsNullOrEmpty(Info.Password))
+                if (!(((int)Force & (int)ConnectionRecordImp.Force.NoCredentials) == (int)ConnectionRecordImp.Force.NoCredentials) && !string.IsNullOrEmpty(Info.Password))
 				{
 					_VNC.GetPassword = VNCEvent_Authenticate;
 				}

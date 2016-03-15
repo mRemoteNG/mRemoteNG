@@ -24,8 +24,8 @@ namespace mRemoteNG.Config.Import
 			TreeNode treeNode = new TreeNode(name);
 			parentTreeNode.Nodes.Add(treeNode);
 				
-			Connection.Info connectionInfo = new Connection.Info();
-			connectionInfo.Inherit = new Connection.Info.Inheritance(connectionInfo);
+			Connection.ConnectionRecordImp connectionInfo = new Connection.ConnectionRecordImp();
+			connectionInfo.Inherit = new Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp(connectionInfo);
 			connectionInfo.Name = name;
 			connectionInfo.TreeNode = treeNode;
 				
@@ -56,7 +56,7 @@ namespace mRemoteNG.Config.Import
 			Runtime.ConnectionList.Add(connectionInfo);
 		}
 			
-		private static void SetConnectionInfoParameter(Connection.Info connectionInfo, string key, string value)
+		private static void SetConnectionInfoParameter(Connection.ConnectionRecordImp connectionInfo, string key, string value)
 		{
 			switch (key.ToLower())
 			{

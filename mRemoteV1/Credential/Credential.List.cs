@@ -7,17 +7,17 @@ namespace mRemoteNG.Credential
 	public class List : CollectionBase
 	{
         #region Public Properties
-        public Credential.Info this[object Index]
+        public Credential.CredentialRecordImp this[object Index]
 		{
 			get
 			{
-				if (Index is Credential.Info)
+				if (Index is Credential.CredentialRecordImp)
 				{
-                    return (Credential.Info)Index;
+                    return (Credential.CredentialRecordImp)Index;
 				}
 				else
 				{
-					return ((Credential.Info) (List[System.Convert.ToInt32(Index)]));
+					return ((Credential.CredentialRecordImp) (List[System.Convert.ToInt32(Index)]));
 				}
 			}
 		}
@@ -32,15 +32,15 @@ namespace mRemoteNG.Credential
         #endregion
 			
         #region Public Methods
-		public Credential.Info Add(Credential.Info cInfo)
+		public Credential.CredentialRecordImp Add(Credential.CredentialRecordImp cInfo)
 		{
 			List.Add(cInfo);
 			return cInfo;
 		}
 			
-		public void AddRange(Credential.Info[] cInfo)
+		public void AddRange(Credential.CredentialRecordImp[] cInfo)
 		{
-			foreach (Credential.Info cI in cInfo)
+			foreach (Credential.CredentialRecordImp cI in cInfo)
 			{
 				List.Add(cI);
 			}

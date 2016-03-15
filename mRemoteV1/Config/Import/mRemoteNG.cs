@@ -27,13 +27,13 @@ namespace mRemoteNG.Config.Import
 			containerInfo.TreeNode = treeNode;
 			containerInfo.Name = name;
 				
-			Connection.Info connectionInfo = new Connection.Info();
-			connectionInfo.Inherit = new Connection.Info.Inheritance(connectionInfo);
+			Connection.ConnectionRecordImp connectionInfo = new Connection.ConnectionRecordImp();
+			connectionInfo.Inherit = new Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp(connectionInfo);
 			connectionInfo.Name = name;
 			connectionInfo.TreeNode = treeNode;
 			connectionInfo.Parent = containerInfo;
 			connectionInfo.IsContainer = true;
-			containerInfo.ConnectionInfo = connectionInfo;
+			containerInfo.ConnectionRecord = connectionInfo;
 				
 			// We can only inherit from a container node, not the root node or connection nodes
 			if (Tree.Node.GetNodeType(parentTreeNode) == Tree.Node.Type.Container)

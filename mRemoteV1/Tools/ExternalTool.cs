@@ -17,7 +17,7 @@ namespace mRemoteNG.Tools
 		public bool WaitForExit {get; set;}
 		public string Arguments {get; set;}
 		public bool TryIntegrate {get; set;}
-		public Connection.Info ConnectionInfo {get; set;}
+		public Connection.ConnectionRecordImp ConnectionInfo {get; set;}
 			
         public Icon Icon
 		{
@@ -61,7 +61,7 @@ namespace mRemoteNG.Tools
 			
         #region Public Methods
 		// Start external app
-		public void Start(Connection.Info startConnectionInfo = null)
+		public void Start(Connection.ConnectionRecordImp startConnectionInfo = null)
 		{
 			try
 			{
@@ -101,14 +101,14 @@ namespace mRemoteNG.Tools
 		{
 			try
 			{
-				Connection.Info newConnectionInfo = default(Connection.Info);
+				Connection.ConnectionRecordImp newConnectionInfo = default(Connection.ConnectionRecordImp);
 				if (ConnectionInfo == null)
 				{
-					newConnectionInfo = new Connection.Info();
+					newConnectionInfo = new Connection.ConnectionRecordImp();
 				}
 				else
 				{
-					newConnectionInfo = ConnectionInfo.Copy();
+					newConnectionInfo = ConnectionInfo.Clone();
 				}
 					
 				newConnectionInfo.Protocol = Connection.Protocol.Protocols.IntApp;

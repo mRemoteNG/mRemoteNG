@@ -48,7 +48,7 @@ namespace mRemoteNG.Config.Connections
 		public bool Export {get; set;}
 		public Format SaveFormat {get; set;}
 		public Security.Save SaveSecurity {get; set;}
-		public Connection.List ConnectionList {get; set;}
+		public Connection.ConnectionList ConnectionList {get; set;}
 		public Container.List ContainerList {get; set;}
         #endregion
 				
@@ -224,7 +224,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				_currentNodeIndex++;
 						
-				Connection.Info curConI = default(Connection.Info);
+				Connection.ConnectionRecordImp curConI = default(Connection.ConnectionRecordImp);
 				_sqlQuery = new SqlCommand("INSERT INTO tblCons (Name, Type, Expanded, Description, Icon, Panel, Username, " + "DomainName, Password, Hostname, Protocol, PuttySession, " + "Port, ConnectToConsole, RenderingEngine, ICAEncryptionStrength, RDPAuthenticationLevel, LoadBalanceInfo, Colors, Resolution, AutomaticResize, DisplayWallpaper, " + "DisplayThemes, EnableFontSmoothing, EnableDesktopComposition, CacheBitmaps, RedirectDiskDrives, RedirectPorts, " + "RedirectPrinters, RedirectSmartCards, RedirectSound, RedirectKeys, " + "Connected, PreExtApp, PostExtApp, MacAddress, UserField, ExtApp, VNCCompression, VNCEncoding, VNCAuthMode, " + "VNCProxyType, VNCProxyIP, VNCProxyPort, VNCProxyUsername, VNCProxyPassword, " + "VNCColors, VNCSmartSizeMode, VNCViewOnly, " + "RDGatewayUsageMethod, RDGatewayHostname, RDGatewayUseConnectionCredentials, RDGatewayUsername, RDGatewayPassword, RDGatewayDomain, " + "UseCredSsp, " + "InheritCacheBitmaps, InheritColors, " + "InheritDescription, InheritDisplayThemes, InheritDisplayWallpaper, InheritEnableFontSmoothing, InheritEnableDesktopComposition, InheritDomain, " + "InheritIcon, InheritPanel, InheritPassword, InheritPort, " + "InheritProtocol, InheritPuttySession, InheritRedirectDiskDrives, " + "InheritRedirectKeys, InheritRedirectPorts, InheritRedirectPrinters, " + "InheritRedirectSmartCards, InheritRedirectSound, InheritResolution, InheritAutomaticResize, " + "InheritUseConsoleSession, InheritRenderingEngine, InheritUsername, InheritICAEncryptionStrength, InheritRDPAuthenticationLevel, InheritLoadBalanceInfo, " + "InheritPreExtApp, InheritPostExtApp, InheritMacAddress, InheritUserField, InheritExtApp, InheritVNCCompression, InheritVNCEncoding, " + "InheritVNCAuthMode, InheritVNCProxyType, InheritVNCProxyIP, InheritVNCProxyPort, " + "InheritVNCProxyUsername, InheritVNCProxyPassword, InheritVNCColors, " + "InheritVNCSmartSizeMode, InheritVNCViewOnly, " + "InheritRDGatewayUsageMethod, InheritRDGatewayHostname, InheritRDGatewayUseConnectionCredentials, InheritRDGatewayUsername, InheritRDGatewayPassword, InheritRDGatewayDomain, "
 				+ "InheritUseCredSsp, " + "PositionID, ParentID, ConstantID, LastChange)" + "VALUES (", _sqlConnection
 				);
@@ -239,7 +239,7 @@ namespace mRemoteNG.Config.Connections
 				if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Container) //container
 				{
 					_sqlQuery.CommandText += "\'" + this.ContainerList[node.Tag].IsExpanded + "\',"; //Expanded
-					curConI = this.ContainerList[node.Tag].ConnectionInfo;
+					curConI = this.ContainerList[node.Tag].ConnectionRecord;
 					SaveConnectionFieldsSQL(curConI);
 							
 					_sqlQuery.CommandText = Tools.Misc.PrepareForDB(_sqlQuery.CommandText);
@@ -263,9 +263,9 @@ namespace mRemoteNG.Config.Connections
 			}
 		}
 				
-		private void SaveConnectionFieldsSQL(Connection.Info curConI)
+		private void SaveConnectionFieldsSQL(Connection.ConnectionRecordImp curConI)
 		{
-			Connection.Info with_1 = curConI;
+			Connection.ConnectionRecordImp with_1 = curConI;
             _sqlQuery.CommandText += "\'" + Misc.PrepareValueForDB(with_1.Description) + "\',";
             _sqlQuery.CommandText += "\'" + Misc.PrepareValueForDB(with_1.Icon) + "\',";
             _sqlQuery.CommandText += "\'" + Misc.PrepareValueForDB(with_1.Panel) + "\',";
@@ -496,13 +496,13 @@ namespace mRemoteNG.Config.Connections
 				_sqlQuery.CommandText += "\'" + System.Convert.ToString(false) + "\',"; // .UseCredSsp
 			}
 					
-			with_1.PositionID = _currentNodeIndex;
+			with_1.MetaData.PositionID = _currentNodeIndex;
 					
-			if (with_1.IsContainer == false)
+			if (with_1.MetaData.IsContainer == false)
 			{
 				if (with_1.Parent != null)
 				{
-					_parentConstantId = System.Convert.ToString((with_1.Parent as Container.Info).ConnectionInfo.ConstantID);
+					_parentConstantId = System.Convert.ToString((with_1.Parent as Container.Info).ConnectionRecord.MetaData.ConstantID);
 				}
 				else
 				{
@@ -513,7 +513,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if ((with_1.Parent as Container.Info).Parent != null)
 				{
-					_parentConstantId = System.Convert.ToString(((with_1.Parent as Container.Info).Parent as Container.Info).ConnectionInfo.ConstantID);
+					_parentConstantId = System.Convert.ToString(((with_1.Parent as Container.Info).Parent as Container.Info).ConnectionRecord.MetaData.ConstantID);
 				}
 				else
 				{
@@ -521,7 +521,7 @@ namespace mRemoteNG.Config.Connections
 				}
 			}
 					
-			_sqlQuery.CommandText += _currentNodeIndex + ",\'" + _parentConstantId + "\',\'" + with_1.ConstantID + "\',\'" + Tools.Misc.DBDate(DateTime.Now) + "\')";
+			_sqlQuery.CommandText += _currentNodeIndex + ",\'" + _parentConstantId + "\',\'" + with_1.MetaData.ConstantID + "\',\'" + Tools.Misc.DBDate(DateTime.Now) + "\')";
 		}
         #endregion
 				
@@ -629,7 +629,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				foreach (TreeNode node in tNC)
 				{
-					Connection.Info curConI = default(Connection.Info);
+					Connection.ConnectionRecordImp curConI = default(Connection.ConnectionRecordImp);
 							
 					if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Connection | Tree.Node.GetNodeType(node) == Tree.Node.Type.Container)
 					{
@@ -641,7 +641,7 @@ namespace mRemoteNG.Config.Connections
 					if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Container) //container
 					{
 						_xmlTextWriter.WriteAttributeString("Expanded", "", System.Convert.ToString(this.ContainerList[node.Tag].TreeNode.IsExpanded));
-						curConI = this.ContainerList[node.Tag].ConnectionInfo;
+						curConI = this.ContainerList[node.Tag].ConnectionRecord;
 						SaveConnectionFields(curConI);
 						SaveNode(node.Nodes);
 						_xmlTextWriter.WriteEndElement();
@@ -661,7 +661,7 @@ namespace mRemoteNG.Config.Connections
 			}
 		}
 				
-		private void SaveConnectionFields(Connection.Info curConI)
+		private void SaveConnectionFields(Connection.ConnectionRecordImp curConI)
 		{
 			try
 			{
@@ -978,7 +978,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Connection)
 				{
-					Connection.Info curConI = (Connection.Info)node.Tag;
+					Connection.ConnectionRecordImp curConI = (Connection.ConnectionRecordImp)node.Tag;
 							
 					WritemRCSVLine(curConI);
 				}
@@ -989,7 +989,7 @@ namespace mRemoteNG.Config.Connections
 			}
 		}
 				
-		private void WritemRCSVLine(Connection.Info con)
+		private void WritemRCSVLine(Connection.ConnectionRecordImp con)
 		{
 			string nodePath = con.TreeNode.FullPath;
 					
@@ -1064,7 +1064,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Connection)
 				{
-					Connection.Info curConI = (Connection.Info)node.Tag;
+					Connection.ConnectionRecordImp curConI = (Connection.ConnectionRecordImp)node.Tag;
 							
 					if (curConI.Protocol == Connection.Protocol.Protocols.RDP)
 					{
@@ -1078,7 +1078,7 @@ namespace mRemoteNG.Config.Connections
 			}
 		}
 				
-		private void WritevRDCSVLine(Connection.Info con)
+		private void WritevRDCSVLine(Connection.ConnectionRecordImp con)
 		{
 			string nodePath = con.TreeNode.FullPath;
 					
@@ -1137,7 +1137,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if (Tree.Node.GetNodeType(node) == Tree.Node.Type.Connection)
 				{
-					Connection.Info curConI = (Connection.Info)node.Tag;
+					Connection.ConnectionRecordImp curConI = (Connection.ConnectionRecordImp)node.Tag;
 							
 					if (curConI.Protocol == Connection.Protocol.Protocols.RDP)
 					{
@@ -1156,7 +1156,7 @@ namespace mRemoteNG.Config.Connections
 			}
 		}
 				
-		private void WriteVREitem(Connection.Info con)
+		private void WriteVREitem(Connection.ConnectionRecordImp con)
 		{
 			//Name
 			_xmlTextWriter.WriteStartElement("ConnectionName");
