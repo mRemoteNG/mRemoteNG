@@ -8,62 +8,19 @@ namespace mRemoteNG.Themes
 {
 	public class ThemeManager
     {
-        private static readonly Theme _defaultTheme = new Theme(Language.strDefaultTheme);
-        private static Theme _activeTheme;
+        #region Private Variables
+        private static readonly ThemeInfo _defaultTheme = new ThemeInfo(Language.strDefaultTheme);
+        private static ThemeInfo _activeTheme;
         private static bool _activeThemeHandlerSet = false;
-
-        #region Properties
-        public static Theme DefaultTheme
-        {
-            get { return _defaultTheme; }
-        }
-
-        public static Theme ActiveTheme
-        {
-            get
-            {
-                if (_activeTheme == null)
-                    return DefaultTheme;
-                return _activeTheme;
-            }
-            set
-            {
-                // We need to set ActiveTheme to the new theme to make sure it references the right object.
-                // However, if both themes have the same properties, we don't need to raise a notification event.
-                bool needNotify = true;
-                if (_activeTheme != null)
-                {
-                    if (_activeTheme.Equals(value))
-                    {
-                        needNotify = false;
-                    }
-                }
-
-                if (_activeThemeHandlerSet)
-                {
-                    _activeTheme.PropertyChanged -= NotifyThemeChanged;
-                }
-
-                _activeTheme = value;
-
-                _activeTheme.PropertyChanged += NotifyThemeChanged;
-                _activeThemeHandlerSet = true;
-
-                if (needNotify)
-                {
-                    NotifyThemeChanged(_activeTheme, new PropertyChangedEventArgs(""));
-                }
-            }
-        }
         #endregion
 
         #region Public Methods
-        public static Theme LoadTheme(string themeName, bool setActive = true)
+        public static ThemeInfo LoadTheme(string themeName, bool setActive = true)
 		{
-			Theme loadedTheme = DefaultTheme;
+			ThemeInfo loadedTheme = DefaultTheme;
 			if (!string.IsNullOrEmpty(themeName))
 			{
-				foreach (Theme theme in LoadThemes())
+				foreach (ThemeInfo theme in LoadThemes())
 				{
 					if (theme.Name == themeName)
 					{
@@ -80,9 +37,9 @@ namespace mRemoteNG.Themes
 			return loadedTheme;
 		}
 			
-		public static List<Theme> LoadThemes()
+		public static List<ThemeInfo> LoadThemes()
 		{
-			List<Theme> themes = new List<Theme>();
+			List<ThemeInfo> themes = new List<ThemeInfo>();
 			themes.Add(DefaultTheme);
 			try
 			{
@@ -95,20 +52,20 @@ namespace mRemoteNG.Themes
 			return themes;
 		}
 			
-		public static void SaveThemes(List<Theme> themes)
+		public static void SaveThemes(List<ThemeInfo> themes)
 		{
 			themes.Remove(DefaultTheme);
 			ThemeSerializer.SaveToXmlFile(themes, Path.Combine(App.Info.Settings.SettingsPath, App.Info.Settings.ThemesFileName));
 		}
 			
-		public static void SaveThemes(Theme[] themes)
+		public static void SaveThemes(ThemeInfo[] themes)
 		{
-			SaveThemes(new List<Theme>(themes));
+			SaveThemes(new List<ThemeInfo>(themes));
 		}
 			
-		public static void SaveThemes(BindingList<Theme> themes)
+		public static void SaveThemes(BindingList<ThemeInfo> themes)
 		{
-			Theme[] themesArray = new Theme[themes.Count - 1 + 1];
+			ThemeInfo[] themesArray = new ThemeInfo[themes.Count - 1 + 1];
 			themes.CopyTo(themesArray, 0);
 			SaveThemes(themesArray);
 		}
@@ -132,6 +89,53 @@ namespace mRemoteNG.Themes
 			}
 			if (ThemeChangedEvent != null)
 				ThemeChangedEvent();
+		}
+        #endregion
+			
+        #region Properties
+        public static ThemeInfo DefaultTheme
+		{
+			get { return _defaultTheme; }
+		}
+		
+        public static ThemeInfo ActiveTheme
+		{
+			get
+			{
+				if (_activeTheme == null)
+				{
+					return DefaultTheme;
+				}
+				return _activeTheme;
+			}
+			set
+			{
+				// We need to set ActiveTheme to the new theme to make sure it references the right object.
+				// However, if both themes have the same properties, we don't need to raise a notification event.
+				bool needNotify = true;
+				if (_activeTheme != null)
+				{
+					if (_activeTheme.Equals(value))
+					{
+						needNotify = false;
+					}
+				}
+					
+				if (_activeThemeHandlerSet)
+				{
+					_activeTheme.PropertyChanged -= NotifyThemeChanged;
+				}
+					
+				_activeTheme = value;
+					
+				_activeTheme.PropertyChanged += NotifyThemeChanged;
+				_activeThemeHandlerSet = true;
+					
+				if (needNotify)
+				{
+					NotifyThemeChanged(_activeTheme, new PropertyChangedEventArgs(""));
+				}
+			}
 		}
         #endregion
 	}

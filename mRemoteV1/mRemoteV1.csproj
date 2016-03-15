@@ -192,12 +192,6 @@
     <Compile Include="Config\Putty\Config.Putty.Provider.cs" />
     <Compile Include="Connection\Connection.Info.Inheritance.cs" />
     <Compile Include="App\ProgramRoot.cs" />
-    <Compile Include="Themes\ConfigPanelColorCollection.cs" />
-    <Compile Include="Themes\ConnectionPanelColorCollection.cs" />
-    <Compile Include="Themes\MainWindowColorCollection.cs" />
-    <Compile Include="Themes\ThemeColorCollection.cs" />
-    <Compile Include="Themes\ThemeXMLReader.cs" />
-    <Compile Include="Themes\ThemeXMLWriter.cs" />
     <Compile Include="UI\Controls\ListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -309,7 +303,7 @@
     <Compile Include="Connection\Connection.Protocol.SSH2.cs" />
     <Compile Include="Connection\Connection.Protocol.Telnet.cs" />
     <Compile Include="Connection\Connection.Protocol.VNC.cs" />
-    <Compile Include="Themes\Theme.cs" />
+    <Compile Include="Themes\ThemeInfo.cs" />
     <Compile Include="Tools\CommandLineArguments.cs" />
     <Compile Include="Container\Container.Info.cs" />
     <Compile Include="Container\Container.List.cs" />

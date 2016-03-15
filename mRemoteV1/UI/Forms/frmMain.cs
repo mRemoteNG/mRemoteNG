@@ -297,9 +297,43 @@ namespace mRemoteNG
 		
 		public void ApplyThemes()
 		{
-			ThemeManager.ActiveTheme.ApplyTheme();
+			pnlDock.DockBackColor = ThemeManager.ActiveTheme.WindowBackgroundColor;
+			tsContainer.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+			tsContainer.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
+			tsContainer.TopToolStripPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+			tsContainer.TopToolStripPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
+			tsContainer.BottomToolStripPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+			tsContainer.BottomToolStripPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
+			tsContainer.LeftToolStripPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+			tsContainer.LeftToolStripPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
+			tsContainer.RightToolStripPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+			tsContainer.RightToolStripPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
+			tsContainer.ContentPanel.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+			tsContainer.ContentPanel.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
+			msMain.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+			msMain.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
+			ApplyMenuColors(msMain.Items);
+			tsExternalTools.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+			tsExternalTools.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
+			tsQuickConnect.BackColor = ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+			tsQuickConnect.ForeColor = ThemeManager.ActiveTheme.ToolbarTextColor;
 		}
 		
+		private static void ApplyMenuColors(ToolStripItemCollection itemCollection)
+		{
+			ToolStripMenuItem menuItem = default(ToolStripMenuItem);
+			foreach (ToolStripItem item in itemCollection)
+			{
+				item.BackColor = ThemeManager.ActiveTheme.MenuBackgroundColor;
+				item.ForeColor = ThemeManager.ActiveTheme.MenuTextColor;
+				
+				menuItem = item as ToolStripMenuItem;
+				if (menuItem != null)
+				{
+					ApplyMenuColors(menuItem.DropDownItems);
+				}
+			}
+		}
 		
 		public void frmMain_Shown(object sender, EventArgs e)
 		{

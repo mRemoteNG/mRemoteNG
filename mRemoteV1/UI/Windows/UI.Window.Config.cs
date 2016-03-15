@@ -690,7 +690,14 @@ namespace mRemoteNG.UI.Window
 				
 		private void ApplyTheme()
 		{
-			Themes.ThemeManager.ActiveTheme.ApplyTheme();
+			pGrid.BackColor = Themes.ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+			pGrid.ForeColor = Themes.ThemeManager.ActiveTheme.ToolbarTextColor;
+			pGrid.ViewBackColor = Themes.ThemeManager.ActiveTheme.ConfigPanelBackgroundColor;
+			pGrid.ViewForeColor = Themes.ThemeManager.ActiveTheme.ConfigPanelTextColor;
+			pGrid.LineColor = Themes.ThemeManager.ActiveTheme.ConfigPanelGridLineColor;
+			pGrid.HelpBackColor = Themes.ThemeManager.ActiveTheme.ConfigPanelHelpBackgroundColor;
+			pGrid.HelpForeColor = Themes.ThemeManager.ActiveTheme.ConfigPanelHelpTextColor;
+			pGrid.CategoryForeColor = Themes.ThemeManager.ActiveTheme.ConfigPanelCategoryTextColor;
 		}
 				
 		private bool _originalPropertyGridToolStripItemCountValid;
