@@ -50,7 +50,7 @@ namespace mRemoteNG.Tools.PortScan
 			set { _RloginPort = value; }
 		}
 
-        private static int _RDPPort = (int)Connection.Protocol.RDP.Defaults.Port;
+        private static int _RDPPort = (int)Connection.Protocol.RDPConnectionProtocolImp.Defaults.Port;
         public static int RDPPort
 		{
 			get { return _RDPPort; }
@@ -406,7 +406,7 @@ namespace mRemoteNG.Tools.PortScan
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "StartScanBG failed (Tools.PortScan)" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "StartScanBG failed (Tools.PortScan)" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				

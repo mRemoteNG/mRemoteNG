@@ -326,7 +326,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Loading About failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Loading About failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				

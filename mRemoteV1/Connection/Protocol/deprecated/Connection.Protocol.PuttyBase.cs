@@ -235,7 +235,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyConnectionFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyConnectionFailed + Environment.NewLine + ex.Message);
 				return false;
 			}
 		}
@@ -252,7 +252,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyFocusFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyFocusFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -268,7 +268,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyResizeFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyResizeFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -283,7 +283,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyKillFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyKillFailed + Environment.NewLine + ex.Message, true);
 			}
 					
 			try
@@ -292,7 +292,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyDisposeFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyDisposeFailed + Environment.NewLine + ex.Message, true);
 			}
 					
 			base.Close();
@@ -307,7 +307,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyShowSettingsDialogFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyShowSettingsDialogFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion

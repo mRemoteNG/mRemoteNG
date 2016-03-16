@@ -121,7 +121,7 @@ namespace mRemoteNG.Messages
 
             ListViewItem lvItem = new ListViewItem();
             lvItem.ImageIndex = System.Convert.ToInt32(nMsg.MsgClass);
-            lvItem.Text = nMsg.MsgText.Replace(Constants.vbNewLine, "  ");
+            lvItem.Text = nMsg.MsgText.Replace(Environment.NewLine, "  ");
             lvItem.Tag = nMsg;
 
             AddToList(lvItem);
@@ -129,7 +129,7 @@ namespace mRemoteNG.Messages
 
         public void AddExceptionMessage(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = false)
         {
-            AddMessage(msgClass, message + Constants.vbNewLine + Tools.Misc.GetExceptionMessageRecursive(ex), logOnly);
+            AddMessage(msgClass, message + Environment.NewLine + Tools.Misc.GetExceptionMessageRecursive(ex), logOnly);
         }
 #endregion
 

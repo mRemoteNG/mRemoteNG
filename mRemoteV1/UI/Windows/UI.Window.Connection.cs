@@ -327,7 +327,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddConnectionTab (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddConnectionTab (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 					
 			return null;
@@ -443,7 +443,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.Connection_FormClosing() failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.Connection_FormClosing() failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -527,7 +527,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.CloseConnectionTab() failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Connection.CloseConnectionTab() failed" + Environment.NewLine + ex.Message, true);
 			}
 					
 			UpdateSelectedConnection();
@@ -585,7 +585,7 @@ namespace mRemoteNG.UI.Window
 						
 				if (IC.Info.Protocol == mRemoteNG.Connection.Protocol.Protocols.RDP)
 				{
-                    mRemoteNG.Connection.Protocol.RDP rdp = (mRemoteNG.Connection.Protocol.RDP)IC.Protocol;
+                    mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp rdp = (mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp)IC.Protocol;
 							
 					cmenTabFullscreen.Enabled = true;
 					cmenTabFullscreen.Checked = rdp.Fullscreen;
@@ -640,7 +640,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideMenuButtons (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideMenuButtons (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -733,9 +733,9 @@ namespace mRemoteNG.UI.Window
 					{
                         mRemoteNG.Connection.InterfaceControl IC = (mRemoteNG.Connection.InterfaceControl)this.TabController.SelectedTab.Tag;
 								
-						if (IC.Protocol is mRemoteNG.Connection.Protocol.RDP)
+						if (IC.Protocol is mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp)
 						{
-                            mRemoteNG.Connection.Protocol.RDP rdp = (mRemoteNG.Connection.Protocol.RDP)IC.Protocol;
+                            mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp rdp = (mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp)IC.Protocol;
 							rdp.ToggleSmartSize();
 						}
 						else if (IC.Protocol is mRemoteNG.Connection.Protocol.VNC)
@@ -748,7 +748,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleSmartSize (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleSmartSize (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -775,7 +775,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TransferFile (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TransferFile (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -797,7 +797,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -811,7 +811,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "VNCTransferFile (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "VNCTransferFile (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -837,7 +837,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleViewOnly (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleViewOnly (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -861,7 +861,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartChat (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartChat (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -885,7 +885,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshScreen (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshScreen (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 
@@ -909,7 +909,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SendSpecialKeys (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SendSpecialKeys (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -923,9 +923,9 @@ namespace mRemoteNG.UI.Window
 					{
                         mRemoteNG.Connection.InterfaceControl IC = (mRemoteNG.Connection.InterfaceControl)this.TabController.SelectedTab.Tag;
 								
-						if (IC.Protocol is mRemoteNG.Connection.Protocol.RDP)
+						if (IC.Protocol is mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp)
 						{
-                            mRemoteNG.Connection.Protocol.RDP rdp = (mRemoteNG.Connection.Protocol.RDP)IC.Protocol;
+                            mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp rdp = (mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp)IC.Protocol;
 							rdp.ToggleFullscreen();
 						}
 					}
@@ -933,7 +933,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleFullscreen (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ToggleFullscreen (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -958,7 +958,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowPuttySettingsDialog (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowPuttySettingsDialog (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -985,7 +985,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -1006,7 +1006,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cmenTabExternalAppsEntry_Click failed (UI.Window.Tree)" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cmenTabExternalAppsEntry_Click failed (UI.Window.Tree)" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -1026,7 +1026,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CloseTabMenu (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "CloseTabMenu (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -1047,7 +1047,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "DuplicateTab (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "DuplicateTab (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -1070,7 +1070,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Reconnect (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Reconnect (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -1087,7 +1087,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RenameTab (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RenameTab (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -1118,7 +1118,7 @@ namespace mRemoteNG.UI.Window
 				}
 				catch (Exception ex)
 				{
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t close tab" + Constants.vbNewLine + ex.Message, true);
+                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t close tab" + Environment.NewLine + ex.Message, true);
 				}
 			}
 			else
@@ -1134,7 +1134,7 @@ namespace mRemoteNG.UI.Window
 				}
 				catch (Exception ex)
 				{
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t close tab" + Constants.vbNewLine + ex.Message, true);
+                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t close tab" + Environment.NewLine + ex.Message, true);
 				}
 						
 				if (this.TabController.TabPages.Count == 0)
@@ -1198,7 +1198,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseUp (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "TabController_MouseUp (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -1217,7 +1217,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "FocusIC (UI.Window.Connections) failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "FocusIC (UI.Window.Connections) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -1240,7 +1240,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshIC (UI.Window.Connection) failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "RefreshIC (UI.Window.Connection) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion

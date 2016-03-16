@@ -46,7 +46,7 @@ namespace mRemoteNG.Config.Settings
 					}
 					catch (Exception ex)
 					{
-                        Runtime.Log.Error("My.Settings.Upgrade() failed" + Constants.vbNewLine + ex.Message);
+                        Runtime.Log.Error("My.Settings.Upgrade() failed" + Environment.NewLine + ex.Message);
 					}
 					My.Settings.Default.DoUpgrade = false;
 							
@@ -165,7 +165,7 @@ namespace mRemoteNG.Config.Settings
 			}
 			catch (Exception ex)
 			{
-                Runtime.Log.Error("Loading settings failed" + Constants.vbNewLine + ex.Message);
+                Runtime.Log.Error("Loading settings failed" + Environment.NewLine + ex.Message);
 			}
 		}
 				
@@ -255,7 +255,7 @@ namespace mRemoteNG.Config.Settings
 			}
 			catch (Exception ex)
 			{
-                Runtime.Log.Error("LoadPanelsFromXML failed" + Constants.vbNewLine + ex.Message);
+                Runtime.Log.Error("LoadPanelsFromXML failed" + Environment.NewLine + ex.Message);
 			}
 		}
 				
@@ -345,7 +345,7 @@ namespace mRemoteNG.Config.Settings
 			}
 			catch (Exception ex)
 			{
-                Runtime.Log.Error("GetContentFromPersistString failed" + Constants.vbNewLine + ex.Message);
+                Runtime.Log.Error("GetContentFromPersistString failed" + Environment.NewLine + ex.Message);
 			}
 					
 			return null;

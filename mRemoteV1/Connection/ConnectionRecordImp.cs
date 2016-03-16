@@ -19,6 +19,9 @@ namespace mRemoteNG.Connection
         ConnectionProtocol _protocol;
         private string _constantId;
 
+
+
+
         // Meta data
         //private Protocol.Protocols _protocol;
         private ConnectionRecordInheritanceImp _Inherit;
@@ -245,7 +248,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameAuthenticationLevel"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionAuthenticationLevel"), 
             TypeConverter(typeof(Tools.Misc.EnumTypeConverter))]
-        public Protocol.RDP.AuthenticationLevel RDPAuthenticationLevel
+        public Protocol.RDPConnectionProtocolImp.AuthenticationLevel RDPAuthenticationLevel
 		{
 			get { return GetInheritedPropertyValue("RDPAuthenticationLevel", _rdpAuthenticationLevel); }
 			set { _rdpAuthenticationLevel = value; }
@@ -285,7 +288,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayUsageMethod"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUsageMethod"), 
             TypeConverter(typeof(Tools.Misc.EnumTypeConverter))]
-        public Protocol.RDP.RDGatewayUsageMethod RDGatewayUsageMethod
+        public Protocol.RDPConnectionProtocolImp.RDGatewayUsageMethod RDGatewayUsageMethod
 		{
 			get { return GetInheritedPropertyValue("RDGatewayUsageMethod", _rdGatewayUsageMethod); }
 			set { _rdGatewayUsageMethod = value; }
@@ -304,7 +307,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayUseConnectionCredentials"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUseConnectionCredentials"), 
             TypeConverter(typeof(Tools.Misc.EnumTypeConverter))]
-        public Protocol.RDP.RDGatewayUseConnectionCredentials RDGatewayUseConnectionCredentials
+        public Protocol.RDPConnectionProtocolImp.RDGatewayUseConnectionCredentials RDGatewayUseConnectionCredentials
 		{
 			get { return GetInheritedPropertyValue("RDGatewayUseConnectionCredentials", _rdGatewayUseConnectionCredentials); }
 			set { _rdGatewayUseConnectionCredentials = value; }
@@ -343,7 +346,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameResolution"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionResolution"), 
             TypeConverter(typeof(Tools.Misc.EnumTypeConverter))]
-        public Protocol.RDP.RDPResolutions Resolution
+        public Protocol.RDPConnectionProtocolImp.RDPResolutions Resolution
 		{
 			get { return GetInheritedPropertyValue("Resolution", _resolution); }
 			set { _resolution = value; }
@@ -363,7 +366,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameColors"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionColors"), 
             TypeConverter(typeof(Tools.Misc.EnumTypeConverter))]
-        public Protocol.RDP.RDPColors Colors
+        public Protocol.RDPConnectionProtocolImp.RDPColors Colors
 		{
 			get { return GetInheritedPropertyValue("Colors", _colors); }
 			set { _colors = value; }
@@ -474,7 +477,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectSounds"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectSounds"), 
             TypeConverter(typeof(Tools.Misc.EnumTypeConverter))]
-        public Protocol.RDP.RDPSounds RedirectSound
+        public Protocol.RDPConnectionProtocolImp.RDPSounds RedirectSound
 		{
 			get { return GetInheritedPropertyValue("RedirectSound", _redirectSound); }
 			set { _redirectSound = value; }
@@ -618,7 +621,7 @@ namespace mRemoteNG.Connection
             _metaData = new ConnectionRecordMetaDataImp();
             _credential = new CredentialRecordImp();
             _externalTool = new ExternalToolRecordImp();
-            _protocol = ProtocolManagerImp.GetConnectionProtocol(protocol);
+            _protocol = new ConnectionProtocolImp(protocol);
             SetDefaults();
 		}
 		
@@ -713,7 +716,7 @@ namespace mRemoteNG.Connection
                 switch (protocol)
                 {
                     case Connection.Protocol.Protocols.RDP:
-                        return (int)Connection.Protocol.RDP.Defaults.Port;
+                        return (int)Connection.Protocol.RDPConnectionProtocolImp.Defaults.Port;
                     case Connection.Protocol.Protocols.VNC:
                         return (int)Connection.Protocol.VNC.Defaults.Port;
                     case Connection.Protocol.Protocols.SSH1:
@@ -768,7 +771,7 @@ namespace mRemoteNG.Connection
             _puttySession = My.Settings.Default.ConDefaultPuttySession;
             _icaEncryption = (Protocol.ICA.EncryptionStrength)System.Enum.Parse(typeof(Protocol.ICA.EncryptionStrength), My.Settings.Default.ConDefaultICAEncryptionStrength);
             _useConsoleSession = My.Settings.Default.ConDefaultUseConsoleSession;
-            _rdpAuthenticationLevel = (Protocol.RDP.AuthenticationLevel)System.Enum.Parse(typeof(Protocol.RDP.AuthenticationLevel), My.Settings.Default.ConDefaultRDPAuthenticationLevel);
+            _rdpAuthenticationLevel = (Protocol.RDPConnectionProtocolImp.AuthenticationLevel)System.Enum.Parse(typeof(Protocol.RDPConnectionProtocolImp.AuthenticationLevel), My.Settings.Default.ConDefaultRDPAuthenticationLevel);
             _loadBalanceInfo = My.Settings.Default.ConDefaultLoadBalanceInfo;
             _renderingEngine = (Protocol.HTTPBase.RenderingEngine)System.Enum.Parse(typeof(Protocol.HTTPBase.RenderingEngine), My.Settings.Default.ConDefaultRenderingEngine);
             _useCredSsp = My.Settings.Default.ConDefaultUseCredSsp;
@@ -776,9 +779,9 @@ namespace mRemoteNG.Connection
 
         private void SetRDGatewayDefaults()
         {
-            _rdGatewayUsageMethod = (Protocol.RDP.RDGatewayUsageMethod)System.Enum.Parse(typeof(Protocol.RDP.RDGatewayUsageMethod), My.Settings.Default.ConDefaultRDGatewayUsageMethod);
+            _rdGatewayUsageMethod = (Protocol.RDPConnectionProtocolImp.RDGatewayUsageMethod)System.Enum.Parse(typeof(Protocol.RDPConnectionProtocolImp.RDGatewayUsageMethod), My.Settings.Default.ConDefaultRDGatewayUsageMethod);
             _rdGatewayHostname = My.Settings.Default.ConDefaultRDGatewayHostname;
-            _rdGatewayUseConnectionCredentials = (Protocol.RDP.RDGatewayUseConnectionCredentials)System.Enum.Parse(typeof(Protocol.RDP.RDGatewayUseConnectionCredentials), My.Settings.Default.ConDefaultRDGatewayUseConnectionCredentials); ;
+            _rdGatewayUseConnectionCredentials = (Protocol.RDPConnectionProtocolImp.RDGatewayUseConnectionCredentials)System.Enum.Parse(typeof(Protocol.RDPConnectionProtocolImp.RDGatewayUseConnectionCredentials), My.Settings.Default.ConDefaultRDGatewayUseConnectionCredentials); ;
             _rdGatewayUsername = My.Settings.Default.ConDefaultRDGatewayUsername;
             _rdGatewayPassword = My.Settings.Default.ConDefaultRDGatewayPassword;
             _rdGatewayDomain = My.Settings.Default.ConDefaultRDGatewayDomain;
@@ -786,9 +789,9 @@ namespace mRemoteNG.Connection
 
         private void SetAppearanceDefaults() 
         {
-            _resolution = (Protocol.RDP.RDPResolutions)System.Enum.Parse(typeof(Protocol.RDP.RDPResolutions), My.Settings.Default.ConDefaultResolution);
+            _resolution = (Protocol.RDPConnectionProtocolImp.RDPResolutions)System.Enum.Parse(typeof(Protocol.RDPConnectionProtocolImp.RDPResolutions), My.Settings.Default.ConDefaultResolution);
             _automaticResize = My.Settings.Default.ConDefaultAutomaticResize;
-            _colors = (Protocol.RDP.RDPColors)System.Enum.Parse(typeof(Protocol.RDP.RDPColors), My.Settings.Default.ConDefaultColors);
+            _colors = (Protocol.RDPConnectionProtocolImp.RDPColors)System.Enum.Parse(typeof(Protocol.RDPConnectionProtocolImp.RDPColors), My.Settings.Default.ConDefaultColors);
             _cacheBitmaps = My.Settings.Default.ConDefaultCacheBitmaps;
             _displayWallpaper = My.Settings.Default.ConDefaultDisplayWallpaper;
             _displayThemes = My.Settings.Default.ConDefaultDisplayThemes;
@@ -803,7 +806,7 @@ namespace mRemoteNG.Connection
             _redirectPrinters = My.Settings.Default.ConDefaultRedirectPrinters;
             _redirectPorts = My.Settings.Default.ConDefaultRedirectPorts;
             _redirectSmartCards = My.Settings.Default.ConDefaultRedirectSmartCards;
-            _redirectSound = (Protocol.RDP.RDPSounds)System.Enum.Parse(typeof(Protocol.RDP.RDPSounds), My.Settings.Default.ConDefaultRedirectSound);
+            _redirectSound = (Protocol.RDPConnectionProtocolImp.RDPSounds)System.Enum.Parse(typeof(Protocol.RDPConnectionProtocolImp.RDPSounds), My.Settings.Default.ConDefaultRedirectSound);
         }
 
         private void SetVNCDefaults()

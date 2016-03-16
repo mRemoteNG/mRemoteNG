@@ -84,19 +84,19 @@ namespace mRemoteNG.Config.Import
 					switch (value)
 					{
 						case "8":
-							connectionInfo.Colors = Connection.Protocol.RDP.RDPColors.Colors256;
+							connectionInfo.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors256;
 							break;
 						case "15":
-							connectionInfo.Colors = Connection.Protocol.RDP.RDPColors.Colors15Bit;
+							connectionInfo.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors15Bit;
 							break;
 						case "16":
-							connectionInfo.Colors = Connection.Protocol.RDP.RDPColors.Colors16Bit;
+							connectionInfo.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors16Bit;
 							break;
 						case "24":
-							connectionInfo.Colors = Connection.Protocol.RDP.RDPColors.Colors24Bit;
+							connectionInfo.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors24Bit;
 							break;
 						case "32":
-							connectionInfo.Colors = Connection.Protocol.RDP.RDPColors.Colors32Bit;
+							connectionInfo.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors32Bit;
 							break;
 					}
 					break;
@@ -113,11 +113,11 @@ namespace mRemoteNG.Config.Import
 				case "screen mode id":
 					if (value == "2")
 					{
-						connectionInfo.Resolution = Connection.Protocol.RDP.RDPResolutions.Fullscreen;
+						connectionInfo.Resolution = Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions.Fullscreen;
 					}
 					else
 					{
-						connectionInfo.Resolution = Connection.Protocol.RDP.RDPResolutions.FitToWindow;
+						connectionInfo.Resolution = Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions.FitToWindow;
 					}
 					break;
 				case "connect to console":
@@ -210,13 +210,13 @@ namespace mRemoteNG.Config.Import
 					switch (value)
 					{
 						case "0":
-							connectionInfo.RedirectSound = Connection.Protocol.RDP.RDPSounds.BringToThisComputer;
+							connectionInfo.RedirectSound = Connection.Protocol.RDPConnectionProtocolImp.RDPSounds.BringToThisComputer;
 							break;
 						case "1":
-							connectionInfo.RedirectSound = Connection.Protocol.RDP.RDPSounds.LeaveAtRemoteComputer;
+							connectionInfo.RedirectSound = Connection.Protocol.RDPConnectionProtocolImp.RDPSounds.LeaveAtRemoteComputer;
 							break;
 						case "2":
-							connectionInfo.RedirectSound = Connection.Protocol.RDP.RDPSounds.DoNotPlay;
+							connectionInfo.RedirectSound = Connection.Protocol.RDPConnectionProtocolImp.RDPSounds.DoNotPlay;
 							break;
 					}
 					break;

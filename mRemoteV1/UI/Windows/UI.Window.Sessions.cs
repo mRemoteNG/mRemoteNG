@@ -87,7 +87,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Sessions.GetSessions() failed." + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Sessions.GetSessions() failed." + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -133,7 +133,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Sessions.KillSession() failed." + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Sessions.KillSession() failed." + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -166,7 +166,7 @@ namespace mRemoteNG.UI.Window
 			}
 					
 			Security.Impersonator impersonator = new Security.Impersonator();
-			mRemoteNG.Connection.Protocol.RDP.TerminalSessions terminalSessions = new mRemoteNG.Connection.Protocol.RDP.TerminalSessions();
+			mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.TerminalSessions terminalSessions = new mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.TerminalSessions();
 			int serverHandle = 0;
 			try
 			{
@@ -188,7 +188,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSessionGetFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSessionGetFailed + Environment.NewLine + ex.Message, true);
 			}
 			finally
 			{
@@ -201,16 +201,16 @@ namespace mRemoteNG.UI.Window
 		}
 				
 		// Get sessions from an already impersonated and connected TerminalSessions object
-        private void GetSessions(mRemoteNG.Connection.Protocol.RDP.TerminalSessions terminalSessions, int serverHandle)
+        private void GetSessions(mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.TerminalSessions terminalSessions, int serverHandle)
 		{
-			mRemoteNG.Connection.Protocol.RDP.SessionsCollection rdpSessions = terminalSessions.GetSessions(serverHandle);
-			foreach (mRemoteNG.Connection.Protocol.RDP.Session session in rdpSessions)
+			mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.SessionsCollection rdpSessions = terminalSessions.GetSessions(serverHandle);
+			foreach (mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.Session session in rdpSessions)
 			{
 				ListViewItem item = new ListViewItem();
 				item.Tag = session.SessionId;
 				item.Text = session.SessionUser;
 				item.SubItems.Add(session.SessionState);
-				item.SubItems.Add(session.SessionName.Replace(Constants.vbNewLine, ""));
+				item.SubItems.Add(session.SessionName.Replace(Environment.NewLine, ""));
 				AddToList(item);
 			}
 		}
@@ -224,7 +224,7 @@ namespace mRemoteNG.UI.Window
 			}
 					
 			Security.Impersonator impersonator = new Security.Impersonator();
-			mRemoteNG.Connection.Protocol.RDP.TerminalSessions terminalSessions = new mRemoteNG.Connection.Protocol.RDP.TerminalSessions();
+			mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.TerminalSessions terminalSessions = new mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.TerminalSessions();
 			int serverHandle = 0;
 			try
 			{
@@ -253,7 +253,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSessionKillFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSessionKillFailed + Environment.NewLine + ex.Message, true);
 			}
 			finally
 			{

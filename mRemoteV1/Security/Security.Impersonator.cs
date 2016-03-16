@@ -78,7 +78,7 @@ namespace mRemoteNG.Security
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Starting Impersonation failed (Sessions feature will not work)" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Starting Impersonation failed (Sessions feature will not work)" + Environment.NewLine + ex.Message, true);
 			}
 		}
 			
@@ -95,7 +95,7 @@ namespace mRemoteNG.Security
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Stopping Impersonation failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Stopping Impersonation failed" + Environment.NewLine + ex.Message, true);
 				throw;
 			}
 			finally

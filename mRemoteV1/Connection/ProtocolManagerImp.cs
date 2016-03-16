@@ -23,7 +23,7 @@ namespace mRemoteNG.Connection
             _enumInterfaceProtocolPairs.Add(Protocols.ICA, new ICAConnectionProtocol());
             _enumInterfaceProtocolPairs.Add(Protocols.IntApp, new OtherConnectionProtocol());
             _enumInterfaceProtocolPairs.Add(Protocols.RAW, new RAWConnectionProtocol());
-            _enumInterfaceProtocolPairs.Add(Protocols.RDP, new RDPConnectionProtocol());
+            _enumInterfaceProtocolPairs.Add(Protocols.RDP, new RDPConnectionProtocolImp());
             _enumInterfaceProtocolPairs.Add(Protocols.Rlogin, new RloginConnectionProtocol());
             _enumInterfaceProtocolPairs.Add(Protocols.SSH1, new SSH1ConnectionProtocol());
             _enumInterfaceProtocolPairs.Add(Protocols.SSH2, new SSH2ConnectionProtocol());

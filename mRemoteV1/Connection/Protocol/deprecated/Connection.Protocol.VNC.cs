@@ -113,7 +113,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSetPropsFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSetPropsFailed + Environment.NewLine + ex.Message, true);
 				return false;
 			}
 		}
@@ -128,7 +128,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionOpenFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionOpenFailed + Environment.NewLine + ex.Message);
 				return false;
 			}
 					
@@ -143,7 +143,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionDisconnectFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncConnectionDisconnectFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -163,7 +163,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSendSpecialKeysFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSendSpecialKeysFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -176,7 +176,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncToggleSmartSizeFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncToggleSmartSizeFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -188,7 +188,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncToggleViewOnlyFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncToggleViewOnlyFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -205,7 +205,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncStartChatFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncStartChatFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -233,7 +233,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncRefreshFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncRefreshFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -253,7 +253,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSetEventHandlersFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strVncSetEventHandlersFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion

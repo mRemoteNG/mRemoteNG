@@ -13,7 +13,7 @@ namespace mRemoteNG.Connection.Protocol
         private UI.Window.Connection _connectionWindow;
         private InterfaceControl _interfaceControl;
         private Control _Control;
-        private mRemoteNG.Connection.ConnectionRecordImp.Force _Force;
+        private ConnectionRecordImp.Force _Force;
         private ConnectingEventHandler ConnectingEvent;
         private ConnectedEventHandler ConnectedEvent;
         private DisconnectedEventHandler DisconnectedEvent;

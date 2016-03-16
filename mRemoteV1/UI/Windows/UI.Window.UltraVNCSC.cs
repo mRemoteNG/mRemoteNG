@@ -120,7 +120,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartListening (UI.Window.UltraVNCSC) failed" + Constants.vbNewLine + ex.Message, false);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartListening (UI.Window.UltraVNCSC) failed" + Environment.NewLine + ex.Message, false);
 				Close();
 			}
 		}
@@ -135,7 +135,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "VNC SetupLicense failed (UI.Window.UltraVNCSC)" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "VNC SetupLicense failed (UI.Window.UltraVNCSC)" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				

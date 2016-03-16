@@ -138,7 +138,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t get node type" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t get node type" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return Type.None;
@@ -160,7 +160,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t get node type from string" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t get node type from string" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return Type.None;
@@ -190,7 +190,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return null;
@@ -220,7 +220,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return null;
@@ -237,7 +237,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "IsEmpty (Tree.Node) failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "IsEmpty (Tree.Node) failed" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return true;
@@ -284,7 +284,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNode failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNode failed" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return null;
@@ -403,7 +403,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SetNodeToolTip failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SetNodeToolTip failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 		
@@ -455,7 +455,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Deleting selected node failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Deleting selected node failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 		
@@ -511,7 +511,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeUp failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeUp failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 		
@@ -537,7 +537,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeDown failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeDown failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 		
@@ -675,7 +675,7 @@ namespace mRemoteNG.Tree
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" + Environment.NewLine + ex.Message, true);
             }
         }
         #endregion

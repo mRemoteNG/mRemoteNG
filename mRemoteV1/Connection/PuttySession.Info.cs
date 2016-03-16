@@ -32,7 +32,7 @@ namespace mRemoteNG.Connection.PuttySession
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorCouldNotLaunchPutty + Constants.vbNewLine + ex.Message, false);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorCouldNotLaunchPutty + Environment.NewLine + ex.Message, false);
 			}
 	    }
         #endregion

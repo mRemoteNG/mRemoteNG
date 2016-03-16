@@ -514,9 +514,9 @@ namespace mRemoteNG.UI.Window
 					System.Windows.Forms.Application.DoEvents();
 				}
 						
-				if (!(new Version(System.Convert.ToString(rdpClient.Version)) >= mRemoteNG.Connection.Protocol.RDP.Versions.RDC60))
+				if (!(new Version(System.Convert.ToString(rdpClient.Version)) >= mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.Versions.RDC60))
 				{
-					throw (new Exception(string.Format("Found RDC Client version {0} but version {1} or higher is required.", rdpClient.Version, mRemoteNG.Connection.Protocol.RDP.Versions.RDC60)));
+					throw (new Exception(string.Format("Found RDC Client version {0} but version {1} or higher is required.", rdpClient.Version, mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.Versions.RDC60)));
 				}
 						
 				pbCheck1.Image = My.Resources.Good_Symbol;

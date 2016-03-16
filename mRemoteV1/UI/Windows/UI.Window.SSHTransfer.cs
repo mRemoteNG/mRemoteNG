@@ -429,7 +429,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHTransferFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHTransferFailed + Environment.NewLine + ex.Message);
 				this.sshT.Close();
 			}
 		}
@@ -446,7 +446,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHStartTransferBG + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHStartTransferBG + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -561,7 +561,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHTransferEndFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHTransferEndFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion

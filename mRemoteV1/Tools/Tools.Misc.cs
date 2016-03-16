@@ -67,7 +67,7 @@ namespace mRemoteNG.Tools
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" + Environment.NewLine + ex.Message, true);
 				return null;
 			}
 		}
@@ -146,7 +146,7 @@ namespace mRemoteNG.Tools
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "IsSQLUpdateAvailable failed (Tools.Misc)" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "IsSQLUpdateAvailable failed (Tools.Misc)" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return false;
@@ -212,7 +212,7 @@ namespace mRemoteNG.Tools
 			return Enum.Parse(t, value);
 		}
 			
-		public static string GetExceptionMessageRecursive(Exception ex, string separator = Constants.vbNewLine)
+		public static string GetExceptionMessageRecursive(Exception ex, string separator = Environment.NewLine)
 		{
 			string message = ex.Message;
 			if (ex.InnerException != null)
@@ -242,7 +242,7 @@ namespace mRemoteNG.Tools
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Taking Screenshot failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Taking Screenshot failed" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return null;
@@ -526,7 +526,7 @@ namespace mRemoteNG.Tools
 				}
 				catch (Exception ex)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new Args failed" + Constants.vbNewLine + ex.Message, true);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new Args failed" + Environment.NewLine + ex.Message, true);
 				}
 			}
 		}

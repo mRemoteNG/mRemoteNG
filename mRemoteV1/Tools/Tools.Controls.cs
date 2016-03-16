@@ -105,7 +105,7 @@ namespace mRemoteNG.Tools
 				}
 				catch (Exception ex)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new SysTrayIcon failed" + Constants.vbNewLine + ex.Message, true);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new SysTrayIcon failed" + Environment.NewLine + ex.Message, true);
 				}
 			}
 				
@@ -120,7 +120,7 @@ namespace mRemoteNG.Tools
 				}
 				catch (Exception ex)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Disposing SysTrayIcon failed" + Constants.vbNewLine + ex.Message, true);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Disposing SysTrayIcon failed" + Environment.NewLine + ex.Message, true);
 				}
 			}
 				
@@ -168,7 +168,7 @@ namespace mRemoteNG.Tools
 				}
 				catch (Exception ex)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" + Constants.vbNewLine + ex.Message, true);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" + Environment.NewLine + ex.Message, true);
 				}
 			}
 				

@@ -458,14 +458,14 @@ namespace mRemoteNG.Config.Connections
 				connectionRecord.RedirectPorts = System.Convert.ToBoolean(sqlRd["RedirectPorts"]);
 				connectionRecord.RedirectSmartCards = System.Convert.ToBoolean(sqlRd["RedirectSmartCards"]);
 				connectionRecord.RedirectKeys = System.Convert.ToBoolean(sqlRd["RedirectKeys"]);
-                connectionRecord.RedirectSound = (Connection.Protocol.RDP.RDPSounds)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPSounds), System.Convert.ToString(sqlRd["RedirectSound"]));
+                connectionRecord.RedirectSound = (Connection.Protocol.RDPConnectionProtocolImp.RDPSounds)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDPConnectionProtocolImp.RDPSounds), System.Convert.ToString(sqlRd["RedirectSound"]));
 
                 connectionRecord.Protocol = (Connection.Protocol.Protocols)Tools.Misc.StringToEnum(typeof(Connection.Protocol.Protocols), System.Convert.ToString(sqlRd["Protocol"]));
 				connectionRecord.Port = System.Convert.ToInt32(sqlRd["Port"]);
 				connectionRecord.PuttySession = System.Convert.ToString(sqlRd["PuttySession"]);
                 
-                connectionRecord.Colors = (Connection.Protocol.RDP.RDPColors)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPColors), System.Convert.ToString(sqlRd["Colors"]));
-                connectionRecord.Resolution = (Connection.Protocol.RDP.RDPResolutions)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPResolutions), System.Convert.ToString(sqlRd["Resolution"]));
+                connectionRecord.Colors = (Connection.Protocol.RDPConnectionProtocolImp.RDPColors)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDPConnectionProtocolImp.RDPColors), System.Convert.ToString(sqlRd["Colors"]));
+                connectionRecord.Resolution = (Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions), System.Convert.ToString(sqlRd["Resolution"]));
 				
 				connectionRecord.Inherit = new ConnectionRecordInheritanceImp(connectionRecord);
 				connectionRecord.Inherit.CacheBitmaps = System.Convert.ToBoolean(sqlRd["InheritCacheBitmaps"]);
@@ -498,8 +498,8 @@ namespace mRemoteNG.Config.Connections
                     connectionRecord.ICAEncryption = (Connection.Protocol.ICA.EncryptionStrength)Tools.Misc.StringToEnum(typeof(Connection.Protocol.ICA.EncryptionStrength), System.Convert.ToString(sqlRd["ICAEncryptionStrength"]));
 					connectionRecord.Inherit.ICAEncryption = System.Convert.ToBoolean(sqlRd["InheritICAEncryptionStrength"]);
 							
-					connectionRecord.ExternalTool.PreExtApp = System.Convert.ToString(sqlRd["PreExtApp"]);
-                    connectionRecord.ExternalTool.PostExtApp = System.Convert.ToString(sqlRd["PostExtApp"]);
+					connectionRecord.PreExtApp = System.Convert.ToString(sqlRd["PreExtApp"]);
+                    connectionRecord.PostExtApp = System.Convert.ToString(sqlRd["PostExtApp"]);
 					connectionRecord.Inherit.PreExtApp = System.Convert.ToBoolean(sqlRd["InheritPreExtApp"]);
 					connectionRecord.Inherit.PostExtApp = System.Convert.ToBoolean(sqlRd["InheritPostExtApp"]);
 				}
@@ -533,7 +533,7 @@ namespace mRemoteNG.Config.Connections
 				
 				if (this.confVersion > 1.7) //1.8
 				{
-                    connectionRecord.RDPAuthenticationLevel = (Connection.Protocol.RDP.AuthenticationLevel)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.AuthenticationLevel), System.Convert.ToString(sqlRd["RDPAuthenticationLevel"]));
+                    connectionRecord.RDPAuthenticationLevel = (Connection.Protocol.RDPConnectionProtocolImp.AuthenticationLevel)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDPConnectionProtocolImp.AuthenticationLevel), System.Convert.ToString(sqlRd["RDPAuthenticationLevel"]));
 							
 					connectionRecord.Inherit.RDPAuthenticationLevel = System.Convert.ToBoolean(sqlRd["InheritRDPAuthenticationLevel"]);
 				}
@@ -563,9 +563,9 @@ namespace mRemoteNG.Config.Connections
 				
 				if (this.confVersion >= 2.2)
 				{
-                    connectionRecord.RDGatewayUsageMethod = (mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), System.Convert.ToString(sqlRd["RDGatewayUsageMethod"]));
+                    connectionRecord.RDGatewayUsageMethod = (mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.RDGatewayUsageMethod)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.RDGatewayUsageMethod), System.Convert.ToString(sqlRd["RDGatewayUsageMethod"]));
 					connectionRecord.RDGatewayHostname = System.Convert.ToString(sqlRd["RDGatewayHostname"]);
-                    connectionRecord.RDGatewayUseConnectionCredentials = (mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), System.Convert.ToString(sqlRd["RDGatewayUseConnectionCredentials"]));
+                    connectionRecord.RDGatewayUseConnectionCredentials = (mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.RDGatewayUseConnectionCredentials)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.RDGatewayUseConnectionCredentials), System.Convert.ToString(sqlRd["RDGatewayUseConnectionCredentials"]));
 					connectionRecord.RDGatewayUsername = System.Convert.ToString(sqlRd["RDGatewayUsername"]);
 					connectionRecord.RDGatewayPassword = Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["RDGatewayPassword"]), pW);
 					connectionRecord.RDGatewayDomain = System.Convert.ToString(sqlRd["RDGatewayDomain"]);
@@ -607,7 +607,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strGetConnectionInfoFromSqlFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strGetConnectionInfoFromSqlFailed + Environment.NewLine + ex.Message, true);
 			}
 			
 			return null;
@@ -715,7 +715,7 @@ namespace mRemoteNG.Config.Connections
                         System.Windows.Forms.Application.ProductName, 
                         "Incompatible connection file format", 
                         string.Format("The format of this connection file is not supported. Please upgrade to a newer version of {0}.", System.Windows.Forms.Application.ProductName), 
-                        string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Constants.vbNewLine, ConnectionFileName, confVersion.ToString(), maxSupportedConfVersion.ToString()),
+                        string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine, ConnectionFileName, confVersion.ToString(), maxSupportedConfVersion.ToString()),
                         "", 
                         "", 
                         "", 
@@ -834,7 +834,7 @@ namespace mRemoteNG.Config.Connections
 			catch (Exception ex)
 			{
 				App.Runtime.IsConnectionsFileLoaded = false;
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed + Constants.vbNewLine + ex.Message + Constants.vbNewLine + ex.StackTrace, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, true);
 				throw;
 			}
 		}
@@ -936,7 +936,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodeFromXmlFailed + Constants.vbNewLine + ex.Message + ex.StackTrace, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodeFromXmlFailed + Environment.NewLine + ex.Message + ex.StackTrace, true);
 				throw;
 			}
 		}
@@ -963,11 +963,11 @@ namespace mRemoteNG.Config.Connections
 					{
 						if (System.Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value) == true)
 						{
-							conI.Resolution = Connection.Protocol.RDP.RDPResolutions.Fullscreen;
+							conI.Resolution = Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions.Fullscreen;
 						}
 						else
 						{
-							conI.Resolution = Connection.Protocol.RDP.RDPResolutions.FitToWindow;
+							conI.Resolution = Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions.FitToWindow;
 						}
 					}
 				}
@@ -989,7 +989,7 @@ namespace mRemoteNG.Config.Connections
 				}
 				else
 				{
-					conI.Port = (int)Connection.Protocol.RDP.Defaults.Port;
+					conI.Port = (int)Connection.Protocol.RDPConnectionProtocolImp.Defaults.Port;
 					conI.Protocol = Connection.Protocol.Protocols.RDP;
 				}
 						
@@ -1019,7 +1019,7 @@ namespace mRemoteNG.Config.Connections
 						}
 						else
 						{
-							conI.Port = (int)Connection.Protocol.RDP.Defaults.Port;
+							conI.Port = (int)Connection.Protocol.RDPConnectionProtocolImp.Defaults.Port;
 						}
 					}
 					conI.UseConsoleSession = false;
@@ -1058,32 +1058,32 @@ namespace mRemoteNG.Config.Connections
 						
 				if (this.confVersion > 1.2) //1.3
 				{
-                    conI.Colors = (Connection.Protocol.RDP.RDPColors)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPColors), xmlnode.Attributes["Colors"].Value);
-                    conI.Resolution = (Connection.Protocol.RDP.RDPResolutions)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPResolutions), System.Convert.ToString(xmlnode.Attributes["Resolution"].Value));
-                    conI.RedirectSound = (Connection.Protocol.RDP.RDPSounds)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDP.RDPSounds), System.Convert.ToString(xmlnode.Attributes["RedirectSound"].Value));
+                    conI.Colors = (Connection.Protocol.RDPConnectionProtocolImp.RDPColors)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDPConnectionProtocolImp.RDPColors), xmlnode.Attributes["Colors"].Value);
+                    conI.Resolution = (Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions), System.Convert.ToString(xmlnode.Attributes["Resolution"].Value));
+                    conI.RedirectSound = (Connection.Protocol.RDPConnectionProtocolImp.RDPSounds)Tools.Misc.StringToEnum(typeof(Connection.Protocol.RDPConnectionProtocolImp.RDPSounds), System.Convert.ToString(xmlnode.Attributes["RedirectSound"].Value));
 				}
 				else
 				{
 					switch (System.Convert.ToInt32(xmlnode.Attributes["Colors"].Value))
 					{
 						case 0:
-							conI.Colors = Connection.Protocol.RDP.RDPColors.Colors256;
+							conI.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors256;
 							break;
 						case 1:
-							conI.Colors = Connection.Protocol.RDP.RDPColors.Colors16Bit;
+							conI.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors16Bit;
 							break;
 						case 2:
-							conI.Colors = Connection.Protocol.RDP.RDPColors.Colors24Bit;
+							conI.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors24Bit;
 							break;
 						case 3:
-							conI.Colors = Connection.Protocol.RDP.RDPColors.Colors32Bit;
+							conI.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors32Bit;
 							break;
 						case 4:
-							conI.Colors = Connection.Protocol.RDP.RDPColors.Colors15Bit;
+							conI.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors15Bit;
 							break;
 					}
 							
-					conI.RedirectSound = (Connection.Protocol.RDP.RDPSounds) System.Convert.ToInt32(xmlnode.Attributes["RedirectSound"].Value);
+					conI.RedirectSound = (Connection.Protocol.RDPConnectionProtocolImp.RDPSounds) System.Convert.ToInt32(xmlnode.Attributes["RedirectSound"].Value);
 				}
 						
 				if (this.confVersion > 1.2) //1.3
@@ -1167,7 +1167,7 @@ namespace mRemoteNG.Config.Connections
 						
 				if (this.confVersion > 1.7) //1.8
 				{
-                    conI.RDPAuthenticationLevel = (mRemoteNG.Connection.Protocol.RDP.AuthenticationLevel)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.AuthenticationLevel), xmlnode.Attributes["RDPAuthenticationLevel"].Value);
+                    conI.RDPAuthenticationLevel = (mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.AuthenticationLevel)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.AuthenticationLevel), xmlnode.Attributes["RDPAuthenticationLevel"].Value);
 							
 					conI.Inherit.RDPAuthenticationLevel = bool.Parse(xmlnode.Attributes["InheritRDPAuthenticationLevel"].Value);
 				}
@@ -1196,9 +1196,9 @@ namespace mRemoteNG.Config.Connections
 				if (this.confVersion > 2.1) //2.2
 				{
 					// Get settings
-                    conI.RDGatewayUsageMethod = (mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod), System.Convert.ToString(xmlnode.Attributes["RDGatewayUsageMethod"].Value));
+                    conI.RDGatewayUsageMethod = (mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.RDGatewayUsageMethod)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.RDGatewayUsageMethod), System.Convert.ToString(xmlnode.Attributes["RDGatewayUsageMethod"].Value));
 					conI.RDGatewayHostname = xmlnode.Attributes["RDGatewayHostname"].Value;
-                    conI.RDGatewayUseConnectionCredentials = (mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials), System.Convert.ToString(xmlnode.Attributes["RDGatewayUseConnectionCredentials"].Value));
+                    conI.RDGatewayUseConnectionCredentials = (mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.RDGatewayUseConnectionCredentials)Tools.Misc.StringToEnum(typeof(mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.RDGatewayUseConnectionCredentials), System.Convert.ToString(xmlnode.Attributes["RDGatewayUseConnectionCredentials"].Value));
 					conI.RDGatewayUsername = xmlnode.Attributes["RDGatewayUsername"].Value;
 					conI.RDGatewayPassword = Security.Crypt.Decrypt(System.Convert.ToString(xmlnode.Attributes["RDGatewayPassword"].Value), pW);
 					conI.RDGatewayDomain = xmlnode.Attributes["RDGatewayDomain"].Value;

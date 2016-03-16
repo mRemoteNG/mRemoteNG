@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Diagnostics;
 using AxMSTSCLib;
-using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using System.Threading;
@@ -12,12 +11,23 @@ using mRemoteNG.Messages;
 using mRemoteNG.App;
 using MSTSCLib;
 using mRemoteNG.Tools;
+using mRemoteNG.Connection.Protocol.RDP;
 
 
 namespace mRemoteNG.Connection.Protocol
 {
-	public class RDP : Base
+    public class RDPConnectionProtocolImp : RDPConnectionProtocol
 	{
+        #region Private Declarations
+        private MsRdpClient6NotSafeForScripting _rdpClient;
+        private Version _rdpVersion;
+        private ConnectionRecordImp _connectionInfo;
+        private bool _loginComplete;
+        private Size _controlBeginningSize = new Size();
+        private bool _redirectKeys = false;
+        private Control _Control;
+        #endregion
+        
         #region Properties
         public bool SmartSize
 		{
@@ -31,7 +41,7 @@ namespace mRemoteNG.Connection.Protocol
 				ReconnectForResize();
 			}
 		}
-				
+		
         public bool Fullscreen
 		{
 			get
@@ -44,8 +54,7 @@ namespace mRemoteNG.Connection.Protocol
 				ReconnectForResize();
 			}
 		}
-				
-		private bool _redirectKeys = false;
+		
         public bool RedirectKeys
 		{
 			get
@@ -68,28 +77,43 @@ namespace mRemoteNG.Connection.Protocol
 				}
 				catch (Exception ex)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectKeysFailed + Constants.vbNewLine + ex.Message, true);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectKeysFailed + Environment.NewLine + ex.Message, true);
 				}
 			}
 		}
         #endregion
-				
-        #region Private Declarations
-		private MSTSCLib.MsRdpClient6NotSafeForScripting _rdpClient;
-		private Version _rdpVersion;
-		private ConnectionRecordImp _connectionInfo;
-		private bool _loginComplete;
-        #endregion
-				
+		
         #region Public Methods
-		public RDP()
+		public RDPConnectionProtocolImp()
 		{
-			Control = new AxMsRdpClient5NotSafeForScripting();
+            _rdpClient = new MsRdpClient6NotSafeForScriptingClass();
+            _rdpVersion = new Version(_rdpClient.Version);
+
 		}
-				
+		
 		public override bool SetProps()
 		{
-			base.SetProps();
+            try
+            {
+                this._interfaceControl.Parent.Tag = this._interfaceControl;
+                this._interfaceControl.Show();
+
+                if (this._Control != null)
+                {
+                    this._Control.Name = this._Name;
+                    this._Control.Parent = this._interfaceControl;
+                    this._Control.Location = this._interfaceControl.Location;
+                    this._Control.Size = this.InterfaceControl.Size;
+                    this._Control.Anchor = this._interfaceControl.Anchor;
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t SetProps (Connection.Protocol.Base)" + Environment.NewLine + ex.Message, true);
+                return false;
+            }
 					
 			try
 			{
@@ -113,9 +137,9 @@ namespace mRemoteNG.Connection.Protocol
 					return false;
 				}
 						
-				_rdpVersion = new Version(_rdpClient.Version);
+				this._rdpVersion = new Version(_rdpClient.Version);
 						
-				_rdpClient.Server = this._connectionInfo.Hostname;
+				this._rdpClient.Server = this._connectionInfo.Hostname;
 						
 				this.SetCredentials();
 				this.SetResolution();
@@ -128,10 +152,9 @@ namespace mRemoteNG.Connection.Protocol
 				_rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10.000 = 10 seconds)
 				_rdpClient.AdvancedSettings5.AuthenticationLevel = 0;
 				_rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
-						
 				_rdpClient.AdvancedSettings2.overallConnectionTimeout = 20;
-						
 				_rdpClient.AdvancedSettings2.BitmapPeristence = System.Convert.ToInt32(this._connectionInfo.CacheBitmaps);
+
 				if (_rdpVersion >= Versions.RDC61)
 				{
 					_rdpClient.AdvancedSettings7.EnableCredSspSupport = _connectionInfo.UseCredSsp;
@@ -139,29 +162,25 @@ namespace mRemoteNG.Connection.Protocol
 						
 				this.SetUseConsoleSession();
 				this.SetPort();
-				RedirectKeys = _connectionInfo.RedirectKeys;
+				this.RedirectKeys = _connectionInfo.RedirectKeys;
 				this.SetRedirection();
 				this.SetAuthenticationLevel();
-				SetLoadBalanceInfo();
+				this.SetLoadBalanceInfo();
 				this.SetRdGateway();
-						
-				_rdpClient.ColorDepth = System.Convert.ToInt32(Conversion.Int(this._connectionInfo.Colors));
-						
+				this._rdpClient.ColorDepth = System.Convert.ToInt32(Conversion.Int(this._connectionInfo.Colors));
 				this.SetPerformanceFlags();
-						
-				_rdpClient.ConnectingText = My.Language.strConnecting;
-						
-				Control.Anchor = AnchorStyles.None;
+				this._rdpClient.ConnectingText = My.Language.strConnecting;
+				base.Control.Anchor = AnchorStyles.None;
 						
 				return true;
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPropsFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPropsFailed + Environment.NewLine + ex.Message, true);
 				return false;
 			}
 		}
-				
+		
 		public override bool Connect()
 		{
 			_loginComplete = false;
@@ -170,17 +189,21 @@ namespace mRemoteNG.Connection.Protocol
 			try
 			{
 				_rdpClient.Connect();
-				base.Connect();
+                if (ConnectedEvent != null)
+                {
+                    ConnectedEvent(this);
+                    return true;
+                }
 				return true;
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpConnectionOpenFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 					
 			return false;
 		}
-				
+		
 		public override void Disconnect()
 		{
 			try
@@ -189,11 +212,11 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpDisconnectFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpDisconnectFailed + Environment.NewLine + ex.Message, true);
 				base.Close();
 			}
 		}
-				
+		
 		public void ToggleFullscreen()
 		{
 			try
@@ -202,10 +225,10 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpToggleFullscreenFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpToggleFullscreenFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
+		
 		public void ToggleSmartSize()
 		{
 			try
@@ -214,10 +237,10 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpToggleSmartSizeFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpToggleSmartSizeFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
+		
 		public override void Focus()
 		{
 			try
@@ -229,16 +252,15 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpFocusFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpFocusFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
-		private Size _controlBeginningSize = new Size();
+		
 		public override void ResizeBegin(object sender, EventArgs e)
 		{
 			_controlBeginningSize = Control.Size;
 		}
-				
+		
 		public override void Resize(object sender, EventArgs e)
 		{
 			if (DoResize() && _controlBeginningSize.IsEmpty)
@@ -247,7 +269,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			base.Resize(sender, e);
 		}
-				
+		
 		public override void ResizeEnd(object sender, EventArgs e)
 		{
 			DoResize();
@@ -258,7 +280,7 @@ namespace mRemoteNG.Connection.Protocol
 			_controlBeginningSize = Size.Empty;
 		}
         #endregion
-				
+		
         #region Private Methods
 		private bool DoResize()
 		{
@@ -362,7 +384,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strRdpSetGatewayFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strRdpSetGatewayFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -464,7 +486,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetCredentialsFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetCredentialsFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -501,7 +523,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetResolutionFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetResolutionFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -516,7 +538,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPortFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPortFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -532,7 +554,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectionFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetRedirectionFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -543,29 +565,29 @@ namespace mRemoteNG.Connection.Protocol
 				int pFlags = 0;
 				if (this._connectionInfo.DisplayThemes == false)
 				{
-					pFlags += System.Convert.ToInt32(Conversion.Int(Connection.Protocol.RDP.RDPPerformanceFlags.DisableThemes));
+					pFlags += System.Convert.ToInt32(Conversion.Int(Connection.Protocol.RDPConnectionProtocolImp.RDPPerformanceFlags.DisableThemes));
 				}
 						
 				if (this._connectionInfo.DisplayWallpaper == false)
 				{
-					pFlags += System.Convert.ToInt32(Conversion.Int(Connection.Protocol.RDP.RDPPerformanceFlags.DisableWallpaper));
+					pFlags += System.Convert.ToInt32(Conversion.Int(Connection.Protocol.RDPConnectionProtocolImp.RDPPerformanceFlags.DisableWallpaper));
 				}
 						
 				if (this._connectionInfo.EnableFontSmoothing)
 				{
-					pFlags += System.Convert.ToInt32(Conversion.Int(Connection.Protocol.RDP.RDPPerformanceFlags.EnableFontSmoothing));
+					pFlags += System.Convert.ToInt32(Conversion.Int(Connection.Protocol.RDPConnectionProtocolImp.RDPPerformanceFlags.EnableFontSmoothing));
 				}
 						
 				if (this._connectionInfo.EnableDesktopComposition)
 				{
-					pFlags += System.Convert.ToInt32(Conversion.Int(Connection.Protocol.RDP.RDPPerformanceFlags.EnableDesktopComposition));
+					pFlags += System.Convert.ToInt32(Conversion.Int(Connection.Protocol.RDPConnectionProtocolImp.RDPPerformanceFlags.EnableDesktopComposition));
 				}
 						
 				_rdpClient.AdvancedSettings2.PerformanceFlags = pFlags;
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPerformanceFlagsFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetPerformanceFlagsFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -577,7 +599,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetAuthenticationLevelFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetAuthenticationLevelFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -610,11 +632,11 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetEventHandlersFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpSetEventHandlersFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
-				
+		
         #region Private Events & Handlers
 		private void RDPEvent_OnFatalError(int errorCode)
 		{
@@ -668,9 +690,9 @@ namespace mRemoteNG.Connection.Protocol
 				LeaveFullscreenEvent(this, new EventArgs());
 		}
         #endregion
-				
+		
         #region Public Events & Handlers
-		public delegate void LeaveFullscreenEventHandler(Connection.Protocol.RDP sender, System.EventArgs e);
+		public delegate void LeaveFullscreenEventHandler(Connection.Protocol.RDPConnectionProtocolImp sender, System.EventArgs e);
 		private LeaveFullscreenEventHandler LeaveFullscreenEvent;
 				
 		public event LeaveFullscreenEventHandler LeaveFullscreen
@@ -685,111 +707,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 		}
         #endregion
-				
-        #region Enums
-		public enum Defaults
-		{
-			Colors = RDPColors.Colors16Bit,
-			Sounds = RDPSounds.DoNotPlay,
-			Resolution = RDPResolutions.FitToWindow,
-			Port = 3389
-		}
-				
-		public enum RDPColors
-		{
-            [LocalizedAttributes.LocalizedDescription("strRDP256Colors")]
-            Colors256 = 8,
-            [LocalizedAttributes.LocalizedDescription("strRDP32768Colors")]
-            Colors15Bit = 15,
-            [LocalizedAttributes.LocalizedDescription("strRDP65536Colors")]
-            Colors16Bit = 16,
-            [LocalizedAttributes.LocalizedDescription("strRDP16777216Colors")]
-            Colors24Bit = 24,
-            [LocalizedAttributes.LocalizedDescription("strRDP4294967296Colors")]
-            Colors32Bit = 32
-		}
-				
-		public enum RDPSounds
-		{
-            [LocalizedAttributes.LocalizedDescription("strRDPSoundBringToThisComputer")]
-            BringToThisComputer = 0,
-            [LocalizedAttributes.LocalizedDescription("strRDPSoundLeaveAtRemoteComputer")]
-            LeaveAtRemoteComputer = 1,
-            [LocalizedAttributes.LocalizedDescription("strRDPSoundDoNotPlay")]
-            DoNotPlay = 2
-		}
-				
-		private enum RDPPerformanceFlags
-		{
-			[Description("strRDPDisableWallpaper")]DisableWallpaper = 0x1,
-			[Description("strRDPDisableFullWindowdrag")]DisableFullWindowDrag = 0x2,
-			[Description("strRDPDisableMenuAnimations")]DisableMenuAnimations = 0x4,
-			[Description("strRDPDisableThemes")]DisableThemes = 0x8,
-			[Description("strRDPDisableCursorShadow")]DisableCursorShadow = 0x20,
-			[Description("strRDPDisableCursorblinking")]DisableCursorBlinking = 0x40,
-			[Description("strRDPEnableFontSmoothing")]EnableFontSmoothing = 0x80,
-			[Description("strRDPEnableDesktopComposition")]EnableDesktopComposition = 0x100
-		}
-				
-		public enum RDPResolutions
-		{
-            [LocalizedAttributes.LocalizedDescription("strRDPFitToPanel")]
-            FitToWindow,
-            [LocalizedAttributes.LocalizedDescription("strFullscreen")]
-            Fullscreen,
-            [LocalizedAttributes.LocalizedDescription("strRDPSmartSize")]
-            SmartSize,
-			[Description("640x480")]Res640x480,
-			[Description("800x600")]Res800x600,
-			[Description("1024x768")]Res1024x768,
-			[Description("1152x864")]Res1152x864,
-			[Description("1280x800")]Res1280x800,
-			[Description("1280x1024")]Res1280x1024,
-			[Description("1400x1050")]Res1400x1050,
-			[Description("1440x900")]Res1440x900,
-			[Description("1600x1024")]Res1600x1024,
-			[Description("1600x1200")]Res1600x1200,
-			[Description("1600x1280")]Res1600x1280,
-			[Description("1680x1050")]Res1680x1050,
-			[Description("1900x1200")]Res1900x1200,
-			[Description("1920x1200")]Res1920x1200,
-			[Description("2048x1536")]Res2048x1536,
-			[Description("2560x2048")]Res2560x2048,
-			[Description("3200x2400")]Res3200x2400,
-			[Description("3840x2400")]Res3840x2400
-		}
-				
-		public enum AuthenticationLevel
-		{
-            [LocalizedAttributes.LocalizedDescription("strAlwaysConnectEvenIfAuthFails")]
-            NoAuth = 0,
-            [LocalizedAttributes.LocalizedDescription("strDontConnectWhenAuthFails")]
-            AuthRequired = 1,
-            [LocalizedAttributes.LocalizedDescription("strWarnIfAuthFails")]
-            WarnOnFailedAuth = 2
-		}
-				
-		public enum RDGatewayUsageMethod
-		{
-            [LocalizedAttributes.LocalizedDescription("strNever")]
-            Never = 0, // TSC_PROXY_MODE_NONE_DIRECT
-            [LocalizedAttributes.LocalizedDescription("strAlways")]
-            Always = 1, // TSC_PROXY_MODE_DIRECT
-            [LocalizedAttributes.LocalizedDescription("strDetect")]
-            Detect = 2 // TSC_PROXY_MODE_DETECT
-		}
-				
-		public enum RDGatewayUseConnectionCredentials
-		{
-            [LocalizedAttributes.LocalizedDescription("strUseDifferentUsernameAndPassword")]
-            No = 0,
-            [LocalizedAttributes.LocalizedDescription("strUseSameUsernameAndPassword")]
-            Yes = 1,
-            [LocalizedAttributes.LocalizedDescription("strUseSmartCard")]
-            SmartCard = 2
-		}
-        #endregion
-				
+		
         #region Resolution
 		public static Rectangle GetResolutionRectangle(RDPResolutions resolution)
 		{
@@ -808,7 +726,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 		}
         #endregion
-				
+		
 		public class Versions
 		{
 			public static Version RDC60 = new Version(6, 0, 6000);
@@ -816,7 +734,7 @@ namespace mRemoteNG.Connection.Protocol
 			public static Version RDC70 = new Version(6, 1, 7600);
 			public static Version RDC80 = new Version(6, 2, 9200);
 		}
-				
+		
         #region Terminal Sessions
 		public class TerminalSessions
 		{
@@ -992,7 +910,7 @@ namespace mRemoteNG.Connection.Protocol
 			public string SessionName {get; set;}
 		}
         #endregion
-				
+		
         #region Fatal Errors
 		public class FatalErrors
 		{
@@ -1023,13 +941,13 @@ namespace mRemoteNG.Connection.Protocol
 				}
 				catch (Exception ex)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpErrorGetFailure + Constants.vbNewLine + ex.Message, true);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strRdpErrorGetFailure + Environment.NewLine + ex.Message, true);
 					return string.Format(My.Language.strRdpErrorUnknown, id);
 				}
 			}
 		}
         #endregion
-				
+		
         #region Reconnect Stuff
 		public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
@@ -1045,6 +963,92 @@ namespace mRemoteNG.Connection.Protocol
 				_rdpClient.Connect();
 			}
 		}
+        #endregion
+
+        #region Events
+        public delegate void ConnectingEventHandler(object sender);
+        public event ConnectingEventHandler Connecting
+        {
+            add { ConnectingEvent = (ConnectingEventHandler)System.Delegate.Combine(ConnectingEvent, value); }
+            remove { ConnectingEvent = (ConnectingEventHandler)System.Delegate.Remove(ConnectingEvent, value); }
+        }
+
+        public delegate void ConnectedEventHandler(object sender);
+        public event ConnectedEventHandler Connected
+        {
+            add { ConnectedEvent = (ConnectedEventHandler)System.Delegate.Combine(ConnectedEvent, value); }
+            remove { ConnectedEvent = (ConnectedEventHandler)System.Delegate.Remove(ConnectedEvent, value); }
+        }
+
+        public delegate void DisconnectedEventHandler(object sender, string DisconnectedMessage);
+        public event DisconnectedEventHandler Disconnected
+        {
+            add { DisconnectedEvent = (DisconnectedEventHandler)System.Delegate.Combine(DisconnectedEvent, value); }
+            remove { DisconnectedEvent = (DisconnectedEventHandler)System.Delegate.Remove(DisconnectedEvent, value); }
+        }
+
+        public delegate void ErrorOccuredEventHandler(object sender, string ErrorMessage);
+        public event ErrorOccuredEventHandler ErrorOccured
+        {
+            add { ErrorOccuredEvent = (ErrorOccuredEventHandler)System.Delegate.Combine(ErrorOccuredEvent, value); }
+            remove { ErrorOccuredEvent = (ErrorOccuredEventHandler)System.Delegate.Remove(ErrorOccuredEvent, value); }
+        }
+
+        public delegate void ClosingEventHandler(object sender);
+        public event ClosingEventHandler Closing
+        {
+            add { ClosingEvent = (ClosingEventHandler)System.Delegate.Combine(ClosingEvent, value); }
+            remove { ClosingEvent = (ClosingEventHandler)System.Delegate.Remove(ClosingEvent, value); }
+        }
+
+        public delegate void ClosedEventHandler(object sender);
+        public event ClosedEventHandler Closed
+        {
+            add { ClosedEvent = (ClosedEventHandler)System.Delegate.Combine(ClosedEvent, value); }
+            remove { ClosedEvent = (ClosedEventHandler)System.Delegate.Remove(ClosedEvent, value); }
+        }
+
+
+        public void Event_Closing(object sender)
+        {
+            if (ClosingEvent != null)
+                ClosingEvent(sender);
+        }
+
+        public void Event_Closed(object sender)
+        {
+            if (ClosedEvent != null)
+                ClosedEvent(sender);
+        }
+
+        public void Event_Connecting(object sender)
+        {
+            if (ConnectingEvent != null)
+                ConnectingEvent(sender);
+        }
+
+        public void Event_Connected(object sender)
+        {
+            if (ConnectedEvent != null)
+                ConnectedEvent(sender);
+        }
+
+        public void Event_Disconnected(object sender, string DisconnectedMessage)
+        {
+            if (DisconnectedEvent != null)
+                DisconnectedEvent(sender, DisconnectedMessage);
+        }
+
+        public void Event_ErrorOccured(object sender, string ErrorMsg)
+        {
+            if (ErrorOccuredEvent != null)
+                ErrorOccuredEvent(sender, ErrorMsg);
+        }
+
+        public void Event_ReconnectGroupCloseClicked()
+        {
+            Close();
+        }
         #endregion
 	}
 }

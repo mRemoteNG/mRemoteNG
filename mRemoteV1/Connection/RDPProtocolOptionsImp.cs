@@ -7,12 +7,12 @@ namespace mRemoteNG.Connection
 {
     public class RDPProtocolOptionsImp : ConnectionProtocolOptions
     {
-        private Protocol.RDP.RDGatewayUsageMethod _rdGatewayUsageMethod;
-        private Protocol.RDP.AuthenticationLevel _rdpAuthenticationLevel;
-        private Protocol.RDP.RDGatewayUseConnectionCredentials _rdGatewayUseConnectionCredentials;
-        private Protocol.RDP.RDPResolutions _resolution;
-        private Protocol.RDP.RDPSounds _redirectSound;
-        private Protocol.RDP.RDPColors _colors;
+        private Protocol.RDPConnectionProtocolImp.RDGatewayUsageMethod _rdGatewayUsageMethod;
+        private Protocol.RDPConnectionProtocolImp.AuthenticationLevel _rdpAuthenticationLevel;
+        private Protocol.RDPConnectionProtocolImp.RDGatewayUseConnectionCredentials _rdGatewayUseConnectionCredentials;
+        private Protocol.RDPConnectionProtocolImp.RDPResolutions _resolution;
+        private Protocol.RDPConnectionProtocolImp.RDPSounds _redirectSound;
+        private Protocol.RDPConnectionProtocolImp.RDPColors _colors;
         private string _rdGatewayHostname;
         private string _rdGatewayUsername;
         private string _rdGatewayPassword;

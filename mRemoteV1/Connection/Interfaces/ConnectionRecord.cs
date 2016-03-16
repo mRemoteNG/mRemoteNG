@@ -6,7 +6,7 @@ using mRemoteNG.Credential;
 
 namespace mRemoteNG.Connection
 {
-    public interface ConnectionRecord : Record
+    public interface ConnectionRecord : Record, Connectable
     {
         string Name { get; set; }
         string Description { get; set; }
@@ -16,10 +16,13 @@ namespace mRemoteNG.Connection
         ConnectionRecordInheritanceController Inherit { get; }
         ConnectionProtocol Protocol { get; set; }
         CredentialRecord Credential { get; set; }
-        ExternalToolRecord ExternalTool { get; set; }
 
-        void Connect();
-        void Disconnect();
-        void Reconnect();
+        //ExternalToolRecord ExternalTool { get; set; }
+        string PreExtApp { get; set; }
+        string PostExtApp { get; set; }
+        string MacAddress { get; set; }
+        string UserField { get; set; }
+
+        
     }
 }

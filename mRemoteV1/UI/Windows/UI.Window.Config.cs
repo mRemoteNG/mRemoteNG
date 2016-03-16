@@ -902,7 +902,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCProxyUsername");
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
-							if (conI.RDGatewayUsageMethod == mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod.Never)
+							if (conI.RDGatewayUsageMethod == mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.RDGatewayUsageMethod.Never)
 							{
 								strHide.Add("RDGatewayDomain");
 								strHide.Add("RDGatewayHostname");
@@ -910,13 +910,13 @@ namespace mRemoteNG.UI.Window
 								strHide.Add("RDGatewayUseConnectionCredentials");
 								strHide.Add("RDGatewayUsername");
 							}
-                            else if (conI.RDGatewayUseConnectionCredentials == mRemoteNG.Connection.Protocol.RDP.RDGatewayUseConnectionCredentials.Yes)
+                            else if (conI.RDGatewayUseConnectionCredentials == mRemoteNG.Connection.Protocol.RDPConnectionProtocolImp.RDGatewayUseConnectionCredentials.Yes)
 							{
 								strHide.Add("RDGatewayDomain");
 								strHide.Add("RDGatewayPassword");
 								strHide.Add("RDGatewayUsername");
 							}
-							if (!(conI.Resolution == RDP.RDPResolutions.FitToWindow || conI.Resolution == RDP.RDPResolutions.Fullscreen))
+							if (!(conI.Resolution == RDPConnectionProtocolImp.RDPResolutions.FitToWindow || conI.Resolution == RDPConnectionProtocolImp.RDPResolutions.Fullscreen))
 							{
 								strHide.Add("AutomaticResize");
 							}

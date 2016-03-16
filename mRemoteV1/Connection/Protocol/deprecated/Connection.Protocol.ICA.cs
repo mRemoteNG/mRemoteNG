@@ -56,7 +56,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaControlFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaControlFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -112,7 +112,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetPropsFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetPropsFailed + Environment.NewLine + ex.Message, true);
 				return false;
 			}
 		}
@@ -129,7 +129,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaConnectionFailed + Constants.vbNewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaConnectionFailed + Environment.NewLine + ex.Message);
 				return false;
 			}
 		}
@@ -198,7 +198,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetCredentialsFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetCredentialsFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -214,28 +214,28 @@ namespace mRemoteNG.Connection.Protocol
 					return;
 				}
 						
-				if (this.InterfaceControl.Info.Resolution == RDP.RDPResolutions.FitToWindow)
+				if (this.InterfaceControl.Info.Resolution == RDPConnectionProtocolImp.RDPResolutions.FitToWindow)
 				{
 					_ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, this.InterfaceControl.Size.Width, this.InterfaceControl.Size.Height, 0);
 				}
-				else if (this.InterfaceControl.Info.Resolution == RDP.RDPResolutions.SmartSize)
+				else if (this.InterfaceControl.Info.Resolution == RDPConnectionProtocolImp.RDPResolutions.SmartSize)
 				{
 					_ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, this.InterfaceControl.Size.Width, this.InterfaceControl.Size.Height, 0);
 				}
-				else if (this.InterfaceControl.Info.Resolution == RDP.RDPResolutions.Fullscreen)
+				else if (this.InterfaceControl.Info.Resolution == RDPConnectionProtocolImp.RDPResolutions.Fullscreen)
 				{
 					_ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, Screen.FromControl(frmMain.Default).Bounds.Width, Screen.FromControl(frmMain.Default).Bounds.Height, 0);
 					_ICAClient.FullScreenWindow();
 				}
 				else
 				{
-					Rectangle resolution = RDP.GetResolutionRectangle(_Info.Resolution);
+					Rectangle resolution = RDPConnectionProtocolImp.GetResolutionRectangle(_Info.Resolution);
 					_ICAClient.SetWindowSize(WFICALib.ICAWindowType.WindowTypeClient, resolution.Width, resolution.Height, 0);
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetResolutionFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetResolutionFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -243,13 +243,13 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			switch (_Info.Colors)
 			{
-				case RDP.RDPColors.Colors256:
+				case RDPConnectionProtocolImp.RDPColors.Colors256:
 					_ICAClient.SetProp("DesiredColor", "2");
 					break;
-				case RDP.RDPColors.Colors15Bit:
+				case RDPConnectionProtocolImp.RDPColors.Colors15Bit:
 					_ICAClient.SetProp("DesiredColor", "4");
 					break;
-				case RDP.RDPColors.Colors16Bit:
+				case RDPConnectionProtocolImp.RDPColors.Colors16Bit:
 					_ICAClient.SetProp("DesiredColor", "4");
 					break;
 				default:
@@ -292,7 +292,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetEventHandlersFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetEventHandlersFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion

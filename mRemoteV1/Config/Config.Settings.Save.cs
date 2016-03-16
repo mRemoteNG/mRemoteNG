@@ -65,7 +65,7 @@ namespace mRemoteNG.Config.Settings
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Saving settings failed" + Constants.vbNewLine + Constants.vbNewLine + ex.Message, false);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Saving settings failed" + Environment.NewLine + Environment.NewLine + ex.Message, false);
 			}
 		}
 				
@@ -82,7 +82,7 @@ namespace mRemoteNG.Config.Settings
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SavePanelsToXML failed" + Constants.vbNewLine + Constants.vbNewLine + ex.Message, false);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SavePanelsToXML failed" + Environment.NewLine + Environment.NewLine + ex.Message, false);
 			}
 		}
 				
@@ -120,7 +120,7 @@ namespace mRemoteNG.Config.Settings
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveExternalAppsToXML failed" + Constants.vbNewLine + Constants.vbNewLine + ex.Message, false);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveExternalAppsToXML failed" + Environment.NewLine + Environment.NewLine + ex.Message, false);
 			}
 		}
         #endregion

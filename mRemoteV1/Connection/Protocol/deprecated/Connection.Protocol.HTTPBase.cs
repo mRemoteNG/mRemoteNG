@@ -34,7 +34,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectionFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectionFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -80,7 +80,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpSetPropsFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpSetPropsFailed + Environment.NewLine + ex.Message, true);
 				return false;
 			}
 		}
@@ -94,7 +94,7 @@ namespace mRemoteNG.Connection.Protocol
 
                 if (!(((int)Force & (int)ConnectionRecordImp.Force.NoCredentials) == (int)ConnectionRecordImp.Force.NoCredentials) && !string.IsNullOrEmpty(InterfaceControl.Info.Username) && !string.IsNullOrEmpty(InterfaceControl.Info.Password))
 				{
-					strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(this.InterfaceControl.Info.Username + ":" + this.InterfaceControl.Info.Password)) + Constants.vbNewLine;
+					strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(this.InterfaceControl.Info.Username + ":" + this.InterfaceControl.Info.Password)) + Environment.NewLine;
 				}
 						
 				if (this.InterfaceControl.Info.Port != defaultPort)
@@ -140,7 +140,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectFailed + Environment.NewLine + ex.Message, true);
 				return false;
 			}
 		}
@@ -227,7 +227,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 
@@ -278,7 +278,7 @@ namespace mRemoteNG.Connection.Protocol
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed + Constants.vbNewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed + Environment.NewLine + ex.Message, true);
             }
         }
         #endregion

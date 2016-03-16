@@ -619,7 +619,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveToXml failed" + Constants.vbNewLine + ex.Message, false);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveToXml failed" + Environment.NewLine + ex.Message, false);
 			}
 		}
 				
@@ -657,7 +657,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveNode failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveNode failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -915,7 +915,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveConnectionFields failed" + Constants.vbNewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveConnectionFields failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -1225,7 +1225,7 @@ namespace mRemoteNG.Config.Connections
 					
 			//Smart Size
 			_xmlTextWriter.WriteStartElement("AutoSize");
-			_xmlTextWriter.WriteValue(con.Resolution == Connection.Protocol.RDP.RDPResolutions.SmartSize);
+			_xmlTextWriter.WriteValue(con.Resolution == Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions.SmartSize);
 			_xmlTextWriter.WriteEndElement();
 					
 			//SeparateResolutionX
@@ -1238,7 +1238,7 @@ namespace mRemoteNG.Config.Connections
 			_xmlTextWriter.WriteValue("768");
 			_xmlTextWriter.WriteEndElement();
 					
-			Rectangle resolution = Connection.Protocol.RDP.GetResolutionRectangle(con.Resolution);
+			Rectangle resolution = Connection.Protocol.RDPConnectionProtocolImp.GetResolutionRectangle(con.Resolution);
 			if (resolution.Width == 0)
 			{
 				resolution.Width = 1024;

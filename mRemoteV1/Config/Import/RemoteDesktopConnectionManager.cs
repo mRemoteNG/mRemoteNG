@@ -179,11 +179,11 @@ namespace mRemoteNG.Config.Import
 			{
 				if (gatewaySettingsNode.SelectSingleNode("./enabled").InnerText == "True")
 				{
-					connectionInfo.RDGatewayUsageMethod = RDP.RDGatewayUsageMethod.Always;
+					connectionInfo.RDGatewayUsageMethod = RDPConnectionProtocolImp.RDGatewayUsageMethod.Always;
 				}
 				else
 				{
-					connectionInfo.RDGatewayUsageMethod = RDP.RDGatewayUsageMethod.Never;
+					connectionInfo.RDGatewayUsageMethod = RDPConnectionProtocolImp.RDGatewayUsageMethod.Never;
 				}
 					
 				connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName").InnerText;
@@ -219,25 +219,25 @@ namespace mRemoteNG.Config.Import
 				string resolutionString = System.Convert.ToString(remoteDesktopNode.SelectSingleNode("./size").InnerText.Replace(" ", ""));
 				try
 				{
-                    connectionInfo.Resolution = (Connection.Protocol.RDP.RDPResolutions)Enum.Parse(typeof(Connection.Protocol.RDP.RDPResolutions), "Res" + resolutionString);
+                    connectionInfo.Resolution = (Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions)Enum.Parse(typeof(Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions), "Res" + resolutionString);
 				}
 				catch (ArgumentException)
 				{
-					connectionInfo.Resolution = RDP.RDPResolutions.FitToWindow;
+					connectionInfo.Resolution = RDPConnectionProtocolImp.RDPResolutions.FitToWindow;
 				}
 					
 				if (remoteDesktopNode.SelectSingleNode("./sameSizeAsClientArea").InnerText == "True")
 				{
-					connectionInfo.Resolution = RDP.RDPResolutions.FitToWindow;
+					connectionInfo.Resolution = RDPConnectionProtocolImp.RDPResolutions.FitToWindow;
 				}
 					
 				if (remoteDesktopNode.SelectSingleNode("./fullScreen").InnerText == "True")
 				{
-					connectionInfo.Resolution = RDP.RDPResolutions.Fullscreen;
+					connectionInfo.Resolution = RDPConnectionProtocolImp.RDPResolutions.Fullscreen;
 				}
 
 
-                connectionInfo.Colors = (Connection.Protocol.RDP.RDPColors)Enum.Parse(typeof(Connection.Protocol.RDP.RDPColors), remoteDesktopNode.SelectSingleNode("./colorDepth").InnerText);
+                connectionInfo.Colors = (Connection.Protocol.RDPConnectionProtocolImp.RDPColors)Enum.Parse(typeof(Connection.Protocol.RDPConnectionProtocolImp.RDPColors), remoteDesktopNode.SelectSingleNode("./colorDepth").InnerText);
 			}
 			else
 			{
@@ -251,13 +251,13 @@ namespace mRemoteNG.Config.Import
 				switch (localResourcesNode.SelectSingleNode("./audioRedirection").InnerText)
 				{
 					case "0": // Bring to this computer
-						connectionInfo.RedirectSound = RDP.RDPSounds.BringToThisComputer;
+						connectionInfo.RedirectSound = RDPConnectionProtocolImp.RDPSounds.BringToThisComputer;
 						break;
 					case "1": // Leave at remote computer
-						connectionInfo.RedirectSound = RDP.RDPSounds.LeaveAtRemoteComputer;
+						connectionInfo.RedirectSound = RDPConnectionProtocolImp.RDPSounds.LeaveAtRemoteComputer;
 						break;
 					case "2": // Do not play
-						connectionInfo.RedirectSound = RDP.RDPSounds.DoNotPlay;
+						connectionInfo.RedirectSound = RDPConnectionProtocolImp.RDPSounds.DoNotPlay;
 						break;
 				}
 					
@@ -299,13 +299,13 @@ namespace mRemoteNG.Config.Import
 				switch (securitySettingsNode.SelectSingleNode("./authentication").InnerText)
 				{
 					case "0": // No authentication
-						connectionInfo.RDPAuthenticationLevel = RDP.AuthenticationLevel.NoAuth;
+						connectionInfo.RDPAuthenticationLevel = RDPConnectionProtocolImp.AuthenticationLevel.NoAuth;
 						break;
 					case "1": // Do not connect if authentication fails
-						connectionInfo.RDPAuthenticationLevel = RDP.AuthenticationLevel.AuthRequired;
+						connectionInfo.RDPAuthenticationLevel = RDPConnectionProtocolImp.AuthenticationLevel.AuthRequired;
 						break;
 					case "2": // Warn if authentication fails
-						connectionInfo.RDPAuthenticationLevel = RDP.AuthenticationLevel.WarnOnFailedAuth;
+						connectionInfo.RDPAuthenticationLevel = RDPConnectionProtocolImp.AuthenticationLevel.WarnOnFailedAuth;
 						break;
 				}
 			}
