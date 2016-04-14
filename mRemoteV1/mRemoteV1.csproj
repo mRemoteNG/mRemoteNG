@@ -86,7 +86,7 @@
     <OutputPath>bin\Debug Portable\</OutputPath>
     <NOWARN>1591,660,661</NOWARN>
     <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DefineConstants>PORTABLE</DefineConstants>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
@@ -167,56 +167,69 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App\ApplicationEvents.cs" />
-    <Compile Include="App\App.Info.cs" />
-    <Compile Include="App\App.Native.cs" />
-    <Compile Include="App\App.Runtime.cs" />
-    <Compile Include="App\App.SupportedCultures.cs" />
-    <Compile Include="App\App.Update.cs" />
+    <Compile Include="App\Info\GeneralAppInfo.cs" />
+    <Compile Include="App\Logger.cs" />
+    <Compile Include="App\Native.cs" />
+    <Compile Include="App\Runtime.cs" />
+    <Compile Include="App\Screens.cs" />
+    <Compile Include="App\Shutdown.cs" />
+    <Compile Include="App\Startup.cs" />
+    <Compile Include="App\SupportedCultures.cs" />
+    <Compile Include="App\Update\AnnouncementInfo.cs" />
+    <Compile Include="App\Update\AppUpdater.cs" />
     <Compile Include="App\Export.cs" />
     <Compile Include="App\Import.cs" />
-    <Compile Include="Config\Config.Connections.Load.cs" />
-    <Compile Include="Config\Config.Connections.Save.cs" />
-    <Compile Include="Config\Config.Settings.Load.cs" />
-    <Compile Include="Config\Config.Settings.Providers.cs" />
-    <Compile Include="Config\Config.Settings.Save.cs" />
-    <Compile Include="Config\ConfirmClose.cs" />
+    <Compile Include="App\Info\ConnectionsFileInfo.cs" />
+    <Compile Include="App\Info\CredentialsFileInfo.cs" />
+    <Compile Include="App\Info\SettingsFileInfo.cs" />
+    <Compile Include="App\Info\UpdateChannelInfo.cs" />
+    <Compile Include="App\Update\UpdateFile.cs" />
+    <Compile Include="App\Update\UpdateInfo.cs" />
+    <Compile Include="App\Windows.cs" />
+    <Compile Include="Config\Connections\ConnectionsLoader.cs" />
+    <Compile Include="Config\Connections\ConnectionsSaver.cs" />
+    <Compile Include="Config\Connections\SqlCommandBuilder.cs" />
+    <Compile Include="Config\Connections\SqlConnectionsUpdateChecker.cs" />
+    <Compile Include="Config\Connections\SqlConnectionsProvider.cs" />
+    <Compile Include="Config\Connections\SqlUpdateQueryBuilder.cs" />
+    <Compile Include="Config\Connections\SqlUpdateTimer.cs" />
+    <Compile Include="Config\Settings\Providers\ChooseProvider.cs" />
+    <Compile Include="Config\Settings\SettingsLoader.cs" />
+    <Compile Include="Config\Settings\Providers\PortableSettingsProvider.cs" />
+    <Compile Include="Config\Settings\SettingsSaver.cs" />
+    <Compile Include="Config\ConfirmCloseEnum.cs" />
     <Compile Include="Config\Import\ActiveDirectory.cs" />
     <Compile Include="Config\Import\mRemoteNG.cs" />
     <Compile Include="Config\Import\PortScan.cs" />
     <Compile Include="Config\Import\PuttyConnectionManager.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnection.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnectionManager.cs" />
+    <Compile Include="Config\KeyboardShortcuts\KeyboardShortcutMap.cs" />
+    <Compile Include="Config\KeyboardShortcuts\ShortcutCommandEnum.cs" />
+    <Compile Include="Config\KeyboardShortcuts\ShortcutKey.cs" />
+    <Compile Include="Config\KeyboardShortcuts\ShortcutMapping.cs" />
     <Compile Include="Config\Putty\Config.Putty.RegistryProvider.cs" />
     <Compile Include="Config\Putty\Config.Putty.XmingProvider.cs" />
     <Compile Include="Config\Putty\Config.Putty.Sessions.cs" />
     <Compile Include="Config\Putty\Config.Putty.Provider.cs" />
-    <Compile Include="Connection\Protocols\HttpConnectionProtocol.cs" />
-    <Compile Include="Connection\Protocols\HttpsConnectionProtocol.cs" />
-    <Compile Include="Connection\Protocols\ICAConnectionProtocol.cs" />
-    <Compile Include="Connection\Protocols\OtherConnectionProtocol.cs" />
-    <Compile Include="Connection\Protocols\RAWConnectionProtocol.cs" />
-    <Compile Include="Connection\Protocols\RloginConnectionProtocol.cs" />
-    <Compile Include="Connection\Protocols\SSH1ConnectionProtocol.cs" />
-    <Compile Include="Connection\Protocols\SSH2ConnectionProtocol.cs" />
-    <Compile Include="Connection\Protocols\TelnetConnectionProtocol.cs" />
-    <Compile Include="Connection\Protocols\VNCConnectionProtocol.cs" />
-    <Compile Include="Connection\Protocols\RDPConnectionProtocol.cs" />
-    <Compile Include="Connection\ExternalToolRecordImp.cs" />
-    <Compile Include="Connection\Interfaces\ConnectionProtocol.cs" />
-    <Compile Include="Connection\Interfaces\ConnectionProtocolOptions.cs" />
-    <Compile Include="Connection\ConnectionRecordInheritanceImp.cs" />
+    <Compile Include="Config\SqlConnector.cs" />
+    <Compile Include="Config\SqlConnectorImp.cs" />
+    <Compile Include="Connection\ConnectionInfoInheritance.cs" />
     <Compile Include="App\ProgramRoot.cs" />
-    <Compile Include="Connection\Interfaces\ConnectionRecord.cs" />
-    <Compile Include="Connection\Interfaces\ConnectionRecordInheritanceController.cs" />
-    <Compile Include="Connection\ConnectionRecordMetaDataImp.cs" />
-    <Compile Include="Connection\Interfaces\ConnectionRecordMetaData.cs" />
-    <Compile Include="Connection\Interfaces\ExternalToolRecord.cs" />
-    <Compile Include="Connection\Interfaces\Record.cs" />
-    <Compile Include="Connection\ProtocolEnum.cs" />
-    <Compile Include="Connection\Interfaces\ProtocolManager.cs" />
-    <Compile Include="Connection\RDPProtocolOptionsImp.cs" />
-    <Compile Include="Credential\CredentialRecord.cs" />
-    <Compile Include="Tools\GenericEnum.cs" />
+    <Compile Include="Connection\Converter.cs" />
+    <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPEnums.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPVersions.cs" />
+    <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
+    <Compile Include="Images\ErrorImageType.cs" />
+    <Compile Include="Messages\MessageClassEnum.cs" />
+    <Compile Include="Tools\ArgumentParser.cs" />
+    <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
+    <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
+    <Compile Include="Tools\Sorting\TreeNodeSorter.cs" />
+    <Compile Include="Tools\Sorting\Sortable.cs" />
+    <Compile Include="Tree\ConnectionTree.cs" />
+    <Compile Include="Tree\NodeType.cs" />
     <Compile Include="UI\Controls\ListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -229,7 +242,7 @@
     <Compile Include="UI\Controls\ToolStripSplitButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Config\KeyboardShortcuts.cs" />
+    <Compile Include="Config\KeyboardShortcuts\KeyboardShortcuts.cs" />
     <Compile Include="UI\Forms\OptionsPages\AdvancedPage.Designer.cs">
       <DependentUpon>AdvancedPage.cs</DependentUpon>
     </Compile>
@@ -298,42 +311,42 @@
     <Compile Include="Tools\EnumWindows.cs" />
     <Compile Include="Tools\EnvironmentInfo.cs" />
     <Compile Include="Tools\PropertyGridCommandSite.cs" />
-    <Compile Include="Connection\PuttySession.Info.cs" />
+    <Compile Include="Connection\PuttySessionInfo.cs" />
     <Compile Include="Tree\Root\PuttySessions.Info.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Themes\ThemeSerializer.cs" />
-    <Compile Include="Connection\Connection.Icon.cs" />
-    <Compile Include="Connection\ConnectionRecordImp.cs" />
-    <Compile Include="Connection\Connection.InterfaceControl.Designer.cs">
-      <DependentUpon>Connection.InterfaceControl.cs</DependentUpon>
+    <Compile Include="Connection\ConnectionIcon.cs" />
+    <Compile Include="Connection\ConnectionInfo.cs" />
+    <Compile Include="Connection\InterfaceControl.Designer.cs">
+      <DependentUpon>InterfaceControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Connection\Connection.InterfaceControl.cs">
+    <Compile Include="Connection\InterfaceControl.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Connection\ConnectionList.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.Base.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.HTTP.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.HTTPBase.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.HTTPS.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.ICA.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.IntegratedProgram.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.List.cs" />
-    <Compile Include="Connection\ProtocolManagerImp.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.PuttyBase.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.RAW.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.RDP.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.Rlogin.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.Serial.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.SSH1.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.SSH2.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.Telnet.cs" />
-    <Compile Include="Connection\Protocols\deprecated\Connection.Protocol.VNC.cs" />
+    <Compile Include="Connection\Protocol\ProtocolBase.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPBase.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.cs" />
+    <Compile Include="Connection\Protocol\ICA\Connection.Protocol.ICA.cs" />
+    <Compile Include="Connection\Protocol\IntegratedProgram.cs" />
+    <Compile Include="Connection\Protocol\ProtocolList.cs" />
+    <Compile Include="Connection\Protocol\ProtocolType.cs" />
+    <Compile Include="Connection\Protocol\PuttyBase.cs" />
+    <Compile Include="Connection\Protocol\RAW\Connection.Protocol.RAW.cs" />
+    <Compile Include="Connection\Protocol\RDP\Connection.Protocol.RDP.cs" />
+    <Compile Include="Connection\Protocol\Rlogin\Connection.Protocol.Rlogin.cs" />
+    <Compile Include="Connection\Protocol\Serial\Connection.Protocol.Serial.cs" />
+    <Compile Include="Connection\Protocol\SSH\Connection.Protocol.SSH1.cs" />
+    <Compile Include="Connection\Protocol\SSH\Connection.Protocol.SSH2.cs" />
+    <Compile Include="Connection\Protocol\Telnet\Connection.Protocol.Telnet.cs" />
+    <Compile Include="Connection\Protocol\VNC\Connection.Protocol.VNC.cs" />
     <Compile Include="Themes\ThemeInfo.cs" />
     <Compile Include="Tools\CommandLineArguments.cs" />
-    <Compile Include="Container\Container.Info.cs" />
-    <Compile Include="Container\Container.List.cs" />
-    <Compile Include="Credential\CredentialRecordImp.cs" />
-    <Compile Include="Credential\Credential.List.cs" />
+    <Compile Include="Container\ContainerInfo.cs" />
+    <Compile Include="Container\ContainerList.cs" />
+    <Compile Include="Credential\CredentialInfo.cs" />
+    <Compile Include="Credential\CredentialList.cs" />
     <Compile Include="UI\Forms\frmChoosePanel.Designer.cs">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
     </Compile>
@@ -352,14 +365,14 @@
     <Compile Include="UI\Forms\PasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Images\Images.Enums.cs" />
+    <Compile Include="Images\TreeImageType.cs" />
     <Compile Include="Resources\Language\Language.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Language.resx</DependentUpon>
     </Compile>
-    <Compile Include="Messages\Messages.Collector.cs" />
-    <Compile Include="Messages\Messages.Message.cs" />
+    <Compile Include="Messages\MessageCollector.cs" />
+    <Compile Include="Messages\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Application.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -393,89 +406,95 @@
     </Compile>
     <Compile Include="Tools\ExternalTool.cs" />
     <Compile Include="Tools\Tools.LocalizedAttributes.cs" />
-    <Compile Include="Tools\Tools.Misc.cs" />
+    <Compile Include="Tools\MiscTools.cs" />
     <Compile Include="Tools\Tools.PortScan.cs" />
     <Compile Include="Tools\Tools.SystemMenu.cs" />
     <Compile Include="Tools\Tools.WindowPlacement.cs" />
     <Compile Include="Tree\Tree.Node.cs" />
-    <Compile Include="UI\Windows\UI.Window.About.cs">
+    <Compile Include="UI\Forms\SplashPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.ActiveDirectoryImport.Designer.cs">
-      <DependentUpon>UI.Window.ActiveDirectoryImport.cs</DependentUpon>
+    <Compile Include="UI\Forms\SplashPage.Designer.cs">
+      <DependentUpon>SplashPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.ActiveDirectoryImport.cs">
+    <Compile Include="UI\Window\AboutWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.Announcement.Designer.cs">
-      <DependentUpon>UI.Window.Announcement.cs</DependentUpon>
+    <Compile Include="UI\Window\ActiveDirectoryImportWindow.Designer.cs">
+      <DependentUpon>ActiveDirectoryImportWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.Announcement.cs">
+    <Compile Include="UI\Window\ActiveDirectoryImportWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.Base.cs">
+    <Compile Include="UI\Window\AnnouncementWindow.Designer.cs">
+      <DependentUpon>AnnouncementWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\AnnouncementWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.ComponentsCheck.cs">
+    <Compile Include="UI\Window\BaseWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.Config.cs">
+    <Compile Include="UI\Window\ComponentsCheckWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.Connection.cs">
+    <Compile Include="UI\Window\ConfigWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.ErrorsAndInfos.cs">
+    <Compile Include="UI\Window\ConnectionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ErrorAndInfoWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\ExportForm.Designer.cs">
       <DependentUpon>ExportForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.ExternalTools.Designer.cs">
-      <DependentUpon>UI.Window.ExternalTools.cs</DependentUpon>
+    <Compile Include="UI\Window\ExternalToolsWindow.Designer.cs">
+      <DependentUpon>ExternalToolsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.ExternalTools.cs">
+    <Compile Include="UI\Window\ExternalToolsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.Help.cs">
+    <Compile Include="UI\Window\HelpWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.List.cs" />
-    <Compile Include="UI\Windows\UI.Window.PortScan.Designer.cs">
-      <DependentUpon>UI.Window.PortScan.cs</DependentUpon>
+    <Compile Include="UI\WindowList.cs" />
+    <Compile Include="UI\Window\PortScanWindow.Designer.cs">
+      <DependentUpon>PortScanWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.PortScan.cs">
+    <Compile Include="UI\Window\PortScanWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Forms\ExportForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.ScreenshotManager.cs">
+    <Compile Include="UI\Window\ScreenshotManagerWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.Sessions.Designer.cs">
-      <DependentUpon>UI.Window.Sessions.cs</DependentUpon>
+    <Compile Include="UI\Window\SessionsWindow.Designer.cs">
+      <DependentUpon>SessionsWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.Sessions.cs">
+    <Compile Include="UI\Window\SessionsWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.SSHTransfer.cs">
+    <Compile Include="UI\Window\SSHTransferWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.Tree.Designer.cs">
-      <DependentUpon>UI.Window.Tree.cs</DependentUpon>
+    <Compile Include="UI\Window\ConnectionTreeWindow.Designer.cs">
+      <DependentUpon>ConnectionTreeWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.Tree.cs">
+    <Compile Include="UI\Window\ConnectionTreeWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\UI.Window.Type.cs" />
-    <Compile Include="UI\Windows\UI.Window.UltraVNCSC.cs">
+    <Compile Include="UI\WindowType.cs" />
+    <Compile Include="UI\Window\UltraVNCWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.Update.Designer.cs">
-      <DependentUpon>UI.Window.Update.cs</DependentUpon>
+    <Compile Include="UI\Window\UpdateWindow.Designer.cs">
+      <DependentUpon>UpdateWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Windows\UI.Window.Update.cs">
+    <Compile Include="UI\Window\UpdateWindow.cs">
       <SubType>Form</SubType>
     </Compile>
   </ItemGroup>
@@ -581,72 +600,75 @@
       <DependentUpon>ReconnectGroup.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.About.resx">
-      <DependentUpon>UI.Window.About.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Forms\SplashPage.resx">
+      <DependentUpon>SplashPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\AboutWindow.resx">
+      <DependentUpon>AboutWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.ActiveDirectoryImport.resx">
-      <DependentUpon>UI.Window.ActiveDirectoryImport.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\ActiveDirectoryImportWindow.resx">
+      <DependentUpon>ActiveDirectoryImportWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.Announcement.resx">
-      <DependentUpon>UI.Window.Announcement.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\AnnouncementWindow.resx">
+      <DependentUpon>AnnouncementWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.ComponentsCheck.resx">
-      <DependentUpon>UI.Window.ComponentsCheck.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\ComponentsCheckWindow.resx">
+      <DependentUpon>ComponentsCheckWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.Config.resx">
+    <EmbeddedResource Include="UI\Window\ConfigWindow.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>UI.Window.Config.cs</DependentUpon>
+      <DependentUpon>ConfigWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.Connection.resx">
-      <DependentUpon>UI.Window.Connection.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.ErrorsAndInfos.resx">
-      <DependentUpon>UI.Window.ErrorsAndInfos.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\ConnectionWindow.resx">
+      <DependentUpon>ConnectionWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.ExternalTools.resx">
-      <DependentUpon>UI.Window.ExternalTools.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\ErrorAndInfoWindow.resx">
+      <DependentUpon>ErrorAndInfoWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.Help.resx">
-      <DependentUpon>UI.Window.Help.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\ExternalToolsWindow.resx">
+      <DependentUpon>ExternalToolsWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.PortScan.resx">
-      <DependentUpon>UI.Window.PortScan.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\HelpWindow.resx">
+      <DependentUpon>HelpWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\PortScanWindow.resx">
+      <DependentUpon>PortScanWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\ExportForm.resx">
       <DependentUpon>ExportForm.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.ScreenshotManager.resx">
-      <DependentUpon>UI.Window.ScreenshotManager.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\ScreenshotManagerWindow.resx">
+      <DependentUpon>ScreenshotManagerWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.Sessions.resx">
-      <DependentUpon>UI.Window.Sessions.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\SessionsWindow.resx">
+      <DependentUpon>SessionsWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.SSHTransfer.resx">
-      <DependentUpon>UI.Window.SSHTransfer.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\SSHTransferWindow.resx">
+      <DependentUpon>SSHTransferWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.Tree.resx">
-      <DependentUpon>UI.Window.Tree.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\ConnectionTreeWindow.resx">
+      <DependentUpon>ConnectionTreeWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.UltraVNCSC.resx">
-      <DependentUpon>UI.Window.UltraVNCSC.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\UltraVNCWindow.resx">
+      <DependentUpon>UltraVNCWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Windows\UI.Window.Update.resx">
-      <DependentUpon>UI.Window.Update.cs</DependentUpon>
+    <EmbeddedResource Include="UI\Window\UpdateWindow.resx">
+      <DependentUpon>UpdateWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>

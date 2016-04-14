@@ -1,15 +1,10 @@
-using System.Collections.Generic;
-using System;
-using AxWFICALib;
-using System.Drawing;
-using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
-using Microsoft.VisualBasic;
-using System.Collections;
-using System.Windows.Forms;
-using System.ComponentModel;
+using mRemoteNG.Connection;
+using mRemoteNG.Images;
 using mRemoteNG.Tools;
+using mRemoteNG.Tree;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Windows.Forms;
 
 
 namespace mRemoteNG.Config.Putty
@@ -20,7 +15,7 @@ namespace mRemoteNG.Config.Putty
 		private delegate void AddSessionsToTreeDelegate();
 		public static void AddSessionsToTree()
 		{
-			TreeView treeView = Tree.Node.TreeView;
+            TreeView treeView = ConnectionTree.TreeView;
 			if (treeView == null)
 			{
 				return ;
@@ -36,7 +31,7 @@ namespace mRemoteNG.Config.Putty
 				TreeNode rootTreeNode = provider.RootTreeNode;
 				bool inUpdate = false;
 					
-				List<Connection.ConnectionRecordImp> savedSessions = new List<Connection.ConnectionRecordImp>(provider.GetSessions());
+				List<Connection.ConnectionInfo> savedSessions = new List<Connection.ConnectionInfo>(provider.GetSessions());
 				if (!IsProviderEnabled(provider) || savedSessions == null || savedSessions.Count == 0)
 				{
 					if (rootTreeNode != null && treeView.Nodes.Contains(rootTreeNode))
@@ -59,7 +54,7 @@ namespace mRemoteNG.Config.Putty
 				}
 					
 				List<TreeNode> newTreeNodes = new List<TreeNode>();
-				foreach (Connection.PuttySession.Info sessionInfo in savedSessions)
+				foreach (PuttySessionInfo sessionInfo in savedSessions)
 				{
 					TreeNode treeNode = default(TreeNode);
 					bool isNewNode = false;
@@ -70,14 +65,14 @@ namespace mRemoteNG.Config.Putty
 					}
 					else
 					{
-						treeNode = Tree.Node.AddNode(Tree.Node.Type.PuttySession, sessionInfo.Name);
+						treeNode = Tree.Node.AddNode(TreeNodeType.PuttySession, sessionInfo.Name);
 						if (treeNode == null)
 						{
 							continue;
 						}
 						treeNode.Name = treeNode.Text;
-						treeNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
-						treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+						treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
+						treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
 						isNewNode = true;
 					}
 					
@@ -95,7 +90,7 @@ namespace mRemoteNG.Config.Putty
 					
 				foreach (TreeNode treeNode in rootTreeNode.Nodes)
 				{
-					if (!savedSessions.Contains((Connection.ConnectionRecordImp)treeNode.Tag))
+					if (!savedSessions.Contains((ConnectionInfo)treeNode.Tag))
 					{
 						if (!inUpdate)
 						{
@@ -118,7 +113,7 @@ namespace mRemoteNG.Config.Putty
 					
 				if (inUpdate)
 				{
-					Tree.Node.Sort(rootTreeNode, SortOrder.Ascending);
+                    ConnectionTree.Sort(rootTreeNode, SortOrder.Ascending);
 					rootTreeNode.Expand();
 					treeView.EndUpdate();
 				}

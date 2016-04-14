@@ -6,6 +6,7 @@ using mRemoteNG.App;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
 using PSTaskDialog;
+using mRemoteNG.App.Update;
 
 
 namespace mRemoteNG.Forms.OptionsPages
@@ -93,7 +94,7 @@ namespace mRemoteNG.Forms.OptionsPages
 			chkUseProxyAuthentication.Checked = System.Convert.ToBoolean(My.Settings.Default.UpdateProxyUseAuthentication);
 			pnlProxyAuthentication.Enabled = System.Convert.ToBoolean(My.Settings.Default.UpdateProxyUseAuthentication);
 			txtProxyUsername.Text = System.Convert.ToString(My.Settings.Default.UpdateProxyAuthUser);
-			txtProxyPassword.Text = Crypt.Decrypt(System.Convert.ToString(My.Settings.Default.UpdateProxyAuthPass), App.Info.General.EncryptionKey);
+			txtProxyPassword.Text = Crypt.Decrypt(System.Convert.ToString(My.Settings.Default.UpdateProxyAuthPass), App.Info.GeneralAppInfo.EncryptionKey);
 				
 			btnTestProxy.Enabled = System.Convert.ToBoolean(My.Settings.Default.UpdateUseProxy);
 				
@@ -132,26 +133,26 @@ namespace mRemoteNG.Forms.OptionsPages
 				
 			My.Settings.Default.UpdateProxyUseAuthentication = chkUseProxyAuthentication.Checked;
 			My.Settings.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
-			My.Settings.Default.UpdateProxyAuthPass = Crypt.Encrypt(txtProxyPassword.Text, App.Info.General.EncryptionKey);
+			My.Settings.Default.UpdateProxyAuthPass = Crypt.Encrypt(txtProxyPassword.Text, App.Info.GeneralAppInfo.EncryptionKey);
 		}
         #endregion
 			
         #region Private Fields
-		private App.Update _appUpdate;
+		private AppUpdater _appUpdate;
         #endregion
-			
+		
         #region Private Methods
         #region Event Handlers
 		public void chkCheckForUpdatesOnStartup_CheckedChanged(object sender, EventArgs e)
 		{
 			cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked;
 		}
-			
+		
 		public void btnUpdateCheckNow_Click(object sender, EventArgs e)
 		{
-			Runtime.Windows.Show(UI.Window.Type.Update);
+			Windows.Show(UI.Window.WindowType.Update);
 		}
-			
+		
 		public void chkUseProxyForAutomaticUpdates_CheckedChanged(object sender, EventArgs e)
 		{
 			pnlProxyBasic.Enabled = chkUseProxyForAutomaticUpdates.Checked;
@@ -172,7 +173,7 @@ namespace mRemoteNG.Forms.OptionsPages
 				pnlProxyAuthentication.Enabled = false;
 			}
 		}
-			
+		
 		public void btnTestProxy_Click(object sender, EventArgs e)
 		{
 			if (_appUpdate != null)
@@ -182,8 +183,8 @@ namespace mRemoteNG.Forms.OptionsPages
 					return ;
 				}
 			}
-				
-			_appUpdate = new App.Update();
+			
+			_appUpdate = new AppUpdater();
 			//_appUpdate.Load += _appUpdate.Update_Load;
 			_appUpdate.SetProxySettings(chkUseProxyForAutomaticUpdates.Checked, txtProxyAddress.Text, (int) numProxyPort.Value, chkUseProxyAuthentication.Checked, txtProxyUsername.Text, txtProxyPassword.Text);
 				
@@ -194,7 +195,7 @@ namespace mRemoteNG.Forms.OptionsPages
 				
 			_appUpdate.GetUpdateInfoAsync();
 		}
-			
+		
 		public void chkUseProxyAuthentication_CheckedChanged(object sender, EventArgs e)
 		{
 			if (chkUseProxyForAutomaticUpdates.Checked)
@@ -210,7 +211,7 @@ namespace mRemoteNG.Forms.OptionsPages
 			}
 		}
         #endregion
-			
+		
 		private void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
 		{
 			if (InvokeRequired)
@@ -219,14 +220,14 @@ namespace mRemoteNG.Forms.OptionsPages
 				Invoke(myDelegate, new object[] {sender, e});
 				return ;
 			}
-				
+			
 			try
 			{
 				_appUpdate.GetUpdateInfoCompletedEvent -= GetUpdateInfoCompleted;
-					
+				
 				btnTestProxy.Enabled = true;
 				btnTestProxy.Text = Language.strButtonTestProxy;
-					
+				
 				if (e.Cancelled)
 				{
 					return ;
@@ -235,12 +236,12 @@ namespace mRemoteNG.Forms.OptionsPages
 				{
 					throw (e.Error);
 				}
-					
+				
 				cTaskDialog.ShowCommandBox(this, System.Convert.ToString(Application.ProductName), Language.strProxyTestSucceeded, "", Language.strButtonOK, false);
 			}
 			catch (Exception ex)
 			{
-				cTaskDialog.ShowCommandBox(this, System.Convert.ToString(Application.ProductName), Language.strProxyTestFailed, Misc.GetExceptionMessageRecursive(ex), "", "", "", Language.strButtonOK, false, eSysIcons.Error, (PSTaskDialog.eSysIcons) 0);
+				cTaskDialog.ShowCommandBox(this, System.Convert.ToString(Application.ProductName), Language.strProxyTestFailed, MiscTools.GetExceptionMessageRecursive(ex), "", "", "", Language.strButtonOK, false, eSysIcons.Error, (PSTaskDialog.eSysIcons) 0);
 			}
 		}
         #endregion

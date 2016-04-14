@@ -187,7 +187,8 @@ namespace mRemoteNG.Tools
 				
 			if (Controls.Count == 0)
 			{
-				Controls = EnumWindows.EnumChildWindows(Handle);
+                EnumWindows windowEnumerator = new EnumWindows();
+                Controls = windowEnumerator.EnumChildWindows(Handle);
 			}
 				
 			System.Text.StringBuilder stringBuilder = new System.Text.StringBuilder();

@@ -12,6 +12,8 @@ using System.DirectoryServices;
 using mRemoteNG.App;
 using System.Text.RegularExpressions;
 using mRemoteNG.My;
+using mRemoteNG.Connection;
+using mRemoteNG.Container;
 
 
 namespace mRemoteNG.Config.Import
@@ -22,12 +24,12 @@ namespace mRemoteNG.Config.Import
 		{
 			try
 			{
-				TreeNode treeNode = Tree.Node.AddNode(Tree.Node.Type.Container);
+				TreeNode treeNode = Tree.Node.AddNode(Tree.TreeNodeType.Container);
 					
-				Container.Info containerInfo = new Container.Info();
+				ContainerInfo containerInfo = new ContainerInfo();
 				containerInfo.TreeNode = treeNode;
-				containerInfo.ConnectionRecord = new Connection.ConnectionRecordImp(containerInfo);
-					
+				containerInfo.ConnectionInfo = new ConnectionInfo(containerInfo);
+				
 				string name = "";
 				Match match = Regex.Match(ldapPath, "ou=([^,]*)", RegexOptions.IgnoreCase);
 				if (match.Success)
@@ -42,13 +44,13 @@ namespace mRemoteNG.Config.Import
 				containerInfo.Name = name;
 					
 				// We can only inherit from a container node, not the root node or connection nodes
-				if (Tree.Node.GetNodeType(parentTreeNode) == Tree.Node.Type.Container)
+				if (Tree.Node.GetNodeType(parentTreeNode) == Tree.TreeNodeType.Container)
 				{
 					containerInfo.Parent = parentTreeNode.Tag;
 				}
 				else
 				{
-					containerInfo.ConnectionRecord.Inherit.TurnOffInheritanceCompletely();
+					containerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely();
 				}
 					
 				treeNode.Text = name;
@@ -91,18 +93,18 @@ namespace mRemoteNG.Config.Import
 				{
 					ldapResult = tempLoopVar_ldapResult;
 					System.DirectoryServices.DirectoryEntry with_2 = ldapResult.GetDirectoryEntry();
-					strDisplayName = System.Convert.ToString(with_2.Properties["cn"].Value);
-					strDescription = System.Convert.ToString(with_2.Properties["Description"].Value);
-					strHostName = System.Convert.ToString(with_2.Properties["dNSHostName"].Value);
+					strDisplayName = Convert.ToString(with_2.Properties["cn"].Value);
+					strDescription = Convert.ToString(with_2.Properties["Description"].Value);
+					strHostName = Convert.ToString(with_2.Properties["dNSHostName"].Value);
 						
-					TreeNode treeNode = Tree.Node.AddNode(Tree.Node.Type.Connection, strDisplayName);
+					TreeNode treeNode = Tree.Node.AddNode(Tree.TreeNodeType.Connection, strDisplayName);
 						
-					Connection.ConnectionRecordImp connectionInfo = new Connection.ConnectionRecordImp();
-					Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp inheritanceInfo = new Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp(connectionInfo, true);
+					ConnectionInfo connectionInfo = new ConnectionInfo();
+					ConnectionInfoInheritance inheritanceInfo = new ConnectionInfoInheritance(connectionInfo, true);
 					inheritanceInfo.Description = false;
-					if (parentTreeNode.Tag is Container.Info)
+					if (parentTreeNode.Tag is ContainerInfo)
 					{
-						connectionInfo.Parent = (Container.Info)parentTreeNode.Tag;
+						connectionInfo.Parent = (ContainerInfo)parentTreeNode.Tag;
 					}
 					connectionInfo.Inherit = inheritanceInfo;
 					connectionInfo.Name = strDisplayName;

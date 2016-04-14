@@ -13,7 +13,7 @@ namespace mRemoteNG.Tools
 			}
 			else
 			{
-				filename = App.Info.General.PuttyPath;
+				filename = App.Info.GeneralAppInfo.PuttyPath;
 			}
 			return Start(filename, arguments);
 		}

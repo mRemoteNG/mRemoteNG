@@ -78,18 +78,18 @@ namespace mRemoteNG.Forms.OptionsPages
 			}
 				
 			txtCredentialsUsername.Text = System.Convert.ToString(My.Settings.Default.DefaultUsername);
-			txtCredentialsPassword.Text = Crypt.Decrypt(System.Convert.ToString(My.Settings.Default.DefaultPassword), App.Info.General.EncryptionKey);
+			txtCredentialsPassword.Text = Crypt.Decrypt(System.Convert.ToString(My.Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
 			txtCredentialsDomain.Text = System.Convert.ToString(My.Settings.Default.DefaultDomain);
 
-            if (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmClose.Never)
+            if (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Never)
 			{
 				radCloseWarnNever.Checked = true;
 			}
-            else if (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmClose.Exit)
+            else if (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit)
 			{
 				radCloseWarnExit.Checked = true;
 			}
-            else if (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmClose.Multiple)
+            else if (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple)
 			{
 				radCloseWarnMultiple.Checked = true;
 			}
@@ -135,24 +135,24 @@ namespace mRemoteNG.Forms.OptionsPages
 			}
 				
 			My.Settings.Default.DefaultUsername = txtCredentialsUsername.Text;
-			My.Settings.Default.DefaultPassword = Crypt.Encrypt(txtCredentialsPassword.Text, App.Info.General.EncryptionKey);
+			My.Settings.Default.DefaultPassword = Crypt.Encrypt(txtCredentialsPassword.Text, App.Info.GeneralAppInfo.EncryptionKey);
 			My.Settings.Default.DefaultDomain = txtCredentialsDomain.Text;
 				
 			if (radCloseWarnAll.Checked)
 			{
-                My.Settings.Default.ConfirmCloseConnection = (int)ConfirmClose.All;
+                My.Settings.Default.ConfirmCloseConnection = (int)ConfirmCloseEnum.All;
 			}
 			if (radCloseWarnMultiple.Checked)
 			{
-                My.Settings.Default.ConfirmCloseConnection = (int)ConfirmClose.Multiple;
+                My.Settings.Default.ConfirmCloseConnection = (int)ConfirmCloseEnum.Multiple;
 			}
 			if (radCloseWarnExit.Checked)
 			{
-                My.Settings.Default.ConfirmCloseConnection = (int)ConfirmClose.Exit;
+                My.Settings.Default.ConfirmCloseConnection = (int)ConfirmCloseEnum.Exit;
 			}
 			if (radCloseWarnNever.Checked)
 			{
-				My.Settings.Default.ConfirmCloseConnection = (int)ConfirmClose.Never;
+				My.Settings.Default.ConfirmCloseConnection = (int)ConfirmCloseEnum.Never;
 			}
 		}
 			

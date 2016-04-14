@@ -6,14 +6,6 @@ using System.ComponentModel;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-    public enum Defaults
-    {
-        Colors = RDPColors.Colors16Bit,
-        Sounds = RDPSounds.DoNotPlay,
-        Resolution = RDPResolutions.FitToWindow,
-        Port = 3389
-    }
-
     public enum RDPColors
     {
         [LocalizedAttributes.LocalizedDescription("strRDP256Colors")]
@@ -38,7 +30,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         DoNotPlay = 2
     }
 
-    private enum RDPPerformanceFlags
+    public enum RDPPerformanceFlags
     {
         [Description("strRDPDisableWallpaper")]
         DisableWallpaper = 0x1,

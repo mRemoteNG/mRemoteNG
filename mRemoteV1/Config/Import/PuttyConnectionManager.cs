@@ -12,6 +12,8 @@ using System.Xml;
 using System.IO;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Images;
+using mRemoteNG.Connection;
 
 
 namespace mRemoteNG.Config.Import
@@ -67,17 +69,17 @@ namespace mRemoteNG.Config.Import
 			TreeNode treeNode = new TreeNode(name);
 			parentTreeNode.Nodes.Add(treeNode);
 				
-			Container.Info containerInfo = new Container.Info();
+			Container.ContainerInfo containerInfo = new Container.ContainerInfo();
 			containerInfo.TreeNode = treeNode;
 			containerInfo.Name = name;
 				
-			Connection.ConnectionRecordImp connectionInfo = CreateConnectionInfo(name);
+			Connection.ConnectionInfo connectionInfo = CreateConnectionInfo(name);
 			connectionInfo.Parent = containerInfo;
 			connectionInfo.IsContainer = true;
-			containerInfo.ConnectionRecord = connectionInfo;
+			containerInfo.ConnectionInfo = connectionInfo;
 				
 			// We can only inherit from a container node, not the root node or connection nodes
-			if (Tree.Node.GetNodeType(parentTreeNode) == Tree.Node.Type.Container)
+			if (Tree.Node.GetNodeType(parentTreeNode) == Tree.TreeNodeType.Container)
 			{
 				containerInfo.Parent = parentTreeNode.Tag;
 			}
@@ -88,8 +90,8 @@ namespace mRemoteNG.Config.Import
 				
 			treeNode.Name = name;
 			treeNode.Tag = containerInfo;
-			treeNode.ImageIndex = (int)Images.Enums.TreeImage.Container;
-			treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Container;
+			treeNode.ImageIndex = (int)TreeImageType.Container;
+			treeNode.SelectedImageIndex = (int)TreeImageType.Container;
 				
 			foreach (XmlNode childNode in xmlNode.SelectNodes("./*"))
 			{
@@ -127,48 +129,48 @@ namespace mRemoteNG.Config.Import
 			TreeNode treeNode = new TreeNode(name);
 			parentTreeNode.Nodes.Add(treeNode);
 				
-			Connection.ConnectionRecordImp connectionInfo = ConnectionInfoFromXml(connectionNode);
+			Connection.ConnectionInfo connectionInfo = ConnectionInfoFromXml(connectionNode);
 			connectionInfo.TreeNode = treeNode;
-			connectionInfo.Parent = (Container.Info)parentTreeNode.Tag;
+			connectionInfo.Parent = (Container.ContainerInfo)parentTreeNode.Tag;
 				
 			treeNode.Name = name;
 			treeNode.Tag = connectionInfo;
-			treeNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
-            treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+			treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
+            treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
 				
 			Runtime.ConnectionList.Add(connectionInfo);
 		}
 			
-		private static Connection.ConnectionRecordImp CreateConnectionInfo(string name)
+		private static ConnectionInfo CreateConnectionInfo(string name)
 		{
-			Connection.ConnectionRecordImp connectionInfo = new Connection.ConnectionRecordImp();
-			connectionInfo.Inherit = new Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp(connectionInfo);
+			ConnectionInfo connectionInfo = new ConnectionInfo();
+			connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo);
 			connectionInfo.Name = name;
 			return connectionInfo;
 		}
 			
-		private static Connection.ConnectionRecordImp ConnectionInfoFromXml(XmlNode xmlNode)
+		private static ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
 		{
 			XmlNode connectionInfoNode = xmlNode.SelectSingleNode("./connection_info");
 				
 			string name = connectionInfoNode.SelectSingleNode("./name").InnerText;
-			Connection.ConnectionRecordImp connectionInfo = CreateConnectionInfo(name);
+			ConnectionInfo connectionInfo = CreateConnectionInfo(name);
 				
 			string protocol = connectionInfoNode.SelectSingleNode("./protocol").InnerText;
 			switch (protocol.ToLowerInvariant())
 			{
 				case "telnet":
-					connectionInfo.Protocol = Protocols.Telnet;
+					connectionInfo.Protocol = ProtocolType.Telnet;
 					break;
 				case "ssh":
-					connectionInfo.Protocol = Protocols.SSH2;
+					connectionInfo.Protocol = ProtocolType.SSH2;
 					break;
 				default:
 					throw (new FileFormatException(string.Format("Unrecognized protocol ({0}).", protocol)));
 			}
 				
 			connectionInfo.Hostname = connectionInfoNode.SelectSingleNode("./host").InnerText;
-			connectionInfo.Port = System.Convert.ToInt32(connectionInfoNode.SelectSingleNode("./port").InnerText);
+			connectionInfo.Port = Convert.ToInt32(connectionInfoNode.SelectSingleNode("./port").InnerText);
 			connectionInfo.PuttySession = connectionInfoNode.SelectSingleNode("./session").InnerText;
 			// ./commandline
 			connectionInfo.Description = connectionInfoNode.SelectSingleNode("./description").InnerText;

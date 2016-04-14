@@ -5,6 +5,8 @@ using System.Diagnostics;
 using mRemoteNG.App;
 using System.IO;
 using System.ComponentModel;
+using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
 
 
 namespace mRemoteNG.Tools
@@ -12,110 +14,88 @@ namespace mRemoteNG.Tools
 	public class ExternalTool
 	{
         #region Public Properties
-		public string DisplayName {get; set;}
-		public string FileName {get; set;}
-		public bool WaitForExit {get; set;}
-		public string Arguments {get; set;}
-		public bool TryIntegrate {get; set;}
-		public Connection.ConnectionRecordImp ConnectionInfo {get; set;}
-			
+		public string DisplayName { get; set; }
+		public string FileName { get; set; }
+		public bool WaitForExit { get; set; }
+		public string Arguments { get; set; }
+		public bool TryIntegrate { get; set; }
+        public ConnectionInfo ConnectionInfo { get; set; }
+		
         public Icon Icon
 		{
 			get
 			{
 				if (File.Exists(FileName))
-				{
-					return Misc.GetIconFromFile(FileName);
-				}
+					return MiscTools.GetIconFromFile(FileName);
 				else
-				{
 					return null;
-				}
 			}
 		}
-			
+		
         public Image Image
 		{
 			get
 			{
 				if (Icon != null)
-				{
 					return Icon.ToBitmap();
-				}
 				else
-				{
 					return null;
-				}
 			}
 		}
         #endregion
-			
-        #region Constructors
+		
 		public ExternalTool(string displayName = "", string fileName = "", string arguments = "")
 		{
 			this.DisplayName = displayName;
 			this.FileName = fileName;
 			this.Arguments = arguments;
 		}
-        #endregion
-			
-        #region Public Methods
-		// Start external app
-		public void Start(Connection.ConnectionRecordImp startConnectionInfo = null)
+
+        public void Start(ConnectionInfo startConnectionInfo = null)
 		{
 			try
 			{
 				if (string.IsNullOrEmpty(FileName))
-				{
 					throw (new InvalidOperationException("FileName cannot be blank."));
-				}
-					
+				
 				ConnectionInfo = startConnectionInfo;
-					
+				
 				if (TryIntegrate)
-				{
 					StartIntegrated();
-					return ;
-				}
-					
-				Process process = new Process();
-				process.StartInfo.UseShellExecute = true;
-				process.StartInfo.FileName = ParseArguments(FileName);
-				process.StartInfo.Arguments = ParseArguments(Arguments);
-					
-				process.Start();
-					
-				if (WaitForExit)
-				{
-					process.WaitForExit();
-				}
+                else
+                    StartExternalProcess();
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionMessage("ExternalApp.Start() failed.", ex);
 			}
 		}
-			
-		// Start external app integrated
+
+        private void StartExternalProcess()
+        {
+            Process process = new Process();
+            SetProcessProperties(process, ConnectionInfo);
+            process.Start();
+
+            if (WaitForExit)
+            {
+                process.WaitForExit();
+            }
+        }
+
+        private void SetProcessProperties(Process process, ConnectionInfo startConnectionInfo)
+        {
+            ArgumentParser argParser = new ArgumentParser(startConnectionInfo);
+            process.StartInfo.UseShellExecute = true;
+            process.StartInfo.FileName = argParser.ParseArguments(FileName);
+            process.StartInfo.Arguments = argParser.ParseArguments(Arguments);
+        }
+		
 		public void StartIntegrated()
 		{
 			try
 			{
-				Connection.ConnectionRecordImp newConnectionInfo = default(Connection.ConnectionRecordImp);
-				if (ConnectionInfo == null)
-				{
-					newConnectionInfo = new Connection.ConnectionRecordImp();
-				}
-				else
-				{
-					newConnectionInfo = ConnectionInfo.Clone();
-				}
-					
-				newConnectionInfo.Protocol = Connection.Protocol.Protocols.IntApp;
-				newConnectionInfo.ExtApp = DisplayName;
-				newConnectionInfo.Name = DisplayName;
-				newConnectionInfo.Panel = My.Language.strMenuExternalTools;
-					
+                ConnectionInfo newConnectionInfo = BuildConnectionInfoForIntegratedApp();
 				Runtime.OpenConnection(newConnectionInfo);
 			}
 			catch (Exception ex)
@@ -123,351 +103,30 @@ namespace mRemoteNG.Tools
 				Runtime.MessageCollector.AddExceptionMessage(message: "ExternalApp.StartIntegrated() failed.", ex: ex, logOnly: true);
 			}
 		}
-			
-		private enum EscapeType
-		{
-			All,
-			ShellMetacharacters,
-			None
-		}
-			
-		private struct Replacement
-		{
-            private int _Start;
-            private int _Length;
-            private string _Value;
 
-			public Replacement(int start, int length, string value)
-			{
-				this._Start = start;
-				this._Length = length;
-				this._Value = value;
-			}
-				
-			public int Start 
-            {
-                get { return _Start; }
-                set { _Start = value; }
-            }
-			public int Length
-            {
-                get { return _Length; }
-                set { _Length = value; }
-            }
-			public string Value
-            {
-                get { return _Value; }
-                set { _Value = value; }
-            }
-		}
-			
-		public string ParseArguments(string input)
-		{
-			int index = 0;
-			List<Replacement> replacements = new List<Replacement>();
-				
-			do
-			{
-				int tokenStart = input.IndexOf("%", index, StringComparison.InvariantCulture);
-				if (tokenStart == -1)
-				{
-					break;
-				}
-					
-				int tokenEnd = input.IndexOf("%", tokenStart + 1, StringComparison.InvariantCulture);
-				if (tokenEnd == -1)
-				{
-					break;
-				}
-					
-				int tokenLength = tokenEnd - tokenStart + 1;
-					
-				int variableNameStart = tokenStart + 1;
-				int variableNameLength = tokenLength - 2;
-					
-				bool isEnvironmentVariable = false;
-					
-				string variableName = "";
-					
-				if (tokenStart > 0)
-				{
-					char tokenStartPrefix = input.Substring(tokenStart - 1, 1).ToCharArray()[0];
-                    char tokenEndPrefix = input.Substring(tokenEnd - 1, 1).ToCharArray()[0];
-						
-					if (tokenStartPrefix == '\\' && tokenEndPrefix == '\\')
-					{
-						isEnvironmentVariable = true;
-							
-						// Add the first backslash to the token
-						tokenStart--;
-						tokenLength++;
-							
-						// Remove the last backslash from the name
-						variableNameLength--;
-					}
-					else if (tokenStartPrefix == '^' && tokenEndPrefix == '^')
-					{
-						// Add the first caret to the token
-						tokenStart--;
-						tokenLength++;
-							
-						// Remove the last caret from the name
-						variableNameLength--;
-							
-						variableName = input.Substring(variableNameStart, variableNameLength);
-						replacements.Add(new Replacement(tokenStart, tokenLength, string.Format("%{0}%", variableName)));
-							
-						index = tokenEnd;
-						continue;
-					}
-				}
-					
-				string token = input.Substring(tokenStart, tokenLength);
-					
-				EscapeType escape = EscapeType.All;
-				string prefix = input.Substring(variableNameStart, 1);
-				switch (prefix)
-				{
-					case "-":
-						escape = EscapeType.ShellMetacharacters;
-						break;
-					case "!":
-						escape = EscapeType.None;
-						break;
-				}
-					
-				if (!(escape == EscapeType.All))
-				{
-					// Remove the escape character from the name
-					variableNameStart++;
-					variableNameLength--;
-				}
-					
-				if (variableNameLength == 0)
-				{
-					index = tokenEnd;
-					continue;
-				}
-					
-				variableName = input.Substring(variableNameStart, variableNameLength);
-					
-				string replacementValue = token;
-				if (!isEnvironmentVariable)
-				{
-					replacementValue = GetVariableReplacement(variableName, token);
-				}
-					
-				bool haveReplacement = false;
-					
-				if (!(replacementValue == token))
-				{
-					haveReplacement = true;
-				}
-				else
-				{
-					replacementValue = Environment.GetEnvironmentVariable(variableName);
-					if (replacementValue != null)
-					{
-						haveReplacement = true;
-					}
-				}
-					
-				if (haveReplacement)
-				{
-					char trailing = '\0';
-					if (tokenEnd + 2 <= input.Length)
-					{
-                        trailing = input.Substring(tokenEnd + 1, 1).ToCharArray()[0];
-					}
-					else
-					{
-						trailing = string.Empty.ToCharArray()[0];
-					}
-						
-					if (escape == EscapeType.All)
-					{
-						replacementValue = CommandLineArguments.EscapeBackslashes(replacementValue);
-						if (trailing == '\'')
-						{
-							replacementValue = CommandLineArguments.EscapeBackslashesForTrailingQuote(replacementValue);
-						}
-					}
-						
-					if (escape == EscapeType.All | escape == EscapeType.ShellMetacharacters)
-					{
-						replacementValue = CommandLineArguments.EscapeShellMetacharacters(replacementValue);
-					}
-						
-					replacements.Add(new Replacement(tokenStart, tokenLength, replacementValue));
-					index = tokenEnd + 1;
-				}
-				else
-				{
-					index = tokenEnd;
-				}
-			} while (true);
-				
-			string result = input;
-				
-			for (index = result.Length; index >= 0; index--)
-			{
-				foreach (Replacement replacement in replacements)
-				{
-					if (!(replacement.Start == index))
-					{
-						continue;
-					}
-						
-					string before = result.Substring(0, replacement.Start);
-					string after = result.Substring(replacement.Start + replacement.Length);
-					result = before + replacement.Value + after;
-				}
-			}
-				
-			return result;
-		}
-        #endregion
-			
-        #region Private Methods
-		private string GetVariableReplacement(string variable, string original)
-		{
-			string replacement = "";
-			switch (variable.ToLowerInvariant())
-			{
-				case "name":
-					if (ConnectionInfo == null)
-					{
-						replacement = "";
-					}
-					else
-					{
-						replacement = ConnectionInfo.Name;
-					}
-					break;
-				case "hostname":
-					if (ConnectionInfo == null)
-					{
-						replacement = "";
-					}
-					else
-					{
-						replacement = ConnectionInfo.Hostname;
-					}
-					break;
-				case "port":
-					if (ConnectionInfo == null)
-					{
-						replacement = "";
-					}
-					else
-					{
-						replacement = System.Convert.ToString(ConnectionInfo.Port);
-					}
-					break;
-				case "username":
-					if (ConnectionInfo == null)
-					{
-						replacement = "";
-					}
-					else
-					{
-						replacement = ConnectionInfo.Username;
-					}
-					break;
-				case "password":
-					if (ConnectionInfo == null)
-					{
-						replacement = "";
-					}
-					else
-					{
-						replacement = ConnectionInfo.Password;
-					}
-					break;
-				case "domain":
-					if (ConnectionInfo == null)
-					{
-						replacement = "";
-					}
-					else
-					{
-						replacement = ConnectionInfo.Domain;
-					}
-					break;
-				case "description":
-					if (ConnectionInfo == null)
-					{
-						replacement = "";
-					}
-					else
-					{
-						replacement = ConnectionInfo.Description;
-					}
-					break;
-					// ReSharper disable once StringLiteralTypo
-				case "macaddress":
-					if (ConnectionInfo == null)
-					{
-						replacement = "";
-					}
-					else
-					{
-						replacement = ConnectionInfo.MacAddress;
-					}
-					break;
-					// ReSharper disable once StringLiteralTypo
-				case "userfield":
-					if (ConnectionInfo == null)
-					{
-						replacement = "";
-					}
-					else
-					{
-						replacement = ConnectionInfo.UserField;
-					}
-					break;
-				default:
-					return original;
-			}
-			return replacement;
-		}
-        #endregion
-	}
-		
-	public class ExternalToolsTypeConverter : StringConverter
-	{
-			
-        public static string[] ExternalTools
-		{
-			get
-			{
-				List<string> externalToolList = new List<string>();
-					
-				// Add a blank entry to signify that no external tool is selected
-				externalToolList.Add(string.Empty);
-					
-				foreach (ExternalTool externalTool in App.Runtime.ExternalTools)
-				{
-					externalToolList.Add(externalTool.DisplayName);
-				}
-					
-				return externalToolList.ToArray();
-			}
-		}
-			
-		public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(System.ComponentModel.ITypeDescriptorContext context)
-		{
-			return new StandardValuesCollection(ExternalTools);
-		}
-			
-		public override bool GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext context)
-		{
-			return true;
-		}
-			
-		public override bool GetStandardValuesSupported(ITypeDescriptorContext context)
-		{
-			return true;
-		}
+        private ConnectionInfo BuildConnectionInfoForIntegratedApp()
+        {
+            ConnectionInfo newConnectionInfo = GetAppropriateInstanceOfConnectionInfo();
+            SetConnectionInfoFields(newConnectionInfo);
+            return newConnectionInfo;
+        }
+
+        private ConnectionInfo GetAppropriateInstanceOfConnectionInfo()
+        {
+            ConnectionInfo newConnectionInfo = default(ConnectionInfo);
+            if (this.ConnectionInfo == null)
+                newConnectionInfo = new ConnectionInfo();
+            else
+                newConnectionInfo = this.ConnectionInfo.Copy();
+            return newConnectionInfo;
+        }
+
+        private void SetConnectionInfoFields(ConnectionInfo newConnectionInfo)
+        {
+            newConnectionInfo.Protocol = ProtocolType.IntApp;
+            newConnectionInfo.ExtApp = DisplayName;
+            newConnectionInfo.Name = DisplayName;
+            newConnectionInfo.Panel = My.Language.strMenuExternalTools;
+        }
 	}
 }

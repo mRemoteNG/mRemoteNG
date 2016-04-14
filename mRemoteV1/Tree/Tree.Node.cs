@@ -1,8 +1,8 @@
-using Microsoft.VisualBasic;
 using mRemoteNG.App;
-using System;
-using System.Collections.Generic;
 using mRemoteNG.Connection;
+using mRemoteNG.Container;
+using mRemoteNG.Images;
+using System;
 using System.Windows.Forms;
 
 
@@ -10,71 +10,27 @@ namespace mRemoteNG.Tree
 {
 	public class Node
     {
-        #region Enums
-        public enum Type
-		{
-			None = 0,
-			Root = 1,
-			Container = 2,
-			Connection = 3,
-			PuttyRoot = 4,
-			PuttySession = 5
-		}
-        #endregion
-
-        #region Private Variables
-        private static TreeNode SetNodeToolTip_old_node = null;
-        private static TreeNode treeNodeToBeSelected;
-        #endregion
-
-        #region Public Properties
-        private static TreeView _TreeView;
-        public static TreeView TreeView
-		{
-			get { return _TreeView; }
-			set { _TreeView = value; }
-		}
-			
-        public static TreeNode SelectedNode
-		{
-			get { return _TreeView.SelectedNode; }
-			set
-			{
-				treeNodeToBeSelected = value;
-				SelectNode();
-			}
-		}
-        #endregion
-
         #region Public Methods
 		public static string GetConstantID(TreeNode node)
 		{
-			if (GetNodeType(node) == Type.Connection)
-			{
-				return (node.Tag as ConnectionRecord).MetaData.ConstantID;
-			}
-			else if (GetNodeType(node) == Type.Container)
-			{
-				return (node.Tag as mRemoteNG.Container.Info).ConnectionRecord.MetaData.ConstantID;
-			}
+			if (GetNodeType(node) == TreeNodeType.Connection)
+				return (node.Tag as mRemoteNG.Connection.ConnectionInfo).ConstantID;
+			else if (GetNodeType(node) == TreeNodeType.Container)
+				return (node.Tag as mRemoteNG.Container.ContainerInfo).ConnectionInfo.ConstantID;
 				
 			return null;
 		}
 		
 		public static TreeNode GetNodeFromPositionID(int id)
 		{
-			foreach (Connection.ConnectionRecord conI in Runtime.ConnectionList)
+			foreach (ConnectionInfo connection in Runtime.ConnectionList)
 			{
-				if (conI.MetaData.PositionID == id)
+				if (connection.PositionID == id)
 				{
-					if (conI.MetaData.IsContainer)
-					{
-						return (conI.Parent as Container.Info).TreeNode;
-					}
+					if (connection.IsContainer)
+						return (connection.Parent as ContainerInfo).TreeNode;
 					else
-					{
-						return conI.TreeNode;
-					}
+						return connection.TreeNode;
 				}
 			}
 				
@@ -83,79 +39,58 @@ namespace mRemoteNG.Tree
 		
 		public static TreeNode GetNodeFromConstantID(string id)
 		{
-            foreach (Connection.ConnectionRecord conI in Runtime.ConnectionList)
+            foreach (ConnectionInfo connectionInfo in Runtime.ConnectionList)
 			{
-				if (conI.MetaData.ConstantID == id)
+				if (connectionInfo.ConstantID == id)
 				{
-					if (conI.MetaData.IsContainer)
-					{
-						return (conI.Parent as Container.Info).TreeNode;
-					}
+					if (connectionInfo.IsContainer)
+						return (connectionInfo.Parent as ContainerInfo).TreeNode;
 					else
-					{
-						return conI.TreeNode;
-					}
+						return connectionInfo.TreeNode;
 				}
 			}
 				
 			return null;
 		}
 		
-		public static Tree.Node.Type GetNodeType(TreeNode treeNode)
+		public static TreeNodeType GetNodeType(TreeNode treeNode)
 		{
 			try
 			{
-				if (treeNode == null)
-				{
-					return Type.None;
-				}
-					
-				if (treeNode.Tag == null)
-				{
-					return Type.None;
-				}
+                if (treeNode == null || treeNode.Tag == null)
+					return TreeNodeType.None;
 					
 				if (treeNode.Tag is Root.PuttySessions.Info)
-				{
-					return Type.PuttyRoot;
-				}
+					return TreeNodeType.PuttyRoot;
 				else if (treeNode.Tag is Root.Info)
-				{
-					return Type.Root;
-				}
-				else if (treeNode.Tag is Container.Info)
-				{
-					return Type.Container;
-				}
-				else if (treeNode.Tag is Connection.PuttySession.Info)
-				{
-					return Type.PuttySession;
-				}
-				else if (treeNode.Tag is Connection.ConnectionRecordImp)
-				{
-					return Type.Connection;
-				}
+					return TreeNodeType.Root;
+				else if (treeNode.Tag is ContainerInfo)
+					return TreeNodeType.Container;
+				else if (treeNode.Tag is PuttySessionInfo)
+					return TreeNodeType.PuttySession;
+				else if (treeNode.Tag is ConnectionInfo)
+					return TreeNodeType.Connection;
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t get node type" + Environment.NewLine + ex.Message, true);
 			}
 				
-			return Type.None;
+			return TreeNodeType.None;
 		}
 		
-		public static Tree.Node.Type GetNodeTypeFromString(string str)
+		public static TreeNodeType GetNodeTypeFromString(string str)
 		{
 			try
 			{
 				switch (str.ToLower())
 				{
 					case "root":
-						return Type.Root;
+						return TreeNodeType.Root;
 					case "container":
-						return Type.Container;
+						return TreeNodeType.Container;
 					case "connection":
-						return Type.Connection;
+						return TreeNodeType.Connection;
 				}
 			}
 			catch (Exception ex)
@@ -163,67 +98,7 @@ namespace mRemoteNG.Tree
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t get node type from string" + Environment.NewLine + ex.Message, true);
 			}
 				
-			return Type.None;
-		}
-		
-		public static TreeNode Find(TreeNode treeNode, string searchFor)
-		{
-			TreeNode tmpNode = default(TreeNode);
-				
-			try
-			{
-				if ((treeNode.Text.ToLower()).IndexOf(searchFor.ToLower()) + 1 > 0)
-				{
-					return treeNode;
-				}
-				else
-				{
-					foreach (TreeNode childNode in treeNode.Nodes)
-					{
-						tmpNode = Find(childNode, searchFor);
-						if (!(tmpNode == null))
-						{
-							return tmpNode;
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" + Environment.NewLine + ex.Message, true);
-			}
-				
-			return null;
-		}
-		
-		public static TreeNode Find(TreeNode treeNode, Connection.ConnectionRecordImp conInfo)
-		{
-			TreeNode tmpNode = default(TreeNode);
-				
-			try
-			{
-				if (treeNode.Tag == conInfo)
-				{
-					return treeNode;
-				}
-				else
-				{
-					foreach (TreeNode childNode in treeNode.Nodes)
-					{
-						tmpNode = Find(childNode, conInfo);
-						if (!(tmpNode == null))
-						{
-							return tmpNode;
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" + Environment.NewLine + ex.Message, true);
-			}
-				
-			return null;
+			return TreeNodeType.None;
 		}
 		
 		public static bool IsEmpty(TreeNode treeNode)
@@ -231,9 +106,7 @@ namespace mRemoteNG.Tree
 			try
 			{
 				if (treeNode.Nodes.Count <= 0)
-				{
 					return false;
-				}
 			}
 			catch (Exception ex)
 			{
@@ -243,7 +116,7 @@ namespace mRemoteNG.Tree
 			return true;
 		}
 		
-		public static TreeNode AddNode(Type nodeType, string name = null)
+		public static TreeNode AddNode(TreeNodeType nodeType, string name = null)
 		{
 			try
 			{
@@ -252,32 +125,28 @@ namespace mRemoteNG.Tree
 					
 				switch (nodeType)
 				{
-					case Type.Connection:
-					case Type.PuttySession:
+					case TreeNodeType.Connection:
+					case TreeNodeType.PuttySession:
 						defaultName = My.Language.strNewConnection;
-                        treeNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
-                        treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+                        treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
+                        treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
 						break;
-					case Type.Container:
+					case TreeNodeType.Container:
 						defaultName = My.Language.strNewFolder;
-                        treeNode.ImageIndex = (int)Images.Enums.TreeImage.Container;
-                        treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Container;
+                        treeNode.ImageIndex = (int)TreeImageType.Container;
+                        treeNode.SelectedImageIndex = (int)TreeImageType.Container;
 						break;
-					case Type.Root:
+					case TreeNodeType.Root:
 						defaultName = My.Language.strNewRoot;
-                        treeNode.ImageIndex = (int)Images.Enums.TreeImage.Root;
-                        treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Root;
+                        treeNode.ImageIndex = (int)TreeImageType.Root;
+                        treeNode.SelectedImageIndex = (int)TreeImageType.Root;
 						break;
 				}
 					
 				if (!string.IsNullOrEmpty(name))
-				{
 					treeNode.Name = name;
-				}
 				else
-				{
 					treeNode.Name = defaultName;
-				}
 				treeNode.Text = treeNode.Name;
 					
 				return treeNode;
@@ -294,337 +163,102 @@ namespace mRemoteNG.Tree
 		{
 			try
 			{
-				if (GetNodeType(oldTreeNode) == Type.Connection)
-				{
-					Connection.ConnectionRecordImp oldConnectionInfo = (Connection.ConnectionRecordImp) oldTreeNode.Tag;
-						
-					Connection.ConnectionRecordImp newConnectionInfo = oldConnectionInfo.Clone();
-					Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp newInheritance = oldConnectionInfo.Inherit.Copy();
-					newInheritance.Parent = newConnectionInfo;
-					newConnectionInfo.Inherit = newInheritance;
-
-                    Runtime.ConnectionList.Add(newConnectionInfo);
-						
-					TreeNode newTreeNode = new TreeNode(newConnectionInfo.Name);
-					newTreeNode.Tag = newConnectionInfo;
-                    newTreeNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
-                    newTreeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
-						
-					newConnectionInfo.TreeNode = newTreeNode;
-						
-					if (parentNode == null)
-					{
-						oldTreeNode.Parent.Nodes.Insert(oldTreeNode.Index + 1, newTreeNode);
-						TreeView.SelectedNode = newTreeNode;
-					}
-					else
-					{
-						Container.Info parentContainerInfo = parentNode.Tag as Container.Info;
-						if (parentContainerInfo != null)
-						{
-							newConnectionInfo.Parent = parentContainerInfo;
-						}
-						parentNode.Nodes.Add(newTreeNode);
-					}
-				}
-				else if (GetNodeType(oldTreeNode) == Type.Container)
-				{
-					Container.Info oldContainerInfo = (Container.Info) oldTreeNode.Tag;
-						
-					Container.Info newContainerInfo = oldContainerInfo.Copy();
-					Connection.ConnectionRecordImp newConnectionInfo = oldContainerInfo.ConnectionRecord.Clone();
-					newContainerInfo.ConnectionRecord = newConnectionInfo;
-						
-					TreeNode newTreeNode = new TreeNode(newContainerInfo.Name);
-					newTreeNode.Tag = newContainerInfo;
-                    newTreeNode.ImageIndex = (int)Images.Enums.TreeImage.Container;
-                    newTreeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Container;
-					newContainerInfo.ConnectionRecord.Parent = newContainerInfo;
-
-                    Runtime.ContainerList.Add(newContainerInfo);
-						
-					if (parentNode == null)
-					{
-						oldTreeNode.Parent.Nodes.Insert(oldTreeNode.Index + 1, newTreeNode);
-						TreeView.SelectedNode = newTreeNode;
-					}
-					else
-					{
-						parentNode.Nodes.Add(newTreeNode);
-					}
-						
-					foreach (TreeNode childTreeNode in oldTreeNode.Nodes)
-					{
-						CloneNode(childTreeNode, newTreeNode);
-					}
-						
-					newTreeNode.Expand();
-				}
+				if (GetNodeType(oldTreeNode) == TreeNodeType.Connection)
+                    CloneConnectionNode(oldTreeNode, parentNode);
+				else if (GetNodeType(oldTreeNode) == TreeNodeType.Container)
+                    CloneContainerNode(oldTreeNode, parentNode);
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, string.Format(My.Language.strErrorCloneNodeFailed, ex.Message));
 			}
 		}
+
+        private static void CloneContainerNode(TreeNode oldTreeNode, TreeNode parentNode)
+        {
+            ContainerInfo oldContainerInfo = (ContainerInfo) oldTreeNode.Tag;
+
+            ContainerInfo newContainerInfo = oldContainerInfo.Copy();
+            ConnectionInfo newConnectionInfo = oldContainerInfo.ConnectionInfo.Copy();
+            newContainerInfo.ConnectionInfo = newConnectionInfo;
+
+            TreeNode newTreeNode = new TreeNode(newContainerInfo.Name);
+            newTreeNode.Tag = newContainerInfo;
+            newTreeNode.ImageIndex = (int)TreeImageType.Container;
+            newTreeNode.SelectedImageIndex = (int)TreeImageType.Container;
+            newContainerInfo.ConnectionInfo.Parent = newContainerInfo;
+
+            Runtime.ContainerList.Add(newContainerInfo);
+
+            if (parentNode == null)
+            {
+                oldTreeNode.Parent.Nodes.Insert(oldTreeNode.Index + 1, newTreeNode);
+                ConnectionTree.SelectedNode = newTreeNode;
+            }
+            else
+            {
+                parentNode.Nodes.Add(newTreeNode);
+            }
+
+            foreach (TreeNode childTreeNode in oldTreeNode.Nodes)
+            {
+                CloneNode(childTreeNode, newTreeNode);
+            }
+
+            newTreeNode.Expand();
+        }
+
+        private static void CloneConnectionNode(TreeNode oldTreeNode, TreeNode parentNode)
+        {
+            ConnectionInfo oldConnectionInfo = (Connection.ConnectionInfo)oldTreeNode.Tag;
+
+            ConnectionInfo newConnectionInfo = oldConnectionInfo.Copy();
+            ConnectionInfoInheritance newInheritance = oldConnectionInfo.Inherit.Copy();
+            newInheritance.Parent = newConnectionInfo;
+            newConnectionInfo.Inherit = newInheritance;
+
+            Runtime.ConnectionList.Add(newConnectionInfo);
+
+            TreeNode newTreeNode = new TreeNode(newConnectionInfo.Name);
+            newTreeNode.Tag = newConnectionInfo;
+            newTreeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
+            newTreeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
+
+            newConnectionInfo.TreeNode = newTreeNode;
+
+            if (parentNode == null)
+            {
+                oldTreeNode.Parent.Nodes.Insert(oldTreeNode.Index + 1, newTreeNode);
+                ConnectionTree.SelectedNode = newTreeNode;
+            }
+            else
+            {
+                ContainerInfo parentContainerInfo = parentNode.Tag as Container.ContainerInfo;
+                if (parentContainerInfo != null)
+                {
+                    newConnectionInfo.Parent = parentContainerInfo;
+                }
+                parentNode.Nodes.Add(newTreeNode);
+            }
+        }
 		
-		public static void SetNodeImage(TreeNode treeNode, Images.Enums.TreeImage Img)
+		public static void SetNodeImage(TreeNode treeNode, TreeImageType Img)
 		{
 			SetNodeImageIndex(treeNode, (int)Img);
 		}
 		
-		public static void SetNodeToolTip(MouseEventArgs e, ToolTip tTip)
-		{
-			try
-			{
-				if (My.Settings.Default.ShowDescriptionTooltipsInTree)
-				{
-					//Find the node under the mouse.
-					TreeNode new_node = _TreeView.GetNodeAt(e.X, e.Y);
-					if (new_node.Equals(SetNodeToolTip_old_node))
-					{
-						return;
-					}
-					SetNodeToolTip_old_node = new_node;
-						
-					//See if we have a node.
-					if (SetNodeToolTip_old_node == null)
-					{
-						tTip.SetToolTip(_TreeView, "");
-					}
-					else
-					{
-						//Get this node's object data.
-						if (GetNodeType(SetNodeToolTip_old_node) == Type.Connection)
-						{
-							tTip.SetToolTip(_TreeView, (SetNodeToolTip_old_node.Tag as mRemoteNG.Connection.ConnectionRecordImp).Description);
-						}
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SetNodeToolTip failed" + Environment.NewLine + ex.Message, true);
-			}
-		}
-		
-		public static void DeleteSelectedNode()
-		{
-			try
-			{
-				if (SelectedNode == null)
-				{
-					return ;
-				}
-					
-				if (Tree.Node.GetNodeType(SelectedNode) == Type.Root)
-				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "The root item cannot be deleted!");
-				}
-				else if (Tree.Node.GetNodeType(SelectedNode) == Type.Container)
-				{
-					if (Tree.Node.IsEmpty(SelectedNode) == false)
-					{
-						if (Interaction.MsgBox(string.Format(My.Language.strConfirmDeleteNodeFolder, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle) (MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
-						{
-							SelectedNode.Remove();
-						}
-					}
-					else
-					{
-						if (Interaction.MsgBox(string.Format(My.Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle) (MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
-						{
-							foreach (TreeNode tNode in SelectedNode.Nodes)
-							{
-								tNode.Remove();
-							}
-							SelectedNode.Remove();
-						}
-					}
-				}
-				else if (Tree.Node.GetNodeType(SelectedNode) == Type.Connection)
-				{
-					if (Interaction.MsgBox(string.Format(My.Language.strConfirmDeleteNodeConnection, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle) (MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
-					{
-						SelectedNode.Remove();
-					}
-				}
-				else
-				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Tree item type is unknown so it cannot be deleted!");
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Deleting selected node failed" + Environment.NewLine + ex.Message, true);
-			}
-		}
-		
-		public static void StartRenameSelectedNode()
-		{
-			if (SelectedNode != null)
-			{
-				SelectedNode.BeginEdit();
-			}
-		}
-		
-		public static void FinishRenameSelectedNode(string newName)
-		{
-			if (newName == null)
-			{
-				return ;
-			}
-				
-			if (newName.Length > 0)
-			{
-				((Connection.ConnectionRecordImp)SelectedNode.Tag).Name = newName;
-					
-				if (My.Settings.Default.SetHostnameLikeDisplayName)
-				{
-					Connection.ConnectionRecordImp connectionInfo = SelectedNode.Tag as Connection.ConnectionRecordImp;
-					if (connectionInfo != null)
-					{
-						connectionInfo.Hostname = newName;
-					}
-				}
-			}
-		}
-		
-		public static void MoveNodeUp()
-		{
-			try
-			{
-				if (SelectedNode != null)
-				{
-					if (!(SelectedNode.PrevNode == null))
-					{
-						TreeView.BeginUpdate();
-						TreeView.Sorted = false;
+        public static void RenameNode(ConnectionInfo connectionInfo, string newName)
+        {
+            if (newName == null || newName.Length <= 0)
+                return;
 
-                        TreeNode newNode = (TreeNode)SelectedNode.Clone();
-						SelectedNode.Parent.Nodes.Insert(SelectedNode.Index - 1, newNode);
-						SelectedNode.Remove();
-						SelectedNode = newNode;
-							
-						TreeView.EndUpdate();
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeUp failed" + Environment.NewLine + ex.Message, true);
-			}
-		}
-		
-		public static void MoveNodeDown()
-		{
-			try
-			{
-				if (SelectedNode != null)
-				{
-					if (!(SelectedNode.NextNode == null))
-					{
-						TreeView.BeginUpdate();
-						TreeView.Sorted = false;
-							
-						TreeNode newNode = (TreeNode)SelectedNode.Clone();
-						SelectedNode.Parent.Nodes.Insert(SelectedNode.Index + 2, newNode);
-						SelectedNode.Remove();
-						SelectedNode = newNode;
-							
-						TreeView.EndUpdate();
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeDown failed" + Environment.NewLine + ex.Message, true);
-			}
-		}
-		
-		public static void ExpandAllNodes()
-		{
-			TreeView.BeginUpdate();
-			TreeView.ExpandAll();
-			TreeView.EndUpdate();
-		}
-		
-		public static void CollapseAllNodes()
-		{
-			TreeView.BeginUpdate();
-			foreach (TreeNode treeNode in TreeView.Nodes[0].Nodes)
-			{
-				treeNode.Collapse(false);
-			}
-			TreeView.EndUpdate();
-		}
-		
-		public static void Sort(TreeNode treeNode, System.Windows.Forms.SortOrder sorting)
-		{
-			if (TreeView == null)
-			{
-				return ;
-			}
-				
-			TreeView.BeginUpdate();
-				
-			if (treeNode == null)
-			{
-				if (TreeView.Nodes.Count > 0)
-				{
-					treeNode = TreeView.Nodes[0];
-				}
-				else
-				{
-					return ;
-				}
-			}
-			else if (GetNodeType(treeNode) == Type.Connection)
-			{
-				treeNode = treeNode.Parent;
-				if (treeNode == null)
-				{
-					return ;
-				}
-			}
-				
-			Sort(treeNode, new Tools.Controls.TreeNodeSorter(sorting));
-				
-			TreeView.EndUpdate();
-		}
-		
-		private delegate void ResetTreeDelegate();
-		public static void ResetTree()
-		{
-			if (TreeView.InvokeRequired)
-			{
-				ResetTreeDelegate resetTreeDelegate = new ResetTreeDelegate(ResetTree);
-				Runtime.Windows.treeForm.Invoke(resetTreeDelegate);
-			}
-			else
-			{
-				TreeView.BeginUpdate();
-				TreeView.Nodes.Clear();
-				TreeView.Nodes.Add(My.Language.strConnections);
-				TreeView.EndUpdate();
-			}
+            connectionInfo.Name = newName;
+            if (My.Settings.Default.SetHostnameLikeDisplayName)
+                connectionInfo.Hostname = newName;
         }
         #endregion
 
         #region Private Methods
-        private delegate void SelectNodeCB();
-        private static void SelectNode()
-        {
-            if (_TreeView.InvokeRequired == true)
-            {
-                SelectNodeCB d = new SelectNodeCB(SelectNode);
-                _TreeView.Invoke(d);
-            }
-            else
-            {
-                _TreeView.SelectedNode = treeNodeToBeSelected;
-            }
-        }
-
         private delegate void SetNodeImageIndexDelegate(TreeNode treeNode, int imageIndex);
         private static void SetNodeImageIndex(TreeNode treeNode, int imageIndex)
         {
@@ -640,43 +274,6 @@ namespace mRemoteNG.Tree
 
             treeNode.ImageIndex = imageIndex;
             treeNode.SelectedImageIndex = imageIndex;
-        }
-
-        // Adapted from http://www.codeproject.com/Tips/252234/ASP-NET-TreeView-Sort
-        private static void Sort(TreeNode treeNode, Tools.Controls.TreeNodeSorter nodeSorter)
-        {
-            foreach (TreeNode childNode in treeNode.Nodes)
-            {
-                Sort(childNode, nodeSorter);
-            }
-
-            try
-            {
-                ConnectionList<TreeNode> sortedNodes = new List<TreeNode>();
-                TreeNode currentNode = null;
-                while (treeNode.Nodes.Count > 0)
-                {
-                    foreach (TreeNode childNode in treeNode.Nodes)
-                    {
-                        if (currentNode == null || nodeSorter.Compare(childNode, currentNode) < 0)
-                        {
-                            currentNode = childNode;
-                        }
-                    }
-                    treeNode.Nodes.Remove(currentNode);
-                    sortedNodes.Add(currentNode);
-                    currentNode = null;
-                }
-
-                foreach (TreeNode childNode in sortedNodes)
-                {
-                    treeNode.Nodes.Add(childNode);
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" + Environment.NewLine + ex.Message, true);
-            }
         }
         #endregion
     }

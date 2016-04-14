@@ -10,6 +10,10 @@ using System.Collections;
 using System.Windows.Forms;
 using System.IO;
 using mRemoteNG.App;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Images;
+using mRemoteNG.Container;
+using mRemoteNG.Connection;
 
 
 namespace mRemoteNG.Config.Import
@@ -24,20 +28,20 @@ namespace mRemoteNG.Config.Import
 			TreeNode treeNode = new TreeNode(name);
 			parentTreeNode.Nodes.Add(treeNode);
 				
-			Connection.ConnectionRecordImp connectionInfo = new Connection.ConnectionRecordImp();
-			connectionInfo.Inherit = new Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp(connectionInfo);
+			ConnectionInfo connectionInfo = new ConnectionInfo();
+			connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo);
 			connectionInfo.Name = name;
 			connectionInfo.TreeNode = treeNode;
 				
-			if (treeNode.Parent.Tag is Container.Info)
+			if (treeNode.Parent.Tag is ContainerInfo)
 			{
-                connectionInfo.Parent = (Container.Info)treeNode.Parent.Tag;
+                connectionInfo.Parent = (ContainerInfo)treeNode.Parent.Tag;
 			}
 				
 			treeNode.Name = name;
 			treeNode.Tag = connectionInfo;
-			treeNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
-			treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+			treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
+			treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
 				
 			foreach (string line in lines)
 			{
@@ -56,12 +60,12 @@ namespace mRemoteNG.Config.Import
 			Runtime.ConnectionList.Add(connectionInfo);
 		}
 			
-		private static void SetConnectionInfoParameter(Connection.ConnectionRecordImp connectionInfo, string key, string value)
+		private static void SetConnectionInfoParameter(ConnectionInfo connectionInfo, string key, string value)
 		{
 			switch (key.ToLower())
 			{
 				case "full address":
-					Uri uri = new Uri("dummyscheme" + System.Uri.SchemeDelimiter + value);
+					Uri uri = new Uri("dummyscheme" + Uri.SchemeDelimiter + value);
 					if (!string.IsNullOrEmpty(uri.Host))
 					{
 						connectionInfo.Hostname = uri.Host;
@@ -72,7 +76,7 @@ namespace mRemoteNG.Config.Import
 					}
 					break;
 				case "server port":
-					connectionInfo.Port = System.Convert.ToInt32(value);
+					connectionInfo.Port = Convert.ToInt32(value);
 					break;
 				case "username":
 					connectionInfo.Username = value;
@@ -84,19 +88,19 @@ namespace mRemoteNG.Config.Import
 					switch (value)
 					{
 						case "8":
-							connectionInfo.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors256;
+							connectionInfo.Colors = ProtocolRDP.RDPColors.Colors256;
 							break;
 						case "15":
-							connectionInfo.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors15Bit;
+							connectionInfo.Colors = ProtocolRDP.RDPColors.Colors15Bit;
 							break;
 						case "16":
-							connectionInfo.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors16Bit;
+							connectionInfo.Colors = ProtocolRDP.RDPColors.Colors16Bit;
 							break;
 						case "24":
-							connectionInfo.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors24Bit;
+							connectionInfo.Colors = ProtocolRDP.RDPColors.Colors24Bit;
 							break;
 						case "32":
-							connectionInfo.Colors = Connection.Protocol.RDPConnectionProtocolImp.RDPColors.Colors32Bit;
+							connectionInfo.Colors = ProtocolRDP.RDPColors.Colors32Bit;
 							break;
 					}
 					break;
@@ -113,11 +117,11 @@ namespace mRemoteNG.Config.Import
 				case "screen mode id":
 					if (value == "2")
 					{
-						connectionInfo.Resolution = Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions.Fullscreen;
+						connectionInfo.Resolution = ProtocolRDP.RDPResolutions.Fullscreen;
 					}
 					else
 					{
-						connectionInfo.Resolution = Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions.FitToWindow;
+						connectionInfo.Resolution = ProtocolRDP.RDPResolutions.FitToWindow;
 					}
 					break;
 				case "connect to console":
@@ -210,13 +214,13 @@ namespace mRemoteNG.Config.Import
 					switch (value)
 					{
 						case "0":
-							connectionInfo.RedirectSound = Connection.Protocol.RDPConnectionProtocolImp.RDPSounds.BringToThisComputer;
+							connectionInfo.RedirectSound = ProtocolRDP.RDPSounds.BringToThisComputer;
 							break;
 						case "1":
-							connectionInfo.RedirectSound = Connection.Protocol.RDPConnectionProtocolImp.RDPSounds.LeaveAtRemoteComputer;
+							connectionInfo.RedirectSound = ProtocolRDP.RDPSounds.LeaveAtRemoteComputer;
 							break;
 						case "2":
-							connectionInfo.RedirectSound = Connection.Protocol.RDPConnectionProtocolImp.RDPSounds.DoNotPlay;
+							connectionInfo.RedirectSound = ProtocolRDP.RDPSounds.DoNotPlay;
 							break;
 					}
 					break;

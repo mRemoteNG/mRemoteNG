@@ -51,19 +51,19 @@ namespace mRemoteNG.Forms.OptionsPages
 		{
 			base.SaveSettings();
 				
-			chkWriteLogFile.Checked = System.Convert.ToBoolean(My.Settings.Default.WriteLogFile);
-			chkEncryptCompleteFile.Checked = System.Convert.ToBoolean(My.Settings.Default.EncryptCompleteConnectionsFile);
-			chkAutomaticallyGetSessionInfo.Checked = System.Convert.ToBoolean(My.Settings.Default.AutomaticallyGetSessionInfo);
-			chkAutomaticReconnect.Checked = System.Convert.ToBoolean(My.Settings.Default.ReconnectOnDisconnect);
-			numPuttyWaitTime.Value = System.Convert.ToDecimal(My.Settings.Default.MaxPuttyWaitTime);
+			chkWriteLogFile.Checked = My.Settings.Default.WriteLogFile;
+			chkEncryptCompleteFile.Checked = My.Settings.Default.EncryptCompleteConnectionsFile;
+			chkAutomaticallyGetSessionInfo.Checked = My.Settings.Default.AutomaticallyGetSessionInfo;
+			chkAutomaticReconnect.Checked = My.Settings.Default.ReconnectOnDisconnect;
+			numPuttyWaitTime.Value = My.Settings.Default.MaxPuttyWaitTime;
 				
 			chkUseCustomPuttyPath.Checked = My.Settings.Default.UseCustomPuttyPath;
             txtCustomPuttyPath.Text = My.Settings.Default.CustomPuttyPath;
 			SetPuttyLaunchButtonEnabled();
 				
-			numUVNCSCPort.Value = System.Convert.ToDecimal(My.Settings.Default.UVNCSCPort);
+			numUVNCSCPort.Value = My.Settings.Default.UVNCSCPort;
 				
-			txtXULrunnerPath.Text = System.Convert.ToString(My.Settings.Default.XULRunnerPath);
+			txtXULrunnerPath.Text = My.Settings.Default.XULRunnerPath;
 		}
 			
 		public override void SaveSettings()
@@ -94,7 +94,7 @@ namespace mRemoteNG.Forms.OptionsPages
 				}
 				else
 				{
-					PuttyBase.PuttyPath = App.Info.General.PuttyPath;
+					PuttyBase.PuttyPath = App.Info.GeneralAppInfo.PuttyPath;
 				}
 				Config.Putty.Sessions.AddSessionsToTree();
 			}
@@ -126,7 +126,7 @@ namespace mRemoteNG.Forms.OptionsPages
 			using (OpenFileDialog openFileDialog = new OpenFileDialog())
 			{
 				openFileDialog.Filter = string.Format("{0}|*.exe|{1}|*.*", Language.strFilterApplication, Language.strFilterAll);
-				openFileDialog.FileName = Path.GetFileName(App.Info.General.PuttyPath);
+				openFileDialog.FileName = Path.GetFileName(App.Info.GeneralAppInfo.PuttyPath);
 				openFileDialog.CheckFileExists = true;
 				openFileDialog.Multiselect = false;
 					
@@ -151,7 +151,7 @@ namespace mRemoteNG.Forms.OptionsPages
 				}
 				else
 				{
-					fileName = App.Info.General.PuttyPath;
+					fileName = App.Info.GeneralAppInfo.PuttyPath;
 				}
 				puttyProcess.Start(fileName);
 				puttyProcess.SetControlText("Button", "&Cancel", "&Close");
@@ -187,7 +187,7 @@ namespace mRemoteNG.Forms.OptionsPages
 			}
 			else
 			{
-				puttyPath = App.Info.General.PuttyPath;
+				puttyPath = App.Info.GeneralAppInfo.PuttyPath;
 			}
 				
 			bool exists = false;

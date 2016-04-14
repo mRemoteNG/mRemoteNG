@@ -9,6 +9,9 @@ using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.My;
+using mRemoteNG.Tree;
+using mRemoteNG.Images;
+using mRemoteNG.Connection;
 
 
 namespace mRemoteNG.Config.Putty
@@ -43,12 +46,12 @@ namespace mRemoteNG.Config.Putty
 		}
 			
 		public abstract string[] GetSessionNames(bool raw = false);
-		public abstract Connection.PuttySession.Info GetSession(string sessionName);
+		public abstract PuttySessionInfo GetSession(string sessionName);
 			
-		public virtual Connection.PuttySession.Info[] GetSessions()
+		public virtual PuttySessionInfo[] GetSessions()
 		{
-			List<Connection.PuttySession.Info> sessionList = new List<Connection.PuttySession.Info>();
-            Connection.PuttySession.Info sessionInfo = (Connection.PuttySession.Info)default(Connection.ConnectionRecordImp);
+			List<PuttySessionInfo> sessionList = new List<PuttySessionInfo>();
+            PuttySessionInfo sessionInfo = (PuttySessionInfo)default(ConnectionInfo);
 			foreach (string sessionName in GetSessionNames(true))
 			{
 				sessionInfo = GetSession(sessionName);
@@ -99,7 +102,7 @@ namespace mRemoteNG.Config.Putty
 		private delegate TreeNode  CreateRootTreeNodeDelegate();
 		protected virtual TreeNode CreateRootTreeNode()
 		{
-			TreeView treeView = Tree.Node.TreeView;
+            TreeView treeView = ConnectionTree.TreeView;
 			if (treeView == null)
 			{
 				return null;
@@ -115,8 +118,8 @@ namespace mRemoteNG.Config.Putty
 			newTreeNode.Name = _rootInfo.Name;
 			newTreeNode.Text = _rootInfo.Name;
 			newTreeNode.Tag = _rootInfo;
-			newTreeNode.ImageIndex = (int)Images.Enums.TreeImage.PuttySessions;
-			newTreeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.PuttySessions;
+			newTreeNode.ImageIndex = (int)TreeImageType.PuttySessions;
+			newTreeNode.SelectedImageIndex = (int)TreeImageType.PuttySessions;
 				
 			return newTreeNode;
 		}
@@ -125,22 +128,22 @@ namespace mRemoteNG.Config.Putty
 		{
 			Root.PuttySessions.Info newRootInfo = new Root.PuttySessions.Info();
 				
-			if (string.IsNullOrEmpty(System.Convert.ToString(My.Settings.Default.PuttySavedSessionsName)))
+			if (string.IsNullOrEmpty(Convert.ToString(My.Settings.Default.PuttySavedSessionsName)))
 			{
 				newRootInfo.Name = Language.strPuttySavedSessionsRootName;
 			}
 			else
 			{
-				newRootInfo.Name = System.Convert.ToString(My.Settings.Default.PuttySavedSessionsName);
+				newRootInfo.Name = Convert.ToString(My.Settings.Default.PuttySavedSessionsName);
 			}
 				
-			if (string.IsNullOrEmpty(System.Convert.ToString(My.Settings.Default.PuttySavedSessionsPanel)))
+			if (string.IsNullOrEmpty(Convert.ToString(My.Settings.Default.PuttySavedSessionsPanel)))
 			{
 				newRootInfo.Panel = Language.strGeneral;
 			}
 			else
 			{
-				newRootInfo.Panel = System.Convert.ToString(My.Settings.Default.PuttySavedSessionsPanel);
+				newRootInfo.Panel = Convert.ToString(My.Settings.Default.PuttySavedSessionsPanel);
 			}
 				
 			return newRootInfo;

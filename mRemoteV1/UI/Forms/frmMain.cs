@@ -13,41 +13,43 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using mRemoteNG.Tree;
+using mRemoteNG.Config.KeyboardShortcuts;
+using mRemoteNG.Messages;
+using mRemoteNG.Tools;
+using mRemoteNG.UI.Window;
+using mRemoteNG.Config.Settings;
+using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Controls;
 
 namespace mRemoteNG
 {
 	public partial class frmMain
     {
         #region Private Variables
-        // Static Variables
         private static clipboardchangeEventHandler clipboardchangeEvent;
-
-        // Instance Variables that are private-only
         private bool _inSizeMove = false;
         private bool _inMouseActivate = false;
         private IntPtr fpChainedWindowHandle;
         private int[] SysMenSubItems = new int[51];
-
-        // Instance Variables with public getters and setters
         private FormWindowState _previousWindowState;
         private bool _isClosing = false;
         private bool _usingSqlServer = false;
         private string _connectionsFileName = null;
         private bool _showFullPathInTitle;
-        private Connection.ConnectionRecordImp _selectedConnection = null;
-        public Tools.Misc.Fullscreen _fullscreen;
+        private ConnectionInfo _selectedConnection = null;
+        public MiscTools.Fullscreen _fullscreen;
         #endregion
 
         #region Constructors
         public frmMain()
 		{
-			_showFullPathInTitle = System.Convert.ToBoolean(Settings.Default.ShowCompleteConsPathInTitle);
+			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
 			//Added to support default instance behavour in C#. This should be removed at the earliest opportunity.
             if (defaultInstance == null)
-            {
                 defaultInstance = this;
-            }
 		}
         #endregion
 
@@ -81,22 +83,6 @@ namespace mRemoteNG
 		}
         #endregion
 
-        #region Events
-        public delegate void clipboardchangeEventHandler();
-		
-		public static event clipboardchangeEventHandler clipboardchange
-		{
-			add
-			{
-				clipboardchangeEvent = (clipboardchangeEventHandler) System.Delegate.Combine(clipboardchangeEvent, value);
-			}
-			remove
-			{
-				clipboardchangeEvent = (clipboardchangeEventHandler) System.Delegate.Remove(clipboardchangeEvent, value);
-			}
-		}
-        #endregion
-
         #region Properties
         public FormWindowState PreviousWindowState
         {
@@ -109,7 +95,7 @@ namespace mRemoteNG
 			get { return _isClosing; }
 		}
 		
-        public bool UsingSqlServer
+        public bool AreWeUsingSqlServerForSavingConnections
 		{
 			get { return _usingSqlServer; }
 			set
@@ -151,7 +137,7 @@ namespace mRemoteNG
 			}
 		}
 		
-        public Connection.ConnectionRecordImp SelectedConnection
+        public ConnectionInfo SelectedConnection
 		{
 			get { return _selectedConnection; }
 			set
@@ -165,7 +151,7 @@ namespace mRemoteNG
 			}
 		}
 
-        public Tools.Misc.Fullscreen Fullscreen
+        public MiscTools.Fullscreen Fullscreen
         {
             get { return _fullscreen; }
             set { _fullscreen = value; }
@@ -173,38 +159,41 @@ namespace mRemoteNG
         #endregion
 		
         #region Startup & Shutdown
-		public void frmMain_Load(object sender, System.EventArgs e)
+		public void frmMain_Load(object sender, EventArgs e)
 		{
             Runtime.MainForm = this;
+            
+            Startup.CreateLogger();
+            Startup.LogStartupData();
+
             //Runtime.Startup.CheckCompatibility();
-            Runtime.Startup.CreateLogger();
 			
 			// Create gui config load and save objects
-			Config.Settings.Load SettingsLoad = new Config.Settings.Load(this);
+			SettingsLoader settingsLoader = new SettingsLoader(this);
+			settingsLoader.LoadSettings();
 			
-			// Load GUI Configuration
-			SettingsLoad.LoadSettings();
-			
-			Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + System.Convert.ToString(DateTime.Now));
-            Runtime.Startup.ParseCommandLineArgs();
+			Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now));
+            Startup.ParseCommandLineArgs();
 			ApplyLanguage();
 			PopulateQuickConnectProtocolMenu();
 			ThemeManager.ThemeChanged += ApplyThemes;
 			ApplyThemes();
 			fpChainedWindowHandle = Native.SetClipboardViewer(this.Handle);
-            Runtime.MessageCollector = new Messages.Collector(Runtime.Windows.errorsForm);
-            Runtime.WindowList = new UI.Window.List();
-			Tools.IeBrowserEmulation.Register();
-            Runtime.Startup.GetConnectionIcons();
-            Runtime.Windows.treePanel.Focus();
-            Tree.Node.TreeView = Runtime.Windows.treeForm.tvConnections;
+            Runtime.MessageCollector = new MessageCollector(Windows.errorsForm);
+            Runtime.WindowList = new WindowList();
+            Startup.CreatePanels();
+            Startup.SetDefaultLayout();
+			IeBrowserEmulation.Register();
+            Startup.GetConnectionIcons();
+            Windows.treePanel.Focus();
+            ConnectionTree.TreeView = Windows.treeForm.tvConnections;
 
             if (My.Settings.Default.FirstStart && !My.Settings.Default.LoadConsFromCustomLocation && !System.IO.File.Exists(Runtime.GetStartupConnectionFileName()))
 			{
                 Runtime.NewConnections(Runtime.GetStartupConnectionFileName());
 			}
-			
-			//LoadCredentials()
+
+            //LoadCredentials()
             Runtime.LoadConnections();
             if (!Runtime.IsConnectionsFileLoaded)
 			{
@@ -214,21 +203,26 @@ namespace mRemoteNG
 			Config.Putty.Sessions.StartWatcher();
 			if (My.Settings.Default.StartupComponentsCheck)
 			{
-                Runtime.Windows.Show(UI.Window.Type.ComponentsCheck);
+                Windows.Show(WindowType.ComponentsCheck);
 			}
-			
-            #if PORTABLE
-			mMenInfoAnnouncements.Visible = false;
-			mMenToolsUpdate.Visible = false;
-			mMenInfoSep2.Visible = false;
-            #endif
 
-            Runtime.Startup.CreateSQLUpdateHandlerAndStartTimer();
+            ApplySpecialSettingsForPortableVersion();
+
+            Startup.CreateConnectionsProvider();
 			AddSysMenuItems();
 			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
 			this.Opacity = 1;
 			KeyboardShortcuts.RequestKeyNotifications(Handle);
 		}
+
+        private void ApplySpecialSettingsForPortableVersion()
+        {
+            #if PORTABLE
+            mMenInfoAnnouncements.Visible = false;
+            mMenToolsUpdate.Visible = false;
+            mMenInfoSep2.Visible = false;
+            #endif
+        }
 		
 		private void ApplyLanguage()
 		{
@@ -372,24 +366,21 @@ namespace mRemoteNG
 //									}
 		}
 								
-		public void frmMain_FormClosing(object sender, System.Windows.Forms.FormClosingEventArgs e)
+		public void frmMain_FormClosing(object sender, FormClosingEventArgs e)
 		{
             if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
 			{
-				UI.Window.Connection connectionWindow = default(UI.Window.Connection);
+				ConnectionWindow connectionWindow = default(ConnectionWindow);
 				int openConnections = 0;
-                foreach (UI.Window.Base window in Runtime.WindowList)
+                foreach (BaseWindow window in Runtime.WindowList)
 				{
-					connectionWindow = window as UI.Window.Connection;
+					connectionWindow = window as ConnectionWindow;
 					if (connectionWindow != null)
-					{
 						openConnections = openConnections + connectionWindow.TabController.TabPages.Count;
-					}
 				}
 
-                if (openConnections > 0 && (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmClose.All | (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmClose.Multiple & openConnections > 1) || My.Settings.Default.ConfirmCloseConnection == (int)ConfirmClose.Exit))
+                if (openConnections > 0 && (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All | (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & openConnections > 1) || My.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
 				{
-                    
 					DialogResult result = cTaskDialog.MessageBox(this, System.Windows.Forms.Application.ProductName, My.Language.strConfirmExitMainInstruction, "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, eSysIcons.Question);
 					if (cTaskDialog.VerificationChecked)
 					{
@@ -403,34 +394,34 @@ namespace mRemoteNG
 				}
 			}
 
-            Runtime.Shutdown.Cleanup();
+            Shutdown.Cleanup();
 									
 			_isClosing = true;
 
             if (Runtime.WindowList != null)
 			{
-                foreach (UI.Window.Base window in Runtime.WindowList)
+                foreach (BaseWindow window in Runtime.WindowList)
 				{
 					window.Close();
 				}
 			}
 
-            Runtime.Shutdown.StartUpdate();
+            Shutdown.StartUpdate();
 									
-			Debug.Print("[END] - " + System.Convert.ToString(DateTime.Now));
+			Debug.Print("[END] - " + Convert.ToString(DateTime.Now));
 		}
         #endregion
 								
         #region Timer
-		public void tmrAutoSave_Tick(System.Object sender, System.EventArgs e)
+		public void tmrAutoSave_Tick(Object sender, EventArgs e)
 		{
-            Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Doing AutoSave", true);
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Doing AutoSave", true);
 			Runtime.SaveConnections();
 		}
         #endregion
 		
         #region Ext Apps Toolbar
-		public void cMenToolbarShowText_Click(System.Object sender, System.EventArgs e)
+		public void cMenToolbarShowText_Click(Object sender, EventArgs e)
 		{
 			SwitchToolBarText(!cMenToolbarShowText.Checked);
 		}
@@ -475,13 +466,13 @@ namespace mRemoteNG
 			}
 		}
 								
-		private void tsExtAppEntry_Click(System.Object sender, System.EventArgs e)
+		private void tsExtAppEntry_Click(Object sender, EventArgs e)
 		{
             Tools.ExternalTool extA = (Tools.ExternalTool)((Control)sender).Tag;
-									
-			if (Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.Connection | Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.PuttySession)
+
+            if (Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection | Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
 			{
-				extA.Start((Connection.ConnectionRecordImp)Tree.Node.SelectedNode.Tag);
+                extA.Start((ConnectionInfo)ConnectionTree.SelectedNode.Tag);
 			}
 			else
 			{
@@ -500,13 +491,9 @@ namespace mRemoteNG
 				else
 				{
 					if (tItem.Image != null)
-					{
 						tItem.DisplayStyle = ToolStripItemDisplayStyle.Image;
-					}
 					else
-					{
 						tItem.DisplayStyle = ToolStripItemDisplayStyle.ImageAndText;
-					}
 				}
 			}
 									
@@ -518,7 +505,7 @@ namespace mRemoteNG
         #region File
 		public void mMenFile_DropDownOpening(System.Object sender, System.EventArgs e)
 		{
-			if (Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.Root)
+            if (Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Root)
 			{
 				mMenFileNewConnection.Enabled = true;
 				mMenFileNewFolder.Enabled = true;
@@ -529,7 +516,7 @@ namespace mRemoteNG
 				mMenFileRename.Text = My.Language.strMenuRenameFolder;
 				mMenFileDuplicate.Text = My.Language.strMenuDuplicate;
 			}
-			else if (Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.Container)
+            else if (Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Container)
 			{
 				mMenFileNewConnection.Enabled = true;
 				mMenFileNewFolder.Enabled = true;
@@ -540,7 +527,7 @@ namespace mRemoteNG
 				mMenFileRename.Text = My.Language.strMenuRenameFolder;
 				mMenFileDuplicate.Text = My.Language.strMenuDuplicateFolder;
 			}
-			else if (Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.Connection)
+            else if (Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection)
 			{
 				mMenFileNewConnection.Enabled = true;
 				mMenFileNewFolder.Enabled = true;
@@ -551,7 +538,7 @@ namespace mRemoteNG
 				mMenFileRename.Text = My.Language.strMenuRenameConnection;
 				mMenFileDuplicate.Text = My.Language.strMenuDuplicateConnection;
 			}
-			else if ((Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.PuttyRoot) || (Tree.Node.GetNodeType(Tree.Node.SelectedNode) == Tree.Node.Type.PuttySession))
+            else if ((Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttyRoot) || (Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession))
 			{
 				mMenFileNewConnection.Enabled = false;
 				mMenFileNewFolder.Enabled = false;
@@ -575,19 +562,19 @@ namespace mRemoteNG
 			}
 		}
 								
-		static public void mMenFileNewConnection_Click(System.Object sender, EventArgs e)
+		static public void mMenFileNewConnection_Click(Object sender, EventArgs e)
 		{
-			Runtime.Windows.treeForm.AddConnection();
+			Windows.treeForm.AddConnection();
             Runtime.SaveConnectionsBG();
 		}
 								
-		static public void mMenFileNewFolder_Click(System.Object sender, EventArgs e)
+		static public void mMenFileNewFolder_Click(Object sender, EventArgs e)
 		{
-            Runtime.Windows.treeForm.AddFolder();
+            Windows.treeForm.AddFolder();
             Runtime.SaveConnectionsBG();
 		}
 								
-		static public void mMenFileNew_Click(System.Object sender, EventArgs e)
+		static public void mMenFileNew_Click(Object sender, EventArgs e)
 		{
 			SaveFileDialog saveFileDialog = Tools.Controls.ConnectionsSaveAsDialog();
 			if (!(saveFileDialog.ShowDialog() == DialogResult.OK))
@@ -598,7 +585,7 @@ namespace mRemoteNG
             Runtime.NewConnections(saveFileDialog.FileName);
 		}
 								
-		static public void mMenFileLoad_Click(System.Object sender, EventArgs e)
+		static public void mMenFileLoad_Click(Object sender, EventArgs e)
 		{
             if (Runtime.IsConnectionsFileLoaded)
 			{
@@ -616,68 +603,68 @@ namespace mRemoteNG
             Runtime.LoadConnections(true);
 		}
 								
-		static public void mMenFileSave_Click(System.Object sender, EventArgs e)
+		static public void mMenFileSave_Click(Object sender, EventArgs e)
 		{
             Runtime.SaveConnections();
 		}
 								
-		static public void mMenFileSaveAs_Click(System.Object sender, EventArgs e)
+		static public void mMenFileSaveAs_Click(Object sender, EventArgs e)
 		{
             Runtime.SaveConnectionsAs();
 		}
 								
-		static public void mMenFileDelete_Click(System.Object sender, EventArgs e)
+		static public void mMenFileDelete_Click(Object sender, EventArgs e)
 		{
-			Tree.Node.DeleteSelectedNode();
+            ConnectionTree.DeleteSelectedNode();
             Runtime.SaveConnectionsBG();
 		}
 								
-		static public void mMenFileRename_Click(System.Object sender, EventArgs e)
+		static public void mMenFileRename_Click(Object sender, EventArgs e)
 		{
-			Tree.Node.StartRenameSelectedNode();
+			ConnectionTree.StartRenameSelectedNode();
             Runtime.SaveConnectionsBG();
 		}
 								
-		static public void mMenFileDuplicate_Click(System.Object sender, EventArgs e)
+		static public void mMenFileDuplicate_Click(Object sender, EventArgs e)
 		{
-			Tree.Node.CloneNode(Tree.Node.SelectedNode);
+            Tree.Node.CloneNode(ConnectionTree.SelectedNode);
             Runtime.SaveConnectionsBG();
 		}
 								
-		static public void mMenFileImportFromFile_Click(System.Object sender, EventArgs e)
+		static public void mMenFileImportFromFile_Click(Object sender, EventArgs e)
 		{
-            Import.ImportFromFile(Runtime.Windows.treeForm.tvConnections.Nodes[0], Runtime.Windows.treeForm.tvConnections.SelectedNode);
+            Import.ImportFromFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode);
 		}
 								
-		static public void mMenFileImportFromActiveDirectory_Click(System.Object sender, EventArgs e)
+		static public void mMenFileImportFromActiveDirectory_Click(Object sender, EventArgs e)
 		{
-            Runtime.Windows.Show(UI.Window.Type.ActiveDirectoryImport);
+            Windows.Show(UI.Window.WindowType.ActiveDirectoryImport);
 		}
 								
-		static public void mMenFileImportFromPortScan_Click(System.Object sender, EventArgs e)
+		static public void mMenFileImportFromPortScan_Click(Object sender, EventArgs e)
 		{
-            Runtime.Windows.Show(UI.Window.Type.PortScan, true);
+            Windows.Show(UI.Window.WindowType.PortScan, true);
 		}
 								
-		static public void mMenFileExport_Click(System.Object sender, EventArgs e)
+		static public void mMenFileExport_Click(Object sender, EventArgs e)
 		{
-            Export.ExportToFile(Runtime.Windows.treeForm.tvConnections.Nodes[0], Runtime.Windows.treeForm.tvConnections.SelectedNode);
+            Export.ExportToFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode);
 		}
 								
-		static public void mMenFileExit_Click(System.Object sender, EventArgs e)
+		static public void mMenFileExit_Click(Object sender, EventArgs e)
 		{
-            Runtime.Shutdown.Quit();
+            Shutdown.Quit();
 		}
         #endregion
 								
         #region View
-		public void mMenView_DropDownOpening(object sender, System.EventArgs e)
+		public void mMenView_DropDownOpening(object sender, EventArgs e)
 		{
-            this.mMenViewConnections.Checked = !Runtime.Windows.treeForm.IsHidden;
-            this.mMenViewConfig.Checked = !Runtime.Windows.configForm.IsHidden;
-            this.mMenViewErrorsAndInfos.Checked = !Runtime.Windows.errorsForm.IsHidden;
-            this.mMenViewSessions.Checked = !Runtime.Windows.sessionsForm.IsHidden;
-            this.mMenViewScreenshotManager.Checked = !Runtime.Windows.screenshotForm.IsHidden;
+            this.mMenViewConnections.Checked = !Windows.treeForm.IsHidden;
+            this.mMenViewConfig.Checked = !Windows.configForm.IsHidden;
+            this.mMenViewErrorsAndInfos.Checked = !Windows.errorsForm.IsHidden;
+            this.mMenViewSessions.Checked = !Windows.sessionsForm.IsHidden;
+            this.mMenViewScreenshotManager.Checked = !Windows.screenshotForm.IsHidden;
 									
 			this.mMenViewExtAppsToolbar.Checked = tsExternalTools.Visible;
 			this.mMenViewQuickConnectToolbar.Checked = tsQuickConnect.Visible;
@@ -692,135 +679,131 @@ namespace mRemoteNG
 			}
 									
 			if (this.mMenViewConnectionPanels.DropDownItems.Count > 0)
-			{
 				this.mMenViewConnectionPanels.Enabled = true;
-			}
 			else
-			{
 				this.mMenViewConnectionPanels.Enabled = false;
-			}
 		}
 								
-		private void ConnectionPanelMenuItem_Click(object sender, System.EventArgs e)
+		private void ConnectionPanelMenuItem_Click(object sender, EventArgs e)
 		{
-			(((System.Windows.Forms.Control)sender).Tag as UI.Window.Base).Show(this.pnlDock);
-            (((System.Windows.Forms.Control)sender).Tag as UI.Window.Base).Focus();
+			(((Control)sender).Tag as BaseWindow).Show(this.pnlDock);
+            (((Control)sender).Tag as BaseWindow).Focus();
 		}
 								
-		public void mMenViewSessions_Click(object sender, System.EventArgs e)
+		public void mMenViewSessions_Click(object sender, EventArgs e)
 		{
 			if (this.mMenViewSessions.Checked == false)
 			{
-                Runtime.Windows.sessionsPanel.Show(this.pnlDock);
+                Windows.sessionsPanel.Show(this.pnlDock);
 				this.mMenViewSessions.Checked = true;
 			}
 			else
 			{
-                Runtime.Windows.sessionsPanel.Hide();
+                Windows.sessionsPanel.Hide();
 				this.mMenViewSessions.Checked = false;
 			}
 		}
 								
-		public void mMenViewConnections_Click(System.Object sender, System.EventArgs e)
+		public void mMenViewConnections_Click(Object sender, EventArgs e)
 		{
 			if (this.mMenViewConnections.Checked == false)
 			{
-                Runtime.Windows.treePanel.Show(this.pnlDock);
+                Windows.treePanel.Show(this.pnlDock);
 				this.mMenViewConnections.Checked = true;
 			}
 			else
 			{
-                Runtime.Windows.treePanel.Hide();
+                Windows.treePanel.Hide();
 				this.mMenViewConnections.Checked = false;
 			}
 		}
 								
-		public void mMenViewConfig_Click(System.Object sender, System.EventArgs e)
+		public void mMenViewConfig_Click(Object sender, EventArgs e)
 		{
 			if (this.mMenViewConfig.Checked == false)
 			{
-                Runtime.Windows.configPanel.Show(this.pnlDock);
+                Windows.configPanel.Show(this.pnlDock);
 				this.mMenViewConfig.Checked = true;
 			}
 			else
 			{
-                Runtime.Windows.configPanel.Hide();
+                Windows.configPanel.Hide();
 				this.mMenViewConfig.Checked = false;
 			}
 		}
 								
-		public void mMenViewErrorsAndInfos_Click(System.Object sender, System.EventArgs e)
+		public void mMenViewErrorsAndInfos_Click(Object sender, EventArgs e)
 		{
 			if (this.mMenViewErrorsAndInfos.Checked == false)
 			{
-                Runtime.Windows.errorsPanel.Show(this.pnlDock);
+                Windows.errorsPanel.Show(this.pnlDock);
 				this.mMenViewErrorsAndInfos.Checked = true;
 			}
 			else
 			{
-                Runtime.Windows.errorsPanel.Hide();
+                Windows.errorsPanel.Hide();
 				this.mMenViewErrorsAndInfos.Checked = false;
 			}
 		}
 								
-		public void mMenViewScreenshotManager_Click(System.Object sender, System.EventArgs e)
+		public void mMenViewScreenshotManager_Click(Object sender, EventArgs e)
 		{
 			if (this.mMenViewScreenshotManager.Checked == false)
 			{
-                Runtime.Windows.screenshotPanel.Show(this.pnlDock);
+                Windows.screenshotPanel.Show(this.pnlDock);
 				this.mMenViewScreenshotManager.Checked = true;
 			}
 			else
 			{
-                Runtime.Windows.screenshotPanel.Hide();
+                Windows.screenshotPanel.Hide();
 				this.mMenViewScreenshotManager.Checked = false;
 			}
 		}
 								
-		public void mMenViewJumpToConnectionsConfig_Click(object sender, System.EventArgs e)
+		public void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e)
 		{
-            if (pnlDock.ActiveContent == Runtime.Windows.treePanel)
+            if (pnlDock.ActiveContent == Windows.treePanel)
 			{
-                Runtime.Windows.configForm.Activate();
+                Windows.configForm.Activate();
 			}
 			else
 			{
-                Runtime.Windows.treeForm.Activate();
+                Windows.treeForm.Activate();
 			}
 		}
 								
-		public void mMenViewJumpToSessionsScreenshots_Click(object sender, System.EventArgs e)
+		public void mMenViewJumpToSessionsScreenshots_Click(object sender, EventArgs e)
 		{
-            if (pnlDock.ActiveContent == Runtime.Windows.sessionsPanel)
+            if (pnlDock.ActiveContent == Windows.sessionsPanel)
 			{
-                Runtime.Windows.screenshotForm.Activate();
+                Windows.screenshotForm.Activate();
 			}
 			else
 			{
-                Runtime.Windows.sessionsForm.Activate();
+                Windows.sessionsForm.Activate();
 			}
 		}
 								
-		public void mMenViewJumpToErrorsInfos_Click(object sender, System.EventArgs e)
+		public void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e)
 		{
-            Runtime.Windows.errorsForm.Activate();
+            Windows.errorsForm.Activate();
 		}
 								
-		public void mMenViewResetLayout_Click(System.Object sender, System.EventArgs e)
+		public void mMenViewResetLayout_Click(Object sender, EventArgs e)
 		{
             DialogResult msgBoxResult = MessageBox.Show(Language.strConfirmResetLayout, "", MessageBoxButtons.YesNo);
             if (msgBoxResult == DialogResult.Yes)
 			{
-				App.Runtime.Startup.SetDefaultLayout();
+				Startup.SetDefaultLayout();
 			}
 		}
 								
-		public void mMenViewAddConnectionPanel_Click(System.Object sender, System.EventArgs e)
+		public void mMenViewAddConnectionPanel_Click(Object sender, EventArgs e)
 		{
             Runtime.AddPanel();
 		}
 								
-		public void mMenViewExtAppsToolbar_Click(System.Object sender, System.EventArgs e)
+		public void mMenViewExtAppsToolbar_Click(Object sender, EventArgs e)
 		{
 			if (mMenViewExtAppsToolbar.Checked == false)
 			{
@@ -834,7 +817,7 @@ namespace mRemoteNG
 			}
 		}
 								
-		public void mMenViewQuickConnectToolbar_Click(System.Object sender, System.EventArgs e)
+		public void mMenViewQuickConnectToolbar_Click(Object sender, EventArgs e)
 		{
 			if (mMenViewQuickConnectToolbar.Checked == false)
 			{
@@ -848,7 +831,7 @@ namespace mRemoteNG
 			}
 		}
 		
-		public void mMenViewFullscreen_Click(System.Object sender, System.EventArgs e)
+		public void mMenViewFullscreen_Click(Object sender, EventArgs e)
 		{
 			Fullscreen.Value = !Fullscreen.Value;
 			mMenViewFullscreen.Checked = Fullscreen.Value;
@@ -856,39 +839,39 @@ namespace mRemoteNG
         #endregion
 								
         #region Tools
-		public void mMenToolsUpdate_Click(System.Object sender, System.EventArgs e)
+		public void mMenToolsUpdate_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.Windows.Show(UI.Window.Type.Update);
+			Windows.Show(WindowType.Update);
 		}
 								
-		public void mMenToolsSSHTransfer_Click(System.Object sender, System.EventArgs e)
+		public void mMenToolsSSHTransfer_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.Windows.Show(UI.Window.Type.SSHTransfer);
+			Windows.Show(WindowType.SSHTransfer);
 		}
 								
-		public void mMenToolsUVNCSC_Click(System.Object sender, System.EventArgs e)
+		public void mMenToolsUVNCSC_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.Windows.Show(UI.Window.Type.UltraVNCSC);
+			Windows.Show(WindowType.UltraVNCSC);
 		}
 								
-		public void mMenToolsExternalApps_Click(System.Object sender, System.EventArgs e)
+		public void mMenToolsExternalApps_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.Windows.Show(UI.Window.Type.ExternalApps);
+			Windows.Show(WindowType.ExternalApps);
 		}
 								
-		public void mMenToolsPortScan_Click(System.Object sender, EventArgs e)
+		public void mMenToolsPortScan_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.Windows.Show(UI.Window.Type.PortScan, false);
+			Windows.Show(WindowType.PortScan, false);
 		}
 								
-		public void mMenToolsComponentsCheck_Click(System.Object sender, System.EventArgs e)
+		public void mMenToolsComponentsCheck_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.Windows.Show(UI.Window.Type.ComponentsCheck);
+			Windows.Show(WindowType.ComponentsCheck);
 		}
 								
-		public void mMenToolsOptions_Click(System.Object sender, System.EventArgs e)
+		public void mMenToolsOptions_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.Windows.Show(UI.Window.Type.Options);
+			Windows.Show(WindowType.Options);
 		}
         #endregion
 								
@@ -898,7 +881,7 @@ namespace mRemoteNG
 			try
 			{
 				mnuQuickConnectProtocol.Items.Clear();
-				foreach (FieldInfo fieldInfo in typeof(Connection.Protocol.Protocols).GetFields())
+				foreach (FieldInfo fieldInfo in typeof(ProtocolType).GetFields())
 				{
 					if (!(fieldInfo.Name == "value__" || fieldInfo.Name == "IntApp"))
 					{
@@ -906,7 +889,7 @@ namespace mRemoteNG
 						if (fieldInfo.Name == My.Settings.Default.QuickConnectProtocol)
 						{
 							menuItem.Checked = true;
-							btnQuickConnect.Text = System.Convert.ToString(My.Settings.Default.QuickConnectProtocol);
+							btnQuickConnect.Text = My.Settings.Default.QuickConnectProtocol;
 						}
 						mnuQuickConnectProtocol.Items.Add(menuItem);
 					}
@@ -914,16 +897,16 @@ namespace mRemoteNG
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionMessage("PopulateQuickConnectProtocolMenu() failed.", ex, Messages.MessageClass.ErrorMsg, true);
+                Runtime.MessageCollector.AddExceptionMessage("PopulateQuickConnectProtocolMenu() failed.", ex, MessageClass.ErrorMsg, true);
 			}
 		}
 								
-		public void lblQuickConnect_Click(System.Object sender, EventArgs e)
+		public void lblQuickConnect_Click(Object sender, EventArgs e)
 		{
 			cmbQuickConnect.Focus();
 		}
 								
-		public void cmbQuickConnect_ConnectRequested(object sender, Controls.QuickConnectComboBox.ConnectRequestedEventArgs e)
+		public void cmbQuickConnect_ConnectRequested(object sender, QuickConnectComboBox.ConnectRequestedEventArgs e)
 		{
 			btnQuickConnect_ButtonClick(sender, e);
 		}
@@ -932,27 +915,27 @@ namespace mRemoteNG
 		{
 			try
 			{
-				Connection.ConnectionRecordImp connectionInfo = Runtime.CreateQuickConnect(cmbQuickConnect.Text.Trim(), Connection.Protocol.ProtocolManagerImp.StringToProtocol(System.Convert.ToString(My.Settings.Default.QuickConnectProtocol)));
+				ConnectionInfo connectionInfo = Runtime.CreateQuickConnect(cmbQuickConnect.Text.Trim(), Connection.Protocol.Converter.StringToProtocol(My.Settings.Default.QuickConnectProtocol));
 				if (connectionInfo == null)
 				{
 					cmbQuickConnect.Focus();
 					return ;
 				}
 				cmbQuickConnect.Add(connectionInfo);
-				Runtime.OpenConnection(connectionInfo, Connection.ConnectionRecordImp.Force.DoNotJump);
+				Runtime.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage("btnQuickConnect_ButtonClick() failed.", ex, Messages.MessageClass.ErrorMsg, true);
+				Runtime.MessageCollector.AddExceptionMessage("btnQuickConnect_ButtonClick() failed.", ex, MessageClass.ErrorMsg, true);
 			}
 		}
 		
-		public void cmbQuickConnect_ProtocolChanged(object sender, Controls.QuickConnectComboBox.ProtocolChangedEventArgs e)
+		public void cmbQuickConnect_ProtocolChanged(object sender, QuickConnectComboBox.ProtocolChangedEventArgs e)
 		{
-			SetQuickConnectProtocol(Connection.Protocol.ProtocolManagerImp.ProtocolToString(e.Protocol));
+			SetQuickConnectProtocol(Connection.Protocol.Converter.ProtocolToString(e.Protocol));
 		}
 	    
-		public void btnQuickConnect_DropDownItemClicked(System.Object sender, System.Windows.Forms.ToolStripItemClickedEventArgs e)
+		public void btnQuickConnect_DropDownItemClicked(Object sender, ToolStripItemClickedEventArgs e)
 		{
 			SetQuickConnectProtocol(e.ClickedItem.Text);
 		}
@@ -964,51 +947,47 @@ namespace mRemoteNG
 			foreach (ToolStripMenuItem menuItem in mnuQuickConnectProtocol.Items)
 			{
 				if (menuItem.Text == protocol)
-				{
 					menuItem.Checked = true;
-				}
 				else
-				{
 					menuItem.Checked = false;
-				}
 			}
 		}
         #endregion
 								
         #region Info
-		public void mMenInfoHelp_Click(System.Object sender, System.EventArgs e)
+		public void mMenInfoHelp_Click(Object sender, EventArgs e)
 		{
-			Runtime.Windows.Show(UI.Window.Type.Help);
+			Windows.Show(WindowType.Help);
 		}
 								
-		public void mMenInfoForum_Click(System.Object sender, System.EventArgs e)
+		public void mMenInfoForum_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.GoToForum();
+			Runtime.GoToForum();
 		}
 								
-		public void mMenInfoBugReport_Click(System.Object sender, System.EventArgs e)
+		public void mMenInfoBugReport_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.GoToBugs();
+			Runtime.GoToBugs();
 		}
 								
-		public void mMenInfoWebsite_Click(System.Object sender, System.EventArgs e)
+		public void mMenInfoWebsite_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.GoToWebsite();
+			Runtime.GoToWebsite();
 		}
 								
-		public void mMenInfoDonate_Click(System.Object sender, System.EventArgs e)
+		public void mMenInfoDonate_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.GoToDonate();
+			Runtime.GoToDonate();
 		}
 								
-		public void mMenInfoAnnouncements_Click(System.Object sender, System.EventArgs e)
+		public void mMenInfoAnnouncements_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.Windows.Show(UI.Window.Type.Announcement);
+			Windows.Show(WindowType.Announcement);
 		}
 								
-		public void mMenInfoAbout_Click(System.Object sender, System.EventArgs e)
+		public void mMenInfoAbout_Click(Object sender, EventArgs e)
 		{
-			App.Runtime.Windows.Show(UI.Window.Type.About);
+			Windows.Show(WindowType.About);
 		}
         #endregion
         #endregion
@@ -1017,7 +996,7 @@ namespace mRemoteNG
 		public void btnConnections_DropDownOpening(object sender, EventArgs e)
 		{
 			btnConnections.DropDownItems.Clear();	
-			foreach (TreeNode treeNode in Runtime.Windows.treeForm.tvConnections.Nodes)
+			foreach (TreeNode treeNode in Windows.treeForm.tvConnections.Nodes)
 			{
 				AddNodeToMenu(treeNode.Nodes, btnConnections);
 			}
@@ -1033,7 +1012,7 @@ namespace mRemoteNG
 					menuItem.Text = treeNode.Text;
 					menuItem.Tag = treeNode;
 											
-					if (Tree.Node.GetNodeType(treeNode) == Tree.Node.Type.Container)
+					if (Tree.Node.GetNodeType(treeNode) == TreeNodeType.Container)
 					{
 						menuItem.Image = My.Resources.Folder;
 						menuItem.Tag = treeNode.Tag;
@@ -1041,9 +1020,9 @@ namespace mRemoteNG
 						toolStripMenuItem.DropDownItems.Add(menuItem);
 						AddNodeToMenu(treeNode.Nodes, menuItem);
 					}
-					else if (Tree.Node.GetNodeType(treeNode) == Tree.Node.Type.Connection | Tree.Node.GetNodeType(treeNode) == Tree.Node.Type.PuttySession)
+					else if (Tree.Node.GetNodeType(treeNode) == TreeNodeType.Connection | Tree.Node.GetNodeType(treeNode) == TreeNodeType.PuttySession)
 					{
-						menuItem.Image = Runtime.Windows.treeForm.imgListTree.Images[treeNode.ImageIndex];
+						menuItem.Image = Windows.treeForm.imgListTree.Images[treeNode.ImageIndex];
 						menuItem.Tag = treeNode.Tag;
 												
 						toolStripMenuItem.DropDownItems.Add(menuItem);
@@ -1054,17 +1033,17 @@ namespace mRemoteNG
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex, Messages.MessageClass.ErrorMsg, true);
+				Runtime.MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex, MessageClass.ErrorMsg, true);
 			}
 		}
 								
-		private static void ConnectionsMenuItem_MouseUp(System.Object sender, System.Windows.Forms.MouseEventArgs e)
+		private static void ConnectionsMenuItem_MouseUp(Object sender, MouseEventArgs e)
 		{
 			if (e.Button == MouseButtons.Left)
 			{
-                if (((System.Windows.Forms.Control)sender).Tag is Connection.ConnectionRecordImp)
+                if (((Control)sender).Tag is ConnectionInfo)
 				{
-                    Runtime.OpenConnection((Connection.ConnectionRecordImp)((System.Windows.Forms.Control)sender).Tag);
+                    Runtime.OpenConnection((ConnectionInfo)((Control)sender).Tag);
 				}
 			}
 		}
@@ -1102,7 +1081,7 @@ namespace mRemoteNG
 			ActivateConnection();
 		}				
 		
-		protected override void WndProc(ref Message m)
+		protected override void WndProc(ref System.Windows.Forms.Message m)
 		{
             // Listen for and handle operating system messages
 			try
@@ -1130,8 +1109,8 @@ namespace mRemoteNG
 						{
 							// Simulate a mouse event since one wasn't generated by Windows
 							Point clientMousePosition = control.PointToClient(MousePosition);
-							System.Int32 temp_wLow = clientMousePosition.X;
-							System.Int32 temp_wHigh = clientMousePosition.Y;
+							Int32 temp_wLow = clientMousePosition.X;
+							Int32 temp_wHigh = clientMousePosition.Y;
                             Native.SendMessage(control.Handle, Native.WM_LBUTTONDOWN, Native.MK_LBUTTON, Native.MAKELPARAM(ref temp_wLow, ref temp_wHigh));
 							clientMousePosition.X = temp_wLow;
 							clientMousePosition.Y = temp_wHigh;
@@ -1162,7 +1141,7 @@ namespace mRemoteNG
 					{
 						if (SysMenSubItems[i] == m.WParam.ToInt32())
 						{
-							Runtime.Screens.SendFormToScreen(Screen.AllScreens[i]);
+							Screens.SendFormToScreen(Screen.AllScreens[i]);
 							break;
 						}
 					}
@@ -1207,15 +1186,15 @@ namespace mRemoteNG
         
 		private void ActivateConnection()
 		{
-			if (pnlDock.ActiveDocument is UI.Window.Connection)
+			if (pnlDock.ActiveDocument is ConnectionWindow)
 			{
-                UI.Window.Connection cW = pnlDock.ActiveDocument as UI.Window.Connection;
+                ConnectionWindow cW = pnlDock.ActiveDocument as ConnectionWindow;
 				if (cW.TabController.SelectedTab != null)
 				{
 					Crownwood.Magic.Controls.TabPage tab = cW.TabController.SelectedTab;
                     Connection.InterfaceControl ifc = (Connection.InterfaceControl)tab.Tag;
 					ifc.Protocol.Focus();
-					(ifc.FindForm() as UI.Window.Connection).RefreshIC();
+					(ifc.FindForm() as ConnectionWindow).RefreshIC();
 				}
 			}
 		}
@@ -1223,7 +1202,7 @@ namespace mRemoteNG
 		public void pnlDock_ActiveDocumentChanged(object sender, EventArgs e)
 		{
 			ActivateConnection();
-            UI.Window.Connection connectionWindow = pnlDock.ActiveDocument as UI.Window.Connection;
+            ConnectionWindow connectionWindow = pnlDock.ActiveDocument as ConnectionWindow;
 			if (connectionWindow != null)
 			{
 				connectionWindow.UpdateSelectedConnection();
@@ -1243,7 +1222,7 @@ namespace mRemoteNG
 									
 			if (Runtime.IsConnectionsFileLoaded)
 			{
-				if (UsingSqlServer)
+				if (AreWeUsingSqlServerForSavingConnections)
 				{
 					titleBuilder.Append(separator);
 					titleBuilder.Append(Language.strSQLServer.TrimEnd(':'));
@@ -1287,7 +1266,7 @@ namespace mRemoteNG
 				int nonConnectionPanelCount = 0;
 				foreach (DockContent document in pnlDock.Documents)
 				{
-					if ((closingDocument == null || document != closingDocument) && !(document is UI.Window.Connection))
+					if ((closingDocument == null || document != closingDocument) && !(document is ConnectionWindow))
 					{
 						nonConnectionPanelCount++;
 					}
@@ -1312,12 +1291,12 @@ namespace mRemoteNG
 		
 		private void SelectTabRelative(int relativeIndex)
 		{
-			if (!(pnlDock.ActiveDocument is UI.Window.Connection))
+			if (!(pnlDock.ActiveDocument is ConnectionWindow))
 			{
 				return ;
 			}
 
-            UI.Window.Connection connectionWindow = (UI.Window.Connection)pnlDock.ActiveDocument;
+            ConnectionWindow connectionWindow = (ConnectionWindow)pnlDock.ActiveDocument;
 			Crownwood.Magic.Controls.TabControl tabController = connectionWindow.TabController;
 									
 			int newIndex = tabController.SelectedIndex + relativeIndex;
@@ -1363,6 +1342,21 @@ namespace mRemoteNG
             Runtime.SystemMenu.InsertMenuItem(Runtime.SystemMenu.SystemMenuHandle, 0, Tools.SystemMenu.Flags.MF_POPUP | Tools.SystemMenu.Flags.MF_BYPOSITION, popMen, My.Language.strSendTo);
             Runtime.SystemMenu.InsertMenuItem(Runtime.SystemMenu.SystemMenuHandle, 1, Tools.SystemMenu.Flags.MF_BYPOSITION | Tools.SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, null);
 		}
+        #endregion
+
+        #region Events
+        public delegate void clipboardchangeEventHandler();
+        public static event clipboardchangeEventHandler clipboardchange
+        {
+            add
+            {
+                clipboardchangeEvent = (clipboardchangeEventHandler)System.Delegate.Combine(clipboardchangeEvent, value);
+            }
+            remove
+            {
+                clipboardchangeEvent = (clipboardchangeEventHandler)System.Delegate.Remove(clipboardchangeEvent, value);
+            }
+        }
         #endregion
 	}					
 }

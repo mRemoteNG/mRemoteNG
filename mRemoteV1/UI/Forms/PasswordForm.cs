@@ -7,18 +7,14 @@ namespace mRemoteNG.Forms
 {
     public partial class PasswordForm
 	{
+        private string _passwordName;
+        private bool _Verify = true;
+
         #region Public Properties
-		private bool _Verify = true;
         public bool Verify
 		{
-			get
-			{
-				return _Verify;
-			}
-			set
-			{
-				_Verify = value;
-			}
+			get { return _Verify; }
+			set { _Verify = value; }
 		}
 			
         public string Password
@@ -26,17 +22,13 @@ namespace mRemoteNG.Forms
 			get
 			{
 				if (Verify)
-				{
 					return txtVerify.Text;
-				}
 				else
-				{
 					return txtPassword.Text;
-				}
 			}
 		}
         #endregion
-				
+		
         #region Constructors
 		public PasswordForm(string passwordName = null, bool verify = true)
 		{
@@ -48,7 +40,7 @@ namespace mRemoteNG.Forms
 			this.Verify = verify;
 		}
         #endregion
-			
+		
         #region Event Handlers
 		public void frmPassword_Load(object sender, EventArgs e)
 		{
@@ -65,6 +57,7 @@ namespace mRemoteNG.Forms
 		public void btnCancel_Click(System.Object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.Cancel;
+            Close();
 		}
 			
 		public void btnOK_Click(System.Object sender, EventArgs e)
@@ -72,9 +65,7 @@ namespace mRemoteNG.Forms
 			if (Verify)
 			{
 				if (VerifyPassword())
-				{
 					DialogResult = DialogResult.OK;
-				}
 			}
 			else
 			{
@@ -87,11 +78,7 @@ namespace mRemoteNG.Forms
 			HideStatus();
 		}
         #endregion
-			
-        #region Private Fields
-		private string _passwordName;
-        #endregion
-			
+		
         #region Private Methods
 		private void ApplyLanguage()
 		{

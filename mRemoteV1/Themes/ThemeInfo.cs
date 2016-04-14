@@ -93,16 +93,6 @@ namespace mRemoteNG.Themes
 				
 			return true;
 		}
-
-        public override int GetHashCode()
-        {
-            int hash = 29;
-            foreach (System.Reflection.PropertyInfo propertyInfo in this.GetType().GetProperties())
-            {
-                hash = hash * 17 + System.Convert.ToInt32(propertyInfo.GetValue(this, null)).GetHashCode();
-            }
-            return hash;
-        }
         #endregion
 			
         #region Events

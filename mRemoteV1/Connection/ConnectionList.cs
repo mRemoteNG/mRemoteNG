@@ -7,50 +7,47 @@ namespace mRemoteNG.Connection
 	public class ConnectionList : CollectionBase
 	{
         #region Public Properties
-        public ConnectionRecordImp this[object Index]
+        public Connection.ConnectionInfo this[object Index]
 		{
 			get
 			{
-				if (Index is ConnectionRecordImp)
+				if (Index is Connection.ConnectionInfo)
 				{
-					return (ConnectionRecordImp)Index;
+					return (Connection.ConnectionInfo)Index;
 				}
 				else
 				{
-					return ((ConnectionRecordImp) (List[System.Convert.ToInt32(Index)]));
+					return ((Connection.ConnectionInfo) (List[System.Convert.ToInt32(Index)]));
 				}
 			}
 		}
 			
         public new int Count
 		{
-			get
-            { 
-                return List.Count; 
-            }
+			get { return List.Count; }
 		}
         #endregion
 			
         #region Public Methods
-        public ConnectionRecord Add(ConnectionRecord cInfo)
+		public Connection.ConnectionInfo Add(Connection.ConnectionInfo cInfo)
 		{
 			this.List.Add(cInfo);
 			return cInfo;
 		}
-
-        public void AddRange(ConnectionRecord[] cInfo)
+			
+		public void AddRange(Connection.ConnectionInfo[] cInfo)
 		{
-            foreach (ConnectionRecord cI in cInfo)
+			foreach (Connection.ConnectionInfo cI in cInfo)
 			{
 				List.Add(cI);
 			}
 		}
-
-        public ConnectionRecord FindByConstantID(string id)
+			
+		public Connection.ConnectionInfo FindByConstantID(string id)
 		{
-			foreach (ConnectionRecord conI in List)
+			foreach (Connection.ConnectionInfo conI in List)
 			{
-				if (conI.MetaData.ConstantID == id)
+				if (conI.ConstantID == id)
 				{
 					return conI;
 				}
@@ -58,12 +55,6 @@ namespace mRemoteNG.Connection
 				
 			return null;
 		}
-			
-		//Public Function Find(ByVal cInfo As Connection.Info)
-		//    For Each cI As Connection.Info In List
-			
-		//    Next
-		//End Function
 			
 		public Connection.ConnectionList Copy()
 		{

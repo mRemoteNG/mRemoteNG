@@ -1,18 +1,11 @@
-using System.Collections.Generic;
-using System;
-using AxWFICALib;
-using System.Drawing;
-using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
-using Microsoft.VisualBasic;
-using System.Collections;
-using System.Windows.Forms;
-using System.Management;
-using mRemoteNG.App;
-using mRemoteNG.Messages;
 using Microsoft.Win32;
+using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Messages;
+using System;
+using System.Collections.Generic;
+using System.Management;
 using System.Security.Principal;
 
 
@@ -20,6 +13,11 @@ namespace mRemoteNG.Config.Putty
 {
 	public class RegistryProvider : Provider
 	{
+        #region Private Fields
+        private const string PuttySessionsKey = "Software\\SimonTatham\\PuTTY\\Sessions";
+        private static ManagementEventWatcher _eventWatcher;
+        #endregion
+
         #region Public Methods
 		public override string[] GetSessionNames(bool raw = false)
 		{
@@ -60,7 +58,7 @@ namespace mRemoteNG.Config.Putty
 			return sessionNames.ToArray();
 		}
 			
-		public override Connection.PuttySession.Info GetSession(string sessionName)
+		public override PuttySessionInfo GetSession(string sessionName)
 		{
 			RegistryKey sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
 			if (sessionsKey == null)
@@ -76,7 +74,7 @@ namespace mRemoteNG.Config.Putty
 				
 			sessionName = System.Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"));
 				
-			Connection.PuttySession.Info sessionInfo = new Connection.PuttySession.Info();
+			PuttySessionInfo sessionInfo = new PuttySessionInfo();
 			sessionInfo.PuttySession = sessionName;
 			sessionInfo.Name = sessionName;
 			sessionInfo.Hostname = System.Convert.ToString(sessionKey.GetValue("HostName"));
@@ -89,10 +87,10 @@ namespace mRemoteNG.Config.Putty
 			switch (protocol.ToLowerInvariant())
 			{
 				case "raw":
-					sessionInfo.Protocol = Protocols.RAW;
+					sessionInfo.Protocol = ProtocolType.RAW;
 					break;
 				case "rlogin":
-					sessionInfo.Protocol = Protocols.Rlogin;
+					sessionInfo.Protocol = ProtocolType.Rlogin;
 					break;
 				case "serial":
 					return null;
@@ -103,20 +101,20 @@ namespace mRemoteNG.Config.Putty
 						int sshVersion = System.Convert.ToInt32(sshVersionObject);
 						if (sshVersion >= 2)
 						{
-							sessionInfo.Protocol = Protocols.SSH2;
+							sessionInfo.Protocol = ProtocolType.SSH2;
 						}
 						else
 						{
-							sessionInfo.Protocol = Protocols.SSH1;
+							sessionInfo.Protocol = ProtocolType.SSH1;
 						}
 					}
 					else
 					{
-						sessionInfo.Protocol = Protocols.SSH2;
+						sessionInfo.Protocol = ProtocolType.SSH2;
 					}
 					break;
 				case "telnet":
-					sessionInfo.Protocol = Protocols.Telnet;
+					sessionInfo.Protocol = ProtocolType.Telnet;
 					break;
 				default:
 					return null;
@@ -136,7 +134,7 @@ namespace mRemoteNG.Config.Putty
 			try
 			{
 				string currentUserSid = WindowsIdentity.GetCurrent().User.Value;
-				string key = System.Convert.ToString(string.Join("\\", new[] {currentUserSid, PuttySessionsKey}).Replace("\\", "\\\\"));
+				string key = Convert.ToString(string.Join("\\", new[] {currentUserSid, PuttySessionsKey}).Replace("\\", "\\\\"));
 				WqlEventQuery query = new WqlEventQuery(string.Format("SELECT * FROM RegistryTreeChangeEvent WHERE Hive = \'HKEY_USERS\' AND RootPath = \'{0}\'", key));
 				_eventWatcher = new ManagementEventWatcher(query);
 				_eventWatcher.EventArrived += OnManagementEventArrived;
@@ -159,12 +157,7 @@ namespace mRemoteNG.Config.Putty
 			_eventWatcher = null;
 		}
         #endregion
-			
-        #region Private Fields
-		private const string PuttySessionsKey = "Software\\SimonTatham\\PuTTY\\Sessions";
-		private static ManagementEventWatcher _eventWatcher;
-        #endregion
-			
+		
         #region Private Methods
 		private void OnManagementEventArrived(object sender, EventArrivedEventArgs e)
 		{

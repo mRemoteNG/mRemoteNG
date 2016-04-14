@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using mRemoteNG.Forms;
+using mRemoteNG.Config.Connections;
 
 
 namespace mRemoteNG.App
@@ -16,13 +17,13 @@ namespace mRemoteNG.App
 					
 				using (ExportForm exportForm = new ExportForm())
 				{
-					if (Tree.Node.GetNodeType(selectedTreeNode) == Tree.Node.Type.Container)
+					if (Tree.Node.GetNodeType(selectedTreeNode) == Tree.TreeNodeType.Container)
 					{
 						exportForm.SelectedFolder = selectedTreeNode;
 					}
-					else if (Tree.Node.GetNodeType(selectedTreeNode) == Tree.Node.Type.Connection)
+					else if (Tree.Node.GetNodeType(selectedTreeNode) == Tree.TreeNodeType.Connection)
 					{
-						if (Tree.Node.GetNodeType(selectedTreeNode.Parent) == Tree.Node.Type.Container)
+						if (Tree.Node.GetNodeType(selectedTreeNode.Parent) == Tree.TreeNodeType.Container)
 						{
 							exportForm.SelectedFolder = selectedTreeNode.Parent;
 						}
@@ -62,29 +63,25 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		private static void SaveExportFile(string fileName, mRemoteNG.Config.Connections.Save.Format saveFormat, TreeNode rootNode, Security.Save saveSecurity)
+		private static void SaveExportFile(string fileName, ConnectionsSaver.Format saveFormat, TreeNode rootNode, Security.Save saveSecurity)
 		{
 			bool previousTimerEnabled = false;
 				
 			try
 			{
-				if (Runtime.TimerSqlWatcher != null)
+                if (Runtime.SQLConnProvider != null)
 				{
-                    previousTimerEnabled = Runtime.TimerSqlWatcher.Enabled;
-                    Runtime.TimerSqlWatcher.Enabled = false;
+                    Runtime.SQLConnProvider.Disable();
 				}
 					
-				Config.Connections.Save connectionsSave = new Config.Connections.Save();
+				ConnectionsSaver connectionsSave = new ConnectionsSaver();
 				connectionsSave.Export = true;
 				connectionsSave.ConnectionFileName = fileName;
 				connectionsSave.SaveFormat = saveFormat;
-
                 connectionsSave.ConnectionList = Runtime.ConnectionList;
                 connectionsSave.ContainerList = Runtime.ContainerList;
 				connectionsSave.RootTreeNode = rootNode;
-					
 				connectionsSave.SaveSecurity = saveSecurity;
-					
 				connectionsSave.SaveConnections();
 			}
 			catch (Exception ex)
@@ -93,9 +90,9 @@ namespace mRemoteNG.App
 			}
 			finally
 			{
-                if (Runtime.TimerSqlWatcher != null)
+                if (Runtime.SQLConnProvider != null)
 				{
-                    Runtime.TimerSqlWatcher.Enabled = previousTimerEnabled;
+                    Runtime.SQLConnProvider.Enable();
 				}
 			}
 		}

@@ -1,70 +1,88 @@
-using System.Collections.Generic;
-using System;
-using System.Diagnostics;
-using Microsoft.VisualBasic;
-using System.Collections;
-using System.Windows.Forms;
-using System.Threading;
 using mRemoteNG.App;
-using System.Net.NetworkInformation;
+using mRemoteNG.Connection.Protocol.Http;
+using mRemoteNG.Connection.Protocol.SSH;
+using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.Telnet;
+using mRemoteNG.Connection.Protocol.Rlogin;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
+using System.Net.NetworkInformation;
+using System.Threading;
+using System.Windows.Forms;
 
 
 namespace mRemoteNG.Tools.PortScan
 {
 	public class ScanHost
-	{
+    {
+        #region Private Variables
+        private static int _SSHPort = (int)ProtocolSSH1.Defaults.Port;
+        private static int _TelnetPort = (int)ProtocolTelnet.Defaults.Port;
+        private static int _HTTPPort = (int)ProtocolHTTP.Defaults.Port;
+        private static int _HTTPSPort = (int)ProtocolHTTPS.Defaults.Port;
+        private static int _RloginPort = (int)ProtocolRlogin.Defaults.Port;
+        private static int _RDPPort = (int)ProtocolRDP.Defaults.Port;
+        private static int _VNCPort = (int)ProtocolVNC.Defaults.Port;
+        private string _hostName = "";
+        private string _hostIp;
+        private ArrayList _openPorts = new ArrayList();
+        private ArrayList _closedPorts;
+        private bool _RDP;
+        private bool _VNC;
+        private bool _SSH;
+        private bool _Telnet;
+        private bool _Rlogin;
+        private bool _HTTP;
+        private bool _HTTPS;
+        #endregion
+
         #region Properties
-		private static int _SSHPort = (int)Connection.Protocol.SSH1.Defaults.Port;
         public static int SSHPort
 		{
 			get { return _SSHPort; }
 			set { _SSHPort = value; }
 		}
 
-        private static int _TelnetPort = (int)Connection.Protocol.Telnet.Defaults.Port;
         public static int TelnetPort
 		{
 			get { return _TelnetPort; }
 			set { _TelnetPort = value; }
 		}
 
-        private static int _HTTPPort = (int)Connection.Protocol.HTTP.Defaults.Port;
         public static int HTTPPort
 		{
 			get { return _HTTPPort; }
 			set { _HTTPPort = value; }
 		}
 
-        private static int _HTTPSPort = (int)Connection.Protocol.HTTPS.Defaults.Port;
         public static int HTTPSPort
 		{
 			get { return _HTTPSPort; }
 			set { _HTTPSPort = value; }
 		}
 
-        private static int _RloginPort = (int)Connection.Protocol.Rlogin.Defaults.Port;
         public static int RloginPort
 		{
 			get { return _RloginPort; }
 			set { _RloginPort = value; }
 		}
 
-        private static int _RDPPort = (int)Connection.Protocol.RDPConnectionProtocolImp.Defaults.Port;
         public static int RDPPort
 		{
 			get { return _RDPPort; }
 			set { _RDPPort = value; }
 		}
 
-        private static int _VNCPort = (int)Connection.Protocol.VNC.Defaults.Port;
         public static int VNCPort
 		{
 			get { return _VNCPort; }
 			set { _VNCPort = value; }
 		}
-				
-		private string _hostName = "";
+
         public string HostName
 		{
 			get { return _hostName; }
@@ -82,71 +100,61 @@ namespace mRemoteNG.Tools.PortScan
 				return HostName.Split('.')[0];
 			}
 		}
-				
-		private string _hostIp;
+
         public string HostIp
 		{
 			get { return _hostIp; }
 			set { _hostIp = value; }
 		}
-				
-		private ArrayList _openPorts = new ArrayList();
+
         public ArrayList OpenPorts
 		{
 			get { return _openPorts; }
 			set { _openPorts = value; }
 		}
-				
-		private ArrayList _closedPorts;
+
         public ArrayList ClosedPorts
 		{
 			get { return _closedPorts; }
 			set { _closedPorts = value; }
 		}
-				
-		private bool _RDP;
+
         public bool RDP
 		{
 			get { return _RDP; }
 			set { _RDP = value; }
 		}
-				
-		private bool _VNC;
+
         public bool VNC
 		{
 			get { return _VNC; }
 			set { _VNC = value; }
 		}
-				
-		private bool _SSH;
+
         public bool SSH
 		{
 			get { return _SSH; }
 			set { _SSH = value; }
 		}
-				
-		private bool _Telnet;
+		
         public bool Telnet
 		{
 			get { return _Telnet; }
 			set { _Telnet = value; }
 		}
-				
-		private bool _Rlogin;
+
         public bool Rlogin
 		{
 			get { return _Rlogin; }
 			set { _Rlogin = value; }
 		}
-				
-		private bool _HTTP;
+
         public bool HTTP
 		{
 			get { return _HTTP; }
 			set { _HTTP = value; }
 		}
-				
-		private bool _HTTPS;
+
         public bool HTTPS
 		{
 			get { return _HTTPS; }

@@ -9,75 +9,78 @@ using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Container;
 
 
 namespace mRemoteNG.Config.Import
 {
 	public class PortScan
 	{
-		public static void Import(IEnumerable hosts, Connection.Protocol.Protocols protocol, TreeNode parentTreeNode)
+		public static void Import(IEnumerable hosts, ProtocolType protocol, TreeNode parentTreeNode)
 		{
 			foreach (Tools.PortScan.ScanHost host in hosts)
 			{
-				Connection.Protocol.Protocols finalProtocol = default(Connection.Protocol.Protocols);
+				ProtocolType finalProtocol = default(ProtocolType);
 				bool protocolValid = false;
 					
-				TreeNode treeNode = Tree.Node.AddNode(Tree.Node.Type.Connection, host.HostNameWithoutDomain);
+				TreeNode treeNode = Tree.Node.AddNode(Tree.TreeNodeType.Connection, host.HostNameWithoutDomain);
 					
-				Connection.ConnectionRecordImp connectionInfo = new Connection.ConnectionRecordImp();
-				connectionInfo.Inherit = new Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp(connectionInfo);
+				ConnectionInfo connectionInfo = new ConnectionInfo();
+				connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo);
 					
 				connectionInfo.Name = host.HostNameWithoutDomain;
 				connectionInfo.Hostname = host.HostName;
 					
 				switch (protocol)
 				{
-					case Connection.Protocol.Protocols.SSH2:
+					case ProtocolType.SSH2:
 						if (host.SSH)
 						{
-							finalProtocol = Connection.Protocol.Protocols.SSH2;
+							finalProtocol = ProtocolType.SSH2;
 							protocolValid = true;
 						}
 						break;
-					case Connection.Protocol.Protocols.Telnet:
+					case ProtocolType.Telnet:
 						if (host.Telnet)
 						{
-							finalProtocol = Connection.Protocol.Protocols.Telnet;
+							finalProtocol = ProtocolType.Telnet;
 							protocolValid = true;
 						}
 						break;
-					case Connection.Protocol.Protocols.HTTP:
+					case ProtocolType.HTTP:
 						if (host.HTTP)
 						{
-							finalProtocol = Connection.Protocol.Protocols.HTTP;
+							finalProtocol = ProtocolType.HTTP;
 							protocolValid = true;
 						}
 						break;
-					case Connection.Protocol.Protocols.HTTPS:
+					case ProtocolType.HTTPS:
 						if (host.HTTPS)
 						{
-							finalProtocol = Connection.Protocol.Protocols.HTTPS;
+							finalProtocol = ProtocolType.HTTPS;
 							protocolValid = true;
 						}
 						break;
-					case Connection.Protocol.Protocols.Rlogin:
+					case ProtocolType.Rlogin:
 						if (host.Rlogin)
 						{
-							finalProtocol = Connection.Protocol.Protocols.Rlogin;
+							finalProtocol = ProtocolType.Rlogin;
 							protocolValid = true;
 						}
 						break;
-					case Connection.Protocol.Protocols.RDP:
+					case ProtocolType.RDP:
 						if (host.RDP)
 						{
-							finalProtocol = Connection.Protocol.Protocols.RDP;
+							finalProtocol = ProtocolType.RDP;
 							protocolValid = true;
 						}
 						break;
-					case Connection.Protocol.Protocols.VNC:
+					case ProtocolType.VNC:
 						if (host.VNC)
 						{
-							finalProtocol = Connection.Protocol.Protocols.VNC;
+							finalProtocol = ProtocolType.VNC;
 							protocolValid = true;
 						}
 						break;
@@ -91,9 +94,9 @@ namespace mRemoteNG.Config.Import
 					treeNode.Tag = connectionInfo;
 					parentTreeNode.Nodes.Add(treeNode);
 						
-					if (parentTreeNode.Tag is Container.Info)
+					if (parentTreeNode.Tag is ContainerInfo)
 					{
-						connectionInfo.Parent = (Container.Info)parentTreeNode.Tag;
+						connectionInfo.Parent = (ContainerInfo)parentTreeNode.Tag;
 					}
 						
 					Runtime.ConnectionList.Add(connectionInfo);

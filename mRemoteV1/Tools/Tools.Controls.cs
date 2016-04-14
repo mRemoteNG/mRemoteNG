@@ -45,8 +45,7 @@ namespace mRemoteNG.Tools
 				return this._Text;
 			}
 		}
-			
-			
+		
 		public class NotificationAreaIcon
 		{
 			private NotifyIcon _nI;
@@ -130,7 +129,7 @@ namespace mRemoteNG.Tools
 				{
 					this._cMenCons.DropDownItems.Clear();
 						
-					foreach (TreeNode tNode in App.Runtime.Windows.treeForm.tvConnections.Nodes)
+					foreach (TreeNode tNode in App.Windows.treeForm.tvConnections.Nodes)
 					{
 						AddNodeToMenu(tNode.Nodes, this._cMenCons);
 					}
@@ -147,7 +146,7 @@ namespace mRemoteNG.Tools
 						tMenItem.Text = tNode.Text;
 						tMenItem.Tag = tNode;
 							
-						if (Tree.Node.GetNodeType(tNode) == Tree.Node.Type.Container)
+						if (Tree.Node.GetNodeType(tNode) == Tree.TreeNodeType.Container)
 						{
 							tMenItem.Image = My.Resources.Folder;
 							tMenItem.Tag = tNode.Tag;
@@ -155,9 +154,9 @@ namespace mRemoteNG.Tools
 							menToolStrip.DropDownItems.Add(tMenItem);
 							AddNodeToMenu(tNode.Nodes, tMenItem);
 						}
-						else if (Tree.Node.GetNodeType(tNode) == Tree.Node.Type.Connection | Tree.Node.GetNodeType(tNode) == Tree.Node.Type.PuttySession)
+						else if (Tree.Node.GetNodeType(tNode) == Tree.TreeNodeType.Connection | Tree.Node.GetNodeType(tNode) == Tree.TreeNodeType.PuttySession)
 						{
-							tMenItem.Image = Runtime.Windows.treeForm.imgListTree.Images[tNode.ImageIndex];
+							tMenItem.Image = Windows.treeForm.imgListTree.Images[tNode.ImageIndex];
 							tMenItem.Tag = tNode.Tag;
 								
 							menToolStrip.DropDownItems.Add(tMenItem);
@@ -206,59 +205,59 @@ namespace mRemoteNG.Tools
 			{
 				if (e.Button == MouseButtons.Left)
 				{
-					if (((System.Windows.Forms.Control)sender).Tag is Connection.ConnectionRecordImp)
+					if (((System.Windows.Forms.Control)sender).Tag is Connection.ConnectionInfo)
 					{
 						if (frmMain.Default.Visible == false)
 						{
 							ShowForm();
 						}
-                        App.Runtime.OpenConnection((mRemoteNG.Connection.ConnectionRecordImp)((System.Windows.Forms.Control)sender).Tag);
+                        App.Runtime.OpenConnection((mRemoteNG.Connection.ConnectionInfo)((System.Windows.Forms.Control)sender).Tag);
 					}
 				}
 			}
 				
 			private void cMenExit_Click(System.Object sender, System.EventArgs e)
 			{
-				App.Runtime.Shutdown.Quit();
+				Shutdown.Quit();
 			}
 		}
-			
+		
 		public static SaveFileDialog ConnectionsSaveAsDialog()
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
 			saveFileDialog.CheckPathExists = true;
-			saveFileDialog.InitialDirectory = App.Info.Connections.DefaultConnectionsPath;
-			saveFileDialog.FileName = App.Info.Connections.DefaultConnectionsFile;
+			saveFileDialog.InitialDirectory = App.Info.ConnectionsFileInfo.DefaultConnectionsPath;
+			saveFileDialog.FileName = App.Info.ConnectionsFileInfo.DefaultConnectionsFile;
 			saveFileDialog.OverwritePrompt = true;
 				
 			saveFileDialog.Filter = My.Language.strFiltermRemoteXML + "|*.xml|" + My.Language.strFilterAll + "|*.*";
 				
 			return saveFileDialog;
 		}
-			
+		
 		public static SaveFileDialog ConnectionsExportDialog()
 		{
 			SaveFileDialog saveFileDialog = new SaveFileDialog();
 			saveFileDialog.CheckPathExists = true;
-			saveFileDialog.InitialDirectory = App.Info.Connections.DefaultConnectionsPath;
-			saveFileDialog.FileName = App.Info.Connections.DefaultConnectionsFile;
+			saveFileDialog.InitialDirectory = App.Info.ConnectionsFileInfo.DefaultConnectionsPath;
+			saveFileDialog.FileName = App.Info.ConnectionsFileInfo.DefaultConnectionsFile;
 			saveFileDialog.OverwritePrompt = true;
 				
 			saveFileDialog.Filter = My.Language.strFiltermRemoteXML + "|*.xml|" + My.Language.strFiltermRemoteCSV + "|*.csv|" + My.Language.strFiltervRD2008CSV + "|*.csv|" + My.Language.strFilterAll + "|*.*";
 				
 			return saveFileDialog;
 		}
-			
+		
 		public static OpenFileDialog ConnectionsLoadDialog()
 		{
 			OpenFileDialog lDlg = new OpenFileDialog();
 			lDlg.CheckFileExists = true;
-			lDlg.InitialDirectory = App.Info.Connections.DefaultConnectionsPath;
+			lDlg.InitialDirectory = App.Info.ConnectionsFileInfo.DefaultConnectionsPath;
 			lDlg.Filter = My.Language.strFiltermRemoteXML + "|*.xml|" + My.Language.strFilterAll + "|*.*";
 				
 			return lDlg;
 		}
-			
+		
 		public static OpenFileDialog ImportConnectionsRdpFileDialog()
 		{
 			OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -267,33 +266,6 @@ namespace mRemoteNG.Tools
 			openFileDialog.Filter = string.Join("|", new[] {My.Language.strFilterRDP, "*.rdp", My.Language.strFilterAll, "*.*"});
 			openFileDialog.Multiselect = true;
 			return openFileDialog;
-		}
-			
-		public class TreeNodeSorter : IComparer
-		{
-				
-			public System.Windows.Forms.SortOrder Sorting {get; set;}
-				
-			public TreeNodeSorter(SortOrder sortOrder = System.Windows.Forms.SortOrder.None)
-			{
-				Sorting = sortOrder;
-			}
-				
-			public int Compare(object x, object y)
-			{
-				TreeNode tx = (TreeNode) x;
-				TreeNode ty = (TreeNode) y;
-					
-				switch (Sorting)
-				{
-					case SortOrder.Ascending:
-						return string.Compare(tx.Text, ty.Text);
-					case SortOrder.Descending:
-						return string.Compare(ty.Text, tx.Text);
-					default:
-						return 0;
-				}
-			}
 		}
 	}
 }

@@ -7,10 +7,9 @@ namespace mRemoteNG.Controls
 {
 	public class ListView : System.Windows.Forms.ListView
     {
-        #region Private Variables
-        private bool _ShowFocusCues;
-        private Alignment _LabelAlignment;
-        #endregion
+        Brush foreColorBrush = null;
+        Brush backColorBrush = null;
+        Pen borderPen = null;
 
         #region Public Properties
         [Category("Appearance"), DefaultValue(typeof(Color), "HighlightText")]
@@ -56,99 +55,130 @@ namespace mRemoteNG.Controls
         #region Protected Methods
 		protected override void OnDrawItem(DrawListViewItemEventArgs e)
 		{
-			if (!(View == View.Tile))
-			{
+            if (View != View.Tile || e.ItemIndex < 0)
 				base.OnDrawItem(e);
-			}
-			if (e.ItemIndex < 0)
-			{
-				base.OnDrawItem(e);
-			}
-				
-			Brush foreColorBrush = null;
-			Brush backColorBrush = null;
-			Pen borderPen = null;
-			try
-			{
-				if (Focused)
-				{
-					borderPen = new Pen(HighlightBorderColor);
-				}
-				else
-				{
-					borderPen = new Pen(InactiveHighlightBorderColor);
-				}
-					
-				if (e.Item.Selected)
-				{
-					if (Focused)
-					{
-						foreColorBrush = new SolidBrush(HighlightForeColor);
-						backColorBrush = new SolidBrush(HighlightBackColor);
-					}
-					else
-					{
-						foreColorBrush = new SolidBrush(InactiveHighlightForeColor);
-						backColorBrush = new SolidBrush(InactiveHighlightBackColor);
-					}
-				}
-				else
-				{
-					foreColorBrush = new SolidBrush(e.Item.ForeColor);
-					backColorBrush = new SolidBrush(BackColor);
-				}
-					
-				e.Graphics.FillRectangle(backColorBrush, e.Bounds);
-					
-				if (Focused && ShowFocusCues)
-				{
-					e.DrawFocusRectangle();
-				}
-				else if (e.Item.Selected)
-				{
-					e.Graphics.DrawRectangle(borderPen, e.Bounds.X, e.Bounds.Y, e.Bounds.Width - 1, e.Bounds.Height - 1);
-				}
-					
-				Rectangle imageBounds = new Rectangle(e.Bounds.X + 2, e.Bounds.Y + 6, 16, 16);
-				Rectangle textBounds = e.Bounds;
-					
-				if (e.Item.ImageList != null)
-				{
-					Image image = null;
-					if (!string.IsNullOrEmpty(e.Item.ImageKey) && e.Item.ImageList.Images.ContainsKey(e.Item.ImageKey))
-					{
-						image = e.Item.ImageList.Images[e.Item.ImageKey];
-					}
-					else if (!(e.Item.ImageIndex < 0) & e.Item.ImageList.Images.Count > e.Item.ImageIndex)
-					{
-						image = e.Item.ImageList.Images[e.Item.ImageIndex];
-					}
-					if (image != null)
-					{
-						e.Graphics.DrawImageUnscaledAndClipped(image, imageBounds);
-						textBounds.X = textBounds.Left + 20;
-						textBounds.Width = textBounds.Width - 20;
-					}
-				}
-					
-				e.Graphics.DrawString(e.Item.Text, e.Item.Font, foreColorBrush, textBounds, GetStringFormat());
-			}
-			finally
-			{
-				if (foreColorBrush != null)
-				{
-					foreColorBrush.Dispose();
-				}
-				if (backColorBrush != null)
-				{
-					backColorBrush.Dispose();
-				}
-				if (borderPen != null)
-				{
-					borderPen.Dispose();
-				}
-			}
+            else
+                CustomDraw(e);
 		}
+
+        private void CustomDraw(DrawListViewItemEventArgs e)
+        {
+            try
+            {
+                ResetBrushesAndPens();
+                BuildBorderPen();
+                BuildBrushes(e);
+                FillBackgroundColor(e);
+                DrawItemBorder(e);
+                DrawImageAndText(e);
+            }
+            finally
+            {
+                DisposeBrushesAndPens();
+            }
+        }
+
+        private void ResetBrushesAndPens()
+        {
+            foreColorBrush = null;
+            backColorBrush = null;
+            borderPen = null;
+        }
+
+        private void BuildBorderPen()
+        {
+            if (Focused)
+                borderPen = new Pen(HighlightBorderColor);
+            borderPen = new Pen(InactiveHighlightBorderColor);
+        }
+
+        private void BuildBrushes(DrawListViewItemEventArgs e)
+        {
+            if (e.Item.Selected)
+            {
+                if (Focused)
+                {
+                    foreColorBrush = new SolidBrush(HighlightForeColor);
+                    backColorBrush = new SolidBrush(HighlightBackColor);
+                }
+                else
+                {
+                    foreColorBrush = new SolidBrush(InactiveHighlightForeColor);
+                    backColorBrush = new SolidBrush(InactiveHighlightBackColor);
+                }
+            }
+            else
+            {
+                foreColorBrush = new SolidBrush(e.Item.ForeColor);
+                backColorBrush = new SolidBrush(BackColor);
+            }
+        }
+
+        private void FillBackgroundColor(DrawListViewItemEventArgs e)
+        {
+            e.Graphics.FillRectangle(backColorBrush, e.Bounds);
+        }
+
+        private void DrawImageAndText(DrawListViewItemEventArgs e)
+        {
+            Rectangle imageBounds = new Rectangle(e.Bounds.X + 2, e.Bounds.Y + 6, 16, 16);
+            Rectangle textBounds = e.Bounds;
+            if (e.Item.ImageList != null)
+            {
+                Image image = GetItemImage(e);
+                if (image != null)
+                {
+                    DrawImage(e, imageBounds, image);
+                    textBounds = UpdateTextBoundsToLeaveRoomForImage(textBounds);
+                }
+            }
+            DrawText(e, textBounds);
+        }
+
+        private static Image GetItemImage(DrawListViewItemEventArgs e)
+        {
+            Image image = null;
+            if (!string.IsNullOrEmpty(e.Item.ImageKey) && e.Item.ImageList.Images.ContainsKey(e.Item.ImageKey))
+                image = e.Item.ImageList.Images[e.Item.ImageKey];
+            else if (!(e.Item.ImageIndex < 0) & e.Item.ImageList.Images.Count > e.Item.ImageIndex)
+                image = e.Item.ImageList.Images[e.Item.ImageIndex];
+            return image;
+        }
+
+        private static void DrawImage(DrawListViewItemEventArgs e, Rectangle imageBounds, Image image)
+        {
+            e.Graphics.DrawImageUnscaledAndClipped(image, imageBounds);
+        }
+
+        private static Rectangle UpdateTextBoundsToLeaveRoomForImage(Rectangle textBounds)
+        {
+            textBounds.X = textBounds.Left + 20;
+            textBounds.Width = textBounds.Width - 20;
+            return textBounds;
+        }
+
+        private void DrawText(DrawListViewItemEventArgs e, Rectangle textBounds)
+        {
+            e.Graphics.DrawString(e.Item.Text, e.Item.Font, foreColorBrush, textBounds, GetStringFormat());
+        }
+
+        private void DrawItemBorder(DrawListViewItemEventArgs e)
+        {
+            if (Focused && ShowFocusCues)
+                e.DrawFocusRectangle();
+            else if (e.Item.Selected)
+                e.Graphics.DrawRectangle(borderPen, e.Bounds.X, e.Bounds.Y, e.Bounds.Width - 1, e.Bounds.Height - 1);
+        }
+
+        private void DisposeBrushesAndPens()
+        {
+            if (foreColorBrush != null)
+                foreColorBrush.Dispose();
+            if (backColorBrush != null)
+                backColorBrush.Dispose();
+            if (borderPen != null)
+                borderPen.Dispose();
+        }
         #endregion
 			
         #region Private Methods
@@ -182,19 +212,12 @@ namespace mRemoteNG.Controls
 			}
             
 			if (RightToLeft.ToString() != null)
-			{
-				format.FormatFlags = (System.Drawing.StringFormatFlags) (format.FormatFlags | StringFormatFlags.DirectionRightToLeft);
-			}
+				format.FormatFlags = (StringFormatFlags) (format.FormatFlags | StringFormatFlags.DirectionRightToLeft);
 				
 			if (LabelWrap)
-			{
-				format.FormatFlags = (System.Drawing.StringFormatFlags) (format.FormatFlags 
-					& ~StringFormatFlags.NoWrap);
-			}
+				format.FormatFlags = (StringFormatFlags) (format.FormatFlags & ~StringFormatFlags.NoWrap);
 			else
-			{
-				format.FormatFlags = (System.Drawing.StringFormatFlags) (format.FormatFlags | StringFormatFlags.NoWrap);
-			}
+				format.FormatFlags = (StringFormatFlags) (format.FormatFlags | StringFormatFlags.NoWrap);
 			
 			return format;
 		}
@@ -204,22 +227,17 @@ namespace mRemoteNG.Controls
 	[TypeConverter(typeof(ExpandableObjectConverter))]
     public class Alignment
     {
-        #region Private Properties
         [DefaultValue(VerticalAlignment.Top)]
         private VerticalAlignment _Vertical = VerticalAlignment.Top;
         [DefaultValue(HorizontalAlignment.Left)]
         private HorizontalAlignment _Horizontal = HorizontalAlignment.Left;
 
-        #endregion
 
-        #region Constructors
         public Alignment()
 		{
-			
 		}
-        #endregion
 
-        #region Public Properties
+
         public Alignment(VerticalAlignment verticalAlignment, HorizontalAlignment horizontalAlignment)
 		{
 			Vertical = verticalAlignment;
@@ -237,14 +255,11 @@ namespace mRemoteNG.Controls
 			get { return _Horizontal; }
 			set { _Horizontal = value; }
 		}
-        #endregion
 
-        #region Public Methods
         public override string ToString()
 		{
 			return string.Format("{0}, {1}", Vertical, Horizontal);
         }
-        #endregion
     }
 
     #region Enums

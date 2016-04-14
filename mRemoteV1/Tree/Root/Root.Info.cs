@@ -47,7 +47,7 @@ namespace mRemoteNG.Root
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
             Browsable(true),
             LocalizedAttributes.LocalizedDisplayName("strPasswordProtect"),
-            TypeConverter(typeof(Tools.Misc.YesNoTypeConverter))]
+            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool Password { get; set; }
 			
 		[Browsable(false)]

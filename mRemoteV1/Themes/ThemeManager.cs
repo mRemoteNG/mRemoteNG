@@ -43,7 +43,7 @@ namespace mRemoteNG.Themes
 			themes.Add(DefaultTheme);
 			try
 			{
-				themes.AddRange(ThemeSerializer.LoadFromXmlFile(Path.Combine(App.Info.Settings.SettingsPath, App.Info.Settings.ThemesFileName)));
+				themes.AddRange(ThemeSerializer.LoadFromXmlFile(Path.Combine(App.Info.SettingsFileInfo.SettingsPath, App.Info.SettingsFileInfo.ThemesFileName)));
 			}
 			catch (FileNotFoundException)
 			{
@@ -55,7 +55,7 @@ namespace mRemoteNG.Themes
 		public static void SaveThemes(List<ThemeInfo> themes)
 		{
 			themes.Remove(DefaultTheme);
-			ThemeSerializer.SaveToXmlFile(themes, Path.Combine(App.Info.Settings.SettingsPath, App.Info.Settings.ThemesFileName));
+			ThemeSerializer.SaveToXmlFile(themes, Path.Combine(App.Info.SettingsFileInfo.SettingsPath, App.Info.SettingsFileInfo.ThemesFileName));
 		}
 			
 		public static void SaveThemes(ThemeInfo[] themes)

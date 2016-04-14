@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.IO;
 using mRemoteNG.My;
 using PSTaskDialog;
+using mRemoteNG.Tree;
 
 
 namespace mRemoteNG.App
@@ -68,12 +69,12 @@ namespace mRemoteNG.App
 						}
 						catch (Exception ex)
 						{
-							cTaskDialog.ShowTaskDialogBox(System.Windows.Forms.Application.ProductName, Language.strImportFileFailedMainInstruction, string.Format(Language.strImportFileFailedContent, fileName), Tools.Misc.GetExceptionMessageRecursive(ex), "", "", "", "", eTaskDialogButtons.OK, eSysIcons.Error, eSysIcons.Error);
+							cTaskDialog.ShowTaskDialogBox(System.Windows.Forms.Application.ProductName, Language.strImportFileFailedMainInstruction, string.Format(Language.strImportFileFailedContent, fileName), Tools.MiscTools.GetExceptionMessageRecursive(ex), "", "", "", "", eTaskDialogButtons.OK, eSysIcons.Error, eSysIcons.Error);
 						}
 					}
 						
 					parentTreeNode.Expand();
-                    Container.Info parentContainer = (Container.Info)parentTreeNode.Tag;
+                    Container.ContainerInfo parentContainer = (Container.ContainerInfo)parentTreeNode.Tag;
 					if (parentContainer != null)
 					{
 						parentContainer.IsExpanded = true;
@@ -93,8 +94,8 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-				TreeNode rootTreeNode = Tree.Node.TreeView.Nodes[0];
-				TreeNode selectedTreeNode = Tree.Node.TreeView.SelectedNode;
+                TreeNode rootTreeNode = ConnectionTree.TreeView.Nodes[0];
+                TreeNode selectedTreeNode = ConnectionTree.TreeView.SelectedNode;
 					
 				TreeNode parentTreeNode = GetParentTreeNode(rootTreeNode, selectedTreeNode);
 				if (parentTreeNode == null)
@@ -105,7 +106,7 @@ namespace mRemoteNG.App
 				Config.Import.ActiveDirectory.Import(ldapPath, parentTreeNode);
 					
 				parentTreeNode.Expand();
-                Container.Info parentContainer = (Container.Info)parentTreeNode.Tag;
+                Container.ContainerInfo parentContainer = (Container.ContainerInfo)parentTreeNode.Tag;
 				if (parentContainer != null)
 				{
 					parentContainer.IsExpanded = true;
@@ -119,12 +120,12 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		public static void ImportFromPortScan(IEnumerable hosts, Connection.Protocol.Protocols protocol)
+		public static void ImportFromPortScan(IEnumerable hosts, Connection.Protocol.ProtocolType protocol)
 		{
 			try
 			{
-				TreeNode rootTreeNode = Tree.Node.TreeView.Nodes[0];
-				TreeNode selectedTreeNode = Tree.Node.TreeView.SelectedNode;
+                TreeNode rootTreeNode = ConnectionTree.TreeView.Nodes[0];
+                TreeNode selectedTreeNode = ConnectionTree.TreeView.SelectedNode;
 					
 				TreeNode parentTreeNode = GetParentTreeNode(rootTreeNode, selectedTreeNode);
 				if (parentTreeNode == null)
@@ -135,7 +136,7 @@ namespace mRemoteNG.App
 				Config.Import.PortScan.Import(hosts, protocol, parentTreeNode);
 					
 				parentTreeNode.Expand();
-                Container.Info parentContainer = (Container.Info)parentTreeNode.Tag;
+                Container.ContainerInfo parentContainer = (Container.ContainerInfo)parentTreeNode.Tag;
 				if (parentContainer != null)
 				{
 					parentContainer.IsExpanded = true;
@@ -189,11 +190,11 @@ namespace mRemoteNG.App
 			
 		private static TreeNode GetContainerTreeNode(TreeNode treeNode)
 		{
-			if ((Tree.Node.GetNodeType(treeNode) == Tree.Node.Type.Root) || (Tree.Node.GetNodeType(treeNode) == Tree.Node.Type.Container))
+			if ((Tree.Node.GetNodeType(treeNode) == Tree.TreeNodeType.Root) || (Tree.Node.GetNodeType(treeNode) == Tree.TreeNodeType.Container))
 			{
 				return treeNode;
 			}
-			else if (Tree.Node.GetNodeType(treeNode) == Tree.Node.Type.Connection)
+			else if (Tree.Node.GetNodeType(treeNode) == Tree.TreeNodeType.Connection)
 			{
 				return treeNode.Parent;
 			}

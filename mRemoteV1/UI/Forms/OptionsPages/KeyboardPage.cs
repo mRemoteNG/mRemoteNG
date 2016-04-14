@@ -2,27 +2,35 @@ using System;
 using System.Windows.Forms;
 using mRemoteNG.Config;
 using mRemoteNG.My;
+using mRemoteNG.Config.KeyboardShortcuts;
 
 
 namespace mRemoteNG.Forms.OptionsPages
 {
 	public partial class KeyboardPage
 	{
+        private KeyboardShortcutMap _keyboardShortcutMap;
+        private ListViewGroup _tabsListViewGroup;
+        private ListViewItem _previousTabListViewItem;
+        private ListViewItem _nextTabListViewItem;
+        private bool _ignoreKeyboardShortcutTextChanged = false;
+
+
 		public KeyboardPage()
 		{
 			InitializeComponent();
 		}
-            
+        
         public override string PageName
 		{
 			get { return Language.strOptionsTabKeyboard; }
 			set {}
 		}
-			
+		
 		public override void ApplyLanguage()
 		{
 			base.ApplyLanguage();
-				
+			
 			lblKeyboardShortcuts.Text = Language.strOptionsKeyboardLabelKeyboardShortcuts;
 			btnNewKeyboardShortcut.Text = Language.strOptionsKeyboardButtonNew;
 			btnDeleteKeyboardShortcut.Text = Language.strOptionsKeyboardButtonDelete;
@@ -30,42 +38,34 @@ namespace mRemoteNG.Forms.OptionsPages
 			grpModifyKeyboardShortcut.Text = Language.strOptionsKeyboardGroupModifyShortcut;
 			btnResetAllKeyboardShortcuts.Text = Language.strOptionsKeyboardButtonResetAll;
 		}
-			
+		
 		public override void LoadSettings()
 		{
 			_tabsListViewGroup = new ListViewGroup(Language.strOptionsKeyboardCommandsGroupTabs);
 			_previousTabListViewItem = new ListViewItem(Language.strOptionsKeyboardCommandsPreviousTab, _tabsListViewGroup);
 			_nextTabListViewItem = new ListViewItem(Language.strOptionsKeyboardCommandsNextTab, _tabsListViewGroup);
-				
-			_keyboardShortcutMap = (mRemoteNG.Config.KeyboardShortcutMap)KeyboardShortcuts.Map.Clone();
-				
+			
+			_keyboardShortcutMap = (KeyboardShortcutMap)KeyboardShortcuts.Map.Clone();
+			
 			lvKeyboardCommands.Groups.Add(_tabsListViewGroup);
 			lvKeyboardCommands.Items.Add(_previousTabListViewItem);
 			lvKeyboardCommands.Items.Add(_nextTabListViewItem);
 			_previousTabListViewItem.Selected = true;
 		}
-			
+		
 		public override void SaveSettings()
 		{
 			base.SaveSettings();
-				
+			
 			if (_keyboardShortcutMap != null)
 			{
 				KeyboardShortcuts.Map = _keyboardShortcutMap;
 			}
 		}
-			
-        #region Private Fields
-		private KeyboardShortcutMap _keyboardShortcutMap;
-		private ListViewGroup _tabsListViewGroup;
-		private ListViewItem _previousTabListViewItem;
-		private ListViewItem _nextTabListViewItem;
-		private bool _ignoreKeyboardShortcutTextChanged = false;
-        #endregion
-			
+		
         #region Private Methods
         #region Event Handlers
-		public void lvKeyboardCommands_SelectedIndexChanged(System.Object sender, EventArgs e)
+		public void lvKeyboardCommands_SelectedIndexChanged(Object sender, EventArgs e)
 		{
 			bool isItemSelected = lvKeyboardCommands.SelectedItems.Count == 1;
 			EnableKeyboardShortcutControls(isItemSelected);
@@ -88,7 +88,7 @@ namespace mRemoteNG.Forms.OptionsPages
 			}
 		}
 			
-		public void lstKeyboardShortcuts_SelectedIndexChanged(System.Object sender, EventArgs e)
+		public void lstKeyboardShortcuts_SelectedIndexChanged(Object sender, EventArgs e)
 		{
 			bool isItemSelected = lstKeyboardShortcuts.SelectedItems.Count == 1;
 				
@@ -119,7 +119,7 @@ namespace mRemoteNG.Forms.OptionsPages
 			_ignoreKeyboardShortcutTextChanged = false;
 		}
 			
-		public void btnNewKeyboardShortcut_Click(System.Object sender, EventArgs e)
+		public void btnNewKeyboardShortcut_Click(Object sender, EventArgs e)
 		{
 			foreach (object item in lstKeyboardShortcuts.Items)
 			{
@@ -139,7 +139,7 @@ namespace mRemoteNG.Forms.OptionsPages
 			hotModifyKeyboardShortcut.Focus();
 		}
 			
-		public void btnDeleteKeyboardShortcut_Click(System.Object sender, EventArgs e)
+		public void btnDeleteKeyboardShortcut_Click(Object sender, EventArgs e)
 		{
 			int selectedIndex = lstKeyboardShortcuts.SelectedIndex;
 				
@@ -159,13 +159,13 @@ namespace mRemoteNG.Forms.OptionsPages
 			lstKeyboardShortcuts.SelectedIndex = selectedIndex;
 		}
 			
-		public void btnResetAllKeyboardShortcuts_Click(System.Object sender, EventArgs e)
+		public void btnResetAllKeyboardShortcuts_Click(Object sender, EventArgs e)
 		{
-			_keyboardShortcutMap = (mRemoteNG.Config.KeyboardShortcutMap)KeyboardShortcuts.DefaultMap.Clone();
+			_keyboardShortcutMap = (KeyboardShortcutMap)KeyboardShortcuts.DefaultMap.Clone();
 			lvKeyboardCommands_SelectedIndexChanged(this, new EventArgs());
 		}
 			
-		public void btnResetKeyboardShortcuts_Click(System.Object sender, EventArgs e)
+		public void btnResetKeyboardShortcuts_Click(Object sender, EventArgs e)
 		{
 			ShortcutCommand command = (ShortcutCommand) (GetSelectedShortcutCommand());
 			if (command == ShortcutCommand.None)
@@ -176,7 +176,7 @@ namespace mRemoteNG.Forms.OptionsPages
 			lvKeyboardCommands_SelectedIndexChanged(this, new EventArgs());
 		}
 			
-		public void hotModifyKeyboardShortcut_TextChanged(System.Object sender, EventArgs e)
+		public void hotModifyKeyboardShortcut_TextChanged(Object sender, EventArgs e)
 		{
 			if (_ignoreKeyboardShortcutTextChanged || lstKeyboardShortcuts.SelectedIndex < 0 | lstKeyboardShortcuts.SelectedIndex >= lstKeyboardShortcuts.Items.Count)
 			{
@@ -209,14 +209,14 @@ namespace mRemoteNG.Forms.OptionsPages
 			}
 		}
         #endregion
-			
+		
 		private ShortcutCommand GetSelectedShortcutCommand()
 		{
 			if (!(lvKeyboardCommands.SelectedItems.Count == 1))
 			{
 				return ShortcutCommand.None;
 			}
-				
+			
 			ListViewItem selectedItem = lvKeyboardCommands.SelectedItems[0];
 			if (selectedItem == _previousTabListViewItem)
 			{
@@ -236,13 +236,11 @@ namespace mRemoteNG.Forms.OptionsPages
 			lstKeyboardShortcuts.Enabled = enable;
 			btnNewKeyboardShortcut.Enabled = enable;
 			btnResetKeyboardShortcuts.Enabled = enable;
-				
 			if (!enable)
 			{
 				btnDeleteKeyboardShortcut.Enabled = false;
 				grpModifyKeyboardShortcut.Enabled = false;
 				hotModifyKeyboardShortcut.Enabled = false;
-					
 				lstKeyboardShortcuts.Items.Clear();
 				hotModifyKeyboardShortcut.Text = string.Empty;
 			}

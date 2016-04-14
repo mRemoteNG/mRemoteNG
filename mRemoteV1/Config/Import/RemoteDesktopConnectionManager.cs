@@ -13,6 +13,10 @@ using System.IO;
 using System.Runtime.InteropServices;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Images;
+using mRemoteNG.Connection;
+using mRemoteNG.Container;
 
 
 namespace mRemoteNG.Config.Import
@@ -50,17 +54,17 @@ namespace mRemoteNG.Config.Import
 			TreeNode treeNode = new TreeNode(name);
 			parentTreeNode.Nodes.Add(treeNode);
 				
-			Container.Info containerInfo = new Container.Info();
+			Container.ContainerInfo containerInfo = new Container.ContainerInfo();
 			containerInfo.TreeNode = treeNode;
 			containerInfo.Name = name;
 				
-			Connection.ConnectionRecordImp connectionInfo = ConnectionInfoFromXml(propertiesNode);
+			Connection.ConnectionInfo connectionInfo = ConnectionInfoFromXml(propertiesNode);
 			connectionInfo.Parent = containerInfo;
 			connectionInfo.IsContainer = true;
-			containerInfo.ConnectionRecord = connectionInfo;
+			containerInfo.ConnectionInfo = connectionInfo;
 				
 			// We can only inherit from a container node, not the root node or connection nodes
-			if (Tree.Node.GetNodeType(parentTreeNode) == Tree.Node.Type.Container)
+			if (Tree.Node.GetNodeType(parentTreeNode) == Tree.TreeNodeType.Container)
 			{
 				containerInfo.Parent = parentTreeNode.Tag;
 			}
@@ -71,8 +75,8 @@ namespace mRemoteNG.Config.Import
 				
 			treeNode.Name = name;
 			treeNode.Tag = containerInfo;
-			treeNode.ImageIndex = (int)Images.Enums.TreeImage.Container;
-			treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.Container;
+			treeNode.ImageIndex = (int)TreeImageType.Container;
+			treeNode.SelectedImageIndex = (int)TreeImageType.Container;
 				
 			foreach (XmlNode childNode in xmlNode.SelectNodes("./group|./server"))
 			{
@@ -102,22 +106,22 @@ namespace mRemoteNG.Config.Import
 			TreeNode treeNode = new TreeNode(name);
 			parentTreeNode.Nodes.Add(treeNode);
 				
-			Connection.ConnectionRecordImp connectionInfo = ConnectionInfoFromXml(serverNode);
+			ConnectionInfo connectionInfo = ConnectionInfoFromXml(serverNode);
 			connectionInfo.TreeNode = treeNode;
-			connectionInfo.Parent = (Container.Info)parentTreeNode.Tag;
+			connectionInfo.Parent = (ContainerInfo)parentTreeNode.Tag;
 				
 			treeNode.Name = name;
 			treeNode.Tag = connectionInfo;
-			treeNode.ImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
-			treeNode.SelectedImageIndex = (int)Images.Enums.TreeImage.ConnectionClosed;
+			treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
+			treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
 				
 			Runtime.ConnectionList.Add(connectionInfo);
 		}
 
-        private static Connection.ConnectionRecordImp ConnectionInfoFromXml(XmlNode xmlNode)
+        private static ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
 		{
-			Connection.ConnectionRecordImp connectionInfo = new Connection.ConnectionRecordImp();
-			connectionInfo.Inherit = new Connection.ConnectionRecordImp.ConnectionRecordInheritanceImp(connectionInfo);
+			ConnectionInfo connectionInfo = new ConnectionInfo();
+			connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo);
 				
 			string name = xmlNode.SelectSingleNode("./name").InnerText;
 				
@@ -166,7 +170,7 @@ namespace mRemoteNG.Config.Import
 				connectionInfo.UseConsoleSession = bool.Parse(connectionSettingsNode.SelectSingleNode("./connectToConsole").InnerText);
 				// ./startProgram
 				// ./workingDir
-				connectionInfo.Port = System.Convert.ToInt32(connectionSettingsNode.SelectSingleNode("./port").InnerText);
+				connectionInfo.Port = Convert.ToInt32(connectionSettingsNode.SelectSingleNode("./port").InnerText);
 			}
 			else
 			{
@@ -179,11 +183,11 @@ namespace mRemoteNG.Config.Import
 			{
 				if (gatewaySettingsNode.SelectSingleNode("./enabled").InnerText == "True")
 				{
-					connectionInfo.RDGatewayUsageMethod = RDPConnectionProtocolImp.RDGatewayUsageMethod.Always;
+					connectionInfo.RDGatewayUsageMethod = ProtocolRDP.RDGatewayUsageMethod.Always;
 				}
 				else
 				{
-					connectionInfo.RDGatewayUsageMethod = RDPConnectionProtocolImp.RDGatewayUsageMethod.Never;
+					connectionInfo.RDGatewayUsageMethod = ProtocolRDP.RDGatewayUsageMethod.Never;
 				}
 					
 				connectionInfo.RDGatewayHostname = gatewaySettingsNode.SelectSingleNode("./hostName").InnerText;
@@ -216,28 +220,28 @@ namespace mRemoteNG.Config.Import
 			XmlNode remoteDesktopNode = xmlNode.SelectSingleNode("./remoteDesktop");
 			if (remoteDesktopNode.Attributes["inherit"].Value == "None")
 			{
-				string resolutionString = System.Convert.ToString(remoteDesktopNode.SelectSingleNode("./size").InnerText.Replace(" ", ""));
+				string resolutionString = Convert.ToString(remoteDesktopNode.SelectSingleNode("./size").InnerText.Replace(" ", ""));
 				try
 				{
-                    connectionInfo.Resolution = (Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions)Enum.Parse(typeof(Connection.Protocol.RDPConnectionProtocolImp.RDPResolutions), "Res" + resolutionString);
+                    connectionInfo.Resolution = (ProtocolRDP.RDPResolutions)Enum.Parse(typeof(ProtocolRDP.RDPResolutions), "Res" + resolutionString);
 				}
 				catch (ArgumentException)
 				{
-					connectionInfo.Resolution = RDPConnectionProtocolImp.RDPResolutions.FitToWindow;
+					connectionInfo.Resolution = ProtocolRDP.RDPResolutions.FitToWindow;
 				}
 					
 				if (remoteDesktopNode.SelectSingleNode("./sameSizeAsClientArea").InnerText == "True")
 				{
-					connectionInfo.Resolution = RDPConnectionProtocolImp.RDPResolutions.FitToWindow;
+					connectionInfo.Resolution = ProtocolRDP.RDPResolutions.FitToWindow;
 				}
 					
 				if (remoteDesktopNode.SelectSingleNode("./fullScreen").InnerText == "True")
 				{
-					connectionInfo.Resolution = RDPConnectionProtocolImp.RDPResolutions.Fullscreen;
+					connectionInfo.Resolution = ProtocolRDP.RDPResolutions.Fullscreen;
 				}
 
 
-                connectionInfo.Colors = (Connection.Protocol.RDPConnectionProtocolImp.RDPColors)Enum.Parse(typeof(Connection.Protocol.RDPConnectionProtocolImp.RDPColors), remoteDesktopNode.SelectSingleNode("./colorDepth").InnerText);
+                connectionInfo.Colors = (ProtocolRDP.RDPColors)Enum.Parse(typeof(ProtocolRDP.RDPColors), remoteDesktopNode.SelectSingleNode("./colorDepth").InnerText);
 			}
 			else
 			{
@@ -251,13 +255,13 @@ namespace mRemoteNG.Config.Import
 				switch (localResourcesNode.SelectSingleNode("./audioRedirection").InnerText)
 				{
 					case "0": // Bring to this computer
-						connectionInfo.RedirectSound = RDPConnectionProtocolImp.RDPSounds.BringToThisComputer;
+						connectionInfo.RedirectSound = ProtocolRDP.RDPSounds.BringToThisComputer;
 						break;
 					case "1": // Leave at remote computer
-						connectionInfo.RedirectSound = RDPConnectionProtocolImp.RDPSounds.LeaveAtRemoteComputer;
+						connectionInfo.RedirectSound = ProtocolRDP.RDPSounds.LeaveAtRemoteComputer;
 						break;
 					case "2": // Do not play
-						connectionInfo.RedirectSound = RDPConnectionProtocolImp.RDPSounds.DoNotPlay;
+						connectionInfo.RedirectSound = ProtocolRDP.RDPSounds.DoNotPlay;
 						break;
 				}
 					
@@ -299,13 +303,13 @@ namespace mRemoteNG.Config.Import
 				switch (securitySettingsNode.SelectSingleNode("./authentication").InnerText)
 				{
 					case "0": // No authentication
-						connectionInfo.RDPAuthenticationLevel = RDPConnectionProtocolImp.AuthenticationLevel.NoAuth;
+						connectionInfo.RDPAuthenticationLevel = ProtocolRDP.AuthenticationLevel.NoAuth;
 						break;
 					case "1": // Do not connect if authentication fails
-						connectionInfo.RDPAuthenticationLevel = RDPConnectionProtocolImp.AuthenticationLevel.AuthRequired;
+						connectionInfo.RDPAuthenticationLevel = ProtocolRDP.AuthenticationLevel.AuthRequired;
 						break;
 					case "2": // Warn if authentication fails
-						connectionInfo.RDPAuthenticationLevel = RDPConnectionProtocolImp.AuthenticationLevel.WarnOnFailedAuth;
+						connectionInfo.RDPAuthenticationLevel = ProtocolRDP.AuthenticationLevel.WarnOnFailedAuth;
 						break;
 				}
 			}

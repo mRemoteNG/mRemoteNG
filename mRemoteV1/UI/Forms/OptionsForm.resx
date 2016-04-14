@@ -195,6 +195,15 @@
   <data name="&gt;&gt;CancelButtonControl.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="PageListView.Alignment" type="System.Windows.Forms.ListViewAlignment, System.Windows.Forms">
+    <value>Left</value>
+  </data>
+  <data name="columnHeader1.Width" type="System.Int32, mscorlib">
+    <value>150</value>
+  </data>
+  <data name="PageListView.LabelWrap" type="System.Boolean, mscorlib">
+    <value>False</value>
+  </data>
   <data name="PageListView.Location" type="System.Drawing.Point, System.Drawing">
     <value>12, 12</value>
   </data>
@@ -208,7 +217,7 @@
     <value>PageListView</value>
   </data>
   <data name="&gt;&gt;PageListView.Type" xml:space="preserve">
-    <value>mRemoteNG.Controls.ListView, mRemoteNG, Version=1.72.5056.42837, Culture=neutral, PublicKeyToken=null</value>
+    <value>mRemoteNG.Controls.ListView, mRemoteNG, Version=1.73.5940.35123, Culture=neutral, PublicKeyToken=null</value>
   </data>
   <data name="&gt;&gt;PageListView.Parent" xml:space="preserve">
     <value>$this</value>
@@ -254,6 +263,12 @@
   </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Options</value>
+  </data>
+  <data name="&gt;&gt;columnHeader1.Name" xml:space="preserve">
+    <value>columnHeader1</value>
+  </data>
+  <data name="&gt;&gt;columnHeader1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ColumnHeader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>OptionsForm</value>

@@ -1,0 +1,2320 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NUnitForms</name>
+    </assembly>
+    <members>
+        <member name="T:NUnit.Extensions.Forms.AmbiguousNameException">
+             <summary>
+             Exception is thrown when there is more than one control with the specified name.
+             </summary>
+             <remarks>
+             You should qualify the name according to the name property of the parent control in
+             a dot-delimited string.
+             <para>
+             If you have multiple dynamic controls with the same name, consider giving them unique
+             names or else access them using the indexer property on each ControlTester.
+             </para> 
+            </remarks>
+            <example>
+            grandparent.parent.child is a valid name string.. You can use the shortest name string
+            that uniquely identifies a control.
+            </example>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.AmbiguousNameException.#ctor(System.String)">
+            <summary>
+            Creates an AmbiguousNameException.
+            </summary>
+            <remarks>
+            The message string can be specified.
+            </remarks>
+            <param name="message">The messasge for the exception.</param>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.ButtonTester">
+            <summary>
+            A ControlTester for testing Buttons.  
+            </summary>
+            <remarks>
+            This has no convenience methods beyond those provided
+            by ControlTester, but does provide a typed Properties
+            property.</remarks>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.ControlTester">
+            <summary>
+            A ControlTester for any type of control.  It is the base class for all
+            ControlTesters in the API.  It can also serve as a generic tester for all 
+            Controls with no specifically implemented support.
+            </summary>
+            <remarks>
+            If you want to make your own ControlTester for a custom or unsupported
+            control, you should implement a version of each of the four constructors.
+            I plan to separate out (and generate) this code once we get partial class
+            support in c#.
+            You should also implement a Property named Properties that returns the 
+            underlying control.
+            You should hide the indexer (new) and implement one that returns the
+            appropriate type.
+            The ButtonTester class is a good place to look for an example (or cut and
+            paste starting point) if you are making your own tester.</remarks>
+        </member>
+        <member name="F:NUnit.Extensions.Forms.ControlTester.name">
+            <summary>
+            The name of the underlying control.
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlTester.#ctor(System.String,System.String)">
+            <summary>
+            Creates a ControlTester that will test controls with the specified name
+            on a form with the specified name.
+            </summary>
+            <remarks>
+            If the name is unique, you can operate on the tester directly, otherwise
+            you should use the indexer or Enumerator properties to access each separate
+            control.</remarks>
+            <param name="name">The name of the control to test.</param>
+            <param name="formName">The name of the form to test.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlTester.EndCurrentEdit(System.String)">
+            <summary>
+            Should call this method after editing something in order to trigger any
+            databinding done with the Databindings collection.  (ie text box to a data
+            set)
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlTester.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a ControlTester that will test controls with the specified name
+            on the specified form.
+            </summary>
+            <remarks>
+            If the name is unique, you can operate on the tester directly, otherwise
+            you should use the indexer or Enumerator properties to access each separate
+            control.</remarks>
+            <param name="name">The name of the control to test.</param>
+            <param name="form">The form to test.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlTester.#ctor(System.String)">
+            <summary>
+            Creates a ControlTester that will test controls with the specified name.
+            </summary>
+            <remarks>
+            If the name is unique, you can operate on the tester directly, otherwise
+            you should use the indexer or Enumerator properties to access each separate
+            control.</remarks>
+            <param name="name">The name of the control to test.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlTester.GetEnumerator">
+            <summary>
+            Returns uniquely qualified ControlTesters for each of the controls
+            associated with this tester as an IEnumerator.  This allows use of a 
+            foreach loop.
+            </summary>
+            <returns>IEnumerator of ControlTesters (typed correctly)</returns>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlTester.Click">
+            <summary>
+            Convenience method "Clicks" on the control being tested if it is visible
+            </summary>
+            <exception>
+            ControlNotVisibleException is thrown if the Control is not Visible.
+            </exception>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlTester.FireEvent(System.String,System.Object[])">
+            <summary>
+            Simulates firing of an event by the control being tested.
+            </summary>
+            <param name="eventName">The name of the event to fire.</param>
+            <param name="args">The optional arguments required to construct the EventArgs for the specified event.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlTester.FireEvent(System.String,System.EventArgs)">
+            <summary>
+            Simulates firing of an event by the control being tested.
+            </summary>
+            <param name="eventName">The name of the event to fire.</param>
+            <param name="arg">The EventArgs object to pass as a parameter on the event.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlTester.Invoke(System.String,System.Object[])">
+            <summary>
+            Convenience method invoker for any nonsupported method on a control to test
+            </summary>
+            <param name="methodName">the name of the method to invoke</param>
+            <param name="args">the arguments to pass into the method</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlTester.MouseController">
+            <summary>
+              Returns a <see cref="T:NUnit.Extensions.Forms.MouseController"/> that
+              can be used with the <see cref="P:NUnit.Extensions.Forms.ControlTester.Control">control under test</see>.
+              
+              It would be better to use the MouseController on the base test class so
+              that you don't have to worry about disposing it after your test.  I think
+              this may be marked obsolete soon.
+            </summary>
+            <returns>
+              A <see cref="T:NUnit.Extensions.Forms.MouseController"/>.
+            </returns>
+            <remarks>
+              <b>MouseController</b> returns a new instance of a <see cref="T:NUnit.Extensions.Forms.MouseController"/>
+              that can be used with the <see cref="P:NUnit.Extensions.Forms.ControlTester.Control">control under test</see>.
+              All <see cref="P:NUnit.Extensions.Forms.MouseController.Position">mouse positions</see> are relative
+              the control.
+              <para>
+              The returned <b>MouseController</b> must be <see cref="M:NUnit.Extensions.Forms.MouseController.Dispose">disposed</see>
+              to restore the mouse settings prior to the testing; which can be accomplished with the <c>using</c>
+              statement.
+              </para>
+            </remarks>
+            <example>
+            <code>
+            TextBoxTester textBox = new TextBoxTester("myTextBox");
+            using (MouseController mouse = textBox.MouseController())
+            {
+              mouse.Position = new PointF(1,1);
+              mouse.Drag(30,1);
+            }
+            </code>
+            </example>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ControlTester.Item(System.Int32)">
+            <summary>
+            Allows you to find a ControlTester by index where the name is not unique.
+            </summary>
+            <remarks>
+            When a control is not uniquely identified by its name property, you can
+            access it according to an index.  This should only be used when you have
+            dynamic controls and it is inconvenient to set the Name property uniquely.
+            
+            This was added to support the ability to find controls where their name is
+            not unique.  If all of your controls are uniquely named (I recommend this) then
+            you will not need this.
+            </remarks>
+            <value>The ControlTester at the specified index.</value>
+            <param name="index">The index of the ControlTester.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ControlTester.Count">
+            <summary>
+            Returns the number of controls associated with this tester.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ControlTester.Text">
+            <summary>
+            Convenience method retrieves the Text property of the tested control.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ControlTester.Item(System.String)">
+            <summary>
+            Convenience accessor / mutator for any nonsupported property on a control
+            to test.
+            </summary>
+            <example>
+            ControlTester t = new ControlTester("t");
+            t["Text"] = "a";
+            AssertEqual("a", t["Text"]);
+            </example>
+            
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ControlTester.Control">
+            <summary>
+            The underlying control for this tester.
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ButtonTester.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a ControlTester from the control name and the form instance.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="form">The Form instance.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ButtonTester.#ctor(System.String,System.String)">
+            <summary>
+            Creates a ControlTester from the control name and the form name.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="formName">The Form name..</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ButtonTester.#ctor(System.String)">
+            <summary>
+            Creates a ControlTester from the control name.
+            </summary>
+            <remarks>
+            This is the best constructor.</remarks>
+            <param name="name">The Control name.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ButtonTester.#ctor(NUnit.Extensions.Forms.ControlTester,System.Int32)">
+            <summary>
+            Creates a ControlTester from a ControlTester and an index where the
+            original tester's name is not unique.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="tester">The ControlTester.</param>
+            <param name="index">The index to test.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ButtonTester.Item(System.Int32)">
+            <summary>
+            Allows you to find a ButtonTester by index where the name is not unique.
+            </summary>
+            <remarks>
+            This was added to support the ability to find controls where their name is
+            not unique.  If all of your controls are uniquely named (I recommend this) then
+            you will not need this.
+            </remarks>
+            <value>The ControlTester at the specified index.</value>
+            <param name="index">The index of the ButtonTester.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ButtonTester.Properties">
+            <summary>
+            Provides access to all of the Properties of the button.
+            </summary>
+            <remarks>
+            Allows typed access to all of the properties of the underlying control.
+            </remarks>
+            <value>The underlying control.</value>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.CheckBoxTester">
+            <summary>
+            A ControlTester for testing CheckBoxes.
+            </summary>
+            <remarks>
+            Has convenience methods for Check and Uncheck as well as the Checked Property.
+            <para>
+            Fully supported by the recorder application
+            </para>
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.CheckBoxTester.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a ControlTester from the control name and the form instance.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="form">The Form instance.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.CheckBoxTester.#ctor(System.String,System.String)">
+            <summary>
+            Creates a ControlTester from the control name and the form name.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="formName">The Form name..</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.CheckBoxTester.#ctor(System.String)">
+            <summary>
+            Creates a ControlTester from the control name.
+            </summary>
+            <remarks>
+            This is the best constructor.</remarks>
+            <param name="name">The Control name.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.CheckBoxTester.#ctor(NUnit.Extensions.Forms.ControlTester,System.Int32)">
+            <summary>
+            Creates a ControlTester from a ControlTester and an index where the
+            original tester's name is not unique.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="tester">The ControlTester.</param>
+            <param name="index">The index to test.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.CheckBoxTester.Check(System.Boolean)">
+            <summary>
+            Sets the Checked property to the specified value.
+            </summary>
+            <remarks>
+            Pass a boolean to indicate checked (true) or unchecked (false)
+            </remarks>
+            <param name="Checked">Should the box be checked or not checked.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.CheckBoxTester.Check">
+            <summary>
+            Sets the Checked property of the CheckBox to true
+            </summary>
+            <remarks>
+            Equivalent to Check(true)
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.CheckBoxTester.UnCheck">
+            <summary>
+            Sets the Checked property of the CheckBox to false
+            </summary>
+            <remarks>
+            Equivalent to Check(false)
+            </remarks>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.CheckBoxTester.Item(System.Int32)">
+            <summary>
+            Allows you to find a CheckBoxTester by index where the name is not unique.
+            </summary>
+            <remarks>
+            This was added to support the ability to find controls where their name is
+            not unique.  If all of your controls are uniquely named (I recommend this) then
+            you will not need this.
+            </remarks>
+            <value>The ControlTester at the specified index.</value>
+            <param name="index">The index of the CheckBoxTester.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.CheckBoxTester.Properties">
+            <summary>
+            Provides access to all of the Properties of the CheckBox.
+            </summary>
+            <remarks>
+            Allows typed access to all of the properties of the underlying control.
+            </remarks>
+            <value>The underlying control.</value>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.CheckBoxTester.Checked">
+            <summary>
+            Retrieves the Checked property of the CheckBox
+            </summary>
+            <remarks>
+            Just returns the checked property of the underlying checkbox.
+            </remarks>
+            <value>
+            A boolean to indicate whether the CheckBox is checked.
+            </value>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.ComboBoxTester">
+            <summary>
+            A ControlTester for testing ComboBoxes.
+            </summary>
+            <remarks>
+            Has convenience methods for Selecting items and Entering text.
+            <para>
+            Fully supported by the recorder application
+            </para>
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ComboBoxTester.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a ControlTester from the control name and the form instance.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="form">The Form instance.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ComboBoxTester.#ctor(System.String,System.String)">
+            <summary>
+            Creates a ControlTester from the control name and the form name.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="formName">The Form name..</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ComboBoxTester.#ctor(System.String)">
+            <summary>
+            Creates a ControlTester from the control name.
+            </summary>
+            <remarks>
+            This is the best constructor.</remarks>
+            <param name="name">The Control name.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ComboBoxTester.#ctor(NUnit.Extensions.Forms.ControlTester,System.Int32)">
+            <summary>
+            Creates a ControlTester from a ControlTester and an index where the
+            original tester's name is not unique.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="tester">The ControlTester.</param>
+            <param name="index">The index to test.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ComboBoxTester.Enter(System.String)">
+            <summary>
+            Sets the text property of the ComboBox to the specified value.
+            </summary>
+            <remarks>
+            Also calls EndCurrentEdit() so that databinding will happen.
+            </remarks>
+            <param name="text">The specified value for the text property.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ComboBoxTester.Select(System.Int32)">
+            <summary>
+            Selects an entry in the ComboBox according to its index.
+            </summary>
+            <remarks>
+            Sets the SelectedIndex property on the underlying control.
+            </remarks>
+            <param name="i">The index of the ComboBox entry to select.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ComboBoxTester.Select(System.String)">
+            <summary>
+            Selects an entry in the ComboBox according to its string value.
+            </summary>
+            <remarks>
+            Sets the Selected Index property on the underlying control after calling
+            FindStringExact
+            </remarks>
+            <param name="text">The string value of the entry to select.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ComboBoxTester.Item(System.Int32)">
+            <summary>
+            Allows you to find a ComboBoxTester by index where the name is not unique.
+            </summary>
+            <remarks>
+            This was added to support the ability to find controls where their name is
+            not unique.  If all of your controls are uniquely named (I recommend this) then
+            you will not need this.
+            </remarks>
+            <value>The ControlTester at the specified index.</value>
+            <param name="index">The index of the ComboBoxTester.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ComboBoxTester.Properties">
+            <summary>
+            Provides access to all of the Properties of the ComboBox.
+            </summary>
+            <remarks>
+            Allows typed access to all of the properties of the underlying control.
+            </remarks>
+            <value>The underlying control.</value>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.ControlCollection">
+            <summary>
+            Internal use only.  Represents a collection of controls.
+            </summary>
+            <remarks>
+            NUnitForms users should not have a need for this class.  When C# supports
+            generics, this should be replaced.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlCollection.Add(System.Windows.Forms.Control)">
+            <summary>
+            Add a Control to the collection.
+            </summary>
+            <remarks>
+            Will not add a duplicate control.  In this way, the collection acts like a Set.
+            </remarks>
+            <param name="control">The control to add.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlCollection.Add(NUnit.Extensions.Forms.ControlCollection)">
+            <summary>
+            Add one ControlCollection to another.  Combines them into one collection.
+            </summary>
+            <param name="collection">The collection to merge with this one.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlCollection.GetEnumerator">
+            <summary>
+            Returns an IEnumerator of the Controls in this collection.
+            </summary>
+            <returns>An enumerator of controls.</returns>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ControlCollection.Count">
+            <summary>
+            Returns the number of Controls in this ControlCollection.
+            </summary>
+            <remarks>
+            Delegates to the Count property of the underlying collection.
+            </remarks>
+            <value>
+            How many controls are in the collection.
+            </value>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ControlCollection.Item(System.Int32)">
+            <summary>
+            Returns a Control from this collection according to its index.
+            </summary>
+            <remarks>
+            delegates to the Item indexer of an underlying collection.
+            </remarks>
+            <value>
+            The control at the index.
+            </value>
+            <param name="i">the index</param>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.ControlFinder">
+            <summary>
+            Internal use only.  Finds controls according to their name property.
+            </summary>
+            <remarks>
+            It is also used by the recorder application.
+            </remarks>
+            the recorder application.
+        </member>
+        <member name="T:NUnit.Extensions.Forms.Finder">
+            <summary>
+            Internal use only.  Base class for ControlFinder and MenuItemFinder.
+            </summary>
+            <remarks>
+            It is also used by the recorder application to determine names of Controls.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.Finder.Parent(System.Object)">
+            <summary>
+            Finds the parent of a Control or MenuItem. 
+            </summary>
+            <remarks>
+            Necessary only because Control and MenuItem don't have a shared base class.</remarks>
+            <param name="o">the Control or MenuItem</param>
+            <returns>The parent of the Control or MenuItem</returns>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.Finder.Name(System.Object)">
+            <summary>
+            Finds the name of a Control or MenuItem. 
+            </summary>
+            <remarks>
+            Necessary only because Control and MenuItem don't have a shared base class.</remarks>
+            <param name="o">the Control or MenuItem</param>
+            <returns>The name of the Control or MenuItem</returns>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlFinder.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a ControlFinder that will find controls on a specific Form according to their name.
+            </summary>
+            <param name="name">The name of the Control to find.</param>
+            <param name="form">The form to search for the control.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlFinder.#ctor(System.String)">
+            <summary>
+            Creates a ControlFinder that will find controls according to their name.  
+            </summary>
+            <param name="name">The name of the Control to find.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlFinder.Find">
+            <summary>
+            Finds a control.  
+            </summary>
+            <exception>
+            If there is more than one with the specified name, it will
+            throw an AmbiguousNameException.  If the Control does not exist, it will throw
+            a NoSuchControlException.
+            </exception>
+            <returns>The control if one is found.</returns>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.ControlNotVisibleException">
+            <summary>
+            Exception is thrown when you attempt an action on a Control that is not
+            visible.
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ControlNotVisibleException.#ctor(System.String)">
+            <summary>
+            Creates a ControlNotVisibleException.
+            </summary>
+            <remarks>
+            The message string can be specified.
+            </remarks>
+            <param name="message">The messasge for the exception.</param>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.FormCollection">
+            <summary>
+            Internal use only.  Represents a collection of controls.
+            </summary>
+            <remarks>
+            NUnitForms users should not have a need for this class.  When C# supports
+            generics, this should be replaced.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.FormCollection.Add(System.Windows.Forms.Form)">
+            <summary>
+            Add a Form to the collection.
+            </summary>
+            <remarks>
+            Will not add a duplicate form.  In this way, the collection acts like a Set.
+            </remarks>
+            <param name="form">The form to add.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.FormCollection.Contains(System.Windows.Forms.Form)">
+            <summary>
+            Returns a boolean to indicate whether the supplied form exists in this collection.
+            </summary>
+            <param name="form">The form to check for existence.</param>
+            <returns>true if the form is in the collection, false otherwise.</returns>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.FormCollection.Add(NUnit.Extensions.Forms.FormCollection)">
+            <summary>
+            Add one FormCollection to another.  Combines them into one collection.
+            </summary>
+            <param name="collection">The collection to merge with this one.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.FormCollection.GetEnumerator">
+            <summary>
+            Returns an IEnumerator of the Forms in this collection.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.FormCollection.Count">
+            <summary>
+            Returns the number of forms in this FormCollection.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.FormCollection.Item(System.Int32)">
+            <summary>
+            Returns a Form from this collection according to its index.
+            </summary>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.FormFinder">
+            <summary>
+            A class to help find a form according to its name.  NUnitForms users should not need to use
+            this class.  Consider it as internal.  
+            </summary>
+            <remarks>
+            It is also used by the recorder application.</remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.FormFinder.FindAll(System.String)">
+            <summary>
+            Finds all of the forms with a specified name and returns them in a FormCollection.
+            </summary>
+            <param name="name">The name of the form to search for.</param>
+            <returns>the FormCollection of all found forms.</returns>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.FormFinder.Find(System.String)">
+            <summary>
+            Finds one form with the specified name.
+            </summary>
+            <param name="name">The name of the form to search for.</param>
+            <returns>The form it finds.</returns>
+            <exception cref="T:NUnit.Extensions.Forms.NoSuchControlException">
+            Thrown if there are no forms with the specified name.
+            </exception>
+            <exception cref="T:NUnit.Extensions.Forms.AmbiguousNameException">
+            Thrown if there is more than one form with the specified name.</exception>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.FormFinder.FindAll">
+            <summary>
+            Finds all of the forms.
+            </summary>
+            <returns>FormCollection with all of the forms regardless of name.</returns>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.FormTester">
+            <summary>
+            A ControlTester for testing forms.
+            
+            This class implements a Close() helper method to close a form that you find.
+            </summary>
+            <remarks>
+            This class does not have all of the constructors because they don't make
+            sense in this context.</remarks>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.FormTester.Properties">
+            <summary>
+            Provides access to all of the Properties of the Form.
+            </summary>
+            <remarks>
+            Allows typed access to all of the properties of the underlying control.
+            </remarks>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.Key">
+            <summary>
+            Constant values for use with KeyboardController.
+            </summary>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.KeyboardController">
+            <summary>
+            Provides testing control of the keyboard.
+            </summary>
+            <remarks>
+            KeyboardController lets you send key presses to your application.  You can
+            click, press, or release any key.  The UseOn() method allows you to assert
+            focus on a specific control before sending the keys.  It also initializes
+            the Keyboard controller for use by blocking user input.</remarks>
+            <code>
+             [Test]
+             public void TextBox()
+             {
+               new TextBoxTestForm().Show();
+               TextBoxTester box = new TextBoxTester( "myTextBox", CurrentForm );
+            	  Assert.AreEqual( "default", box.Text );
+            
+            	  Keyboard.UseOn( box );
+            
+               Keyboard.Click( Key.A );
+               Keyboard.Click( Key.B );
+               Keyboard.Press( Key.SHIFT );
+               Keyboard.Click( Key.C );
+               Keyboard.Release( Key.SHIFT );
+            
+               Assert.AreEqual( "abC", box.Text );
+             }
+            </code>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.KeyboardController.#ctor(NUnit.Extensions.Forms.ControlTester)">
+            <summary>
+            Creates a keyboard controller and sets the focus on the control
+            indicated by the supplied ControlTester.
+            </summary>
+            <param name="controlTester">The ControlTester to use the keyboard
+            on.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.KeyboardController.UseOn(NUnit.Extensions.Forms.ControlTester)">
+            <summary>
+            Initializes the KeyboardController, blocks user input, and sets
+            the focus on the specified control.
+            </summary>
+            <param name="control">The ControlTester to use the keyboard on.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.KeyboardController.UseOn(System.String)">
+            <summary>
+            Overloaded.  Allows you to specify the control by name.
+            </summary>
+            <remarks>
+            You should probably use this one if you are not sure.</remarks>
+            <param name="name">The name of the control.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.KeyboardController.UseOn(System.String,System.String)">
+            <summary>
+            Overloaded.  Allows you to specify the control by name and
+            qualified by a form name.
+            </summary>
+            <param name="name">The name of the control.</param>
+            <param name="formName">The name of the form.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.KeyboardController.UseOn(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Overloaded.  Allows you to specify the control by name and
+            qualified by a form instance.  This should be obsolete soon.
+            Do not use it unless necessary.
+            </summary>
+            <param name="name">The name of the control.</param>
+            <param name="form">The form instance to test on.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.KeyboardController.Dispose">
+            <summary>
+            Implements the IDisposable interface.  This restores user input.
+            It should eventually return the keyboard to its pre-test state.
+            </summary>
+            <remarks>
+            If you are using the Keyboard controller through the base NUnitFormTest
+            class, then you should not need to call this method or use finally or using
+            blocks.  The base class handles this for you.</remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.KeyboardController.Click(System.Int16)">
+            <summary>
+            Press and release a key.
+            these constants.
+            </summary>
+            <remarks>
+            Use the Key class (in Key.cs) to find these constants.
+            </remarks>
+            <param name="key">The key to click.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.KeyboardController.Press(System.Int16)">
+            <summary>
+            Press a key.
+            </summary>
+            <remarks>
+            Use the Key class (in Key.cs) to find these constants.
+            </remarks>
+            <param name="key">The key to press.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.KeyboardController.Release(System.Int16)">
+            <summary>
+            Release a key.  
+            </summary>
+            <remarks>
+            Use the Key class (in Key.cs) to find these constants.
+            </remarks>
+            <param name="key">The key to release.</param>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.LabelTester">
+            <summary>
+            A ControlTester for testing Labels.  
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.LabelTester.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a ControlTester from the control name and the form instance.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="form">The Form instance.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.LabelTester.#ctor(System.String,System.String)">
+            <summary>
+            Creates a ControlTester from the control name and the form name.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="formName">The Form name..</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.LabelTester.#ctor(System.String)">
+            <summary>
+            Creates a ControlTester from the control name.
+            </summary>
+            <remarks>
+            This is the best constructor.</remarks>
+            <param name="name">The Control name.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.LabelTester.#ctor(NUnit.Extensions.Forms.ControlTester,System.Int32)">
+            <summary>
+            Creates a ControlTester from a ControlTester and an index where the
+            original tester's name is not unique.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="tester">The ControlTester.</param>
+            <param name="index">The index to test.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.LabelTester.Item(System.Int32)">
+            <summary>
+            Allows you to find a LabelTester by index where the name is not unique.
+            </summary>
+            <remarks>
+            This was added to support the ability to find controls where their name is
+            not unique.  If all of your controls are uniquely named (I recommend this) then
+            you will not need this.
+            </remarks>
+            <value>The ControlTester at the specified index.</value>
+            <param name="index">The index of the LabelTester.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.LabelTester.Properties">
+            <summary>
+            Provides access to all of the Properties of the Label.
+            </summary>
+            <remarks>
+            Allows typed access to all of the properties of the underlying control.
+            </remarks>
+            <value>The underlying control.</value>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.LinkLabelTester">
+            <summary>
+            A ControlTester for testing LinkLabels.
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.LinkLabelTester.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a ControlTester from the control name and the form instance.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="form">The Form instance.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.LinkLabelTester.#ctor(System.String,System.String)">
+            <summary>
+            Creates a ControlTester from the control name and the form name.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="formName">The Form name..</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.LinkLabelTester.#ctor(System.String)">
+            <summary>
+            Creates a ControlTester from the control name.
+            </summary>
+            <remarks>
+            This is the best constructor.</remarks>
+            <param name="name">The Control name.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.LinkLabelTester.#ctor(NUnit.Extensions.Forms.ControlTester,System.Int32)">
+            <summary>
+            Creates a ControlTester from a ControlTester and an index where the
+            original tester's name is not unique.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="tester">The ControlTester.</param>
+            <param name="index">The index to test.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.LinkLabelTester.Item(System.Int32)">
+            <summary>
+            Allows you to find a LinkLabelTester by index where the name is not unique.
+            </summary>
+            <remarks>
+            This was added to support the ability to find controls where their name is
+            not unique.  If all of your controls are uniquely named (I recommend this) then
+            you will not need this.
+            </remarks>
+            <value>The ControlTester at the specified index.</value>
+            <param name="index">The index of the LinkLabelTester.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.LinkLabelTester.Properties">
+            <summary>
+            Provides access to all of the Properties of the LinkLabel.
+            </summary>
+            <remarks>
+            Allows typed access to all of the properties of the underlying control.
+            </remarks>
+            <value>The underlying control.</value>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.ListBoxTester">
+            <summary>
+            A ControlTester for testing ListBoxes.  
+            </summary>
+            <remarks>
+            It includes helper methods for selecting items from the list
+            and for clearing those selections.</remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ListBoxTester.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a ControlTester from the control name and the form instance.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="form">The Form instance.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ListBoxTester.#ctor(System.String,System.String)">
+            <summary>
+            Creates a ControlTester from the control name and the form name.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="formName">The Form name..</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ListBoxTester.#ctor(System.String)">
+            <summary>
+            Creates a ControlTester from the control name.
+            </summary>
+            <remarks>
+            This is the best constructor.</remarks>
+            <param name="name">The Control name.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ListBoxTester.#ctor(NUnit.Extensions.Forms.ControlTester,System.Int32)">
+            <summary>
+            Creates a ControlTester from a ControlTester and an index where the
+            original tester's name is not unique.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="tester">The ControlTester.</param>
+            <param name="index">The index to test.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ListBoxTester.ClearSelected">
+            <summary>
+            Clears the selections from the list box.
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ListBoxTester.Select(System.Int32)">
+            <summary>
+            Selects an item in the ListBox according to its index.
+            </summary>
+            <param name="i">the index to select.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ListBoxTester.Select(System.String)">
+            <summary>
+            Selects an item in the list according to its string value.
+            </summary>
+            <param name="text">The item to select.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ListBoxTester.SetSelected(System.Int32,System.Boolean)">
+            <summary>
+            Sets the selected property of an item at an index.
+            </summary>
+            <param name="index">the index to select (or clear)</param>
+            <param name="value">true if you want to select, false to clear.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.ListBoxTester.SetSelected(System.String,System.Boolean)">
+            <summary>
+            Sets the selected property of an item with a specified string value.
+            </summary>
+            <param name="text">the item to select (or clear)</param>
+            <param name="value">true if you want to select, false to clear.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ListBoxTester.Item(System.Int32)">
+            <summary>
+            Allows you to find a ListBoxTester by index where the name is not unique.
+            </summary>
+            <remarks>
+            This was added to support the ability to find controls where their name is
+            not unique.  If all of your controls are uniquely named (I recommend this) then
+            you will not need this.
+            </remarks>
+            <value>The ControlTester at the specified index.</value>
+            <param name="index">The index of the ListBoxTester.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.ListBoxTester.Properties">
+            <summary>
+            Provides access to all of the Properties of the ListBox.
+            </summary>
+            <remarks>
+            Allows typed access to all of the properties of the underlying control.
+            </remarks>
+            <value>The underlying control.</value>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.MenuItemCollection">
+            <summary>
+            Internal use only.  Represents a collection of MenuItems.
+            </summary>
+            <remarks>
+            NUnitForms users should not have a need for this class.  When C# supports
+            generics, this should be replaced.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MenuItemCollection.Add(System.Windows.Forms.MenuItem)">
+            <summary>
+            Add a MenuItem to the collection.
+            </summary>
+            <remarks>
+            Will not add a duplicate MenuItem.  In this way, the collection acts like a Set.
+            </remarks>
+            <param name="menuItem">The menu item to add.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MenuItemCollection.Add(NUnit.Extensions.Forms.MenuItemCollection)">
+            <summary>
+            Add one MenuItemCollection to another.  Combines them into one collection.
+            </summary>
+            <param name="collection">The collection to merge with this one.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MenuItemCollection.GetEnumerator">
+            <summary>
+            Returns an IEnumerator of the MenuItems in this collection.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.MenuItemCollection.Count">
+            <summary>
+            Returns the number of Controls in this MenuItemCollection.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.MenuItemCollection.Item(System.Int32)">
+            <summary>
+            Returns a MenuItem from this collection according to its index.
+            </summary>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.MenuItemFinder">
+            <summary>
+            Internal use only.  This class finds MenuItems according to a name.
+            </summary>
+            <remarks>
+            It is also used by the recorder application to determine names of Controls.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MenuItemFinder.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a MenuItemFinder that will find MenuItems according to their name
+            and qualified by a form instance.
+            </summary>
+            <param name="name">The MenuItem name.</param>
+            <param name="form">The form instance.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MenuItemFinder.#ctor(System.String)">
+            <summary>
+            Creates a MenuItemFinder that will find a MenuItem according to its name.
+            </summary>
+            <param name="name"></param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MenuItemFinder.Find">
+            <summary>
+            Finds the MenuItem.
+            </summary>
+            <returns>the MenuItem found by this MenuItemFinder.</returns>
+            <exception cref="T:NUnit.Extensions.Forms.NoSuchControlException">
+            Thrown if this MenuItem is not found.</exception>
+            <exception cref="T:NUnit.Extensions.Forms.AmbiguousNameException">
+            Thrown if multiple MenuItems are found with the same name.</exception>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.MenuItemTester">
+            <summary>
+            A ControlTester for MenuItems.
+            </summary>
+            <remarks>
+            It does not extend ControlTester because MenuItems are not Controls.  (sadly)</remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MenuItemTester.Click">
+            <summary>
+            Clicks the MenuItem (activates it)
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MenuItemTester.Popup">
+            <summary>
+            Pops up a menu.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.MenuItemTester.Text">
+            <summary>
+            Gets the text of this MenuItem.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.MenuItemTester.Properties">
+            <summary>
+            Allows you to access any properties of this MenuItem.
+            </summary>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.MessageBoxTester">
+            <summary>
+            A ControlTester for MessageBoxes.  
+            Allows you to handle and test MessageBoxes by pressing any of the
+            buttons that ordinarily appear on them.
+            </summary>
+            <remarks>
+            It does not extend ControlTester because MessageBoxes are not controls.</remarks>
+            <code>
+            public void MessageBoxHandler
+            {
+            	MessageBoxTester messageBox = new MessageBoxTester( "MessageBoxName" );
+            	Assert.AreEqual( "MessageBoxText", messageBox.Text );
+              Assert.AreEqual( "MessageBoxTitle", messageBox.Title );
+            	messageBox.SendCommand( MessageBoxTester.Command.OK );
+            }
+            </code>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MessageBoxTester.#ctor(System.IntPtr)">
+            <summary>
+            Creates a MessageBoxTester with the specified handle.  NUnitForms
+            users probably won't use this directly.  Use the other constructor.
+            </summary>
+            <param name="handle">The handle of the MessageBox to test.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MessageBoxTester.#ctor(System.String)">
+            <summary>
+            Creates a MessageBoxTester that finds MessageBoxes with the
+            specified name.
+            </summary>
+            <param name="name">The name of the MessageBox to test.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MessageBoxTester.SendCommand(NUnit.Extensions.Forms.MessageBoxTester.Command)">
+            <summary>
+            Sends a command to the MessageBox.
+            </summary>
+            <param name="cmd">The command to send.. (ok, cancel, yes, abort, etc..)</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MessageBoxTester.ClickOk">
+            <summary>
+            Clicks the Ok button of a MessageBox.
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MessageBoxTester.ClickCancel">
+            <summary>
+            Clicks the cancel button of a MessageBox.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.MessageBoxTester.Title">
+            <summary>
+            Returns the caption on the message box we are testing.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.MessageBoxTester.Text">
+            <summary>
+            Returns the text of the message box we are testing.
+            </summary>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.MessageBoxTester.Command">
+            <summary>
+            Available commands you can send to the MessageBox.
+            </summary>
+            <remarks>
+            There are convenience methods for OK and Cancel, so you should not need 
+            those.
+            </remarks>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.ModalFormActivated">
+            <summary>
+            Used to specify a handler for a Modal form that is displayed during testing.
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseControl.Convert(System.Drawing.PointF,System.Drawing.PointF)">
+            <summary>
+              Translation between mouse position and screen position.
+            </summary>
+            <param name="p">
+              A <see cref="T:System.Drawing.PointF"/> mouse coordinate relative to
+              the origin control and specified in PositionUnit.
+            </param>
+            <param name="scale">
+            The scale to convert by.
+            </param>
+            <returns>
+              A <see cref="T:NUnit.Extensions.Forms.Win32.Point"/> mouse coordinate relative to
+              the screen and specified in pixels.
+            </returns>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.MouseController">
+             <summary>
+               Provides testing control over the mouse.
+             </summary>
+             <remarks>
+              <b>MouseController</b> allows you to control the mouse position 
+              and buttons and simulate dragging and clicking during a test.  It can be
+              used to test the behavior of a control.  For testing the behavior of an
+              application in reponse to a control's events, it is not necessary to use
+              the MouseControl.  I suggest you directly fire the appropriate events instead.
+              (You probably aren't using this class unless you are writing some custom
+              control and need to see its response to actual low level mouse movement, etc..)
+              <para>
+              The mouse Position can be relative to a <see cref="T:System.Windows.Forms.Form"/> or a <see cref="T:System.Windows.Forms.Control"/> 
+              on a <b>Form</b>.  The <b>Position</b> can be specified in pixels, inches or millimetres
+              </para>
+              <para>
+              The mouse buttons are controlled with the Press and Release methods.  Both
+              methods allow a bitwise combination of the <see cref="T:System.Windows.Forms.MouseButtons"/>, for example 
+              <c>Press(MouseButtons.Left | MouseButtons.Center)</c>.
+              Button modifiers, the Alt, Shift and Ctrl keys, are also controlled with the two methods.
+              </para>
+              <para>
+              The <b>XButtons</b> (<see cref="F:System.Windows.Forms.MouseButtons.XButton1"/> and <see cref="F:System.Windows.Forms.MouseButtons.XButton2"/>)
+              can only be simulated when a mouse with <see cref="P:System.Windows.Forms.SystemInformation.MouseButtons">5 buttons</see> is installed. 
+              The <b>Press</b> and <b>Release</b> methods will throw <see cref="T:System.NotSupportedException"/> if the XButtons are used 
+              when a mouse does not have 4 or 5 button support.
+              </para>
+             </remarks>
+             <example>
+             <code>
+            [TestFixture] public class ATest : NUnitFormTest
+            {
+              // Gets the Form used for testing.
+              public override Type FormType
+              {
+                get {return typeof(MyTestForm);}
+              }
+              
+              [Test] public void Selecting()
+              {
+                ControlTester myControl = new ControlTester("myControl", CurrentForm);
+                using (MouseController mouse = myControl.MouseController())
+                {
+                  mouse.Drag (10,10, 20,20);
+                  AssertEquals (1, myControl.Properties.SelectedObjects.Count);
+                }
+              }
+             </code>
+             </example>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.#ctor">
+            <summary>
+              Creates and initialises a new instance of the class. 
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.#ctor(NUnit.Extensions.Forms.ControlTester)">
+            <summary>
+              Creates and initialises a new instance of the class for the specified <see cref="T:NUnit.Extensions.Forms.ControlTester"/>.
+            </summary>
+            <param name="controlTester">
+              A <see cref="T:NUnit.Extensions.Forms.ControlTester"/>.
+            </param>
+            <remarks>
+              The <see cref="P:NUnit.Extensions.Forms.MouseController.Position">mouse position</see> is relative to the <see cref="T:System.Windows.Forms.Control"/> managed by
+              the <paramref name="controlTester"/>.
+              <para>
+              While the <b>MouseController</b> is active, user keyboard and mouse input is disabled.  For this
+              reason the <b>MouseController</b> should be disposed of when the testing is concluded.
+              </para>
+            </remarks>
+            <example>
+            <code>
+            using (MouseController mouse = new MouseControler(myTestControl))
+            {
+              mouse.Position = new PointF(1,1);
+              mouse.Press(MouseButtons.Middle);
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.UseOn(NUnit.Extensions.Forms.ControlTester)">
+            <summary>
+            Specify which control or form we should use for the relative position.
+            </summary>
+            <param name="control">
+              A <see cref="T:NUnit.Extensions.Forms.ControlTester"/>.
+            </param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.UseOn(System.String)">
+            <summary>
+            Overloaded.  Specifies control by name.
+            </summary>
+            <param name="name">The name of the control</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.UseOn(System.String,System.String)">
+            <summary>
+            Overloaded.  Specifies control by name and form name
+            </summary>
+            <param name="name">The name of the control.</param>
+            <param name="formName">The name of the form.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.UseOn(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Overloaded.  Specifies control by name and form instance.
+            </summary>
+            <param name="name">The name of the control.</param>
+            <param name="form">The form instance.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Dispose">
+            <summary>
+              Releases the resources used by the <see cref="T:NUnit.Extensions.Forms.MouseController"/>.
+            </summary>
+            <remarks>
+              <b>Dispose</b> releases any pressed mouse keys, restores the
+              mouse <see cref="P:NUnit.Extensions.Forms.MouseController.Position"/> and enables user input.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Hover">
+            <summary>
+              Simulate hovering over the control under test.
+            </summary>
+            <remarks>
+              <b>Hover</b> positions the mouse over the control under test for the
+              system defined mouse hover time and then <see cref="M:System.Windows.Forms.Application.DoEvents">processes</see> the events.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Hover(System.Single,System.Single)">
+            <summary>
+              Simulate hovering over the control under test at the specified x and y-coordinate.
+            </summary>
+            <param name="x">
+              The <see cref="T:System.Single"/> x-coordinate,
+              relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <param name="y">
+              The <see cref="T:System.Single"/> y-coordinate,
+              relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <remarks>
+              <b>Hover</b> positions the mouse over the control under test 
+              at the specified point (<paramref name="x"/>, <paramref name="y"/>) for the system defined mouse hover 
+              time and then <see cref="M:System.Windows.Forms.Application.DoEvents">processes</see> the events.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Hover(System.Drawing.PointF)">
+            <summary>
+              Simulate hovering over the control under test at the specified <see cref="T:System.Drawing.PointF"/>.
+            </summary>
+            <param name="point">
+              A <see cref="T:System.Drawing.PointF"/>, relative to the control under test,
+               to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <remarks>
+              <b>Hover</b> positions the mouse over the control under test 
+              at the specified <paramref name="point"/> for the system defined mouse hover 
+              time and then <see cref="M:System.Windows.Forms.Application.DoEvents">processes</see> the events.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Click">
+            <summary>
+              Simulate clicking on the control under test.
+            </summary>
+            <remarks>
+              <b>Click</b> positions the mouse over the control under test 
+              and then presses and releases the left mouse button.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Click(System.Single,System.Single)">
+            <summary>
+              Simulate clicking at the specified x and y-coordinate.
+            </summary>
+            <param name="x">
+              The <see cref="T:System.Single"/> x-coordinate,
+              relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <param name="y">
+              The <see cref="T:System.Single"/> y-coordinate,
+              relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <remarks>
+              <b>Click</b> positions the mouse over the control under test 
+              at the specified point (<paramref name="x"/>, <paramref name="y"/>)
+              and then presses and releases the left mouse button.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Click(System.Drawing.PointF)">
+            <summary>
+              Simulate clicking at the specified <see cref="T:System.Drawing.PointF"/>.
+            </summary>
+            <param name="point">
+              A <see cref="T:System.Drawing.PointF"/>, relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <remarks>
+              <b>Click</b> positions the mouse over the control under test 
+              at the specified <paramref name="point"/>
+              and then presses and releases the left mouse button.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.DoubleClick">
+            <summary>
+              Simulate double clicking on the control under test.
+            </summary>
+            <remarks>
+              <b>Click</b> positions the mouse over the control under test 
+              and then presses and releases the left mouse button twice.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.DoubleClick(System.Single,System.Single)">
+            <summary>
+              Simulate double clicking at the specified x and y-coordinate.
+            </summary>
+            <param name="x">
+              The <see cref="T:System.Single"/> x-coordinate,
+              relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <param name="y">
+              The <see cref="T:System.Single"/> y-coordinate,
+              relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <remarks>
+              <b>Click</b> positions the mouse over the control under test 
+              at the specified point (<paramref name="x"/>, <paramref name="y"/>)
+              and then presses and releases the left mouse button twice.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.DoubleClick(System.Drawing.PointF)">
+            <summary>
+              Simulate double clicking at the specified <see cref="T:System.Drawing.PointF"/>.
+            </summary>
+            <param name="point">
+              A <see cref="T:System.Drawing.PointF"/>, relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <remarks>
+              <b>Click</b> positions the mouse over the control under test 
+              at the specified <paramref name="point"/>
+              and then presses and releases the left mouse button twice.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Press(System.Windows.Forms.MouseButtons)">
+            <summary>
+              Simulate pressing the mouse button(s).
+            </summary>
+            <param name="buttons">
+              A bitwise combination of the <see cref="T:System.Windows.Forms.MouseButtons"/> enumeration values. 
+            </param>
+            <remarks>
+              <b>Press</b> positions the mouse over the control under test 
+              and then simulates pressing the specified <paramref name="buttons"/>.
+            </remarks>
+            <exception cref="T:System.NotSupportedException">
+              When <paramref name="buttons"/> contains <see cref="T:System.Windows.Forms.MouseButtons">MouseButtons.XButton1</see>
+              or <see cref="T:System.Windows.Forms.MouseButtons">MouseButtons.XButton2</see> and the installed mouse does have 4
+              or 5 buttons, respectively.
+            </exception>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Press(System.Windows.Forms.MouseButtons,System.Single,System.Single)">
+            <summary>
+              Simulate pressing the mouse button(s) at the specified  x and y-coordinate.
+            </summary>
+            <param name="buttons">
+              A bitwise combination of the <see cref="T:System.Windows.Forms.MouseButtons"/> enumeration values. 
+            </param>
+            <param name="x">
+              The <see cref="T:System.Single"/> x-coordinate,
+              relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <param name="y">
+              The <see cref="T:System.Single"/> y-coordinate,
+              relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <remarks>
+              <b>Press</b> positions the mouse over the control under test 
+              at the specified point (<paramref name="x"/>, <paramref name="y"/>)
+              and then simulates pressing the specified <paramref name="buttons"/>.
+            </remarks>
+            <exception cref="T:System.NotSupportedException">
+              When <paramref name="buttons"/> contains <see cref="T:System.Windows.Forms.MouseButtons">MouseButtons.XButton1</see>
+              or <see cref="T:System.Windows.Forms.MouseButtons">MouseButtons.XButton2</see> and the installed mouse does have 4
+              or 5 buttons, respectively.
+            </exception>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Press(System.Windows.Forms.MouseButtons,System.Drawing.PointF)">
+            <summary>
+              Simulate pressing the mouse button(s) at the specified <see cref="T:System.Drawing.PointF"/>.
+            </summary>
+            <param name="buttons">
+              A bitwise combination of the <see cref="T:System.Windows.Forms.MouseButtons"/> enumeration values. 
+            </param>
+            <param name="point">
+              A <see cref="T:System.Drawing.PointF"/>, relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <remarks>
+              <b>Press</b> positions the mouse over the control under test 
+              at the specified <paramref name="point"/>
+              and then simulates pressing the specified <paramref name="buttons"/>.
+            </remarks>
+            <exception cref="T:System.NotSupportedException">
+              When <paramref name="buttons"/> contains <see cref="T:System.Windows.Forms.MouseButtons">MouseButtons.XButton1</see>
+              or <see cref="T:System.Windows.Forms.MouseButtons">MouseButtons.XButton2</see> and the installed mouse does have 4
+              or 5 buttons, respectively.
+            </exception>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Press(System.Windows.Forms.Keys)">
+             <overloads>
+               Simulates pressing the <see cref="T:System.Windows.Forms.MouseButtons"/> or modifier <see cref="T:System.Windows.Forms.Keys"/>.
+             </overloads>
+             <summary>
+               Simulate pressing the mouse modifier key(s) (Alt, Shift and Control).
+             </summary>
+             <param name="keys">
+               A bitwise combination of the <see cref="T:System.Windows.Forms.Keys"/> enumeration values. Only <b>Alt</b>, <b>Shift</b>
+               and <b>Control</b> are allowed.
+             </param>
+             <remarks>
+               <b>Press</b> simulates pressing the specified <paramref name="keys"/>.
+             </remarks>
+             <exception cref="T:System.ArgumentOutOfRangeException">
+               When <paramref name="keys"/> contains a value that is not 
+               <b>Alt</b>, <b>Shift</b> or <b>Control</b>.
+             </exception>
+             <example>
+               The following example performs a "shift drag" and verifies that
+               two objects are selected.
+             <code>
+            [TestFixture] public class ATest : NUnitFormTest
+            {
+              // Gets the Form used for testing.
+              public override Type FormType
+              {
+                get {return typeof(MyTestForm);}
+              }
+              
+              [Test] public void Selecting()
+              {
+                ControlTester myControl = new ControlTester("myControl", CurrentForm);
+                using (MouseController mouse = myControl.MouseController())
+                {
+                  mouse.Drag (10,10, 20,20);
+                  AssertEquals (1, myControl.Properties.SelectedObjects.Count);
+                  
+                  mouse.Press(Keys.Shift);
+                  mouse.Drag(100,100, 200,200);
+                  mouse.Release(Keys.Shift);
+                  AssertEquals (2, myControl.Properties.SelectedObjects.Count);
+                }
+              }
+             </code>
+             </example>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Release(System.Windows.Forms.MouseButtons)">
+            <summary>
+              Simulate releasing the mouse button(s).
+            </summary>
+            <param name="buttons">
+              A bitwise combination of the <see cref="T:System.Windows.Forms.MouseButtons"/> enumeration values. 
+            </param>
+            <remarks>
+              <b>Release</b> positions the mouse over the control under test 
+              and then simulates releasing the specified <paramref name="buttons"/>.
+            </remarks>
+            <exception cref="T:System.NotSupportedException">
+              When <paramref name="buttons"/> contains <see cref="T:System.Windows.Forms.MouseButtons">MouseButtons.XButton1</see>
+              or <see cref="T:System.Windows.Forms.MouseButtons">MouseButtons.XButton2</see> and the installed mouse does have 4
+              or 5 buttons, respectively.
+            </exception>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Release(System.Windows.Forms.MouseButtons,System.Single,System.Single)">
+            <summary>
+              Simulate release the mouse button(s) at the specified  x and y-coordinate.
+            </summary>
+            <param name="buttons">
+              A bitwise combination of the <see cref="T:System.Windows.Forms.MouseButtons"/> enumeration values. 
+            </param>
+            <param name="x">
+              The <see cref="T:System.Single"/> x-coordinate,
+              relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <param name="y">
+              The <see cref="T:System.Single"/> y-coordinate,
+              relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <remarks>
+              <b>Release</b> positions the mouse over the control under test 
+              at the specified point (<paramref name="x"/>, <paramref name="y"/>)
+              and then simulates releasing the specified <paramref name="buttons"/>.
+            </remarks>
+            <exception cref="T:System.NotSupportedException">
+              When <paramref name="buttons"/> contains <see cref="T:System.Windows.Forms.MouseButtons">MouseButtons.XButton1</see>
+              or <see cref="T:System.Windows.Forms.MouseButtons">MouseButtons.XButton2</see> and the installed mouse does have 4
+              or 5 buttons, respectively.
+            </exception>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Release(System.Windows.Forms.MouseButtons,System.Drawing.PointF)">
+            <summary>
+              Simulate releasing the mouse button(s) at the specified <see cref="T:System.Drawing.PointF"/>.
+            </summary>
+            <param name="buttons">
+              A bitwise combination of the <see cref="T:System.Windows.Forms.MouseButtons"/> enumeration values. 
+            </param>
+            <param name="point">
+              A <see cref="T:System.Drawing.PointF"/>, relative to the control under test,
+              to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see> the mouse to.
+            </param>
+            <remarks>
+              <b>Release</b> positions the mouse over the control under test 
+              at the specified <paramref name="point"/>
+              and then simulates releasing the specified <paramref name="buttons"/>.
+            </remarks>
+            <exception cref="T:System.NotSupportedException">
+              When <paramref name="buttons"/> contains <see cref="T:System.Windows.Forms.MouseButtons">MouseButtons.XButton1</see>
+              or <see cref="T:System.Windows.Forms.MouseButtons">MouseButtons.XButton2</see> and the installed mouse does have 4
+              or 5 buttons, respectively.
+            </exception>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Release(System.Windows.Forms.Keys)">
+             <overloads>
+               Simulates releasing the <see cref="T:System.Windows.Forms.MouseButtons"/> or modifier <see cref="T:System.Windows.Forms.Keys"/>.
+             </overloads>
+             <summary>
+               Simulate releasing the mouse modifier key(s) (Alt, Shift and Control).
+             </summary>
+             <param name="keys">
+               A bitwise combination of the <see cref="T:System.Windows.Forms.Keys"/> enumeration values. Only <b>Alt</b>, <b>Shift</b>
+               and <b>Control</b> are allowed.
+             </param>
+             <remarks>
+               <b>Release</b> simulates releasing the specified <paramref name="keys"/>.
+             </remarks>
+             <exception cref="T:System.ArgumentOutOfRangeException">
+               When <paramref name="keys"/> contains a value that is not 
+               <b>Alt</b>, <b>Shift</b> or <b>Control</b>.
+             </exception>
+             <example>
+               The following example performs a "shift drag" and verifies that
+               two objects are selected.
+             <code>
+            [TestFixture] public class ATest : NUnitFormTest
+            {
+              // Gets the Form used for testing.
+              public override Type FormType
+              {
+                get {return typeof(MyTestForm);}
+              }
+              
+              [Test] public void Selecting()
+              {
+                ControlTester myControl = new ControlTester("myControl", CurrentForm);
+                using (MouseController mouse = myControl.MouseController())
+                {
+                  mouse.Drag (10,10, 20,20);
+                  AssertEquals (1, myControl.Properties.SelectedObjects.Count);
+                  
+                  mouse.Press(Keys.Shift);
+                  mouse.Drag(100,100, 200,200);
+                  mouse.Release(Keys.Shift);
+                  AssertEquals (2, myControl.Properties.SelectedObjects.Count);
+                }
+              }
+             </code>
+             </example>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Drag(System.Drawing.PointF,System.Drawing.PointF[])">
+            <summary>
+              Simulate dragging the mouse.
+            </summary>
+            <param name="startPoint">
+              A <see cref="T:System.Drawing.PointF"/> to start the drag operation at.
+            </param>
+            <param name="points">
+              Array of <see cref="T:System.Drawing.PointF"/> structures that represent the points to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see>&gt;
+              the mouse to.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              When <paramref name="points"/> is <b>null</b>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              When <paramref name="points"/> does not contain any elements.
+            </exception>
+            <remarks>
+              <b>Drag</b> positions the mouse over the control under test 
+              at the specified <paramref name="startPoint"/> and then presses the
+              left mouse button.  It then moves the mouse to each point specified in the <paramref name="points"/>
+              array.  Finally the left button is released.
+            </remarks>
+            <example>
+            <code>
+            using (MouseController mouse = new MouseControler(myTestControl))
+            {
+              mouse.Drag(new PointF(0,0), new Point(100, 100));
+            }
+            </code>
+            </example>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.MouseController.Drag(System.Single,System.Single,System.Single[])">
+            <summary>
+              Simulate dragging the mouse.
+            </summary>
+            <param name="startX">
+              A <see cref="T:System.Single"/> x-coordinate to start the drag operation at.
+            </param>
+            <param name="startY">
+              A <see cref="T:System.Single"/> y-coordinate to start the drag operation at.
+            </param>
+            <param name="points">
+              Array of <see cref="T:System.Single"/> values that represent the x and y coordinates to <see cref="P:NUnit.Extensions.Forms.MouseController.Position">move</see>&gt;
+              the mouse to.
+            </param>
+            <exception cref="T:System.ArgumentNullException">
+              When <paramref name="points"/> is <b>null</b>.
+            </exception>
+            <exception cref="T:System.ArgumentException">
+              When <paramref name="points"/> does not contain at lease two values,
+              <br/><b>Or</b>, the number of elements is odd.
+            </exception>
+            <remarks>
+              <b>Drag</b> positions the mouse over the control under test 
+              at the specified <see cref="T:System.Drawing.PointF"/>(<paramref name="startX"/>, <paramref name="startY"/>)
+              and then presses the  left mouse button.  It then moves the mouse
+              to each point specified in the <paramref name="points"/> array.  Finally the left button is released.
+            </remarks>
+            <example>
+            <code>
+            using (MouseController mouse = new MouseControler(myTestControl))
+            {
+              mouse.Drag(0,0, 100,100);
+            }
+            </code>
+            </example>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.MouseController.Position">
+            <summary>
+              Gets or sets the mouse position.
+            </summary>
+            <value>
+              A <see cref="T:System.Drawing.PointF"/> representing the mouse position in the <see cref="P:NUnit.Extensions.Forms.MouseController.PositionUnit"/> space.
+            </value>
+            <remarks>
+              <b>Position</b> is the position of the mouse, relative to the control under test
+              and specified in <see cref="P:NUnit.Extensions.Forms.MouseController.PositionUnit">position units</see>.
+            </remarks>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.MouseController.PositionUnit">
+            <summary>
+              Gets or sets the unit of measure used for mouse coordinates.
+            </summary>
+            <value>
+              A member of the <see cref="T:System.Drawing.GraphicsUnit"/> enumeration.  The default
+              is <b>GraphicsUnit.Pixel</b>.
+            </value>
+            <remarks>
+              <b>PositionUnit</b> specifies how the mouse <see cref="P:NUnit.Extensions.Forms.MouseController.Position"/> coordinates
+              are interpreted.
+            </remarks>
+            <exception cref="T:System.NotSupportedException">
+              When value is <see cref="T:System.Drawing.GraphicsUnit">GraphicsUnit.World</see>.
+            </exception>
+            <exception cref="T:System.ComponentModel.InvalidEnumArgumentException">
+              When value is not a valid enumeration value.
+            </exception>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.NoSuchControlException">
+            <summary>
+            Exception is thrown when a control can not be found
+            by its specified name.
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.NoSuchControlException.#ctor(System.String)">
+            <summary>
+            Creates a NoSuchControlException.
+            </summary>
+            <remarks>
+            The message string can be specified.
+            </remarks>
+            <param name="message">The messasge for the exception.</param>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.NUnitFormsAssertionTest">
+            <summary>
+            One of three base classes for your NUnitForms tests.  This one can be
+            used by people who want "built-in" Assertion functionality and prefer
+            the older style "Assertion" syntax.
+            </summary>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.NUnitFormTest">
+            <summary>
+            One of three base classes for your NUnitForms tests.  This one can be
+            used by people who do not need or want "built-in" Assert functionality.
+            
+            This is the recommended base class for all unit tests that use NUnitForms.  
+            </summary>
+            <remarks>
+            You should probably extend this class to create all of your test fixtures.  The benefit is that
+            this class implements setup and teardown methods that clean up after your test.  Any forms that
+            are created and displayed during your test are cleaned up by the tear down method.  This base
+            class also provides easy access to keyboard and mouse controllers.  It has a method that allows
+            you to set up a handler for modal dialog boxes.  It allows your tests to run on a separate 
+            (usually hidden) desktop so that they are faster and do not interfere with your normal desktop
+            activity.  If you want custom setup and teardown behavior, you should override the virtual 
+            Setup and TearDown methods.  Do not use the setup and teardown attributes in your child class.
+            </remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.NUnitFormTest.init">
+            <summary>
+            This is the base classes setup method.  It will be called by NUnit before each test.
+            You should not have anything to do with it.
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.NUnitFormTest.UnexpectedModal(System.IntPtr)">
+            <summary>
+            This is the method that is called to handled unexpected modal dialogs.  It is called automatically
+            by the NUnitForms framework when such a dialog appears.  You should not need to call it.
+            </summary>
+            <param name="hWnd"></param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.NUnitFormTest.ExpectModal(System.String,NUnit.Extensions.Forms.ModalFormActivated)">
+            <summary>
+            One of four overloaded methods to set up a modal dialog handler.  If you expect a modal
+            dialog to appear and can handle it during the test, use this method to set up the handler.
+            </summary>
+            <param name="name">The caption on the dialog you expect.</param>
+            <param name="handler">The method to call when that dialog appears.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.NUnitFormTest.ExpectModal(System.String,NUnit.Extensions.Forms.ModalFormActivated,System.Boolean)">
+            <summary>
+            One of four overloaded methods to set up a modal dialog handler.  If you expect a modal
+            dialog to appear and can handle it during the test, use this method to set up the handler.
+            Because "expected" is usually (always) true if you are calling this, I don't expect it will
+            be used externally.
+            </summary>
+            <param name="name">The caption on the dialog you expect.</param>
+            <param name="handler">The method to call when that dialog appears.</param>
+            <param name="expected">A boolean to indicate whether you expect this modal dialog to appear.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.NUnitFormTest.ExpectModal(System.String,System.String,System.Boolean)">
+            <summary>
+            One of four overloaded methods to set up a modal dialog handler.  If you expect a modal
+            dialog to appear and can handle it during the test, use this method to set up the handler.
+            Because "expected" is usually (always) true if you are calling this, I don't expect it will
+            be used externally.
+            </summary>
+            <param name="name">The caption on the dialog you expect.</param>
+            <param name="handlerName">The name of the method to call when that dialog appears.</param>
+            <param name="expected">A boolean to indicate whether you expect this modal dialog to appear.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.NUnitFormTest.ExpectModal(System.String,System.String)">
+            <summary>
+            One of four overloaded methods to set up a modal dialog handler.  If you are not sure which
+            to use, use this one.  If you expect a modal dialog to appear and can handle it during the
+            test, use this method to set up the handler. Because "expected" is usually (always) true 
+            if you are calling this, I don't expect it will be used externally.
+            </summary>
+            <param name="name">The caption on the dialog you expect.</param>
+            <param name="handlerName">The name of the method to call when that dialog appears.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.NUnitFormTest.BaseSetup">
+            <summary>
+            Obsolete soon.  In your test class, you used to have the choice to override this
+            method, or implement the FormType property.  Now neither is necessary.  It is still
+            here for compatibility with tests written to use the CurrentForm property.
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.NUnitFormTest.Setup">
+            <summary>
+            Override this Setup method if you have custom behavior to execute before each test
+            in your fixture.
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.NUnitFormTest.ActivateForm">
+            <summary>
+            This will be marked obsolete soon.  This method is called before each test in order
+            to set the CurrentForm property (also obsolete)  You can override this method as an
+            alternative to setting the FormType property if you want to test the old way.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.NUnitFormTest.Verify">
+            <summary>
+            This method is called by NUnit after each test runs.  If you have custom
+            behavior to run after each test, then override the TearDown method and do
+            it there.  That method is called at the beginning of this one.
+            You should not need to do anything with it.  Do not call it.
+            If you do call it, call it as the last thing you do in your test.
+            </summary>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.NUnitFormTest.TearDown">
+            <summary>
+            This method is called after each test.  Put code here to clean up anything
+            you need to between tests.  NUnitForms cleans up most everything you need
+            related to the framework (closes extra windows, etc..) but you might need
+            custom behavior beyond this.  Put it here.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.NUnitFormTest.DisplayHidden">
+            <summary>
+            This property controls whether the separate hidden desktop is displayed for the duration of
+            this test.  You will need to override and return true from this property if your test makes
+            use of the keyboard or mouse controllers.  (The hidden desktop cannot accept user input.)  For
+            tests that do not use the keyboard and mouse controller (most should not) you don't need to do
+            anything with this.  The default behavior is fine.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.NUnitFormTest.UseHidden">
+            <summary>
+            This property controls whether a separate desktop is used at all.  I highly recommend that you
+            leave this as returning true.  Tests on the separate desktop are faster and safer.  (There is 
+            no danger of keyboard or mouse input going to your own separate running applications.)  However
+            I have heard report of operating systems or environments where the separate desktop does not work.
+            In that case there are 2 options.  You can override this method from your test class to return false.
+            Or you can set an environment variable called "UseHiddenDesktop" and set that to "false"  Either will
+            cause the tests to run on your original, standard desktop. 
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.NUnitFormTest.CurrentForm">
+            <summary>
+            This should be marked obsolete.  It is used only in combination with the FormType property.
+            If you override the FormType property, then CurrentForm will be initialized (on setup) to
+            an instance of the form whose type you specify.  None of the testers require a reference
+            to the active form anymore, so this should not be necessary.  It will be marked obsolete 
+            soon.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.NUnitFormTest.Mouse">
+            <summary>
+            Returns a reference to the current MouseController for doing Mouse tests.  I recommend
+            this only when you are writing your own custom controls and need to respond to actual
+            mouse input to test them properly.  In most other cases there is a better way to test
+            the form's logic.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.NUnitFormTest.Keyboard">
+            <summary>
+            Returns a reference to the current KeyboardController for doing Keyboard tests.  I recommend
+            this only when you are writing your own custom controls and need to respond to actual
+            keyboard input to test them properly.  In most other cases there is a better way to test
+            for the form's logic.
+            </summary>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.NUnitFormTest.FormType">
+            <summary>
+            Soon to be marked obsolete.  This property specifies the type of form to instantiate
+            before each test.  Do not use it anymore.
+            </summary>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.NUnitFormsAssertTest">
+            <summary>
+            One of three base classes for your NUnitForms tests.  This one can be
+            used by people who want "built-in" Assert functionality and prefer
+            the newer style "Assert" syntax.
+            </summary>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.RadioButtonTester">
+            <summary>
+            A ControlTester for testing RadioButtons.  
+            </summary>
+            <remarks>
+            This class provides a convenience property for determining
+            whether a RadioButton is checked.</remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.RadioButtonTester.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a ControlTester from the control name and the form instance.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="form">The Form instance.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.RadioButtonTester.#ctor(System.String,System.String)">
+            <summary>
+            Creates a ControlTester from the control name and the form name.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="formName">The Form name..</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.RadioButtonTester.#ctor(System.String)">
+            <summary>
+            Creates a ControlTester from the control name.
+            </summary>
+            <remarks>
+            This is the best constructor.</remarks>
+            <param name="name">The Control name.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.RadioButtonTester.#ctor(NUnit.Extensions.Forms.ControlTester,System.Int32)">
+            <summary>
+            Creates a ControlTester from a ControlTester and an index where the
+            original tester's name is not unique.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="tester">The ControlTester.</param>
+            <param name="index">The index to test.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.RadioButtonTester.Item(System.Int32)">
+            <summary>
+            Allows you to find a RadioButtonTester by index where the name is not unique.
+            </summary>
+            <remarks>
+            This was added to support the ability to find controls where their name is
+            not unique.  If all of your controls are uniquely named (I recommend this) then
+            you will not need this.
+            </remarks>
+            <value>The ControlTester at the specified index.</value>
+            <param name="index">The index of the RadioButtonTester.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.RadioButtonTester.Properties">
+            <summary>
+            Provides access to all of the Properties of the RadioButton.
+            </summary>
+            <remarks>
+            Allows typed access to all of the properties of the underlying control.
+            </remarks>
+            <value>The underlying control.</value>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.TabControlTester">
+            <summary>
+            A ControlTester for testing TabControls.
+            </summary>
+            <remarks>
+            There is a convenience method for selecting a specified tab.</remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TabControlTester.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a ControlTester from the control name and the form instance.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="form">The Form instance.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TabControlTester.#ctor(System.String,System.String)">
+            <summary>
+            Creates a ControlTester from the control name and the form name.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="formName">The Form name..</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TabControlTester.#ctor(System.String)">
+            <summary>
+            Creates a ControlTester from the control name.
+            </summary>
+            <remarks>
+            This is the best constructor.</remarks>
+            <param name="name">The Control name.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TabControlTester.#ctor(NUnit.Extensions.Forms.ControlTester,System.Int32)">
+            <summary>
+            Creates a ControlTester from a ControlTester and an index where the
+            original tester's name is not unique.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="tester">The ControlTester.</param>
+            <param name="index">The index to test.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TabControlTester.SelectTab(System.Int32)">
+            <summary>
+            Selects the tab at the specified index.
+            </summary>
+            <param name="index">The tab to select.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.TabControlTester.Item(System.Int32)">
+            <summary>
+            Allows you to find a TabControlTester by index where the name is not unique.
+            </summary>
+            <remarks>
+            This was added to support the ability to find controls where their name is
+            not unique.  If all of your controls are uniquely named (I recommend this) then
+            you will not need this.
+            </remarks>
+            <value>The ControlTester at the specified index.</value>
+            <param name="index">The index of the TabControlTester.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.TabControlTester.Properties">
+            <summary>
+            Provides access to all of the Properties of the TabControl.
+            </summary>
+            <remarks>
+            Allows typed access to all of the properties of the underlying control.
+            </remarks>
+            <value>The underlying control.</value>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.TextBoxTester">
+            <summary>
+            A ControlTester for testing TextBoxes.
+            </summary>
+            <remarks>
+            There is a convenience method for entering text into a text box.</remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TextBoxTester.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a ControlTester from the control name and the form instance.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="form">The Form instance.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TextBoxTester.#ctor(System.String,System.String)">
+            <summary>
+            Creates a ControlTester from the control name and the form name.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="formName">The Form name..</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TextBoxTester.#ctor(System.String)">
+            <summary>
+            Creates a ControlTester from the control name.
+            </summary>
+            <remarks>
+            This is the best constructor.</remarks>
+            <param name="name">The Control name.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TextBoxTester.#ctor(NUnit.Extensions.Forms.ControlTester,System.Int32)">
+            <summary>
+            Creates a ControlTester from a ControlTester and an index where the
+            original tester's name is not unique.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="tester">The ControlTester.</param>
+            <param name="index">The index to test.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TextBoxTester.Enter(System.String)">
+            <summary>
+            This method allows you to enter text into the text box.
+            </summary>
+            <param name="text">The text to enter into the text box.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.TextBoxTester.Item(System.Int32)">
+            <summary>
+            Allows you to find a TextBoxTester by index where the name is not unique.
+            </summary>
+            <remarks>
+            This was added to support the ability to find controls where their name is
+            not unique.  If all of your controls are uniquely named (I recommend this) then
+            you will not need this.
+            </remarks>
+            <value>The ControlTester at the specified index.</value>
+            <param name="index">The index of the TextBoxTester.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.TextBoxTester.Properties">
+            <summary>
+            Provides access to all of the Properties of the TextBox.
+            </summary>
+            <remarks>
+            Allows typed access to all of the properties of the underlying control.
+            </remarks>
+            <value>The underlying control.</value>
+        </member>
+        <member name="T:NUnit.Extensions.Forms.TreeViewTester">
+            <summary>
+            A ControlTester for testing TreeViews.
+            </summary>
+            <remarks>
+            There is a convenience method for selecting a node in the tree.</remarks>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TreeViewTester.#ctor(System.String,System.Windows.Forms.Form)">
+            <summary>
+            Creates a ControlTester from the control name and the form instance.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="form">The Form instance.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TreeViewTester.#ctor(System.String,System.String)">
+            <summary>
+            Creates a ControlTester from the control name and the form name.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="name">The Control name.</param>
+            <param name="formName">The Form name..</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TreeViewTester.#ctor(System.String)">
+            <summary>
+            Creates a ControlTester from the control name.
+            </summary>
+            <remarks>
+            This is the best constructor.</remarks>
+            <param name="name">The Control name.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TreeViewTester.#ctor(NUnit.Extensions.Forms.ControlTester,System.Int32)">
+            <summary>
+            Creates a ControlTester from a ControlTester and an index where the
+            original tester's name is not unique.
+            </summary>
+            <remarks>
+            It is best to use the overloaded Constructor that requires just the name 
+            parameter if possible.
+            </remarks>
+            <param name="tester">The ControlTester.</param>
+            <param name="index">The index to test.</param>
+        </member>
+        <member name="M:NUnit.Extensions.Forms.TreeViewTester.SelectNode(System.Int32[])">
+            <summary>
+            Selects a node in the tree.
+            </summary>
+            <param name="indices">an array of the indexes of the node to select</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.TreeViewTester.Item(System.Int32)">
+            <summary>
+            Allows you to find a TreeViewTester by index where the name is not unique.
+            </summary>
+            <remarks>
+            This was added to support the ability to find controls where their name is
+            not unique.  If all of your controls are uniquely named (I recommend this) then
+            you will not need this.
+            </remarks>
+            <value>The ControlTester at the specified index.</value>
+            <param name="index">The index of the TreeViewTester.</param>
+        </member>
+        <member name="P:NUnit.Extensions.Forms.TreeViewTester.Properties">
+            <summary>
+            Provides access to all of the Properties of the TreeView.
+            </summary>
+            <remarks>
+            Allows typed access to all of the properties of the underlying control.
+            </remarks>
+            <value>The underlying control.</value>
+        </member>
+    </members>
+</doc>

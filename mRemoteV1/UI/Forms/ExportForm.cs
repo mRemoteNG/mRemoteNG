@@ -23,14 +23,14 @@ namespace mRemoteNG.Forms
 			}
 		}
 			
-        public Config.Connections.Save.Format SaveFormat
+        public Config.Connections.ConnectionsSaver.Format SaveFormat
 		{
 			get
 			{
 				ExportFormat exportFormat = cboFileFormat.SelectedItem as ExportFormat;
 				if (exportFormat == null)
 				{
-					return Config.Connections.Save.Format.mRXML;
+					return Config.Connections.ConnectionsSaver.Format.mRXML;
 				}
 				else
 				{
@@ -201,9 +201,9 @@ namespace mRemoteNG.Forms
 		public void ExportForm_Load(object sender, EventArgs e)
 		{
 			cboFileFormat.Items.Clear();
-            cboFileFormat.Items.Add(new ExportFormat(Config.Connections.Save.Format.mRXML));
-            cboFileFormat.Items.Add(new ExportFormat(Config.Connections.Save.Format.mRCSV));
-            cboFileFormat.Items.Add(new ExportFormat(Config.Connections.Save.Format.vRDCSV));
+            cboFileFormat.Items.Add(new ExportFormat(Config.Connections.ConnectionsSaver.Format.mRXML));
+            cboFileFormat.Items.Add(new ExportFormat(Config.Connections.ConnectionsSaver.Format.mRCSV));
+            cboFileFormat.Items.Add(new ExportFormat(Config.Connections.ConnectionsSaver.Format.vRDCSV));
 			cboFileFormat.SelectedIndex = 0;
 				
 			ApplyLanguage();
@@ -291,8 +291,8 @@ namespace mRemoteNG.Forms
         private class ExportFormat
 		{
             #region Public Properties
-			private Config.Connections.Save.Format _format;
-            public Config.Connections.Save.Format Format
+			private Config.Connections.ConnectionsSaver.Format _format;
+            public Config.Connections.ConnectionsSaver.Format Format
 			{
 				get
 				{
@@ -302,7 +302,7 @@ namespace mRemoteNG.Forms
             #endregion
 				
             #region Constructors
-			public ExportFormat(Config.Connections.Save.Format format)
+			public ExportFormat(Config.Connections.ConnectionsSaver.Format format)
 			{
 				_format = format;
 			}
@@ -313,11 +313,11 @@ namespace mRemoteNG.Forms
 			{
 				switch (Format)
 				{
-					case Config.Connections.Save.Format.mRXML:
+					case Config.Connections.ConnectionsSaver.Format.mRXML:
 						return Language.strMremoteNgXml;
-                    case Config.Connections.Save.Format.mRCSV:
+                    case Config.Connections.ConnectionsSaver.Format.mRCSV:
 						return Language.strMremoteNgCsv;
-                    case Config.Connections.Save.Format.vRDCSV:
+                    case Config.Connections.ConnectionsSaver.Format.vRDCSV:
 						return Language.strVisionAppRemoteDesktopCsv;
 					default:
 						return Format.ToString();

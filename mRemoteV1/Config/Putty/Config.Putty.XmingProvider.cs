@@ -1,17 +1,10 @@
-using System.Collections.Generic;
-using System;
-using AxWFICALib;
-using System.Drawing;
-using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
-using Microsoft.VisualBasic;
-using System.Collections;
-using System.Windows.Forms;
-using System.IO;
 using mRemoteNG.App;
-using mRemoteNG.Messages;
+using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Messages;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Text.RegularExpressions;
 
 
@@ -19,6 +12,13 @@ namespace mRemoteNG.Config.Putty
 {
 	public class XmingProvider : Provider
 	{
+        #region Private Fields
+        private const string RegistrySessionNameFormat = "{0} [registry]";
+        private const string RegistrySessionNamePattern = "(.*)\\ \\[registry\\]";
+        private static readonly RegistryProvider RegistryProvider = new RegistryProvider();
+        private static FileSystemWatcher _eventWatcher;
+        #endregion
+
         #region Public Methods
 		public override string[] GetSessionNames(bool raw = false)
 		{
@@ -27,8 +27,8 @@ namespace mRemoteNG.Config.Putty
 			{
 				return new string[] {};
 			}
-				
-			List<string> sessionNames = new List<string>();
+
+            List<string> sessionNames = new List<string>();
 			foreach (string sessionName in Directory.GetFiles(sessionsFolderPath))
 			{
 				string _sessionFileName = Path.GetFileName(sessionName);
@@ -56,8 +56,8 @@ namespace mRemoteNG.Config.Putty
 					sessionNames.Insert(0, "Default Settings");
 				}
 			}
-				
-			List<string> registrySessionNames = new List<string>();
+
+            List<string> registrySessionNames = new List<string>();
 			foreach (string sessionName in RegistryProvider.GetSessionNames(raw))
 			{
 				registrySessionNames.Add(string.Format(RegistrySessionNameFormat, sessionName));
@@ -69,7 +69,7 @@ namespace mRemoteNG.Config.Putty
 			return sessionNames.ToArray();
 		}
 			
-		public override Connection.PuttySession.Info GetSession(string sessionName)
+		public override PuttySessionInfo GetSession(string sessionName)
 		{
 			string registrySessionName = GetRegistrySessionName(sessionName);
 			if (!string.IsNullOrEmpty(registrySessionName))
@@ -92,7 +92,7 @@ namespace mRemoteNG.Config.Putty
 			sessionName = System.Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"));
 				
 			SessionFileReader sessionFileReader = new SessionFileReader(sessionFile);
-			Connection.PuttySession.Info sessionInfo = new Connection.PuttySession.Info();
+			PuttySessionInfo sessionInfo = new PuttySessionInfo();
 			sessionInfo.PuttySession = sessionName;
 			sessionInfo.Name = sessionName;
 			sessionInfo.Hostname = sessionFileReader.GetValue("HostName");
@@ -105,10 +105,10 @@ namespace mRemoteNG.Config.Putty
 			switch (protocol.ToLowerInvariant())
 			{
 				case "raw":
-					sessionInfo.Protocol = Protocols.RAW;
+					sessionInfo.Protocol = ProtocolType.RAW;
 					break;
 				case "rlogin":
-					sessionInfo.Protocol = Protocols.Rlogin;
+					sessionInfo.Protocol = ProtocolType.Rlogin;
 					break;
 				case "serial":
 					return null;
@@ -119,25 +119,25 @@ namespace mRemoteNG.Config.Putty
 						int sshVersion = System.Convert.ToInt32(sshVersionObject);
 						if (sshVersion >= 2)
 						{
-							sessionInfo.Protocol = Protocols.SSH2;
+							sessionInfo.Protocol = ProtocolType.SSH2;
 						}
 						else
 						{
-							sessionInfo.Protocol = Protocols.SSH1;
+							sessionInfo.Protocol = ProtocolType.SSH1;
 						}
 					}
 					else
 					{
-						sessionInfo.Protocol = Protocols.SSH2;
+						sessionInfo.Protocol = ProtocolType.SSH2;
 					}
 					break;
 				case "telnet":
-					sessionInfo.Protocol = Protocols.Telnet;
+					sessionInfo.Protocol = ProtocolType.Telnet;
 					break;
 				default:
 					return null;
 			}
-			sessionInfo.Port = System.Convert.ToInt32(sessionFileReader.GetValue("PortNumber"));
+			sessionInfo.Port = Convert.ToInt32(sessionFileReader.GetValue("PortNumber"));
 			
 			return sessionInfo;
 		}
@@ -182,26 +182,18 @@ namespace mRemoteNG.Config.Putty
 			_eventWatcher = null;
 		}
         #endregion
-			
-        #region Private Fields
-		private const string RegistrySessionNameFormat = "{0} [registry]";
-		private const string RegistrySessionNamePattern = "(.*)\\ \\[registry\\]";
-			
-		private static readonly RegistryProvider RegistryProvider = new RegistryProvider();
-		private static FileSystemWatcher _eventWatcher;
-        #endregion
-			
+		
         #region Private Methods
 		private static string GetPuttyConfPath()
 		{
 			string puttyPath = "";
 			if (My.Settings.Default.UseCustomPuttyPath)
 			{
-				puttyPath = System.Convert.ToString(My.Settings.Default.CustomPuttyPath);
+				puttyPath = Convert.ToString(My.Settings.Default.CustomPuttyPath);
 			}
 			else
 			{
-				puttyPath = App.Info.General.PuttyPath;
+				puttyPath = App.Info.GeneralAppInfo.PuttyPath;
 			}
 			return Path.Combine(Path.GetDirectoryName(puttyPath), "putty.conf");
 		}
@@ -233,7 +225,7 @@ namespace mRemoteNG.Config.Putty
 			return groups[1].Value;
 		}
 			
-		private static Connection.PuttySession.Info ModifyRegistrySessionInfo(Connection.PuttySession.Info sessionInfo)
+		private static PuttySessionInfo ModifyRegistrySessionInfo(PuttySessionInfo sessionInfo)
 		{
 			sessionInfo.Name = string.Format(RegistrySessionNameFormat, sessionInfo.Name);
 			sessionInfo.PuttySession = string.Format(RegistrySessionNameFormat, sessionInfo.PuttySession);
