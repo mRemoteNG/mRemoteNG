@@ -106,7 +106,7 @@
     </xsd:element>
   </xsd:schema>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -115,7 +115,7 @@
     <value>2.0</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strAbout" xml:space="preserve">
     <value>Over</value>
@@ -139,7 +139,7 @@
     <value>Knooppunten toevoegen van XML mislukt!</value>
   </data>
   <data name="strAllowOnlySingleInstance" xml:space="preserve">
-    <value>Laat slechts één exemplaar van de applicatie toe (mRemoteNG herstart vereist)</value>
+    <value>Laat slechts één exemplaar van de applicatie toe (mRemote3G herstart vereist)</value>
   </data>
   <data name="strAlways" xml:space="preserve">
     <value>Altijd</value>
@@ -285,9 +285,9 @@ Gebruik dan Bestand - Laad Connecties voor normale connectie bestanden!</value>
   </data>
   <data name="strCcEOLFailed" xml:space="preserve">
     <value>De (RDP) Sessies optie vereist dat u een geregistreerde versie van eolwtscom.dll op uw systeem heeft.
-mRemoteNG neemt dit onderdeel automatisch mee bij instalatie, maar zal niet automatisch registreren al u handmatig heeft geïnstalleerd, tenzij u het installatieprogramma opnieuw uitvoert.
-Om handmatig te registreren : Open het dialoogvenster Uitvoeren (Start - Uitvoeren) en typ het volgende: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (Waar c:\Program Files\mRemoteNG\ het pad is naar uw mRemoteNG installatie).
-Als u nog steeds niet in staat bent om de langs check te komen gebruik dan ICA in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
+mRemote3G neemt dit onderdeel automatisch mee bij instalatie, maar zal niet automatisch registreren al u handmatig heeft geïnstalleerd, tenzij u het installatieprogramma opnieuw uitvoert.
+Om handmatig te registreren : Open het dialoogvenster Uitvoeren (Start - Uitvoeren) en typ het volgende: regsvr32 "c:\Program Files\mRemote3G\eolwtscom.dll" (Waar c:\Program Files\mRemote3G\ het pad is naar uw mRemote3G installatie).
+Als u nog steeds niet in staat bent om de langs check te komen gebruik dan ICA in mRemote3G of raadpleeg mRemote3G Forum op http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM werd gevonden en lijkt correct te zijn geïnstalleerd.</value>
@@ -295,8 +295,8 @@ Als u nog steeds niet in staat bent om de langs check te komen gebruik dan ICA i
   <data name="strCcGeckoFailed" xml:space="preserve">
     <value>Voor het gebruik van de Gecko Rendering Engine heb je XULrunner 1.8.1.x nodig en correcte pad naar de installatiemap welke onder Opties kunnen worden ingesteld.
 U kunt XULrunner 1.8.1.3 vanaf deze locatie downloaden: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Wanneer de download van het pakket is voltooid kunt u deze uitpakken naar een willekeurige locatie. Ga daarna vervolgens in mRemoteNG naar Extra - Opties - Geavanceerd en voer het juiste pad in naar de uitgepakte XULrunner bestanden.
-Als u nog steeds niet in staat bent om de langs check te komen gebruik dan de Gecko Engine in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
+Wanneer de download van het pakket is voltooid kunt u deze uitpakken naar een willekeurige locatie. Ga daarna vervolgens in mRemote3G naar Extra - Opties - Geavanceerd en voer het juiste pad in naar de uitgepakte XULrunner bestanden.
+Als u nog steeds niet in staat bent om de langs check te komen gebruik dan de Gecko Engine in mRemote3G of raadpleeg mRemote3G Forum op http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>XULrunner werd gevonden en lijkt correct te zijn geïnstalleerd.</value>
@@ -305,7 +305,7 @@ Als u nog steeds niet in staat bent om de langs check te komen gebruik dan de Ge
     <value>ICA vereist dat de XenDesktop Online Plugin is geïnstalleerd is en dat de wfica.ocx bibliotheek is geregistreerd. U kunt de cliënt van deze locatie downloaden: http://www.citrix.com/download/
 Als u de XenDesktop Online Plugin heeft geïnstalleerd en de check nog niet lukt, probeer dan om handmatig wfica.ocx te registreren
 Om dit uit te voeren opent u het dialoogvenster Uitvoeren (Start - Uitvoeren) en typ het volgende: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (Waarbij c:\Program Files\Citrix\ICA Client\ het pad is naar uw XenDesktop Online Plugin installatie).
-Als u nog steeds niet in staat bent om de langs check te komen gebruik dan ICA in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
+Als u nog steeds niet in staat bent om de langs check te komen gebruik dan ICA in mRemote3G of raadpleeg mRemote3G Forum op http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
     <value>Alle ICA componenten werden gevonden en lijken correct te zijn geregistreerd.
@@ -315,8 +315,8 @@ Citrix ICA Versie {0}</value>
     <value>Niet correct geïnstalleerd</value>
   </data>
   <data name="strCcPuttyFailed" xml:space="preserve">
-    <value>De SSH, Telnet, Rlogin en RAW protocollen zijn nodig PuTTY om te laten functioneren. PuTTY wordt standaard geleverd bij de mRemoteNG installatie en bevind zich in het installatiepad.
-Zorg ervoor dat u ofwel de Putty.exe in uw mRemoteNG directory staat(standaard: c:\Program Files\mRemoteNG\) of een geldig pad heeft opgegeven naar het PuTTY programmabestand onder Opties (Extra - Opties - Geavanceerd - Aangepast PuTTY pad)</value>
+    <value>De SSH, Telnet, Rlogin en RAW protocollen zijn nodig PuTTY om te laten functioneren. PuTTY wordt standaard geleverd bij de mRemote3G installatie en bevind zich in het installatiepad.
+Zorg ervoor dat u ofwel de Putty.exe in uw mRemote3G directory staat(standaard: c:\Program Files\mRemote3G\) of een geldig pad heeft opgegeven naar het PuTTY programmabestand onder Opties (Extra - Opties - Geavanceerd - Aangepast PuTTY pad)</value>
   </data>
   <data name="strCcPuttyOK" xml:space="preserve">
     <value>Het programmabestand PuTTY werd gevonden en is klaar voor gebruik</value>
@@ -324,23 +324,23 @@ Zorg ervoor dat u ofwel de Putty.exe in uw mRemoteNG directory staat(standaard: 
   <data name="strCcRDPFailed" xml:space="preserve">
     <value>Om RDP goed te laten werken moet je minimaal Verbinding met extern bureaublad (Terminal Services Client) 6.1 geïnstalleerd te hebben. U kunt het hier downloaden: http://support.microsoft.com/kb/951616
 Als u RDP 6.1 heeft geïnstalleerd en de check nog niet lukt, probeer dan om handmatig mstscax.dll te registreren. Om dit uit te voeren opent u het dialoogvenster Uitvoeren (Start - Uitvoeren) en typ het volgende:  regsvr32 "c:\windows\system32\mstscax.dll" (Waarbij c: \ je systeem schijf is).
-Als u nog steeds niet in staat bent om de langs check te komen voor RDP raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
+Als u nog steeds niet in staat bent om de langs check te komen voor RDP raadpleeg mRemote3G Forum op http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
     <value>Alle RDP componenten werden gevonden en lijken correct te zijn geregistreerd.
 Verbinding met extern bureaublad Versie {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC vereist dat VncSharpNG.dll in de mRemoteNG installatiemap is geplaatst.
-Zorg ervoor dat u  VncSharpNG.dll bestand in de  mRemoteNG installatiemap wordt geplaatst (standaard C:\Program Files\mRemoteNG\).
-Als u nog steeds niet in staat bent om de langs check te komen gebruik dan VNC in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
+    <value>VNC vereist dat VncSharpNG.dll in de mRemote3G installatiemap is geplaatst.
+Zorg ervoor dat u  VncSharpNG.dll bestand in de  mRemote3G installatiemap wordt geplaatst (standaard C:\Program Files\mRemote3G\).
+Als u nog steeds niet in staat bent om de langs check te komen gebruik dan VNC in mRemote3G of raadpleeg mRemote3G Forum op http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>Alle VNC componenten werden gevonden en lijken correct te zijn geregistreerd.
 VncSharpNG Versie {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Automatisch proberen opnieuw te verbinden wanneer de verbinding is verbroken van de server (RDP &amp;&amp; ICA Alleen)</value>
+    <value>Automatisch proberen opnieuw te verbinden wanneer de verbinding is verbroken van de server (RDP Alleen)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Domein</value>
@@ -650,7 +650,7 @@ Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor
     <value>Exporteer</value>
   </data>
   <data name="strExportmRemoteXML" xml:space="preserve">
-    <value>Exporteer mRemote/mRemoteNG XML</value>
+    <value>Exporteer mRemote/mRemote3G XML</value>
   </data>
   <data name="strExtApp" xml:space="preserve">
     <value>Externe Applicatie</value>
@@ -752,7 +752,7 @@ Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor
     <value>Importeer/Exporteer</value>
   </data>
   <data name="strImportmRemoteXML" xml:space="preserve">
-    <value>Importeer mRemote/mRemoteNG XML</value>
+    <value>Importeer mRemote/mRemote3G XML</value>
   </data>
   <data name="strImportPortScan" xml:space="preserve">
     <value>Importeer van Poort Scan</value>
@@ -767,7 +767,7 @@ Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor
     <value>Informatie</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG is voorzien van de meest actuele versie</value>
+    <value>mRemote3G is voorzien van de meest actuele versie</value>
   </data>
   <data name="strIntAppConnectionFailed" xml:space="preserve">
     <value>Verbinding mislukt!</value>
@@ -995,7 +995,7 @@ Zie het Microsoft Support artikel op http://support.microsoft.com/kb/811833 voor
     <value>&amp;Help</value>
   </data>
   <data name="strMenuHelpContents" xml:space="preserve">
-    <value>mRemoteNG Help</value>
+    <value>mRemote3G Help</value>
   </data>
   <data name="strMenuJumpTo" xml:space="preserve">
     <value>Ga naar</value>
@@ -1200,7 +1200,7 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
     <value>Poortscan paneel kon niet worden geladen</value>
   </data>
   <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-    <value>(Deze eigenschappen worden alleen opgeslagen als u mRemote/mRemoteNG XML als output bestand formaat selecteert!)</value>
+    <value>(Deze eigenschappen worden alleen opgeslagen als u mRemote/mRemote3G XML als output bestand formaat selecteert!)</value>
   </data>
   <data name="strPropertyDescriptionAddress" xml:space="preserve">
     <value>Geef de hostnaam of IP adres op waarmee u verbinding wilt maken</value>
@@ -1275,7 +1275,7 @@ Als dergelijke problemen voorkomen maak dan een nieuwe verbindings bestand aan!<
     <value>Voer de poortnummer in waar het geselecteerde protocol op luistert.</value>
   </data>
   <data name="strPropertyDescriptionProtocol" xml:space="preserve">
-    <value>Kies het protocol dat mRemoteNG moet gebruiken om verbinding te maken met de host.</value>
+    <value>Kies het protocol dat mRemote3G moet gebruiken om verbinding te maken met de host.</value>
   </data>
   <data name="strPropertyDescriptionPuttySession" xml:space="preserve">
     <value>Selecteer een PuTTY sessie welke wordt gebruikt bij het verbinden.</value>
@@ -1581,7 +1581,7 @@ Bericht:
     <value>&amp;Waarschuw bij het sluiten van connecties</value>
   </data>
   <data name="strRadioCloseWarnExit" xml:space="preserve">
-    <value>&amp;xWaarschuw alleen bij het sluiten van mRemoteNG</value>
+    <value>&amp;xWaarschuw alleen bij het sluiten van mRemote3G</value>
   </data>
   <data name="strRadioCloseWarnMultiple" xml:space="preserve">
     <value>Waarschuw alleen bij het sluiten van &amp;meerdere connecties</value>
@@ -1626,7 +1626,7 @@ Bericht:
     <value>Openen van verbinding mislukt!</value>
   </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
-    <value>Kan geen RDP controle aanmaken, controleer mRemoteNG systeemeisen.</value>
+    <value>Kan geen RDP controle aanmaken, controleer mRemote3G systeemeisen.</value>
   </data>
   <data name="strRDPDisableCursorblinking" xml:space="preserve">
     <value>Cursor Knipperen Uitschakelen</value>
@@ -2079,10 +2079,10 @@ Bericht:
     <value>Thema zonder naam</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
-    <value>Er is een update voor mRemoteNG beschikbaar</value>
+    <value>Er is een update voor mRemote3G beschikbaar</value>
   </data>
   <data name="strUpdateCheck" xml:space="preserve">
-    <value>mRemoteNG kan periodiek verbinding maken met de mRemoteNG website om te controleren op updates en product aankondigingen.</value>
+    <value>mRemote3G kan periodiek verbinding maken met de mRemote3G website om te controleren op updates en product aankondigingen.</value>
   </data>
   <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
     <value>Check voor de update voltooiing is mislukt!</value>
@@ -2091,14 +2091,14 @@ Bericht:
     <value>Controleren op update mislukt!</value>
   </data>
   <data name="strUpdateCheckPortableEdition" xml:space="preserve">
-    <value>mRemoteNG Portable Edition ondersteunt momenteel geen automatische updates.</value>
+    <value>mRemote3G Portable Edition ondersteunt momenteel geen automatische updates.</value>
   </data>
   <data name="strUpdateDeleteFailed" xml:space="preserve">
     <value>Fout bij verwijderen van update-bestand!</value>
   </data>
   <data name="strUpdateDownloadComplete" xml:space="preserve">
     <value>Download voltooid!
-mRemoteNG zal nu worden gesloten en beginnen met de installatie.</value>
+mRemote3G zal nu worden gesloten en beginnen met de installatie.</value>
   </data>
   <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
     <value>Download complete mislukt!</value>
@@ -2182,7 +2182,7 @@ mRemoteNG zal nu worden gesloten en beginnen met de installatie.</value>
     <value>Maakt gebruik van de DockPanel Suite van [Weifen Luo]</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Schrijf log bestand (mRemoteNG.log)</value>
+    <value>Schrijf log bestand (mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner pad:</value>

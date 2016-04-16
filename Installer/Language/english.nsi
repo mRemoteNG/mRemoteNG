@@ -1,7 +1,7 @@
 ; English installer translation
 
-; Start mRemoteNG after installation
-LangString LaunchMremoteNow ${LANG_ENGLISH} "Launch mRemoteNG Now"
+; Start mRemote3G after installation
+LangString LaunchMremoteNow ${LANG_ENGLISH} "Launch mRemote3G Now"
 
 ; Installer Language
 LangString InstallerLanguage ${LANG_ENGLISH} "Installer Language"
@@ -10,10 +10,10 @@ LangString InstallerLanguage ${LANG_ENGLISH} "Installer Language"
 LangString SelectInstallerLanguage ${LANG_ENGLISH} "Please select the language of the installer"
 
 ; Requires .NET Framework
-LangString RequiresNetFramework ${LANG_ENGLISH} "mRemoteNG requires Microsoft .NET Framework 3.0."
+LangString RequiresNetFramework ${LANG_ENGLISH} "mRemote3G requires Microsoft .NET Framework 4.6."
 
 ; User needs to be Admin
-LangString RequiresAdminUser ${LANG_ENGLISH} "You must be a member of the 'Power Users' or 'Administrators' group to install mRemoteNG."
+LangString RequiresAdminUser ${LANG_ENGLISH} "You must be a member of the 'Power Users' or 'Administrators' group to install mRemote3G."
 
 ; Start Menu items
 LangString CreditsLinkName ${LANG_ENGLISH} "Credits"

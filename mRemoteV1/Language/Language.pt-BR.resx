@@ -106,7 +106,7 @@
     </xsd:element>
   </xsd:schema>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -115,7 +115,7 @@
     <value>2.0</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strAbout" xml:space="preserve">
     <value>Sobre</value>
@@ -139,7 +139,7 @@
     <value>AddNodesFromSQL falhou!</value>
   </data>
   <data name="strAllowOnlySingleInstance" xml:space="preserve">
-    <value>Permitir apenas uma única instância do aplicativo (É necessário reiniciar o mRemoteNG)</value>
+    <value>Permitir apenas uma única instância do aplicativo (É necessário reiniciar o mRemote3G)</value>
   </data>
   <data name="strAlways" xml:space="preserve">
     <value>Sempre</value>
@@ -281,9 +281,9 @@
   </data>
   <data name="strCcEOLFailed" xml:space="preserve">
     <value>O recurso de sessões (RDP) requer que você tenha uma cópia registrada do eolwtscom.dll no seu sistema. 
-mRemoteNG vem com este componente mas não o registra automaticamente a menos que você instale o pacote. 
-Para registrá-lo manualmente faça isso: Abra a caixa de diálogo Executar (Iniciar - Executar) e digite o seguinte: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (onde c:\Program Files\mRemoteNG\ é o caminho para a instalação de mRemoteNG). 
-Se você ainda não conseguir passar por esta verificação ou não conseguir usar o recurso de sessões (RDP) no mRemoteNG, por favor, consulte o fórum de mRemoteNG em http://forum.mremoteng.org/</value>
+mRemote3G vem com este componente mas não o registra automaticamente a menos que você instale o pacote. 
+Para registrá-lo manualmente faça isso: Abra a caixa de diálogo Executar (Iniciar - Executar) e digite o seguinte: regsvr32 "c:\Program Files\mRemote3G\eolwtscom.dll" (onde c:\Program Files\mRemote3G\ é o caminho para a instalação de mRemote3G). 
+Se você ainda não conseguir passar por esta verificação ou não conseguir usar o recurso de sessões (RDP) no mRemote3G, por favor, consulte o fórum de mRemote3G em http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM foi encontrada e parece ser registrado corretamente.</value>
@@ -292,8 +292,8 @@ Se você ainda não conseguir passar por esta verificação ou não conseguir us
     <value>Para usar o motor de renderização Gecko, você precisa ter o XULrunner 1.8.1.x e o caminho para a instalação do conjunto em suas opções. 
 Você pode baixar o XULrunner 1.8.1.3 em: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/ 
 Quando terminar de baixar o pacote, extraia o pacote para um caminho de sua escolha. 
-Em seguida, emtre no mRemoteNG e vá em ferramentas - opções - avançadas e digite o caminho correto no campo caminho XULrunner. 
-Se ainda não conseguir passar esta verificação ou usar o motor Gecko em mRemoteNG por favor consultar o fórum de mRemoteNG em http://forum.mremoteng.org/</value>
+Em seguida, emtre no mRemote3G e vá em ferramentas - opções - avançadas e digite o caminho correto no campo caminho XULrunner. 
+Se ainda não conseguir passar esta verificação ou usar o motor Gecko em mRemote3G por favor consultar o fórum de mRemote3G em http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>XULrunner foi encontrado e aparenta estar instalado corretamente.</value>
@@ -302,7 +302,7 @@ Se ainda não conseguir passar esta verificação ou usar o motor Gecko em mRemo
     <value>ICA requer que o XenDesktop Online Plugin esteja instalado e a biblioteca wfica.ocs registrada. Você pode baixar o cliente aqui: http://www.citrix.com/download/ 
 Se você tiver o Plugin Online XenDesktop instalado e a verificação ainda falhar, tente registrar manualmente o wfica.ocx 
 Para fazer isso abra a caixa de diálogo Executar (Iniciar - Executar) e digite o seguinte: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (onde c:\Program Files\Citrix\ICA Client\ é o caminho para a instalação do Plugin Online do XenDesktop). 
-Se você ainda não puder passar por esta verificação ou usar ICA em mRemoteNG, por favor, consulte o fórum de mRemoteNG no http://forum.mremoteng.org/"</value>
+Se você ainda não puder passar por esta verificação ou usar ICA em mRemote3G, por favor, consulte o fórum de mRemote3G no http://forum.mremoteng.org/"</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
     <value>Todos os componentes de ICA, foram encontrados e parecem ser registrado corretamente. Citrix ICA cliente controle versão {0}</value>
@@ -311,8 +311,8 @@ Se você ainda não puder passar por esta verificação ou usar ICA em mRemoteNG
     <value>não instalado corretamente</value>
   </data>
   <data name="strCcPuttyFailed" xml:space="preserve">
-    <value>O SSH, Telnet, Rlogin e protocolos RAW precisam PuTTY para trabalhar. PuTTY vem com cada pacote de mRemoteNG e está localizado no caminho de instalação. 
-Por favor, certifique-se de que você tem o Putty.exe em seu diretório mRemoteNG (padrão: c:\Program Files\mRemoteNG\) ou que você tenha especificado um caminho válido para seu executável PuTTY nas opções (ferramentas - opções - avançadas - caminho personalizado PuTTY)</value>
+    <value>O SSH, Telnet, Rlogin e protocolos RAW precisam PuTTY para trabalhar. PuTTY vem com cada pacote de mRemote3G e está localizado no caminho de instalação. 
+Por favor, certifique-se de que você tem o Putty.exe em seu diretório mRemote3G (padrão: c:\Program Files\mRemote3G\) ou que você tenha especificado um caminho válido para seu executável PuTTY nas opções (ferramentas - opções - avançadas - caminho personalizado PuTTY)</value>
   </data>
   <data name="strCcPuttyOK" xml:space="preserve">
     <value>O executável PuTTY foi encontrado e está pronto para usar.</value>

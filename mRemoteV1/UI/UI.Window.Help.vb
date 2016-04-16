@@ -1,50 +1,59 @@
-﻿Imports WeifenLuo.WinFormsUI.Docking
+﻿Imports System.ComponentModel
+Imports mRemote3G.My.Resources
+Imports WeifenLuo.WinFormsUI.Docking
 
 Namespace UI
+
     Namespace Window
         Public Class Help
-            Inherits UI.Window.Base
+            Inherits Base
 
 #Region "Form Init"
-            Friend WithEvents tvIndex As System.Windows.Forms.TreeView
-            Friend WithEvents imgListHelp As System.Windows.Forms.ImageList
-            Private components As System.ComponentModel.IContainer
-            Friend WithEvents pnlSplitter As System.Windows.Forms.SplitContainer
-            Friend WithEvents lblDocName As System.Windows.Forms.Label
-            Friend WithEvents wbHelp As System.Windows.Forms.WebBrowser
+
+            Friend WithEvents tvIndex As TreeView
+            Friend WithEvents imgListHelp As ImageList
+            Private components As IContainer
+            Friend WithEvents pnlSplitter As SplitContainer
+            Friend WithEvents lblDocName As Label
+            Friend WithEvents wbHelp As WebBrowser
 
             Private Sub InitializeComponent()
                 Me.components = New System.ComponentModel.Container
-                Dim TreeNode1 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Introduction")
-                Dim TreeNode2 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Prerequisites")
-                Dim TreeNode3 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Installation")
-                Dim TreeNode4 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Configuration")
-                Dim TreeNode5 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("SQL Configuration")
-                Dim TreeNode6 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Command-Line Switches")
-                Dim TreeNode7 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Getting Started", New System.Windows.Forms.TreeNode() {TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
-                Dim TreeNode8 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Main Menu")
-                Dim TreeNode9 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Connections")
-                Dim TreeNode10 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Config")
-                Dim TreeNode11 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Errors and Infos")
-                Dim TreeNode12 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Save As / Export")
-                Dim TreeNode13 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Sessions")
-                Dim TreeNode14 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Screenshot Manager")
-                Dim TreeNode15 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Connection")
-                Dim TreeNode16 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Options")
-                Dim TreeNode17 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Update")
-                Dim TreeNode18 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("SSH File Transfer")
-                Dim TreeNode19 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Quick Connect")
-                Dim TreeNode20 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Import From Active Directory")
-                Dim TreeNode21 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("External Applications")
-                Dim TreeNode22 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Port Scan")
-                Dim TreeNode23 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("User Interface", New System.Windows.Forms.TreeNode() {TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12, TreeNode13, TreeNode14, TreeNode15, TreeNode16, TreeNode17, TreeNode18, TreeNode19, TreeNode20, TreeNode21, TreeNode22})
-                Dim TreeNode24 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Quick Reference")
-                Dim TreeNode25 As System.Windows.Forms.TreeNode = New System.Windows.Forms.TreeNode("Help", New System.Windows.Forms.TreeNode() {TreeNode1, TreeNode7, TreeNode23, TreeNode24})
-                Me.wbHelp = New System.Windows.Forms.WebBrowser
-                Me.tvIndex = New System.Windows.Forms.TreeView
-                Me.imgListHelp = New System.Windows.Forms.ImageList(Me.components)
-                Me.pnlSplitter = New System.Windows.Forms.SplitContainer
-                Me.lblDocName = New System.Windows.Forms.Label
+                Dim TreeNode1 = New TreeNode("Introduction")
+                Dim TreeNode2 = New TreeNode("Prerequisites")
+                Dim TreeNode3 = New TreeNode("Installation")
+                Dim TreeNode4 = New TreeNode("Configuration")
+                Dim TreeNode5 = New TreeNode("SQL Configuration")
+                Dim TreeNode6 = New TreeNode("Command-Line Switches")
+                Dim TreeNode7 = New TreeNode("Getting Started",
+                                             New TreeNode() {TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6})
+                Dim TreeNode8 = New TreeNode("Main Menu")
+                Dim TreeNode9 = New TreeNode("Connections")
+                Dim TreeNode10 = New TreeNode("Config")
+                Dim TreeNode11 = New TreeNode("Errors and Infos")
+                Dim TreeNode12 = New TreeNode("Save As / Export")
+                Dim TreeNode13 = New TreeNode("Sessions")
+                Dim TreeNode14 = New TreeNode("Screenshot Manager")
+                Dim TreeNode15 = New TreeNode("Connection")
+                Dim TreeNode16 = New TreeNode("Options")
+                Dim TreeNode17 = New TreeNode("Update")
+                Dim TreeNode18 = New TreeNode("SSH File Transfer")
+                Dim TreeNode19 = New TreeNode("Quick Connect")
+                Dim TreeNode20 = New TreeNode("Import From Active Directory")
+                Dim TreeNode21 = New TreeNode("External Applications")
+                Dim TreeNode22 = New TreeNode("Port Scan")
+                Dim TreeNode23 = New TreeNode("User Interface",
+                                              New TreeNode() _
+                                                 {TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12, TreeNode13,
+                                                  TreeNode14, TreeNode15, TreeNode16, TreeNode17, TreeNode18, TreeNode19,
+                                                  TreeNode20, TreeNode21, TreeNode22})
+                Dim TreeNode24 = New TreeNode("Quick Reference")
+                Dim TreeNode25 = New TreeNode("Help", New TreeNode() {TreeNode1, TreeNode7, TreeNode23, TreeNode24})
+                Me.wbHelp = New WebBrowser
+                Me.tvIndex = New TreeView
+                Me.imgListHelp = New ImageList(Me.components)
+                Me.pnlSplitter = New SplitContainer
+                Me.lblDocName = New Label
                 Me.pnlSplitter.Panel1.SuspendLayout()
                 Me.pnlSplitter.Panel2.SuspendLayout()
                 Me.pnlSplitter.SuspendLayout()
@@ -52,24 +61,26 @@ Namespace UI
                 '
                 'wbHelp
                 '
-                Me.wbHelp.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.wbHelp.Location = New System.Drawing.Point(1, 36)
-                Me.wbHelp.MinimumSize = New System.Drawing.Size(20, 20)
+                Me.wbHelp.Anchor = CType((((AnchorStyles.Top Or AnchorStyles.Bottom) _
+                                           Or AnchorStyles.Left) _
+                                          Or AnchorStyles.Right),
+                                         AnchorStyles)
+                Me.wbHelp.Location = New Point(1, 36)
+                Me.wbHelp.MinimumSize = New Size(20, 20)
                 Me.wbHelp.Name = "wbHelp"
                 Me.wbHelp.ScriptErrorsSuppressed = True
-                Me.wbHelp.Size = New System.Drawing.Size(327, 286)
+                Me.wbHelp.Size = New Size(327, 286)
                 Me.wbHelp.TabIndex = 1
                 '
                 'tvIndex
                 '
-                Me.tvIndex.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.tvIndex.BorderStyle = System.Windows.Forms.BorderStyle.None
+                Me.tvIndex.Anchor = CType((((AnchorStyles.Top Or AnchorStyles.Bottom) _
+                                            Or AnchorStyles.Left) _
+                                           Or AnchorStyles.Right),
+                                          AnchorStyles)
+                Me.tvIndex.BorderStyle = BorderStyle.None
                 Me.tvIndex.HideSelection = False
-                Me.tvIndex.Location = New System.Drawing.Point(1, 1)
+                Me.tvIndex.Location = New Point(1, 1)
                 Me.tvIndex.Name = "tvIndex"
                 TreeNode1.Name = "Node0"
                 TreeNode1.Tag = "Introduction"
@@ -143,24 +154,25 @@ Namespace UI
                 TreeNode24.Text = "Quick Reference"
                 TreeNode25.Name = "Node0"
                 TreeNode25.Text = "Help"
-                Me.tvIndex.Nodes.AddRange(New System.Windows.Forms.TreeNode() {TreeNode25})
+                Me.tvIndex.Nodes.AddRange(New TreeNode() {TreeNode25})
                 Me.tvIndex.ShowRootLines = False
-                Me.tvIndex.Size = New System.Drawing.Size(207, 321)
+                Me.tvIndex.Size = New Size(207, 321)
                 Me.tvIndex.TabIndex = 0
                 '
                 'imgListHelp
                 '
-                Me.imgListHelp.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit
-                Me.imgListHelp.ImageSize = New System.Drawing.Size(16, 16)
-                Me.imgListHelp.TransparentColor = System.Drawing.Color.Transparent
+                Me.imgListHelp.ColorDepth = ColorDepth.Depth32Bit
+                Me.imgListHelp.ImageSize = New Size(16, 16)
+                Me.imgListHelp.TransparentColor = Color.Transparent
                 '
                 'pnlSplitter
                 '
-                Me.pnlSplitter.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                            Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.pnlSplitter.FixedPanel = System.Windows.Forms.FixedPanel.Panel1
-                Me.pnlSplitter.Location = New System.Drawing.Point(0, 0)
+                Me.pnlSplitter.Anchor = CType((((AnchorStyles.Top Or AnchorStyles.Bottom) _
+                                                Or AnchorStyles.Left) _
+                                               Or AnchorStyles.Right),
+                                              AnchorStyles)
+                Me.pnlSplitter.FixedPanel = FixedPanel.Panel1
+                Me.pnlSplitter.Location = New Point(0, 0)
                 Me.pnlSplitter.Name = "pnlSplitter"
                 '
                 'pnlSplitter.Panel1
@@ -171,29 +183,31 @@ Namespace UI
                 '
                 Me.pnlSplitter.Panel2.Controls.Add(Me.lblDocName)
                 Me.pnlSplitter.Panel2.Controls.Add(Me.wbHelp)
-                Me.pnlSplitter.Size = New System.Drawing.Size(542, 323)
+                Me.pnlSplitter.Size = New Size(542, 323)
                 Me.pnlSplitter.SplitterDistance = 209
                 Me.pnlSplitter.TabIndex = 2
                 '
                 'lblDocName
                 '
-                Me.lblDocName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-                            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.lblDocName.BackColor = System.Drawing.Color.DimGray
-                Me.lblDocName.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.lblDocName.ForeColor = System.Drawing.Color.White
-                Me.lblDocName.Location = New System.Drawing.Point(1, 1)
+                Me.lblDocName.Anchor = CType(((AnchorStyles.Top Or AnchorStyles.Left) _
+                                              Or AnchorStyles.Right),
+                                             AnchorStyles)
+                Me.lblDocName.BackColor = Color.DimGray
+                Me.lblDocName.Font = New Font("Microsoft Sans Serif", 12.0!, FontStyle.Bold, GraphicsUnit.Point,
+                                              CType(0, Byte))
+                Me.lblDocName.ForeColor = Color.White
+                Me.lblDocName.Location = New Point(1, 1)
                 Me.lblDocName.Name = "lblDocName"
-                Me.lblDocName.Size = New System.Drawing.Size(327, 35)
+                Me.lblDocName.Size = New Size(327, 35)
                 Me.lblDocName.TabIndex = 2
                 Me.lblDocName.Text = "Introduction"
-                Me.lblDocName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+                Me.lblDocName.TextAlign = ContentAlignment.MiddleLeft
                 '
                 'Help
                 '
-                Me.ClientSize = New System.Drawing.Size(542, 323)
+                Me.ClientSize = New Size(542, 323)
                 Me.Controls.Add(Me.pnlSplitter)
-                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Help_Icon
+                Me.Icon = Help_Icon
                 Me.Name = "Help"
                 Me.TabText = "Help"
                 Me.Text = "Help"
@@ -201,12 +215,13 @@ Namespace UI
                 Me.pnlSplitter.Panel2.ResumeLayout(False)
                 Me.pnlSplitter.ResumeLayout(False)
                 Me.ResumeLayout(False)
-
             End Sub
+
 #End Region
 
 #Region "Public Methods"
-            Public Sub New(ByVal Panel As DockContent)
+
+            Public Sub New(Panel As DockContent)
                 Me.WindowType = Type.Help
                 Me.DockPnl = Panel
                 Me.InitializeComponent()
@@ -215,10 +230,12 @@ Namespace UI
                 Me.tvIndex.ImageList = Me.imgListHelp
                 Me.SetImages(Me.tvIndex.Nodes(0))
             End Sub
+
 #End Region
 
 #Region "Private Methods"
-            Private Sub Help_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+
+            Private Sub Help_Load(sender As Object, e As EventArgs) Handles Me.Load
                 tvIndex.Nodes(0).ExpandAll()
                 tvIndex.SelectedNode = tvIndex.Nodes(0).Nodes(0)
             End Sub
@@ -227,28 +244,30 @@ Namespace UI
                 ' This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
                 wbHelp.AllowWebBrowserDrop = False
             End Sub
-            
-            Private Sub tvIndex_NodeMouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.TreeNodeMouseClickEventArgs) Handles tvIndex.NodeMouseClick
+
+            Private Sub tvIndex_NodeMouseClick(sender As Object, e As TreeNodeMouseClickEventArgs) _
+                Handles tvIndex.NodeMouseClick
                 Me.tvIndex.SelectedNode = e.Node
             End Sub
 
-            Private Sub tvIndex_AfterSelect(ByVal sender As System.Object, ByVal e As System.Windows.Forms.TreeViewEventArgs) Handles tvIndex.AfterSelect
+            Private Sub tvIndex_AfterSelect(sender As Object, e As TreeViewEventArgs) Handles tvIndex.AfterSelect
                 If e.Node.Tag <> "" Then
                     Me.wbHelp.Navigate(My.Application.Info.DirectoryPath & "\Help\" & e.Node.Tag & ".htm")
                 End If
             End Sub
 
-            Private Sub wbHelp_DocumentTitleChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles wbHelp.DocumentTitleChanged
+            Private Sub wbHelp_DocumentTitleChanged(sender As Object, e As EventArgs) _
+                Handles wbHelp.DocumentTitleChanged
                 Me.lblDocName.Text = Me.wbHelp.DocumentTitle
             End Sub
 
             Private Sub FillImageList()
-                Me.imgListHelp.Images.Add("File", My.Resources.Page)
-                Me.imgListHelp.Images.Add("Folder", My.Resources.Folder)
+                Me.imgListHelp.Images.Add("File", Page)
+                Me.imgListHelp.Images.Add("Folder", Folder)
                 Me.imgListHelp.Images.Add("Help", My.Resources.Help)
             End Sub
 
-            Private Sub SetImages(ByVal node As TreeNode)
+            Private Sub SetImages(node As TreeNode)
                 node.ImageIndex = 2
                 node.SelectedImageIndex = 2
 
@@ -262,7 +281,9 @@ Namespace UI
                     End If
                 Next
             End Sub
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

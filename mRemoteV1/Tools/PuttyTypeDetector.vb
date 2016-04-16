@@ -1,4 +1,4 @@
-﻿Imports mRemoteNG.Connection.Protocol
+﻿Imports mRemote3G.Connection.Protocol
 
 Namespace Tools
     Public Class PuttyTypeDetector
@@ -6,7 +6,7 @@ Namespace Tools
             Return GetPuttyType(PuttyBase.PuttyPath)
         End Function
 
-        Public Shared Function GetPuttyType(ByVal filename As String) As PuttyType
+        Public Shared Function GetPuttyType(filename As String) As PuttyType
             If IsPuttyNg(filename) Then Return PuttyType.PuttyNg
             If IsKitty(filename) Then Return PuttyType.Kitty
             If IsXming(filename) Then Return PuttyType.Xming
@@ -17,7 +17,7 @@ Namespace Tools
             Return PuttyType.Unknown
         End Function
 
-        Private Shared Function IsPutty(ByVal filename As String) As Boolean
+        Private Shared Function IsPutty(filename As String) As Boolean
             Dim result As Boolean
             Try
                 result = FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY")
@@ -41,7 +41,7 @@ Namespace Tools
             Dim result As Boolean
             Try
                 result = FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY") _
-                    And FileVersionInfo.GetVersionInfo(filename).Comments.Contains("KiTTY")
+                         And FileVersionInfo.GetVersionInfo(filename).Comments.Contains("KiTTY")
             Catch
                 result = False
             End Try
@@ -52,7 +52,7 @@ Namespace Tools
             Dim result As Boolean
             Try
                 result = FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY") _
-                    And FileVersionInfo.GetVersionInfo(filename).ProductVersion.Contains("Xming")
+                         And FileVersionInfo.GetVersionInfo(filename).ProductVersion.Contains("Xming")
             Catch
                 result = False
             End Try
@@ -66,5 +66,8 @@ Namespace Tools
             Kitty
             Xming
         End Enum
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

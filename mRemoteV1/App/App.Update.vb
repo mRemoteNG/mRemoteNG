@@ -1,43 +1,52 @@
-﻿Imports System.IO
+﻿Imports System.ComponentModel
+Imports System.IO
 Imports System.Net
-Imports System.ComponentModel
-Imports System.Threading
-Imports mRemoteNG.Tools
 Imports System.Reflection
+Imports System.Threading
+Imports mRemote3G.App.Info
+Imports mRemote3G.Security
+Imports mRemote3G.Tools
 
 Namespace App
     Public Class Update
+
 #Region "Events"
+
         Public Event GetUpdateInfoCompletedEvent As AsyncCompletedEventHandler
         Public Event GetChangeLogCompletedEvent As AsyncCompletedEventHandler
         Public Event GetAnnouncementInfoCompletedEvent As AsyncCompletedEventHandler
         Public Event DownloadUpdateProgressChangedEvent As DownloadProgressChangedEventHandler
         Public Event DownloadUpdateCompletedEvent As AsyncCompletedEventHandler
+
 #End Region
 
 #Region "Public Properties"
+
         Private _currentUpdateInfo As UpdateInfo
-        Public ReadOnly Property CurrentUpdateInfo() As UpdateInfo
+
+        Public ReadOnly Property CurrentUpdateInfo As UpdateInfo
             Get
                 Return _currentUpdateInfo
             End Get
         End Property
 
         Private _changeLog As String
-        Public ReadOnly Property ChangeLog() As String
+
+        Public ReadOnly Property ChangeLog As String
             Get
                 Return _changeLog
             End Get
         End Property
 
         Private _currentAnnouncementInfo As AnnouncementInfo
-        Public ReadOnly Property CurrentAnnouncementInfo() As AnnouncementInfo
+
+        Public ReadOnly Property CurrentAnnouncementInfo As AnnouncementInfo
             Get
                 Return _currentAnnouncementInfo
             End Get
         End Property
 
-        Public ReadOnly Property IsGetUpdateInfoRunning() As Boolean
+        Public ReadOnly Property IsGetUpdateInfoRunning As Boolean
             Get
                 If _getUpdateInfoThread IsNot Nothing Then
                     If _getUpdateInfoThread.IsAlive Then Return True
@@ -46,7 +55,7 @@ Namespace App
             End Get
         End Property
 
-        Public ReadOnly Property IsGetChangeLogRunning() As Boolean
+        Public ReadOnly Property IsGetChangeLogRunning As Boolean
             Get
                 If _getChangeLogThread IsNot Nothing Then
                     If _getChangeLogThread.IsAlive Then Return True
@@ -55,7 +64,7 @@ Namespace App
             End Get
         End Property
 
-        Public ReadOnly Property IsGetAnnouncementInfoRunning() As Boolean
+        Public ReadOnly Property IsGetAnnouncementInfoRunning As Boolean
             Get
                 If _getAnnouncementInfoThread IsNot Nothing Then
                     If _getAnnouncementInfoThread.IsAlive Then Return True
@@ -64,23 +73,28 @@ Namespace App
             End Get
         End Property
 
-        Public ReadOnly Property IsDownloadUpdateRunning() As Boolean
+        Public ReadOnly Property IsDownloadUpdateRunning As Boolean
             Get
                 Return (_downloadUpdateWebClient IsNot Nothing)
             End Get
         End Property
+
 #End Region
 
 #Region "Public Methods"
+
         Public Sub New()
             SetProxySettings()
         End Sub
 
         Public Sub SetProxySettings()
-            SetProxySettings(My.Settings.UpdateUseProxy, My.Settings.UpdateProxyAddress, My.Settings.UpdateProxyPort, My.Settings.UpdateProxyUseAuthentication, My.Settings.UpdateProxyAuthUser, Security.Crypt.Decrypt(My.Settings.UpdateProxyAuthPass, Info.General.EncryptionKey))
+            SetProxySettings(My.Settings.UpdateUseProxy, My.Settings.UpdateProxyAddress, My.Settings.UpdateProxyPort,
+                             My.Settings.UpdateProxyUseAuthentication, My.Settings.UpdateProxyAuthUser,
+                             Crypt.Decrypt(My.Settings.UpdateProxyAuthPass, General.EncryptionKey))
         End Sub
 
-        Public Sub SetProxySettings(ByVal useProxy As Boolean, ByVal address As String, ByVal port As Integer, ByVal useAuthentication As Boolean, ByVal username As String, ByVal password As String)
+        Public Sub SetProxySettings(useProxy As Boolean, address As String, port As Integer,
+                                    useAuthentication As Boolean, username As String, password As String)
             If useProxy And Not String.IsNullOrEmpty(address) Then
                 If Not port = 0 Then
                     _webProxy = New WebProxy(address, port)
@@ -105,9 +119,9 @@ Namespace App
         End Function
 
         Public Function IsAnnouncementAvailable() As Boolean
-            If _currentAnnouncementInfo Is Nothing OrElse _
-                (Not _currentAnnouncementInfo.IsValid Or _
-                 String.IsNullOrEmpty(_currentAnnouncementInfo.Name)) Then Return False
+            If _currentAnnouncementInfo Is Nothing OrElse
+               (Not _currentAnnouncementInfo.IsValid Or
+                String.IsNullOrEmpty(_currentAnnouncementInfo.Name)) Then Return False
 
             Return (Not _currentAnnouncementInfo.Name = My.Settings.LastAnnouncement)
         End Function
@@ -125,7 +139,9 @@ Namespace App
 
         Public Sub GetChangeLogAsync()
             If _currentUpdateInfo Is Nothing OrElse Not _currentUpdateInfo.IsValid Then
-                Throw New InvalidOperationException("CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling GetChangeLogAsync().")
+                Throw _
+                    New InvalidOperationException(
+                        "CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling GetChangeLogAsync().")
             End If
 
             If IsGetChangeLogRunning Then _getChangeLogThread.Abort()
@@ -155,17 +171,22 @@ Namespace App
             End If
 
             If _currentUpdateInfo Is Nothing OrElse Not _currentUpdateInfo.IsValid Then
-                Throw New InvalidOperationException("CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling DownloadUpdateAsync().")
+                Throw _
+                    New InvalidOperationException(
+                        "CurrentUpdateInfo is not valid. GetUpdateInfoAsync() must be called before calling DownloadUpdateAsync().")
             End If
 
             _currentUpdateInfo.UpdateFilePath = Path.Combine(Path.GetTempPath(), Path.ChangeExtension(Path.GetRandomFileName, "exe"))
             DownloadUpdateWebClient.DownloadFileAsync(CurrentUpdateInfo.DownloadAddress, _currentUpdateInfo.UpdateFilePath)
         End Sub
+
 #End Region
 
 #Region "Private Properties"
+
         Private _downloadUpdateWebClient As WebClient
-        Private ReadOnly Property DownloadUpdateWebClient() As WebClient
+
+        Private ReadOnly Property DownloadUpdateWebClient As WebClient
             Get
                 If _downloadUpdateWebClient IsNot Nothing Then Return _downloadUpdateWebClient
 
@@ -177,19 +198,23 @@ Namespace App
                 Return _downloadUpdateWebClient
             End Get
         End Property
+
 #End Region
 
 #Region "Private Fields"
+
         Private _webProxy As WebProxy
         Private _getUpdateInfoThread As Thread
         Private _getChangeLogThread As Thread
         Private _getAnnouncementInfoThread As Thread
+
 #End Region
 
 #Region "Private Methods"
+
         Private Function CreateWebClient() As WebClient
             Dim webClient As New WebClient
-            webClient.Headers.Add("user-agent", Info.General.UserAgent)
+            webClient.Headers.Add("user-agent", General.UserAgent)
             webClient.Proxy = _webProxy
             Return webClient
         End Function
@@ -204,11 +229,11 @@ Namespace App
             Return constructor.Invoke(arguments)
         End Function
 
-        Private Function DownloadString(ByVal address As Uri) As DownloadStringCompletedEventArgs
+        Private Function DownloadString(address As Uri) As DownloadStringCompletedEventArgs
             Dim webClient As WebClient = CreateWebClient()
             Dim result As String = String.Empty
             Dim exception As Exception = Nothing
-            Dim cancelled As Boolean = False
+            Dim cancelled = False
 
             Try
                 result = webClient.DownloadString(address)
@@ -222,7 +247,9 @@ Namespace App
         End Function
 
         Private Sub GetUpdateInfo()
-            Dim updateFileUri As New Uri(New Uri(My.Settings.UpdateAddress), New Uri(Info.Update.FileName, UriKind.Relative))
+            Dim _
+                updateFileUri As _
+                    New Uri(New Uri(My.Settings.UpdateAddress), New Uri(UpdateApp.FileName, UriKind.Relative))
             Dim e As DownloadStringCompletedEventArgs = DownloadString(updateFileUri)
 
             If Not e.Cancelled And e.Error Is Nothing Then
@@ -260,11 +287,11 @@ Namespace App
             RaiseEvent GetAnnouncementInfoCompletedEvent(Me, e)
         End Sub
 
-        Private Sub DownloadUpdateProgressChanged(ByVal sender As Object, ByVal e As DownloadProgressChangedEventArgs)
+        Private Sub DownloadUpdateProgressChanged(sender As Object, e As DownloadProgressChangedEventArgs)
             RaiseEvent DownloadUpdateProgressChangedEvent(sender, e)
         End Sub
 
-        Private Sub DownloadUpdateCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.AsyncCompletedEventArgs)
+        Private Sub DownloadUpdateCompleted(sender As Object, e As AsyncCompletedEventArgs)
             Dim raiseEventArgs As AsyncCompletedEventArgs = e
 
             If Not e.Cancelled And e.Error Is Nothing Then
@@ -296,11 +323,15 @@ Namespace App
             _downloadUpdateWebClient.Dispose()
             _downloadUpdateWebClient = Nothing
         End Sub
+
 #End Region
 
 #Region "Public Classes"
+
         Public Class UpdateInfo
+
 #Region "Public Properties"
+
             Public Property IsValid As Boolean
             Public Property Version As Version
             Public Property DownloadAddress As Uri
@@ -309,10 +340,12 @@ Namespace App
             Public Property ImageAddress As Uri
             Public Property ImageLinkAddress As Uri
             Public Property CertificateThumbprint As String
+
 #End Region
 
 #Region "Public Methods"
-            Public Shared Function FromString(ByVal input As String) As UpdateInfo
+
+            Public Shared Function FromString(input As String) As UpdateInfo
                 Dim newInfo As New UpdateInfo
                 With newInfo
                     If String.IsNullOrEmpty(input) Then
@@ -330,18 +363,23 @@ Namespace App
                 End With
                 Return newInfo
             End Function
+
 #End Region
         End Class
 
         Public Class AnnouncementInfo
+
 #Region "Public Properties"
+
             Public Property IsValid As Boolean
             Public Property Name As String
             Public Property Address As Uri
+
 #End Region
 
 #Region "Public Methods"
-            Public Shared Function FromString(ByVal input As String) As AnnouncementInfo
+
+            Public Shared Function FromString(input As String) As AnnouncementInfo
                 Dim newInfo As New AnnouncementInfo
                 With newInfo
                     If String.IsNullOrEmpty(input) Then
@@ -355,42 +393,49 @@ Namespace App
                 End With
                 Return newInfo
             End Function
+
 #End Region
         End Class
+
 #End Region
 
 #Region "Private Classes"
+
         Private Class UpdateFile
+
 #Region "Public Properties"
+
             Private ReadOnly _items As New Dictionary(Of String, String)(StringComparer.InvariantCultureIgnoreCase)
             ' ReSharper disable MemberCanBePrivate.Local
-            Public ReadOnly Property Items() As Dictionary(Of String, String)
+            Public ReadOnly Property Items As Dictionary(Of String, String)
                 ' ReSharper restore MemberCanBePrivate.Local
                 Get
                     Return _items
                 End Get
             End Property
+
 #End Region
 
 #Region "Public Methods"
-            Public Sub New(ByVal content As String)
+
+            Public Sub New(content As String)
                 FromString(content)
             End Sub
 
             ' ReSharper disable MemberCanBePrivate.Local
-            Public Sub FromString(ByVal content As String)
+            Public Sub FromString(content As String)
                 ' ReSharper restore MemberCanBePrivate.Local
                 If String.IsNullOrEmpty(content) Then
                 Else
-                    Dim lineSeparators() As Char = New Char() {Chr(&HA), Chr(&HD)}
-                    Dim keyValueSeparators() As Char = New Char() {":", "="}
-                    Dim commentCharacters() As Char = New Char() {"#", ";", "'"}
+                    Dim lineSeparators = New Char() {Chr(&HA), Chr(&HD)}
+                    Dim keyValueSeparators = New Char() {":", "="}
+                    Dim commentCharacters = New Char() {"#", ";", "'"}
 
                     Dim lines() As String = content.Split(lineSeparators, StringSplitOptions.RemoveEmptyEntries)
                     For Each line As String In lines
                         line = line.Trim()
                         If line.Length = 0 Then Continue For
-                        If Not line.Substring(0, 1).IndexOfAny(commentCharacters) = -1 Then Continue For
+                        If Not line.Substring(0, 1).IndexOfAny(commentCharacters) = - 1 Then Continue For
 
                         Dim parts() As String = line.Split(keyValueSeparators, 2)
                         If Not parts.Length = 2 Then Continue For
@@ -403,29 +448,31 @@ Namespace App
             End Sub
 
             ' ReSharper disable MemberCanBePrivate.Local
-            Public Function GetString(ByVal key As String) As String
+            Public Function GetString(key As String) As String
                 ' ReSharper restore MemberCanBePrivate.Local
                 If Not Items.ContainsKey(key) Then Return String.Empty
                 Return Items(key)
             End Function
 
-            Public Function GetVersion(ByVal key As String) As Version
+            Public Function GetVersion(key As String) As Version
                 Dim value As String = GetString(key)
                 If String.IsNullOrEmpty(value) Then Return Nothing
                 Return New Version(value)
             End Function
 
-            Public Function GetUri(ByVal key As String) As Uri
+            Public Function GetUri(key As String) As Uri
                 Dim value As String = GetString(key)
                 If String.IsNullOrEmpty(value) Then Return Nothing
                 Return New Uri(value)
             End Function
 
-            Public Function GetThumbprint(ByVal key As String) As String
+            Public Function GetThumbprint(key As String) As String
                 Return GetString(key).Replace(" ", "").ToUpperInvariant()
             End Function
+
 #End Region
         End Class
+
 #End Region
     End Class
 End Namespace

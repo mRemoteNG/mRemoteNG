@@ -1,26 +1,32 @@
 ﻿Imports System.ComponentModel
-Imports mRemoteNG.My
+Imports mRemote3G.App
 Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemoteNG.App.Runtime
 
 Namespace UI
+
     Namespace Window
         Public Class Announcement
             Inherits Base
+
 #Region "Public Methods"
-            Public Sub New(ByVal panel As DockContent)
+
+            Public Sub New(panel As DockContent)
                 WindowType = Type.Announcement
                 DockPnl = panel
                 InitializeComponent()
             End Sub
+
 #End Region
 
 #Region "Private Fields"
+
             Private _appUpdate As App.Update
+
 #End Region
 
 #Region "Private Methods"
-            Private Sub Announcement_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+
+            Private Sub Announcement_Load(sender As Object, e As EventArgs) Handles Me.Load
                 AddHandler webBrowser.Navigated, AddressOf webBrowser_Navigated
 
                 ApplyLanguage()
@@ -28,10 +34,9 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-
             End Sub
 
-            Private Sub webBrowser_Navigated(sender As Object, e As System.Windows.Forms.WebBrowserNavigatedEventArgs)
+            Private Sub webBrowser_Navigated(sender As Object, e As WebBrowserNavigatedEventArgs)
                 ' This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
                 webBrowser.AllowWebBrowserDrop = False
 
@@ -50,7 +55,7 @@ Namespace UI
                 _appUpdate.GetAnnouncementInfoAsync()
             End Sub
 
-            Private Sub GetAnnouncementInfoCompleted(ByVal sender As Object, ByVal e As AsyncCompletedEventArgs)
+            Private Sub GetAnnouncementInfoCompleted(sender As Object, e As AsyncCompletedEventArgs)
                 If InvokeRequired Then
                     Dim myDelegate As New AsyncCompletedEventHandler(AddressOf GetAnnouncementInfoCompleted)
                     Invoke(myDelegate, New Object() {sender, e})
@@ -65,10 +70,13 @@ Namespace UI
 
                     webBrowser.Navigate(_appUpdate.CurrentAnnouncementInfo.Address)
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage(Language.strUpdateGetAnnouncementInfoFailed, ex)
+                    Runtime.MessageCollector.AddExceptionMessage(Language.Language.strUpdateGetAnnouncementInfoFailed,
+                                                                 ex)
                 End Try
             End Sub
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

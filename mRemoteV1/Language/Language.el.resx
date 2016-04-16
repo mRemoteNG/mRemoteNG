@@ -106,7 +106,7 @@
     </xsd:element>
   </xsd:schema>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -115,7 +115,7 @@
     <value>2.0</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strAbout" xml:space="preserve">
     <value>Σχετικά με</value>
@@ -139,7 +139,7 @@
     <value>AddNodesFromSQL απέτυχε!</value>
   </data>
   <data name="strAllowOnlySingleInstance" xml:space="preserve">
-    <value>Επιτρέπετε μόνο ένα μόνο παράδειγμα της εφαρμογής (απαιτείται επανεκκίνηση του mRemoteNG)</value>
+    <value>Επιτρέπετε μόνο ένα μόνο παράδειγμα της εφαρμογής (απαιτείται επανεκκίνηση του mRemote3G)</value>
   </data>
   <data name="strAlways" xml:space="preserve">
     <value>Πάντα</value>
@@ -281,19 +281,19 @@
     <value>Ο ελεγχος πέτυχε!</value>
   </data>
   <data name="strCcEOLFailed" xml:space="preserve">
-    <value>Η δυνατότητα (RDP) συνεδρίες προϋποθέτει ότι έχετε μια εγγεγραμμένο αντίγραφο του eolwtscom.dll στο σύστημά σας. mRemoteNG πλοία με αυτό το στοιχείο αλλά θα δεν εγγραφείτε αυτόματα εκτός αν η εκτέλεση του πακέτου εγκατάστασης. Να εγγραφείτε δεν με μη αυτόματο τρόπο αυτό: Ανοίξτε στο τρέχω διάλογος (έναρξη - Run) και πληκτρολογήστε τα παρακάτω: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (όπου c:\Program Files\mRemoteNG\ είναι η διαδρομή προς την εγκατάσταση mRemoteNG). Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή να χρησιμοποιήσετε τη δυνατότητα συνεδρίες (RDP) στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/</value>
+    <value>Η δυνατότητα (RDP) συνεδρίες προϋποθέτει ότι έχετε μια εγγεγραμμένο αντίγραφο του eolwtscom.dll στο σύστημά σας. mRemote3G πλοία με αυτό το στοιχείο αλλά θα δεν εγγραφείτε αυτόματα εκτός αν η εκτέλεση του πακέτου εγκατάστασης. Να εγγραφείτε δεν με μη αυτόματο τρόπο αυτό: Ανοίξτε στο τρέχω διάλογος (έναρξη - Run) και πληκτρολογήστε τα παρακάτω: regsvr32 "c:\Program Files\mRemote3G\eolwtscom.dll" (όπου c:\Program Files\mRemote3G\ είναι η διαδρομή προς την εγκατάσταση mRemote3G). Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή να χρησιμοποιήσετε τη δυνατότητα συνεδρίες (RDP) στο mRemote3G συμβουλευτείτε το mRemote3G φόρουμ στο http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcEOLOK" xml:space="preserve">
     <value>Το EOLWTSCOM βρέθηκε και φαίνεται να έχει καταχωρηθεί σωστά.</value>
   </data>
   <data name="strCcGeckoFailed" xml:space="preserve">
-    <value>Για να χρησιμοποιήσετε το μηχανισμό απόδοσης Gecko πρέπει να έχετε XULrunner 1.8.1.x και ο δρόμος για την εγκατάσταση ορίστε στις επιλογές σας. Μπορείτε να κατεβάσετε XULrunner 1.8.1.3 εδώ: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/ όταν ολοκληρώσετε τη λήψη κάντε εξαγωγή του πακέτου για την πορεία της επιλογής σας. Στη συνέχεια, στο mRemoteNG πηγαίνετε στο εργαλεία - επιλογές - προηγμένες και πληκτρολογήσει τη σωστή διαδρομή στο πεδίο διαδρομή XULrunner. Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή χρησιμοποιούν την μηχανή Gecko στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/</value>
+    <value>Για να χρησιμοποιήσετε το μηχανισμό απόδοσης Gecko πρέπει να έχετε XULrunner 1.8.1.x και ο δρόμος για την εγκατάσταση ορίστε στις επιλογές σας. Μπορείτε να κατεβάσετε XULrunner 1.8.1.3 εδώ: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/ όταν ολοκληρώσετε τη λήψη κάντε εξαγωγή του πακέτου για την πορεία της επιλογής σας. Στη συνέχεια, στο mRemote3G πηγαίνετε στο εργαλεία - επιλογές - προηγμένες και πληκτρολογήσει τη σωστή διαδρομή στο πεδίο διαδρομή XULrunner. Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή χρησιμοποιούν την μηχανή Gecko στο mRemote3G συμβουλευτείτε το mRemote3G φόρουμ στο http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>Το XULrunner βρέθηκε και φαίνεται να έχει εγκατασταθεί σωστά.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
-    <value>ICA απαιτεί ότι είναι εγκατεστημένο το XenDesktop Online Plugin και ότι καταχωρείται η βιβλιοθήκη wfica.ocx. Μπορείτε να κατεβάσετε τον πελάτη εδώ: http://www.citrix.com/download/ αν έχετε το XenDesktop Online Plugin εγκατασταθεί και ο έλεγχος συνεχίσει να αποτυγχάνει, προσπαθήστε να εγγραφείτε wfica.ocx με μη αυτόματο τρόπο. Να κάνει αυτό ανοίγω πάνω στο τρέχω διάλογος (έναρξη - Run) και πληκτρολογήστε τα παρακάτω: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (όπου c:\Program Files\Citrix\ICA Client\ είναι η διαδρομή στην εγκατάσταση XenDesktop Online Plugin). Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή να χρησιμοποιήσετε ICA στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/"</value>
+    <value>ICA απαιτεί ότι είναι εγκατεστημένο το XenDesktop Online Plugin και ότι καταχωρείται η βιβλιοθήκη wfica.ocx. Μπορείτε να κατεβάσετε τον πελάτη εδώ: http://www.citrix.com/download/ αν έχετε το XenDesktop Online Plugin εγκατασταθεί και ο έλεγχος συνεχίσει να αποτυγχάνει, προσπαθήστε να εγγραφείτε wfica.ocx με μη αυτόματο τρόπο. Να κάνει αυτό ανοίγω πάνω στο τρέχω διάλογος (έναρξη - Run) και πληκτρολογήστε τα παρακάτω: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (όπου c:\Program Files\Citrix\ICA Client\ είναι η διαδρομή στην εγκατάσταση XenDesktop Online Plugin). Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή να χρησιμοποιήσετε ICA στο mRemote3G συμβουλευτείτε το mRemote3G φόρουμ στο http://forum.mremoteng.org/"</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
     <value>Όλα τα συστατικά ICA βρέθηκαν και φαίνεται να καταχωρηθηκαν σωστά. Πρόγραμμα-πελάτη Citrix ICA ελέγχου έκδοση {0}</value>

@@ -1,15 +1,16 @@
 ﻿Imports System.DirectoryServices
-Imports mRemoteNG.App.Runtime
 Imports System.Text.RegularExpressions
-Imports mRemoteNG.My
+Imports mRemote3G.App
+Imports mRemote3G.Container
+Imports mRemote3G.Tree
 
 Namespace Config.Import
     Public Class ActiveDirectory
-        Public Shared Sub Import(ByVal ldapPath As String, ByVal parentTreeNode As TreeNode)
+        Public Shared Sub Import(ldapPath As String, parentTreeNode As TreeNode)
             Try
-                Dim treeNode As TreeNode = Tree.Node.AddNode(Tree.Node.Type.Container)
+                Dim treeNode As TreeNode = Node.AddNode(Node.Type.Container)
 
-                Dim containerInfo As New Container.Info()
+                Dim containerInfo As New Info()
                 containerInfo.TreeNode = treeNode
                 containerInfo.ConnectionInfo = New Connection.Info(containerInfo)
 
@@ -18,13 +19,13 @@ Namespace Config.Import
                 If match.Success Then
                     name = match.Groups(1).Captures(0).Value
                 Else
-                    name = Language.strActiveDirectory
+                    name = Language.Language.strActiveDirectory
                 End If
 
                 containerInfo.Name = name
 
                 ' We can only inherit from a container node, not the root node or connection nodes
-                If Tree.Node.GetNodeType(parentTreeNode) = Tree.Node.Type.Container Then
+                If Node.GetNodeType(parentTreeNode) = Node.Type.Container Then
                     containerInfo.Parent = parentTreeNode.Tag
                 Else
                     containerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
@@ -33,21 +34,22 @@ Namespace Config.Import
                 treeNode.Text = name
                 treeNode.Name = name
                 treeNode.Tag = containerInfo
-                ContainerList.Add(containerInfo)
+                Runtime.ContainerList.Add(containerInfo)
 
                 ImportComputers(ldapPath, treeNode)
 
                 parentTreeNode.Nodes.Add(treeNode)
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.Import() failed.", ex, , True)
+                Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.Import() failed.", ex, ,
+                                                             True)
             End Try
         End Sub
 
-        Private Shared Sub ImportComputers(ByVal ldapPath As String, ByVal parentTreeNode As TreeNode)
+        Private Shared Sub ImportComputers(ldapPath As String, parentTreeNode As TreeNode)
             Try
                 Dim strDisplayName, strDescription, strHostName As String
 
-                Const ldapFilter As String = "(objectClass=computer)"
+                Const ldapFilter = "(objectClass=computer)"
 
                 Dim ldapSearcher As New DirectorySearcher
                 Dim ldapResults As SearchResultCollection
@@ -69,12 +71,12 @@ Namespace Config.Import
                         strHostName = .Properties("dNSHostName").Value
                     End With
 
-                    Dim treeNode As TreeNode = Tree.Node.AddNode(Tree.Node.Type.Connection, strDisplayName)
+                    Dim treeNode As TreeNode = Node.AddNode(Node.Type.Connection, strDisplayName)
 
                     Dim connectionInfo As New Connection.Info()
                     Dim inheritanceInfo As New Connection.Info.Inheritance(connectionInfo, True)
                     inheritanceInfo.Description = False
-                    If TypeOf parentTreeNode.Tag Is Container.Info Then
+                    If TypeOf parentTreeNode.Tag Is Info Then
                         connectionInfo.Parent = parentTreeNode.Tag
                     End If
                     connectionInfo.Inherit = inheritanceInfo
@@ -85,13 +87,17 @@ Namespace Config.Import
                     treeNode.Name = strDisplayName
                     treeNode.Tag = connectionInfo 'set the nodes tag to the conI
                     'add connection to connections
-                    ConnectionList.Add(connectionInfo)
+                    Runtime.ConnectionList.Add(connectionInfo)
 
                     parentTreeNode.Nodes.Add(treeNode)
                 Next
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.", ex, , True)
+                Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.",
+                                                             ex, , True)
             End Try
+        End Sub
+
+        Private Sub New()
         End Sub
     End Class
 End Namespace

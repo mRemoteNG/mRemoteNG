@@ -1,11 +1,15 @@
-﻿Imports System.Xml
+﻿Imports System.Globalization
 Imports System.IO
-Imports mRemoteNG.App.Runtime
-Imports mRemoteNG.Connection.Protocol
+Imports System.Xml
+Imports mRemote3G.App
+Imports mRemote3G.Connection
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Images
+Imports mRemote3G.Tree
 
 Namespace Config.Import
     Public Class PuttyConnectionManager
-        Public Shared Sub Import(ByVal fileName As String, ByVal parentTreeNode As TreeNode)
+        Public Shared Sub Import(fileName As String, parentTreeNode As TreeNode)
             Dim xmlDocument As New XmlDocument()
             xmlDocument.Load(fileName)
 
@@ -20,15 +24,15 @@ Namespace Config.Import
             Next
         End Sub
 
-        Private Shared Sub ImportRootOrContainer(ByVal xmlNode As XmlNode, ByVal parentTreeNode As TreeNode)
+        Private Shared Sub ImportRootOrContainer(xmlNode As XmlNode, parentTreeNode As TreeNode)
             Dim xmlNodeType As String = xmlNode.Attributes("type").Value
             Select Case xmlNode.Name
                 Case "root"
-                    If Not String.Compare(xmlNodeType, "database", ignoreCase:=True) = 0 Then
+                    If Not String.Compare(xmlNodeType, "database", True, CultureInfo.InvariantCulture) = 0 Then
                         Throw New FileFormatException(String.Format("Unrecognized root node type ({0}).", xmlNodeType))
                     End If
                 Case "container"
-                    If Not String.Compare(xmlNodeType, "folder", ignoreCase:=True) = 0 Then
+                    If Not String.Compare(xmlNodeType, "folder", True, CultureInfo.InvariantCulture) = 0 Then
                         Throw New FileFormatException(String.Format("Unrecognized root node type ({0}).", xmlNodeType))
                     End If
                 Case Else
@@ -49,13 +53,13 @@ Namespace Config.Import
             containerInfo.TreeNode = treeNode
             containerInfo.Name = name
 
-            Dim connectionInfo As Connection.Info = CreateConnectionInfo(name)
+            Dim connectionInfo As Info = CreateConnectionInfo(name)
             connectionInfo.Parent = containerInfo
             connectionInfo.IsContainer = True
             containerInfo.ConnectionInfo = connectionInfo
 
             ' We can only inherit from a container node, not the root node or connection nodes
-            If Tree.Node.GetNodeType(parentTreeNode) = Tree.Node.Type.Container Then
+            If Node.GetNodeType(parentTreeNode) = Node.Type.Container Then
                 containerInfo.Parent = parentTreeNode.Tag
             Else
                 connectionInfo.Inherit.TurnOffInheritanceCompletely()
@@ -63,8 +67,8 @@ Namespace Config.Import
 
             treeNode.Name = name
             treeNode.Tag = containerInfo
-            treeNode.ImageIndex = Images.Enums.TreeImage.Container
-            treeNode.SelectedImageIndex = Images.Enums.TreeImage.Container
+            treeNode.ImageIndex = Enums.TreeImage.Container
+            treeNode.SelectedImageIndex = Enums.TreeImage.Container
 
             For Each childNode As XmlNode In xmlNode.SelectNodes("./*")
                 Select Case childNode.Name
@@ -80,43 +84,44 @@ Namespace Config.Import
             containerInfo.IsExpanded = xmlNode.Attributes("expanded").InnerText
             If containerInfo.IsExpanded Then treeNode.Expand()
 
-            ContainerList.Add(containerInfo)
+            Runtime.ContainerList.Add(containerInfo)
         End Sub
 
-        Private Shared Sub ImportConnection(ByVal connectionNode As XmlNode, ByVal parentTreeNode As TreeNode)
+        Private Shared Sub ImportConnection(connectionNode As XmlNode, parentTreeNode As TreeNode)
             Dim connectionNodeType As String = connectionNode.Attributes("type").Value
-            If Not String.Compare(connectionNodeType, "PuTTY", ignoreCase:=True) = 0 Then
-                Throw New FileFormatException(String.Format("Unrecognized connection node type ({0}).", connectionNodeType))
+            If Not String.Compare(connectionNodeType, "PuTTY", True, CultureInfo.InvariantCulture) = 0 Then
+                Throw _
+                    New FileFormatException(String.Format("Unrecognized connection node type ({0}).", connectionNodeType))
             End If
 
             Dim name As String = connectionNode.Attributes("name").Value
             Dim treeNode As New TreeNode(name)
             parentTreeNode.Nodes.Add(treeNode)
 
-            Dim connectionInfo As Connection.Info = ConnectionInfoFromXml(connectionNode)
+            Dim connectionInfo As Info = ConnectionInfoFromXml(connectionNode)
             connectionInfo.TreeNode = treeNode
             connectionInfo.Parent = parentTreeNode.Tag
 
             treeNode.Name = name
             treeNode.Tag = connectionInfo
-            treeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
-            treeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
+            treeNode.ImageIndex = Enums.TreeImage.ConnectionClosed
+            treeNode.SelectedImageIndex = Enums.TreeImage.ConnectionClosed
 
-            ConnectionList.Add(connectionInfo)
+            Runtime.ConnectionList.Add(connectionInfo)
         End Sub
 
-        Private Shared Function CreateConnectionInfo(ByVal name As String) As Connection.Info
-            Dim connectionInfo As New Connection.Info
-            connectionInfo.Inherit = New Connection.Info.Inheritance(connectionInfo)
+        Private Shared Function CreateConnectionInfo(name As String) As Info
+            Dim connectionInfo As New Info
+            connectionInfo.Inherit = New Info.Inheritance(connectionInfo)
             connectionInfo.Name = name
             Return connectionInfo
         End Function
 
-        Private Shared Function ConnectionInfoFromXml(ByVal xmlNode As XmlNode) As Connection.Info
+        Private Shared Function ConnectionInfoFromXml(xmlNode As XmlNode) As Info
             Dim connectionInfoNode As XmlNode = xmlNode.SelectSingleNode("./connection_info")
 
             Dim name As String = connectionInfoNode.SelectSingleNode("./name").InnerText
-            Dim connectionInfo As Connection.Info = CreateConnectionInfo(name)
+            Dim connectionInfo As Info = CreateConnectionInfo(name)
 
             Dim protocol As String = connectionInfoNode.SelectSingleNode("./protocol").InnerText
             Select Case protocol.ToLowerInvariant()
@@ -156,5 +161,8 @@ Namespace Config.Import
 
             Return connectionInfo
         End Function
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

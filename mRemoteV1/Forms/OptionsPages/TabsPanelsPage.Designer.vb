@@ -56,7 +56,7 @@
             Me.chkIdentifyQuickConnectTabs.Name = "chkIdentifyQuickConnectTabs"
             Me.chkIdentifyQuickConnectTabs.Size = New System.Drawing.Size(293, 17)
             Me.chkIdentifyQuickConnectTabs.TabIndex = 16
-            Me.chkIdentifyQuickConnectTabs.Text = Global.mRemoteNG.My.Language.strIdentifyQuickConnectTabs
+            Me.chkIdentifyQuickConnectTabs.Text = Global.mRemote3G.Language.Language.strIdentifyQuickConnectTabs
             Me.chkIdentifyQuickConnectTabs.UseVisualStyleBackColor = True
             '
             'chkUseOnlyErrorsAndInfosPanel

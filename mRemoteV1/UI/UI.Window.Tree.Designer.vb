@@ -124,7 +124,7 @@
                 '
                 'cMenTreeConnect
                 '
-                Me.cMenTreeConnect.Image = Global.mRemoteNG.My.Resources.Resources.Play
+                Me.cMenTreeConnect.Image = Global.mRemote3G.My.Resources.Resources.Play1
                 Me.cMenTreeConnect.Name = "cMenTreeConnect"
                 Me.cMenTreeConnect.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Shift) _
                     Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
@@ -140,14 +140,14 @@
                 '
                 'cMenTreeConnectWithOptionsConnectToConsoleSession
                 '
-                Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Image = Global.mRemoteNG.My.Resources.Resources.monitor_go
+                Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Image = Global.mRemote3G.My.Resources.Resources.monitor_go
                 Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Name = "cMenTreeConnectWithOptionsConnectToConsoleSession"
                 Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Size = New System.Drawing.Size(231, 22)
                 Me.cMenTreeConnectWithOptionsConnectToConsoleSession.Text = "Connect to console session"
                 '
                 'cMenTreeConnectWithOptionsDontConnectToConsoleSession
                 '
-                Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Image = Global.mRemoteNG.My.Resources.Resources.monitor_delete
+                Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Image = Global.mRemote3G.My.Resources.Resources.monitor_delete
                 Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Name = "cMenTreeConnectWithOptionsDontConnectToConsoleSession"
                 Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Size = New System.Drawing.Size(231, 22)
                 Me.cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text = "Don't connect to console session"
@@ -155,28 +155,28 @@
                 '
                 'cMenTreeConnectWithOptionsConnectInFullscreen
                 '
-                Me.cMenTreeConnectWithOptionsConnectInFullscreen.Image = Global.mRemoteNG.My.Resources.Resources.arrow_out
+                Me.cMenTreeConnectWithOptionsConnectInFullscreen.Image = Global.mRemote3G.My.Resources.Resources.arrow_out
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Name = "cMenTreeConnectWithOptionsConnectInFullscreen"
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Size = New System.Drawing.Size(231, 22)
                 Me.cMenTreeConnectWithOptionsConnectInFullscreen.Text = "Connect in fullscreen"
                 '
                 'cMenTreeConnectWithOptionsNoCredentials
                 '
-                Me.cMenTreeConnectWithOptionsNoCredentials.Image = Global.mRemoteNG.My.Resources.Resources.key_delete
+                Me.cMenTreeConnectWithOptionsNoCredentials.Image = Global.mRemote3G.My.Resources.Resources.key_delete
                 Me.cMenTreeConnectWithOptionsNoCredentials.Name = "cMenTreeConnectWithOptionsNoCredentials"
                 Me.cMenTreeConnectWithOptionsNoCredentials.Size = New System.Drawing.Size(231, 22)
                 Me.cMenTreeConnectWithOptionsNoCredentials.Text = "Connect without credentials"
                 '
                 'cMenTreeConnectWithOptionsChoosePanelBeforeConnecting
                 '
-                Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Image = Global.mRemoteNG.My.Resources.Resources.Panels
+                Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Image = Global.mRemote3G.My.Resources.Resources.Panels
                 Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Name = "cMenTreeConnectWithOptionsChoosePanelBeforeConnecting"
                 Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Size = New System.Drawing.Size(231, 22)
                 Me.cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = "Choose panel before connecting"
                 '
                 'cMenTreeDisconnect
                 '
-                Me.cMenTreeDisconnect.Image = Global.mRemoteNG.My.Resources.Resources.Pause
+                Me.cMenTreeDisconnect.Image = Global.mRemote3G.My.Resources.Resources.Pause1
                 Me.cMenTreeDisconnect.Name = "cMenTreeDisconnect"
                 Me.cMenTreeDisconnect.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeDisconnect.Text = "Disconnect"
@@ -188,14 +188,14 @@
                 '
                 'cMenTreeToolsExternalApps
                 '
-                Me.cMenTreeToolsExternalApps.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp
+                Me.cMenTreeToolsExternalApps.Image = Global.mRemote3G.My.Resources.Resources.ExtApp
                 Me.cMenTreeToolsExternalApps.Name = "cMenTreeToolsExternalApps"
                 Me.cMenTreeToolsExternalApps.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeToolsExternalApps.Text = "External Applications"
                 '
                 'cMenTreeToolsTransferFile
                 '
-                Me.cMenTreeToolsTransferFile.Image = Global.mRemoteNG.My.Resources.Resources.SSHTransfer
+                Me.cMenTreeToolsTransferFile.Image = Global.mRemote3G.My.Resources.Resources.SSHTransfer
                 Me.cMenTreeToolsTransferFile.Name = "cMenTreeToolsTransferFile"
                 Me.cMenTreeToolsTransferFile.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeToolsTransferFile.Text = "Transfer File (SSH)"
@@ -207,7 +207,7 @@
                 '
                 'cMenTreeDuplicate
                 '
-                Me.cMenTreeDuplicate.Image = Global.mRemoteNG.My.Resources.Resources.page_copy
+                Me.cMenTreeDuplicate.Image = Global.mRemote3G.My.Resources.Resources.page_copy
                 Me.cMenTreeDuplicate.Name = "cMenTreeDuplicate"
                 Me.cMenTreeDuplicate.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.D), System.Windows.Forms.Keys)
                 Me.cMenTreeDuplicate.Size = New System.Drawing.Size(186, 22)
@@ -215,7 +215,7 @@
                 '
                 'cMenTreeRename
                 '
-                Me.cMenTreeRename.Image = Global.mRemoteNG.My.Resources.Resources.Rename
+                Me.cMenTreeRename.Image = Global.mRemote3G.My.Resources.Resources.Rename
                 Me.cMenTreeRename.Name = "cMenTreeRename"
                 Me.cMenTreeRename.ShortcutKeys = System.Windows.Forms.Keys.F2
                 Me.cMenTreeRename.Size = New System.Drawing.Size(186, 22)
@@ -223,7 +223,7 @@
                 '
                 'cMenTreeDelete
                 '
-                Me.cMenTreeDelete.Image = Global.mRemoteNG.My.Resources.Resources.Delete
+                Me.cMenTreeDelete.Image = Global.mRemote3G.My.Resources.Resources.Delete
                 Me.cMenTreeDelete.Name = "cMenTreeDelete"
                 Me.cMenTreeDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete
                 Me.cMenTreeDelete.Size = New System.Drawing.Size(186, 22)
@@ -272,14 +272,14 @@
                 '
                 'cMenTreeAddConnection
                 '
-                Me.cMenTreeAddConnection.Image = Global.mRemoteNG.My.Resources.Resources.Connection_Add
+                Me.cMenTreeAddConnection.Image = Global.mRemote3G.My.Resources.Resources.Connection_Add
                 Me.cMenTreeAddConnection.Name = "cMenTreeAddConnection"
                 Me.cMenTreeAddConnection.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeAddConnection.Text = "New Connection"
                 '
                 'cMenTreeAddFolder
                 '
-                Me.cMenTreeAddFolder.Image = Global.mRemoteNG.My.Resources.Resources.Folder_Add
+                Me.cMenTreeAddFolder.Image = Global.mRemote3G.My.Resources.Resources.Folder_Add
                 Me.cMenTreeAddFolder.Name = "cMenTreeAddFolder"
                 Me.cMenTreeAddFolder.Size = New System.Drawing.Size(186, 22)
                 Me.cMenTreeAddFolder.Text = "New Folder"
@@ -298,21 +298,21 @@
                 '
                 'cMenTreeToolsSortAscending
                 '
-                Me.cMenTreeToolsSortAscending.Image = Global.mRemoteNG.My.Resources.Resources.Sort_AZ
+                Me.cMenTreeToolsSortAscending.Image = Global.mRemote3G.My.Resources.Resources.Sort_AZ
                 Me.cMenTreeToolsSortAscending.Name = "cMenTreeToolsSortAscending"
                 Me.cMenTreeToolsSortAscending.Size = New System.Drawing.Size(157, 22)
                 Me.cMenTreeToolsSortAscending.Text = "Ascending (A-Z)"
                 '
                 'cMenTreeToolsSortDescending
                 '
-                Me.cMenTreeToolsSortDescending.Image = Global.mRemoteNG.My.Resources.Resources.Sort_ZA
+                Me.cMenTreeToolsSortDescending.Image = Global.mRemote3G.My.Resources.Resources.Sort_ZA
                 Me.cMenTreeToolsSortDescending.Name = "cMenTreeToolsSortDescending"
                 Me.cMenTreeToolsSortDescending.Size = New System.Drawing.Size(157, 22)
                 Me.cMenTreeToolsSortDescending.Text = "Descending (Z-A)"
                 '
                 'cMenTreeMoveUp
                 '
-                Me.cMenTreeMoveUp.Image = Global.mRemoteNG.My.Resources.Resources.Arrow_Up
+                Me.cMenTreeMoveUp.Image = Global.mRemote3G.My.Resources.Resources.Arrow_Up
                 Me.cMenTreeMoveUp.Name = "cMenTreeMoveUp"
                 Me.cMenTreeMoveUp.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Up), System.Windows.Forms.Keys)
                 Me.cMenTreeMoveUp.Size = New System.Drawing.Size(186, 22)
@@ -320,7 +320,7 @@
                 '
                 'cMenTreeMoveDown
                 '
-                Me.cMenTreeMoveDown.Image = Global.mRemoteNG.My.Resources.Resources.Arrow_Down
+                Me.cMenTreeMoveDown.Image = Global.mRemote3G.My.Resources.Resources.Arrow_Down
                 Me.cMenTreeMoveDown.Name = "cMenTreeMoveDown"
                 Me.cMenTreeMoveDown.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Down), System.Windows.Forms.Keys)
                 Me.cMenTreeMoveDown.Size = New System.Drawing.Size(186, 22)
@@ -348,7 +348,7 @@
                 'PictureBox1
                 '
                 Me.PictureBox1.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
-                Me.PictureBox1.Image = Global.mRemoteNG.My.Resources.Resources.Search
+                Me.PictureBox1.Image = Global.mRemote3G.My.Resources.Resources.Search
                 Me.PictureBox1.Location = New System.Drawing.Point(2, 412)
                 Me.PictureBox1.Name = "PictureBox1"
                 Me.PictureBox1.Size = New System.Drawing.Size(16, 16)
@@ -384,14 +384,14 @@
                 'mMenAddConnection
                 '
                 Me.mMenAddConnection.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.mMenAddConnection.Image = Global.mRemoteNG.My.Resources.Resources.Connection_Add
+                Me.mMenAddConnection.Image = Global.mRemote3G.My.Resources.Resources.Connection_Add
                 Me.mMenAddConnection.Name = "mMenAddConnection"
                 Me.mMenAddConnection.Size = New System.Drawing.Size(28, 20)
                 '
                 'mMenAddFolder
                 '
                 Me.mMenAddFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.mMenAddFolder.Image = Global.mRemoteNG.My.Resources.Resources.Folder_Add
+                Me.mMenAddFolder.Image = Global.mRemote3G.My.Resources.Resources.Folder_Add
                 Me.mMenAddFolder.Name = "mMenAddFolder"
                 Me.mMenAddFolder.Size = New System.Drawing.Size(28, 20)
                 '
@@ -399,21 +399,21 @@
                 '
                 Me.mMenView.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
                 Me.mMenView.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mMenViewExpandAllFolders, Me.mMenViewCollapseAllFolders})
-                Me.mMenView.Image = Global.mRemoteNG.My.Resources.Resources.View
+                Me.mMenView.Image = Global.mRemote3G.My.Resources.Resources.View
                 Me.mMenView.Name = "mMenView"
                 Me.mMenView.Size = New System.Drawing.Size(28, 20)
                 Me.mMenView.Text = "&View"
                 '
                 'mMenViewExpandAllFolders
                 '
-                Me.mMenViewExpandAllFolders.Image = Global.mRemoteNG.My.Resources.Resources.Expand
+                Me.mMenViewExpandAllFolders.Image = Global.mRemote3G.My.Resources.Resources.Expand
                 Me.mMenViewExpandAllFolders.Name = "mMenViewExpandAllFolders"
                 Me.mMenViewExpandAllFolders.Size = New System.Drawing.Size(161, 22)
                 Me.mMenViewExpandAllFolders.Text = "Expand all folders"
                 '
                 'mMenViewCollapseAllFolders
                 '
-                Me.mMenViewCollapseAllFolders.Image = Global.mRemoteNG.My.Resources.Resources.Collapse
+                Me.mMenViewCollapseAllFolders.Image = Global.mRemote3G.My.Resources.Resources.Collapse
                 Me.mMenViewCollapseAllFolders.Name = "mMenViewCollapseAllFolders"
                 Me.mMenViewCollapseAllFolders.Size = New System.Drawing.Size(161, 22)
                 Me.mMenViewCollapseAllFolders.Text = "Collapse all folders"
@@ -421,7 +421,7 @@
                 'mMenSortAscending
                 '
                 Me.mMenSortAscending.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.mMenSortAscending.Image = Global.mRemoteNG.My.Resources.Resources.Sort_AZ
+                Me.mMenSortAscending.Image = Global.mRemote3G.My.Resources.Resources.Sort_AZ
                 Me.mMenSortAscending.Name = "mMenSortAscending"
                 Me.mMenSortAscending.Size = New System.Drawing.Size(28, 20)
                 '
@@ -432,7 +432,7 @@
                 Me.Controls.Add(Me.pnlConnections)
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
                 Me.HideOnClose = True
-                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Root_Icon
+                Me.Icon = Global.mRemote3G.My.Resources.Resources.Root_Icon
                 Me.Name = "Tree"
                 Me.TabText = "Connections"
                 Me.Text = "Connections"

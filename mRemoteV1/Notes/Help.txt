@@ -1,13 +1,13 @@
 ﻿[Introduction]
 Introduction:
 mRemote is a multi-protocol remote connections manager.
-As of Version 1.00 it supports the RDP, VNC, ICA, SSH, Telnet, RAW, Rlogin and HTTP/S protocols.
+As of Version 1.00 it supports the RDP, VNC, SSH, Telnet, RAW, Rlogin and HTTP/S protocols.
 The main goal is to minimize window clutter and to provide a easy gui for managing all your remote connections.
 
 Features:
 Free and Open Source, released under the GPL
 Panels and tabs allow to group certain connections together, dock them to any side of the window or completely undock them and move them to another screen for example
-Multiple supported protocols (RDP, VNC, ICA, SSH, Telnet, RAW, Rlogin and HTTP/S)
+Multiple supported protocols (RDP, VNC, SSH, Telnet, RAW, Rlogin and HTTP/S)
 Easy to organize and maintain list of connections
 Inheritance makes it possible to store most properties on folder basis and let the underlying connections inherit this info
 Support for importing connections from Active Directory
@@ -35,7 +35,6 @@ Binary and source code packages are available for download.
 WinXP; Vista -> x86
 Win7 -> x86,x64
 Terminal Services Client 6.0
-Citrix Client for ICA (Registered wfica.ocx)
 
 [Installation]
 Setup Package

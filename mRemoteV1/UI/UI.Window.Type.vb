@@ -1,4 +1,5 @@
 Namespace UI
+
     Namespace Window
         Public Enum Type
             Tree = 0
@@ -20,4 +21,5 @@ Namespace UI
             Announcement = 18
         End Enum
     End Namespace
+
 End Namespace

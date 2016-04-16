@@ -106,7 +106,7 @@
     </xsd:element>
   </xsd:schema>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -115,7 +115,7 @@
     <value>2.0</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strAbout" xml:space="preserve">
     <value>关于</value>
@@ -139,7 +139,7 @@
     <value>AddNodesFromSQL 函数执行失败！</value>
   </data>
   <data name="strAllowOnlySingleInstance" xml:space="preserve">
-    <value>仅允许应用程序以单实例运行（需要重新启动mRemoteNG）</value>
+    <value>仅允许应用程序以单实例运行（需要重新启动mRemote3G）</value>
   </data>
   <data name="strAlways" xml:space="preserve">
     <value>始终</value>
@@ -283,7 +283,7 @@
     <value>检查成功！</value>
   </data>
   <data name="strCcEOLFailed" xml:space="preserve">
-    <value>RDP会话功能需要您已提前在系统上注册eolwtscom.dll文件。mRemoteNG提供此组件，但是不会自动进行注册，需要您手动执行安装。手动注册可以通过以下方式：打开运行对话框（开始菜单中的运行），并输入以下内容“regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll"”（c:\Program Files\mRemoteNG\是您安装mRemoteNG的路径）。如果执行此操作后，依然无法通过RDP会话功能的检测，请在mRemoteNG论坛中咨询，地址是：http://forum.mremoteng.org/</value>
+    <value>RDP会话功能需要您已提前在系统上注册eolwtscom.dll文件。mRemote3G提供此组件，但是不会自动进行注册，需要您手动执行安装。手动注册可以通过以下方式：打开运行对话框（开始菜单中的运行），并输入以下内容“regsvr32 "c:\Program Files\mRemote3G\eolwtscom.dll"”（c:\Program Files\mRemote3G\是您安装mRemote3G的路径）。如果执行此操作后，依然无法通过RDP会话功能的检测，请在mRemote3G论坛中咨询，地址是：http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcEOLOK" xml:space="preserve">
     <value>发现EOLWTSCOM组件，组件已注册。</value>
@@ -291,8 +291,8 @@
   <data name="strCcGeckoFailed" xml:space="preserve">
     <value>使用Gecko渲染引擎，必须事先安装XULrunner 1.8.1.x版本，并且在选项中设置路径。
 您可以在此下载XULrunner 1.8.1.3：ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-下载完成后请解压此压缩包。然后请在mRemoteNG中的工具/选项/高级的XULrunner字段中填写解压路径。
-如果执行此操作后，依然无法通过Gecko渲染引擎的检测，请在mRemoteNG论坛中咨询，地址是：http://forum.mremoteng.org/</value>
+下载完成后请解压此压缩包。然后请在mRemote3G中的工具/选项/高级的XULrunner字段中填写解压路径。
+如果执行此操作后，依然无法通过Gecko渲染引擎的检测，请在mRemote3G论坛中咨询，地址是：http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>发现XULrunner组件。</value>
@@ -301,7 +301,7 @@
     <value>启用ICA需要提前安装 XenDesktop Online 插件，并正确注册wfica.ocx库文件。您可以在此下载此插件：http://www.citrix.com/download/
 如果您已安装 XenDesktop Online 插件，但人就检测失败，请手动注册 wfica.ocx 。
 请打开运行对话框（开始菜单/运行），并输入如下内容：“regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" ”（c:\Program Files\Citrix\ICA Client\ 是您安装 XenDesktop Online 插件的路径）。
-如果执行此操作后，依然无法通过ICA的检测，请在mRemoteNG论坛中咨询，地址是：http://forum.mremoteng.org/</value>
+如果执行此操作后，依然无法通过ICA的检测，请在mRemote3G论坛中咨询，地址是：http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
     <value>发现ICA组件。
@@ -311,8 +311,8 @@ Citrix ICA 客户端空间版本：{0}</value>
     <value>安装不正确</value>
   </data>
   <data name="strCcPuttyFailed" xml:space="preserve">
-    <value>SSH、Telnet、Rlogin和RAW协议均基于PuTTY。mRemoteNG安装时会自动安装内置的PuTTY到安装目录中。
-请确保Putty.exe在mRemoteNG目录中（默认为 c:\Program Files\mRemoteNG\）或是在选项（工具/选项/高级/自定义PuTTY路径）中指定Putty的有效路径。</value>
+    <value>SSH、Telnet、Rlogin和RAW协议均基于PuTTY。mRemote3G安装时会自动安装内置的PuTTY到安装目录中。
+请确保Putty.exe在mRemote3G目录中（默认为 c:\Program Files\mRemote3G\）或是在选项（工具/选项/高级/自定义PuTTY路径）中指定Putty的有效路径。</value>
   </data>
   <data name="strCcPuttyOK" xml:space="preserve">
     <value>发现 PuTTY 执行文件。</value>
@@ -320,22 +320,22 @@ Citrix ICA 客户端空间版本：{0}</value>
   <data name="strCcRDPFailed" xml:space="preserve">
     <value>为确保RDP工作征程，请您提前安装远程桌面连接（终端服务客户端）6.1版本。您可以在这里下载：http://support.microsoft.com/kb/951616
 如果您已经安装RDP 6.1，但依然检测失败，请尝试手动注册mstscax.dll文件。注册方法：打开运行对话框（开始菜单/运行），并输入以下命令：“regsvr32 "c:\windows\system32\mstscax.dll"”（C:\是您的系统所在驱动器）。
-如果执行此操作后，依然无法正常使用RDP，请在mRemoteNG论坛中咨询，地址是：http://forum.mremoteng.org/</value>
+如果执行此操作后，依然无法正常使用RDP，请在mRemote3G论坛中咨询，地址是：http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
     <value>发现 RDP 组件。
 远程桌面版本 {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>使用VNC前，请确认VncSharpNG.dll在您安装mRemoteNG的目录中（一般为 C:\Program Files\mRemoteNG\）。
-如果执行此操作后，依然无法通过VNC的检测，请在mRemoteNG论坛中咨询，地址是：http://forum.mremoteng.org/</value>
+    <value>使用VNC前，请确认VncSharpNG.dll在您安装mRemote3G的目录中（一般为 C:\Program Files\mRemote3G\）。
+如果执行此操作后，依然无法通过VNC的检测，请在mRemote3G论坛中咨询，地址是：http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>发现 VNC 组件。
 VncSharpNG 版本 {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>服务器连接断开时，自动重试连接(仅限RDP和ICA)</value>
+    <value>服务器连接断开时，自动重试连接(仅限RDP和)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>域名</value>
@@ -643,7 +643,7 @@ VncSharpNG 版本 {0}</value>
     <value>导出</value>
   </data>
   <data name="strExportmRemoteXML" xml:space="preserve">
-    <value>导出mRemote/mRemoteNG XML</value>
+    <value>导出mRemote/mRemote3G XML</value>
   </data>
   <data name="strExtApp" xml:space="preserve">
     <value>外部应用</value>
@@ -742,7 +742,7 @@ VncSharpNG 版本 {0}</value>
     <value>导入/导出</value>
   </data>
   <data name="strImportmRemoteXML" xml:space="preserve">
-    <value>导入mRemote/mRemoteNG XML</value>
+    <value>导入mRemote/mRemote3G XML</value>
   </data>
   <data name="strImportPortScan" xml:space="preserve">
     <value>导入端口扫描结果</value>
@@ -757,7 +757,7 @@ VncSharpNG 版本 {0}</value>
     <value>信息</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG 已经是最新版本。</value>
+    <value>mRemote3G 已经是最新版本。</value>
   </data>
   <data name="strIntAppConnectionFailed" xml:space="preserve">
     <value>连接失败！</value>
@@ -985,7 +985,7 @@ VncSharpNG 版本 {0}</value>
     <value>帮助(&amp;H)</value>
   </data>
   <data name="strMenuHelpContents" xml:space="preserve">
-    <value>mRemoteNG 帮助</value>
+    <value>mRemote3G 帮助</value>
   </data>
   <data name="strMenuJumpTo" xml:space="preserve">
     <value>转到</value>
@@ -1189,7 +1189,7 @@ VncSharpNG 版本 {0}</value>
     <value>无法载入端口扫描面板！</value>
   </data>
   <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-    <value>(仅当选择mRemote/mRemoteNG XML文件格式保存时，这些属性才会保存！)</value>
+    <value>(仅当选择mRemote/mRemote3G XML文件格式保存时，这些属性才会保存！)</value>
   </data>
   <data name="strPropertyDescriptionAddress" xml:space="preserve">
     <value>请输入您要连接的主机名或IP。</value>
@@ -1264,7 +1264,7 @@ VncSharpNG 版本 {0}</value>
     <value>请输入所选协议对应的监听端口。</value>
   </data>
   <data name="strPropertyDescriptionProtocol" xml:space="preserve">
-    <value>请选择mRemoteNG连接主机所使用的协议。</value>
+    <value>请选择mRemote3G连接主机所使用的协议。</value>
   </data>
   <data name="strPropertyDescriptionPuttySession" xml:space="preserve">
     <value>请选择连接时所使用的 PuTTY 会话。</value>
@@ -1567,7 +1567,7 @@ VncSharpNG 版本 {0}</value>
     <value>（&amp;W）关闭连接时确认</value>
   </data>
   <data name="strRadioCloseWarnExit" xml:space="preserve">
-    <value>退出（&amp;e）mRemoteNG时确认</value>
+    <value>退出（&amp;e）mRemote3G时确认</value>
   </data>
   <data name="strRadioCloseWarnMultiple" xml:space="preserve">
     <value>关闭多个（&amp;m）连接时确认</value>
@@ -1612,7 +1612,7 @@ VncSharpNG 版本 {0}</value>
     <value>连接建立失败！</value>
   </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
-    <value>无法创建 RDP 控制，请检查 mRemoteNG 的安装需求是否满足。</value>
+    <value>无法创建 RDP 控制，请检查 mRemote3G 的安装需求是否满足。</value>
   </data>
   <data name="strRDPDisableCursorblinking" xml:space="preserve">
     <value>禁用光标闪烁</value>
@@ -2014,10 +2014,10 @@ VncSharpNG 版本 {0}</value>
     <value>未命名主题</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
-    <value>mRemoteNG 需要更新</value>
+    <value>mRemote3G 需要更新</value>
   </data>
   <data name="strUpdateCheck" xml:space="preserve">
-    <value>mRemoteNG 会定期检查 mRemoteNG 网站更新和产品公告。</value>
+    <value>mRemote3G 会定期检查 mRemote3G 网站更新和产品公告。</value>
   </data>
   <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
     <value>升级检查未完成！</value>
@@ -2026,14 +2026,14 @@ VncSharpNG 版本 {0}</value>
     <value>升级检查失败！</value>
   </data>
   <data name="strUpdateCheckPortableEdition" xml:space="preserve">
-    <value>mRemoteNG便携版目前不支持自动更新。</value>
+    <value>mRemote3G便携版目前不支持自动更新。</value>
   </data>
   <data name="strUpdateDeleteFailed" xml:space="preserve">
     <value>升级文件删除失败！</value>
   </data>
   <data name="strUpdateDownloadComplete" xml:space="preserve">
     <value>下载完成！
-mRemoteNG 将退出并安装更新。</value>
+mRemote3G 将退出并安装更新。</value>
   </data>
   <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
     <value>下载未完成！</value>
@@ -2117,7 +2117,7 @@ mRemoteNG 将退出并安装更新。</value>
     <value>使用DockPanel Suite[Weifen Luo]</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>记录日志(mRemoteNG.log)</value>
+    <value>记录日志(mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner路径：</value>

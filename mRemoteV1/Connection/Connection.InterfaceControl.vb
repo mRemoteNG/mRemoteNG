@@ -1,33 +1,39 @@
-Imports System.Windows.Forms
-Imports System.Drawing
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Messages
 
 Namespace Connection
     Public Class InterfaceControl
+
 #Region "Properties"
-        Private _Protocol As Connection.Protocol.Base
-        Public Property Protocol() As Connection.Protocol.Base
+
+        Private _Protocol As Base
+
+        Public Property Protocol As Base
             Get
                 Return Me._Protocol
             End Get
-            Set(ByVal value As Connection.Protocol.Base)
+            Set
                 Me._Protocol = value
             End Set
         End Property
 
-        Private _Info As Connection.Info
-        Public Property Info() As Connection.Info
+        Private _Info As Info
+
+        Public Property Info As Info
             Get
                 Return Me._Info
             End Get
-            Set(ByVal value As Connection.Info)
+            Set
                 Me._Info = value
             End Set
         End Property
+
 #End Region
 
 #Region "Methods"
-        Public Sub New(ByVal Parent As Control, ByVal Protocol As Connection.Protocol.Base, ByVal Info As Connection.Info)
+
+        Public Sub New(Parent As Control, Protocol As Base, Info As Info)
             Try
                 Me._Protocol = Protocol
                 Me._Info = Info
@@ -37,9 +43,11 @@ Namespace Connection
                 Me.Anchor = AnchorStyles.Bottom Or AnchorStyles.Left Or AnchorStyles.Right Or AnchorStyles.Top
                 InitializeComponent()
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn't create new InterfaceControl" & vbNewLine & ex.Message)
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    "Couldn't create new InterfaceControl" & vbNewLine & ex.ToString())
             End Try
         End Sub
+
 #End Region
     End Class
 End Namespace

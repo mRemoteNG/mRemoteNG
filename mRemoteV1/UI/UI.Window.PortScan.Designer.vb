@@ -101,7 +101,7 @@
                 'btnScan
                 '
                 Me.btnScan.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-                Me.btnScan.Image = Global.mRemoteNG.My.Resources.Resources.Search
+                Me.btnScan.Image = Global.mRemote3G.My.Resources.Resources.Search
                 Me.btnScan.Location = New System.Drawing.Point(420, 9)
                 Me.btnScan.Name = "btnScan"
                 Me.btnScan.Size = New System.Drawing.Size(86, 58)

@@ -1,20 +1,22 @@
-﻿Imports mRemoteNG.Forms
-Imports mRemoteNG.App.Runtime
+﻿Imports mRemote3G.Config.Connections
+Imports mRemote3G.Forms
+Imports mRemote3G.Security
+Imports mRemote3G.Tree
 
 Namespace App
     Public Class Export
-        Public Shared Sub ExportToFile(ByVal rootTreeNode As TreeNode, ByVal selectedTreeNode As TreeNode)
+        Public Shared Sub ExportToFile(rootTreeNode As TreeNode, selectedTreeNode As TreeNode)
             Try
                 Dim exportTreeNode As TreeNode
-                Dim saveSecurity As New Security.Save()
+                Dim saveSecurity As New Save()
 
                 Using exportForm As New ExportForm()
                     With exportForm
-                        Select Case Tree.Node.GetNodeType(selectedTreeNode)
-                            Case Tree.Node.Type.Container
+                        Select Case Node.GetNodeType(selectedTreeNode)
+                            Case Node.Type.Container
                                 .SelectedFolder = selectedTreeNode
-                            Case Tree.Node.Type.Connection
-                                If Tree.Node.GetNodeType(selectedTreeNode.Parent) = Tree.Node.Type.Container Then
+                            Case Node.Type.Connection
+                                If Node.GetNodeType(selectedTreeNode.Parent) = Node.Type.Container Then
                                     .SelectedFolder = selectedTreeNode.Parent
                                 End If
                                 .SelectedConnection = selectedTreeNode
@@ -40,27 +42,27 @@ Namespace App
                     SaveExportFile(exportForm.FileName, exportForm.SaveFormat, exportTreeNode, saveSecurity)
                 End Using
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage("App.Export.ExportToFile() failed.", ex, , True)
+                Runtime.MessageCollector.AddExceptionMessage("App.Export.ExportToFile() failed.", ex, , True)
             End Try
         End Sub
 
-        Private Shared Sub SaveExportFile(ByVal fileName As String, ByVal saveFormat As Config.Connections.Save.Format, ByVal rootNode As TreeNode, ByVal saveSecurity As Security.Save)
+        Private Shared Sub SaveExportFile(ByVal fileName As String, ByVal saveFormat As Config.Connections.ConnectionsSave.Format, ByVal rootNode As TreeNode, ByVal saveSecurity As Security.Save)
             Dim previousTimerEnabled As Boolean = False
 
             Try
-                If TimerSqlWatcher IsNot Nothing Then
-                    previousTimerEnabled = TimerSqlWatcher.Enabled
-                    TimerSqlWatcher.Enabled = False
+                If Runtime.TimerSqlWatcher IsNot Nothing Then
+                    previousTimerEnabled = Runtime.TimerSqlWatcher.Enabled
+                    Runtime.TimerSqlWatcher.Enabled = False
                 End If
 
-                Dim connectionsSave As New Config.Connections.Save
+                Dim connectionsSave As New ConnectionsSave
                 With connectionsSave
                     .Export = True
                     .ConnectionFileName = fileName
                     .SaveFormat = saveFormat
 
-                    .ConnectionList = ConnectionList
-                    .ContainerList = ContainerList
+                    .ConnectionList = Runtime.ConnectionList
+                    .ContainerList = Runtime.ContainerList
                     .RootTreeNode = rootNode
 
                     .SaveSecurity = saveSecurity
@@ -68,12 +70,16 @@ Namespace App
 
                 connectionsSave.Save()
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage(String.Format("Export.SaveExportFile(""{0}"") failed.", fileName), ex)
+                Runtime.MessageCollector.AddExceptionMessage(
+                    String.Format("Export.SaveExportFile(""{0}"") failed.", fileName), ex)
             Finally
-                If TimerSqlWatcher IsNot Nothing Then
-                    TimerSqlWatcher.Enabled = previousTimerEnabled
+                If Runtime.TimerSqlWatcher IsNot Nothing Then
+                    Runtime.TimerSqlWatcher.Enabled = previousTimerEnabled
                 End If
             End Try
+        End Sub
+
+        Private Sub New()
         End Sub
     End Class
 End Namespace

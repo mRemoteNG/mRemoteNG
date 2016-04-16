@@ -56,7 +56,7 @@
             Me.lblUpdatesExplanation.Name = "lblUpdatesExplanation"
             Me.lblUpdatesExplanation.Size = New System.Drawing.Size(536, 40)
             Me.lblUpdatesExplanation.TabIndex = 3
-            Me.lblUpdatesExplanation.Text = "mRemoteNG can periodically connect to the mRemoteNG website to check for updates " & _
+            Me.lblUpdatesExplanation.Text = "mRemote3G can periodically connect to the mRemote3G website to check for updates " &
         "and product announcements."
             '
             'pnlUpdateCheck

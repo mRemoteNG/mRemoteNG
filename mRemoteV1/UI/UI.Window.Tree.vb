@@ -1,17 +1,26 @@
-Imports mRemoteNG.App
-Imports mRemoteNG.My
+Imports mRemote3G.App
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Connection.PuttySession
+Imports mRemote3G.Container
+Imports mRemote3G.Messages
+Imports mRemote3G.Root.PuttySessions
+Imports mRemote3G.Themes
+Imports mRemote3G.Tools
+Imports mRemote3G.Tree
 Imports WeifenLuo.WinFormsUI.Docking
-Imports mRemoteNG.App.Runtime
 
 Namespace UI
+
     Namespace Window
         Public Class Tree
             Inherits Base
+
 #Region "Form Stuff"
-            Private Sub Tree_Load(ByVal sender As Object, ByVal e As EventArgs) Handles Me.Load
+
+            Private Sub Tree_Load(sender As Object, e As EventArgs) Handles Me.Load
                 ApplyLanguage()
 
-                AddHandler Themes.ThemeManager.ThemeChanged, AddressOf ApplyTheme
+                AddHandler ThemeManager.ThemeChanged, AddressOf ApplyTheme
                 ApplyTheme()
 
                 txtSearch.Multiline = True
@@ -21,52 +30,54 @@ Namespace UI
             End Sub
 
             Private Sub ApplyLanguage()
-                Text = Language.strConnections
-                TabText = Language.strConnections
+                Text = Language.Language.strConnections
+                TabText = Language.Language.strConnections
 
-                mMenAddConnection.ToolTipText = Language.strAddConnection
-                mMenAddFolder.ToolTipText = Language.strAddFolder
-                mMenView.ToolTipText = Language.strMenuView.Replace("&", "")
-                mMenViewExpandAllFolders.Text = Language.strExpandAllFolders
-                mMenViewCollapseAllFolders.Text = Language.strCollapseAllFolders
-                mMenSortAscending.ToolTipText = Language.strSortAsc
+                mMenAddConnection.ToolTipText = Language.Language.strAddConnection
+                mMenAddFolder.ToolTipText = Language.Language.strAddFolder
+                mMenView.ToolTipText = Language.Language.strMenuView.Replace("&", "")
+                mMenViewExpandAllFolders.Text = Language.Language.strExpandAllFolders
+                mMenViewCollapseAllFolders.Text = Language.Language.strCollapseAllFolders
+                mMenSortAscending.ToolTipText = Language.Language.strSortAsc
 
-                cMenTreeConnect.Text = Language.strConnect
-                cMenTreeConnectWithOptions.Text = Language.strConnectWithOptions
-                cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.strConnectToConsoleSession
-                cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text = Language.strDontConnectToConsoleSessionMenuItem
-                cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.strConnectInFullscreen
-                cMenTreeConnectWithOptionsNoCredentials.Text = Language.strConnectNoCredentials
-                cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.strChoosePanelBeforeConnecting
-                cMenTreeDisconnect.Text = Language.strMenuDisconnect
+                cMenTreeConnect.Text = Language.Language.strConnect
+                cMenTreeConnectWithOptions.Text = Language.Language.strConnectWithOptions
+                cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.Language.strConnectToConsoleSession
+                cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text =
+                    Language.Language.strDontConnectToConsoleSessionMenuItem
+                cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.Language.strConnectInFullscreen
+                cMenTreeConnectWithOptionsNoCredentials.Text = Language.Language.strConnectNoCredentials
+                cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text =
+                    Language.Language.strChoosePanelBeforeConnecting
+                cMenTreeDisconnect.Text = Language.Language.strMenuDisconnect
 
-                cMenTreeToolsExternalApps.Text = Language.strMenuExternalTools
-                cMenTreeToolsTransferFile.Text = Language.strMenuTransferFile
+                cMenTreeToolsExternalApps.Text = Language.Language.strMenuExternalTools
+                cMenTreeToolsTransferFile.Text = Language.Language.strMenuTransferFile
 
-                cMenTreeDuplicate.Text = Language.strDuplicate
-                cMenTreeRename.Text = Language.strRename
-                cMenTreeDelete.Text = Language.strMenuDelete
+                cMenTreeDuplicate.Text = Language.Language.strDuplicate
+                cMenTreeRename.Text = Language.Language.strRename
+                cMenTreeDelete.Text = Language.Language.strMenuDelete
 
-                cMenTreeImport.Text = Language.strImportMenuItem
-                cMenTreeImportFile.Text = Language.strImportFromFileMenuItem
-                cMenTreeImportActiveDirectory.Text = Language.strImportAD
-                cMenTreeImportPortScan.Text = Language.strImportPortScan
-                cMenTreeExportFile.Text = Language.strExportToFileMenuItem
+                cMenTreeImport.Text = Language.Language.strImportMenuItem
+                cMenTreeImportFile.Text = Language.Language.strImportFromFileMenuItem
+                cMenTreeImportActiveDirectory.Text = Language.Language.strImportAD
+                cMenTreeImportPortScan.Text = Language.Language.strImportPortScan
+                cMenTreeExportFile.Text = Language.Language.strExportToFileMenuItem
 
-                cMenTreeAddConnection.Text = Language.strAddConnection
-                cMenTreeAddFolder.Text = Language.strAddFolder
+                cMenTreeAddConnection.Text = Language.Language.strAddConnection
+                cMenTreeAddFolder.Text = Language.Language.strAddFolder
 
-                cMenTreeToolsSort.Text = Language.strSort
-                cMenTreeToolsSortAscending.Text = Language.strSortAsc
-                cMenTreeToolsSortDescending.Text = Language.strSortDesc
-                cMenTreeMoveUp.Text = Language.strMoveUp
-                cMenTreeMoveDown.Text = Language.strMoveDown
+                cMenTreeToolsSort.Text = Language.Language.strSort
+                cMenTreeToolsSortAscending.Text = Language.Language.strSortAsc
+                cMenTreeToolsSortDescending.Text = Language.Language.strSortDesc
+                cMenTreeMoveUp.Text = Language.Language.strMoveUp
+                cMenTreeMoveDown.Text = Language.Language.strMoveDown
 
-                txtSearch.Text = Language.strSearchPrompt
+                txtSearch.Text = Language.Language.strSearchPrompt
             End Sub
 
             Public Sub ApplyTheme()
-                With Themes.ThemeManager.ActiveTheme
+                With ThemeManager.ActiveTheme
                     msMain.BackColor = .ToolbarBackgroundColor
                     msMain.ForeColor = .ToolbarTextColor
                     tvConnections.BackColor = .ConnectionsPanelBackgroundColor
@@ -77,10 +88,12 @@ Namespace UI
                     txtSearch.ForeColor = .SearchBoxTextPromptColor
                 End With
             End Sub
+
 #End Region
 
 #Region "Public Methods"
-            Public Sub New(ByVal panel As DockContent)
+
+            Public Sub New(panel As DockContent)
                 WindowType = Type.Tree
                 DockPnl = panel
                 InitializeComponent()
@@ -92,104 +105,118 @@ Namespace UI
             End Sub
 
             Public Sub InitialRefresh()
-                tvConnections_AfterSelect(tvConnections, New TreeViewEventArgs(tvConnections.SelectedNode, TreeViewAction.ByMouse))
+                tvConnections_AfterSelect(tvConnections,
+                                          New TreeViewEventArgs(tvConnections.SelectedNode, TreeViewAction.ByMouse))
             End Sub
+
 #End Region
 
 #Region "Public Properties"
-            Public Property DescriptionTooltip() As ToolTip
+
+            Public Property DescriptionTooltip As ToolTip
+
 #End Region
 
 #Region "Private Methods"
+
             Private Sub FillImageList()
                 Try
-                    imgListTree.Images.Add(Resources.Root)
-                    imgListTree.Images.Add(Resources.Folder)
-                    imgListTree.Images.Add(Resources.Play)
-                    imgListTree.Images.Add(Resources.Pause)
-                    imgListTree.Images.Add(Resources.PuttySessions)
+                    imgListTree.Images.Add(My.Resources.Root)
+                    imgListTree.Images.Add(My.Resources.Folder)
+                    imgListTree.Images.Add(My.Resources.Play1)
+                    imgListTree.Images.Add(My.Resources.Pause1)
+                    imgListTree.Images.Add(My.Resources.PuttySessions)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "FillImageList (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        "FillImageList (UI.Window.Tree) failed" & vbNewLine &
+                                                        ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Sub tvConnections_BeforeLabelEdit(ByVal sender As Object, ByVal e As NodeLabelEditEventArgs) Handles tvConnections.BeforeLabelEdit
+            Private Sub tvConnections_BeforeLabelEdit(sender As Object, e As NodeLabelEditEventArgs) _
+                Handles tvConnections.BeforeLabelEdit
                 cMenTreeDelete.ShortcutKeys = Keys.None
             End Sub
 
-            Private Sub tvConnections_AfterLabelEdit(ByVal sender As Object, ByVal e As NodeLabelEditEventArgs) Handles tvConnections.AfterLabelEdit
+            Private Sub tvConnections_AfterLabelEdit(sender As Object, e As NodeLabelEditEventArgs) _
+                Handles tvConnections.AfterLabelEdit
                 Try
                     cMenTreeDelete.ShortcutKeys = Keys.Delete
 
-                    mRemoteNG.Tree.Node.FinishRenameSelectedNode(e.Label)
-                    Windows.configForm.pGrid_SelectedObjectChanged()
+                    Node.FinishRenameSelectedNode(e.Label)
+                    Runtime.Windows.configForm.pGrid_SelectedObjectChanged()
                     ShowHideTreeContextMenuItems(e.Node)
-                    SaveConnectionsBG()
+                    Runtime.SaveConnectionsBG()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterLabelEdit (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_AfterLabelEdit (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Sub tvConnections_AfterSelect(ByVal sender As Object, ByVal e As TreeViewEventArgs) Handles tvConnections.AfterSelect
+            Private Sub tvConnections_AfterSelect(sender As Object, e As TreeViewEventArgs) _
+                Handles tvConnections.AfterSelect
                 Try
-                    Select Case mRemoteNG.Tree.Node.GetNodeType(e.Node)
-                        Case mRemoteNG.Tree.Node.Type.Connection, mRemoteNG.Tree.Node.Type.PuttySession
-                            Windows.configForm.SetPropertyGridObject(e.Node.Tag)
-                        Case mRemoteNG.Tree.Node.Type.Container
-                            Windows.configForm.SetPropertyGridObject(TryCast(e.Node.Tag, Container.Info).ConnectionInfo)
-                        Case mRemoteNG.Tree.Node.Type.Root, mRemoteNG.Tree.Node.Type.PuttyRoot
-                            Windows.configForm.SetPropertyGridObject(e.Node.Tag)
+                    Select Case Node.GetNodeType(e.Node)
+                        Case Node.Type.Connection, Node.Type.PuttySession
+                            Runtime.Windows.configForm.SetPropertyGridObject(e.Node.Tag)
+                        Case Node.Type.Container
+                            Runtime.Windows.configForm.SetPropertyGridObject(TryCast(e.Node.Tag, Info).ConnectionInfo)
+                        Case Node.Type.Root, Node.Type.PuttyRoot
+                            Runtime.Windows.configForm.SetPropertyGridObject(e.Node.Tag)
                         Case Else
                             Exit Sub
                     End Select
 
-                    Windows.configForm.pGrid_SelectedObjectChanged()
+                    Runtime.Windows.configForm.pGrid_SelectedObjectChanged()
                     ShowHideTreeContextMenuItems(e.Node)
-                    Windows.sessionsForm.GetSessions(True)
 
-                    LastSelected = mRemoteNG.Tree.Node.GetConstantID(e.Node)
+                    Runtime.LastSelected = Node.GetConstantID(e.Node)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterSelect (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_AfterSelect (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Sub tvConnections_NodeMouseClick(ByVal sender As Object, ByVal e As TreeNodeMouseClickEventArgs) Handles tvConnections.NodeMouseClick
+            Private Sub tvConnections_NodeMouseClick(sender As Object, e As TreeNodeMouseClickEventArgs) _
+                Handles tvConnections.NodeMouseClick
                 Try
                     ShowHideTreeContextMenuItems(tvConnections.SelectedNode)
                     tvConnections.SelectedNode = e.Node
 
                     If e.Button = MouseButtons.Left Then
-                        If Settings.SingleClickOnConnectionOpensIt And _
-                            (mRemoteNG.Tree.Node.GetNodeType(e.Node) = mRemoteNG.Tree.Node.Type.Connection Or _
-                             mRemoteNG.Tree.Node.GetNodeType(e.Node) = mRemoteNG.Tree.Node.Type.PuttySession) Then
-                            OpenConnection()
+                        If My.Settings.SingleClickOnConnectionOpensIt And
+                           (Node.GetNodeType(e.Node) = Node.Type.Connection Or
+                            Node.GetNodeType(e.Node) = Node.Type.PuttySession) Then
+                            Runtime.OpenConnection()
                         End If
 
-                        If Settings.SingleClickSwitchesToOpenConnection And mRemoteNG.Tree.Node.GetNodeType(e.Node) = mRemoteNG.Tree.Node.Type.Connection Then
-                            SwitchToOpenConnection(e.Node.Tag)
+                        If _
+                            My.Settings.SingleClickSwitchesToOpenConnection And
+                            Node.GetNodeType(e.Node) = Node.Type.Connection Then
+                            Runtime.SwitchToOpenConnection(e.Node.Tag)
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_NodeMouseClick (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_NodeMouseClick (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Shared Sub tvConnections_NodeMouseDoubleClick(ByVal sender As Object, ByVal e As TreeNodeMouseClickEventArgs) Handles tvConnections.NodeMouseDoubleClick
-                If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Or _
-                   mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.PuttySession Then
-                    OpenConnection()
+            Private Shared Sub tvConnections_NodeMouseDoubleClick(sender As Object, e As TreeNodeMouseClickEventArgs) _
+                Handles tvConnections.NodeMouseDoubleClick
+                If Node.GetNodeType(Node.SelectedNode) = Node.Type.Connection Or
+                   Node.GetNodeType(Node.SelectedNode) = Node.Type.PuttySession Then
+                    Runtime.OpenConnection()
                 End If
             End Sub
 
-            Private Sub tvConnections_MouseMove(ByVal sender As Object, ByVal e As MouseEventArgs) Handles tvConnections.MouseMove
+            Private Sub tvConnections_MouseMove(sender As Object, e As MouseEventArgs) Handles tvConnections.MouseMove
                 Try
-                    mRemoteNG.Tree.Node.SetNodeToolTip(e, DescriptionTooltip)
+                    Node.SetNodeToolTip(e, DescriptionTooltip)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_MouseMove (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_MouseMove (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Shared Sub EnableMenuItemsRecursive(ByVal items As ToolStripItemCollection, Optional ByVal enable As Boolean = True)
+            Private Shared Sub EnableMenuItemsRecursive(items As ToolStripItemCollection,
+                                                        Optional ByVal enable As Boolean = True)
                 Dim menuItem As ToolStripMenuItem
                 For Each item As ToolStripItem In items
                     menuItem = TryCast(item, ToolStripMenuItem)
@@ -201,37 +228,36 @@ Namespace UI
                 Next
             End Sub
 
-            Private Sub ShowHideTreeContextMenuItems(ByVal selectedNode As TreeNode)
+            Private Sub ShowHideTreeContextMenuItems(selectedNode As TreeNode)
                 If selectedNode Is Nothing Then Return
 
                 Try
                     cMenTree.Enabled = True
                     EnableMenuItemsRecursive(cMenTree.Items)
 
-                    Select Case mRemoteNG.Tree.Node.GetNodeType(selectedNode)
-                        Case mRemoteNG.Tree.Node.Type.Connection
-                            Dim connectionInfo As mRemoteNG.Connection.Info = selectedNode.Tag
+                    Select Case Node.GetNodeType(selectedNode)
+                        Case Node.Type.Connection
+                            Dim connectionInfo As mRemote3G.Connection.Info = selectedNode.Tag
 
                             If connectionInfo.OpenConnections.Count = 0 Then
                                 cMenTreeDisconnect.Enabled = False
                             End If
 
-                            If Not (connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH1 Or _
-                                    connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH2) Then
+                            If Not (connectionInfo.Protocol = Protocols.SSH1 Or
+                                    connectionInfo.Protocol = Protocols.SSH2) Then
                                 cMenTreeToolsTransferFile.Enabled = False
                             End If
 
-                            If Not (connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.RDP Or _
-                                    connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.ICA) Then
+                            If Not (connectionInfo.Protocol = Protocols.RDP) Then
                                 cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
                                 cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
                             End If
 
-                            If (connectionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.IntApp) Then
+                            If (connectionInfo.Protocol = Protocols.IntApp) Then
                                 cMenTreeConnectWithOptionsNoCredentials.Enabled = False
                             End If
-                        Case mRemoteNG.Tree.Node.Type.PuttySession
-                            Dim puttySessionInfo As mRemoteNG.Connection.PuttySession.Info = selectedNode.Tag
+                        Case Node.Type.PuttySession
+                            Dim puttySessionInfo As PuttyInfo = selectedNode.Tag
 
                             cMenTreeAddConnection.Enabled = False
                             cMenTreeAddFolder.Enabled = False
@@ -240,8 +266,8 @@ Namespace UI
                                 cMenTreeDisconnect.Enabled = False
                             End If
 
-                            If Not (puttySessionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH1 Or _
-                                    puttySessionInfo.Protocol = mRemoteNG.Connection.Protocol.Protocols.SSH2) Then
+                            If Not (puttySessionInfo.Protocol = Protocols.SSH1 Or
+                                    puttySessionInfo.Protocol = Protocols.SSH2) Then
                                 cMenTreeToolsTransferFile.Enabled = False
                             End If
 
@@ -253,15 +279,15 @@ Namespace UI
                             cMenTreeDelete.Enabled = False
                             cMenTreeMoveUp.Enabled = False
                             cMenTreeMoveDown.Enabled = False
-                        Case mRemoteNG.Tree.Node.Type.Container
+                        Case Node.Type.Container
                             cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
                             cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = False
                             cMenTreeDisconnect.Enabled = False
 
-                            Dim openConnections As Integer = 0
-                            Dim connectionInfo As mRemoteNG.Connection.Info
+                            Dim openConnections = 0
+                            Dim connectionInfo As mRemote3G.Connection.Info
                             For Each node As TreeNode In selectedNode.Nodes
-                                If TypeOf node.Tag Is mRemoteNG.Connection.Info Then
+                                If TypeOf node.Tag Is mRemote3G.Connection.Info Then
                                     connectionInfo = node.Tag
                                     openConnections = openConnections + connectionInfo.OpenConnections.Count
                                 End If
@@ -272,7 +298,7 @@ Namespace UI
 
                             cMenTreeToolsTransferFile.Enabled = False
                             cMenTreeToolsExternalApps.Enabled = False
-                        Case mRemoteNG.Tree.Node.Type.Root
+                        Case Node.Type.Root
                             cMenTreeConnect.Enabled = False
                             cMenTreeConnectWithOptions.Enabled = False
                             cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = False
@@ -285,7 +311,7 @@ Namespace UI
                             cMenTreeDelete.Enabled = False
                             cMenTreeMoveUp.Enabled = False
                             cMenTreeMoveDown.Enabled = False
-                        Case mRemoteNG.Tree.Node.Type.PuttyRoot
+                        Case Node.Type.PuttyRoot
                             cMenTreeAddConnection.Enabled = False
                             cMenTreeAddFolder.Enabled = False
                             cMenTreeConnect.Enabled = False
@@ -304,22 +330,25 @@ Namespace UI
                             cMenTree.Enabled = False
                     End Select
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideTreeContextMenuItems (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ShowHideTreeContextMenuItems (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
+
 #End Region
 
 #Region "Drag and Drop"
-            Private Shared Sub tvConnections_DragDrop(ByVal sender As Object, ByVal e As DragEventArgs) Handles tvConnections.DragDrop
+
+            Private Shared Sub tvConnections_DragDrop(sender As Object, e As DragEventArgs) _
+                Handles tvConnections.DragDrop
                 Try
                     'Check that there is a TreeNode being dragged
                     If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) = False Then Exit Sub
 
                     'Get the TreeView raising the event (in case multiple on form)
-                    Dim selectedTreeview As TreeView = CType(sender, TreeView)
+                    Dim selectedTreeview = CType(sender, TreeView)
 
                     'Get the TreeNode being dragged
-                    Dim dropNode As TreeNode = CType(e.Data.GetData("System.Windows.Forms.TreeNode"), TreeNode)
+                    Dim dropNode = CType(e.Data.GetData("System.Windows.Forms.TreeNode"), TreeNode)
 
                     'The target node should be selected from the DragOver event
                     Dim targetNode As TreeNode = selectedTreeview.SelectedNode
@@ -328,7 +357,7 @@ Namespace UI
                         Exit Sub
                     End If
 
-                    If mRemoteNG.Tree.Node.GetNodeType(dropNode) = mRemoteNG.Tree.Node.Type.Root Then
+                    If Node.GetNodeType(dropNode) = Node.Type.Root Then
                         Exit Sub
                     End If
 
@@ -343,20 +372,24 @@ Namespace UI
                     'the TreeView root nodes, otherwise add it to the end of
                     'the dropNode child nodes
 
-                    If mRemoteNG.Tree.Node.GetNodeType(targetNode) = mRemoteNG.Tree.Node.Type.Root Or mRemoteNG.Tree.Node.GetNodeType(targetNode) = mRemoteNG.Tree.Node.Type.Container Then
+                    If _
+                        Node.GetNodeType(targetNode) = Node.Type.Root Or
+                        Node.GetNodeType(targetNode) = Node.Type.Container Then
                         targetNode.Nodes.Insert(0, dropNode)
                     Else
                         targetNode.Parent.Nodes.Insert(targetNode.Index + 1, dropNode)
                     End If
 
-                    If mRemoteNG.Tree.Node.GetNodeType(dropNode) = mRemoteNG.Tree.Node.Type.Connection Or mRemoteNG.Tree.Node.GetNodeType(dropNode) = mRemoteNG.Tree.Node.Type.Container Then
-                        If mRemoteNG.Tree.Node.GetNodeType(dropNode.Parent) = mRemoteNG.Tree.Node.Type.Container Then
+                    If _
+                        Node.GetNodeType(dropNode) = Node.Type.Connection Or
+                        Node.GetNodeType(dropNode) = Node.Type.Container Then
+                        If Node.GetNodeType(dropNode.Parent) = Node.Type.Container Then
                             dropNode.Tag.Parent = dropNode.Parent.Tag
-                        ElseIf mRemoteNG.Tree.Node.GetNodeType(dropNode.Parent) = mRemoteNG.Tree.Node.Type.Root Then
+                        ElseIf Node.GetNodeType(dropNode.Parent) = Node.Type.Root Then
                             dropNode.Tag.Parent = Nothing
-                            If mRemoteNG.Tree.Node.GetNodeType(dropNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                            If Node.GetNodeType(dropNode) = Node.Type.Connection Then
                                 dropNode.Tag.Inherit.TurnOffInheritanceCompletely()
-                            ElseIf mRemoteNG.Tree.Node.GetNodeType(dropNode) = mRemoteNG.Tree.Node.Type.Container Then
+                            ElseIf Node.GetNodeType(dropNode) = Node.Type.Container Then
                                 dropNode.Tag.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
                             End If
                         End If
@@ -367,13 +400,14 @@ Namespace UI
                     dropNode.EnsureVisible()
                     selectedTreeview.SelectedNode = dropNode
 
-                    SaveConnectionsBG()
+                    Runtime.SaveConnectionsBG()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragDrop (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_DragDrop (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Shared Sub tvConnections_DragEnter(ByVal sender As Object, ByVal e As DragEventArgs) Handles tvConnections.DragEnter
+            Private Shared Sub tvConnections_DragEnter(sender As Object, e As DragEventArgs) _
+                Handles tvConnections.DragEnter
                 Try
                     'See if there is a TreeNode being dragged
                     If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) Then
@@ -384,17 +418,18 @@ Namespace UI
                         e.Effect = DragDropEffects.None
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragEnter (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_DragEnter (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Shared Sub tvConnections_DragOver(ByVal sender As Object, ByVal e As DragEventArgs) Handles tvConnections.DragOver
+            Private Shared Sub tvConnections_DragOver(sender As Object, e As DragEventArgs) _
+                Handles tvConnections.DragOver
                 Try
                     'Check that there is a TreeNode being dragged 
                     If e.Data.GetDataPresent("System.Windows.Forms.TreeNode", True) = False Then Exit Sub
 
                     'Get the TreeView raising the event (in case multiple on form)
-                    Dim selectedTreeview As TreeView = CType(sender, TreeView)
+                    Dim selectedTreeview = CType(sender, TreeView)
 
                     'As the mouse moves over nodes, provide feedback to 
                     'the user by highlighting the node that is the 
@@ -408,11 +443,11 @@ Namespace UI
                     'Check that the selected node is not the dropNode and
                     'also that it is not a child of the dropNode and 
                     'therefore an invalid target
-                    Dim dropNode As TreeNode = CType(e.Data.GetData("System.Windows.Forms.TreeNode"), TreeNode)
+                    Dim dropNode = CType(e.Data.GetData("System.Windows.Forms.TreeNode"), TreeNode)
 
-                    Dim puttyRootInfo As Root.PuttySessions.Info
+                    Dim puttyRootInfo As PuttySessionsInfo
                     Do Until targetNode Is Nothing
-                        puttyRootInfo = TryCast(targetNode.Tag, Root.PuttySessions.Info)
+                        puttyRootInfo = TryCast(targetNode.Tag, PuttySessionsInfo)
                         If puttyRootInfo IsNot Nothing Or targetNode Is dropNode Then
                             e.Effect = DragDropEffects.None
                             Return
@@ -423,19 +458,19 @@ Namespace UI
                     'Currently selected node is a suitable target
                     e.Effect = DragDropEffects.Move
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragOver (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_DragOver (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Sub tvConnections_ItemDrag(ByVal sender As Object, ByVal e As ItemDragEventArgs) Handles tvConnections.ItemDrag
+            Private Sub tvConnections_ItemDrag(sender As Object, e As ItemDragEventArgs) Handles tvConnections.ItemDrag
                 Try
-                    Dim dragTreeNode As TreeNode = TryCast(e.Item, TreeNode)
+                    Dim dragTreeNode = TryCast(e.Item, TreeNode)
                     If dragTreeNode Is Nothing Then Return
 
                     If dragTreeNode.Tag Is Nothing Then Return
-                    If TypeOf dragTreeNode.Tag Is mRemoteNG.Connection.PuttySession.Info Or _
-                       Not (TypeOf dragTreeNode.Tag Is mRemoteNG.Connection.Info Or _
-                            TypeOf dragTreeNode.Tag Is Container.Info) Then
+                    If TypeOf dragTreeNode.Tag Is PuttyInfo Or
+                       Not (TypeOf dragTreeNode.Tag Is mRemote3G.Connection.Info Or
+                            TypeOf dragTreeNode.Tag Is Info) Then
                         tvConnections.SelectedNode = dragTreeNode
                         Return
                     End If
@@ -443,142 +478,174 @@ Namespace UI
                     'Set the drag node and initiate the DragDrop 
                     DoDragDrop(e.Item, DragDropEffects.Move)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_ItemDrag (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_ItemDrag (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
+
 #End Region
 
 #Region "Tree Context Menu"
-            Private Sub cMenTreeAddConnection_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeAddConnection.Click, mMenAddConnection.Click
+
+            Private Sub cMenTreeAddConnection_Click(sender As Object, e As EventArgs) _
+                Handles cMenTreeAddConnection.Click, mMenAddConnection.Click
                 AddConnection()
-                SaveConnectionsBG()
+                Runtime.SaveConnectionsBG()
             End Sub
 
-            Private Sub cMenTreeAddFolder_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeAddFolder.Click, mMenAddFolder.Click
+            Private Sub cMenTreeAddFolder_Click(sender As Object, e As EventArgs) _
+                Handles cMenTreeAddFolder.Click, mMenAddFolder.Click
                 AddFolder()
-                SaveConnectionsBG()
+                Runtime.SaveConnectionsBG()
             End Sub
 
-            Private Shared Sub cMenTreeConnect_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeConnect.Click
-                OpenConnection(mRemoteNG.Connection.Info.Force.DoNotJump)
+            Private Shared Sub cMenTreeConnect_Click(sender As Object, e As EventArgs) Handles cMenTreeConnect.Click
+                Runtime.OpenConnection(mRemote3G.Connection.Info.Force.DoNotJump)
             End Sub
 
-            Private Shared Sub cMenTreeConnectWithOptionsConnectToConsoleSession_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeConnectWithOptionsConnectToConsoleSession.Click
-                OpenConnection(mRemoteNG.Connection.Info.Force.UseConsoleSession Or mRemoteNG.Connection.Info.Force.DoNotJump)
+            Private Shared Sub cMenTreeConnectWithOptionsConnectToConsoleSession_Click(sender As Object, e As EventArgs) _
+                Handles cMenTreeConnectWithOptionsConnectToConsoleSession.Click
+                Runtime.OpenConnection(
+                    mRemote3G.Connection.Info.Force.UseConsoleSession Or
+                    mRemote3G.Connection.Info.Force.DoNotJump)
             End Sub
 
-            Private Shared Sub cMenTreeConnectWithOptionsNoCredentials_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeConnectWithOptionsNoCredentials.Click
-                OpenConnection(mRemoteNG.Connection.Info.Force.NoCredentials)
+            Private Shared Sub cMenTreeConnectWithOptionsNoCredentials_Click(sender As Object, e As EventArgs) _
+                Handles cMenTreeConnectWithOptionsNoCredentials.Click
+                Runtime.OpenConnection(mRemote3G.Connection.Info.Force.NoCredentials)
             End Sub
 
-            Private Shared Sub cMenTreeConnectWithOptionsDontConnectToConsoleSession_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeConnectWithOptionsDontConnectToConsoleSession.Click
-                OpenConnection(mRemoteNG.Connection.Info.Force.DontUseConsoleSession Or mRemoteNG.Connection.Info.Force.DoNotJump)
+            Private Shared Sub cMenTreeConnectWithOptionsDontConnectToConsoleSession_Click(sender As Object,
+                                                                                           e As EventArgs) _
+                Handles cMenTreeConnectWithOptionsDontConnectToConsoleSession.Click
+                Runtime.OpenConnection(
+                    mRemote3G.Connection.Info.Force.DontUseConsoleSession Or
+                    mRemote3G.Connection.Info.Force.DoNotJump)
             End Sub
 
-            Private Shared Sub cMenTreeConnectWithOptionsConnectInFullscreen_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeConnectWithOptionsConnectInFullscreen.Click
-                OpenConnection(mRemoteNG.Connection.Info.Force.Fullscreen Or mRemoteNG.Connection.Info.Force.DoNotJump)
+            Private Shared Sub cMenTreeConnectWithOptionsConnectInFullscreen_Click(sender As Object, e As EventArgs) _
+                Handles cMenTreeConnectWithOptionsConnectInFullscreen.Click
+                Runtime.OpenConnection(
+                    mRemote3G.Connection.Info.Force.Fullscreen Or
+                    mRemote3G.Connection.Info.Force.DoNotJump)
             End Sub
 
-            Private Shared Sub cMenTreeConnectWithOptionsChoosePanelBeforeConnecting_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Click
-                OpenConnection(mRemoteNG.Connection.Info.Force.OverridePanel Or mRemoteNG.Connection.Info.Force.DoNotJump)
+            Private Shared Sub cMenTreeConnectWithOptionsChoosePanelBeforeConnecting_Click(sender As Object,
+                                                                                           e As EventArgs) _
+                Handles cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Click
+                Runtime.OpenConnection(
+                    mRemote3G.Connection.Info.Force.OverridePanel Or
+                    mRemote3G.Connection.Info.Force.DoNotJump)
             End Sub
 
-            Private Sub cMenTreeDisconnect_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeDisconnect.Click
+            Private Sub cMenTreeDisconnect_Click(sender As Object, e As EventArgs) Handles cMenTreeDisconnect.Click
                 DisconnectConnection()
             End Sub
 
-            Private Shared Sub cMenTreeToolsTransferFile_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeToolsTransferFile.Click
+            Private Shared Sub cMenTreeToolsTransferFile_Click(sender As Object, e As EventArgs) _
+                Handles cMenTreeToolsTransferFile.Click
                 SshTransferFile()
             End Sub
 
-            Private Sub mMenSortAscending_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenSortAscending.Click
+            Private Sub mMenSortAscending_Click(sender As Object, e As EventArgs) Handles mMenSortAscending.Click
                 tvConnections.BeginUpdate()
-                mRemoteNG.Tree.Node.Sort(tvConnections.Nodes.Item(0), SortOrder.Ascending)
+                Node.Sort(tvConnections.Nodes.Item(0), SortOrder.Ascending)
                 tvConnections.EndUpdate()
-                SaveConnectionsBG()
+                Runtime.SaveConnectionsBG()
             End Sub
 
-            Private Sub cMenTreeToolsSortAscending_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeToolsSortAscending.Click
+            Private Sub cMenTreeToolsSortAscending_Click(sender As Object, e As EventArgs) _
+                Handles cMenTreeToolsSortAscending.Click
                 tvConnections.BeginUpdate()
-                mRemoteNG.Tree.Node.Sort(tvConnections.SelectedNode, SortOrder.Ascending)
+                Node.Sort(tvConnections.SelectedNode, SortOrder.Ascending)
                 tvConnections.EndUpdate()
-                SaveConnectionsBG()
+                Runtime.SaveConnectionsBG()
             End Sub
 
-            Private Sub cMenTreeToolsSortDescending_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeToolsSortDescending.Click
+            Private Sub cMenTreeToolsSortDescending_Click(sender As Object, e As EventArgs) _
+                Handles cMenTreeToolsSortDescending.Click
                 tvConnections.BeginUpdate()
-                mRemoteNG.Tree.Node.Sort(tvConnections.SelectedNode, SortOrder.Descending)
+                Node.Sort(tvConnections.SelectedNode, SortOrder.Descending)
                 tvConnections.EndUpdate()
-                SaveConnectionsBG()
+                Runtime.SaveConnectionsBG()
             End Sub
 
-            Private Sub cMenTree_DropDownOpening(ByVal sender As Object, ByVal e As EventArgs) Handles cMenTree.Opening
+            Private Sub cMenTree_DropDownOpening(sender As Object, e As EventArgs) Handles cMenTree.Opening
                 AddExternalApps()
             End Sub
 
-            Private Shared Sub cMenTreeToolsExternalAppsEntry_Click(ByVal sender As Object, ByVal e As EventArgs)
+            Private Shared Sub cMenTreeToolsExternalAppsEntry_Click(sender As Object, e As EventArgs)
                 StartExternalApp(sender.Tag)
             End Sub
 
-            Private Sub cMenTreeDuplicate_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeDuplicate.Click
-                mRemoteNG.Tree.Node.CloneNode(tvConnections.SelectedNode)
-                SaveConnectionsBG()
+            Private Sub cMenTreeDuplicate_Click(sender As Object, e As EventArgs) Handles cMenTreeDuplicate.Click
+                Node.CloneNode(tvConnections.SelectedNode)
+                Runtime.SaveConnectionsBG()
             End Sub
 
-            Private Shared Sub cMenTreeRename_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeRename.Click
-                mRemoteNG.Tree.Node.StartRenameSelectedNode()
-                SaveConnectionsBG()
+            Private Shared Sub cMenTreeRename_Click(sender As Object, e As EventArgs) Handles cMenTreeRename.Click
+                Node.StartRenameSelectedNode()
+                Runtime.SaveConnectionsBG()
             End Sub
 
-            Private Shared Sub cMenTreeDelete_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeDelete.Click
-                mRemoteNG.Tree.Node.DeleteSelectedNode()
-                SaveConnectionsBG()
+            Private Shared Sub cMenTreeDelete_Click(sender As Object, e As EventArgs) Handles cMenTreeDelete.Click
+                Node.DeleteSelectedNode()
+                Runtime.SaveConnectionsBG()
             End Sub
 
-            Private Shared Sub cMenTreeImportFile_Click(sender As System.Object, e As EventArgs) Handles cMenTreeImportFile.Click
-                Import.ImportFromFile(Windows.treeForm.tvConnections.Nodes(0), Windows.treeForm.tvConnections.SelectedNode, True)
+            Private Shared Sub cMenTreeImportFile_Click(sender As Object, e As EventArgs) _
+                Handles cMenTreeImportFile.Click
+                Import.ImportFromFile(Runtime.Windows.treeForm.tvConnections.Nodes(0),
+                                      Runtime.Windows.treeForm.tvConnections.SelectedNode, True)
             End Sub
 
-            Private Shared Sub cMenTreeImportActiveDirectory_Click(sender As System.Object, e As EventArgs) Handles cMenTreeImportActiveDirectory.Click
-                Windows.Show(Type.ActiveDirectoryImport)
+            Private Shared Sub cMenTreeImportActiveDirectory_Click(sender As Object, e As EventArgs) _
+                Handles cMenTreeImportActiveDirectory.Click
+                Runtime.Windows.Show(Type.ActiveDirectoryImport)
             End Sub
 
-            Private Shared Sub cMenTreeImportPortScan_Click(sender As System.Object, e As EventArgs) Handles cMenTreeImportPortScan.Click
-                Windows.Show(UI.Window.Type.PortScan, True)
+            Private Shared Sub cMenTreeImportPortScan_Click(sender As Object, e As EventArgs) _
+                Handles cMenTreeImportPortScan.Click
+                Runtime.Windows.Show(Type.PortScan, True)
             End Sub
 
-            Private Shared Sub cMenTreeExportFile_Click(sender As System.Object, e As EventArgs) Handles cMenTreeExportFile.Click
-                Export.ExportToFile(Windows.treeForm.tvConnections.Nodes(0), Windows.treeForm.tvConnections.SelectedNode)
-            End Sub
-            Private Shared Sub cMenTreeMoveUp_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeMoveUp.Click
-                mRemoteNG.Tree.Node.MoveNodeUp()
-                SaveConnectionsBG()
+            Private Shared Sub cMenTreeExportFile_Click(sender As Object, e As EventArgs) _
+                Handles cMenTreeExportFile.Click
+                Export.ExportToFile(Runtime.Windows.treeForm.tvConnections.Nodes(0),
+                                    Runtime.Windows.treeForm.tvConnections.SelectedNode)
             End Sub
 
-            Private Shared Sub cMenTreeMoveDown_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles cMenTreeMoveDown.Click
-                mRemoteNG.Tree.Node.MoveNodeDown()
-                SaveConnectionsBG()
+            Private Shared Sub cMenTreeMoveUp_Click(sender As Object, e As EventArgs) Handles cMenTreeMoveUp.Click
+                Node.MoveNodeUp()
+                Runtime.SaveConnectionsBG()
             End Sub
+
+            Private Shared Sub cMenTreeMoveDown_Click(sender As Object, e As EventArgs) Handles cMenTreeMoveDown.Click
+                Node.MoveNodeDown()
+                Runtime.SaveConnectionsBG()
+            End Sub
+
 #End Region
 
 #Region "Context Menu Actions"
+
             Public Sub AddConnection()
                 Try
-                    If tvConnections.SelectedNode Is Nothing Then tvConnections.SelectedNode = tvConnections.Nodes.Item(0)
+                    If tvConnections.SelectedNode Is Nothing Then _
+                        tvConnections.SelectedNode = tvConnections.Nodes.Item(0)
 
-                    Dim newTreeNode As TreeNode = mRemoteNG.Tree.Node.AddNode(mRemoteNG.Tree.Node.Type.Connection)
+                    Dim newTreeNode As TreeNode = Node.AddNode(Node.Type.Connection)
                     If newTreeNode Is Nothing Then
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Tree.AddConnection() failed." & vbNewLine & "mRemoteNG.Tree.Node.AddNode() returned Nothing.", True)
+                        Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.Tree.AddConnection() failed." & vbNewLine & "mRemote3G.Tree.Node.AddNode() returned Nothing.", True)
                         Return
                     End If
 
                     Dim containerNode As TreeNode = tvConnections.SelectedNode
-                    If mRemoteNG.Tree.Node.GetNodeType(containerNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                    If Node.GetNodeType(containerNode) = Node.Type.Connection Then
                         containerNode = containerNode.Parent
                     End If
 
-                    Dim newConnectionInfo As New mRemoteNG.Connection.Info()
-                    If mRemoteNG.Tree.Node.GetNodeType(containerNode) = mRemoteNG.Tree.Node.Type.Root Then
+                    Dim newConnectionInfo As New mRemote3G.Connection.Info()
+                    If Node.GetNodeType(containerNode) = Node.Type.Root Then
                         newConnectionInfo.Inherit.TurnOffInheritanceCompletely()
                     Else
                         newConnectionInfo.Parent = containerNode.Tag
@@ -586,71 +653,71 @@ Namespace UI
 
                     newConnectionInfo.TreeNode = newTreeNode
                     newTreeNode.Tag = newConnectionInfo
-                    ConnectionList.Add(newConnectionInfo)
+                    Runtime.ConnectionList.Add(newConnectionInfo)
 
                     containerNode.Nodes.Add(newTreeNode)
 
                     tvConnections.SelectedNode = newTreeNode
                     tvConnections.SelectedNode.BeginEdit()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Tree.AddConnection() failed." & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.Tree.AddConnection() failed." & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Public Sub AddFolder()
                 Try
-                    Dim newNode As TreeNode = mRemoteNG.Tree.Node.AddNode(mRemoteNG.Tree.Node.Type.Container)
-                    Dim newContainerInfo As New Container.Info()
+                    Dim newNode As TreeNode = Node.AddNode(Node.Type.Container)
+                    Dim newContainerInfo As New Info()
                     newNode.Tag = newContainerInfo
                     newContainerInfo.TreeNode = newNode
 
-                    Dim selectedNode As TreeNode = mRemoteNG.Tree.Node.SelectedNode
+                    Dim selectedNode As TreeNode = Node.SelectedNode
                     Dim parentNode As TreeNode
                     If selectedNode Is Nothing Then
                         parentNode = tvConnections.Nodes(0)
                     Else
-                        If mRemoteNG.Tree.Node.GetNodeType(selectedNode) = mRemoteNG.Tree.Node.Type.Connection Then
+                        If Node.GetNodeType(selectedNode) = Node.Type.Connection Then
                             parentNode = selectedNode.Parent
                         Else
                             parentNode = selectedNode
                         End If
                     End If
 
-                    newContainerInfo.ConnectionInfo = New mRemoteNG.Connection.Info(newContainerInfo)
+                    newContainerInfo.ConnectionInfo = New mRemote3G.Connection.Info(newContainerInfo)
                     newContainerInfo.ConnectionInfo.Name = newNode.Text
 
                     ' We can only inherit from a container node, not the root node or connection nodes
-                    If mRemoteNG.Tree.Node.GetNodeType(parentNode) = mRemoteNG.Tree.Node.Type.Container Then
+                    If Node.GetNodeType(parentNode) = Node.Type.Container Then
                         newContainerInfo.Parent = parentNode.Tag
                     Else
                         newContainerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely()
                     End If
 
-                    ContainerList.Add(newContainerInfo)
+                    Runtime.ContainerList.Add(newContainerInfo)
                     parentNode.Nodes.Add(newNode)
 
                     tvConnections.SelectedNode = newNode
                     tvConnections.SelectedNode.BeginEdit()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(Language.strErrorAddFolderFailed, ex.Message), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, String.Format(Language.Language.strErrorAddFolderFailed, ex.ToString()), True)
                 End Try
             End Sub
 
             Private Sub DisconnectConnection()
                 Try
                     If tvConnections.SelectedNode IsNot Nothing Then
-                        If TypeOf tvConnections.SelectedNode.Tag Is mRemoteNG.Connection.Info Then
-                            Dim conI As mRemoteNG.Connection.Info = tvConnections.SelectedNode.Tag
-                            For i As Integer = 0 To conI.OpenConnections.Count - 1
+                        If TypeOf tvConnections.SelectedNode.Tag Is mRemote3G.Connection.Info Then
+                            Dim conI As mRemote3G.Connection.Info = tvConnections.SelectedNode.Tag
+                            For i = 0 To conI.OpenConnections.Count - 1
                                 conI.OpenConnections(i).Disconnect()
                             Next
                         End If
 
-                        If TypeOf tvConnections.SelectedNode.Tag Is Container.Info Then
+                        If TypeOf tvConnections.SelectedNode.Tag Is Info Then
                             For Each n As TreeNode In tvConnections.SelectedNode.Nodes
-                                If TypeOf n.Tag Is mRemoteNG.Connection.Info Then
-                                    Dim conI As mRemoteNG.Connection.Info = n.Tag
-                                    For i As Integer = 0 To conI.OpenConnections.Count - 1
+                                If TypeOf n.Tag Is mRemote3G.Connection.Info Then
+                                    Dim conI As mRemote3G.Connection.Info = n.Tag
+                                    For i = 0 To conI.OpenConnections.Count - 1
                                         conI.OpenConnections(i).Disconnect()
                                     Next
                                 End If
@@ -658,32 +725,40 @@ Namespace UI
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "DisconnectConnection (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "DisconnectConnection (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Shared Sub SshTransferFile()
                 Try
-                    Windows.Show(Type.SSHTransfer)
+                    Runtime.Windows.Show(Type.SSHTransfer)
 
-                    Dim conI As mRemoteNG.Connection.Info = mRemoteNG.Tree.Node.SelectedNode.Tag
+                    Dim conI As mRemote3G.Connection.Info = Node.SelectedNode.Tag
 
-                    Windows.sshtransferForm.Hostname = conI.Hostname
-                    Windows.sshtransferForm.Username = conI.Username
-                    Windows.sshtransferForm.Password = conI.Password
-                    Windows.sshtransferForm.Port = conI.Port
+                    Runtime.Windows.sshtransferForm.Hostname = conI.Hostname
+                    Runtime.Windows.sshtransferForm.Username = conI.Username
+                    Runtime.Windows.sshtransferForm.Password = conI.Password
+                    Runtime.Windows.sshtransferForm.Port = conI.Port
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Private Sub AddExternalApps()
                 Try
                     'clean up
-                    cMenTreeToolsExternalApps.DropDownItems.Clear()
+                    'since new items are added below, we have to dispose of any previous items first
+                    'Same fix that was done for cmenTabExternalApps in UI.Window.Connection.vb
+                    'for #16
+                    If cMenTreeToolsExternalApps.DropDownItems.Count > 0 Then
+                        For Each mitem As ToolStripMenuItem In cMenTreeToolsExternalApps.DropDownItems
+                            mitem.Dispose()
+                        Next mitem
+                        cMenTreeToolsExternalApps.DropDownItems.Clear()
+                    End If
 
                     'add ext apps
-                    For Each extA As Tools.ExternalTool In Runtime.ExternalTools
+                    For Each extA As ExternalTool In Runtime.ExternalTools
                         Dim nItem As New ToolStripMenuItem
                         nItem.Text = extA.DisplayName
                         nItem.Tag = extA
@@ -695,51 +770,57 @@ Namespace UI
                         cMenTreeToolsExternalApps.DropDownItems.Add(nItem)
                     Next
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Shared Sub StartExternalApp(ByVal externalTool As Tools.ExternalTool)
+            Private Shared Sub StartExternalApp(externalTool As ExternalTool)
                 Try
-                    If mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.Connection Or _
-                       mRemoteNG.Tree.Node.GetNodeType(mRemoteNG.Tree.Node.SelectedNode) = mRemoteNG.Tree.Node.Type.PuttySession Then
-                        externalTool.Start(mRemoteNG.Tree.Node.SelectedNode.Tag)
+                    If Node.GetNodeType(Node.SelectedNode) = Node.Type.Connection Or
+                       Node.GetNodeType(Node.SelectedNode) = Node.Type.PuttySession Then
+                        externalTool.Start(Node.SelectedNode.Tag)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.Tree)" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
+
 #End Region
 
 #Region "Menu"
-            Private Shared Sub mMenViewExpandAllFolders_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenViewExpandAllFolders.Click
-                mRemoteNG.Tree.Node.ExpandAllNodes()
+
+            Private Shared Sub mMenViewExpandAllFolders_Click(sender As Object, e As EventArgs) _
+                Handles mMenViewExpandAllFolders.Click
+                Node.ExpandAllNodes()
             End Sub
 
-            Private Sub mMenViewCollapseAllFolders_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles mMenViewCollapseAllFolders.Click
+            Private Sub mMenViewCollapseAllFolders_Click(sender As Object, e As EventArgs) _
+                Handles mMenViewCollapseAllFolders.Click
                 If tvConnections.SelectedNode IsNot Nothing Then
                     If tvConnections.SelectedNode.IsEditing Then tvConnections.SelectedNode.EndEdit(False)
                 End If
-                mRemoteNG.Tree.Node.CollapseAllNodes()
+                Node.CollapseAllNodes()
             End Sub
+
 #End Region
 
 #Region "Search"
-            Private Sub txtSearch_GotFocus(ByVal sender As Object, ByVal e As EventArgs) Handles txtSearch.GotFocus
-                txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextColor
-                If txtSearch.Text = Language.strSearchPrompt Then
+
+            Private Sub txtSearch_GotFocus(sender As Object, e As EventArgs) Handles txtSearch.GotFocus
+                txtSearch.ForeColor = ThemeManager.ActiveTheme.SearchBoxTextColor
+                If txtSearch.Text = Language.Language.strSearchPrompt Then
                     txtSearch.Text = ""
                 End If
             End Sub
 
-            Private Sub txtSearch_LostFocus(ByVal sender As Object, ByVal e As EventArgs) Handles txtSearch.LostFocus
+            Private Sub txtSearch_LostFocus(sender As Object, e As EventArgs) Handles txtSearch.LostFocus
                 If txtSearch.Text = "" Then
-                    txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextPromptColor
-                    txtSearch.Text = Language.strSearchPrompt
+                    txtSearch.ForeColor = ThemeManager.ActiveTheme.SearchBoxTextPromptColor
+                    txtSearch.Text = Language.Language.strSearchPrompt
                 End If
             End Sub
 
-            Private Sub txtSearch_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles txtSearch.KeyDown
+            Private Sub txtSearch_KeyDown(sender As Object, e As KeyEventArgs) Handles txtSearch.KeyDown
                 Try
                     If e.KeyCode = Keys.Escape Then
                         e.Handled = True
@@ -752,15 +833,15 @@ Namespace UI
                         tvConnections_KeyDown(sender, e)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "txtSearch_KeyDown (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "txtSearch_KeyDown (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles txtSearch.TextChanged
-                tvConnections.SelectedNode = mRemoteNG.Tree.Node.Find(tvConnections.Nodes(0), txtSearch.Text)
+            Private Sub txtSearch_TextChanged(sender As Object, e As EventArgs) Handles txtSearch.TextChanged
+                tvConnections.SelectedNode = Node.Find(tvConnections.Nodes(0), txtSearch.Text)
             End Sub
 
-            Private Sub tvConnections_KeyPress(ByVal sender As Object, ByVal e As KeyPressEventArgs) Handles tvConnections.KeyPress
+            Private Sub tvConnections_KeyPress(sender As Object, e As KeyPressEventArgs) Handles tvConnections.KeyPress
                 Try
                     If Char.IsLetterOrDigit(e.KeyChar) Then
                         txtSearch.Text = e.KeyChar
@@ -769,16 +850,16 @@ Namespace UI
                         txtSearch.SelectionStart = txtSearch.TextLength
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_KeyPress (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_KeyPress (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Sub tvConnections_KeyDown(ByVal sender As Object, ByVal e As KeyEventArgs) Handles tvConnections.KeyDown
+            Private Sub tvConnections_KeyDown(sender As Object, e As KeyEventArgs) Handles tvConnections.KeyDown
                 Try
                     If e.KeyCode = Keys.Enter Then
-                        If TypeOf tvConnections.SelectedNode.Tag Is mRemoteNG.Connection.Info Then
+                        If TypeOf tvConnections.SelectedNode.Tag Is mRemote3G.Connection.Info Then
                             e.Handled = True
-                            OpenConnection()
+                            Runtime.OpenConnection()
                         Else
                             If tvConnections.SelectedNode.IsExpanded Then
                                 tvConnections.SelectedNode.Collapse(True)
@@ -791,10 +872,12 @@ Namespace UI
                         txtSearch.SelectionStart = txtSearch.TextLength
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_KeyDown (UI.Window.Tree) failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_KeyDown (UI.Window.Tree) failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

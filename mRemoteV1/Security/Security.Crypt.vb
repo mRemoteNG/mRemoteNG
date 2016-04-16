@@ -1,11 +1,13 @@
 Imports System.IO
 Imports System.Security.Cryptography
 Imports System.Text
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App
+Imports mRemote3G.App.Runtime
+Imports mRemote3G.Messages
 
 Namespace Security
     Public Class Crypt
-        Public Shared Function Encrypt(ByVal StrToEncrypt As String, ByVal StrSecret As String) As String
+        Public Shared Function Encrypt(StrToEncrypt As String, StrSecret As String) As String
             If StrToEncrypt = "" Or StrSecret = "" Then
                 Return StrToEncrypt
             End If
@@ -26,7 +28,7 @@ Namespace Security
                 ms.Write(iv, 0, iv.Length)
 
                 Dim cs As New CryptoStream(ms, rd.CreateEncryptor, CryptoStreamMode.Write)
-                Dim data() As Byte = System.Text.Encoding.UTF8.GetBytes(StrToEncrypt)
+                Dim data() As Byte = Encoding.UTF8.GetBytes(StrToEncrypt)
 
                 cs.Write(data, 0, data.Length)
                 cs.FlushFinalBlock()
@@ -37,13 +39,13 @@ Namespace Security
 
                 Return Convert.ToBase64String(encdata)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorEncryptionFailed, ex.Message))
+                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(Language.Language.strErrorEncryptionFailed, ex.ToString()))
             End Try
 
             Return StrToEncrypt
         End Function
 
-        Public Shared Function Decrypt(ByVal ciphertextBase64 As String, ByVal password As String) As String
+        Public Shared Function Decrypt(ciphertextBase64 As String, password As String) As String
             If String.IsNullOrEmpty(ciphertextBase64) Or String.IsNullOrEmpty(password) Then
                 Return ciphertextBase64
             End If
@@ -60,13 +62,15 @@ Namespace Security
                     Dim ciphertext() As Byte = Convert.FromBase64String(ciphertextBase64)
 
                     Using memoryStream As New MemoryStream(ciphertext)
-                        Const ivLength As Integer = 16
+                        Const ivLength = 16
                         Dim iv(ivLength - 1) As Byte
                         memoryStream.Read(iv, 0, ivLength)
                         rijndaelManaged.IV = iv
 
-                        Using cryptoStream As New CryptoStream(memoryStream, rijndaelManaged.CreateDecryptor, CryptoStreamMode.Read)
-                            Using streamReader As New StreamReader(cryptoStream, System.Text.Encoding.UTF8, True)
+                        Using _
+                            cryptoStream As _
+                                New CryptoStream(memoryStream, rijndaelManaged.CreateDecryptor, CryptoStreamMode.Read)
+                            Using streamReader As New StreamReader(cryptoStream, Encoding.UTF8, True)
                                 plaintext = streamReader.ReadToEnd()
                             End Using
                             rijndaelManaged.Clear()
@@ -78,12 +82,15 @@ Namespace Security
             Catch ex As Exception
                 ' Ignore CryptographicException "Padding is invalid and cannot be removed." when password is incorrect.
                 If Not TypeOf ex Is CryptographicException Then
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorDecryptionFailed, ex.Message))
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(Language.Language.strErrorDecryptionFailed, ex.ToString()))
                 End If
             End Try
 
             Return ciphertextBase64
         End Function
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace
 

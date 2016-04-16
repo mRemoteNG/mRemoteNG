@@ -1,53 +1,56 @@
-Imports System.Windows.Forms
 Imports System.ComponentModel
-Imports mRemoteNG.Tools.LocalizedAttributes
+Imports mRemote3G.Tools
 
 Namespace Container
-    <DefaultProperty("Name")> _
+    <DefaultProperty("Name")>
     Public Class Info
+
 #Region "Properties"
-        <LocalizedCategory("strCategoryDisplay", 1), _
-            Browsable(True), _
-            [ReadOnly](False), _
-            Bindable(False), _
-            DefaultValue(""), _
-            DesignOnly(False), _
-            LocalizedDisplayName("strPropertyNameName"), _
-            LocalizedDescription("strPropertyDescriptionName"), _
-            Attributes.Container()> _
-        Public Property Name() As String
+
+        <LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
+            Browsable(True),
+            [ReadOnly](False),
+            Bindable(False),
+            DefaultValue(""),
+            DesignOnly(False),
+            LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
+            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName"),
+            Attributes.Container>
+        Public Property Name As String
             Get
                 Return ConnectionInfo.Name
             End Get
-            Set(ByVal value As String)
+            Set
                 ConnectionInfo.Name = value
             End Set
         End Property
 
         Private _TreeNode As TreeNode
-        <Category(""), _
-           Browsable(False), _
-           [ReadOnly](False), _
-           Bindable(False), _
-           DefaultValue(""), _
-           DesignOnly(False)> _
-        Public Property TreeNode() As TreeNode
+
+        <Category(""),
+            Browsable(False),
+            [ReadOnly](False),
+            Bindable(False),
+            DefaultValue(""),
+            DesignOnly(False)>
+        Public Property TreeNode As TreeNode
             Get
                 Return Me._TreeNode
             End Get
-            Set(ByVal value As TreeNode)
+            Set
                 Me._TreeNode = value
             End Set
         End Property
 
         Private _Parent As Object
-        <Category(""), _
-            Browsable(False)> _
-        Public Property Parent() As Object
+
+        <Category(""),
+            Browsable(False)>
+        Public Property Parent As Object
             Get
                 Return Me._Parent
             End Get
-            Set(ByVal value As Object)
+            Set
                 Me._Parent = value
             End Set
         End Property
@@ -65,34 +68,38 @@ Namespace Container
         'End Property
 
         Private _IsExpanded As Boolean
-        <Category(""), _
-           Browsable(False), _
-           [ReadOnly](False), _
-           Bindable(False), _
-           DefaultValue(""), _
-           DesignOnly(False)> _
-        Public Property IsExpanded() As Boolean
+
+        <Category(""),
+            Browsable(False),
+            [ReadOnly](False),
+            Bindable(False),
+            DefaultValue(""),
+            DesignOnly(False)>
+        Public Property IsExpanded As Boolean
             Get
                 Return Me._IsExpanded
             End Get
-            Set(ByVal value As Boolean)
+            Set
                 Me._IsExpanded = value
             End Set
         End Property
 
         Private _ConnectionInfo As New Connection.Info
-        Public Property ConnectionInfo() As Connection.Info
+
+        Public Property ConnectionInfo As Connection.Info
             Get
                 Return Me._ConnectionInfo
             End Get
-            Set(ByVal value As Connection.Info)
+            Set
                 Me._ConnectionInfo = value
             End Set
         End Property
+
 #End Region
 
 #Region "Methods"
-        Public Function Copy() As Container.Info
+
+        Public Function Copy() As Info
             Return Me.MemberwiseClone
         End Function
 
@@ -105,12 +112,16 @@ Namespace Container
                 Me.IsExpanded = True
             End If
         End Sub
+
 #End Region
 
         Public Class Attributes
             Public Class Container
                 Inherits Attribute
             End Class
+
+            Private Sub New()
+            End Sub
         End Class
     End Class
 End Namespace

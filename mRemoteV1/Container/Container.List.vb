@@ -3,37 +3,40 @@ Namespace Container
         Inherits CollectionBase
 
 #Region "Public Properties"
-        Default Public ReadOnly Property Items(ByVal Index As Object) As Container.Info
+
+        Default Public ReadOnly Property Items(Index As Object) As Info
             Get
-                If TypeOf Index Is Container.Info Then
+                If TypeOf Index Is Info Then
                     Return Index
                 Else
-                    Return CType(List.Item(Index), Container.Info)
+                    Return CType(List.Item(Index), Info)
                 End If
             End Get
         End Property
 
-        Public Shadows ReadOnly Property Count() As Integer
+        Public Shadows ReadOnly Property Count As Integer
             Get
                 Return List.Count
             End Get
         End Property
+
 #End Region
 
 #Region "Public Methods"
-        Public Function Add(ByVal cInfo As Container.Info) As Container.Info
+
+        Public Function Add(cInfo As Info) As Info
             Me.List.Add(cInfo)
             Return cInfo
         End Function
 
-        Public Sub AddRange(ByVal cInfo() As Container.Info)
-            For Each cI As Container.Info In cInfo
+        Public Sub AddRange(cInfo() As Info)
+            For Each cI As Info In cInfo
                 List.Add(cI)
             Next
         End Sub
 
-        Public Function FindByConstantID(ByVal id As String) As Container.Info
-            For Each contI As Container.Info In List
+        Public Function FindByConstantID(id As String) As Info
+            For Each contI As Info In List
                 If contI.ConnectionInfo.ConstantID = id Then
                     Return contI
                 End If
@@ -42,7 +45,7 @@ Namespace Container
             Return Nothing
         End Function
 
-        Public Function Copy() As Container.List
+        Public Function Copy() As List
             Try
                 Return Me.MemberwiseClone
             Catch ex As Exception
@@ -54,6 +57,7 @@ Namespace Container
         Public Shadows Sub Clear()
             Me.List.Clear()
         End Sub
+
 #End Region
     End Class
 End Namespace

@@ -24,11 +24,11 @@
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(OptionsForm))
-            Dim Alignment2 As mRemoteNG.Controls.Alignment = New mRemoteNG.Controls.Alignment()
+            Dim Alignment2 As mRemote3G.Controls.Alignment = New mRemote3G.Controls.Alignment()
             Me.PagePanel = New System.Windows.Forms.Panel()
             Me.OkButton = New System.Windows.Forms.Button()
             Me.CancelButtonControl = New System.Windows.Forms.Button()
-            Me.PageListView = New mRemoteNG.Controls.ListView()
+            Me.PageListView = New mRemote3G.Controls.ListView()
             Me.SuspendLayout()
             '
             'PagePanel
@@ -54,8 +54,8 @@
             Me.PageListView.InactiveHighlightBackColor = System.Drawing.SystemColors.Highlight
             Me.PageListView.InactiveHighlightBorderColor = System.Drawing.SystemColors.HotTrack
             Me.PageListView.InactiveHighlightForeColor = System.Drawing.SystemColors.HighlightText
-            Alignment2.Horizontal = mRemoteNG.Controls.HorizontalAlignment.Left
-            Alignment2.Vertical = mRemoteNG.Controls.VerticalAlignment.Middle
+            Alignment2.Horizontal = mRemote3G.Controls.HorizontalAlignment.Left
+            Alignment2.Vertical = mRemote3G.Controls.VerticalAlignment.Middle
             Me.PageListView.LabelAlignment = Alignment2
             resources.ApplyResources(Me.PageListView, "PageListView")
             Me.PageListView.MultiSelect = False
@@ -84,7 +84,7 @@
             Me.ResumeLayout(False)
 
         End Sub
-        Friend WithEvents PageListView As mRemoteNG.Controls.ListView
+        Friend WithEvents PageListView As mRemote3G.Controls.ListView
         Friend WithEvents PagePanel As System.Windows.Forms.Panel
         Friend WithEvents OkButton As System.Windows.Forms.Button
         Friend WithEvents CancelButtonControl As System.Windows.Forms.Button

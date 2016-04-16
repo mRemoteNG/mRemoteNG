@@ -106,7 +106,7 @@
     </xsd:element>
   </xsd:schema>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -115,7 +115,7 @@
     <value>2.0</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strAbout" xml:space="preserve">
     <value>關於</value>
@@ -139,7 +139,7 @@
     <value>AddNodesFromSQL 失敗!</value>
   </data>
   <data name="strAllowOnlySingleInstance" xml:space="preserve">
-    <value>只允許單一應用程式執行個體 (需要重新啟動 mRemoteNG)</value>
+    <value>只允許單一應用程式執行個體 (需要重新啟動 mRemote3G)</value>
   </data>
   <data name="strAlways" xml:space="preserve">
     <value>始終</value>
@@ -308,7 +308,7 @@ Remote Desktop Connection Control 版本 {0}</value>
 VncSharpNG Control 版本 {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>從伺服器中斷連線時自動嘗試重新連線 (僅限 RDP &amp;&amp; ICA)</value>
+    <value>從伺服器中斷連線時自動嘗試重新連線 (僅限 RDP)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>網域</value>
@@ -618,7 +618,7 @@ VncSharpNG Control 版本 {0}</value>
     <value>匯出</value>
   </data>
   <data name="strExportmRemoteXML" xml:space="preserve">
-    <value>匯出 mRemote/mRemoteNG XML</value>
+    <value>匯出 mRemote/mRemote3G XML</value>
   </data>
   <data name="strExtApp" xml:space="preserve">
     <value>結束 App</value>
@@ -720,7 +720,7 @@ VncSharpNG Control 版本 {0}</value>
     <value>匯入/匯出</value>
   </data>
   <data name="strImportmRemoteXML" xml:space="preserve">
-    <value>匯入 mRemote/mRemoteNG XML</value>
+    <value>匯入 mRemote/mRemote3G XML</value>
   </data>
   <data name="strImportPortScan" xml:space="preserve">
     <value>從 Port Scan 匯入</value>
@@ -735,7 +735,7 @@ VncSharpNG Control 版本 {0}</value>
     <value>資訊</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG 為最新</value>
+    <value>mRemote3G 為最新</value>
   </data>
   <data name="strIntAppConnectionFailed" xml:space="preserve">
     <value>連線失敗!</value>
@@ -963,7 +963,7 @@ VncSharpNG Control 版本 {0}</value>
     <value>說明(&amp;H)</value>
   </data>
   <data name="strMenuHelpContents" xml:space="preserve">
-    <value>mRemoteNG 說明</value>
+    <value>mRemote3G 說明</value>
   </data>
   <data name="strMenuJumpTo" xml:space="preserve">
     <value>跳至</value>
@@ -1168,7 +1168,7 @@ VncSharpNG Control 版本 {0}</value>
     <value>無法載入 PortScan 面板!</value>
   </data>
   <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-    <value>(這些內容只有在選取 mRemote/mRemoteNG XML 為輸出檔案格式時才會儲存!)</value>
+    <value>(這些內容只有在選取 mRemote/mRemote3G XML 為輸出檔案格式時才會儲存!)</value>
   </data>
   <data name="strPropertyDescriptionAddress" xml:space="preserve">
     <value>輸入您要連線的主機名稱或 IP。</value>
@@ -1243,7 +1243,7 @@ VncSharpNG Control 版本 {0}</value>
     <value>輸入選取協定的接聽連接埠。</value>
   </data>
   <data name="strPropertyDescriptionProtocol" xml:space="preserve">
-    <value>選擇連線到主機時 mRemoteNG 使用的協定。</value>
+    <value>選擇連線到主機時 mRemote3G 使用的協定。</value>
   </data>
   <data name="strPropertyDescriptionPuttySession" xml:space="preserve">
     <value>選取連線時所用的 PuTTY 工作階段。</value>
@@ -1549,7 +1549,7 @@ VncSharpNG Control 版本 {0}</value>
     <value>關閉連線時警告(&amp;W)</value>
   </data>
   <data name="strRadioCloseWarnExit" xml:space="preserve">
-    <value>只在結束 mRemoteNG 時警告我(&amp;X)</value>
+    <value>只在結束 mRemote3G 時警告我(&amp;X)</value>
   </data>
   <data name="strRadioCloseWarnMultiple" xml:space="preserve">
     <value>只在關閉多重連線時警告我(&amp;M)</value>
@@ -1594,7 +1594,7 @@ VncSharpNG Control 版本 {0}</value>
     <value>開啟連線失敗!</value>
   </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
-    <value>無法建立 RDP 控制，請檢查 mRemoteNG 需求。</value>
+    <value>無法建立 RDP 控制，請檢查 mRemote3G 需求。</value>
   </data>
   <data name="strRDPDisableCursorblinking" xml:space="preserve">
     <value>停用游標閃爍</value>
@@ -2047,10 +2047,10 @@ VncSharpNG Control 版本 {0}</value>
     <value>未命名的主題</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
-    <value>mRemoteNG 需要更新</value>
+    <value>mRemote3G 需要更新</value>
   </data>
   <data name="strUpdateCheck" xml:space="preserve">
-    <value>mRemoteNG 能定期連線到 mRemoteNG 網站檢查更新和產品發佈。</value>
+    <value>mRemote3G 能定期連線到 mRemote3G 網站檢查更新和產品發佈。</value>
   </data>
   <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
     <value>檢查更新完整性失敗!</value>
@@ -2059,14 +2059,14 @@ VncSharpNG Control 版本 {0}</value>
     <value>檢查更新失敗!</value>
   </data>
   <data name="strUpdateCheckPortableEdition" xml:space="preserve">
-    <value>mRemoteNG 可攜式版本目前不支援自動更新。</value>
+    <value>mRemote3G 可攜式版本目前不支援自動更新。</value>
   </data>
   <data name="strUpdateDeleteFailed" xml:space="preserve">
     <value>刪除更新檔案錯誤!</value>
   </data>
   <data name="strUpdateDownloadComplete" xml:space="preserve">
     <value>下載完成!
-mRemoteNG 將立即結束並開始安裝。</value>
+mRemote3G 將立即結束並開始安裝。</value>
   </data>
   <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
     <value>下載完成失敗!</value>
@@ -2150,7 +2150,7 @@ mRemoteNG 將立即結束並開始安裝。</value>
     <value>使用 DockPanel Suite by [Weifen Luo]</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>寫入日誌檔 (mRemoteNG.log)</value>
+    <value>寫入日誌檔 (mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner 路徑:</value>

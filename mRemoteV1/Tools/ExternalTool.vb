@@ -1,18 +1,24 @@
-﻿Imports mRemoteNG.App.Runtime
+﻿Imports System.ComponentModel
 Imports System.IO
-Imports System.ComponentModel
+Imports mRemote3G.App
+Imports mRemote3G.Connection
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Messages
+Imports mRemote3G.My.Resources
 
 Namespace Tools
     Public Class ExternalTool
-#Region "Public Properties"
-        Public Property DisplayName() As String
-        Public Property FileName() As String
-        Public Property WaitForExit() As Boolean
-        Public Property Arguments() As String
-        Public Property TryIntegrate() As Boolean
-        Public Property ConnectionInfo() As Connection.Info
 
-        Public ReadOnly Property Icon() As Icon
+#Region "Public Properties"
+
+        Public Property DisplayName As String
+        Public Property FileName As String
+        Public Property WaitForExit As Boolean
+        Public Property Arguments As String
+        Public Property TryIntegrate As Boolean
+        Public Property ConnectionInfo As Info
+
+        Public ReadOnly Property Icon As Drawing.Icon
             Get
                 If File.Exists(FileName) Then
                     Return Misc.GetIconFromFile(FileName)
@@ -22,30 +28,48 @@ Namespace Tools
             End Get
         End Property
 
-        Public ReadOnly Property Image() As Image
+        Public ReadOnly Property Image As Image
             Get
-                If Icon IsNot Nothing Then
-                    Return Icon.ToBitmap
-                Else
-                    Return Nothing
-                End If
+                Try
+                    Dim i As Image
+                    If Icon IsNot Nothing Then
+                        i = Icon.ToBitmap
+                        Return i
+                    Else
+                        Return mRemote_Icon.ToBitmap
+                    End If
+                Catch ex As Exception
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                        "Could not convert image to Bitmap (Tools.ExternalTool) - using default icon. Exception:" &
+                                                        vbNewLine & ex.ToString(), True)
+                    Return mRemote_Icon.ToBitmap
+                End Try
             End Get
         End Property
+
 #End Region
 
 #Region "Constructors"
-        Public Sub New(Optional ByVal displayName As String = "", Optional ByVal fileName As String = "", Optional ByVal arguments As String = "")
+
+        Public Sub New(Optional ByVal displayName As String = "", Optional ByVal fileName As String = "",
+                       Optional ByVal arguments As String = "")
             Me.DisplayName = displayName
             Me.FileName = fileName
             Me.Arguments = arguments
         End Sub
+
 #End Region
 
 #Region "Public Methods"
         ' Start external app
-        Public Sub Start(Optional ByVal startConnectionInfo As Connection.Info = Nothing)
+        Public Sub Start(Optional ByVal startConnectionInfo As Info = Nothing)
             Try
-                If String.IsNullOrEmpty(_FileName) Then Throw New InvalidOperationException("FileName cannot be blank.")
+                If String.IsNullOrEmpty(_FileName) Then
+                    ' No need to thow an exception, just log/show an error and return.
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        "ExternalApp.Start() failed: FileName cannot be blank.", False)
+                    Return
+                End If
 
                 ConnectionInfo = startConnectionInfo
 
@@ -65,30 +89,30 @@ Namespace Tools
 
                 If WaitForExit Then process.WaitForExit()
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage("ExternalApp.Start() failed.", ex)
+                Runtime.MessageCollector.AddExceptionMessage("ExternalApp.Start() failed.", ex)
             End Try
         End Sub
 
         ' Start external app integrated
         Public Sub StartIntegrated()
             Try
-                Dim newConnectionInfo As Connection.Info
+                Dim newConnectionInfo As Info
                 If ConnectionInfo Is Nothing Then
-                    newConnectionInfo = New Connection.Info
+                    newConnectionInfo = New Info
                 Else
                     newConnectionInfo = ConnectionInfo.Copy()
                 End If
 
                 With newConnectionInfo
-                    .Protocol = Connection.Protocol.Protocols.IntApp
+                    .Protocol = Protocols.IntApp
                     .ExtApp = DisplayName
                     .Name = DisplayName
-                    .Panel = My.Language.strMenuExternalTools
+                    .Panel = Language.Language.strMenuExternalTools
                 End With
 
-                OpenConnection(newConnectionInfo)
+                Runtime.OpenConnection(newConnectionInfo)
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage("ExternalApp.StartIntegrated() failed.", ex, , True)
+                Runtime.MessageCollector.AddExceptionMessage("ExternalApp.StartIntegrated() failed.", ex, , True)
             End Try
         End Sub
 
@@ -99,7 +123,7 @@ Namespace Tools
         End Enum
 
         Private Structure Replacement
-            Public Sub New(ByVal start As Integer, ByVal length As Integer, ByVal value As String)
+            Public Sub New(start As Integer, length As Integer, value As String)
                 Me.Start = start
                 Me.Length = length
                 Me.Value = value
@@ -110,23 +134,23 @@ Namespace Tools
             Public Property Value As String
         End Structure
 
-        Public Function ParseArguments(ByVal input As String) As String
-            Dim index As Integer = 0
+        Public Function ParseArguments(input As String) As String
+            Dim index = 0
             Dim replacements As New List(Of Replacement)
 
             Do
                 Dim tokenStart As Integer = input.IndexOf("%", index, StringComparison.InvariantCulture)
-                If tokenStart = -1 Then Exit Do
+                If tokenStart = - 1 Then Exit Do
 
                 Dim tokenEnd As Integer = input.IndexOf("%", tokenStart + 1, StringComparison.InvariantCulture)
-                If tokenEnd = -1 Then Exit Do
+                If tokenEnd = - 1 Then Exit Do
 
                 Dim tokenLength As Integer = tokenEnd - tokenStart + 1
 
                 Dim variableNameStart As Integer = tokenStart + 1
                 Dim variableNameLength As Integer = tokenLength - 2
 
-                Dim isEnvironmentVariable As Boolean = False
+                Dim isEnvironmentVariable = False
 
                 Dim variableName As String
 
@@ -161,7 +185,7 @@ Namespace Tools
 
                 Dim token As String = input.Substring(tokenStart, tokenLength)
 
-                Dim escape As EscapeType = EscapeType.All
+                Dim escape = EscapeType.All
                 Dim prefix As String = input.Substring(variableNameStart, 1)
                 Select Case prefix
                     Case "-"
@@ -188,7 +212,7 @@ Namespace Tools
                     replacementValue = GetVariableReplacement(variableName, token)
                 End If
 
-                Dim haveReplacement As Boolean = False
+                Dim haveReplacement = False
 
                 If Not replacementValue = token Then
                     haveReplacement = True
@@ -225,7 +249,7 @@ Namespace Tools
 
             Dim result As String = input
 
-            For index = result.Length To 0 Step -1
+            For index = result.Length To 0 Step - 1
                 For Each replacement As Replacement In replacements
                     If Not replacement.Start = index Then Continue For
 
@@ -237,10 +261,12 @@ Namespace Tools
 
             Return result
         End Function
+
 #End Region
 
 #Region "Private Methods"
-        Private Function GetVariableReplacement(ByVal variable As String, ByVal original As String) As String
+
+        Private Function GetVariableReplacement(variable As String, original As String) As String
             Dim replacement As String
             Select Case variable.ToLowerInvariant()
                 Case "name"
@@ -268,6 +294,7 @@ Namespace Tools
             End Select
             Return replacement
         End Function
+
 #End Region
     End Class
 
@@ -281,7 +308,7 @@ Namespace Tools
                 ' Add a blank entry to signify that no external tool is selected
                 externalToolList.Add(String.Empty)
 
-                For Each externalTool As ExternalTool In App.Runtime.ExternalTools
+                For Each externalTool As ExternalTool In Runtime.ExternalTools
                     externalToolList.Add(externalTool.DisplayName)
                 Next
 
@@ -289,15 +316,16 @@ Namespace Tools
             End Get
         End Property
 
-        Public Overloads Overrides Function GetStandardValues(ByVal context As System.ComponentModel.ITypeDescriptorContext) As System.ComponentModel.TypeConverter.StandardValuesCollection
+        Public Overloads Overrides Function GetStandardValues(context As ITypeDescriptorContext) _
+            As StandardValuesCollection
             Return New StandardValuesCollection(ExternalTools)
         End Function
 
-        Public Overloads Overrides Function GetStandardValuesExclusive(ByVal context As System.ComponentModel.ITypeDescriptorContext) As Boolean
+        Public Overloads Overrides Function GetStandardValuesExclusive(context As ITypeDescriptorContext) As Boolean
             Return True
         End Function
 
-        Public Overloads Overrides Function GetStandardValuesSupported(ByVal context As ITypeDescriptorContext) As Boolean
+        Public Overloads Overrides Function GetStandardValuesSupported(context As ITypeDescriptorContext) As Boolean
             Return True
         End Function
     End Class

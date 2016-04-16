@@ -1,12 +1,16 @@
-﻿Imports System.Xml
-Imports System.IO
+﻿Imports System.IO
 Imports System.Runtime.InteropServices
-Imports mRemoteNG.Connection.Protocol
-Imports mRemoteNG.App.Runtime
+Imports System.Xml
+Imports mRemote3G.App
+Imports mRemote3G.Connection
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Images
+Imports mRemote3G.Tools
+Imports mRemote3G.Tree
 
 Namespace Config.Import
     Public Class RemoteDesktopConnectionManager
-        Public Shared Sub Import(ByVal fileName As String, ByVal parentTreeNode As TreeNode)
+        Public Shared Sub Import(fileName As String, parentTreeNode As TreeNode)
             Dim xmlDocument As New XmlDocument()
             xmlDocument.Load(fileName)
 
@@ -26,7 +30,7 @@ Namespace Config.Import
             ImportFileOrGroup(fileNode, parentTreeNode)
         End Sub
 
-        Private Shared Sub ImportFileOrGroup(ByVal xmlNode As XmlNode, ByVal parentTreeNode As TreeNode)
+        Private Shared Sub ImportFileOrGroup(xmlNode As XmlNode, parentTreeNode As TreeNode)
             Dim propertiesNode As XmlNode = xmlNode.SelectSingleNode("./properties")
             Dim name As String = propertiesNode.SelectSingleNode("./name").InnerText
 
@@ -37,13 +41,13 @@ Namespace Config.Import
             containerInfo.TreeNode = treeNode
             containerInfo.Name = name
 
-            Dim connectionInfo As Connection.Info = ConnectionInfoFromXml(propertiesNode)
+            Dim connectionInfo As Info = ConnectionInfoFromXml(propertiesNode)
             connectionInfo.Parent = containerInfo
             connectionInfo.IsContainer = True
             containerInfo.ConnectionInfo = connectionInfo
 
             ' We can only inherit from a container node, not the root node or connection nodes
-            If Tree.Node.GetNodeType(parentTreeNode) = Tree.Node.Type.Container Then
+            If Node.GetNodeType(parentTreeNode) = Node.Type.Container Then
                 containerInfo.Parent = parentTreeNode.Tag
             Else
                 connectionInfo.Inherit.TurnOffInheritanceCompletely()
@@ -51,8 +55,8 @@ Namespace Config.Import
 
             treeNode.Name = name
             treeNode.Tag = containerInfo
-            treeNode.ImageIndex = Images.Enums.TreeImage.Container
-            treeNode.SelectedImageIndex = Images.Enums.TreeImage.Container
+            treeNode.ImageIndex = Enums.TreeImage.Container
+            treeNode.SelectedImageIndex = Enums.TreeImage.Container
 
             For Each childNode As XmlNode In xmlNode.SelectNodes("./group|./server")
                 Select Case childNode.Name
@@ -66,29 +70,29 @@ Namespace Config.Import
             containerInfo.IsExpanded = propertiesNode.SelectSingleNode("./expanded").InnerText
             If containerInfo.IsExpanded Then treeNode.Expand()
 
-            ContainerList.Add(containerInfo)
+            Runtime.ContainerList.Add(containerInfo)
         End Sub
 
-        Private Shared Sub ImportServer(ByVal serverNode As XmlNode, ByVal parentTreeNode As TreeNode)
+        Private Shared Sub ImportServer(serverNode As XmlNode, parentTreeNode As TreeNode)
             Dim name As String = serverNode.SelectSingleNode("./displayName").InnerText
             Dim treeNode As New TreeNode(name)
             parentTreeNode.Nodes.Add(treeNode)
 
-            Dim connectionInfo As Connection.Info = ConnectionInfoFromXml(serverNode)
+            Dim connectionInfo As Info = ConnectionInfoFromXml(serverNode)
             connectionInfo.TreeNode = treeNode
             connectionInfo.Parent = parentTreeNode.Tag
 
             treeNode.Name = name
             treeNode.Tag = connectionInfo
-            treeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
-            treeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
+            treeNode.ImageIndex = Enums.TreeImage.ConnectionClosed
+            treeNode.SelectedImageIndex = Enums.TreeImage.ConnectionClosed
 
-            ConnectionList.Add(connectionInfo)
+            Runtime.ConnectionList.Add(connectionInfo)
         End Sub
 
-        Private Shared Function ConnectionInfoFromXml(ByVal xmlNode As XmlNode) As Connection.Info
-            Dim connectionInfo As New Connection.Info
-            connectionInfo.Inherit = New Connection.Info.Inheritance(connectionInfo)
+        Private Shared Function ConnectionInfoFromXml(xmlNode As XmlNode) As Info
+            Dim connectionInfo As New Info
+            connectionInfo.Inherit = New Info.Inheritance(connectionInfo)
 
             Dim name As String = xmlNode.SelectSingleNode("./name").InnerText
 
@@ -124,7 +128,8 @@ Namespace Config.Import
 
             Dim connectionSettingsNode As XmlNode = xmlNode.SelectSingleNode("./connectionSettings")
             If connectionSettingsNode.Attributes("inherit").Value = "None" Then
-                connectionInfo.UseConsoleSession = connectionSettingsNode.SelectSingleNode("./connectToConsole").InnerText
+                connectionInfo.UseConsoleSession =
+                    connectionSettingsNode.SelectSingleNode("./connectToConsole").InnerText
                 ' ./startProgram
                 ' ./workingDir
                 connectionInfo.Port = connectionSettingsNode.SelectSingleNode("./port").InnerText
@@ -167,7 +172,7 @@ Namespace Config.Import
             If remoteDesktopNode.Attributes("inherit").Value = "None" Then
                 Dim resolutionString As String = remoteDesktopNode.SelectSingleNode("./size").InnerText.Replace(" ", "")
                 Try
-                    connectionInfo.Resolution = "Res" & Tools.Misc.StringToEnum(GetType(Connection.Protocol.RDP.RDPResolutions), resolutionString)
+                    connectionInfo.Resolution = "Res" & Misc.StringToEnum(GetType(RDP.RDPResolutions), resolutionString)
                 Catch ex As ArgumentException
                     connectionInfo.Resolution = RDP.RDPResolutions.FitToWindow
                 End Try
@@ -213,7 +218,8 @@ Namespace Config.Import
                 connectionInfo.RedirectDiskDrives = localResourcesNode.SelectSingleNode("./redirectDrives").InnerText
                 connectionInfo.RedirectPorts = localResourcesNode.SelectSingleNode("./redirectPorts").InnerText
                 connectionInfo.RedirectPrinters = localResourcesNode.SelectSingleNode("./redirectPrinters").InnerText
-                connectionInfo.RedirectSmartCards = localResourcesNode.SelectSingleNode("./redirectSmartCards").InnerText
+                connectionInfo.RedirectSmartCards =
+                    localResourcesNode.SelectSingleNode("./redirectSmartCards").InnerText
             Else
                 connectionInfo.Inherit.RedirectSound = True
                 connectionInfo.Inherit.RedirectKeys = True
@@ -244,28 +250,30 @@ Namespace Config.Import
             Return connectionInfo
         End Function
 
-        Private Shared Function DecryptPassword(ByVal ciphertext As String) As String
+        Private Shared Function DecryptPassword(ciphertext As String) As String
             If String.IsNullOrEmpty(ciphertext) Then Return Nothing
 
             Dim gcHandle As GCHandle
             Dim plaintextData As Win32.DATA_BLOB
             Try
                 Dim ciphertextArray As Byte() = Convert.FromBase64String(ciphertext)
-                gcHandle = Runtime.InteropServices.GCHandle.Alloc(ciphertextArray, GCHandleType.Pinned)
+                gcHandle = GCHandle.Alloc(ciphertextArray, GCHandleType.Pinned)
 
                 Dim ciphertextData As Win32.DATA_BLOB
                 ciphertextData.cbData = ciphertextArray.Length
                 ciphertextData.pbData = gcHandle.AddrOfPinnedObject()
 
-                If Not Win32.CryptUnprotectData(ciphertextData, Nothing, Nothing, Nothing, Nothing, 0, plaintextData) Then Return Nothing
+                If Not Win32.CryptUnprotectData(ciphertextData, Nothing, Nothing, Nothing, Nothing, 0, plaintextData) _
+                    Then Return Nothing
 
-                Dim plaintextLength As Integer = plaintextData.cbData / 2 ' Char = 2 bytes
+                Dim plaintextLength As Integer = plaintextData.cbData/2 ' Char = 2 bytes
                 Dim plaintextArray(plaintextLength - 1) As Char
                 Marshal.Copy(plaintextData.pbData, plaintextArray, 0, plaintextLength)
 
                 Return New String(plaintextArray)
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage("RemoteDesktopConnectionManager.DecryptPassword() failed.", ex, , True)
+                Runtime.MessageCollector.AddExceptionMessage("RemoteDesktopConnectionManager.DecryptPassword() failed.",
+                                                             ex, , True)
                 Return Nothing
             Finally
                 If gcHandle.IsAllocated Then gcHandle.Free()
@@ -278,12 +286,12 @@ Namespace Config.Import
             ' ReSharper disable InconsistentNaming
             ' ReSharper disable IdentifierTypo
             ' ReSharper disable StringLiteralTypo
-            <DllImport("crypt32.dll", CharSet:=CharSet.Unicode)> _
+            <DllImport("crypt32.dll", CharSet:=CharSet.Unicode)>
             Public Shared Function CryptUnprotectData(ByRef dataIn As DATA_BLOB, ByVal description As String, ByRef optionalEntropy As DATA_BLOB, ByVal reserved As IntPtr, ByRef promptStruct As IntPtr, ByVal flags As Integer, ByRef dataOut As DATA_BLOB) As Boolean
             End Function
 
-            <DllImport("kernel32.dll", CharSet:=CharSet.Unicode)> _
-            Public Shared Sub LocalFree(ByVal ptr As IntPtr)
+            <DllImport("kernel32.dll", CharSet := CharSet.Unicode)>
+            Public Shared Sub LocalFree(ptr As IntPtr)
             End Sub
 
             Public Structure DATA_BLOB
@@ -294,5 +302,8 @@ Namespace Config.Import
             ' ReSharper restore IdentifierTypo
             ' ReSharper restore InconsistentNaming
         End Class
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

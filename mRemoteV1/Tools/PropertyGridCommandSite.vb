@@ -7,27 +7,30 @@ Namespace Tools
         Implements IMenuCommandService, ISite
 
         Protected TheObject As Object
-        Sub New(ByVal [object] As Object)
+
+        Sub New([object] As Object)
             TheObject = [object]
         End Sub
 
-        Public ReadOnly Property Verbs() As DesignerVerbCollection Implements IMenuCommandService.Verbs
+        Public ReadOnly Property Verbs As DesignerVerbCollection Implements IMenuCommandService.Verbs
             Get
                 Dim objectVerbs As New DesignerVerbCollection()
                 ' ReSharper disable VBPossibleMistakenCallToGetType.2
-                Dim methods() As MethodInfo = TheObject.GetType().GetMethods(BindingFlags.Public Or BindingFlags.Instance)
+                Dim methods() As MethodInfo =
+                        TheObject.GetType().GetMethods(BindingFlags.Public Or BindingFlags.Instance)
                 ' ReSharper restore VBPossibleMistakenCallToGetType.2
                 For Each method As MethodInfo In methods
                     Dim commandAttributes() As Object = method.GetCustomAttributes(GetType(CommandAttribute), True)
                     If commandAttributes Is Nothing OrElse commandAttributes.Length = 0 Then Continue For
 
-                    Dim commandAttribute As CommandAttribute = CType(commandAttributes(0), CommandAttribute)
+                    Dim commandAttribute = CType(commandAttributes(0), CommandAttribute)
                     If Not commandAttribute.Command Then Continue For
 
                     Dim displayName As String = method.Name
-                    Dim displayNameAttributes() As Object = method.GetCustomAttributes(GetType(DisplayNameAttribute), True)
+                    Dim displayNameAttributes() As Object = method.GetCustomAttributes(GetType(DisplayNameAttribute),
+                                                                                       True)
                     If Not (displayNameAttributes Is Nothing OrElse displayNameAttributes.Length = 0) Then
-                        Dim displayNameAttribute As DisplayNameAttribute = CType(displayNameAttributes(0), DisplayNameAttribute)
+                        Dim displayNameAttribute = CType(displayNameAttributes(0), DisplayNameAttribute)
                         If Not String.IsNullOrEmpty(displayNameAttribute.DisplayName) Then
                             displayName = displayNameAttribute.DisplayName
                         End If
@@ -39,8 +42,8 @@ Namespace Tools
             End Get
         End Property
 
-        Private Sub VerbEventHandler(ByVal sender As Object, ByVal e As EventArgs)
-            Dim verb As DesignerVerb = TryCast(sender, DesignerVerb)
+        Private Sub VerbEventHandler(sender As Object, e As EventArgs)
+            Dim verb = TryCast(sender, DesignerVerb)
             If verb Is Nothing Then Return
             ' ReSharper disable VBPossibleMistakenCallToGetType.2
             Dim methods() As MethodInfo = TheObject.GetType().GetMethods(BindingFlags.Public Or BindingFlags.Instance)
@@ -49,13 +52,13 @@ Namespace Tools
                 Dim commandAttributes() As Object = method.GetCustomAttributes(GetType(CommandAttribute), True)
                 If commandAttributes Is Nothing OrElse commandAttributes.Length = 0 Then Continue For
 
-                Dim commandAttribute As CommandAttribute = CType(commandAttributes(0), CommandAttribute)
+                Dim commandAttribute = CType(commandAttributes(0), CommandAttribute)
                 If Not commandAttribute.Command Then Continue For
 
                 Dim displayName As String = method.Name
                 Dim displayNameAttributes() As Object = method.GetCustomAttributes(GetType(DisplayNameAttribute), True)
                 If Not (displayNameAttributes Is Nothing OrElse displayNameAttributes.Length = 0) Then
-                    Dim displayNameAttribute As DisplayNameAttribute = CType(displayNameAttributes(0), DisplayNameAttribute)
+                    Dim displayNameAttribute = CType(displayNameAttributes(0), DisplayNameAttribute)
                     If Not String.IsNullOrEmpty(displayNameAttribute.DisplayName) Then
                         displayName = displayNameAttribute.DisplayName
                     End If
@@ -76,66 +79,67 @@ Namespace Tools
             End If
         End Function
 
-        Public ReadOnly Property Component As System.ComponentModel.IComponent Implements System.ComponentModel.ISite.Component
+        Public ReadOnly Property Component As IComponent Implements ISite.Component
             Get
-                Throw New NotImplementedException()
+                Throw New NotSupportedException()
             End Get
         End Property
 
-        Public ReadOnly Property Container As System.ComponentModel.IContainer Implements System.ComponentModel.ISite.Container
+        Public ReadOnly Property Container As IContainer Implements ISite.Container
             Get
                 Return Nothing
             End Get
         End Property
 
-        Public ReadOnly Property DesignMode As Boolean Implements System.ComponentModel.ISite.DesignMode
+        Public ReadOnly Property DesignMode As Boolean Implements ISite.DesignMode
             Get
                 Return True
             End Get
         End Property
 
-        Public Property Name As String Implements System.ComponentModel.ISite.Name
+        Public Property Name As String Implements ISite.Name
             Get
-                Throw New NotImplementedException()
+                Throw New NotSupportedException()
             End Get
-            Set(value As String)
+            Set
                 Throw New NotImplementedException()
             End Set
         End Property
 
-        Public Sub AddCommand(ByVal command As MenuCommand) Implements IMenuCommandService.AddCommand
+        Public Sub AddCommand(command As MenuCommand) Implements IMenuCommandService.AddCommand
             Throw New NotImplementedException()
         End Sub
 
-        Public Sub AddVerb(ByVal verb As DesignerVerb) Implements IMenuCommandService.AddVerb
+        Public Sub AddVerb(verb As DesignerVerb) Implements IMenuCommandService.AddVerb
             Throw New NotImplementedException()
         End Sub
 
-        Public Function FindCommand(ByVal commandId As CommandID) As MenuCommand Implements IMenuCommandService.FindCommand
+        Public Function FindCommand(commandId As CommandID) As MenuCommand Implements IMenuCommandService.FindCommand
             Throw New NotImplementedException()
         End Function
 
-        Public Function GlobalInvoke(ByVal commandId As CommandID) As Boolean Implements IMenuCommandService.GlobalInvoke
+        Public Function GlobalInvoke(commandId As CommandID) As Boolean Implements IMenuCommandService.GlobalInvoke
             Throw New NotImplementedException()
         End Function
 
-        Public Sub RemoveCommand(ByVal command As MenuCommand) Implements IMenuCommandService.RemoveCommand
+        Public Sub RemoveCommand(command As MenuCommand) Implements IMenuCommandService.RemoveCommand
             Throw New NotImplementedException()
         End Sub
 
-        Public Sub RemoveVerb(ByVal verb As DesignerVerb) Implements IMenuCommandService.RemoveVerb
+        Public Sub RemoveVerb(verb As DesignerVerb) Implements IMenuCommandService.RemoveVerb
             Throw New NotImplementedException()
         End Sub
 
-        Public Sub ShowContextMenu(ByVal menuId As CommandID, ByVal x As Integer, ByVal y As Integer) Implements IMenuCommandService.ShowContextMenu
+        Public Sub ShowContextMenu(menuId As CommandID, x As Integer, y As Integer) _
+            Implements IMenuCommandService.ShowContextMenu
             Throw New NotImplementedException()
         End Sub
-
     End Class
 
     Public Class CommandAttribute
         Inherits Attribute
         Public Property Command As Boolean = False
+
         Sub New(Optional ByVal isCommand As Boolean = True)
             Command = isCommand
         End Sub

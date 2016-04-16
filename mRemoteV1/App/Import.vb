@@ -1,13 +1,17 @@
-﻿Imports System.Windows.Forms
-Imports System.IO
-Imports mRemoteNG.My
-Imports mRemoteNG.App.Runtime
+﻿Imports System.IO
+Imports mRemote3G.Config.Import
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Tools
+Imports mRemote3G.Tree
 Imports PSTaskDialog
 
 Namespace App
     Public Class Import
+
 #Region "Public Methods"
-        Public Shared Sub ImportFromFile(ByVal rootTreeNode As TreeNode, ByVal selectedTreeNode As TreeNode, Optional ByVal alwaysUseSelectedTreeNode As Boolean = False)
+
+        Public Shared Sub ImportFromFile(rootTreeNode As TreeNode, selectedTreeNode As TreeNode,
+                                         Optional ByVal alwaysUseSelectedTreeNode As Boolean = False)
             Try
                 Using openFileDialog As New OpenFileDialog()
                     With openFileDialog
@@ -16,90 +20,93 @@ Namespace App
                         .Multiselect = True
 
                         Dim fileTypes As New List(Of String)
-                        fileTypes.AddRange({Language.strFilterAllImportable, "*.xml;*.rdp;*.rdg;*.dat"})
-                        fileTypes.AddRange({Language.strFiltermRemoteXML, "*.xml"})
-                        fileTypes.AddRange({Language.strFilterRDP, "*.rdp"})
-                        fileTypes.AddRange({Language.strFilterRdgFiles, "*.rdg"})
-                        fileTypes.AddRange({Language.strFilterPuttyConnectionManager, "*.dat"})
-                        fileTypes.AddRange({Language.strFilterAll, "*.*"})
+                        fileTypes.AddRange({Language.Language.strFilterAllImportable, "*.xml;*.rdp;*.rdg;*.dat"})
+                        fileTypes.AddRange({Language.Language.strFiltermRemoteXML, "*.xml"})
+                        fileTypes.AddRange({Language.Language.strFilterRDP, "*.rdp"})
+                        fileTypes.AddRange({Language.Language.strFilterRdgFiles, "*.rdg"})
+                        fileTypes.AddRange({Language.Language.strFilterPuttyConnectionManager, "*.dat"})
+                        fileTypes.AddRange({Language.Language.strFilterAll, "*.*"})
 
                         .Filter = String.Join("|", fileTypes.ToArray())
                     End With
 
                     If Not openFileDialog.ShowDialog = DialogResult.OK Then Return
 
-                    Dim parentTreeNode As TreeNode = GetParentTreeNode(rootTreeNode, selectedTreeNode, alwaysUseSelectedTreeNode)
+                    Dim parentTreeNode As TreeNode = GetParentTreeNode(rootTreeNode, selectedTreeNode,
+                                                                       alwaysUseSelectedTreeNode)
                     If parentTreeNode Is Nothing Then Return
 
                     For Each fileName As String In openFileDialog.FileNames
                         Try
                             Select Case DetermineFileType(fileName)
                                 Case FileType.mRemoteXml
-                                    Config.Import.mRemoteNG.Import(fileName, parentTreeNode)
+                                    Config.Import.mRemote3G.Import(fileName, parentTreeNode)
                                 Case FileType.RemoteDesktopConnection
-                                    Config.Import.RemoteDesktopConnection.Import(fileName, parentTreeNode)
+                                    RemoteDesktopConnection.Import(fileName, parentTreeNode)
                                 Case FileType.RemoteDesktopConnectionManager
-                                    Config.Import.RemoteDesktopConnectionManager.Import(fileName, parentTreeNode)
+                                    RemoteDesktopConnectionManager.Import(fileName, parentTreeNode)
                                 Case FileType.PuttyConnectionManager
-                                    Config.Import.PuttyConnectionManager.Import(fileName, parentTreeNode)
+                                    PuttyConnectionManager.Import(fileName, parentTreeNode)
                                 Case Else
                                     Throw New FileFormatException("Unrecognized file format.")
                             End Select
                         Catch ex As Exception
-                            cTaskDialog.ShowTaskDialogBox(Application.ProductName, Language.strImportFileFailedMainInstruction, String.Format(Language.strImportFileFailedContent, fileName), Tools.Misc.GetExceptionMessageRecursive(ex), "", "", "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
+                            cTaskDialog.ShowTaskDialogBox(Application.ProductName, Language.Language.strImportFileFailedMainInstruction, String.Format(Language.Language.strImportFileFailedContent, fileName), Tools.Misc.GetExceptionMessageRecursive(ex), "", "", "", "", eTaskDialogButtons.OK, eSysIcons.Error, Nothing)
                         End Try
                     Next
 
                     parentTreeNode.Expand()
-                    Dim parentContainer As Container.Info = TryCast(parentTreeNode.Tag, Container.Info)
+                    Dim parentContainer = TryCast(parentTreeNode.Tag, Container.Info)
                     If parentContainer IsNot Nothing Then parentContainer.IsExpanded = True
 
-                    SaveConnectionsBG()
+                    Runtime.SaveConnectionsBG()
                 End Using
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed.", ex, , True)
+                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed.", ex, , True)
             End Try
         End Sub
 
-        Public Shared Sub ImportFromActiveDirectory(ByVal ldapPath As String)
+        Public Shared Sub ImportFromActiveDirectory(ldapPath As String)
             Try
-                Dim rootTreeNode As TreeNode = Tree.Node.TreeView.Nodes(0)
-                Dim selectedTreeNode As TreeNode = Tree.Node.TreeView.SelectedNode
+                Dim rootTreeNode As TreeNode = Node.TreeView.Nodes(0)
+                Dim selectedTreeNode As TreeNode = Node.TreeView.SelectedNode
 
                 Dim parentTreeNode As TreeNode = GetParentTreeNode(rootTreeNode, selectedTreeNode)
                 If parentTreeNode Is Nothing Then Return
 
-                Config.Import.ActiveDirectory.Import(ldapPath, parentTreeNode)
+                ActiveDirectory.Import(ldapPath, parentTreeNode)
 
                 parentTreeNode.Expand()
-                Dim parentContainer As Container.Info = TryCast(parentTreeNode.Tag, Container.Info)
+                Dim parentContainer = TryCast(parentTreeNode.Tag, Container.Info)
                 If parentContainer IsNot Nothing Then parentContainer.IsExpanded = True
 
-                SaveConnectionsBG()
+                Runtime.SaveConnectionsBG()
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage("App.Import.ImportFromActiveDirectory() failed.", ex, , True)
+                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromActiveDirectory() failed.", ex, ,
+                                                             True)
             End Try
         End Sub
 
-        Public Shared Sub ImportFromPortScan(ByVal hosts As IEnumerable, ByVal protocol As Connection.Protocol.Protocols)
+        Public Shared Sub ImportFromPortScan(hosts As IEnumerable, protocol As Protocols)
             Try
-                Dim rootTreeNode As TreeNode = Tree.Node.TreeView.Nodes(0)
-                Dim selectedTreeNode As TreeNode = Tree.Node.TreeView.SelectedNode
+                Dim rootTreeNode As TreeNode = Node.TreeView.Nodes(0)
+                Dim selectedTreeNode As TreeNode = Node.TreeView.SelectedNode
 
                 Dim parentTreeNode As TreeNode = GetParentTreeNode(rootTreeNode, selectedTreeNode)
                 If parentTreeNode Is Nothing Then Return
 
-                Config.Import.PortScan.Import(hosts, protocol, parentTreeNode)
+                PortScan.Import(hosts, protocol, parentTreeNode)
 
                 parentTreeNode.Expand()
-                Dim parentContainer As Container.Info = TryCast(parentTreeNode.Tag, Container.Info)
+                Dim parentContainer = TryCast(parentTreeNode.Tag, Container.Info)
                 If parentContainer IsNot Nothing Then parentContainer.IsExpanded = True
 
-                SaveConnectionsBG()
+                Runtime.SaveConnectionsBG()
             Catch ex As Exception
-                MessageCollector.AddExceptionMessage("App.Import.ImportFromPortScan() failed.", ex, , True)
+                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromPortScan() failed.", ex, , True)
             End Try
         End Sub
+
 #End Region
 
 #Region "Private Methods"
@@ -113,7 +120,7 @@ Namespace App
                 If alwaysUseSelectedTreeNode Then
                     parentTreeNode = GetContainerTreeNode(selectedTreeNode)
                 Else
-                    cTaskDialog.ShowCommandBox(Application.ProductName, Language.strImportLocationMainInstruction, Language.strImportLocationContent, "", "", "", String.Format(Language.strImportLocationCommandButtons, vbLf, rootTreeNode.Text, selectedTreeNode.Text), True, eSysIcons.Question, 0)
+                    cTaskDialog.ShowCommandBox(Application.ProductName, Language.Language.strImportLocationMainInstruction, Language.Language.strImportLocationContent, "", "", "", String.Format(Language.Language.strImportLocationCommandButtons, vbLf, rootTreeNode.Text, selectedTreeNode.Text), True, eSysIcons.Question, 0)
                     Select Case cTaskDialog.CommandButtonResult
                         Case 0 ' Root
                             parentTreeNode = rootTreeNode
@@ -128,18 +135,18 @@ Namespace App
             Return parentTreeNode
         End Function
 
-        Private Shared Function GetContainerTreeNode(ByVal treeNode As TreeNode) As TreeNode
-            Select Case Tree.Node.GetNodeType(treeNode)
-                Case Tree.Node.Type.Root, Tree.Node.Type.Container
+        Private Shared Function GetContainerTreeNode(treeNode As TreeNode) As TreeNode
+            Select Case Node.GetNodeType(treeNode)
+                Case Node.Type.Root, Node.Type.Container
                     Return treeNode
-                Case Tree.Node.Type.Connection
+                Case Node.Type.Connection
                     Return treeNode.Parent
                 Case Else
                     Return Nothing
             End Select
         End Function
 
-        Private Shared Function DetermineFileType(ByVal fileName As String) As FileType
+        Private Shared Function DetermineFileType(fileName As String) As FileType
             ' TODO: Use the file contents to determine the file type instead of trusting the extension
             Dim fileExtension As String = Path.GetExtension(fileName).ToLowerInvariant()
             Select Case fileExtension
@@ -155,9 +162,11 @@ Namespace App
                     Return FileType.Unknown
             End Select
         End Function
+
 #End Region
 
 #Region "Private Enumerations"
+
         Private Enum FileType As Integer
             Unknown = 0
             ' ReSharper disable once InconsistentNaming
@@ -166,6 +175,10 @@ Namespace App
             RemoteDesktopConnectionManager
             PuttyConnectionManager
         End Enum
+
+        Private Sub New()
+        End Sub
+
 #End Region
     End Class
 End Namespace

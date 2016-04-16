@@ -40,7 +40,7 @@
             Me.lblLanguageRestartRequired.Name = "lblLanguageRestartRequired"
             Me.lblLanguageRestartRequired.Size = New System.Drawing.Size(380, 13)
             Me.lblLanguageRestartRequired.TabIndex = 9
-            Me.lblLanguageRestartRequired.Text = "mRemoteNG must be restarted before changes to the language will take effect."
+            Me.lblLanguageRestartRequired.Text = "mRemote3G must be restarted before changes to the language will take effect."
             '
             'cboLanguage
             '

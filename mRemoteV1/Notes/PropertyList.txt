@@ -9,7 +9,6 @@ Protocol
 PuttySession
 Port As Integer
 ConnectToConsole
-ICAEncryptionStrength
 Colors
 Resolution
 DisplayWallpaper
@@ -55,7 +54,6 @@ inheritRedirectSmartCards
 inheritRedirectSound
 inheritResolution
 inheritUseConsoleSession
-inheritICAEncryptionStrength
 inheritUsername
 inheritPreExtApp
 inheritPostExtApp

@@ -1,9 +1,10 @@
 Namespace Connection
+
     Namespace Protocol
         Public Class HTTP
-            Inherits Connection.Protocol.HTTPBase
+            Inherits HTTPBase
 
-            Public Sub New(ByVal RenderingEngine As RenderingEngine)
+            Public Sub New(RenderingEngine As RenderingEngine)
                 MyBase.New(RenderingEngine)
             End Sub
 
@@ -15,8 +16,10 @@ Namespace Connection
             End Sub
 
             Public Enum Defaults
+                None = 0
                 Port = 80
             End Enum
         End Class
     End Namespace
+
 End Namespace

@@ -1,12 +1,19 @@
-Imports System.Reflection
-Imports System.ComponentModel
-Imports System.Runtime.InteropServices
 Imports System.Collections.Specialized
-Imports System.Text.RegularExpressions
-Imports mRemoteNG.Forms
-Imports mRemoteNG.App.Runtime
-Imports System.IO
+Imports System.ComponentModel
 Imports System.Data.SqlClient
+Imports System.Globalization
+Imports System.IO
+Imports System.Reflection
+Imports System.Runtime.InteropServices
+Imports System.Text.RegularExpressions
+Imports System.Threading
+Imports mRemote3G.App
+Imports mRemote3G.App.Info
+Imports mRemote3G.App.Runtime
+Imports mRemote3G.Forms
+Imports mRemote3G.Messages
+Imports mRemote3G.My.Resources
+Imports mRemote3G.Security
 
 Namespace Tools
     Public Class Misc
@@ -14,21 +21,20 @@ Namespace Tools
             Public hIcon As IntPtr            ' : icon
             Public iIcon As Integer           ' : icondex
             Public dwAttributes As Integer    ' : SFGAO_ flags
-            <MarshalAs(UnmanagedType.ByValTStr, SizeConst:=260)> _
-            Public szDisplayName As String
-            <MarshalAs(UnmanagedType.ByValTStr, SizeConst:=80)> _
-            Public szTypeName As String
+            <MarshalAs(UnmanagedType.ByValTStr, SizeConst := 260)> Public szDisplayName As String
+            <MarshalAs(UnmanagedType.ByValTStr, SizeConst := 80)> Public szTypeName As String
         End Structure
 
-        <DllImport("shell32.dll")> _
-        Private Shared Function SHGetFileInfo(ByVal pszPath As String, ByVal dwFileAttributes As Integer, ByRef psfi As SHFILEINFO, ByVal cbFileInfo As Integer, ByVal uFlags As Integer) As IntPtr
+        <DllImport("shell32.dll", CharSet := CharSet.Unicode)>
+        Private Shared Function SHGetFileInfo(pszPath As String, dwFileAttributes As Integer, ByRef psfi As SHFILEINFO,
+                                              cbFileInfo As Integer, uFlags As Integer) As IntPtr
         End Function
 
         Private Const SHGFI_ICON As Integer = &H100
         Private Const SHGFI_SMALLICON As Integer = &H1
         'Private Const SHGFI_LARGEICON = &H0    ' Large icon
 
-        Public Shared Function GetIconFromFile(ByVal FileName As String) As Icon
+        Public Shared Function GetIconFromFile(FileName As String) As Icon
             Try
                 If File.Exists(FileName) = False Then
                     Return Nothing
@@ -50,20 +56,28 @@ Namespace Tools
 
                 'The icon is returned in the hIcon member of the
                 'shinfo struct.
-                Dim myIcon As System.Drawing.Icon
-                myIcon = System.Drawing.Icon.FromHandle(shinfo.hIcon)
+                Dim myIcon As Icon
+                myIcon = Icon.FromHandle(shinfo.hIcon)
 
                 Return myIcon
+            Catch SAEx As ArgumentException
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                    "GetIconFromFile failed (Tools.Misc) - using default icon. Exception:" &
+                                                    vbNewLine & SAEx.ToString(), True)
+                Return mRemote_Icon
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" & vbNewLine & ex.Message, True)
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                    "GetIconFromFile failed (Tools.Misc)" & vbNewLine & ex.ToString(),
+                                                    True)
                 Return Nothing
             End Try
         End Function
 
-        Public Shared Event SQLUpdateCheckFinished(ByVal UpdateAvailable As Boolean)
+        Public Shared Event SQLUpdateCheckFinished(UpdateAvailable As Boolean)
+
         Public Shared Sub IsSQLUpdateAvailableBG()
-            Dim t As New Threading.Thread(AddressOf IsSQLUpdateAvailable)
-            t.SetApartmentState(Threading.ApartmentState.STA)
+            Dim t As New Thread(AddressOf IsSQLUpdateAvailable)
+            t.SetApartmentState(ApartmentState.STA)
             t.Start()
         End Sub
 
@@ -76,9 +90,16 @@ Namespace Tools
                 Dim LastUpdateInDB As Date
 
                 If My.Settings.SQLUser <> "" Then
-                    sqlCon = New SqlConnection("Data Source=" & My.Settings.SQLHost & ";Initial Catalog=" & My.Settings.SQLDatabaseName & ";User Id=" & My.Settings.SQLUser & ";Password=" & Security.Crypt.Decrypt(My.Settings.SQLPass, App.Info.General.EncryptionKey))
+                    sqlCon =
+                        New SqlConnection(
+                            "Data Source=" & My.Settings.SQLHost & ";Initial Catalog=" & My.Settings.SQLDatabaseName &
+                            ";User Id=" & My.Settings.SQLUser & ";Password=" &
+                            Crypt.Decrypt(My.Settings.SQLPass, General.EncryptionKey))
                 Else
-                    sqlCon = New SqlConnection("Data Source=" & My.Settings.SQLHost & ";Initial Catalog=" & My.Settings.SQLDatabaseName & ";Integrated Security=True")
+                    sqlCon =
+                        New SqlConnection(
+                            "Data Source=" & My.Settings.SQLHost & ";Initial Catalog=" & My.Settings.SQLDatabaseName &
+                            ";Integrated Security=True")
                 End If
 
                 sqlCon.Open()
@@ -91,7 +112,7 @@ Namespace Tools
                 If sqlRd.HasRows Then
                     LastUpdateInDB = sqlRd.Item("LastUpdate")
 
-                    If LastUpdateInDB > LastSQLUpdate Then
+                    If LastUpdateInDB > Runtime.LastSqlUpdate Then
                         RaiseEvent SQLUpdateCheckFinished(True)
                         Return True
                     End If
@@ -99,13 +120,16 @@ Namespace Tools
 
                 RaiseEvent SQLUpdateCheckFinished(False)
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "IsSQLUpdateAvailable failed (Tools.Misc)" & vbNewLine & ex.Message, True)
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                    "IsSQLUpdateAvailable failed (Tools.Misc)" & vbNewLine &
+                                                    ex.ToString(), True)
             End Try
 
             Return False
         End Function
 
-        Public Shared Function PasswordDialog(Optional ByVal passwordName As String = Nothing, Optional ByVal verify As Boolean = True) As String
+        Public Shared Function PasswordDialog(Optional ByVal passwordName As String = Nothing,
+                                              Optional ByVal verify As Boolean = True) As String
             Dim passwordForm As New PasswordForm(passwordName, verify)
 
             If passwordForm.ShowDialog = DialogResult.OK Then
@@ -119,7 +143,7 @@ Namespace Tools
             Return Guid.NewGuid().ToString()
         End Function
 
-        Public Shared Function LeadingZero(ByVal Number As String) As String
+        Public Shared Function LeadingZero(Number As String) As String
             If Number < 10 Then
                 Return "0" & Number
             Else
@@ -127,33 +151,35 @@ Namespace Tools
             End If
         End Function
 
-        Public Shared Function DBDate(ByVal Dt As Date) As String
+        Public Shared Function DBDate(Dt As Date) As String
             Dim strDate As String
 
-            strDate = Dt.Year & LeadingZero(Dt.Month) & LeadingZero(Dt.Day) & " " & LeadingZero(Dt.Hour) & ":" & LeadingZero(Dt.Minute) & ":" & LeadingZero(Dt.Second)
+            strDate = Dt.Year & LeadingZero(Dt.Month) & LeadingZero(Dt.Day) & " " & LeadingZero(Dt.Hour) & ":" &
+                      LeadingZero(Dt.Minute) & ":" & LeadingZero(Dt.Second)
 
             Return strDate
         End Function
 
-        Public Shared Function PrepareForDB(ByVal Text As String) As String
+        Public Shared Function PrepareForDB(Text As String) As String
             Text = Replace(Text, "'True'", "1", , , CompareMethod.Text)
             Text = Replace(Text, "'False'", "0", , , CompareMethod.Text)
 
             Return Text
         End Function
 
-        Public Shared Function PrepareValueForDB(ByVal Text As String) As String
+        Public Shared Function PrepareValueForDB(Text As String) As String
             Text = Replace(Text, "'", "''", , , CompareMethod.Text)
 
             Return Text
         End Function
 
-        Public Shared Function StringToEnum(ByVal t As Type, ByVal value As String) As Object
+        Public Shared Function StringToEnum(t As Type, value As String) As Object
             Return [Enum].Parse(t, value)
         End Function
 
-        Public Shared Function GetExceptionMessageRecursive(ByVal ex As Exception, Optional ByVal separator As String = vbNewLine) As String
-            Dim message As String = ex.Message
+        Public Shared Function GetExceptionMessageRecursive(ex As Exception,
+                                                            Optional ByVal separator As String = vbNewLine) As String
+            Dim message As String = ex.ToString()
             If ex.InnerException IsNot Nothing Then
                 Dim innerMessage As String = GetExceptionMessageRecursive(ex.InnerException, separator)
                 message = String.Join(separator, New String() {message, innerMessage})
@@ -161,22 +187,29 @@ Namespace Tools
             Return message
         End Function
 
-        Public Shared Function TakeScreenshot(ByVal sender As UI.Window.Connection) As Image
+        Public Shared Function TakeScreenshot(sender As UI.Window.Connection) As Image
             Try
-                Dim LeftStart As Integer = sender.TabController.SelectedTab.PointToScreen(New Point(sender.TabController.SelectedTab.Left)).X  'Me.Left + Splitter.SplitterDistance + 11
-                Dim TopStart As Integer = sender.TabController.SelectedTab.PointToScreen(New Point(sender.TabController.SelectedTab.Top)).Y 'Me.Top + Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 - 3
-                Dim LeftWidth As Integer = sender.TabController.SelectedTab.Width  'Me.Width - (Splitter.SplitterDistance + 16)
-                Dim TopHeight As Integer = sender.TabController.SelectedTab.Height  'Me.Height - (Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 + 2)
+                Dim LeftStart As Integer =
+                        sender.TabController.SelectedTab.PointToScreen(New Point(sender.TabController.SelectedTab.Left)) _
+                        .X  'Me.Left + Splitter.SplitterDistance + 11
+                Dim TopStart As Integer =
+                        sender.TabController.SelectedTab.PointToScreen(New Point(sender.TabController.SelectedTab.Top)).
+                        Y 'Me.Top + Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 - 3
+                Dim LeftWidth As Integer = sender.TabController.SelectedTab.Width _
+                'Me.Width - (Splitter.SplitterDistance + 16)
+                Dim TopHeight As Integer = sender.TabController.SelectedTab.Height _
+                'Me.Height - (Splitter.Top + TabController.Top + TabController.SelectedTab.Top * 2 + 2)
 
                 Dim currentFormSize As New Size(LeftWidth, TopHeight)
                 Dim ScreenToBitmap As New Bitmap(LeftWidth, TopHeight)
-                Dim gGraphics As System.Drawing.Graphics = System.Drawing.Graphics.FromImage(ScreenToBitmap)
+                Dim gGraphics As Graphics = Graphics.FromImage(ScreenToBitmap)
 
                 gGraphics.CopyFromScreen(New Point(LeftStart, TopStart), New Point(0, 0), currentFormSize)
 
                 Return ScreenToBitmap
             Catch ex As Exception
-                MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Taking Screenshot failed" & vbNewLine & ex.Message, True)
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                    "Taking Screenshot failed" & vbNewLine & ex.ToString(), True)
             End Try
 
             Return Nothing
@@ -184,20 +217,23 @@ Namespace Tools
 
         Public Class EnumTypeConverter
             Inherits EnumConverter
-            Private _enumType As System.Type
+            Private ReadOnly _enumType As Type
 
-            Public Sub New(ByVal type As System.Type)
+            Public Sub New(type As Type)
                 MyBase.New(type)
                 _enumType = type
             End Sub
 
-            Public Overloads Overrides Function CanConvertTo(ByVal context As ITypeDescriptorContext, ByVal destType As System.Type) As Boolean
+            Public Overloads Overrides Function CanConvertTo(context As ITypeDescriptorContext, destType As Type) _
+                As Boolean
                 Return destType Is GetType(String)
             End Function
 
-            Public Overloads Overrides Function ConvertTo(ByVal context As ITypeDescriptorContext, ByVal culture As Globalization.CultureInfo, ByVal value As Object, ByVal destType As System.Type) As Object
+            Public Overloads Overrides Function ConvertTo(context As ITypeDescriptorContext, culture As CultureInfo,
+                                                          value As Object, destType As Type) As Object
                 Dim fi As FieldInfo = _enumType.GetField([Enum].GetName(_enumType, value))
-                Dim dna As DescriptionAttribute = DirectCast(Attribute.GetCustomAttribute(fi, GetType(DescriptionAttribute)), DescriptionAttribute)
+                Dim dna = DirectCast(Attribute.GetCustomAttribute(fi, GetType(DescriptionAttribute)),
+                                     DescriptionAttribute)
 
                 If dna IsNot Nothing Then
                     Return dna.Description
@@ -206,13 +242,16 @@ Namespace Tools
                 End If
             End Function
 
-            Public Overloads Overrides Function CanConvertFrom(ByVal context As ITypeDescriptorContext, ByVal srcType As System.Type) As Boolean
+            Public Overloads Overrides Function CanConvertFrom(context As ITypeDescriptorContext, srcType As Type) _
+                As Boolean
                 Return srcType Is GetType(String)
             End Function
 
-            Public Overloads Overrides Function ConvertFrom(ByVal context As ITypeDescriptorContext, ByVal culture As Globalization.CultureInfo, ByVal value As Object) As Object
+            Public Overloads Overrides Function ConvertFrom(context As ITypeDescriptorContext, culture As CultureInfo,
+                                                            value As Object) As Object
                 For Each fi As FieldInfo In _enumType.GetFields()
-                    Dim dna As DescriptionAttribute = DirectCast(Attribute.GetCustomAttribute(fi, GetType(DescriptionAttribute)), DescriptionAttribute)
+                    Dim dna = DirectCast(Attribute.GetCustomAttribute(fi, GetType(DescriptionAttribute)),
+                                         DescriptionAttribute)
 
                     If (dna IsNot Nothing) AndAlso (DirectCast(value, String) = dna.Description) Then
                         Return [Enum].Parse(_enumType, fi.Name)
@@ -226,7 +265,8 @@ Namespace Tools
         Public Class YesNoTypeConverter
             Inherits TypeConverter
 
-            Public Overloads Overrides Function CanConvertFrom(ByVal context As ITypeDescriptorContext, ByVal sourceType As Type) As Boolean
+            Public Overloads Overrides Function CanConvertFrom(context As ITypeDescriptorContext, sourceType As Type) _
+                As Boolean
                 If sourceType Is GetType(String) Then
                     Return True
                 End If
@@ -234,7 +274,8 @@ Namespace Tools
                 Return MyBase.CanConvertFrom(context, sourceType)
             End Function
 
-            Public Overloads Overrides Function CanConvertTo(ByVal context As ITypeDescriptorContext, ByVal destinationType As Type) As Boolean
+            Public Overloads Overrides Function CanConvertTo(context As ITypeDescriptorContext, destinationType As Type) _
+                As Boolean
                 If destinationType Is GetType(String) Then
                     Return True
                 End If
@@ -242,13 +283,14 @@ Namespace Tools
                 Return MyBase.CanConvertTo(context, destinationType)
             End Function
 
-            Public Overloads Overrides Function ConvertFrom(ByVal context As ITypeDescriptorContext, ByVal culture As System.Globalization.CultureInfo, ByVal value As Object) As Object
+            Public Overloads Overrides Function ConvertFrom(context As ITypeDescriptorContext, culture As CultureInfo,
+                                                            value As Object) As Object
                 If value.GetType() Is GetType(String) Then
-                    If CStr(value).ToLower() = My.Language.strYes.ToLower Then
+                    If CStr(value).ToLower() = Language.Language.strYes.ToLower Then
                         Return True
                     End If
 
-                    If CStr(value).ToLower() = My.Language.strNo.ToLower Then
+                    If CStr(value).ToLower() = Language.Language.strNo.ToLower Then
                         Return False
                     End If
 
@@ -258,29 +300,31 @@ Namespace Tools
                 Return MyBase.ConvertFrom(context, culture, value)
             End Function
 
-            Public Overloads Overrides Function ConvertTo(ByVal context As ITypeDescriptorContext, ByVal culture As System.Globalization.CultureInfo, ByVal value As Object, ByVal destinationType As Type) As Object
+            Public Overloads Overrides Function ConvertTo(context As ITypeDescriptorContext, culture As CultureInfo,
+                                                          value As Object, destinationType As Type) As Object
                 If destinationType Is GetType(String) Then
-                    Return IIf(CBool(value), My.Language.strYes, My.Language.strNo)
+                    Return IIf(CBool(value), Language.Language.strYes, Language.Language.strNo)
                 End If
 
                 Return MyBase.ConvertTo(context, culture, value, destinationType)
             End Function
 
-            Public Overloads Overrides Function GetStandardValuesSupported(ByVal context As ITypeDescriptorContext) As Boolean
+            Public Overloads Overrides Function GetStandardValuesSupported(context As ITypeDescriptorContext) As Boolean
                 Return True
             End Function
 
-            Public Overloads Overrides Function GetStandardValues(ByVal context As ITypeDescriptorContext) As System.ComponentModel.TypeConverter.StandardValuesCollection
+            Public Overloads Overrides Function GetStandardValues(context As ITypeDescriptorContext) _
+                As StandardValuesCollection
                 Dim bools() As Boolean = {True, False}
 
-                Dim svc As New System.ComponentModel.TypeConverter.StandardValuesCollection(bools)
+                Dim svc As New StandardValuesCollection(bools)
 
                 Return svc
             End Function
         End Class
 
         Public Class Fullscreen
-            Public Sub New(ByVal handledForm As Form)
+            Public Sub New(handledForm As Form)
                 _handledForm = handledForm
             End Sub
 
@@ -290,7 +334,8 @@ Namespace Tools
             Private _savedBounds As Rectangle
 
             Private _value As Boolean = False
-            Public Property Value() As Boolean
+
+            Public Property Value As Boolean
                 Get
                     Return _value
                 End Get
@@ -336,16 +381,16 @@ Namespace Tools
         '* Version:		1.0
         '
         Public Class CMDArguments
-            Private Parameters As StringDictionary
+            Private ReadOnly Parameters As StringDictionary
 
             ' Retrieve a parameter value if it exists
-            Default Public ReadOnly Property Item(ByVal Param As String) As String
+            Default Public ReadOnly Property Item(Param As String) As String
                 Get
                     Return (Parameters(Param))
                 End Get
             End Property
 
-            Public Sub New(ByVal Args As String())
+            Public Sub New(Args As String())
                 Parameters = New StringDictionary()
                 Dim Spliter As New Regex("^-{1,2}|^/|=|:", RegexOptions.IgnoreCase Or RegexOptions.Compiled)
                 Dim Remover As New Regex("^['""]?(.*?)['""]?$", RegexOptions.IgnoreCase Or RegexOptions.Compiled)
@@ -407,9 +452,12 @@ Namespace Tools
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new Args failed" & vbNewLine & ex.Message, True)
+                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Creating new Args failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
         End Class
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

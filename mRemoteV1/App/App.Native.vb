@@ -1,95 +1,99 @@
 ﻿Imports System.Runtime.InteropServices
 
 Namespace App
-    Public Class Native
+    Public Class NativeMethods
         Private Sub New()
             ' Fix Warning 292 CA1053 : Microsoft.Design : Because type 'Native' contains only 'static' ('Shared' in Visual Basic) members, add a default private constructor to prevent the compiler from adding a default public constructor.
         End Sub
 
 #Region "Functions"
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Unicode)>
         Public Shared Function AppendMenu(ByVal hMenu As IntPtr, ByVal uFlags As Int32, ByVal uIDNewItem As IntPtr, ByVal lpNewItem As String) As Boolean
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+        <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
         Public Shared Function CreatePopupMenu() As IntPtr
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Unicode)>
         Public Shared Function FindWindowEx(ByVal parentHandle As IntPtr, ByVal childAfter As IntPtr, ByVal lclassName As String, ByVal windowTitle As String) As IntPtr
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+        <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
         Public Shared Function GetForegroundWindow() As IntPtr
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-        Public Shared Function GetSystemMenu(ByVal hWnd As IntPtr, ByVal bRevert As Boolean) As IntPtr
+        <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+        Public Shared Function GetSystemMenu(hWnd As IntPtr, bRevert As Boolean) As IntPtr
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Unicode)>
         Public Shared Function InsertMenu(ByVal hMenu As IntPtr, ByVal uPosition As Integer, ByVal uFlags As Integer, ByVal uIDNewItem As IntPtr, ByVal lpNewItem As String) As Boolean
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-        Public Shared Function IsIconic(ByVal hWnd As IntPtr) As Integer
+        <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+        Public Shared Function IsIconic(hWnd As IntPtr) As Integer
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
         Public Shared Function MoveWindow(ByVal hWnd As IntPtr, ByVal x As Integer, ByVal y As Integer, ByVal cx As Integer, ByVal cy As Integer, ByVal repaint As Boolean) As Boolean
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
         Public Shared Function PostMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As Integer, ByVal lParam As Integer) As Boolean
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
         Public Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal msg As Integer, ByVal wparam As Integer, ByVal lparam As Integer) As Integer
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-        Public Shared Function SetClipboardViewer(ByVal hWndNewViewer As IntPtr) As IntPtr
+        <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+        Public Shared Function SetClipboardViewer(hWndNewViewer As IntPtr) As IntPtr
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-        Public Shared Function SetForegroundWindow(ByVal hWnd As IntPtr) As Boolean
+        <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+        Public Shared Function SetForegroundWindow(hWnd As IntPtr) As Boolean
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
+        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)>
         Public Shared Function SetMenuItemBitmaps(ByVal hMenu As IntPtr, ByVal uPosition As Integer, ByVal uFlags As Integer, ByVal hBitmapUnchecked As IntPtr, ByVal hBitmapChecked As IntPtr) As Boolean
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-        Public Shared Function SetParent(ByVal hWndChild As IntPtr, ByVal hWndNewParent As IntPtr) As Long
+        <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+        Public Shared Function SetParent(hWndChild As IntPtr, hWndNewParent As IntPtr) As Long
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-        Public Shared Function SetWindowLong(ByVal hWnd As IntPtr, ByVal nIndex As Integer, ByVal dwNewLong As Long) As Integer
+        <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+        Public Shared Function SetWindowLong(hWnd As IntPtr, nIndex As Integer, dwNewLong As Long) As Integer
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-        Public Shared Function ShowWindow(ByVal hWnd As IntPtr, ByVal nCmdShow As Integer) As Integer
+        <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+        Public Shared Function ShowWindow(hWnd As IntPtr, nCmdShow As Integer) As Integer
         End Function
 
-        <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-        Public Shared Function WindowFromPoint(ByVal point As Point) As IntPtr
+        <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+        Public Shared Function WindowFromPoint(point As Point) As IntPtr
         End Function
+
 #End Region
 
 #Region "Structures"
-        <StructLayout(LayoutKind.Sequential)> _
+
+        <StructLayout(LayoutKind.Sequential)>
         Public Structure WINDOWPOS
-            Public hwnd As IntPtr
-            Public hwndInsertAfter As IntPtr
+            Private ReadOnly hwnd As IntPtr
+            Private ReadOnly hwndInsertAfter As IntPtr
             Public x As Integer
             Public y As Integer
             Public cx As Integer
             Public cy As Integer
             Public flags As Integer
         End Structure
+
 #End Region
 
 #Region "Helpers"
+
         Public Shared Function MAKELONG(ByRef wLow As Int32, ByRef wHigh As Int32) As Int32
             Return wLow Or wHigh << 16
         End Function
@@ -118,7 +122,7 @@ Namespace App
 
 #Region "Constants"
         ' GetWindowLong
-        Public Const GWL_STYLE As Integer = (-16)
+        Public Const GWL_STYLE As Integer = (- 16)
 
         ' AppendMenu / ModifyMenu / DeleteMenu / RemoveMenu
         Public Const MF_BYCOMMAND As Integer = &H0
@@ -194,6 +198,7 @@ Namespace App
         ' Virtual Key Codes
         Public Const VK_CONTROL As Integer = &H11
         Public Const VK_C As Integer = &H67
+
 #End Region
     End Class
 End Namespace

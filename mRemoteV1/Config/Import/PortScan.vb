@@ -1,54 +1,58 @@
-﻿Imports mRemoteNG.App.Runtime
+﻿Imports mRemote3G.App
+Imports mRemote3G.Connection
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Tools.PortScan
+Imports mRemote3G.Tree
 
 Namespace Config.Import
     Public Class PortScan
-        Public Shared Sub Import(ByVal hosts As IEnumerable, ByVal protocol As Connection.Protocol.Protocols, ByVal parentTreeNode As TreeNode)
-            For Each host As Tools.PortScan.ScanHost In hosts
-                Dim finalProtocol As Connection.Protocol.Protocols
-                Dim protocolValid As Boolean = False
+        Public Shared Sub Import(hosts As IEnumerable, protocol As Protocols, parentTreeNode As TreeNode)
+            For Each host As ScanHost In hosts
+                Dim finalProtocol As Protocols
+                Dim protocolValid = False
 
-                Dim treeNode As TreeNode = Tree.Node.AddNode(Tree.Node.Type.Connection, host.HostNameWithoutDomain)
+                Dim treeNode As TreeNode = Node.AddNode(Node.Type.Connection, host.HostNameWithoutDomain)
 
-                Dim connectionInfo As New Connection.Info()
-                connectionInfo.Inherit = New Connection.Info.Inheritance(connectionInfo)
+                Dim connectionInfo As New Info()
+                connectionInfo.Inherit = New Info.Inheritance(connectionInfo)
 
                 connectionInfo.Name = host.HostNameWithoutDomain
                 connectionInfo.Hostname = host.HostName
 
                 Select Case protocol
-                    Case Connection.Protocol.Protocols.SSH2
+                    Case Protocols.SSH2
                         If host.SSH Then
-                            finalProtocol = Connection.Protocol.Protocols.SSH2
+                            finalProtocol = Protocols.SSH2
                             protocolValid = True
                         End If
-                    Case Connection.Protocol.Protocols.Telnet
+                    Case Protocols.Telnet
                         If host.Telnet Then
-                            finalProtocol = Connection.Protocol.Protocols.Telnet
+                            finalProtocol = Protocols.Telnet
                             protocolValid = True
                         End If
-                    Case Connection.Protocol.Protocols.HTTP
+                    Case Protocols.HTTP
                         If host.HTTP Then
-                            finalProtocol = Connection.Protocol.Protocols.HTTP
+                            finalProtocol = Protocols.HTTP
                             protocolValid = True
                         End If
-                    Case Connection.Protocol.Protocols.HTTPS
+                    Case Protocols.HTTPS
                         If host.HTTPS Then
-                            finalProtocol = Connection.Protocol.Protocols.HTTPS
+                            finalProtocol = Protocols.HTTPS
                             protocolValid = True
                         End If
-                    Case Connection.Protocol.Protocols.Rlogin
+                    Case Protocols.Rlogin
                         If host.Rlogin Then
-                            finalProtocol = Connection.Protocol.Protocols.Rlogin
+                            finalProtocol = Protocols.Rlogin
                             protocolValid = True
                         End If
-                    Case Connection.Protocol.Protocols.RDP
+                    Case Protocols.RDP
                         If host.RDP Then
-                            finalProtocol = Connection.Protocol.Protocols.RDP
+                            finalProtocol = Protocols.RDP
                             protocolValid = True
                         End If
-                    Case Connection.Protocol.Protocols.VNC
+                    Case Protocols.VNC
                         If host.VNC Then
-                            finalProtocol = Connection.Protocol.Protocols.VNC
+                            finalProtocol = Protocols.VNC
                             protocolValid = True
                         End If
                 End Select
@@ -64,9 +68,12 @@ Namespace Config.Import
                         connectionInfo.Parent = parentTreeNode.Tag
                     End If
 
-                    ConnectionList.Add(connectionInfo)
+                    Runtime.ConnectionList.Add(connectionInfo)
                 End If
             Next
+        End Sub
+
+        Private Sub New()
         End Sub
     End Class
 End Namespace

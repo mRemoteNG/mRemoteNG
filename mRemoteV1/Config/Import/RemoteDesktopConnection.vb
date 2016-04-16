@@ -1,17 +1,20 @@
 ﻿Imports System.IO
-Imports mRemoteNG.App.Runtime
+Imports mRemote3G.App
+Imports mRemote3G.Connection
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Images
 
 Namespace Config.Import
     Public Class RemoteDesktopConnection
-        Public Shared Sub Import(ByVal fileName As String, ByVal parentTreeNode As TreeNode)
+        Public Shared Sub Import(fileName As String, parentTreeNode As TreeNode)
             Dim lines As String() = File.ReadAllLines(fileName)
 
             Dim name As String = Path.GetFileNameWithoutExtension(fileName)
-            Dim treeNode As TreeNode = New TreeNode(name)
+            Dim treeNode = New TreeNode(name)
             parentTreeNode.Nodes.Add(treeNode)
 
-            Dim connectionInfo As New Connection.Info
-            connectionInfo.Inherit = New Connection.Info.Inheritance(connectionInfo)
+            Dim connectionInfo As New Info
+            connectionInfo.Inherit = New Info.Inheritance(connectionInfo)
             connectionInfo.Name = name
             connectionInfo.TreeNode = treeNode
 
@@ -21,8 +24,8 @@ Namespace Config.Import
 
             treeNode.Name = name
             treeNode.Tag = connectionInfo
-            treeNode.ImageIndex = Images.Enums.TreeImage.ConnectionClosed
-            treeNode.SelectedImageIndex = Images.Enums.TreeImage.ConnectionClosed
+            treeNode.ImageIndex = Enums.TreeImage.ConnectionClosed
+            treeNode.SelectedImageIndex = Enums.TreeImage.ConnectionClosed
 
             For Each line As String In lines
                 Dim parts() As String = line.Split(New Char() {":"}, 3)
@@ -34,15 +37,15 @@ Namespace Config.Import
                 SetConnectionInfoParameter(connectionInfo, key, value)
             Next
 
-            ConnectionList.Add(connectionInfo)
+            Runtime.ConnectionList.Add(connectionInfo)
         End Sub
 
-        Private Shared Sub SetConnectionInfoParameter(ByRef connectionInfo As Connection.Info, ByVal key As String, ByVal value As String)
+        Private Shared Sub SetConnectionInfoParameter(ByRef connectionInfo As Info, key As String, value As String)
             Select Case LCase(key)
                 Case "full address"
                     Dim uri As New Uri("dummyscheme" + uri.SchemeDelimiter + value)
                     If Not String.IsNullOrEmpty(uri.Host) Then connectionInfo.Hostname = uri.Host
-                    If Not uri.Port = -1 Then connectionInfo.Port = uri.Port
+                    If Not uri.Port = - 1 Then connectionInfo.Port = uri.Port
                 Case "server port"
                     connectionInfo.Port = value
                 Case "username"
@@ -52,15 +55,15 @@ Namespace Config.Import
                 Case "session bpp"
                     Select Case value
                         Case 8
-                            connectionInfo.Colors = Connection.Protocol.RDP.RDPColors.Colors256
+                            connectionInfo.Colors = RDP.RDPColors.Colors256
                         Case 15
-                            connectionInfo.Colors = Connection.Protocol.RDP.RDPColors.Colors15Bit
+                            connectionInfo.Colors = RDP.RDPColors.Colors15Bit
                         Case 16
-                            connectionInfo.Colors = Connection.Protocol.RDP.RDPColors.Colors16Bit
+                            connectionInfo.Colors = RDP.RDPColors.Colors16Bit
                         Case 24
-                            connectionInfo.Colors = Connection.Protocol.RDP.RDPColors.Colors24Bit
+                            connectionInfo.Colors = RDP.RDPColors.Colors24Bit
                         Case 32
-                            connectionInfo.Colors = Connection.Protocol.RDP.RDPColors.Colors32Bit
+                            connectionInfo.Colors = RDP.RDPColors.Colors32Bit
                     End Select
                 Case "bitmapcachepersistenable"
                     If value = 1 Then
@@ -70,9 +73,9 @@ Namespace Config.Import
                     End If
                 Case "screen mode id"
                     If value = 2 Then
-                        connectionInfo.Resolution = Connection.Protocol.RDP.RDPResolutions.Fullscreen
+                        connectionInfo.Resolution = RDP.RDPResolutions.Fullscreen
                     Else
-                        connectionInfo.Resolution = Connection.Protocol.RDP.RDPResolutions.FitToWindow
+                        connectionInfo.Resolution = RDP.RDPResolutions.FitToWindow
                     End If
                 Case "connect to console"
                     If value = 1 Then
@@ -129,13 +132,16 @@ Namespace Config.Import
                 Case "audiomode"
                     Select Case value
                         Case 0
-                            connectionInfo.RedirectSound = Connection.Protocol.RDP.RDPSounds.BringToThisComputer
+                            connectionInfo.RedirectSound = RDP.RDPSounds.BringToThisComputer
                         Case 1
-                            connectionInfo.RedirectSound = Connection.Protocol.RDP.RDPSounds.LeaveAtRemoteComputer
+                            connectionInfo.RedirectSound = RDP.RDPSounds.LeaveAtRemoteComputer
                         Case 2
-                            connectionInfo.RedirectSound = Connection.Protocol.RDP.RDPSounds.DoNotPlay
+                            connectionInfo.RedirectSound = RDP.RDPSounds.DoNotPlay
                     End Select
             End Select
+        End Sub
+
+        Private Sub New()
         End Sub
     End Class
 End Namespace

@@ -1,174 +1,190 @@
+Imports System.ComponentModel
 Imports System.IO
-Imports mRemoteNG.Messages
-Imports mRemoteNG.My
-Imports mRemoteNG.Connection.Protocol
-Imports mRemoteNG.Root
-Imports WeifenLuo.WinFormsUI.Docking
 Imports System.Net.NetworkInformation
-Imports mRemoteNG.App.Runtime
+Imports System.Threading
+Imports Azuria.Common.Controls
+Imports mRemote3G.App
+Imports mRemote3G.Connection
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Connection.PuttySession
+Imports mRemote3G.Messages
+Imports mRemote3G.My
+Imports mRemote3G.My.Resources
+Imports mRemote3G.Themes
+Imports mRemote3G.Tools
+Imports WeifenLuo.WinFormsUI.Docking
 
 Namespace UI
+
     Namespace Window
         Public Class Config
-            Inherits UI.Window.Base
-
+            Inherits Base
 
 #Region "Form Init"
-            Friend WithEvents btnShowProperties As System.Windows.Forms.ToolStripButton
-            Friend WithEvents btnShowDefaultProperties As System.Windows.Forms.ToolStripButton
-            Friend WithEvents btnShowInheritance As System.Windows.Forms.ToolStripButton
-            Friend WithEvents btnShowDefaultInheritance As System.Windows.Forms.ToolStripButton
-            Friend WithEvents btnIcon As System.Windows.Forms.ToolStripButton
-            Friend WithEvents btnHostStatus As System.Windows.Forms.ToolStripButton
-            Friend WithEvents cMenIcons As System.Windows.Forms.ContextMenuStrip
-            Private components As System.ComponentModel.IContainer
-            Friend WithEvents propertyGridContextMenu As System.Windows.Forms.ContextMenuStrip
-            Friend WithEvents propertyGridContextMenuShowHelpText As System.Windows.Forms.ToolStripMenuItem
-            Friend WithEvents propertyGridContextMenuReset As System.Windows.Forms.ToolStripMenuItem
-            Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-            Friend WithEvents pGrid As Azuria.Common.Controls.FilteredPropertyGrid
+
+            Friend WithEvents btnShowProperties As ToolStripButton
+            Friend WithEvents btnShowDefaultProperties As ToolStripButton
+            Friend WithEvents btnShowInheritance As ToolStripButton
+            Friend WithEvents btnShowDefaultInheritance As ToolStripButton
+            Friend WithEvents btnIcon As ToolStripButton
+            Friend WithEvents btnHostStatus As ToolStripButton
+            Friend WithEvents cMenIcons As ContextMenuStrip
+            Private components As IContainer
+            Friend WithEvents propertyGridContextMenu As ContextMenuStrip
+            Friend WithEvents propertyGridContextMenuShowHelpText As ToolStripMenuItem
+            Friend WithEvents propertyGridContextMenuReset As ToolStripMenuItem
+            Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
+            Friend WithEvents pGrid As FilteredPropertyGrid
+
             Private Sub InitializeComponent()
                 Me.components = New System.ComponentModel.Container()
-                Me.pGrid = New Azuria.Common.Controls.FilteredPropertyGrid()
-                Me.propertyGridContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-                Me.propertyGridContextMenuReset = New System.Windows.Forms.ToolStripMenuItem()
-                Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
-                Me.propertyGridContextMenuShowHelpText = New System.Windows.Forms.ToolStripMenuItem()
-                Me.btnShowInheritance = New System.Windows.Forms.ToolStripButton()
-                Me.btnShowDefaultInheritance = New System.Windows.Forms.ToolStripButton()
-                Me.btnShowProperties = New System.Windows.Forms.ToolStripButton()
-                Me.btnShowDefaultProperties = New System.Windows.Forms.ToolStripButton()
-                Me.btnIcon = New System.Windows.Forms.ToolStripButton()
-                Me.btnHostStatus = New System.Windows.Forms.ToolStripButton()
-                Me.cMenIcons = New System.Windows.Forms.ContextMenuStrip(Me.components)
+                Me.pGrid = New FilteredPropertyGrid()
+                Me.propertyGridContextMenu = New ContextMenuStrip(Me.components)
+                Me.propertyGridContextMenuReset = New ToolStripMenuItem()
+                Me.ToolStripSeparator1 = New ToolStripSeparator()
+                Me.propertyGridContextMenuShowHelpText = New ToolStripMenuItem()
+                Me.btnShowInheritance = New ToolStripButton()
+                Me.btnShowDefaultInheritance = New ToolStripButton()
+                Me.btnShowProperties = New ToolStripButton()
+                Me.btnShowDefaultProperties = New ToolStripButton()
+                Me.btnIcon = New ToolStripButton()
+                Me.btnHostStatus = New ToolStripButton()
+                Me.cMenIcons = New ContextMenuStrip(Me.components)
                 Me.propertyGridContextMenu.SuspendLayout()
                 Me.SuspendLayout()
                 '
                 'pGrid
                 '
-                Me.pGrid.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-                    Or System.Windows.Forms.AnchorStyles.Left) _
-                    Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+                Me.pGrid.Anchor = CType((((AnchorStyles.Top Or AnchorStyles.Bottom) _
+                                          Or AnchorStyles.Left) _
+                                         Or AnchorStyles.Right),
+                                        AnchorStyles)
                 Me.pGrid.BrowsableProperties = Nothing
                 Me.pGrid.ContextMenuStrip = Me.propertyGridContextMenu
-                Me.pGrid.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.pGrid.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Regular, GraphicsUnit.Point,
+                                         CType(0, Byte))
                 Me.pGrid.HiddenAttributes = Nothing
                 Me.pGrid.HiddenProperties = Nothing
-                Me.pGrid.Location = New System.Drawing.Point(0, 0)
+                Me.pGrid.Location = New Point(0, 0)
                 Me.pGrid.Name = "pGrid"
-                Me.pGrid.PropertySort = System.Windows.Forms.PropertySort.Categorized
-                Me.pGrid.Size = New System.Drawing.Size(226, 530)
+                Me.pGrid.PropertySort = PropertySort.Categorized
+                Me.pGrid.Size = New Size(226, 530)
                 Me.pGrid.TabIndex = 0
                 Me.pGrid.UseCompatibleTextRendering = True
                 '
                 'propertyGridContextMenu
                 '
-                Me.propertyGridContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.propertyGridContextMenuReset, Me.ToolStripSeparator1, Me.propertyGridContextMenuShowHelpText})
+                Me.propertyGridContextMenu.Items.AddRange(New ToolStripItem() _
+                                                             {Me.propertyGridContextMenuReset, Me.ToolStripSeparator1,
+                                                              Me.propertyGridContextMenuShowHelpText})
                 Me.propertyGridContextMenu.Name = "propertyGridContextMenu"
-                Me.propertyGridContextMenu.Size = New System.Drawing.Size(157, 76)
+                Me.propertyGridContextMenu.Size = New Size(157, 76)
                 '
                 'propertyGridContextMenuReset
                 '
                 Me.propertyGridContextMenuReset.Name = "propertyGridContextMenuReset"
-                Me.propertyGridContextMenuReset.Size = New System.Drawing.Size(156, 22)
+                Me.propertyGridContextMenuReset.Size = New Size(156, 22)
                 Me.propertyGridContextMenuReset.Text = "&Reset"
                 '
                 'ToolStripSeparator1
                 '
                 Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-                Me.ToolStripSeparator1.Size = New System.Drawing.Size(153, 6)
+                Me.ToolStripSeparator1.Size = New Size(153, 6)
                 '
                 'propertyGridContextMenuShowHelpText
                 '
                 Me.propertyGridContextMenuShowHelpText.Name = "propertyGridContextMenuShowHelpText"
-                Me.propertyGridContextMenuShowHelpText.Size = New System.Drawing.Size(156, 22)
+                Me.propertyGridContextMenuShowHelpText.Size = New Size(156, 22)
                 Me.propertyGridContextMenuShowHelpText.Text = "&Show Help Text"
                 '
                 'btnShowInheritance
                 '
-                Me.btnShowInheritance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.btnShowInheritance.Image = Global.mRemoteNG.My.Resources.Resources.Inheritance
-                Me.btnShowInheritance.ImageTransparentColor = System.Drawing.Color.Magenta
+                Me.btnShowInheritance.DisplayStyle = ToolStripItemDisplayStyle.Image
+                Me.btnShowInheritance.Image = Inheritance
+                Me.btnShowInheritance.ImageTransparentColor = Color.Magenta
                 Me.btnShowInheritance.Name = "btnShowInheritance"
-                Me.btnShowInheritance.Size = New System.Drawing.Size(23, 22)
+                Me.btnShowInheritance.Size = New Size(23, 22)
                 Me.btnShowInheritance.Text = "Inheritance"
                 '
                 'btnShowDefaultInheritance
                 '
-                Me.btnShowDefaultInheritance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.btnShowDefaultInheritance.Image = Global.mRemoteNG.My.Resources.Resources.Inheritance_Default
-                Me.btnShowDefaultInheritance.ImageTransparentColor = System.Drawing.Color.Magenta
+                Me.btnShowDefaultInheritance.DisplayStyle = ToolStripItemDisplayStyle.Image
+                Me.btnShowDefaultInheritance.Image = Inheritance_Default
+                Me.btnShowDefaultInheritance.ImageTransparentColor = Color.Magenta
                 Me.btnShowDefaultInheritance.Name = "btnShowDefaultInheritance"
-                Me.btnShowDefaultInheritance.Size = New System.Drawing.Size(23, 22)
+                Me.btnShowDefaultInheritance.Size = New Size(23, 22)
                 Me.btnShowDefaultInheritance.Text = "Default Inheritance"
                 '
                 'btnShowProperties
                 '
                 Me.btnShowProperties.Checked = True
-                Me.btnShowProperties.CheckState = System.Windows.Forms.CheckState.Checked
-                Me.btnShowProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.btnShowProperties.Image = Global.mRemoteNG.My.Resources.Resources.Properties
-                Me.btnShowProperties.ImageTransparentColor = System.Drawing.Color.Magenta
+                Me.btnShowProperties.CheckState = CheckState.Checked
+                Me.btnShowProperties.DisplayStyle = ToolStripItemDisplayStyle.Image
+                Me.btnShowProperties.Image = Properties
+                Me.btnShowProperties.ImageTransparentColor = Color.Magenta
                 Me.btnShowProperties.Name = "btnShowProperties"
-                Me.btnShowProperties.Size = New System.Drawing.Size(23, 22)
+                Me.btnShowProperties.Size = New Size(23, 22)
                 Me.btnShowProperties.Text = "Properties"
                 '
                 'btnShowDefaultProperties
                 '
-                Me.btnShowDefaultProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.btnShowDefaultProperties.Image = Global.mRemoteNG.My.Resources.Resources.Properties_Default
-                Me.btnShowDefaultProperties.ImageTransparentColor = System.Drawing.Color.Magenta
+                Me.btnShowDefaultProperties.DisplayStyle = ToolStripItemDisplayStyle.Image
+                Me.btnShowDefaultProperties.Image = Properties_Default
+                Me.btnShowDefaultProperties.ImageTransparentColor = Color.Magenta
                 Me.btnShowDefaultProperties.Name = "btnShowDefaultProperties"
-                Me.btnShowDefaultProperties.Size = New System.Drawing.Size(23, 22)
+                Me.btnShowDefaultProperties.Size = New Size(23, 22)
                 Me.btnShowDefaultProperties.Text = "Default Properties"
                 '
                 'btnIcon
                 '
-                Me.btnIcon.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-                Me.btnIcon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.btnIcon.ImageTransparentColor = System.Drawing.Color.Magenta
+                Me.btnIcon.Alignment = ToolStripItemAlignment.Right
+                Me.btnIcon.DisplayStyle = ToolStripItemDisplayStyle.Image
+                Me.btnIcon.ImageTransparentColor = Color.Magenta
                 Me.btnIcon.Name = "btnIcon"
-                Me.btnIcon.Size = New System.Drawing.Size(23, 22)
+                Me.btnIcon.Size = New Size(23, 22)
                 Me.btnIcon.Text = "Icon"
                 '
                 'btnHostStatus
                 '
-                Me.btnHostStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right
-                Me.btnHostStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-                Me.btnHostStatus.Image = Global.mRemoteNG.My.Resources.Resources.HostStatus_Check
-                Me.btnHostStatus.ImageTransparentColor = System.Drawing.Color.Magenta
+                Me.btnHostStatus.Alignment = ToolStripItemAlignment.Right
+                Me.btnHostStatus.DisplayStyle = ToolStripItemDisplayStyle.Image
+                Me.btnHostStatus.Image = HostStatus_Check
+                Me.btnHostStatus.ImageTransparentColor = Color.Magenta
                 Me.btnHostStatus.Name = "btnHostStatus"
-                Me.btnHostStatus.Size = New System.Drawing.Size(23, 22)
+                Me.btnHostStatus.Size = New Size(23, 22)
                 Me.btnHostStatus.Tag = "checking"
                 Me.btnHostStatus.Text = "Status"
                 '
                 'cMenIcons
                 '
                 Me.cMenIcons.Name = "cMenIcons"
-                Me.cMenIcons.Size = New System.Drawing.Size(61, 4)
+                Me.cMenIcons.Size = New Size(61, 4)
                 '
                 'Config
                 '
-                Me.ClientSize = New System.Drawing.Size(226, 530)
+                Me.ClientSize = New Size(226, 530)
                 Me.Controls.Add(Me.pGrid)
-                Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+                Me.Font = New Font("Microsoft Sans Serif", 8.25!, FontStyle.Regular, GraphicsUnit.Point, CType(0, Byte))
                 Me.HideOnClose = True
-                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Config_Icon
+                Me.Icon = Config_Icon
                 Me.Name = "Config"
                 Me.TabText = "Config"
                 Me.Text = "Config"
                 Me.propertyGridContextMenu.ResumeLayout(False)
                 Me.ResumeLayout(False)
-
             End Sub
+
 #End Region
 
 #Region "Private Properties"
+
             Private ConfigLoading As Boolean = False
+
 #End Region
 
 #Region "Public Properties"
-            Public Property PropertiesVisible() As Boolean
+
+            Public Property PropertiesVisible As Boolean
                 Get
                     If Me.btnShowProperties.Checked Then
                         Return True
@@ -176,7 +192,7 @@ Namespace UI
                         Return False
                     End If
                 End Get
-                Set(ByVal value As Boolean)
+                Set
                     Me.btnShowProperties.Checked = value
 
                     If value = True Then
@@ -187,7 +203,7 @@ Namespace UI
                 End Set
             End Property
 
-            Public Property InheritanceVisible() As Boolean
+            Public Property InheritanceVisible As Boolean
                 Get
                     If Me.btnShowInheritance.Checked Then
                         Return True
@@ -195,7 +211,7 @@ Namespace UI
                         Return False
                     End If
                 End Get
-                Set(ByVal value As Boolean)
+                Set
                     Me.btnShowInheritance.Checked = value
 
                     If value = True Then
@@ -206,7 +222,7 @@ Namespace UI
                 End Set
             End Property
 
-            Public Property DefaultPropertiesVisible() As Boolean
+            Public Property DefaultPropertiesVisible As Boolean
                 Get
                     If Me.btnShowDefaultProperties.Checked Then
                         Return True
@@ -214,7 +230,7 @@ Namespace UI
                         Return False
                     End If
                 End Get
-                Set(ByVal value As Boolean)
+                Set
                     Me.btnShowDefaultProperties.Checked = value
 
                     If value = True Then
@@ -225,7 +241,7 @@ Namespace UI
                 End Set
             End Property
 
-            Public Property DefaultInheritanceVisible() As Boolean
+            Public Property DefaultInheritanceVisible As Boolean
                 Get
                     If Me.btnShowDefaultInheritance.Checked Then
                         Return True
@@ -233,7 +249,7 @@ Namespace UI
                         Return False
                     End If
                 End Get
-                Set(ByVal value As Boolean)
+                Set
                     Me.btnShowDefaultInheritance.Checked = value
 
                     If value = True Then
@@ -243,10 +259,12 @@ Namespace UI
                     End If
                 End Set
             End Property
+
 #End Region
 
 #Region "Public Methods"
-            Public Sub New(ByVal Panel As DockContent)
+
+            Public Sub New(Panel As DockContent)
                 Me.WindowType = Type.Config
                 Me.DockPnl = Panel
                 Me.InitializeComponent()
@@ -254,7 +272,8 @@ Namespace UI
 
             ' Main form handle command key events
             ' Adapted from http://kiwigis.blogspot.com/2009/05/adding-tab-key-support-to-propertygrid.html
-            Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, ByVal keyData As System.Windows.Forms.Keys) As Boolean
+            Protected Overrides Function ProcessCmdKey(ByRef msg As System.Windows.Forms.Message, keyData As Keys) _
+                As Boolean
                 If (keyData And Keys.KeyCode) = Keys.Tab Then
                     Dim selectedItem As GridItem = pGrid.SelectedGridItem
                     Dim gridRoot As GridItem = selectedItem
@@ -300,7 +319,8 @@ Namespace UI
                 Return False
             End Function
 
-            Private Function FindPreviousGridItemProperty(gridItems As List(Of GridItem), startItem As GridItem) As GridItem
+            Private Function FindPreviousGridItemProperty(gridItems As List(Of GridItem), startItem As GridItem) _
+                As GridItem
                 If gridItems.Count = 0 Then Return Nothing
                 If startItem Is Nothing Then Return Nothing
 
@@ -311,9 +331,9 @@ Namespace UI
                     If startIndex < 0 Then startIndex = gridItems.Count - 1
                 End If
 
-                Dim previousIndex As Integer = 0
-                Dim previousIndexValid As Boolean = False
-                For index As Integer = startIndex To 0 Step -1
+                Dim previousIndex = 0
+                Dim previousIndexValid = False
+                For index As Integer = startIndex To 0 Step - 1
                     If gridItems(index).GridItemType = GridItemType.Property Then
                         previousIndex = index
                         previousIndexValid = True
@@ -323,7 +343,7 @@ Namespace UI
 
                 If previousIndexValid Then Return gridItems(previousIndex)
 
-                For index As Integer = gridItems.Count - 1 To startIndex + 1 Step -1
+                For index As Integer = gridItems.Count - 1 To startIndex + 1 Step - 1
                     If gridItems(index).GridItemType = GridItemType.Property Then
                         previousIndex = index
                         previousIndexValid = True
@@ -347,8 +367,8 @@ Namespace UI
                     If startIndex >= gridItems.Count Then startIndex = 0
                 End If
 
-                Dim nextIndex As Integer = 0
-                Dim nextIndexValid As Boolean = False
+                Dim nextIndex = 0
+                Dim nextIndexValid = False
                 For index As Integer = startIndex To gridItems.Count - 1
                     If gridItems(index).GridItemType = GridItemType.Property Then
                         nextIndex = index
@@ -359,7 +379,7 @@ Namespace UI
 
                 If nextIndexValid Then Return gridItems(nextIndex)
 
-                For index As Integer = 0 To startIndex - 1
+                For index = 0 To startIndex - 1
                     If gridItems(index).GridItemType = GridItemType.Property Then
                         nextIndex = index
                         nextIndexValid = True
@@ -372,7 +392,7 @@ Namespace UI
                 Return gridItems(nextIndex)
             End Function
 
-            Public Sub SetPropertyGridObject(ByVal Obj As Object)
+            Public Sub SetPropertyGridObject(Obj As Object)
                 Try
                     Me.btnShowProperties.Enabled = False
                     Me.btnShowInheritance.Enabled = False
@@ -383,13 +403,13 @@ Namespace UI
 
                     Me.btnIcon.Image = Nothing
 
-                    If TypeOf Obj Is mRemoteNG.Connection.Info Then 'CONNECTION INFO
-                        If TryCast(Obj, mRemoteNG.Connection.Info).IsContainer = False Then 'NO CONTAINER
+                    If TypeOf Obj Is Info Then 'CONNECTION INFO
+                        If TryCast(Obj, Info).IsContainer = False Then 'NO CONTAINER
                             If Me.PropertiesVisible Then 'Properties selected
                                 Me.pGrid.SelectedObject = Obj
 
                                 Me.btnShowProperties.Enabled = True
-                                If TryCast(Obj, mRemoteNG.Connection.Info).Parent IsNot Nothing Then
+                                If TryCast(Obj, Info).Parent IsNot Nothing Then
                                     Me.btnShowInheritance.Enabled = True
                                 Else
                                     Me.btnShowInheritance.Enabled = False
@@ -401,7 +421,7 @@ Namespace UI
                             ElseIf Me.DefaultPropertiesVisible Then 'Defaults selected
                                 Me.pGrid.SelectedObject = Obj
 
-                                If TryCast(Obj, mRemoteNG.Connection.Info).IsDefault Then 'Is the default connection
+                                If TryCast(Obj, Info).IsDefault Then 'Is the default connection
                                     Me.btnShowProperties.Enabled = True
                                     Me.btnShowInheritance.Enabled = False
                                     Me.btnShowDefaultProperties.Enabled = True
@@ -419,7 +439,7 @@ Namespace UI
                                     Me.PropertiesVisible = True
                                 End If
                             ElseIf Me.InheritanceVisible Then 'Inheritance selected
-                                Me.pGrid.SelectedObject = TryCast(Obj, mRemoteNG.Connection.Info).Inherit
+                                Me.pGrid.SelectedObject = TryCast(Obj, Info).Inherit
 
                                 Me.btnShowProperties.Enabled = True
                                 Me.btnShowInheritance.Enabled = True
@@ -439,11 +459,11 @@ Namespace UI
 
                                 Me.PropertiesVisible = True
                             End If
-                        ElseIf TryCast(Obj, mRemoteNG.Connection.Info).IsContainer Then 'CONTAINER
+                        ElseIf TryCast(Obj, Info).IsContainer Then 'CONTAINER
                             Me.pGrid.SelectedObject = Obj
 
                             Me.btnShowProperties.Enabled = True
-                            If TryCast(TryCast(Obj, mRemoteNG.Connection.Info).Parent, mRemoteNG.Container.Info).Parent IsNot Nothing Then
+                            If TryCast(TryCast(Obj, Info).Parent, Container.Info).Parent IsNot Nothing Then
                                 Me.btnShowInheritance.Enabled = True
                             Else
                                 Me.btnShowInheritance.Enabled = False
@@ -456,12 +476,13 @@ Namespace UI
                             Me.PropertiesVisible = True
                         End If
 
-                        Dim conIcon As Icon = mRemoteNG.Connection.Icon.FromString(TryCast(Obj, mRemoteNG.Connection.Info).Icon)
+                        Dim conIcon As Drawing.Icon =
+                                Global.mRemote3G.Connection.Icon.FromString(TryCast(Obj, Info).Icon)
                         If conIcon IsNot Nothing Then
                             Me.btnIcon.Image = conIcon.ToBitmap
                         End If
                     ElseIf TypeOf Obj Is Root.Info Then 'ROOT
-                        Dim rootInfo As Root.Info = CType(Obj, Root.Info)
+                        Dim rootInfo = CType(Obj, Root.Info)
                         Select Case rootInfo.Type
                             Case Root.Info.RootType.Connection
                                 PropertiesVisible = True
@@ -485,7 +506,7 @@ Namespace UI
                                 btnHostStatus.Enabled = False
                         End Select
                         pGrid.SelectedObject = Obj
-                    ElseIf TypeOf Obj Is mRemoteNG.Connection.Info.Inheritance Then 'INHERITANCE
+                    ElseIf TypeOf Obj Is Info.Inheritance Then 'INHERITANCE
                         Me.pGrid.SelectedObject = Obj
 
                         If Me.InheritanceVisible Then
@@ -495,11 +516,14 @@ Namespace UI
                             Me.btnShowDefaultProperties.Enabled = False
                             Me.btnShowDefaultInheritance.Enabled = False
                             Me.btnIcon.Enabled = True
-                            Me.btnHostStatus.Enabled = Not TryCast(TryCast(Obj, mRemoteNG.Connection.Info.Inheritance).Parent, mRemoteNG.Connection.Info).IsContainer
+                            Me.btnHostStatus.Enabled =
+                                Not TryCast(TryCast(Obj, Info.Inheritance).Parent, Info).IsContainer
 
                             Me.InheritanceVisible = True
 
-                            Dim conIcon As Icon = mRemoteNG.Connection.Icon.FromString(TryCast(TryCast(Obj, mRemoteNG.Connection.Info.Inheritance).Parent, mRemoteNG.Connection.Info).Icon)
+                            Dim conIcon As Drawing.Icon =
+                                    Global.mRemote3G.Connection.Icon.FromString(
+                                        TryCast(TryCast(Obj, Info.Inheritance).Parent, Info).Icon)
                             If conIcon IsNot Nothing Then
                                 Me.btnIcon.Image = conIcon.ToBitmap
                             End If
@@ -519,30 +543,32 @@ Namespace UI
                     Me.ShowHideGridItems()
                     Me.SetHostStatus(Obj)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridObjectFailed & vbNewLine & ex.Message, True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strConfigPropertyGridObjectFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
             Public Sub pGrid_SelectedObjectChanged()
                 Me.ShowHideGridItems()
             End Sub
+
 #End Region
 
 #Region "Private Methods"
+
             Private Sub ApplyLanguage()
-                btnShowInheritance.Text = My.Language.strButtonInheritance
-                btnShowDefaultInheritance.Text = My.Language.strButtonDefaultInheritance
-                btnShowProperties.Text = My.Language.strButtonProperties
-                btnShowDefaultProperties.Text = My.Language.strButtonDefaultProperties
-                btnIcon.Text = My.Language.strButtonIcon
-                btnHostStatus.Text = My.Language.strStatus
-                Text = My.Language.strMenuConfig
-                TabText = My.Language.strMenuConfig
-                propertyGridContextMenuShowHelpText.Text = Language.strMenuShowHelpText
+                btnShowInheritance.Text = Language.Language.strButtonInheritance
+                btnShowDefaultInheritance.Text = Language.Language.strButtonDefaultInheritance
+                btnShowProperties.Text = Language.Language.strButtonProperties
+                btnShowDefaultProperties.Text = Language.Language.strButtonDefaultProperties
+                btnIcon.Text = Language.Language.strButtonIcon
+                btnHostStatus.Text = Language.Language.strStatus
+                Text = Language.Language.strMenuConfig
+                TabText = Language.Language.strMenuConfig
+                propertyGridContextMenuShowHelpText.Text = Language.Language.strMenuShowHelpText
             End Sub
 
             Private Sub ApplyTheme()
-                With Themes.ThemeManager.ActiveTheme
+                With ThemeManager.ActiveTheme
                     pGrid.BackColor = .ToolbarBackgroundColor
                     pGrid.ForeColor = .ToolbarTextColor
                     pGrid.ViewBackColor = .ConfigPanelBackgroundColor
@@ -559,7 +585,7 @@ Namespace UI
 
             Private Sub AddToolStripItems()
                 Try
-                    Dim customToolStrip As ToolStrip = New ToolStrip
+                    Dim customToolStrip = New ToolStrip
                     customToolStrip.Items.Add(btnShowProperties)
                     customToolStrip.Items.Add(btnShowInheritance)
                     customToolStrip.Items.Add(btnShowDefaultProperties)
@@ -571,7 +597,7 @@ Namespace UI
                     Dim propertyGridToolStrip As New ToolStrip
 
                     Dim toolStrip As ToolStrip = Nothing
-                    For Each control As System.Windows.Forms.Control In pGrid.Controls
+                    For Each control As Control In pGrid.Controls
                         toolStrip = TryCast(control, ToolStrip)
 
                         If toolStrip IsNot Nothing Then
@@ -581,7 +607,9 @@ Namespace UI
                     Next
 
                     If toolStrip Is Nothing Then
-                        MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strCouldNotFindToolStripInFilteredPropertyGrid, True)
+                        Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                            Language.Language.
+                                                               strCouldNotFindToolStripInFilteredPropertyGrid, True)
                         Return
                     End If
 
@@ -594,20 +622,23 @@ Namespace UI
                     ' Hide the "Property Pages" button
                     propertyGridToolStrip.Items(_originalPropertyGridToolStripItemCount - 1).Visible = False
 
-                    Dim expectedToolStripItemCount As Integer = _originalPropertyGridToolStripItemCount + customToolStrip.Items.Count
+                    Dim expectedToolStripItemCount As Integer = _originalPropertyGridToolStripItemCount +
+                                                                customToolStrip.Items.Count
                     If propertyGridToolStrip.Items.Count <> expectedToolStripItemCount Then
                         propertyGridToolStrip.AllowMerge = True
                         ToolStripManager.Merge(customToolStrip, propertyGridToolStrip)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strConfigUiLoadFailed & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.Language.strConfigUiLoadFailed & vbNewLine &
+                                                        ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Sub Config_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+            Private Sub Config_Load(sender As Object, e As EventArgs) Handles Me.Load
                 ApplyLanguage()
 
-                AddHandler Themes.ThemeManager.ThemeChanged, AddressOf ApplyTheme
+                AddHandler ThemeManager.ThemeChanged, AddressOf ApplyTheme
                 ApplyTheme()
 
                 AddToolStripItems()
@@ -615,51 +646,54 @@ Namespace UI
                 pGrid.HelpVisible = Settings.ShowConfigHelpText
             End Sub
 
-            Private Sub Config_SystemColorsChanged(sender As System.Object, e As System.EventArgs) Handles MyBase.SystemColorsChanged
+            Private Sub Config_SystemColorsChanged(sender As Object, e As EventArgs) Handles MyBase.SystemColorsChanged
                 AddToolStripItems()
             End Sub
 
-            Private Sub pGrid_PropertyValueChanged(ByVal s As Object, ByVal e As System.Windows.Forms.PropertyValueChangedEventArgs) Handles pGrid.PropertyValueChanged
+            Private Sub pGrid_PropertyValueChanged(s As Object, e As PropertyValueChangedEventArgs) _
+                Handles pGrid.PropertyValueChanged
                 Try
-                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
+                    If TypeOf Me.pGrid.SelectedObject Is Info Then
                         Select Case e.ChangedItem.Label
-                            Case My.Language.strPropertyNameProtocol
-                                TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).SetDefaultPort()
-                            Case My.Language.strPropertyNameName
-                                App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Text = Me.pGrid.SelectedObject.Name
-                                If My.Settings.SetHostnameLikeDisplayName And TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
-                                    Dim connectionInfo As mRemoteNG.Connection.Info = DirectCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info)
+                            Case Language.Language.strPropertyNameProtocol
+                                TryCast(Me.pGrid.SelectedObject, Info).SetDefaultPort()
+                            Case Language.Language.strPropertyNameName
+                                Runtime.Windows.treeForm.tvConnections.SelectedNode.Text = Me.pGrid.SelectedObject.Name
+                                If Settings.SetHostnameLikeDisplayName And TypeOf Me.pGrid.SelectedObject Is Info Then
+                                    Dim connectionInfo = DirectCast(Me.pGrid.SelectedObject, Info)
                                     If Not String.IsNullOrEmpty(connectionInfo.Name) Then
                                         connectionInfo.Hostname = connectionInfo.Name
                                     End If
                                 End If
-                            Case My.Language.strPropertyNameIcon
-                                Dim conIcon As Icon = mRemoteNG.Connection.Icon.FromString(TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).Icon)
+                            Case Language.Language.strPropertyNameIcon
+                                Dim conIcon As Drawing.Icon =
+                                        Global.mRemote3G.Connection.Icon.FromString(
+                                            TryCast(Me.pGrid.SelectedObject, Info).Icon)
                                 If conIcon IsNot Nothing Then
                                     Me.btnIcon.Image = conIcon.ToBitmap
                                 End If
-                            Case My.Language.strPropertyNameAddress
+                            Case Language.Language.strPropertyNameAddress
                                 Me.SetHostStatus(Me.pGrid.SelectedObject)
                         End Select
 
-                        If TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).IsDefault Then
-                            App.Runtime.DefaultConnectionToSettings()
+                        If TryCast(Me.pGrid.SelectedObject, Info).IsDefault Then
+                            Runtime.DefaultConnectionToSettings()
                         End If
                     End If
 
-                    Dim rootInfo As Info = TryCast(pGrid.SelectedObject, Info)
+                    Dim rootInfo = TryCast(pGrid.SelectedObject, Root.Info)
                     If (rootInfo IsNot Nothing) Then
                         Select Case e.ChangedItem.PropertyDescriptor.Name
                             Case "Password"
                                 If rootInfo.Password = True Then
                                     Dim passwordName As String
                                     If Settings.UseSQLServer Then
-                                        passwordName = Language.strSQLServer.TrimEnd(":")
+                                        passwordName = Language.Language.strSQLServer.TrimEnd(":")
                                     Else
-                                        passwordName = Path.GetFileName(GetStartupConnectionFileName())
+                                        passwordName = Path.GetFileName(Runtime.GetStartupConnectionFileName())
                                     End If
 
-                                    Dim password As String = Tools.Misc.PasswordDialog(passwordName)
+                                    Dim password As String = Misc.PasswordDialog(passwordName)
 
                                     If String.IsNullOrEmpty(password) Then
                                         rootInfo.Password = False
@@ -672,20 +706,22 @@ Namespace UI
                         End Select
                     End If
 
-                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info.Inheritance Then
-                        If TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info.Inheritance).IsDefault Then
-                            App.Runtime.DefaultInheritanceToSettings()
+                    If TypeOf Me.pGrid.SelectedObject Is Info.Inheritance Then
+                        If TryCast(Me.pGrid.SelectedObject, Info.Inheritance).IsDefault Then
+                            Runtime.DefaultInheritanceToSettings()
                         End If
                     End If
 
                     Me.ShowHideGridItems()
-                    App.Runtime.SaveConnectionsBG()
+                    Runtime.SaveConnectionsBG()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridValueFailed & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.Language.strConfigPropertyGridValueFailed & vbNewLine &
+                                                        ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Sub pGrid_PropertySortChanged(ByVal sender As Object, ByVal e As EventArgs) Handles pGrid.PropertySortChanged
+            Private Sub pGrid_PropertySortChanged(sender As Object, e As EventArgs) Handles pGrid.PropertySortChanged
                 If pGrid.PropertySort = PropertySort.CategorizedAlphabetical Then
                     pGrid.PropertySort = PropertySort.Categorized
                 End If
@@ -695,13 +731,12 @@ Namespace UI
                 Try
                     Dim strHide As New List(Of String)
 
-                    If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
-                        Dim conI As mRemoteNG.Connection.Info = pGrid.SelectedObject
+                    If TypeOf Me.pGrid.SelectedObject Is Info Then
+                        Dim conI As Info = pGrid.SelectedObject
 
                         Select Case conI.Protocol
-                            Case mRemoteNG.Connection.Protocol.Protocols.RDP
+                            Case Protocols.RDP
                                 strHide.Add("ExtApp")
-                                strHide.Add("ICAEncryption")
                                 strHide.Add("PuttySession")
                                 strHide.Add("RenderingEngine")
                                 strHide.Add("VNCAuthMode")
@@ -715,7 +750,7 @@ Namespace UI
                                 strHide.Add("VNCProxyUsername")
                                 strHide.Add("VNCSmartSizeMode")
                                 strHide.Add("VNCViewOnly")
-                                If conI.RDGatewayUsageMethod = mRemoteNG.Connection.Protocol.RDP.RDGatewayUsageMethod.Never Then
+                                If conI.RDGatewayUsageMethod = RDP.RDGatewayUsageMethod.Never Then
                                     strHide.Add("RDGatewayDomain")
                                     strHide.Add("RDGatewayHostname")
                                     strHide.Add("RDGatewayPassword")
@@ -726,11 +761,11 @@ Namespace UI
                                     strHide.Add("RDGatewayPassword")
                                     strHide.Add("RDGatewayUsername")
                                 End If
-                                If Not (conI.Resolution = RDP.RDPResolutions.FitToWindow Or _
+                                If Not (conI.Resolution = RDP.RDPResolutions.FitToWindow Or
                                         conI.Resolution = RDP.RDPResolutions.Fullscreen) Then
                                     strHide.Add("AutomaticResize")
                                 End If
-                            Case mRemoteNG.Connection.Protocol.Protocols.VNC
+                            Case Protocols.VNC
                                 strHide.Add("CacheBitmaps")
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
@@ -738,7 +773,6 @@ Namespace UI
                                 strHide.Add("EnableFontSmoothing")
                                 strHide.Add("EnableDesktopComposition")
                                 strHide.Add("ExtApp")
-                                strHide.Add("ICAEncryption")
                                 strHide.Add("PuttySession")
                                 strHide.Add("RDGatewayDomain")
                                 strHide.Add("RDGatewayHostname")
@@ -759,17 +793,17 @@ Namespace UI
                                 strHide.Add("AutomaticResize")
                                 strHide.Add("UseConsoleSession")
                                 strHide.Add("UseCredSsp")
-                                If conI.VNCAuthMode = mRemoteNG.Connection.Protocol.VNC.AuthMode.AuthVNC Then
+                                If conI.VNCAuthMode = VNC.AuthMode.AuthVNC Then
                                     strHide.Add("Username")
                                     strHide.Add("Domain")
                                 End If
-                                If conI.VNCProxyType = mRemoteNG.Connection.Protocol.VNC.ProxyType.ProxyNone Then
+                                If conI.VNCProxyType = VNC.ProxyType.ProxyNone Then
                                     strHide.Add("VNCProxyIP")
                                     strHide.Add("VNCProxyPassword")
                                     strHide.Add("VNCProxyPort")
                                     strHide.Add("VNCProxyUsername")
                                 End If
-                            Case mRemoteNG.Connection.Protocol.Protocols.SSH1
+                            Case Protocols.SSH1
                                 strHide.Add("CacheBitmaps")
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
@@ -778,7 +812,6 @@ Namespace UI
                                 strHide.Add("EnableDesktopComposition")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
-                                strHide.Add("ICAEncryption")
                                 strHide.Add("RDGatewayDomain")
                                 strHide.Add("RDGatewayHostname")
                                 strHide.Add("RDGatewayPassword")
@@ -809,7 +842,7 @@ Namespace UI
                                 strHide.Add("VNCProxyUsername")
                                 strHide.Add("VNCSmartSizeMode")
                                 strHide.Add("VNCViewOnly")
-                            Case mRemoteNG.Connection.Protocol.Protocols.SSH2
+                            Case Protocols.SSH2
                                 strHide.Add("CacheBitmaps")
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
@@ -818,7 +851,6 @@ Namespace UI
                                 strHide.Add("EnableDesktopComposition")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
-                                strHide.Add("ICAEncryption")
                                 strHide.Add("RDGatewayDomain")
                                 strHide.Add("RDGatewayHostname")
                                 strHide.Add("RDGatewayPassword")
@@ -849,7 +881,7 @@ Namespace UI
                                 strHide.Add("VNCProxyUsername")
                                 strHide.Add("VNCSmartSizeMode")
                                 strHide.Add("VNCViewOnly")
-                            Case mRemoteNG.Connection.Protocol.Protocols.Telnet
+                            Case Protocols.Telnet
                                 strHide.Add("CacheBitmaps")
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
@@ -858,7 +890,6 @@ Namespace UI
                                 strHide.Add("EnableDesktopComposition")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
-                                strHide.Add("ICAEncryption")
                                 strHide.Add("Password")
                                 strHide.Add("RDGatewayDomain")
                                 strHide.Add("RDGatewayHostname")
@@ -891,7 +922,7 @@ Namespace UI
                                 strHide.Add("VNCProxyUsername")
                                 strHide.Add("VNCSmartSizeMode")
                                 strHide.Add("VNCViewOnly")
-                            Case mRemoteNG.Connection.Protocol.Protocols.Rlogin
+                            Case Protocols.Rlogin
                                 strHide.Add("CacheBitmaps")
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
@@ -900,7 +931,6 @@ Namespace UI
                                 strHide.Add("EnableDesktopComposition")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
-                                strHide.Add("ICAEncryption")
                                 strHide.Add("Password")
                                 strHide.Add("RDGatewayDomain")
                                 strHide.Add("RDGatewayHostname")
@@ -933,7 +963,7 @@ Namespace UI
                                 strHide.Add("VNCProxyUsername")
                                 strHide.Add("VNCSmartSizeMode")
                                 strHide.Add("VNCViewOnly")
-                            Case mRemoteNG.Connection.Protocol.Protocols.RAW
+                            Case Protocols.RAW
                                 strHide.Add("CacheBitmaps")
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
@@ -942,7 +972,6 @@ Namespace UI
                                 strHide.Add("EnableDesktopComposition")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
-                                strHide.Add("ICAEncryption")
                                 strHide.Add("Password")
                                 strHide.Add("RDGatewayDomain")
                                 strHide.Add("RDGatewayHostname")
@@ -975,7 +1004,7 @@ Namespace UI
                                 strHide.Add("VNCProxyUsername")
                                 strHide.Add("VNCSmartSizeMode")
                                 strHide.Add("VNCViewOnly")
-                            Case mRemoteNG.Connection.Protocol.Protocols.HTTP
+                            Case Protocols.HTTP
                                 strHide.Add("CacheBitmaps")
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
@@ -984,7 +1013,6 @@ Namespace UI
                                 strHide.Add("EnableDesktopComposition")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
-                                strHide.Add("ICAEncryption")
                                 strHide.Add("PuttySession")
                                 strHide.Add("RDGatewayDomain")
                                 strHide.Add("RDGatewayHostname")
@@ -1015,7 +1043,7 @@ Namespace UI
                                 strHide.Add("VNCProxyUsername")
                                 strHide.Add("VNCSmartSizeMode")
                                 strHide.Add("VNCViewOnly")
-                            Case mRemoteNG.Connection.Protocol.Protocols.HTTPS
+                            Case Protocols.HTTPS
                                 strHide.Add("CacheBitmaps")
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
@@ -1024,7 +1052,6 @@ Namespace UI
                                 strHide.Add("EnableDesktopComposition")
                                 strHide.Add("Domain")
                                 strHide.Add("ExtApp")
-                                strHide.Add("ICAEncryption")
                                 strHide.Add("PuttySession")
                                 strHide.Add("RDGatewayDomain")
                                 strHide.Add("RDGatewayHostname")
@@ -1054,44 +1081,7 @@ Namespace UI
                                 strHide.Add("VNCProxyUsername")
                                 strHide.Add("VNCSmartSizeMode")
                                 strHide.Add("VNCViewOnly")
-                            Case mRemoteNG.Connection.Protocol.Protocols.ICA
-                                strHide.Add("DisplayThemes")
-                                strHide.Add("DisplayWallpaper")
-                                strHide.Add("EnableFontSmoothing")
-                                strHide.Add("EnableDesktopComposition")
-                                strHide.Add("ExtApp")
-                                strHide.Add("Port")
-                                strHide.Add("PuttySession")
-                                strHide.Add("RDGatewayDomain")
-                                strHide.Add("RDGatewayHostname")
-                                strHide.Add("RDGatewayPassword")
-                                strHide.Add("RDGatewayUsageMethod")
-                                strHide.Add("RDGatewayUseConnectionCredentials")
-                                strHide.Add("RDGatewayUsername")
-                                strHide.Add("RDPAuthenticationLevel")
-                                strHide.Add("LoadBalanceInfo")
-                                strHide.Add("RedirectDiskDrives")
-                                strHide.Add("RedirectKeys")
-                                strHide.Add("RedirectPorts")
-                                strHide.Add("RedirectPrinters")
-                                strHide.Add("RedirectSmartCards")
-                                strHide.Add("RedirectSound")
-                                strHide.Add("RenderingEngine")
-                                strHide.Add("AutomaticResize")
-                                strHide.Add("UseConsoleSession")
-                                strHide.Add("UseCredSsp")
-                                strHide.Add("VNCAuthMode")
-                                strHide.Add("VNCColors")
-                                strHide.Add("VNCCompression")
-                                strHide.Add("VNCEncoding")
-                                strHide.Add("VNCProxyIP")
-                                strHide.Add("VNCProxyPassword")
-                                strHide.Add("VNCProxyPort")
-                                strHide.Add("VNCProxyType")
-                                strHide.Add("VNCProxyUsername")
-                                strHide.Add("VNCSmartSizeMode")
-                                strHide.Add("VNCViewOnly")
-                            Case mRemoteNG.Connection.Protocol.Protocols.IntApp
+                            Case Protocols.IntApp
                                 strHide.Add("CacheBitmaps")
                                 strHide.Add("Colors")
                                 strHide.Add("DisplayThemes")
@@ -1099,7 +1089,6 @@ Namespace UI
                                 strHide.Add("EnableFontSmoothing")
                                 strHide.Add("EnableDesktopComposition")
                                 strHide.Add("Domain")
-                                strHide.Add("ICAEncryption")
                                 strHide.Add("PuttySession")
                                 strHide.Add("RDGatewayDomain")
                                 strHide.Add("RDGatewayHostname")
@@ -1229,10 +1218,6 @@ Namespace UI
                                     strHide.Add("RenderingEngine")
                                 End If
 
-                                If .ICAEncryption Then
-                                    strHide.Add("ICAEncryption")
-                                End If
-
                                 If .RDPAuthenticationLevel Then
                                     strHide.Add("RDPAuthenticationLevel")
                                 End If
@@ -1348,7 +1333,7 @@ Namespace UI
                             strHide.Add("Name")
                         End If
                     ElseIf TypeOf pGrid.SelectedObject Is Root.Info Then
-                        Dim rootInfo As Root.Info = CType(pGrid.SelectedObject, Root.Info)
+                        Dim rootInfo = CType(pGrid.SelectedObject, Root.Info)
                         If rootInfo.Type = Root.Info.RootType.PuttySessions Then
                             strHide.Add("Password")
                         End If
@@ -1358,105 +1343,112 @@ Namespace UI
 
                     Me.pGrid.Refresh()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridHideItemsFailed & vbNewLine & ex.Message, True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strConfigPropertyGridHideItemsFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Sub btnShowProperties_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnShowProperties.Click
-                If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info.Inheritance Then
-                    If TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info.Inheritance).IsDefault Then
+            Private Sub btnShowProperties_Click(sender As Object, e As EventArgs) Handles btnShowProperties.Click
+                If TypeOf Me.pGrid.SelectedObject Is Info.Inheritance Then
+                    If TryCast(Me.pGrid.SelectedObject, Info.Inheritance).IsDefault Then
                         Me.PropertiesVisible = True
                         Me.InheritanceVisible = False
                         Me.DefaultPropertiesVisible = False
                         Me.DefaultInheritanceVisible = False
-                        Me.SetPropertyGridObject(TryCast(App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Tag, mRemoteNG.Root.Info))
+                        Me.SetPropertyGridObject(TryCast(Runtime.Windows.treeForm.tvConnections.SelectedNode.Tag,
+                                                         Root.Info))
                     Else
                         Me.PropertiesVisible = True
                         Me.InheritanceVisible = False
                         Me.DefaultPropertiesVisible = False
                         Me.DefaultInheritanceVisible = False
-                        Me.SetPropertyGridObject(TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info.Inheritance).Parent)
+                        Me.SetPropertyGridObject(TryCast(Me.pGrid.SelectedObject, Info.Inheritance).Parent)
                     End If
-                ElseIf TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
-                    If TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).IsDefault Then
+                ElseIf TypeOf Me.pGrid.SelectedObject Is Info Then
+                    If TryCast(Me.pGrid.SelectedObject, Info).IsDefault Then
                         Me.PropertiesVisible = True
                         Me.InheritanceVisible = False
                         Me.DefaultPropertiesVisible = False
                         Me.DefaultInheritanceVisible = False
-                        Me.SetPropertyGridObject(TryCast(App.Runtime.Windows.treeForm.tvConnections.SelectedNode.Tag, mRemoteNG.Root.Info))
+                        Me.SetPropertyGridObject(TryCast(Runtime.Windows.treeForm.tvConnections.SelectedNode.Tag,
+                                                         Root.Info))
                     End If
                 End If
             End Sub
 
-            Private Sub btnShowDefaultProperties_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnShowDefaultProperties.Click
-                If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Or TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info.Inheritance Then
+            Private Sub btnShowDefaultProperties_Click(sender As Object, e As EventArgs) _
+                Handles btnShowDefaultProperties.Click
+                If TypeOf Me.pGrid.SelectedObject Is Root.Info Or TypeOf Me.pGrid.SelectedObject Is Info.Inheritance _
+                    Then
                     Me.PropertiesVisible = False
                     Me.InheritanceVisible = False
                     Me.DefaultPropertiesVisible = True
                     Me.DefaultInheritanceVisible = False
-                    Me.SetPropertyGridObject(App.Runtime.DefaultConnectionFromSettings())
+                    Me.SetPropertyGridObject(Runtime.DefaultConnectionFromSettings())
                 End If
             End Sub
 
-            Private Sub btnShowInheritance_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnShowInheritance.Click
-                If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
+            Private Sub btnShowInheritance_Click(sender As Object, e As EventArgs) Handles btnShowInheritance.Click
+                If TypeOf Me.pGrid.SelectedObject Is Info Then
                     Me.PropertiesVisible = False
                     Me.InheritanceVisible = True
                     Me.DefaultPropertiesVisible = False
                     Me.DefaultInheritanceVisible = False
-                    Me.SetPropertyGridObject(TryCast(Me.pGrid.SelectedObject, mRemoteNG.Connection.Info).Inherit)
+                    Me.SetPropertyGridObject(TryCast(Me.pGrid.SelectedObject, Info).Inherit)
                 End If
             End Sub
 
-            Private Sub btnShowDefaultInheritance_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnShowDefaultInheritance.Click
-                If TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Root.Info Or TypeOf Me.pGrid.SelectedObject Is mRemoteNG.Connection.Info Then
+            Private Sub btnShowDefaultInheritance_Click(sender As Object, e As EventArgs) _
+                Handles btnShowDefaultInheritance.Click
+                If TypeOf Me.pGrid.SelectedObject Is Root.Info Or TypeOf Me.pGrid.SelectedObject Is Info Then
                     Me.PropertiesVisible = False
                     Me.InheritanceVisible = False
                     Me.DefaultPropertiesVisible = False
                     Me.DefaultInheritanceVisible = True
-                    Me.SetPropertyGridObject(App.Runtime.DefaultInheritanceFromSettings())
+                    Me.SetPropertyGridObject(Runtime.DefaultInheritanceFromSettings())
                 End If
             End Sub
 
-            Private Sub btnHostStatus_Click(ByVal sender As Object, ByVal e As System.EventArgs) Handles btnHostStatus.Click
+            Private Sub btnHostStatus_Click(sender As Object, e As EventArgs) Handles btnHostStatus.Click
                 SetHostStatus(Me.pGrid.SelectedObject)
             End Sub
 
-            Private Sub btnIcon_Click(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles btnIcon.MouseUp
+            Private Sub btnIcon_Click(sender As Object, e As MouseEventArgs) Handles btnIcon.MouseUp
                 Try
-                    If TypeOf pGrid.SelectedObject Is mRemoteNG.Connection.Info And _
-                       Not TypeOf pGrid.SelectedObject Is mRemoteNG.Connection.PuttySession.Info Then
+                    If TypeOf pGrid.SelectedObject Is Info And
+                       Not TypeOf pGrid.SelectedObject Is PuttyInfo Then
                         Me.cMenIcons.Items.Clear()
 
-                        For Each iStr As String In mRemoteNG.Connection.Icon.Icons
+                        For Each iStr As String In Global.mRemote3G.Connection.Icon.Icons
                             Dim tI As New ToolStripMenuItem
                             tI.Text = iStr
-                            tI.Image = mRemoteNG.Connection.Icon.FromString(iStr).ToBitmap
+                            tI.Image = Global.mRemote3G.Connection.Icon.FromString(iStr).ToBitmap
                             AddHandler tI.Click, AddressOf IconMenu_Click
 
                             Me.cMenIcons.Items.Add(tI)
                         Next
 
-                        Dim mPos As New Point(PointToScreen(New Point(e.Location.X + Me.pGrid.Width - 100, e.Location.Y)))
+                        Dim _
+                            mPos As _
+                                New Point(PointToScreen(New Point(e.Location.X + Me.pGrid.Width - 100, e.Location.Y)))
                         Me.cMenIcons.Show(mPos)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridButtonIconClickFailed & vbNewLine & ex.Message, True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strConfigPropertyGridButtonIconClickFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Sub IconMenu_Click(ByVal sender As Object, ByVal e As EventArgs)
+            Private Sub IconMenu_Click(sender As Object, e As EventArgs)
                 Try
-                    Dim connectionInfo As mRemoteNG.Connection.Info = TryCast(pGrid.SelectedObject, mRemoteNG.Connection.Info)
+                    Dim connectionInfo = TryCast(pGrid.SelectedObject, Info)
                     If connectionInfo Is Nothing Then Return
 
-                    Dim selectedMenuItem As ToolStripMenuItem = TryCast(sender, ToolStripMenuItem)
+                    Dim selectedMenuItem = TryCast(sender, ToolStripMenuItem)
                     If selectedMenuItem Is Nothing Then Return
 
                     Dim iconName As String = selectedMenuItem.Text
                     If String.IsNullOrEmpty(iconName) Then Return
 
-                    Dim connectionIcon As Icon = mRemoteNG.Connection.Icon.FromString(iconName)
+                    Dim connectionIcon As Drawing.Icon = Global.mRemote3G.Connection.Icon.FromString(iconName)
                     If connectionIcon Is Nothing Then Return
 
                     btnIcon.Image = connectionIcon.ToBitmap()
@@ -1464,16 +1456,18 @@ Namespace UI
                     connectionInfo.Icon = iconName
                     pGrid.Refresh()
 
-                    SaveConnectionsBG()
+                    Runtime.SaveConnectionsBG()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strConfigPropertyGridMenuClickFailed & vbNewLine & ex.Message, True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strConfigPropertyGridMenuClickFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
+
 #End Region
 
 #Region "Host Status (Ping)"
+
             Private HostName As String
-            Private pThread As Threading.Thread
+            Private pThread As Thread
 
             Private Sub CheckHostAlive()
                 Dim pingSender As New Ping
@@ -1484,22 +1478,23 @@ Namespace UI
 
                     If pReply.Status = IPStatus.Success Then
                         If Me.btnHostStatus.Tag = "checking" Then
-                            ShowStatusImage(My.Resources.HostStatus_On)
+                            ShowStatusImage(HostStatus_On)
                         End If
                     Else
                         If Me.btnHostStatus.Tag = "checking" Then
-                            ShowStatusImage(My.Resources.HostStatus_Off)
+                            ShowStatusImage(HostStatus_Off)
                         End If
                     End If
                 Catch ex As Exception
                     If Me.btnHostStatus.Tag = "checking" Then
-                        ShowStatusImage(My.Resources.HostStatus_Off)
+                        ShowStatusImage(HostStatus_Off)
                     End If
                 End Try
             End Sub
 
-            Delegate Sub ShowStatusImageCB(ByVal [Image] As Image)
-            Private Sub ShowStatusImage(ByVal [Image] As Image)
+            Delegate Sub ShowStatusImageCB([Image] As Image)
+
+            Private Sub ShowStatusImage([Image] As Image)
                 If Me.pGrid.InvokeRequired Then
                     Dim d As New ShowStatusImageCB(AddressOf ShowStatusImage)
                     Me.pGrid.Invoke(d, New Object() {[Image]})
@@ -1509,64 +1504,73 @@ Namespace UI
                 End If
             End Sub
 
-            Public Sub SetHostStatus(ByVal ConnectionInfo As Object)
+            Public Sub SetHostStatus(ConnectionInfo As Object)
                 Try
-                    Me.btnHostStatus.Image = My.Resources.HostStatus_Check
+                    Me.btnHostStatus.Image = HostStatus_Check
 
-                    ' To check status, ConnectionInfo must be an mRemoteNG.Connection.Info that is not a container
-                    If TypeOf ConnectionInfo Is mRemoteNG.Connection.Info Then
-                        If TryCast(ConnectionInfo, mRemoteNG.Connection.Info).IsContainer Then Return
+                    ' To check status, ConnectionInfo must be an mRemote3G.Connection.Info that is not a container
+                    If TypeOf ConnectionInfo Is Info Then
+                        If TryCast(ConnectionInfo, Info).IsContainer Then Return
                     Else
                         Return
                     End If
 
                     Me.btnHostStatus.Tag = "checking"
-                    HostName = TryCast(ConnectionInfo, mRemoteNG.Connection.Info).Hostname
-                    pThread = New Threading.Thread(AddressOf CheckHostAlive)
-                    pThread.SetApartmentState(Threading.ApartmentState.STA)
+                    HostName = TryCast(ConnectionInfo, Info).Hostname
+                    pThread = New Thread(AddressOf CheckHostAlive)
+                    pThread.SetApartmentState(ApartmentState.STA)
                     pThread.IsBackground = True
                     pThread.Start()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridSetHostStatusFailed & vbNewLine & ex.Message, True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.Language.strConfigPropertyGridSetHostStatusFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
+
 #End Region
 
-            Private Sub propertyGridContextMenu_Opening(sender As Object, e As System.ComponentModel.CancelEventArgs) Handles propertyGridContextMenu.Opening
+            Private Sub propertyGridContextMenu_Opening(sender As Object, e As CancelEventArgs) _
+                Handles propertyGridContextMenu.Opening
                 Try
                     propertyGridContextMenuShowHelpText.Checked = Settings.ShowConfigHelpText
                     Dim gridItem As GridItem = pGrid.SelectedGridItem
-                    propertyGridContextMenuReset.Enabled = (pGrid.SelectedObject IsNot Nothing AndAlso _
-                                                            gridItem IsNot Nothing AndAlso _
-                                                            gridItem.PropertyDescriptor IsNot Nothing AndAlso _
-                                                            gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject))
+                    propertyGridContextMenuReset.Enabled = (pGrid.SelectedObject IsNot Nothing AndAlso
+                                                            gridItem IsNot Nothing AndAlso
+                                                            gridItem.PropertyDescriptor IsNot Nothing AndAlso
+                                                            gridItem.PropertyDescriptor.CanResetValue(
+                                                                pGrid.SelectedObject))
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenu_Opening() failed.", ex, MessageClass.ErrorMsg, True)
+                    Runtime.MessageCollector.AddExceptionMessage(
+                        "UI.Window.Config.propertyGridContextMenu_Opening() failed.", ex, MessageClass.ErrorMsg, True)
                 End Try
             End Sub
 
-            Private Sub propertyGridContextMenuReset_Click(sender As System.Object, e As EventArgs) Handles propertyGridContextMenuReset.Click
+            Private Sub propertyGridContextMenuReset_Click(sender As Object, e As EventArgs) _
+                Handles propertyGridContextMenuReset.Click
                 Try
                     Dim gridItem As GridItem = pGrid.SelectedGridItem
-                    If pGrid.SelectedObject IsNot Nothing AndAlso _
-                            gridItem IsNot Nothing AndAlso _
-                            gridItem.PropertyDescriptor IsNot Nothing AndAlso _
-                            gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject) Then
+                    If pGrid.SelectedObject IsNot Nothing AndAlso
+                       gridItem IsNot Nothing AndAlso
+                       gridItem.PropertyDescriptor IsNot Nothing AndAlso
+                       gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject) Then
                         pGrid.ResetSelectedProperty()
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddExceptionMessage("UI.Window.Config.propertyGridContextMenuReset_Click() failed.", ex, MessageClass.ErrorMsg, True)
+                    Runtime.MessageCollector.AddExceptionMessage(
+                        "UI.Window.Config.propertyGridContextMenuReset_Click() failed.", ex, MessageClass.ErrorMsg, True)
                 End Try
             End Sub
 
-            Private Sub propertyGridContextMenuShowHelpText_Click(sender As Object, e As EventArgs) Handles propertyGridContextMenuShowHelpText.Click
+            Private Sub propertyGridContextMenuShowHelpText_Click(sender As Object, e As EventArgs) _
+                Handles propertyGridContextMenuShowHelpText.Click
                 propertyGridContextMenuShowHelpText.Checked = Not propertyGridContextMenuShowHelpText.Checked
             End Sub
 
-            Private Sub propertyGridContextMenuShowHelpText_CheckedChanged(sender As Object, e As EventArgs) Handles propertyGridContextMenuShowHelpText.CheckedChanged
+            Private Sub propertyGridContextMenuShowHelpText_CheckedChanged(sender As Object, e As EventArgs) _
+                Handles propertyGridContextMenuShowHelpText.CheckedChanged
                 Settings.ShowConfigHelpText = propertyGridContextMenuShowHelpText.Checked
                 pGrid.HelpVisible = propertyGridContextMenuShowHelpText.Checked
             End Sub
         End Class
     End Namespace
+
 End Namespace

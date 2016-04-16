@@ -1,70 +1,72 @@
-﻿Imports mRemoteNG.My
+﻿
+
 
 Namespace Forms.OptionsPages
     Public Class TabsPanelsPage
-        Public Overrides Property PageName() As String
+        Public Overrides Property PageName As String
             Get
-                Return Language.strTabsAndPanels.Replace("&&", "&")
+                Return Language.Language.strTabsAndPanels.Replace("&&", "&")
             End Get
-            Set(value As String)
+            Set
             End Set
         End Property
 
         Public Overrides Sub ApplyLanguage()
             MyBase.ApplyLanguage()
 
-            chkAlwaysShowPanelTabs.Text = Language.strAlwaysShowPanelTabs
-            chkOpenNewTabRightOfSelected.Text = Language.strOpenNewTabRight
-            chkShowLogonInfoOnTabs.Text = Language.strShowLogonInfoOnTabs
-            chkShowProtocolOnTabs.Text = Language.strShowProtocolOnTabs
-            chkIdentifyQuickConnectTabs.Text = Language.strIdentifyQuickConnectTabs
-            chkDoubleClickClosesTab.Text = Language.strDoubleClickTabClosesIt
-            chkAlwaysShowPanelSelectionDlg.Text = Language.strAlwaysShowPanelSelection
+            chkAlwaysShowPanelTabs.Text = Language.Language.strAlwaysShowPanelTabs
+            chkOpenNewTabRightOfSelected.Text = Language.Language.strOpenNewTabRight
+            chkShowLogonInfoOnTabs.Text = Language.Language.strShowLogonInfoOnTabs
+            chkShowProtocolOnTabs.Text = Language.Language.strShowProtocolOnTabs
+            chkIdentifyQuickConnectTabs.Text = Language.Language.strIdentifyQuickConnectTabs
+            chkDoubleClickClosesTab.Text = Language.Language.strDoubleClickTabClosesIt
+            chkAlwaysShowPanelSelectionDlg.Text = Language.Language.strAlwaysShowPanelSelection
 
-            chkUseOnlyErrorsAndInfosPanel.Text = Language.strUseOnlyErrorsAndInfosPanel
-            lblSwitchToErrorsAndInfos.Text = Language.strSwitchToErrorsAndInfos
-            chkMCInformation.Text = Language.strInformations
-            chkMCWarnings.Text = Language.strWarnings
-            chkMCErrors.Text = Language.strErrors
+            chkUseOnlyErrorsAndInfosPanel.Text = Language.Language.strUseOnlyErrorsAndInfosPanel
+            lblSwitchToErrorsAndInfos.Text = Language.Language.strSwitchToErrorsAndInfos
+            chkMCInformation.Text = Language.Language.strInformations
+            chkMCWarnings.Text = Language.Language.strWarnings
+            chkMCErrors.Text = Language.Language.strErrors
         End Sub
 
         Public Overrides Sub LoadSettings()
             MyBase.SaveSettings()
 
-            chkAlwaysShowPanelTabs.Checked = Settings.AlwaysShowPanelTabs
-            chkOpenNewTabRightOfSelected.Checked = Settings.OpenTabsRightOfSelected
-            chkShowLogonInfoOnTabs.Checked = Settings.ShowLogonInfoOnTabs
-            chkShowProtocolOnTabs.Checked = Settings.ShowProtocolOnTabs
-            chkIdentifyQuickConnectTabs.Checked = Settings.IdentifyQuickConnectTabs
-            chkDoubleClickClosesTab.Checked = Settings.DoubleClickOnTabClosesIt
-            chkAlwaysShowPanelSelectionDlg.Checked = Settings.AlwaysShowPanelSelectionDlg
+            chkAlwaysShowPanelTabs.Checked = My.Settings.AlwaysShowPanelTabs
+            chkOpenNewTabRightOfSelected.Checked = My.Settings.OpenTabsRightOfSelected
+            chkShowLogonInfoOnTabs.Checked = My.Settings.ShowLogonInfoOnTabs
+            chkShowProtocolOnTabs.Checked = My.Settings.ShowProtocolOnTabs
+            chkIdentifyQuickConnectTabs.Checked = My.Settings.IdentifyQuickConnectTabs
+            chkDoubleClickClosesTab.Checked = My.Settings.DoubleClickOnTabClosesIt
+            chkAlwaysShowPanelSelectionDlg.Checked = My.Settings.AlwaysShowPanelSelectionDlg
 
-            chkUseOnlyErrorsAndInfosPanel.Checked = Settings.ShowNoMessageBoxes
-            chkMCInformation.Checked = Settings.SwitchToMCOnInformation
-            chkMCWarnings.Checked = Settings.SwitchToMCOnWarning
-            chkMCErrors.Checked = Settings.SwitchToMCOnError
+            chkUseOnlyErrorsAndInfosPanel.Checked = My.Settings.ShowNoMessageBoxes
+            chkMCInformation.Checked = My.Settings.SwitchToMCOnInformation
+            chkMCWarnings.Checked = My.Settings.SwitchToMCOnWarning
+            chkMCErrors.Checked = My.Settings.SwitchToMCOnError
         End Sub
 
         Public Overrides Sub SaveSettings()
             MyBase.SaveSettings()
 
-            Settings.AlwaysShowPanelTabs = chkAlwaysShowPanelTabs.Checked
+            My.Settings.AlwaysShowPanelTabs = chkAlwaysShowPanelTabs.Checked
             frmMain.ShowHidePanelTabs()
 
-            Settings.OpenTabsRightOfSelected = chkOpenNewTabRightOfSelected.Checked
-            Settings.ShowLogonInfoOnTabs = chkShowLogonInfoOnTabs.Checked
-            Settings.ShowProtocolOnTabs = chkShowProtocolOnTabs.Checked
-            Settings.IdentifyQuickConnectTabs = chkIdentifyQuickConnectTabs.Checked
-            Settings.DoubleClickOnTabClosesIt = chkDoubleClickClosesTab.Checked
-            Settings.AlwaysShowPanelSelectionDlg = chkAlwaysShowPanelSelectionDlg.Checked
+            My.Settings.OpenTabsRightOfSelected = chkOpenNewTabRightOfSelected.Checked
+            My.Settings.ShowLogonInfoOnTabs = chkShowLogonInfoOnTabs.Checked
+            My.Settings.ShowProtocolOnTabs = chkShowProtocolOnTabs.Checked
+            My.Settings.IdentifyQuickConnectTabs = chkIdentifyQuickConnectTabs.Checked
+            My.Settings.DoubleClickOnTabClosesIt = chkDoubleClickClosesTab.Checked
+            My.Settings.AlwaysShowPanelSelectionDlg = chkAlwaysShowPanelSelectionDlg.Checked
 
-            Settings.ShowNoMessageBoxes = chkUseOnlyErrorsAndInfosPanel.Checked
-            Settings.SwitchToMCOnInformation = chkMCInformation.Checked
-            Settings.SwitchToMCOnWarning = chkMCWarnings.Checked
-            Settings.SwitchToMCOnError = chkMCErrors.Checked
+            My.Settings.ShowNoMessageBoxes = chkUseOnlyErrorsAndInfosPanel.Checked
+            My.Settings.SwitchToMCOnInformation = chkMCInformation.Checked
+            My.Settings.SwitchToMCOnWarning = chkMCWarnings.Checked
+            My.Settings.SwitchToMCOnError = chkMCErrors.Checked
         End Sub
 
-        Private Sub chkUseOnlyErrorsAndInfosPanel_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkUseOnlyErrorsAndInfosPanel.CheckedChanged
+        Private Sub chkUseOnlyErrorsAndInfosPanel_CheckedChanged(sender As Object, e As EventArgs) _
+            Handles chkUseOnlyErrorsAndInfosPanel.CheckedChanged
             chkMCInformation.Enabled = chkUseOnlyErrorsAndInfosPanel.Checked
             chkMCWarnings.Enabled = chkUseOnlyErrorsAndInfosPanel.Checked
             chkMCErrors.Enabled = chkUseOnlyErrorsAndInfosPanel.Checked

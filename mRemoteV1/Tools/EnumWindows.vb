@@ -11,7 +11,7 @@
             Return handleList
         End Function
 
-        Public Shared Function EnumChildWindows(ByVal hWndParent As IntPtr) As List(Of IntPtr)
+        Public Shared Function EnumChildWindows(hWndParent As IntPtr) As List(Of IntPtr)
             Dim handleList As New List(Of IntPtr)
 
             HandleLists.Add(handleList)
@@ -32,9 +32,14 @@
         ' ReSharper disable ClassNeverInstantiated.Local
         Private Class Win32
             ' ReSharper restore ClassNeverInstantiated.Local
-            Public Delegate Function EnumWindowsProc(ByVal hwnd As Integer, ByVal lParam As Integer) As Boolean
-            Declare Function EnumWindows Lib "user32" (ByVal lpEnumFunc As EnumWindowsProc, ByVal lParam As Integer) As Boolean
-            Declare Function EnumChildWindows Lib "user32" (ByVal hWndParent As IntPtr, ByVal lpEnumFunc As EnumWindowsProc, ByVal lParam As Integer) As Boolean
+            Public Delegate Function EnumWindowsProc(hwnd As Integer, lParam As Integer) As Boolean
+
+            Declare Function EnumWindows Lib "user32"(lpEnumFunc As EnumWindowsProc, lParam As Integer) As Boolean
+            Declare Function EnumChildWindows Lib "user32"(hWndParent As IntPtr, lpEnumFunc As EnumWindowsProc,
+                                                           lParam As Integer) As Boolean
         End Class
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

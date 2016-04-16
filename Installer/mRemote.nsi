@@ -2,7 +2,6 @@
 !include "WordFunc.nsh"
 !insertmacro VersionCompare
 
-!include "DotNetVer.nsh"
 !include "..\Release\Version.nsh"
 
 ; This will be passed in using the /D switch by BUILD.CMD
@@ -15,20 +14,20 @@
 !endif
 
 ; Basic Config
-Name "mRemoteNG ${PRODUCT_VERSION_FRIENDLY}"
-OutFile "..\Release\mRemoteNG-Installer-${PRODUCT_VERSION_TAGGED}.exe"
+Name "mRemote3G ${PRODUCT_VERSION_FRIENDLY}"
+OutFile "..\Release\mRemote3G-Installer-${PRODUCT_VERSION_TAGGED}.exe"
 SetCompressor /SOLID lzma
-InstallDir "$PROGRAMFILES\mRemoteNG"
-InstallDirRegKey HKLM "Software\mRemoteNG" "InstallPath"
+InstallDir "$PROGRAMFILES\mRemote3G"
+InstallDirRegKey HKLM "Software\mRemote3G" "InstallPath"
 RequestExecutionLevel admin
 
 ; Version Information
 VIProductVersion ${PRODUCT_VERSION}
-VIAddVersionKey "CompanyName" "Next Generation Software"
-VIAddVersionKey "ProductName" "mRemoteNG"
+VIAddVersionKey "CompanyName" "kmscode"
+VIAddVersionKey "ProductName" "mRemote3G"
 VIAddVersionKey "ProductVersion" ${PRODUCT_VERSION}
-VIAddVersionKey "LegalCopyright" "Copyright © 2007-2009 Felix Deimel, 2010-2013 Riley McArdle"
-VIAddVersionKey "FileDescription" "mRemoteNG ${PRODUCT_VERSION_FRIENDLY} Installer"
+VIAddVersionKey "LegalCopyright" "Copyright © 2015-2016 Sean Kaim - Based off of mRemote 2007-2009 Felix Deimel, & mRemoteNG 2010-2013 Riley McArdlee"
+VIAddVersionKey "FileDescription" "mRemote3G ${PRODUCT_VERSION_FRIENDLY} Installer"
 VIAddVersionKey "FileVersion" ${PRODUCT_VERSION}
 
 ; Design
@@ -53,7 +52,7 @@ VIAddVersionKey "FileVersion" ${PRODUCT_VERSION}
 
 ; Finish Page
 !define MUI_FINISHPAGE_RUN_NOTCHECKED
-!define MUI_FINISHPAGE_RUN "$INSTDIR\mRemoteNG.exe"
+!define MUI_FINISHPAGE_RUN "$INSTDIR\mRemote3G.exe"
 !insertmacro MUI_PAGE_FINISH
 
 ; Uninstall Pages
@@ -103,6 +102,47 @@ Function .onInit
 	end:
 FunctionEnd
 
+; http://stackoverflow.com/questions/15227634/check-for-net4-5-with-nsis
+; returns a numeric value on the stack, ranging from 0 to 450, 451, 452 or 460. 0 means nothing found, the other values mean at least that version
+Function CheckForDotVersion45Up
+
+  ReadRegDWORD $0 HKLM "SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full" Release
+
+	; https://msdn.microsoft.com/en-us/library/hh925568%28v=vs.110%29.aspx#net_d
+	; Anything greater than 393295 is acceptable
+  IntCmp $0 393295 is46 isbelow46 is46
+
+  isbelow46:
+  IntCmp $0 379893 is452 isbelow452 is452
+
+  isbelow452:
+  IntCmp $0 378675 is451 isbelow451 is451
+
+  isbelow451:
+  IntCmp $0 378389 is45 isbelow45 is45
+
+  isbelow45:
+  Push 0
+  Return
+
+  is46:
+  Push 460
+  Return
+
+  is452:
+  Push 452
+  Return
+
+  is451:
+  Push 451
+  Return
+
+  is45:
+  Push 45
+  Return
+
+FunctionEnd
+
 Function SelectLanguage
 	;Language selection dialog
 	Push ""
@@ -129,12 +169,14 @@ Function SelectLanguage
 	Pop $LANGUAGE
 	StrCmp $LANGUAGE "cancel" 0 +2
 		Abort
-
-	; Check .NET version
-	${IfNot} ${HasDotNet3.0}
+		
+	Call CheckForDotVersion45Up
+	Pop $0
+	${IfNot} $0 = 460
 		MessageBox MB_OK|MB_ICONEXCLAMATION "$(RequiresNetFramework)"
 		Quit
 	${EndIf}
+	
 FunctionEnd
 
 Section "" ; Install
@@ -142,56 +184,50 @@ Section "" ; Install
 	SetShellVarContext all
 	
 	; AddFiles
-	File /r /x "mRemoteNG.vshost.*" "..\mRemoteV1\bin\Release\*.*"
+	File /r /x "mRemote3G.vshost.*" "..\mRemoteV1\bin\Release\*.*"
 	File /r "Dependencies\*.*"
 	File "..\*.txt"
 
 	; Uninstaller
 	WriteUninstaller "$INSTDIR\Uninstall.exe"
-
-	; Register ActiveX components
-	RegDLL "$INSTDIR\eolwtscom.dll"
  
 	; Start Menu
-	CreateDirectory "$SMPROGRAMS\mRemoteNG"
-	CreateShortCut "$SMPROGRAMS\mRemoteNG\$(CreditsLinkName).lnk" "$INSTDIR\CREDITS.TXT"
-	CreateShortCut "$SMPROGRAMS\mRemoteNG\$(CopyingLinkName).lnk" "$INSTDIR\COPYING.TXT"
-	CreateShortCut "$SMPROGRAMS\mRemoteNG\mRemoteNG.lnk" "$INSTDIR\mRemoteNG.exe"
-	CreateShortCut "$SMPROGRAMS\mRemoteNG\$(UninstallLinkName).lnk" "$INSTDIR\Uninstall.exe"
-	CreateShortCut "$SMPROGRAMS\mRemoteNG\$(ChangeLogLinkName).lnk" "$INSTDIR\CHANGELOG.TXT"
+	CreateDirectory "$SMPROGRAMS\mRemote3G"
+	CreateShortCut "$SMPROGRAMS\mRemote3G\$(CreditsLinkName).lnk" "$INSTDIR\CREDITS.TXT"
+	CreateShortCut "$SMPROGRAMS\mRemote3G\$(CopyingLinkName).lnk" "$INSTDIR\COPYING.TXT"
+	CreateShortCut "$SMPROGRAMS\mRemote3G\mRemote3G.lnk" "$INSTDIR\mRemote3G.exe"
+	CreateShortCut "$SMPROGRAMS\mRemote3G\$(UninstallLinkName).lnk" "$INSTDIR\Uninstall.exe"
+	CreateShortCut "$SMPROGRAMS\mRemote3G\$(ChangeLogLinkName).lnk" "$INSTDIR\CHANGELOG.TXT"
 
 	; Registry
-	WriteRegStr HKLM "Software\mRemoteNG" "InstallPath" $INSTDIR
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayName" "mRemoteNG"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "Publisher" "Next Generation Software"
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayIcon" "$INSTDIR\mRemoteNG.exe"
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "EstimatedSize" 7080
+	WriteRegStr HKLM "Software\mRemote3G" "InstallPath" $INSTDIR
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemote3G" "DisplayName" "mRemote3G"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemote3G" "Publisher" "kmscode"
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemote3G" "DisplayIcon" "$INSTDIR\mRemote3G.exe"
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemote3G" "EstimatedSize" 7080
 
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "DisplayVersion" ${PRODUCT_VERSION}
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "VersionMajor" ${PRODUCT_VERSION_MAJOR}
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "VersionMinor" ${PRODUCT_VERSION_MINOR}
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemote3G" "DisplayVersion" ${PRODUCT_VERSION}
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemote3G" "VersionMajor" ${PRODUCT_VERSION_MAJOR}
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemote3G" "VersionMinor" ${PRODUCT_VERSION_MINOR}
 
-	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "UninstallString" '"$INSTDIR\Uninstall.exe"'
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "NoModify" 1
-	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG" "NoRepair" 1
+	WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemote3G" "UninstallString" '"$INSTDIR\Uninstall.exe"'
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemote3G" "NoModify" 1
+	WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemote3G" "NoRepair" 1
 SectionEnd
 
 Section "un.Uninstall"
-	; Unregister ActiveX components
-	UnregDLL "$INSTDIR\eolwtscom.dll"
-
 	; Delete Files
 	RMDIR /r $INSTDIR
 
 	; Start Menu
 	SetShellVarContext all
-	RMDir /r "$SMPROGRAMS\mRemoteNG"
+	RMDir /r "$SMPROGRAMS\mRemote3G"
 	SetShellVarContext current
-	RMDir /r "$SMPROGRAMS\mRemoteNG"
+	RMDir /r "$SMPROGRAMS\mRemote3G"
 
 	; Registry
-	DeleteRegValue HKLM "Software\mRemoteNG" "InstallPath"
-	DeleteRegKey /ifempty HKLM "Software\mRemoteNG"
-	DeleteRegKey /ifempty HKCU "Software\mRemoteNG"
-	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemoteNG"
+	DeleteRegValue HKLM "Software\mRemote3G" "InstallPath"
+	DeleteRegKey /ifempty HKLM "Software\mRemote3G"
+	DeleteRegKey /ifempty HKCU "Software\mRemote3G"
+	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\mRemote3G"
 SectionEnd
