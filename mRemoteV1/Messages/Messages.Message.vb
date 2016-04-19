@@ -8,31 +8,34 @@ Namespace Messages
 
     Public Class Message
         Private _MsgClass As MessageClass
-        Public Property MsgClass() As MessageClass
+
+        Public Property MsgClass As MessageClass
             Get
                 Return _MsgClass
             End Get
-            Set(ByVal value As MessageClass)
+            Set
                 _MsgClass = value
             End Set
         End Property
 
         Private _MsgText As String
-        Public Property MsgText() As String
+
+        Public Property MsgText As String
             Get
                 Return _MsgText
             End Get
-            Set(ByVal value As String)
+            Set
                 _MsgText = value
             End Set
         End Property
 
         Private _MsgDate As Date
-        Public Property MsgDate() As Date
+
+        Public Property MsgDate As Date
             Get
                 Return _MsgDate
             End Get
-            Set(ByVal value As Date)
+            Set
                 _MsgDate = value
             End Set
         End Property

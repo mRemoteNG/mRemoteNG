@@ -106,7 +106,7 @@
     </xsd:element>
   </xsd:schema>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -115,7 +115,7 @@
     <value>2.0</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strAbout" xml:space="preserve">
     <value>Om</value>
@@ -139,7 +139,7 @@
     <value>AddNodesFromSQL mislyktes!</value>
   </data>
   <data name="strAllowOnlySingleInstance" xml:space="preserve">
-    <value>Tillat bare én instans av programmet (omstart av mRemoteNG påkrevd)</value>
+    <value>Tillat bare én instans av programmet (omstart av mRemote3G påkrevd)</value>
   </data>
   <data name="strAlways" xml:space="preserve">
     <value>Alltid</value>
@@ -285,9 +285,9 @@ Vennligst bruk Fil - Last inn tilkoblinger for vanlige tilkoblingsfiler!</value>
   </data>
   <data name="strCcEOLFailed" xml:space="preserve">
     <value>(RDP) økter-funksjonen krever at du har en registrert kopi av eolwtscom.dll på systemet.
-mRemoteNG leveres med denne komponenten, men vil ikke automatisk registrere det med mindre du kjører installasjonsprogrammet.
-For å registrere det manuelt gjør dette: Åpne Kjør-dialogboksen (Start - Kjør) og skriv inn følgende: regsvr32 "c:\Program Files\mRemoteNG\eolwtscom.dll" (der c:\Program Files\mRemoteNG\ er banen til din mRemoteNG-installasjon).
-Hvis du fortsatt ikke passerer denne kontrollen eller bruke (RDP) økter-funksjonene i mRemoteNG kan du konsultere mRemoteNG-forumet på http://forum.mremoteng.org/</value>
+mRemote3G leveres med denne komponenten, men vil ikke automatisk registrere det med mindre du kjører installasjonsprogrammet.
+For å registrere det manuelt gjør dette: Åpne Kjør-dialogboksen (Start - Kjør) og skriv inn følgende: regsvr32 "c:\Program Files\mRemote3G\eolwtscom.dll" (der c:\Program Files\mRemote3G\ er banen til din mRemote3G-installasjon).
+Hvis du fortsatt ikke passerer denne kontrollen eller bruke (RDP) økter-funksjonene i mRemote3G kan du konsultere mRemote3G-forumet på http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM ble funnet, og synes å være korrekt registrert.</value>
@@ -295,8 +295,8 @@ Hvis du fortsatt ikke passerer denne kontrollen eller bruke (RDP) økter-funksjo
   <data name="strCcGeckoFailed" xml:space="preserve">
     <value>For å bruke Gecko-renderingsmotoren må du ha XULrunner 1.8.1.x installert og stien til installasjonen angitt i Alternativer.
 Du kan laste ned XULrunner 1.8.1.3 herfra: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
-Når nedlastingen er ferdig, pakk den ut til et passende sted. I mRemoteNG, gå til Verktøy - Alternativer - Avansert og skriv inn korrekt sti i XULrunner-stifeltet.
-Hvis du fremdeles ikke passerer denne kontrollen eller brukre Gecko-renderingsmotoren i mRemoteNG, vennligst konsulter mRemoteNG-forumet på http://forum.mremoteng.org/</value>
+Når nedlastingen er ferdig, pakk den ut til et passende sted. I mRemote3G, gå til Verktøy - Alternativer - Avansert og skriv inn korrekt sti i XULrunner-stifeltet.
+Hvis du fremdeles ikke passerer denne kontrollen eller brukre Gecko-renderingsmotoren i mRemote3G, vennligst konsulter mRemote3G-forumet på http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>XULrunner ble funnet å ser ut til å være korrekt installert.</value>
@@ -305,7 +305,7 @@ Hvis du fremdeles ikke passerer denne kontrollen eller brukre Gecko-renderingsmo
     <value>ICA krever at XenDesktop Online Plugin er installert og at wfica.ocx-biblioteket er registrert. Du kan laste ned klienten herfra: http://www.citrix.com/download/
 Hvis du har XenDesktop Online Pluginen installert og kontrollen fremdeles feiler, kan du forsøke å registrere wfica.ocx manuelt.
 For å gjøre dette, åpne Kjør-dialogboksen (Start - Kjør) og skriv inn følgende: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (der c:\Program Files\Citrix\ICA Client\ er stien til XenDesktop Online Plugin-installasjonen).
-Hvis du fremdeles ikke passerer kontrollen eller bruke ICA i mRemoteNG, vennligst konsulter mRemoteNG-forumet på http://forum.mremoteng.org/</value>
+Hvis du fremdeles ikke passerer kontrollen eller bruke ICA i mRemote3G, vennligst konsulter mRemote3G-forumet på http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
     <value>Alle ICA-komponenter ble funnet, og ser ut til å være korrekt registrert.
@@ -315,8 +315,8 @@ Citrix ICA Client Control Version {0}</value>
     <value>ikke korrekt installert</value>
   </data>
   <data name="strCcPuttyFailed" xml:space="preserve">
-    <value>SSH-, Telnet-, Rlogin- og RAW-protokollene trenger PuTTY for å fungere. PuTTY kommer med hver mRemoteNG-pakke, og ligger i installasjonsstien.
-Vennligst kontroller at du enten har putty.exe i mRemoteNG-mappen (standard: C:\Program Files\mRemoteNG\) eller at du har angitt en gyldig sti til putty.exe i Alternativer (Verktøy - Alternativer - Avansert - Egendefinert bane til PuTTY)</value>
+    <value>SSH-, Telnet-, Rlogin- og RAW-protokollene trenger PuTTY for å fungere. PuTTY kommer med hver mRemote3G-pakke, og ligger i installasjonsstien.
+Vennligst kontroller at du enten har putty.exe i mRemote3G-mappen (standard: C:\Program Files\mRemote3G\) eller at du har angitt en gyldig sti til putty.exe i Alternativer (Verktøy - Alternativer - Avansert - Egendefinert bane til PuTTY)</value>
   </data>
   <data name="strCcPuttyOK" xml:space="preserve">
     <value>PuTTY ble funnet og er klar til bruk.</value>
@@ -324,23 +324,23 @@ Vennligst kontroller at du enten har putty.exe i mRemoteNG-mappen (standard: C:\
   <data name="strCcRDPFailed" xml:space="preserve">
     <value>For at RDP skal fungere korrekt må du som et minimum ha Remote Desktop Connection (Terminal Services Client) 6.1 installert. Denne kan lastes ned herfra: http://support.microsoft.com/kb/951616
 Hvis du har RDP 6.1 installert og kontrollen fremdeles feiler, kan du prøve å registrere mstscax.dll manuelt. For å gjøre dette, åpne Kjør-dialogboksen (Start - Kjør) og skriv inn følgende: regsvr32 "c:\windows\system32\mstscax.dll" (der c:\ er systemdisken).
-Hvis du fremdeles har problemer med å få RDP til å fungere, vennligst konsulter mRemoteNG-forumet på http://forum.mremoteng.org/</value>
+Hvis du fremdeles har problemer med å få RDP til å fungere, vennligst konsulter mRemote3G-forumet på http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
     <value>Alle RDP-komponenter ble funnet og ser ut til å være korrekt registrert.
 Remote Desktop Connection Control Version {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC krever at VncSharpNG.dll finnes i mappen mRemoteNG er installert i.
-Vennligst kontroller at du har VncSharpNG.dll i installasjonsmappen til mRemoteNG (vanligvis C:\Program Files\mRemoteNG\).
-Hvis du ikke passerer kontrollen eller ikke får brukt VNC i mRemoteNG, vennligst konsulter mRemoteNG-forumet på http://forum.mremoteng.org/</value>
+    <value>VNC krever at VncSharpNG.dll finnes i mappen mRemote3G er installert i.
+Vennligst kontroller at du har VncSharpNG.dll i installasjonsmappen til mRemote3G (vanligvis C:\Program Files\mRemote3G\).
+Hvis du ikke passerer kontrollen eller ikke får brukt VNC i mRemote3G, vennligst konsulter mRemote3G-forumet på http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>Alle VNC-komponenter ble funnet og ser ut til å være korrekt registrert.
 VncSharpNG Control Version {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Forsøk å automatisk koble til på nytt ved frakobling fra server (kun RDP &amp;&amp; ICA)</value>
+    <value>Forsøk å automatisk koble til på nytt ved frakobling fra server (kun RDP)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Domene</value>
@@ -650,7 +650,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Eksporter</value>
   </data>
   <data name="strExportmRemoteXML" xml:space="preserve">
-    <value>Eksporter mRemote/mRemoteNG XML</value>
+    <value>Eksporter mRemote/mRemote3G XML</value>
   </data>
   <data name="strExtApp" xml:space="preserve">
     <value>Ekstern applikasjon</value>
@@ -752,7 +752,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Import/eksport</value>
   </data>
   <data name="strImportmRemoteXML" xml:space="preserve">
-    <value>Importere mRemote/mRemoteNG XML</value>
+    <value>Importere mRemote/mRemote3G XML</value>
   </data>
   <data name="strImportPortScan" xml:space="preserve">
     <value>Import fra Port Scan</value>
@@ -767,7 +767,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Informasjon</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG er oppdatert</value>
+    <value>mRemote3G er oppdatert</value>
   </data>
   <data name="strIntAppConnectionFailed" xml:space="preserve">
     <value>Tilkobling mislyktes!</value>
@@ -995,7 +995,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>&amp;Hjelp</value>
   </data>
   <data name="strMenuHelpContents" xml:space="preserve">
-    <value>mRemoteNG-hjelp</value>
+    <value>mRemote3G-hjelp</value>
   </data>
   <data name="strMenuJumpTo" xml:space="preserve">
     <value>Hopp til</value>
@@ -1199,7 +1199,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Kunne ikke laste inn PortScan-panelet!</value>
   </data>
   <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-    <value>(Disse egenskapene vil bare lagres dersom du velger mRemote/mRemoteNG XML som format for målfilen!)</value>
+    <value>(Disse egenskapene vil bare lagres dersom du velger mRemote/mRemote3G XML som format for målfilen!)</value>
   </data>
   <data name="strPropertyDescriptionAddress" xml:space="preserve">
     <value>Angi vertsnavnet eller IP-adressen du ønsker å koble til.</value>
@@ -1274,7 +1274,7 @@ Se Microsoft Support-artikkelen på http://support.microsoft.com/kb/811833 for m
     <value>Angi porten den valgte protokollen lytter på.</value>
   </data>
   <data name="strPropertyDescriptionProtocol" xml:space="preserve">
-    <value>Velg protokollen mRemoteNG skal bruke for å koble til verten.</value>
+    <value>Velg protokollen mRemote3G skal bruke for å koble til verten.</value>
   </data>
   <data name="strPropertyDescriptionPuttySession" xml:space="preserve">
     <value>Velg en PuTTY-sesjon som skal brukes ved tilkobling.</value>
@@ -1580,7 +1580,7 @@ Melding:
     <value>&amp;Advar meg når tilkoblinger lukkes</value>
   </data>
   <data name="strRadioCloseWarnExit" xml:space="preserve">
-    <value>Advar meg bare ved a&amp;vslutning av mRemoteNG</value>
+    <value>Advar meg bare ved a&amp;vslutning av mRemote3G</value>
   </data>
   <data name="strRadioCloseWarnMultiple" xml:space="preserve">
     <value>Advar meg bare ved lukking av &amp;mange tilkoblinger samtidig</value>
@@ -1625,7 +1625,7 @@ Melding:
     <value>Åpning av tilkobling mislyktes!</value>
   </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
-    <value>Kunne ikke opprette RDP-kontroll, vennligst kontroller mRemoteNGs systemkrav.</value>
+    <value>Kunne ikke opprette RDP-kontroll, vennligst kontroller mRemote3Gs systemkrav.</value>
   </data>
   <data name="strRDPDisableCursorblinking" xml:space="preserve">
     <value>Deaktiver blinkende markør</value>
@@ -2078,10 +2078,10 @@ Melding:
     <value>Tema uten navn</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
-    <value>mRemoteNG krever en oppdatering</value>
+    <value>mRemote3G krever en oppdatering</value>
   </data>
   <data name="strUpdateCheck" xml:space="preserve">
-    <value>mRemoteNG kan med jevne mellomrom koble til mRemoteNG-webområdet for å se etter oppdateringer og produktkunngjøringer.</value>
+    <value>mRemote3G kan med jevne mellomrom koble til mRemote3G-webområdet for å se etter oppdateringer og produktkunngjøringer.</value>
   </data>
   <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
     <value>Fullføring av sjekk for oppdatering mislyktes!</value>
@@ -2090,14 +2090,14 @@ Melding:
     <value>Sjekk for oppdatering mislyktes!</value>
   </data>
   <data name="strUpdateCheckPortableEdition" xml:space="preserve">
-    <value>mRemoteNG Portable Edition støtter for øyeblikket ikke automatiske oppdateringer.</value>
+    <value>mRemote3G Portable Edition støtter for øyeblikket ikke automatiske oppdateringer.</value>
   </data>
   <data name="strUpdateDeleteFailed" xml:space="preserve">
     <value>Feil ved sletting av oppdateringsfilen!</value>
   </data>
   <data name="strUpdateDownloadComplete" xml:space="preserve">
     <value>Nedlastingen er fullført!
-mRemoteNG vil nå avslutte og starte installasjonen.</value>
+mRemote3G vil nå avslutte og starte installasjonen.</value>
   </data>
   <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
     <value>Nedlasting fullført mislyktes!</value>
@@ -2181,7 +2181,7 @@ mRemoteNG vil nå avslutte og starte installasjonen.</value>
     <value>Bruker DockPanel Suite av [Weifen Luo]</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Skriv loggfil (mRemoteNG.log)</value>
+    <value>Skriv loggfil (mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>XULrunner filsti:</value>

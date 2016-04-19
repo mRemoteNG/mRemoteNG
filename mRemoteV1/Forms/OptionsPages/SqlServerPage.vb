@@ -1,29 +1,29 @@
-﻿Imports mRemoteNG.My
-Imports mRemoteNG.App
-Imports mRemoteNG.App.Info
-Imports mRemoteNG.Security
+﻿
+Imports mRemote3G.App
+Imports mRemote3G.App.Info
+Imports mRemote3G.Security
 
 Namespace Forms.OptionsPages
     Public Class SqlServerPage
-        Public Overrides Property PageName() As String
+        Public Overrides Property PageName As String
             Get
-                Return Language.strSQLServer.TrimEnd(":")
+                Return Language.Language.strSQLServer.TrimEnd(":")
             End Get
-            Set(value As String)
+            Set
             End Set
         End Property
 
         Public Overrides Sub ApplyLanguage()
             MyBase.ApplyLanguage()
 
-            lblExperimental.Text = Language.strExperimental.ToUpper
-            lblSQLInfo.Text = Language.strSQLInfo
+            lblExperimental.Text = Language.Language.strExperimental.ToUpper
+            lblSQLInfo.Text = Language.Language.strSQLInfo
 
-            chkUseSQLServer.Text = Language.strUseSQLServer
-            lblSQLServer.Text = Language.strLabelHostname
-            lblSQLDatabaseName.Text = Language.strLabelSQLServerDatabaseName
-            lblSQLUsername.Text = Language.strLabelUsername
-            lblSQLPassword.Text = Language.strLabelPassword
+            chkUseSQLServer.Text = Language.Language.strUseSQLServer
+            lblSQLServer.Text = Language.Language.strLabelHostname
+            lblSQLDatabaseName.Text = Language.Language.strLabelSQLServerDatabaseName
+            lblSQLUsername.Text = Language.Language.strLabelUsername
+            lblSQLPassword.Text = Language.Language.strLabelPassword
         End Sub
 
         Public Overrides Sub LoadSettings()
@@ -52,7 +52,8 @@ Namespace Forms.OptionsPages
             End If
         End Sub
 
-        Private Sub chkUseSQLServer_CheckedChanged(ByVal sender As Object, ByVal e As EventArgs) Handles chkUseSQLServer.CheckedChanged
+        Private Sub chkUseSQLServer_CheckedChanged(sender As Object, e As EventArgs) _
+            Handles chkUseSQLServer.CheckedChanged
             lblSQLServer.Enabled = chkUseSQLServer.Checked
             lblSQLDatabaseName.Enabled = chkUseSQLServer.Checked
             lblSQLUsername.Enabled = chkUseSQLServer.Checked

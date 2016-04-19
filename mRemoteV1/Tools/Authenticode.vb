@@ -1,14 +1,15 @@
 ﻿Imports System.IO
-Imports System.Security.Cryptography.X509Certificates
+Imports System.Reflection
 Imports System.Runtime.InteropServices
 Imports System.Security.Cryptography
-Imports System.Reflection
-Imports System.ComponentModel
+Imports System.Security.Cryptography.X509Certificates
 
 Namespace Tools
     Public Class Authenticode
+
 #Region "Public Methods"
-        Public Sub New(ByVal filePath As String)
+
+        Public Sub New(filePath As String)
             Me.FilePath = filePath
         End Sub
 
@@ -66,7 +67,8 @@ Namespace Tools
                     windowHandle = DisplayParentForm.Handle
                 End If
 
-                _trustProviderErrorCode = Win32.WinVerifyTrust(windowHandle, Win32.WINTRUST_ACTION_GENERIC_VERIFY_V2, trustDataPointer)
+                _trustProviderErrorCode = Win32.WinVerifyTrust(windowHandle, Win32.WINTRUST_ACTION_GENERIC_VERIFY_V2,
+                                                               trustDataPointer)
                 Select Case _trustProviderErrorCode
                     Case Win32.TRUST_E_NOSIGNATURE
                         _status = StatusValue.NoSignature
@@ -81,7 +83,9 @@ Namespace Tools
                 _status = StatusValue.Verified
                 Return _status
             Catch ex As CryptographicException
-                Dim hResultProperty As PropertyInfo = ex.GetType.GetProperty("HResult", BindingFlags.NonPublic Or BindingFlags.Instance)
+                Dim hResultProperty As PropertyInfo = ex.GetType.GetProperty("HResult",
+                                                                             BindingFlags.NonPublic Or
+                                                                             BindingFlags.Instance)
                 Dim hResult As Integer = hResultProperty.GetValue(ex, Nothing)
                 If hResult = Win32.CRYPT_E_NO_MATCH Then
                     _status = StatusValue.NoSignature
@@ -100,24 +104,27 @@ Namespace Tools
                 If Not trustFileInfoPointer = IntPtr.Zero Then Marshal.FreeCoTaskMem(trustFileInfoPointer)
             End Try
         End Function
+
 #End Region
 
 #Region "Public Properties"
-        Public Property Display() As DisplayValue = DisplayValue.None
-        Public Property DisplayContext() As DisplayContextValue
-        Public Property DisplayParentForm() As Form
-        Public Property Exception() As Exception
-        Public Property FilePath() As String
-        Public Property RequireThumbprintMatch() As Boolean
+
+        Public Property Display As DisplayValue = DisplayValue.None
+        Public Property DisplayContext As DisplayContextValue
+        Public Property DisplayParentForm As Form
+        Public Property Exception As Exception
+        Public Property FilePath As String
+        Public Property RequireThumbprintMatch As Boolean
 
         Private _status As StatusValue
-        Public ReadOnly Property Status() As StatusValue
+
+        Public ReadOnly Property Status As StatusValue
             Get
                 Return _status
             End Get
         End Property
 
-        Public ReadOnly Property StatusMessage() As String
+        Public ReadOnly Property StatusMessage As String
             Get
                 Select Case Status
                     Case StatusValue.Verified
@@ -131,10 +138,12 @@ Namespace Tools
                     Case StatusValue.NoThumbprintToMatch
                         Return "A thumbprint match is required but no thumbprint to match against was specified."
                     Case StatusValue.ThumbprintNotMatch
-                        Return String.Format("The thumbprint does not match. {0} {1} {2}.", _thumbprint, ChrW(&H2260), ThumbprintToMatch)
+                        Return _
+                            String.Format("The thumbprint does not match. {0} {1} {2}.", _thumbprint, ChrW(&H2260),
+                                          ThumbprintToMatch)
                     Case StatusValue.TrustProviderError
-                        Dim ex As New Win32Exception(_trustProviderErrorCode)
-                        Return String.Format("The trust provider returned an error. {0}", ex.Message)
+                        Dim ex As New InvalidOperationException(_trustProviderErrorCode)
+                        Return String.Format("The trust provider returned an error. {0}", ex.ToString())
                     Case StatusValue.UnhandledException
                         Return String.Format("An unhandled exception occurred. {0}", Exception.Message)
                     Case Else
@@ -144,24 +153,28 @@ Namespace Tools
         End Property
 
         Private _thumbprint As String
-        Public ReadOnly Property Thumbprint() As String
+
+        Public ReadOnly Property Thumbprint As String
             Get
                 Return _thumbprint
             End Get
         End Property
 
-        Public Property ThumbprintToMatch() As String
+        Public Property ThumbprintToMatch As String
 
         Private _trustProviderErrorCode As Integer
-        Public ReadOnly Property TrustProviderErrorCode() As Integer
+
+        Public ReadOnly Property TrustProviderErrorCode As Integer
             Get
                 Return _trustProviderErrorCode
             End Get
         End Property
+
 #End Region
 
 #Region "Public Enums"
-        Public Enum DisplayValue As UInt32
+
+        Public Enum DisplayValue
             Unknown = 0
             All = Win32.WTD_UI_ALL
             None = Win32.WTD_UI_NONE
@@ -169,12 +182,12 @@ Namespace Tools
             NoGood = Win32.WTD_UI_NOGOOD
         End Enum
 
-        Public Enum DisplayContextValue As UInt32
+        Public Enum DisplayContextValue
             Execute = Win32.WTD_UICONTEXT_EXECUTE
             Install = Win32.WTD_UICONTEXT_INSTALL
         End Enum
 
-        Public Enum StatusValue As Integer
+        Public Enum StatusValue
             Unknown = 0
             Verified
             FileNotExist
@@ -185,16 +198,20 @@ Namespace Tools
             TrustProviderError
             UnhandledException
         End Enum
+
 #End Region
 
 #Region "Protected Classes"
+
         Protected Class Win32
             ' ReSharper disable InconsistentNaming
-            <DllImport("wintrust.dll", CharSet:=CharSet.Auto, SetLastError:=False)> _
-            Public Shared Function WinVerifyTrust(<[In]()> ByVal hWnd As IntPtr, <[In](), MarshalAs(UnmanagedType.LPStruct)> ByVal pgActionOID As Guid, <[In]()> ByVal pWVTData As IntPtr) As Integer
+            <DllImport("wintrust.dll", CharSet := CharSet.Auto, SetLastError := False)>
+            Public Shared Function WinVerifyTrust(<[In]> hWnd As IntPtr,
+                                                  <[In], MarshalAs(UnmanagedType.LPStruct)> pgActionOID As Guid,
+                                                  <[In]> pWVTData As IntPtr) As Integer
             End Function
 
-            <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)> _
+            <StructLayout(LayoutKind.Sequential, CharSet := CharSet.Unicode)>
             Public Class WINTRUST_DATA
                 Public cbStruct As UInt32 = Marshal.SizeOf(GetType(WINTRUST_DATA))
                 Public pPolicyCallbackData As IntPtr
@@ -210,11 +227,10 @@ Namespace Tools
                 Public dwUIContext As UInt32
             End Class
 
-            <StructLayout(LayoutKind.Sequential, CharSet:=CharSet.Unicode)> _
+            <StructLayout(LayoutKind.Sequential, CharSet := CharSet.Unicode)>
             Public Class WINTRUST_FILE_INFO
                 Public cbStruct As UInt32 = Marshal.SizeOf(GetType(WINTRUST_FILE_INFO))
-                <MarshalAs(UnmanagedType.LPTStr)> _
-                Public pcwszFilePath As String
+                <MarshalAs(UnmanagedType.LPTStr)> Public pcwszFilePath As String
                 Public hFile As IntPtr
                 Public pgKnownSubject As IntPtr
             End Class
@@ -224,7 +240,8 @@ Namespace Tools
             Public Const TRUST_E_SUBJECT_NOT_TRUSTED As Integer = &H800B0004
             Public Const TRUST_E_NOSIGNATURE As Integer = &H800B0100
 
-            Public Shared ReadOnly WINTRUST_ACTION_GENERIC_VERIFY_V2 As New Guid("{00AAC56B-CD44-11d0-8CC2-00C04FC295EE}")
+            Public Shared ReadOnly _
+                WINTRUST_ACTION_GENERIC_VERIFY_V2 As New Guid("{00AAC56B-CD44-11d0-8CC2-00C04FC295EE}")
 
             Public Const WTD_CHOICE_FILE As UInt32 = 1
             Public Const WTD_DISABLE_MD2_MD4 As UInt32 = &H2000
@@ -242,7 +259,14 @@ Namespace Tools
             Public Const WTD_UICONTEXT_EXECUTE As UInt32 = 0
             Public Const WTD_UICONTEXT_INSTALL As UInt32 = 1
             ' ReSharper restore InconsistentNaming
+
+            Private Sub New()
+            End Sub
         End Class
+
 #End Region
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

@@ -1,6 +1,8 @@
 ﻿Imports System.IO
-Imports System.Xml
 Imports System.Reflection
+Imports System.Text
+Imports System.Text.RegularExpressions
+Imports System.Xml
 
 Namespace Themes
     Public Class ThemeSerializer
@@ -12,7 +14,7 @@ Namespace Themes
 
         Public Shared Sub SaveToXmlFile(themes As List(Of ThemeInfo), filename As String)
             Dim tempFileName As String = Path.GetTempFileName()
-            Dim xmlTextWriter As New XmlTextWriter(tempFileName, System.Text.Encoding.UTF8)
+            Dim xmlTextWriter As New XmlTextWriter(tempFileName, Encoding.UTF8)
 
             xmlTextWriter.Formatting = Formatting.Indented
             xmlTextWriter.Indentation = 4
@@ -99,7 +101,7 @@ Namespace Themes
             Return themes
         End Function
 
-        Private Shared Function EncodeColorName(ByVal color As Color) As String
+        Private Shared Function EncodeColorName(color As Color) As String
             If color.IsNamedColor Then
                 Return color.Name
             Else
@@ -107,13 +109,16 @@ Namespace Themes
             End If
         End Function
 
-        Private Shared Function DecodeColorName(ByVal name As String) As Color
-            Dim regex As New System.Text.RegularExpressions.Regex("^[0-9a-fA-F]{8}$")
+        Private Shared Function DecodeColorName(name As String) As Color
+            Dim regex As New Regex("^[0-9a-fA-F]{8}$")
             If regex.Match(name).Success Then
                 Return Color.FromArgb(Convert.ToInt32(name, 16))
             Else
                 Return Color.FromName(name)
             End If
         End Function
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

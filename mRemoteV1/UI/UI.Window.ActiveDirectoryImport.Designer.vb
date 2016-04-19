@@ -73,7 +73,7 @@
                 Me.Controls.Add(Me.btnChangeDomain)
                 Me.Controls.Add(Me.btnImport)
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.Icon = Global.mRemoteNG.My.Resources.Resources.ActiveDirectory_Icon
+                Me.Icon = Global.mRemote3G.My.Resources.Resources.ActiveDirectory_Icon
                 Me.Name = "ActiveDirectoryImport"
                 Me.TabText = "Active Directory Import"
                 Me.Text = "Active Directory Import"

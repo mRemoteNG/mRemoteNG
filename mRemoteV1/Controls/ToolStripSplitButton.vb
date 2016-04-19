@@ -1,12 +1,12 @@
 ﻿Namespace Controls
     Public Class ToolStripSplitButton
-        Inherits Windows.Forms.ToolStripSplitButton
+        Inherits System.Windows.Forms.ToolStripSplitButton
 
         Public Overloads Property DropDown As ToolStripDropDown
             Get
                 Return MyBase.DropDown
             End Get
-            Set(value As ToolStripDropDown)
+            Set
                 If MyBase.DropDown IsNot value Then
                     MyBase.DropDown = value
                     AddHandler MyBase.DropDown.Closing, AddressOf DropDown_Closing
@@ -14,12 +14,13 @@
             End Set
         End Property
 
-        Private Sub DropDown_Closing(ByVal sender As Object, e As ToolStripDropDownClosingEventArgs)
+        Private Sub DropDown_Closing(sender As Object, e As ToolStripDropDownClosingEventArgs)
             If Not e.CloseReason = ToolStripDropDownCloseReason.AppClicked Then Return
 
             Dim dropDownButtonBoundsClient As Rectangle = DropDownButtonBounds ' Relative to the ToolStripSplitButton
             dropDownButtonBoundsClient.Offset(Bounds.Location) ' Relative to the parent of the ToolStripSplitButton
-            Dim dropDownButtonBoundsScreen As Rectangle = GetCurrentParent().RectangleToScreen(dropDownButtonBoundsClient) ' Relative to the screen
+            Dim dropDownButtonBoundsScreen As Rectangle =
+                    GetCurrentParent().RectangleToScreen(dropDownButtonBoundsClient) ' Relative to the screen
 
             If dropDownButtonBoundsScreen.Contains(Control.MousePosition) Then e.Cancel = True
         End Sub

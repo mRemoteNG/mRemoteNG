@@ -13,5 +13,8 @@ Namespace Images
             _Warning = 1
             _Error = 2
         End Enum
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace

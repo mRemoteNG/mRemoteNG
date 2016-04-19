@@ -1,15 +1,26 @@
-Imports System.Windows.Forms
-Imports System.Xml
-Imports System.IO
-Imports System.Globalization
-Imports mRemoteNG.App.Runtime
 Imports System.Data.SqlClient
-Imports mRemoteNG.Tools.Misc
+Imports System.Globalization
+Imports System.IO
+Imports System.Text
+Imports System.Xml
+Imports mRemote3G.App
+Imports mRemote3G.App.Info
+Imports mRemote3G.Connection
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Forms
+Imports mRemote3G.Messages
+Imports mRemote3G.My
+Imports mRemote3G.Security
+Imports mRemote3G.Tools
+Imports mRemote3G.Tree
 
 Namespace Config
+
     Namespace Connections
-        Public Class Save
+        Public Class ConnectionsSave
+
 #Region "Public Enums"
+
             Public Enum Format
                 None
                 mRXML
@@ -18,20 +29,24 @@ Namespace Config
                 vRDCSV
                 SQL
             End Enum
+
 #End Region
 
 #Region "Private Properties"
+
             Private _xmlTextWriter As XmlTextWriter
-            Private _password As String = App.Info.General.EncryptionKey
+            Private _password As String = General.EncryptionKey
 
             Private _sqlConnection As SqlConnection
             Private _sqlQuery As SqlCommand
 
             Private _currentNodeIndex As Integer = 0
             Private _parentConstantId As String = 0
+
 #End Region
 
 #Region "Public Properties"
+
             Public Property SQLHost As String
             Public Property SQLDatabaseName As String
             Public Property SQLUsername As String
@@ -41,12 +56,14 @@ Namespace Config
             Public Property RootTreeNode As TreeNode
             Public Property Export As Boolean
             Public Property SaveFormat As Format
-            Public Property SaveSecurity As Security.Save
-            Public Property ConnectionList As Connection.List
+            Public Property SaveSecurity As Save
+            Public Property ConnectionList As List
             Public Property ContainerList As Container.List
+
 #End Region
 
 #Region "Public Methods"
+
             Public Sub Save()
                 Select Case SaveFormat
                     Case Format.SQL
@@ -59,47 +76,68 @@ Namespace Config
                         SaveTovRDCSV()
                     Case Else
                         SaveToXml()
-                        If My.Settings.EncryptCompleteConnectionsFile Then
+                        If MySettingsProperty.Settings.EncryptCompleteConnectionsFile Then
                             EncryptCompleteFile()
                         End If
                         If Not Export Then frmMain.ConnectionsFileName = ConnectionFileName
                 End Select
                 frmMain.UsingSqlServer = (SaveFormat = Format.SQL)
             End Sub
+
 #End Region
 
 #Region "SQL"
-            Private Function VerifyDatabaseVersion(ByVal sqlConnection As SqlConnection) As Boolean
-                Dim isVerified As Boolean = False
+
+            Private Function VerifyDatabaseVersion(sqlConnection As SqlConnection) As Boolean
+                Dim isVerified = False
                 Dim sqlDataReader As SqlDataReader = Nothing
-                Dim databaseVersion As System.Version = Nothing
+                Dim databaseVersion As Version = Nothing
                 Try
                     Dim sqlCommand As New SqlCommand("SELECT * FROM tblRoot", sqlConnection)
                     sqlDataReader = sqlCommand.ExecuteReader()
                     If (Not sqlDataReader.HasRows) Then Return True ' assume new empty database
                     sqlDataReader.Read()
 
-                    databaseVersion = New Version(Convert.ToString(sqlDataReader.Item("confVersion"), CultureInfo.InvariantCulture))
+                    databaseVersion = New Version(Convert.ToString(sqlDataReader.Item("confVersion"),
+                                                                   CultureInfo.InvariantCulture))
 
                     sqlDataReader.Close()
 
-                    If databaseVersion.CompareTo(New System.Version(2, 2)) = 0 Then ' 2.2
-                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.3"))
-                        sqlCommand = New SqlCommand("ALTER TABLE tblCons ADD EnableFontSmoothing bit NOT NULL DEFAULT 0, EnableDesktopComposition bit NOT NULL DEFAULT 0, InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;", sqlConnection)
+                    If databaseVersion.CompareTo(New Version(2, 2)) = 0 Then ' 2.2
+                        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                            String.Format(
+                                                                "Upgrading database from version {0} to version {1}.",
+                                                                databaseVersion.ToString, "2.3"))
+                        sqlCommand =
+                            New SqlCommand(
+                                "ALTER TABLE tblCons ADD EnableFontSmoothing bit NOT NULL DEFAULT 0, EnableDesktopComposition bit NOT NULL DEFAULT 0, InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;",
+                                sqlConnection)
                         sqlCommand.ExecuteNonQuery()
-                        databaseVersion = New System.Version(2, 3)
+                        databaseVersion = New Version(2, 3)
                     End If
 
-                    If databaseVersion.CompareTo(New System.Version(2, 3)) = 0 Then ' 2.3
-                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.4"))
-                        sqlCommand = New SqlCommand("ALTER TABLE tblCons ADD UseCredSsp bit NOT NULL DEFAULT 1, InheritUseCredSsp bit NOT NULL DEFAULT 0;", sqlConnection)
+                    If databaseVersion.CompareTo(New Version(2, 3)) = 0 Then ' 2.3
+                        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                            String.Format(
+                                                                "Upgrading database from version {0} to version {1}.",
+                                                                databaseVersion.ToString, "2.4"))
+                        sqlCommand =
+                            New SqlCommand(
+                                "ALTER TABLE tblCons ADD UseCredSsp bit NOT NULL DEFAULT 1, InheritUseCredSsp bit NOT NULL DEFAULT 0;",
+                                sqlConnection)
                         sqlCommand.ExecuteNonQuery()
                         databaseVersion = New Version(2, 4)
                     End If
 
                     If databaseVersion.CompareTo(New Version(2, 4)) = 0 Then ' 2.4
-                        MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, String.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString, "2.5"))
-                        sqlCommand = New SqlCommand("ALTER TABLE tblCons ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, AutomaticResize bit NOT NULL DEFAULT 1, InheritLoadBalanceInfo bit NOT NULL DEFAULT 0, InheritAutomaticResize bit NOT NULL DEFAULT 0;", sqlConnection)
+                        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                            String.Format(
+                                                                "Upgrading database from version {0} to version {1}.",
+                                                                databaseVersion.ToString, "2.5"))
+                        sqlCommand =
+                            New SqlCommand(
+                                "ALTER TABLE tblCons ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, AutomaticResize bit NOT NULL DEFAULT 1, InheritLoadBalanceInfo bit NOT NULL DEFAULT 0, InheritAutomaticResize bit NOT NULL DEFAULT 0;",
+                                sqlConnection)
                         sqlCommand.ExecuteNonQuery()
                         databaseVersion = New Version(2, 5)
                     End If
@@ -109,10 +147,16 @@ Namespace Config
                     End If
 
                     If isVerified = False Then
-                        MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, String.Format(My.Language.strErrorBadDatabaseVersion, databaseVersion.ToString, My.Application.Info.ProductName))
+                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
+                                                            String.Format(Language.Language.strErrorBadDatabaseVersion,
+                                                                          databaseVersion.ToString,
+                                                                          Application.Info.ProductName))
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, String.Format(My.Language.strErrorVerifyDatabaseVersionFailed, ex.Message))
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        String.Format(
+                                                            Language.Language.strErrorVerifyDatabaseVersionFailed,
+                                                            ex.ToString()))
                 Finally
                     If sqlDataReader IsNot Nothing Then
                         If Not sqlDataReader.IsClosed Then sqlDataReader.Close()
@@ -123,15 +167,22 @@ Namespace Config
 
             Private Sub SaveToSQL()
                 If _SQLUsername <> "" Then
-                    _sqlConnection = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & _SQLDatabaseName & ";User Id=" & _SQLUsername & ";Password=" & _SQLPassword)
+                    _sqlConnection =
+                        New SqlConnection(
+                            "Data Source=" & _SQLHost & ";Initial Catalog=" & _SQLDatabaseName & ";User Id=" &
+                            _SQLUsername & ";Password=" & _SQLPassword)
                 Else
-                    _sqlConnection = New SqlConnection("Data Source=" & _SQLHost & ";Initial Catalog=" & _SQLDatabaseName & ";Integrated Security=True")
+                    _sqlConnection =
+                        New SqlConnection(
+                            "Data Source=" & _SQLHost & ";Initial Catalog=" & _SQLDatabaseName &
+                            ";Integrated Security=True")
                 End If
 
                 _sqlConnection.Open()
 
                 If Not VerifyDatabaseVersion(_sqlConnection) Then
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strErrorConnectionListSaveFailed)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.Language.strErrorConnectionListSaveFailed)
                     Return
                 End If
 
@@ -140,20 +191,25 @@ Namespace Config
 
                 Dim strProtected As String
                 If tN.Tag IsNot Nothing Then
-                    If TryCast(tN.Tag, mRemoteNG.Root.Info).Password = True Then
-                        _password = TryCast(tN.Tag, mRemoteNG.Root.Info).PasswordString
-                        strProtected = Security.Crypt.Encrypt("ThisIsProtected", _password)
+                    If TryCast(tN.Tag, Root.Info).Password = True Then
+                        _password = TryCast(tN.Tag, Root.Info).PasswordString
+                        strProtected = Crypt.Encrypt("ThisIsProtected", _password)
                     Else
-                        strProtected = Security.Crypt.Encrypt("ThisIsNotProtected", _password)
+                        strProtected = Crypt.Encrypt("ThisIsNotProtected", _password)
                     End If
                 Else
-                    strProtected = Security.Crypt.Encrypt("ThisIsNotProtected", _password)
+                    strProtected = Crypt.Encrypt("ThisIsNotProtected", _password)
                 End If
 
                 _sqlQuery = New SqlCommand("DELETE FROM tblRoot", _sqlConnection)
                 _sqlQuery.ExecuteNonQuery()
 
-                _sqlQuery = New SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES('" & PrepareValueForDB(tN.Text) & "', 0, '" & strProtected & "'," & App.Info.Connections.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) & ")", _sqlConnection)
+                _sqlQuery =
+                    New SqlCommand(
+                        "INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES('" &
+                        Misc.PrepareValueForDB(tN.Text) & "', 0, '" & strProtected & "'," &
+                        App.Info.Connections.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) & ")",
+                        _sqlConnection)
                 _sqlQuery.ExecuteNonQuery()
 
                 _sqlQuery = New SqlCommand("DELETE FROM tblCons", _sqlConnection)
@@ -166,46 +222,51 @@ Namespace Config
 
                 _sqlQuery = New SqlCommand("DELETE FROM tblUpdate", _sqlConnection)
                 _sqlQuery.ExecuteNonQuery()
-                _sqlQuery = New SqlCommand("INSERT INTO tblUpdate (LastUpdate) VALUES('" & Tools.Misc.DBDate(Now) & "')", _sqlConnection)
+                _sqlQuery = New SqlCommand("INSERT INTO tblUpdate (LastUpdate) VALUES('" & Misc.DBDate(Now) & "')",
+                                           _sqlConnection)
                 _sqlQuery.ExecuteNonQuery()
 
                 _sqlConnection.Close()
             End Sub
 
-            Private Sub SaveNodesSQL(ByVal tnc As TreeNodeCollection)
+            Private Sub SaveNodesSQL(tnc As TreeNodeCollection)
                 For Each node As TreeNode In tnc
                     _currentNodeIndex += 1
 
-                    Dim curConI As Connection.Info
-                    _sqlQuery = New SqlCommand("INSERT INTO tblCons (Name, Type, Expanded, Description, Icon, Panel, Username, " & _
-                                               "DomainName, Password, Hostname, Protocol, PuttySession, " & _
-                                               "Port, ConnectToConsole, RenderingEngine, ICAEncryptionStrength, RDPAuthenticationLevel, LoadBalanceInfo, Colors, Resolution, AutomaticResize, DisplayWallpaper, " & _
-                                               "DisplayThemes, EnableFontSmoothing, EnableDesktopComposition, CacheBitmaps, RedirectDiskDrives, RedirectPorts, " & _
-                                               "RedirectPrinters, RedirectSmartCards, RedirectSound, RedirectKeys, " & _
-                                               "Connected, PreExtApp, PostExtApp, MacAddress, UserField, ExtApp, VNCCompression, VNCEncoding, VNCAuthMode, " & _
-                                               "VNCProxyType, VNCProxyIP, VNCProxyPort, VNCProxyUsername, VNCProxyPassword, " & _
-                                               "VNCColors, VNCSmartSizeMode, VNCViewOnly, " & _
-                                               "RDGatewayUsageMethod, RDGatewayHostname, RDGatewayUseConnectionCredentials, RDGatewayUsername, RDGatewayPassword, RDGatewayDomain, " & _
-                                               "UseCredSsp, " & _
-                                               "InheritCacheBitmaps, InheritColors, " & _
-                                               "InheritDescription, InheritDisplayThemes, InheritDisplayWallpaper, InheritEnableFontSmoothing, InheritEnableDesktopComposition, InheritDomain, " & _
-                                               "InheritIcon, InheritPanel, InheritPassword, InheritPort, " & _
-                                               "InheritProtocol, InheritPuttySession, InheritRedirectDiskDrives, " & _
-                                               "InheritRedirectKeys, InheritRedirectPorts, InheritRedirectPrinters, " & _
-                                               "InheritRedirectSmartCards, InheritRedirectSound, InheritResolution, InheritAutomaticResize, " & _
-                                               "InheritUseConsoleSession, InheritRenderingEngine, InheritUsername, InheritICAEncryptionStrength, InheritRDPAuthenticationLevel, InheritLoadBalanceInfo, " & _
-                                               "InheritPreExtApp, InheritPostExtApp, InheritMacAddress, InheritUserField, InheritExtApp, InheritVNCCompression, InheritVNCEncoding, " & _
-                                               "InheritVNCAuthMode, InheritVNCProxyType, InheritVNCProxyIP, InheritVNCProxyPort, " & _
-                                               "InheritVNCProxyUsername, InheritVNCProxyPassword, InheritVNCColors, " & _
-                                               "InheritVNCSmartSizeMode, InheritVNCViewOnly, " & _
-                                               "InheritRDGatewayUsageMethod, InheritRDGatewayHostname, InheritRDGatewayUseConnectionCredentials, InheritRDGatewayUsername, InheritRDGatewayPassword, InheritRDGatewayDomain, " & _
-                                               "InheritUseCredSsp, " & _
-                                               "PositionID, ParentID, ConstantID, LastChange)" & _
-                                               "VALUES (", _sqlConnection)
+                    Dim curConI As Info
+                    _sqlQuery =
+                        New SqlCommand(
+                            "INSERT INTO tblCons (Name, Type, Expanded, Description, Icon, Panel, Username, " &
+                            "DomainName, Password, Hostname, Protocol, PuttySession, " &
+                            "Port, ConnectToConsole, RenderingEngine, RDPAuthenticationLevel, LoadBalanceInfo, Colors, Resolution, AutomaticResize, DisplayWallpaper, " &
+                            "DisplayThemes, EnableFontSmoothing, EnableDesktopComposition, CacheBitmaps, RedirectDiskDrives, RedirectPorts, " &
+                            "RedirectPrinters, RedirectSmartCards, RedirectSound, RedirectKeys, " &
+                            "Connected, PreExtApp, PostExtApp, MacAddress, UserField, ExtApp, VNCCompression, VNCEncoding, VNCAuthMode, " &
+                            "VNCProxyType, VNCProxyIP, VNCProxyPort, VNCProxyUsername, VNCProxyPassword, " &
+                            "VNCColors, VNCSmartSizeMode, VNCViewOnly, " &
+                            "RDGatewayUsageMethod, RDGatewayHostname, RDGatewayUseConnectionCredentials, RDGatewayUsername, RDGatewayPassword, RDGatewayDomain, " &
+                            "UseCredSsp, " &
+                            "InheritCacheBitmaps, InheritColors, " &
+                            "InheritDescription, InheritDisplayThemes, InheritDisplayWallpaper, InheritEnableFontSmoothing, InheritEnableDesktopComposition, InheritDomain, " &
+                            "InheritIcon, InheritPanel, InheritPassword, InheritPort, " &
+                            "InheritProtocol, InheritPuttySession, InheritRedirectDiskDrives, " &
+                            "InheritRedirectKeys, InheritRedirectPorts, InheritRedirectPrinters, " &
+                            "InheritRedirectSmartCards, InheritRedirectSound, InheritResolution, InheritAutomaticResize, " &
+                            "InheritUseConsoleSession, InheritRenderingEngine, InheritUsername, InheritICAEncryptionStrength, InheritRDPAuthenticationLevel, InheritLoadBalanceInfo, " &
+                            "InheritPreExtApp, InheritPostExtApp, InheritMacAddress, InheritUserField, InheritExtApp, InheritVNCCompression, InheritVNCEncoding, " &
+                            "InheritVNCAuthMode, InheritVNCProxyType, InheritVNCProxyIP, InheritVNCProxyPort, " &
+                            "InheritVNCProxyUsername, InheritVNCProxyPassword, InheritVNCColors, " &
+                            "InheritVNCSmartSizeMode, InheritVNCViewOnly, " &
+                            "InheritRDGatewayUsageMethod, InheritRDGatewayHostname, InheritRDGatewayUseConnectionCredentials, InheritRDGatewayUsername, InheritRDGatewayPassword, InheritRDGatewayDomain, " &
+                            "InheritUseCredSsp, " &
+                            "PositionID, ParentID, ConstantID, LastChange)" &
+                            "VALUES (", _sqlConnection)
 
-                    If Tree.Node.GetNodeType(node) = Tree.Node.Type.Connection Or Tree.Node.GetNodeType(node) = Tree.Node.Type.Container Then
+                    If _
+                        Tree.Node.GetNodeType(node) = Tree.Node.Type.Connection Or
+                        Tree.Node.GetNodeType(node) = Tree.Node.Type.Container Then
                         '_xmlTextWriter.WriteStartElement("Node")
-                        _sqlQuery.CommandText &= "'" & PrepareValueForDB(node.Text) & "'," 'Name
+                        _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(node.Text) & "'," 'Name
                         _sqlQuery.CommandText &= "'" & Tree.Node.GetNodeType(node).ToString & "'," 'Type
                     End If
 
@@ -214,7 +275,7 @@ Namespace Config
                         curConI = Me._ContainerList(node.Tag).ConnectionInfo
                         SaveConnectionFieldsSQL(curConI)
 
-                        _sqlQuery.CommandText = Tools.Misc.PrepareForDB(_sqlQuery.CommandText)
+                        _sqlQuery.CommandText = Misc.PrepareForDB(_sqlQuery.CommandText)
                         _sqlQuery.ExecuteNonQuery()
                         '_parentConstantId = _currentNodeIndex
                         SaveNodesSQL(node.Nodes)
@@ -226,7 +287,7 @@ Namespace Config
                         curConI = Me._ConnectionList(node.Tag)
                         SaveConnectionFieldsSQL(curConI)
                         '_xmlTextWriter.WriteEndElement()
-                        _sqlQuery.CommandText = Tools.Misc.PrepareForDB(_sqlQuery.CommandText)
+                        _sqlQuery.CommandText = Misc.PrepareForDB(_sqlQuery.CommandText)
                         _sqlQuery.ExecuteNonQuery()
                     End If
 
@@ -234,37 +295,37 @@ Namespace Config
                 Next
             End Sub
 
-            Private Sub SaveConnectionFieldsSQL(ByVal curConI As Connection.Info)
+            Private Sub SaveConnectionFieldsSQL(curConI As Info)
                 With curConI
-                    _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Description) & "',"
-                    _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Icon) & "',"
-                    _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Panel) & "',"
+                    _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.Description) & "',"
+                    _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.Icon) & "',"
+                    _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.Panel) & "',"
 
                     If Me._SaveSecurity.Username = True Then
-                        _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Username) & "',"
+                        _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.Username) & "',"
                     Else
                         _sqlQuery.CommandText &= "'" & "" & "',"
                     End If
 
                     If Me._SaveSecurity.Domain = True Then
-                        _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Domain) & "',"
+                        _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.Domain) & "',"
                     Else
                         _sqlQuery.CommandText &= "'" & "" & "',"
                     End If
 
                     If Me._SaveSecurity.Password = True Then
-                        _sqlQuery.CommandText &= "'" & PrepareValueForDB(Security.Crypt.Encrypt(.Password, _password)) & "',"
+                        _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(Crypt.Encrypt(.Password, _password)) &
+                                                 "',"
                     Else
                         _sqlQuery.CommandText &= "'" & "" & "',"
                     End If
 
-                    _sqlQuery.CommandText &= "'" & PrepareValueForDB(.Hostname) & "',"
+                    _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.Hostname) & "',"
                     _sqlQuery.CommandText &= "'" & .Protocol.ToString & "',"
-                    _sqlQuery.CommandText &= "'" & PrepareValueForDB(.PuttySession) & "',"
+                    _sqlQuery.CommandText &= "'" & Misc.PrepareValueForDB(.PuttySession) & "',"
                     _sqlQuery.CommandText &= "'" & .Port & "',"
                     _sqlQuery.CommandText &= "'" & .UseConsoleSession & "',"
                     _sqlQuery.CommandText &= "'" & .RenderingEngine.ToString & "',"
-                    _sqlQuery.CommandText &= "'" & .ICAEncryption.ToString & "',"
                     _sqlQuery.CommandText &= "'" & .RDPAuthenticationLevel.ToString & "',"
                     _sqlQuery.CommandText &= "'" & .LoadBalanceInfo & "',"
                     _sqlQuery.CommandText &= "'" & .Colors.ToString & "',"
@@ -301,7 +362,7 @@ Namespace Config
                     _sqlQuery.CommandText &= "'" & .VNCProxyIP & "',"
                     _sqlQuery.CommandText &= "'" & .VNCProxyPort & "',"
                     _sqlQuery.CommandText &= "'" & .VNCProxyUsername & "',"
-                    _sqlQuery.CommandText &= "'" & Security.Crypt.Encrypt(.VNCProxyPassword, _password) & "',"
+                    _sqlQuery.CommandText &= "'" & Crypt.Encrypt(.VNCProxyPassword, _password) & "',"
                     _sqlQuery.CommandText &= "'" & .VNCColors.ToString & "',"
                     _sqlQuery.CommandText &= "'" & .VNCSmartSizeMode.ToString & "',"
                     _sqlQuery.CommandText &= "'" & .VNCViewOnly & "',"
@@ -317,7 +378,7 @@ Namespace Config
                     End If
 
                     If Me._SaveSecurity.Password = True Then
-                        _sqlQuery.CommandText &= "'" & Security.Crypt.Encrypt(.RDGatewayPassword, _password) & "',"
+                        _sqlQuery.CommandText &= "'" & Crypt.Encrypt(.RDGatewayPassword, _password) & "',"
                     Else
                         _sqlQuery.CommandText &= "'" & "" & "',"
                     End If
@@ -357,7 +418,6 @@ Namespace Config
                             _sqlQuery.CommandText &= "'" & .UseConsoleSession & "',"
                             _sqlQuery.CommandText &= "'" & .RenderingEngine & "',"
                             _sqlQuery.CommandText &= "'" & .Username & "',"
-                            _sqlQuery.CommandText &= "'" & .ICAEncryption & "',"
                             _sqlQuery.CommandText &= "'" & .RDPAuthenticationLevel & "',"
                             _sqlQuery.CommandText &= "'" & .LoadBalanceInfo & "',"
                             _sqlQuery.CommandText &= "'" & .PreExtApp & "',"
@@ -454,18 +514,23 @@ Namespace Config
                         End If
                     Else
                         If TryCast(.Parent, Container.Info).Parent IsNot Nothing Then
-                            _parentConstantId = TryCast(TryCast(.Parent, Container.Info).Parent, Container.Info).ConnectionInfo.ConstantID
+                            _parentConstantId =
+                                TryCast(TryCast(.Parent, Container.Info).Parent, Container.Info).ConnectionInfo.
+                                    ConstantID
                         Else
                             _parentConstantId = 0
                         End If
                     End If
 
-                    _sqlQuery.CommandText &= _currentNodeIndex & ",'" & _parentConstantId & "','" & .ConstantID & "','" & Tools.Misc.DBDate(Now) & "')"
+                    _sqlQuery.CommandText &= _currentNodeIndex & ",'" & _parentConstantId & "','" & .ConstantID & "','" &
+                                             Misc.DBDate(Now) & "')"
                 End With
             End Sub
+
 #End Region
 
 #Region "XML"
+
             Private Sub EncryptCompleteFile()
                 Dim streamReader As New StreamReader(ConnectionFileName)
 
@@ -475,26 +540,26 @@ Namespace Config
 
                 If Not String.IsNullOrEmpty(fileContents) Then
                     Dim streamWriter As New StreamWriter(ConnectionFileName)
-                    streamWriter.Write(Security.Crypt.Encrypt(fileContents, _password))
+                    streamWriter.Write(Crypt.Encrypt(fileContents, _password))
                     streamWriter.Close()
                 End If
             End Sub
 
             Private Sub SaveToXml()
                 Try
-                    If Not IsConnectionsFileLoaded Then Exit Sub
+                    If Not Runtime.IsConnectionsFileLoaded Then Exit Sub
 
                     Dim treeNode As TreeNode
 
-                    If Tree.Node.GetNodeType(RootTreeNode) = Tree.Node.Type.Root Then
+                    If Node.GetNodeType(RootTreeNode) = Node.Type.Root Then
                         treeNode = RootTreeNode.Clone
                     Else
-                        treeNode = New TreeNode("mR|Export (" + Tools.Misc.DBDate(Now) + ")")
+                        treeNode = New TreeNode("mR|Export (" + Misc.DBDate(Now) + ")")
                         treeNode.Nodes.Add(RootTreeNode.Clone)
                     End If
 
                     Dim tempFileName As String = Path.GetTempFileName()
-                    _xmlTextWriter = New XmlTextWriter(tempFileName, System.Text.Encoding.UTF8)
+                    _xmlTextWriter = New XmlTextWriter(tempFileName, Encoding.UTF8)
 
                     _xmlTextWriter.Formatting = Formatting.Indented
                     _xmlTextWriter.Indentation = 4
@@ -506,17 +571,22 @@ Namespace Config
                     _xmlTextWriter.WriteAttributeString("Export", "", Export)
 
                     If Export Then
-                        _xmlTextWriter.WriteAttributeString("Protected", "", Security.Crypt.Encrypt("ThisIsNotProtected", _password))
+                        _xmlTextWriter.WriteAttributeString("Protected", "",
+                                                            Crypt.Encrypt("ThisIsNotProtected", _password))
                     Else
                         If TryCast(treeNode.Tag, Root.Info).Password = True Then
                             _password = TryCast(treeNode.Tag, Root.Info).PasswordString
-                            _xmlTextWriter.WriteAttributeString("Protected", "", Security.Crypt.Encrypt("ThisIsProtected", _password))
+                            _xmlTextWriter.WriteAttributeString("Protected", "",
+                                                                Crypt.Encrypt("ThisIsProtected", _password))
                         Else
-                            _xmlTextWriter.WriteAttributeString("Protected", "", Security.Crypt.Encrypt("ThisIsNotProtected", _password))
+                            _xmlTextWriter.WriteAttributeString("Protected", "",
+                                                                Crypt.Encrypt("ThisIsNotProtected", _password))
                         End If
                     End If
 
-                    _xmlTextWriter.WriteAttributeString("ConfVersion", "", App.Info.Connections.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture))
+                    _xmlTextWriter.WriteAttributeString("ConfVersion", "",
+                                                        App.Info.Connections.ConnectionFileVersion.ToString(
+                                                            CultureInfo.InvariantCulture))
 
                     Dim treeNodeCollection As TreeNodeCollection
                     treeNodeCollection = treeNode.Nodes
@@ -537,23 +607,27 @@ Namespace Config
                     End If
                     File.Move(tempFileName, ConnectionFileName)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveToXml failed" & vbNewLine & ex.Message, False)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        "SaveToXml failed" & vbNewLine & ex.ToString(), False)
                 End Try
             End Sub
 
-            Private Sub SaveNode(ByVal tNC As TreeNodeCollection)
+            Private Sub SaveNode(tNC As TreeNodeCollection)
                 Try
                     For Each node As TreeNode In tNC
-                        Dim curConI As Connection.Info
+                        Dim curConI As Info
 
-                        If Tree.Node.GetNodeType(node) = Tree.Node.Type.Connection Or Tree.Node.GetNodeType(node) = Tree.Node.Type.Container Then
+                        If _
+                            Tree.Node.GetNodeType(node) = Tree.Node.Type.Connection Or
+                            Tree.Node.GetNodeType(node) = Tree.Node.Type.Container Then
                             _xmlTextWriter.WriteStartElement("Node")
                             _xmlTextWriter.WriteAttributeString("Name", "", node.Text)
                             _xmlTextWriter.WriteAttributeString("Type", "", Tree.Node.GetNodeType(node).ToString)
                         End If
 
                         If Tree.Node.GetNodeType(node) = Tree.Node.Type.Container Then 'container
-                            _xmlTextWriter.WriteAttributeString("Expanded", "", Me._ContainerList(node.Tag).TreeNode.IsExpanded)
+                            _xmlTextWriter.WriteAttributeString("Expanded", "",
+                                                                Me._ContainerList(node.Tag).TreeNode.IsExpanded)
                             curConI = Me._ContainerList(node.Tag).ConnectionInfo
                             SaveConnectionFields(curConI)
                             SaveNode(node.Nodes)
@@ -567,11 +641,12 @@ Namespace Config
                         End If
                     Next
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveNode failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        "SaveNode failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
 
-            Private Sub SaveConnectionFields(ByVal curConI As Connection.Info)
+            Private Sub SaveConnectionFields(curConI As Info)
                 Try
                     _xmlTextWriter.WriteAttributeString("Descr", "", curConI.Description)
 
@@ -592,7 +667,7 @@ Namespace Config
                     End If
 
                     If Me._SaveSecurity.Password = True Then
-                        _xmlTextWriter.WriteAttributeString("Password", "", Security.Crypt.Encrypt(curConI.Password, _password))
+                        _xmlTextWriter.WriteAttributeString("Password", "", Crypt.Encrypt(curConI.Password, _password))
                     Else
                         _xmlTextWriter.WriteAttributeString("Password", "", "")
                     End If
@@ -611,9 +686,8 @@ Namespace Config
 
                     _xmlTextWriter.WriteAttributeString("RenderingEngine", "", curConI.RenderingEngine.ToString)
 
-                    _xmlTextWriter.WriteAttributeString("ICAEncryptionStrength", "", curConI.ICAEncryption.ToString)
-
-                    _xmlTextWriter.WriteAttributeString("RDPAuthenticationLevel", "", curConI.RDPAuthenticationLevel.ToString)
+                    _xmlTextWriter.WriteAttributeString("RDPAuthenticationLevel", "",
+                                                        curConI.RDPAuthenticationLevel.ToString)
 
                     _xmlTextWriter.WriteAttributeString("LoadBalanceInfo", "", curConI.LoadBalanceInfo)
 
@@ -664,15 +738,18 @@ Namespace Config
                     _xmlTextWriter.WriteAttributeString("VNCProxyIP", "", curConI.VNCProxyIP)
                     _xmlTextWriter.WriteAttributeString("VNCProxyPort", "", curConI.VNCProxyPort)
                     _xmlTextWriter.WriteAttributeString("VNCProxyUsername", "", curConI.VNCProxyUsername)
-                    _xmlTextWriter.WriteAttributeString("VNCProxyPassword", "", Security.Crypt.Encrypt(curConI.VNCProxyPassword, _password))
+                    _xmlTextWriter.WriteAttributeString("VNCProxyPassword", "",
+                                                        Crypt.Encrypt(curConI.VNCProxyPassword, _password))
                     _xmlTextWriter.WriteAttributeString("VNCColors", "", curConI.VNCColors.ToString)
                     _xmlTextWriter.WriteAttributeString("VNCSmartSizeMode", "", curConI.VNCSmartSizeMode.ToString)
                     _xmlTextWriter.WriteAttributeString("VNCViewOnly", "", curConI.VNCViewOnly)
 
-                    _xmlTextWriter.WriteAttributeString("RDGatewayUsageMethod", "", curConI.RDGatewayUsageMethod.ToString)
+                    _xmlTextWriter.WriteAttributeString("RDGatewayUsageMethod", "",
+                                                        curConI.RDGatewayUsageMethod.ToString)
                     _xmlTextWriter.WriteAttributeString("RDGatewayHostname", "", curConI.RDGatewayHostname)
 
-                    _xmlTextWriter.WriteAttributeString("RDGatewayUseConnectionCredentials", "", curConI.RDGatewayUseConnectionCredentials.ToString)
+                    _xmlTextWriter.WriteAttributeString("RDGatewayUseConnectionCredentials", "",
+                                                        curConI.RDGatewayUseConnectionCredentials.ToString)
 
                     If Me._SaveSecurity.Username = True Then
                         _xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", curConI.RDGatewayUsername)
@@ -681,7 +758,8 @@ Namespace Config
                     End If
 
                     If Me._SaveSecurity.Password = True Then
-                        _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", Security.Crypt.Encrypt(curConI.RDGatewayPassword, _password))
+                        _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "",
+                                                            Crypt.Encrypt(curConI.RDGatewayPassword, _password))
                     Else
                         _xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", "")
                     End If
@@ -697,9 +775,12 @@ Namespace Config
                         _xmlTextWriter.WriteAttributeString("InheritColors", "", curConI.Inherit.Colors)
                         _xmlTextWriter.WriteAttributeString("InheritDescription", "", curConI.Inherit.Description)
                         _xmlTextWriter.WriteAttributeString("InheritDisplayThemes", "", curConI.Inherit.DisplayThemes)
-                        _xmlTextWriter.WriteAttributeString("InheritDisplayWallpaper", "", curConI.Inherit.DisplayWallpaper)
-                        _xmlTextWriter.WriteAttributeString("InheritEnableFontSmoothing", "", curConI.Inherit.EnableFontSmoothing)
-                        _xmlTextWriter.WriteAttributeString("InheritEnableDesktopComposition", "", curConI.Inherit.EnableDesktopComposition)
+                        _xmlTextWriter.WriteAttributeString("InheritDisplayWallpaper", "",
+                                                            curConI.Inherit.DisplayWallpaper)
+                        _xmlTextWriter.WriteAttributeString("InheritEnableFontSmoothing", "",
+                                                            curConI.Inherit.EnableFontSmoothing)
+                        _xmlTextWriter.WriteAttributeString("InheritEnableDesktopComposition", "",
+                                                            curConI.Inherit.EnableDesktopComposition)
                         _xmlTextWriter.WriteAttributeString("InheritDomain", "", curConI.Inherit.Domain)
                         _xmlTextWriter.WriteAttributeString("InheritIcon", "", curConI.Inherit.Icon)
                         _xmlTextWriter.WriteAttributeString("InheritPanel", "", curConI.Inherit.Panel)
@@ -707,21 +788,28 @@ Namespace Config
                         _xmlTextWriter.WriteAttributeString("InheritPort", "", curConI.Inherit.Port)
                         _xmlTextWriter.WriteAttributeString("InheritProtocol", "", curConI.Inherit.Protocol)
                         _xmlTextWriter.WriteAttributeString("InheritPuttySession", "", curConI.Inherit.PuttySession)
-                        _xmlTextWriter.WriteAttributeString("InheritRedirectDiskDrives", "", curConI.Inherit.RedirectDiskDrives)
+                        _xmlTextWriter.WriteAttributeString("InheritRedirectDiskDrives", "",
+                                                            curConI.Inherit.RedirectDiskDrives)
                         _xmlTextWriter.WriteAttributeString("InheritRedirectKeys", "", curConI.Inherit.RedirectKeys)
                         _xmlTextWriter.WriteAttributeString("InheritRedirectPorts", "", curConI.Inherit.RedirectPorts)
-                        _xmlTextWriter.WriteAttributeString("InheritRedirectPrinters", "", curConI.Inherit.RedirectPrinters)
-                        _xmlTextWriter.WriteAttributeString("InheritRedirectSmartCards", "", curConI.Inherit.RedirectSmartCards)
+                        _xmlTextWriter.WriteAttributeString("InheritRedirectPrinters", "",
+                                                            curConI.Inherit.RedirectPrinters)
+                        _xmlTextWriter.WriteAttributeString("InheritRedirectSmartCards", "",
+                                                            curConI.Inherit.RedirectSmartCards)
                         _xmlTextWriter.WriteAttributeString("InheritRedirectSound", "", curConI.Inherit.RedirectSound)
                         _xmlTextWriter.WriteAttributeString("InheritResolution", "", curConI.Inherit.Resolution)
-                        _xmlTextWriter.WriteAttributeString("InheritAutomaticResize", "", curConI.Inherit.AutomaticResize)
-                        _xmlTextWriter.WriteAttributeString("InheritUseConsoleSession", "", curConI.Inherit.UseConsoleSession)
+                        _xmlTextWriter.WriteAttributeString("InheritAutomaticResize", "",
+                                                            curConI.Inherit.AutomaticResize)
+                        _xmlTextWriter.WriteAttributeString("InheritUseConsoleSession", "",
+                                                            curConI.Inherit.UseConsoleSession)
                         _xmlTextWriter.WriteAttributeString("InheritUseCredSsp", "", curConI.Inherit.UseCredSsp)
-                        _xmlTextWriter.WriteAttributeString("InheritRenderingEngine", "", curConI.Inherit.RenderingEngine)
+                        _xmlTextWriter.WriteAttributeString("InheritRenderingEngine", "",
+                                                            curConI.Inherit.RenderingEngine)
                         _xmlTextWriter.WriteAttributeString("InheritUsername", "", curConI.Inherit.Username)
-                        _xmlTextWriter.WriteAttributeString("InheritICAEncryptionStrength", "", curConI.Inherit.ICAEncryption)
-                        _xmlTextWriter.WriteAttributeString("InheritRDPAuthenticationLevel", "", curConI.Inherit.RDPAuthenticationLevel)
-                        _xmlTextWriter.WriteAttributeString("InheritLoadBalanceInfo", "", curConI.Inherit.LoadBalanceInfo)
+                        _xmlTextWriter.WriteAttributeString("InheritRDPAuthenticationLevel", "",
+                                                            curConI.Inherit.RDPAuthenticationLevel)
+                        _xmlTextWriter.WriteAttributeString("InheritLoadBalanceInfo", "",
+                                                            curConI.Inherit.LoadBalanceInfo)
                         _xmlTextWriter.WriteAttributeString("InheritPreExtApp", "", curConI.Inherit.PreExtApp)
                         _xmlTextWriter.WriteAttributeString("InheritPostExtApp", "", curConI.Inherit.PostExtApp)
                         _xmlTextWriter.WriteAttributeString("InheritMacAddress", "", curConI.Inherit.MacAddress)
@@ -733,17 +821,26 @@ Namespace Config
                         _xmlTextWriter.WriteAttributeString("InheritVNCProxyType", "", curConI.Inherit.VNCProxyType)
                         _xmlTextWriter.WriteAttributeString("InheritVNCProxyIP", "", curConI.Inherit.VNCProxyIP)
                         _xmlTextWriter.WriteAttributeString("InheritVNCProxyPort", "", curConI.Inherit.VNCProxyPort)
-                        _xmlTextWriter.WriteAttributeString("InheritVNCProxyUsername", "", curConI.Inherit.VNCProxyUsername)
-                        _xmlTextWriter.WriteAttributeString("InheritVNCProxyPassword", "", curConI.Inherit.VNCProxyPassword)
+                        _xmlTextWriter.WriteAttributeString("InheritVNCProxyUsername", "",
+                                                            curConI.Inherit.VNCProxyUsername)
+                        _xmlTextWriter.WriteAttributeString("InheritVNCProxyPassword", "",
+                                                            curConI.Inherit.VNCProxyPassword)
                         _xmlTextWriter.WriteAttributeString("InheritVNCColors", "", curConI.Inherit.VNCColors)
-                        _xmlTextWriter.WriteAttributeString("InheritVNCSmartSizeMode", "", curConI.Inherit.VNCSmartSizeMode)
+                        _xmlTextWriter.WriteAttributeString("InheritVNCSmartSizeMode", "",
+                                                            curConI.Inherit.VNCSmartSizeMode)
                         _xmlTextWriter.WriteAttributeString("InheritVNCViewOnly", "", curConI.Inherit.VNCViewOnly)
-                        _xmlTextWriter.WriteAttributeString("InheritRDGatewayUsageMethod", "", curConI.Inherit.RDGatewayUsageMethod)
-                        _xmlTextWriter.WriteAttributeString("InheritRDGatewayHostname", "", curConI.Inherit.RDGatewayHostname)
-                        _xmlTextWriter.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "", curConI.Inherit.RDGatewayUseConnectionCredentials)
-                        _xmlTextWriter.WriteAttributeString("InheritRDGatewayUsername", "", curConI.Inherit.RDGatewayUsername)
-                        _xmlTextWriter.WriteAttributeString("InheritRDGatewayPassword", "", curConI.Inherit.RDGatewayPassword)
-                        _xmlTextWriter.WriteAttributeString("InheritRDGatewayDomain", "", curConI.Inherit.RDGatewayDomain)
+                        _xmlTextWriter.WriteAttributeString("InheritRDGatewayUsageMethod", "",
+                                                            curConI.Inherit.RDGatewayUsageMethod)
+                        _xmlTextWriter.WriteAttributeString("InheritRDGatewayHostname", "",
+                                                            curConI.Inherit.RDGatewayHostname)
+                        _xmlTextWriter.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "",
+                                                            curConI.Inherit.RDGatewayUseConnectionCredentials)
+                        _xmlTextWriter.WriteAttributeString("InheritRDGatewayUsername", "",
+                                                            curConI.Inherit.RDGatewayUsername)
+                        _xmlTextWriter.WriteAttributeString("InheritRDGatewayPassword", "",
+                                                            curConI.Inherit.RDGatewayPassword)
+                        _xmlTextWriter.WriteAttributeString("InheritRDGatewayDomain", "",
+                                                            curConI.Inherit.RDGatewayDomain)
                     Else
                         _xmlTextWriter.WriteAttributeString("InheritCacheBitmaps", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritColors", "", False)
@@ -771,7 +868,6 @@ Namespace Config
                         _xmlTextWriter.WriteAttributeString("InheritUseCredSsp", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritRenderingEngine", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritUsername", "", False)
-                        _xmlTextWriter.WriteAttributeString("InheritICAEncryptionStrength", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritRDPAuthenticationLevel", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritLoadBalanceInfo", "", False)
                         _xmlTextWriter.WriteAttributeString("InheritPreExtApp", "", False)
@@ -797,16 +893,19 @@ Namespace Config
                         _xmlTextWriter.WriteAttributeString("InheritRDGatewayDomain", "", False)
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveConnectionFields failed" & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        "SaveConnectionFields failed" & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
+
 #End Region
 
 #Region "CSV"
+
             Private csvWr As StreamWriter
 
             Private Sub SaveTomRCSV()
-                If App.Runtime.IsConnectionsFileLoaded = False Then
+                If Runtime.IsConnectionsFileLoaded = False Then
                     Exit Sub
                 End If
 
@@ -835,10 +934,12 @@ Namespace Config
                     csvLn += "Domain;"
                 End If
 
-                csvLn += "Hostname;Protocol;PuttySession;Port;ConnectToConsole;UseCredSsp;RenderingEngine;ICAEncryptionStrength;RDPAuthenticationLevel;LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;RedirectKeys;PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
+                csvLn +=
+                    "Hostname;Protocol;PuttySession;Port;ConnectToConsole;UseCredSsp;RenderingEngine;RDPAuthenticationLevel;LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;RedirectKeys;PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;"
 
                 If SaveSecurity.Inheritance Then
-                    csvLn += "InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;InheritProtocol;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;InheritUseConsoleSession;InheritUseCredSsp;InheritRenderingEngine;InheritUsername;InheritICAEncryptionStrength;InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;InheritRDGatewayUsageMethod;InheritRDGatewayHostname;InheritRDGatewayUseConnectionCredentials;InheritRDGatewayUsername;InheritRDGatewayPassword;InheritRDGatewayDomain"
+                    csvLn +=
+                        "InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;InheritProtocol;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;InheritUseConsoleSession;InheritUseCredSsp;InheritRenderingEngine;InheritUsername;InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;InheritRDGatewayUsageMethod;InheritRDGatewayHostname;InheritRDGatewayUseConnectionCredentials;InheritRDGatewayUsername;InheritRDGatewayPassword;InheritRDGatewayDomain"
                 End If
 
                 csvWr.WriteLine(csvLn)
@@ -848,10 +949,10 @@ Namespace Config
                 csvWr.Close()
             End Sub
 
-            Private Sub SaveNodemRCSV(ByVal tNC As TreeNodeCollection)
+            Private Sub SaveNodemRCSV(tNC As TreeNodeCollection)
                 For Each node As TreeNode In tNC
                     If Tree.Node.GetNodeType(node) = Tree.Node.Type.Connection Then
-                        Dim curConI As Connection.Info = node.Tag
+                        Dim curConI As Info = node.Tag
 
                         WritemRCSVLine(curConI)
                     ElseIf Tree.Node.GetNodeType(node) = Tree.Node.Type.Container Then
@@ -860,7 +961,7 @@ Namespace Config
                 Next
             End Sub
 
-            Private Sub WritemRCSVLine(ByVal con As Connection.Info)
+            Private Sub WritemRCSVLine(con As Info)
                 Dim nodePath As String = con.TreeNode.FullPath
 
                 Dim firstSlash As Integer = nodePath.IndexOf("\")
@@ -889,19 +990,50 @@ Namespace Config
                     csvLn += con.Domain & ";"
                 End If
 
-                csvLn += con.Hostname & ";" & con.Protocol.ToString & ";" & con.PuttySession & ";" & con.Port & ";" & con.UseConsoleSession & ";" & con.UseCredSsp & ";" & con.RenderingEngine.ToString & ";" & con.ICAEncryption.ToString & ";" & con.RDPAuthenticationLevel.ToString & ";" & con.LoadBalanceInfo & ";" & con.Colors.ToString & ";" & con.Resolution.ToString & ";" & con.AutomaticResize & ";" & con.DisplayWallpaper & ";" & con.DisplayThemes & ";" & con.EnableFontSmoothing & ";" & con.EnableDesktopComposition & ";" & con.CacheBitmaps & ";" & con.RedirectDiskDrives & ";" & con.RedirectPorts & ";" & con.RedirectPrinters & ";" & con.RedirectSmartCards & ";" & con.RedirectSound.ToString & ";" & con.RedirectKeys & ";" & con.PreExtApp & ";" & con.PostExtApp & ";" & con.MacAddress & ";" & con.UserField & ";" & con.ExtApp & ";" & con.VNCCompression.ToString & ";" & con.VNCEncoding.ToString & ";" & con.VNCAuthMode.ToString & ";" & con.VNCProxyType.ToString & ";" & con.VNCProxyIP & ";" & con.VNCProxyPort & ";" & con.VNCProxyUsername & ";" & con.VNCProxyPassword & ";" & con.VNCColors.ToString & ";" & con.VNCSmartSizeMode.ToString & ";" & con.VNCViewOnly & ";"
+                csvLn += con.Hostname & ";" & con.Protocol.ToString & ";" & con.PuttySession & ";" & con.Port & ";" &
+                         con.UseConsoleSession & ";" & con.UseCredSsp & ";" & con.RenderingEngine.ToString & ";" &
+                         con.RDPAuthenticationLevel.ToString & ";" & con.LoadBalanceInfo & ";" & con.Colors.ToString &
+                         ";" & con.Resolution.ToString & ";" & con.AutomaticResize & ";" & con.DisplayWallpaper & ";" &
+                         con.DisplayThemes & ";" & con.EnableFontSmoothing & ";" & con.EnableDesktopComposition & ";" &
+                         con.CacheBitmaps & ";" & con.RedirectDiskDrives & ";" & con.RedirectPorts & ";" &
+                         con.RedirectPrinters & ";" & con.RedirectSmartCards & ";" & con.RedirectSound.ToString & ";" &
+                         con.RedirectKeys & ";" & con.PreExtApp & ";" & con.PostExtApp & ";" & con.MacAddress & ";" &
+                         con.UserField & ";" & con.ExtApp & ";" & con.VNCCompression.ToString & ";" &
+                         con.VNCEncoding.ToString & ";" & con.VNCAuthMode.ToString & ";" & con.VNCProxyType.ToString &
+                         ";" & con.VNCProxyIP & ";" & con.VNCProxyPort & ";" & con.VNCProxyUsername & ";" &
+                         con.VNCProxyPassword & ";" & con.VNCColors.ToString & ";" & con.VNCSmartSizeMode.ToString & ";" &
+                         con.VNCViewOnly & ";"
 
                 If SaveSecurity.Inheritance Then
-                    csvLn += con.Inherit.CacheBitmaps & ";" & con.Inherit.Colors & ";" & con.Inherit.Description & ";" & con.Inherit.DisplayThemes & ";" & con.Inherit.DisplayWallpaper & ";" & con.Inherit.EnableFontSmoothing & ";" & con.Inherit.EnableDesktopComposition & ";" & con.Inherit.Domain & ";" & con.Inherit.Icon & ";" & con.Inherit.Panel & ";" & con.Inherit.Password & ";" & con.Inherit.Port & ";" & con.Inherit.Protocol & ";" & con.Inherit.PuttySession & ";" & con.Inherit.RedirectDiskDrives & ";" & con.Inherit.RedirectKeys & ";" & con.Inherit.RedirectPorts & ";" & con.Inherit.RedirectPrinters & ";" & con.Inherit.RedirectSmartCards & ";" & con.Inherit.RedirectSound & ";" & con.Inherit.Resolution & ";" & con.Inherit.AutomaticResize & ";" & con.Inherit.UseConsoleSession & ";" & con.Inherit.UseCredSsp & ";" & con.Inherit.RenderingEngine & ";" & con.Inherit.Username & ";" & con.Inherit.ICAEncryption & ";" & con.Inherit.RDPAuthenticationLevel & ";" & con.Inherit.LoadBalanceInfo & ";" & con.Inherit.PreExtApp & ";" & con.Inherit.PostExtApp & ";" & con.Inherit.MacAddress & ";" & con.Inherit.UserField & ";" & con.Inherit.ExtApp & ";" & con.Inherit.VNCCompression & ";" & con.Inherit.VNCEncoding & ";" & con.Inherit.VNCAuthMode & ";" & con.Inherit.VNCProxyType & ";" & con.Inherit.VNCProxyIP & ";" & con.Inherit.VNCProxyPort & ";" & con.Inherit.VNCProxyUsername & ";" & con.Inherit.VNCProxyPassword & ";" & con.Inherit.VNCColors & ";" & con.Inherit.VNCSmartSizeMode & ";" & con.Inherit.VNCViewOnly
+                    csvLn += con.Inherit.CacheBitmaps & ";" & con.Inherit.Colors & ";" & con.Inherit.Description & ";" &
+                             con.Inherit.DisplayThemes & ";" & con.Inherit.DisplayWallpaper & ";" &
+                             con.Inherit.EnableFontSmoothing & ";" & con.Inherit.EnableDesktopComposition & ";" &
+                             con.Inherit.Domain & ";" & con.Inherit.Icon & ";" & con.Inherit.Panel & ";" &
+                             con.Inherit.Password & ";" & con.Inherit.Port & ";" & con.Inherit.Protocol & ";" &
+                             con.Inherit.PuttySession & ";" & con.Inherit.RedirectDiskDrives & ";" &
+                             con.Inherit.RedirectKeys & ";" & con.Inherit.RedirectPorts & ";" &
+                             con.Inherit.RedirectPrinters & ";" & con.Inherit.RedirectSmartCards & ";" &
+                             con.Inherit.RedirectSound & ";" & con.Inherit.Resolution & ";" &
+                             con.Inherit.AutomaticResize & ";" & con.Inherit.UseConsoleSession & ";" &
+                             con.Inherit.UseCredSsp & ";" & con.Inherit.RenderingEngine & ";" & con.Inherit.Username &
+                             ";" & con.Inherit.RDPAuthenticationLevel & ";" & con.Inherit.LoadBalanceInfo & ";" &
+                             con.Inherit.PreExtApp & ";" & con.Inherit.PostExtApp & ";" & con.Inherit.MacAddress & ";" &
+                             con.Inherit.UserField & ";" & con.Inherit.ExtApp & ";" & con.Inherit.VNCCompression & ";" &
+                             con.Inherit.VNCEncoding & ";" & con.Inherit.VNCAuthMode & ";" & con.Inherit.VNCProxyType &
+                             ";" & con.Inherit.VNCProxyIP & ";" & con.Inherit.VNCProxyPort & ";" &
+                             con.Inherit.VNCProxyUsername & ";" & con.Inherit.VNCProxyPassword & ";" &
+                             con.Inherit.VNCColors & ";" & con.Inherit.VNCSmartSizeMode & ";" & con.Inherit.VNCViewOnly
                 End If
 
                 csvWr.WriteLine(csvLn)
             End Sub
+
 #End Region
 
 #Region "vRD CSV"
+
             Private Sub SaveTovRDCSV()
-                If App.Runtime.IsConnectionsFileLoaded = False Then
+                If Runtime.IsConnectionsFileLoaded = False Then
                     Exit Sub
                 End If
 
@@ -918,12 +1050,12 @@ Namespace Config
                 csvWr.Close()
             End Sub
 
-            Private Sub SaveNodevRDCSV(ByVal tNC As TreeNodeCollection)
+            Private Sub SaveNodevRDCSV(tNC As TreeNodeCollection)
                 For Each node As TreeNode In tNC
                     If Tree.Node.GetNodeType(node) = Tree.Node.Type.Connection Then
-                        Dim curConI As Connection.Info = node.Tag
+                        Dim curConI As Info = node.Tag
 
-                        If curConI.Protocol = Connection.Protocol.Protocols.RDP Then
+                        If curConI.Protocol = Protocols.RDP Then
                             WritevRDCSVLine(curConI)
                         End If
                     ElseIf Tree.Node.GetNodeType(node) = Tree.Node.Type.Container Then
@@ -932,7 +1064,7 @@ Namespace Config
                 Next
             End Sub
 
-            Private Sub WritevRDCSVLine(ByVal con As Connection.Info)
+            Private Sub WritevRDCSVLine(con As Info)
                 Dim nodePath As String = con.TreeNode.FullPath
 
                 Dim firstSlash As Integer = nodePath.IndexOf("\")
@@ -945,13 +1077,17 @@ Namespace Config
                     nodePath = ""
                 End If
 
-                csvWr.WriteLine(con.Name & ";" & con.Hostname & ";" & con.MacAddress & ";;" & con.Port & ";" & con.UseConsoleSession & ";" & nodePath)
+                csvWr.WriteLine(
+                    con.Name & ";" & con.Hostname & ";" & con.MacAddress & ";;" & con.Port & ";" & con.UseConsoleSession &
+                    ";" & nodePath)
             End Sub
+
 #End Region
 
 #Region "vRD VRE"
+
             Private Sub SaveToVRE()
-                If App.Runtime.IsConnectionsFileLoaded = False Then
+                If Runtime.IsConnectionsFileLoaded = False Then
                     Exit Sub
                 End If
 
@@ -961,7 +1097,7 @@ Namespace Config
                 Dim tNC As TreeNodeCollection
                 tNC = tN.Nodes
 
-                _xmlTextWriter = New XmlTextWriter(ConnectionFileName, System.Text.Encoding.UTF8)
+                _xmlTextWriter = New XmlTextWriter(ConnectionFileName, Encoding.UTF8)
                 _xmlTextWriter.Formatting = Formatting.Indented
                 _xmlTextWriter.Indentation = 4
 
@@ -979,12 +1115,12 @@ Namespace Config
                 _xmlTextWriter.Close()
             End Sub
 
-            Private Sub SaveNodeVRE(ByVal tNC As TreeNodeCollection)
+            Private Sub SaveNodeVRE(tNC As TreeNodeCollection)
                 For Each node As TreeNode In tNC
                     If Tree.Node.GetNodeType(node) = Tree.Node.Type.Connection Then
-                        Dim curConI As Connection.Info = node.Tag
+                        Dim curConI As Info = node.Tag
 
-                        If curConI.Protocol = Connection.Protocol.Protocols.RDP Then
+                        If curConI.Protocol = Protocols.RDP Then
                             _xmlTextWriter.WriteStartElement("Connection")
                             _xmlTextWriter.WriteAttributeString("Id", "", "")
 
@@ -998,7 +1134,7 @@ Namespace Config
                 Next
             End Sub
 
-            Private Sub WriteVREitem(ByVal con As Connection.Info)
+            Private Sub WriteVREitem(con As Info)
                 'Name
                 _xmlTextWriter.WriteStartElement("ConnectionName")
                 _xmlTextWriter.WriteValue(con.Name)
@@ -1066,7 +1202,7 @@ Namespace Config
 
                 'Smart Size
                 _xmlTextWriter.WriteStartElement("AutoSize")
-                _xmlTextWriter.WriteValue(con.Resolution = Connection.Protocol.RDP.RDPResolutions.SmartSize)
+                _xmlTextWriter.WriteValue(con.Resolution = RDP.RDPResolutions.SmartSize)
                 _xmlTextWriter.WriteEndElement()
 
                 'SeparateResolutionX
@@ -1079,7 +1215,7 @@ Namespace Config
                 _xmlTextWriter.WriteValue("768")
                 _xmlTextWriter.WriteEndElement()
 
-                Dim resolution As Rectangle = Connection.Protocol.RDP.GetResolutionRectangle(con.Resolution)
+                Dim resolution As Rectangle = RDP.GetResolutionRectangle(con.Resolution)
                 If resolution.Width = 0 Then resolution.Width = 1024
                 If resolution.Height = 0 Then resolution.Height = 768
 
@@ -1113,7 +1249,9 @@ Namespace Config
                 _xmlTextWriter.WriteValue(con.DisplayWallpaper)
                 _xmlTextWriter.WriteEndElement()
             End Sub
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

@@ -1,14 +1,18 @@
 ﻿Imports System.IO
-Imports mRemoteNG.App
-Imports mRemoteNG.Messages
-Imports mRemoteNG.Connection.Protocol
 Imports System.Text.RegularExpressions
+Imports System.Web
+Imports mRemote3G.App
+Imports mRemote3G.App.Info
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Connection.PuttySession
+Imports mRemote3G.Messages
 
 Namespace Config.Putty
     Public Class XmingProvider
         Inherits Provider
 
 #Region "Public Methods"
+
         Public Overrides Function GetSessionNames(Optional ByVal raw As Boolean = False) As String()
             Dim sessionsFolderPath As String = GetSessionsFolderPath()
             If Not Directory.Exists(sessionsFolderPath) Then Return New String() {}
@@ -19,7 +23,7 @@ Namespace Config.Putty
                 If raw Then
                     sessionNames.Add(sessionName)
                 Else
-                    sessionNames.Add(Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B")))
+                    sessionNames.Add(HttpUtility.UrlDecode(sessionName.Replace("+", "%2B")))
                 End If
             Next
 
@@ -44,7 +48,7 @@ Namespace Config.Putty
             Return sessionNames.ToArray()
         End Function
 
-        Public Overrides Function GetSession(ByVal sessionName As String) As Connection.PuttySession.Info
+        Public Overrides Function GetSession(sessionName As String) As PuttyInfo
             Dim registrySessionName As String = GetRegistrySessionName(sessionName)
             If Not String.IsNullOrEmpty(registrySessionName) Then
                 Return ModifyRegistrySessionInfo(RegistryProvider.GetSession(registrySessionName))
@@ -56,10 +60,10 @@ Namespace Config.Putty
             Dim sessionFile As String = Path.Combine(sessionsFolderPath, sessionName)
             If Not File.Exists(sessionFile) Then Return Nothing
 
-            sessionName = Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"))
+            sessionName = HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"))
 
             Dim sessionFileReader As New SessionFileReader(sessionFile)
-            Dim sessionInfo As New Connection.PuttySession.Info
+            Dim sessionInfo As New PuttyInfo
             With sessionInfo
                 .PuttySession = sessionName
                 .Name = sessionName
@@ -77,7 +81,7 @@ Namespace Config.Putty
                     Case "ssh"
                         Dim sshVersionObject As Object = sessionFileReader.GetValue("SshProt")
                         If sshVersionObject IsNot Nothing Then
-                            Dim sshVersion As Integer = CType(sshVersionObject, Integer)
+                            Dim sshVersion = CType(sshVersionObject, Integer)
                             If sshVersion >= 2 Then
                                 .Protocol = Protocols.SSH2
                             Else
@@ -103,8 +107,14 @@ Namespace Config.Putty
 
             If _eventWatcher IsNot Nothing Then Return
 
+            Dim sessDir = GetSessionsFolderPath()
+            If Not Directory.Exists(sessDir) Then
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "XmingProvider: Could not find Session Dir. Cannot watch sessions.", True)
+                Return
+            End If
+
             Try
-                _eventWatcher = New FileSystemWatcher(GetSessionsFolderPath())
+                _eventWatcher = New FileSystemWatcher(sessDir)
                 _eventWatcher.NotifyFilter = (NotifyFilters.FileName Or NotifyFilters.LastWrite)
                 AddHandler _eventWatcher.Changed, AddressOf OnFileSystemEventArrived
                 AddHandler _eventWatcher.Created, AddressOf OnFileSystemEventArrived
@@ -112,7 +122,8 @@ Namespace Config.Putty
                 AddHandler _eventWatcher.Renamed, AddressOf OnFileSystemEventArrived
                 _eventWatcher.EnableRaisingEvents = True
             Catch ex As Exception
-                Runtime.MessageCollector.AddExceptionMessage("XmingPortablePuttySessions.Watcher.StartWatching() failed.", ex, MessageClass.WarningMsg, True)
+                Runtime.MessageCollector.AddExceptionMessage(
+                    "XmingPortablePuttySessions.Watcher.StartWatching() failed.", ex, MessageClass.WarningMsg, True)
             End Try
         End Sub
 
@@ -125,23 +136,27 @@ Namespace Config.Putty
             _eventWatcher.Dispose()
             _eventWatcher = Nothing
         End Sub
+
 #End Region
 
 #Region "Private Fields"
+
         Private Const RegistrySessionNameFormat As String = "{0} [registry]"
         Private Const RegistrySessionNamePattern As String = "(.*)\ \[registry\]"
 
         Private Shared ReadOnly RegistryProvider As New RegistryProvider
         Private Shared _eventWatcher As FileSystemWatcher
+
 #End Region
 
 #Region "Private Methods"
+
         Private Shared Function GetPuttyConfPath() As String
             Dim puttyPath As String
             If My.Settings.UseCustomPuttyPath Then
                 puttyPath = My.Settings.CustomPuttyPath
             Else
-                puttyPath = Info.General.PuttyPath
+                puttyPath = General.PuttyPath
             End If
             Return Path.Combine(Path.GetDirectoryName(puttyPath), "putty.conf")
         End Function
@@ -153,36 +168,39 @@ Namespace Config.Putty
             Return Path.Combine(basePath, "sessions")
         End Function
 
-        Private Shared Function GetRegistrySessionName(ByVal sessionName As String) As String
+        Private Shared Function GetRegistrySessionName(sessionName As String) As String
             Dim regex As New Regex(RegistrySessionNamePattern)
 
             Dim matches As MatchCollection = regex.Matches(sessionName)
             If matches.Count < 1 Then Return String.Empty
 
             Dim groups As GroupCollection = matches(0).Groups
-            If groups.Count < 1 Then Return String.Empty ' This should always include at least one item, but check anyway
+            If groups.Count < 1 Then Return String.Empty _
+            ' This should always include at least one item, but check anyway
 
             Return groups(1).Value
         End Function
 
-        Private Shared Function ModifyRegistrySessionInfo(ByVal sessionInfo As Connection.PuttySession.Info) As Connection.PuttySession.Info
+        Private Shared Function ModifyRegistrySessionInfo(sessionInfo As PuttyInfo) As PuttyInfo
             sessionInfo.Name = String.Format(RegistrySessionNameFormat, sessionInfo.Name)
             sessionInfo.PuttySession = String.Format(RegistrySessionNameFormat, sessionInfo.PuttySession)
             Return sessionInfo
         End Function
 
-        Private Sub OnFileSystemEventArrived(ByVal sender As Object, ByVal e As FileSystemEventArgs)
+        Private Sub OnFileSystemEventArrived(sender As Object, e As FileSystemEventArgs)
             OnSessionChanged(New SessionChangedEventArgs())
         End Sub
 
-        Private Sub OnRegistrySessionChanged(ByVal sender As Object, ByVal e As SessionChangedEventArgs)
+        Private Sub OnRegistrySessionChanged(sender As Object, e As SessionChangedEventArgs)
             OnSessionChanged(New SessionChangedEventArgs())
         End Sub
+
 #End Region
 
 #Region "Private Classes"
+
         Private Class PuttyConfFileReader
-            Public Sub New(ByVal puttyConfFile As String)
+            Public Sub New(puttyConfFile As String)
                 _puttyConfFile = puttyConfFile
             End Sub
 
@@ -204,16 +222,18 @@ Namespace Config.Putty
                             If line.Substring(0, 1) = ";" Then Continue Do ' Comment
                             Dim parts() As String = line.Split(New Char() {"="}, 2)
                             If parts.Length < 2 Then Continue Do
-                            If _configuration.ContainsKey(parts(0)) Then Continue Do ' As per http://www.straightrunning.com/XmingNotes/portableputty.php only first entry is used
+                            If _configuration.ContainsKey(parts(0)) Then Continue Do _
+                            ' As per http://www.straightrunning.com/XmingNotes/portableputty.php only first entry is used
                             _configuration.Add(parts(0), parts(1))
                         Loop
                     End Using
                 Catch ex As Exception
-                    Runtime.MessageCollector.AddExceptionMessage("PuttyConfFileReader.LoadConfiguration() failed.", ex, MessageClass.ErrorMsg, True)
+                    Runtime.MessageCollector.AddExceptionMessage("PuttyConfFileReader.LoadConfiguration() failed.", ex,
+                                                                 MessageClass.ErrorMsg, True)
                 End Try
             End Sub
 
-            Public Function GetValue(ByVal setting As String) As String
+            Public Function GetValue(setting As String) As String
                 If Not _configurationLoaded Then LoadConfiguration()
                 If Not _configuration.ContainsKey(setting) Then Return String.Empty
                 Return _configuration(setting)
@@ -221,7 +241,7 @@ Namespace Config.Putty
         End Class
 
         Private Class SessionFileReader
-            Public Sub New(ByVal sessionFile As String)
+            Public Sub New(sessionFile As String)
                 _sessionFile = sessionFile
             End Sub
 
@@ -244,16 +264,18 @@ Namespace Config.Putty
                         Loop
                     End Using
                 Catch ex As Exception
-                    Runtime.MessageCollector.AddExceptionMessage("SessionFileReader.LoadSessionInfo() failed.", ex, MessageClass.ErrorMsg, True)
+                    Runtime.MessageCollector.AddExceptionMessage("SessionFileReader.LoadSessionInfo() failed.", ex,
+                                                                 MessageClass.ErrorMsg, True)
                 End Try
             End Sub
 
-            Public Function GetValue(ByVal setting As String) As String
+            Public Function GetValue(setting As String) As String
                 If Not _sessionInfoLoaded Then LoadSessionInfo()
                 If Not _sessionInfo.ContainsKey(setting) Then Return String.Empty
                 Return _sessionInfo(setting)
             End Function
         End Class
+
 #End Region
     End Class
 End Namespace

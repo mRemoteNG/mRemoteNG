@@ -1,22 +1,28 @@
-Imports System.Windows.Forms
+Imports mRemote3G.App
+Imports mRemote3G.Forms
+Imports mRemote3G.UI.Window
 
 Namespace Messages
     Public Class Collector
+
 #Region "Public Properties"
-        Private _MCForm As UI.Window.ErrorsAndInfos
-        Public Property MCForm() As UI.Window.ErrorsAndInfos
+
+        Private _MCForm As ErrorsAndInfos
+
+        Public Property MCForm As ErrorsAndInfos
             Get
                 Return Me._MCForm
             End Get
-            Set(ByVal value As UI.Window.ErrorsAndInfos)
+            Set
                 Me._MCForm = value
             End Set
         End Property
+
 #End Region
 
         Private ECTimer As Timer
 
-        Public Sub New(ByVal MessageCollectorForm As UI.Window.ErrorsAndInfos)
+        Public Sub New(MessageCollectorForm As ErrorsAndInfos)
             Me._MCForm = MessageCollectorForm
             CreateTimer()
         End Sub
@@ -28,8 +34,9 @@ Namespace Messages
             AddHandler ECTimer.Tick, AddressOf SwitchTimerTick
         End Sub
 
-        Delegate Sub AddToListCB(ByVal lvItem As ListViewItem)
-        Private Sub AddToList(ByVal lvItem As ListViewItem)
+        Delegate Sub AddToListCB(lvItem As ListViewItem)
+
+        Private Sub AddToList(lvItem As ListViewItem)
             If Me._MCForm.lvErrorCollector.InvokeRequired Then
                 Dim d As New AddToListCB(AddressOf AddToList)
                 Me._MCForm.lvErrorCollector.Invoke(d, New Object() {lvItem})
@@ -38,16 +45,16 @@ Namespace Messages
             End If
         End Sub
 
-        Public Sub AddMessage(ByVal MsgClass As Messages.MessageClass, ByVal MsgText As String, Optional ByVal OnlyLog As Boolean = False)
-            Dim nMsg As New Messages.Message
+        Public Sub AddMessage(MsgClass As MessageClass, MsgText As String, Optional ByVal OnlyLog As Boolean = False)
+            Dim nMsg As New Message
             nMsg.MsgClass = MsgClass
             nMsg.MsgText = MsgText
             nMsg.MsgDate = Now
 
-            If My.Settings.SwitchToMCOnInformation And nMsg.MsgClass = Messages.MessageClass.InformationMsg Then
+            If My.Settings.SwitchToMCOnInformation And nMsg.MsgClass = MessageClass.InformationMsg Then
                 Debug.Print("Info: " & nMsg.MsgText)
                 If My.Settings.WriteLogFile Then
-                    App.Runtime.log.Info(nMsg.MsgText)
+                    Runtime.log.Info(nMsg.MsgText)
                 End If
 
                 If OnlyLog Then
@@ -61,10 +68,10 @@ Namespace Messages
                 End If
             End If
 
-            If My.Settings.SwitchToMCOnWarning And nMsg.MsgClass = Messages.MessageClass.WarningMsg Then
+            If My.Settings.SwitchToMCOnWarning And nMsg.MsgClass = MessageClass.WarningMsg Then
                 Debug.Print("Warning: " & nMsg.MsgText)
                 If My.Settings.WriteLogFile Then
-                    App.Runtime.log.Warn(nMsg.MsgText)
+                    Runtime.log.Warn(nMsg.MsgText)
                 End If
 
                 If OnlyLog Then
@@ -78,11 +85,11 @@ Namespace Messages
                 End If
             End If
 
-            If My.Settings.SwitchToMCOnError And nMsg.MsgClass = Messages.MessageClass.ErrorMsg Then
+            If My.Settings.SwitchToMCOnError And nMsg.MsgClass = MessageClass.ErrorMsg Then
                 Debug.Print("Error: " & nMsg.MsgText)
 
                 ' Always log error messages
-                App.Runtime.Log.Error(nMsg.MsgText)
+                Runtime.Log.Error(nMsg.MsgText)
 
                 If OnlyLog Then
                     Exit Sub
@@ -99,7 +106,7 @@ Namespace Messages
                 Debug.Print("Report: " & nMsg.MsgText)
 
                 If My.Settings.WriteLogFile Then
-                    App.Runtime.Log.Info(nMsg.MsgText)
+                    Runtime.Log.Info(nMsg.MsgText)
                 End If
 
                 Exit Sub
@@ -113,11 +120,13 @@ Namespace Messages
             AddToList(lvItem)
         End Sub
 
-        Public Sub AddExceptionMessage(ByVal message As String, ByVal ex As Exception, Optional ByVal msgClass As MessageClass = MessageClass.ErrorMsg, Optional ByVal logOnly As Boolean = False)
-            AddMessage(msgClass, message & vbNewLine & Tools.Misc.GetExceptionMessageRecursive(ex), logOnly)
+        Public Sub AddExceptionMessage(message As String, ex As Exception,
+                                       Optional ByVal msgClass As MessageClass = MessageClass.ErrorMsg,
+                                       Optional ByVal logOnly As Boolean = False)
+            AddMessage(msgClass, message & vbNewLine & ex.ToString(), logOnly)
         End Sub
 
-        Private Sub SwitchTimerTick(ByVal sender As Object, ByVal e As System.EventArgs)
+        Private Sub SwitchTimerTick(sender As Object, e As EventArgs)
             Me.SwitchToMessage()
             Me.ECTimer.Enabled = False
         End Sub
@@ -131,19 +140,24 @@ Namespace Messages
             Me._MCForm.lvErrorCollector.FocusedItem = Me._MCForm.lvErrorCollector.Items(0)
         End Sub
 
-        Private Shared Sub ShowMessageBox(ByVal Msg As Messages.Message)
+        Private Shared Sub ShowMessageBox(Msg As Message)
             Select Case Msg.MsgClass
-                Case Messages.MessageClass.InformationMsg
-                    MessageBox.Show(Msg.MsgText, String.Format(My.Language.strTitleInformation, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Case Messages.MessageClass.WarningMsg
-                    MessageBox.Show(Msg.MsgText, String.Format(My.Language.strTitleWarning, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Warning)
-                Case Messages.MessageClass.ErrorMsg
-                    MessageBox.Show(Msg.MsgText, String.Format(My.Language.strTitleError, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Error)
+                Case MessageClass.InformationMsg
+                    MessageBox.Show(Msg.MsgText, String.Format(Language.Language.strTitleInformation, Msg.MsgDate),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Case MessageClass.WarningMsg
+                    MessageBox.Show(Msg.MsgText, String.Format(Language.Language.strTitleWarning, Msg.MsgDate),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Warning)
+                Case MessageClass.ErrorMsg
+                    MessageBox.Show(Msg.MsgText, String.Format(Language.Language.strTitleError, Msg.MsgDate),
+                                    MessageBoxButtons.OK, MessageBoxIcon.Error)
             End Select
         End Sub
 
 #Region "Delegates"
+
         Private Delegate Sub ShowMCFormCB()
+
         Private Sub ShowMCForm()
             If frmMain.pnlDock.InvokeRequired Then
                 Dim d As New ShowMCFormCB(AddressOf ShowMCForm)
@@ -152,6 +166,7 @@ Namespace Messages
                 Me._MCForm.Show(frmMain.pnlDock)
             End If
         End Sub
+
 #End Region
     End Class
 End Namespace

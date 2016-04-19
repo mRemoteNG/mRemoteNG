@@ -4,16 +4,19 @@
 
 Namespace Controls
     Public Class TextBox
-        Inherits Windows.Forms.TextBox
+        Inherits System.Windows.Forms.TextBox
 
 #Region "Public Properties"
+
         <Category("Behavior"),
-        DefaultValue(False)> _
+            DefaultValue(False)>
         Public Property SelectAllOnFocus As Boolean = False
+
 #End Region
 
 #Region "Protected Methods"
-        Protected Overrides Sub OnEnter(ByVal e As EventArgs)
+
+        Protected Overrides Sub OnEnter(e As EventArgs)
             MyBase.OnEnter(e)
 
             If MouseButtons = MouseButtons.None Then
@@ -22,13 +25,13 @@ Namespace Controls
             End If
         End Sub
 
-        Protected Overrides Sub OnLeave(ByVal e As EventArgs)
+        Protected Overrides Sub OnLeave(e As EventArgs)
             MyBase.OnLeave(e)
 
             _focusHandled = False
         End Sub
 
-        Protected Overrides Sub OnMouseUp(ByVal e As MouseEventArgs)
+        Protected Overrides Sub OnMouseUp(e As MouseEventArgs)
             MyBase.OnMouseUp(e)
 
             If Not _focusHandled Then
@@ -36,10 +39,13 @@ Namespace Controls
                 _focusHandled = True
             End If
         End Sub
+
 #End Region
 
 #Region "Private Fields"
+
         Private _focusHandled As Boolean = False
+
 #End Region
     End Class
 End Namespace

@@ -1,88 +1,102 @@
-Imports mRemoteNG.App.Runtime
-Imports System.Xml
 Imports System.IO
+Imports System.Text
+Imports System.Xml
+Imports mRemote3G.App
+Imports mRemote3G.App.Info
+Imports mRemote3G.Forms
+Imports mRemote3G.Messages
+Imports mRemote3G.My
+Imports mRemote3G.Security
+Imports mRemote3G.Tools
 
 Namespace Config
+
     Namespace Settings
         Public Class Save
+
 #Region "Public Methods"
+
             Public Shared Sub Save()
                 Try
                     With frmMain
-                        Dim windowPlacement As New Tools.WindowPlacement(frmMain)
+                        Dim windowPlacement As New WindowPlacement(frmMain)
                         If .WindowState = FormWindowState.Minimized And windowPlacement.RestoreToMaximized Then
                             .Opacity = 0
                             .WindowState = FormWindowState.Maximized
                         End If
 
-                        My.Settings.MainFormLocation = .Location
-                        My.Settings.MainFormSize = .Size
+                        MySettingsProperty.Settings.MainFormLocation = .Location
+                        MySettingsProperty.Settings.MainFormSize = .Size
 
                         If Not .WindowState = FormWindowState.Normal Then
-                            My.Settings.MainFormRestoreLocation = .RestoreBounds.Location
-                            My.Settings.MainFormRestoreSize = .RestoreBounds.Size
+                            MySettingsProperty.Settings.MainFormRestoreLocation = .RestoreBounds.Location
+                            MySettingsProperty.Settings.MainFormRestoreSize = .RestoreBounds.Size
                         End If
 
-                        My.Settings.MainFormState = .WindowState
+                        MySettingsProperty.Settings.MainFormState = .WindowState
 
-                        My.Settings.MainFormKiosk = .Fullscreen.Value
+                        MySettingsProperty.Settings.MainFormKiosk = frmMain.Fullscreen.Value
 
-                        My.Settings.FirstStart = False
-                        My.Settings.ResetPanels = False
-                        My.Settings.ResetToolbars = False
-                        My.Settings.NoReconnect = False
+                        MySettingsProperty.Settings.FirstStart = False
+                        MySettingsProperty.Settings.ResetPanels = False
+                        MySettingsProperty.Settings.ResetToolbars = False
+                        MySettingsProperty.Settings.NoReconnect = False
 
-                        My.Settings.ExtAppsTBLocation = .tsExternalTools.Location
+                        MySettingsProperty.Settings.ExtAppsTBLocation = .tsExternalTools.Location
                         If .tsExternalTools.Parent IsNot Nothing Then
-                            My.Settings.ExtAppsTBParentDock = .tsExternalTools.Parent.Dock.ToString
+                            MySettingsProperty.Settings.ExtAppsTBParentDock = .tsExternalTools.Parent.Dock.ToString
                         End If
-                        My.Settings.ExtAppsTBVisible = .tsExternalTools.Visible
-                        My.Settings.ExtAppsTBShowText = .cMenToolbarShowText.Checked
+                        MySettingsProperty.Settings.ExtAppsTBVisible = .tsExternalTools.Visible
+                        MySettingsProperty.Settings.ExtAppsTBShowText = .cMenToolbarShowText.Checked
 
-                        My.Settings.QuickyTBLocation = .tsQuickConnect.Location
+                        MySettingsProperty.Settings.QuickyTBLocation = .tsQuickConnect.Location
                         If .tsQuickConnect.Parent IsNot Nothing Then
-                            My.Settings.QuickyTBParentDock = .tsQuickConnect.Parent.Dock.ToString
+                            MySettingsProperty.Settings.QuickyTBParentDock = .tsQuickConnect.Parent.Dock.ToString
                         End If
-                        My.Settings.QuickyTBVisible = .tsQuickConnect.Visible
+                        MySettingsProperty.Settings.QuickyTBVisible = .tsQuickConnect.Visible
 
-                        My.Settings.ConDefaultPassword = Security.Crypt.Encrypt(My.Settings.ConDefaultPassword, App.Info.General.EncryptionKey)
+                        MySettingsProperty.Settings.ConDefaultPassword =
+                            Crypt.Encrypt(MySettingsProperty.Settings.ConDefaultPassword, General.EncryptionKey)
 
-                        My.Settings.Save()
+                        MySettingsProperty.Settings.Save()
                     End With
 
                     SavePanelsToXML()
                     SaveExternalAppsToXML()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Saving settings failed" & vbNewLine & vbNewLine & ex.Message, False)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Saving settings failed" & vbNewLine & vbNewLine & ex.ToString(), False)
                 End Try
             End Sub
 
             Public Shared Sub SavePanelsToXML()
                 Try
-                    If Directory.Exists(App.Info.Settings.SettingsPath) = False Then
-                        Directory.CreateDirectory(App.Info.Settings.SettingsPath)
+                    If Directory.Exists(Info.Settings.SettingsPath) = False Then
+                        Directory.CreateDirectory(Info.Settings.SettingsPath)
                     End If
 
-                    frmMain.pnlDock.SaveAsXml(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.LayoutFileName)
+                    frmMain.pnlDock.SaveAsXml(Info.Settings.SettingsPath & "\" & Info.Settings.LayoutFileName)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SavePanelsToXML failed" & vbNewLine & vbNewLine & ex.Message, False)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SavePanelsToXML failed" & vbNewLine & vbNewLine & ex.ToString(), False)
                 End Try
             End Sub
 
             Public Shared Sub SaveExternalAppsToXML()
                 Try
-                    If Directory.Exists(App.Info.Settings.SettingsPath) = False Then
-                        Directory.CreateDirectory(App.Info.Settings.SettingsPath)
+                    If Directory.Exists(Info.Settings.SettingsPath) = False Then
+                        Directory.CreateDirectory(Info.Settings.SettingsPath)
                     End If
 
-                    Dim xmlTextWriter As New XmlTextWriter(App.Info.Settings.SettingsPath & "\" & App.Info.Settings.ExtAppsFilesName, System.Text.Encoding.UTF8)
+                    Dim _
+                        xmlTextWriter As _
+                            New XmlTextWriter(Info.Settings.SettingsPath & "\" & Info.Settings.ExtAppsFilesName,
+                                              Encoding.UTF8)
                     xmlTextWriter.Formatting = Formatting.Indented
                     xmlTextWriter.Indentation = 4
 
                     xmlTextWriter.WriteStartDocument()
                     xmlTextWriter.WriteStartElement("Apps")
 
-                    For Each extA As Tools.ExternalTool In ExternalTools
+                    For Each extA As ExternalTool In Runtime.ExternalTools
                         xmlTextWriter.WriteStartElement("App")
                         xmlTextWriter.WriteAttributeString("DisplayName", "", extA.DisplayName)
                         xmlTextWriter.WriteAttributeString("FileName", "", extA.FileName)
@@ -97,10 +111,15 @@ Namespace Config
 
                     xmlTextWriter.Close()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveExternalAppsToXML failed" & vbNewLine & vbNewLine & ex.Message, False)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveExternalAppsToXML failed" & vbNewLine & vbNewLine & ex.ToString(), False)
                 End Try
             End Sub
+
+            Private Sub New()
+            End Sub
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

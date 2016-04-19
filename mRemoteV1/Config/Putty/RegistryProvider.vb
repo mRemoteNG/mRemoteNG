@@ -1,15 +1,18 @@
 ﻿Imports System.Management
-Imports mRemoteNG.App
-Imports mRemoteNG.Messages
-Imports Microsoft.Win32
-Imports mRemoteNG.Connection.Protocol
 Imports System.Security.Principal
+Imports System.Web
+Imports Microsoft.Win32
+Imports mRemote3G.App
+Imports mRemote3G.Connection.Protocol
+Imports mRemote3G.Connection.PuttySession
+Imports mRemote3G.Messages
 
 Namespace Config.Putty
     Public Class RegistryProvider
         Inherits Provider
 
 #Region "Public Methods"
+
         Public Overrides Function GetSessionNames(Optional ByVal raw As Boolean = False) As String()
             Dim sessionsKey As RegistryKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey)
             If sessionsKey Is Nothing Then Return New String() {}
@@ -19,7 +22,7 @@ Namespace Config.Putty
                 If raw Then
                     sessionNames.Add(sessionName)
                 Else
-                    sessionNames.Add(Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B")))
+                    sessionNames.Add(HttpUtility.UrlDecode(sessionName.Replace("+", "%2B")))
                 End If
             Next
 
@@ -36,16 +39,16 @@ Namespace Config.Putty
             Return sessionNames.ToArray()
         End Function
 
-        Public Overrides Function GetSession(ByVal sessionName As String) As Connection.PuttySession.Info
+        Public Overrides Function GetSession(sessionName As String) As PuttyInfo
             Dim sessionsKey As RegistryKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey)
             If sessionsKey Is Nothing Then Return Nothing
 
             Dim sessionKey As RegistryKey = sessionsKey.OpenSubKey(sessionName)
             If sessionKey Is Nothing Then Return Nothing
 
-            sessionName = Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"))
+            sessionName = HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"))
 
-            Dim sessionInfo As New Connection.PuttySession.Info
+            Dim sessionInfo As New PuttyInfo
             With sessionInfo
                 .PuttySession = sessionName
                 .Name = sessionName
@@ -63,7 +66,7 @@ Namespace Config.Putty
                     Case "ssh"
                         Dim sshVersionObject As Object = sessionKey.GetValue("SshProt")
                         If sshVersionObject IsNot Nothing Then
-                            Dim sshVersion As Integer = CType(sshVersionObject, Integer)
+                            Dim sshVersion = CType(sshVersionObject, Integer)
                             If sshVersion >= 2 Then
                                 .Protocol = Protocols.SSH2
                             Else
@@ -89,12 +92,18 @@ Namespace Config.Putty
             Try
                 Dim currentUserSid As String = WindowsIdentity.GetCurrent().User.Value
                 Dim key As String = String.Join("\", {currentUserSid, PuttySessionsKey}).Replace("\", "\\")
-                Dim query As New WqlEventQuery(String.Format("SELECT * FROM RegistryTreeChangeEvent WHERE Hive = 'HKEY_USERS' AND RootPath = '{0}'", key))
+                Dim _
+                    query As _
+                        New WqlEventQuery(
+                            String.Format(
+                                "SELECT * FROM RegistryTreeChangeEvent WHERE Hive = 'HKEY_USERS' AND RootPath = '{0}'",
+                                key))
                 _eventWatcher = New ManagementEventWatcher(query)
                 AddHandler _eventWatcher.EventArrived, AddressOf OnManagementEventArrived
                 _eventWatcher.Start()
             Catch ex As Exception
-                Runtime.MessageCollector.AddExceptionMessage("PuttySessions.Watcher.StartWatching() failed.", ex, MessageClass.WarningMsg, True)
+                Runtime.MessageCollector.AddExceptionMessage("PuttySessions.Watcher.StartWatching() failed.", ex,
+                                                             MessageClass.WarningMsg, True)
             End Try
         End Sub
 
@@ -104,17 +113,22 @@ Namespace Config.Putty
             _eventWatcher.Dispose()
             _eventWatcher = Nothing
         End Sub
+
 #End Region
 
 #Region "Private Fields"
+
         Private Const PuttySessionsKey As String = "Software\SimonTatham\PuTTY\Sessions"
         Private Shared _eventWatcher As ManagementEventWatcher
+
 #End Region
 
 #Region "Private Methods"
-        Private Sub OnManagementEventArrived(ByVal sender As Object, ByVal e As EventArrivedEventArgs)
+
+        Private Sub OnManagementEventArrived(sender As Object, e As EventArrivedEventArgs)
             OnSessionChanged(New SessionChangedEventArgs())
         End Sub
+
 #End Region
     End Class
 End Namespace

@@ -177,7 +177,7 @@
                 Me.Controls.Add(Me.pnlUpdate)
                 Me.Controls.Add(Me.lblStatus)
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.Icon = Global.mRemoteNG.My.Resources.Resources.Update_Icon
+                Me.Icon = Global.mRemote3G.My.Resources.Resources.Update_Icon
                 Me.Name = "Update"
                 Me.TabText = "Update"
                 Me.Text = "Update"

@@ -1,4 +1,88 @@
-1.73 Beta 2 ():
+1.94.2 (2016-01-31)
+  Use Remote Desktop Client v8 connections
+    - Requires Windows 7 SP1+
+    - https://support.microsoft.com/en-us/kb/2923545 may also be required for Win 7 SP1 (though is highly recommended at a minimum).
+  Default icons for External tools (attempt to fix #16)
+  Build environment changes
+  
+1.94.1 (2016-01-25)
+  Version numbering change (I'm getting too close to 2.0, but don't want to flip to 2.0 yet - I'd be OK with 2.0 after 1.99.99 I guess)
+  Fix Bug #10 - (for reals this time?) crash seems to have been related to complier optimizations
+    - This may very well address #8 as well. Suspect that there was memory corruption that caused issues with Garbage Collection
+  Updated PuTTYNG (https://github.com/kmscode/PuTTYNG) with some minor changes that allow it to integrate properly into mRemote3G
+    - PuTTYNG window should no longer flash outside of mRemote3G
+  Fix for Menu bar items which were not displaying in the correct order
+
+1.93 (2016-01-21)
+  Fix Bug #10 - Avoid throwing exceptions/crashing when adding new External Tool
+  Remove Keyboard Shortcut functionality to prevent Windows Lock/Unlock crash
+    - This was a beta option from 1.73 that was never released
+    - If the functionality were to be implemented (in a "fixed" fashion), it may still end up causing "expected behavior"
+  New build of MagicLibrary.dll
+  Other minor build changes
+  
+1.92 (2016-01-08)
+  Additional fixes/logging for Windows lock/unlock crash 
+  Removed old references and files for external code/binaries that are no longer used
+  
+1.91 (2016-01-05)
+  Additional code changes for the rename to "mRemote3G"
+  Revert commit 5f2112a (Fix Warning CA1702) - This resolves issue #3
+  Additional logging for Windows System Lock Crash - Pull Request #2 helped significantly, but didn't fully resolve this
+  
+
+1.90 (2015-12-21)
+  ** Updated name to "mRemote3G" **
+  
+  Changed some logos/icons accordingly with the name change
+  Reverted most changes from 1.84 - Re-enabled HTTP/S connections
+  Enabled enhanced functionality for the IE rendering engine
+  Removed XULRunner HTTP/S (Gecko) rendering engine only (current versions aren't a drop in replacement for the 1.8.x release, circa 2007)
+  Disabled donate link (not proper for this build)
+  Pointed "website" links to GitHub project page
+  Changed Bugs and Forum link to port to GitHub repo issues
+  Fixed some complier errors
+  Minor changes to build envornment
+  Fixed changelog (forgot to list some really minor things for the 1.84 changelog)
+  
+  
+1.84 (2015-12-11)
+  Open links within the default browser (not within the mRemote application)
+  Removed HTTP/S connection functionality (which is better served by browsers)
+  Removed "RDP Sessions" component check (functionality removed in 1.81)
+  Removed "ICA" references from Language files
+  Fixed some compiler warnings and build environment issues
+  
+1.83 (2015-11-16)
+  Correct random crash after unlocking session (Thanks to Fabrice Didierjean - coredmp95 - AT - gmail.com)
+  Update to be "DPI Aware" to prevent the UI from looking "Fuzzy" - https://msdn.microsoft.com/en-us/library/dn469266%28v=vs.85%29.aspx
+  Added new build-relport.cmd file for quick "Release Portable" builds
+
+1.82 (2015-11-12):
+  Fixed a number of Complier Warnings
+  Print exception stack in the log
+  PuTTYNG updated to 0.66 from Upstream PuTTY release
+  
+1.81 (2015-11-11):
+  Updated CREDITS.TXT
+  Updated to latest log4net.dll
+  Enabled Log file by default
+  Removed EOLWTSCOM dll - closed source and unable to find suitable replacement at this time
+  Removed "Sessions" window (required EOLWTSCOM)
+  Updated SSH Transfer log message
+  Corrected "Debug Portable" and "Release Portable" build configuration
+  
+  
+1.80 (2015-11-05):
+  Compile with VS 2015
+  Target .NET Framework 4.6
+  Remove ICA support (unable to find proper required library, not a "key" feature from my perspective)
+  Fixed some form inconsistencies - OK btn left of Cancel btn, no more flat style controls (Pull Request #101 from Upstream)
+  Latest DockPanel Suite library 2.9.0 - https://github.com/dockpanelsuite/dockpanelsuite
+  Disable the update check (at least for now).
+  PuTTYNG updated to 0.65 from Upstream PuTTY release
+  
+1.73 Beta 2 (NOT RELEASED):
   Fixed issue MR-619 - Keyboard shortcuts stop working after locking the screen with Win+L
   Added support for importing files from PuTTY Connection Manager.
   Improved the import and export functionality.

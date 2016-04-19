@@ -22,7 +22,7 @@
                 Me.ClientSize = New System.Drawing.Size(549, 474)
                 Me.Controls.Add(Me.webBrowser)
                 Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                Me.Icon = Global.mRemoteNG.My.Resources.Resources.News_Icon
+                Me.Icon = Global.mRemote3G.My.Resources.Resources.News_Icon
                 Me.Name = "Announcement"
                 Me.TabText = "Announcement"
                 Me.Text = "Announcement"

@@ -119,7 +119,7 @@
                 '
                 'NewToolMenuItem
                 '
-                Me.NewToolMenuItem.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp_Add
+                Me.NewToolMenuItem.Image = Global.mRemote3G.My.Resources.Resources.ExtApp_Add
                 Me.NewToolMenuItem.Name = "NewToolMenuItem"
                 Me.NewToolMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Shift Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
                 Me.NewToolMenuItem.Size = New System.Drawing.Size(220, 22)
@@ -127,7 +127,7 @@
                 '
                 'DeleteToolMenuItem
                 '
-                Me.DeleteToolMenuItem.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp_Delete
+                Me.DeleteToolMenuItem.Image = Global.mRemote3G.My.Resources.Resources.ExtApp_Delete
                 Me.DeleteToolMenuItem.Name = "DeleteToolMenuItem"
                 Me.DeleteToolMenuItem.ShortcutKeys = System.Windows.Forms.Keys.Delete
                 Me.DeleteToolMenuItem.Size = New System.Drawing.Size(220, 22)
@@ -140,7 +140,7 @@
                 '
                 'LaunchToolMenuItem
                 '
-                Me.LaunchToolMenuItem.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp_Start
+                Me.LaunchToolMenuItem.Image = Global.mRemote3G.My.Resources.Resources.ExtApp_Start
                 Me.LaunchToolMenuItem.Name = "LaunchToolMenuItem"
                 Me.LaunchToolMenuItem.Size = New System.Drawing.Size(220, 22)
                 Me.LaunchToolMenuItem.Text = "Launch External Tool"
@@ -295,7 +295,7 @@
                 '
                 'NewToolToolstripButton
                 '
-                Me.NewToolToolstripButton.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp_Add
+                Me.NewToolToolstripButton.Image = Global.mRemote3G.My.Resources.Resources.ExtApp_Add
                 Me.NewToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta
                 Me.NewToolToolstripButton.Name = "NewToolToolstripButton"
                 Me.NewToolToolstripButton.Size = New System.Drawing.Size(51, 22)
@@ -303,7 +303,7 @@
                 '
                 'DeleteToolToolstripButton
                 '
-                Me.DeleteToolToolstripButton.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp_Delete
+                Me.DeleteToolToolstripButton.Image = Global.mRemote3G.My.Resources.Resources.ExtApp_Delete
                 Me.DeleteToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta
                 Me.DeleteToolToolstripButton.Name = "DeleteToolToolstripButton"
                 Me.DeleteToolToolstripButton.Size = New System.Drawing.Size(60, 22)
@@ -316,7 +316,7 @@
                 '
                 'LaunchToolToolstripButton
                 '
-                Me.LaunchToolToolstripButton.Image = Global.mRemoteNG.My.Resources.Resources.ExtApp_Start
+                Me.LaunchToolToolstripButton.Image = Global.mRemote3G.My.Resources.Resources.ExtApp_Start
                 Me.LaunchToolToolstripButton.ImageTransparentColor = System.Drawing.Color.Magenta
                 Me.LaunchToolToolstripButton.Name = "LaunchToolToolstripButton"
                 Me.LaunchToolToolstripButton.Size = New System.Drawing.Size(66, 22)

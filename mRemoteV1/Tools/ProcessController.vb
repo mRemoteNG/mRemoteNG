@@ -1,11 +1,13 @@
 ﻿Imports System.Runtime.InteropServices
 Imports System.Text
-Imports mRemoteNG.My
+Imports System.Threading
 
 Namespace Tools
     Public Class ProcessController
+
 #Region "Public Methods"
-        Public Function Start(ByVal fileName As String, Optional ByVal arguments As CommandLineArguments = Nothing) As Boolean
+
+        Public Function Start(fileName As String, Optional ByVal arguments As CommandLineArguments = Nothing) As Boolean
             With Process.StartInfo
                 .UseShellExecute = False
                 .FileName = fileName
@@ -18,7 +20,8 @@ Namespace Tools
             Return True
         End Function
 
-        Public Function SetControlVisible(ByVal className As String, ByVal text As String, Optional ByVal visible As Boolean = True) As Boolean
+        Public Function SetControlVisible(className As String, text As String, Optional ByVal visible As Boolean = True) _
+            As Boolean
             If Process Is Nothing OrElse Process.HasExited Then Return False
             If Handle = IntPtr.Zero Then Return False
 
@@ -37,7 +40,7 @@ Namespace Tools
             Return True
         End Function
 
-        Public Function SetControlText(ByVal className As String, ByVal oldText As String, ByVal newText As String) As Boolean
+        Public Function SetControlText(className As String, oldText As String, newText As String) As Boolean
             If Process Is Nothing OrElse Process.HasExited Then Return False
             If Handle = IntPtr.Zero Then Return False
 
@@ -50,20 +53,21 @@ Namespace Tools
             Return True
         End Function
 
-        Public Function SelectListBoxItem(ByVal itemText As String) As Boolean
+        Public Function SelectListBoxItem(itemText As String) As Boolean
             If Process Is Nothing OrElse Process.HasExited Then Return False
             If Handle = IntPtr.Zero Then Return False
 
             Dim listBoxHandle As IntPtr = GetControlHandle("ListBox")
             If listBoxHandle = IntPtr.Zero Then Return False
 
-            Dim result As IntPtr = Win32.SendMessage(listBoxHandle, Win32.LB_SELECTSTRING, -1, New StringBuilder(itemText))
+            Dim result As IntPtr = Win32.SendMessage(listBoxHandle, Win32.LB_SELECTSTRING, - 1,
+                                                     New StringBuilder(itemText))
             If result.ToInt32() = Win32.LB_ERR Then Return False
 
             Return True
         End Function
 
-        Public Function ClickButton(ByVal text As String) As Boolean
+        Public Function ClickButton(text As String) As Boolean
             If Process Is Nothing OrElse Process.HasExited Then Return False
             If Handle = IntPtr.Zero Then Return False
 
@@ -80,32 +84,36 @@ Namespace Tools
             If Process Is Nothing OrElse Process.HasExited Then Return
             Process.WaitForExit()
         End Sub
+
 #End Region
 
 #Region "Protected Fields"
+
         Protected Process As New Process
         Protected Handle As IntPtr = IntPtr.Zero
         Protected Controls As New List(Of IntPtr)
+
 #End Region
 
 #Region "Protected Methods"
+
         Protected Function GetMainWindowHandle() As IntPtr
             If Process Is Nothing OrElse Process.HasExited Then Return IntPtr.Zero
 
-            Process.WaitForInputIdle(Settings.MaxPuttyWaitTime * 1000)
+            Process.WaitForInputIdle(My.Settings.MaxPuttyWaitTime*1000)
 
             Handle = IntPtr.Zero
             Dim startTicks As Integer = Environment.TickCount
-            While Handle = IntPtr.Zero And Environment.TickCount < startTicks + (Settings.MaxPuttyWaitTime * 1000)
+            While Handle = IntPtr.Zero And Environment.TickCount < startTicks + (My.Settings.MaxPuttyWaitTime*1000)
                 Process.Refresh()
                 Handle = Process.MainWindowHandle
-                If Handle = IntPtr.Zero Then Threading.Thread.Sleep(0)
+                If Handle = IntPtr.Zero Then Thread.Sleep(0)
             End While
 
             Return Handle
         End Function
 
-        Protected Function GetControlHandle(ByVal className As String, Optional ByVal text As String = "") As IntPtr
+        Protected Function GetControlHandle(className As String, Optional ByVal text As String = "") As IntPtr
             If Process Is Nothing OrElse Process.HasExited Then Return IntPtr.Zero
             If Handle = IntPtr.Zero Then Return IntPtr.Zero
 
@@ -113,7 +121,7 @@ Namespace Tools
                 Controls = EnumWindows.EnumChildWindows(Handle)
             End If
 
-            Dim stringBuilder As New System.Text.StringBuilder
+            Dim stringBuilder As New StringBuilder
             Dim controlHandle As IntPtr = IntPtr.Zero
             For Each control As IntPtr In Controls
                 Win32.GetClassName(control, stringBuilder, stringBuilder.Capacity)
@@ -133,6 +141,7 @@ Namespace Tools
 
             Return controlHandle
         End Function
+
 #End Region
 
 #Region "Win32"
@@ -141,27 +150,29 @@ Namespace Tools
             ' ReSharper restore ClassNeverInstantiated.Local
             ' ReSharper disable InconsistentNaming
             ' ReSharper disable UnusedMethodReturnValue.Local
-            <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-            Public Shared Sub GetClassName(ByVal hWnd As IntPtr, ByVal lpClassName As System.Text.StringBuilder, ByVal nMaxCount As Integer)
+            <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Unicode)>
+            Public Shared Sub GetClassName(hWnd As IntPtr, lpClassName As StringBuilder, nMaxCount As Integer)
             End Sub
 
-            <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-            Public Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As IntPtr) As IntPtr
+            <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+            Public Shared Function SendMessage(hWnd As IntPtr, Msg As UInteger, wParam As IntPtr, lParam As IntPtr) _
+                As IntPtr
             End Function
 
-            <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-            Public Shared Function SendMessage(ByVal hWnd As IntPtr, ByVal Msg As UInteger, ByVal wParam As IntPtr, ByVal lParam As System.Text.StringBuilder) As IntPtr
+            <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Unicode)>
+            Public Shared Function SendMessage(hWnd As IntPtr, Msg As UInteger, wParam As IntPtr,
+                                               lParam As StringBuilder) As IntPtr
             End Function
 
-            <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-            Public Shared Function GetDlgCtrlID(ByVal hwndCtl As Integer) As Integer
+            <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+            Public Shared Function GetDlgCtrlID(hwndCtl As Integer) As Integer
             End Function
 
-            <DllImport("user32.dll", SetLastError:=True, CharSet:=CharSet.Auto)> _
-            Public Shared Function ShowWindow(ByVal hWnd As IntPtr, ByVal nCmdShow As Integer) As Boolean
+            <DllImport("user32.dll", SetLastError := True, CharSet := CharSet.Auto)>
+            Public Shared Function ShowWindow(hWnd As IntPtr, nCmdShow As Integer) As Boolean
             End Function
 
-            Public Const LB_ERR As Integer = -1
+            Public Const LB_ERR As Integer = - 1
             Public Const LB_SELECTSTRING As Integer = &H18C
 
             Public Const WM_SETTEXT As Integer = &HC
@@ -175,6 +186,7 @@ Namespace Tools
             ' ReSharper restore UnusedMethodReturnValue.Local
             ' ReSharper restore InconsistentNaming
         End Class
+
 #End Region
     End Class
 End Namespace

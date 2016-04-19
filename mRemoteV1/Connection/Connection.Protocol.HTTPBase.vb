@@ -1,32 +1,36 @@
-﻿Imports System.Windows.Forms
-Imports mRemoteNG.App.Runtime
-Imports mRemoteNG.Tools.LocalizedAttributes
+﻿Imports System.Text
+Imports Crownwood.Magic.Controls
+Imports mRemote3G.App
+Imports mRemote3G.Messages
+Imports mRemote3G.Tools
+Imports SHDocVw
 
 Namespace Connection
+
     Namespace Protocol
         Public Class HTTPBase
-            Inherits Connection.Protocol.Base
+            Inherits Base
 
 #Region "Private Properties"
+
             Private wBrowser As Control
             Public httpOrS As String
             Public defaultPort As Integer
             Private tabTitle As String
+
 #End Region
 
 #Region "Public Methods"
-            Public Sub New(ByVal RenderingEngine As RenderingEngine)
+
+            Public Sub New(RenderingEngine As RenderingEngine)
                 Try
-                    If RenderingEngine = RenderingEngine.Gecko Then
-                        Me.Control = New MiniGeckoBrowser.MiniGeckoBrowser
-                        TryCast(Me.Control, MiniGeckoBrowser.MiniGeckoBrowser).XULrunnerPath = My.Settings.XULRunnerPath
-                    Else
-                        Me.Control = New WebBrowser
-                    End If
+                    Me.Control = New System.Windows.Forms.WebBrowser
 
                     NewExtended()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectionFailed & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.Language.strHttpConnectionFailed & vbNewLine &
+                                                        ex.ToString(), True)
                 End Try
             End Sub
 
@@ -37,7 +41,7 @@ Namespace Connection
                 MyBase.SetProps()
 
                 Try
-                    Dim objTabPage As Crownwood.Magic.Controls.TabPage = TryCast(Me.InterfaceControl.Parent, Crownwood.Magic.Controls.TabPage)
+                    Dim objTabPage = TryCast(Me.InterfaceControl.Parent, TabPage)
                     Me.tabTitle = objTabPage.Title
                 Catch ex As Exception
                     Me.tabTitle = ""
@@ -46,25 +50,20 @@ Namespace Connection
                 Try
                     Me.wBrowser = Me.Control
 
-                    If InterfaceControl.Info.RenderingEngine = RenderingEngine.Gecko Then
-                        Dim objMiniGeckoBrowser As MiniGeckoBrowser.MiniGeckoBrowser = TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser)
+                    Dim objWebBrowser = TryCast(wBrowser, System.Windows.Forms.WebBrowser)
+                    Dim objAxWebBrowser = DirectCast(objWebBrowser.ActiveXInstance, WebBrowser)
 
-                        AddHandler objMiniGeckoBrowser.TitleChanged, AddressOf wBrowser_DocumentTitleChanged
-                        AddHandler objMiniGeckoBrowser.LastTabRemoved, AddressOf wBrowser_LastTabRemoved
-                    Else
-                        Dim objWebBrowser As WebBrowser = TryCast(wBrowser, WebBrowser)
-                        Dim objAxWebBrowser As SHDocVw.WebBrowser = DirectCast(objWebBrowser.ActiveXInstance, SHDocVw.WebBrowser)
+                    objWebBrowser.ScrollBarsEnabled = True
 
-                        objWebBrowser.ScrollBarsEnabled = True
-
-                        AddHandler objWebBrowser.Navigated, AddressOf wBrowser_Navigated
-                        AddHandler objWebBrowser.DocumentTitleChanged, AddressOf wBrowser_DocumentTitleChanged
-                        AddHandler objAxWebBrowser.NewWindow3, AddressOf wBrowser_NewWindow3
-                    End If
+                    AddHandler objWebBrowser.Navigated, AddressOf wBrowser_Navigated
+                    AddHandler objWebBrowser.DocumentTitleChanged, AddressOf wBrowser_DocumentTitleChanged
+                    AddHandler objAxWebBrowser.NewWindow3, AddressOf wBrowser_NewWindow3
 
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpSetPropsFailed & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.Language.strHttpSetPropsFailed & vbNewLine &
+                                                        ex.ToString(), True)
                     Return False
                 End Try
             End Function
@@ -72,10 +71,17 @@ Namespace Connection
             Public Overrides Function Connect() As Boolean
                 Try
                     Dim strHost As String = Me.InterfaceControl.Info.Hostname
-                    Dim strAuth As String = ""
+                    Dim strAuth = ""
 
-                    If Not ((Force And Info.Force.NoCredentials) = Info.Force.NoCredentials) And Not String.IsNullOrEmpty(InterfaceControl.Info.Username) And Not String.IsNullOrEmpty(InterfaceControl.Info.Password) Then
-                        strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(Me.InterfaceControl.Info.Username & ":" & Me.InterfaceControl.Info.Password)) & vbNewLine
+                    If _
+                        Not ((Force And Info.Force.NoCredentials) = Info.Force.NoCredentials) And
+                        Not String.IsNullOrEmpty(InterfaceControl.Info.Username) And
+                        Not String.IsNullOrEmpty(InterfaceControl.Info.Password) Then
+                        strAuth = "Authorization: Basic " +
+                                  Convert.ToBase64String(
+                                      Encoding.ASCII.GetBytes(
+                                          Me.InterfaceControl.Info.Username & ":" & Me.InterfaceControl.Info.Password)) &
+                                  vbNewLine
                     End If
 
                     If Me.InterfaceControl.Info.Port <> defaultPort Then
@@ -87,30 +93,28 @@ Namespace Connection
                             strHost = httpOrS & "://" & strHost
                         End If
 
-                        If InterfaceControl.Info.RenderingEngine = RenderingEngine.Gecko Then
-                            TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser).Navigate(strHost & ":" & Me.InterfaceControl.Info.Port)
-                        Else
-                            TryCast(wBrowser, WebBrowser).Navigate(strHost & ":" & Me.InterfaceControl.Info.Port, Nothing, Nothing, strAuth)
-                        End If
+
+                        TryCast(wBrowser, System.Windows.Forms.WebBrowser).Navigate(
+                            strHost & ":" & Me.InterfaceControl.Info.Port, Nothing, Nothing, strAuth)
                     Else
                         If strHost.Contains(httpOrS & "://") = False Then
                             strHost = httpOrS & "://" & strHost
                         End If
 
-                        If InterfaceControl.Info.RenderingEngine = RenderingEngine.Gecko Then
-                            TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser).Navigate(strHost)
-                        Else
-                            TryCast(wBrowser, WebBrowser).Navigate(strHost, Nothing, Nothing, strAuth)
-                        End If
+
+                        TryCast(wBrowser, System.Windows.Forms.WebBrowser).Navigate(strHost, Nothing, Nothing, strAuth)
                     End If
 
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectFailed & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.Language.strHttpConnectFailed & vbNewLine &
+                                                        ex.ToString(), True)
                     Return False
                 End Try
             End Function
+
 #End Region
 
 #Region "Private Methods"
@@ -118,8 +122,9 @@ Namespace Connection
 #End Region
 
 #Region "Events"
-            Private Sub wBrowser_Navigated(sender As Object, e As System.Windows.Forms.WebBrowserNavigatedEventArgs)
-                Dim objWebBrowser As WebBrowser = TryCast(wBrowser, WebBrowser)
+
+            Private Sub wBrowser_Navigated(sender As Object, e As WebBrowserNavigatedEventArgs)
+                Dim objWebBrowser = TryCast(wBrowser, System.Windows.Forms.WebBrowser)
                 If objWebBrowser Is Nothing Then Return
 
                 ' This can only be set once the WebBrowser control is shown, it will throw a COM exception otherwise.
@@ -128,7 +133,8 @@ Namespace Connection
                 RemoveHandler objWebBrowser.Navigated, AddressOf wBrowser_Navigated
             End Sub
 
-            Private Sub wBrowser_NewWindow3(ByRef ppDisp As Object, ByRef Cancel As Boolean, ByVal dwFlags As Long, ByVal bstrUrlContext As String, ByVal bstrUrl As String)
+            Private Sub wBrowser_NewWindow3(ByRef ppDisp As Object, ByRef Cancel As Boolean, dwFlags As Long,
+                                            bstrUrlContext As String, bstrUrl As String)
                 If (dwFlags And NWMF.NWMF_OVERRIDEKEY) Then
                     Cancel = False
                 Else
@@ -136,30 +142,25 @@ Namespace Connection
                 End If
             End Sub
 
-            Private Sub wBrowser_LastTabRemoved(ByVal sender As Object)
+            Private Sub wBrowser_LastTabRemoved(sender As Object)
                 Me.Close()
             End Sub
 
             Private Sub wBrowser_DocumentTitleChanged()
                 Try
-                    Dim tabP As Crownwood.Magic.Controls.TabPage
-                    tabP = TryCast(InterfaceControl.Parent, Crownwood.Magic.Controls.TabPage)
+                    Dim tabP As TabPage
+                    tabP = TryCast(InterfaceControl.Parent, TabPage)
 
                     If tabP IsNot Nothing Then
-                        Dim shortTitle As String = ""
+                        Dim shortTitle = ""
 
-                        If Me.InterfaceControl.Info.RenderingEngine = RenderingEngine.Gecko Then
-                            If TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser).Title.Length >= 30 Then
-                                shortTitle = TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser).Title.Substring(0, 29) & " ..."
-                            Else
-                                shortTitle = TryCast(wBrowser, MiniGeckoBrowser.MiniGeckoBrowser).Title
-                            End If
+
+                        If TryCast(wBrowser, System.Windows.Forms.WebBrowser).DocumentTitle.Length >= 30 Then
+                            shortTitle =
+                                TryCast(wBrowser, System.Windows.Forms.WebBrowser).DocumentTitle.Substring(0, 29) &
+                                " ..."
                         Else
-                            If TryCast(wBrowser, WebBrowser).DocumentTitle.Length >= 30 Then
-                                shortTitle = TryCast(wBrowser, WebBrowser).DocumentTitle.Substring(0, 29) & " ..."
-                            Else
-                                shortTitle = TryCast(wBrowser, WebBrowser).DocumentTitle
-                            End If
+                            shortTitle = TryCast(wBrowser, System.Windows.Forms.WebBrowser).DocumentTitle
                         End If
 
                         If Me.tabTitle <> "" Then
@@ -169,17 +170,18 @@ Namespace Connection
                         End If
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed & vbNewLine & ex.Message, True)
+                    App.Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.Language.strHttpDocumentTileChangeFailed & vbNewLine & ex.ToString(), True)
                 End Try
             End Sub
+
 #End Region
 
 #Region "Enums"
+
             Public Enum RenderingEngine
-                <LocalizedDescription("strHttpInternetExplorer")> _
+                None = 0
+                <LocalizedAttributes.LocalizedDescription("strHttpInternetExplorer")>
                 IE = 1
-                <LocalizedDescription("strHttpGecko")> _
-                Gecko = 2
             End Enum
 
             Private Enum NWMF
@@ -200,7 +202,9 @@ Namespace Connection
                 NWMF_INACTIVETAB = &H100000
                 ' ReSharper restore InconsistentNaming
             End Enum
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

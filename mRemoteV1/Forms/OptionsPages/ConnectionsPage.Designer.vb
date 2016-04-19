@@ -321,7 +321,7 @@
             Me.radCloseWarnExit.Size = New System.Drawing.Size(216, 17)
             Me.radCloseWarnExit.TabIndex = 3
             Me.radCloseWarnExit.TabStop = True
-            Me.radCloseWarnExit.Text = "Warn me only when exiting mRemoteNG"
+            Me.radCloseWarnExit.Text = "Warn me only when exiting mRemote3G"
             Me.radCloseWarnExit.UseVisualStyleBackColor = True
             '
             'radCloseWarnNever

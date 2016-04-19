@@ -253,7 +253,7 @@
             Me.Controls.Add(Me.btnCancel)
             Me.Controls.Add(Me.btnOK)
             Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
-            Me.Icon = Global.mRemoteNG.My.Resources.Resources.Connections_SaveAs_Icon
+            Me.Icon = Global.mRemote3G.My.Resources.Resources.Connections_SaveAs_Icon
             Me.MaximizeBox = False
             Me.MinimizeBox = False
             Me.Name = "ExportForm"

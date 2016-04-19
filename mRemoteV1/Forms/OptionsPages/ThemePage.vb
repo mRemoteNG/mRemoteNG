@@ -1,22 +1,21 @@
 ﻿Imports System.ComponentModel
-Imports mRemoteNG.My
-Imports mRemoteNG.Themes
+Imports mRemote3G.Themes
 
 Namespace Forms.OptionsPages
     Public Class ThemePage
-        Public Overrides Property PageName() As String
+        Public Overrides Property PageName As String
             Get
-                Return Language.strOptionsTabTheme
+                Return Language.Language.strOptionsTabTheme
             End Get
-            Set(value As String)
+            Set
             End Set
         End Property
 
         Public Overrides Sub ApplyLanguage()
             MyBase.ApplyLanguage()
 
-            btnThemeDelete.Text = Language.strOptionsThemeButtonDelete
-            btnThemeNew.Text = Language.strOptionsThemeButtonNew
+            btnThemeDelete.Text = Language.Language.strOptionsThemeButtonDelete
+            btnThemeNew.Text = Language.Language.strOptionsThemeButtonNew
         End Sub
 
         Public Overrides Sub LoadSettings()
@@ -36,7 +35,7 @@ Namespace Forms.OptionsPages
             MyBase.SaveSettings()
 
             ThemeManager.SaveThemes(_themeList)
-            Settings.ThemeName = ThemeManager.ActiveTheme.Name
+            My.Settings.ThemeName = ThemeManager.ActiveTheme.Name
         End Sub
 
         Public Overrides Sub RevertSettings()
@@ -44,18 +43,23 @@ Namespace Forms.OptionsPages
         End Sub
 
 #Region "Private Fields"
+
         Private _themeList As BindingList(Of ThemeInfo)
         Private _originalTheme As ThemeInfo
+
 #End Region
 
 #Region "Private Methods"
+
 #Region "Event Handlers"
-        Private Sub cboTheme_DropDown(ByVal sender As Object, ByVal e As EventArgs) Handles cboTheme.DropDown
+
+        Private Sub cboTheme_DropDown(sender As Object, e As EventArgs) Handles cboTheme.DropDown
             If ThemeManager.ActiveTheme Is ThemeManager.DefaultTheme Then Return
             ThemeManager.ActiveTheme.Name = cboTheme.Text
         End Sub
 
-        Private Sub cboTheme_SelectionChangeCommitted(ByVal sender As Object, ByVal e As EventArgs) Handles cboTheme.SelectionChangeCommitted
+        Private Sub cboTheme_SelectionChangeCommitted(sender As Object, e As EventArgs) _
+            Handles cboTheme.SelectionChangeCommitted
             If cboTheme.SelectedItem Is Nothing Then cboTheme.SelectedItem = ThemeManager.DefaultTheme
 
             If cboTheme.SelectedItem Is ThemeManager.DefaultTheme Then
@@ -73,9 +77,9 @@ Namespace Forms.OptionsPages
             ThemePropertyGrid.Refresh()
         End Sub
 
-        Private Sub btnThemeNew_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnThemeNew.Click
+        Private Sub btnThemeNew_Click(sender As Object, e As EventArgs) Handles btnThemeNew.Click
             Dim newTheme As ThemeInfo = ThemeManager.ActiveTheme.Clone()
-            newTheme.Name = Language.strUnnamedTheme
+            newTheme.Name = Language.Language.strUnnamedTheme
 
             _themeList.Add(newTheme)
 
@@ -94,7 +98,9 @@ Namespace Forms.OptionsPages
             cboTheme.SelectedItem = ThemeManager.DefaultTheme
             cboTheme_SelectionChangeCommitted(Me, New EventArgs())
         End Sub
+
 #End Region
+
 #End Region
     End Class
 End Namespace

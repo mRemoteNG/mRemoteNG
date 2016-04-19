@@ -2,7 +2,7 @@
 
 Namespace Tools
     Public Class EnvironmentInfo
-        Public Shared ReadOnly Property IsWow64() As Boolean
+        Public Shared ReadOnly Property IsWow64 As Boolean
             Get
                 Dim isWow64ProcessDelegate As Win32.IsWow64ProcessDelegate = GetIsWow64ProcessDelegate()
                 If isWow64ProcessDelegate Is Nothing Then Return False
@@ -27,17 +27,25 @@ Namespace Tools
 
         Protected Class Win32
             ' ReSharper disable InconsistentNaming
-            <DllImport("kernel32", CharSet:=CharSet.Auto, SetLastError:=True)> _
-            Public Shared Function LoadLibrary(<[In](), MarshalAs(UnmanagedType.LPTStr)> ByVal lpFileName As String) As IntPtr
+            <DllImport("kernel32", CharSet := CharSet.Unicode, SetLastError := True)>
+            Public Shared Function LoadLibrary(<[In], MarshalAs(UnmanagedType.LPTStr)> lpFileName As String) As IntPtr
             End Function
 
-            <DllImport("kernel32", ExactSpelling:=True, CharSet:=CharSet.Ansi, SetLastError:=True)> _
-            Public Shared Function GetProcAddress(<[In]()> ByVal hModule As IntPtr, <[In](), MarshalAs(UnmanagedType.LPStr)> ByVal lpProcName As String) As IntPtr
+            <DllImport("kernel32", ExactSpelling := True, CharSet := CharSet.Unicode, SetLastError := True)>
+            Public Shared Function GetProcAddress(<[In]> hModule As IntPtr,
+                                                  <[In], MarshalAs(UnmanagedType.LPStr)> lpProcName As String) As IntPtr
             End Function
 
-            Public Delegate Function IsWow64ProcessDelegate(<[In]()> hProcess As IntPtr, <[Out]()> ByRef Wow64Process As Boolean) As Boolean
+            Public Delegate Function IsWow64ProcessDelegate _
+                (<[In]> hProcess As IntPtr, <[Out]> ByRef Wow64Process As Boolean) As Boolean
             ' ReSharper restore InconsistentNaming
+
+            Private Sub New()
+            End Sub
         End Class
+
+        Private Sub New()
+        End Sub
     End Class
 End Namespace
 

@@ -3,37 +3,40 @@ Namespace Connection
         Inherits CollectionBase
 
 #Region "Public Properties"
-        Default Public ReadOnly Property Items(ByVal Index As Object) As Connection.Info
+
+        Default Public ReadOnly Property Items(Index As Object) As Info
             Get
-                If TypeOf Index Is Connection.Info Then
+                If TypeOf Index Is Info Then
                     Return Index
                 Else
-                    Return CType(List.Item(Index), Connection.Info)
+                    Return CType(List.Item(Index), Info)
                 End If
             End Get
         End Property
 
-        Public Shadows ReadOnly Property Count() As Integer
+        Public Shadows ReadOnly Property Count As Integer
             Get
                 Return List.Count
             End Get
         End Property
+
 #End Region
 
 #Region "Public Methods"
-        Public Function Add(ByVal cInfo As Connection.Info) As Connection.Info
+
+        Public Function Add(cInfo As Info) As Info
             Me.List.Add(cInfo)
             Return cInfo
         End Function
 
-        Public Sub AddRange(ByVal cInfo() As Connection.Info)
-            For Each cI As Connection.Info In cInfo
+        Public Sub AddRange(cInfo() As Info)
+            For Each cI As Info In cInfo
                 List.Add(cI)
             Next
         End Sub
 
-        Public Function FindByConstantID(ByVal id As String) As Connection.Info
-            For Each conI As Connection.Info In List
+        Public Function FindByConstantID(id As String) As Info
+            For Each conI As Info In List
                 If conI.ConstantID = id Then
                     Return conI
                 End If
@@ -48,7 +51,7 @@ Namespace Connection
         '    Next
         'End Function
 
-        Public Function Copy() As Connection.List
+        Public Function Copy() As List
             Try
                 Return Me.MemberwiseClone
             Catch ex As Exception
@@ -60,6 +63,7 @@ Namespace Connection
         Public Shadows Sub Clear()
             Me.List.Clear()
         End Sub
+
 #End Region
     End Class
 End Namespace

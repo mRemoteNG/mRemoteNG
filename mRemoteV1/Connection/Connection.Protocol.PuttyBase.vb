@@ -1,98 +1,111 @@
-Imports System.Runtime.InteropServices
-Imports System.ComponentModel
-Imports mRemoteNG.Messages
-Imports mRemoteNG.App.Native
+
 Imports System.Threading
-Imports Microsoft.Win32
-Imports System.Drawing
-Imports mRemoteNG.App.Runtime
-Imports System.Text.RegularExpressions
-Imports mRemoteNG.Tools
+Imports mRemote3G.App
+Imports mRemote3G.App.Info
+Imports mRemote3G.Connection.PuttySession
+Imports mRemote3G.Messages
+Imports mRemote3G.My
+Imports mRemote3G.Security
+Imports mRemote3G.Tools
 
 Namespace Connection
+
     Namespace Protocol
         Public Class PuttyBase
-            Inherits Connection.Protocol.Base
+            Inherits Base
 
 #Region "Constants"
+
             Private Const IDM_RECONF As Int32 = &H50 ' PuTTY Settings Menu ID
+
 #End Region
 
 #Region "Private Properties"
+
             Dim _isPuttyNg As Boolean
+
 #End Region
 
 #Region "Public Properties"
+
             Private _PuttyProtocol As Putty_Protocol
-            Public Property PuttyProtocol() As Putty_Protocol
+
+            Public Property PuttyProtocol As Putty_Protocol
                 Get
                     Return Me._PuttyProtocol
                 End Get
-                Set(ByVal value As Putty_Protocol)
+                Set
                     Me._PuttyProtocol = value
                 End Set
             End Property
 
             Private _PuttySSHVersion As Putty_SSHVersion
-            Public Property PuttySSHVersion() As Putty_SSHVersion
+
+            Public Property PuttySSHVersion As Putty_SSHVersion
                 Get
                     Return Me._PuttySSHVersion
                 End Get
-                Set(ByVal value As Putty_SSHVersion)
+                Set
                     Me._PuttySSHVersion = value
                 End Set
             End Property
 
             Private _PuttyHandle As IntPtr
-            Public Property PuttyHandle() As IntPtr
+
+            Public Property PuttyHandle As IntPtr
                 Get
                     Return Me._PuttyHandle
                 End Get
-                Set(ByVal value As IntPtr)
+                Set
                     Me._PuttyHandle = value
                 End Set
             End Property
 
             Private _PuttyProcess As Process
-            Public Property PuttyProcess() As Process
+
+            Public Property PuttyProcess As Process
                 Get
                     Return Me._PuttyProcess
                 End Get
-                Set(ByVal value As Process)
+                Set
                     Me._PuttyProcess = value
                 End Set
             End Property
 
             Private Shared _PuttyPath As String
-            Public Shared Property PuttyPath() As String
+
+            Public Shared Property PuttyPath As String
                 Get
                     Return _PuttyPath
                 End Get
-                Set(ByVal value As String)
+                Set
                     _PuttyPath = value
                 End Set
             End Property
 
-            Public ReadOnly Property Focused() As Boolean
+            Public ReadOnly Property Focused As Boolean
                 Get
-                    If GetForegroundWindow() = PuttyHandle Then
+                    If NativeMethods.GetForegroundWindow() = PuttyHandle Then
                         Return True
                     Else
                         Return False
                     End If
                 End Get
             End Property
+
 #End Region
 
 #Region "Private Events & Handlers"
-            Private Sub ProcessExited(ByVal sender As Object, ByVal e As System.EventArgs)
+
+            Private Sub ProcessExited(sender As Object, e As EventArgs)
                 MyBase.Event_Closed(Me)
             End Sub
+
 #End Region
 
 #Region "Public Methods"
-            Public Sub New()
 
+            Public Sub New()
             End Sub
 
             Public Overrides Function Connect() As Boolean
@@ -109,28 +122,29 @@ Namespace Connection
 
                         arguments.Add("-load", InterfaceControl.Info.PuttySession)
 
-                        If Not TypeOf InterfaceControl.Info Is PuttySession.Info Then
+                        If Not TypeOf InterfaceControl.Info Is PuttyInfo Then
                             arguments.Add("-" & _PuttyProtocol.ToString)
 
                             If _PuttyProtocol = Putty_Protocol.ssh Then
-                                Dim username As String = ""
-                                Dim password As String = ""
+                                Dim username = ""
+                                Dim password = ""
 
                                 If Not String.IsNullOrEmpty(InterfaceControl.Info.Username) Then
                                     username = InterfaceControl.Info.Username
                                 Else
-                                    If My.Settings.EmptyCredentials = "windows" Then
+                                    If MySettingsProperty.Settings.EmptyCredentials = "windows" Then
                                         username = Environment.UserName
-                                    ElseIf My.Settings.EmptyCredentials = "custom" Then
-                                        username = My.Settings.DefaultUsername
+                                    ElseIf MySettingsProperty.Settings.EmptyCredentials = "custom" Then
+                                        username = MySettingsProperty.Settings.DefaultUsername
                                     End If
                                 End If
 
                                 If Not String.IsNullOrEmpty(InterfaceControl.Info.Password) Then
                                     password = InterfaceControl.Info.Password
                                 Else
-                                    If My.Settings.EmptyCredentials = "custom" Then
-                                        password = Security.Crypt.Decrypt(My.Settings.DefaultPassword, App.Info.General.EncryptionKey)
+                                    If MySettingsProperty.Settings.EmptyCredentials = "custom" Then
+                                        password = Crypt.Decrypt(MySettingsProperty.Settings.DefaultPassword,
+                                                                 General.EncryptionKey)
                                     End If
                                 End If
 
@@ -161,12 +175,15 @@ Namespace Connection
                     AddHandler PuttyProcess.Exited, AddressOf ProcessExited
 
                     PuttyProcess.Start()
-                    PuttyProcess.WaitForInputIdle(My.Settings.MaxPuttyWaitTime * 1000)
+                    PuttyProcess.WaitForInputIdle(MySettingsProperty.Settings.MaxPuttyWaitTime*1000)
 
                     Dim startTicks As Integer = Environment.TickCount
-                    While PuttyHandle.ToInt32 = 0 And Environment.TickCount < startTicks + (My.Settings.MaxPuttyWaitTime * 1000)
+                    While _
+                        PuttyHandle.ToInt32 = 0 And
+                        Environment.TickCount < startTicks + (MySettingsProperty.Settings.MaxPuttyWaitTime*1000)
                         If _isPuttyNg Then
-                            PuttyHandle = FindWindowEx(InterfaceControl.Handle, 0, vbNullString, vbNullString)
+                            PuttyHandle = NativeMethods.FindWindowEx(InterfaceControl.Handle, 0, vbNullString,
+                                                                     vbNullString)
                         Else
                             PuttyProcess.Refresh()
                             PuttyHandle = PuttyProcess.MainWindowHandle
@@ -175,21 +192,30 @@ Namespace Connection
                     End While
 
                     If Not _isPuttyNg Then
-                        SetParent(PuttyHandle, InterfaceControl.Handle)
+                        NativeMethods.SetParent(PuttyHandle, InterfaceControl.Handle)
                     End If
 
-                    MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strPuttyStuff, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.Language.strPuttyStuff,
+                                                        True)
 
-                    MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strPuttyHandle, PuttyHandle.ToString), True)
-                    MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strPuttyTitle, PuttyProcess.MainWindowTitle), True)
-                    MessageCollector.AddMessage(MessageClass.InformationMsg, String.Format(My.Language.strPuttyParentHandle, InterfaceControl.Parent.Handle.ToString), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                        String.Format(Language.Language.strPuttyHandle,
+                                                                      PuttyHandle.ToString), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                        String.Format(Language.Language.strPuttyTitle,
+                                                                      PuttyProcess.MainWindowTitle), True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                                                        String.Format(Language.Language.strPuttyParentHandle,
+                                                                      InterfaceControl.Parent.Handle.ToString), True)
 
                     Resize(Me, New EventArgs)
 
                     MyBase.Connect()
                     Return True
                 Catch ex As Exception
-                    MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyConnectionFailed & vbNewLine & ex.Message)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.Language.strPuttyConnectionFailed & vbNewLine &
+                                                        ex.ToString())
                     Return False
                 End Try
             End Function
@@ -197,18 +223,26 @@ Namespace Connection
             Public Overrides Sub Focus()
                 Try
                     If ConnectionWindow.InTabDrag Then Return
-                    SetForegroundWindow(PuttyHandle)
+                    NativeMethods.SetForegroundWindow(PuttyHandle)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyFocusFailed & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.Language.strPuttyFocusFailed & vbNewLine &
+                                                        ex.ToString(), True)
                 End Try
             End Sub
 
-            Public Overrides Sub Resize(ByVal sender As Object, ByVal e As EventArgs)
+            Public Overrides Sub Resize(sender As Object, e As EventArgs)
                 Try
                     If InterfaceControl.Size = Size.Empty Then Return
-                    MoveWindow(PuttyHandle, -SystemInformation.FrameBorderSize.Width, -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), True)
+                    NativeMethods.MoveWindow(PuttyHandle, -SystemInformation.FrameBorderSize.Width,
+                                             -(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height),
+                                             InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2),
+                                             InterfaceControl.Height + SystemInformation.CaptionHeight +
+                                             (SystemInformation.FrameBorderSize.Height * 2), True)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyResizeFailed & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.Language.strPuttyResizeFailed & vbNewLine &
+                                                        ex.ToString(), True)
                 End Try
             End Sub
 
@@ -218,13 +252,17 @@ Namespace Connection
                         PuttyProcess.Kill()
                     End If
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyKillFailed & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.Language.strPuttyKillFailed & vbNewLine & ex.ToString(),
+                                                        True)
                 End Try
 
                 Try
                     PuttyProcess.Dispose()
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyDisposeFailed & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.Language.strPuttyDisposeFailed & vbNewLine &
+                                                        ex.ToString(), True)
                 End Try
 
                 MyBase.Close()
@@ -232,15 +270,19 @@ Namespace Connection
 
             Public Sub ShowSettingsDialog()
                 Try
-                    PostMessage(Me.PuttyHandle, WM_SYSCOMMAND, IDM_RECONF, 0)
-                    SetForegroundWindow(Me.PuttyHandle)
+                    NativeMethods.PostMessage(Me.PuttyHandle, NativeMethods.WM_SYSCOMMAND, IDM_RECONF, 0)
+                    NativeMethods.SetForegroundWindow(Me.PuttyHandle)
                 Catch ex As Exception
-                    MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyShowSettingsDialogFailed & vbNewLine & ex.Message, True)
+                    Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
+                                                        Language.Language.strPuttyShowSettingsDialogFailed & vbNewLine &
+                                                        ex.ToString(), True)
                 End Try
             End Sub
+
 #End Region
 
 #Region "Enums"
+
             Public Enum Putty_Protocol
                 ssh = 0
                 telnet = 1
@@ -250,10 +292,13 @@ Namespace Connection
             End Enum
 
             Public Enum Putty_SSHVersion
+                None = 0
                 ssh1 = 1
                 ssh2 = 2
             End Enum
+
 #End Region
         End Class
     End Namespace
+
 End Namespace

@@ -1,17 +1,19 @@
 Contributors
 ============
 
+Sean Kaim
+Riley McArdle
+Felix Deimel
 Jason Barbier
 Wiktor Beryt
 Lionel Caignec
 Ruben d'Arco
-Felix Deimel
 Holger Henke
 Tom Hiller
-Riley McArdle
 Apisitt Rattana
 Andreas Rehm
 David Vidmar
+Fabrice Didierjean
 
 
 Translators
@@ -54,31 +56,23 @@ Copyright © 2003 The Mentalis.org Team
 Modified New BSD License
 http://www.mentalis.org/
 
-DockPanel Suite 2.3.1
-Copyright © 2007 Weifen Luo
+DockPanel Suite 2.9.0
+Copyright © 2013 Ryan Rastedt, Lex Li, (Previously Weifen Luo)
 MIT License
-http://sourceforge.net/projects/dockpanelsuite/
-
-Emergent OnLine WTSCOM 2.0.6.0
-Copyright © 2001-2003 Emergent OnLine
-http://www.go-eol.com/
+http://dockpanelsuite.com/
+https://github.com/dockpanelsuite/dockpanelsuite
 
 FilteredPropertyGrid 1.0.0.0
 Copyright © 2006 Azuria
 http://www.codeproject.com/KB/cs/FilteredPropertyGrid.aspx
-
-GeckoFX 1.8.1.4
-Copyright © 2008 Skybound Software
-Mozilla Public License 1.1
-http://www.geckofx.org/
 
 IPTextBox 1.1
 Copyright © 2006 Matthew Kleinwaks
 Copyright © 2008 Felix Deimel
 http://www.vbforums.com/showthread.php?t=430169
 
-log4net 1.2.10.0
-Copyright © 2001-2006 The Apache Software Foundation
+log4net 1.2.14.0
+Copyright © 2004-2015 The Apache Software Foundation
 Apache License Version 2.0
 http://logging.apache.org/log4net/
 
@@ -92,16 +86,8 @@ Copyright © 2002-2005 The Mentalis.org Team
 Modified New BSD License
 http://www.mentalis.org/
 
-MiniGeckoBrowser 1.0
-Copyright © 2008 Felix Deimel
-http://www.appjuice.org/
-
-MiniTabControl 1.0
-Copyright © 2008 Felix Deimel
-http://www.appjuice.org/
-
-PuTTY 0.62
-Copyright © 1997-2011 Simon Tatham
+PuTTY 0.66
+Copyright © 1997-2015 Simon Tatham
 MIT License
 http://www.chiark.greenend.org.uk/~sgtatham/putty/
 

@@ -2,48 +2,53 @@
 
 Namespace Controls
     Public Class ListView
-        Inherits Windows.Forms.ListView
+        Inherits System.Windows.Forms.ListView
 
 #Region "Public Properties"
+
         <Category("Appearance"),
-        DefaultValue(GetType(Color), "HighlightText")> _
+            DefaultValue(GetType(Color), "HighlightText")>
         Public Property HighlightForeColor As Color = SystemColors.HighlightText
 
         <Category("Appearance"),
-        DefaultValue(GetType(Color), "Highlight")> _
+            DefaultValue(GetType(Color), "Highlight")>
         Public Property HighlightBackColor As Color = SystemColors.Highlight
 
         <Category("Appearance"),
-        DefaultValue(GetType(Color), "HotTrack")> _
+            DefaultValue(GetType(Color), "HotTrack")>
         Public Property HighlightBorderColor As Color = SystemColors.HotTrack
 
         <Category("Appearance"),
-        DefaultValue(GetType(Color), "ControlText")> _
+            DefaultValue(GetType(Color), "ControlText")>
         Public Property InactiveHighlightForeColor As Color = SystemColors.ControlText
 
         <Category("Appearance"),
-        DefaultValue(GetType(Color), "Control")> _
+            DefaultValue(GetType(Color), "Control")>
         Public Property InactiveHighlightBackColor As Color = SystemColors.Control
 
         <Category("Appearance"),
-        DefaultValue(GetType(Color), "ControlDark")> _
+            DefaultValue(GetType(Color), "ControlDark")>
         Public Property InactiveHighlightBorderColor As Color = SystemColors.ControlDark
 
         <Category("Appearance"),
-        DefaultValue(True)> _
+            DefaultValue(True)>
         Public Overloads Property ShowFocusCues As Boolean = True
 
-        <Category("Appearance")> _
+        <Category("Appearance")>
         Public Property LabelAlignment As New Alignment(VerticalAlignment.Top, HorizontalAlignment.Left)
+
 #End Region
 
 #Region "Constructors"
+
         Public Sub New()
             OwnerDraw = True
         End Sub
+
 #End Region
 
 #Region "Protected Methods"
+
         Protected Overrides Sub OnDrawItem(e As DrawListViewItemEventArgs)
             If Not View = View.Tile Then MyBase.OnDrawItem(e)
             If e.ItemIndex < 0 Then MyBase.OnDrawItem(e)
@@ -84,7 +89,9 @@ Namespace Controls
 
                 If e.Item.ImageList IsNot Nothing Then
                     Dim image As Image = Nothing
-                    If Not String.IsNullOrEmpty(e.Item.ImageKey) And e.Item.ImageList.Images.ContainsKey(e.Item.ImageKey) Then
+                    If _
+                        Not String.IsNullOrEmpty(e.Item.ImageKey) And
+                        e.Item.ImageList.Images.ContainsKey(e.Item.ImageKey) Then
                         image = e.Item.ImageList.Images.Item(e.Item.ImageKey)
                     ElseIf Not e.Item.ImageIndex < 0 And e.Item.ImageList.Images.Count > e.Item.ImageIndex Then
                         image = e.Item.ImageList.Images(e.Item.ImageIndex)
@@ -103,9 +110,11 @@ Namespace Controls
                 If borderPen IsNot Nothing Then borderPen.Dispose()
             End Try
         End Sub
+
 #End Region
 
 #Region "Private Methods"
+
         Private Function GetStringFormat() As StringFormat
             Dim format As StringFormat = StringFormat.GenericDefault
 
@@ -139,26 +148,26 @@ Namespace Controls
 
             Return format
         End Function
+
 #End Region
     End Class
 
-    <TypeConverter(GetType(ExpandableObjectConverter))> _
+    <TypeConverter(GetType(ExpandableObjectConverter))>
     Public Class Alignment
         Public Sub New()
-
         End Sub
 
-        Public Sub New(ByVal verticalAlignment As VerticalAlignment, ByVal horizontalAlignment As HorizontalAlignment)
+        Public Sub New(verticalAlignment As VerticalAlignment, horizontalAlignment As HorizontalAlignment)
             Vertical = verticalAlignment
             Horizontal = horizontalAlignment
         End Sub
 
         <NotifyParentProperty(True),
-        DefaultValue(VerticalAlignment.Top)> _
+            DefaultValue(VerticalAlignment.Top)>
         Public Property Vertical As VerticalAlignment = VerticalAlignment.Top
 
         <NotifyParentProperty(True),
-        DefaultValue(HorizontalAlignment.Left)> _
+            DefaultValue(HorizontalAlignment.Left)>
         Public Property Horizontal As HorizontalAlignment = HorizontalAlignment.Left
 
         Public Overrides Function ToString() As String
@@ -166,13 +175,13 @@ Namespace Controls
         End Function
     End Class
 
-    Public Enum VerticalAlignment As Integer
+    Public Enum VerticalAlignment
         Top
         Middle
         Bottom
     End Enum
 
-    Public Enum HorizontalAlignment As Integer
+    Public Enum HorizontalAlignment
         Left
         Center
         Right

@@ -2,13 +2,20 @@
 
 Namespace Tools
     Public Class WindowPlacement
+
 #Region "Windows API"
+
 #Region "Functions"
-        Private Declare Function GetWindowPlacement Lib "user32" (ByVal hWnd As System.IntPtr, ByRef lpwndpl As WINDOWPLACEMENT) As Boolean
-        Private Declare Function SetWindowPlacement Lib "user32" (ByVal hWnd As System.IntPtr, ByRef lpwndpl As WINDOWPLACEMENT) As Boolean
+
+        Private Declare Function GetWindowPlacement Lib "user32"(hWnd As IntPtr, ByRef lpwndpl As WINDOWPLACEMENT) _
+            As Boolean
+        Private Declare Function SetWindowPlacement Lib "user32"(hWnd As IntPtr, ByRef lpwndpl As WINDOWPLACEMENT) _
+            As Boolean
+
 #End Region
 
 #Region "Structures"
+
         Private Structure WINDOWPLACEMENT
             Public length As UInteger
             Public flags As UInteger
@@ -29,6 +36,7 @@ Namespace Tools
             Public right As Long
             Public bottom As Long
         End Structure
+
 #End Region
 
 #Region "Constants"
@@ -49,35 +57,42 @@ Namespace Tools
         Private Const SW_SHOWMINNOACTIVE As UInteger = 7
         Private Const SW_SHOWNA As UInteger = 8
         Private Const SW_RESTORE As UInteger = 9
+
 #End Region
+
 #End Region
 
 #Region "Private Variables"
-        Private _form As Windows.Forms.Form
+
+        Private _form As Form
+
 #End Region
 
 #Region "Constructors/Destructors"
-        Public Sub New(ByRef form As Windows.Forms.Form)
+
+        Public Sub New(ByRef form As Form)
             _form = form
         End Sub
+
 #End Region
 
 #Region "Public Properties"
-        Public Property Form() As Windows.Forms.Form
+
+        Public Property Form As Form
             Get
                 Return _form
             End Get
-            Set(ByVal value As Windows.Forms.Form)
+            Set
                 _form = value
             End Set
         End Property
 
-        Public Property RestoreToMaximized() As Boolean
+        Public Property RestoreToMaximized As Boolean
             Get
                 Dim windowPlacement As WINDOWPLACEMENT = GetWindowPlacement()
                 Return windowPlacement.flags And WPF_RESTORETOMAXIMIZED
             End Get
-            Set(ByVal value As Boolean)
+            Set
                 Dim windowPlacement As WINDOWPLACEMENT = GetWindowPlacement()
                 If value Then
                     windowPlacement.flags = windowPlacement.flags Or WPF_RESTORETOMAXIMIZED
@@ -87,12 +102,14 @@ Namespace Tools
                 SetWindowPlacement(windowPlacement)
             End Set
         End Property
+
 #End Region
 
 #Region "Private Functions"
+
         Private Function GetWindowPlacement() As WINDOWPLACEMENT
             If _form Is Nothing Then
-                Throw New System.NullReferenceException("WindowPlacement.Form is not set.")
+                Throw New NullReferenceException("WindowPlacement.Form is not set.")
             End If
             Dim windowPlacement As WINDOWPLACEMENT
             windowPlacement.length = Marshal.SizeOf(windowPlacement)
@@ -104,9 +121,9 @@ Namespace Tools
             End Try
         End Function
 
-        Private Function SetWindowPlacement(ByVal windowPlacement As WINDOWPLACEMENT) As Boolean
+        Private Function SetWindowPlacement(windowPlacement As WINDOWPLACEMENT) As Boolean
             If _form Is Nothing Then
-                Throw New System.NullReferenceException("WindowPlacement.Form is not set.")
+                Throw New NullReferenceException("WindowPlacement.Form is not set.")
             End If
             windowPlacement.length = Marshal.SizeOf(windowPlacement)
             Try
@@ -115,6 +132,7 @@ Namespace Tools
                 Throw
             End Try
         End Function
+
 #End Region
     End Class
 End Namespace

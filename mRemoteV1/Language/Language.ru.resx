@@ -106,7 +106,7 @@
     </xsd:element>
   </xsd:schema>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
@@ -115,7 +115,7 @@
     <value>2.0</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="strAbout" xml:space="preserve">
     <value>О программе</value>
@@ -285,9 +285,9 @@
   </data>
   <data name="strCcEOLFailed" xml:space="preserve">
     <value>Для (RDP) сессий должна быть зарегистрирована  в системе eolwtscom.dll.
- mRemoteNG загрузится с этим компонентом, но не зарегистрирует его автоматически.
- Чтобы зарегистрировать его вручную: Откройте (Пуск - Выполнить) и введите следующую команду: regsvr32 "C:\Program Files\mRemoteNG\eolwtscom.dll" (где C:\Program Files\mRemoteNG\ это путь к установленному mRemoteNG).
- Если у вас все же не получается зарегистрировать компонент для RDP - обратитесь на форум mRemoteNG http://forum.mremoteng.org/</value>
+ mRemote3G загрузится с этим компонентом, но не зарегистрирует его автоматически.
+ Чтобы зарегистрировать его вручную: Откройте (Пуск - Выполнить) и введите следующую команду: regsvr32 "C:\Program Files\mRemote3G\eolwtscom.dll" (где C:\Program Files\mRemote3G\ это путь к установленному mRemote3G).
+ Если у вас все же не получается зарегистрировать компонент для RDP - обратитесь на форум mRemote3G http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcEOLOK" xml:space="preserve">
     <value>EOLWTSCOM был найден и зарегистрирован.</value>
@@ -295,8 +295,8 @@
   <data name="strCcGeckoFailed" xml:space="preserve">
     <value>Для использования движка Gecko у Вас должен быть установлен XULRunner 1.8.1.x
  Вы можете скачать XULRunner 1.8.1.3 здесь: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/
- После загрузки извлеките пакет в любую папку. Потом в mRemoteNG перейдите в меню Инструменты - Опции - Дополнительно и введите правильный путь в поле Путь XULRunner.
- Если у вас ничего не получилось обратитесь на форум mRemoteNG http://forum.mremoteng.org/</value>
+ После загрузки извлеките пакет в любую папку. Потом в mRemote3G перейдите в меню Инструменты - Опции - Дополнительно и введите правильный путь в поле Путь XULRunner.
+ Если у вас ничего не получилось обратитесь на форум mRemote3G http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
     <value>XULRunner был найден и установлен правильно.</value>
@@ -305,7 +305,7 @@
     <value>ICA требуется установленный XenDesktop Online Plugin и зарегистрированная библиотека wfica.ocx. Вы можете скачать клиент здесь: http://www.citrix.com/download/ 
  Если у вас есть установленный XenDesktop Online Plugin и ничего не работает, попробуйте зарегистрировать wfica.ocx вручную. 
  Для этого откройте (Пуск - Выполнить) и введите следующую команду: regsvr32 "C:\Program Files\Citrix\ICA Client\wfica.ocx" (где C:\Program Files\Citrix \ICA Client\ это путь к XenDesktop Online Plugin).
- Если у вас все же не работает ICA в mRemoteNG обратитесь на форум mRemoteNG http://forum.mremoteng.org/ "</value>
+ Если у вас все же не работает ICA в mRemote3G обратитесь на форум mRemote3G http://forum.mremoteng.org/ "</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
     <value>Все компоненты ICA были найдены и зарегистрированы.
@@ -315,8 +315,8 @@
     <value>установлен неправильно</value>
   </data>
   <data name="strCcPuttyFailed" xml:space="preserve">
-    <value>SSH, Telnet, Rlogin и RAW протоколам нужен для работы PuTTY. PuTTY поставляется с каждым mRemoteNG и находится в папке с программой.
- Убедитесь, что  putty.exe есть в папке с mRemoteNG (по умолчанию: C:\Program Files\mRemoteNG\), или что вы указали правильный путь к исполняемому файлу PuTTY в Инструменты - Опции - Дополнительно - Путь к PuTTY)</value>
+    <value>SSH, Telnet, Rlogin и RAW протоколам нужен для работы PuTTY. PuTTY поставляется с каждым mRemote3G и находится в папке с программой.
+ Убедитесь, что  putty.exe есть в папке с mRemote3G (по умолчанию: C:\Program Files\mRemote3G\), или что вы указали правильный путь к исполняемому файлу PuTTY в Инструменты - Опции - Дополнительно - Путь к PuTTY)</value>
   </data>
   <data name="strCcPuttyOK" xml:space="preserve">
     <value>Испольняемый файл PuTTY найден и готов к использованию.</value>
@@ -324,23 +324,23 @@
   <data name="strCcRDPFailed" xml:space="preserve">
     <value>Для правильной работы RDP необходимо иметь установленный Remote Desktop Connection (Terminal Services Client) 6.1. Вы можете получить его здесь: http://support.microsoft.com/kb/951616
  Если у вас есть установленный RDP 6.1 и подключиться не удается, попробуйте зарегистрироваться mstscax.dll вручную. Для этого откройте (Пуск - Выполнить) и введите следующую команду: regsvr32 "C:\Windows\system32\mstscax.dll" (где C:\ваш системный диск).
- Если у вас возникли проблемы при работе с RDP обратитесь на форум mRemoteNGhttp://forum.mremoteng.org/</value>
+ Если у вас возникли проблемы при работе с RDP обратитесь на форум mRemote3Ghttp://forum.mremoteng.org/</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
     <value>Все RDP компоненты были найдены и зарегистрированы.
  Remote Desktop Connection, Control Version {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC требуется VncSharpNG.dll который находится в папке с mRemoteNG.
- Убедитесь, что у вас есть VncSharpNG.dll в папке mRemoteNG (обычно C:\Program Files\mRemoteNG\).
- Если  у вас все же не работает VNC в mRemoteNG обратитесь на форум mRemoteNGhttp://forum.mremoteng.org/</value>
+    <value>VNC требуется VncSharpNG.dll который находится в папке с mRemote3G.
+ Убедитесь, что у вас есть VncSharpNG.dll в папке mRemote3G (обычно C:\Program Files\mRemote3G\).
+ Если  у вас все же не работает VNC в mRemote3G обратитесь на форум mRemote3Ghttp://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>Все VNC компоненты были найдены и зарегистрированы.
  VncSharpNG Control Version {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
-    <value>Автоматически пытаться восстановить связь при отключении от сервера (только RDP и ICA)</value>
+    <value>Автоматически пытаться восстановить связь при отключении от сервера (только RDP)</value>
   </data>
   <data name="strCheckboxDomain" xml:space="preserve">
     <value>Домен</value>
@@ -656,7 +656,7 @@
     <value>Экспорт</value>
   </data>
   <data name="strExportmRemoteXML" xml:space="preserve">
-    <value>Экспорт mRemote / mRemoteNG XML</value>
+    <value>Экспорт mRemote / mRemote3G XML</value>
   </data>
   <data name="strExtApp" xml:space="preserve">
     <value>Внешнее Приложение</value>
@@ -758,7 +758,7 @@
     <value>Импорт / Экспорт</value>
   </data>
   <data name="strImportmRemoteXML" xml:space="preserve">
-    <value>Импорт mRemote / mRemoteNG XML</value>
+    <value>Импорт mRemote / mRemote3G XML</value>
   </data>
   <data name="strImportPortScan" xml:space="preserve">
     <value>Импорт из просканированных портов</value>
@@ -773,7 +773,7 @@
     <value>Информация</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG в актуальном состоянии</value>
+    <value>mRemote3G в актуальном состоянии</value>
   </data>
   <data name="strIntAppConnectionFailed" xml:space="preserve">
     <value>Подключение не удалось!</value>
@@ -1001,7 +1001,7 @@
     <value>&amp;Справка</value>
   </data>
   <data name="strMenuHelpContents" xml:space="preserve">
-    <value>Справка mRemoteNG</value>
+    <value>Справка mRemote3G</value>
   </data>
   <data name="strMenuJumpTo" xml:space="preserve">
     <value>Перейти к...</value>
@@ -1206,7 +1206,7 @@
     <value>Не удалось загрузить панель Сканера портов!</value>
   </data>
   <data name="strPropertiesWillOnlyBeSavedMRemoteXML" xml:space="preserve">
-    <value>(Эти свойства будут сохранены только если вы выберете mRemote/mRemoteNG XML в качестве выходного формата файлов!)</value>
+    <value>(Эти свойства будут сохранены только если вы выберете mRemote/mRemote3G XML в качестве выходного формата файлов!)</value>
   </data>
   <data name="strPropertyDescriptionAddress" xml:space="preserve">
     <value>Введите имя хоста или IP к которому вы хотите подключиться.</value>
@@ -1587,7 +1587,7 @@
     <value>Предупреждать при закрытии подключений</value>
   </data>
   <data name="strRadioCloseWarnExit" xml:space="preserve">
-    <value>Предупреждать меня только при выходе из mRemoteNG</value>
+    <value>Предупреждать меня только при выходе из mRemote3G</value>
   </data>
   <data name="strRadioCloseWarnMultiple" xml:space="preserve">
     <value>Предупреждать меня только при закрытии нескольких подключений</value>
@@ -1632,7 +1632,7 @@
     <value>Открытие подключения не удалась!</value>
   </data>
   <data name="strRdpControlCreationFailed" xml:space="preserve">
-    <value>Не удается создать RDP подключение, пожалуйста, проверьте настройки mRemoteNG.</value>
+    <value>Не удается создать RDP подключение, пожалуйста, проверьте настройки mRemote3G.</value>
   </data>
   <data name="strRDPDisableCursorblinking" xml:space="preserve">
     <value>Отключить мигание курсора </value>
@@ -2085,10 +2085,10 @@
     <value>Безымянный тема</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
-    <value>Требуется обновление mRemoteNG</value>
+    <value>Требуется обновление mRemote3G</value>
   </data>
   <data name="strUpdateCheck" xml:space="preserve">
-    <value>mRemoteNG может периодически подключаться к сайту mRemoteNG для  проверки наличия обновлений.</value>
+    <value>mRemote3G может периодически подключаться к сайту mRemote3G для  проверки наличия обновлений.</value>
   </data>
   <data name="strUpdateCheckCompleteFailed" xml:space="preserve">
     <value>Не удалось завершить проверку обновлений!</value>
@@ -2097,14 +2097,14 @@
     <value>Не удалось проверить наличие обновлений!</value>
   </data>
   <data name="strUpdateCheckPortableEdition" xml:space="preserve">
-    <value>mRemoteNG Portable Edition не поддерживает автообновление.</value>
+    <value>mRemote3G Portable Edition не поддерживает автообновление.</value>
   </data>
   <data name="strUpdateDeleteFailed" xml:space="preserve">
     <value>Ошибка при удалении файла обновления!</value>
   </data>
   <data name="strUpdateDownloadComplete" xml:space="preserve">
     <value>Загрузка завершена!
-mRemoteNG сейчас прекратит работу и начнет процесс установки обновлений.</value>
+mRemote3G сейчас прекратит работу и начнет процесс установки обновлений.</value>
   </data>
   <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
     <value>Не удалось завершить загрузку!</value>
@@ -2191,7 +2191,7 @@ mRemoteNG сейчас прекратит работу и начнет проц�
     <value>http://sourceforge.net/projects/dockpanelsuite/</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Запись в лог-файл (mRemoteNG.log)</value>
+    <value>Запись в лог-файл (mRemote3G.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
     <value>Путь XULRunner:</value>
