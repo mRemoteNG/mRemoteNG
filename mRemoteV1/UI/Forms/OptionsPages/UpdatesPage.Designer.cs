@@ -1,5 +1,5 @@
 
-namespace mRemoteNG.Forms.OptionsPages
+namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     public partial class UpdatesPage : OptionsPage

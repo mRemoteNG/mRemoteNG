@@ -1,7 +1,8 @@
 ﻿using mRemoteNG.Forms;
-using mRemoteNG.Forms.OptionsPages;
 using mRemoteNG.Messages;
 using System;
+using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.Forms.OptionsPages;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App
@@ -65,9 +66,11 @@ namespace mRemoteNG.App
                 }
                 else if (windowType.Equals(UI.Window.WindowType.Options))
                 {
-                    using (OptionsForm optionsForm = new OptionsForm())
+                    //var options = new frmOptions();
+                    //options.ShowDialog();
+                    using (var optionsForm = new frmOptions())
                     {
-                        optionsForm.ShowDialog(frmMain.Default);
+                        optionsForm.ShowDialog(frmMain.Default.pnlDock);
                     }
                 }
                 else if (windowType.Equals(UI.Window.WindowType.SSHTransfer))
@@ -148,6 +151,7 @@ namespace mRemoteNG.App
             using (OptionsForm optionsForm = new OptionsForm())
             {
                 optionsForm.ShowDialog(frmMain.Default, typeof(UpdatesPage));
+                
             }
 
         }

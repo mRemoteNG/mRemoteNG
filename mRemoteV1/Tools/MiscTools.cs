@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.Tools

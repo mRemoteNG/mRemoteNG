@@ -13,8 +13,8 @@ namespace mRemoteNG
         [STAThread]
         public static void Main()
         {
-            mRemoteNG.frmMain mainForm = new frmMain();
-            mRemoteNG.frmMain.Default = mainForm;
+            frmMain mainForm = new frmMain();
+            frmMain.Default = mainForm;
             Application.Run(mainForm);
         }
     }

@@ -6,6 +6,7 @@ using NUnit.Framework;
 using NUnit.Extensions.Forms;
 using System.Threading.Tasks;
 using mRemoteNG.Forms;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNGTests.UI.Forms
 {

@@ -1,6 +1,6 @@
 
 
-namespace mRemoteNG.Forms
+namespace mRemoteNG.UI.Forms
 {
     public partial class OptionsForm : System.Windows.Forms.Form
 	{
@@ -33,17 +33,18 @@ namespace mRemoteNG.Forms
 		{
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
             mRemoteNG.Controls.Alignment alignment1 = new mRemoteNG.Controls.Alignment();
-            this.PagePanel = new System.Windows.Forms.Panel();
             this.OkButton = new System.Windows.Forms.Button();
             this.CancelButtonControl = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.splitter2 = new System.Windows.Forms.Splitter();
+            this.PagePanel = new System.Windows.Forms.Panel();
             this.PageListView = new mRemoteNG.Controls.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.panel1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // PagePanel
-            // 
-            resources.ApplyResources(this.PagePanel, "PagePanel");
-            this.PagePanel.Name = "PagePanel";
             // 
             // OkButton
             // 
@@ -60,11 +61,41 @@ namespace mRemoteNG.Forms
             this.CancelButtonControl.UseVisualStyleBackColor = true;
             this.CancelButtonControl.Click += new System.EventHandler(this.CancelButtonControl_Click);
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.OkButton);
+            this.panel1.Controls.Add(this.CancelButtonControl);
+            resources.ApplyResources(this.panel1, "panel1");
+            this.panel1.Name = "panel1";
+            // 
+            // splitter1
+            // 
+            resources.ApplyResources(this.splitter1, "splitter1");
+            this.splitter1.Name = "splitter1";
+            this.splitter1.TabStop = false;
+            // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.PageListView);
+            resources.ApplyResources(this.panel2, "panel2");
+            this.panel2.Name = "panel2";
+            // 
+            // splitter2
+            // 
+            resources.ApplyResources(this.splitter2, "splitter2");
+            this.splitter2.Name = "splitter2";
+            this.splitter2.TabStop = false;
+            // 
+            // PagePanel
+            // 
+            resources.ApplyResources(this.PagePanel, "PagePanel");
+            this.PagePanel.Name = "PagePanel";
+            // 
             // PageListView
             // 
-            resources.ApplyResources(this.PageListView, "PageListView");
             this.PageListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
+            resources.ApplyResources(this.PageListView, "PageListView");
             this.PageListView.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.PageListView.InactiveHighlightBackColor = System.Drawing.SystemColors.Highlight;
             this.PageListView.InactiveHighlightBorderColor = System.Drawing.SystemColors.HotTrack;
@@ -82,20 +113,17 @@ namespace mRemoteNG.Forms
             this.PageListView.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.PageListView_ItemSelectionChanged);
             this.PageListView.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PageListView_MouseUp);
             // 
-            // columnHeader1
-            // 
-            resources.ApplyResources(this.columnHeader1, "columnHeader1");
-            // 
             // OptionsForm
             // 
             this.AcceptButton = this.OkButton;
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.CancelButtonControl;
-            this.Controls.Add(this.CancelButtonControl);
-            this.Controls.Add(this.OkButton);
             this.Controls.Add(this.PagePanel);
-            this.Controls.Add(this.PageListView);
+            this.Controls.Add(this.splitter2);
+            this.Controls.Add(this.panel2);
+            this.Controls.Add(this.splitter1);
+            this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -103,13 +131,19 @@ namespace mRemoteNG.Forms
             this.ShowInTaskbar = false;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsForm_FormClosing);
             this.Load += new System.EventHandler(this.OptionsForm_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel2.ResumeLayout(false);
             this.ResumeLayout(false);
 
 		}
-		internal mRemoteNG.Controls.ListView PageListView;
-		internal System.Windows.Forms.Panel PagePanel;
 		internal System.Windows.Forms.Button OkButton;
 		internal System.Windows.Forms.Button CancelButtonControl;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Splitter splitter2;
+        private System.Windows.Forms.Panel PagePanel;
+        internal Controls.ListView PageListView;
         private System.Windows.Forms.ColumnHeader columnHeader1;
-	}
+    }
 }

@@ -1,13 +1,11 @@
-using mRemoteNG.App;
-using mRemoteNG.Forms.OptionsPages;
-using mRemoteNG.My;
 using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using mRemoteNG.App;
+using mRemoteNG.My;
+using mRemoteNG.UI.Forms.OptionsPages;
 
-
-namespace mRemoteNG.Forms
+namespace mRemoteNG.UI.Forms
 {
 	public partial class OptionsForm
 	{
@@ -32,7 +30,7 @@ namespace mRemoteNG.Forms
         private void CompileListOfOptionsPages()
         {
             _pages = new Dictionary<OptionsPage, PageInfo>();
-            _pages.Add(new Forms.OptionsPages.StartupExitPage(), new PageInfo());
+            _pages.Add(new StartupExitPage(), new PageInfo());
             _pages.Add(new AppearancePage(), new PageInfo());
             _pages.Add(new TabsPanelsPage(), new PageInfo());
             _pages.Add(new ConnectionsPage(), new PageInfo());
@@ -48,12 +46,12 @@ namespace mRemoteNG.Forms
             _pageIconImageList = new ImageList();
             _pageIconImageList.ColorDepth = ColorDepth.Depth32Bit;
             PageListView.LargeImageList = _pageIconImageList;
-            //PageListView.SmallImageList = _pageIconImageList;
+            PageListView.SmallImageList = _pageIconImageList;
         }
 
         private void SetStartPage()
         {
-            _startPage = GetPageFromType(typeof(Forms.OptionsPages.StartupExitPage));
+            _startPage = GetPageFromType(typeof(StartupExitPage));
         }
 
         #region Public Methods
@@ -227,11 +225,11 @@ namespace mRemoteNG.Forms
         {
             if (_selectedPage != null)
             {
-                OptionsPage oldPage = _selectedPage;
+                var oldPage = _selectedPage;
                 oldPage.Visible = false;
                 if (_pages.ContainsKey(oldPage))
                 {
-                    PageInfo oldPageInfo = _pages[oldPage];
+                    var oldPageInfo = _pages[oldPage];
                     oldPageInfo.ListViewItem.Selected = false;
                 }
             }

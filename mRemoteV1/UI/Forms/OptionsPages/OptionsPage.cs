@@ -1,9 +1,8 @@
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using System.ComponentModel;
 
-
-namespace mRemoteNG.Forms.OptionsPages
+namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	public class OptionsPage : UserControl
 	{
