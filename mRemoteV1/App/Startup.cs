@@ -220,11 +220,11 @@ namespace mRemoteNG.App
         }
         private static void LogApplicationData()
         {
-            #if !PORTABLE
-			Log.InfoFormat("{0} {1} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion);
-            #else
+#if !PORTABLE
+            Runtime.Log.InfoFormat("{0} {1} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion);
+#else
             Runtime.Log.InfoFormat("{0} {1} {2} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion, My.Language.strLabelPortableEdition);
-            #endif
+#endif
         }
         private static void LogCmdLineArgs()
         {
