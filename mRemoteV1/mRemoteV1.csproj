@@ -472,12 +472,6 @@
     <Compile Include="UI\Window\ScreenshotManagerWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Window\SessionsWindow.Designer.cs">
-      <DependentUpon>SessionsWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Window\SessionsWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UI\Window\SSHTransferWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -653,10 +647,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ScreenshotManagerWindow.resx">
       <DependentUpon>ScreenshotManagerWindow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Window\SessionsWindow.resx">
-      <DependentUpon>SessionsWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\SSHTransferWindow.resx">
@@ -1175,14 +1165,6 @@
       <VersionMinor>7</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>aximp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
-    <COMReference Include="EOLWTSCOM">
-      <Guid>{96C3FA7A-3211-4D93-BFEA-4589DA4ABDE2}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
     <COMReference Include="MSTSCLib">

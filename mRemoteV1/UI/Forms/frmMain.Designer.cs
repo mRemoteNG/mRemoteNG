@@ -100,8 +100,6 @@ namespace mRemoteNG
 			this.mMenViewConnections.Click += new System.EventHandler(this.mMenViewConnections_Click);
 			this.mMenViewConfig = new System.Windows.Forms.ToolStripMenuItem();
 			this.mMenViewConfig.Click += new System.EventHandler(this.mMenViewConfig_Click);
-			this.mMenViewSessions = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewSessions.Click += new System.EventHandler(this.mMenViewSessions_Click);
 			this.mMenViewErrorsAndInfos = new System.Windows.Forms.ToolStripMenuItem();
 			this.mMenViewErrorsAndInfos.Click += new System.EventHandler(this.mMenViewErrorsAndInfos_Click);
 			this.mMenViewScreenshotManager = new System.Windows.Forms.ToolStripMenuItem();
@@ -110,8 +108,6 @@ namespace mRemoteNG
 			this.mMenViewJumpTo = new System.Windows.Forms.ToolStripMenuItem();
 			this.mMenViewJumpToConnectionsConfig = new System.Windows.Forms.ToolStripMenuItem();
 			this.mMenViewJumpToConnectionsConfig.Click += new System.EventHandler(this.mMenViewJumpToConnectionsConfig_Click);
-			this.mMenViewJumpToSessionsScreenshots = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewJumpToSessionsScreenshots.Click += new System.EventHandler(this.mMenViewJumpToSessionsScreenshots_Click);
 			this.mMenViewJumpToErrorsInfos = new System.Windows.Forms.ToolStripMenuItem();
 			this.mMenViewJumpToErrorsInfos.Click += new System.EventHandler(this.mMenViewJumpToErrorsInfos_Click);
 			this.mMenViewResetLayout = new System.Windows.Forms.ToolStripMenuItem();
@@ -406,7 +402,7 @@ namespace mRemoteNG
 			//
 			//mMenView
 			//
-			this.mMenView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenViewAddConnectionPanel, this.mMenViewConnectionPanels, this.mMenViewSep1, this.mMenViewConnections, this.mMenViewConfig, this.mMenViewSessions, this.mMenViewErrorsAndInfos, this.mMenViewScreenshotManager, this.ToolStripSeparator1, this.mMenViewJumpTo, this.mMenViewResetLayout, this.mMenViewSep2, this.mMenViewQuickConnectToolbar, this.mMenViewExtAppsToolbar, this.mMenViewSep3, this.mMenViewFullscreen});
+			this.mMenView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenViewAddConnectionPanel, this.mMenViewConnectionPanels, this.mMenViewSep1, this.mMenViewConnections, this.mMenViewConfig, this.mMenViewErrorsAndInfos, this.mMenViewScreenshotManager, this.ToolStripSeparator1, this.mMenViewJumpTo, this.mMenViewResetLayout, this.mMenViewSep2, this.mMenViewQuickConnectToolbar, this.mMenViewExtAppsToolbar, this.mMenViewSep3, this.mMenViewFullscreen});
 			this.mMenView.Name = "mMenView";
 			this.mMenView.Size = new System.Drawing.Size(44, 20);
 			this.mMenView.Text = "&View";
@@ -448,15 +444,6 @@ namespace mRemoteNG
 			this.mMenViewConfig.Size = new System.Drawing.Size(228, 22);
 			this.mMenViewConfig.Text = "Config";
 			//
-			//mMenViewSessions
-			//
-			this.mMenViewSessions.Checked = true;
-			this.mMenViewSessions.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.mMenViewSessions.Image = (System.Drawing.Image) (resources.GetObject("mMenViewSessions.Image"));
-			this.mMenViewSessions.Name = "mMenViewSessions";
-			this.mMenViewSessions.Size = new System.Drawing.Size(228, 22);
-			this.mMenViewSessions.Text = "Sessions";
-			//
 			//mMenViewErrorsAndInfos
 			//
 			this.mMenViewErrorsAndInfos.Checked = true;
@@ -480,7 +467,7 @@ namespace mRemoteNG
 			//
 			//mMenViewJumpTo
 			//
-			this.mMenViewJumpTo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenViewJumpToConnectionsConfig, this.mMenViewJumpToSessionsScreenshots, this.mMenViewJumpToErrorsInfos});
+			this.mMenViewJumpTo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenViewJumpToConnectionsConfig, this.mMenViewJumpToErrorsInfos});
 			this.mMenViewJumpTo.Image = My.Resources.JumpTo;
 			this.mMenViewJumpTo.Name = "mMenViewJumpTo";
 			this.mMenViewJumpTo.Size = new System.Drawing.Size(228, 22);
@@ -494,15 +481,6 @@ namespace mRemoteNG
 				| System.Windows.Forms.Keys.C);
 			this.mMenViewJumpToConnectionsConfig.Size = new System.Drawing.Size(260, 22);
 			this.mMenViewJumpToConnectionsConfig.Text = "Connections && Config";
-			//
-			//mMenViewJumpToSessionsScreenshots
-			//
-			this.mMenViewJumpToSessionsScreenshots.Image = My.Resources.Sessions;
-			this.mMenViewJumpToSessionsScreenshots.Name = "mMenViewJumpToSessionsScreenshots";
-			this.mMenViewJumpToSessionsScreenshots.ShortcutKeys = (System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-				| System.Windows.Forms.Keys.S);
-			this.mMenViewJumpToSessionsScreenshots.Size = new System.Drawing.Size(260, 22);
-			this.mMenViewJumpToSessionsScreenshots.Text = "Sessions && Screenshots";
 			//
 			//mMenViewJumpToErrorsInfos
 			//
@@ -918,7 +896,6 @@ namespace mRemoteNG
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoAbout;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewConnectionPanels;
 		internal System.Windows.Forms.ToolStripSeparator mMenViewSep1;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewSessions;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewConnections;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewConfig;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewErrorsAndInfos;
@@ -944,7 +921,6 @@ namespace mRemoteNG
 		internal Controls.ToolStripSplitButton btnQuickConnect;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpTo;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToConnectionsConfig;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToSessionsScreenshots;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToErrorsInfos;
 		internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
 		internal System.Windows.Forms.ToolStripMenuItem mMenToolsUVNCSC;

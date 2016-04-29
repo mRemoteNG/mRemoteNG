@@ -102,9 +102,6 @@ namespace mRemoteNG.App
             Windows.errorsForm = new ErrorAndInfoWindow(Windows.errorsPanel);
             Windows.errorsPanel = Windows.errorsForm;
 
-            Windows.sessionsForm = new SessionsWindow(Windows.sessionsPanel);
-            Windows.sessionsPanel = Windows.sessionsForm;
-
             Windows.screenshotForm = new ScreenshotManagerWindow(Windows.screenshotPanel);
             Windows.screenshotPanel = Windows.screenshotForm;
 

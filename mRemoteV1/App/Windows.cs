@@ -15,8 +15,6 @@ namespace mRemoteNG.App
         public static DockContent configPanel = new DockContent();
         public static UI.Window.ErrorAndInfoWindow errorsForm;
         public static DockContent errorsPanel = new DockContent();
-        public static UI.Window.SessionsWindow sessionsForm;
-        public static DockContent sessionsPanel = new DockContent();
         public static UI.Window.ScreenshotManagerWindow screenshotForm;
         public static DockContent screenshotPanel = new DockContent();
         public static ExportForm exportForm;
