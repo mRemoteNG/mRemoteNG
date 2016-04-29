@@ -91,7 +91,6 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="mscorlib" />
     <Reference Include="ADTree, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -118,14 +117,9 @@
       <HintPath>References\MagicLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="MiniGeckoBrowser, Version=1.0.3142.33318, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\MiniGeckoBrowser.dll</HintPath>
-    </Reference>
-    <Reference Include="MiniTabControl, Version=1.0.3142.32770, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\MiniTabControl.dll</HintPath>
     </Reference>
     <Reference Include="Org.Mentalis.Security, Version=1.0.13.715, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
@@ -478,12 +472,6 @@
     <Compile Include="UI\Window\ScreenshotManagerWindow.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Window\SessionsWindow.Designer.cs">
-      <DependentUpon>SessionsWindow.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Window\SessionsWindow.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UI\Window\SSHTransferWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -659,10 +647,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\ScreenshotManagerWindow.resx">
       <DependentUpon>ScreenshotManagerWindow.cs</DependentUpon>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Window\SessionsWindow.resx">
-      <DependentUpon>SessionsWindow.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\SSHTransferWindow.resx">
@@ -1183,14 +1167,6 @@
       <WrapperTool>aximp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
-    <COMReference Include="EOLWTSCOM">
-      <Guid>{96C3FA7A-3211-4D93-BFEA-4589DA4ABDE2}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>0</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>tlbimp</WrapperTool>
-      <Isolated>False</Isolated>
-    </COMReference>
     <COMReference Include="MSTSCLib">
       <Guid>{8C11EFA1-92C3-11D1-BC1E-00C04FA31489}</Guid>
       <VersionMajor>1</VersionMajor>
@@ -1233,7 +1209,6 @@
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="mscorlib" />
-    <Reference Include="C:\Users\vsparda\Documents\Repositories\mRemoteNG_MyFork\SharedLibraryNG\bin\Debug\SharedLibraryNG.dll" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>

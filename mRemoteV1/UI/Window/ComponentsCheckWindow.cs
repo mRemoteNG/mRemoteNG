@@ -34,10 +34,6 @@ namespace mRemoteNG.UI.Window
 		internal System.Windows.Forms.TextBox txtCheck5;
 		internal System.Windows.Forms.CheckBox chkAlwaysShow;
 		internal System.Windows.Forms.Panel pnlChecks;
-		internal System.Windows.Forms.Panel pnlCheck6;
-		internal System.Windows.Forms.TextBox txtCheck6;
-		internal System.Windows.Forms.Label lblCheck6;
-		internal System.Windows.Forms.PictureBox pbCheck6;
 		internal System.Windows.Forms.Panel pnlCheck1;
 				
 		private void InitializeComponent()
@@ -68,10 +64,6 @@ namespace mRemoteNG.UI.Window
 			this.chkAlwaysShow = new System.Windows.Forms.CheckBox();
 			this.chkAlwaysShow.CheckedChanged += new System.EventHandler(this.chkAlwaysShow_CheckedChanged);
 			this.pnlChecks = new System.Windows.Forms.Panel();
-			this.pnlCheck6 = new System.Windows.Forms.Panel();
-			this.txtCheck6 = new System.Windows.Forms.TextBox();
-			this.lblCheck6 = new System.Windows.Forms.Label();
-			this.pbCheck6 = new System.Windows.Forms.PictureBox();
 			this.pnlCheck1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize) this.pbCheck1).BeginInit();
 			this.pnlCheck2.SuspendLayout();
@@ -83,8 +75,6 @@ namespace mRemoteNG.UI.Window
 			this.pnlCheck5.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize) this.pbCheck5).BeginInit();
 			this.pnlChecks.SuspendLayout();
-			this.pnlCheck6.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize) this.pbCheck6).BeginInit();
 			this.SuspendLayout();
 			//
 			//pnlCheck1
@@ -360,61 +350,12 @@ namespace mRemoteNG.UI.Window
 			this.pnlChecks.Controls.Add(this.pnlCheck1);
 			this.pnlChecks.Controls.Add(this.pnlCheck2);
 			this.pnlChecks.Controls.Add(this.pnlCheck3);
-			this.pnlChecks.Controls.Add(this.pnlCheck6);
 			this.pnlChecks.Controls.Add(this.pnlCheck5);
 			this.pnlChecks.Controls.Add(this.pnlCheck4);
 			this.pnlChecks.Location = new System.Drawing.Point(12, 12);
 			this.pnlChecks.Name = "pnlChecks";
 			this.pnlChecks.Size = new System.Drawing.Size(568, 824);
 			this.pnlChecks.TabIndex = 52;
-			//
-			//pnlCheck6
-			//
-			this.pnlCheck6.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.pnlCheck6.Controls.Add(this.txtCheck6);
-			this.pnlCheck6.Controls.Add(this.lblCheck6);
-			this.pnlCheck6.Controls.Add(this.pbCheck6);
-			this.pnlCheck6.Location = new System.Drawing.Point(3, 683);
-			this.pnlCheck6.Name = "pnlCheck6";
-			this.pnlCheck6.Size = new System.Drawing.Size(562, 130);
-			this.pnlCheck6.TabIndex = 50;
-			this.pnlCheck6.Visible = false;
-			//
-			//txtCheck6
-			//
-			this.txtCheck6.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.txtCheck6.BackColor = System.Drawing.SystemColors.Control;
-			this.txtCheck6.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.txtCheck6.Location = new System.Drawing.Point(129, 29);
-			this.txtCheck6.Multiline = true;
-			this.txtCheck6.Name = "txtCheck6";
-			this.txtCheck6.ReadOnly = true;
-			this.txtCheck6.Size = new System.Drawing.Size(430, 97);
-			this.txtCheck6.TabIndex = 2;
-			//
-			//lblCheck6
-			//
-			this.lblCheck6.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.lblCheck6.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (12.0F), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
-			this.lblCheck6.Location = new System.Drawing.Point(112, 3);
-			this.lblCheck6.Name = "lblCheck6";
-			this.lblCheck6.Size = new System.Drawing.Size(447, 23);
-			this.lblCheck6.TabIndex = 1;
-			this.lblCheck6.Text = "RDP check succeeded!";
-			//
-			//pbCheck6
-			//
-			this.pbCheck6.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left);
-			this.pbCheck6.Location = new System.Drawing.Point(3, 3);
-			this.pbCheck6.Name = "pbCheck6";
-			this.pbCheck6.Size = new System.Drawing.Size(72, 123);
-			this.pbCheck6.TabIndex = 0;
-			this.pbCheck6.TabStop = false;
 			//
 			//ComponentsCheck
 			//
@@ -442,9 +383,6 @@ namespace mRemoteNG.UI.Window
 			this.pnlCheck5.PerformLayout();
 			((System.ComponentModel.ISupportInitialize) this.pbCheck5).EndInit();
 			this.pnlChecks.ResumeLayout(false);
-			this.pnlCheck6.ResumeLayout(false);
-			this.pnlCheck6.PerformLayout();
-			((System.ComponentModel.ISupportInitialize) this.pbCheck6).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 					
@@ -499,8 +437,6 @@ namespace mRemoteNG.UI.Window
 			pnlCheck3.Visible = true;
 			pnlCheck4.Visible = true;
 			pnlCheck5.Visible = true;
-			pnlCheck6.Visible = true;
-					
 					
 			AxMSTSCLib.AxMsRdpClient5NotSafeForScripting rdpClient = null;
 					
@@ -678,28 +614,6 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " + My.Settings.Default.XULRunnerPath, true);
 			}
 					
-					
-			EOLWTSCOM.WTSCOM eol = null;
-					
-			try
-			{
-				eol = new EOLWTSCOM.WTSCOM();
-						
-				pbCheck6.Image = My.Resources.Good_Symbol;
-				lblCheck6.ForeColor = Color.DarkOliveGreen;
-				lblCheck6.Text = "(RDP) Sessions " + My.Language.strCcCheckSucceeded;
-				txtCheck6.Text = My.Language.strCcEOLOK;
-			}
-			catch (Exception ex)
-			{
-				pbCheck6.Image = My.Resources.Bad_Symbol;
-				lblCheck6.ForeColor = Color.Firebrick;
-				lblCheck6.Text = "(RDP) Sessions " + My.Language.strCcCheckFailed;
-				txtCheck6.Text = My.Language.strCcEOLFailed;
-						
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "EOLWTSCOM " + errorMsg, true);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
-			}
 		}
         #endregion
 				

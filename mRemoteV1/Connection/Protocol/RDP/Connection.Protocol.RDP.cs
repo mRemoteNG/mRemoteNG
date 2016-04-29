@@ -6,7 +6,6 @@ using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using System.Threading;
-using EOLWTSCOM;
 using System.ComponentModel;
 using mRemoteNG.Messages;
 using mRemoteNG.App;
@@ -16,7 +15,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection.Protocol.RDP
 {
-	public class ProtocolRDP : ProtocolBase
+    public class ProtocolRDP : ProtocolBase
 	{
         #region Private Declarations
         private MsRdpClient6NotSafeForScripting _rdpClient;
@@ -816,182 +815,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			public static Version RDC70 = new Version(6, 1, 7600);
 			public static Version RDC80 = new Version(6, 2, 9200);
 		}
-		
-        #region Terminal Sessions
-		public class TerminalSessions
-		{
-			private WTSCOM _wtsCom;
-					
-			public TerminalSessions()
-			{
-				try
-				{
-					_wtsCom = new WTSCOM();
-				}
-				catch (Exception ex)
-				{
-					Runtime.MessageCollector.AddExceptionMessage("TerminalSessions.New() failed.", ex, MessageClass.ErrorMsg, true);
-				}
-			}
-					
-			public int OpenConnection(string hostname)
-			{
-				if (_wtsCom == null)
-				{
-					return 0;
-				}
-						
-				try
-				{
-					return _wtsCom.WTSOpenServer(hostname);
-				}
-				catch (Exception ex)
-				{
-					Runtime.MessageCollector.AddExceptionMessage(My.Language.strRdpOpenConnectionFailed, ex, MessageClass.ErrorMsg, true);
-				}
-                return 0;
-			}
-					
-			public void CloseConnection(int serverHandle)
-			{
-				if (_wtsCom == null)
-				{
-					return ;
-				}
-						
-				try
-				{
-					_wtsCom.WTSCloseServer(serverHandle);
-				}
-				catch (Exception ex)
-				{
-					Runtime.MessageCollector.AddExceptionMessage(My.Language.strRdpCloseConnectionFailed, ex, MessageClass.ErrorMsg, true);
-				}
-			}
-
-            public SessionsCollection GetSessions(int serverHandle)
-			{
-				if (_wtsCom == null)
-				{
-					return new SessionsCollection();
-				}
-						
-				SessionsCollection sessions = new SessionsCollection();
-						
-				try
-				{
-					WTSSessions wtsSessions = _wtsCom.WTSEnumerateSessions(serverHandle);
-							
-					int sessionId = 0;
-					string sessionUser = "";
-					long sessionState;
-					string sessionName = "";
-							
-					foreach (WTSSession wtsSession in wtsSessions)
-					{
-						sessionId = wtsSession.SessionId;
-						sessionUser = _wtsCom.WTSQuerySessionInformation(serverHandle, wtsSession.SessionId, 5); // WFUsername = 5
-						sessionState = long.Parse(wtsSession.State + "\r\n");
-						sessionName = wtsSession.WinStationName + "\r\n";
-								
-						if (!string.IsNullOrEmpty(sessionUser))
-						{
-							if (sessionState == 0)
-							{
-								sessions.Add(sessionId, My.Language.strActive, sessionUser, sessionName);
-							}
-							else
-							{
-								sessions.Add(sessionId, My.Language.strInactive, sessionUser, sessionName);
-							}
-						}
-					}
-				}
-				catch (Exception ex)
-				{
-					Runtime.MessageCollector.AddExceptionMessage(My.Language.strRdpGetSessionsFailed, ex, MessageClass.ErrorMsg, true);
-				}
-						
-				return sessions;
-			}
-
-            public bool KillSession(int serverHandle, int sessionId)
-			{
-				if (_wtsCom == null)
-				{
-					return false;
-				}
-						
-				bool result = false;
-						
-				try
-				{
-					result = _wtsCom.WTSLogoffSession(serverHandle, sessionId, true);
-				}
-				catch (Exception ex)
-				{
-					Runtime.MessageCollector.AddExceptionMessage("TerminalSessions.KillSession() failed.", ex, MessageClass.ErrorMsg, true);
-				}
-						
-				return result;
-			}
-		}
-				
-		public class SessionsCollection : CollectionBase
-		{
-					
-            public Session this[int index]
-			{
-				get
-				{
-					return ((Session) (List[index]));
-				}
-			}
-					
-            public int ItemsCount
-			{
-				get
-				{
-					return List.Count;
-				}
-			}
-					
-			public Session Add(int sessionId, string sessionState, string sessionUser, string sessionName)
-			{
-				Session newSession = new Session();
-						
-				try
-				{
-					newSession.SessionId = sessionId;
-					newSession.SessionState = sessionState;
-					newSession.SessionUser = sessionUser;
-					newSession.SessionName = sessionName;
-							
-					List.Add(newSession);
-				}
-				catch (Exception ex)
-				{
-					Runtime.MessageCollector.AddExceptionMessage(My.Language.strRdpAddSessionFailed, ex, MessageClass.ErrorMsg, true);
-				}
-						
-				return newSession;
-			}
-					
-			public void ClearSessions()
-			{
-				List.Clear();
-			}
-		}
-				
-		public class Session : CollectionBase
-		{
-					
-			public int SessionId {get; set;}
-			public string SessionState {get; set;}
-			public string SessionUser {get; set;}
-			public string SessionName {get; set;}
-		}
-        #endregion
 		
         #region Fatal Errors
 		public class FatalErrors
