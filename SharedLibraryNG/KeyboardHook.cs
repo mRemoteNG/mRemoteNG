@@ -119,27 +119,33 @@ namespace SharedLibraryNG
             _hook = IntPtr.Zero;
         }
 
-        private static IntPtr LowLevelKeyboardProc(Int32 nCode, IntPtr wParam, Win32.KBDLLHOOKSTRUCT lParam)
+        private static IntPtr LowLevelKeyboardProc(int nCode, IntPtr wParam, Win32.KBDLLHOOKSTRUCT lParam)
         {
-            var wParamInt = wParam.ToInt32();
-            var result = 0;
-
-            if (nCode == Win32.HC_ACTION)
+            try
             {
-                switch (wParamInt)
+                var wParamInt = wParam.ToInt32();
+                var result = 0;
+
+                if (nCode == Win32.HC_ACTION)
                 {
-                    case Win32.WM_KEYDOWN:
-                    case Win32.WM_SYSKEYDOWN:
-                    case Win32.WM_KEYUP:
-                    case Win32.WM_SYSKEYUP:
-                        result = OnKey(wParamInt, lParam);
-                        break;
+                    switch (wParamInt)
+                    {
+                        case Win32.WM_KEYDOWN:
+                        case Win32.WM_SYSKEYDOWN:
+                        case Win32.WM_KEYUP:
+                        case Win32.WM_SYSKEYUP:
+                            result = OnKey(wParamInt, lParam);
+                            break;
+                    }
                 }
+
+                if (result != 0) return new IntPtr(result);
+
+                return Win32.CallNextHookEx(_hook, nCode, wParam, lParam);
             }
+            catch {}
 
-            if (result != 0) return new IntPtr(result);
-
-            return Win32.CallNextHookEx(_hook, nCode, wParam, lParam);
+            return IntPtr.Zero;
         }
 
         private static int OnKey(Int32 msg, Win32.KBDLLHOOKSTRUCT key)
