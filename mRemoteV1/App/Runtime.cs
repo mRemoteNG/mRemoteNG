@@ -716,13 +716,13 @@ namespace mRemoteNG.App
 		public static string GetDefaultStartupConnectionFileName()
 		{
 			string newPath = App.Info.ConnectionsFileInfo.DefaultConnectionsPath + "\\" + Info.ConnectionsFileInfo.DefaultConnectionsFile;
-            #if !PORTABLE
-			string oldPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "\\" + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName + "\\" + Info.Connections.DefaultConnectionsFile;
+#if !PORTABLE
+			string oldPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "\\" + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName + "\\" + App.Info.ConnectionsFileInfo.DefaultConnectionsFile;
 			if (File.Exists(oldPath))
 			{
 				return oldPath;
 			}
-            #endif
+#endif
 			return newPath;
 		}
 		

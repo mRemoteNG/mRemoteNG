@@ -173,7 +173,6 @@ namespace mRemoteNG.UI.Window
 
                 Windows.configForm.pGrid_SelectedObjectChanged();
 				ShowHideTreeContextMenuItems(e.Node);
-                Windows.sessionsForm.GetSessions(true);
 
                 Runtime.LastSelected = mRemoteNG.Tree.Node.GetConstantID(e.Node);
 			}

@@ -341,10 +341,7 @@ namespace mRemoteNG.Config.Settings
 						
 				if (persistString == typeof(ErrorAndInfoWindow).ToString())
                     return Windows.errorsPanel;
-						
-				if (persistString == typeof(SessionsWindow).ToString())
-                    return Windows.sessionsPanel;
-						
+				
 				if (persistString == typeof(ScreenshotManagerWindow).ToString())
                     return Windows.screenshotPanel;
 			}

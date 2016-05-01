@@ -245,12 +245,10 @@ namespace mRemoteNG
 			mMenViewConnectionPanels.Text = My.Language.strMenuConnectionPanels;
 			mMenViewConnections.Text = My.Language.strMenuConnections;
 			mMenViewConfig.Text = My.Language.strMenuConfig;
-			mMenViewSessions.Text = My.Language.strMenuSessions;
 			mMenViewErrorsAndInfos.Text = My.Language.strMenuNotifications;
 			mMenViewScreenshotManager.Text = My.Language.strScreenshots;
 			mMenViewJumpTo.Text = My.Language.strMenuJumpTo;
 			mMenViewJumpToConnectionsConfig.Text = My.Language.strMenuConnectionsAndConfig;
-			mMenViewJumpToSessionsScreenshots.Text = My.Language.strMenuSessionsAndScreenshots;
 			mMenViewJumpToErrorsInfos.Text = My.Language.strMenuNotifications;
 			mMenViewResetLayout.Text = My.Language.strMenuResetLayout;
 			mMenViewQuickConnectToolbar.Text = My.Language.strMenuQuickConnectToolbar;
@@ -663,7 +661,6 @@ namespace mRemoteNG
             this.mMenViewConnections.Checked = !Windows.treeForm.IsHidden;
             this.mMenViewConfig.Checked = !Windows.configForm.IsHidden;
             this.mMenViewErrorsAndInfos.Checked = !Windows.errorsForm.IsHidden;
-            this.mMenViewSessions.Checked = !Windows.sessionsForm.IsHidden;
             this.mMenViewScreenshotManager.Checked = !Windows.screenshotForm.IsHidden;
 									
 			this.mMenViewExtAppsToolbar.Checked = tsExternalTools.Visible;
@@ -688,20 +685,6 @@ namespace mRemoteNG
 		{
 			(((Control)sender).Tag as BaseWindow).Show(this.pnlDock);
             (((Control)sender).Tag as BaseWindow).Focus();
-		}
-								
-		public void mMenViewSessions_Click(object sender, EventArgs e)
-		{
-			if (this.mMenViewSessions.Checked == false)
-			{
-                Windows.sessionsPanel.Show(this.pnlDock);
-				this.mMenViewSessions.Checked = true;
-			}
-			else
-			{
-                Windows.sessionsPanel.Hide();
-				this.mMenViewSessions.Checked = false;
-			}
 		}
 								
 		public void mMenViewConnections_Click(Object sender, EventArgs e)
@@ -769,18 +752,6 @@ namespace mRemoteNG
 			else
 			{
                 Windows.treeForm.Activate();
-			}
-		}
-								
-		public void mMenViewJumpToSessionsScreenshots_Click(object sender, EventArgs e)
-		{
-            if (pnlDock.ActiveContent == Windows.sessionsPanel)
-			{
-                Windows.screenshotForm.Activate();
-			}
-			else
-			{
-                Windows.sessionsForm.Activate();
 			}
 		}
 								
