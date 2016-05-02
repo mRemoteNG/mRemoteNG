@@ -48,13 +48,13 @@ namespace mRemoteNG
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
 			//Added to support default instance behavour in C#. This should be removed at the earliest opportunity.
-            if (defaultInstance == null)
-                defaultInstance = this;
+            if (_defaultInstance == null)
+                _defaultInstance = this;
 		}
         #endregion
 
         #region Default Instance
-        private static frmMain defaultInstance;
+        private static frmMain _defaultInstance;
 		
 		/// <summary>
 		/// Added by the VB.Net to C# Converter to support default instance behavour in C#
@@ -63,23 +63,23 @@ namespace mRemoteNG
 		{
 			get
 			{
-				if (defaultInstance == null)
+				if (_defaultInstance == null)
 				{
-					defaultInstance = new frmMain();
-					defaultInstance.FormClosed += new FormClosedEventHandler(defaultInstance_FormClosed);
+					_defaultInstance = new frmMain();
+					_defaultInstance.FormClosed += defaultInstance_FormClosed;
 				}
 				
-				return defaultInstance;
+				return _defaultInstance;
 			}
 			set
 			{
-				defaultInstance = value;
+				_defaultInstance = value;
 			}
 		}
 		
 		static void defaultInstance_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			defaultInstance = null;
+			_defaultInstance = null;
 		}
         #endregion
 

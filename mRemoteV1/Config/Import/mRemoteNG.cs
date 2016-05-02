@@ -26,12 +26,14 @@ namespace mRemoteNG.Config.Import
 			string name = Path.GetFileNameWithoutExtension(fileName);
 			TreeNode treeNode = new TreeNode(name);
 			parentTreeNode.Nodes.Add(treeNode);
-				
-			ContainerInfo containerInfo = new ContainerInfo();
-			containerInfo.TreeNode = treeNode;
-			containerInfo.Name = name;
-				
-			ConnectionInfo connectionInfo = new ConnectionInfo();
+
+		    ContainerInfo containerInfo = new ContainerInfo
+		    {
+		        TreeNode = treeNode,
+		        Name = name
+		    };
+
+		    var connectionInfo = new ConnectionInfo();
 			connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo);
 			connectionInfo.Name = name;
 			connectionInfo.TreeNode = treeNode;

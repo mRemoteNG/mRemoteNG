@@ -362,19 +362,6 @@ namespace mRemoteNG.My {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool ShowCompleteConsPathInTitle {
-            get {
-                return ((bool)(this["ShowCompleteConsPathInTitle"]));
-            }
-            set {
-                this["ShowCompleteConsPathInTitle"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool FirstStart {
             get {
@@ -2481,6 +2468,18 @@ namespace mRemoteNG.My {
             }
             set {
                 this["KeysNextTab"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ShowCompleteConsPathInTitle {
+            get {
+                return ((bool)(this["ShowCompleteConsPathInTitle"]));
+            }
+            set {
+                this["ShowCompleteConsPathInTitle"] = value;
             }
         }
     }
