@@ -44,8 +44,8 @@ namespace mRemoteNG.App
         private static WindowList _windowList;
         private static MessageCollector _messageCollector;
         private static Tools.Controls.NotificationAreaIcon _notificationAreaIcon;
-        private static mRemoteNG.Tools.SystemMenu _systemMenu;
-        private static log4net.ILog _log;
+        private static SystemMenu _systemMenu;
+        private static ILog _log;
         private static bool _isConnectionsFileLoaded;
         private static System.Timers.Timer _timerSqlWatcher;
         private static SqlConnectionsProvider _sqlConnectionsProvider;
@@ -323,7 +323,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t add panel" + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t add panel" + Environment.NewLine + ex.Message);
 				return null;
 			}
 		}
@@ -394,7 +394,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t rename panel" + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t rename panel" + Environment.NewLine + ex.Message);
 			}
 		}
 			
@@ -418,7 +418,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t enumerate screens" + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t enumerate screens" + Environment.NewLine + ex.Message);
 			}
 		}
 			
@@ -445,9 +445,10 @@ namespace mRemoteNG.App
                     Screens.SendPanelToScreen(panel, screen);
                 }
 			}
-			catch (Exception)
+			catch (Exception ex)
 			{
-			}
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, "Caught Exception: " + Environment.NewLine + ex.Message);
+            }
 		}
         #endregion
 		
@@ -511,7 +512,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(My.Language.strCouldNotCreateNewConnectionsFile, ex, MessageClass.ErrorMsg);
+                MessageCollector.AddExceptionMessage(My.Language.strCouldNotCreateNewConnectionsFile, ex, MessageClass.ErrorMsg);
 			}
 		}
 		
@@ -520,8 +521,8 @@ namespace mRemoteNG.App
 			_withDialog = false;
 			_loadUpdate = true;
 				
-			Thread t = new Thread(new System.Threading.ThreadStart(LoadConnectionsBGd));
-			t.SetApartmentState(System.Threading.ApartmentState.STA);
+			Thread t = new Thread(new ThreadStart(LoadConnectionsBGd));
+			t.SetApartmentState(ApartmentState.STA);
 			t.Start();
 		}
 		
@@ -555,7 +556,7 @@ namespace mRemoteNG.App
 					if (withDialog)
 					{
 						OpenFileDialog loadDialog = Tools.Controls.ConnectionsLoadDialog();
-						if (loadDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+						if (loadDialog.ShowDialog() == DialogResult.OK)
 						{
 							connectionsLoader.ConnectionFileName = loadDialog.FileName;
 						}
@@ -624,9 +625,9 @@ namespace mRemoteNG.App
 			{
 				if (My.Settings.Default.UseSQLServer)
 				{
-					Runtime.MessageCollector.AddExceptionMessage(My.Language.strLoadFromSqlFailed, ex);
-					string commandButtons = string.Join("|", new[] {My.Language.strCommandTryAgain, My.Language.strCommandOpenConnectionFile, string.Format(My.Language.strCommandExitProgram, System.Windows.Forms.Application.ProductName)});
-                    cTaskDialog.ShowCommandBox(System.Windows.Forms.Application.ProductName, My.Language.strLoadFromSqlFailed, My.Language.strLoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, eSysIcons.Error, eSysIcons.Error);
+                    MessageCollector.AddExceptionMessage(My.Language.strLoadFromSqlFailed, ex);
+					string commandButtons = string.Join("|", new[] {My.Language.strCommandTryAgain, My.Language.strCommandOpenConnectionFile, string.Format(My.Language.strCommandExitProgram, Application.ProductName)});
+                    cTaskDialog.ShowCommandBox(Application.ProductName, My.Language.strLoadFromSqlFailed, My.Language.strLoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, eSysIcons.Error, eSysIcons.Error);
 					switch (cTaskDialog.CommandButtonResult)
 					{
 						case 0:
@@ -645,12 +646,12 @@ namespace mRemoteNG.App
 				{
 					if (ex is FileNotFoundException&& !withDialog)
 					{
-						Runtime.MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), ex, MessageClass.InformationMsg);
+                        MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), ex, MessageClass.InformationMsg);
 						NewConnections(Convert.ToString(connectionsLoader.ConnectionFileName));
 						return ;
 					}
-						
-					Runtime.MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotBeLoaded, connectionsLoader.ConnectionFileName), ex);
+
+                    MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotBeLoaded, connectionsLoader.ConnectionFileName), ex);
 					if (!(connectionsLoader.ConnectionFileName == GetStartupConnectionFileName()))
 					{
 						LoadConnections(withDialog, update);
@@ -658,7 +659,7 @@ namespace mRemoteNG.App
 					}
 					else
 					{
-						Interaction.MsgBox(string.Format(My.Language.strErrorStartupConnectionFileLoad, Environment.NewLine, System.Windows.Forms.Application.ProductName, GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)), (int) MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, null);
+						Interaction.MsgBox(string.Format(My.Language.strErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)), (int) MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, null);
 						Application.Exit();
 						return ;
 					}
@@ -682,7 +683,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(My.Language.strConnectionsFileBackupFailed, ex, MessageClass.WarningMsg);
+                MessageCollector.AddExceptionMessage(My.Language.strConnectionsFileBackupFailed, ex, MessageClass.WarningMsg);
 				throw;
 			}
 		}
@@ -710,15 +711,15 @@ namespace mRemoteNG.App
 				
 			foreach (string file in files)
 			{
-				System.IO.File.Delete(file);
+                File.Delete(file);
 			}
 		}
 		
 		public static string GetDefaultStartupConnectionFileName()
 		{
-			string newPath = App.Info.ConnectionsFileInfo.DefaultConnectionsPath + "\\" + Info.ConnectionsFileInfo.DefaultConnectionsFile;
+			string newPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
 #if !PORTABLE
-			string oldPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "\\" + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName + "\\" + App.Info.ConnectionsFileInfo.DefaultConnectionsFile;
+			string oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + Application.ProductName + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
 			if (File.Exists(oldPath))
 			{
 				return oldPath;
@@ -743,7 +744,7 @@ namespace mRemoteNG.App
 		{
 			_saveUpdate = true;
 			Thread t = new Thread(new ThreadStart(SaveConnectionsBGd));
-			t.SetApartmentState(System.Threading.ApartmentState.STA);
+			t.SetApartmentState(ApartmentState.STA);
 			t.Start();
 		}
 		
@@ -808,7 +809,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeSaved + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeSaved + Environment.NewLine + ex.Message);
 			}
 			finally
 			{
@@ -834,8 +835,8 @@ namespace mRemoteNG.App
 				using (SaveFileDialog saveFileDialog = new SaveFileDialog())
 				{
 					saveFileDialog.CheckPathExists = true;
-					saveFileDialog.InitialDirectory = Info.ConnectionsFileInfo.DefaultConnectionsPath;
-					saveFileDialog.FileName = Info.ConnectionsFileInfo.DefaultConnectionsFile;
+					saveFileDialog.InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath;
+					saveFileDialog.FileName = ConnectionsFileInfo.DefaultConnectionsFile;
 					saveFileDialog.OverwritePrompt = true;
 
                     List<string> fileTypes = new List<string>();
@@ -873,7 +874,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotSaveAs, connectionsSave.ConnectionFileName), ex);
+                MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotSaveAs, connectionsSave.ConnectionFileName), ex);
 			}
 			finally
 			{
@@ -923,7 +924,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(My.Language.strQuickConnectFailed, ex, MessageClass.ErrorMsg);
+                MessageCollector.AddExceptionMessage(My.Language.strQuickConnectFailed, ex, MessageClass.ErrorMsg);
 				return null;
 			}
 		}
@@ -936,7 +937,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 			
@@ -969,7 +970,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 			
@@ -981,7 +982,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 			
@@ -993,7 +994,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 			
@@ -1005,7 +1006,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 			
@@ -1017,7 +1018,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 
@@ -1027,7 +1028,7 @@ namespace mRemoteNG.App
 			{
 				if (ConnectionInfo.Hostname == "" && ConnectionInfo.Protocol != Connection.Protocol.ProtocolType.IntApp)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strConnectionOpenFailedNoHostname);
+                    MessageCollector.AddMessage(MessageClass.WarningMsg, My.Language.strConnectionOpenFailedNoHostname);
 					return;
 				}
 
@@ -1071,7 +1072,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 
@@ -1195,7 +1196,7 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(My.Language.strProtocolEventDisconnected, DisconnectedMessage), true);
+                MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(My.Language.strProtocolEventDisconnected, DisconnectedMessage), true);
 
                 ProtocolBase Prot = (ProtocolBase)sender;
 				if (Prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
@@ -1207,18 +1208,18 @@ namespace mRemoteNG.App
 					{
 						if (!string.IsNullOrEmpty(ReasonDescription))
 						{
-							Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strRdpDisconnected + Environment.NewLine + ReasonDescription + Environment.NewLine + string.Format(My.Language.strErrorCode, ReasonCode));
+                            MessageCollector.AddMessage(MessageClass.WarningMsg, My.Language.strRdpDisconnected + Environment.NewLine + ReasonDescription + Environment.NewLine + string.Format(My.Language.strErrorCode, ReasonCode));
 						}
 						else
 						{
-							Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strRdpDisconnected + Environment.NewLine + string.Format(My.Language.strErrorCode, ReasonCode));
+                            MessageCollector.AddMessage(MessageClass.WarningMsg, My.Language.strRdpDisconnected + Environment.NewLine + string.Format(My.Language.strErrorCode, ReasonCode));
 						}
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(My.Language.strProtocolEventDisconnectFailed, ex.Message), true);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(My.Language.strProtocolEventDisconnectFailed, ex.Message), true);
 			}
 		}
 			
@@ -1227,10 +1228,10 @@ namespace mRemoteNG.App
 			try
 			{
                 ProtocolBase Prot = (ProtocolBase)sender;
-					
-				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strConnenctionCloseEvent, true);
-					
-				Runtime.MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(My.Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), (new Microsoft.VisualBasic.ApplicationServices.User()).Name));
+
+                MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strConnenctionCloseEvent, true);
+
+                MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(My.Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName));
 					
 				Prot.InterfaceControl.Info.OpenConnections.Remove(Prot);
 					
@@ -1250,35 +1251,35 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConnenctionCloseEventFailed + Environment.NewLine + ex.Message, true);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnenctionCloseEventFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 			
 		public static void Prot_Event_Connected(object sender)
 		{
             ProtocolBase prot = (ProtocolBase)sender;
-			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strConnectionEventConnected, true);
-			Runtime.MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(My.Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString(), (new Microsoft.VisualBasic.ApplicationServices.User()).Name, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
+            MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strConnectionEventConnected, true);
+            MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(My.Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
 		}
 			
 		public static void Prot_Event_ErrorOccured(object sender, string ErrorMessage)
 		{
 			try
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strConnectionEventErrorOccured, true);
+                MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strConnectionEventErrorOccured, true);
                 ProtocolBase Prot = (ProtocolBase)sender;
 					
 				if (Prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
 				{
 					if (Convert.ToInt32(ErrorMessage) > -1)
 					{
-						Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(My.Language.strConnectionRdpErrorDetail, ErrorMessage, ProtocolRDP.FatalErrors.GetError(ErrorMessage)));
+                        MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(My.Language.strConnectionRdpErrorDetail, ErrorMessage, ProtocolRDP.FatalErrors.GetError(ErrorMessage)));
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionEventConnectionFailed + Environment.NewLine + ex.Message, true);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionEventConnectionFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -1339,13 +1340,13 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-				StreamWriter sWr = new StreamWriter((new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\Report.log", true);
+				StreamWriter sWr = new StreamWriter(SettingsFileInfo.exePath + "\\Report.log", true);
 				sWr.WriteLine(Text);
 				sWr.Close();
 			}
 			catch (Exception)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLogWriteToFileFailed);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strLogWriteToFileFailed);
 			}
 		}
 			
@@ -1355,7 +1356,7 @@ namespace mRemoteNG.App
 			StreamWriter streamWriter = null;
 			try
 			{
-				streamReader = new StreamReader((new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\Report.log");
+				streamReader = new StreamReader(SettingsFileInfo.exePath + "\\Report.log");
 				string text = streamReader.ReadToEnd();
 				streamReader.Close();
 				streamWriter = new StreamWriter(App.Info.GeneralAppInfo.ReportingFilePath, true);
@@ -1364,7 +1365,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strLogWriteToFileFinalLocationFailed + Environment.NewLine + ex.Message, true);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strLogWriteToFileFinalLocationFailed + Environment.NewLine + ex.Message, true);
 				return false;
 			}
 			finally
