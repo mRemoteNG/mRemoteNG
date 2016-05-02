@@ -5,7 +5,7 @@ using System.Windows.Forms;
 using mRemoteNG.My;
 using mRemoteNG.UI.Window;
 using mRemoteNG.App;
-
+using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.Messages

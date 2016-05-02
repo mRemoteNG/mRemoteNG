@@ -11,6 +11,7 @@ using mRemoteNG.Messages;
 using mRemoteNG.App;
 using MSTSCLib;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.Connection.Protocol.RDP

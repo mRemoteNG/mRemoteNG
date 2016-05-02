@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
+using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App

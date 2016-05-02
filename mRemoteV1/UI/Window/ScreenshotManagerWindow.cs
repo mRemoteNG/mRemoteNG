@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using System.IO;
+using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.UI.Window

@@ -10,6 +10,7 @@ using System.Globalization;
 using mRemoteNG.Themes;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 
 

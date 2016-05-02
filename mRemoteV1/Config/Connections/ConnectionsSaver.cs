@@ -11,6 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.Config.Connections

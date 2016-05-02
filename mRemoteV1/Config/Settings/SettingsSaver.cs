@@ -8,6 +8,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Config.Settings
 {

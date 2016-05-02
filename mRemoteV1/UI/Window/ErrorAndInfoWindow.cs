@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Text;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
+using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.UI.Window
@@ -326,6 +327,7 @@ namespace mRemoteNG.UI.Window
 					}
 					catch (Exception)
 					{
+					    // ignored
 					}
 				}
 			}

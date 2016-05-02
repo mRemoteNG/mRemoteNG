@@ -10,6 +10,7 @@ using mRemoteNG.Config;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.UI.Window
 {

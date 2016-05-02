@@ -3,6 +3,7 @@ using Microsoft.VisualBasic;
 using mRemoteNG.App;
 using System.ComponentModel;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.Connection.Protocol.VNC
@@ -245,8 +246,8 @@ namespace mRemoteNG.Connection.Protocol.VNC
 			{
 				_VNC.ConnectComplete += VNCEvent_Connected;
 				_VNC.ConnectionLost += VNCEvent_Disconnected;
-				mRemoteNG.frmMain.clipboardchange += VNCEvent_ClipboardChanged;
-                if (!(((int)Force & (int)ConnectionInfo.Force.NoCredentials) == (int)ConnectionInfo.Force.NoCredentials) && !string.IsNullOrEmpty(Info.Password))
+				frmMain.clipboardchange += VNCEvent_ClipboardChanged;
+                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials && !string.IsNullOrEmpty(Info.Password))
 				{
 					_VNC.GetPassword = VNCEvent_Authenticate;
 				}

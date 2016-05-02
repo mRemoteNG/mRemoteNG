@@ -1,4 +1,5 @@
 using System;
+using mRemoteNG.UI.Forms;
 
 
 //------------------------------------------------------------------------------
@@ -40,7 +41,7 @@ namespace mRemoteNG.My
 		[global::System.Diagnostics.DebuggerStepThroughAttribute()]
         protected override void OnCreateMainForm()
 		{
-			this.MainForm = mRemoteNG.frmMain.Default;
+			this.MainForm = frmMain.Default;
 		}
 	}
 }

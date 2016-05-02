@@ -1,4 +1,4 @@
-namespace mRemoteNG
+namespace mRemoteNG.UI.Forms
 {
     public partial class frmMain : System.Windows.Forms.Form
 	{

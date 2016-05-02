@@ -7,6 +7,7 @@ using mRemoteNG.App;
 using System.Threading;
 using mRemoteNG.Tools;
 using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.Connection.Protocol.ICA

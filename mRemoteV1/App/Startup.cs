@@ -17,6 +17,7 @@ using System.Threading;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
 {

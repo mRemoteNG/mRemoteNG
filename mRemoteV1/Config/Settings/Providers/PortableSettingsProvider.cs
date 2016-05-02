@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Specialized;
 using System.Configuration;
+using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 
@@ -9,41 +10,38 @@ namespace mRemoteNG.Config.Settings.Providers
 {
 	public class PortableSettingsProvider : SettingsProvider
 	{
-		const string SETTINGSROOT = "Settings"; //XML Root Node
+        const string SETTINGSROOT = "Settings"; //XML Root Node
 
 		public override void Initialize(string name, NameValueCollection col)
 		{
-			base.Initialize(this.ApplicationName, col);
-		}
-		
+			base.Initialize(ApplicationName, col);
+
+            if (Application.ProductName.Trim().Length > 0)
+            {
+                _applicationName = Application.ProductName;
+            }
+            else
+            {
+                _applicationName = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
+            }
+        }
+
+	    private string _applicationName;
         public override string ApplicationName
-		{
-			get
-			{
-				if (System.Windows.Forms.Application.ProductName.Trim().Length > 0)
-				{
-					return System.Windows.Forms.Application.ProductName;
-				}
-				else
-				{
-					System.IO.FileInfo fi = new System.IO.FileInfo(System.Windows.Forms.Application.ExecutablePath);
-					return fi.Name.Substring(0, fi.Name.Length - fi.Extension.Length);
-				}
-			}
-			set
-			{
-				//Do nothing
-			}
-		}
-		
-		virtual public string GetAppSettingsPath()
+        {
+            get { return _applicationName; }
+            set { }
+        }
+
+
+	    public virtual string GetAppSettingsPath()
 		{
 			//Used to determine where to store the settings
 			System.IO.FileInfo fi = new System.IO.FileInfo(Application.ExecutablePath);
 			return fi.DirectoryName;
 		}
 		
-		virtual public string GetAppSettingsFilename()
+		public virtual string GetAppSettingsFilename()
 		{
 			//Used to determine the filename to store the settings
 			return "portable.config"; //ApplicationName & ".settings"
@@ -60,7 +58,7 @@ namespace mRemoteNG.Config.Settings.Providers
 						
 			try
 			{
-				SettingsXML.Save(System.IO.Path.Combine(GetAppSettingsPath(), GetAppSettingsFilename()));
+				SettingsXml.Save(Path.Combine(GetAppSettingsPath(), GetAppSettingsFilename()));
 			}
 			catch (Exception)
 			{
@@ -71,77 +69,70 @@ namespace mRemoteNG.Config.Settings.Providers
 		public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext context, SettingsPropertyCollection props)
 		{
 			//Create new collection of values
-			SettingsPropertyValueCollection values = new SettingsPropertyValueCollection();
+			var values = new SettingsPropertyValueCollection();
 						
 			//Iterate through the settings to be retrieved
 			foreach (SettingsProperty setting in props)
 			{
-							
-				SettingsPropertyValue value = new SettingsPropertyValue(setting);
-				value.IsDirty = false;
-				value.SerializedValue = GetValue(setting);
-				values.Add(value);
+
+			    var value = new SettingsPropertyValue(setting)
+			    {
+			        IsDirty = false,
+			        SerializedValue = GetValue(setting)
+			    };
+			    values.Add(value);
 			}
 			return values;
 		}
 		
-		private System.Xml.XmlDocument m_SettingsXML = null;
+		private XmlDocument _SettingsXml;
 		
-        private System.Xml.XmlDocument SettingsXML
+        private XmlDocument SettingsXml
 		{
 			get
 			{
 				//If we dont hold an xml document, try opening one.
 				//If it doesnt exist then create a new one ready.
-				if (m_SettingsXML == null)
+				if (_SettingsXml == null)
 				{
-					m_SettingsXML = new System.Xml.XmlDocument();
+					_SettingsXml = new XmlDocument();
 								
 					try
 					{
-						m_SettingsXML.Load(System.IO.Path.Combine(GetAppSettingsPath(), GetAppSettingsFilename()));
+						_SettingsXml.Load(System.IO.Path.Combine(GetAppSettingsPath(), GetAppSettingsFilename()));
 					}
 					catch (Exception)
 					{
 						//Create new document
-						XmlDeclaration dec = m_SettingsXML.CreateXmlDeclaration("1.0", "utf-8", string.Empty);
-						m_SettingsXML.AppendChild(dec);
-									
-						XmlNode nodeRoot = default(XmlNode);
-									
-						nodeRoot = m_SettingsXML.CreateNode(XmlNodeType.Element, SETTINGSROOT, "");
-						m_SettingsXML.AppendChild(nodeRoot);
+						var dec = _SettingsXml.CreateXmlDeclaration("1.0", "utf-8", string.Empty);
+						_SettingsXml.AppendChild(dec);
+
+					    var nodeRoot = _SettingsXml.CreateNode(XmlNodeType.Element, SETTINGSROOT, "");
+						_SettingsXml.AppendChild(nodeRoot);
 					}
 				}
-				return m_SettingsXML;
+				return _SettingsXml;
 			}
 		}
 		
 		private string GetValue(SettingsProperty setting)
 		{
-			string ret = "";
+			var ret = string.Empty;
 						
 			try
 			{
 				if (IsRoaming(setting))
 				{
-					ret = SettingsXML.SelectSingleNode(SETTINGSROOT + "/" + setting.Name).InnerText;
+					ret = SettingsXml.SelectSingleNode(SETTINGSROOT + "/" + setting.Name).InnerText;
 				}
 				else
 				{
-					ret = SettingsXML.SelectSingleNode(SETTINGSROOT + "/" + (new Microsoft.VisualBasic.Devices.Computer()).Name + "/" + setting.Name).InnerText;
+					ret = SettingsXml.SelectSingleNode(SETTINGSROOT + "/" + Environment.MachineName + "/" + setting.Name).InnerText;
 				}
 			}
 			catch (Exception)
 			{
-				if (!(setting.DefaultValue == null))
-				{
-					ret = setting.DefaultValue.ToString();
-				}
-				else
-				{
-					ret = "";
-				}
+				ret = setting.DefaultValue?.ToString() ?? "";
 			}
 			return ret;
 		}
@@ -158,11 +149,11 @@ namespace mRemoteNG.Config.Settings.Providers
 			{
 				if (IsRoaming(propVal.Property))
 				{
-					SettingNode = (XmlElement) (SettingsXML.SelectSingleNode(SETTINGSROOT + "/" + propVal.Name));
+					SettingNode = (XmlElement) (SettingsXml.SelectSingleNode(SETTINGSROOT + "/" + propVal.Name));
 				}
 				else
 				{
-					SettingNode = (XmlElement) (SettingsXML.SelectSingleNode(SETTINGSROOT + "/" + (new Microsoft.VisualBasic.Devices.Computer()).Name + "/" + propVal.Name));
+					SettingNode = (XmlElement) (SettingsXml.SelectSingleNode(SETTINGSROOT + "/" + (new Microsoft.VisualBasic.Devices.Computer()).Name + "/" + propVal.Name));
 				}
 			}
 			catch (Exception)
@@ -183,12 +174,12 @@ namespace mRemoteNG.Config.Settings.Providers
 				if (IsRoaming(propVal.Property))
 				{
 					//Store the value as an element of the Settings Root Node
-					SettingNode = SettingsXML.CreateElement(propVal.Name);
+					SettingNode = SettingsXml.CreateElement(propVal.Name);
 					if (propVal.SerializedValue != null)
 					{
 						SettingNode.InnerText = propVal.SerializedValue.ToString();
 					}
-					SettingsXML.SelectSingleNode(SETTINGSROOT).AppendChild(SettingNode);
+					SettingsXml.SelectSingleNode(SETTINGSROOT).AppendChild(SettingNode);
 				}
 				else
 				{
@@ -196,21 +187,21 @@ namespace mRemoteNG.Config.Settings.Providers
 					//creating a new machine name node if one doesnt exist.
 					try
 					{
-						MachineNode = (XmlElement) (SettingsXML.SelectSingleNode(SETTINGSROOT + "/" + (new Microsoft.VisualBasic.Devices.Computer()).Name));
+						MachineNode = (XmlElement) (SettingsXml.SelectSingleNode(SETTINGSROOT + "/" + (new Microsoft.VisualBasic.Devices.Computer()).Name));
 					}
 					catch (Exception)
 					{
-						MachineNode = SettingsXML.CreateElement((new Microsoft.VisualBasic.Devices.Computer()).Name);
-						SettingsXML.SelectSingleNode(SETTINGSROOT).AppendChild(MachineNode);
+						MachineNode = SettingsXml.CreateElement((new Microsoft.VisualBasic.Devices.Computer()).Name);
+						SettingsXml.SelectSingleNode(SETTINGSROOT).AppendChild(MachineNode);
 					}
 								
 					if (MachineNode == null)
 					{
-						MachineNode = SettingsXML.CreateElement((new Microsoft.VisualBasic.Devices.Computer()).Name);
-						SettingsXML.SelectSingleNode(SETTINGSROOT).AppendChild(MachineNode);
+						MachineNode = SettingsXml.CreateElement((new Microsoft.VisualBasic.Devices.Computer()).Name);
+						SettingsXml.SelectSingleNode(SETTINGSROOT).AppendChild(MachineNode);
 					}
 								
-					SettingNode = SettingsXML.CreateElement(propVal.Name);
+					SettingNode = SettingsXml.CreateElement(propVal.Name);
 					if (propVal.SerializedValue != null)
 					{
 						SettingNode.InnerText = propVal.SerializedValue.ToString();

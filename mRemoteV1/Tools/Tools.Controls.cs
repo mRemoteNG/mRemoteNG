@@ -3,6 +3,7 @@ using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.Tools

@@ -1,9 +1,3 @@
-using mRemoteNG.App;
-using mRemoteNG.Config;
-using mRemoteNG.My;
-using mRemoteNG.Themes;
-using PSTaskDialog;
-using SharedLibraryNG;
 using System;
 using System.Diagnostics;
 using System.Drawing;
@@ -12,18 +6,24 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
-using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.Tree;
+using mRemoteNG.App;
+using mRemoteNG.Config;
 using mRemoteNG.Config.KeyboardShortcuts;
-using mRemoteNG.Messages;
-using mRemoteNG.Tools;
-using mRemoteNG.UI.Window;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Controls;
+using mRemoteNG.Messages;
+using mRemoteNG.My;
+using mRemoteNG.Themes;
+using mRemoteNG.Tools;
+using mRemoteNG.Tree;
+using mRemoteNG.UI.Window;
+using PSTaskDialog;
+using SharedLibraryNG;
+using WeifenLuo.WinFormsUI.Docking;
 
-namespace mRemoteNG
+namespace mRemoteNG.UI.Forms
 {
 	public partial class frmMain
     {
@@ -197,7 +197,7 @@ namespace mRemoteNG
             Runtime.LoadConnections();
             if (!Runtime.IsConnectionsFileLoaded)
 			{
-				System.Windows.Forms.Application.Exit();
+				Application.Exit();
 				return ;
 			}
 			Config.Putty.Sessions.StartWatcher();

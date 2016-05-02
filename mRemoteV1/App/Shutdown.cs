@@ -2,6 +2,7 @@
 using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
 {

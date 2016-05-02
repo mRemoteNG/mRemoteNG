@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using mRemoteNG.Forms;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.App
@@ -30,7 +31,7 @@ namespace mRemoteNG.App
 						exportForm.SelectedConnection = selectedTreeNode;
 					}
 						
-					if (!(exportForm.ShowDialog(frmMain.Default) == DialogResult.OK))
+					if (exportForm.ShowDialog(frmMain.Default) != DialogResult.OK)
 					{
 						return ;
 					}

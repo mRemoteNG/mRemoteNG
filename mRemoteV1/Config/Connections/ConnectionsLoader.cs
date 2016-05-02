@@ -17,6 +17,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Images;
+using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.Config.Connections
