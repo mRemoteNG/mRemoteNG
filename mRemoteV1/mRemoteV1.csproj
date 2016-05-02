@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4934A491-40BC-4E5B-9166-EA1169A220F6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>mRemoteNG.ProgramRoot</StartupObject>
+    <StartupObject>mRemoteNG.App.ProgramRoot</StartupObject>
     <RootNamespace>mRemoteNG</RootNamespace>
     <AssemblyName>mRemoteNG</AssemblyName>
     <MyType>WindowsForms</MyType>

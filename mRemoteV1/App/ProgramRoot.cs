@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Forms;
 
-namespace mRemoteNG
+namespace mRemoteNG.App
 {
     public static class ProgramRoot
     {
@@ -11,7 +9,7 @@ namespace mRemoteNG
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        public static void Main()
+        public static void Main(string[] args)
         {
             frmMain mainForm = new frmMain();
             frmMain.Default = mainForm;

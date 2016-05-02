@@ -1316,22 +1316,22 @@ namespace mRemoteNG.App
 			
 		public static void GoToWebsite()
 		{
-			GoToURL(App.Info.GeneralAppInfo.URLHome);
+			GoToURL(App.Info.GeneralAppInfo.UrlHome);
 		}
 			
 		public static void GoToDonate()
 		{
-			GoToURL(App.Info.GeneralAppInfo.URLDonate);
+			GoToURL(App.Info.GeneralAppInfo.UrlDonate);
 		}
 			
 		public static void GoToForum()
 		{
-			GoToURL(App.Info.GeneralAppInfo.URLForum);
+			GoToURL(App.Info.GeneralAppInfo.UrlForum);
 		}
 			
 		public static void GoToBugs()
 		{
-			GoToURL(App.Info.GeneralAppInfo.URLBugs);
+			GoToURL(App.Info.GeneralAppInfo.UrlBugs);
 		}
 			
 		public static void Report(string Text)

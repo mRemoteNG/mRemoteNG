@@ -64,7 +64,7 @@ namespace mRemoteNG.App
                                     Config.Import.PuttyConnectionManager.Import(fileName, parentTreeNode);
 									break;
 								default:
-									throw (new FileFormatException("Unrecognized file format."));
+									throw new FileFormatException("Unrecognized file format.");
 							}
 						}
 						catch (Exception ex)
