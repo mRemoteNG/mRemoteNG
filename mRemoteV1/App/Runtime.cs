@@ -1231,7 +1231,7 @@ namespace mRemoteNG.App
 
                 MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strConnenctionCloseEvent, true);
 
-                MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(My.Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), (new Microsoft.VisualBasic.ApplicationServices.User()).Name));
+                MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(My.Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName));
 					
 				Prot.InterfaceControl.Info.OpenConnections.Remove(Prot);
 					
@@ -1259,7 +1259,7 @@ namespace mRemoteNG.App
 		{
             ProtocolBase prot = (ProtocolBase)sender;
             MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strConnectionEventConnected, true);
-            MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(My.Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString(), (new Microsoft.VisualBasic.ApplicationServices.User()).Name, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
+            MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(My.Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
 		}
 			
 		public static void Prot_Event_ErrorOccured(object sender, string ErrorMessage)
@@ -1340,7 +1340,7 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-				StreamWriter sWr = new StreamWriter((new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\Report.log", true);
+				StreamWriter sWr = new StreamWriter(SettingsFileInfo.exePath + "\\Report.log", true);
 				sWr.WriteLine(Text);
 				sWr.Close();
 			}
@@ -1356,7 +1356,7 @@ namespace mRemoteNG.App
 			StreamWriter streamWriter = null;
 			try
 			{
-				streamReader = new StreamReader((new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\Report.log");
+				streamReader = new StreamReader(SettingsFileInfo.exePath + "\\Report.log");
 				string text = streamReader.ReadToEnd();
 				streamReader.Close();
 				streamWriter = new StreamWriter(App.Info.GeneralAppInfo.ReportingFilePath, true);
