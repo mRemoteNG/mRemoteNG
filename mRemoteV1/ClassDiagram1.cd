@@ -1,0 +1,309 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="mRemoteNG.Connection.Info" Collapsed="true">
+    <Position X="29.5" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="mRemoteNG.Connection.Info.Force" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Info.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Class Name="mRemoteNG.Connection.Info.Inheritance">
+        <Compartments>
+          <Compartment Name="Properties" Collapsed="true" />
+          <Compartment Name="Methods" Collapsed="true" />
+        </Compartments>
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Info.Inheritance.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>nsdT4YQ80AjyrN6+C3B3TRVBrwEyVASPjA5epmmggHg=</HashCode>
+      <FileName>Connection\Connection.Info.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.List" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="27.75" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAACAAAAAQAAkAAAAAAAAAAAABEAAA=</HashCode>
+      <FileName>Connection\Connection.List.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.PuttyBase">
+    <Position X="17.25" Y="3.25" Width="2.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Enum Name="mRemoteNG.Connection.Protocol.PuttyBase.Putty_Protocol" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Protocol.PuttyBase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="mRemoteNG.Connection.Protocol.PuttyBase.Putty_SSHVersion" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Protocol.PuttyBase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>BjAAQAAAQBAAgAAAgAAAAIAAAAAADoAAAAQAAAGAQgA=</HashCode>
+      <FileName>Connection\Connection.Protocol.PuttyBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.Converter" Collapsed="true">
+    <Position X="26" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEQAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Connection.Protocol.Protocols.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.Base">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+      <Compartment Name="Events" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Delegate Name="mRemoteNG.Connection.Protocol.Base.SetTagToNothingCB" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Protocol.Base.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="mRemoteNG.Connection.Protocol.Base.ErrorOccuredEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Protocol.Base.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="mRemoteNG.Connection.Protocol.Base.ClosingEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Protocol.Base.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="mRemoteNG.Connection.Protocol.Base.ConnectedEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Protocol.Base.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="mRemoteNG.Connection.Protocol.Base.DisconnectedEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Protocol.Base.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="mRemoteNG.Connection.Protocol.Base.DisposeControlCB" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Protocol.Base.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="mRemoteNG.Connection.Protocol.Base.ConnectingEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Protocol.Base.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="mRemoteNG.Connection.Protocol.Base.ClosedEventHandler" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Protocol.Base.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+      <Delegate Name="mRemoteNG.Connection.Protocol.Base.DisposeInterfaceCB" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Connection\Connection.Protocol.Base.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ACSAAQAMAABAQQADAgBUoMSAlIAQAAgAAAAAkwGoABA=</HashCode>
+      <FileName>Connection\Connection.Protocol.Base.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.InterfaceControl" Collapsed="true">
+    <Position X="26" Y="1.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Properties" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACAAABKAAAAAAAAAAAAAEAAABA=</HashCode>
+      <FileName>Connection\Connection.InterfaceControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Icon" Collapsed="true">
+    <Position X="27.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAABACAAEAAAAAAAAAAAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Connection\Connection.Icon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.VNC.ProtocolVNC" Collapsed="true">
+    <Position X="10" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AxQAAAAAIAgAAQABAAAAAYAQAQAAAAAAAAAAAEAAwAA=</HashCode>
+      <FileName>Connection\Protocol\VNC\Connection.Protocol.VNC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.Telnet.ProtocolTelnet" Collapsed="true">
+    <Position X="16.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\Telnet\Connection.Protocol.Telnet.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.SSH.ProtocolSSH1" Collapsed="true">
+    <Position X="21.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\SSH\Connection.Protocol.SSH1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.SSH.ProtocolSSH2" Collapsed="true">
+    <Position X="23.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\SSH\Connection.Protocol.SSH2.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.Serial.ProtocolSerial" Collapsed="true">
+    <Position X="19" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\Serial\Connection.Protocol.Serial.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.Rlogin.ProtocolRlogin" Collapsed="true">
+    <Position X="14.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\Rlogin\Connection.Protocol.Rlogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.RDP.ProtocolRDP" Collapsed="true">
+    <Position X="3.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACQRAAAFIAQgIQACAIBACIAAQaAABIIbAIgUYgEAgAE=</HashCode>
+      <FileName>Connection\Protocol\RDP\Connection.Protocol.RDP.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.RAW.ProtocolRAW" Collapsed="true">
+    <Position X="12.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\RAW\Connection.Protocol.RAW.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.ICA.ProtocolICA" Collapsed="true">
+    <Position X="1" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAABAAAAAQADAABAIIAIAQABBAAAAIiAAAAEAgA=</HashCode>
+      <FileName>Connection\Protocol\ICA\Connection.Protocol.ICA.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.Http.ProtocolHTTP" Collapsed="true">
+    <Position X="5.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\Http\Connection.Protocol.HTTP.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.Http.HTTPBase" Collapsed="true">
+    <Position X="6.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAQAAABAAAQAIAAAAAKCAAAAAAAEAAAAAABAAAUA=</HashCode>
+      <FileName>Connection\Protocol\Http\Connection.Protocol.HTTPBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="mRemoteNG.Connection.Protocol.Http.ProtocolHTTPS" Collapsed="true">
+    <Position X="7.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\Http\Connection.Protocol.HTTPS.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="mRemoteNG.Connection.Protocol.Protocols" Collapsed="true">
+    <Position X="29.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAwAgAAAQAQAEAAAAAAAAAAJAEABAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Connection.Protocol.Protocols.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="mRemoteNG.Connection.Protocol.VNC.Defaults" Collapsed="true">
+    <Position X="26" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\VNC\VNCEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="mRemoteNG.Connection.Protocol.VNC.SpecialKeys" Collapsed="true">
+    <Position X="29.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\VNC\VNCEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="mRemoteNG.Connection.Protocol.VNC.Compression" Collapsed="true">
+    <Position X="29.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAAAAAkAAAAAAAQAgAAQAAIAABAAAAAIBAIAA=</HashCode>
+      <FileName>Connection\Protocol\VNC\VNCEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="mRemoteNG.Connection.Protocol.VNC.Encoding" Collapsed="true">
+    <Position X="27.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAEBAAIAAAAAAAIAAAEAAAQgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\VNC\VNCEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="mRemoteNG.Connection.Protocol.VNC.AuthMode" Collapsed="true">
+    <Position X="26" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\VNC\VNCEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="mRemoteNG.Connection.Protocol.VNC.ProxyType" Collapsed="true">
+    <Position X="26" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAACAACAAA=</HashCode>
+      <FileName>Connection\Protocol\VNC\VNCEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="mRemoteNG.Connection.Protocol.VNC.Colors" Collapsed="true">
+    <Position X="27.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Connection\Protocol\VNC\VNCEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="mRemoteNG.Connection.Protocol.VNC.SmartSizeMode" Collapsed="true">
+    <Position X="27.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>Connection\Protocol\VNC\VNCEnum.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

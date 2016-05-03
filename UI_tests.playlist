@@ -1,0 +1,1 @@
+<Playlist Version="1.0"><Add Test="mRemoteNGTests.UI.WindowListTests.TestMethod1" /><Add Test="mRemoteNGTests.UI.WindowListTests.AddWindowToList" /><Add Test="mRemoteNGTests.UI.WindowListTests.CountReturnsCorrectNumber" /></Playlist>

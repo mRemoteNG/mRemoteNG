@@ -1,0 +1,1224 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{4934A491-40BC-4E5B-9166-EA1169A220F6}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>mRemoteNG.App.ProgramRoot</StartupObject>
+    <RootNamespace>mRemoteNG</RootNamespace>
+    <AssemblyName>mRemoteNG</AssemblyName>
+    <MyType>WindowsForms</MyType>
+    <OptionExplicit>On</OptionExplicit>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>3.5</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+    <ApplicationIcon>Resources\Icons\mRemote_Icon.ico</ApplicationIcon>
+    <OptionStrict>Off</OptionStrict>
+    <ManifestCertificateThumbprint>B249710A6BB08171F8E75082CF2355AE2890911A</ManifestCertificateThumbprint>
+    <ManifestKeyFile>mRemoteV1_TemporaryKey.pfx</ManifestKeyFile>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>false</SignManifests>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.64.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NOWARN>1591,660,661</NOWARN>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DocumentationFile>
+    </DocumentationFile>
+    <NOWARN>1591,660,661</NOWARN>
+    <DebugSymbols>true</DebugSymbols>
+    <PlatformTarget>x86</PlatformTarget>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Portable|AnyCPU' ">
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Release Portable\</OutputPath>
+    <Optimize>true</Optimize>
+    <NOWARN>1591,660,661</NOWARN>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <DefineConstants>PORTABLE</DefineConstants>
+    <DebugSymbols>true</DebugSymbols>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Portable|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug Portable\</OutputPath>
+    <NOWARN>1591,660,661</NOWARN>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants>DEBUG;PORTABLE</DefineConstants>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="ADTree, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\ADTree.dll</HintPath>
+    </Reference>
+    <Reference Include="DiffieHellman, Version=0.0.0.0, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\DiffieHellman.dll</HintPath>
+    </Reference>
+    <Reference Include="FilteredPropertyGrid, Version=1.0.2258.31541, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\FilteredPropertyGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="IPTextBox, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\IPTextBox.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MagicLibrary, Version=1.7.4.0, Culture=neutral, PublicKeyToken=3a6eb82f876a49bc">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\MagicLibrary.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MiniGeckoBrowser, Version=1.0.3142.33318, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\MiniGeckoBrowser.dll</HintPath>
+    </Reference>
+    <Reference Include="Org.Mentalis.Security, Version=1.0.13.715, Culture=neutral">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Org.Mentalis.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="PSTaskDialog, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\PSTaskDialog.dll</HintPath>
+    </Reference>
+    <Reference Include="Skybound.Gecko, Version=1.8.1.4, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Skybound.Gecko.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Tamir.SharpSSH, Version=1.1.1.13, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\Tamir.SharpSSH.dll</HintPath>
+    </Reference>
+    <Reference Include="VncSharpNG, Version=1.1.2.0, Culture=neutral, PublicKeyToken=61974755c7bfea7c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\VncSharpNG.dll</HintPath>
+    </Reference>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.2.2864.18696, Culture=neutral, PublicKeyToken=d481317c817cec47, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>References\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App\ApplicationEvents.cs" />
+    <Compile Include="App\Info\GeneralAppInfo.cs" />
+    <Compile Include="App\Logger.cs" />
+    <Compile Include="App\Native.cs" />
+    <Compile Include="App\Runtime.cs" />
+    <Compile Include="App\Screens.cs" />
+    <Compile Include="App\Shutdown.cs" />
+    <Compile Include="App\Startup.cs" />
+    <Compile Include="App\SupportedCultures.cs" />
+    <Compile Include="App\Update\AnnouncementInfo.cs" />
+    <Compile Include="App\Update\AppUpdater.cs" />
+    <Compile Include="App\Export.cs" />
+    <Compile Include="App\Import.cs" />
+    <Compile Include="App\Info\ConnectionsFileInfo.cs" />
+    <Compile Include="App\Info\CredentialsFileInfo.cs" />
+    <Compile Include="App\Info\SettingsFileInfo.cs" />
+    <Compile Include="App\Info\UpdateChannelInfo.cs" />
+    <Compile Include="App\Update\UpdateFile.cs" />
+    <Compile Include="App\Update\UpdateInfo.cs" />
+    <Compile Include="App\Windows.cs" />
+    <Compile Include="Config\Connections\ConnectionsLoader.cs" />
+    <Compile Include="Config\Connections\ConnectionsSaver.cs" />
+    <Compile Include="Config\Connections\SqlCommandBuilder.cs" />
+    <Compile Include="Config\Connections\SqlConnectionsUpdateChecker.cs" />
+    <Compile Include="Config\Connections\SqlConnectionsProvider.cs" />
+    <Compile Include="Config\Connections\SqlUpdateQueryBuilder.cs" />
+    <Compile Include="Config\Connections\SqlUpdateTimer.cs" />
+    <Compile Include="Config\Settings\Providers\ChooseProvider.cs" />
+    <Compile Include="Config\Settings\SettingsLoader.cs" />
+    <Compile Include="Config\Settings\Providers\PortableSettingsProvider.cs" />
+    <Compile Include="Config\Settings\SettingsSaver.cs" />
+    <Compile Include="Config\ConfirmCloseEnum.cs" />
+    <Compile Include="Config\Import\ActiveDirectory.cs" />
+    <Compile Include="Config\Import\mRemoteNG.cs" />
+    <Compile Include="Config\Import\PortScan.cs" />
+    <Compile Include="Config\Import\PuttyConnectionManager.cs" />
+    <Compile Include="Config\Import\RemoteDesktopConnection.cs" />
+    <Compile Include="Config\Import\RemoteDesktopConnectionManager.cs" />
+    <Compile Include="Config\KeyboardShortcuts\KeyboardShortcutMap.cs" />
+    <Compile Include="Config\KeyboardShortcuts\ShortcutCommandEnum.cs" />
+    <Compile Include="Config\KeyboardShortcuts\ShortcutKey.cs" />
+    <Compile Include="Config\KeyboardShortcuts\ShortcutMapping.cs" />
+    <Compile Include="Config\Putty\Config.Putty.RegistryProvider.cs" />
+    <Compile Include="Config\Putty\Config.Putty.XmingProvider.cs" />
+    <Compile Include="Config\Putty\Config.Putty.Sessions.cs" />
+    <Compile Include="Config\Putty\Config.Putty.Provider.cs" />
+    <Compile Include="Config\SqlConnector.cs" />
+    <Compile Include="Config\SqlConnectorImp.cs" />
+    <Compile Include="Connection\ConnectionInfoInheritance.cs" />
+    <Compile Include="App\ProgramRoot.cs" />
+    <Compile Include="Connection\Converter.cs" />
+    <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPEnums.cs" />
+    <Compile Include="Connection\Protocol\RDP\RDPVersions.cs" />
+    <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
+    <Compile Include="Images\ErrorImageType.cs" />
+    <Compile Include="Messages\MessageClassEnum.cs" />
+    <Compile Include="Tools\ArgumentParser.cs" />
+    <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
+    <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
+    <Compile Include="Tools\Sorting\TreeNodeSorter.cs" />
+    <Compile Include="Tools\Sorting\Sortable.cs" />
+    <Compile Include="Tree\ConnectionTree.cs" />
+    <Compile Include="Tree\NodeType.cs" />
+    <Compile Include="UI\Controls\ListView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\QuickConnectComboBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\TextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\ToolStripSplitButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Config\KeyboardShortcuts\KeyboardShortcuts.cs" />
+    <Compile Include="UI\Forms\frmOptions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\frmOptions.Designer.cs">
+      <DependentUpon>frmOptions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\AdvancedPage.Designer.cs">
+      <DependentUpon>AdvancedPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\AdvancedPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\AppearancePage.Designer.cs">
+      <DependentUpon>AppearancePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\AppearancePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\ConnectionsPage.Designer.cs">
+      <DependentUpon>ConnectionsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\ConnectionsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsForm.Designer.cs">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\KeyboardPage.Designer.cs">
+      <DependentUpon>KeyboardPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\KeyboardPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\OptionsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\SqlServerPage.Designer.cs">
+      <DependentUpon>SqlServerPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\SqlServerPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\StartupExitPage.Designer.cs">
+      <DependentUpon>StartupExitPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\StartupExitPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\TabsPanelsPage.Designer.cs">
+      <DependentUpon>TabsPanelsPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\TabsPanelsPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\ThemePage.Designer.cs">
+      <DependentUpon>ThemePage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\ThemePage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\UpdatesPage.Designer.cs">
+      <DependentUpon>UpdatesPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\UpdatesPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Tools\Authenticode.cs" />
+    <Compile Include="Tools\EnumWindows.cs" />
+    <Compile Include="Tools\EnvironmentInfo.cs" />
+    <Compile Include="Tools\PropertyGridCommandSite.cs" />
+    <Compile Include="Connection\PuttySessionInfo.cs" />
+    <Compile Include="Tree\Root\PuttySessions.Info.cs" />
+    <Compile Include="Themes\ThemeManager.cs" />
+    <Compile Include="Themes\ThemeSerializer.cs" />
+    <Compile Include="Connection\ConnectionIcon.cs" />
+    <Compile Include="Connection\ConnectionInfo.cs" />
+    <Compile Include="Connection\InterfaceControl.Designer.cs">
+      <DependentUpon>InterfaceControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Connection\InterfaceControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Connection\ConnectionList.cs" />
+    <Compile Include="Connection\Protocol\ProtocolBase.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPBase.cs" />
+    <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.cs" />
+    <Compile Include="Connection\Protocol\ICA\Connection.Protocol.ICA.cs" />
+    <Compile Include="Connection\Protocol\IntegratedProgram.cs" />
+    <Compile Include="Connection\Protocol\ProtocolList.cs" />
+    <Compile Include="Connection\Protocol\ProtocolType.cs" />
+    <Compile Include="Connection\Protocol\PuttyBase.cs" />
+    <Compile Include="Connection\Protocol\RAW\Connection.Protocol.RAW.cs" />
+    <Compile Include="Connection\Protocol\RDP\Connection.Protocol.RDP.cs" />
+    <Compile Include="Connection\Protocol\Rlogin\Connection.Protocol.Rlogin.cs" />
+    <Compile Include="Connection\Protocol\Serial\Connection.Protocol.Serial.cs" />
+    <Compile Include="Connection\Protocol\SSH\Connection.Protocol.SSH1.cs" />
+    <Compile Include="Connection\Protocol\SSH\Connection.Protocol.SSH2.cs" />
+    <Compile Include="Connection\Protocol\Telnet\Connection.Protocol.Telnet.cs" />
+    <Compile Include="Connection\Protocol\VNC\Connection.Protocol.VNC.cs" />
+    <Compile Include="Themes\ThemeInfo.cs" />
+    <Compile Include="Tools\CommandLineArguments.cs" />
+    <Compile Include="Container\ContainerInfo.cs" />
+    <Compile Include="Container\ContainerList.cs" />
+    <Compile Include="Credential\CredentialInfo.cs" />
+    <Compile Include="Credential\CredentialList.cs" />
+    <Compile Include="UI\Forms\frmChoosePanel.Designer.cs">
+      <DependentUpon>frmChoosePanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\frmChoosePanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\frmMain.Designer.cs">
+      <DependentUpon>frmMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\frmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\PasswordForm.Designer.cs">
+      <DependentUpon>PasswordForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Forms\PasswordForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Images\TreeImageType.cs" />
+    <Compile Include="Resources\Language\Language.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Language.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Messages\MessageCollector.cs" />
+    <Compile Include="Messages\Message.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Application.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Tree\Root\Root.Info.cs" />
+    <Compile Include="Security\Security.Crypt.cs" />
+    <Compile Include="Security\Security.Impersonator.cs" />
+    <Compile Include="Security\Security.Save.cs" />
+    <Compile Include="Tools\IeBrowserEmulation.cs" />
+    <Compile Include="Tools\ProcessController.cs" />
+    <Compile Include="Tools\PuttyTypeDetector.cs" />
+    <Compile Include="Tools\PuttyProcessController.cs" />
+    <Compile Include="Tools\ReconnectGroup.Designer.cs">
+      <DependentUpon>ReconnectGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools\ReconnectGroup.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Tools\Tools.Controls.cs">
+    </Compile>
+    <Compile Include="Tools\ExternalTool.cs" />
+    <Compile Include="Tools\Tools.LocalizedAttributes.cs" />
+    <Compile Include="Tools\MiscTools.cs" />
+    <Compile Include="Tools\Tools.PortScan.cs" />
+    <Compile Include="Tools\Tools.SystemMenu.cs" />
+    <Compile Include="Tools\Tools.WindowPlacement.cs" />
+    <Compile Include="Tree\Tree.Node.cs" />
+    <Compile Include="UI\Forms\SplashPage.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\SplashPage.Designer.cs">
+      <DependentUpon>SplashPage.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\AboutWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ActiveDirectoryImportWindow.Designer.cs">
+      <DependentUpon>ActiveDirectoryImportWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\ActiveDirectoryImportWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\AnnouncementWindow.Designer.cs">
+      <DependentUpon>AnnouncementWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\AnnouncementWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\BaseWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ComponentsCheckWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ConfigWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ConnectionWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ErrorAndInfoWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\ExportForm.Designer.cs">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\ExternalToolsWindow.Designer.cs">
+      <DependentUpon>ExternalToolsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\ExternalToolsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\HelpWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\WindowList.cs" />
+    <Compile Include="UI\Window\PortScanWindow.Designer.cs">
+      <DependentUpon>PortScanWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\PortScanWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\ExportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ScreenshotManagerWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\SSHTransferWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\ConnectionTreeWindow.Designer.cs">
+      <DependentUpon>ConnectionTreeWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\ConnectionTreeWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\WindowType.cs" />
+    <Compile Include="UI\Window\UltraVNCWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Window\UpdateWindow.Designer.cs">
+      <DependentUpon>UpdateWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Window\UpdateWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Language\Language.ja-JP.resx" />
+    <EmbeddedResource Include="UI\Forms\frmChoosePanel.resx">
+      <DependentUpon>frmChoosePanel.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\frmMain.resx">
+      <DependentUpon>frmMain.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\frmOptions.resx">
+      <DependentUpon>frmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\PasswordForm.resx">
+      <DependentUpon>PasswordForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\AdvancedPage.resx">
+      <DependentUpon>AdvancedPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\AppearancePage.resx">
+      <DependentUpon>AppearancePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ConnectionsPage.resx">
+      <DependentUpon>ConnectionsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsForm.resx">
+      <DependentUpon>OptionsForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\KeyboardPage.resx">
+      <DependentUpon>KeyboardPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\SqlServerPage.resx">
+      <DependentUpon>SqlServerPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\StartupExitPage.resx">
+      <DependentUpon>StartupExitPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\TabsPanelsPage.resx">
+      <DependentUpon>TabsPanelsPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\ThemePage.resx">
+      <DependentUpon>ThemePage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\UpdatesPage.resx">
+      <DependentUpon>UpdatesPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.de.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.el.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.en-US.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.es-AR.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.es.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.hu.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.it.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.nb-NO.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.nl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.pt-BR.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.pt.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Language.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>mRemoteNG.My</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.fr.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.pl.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.ru.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.uk.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.zh-CN.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Language\Language.zh-TW.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>mRemoteNG.My</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools\ReconnectGroup.resx">
+      <DependentUpon>ReconnectGroup.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\SplashPage.resx">
+      <DependentUpon>SplashPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\AboutWindow.resx">
+      <DependentUpon>AboutWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ActiveDirectoryImportWindow.resx">
+      <DependentUpon>ActiveDirectoryImportWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\AnnouncementWindow.resx">
+      <DependentUpon>AnnouncementWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ComponentsCheckWindow.resx">
+      <DependentUpon>ComponentsCheckWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ConfigWindow.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ConfigWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ConnectionWindow.resx">
+      <DependentUpon>ConnectionWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ErrorAndInfoWindow.resx">
+      <DependentUpon>ErrorAndInfoWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ExternalToolsWindow.resx">
+      <DependentUpon>ExternalToolsWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\HelpWindow.resx">
+      <DependentUpon>HelpWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\PortScanWindow.resx">
+      <DependentUpon>PortScanWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\ExportForm.resx">
+      <DependentUpon>ExportForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ScreenshotManagerWindow.resx">
+      <DependentUpon>ScreenshotManagerWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\SSHTransferWindow.resx">
+      <DependentUpon>SSHTransferWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\ConnectionTreeWindow.resx">
+      <DependentUpon>ConnectionTreeWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\UltraVNCWindow.resx">
+      <DependentUpon>UltraVNCWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Window\UpdateWindow.resx">
+      <DependentUpon>UpdateWindow.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Help\CMDSwitches.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Config.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Configuration.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Connection.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Connections.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\ConfigurationSQL.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Index.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\PortScan.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\ExternalTools.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\ErrorsAndInfos.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\ImportFromAD.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Installation.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Introduction.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\MainMenu.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Options.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Prerequisites.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\QuickConnect.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\QuickReference.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\SaveAsExport.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\ScreenshotManager.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\02.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\03.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\04.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\05.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\06.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\07.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\08.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\09.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\10.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\11.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\12.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\13.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\14.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\15.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\16.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Configuration\17.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\External Tools\01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\External Tools\02.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\External Tools\03.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\External Tools\04.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\External Tools\05.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\External Tools\06.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\External Tools\07.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\External Tools\08.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Main Menu\File.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Main Menu\Info.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Main Menu\QuickConnect.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Main Menu\Tools.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Main Menu\View.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Screenshots\Reference\01.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Sessions.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\SQLScript.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\SSHFileTransfer.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Help\Update.htm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Icons\RDCMan_Icon.ico" />
+    <Content Include="Resources\Images_FamFamFam\Config.png" />
+    <Content Include="Resources\Images_FamFamFam\database.png" />
+    <Content Include="Resources\Images_FamFamFam\Link.png" />
+    <Content Include="Resources\Images_FamFamFam\page_copy.png" />
+    <None Include="Resources\Images\puttycm.png" />
+    <None Include="Resources\Images_FamFamFam\monitor_go.png" />
+    <None Include="Resources\Images_FamFamFam\monitor_delete.png" />
+    <None Include="Resources\Images_FamFamFam\user_comment.png" />
+    <None Include="Resources\Images_FamFamFam\key_delete.png" />
+    <None Include="Resources\Images\PuttySessions.png" />
+    <None Include="Resources\Notes\Help.txt" />
+    <None Include="Resources\Notes\ICA.txt" />
+    <None Include="Resources\Notes\Misc.txt" />
+    <None Include="Resources\Notes\PropertyList.csv" />
+    <None Include="Resources\Images\PuttyConfig.png" />
+    <None Include="Resources\Images\Play_Quick.png" />
+    <None Include="Resources\Icons\Play_Quick_Icon.ico" />
+    <None Include="Resources\Icons\SSHTransfer_Icon.ico" />
+    <None Include="Resources\Images\SSHTransfer.png" />
+    <None Include="Resources\Images\mRemote.png" />
+    <None Include="Resources\Images\ErrorsAndInfos.png" />
+    <None Include="Resources\Images\Screenshot.png" />
+    <None Include="Resources\Images\Sessions.png" />
+    <None Include="Resources\Images\Connections_New.png" />
+    <None Include="Resources\Images\Connections_Load.png" />
+    <None Include="Resources\Images\Connections_SaveAs.png" />
+    <None Include="Resources\Images\Connections_Save.png" />
+    <None Include="Resources\Icons\Connections_SaveAs_Icon.ico" />
+    <None Include="Resources\Images\Sort_ZA.png" />
+    <None Include="Resources\Images\Sort_AZ.png" />
+    <None Include="Resources\Icons\Help_Icon.ico" />
+    <None Include="Resources\Images\Lock.png" />
+    <None Include="Resources\Images\Refresh.png" />
+    <None Include="Resources\Images\RDP.png" />
+    <None Include="Resources\Images\PropertiesDefault.png" />
+    <None Include="Resources\Images\ExtApp.png" />
+    <None Include="Resources\Icons\ExtApp_Icon.ico" />
+    <None Include="Resources\Images\Duplicate.png" />
+    <None Include="Resources\Images\PortScan.png" />
+    <None Include="Resources\Icons\PortScan_Icon.ico" />
+    <None Include="Resources\Notes\MultiLang.txt" />
+    <None Include="Resources\Notes\MultiUserCons.txt" />
+    <None Include="Resources\Images_FamFamFam\Copy.png" />
+    <None Include="Resources\Images_FamFamFam\Delete.png" />
+    <None Include="Resources\Icons_FamFamFam\Config_Icon.ico" />
+    <None Include="Resources\Icons_FamFamFam\Options_Icon.ico" />
+    <None Include="Resources\Icons_FamFamFam\Save_Icon.ico" />
+    <None Include="Resources\Icons_FamFamFam\Screenshot_Icon.ico" />
+    <None Include="Resources\Images_FamFamFam\Donate.png" />
+    <None Include="Resources\Images_FamFamFam\Info.png" />
+    <None Include="Resources\Images_FamFamFam\Inheritance.png" />
+    <None Include="Resources\Images_FamFamFam\Keyboard.png" />
+    <None Include="Resources\Images_FamFamFam\Options.png" />
+    <None Include="Resources\Images_FamFamFam\Panel_Close.png" />
+    <None Include="Resources\Images_FamFamFam\Panels.png" />
+    <None Include="Resources\Images_FamFamFam\Panel_Add.png" />
+    <None Include="Resources\Images_FamFamFam\Quit.png" />
+    <None Include="Resources\Images_FamFamFam\Save.png" />
+    <None Include="Resources\Images_FamFamFam\Screenshot.png" />
+    <None Include="Resources\Images_FamFamFam\Screenshot_Add.png" />
+    <None Include="Resources\Images_FamFamFam\Screenshot_Copy.png" />
+    <None Include="Resources\Images_FamFamFam\Screenshot_Delete.png" />
+    <None Include="Resources\Images_FamFamFam\Screenshot_Save.png" />
+    <None Include="Resources\Images_FamFamFam\Search.png" />
+    <None Include="Resources\Images_FamFamFam\View.png" />
+    <None Include="Resources\Images_FamFamFam\Warning_Small.png" />
+    <None Include="Resources\Images_FamFamFam\Website.png" />
+    <None Include="Resources\Images_FamFamFam\ExtApp.png" />
+    <None Include="Resources\Icons_FamFamFam\ExtApp_Icon.ico" />
+    <None Include="Resources\Icons_FamFamFam\Sessions_Icon.ico" />
+    <None Include="Resources\Images_FamFamFam\Sessions.png" />
+    <None Include="Resources\Images_FamFamFam\Session_LogOff.png" />
+    <None Include="Resources\Images_FamFamFam\File.png" />
+    <None Include="Resources\Images_FamFamFam\Refresh.png" />
+    <None Include="Resources\Images_FamFamFam\Properties_Default.png" />
+    <None Include="Resources\Images_FamFamFam\Properties.png" />
+    <None Include="Resources\Images_FamFamFam\Arrow_Down.png" />
+    <None Include="Resources\Images_FamFamFam\Arrow_Up.png" />
+    <None Include="Resources\Images_FamFamFam\Tools.png" />
+    <None Include="Resources\Images_FamFamFam\Bug.png" />
+    <None Include="Resources\Icons_FamFamFam\Help_Icon.ico" />
+    <None Include="Resources\Images_FamFamFam\Help.png" />
+    <None Include="Resources\Images_FamFamFam\Page.png" />
+    <None Include="Resources\Images_FamFamFam\SmartSize.png" />
+    <None Include="Resources\Images_FamFamFam\Update.png" />
+    <None Include="Resources\Icons_FamFamFam\Update_Icon.ico" />
+    <None Include="Resources\Images_FamFamFam\Folder.png" />
+    <None Include="Resources\Images_FamFamFam\Folder_Add.png" />
+    <None Include="Resources\Images_FamFamFam\Pause.png" />
+    <None Include="Resources\Images_FamFamFam\Play.png" />
+    <None Include="Resources\Images_FamFamFam\Connection_Add.png" />
+    <None Include="Resources\Images_FamFamFam\Connection_Duplicate.png" />
+    <None Include="Resources\Images_FamFamFam\ExtApp_Add.png" />
+    <None Include="Resources\Images_FamFamFam\ExtApp_Delete.png" />
+    <None Include="Resources\Images_FamFamFam\ExtApp_Start.png" />
+    <None Include="Resources\Images_FamFamFam\SSHTransfer.png" />
+    <None Include="Resources\Icons_FamFamFam\SSHTransfer_Icon.ico" />
+    <None Include="Resources\Images_FamFamFam\PortScan.png" />
+    <None Include="Resources\Icons_FamFamFam\PortScan_Icon.ico" />
+    <None Include="Resources\Icons_FamFamFam\Appearance_Icon.ico" />
+    <None Include="Resources\Icons_FamFamFam\Tab_Icon.ico" />
+    <None Include="Resources\Icons_FamFamFam\StartupExit_Icon.ico" />
+    <None Include="Resources\Images_FamFamFam\Console.png" />
+    <None Include="Resources\Images_FamFamFam\Inheritance_Default.png" />
+    <None Include="Resources\Images_FamFamFam\Chat.png" />
+    <None Include="Resources\Icons_FamFamFam\Panels_Icon.ico" />
+    <None Include="Resources\Images_FamFamFam\JumpTo.png" />
+    <None Include="Resources\Notes\PropertyList.txt" />
+    <None Include="Resources\Images_FamFamFam\Monitor_GoTo.png" />
+    <None Include="Resources\Images_FamFamFam\Monitor.png" />
+    <None Include="Resources\Icons\UVNC_SC_Icon.ico" />
+    <None Include="Resources\Images\UVNC_SC.png" />
+    <None Include="Resources\Images\Bad_Symbol.png" />
+    <None Include="Resources\Images\Good_Symbol.png" />
+    <None Include="Resources\Images\ComponentsCheck.png" />
+    <None Include="Resources\Icons\ComponentsCheck_Icon.ico" />
+    <None Include="Resources\Icons_FamFamFam\News_Icon.ico" />
+    <None Include="Resources\Images_FamFamFam\News.png" />
+    <None Include="Resources\Announcement\mRemote_Announcement.txt" />
+    <None Include="Resources\Update\mRemote_Update.txt" />
+    <Content Include="Resources\Help\Main.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Anti Virus.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Backup.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Build Server.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Database.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Domain Controller.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\ESX.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Fax.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\File Server.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Finance.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Firewall.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Linux.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Log.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Mail Server.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\mRemote.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\mRemoteNG.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\PuTTY.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Remote Desktop.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Router.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\SharePoint.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\SSH.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Switch.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Tel.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Telnet.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Terminal Server.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Test Server.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Virtual Machine.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Web Server.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\WiFi.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Windows.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Icons\Workstation.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <None Include="Resources\Images_FamFamFam\application_side_tree.png" />
+    <None Include="Resources\Images_FamFamFam\arrow_out.png" />
+    <None Include="Resources\Images_FamFamFam\cog_error.png" />
+    <Content Include="Resources\Icons_FamFamFam\database.ico" />
+    <Content Include="Resources\Icons_FamFamFam\keyboard.ico" />
+    <Content Include="Resources\Images_FamFamFam\cog.png" />
+    <Content Include="Resources\Images\database.bmp" />
+    <None Include="Resources\Images\Copy.png" />
+    <None Include="Resources\Icons\mRemote_Icon.ico" />
+    <None Include="Resources\Icons\Sessions_Icon.ico" />
+    <None Include="Resources\Icons\Info_Icon.ico" />
+    <None Include="app.config" />
+    <None Include="Properties\Settings.settings">
+      <CustomToolNamespace>mRemoteNG.My</CustomToolNamespace>
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Resources\Images\Properties.png" />
+    <None Include="Resources\Images\Inheritance.png" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Resources\Icons\Update_Icon.ico" />
+    <None Include="Resources\Icons\Screenshot_Icon.ico" />
+    <None Include="Resources\Icons\Save_Icon.ico" />
+    <None Include="Resources\Icons\Root_Icon.ico" />
+    <None Include="Resources\Icons\Options_Icon.ico" />
+    <None Include="Resources\Icons\Config_Icon.ico" />
+    <None Include="Resources\Icons\ActiveDirectory_Icon.ico" />
+    <None Include="Resources\Images\WarningSmall.png" />
+    <None Include="Resources\Images\Warning.png" />
+    <None Include="Resources\Images\View.png" />
+    <None Include="Resources\Images\Update.png" />
+    <None Include="Resources\Images\Tools.png" />
+    <None Include="Resources\Images\Search.png" />
+    <None Include="Resources\Images\Screenshot_Add.png" />
+    <None Include="Resources\Images\Save.png" />
+    <None Include="Resources\Images\Root.png" />
+    <None Include="Resources\Images\Rename.png" />
+    <None Include="Resources\Images\Play.png" />
+    <None Include="Resources\Images\Pause.png" />
+    <None Include="Resources\Images\Options.png" />
+    <None Include="Resources\Images\Open.png" />
+    <None Include="Resources\Images\NewFolder.png" />
+    <None Include="Resources\Images\NewConnection.png" />
+    <None Include="Resources\Images\New.png" />
+    <None Include="Resources\Images\Minimize.png" />
+    <None Include="Resources\Images\Logo.png" />
+    <None Include="Resources\Images\Keyboard.png" />
+    <None Include="Resources\Images\InformationSmall.png" />
+    <None Include="Resources\Images\Information.png" />
+    <None Include="Resources\Images\Info.png" />
+    <None Include="Resources\Images\HostStatus_On.png" />
+    <None Include="Resources\Images\HostStatus_Off.png" />
+    <None Include="Resources\Images\HostStatus_Check.png" />
+    <None Include="Resources\Images\Help.png" />
+    <None Include="Resources\Images\Fullscreen.png" />
+    <None Include="Resources\Images\Folder.png" />
+    <None Include="Resources\Images\File.png" />
+    <None Include="Resources\Images\Expand.png" />
+    <None Include="Resources\Images\Exit.png" />
+    <None Include="Resources\Images\ErrorSmall.png" />
+    <None Include="Resources\Images\Error.png" />
+    <None Include="Resources\Images\Delete.png" />
+    <None Include="Resources\Images\Config.png" />
+    <None Include="Resources\Images\Collapse.png" />
+    <None Include="Resources\Images\Arrow_Up.png" />
+    <None Include="Resources\Images\Arrow_Down.png" />
+    <None Include="Resources\Images\ActiveDirectory.png" />
+    <None Include="Resources\Images\Website.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <COMReference Include="AxMSTSCLib">
+      <Guid>{8C11EFA1-92C3-11D1-BC1E-00C04FA31489}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="AxWFICALib">
+      <Guid>{238F6F80-B8B4-11CF-8771-00A024541EE3}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>aximp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="MSTSCLib">
+      <Guid>{8C11EFA1-92C3-11D1-BC1E-00C04FA31489}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="SHDocVw">
+      <Guid>{EAB22AC0-30C1-11CF-A7EB-0000C05BAE0B}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>1</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="WFICALib">
+      <Guid>{238F6F80-B8B4-11CF-8771-00A024541EE3}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>7</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SharedLibraryNG\SharedLibraryNG.csproj">
+      <Project>{0f615504-5f30-4cf2-8341-1de7fec95a23}</Project>
+      <Name>SharedLibraryNG</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="mscorlib" />
+  </ItemGroup>
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+  <Import Project="$(MSBuildBinPath)/Microsoft.CSharp.targets" />
+</Project>

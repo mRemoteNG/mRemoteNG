@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" id="root">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="strPropertyDescriptionColors" xml:space="preserve">
+    <value>Select the color quality to be used.</value>
+  </data>
+  <data name="strPropertyNameColors" xml:space="preserve">
+    <value>Colors</value>
+  </data>
+  <data name="strRDP16777216Colors" xml:space="preserve">
+    <value>16777216 Colors (24-bit)</value>
+  </data>
+  <data name="strRDP256Colors" xml:space="preserve">
+    <value>256 Colors (8-bit)</value>
+  </data>
+  <data name="strRDP32768Colors" xml:space="preserve">
+    <value>32768 Colors (15-bit)</value>
+  </data>
+  <data name="strRDP4294967296Colors" xml:space="preserve">
+    <value>16777216 Colors (32-bit)</value>
+  </data>
+  <data name="strRDP65536Colors" xml:space="preserve">
+    <value>65536 Colors (16-bit)</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelBackgroundColor" xml:space="preserve">
+    <value>The background color of the config panel.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>The color of the category text in the config panel.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelGridLineColor" xml:space="preserve">
+    <value>The color of the grid lines in the config panel</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>The background color of the help area of the config panel.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelHelpTextColor" xml:space="preserve">
+    <value>The color of the text in the help area of the config panel.</value>
+  </data>
+  <data name="strThemeDescriptionConfigPanelTextColor" xml:space="preserve">
+    <value>The color of the text in the config panel.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>The background color of the connections panel.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTextColor" xml:space="preserve">
+    <value>The color of the text in the connections panel.</value>
+  </data>
+  <data name="strThemeDescriptionConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>The color of the tree lines in the connections panel.</value>
+  </data>
+  <data name="strThemeDescriptionMenuBackgroundColor" xml:space="preserve">
+    <value>The background color of the menus.</value>
+  </data>
+  <data name="strThemeDescriptionMenuTextColor" xml:space="preserve">
+    <value>The color of the text in the menus.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxBackgroundColor" xml:space="preserve">
+    <value>The background color of the search box.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextColor" xml:space="preserve">
+    <value>The color of the text in the search box.</value>
+  </data>
+  <data name="strThemeDescriptionSearchBoxTextPromptColor" xml:space="preserve">
+    <value>The color of the prompt text in the search box.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarBackgroundColor" xml:space="preserve">
+    <value>The background color of the toolbars.</value>
+  </data>
+  <data name="strThemeDescriptionToolbarTextColor" xml:space="preserve">
+    <value>The color of the text in the toolbars.</value>
+  </data>
+  <data name="strThemeDescriptionWindowBackgroundColor" xml:space="preserve">
+    <value>The background color of the main window.</value>
+  </data>
+  <data name="strThemeNameConfigPanelBackgroundColor" xml:space="preserve">
+    <value>Config Panel Background Color</value>
+  </data>
+  <data name="strThemeNameConfigPanelCategoryTextColor" xml:space="preserve">
+    <value>Config Panel Category Text Color</value>
+  </data>
+  <data name="strThemeNameConfigPanelGridLineColor" xml:space="preserve">
+    <value>Config Panel Grid Line Color</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpBackgroundColor" xml:space="preserve">
+    <value>Config Panel Help Background Color</value>
+  </data>
+  <data name="strThemeNameConfigPanelHelpTextColor" xml:space="preserve">
+    <value>Config Panel Help Text Color</value>
+  </data>
+  <data name="strThemeNameConfigPanelTextColor" xml:space="preserve">
+    <value>Config Panel Text Color</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelBackgroundColor" xml:space="preserve">
+    <value>Connections Panel Background Color</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTextColor" xml:space="preserve">
+    <value>Connections Panel Text Color</value>
+  </data>
+  <data name="strThemeNameConnectionsPanelTreeLineColor" xml:space="preserve">
+    <value>Connections Panel Tree Line Color</value>
+  </data>
+  <data name="strThemeNameMenuBackgroundColor" xml:space="preserve">
+    <value>Menu Background Color</value>
+  </data>
+  <data name="strThemeNameMenuTextColor" xml:space="preserve">
+    <value>Menu Text Color</value>
+  </data>
+  <data name="strThemeNameSearchBoxBackgroundColor" xml:space="preserve">
+    <value>Search Box Background Color</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextColor" xml:space="preserve">
+    <value>Search Box Text Color</value>
+  </data>
+  <data name="strThemeNameSearchBoxTextPromptColor" xml:space="preserve">
+    <value>Search Box Text Prompt Color</value>
+  </data>
+  <data name="strThemeNameToolbarBackgroundColor" xml:space="preserve">
+    <value>Toolbar Background Color</value>
+  </data>
+  <data name="strThemeNameToolbarTextColor" xml:space="preserve">
+    <value>Toolbar Text Color</value>
+  </data>
+  <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
+    <value>Window Background Color</value>
+  </data>
+</root>
