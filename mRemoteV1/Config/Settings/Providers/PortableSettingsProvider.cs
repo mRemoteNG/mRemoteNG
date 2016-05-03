@@ -14,8 +14,6 @@ namespace mRemoteNG.Config.Settings.Providers
 
 		public override void Initialize(string name, NameValueCollection col)
 		{
-			base.Initialize(ApplicationName, col);
-
             if (Application.ProductName.Trim().Length > 0)
             {
                 _applicationName = Application.ProductName;
@@ -24,6 +22,8 @@ namespace mRemoteNG.Config.Settings.Providers
             {
                 _applicationName = Path.GetFileNameWithoutExtension(Application.ExecutablePath);
             }
+
+            base.Initialize(ApplicationName, col);
         }
 
 	    private string _applicationName;
