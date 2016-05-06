@@ -26,7 +26,7 @@ namespace mRemoteNG.UI.Window
         internal ToolStripButton btnShowProperties;
         internal ToolStripButton btnShowDefaultProperties;
         internal ToolStripButton btnShowInheritance;
-        internal ToolStripButton btnShowDefaultInheritance;
+        internal  btnShowDefaultInheritance;
         internal ToolStripButton btnIcon;
         internal ToolStripButton btnHostStatus;
         internal ContextMenuStrip cMenIcons;
