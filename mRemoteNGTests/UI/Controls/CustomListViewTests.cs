@@ -12,7 +12,6 @@ namespace mRemoteNGTests.UI.Controls
 {
     public class CustomListViewTests
     {
-        TestForm _testForm;
         mRemoteNG.Controls.ListView _listView;
 
         [SetUp]
@@ -29,19 +28,6 @@ namespace mRemoteNGTests.UI.Controls
             _listView.Dispose();
             while (_listView.Disposing) ;
             _listView = null;
-        }
-
-        [Test]
-        public void a()
-        {
-            _testForm = new TestForm();
-            _testForm.Controls.Add(_listView);
-            _listView.Items.Add(new ListViewItem("mytestitem"));
-            _testForm.Show();
-            ListViewTester listviewTester = new ListViewTester("myTestListView", _testForm);
-            while (true) ;
-            Assert.That(listviewTester.Items.Count, Is.EqualTo(1));
-
         }
     }
 }
