@@ -19,17 +19,23 @@ node('windows') {
 def GetBranchName() {
 	def jobDir = pwd()
 	echo "JobDir: ${jobDir}"
-	def patternToUse = ""
-	def linuxPattern = "/([a-zA-Z0-9\\-]*)(@[0-9])*\$"
-	def windowsPattern = "\\\\([a-zA-Z0-9\\-]*)(@[0-9])*\$"
-	echo "isUnix: ${isUnix()}"
-	if (isUnix()) {
-		patternToUse = linuxPattern
-	} else {
-		patternToUse =  windowsPattern
-	}
+	def patternToUse = GetPatternToMatchBranchNameFromDirectory()
 	echo "PatternToUse: ${patternToUse}"
 	java.util.regex.Matcher matcher = jobDir =~ patternToUse
 	echo "Ran the matcher"
 	matcher ? matcher[0][1] : null
+}
+def GetPatternToMatchBranchNameFromDirectory() {
+	def patternToUse = ""
+	def folderSeparator = ""
+	def branchNamePattern = "[a-zA-Z0-9\\-_]*"
+	def jenkinsJobInfoTag = "@*[0-9]*"
+	echo "isUnix: ${isUnix()}"
+	if (isUnix()) {
+		folderSeparator = "/"
+	} else {
+		folderSeparator =  "\\\\"
+	}
+	patternToUse = "${folderSeparator}(${branchNamePattern})(${jenkinsJobInfoTag})\$"
+	patternToUse
 }
