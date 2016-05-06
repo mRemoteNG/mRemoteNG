@@ -5,6 +5,7 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Messages;
 using mRemoteNG.My;
 using mRemoteNG.Root;
+using mRemoteNG.Tools;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -19,8 +20,11 @@ namespace mRemoteNG.UI.Window
 {
 	public class ConfigWindow : BaseWindow
 	{
+        private bool _originalPropertyGridToolStripItemCountValid;
+        private int _originalPropertyGridToolStripItemCount;
+
         #region Form Init
-		internal System.Windows.Forms.ToolStripButton btnShowProperties;
+        internal System.Windows.Forms.ToolStripButton btnShowProperties;
 		internal System.Windows.Forms.ToolStripButton btnShowDefaultProperties;
 		internal System.Windows.Forms.ToolStripButton btnShowInheritance;
 		internal System.Windows.Forms.ToolStripButton btnShowDefaultInheritance;
@@ -35,151 +39,151 @@ namespace mRemoteNG.UI.Window
 		internal Azuria.Common.Controls.FilteredPropertyGrid pGrid;
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.Load += new System.EventHandler(Config_Load);
+            components = new System.ComponentModel.Container();
+            Load += new System.EventHandler(Config_Load);
 			base.SystemColorsChanged += new System.EventHandler(Config_SystemColorsChanged);
-			this.pGrid = new Azuria.Common.Controls.FilteredPropertyGrid();
-			this.pGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(this.pGrid_PropertyValueChanged);
-			this.pGrid.PropertySortChanged += new System.EventHandler(this.pGrid_PropertySortChanged);
-			this.propertyGridContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.propertyGridContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.propertyGridContextMenu_Opening);
-			this.propertyGridContextMenuReset = new System.Windows.Forms.ToolStripMenuItem();
-			this.propertyGridContextMenuReset.Click += new System.EventHandler(this.propertyGridContextMenuReset_Click);
-			this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.propertyGridContextMenuShowHelpText = new System.Windows.Forms.ToolStripMenuItem();
-			this.propertyGridContextMenuShowHelpText.Click += new System.EventHandler(this.propertyGridContextMenuShowHelpText_Click);
-			this.propertyGridContextMenuShowHelpText.CheckedChanged += new System.EventHandler(this.propertyGridContextMenuShowHelpText_CheckedChanged);
-			this.btnShowInheritance = new System.Windows.Forms.ToolStripButton();
-			this.btnShowInheritance.Click += new System.EventHandler(this.btnShowInheritance_Click);
-			this.btnShowDefaultInheritance = new System.Windows.Forms.ToolStripButton();
-			this.btnShowDefaultInheritance.Click += new System.EventHandler(this.btnShowDefaultInheritance_Click);
-			this.btnShowProperties = new System.Windows.Forms.ToolStripButton();
-			this.btnShowProperties.Click += new System.EventHandler(this.btnShowProperties_Click);
-			this.btnShowDefaultProperties = new System.Windows.Forms.ToolStripButton();
-			this.btnShowDefaultProperties.Click += new System.EventHandler(this.btnShowDefaultProperties_Click);
-			this.btnIcon = new System.Windows.Forms.ToolStripButton();
-			this.btnIcon.MouseUp += new System.Windows.Forms.MouseEventHandler(this.btnIcon_Click);
-			this.btnHostStatus = new System.Windows.Forms.ToolStripButton();
-			this.btnHostStatus.Click += new System.EventHandler(this.btnHostStatus_Click);
-			this.cMenIcons = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.propertyGridContextMenu.SuspendLayout();
-			this.SuspendLayout();
-			//
-			//pGrid
-			//
-			this.pGrid.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            pGrid = new Azuria.Common.Controls.FilteredPropertyGrid();
+            pGrid.PropertyValueChanged += new System.Windows.Forms.PropertyValueChangedEventHandler(pGrid_PropertyValueChanged);
+            pGrid.PropertySortChanged += new System.EventHandler(pGrid_PropertySortChanged);
+            propertyGridContextMenu = new System.Windows.Forms.ContextMenuStrip(components);
+            propertyGridContextMenu.Opening += new System.ComponentModel.CancelEventHandler(propertyGridContextMenu_Opening);
+            propertyGridContextMenuReset = new System.Windows.Forms.ToolStripMenuItem();
+            propertyGridContextMenuReset.Click += new System.EventHandler(propertyGridContextMenuReset_Click);
+            ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            propertyGridContextMenuShowHelpText = new System.Windows.Forms.ToolStripMenuItem();
+            propertyGridContextMenuShowHelpText.Click += new System.EventHandler(propertyGridContextMenuShowHelpText_Click);
+            propertyGridContextMenuShowHelpText.CheckedChanged += new System.EventHandler(propertyGridContextMenuShowHelpText_CheckedChanged);
+            btnShowInheritance = new System.Windows.Forms.ToolStripButton();
+            btnShowInheritance.Click += new System.EventHandler(btnShowInheritance_Click);
+            btnShowDefaultInheritance = new System.Windows.Forms.ToolStripButton();
+            btnShowDefaultInheritance.Click += new System.EventHandler(btnShowDefaultInheritance_Click);
+            btnShowProperties = new System.Windows.Forms.ToolStripButton();
+            btnShowProperties.Click += new System.EventHandler(btnShowProperties_Click);
+            btnShowDefaultProperties = new System.Windows.Forms.ToolStripButton();
+            btnShowDefaultProperties.Click += new System.EventHandler(btnShowDefaultProperties_Click);
+            btnIcon = new System.Windows.Forms.ToolStripButton();
+            btnIcon.MouseUp += new System.Windows.Forms.MouseEventHandler(btnIcon_Click);
+            btnHostStatus = new System.Windows.Forms.ToolStripButton();
+            btnHostStatus.Click += new System.EventHandler(btnHostStatus_Click);
+            cMenIcons = new System.Windows.Forms.ContextMenuStrip(components);
+            propertyGridContextMenu.SuspendLayout();
+            SuspendLayout();
+            //
+            //pGrid
+            //
+            pGrid.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 				| System.Windows.Forms.AnchorStyles.Left) 
 				| System.Windows.Forms.AnchorStyles.Right);
-			this.pGrid.BrowsableProperties = null;
-			this.pGrid.ContextMenuStrip = this.propertyGridContextMenu;
-			this.pGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
-			this.pGrid.HiddenAttributes = null;
-			this.pGrid.HiddenProperties = null;
-			this.pGrid.Location = new System.Drawing.Point(0, 0);
-			this.pGrid.Name = "pGrid";
-			this.pGrid.PropertySort = System.Windows.Forms.PropertySort.Categorized;
-			this.pGrid.Size = new System.Drawing.Size(226, 530);
-			this.pGrid.TabIndex = 0;
-			this.pGrid.UseCompatibleTextRendering = true;
-			//
-			//propertyGridContextMenu
-			//
-			this.propertyGridContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.propertyGridContextMenuReset, this.ToolStripSeparator1, this.propertyGridContextMenuShowHelpText});
-			this.propertyGridContextMenu.Name = "propertyGridContextMenu";
-			this.propertyGridContextMenu.Size = new System.Drawing.Size(157, 76);
-			//
-			//propertyGridContextMenuReset
-			//
-			this.propertyGridContextMenuReset.Name = "propertyGridContextMenuReset";
-			this.propertyGridContextMenuReset.Size = new System.Drawing.Size(156, 22);
-			this.propertyGridContextMenuReset.Text = "&Reset";
-			//
-			//ToolStripSeparator1
-			//
-			this.ToolStripSeparator1.Name = "ToolStripSeparator1";
-			this.ToolStripSeparator1.Size = new System.Drawing.Size(153, 6);
-			//
-			//propertyGridContextMenuShowHelpText
-			//
-			this.propertyGridContextMenuShowHelpText.Name = "propertyGridContextMenuShowHelpText";
-			this.propertyGridContextMenuShowHelpText.Size = new System.Drawing.Size(156, 22);
-			this.propertyGridContextMenuShowHelpText.Text = "&Show Help Text";
-			//
-			//btnShowInheritance
-			//
-			this.btnShowInheritance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnShowInheritance.Image = My.Resources.Inheritance;
-			this.btnShowInheritance.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnShowInheritance.Name = "btnShowInheritance";
-			this.btnShowInheritance.Size = new System.Drawing.Size(23, 22);
-			this.btnShowInheritance.Text = "Inheritance";
-			//
-			//btnShowDefaultInheritance
-			//
-			this.btnShowDefaultInheritance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnShowDefaultInheritance.Image = My.Resources.Inheritance_Default;
-			this.btnShowDefaultInheritance.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnShowDefaultInheritance.Name = "btnShowDefaultInheritance";
-			this.btnShowDefaultInheritance.Size = new System.Drawing.Size(23, 22);
-			this.btnShowDefaultInheritance.Text = "Default Inheritance";
-			//
-			//btnShowProperties
-			//
-			this.btnShowProperties.Checked = true;
-			this.btnShowProperties.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.btnShowProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnShowProperties.Image = My.Resources.Properties;
-			this.btnShowProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnShowProperties.Name = "btnShowProperties";
-			this.btnShowProperties.Size = new System.Drawing.Size(23, 22);
-			this.btnShowProperties.Text = "Properties";
-			//
-			//btnShowDefaultProperties
-			//
-			this.btnShowDefaultProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnShowDefaultProperties.Image = My.Resources.Properties_Default;
-			this.btnShowDefaultProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnShowDefaultProperties.Name = "btnShowDefaultProperties";
-			this.btnShowDefaultProperties.Size = new System.Drawing.Size(23, 22);
-			this.btnShowDefaultProperties.Text = "Default Properties";
-			//
-			//btnIcon
-			//
-			this.btnIcon.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.btnIcon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnIcon.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnIcon.Name = "btnIcon";
-			this.btnIcon.Size = new System.Drawing.Size(23, 22);
-			this.btnIcon.Text = "Icon";
-			//
-			//btnHostStatus
-			//
-			this.btnHostStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
-			this.btnHostStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnHostStatus.Image = My.Resources.HostStatus_Check;
-			this.btnHostStatus.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnHostStatus.Name = "btnHostStatus";
-			this.btnHostStatus.Size = new System.Drawing.Size(23, 22);
-			this.btnHostStatus.Tag = "checking";
-			this.btnHostStatus.Text = "Status";
-			//
-			//cMenIcons
-			//
-			this.cMenIcons.Name = "cMenIcons";
-			this.cMenIcons.Size = new System.Drawing.Size(61, 4);
-			//
-			//Config
-			//
-			this.ClientSize = new System.Drawing.Size(226, 530);
-			this.Controls.Add(this.pGrid);
-			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
-			this.HideOnClose = true;
-			this.Icon = My.Resources.Config_Icon;
-			this.Name = "Config";
-			this.TabText = "Config";
-			this.Text = "Config";
-			this.propertyGridContextMenu.ResumeLayout(false);
-			this.ResumeLayout(false);
+            pGrid.BrowsableProperties = null;
+            pGrid.ContextMenuStrip = propertyGridContextMenu;
+            pGrid.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
+            pGrid.HiddenAttributes = null;
+            pGrid.HiddenProperties = null;
+            pGrid.Location = new System.Drawing.Point(0, 0);
+            pGrid.Name = "pGrid";
+            pGrid.PropertySort = System.Windows.Forms.PropertySort.Categorized;
+            pGrid.Size = new System.Drawing.Size(226, 530);
+            pGrid.TabIndex = 0;
+            pGrid.UseCompatibleTextRendering = true;
+            //
+            //propertyGridContextMenu
+            //
+            propertyGridContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] { propertyGridContextMenuReset, ToolStripSeparator1, propertyGridContextMenuShowHelpText });
+            propertyGridContextMenu.Name = "propertyGridContextMenu";
+            propertyGridContextMenu.Size = new System.Drawing.Size(157, 76);
+            //
+            //propertyGridContextMenuReset
+            //
+            propertyGridContextMenuReset.Name = "propertyGridContextMenuReset";
+            propertyGridContextMenuReset.Size = new System.Drawing.Size(156, 22);
+            propertyGridContextMenuReset.Text = "&Reset";
+            //
+            //ToolStripSeparator1
+            //
+            ToolStripSeparator1.Name = "ToolStripSeparator1";
+            ToolStripSeparator1.Size = new System.Drawing.Size(153, 6);
+            //
+            //propertyGridContextMenuShowHelpText
+            //
+            propertyGridContextMenuShowHelpText.Name = "propertyGridContextMenuShowHelpText";
+            propertyGridContextMenuShowHelpText.Size = new System.Drawing.Size(156, 22);
+            propertyGridContextMenuShowHelpText.Text = "&Show Help Text";
+            //
+            //btnShowInheritance
+            //
+            btnShowInheritance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnShowInheritance.Image = My.Resources.Inheritance;
+            btnShowInheritance.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnShowInheritance.Name = "btnShowInheritance";
+            btnShowInheritance.Size = new System.Drawing.Size(23, 22);
+            btnShowInheritance.Text = "Inheritance";
+            //
+            //btnShowDefaultInheritance
+            //
+            btnShowDefaultInheritance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnShowDefaultInheritance.Image = My.Resources.Inheritance_Default;
+            btnShowDefaultInheritance.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnShowDefaultInheritance.Name = "btnShowDefaultInheritance";
+            btnShowDefaultInheritance.Size = new System.Drawing.Size(23, 22);
+            btnShowDefaultInheritance.Text = "Default Inheritance";
+            //
+            //btnShowProperties
+            //
+            btnShowProperties.Checked = true;
+            btnShowProperties.CheckState = System.Windows.Forms.CheckState.Checked;
+            btnShowProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnShowProperties.Image = My.Resources.Properties;
+            btnShowProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnShowProperties.Name = "btnShowProperties";
+            btnShowProperties.Size = new System.Drawing.Size(23, 22);
+            btnShowProperties.Text = "Properties";
+            //
+            //btnShowDefaultProperties
+            //
+            btnShowDefaultProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnShowDefaultProperties.Image = My.Resources.Properties_Default;
+            btnShowDefaultProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnShowDefaultProperties.Name = "btnShowDefaultProperties";
+            btnShowDefaultProperties.Size = new System.Drawing.Size(23, 22);
+            btnShowDefaultProperties.Text = "Default Properties";
+            //
+            //btnIcon
+            //
+            btnIcon.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnIcon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnIcon.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnIcon.Name = "btnIcon";
+            btnIcon.Size = new System.Drawing.Size(23, 22);
+            btnIcon.Text = "Icon";
+            //
+            //btnHostStatus
+            //
+            btnHostStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            btnHostStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            btnHostStatus.Image = My.Resources.HostStatus_Check;
+            btnHostStatus.ImageTransparentColor = System.Drawing.Color.Magenta;
+            btnHostStatus.Name = "btnHostStatus";
+            btnHostStatus.Size = new System.Drawing.Size(23, 22);
+            btnHostStatus.Tag = "checking";
+            btnHostStatus.Text = "Status";
+            //
+            //cMenIcons
+            //
+            cMenIcons.Name = "cMenIcons";
+            cMenIcons.Size = new System.Drawing.Size(61, 4);
+            //
+            //Config
+            //
+            ClientSize = new System.Drawing.Size(226, 530);
+            Controls.Add(pGrid);
+            Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
+            HideOnClose = true;
+            Icon = My.Resources.Config_Icon;
+            Name = "Config";
+            TabText = "Config";
+            Text = "Config";
+            propertyGridContextMenu.ResumeLayout(false);
+            ResumeLayout(false);
 					
 		}
         #endregion
@@ -193,7 +197,7 @@ namespace mRemoteNG.UI.Window
 		{
 			get
 			{
-				if (this.btnShowProperties.Checked)
+				if (btnShowProperties.Checked)
 				{
 					return true;
 				}
@@ -204,13 +208,13 @@ namespace mRemoteNG.UI.Window
 			}
 			set
 			{
-				this.btnShowProperties.Checked = value;
+                btnShowProperties.Checked = value;
 						
 				if (value == true)
 				{
-					this.btnShowInheritance.Checked = false;
-					this.btnShowDefaultInheritance.Checked = false;
-					this.btnShowDefaultProperties.Checked = false;
+                    btnShowInheritance.Checked = false;
+                    btnShowDefaultInheritance.Checked = false;
+                    btnShowDefaultProperties.Checked = false;
 				}
 			}
 		}
@@ -219,7 +223,7 @@ namespace mRemoteNG.UI.Window
 		{
 			get
 			{
-				if (this.btnShowInheritance.Checked)
+				if (btnShowInheritance.Checked)
 				{
 					return true;
 				}
@@ -230,13 +234,13 @@ namespace mRemoteNG.UI.Window
 			}
 			set
 			{
-				this.btnShowInheritance.Checked = value;
+                btnShowInheritance.Checked = value;
 						
 				if (value == true)
 				{
-					this.btnShowProperties.Checked = false;
-					this.btnShowDefaultInheritance.Checked = false;
-					this.btnShowDefaultProperties.Checked = false;
+                    btnShowProperties.Checked = false;
+                    btnShowDefaultInheritance.Checked = false;
+                    btnShowDefaultProperties.Checked = false;
 				}
 			}
 		}
@@ -245,7 +249,7 @@ namespace mRemoteNG.UI.Window
 		{
 			get
 			{
-				if (this.btnShowDefaultProperties.Checked)
+				if (btnShowDefaultProperties.Checked)
 				{
 					return true;
 				}
@@ -256,13 +260,13 @@ namespace mRemoteNG.UI.Window
 			}
 			set
 			{
-				this.btnShowDefaultProperties.Checked = value;
+                btnShowDefaultProperties.Checked = value;
 						
 				if (value == true)
 				{
-					this.btnShowProperties.Checked = false;
-					this.btnShowDefaultInheritance.Checked = false;
-					this.btnShowInheritance.Checked = false;
+                    btnShowProperties.Checked = false;
+                    btnShowDefaultInheritance.Checked = false;
+                    btnShowInheritance.Checked = false;
 				}
 			}
 		}
@@ -271,7 +275,7 @@ namespace mRemoteNG.UI.Window
 		{
 			get
 			{
-				if (this.btnShowDefaultInheritance.Checked)
+				if (btnShowDefaultInheritance.Checked)
 				{
 					return true;
 				}
@@ -282,13 +286,13 @@ namespace mRemoteNG.UI.Window
 			}
 			set
 			{
-				this.btnShowDefaultInheritance.Checked = value;
+                btnShowDefaultInheritance.Checked = value;
 						
 				if (value == true)
 				{
-					this.btnShowProperties.Checked = false;
-					this.btnShowDefaultProperties.Checked = false;
-					this.btnShowInheritance.Checked = false;
+                    btnShowProperties.Checked = false;
+                    btnShowDefaultProperties.Checked = false;
+                    btnShowInheritance.Checked = false;
 				}
 			}
 		}
@@ -297,9 +301,9 @@ namespace mRemoteNG.UI.Window
         #region Constructors
         public ConfigWindow(DockContent Panel)
         {
-            this.WindowType = WindowType.Config;
-            this.DockPnl = Panel;
-            this.InitializeComponent();
+            WindowType = WindowType.Config;
+            DockPnl = Panel;
+            InitializeComponent();
         }
         #endregion
 
@@ -371,7 +375,7 @@ namespace mRemoteNG.UI.Window
 			return false;
 		}
 				
-		private GridItem FindPreviousGridItemProperty(System.Collections.Generic.List<GridItem> gridItems, GridItem startItem)
+		private GridItem FindPreviousGridItemProperty(List<GridItem> gridItems, GridItem startItem)
 		{
 			if (gridItems.Count == 0)
 			{
@@ -428,7 +432,7 @@ namespace mRemoteNG.UI.Window
 			return gridItems[previousIndex];
 		}
 				
-		private GridItem FindNextGridItemProperty(System.Collections.Generic.List<GridItem> gridItems, GridItem startItem)
+		private GridItem FindNextGridItemProperty(List<GridItem> gridItems, GridItem startItem)
 		{
 			if (gridItems.Count == 0)
 			{
@@ -489,112 +493,112 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				this.btnShowProperties.Enabled = false;
-				this.btnShowInheritance.Enabled = false;
-				this.btnShowDefaultProperties.Enabled = false;
-				this.btnShowDefaultInheritance.Enabled = false;
-				this.btnIcon.Enabled = false;
-				this.btnHostStatus.Enabled = false;
+                btnShowProperties.Enabled = false;
+                btnShowInheritance.Enabled = false;
+                btnShowDefaultProperties.Enabled = false;
+                btnShowDefaultInheritance.Enabled = false;
+                btnIcon.Enabled = false;
+                btnHostStatus.Enabled = false;
+
+                btnIcon.Image = null;
 						
-				this.btnIcon.Image = null;
-						
-				if (Obj is mRemoteNG.Connection.ConnectionInfo) //CONNECTION INFO
+				if (Obj is ConnectionInfo) //CONNECTION INFO
 				{
-                    if (((mRemoteNG.Connection.ConnectionInfo)Obj).IsContainer == false) //NO CONTAINER
+                    if (((ConnectionInfo)Obj).IsContainer == false) //NO CONTAINER
 					{
-						if (this.PropertiesVisible) //Properties selected
+						if (PropertiesVisible) //Properties selected
 						{
-							this.pGrid.SelectedObject = Obj;
-									
-							this.btnShowProperties.Enabled = true;
-                            if (((mRemoteNG.Connection.ConnectionInfo)Obj).Parent != null)
+                            pGrid.SelectedObject = Obj;
+
+                            btnShowProperties.Enabled = true;
+                            if (((ConnectionInfo)Obj).Parent != null)
 							{
-								this.btnShowInheritance.Enabled = true;
+                                btnShowInheritance.Enabled = true;
 							}
 							else
 							{
-								this.btnShowInheritance.Enabled = false;
+                                btnShowInheritance.Enabled = false;
 							}
-							this.btnShowDefaultProperties.Enabled = false;
-							this.btnShowDefaultInheritance.Enabled = false;
+                            btnShowDefaultProperties.Enabled = false;
+                            btnShowDefaultInheritance.Enabled = false;
 							btnIcon.Enabled = true;
-							this.btnHostStatus.Enabled = true;
+                            btnHostStatus.Enabled = true;
 						}
-						else if (this.DefaultPropertiesVisible) //Defaults selected
+						else if (DefaultPropertiesVisible) //Defaults selected
 						{
-							this.pGrid.SelectedObject = Obj;
+                            pGrid.SelectedObject = Obj;
 
-                            if (((mRemoteNG.Connection.ConnectionInfo)Obj).IsDefault) //Is the default connection
+                            if (((ConnectionInfo)Obj).IsDefault) //Is the default connection
 							{
-								this.btnShowProperties.Enabled = true;
-								this.btnShowInheritance.Enabled = false;
-								this.btnShowDefaultProperties.Enabled = true;
-								this.btnShowDefaultInheritance.Enabled = true;
-								this.btnIcon.Enabled = true;
-								this.btnHostStatus.Enabled = false;
+                                btnShowProperties.Enabled = true;
+                                btnShowInheritance.Enabled = false;
+                                btnShowDefaultProperties.Enabled = true;
+                                btnShowDefaultInheritance.Enabled = true;
+                                btnIcon.Enabled = true;
+                                btnHostStatus.Enabled = false;
 							}
 							else //is not the default connection
 							{
-								this.btnShowProperties.Enabled = true;
-								this.btnShowInheritance.Enabled = true;
-								this.btnShowDefaultProperties.Enabled = false;
-								this.btnShowDefaultInheritance.Enabled = false;
-								this.btnIcon.Enabled = true;
-								this.btnHostStatus.Enabled = true;
-										
-								this.PropertiesVisible = true;
+                                btnShowProperties.Enabled = true;
+                                btnShowInheritance.Enabled = true;
+                                btnShowDefaultProperties.Enabled = false;
+                                btnShowDefaultInheritance.Enabled = false;
+                                btnIcon.Enabled = true;
+                                btnHostStatus.Enabled = true;
+
+                                PropertiesVisible = true;
 							}
 						}
-						else if (this.InheritanceVisible) //Inheritance selected
+						else if (InheritanceVisible) //Inheritance selected
 						{
-                            this.pGrid.SelectedObject = ((mRemoteNG.Connection.ConnectionInfo)Obj).Inherit;
-									
-							this.btnShowProperties.Enabled = true;
-							this.btnShowInheritance.Enabled = true;
-							this.btnShowDefaultProperties.Enabled = false;
-							this.btnShowDefaultInheritance.Enabled = false;
-							this.btnIcon.Enabled = true;
-							this.btnHostStatus.Enabled = true;
+                            pGrid.SelectedObject = ((ConnectionInfo)Obj).Inherit;
+
+                            btnShowProperties.Enabled = true;
+                            btnShowInheritance.Enabled = true;
+                            btnShowDefaultProperties.Enabled = false;
+                            btnShowDefaultInheritance.Enabled = false;
+                            btnIcon.Enabled = true;
+                            btnHostStatus.Enabled = true;
 						}
-						else if (this.DefaultInheritanceVisible) //Default Inhertiance selected
+						else if (DefaultInheritanceVisible) //Default Inhertiance selected
 						{
 							pGrid.SelectedObject = Obj;
-									
-							this.btnShowProperties.Enabled = true;
-							this.btnShowInheritance.Enabled = true;
-							this.btnShowDefaultProperties.Enabled = false;
-							this.btnShowDefaultInheritance.Enabled = false;
-							this.btnIcon.Enabled = true;
-							this.btnHostStatus.Enabled = true;
-									
-							this.PropertiesVisible = true;
+
+                            btnShowProperties.Enabled = true;
+                            btnShowInheritance.Enabled = true;
+                            btnShowDefaultProperties.Enabled = false;
+                            btnShowDefaultInheritance.Enabled = false;
+                            btnIcon.Enabled = true;
+                            btnHostStatus.Enabled = true;
+
+                            PropertiesVisible = true;
 						}
 					}
-                    else if (((mRemoteNG.Connection.ConnectionInfo)Obj).IsContainer) //CONTAINER
+                    else if (((ConnectionInfo)Obj).IsContainer) //CONTAINER
 					{
-						this.pGrid.SelectedObject = Obj;
-								
-						this.btnShowProperties.Enabled = true;
-                        if (((mRemoteNG.Container.ContainerInfo)((mRemoteNG.Connection.ConnectionInfo)Obj).Parent).Parent != null)
+                        pGrid.SelectedObject = Obj;
+
+                        btnShowProperties.Enabled = true;
+                        if (((Container.ContainerInfo)((ConnectionInfo)Obj).Parent).Parent != null)
 						{
-							this.btnShowInheritance.Enabled = true;
+                            btnShowInheritance.Enabled = true;
 						}
 						else
 						{
-							this.btnShowInheritance.Enabled = false;
+                            btnShowInheritance.Enabled = false;
 						}
-						this.btnShowDefaultProperties.Enabled = false;
-						this.btnShowDefaultInheritance.Enabled = false;
-						this.btnIcon.Enabled = true;
-						this.btnHostStatus.Enabled = false;
-								
-						this.PropertiesVisible = true;
+                        btnShowDefaultProperties.Enabled = false;
+                        btnShowDefaultInheritance.Enabled = false;
+                        btnIcon.Enabled = true;
+                        btnHostStatus.Enabled = false;
+
+                        PropertiesVisible = true;
 					}
 
-                    Icon conIcon = mRemoteNG.Connection.ConnectionIcon.FromString(System.Convert.ToString(((mRemoteNG.Connection.ConnectionInfo)Obj).Icon));
+                    Icon conIcon = ConnectionIcon.FromString(Convert.ToString(((ConnectionInfo)Obj).Icon));
 					if (conIcon != null)
 					{
-						this.btnIcon.Image = conIcon.ToBitmap();
+                        btnIcon.Image = conIcon.ToBitmap();
 					}
 				}
 				else if (Obj is Root.Info) //ROOT
@@ -629,50 +633,50 @@ namespace mRemoteNG.UI.Window
 				}
 				else if (Obj is ConnectionInfoInheritance) //INHERITANCE
 				{
-					this.pGrid.SelectedObject = Obj;
+                    pGrid.SelectedObject = Obj;
 							
-					if (this.InheritanceVisible)
+					if (InheritanceVisible)
 					{
-						this.InheritanceVisible = true;
-						this.btnShowProperties.Enabled = true;
-						this.btnShowInheritance.Enabled = true;
-						this.btnShowDefaultProperties.Enabled = false;
-						this.btnShowDefaultInheritance.Enabled = false;
-						this.btnIcon.Enabled = true;
-                        this.btnHostStatus.Enabled = !((ConnectionInfo)((ConnectionInfoInheritance)Obj).Parent).IsContainer;
-						this.InheritanceVisible = true;
+                        InheritanceVisible = true;
+                        btnShowProperties.Enabled = true;
+                        btnShowInheritance.Enabled = true;
+                        btnShowDefaultProperties.Enabled = false;
+                        btnShowDefaultInheritance.Enabled = false;
+                        btnIcon.Enabled = true;
+                        btnHostStatus.Enabled = !((ConnectionInfo)((ConnectionInfoInheritance)Obj).Parent).IsContainer;
+                        InheritanceVisible = true;
                         Icon conIcon = ConnectionIcon.FromString(Convert.ToString(((ConnectionInfo)((ConnectionInfoInheritance)Obj).Parent).Icon));
 						if (conIcon != null)
 						{
-							this.btnIcon.Image = conIcon.ToBitmap();
+                            btnIcon.Image = conIcon.ToBitmap();
 						}
 					}
-					else if (this.DefaultInheritanceVisible)
+					else if (DefaultInheritanceVisible)
 					{
-						this.btnShowProperties.Enabled = true;
-						this.btnShowInheritance.Enabled = false;
-						this.btnShowDefaultProperties.Enabled = true;
-						this.btnShowDefaultInheritance.Enabled = true;
-						this.btnIcon.Enabled = false;
-						this.btnHostStatus.Enabled = false;
-								
-						this.DefaultInheritanceVisible = true;
+                        btnShowProperties.Enabled = true;
+                        btnShowInheritance.Enabled = false;
+                        btnShowDefaultProperties.Enabled = true;
+                        btnShowDefaultInheritance.Enabled = true;
+                        btnIcon.Enabled = false;
+                        btnHostStatus.Enabled = false;
+
+                        DefaultInheritanceVisible = true;
 					}
 							
 				}
-						
-				this.ShowHideGridItems();
-				this.SetHostStatus(Obj);
+
+                ShowHideGridItems();
+                SetHostStatus(Obj);
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridObjectFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConfigPropertyGridObjectFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
 		public void pGrid_SelectedObjectChanged()
 		{
-			this.ShowHideGridItems();
+            ShowHideGridItems();
 		}
         #endregion
 		
@@ -701,10 +705,7 @@ namespace mRemoteNG.UI.Window
 			pGrid.HelpForeColor = Themes.ThemeManager.ActiveTheme.ConfigPanelHelpTextColor;
 			pGrid.CategoryForeColor = Themes.ThemeManager.ActiveTheme.ConfigPanelCategoryTextColor;
 		}
-				
-		private bool _originalPropertyGridToolStripItemCountValid;
-		private int _originalPropertyGridToolStripItemCount;
-				
+		
 		private void AddToolStripItems()
 		{
 			try
@@ -721,7 +722,7 @@ namespace mRemoteNG.UI.Window
 				ToolStrip propertyGridToolStrip = new ToolStrip();
 						
 				ToolStrip toolStrip = null;
-				foreach (System.Windows.Forms.Control control in pGrid.Controls)
+				foreach (Control control in pGrid.Controls)
 				{
                     toolStrip = control as ToolStrip;
                     if (toolStrip != null)
@@ -733,7 +734,7 @@ namespace mRemoteNG.UI.Window
 						
 				if (toolStrip == null)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strCouldNotFindToolStripInFilteredPropertyGrid, true);
+					Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strCouldNotFindToolStripInFilteredPropertyGrid, true);
 					return ;
 				}
 						
@@ -756,11 +757,11 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strConfigUiLoadFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigUiLoadFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
-		private void Config_Load(object sender, System.EventArgs e)
+		private void Config_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
 			Themes.ThemeManager.ThemeChanged += ApplyTheme;
@@ -769,106 +770,102 @@ namespace mRemoteNG.UI.Window
 			pGrid.HelpVisible = My.Settings.Default.ShowConfigHelpText;
 		}
 				
-		private void Config_SystemColorsChanged(System.Object sender, System.EventArgs e)
+		private void Config_SystemColorsChanged(object sender, EventArgs e)
 		{
 			AddToolStripItems();
 		}
 				
-		private void pGrid_PropertyValueChanged(object s, System.Windows.Forms.PropertyValueChangedEventArgs e)
+		private void pGrid_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
 		{
 			try
+            {
+                UpdateConnectionInfoNode(e);
+                UpdateRootInfoNode(e);
+                UpdateInheritanceNode();
+                ShowHideGridItems();
+                Runtime.SaveConnectionsBG();
+            }
+            catch (Exception ex)
 			{
-				if (this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionInfo)
-				{
-					if (e.ChangedItem.Label == My.Language.strPropertyNameProtocol)
-					{
-                        ((mRemoteNG.Connection.ConnectionInfo)this.pGrid.SelectedObject).SetDefaultPort();
-					}
-					else if (e.ChangedItem.Label == My.Language.strPropertyNameName)
-					{
-						Windows.treeForm.tvConnections.SelectedNode.Text = System.Convert.ToString(((System.Windows.Forms.Control)this.pGrid.SelectedObject).Name);
-						if (My.Settings.Default.SetHostnameLikeDisplayName && this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionInfo)
-						{
-							mRemoteNG.Connection.ConnectionInfo connectionInfo = (mRemoteNG.Connection.ConnectionInfo) this.pGrid.SelectedObject;
-							if (!string.IsNullOrEmpty(connectionInfo.Name))
-							{
-								connectionInfo.Hostname = connectionInfo.Name;
-							}
-						}
-					}
-					else if (e.ChangedItem.Label == My.Language.strPropertyNameIcon)
-					{
-                        Icon conIcon = mRemoteNG.Connection.ConnectionIcon.FromString(System.Convert.ToString(((mRemoteNG.Connection.ConnectionInfo)this.pGrid.SelectedObject).Icon));
-						if (conIcon != null)
-						{
-							this.btnIcon.Image = conIcon.ToBitmap();
-						}
-					}
-					else if (e.ChangedItem.Label == My.Language.strPropertyNameAddress)
-					{
-						this.SetHostStatus(this.pGrid.SelectedObject);
-					}
-
-                    if (((mRemoteNG.Connection.ConnectionInfo)this.pGrid.SelectedObject).IsDefault)
-					{
-						App.Runtime.DefaultConnectionToSettings();
-					}
-				}
-						
-				Info rootInfo = (Info)pGrid.SelectedObject;
-				if (rootInfo != null)
-				{
-					switch (e.ChangedItem.PropertyDescriptor.Name)
-					{
-						case "Password":
-							if (rootInfo.Password == true)
-							{
-								string passwordName = "";
-								if (My.Settings.Default.UseSQLServer)
-								{
-									passwordName = Language.strSQLServer.TrimEnd(':');
-								}
-								else
-								{
-									passwordName = Path.GetFileName(Runtime.GetStartupConnectionFileName());
-								}
-										
-								string password = Tools.MiscTools.PasswordDialog(passwordName);
-										
-								if (string.IsNullOrEmpty(password))
-								{
-									rootInfo.Password = false;
-								}
-								else
-								{
-									rootInfo.PasswordString = password;
-								}
-							}
-							break;
-						case "Name":
-							break;
-							//Windows.treeForm.tvConnections.SelectedNode.Text = pGrid.SelectedObject.Name
-					}
-				}
-						
-				if (this.pGrid.SelectedObject is ConnectionInfoInheritance)
-				{
-                    if (((ConnectionInfoInheritance)this.pGrid.SelectedObject).IsDefault)
-					{
-						App.Runtime.DefaultInheritanceToSettings();
-					}
-				}
-						
-				this.ShowHideGridItems();
-				App.Runtime.SaveConnectionsBG();
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridValueFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConfigPropertyGridValueFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
-		private void pGrid_PropertySortChanged(object sender, EventArgs e)
+
+        private void UpdateConnectionInfoNode(PropertyValueChangedEventArgs e)
+        {
+            if (pGrid.SelectedObject is ConnectionInfo)
+            {
+                if (e.ChangedItem.Label == My.Language.strPropertyNameProtocol)
+                {
+                    ((ConnectionInfo)pGrid.SelectedObject).SetDefaultPort();
+                }
+                else if (e.ChangedItem.Label == My.Language.strPropertyNameName)
+                {
+                    Windows.treeForm.tvConnections.SelectedNode.Text = Convert.ToString(((ConnectionInfo)pGrid.SelectedObject).Name);
+                    if (My.Settings.Default.SetHostnameLikeDisplayName && pGrid.SelectedObject is ConnectionInfo)
+                    {
+                        ConnectionInfo connectionInfo = (ConnectionInfo)pGrid.SelectedObject;
+                        if (!string.IsNullOrEmpty(connectionInfo.Name))
+                            connectionInfo.Hostname = connectionInfo.Name;
+                    }
+                }
+                else if (e.ChangedItem.Label == My.Language.strPropertyNameIcon)
+                {
+                    Icon conIcon = ConnectionIcon.FromString(Convert.ToString(((ConnectionInfo)pGrid.SelectedObject).Icon));
+                    if (conIcon != null)
+                        btnIcon.Image = conIcon.ToBitmap();
+                }
+                else if (e.ChangedItem.Label == My.Language.strPropertyNameAddress)
+                {
+                    SetHostStatus(pGrid.SelectedObject);
+                }
+
+                if (((ConnectionInfo)pGrid.SelectedObject).IsDefault)
+                    Runtime.DefaultConnectionToSettings();
+            }
+        }
+
+        private void UpdateRootInfoNode(PropertyValueChangedEventArgs e)
+        {
+            if (pGrid.SelectedObject is Info)
+            {
+                Info rootInfo = (Info)pGrid.SelectedObject;
+                switch (e.ChangedItem.PropertyDescriptor.Name)
+                {
+                    case "Password":
+                        if (rootInfo.Password == true)
+                        {
+                            string passwordName = "";
+                            if (My.Settings.Default.UseSQLServer)
+                                passwordName = Language.strSQLServer.TrimEnd(':');
+                            else
+                                passwordName = Path.GetFileName(Runtime.GetStartupConnectionFileName());
+
+                            string password = MiscTools.PasswordDialog(passwordName);
+                            if (string.IsNullOrEmpty(password))
+                                rootInfo.Password = false;
+                            else
+                                rootInfo.PasswordString = password;
+                        }
+                        break;
+                    case "Name":
+                        break;
+                }
+            }
+        }
+
+        private void UpdateInheritanceNode()
+        {
+            if (pGrid.SelectedObject is ConnectionInfoInheritance)
+            {
+                if (((ConnectionInfoInheritance)pGrid.SelectedObject).IsDefault)
+                {
+                    Runtime.DefaultInheritanceToSettings();
+                }
+            }
+        }
+
+        private void pGrid_PropertySortChanged(object sender, EventArgs e)
 		{
 			if (pGrid.PropertySort == PropertySort.CategorizedAlphabetical)
 			{
@@ -882,9 +879,9 @@ namespace mRemoteNG.UI.Window
 			{
 				System.Collections.Generic.List<string> strHide = new System.Collections.Generic.List<string>();
 						
-				if (this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionInfo)
+				if (pGrid.SelectedObject is ConnectionInfo)
 				{
-                    mRemoteNG.Connection.ConnectionInfo conI = (mRemoteNG.Connection.ConnectionInfo)pGrid.SelectedObject;
+                    ConnectionInfo conI = (ConnectionInfo)pGrid.SelectedObject;
 							
 					switch (conI.Protocol)
 					{
@@ -1619,90 +1616,90 @@ namespace mRemoteNG.UI.Window
 						strHide.Add("Password");
 					}
 				}
-						
-				this.pGrid.HiddenProperties = strHide.ToArray();
-						
-				this.pGrid.Refresh();
+
+                pGrid.HiddenProperties = strHide.ToArray();
+
+                pGrid.Refresh();
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridHideItemsFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConfigPropertyGridHideItemsFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
-		private void btnShowProperties_Click(object sender, System.EventArgs e)
+		private void btnShowProperties_Click(object sender, EventArgs e)
 		{
-			if (this.pGrid.SelectedObject is ConnectionInfoInheritance)
+			if (pGrid.SelectedObject is ConnectionInfoInheritance)
 			{
-				if (((ConnectionInfoInheritance)this.pGrid.SelectedObject).IsDefault)
+				if (((ConnectionInfoInheritance)pGrid.SelectedObject).IsDefault)
 				{
-					this.PropertiesVisible = true;
-					this.InheritanceVisible = false;
-					this.DefaultPropertiesVisible = false;
-					this.DefaultInheritanceVisible = false;
-                    this.SetPropertyGridObject((mRemoteNG.Root.Info)Windows.treeForm.tvConnections.SelectedNode.Tag);
+                    PropertiesVisible = true;
+                    InheritanceVisible = false;
+                    DefaultPropertiesVisible = false;
+                    DefaultInheritanceVisible = false;
+                    SetPropertyGridObject((mRemoteNG.Root.Info)Windows.treeForm.tvConnections.SelectedNode.Tag);
 				}
 				else
 				{
-					this.PropertiesVisible = true;
-					this.InheritanceVisible = false;
-					this.DefaultPropertiesVisible = false;
-					this.DefaultInheritanceVisible = false;
-                    this.SetPropertyGridObject(((ConnectionInfoInheritance)this.pGrid.SelectedObject).Parent);
+                    PropertiesVisible = true;
+                    InheritanceVisible = false;
+                    DefaultPropertiesVisible = false;
+                    DefaultInheritanceVisible = false;
+                    SetPropertyGridObject(((ConnectionInfoInheritance)pGrid.SelectedObject).Parent);
 				}
 			}
-			else if (this.pGrid.SelectedObject is mRemoteNG.Connection.ConnectionInfo)
+			else if (pGrid.SelectedObject is ConnectionInfo)
 			{
-                if (((ConnectionInfo)this.pGrid.SelectedObject).IsDefault)
+                if (((ConnectionInfo)pGrid.SelectedObject).IsDefault)
 				{
-					this.PropertiesVisible = true;
-					this.InheritanceVisible = false;
-					this.DefaultPropertiesVisible = false;
-					this.DefaultInheritanceVisible = false;
-                    this.SetPropertyGridObject((mRemoteNG.Root.Info)Windows.treeForm.tvConnections.SelectedNode.Tag);
+                    PropertiesVisible = true;
+                    InheritanceVisible = false;
+                    DefaultPropertiesVisible = false;
+                    DefaultInheritanceVisible = false;
+                    SetPropertyGridObject((mRemoteNG.Root.Info)Windows.treeForm.tvConnections.SelectedNode.Tag);
 				}
 			}
 		}
 				
-		private void btnShowDefaultProperties_Click(object sender, System.EventArgs e)
+		private void btnShowDefaultProperties_Click(object sender, EventArgs e)
 		{
-			if (this.pGrid.SelectedObject is mRemoteNG.Root.Info|| this.pGrid.SelectedObject is ConnectionInfoInheritance)
+			if (pGrid.SelectedObject is mRemoteNG.Root.Info || pGrid.SelectedObject is ConnectionInfoInheritance)
 			{
-				this.PropertiesVisible = false;
-				this.InheritanceVisible = false;
-				this.DefaultPropertiesVisible = true;
-				this.DefaultInheritanceVisible = false;
-				this.SetPropertyGridObject(App.Runtime.DefaultConnectionFromSettings());
+                PropertiesVisible = false;
+                InheritanceVisible = false;
+                DefaultPropertiesVisible = true;
+                DefaultInheritanceVisible = false;
+                SetPropertyGridObject(Runtime.DefaultConnectionFromSettings());
 			}
 		}
 				
-		private void btnShowInheritance_Click(object sender, System.EventArgs e)
+		private void btnShowInheritance_Click(object sender, EventArgs e)
 		{
-			if (this.pGrid.SelectedObject is ConnectionInfo)
+			if (pGrid.SelectedObject is ConnectionInfo)
 			{
-				this.PropertiesVisible = false;
-				this.InheritanceVisible = true;
-				this.DefaultPropertiesVisible = false;
-				this.DefaultInheritanceVisible = false;
-				this.SetPropertyGridObject(((ConnectionInfo)this.pGrid.SelectedObject).Inherit);
+                PropertiesVisible = false;
+                InheritanceVisible = true;
+                DefaultPropertiesVisible = false;
+                DefaultInheritanceVisible = false;
+                SetPropertyGridObject(((ConnectionInfo)pGrid.SelectedObject).Inherit);
 			}
 		}
 				
-		private void btnShowDefaultInheritance_Click(object sender, System.EventArgs e)
+		private void btnShowDefaultInheritance_Click(object sender, EventArgs e)
 		{
-			if (this.pGrid.SelectedObject is mRemoteNG.Root.Info|| this.pGrid.SelectedObject is ConnectionInfo)
+			if (pGrid.SelectedObject is mRemoteNG.Root.Info || pGrid.SelectedObject is ConnectionInfo)
 			{
-				this.PropertiesVisible = false;
-				this.InheritanceVisible = false;
-				this.DefaultPropertiesVisible = false;
-				this.DefaultInheritanceVisible = true;
-				this.SetPropertyGridObject(App.Runtime.DefaultInheritanceFromSettings());
+                PropertiesVisible = false;
+                InheritanceVisible = false;
+                DefaultPropertiesVisible = false;
+                DefaultInheritanceVisible = true;
+                SetPropertyGridObject(Runtime.DefaultInheritanceFromSettings());
 			}
 		}
 				
-		private void btnHostStatus_Click(object sender, System.EventArgs e)
+		private void btnHostStatus_Click(object sender, EventArgs e)
 		{
-			SetHostStatus(this.pGrid.SelectedObject);
+			SetHostStatus(pGrid.SelectedObject);
 		}
 				
 		private void btnIcon_Click(object sender, System.Windows.Forms.MouseEventArgs e)
@@ -1711,7 +1708,7 @@ namespace mRemoteNG.UI.Window
 			{
 				if (pGrid.SelectedObject is ConnectionInfo&& !(pGrid.SelectedObject is PuttySessionInfo))
 				{
-					this.cMenIcons.Items.Clear();
+                    cMenIcons.Items.Clear();
 							
 					foreach (string iStr in ConnectionIcon.Icons)
 					{
@@ -1719,16 +1716,16 @@ namespace mRemoteNG.UI.Window
 						tI.Text = iStr;
 						tI.Image = ConnectionIcon.FromString(iStr).ToBitmap();
 						tI.Click += IconMenu_Click;
-								
-						this.cMenIcons.Items.Add(tI);
+
+                        cMenIcons.Items.Add(tI);
 					}
-					Point mPos = new Point(new System.Drawing.Size(PointToScreen(new Point(e.Location.X + this.pGrid.Width - 100, e.Location.Y))));
-					this.cMenIcons.Show(mPos);
+					Point mPos = new Point(new System.Drawing.Size(PointToScreen(new Point(e.Location.X + pGrid.Width - 100, e.Location.Y))));
+                    cMenIcons.Show(mPos);
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridButtonIconClickFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConfigPropertyGridButtonIconClickFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -1769,7 +1766,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strConfigPropertyGridMenuClickFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigPropertyGridMenuClickFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -1788,14 +1785,14 @@ namespace mRemoteNG.UI.Window
 				pReply = pingSender.Send(HostName);
 				if (pReply.Status == IPStatus.Success)
 				{
-					if ((string) this.btnHostStatus.Tag == "checking")
+					if ((string)btnHostStatus.Tag == "checking")
 					{
 						ShowStatusImage(My.Resources.HostStatus_On);
 					}
 				}
 				else
 				{
-					if ((string) this.btnHostStatus.Tag == "checking")
+					if ((string)btnHostStatus.Tag == "checking")
 					{
 						ShowStatusImage(My.Resources.HostStatus_Off);
 					}
@@ -1803,7 +1800,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception)
 			{
-				if ((string) this.btnHostStatus.Tag == "checking")
+				if ((string)btnHostStatus.Tag == "checking")
 				{
 					ShowStatusImage(My.Resources.HostStatus_Off);
 				}
@@ -1813,15 +1810,15 @@ namespace mRemoteNG.UI.Window
 		delegate void ShowStatusImageCB(Image Image);
 		private void ShowStatusImage(Image Image)
 		{
-			if (this.pGrid.InvokeRequired)
+			if (pGrid.InvokeRequired)
 			{
 				ShowStatusImageCB d = new ShowStatusImageCB(ShowStatusImage);
-				this.pGrid.Invoke(d, new object[] {Image});
+                pGrid.Invoke(d, new object[] {Image});
 			}
 			else
 			{
-				this.btnHostStatus.Image = Image;
-				this.btnHostStatus.Tag = "checkfinished";
+                btnHostStatus.Image = Image;
+                btnHostStatus.Tag = "checkfinished";
 			}
 		}
 				
@@ -1829,11 +1826,11 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				this.btnHostStatus.Image = My.Resources.HostStatus_Check;
+                btnHostStatus.Image = My.Resources.HostStatus_Check;
 				// To check status, ConnectionInfo must be an mRemoteNG.Connection.Info that is not a container
-				if (ConnectionInfo is mRemoteNG.Connection.ConnectionInfo)
+				if (ConnectionInfo is ConnectionInfo)
 				{
-                    if (((mRemoteNG.Connection.ConnectionInfo)ConnectionInfo).IsContainer)
+                    if (((ConnectionInfo)ConnectionInfo).IsContainer)
 					{
 						return;
 					}
@@ -1842,9 +1839,9 @@ namespace mRemoteNG.UI.Window
 				{
 					return;
 				}
-						
-				this.btnHostStatus.Tag = "checking";
-                HostName = ((mRemoteNG.Connection.ConnectionInfo)ConnectionInfo).Hostname;
+
+                btnHostStatus.Tag = "checking";
+                HostName = ((ConnectionInfo)ConnectionInfo).Hostname;
 				pThread = new System.Threading.Thread(new System.Threading.ThreadStart(CheckHostAlive));
 				pThread.SetApartmentState(System.Threading.ApartmentState.STA);
 				pThread.IsBackground = true;
@@ -1852,7 +1849,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strConfigPropertyGridSetHostStatusFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConfigPropertyGridSetHostStatusFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -1864,7 +1861,7 @@ namespace mRemoteNG.UI.Window
 			{
 				propertyGridContextMenuShowHelpText.Checked = My.Settings.Default.ShowConfigHelpText;
 				GridItem gridItem = pGrid.SelectedGridItem;
-				propertyGridContextMenuReset.Enabled = System.Convert.ToBoolean(pGrid.SelectedObject != null && gridItem != null && gridItem.PropertyDescriptor != null && gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject));
+				propertyGridContextMenuReset.Enabled = Convert.ToBoolean(pGrid.SelectedObject != null && gridItem != null && gridItem.PropertyDescriptor != null && gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject));
 			}
 			catch (Exception ex)
 			{
@@ -1872,7 +1869,7 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		private void propertyGridContextMenuReset_Click(System.Object sender, EventArgs e)
+		private void propertyGridContextMenuReset_Click(object sender, EventArgs e)
 		{
 			try
 			{
