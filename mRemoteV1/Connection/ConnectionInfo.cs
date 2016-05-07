@@ -20,7 +20,7 @@ using mRemoteNG.Messages;
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public partial class ConnectionInfo
+    public partial class ConnectionInfo : Parent,Inheritance
     {
         #region Private Properties
         // Private properties with public get/set
@@ -32,7 +32,7 @@ namespace mRemoteNG.Connection
         private string _username;
         private string _password;
         private string _domain;
-        private Protocol.ProtocolType _protocol;
+        private ProtocolType _protocol;
         private string _extApp;
         private int _port;
         private string _puttySession;
@@ -77,8 +77,8 @@ namespace mRemoteNG.Connection
         private ProtocolVNC.Colors _vncColors;
         private ProtocolVNC.SmartSizeMode _vncSmartSizeMode;
         private bool _vncViewOnly;
-        private ConnectionInfoInheritance _Inherit;
-        private Protocol.ProtocolList _OpenConnections;
+        private ConnectionInfoInheritance _Inheritance;
+        private ProtocolList _OpenConnections;
         private bool _IsContainer;
         private bool _IsDefault;
         private int _PositionID;
@@ -179,7 +179,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameProtocol"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionProtocol"), 
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
-        public virtual Protocol.ProtocolType Protocol
+        public virtual ProtocolType Protocol
 		{
             get { return GetPropertyValue("Protocol", _protocol); }
 			set { _protocol = value; }
@@ -631,14 +631,14 @@ namespace mRemoteNG.Connection
         #endregion
         #region Non-browsable public properties
         [Browsable(false)]
-        public ConnectionInfoInheritance Inherit
+        public ConnectionInfoInheritance Inheritance
         {
-            get { return _Inherit; }
-            set { _Inherit = value; }
+            get { return _Inheritance; }
+            set { _Inheritance = value; }
         }
         
         [Browsable(false)]
-        public Protocol.ProtocolList OpenConnections
+        public ProtocolList OpenConnections
         {
             get { return _OpenConnections; }
             set { _OpenConnections = value; }
@@ -781,9 +781,9 @@ namespace mRemoteNG.Connection
         private bool IsInheritanceTurnedOnForThisProperty(string propertyName)
         {
             bool inheritPropertyValue = false;
-            Type inheritType = _Inherit.GetType();
+            Type inheritType = _Inheritance.GetType();
             PropertyInfo inheritPropertyInfo = inheritType.GetProperty(propertyName);
-            inheritPropertyValue = Convert.ToBoolean(inheritPropertyInfo.GetValue(Inherit, BindingFlags.GetProperty, null, null, null));
+            inheritPropertyValue = Convert.ToBoolean(inheritPropertyInfo.GetValue(Inheritance, BindingFlags.GetProperty, null, null, null));
             return inheritPropertyValue;
         }
 
@@ -928,7 +928,7 @@ namespace mRemoteNG.Connection
 
         private void SetNonBrowsablePropertiesDefaults()
         {
-            _Inherit = new ConnectionInfoInheritance(this);
+            _Inheritance = new ConnectionInfoInheritance(this);
             _OpenConnections = new ProtocolList();
             _IsContainer = false;
             _IsDefault = false;

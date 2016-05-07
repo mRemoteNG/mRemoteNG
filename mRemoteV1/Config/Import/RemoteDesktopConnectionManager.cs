@@ -17,7 +17,7 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Images;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-
+using mRemoteNG.Tree;
 
 namespace mRemoteNG.Config.Import
 {
@@ -64,13 +64,13 @@ namespace mRemoteNG.Config.Import
 			containerInfo.ConnectionInfo = connectionInfo;
 				
 			// We can only inherit from a container node, not the root node or connection nodes
-			if (Tree.ConnectionTreeNode.GetNodeType(parentTreeNode) == Tree.TreeNodeType.Container)
+			if (ConnectionTreeNode.GetNodeType(parentTreeNode) == TreeNodeType.Container)
 			{
-				containerInfo.Parent = parentTreeNode.Tag;
+				containerInfo.Parent = (ContainerInfo)parentTreeNode.Tag;
 			}
 			else
 			{
-				connectionInfo.Inherit.TurnOffInheritanceCompletely();
+				connectionInfo.Inheritance.DisableInheritance();
 			}
 				
 			treeNode.Name = name;
@@ -121,7 +121,7 @@ namespace mRemoteNG.Config.Import
         private static ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
 		{
 			ConnectionInfo connectionInfo = new ConnectionInfo();
-			connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo);
+			connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
 				
 			string name = xmlNode.SelectSingleNode("./name").InnerText;
 				
@@ -159,9 +159,9 @@ namespace mRemoteNG.Config.Import
 			}
 			else
 			{
-				connectionInfo.Inherit.Username = true;
-				connectionInfo.Inherit.Password = true;
-				connectionInfo.Inherit.Domain = true;
+				connectionInfo.Inheritance.Username = true;
+				connectionInfo.Inheritance.Password = true;
+				connectionInfo.Inheritance.Domain = true;
 			}
 				
 			XmlNode connectionSettingsNode = xmlNode.SelectSingleNode("./connectionSettings");
@@ -174,8 +174,8 @@ namespace mRemoteNG.Config.Import
 			}
 			else
 			{
-				connectionInfo.Inherit.UseConsoleSession = true;
-				connectionInfo.Inherit.Port = true;
+				connectionInfo.Inheritance.UseConsoleSession = true;
+				connectionInfo.Inheritance.Port = true;
 			}
 				
 			XmlNode gatewaySettingsNode = xmlNode.SelectSingleNode("./gatewaySettings");
@@ -210,11 +210,11 @@ namespace mRemoteNG.Config.Import
 			}
 			else
 			{
-				connectionInfo.Inherit.RDGatewayUsageMethod = true;
-				connectionInfo.Inherit.RDGatewayHostname = true;
-				connectionInfo.Inherit.RDGatewayUsername = true;
-				connectionInfo.Inherit.RDGatewayPassword = true;
-				connectionInfo.Inherit.RDGatewayDomain = true;
+				connectionInfo.Inheritance.RDGatewayUsageMethod = true;
+				connectionInfo.Inheritance.RDGatewayHostname = true;
+				connectionInfo.Inheritance.RDGatewayUsername = true;
+				connectionInfo.Inheritance.RDGatewayPassword = true;
+				connectionInfo.Inheritance.RDGatewayDomain = true;
 			}
 				
 			XmlNode remoteDesktopNode = xmlNode.SelectSingleNode("./remoteDesktop");
@@ -245,8 +245,8 @@ namespace mRemoteNG.Config.Import
 			}
 			else
 			{
-				connectionInfo.Inherit.Resolution = true;
-				connectionInfo.Inherit.Colors = true;
+				connectionInfo.Inheritance.Resolution = true;
+				connectionInfo.Inheritance.Colors = true;
 			}
 				
 			XmlNode localResourcesNode = xmlNode.SelectSingleNode("./localResources");
@@ -289,12 +289,12 @@ namespace mRemoteNG.Config.Import
 			}
 			else
 			{
-				connectionInfo.Inherit.RedirectSound = true;
-				connectionInfo.Inherit.RedirectKeys = true;
-				connectionInfo.Inherit.RedirectDiskDrives = true;
-				connectionInfo.Inherit.RedirectPorts = true;
-				connectionInfo.Inherit.RedirectPrinters = true;
-				connectionInfo.Inherit.RedirectSmartCards = true;
+				connectionInfo.Inheritance.RedirectSound = true;
+				connectionInfo.Inheritance.RedirectKeys = true;
+				connectionInfo.Inheritance.RedirectDiskDrives = true;
+				connectionInfo.Inheritance.RedirectPorts = true;
+				connectionInfo.Inheritance.RedirectPrinters = true;
+				connectionInfo.Inheritance.RedirectSmartCards = true;
 			}
 				
 			XmlNode securitySettingsNode = xmlNode.SelectSingleNode("./securitySettings");
@@ -315,7 +315,7 @@ namespace mRemoteNG.Config.Import
 			}
 			else
 			{
-				connectionInfo.Inherit.RDPAuthenticationLevel = true;
+				connectionInfo.Inheritance.RDPAuthenticationLevel = true;
 			}
 				
 			// ./displaySettings/thumbnailScale

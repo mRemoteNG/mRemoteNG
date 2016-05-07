@@ -528,7 +528,7 @@ namespace mRemoteNG.UI.Window
 						}
 						else if (InheritanceVisible) //Inheritance selected
 						{
-                            pGrid.SelectedObject = ((ConnectionInfo)Obj).Inherit;
+                            pGrid.SelectedObject = ((ConnectionInfo)Obj).Inheritance;
 
                             btnShowProperties.Enabled = true;
                             btnShowInheritance.Enabled = true;
@@ -1314,147 +1314,147 @@ namespace mRemoteNG.UI.Window
 							
 					if (conI.IsDefault == false)
 					{
-						if (conI.Inherit.CacheBitmaps)
+						if (conI.Inheritance.CacheBitmaps)
 						{
 							strHide.Add("CacheBitmaps");
 						}
 								
-						if (conI.Inherit.Colors)
+						if (conI.Inheritance.Colors)
 						{
 							strHide.Add("Colors");
 						}
 								
-						if (conI.Inherit.Description)
+						if (conI.Inheritance.Description)
 						{
 							strHide.Add("Description");
 						}
 								
-						if (conI.Inherit.DisplayThemes)
+						if (conI.Inheritance.DisplayThemes)
 						{
 							strHide.Add("DisplayThemes");
 						}
 								
-						if (conI.Inherit.DisplayWallpaper)
+						if (conI.Inheritance.DisplayWallpaper)
 						{
 							strHide.Add("DisplayWallpaper");
 						}
 								
-						if (conI.Inherit.EnableFontSmoothing)
+						if (conI.Inheritance.EnableFontSmoothing)
 						{
 							strHide.Add("EnableFontSmoothing");
 						}
 								
-						if (conI.Inherit.EnableDesktopComposition)
+						if (conI.Inheritance.EnableDesktopComposition)
 						{
 							strHide.Add("EnableDesktopComposition");
 						}
 								
-						if (conI.Inherit.Domain)
+						if (conI.Inheritance.Domain)
 						{
 							strHide.Add("Domain");
 						}
 								
-						if (conI.Inherit.Icon)
+						if (conI.Inheritance.Icon)
 						{
 							strHide.Add("Icon");
 						}
 								
-						if (conI.Inherit.Password)
+						if (conI.Inheritance.Password)
 						{
 							strHide.Add("Password");
 						}
 								
-						if (conI.Inherit.Port)
+						if (conI.Inheritance.Port)
 						{
 							strHide.Add("Port");
 						}
 								
-						if (conI.Inherit.Protocol)
+						if (conI.Inheritance.Protocol)
 						{
 							strHide.Add("Protocol");
 						}
 								
-						if (conI.Inherit.PuttySession)
+						if (conI.Inheritance.PuttySession)
 						{
 							strHide.Add("PuttySession");
 						}
 								
-						if (conI.Inherit.RedirectDiskDrives)
+						if (conI.Inheritance.RedirectDiskDrives)
 						{
 							strHide.Add("RedirectDiskDrives");
 						}
 								
-						if (conI.Inherit.RedirectKeys)
+						if (conI.Inheritance.RedirectKeys)
 						{
 							strHide.Add("RedirectKeys");
 						}
 								
-						if (conI.Inherit.RedirectPorts)
+						if (conI.Inheritance.RedirectPorts)
 						{
 							strHide.Add("RedirectPorts");
 						}
 								
-						if (conI.Inherit.RedirectPrinters)
+						if (conI.Inheritance.RedirectPrinters)
 						{
 							strHide.Add("RedirectPrinters");
 						}
 								
-						if (conI.Inherit.RedirectSmartCards)
+						if (conI.Inheritance.RedirectSmartCards)
 						{
 							strHide.Add("RedirectSmartCards");
 						}
 								
-						if (conI.Inherit.RedirectSound)
+						if (conI.Inheritance.RedirectSound)
 						{
 							strHide.Add("RedirectSound");
 						}
 								
-						if (conI.Inherit.Resolution)
+						if (conI.Inheritance.Resolution)
 						{
 							strHide.Add("Resolution");
 						}
 								
-						if (conI.Inherit.AutomaticResize)
+						if (conI.Inheritance.AutomaticResize)
 						{
 							strHide.Add("AutomaticResize");
 						}
 								
-						if (conI.Inherit.UseConsoleSession)
+						if (conI.Inheritance.UseConsoleSession)
 						{
 							strHide.Add("UseConsoleSession");
 						}
 								
-						if (conI.Inherit.UseCredSsp)
+						if (conI.Inheritance.UseCredSsp)
 						{
 							strHide.Add("UseCredSsp");
 						}
 								
-						if (conI.Inherit.RenderingEngine)
+						if (conI.Inheritance.RenderingEngine)
 						{
 							strHide.Add("RenderingEngine");
 						}
 								
-						if (conI.Inherit.ICAEncryption)
+						if (conI.Inheritance.ICAEncryption)
 						{
 							strHide.Add("ICAEncryption");
 						}
 								
-						if (conI.Inherit.RDPAuthenticationLevel)
+						if (conI.Inheritance.RDPAuthenticationLevel)
 						{
 							strHide.Add("RDPAuthenticationLevel");
 						}
 								
-						if (conI.Inherit.LoadBalanceInfo)
+						if (conI.Inheritance.LoadBalanceInfo)
 						{
 							strHide.Add("LoadBalanceInfo");
 						}
 								
-						if (conI.Inherit.Username)
+						if (conI.Inheritance.Username)
 						{
 							strHide.Add("Username");
 						}
 								
-						if (conI.Inherit.Panel)
+						if (conI.Inheritance.Panel)
 						{
 							strHide.Add("Panel");
 						}
@@ -1464,117 +1464,117 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("Hostname");
 						}
 								
-						if (conI.Inherit.PreExtApp)
+						if (conI.Inheritance.PreExtApp)
 						{
 							strHide.Add("PreExtApp");
 						}
 								
-						if (conI.Inherit.PostExtApp)
+						if (conI.Inheritance.PostExtApp)
 						{
 							strHide.Add("PostExtApp");
 						}
 								
-						if (conI.Inherit.MacAddress)
+						if (conI.Inheritance.MacAddress)
 						{
 							strHide.Add("MacAddress");
 						}
 								
-						if (conI.Inherit.UserField)
+						if (conI.Inheritance.UserField)
 						{
 							strHide.Add("UserField");
 						}
 								
-						if (conI.Inherit.VNCAuthMode)
+						if (conI.Inheritance.VNCAuthMode)
 						{
 							strHide.Add("VNCAuthMode");
 						}
 								
-						if (conI.Inherit.VNCColors)
+						if (conI.Inheritance.VNCColors)
 						{
 							strHide.Add("VNCColors");
 						}
 								
-						if (conI.Inherit.VNCCompression)
+						if (conI.Inheritance.VNCCompression)
 						{
 							strHide.Add("VNCCompression");
 						}
 								
-						if (conI.Inherit.VNCEncoding)
+						if (conI.Inheritance.VNCEncoding)
 						{
 							strHide.Add("VNCEncoding");
 						}
 								
-						if (conI.Inherit.VNCProxyIP)
+						if (conI.Inheritance.VNCProxyIP)
 						{
 							strHide.Add("VNCProxyIP");
 						}
 								
-						if (conI.Inherit.VNCProxyPassword)
+						if (conI.Inheritance.VNCProxyPassword)
 						{
 							strHide.Add("VNCProxyPassword");
 						}
 								
-						if (conI.Inherit.VNCProxyPort)
+						if (conI.Inheritance.VNCProxyPort)
 						{
 							strHide.Add("VNCProxyPort");
 						}
 								
-						if (conI.Inherit.VNCProxyType)
+						if (conI.Inheritance.VNCProxyType)
 						{
 							strHide.Add("VNCProxyType");
 						}
 								
-						if (conI.Inherit.VNCProxyUsername)
+						if (conI.Inheritance.VNCProxyUsername)
 						{
 							strHide.Add("VNCProxyUsername");
 						}
 								
-						if (conI.Inherit.VNCViewOnly)
+						if (conI.Inheritance.VNCViewOnly)
 						{
 							strHide.Add("VNCViewOnly");
 						}
 								
-						if (conI.Inherit.VNCSmartSizeMode)
+						if (conI.Inheritance.VNCSmartSizeMode)
 						{
 							strHide.Add("VNCSmartSizeMode");
 						}
 								
-						if (conI.Inherit.ExtApp)
+						if (conI.Inheritance.ExtApp)
 						{
 							strHide.Add("ExtApp");
 						}
 								
-						if (conI.Inherit.RDGatewayUsageMethod)
+						if (conI.Inheritance.RDGatewayUsageMethod)
 						{
 							strHide.Add("RDGatewayUsageMethod");
 						}
 								
-						if (conI.Inherit.RDGatewayHostname)
+						if (conI.Inheritance.RDGatewayHostname)
 						{
 							strHide.Add("RDGatewayHostname");
 						}
 								
-						if (conI.Inherit.RDGatewayUsername)
+						if (conI.Inheritance.RDGatewayUsername)
 						{
 							strHide.Add("RDGatewayUsername");
 						}
 								
-						if (conI.Inherit.RDGatewayPassword)
+						if (conI.Inheritance.RDGatewayPassword)
 						{
 							strHide.Add("RDGatewayPassword");
 						}
 								
-						if (conI.Inherit.RDGatewayDomain)
+						if (conI.Inheritance.RDGatewayDomain)
 						{
 							strHide.Add("RDGatewayDomain");
 						}
 								
-						if (conI.Inherit.RDGatewayUseConnectionCredentials)
+						if (conI.Inheritance.RDGatewayUseConnectionCredentials)
 						{
 							strHide.Add("RDGatewayUseConnectionCredentials");
 						}
 								
-						if (conI.Inherit.RDGatewayHostname)
+						if (conI.Inheritance.RDGatewayHostname)
 						{
 							strHide.Add("RDGatewayHostname");
 						}
@@ -1658,7 +1658,7 @@ namespace mRemoteNG.UI.Window
                 InheritanceVisible = true;
                 DefaultPropertiesVisible = false;
                 DefaultInheritanceVisible = false;
-                SetPropertyGridObject(((ConnectionInfo)pGrid.SelectedObject).Inherit);
+                SetPropertyGridObject(((ConnectionInfo)pGrid.SelectedObject).Inheritance);
 			}
 		}
 				

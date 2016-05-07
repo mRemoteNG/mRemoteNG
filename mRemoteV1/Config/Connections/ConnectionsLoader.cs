@@ -306,7 +306,7 @@ namespace mRemoteNG.Config.Connections
 					tNode = new TreeNode(Convert.ToString(sqlRd["Name"]));
 					//baseNode.Nodes.Add(tNode)
 							
-					if (Tree.ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(sqlRd["Type"])) == Tree.TreeNodeType.Connection)
+					if (ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(sqlRd["Type"])) == TreeNodeType.Connection)
 					{
                         ConnectionInfo conI = GetConnectionInfoFromSQL();
 						conI.TreeNode = tNode;
@@ -356,7 +356,7 @@ namespace mRemoteNG.Config.Connections
                             tNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
 						}
 					}
-					else if (Tree.ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(sqlRd["Type"])) == Tree.TreeNodeType.Container)
+					else if (ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(sqlRd["Type"])) == TreeNodeType.Container)
 					{
                         ContainerInfo contI = new ContainerInfo();
 						//If tNode.Parent IsNot Nothing Then
@@ -417,19 +417,19 @@ namespace mRemoteNG.Config.Connections
 					}
 					else
 					{
-						TreeNode pNode = Tree.ConnectionTreeNode.GetNodeFromConstantID(Convert.ToString(sqlRd["ParentID"]));
+						TreeNode pNode = ConnectionTreeNode.GetNodeFromConstantID(Convert.ToString(sqlRd["ParentID"]));
 								
 						if (pNode != null)
 						{
 							pNode.Nodes.Add(tNode);
 									
-							if (Tree.ConnectionTreeNode.GetNodeType(tNode) == Tree.TreeNodeType.Connection)
+							if (ConnectionTreeNode.GetNodeType(tNode) == TreeNodeType.Connection)
 							{
 								(tNode.Tag as ConnectionInfo).Parent = (ContainerInfo)pNode.Tag;
 							}
-							else if (Tree.ConnectionTreeNode.GetNodeType(tNode) == Tree.TreeNodeType.Container)
+							else if (ConnectionTreeNode.GetNodeType(tNode) == TreeNodeType.Container)
 							{
-								(tNode.Tag as ContainerInfo).Parent = pNode.Tag;
+								(tNode.Tag as ContainerInfo).Parent = (ContainerInfo)pNode.Tag;
 							}
 						}
 						else
@@ -476,39 +476,39 @@ namespace mRemoteNG.Config.Connections
 				connectionInfo.PuttySession = Convert.ToString(sqlRd["PuttySession"]);
                 connectionInfo.Colors = (ProtocolRDP.RDPColors)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPColors), Convert.ToString(sqlRd["Colors"]));
                 connectionInfo.Resolution = (ProtocolRDP.RDPResolutions)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPResolutions), Convert.ToString(sqlRd["Resolution"]));
-				connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo);
-				connectionInfo.Inherit.CacheBitmaps = Convert.ToBoolean(sqlRd["InheritCacheBitmaps"]);
-				connectionInfo.Inherit.Colors = Convert.ToBoolean(sqlRd["InheritColors"]);
-				connectionInfo.Inherit.Description = Convert.ToBoolean(sqlRd["InheritDescription"]);
-				connectionInfo.Inherit.DisplayThemes = Convert.ToBoolean(sqlRd["InheritDisplayThemes"]);
-				connectionInfo.Inherit.DisplayWallpaper = Convert.ToBoolean(sqlRd["InheritDisplayWallpaper"]);
-				connectionInfo.Inherit.Domain = Convert.ToBoolean(sqlRd["InheritDomain"]);
-				connectionInfo.Inherit.Icon = Convert.ToBoolean(sqlRd["InheritIcon"]);
-				connectionInfo.Inherit.Panel = Convert.ToBoolean(sqlRd["InheritPanel"]);
-				connectionInfo.Inherit.Password = Convert.ToBoolean(sqlRd["InheritPassword"]);
-				connectionInfo.Inherit.Port = Convert.ToBoolean(sqlRd["InheritPort"]);
-				connectionInfo.Inherit.Protocol = Convert.ToBoolean(sqlRd["InheritProtocol"]);
-				connectionInfo.Inherit.PuttySession = Convert.ToBoolean(sqlRd["InheritPuttySession"]);
-				connectionInfo.Inherit.RedirectDiskDrives = Convert.ToBoolean(sqlRd["InheritRedirectDiskDrives"]);
-				connectionInfo.Inherit.RedirectKeys = Convert.ToBoolean(sqlRd["InheritRedirectKeys"]);
-				connectionInfo.Inherit.RedirectPorts = Convert.ToBoolean(sqlRd["InheritRedirectPorts"]);
-				connectionInfo.Inherit.RedirectPrinters = Convert.ToBoolean(sqlRd["InheritRedirectPrinters"]);
-				connectionInfo.Inherit.RedirectSmartCards = Convert.ToBoolean(sqlRd["InheritRedirectSmartCards"]);
-				connectionInfo.Inherit.RedirectSound = Convert.ToBoolean(sqlRd["InheritRedirectSound"]);
-				connectionInfo.Inherit.Resolution = Convert.ToBoolean(sqlRd["InheritResolution"]);
-				connectionInfo.Inherit.UseConsoleSession = Convert.ToBoolean(sqlRd["InheritUseConsoleSession"]);
-				connectionInfo.Inherit.Username = Convert.ToBoolean(sqlRd["InheritUsername"]);
+				connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
+				connectionInfo.Inheritance.CacheBitmaps = Convert.ToBoolean(sqlRd["InheritCacheBitmaps"]);
+				connectionInfo.Inheritance.Colors = Convert.ToBoolean(sqlRd["InheritColors"]);
+				connectionInfo.Inheritance.Description = Convert.ToBoolean(sqlRd["InheritDescription"]);
+				connectionInfo.Inheritance.DisplayThemes = Convert.ToBoolean(sqlRd["InheritDisplayThemes"]);
+				connectionInfo.Inheritance.DisplayWallpaper = Convert.ToBoolean(sqlRd["InheritDisplayWallpaper"]);
+				connectionInfo.Inheritance.Domain = Convert.ToBoolean(sqlRd["InheritDomain"]);
+				connectionInfo.Inheritance.Icon = Convert.ToBoolean(sqlRd["InheritIcon"]);
+				connectionInfo.Inheritance.Panel = Convert.ToBoolean(sqlRd["InheritPanel"]);
+				connectionInfo.Inheritance.Password = Convert.ToBoolean(sqlRd["InheritPassword"]);
+				connectionInfo.Inheritance.Port = Convert.ToBoolean(sqlRd["InheritPort"]);
+				connectionInfo.Inheritance.Protocol = Convert.ToBoolean(sqlRd["InheritProtocol"]);
+				connectionInfo.Inheritance.PuttySession = Convert.ToBoolean(sqlRd["InheritPuttySession"]);
+				connectionInfo.Inheritance.RedirectDiskDrives = Convert.ToBoolean(sqlRd["InheritRedirectDiskDrives"]);
+				connectionInfo.Inheritance.RedirectKeys = Convert.ToBoolean(sqlRd["InheritRedirectKeys"]);
+				connectionInfo.Inheritance.RedirectPorts = Convert.ToBoolean(sqlRd["InheritRedirectPorts"]);
+				connectionInfo.Inheritance.RedirectPrinters = Convert.ToBoolean(sqlRd["InheritRedirectPrinters"]);
+				connectionInfo.Inheritance.RedirectSmartCards = Convert.ToBoolean(sqlRd["InheritRedirectSmartCards"]);
+				connectionInfo.Inheritance.RedirectSound = Convert.ToBoolean(sqlRd["InheritRedirectSound"]);
+				connectionInfo.Inheritance.Resolution = Convert.ToBoolean(sqlRd["InheritResolution"]);
+				connectionInfo.Inheritance.UseConsoleSession = Convert.ToBoolean(sqlRd["InheritUseConsoleSession"]);
+				connectionInfo.Inheritance.Username = Convert.ToBoolean(sqlRd["InheritUsername"]);
 				connectionInfo.Icon = Convert.ToString(sqlRd["Icon"]);
 				connectionInfo.Panel = Convert.ToString(sqlRd["Panel"]);
 						
 				if (this.confVersion > 1.5) //1.6
 				{
                     connectionInfo.ICAEncryption = (ProtocolICA.EncryptionStrength)Tools.MiscTools.StringToEnum(typeof(ProtocolICA.EncryptionStrength), Convert.ToString(sqlRd["ICAEncryptionStrength"]));
-					connectionInfo.Inherit.ICAEncryption = Convert.ToBoolean(sqlRd["InheritICAEncryptionStrength"]);
+					connectionInfo.Inheritance.ICAEncryption = Convert.ToBoolean(sqlRd["InheritICAEncryptionStrength"]);
 					connectionInfo.PreExtApp = Convert.ToString(sqlRd["PreExtApp"]);
 					connectionInfo.PostExtApp = Convert.ToString(sqlRd["PostExtApp"]);
-					connectionInfo.Inherit.PreExtApp = Convert.ToBoolean(sqlRd["InheritPreExtApp"]);
-					connectionInfo.Inherit.PostExtApp = Convert.ToBoolean(sqlRd["InheritPostExtApp"]);
+					connectionInfo.Inheritance.PreExtApp = Convert.ToBoolean(sqlRd["InheritPreExtApp"]);
+					connectionInfo.Inheritance.PostExtApp = Convert.ToBoolean(sqlRd["InheritPostExtApp"]);
 				}
 						
 				if (this.confVersion > 1.6) //1.7
@@ -524,43 +524,43 @@ namespace mRemoteNG.Config.Connections
                     connectionInfo.VNCColors = (ProtocolVNC.Colors)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Colors), Convert.ToString(sqlRd["VNCColors"]));
                     connectionInfo.VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.SmartSizeMode), Convert.ToString(sqlRd["VNCSmartSizeMode"]));
 					connectionInfo.VNCViewOnly = Convert.ToBoolean(sqlRd["VNCViewOnly"]);
-					connectionInfo.Inherit.VNCCompression = Convert.ToBoolean(sqlRd["InheritVNCCompression"]);
-					connectionInfo.Inherit.VNCEncoding = Convert.ToBoolean(sqlRd["InheritVNCEncoding"]);
-					connectionInfo.Inherit.VNCAuthMode = Convert.ToBoolean(sqlRd["InheritVNCAuthMode"]);
-					connectionInfo.Inherit.VNCProxyType = Convert.ToBoolean(sqlRd["InheritVNCProxyType"]);
-					connectionInfo.Inherit.VNCProxyIP = Convert.ToBoolean(sqlRd["InheritVNCProxyIP"]);
-					connectionInfo.Inherit.VNCProxyPort = Convert.ToBoolean(sqlRd["InheritVNCProxyPort"]);
-					connectionInfo.Inherit.VNCProxyUsername = Convert.ToBoolean(sqlRd["InheritVNCProxyUsername"]);
-					connectionInfo.Inherit.VNCProxyPassword = Convert.ToBoolean(sqlRd["InheritVNCProxyPassword"]);
-					connectionInfo.Inherit.VNCColors = Convert.ToBoolean(sqlRd["InheritVNCColors"]);
-					connectionInfo.Inherit.VNCSmartSizeMode = Convert.ToBoolean(sqlRd["InheritVNCSmartSizeMode"]);
-					connectionInfo.Inherit.VNCViewOnly = Convert.ToBoolean(sqlRd["InheritVNCViewOnly"]);
+					connectionInfo.Inheritance.VNCCompression = Convert.ToBoolean(sqlRd["InheritVNCCompression"]);
+					connectionInfo.Inheritance.VNCEncoding = Convert.ToBoolean(sqlRd["InheritVNCEncoding"]);
+					connectionInfo.Inheritance.VNCAuthMode = Convert.ToBoolean(sqlRd["InheritVNCAuthMode"]);
+					connectionInfo.Inheritance.VNCProxyType = Convert.ToBoolean(sqlRd["InheritVNCProxyType"]);
+					connectionInfo.Inheritance.VNCProxyIP = Convert.ToBoolean(sqlRd["InheritVNCProxyIP"]);
+					connectionInfo.Inheritance.VNCProxyPort = Convert.ToBoolean(sqlRd["InheritVNCProxyPort"]);
+					connectionInfo.Inheritance.VNCProxyUsername = Convert.ToBoolean(sqlRd["InheritVNCProxyUsername"]);
+					connectionInfo.Inheritance.VNCProxyPassword = Convert.ToBoolean(sqlRd["InheritVNCProxyPassword"]);
+					connectionInfo.Inheritance.VNCColors = Convert.ToBoolean(sqlRd["InheritVNCColors"]);
+					connectionInfo.Inheritance.VNCSmartSizeMode = Convert.ToBoolean(sqlRd["InheritVNCSmartSizeMode"]);
+					connectionInfo.Inheritance.VNCViewOnly = Convert.ToBoolean(sqlRd["InheritVNCViewOnly"]);
 				}
 				
 				if (this.confVersion > 1.7) //1.8
 				{
                     connectionInfo.RDPAuthenticationLevel = (ProtocolRDP.AuthenticationLevel)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.AuthenticationLevel), Convert.ToString(sqlRd["RDPAuthenticationLevel"]));
-					connectionInfo.Inherit.RDPAuthenticationLevel = Convert.ToBoolean(sqlRd["InheritRDPAuthenticationLevel"]);
+					connectionInfo.Inheritance.RDPAuthenticationLevel = Convert.ToBoolean(sqlRd["InheritRDPAuthenticationLevel"]);
 				}
 				
 				if (this.confVersion > 1.8) //1.9
 				{
                     connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Tools.MiscTools.StringToEnum(typeof(HTTPBase.RenderingEngine), Convert.ToString(sqlRd["RenderingEngine"]));
 					connectionInfo.MacAddress = Convert.ToString(sqlRd["MacAddress"]);
-					connectionInfo.Inherit.RenderingEngine = Convert.ToBoolean(sqlRd["InheritRenderingEngine"]);
-					connectionInfo.Inherit.MacAddress = Convert.ToBoolean(sqlRd["InheritMacAddress"]);
+					connectionInfo.Inheritance.RenderingEngine = Convert.ToBoolean(sqlRd["InheritRenderingEngine"]);
+					connectionInfo.Inheritance.MacAddress = Convert.ToBoolean(sqlRd["InheritMacAddress"]);
 				}
 				
 				if (this.confVersion > 1.9) //2.0
 				{
 					connectionInfo.UserField = Convert.ToString(sqlRd["UserField"]);
-					connectionInfo.Inherit.UserField = Convert.ToBoolean(sqlRd["InheritUserField"]);
+					connectionInfo.Inheritance.UserField = Convert.ToBoolean(sqlRd["InheritUserField"]);
 				}
 				
 				if (this.confVersion > 2.0) //2.1
 				{
 					connectionInfo.ExtApp = Convert.ToString(sqlRd["ExtApp"]);
-					connectionInfo.Inherit.ExtApp = Convert.ToBoolean(sqlRd["InheritExtApp"]);
+					connectionInfo.Inheritance.ExtApp = Convert.ToBoolean(sqlRd["InheritExtApp"]);
 				}
 						
 				if (this.confVersion >= 2.2)
@@ -571,33 +571,33 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.RDGatewayUsername = Convert.ToString(sqlRd["RDGatewayUsername"]);
 					connectionInfo.RDGatewayPassword = Security.Crypt.Decrypt(Convert.ToString(sqlRd["RDGatewayPassword"]), pW);
 					connectionInfo.RDGatewayDomain = Convert.ToString(sqlRd["RDGatewayDomain"]);
-					connectionInfo.Inherit.RDGatewayUsageMethod = Convert.ToBoolean(sqlRd["InheritRDGatewayUsageMethod"]);
-					connectionInfo.Inherit.RDGatewayHostname = Convert.ToBoolean(sqlRd["InheritRDGatewayHostname"]);
-					connectionInfo.Inherit.RDGatewayUsername = Convert.ToBoolean(sqlRd["InheritRDGatewayUsername"]);
-					connectionInfo.Inherit.RDGatewayPassword = Convert.ToBoolean(sqlRd["InheritRDGatewayPassword"]);
-					connectionInfo.Inherit.RDGatewayDomain = Convert.ToBoolean(sqlRd["InheritRDGatewayDomain"]);
+					connectionInfo.Inheritance.RDGatewayUsageMethod = Convert.ToBoolean(sqlRd["InheritRDGatewayUsageMethod"]);
+					connectionInfo.Inheritance.RDGatewayHostname = Convert.ToBoolean(sqlRd["InheritRDGatewayHostname"]);
+					connectionInfo.Inheritance.RDGatewayUsername = Convert.ToBoolean(sqlRd["InheritRDGatewayUsername"]);
+					connectionInfo.Inheritance.RDGatewayPassword = Convert.ToBoolean(sqlRd["InheritRDGatewayPassword"]);
+					connectionInfo.Inheritance.RDGatewayDomain = Convert.ToBoolean(sqlRd["InheritRDGatewayDomain"]);
 				}
 						
 				if (this.confVersion >= 2.3)
 				{
 					connectionInfo.EnableFontSmoothing = Convert.ToBoolean(sqlRd["EnableFontSmoothing"]);
 					connectionInfo.EnableDesktopComposition = Convert.ToBoolean(sqlRd["EnableDesktopComposition"]);
-					connectionInfo.Inherit.EnableFontSmoothing = Convert.ToBoolean(sqlRd["InheritEnableFontSmoothing"]);
-					connectionInfo.Inherit.EnableDesktopComposition = Convert.ToBoolean(sqlRd["InheritEnableDesktopComposition"]);
+					connectionInfo.Inheritance.EnableFontSmoothing = Convert.ToBoolean(sqlRd["InheritEnableFontSmoothing"]);
+					connectionInfo.Inheritance.EnableDesktopComposition = Convert.ToBoolean(sqlRd["InheritEnableDesktopComposition"]);
 				}
 						
 				if (confVersion >= 2.4)
 				{
 					connectionInfo.UseCredSsp = Convert.ToBoolean(sqlRd["UseCredSsp"]);
-					connectionInfo.Inherit.UseCredSsp = Convert.ToBoolean(sqlRd["InheritUseCredSsp"]);
+					connectionInfo.Inheritance.UseCredSsp = Convert.ToBoolean(sqlRd["InheritUseCredSsp"]);
 				}
 						
 				if (confVersion >= 2.5)
 				{
 					connectionInfo.LoadBalanceInfo = Convert.ToString(sqlRd["LoadBalanceInfo"]);
 					connectionInfo.AutomaticResize = Convert.ToBoolean(sqlRd["AutomaticResize"]);
-					connectionInfo.Inherit.LoadBalanceInfo = Convert.ToBoolean(sqlRd["InheritLoadBalanceInfo"]);
-					connectionInfo.Inherit.AutomaticResize = Convert.ToBoolean(sqlRd["InheritAutomaticResize"]);
+					connectionInfo.Inheritance.LoadBalanceInfo = Convert.ToBoolean(sqlRd["InheritLoadBalanceInfo"]);
+					connectionInfo.Inheritance.AutomaticResize = Convert.ToBoolean(sqlRd["InheritAutomaticResize"]);
 				}
 						
 				if (SQLUpdate == true)
@@ -851,7 +851,7 @@ namespace mRemoteNG.Config.Connections
 						TreeNode treeNode = new TreeNode(xmlNode.Attributes["Name"].Value);
 						parentTreeNode.Nodes.Add(treeNode);
 								
-						if (Tree.ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == TreeNodeType.Connection) //connection info
+						if (ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == TreeNodeType.Connection) //connection info
 						{
 							ConnectionInfo connectionInfo = GetConnectionInfoFromXml(xmlNode);
 							connectionInfo.TreeNode = treeNode;
@@ -863,14 +863,14 @@ namespace mRemoteNG.Config.Connections
                             treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
                             treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
 						}
-						else if (Tree.ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == TreeNodeType.Container) //container info
+						else if (ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == TreeNodeType.Container) //container info
 						{
 							ContainerInfo containerInfo = new ContainerInfo();
 							if (treeNode.Parent != null)
 							{
-								if (Tree.ConnectionTreeNode.GetNodeType(treeNode.Parent) == TreeNodeType.Container)
+								if (ConnectionTreeNode.GetNodeType(treeNode.Parent) == TreeNodeType.Container)
 								{
-									containerInfo.Parent = treeNode.Parent.Tag;
+									containerInfo.Parent = (ContainerInfo)treeNode.Parent.Tag;
 								}
 							}
 							_previousContainer = containerInfo; //NEW
@@ -1078,34 +1078,34 @@ namespace mRemoteNG.Config.Connections
 				
 				if (this.confVersion > 1.2) //1.3
 				{
-					connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo);
-					connectionInfo.Inherit.CacheBitmaps = bool.Parse(xmlnode.Attributes["InheritCacheBitmaps"].Value);
-					connectionInfo.Inherit.Colors = bool.Parse(xmlnode.Attributes["InheritColors"].Value);
-					connectionInfo.Inherit.Description = bool.Parse(xmlnode.Attributes["InheritDescription"].Value);
-					connectionInfo.Inherit.DisplayThemes = bool.Parse(xmlnode.Attributes["InheritDisplayThemes"].Value);
-					connectionInfo.Inherit.DisplayWallpaper = bool.Parse(xmlnode.Attributes["InheritDisplayWallpaper"].Value);
-					connectionInfo.Inherit.Domain = bool.Parse(xmlnode.Attributes["InheritDomain"].Value);
-					connectionInfo.Inherit.Icon = bool.Parse(xmlnode.Attributes["InheritIcon"].Value);
-					connectionInfo.Inherit.Panel = bool.Parse(xmlnode.Attributes["InheritPanel"].Value);
-					connectionInfo.Inherit.Password = bool.Parse(xmlnode.Attributes["InheritPassword"].Value);
-					connectionInfo.Inherit.Port = bool.Parse(xmlnode.Attributes["InheritPort"].Value);
-					connectionInfo.Inherit.Protocol = bool.Parse(xmlnode.Attributes["InheritProtocol"].Value);
-					connectionInfo.Inherit.PuttySession = bool.Parse(xmlnode.Attributes["InheritPuttySession"].Value);
-					connectionInfo.Inherit.RedirectDiskDrives = bool.Parse(xmlnode.Attributes["InheritRedirectDiskDrives"].Value);
-					connectionInfo.Inherit.RedirectKeys = bool.Parse(xmlnode.Attributes["InheritRedirectKeys"].Value);
-					connectionInfo.Inherit.RedirectPorts = bool.Parse(xmlnode.Attributes["InheritRedirectPorts"].Value);
-					connectionInfo.Inherit.RedirectPrinters = bool.Parse(xmlnode.Attributes["InheritRedirectPrinters"].Value);
-					connectionInfo.Inherit.RedirectSmartCards = bool.Parse(xmlnode.Attributes["InheritRedirectSmartCards"].Value);
-					connectionInfo.Inherit.RedirectSound = bool.Parse(xmlnode.Attributes["InheritRedirectSound"].Value);
-					connectionInfo.Inherit.Resolution = bool.Parse(xmlnode.Attributes["InheritResolution"].Value);
-					connectionInfo.Inherit.UseConsoleSession = bool.Parse(xmlnode.Attributes["InheritUseConsoleSession"].Value);
-					connectionInfo.Inherit.Username = bool.Parse(xmlnode.Attributes["InheritUsername"].Value);
+					connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
+					connectionInfo.Inheritance.CacheBitmaps = bool.Parse(xmlnode.Attributes["InheritCacheBitmaps"].Value);
+					connectionInfo.Inheritance.Colors = bool.Parse(xmlnode.Attributes["InheritColors"].Value);
+					connectionInfo.Inheritance.Description = bool.Parse(xmlnode.Attributes["InheritDescription"].Value);
+					connectionInfo.Inheritance.DisplayThemes = bool.Parse(xmlnode.Attributes["InheritDisplayThemes"].Value);
+					connectionInfo.Inheritance.DisplayWallpaper = bool.Parse(xmlnode.Attributes["InheritDisplayWallpaper"].Value);
+					connectionInfo.Inheritance.Domain = bool.Parse(xmlnode.Attributes["InheritDomain"].Value);
+					connectionInfo.Inheritance.Icon = bool.Parse(xmlnode.Attributes["InheritIcon"].Value);
+					connectionInfo.Inheritance.Panel = bool.Parse(xmlnode.Attributes["InheritPanel"].Value);
+					connectionInfo.Inheritance.Password = bool.Parse(xmlnode.Attributes["InheritPassword"].Value);
+					connectionInfo.Inheritance.Port = bool.Parse(xmlnode.Attributes["InheritPort"].Value);
+					connectionInfo.Inheritance.Protocol = bool.Parse(xmlnode.Attributes["InheritProtocol"].Value);
+					connectionInfo.Inheritance.PuttySession = bool.Parse(xmlnode.Attributes["InheritPuttySession"].Value);
+					connectionInfo.Inheritance.RedirectDiskDrives = bool.Parse(xmlnode.Attributes["InheritRedirectDiskDrives"].Value);
+					connectionInfo.Inheritance.RedirectKeys = bool.Parse(xmlnode.Attributes["InheritRedirectKeys"].Value);
+					connectionInfo.Inheritance.RedirectPorts = bool.Parse(xmlnode.Attributes["InheritRedirectPorts"].Value);
+					connectionInfo.Inheritance.RedirectPrinters = bool.Parse(xmlnode.Attributes["InheritRedirectPrinters"].Value);
+					connectionInfo.Inheritance.RedirectSmartCards = bool.Parse(xmlnode.Attributes["InheritRedirectSmartCards"].Value);
+					connectionInfo.Inheritance.RedirectSound = bool.Parse(xmlnode.Attributes["InheritRedirectSound"].Value);
+					connectionInfo.Inheritance.Resolution = bool.Parse(xmlnode.Attributes["InheritResolution"].Value);
+					connectionInfo.Inheritance.UseConsoleSession = bool.Parse(xmlnode.Attributes["InheritUseConsoleSession"].Value);
+					connectionInfo.Inheritance.Username = bool.Parse(xmlnode.Attributes["InheritUsername"].Value);
 					connectionInfo.Icon = xmlnode.Attributes["Icon"].Value;
 					connectionInfo.Panel = xmlnode.Attributes["Panel"].Value;
 				}
 				else
 				{
-                    connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo, Convert.ToBoolean(xmlnode.Attributes["Inherit"].Value));
+                    connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo, Convert.ToBoolean(xmlnode.Attributes["Inherit"].Value));
 					connectionInfo.Icon = Convert.ToString(xmlnode.Attributes["Icon"].Value.Replace(".ico", ""));
 					connectionInfo.Panel = Language.strGeneral;
 				}
@@ -1118,11 +1118,11 @@ namespace mRemoteNG.Config.Connections
 				if (this.confVersion > 1.5) //1.6
 				{
                     connectionInfo.ICAEncryption = (ProtocolICA.EncryptionStrength)Tools.MiscTools.StringToEnum(typeof(ProtocolICA.EncryptionStrength), xmlnode.Attributes["ICAEncryptionStrength"].Value);
-					connectionInfo.Inherit.ICAEncryption = bool.Parse(xmlnode.Attributes["InheritICAEncryptionStrength"].Value);
+					connectionInfo.Inheritance.ICAEncryption = bool.Parse(xmlnode.Attributes["InheritICAEncryptionStrength"].Value);
 					connectionInfo.PreExtApp = xmlnode.Attributes["PreExtApp"].Value;
 					connectionInfo.PostExtApp = xmlnode.Attributes["PostExtApp"].Value;
-					connectionInfo.Inherit.PreExtApp = bool.Parse(xmlnode.Attributes["InheritPreExtApp"].Value);
-					connectionInfo.Inherit.PostExtApp = bool.Parse(xmlnode.Attributes["InheritPostExtApp"].Value);
+					connectionInfo.Inheritance.PreExtApp = bool.Parse(xmlnode.Attributes["InheritPreExtApp"].Value);
+					connectionInfo.Inheritance.PostExtApp = bool.Parse(xmlnode.Attributes["InheritPostExtApp"].Value);
 				}
 				
 				if (this.confVersion > 1.6) //1.7
@@ -1138,43 +1138,43 @@ namespace mRemoteNG.Config.Connections
                     connectionInfo.VNCColors = (ProtocolVNC.Colors)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Colors), xmlnode.Attributes["VNCColors"].Value);
                     connectionInfo.VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.SmartSizeMode), xmlnode.Attributes["VNCSmartSizeMode"].Value);
 					connectionInfo.VNCViewOnly = bool.Parse(xmlnode.Attributes["VNCViewOnly"].Value);
-					connectionInfo.Inherit.VNCCompression = bool.Parse(xmlnode.Attributes["InheritVNCCompression"].Value);
-					connectionInfo.Inherit.VNCEncoding = bool.Parse(xmlnode.Attributes["InheritVNCEncoding"].Value);
-					connectionInfo.Inherit.VNCAuthMode = bool.Parse(xmlnode.Attributes["InheritVNCAuthMode"].Value);
-					connectionInfo.Inherit.VNCProxyType = bool.Parse(xmlnode.Attributes["InheritVNCProxyType"].Value);
-					connectionInfo.Inherit.VNCProxyIP = bool.Parse(xmlnode.Attributes["InheritVNCProxyIP"].Value);
-					connectionInfo.Inherit.VNCProxyPort = bool.Parse(xmlnode.Attributes["InheritVNCProxyPort"].Value);
-					connectionInfo.Inherit.VNCProxyUsername = bool.Parse(xmlnode.Attributes["InheritVNCProxyUsername"].Value);
-					connectionInfo.Inherit.VNCProxyPassword = bool.Parse(xmlnode.Attributes["InheritVNCProxyPassword"].Value);
-					connectionInfo.Inherit.VNCColors = bool.Parse(xmlnode.Attributes["InheritVNCColors"].Value);
-					connectionInfo.Inherit.VNCSmartSizeMode = bool.Parse(xmlnode.Attributes["InheritVNCSmartSizeMode"].Value);
-					connectionInfo.Inherit.VNCViewOnly = bool.Parse(xmlnode.Attributes["InheritVNCViewOnly"].Value);
+					connectionInfo.Inheritance.VNCCompression = bool.Parse(xmlnode.Attributes["InheritVNCCompression"].Value);
+					connectionInfo.Inheritance.VNCEncoding = bool.Parse(xmlnode.Attributes["InheritVNCEncoding"].Value);
+					connectionInfo.Inheritance.VNCAuthMode = bool.Parse(xmlnode.Attributes["InheritVNCAuthMode"].Value);
+					connectionInfo.Inheritance.VNCProxyType = bool.Parse(xmlnode.Attributes["InheritVNCProxyType"].Value);
+					connectionInfo.Inheritance.VNCProxyIP = bool.Parse(xmlnode.Attributes["InheritVNCProxyIP"].Value);
+					connectionInfo.Inheritance.VNCProxyPort = bool.Parse(xmlnode.Attributes["InheritVNCProxyPort"].Value);
+					connectionInfo.Inheritance.VNCProxyUsername = bool.Parse(xmlnode.Attributes["InheritVNCProxyUsername"].Value);
+					connectionInfo.Inheritance.VNCProxyPassword = bool.Parse(xmlnode.Attributes["InheritVNCProxyPassword"].Value);
+					connectionInfo.Inheritance.VNCColors = bool.Parse(xmlnode.Attributes["InheritVNCColors"].Value);
+					connectionInfo.Inheritance.VNCSmartSizeMode = bool.Parse(xmlnode.Attributes["InheritVNCSmartSizeMode"].Value);
+					connectionInfo.Inheritance.VNCViewOnly = bool.Parse(xmlnode.Attributes["InheritVNCViewOnly"].Value);
 				}
 				
 				if (this.confVersion > 1.7) //1.8
 				{
                     connectionInfo.RDPAuthenticationLevel = (ProtocolRDP.AuthenticationLevel)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.AuthenticationLevel), xmlnode.Attributes["RDPAuthenticationLevel"].Value);
-					connectionInfo.Inherit.RDPAuthenticationLevel = bool.Parse(xmlnode.Attributes["InheritRDPAuthenticationLevel"].Value);
+					connectionInfo.Inheritance.RDPAuthenticationLevel = bool.Parse(xmlnode.Attributes["InheritRDPAuthenticationLevel"].Value);
 				}
 				
 				if (this.confVersion > 1.8) //1.9
 				{
                     connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Tools.MiscTools.StringToEnum(typeof(HTTPBase.RenderingEngine), xmlnode.Attributes["RenderingEngine"].Value);
 					connectionInfo.MacAddress = xmlnode.Attributes["MacAddress"].Value;
-					connectionInfo.Inherit.RenderingEngine = bool.Parse(xmlnode.Attributes["InheritRenderingEngine"].Value);
-					connectionInfo.Inherit.MacAddress = bool.Parse(xmlnode.Attributes["InheritMacAddress"].Value);
+					connectionInfo.Inheritance.RenderingEngine = bool.Parse(xmlnode.Attributes["InheritRenderingEngine"].Value);
+					connectionInfo.Inheritance.MacAddress = bool.Parse(xmlnode.Attributes["InheritMacAddress"].Value);
 				}
 				
 				if (this.confVersion > 1.9) //2.0
 				{
 					connectionInfo.UserField = xmlnode.Attributes["UserField"].Value;
-					connectionInfo.Inherit.UserField = bool.Parse(xmlnode.Attributes["InheritUserField"].Value);
+					connectionInfo.Inheritance.UserField = bool.Parse(xmlnode.Attributes["InheritUserField"].Value);
 				}
 				
 				if (this.confVersion > 2.0) //2.1
 				{
 					connectionInfo.ExtApp = xmlnode.Attributes["ExtApp"].Value;
-					connectionInfo.Inherit.ExtApp = bool.Parse(xmlnode.Attributes["InheritExtApp"].Value);
+					connectionInfo.Inheritance.ExtApp = bool.Parse(xmlnode.Attributes["InheritExtApp"].Value);
 				}
 				
 				if (this.confVersion > 2.1) //2.2
@@ -1188,12 +1188,12 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.RDGatewayDomain = xmlnode.Attributes["RDGatewayDomain"].Value;
 							
 					// Get inheritance settings
-					connectionInfo.Inherit.RDGatewayUsageMethod = bool.Parse(xmlnode.Attributes["InheritRDGatewayUsageMethod"].Value);
-					connectionInfo.Inherit.RDGatewayHostname = bool.Parse(xmlnode.Attributes["InheritRDGatewayHostname"].Value);
-					connectionInfo.Inherit.RDGatewayUseConnectionCredentials = bool.Parse(xmlnode.Attributes["InheritRDGatewayUseConnectionCredentials"].Value);
-					connectionInfo.Inherit.RDGatewayUsername = bool.Parse(xmlnode.Attributes["InheritRDGatewayUsername"].Value);
-					connectionInfo.Inherit.RDGatewayPassword = bool.Parse(xmlnode.Attributes["InheritRDGatewayPassword"].Value);
-					connectionInfo.Inherit.RDGatewayDomain = bool.Parse(xmlnode.Attributes["InheritRDGatewayDomain"].Value);
+					connectionInfo.Inheritance.RDGatewayUsageMethod = bool.Parse(xmlnode.Attributes["InheritRDGatewayUsageMethod"].Value);
+					connectionInfo.Inheritance.RDGatewayHostname = bool.Parse(xmlnode.Attributes["InheritRDGatewayHostname"].Value);
+					connectionInfo.Inheritance.RDGatewayUseConnectionCredentials = bool.Parse(xmlnode.Attributes["InheritRDGatewayUseConnectionCredentials"].Value);
+					connectionInfo.Inheritance.RDGatewayUsername = bool.Parse(xmlnode.Attributes["InheritRDGatewayUsername"].Value);
+					connectionInfo.Inheritance.RDGatewayPassword = bool.Parse(xmlnode.Attributes["InheritRDGatewayPassword"].Value);
+					connectionInfo.Inheritance.RDGatewayDomain = bool.Parse(xmlnode.Attributes["InheritRDGatewayDomain"].Value);
 				}
 				
 				if (this.confVersion > 2.2) //2.3
@@ -1203,22 +1203,22 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.EnableDesktopComposition = bool.Parse(xmlnode.Attributes["EnableDesktopComposition"].Value);
 							
 					// Get inheritance settings
-					connectionInfo.Inherit.EnableFontSmoothing = bool.Parse(xmlnode.Attributes["InheritEnableFontSmoothing"].Value);
-					connectionInfo.Inherit.EnableDesktopComposition = bool.Parse(xmlnode.Attributes["InheritEnableDesktopComposition"].Value);
+					connectionInfo.Inheritance.EnableFontSmoothing = bool.Parse(xmlnode.Attributes["InheritEnableFontSmoothing"].Value);
+					connectionInfo.Inheritance.EnableDesktopComposition = bool.Parse(xmlnode.Attributes["InheritEnableDesktopComposition"].Value);
 				}
 				
 				if (confVersion >= 2.4)
 				{
 					connectionInfo.UseCredSsp = bool.Parse(xmlnode.Attributes["UseCredSsp"].Value);
-					connectionInfo.Inherit.UseCredSsp = bool.Parse(xmlnode.Attributes["InheritUseCredSsp"].Value);
+					connectionInfo.Inheritance.UseCredSsp = bool.Parse(xmlnode.Attributes["InheritUseCredSsp"].Value);
 				}
 				
 				if (confVersion >= 2.5)
 				{
 					connectionInfo.LoadBalanceInfo = xmlnode.Attributes["LoadBalanceInfo"].Value;
 					connectionInfo.AutomaticResize = bool.Parse(xmlnode.Attributes["AutomaticResize"].Value);
-					connectionInfo.Inherit.LoadBalanceInfo = bool.Parse(xmlnode.Attributes["InheritLoadBalanceInfo"].Value);
-					connectionInfo.Inherit.AutomaticResize = bool.Parse(xmlnode.Attributes["InheritAutomaticResize"].Value);
+					connectionInfo.Inheritance.LoadBalanceInfo = bool.Parse(xmlnode.Attributes["InheritLoadBalanceInfo"].Value);
+					connectionInfo.Inheritance.AutomaticResize = bool.Parse(xmlnode.Attributes["InheritAutomaticResize"].Value);
 				}
 			}
 			catch (Exception ex)

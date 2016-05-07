@@ -1,10 +1,6 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace mRemoteNG.Tree
@@ -62,25 +58,25 @@ namespace mRemoteNG.Tree
 
         private void UpdateParentReferences()
         {
-            if (ConnectionTreeNode.GetNodeType(_nodeBeingMoved) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(_nodeBeingMoved) == TreeNodeType.Container)
+            UpdateParentReferenceWhenParentIsAContainer();
+            UpdateParentReferenceWhenParentIsRoot();
+        }
+
+        private void UpdateParentReferenceWhenParentIsAContainer()
+        {
+            if (ConnectionTreeNode.GetNodeType(_nodeBeingMoved.Parent) == TreeNodeType.Container)
             {
-                if (ConnectionTreeNode.GetNodeType(_nodeBeingMoved.Parent) == TreeNodeType.Container)
-                {
-                    ((ContainerInfo)_nodeBeingMoved.Tag).Parent = (ContainerInfo)_nodeBeingMoved.Parent.Tag;
-                }
-                else if (ConnectionTreeNode.GetNodeType(_nodeBeingMoved.Parent) == TreeNodeType.Root)
-                {
-                    if (ConnectionTreeNode.GetNodeType(_nodeBeingMoved) == TreeNodeType.Connection)
-                    {
-                        ((ConnectionInfo)_nodeBeingMoved.Tag).Parent = null;
-                        ((ConnectionInfo)_nodeBeingMoved.Tag).Inherit.TurnOffInheritanceCompletely();
-                    }
-                    else if (ConnectionTreeNode.GetNodeType(_nodeBeingMoved) == TreeNodeType.Container)
-                    {
-                        ((ContainerInfo)_nodeBeingMoved.Tag).Parent = null;
-                        ((ContainerInfo)_nodeBeingMoved.Tag).ConnectionInfo.Inherit.TurnOffInheritanceCompletely();
-                    }
-                }
+                ((Parent)_nodeBeingMoved.Tag).Parent = (ContainerInfo)_nodeBeingMoved.Parent.Tag;
+                ((Inheritance)_nodeBeingMoved.Tag).Inheritance.EnableInheritance();
+            }
+        }
+
+        private void UpdateParentReferenceWhenParentIsRoot()
+        {
+            if (ConnectionTreeNode.GetNodeType(_nodeBeingMoved.Parent) == TreeNodeType.Root)
+            {
+                ((Parent)_nodeBeingMoved.Tag).Parent = null;
+                ((Inheritance)_nodeBeingMoved.Tag).Inheritance.DisableInheritance();
             }
         }
 

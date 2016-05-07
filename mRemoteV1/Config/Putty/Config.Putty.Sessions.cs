@@ -65,7 +65,7 @@ namespace mRemoteNG.Config.Putty
 					}
 					else
 					{
-						treeNode = Tree.ConnectionTreeNode.AddNode(TreeNodeType.PuttySession, sessionInfo.Name);
+						treeNode = ConnectionTreeNode.AddNode(TreeNodeType.PuttySession, sessionInfo.Name);
 						if (treeNode == null)
 						{
 							continue;
@@ -78,7 +78,7 @@ namespace mRemoteNG.Config.Putty
 					
 					sessionInfo.RootPuttySessionsInfo = provider.RootInfo;
 					sessionInfo.TreeNode = treeNode;
-					sessionInfo.Inherit.TurnOffInheritanceCompletely();
+					//sessionInfo.Inheritance.TurnOffInheritanceCompletely();
 					
 					treeNode.Tag = sessionInfo;
 						

@@ -668,7 +668,7 @@ namespace mRemoteNG.UI.Window
                 ConnectionInfo newConnectionInfo = new ConnectionInfo();
 				if (ConnectionTreeNode.GetNodeType(containerNode) == TreeNodeType.Root)
 				{
-					newConnectionInfo.Inherit.TurnOffInheritanceCompletely();
+					newConnectionInfo.Inheritance.DisableInheritance();
 				}
 				else
 				{
@@ -708,13 +708,9 @@ namespace mRemoteNG.UI.Window
 				else
 				{
 					if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.Connection)
-					{
 						parentNode = selectedNode.Parent;
-					}
 					else
-					{
 						parentNode = selectedNode;
-					}
 				}
 						
 				newContainerInfo.ConnectionInfo = new ConnectionInfo(newContainerInfo);
@@ -723,11 +719,11 @@ namespace mRemoteNG.UI.Window
 				// We can only inherit from a container node, not the root node or connection nodes
 				if (ConnectionTreeNode.GetNodeType(parentNode) == TreeNodeType.Container)
 				{
-					newContainerInfo.Parent = parentNode.Tag;
+					newContainerInfo.Parent = (ContainerInfo)parentNode.Tag;
 				}
 				else
 				{
-					newContainerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely();
+					newContainerInfo.ConnectionInfo.Inheritance.DisableInheritance();
 				}
 
                 Runtime.ContainerList.Add(newContainerInfo);

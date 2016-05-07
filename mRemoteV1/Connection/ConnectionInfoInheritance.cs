@@ -1,11 +1,14 @@
 using mRemoteNG.Tools;
+using System;
 using System.ComponentModel;
-
+using System.Reflection;
 
 namespace mRemoteNG.Connection
 {
 	public class ConnectionInfoInheritance
 	{
+        private ConnectionInfoInheritance _tempInheritanceStorage = null;
+
         #region Public Properties
         #region General
         [LocalizedAttributes.LocalizedCategory("strCategoryGeneral", 1),
@@ -319,11 +322,9 @@ namespace mRemoteNG.Connection
         #region Constructors
 		public ConnectionInfoInheritance(object parent, bool inheritEverything = false)
 		{
-			this.Parent = parent;
+            Parent = parent;
 			if (inheritEverything)
-			{
 				TurnOnInheritanceCompletely();
-			}
 		}
         #endregion
 		
@@ -332,88 +333,59 @@ namespace mRemoteNG.Connection
 		{
 			return (ConnectionInfoInheritance)MemberwiseClone();
 		}
-	    
-		public void TurnOnInheritanceCompletely()
+
+        public void EnableInheritance()
+        {
+            if (_tempInheritanceStorage != null)
+                UnstashInheritanceData();
+        }
+
+        private void UnstashInheritanceData()
+        {
+            SetAllValues(_tempInheritanceStorage);
+            _tempInheritanceStorage = null;
+        }
+
+        public void DisableInheritance()
+        {
+            StashInheritanceData();
+            TurnOffInheritanceCompletely();
+        }
+
+        private void StashInheritanceData()
+        {
+            _tempInheritanceStorage = Copy();
+        }
+
+        public void TurnOnInheritanceCompletely()
 		{
 			SetAllValues(true);
 		}
 		
 		public void TurnOffInheritanceCompletely()
 		{
-			//SetAllValues(false);
+			SetAllValues(false);
 		}
         #endregion
 		
-        #region Private Methods
 		private void SetAllValues(bool value)
 		{
-			// Display
-			Description = value;
-			Icon = value;
-			Panel = value;
-			
-			// Connection
-			Username = value;
-			Password = value;
-			Domain = value;
-			
-			// Protocol
-			Protocol = value;
-			ExtApp = value;
-			Port = value;
-			PuttySession = value;
-			ICAEncryption = value;
-			RDPAuthenticationLevel = value;
-			LoadBalanceInfo = value;
-			RenderingEngine = value;
-			UseConsoleSession = value;
-			UseCredSsp = value;
-			
-			// RD Gateway
-			RDGatewayUsageMethod = value;
-			RDGatewayHostname = value;
-			RDGatewayUseConnectionCredentials = value;
-			RDGatewayUsername = value;
-			RDGatewayPassword = value;
-			RDGatewayDomain = value;
-			
-			// Appearance
-			Resolution = value;
-			AutomaticResize = value;
-			Colors = value;
-			CacheBitmaps = value;
-			DisplayWallpaper = value;
-			DisplayThemes = value;
-			EnableFontSmoothing = value;
-			EnableDesktopComposition = value;
-			
-			// Redirect
-			RedirectKeys = value;
-			RedirectDiskDrives = value;
-			RedirectPrinters = value;
-			RedirectPorts = value;
-			RedirectSmartCards = value;
-			RedirectSound = value;
-			
-			// Misc
-			PreExtApp = value;
-			PostExtApp = value;
-			MacAddress = value;
-			UserField = value;
-			
-			// VNC
-			VNCCompression = value;
-			VNCEncoding = value;
-			VNCAuthMode = value;
-			VNCProxyType = value;
-			VNCProxyIP = value;
-			VNCProxyPort = value;
-			VNCProxyUsername = value;
-			VNCProxyPassword = value;
-			VNCColors = value;
-			VNCSmartSizeMode = value;
-			VNCViewOnly = value;
-		}
-        #endregion
-	}
+            var properties = typeof(ConnectionInfoInheritance).GetProperties();
+            foreach (var property in properties)
+            {
+                if (property.PropertyType.Name == typeof(Boolean).Name && property.Name != "EverythingInherited")
+                    property.SetValue(this, value, null);
+            }
+        }
+
+        private void SetAllValues(ConnectionInfoInheritance otherInheritanceObject)
+        {
+            var properties = typeof(ConnectionInfoInheritance).GetProperties();
+            foreach (var property in properties)
+            {
+                var newPropertyValue = property.GetValue(otherInheritanceObject, null);
+                property.SetValue(this, newPropertyValue, null);
+            }
+        }
+    }
 }
