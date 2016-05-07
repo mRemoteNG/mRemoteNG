@@ -6,9 +6,6 @@ using System.Security.Permissions;
 using mRemoteNG.App;
 
 
-[assembly:SecurityPermissionAttribute(SecurityAction.RequestMinimum,UnmanagedCode=true)]
-[assembly:PermissionSetAttribute(SecurityAction.RequestMinimum,Name="FullTrust")]
-
 namespace mRemoteNG.Security
 {
 	public class Impersonator

@@ -92,10 +92,7 @@ namespace mRemoteNG.Container
 			
 		public void SetDefaults()
 		{
-			if (this.IsExpanded == null)
-			{
 				this.IsExpanded = true;
-			}
 		}
         #endregion
 	}

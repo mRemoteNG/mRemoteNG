@@ -66,8 +66,6 @@ namespace mRemoteNG.App
 			
 		private static void SaveExportFile(string fileName, ConnectionsSaver.Format saveFormat, TreeNode rootNode, Security.Save saveSecurity)
 		{
-			bool previousTimerEnabled = false;
-				
 			try
 			{
                 if (Runtime.SQLConnProvider != null)

@@ -1,4 +1,6 @@
-﻿using SharedLibraryNG;
+﻿using mRemoteNG.App;
+using mRemoteNG.Messages;
+using SharedLibraryNG;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -87,6 +89,7 @@ namespace mRemoteNG.Config.KeyboardShortcuts
             }
             catch (NullReferenceException e)
             {
+                Runtime.MessageCollector.AddExceptionMessage("Encountered Exception", e);
                 return false;
             }
             return true;

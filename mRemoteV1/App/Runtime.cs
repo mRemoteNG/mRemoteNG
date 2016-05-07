@@ -47,7 +47,7 @@ namespace mRemoteNG.App
         private static SystemMenu _systemMenu;
         private static ILog _log;
         private static bool _isConnectionsFileLoaded;
-        private static System.Timers.Timer _timerSqlWatcher;
+        //private static System.Timers.Timer _timerSqlWatcher;
         private static SqlConnectionsProvider _sqlConnectionsProvider;
         private static DateTime _lastSqlUpdate;
         private static string _lastSelected;
@@ -764,8 +764,6 @@ namespace mRemoteNG.App
 				return;
 			}
 				
-			bool previousTimerState = false;
-				
 			try
 			{
 				if (Update == true && My.Settings.Default.UseSQLServer == false)
@@ -822,7 +820,6 @@ namespace mRemoteNG.App
 		
 		public static void SaveConnectionsAs()
 		{
-			bool previousTimerState = false;
             ConnectionsSaver connectionsSave = new ConnectionsSaver();
 				
 			try
