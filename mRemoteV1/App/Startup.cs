@@ -59,7 +59,7 @@ namespace mRemoteNG.App
 
             if (isFipsPolicyEnabled)
             {
-                MessageBox.Show(frmMain.Default, string.Format(My.Language.strErrorFipsPolicyIncompatible, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName), (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(frmMain.Default, string.Format(Language.strErrorFipsPolicyIncompatible, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName), (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
                 System.Environment.Exit(1);
             }
         }
@@ -83,7 +83,7 @@ namespace mRemoteNG.App
                 return;
             }
 
-            cTaskDialog.MessageBox(System.Windows.Forms.Application.ProductName, My.Language.strCompatibilityProblemDetected, string.Format(My.Language.strCompatibilityLenovoAutoScrollUtilityDetected, System.Windows.Forms.Application.ProductName), "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.OK, eSysIcons.Warning, eSysIcons.Warning);
+            cTaskDialog.MessageBox(System.Windows.Forms.Application.ProductName, Language.strCompatibilityProblemDetected, string.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected, System.Windows.Forms.Application.ProductName), "", "", Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.OK, eSysIcons.Warning, eSysIcons.Warning);
             if (cTaskDialog.VerificationChecked)
             {
                 Settings.Default.CompatibilityWarnLenovoAutoScrollUtility = false;
@@ -224,7 +224,7 @@ namespace mRemoteNG.App
 #if !PORTABLE
             Runtime.Log.InfoFormat("{0} {1} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion);
 #else
-            Runtime.Log.InfoFormat("{0} {1} {2} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion, My.Language.strLabelPortableEdition);
+            Runtime.Log.InfoFormat("{0} {1} {2} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion, Language.strLabelPortableEdition);
 #endif
         }
         private static void LogCmdLineArgs()
@@ -243,7 +243,7 @@ namespace mRemoteNG.App
 
         public static void CreateConnectionsProvider()
         {
-            if (My.Settings.Default.UseSQLServer == true)
+            if (Settings.Default.UseSQLServer == true)
             {
                 SqlConnectionsProvider _sqlConnectionsProvider = new SqlConnectionsProvider();
             }
@@ -458,7 +458,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strCommandLineArgsCouldNotBeParsed + Environment.NewLine + ex.Message);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strCommandLineArgsCouldNotBeParsed + Environment.NewLine + ex.Message);
             }
         }
     }

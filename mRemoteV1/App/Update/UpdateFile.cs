@@ -55,8 +55,8 @@ namespace mRemoteNG.App.Update
                     {
                         continue;
                     }
-                    string key = System.Convert.ToString(parts[0].Trim());
-                    string value = System.Convert.ToString(parts[1].Trim());
+                    string key = Convert.ToString(parts[0].Trim());
+                    string value = Convert.ToString(parts[1].Trim());
 
                     _items.Add(key, value);
                 }

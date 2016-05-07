@@ -113,7 +113,7 @@ namespace mRemoteNG.Connection.Protocol
 							}
 							else if (My.Settings.Default.EmptyCredentials == "custom")
 							{
-								username = System.Convert.ToString(My.Settings.Default.DefaultUsername);
+								username = Convert.ToString(My.Settings.Default.DefaultUsername);
 							}
 						}
 								
@@ -125,7 +125,7 @@ namespace mRemoteNG.Connection.Protocol
 						{
 							if (My.Settings.Default.EmptyCredentials == "custom")
 							{
-								password = Security.Crypt.Decrypt(System.Convert.ToString(My.Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
+								password = Security.Crypt.Decrypt(Convert.ToString(My.Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
 							}
 						}
 								
@@ -159,7 +159,7 @@ namespace mRemoteNG.Connection.Protocol
 				PuttyProcess.Exited += ProcessExited;
 						
 				PuttyProcess.Start();
-				PuttyProcess.WaitForInputIdle(System.Convert.ToInt32(My.Settings.Default.MaxPuttyWaitTime * 1000));
+				PuttyProcess.WaitForInputIdle(Convert.ToInt32(My.Settings.Default.MaxPuttyWaitTime * 1000));
 						
 				int startTicks = Environment.TickCount;
 				while (PuttyHandle.ToInt32() == 0 & Environment.TickCount < startTicks + (My.Settings.Default.MaxPuttyWaitTime * 1000))
@@ -213,7 +213,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyFocusFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyFocusFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -225,11 +225,11 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return ;
 				}
-                Native.MoveWindow(PuttyHandle, System.Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), System.Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
+                Native.MoveWindow(PuttyHandle, Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyResizeFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyResizeFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -244,7 +244,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyKillFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyKillFailed + Environment.NewLine + ex.Message, true);
 			}
 					
 			try
@@ -253,7 +253,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyDisposeFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyDisposeFailed + Environment.NewLine + ex.Message, true);
 			}
 					
 			base.Close();
@@ -268,7 +268,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPuttyShowSettingsDialogFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strPuttyShowSettingsDialogFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion

@@ -410,7 +410,7 @@
     <Compile Include="Tools\Tools.PortScan.cs" />
     <Compile Include="Tools\Tools.SystemMenu.cs" />
     <Compile Include="Tools\Tools.WindowPlacement.cs" />
-    <Compile Include="Tree\Tree.Node.cs" />
+    <Compile Include="Tree\ConnectionTreeNode.cs" />
     <Compile Include="UI\Forms\SplashPage.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -294,7 +294,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.grpConnection);
 			this.Controls.Add(this.btnTransfer);
 			this.Controls.Add(this.pbStatus);
-			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.Icon = (System.Drawing.Icon) (resources.GetObject("$this.Icon"));
 			this.Name = "SSHTransfer";
 			this.TabText = "SSH File Transfer";
@@ -417,7 +417,7 @@ namespace mRemoteNG.UI.Window
 				sshT.OnTransferProgress += SshTransfer_Progress;
 				sshT.OnTransferEnd += SshTransfer_End;
 						
-				this.sshT.Connect(System.Convert.ToInt32(this.txtPort.Text));
+				this.sshT.Connect(Convert.ToInt32(this.txtPort.Text));
 						
 				LocalFile = this.txtLocalFile.Text;
 				RemoteFile = this.txtRemoteFile.Text;

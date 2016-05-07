@@ -25,7 +25,7 @@ namespace mRemoteNG.Config.Import
 				ProtocolType finalProtocol = default(ProtocolType);
 				bool protocolValid = false;
 					
-				TreeNode treeNode = Tree.Node.AddNode(Tree.TreeNodeType.Connection, host.HostNameWithoutDomain);
+				TreeNode treeNode = Tree.ConnectionTreeNode.AddNode(Tree.TreeNodeType.Connection, host.HostNameWithoutDomain);
 					
 				ConnectionInfo connectionInfo = new ConnectionInfo();
 				connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo);

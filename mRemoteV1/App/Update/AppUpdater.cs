@@ -107,7 +107,7 @@ namespace mRemoteNG.App.Update
 			
 		public void SetProxySettings()
 		{
-			SetProxySettings(System.Convert.ToBoolean(My.Settings.Default.UpdateUseProxy), System.Convert.ToString(My.Settings.Default.UpdateProxyAddress), System.Convert.ToInt32(My.Settings.Default.UpdateProxyPort), System.Convert.ToBoolean(My.Settings.Default.UpdateProxyUseAuthentication), System.Convert.ToString(My.Settings.Default.UpdateProxyAuthUser), Security.Crypt.Decrypt(System.Convert.ToString(My.Settings.Default.UpdateProxyAuthPass), Info.GeneralAppInfo.EncryptionKey));
+			SetProxySettings(Convert.ToBoolean(My.Settings.Default.UpdateUseProxy), Convert.ToString(My.Settings.Default.UpdateProxyAddress), Convert.ToInt32(My.Settings.Default.UpdateProxyPort), Convert.ToBoolean(My.Settings.Default.UpdateProxyUseAuthentication), Convert.ToString(My.Settings.Default.UpdateProxyAuthUser), Security.Crypt.Decrypt(Convert.ToString(My.Settings.Default.UpdateProxyAuthPass), Info.GeneralAppInfo.EncryptionKey));
 		}
 			
 		public void SetProxySettings(bool useProxy, string address, int port, bool useAuthentication, string username, string password)
@@ -285,7 +285,7 @@ namespace mRemoteNG.App.Update
 			
 		private void GetUpdateInfo()
 		{
-			Uri updateFileUri = new Uri(new Uri(System.Convert.ToString(My.Settings.Default.UpdateAddress)), new Uri(Info.UpdateChannelInfo.FileName, UriKind.Relative));
+			Uri updateFileUri = new Uri(new Uri(Convert.ToString(My.Settings.Default.UpdateAddress)), new Uri(Info.UpdateChannelInfo.FileName, UriKind.Relative));
 			DownloadStringCompletedEventArgs e = DownloadString(updateFileUri);
 				
 			if (!e.Cancelled && e.Error == null)
@@ -318,7 +318,7 @@ namespace mRemoteNG.App.Update
 			
 		private void GetAnnouncementInfo()
 		{
-			Uri announcementFileUri = new Uri(System.Convert.ToString(My.Settings.Default.AnnouncementAddress));
+			Uri announcementFileUri = new Uri(Convert.ToString(My.Settings.Default.AnnouncementAddress));
 			DownloadStringCompletedEventArgs e = DownloadString(announcementFileUri);
 				
 			if (!e.Cancelled && e.Error == null)

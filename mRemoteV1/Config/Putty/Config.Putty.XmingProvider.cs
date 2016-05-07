@@ -116,7 +116,7 @@ namespace mRemoteNG.Config.Putty
 					object sshVersionObject = sessionFileReader.GetValue("SshProt");
 					if (sshVersionObject != null)
 					{
-						int sshVersion = System.Convert.ToInt32(sshVersionObject);
+						int sshVersion = Convert.ToInt32(sshVersionObject);
 						if (sshVersion >= 2)
 						{
 							sessionInfo.Protocol = ProtocolType.SSH2;

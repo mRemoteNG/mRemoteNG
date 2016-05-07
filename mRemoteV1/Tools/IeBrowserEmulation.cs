@@ -26,7 +26,7 @@ namespace mRemoteNG.Tools
 					}
 				}
 				string exeName = Path.GetFileName(Process.GetCurrentProcess().MainModule.FileName);
-				_previousIeBrowserEmulationValue = System.Convert.ToInt32(registryKey.GetValue(exeName, 0));
+				_previousIeBrowserEmulationValue = Convert.ToInt32(registryKey.GetValue(exeName, 0));
 				registryKey.SetValue(exeName, 11000, RegistryValueKind.DWord);
 			}
 			catch (Exception ex)

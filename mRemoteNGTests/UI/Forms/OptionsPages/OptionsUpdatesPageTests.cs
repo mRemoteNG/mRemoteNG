@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System;
-using NUnit.Framework;
-using mRemoteNGTests.UI.Forms;
+﻿using NUnit.Framework;
 using NUnit.Extensions.Forms;
 
 namespace mRemoteNGTests.UI.Forms.OptionsPages

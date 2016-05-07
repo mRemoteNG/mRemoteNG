@@ -124,7 +124,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.PerformLayout();
 				
 		}
-		internal System.Windows.Forms.Label Label1;
 		internal System.Windows.Forms.Label lblLanguageRestartRequired;
 		internal System.Windows.Forms.ComboBox cboLanguage;
 		internal System.Windows.Forms.Label lblLanguage;

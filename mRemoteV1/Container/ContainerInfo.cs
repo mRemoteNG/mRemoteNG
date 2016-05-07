@@ -33,8 +33,8 @@ namespace mRemoteNG.Container
             DesignOnly(false)]
         public TreeNode TreeNode
 		{
-			get { return this._TreeNode; }
-			set { this._TreeNode = value; }
+			get { return _TreeNode; }
+			set { _TreeNode = value; }
 		}
 			
 		private object _Parent;
@@ -42,8 +42,8 @@ namespace mRemoteNG.Container
             Browsable(false)]
         public object Parent
 		{
-			get { return this._Parent; }
-			set { this._Parent = value; }
+			get { return _Parent; }
+			set { _Parent = value; }
 		}
 			
 		//Private _GlobalID As Integer = 0
@@ -67,35 +67,32 @@ namespace mRemoteNG.Container
             DesignOnly(false)]
         public bool IsExpanded
 		{
-			get { return this._IsExpanded; }
-			set { this._IsExpanded = value; }
+			get { return _IsExpanded; }
+			set { _IsExpanded = value; }
 		}
 			
 		private Connection.ConnectionInfo _ConnectionInfo = new Connection.ConnectionInfo();
         public Connection.ConnectionInfo ConnectionInfo
 		{
-			get { return this._ConnectionInfo; }
-			set { this._ConnectionInfo = value; }
+			get { return _ConnectionInfo; }
+			set { _ConnectionInfo = value; }
 		}
         #endregion
 			
         #region Methods
-		public Container.ContainerInfo Copy()
+		public ContainerInfo Copy()
 		{
-			return (ContainerInfo)this.MemberwiseClone();
+			return (ContainerInfo)MemberwiseClone();
 		}
 			
 		public ContainerInfo()
 		{
-			this.SetDefaults();
+            SetDefaults();
 		}
 			
 		public void SetDefaults()
 		{
-			if (this.IsExpanded == null)
-			{
-				this.IsExpanded = true;
-			}
+            IsExpanded = true;
 		}
         #endregion
 	}

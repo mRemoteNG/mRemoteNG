@@ -4,19 +4,20 @@ using mRemoteNG.Container;
 using mRemoteNG.Images;
 using System;
 using System.Windows.Forms;
-
+using mRemoteNG.Messages;
+using mRemoteNG.Root.PuttySessions;
 
 namespace mRemoteNG.Tree
 {
-	public class Node
+	public class ConnectionTreeNode
     {
         #region Public Methods
 		public static string GetConstantID(TreeNode node)
 		{
 			if (GetNodeType(node) == TreeNodeType.Connection)
-				return (node.Tag as mRemoteNG.Connection.ConnectionInfo).ConstantID;
+				return (node.Tag as ConnectionInfo).ConstantID;
 			else if (GetNodeType(node) == TreeNodeType.Container)
-				return (node.Tag as mRemoteNG.Container.ContainerInfo).ConnectionInfo.ConstantID;
+				return (node.Tag as ContainerInfo).ConnectionInfo.ConstantID;
 				
 			return null;
 		}
@@ -60,9 +61,9 @@ namespace mRemoteNG.Tree
                 if (treeNode == null || treeNode.Tag == null)
 					return TreeNodeType.None;
 					
-				if (treeNode.Tag is Root.PuttySessions.Info)
+				if (treeNode.Tag is PuttySessionsNodeInfo)
 					return TreeNodeType.PuttyRoot;
-				else if (treeNode.Tag is Root.Info)
+				else if (treeNode.Tag is Root.RootNodeInfo)
 					return TreeNodeType.Root;
 				else if (treeNode.Tag is ContainerInfo)
 					return TreeNodeType.Container;
@@ -73,7 +74,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t get node type" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t get node type" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return TreeNodeType.None;
@@ -95,7 +96,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t get node type from string" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t get node type from string" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return TreeNodeType.None;
@@ -110,7 +111,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "IsEmpty (Tree.Node) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "IsEmpty (Tree.Node) failed" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return true;
@@ -153,7 +154,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNode failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "AddNode failed" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return null;
@@ -170,7 +171,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, string.Format(My.Language.strErrorCloneNodeFailed, ex.Message));
+				Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(My.Language.strErrorCloneNodeFailed, ex.Message));
 			}
 		}
 
@@ -210,7 +211,7 @@ namespace mRemoteNG.Tree
 
         private static void CloneConnectionNode(TreeNode oldTreeNode, TreeNode parentNode)
         {
-            ConnectionInfo oldConnectionInfo = (Connection.ConnectionInfo)oldTreeNode.Tag;
+            ConnectionInfo oldConnectionInfo = (ConnectionInfo)oldTreeNode.Tag;
 
             ConnectionInfo newConnectionInfo = oldConnectionInfo.Copy();
             ConnectionInfoInheritance newInheritance = oldConnectionInfo.Inherit.Copy();
@@ -233,7 +234,7 @@ namespace mRemoteNG.Tree
             }
             else
             {
-                ContainerInfo parentContainerInfo = parentNode.Tag as Container.ContainerInfo;
+                ContainerInfo parentContainerInfo = parentNode.Tag as ContainerInfo;
                 if (parentContainerInfo != null)
                 {
                     newConnectionInfo.Parent = parentContainerInfo;

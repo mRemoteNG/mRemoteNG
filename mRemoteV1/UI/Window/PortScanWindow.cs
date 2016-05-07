@@ -94,7 +94,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(My.Language.strPortScanCouldNotLoadPanel, ex);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strPortScanCouldNotLoadPanel, ex);
 			}
 		}
 				
@@ -122,14 +122,14 @@ namespace mRemoteNG.UI.Window
 				}
 				else
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strCannotStartPortScan);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.strCannotStartPortScan);
 				}
 			}
 		}
 				
 		public void btnImport_Click(System.Object sender, EventArgs e)
 		{
-            mRemoteNG.Connection.Protocol.ProtocolType protocol = (mRemoteNG.Connection.Protocol.ProtocolType)Tools.MiscTools.StringToEnum(typeof(mRemoteNG.Connection.Protocol.ProtocolType), System.Convert.ToString(cbProtocol.SelectedItem));
+            mRemoteNG.Connection.Protocol.ProtocolType protocol = (mRemoteNG.Connection.Protocol.ProtocolType)Tools.MiscTools.StringToEnum(typeof(mRemoteNG.Connection.Protocol.ProtocolType), Convert.ToString(cbProtocol.SelectedItem));
 					
 			List<Tools.PortScan.ScanHost> hosts = new List<Tools.PortScan.ScanHost>();
 			foreach (ListViewItem item in lvHosts.SelectedItems)
@@ -148,18 +148,18 @@ namespace mRemoteNG.UI.Window
 				
 		private void ApplyLanguage()
 		{
-			lblStartIP.Text = string.Format("{0}:", My.Language.strStartIP);
-			lblEndIP.Text = string.Format("{0}:", My.Language.strEndIP);
-			btnScan.Text = My.Language.strButtonScan;
-			btnImport.Text = My.Language.strButtonImport;
-			lblOnlyImport.Text = string.Format("{0}:", My.Language.strProtocolToImport);
-			clmHost.Text = My.Language.strColumnHostnameIP;
-			clmOpenPorts.Text = My.Language.strOpenPorts;
-			clmClosedPorts.Text = My.Language.strClosedPorts;
-			Label2.Text = string.Format("{0}:", My.Language.strEndPort);
-			Label1.Text = string.Format("{0}:", My.Language.strStartPort);
-			TabText = My.Language.strMenuPortScan;
-			Text = My.Language.strMenuPortScan;
+			lblStartIP.Text = string.Format("{0}:", Language.strStartIP);
+			lblEndIP.Text = string.Format("{0}:", Language.strEndIP);
+			btnScan.Text = Language.strButtonScan;
+			btnImport.Text = Language.strButtonImport;
+			lblOnlyImport.Text = string.Format("{0}:", Language.strProtocolToImport);
+			clmHost.Text = Language.strColumnHostnameIP;
+			clmOpenPorts.Text = Language.strOpenPorts;
+			clmClosedPorts.Text = Language.strClosedPorts;
+			Label2.Text = string.Format("{0}:", Language.strEndPort);
+			Label1.Text = string.Format("{0}:", Language.strStartPort);
+			TabText = Language.strMenuPortScan;
+			Text = Language.strMenuPortScan;
 		}
 				
 		private void ShowImportControls(bool controlsVisible)
@@ -222,11 +222,11 @@ namespace mRemoteNG.UI.Window
 		{
 			if (_scanning)
 			{
-				btnScan.Text = My.Language.strButtonStop;
+				btnScan.Text = Language.strButtonStop;
 			}
 			else
 			{
-				btnScan.Text = My.Language.strButtonScan;
+				btnScan.Text = Language.strButtonScan;
 			}
 					
 			prgBar.Maximum = 100;

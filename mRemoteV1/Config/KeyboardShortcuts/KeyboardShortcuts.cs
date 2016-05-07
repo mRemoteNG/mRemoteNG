@@ -76,8 +76,8 @@ namespace mRemoteNG.Config.KeyboardShortcuts
 				return ;
 			}
 			_defaultMap = new KeyboardShortcutMap();
-			_defaultMap.AddFromConfigString(ShortcutCommand.PreviousTab, System.Convert.ToString(My.Settings.Default.Properties["KeysPreviousTab"].DefaultValue));
-			_defaultMap.AddFromConfigString(ShortcutCommand.NextTab, System.Convert.ToString(My.Settings.Default.Properties["KeysNextTab"].DefaultValue));
+			_defaultMap.AddFromConfigString(ShortcutCommand.PreviousTab, Convert.ToString(My.Settings.Default.Properties["KeysPreviousTab"].DefaultValue));
+			_defaultMap.AddFromConfigString(ShortcutCommand.NextTab, Convert.ToString(My.Settings.Default.Properties["KeysNextTab"].DefaultValue));
 		}
 			
 		private static void Load()
@@ -87,8 +87,8 @@ namespace mRemoteNG.Config.KeyboardShortcuts
 				return ;
 			}
 			_map = new KeyboardShortcutMap();
-			_map.AddFromConfigString(ShortcutCommand.PreviousTab, System.Convert.ToString(My.Settings.Default.KeysPreviousTab));
-			_map.AddFromConfigString(ShortcutCommand.NextTab, System.Convert.ToString(My.Settings.Default.KeysNextTab));
+			_map.AddFromConfigString(ShortcutCommand.PreviousTab, Convert.ToString(My.Settings.Default.KeysPreviousTab));
+			_map.AddFromConfigString(ShortcutCommand.NextTab, Convert.ToString(My.Settings.Default.KeysNextTab));
 			_mapLoaded = true;
 		}
 			

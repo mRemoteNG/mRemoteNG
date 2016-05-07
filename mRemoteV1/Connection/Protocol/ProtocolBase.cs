@@ -14,7 +14,7 @@ namespace mRemoteNG.Connection.Protocol
         private UI.Window.ConnectionWindow _connectionWindow;
         private InterfaceControl _interfaceControl;
         private Control _Control;
-        private mRemoteNG.Connection.ConnectionInfo.Force _Force;
+        private ConnectionInfo.Force _Force;
         private ConnectingEventHandler ConnectingEvent;
         private ConnectedEventHandler ConnectedEvent;
         private DisconnectedEventHandler DisconnectedEvent;

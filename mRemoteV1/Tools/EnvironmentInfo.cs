@@ -18,7 +18,7 @@ namespace mRemoteNG.Tools
 				}
 					
 				bool isWow64Process = false;
-				bool result = System.Convert.ToBoolean(isWow64ProcessDelegate.Invoke(Process.GetCurrentProcess().Handle, ref isWow64Process));
+				bool result = Convert.ToBoolean(isWow64ProcessDelegate.Invoke(Process.GetCurrentProcess().Handle, ref isWow64Process));
 				if (!result)
 				{
 					return false;

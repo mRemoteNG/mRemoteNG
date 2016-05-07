@@ -3,22 +3,19 @@ using System.ComponentModel;
 using System.Windows.Forms;
 
 
-namespace mRemoteNG.Root
+namespace mRemoteNG.Tree.Root
 {
 	[DefaultProperty("Name")]
-    public class Info
+    public class RootNodeInfo
     {
-        #region Private Properties
         private string _name;
-        #endregion
 
-        #region Constructors
-        public Info(RootType rootType)
+
+        public RootNodeInfo(RootNodeType rootType)
 		{
 			_name = My.Language.strConnections;
 			Type = rootType;
 		}
-        #endregion
 			
         #region Public Properties
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1), 
@@ -54,19 +51,10 @@ namespace mRemoteNG.Root
         public string PasswordString {get; set;}
 			
 		[Browsable(false)]
-        public RootType Type {get; set;}
+        public RootNodeType Type {get; set;}
 			
 		[Browsable(false)]
         public TreeNode TreeNode {get; set;}
-        #endregion
-			
-        #region Public Enumerations
-		public enum RootType
-		{
-			Connection,
-			Credential,
-			PuttySessions
-		}
         #endregion
 	}
 }

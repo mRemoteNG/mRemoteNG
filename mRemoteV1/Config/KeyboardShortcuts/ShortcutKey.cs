@@ -85,7 +85,7 @@ namespace mRemoteNG.Config.KeyboardShortcuts
                 if (ModifierKeys != other.ModifierKeys)
                     return false;
             }
-            catch (NullReferenceException e)
+            catch (NullReferenceException)
             {
                 return false;
             }

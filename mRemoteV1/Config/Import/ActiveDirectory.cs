@@ -24,7 +24,7 @@ namespace mRemoteNG.Config.Import
 		{
 			try
 			{
-				TreeNode treeNode = Tree.Node.AddNode(Tree.TreeNodeType.Container);
+				TreeNode treeNode = Tree.ConnectionTreeNode.AddNode(Tree.TreeNodeType.Container);
 					
 				ContainerInfo containerInfo = new ContainerInfo();
 				containerInfo.TreeNode = treeNode;
@@ -38,13 +38,13 @@ namespace mRemoteNG.Config.Import
 				}
 				else
 				{
-					name = My.Language.strActiveDirectory;
+					name = Language.strActiveDirectory;
 				}
 					
 				containerInfo.Name = name;
 					
 				// We can only inherit from a container node, not the root node or connection nodes
-				if (Tree.Node.GetNodeType(parentTreeNode) == Tree.TreeNodeType.Container)
+				if (Tree.ConnectionTreeNode.GetNodeType(parentTreeNode) == Tree.TreeNodeType.Container)
 				{
 					containerInfo.Parent = parentTreeNode.Tag;
 				}
@@ -97,7 +97,7 @@ namespace mRemoteNG.Config.Import
 					strDescription = Convert.ToString(with_2.Properties["Description"].Value);
 					strHostName = Convert.ToString(with_2.Properties["dNSHostName"].Value);
 						
-					TreeNode treeNode = Tree.Node.AddNode(Tree.TreeNodeType.Connection, strDisplayName);
+					TreeNode treeNode = Tree.ConnectionTreeNode.AddNode(Tree.TreeNodeType.Connection, strDisplayName);
 						
 					ConnectionInfo connectionInfo = new ConnectionInfo();
 					ConnectionInfoInheritance inheritanceInfo = new ConnectionInfoInheritance(connectionInfo, true);

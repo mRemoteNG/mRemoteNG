@@ -36,7 +36,7 @@ namespace mRemoteNG.Connection
 				
         #region Properties
 		[Browsable(false)]
-        public Root.PuttySessions.Info RootPuttySessionsInfo { get; set; }
+        public Root.PuttySessions.PuttySessionsNodeInfo RootPuttySessionsInfo { get; set; }
 				
 		[ReadOnly(true)]
         public override string PuttySession { get; set; }

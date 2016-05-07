@@ -130,14 +130,14 @@ namespace mRemoteNG.Messages
         {
             switch (Msg.MsgClass)
             {
-                case Messages.MessageClass.InformationMsg:
-                    MessageBox.Show(Msg.MsgText, string.Format(My.Language.strTitleInformation, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                case MessageClass.InformationMsg:
+                    MessageBox.Show(Msg.MsgText, string.Format(Language.strTitleInformation, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Information);
                     break;
-                case Messages.MessageClass.WarningMsg:
-                    MessageBox.Show(Msg.MsgText, string.Format(My.Language.strTitleWarning, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                case MessageClass.WarningMsg:
+                    MessageBox.Show(Msg.MsgText, string.Format(Language.strTitleWarning, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     break;
-                case Messages.MessageClass.ErrorMsg:
-                    MessageBox.Show(Msg.MsgText, string.Format(My.Language.strTitleError, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                case MessageClass.ErrorMsg:
+                    MessageBox.Show(Msg.MsgText, string.Format(Language.strTitleError, Msg.MsgDate), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     break;
             }
         }

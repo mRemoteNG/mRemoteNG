@@ -1,24 +1,22 @@
 using mRemoteNG.My;
 using mRemoteNG.Tools;
+using mRemoteNG.Tree.Root;
 using System.Windows.Forms;
 
 
 namespace mRemoteNG.Root.PuttySessions
 {
-	public class Info : Root.Info
+	public class PuttySessionsNodeInfo : RootNodeInfo
     {
-        #region Private Variables
         private string _name;
         private string _panel;
-        #endregion
 
-        #region Constructors
-        public Info() : base(RootType.PuttySessions)
+
+        public PuttySessionsNodeInfo() : base(RootNodeType.PuttySessions)
 		{
 			_name = Language.strPuttySavedSessionsRootName;
-			_panel = My.Language.strGeneral;
+			_panel = Language.strGeneral;
 		}
-        #endregion
 
         #region Public Properties
         [LocalizedAttributes.LocalizedDefaultValue("strPuttySavedSessionsRootName")]
@@ -36,7 +34,7 @@ namespace mRemoteNG.Root.PuttySessions
 				{
 					TreeNode.Text = value;
 				}
-                My.Settings.Default.PuttySavedSessionsName = value;
+                Settings.Default.PuttySavedSessionsName = value;
 			}
 		}
 				
@@ -53,7 +51,7 @@ namespace mRemoteNG.Root.PuttySessions
 					return ;
 				}
 				_panel = value;
-				My.Settings.Default.PuttySavedSessionsPanel = value;
+                Settings.Default.PuttySavedSessionsPanel = value;
 			}
         }
         #endregion

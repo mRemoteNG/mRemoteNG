@@ -190,11 +190,11 @@ namespace mRemoteNG.App
 			
 		private static TreeNode GetContainerTreeNode(TreeNode treeNode)
 		{
-			if ((Tree.Node.GetNodeType(treeNode) == Tree.TreeNodeType.Root) || (Tree.Node.GetNodeType(treeNode) == Tree.TreeNodeType.Container))
+			if ((Tree.ConnectionTreeNode.GetNodeType(treeNode) == Tree.TreeNodeType.Root) || (Tree.ConnectionTreeNode.GetNodeType(treeNode) == Tree.TreeNodeType.Container))
 			{
 				return treeNode;
 			}
-			else if (Tree.Node.GetNodeType(treeNode) == Tree.TreeNodeType.Connection)
+			else if (Tree.ConnectionTreeNode.GetNodeType(treeNode) == Tree.TreeNodeType.Connection)
 			{
 				return treeNode.Parent;
 			}
@@ -207,7 +207,7 @@ namespace mRemoteNG.App
 		private static FileType DetermineFileType(string fileName)
 		{
 			// TODO: Use the file contents to determine the file type instead of trusting the extension
-			string fileExtension = System.Convert.ToString(Path.GetExtension(fileName).ToLowerInvariant());
+			string fileExtension = Convert.ToString(Path.GetExtension(fileName).ToLowerInvariant());
 			switch (fileExtension)
 			{
 				case ".xml":

@@ -29,7 +29,7 @@ namespace mRemoteNG.Config.Import
 			xmlDocument.Load(fileName);
 				
 			XmlNode rdcManNode = xmlDocument.SelectSingleNode("/RDCMan");
-			int schemaVersion = System.Convert.ToInt32(rdcManNode.Attributes["schemaVersion"].Value);
+			int schemaVersion = Convert.ToInt32(rdcManNode.Attributes["schemaVersion"].Value);
 			if (!(schemaVersion == 1))
 			{
 				throw (new FileFormatException(string.Format("Unsupported schema version ({0}).", schemaVersion)));
@@ -53,18 +53,18 @@ namespace mRemoteNG.Config.Import
 				
 			TreeNode treeNode = new TreeNode(name);
 			parentTreeNode.Nodes.Add(treeNode);
-				
-			Container.ContainerInfo containerInfo = new Container.ContainerInfo();
+
+            ContainerInfo containerInfo = new ContainerInfo();
 			containerInfo.TreeNode = treeNode;
 			containerInfo.Name = name;
-				
-			Connection.ConnectionInfo connectionInfo = ConnectionInfoFromXml(propertiesNode);
+
+            ConnectionInfo connectionInfo = ConnectionInfoFromXml(propertiesNode);
 			connectionInfo.Parent = containerInfo;
 			connectionInfo.IsContainer = true;
 			containerInfo.ConnectionInfo = connectionInfo;
 				
 			// We can only inherit from a container node, not the root node or connection nodes
-			if (Tree.Node.GetNodeType(parentTreeNode) == Tree.TreeNodeType.Container)
+			if (Tree.ConnectionTreeNode.GetNodeType(parentTreeNode) == Tree.TreeNodeType.Container)
 			{
 				containerInfo.Parent = parentTreeNode.Tag;
 			}

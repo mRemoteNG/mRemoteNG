@@ -18,7 +18,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Images;
 using mRemoteNG.UI.Forms;
-
+using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -205,9 +205,9 @@ namespace mRemoteNG.Config.Connections
 					throw (new Exception(string.Format("Incompatible database schema (schema version {0}).", confVersion)));
 				}
 						
-				RootTreeNode.Name = System.Convert.ToString(sqlRd["Name"]);
+				RootTreeNode.Name = Convert.ToString(sqlRd["Name"]);
 						
-				Root.Info rootInfo = new Root.Info(Root.Info.RootType.Connection);
+				RootNodeInfo rootInfo = new RootNodeInfo(RootNodeType.Connection);
 				rootInfo.Name = RootTreeNode.Name;
 				rootInfo.TreeNode = RootTreeNode;
 						
@@ -215,9 +215,9 @@ namespace mRemoteNG.Config.Connections
 				RootTreeNode.ImageIndex = (int)TreeImageType.Root;
                 RootTreeNode.SelectedImageIndex = (int)TreeImageType.Root;
 						
-				if (Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["Protected"]), pW) != "ThisIsNotProtected")
+				if (Security.Crypt.Decrypt(Convert.ToString(sqlRd["Protected"]), pW) != "ThisIsNotProtected")
 				{
-					if (Authenticate(System.Convert.ToString(sqlRd["Protected"]), false, rootInfo) == false)
+					if (Authenticate(Convert.ToString(sqlRd["Protected"]), false, rootInfo) == false)
 					{
 						My.Settings.Default.LoadConsFromCustomLocation = false;
 						My.Settings.Default.CustomConsPath = "";
@@ -236,7 +236,7 @@ namespace mRemoteNG.Config.Connections
 				RootTreeNode.Expand();
 						
 				//expand containers
-				foreach (Container.ContainerInfo contI in this._ContainerList)
+				foreach (ContainerInfo contI in this._ContainerList)
 				{
 					if (contI.IsExpanded == true)
 					{
@@ -249,7 +249,7 @@ namespace mRemoteNG.Config.Connections
 				//open connections from last mremote session
 				if (My.Settings.Default.OpenConsFromLastSession == true && My.Settings.Default.NoReconnect == false)
 				{
-					foreach (Connection.ConnectionInfo conI in ConnectionList)
+					foreach (ConnectionInfo conI in ConnectionList)
 					{
 						if (conI.PleaseConnect == true)
 						{
@@ -303,12 +303,12 @@ namespace mRemoteNG.Config.Connections
 						
 				while (sqlRd.Read())
 				{
-					tNode = new TreeNode(System.Convert.ToString(sqlRd["Name"]));
+					tNode = new TreeNode(Convert.ToString(sqlRd["Name"]));
 					//baseNode.Nodes.Add(tNode)
 							
-					if (Tree.Node.GetNodeTypeFromString(System.Convert.ToString(sqlRd["Type"])) == Tree.TreeNodeType.Connection)
+					if (Tree.ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(sqlRd["Type"])) == Tree.TreeNodeType.Connection)
 					{
-						Connection.ConnectionInfo conI = GetConnectionInfoFromSQL();
+                        ConnectionInfo conI = GetConnectionInfoFromSQL();
 						conI.TreeNode = tNode;
 						//conI.Parent = _previousContainer 'NEW
 								
@@ -318,7 +318,7 @@ namespace mRemoteNG.Config.Connections
 								
 						if (SQLUpdate == true)
 						{
-							Connection.ConnectionInfo prevCon = PreviousConnectionList.FindByConstantID(conI.ConstantID);
+                            ConnectionInfo prevCon = PreviousConnectionList.FindByConstantID(conI.ConstantID);
 									
 							if (prevCon != null)
 							{
@@ -356,9 +356,9 @@ namespace mRemoteNG.Config.Connections
                             tNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
 						}
 					}
-					else if (Tree.Node.GetNodeTypeFromString(System.Convert.ToString(sqlRd["Type"])) == Tree.TreeNodeType.Container)
+					else if (Tree.ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(sqlRd["Type"])) == Tree.TreeNodeType.Container)
 					{
-						Container.ContainerInfo contI = new Container.ContainerInfo();
+                        ContainerInfo contI = new ContainerInfo();
 						//If tNode.Parent IsNot Nothing Then
 						//    If Tree.Node.GetNodeType(tNode.Parent) = Tree.Node.Type.Container Then
 						//        contI.Parent = tNode.Parent.Tag
@@ -367,9 +367,9 @@ namespace mRemoteNG.Config.Connections
 						//_previousContainer = contI 'NEW
 						contI.TreeNode = tNode;
 								
-						contI.Name = System.Convert.ToString(sqlRd["Name"]);
-								
-						Connection.ConnectionInfo conI = default(Connection.ConnectionInfo);
+						contI.Name = Convert.ToString(sqlRd["Name"]);
+
+                        ConnectionInfo conI = default(ConnectionInfo);
 								
 						conI = GetConnectionInfoFromSQL();
 								
@@ -379,7 +379,7 @@ namespace mRemoteNG.Config.Connections
 								
 						if (SQLUpdate == true)
 						{
-							Container.ContainerInfo prevCont = PreviousContainerList.FindByConstantID(conI.ConstantID);
+                            ContainerInfo prevCont = PreviousContainerList.FindByConstantID(conI.ConstantID);
 							if (prevCont != null)
 							{
 								contI.IsExpanded = prevCont.IsExpanded;
@@ -392,7 +392,7 @@ namespace mRemoteNG.Config.Connections
 						}
 						else
 						{
-							if (System.Convert.ToBoolean(sqlRd["Expanded"]) == true)
+							if (Convert.ToBoolean(sqlRd["Expanded"]) == true)
 							{
 								contI.IsExpanded = true;
 							}
@@ -410,26 +410,26 @@ namespace mRemoteNG.Config.Connections
                         tNode.SelectedImageIndex = (int)TreeImageType.Container;
 					}
 							
-					string parentId = System.Convert.ToString(sqlRd["ParentID"].ToString().Trim());
+					string parentId = Convert.ToString(sqlRd["ParentID"].ToString().Trim());
 					if (string.IsNullOrEmpty(parentId) || parentId == "0")
 					{
 						baseNode.Nodes.Add(tNode);
 					}
 					else
 					{
-						TreeNode pNode = Tree.Node.GetNodeFromConstantID(System.Convert.ToString(sqlRd["ParentID"]));
+						TreeNode pNode = Tree.ConnectionTreeNode.GetNodeFromConstantID(Convert.ToString(sqlRd["ParentID"]));
 								
 						if (pNode != null)
 						{
 							pNode.Nodes.Add(tNode);
 									
-							if (Tree.Node.GetNodeType(tNode) == Tree.TreeNodeType.Connection)
+							if (Tree.ConnectionTreeNode.GetNodeType(tNode) == Tree.TreeNodeType.Connection)
 							{
-								(tNode.Tag as Connection.ConnectionInfo).Parent = (mRemoteNG.Container.ContainerInfo)pNode.Tag;
+								(tNode.Tag as ConnectionInfo).Parent = (ContainerInfo)pNode.Tag;
 							}
-							else if (Tree.Node.GetNodeType(tNode) == Tree.TreeNodeType.Container)
+							else if (Tree.ConnectionTreeNode.GetNodeType(tNode) == Tree.TreeNodeType.Container)
 							{
-								(tNode.Tag as Container.ContainerInfo).Parent = pNode.Tag;
+								(tNode.Tag as ContainerInfo).Parent = pNode.Tag;
 							}
 						}
 						else
@@ -443,7 +443,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodesFromSqlFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strAddNodesFromSqlFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -459,7 +459,7 @@ namespace mRemoteNG.Config.Connections
 				connectionInfo.Description = Convert.ToString(sqlRd["Description"]);
 				connectionInfo.Hostname = Convert.ToString(sqlRd["Hostname"]);
 				connectionInfo.Username = Convert.ToString(sqlRd["Username"]);
-				connectionInfo.Password = Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["Password"]), pW);
+				connectionInfo.Password = Security.Crypt.Decrypt(Convert.ToString(sqlRd["Password"]), pW);
 				connectionInfo.Domain = Convert.ToString(sqlRd["DomainName"]);
 				connectionInfo.DisplayWallpaper = Convert.ToBoolean(sqlRd["DisplayWallpaper"]);
 				connectionInfo.DisplayThemes = Convert.ToBoolean(sqlRd["DisplayThemes"]);
@@ -471,7 +471,7 @@ namespace mRemoteNG.Config.Connections
 				connectionInfo.RedirectSmartCards = Convert.ToBoolean(sqlRd["RedirectSmartCards"]);
 				connectionInfo.RedirectKeys = Convert.ToBoolean(sqlRd["RedirectKeys"]);
                 connectionInfo.RedirectSound = (ProtocolRDP.RDPSounds)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPSounds), Convert.ToString(sqlRd["RedirectSound"]));
-                connectionInfo.Protocol = (Connection.Protocol.ProtocolType)Tools.MiscTools.StringToEnum(typeof(ProtocolType), Convert.ToString(sqlRd["Protocol"]));
+                connectionInfo.Protocol = (ProtocolType)Tools.MiscTools.StringToEnum(typeof(ProtocolType), Convert.ToString(sqlRd["Protocol"]));
 				connectionInfo.Port = Convert.ToInt32(sqlRd["Port"]);
 				connectionInfo.PuttySession = Convert.ToString(sqlRd["PuttySession"]);
                 connectionInfo.Colors = (ProtocolRDP.RDPColors)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPColors), Convert.ToString(sqlRd["Colors"]));
@@ -520,7 +520,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.VNCProxyIP = Convert.ToString(sqlRd["VNCProxyIP"]);
 					connectionInfo.VNCProxyPort = Convert.ToInt32(sqlRd["VNCProxyPort"]);
 					connectionInfo.VNCProxyUsername = Convert.ToString(sqlRd["VNCProxyUsername"]);
-					connectionInfo.VNCProxyPassword = Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["VNCProxyPassword"]), pW);
+					connectionInfo.VNCProxyPassword = Security.Crypt.Decrypt(Convert.ToString(sqlRd["VNCProxyPassword"]), pW);
                     connectionInfo.VNCColors = (ProtocolVNC.Colors)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Colors), Convert.ToString(sqlRd["VNCColors"]));
                     connectionInfo.VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.SmartSizeMode), Convert.ToString(sqlRd["VNCSmartSizeMode"]));
 					connectionInfo.VNCViewOnly = Convert.ToBoolean(sqlRd["VNCViewOnly"]);
@@ -567,9 +567,9 @@ namespace mRemoteNG.Config.Connections
 				{
                     connectionInfo.RDGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDGatewayUsageMethod), Convert.ToString(sqlRd["RDGatewayUsageMethod"]));
 					connectionInfo.RDGatewayHostname = Convert.ToString(sqlRd["RDGatewayHostname"]);
-                    connectionInfo.RDGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), System.Convert.ToString(sqlRd["RDGatewayUseConnectionCredentials"]));
+                    connectionInfo.RDGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), Convert.ToString(sqlRd["RDGatewayUseConnectionCredentials"]));
 					connectionInfo.RDGatewayUsername = Convert.ToString(sqlRd["RDGatewayUsername"]);
-					connectionInfo.RDGatewayPassword = Security.Crypt.Decrypt(System.Convert.ToString(sqlRd["RDGatewayPassword"]), pW);
+					connectionInfo.RDGatewayPassword = Security.Crypt.Decrypt(Convert.ToString(sqlRd["RDGatewayPassword"]), pW);
 					connectionInfo.RDGatewayDomain = Convert.ToString(sqlRd["RDGatewayDomain"]);
 					connectionInfo.Inherit.RDGatewayUsageMethod = Convert.ToBoolean(sqlRd["InheritRDGatewayUsageMethod"]);
 					connectionInfo.Inherit.RDGatewayHostname = Convert.ToBoolean(sqlRd["InheritRDGatewayHostname"]);
@@ -609,7 +609,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strGetConnectionInfoFromSqlFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strGetConnectionInfoFromSqlFailed + Environment.NewLine + ex.Message, true);
 			}
 					
 			return null;
@@ -702,7 +702,7 @@ namespace mRemoteNG.Config.Connections
 				}
 				else
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strOldConffile);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.strOldConffile);
 				}
 						
 				const double maxSupportedConfVersion = 2.5;
@@ -726,7 +726,7 @@ namespace mRemoteNG.Config.Connections
 				}
 						
 				// SECTION 2. Initialize the treeview control.
-				Root.Info rootInfo = default(Root.Info);
+				RootNodeInfo rootInfo = default(RootNodeInfo);
 				if (import)
 				{
 					rootInfo = null;
@@ -736,7 +736,7 @@ namespace mRemoteNG.Config.Connections
 					string rootNodeName = "";
 					if (xDom.DocumentElement.HasAttribute("Name"))
 					{
-						rootNodeName = System.Convert.ToString(xDom.DocumentElement.Attributes["Name"].Value.Trim());
+						rootNodeName = Convert.ToString(xDom.DocumentElement.Attributes["Name"].Value.Trim());
 					}
 					if (!string.IsNullOrEmpty(rootNodeName))
 					{
@@ -748,7 +748,7 @@ namespace mRemoteNG.Config.Connections
 					}
 					RootTreeNode.Text = RootTreeNode.Name;
 							
-					rootInfo = new Root.Info(Root.Info.RootType.Connection);
+					rootInfo = new RootNodeInfo(RootNodeType.Connection);
 					rootInfo.Name = RootTreeNode.Name;
 					rootInfo.TreeNode = RootTreeNode;
 							
@@ -757,9 +757,9 @@ namespace mRemoteNG.Config.Connections
 						
 				if (this.confVersion > 1.3) //1.4
 				{
-					if (Security.Crypt.Decrypt(System.Convert.ToString(xDom.DocumentElement.Attributes["Protected"].Value), pW) != "ThisIsNotProtected")
+					if (Security.Crypt.Decrypt(Convert.ToString(xDom.DocumentElement.Attributes["Protected"].Value), pW) != "ThisIsNotProtected")
 					{
-						if (Authenticate(System.Convert.ToString(xDom.DocumentElement.Attributes["Protected"].Value), false, rootInfo) == false)
+						if (Authenticate(Convert.ToString(xDom.DocumentElement.Attributes["Protected"].Value), false, rootInfo) == false)
 						{
 							My.Settings.Default.LoadConsFromCustomLocation = false;
 							My.Settings.Default.CustomConsPath = "";
@@ -772,7 +772,7 @@ namespace mRemoteNG.Config.Connections
 				bool isExportFile = false;
 				if (confVersion >= 1.0)
 				{
-					if (System.Convert.ToBoolean(xDom.DocumentElement.Attributes["Export"].Value) == true)
+					if (Convert.ToBoolean(xDom.DocumentElement.Attributes["Export"].Value) == true)
 					{
 						isExportFile = true;
 					}
@@ -780,7 +780,7 @@ namespace mRemoteNG.Config.Connections
 						
 				if (import && !isExportFile)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strCannotImportNormalSessionFile);
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.strCannotImportNormalSessionFile);
 					return ;
 				}
 						
@@ -798,7 +798,7 @@ namespace mRemoteNG.Config.Connections
 				RootTreeNode.Expand();
 						
 				//expand containers
-				foreach (Container.ContainerInfo contI in this._ContainerList)
+				foreach (ContainerInfo contI in this._ContainerList)
 				{
 					if (contI.IsExpanded == true)
 					{
@@ -811,7 +811,7 @@ namespace mRemoteNG.Config.Connections
 				//open connections from last mremote session
 				if (My.Settings.Default.OpenConsFromLastSession == true && My.Settings.Default.NoReconnect == false)
 				{
-					foreach (Connection.ConnectionInfo conI in ConnectionList)
+					foreach (ConnectionInfo conI in ConnectionList)
 					{
 						if (conI.PleaseConnect == true)
 						{
@@ -832,7 +832,7 @@ namespace mRemoteNG.Config.Connections
 			catch (Exception ex)
 			{
 				App.Runtime.IsConnectionsFileLoaded = false;
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strLoadFromXmlFailed + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strLoadFromXmlFailed + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, true);
 				throw;
 			}
 		}
@@ -851,7 +851,7 @@ namespace mRemoteNG.Config.Connections
 						TreeNode treeNode = new TreeNode(xmlNode.Attributes["Name"].Value);
 						parentTreeNode.Nodes.Add(treeNode);
 								
-						if (Tree.Node.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == TreeNodeType.Connection) //connection info
+						if (Tree.ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == TreeNodeType.Connection) //connection info
 						{
 							ConnectionInfo connectionInfo = GetConnectionInfoFromXml(xmlNode);
 							connectionInfo.TreeNode = treeNode;
@@ -863,12 +863,12 @@ namespace mRemoteNG.Config.Connections
                             treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
                             treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
 						}
-						else if (Tree.Node.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == TreeNodeType.Container) //container info
+						else if (Tree.ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == TreeNodeType.Container) //container info
 						{
-							ContainerInfo containerInfo = new Container.ContainerInfo();
+							ContainerInfo containerInfo = new ContainerInfo();
 							if (treeNode.Parent != null)
 							{
-								if (Tree.Node.GetNodeType(treeNode.Parent) == TreeNodeType.Container)
+								if (Tree.ConnectionTreeNode.GetNodeType(treeNode.Parent) == TreeNodeType.Container)
 								{
 									containerInfo.Parent = treeNode.Parent.Tag;
 								}
@@ -934,7 +934,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strAddNodeFromXmlFailed + Environment.NewLine + ex.Message + ex.StackTrace, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strAddNodeFromXmlFailed + Environment.NewLine + ex.Message + ex.StackTrace, true);
 				throw;
 			}
 		}
@@ -995,10 +995,10 @@ namespace mRemoteNG.Config.Connections
 				{
 					if (this.confVersion < 0.7)
 					{
-						if (System.Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
-                            connectionInfo.Port = System.Convert.ToInt32(xmlnode.Attributes["VNCPort"].Value);
+						if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
+                            connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["VNCPort"].Value);
 						else
-                            connectionInfo.Port = System.Convert.ToInt32(xmlnode.Attributes["RDPPort"].Value);
+                            connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["RDPPort"].Value);
 					}
 							
 					connectionInfo.UseConsoleSession = bool.Parse(xmlnode.Attributes["ConnectToConsole"].Value);
@@ -1007,7 +1007,7 @@ namespace mRemoteNG.Config.Connections
 				{
 					if (this.confVersion < 0.7)
 					{
-						if (System.Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
+						if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
 							connectionInfo.Port = (int)ProtocolVNC.Defaults.Port;
 						else
 							connectionInfo.Port = (int)ProtocolRDP.Defaults.Port;
@@ -1032,7 +1032,7 @@ namespace mRemoteNG.Config.Connections
 				
 				if (this.confVersion > 0.6) //0.7
 				{
-                    connectionInfo.Protocol = (Connection.Protocol.ProtocolType)Tools.MiscTools.StringToEnum(typeof(Connection.Protocol.ProtocolType), xmlnode.Attributes["Protocol"].Value);
+                    connectionInfo.Protocol = (ProtocolType)Tools.MiscTools.StringToEnum(typeof(ProtocolType), xmlnode.Attributes["Protocol"].Value);
                     connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["Port"].Value);
 				}
 				
@@ -1107,7 +1107,7 @@ namespace mRemoteNG.Config.Connections
 				{
                     connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo, Convert.ToBoolean(xmlnode.Attributes["Inherit"].Value));
 					connectionInfo.Icon = Convert.ToString(xmlnode.Attributes["Icon"].Value.Replace(".ico", ""));
-					connectionInfo.Panel = My.Language.strGeneral;
+					connectionInfo.Panel = Language.strGeneral;
 				}
 				
 				if (this.confVersion > 1.4) //1.5
@@ -1182,7 +1182,7 @@ namespace mRemoteNG.Config.Connections
 					// Get settings
                     connectionInfo.RDGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDGatewayUsageMethod), Convert.ToString(xmlnode.Attributes["RDGatewayUsageMethod"].Value));
 					connectionInfo.RDGatewayHostname = xmlnode.Attributes["RDGatewayHostname"].Value;
-                    connectionInfo.RDGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), System.Convert.ToString(xmlnode.Attributes["RDGatewayUseConnectionCredentials"].Value));
+                    connectionInfo.RDGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), Convert.ToString(xmlnode.Attributes["RDGatewayUseConnectionCredentials"].Value));
 					connectionInfo.RDGatewayUsername = xmlnode.Attributes["RDGatewayUsername"].Value;
 					connectionInfo.RDGatewayPassword = Security.Crypt.Decrypt(Convert.ToString(xmlnode.Attributes["RDGatewayPassword"].Value), pW);
 					connectionInfo.RDGatewayDomain = xmlnode.Attributes["RDGatewayDomain"].Value;
@@ -1223,12 +1223,12 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(My.Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, this.ConnectionFileName, ex.Message), false);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, this.ConnectionFileName, ex.Message), false);
 			}
 			return connectionInfo;
 		}
 				
-		private bool Authenticate(string Value, bool CompareToOriginalValue, Root.Info rootInfo = null)
+		private bool Authenticate(string Value, bool CompareToOriginalValue, RootNodeInfo rootInfo = null)
 		{
 			string passwordName = "";
 			if (UseSQL)

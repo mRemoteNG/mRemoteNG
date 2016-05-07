@@ -659,7 +659,7 @@ namespace mRemoteNG.Connection
         }
 
         [Browsable(false)]
-        public Container.ContainerInfo Parent { get; set; }
+        public ContainerInfo Parent { get; set; }
 
         [Browsable(false)]
         public int PositionID

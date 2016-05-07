@@ -23,7 +23,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 				if (RenderingEngine == RenderingEngine.Gecko)
 				{
 					this.Control = new MiniGeckoBrowser.MiniGeckoBrowser();
-					(this.Control as MiniGeckoBrowser.MiniGeckoBrowser).XULrunnerPath = System.Convert.ToString(My.Settings.Default.XULRunnerPath);
+					(this.Control as MiniGeckoBrowser.MiniGeckoBrowser).XULrunnerPath = Convert.ToString(My.Settings.Default.XULRunnerPath);
 				}
 				else
 				{
@@ -89,7 +89,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 		{
 			try
 			{
-				string strHost = System.Convert.ToString(this.InterfaceControl.Info.Hostname);
+				string strHost = Convert.ToString(this.InterfaceControl.Info.Hostname);
 				string strAuth = "";
 
                 if (!(((int)Force & (int)ConnectionInfo.Force.NoCredentials) == (int)ConnectionInfo.Force.NoCredentials) && !string.IsNullOrEmpty(InterfaceControl.Info.Username) && !string.IsNullOrEmpty(InterfaceControl.Info.Password))

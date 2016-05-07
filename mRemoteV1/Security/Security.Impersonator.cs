@@ -63,7 +63,7 @@ namespace mRemoteNG.Security
 					
 				tokenHandle = IntPtr.Zero;
 					
-				int returnValue = System.Convert.ToInt32(LogonUser(UserName, DomainName, Password, LOGON32_LOGON_NEW_CREDENTIALS, LOGON32_PROVIDER_DEFAULT, ref tokenHandle));
+				int returnValue = Convert.ToInt32(LogonUser(UserName, DomainName, Password, LOGON32_LOGON_NEW_CREDENTIALS, LOGON32_PROVIDER_DEFAULT, ref tokenHandle));
 					
 				if (0 == returnValue)
 				{
