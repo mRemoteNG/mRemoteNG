@@ -86,7 +86,7 @@
     <OutputPath>bin\Debug Portable\</OutputPath>
     <NOWARN>1591,660,661</NOWARN>
     <DebugType>full</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DefineConstants>DEBUG;PORTABLE</DefineConstants>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
