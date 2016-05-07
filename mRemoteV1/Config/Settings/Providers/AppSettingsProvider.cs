@@ -8,7 +8,7 @@ using System.Xml;
 
 namespace mRemoteNG.Config.Settings.Providers
 {
-	public class PortableSettingsProvider : SettingsProvider
+	public class AppSettingsProvider : SettingsProvider
 	{
         const string SETTINGSROOT = "Settings"; //XML Root Node
 
@@ -38,17 +38,17 @@ namespace mRemoteNG.Config.Settings.Providers
             return Path.Combine(GetAppSettingsPath(), GetAppSettingsFilename());
         }
 
+
         public virtual string GetAppSettingsPath()
 		{
-			//Used to determine where to store the settings
-			System.IO.FileInfo fi = new System.IO.FileInfo(Application.ExecutablePath);
-			return fi.DirectoryName;
+            //Used to determine where to store the settings
+            return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
 		}
 		
 		public virtual string GetAppSettingsFilename()
 		{
 			//Used to determine the filename to store the settings
-			return "portable.config"; //ApplicationName & ".settings"
+			return "app.config"; //ApplicationName & ".settings"
 		}
 		
 		public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection propvals)

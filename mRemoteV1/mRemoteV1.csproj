@@ -187,6 +187,7 @@
     <Compile Include="Config\Connections\SqlConnectionsProvider.cs" />
     <Compile Include="Config\Connections\SqlUpdateQueryBuilder.cs" />
     <Compile Include="Config\Connections\SqlUpdateTimer.cs" />
+    <Compile Include="Config\Settings\Providers\AppSettingsProvider.cs" />
     <Compile Include="Config\Settings\Providers\ChooseProvider.cs" />
     <Compile Include="Config\Settings\SettingsLoader.cs" />
     <Compile Include="Config\Settings\Providers\PortableSettingsProvider.cs" />
