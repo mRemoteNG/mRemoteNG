@@ -385,78 +385,27 @@ namespace mRemoteNG.UI.Window
 		static public void tvConnections_DragDrop(object sender, DragEventArgs e)
 		{
 			try
-			{
-				//Check that there is a TreeNode being dragged
-				if (e.Data.GetDataPresent("System.Windows.Forms.TreeNode", true) == false)
-				{
-					return;
-				}
-				
-				//Get the TreeView raising the event (in case multiple on form)
-				TreeView selectedTreeview = (TreeView) sender;
-                
-                //Get the TreeNode being dragged
-                TreeNode dropNode = (TreeNode) (e.Data.GetData("System.Windows.Forms.TreeNode"));
-				
-				//The target node should be selected from the DragOver event
-				TreeNode targetNode = selectedTreeview.SelectedNode;
-				
-				if (dropNode == targetNode)
-					return;
-				
-				if (ConnectionTreeNode.GetNodeType(dropNode) == TreeNodeType.Root)
-					return;
-				
-				if (dropNode == targetNode.Parent)
-					return;
-				
-				//Remove the drop node from its current location
-				dropNode.Remove();
-						
-				//If there is no targetNode add dropNode to the bottom of
-				//the TreeView root nodes, otherwise add it to the end of
-				//the dropNode child nodes
-				
-				if (ConnectionTreeNode.GetNodeType(targetNode) == TreeNodeType.Root | ConnectionTreeNode.GetNodeType(targetNode) == TreeNodeType.Container)
-					targetNode.Nodes.Insert(0, dropNode);
-				else
-					targetNode.Parent.Nodes.Insert(targetNode.Index + 1, dropNode);
-						
-				if (ConnectionTreeNode.GetNodeType(dropNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(dropNode) == TreeNodeType.Container)
-				{
-					if (ConnectionTreeNode.GetNodeType(dropNode.Parent) == TreeNodeType.Container)
-					{
-                        ((ContainerInfo)dropNode.Tag).Parent = (ContainerInfo)dropNode.Parent.Tag;
-					}
-					else if (ConnectionTreeNode.GetNodeType(dropNode.Parent) == TreeNodeType.Root)
-					{
-						if (ConnectionTreeNode.GetNodeType(dropNode) == TreeNodeType.Connection)
-						{
-                            ((ConnectionInfo)dropNode.Tag).Parent = null;
-							((ConnectionInfo)dropNode.Tag).Inherit.TurnOffInheritanceCompletely();
-						}
-						else if (ConnectionTreeNode.GetNodeType(dropNode) == TreeNodeType.Container)
-						{
-                            ((ContainerInfo)dropNode.Tag).Parent = null;
-							((ContainerInfo)dropNode.Tag).ConnectionInfo.Inherit.TurnOffInheritanceCompletely();
-						}
-					}
-				}
-						
-				//Ensure the newly created node is visible to
-				//the user and select it
-				dropNode.EnsureVisible();
-				selectedTreeview.SelectedNode = dropNode;
+            {
+                //Check that there is a TreeNode being dragged
+                if (e.Data.GetDataPresent("System.Windows.Forms.TreeNode", true) == false)
+                    return;
 
-                Runtime.SaveConnectionsBG();
-			}
-			catch (Exception ex)
+                TreeView treeviewThatSentTheEvent = (TreeView)sender;
+                TreeNode nodeBeingDragged = (TreeNode)(e.Data.GetData("System.Windows.Forms.TreeNode"));
+                TreeNode nodeBeingTargetedByDragOverEvent = treeviewThatSentTheEvent.SelectedNode;
+
+                TreeNodeMover treeNodeMover = new TreeNodeMover(nodeBeingDragged);
+                treeNodeMover.MoveNode(nodeBeingTargetedByDragOverEvent);
+            }
+            catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_DragDrop (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
-		static public void tvConnections_DragEnter(object sender, DragEventArgs e)
+
+        
+
+        static public void tvConnections_DragEnter(object sender, DragEventArgs e)
 		{
 			try
 			{

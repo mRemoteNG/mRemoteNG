@@ -6,6 +6,7 @@ using System;
 using System.Windows.Forms;
 using mRemoteNG.Messages;
 using mRemoteNG.Root.PuttySessions;
+using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Tree
 {
@@ -63,7 +64,7 @@ namespace mRemoteNG.Tree
 					
 				if (treeNode.Tag is PuttySessionsNodeInfo)
 					return TreeNodeType.PuttyRoot;
-				else if (treeNode.Tag is Root.RootNodeInfo)
+				else if (treeNode.Tag is RootNodeInfo)
 					return TreeNodeType.Root;
 				else if (treeNode.Tag is ContainerInfo)
 					return TreeNodeType.Container;

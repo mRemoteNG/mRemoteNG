@@ -340,7 +340,7 @@ namespace mRemoteNG.Connection
 		
 		public void TurnOffInheritanceCompletely()
 		{
-			SetAllValues(false);
+			//SetAllValues(false);
 		}
         #endregion
 		
