@@ -6,19 +6,14 @@ namespace mRemoteNG.Connection
 {
 	public class ConnectionList : CollectionBase
 	{
-        #region Public Properties
         public ConnectionInfo this[object Index]
 		{
 			get
 			{
 				if (Index is ConnectionInfo)
-				{
 					return (ConnectionInfo)Index;
-				}
 				else
-				{
 					return ((ConnectionInfo) (List[Convert.ToInt32(Index)]));
-				}
 			}
 		}
 			
@@ -26,41 +21,37 @@ namespace mRemoteNG.Connection
 		{
 			get { return List.Count; }
 		}
-        #endregion
 			
-        #region Public Methods
-		public ConnectionInfo Add(ConnectionInfo cInfo)
+		public ConnectionInfo Add(ConnectionInfo connectionInfo)
 		{
-			this.List.Add(cInfo);
-			return cInfo;
+            List.Add(connectionInfo);
+			return connectionInfo;
 		}
 			
-		public void AddRange(ConnectionInfo[] cInfo)
+		public void AddRange(ConnectionInfo[] connectionInfoArray)
 		{
-			foreach (ConnectionInfo cI in cInfo)
+			foreach (ConnectionInfo connectionInfo in connectionInfoArray)
 			{
-				List.Add(cI);
+				List.Add(connectionInfo);
 			}
 		}
 			
 		public ConnectionInfo FindByConstantID(string id)
 		{
-			foreach (ConnectionInfo conI in List)
+			foreach (ConnectionInfo connectionInfo in List)
 			{
-				if (conI.ConstantID == id)
-				{
-					return conI;
-				}
+				if (connectionInfo.ConstantID == id)
+					return connectionInfo;
 			}
 				
 			return null;
 		}
 			
-		public Connection.ConnectionList Copy()
+		public ConnectionList Copy()
 		{
 			try
 			{
-                return (Connection.ConnectionList)this.MemberwiseClone();
+                return (ConnectionList)MemberwiseClone();
 			}
 			catch (Exception)
 			{
@@ -71,8 +62,7 @@ namespace mRemoteNG.Connection
 			
 		public new void Clear()
 		{
-			this.List.Clear();
+            List.Clear();
 		}
-        #endregion
 	}
 }
