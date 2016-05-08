@@ -22,7 +22,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			if (InterfaceControl.Info != null)
 			{
-				_externalTool = Runtime.GetExtAppByName(System.Convert.ToString(InterfaceControl.Info.ExtApp));
+				_externalTool = Runtime.GetExtAppByName(Convert.ToString(InterfaceControl.Info.ExtApp));
 				_externalTool.ConnectionInfo = InterfaceControl.Info;
 			}
 					
@@ -51,7 +51,7 @@ namespace mRemoteNG.Connection.Protocol
 				_process.Exited += ProcessExited;
 						
 				_process.Start();
-				_process.WaitForInputIdle(System.Convert.ToInt32(My.Settings.Default.MaxPuttyWaitTime * 1000));
+				_process.WaitForInputIdle(Convert.ToInt32(My.Settings.Default.MaxPuttyWaitTime * 1000));
 						
 				int startTicks = Environment.TickCount;
 				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + (My.Settings.Default.MaxPuttyWaitTime * 1000))
@@ -108,7 +108,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return ;
 				}
-                Native.MoveWindow(_handle, System.Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), System.Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
+                Native.MoveWindow(_handle, Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
 			}
 			catch (Exception ex)
 			{

@@ -12,7 +12,7 @@ using System.IO;
 using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.UI.Forms;
-
+using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -185,9 +185,9 @@ namespace mRemoteNG.Config.Connections
 			string strProtected = "";
 			if (tN.Tag != null)
 			{
-				if ((tN.Tag as mRemoteNG.Root.Info).Password == true)
+				if ((tN.Tag as RootNodeInfo).Password == true)
 				{
-					_password = Convert.ToString((tN.Tag as mRemoteNG.Root.Info).PasswordString);
+					_password = Convert.ToString((tN.Tag as RootNodeInfo).PasswordString);
 					strProtected = Security.Crypt.Encrypt("ThisIsProtected", _password);
 				}
 				else
@@ -233,14 +233,14 @@ namespace mRemoteNG.Config.Connections
 				+ "InheritUseCredSsp, " + "PositionID, ParentID, ConstantID, LastChange)" + "VALUES (", _sqlConnection
 				);
 						
-				if (Tree.Node.GetNodeType(node) == TreeNodeType.Connection | Tree.Node.GetNodeType(node) == TreeNodeType.Container)
+				if (Tree.ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection | Tree.ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container)
 				{
 					//_xmlTextWriter.WriteStartElement("Node")
 					_sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(node.Text) + "\',"; //Name
-					_sqlQuery.CommandText += "\'" + Tree.Node.GetNodeType(node).ToString() + "\',"; //Type
+					_sqlQuery.CommandText += "\'" + Tree.ConnectionTreeNode.GetNodeType(node).ToString() + "\',"; //Type
 				}
 						
-				if (Tree.Node.GetNodeType(node) == TreeNodeType.Container) //container
+				if (Tree.ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container) //container
 				{
 					_sqlQuery.CommandText += "\'" + this.ContainerList[node.Tag].IsExpanded + "\',"; //Expanded
 					curConI = this.ContainerList[node.Tag].ConnectionInfo;
@@ -253,9 +253,9 @@ namespace mRemoteNG.Config.Connections
 					//_xmlTextWriter.WriteEndElement()
 				}
 						
-				if (Tree.Node.GetNodeType(node) == TreeNodeType.Connection)
+				if (Tree.ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection)
 				{
-					_sqlQuery.CommandText += "\'" + System.Convert.ToString(false) + "\',";
+					_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
 					curConI = this.ConnectionList[node.Tag];
 					SaveConnectionFieldsSQL(curConI);
 					//_xmlTextWriter.WriteEndElement()
@@ -387,60 +387,60 @@ namespace mRemoteNG.Config.Connections
 					
 			if (this.SaveSecurity.Inheritance == true)
 			{
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.CacheBitmaps) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.Colors) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.Description) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.DisplayThemes) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.DisplayWallpaper) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.EnableFontSmoothing) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.EnableDesktopComposition) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.Domain) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.Icon) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.Panel) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.Password) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.Port) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.Protocol) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.PuttySession) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RedirectDiskDrives) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RedirectKeys) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RedirectPorts) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RedirectPrinters) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RedirectSmartCards) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RedirectSound) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.Resolution) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.AutomaticResize) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.UseConsoleSession) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RenderingEngine) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.Username) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.ICAEncryption) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RDPAuthenticationLevel) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.LoadBalanceInfo) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.PreExtApp) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.PostExtApp) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.MacAddress) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.UserField) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.ExtApp) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.CacheBitmaps) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Colors) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Description) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.DisplayThemes) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.DisplayWallpaper) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.EnableFontSmoothing) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.EnableDesktopComposition) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Domain) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Icon) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Panel) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Password) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Port) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Protocol) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.PuttySession) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RedirectDiskDrives) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RedirectKeys) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RedirectPorts) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RedirectPrinters) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RedirectSmartCards) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RedirectSound) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Resolution) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.AutomaticResize) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.UseConsoleSession) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RenderingEngine) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Username) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.ICAEncryption) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDPAuthenticationLevel) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.LoadBalanceInfo) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.PreExtApp) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.PostExtApp) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.MacAddress) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.UserField) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.ExtApp) + "\',";
 						
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.VNCCompression) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.VNCEncoding) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.VNCAuthMode) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.VNCProxyType) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.VNCProxyIP) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.VNCProxyPort) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.VNCProxyUsername) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.VNCProxyPassword) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.VNCColors) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.VNCSmartSizeMode) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.VNCViewOnly) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCCompression) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCEncoding) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCAuthMode) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCProxyType) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCProxyIP) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCProxyPort) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCProxyUsername) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCProxyPassword) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCColors) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCSmartSizeMode) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCViewOnly) + "\',";
 						
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RDGatewayUsageMethod) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RDGatewayHostname) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RDGatewayUseConnectionCredentials) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RDGatewayUsername) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RDGatewayPassword) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.RDGatewayDomain) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDGatewayUsageMethod) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDGatewayHostname) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDGatewayUseConnectionCredentials) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDGatewayUsername) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDGatewayPassword) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDGatewayDomain) + "\',";
 						
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inherit.UseCredSsp) + "\',";
+				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.UseCredSsp) + "\',";
 			}
 			else
 			{
@@ -557,14 +557,14 @@ namespace mRemoteNG.Config.Connections
 						
 				TreeNode treeNode = default(TreeNode);
 						
-				if (Tree.Node.GetNodeType(RootTreeNode) == Tree.TreeNodeType.Root)
+				if (Tree.ConnectionTreeNode.GetNodeType(RootTreeNode) == Tree.TreeNodeType.Root)
 				{
 					treeNode = (TreeNode)RootTreeNode.Clone();
 				}
 				else
 				{
 					treeNode = new TreeNode("mR|Export (" + Tools.MiscTools.DBDate(DateTime.Now) + ")");
-					treeNode.Nodes.Add(System.Convert.ToString(RootTreeNode.Clone()));
+					treeNode.Nodes.Add(Convert.ToString(RootTreeNode.Clone()));
 				}
 						
 				string tempFileName = Path.GetTempFileName();
@@ -577,7 +577,7 @@ namespace mRemoteNG.Config.Connections
 						
 				_xmlTextWriter.WriteStartElement("Connections"); // Do not localize
 				_xmlTextWriter.WriteAttributeString("Name", "", treeNode.Text);
-				_xmlTextWriter.WriteAttributeString("Export", "", System.Convert.ToString(Export));
+				_xmlTextWriter.WriteAttributeString("Export", "", Convert.ToString(Export));
 						
 				if (Export)
 				{
@@ -585,9 +585,9 @@ namespace mRemoteNG.Config.Connections
 				}
 				else
 				{
-					if ((treeNode.Tag as Root.Info).Password == true)
+					if ((treeNode.Tag as RootNodeInfo).Password == true)
 					{
-						_password = System.Convert.ToString((treeNode.Tag as Root.Info).PasswordString);
+						_password = Convert.ToString((treeNode.Tag as RootNodeInfo).PasswordString);
 						_xmlTextWriter.WriteAttributeString("Protected", "", Security.Crypt.Encrypt("ThisIsProtected", _password));
 					}
 					else
@@ -633,25 +633,25 @@ namespace mRemoteNG.Config.Connections
 			{
 				foreach (TreeNode node in tNC)
 				{
-					Connection.ConnectionInfo curConI = default(Connection.ConnectionInfo);
+                    ConnectionInfo curConI = default(ConnectionInfo);
 							
-					if (Tree.Node.GetNodeType(node) == Tree.TreeNodeType.Connection | Tree.Node.GetNodeType(node) == Tree.TreeNodeType.Container)
+					if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Connection | Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Container)
 					{
 						_xmlTextWriter.WriteStartElement("Node");
 						_xmlTextWriter.WriteAttributeString("Name", "", node.Text);
-						_xmlTextWriter.WriteAttributeString("Type", "", Tree.Node.GetNodeType(node).ToString());
+						_xmlTextWriter.WriteAttributeString("Type", "", Tree.ConnectionTreeNode.GetNodeType(node).ToString());
 					}
 							
-					if (Tree.Node.GetNodeType(node) == Tree.TreeNodeType.Container) //container
+					if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Container) //container
 					{
-						_xmlTextWriter.WriteAttributeString("Expanded", "", System.Convert.ToString(this.ContainerList[node.Tag].TreeNode.IsExpanded));
+						_xmlTextWriter.WriteAttributeString("Expanded", "", Convert.ToString(this.ContainerList[node.Tag].TreeNode.IsExpanded));
 						curConI = this.ContainerList[node.Tag].ConnectionInfo;
 						SaveConnectionFields(curConI);
 						SaveNode(node.Nodes);
 						_xmlTextWriter.WriteEndElement();
 					}
 							
-					if (Tree.Node.GetNodeType(node) == Tree.TreeNodeType.Connection)
+					if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Connection)
 					{
 						curConI = this.ConnectionList[node.Tag];
 						SaveConnectionFields(curConI);
@@ -665,7 +665,7 @@ namespace mRemoteNG.Config.Connections
 			}
 		}
 				
-		private void SaveConnectionFields(Connection.ConnectionInfo curConI)
+		private void SaveConnectionFields(ConnectionInfo curConI)
 		{
 			try
 			{
@@ -708,11 +708,11 @@ namespace mRemoteNG.Config.Connections
 						
 				_xmlTextWriter.WriteAttributeString("PuttySession", "", curConI.PuttySession);
 						
-				_xmlTextWriter.WriteAttributeString("Port", "", System.Convert.ToString(curConI.Port));
+				_xmlTextWriter.WriteAttributeString("Port", "", Convert.ToString(curConI.Port));
 						
-				_xmlTextWriter.WriteAttributeString("ConnectToConsole", "", System.Convert.ToString(curConI.UseConsoleSession));
+				_xmlTextWriter.WriteAttributeString("ConnectToConsole", "", Convert.ToString(curConI.UseConsoleSession));
 						
-				_xmlTextWriter.WriteAttributeString("UseCredSsp", "", System.Convert.ToString(curConI.UseCredSsp));
+				_xmlTextWriter.WriteAttributeString("UseCredSsp", "", Convert.ToString(curConI.UseCredSsp));
 						
 				_xmlTextWriter.WriteAttributeString("RenderingEngine", "", curConI.RenderingEngine.ToString());
 						
@@ -726,37 +726,37 @@ namespace mRemoteNG.Config.Connections
 						
 				_xmlTextWriter.WriteAttributeString("Resolution", "", curConI.Resolution.ToString());
 						
-				_xmlTextWriter.WriteAttributeString("AutomaticResize", "", System.Convert.ToString(curConI.AutomaticResize));
+				_xmlTextWriter.WriteAttributeString("AutomaticResize", "", Convert.ToString(curConI.AutomaticResize));
 						
-				_xmlTextWriter.WriteAttributeString("DisplayWallpaper", "", System.Convert.ToString(curConI.DisplayWallpaper));
+				_xmlTextWriter.WriteAttributeString("DisplayWallpaper", "", Convert.ToString(curConI.DisplayWallpaper));
 						
-				_xmlTextWriter.WriteAttributeString("DisplayThemes", "", System.Convert.ToString(curConI.DisplayThemes));
+				_xmlTextWriter.WriteAttributeString("DisplayThemes", "", Convert.ToString(curConI.DisplayThemes));
 						
-				_xmlTextWriter.WriteAttributeString("EnableFontSmoothing", "", System.Convert.ToString(curConI.EnableFontSmoothing));
+				_xmlTextWriter.WriteAttributeString("EnableFontSmoothing", "", Convert.ToString(curConI.EnableFontSmoothing));
 						
-				_xmlTextWriter.WriteAttributeString("EnableDesktopComposition", "", System.Convert.ToString(curConI.EnableDesktopComposition));
+				_xmlTextWriter.WriteAttributeString("EnableDesktopComposition", "", Convert.ToString(curConI.EnableDesktopComposition));
 						
-				_xmlTextWriter.WriteAttributeString("CacheBitmaps", "", System.Convert.ToString(curConI.CacheBitmaps));
+				_xmlTextWriter.WriteAttributeString("CacheBitmaps", "", Convert.ToString(curConI.CacheBitmaps));
 						
-				_xmlTextWriter.WriteAttributeString("RedirectDiskDrives", "", System.Convert.ToString(curConI.RedirectDiskDrives));
+				_xmlTextWriter.WriteAttributeString("RedirectDiskDrives", "", Convert.ToString(curConI.RedirectDiskDrives));
 						
-				_xmlTextWriter.WriteAttributeString("RedirectPorts", "", System.Convert.ToString(curConI.RedirectPorts));
+				_xmlTextWriter.WriteAttributeString("RedirectPorts", "", Convert.ToString(curConI.RedirectPorts));
 						
-				_xmlTextWriter.WriteAttributeString("RedirectPrinters", "", System.Convert.ToString(curConI.RedirectPrinters));
+				_xmlTextWriter.WriteAttributeString("RedirectPrinters", "", Convert.ToString(curConI.RedirectPrinters));
 						
-				_xmlTextWriter.WriteAttributeString("RedirectSmartCards", "", System.Convert.ToString(curConI.RedirectSmartCards));
+				_xmlTextWriter.WriteAttributeString("RedirectSmartCards", "", Convert.ToString(curConI.RedirectSmartCards));
 						
 				_xmlTextWriter.WriteAttributeString("RedirectSound", "", curConI.RedirectSound.ToString());
 						
-				_xmlTextWriter.WriteAttributeString("RedirectKeys", "", System.Convert.ToString(curConI.RedirectKeys));
+				_xmlTextWriter.WriteAttributeString("RedirectKeys", "", Convert.ToString(curConI.RedirectKeys));
 						
 				if (curConI.OpenConnections.Count > 0)
 				{
-					_xmlTextWriter.WriteAttributeString("Connected", "", System.Convert.ToString(true));
+					_xmlTextWriter.WriteAttributeString("Connected", "", Convert.ToString(true));
 				}
 				else
 				{
-					_xmlTextWriter.WriteAttributeString("Connected", "", System.Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("Connected", "", Convert.ToString(false));
 				}
 						
 				_xmlTextWriter.WriteAttributeString("PreExtApp", "", curConI.PreExtApp);
@@ -770,12 +770,12 @@ namespace mRemoteNG.Config.Connections
 				_xmlTextWriter.WriteAttributeString("VNCAuthMode", "", curConI.VNCAuthMode.ToString());
 				_xmlTextWriter.WriteAttributeString("VNCProxyType", "", curConI.VNCProxyType.ToString());
 				_xmlTextWriter.WriteAttributeString("VNCProxyIP", "", curConI.VNCProxyIP);
-				_xmlTextWriter.WriteAttributeString("VNCProxyPort", "", System.Convert.ToString(curConI.VNCProxyPort));
+				_xmlTextWriter.WriteAttributeString("VNCProxyPort", "", Convert.ToString(curConI.VNCProxyPort));
 				_xmlTextWriter.WriteAttributeString("VNCProxyUsername", "", curConI.VNCProxyUsername);
 				_xmlTextWriter.WriteAttributeString("VNCProxyPassword", "", Security.Crypt.Encrypt(curConI.VNCProxyPassword, _password));
 				_xmlTextWriter.WriteAttributeString("VNCColors", "", curConI.VNCColors.ToString());
 				_xmlTextWriter.WriteAttributeString("VNCSmartSizeMode", "", curConI.VNCSmartSizeMode.ToString());
-				_xmlTextWriter.WriteAttributeString("VNCViewOnly", "", System.Convert.ToString(curConI.VNCViewOnly));
+				_xmlTextWriter.WriteAttributeString("VNCViewOnly", "", Convert.ToString(curConI.VNCViewOnly));
 						
 				_xmlTextWriter.WriteAttributeString("RDGatewayUsageMethod", "", curConI.RDGatewayUsageMethod.ToString());
 				_xmlTextWriter.WriteAttributeString("RDGatewayHostname", "", curConI.RDGatewayHostname);
@@ -811,110 +811,110 @@ namespace mRemoteNG.Config.Connections
 						
 				if (this.SaveSecurity.Inheritance == true)
 				{
-					_xmlTextWriter.WriteAttributeString("InheritCacheBitmaps", "", System.Convert.ToString(curConI.Inherit.CacheBitmaps));
-					_xmlTextWriter.WriteAttributeString("InheritColors", "", System.Convert.ToString(curConI.Inherit.Colors));
-					_xmlTextWriter.WriteAttributeString("InheritDescription", "", System.Convert.ToString(curConI.Inherit.Description));
-					_xmlTextWriter.WriteAttributeString("InheritDisplayThemes", "", System.Convert.ToString(curConI.Inherit.DisplayThemes));
-					_xmlTextWriter.WriteAttributeString("InheritDisplayWallpaper", "", System.Convert.ToString(curConI.Inherit.DisplayWallpaper));
-					_xmlTextWriter.WriteAttributeString("InheritEnableFontSmoothing", "", System.Convert.ToString(curConI.Inherit.EnableFontSmoothing));
-					_xmlTextWriter.WriteAttributeString("InheritEnableDesktopComposition", "", System.Convert.ToString(curConI.Inherit.EnableDesktopComposition));
-					_xmlTextWriter.WriteAttributeString("InheritDomain", "", System.Convert.ToString(curConI.Inherit.Domain));
-					_xmlTextWriter.WriteAttributeString("InheritIcon", "", System.Convert.ToString(curConI.Inherit.Icon));
-					_xmlTextWriter.WriteAttributeString("InheritPanel", "", System.Convert.ToString(curConI.Inherit.Panel));
-					_xmlTextWriter.WriteAttributeString("InheritPassword", "", System.Convert.ToString(curConI.Inherit.Password));
-					_xmlTextWriter.WriteAttributeString("InheritPort", "", System.Convert.ToString(curConI.Inherit.Port));
-					_xmlTextWriter.WriteAttributeString("InheritProtocol", "", System.Convert.ToString(curConI.Inherit.Protocol));
-					_xmlTextWriter.WriteAttributeString("InheritPuttySession", "", System.Convert.ToString(curConI.Inherit.PuttySession));
-					_xmlTextWriter.WriteAttributeString("InheritRedirectDiskDrives", "", System.Convert.ToString(curConI.Inherit.RedirectDiskDrives));
-					_xmlTextWriter.WriteAttributeString("InheritRedirectKeys", "", System.Convert.ToString(curConI.Inherit.RedirectKeys));
-					_xmlTextWriter.WriteAttributeString("InheritRedirectPorts", "", System.Convert.ToString(curConI.Inherit.RedirectPorts));
-					_xmlTextWriter.WriteAttributeString("InheritRedirectPrinters", "", System.Convert.ToString(curConI.Inherit.RedirectPrinters));
-					_xmlTextWriter.WriteAttributeString("InheritRedirectSmartCards", "", System.Convert.ToString(curConI.Inherit.RedirectSmartCards));
-					_xmlTextWriter.WriteAttributeString("InheritRedirectSound", "", System.Convert.ToString(curConI.Inherit.RedirectSound));
-					_xmlTextWriter.WriteAttributeString("InheritResolution", "", System.Convert.ToString(curConI.Inherit.Resolution));
-					_xmlTextWriter.WriteAttributeString("InheritAutomaticResize", "", System.Convert.ToString(curConI.Inherit.AutomaticResize));
-					_xmlTextWriter.WriteAttributeString("InheritUseConsoleSession", "", System.Convert.ToString(curConI.Inherit.UseConsoleSession));
-					_xmlTextWriter.WriteAttributeString("InheritUseCredSsp", "", System.Convert.ToString(curConI.Inherit.UseCredSsp));
-					_xmlTextWriter.WriteAttributeString("InheritRenderingEngine", "", System.Convert.ToString(curConI.Inherit.RenderingEngine));
-					_xmlTextWriter.WriteAttributeString("InheritUsername", "", System.Convert.ToString(curConI.Inherit.Username));
-					_xmlTextWriter.WriteAttributeString("InheritICAEncryptionStrength", "", System.Convert.ToString(curConI.Inherit.ICAEncryption));
-					_xmlTextWriter.WriteAttributeString("InheritRDPAuthenticationLevel", "", System.Convert.ToString(curConI.Inherit.RDPAuthenticationLevel));
-					_xmlTextWriter.WriteAttributeString("InheritLoadBalanceInfo", "", System.Convert.ToString(curConI.Inherit.LoadBalanceInfo));
-					_xmlTextWriter.WriteAttributeString("InheritPreExtApp", "", System.Convert.ToString(curConI.Inherit.PreExtApp));
-					_xmlTextWriter.WriteAttributeString("InheritPostExtApp", "", System.Convert.ToString(curConI.Inherit.PostExtApp));
-					_xmlTextWriter.WriteAttributeString("InheritMacAddress", "", System.Convert.ToString(curConI.Inherit.MacAddress));
-					_xmlTextWriter.WriteAttributeString("InheritUserField", "", System.Convert.ToString(curConI.Inherit.UserField));
-					_xmlTextWriter.WriteAttributeString("InheritExtApp", "", System.Convert.ToString(curConI.Inherit.ExtApp));
-					_xmlTextWriter.WriteAttributeString("InheritVNCCompression", "", System.Convert.ToString(curConI.Inherit.VNCCompression));
-					_xmlTextWriter.WriteAttributeString("InheritVNCEncoding", "", System.Convert.ToString(curConI.Inherit.VNCEncoding));
-					_xmlTextWriter.WriteAttributeString("InheritVNCAuthMode", "", System.Convert.ToString(curConI.Inherit.VNCAuthMode));
-					_xmlTextWriter.WriteAttributeString("InheritVNCProxyType", "", System.Convert.ToString(curConI.Inherit.VNCProxyType));
-					_xmlTextWriter.WriteAttributeString("InheritVNCProxyIP", "", System.Convert.ToString(curConI.Inherit.VNCProxyIP));
-					_xmlTextWriter.WriteAttributeString("InheritVNCProxyPort", "", System.Convert.ToString(curConI.Inherit.VNCProxyPort));
-					_xmlTextWriter.WriteAttributeString("InheritVNCProxyUsername", "", System.Convert.ToString(curConI.Inherit.VNCProxyUsername));
-					_xmlTextWriter.WriteAttributeString("InheritVNCProxyPassword", "", System.Convert.ToString(curConI.Inherit.VNCProxyPassword));
-					_xmlTextWriter.WriteAttributeString("InheritVNCColors", "", System.Convert.ToString(curConI.Inherit.VNCColors));
-					_xmlTextWriter.WriteAttributeString("InheritVNCSmartSizeMode", "", System.Convert.ToString(curConI.Inherit.VNCSmartSizeMode));
-					_xmlTextWriter.WriteAttributeString("InheritVNCViewOnly", "", System.Convert.ToString(curConI.Inherit.VNCViewOnly));
-					_xmlTextWriter.WriteAttributeString("InheritRDGatewayUsageMethod", "", System.Convert.ToString(curConI.Inherit.RDGatewayUsageMethod));
-					_xmlTextWriter.WriteAttributeString("InheritRDGatewayHostname", "", System.Convert.ToString(curConI.Inherit.RDGatewayHostname));
-					_xmlTextWriter.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "", System.Convert.ToString(curConI.Inherit.RDGatewayUseConnectionCredentials));
-					_xmlTextWriter.WriteAttributeString("InheritRDGatewayUsername", "", System.Convert.ToString(curConI.Inherit.RDGatewayUsername));
-					_xmlTextWriter.WriteAttributeString("InheritRDGatewayPassword", "", System.Convert.ToString(curConI.Inherit.RDGatewayPassword));
-					_xmlTextWriter.WriteAttributeString("InheritRDGatewayDomain", "", System.Convert.ToString(curConI.Inherit.RDGatewayDomain));
+					_xmlTextWriter.WriteAttributeString("InheritCacheBitmaps", "", Convert.ToString(curConI.Inheritance.CacheBitmaps));
+					_xmlTextWriter.WriteAttributeString("InheritColors", "", Convert.ToString(curConI.Inheritance.Colors));
+					_xmlTextWriter.WriteAttributeString("InheritDescription", "", Convert.ToString(curConI.Inheritance.Description));
+					_xmlTextWriter.WriteAttributeString("InheritDisplayThemes", "", Convert.ToString(curConI.Inheritance.DisplayThemes));
+					_xmlTextWriter.WriteAttributeString("InheritDisplayWallpaper", "", Convert.ToString(curConI.Inheritance.DisplayWallpaper));
+					_xmlTextWriter.WriteAttributeString("InheritEnableFontSmoothing", "", Convert.ToString(curConI.Inheritance.EnableFontSmoothing));
+					_xmlTextWriter.WriteAttributeString("InheritEnableDesktopComposition", "", Convert.ToString(curConI.Inheritance.EnableDesktopComposition));
+					_xmlTextWriter.WriteAttributeString("InheritDomain", "", Convert.ToString(curConI.Inheritance.Domain));
+					_xmlTextWriter.WriteAttributeString("InheritIcon", "", Convert.ToString(curConI.Inheritance.Icon));
+					_xmlTextWriter.WriteAttributeString("InheritPanel", "", Convert.ToString(curConI.Inheritance.Panel));
+					_xmlTextWriter.WriteAttributeString("InheritPassword", "", Convert.ToString(curConI.Inheritance.Password));
+					_xmlTextWriter.WriteAttributeString("InheritPort", "", Convert.ToString(curConI.Inheritance.Port));
+					_xmlTextWriter.WriteAttributeString("InheritProtocol", "", Convert.ToString(curConI.Inheritance.Protocol));
+					_xmlTextWriter.WriteAttributeString("InheritPuttySession", "", Convert.ToString(curConI.Inheritance.PuttySession));
+					_xmlTextWriter.WriteAttributeString("InheritRedirectDiskDrives", "", Convert.ToString(curConI.Inheritance.RedirectDiskDrives));
+					_xmlTextWriter.WriteAttributeString("InheritRedirectKeys", "", Convert.ToString(curConI.Inheritance.RedirectKeys));
+					_xmlTextWriter.WriteAttributeString("InheritRedirectPorts", "", Convert.ToString(curConI.Inheritance.RedirectPorts));
+					_xmlTextWriter.WriteAttributeString("InheritRedirectPrinters", "", Convert.ToString(curConI.Inheritance.RedirectPrinters));
+					_xmlTextWriter.WriteAttributeString("InheritRedirectSmartCards", "", Convert.ToString(curConI.Inheritance.RedirectSmartCards));
+					_xmlTextWriter.WriteAttributeString("InheritRedirectSound", "", Convert.ToString(curConI.Inheritance.RedirectSound));
+					_xmlTextWriter.WriteAttributeString("InheritResolution", "", Convert.ToString(curConI.Inheritance.Resolution));
+					_xmlTextWriter.WriteAttributeString("InheritAutomaticResize", "", Convert.ToString(curConI.Inheritance.AutomaticResize));
+					_xmlTextWriter.WriteAttributeString("InheritUseConsoleSession", "", Convert.ToString(curConI.Inheritance.UseConsoleSession));
+					_xmlTextWriter.WriteAttributeString("InheritUseCredSsp", "", Convert.ToString(curConI.Inheritance.UseCredSsp));
+					_xmlTextWriter.WriteAttributeString("InheritRenderingEngine", "", Convert.ToString(curConI.Inheritance.RenderingEngine));
+					_xmlTextWriter.WriteAttributeString("InheritUsername", "", Convert.ToString(curConI.Inheritance.Username));
+					_xmlTextWriter.WriteAttributeString("InheritICAEncryptionStrength", "", Convert.ToString(curConI.Inheritance.ICAEncryption));
+					_xmlTextWriter.WriteAttributeString("InheritRDPAuthenticationLevel", "", Convert.ToString(curConI.Inheritance.RDPAuthenticationLevel));
+					_xmlTextWriter.WriteAttributeString("InheritLoadBalanceInfo", "", Convert.ToString(curConI.Inheritance.LoadBalanceInfo));
+					_xmlTextWriter.WriteAttributeString("InheritPreExtApp", "", Convert.ToString(curConI.Inheritance.PreExtApp));
+					_xmlTextWriter.WriteAttributeString("InheritPostExtApp", "", Convert.ToString(curConI.Inheritance.PostExtApp));
+					_xmlTextWriter.WriteAttributeString("InheritMacAddress", "", Convert.ToString(curConI.Inheritance.MacAddress));
+					_xmlTextWriter.WriteAttributeString("InheritUserField", "", Convert.ToString(curConI.Inheritance.UserField));
+					_xmlTextWriter.WriteAttributeString("InheritExtApp", "", Convert.ToString(curConI.Inheritance.ExtApp));
+					_xmlTextWriter.WriteAttributeString("InheritVNCCompression", "", Convert.ToString(curConI.Inheritance.VNCCompression));
+					_xmlTextWriter.WriteAttributeString("InheritVNCEncoding", "", Convert.ToString(curConI.Inheritance.VNCEncoding));
+					_xmlTextWriter.WriteAttributeString("InheritVNCAuthMode", "", Convert.ToString(curConI.Inheritance.VNCAuthMode));
+					_xmlTextWriter.WriteAttributeString("InheritVNCProxyType", "", Convert.ToString(curConI.Inheritance.VNCProxyType));
+					_xmlTextWriter.WriteAttributeString("InheritVNCProxyIP", "", Convert.ToString(curConI.Inheritance.VNCProxyIP));
+					_xmlTextWriter.WriteAttributeString("InheritVNCProxyPort", "", Convert.ToString(curConI.Inheritance.VNCProxyPort));
+					_xmlTextWriter.WriteAttributeString("InheritVNCProxyUsername", "", Convert.ToString(curConI.Inheritance.VNCProxyUsername));
+					_xmlTextWriter.WriteAttributeString("InheritVNCProxyPassword", "", Convert.ToString(curConI.Inheritance.VNCProxyPassword));
+					_xmlTextWriter.WriteAttributeString("InheritVNCColors", "", Convert.ToString(curConI.Inheritance.VNCColors));
+					_xmlTextWriter.WriteAttributeString("InheritVNCSmartSizeMode", "", Convert.ToString(curConI.Inheritance.VNCSmartSizeMode));
+					_xmlTextWriter.WriteAttributeString("InheritVNCViewOnly", "", Convert.ToString(curConI.Inheritance.VNCViewOnly));
+					_xmlTextWriter.WriteAttributeString("InheritRDGatewayUsageMethod", "", Convert.ToString(curConI.Inheritance.RDGatewayUsageMethod));
+					_xmlTextWriter.WriteAttributeString("InheritRDGatewayHostname", "", Convert.ToString(curConI.Inheritance.RDGatewayHostname));
+					_xmlTextWriter.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "", Convert.ToString(curConI.Inheritance.RDGatewayUseConnectionCredentials));
+					_xmlTextWriter.WriteAttributeString("InheritRDGatewayUsername", "", Convert.ToString(curConI.Inheritance.RDGatewayUsername));
+					_xmlTextWriter.WriteAttributeString("InheritRDGatewayPassword", "", Convert.ToString(curConI.Inheritance.RDGatewayPassword));
+					_xmlTextWriter.WriteAttributeString("InheritRDGatewayDomain", "", Convert.ToString(curConI.Inheritance.RDGatewayDomain));
 				}
 				else
 				{
-					_xmlTextWriter.WriteAttributeString("InheritCacheBitmaps", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritColors", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritDescription", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritDisplayThemes", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritDisplayWallpaper", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritEnableFontSmoothing", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritEnableDesktopComposition", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritDomain", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritIcon", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritPanel", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritPassword", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritPort", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritProtocol", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritPuttySession", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRedirectDiskDrives", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRedirectKeys", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRedirectPorts", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRedirectPrinters", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRedirectSmartCards", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRedirectSound", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritResolution", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritAutomaticResize", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritUseConsoleSession", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritUseCredSsp", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRenderingEngine", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritUsername", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritICAEncryptionStrength", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRDPAuthenticationLevel", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritLoadBalanceInfo", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritPreExtApp", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritPostExtApp", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritMacAddress", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritUserField", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritExtApp", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritVNCCompression", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritVNCEncoding", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritVNCAuthMode", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritVNCProxyType", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritVNCProxyIP", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritVNCProxyPort", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritVNCProxyUsername", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritVNCProxyPassword", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritVNCColors", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritVNCSmartSizeMode", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritVNCViewOnly", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRDGatewayHostname", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRDGatewayUsername", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRDGatewayPassword", "", System.Convert.ToString(false));
-					_xmlTextWriter.WriteAttributeString("InheritRDGatewayDomain", "", System.Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritCacheBitmaps", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritColors", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritDescription", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritDisplayThemes", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritDisplayWallpaper", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritEnableFontSmoothing", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritEnableDesktopComposition", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritDomain", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritIcon", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritPanel", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritPassword", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritPort", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritProtocol", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritPuttySession", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRedirectDiskDrives", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRedirectKeys", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRedirectPorts", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRedirectPrinters", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRedirectSmartCards", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRedirectSound", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritResolution", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritAutomaticResize", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritUseConsoleSession", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritUseCredSsp", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRenderingEngine", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritUsername", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritICAEncryptionStrength", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRDPAuthenticationLevel", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritLoadBalanceInfo", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritPreExtApp", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritPostExtApp", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritMacAddress", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritUserField", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritExtApp", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritVNCCompression", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritVNCEncoding", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritVNCAuthMode", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritVNCProxyType", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritVNCProxyIP", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritVNCProxyPort", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritVNCProxyUsername", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritVNCProxyPassword", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritVNCColors", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritVNCSmartSizeMode", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritVNCViewOnly", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRDGatewayHostname", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRDGatewayUseConnectionCredentials", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRDGatewayUsername", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRDGatewayPassword", "", Convert.ToString(false));
+					_xmlTextWriter.WriteAttributeString("InheritRDGatewayDomain", "", Convert.ToString(false));
 				}
 			}
 			catch (Exception ex)
@@ -980,20 +980,20 @@ namespace mRemoteNG.Config.Connections
 		{
 			foreach (TreeNode node in tNC)
 			{
-				if (Tree.Node.GetNodeType(node) == Tree.TreeNodeType.Connection)
+				if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Connection)
 				{
-					Connection.ConnectionInfo curConI = (Connection.ConnectionInfo)node.Tag;
+                    ConnectionInfo curConI = (ConnectionInfo)node.Tag;
 							
 					WritemRCSVLine(curConI);
 				}
-				else if (Tree.Node.GetNodeType(node) == Tree.TreeNodeType.Container)
+				else if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Container)
 				{
 					SaveNodemRCSV(node.Nodes);
 				}
 			}
 		}
 				
-		private void WritemRCSVLine(Connection.ConnectionInfo con)
+		private void WritemRCSVLine(ConnectionInfo con)
 		{
 			string nodePath = con.TreeNode.FullPath;
 					
@@ -1029,12 +1029,12 @@ namespace mRemoteNG.Config.Connections
 				csvLn += con.Domain + ";";
 			}
 					
-			csvLn += con.Hostname + ";" + con.Protocol.ToString() + ";" + con.PuttySession + ";" + System.Convert.ToString(con.Port) + ";" + System.Convert.ToString(con.UseConsoleSession) + ";" + System.Convert.ToString(con.UseCredSsp) + ";" + con.RenderingEngine.ToString() + ";" + con.ICAEncryption.ToString() + ";" + con.RDPAuthenticationLevel.ToString() + ";" + con.LoadBalanceInfo + ";" + con.Colors.ToString() + ";" + con.Resolution.ToString() + ";" + System.Convert.ToString(con.AutomaticResize) + ";" + System.Convert.ToString(con.DisplayWallpaper) + ";" + System.Convert.ToString(con.DisplayThemes) + ";" + System.Convert.ToString(con.EnableFontSmoothing) + ";" + System.Convert.ToString(con.EnableDesktopComposition) + ";" + System.Convert.ToString(con.CacheBitmaps) + ";" + System.Convert.ToString(con.RedirectDiskDrives) + ";" + System.Convert.ToString(con.RedirectPorts) + ";" + System.Convert.ToString(con.RedirectPrinters) + ";" + System.Convert.ToString(con.RedirectSmartCards) + ";" + con.RedirectSound.ToString() + ";" + System.Convert.ToString(con.RedirectKeys) + ";" + con.PreExtApp + ";" + con.PostExtApp + ";" + con.MacAddress + ";" + con.UserField + ";" + con.ExtApp + ";" + con.VNCCompression.ToString() + ";" + con.VNCEncoding.ToString() + ";" + con.VNCAuthMode.ToString() + ";" + con.VNCProxyType.ToString() + ";" + con.VNCProxyIP + ";" + System.Convert.ToString(con.VNCProxyPort) + ";" + con.VNCProxyUsername + ";" + con.VNCProxyPassword + ";" + con.VNCColors.ToString() + ";" + con.VNCSmartSizeMode.ToString() + ";" + System.Convert.ToString(con.VNCViewOnly) + ";";
+			csvLn += con.Hostname + ";" + con.Protocol.ToString() + ";" + con.PuttySession + ";" + Convert.ToString(con.Port) + ";" + Convert.ToString(con.UseConsoleSession) + ";" + Convert.ToString(con.UseCredSsp) + ";" + con.RenderingEngine.ToString() + ";" + con.ICAEncryption.ToString() + ";" + con.RDPAuthenticationLevel.ToString() + ";" + con.LoadBalanceInfo + ";" + con.Colors.ToString() + ";" + con.Resolution.ToString() + ";" + Convert.ToString(con.AutomaticResize) + ";" + Convert.ToString(con.DisplayWallpaper) + ";" + Convert.ToString(con.DisplayThemes) + ";" + Convert.ToString(con.EnableFontSmoothing) + ";" + Convert.ToString(con.EnableDesktopComposition) + ";" + Convert.ToString(con.CacheBitmaps) + ";" + Convert.ToString(con.RedirectDiskDrives) + ";" + Convert.ToString(con.RedirectPorts) + ";" + Convert.ToString(con.RedirectPrinters) + ";" + Convert.ToString(con.RedirectSmartCards) + ";" + con.RedirectSound.ToString() + ";" + Convert.ToString(con.RedirectKeys) + ";" + con.PreExtApp + ";" + con.PostExtApp + ";" + con.MacAddress + ";" + con.UserField + ";" + con.ExtApp + ";" + con.VNCCompression.ToString() + ";" + con.VNCEncoding.ToString() + ";" + con.VNCAuthMode.ToString() + ";" + con.VNCProxyType.ToString() + ";" + con.VNCProxyIP + ";" + Convert.ToString(con.VNCProxyPort) + ";" + con.VNCProxyUsername + ";" + con.VNCProxyPassword + ";" + con.VNCColors.ToString() + ";" + con.VNCSmartSizeMode.ToString() + ";" + Convert.ToString(con.VNCViewOnly) + ";";
 					
 			if (SaveSecurity.Inheritance)
 			{
-				csvLn += con.Inherit.CacheBitmaps + ";" + System.Convert.ToString(con.Inherit.Colors) + ";" + System.Convert.ToString(con.Inherit.Description) + ";" + System.Convert.ToString(con.Inherit.DisplayThemes) + ";" + System.Convert.ToString(con.Inherit.DisplayWallpaper) + ";" + System.Convert.ToString(con.Inherit.EnableFontSmoothing) + ";" + System.Convert.ToString(con.Inherit.EnableDesktopComposition) + ";" + System.Convert.ToString(con.Inherit.Domain) + ";" + System.Convert.ToString(con.Inherit.Icon) + ";" + System.Convert.ToString(con.Inherit.Panel) + ";" + System.Convert.ToString(con.Inherit.Password) + ";" + System.Convert.ToString(con.Inherit.Port) + ";" + System.Convert.ToString(con.Inherit.Protocol) + ";" + System.Convert.ToString(con.Inherit.PuttySession) + ";" + System.Convert.ToString(con.Inherit.RedirectDiskDrives) + ";" + System.Convert.ToString(con.Inherit.RedirectKeys) + ";" + System.Convert.ToString(con.Inherit.RedirectPorts) + ";" + System.Convert.ToString(con.Inherit.RedirectPrinters) + ";" + System.Convert.ToString(con.Inherit.RedirectSmartCards) + ";" + System.Convert.ToString(con.Inherit.RedirectSound) + ";" + System.Convert.ToString(con.Inherit.Resolution) + ";" + System.Convert.ToString(con.Inherit.AutomaticResize) + ";" + System.Convert.ToString(con.Inherit.UseConsoleSession) + ";" + System.Convert.ToString(con.Inherit.UseCredSsp) + ";" + System.Convert.ToString(con.Inherit.RenderingEngine) + ";" + System.Convert.ToString(con.Inherit.Username) + ";" + System.Convert.ToString(con.Inherit.ICAEncryption) + ";" + System.Convert.ToString(con.Inherit.RDPAuthenticationLevel) + ";" + System.Convert.ToString(con.Inherit.LoadBalanceInfo) + ";" + System.Convert.ToString(con.Inherit.PreExtApp) + ";" + System.Convert.ToString(con.Inherit.PostExtApp) + ";" + System.Convert.ToString(con.Inherit.MacAddress) + ";" + System.Convert.ToString(con.Inherit.UserField) + ";" + System.Convert.ToString(con.Inherit.ExtApp) + ";" + System.Convert.ToString(con.Inherit.VNCCompression) + ";"
-				+ System.Convert.ToString(con.Inherit.VNCEncoding) + ";" + System.Convert.ToString(con.Inherit.VNCAuthMode) + ";" + System.Convert.ToString(con.Inherit.VNCProxyType) + ";" + System.Convert.ToString(con.Inherit.VNCProxyIP) + ";" + System.Convert.ToString(con.Inherit.VNCProxyPort) + ";" + System.Convert.ToString(con.Inherit.VNCProxyUsername) + ";" + System.Convert.ToString(con.Inherit.VNCProxyPassword) + ";" + System.Convert.ToString(con.Inherit.VNCColors) + ";" + System.Convert.ToString(con.Inherit.VNCSmartSizeMode) + ";" + System.Convert.ToString(con.Inherit.VNCViewOnly);
+				csvLn += con.Inheritance.CacheBitmaps + ";" + Convert.ToString(con.Inheritance.Colors) + ";" + Convert.ToString(con.Inheritance.Description) + ";" + Convert.ToString(con.Inheritance.DisplayThemes) + ";" + Convert.ToString(con.Inheritance.DisplayWallpaper) + ";" + Convert.ToString(con.Inheritance.EnableFontSmoothing) + ";" + Convert.ToString(con.Inheritance.EnableDesktopComposition) + ";" + Convert.ToString(con.Inheritance.Domain) + ";" + Convert.ToString(con.Inheritance.Icon) + ";" + Convert.ToString(con.Inheritance.Panel) + ";" + Convert.ToString(con.Inheritance.Password) + ";" + Convert.ToString(con.Inheritance.Port) + ";" + Convert.ToString(con.Inheritance.Protocol) + ";" + Convert.ToString(con.Inheritance.PuttySession) + ";" + Convert.ToString(con.Inheritance.RedirectDiskDrives) + ";" + Convert.ToString(con.Inheritance.RedirectKeys) + ";" + Convert.ToString(con.Inheritance.RedirectPorts) + ";" + Convert.ToString(con.Inheritance.RedirectPrinters) + ";" + Convert.ToString(con.Inheritance.RedirectSmartCards) + ";" + Convert.ToString(con.Inheritance.RedirectSound) + ";" + Convert.ToString(con.Inheritance.Resolution) + ";" + Convert.ToString(con.Inheritance.AutomaticResize) + ";" + Convert.ToString(con.Inheritance.UseConsoleSession) + ";" + Convert.ToString(con.Inheritance.UseCredSsp) + ";" + Convert.ToString(con.Inheritance.RenderingEngine) + ";" + Convert.ToString(con.Inheritance.Username) + ";" + Convert.ToString(con.Inheritance.ICAEncryption) + ";" + Convert.ToString(con.Inheritance.RDPAuthenticationLevel) + ";" + Convert.ToString(con.Inheritance.LoadBalanceInfo) + ";" + Convert.ToString(con.Inheritance.PreExtApp) + ";" + Convert.ToString(con.Inheritance.PostExtApp) + ";" + Convert.ToString(con.Inheritance.MacAddress) + ";" + Convert.ToString(con.Inheritance.UserField) + ";" + Convert.ToString(con.Inheritance.ExtApp) + ";" + Convert.ToString(con.Inheritance.VNCCompression) + ";"
+				+ Convert.ToString(con.Inheritance.VNCEncoding) + ";" + Convert.ToString(con.Inheritance.VNCAuthMode) + ";" + Convert.ToString(con.Inheritance.VNCProxyType) + ";" + Convert.ToString(con.Inheritance.VNCProxyIP) + ";" + Convert.ToString(con.Inheritance.VNCProxyPort) + ";" + Convert.ToString(con.Inheritance.VNCProxyUsername) + ";" + Convert.ToString(con.Inheritance.VNCProxyPassword) + ";" + Convert.ToString(con.Inheritance.VNCColors) + ";" + Convert.ToString(con.Inheritance.VNCSmartSizeMode) + ";" + Convert.ToString(con.Inheritance.VNCViewOnly);
 			}
 					
 			csvWr.WriteLine(csvLn);
@@ -1066,23 +1066,23 @@ namespace mRemoteNG.Config.Connections
 		{
 			foreach (TreeNode node in tNC)
 			{
-				if (Tree.Node.GetNodeType(node) == Tree.TreeNodeType.Connection)
+				if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Connection)
 				{
-					Connection.ConnectionInfo curConI = (Connection.ConnectionInfo)node.Tag;
+                    ConnectionInfo curConI = (ConnectionInfo)node.Tag;
 							
 					if (curConI.Protocol == Connection.Protocol.ProtocolType.RDP)
 					{
 						WritevRDCSVLine(curConI);
 					}
 				}
-				else if (Tree.Node.GetNodeType(node) == Tree.TreeNodeType.Container)
+				else if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Container)
 				{
 					SaveNodevRDCSV(node.Nodes);
 				}
 			}
 		}
 				
-		private void WritevRDCSVLine(Connection.ConnectionInfo con)
+		private void WritevRDCSVLine(ConnectionInfo con)
 		{
 			string nodePath = con.TreeNode.FullPath;
 					
@@ -1099,7 +1099,7 @@ namespace mRemoteNG.Config.Connections
 				nodePath = "";
 			}
 					
-			csvWr.WriteLine(con.Name + ";" + con.Hostname + ";" + con.MacAddress + ";;" + System.Convert.ToString(con.Port) + ";" + System.Convert.ToString(con.UseConsoleSession) + ";" + nodePath);
+			csvWr.WriteLine(con.Name + ";" + con.Hostname + ";" + con.MacAddress + ";;" + Convert.ToString(con.Port) + ";" + Convert.ToString(con.UseConsoleSession) + ";" + nodePath);
 		}
         #endregion
 				
@@ -1139,9 +1139,9 @@ namespace mRemoteNG.Config.Connections
 		{
 			foreach (TreeNode node in tNC)
 			{
-				if (Tree.Node.GetNodeType(node) == Tree.TreeNodeType.Connection)
+				if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Connection)
 				{
-					Connection.ConnectionInfo curConI = (Connection.ConnectionInfo)node.Tag;
+                    ConnectionInfo curConI = (ConnectionInfo)node.Tag;
 							
 					if (curConI.Protocol == Connection.Protocol.ProtocolType.RDP)
 					{
@@ -1160,7 +1160,7 @@ namespace mRemoteNG.Config.Connections
 			}
 		}
 				
-		private void WriteVREitem(Connection.ConnectionInfo con)
+		private void WriteVREitem(ConnectionInfo con)
 		{
 			//Name
 			_xmlTextWriter.WriteStartElement("ConnectionName");

@@ -14,7 +14,7 @@ using System.Text.RegularExpressions;
 using mRemoteNG.My;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-
+using mRemoteNG.Tree;
 
 namespace mRemoteNG.Config.Import
 {
@@ -24,7 +24,7 @@ namespace mRemoteNG.Config.Import
 		{
 			try
 			{
-				TreeNode treeNode = Tree.Node.AddNode(Tree.TreeNodeType.Container);
+				TreeNode treeNode = Tree.ConnectionTreeNode.AddNode(TreeNodeType.Container);
 					
 				ContainerInfo containerInfo = new ContainerInfo();
 				containerInfo.TreeNode = treeNode;
@@ -38,19 +38,19 @@ namespace mRemoteNG.Config.Import
 				}
 				else
 				{
-					name = My.Language.strActiveDirectory;
+					name = Language.strActiveDirectory;
 				}
 					
 				containerInfo.Name = name;
 					
 				// We can only inherit from a container node, not the root node or connection nodes
-				if (Tree.Node.GetNodeType(parentTreeNode) == Tree.TreeNodeType.Container)
+				if (ConnectionTreeNode.GetNodeType(parentTreeNode) == TreeNodeType.Container)
 				{
-					containerInfo.Parent = parentTreeNode.Tag;
+					containerInfo.Parent = (ContainerInfo)parentTreeNode.Tag;
 				}
 				else
 				{
-					containerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely();
+					containerInfo.ConnectionInfo.Inheritance.DisableInheritance();
 				}
 					
 				treeNode.Text = name;
@@ -97,7 +97,7 @@ namespace mRemoteNG.Config.Import
 					strDescription = Convert.ToString(with_2.Properties["Description"].Value);
 					strHostName = Convert.ToString(with_2.Properties["dNSHostName"].Value);
 						
-					TreeNode treeNode = Tree.Node.AddNode(Tree.TreeNodeType.Connection, strDisplayName);
+					TreeNode treeNode = Tree.ConnectionTreeNode.AddNode(TreeNodeType.Connection, strDisplayName);
 						
 					ConnectionInfo connectionInfo = new ConnectionInfo();
 					ConnectionInfoInheritance inheritanceInfo = new ConnectionInfoInheritance(connectionInfo, true);
@@ -106,7 +106,7 @@ namespace mRemoteNG.Config.Import
 					{
 						connectionInfo.Parent = (ContainerInfo)parentTreeNode.Tag;
 					}
-					connectionInfo.Inherit = inheritanceInfo;
+					connectionInfo.Inheritance = inheritanceInfo;
 					connectionInfo.Name = strDisplayName;
 					connectionInfo.Hostname = strHostName;
 					connectionInfo.Description = strDescription;

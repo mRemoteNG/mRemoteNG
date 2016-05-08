@@ -124,7 +124,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "FillImageList (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "FillImageList (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -146,7 +146,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterLabelEdit (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_AfterLabelEdit (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -154,15 +154,15 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				if ((mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.TreeNodeType.Connection) || (mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.TreeNodeType.PuttySession))
+				if ((ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Connection) || (ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.PuttySession))
 				{
                     Windows.configForm.SetPropertyGridObject(e.Node.Tag);
 				}
-				else if (mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.TreeNodeType.Container)
+				else if (ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Container)
 				{
-                    Windows.configForm.SetPropertyGridObject((e.Node.Tag as Container.ContainerInfo).ConnectionInfo);
+                    Windows.configForm.SetPropertyGridObject((e.Node.Tag as ContainerInfo).ConnectionInfo);
 				}
-				else if ((mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.TreeNodeType.Root) || (mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.TreeNodeType.PuttyRoot))
+				else if ((ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Root) || (ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.PuttyRoot))
 				{
                     Windows.configForm.SetPropertyGridObject(e.Node.Tag);
 				}
@@ -174,11 +174,11 @@ namespace mRemoteNG.UI.Window
                 Windows.configForm.pGrid_SelectedObjectChanged();
 				ShowHideTreeContextMenuItems(e.Node);
 
-                Runtime.LastSelected = mRemoteNG.Tree.Node.GetConstantID(e.Node);
+                Runtime.LastSelected = ConnectionTreeNode.GetConstantID(e.Node);
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_AfterSelect (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_AfterSelect (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -191,29 +191,29 @@ namespace mRemoteNG.UI.Window
 						
 				if (e.Button == MouseButtons.Left)
 				{
-					if (My.Settings.Default.SingleClickOnConnectionOpensIt && 
-						(mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.TreeNodeType.Connection | 
-						mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.TreeNodeType.PuttySession))
+					if (Settings.Default.SingleClickOnConnectionOpensIt && 
+						(ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Connection |
+                        ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.PuttySession))
 					{
 						Runtime.OpenConnection();
 					}
 							
-					if (My.Settings.Default.SingleClickSwitchesToOpenConnection && mRemoteNG.Tree.Node.GetNodeType(e.Node) == mRemoteNG.Tree.TreeNodeType.Connection)
+					if (Settings.Default.SingleClickSwitchesToOpenConnection && ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Connection)
 					{
-                        Runtime.SwitchToOpenConnection((mRemoteNG.Connection.ConnectionInfo)e.Node.Tag);
+                        Runtime.SwitchToOpenConnection((ConnectionInfo)e.Node.Tag);
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_NodeMouseClick (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_NodeMouseClick (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
 		static public void tvConnections_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
-            if (mRemoteNG.Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection |
-                mRemoteNG.Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
+            if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection |
+                ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
 			{
                 Runtime.OpenConnection();
 			}
@@ -227,7 +227,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_MouseMove (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_MouseMove (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -261,7 +261,7 @@ namespace mRemoteNG.UI.Window
 				cMenTree.Enabled = true;
 				EnableMenuItemsRecursive(cMenTree.Items);
 						
-				if (mRemoteNG.Tree.Node.GetNodeType(selectedNode) == TreeNodeType.Connection)
+				if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.Connection)
 				{
                     ConnectionInfo connectionInfo = (ConnectionInfo)selectedNode.Tag;
 							
@@ -287,7 +287,7 @@ namespace mRemoteNG.UI.Window
 						cMenTreeConnectWithOptionsNoCredentials.Enabled = false;
 					}
 				}
-				else if (mRemoteNG.Tree.Node.GetNodeType(selectedNode) == TreeNodeType.PuttySession)
+				else if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.PuttySession)
 				{
                     PuttySessionInfo puttySessionInfo = (PuttySessionInfo)selectedNode.Tag;
 							
@@ -313,7 +313,7 @@ namespace mRemoteNG.UI.Window
 					cMenTreeMoveUp.Enabled = false;
 					cMenTreeMoveDown.Enabled = false;
 				}
-				else if (mRemoteNG.Tree.Node.GetNodeType(selectedNode) == TreeNodeType.Container)
+				else if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.Container)
 				{
 					cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
 					cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
@@ -337,7 +337,7 @@ namespace mRemoteNG.UI.Window
 					cMenTreeToolsTransferFile.Enabled = false;
 					cMenTreeToolsExternalApps.Enabled = false;
 				}
-				else if (mRemoteNG.Tree.Node.GetNodeType(selectedNode) == TreeNodeType.Root)
+				else if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.Root)
 				{
 					cMenTreeConnect.Enabled = false;
 					cMenTreeConnectWithOptions.Enabled = false;
@@ -352,7 +352,7 @@ namespace mRemoteNG.UI.Window
 					cMenTreeMoveUp.Enabled = false;
 					cMenTreeMoveDown.Enabled = false;
 				}
-				else if (mRemoteNG.Tree.Node.GetNodeType(selectedNode) == TreeNodeType.PuttyRoot)
+				else if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.PuttyRoot)
 				{
 					cMenTreeAddConnection.Enabled = false;
 					cMenTreeAddFolder.Enabled = false;
@@ -376,7 +376,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ShowHideTreeContextMenuItems (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ShowHideTreeContextMenuItems (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -385,88 +385,27 @@ namespace mRemoteNG.UI.Window
 		static public void tvConnections_DragDrop(object sender, DragEventArgs e)
 		{
 			try
-			{
-				//Check that there is a TreeNode being dragged
-				if (e.Data.GetDataPresent("System.Windows.Forms.TreeNode", true) == false)
-				{
-					return;
-				}
-						
-				//Get the TreeView raising the event (in case multiple on form)
-				TreeView selectedTreeview = (TreeView) sender;
-						
-				//Get the TreeNode being dragged
-				System.Windows.Forms.TreeNode dropNode = (System.Windows.Forms.TreeNode) (e.Data.GetData("System.Windows.Forms.TreeNode"));
-						
-				//The target node should be selected from the DragOver event
-				TreeNode targetNode = selectedTreeview.SelectedNode;
-						
-				if (dropNode == targetNode)
-				{
-					return;
-				}
-						
-				if (mRemoteNG.Tree.Node.GetNodeType(dropNode) == mRemoteNG.Tree.TreeNodeType.Root)
-				{
-					return;
-				}
-						
-				if (dropNode == targetNode.Parent)
-				{
-					return;
-				}
-						
-				//Remove the drop node from its current location
-				dropNode.Remove();
-						
-				//If there is no targetNode add dropNode to the bottom of
-				//the TreeView root nodes, otherwise add it to the end of
-				//the dropNode child nodes
-						
-				if (mRemoteNG.Tree.Node.GetNodeType(targetNode) == mRemoteNG.Tree.TreeNodeType.Root | mRemoteNG.Tree.Node.GetNodeType(targetNode) == mRemoteNG.Tree.TreeNodeType.Container)
-				{
-					targetNode.Nodes.Insert(0, dropNode);
-				}
-				else
-				{
-					targetNode.Parent.Nodes.Insert(targetNode.Index + 1, dropNode);
-				}
-						
-				if (mRemoteNG.Tree.Node.GetNodeType(dropNode) == mRemoteNG.Tree.TreeNodeType.Connection | mRemoteNG.Tree.Node.GetNodeType(dropNode) == mRemoteNG.Tree.TreeNodeType.Container)
-				{
-					if (mRemoteNG.Tree.Node.GetNodeType(dropNode.Parent) == mRemoteNG.Tree.TreeNodeType.Container)
-					{
-                        ((mRemoteNG.Container.ContainerInfo)dropNode.Tag).Parent = (mRemoteNG.Container.ContainerInfo)dropNode.Parent.Tag;
-					}
-					else if (mRemoteNG.Tree.Node.GetNodeType(dropNode.Parent) == mRemoteNG.Tree.TreeNodeType.Root)
-					{
-						if (mRemoteNG.Tree.Node.GetNodeType(dropNode) == mRemoteNG.Tree.TreeNodeType.Connection)
-						{
-                            ((mRemoteNG.Connection.ConnectionInfo)dropNode.Tag).Parent = null;
-							((mRemoteNG.Connection.ConnectionInfo)dropNode.Tag).Inherit.TurnOffInheritanceCompletely();
-						}
-						else if (mRemoteNG.Tree.Node.GetNodeType(dropNode) == mRemoteNG.Tree.TreeNodeType.Container)
-						{
-                            ((mRemoteNG.Container.ContainerInfo)dropNode.Tag).Parent = null;
-							((mRemoteNG.Container.ContainerInfo)dropNode.Tag).ConnectionInfo.Inherit.TurnOffInheritanceCompletely();
-						}
-					}
-				}
-						
-				//Ensure the newly created node is visible to
-				//the user and select it
-				dropNode.EnsureVisible();
-				selectedTreeview.SelectedNode = dropNode;
+            {
+                //Check that there is a TreeNode being dragged
+                if (e.Data.GetDataPresent("System.Windows.Forms.TreeNode", true) == false)
+                    return;
 
-                Runtime.SaveConnectionsBG();
-			}
-			catch (Exception ex)
+                TreeView treeviewThatSentTheEvent = (TreeView)sender;
+                TreeNode nodeBeingDragged = (TreeNode)(e.Data.GetData("System.Windows.Forms.TreeNode"));
+                TreeNode nodeBeingTargetedByDragOverEvent = treeviewThatSentTheEvent.SelectedNode;
+
+                TreeNodeMover treeNodeMover = new TreeNodeMover(nodeBeingDragged);
+                treeNodeMover.MoveNode(nodeBeingTargetedByDragOverEvent);
+            }
+            catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragDrop (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_DragDrop (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
-		static public void tvConnections_DragEnter(object sender, DragEventArgs e)
+
+        
+
+        static public void tvConnections_DragEnter(object sender, DragEventArgs e)
 		{
 			try
 			{
@@ -484,7 +423,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragEnter (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_DragEnter (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -515,10 +454,10 @@ namespace mRemoteNG.UI.Window
 				//therefore an invalid target
 				TreeNode dropNode = (TreeNode) (e.Data.GetData("System.Windows.Forms.TreeNode"));
 						
-				Root.PuttySessions.Info puttyRootInfo = default(Root.PuttySessions.Info);
+				Root.PuttySessions.PuttySessionsNodeInfo puttyRootInfo = default(Root.PuttySessions.PuttySessionsNodeInfo);
 				while (!(targetNode == null))
 				{
-					puttyRootInfo = targetNode.Tag as Root.PuttySessions.Info;
+					puttyRootInfo = targetNode.Tag as Root.PuttySessions.PuttySessionsNodeInfo;
 					if (puttyRootInfo != null || targetNode == dropNode)
 					{
 						e.Effect = DragDropEffects.None;
@@ -532,7 +471,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_DragOver (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_DragOver (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -655,7 +594,7 @@ namespace mRemoteNG.UI.Window
 				
 		public void cMenTreeDuplicate_Click(System.Object sender, EventArgs e)
 		{
-			mRemoteNG.Tree.Node.CloneNode(tvConnections.SelectedNode);
+            ConnectionTreeNode.CloneNode(tvConnections.SelectedNode);
             Runtime.SaveConnectionsBG();
 		}
 				
@@ -713,27 +652,27 @@ namespace mRemoteNG.UI.Window
 					tvConnections.SelectedNode = tvConnections.Nodes[0];
 				}
 						
-				TreeNode newTreeNode = mRemoteNG.Tree.Node.AddNode(mRemoteNG.Tree.TreeNodeType.Connection);
+				TreeNode newTreeNode = ConnectionTreeNode.AddNode(TreeNodeType.Connection);
 				if (newTreeNode == null)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Tree.AddConnection() failed." + Environment.NewLine + "mRemoteNG.Tree.Node.AddNode() returned Nothing.", true);
+					Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.Tree.AddConnection() failed." + Environment.NewLine + "mRemoteNG.Tree.Node.AddNode() returned Nothing.", true);
 					return ;
 				}
 						
 				TreeNode containerNode = tvConnections.SelectedNode;
-				if (mRemoteNG.Tree.Node.GetNodeType(containerNode) == mRemoteNG.Tree.TreeNodeType.Connection)
+				if (ConnectionTreeNode.GetNodeType(containerNode) == TreeNodeType.Connection)
 				{
 					containerNode = containerNode.Parent;
 				}
-						
-				mRemoteNG.Connection.ConnectionInfo newConnectionInfo = new mRemoteNG.Connection.ConnectionInfo();
-				if (mRemoteNG.Tree.Node.GetNodeType(containerNode) == mRemoteNG.Tree.TreeNodeType.Root)
+
+                ConnectionInfo newConnectionInfo = new ConnectionInfo();
+				if (ConnectionTreeNode.GetNodeType(containerNode) == TreeNodeType.Root)
 				{
-					newConnectionInfo.Inherit.TurnOffInheritanceCompletely();
+					newConnectionInfo.Inheritance.DisableInheritance();
 				}
 				else
 				{
-                    newConnectionInfo.Parent = (mRemoteNG.Container.ContainerInfo)containerNode.Tag;
+                    newConnectionInfo.Parent = (ContainerInfo)containerNode.Tag;
 				}
 						
 				newConnectionInfo.TreeNode = newTreeNode;
@@ -747,7 +686,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "UI.Window.Tree.AddConnection() failed." + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.Tree.AddConnection() failed." + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -755,7 +694,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				TreeNode newNode = mRemoteNG.Tree.Node.AddNode(TreeNodeType.Container);
+				TreeNode newNode = ConnectionTreeNode.AddNode(TreeNodeType.Container);
 				ContainerInfo newContainerInfo = new ContainerInfo();
 				newNode.Tag = newContainerInfo;
 				newContainerInfo.TreeNode = newNode;
@@ -768,27 +707,23 @@ namespace mRemoteNG.UI.Window
 				}
 				else
 				{
-					if (mRemoteNG.Tree.Node.GetNodeType(selectedNode) == TreeNodeType.Connection)
-					{
+					if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.Connection)
 						parentNode = selectedNode.Parent;
-					}
 					else
-					{
 						parentNode = selectedNode;
-					}
 				}
 						
-				newContainerInfo.ConnectionInfo = new mRemoteNG.Connection.ConnectionInfo(newContainerInfo);
+				newContainerInfo.ConnectionInfo = new ConnectionInfo(newContainerInfo);
 				newContainerInfo.ConnectionInfo.Name = newNode.Text;
 						
 				// We can only inherit from a container node, not the root node or connection nodes
-				if (mRemoteNG.Tree.Node.GetNodeType(parentNode) == mRemoteNG.Tree.TreeNodeType.Container)
+				if (ConnectionTreeNode.GetNodeType(parentNode) == TreeNodeType.Container)
 				{
-					newContainerInfo.Parent = parentNode.Tag;
+					newContainerInfo.Parent = (ContainerInfo)parentNode.Tag;
 				}
 				else
 				{
-					newContainerInfo.ConnectionInfo.Inherit.TurnOffInheritanceCompletely();
+					newContainerInfo.ConnectionInfo.Inheritance.DisableInheritance();
 				}
 
                 Runtime.ContainerList.Add(newContainerInfo);
@@ -799,7 +734,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(Language.strErrorAddFolderFailed, ex.Message), true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorAddFolderFailed, ex.Message), true);
 			}
 		}
 				
@@ -836,7 +771,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "DisconnectConnection (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "DisconnectConnection (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -851,11 +786,11 @@ namespace mRemoteNG.UI.Window
                 Windows.sshtransferForm.Hostname = conI.Hostname;
                 Windows.sshtransferForm.Username = conI.Username;
                 Windows.sshtransferForm.Password = conI.Password;
-                Windows.sshtransferForm.Port = System.Convert.ToString(conI.Port);
+                Windows.sshtransferForm.Port = Convert.ToString(conI.Port);
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -882,7 +817,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -890,14 +825,14 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-                if (mRemoteNG.Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection | mRemoteNG.Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
+                if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
 				{
                     externalTool.Start((ConnectionInfo)ConnectionTree.SelectedNode.Tag);
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.Tree)" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.Tree)" + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -964,7 +899,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "txtSearch_KeyDown (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "txtSearch_KeyDown (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -987,7 +922,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_KeyPress (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_KeyPress (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -997,7 +932,7 @@ namespace mRemoteNG.UI.Window
 			{
 				if (e.KeyCode == Keys.Enter)
 				{
-					if (tvConnections.SelectedNode.Tag is mRemoteNG.Connection.ConnectionInfo)
+					if (tvConnections.SelectedNode.Tag is ConnectionInfo)
 					{
 						e.Handled = true;
                         Runtime.OpenConnection();
@@ -1022,7 +957,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "tvConnections_KeyDown (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_KeyDown (UI.Window.Tree) failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion

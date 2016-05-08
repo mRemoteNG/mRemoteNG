@@ -7,6 +7,7 @@ using mRemoteNG.Messages;
 using mRemoteNG.My;
 using mRemoteNG.Root;
 using mRemoteNG.Tools;
+using mRemoteNG.Tree.Root;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -527,7 +528,7 @@ namespace mRemoteNG.UI.Window
 						}
 						else if (InheritanceVisible) //Inheritance selected
 						{
-                            pGrid.SelectedObject = ((ConnectionInfo)Obj).Inherit;
+                            pGrid.SelectedObject = ((ConnectionInfo)Obj).Inheritance;
 
                             btnShowProperties.Enabled = true;
                             btnShowInheritance.Enabled = true;
@@ -577,12 +578,12 @@ namespace mRemoteNG.UI.Window
                         btnIcon.Image = conIcon.ToBitmap();
 					}
 				}
-				else if (Obj is Root.Info) //ROOT
+				else if (Obj is RootNodeInfo) //ROOT
 				{
-					Root.Info rootInfo = (Root.Info) Obj;
+					RootNodeInfo rootInfo = (RootNodeInfo) Obj;
 					switch (rootInfo.Type)
 					{
-						case Root.Info.RootType.Connection:
+						case RootNodeType.Connection:
 							PropertiesVisible = true;
 							DefaultPropertiesVisible = false;
 							btnShowProperties.Enabled = true;
@@ -592,9 +593,9 @@ namespace mRemoteNG.UI.Window
 							btnIcon.Enabled = false;
 							btnHostStatus.Enabled = false;
 							break;
-						case Root.Info.RootType.Credential:
+						case RootNodeType.Credential:
 							throw (new NotImplementedException());
-						case Root.Info.RootType.PuttySessions:
+						case RootNodeType.PuttySessions:
 							PropertiesVisible = true;
 							DefaultPropertiesVisible = false;
 							btnShowProperties.Enabled = true;
@@ -646,7 +647,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConfigPropertyGridObjectFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigPropertyGridObjectFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -659,14 +660,14 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
 		private void ApplyLanguage()
 		{
-			btnShowInheritance.Text = My.Language.strButtonInheritance;
-			btnShowDefaultInheritance.Text = My.Language.strButtonDefaultInheritance;
-			btnShowProperties.Text = My.Language.strButtonProperties;
-			btnShowDefaultProperties.Text = My.Language.strButtonDefaultProperties;
-			btnIcon.Text = My.Language.strButtonIcon;
-			btnHostStatus.Text = My.Language.strStatus;
-			Text = My.Language.strMenuConfig;
-			TabText = My.Language.strMenuConfig;
+			btnShowInheritance.Text = Language.strButtonInheritance;
+			btnShowDefaultInheritance.Text = Language.strButtonDefaultInheritance;
+			btnShowProperties.Text = Language.strButtonProperties;
+			btnShowDefaultProperties.Text = Language.strButtonDefaultProperties;
+			btnIcon.Text = Language.strButtonIcon;
+			btnHostStatus.Text = Language.strStatus;
+			Text = Language.strMenuConfig;
+			TabText = Language.strMenuConfig;
 			propertyGridContextMenuShowHelpText.Text = Language.strMenuShowHelpText;
 		}
 				
@@ -743,7 +744,7 @@ namespace mRemoteNG.UI.Window
 			Themes.ThemeManager.ThemeChanged += ApplyTheme;
 			ApplyTheme();
 			AddToolStripItems();
-			pGrid.HelpVisible = My.Settings.Default.ShowConfigHelpText;
+			pGrid.HelpVisible = Settings.Default.ShowConfigHelpText;
 		}
 				
 		private void Config_SystemColorsChanged(object sender, EventArgs e)
@@ -763,7 +764,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConfigPropertyGridValueFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigPropertyGridValueFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 
@@ -771,27 +772,27 @@ namespace mRemoteNG.UI.Window
         {
             if (pGrid.SelectedObject is ConnectionInfo)
             {
-                if (e.ChangedItem.Label == My.Language.strPropertyNameProtocol)
+                if (e.ChangedItem.Label == Language.strPropertyNameProtocol)
                 {
                     ((ConnectionInfo)pGrid.SelectedObject).SetDefaultPort();
                 }
-                else if (e.ChangedItem.Label == My.Language.strPropertyNameName)
+                else if (e.ChangedItem.Label == Language.strPropertyNameName)
                 {
                     Windows.treeForm.tvConnections.SelectedNode.Text = Convert.ToString(((ConnectionInfo)pGrid.SelectedObject).Name);
-                    if (My.Settings.Default.SetHostnameLikeDisplayName && pGrid.SelectedObject is ConnectionInfo)
+                    if (Settings.Default.SetHostnameLikeDisplayName && pGrid.SelectedObject is ConnectionInfo)
                     {
                         ConnectionInfo connectionInfo = (ConnectionInfo)pGrid.SelectedObject;
                         if (!string.IsNullOrEmpty(connectionInfo.Name))
                             connectionInfo.Hostname = connectionInfo.Name;
                     }
                 }
-                else if (e.ChangedItem.Label == My.Language.strPropertyNameIcon)
+                else if (e.ChangedItem.Label == Language.strPropertyNameIcon)
                 {
                     Icon conIcon = ConnectionIcon.FromString(Convert.ToString(((ConnectionInfo)pGrid.SelectedObject).Icon));
                     if (conIcon != null)
                         btnIcon.Image = conIcon.ToBitmap();
                 }
-                else if (e.ChangedItem.Label == My.Language.strPropertyNameAddress)
+                else if (e.ChangedItem.Label == Language.strPropertyNameAddress)
                 {
                     SetHostStatus(pGrid.SelectedObject);
                 }
@@ -803,16 +804,16 @@ namespace mRemoteNG.UI.Window
 
         private void UpdateRootInfoNode(PropertyValueChangedEventArgs e)
         {
-            if (pGrid.SelectedObject is Info)
+            if (pGrid.SelectedObject is RootNodeInfo)
             {
-                Info rootInfo = (Info)pGrid.SelectedObject;
+                RootNodeInfo rootInfo = (RootNodeInfo)pGrid.SelectedObject;
                 switch (e.ChangedItem.PropertyDescriptor.Name)
                 {
                     case "Password":
                         if (rootInfo.Password == true)
                         {
                             string passwordName = "";
-                            if (My.Settings.Default.UseSQLServer)
+                            if (Settings.Default.UseSQLServer)
                                 passwordName = Language.strSQLServer.TrimEnd(':');
                             else
                                 passwordName = Path.GetFileName(Runtime.GetStartupConnectionFileName());
@@ -1313,147 +1314,147 @@ namespace mRemoteNG.UI.Window
 							
 					if (conI.IsDefault == false)
 					{
-						if (conI.Inherit.CacheBitmaps)
+						if (conI.Inheritance.CacheBitmaps)
 						{
 							strHide.Add("CacheBitmaps");
 						}
 								
-						if (conI.Inherit.Colors)
+						if (conI.Inheritance.Colors)
 						{
 							strHide.Add("Colors");
 						}
 								
-						if (conI.Inherit.Description)
+						if (conI.Inheritance.Description)
 						{
 							strHide.Add("Description");
 						}
 								
-						if (conI.Inherit.DisplayThemes)
+						if (conI.Inheritance.DisplayThemes)
 						{
 							strHide.Add("DisplayThemes");
 						}
 								
-						if (conI.Inherit.DisplayWallpaper)
+						if (conI.Inheritance.DisplayWallpaper)
 						{
 							strHide.Add("DisplayWallpaper");
 						}
 								
-						if (conI.Inherit.EnableFontSmoothing)
+						if (conI.Inheritance.EnableFontSmoothing)
 						{
 							strHide.Add("EnableFontSmoothing");
 						}
 								
-						if (conI.Inherit.EnableDesktopComposition)
+						if (conI.Inheritance.EnableDesktopComposition)
 						{
 							strHide.Add("EnableDesktopComposition");
 						}
 								
-						if (conI.Inherit.Domain)
+						if (conI.Inheritance.Domain)
 						{
 							strHide.Add("Domain");
 						}
 								
-						if (conI.Inherit.Icon)
+						if (conI.Inheritance.Icon)
 						{
 							strHide.Add("Icon");
 						}
 								
-						if (conI.Inherit.Password)
+						if (conI.Inheritance.Password)
 						{
 							strHide.Add("Password");
 						}
 								
-						if (conI.Inherit.Port)
+						if (conI.Inheritance.Port)
 						{
 							strHide.Add("Port");
 						}
 								
-						if (conI.Inherit.Protocol)
+						if (conI.Inheritance.Protocol)
 						{
 							strHide.Add("Protocol");
 						}
 								
-						if (conI.Inherit.PuttySession)
+						if (conI.Inheritance.PuttySession)
 						{
 							strHide.Add("PuttySession");
 						}
 								
-						if (conI.Inherit.RedirectDiskDrives)
+						if (conI.Inheritance.RedirectDiskDrives)
 						{
 							strHide.Add("RedirectDiskDrives");
 						}
 								
-						if (conI.Inherit.RedirectKeys)
+						if (conI.Inheritance.RedirectKeys)
 						{
 							strHide.Add("RedirectKeys");
 						}
 								
-						if (conI.Inherit.RedirectPorts)
+						if (conI.Inheritance.RedirectPorts)
 						{
 							strHide.Add("RedirectPorts");
 						}
 								
-						if (conI.Inherit.RedirectPrinters)
+						if (conI.Inheritance.RedirectPrinters)
 						{
 							strHide.Add("RedirectPrinters");
 						}
 								
-						if (conI.Inherit.RedirectSmartCards)
+						if (conI.Inheritance.RedirectSmartCards)
 						{
 							strHide.Add("RedirectSmartCards");
 						}
 								
-						if (conI.Inherit.RedirectSound)
+						if (conI.Inheritance.RedirectSound)
 						{
 							strHide.Add("RedirectSound");
 						}
 								
-						if (conI.Inherit.Resolution)
+						if (conI.Inheritance.Resolution)
 						{
 							strHide.Add("Resolution");
 						}
 								
-						if (conI.Inherit.AutomaticResize)
+						if (conI.Inheritance.AutomaticResize)
 						{
 							strHide.Add("AutomaticResize");
 						}
 								
-						if (conI.Inherit.UseConsoleSession)
+						if (conI.Inheritance.UseConsoleSession)
 						{
 							strHide.Add("UseConsoleSession");
 						}
 								
-						if (conI.Inherit.UseCredSsp)
+						if (conI.Inheritance.UseCredSsp)
 						{
 							strHide.Add("UseCredSsp");
 						}
 								
-						if (conI.Inherit.RenderingEngine)
+						if (conI.Inheritance.RenderingEngine)
 						{
 							strHide.Add("RenderingEngine");
 						}
 								
-						if (conI.Inherit.ICAEncryption)
+						if (conI.Inheritance.ICAEncryption)
 						{
 							strHide.Add("ICAEncryption");
 						}
 								
-						if (conI.Inherit.RDPAuthenticationLevel)
+						if (conI.Inheritance.RDPAuthenticationLevel)
 						{
 							strHide.Add("RDPAuthenticationLevel");
 						}
 								
-						if (conI.Inherit.LoadBalanceInfo)
+						if (conI.Inheritance.LoadBalanceInfo)
 						{
 							strHide.Add("LoadBalanceInfo");
 						}
 								
-						if (conI.Inherit.Username)
+						if (conI.Inheritance.Username)
 						{
 							strHide.Add("Username");
 						}
 								
-						if (conI.Inherit.Panel)
+						if (conI.Inheritance.Panel)
 						{
 							strHide.Add("Panel");
 						}
@@ -1463,117 +1464,117 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("Hostname");
 						}
 								
-						if (conI.Inherit.PreExtApp)
+						if (conI.Inheritance.PreExtApp)
 						{
 							strHide.Add("PreExtApp");
 						}
 								
-						if (conI.Inherit.PostExtApp)
+						if (conI.Inheritance.PostExtApp)
 						{
 							strHide.Add("PostExtApp");
 						}
 								
-						if (conI.Inherit.MacAddress)
+						if (conI.Inheritance.MacAddress)
 						{
 							strHide.Add("MacAddress");
 						}
 								
-						if (conI.Inherit.UserField)
+						if (conI.Inheritance.UserField)
 						{
 							strHide.Add("UserField");
 						}
 								
-						if (conI.Inherit.VNCAuthMode)
+						if (conI.Inheritance.VNCAuthMode)
 						{
 							strHide.Add("VNCAuthMode");
 						}
 								
-						if (conI.Inherit.VNCColors)
+						if (conI.Inheritance.VNCColors)
 						{
 							strHide.Add("VNCColors");
 						}
 								
-						if (conI.Inherit.VNCCompression)
+						if (conI.Inheritance.VNCCompression)
 						{
 							strHide.Add("VNCCompression");
 						}
 								
-						if (conI.Inherit.VNCEncoding)
+						if (conI.Inheritance.VNCEncoding)
 						{
 							strHide.Add("VNCEncoding");
 						}
 								
-						if (conI.Inherit.VNCProxyIP)
+						if (conI.Inheritance.VNCProxyIP)
 						{
 							strHide.Add("VNCProxyIP");
 						}
 								
-						if (conI.Inherit.VNCProxyPassword)
+						if (conI.Inheritance.VNCProxyPassword)
 						{
 							strHide.Add("VNCProxyPassword");
 						}
 								
-						if (conI.Inherit.VNCProxyPort)
+						if (conI.Inheritance.VNCProxyPort)
 						{
 							strHide.Add("VNCProxyPort");
 						}
 								
-						if (conI.Inherit.VNCProxyType)
+						if (conI.Inheritance.VNCProxyType)
 						{
 							strHide.Add("VNCProxyType");
 						}
 								
-						if (conI.Inherit.VNCProxyUsername)
+						if (conI.Inheritance.VNCProxyUsername)
 						{
 							strHide.Add("VNCProxyUsername");
 						}
 								
-						if (conI.Inherit.VNCViewOnly)
+						if (conI.Inheritance.VNCViewOnly)
 						{
 							strHide.Add("VNCViewOnly");
 						}
 								
-						if (conI.Inherit.VNCSmartSizeMode)
+						if (conI.Inheritance.VNCSmartSizeMode)
 						{
 							strHide.Add("VNCSmartSizeMode");
 						}
 								
-						if (conI.Inherit.ExtApp)
+						if (conI.Inheritance.ExtApp)
 						{
 							strHide.Add("ExtApp");
 						}
 								
-						if (conI.Inherit.RDGatewayUsageMethod)
+						if (conI.Inheritance.RDGatewayUsageMethod)
 						{
 							strHide.Add("RDGatewayUsageMethod");
 						}
 								
-						if (conI.Inherit.RDGatewayHostname)
+						if (conI.Inheritance.RDGatewayHostname)
 						{
 							strHide.Add("RDGatewayHostname");
 						}
 								
-						if (conI.Inherit.RDGatewayUsername)
+						if (conI.Inheritance.RDGatewayUsername)
 						{
 							strHide.Add("RDGatewayUsername");
 						}
 								
-						if (conI.Inherit.RDGatewayPassword)
+						if (conI.Inheritance.RDGatewayPassword)
 						{
 							strHide.Add("RDGatewayPassword");
 						}
 								
-						if (conI.Inherit.RDGatewayDomain)
+						if (conI.Inheritance.RDGatewayDomain)
 						{
 							strHide.Add("RDGatewayDomain");
 						}
 								
-						if (conI.Inherit.RDGatewayUseConnectionCredentials)
+						if (conI.Inheritance.RDGatewayUseConnectionCredentials)
 						{
 							strHide.Add("RDGatewayUseConnectionCredentials");
 						}
 								
-						if (conI.Inherit.RDGatewayHostname)
+						if (conI.Inheritance.RDGatewayHostname)
 						{
 							strHide.Add("RDGatewayHostname");
 						}
@@ -1584,10 +1585,10 @@ namespace mRemoteNG.UI.Window
 						strHide.Add("Name");
 					}
 				}
-				else if (pGrid.SelectedObject is Root.Info)
+				else if (pGrid.SelectedObject is RootNodeInfo)
 				{
-					Root.Info rootInfo = (Root.Info) pGrid.SelectedObject;
-					if (rootInfo.Type == Root.Info.RootType.PuttySessions)
+					RootNodeInfo rootInfo = (RootNodeInfo) pGrid.SelectedObject;
+					if (rootInfo.Type == RootNodeType.PuttySessions)
 					{
 						strHide.Add("Password");
 					}
@@ -1599,7 +1600,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConfigPropertyGridHideItemsFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigPropertyGridHideItemsFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -1613,7 +1614,7 @@ namespace mRemoteNG.UI.Window
                     InheritanceVisible = false;
                     DefaultPropertiesVisible = false;
                     DefaultInheritanceVisible = false;
-                    SetPropertyGridObject((mRemoteNG.Root.Info)Windows.treeForm.tvConnections.SelectedNode.Tag);
+                    SetPropertyGridObject((RootNodeInfo)Windows.treeForm.tvConnections.SelectedNode.Tag);
 				}
 				else
 				{
@@ -1632,14 +1633,14 @@ namespace mRemoteNG.UI.Window
                     InheritanceVisible = false;
                     DefaultPropertiesVisible = false;
                     DefaultInheritanceVisible = false;
-                    SetPropertyGridObject((mRemoteNG.Root.Info)Windows.treeForm.tvConnections.SelectedNode.Tag);
+                    SetPropertyGridObject((RootNodeInfo)Windows.treeForm.tvConnections.SelectedNode.Tag);
 				}
 			}
 		}
 				
 		private void btnShowDefaultProperties_Click(object sender, EventArgs e)
 		{
-			if (pGrid.SelectedObject is mRemoteNG.Root.Info || pGrid.SelectedObject is ConnectionInfoInheritance)
+			if (pGrid.SelectedObject is RootNodeInfo || pGrid.SelectedObject is ConnectionInfoInheritance)
 			{
                 PropertiesVisible = false;
                 InheritanceVisible = false;
@@ -1657,13 +1658,13 @@ namespace mRemoteNG.UI.Window
                 InheritanceVisible = true;
                 DefaultPropertiesVisible = false;
                 DefaultInheritanceVisible = false;
-                SetPropertyGridObject(((ConnectionInfo)pGrid.SelectedObject).Inherit);
+                SetPropertyGridObject(((ConnectionInfo)pGrid.SelectedObject).Inheritance);
 			}
 		}
 				
 		private void btnShowDefaultInheritance_Click(object sender, EventArgs e)
 		{
-			if (pGrid.SelectedObject is mRemoteNG.Root.Info || pGrid.SelectedObject is ConnectionInfo)
+			if (pGrid.SelectedObject is RootNodeInfo || pGrid.SelectedObject is ConnectionInfo)
 			{
                 PropertiesVisible = false;
                 InheritanceVisible = false;
@@ -1701,7 +1702,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConfigPropertyGridButtonIconClickFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigPropertyGridButtonIconClickFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -1825,7 +1826,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConfigPropertyGridSetHostStatusFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigPropertyGridSetHostStatusFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -1835,7 +1836,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				propertyGridContextMenuShowHelpText.Checked = My.Settings.Default.ShowConfigHelpText;
+				propertyGridContextMenuShowHelpText.Checked = Settings.Default.ShowConfigHelpText;
 				GridItem gridItem = pGrid.SelectedGridItem;
 				propertyGridContextMenuReset.Enabled = Convert.ToBoolean(pGrid.SelectedObject != null && gridItem != null && gridItem.PropertyDescriptor != null && gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject));
 			}
@@ -1868,7 +1869,7 @@ namespace mRemoteNG.UI.Window
 				
 		private void propertyGridContextMenuShowHelpText_CheckedChanged(object sender, EventArgs e)
 		{
-			My.Settings.Default.ShowConfigHelpText = propertyGridContextMenuShowHelpText.Checked;
+            Settings.Default.ShowConfigHelpText = propertyGridContextMenuShowHelpText.Checked;
 			pGrid.HelpVisible = propertyGridContextMenuShowHelpText.Checked;
         }
         #endregion

@@ -13,7 +13,7 @@ namespace mRemoteNG.Container
 				if (Index is ContainerInfo)
                     return (ContainerInfo)Index;
 				else
-					return ((ContainerInfo) (List[System.Convert.ToInt32(Index)]));
+					return ((ContainerInfo) (List[Convert.ToInt32(Index)]));
 			}
 		}
 			

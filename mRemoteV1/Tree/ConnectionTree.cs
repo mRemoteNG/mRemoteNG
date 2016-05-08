@@ -42,13 +42,13 @@ namespace mRemoteNG.Tree
                     return;
                 }
 
-                if (Tree.Node.GetNodeType(SelectedNode) == TreeNodeType.Root)
+                if (Tree.ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Root)
                 {
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "The root item cannot be deleted!");
                 }
-                else if (Tree.Node.GetNodeType(SelectedNode) == TreeNodeType.Container)
+                else if (Tree.ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Container)
                 {
-                    if (Tree.Node.IsEmpty(SelectedNode) == false)
+                    if (Tree.ConnectionTreeNode.IsEmpty(SelectedNode) == false)
                     {
                         if (Interaction.MsgBox(string.Format(My.Language.strConfirmDeleteNodeFolder, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle)(MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
                         {
@@ -67,7 +67,7 @@ namespace mRemoteNG.Tree
                         }
                     }
                 }
-                else if (Tree.Node.GetNodeType(SelectedNode) == TreeNodeType.Connection)
+                else if (Tree.ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Connection)
                 {
                     if (Interaction.MsgBox(string.Format(My.Language.strConfirmDeleteNodeConnection, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle)(MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
                     {
@@ -97,7 +97,7 @@ namespace mRemoteNG.Tree
         {
             ConnectionInfo connectionInfo = SelectedNode.Tag as ConnectionInfo;
             if (connectionInfo != null)
-                Tree.Node.RenameNode(connectionInfo, newName);
+                Tree.ConnectionTreeNode.RenameNode(connectionInfo, newName);
         }
 
         public static void SetNodeToolTip(MouseEventArgs e, ToolTip tTip)
@@ -122,7 +122,7 @@ namespace mRemoteNG.Tree
                     else
                     {
                         //Get this node's object data.
-                        if (Tree.Node.GetNodeType(SetNodeToolTip_old_node) == TreeNodeType.Connection)
+                        if (Tree.ConnectionTreeNode.GetNodeType(SetNodeToolTip_old_node) == TreeNodeType.Connection)
                         {
                             tTip.SetToolTip(_TreeView, (SetNodeToolTip_old_node.Tag as ConnectionInfo).Description);
                         }
@@ -218,7 +218,7 @@ namespace mRemoteNG.Tree
                 else
                     return;
             }
-            else if (Tree.Node.GetNodeType(treeNode) == TreeNodeType.Connection)
+            else if (Tree.ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.Connection)
             {
                 treeNode = treeNode.Parent;
                 if (treeNode == null)

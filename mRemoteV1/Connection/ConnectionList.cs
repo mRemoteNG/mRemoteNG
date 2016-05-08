@@ -7,17 +7,17 @@ namespace mRemoteNG.Connection
 	public class ConnectionList : CollectionBase
 	{
         #region Public Properties
-        public Connection.ConnectionInfo this[object Index]
+        public ConnectionInfo this[object Index]
 		{
 			get
 			{
-				if (Index is Connection.ConnectionInfo)
+				if (Index is ConnectionInfo)
 				{
-					return (Connection.ConnectionInfo)Index;
+					return (ConnectionInfo)Index;
 				}
 				else
 				{
-					return ((Connection.ConnectionInfo) (List[System.Convert.ToInt32(Index)]));
+					return ((ConnectionInfo) (List[Convert.ToInt32(Index)]));
 				}
 			}
 		}
@@ -29,23 +29,23 @@ namespace mRemoteNG.Connection
         #endregion
 			
         #region Public Methods
-		public Connection.ConnectionInfo Add(Connection.ConnectionInfo cInfo)
+		public ConnectionInfo Add(ConnectionInfo cInfo)
 		{
 			this.List.Add(cInfo);
 			return cInfo;
 		}
 			
-		public void AddRange(Connection.ConnectionInfo[] cInfo)
+		public void AddRange(ConnectionInfo[] cInfo)
 		{
-			foreach (Connection.ConnectionInfo cI in cInfo)
+			foreach (ConnectionInfo cI in cInfo)
 			{
 				List.Add(cI);
 			}
 		}
 			
-		public Connection.ConnectionInfo FindByConstantID(string id)
+		public ConnectionInfo FindByConstantID(string id)
 		{
-			foreach (Connection.ConnectionInfo conI in List)
+			foreach (ConnectionInfo conI in List)
 			{
 				if (conI.ConstantID == id)
 				{

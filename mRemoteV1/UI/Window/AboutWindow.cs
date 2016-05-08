@@ -66,7 +66,7 @@ namespace mRemoteNG.UI.Window
 			//
 			this.lblEdition.Anchor = (System.Windows.Forms.AnchorStyles) (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
 			this.lblEdition.BackColor = System.Drawing.Color.Black;
-			this.lblEdition.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (14.25F), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.lblEdition.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (14.25F), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.lblEdition.ForeColor = System.Drawing.Color.White;
 			this.lblEdition.Location = new System.Drawing.Point(512, 112);
 			this.lblEdition.Name = "lblEdition";
@@ -110,7 +110,7 @@ namespace mRemoteNG.UI.Window
 			//llblWeifenLuo
 			//
 			this.llblWeifenLuo.AutoSize = true;
-			this.llblWeifenLuo.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.llblWeifenLuo.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.llblWeifenLuo.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.llblWeifenLuo.LinkColor = System.Drawing.Color.Blue;
 			this.llblWeifenLuo.Location = new System.Drawing.Point(16, 158);
@@ -124,7 +124,7 @@ namespace mRemoteNG.UI.Window
 			//llblMagicLibrary
 			//
 			this.llblMagicLibrary.AutoSize = true;
-			this.llblMagicLibrary.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.llblMagicLibrary.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.llblMagicLibrary.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.llblMagicLibrary.LinkColor = System.Drawing.Color.Blue;
 			this.llblMagicLibrary.Location = new System.Drawing.Point(16, 136);
@@ -138,7 +138,7 @@ namespace mRemoteNG.UI.Window
 			//llblFAMFAMFAM
 			//
 			this.llblFAMFAMFAM.AutoSize = true;
-			this.llblFAMFAMFAM.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.llblFAMFAMFAM.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.llblFAMFAMFAM.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.llblFAMFAMFAM.LinkColor = System.Drawing.Color.Blue;
 			this.llblFAMFAMFAM.Location = new System.Drawing.Point(16, 116);
@@ -157,7 +157,7 @@ namespace mRemoteNG.UI.Window
 			this.txtChangeLog.BackColor = System.Drawing.SystemColors.Control;
 			this.txtChangeLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
 			this.txtChangeLog.Cursor = System.Windows.Forms.Cursors.Default;
-			this.txtChangeLog.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (9.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.txtChangeLog.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (9.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.txtChangeLog.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.txtChangeLog.Location = new System.Drawing.Point(24, 224);
 			this.txtChangeLog.Multiline = true;
@@ -171,7 +171,7 @@ namespace mRemoteNG.UI.Window
 			//lblTitle
 			//
 			this.lblTitle.AutoSize = true;
-			this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (14.0F), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (14.0F), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.lblTitle.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.lblTitle.Location = new System.Drawing.Point(16, 16);
 			this.lblTitle.Name = "lblTitle";
@@ -183,7 +183,7 @@ namespace mRemoteNG.UI.Window
 			//lblVersion
 			//
 			this.lblVersion.AutoSize = true;
-			this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.lblVersion.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.lblVersion.Location = new System.Drawing.Point(16, 56);
 			this.lblVersion.Name = "lblVersion";
@@ -195,7 +195,7 @@ namespace mRemoteNG.UI.Window
 			//lblChangeLog
 			//
 			this.lblChangeLog.AutoSize = true;
-			this.lblChangeLog.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.lblChangeLog.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.lblChangeLog.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.lblChangeLog.Location = new System.Drawing.Point(16, 199);
 			this.lblChangeLog.Name = "lblChangeLog";
@@ -207,7 +207,7 @@ namespace mRemoteNG.UI.Window
 			//lblLicense
 			//
 			this.lblLicense.AutoSize = true;
-			this.lblLicense.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.lblLicense.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.lblLicense.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.lblLicense.Location = new System.Drawing.Point(16, 96);
 			this.lblLicense.Name = "lblLicense";
@@ -219,7 +219,7 @@ namespace mRemoteNG.UI.Window
 			//lblCopyright
 			//
 			this.lblCopyright.AutoSize = true;
-			this.lblCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.lblCopyright.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (11.0F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.lblCopyright.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.lblCopyright.Location = new System.Drawing.Point(16, 76);
 			this.lblCopyright.Name = "lblCopyright";
@@ -234,7 +234,7 @@ namespace mRemoteNG.UI.Window
 			this.ClientSize = new System.Drawing.Size(784, 564);
 			this.Controls.Add(this.pnlTop);
 			this.Controls.Add(this.pnlBottom);
-			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.Icon = My.Resources.mRemote_Icon;
 			this.MaximumSize = new System.Drawing.Size(20000, 10000);

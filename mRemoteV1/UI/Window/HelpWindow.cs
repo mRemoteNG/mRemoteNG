@@ -189,7 +189,7 @@ namespace mRemoteNG.UI.Window
 			this.lblDocName.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
 				| System.Windows.Forms.AnchorStyles.Right);
 			this.lblDocName.BackColor = System.Drawing.Color.DimGray;
-			this.lblDocName.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (12.0F), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.lblDocName.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (12.0F), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.lblDocName.ForeColor = System.Drawing.Color.White;
 			this.lblDocName.Location = new System.Drawing.Point(1, 1);
 			this.lblDocName.Name = "lblDocName";
@@ -249,7 +249,7 @@ namespace mRemoteNG.UI.Window
 		{
 			if (((string)e.Node.Tag) != "")
 			{
-				this.wbHelp.Navigate((new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\Help\\" + System.Convert.ToString(e.Node.Tag) +".htm");
+				this.wbHelp.Navigate((new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\Help\\" + Convert.ToString(e.Node.Tag) +".htm");
 			}
 		}
 				

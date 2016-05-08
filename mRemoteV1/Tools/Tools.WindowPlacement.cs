@@ -91,7 +91,7 @@ namespace mRemoteNG.Tools
 			get
 			{
 				WINDOWPLACEMENT windowPlacement = GetWindowPlacement();
-				return System.Convert.ToBoolean(windowPlacement.flags & WPF_RESTORETOMAXIMIZED);
+				return Convert.ToBoolean(windowPlacement.flags & WPF_RESTORETOMAXIMIZED);
 			}
 			set
 			{

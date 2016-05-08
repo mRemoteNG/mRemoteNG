@@ -76,6 +76,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="App\LoggerTests.cs" />
+    <Compile Include="Connection\ConnectionInfoInheritanceTests.cs" />
     <Compile Include="ListViewTester.cs" />
     <Compile Include="Config\Connections\SqlConnectionUpdateCheckerTests.cs" />
     <Compile Include="Config\Connections\SqlUpdateQueryBuilderTest.cs" />

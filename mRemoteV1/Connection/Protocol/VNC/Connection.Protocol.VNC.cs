@@ -26,7 +26,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				
         #region Private Declarations
 		private VncSharp.RemoteDesktop _VNC;
-		private Connection.ConnectionInfo Info;
+		private ConnectionInfo Info;
         #endregion
 				
         #region Public Methods

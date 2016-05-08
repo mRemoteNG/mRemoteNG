@@ -29,7 +29,7 @@ namespace mRemoteNG.Config.Import
 			parentTreeNode.Nodes.Add(treeNode);
 				
 			ConnectionInfo connectionInfo = new ConnectionInfo();
-			connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo);
+			connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
 			connectionInfo.Name = name;
 			connectionInfo.TreeNode = treeNode;
 				

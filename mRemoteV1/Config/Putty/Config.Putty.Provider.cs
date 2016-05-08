@@ -32,8 +32,8 @@ namespace mRemoteNG.Config.Putty
 			}
 		}
 			
-		private Root.PuttySessions.Info _rootInfo;
-        public Root.PuttySessions.Info RootInfo
+		private Root.PuttySessions.PuttySessionsNodeInfo _rootInfo;
+        public Root.PuttySessions.PuttySessionsNodeInfo RootInfo
 		{
 			get
 			{
@@ -124,9 +124,9 @@ namespace mRemoteNG.Config.Putty
 			return newTreeNode;
 		}
 			
-		protected virtual Root.PuttySessions.Info CreateRootInfo()
+		protected virtual Root.PuttySessions.PuttySessionsNodeInfo CreateRootInfo()
 		{
-			Root.PuttySessions.Info newRootInfo = new Root.PuttySessions.Info();
+			Root.PuttySessions.PuttySessionsNodeInfo newRootInfo = new Root.PuttySessions.PuttySessionsNodeInfo();
 				
 			if (string.IsNullOrEmpty(Convert.ToString(My.Settings.Default.PuttySavedSessionsName)))
 			{

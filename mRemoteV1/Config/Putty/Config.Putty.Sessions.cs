@@ -31,7 +31,7 @@ namespace mRemoteNG.Config.Putty
 				TreeNode rootTreeNode = provider.RootTreeNode;
 				bool inUpdate = false;
 					
-				List<Connection.ConnectionInfo> savedSessions = new List<Connection.ConnectionInfo>(provider.GetSessions());
+				List<ConnectionInfo> savedSessions = new List<ConnectionInfo>(provider.GetSessions());
 				if (!IsProviderEnabled(provider) || savedSessions == null || savedSessions.Count == 0)
 				{
 					if (rootTreeNode != null && treeView.Nodes.Contains(rootTreeNode))
@@ -65,7 +65,7 @@ namespace mRemoteNG.Config.Putty
 					}
 					else
 					{
-						treeNode = Tree.Node.AddNode(TreeNodeType.PuttySession, sessionInfo.Name);
+						treeNode = ConnectionTreeNode.AddNode(TreeNodeType.PuttySession, sessionInfo.Name);
 						if (treeNode == null)
 						{
 							continue;
@@ -78,7 +78,7 @@ namespace mRemoteNG.Config.Putty
 					
 					sessionInfo.RootPuttySessionsInfo = provider.RootInfo;
 					sessionInfo.TreeNode = treeNode;
-					sessionInfo.Inherit.TurnOffInheritanceCompletely();
+					//sessionInfo.Inheritance.TurnOffInheritanceCompletely();
 					
 					treeNode.Tag = sessionInfo;
 						

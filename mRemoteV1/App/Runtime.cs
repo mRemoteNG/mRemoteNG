@@ -947,15 +947,15 @@ namespace mRemoteNG.App
 					return;
 				}
 
-                if (Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.Connection | Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.PuttySession)
+                if (Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.Connection | Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.PuttySession)
 				{
 					OpenConnection((ConnectionInfo)Windows.treeForm.tvConnections.SelectedNode.Tag, Force);
 				}
-                else if (Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.Container)
+                else if (Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.Container)
 				{
                     foreach (TreeNode tNode in ConnectionTree.SelectedNode.Nodes)
 					{
-                        if (Tree.Node.GetNodeType(tNode) == Tree.TreeNodeType.Connection | Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.PuttySession)
+                        if (Tree.ConnectionTreeNode.GetNodeType(tNode) == Tree.TreeNodeType.Connection | Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.PuttySession)
 						{
 							if (tNode.Tag != null)
 							{
@@ -1007,7 +1007,7 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		public static void OpenConnection(ConnectionInfo ConnectionInfo, mRemoteNG.Connection.ConnectionInfo.Force Force)
+		public static void OpenConnection(ConnectionInfo ConnectionInfo, ConnectionInfo.Force Force)
 		{
 			try
 			{
@@ -1102,7 +1102,7 @@ namespace mRemoteNG.App
             {
                 if (ConnectionInfo.Protocol != Connection.Protocol.ProtocolType.IntApp)
                 {
-                    Tree.Node.SetNodeImage(ConnectionInfo.TreeNode, TreeImageType.ConnectionOpen);
+                    Tree.ConnectionTreeNode.SetNodeImage(ConnectionInfo.TreeNode, TreeImageType.ConnectionOpen);
                 }
                 else
                 {
@@ -1111,7 +1111,7 @@ namespace mRemoteNG.App
                     {
                         if (extApp.TryIntegrate && ConnectionInfo.TreeNode != null)
                         {
-                            Tree.Node.SetNodeImage(ConnectionInfo.TreeNode, TreeImageType.ConnectionOpen);
+                            Tree.ConnectionTreeNode.SetNodeImage(ConnectionInfo.TreeNode, TreeImageType.ConnectionOpen);
                         }
                     }
                 }
@@ -1234,7 +1234,7 @@ namespace mRemoteNG.App
 					
 				if (Prot.InterfaceControl.Info.OpenConnections.Count < 1 && Prot.InterfaceControl.Info.IsQuickConnect == false)
 				{
-					Tree.Node.SetNodeImage(Prot.InterfaceControl.Info.TreeNode, TreeImageType.ConnectionClosed);
+					Tree.ConnectionTreeNode.SetNodeImage(Prot.InterfaceControl.Info.TreeNode, TreeImageType.ConnectionClosed);
 				}
 				
 				if (Prot.InterfaceControl.Info.PostExtApp != "")

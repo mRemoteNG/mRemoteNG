@@ -12,12 +12,15 @@ using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.Rlogin;
+using mRemoteNG.Container;
+using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Messages;
 
 
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public partial class ConnectionInfo
+    public partial class ConnectionInfo : Parent,Inheritance
     {
         #region Private Properties
         // Private properties with public get/set
@@ -29,7 +32,7 @@ namespace mRemoteNG.Connection
         private string _username;
         private string _password;
         private string _domain;
-        private Protocol.ProtocolType _protocol;
+        private ProtocolType _protocol;
         private string _extApp;
         private int _port;
         private string _puttySession;
@@ -74,8 +77,8 @@ namespace mRemoteNG.Connection
         private ProtocolVNC.Colors _vncColors;
         private ProtocolVNC.SmartSizeMode _vncSmartSizeMode;
         private bool _vncViewOnly;
-        private ConnectionInfoInheritance _Inherit;
-        private Protocol.ProtocolList _OpenConnections;
+        private ConnectionInfoInheritance _Inheritance;
+        private ProtocolList _OpenConnections;
         private bool _IsContainer;
         private bool _IsDefault;
         private int _PositionID;
@@ -100,7 +103,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDescription")]
         public virtual string Description
 		{
-			get { return GetInheritedPropertyValue("Description", _description); }
+            get { return GetPropertyValue("Description", _description); }
 			set { _description = value; }
 		}
 		
@@ -110,7 +113,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionIcon")]
         public virtual string Icon
 		{
-			get { return GetInheritedPropertyValue("Icon", _icon); }
+            get { return GetPropertyValue("Icon", _icon); }
 			set { _icon = value; }
 		}
 			
@@ -119,7 +122,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPanel")]
         public virtual string Panel
 		{
-			get { return GetInheritedPropertyValue("Panel", _panel); }
+            get { return GetPropertyValue("Panel", _panel); }
 			set { _panel = value; }
 		}
         #endregion
@@ -148,7 +151,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUsername")]
         public virtual string Username
 		{
-			get { return GetInheritedPropertyValue("Username", _username); }
+            get { return GetPropertyValue("Username", _username); }
 			set { _username = value.Trim(); }
 		}
 		
@@ -158,7 +161,7 @@ namespace mRemoteNG.Connection
             PasswordPropertyText(true)]
         public virtual string Password
 		{
-			get { return GetInheritedPropertyValue("Password", _password); }
+            get { return GetPropertyValue("Password", _password); }
 			set { _password = value; }
 		}
 		
@@ -167,7 +170,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
         public string Domain
 		{
-			get { return GetInheritedPropertyValue("Domain", _domain).Trim(); }
+            get { return GetPropertyValue("Domain", _domain).Trim(); }
 			set { _domain = value.Trim(); }
 		}
         #endregion
@@ -176,9 +179,9 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameProtocol"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionProtocol"), 
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
-        public virtual Protocol.ProtocolType Protocol
+        public virtual ProtocolType Protocol
 		{
-			get { return GetInheritedPropertyValue("Protocol", _protocol); }
+            get { return GetPropertyValue("Protocol", _protocol); }
 			set { _protocol = value; }
 		}
 		
@@ -188,7 +191,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]
         public string ExtApp
 		{
-			get { return GetInheritedPropertyValue("ExtApp", _extApp); }
+            get { return GetPropertyValue("ExtApp", _extApp); }
 			set { _extApp = value; }
 		}
 		
@@ -197,7 +200,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPort")]
         public virtual int Port
 		{
-			get { return GetInheritedPropertyValue("Port", _port); }
+            get { return GetPropertyValue("Port", _port); }
 			set { _port = value; }
 		}
 		
@@ -207,7 +210,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Config.Putty.Sessions.SessionList))]
         public virtual string PuttySession
 		{
-			get { return GetInheritedPropertyValue("PuttySession", _puttySession); }
+            get { return GetPropertyValue("PuttySession", _puttySession); }
 			set { _puttySession = value; }
 		}
 		
@@ -217,7 +220,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolICA.EncryptionStrength ICAEncryption
 		{
-			get { return GetInheritedPropertyValue("ICAEncryption", _icaEncryption); }
+            get { return GetPropertyValue("ICAEncryption", _icaEncryption); }
 			set { _icaEncryption = value; }
 		}
 		
@@ -227,7 +230,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool UseConsoleSession
 		{
-			get { return GetInheritedPropertyValue("UseConsoleSession", _useConsoleSession); }
+            get { return GetPropertyValue("UseConsoleSession", _useConsoleSession); }
 			set { _useConsoleSession = value; }
 		}
 		
@@ -237,7 +240,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolRDP.AuthenticationLevel RDPAuthenticationLevel
 		{
-			get { return GetInheritedPropertyValue("RDPAuthenticationLevel", _rdpAuthenticationLevel); }
+            get { return GetPropertyValue("RDPAuthenticationLevel", _rdpAuthenticationLevel); }
 			set { _rdpAuthenticationLevel = value; }
 		}
 		
@@ -246,7 +249,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionLoadBalanceInfo")]
         public string LoadBalanceInfo
 		{
-			get { return GetInheritedPropertyValue("LoadBalanceInfo", _loadBalanceInfo).Trim(); }
+            get { return GetPropertyValue("LoadBalanceInfo", _loadBalanceInfo).Trim(); }
 			set { _loadBalanceInfo = value.Trim(); }
 		}
 		
@@ -256,7 +259,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public HTTPBase.RenderingEngine RenderingEngine
 		{
-			get { return GetInheritedPropertyValue("RenderingEngine", _renderingEngine); }
+            get { return GetPropertyValue("RenderingEngine", _renderingEngine); }
 			set { _renderingEngine = value; }
 		}
 		
@@ -266,7 +269,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool UseCredSsp
 		{
-			get { return GetInheritedPropertyValue("UseCredSsp", _useCredSsp); }
+            get { return GetPropertyValue("UseCredSsp", _useCredSsp); }
 			set { _useCredSsp = value; }
 		}
         #endregion
@@ -277,7 +280,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolRDP.RDGatewayUsageMethod RDGatewayUsageMethod
 		{
-			get { return GetInheritedPropertyValue("RDGatewayUsageMethod", _rdGatewayUsageMethod); }
+            get { return GetPropertyValue("RDGatewayUsageMethod", _rdGatewayUsageMethod); }
 			set { _rdGatewayUsageMethod = value; }
 		}
 			
@@ -286,7 +289,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayHostname")]
         public string RDGatewayHostname
 		{
-			get { return GetInheritedPropertyValue("RDGatewayHostname", _rdGatewayHostname).Trim(); }
+            get { return GetPropertyValue("RDGatewayHostname", _rdGatewayHostname).Trim(); }
 			set { _rdGatewayHostname = value.Trim(); }
 		}
 		
@@ -296,7 +299,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolRDP.RDGatewayUseConnectionCredentials RDGatewayUseConnectionCredentials
 		{
-			get { return GetInheritedPropertyValue("RDGatewayUseConnectionCredentials", _rdGatewayUseConnectionCredentials); }
+            get { return GetPropertyValue("RDGatewayUseConnectionCredentials", _rdGatewayUseConnectionCredentials); }
 			set { _rdGatewayUseConnectionCredentials = value; }
 		}
 		
@@ -305,7 +308,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUsername")]
         public string RDGatewayUsername
 		{
-			get { return GetInheritedPropertyValue("RDGatewayUsername", _rdGatewayUsername).Trim(); }
+            get { return GetPropertyValue("RDGatewayUsername", _rdGatewayUsername).Trim(); }
 			set { _rdGatewayUsername = value.Trim(); }
 		}
 		
@@ -315,7 +318,7 @@ namespace mRemoteNG.Connection
             PasswordPropertyText(true)]
         public string RDGatewayPassword
 		{
-			get { return GetInheritedPropertyValue("RDGatewayPassword", _rdGatewayPassword); }
+            get { return GetPropertyValue("RDGatewayPassword", _rdGatewayPassword); }
 			set { _rdGatewayPassword = value; }
 		}
 		
@@ -324,7 +327,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayDomain")]
         public string RDGatewayDomain
 		{
-			get { return GetInheritedPropertyValue("RDGatewayDomain", _rdGatewayDomain).Trim(); }
+            get { return GetPropertyValue("RDGatewayDomain", _rdGatewayDomain).Trim(); }
 			set { _rdGatewayDomain = value.Trim(); }
 		}
         #endregion
@@ -335,7 +338,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolRDP.RDPResolutions Resolution
 		{
-			get { return GetInheritedPropertyValue("Resolution", _resolution); }
+            get { return GetPropertyValue("Resolution", _resolution); }
 			set { _resolution = value; }
 		}
 		
@@ -345,7 +348,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool AutomaticResize
 		{
-			get { return GetInheritedPropertyValue("AutomaticResize", _automaticResize); }
+            get { return GetPropertyValue("AutomaticResize", _automaticResize); }
 			set { _automaticResize = value; }
 		}
 		
@@ -355,7 +358,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolRDP.RDPColors Colors
 		{
-			get { return GetInheritedPropertyValue("Colors", _colors); }
+            get { return GetPropertyValue("Colors", _colors); }
 			set { _colors = value; }
 		}
 		
@@ -365,7 +368,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool CacheBitmaps
 		{
-			get { return GetInheritedPropertyValue("CacheBitmaps", _cacheBitmaps); }
+            get { return GetPropertyValue("CacheBitmaps", _cacheBitmaps); }
 			set { _cacheBitmaps = value; }
 		}
 		
@@ -375,7 +378,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool DisplayWallpaper
 		{
-			get { return GetInheritedPropertyValue("DisplayWallpaper", _displayWallpaper); }
+            get { return GetPropertyValue("DisplayWallpaper", _displayWallpaper); }
 			set { _displayWallpaper = value; }
 		}
 		
@@ -385,7 +388,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool DisplayThemes
 		{
-			get { return GetInheritedPropertyValue("DisplayThemes", _displayThemes); }
+            get { return GetPropertyValue("DisplayThemes", _displayThemes); }
 			set { _displayThemes = value; }
 		}
 		
@@ -395,7 +398,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool EnableFontSmoothing
 		{
-			get { return GetInheritedPropertyValue("EnableFontSmoothing", _enableFontSmoothing); }
+            get { return GetPropertyValue("EnableFontSmoothing", _enableFontSmoothing); }
 			set { _enableFontSmoothing = value; }
 		}
 		
@@ -405,7 +408,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool EnableDesktopComposition
 		{
-			get { return GetInheritedPropertyValue("EnableDesktopComposition", _enableDesktopComposition); }
+            get { return GetPropertyValue("EnableDesktopComposition", _enableDesktopComposition); }
 			set { _enableDesktopComposition = value; }
 		}
         #endregion
@@ -416,7 +419,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool RedirectKeys
 		{
-			get { return GetInheritedPropertyValue("RedirectKeys", _redirectKeys); }
+            get { return GetPropertyValue("RedirectKeys", _redirectKeys); }
 			set { _redirectKeys = value; }
 		}
 		
@@ -426,7 +429,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool RedirectDiskDrives
 		{
-			get { return GetInheritedPropertyValue("RedirectDiskDrives", _redirectDiskDrives); }
+            get { return GetPropertyValue("RedirectDiskDrives", _redirectDiskDrives); }
 			set { _redirectDiskDrives = value; }
 		}
 		
@@ -436,7 +439,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool RedirectPrinters
 		{
-			get { return GetInheritedPropertyValue("RedirectPrinters", _redirectPrinters); }
+            get { return GetPropertyValue("RedirectPrinters", _redirectPrinters); }
 			set { _redirectPrinters = value; }
 		}
 		
@@ -446,7 +449,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool RedirectPorts
 		{
-			get { return GetInheritedPropertyValue("RedirectPorts", _redirectPorts); }
+            get { return GetPropertyValue("RedirectPorts", _redirectPorts); }
 			set { _redirectPorts = value; }
 		}
 		
@@ -456,7 +459,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool RedirectSmartCards
 		{
-			get { return GetInheritedPropertyValue("RedirectSmartCards", _redirectSmartCards); }
+            get { return GetPropertyValue("RedirectSmartCards", _redirectSmartCards); }
 			set { _redirectSmartCards = value; }
 		}
 		
@@ -466,7 +469,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolRDP.RDPSounds RedirectSound
 		{
-			get { return GetInheritedPropertyValue("RedirectSound", _redirectSound); }
+            get { return GetPropertyValue("RedirectSound", _redirectSound); }
 			set { _redirectSound = value; }
 		}
         #endregion
@@ -477,7 +480,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]
         public virtual string PreExtApp
 		{
-			get { return GetInheritedPropertyValue("PreExtApp", _preExtApp); }
+            get { return GetPropertyValue("PreExtApp", _preExtApp); }
 			set { _preExtApp = value; }
 		}
 		
@@ -487,7 +490,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]
         public virtual string PostExtApp
 		{
-			get { return GetInheritedPropertyValue("PostExtApp", _postExtApp); }
+            get { return GetPropertyValue("PostExtApp", _postExtApp); }
 			set { _postExtApp = value; }
 		}
 		
@@ -496,7 +499,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionMACAddress")]
         public virtual string MacAddress
 		{
-			get { return GetInheritedPropertyValue("MacAddress", _macAddress); }
+            get { return GetPropertyValue("MacAddress", _macAddress); }
 			set { _macAddress = value; }
 		}
 
@@ -505,7 +508,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUser1")]
         public virtual string UserField
         {
-            get { return GetInheritedPropertyValue("UserField", _userField); }
+            get { return GetPropertyValue("UserField", _userField); }
             set { _userField = value; }
         }
         #endregion
@@ -517,7 +520,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolVNC.Compression VNCCompression
 		{
-			get { return GetInheritedPropertyValue("VNCCompression", _vncCompression); }
+            get { return GetPropertyValue("VNCCompression", _vncCompression); }
 			set { _vncCompression = value; }
 		}
 		
@@ -528,7 +531,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolVNC.Encoding VNCEncoding
 		{
-			get { return GetInheritedPropertyValue("VNCEncoding", _vncEncoding); }
+            get { return GetPropertyValue("VNCEncoding", _vncEncoding); }
 			set { _vncEncoding = value; }
 		}
 		
@@ -539,7 +542,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolVNC.AuthMode VNCAuthMode
 		{
-			get { return GetInheritedPropertyValue("VNCAuthMode", _vncAuthMode); }
+            get { return GetPropertyValue("VNCAuthMode", _vncAuthMode); }
 			set { _vncAuthMode = value; }
 		}
 		
@@ -550,7 +553,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolVNC.ProxyType VNCProxyType
 		{
-			get { return GetInheritedPropertyValue("VNCProxyType", _vncProxyType); }
+            get { return GetPropertyValue("VNCProxyType", _vncProxyType); }
 			set { _vncProxyType = value; }
 		}
 		
@@ -560,7 +563,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyAddress")]
         public string VNCProxyIP
 		{
-			get { return GetInheritedPropertyValue("VNCProxyIP", _vncProxyIP); }
+            get { return GetPropertyValue("VNCProxyIP", _vncProxyIP); }
 			set { _vncProxyIP = value; }
 		}
 		
@@ -570,7 +573,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyPort")]
         public int VNCProxyPort
 		{
-			get { return GetInheritedPropertyValue("VNCProxyPort", _vncProxyPort); }
+            get { return GetPropertyValue("VNCProxyPort", _vncProxyPort); }
 			set { _vncProxyPort = value; }
 		}
 		
@@ -580,7 +583,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyUsername")]
         public string VNCProxyUsername
 		{
-			get { return GetInheritedPropertyValue("VNCProxyUsername", _vncProxyUsername); }
+            get { return GetPropertyValue("VNCProxyUsername", _vncProxyUsername); }
 			set { _vncProxyUsername = value; }
 		}
 		
@@ -591,7 +594,7 @@ namespace mRemoteNG.Connection
             PasswordPropertyText(true)]
         public string VNCProxyPassword
 		{
-			get { return GetInheritedPropertyValue("VNCProxyPassword", _vncProxyPassword); }
+            get { return GetPropertyValue("VNCProxyPassword", _vncProxyPassword); }
 			set { _vncProxyPassword = value; }
 		}
 		
@@ -602,7 +605,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolVNC.Colors VNCColors
 		{
-			get { return GetInheritedPropertyValue("VNCColors", _vncColors); }
+            get { return GetPropertyValue("VNCColors", _vncColors); }
 			set { _vncColors = value; }
 		}
 		
@@ -612,7 +615,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolVNC.SmartSizeMode VNCSmartSizeMode
 		{
-			get { return GetInheritedPropertyValue("VNCSmartSizeMode", _vncSmartSizeMode); }
+            get { return GetPropertyValue("VNCSmartSizeMode", _vncSmartSizeMode); }
 			set { _vncSmartSizeMode = value; }
 		}
 		
@@ -622,20 +625,20 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
         public bool VNCViewOnly
 		{
-			get { return GetInheritedPropertyValue("VNCViewOnly", _vncViewOnly); }
+            get { return GetPropertyValue("VNCViewOnly", _vncViewOnly); }
 			set { _vncViewOnly = value; }
 		}
         #endregion
         #region Non-browsable public properties
         [Browsable(false)]
-        public ConnectionInfoInheritance Inherit
+        public ConnectionInfoInheritance Inheritance
         {
-            get { return _Inherit; }
-            set { _Inherit = value; }
+            get { return _Inheritance; }
+            set { _Inheritance = value; }
         }
         
         [Browsable(false)]
-        public Protocol.ProtocolList OpenConnections
+        public ProtocolList OpenConnections
         {
             get { return _OpenConnections; }
             set { _OpenConnections = value; }
@@ -656,7 +659,7 @@ namespace mRemoteNG.Connection
         }
 
         [Browsable(false)]
-        public Container.ContainerInfo Parent { get; set; }
+        public ContainerInfo Parent { get; set; }
 
         [Browsable(false)]
         public int PositionID
@@ -707,7 +710,7 @@ namespace mRemoteNG.Connection
             SetDefaults();
 		}
 			
-		public ConnectionInfo(Container.ContainerInfo parent) : this()
+		public ConnectionInfo(ContainerInfo parent) : this()
 		{
 			IsContainer = true;
 			this.Parent = parent;
@@ -718,8 +721,8 @@ namespace mRemoteNG.Connection
 		public ConnectionInfo Copy()
 		{
 			ConnectionInfo newConnectionInfo = (ConnectionInfo)MemberwiseClone();
-			newConnectionInfo.ConstantID = Tools.MiscTools.CreateConstantID();
-			newConnectionInfo._OpenConnections = new Protocol.ProtocolList();
+			newConnectionInfo.ConstantID = MiscTools.CreateConstantID();
+			newConnectionInfo._OpenConnections = new ProtocolList();
 			return newConnectionInfo;
 		}
 			
@@ -757,70 +760,82 @@ namespace mRemoteNG.Connection
         #endregion
 			
         #region Private Methods
-		private TPropertyType GetInheritedPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
-		{
-            Type inheritType = _Inherit.GetType();
-			PropertyInfo inheritPropertyInfo = inheritType.GetProperty(propertyName);
-			bool inheritPropertyValue = System.Convert.ToBoolean(inheritPropertyInfo.GetValue(Inherit, BindingFlags.GetProperty, null, null, null));
-				
-			if (inheritPropertyValue && Parent != null)
-			{
-				ConnectionInfo parentConnectionInfo = default(ConnectionInfo);
-				if (IsContainer)
-				{
-					parentConnectionInfo = ((Container.ContainerInfo)Parent.Parent).ConnectionInfo;
-				}
-				else
-				{
-					parentConnectionInfo = Parent.ConnectionInfo;
-				}
-					
-				Type connectionInfoType = parentConnectionInfo.GetType();
-				PropertyInfo parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
-                TPropertyType parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(parentConnectionInfo, BindingFlags.GetProperty, null, null, null);
-					
-				return parentPropertyValue;
-			}
-			else
-			{
-				return value;
-			}
-		}
-			
-		private static int GetDefaultPort(Protocol.ProtocolType protocol)
+        private TPropertyType GetPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
+        {
+            if (ShouldThisPropertyBeInherited(propertyName))
+                return GetInheritedPropertyValue(propertyName, value);
+            else
+                return value;
+        }
+
+        private bool ShouldThisPropertyBeInherited(string propertyName)
+        {
+            return (ParentIsValidInheritanceTarget() && IsInheritanceTurnedOnForThisProperty(propertyName));
+        }
+
+        private bool ParentIsValidInheritanceTarget()
+        {
+            return (Parent != null);
+        }
+
+        private bool IsInheritanceTurnedOnForThisProperty(string propertyName)
+        {
+            bool inheritPropertyValue = false;
+            Type inheritType = _Inheritance.GetType();
+            PropertyInfo inheritPropertyInfo = inheritType.GetProperty(propertyName);
+            inheritPropertyValue = Convert.ToBoolean(inheritPropertyInfo.GetValue(Inheritance, BindingFlags.GetProperty, null, null, null));
+            return inheritPropertyValue;
+        }
+
+        private TPropertyType GetInheritedPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
+        {
+            var parentConnectionInfo = default(ConnectionInfo);
+            if (IsContainer)
+                parentConnectionInfo = ((ContainerInfo)Parent.Parent).ConnectionInfo;
+            else
+                parentConnectionInfo = Parent.ConnectionInfo;
+
+            Type connectionInfoType = parentConnectionInfo.GetType();
+            PropertyInfo parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
+            TPropertyType parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(parentConnectionInfo, BindingFlags.GetProperty, null, null, null);
+
+            return parentPropertyValue;
+        }
+
+		private static int GetDefaultPort(ProtocolType protocol)
 		{
 			try
 			{
                 switch (protocol)
                 {
-                    case Connection.Protocol.ProtocolType.RDP:
+                    case ProtocolType.RDP:
                         return (int)ProtocolRDP.Defaults.Port;
-                    case Connection.Protocol.ProtocolType.VNC:
+                    case ProtocolType.VNC:
                         return (int)ProtocolVNC.Defaults.Port;
-                    case Connection.Protocol.ProtocolType.SSH1:
+                    case ProtocolType.SSH1:
                         return (int)ProtocolSSH1.Defaults.Port;
-                    case Connection.Protocol.ProtocolType.SSH2:
+                    case ProtocolType.SSH2:
                         return (int)ProtocolSSH2.Defaults.Port;
-                    case Connection.Protocol.ProtocolType.Telnet:
+                    case ProtocolType.Telnet:
                         return (int)ProtocolTelnet.Defaults.Port;
-                    case Connection.Protocol.ProtocolType.Rlogin:
+                    case ProtocolType.Rlogin:
                         return (int)ProtocolRlogin.Defaults.Port;
-                    case Connection.Protocol.ProtocolType.RAW:
+                    case ProtocolType.RAW:
                         return (int)ProtocolRAW.Defaults.Port;
-                    case Connection.Protocol.ProtocolType.HTTP:
+                    case ProtocolType.HTTP:
                         return (int)ProtocolHTTP.Defaults.Port;
-                    case Connection.Protocol.ProtocolType.HTTPS:
+                    case ProtocolType.HTTPS:
                         return (int)ProtocolHTTPS.Defaults.Port;
-                    case Connection.Protocol.ProtocolType.ICA:
+                    case ProtocolType.ICA:
                         return (int)ProtocolICA.Defaults.Port;
-                    case Connection.Protocol.ProtocolType.IntApp:
-                        return (int)Connection.Protocol.IntegratedProgram.Defaults.Port;
+                    case ProtocolType.IntApp:
+                        return (int)IntegratedProgram.Defaults.Port;
                 }
                 return 0;
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionMessage(My.Language.strConnectionSetDefaultPortFailed, ex, Messages.MessageClass.ErrorMsg);
+                Runtime.MessageCollector.AddExceptionMessage(My.Language.strConnectionSetDefaultPortFailed, ex, MessageClass.ErrorMsg);
                 return 0;
 			}
 		}
@@ -843,23 +858,23 @@ namespace mRemoteNG.Connection
 
         private void SetProtocolDefaults()
         {
-            _protocol = (Connection.Protocol.ProtocolType)System.Enum.Parse(typeof(Connection.Protocol.ProtocolType), My.Settings.Default.ConDefaultProtocol);
+            _protocol = (ProtocolType)System.Enum.Parse(typeof(ProtocolType), My.Settings.Default.ConDefaultProtocol);
             _extApp = My.Settings.Default.ConDefaultExtApp;
             _port = 0;
             _puttySession = My.Settings.Default.ConDefaultPuttySession;
-            _icaEncryption = (ProtocolICA.EncryptionStrength)System.Enum.Parse(typeof(ProtocolICA.EncryptionStrength), My.Settings.Default.ConDefaultICAEncryptionStrength);
+            _icaEncryption = (ProtocolICA.EncryptionStrength) Enum.Parse(typeof(ProtocolICA.EncryptionStrength), My.Settings.Default.ConDefaultICAEncryptionStrength);
             _useConsoleSession = My.Settings.Default.ConDefaultUseConsoleSession;
-            _rdpAuthenticationLevel = (ProtocolRDP.AuthenticationLevel)System.Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), My.Settings.Default.ConDefaultRDPAuthenticationLevel);
+            _rdpAuthenticationLevel = (ProtocolRDP.AuthenticationLevel) Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), My.Settings.Default.ConDefaultRDPAuthenticationLevel);
             _loadBalanceInfo = My.Settings.Default.ConDefaultLoadBalanceInfo;
-            _renderingEngine = (HTTPBase.RenderingEngine)System.Enum.Parse(typeof(HTTPBase.RenderingEngine), My.Settings.Default.ConDefaultRenderingEngine);
+            _renderingEngine = (HTTPBase.RenderingEngine) Enum.Parse(typeof(HTTPBase.RenderingEngine), My.Settings.Default.ConDefaultRenderingEngine);
             _useCredSsp = My.Settings.Default.ConDefaultUseCredSsp;
         }
 
         private void SetRDGatewayDefaults()
         {
-            _rdGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod)System.Enum.Parse(typeof(ProtocolRDP.RDGatewayUsageMethod), My.Settings.Default.ConDefaultRDGatewayUsageMethod);
+            _rdGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod) Enum.Parse(typeof(ProtocolRDP.RDGatewayUsageMethod), My.Settings.Default.ConDefaultRDGatewayUsageMethod);
             _rdGatewayHostname = My.Settings.Default.ConDefaultRDGatewayHostname;
-            _rdGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials)System.Enum.Parse(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), My.Settings.Default.ConDefaultRDGatewayUseConnectionCredentials); ;
+            _rdGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials) Enum.Parse(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), My.Settings.Default.ConDefaultRDGatewayUseConnectionCredentials); ;
             _rdGatewayUsername = My.Settings.Default.ConDefaultRDGatewayUsername;
             _rdGatewayPassword = My.Settings.Default.ConDefaultRDGatewayPassword;
             _rdGatewayDomain = My.Settings.Default.ConDefaultRDGatewayDomain;
@@ -867,9 +882,9 @@ namespace mRemoteNG.Connection
 
         private void SetAppearanceDefaults() 
         {
-            _resolution = (ProtocolRDP.RDPResolutions)System.Enum.Parse(typeof(ProtocolRDP.RDPResolutions), My.Settings.Default.ConDefaultResolution);
+            _resolution = (ProtocolRDP.RDPResolutions) Enum.Parse(typeof(ProtocolRDP.RDPResolutions), My.Settings.Default.ConDefaultResolution);
             _automaticResize = My.Settings.Default.ConDefaultAutomaticResize;
-            _colors = (ProtocolRDP.RDPColors)System.Enum.Parse(typeof(ProtocolRDP.RDPColors), My.Settings.Default.ConDefaultColors);
+            _colors = (ProtocolRDP.RDPColors) Enum.Parse(typeof(ProtocolRDP.RDPColors), My.Settings.Default.ConDefaultColors);
             _cacheBitmaps = My.Settings.Default.ConDefaultCacheBitmaps;
             _displayWallpaper = My.Settings.Default.ConDefaultDisplayWallpaper;
             _displayThemes = My.Settings.Default.ConDefaultDisplayThemes;
@@ -884,12 +899,12 @@ namespace mRemoteNG.Connection
             _redirectPrinters = My.Settings.Default.ConDefaultRedirectPrinters;
             _redirectPorts = My.Settings.Default.ConDefaultRedirectPorts;
             _redirectSmartCards = My.Settings.Default.ConDefaultRedirectSmartCards;
-            _redirectSound = (ProtocolRDP.RDPSounds)System.Enum.Parse(typeof(ProtocolRDP.RDPSounds), My.Settings.Default.ConDefaultRedirectSound);
+            _redirectSound = (ProtocolRDP.RDPSounds) Enum.Parse(typeof(ProtocolRDP.RDPSounds), My.Settings.Default.ConDefaultRedirectSound);
         }
 
         private void SetMiscDefaults()
         {
-            _constantId = Tools.MiscTools.CreateConstantID();
+            _constantId = MiscTools.CreateConstantID();
             _preExtApp = My.Settings.Default.ConDefaultPreExtApp;
             _postExtApp = My.Settings.Default.ConDefaultPostExtApp;
             _macAddress = My.Settings.Default.ConDefaultMacAddress;
@@ -898,23 +913,23 @@ namespace mRemoteNG.Connection
 
         private void SetVNCDefaults()
         {
-            _vncCompression = (ProtocolVNC.Compression)System.Enum.Parse(typeof(ProtocolVNC.Compression),My.Settings.Default.ConDefaultVNCCompression);
-            _vncEncoding = (ProtocolVNC.Encoding)System.Enum.Parse(typeof(ProtocolVNC.Encoding),My.Settings.Default.ConDefaultVNCEncoding);
-            _vncAuthMode = (ProtocolVNC.AuthMode)System.Enum.Parse(typeof(ProtocolVNC.AuthMode),My.Settings.Default.ConDefaultVNCAuthMode);
-            _vncProxyType = (ProtocolVNC.ProxyType)System.Enum.Parse(typeof(ProtocolVNC.ProxyType),My.Settings.Default.ConDefaultVNCProxyType);
+            _vncCompression = (ProtocolVNC.Compression) Enum.Parse(typeof(ProtocolVNC.Compression), My.Settings.Default.ConDefaultVNCCompression);
+            _vncEncoding = (ProtocolVNC.Encoding) Enum.Parse(typeof(ProtocolVNC.Encoding), My.Settings.Default.ConDefaultVNCEncoding);
+            _vncAuthMode = (ProtocolVNC.AuthMode) Enum.Parse(typeof(ProtocolVNC.AuthMode), My.Settings.Default.ConDefaultVNCAuthMode);
+            _vncProxyType = (ProtocolVNC.ProxyType) Enum.Parse(typeof(ProtocolVNC.ProxyType), My.Settings.Default.ConDefaultVNCProxyType);
             _vncProxyIP = My.Settings.Default.ConDefaultVNCProxyIP;
             _vncProxyPort = My.Settings.Default.ConDefaultVNCProxyPort;
             _vncProxyUsername = My.Settings.Default.ConDefaultVNCProxyUsername;
             _vncProxyPassword = My.Settings.Default.ConDefaultVNCProxyPassword;
-            _vncColors = (ProtocolVNC.Colors)System.Enum.Parse(typeof(ProtocolVNC.Colors),My.Settings.Default.ConDefaultVNCColors);
-            _vncSmartSizeMode = (ProtocolVNC.SmartSizeMode)System.Enum.Parse(typeof(ProtocolVNC.SmartSizeMode),My.Settings.Default.ConDefaultVNCSmartSizeMode);
+            _vncColors = (ProtocolVNC.Colors) Enum.Parse(typeof(ProtocolVNC.Colors), My.Settings.Default.ConDefaultVNCColors);
+            _vncSmartSizeMode = (ProtocolVNC.SmartSizeMode) Enum.Parse(typeof(ProtocolVNC.SmartSizeMode), My.Settings.Default.ConDefaultVNCSmartSizeMode);
             _vncViewOnly = My.Settings.Default.ConDefaultVNCViewOnly;
         }
 
         private void SetNonBrowsablePropertiesDefaults()
         {
-            _Inherit = new ConnectionInfoInheritance(this);
-            _OpenConnections = new Protocol.ProtocolList();
+            _Inheritance = new ConnectionInfoInheritance(this);
+            _OpenConnections = new ProtocolList();
             _IsContainer = false;
             _IsDefault = false;
             _PositionID = 0;

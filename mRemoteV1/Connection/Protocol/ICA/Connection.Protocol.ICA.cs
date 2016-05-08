@@ -46,7 +46,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 
         #region Private Properties
 		private AxICAClient _ICAClient;
-		private Connection.ConnectionInfo _Info;
+		private ConnectionInfo _Info;
         #endregion
 		
         #region Public Methods
@@ -173,7 +173,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					{
 						if (My.Settings.Default.DefaultPassword != "")
 						{
-							_ICAClient.SetProp("ClearPassword", Security.Crypt.Decrypt(System.Convert.ToString(My.Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey));
+							_ICAClient.SetProp("ClearPassword", Security.Crypt.Decrypt(Convert.ToString(My.Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey));
 						}
 					}
 				}
@@ -339,7 +339,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
         #region Reconnect Stuff
 		public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
-			bool srvReady = Tools.PortScan.Scanner.IsPortOpen(_Info.Hostname, System.Convert.ToString(_Info.Port));
+			bool srvReady = Tools.PortScan.Scanner.IsPortOpen(_Info.Hostname, Convert.ToString(_Info.Port));
 					
 			ReconnectGroup.ServerReady = srvReady;
 					

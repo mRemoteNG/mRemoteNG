@@ -14,7 +14,8 @@ using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Images;
 using mRemoteNG.Connection;
-
+using mRemoteNG.Tree;
+using mRemoteNG.Container;
 
 namespace mRemoteNG.Config.Import
 {
@@ -69,23 +70,23 @@ namespace mRemoteNG.Config.Import
 			TreeNode treeNode = new TreeNode(name);
 			parentTreeNode.Nodes.Add(treeNode);
 				
-			Container.ContainerInfo containerInfo = new Container.ContainerInfo();
+			ContainerInfo containerInfo = new ContainerInfo();
 			containerInfo.TreeNode = treeNode;
 			containerInfo.Name = name;
-				
-			Connection.ConnectionInfo connectionInfo = CreateConnectionInfo(name);
+
+            ConnectionInfo connectionInfo = CreateConnectionInfo(name);
 			connectionInfo.Parent = containerInfo;
 			connectionInfo.IsContainer = true;
 			containerInfo.ConnectionInfo = connectionInfo;
 				
 			// We can only inherit from a container node, not the root node or connection nodes
-			if (Tree.Node.GetNodeType(parentTreeNode) == Tree.TreeNodeType.Container)
+			if (ConnectionTreeNode.GetNodeType(parentTreeNode) == TreeNodeType.Container)
 			{
-				containerInfo.Parent = parentTreeNode.Tag;
+				containerInfo.Parent = (ContainerInfo)parentTreeNode.Tag;
 			}
 			else
 			{
-				connectionInfo.Inherit.TurnOffInheritanceCompletely();
+				connectionInfo.Inheritance.DisableInheritance();
 			}
 				
 			treeNode.Name = name;
@@ -128,10 +129,10 @@ namespace mRemoteNG.Config.Import
 			string name = connectionNode.Attributes["name"].Value;
 			TreeNode treeNode = new TreeNode(name);
 			parentTreeNode.Nodes.Add(treeNode);
-				
-			Connection.ConnectionInfo connectionInfo = ConnectionInfoFromXml(connectionNode);
+
+            ConnectionInfo connectionInfo = ConnectionInfoFromXml(connectionNode);
 			connectionInfo.TreeNode = treeNode;
-			connectionInfo.Parent = (Container.ContainerInfo)parentTreeNode.Tag;
+			connectionInfo.Parent = (ContainerInfo)parentTreeNode.Tag;
 				
 			treeNode.Name = name;
 			treeNode.Tag = connectionInfo;
@@ -144,7 +145,7 @@ namespace mRemoteNG.Config.Import
 		private static ConnectionInfo CreateConnectionInfo(string name)
 		{
 			ConnectionInfo connectionInfo = new ConnectionInfo();
-			connectionInfo.Inherit = new ConnectionInfoInheritance(connectionInfo);
+			connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
 			connectionInfo.Name = name;
 			return connectionInfo;
 		}

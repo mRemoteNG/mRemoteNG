@@ -69,7 +69,7 @@ namespace mRemoteNG.Config.Connections
         {
             if (UpdateIsAvailable)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strSqlUpdateCheckUpdateAvailable, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strSqlUpdateCheckUpdateAvailable, true);
                 Runtime.LoadConnectionsBG();
             }
         }

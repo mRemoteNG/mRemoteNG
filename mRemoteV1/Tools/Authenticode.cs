@@ -103,7 +103,7 @@ namespace mRemoteNG.Tools
 			catch (CryptographicException ex)
 			{
 				PropertyInfo hResultProperty = ex.GetType().GetProperty("HResult", BindingFlags.NonPublic | BindingFlags.Instance);
-				int hResult = System.Convert.ToInt32(hResultProperty.GetValue(ex, null));
+				int hResult = Convert.ToInt32(hResultProperty.GetValue(ex, null));
 				if (hResult == Win32.CRYPT_E_NO_MATCH)
 				{
 					_status = StatusValue.NoSignature;

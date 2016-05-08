@@ -117,7 +117,7 @@ namespace mRemoteNG.Tools
 		public static string DBDate(DateTime Dt)
 		{
 			string strDate = "";
-			strDate = Dt.Year + LeadingZero(Convert.ToString(Dt.Month)) + LeadingZero(Convert.ToString(Dt.Day)) + " " + LeadingZero(Convert.ToString(Dt.Hour)) + ":" + LeadingZero(Convert.ToString(Dt.Minute)) + ":" + LeadingZero(System.Convert.ToString(Dt.Second));
+			strDate = Dt.Year + LeadingZero(Convert.ToString(Dt.Month)) + LeadingZero(Convert.ToString(Dt.Day)) + " " + LeadingZero(Convert.ToString(Dt.Hour)) + ":" + LeadingZero(Convert.ToString(Dt.Minute)) + ":" + LeadingZero(Convert.ToString(Dt.Second));
 			return strDate;
 		}
 		public static string PrepareForDB(string Text)
@@ -289,7 +289,7 @@ namespace mRemoteNG.Tools
 			{
 				if (destinationType == typeof(string))
 				{
-					return ((System.Convert.ToBoolean(value)) ? My.Language.strYes : My.Language.strNo);
+					return ((Convert.ToBoolean(value)) ? My.Language.strYes : My.Language.strNo);
 				}
 					
 				return base.ConvertTo(context, culture, value, destinationType);

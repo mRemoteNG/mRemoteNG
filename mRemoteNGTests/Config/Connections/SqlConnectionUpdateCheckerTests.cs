@@ -23,22 +23,5 @@ namespace mRemoteNGTests.Config.Connections
             _updateChecker.Dispose();
             _updateChecker = null;
         }
-
-        [Test]
-        [Ignore("Need to find a way to mock SqlConnector")]
-        public void ReturnTrueIfUpdateIsAvailable()
-        {
-            Substitute.For<SqlConnector>();
-            bool updateIsAvailable = _updateChecker.IsDatabaseUpdateAvailable();
-            Assert.AreEqual(true,updateIsAvailable);
-        }
-
-        [Test]
-        [Ignore("Need to find a way to mock SqlConnector")]
-        public void ReturnFalseIfUpdateIsNotAvailable()
-        {
-            bool updateIsAvailable = _updateChecker.IsDatabaseUpdateAvailable();
-            Assert.AreEqual(false, updateIsAvailable);
-        }
     }
 }

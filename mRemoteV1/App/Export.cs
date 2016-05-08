@@ -18,13 +18,13 @@ namespace mRemoteNG.App
 					
 				using (ExportForm exportForm = new ExportForm())
 				{
-					if (Tree.Node.GetNodeType(selectedTreeNode) == Tree.TreeNodeType.Container)
+					if (Tree.ConnectionTreeNode.GetNodeType(selectedTreeNode) == Tree.TreeNodeType.Container)
 					{
 						exportForm.SelectedFolder = selectedTreeNode;
 					}
-					else if (Tree.Node.GetNodeType(selectedTreeNode) == Tree.TreeNodeType.Connection)
+					else if (Tree.ConnectionTreeNode.GetNodeType(selectedTreeNode) == Tree.TreeNodeType.Connection)
 					{
-						if (Tree.Node.GetNodeType(selectedTreeNode.Parent) == Tree.TreeNodeType.Container)
+						if (Tree.ConnectionTreeNode.GetNodeType(selectedTreeNode.Parent) == Tree.TreeNodeType.Container)
 						{
 							exportForm.SelectedFolder = selectedTreeNode.Parent;
 						}

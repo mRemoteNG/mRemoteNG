@@ -1,14 +1,18 @@
-using System;
-using System.Windows.Forms;
+using mRemoteNG.Connection;
 using mRemoteNG.Tools;
 using System.ComponentModel;
-
+using System.Windows.Forms;
 
 namespace mRemoteNG.Container
 {
-	[DefaultProperty("Name")]
-    public class ContainerInfo
+    [DefaultProperty("Name")]
+    public class ContainerInfo : Parent,Inheritance
 	{
+        private TreeNode _TreeNode;
+        private ContainerInfo _Parent;
+        private ConnectionInfo _ConnectionInfo = new ConnectionInfo();
+        private bool _IsExpanded;
+
         #region Properties
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1), 
             Browsable(true), 
@@ -23,8 +27,7 @@ namespace mRemoteNG.Container
 			get { return ConnectionInfo.Name; }
 			set { ConnectionInfo.Name = value; }
 		}
-			
-		private TreeNode _TreeNode;
+		
         [Category(""), 
             Browsable(false), 
             ReadOnly(false), 
@@ -33,32 +36,26 @@ namespace mRemoteNG.Container
             DesignOnly(false)]
         public TreeNode TreeNode
 		{
-			get { return this._TreeNode; }
-			set { this._TreeNode = value; }
+			get { return _TreeNode; }
+			set { _TreeNode = value; }
 		}
-			
-		private object _Parent;
+		
         [Category(""), 
             Browsable(false)]
-        public object Parent
+        public ContainerInfo Parent
 		{
-			get { return this._Parent; }
-			set { this._Parent = value; }
+			get { return _Parent; }
+			set { _Parent = value; }
 		}
-			
-		//Private _GlobalID As Integer = 0
-		//<Category(""), _
-		//    Browsable(False)> _
-		//Public Property GlobalID() As Integer
-		//    Get
-		//        Return _GlobalID
-		//    End Get
-		//    Set(ByVal value As Integer)
-		//        _GlobalID = value
-		//    End Set
-		//End Property
-			
-		private bool _IsExpanded;
+
+        [Category(""),
+            Browsable(false)]
+        public ConnectionInfoInheritance Inheritance
+        {
+            get { return ConnectionInfo.Inheritance; }
+            set { ConnectionInfo.Inheritance = value; }
+        }
+
         [Category(""), 
             Browsable(false), 
             ReadOnly(false), 
@@ -67,32 +64,31 @@ namespace mRemoteNG.Container
             DesignOnly(false)]
         public bool IsExpanded
 		{
-			get { return this._IsExpanded; }
-			set { this._IsExpanded = value; }
+			get { return _IsExpanded; }
+			set { _IsExpanded = value; }
 		}
-			
-		private Connection.ConnectionInfo _ConnectionInfo = new Connection.ConnectionInfo();
-        public Connection.ConnectionInfo ConnectionInfo
+		
+        public ConnectionInfo ConnectionInfo
 		{
-			get { return this._ConnectionInfo; }
-			set { this._ConnectionInfo = value; }
+			get { return _ConnectionInfo; }
+			set { _ConnectionInfo = value; }
 		}
         #endregion
 			
         #region Methods
-		public Container.ContainerInfo Copy()
+		public ContainerInfo Copy()
 		{
-			return (ContainerInfo)this.MemberwiseClone();
+			return (ContainerInfo)MemberwiseClone();
 		}
 			
 		public ContainerInfo()
 		{
-			this.SetDefaults();
+            SetDefaults();
 		}
 			
 		public void SetDefaults()
 		{
-				this.IsExpanded = true;
+            IsExpanded = true;
 		}
         #endregion
 	}

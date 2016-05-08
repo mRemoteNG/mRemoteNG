@@ -174,7 +174,7 @@ namespace mRemoteNG.Tools.PortScan
 		{
 			try
 			{
-				return "SSH: " + System.Convert.ToString(_SSH) + " Telnet: " + System.Convert.ToString(_Telnet) + " HTTP: " + System.Convert.ToString(_HTTP) + " HTTPS: " + System.Convert.ToString(_HTTPS) + " Rlogin: " + System.Convert.ToString(_Rlogin) + " RDP: " + System.Convert.ToString(_RDP) + " VNC: " + System.Convert.ToString(_VNC);
+				return "SSH: " + Convert.ToString(_SSH) + " Telnet: " + Convert.ToString(_Telnet) + " HTTP: " + Convert.ToString(_HTTP) + " HTTPS: " + Convert.ToString(_HTTPS) + " Rlogin: " + Convert.ToString(_Rlogin) + " RDP: " + Convert.ToString(_RDP) + " VNC: " + Convert.ToString(_VNC);
 			}
 			catch (Exception)
 			{
@@ -315,7 +315,7 @@ namespace mRemoteNG.Tools.PortScan
 		{
 			try
 			{
-				System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(hostname, System.Convert.ToInt32(port));
+				System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(hostname, Convert.ToInt32(port));
 				return true;
 			}
 			catch (Exception)

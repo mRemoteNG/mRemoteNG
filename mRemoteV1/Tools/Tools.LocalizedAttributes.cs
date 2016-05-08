@@ -29,7 +29,7 @@ namespace mRemoteNG.Tools
 				string OrderPrefix = "";
 				for (int x = 0; x <= LocalizedCategoryAttribute.MaxOrder - this.Order; x++)
 				{
-					OrderPrefix += System.Convert.ToString("\t");
+					OrderPrefix += Convert.ToString("\t");
 				}
 					
 				return OrderPrefix + My.Language.ResourceManager.GetString(value);

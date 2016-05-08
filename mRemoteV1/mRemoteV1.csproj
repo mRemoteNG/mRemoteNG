@@ -212,6 +212,8 @@
     <Compile Include="Connection\ConnectionInfoInheritance.cs" />
     <Compile Include="App\ProgramRoot.cs" />
     <Compile Include="Connection\Converter.cs" />
+    <Compile Include="Connection\Inheritance.cs" />
+    <Compile Include="Connection\Parent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPEnums.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPVersions.cs" />
@@ -225,6 +227,8 @@
     <Compile Include="Tools\Sorting\Sortable.cs" />
     <Compile Include="Tree\ConnectionTree.cs" />
     <Compile Include="Tree\NodeType.cs" />
+    <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
+    <Compile Include="Tree\TreeNodeMover.cs" />
     <Compile Include="UI\Controls\ListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -313,7 +317,7 @@
     <Compile Include="Tools\EnvironmentInfo.cs" />
     <Compile Include="Tools\PropertyGridCommandSite.cs" />
     <Compile Include="Connection\PuttySessionInfo.cs" />
-    <Compile Include="Tree\Root\PuttySessions.Info.cs" />
+    <Compile Include="Tree\Root\PuttySessionsNodeInfo.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Themes\ThemeSerializer.cs" />
     <Compile Include="Connection\ConnectionIcon.cs" />
@@ -389,7 +393,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Tree\Root\Root.Info.cs" />
+    <Compile Include="Tree\Root\RootNodeInfo.cs" />
     <Compile Include="Security\Security.Crypt.cs" />
     <Compile Include="Security\Security.Impersonator.cs" />
     <Compile Include="Security\Security.Save.cs" />
@@ -411,7 +415,7 @@
     <Compile Include="Tools\Tools.PortScan.cs" />
     <Compile Include="Tools\Tools.SystemMenu.cs" />
     <Compile Include="Tools\Tools.WindowPlacement.cs" />
-    <Compile Include="Tree\Tree.Node.cs" />
+    <Compile Include="Tree\ConnectionTreeNode.cs" />
     <Compile Include="UI\Forms\SplashPage.cs">
       <SubType>Form</SubType>
     </Compile>

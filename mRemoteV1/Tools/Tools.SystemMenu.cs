@@ -47,7 +47,7 @@ namespace mRemoteNG.Tools
 			
 		public IntPtr SetBitmap(IntPtr Menu, int Position, Flags Flags, Bitmap Bitmap)
 		{
-			return new IntPtr(System.Convert.ToInt32(App.Native.SetMenuItemBitmaps(Menu, Position, (int)Flags, Bitmap.GetHbitmap(), Bitmap.GetHbitmap())));
+			return new IntPtr(Convert.ToInt32(App.Native.SetMenuItemBitmaps(Menu, Position, (int)Flags, Bitmap.GetHbitmap(), Bitmap.GetHbitmap())));
 		}
 	}
 }

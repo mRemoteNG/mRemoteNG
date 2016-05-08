@@ -188,7 +188,7 @@ namespace mRemoteNG.UI.Forms
             Windows.treePanel.Focus();
             ConnectionTree.TreeView = Windows.treeForm.tvConnections;
 
-            if (My.Settings.Default.FirstStart && !My.Settings.Default.LoadConsFromCustomLocation && !System.IO.File.Exists(Runtime.GetStartupConnectionFileName()))
+            if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !System.IO.File.Exists(Runtime.GetStartupConnectionFileName()))
 			{
                 Runtime.NewConnections(Runtime.GetStartupConnectionFileName());
 			}
@@ -201,7 +201,7 @@ namespace mRemoteNG.UI.Forms
 				return ;
 			}
 			Config.Putty.Sessions.StartWatcher();
-			if (My.Settings.Default.StartupComponentsCheck)
+			if (Settings.Default.StartupComponentsCheck)
 			{
                 Windows.Show(WindowType.ComponentsCheck);
 			}
@@ -226,65 +226,65 @@ namespace mRemoteNG.UI.Forms
 		
 		private void ApplyLanguage()
 		{
-			mMenFile.Text = My.Language.strMenuFile;
-			mMenFileNew.Text = My.Language.strMenuNewConnectionFile;
-			mMenFileNewConnection.Text = My.Language.strNewConnection;
-			mMenFileNewFolder.Text = My.Language.strNewFolder;
-			mMenFileLoad.Text = My.Language.strMenuOpenConnectionFile;
-			mMenFileSave.Text = My.Language.strMenuSaveConnectionFile;
-			mMenFileSaveAs.Text = My.Language.strMenuSaveConnectionFileAs;
-            mMenFileImport.Text = My.Language.strImportMenuItem;
-            mMenFileImportFromFile.Text = My.Language.strImportFromFileMenuItem;
-            mMenFileImportFromActiveDirectory.Text = My.Language.strImportAD;
-            mMenFileImportFromPortScan.Text = My.Language.strImportPortScan;
-            mMenFileExport.Text = My.Language.strExportToFileMenuItem;
-			mMenFileExit.Text = My.Language.strMenuExit;
+			mMenFile.Text = Language.strMenuFile;
+			mMenFileNew.Text = Language.strMenuNewConnectionFile;
+			mMenFileNewConnection.Text = Language.strNewConnection;
+			mMenFileNewFolder.Text = Language.strNewFolder;
+			mMenFileLoad.Text = Language.strMenuOpenConnectionFile;
+			mMenFileSave.Text = Language.strMenuSaveConnectionFile;
+			mMenFileSaveAs.Text = Language.strMenuSaveConnectionFileAs;
+            mMenFileImport.Text = Language.strImportMenuItem;
+            mMenFileImportFromFile.Text = Language.strImportFromFileMenuItem;
+            mMenFileImportFromActiveDirectory.Text = Language.strImportAD;
+            mMenFileImportFromPortScan.Text = Language.strImportPortScan;
+            mMenFileExport.Text = Language.strExportToFileMenuItem;
+			mMenFileExit.Text = Language.strMenuExit;
 			
-			mMenView.Text = My.Language.strMenuView;
-			mMenViewAddConnectionPanel.Text = My.Language.strMenuAddConnectionPanel;
-			mMenViewConnectionPanels.Text = My.Language.strMenuConnectionPanels;
-			mMenViewConnections.Text = My.Language.strMenuConnections;
-			mMenViewConfig.Text = My.Language.strMenuConfig;
-			mMenViewErrorsAndInfos.Text = My.Language.strMenuNotifications;
-			mMenViewScreenshotManager.Text = My.Language.strScreenshots;
-			mMenViewJumpTo.Text = My.Language.strMenuJumpTo;
-			mMenViewJumpToConnectionsConfig.Text = My.Language.strMenuConnectionsAndConfig;
-			mMenViewJumpToErrorsInfos.Text = My.Language.strMenuNotifications;
-			mMenViewResetLayout.Text = My.Language.strMenuResetLayout;
-			mMenViewQuickConnectToolbar.Text = My.Language.strMenuQuickConnectToolbar;
-			mMenViewExtAppsToolbar.Text = My.Language.strMenuExternalToolsToolbar;
-			mMenViewFullscreen.Text = My.Language.strMenuFullScreen;
+			mMenView.Text = Language.strMenuView;
+			mMenViewAddConnectionPanel.Text = Language.strMenuAddConnectionPanel;
+			mMenViewConnectionPanels.Text = Language.strMenuConnectionPanels;
+			mMenViewConnections.Text = Language.strMenuConnections;
+			mMenViewConfig.Text = Language.strMenuConfig;
+			mMenViewErrorsAndInfos.Text = Language.strMenuNotifications;
+			mMenViewScreenshotManager.Text = Language.strScreenshots;
+			mMenViewJumpTo.Text = Language.strMenuJumpTo;
+			mMenViewJumpToConnectionsConfig.Text = Language.strMenuConnectionsAndConfig;
+			mMenViewJumpToErrorsInfos.Text = Language.strMenuNotifications;
+			mMenViewResetLayout.Text = Language.strMenuResetLayout;
+			mMenViewQuickConnectToolbar.Text = Language.strMenuQuickConnectToolbar;
+			mMenViewExtAppsToolbar.Text = Language.strMenuExternalToolsToolbar;
+			mMenViewFullscreen.Text = Language.strMenuFullScreen;
 			
-			mMenTools.Text = My.Language.strMenuTools;
-			mMenToolsSSHTransfer.Text = My.Language.strMenuSSHFileTransfer;
-			mMenToolsExternalApps.Text = My.Language.strMenuExternalTools;
-			mMenToolsPortScan.Text = My.Language.strMenuPortScan;
-			mMenToolsComponentsCheck.Text = My.Language.strComponentsCheck;
-			mMenToolsUpdate.Text = My.Language.strMenuCheckForUpdates;
-			mMenToolsOptions.Text = My.Language.strMenuOptions;
+			mMenTools.Text = Language.strMenuTools;
+			mMenToolsSSHTransfer.Text = Language.strMenuSSHFileTransfer;
+			mMenToolsExternalApps.Text = Language.strMenuExternalTools;
+			mMenToolsPortScan.Text = Language.strMenuPortScan;
+			mMenToolsComponentsCheck.Text = Language.strComponentsCheck;
+			mMenToolsUpdate.Text = Language.strMenuCheckForUpdates;
+			mMenToolsOptions.Text = Language.strMenuOptions;
 			
-			mMenInfo.Text = My.Language.strMenuHelp;
-			mMenInfoHelp.Text = My.Language.strMenuHelpContents;
-			mMenInfoForum.Text = My.Language.strMenuSupportForum;
-			mMenInfoBugReport.Text = My.Language.strMenuReportBug;
-			mMenInfoDonate.Text = My.Language.strMenuDonate;
-			mMenInfoWebsite.Text = My.Language.strMenuWebsite;
-			mMenInfoAbout.Text = My.Language.strMenuAbout;
-			mMenInfoAnnouncements.Text = My.Language.strMenuAnnouncements;
+			mMenInfo.Text = Language.strMenuHelp;
+			mMenInfoHelp.Text = Language.strMenuHelpContents;
+			mMenInfoForum.Text = Language.strMenuSupportForum;
+			mMenInfoBugReport.Text = Language.strMenuReportBug;
+			mMenInfoDonate.Text = Language.strMenuDonate;
+			mMenInfoWebsite.Text = Language.strMenuWebsite;
+			mMenInfoAbout.Text = Language.strMenuAbout;
+			mMenInfoAnnouncements.Text = Language.strMenuAnnouncements;
 			
-			lblQuickConnect.Text = My.Language.strLabelConnect;
-			btnQuickConnect.Text = My.Language.strMenuConnect;
-			btnConnections.Text = My.Language.strMenuConnections;
+			lblQuickConnect.Text = Language.strLabelConnect;
+			btnQuickConnect.Text = Language.strMenuConnect;
+			btnConnections.Text = Language.strMenuConnections;
 			
-			cMenToolbarShowText.Text = My.Language.strMenuShowText;
+			cMenToolbarShowText.Text = Language.strMenuShowText;
 			
-			ToolStripButton1.Text = My.Language.strConnect;
-			ToolStripButton2.Text = My.Language.strScreenshot;
-			ToolStripButton3.Text = My.Language.strRefresh;
+			ToolStripButton1.Text = Language.strConnect;
+			ToolStripButton2.Text = Language.strScreenshot;
+			ToolStripButton3.Text = Language.strRefresh;
 			
-			ToolStripSplitButton1.Text = My.Language.strSpecialKeys;
-			ToolStripMenuItem1.Text = My.Language.strKeysCtrlAltDel;
-			ToolStripMenuItem2.Text = My.Language.strKeysCtrlEsc;
+			ToolStripSplitButton1.Text = Language.strSpecialKeys;
+			ToolStripMenuItem1.Text = Language.strKeysCtrlAltDel;
+			ToolStripMenuItem2.Text = Language.strKeysCtrlEsc;
 		}
 		
 		public void ApplyThemes()
@@ -377,12 +377,12 @@ namespace mRemoteNG.UI.Forms
 						openConnections = openConnections + connectionWindow.TabController.TabPages.Count;
 				}
 
-                if (openConnections > 0 && (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All | (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & openConnections > 1) || My.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
+                if (openConnections > 0 && (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All | (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & openConnections > 1) || Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
 				{
-					DialogResult result = cTaskDialog.MessageBox(this, System.Windows.Forms.Application.ProductName, My.Language.strConfirmExitMainInstruction, "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, eSysIcons.Question);
+					DialogResult result = cTaskDialog.MessageBox(this, System.Windows.Forms.Application.ProductName, Language.strConfirmExitMainInstruction, "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, eSysIcons.Question);
 					if (cTaskDialog.VerificationChecked)
 					{
-						My.Settings.Default.ConfirmCloseConnection--;
+                        Settings.Default.ConfirmCloseConnection--;
 					}
 					if (result == DialogResult.No)
 					{
@@ -460,7 +460,7 @@ namespace mRemoteNG.UI.Forms
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(My.Language.strErrorAddExternalToolsToToolBarFailed, ex.Message), true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorAddExternalToolsToToolBarFailed, ex.Message), true);
 			}
 		}
 								
@@ -468,7 +468,7 @@ namespace mRemoteNG.UI.Forms
 		{
             Tools.ExternalTool extA = (Tools.ExternalTool)((Control)sender).Tag;
 
-            if (Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection | Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
+            if (Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection | Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
 			{
                 extA.Start((ConnectionInfo)ConnectionTree.SelectedNode.Tag);
 			}
@@ -503,49 +503,49 @@ namespace mRemoteNG.UI.Forms
         #region File
 		public void mMenFile_DropDownOpening(System.Object sender, System.EventArgs e)
 		{
-            if (Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Root)
+            if (Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Root)
 			{
 				mMenFileNewConnection.Enabled = true;
 				mMenFileNewFolder.Enabled = true;
 				mMenFileDelete.Enabled = false;
 				mMenFileRename.Enabled = true;
 				mMenFileDuplicate.Enabled = false;
-				mMenFileDelete.Text = My.Language.strMenuDelete;
-				mMenFileRename.Text = My.Language.strMenuRenameFolder;
-				mMenFileDuplicate.Text = My.Language.strMenuDuplicate;
+				mMenFileDelete.Text = Language.strMenuDelete;
+				mMenFileRename.Text = Language.strMenuRenameFolder;
+				mMenFileDuplicate.Text = Language.strMenuDuplicate;
 			}
-            else if (Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Container)
+            else if (Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Container)
 			{
 				mMenFileNewConnection.Enabled = true;
 				mMenFileNewFolder.Enabled = true;
 				mMenFileDelete.Enabled = true;
 				mMenFileRename.Enabled = true;
 				mMenFileDuplicate.Enabled = true;
-				mMenFileDelete.Text = My.Language.strMenuDeleteFolder;
-				mMenFileRename.Text = My.Language.strMenuRenameFolder;
-				mMenFileDuplicate.Text = My.Language.strMenuDuplicateFolder;
+				mMenFileDelete.Text = Language.strMenuDeleteFolder;
+				mMenFileRename.Text = Language.strMenuRenameFolder;
+				mMenFileDuplicate.Text = Language.strMenuDuplicateFolder;
 			}
-            else if (Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection)
+            else if (Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection)
 			{
 				mMenFileNewConnection.Enabled = true;
 				mMenFileNewFolder.Enabled = true;
 				mMenFileDelete.Enabled = true;
 				mMenFileRename.Enabled = true;
 				mMenFileDuplicate.Enabled = true;
-				mMenFileDelete.Text = My.Language.strMenuDeleteConnection;
-				mMenFileRename.Text = My.Language.strMenuRenameConnection;
-				mMenFileDuplicate.Text = My.Language.strMenuDuplicateConnection;
+				mMenFileDelete.Text = Language.strMenuDeleteConnection;
+				mMenFileRename.Text = Language.strMenuRenameConnection;
+				mMenFileDuplicate.Text = Language.strMenuDuplicateConnection;
 			}
-            else if ((Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttyRoot) || (Tree.Node.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession))
+            else if ((Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttyRoot) || (Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession))
 			{
 				mMenFileNewConnection.Enabled = false;
 				mMenFileNewFolder.Enabled = false;
 				mMenFileDelete.Enabled = false;
 				mMenFileRename.Enabled = false;
 				mMenFileDuplicate.Enabled = false;
-				mMenFileDelete.Text = My.Language.strMenuDelete;
-				mMenFileRename.Text = My.Language.strMenuRename;
-				mMenFileDuplicate.Text = My.Language.strMenuDuplicate;
+				mMenFileDelete.Text = Language.strMenuDelete;
+				mMenFileRename.Text = Language.strMenuRename;
+				mMenFileDuplicate.Text = Language.strMenuDuplicate;
 			}
 			else
 			{
@@ -554,9 +554,9 @@ namespace mRemoteNG.UI.Forms
 				mMenFileDelete.Enabled = false;
 				mMenFileRename.Enabled = false;
 				mMenFileDuplicate.Enabled = false;
-				mMenFileDelete.Text = My.Language.strMenuDelete;
-				mMenFileRename.Text = My.Language.strMenuRename;
-				mMenFileDuplicate.Text = My.Language.strMenuDuplicate;
+				mMenFileDelete.Text = Language.strMenuDelete;
+				mMenFileRename.Text = Language.strMenuRename;
+				mMenFileDuplicate.Text = Language.strMenuDuplicate;
 			}
 		}
 								
@@ -625,7 +625,7 @@ namespace mRemoteNG.UI.Forms
 								
 		static public void mMenFileDuplicate_Click(Object sender, EventArgs e)
 		{
-            Tree.Node.CloneNode(ConnectionTree.SelectedNode);
+            Tree.ConnectionTreeNode.CloneNode(ConnectionTree.SelectedNode);
             Runtime.SaveConnectionsBG();
 		}
 								
@@ -670,7 +670,7 @@ namespace mRemoteNG.UI.Forms
 
             for (int i = 0; i <= Runtime.WindowList.Count - 1; i++)
 			{
-                ToolStripMenuItem tItem = new ToolStripMenuItem(System.Convert.ToString(Runtime.WindowList[i].Text), Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click);
+                ToolStripMenuItem tItem = new ToolStripMenuItem(Convert.ToString(Runtime.WindowList[i].Text), Runtime.WindowList[i].Icon.ToBitmap(), ConnectionPanelMenuItem_Click);
                 tItem.Tag = Runtime.WindowList[i];
 				this.mMenViewConnectionPanels.DropDownItems.Add(tItem);
 			}
@@ -857,10 +857,10 @@ namespace mRemoteNG.UI.Forms
 					if (!(fieldInfo.Name == "value__" || fieldInfo.Name == "IntApp"))
 					{
 						ToolStripMenuItem menuItem = new ToolStripMenuItem(fieldInfo.Name);
-						if (fieldInfo.Name == My.Settings.Default.QuickConnectProtocol)
+						if (fieldInfo.Name == Settings.Default.QuickConnectProtocol)
 						{
 							menuItem.Checked = true;
-							btnQuickConnect.Text = My.Settings.Default.QuickConnectProtocol;
+							btnQuickConnect.Text = Settings.Default.QuickConnectProtocol;
 						}
 						mnuQuickConnectProtocol.Items.Add(menuItem);
 					}
@@ -886,7 +886,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			try
 			{
-				ConnectionInfo connectionInfo = Runtime.CreateQuickConnect(cmbQuickConnect.Text.Trim(), Connection.Protocol.Converter.StringToProtocol(My.Settings.Default.QuickConnectProtocol));
+				ConnectionInfo connectionInfo = Runtime.CreateQuickConnect(cmbQuickConnect.Text.Trim(), Connection.Protocol.Converter.StringToProtocol(Settings.Default.QuickConnectProtocol));
 				if (connectionInfo == null)
 				{
 					cmbQuickConnect.Focus();
@@ -913,7 +913,7 @@ namespace mRemoteNG.UI.Forms
 		
 		private void SetQuickConnectProtocol(string protocol)
 		{
-			My.Settings.Default.QuickConnectProtocol = protocol;
+            Settings.Default.QuickConnectProtocol = protocol;
 			btnQuickConnect.Text = protocol;
 			foreach (ToolStripMenuItem menuItem in mnuQuickConnectProtocol.Items)
 			{
@@ -983,7 +983,7 @@ namespace mRemoteNG.UI.Forms
 					menuItem.Text = treeNode.Text;
 					menuItem.Tag = treeNode;
 											
-					if (Tree.Node.GetNodeType(treeNode) == TreeNodeType.Container)
+					if (Tree.ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.Container)
 					{
 						menuItem.Image = My.Resources.Folder;
 						menuItem.Tag = treeNode.Tag;
@@ -991,7 +991,7 @@ namespace mRemoteNG.UI.Forms
 						toolStripMenuItem.DropDownItems.Add(menuItem);
 						AddNodeToMenu(treeNode.Nodes, menuItem);
 					}
-					else if (Tree.Node.GetNodeType(treeNode) == TreeNodeType.Connection | Tree.Node.GetNodeType(treeNode) == TreeNodeType.PuttySession)
+					else if (Tree.ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.Connection | Tree.ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.PuttySession)
 					{
 						menuItem.Image = Windows.treeForm.imgListTree.Images[treeNode.ImageIndex];
 						menuItem.Tag = treeNode.Tag;
@@ -1030,7 +1030,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (WindowState == FormWindowState.Minimized)
 			{
-				if (My.Settings.Default.MinimizeToTray)
+				if (Settings.Default.MinimizeToTray)
 				{
 					if (Runtime.NotificationAreaIcon == null)
 					{
@@ -1203,7 +1203,7 @@ namespace mRemoteNG.UI.Forms
 					if (!string.IsNullOrEmpty(ConnectionsFileName))
 					{
 						titleBuilder.Append(separator);
-						if (My.Settings.Default.ShowCompleteConsPathInTitle)
+						if (Settings.Default.ShowCompleteConsPathInTitle)
 						{
 							titleBuilder.Append(ConnectionsFileName);
 						}
@@ -1228,7 +1228,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			DocumentStyle newDocumentStyle = pnlDock.DocumentStyle;
 									
-			if (My.Settings.Default.AlwaysShowPanelTabs)
+			if (Settings.Default.AlwaysShowPanelTabs)
 			{
 				newDocumentStyle = DocumentStyle.DockingWindow; // Show the panel tabs
 			}
@@ -1307,10 +1307,10 @@ namespace mRemoteNG.UI.Forms
 			for (int i = 0; i <= Screen.AllScreens.Length - 1; i++)
 			{
 				SysMenSubItems[i] = 200 + i;
-                Runtime.SystemMenu.AppendMenuItem(popMen, Tools.SystemMenu.Flags.MF_STRING, new IntPtr(SysMenSubItems[i]), My.Language.strScreen + " " + System.Convert.ToString(i + 1));
+                Runtime.SystemMenu.AppendMenuItem(popMen, Tools.SystemMenu.Flags.MF_STRING, new IntPtr(SysMenSubItems[i]), Language.strScreen + " " + Convert.ToString(i + 1));
 			}
 
-            Runtime.SystemMenu.InsertMenuItem(Runtime.SystemMenu.SystemMenuHandle, 0, Tools.SystemMenu.Flags.MF_POPUP | Tools.SystemMenu.Flags.MF_BYPOSITION, popMen, My.Language.strSendTo);
+            Runtime.SystemMenu.InsertMenuItem(Runtime.SystemMenu.SystemMenuHandle, 0, Tools.SystemMenu.Flags.MF_POPUP | Tools.SystemMenu.Flags.MF_BYPOSITION, popMen, Language.strSendTo);
             Runtime.SystemMenu.InsertMenuItem(Runtime.SystemMenu.SystemMenuHandle, 1, Tools.SystemMenu.Flags.MF_BYPOSITION | Tools.SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, null);
 		}
         #endregion

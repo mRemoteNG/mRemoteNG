@@ -17,7 +17,7 @@ namespace mRemoteNG.My
 			
 		private void MyApplication_Startup(object sender, Microsoft.VisualBasic.ApplicationServices.StartupEventArgs e)
 		{
-			if (My.Settings.Default.SingleInstance)
+			if (Settings.Default.SingleInstance)
 			{
 				string mutexID = "mRemoteNG_SingleInstanceMutex";
 				mutex = new System.Threading.Mutex(false, mutexID);

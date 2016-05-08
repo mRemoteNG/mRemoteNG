@@ -240,7 +240,7 @@ namespace mRemoteNG.UI.Window
 			//
 			this.ClientSize = new System.Drawing.Size(632, 453);
 			this.Controls.Add(this.TabController);
-			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.Icon = My.Resources.mRemote_Icon;
 			this.Name = "Connection";
 			this.TabText = "UI.Window.Connection";
@@ -266,7 +266,7 @@ namespace mRemoteNG.UI.Window
 			this.TabText = FormText;
 		}
 
-        public Crownwood.Magic.Controls.TabPage AddConnectionTab(mRemoteNG.Connection.ConnectionInfo conI)
+        public Crownwood.Magic.Controls.TabPage AddConnectionTab(ConnectionInfo conI)
 		{
 			try
 			{
@@ -550,7 +550,7 @@ namespace mRemoteNG.UI.Window
 		{
 			if (e.Data.GetDataPresent("System.Windows.Forms.TreeNode", true))
 			{
-                App.Runtime.OpenConnection((mRemoteNG.Connection.ConnectionInfo)((System.Windows.Forms.TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode", true)).Tag, this, mRemoteNG.Connection.ConnectionInfo.Force.DoNotJump);
+                App.Runtime.OpenConnection((ConnectionInfo)((System.Windows.Forms.TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode", true)).Tag, this, mRemoteNG.Connection.ConnectionInfo.Force.DoNotJump);
 			}
 		}
 				
@@ -790,13 +790,13 @@ namespace mRemoteNG.UI.Window
                 mRemoteNG.Connection.InterfaceControl IC = (mRemoteNG.Connection.InterfaceControl)this.TabController.SelectedTab.Tag;
 
                 Windows.Show(WindowType.SSHTransfer);
-						
-				mRemoteNG.Connection.ConnectionInfo conI = IC.Info;
+
+                ConnectionInfo conI = IC.Info;
 
                 Windows.sshtransferForm.Hostname = conI.Hostname;
                 Windows.sshtransferForm.Username = conI.Username;
                 Windows.sshtransferForm.Password = conI.Password;
-				Windows.sshtransferForm.Port = System.Convert.ToString(conI.Port);
+				Windows.sshtransferForm.Port = Convert.ToString(conI.Port);
 			}
 			catch (Exception ex)
 			{

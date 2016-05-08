@@ -77,9 +77,9 @@ namespace mRemoteNG.Config.Putty
 			PuttySessionInfo sessionInfo = new PuttySessionInfo();
 			sessionInfo.PuttySession = sessionName;
 			sessionInfo.Name = sessionName;
-			sessionInfo.Hostname = System.Convert.ToString(sessionKey.GetValue("HostName"));
-			sessionInfo.Username = System.Convert.ToString(sessionKey.GetValue("UserName"));
-			string protocol = System.Convert.ToString(sessionKey.GetValue("Protocol"));
+			sessionInfo.Hostname = Convert.ToString(sessionKey.GetValue("HostName"));
+			sessionInfo.Username = Convert.ToString(sessionKey.GetValue("UserName"));
+			string protocol = Convert.ToString(sessionKey.GetValue("Protocol"));
 			if (protocol == null)
 			{
 				protocol = "ssh";
@@ -98,7 +98,7 @@ namespace mRemoteNG.Config.Putty
 					object sshVersionObject = sessionKey.GetValue("SshProt");
 					if (sshVersionObject != null)
 					{
-						int sshVersion = System.Convert.ToInt32(sshVersionObject);
+						int sshVersion = Convert.ToInt32(sshVersionObject);
 						if (sshVersion >= 2)
 						{
 							sessionInfo.Protocol = ProtocolType.SSH2;
@@ -119,7 +119,7 @@ namespace mRemoteNG.Config.Putty
 				default:
 					return null;
 			}
-			sessionInfo.Port = System.Convert.ToInt32(sessionKey.GetValue("PortNumber"));
+			sessionInfo.Port = Convert.ToInt32(sessionKey.GetValue("PortNumber"));
 				
 			return sessionInfo;
 		}
