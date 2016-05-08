@@ -42,7 +42,7 @@ namespace mRemoteNG.Config.Settings
 				}
 				else if (File.Exists(oldPath))
 				{
-					MainForm.pnlDock.LoadFromXml(oldPath, GetContentFromPersistString);
+					_MainForm.pnlDock.LoadFromXml(oldPath, GetContentFromPersistString);
 #endif
                 }
                 else
