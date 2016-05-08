@@ -1,17 +1,14 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
-using System.Xml;
 using System.Threading;
 using System.Globalization;
 using mRemoteNG.Themes;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Window;
 
 
 namespace mRemoteNG.Config.Settings
@@ -248,8 +245,8 @@ namespace mRemoteNG.Config.Settings
 		
 		public void LoadExternalAppsFromXML()
 		{
-			
-		}
+            _externalAppsLoader.LoadExternalAppsFromXML();
+        }
         #endregion
 	}
 }
