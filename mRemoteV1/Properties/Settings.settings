@@ -545,7 +545,7 @@
     <Setting Name="AnnouncementAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://update.mremoteng.org/announcement.txt</Value>
     </Setting>
-    <Setting Name="UpdateAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">
+    <Setting Name="UpdateAddress" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="Application">
       <Value Profile="(Default)">https://update.mremoteng.org/</Value>
     </Setting>
     <Setting Name="ConDefaultLoadBalanceInfo" Provider="mRemoteNG.Config.Settings.Providers.ChooseProvider" Type="System.String" Scope="User">

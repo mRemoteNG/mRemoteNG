@@ -48,7 +48,7 @@ namespace mRemoteNG.Config.Settings.Providers
 		public virtual string GetAppSettingsFilename()
 		{
 			//Used to determine the filename to store the settings
-			return "portable.config"; //ApplicationName & ".settings"
+			return "portable.settings.";
 		}
 		
 		public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection propvals)

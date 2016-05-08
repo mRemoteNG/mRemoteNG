@@ -24,6 +24,13 @@ namespace mRemoteNG.Config.Settings.Providers
             }
 
             base.Initialize(ApplicationName, col);
+
+            /*
+            if (!File.Exists(GetDotSettingsFile()))
+            {
+                // do something smart.
+            }
+            */
         }
 
 	    private string _applicationName;
@@ -48,7 +55,7 @@ namespace mRemoteNG.Config.Settings.Providers
 		public virtual string GetAppSettingsFilename()
 		{
 			//Used to determine the filename to store the settings
-			return "app.config"; //ApplicationName & ".settings"
+			return Application.ProductName + ".settings";
 		}
 		
 		public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection propvals)
