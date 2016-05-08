@@ -13,7 +13,7 @@ node('windows') {
 	bat "\"${vsToolsDir}\\VsDevCmd.bat\" && msbuild.exe /nologo \"${jobDir}\\mRemoteV1.sln\""
 
 	stage 'Build mRemoteNG (Portable)'
-	bat "\"${vsToolsDir}\\VsDevCmd.bat\" && msbuild.exe /nologo /p:config=\"Debug Portable\" \"${jobDir}\\mRemoteV1.sln\""
+	bat "\"${vsToolsDir}\\VsDevCmd.bat\" && msbuild.exe /nologo /p:Configuration=\"Debug Portable\" \"${jobDir}\\mRemoteV1.sln\""
 
 	stage 'Run Unit Tests'
 	def nunitTestAdapterPath = "C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\VisualStudio\\14.0\\Extensions"
