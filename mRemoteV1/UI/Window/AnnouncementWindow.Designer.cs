@@ -1,5 +1,7 @@
 
 
+using mRemoteNG.My;
+
 namespace mRemoteNG.UI.Window
 {
 	public partial class AnnouncementWindow
@@ -27,7 +29,7 @@ namespace mRemoteNG.UI.Window
 			this.ClientSize = new System.Drawing.Size(549, 474);
 			this.Controls.Add(this.webBrowser);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
-			this.Icon = My.Resources.News_Icon;
+			this.Icon = Resources.News_Icon;
 			this.Name = "Announcement";
 			this.TabText = "Announcement";
 			this.Text = "Announcement";

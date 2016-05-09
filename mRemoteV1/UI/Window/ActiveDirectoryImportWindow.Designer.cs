@@ -1,5 +1,7 @@
 
 
+using mRemoteNG.My;
+
 namespace mRemoteNG.UI.Window
 {
 	public partial class ActiveDirectoryImportWindow : BaseWindow
@@ -81,7 +83,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.btnChangeDomain);
 			this.Controls.Add(this.btnImport);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
-			this.Icon = My.Resources.ActiveDirectory_Icon;
+			this.Icon = Resources.ActiveDirectory_Icon;
 			this.Name = "ActiveDirectoryImport";
 			this.TabText = "Active Directory Import";
 			this.Text = "Active Directory Import";

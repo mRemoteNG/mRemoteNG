@@ -107,7 +107,7 @@ namespace mRemoteNG.App.Update
 			
 		public void SetProxySettings()
 		{
-			SetProxySettings(Convert.ToBoolean(My.Settings.Default.UpdateUseProxy), Convert.ToString(My.Settings.Default.UpdateProxyAddress), Convert.ToInt32(My.Settings.Default.UpdateProxyPort), Convert.ToBoolean(My.Settings.Default.UpdateProxyUseAuthentication), Convert.ToString(My.Settings.Default.UpdateProxyAuthUser), Security.Crypt.Decrypt(Convert.ToString(My.Settings.Default.UpdateProxyAuthPass), Info.GeneralAppInfo.EncryptionKey));
+			SetProxySettings(Convert.ToBoolean(mRemoteNG.Settings.Default.UpdateUseProxy), Convert.ToString(mRemoteNG.Settings.Default.UpdateProxyAddress), Convert.ToInt32(mRemoteNG.Settings.Default.UpdateProxyPort), Convert.ToBoolean(mRemoteNG.Settings.Default.UpdateProxyUseAuthentication), Convert.ToString(mRemoteNG.Settings.Default.UpdateProxyAuthUser), Security.Crypt.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.UpdateProxyAuthPass), Info.GeneralAppInfo.EncryptionKey));
 		}
 			
 		public void SetProxySettings(bool useProxy, string address, int port, bool useAuthentication, string username, string password)
@@ -155,7 +155,7 @@ namespace mRemoteNG.App.Update
 				return false;
 			}
 				
-			return !(_currentAnnouncementInfo.Name == My.Settings.Default.LastAnnouncement);
+			return !(_currentAnnouncementInfo.Name == mRemoteNG.Settings.Default.LastAnnouncement);
 		}
 			
 		public void GetUpdateInfoAsync()
@@ -285,17 +285,17 @@ namespace mRemoteNG.App.Update
 			
 		private void GetUpdateInfo()
 		{
-			Uri updateFileUri = new Uri(new Uri(Convert.ToString(My.Settings.Default.UpdateAddress)), new Uri(Info.UpdateChannelInfo.FileName, UriKind.Relative));
+			Uri updateFileUri = new Uri(new Uri(Convert.ToString(mRemoteNG.Settings.Default.UpdateAddress)), new Uri(Info.UpdateChannelInfo.FileName, UriKind.Relative));
 			DownloadStringCompletedEventArgs e = DownloadString(updateFileUri);
 				
 			if (!e.Cancelled && e.Error == null)
 			{
 				_currentUpdateInfo = UpdateInfo.FromString(e.Result);
 					
-				My.Settings.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
-				if (!My.Settings.Default.UpdatePending)
+				mRemoteNG.Settings.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
+				if (!mRemoteNG.Settings.Default.UpdatePending)
 				{
-					My.Settings.Default.UpdatePending = IsUpdateAvailable();
+					mRemoteNG.Settings.Default.UpdatePending = IsUpdateAvailable();
 				}
 			}
 				
@@ -318,7 +318,7 @@ namespace mRemoteNG.App.Update
 			
 		private void GetAnnouncementInfo()
 		{
-			Uri announcementFileUri = new Uri(Convert.ToString(My.Settings.Default.AnnouncementAddress));
+			Uri announcementFileUri = new Uri(Convert.ToString(mRemoteNG.Settings.Default.AnnouncementAddress));
 			DownloadStringCompletedEventArgs e = DownloadString(announcementFileUri);
 				
 			if (!e.Cancelled && e.Error == null)
@@ -327,7 +327,7 @@ namespace mRemoteNG.App.Update
 					
 				if (!string.IsNullOrEmpty(_currentAnnouncementInfo.Name))
 				{
-					My.Settings.Default.LastAnnouncement = _currentAnnouncementInfo.Name;
+					mRemoteNG.Settings.Default.LastAnnouncement = _currentAnnouncementInfo.Name;
 				}
 			}
 				

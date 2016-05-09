@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using mRemoteNG.My;
 using WeifenLuo.WinFormsUI.Docking;
 
 
@@ -202,7 +203,7 @@ namespace mRemoteNG.UI.Window
 			//
 			this.ClientSize = new System.Drawing.Size(542, 323);
 			this.Controls.Add(this.pnlSplitter);
-			this.Icon = My.Resources.Help_Icon;
+			this.Icon = Resources.Help_Icon;
 			this.Name = "Help";
 			this.TabText = "Help";
 			this.Text = "Help";
@@ -260,9 +261,9 @@ namespace mRemoteNG.UI.Window
 				
 		private void FillImageList()
 		{
-			this.imgListHelp.Images.Add("File", My.Resources.Page);
-			this.imgListHelp.Images.Add("Folder", My.Resources.Folder);
-			this.imgListHelp.Images.Add("Help", My.Resources.Help);
+			this.imgListHelp.Images.Add("File", Resources.Page);
+			this.imgListHelp.Images.Add("Folder", Resources.Folder);
+			this.imgListHelp.Images.Add("Help", Resources.Help);
 		}
 				
 		private void SetImages(TreeNode node)

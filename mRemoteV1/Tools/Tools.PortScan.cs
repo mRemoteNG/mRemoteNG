@@ -13,6 +13,7 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG.Tools.PortScan
@@ -240,11 +241,11 @@ namespace mRemoteNG.Tools.PortScan
 		{
 			if (value)
 			{
-				return My.Language.strYes;
+				return Language.strYes;
 			}
 			else
 			{
-				return My.Language.strNo;
+				return Language.strNo;
 			}
 		}
 				

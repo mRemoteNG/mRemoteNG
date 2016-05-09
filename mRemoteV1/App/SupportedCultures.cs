@@ -22,7 +22,7 @@ namespace mRemoteNG.App
         private SupportedCultures()
         {
             System.Globalization.CultureInfo CultureInfo = default(System.Globalization.CultureInfo);
-            foreach (string CultureName in My.Settings.Default.SupportedUICultures.Split(','))
+            foreach (string CultureName in mRemoteNG.Settings.Default.SupportedUICultures.Split(','))
             {
                 try
                 {

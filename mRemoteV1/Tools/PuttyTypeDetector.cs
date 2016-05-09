@@ -1,6 +1,7 @@
+using System;
 using System.Diagnostics;
 using mRemoteNG.Connection.Protocol;
-
+using System.IO;
 
 namespace mRemoteNG.Tools
 {
@@ -37,61 +38,25 @@ namespace mRemoteNG.Tools
 			
 		private static bool IsPutty(string filename)
 		{
-			bool result = false;
-			try
-			{
-				result = System.Convert.ToBoolean(FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY"));
-			}
-			catch
-			{
-				result = false;
-			}
-			return result;
+		    return !string.IsNullOrEmpty(filename) && File.Exists(filename) && Convert.ToBoolean(FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY"));
 		}
-			
-		private static bool IsPuttyNg(string filename)
-		{
-			bool result = false;
-			try
-			{
-				result = System.Convert.ToBoolean(FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTYNG"));
-			}
-			catch
-			{
-				result = false;
-			}
-			return result;
-		}
-			
-		private static bool IsKitty(string filename)
-		{
-			bool result = false;
-			try
-			{
-				result = System.Convert.ToBoolean(FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY") && FileVersionInfo.GetVersionInfo(filename).Comments.Contains("KiTTY"));
-			}
-			catch
-			{
-				result = false;
-			}
-			return result;
-		}
-			
-		private static bool IsXming(string filename)
-		{
-			bool result = false;
-			try
-			{
-				result = System.Convert.ToBoolean(FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY") && FileVersionInfo.GetVersionInfo(filename).ProductVersion.Contains("Xming"));
-			}
-			catch
-			{
-				result = false;
-			}
-			return result;
-		}
-			
-		public enum PuttyType
+
+	    private static bool IsPuttyNg(string filename)
+	    {
+	        return !string.IsNullOrEmpty(filename) && File.Exists(filename) && Convert.ToBoolean(FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTYNG"));
+	    }
+
+	    private static bool IsKitty(string filename)
+	    {
+	        return !string.IsNullOrEmpty(filename) && File.Exists(filename) && Convert.ToBoolean(FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY") && FileVersionInfo.GetVersionInfo(filename).Comments.Contains("KiTTY"));
+	    }
+
+	    private static bool IsXming(string filename)
+	    {
+	        return !string.IsNullOrEmpty(filename) && File.Exists(filename) && Convert.ToBoolean(FileVersionInfo.GetVersionInfo(filename).InternalName.Contains("PuTTY") && FileVersionInfo.GetVersionInfo(filename).ProductVersion.Contains("Xming"));
+	    }
+
+	    public enum PuttyType
 		{
 			Unknown = 0,
 			Putty,

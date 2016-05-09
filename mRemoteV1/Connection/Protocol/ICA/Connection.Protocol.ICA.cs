@@ -7,6 +7,7 @@ using mRemoteNG.App;
 using System.Threading;
 using mRemoteNG.Tools;
 using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 
 
@@ -58,7 +59,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaControlFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strIcaControlFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -114,7 +115,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetPropsFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strIcaSetPropsFailed + Environment.NewLine + ex.Message, true);
 				return false;
 			}
 		}
@@ -131,7 +132,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaConnectionFailed + Environment.NewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strIcaConnectionFailed + Environment.NewLine + ex.Message);
 				return false;
 			}
 		}
@@ -153,13 +154,13 @@ namespace mRemoteNG.Connection.Protocol.ICA
 						
 				if (string.IsNullOrEmpty(_user))
 				{
-					if ((string) My.Settings.Default.EmptyCredentials == "windows")
+					if ((string) mRemoteNG.Settings.Default.EmptyCredentials == "windows")
 					{
 						_ICAClient.Username = Environment.UserName;
 					}
-					else if ((string) My.Settings.Default.EmptyCredentials == "custom")
+					else if ((string) mRemoteNG.Settings.Default.EmptyCredentials == "custom")
 					{
-						_ICAClient.Username = My.Settings.Default.DefaultUsername;
+						_ICAClient.Username = mRemoteNG.Settings.Default.DefaultUsername;
 					}
 				}
 				else
@@ -169,11 +170,11 @@ namespace mRemoteNG.Connection.Protocol.ICA
 						
 				if (string.IsNullOrEmpty(_pass))
 				{
-					if ((string) My.Settings.Default.EmptyCredentials == "custom")
+					if ((string) mRemoteNG.Settings.Default.EmptyCredentials == "custom")
 					{
-						if (My.Settings.Default.DefaultPassword != "")
+						if (mRemoteNG.Settings.Default.DefaultPassword != "")
 						{
-							_ICAClient.SetProp("ClearPassword", Security.Crypt.Decrypt(Convert.ToString(My.Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey));
+							_ICAClient.SetProp("ClearPassword", Security.Crypt.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey));
 						}
 					}
 				}
@@ -184,13 +185,13 @@ namespace mRemoteNG.Connection.Protocol.ICA
 						
 				if (string.IsNullOrEmpty(_dom))
 				{
-					if ((string) My.Settings.Default.EmptyCredentials == "windows")
+					if ((string) mRemoteNG.Settings.Default.EmptyCredentials == "windows")
 					{
 						_ICAClient.Domain = Environment.UserDomainName;
 					}
-					else if ((string) My.Settings.Default.EmptyCredentials == "custom")
+					else if ((string) mRemoteNG.Settings.Default.EmptyCredentials == "custom")
 					{
-						_ICAClient.Domain = My.Settings.Default.DefaultDomain;
+						_ICAClient.Domain = mRemoteNG.Settings.Default.DefaultDomain;
 					}
 				}
 				else
@@ -200,7 +201,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetCredentialsFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strIcaSetCredentialsFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -237,7 +238,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetResolutionFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strIcaSetResolutionFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -294,7 +295,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strIcaSetEventHandlersFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strIcaSetEventHandlersFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -319,7 +320,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 		{
 			base.Event_Disconnected(this, e.ToString());
 					
-			if (My.Settings.Default.ReconnectOnDisconnect)
+			if (mRemoteNG.Settings.Default.ReconnectOnDisconnect)
 			{
 				ReconnectGroup = new ReconnectGroup();
 				//this.Load += ReconnectGroup_Load;

@@ -15,6 +15,7 @@ using mRemoteNG.Connection.Protocol.Rlogin;
 using mRemoteNG.Container;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG.Connection
@@ -835,95 +836,95 @@ namespace mRemoteNG.Connection
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionMessage(My.Language.strConnectionSetDefaultPortFailed, ex, MessageClass.ErrorMsg);
+                Runtime.MessageCollector.AddExceptionMessage(Language.strConnectionSetDefaultPortFailed, ex, MessageClass.ErrorMsg);
                 return 0;
 			}
 		}
 
         private void SetTreeDisplayDefaults()
         {
-            _name = My.Language.strNewConnection;
-            _description = My.Settings.Default.ConDefaultDescription;
-            _icon = My.Settings.Default.ConDefaultIcon;
-            _panel = My.Language.strGeneral;
+            _name = Language.strNewConnection;
+            _description = mRemoteNG.Settings.Default.ConDefaultDescription;
+            _icon = mRemoteNG.Settings.Default.ConDefaultIcon;
+            _panel = Language.strGeneral;
         }
 
         private void SetConnectionDefaults()
         {
             _hostname = string.Empty;
-            _username = My.Settings.Default.ConDefaultUsername;
-            _password = My.Settings.Default.ConDefaultPassword;
-            _domain = My.Settings.Default.ConDefaultDomain;
+            _username = mRemoteNG.Settings.Default.ConDefaultUsername;
+            _password = mRemoteNG.Settings.Default.ConDefaultPassword;
+            _domain = mRemoteNG.Settings.Default.ConDefaultDomain;
         }
 
         private void SetProtocolDefaults()
         {
-            _protocol = (ProtocolType)System.Enum.Parse(typeof(ProtocolType), My.Settings.Default.ConDefaultProtocol);
-            _extApp = My.Settings.Default.ConDefaultExtApp;
+            _protocol = (ProtocolType)System.Enum.Parse(typeof(ProtocolType), mRemoteNG.Settings.Default.ConDefaultProtocol);
+            _extApp = mRemoteNG.Settings.Default.ConDefaultExtApp;
             _port = 0;
-            _puttySession = My.Settings.Default.ConDefaultPuttySession;
-            _icaEncryption = (ProtocolICA.EncryptionStrength) Enum.Parse(typeof(ProtocolICA.EncryptionStrength), My.Settings.Default.ConDefaultICAEncryptionStrength);
-            _useConsoleSession = My.Settings.Default.ConDefaultUseConsoleSession;
-            _rdpAuthenticationLevel = (ProtocolRDP.AuthenticationLevel) Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), My.Settings.Default.ConDefaultRDPAuthenticationLevel);
-            _loadBalanceInfo = My.Settings.Default.ConDefaultLoadBalanceInfo;
-            _renderingEngine = (HTTPBase.RenderingEngine) Enum.Parse(typeof(HTTPBase.RenderingEngine), My.Settings.Default.ConDefaultRenderingEngine);
-            _useCredSsp = My.Settings.Default.ConDefaultUseCredSsp;
+            _puttySession = mRemoteNG.Settings.Default.ConDefaultPuttySession;
+            _icaEncryption = (ProtocolICA.EncryptionStrength) Enum.Parse(typeof(ProtocolICA.EncryptionStrength), mRemoteNG.Settings.Default.ConDefaultICAEncryptionStrength);
+            _useConsoleSession = mRemoteNG.Settings.Default.ConDefaultUseConsoleSession;
+            _rdpAuthenticationLevel = (ProtocolRDP.AuthenticationLevel) Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), mRemoteNG.Settings.Default.ConDefaultRDPAuthenticationLevel);
+            _loadBalanceInfo = mRemoteNG.Settings.Default.ConDefaultLoadBalanceInfo;
+            _renderingEngine = (HTTPBase.RenderingEngine) Enum.Parse(typeof(HTTPBase.RenderingEngine), mRemoteNG.Settings.Default.ConDefaultRenderingEngine);
+            _useCredSsp = mRemoteNG.Settings.Default.ConDefaultUseCredSsp;
         }
 
         private void SetRDGatewayDefaults()
         {
-            _rdGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod) Enum.Parse(typeof(ProtocolRDP.RDGatewayUsageMethod), My.Settings.Default.ConDefaultRDGatewayUsageMethod);
-            _rdGatewayHostname = My.Settings.Default.ConDefaultRDGatewayHostname;
-            _rdGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials) Enum.Parse(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), My.Settings.Default.ConDefaultRDGatewayUseConnectionCredentials); ;
-            _rdGatewayUsername = My.Settings.Default.ConDefaultRDGatewayUsername;
-            _rdGatewayPassword = My.Settings.Default.ConDefaultRDGatewayPassword;
-            _rdGatewayDomain = My.Settings.Default.ConDefaultRDGatewayDomain;
+            _rdGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod) Enum.Parse(typeof(ProtocolRDP.RDGatewayUsageMethod), mRemoteNG.Settings.Default.ConDefaultRDGatewayUsageMethod);
+            _rdGatewayHostname = mRemoteNG.Settings.Default.ConDefaultRDGatewayHostname;
+            _rdGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials) Enum.Parse(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), mRemoteNG.Settings.Default.ConDefaultRDGatewayUseConnectionCredentials); ;
+            _rdGatewayUsername = mRemoteNG.Settings.Default.ConDefaultRDGatewayUsername;
+            _rdGatewayPassword = mRemoteNG.Settings.Default.ConDefaultRDGatewayPassword;
+            _rdGatewayDomain = mRemoteNG.Settings.Default.ConDefaultRDGatewayDomain;
         }
 
         private void SetAppearanceDefaults() 
         {
-            _resolution = (ProtocolRDP.RDPResolutions) Enum.Parse(typeof(ProtocolRDP.RDPResolutions), My.Settings.Default.ConDefaultResolution);
-            _automaticResize = My.Settings.Default.ConDefaultAutomaticResize;
-            _colors = (ProtocolRDP.RDPColors) Enum.Parse(typeof(ProtocolRDP.RDPColors), My.Settings.Default.ConDefaultColors);
-            _cacheBitmaps = My.Settings.Default.ConDefaultCacheBitmaps;
-            _displayWallpaper = My.Settings.Default.ConDefaultDisplayWallpaper;
-            _displayThemes = My.Settings.Default.ConDefaultDisplayThemes;
-            _enableFontSmoothing = My.Settings.Default.ConDefaultEnableFontSmoothing;
-            _enableDesktopComposition = My.Settings.Default.ConDefaultEnableDesktopComposition;
+            _resolution = (ProtocolRDP.RDPResolutions) Enum.Parse(typeof(ProtocolRDP.RDPResolutions), mRemoteNG.Settings.Default.ConDefaultResolution);
+            _automaticResize = mRemoteNG.Settings.Default.ConDefaultAutomaticResize;
+            _colors = (ProtocolRDP.RDPColors) Enum.Parse(typeof(ProtocolRDP.RDPColors), mRemoteNG.Settings.Default.ConDefaultColors);
+            _cacheBitmaps = mRemoteNG.Settings.Default.ConDefaultCacheBitmaps;
+            _displayWallpaper = mRemoteNG.Settings.Default.ConDefaultDisplayWallpaper;
+            _displayThemes = mRemoteNG.Settings.Default.ConDefaultDisplayThemes;
+            _enableFontSmoothing = mRemoteNG.Settings.Default.ConDefaultEnableFontSmoothing;
+            _enableDesktopComposition = mRemoteNG.Settings.Default.ConDefaultEnableDesktopComposition;
         }
 
         private void SetRedirectDefaults()
         {
-            _redirectKeys = My.Settings.Default.ConDefaultRedirectKeys;
-            _redirectDiskDrives = My.Settings.Default.ConDefaultRedirectDiskDrives;
-            _redirectPrinters = My.Settings.Default.ConDefaultRedirectPrinters;
-            _redirectPorts = My.Settings.Default.ConDefaultRedirectPorts;
-            _redirectSmartCards = My.Settings.Default.ConDefaultRedirectSmartCards;
-            _redirectSound = (ProtocolRDP.RDPSounds) Enum.Parse(typeof(ProtocolRDP.RDPSounds), My.Settings.Default.ConDefaultRedirectSound);
+            _redirectKeys = mRemoteNG.Settings.Default.ConDefaultRedirectKeys;
+            _redirectDiskDrives = mRemoteNG.Settings.Default.ConDefaultRedirectDiskDrives;
+            _redirectPrinters = mRemoteNG.Settings.Default.ConDefaultRedirectPrinters;
+            _redirectPorts = mRemoteNG.Settings.Default.ConDefaultRedirectPorts;
+            _redirectSmartCards = mRemoteNG.Settings.Default.ConDefaultRedirectSmartCards;
+            _redirectSound = (ProtocolRDP.RDPSounds) Enum.Parse(typeof(ProtocolRDP.RDPSounds), mRemoteNG.Settings.Default.ConDefaultRedirectSound);
         }
 
         private void SetMiscDefaults()
         {
             _constantId = MiscTools.CreateConstantID();
-            _preExtApp = My.Settings.Default.ConDefaultPreExtApp;
-            _postExtApp = My.Settings.Default.ConDefaultPostExtApp;
-            _macAddress = My.Settings.Default.ConDefaultMacAddress;
-            _userField = My.Settings.Default.ConDefaultUserField;
+            _preExtApp = mRemoteNG.Settings.Default.ConDefaultPreExtApp;
+            _postExtApp = mRemoteNG.Settings.Default.ConDefaultPostExtApp;
+            _macAddress = mRemoteNG.Settings.Default.ConDefaultMacAddress;
+            _userField = mRemoteNG.Settings.Default.ConDefaultUserField;
         }
 
         private void SetVNCDefaults()
         {
-            _vncCompression = (ProtocolVNC.Compression) Enum.Parse(typeof(ProtocolVNC.Compression), My.Settings.Default.ConDefaultVNCCompression);
-            _vncEncoding = (ProtocolVNC.Encoding) Enum.Parse(typeof(ProtocolVNC.Encoding), My.Settings.Default.ConDefaultVNCEncoding);
-            _vncAuthMode = (ProtocolVNC.AuthMode) Enum.Parse(typeof(ProtocolVNC.AuthMode), My.Settings.Default.ConDefaultVNCAuthMode);
-            _vncProxyType = (ProtocolVNC.ProxyType) Enum.Parse(typeof(ProtocolVNC.ProxyType), My.Settings.Default.ConDefaultVNCProxyType);
-            _vncProxyIP = My.Settings.Default.ConDefaultVNCProxyIP;
-            _vncProxyPort = My.Settings.Default.ConDefaultVNCProxyPort;
-            _vncProxyUsername = My.Settings.Default.ConDefaultVNCProxyUsername;
-            _vncProxyPassword = My.Settings.Default.ConDefaultVNCProxyPassword;
-            _vncColors = (ProtocolVNC.Colors) Enum.Parse(typeof(ProtocolVNC.Colors), My.Settings.Default.ConDefaultVNCColors);
-            _vncSmartSizeMode = (ProtocolVNC.SmartSizeMode) Enum.Parse(typeof(ProtocolVNC.SmartSizeMode), My.Settings.Default.ConDefaultVNCSmartSizeMode);
-            _vncViewOnly = My.Settings.Default.ConDefaultVNCViewOnly;
+            _vncCompression = (ProtocolVNC.Compression) Enum.Parse(typeof(ProtocolVNC.Compression), mRemoteNG.Settings.Default.ConDefaultVNCCompression);
+            _vncEncoding = (ProtocolVNC.Encoding) Enum.Parse(typeof(ProtocolVNC.Encoding), mRemoteNG.Settings.Default.ConDefaultVNCEncoding);
+            _vncAuthMode = (ProtocolVNC.AuthMode) Enum.Parse(typeof(ProtocolVNC.AuthMode), mRemoteNG.Settings.Default.ConDefaultVNCAuthMode);
+            _vncProxyType = (ProtocolVNC.ProxyType) Enum.Parse(typeof(ProtocolVNC.ProxyType), mRemoteNG.Settings.Default.ConDefaultVNCProxyType);
+            _vncProxyIP = mRemoteNG.Settings.Default.ConDefaultVNCProxyIP;
+            _vncProxyPort = mRemoteNG.Settings.Default.ConDefaultVNCProxyPort;
+            _vncProxyUsername = mRemoteNG.Settings.Default.ConDefaultVNCProxyUsername;
+            _vncProxyPassword = mRemoteNG.Settings.Default.ConDefaultVNCProxyPassword;
+            _vncColors = (ProtocolVNC.Colors) Enum.Parse(typeof(ProtocolVNC.Colors), mRemoteNG.Settings.Default.ConDefaultVNCColors);
+            _vncSmartSizeMode = (ProtocolVNC.SmartSizeMode) Enum.Parse(typeof(ProtocolVNC.SmartSizeMode), mRemoteNG.Settings.Default.ConDefaultVNCSmartSizeMode);
+            _vncViewOnly = mRemoteNG.Settings.Default.ConDefaultVNCViewOnly;
         }
 
         private void SetNonBrowsablePropertiesDefaults()

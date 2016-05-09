@@ -2,6 +2,7 @@
 using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
+using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
@@ -36,7 +37,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strSettingsCouldNotBeSavedOrTrayDispose + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strSettingsCouldNotBeSavedOrTrayDispose + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -53,7 +54,7 @@ namespace mRemoteNG.App
 
         private static void SaveConnections()
         {
-            if (My.Settings.Default.SaveConsOnExit)
+            if (mRemoteNG.Settings.Default.SaveConsOnExit)
                 Runtime.SaveConnections();
         }
 

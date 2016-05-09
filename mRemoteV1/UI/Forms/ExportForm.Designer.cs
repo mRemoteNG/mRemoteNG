@@ -1,4 +1,5 @@
 using System.Windows.Forms;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG.Forms
@@ -263,7 +264,7 @@ namespace mRemoteNG.Forms
 			this.Controls.Add(this.btnCancel);
 			this.Controls.Add(this.btnOK);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-			this.Icon = My.Resources.Connections_SaveAs_Icon;
+			this.Icon = Resources.Connections_SaveAs_Icon;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "ExportForm";

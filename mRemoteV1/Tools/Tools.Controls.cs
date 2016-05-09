@@ -3,6 +3,7 @@ using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 
 
@@ -79,13 +80,13 @@ namespace mRemoteNG.Tools
 				try
 				{
 					this._cMenCons = new ToolStripMenuItem();
-					this._cMenCons.Text = My.Language.strConnections;
-					this._cMenCons.Image = My.Resources.Root;
+					this._cMenCons.Text = Language.strConnections;
+					this._cMenCons.Image = Resources.Root;
 						
 					this._cMenSep1 = new ToolStripSeparator();
 						
 					this._cMenExit = new ToolStripMenuItem();
-					this._cMenExit.Text = My.Language.strMenuExit;
+					this._cMenExit.Text = Language.strMenuExit;
 					this._cMenExit.Click += cMenExit_Click;
 						
 					this._cMen = new ContextMenuStrip();
@@ -96,7 +97,7 @@ namespace mRemoteNG.Tools
 					this._nI = new NotifyIcon();
 					this._nI.Text = "mRemote";
 					this._nI.BalloonTipText = "mRemote";
-					this._nI.Icon = My.Resources.mRemote_Icon;
+					this._nI.Icon = Resources.mRemote_Icon;
 					this._nI.ContextMenuStrip = this._cMen;
 					this._nI.Visible = true;
 						
@@ -149,7 +150,7 @@ namespace mRemoteNG.Tools
 							
 						if (Tree.ConnectionTreeNode.GetNodeType(tNode) == Tree.TreeNodeType.Container)
 						{
-							tMenItem.Image = My.Resources.Folder;
+							tMenItem.Image = Resources.Folder;
 							tMenItem.Tag = tNode.Tag;
 								
 							menToolStrip.DropDownItems.Add(tMenItem);
@@ -189,7 +190,7 @@ namespace mRemoteNG.Tools
 				frmMain.Default.Show();
 				frmMain.Default.WindowState = frmMain.Default.PreviousWindowState;
 					
-				if (My.Settings.Default.ShowSystemTrayIcon == false)
+				if (mRemoteNG.Settings.Default.ShowSystemTrayIcon == false)
 				{
 					App.Runtime.NotificationAreaIcon.Dispose();
 					App.Runtime.NotificationAreaIcon = null;
@@ -231,7 +232,7 @@ namespace mRemoteNG.Tools
 			saveFileDialog.FileName = App.Info.ConnectionsFileInfo.DefaultConnectionsFile;
 			saveFileDialog.OverwritePrompt = true;
 				
-			saveFileDialog.Filter = My.Language.strFiltermRemoteXML + "|*.xml|" + My.Language.strFilterAll + "|*.*";
+			saveFileDialog.Filter = Language.strFiltermRemoteXML + "|*.xml|" + Language.strFilterAll + "|*.*";
 				
 			return saveFileDialog;
 		}
@@ -244,7 +245,7 @@ namespace mRemoteNG.Tools
 			saveFileDialog.FileName = App.Info.ConnectionsFileInfo.DefaultConnectionsFile;
 			saveFileDialog.OverwritePrompt = true;
 				
-			saveFileDialog.Filter = My.Language.strFiltermRemoteXML + "|*.xml|" + My.Language.strFiltermRemoteCSV + "|*.csv|" + My.Language.strFiltervRD2008CSV + "|*.csv|" + My.Language.strFilterAll + "|*.*";
+			saveFileDialog.Filter = Language.strFiltermRemoteXML + "|*.xml|" + Language.strFiltermRemoteCSV + "|*.csv|" + Language.strFiltervRD2008CSV + "|*.csv|" + Language.strFilterAll + "|*.*";
 				
 			return saveFileDialog;
 		}
@@ -254,7 +255,7 @@ namespace mRemoteNG.Tools
 			OpenFileDialog lDlg = new OpenFileDialog();
 			lDlg.CheckFileExists = true;
 			lDlg.InitialDirectory = App.Info.ConnectionsFileInfo.DefaultConnectionsPath;
-			lDlg.Filter = My.Language.strFiltermRemoteXML + "|*.xml|" + My.Language.strFilterAll + "|*.*";
+			lDlg.Filter = Language.strFiltermRemoteXML + "|*.xml|" + Language.strFilterAll + "|*.*";
 				
 			return lDlg;
 		}
@@ -264,7 +265,7 @@ namespace mRemoteNG.Tools
 			OpenFileDialog openFileDialog = new OpenFileDialog();
 			openFileDialog.CheckFileExists = true;
 			openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-			openFileDialog.Filter = string.Join("|", new[] {My.Language.strFilterRDP, "*.rdp", My.Language.strFilterAll, "*.*"});
+			openFileDialog.Filter = string.Join("|", new[] {Language.strFilterRDP, "*.rdp", Language.strFilterAll, "*.*"});
 			openFileDialog.Multiselect = true;
 			return openFileDialog;
 		}

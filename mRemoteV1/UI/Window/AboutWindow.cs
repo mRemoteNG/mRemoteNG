@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 using mRemoteNG.App;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG.UI.Window
@@ -78,7 +79,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//pbLogo
 			//
-			this.pbLogo.Image = My.Resources.Logo;
+			this.pbLogo.Image = Resources.Logo;
 			this.pbLogo.Location = new System.Drawing.Point(8, 8);
 			this.pbLogo.Name = "pbLogo";
 			this.pbLogo.Size = new System.Drawing.Size(492, 128);
@@ -236,7 +237,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.pnlBottom);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.ForeColor = System.Drawing.SystemColors.ControlText;
-			this.Icon = My.Resources.mRemote_Icon;
+			this.Icon = Resources.mRemote_Icon;
 			this.MaximumSize = new System.Drawing.Size(20000, 10000);
 			this.Name = "About";
 			this.TabText = "About";
@@ -264,16 +265,16 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
 		private void ApplyLanguage()
 		{
-			lblLicense.Text = My.Language.strLabelReleasedUnderGPL;
-			lblChangeLog.Text = My.Language.strLabelChangeLog;
-			TabText = My.Language.strAbout;
-			Text = My.Language.strAbout;
+			lblLicense.Text = Language.strLabelReleasedUnderGPL;
+			lblChangeLog.Text = Language.strLabelChangeLog;
+			TabText = Language.strAbout;
+			Text = Language.strAbout;
 		}
 				
 		private void ApplyEditions()
 		{
             #if PORTABLE
-			lblEdition.Text = My.Language.strLabelPortableEdition;
+			lblEdition.Text = Language.strLabelPortableEdition;
 			lblEdition.Visible = true;
             #endif
 		}
@@ -313,9 +314,9 @@ namespace mRemoteNG.UI.Window
 						
 				this.lblVersion.Text = "Version " + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.Version.ToString();
 						
-				FillLinkLabel(llblFAMFAMFAM, My.Language.strFAMFAMFAMAttribution, My.Language.strFAMFAMFAMAttributionURL);
-				FillLinkLabel(llblMagicLibrary, My.Language.strMagicLibraryAttribution, My.Language.strMagicLibraryAttributionURL);
-				FillLinkLabel(llblWeifenLuo, My.Language.strWeifenLuoAttribution, My.Language.strWeifenLuoAttributionURL);
+				FillLinkLabel(llblFAMFAMFAM, Language.strFAMFAMFAMAttribution, Language.strFAMFAMFAMAttributionURL);
+				FillLinkLabel(llblMagicLibrary, Language.strMagicLibraryAttribution, Language.strMagicLibraryAttributionURL);
+				FillLinkLabel(llblWeifenLuo, Language.strWeifenLuoAttribution, Language.strWeifenLuoAttributionURL);
 						
 				if (File.Exists((new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\CHANGELOG.TXT"))
 				{
@@ -332,17 +333,17 @@ namespace mRemoteNG.UI.Window
 				
 		private void llblFAMFAMFAM_LinkClicked(System.Object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
 		{
-			App.Runtime.GoToURL(My.Language.strFAMFAMFAMAttributionURL);
+			App.Runtime.GoToURL(Language.strFAMFAMFAMAttributionURL);
 		}
 				
 		private void llblMagicLibrary_LinkClicked(System.Object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
 		{
-			App.Runtime.GoToURL(My.Language.strMagicLibraryAttributionURL);
+			App.Runtime.GoToURL(Language.strMagicLibraryAttributionURL);
 		}
 				
 		private void llblWeifenLuo_LinkClicked(System.Object sender, System.Windows.Forms.LinkLabelLinkClickedEventArgs e)
 		{
-			App.Runtime.GoToURL(My.Language.strWeifenLuoAttributionURL);
+			App.Runtime.GoToURL(Language.strWeifenLuoAttributionURL);
 		}
         #endregion
 	}

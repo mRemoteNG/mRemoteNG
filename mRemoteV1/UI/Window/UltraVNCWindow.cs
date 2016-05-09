@@ -1,6 +1,7 @@
 using System;
 using Microsoft.VisualBasic;
 using mRemoteNG.App;
+using mRemoteNG.My;
 using WeifenLuo.WinFormsUI.Docking;
 
 
@@ -58,7 +59,7 @@ namespace mRemoteNG.UI.Window
 			this.ClientSize = new System.Drawing.Size(446, 362);
 			this.Controls.Add(this.pnlContainer);
 			this.Controls.Add(this.tsMain);
-			this.Icon = My.Resources.UVNC_SC_Icon;
+			this.Icon = Resources.UVNC_SC_Icon;
 			this.Name = "UltraVNCSC";
 			this.TabText = "UltraVNC SC";
 			this.Text = "UltraVNC SC";
@@ -93,7 +94,7 @@ namespace mRemoteNG.UI.Window
 				
 		private void ApplyLanguage()
 		{
-			btnDisconnect.Text = My.Language.strButtonDisconnect;
+			btnDisconnect.Text = Language.strButtonDisconnect;
 		}
 				
 		private void StartListening()
@@ -113,9 +114,9 @@ namespace mRemoteNG.UI.Window
 				//vnc.Show()
 						
 				//vnc.StretchMode = ViewerX.ScreenStretchMode.SSM_ASPECT
-				//vnc.ListeningText = My.Language.strInheritListeningForIncomingVNCConnections & " " & My.Settings.UVNCSCPort
+				//vnc.ListeningText = Language.strInheritListeningForIncomingVNCConnections & " " & Settings.UVNCSCPort
 						
-				//vnc.ListenEx(My.Settings.UVNCSCPort)
+				//vnc.ListenEx(Settings.UVNCSCPort)
 			}
 			catch (Exception ex)
 			{

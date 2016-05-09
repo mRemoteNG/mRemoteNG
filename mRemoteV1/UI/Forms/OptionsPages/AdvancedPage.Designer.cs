@@ -1,5 +1,7 @@
 
 
+using mRemoteNG.My;
+
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public partial class AdvancedPage : OptionsPage
@@ -197,7 +199,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnLaunchPutty
             // 
-            this.btnLaunchPutty.Image = global::mRemoteNG.My.Resources.PuttyConfig;
+            this.btnLaunchPutty.Image = Resources.PuttyConfig;
             this.btnLaunchPutty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLaunchPutty.Location = new System.Drawing.Point(373, 159);
             this.btnLaunchPutty.Name = "btnLaunchPutty";

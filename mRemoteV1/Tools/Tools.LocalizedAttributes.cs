@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG.Tools
@@ -32,7 +33,7 @@ namespace mRemoteNG.Tools
 					OrderPrefix += Convert.ToString("\t");
 				}
 					
-				return OrderPrefix + My.Language.ResourceManager.GetString(value);
+				return OrderPrefix + Language.ResourceManager.GetString(value);
 			}
 		}
 			
@@ -54,7 +55,7 @@ namespace mRemoteNG.Tools
 					if (!this.Localized)
 					{
 						this.Localized = true;
-						this.DisplayNameValue = My.Language.ResourceManager.GetString(this.DisplayNameValue);
+						this.DisplayNameValue = Language.ResourceManager.GetString(this.DisplayNameValue);
 					}
 						
 					return base.DisplayName;
@@ -78,7 +79,7 @@ namespace mRemoteNG.Tools
 					if (!this.Localized)
 					{
 						this.Localized = true;
-						this.DescriptionValue = My.Language.ResourceManager.GetString(this.DescriptionValue);
+						this.DescriptionValue = Language.ResourceManager.GetString(this.DescriptionValue);
 					}
 						
 					return base.Description;
@@ -89,7 +90,7 @@ namespace mRemoteNG.Tools
 		[AttributeUsage(AttributeTargets.All, AllowMultiple = false, Inherited = true)]
         public class LocalizedDefaultValueAttribute : DefaultValueAttribute
 		{
-			public LocalizedDefaultValueAttribute(string name) : base(My.Language.ResourceManager.GetString(name))
+			public LocalizedDefaultValueAttribute(string name) : base(Language.ResourceManager.GetString(name))
 			{
 			}
 				
@@ -122,7 +123,7 @@ namespace mRemoteNG.Tools
 					if (!this.Localized)
 					{
 						this.Localized = true;
-						this.DisplayNameValue = string.Format(My.Language.strFormatInherit, My.Language.ResourceManager.GetString(this.DisplayNameValue));
+						this.DisplayNameValue = string.Format(Language.strFormatInherit, Language.ResourceManager.GetString(this.DisplayNameValue));
 					}
 						
 					return base.DisplayName;
@@ -147,7 +148,7 @@ namespace mRemoteNG.Tools
 					if (!this.Localized)
 					{
 						this.Localized = true;
-						this.DescriptionValue = string.Format(My.Language.strFormatInheritDescription, My.Language.ResourceManager.GetString(this.DescriptionValue));
+						this.DescriptionValue = string.Format(Language.strFormatInheritDescription, Language.ResourceManager.GetString(this.DescriptionValue));
 					}
 						
 					return base.Description;

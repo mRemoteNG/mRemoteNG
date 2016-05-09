@@ -191,8 +191,8 @@ namespace mRemoteNG.Config.Connections
                     cTaskDialog.ShowTaskDialogBox(
                         frmMain.Default, 
                         System.Windows.Forms.Application.ProductName, 
-                        "Incompatible database schema", 
-                        string.Format("The database schema on the server is not supported. Please upgrade to a newer version of {0}.", System.Windows.Forms.Application.ProductName), 
+                        "Incompatible database schema",
+                        $"The database schema on the server is not supported. Please upgrade to a newer version of {System.Windows.Forms.Application.ProductName}.", 
                         string.Format("Schema Version: {1}{0}Highest Supported Version: {2}", Environment.NewLine, confVersion.ToString(), maxSupportedSchemaVersion.ToString()), 
                         "", 
                         "", 
@@ -202,12 +202,12 @@ namespace mRemoteNG.Config.Connections
                         eSysIcons.Error, 
                         eSysIcons.Error
                     );
-					throw (new Exception(string.Format("Incompatible database schema (schema version {0}).", confVersion)));
+					throw (new Exception($"Incompatible database schema (schema version {confVersion})."));
 				}
 						
 				RootTreeNode.Name = Convert.ToString(sqlRd["Name"]);
 						
-				RootNodeInfo rootInfo = new RootNodeInfo(RootNodeType.Connection);
+				var rootInfo = new RootNodeInfo(RootNodeType.Connection);
 				rootInfo.Name = RootTreeNode.Name;
 				rootInfo.TreeNode = RootTreeNode;
 						
@@ -219,8 +219,8 @@ namespace mRemoteNG.Config.Connections
 				{
 					if (Authenticate(Convert.ToString(sqlRd["Protected"]), false, rootInfo) == false)
 					{
-						My.Settings.Default.LoadConsFromCustomLocation = false;
-						My.Settings.Default.CustomConsPath = "";
+						mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
+                        mRemoteNG.Settings.Default.CustomConsPath = "";
 						RootTreeNode.Remove();
 						return;
 					}
@@ -247,7 +247,7 @@ namespace mRemoteNG.Config.Connections
                 Windows.treeForm.tvConnections.EndUpdate();
 						
 				//open connections from last mremote session
-				if (My.Settings.Default.OpenConsFromLastSession == true && My.Settings.Default.NoReconnect == false)
+				if (mRemoteNG.Settings.Default.OpenConsFromLastSession && !mRemoteNG.Settings.Default.NoReconnect)
 				{
 					foreach (ConnectionInfo conI in ConnectionList)
 					{
@@ -761,8 +761,8 @@ namespace mRemoteNG.Config.Connections
 					{
 						if (Authenticate(Convert.ToString(xDom.DocumentElement.Attributes["Protected"].Value), false, rootInfo) == false)
 						{
-							My.Settings.Default.LoadConsFromCustomLocation = false;
-							My.Settings.Default.CustomConsPath = "";
+                            mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
+                            mRemoteNG.Settings.Default.CustomConsPath = "";
 							RootTreeNode.Remove();
 							return;
 						}
@@ -809,7 +809,7 @@ namespace mRemoteNG.Config.Connections
                 Windows.treeForm.tvConnections.EndUpdate();
 						
 				//open connections from last mremote session
-				if (My.Settings.Default.OpenConsFromLastSession == true && My.Settings.Default.NoReconnect == false)
+				if (mRemoteNG.Settings.Default.OpenConsFromLastSession && !mRemoteNG.Settings.Default.NoReconnect)
 				{
 					foreach (ConnectionInfo conI in ConnectionList)
 					{

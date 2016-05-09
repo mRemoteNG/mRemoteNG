@@ -128,22 +128,22 @@ namespace mRemoteNG.Config.Putty
 		{
 			Root.PuttySessions.PuttySessionsNodeInfo newRootInfo = new Root.PuttySessions.PuttySessionsNodeInfo();
 				
-			if (string.IsNullOrEmpty(Convert.ToString(My.Settings.Default.PuttySavedSessionsName)))
+			if (string.IsNullOrEmpty(Convert.ToString(mRemoteNG.Settings.Default.PuttySavedSessionsName)))
 			{
 				newRootInfo.Name = Language.strPuttySavedSessionsRootName;
 			}
 			else
 			{
-				newRootInfo.Name = Convert.ToString(My.Settings.Default.PuttySavedSessionsName);
+				newRootInfo.Name = Convert.ToString(mRemoteNG.Settings.Default.PuttySavedSessionsName);
 			}
 				
-			if (string.IsNullOrEmpty(Convert.ToString(My.Settings.Default.PuttySavedSessionsPanel)))
+			if (string.IsNullOrEmpty(Convert.ToString(mRemoteNG.Settings.Default.PuttySavedSessionsPanel)))
 			{
 				newRootInfo.Panel = Language.strGeneral;
 			}
 			else
 			{
-				newRootInfo.Panel = Convert.ToString(My.Settings.Default.PuttySavedSessionsPanel);
+				newRootInfo.Panel = Convert.ToString(mRemoteNG.Settings.Default.PuttySavedSessionsPanel);
 			}
 				
 			return newRootInfo;

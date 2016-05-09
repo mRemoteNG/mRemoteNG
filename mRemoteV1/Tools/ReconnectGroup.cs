@@ -1,4 +1,5 @@
 using System.Drawing;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG
@@ -20,11 +21,11 @@ namespace mRemoteNG
 			{
 				if (value == true)
 				{
-					SetStatusImage(My.Resources.HostStatus_On);
+					SetStatusImage(Resources.HostStatus_On);
 				}
 				else
 				{
-					SetStatusImage(My.Resources.HostStatus_Off);
+					SetStatusImage(Resources.HostStatus_Off);
 				}
 				
 				_ServerReady = value;
@@ -140,10 +141,10 @@ namespace mRemoteNG
 		
 		private void ApplyLanguage()
 		{
-			grpAutomaticReconnect.Text = My.Language.strGroupboxAutomaticReconnect;
-			btnClose.Text = My.Language.strButtonClose;
-			lblServerStatus.Text = My.Language.strLabelServerStatus;
-			chkReconnectWhenReady.Text = My.Language.strCheckboxReconnectWhenReady;
+			grpAutomaticReconnect.Text = Language.strGroupboxAutomaticReconnect;
+			btnClose.Text = Language.strButtonClose;
+			lblServerStatus.Text = Language.strLabelServerStatus;
+			chkReconnectWhenReady.Text = Language.strCheckboxReconnectWhenReady;
 		}
 	}
 }

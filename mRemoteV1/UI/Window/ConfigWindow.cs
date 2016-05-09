@@ -114,7 +114,7 @@ namespace mRemoteNG.UI.Window
             //btnShowInheritance
             //
             btnShowInheritance.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnShowInheritance.Image = My.Resources.Inheritance;
+            btnShowInheritance.Image = Resources.Inheritance;
             btnShowInheritance.ImageTransparentColor = Color.Magenta;
             btnShowInheritance.Name = "btnShowInheritance";
             btnShowInheritance.Size = new Size(23, 22);
@@ -123,7 +123,7 @@ namespace mRemoteNG.UI.Window
             //btnShowDefaultInheritance
             //
             btnShowDefaultInheritance.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnShowDefaultInheritance.Image = My.Resources.Inheritance_Default;
+            btnShowDefaultInheritance.Image = Resources.Inheritance_Default;
             btnShowDefaultInheritance.ImageTransparentColor = Color.Magenta;
             btnShowDefaultInheritance.Name = "btnShowDefaultInheritance";
             btnShowDefaultInheritance.Size = new Size(23, 22);
@@ -134,7 +134,7 @@ namespace mRemoteNG.UI.Window
             btnShowProperties.Checked = true;
             btnShowProperties.CheckState = CheckState.Checked;
             btnShowProperties.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnShowProperties.Image = My.Resources.Properties;
+            btnShowProperties.Image = Resources.Properties;
             btnShowProperties.ImageTransparentColor = Color.Magenta;
             btnShowProperties.Name = "btnShowProperties";
             btnShowProperties.Size = new Size(23, 22);
@@ -143,7 +143,7 @@ namespace mRemoteNG.UI.Window
             //btnShowDefaultProperties
             //
             btnShowDefaultProperties.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnShowDefaultProperties.Image = My.Resources.Properties_Default;
+            btnShowDefaultProperties.Image = Resources.Properties_Default;
             btnShowDefaultProperties.ImageTransparentColor = Color.Magenta;
             btnShowDefaultProperties.Name = "btnShowDefaultProperties";
             btnShowDefaultProperties.Size = new Size(23, 22);
@@ -162,7 +162,7 @@ namespace mRemoteNG.UI.Window
             //
             btnHostStatus.Alignment = ToolStripItemAlignment.Right;
             btnHostStatus.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnHostStatus.Image = My.Resources.HostStatus_Check;
+            btnHostStatus.Image = Resources.HostStatus_Check;
             btnHostStatus.ImageTransparentColor = Color.Magenta;
             btnHostStatus.Name = "btnHostStatus";
             btnHostStatus.Size = new Size(23, 22);
@@ -180,7 +180,7 @@ namespace mRemoteNG.UI.Window
             Controls.Add(pGrid);
             Font = new Font("Microsoft Sans Serif", (float) (8.25F), FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
             HideOnClose = true;
-            Icon = My.Resources.Config_Icon;
+            Icon = Resources.Config_Icon;
             Name = "Config";
             TabText = "Config";
             Text = "Config";
@@ -744,7 +744,7 @@ namespace mRemoteNG.UI.Window
 			Themes.ThemeManager.ThemeChanged += ApplyTheme;
 			ApplyTheme();
 			AddToolStripItems();
-			pGrid.HelpVisible = Settings.Default.ShowConfigHelpText;
+			pGrid.HelpVisible = mRemoteNG.Settings.Default.ShowConfigHelpText;
 		}
 				
 		private void Config_SystemColorsChanged(object sender, EventArgs e)
@@ -779,7 +779,7 @@ namespace mRemoteNG.UI.Window
                 else if (e.ChangedItem.Label == Language.strPropertyNameName)
                 {
                     Windows.treeForm.tvConnections.SelectedNode.Text = Convert.ToString(((ConnectionInfo)pGrid.SelectedObject).Name);
-                    if (Settings.Default.SetHostnameLikeDisplayName && pGrid.SelectedObject is ConnectionInfo)
+                    if (mRemoteNG.Settings.Default.SetHostnameLikeDisplayName && pGrid.SelectedObject is ConnectionInfo)
                     {
                         ConnectionInfo connectionInfo = (ConnectionInfo)pGrid.SelectedObject;
                         if (!string.IsNullOrEmpty(connectionInfo.Name))
@@ -813,7 +813,7 @@ namespace mRemoteNG.UI.Window
                         if (rootInfo.Password == true)
                         {
                             string passwordName = "";
-                            if (Settings.Default.UseSQLServer)
+                            if (mRemoteNG.Settings.Default.UseSQLServer)
                                 passwordName = Language.strSQLServer.TrimEnd(':');
                             else
                                 passwordName = Path.GetFileName(Runtime.GetStartupConnectionFileName());
@@ -1764,14 +1764,14 @@ namespace mRemoteNG.UI.Window
 				{
 					if ((string)btnHostStatus.Tag == "checking")
 					{
-						ShowStatusImage(My.Resources.HostStatus_On);
+						ShowStatusImage(Resources.HostStatus_On);
 					}
 				}
 				else
 				{
 					if ((string)btnHostStatus.Tag == "checking")
 					{
-						ShowStatusImage(My.Resources.HostStatus_Off);
+						ShowStatusImage(Resources.HostStatus_Off);
 					}
 				}
 			}
@@ -1779,7 +1779,7 @@ namespace mRemoteNG.UI.Window
 			{
 				if ((string)btnHostStatus.Tag == "checking")
 				{
-					ShowStatusImage(My.Resources.HostStatus_Off);
+					ShowStatusImage(Resources.HostStatus_Off);
 				}
 			}
 		}
@@ -1803,7 +1803,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-                btnHostStatus.Image = My.Resources.HostStatus_Check;
+                btnHostStatus.Image = Resources.HostStatus_Check;
 				// To check status, ConnectionInfo must be an mRemoteNG.Connection.Info that is not a container
 				if (ConnectionInfo is ConnectionInfo)
 				{
@@ -1836,7 +1836,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				propertyGridContextMenuShowHelpText.Checked = Settings.Default.ShowConfigHelpText;
+				propertyGridContextMenuShowHelpText.Checked = mRemoteNG.Settings.Default.ShowConfigHelpText;
 				GridItem gridItem = pGrid.SelectedGridItem;
 				propertyGridContextMenuReset.Enabled = Convert.ToBoolean(pGrid.SelectedObject != null && gridItem != null && gridItem.PropertyDescriptor != null && gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject));
 			}
@@ -1869,7 +1869,7 @@ namespace mRemoteNG.UI.Window
 				
 		private void propertyGridContextMenuShowHelpText_CheckedChanged(object sender, EventArgs e)
 		{
-            Settings.Default.ShowConfigHelpText = propertyGridContextMenuShowHelpText.Checked;
+            mRemoteNG.Settings.Default.ShowConfigHelpText = propertyGridContextMenuShowHelpText.Checked;
 			pGrid.HelpVisible = propertyGridContextMenuShowHelpText.Checked;
         }
         #endregion

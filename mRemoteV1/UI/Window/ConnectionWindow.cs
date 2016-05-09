@@ -10,6 +10,7 @@ using mRemoteNG.Config;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.UI.Window
@@ -119,14 +120,14 @@ namespace mRemoteNG.UI.Window
 			//
 			//cmenTabFullscreen
 			//
-			this.cmenTabFullscreen.Image = My.Resources.arrow_out;
+			this.cmenTabFullscreen.Image = Resources.arrow_out;
 			this.cmenTabFullscreen.Name = "cmenTabFullscreen";
 			this.cmenTabFullscreen.Size = new System.Drawing.Size(201, 22);
 			this.cmenTabFullscreen.Text = "Fullscreen (RDP)";
 			//
 			//cmenTabSmartSize
 			//
-			this.cmenTabSmartSize.Image = My.Resources.SmartSize;
+			this.cmenTabSmartSize.Image = Resources.SmartSize;
 			this.cmenTabSmartSize.Name = "cmenTabSmartSize";
 			this.cmenTabSmartSize.Size = new System.Drawing.Size(201, 22);
 			this.cmenTabSmartSize.Text = "SmartSize (RDP/VNC)";
@@ -144,14 +145,14 @@ namespace mRemoteNG.UI.Window
 			//
 			//cmenTabScreenshot
 			//
-			this.cmenTabScreenshot.Image = My.Resources.Screenshot_Add;
+			this.cmenTabScreenshot.Image = Resources.Screenshot_Add;
 			this.cmenTabScreenshot.Name = "cmenTabScreenshot";
 			this.cmenTabScreenshot.Size = new System.Drawing.Size(201, 22);
 			this.cmenTabScreenshot.Text = "Screenshot";
 			//
 			//cmenTabStartChat
 			//
-			this.cmenTabStartChat.Image = My.Resources.Chat;
+			this.cmenTabStartChat.Image = Resources.Chat;
 			this.cmenTabStartChat.Name = "cmenTabStartChat";
 			this.cmenTabStartChat.Size = new System.Drawing.Size(201, 22);
 			this.cmenTabStartChat.Text = "Start Chat (VNC)";
@@ -159,14 +160,14 @@ namespace mRemoteNG.UI.Window
 			//
 			//cmenTabTransferFile
 			//
-			this.cmenTabTransferFile.Image = My.Resources.SSHTransfer;
+			this.cmenTabTransferFile.Image = Resources.SSHTransfer;
 			this.cmenTabTransferFile.Name = "cmenTabTransferFile";
 			this.cmenTabTransferFile.Size = new System.Drawing.Size(201, 22);
 			this.cmenTabTransferFile.Text = "Transfer File (SSH)";
 			//
 			//cmenTabRefreshScreen
 			//
-			this.cmenTabRefreshScreen.Image = My.Resources.Refresh;
+			this.cmenTabRefreshScreen.Image = Resources.Refresh;
 			this.cmenTabRefreshScreen.Name = "cmenTabRefreshScreen";
 			this.cmenTabRefreshScreen.Size = new System.Drawing.Size(201, 22);
 			this.cmenTabRefreshScreen.Text = "Refresh Screen (VNC)";
@@ -174,7 +175,7 @@ namespace mRemoteNG.UI.Window
 			//cmenTabSendSpecialKeys
 			//
 			this.cmenTabSendSpecialKeys.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.cmenTabSendSpecialKeysCtrlAltDel, this.cmenTabSendSpecialKeysCtrlEsc});
-			this.cmenTabSendSpecialKeys.Image = My.Resources.Keyboard;
+			this.cmenTabSendSpecialKeys.Image = Resources.Keyboard;
 			this.cmenTabSendSpecialKeys.Name = "cmenTabSendSpecialKeys";
 			this.cmenTabSendSpecialKeys.Size = new System.Drawing.Size(201, 22);
 			this.cmenTabSendSpecialKeys.Text = "Send special Keys (VNC)";
@@ -205,7 +206,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//cmenTabRenameTab
 			//
-			this.cmenTabRenameTab.Image = My.Resources.Rename;
+			this.cmenTabRenameTab.Image = Resources.Rename;
 			this.cmenTabRenameTab.Name = "cmenTabRenameTab";
 			this.cmenTabRenameTab.Size = new System.Drawing.Size(201, 22);
 			this.cmenTabRenameTab.Text = "Rename Tab";
@@ -225,7 +226,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//cmenTabDisconnect
 			//
-			this.cmenTabDisconnect.Image = My.Resources.Pause;
+			this.cmenTabDisconnect.Image = Resources.Pause;
 			this.cmenTabDisconnect.Name = "cmenTabDisconnect";
 			this.cmenTabDisconnect.Size = new System.Drawing.Size(201, 22);
 			this.cmenTabDisconnect.Text = "Disconnect";
@@ -241,7 +242,7 @@ namespace mRemoteNG.UI.Window
 			this.ClientSize = new System.Drawing.Size(632, 453);
 			this.Controls.Add(this.TabController);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
-			this.Icon = My.Resources.mRemote_Icon;
+			this.Icon = Resources.mRemote_Icon;
 			this.Name = "Connection";
 			this.TabText = "UI.Window.Connection";
 			this.Text = "UI.Window.Connection";
@@ -256,7 +257,7 @@ namespace mRemoteNG.UI.Window
 		{
 			if (FormText == "")
 			{
-				FormText = My.Language.strNewPanel;
+				FormText = Language.strNewPanel;
 			}
 					
 			this.WindowType = WindowType.Connection;
@@ -273,7 +274,7 @@ namespace mRemoteNG.UI.Window
 				Crownwood.Magic.Controls.TabPage nTab = new Crownwood.Magic.Controls.TabPage();
 				nTab.Anchor = (System.Windows.Forms.AnchorStyles) (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
 						
-				if (My.Settings.Default.ShowProtocolOnTabs)
+				if (mRemoteNG.Settings.Default.ShowProtocolOnTabs)
 				{
 					nTab.Title = conI.Protocol.ToString() + ": ";
 				}
@@ -284,7 +285,7 @@ namespace mRemoteNG.UI.Window
 						
 				nTab.Title += conI.Name;
 						
-				if (My.Settings.Default.ShowLogonInfoOnTabs)
+				if (mRemoteNG.Settings.Default.ShowLogonInfoOnTabs)
 				{
 					nTab.Title += " (";
 							
@@ -314,7 +315,7 @@ namespace mRemoteNG.UI.Window
 					nTab.Icon = conIcon;
 				}
 						
-				if (My.Settings.Default.OpenTabsRightOfSelected)
+				if (mRemoteNG.Settings.Default.OpenTabsRightOfSelected)
 				{
 					this.TabController.TabPages.Insert(this.TabController.SelectedIndex + 1, nTab);
 				}
@@ -397,34 +398,34 @@ namespace mRemoteNG.UI.Window
 				
 		private void ApplyLanguage()
 		{
-			cmenTabFullscreen.Text = My.Language.strMenuFullScreenRDP;
-			cmenTabSmartSize.Text = My.Language.strMenuSmartSize;
-			cmenTabViewOnly.Text = My.Language.strMenuViewOnly;
-			cmenTabScreenshot.Text = My.Language.strMenuScreenshot;
-			cmenTabStartChat.Text = My.Language.strMenuStartChat;
-			cmenTabTransferFile.Text = My.Language.strMenuTransferFile;
-			cmenTabRefreshScreen.Text = My.Language.strMenuRefreshScreen;
-			cmenTabSendSpecialKeys.Text = My.Language.strMenuSendSpecialKeys;
-			cmenTabSendSpecialKeysCtrlAltDel.Text = My.Language.strMenuCtrlAltDel;
-			cmenTabSendSpecialKeysCtrlEsc.Text = My.Language.strMenuCtrlEsc;
-			cmenTabExternalApps.Text = My.Language.strMenuExternalTools;
-			cmenTabRenameTab.Text = My.Language.strMenuRenameTab;
-			cmenTabDuplicateTab.Text = My.Language.strMenuDuplicateTab;
-			cmenTabReconnect.Text = My.Language.strMenuReconnect;
-			cmenTabDisconnect.Text = My.Language.strMenuDisconnect;
-			cmenTabPuttySettings.Text = My.Language.strPuttySettings;
+			cmenTabFullscreen.Text = Language.strMenuFullScreenRDP;
+			cmenTabSmartSize.Text = Language.strMenuSmartSize;
+			cmenTabViewOnly.Text = Language.strMenuViewOnly;
+			cmenTabScreenshot.Text = Language.strMenuScreenshot;
+			cmenTabStartChat.Text = Language.strMenuStartChat;
+			cmenTabTransferFile.Text = Language.strMenuTransferFile;
+			cmenTabRefreshScreen.Text = Language.strMenuRefreshScreen;
+			cmenTabSendSpecialKeys.Text = Language.strMenuSendSpecialKeys;
+			cmenTabSendSpecialKeysCtrlAltDel.Text = Language.strMenuCtrlAltDel;
+			cmenTabSendSpecialKeysCtrlEsc.Text = Language.strMenuCtrlEsc;
+			cmenTabExternalApps.Text = Language.strMenuExternalTools;
+			cmenTabRenameTab.Text = Language.strMenuRenameTab;
+			cmenTabDuplicateTab.Text = Language.strMenuDuplicateTab;
+			cmenTabReconnect.Text = Language.strMenuReconnect;
+			cmenTabDisconnect.Text = Language.strMenuDisconnect;
+			cmenTabPuttySettings.Text = Language.strPuttySettings;
 		}
 				
 		private void Connection_FormClosing(object sender, FormClosingEventArgs e)
 		{
 			if (!frmMain.Default.IsClosing && 
-				((My.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All & TabController.TabPages.Count > 0) ||
-                (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & TabController.TabPages.Count > 1)))
+				((mRemoteNG.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All & TabController.TabPages.Count > 0) ||
+                (mRemoteNG.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & TabController.TabPages.Count > 1)))
 			{
-                DialogResult result = cTaskDialog.MessageBox(this, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, string.Format(My.Language.strConfirmCloseConnectionPanelMainInstruction, this.Text), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, eSysIcons.Question);
+                DialogResult result = cTaskDialog.MessageBox(this, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, string.Format(Language.strConfirmCloseConnectionPanelMainInstruction, this.Text), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, eSysIcons.Question);
 				if (cTaskDialog.VerificationChecked)
 				{
-					My.Settings.Default.ConfirmCloseConnection--;
+					mRemoteNG.Settings.Default.ConfirmCloseConnection--;
 				}
 				if (result == DialogResult.No)
 				{
@@ -503,12 +504,12 @@ namespace mRemoteNG.UI.Window
 		private void CloseConnectionTab()
 		{
 			Crownwood.Magic.Controls.TabPage selectedTab = TabController.SelectedTab;
-			if (My.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
+			if (mRemoteNG.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
 			{
-                DialogResult result = cTaskDialog.MessageBox(this, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, string.Format(My.Language.strConfirmCloseConnectionMainInstruction, selectedTab.Title), "", "", "", My.Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, eSysIcons.Question);
+                DialogResult result = cTaskDialog.MessageBox(this, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, string.Format(Language.strConfirmCloseConnectionMainInstruction, selectedTab.Title), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, eSysIcons.Question);
 				if (cTaskDialog.VerificationChecked)
 				{
-					My.Settings.Default.ConfirmCloseConnection--;
+					mRemoteNG.Settings.Default.ConfirmCloseConnection--;
 				}
 				if (result == DialogResult.No)
 				{
@@ -539,7 +540,7 @@ namespace mRemoteNG.UI.Window
 		private void TabController_DoubleClickTab(Crownwood.Magic.Controls.TabControl sender, Crownwood.Magic.Controls.TabPage page)
 		{
 			_firstClickTicks = 0;
-			if (My.Settings.Default.DoubleClickOnTabClosesIt)
+			if (mRemoteNG.Settings.Default.DoubleClickOnTabClosesIt)
 			{
 				this.CloseConnectionTab();
 			}
@@ -1062,7 +1063,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				string nTitle = Interaction.InputBox(Prompt: My.Language.strNewTitle + ":", DefaultResponse: this.TabController.SelectedTab.Title.Replace("&&", "&"));
+				string nTitle = Interaction.InputBox(Prompt: Language.strNewTitle + ":", DefaultResponse: this.TabController.SelectedTab.Title.Replace("&&", "&"));
 				
 				if (!string.IsNullOrEmpty(nTitle))
 				{

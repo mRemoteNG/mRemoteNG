@@ -9,7 +9,7 @@
                 #if DEBUG
 				return "update-debug.txt";
                 #else
-                if ((string)(My.Settings.Default.UpdateChannel.ToLowerInvariant()) == "debug")
+                if ((string)(mRemoteNG.Settings.Default.UpdateChannel.ToLowerInvariant()) == "debug")
                     return "update-debug.txt";
                 else
                     return "update.txt";

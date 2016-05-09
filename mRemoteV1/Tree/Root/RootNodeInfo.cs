@@ -1,6 +1,7 @@
 using mRemoteNG.Tools;
 using System.ComponentModel;
 using System.Windows.Forms;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG.Tree.Root
@@ -13,7 +14,7 @@ namespace mRemoteNG.Tree.Root
 
         public RootNodeInfo(RootNodeType rootType)
 		{
-			_name = My.Language.strConnections;
+			_name = Language.strConnections;
 			Type = rootType;
 		}
 			

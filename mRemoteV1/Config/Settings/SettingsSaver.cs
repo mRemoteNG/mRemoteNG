@@ -26,43 +26,46 @@ namespace mRemoteNG.Config.Settings
                     with1.WindowState = FormWindowState.Maximized;
                 }
 
-                My.Settings.Default.MainFormLocation = with1.Location;
-                My.Settings.Default.MainFormSize = with1.Size;
+                mRemoteNG.Settings.Default.MainFormLocation = with1.Location;
+                mRemoteNG.Settings.Default.MainFormSize = with1.Size;
 
                 if (with1.WindowState != FormWindowState.Normal)
                 {
-                    My.Settings.Default.MainFormRestoreLocation = with1.RestoreBounds.Location;
-                    My.Settings.Default.MainFormRestoreSize = with1.RestoreBounds.Size;
+                    mRemoteNG.Settings.Default.MainFormRestoreLocation = with1.RestoreBounds.Location;
+                    mRemoteNG.Settings.Default.MainFormRestoreSize = with1.RestoreBounds.Size;
                 }
 
-                My.Settings.Default.MainFormState = with1.WindowState;
+                mRemoteNG.Settings.Default.MainFormState = with1.WindowState;
 
-                My.Settings.Default.MainFormKiosk = with1.Fullscreen.Value;
+                if (with1.Fullscreen != null)
+                {
+                    mRemoteNG.Settings.Default.MainFormKiosk = with1.Fullscreen.Value;
+                }
 
-                My.Settings.Default.FirstStart = false;
-                My.Settings.Default.ResetPanels = false;
-                My.Settings.Default.ResetToolbars = false;
-                My.Settings.Default.NoReconnect = false;
+                mRemoteNG.Settings.Default.FirstStart = false;
+                mRemoteNG.Settings.Default.ResetPanels = false;
+                mRemoteNG.Settings.Default.ResetToolbars = false;
+                mRemoteNG.Settings.Default.NoReconnect = false;
 
-                My.Settings.Default.ExtAppsTBLocation = with1.tsExternalTools.Location;
+                mRemoteNG.Settings.Default.ExtAppsTBLocation = with1.tsExternalTools.Location;
                 if (with1.tsExternalTools.Parent != null)
                 {
-                    My.Settings.Default.ExtAppsTBParentDock = with1.tsExternalTools.Parent.Dock.ToString();
+                    mRemoteNG.Settings.Default.ExtAppsTBParentDock = with1.tsExternalTools.Parent.Dock.ToString();
                 }
-                My.Settings.Default.ExtAppsTBVisible = with1.tsExternalTools.Visible;
-                My.Settings.Default.ExtAppsTBShowText = with1.cMenToolbarShowText.Checked;
+                mRemoteNG.Settings.Default.ExtAppsTBVisible = with1.tsExternalTools.Visible;
+                mRemoteNG.Settings.Default.ExtAppsTBShowText = with1.cMenToolbarShowText.Checked;
 
-                My.Settings.Default.QuickyTBLocation = with1.tsQuickConnect.Location;
+                mRemoteNG.Settings.Default.QuickyTBLocation = with1.tsQuickConnect.Location;
                 if (with1.tsQuickConnect.Parent != null)
                 {
-                    My.Settings.Default.QuickyTBParentDock = with1.tsQuickConnect.Parent.Dock.ToString();
+                    mRemoteNG.Settings.Default.QuickyTBParentDock = with1.tsQuickConnect.Parent.Dock.ToString();
                 }
-                My.Settings.Default.QuickyTBVisible = with1.tsQuickConnect.Visible;
+                mRemoteNG.Settings.Default.QuickyTBVisible = with1.tsQuickConnect.Visible;
 
-                My.Settings.Default.ConDefaultPassword =
-                    Crypt.Encrypt(Convert.ToString(My.Settings.Default.ConDefaultPassword), GeneralAppInfo.EncryptionKey);
+                mRemoteNG.Settings.Default.ConDefaultPassword =
+                    Crypt.Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword), GeneralAppInfo.EncryptionKey);
 
-                My.Settings.Default.Save();
+                mRemoteNG.Settings.Default.Save();
 
                 SavePanelsToXML();
                 SaveExternalAppsToXML();

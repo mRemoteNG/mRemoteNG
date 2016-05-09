@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mRemoteNG.My {
+namespace mRemoteNG {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
@@ -24,7 +24,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public global::System.Drawing.Point MainFormLocation {
             get {
@@ -36,7 +35,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public global::System.Drawing.Size MainFormSize {
             get {
@@ -48,7 +46,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Normal")]
         public global::System.Windows.Forms.FormWindowState MainFormState {
@@ -61,7 +58,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool MainFormKiosk {
@@ -74,7 +70,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool DoUpgrade {
@@ -87,7 +82,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string CustomPuttyPath {
@@ -100,7 +94,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ShowNoMessageBoxes {
@@ -113,7 +106,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool SwitchToMCOnInformation {
@@ -126,7 +118,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool SwitchToMCOnWarning {
@@ -139,7 +130,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool SwitchToMCOnError {
@@ -152,7 +142,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool AutomaticallyGetSessionInfo {
@@ -165,7 +154,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool LoadConsFromCustomLocation {
@@ -178,7 +166,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string CustomConsPath {
@@ -191,7 +178,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool SaveConsOnExit {
@@ -204,7 +190,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool CheckForUpdatesOnStartup {
@@ -217,7 +202,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ShowDescriptionTooltipsInTree {
@@ -230,7 +214,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ShowSystemTrayIcon {
@@ -243,7 +226,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool OpenTabsRightOfSelected {
@@ -256,7 +238,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ShowLogonInfoOnTabs {
@@ -269,7 +250,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool SingleClickOnConnectionOpensIt {
@@ -282,7 +262,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("noinfo")]
         public string EmptyCredentials {
@@ -295,7 +274,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DefaultUsername {
@@ -308,7 +286,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DefaultPassword {
@@ -321,7 +298,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string DefaultDomain {
@@ -334,7 +310,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool WriteLogFile {
@@ -347,7 +322,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool UseCustomPuttyPath {
@@ -360,7 +334,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool FirstStart {
@@ -373,7 +346,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ShowProtocolOnTabs {
@@ -398,7 +370,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool UpdateUseProxy {
@@ -411,7 +382,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string UpdateProxyAddress {
@@ -424,7 +394,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("80")]
         public int UpdateProxyPort {
@@ -437,7 +406,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool UpdateProxyUseAuthentication {
@@ -450,7 +418,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string UpdateProxyAuthUser {
@@ -463,7 +430,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string UpdateProxyAuthPass {
@@ -476,7 +442,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultDescription {
@@ -489,7 +454,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultUsername {
@@ -502,7 +466,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultPassword {
@@ -515,7 +478,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultDomain {
@@ -528,7 +490,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("RDP")]
         public string ConDefaultProtocol {
@@ -541,7 +502,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Default Settings")]
         public string ConDefaultPuttySession {
@@ -554,7 +514,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultUseConsoleSession {
@@ -567,7 +526,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("FitToWindow")]
         public string ConDefaultResolution {
@@ -580,7 +538,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Colors16Bit")]
         public string ConDefaultColors {
@@ -593,7 +550,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ConDefaultCacheBitmaps {
@@ -606,7 +562,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultDisplayWallpaper {
@@ -619,7 +574,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultDisplayThemes {
@@ -632,7 +586,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultRedirectKeys {
@@ -645,7 +598,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultRedirectDiskDrives {
@@ -658,7 +610,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultRedirectPrinters {
@@ -671,7 +622,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultRedirectPorts {
@@ -684,7 +634,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultRedirectSmartCards {
@@ -697,7 +646,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("DoNotPlay")]
         public string ConDefaultRedirectSound {
@@ -710,7 +658,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("2")]
         public int MaxPuttyWaitTime {
@@ -723,7 +670,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool SingleInstance {
@@ -736,7 +682,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool OpenConsFromLastSession {
@@ -749,7 +694,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool NoReconnect {
@@ -762,7 +706,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int AutoSaveEveryMinutes {
@@ -775,7 +718,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ExtAppsTBVisible {
@@ -788,7 +730,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ExtAppsTBShowText {
@@ -801,7 +742,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
         public global::System.Drawing.Point ExtAppsTBLocation {
@@ -814,7 +754,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Bottom")]
         public string ExtAppsTBParentDock {
@@ -827,7 +766,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool QuickyTBVisible {
@@ -840,7 +778,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("3, 24")]
         public global::System.Drawing.Point QuickyTBLocation {
@@ -853,7 +790,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Top")]
         public string QuickyTBParentDock {
@@ -878,7 +814,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool UseSQLServer {
@@ -891,7 +826,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SQLHost {
@@ -904,7 +838,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SQLUser {
@@ -917,7 +850,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string SQLPass {
@@ -930,7 +862,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultCacheBitmaps {
@@ -943,7 +874,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultColors {
@@ -956,7 +886,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultDescription {
@@ -969,7 +898,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultDisplayThemes {
@@ -982,7 +910,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultDisplayWallpaper {
@@ -995,7 +922,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultDomain {
@@ -1008,7 +934,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultIcon {
@@ -1021,7 +946,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultPassword {
@@ -1034,7 +958,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultPort {
@@ -1047,7 +970,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultProtocol {
@@ -1060,7 +982,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultPuttySession {
@@ -1073,7 +994,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRedirectDiskDrives {
@@ -1086,7 +1006,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRedirectKeys {
@@ -1099,7 +1018,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRedirectPorts {
@@ -1112,7 +1030,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRedirectPrinters {
@@ -1125,7 +1042,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRedirectSmartCards {
@@ -1138,7 +1054,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRedirectSound {
@@ -1151,7 +1066,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultResolution {
@@ -1164,7 +1078,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultUseConsoleSession {
@@ -1177,7 +1090,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultUsername {
@@ -1190,7 +1102,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultPanel {
@@ -1203,7 +1114,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("EncrBasic")]
         public string ConDefaultICAEncryptionStrength {
@@ -1216,7 +1126,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultICAEncryptionStrength {
@@ -1229,7 +1138,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultPreExtApp {
@@ -1242,7 +1150,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultPostExtApp {
@@ -1255,7 +1162,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultPreExtApp {
@@ -1268,7 +1174,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultPostExtApp {
@@ -1281,7 +1186,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool SetHostnameLikeDisplayName {
@@ -1294,7 +1198,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool DoubleClickOnTabClosesIt {
@@ -1307,7 +1210,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ReconnectOnDisconnect {
@@ -1320,7 +1222,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool AlwaysShowPanelSelectionDlg {
@@ -1333,7 +1234,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("AuthVNC")]
         public string ConDefaultVNCAuthMode {
@@ -1346,7 +1246,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("ColNormal")]
         public string ConDefaultVNCColors {
@@ -1359,7 +1258,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("SmartSAspect")]
         public string ConDefaultVNCSmartSizeMode {
@@ -1372,7 +1270,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultVNCViewOnly {
@@ -1385,7 +1282,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("CompNone")]
         public string ConDefaultVNCCompression {
@@ -1398,7 +1294,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("EncHextile")]
         public string ConDefaultVNCEncoding {
@@ -1411,7 +1306,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultVNCProxyIP {
@@ -1424,7 +1318,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultVNCProxyPassword {
@@ -1437,7 +1330,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int ConDefaultVNCProxyPort {
@@ -1450,7 +1342,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("ProxyNone")]
         public string ConDefaultVNCProxyType {
@@ -1463,7 +1354,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultVNCProxyUsername {
@@ -1476,7 +1366,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultVNCAuthMode {
@@ -1489,7 +1378,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultVNCColors {
@@ -1502,7 +1390,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultVNCSmartSizeMode {
@@ -1515,7 +1402,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultVNCViewOnly {
@@ -1528,7 +1414,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultVNCCompression {
@@ -1541,7 +1426,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultVNCEncoding {
@@ -1554,7 +1438,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultVNCProxyIP {
@@ -1567,7 +1450,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultVNCProxyPassword {
@@ -1580,7 +1462,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultVNCProxyPort {
@@ -1593,7 +1474,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultVNCProxyType {
@@ -1606,7 +1486,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultVNCProxyUsername {
@@ -1619,7 +1498,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool MinimizeToTray {
@@ -1632,7 +1510,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool SingleClickSwitchesToOpenConnection {
@@ -1645,7 +1522,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("NoAuth")]
         public string ConDefaultRDPAuthenticationLevel {
@@ -1658,7 +1534,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRDPAuthenticationLevel {
@@ -1671,7 +1546,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5500")]
         public int UVNCSCPort {
@@ -1684,7 +1558,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool StartupComponentsCheck {
@@ -1697,7 +1570,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string XULRunnerPath {
@@ -1710,7 +1582,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("IE")]
         public string ConDefaultRenderingEngine {
@@ -1723,7 +1594,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRenderingEngine {
@@ -1736,7 +1606,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultMacAddress {
@@ -1749,7 +1618,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultMacAddress {
@@ -1762,7 +1630,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool EncryptCompleteConnectionsFile {
@@ -1775,7 +1642,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultUserField {
@@ -1788,7 +1654,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultUserField {
@@ -1801,7 +1666,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultExtApp {
@@ -1814,7 +1678,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultExtApp {
@@ -1827,7 +1690,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string LastAnnouncement {
@@ -1840,7 +1702,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool CheckForUpdatesAsked {
@@ -1853,7 +1714,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("7")]
         public int CheckForUpdatesFrequencyDays {
@@ -1866,7 +1726,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("1980-01-01")]
         public global::System.DateTime CheckForUpdatesLastCheck {
@@ -1879,7 +1738,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool UpdatePending {
@@ -1892,7 +1750,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Never")]
         public string ConDefaultRDGatewayUsageMethod {
@@ -1905,7 +1762,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Yes")]
         public string ConDefaultRDGatewayUseConnectionCredentials {
@@ -1918,7 +1774,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("mRemoteNG")]
         public string ConDefaultIcon {
@@ -1931,7 +1786,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRDGatewayUsageMethod {
@@ -1944,7 +1798,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRDGatewayHostname {
@@ -1957,7 +1810,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRDGatewayUsername {
@@ -1970,7 +1822,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRDGatewayPassword {
@@ -1983,7 +1834,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRDGatewayDomain {
@@ -1996,7 +1846,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultRDGatewayUseConnectionCredentials {
@@ -2009,7 +1858,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("5")]
         public int RdpReconnectionCount {
@@ -2022,7 +1870,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string OverrideUICulture {
@@ -2044,7 +1891,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultRDGatewayHostname {
@@ -2057,7 +1903,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultRDGatewayUsername {
@@ -2070,7 +1915,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultRDGatewayPassword {
@@ -2083,7 +1927,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultRDGatewayDomain {
@@ -2096,7 +1939,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultEnableFontSmoothing {
@@ -2109,7 +1951,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultEnableFontSmoothing {
@@ -2122,7 +1963,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultEnableDesktopComposition {
@@ -2135,7 +1975,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultEnableDesktopComposition {
@@ -2148,7 +1987,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("4")]
         public int ConfirmCloseConnection {
@@ -2161,7 +1999,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public global::System.Drawing.Size MainFormRestoreSize {
             get {
@@ -2173,7 +2010,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         public global::System.Drawing.Point MainFormRestoreLocation {
             get {
@@ -2185,7 +2021,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("mRemoteNG")]
         public string SQLDatabaseName {
@@ -2198,7 +2033,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("10")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
@@ -2212,7 +2046,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("{0}.{1:yyyyMMdd-HHmmssffff}.backup")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
@@ -2226,7 +2059,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultUseCredSsp {
@@ -2239,7 +2071,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ConDefaultUseCredSsp {
@@ -2252,7 +2083,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
@@ -2266,7 +2096,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
@@ -2280,7 +2109,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("release")]
         public string UpdateChannel {
@@ -2290,7 +2118,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ThemeName {
@@ -2303,7 +2130,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ShowConfigHelpText {
@@ -2316,7 +2142,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string PuttySavedSessionsName {
@@ -2329,7 +2154,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string PuttySavedSessionsPanel {
@@ -2342,7 +2166,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool CompatibilityWarnLenovoAutoScrollUtility {
@@ -2355,7 +2178,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://update.mremoteng.org/announcement.txt")]
         public string AnnouncementAddress {
@@ -2365,7 +2187,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("https://update.mremoteng.org/")]
         public string UpdateAddress {
@@ -2375,7 +2196,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string ConDefaultLoadBalanceInfo {
@@ -2388,7 +2208,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool ConDefaultAutomaticResize {
@@ -2401,7 +2220,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultLoadBalanceInfo {
@@ -2414,7 +2232,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool InhDefaultAutomaticResize {
@@ -2427,7 +2244,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("RDP")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
@@ -2441,7 +2257,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("9/9, 33/8")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]
@@ -2455,7 +2270,6 @@ namespace mRemoteNG.My {
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
-        //[global::System.Configuration.SettingsProviderAttribute(typeof(mRemoteNG.Config.Settings.Providers.ChooseProvider))]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("9/8, 34/8")]
         [global::System.Configuration.SettingsManageabilityAttribute(global::System.Configuration.SettingsManageability.Roaming)]

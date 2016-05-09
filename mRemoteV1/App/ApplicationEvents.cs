@@ -1,9 +1,9 @@
-using System;
-using System.Diagnostics;
-using Microsoft.VisualBasic.CompilerServices;
+//using System;
+//using System.Diagnostics;
+//using Microsoft.VisualBasic.CompilerServices;
 
-namespace mRemoteNG.My
-{
+//namespace mRemoteNG.App
+//{
 	// The following events are available for MyApplication:
 	//
 	// Startup: Raised when the application starts, before the startup form is created.
@@ -11,71 +11,71 @@ namespace mRemoteNG.My
 	// UnhandledException: Raised if the application encounters an unhandled exception.
 	// StartupNextInstance: Raised when launching a single-instance application and the application is already active.
 	// NetworkAvailabilityChanged: Raised when the network connection is connected or disconnected.
-	partial class MyApplication : Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase
-	{
-		public System.Threading.Mutex mutex;
+//	partial class MyApplication : Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase
+//	{
+//		public System.Threading.Mutex mutex;
 			
-		private void MyApplication_Startup(object sender, Microsoft.VisualBasic.ApplicationServices.StartupEventArgs e)
-		{
-			if (Settings.Default.SingleInstance)
-			{
-				string mutexID = "mRemoteNG_SingleInstanceMutex";
-				mutex = new System.Threading.Mutex(false, mutexID);
+//		private void MyApplication_Startup(object sender, Microsoft.VisualBasic.ApplicationServices.StartupEventArgs e)
+//		{
+//			if (mRemoteNG.Settings.Default.SingleInstance)
+//			{
+//				string mutexID = "mRemoteNG_SingleInstanceMutex";
+//				mutex = new System.Threading.Mutex(false, mutexID);
 					
-				if (!mutex.WaitOne(0, false))
-				{
-					try
-					{
-						SwitchToCurrentInstance();
-					}
-					catch (Exception)
-					{
-					}
+//				if (!mutex.WaitOne(0, false))
+//				{
+//					try
+//					{
+//						SwitchToCurrentInstance();
+//					}
+//					catch (Exception)
+//					{
+//					}
 						
-					ProjectData.EndApp();
-				}
+//					ProjectData.EndApp();
+//				}
 					
-				GC.KeepAlive(mutex);
-			}
-		}
+//				GC.KeepAlive(mutex);
+//			}
+//		}
 			
-		private IntPtr GetCurrentInstanceWindowHandle()
-		{
-			IntPtr hWnd = IntPtr.Zero;
-			Process curProc = Process.GetCurrentProcess();
-			foreach (Process proc in Process.GetProcessesByName(curProc.ProcessName))
-			{
-				if (proc.Id != curProc.Id && proc.MainModule.FileName == curProc.MainModule.FileName && proc.MainWindowHandle != IntPtr.Zero)
-				{
-					hWnd = proc.MainWindowHandle;
-					break;
-				}
-			}
-			return hWnd;
-		}
+//		private IntPtr GetCurrentInstanceWindowHandle()
+//		{
+//			IntPtr hWnd = IntPtr.Zero;
+//			Process curProc = Process.GetCurrentProcess();
+//			foreach (Process proc in Process.GetProcessesByName(curProc.ProcessName))
+//			{
+//				if (proc.Id != curProc.Id && proc.MainModule.FileName == curProc.MainModule.FileName && proc.MainWindowHandle != IntPtr.Zero)
+//				{
+//					hWnd = proc.MainWindowHandle;
+//					break;
+//				}
+//			}
+//			return hWnd;
+//		}
 			
-		private void SwitchToCurrentInstance()
-		{
-			IntPtr hWnd = GetCurrentInstanceWindowHandle();
-			if (hWnd != IntPtr.Zero)
-			{
-				//Restore window if minimized. Do not restore if already in
-				//normal or maximised window state, since we don't want to
-				//change the current state of the window.
-				if (App.Native.IsIconic(hWnd) != 0)
-				{
-					App.Native.ShowWindow(hWnd, App.Native.SW_RESTORE);
-				}
-				App.Native.SetForegroundWindow(hWnd);
-			}
-		}
+//		private void SwitchToCurrentInstance()
+//		{
+//			IntPtr hWnd = GetCurrentInstanceWindowHandle();
+//			if (hWnd != IntPtr.Zero)
+//			{
+//				//Restore window if minimized. Do not restore if already in
+//				//normal or maximised window state, since we don't want to
+//				//change the current state of the window.
+//				if (App.Native.IsIconic(hWnd) != 0)
+//				{
+//					App.Native.ShowWindow(hWnd, App.Native.SW_RESTORE);
+//				}
+//				App.Native.SetForegroundWindow(hWnd);
+//			}
+//		}
 			
-		private void MyApplication_Shutdown(object sender, System.EventArgs e)
-		{
-			if (mutex != null)
-			{
-				mutex.Close();
-			}
-		}
-	}
-}
+//		private void MyApplication_Shutdown(object sender, System.EventArgs e)
+//		{
+//			if (mutex != null)
+//			{
+//				mutex.Close();
+//			}
+//		}
+//	}
+//}

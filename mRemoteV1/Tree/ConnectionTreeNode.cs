@@ -5,6 +5,7 @@ using mRemoteNG.Images;
 using System;
 using System.Windows.Forms;
 using mRemoteNG.Messages;
+using mRemoteNG.My;
 using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tree.Root;
 
@@ -129,17 +130,17 @@ namespace mRemoteNG.Tree
 				{
 					case TreeNodeType.Connection:
 					case TreeNodeType.PuttySession:
-						defaultName = My.Language.strNewConnection;
+						defaultName = Language.strNewConnection;
                         treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
                         treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
 						break;
 					case TreeNodeType.Container:
-						defaultName = My.Language.strNewFolder;
+						defaultName = Language.strNewFolder;
                         treeNode.ImageIndex = (int)TreeImageType.Container;
                         treeNode.SelectedImageIndex = (int)TreeImageType.Container;
 						break;
 					case TreeNodeType.Root:
-						defaultName = My.Language.strNewRoot;
+						defaultName = Language.strNewRoot;
                         treeNode.ImageIndex = (int)TreeImageType.Root;
                         treeNode.SelectedImageIndex = (int)TreeImageType.Root;
 						break;
@@ -172,7 +173,7 @@ namespace mRemoteNG.Tree
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(My.Language.strErrorCloneNodeFailed, ex.Message));
+				Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strErrorCloneNodeFailed, ex.Message));
 			}
 		}
 
@@ -255,7 +256,7 @@ namespace mRemoteNG.Tree
                 return;
 
             connectionInfo.Name = newName;
-            if (My.Settings.Default.SetHostnameLikeDisplayName)
+            if (mRemoteNG.Settings.Default.SetHostnameLikeDisplayName)
                 connectionInfo.Hostname = newName;
         }
         #endregion

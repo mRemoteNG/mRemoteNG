@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG.Connection.Protocol
@@ -51,10 +52,10 @@ namespace mRemoteNG.Connection.Protocol
 				_process.Exited += ProcessExited;
 						
 				_process.Start();
-				_process.WaitForInputIdle(Convert.ToInt32(My.Settings.Default.MaxPuttyWaitTime * 1000));
+				_process.WaitForInputIdle(Convert.ToInt32(mRemoteNG.Settings.Default.MaxPuttyWaitTime * 1000));
 						
 				int startTicks = Environment.TickCount;
-				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + (My.Settings.Default.MaxPuttyWaitTime * 1000))
+				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + (mRemoteNG.Settings.Default.MaxPuttyWaitTime * 1000))
 				{
 					_process.Refresh();
 					if (!(_process.MainWindowTitle == "Default IME"))
@@ -68,10 +69,10 @@ namespace mRemoteNG.Connection.Protocol
 				}
 						
 				Native.SetParent(_handle, InterfaceControl.Handle);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strIntAppStuff, true);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(My.Language.strIntAppHandle, _handle.ToString()), true);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(My.Language.strIntAppTitle, _process.MainWindowTitle), true);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(My.Language.strIntAppParentHandle, InterfaceControl.Parent.Handle.ToString()), true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.strIntAppStuff, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppHandle, _handle.ToString()), true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppTitle, _process.MainWindowTitle), true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppParentHandle, InterfaceControl.Parent.Handle.ToString()), true);
 						
 				Resize(this, new EventArgs());
 				base.Connect();
@@ -79,7 +80,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(My.Language.strIntAppConnectionFailed, ex);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strIntAppConnectionFailed, ex);
 				return false;
 			}
 		}
@@ -96,7 +97,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: My.Language.strIntAppFocusFailed, ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(message: Language.strIntAppFocusFailed, ex: ex, logOnly: true);
 			}
 		}
 				
@@ -112,7 +113,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: My.Language.strIntAppResizeFailed, ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(message: Language.strIntAppResizeFailed, ex: ex, logOnly: true);
 			}
 		}
 				
@@ -127,7 +128,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: My.Language.strIntAppKillFailed, ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(message: Language.strIntAppKillFailed, ex: ex, logOnly: true);
 			}
 					
 			try
@@ -139,7 +140,7 @@ namespace mRemoteNG.Connection.Protocol
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: My.Language.strIntAppDisposeFailed, ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage(message: Language.strIntAppDisposeFailed, ex: ex, logOnly: true);
 			}
 					
 			base.Close();
