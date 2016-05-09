@@ -9,8 +9,11 @@ node('windows') {
 	echo "BranchName: ${branchName}"
 	git([url: gitUrl, branch: branchName])
 
-	stage 'Build mRemoteNG'
+	stage 'Build mRemoteNG (Normal)'
 	bat "\"${vsToolsDir}\\VsDevCmd.bat\" && msbuild.exe /nologo \"${jobDir}\\mRemoteV1.sln\""
+
+	stage 'Build mRemoteNG (Portable)'
+	bat "\"${vsToolsDir}\\VsDevCmd.bat\" && msbuild.exe /nologo /p:Configuration=\"Debug Portable\" \"${jobDir}\\mRemoteV1.sln\""
 
 	stage 'Run Unit Tests'
 	def nunitTestAdapterPath = "C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\VisualStudio\\14.0\\Extensions"

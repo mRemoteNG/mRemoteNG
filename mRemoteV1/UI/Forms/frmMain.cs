@@ -167,9 +167,9 @@ namespace mRemoteNG.UI.Forms
             Startup.LogStartupData();
 
             //Runtime.Startup.CheckCompatibility();
-			
-			// Create gui config load and save objects
-			SettingsLoader settingsLoader = new SettingsLoader(this);
+
+            // Create gui config load and save objects
+            SettingsLoader settingsLoader = new SettingsLoader(this);
 			settingsLoader.LoadSettings();
 			
 			Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now));
@@ -181,9 +181,9 @@ namespace mRemoteNG.UI.Forms
 			fpChainedWindowHandle = Native.SetClipboardViewer(this.Handle);
             Runtime.MessageCollector = new MessageCollector(Windows.errorsForm);
             Runtime.WindowList = new WindowList();
-            Startup.CreatePanels();
-            Startup.SetDefaultLayout();
-			IeBrowserEmulation.Register();
+            //Startup.CreatePanels();
+            //Startup.SetDefaultLayout();
+            IeBrowserEmulation.Register();
             Startup.GetConnectionIcons();
             Windows.treePanel.Focus();
             ConnectionTree.TreeView = Windows.treeForm.tvConnections;

@@ -1,36 +1,37 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.IO;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
-using System.Xml;
 using System.Threading;
 using System.Globalization;
 using mRemoteNG.Themes;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Window;
 
 
 namespace mRemoteNG.Config.Settings
 {
-	public class SettingsLoader
+    public class SettingsLoader
 	{
 		private frmMain _MainForm;
+        private LayoutSettingsLoader _layoutSettingsLoader;
+        private ExternalAppsLoader _externalAppsLoader;
 
         public frmMain MainForm
 		{
-			get { return this._MainForm; }
-			set { this._MainForm = value; }
+			get { return _MainForm; }
+			set { _MainForm = value; }
 		}
 		
         
 		public SettingsLoader(frmMain MainForm)
 		{
-			this._MainForm = MainForm;
-		}
+            _MainForm = MainForm;
+            _layoutSettingsLoader = new LayoutSettingsLoader(_MainForm);
+            _externalAppsLoader = new ExternalAppsLoader(_MainForm);
+        }
         
         #region Public Methods
         public void LoadSettings()
@@ -71,10 +72,13 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetAlwaysShowPanelTabs()
         {
+<<<<<<< HEAD
             if (mRemoteNG.Settings.Default.AlwaysShowPanelTabs)
             {
+=======
+            if (My.Settings.Default.AlwaysShowPanelTabs)
+>>>>>>> refs/remotes/origin/csharp_conv
                 frmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
-            }
         }
 
         private static void SetTheme()
@@ -130,15 +134,20 @@ namespace mRemoteNG.Config.Settings
             if (newBounds.Top > screenBounds.Bottom - minVertical)
                 newBounds.Y = screenBounds.Bottom - minVertical;
 
-            this._MainForm.Location = newBounds.Location;
+            _MainForm.Location = newBounds.Location;
         }
 
         private void SetAutoSave()
         {
             if (mRemoteNG.Settings.Default.AutoSaveEveryMinutes > 0)
             {
+<<<<<<< HEAD
                 this._MainForm.tmrAutoSave.Interval = Convert.ToInt32(mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000);
                 this._MainForm.tmrAutoSave.Enabled = true;
+=======
+                _MainForm.tmrAutoSave.Interval = Convert.ToInt32(My.Settings.Default.AutoSaveEveryMinutes * 60000);
+                _MainForm.tmrAutoSave.Enabled = true;
+>>>>>>> refs/remotes/origin/csharp_conv
             }
         }
 
@@ -241,45 +250,12 @@ namespace mRemoteNG.Config.Settings
 		
 		public void LoadPanelsFromXML()
 		{
-			try
-			{
-                Windows.treePanel = null;
-                Windows.configPanel = null;
-                Windows.errorsPanel = null;
-						
-				while (MainForm.pnlDock.Contents.Count > 0)
-				{
-                    WeifenLuo.WinFormsUI.Docking.DockContent dc = (WeifenLuo.WinFormsUI.Docking.DockContent)MainForm.pnlDock.Contents[0];
-					dc.Close();
-				}
-
-                Startup.CreatePanels();
-						
-				string oldPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "\\" + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName + "\\" + App.Info.SettingsFileInfo.LayoutFileName;
-				string newPath = App.Info.SettingsFileInfo.SettingsPath + "\\" + App.Info.SettingsFileInfo.LayoutFileName;
-				if (File.Exists(newPath))
-				{
-					MainForm.pnlDock.LoadFromXml(newPath, GetContentFromPersistString);
-                #if !PORTABLE
-				}
-				else if (File.Exists(oldPath))
-				{
-					MainForm.pnlDock.LoadFromXml(oldPath, GetContentFromPersistString);
-                #endif
-				}
-				else
-				{
-                    Startup.SetDefaultLayout();
-				}
-			}
-			catch (Exception ex)
-			{
-                Runtime.Log.Error("LoadPanelsFromXML failed" + Environment.NewLine + ex.Message);
-			}
+            _layoutSettingsLoader.LoadPanelsFromXML();
 		}
 		
 		public void LoadExternalAppsFromXML()
 		{
+<<<<<<< HEAD
 			string oldPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "\\" + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName + "\\" + App.Info.SettingsFileInfo.ExtAppsFilesName;
 			string newPath = App.Info.SettingsFileInfo.SettingsPath + "\\" + App.Info.SettingsFileInfo.ExtAppsFilesName;
 			XmlDocument xDom = new XmlDocument();
@@ -324,34 +300,10 @@ namespace mRemoteNG.Config.Settings
 					
 			frmMain.Default.AddExternalToolsToToolBar();
 		}
+=======
+            _externalAppsLoader.LoadExternalAppsFromXML();
+        }
+>>>>>>> refs/remotes/origin/csharp_conv
         #endregion
-		
-		private IDockContent GetContentFromPersistString(string persistString)
-		{
-			// pnlLayout.xml persistence XML fix for refactoring to mRemoteNG
-			if (persistString.StartsWith("mRemote."))
-				persistString = persistString.Replace("mRemote.", "mRemoteNG.");
-					
-			try
-			{
-				if (persistString == typeof(ConfigWindow).ToString())
-                    return Windows.configPanel;
-						
-				if (persistString == typeof(ConnectionTreeWindow).ToString())
-                    return Windows.treePanel;
-						
-				if (persistString == typeof(ErrorAndInfoWindow).ToString())
-                    return Windows.errorsPanel;
-				
-				if (persistString == typeof(ScreenshotManagerWindow).ToString())
-                    return Windows.screenshotPanel;
-			}
-			catch (Exception ex)
-			{
-                Runtime.Log.Error("GetContentFromPersistString failed" + Environment.NewLine + ex.Message);
-			}
-					
-			return null;
-		}
 	}
 }
