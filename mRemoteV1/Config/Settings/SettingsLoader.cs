@@ -72,12 +72,7 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetAlwaysShowPanelTabs()
         {
-<<<<<<< HEAD
             if (mRemoteNG.Settings.Default.AlwaysShowPanelTabs)
-            {
-=======
-            if (My.Settings.Default.AlwaysShowPanelTabs)
->>>>>>> refs/remotes/origin/csharp_conv
                 frmMain.Default.pnlDock.DocumentStyle = DocumentStyle.DockingWindow;
         }
 
@@ -141,13 +136,8 @@ namespace mRemoteNG.Config.Settings
         {
             if (mRemoteNG.Settings.Default.AutoSaveEveryMinutes > 0)
             {
-<<<<<<< HEAD
-                this._MainForm.tmrAutoSave.Interval = Convert.ToInt32(mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000);
-                this._MainForm.tmrAutoSave.Enabled = true;
-=======
-                _MainForm.tmrAutoSave.Interval = Convert.ToInt32(My.Settings.Default.AutoSaveEveryMinutes * 60000);
+                _MainForm.tmrAutoSave.Interval = Convert.ToInt32(mRemoteNG.Settings.Default.AutoSaveEveryMinutes * 60000);
                 _MainForm.tmrAutoSave.Enabled = true;
->>>>>>> refs/remotes/origin/csharp_conv
             }
         }
 
@@ -255,55 +245,8 @@ namespace mRemoteNG.Config.Settings
 		
 		public void LoadExternalAppsFromXML()
 		{
-<<<<<<< HEAD
-			string oldPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData) + "\\" + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName + "\\" + App.Info.SettingsFileInfo.ExtAppsFilesName;
-			string newPath = App.Info.SettingsFileInfo.SettingsPath + "\\" + App.Info.SettingsFileInfo.ExtAppsFilesName;
-			XmlDocument xDom = new XmlDocument();
-			if (File.Exists(newPath))
-			{
-				xDom.Load(newPath);
-            #if !PORTABLE
-			}
-			else if (File.Exists(oldPath))
-			{
-				xDom.Load(oldPath);
-            #endif
-			}
-			else
-			{
-				return;
-			}
-					
-			foreach (XmlElement xEl in xDom.DocumentElement.ChildNodes)
-			{
-				Tools.ExternalTool extA = new Tools.ExternalTool();
-				extA.DisplayName = xEl.Attributes["DisplayName"].Value;
-				extA.FileName = xEl.Attributes["FileName"].Value;
-				extA.Arguments = xEl.Attributes["Arguments"].Value;
-						
-				if (xEl.HasAttribute("WaitForExit"))
-				{
-					extA.WaitForExit = bool.Parse(xEl.Attributes["WaitForExit"].Value);
-				}
-						
-				if (xEl.HasAttribute("TryToIntegrate"))
-				{
-					extA.TryIntegrate = bool.Parse(xEl.Attributes["TryToIntegrate"].Value);
-				}
-
-                Runtime.ExternalTools.Add(extA);
-			}
-					
-			MainForm.SwitchToolBarText(Convert.ToBoolean(mRemoteNG.Settings.Default.ExtAppsTBShowText));
-					
-			xDom = null;
-					
-			frmMain.Default.AddExternalToolsToToolBar();
-		}
-=======
             _externalAppsLoader.LoadExternalAppsFromXML();
         }
->>>>>>> refs/remotes/origin/csharp_conv
         #endregion
 	}
 }
