@@ -1,3 +1,4 @@
+#if false
 using System;
 using System.Collections.Specialized;
 using System.Configuration;
@@ -230,3 +231,4 @@ namespace mRemoteNG.Config.Settings.Providers
 		}
 	}
 }
+#endif

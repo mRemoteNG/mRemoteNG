@@ -1,5 +1,6 @@
 ﻿namespace mRemoteNG.Config.Settings.Providers
 {
+#if false
 #if PORTABLE
     public class ChooseProvider : PortableSettingsProvider
 #else
@@ -7,4 +8,5 @@
 #endif
     {
     }
+#endif
 }
