@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{4934A491-40BC-4E5B-9166-EA1169A220F6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>mRemoteNG.Program</StartupObject>
+    <StartupObject>mRemoteNG.App.ProgramRoot</StartupObject>
     <RootNamespace>mRemoteNG</RootNamespace>
     <AssemblyName>mRemoteNG</AssemblyName>
     <MyType>WindowsForms</MyType>
@@ -220,7 +220,6 @@
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Images\ErrorImageType.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Tools\ArgumentParser.cs" />
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
