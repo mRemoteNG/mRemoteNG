@@ -7,6 +7,7 @@ using System.IO;
 using System.ComponentModel;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG.Tools
@@ -126,7 +127,7 @@ namespace mRemoteNG.Tools
             newConnectionInfo.Protocol = ProtocolType.IntApp;
             newConnectionInfo.ExtApp = DisplayName;
             newConnectionInfo.Name = DisplayName;
-            newConnectionInfo.Panel = My.Language.strMenuExternalTools;
+            newConnectionInfo.Panel = Language.strMenuExternalTools;
         }
 	}
 }

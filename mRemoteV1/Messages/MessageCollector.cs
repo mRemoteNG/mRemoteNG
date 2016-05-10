@@ -38,18 +38,18 @@ namespace mRemoteNG.Messages
                 return;
             }
 
-            if (Settings.Default.SwitchToMCOnInformation && nMsg.MsgClass == MessageClass.InformationMsg)
+            if (mRemoteNG.Settings.Default.SwitchToMCOnInformation && nMsg.MsgClass == MessageClass.InformationMsg)
                 AddInfoMessage(OnlyLog, nMsg);
             
-            if (Settings.Default.SwitchToMCOnWarning && nMsg.MsgClass == MessageClass.WarningMsg)
+            if (mRemoteNG.Settings.Default.SwitchToMCOnWarning && nMsg.MsgClass == MessageClass.WarningMsg)
                 AddWarningMessage(OnlyLog, nMsg);
 
-            if (Settings.Default.SwitchToMCOnError && nMsg.MsgClass == MessageClass.ErrorMsg)
+            if (mRemoteNG.Settings.Default.SwitchToMCOnError && nMsg.MsgClass == MessageClass.ErrorMsg)
                 AddErrorMessage(OnlyLog, nMsg);
 
             if (!OnlyLog)
             {
-                if (Settings.Default.ShowNoMessageBoxes)
+                if (mRemoteNG.Settings.Default.ShowNoMessageBoxes)
                     _ECTimer.Enabled = true;
                 else
                     ShowMessageBox(nMsg);
@@ -62,14 +62,14 @@ namespace mRemoteNG.Messages
         private void AddInfoMessage(bool OnlyLog, Message nMsg)
         {
             Debug.Print("Info: " + nMsg.MsgText);
-            if (Settings.Default.WriteLogFile)
+            if (mRemoteNG.Settings.Default.WriteLogFile)
                 Runtime.Log.Info(nMsg.MsgText);
         }
 
         private void AddWarningMessage(bool OnlyLog, Message nMsg)
         {
             Debug.Print("Warning: " + nMsg.MsgText);
-            if (Settings.Default.WriteLogFile)
+            if (mRemoteNG.Settings.Default.WriteLogFile)
                 Runtime.Log.Warn(nMsg.MsgText);
         }
 
@@ -82,7 +82,7 @@ namespace mRemoteNG.Messages
         private static void AddReportMessage(Message nMsg)
         {
             Debug.Print("Report: " + nMsg.MsgText);
-            if (Settings.Default.WriteLogFile)
+            if (mRemoteNG.Settings.Default.WriteLogFile)
                 Runtime.Log.Info(nMsg.MsgText);
         }
 

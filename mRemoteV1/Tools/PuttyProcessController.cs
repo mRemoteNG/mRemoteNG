@@ -7,9 +7,9 @@ namespace mRemoteNG.Tools
 		public bool Start(CommandLineArguments arguments = null)
 		{
 			string filename = "";
-			if (My.Settings.Default.UseCustomPuttyPath)
+			if (mRemoteNG.Settings.Default.UseCustomPuttyPath)
 			{
-				filename = My.Settings.Default.CustomPuttyPath;
+				filename = mRemoteNG.Settings.Default.CustomPuttyPath;
 			}
 			else
 			{

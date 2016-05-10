@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG.Controls
@@ -183,7 +184,7 @@ namespace mRemoteNG.Controls
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(My.Language.strQuickConnectAddFailed, ex, Messages.MessageClass.ErrorMsg, true);
+				Runtime.MessageCollector.AddExceptionMessage(Language.strQuickConnectAddFailed, ex, Messages.MessageClass.ErrorMsg, true);
 			}
 		}
 			

@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using System.Text;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
+using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 
 
@@ -119,7 +120,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//clmMessage
 			//
-			this.clmMessage.Text = global::mRemoteNG.My.Language.strColumnMessage;
+			this.clmMessage.Text = Language.strColumnMessage;
 			this.clmMessage.Width = 184;
 			//
 			//cMenMC
@@ -132,19 +133,19 @@ namespace mRemoteNG.UI.Window
 			//
 			//cMenMCCopy
 			//
-			this.cMenMCCopy.Image = My.Resources.Copy;
+			this.cMenMCCopy.Image = Resources.Copy;
 			this.cMenMCCopy.Name = "cMenMCCopy";
 			this.cMenMCCopy.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.C);
 			this.cMenMCCopy.Size = new System.Drawing.Size(152, 22);
-			this.cMenMCCopy.Text = global::mRemoteNG.My.Language.strMenuCopy;
+			this.cMenMCCopy.Text = Language.strMenuCopy;
 			//
 			//cMenMCDelete
 			//
-			this.cMenMCDelete.Image = My.Resources.Delete;
+			this.cMenMCDelete.Image = Resources.Delete;
 			this.cMenMCDelete.Name = "cMenMCDelete";
 			this.cMenMCDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
 			this.cMenMCDelete.Size = new System.Drawing.Size(152, 22);
-			this.cMenMCDelete.Text = global::mRemoteNG.My.Language.strMenuDelete;
+			this.cMenMCDelete.Text = Language.strMenuDelete;
 			//
 			//imgListMC
 			//
@@ -159,9 +160,9 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.pnlErrorMsg);
 			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.HideOnClose = true;
-			this.Icon = My.Resources.Info_Icon;
+			this.Icon = Resources.Info_Icon;
 			this.Name = "ErrorsAndInfos";
-			this.TabText = global::mRemoteNG.My.Language.strMenuNotifications;
+			this.TabText = Language.strMenuNotifications;
 			this.Text = "Notifications";
 			this.pnlErrorMsg.ResumeLayout(false);
 			this.pnlErrorMsg.PerformLayout();
@@ -195,11 +196,11 @@ namespace mRemoteNG.UI.Window
 				
 		private void ApplyLanguage()
 		{
-			clmMessage.Text = My.Language.strColumnMessage;
-			cMenMCCopy.Text = My.Language.strMenuNotificationsCopyAll;
-			cMenMCDelete.Text = My.Language.strMenuNotificationsDeleteAll;
-			TabText = My.Language.strMenuNotifications;
-			Text = My.Language.strMenuNotifications;
+			clmMessage.Text = Language.strColumnMessage;
+			cMenMCCopy.Text = Language.strMenuNotificationsCopyAll;
+			cMenMCDelete.Text = Language.strMenuNotificationsDeleteAll;
+			TabText = Language.strMenuNotifications;
+			Text = Language.strMenuNotifications;
 		}
         #endregion
 				
@@ -217,9 +218,9 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
 		private void FillImageList()
 		{
-			this.imgListMC.Images.Add(My.Resources.InformationSmall);
-			this.imgListMC.Images.Add(My.Resources.WarningSmall);
-			this.imgListMC.Images.Add(My.Resources.ErrorSmall);
+			this.imgListMC.Images.Add(Resources.InformationSmall);
+			this.imgListMC.Images.Add(Resources.WarningSmall);
+			this.imgListMC.Images.Add(Resources.ErrorSmall);
 		}
 				
 				
@@ -352,17 +353,17 @@ namespace mRemoteNG.UI.Window
 				switch (eMsg.MsgClass)
 				{
 					case Messages.MessageClass.InformationMsg:
-						this.pbError.Image = My.Resources.Information;
+						this.pbError.Image = Resources.Information;
 						this.pnlErrorMsg.BackColor = Color.LightSteelBlue;
 						this.txtMsgText.BackColor = Color.LightSteelBlue;
 						break;
 					case Messages.MessageClass.WarningMsg:
-						this.pbError.Image = My.Resources.Warning;
+						this.pbError.Image = Resources.Warning;
 						this.pnlErrorMsg.BackColor = Color.Gold;
 						this.txtMsgText.BackColor = Color.Gold;
 						break;
 					case Messages.MessageClass.ErrorMsg:
-						this.pbError.Image = My.Resources._Error;
+						this.pbError.Image = Resources._Error;
 						this.pnlErrorMsg.BackColor = Color.IndianRed;
 						this.txtMsgText.BackColor = Color.IndianRed;
 						break;
@@ -392,13 +393,13 @@ namespace mRemoteNG.UI.Window
 					
 			if (lvErrorCollector.SelectedItems.Count > 0)
 			{
-				cMenMCCopy.Text = My.Language.strMenuCopy;
-				cMenMCDelete.Text = My.Language.strMenuNotificationsDelete;
+				cMenMCCopy.Text = Language.strMenuCopy;
+				cMenMCDelete.Text = Language.strMenuNotificationsDelete;
 			}
 			else
 			{
-				cMenMCCopy.Text = My.Language.strMenuNotificationsCopyAll;
-				cMenMCDelete.Text = My.Language.strMenuNotificationsDeleteAll;
+				cMenMCCopy.Text = Language.strMenuNotificationsCopyAll;
+				cMenMCDelete.Text = Language.strMenuNotificationsDeleteAll;
 			}
 		}
 				

@@ -3,6 +3,7 @@ using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
+using mRemoteNG.My;
 
 namespace mRemoteNG.Connection.Protocol.Http
 {
@@ -23,7 +24,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 				if (RenderingEngine == RenderingEngine.Gecko)
 				{
 					this.Control = new MiniGeckoBrowser.MiniGeckoBrowser();
-					(this.Control as MiniGeckoBrowser.MiniGeckoBrowser).XULrunnerPath = Convert.ToString(My.Settings.Default.XULRunnerPath);
+					(this.Control as MiniGeckoBrowser.MiniGeckoBrowser).XULrunnerPath = Convert.ToString(mRemoteNG.Settings.Default.XULRunnerPath);
 				}
 				else
 				{
@@ -34,7 +35,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectionFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strHttpConnectionFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -80,7 +81,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpSetPropsFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strHttpSetPropsFailed + Environment.NewLine + ex.Message, true);
 				return false;
 			}
 		}
@@ -140,7 +141,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strHttpConnectFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strHttpConnectFailed + Environment.NewLine + ex.Message, true);
 				return false;
 			}
 		}
@@ -227,7 +228,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.strHttpDocumentTileChangeFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 
@@ -278,7 +279,7 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strHttpDocumentTileChangeFailed + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.strHttpDocumentTileChangeFailed + Environment.NewLine + ex.Message, true);
             }
         }
         #endregion

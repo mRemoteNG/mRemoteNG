@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 
 
@@ -269,12 +270,12 @@ namespace mRemoteNG.Tools
 			{
 				if (value.GetType() == typeof(string))
 				{
-					if ((value).ToString().ToLower() == My.Language.strYes.ToLower())
+					if ((value).ToString().ToLower() == Language.strYes.ToLower())
 					{
 						return true;
 					}
 						
-					if ((value).ToString().ToLower() == My.Language.strNo.ToLower())
+					if ((value).ToString().ToLower() == Language.strNo.ToLower())
 					{
 						return false;
 					}
@@ -289,7 +290,7 @@ namespace mRemoteNG.Tools
 			{
 				if (destinationType == typeof(string))
 				{
-					return ((Convert.ToBoolean(value)) ? My.Language.strYes : My.Language.strNo);
+					return ((Convert.ToBoolean(value)) ? Language.strYes : Language.strNo);
 				}
 					
 				return base.ConvertTo(context, culture, value, destinationType);

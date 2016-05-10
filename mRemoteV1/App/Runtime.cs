@@ -21,6 +21,7 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -190,55 +191,55 @@ namespace mRemoteNG.App
 			
 		public static void DefaultConnectionToSettings()
 		{
-			My.Settings.Default.ConDefaultDescription = DefaultConnection.Description;
-			My.Settings.Default.ConDefaultIcon = DefaultConnection.Icon;
-			My.Settings.Default.ConDefaultUsername = DefaultConnection.Username;
-			My.Settings.Default.ConDefaultPassword = DefaultConnection.Password;
-			My.Settings.Default.ConDefaultDomain = DefaultConnection.Domain;
-			My.Settings.Default.ConDefaultProtocol = DefaultConnection.Protocol.ToString();
-			My.Settings.Default.ConDefaultPuttySession = DefaultConnection.PuttySession;
-			My.Settings.Default.ConDefaultICAEncryptionStrength = DefaultConnection.ICAEncryption.ToString();
-			My.Settings.Default.ConDefaultRDPAuthenticationLevel = DefaultConnection.RDPAuthenticationLevel.ToString();
-			My.Settings.Default.ConDefaultLoadBalanceInfo = DefaultConnection.LoadBalanceInfo;
-			My.Settings.Default.ConDefaultUseConsoleSession = DefaultConnection.UseConsoleSession;
-			My.Settings.Default.ConDefaultUseCredSsp = DefaultConnection.UseCredSsp;
-			My.Settings.Default.ConDefaultRenderingEngine = DefaultConnection.RenderingEngine.ToString();
-			My.Settings.Default.ConDefaultResolution = DefaultConnection.Resolution.ToString();
-			My.Settings.Default.ConDefaultAutomaticResize = DefaultConnection.AutomaticResize;
-			My.Settings.Default.ConDefaultColors = DefaultConnection.Colors.ToString();
-			My.Settings.Default.ConDefaultCacheBitmaps = DefaultConnection.CacheBitmaps;
-			My.Settings.Default.ConDefaultDisplayWallpaper = DefaultConnection.DisplayWallpaper;
-			My.Settings.Default.ConDefaultDisplayThemes = DefaultConnection.DisplayThemes;
-			My.Settings.Default.ConDefaultEnableFontSmoothing = DefaultConnection.EnableFontSmoothing;
-			My.Settings.Default.ConDefaultEnableDesktopComposition = DefaultConnection.EnableDesktopComposition;
-			My.Settings.Default.ConDefaultRedirectKeys = DefaultConnection.RedirectKeys;
-			My.Settings.Default.ConDefaultRedirectDiskDrives = DefaultConnection.RedirectDiskDrives;
-			My.Settings.Default.ConDefaultRedirectPrinters = DefaultConnection.RedirectPrinters;
-			My.Settings.Default.ConDefaultRedirectPorts = DefaultConnection.RedirectPorts;
-			My.Settings.Default.ConDefaultRedirectSmartCards = DefaultConnection.RedirectSmartCards;
-			My.Settings.Default.ConDefaultRedirectSound = DefaultConnection.RedirectSound.ToString();
-			My.Settings.Default.ConDefaultPreExtApp = DefaultConnection.PreExtApp;
-			My.Settings.Default.ConDefaultPostExtApp = DefaultConnection.PostExtApp;
-			My.Settings.Default.ConDefaultMacAddress = DefaultConnection.MacAddress;
-			My.Settings.Default.ConDefaultUserField = DefaultConnection.UserField;
-			My.Settings.Default.ConDefaultVNCAuthMode = DefaultConnection.VNCAuthMode.ToString();
-			My.Settings.Default.ConDefaultVNCColors = DefaultConnection.VNCColors.ToString();
-			My.Settings.Default.ConDefaultVNCCompression = DefaultConnection.VNCCompression.ToString();
-			My.Settings.Default.ConDefaultVNCEncoding = DefaultConnection.VNCEncoding.ToString();
-			My.Settings.Default.ConDefaultVNCProxyIP = DefaultConnection.VNCProxyIP;
-			My.Settings.Default.ConDefaultVNCProxyPassword = DefaultConnection.VNCProxyPassword;
-			My.Settings.Default.ConDefaultVNCProxyPort = DefaultConnection.VNCProxyPort;
-			My.Settings.Default.ConDefaultVNCProxyType = DefaultConnection.VNCProxyType.ToString();
-			My.Settings.Default.ConDefaultVNCProxyUsername = DefaultConnection.VNCProxyUsername;
-			My.Settings.Default.ConDefaultVNCSmartSizeMode = DefaultConnection.VNCSmartSizeMode.ToString();
-			My.Settings.Default.ConDefaultVNCViewOnly = DefaultConnection.VNCViewOnly;
-			My.Settings.Default.ConDefaultExtApp = DefaultConnection.ExtApp;
-			My.Settings.Default.ConDefaultRDGatewayUsageMethod = DefaultConnection.RDGatewayUsageMethod.ToString();
-			My.Settings.Default.ConDefaultRDGatewayHostname = DefaultConnection.RDGatewayHostname;
-			My.Settings.Default.ConDefaultRDGatewayUsername = DefaultConnection.RDGatewayUsername;
-			My.Settings.Default.ConDefaultRDGatewayPassword = DefaultConnection.RDGatewayPassword;
-			My.Settings.Default.ConDefaultRDGatewayDomain = DefaultConnection.RDGatewayDomain;
-			My.Settings.Default.ConDefaultRDGatewayUseConnectionCredentials = DefaultConnection.RDGatewayUseConnectionCredentials.ToString();
+			mRemoteNG.Settings.Default.ConDefaultDescription = DefaultConnection.Description;
+			mRemoteNG.Settings.Default.ConDefaultIcon = DefaultConnection.Icon;
+			mRemoteNG.Settings.Default.ConDefaultUsername = DefaultConnection.Username;
+			mRemoteNG.Settings.Default.ConDefaultPassword = DefaultConnection.Password;
+			mRemoteNG.Settings.Default.ConDefaultDomain = DefaultConnection.Domain;
+			mRemoteNG.Settings.Default.ConDefaultProtocol = DefaultConnection.Protocol.ToString();
+			mRemoteNG.Settings.Default.ConDefaultPuttySession = DefaultConnection.PuttySession;
+			mRemoteNG.Settings.Default.ConDefaultICAEncryptionStrength = DefaultConnection.ICAEncryption.ToString();
+			mRemoteNG.Settings.Default.ConDefaultRDPAuthenticationLevel = DefaultConnection.RDPAuthenticationLevel.ToString();
+			mRemoteNG.Settings.Default.ConDefaultLoadBalanceInfo = DefaultConnection.LoadBalanceInfo;
+			mRemoteNG.Settings.Default.ConDefaultUseConsoleSession = DefaultConnection.UseConsoleSession;
+			mRemoteNG.Settings.Default.ConDefaultUseCredSsp = DefaultConnection.UseCredSsp;
+			mRemoteNG.Settings.Default.ConDefaultRenderingEngine = DefaultConnection.RenderingEngine.ToString();
+			mRemoteNG.Settings.Default.ConDefaultResolution = DefaultConnection.Resolution.ToString();
+			mRemoteNG.Settings.Default.ConDefaultAutomaticResize = DefaultConnection.AutomaticResize;
+			mRemoteNG.Settings.Default.ConDefaultColors = DefaultConnection.Colors.ToString();
+			mRemoteNG.Settings.Default.ConDefaultCacheBitmaps = DefaultConnection.CacheBitmaps;
+			mRemoteNG.Settings.Default.ConDefaultDisplayWallpaper = DefaultConnection.DisplayWallpaper;
+			mRemoteNG.Settings.Default.ConDefaultDisplayThemes = DefaultConnection.DisplayThemes;
+			mRemoteNG.Settings.Default.ConDefaultEnableFontSmoothing = DefaultConnection.EnableFontSmoothing;
+			mRemoteNG.Settings.Default.ConDefaultEnableDesktopComposition = DefaultConnection.EnableDesktopComposition;
+			mRemoteNG.Settings.Default.ConDefaultRedirectKeys = DefaultConnection.RedirectKeys;
+			mRemoteNG.Settings.Default.ConDefaultRedirectDiskDrives = DefaultConnection.RedirectDiskDrives;
+			mRemoteNG.Settings.Default.ConDefaultRedirectPrinters = DefaultConnection.RedirectPrinters;
+			mRemoteNG.Settings.Default.ConDefaultRedirectPorts = DefaultConnection.RedirectPorts;
+			mRemoteNG.Settings.Default.ConDefaultRedirectSmartCards = DefaultConnection.RedirectSmartCards;
+			mRemoteNG.Settings.Default.ConDefaultRedirectSound = DefaultConnection.RedirectSound.ToString();
+			mRemoteNG.Settings.Default.ConDefaultPreExtApp = DefaultConnection.PreExtApp;
+			mRemoteNG.Settings.Default.ConDefaultPostExtApp = DefaultConnection.PostExtApp;
+			mRemoteNG.Settings.Default.ConDefaultMacAddress = DefaultConnection.MacAddress;
+			mRemoteNG.Settings.Default.ConDefaultUserField = DefaultConnection.UserField;
+			mRemoteNG.Settings.Default.ConDefaultVNCAuthMode = DefaultConnection.VNCAuthMode.ToString();
+			mRemoteNG.Settings.Default.ConDefaultVNCColors = DefaultConnection.VNCColors.ToString();
+			mRemoteNG.Settings.Default.ConDefaultVNCCompression = DefaultConnection.VNCCompression.ToString();
+			mRemoteNG.Settings.Default.ConDefaultVNCEncoding = DefaultConnection.VNCEncoding.ToString();
+			mRemoteNG.Settings.Default.ConDefaultVNCProxyIP = DefaultConnection.VNCProxyIP;
+			mRemoteNG.Settings.Default.ConDefaultVNCProxyPassword = DefaultConnection.VNCProxyPassword;
+			mRemoteNG.Settings.Default.ConDefaultVNCProxyPort = DefaultConnection.VNCProxyPort;
+			mRemoteNG.Settings.Default.ConDefaultVNCProxyType = DefaultConnection.VNCProxyType.ToString();
+			mRemoteNG.Settings.Default.ConDefaultVNCProxyUsername = DefaultConnection.VNCProxyUsername;
+			mRemoteNG.Settings.Default.ConDefaultVNCSmartSizeMode = DefaultConnection.VNCSmartSizeMode.ToString();
+			mRemoteNG.Settings.Default.ConDefaultVNCViewOnly = DefaultConnection.VNCViewOnly;
+			mRemoteNG.Settings.Default.ConDefaultExtApp = DefaultConnection.ExtApp;
+			mRemoteNG.Settings.Default.ConDefaultRDGatewayUsageMethod = DefaultConnection.RDGatewayUsageMethod.ToString();
+			mRemoteNG.Settings.Default.ConDefaultRDGatewayHostname = DefaultConnection.RDGatewayHostname;
+			mRemoteNG.Settings.Default.ConDefaultRDGatewayUsername = DefaultConnection.RDGatewayUsername;
+			mRemoteNG.Settings.Default.ConDefaultRDGatewayPassword = DefaultConnection.RDGatewayPassword;
+			mRemoteNG.Settings.Default.ConDefaultRDGatewayDomain = DefaultConnection.RDGatewayDomain;
+			mRemoteNG.Settings.Default.ConDefaultRDGatewayUseConnectionCredentials = DefaultConnection.RDGatewayUseConnectionCredentials.ToString();
 		}
         #endregion
 		
@@ -252,60 +253,60 @@ namespace mRemoteNG.App
 		
 		public static void DefaultInheritanceToSettings()
 		{
-			My.Settings.Default.InhDefaultDescription = DefaultInheritance.Description;
-			My.Settings.Default.InhDefaultIcon = DefaultInheritance.Icon;
-			My.Settings.Default.InhDefaultPanel = DefaultInheritance.Panel;
-			My.Settings.Default.InhDefaultUsername = DefaultInheritance.Username;
-			My.Settings.Default.InhDefaultPassword = DefaultInheritance.Password;
-			My.Settings.Default.InhDefaultDomain = DefaultInheritance.Domain;
-			My.Settings.Default.InhDefaultProtocol = DefaultInheritance.Protocol;
-			My.Settings.Default.InhDefaultPort = DefaultInheritance.Port;
-			My.Settings.Default.InhDefaultPuttySession = DefaultInheritance.PuttySession;
-			My.Settings.Default.InhDefaultUseConsoleSession = DefaultInheritance.UseConsoleSession;
-			My.Settings.Default.InhDefaultUseCredSsp = DefaultInheritance.UseCredSsp;
-			My.Settings.Default.InhDefaultRenderingEngine = DefaultInheritance.RenderingEngine;
-			My.Settings.Default.InhDefaultICAEncryptionStrength = DefaultInheritance.ICAEncryption;
-			My.Settings.Default.InhDefaultRDPAuthenticationLevel = DefaultInheritance.RDPAuthenticationLevel;
-			My.Settings.Default.InhDefaultLoadBalanceInfo = DefaultInheritance.LoadBalanceInfo;
-			My.Settings.Default.InhDefaultResolution = DefaultInheritance.Resolution;
-			My.Settings.Default.InhDefaultAutomaticResize = DefaultInheritance.AutomaticResize;
-			My.Settings.Default.InhDefaultColors = DefaultInheritance.Colors;
-			My.Settings.Default.InhDefaultCacheBitmaps = DefaultInheritance.CacheBitmaps;
-			My.Settings.Default.InhDefaultDisplayWallpaper = DefaultInheritance.DisplayWallpaper;
-			My.Settings.Default.InhDefaultDisplayThemes = DefaultInheritance.DisplayThemes;
-			My.Settings.Default.InhDefaultEnableFontSmoothing = DefaultInheritance.EnableFontSmoothing;
-			My.Settings.Default.InhDefaultEnableDesktopComposition = DefaultInheritance.EnableDesktopComposition;
-			My.Settings.Default.InhDefaultRedirectKeys = DefaultInheritance.RedirectKeys;
-			My.Settings.Default.InhDefaultRedirectDiskDrives = DefaultInheritance.RedirectDiskDrives;
-			My.Settings.Default.InhDefaultRedirectPrinters = DefaultInheritance.RedirectPrinters;
-			My.Settings.Default.InhDefaultRedirectPorts = DefaultInheritance.RedirectPorts;
-			My.Settings.Default.InhDefaultRedirectSmartCards = DefaultInheritance.RedirectSmartCards;
-			My.Settings.Default.InhDefaultRedirectSound = DefaultInheritance.RedirectSound;
-			My.Settings.Default.InhDefaultPreExtApp = DefaultInheritance.PreExtApp;
-			My.Settings.Default.InhDefaultPostExtApp = DefaultInheritance.PostExtApp;
-			My.Settings.Default.InhDefaultMacAddress = DefaultInheritance.MacAddress;
-			My.Settings.Default.InhDefaultUserField = DefaultInheritance.UserField;
+			mRemoteNG.Settings.Default.InhDefaultDescription = DefaultInheritance.Description;
+			mRemoteNG.Settings.Default.InhDefaultIcon = DefaultInheritance.Icon;
+			mRemoteNG.Settings.Default.InhDefaultPanel = DefaultInheritance.Panel;
+			mRemoteNG.Settings.Default.InhDefaultUsername = DefaultInheritance.Username;
+			mRemoteNG.Settings.Default.InhDefaultPassword = DefaultInheritance.Password;
+			mRemoteNG.Settings.Default.InhDefaultDomain = DefaultInheritance.Domain;
+			mRemoteNG.Settings.Default.InhDefaultProtocol = DefaultInheritance.Protocol;
+			mRemoteNG.Settings.Default.InhDefaultPort = DefaultInheritance.Port;
+			mRemoteNG.Settings.Default.InhDefaultPuttySession = DefaultInheritance.PuttySession;
+			mRemoteNG.Settings.Default.InhDefaultUseConsoleSession = DefaultInheritance.UseConsoleSession;
+			mRemoteNG.Settings.Default.InhDefaultUseCredSsp = DefaultInheritance.UseCredSsp;
+			mRemoteNG.Settings.Default.InhDefaultRenderingEngine = DefaultInheritance.RenderingEngine;
+			mRemoteNG.Settings.Default.InhDefaultICAEncryptionStrength = DefaultInheritance.ICAEncryption;
+			mRemoteNG.Settings.Default.InhDefaultRDPAuthenticationLevel = DefaultInheritance.RDPAuthenticationLevel;
+			mRemoteNG.Settings.Default.InhDefaultLoadBalanceInfo = DefaultInheritance.LoadBalanceInfo;
+			mRemoteNG.Settings.Default.InhDefaultResolution = DefaultInheritance.Resolution;
+			mRemoteNG.Settings.Default.InhDefaultAutomaticResize = DefaultInheritance.AutomaticResize;
+			mRemoteNG.Settings.Default.InhDefaultColors = DefaultInheritance.Colors;
+			mRemoteNG.Settings.Default.InhDefaultCacheBitmaps = DefaultInheritance.CacheBitmaps;
+			mRemoteNG.Settings.Default.InhDefaultDisplayWallpaper = DefaultInheritance.DisplayWallpaper;
+			mRemoteNG.Settings.Default.InhDefaultDisplayThemes = DefaultInheritance.DisplayThemes;
+			mRemoteNG.Settings.Default.InhDefaultEnableFontSmoothing = DefaultInheritance.EnableFontSmoothing;
+			mRemoteNG.Settings.Default.InhDefaultEnableDesktopComposition = DefaultInheritance.EnableDesktopComposition;
+			mRemoteNG.Settings.Default.InhDefaultRedirectKeys = DefaultInheritance.RedirectKeys;
+			mRemoteNG.Settings.Default.InhDefaultRedirectDiskDrives = DefaultInheritance.RedirectDiskDrives;
+			mRemoteNG.Settings.Default.InhDefaultRedirectPrinters = DefaultInheritance.RedirectPrinters;
+			mRemoteNG.Settings.Default.InhDefaultRedirectPorts = DefaultInheritance.RedirectPorts;
+			mRemoteNG.Settings.Default.InhDefaultRedirectSmartCards = DefaultInheritance.RedirectSmartCards;
+			mRemoteNG.Settings.Default.InhDefaultRedirectSound = DefaultInheritance.RedirectSound;
+			mRemoteNG.Settings.Default.InhDefaultPreExtApp = DefaultInheritance.PreExtApp;
+			mRemoteNG.Settings.Default.InhDefaultPostExtApp = DefaultInheritance.PostExtApp;
+			mRemoteNG.Settings.Default.InhDefaultMacAddress = DefaultInheritance.MacAddress;
+			mRemoteNG.Settings.Default.InhDefaultUserField = DefaultInheritance.UserField;
 			// VNC inheritance
-			My.Settings.Default.InhDefaultVNCAuthMode = DefaultInheritance.VNCAuthMode;
-			My.Settings.Default.InhDefaultVNCColors = DefaultInheritance.VNCColors;
-			My.Settings.Default.InhDefaultVNCCompression = DefaultInheritance.VNCCompression;
-			My.Settings.Default.InhDefaultVNCEncoding = DefaultInheritance.VNCEncoding;
-			My.Settings.Default.InhDefaultVNCProxyIP = DefaultInheritance.VNCProxyIP;
-			My.Settings.Default.InhDefaultVNCProxyPassword = DefaultInheritance.VNCProxyPassword;
-			My.Settings.Default.InhDefaultVNCProxyPort = DefaultInheritance.VNCProxyPort;
-			My.Settings.Default.InhDefaultVNCProxyType = DefaultInheritance.VNCProxyType;
-			My.Settings.Default.InhDefaultVNCProxyUsername = DefaultInheritance.VNCProxyUsername;
-			My.Settings.Default.InhDefaultVNCSmartSizeMode = DefaultInheritance.VNCSmartSizeMode;
-			My.Settings.Default.InhDefaultVNCViewOnly = DefaultInheritance.VNCViewOnly;
+			mRemoteNG.Settings.Default.InhDefaultVNCAuthMode = DefaultInheritance.VNCAuthMode;
+			mRemoteNG.Settings.Default.InhDefaultVNCColors = DefaultInheritance.VNCColors;
+			mRemoteNG.Settings.Default.InhDefaultVNCCompression = DefaultInheritance.VNCCompression;
+			mRemoteNG.Settings.Default.InhDefaultVNCEncoding = DefaultInheritance.VNCEncoding;
+			mRemoteNG.Settings.Default.InhDefaultVNCProxyIP = DefaultInheritance.VNCProxyIP;
+			mRemoteNG.Settings.Default.InhDefaultVNCProxyPassword = DefaultInheritance.VNCProxyPassword;
+			mRemoteNG.Settings.Default.InhDefaultVNCProxyPort = DefaultInheritance.VNCProxyPort;
+			mRemoteNG.Settings.Default.InhDefaultVNCProxyType = DefaultInheritance.VNCProxyType;
+			mRemoteNG.Settings.Default.InhDefaultVNCProxyUsername = DefaultInheritance.VNCProxyUsername;
+			mRemoteNG.Settings.Default.InhDefaultVNCSmartSizeMode = DefaultInheritance.VNCSmartSizeMode;
+			mRemoteNG.Settings.Default.InhDefaultVNCViewOnly = DefaultInheritance.VNCViewOnly;
 			// Ext. App inheritance
-			My.Settings.Default.InhDefaultExtApp = DefaultInheritance.ExtApp;
+			mRemoteNG.Settings.Default.InhDefaultExtApp = DefaultInheritance.ExtApp;
 			// RDP gateway inheritance
-			My.Settings.Default.InhDefaultRDGatewayUsageMethod = DefaultInheritance.RDGatewayUsageMethod;
-			My.Settings.Default.InhDefaultRDGatewayHostname = DefaultInheritance.RDGatewayHostname;
-			My.Settings.Default.InhDefaultRDGatewayUsername = DefaultInheritance.RDGatewayUsername;
-			My.Settings.Default.InhDefaultRDGatewayPassword = DefaultInheritance.RDGatewayPassword;
-			My.Settings.Default.InhDefaultRDGatewayDomain = DefaultInheritance.RDGatewayDomain;
-			My.Settings.Default.InhDefaultRDGatewayUseConnectionCredentials = DefaultInheritance.RDGatewayUseConnectionCredentials;
+			mRemoteNG.Settings.Default.InhDefaultRDGatewayUsageMethod = DefaultInheritance.RDGatewayUsageMethod;
+			mRemoteNG.Settings.Default.InhDefaultRDGatewayHostname = DefaultInheritance.RDGatewayHostname;
+			mRemoteNG.Settings.Default.InhDefaultRDGatewayUsername = DefaultInheritance.RDGatewayUsername;
+			mRemoteNG.Settings.Default.InhDefaultRDGatewayPassword = DefaultInheritance.RDGatewayPassword;
+			mRemoteNG.Settings.Default.InhDefaultRDGatewayDomain = DefaultInheritance.RDGatewayDomain;
+			mRemoteNG.Settings.Default.InhDefaultRDGatewayUseConnectionCredentials = DefaultInheritance.RDGatewayUseConnectionCredentials;
 		}
         #endregion
 		
@@ -344,7 +345,7 @@ namespace mRemoteNG.App
         private static void SetConnectionWindowTitle(string title, ConnectionWindow connectionForm)
         {
             if (title == "")
-                title = My.Language.strNewPanel;
+                title = Language.strNewPanel;
             connectionForm.SetFormText(title.Replace("&", "&&"));
         }
 
@@ -360,8 +361,8 @@ namespace mRemoteNG.App
         private static ToolStripMenuItem CreateScreensMenuItem(DockContent pnlcForm)
         {
             ToolStripMenuItem cMenScreens = new ToolStripMenuItem();
-            cMenScreens.Text = My.Language.strSendTo;
-            cMenScreens.Image = My.Resources.Monitor;
+            cMenScreens.Text = Language.strSendTo;
+            cMenScreens.Image = Resources.Monitor;
             cMenScreens.Tag = pnlcForm;
             cMenScreens.DropDownItems.Add("Dummy");
             cMenScreens.DropDownOpening += cMenConnectionPanelScreens_DropDownOpening;
@@ -371,8 +372,8 @@ namespace mRemoteNG.App
         private static ToolStripMenuItem CreateRenameMenuItem(DockContent pnlcForm)
         {
             ToolStripMenuItem cMenRen = new ToolStripMenuItem();
-            cMenRen.Text = My.Language.strRename;
-            cMenRen.Image = My.Resources.Rename;
+            cMenRen.Text = Language.strRename;
+            cMenRen.Image = Resources.Rename;
             cMenRen.Tag = pnlcForm;
             cMenRen.Click += cMenConnectionPanelRename_Click;
             return cMenRen;
@@ -385,7 +386,7 @@ namespace mRemoteNG.App
 				ConnectionWindow conW = default(ConnectionWindow);
                 conW = (ConnectionWindow)((Control)sender).Tag;
 
-                string nTitle = Interaction.InputBox(Prompt: My.Language.strNewTitle + ":", DefaultResponse: Convert.ToString(((Control)((Control)sender).Tag).Text.Replace("&&", "&")));
+                string nTitle = Interaction.InputBox(Prompt: Language.strNewTitle + ":", DefaultResponse: Convert.ToString(((Control)((Control)sender).Tag).Text.Replace("&&", "&")));
 					
 				if (!string.IsNullOrEmpty(nTitle))
 				{
@@ -407,9 +408,9 @@ namespace mRemoteNG.App
 					
 				for (int i = 0; i <= Screen.AllScreens.Length - 1; i++)
 				{
-					ToolStripMenuItem cMenScreen = new ToolStripMenuItem(My.Language.strScreen + " " + Convert.ToString(i + 1));
+					ToolStripMenuItem cMenScreen = new ToolStripMenuItem(Language.strScreen + " " + Convert.ToString(i + 1));
 					cMenScreen.Tag = new ArrayList();
-					cMenScreen.Image = My.Resources.Monitor_GoTo;
+					cMenScreen.Image = Resources.Monitor_GoTo;
 					(cMenScreen.Tag as ArrayList).Add(Screen.AllScreens[i]);
 					(cMenScreen.Tag as ArrayList).Add(cMenScreens.Tag);
 					cMenScreen.Click += cMenConnectionPanelScreen_Click;
@@ -470,12 +471,12 @@ namespace mRemoteNG.App
 					
 				if (filename == GetDefaultStartupConnectionFileName())
 				{
-					My.Settings.Default.LoadConsFromCustomLocation = false;
+					mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
 				}
 				else
 				{
-					My.Settings.Default.LoadConsFromCustomLocation = true;
-					My.Settings.Default.CustomConsPath = filename;
+					mRemoteNG.Settings.Default.LoadConsFromCustomLocation = true;
+					mRemoteNG.Settings.Default.CustomConsPath = filename;
 				}
 					
 				Directory.CreateDirectory(Path.GetDirectoryName(filename));
@@ -489,7 +490,7 @@ namespace mRemoteNG.App
 						xmlTextWriter.Indentation = 4;
 						xmlTextWriter.WriteStartDocument();
 						xmlTextWriter.WriteStartElement("Connections"); // Do not localize
-						xmlTextWriter.WriteAttributeString("Name", My.Language.strConnections);
+						xmlTextWriter.WriteAttributeString("Name", Language.strConnections);
 						xmlTextWriter.WriteAttributeString("Export", "", "False");
 						xmlTextWriter.WriteAttributeString("Protected", "", "GiUis20DIbnYzWPcdaQKfjE2H5jh//L5v4RGrJMGNXuIq2CttB/d/BxaBP2LwRhY");
 						xmlTextWriter.WriteAttributeString("ConfVersion", "", "2.5");
@@ -512,7 +513,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddExceptionMessage(My.Language.strCouldNotCreateNewConnectionsFile, ex, MessageClass.ErrorMsg);
+                MessageCollector.AddExceptionMessage(Language.strCouldNotCreateNewConnectionsFile, ex, MessageClass.ErrorMsg);
 			}
 		}
 		
@@ -551,7 +552,7 @@ namespace mRemoteNG.App
 				ConnectionList = new ConnectionList();
 				ContainerList = new ContainerList();
 					
-				if (!My.Settings.Default.UseSQLServer)
+				if (!mRemoteNG.Settings.Default.UseSQLServer)
 				{
 					if (withDialog)
 					{
@@ -590,15 +591,15 @@ namespace mRemoteNG.App
                 ConnectionTree.ResetTree();
 					
 				connectionsLoader.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
-				connectionsLoader.UseSQL = My.Settings.Default.UseSQLServer;
-				connectionsLoader.SQLHost = My.Settings.Default.SQLHost;
-				connectionsLoader.SQLDatabaseName = My.Settings.Default.SQLDatabaseName;
-				connectionsLoader.SQLUsername = My.Settings.Default.SQLUser;
-				connectionsLoader.SQLPassword = Security.Crypt.Decrypt(Convert.ToString(My.Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
+				connectionsLoader.UseSQL = mRemoteNG.Settings.Default.UseSQLServer;
+				connectionsLoader.SQLHost = mRemoteNG.Settings.Default.SQLHost;
+				connectionsLoader.SQLDatabaseName = mRemoteNG.Settings.Default.SQLDatabaseName;
+				connectionsLoader.SQLUsername = mRemoteNG.Settings.Default.SQLUser;
+				connectionsLoader.SQLPassword = Security.Crypt.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
 				connectionsLoader.SQLUpdate = update;
 				connectionsLoader.LoadConnections(false);
 					
-				if (My.Settings.Default.UseSQLServer == true)
+				if (mRemoteNG.Settings.Default.UseSQLServer == true)
 				{
 					LastSqlUpdate = DateTime.Now;
 				}
@@ -606,35 +607,35 @@ namespace mRemoteNG.App
 				{
 					if (connectionsLoader.ConnectionFileName == GetDefaultStartupConnectionFileName())
 					{
-						My.Settings.Default.LoadConsFromCustomLocation = false;
+						mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
 					}
 					else
 					{
-						My.Settings.Default.LoadConsFromCustomLocation = true;
-						My.Settings.Default.CustomConsPath = connectionsLoader.ConnectionFileName;
+						mRemoteNG.Settings.Default.LoadConsFromCustomLocation = true;
+						mRemoteNG.Settings.Default.CustomConsPath = connectionsLoader.ConnectionFileName;
 					}
 				}
 
                 // re-enable sql update checking after updates are loaded
-                if (My.Settings.Default.UseSQLServer && SQLConnProvider != null)
+                if (mRemoteNG.Settings.Default.UseSQLServer && SQLConnProvider != null)
 				{
                     SQLConnProvider.Enable();
 				}
 			}
 			catch (Exception ex)
 			{
-				if (My.Settings.Default.UseSQLServer)
+				if (mRemoteNG.Settings.Default.UseSQLServer)
 				{
-                    MessageCollector.AddExceptionMessage(My.Language.strLoadFromSqlFailed, ex);
-					string commandButtons = string.Join("|", new[] {My.Language.strCommandTryAgain, My.Language.strCommandOpenConnectionFile, string.Format(My.Language.strCommandExitProgram, Application.ProductName)});
-                    cTaskDialog.ShowCommandBox(Application.ProductName, My.Language.strLoadFromSqlFailed, My.Language.strLoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, eSysIcons.Error, eSysIcons.Error);
+                    MessageCollector.AddExceptionMessage(Language.strLoadFromSqlFailed, ex);
+					string commandButtons = string.Join("|", new[] {Language.strCommandTryAgain, Language.strCommandOpenConnectionFile, string.Format(Language.strCommandExitProgram, Application.ProductName)});
+                    cTaskDialog.ShowCommandBox(Application.ProductName, Language.strLoadFromSqlFailed, Language.strLoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, eSysIcons.Error, eSysIcons.Error);
 					switch (cTaskDialog.CommandButtonResult)
 					{
 						case 0:
 							LoadConnections(withDialog, update);
 							return ;
 						case 1:
-							My.Settings.Default.UseSQLServer = false;
+							mRemoteNG.Settings.Default.UseSQLServer = false;
 							LoadConnections(true, update);
 							return ;
 						default:
@@ -646,12 +647,12 @@ namespace mRemoteNG.App
 				{
 					if (ex is FileNotFoundException&& !withDialog)
 					{
-                        MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), ex, MessageClass.InformationMsg);
+                        MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoadedNew, connectionsLoader.ConnectionFileName), ex, MessageClass.InformationMsg);
 						NewConnections(Convert.ToString(connectionsLoader.ConnectionFileName));
 						return ;
 					}
 
-                    MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotBeLoaded, connectionsLoader.ConnectionFileName), ex);
+                    MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoaded, connectionsLoader.ConnectionFileName), ex);
 					if (!(connectionsLoader.ConnectionFileName == GetStartupConnectionFileName()))
 					{
 						LoadConnections(withDialog, update);
@@ -659,7 +660,7 @@ namespace mRemoteNG.App
 					}
 					else
 					{
-						Interaction.MsgBox(string.Format(My.Language.strErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)), (int) MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, null);
+						Interaction.MsgBox(string.Format(Language.strErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)), (int) MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, null);
 						Application.Exit();
 						return ;
 					}
@@ -670,20 +671,20 @@ namespace mRemoteNG.App
 		protected static void CreateBackupFile(string fileName)
 		{
 			// This intentionally doesn't prune any existing backup files. We just assume the user doesn't want any new ones created.
-			if (My.Settings.Default.BackupFileKeepCount == 0)
+			if (mRemoteNG.Settings.Default.BackupFileKeepCount == 0)
 			{
 				return ;
 			}
 				
 			try
 			{
-				string backupFileName = string.Format(My.Settings.Default.BackupFileNameFormat, fileName, DateTime.UtcNow);
+				string backupFileName = string.Format(mRemoteNG.Settings.Default.BackupFileNameFormat, fileName, DateTime.UtcNow);
 				File.Copy(fileName, backupFileName);
 				PruneBackupFiles(fileName);
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddExceptionMessage(My.Language.strConnectionsFileBackupFailed, ex, MessageClass.WarningMsg);
+                MessageCollector.AddExceptionMessage(Language.strConnectionsFileBackupFailed, ex, MessageClass.WarningMsg);
 				throw;
 			}
 		}
@@ -698,16 +699,16 @@ namespace mRemoteNG.App
 				return ;
 			}
 				
-			string searchPattern = string.Format(My.Settings.Default.BackupFileNameFormat, fileName, "*");
+			string searchPattern = string.Format(mRemoteNG.Settings.Default.BackupFileNameFormat, fileName, "*");
 			string[] files = Directory.GetFiles(directoryName, searchPattern);
 				
-			if (files.Length <= My.Settings.Default.BackupFileKeepCount)
+			if (files.Length <= mRemoteNG.Settings.Default.BackupFileKeepCount)
 			{
 				return ;
 			}
 				
 			Array.Sort(files);
-			Array.Resize(ref files, files.Length - My.Settings.Default.BackupFileKeepCount);
+			Array.Resize(ref files, files.Length - mRemoteNG.Settings.Default.BackupFileKeepCount);
 				
 			foreach (string file in files)
 			{
@@ -730,13 +731,13 @@ namespace mRemoteNG.App
 		
 		public static string GetStartupConnectionFileName()
 		{
-			if (My.Settings.Default.LoadConsFromCustomLocation == false)
+			if (mRemoteNG.Settings.Default.LoadConsFromCustomLocation == false)
 			{
 				return GetDefaultStartupConnectionFileName();
 			}
 			else
 			{
-				return My.Settings.Default.CustomConsPath;
+				return mRemoteNG.Settings.Default.CustomConsPath;
 			}
 		}
 		
@@ -766,7 +767,7 @@ namespace mRemoteNG.App
 				
 			try
 			{
-				if (Update == true && My.Settings.Default.UseSQLServer == false)
+				if (Update == true && mRemoteNG.Settings.Default.UseSQLServer == false)
 				{
 					return;
 				}
@@ -778,7 +779,7 @@ namespace mRemoteNG.App
 					
 				ConnectionsSaver conS = new ConnectionsSaver();
 					
-				if (!My.Settings.Default.UseSQLServer)
+				if (!mRemoteNG.Settings.Default.UseSQLServer)
 				{
 					conS.ConnectionFileName = GetStartupConnectionFileName();
 				}
@@ -789,25 +790,25 @@ namespace mRemoteNG.App
 				conS.SaveSecurity = new Security.Save(false);
 				conS.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
 					
-				if (My.Settings.Default.UseSQLServer == true)
+				if (mRemoteNG.Settings.Default.UseSQLServer == true)
 				{
 					conS.SaveFormat = ConnectionsSaver.Format.SQL;
-					conS.SQLHost = Convert.ToString(My.Settings.Default.SQLHost);
-					conS.SQLDatabaseName = Convert.ToString(My.Settings.Default.SQLDatabaseName);
-					conS.SQLUsername = Convert.ToString(My.Settings.Default.SQLUser);
-					conS.SQLPassword = Security.Crypt.Decrypt(Convert.ToString(My.Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
+					conS.SQLHost = Convert.ToString(mRemoteNG.Settings.Default.SQLHost);
+					conS.SQLDatabaseName = Convert.ToString(mRemoteNG.Settings.Default.SQLDatabaseName);
+					conS.SQLUsername = Convert.ToString(mRemoteNG.Settings.Default.SQLUser);
+					conS.SQLPassword = Security.Crypt.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
 				}
 					
 				conS.SaveConnections();
 					
-				if (My.Settings.Default.UseSQLServer == true)
+				if (mRemoteNG.Settings.Default.UseSQLServer == true)
 				{
 					LastSqlUpdate = DateTime.Now;
 				}
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionsFileCouldNotBeSaved + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionsFileCouldNotBeSaved + Environment.NewLine + ex.Message);
 			}
 			finally
 			{
@@ -837,8 +838,8 @@ namespace mRemoteNG.App
 					saveFileDialog.OverwritePrompt = true;
 
                     List<string> fileTypes = new List<string>();
-					fileTypes.AddRange(new[] {My.Language.strFiltermRemoteXML, "*.xml"});
-					fileTypes.AddRange(new[] {My.Language.strFilterAll, "*.*"});
+					fileTypes.AddRange(new[] {Language.strFiltermRemoteXML, "*.xml"});
+					fileTypes.AddRange(new[] {Language.strFilterAll, "*.*"});
 						
 					saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
 						
@@ -859,19 +860,19 @@ namespace mRemoteNG.App
 						
 					if (saveFileDialog.FileName == GetDefaultStartupConnectionFileName())
 					{
-						My.Settings.Default.LoadConsFromCustomLocation = false;
+						mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
 					}
 					else
 					{
-						My.Settings.Default.LoadConsFromCustomLocation = true;
-						My.Settings.Default.CustomConsPath = saveFileDialog.FileName;
+						mRemoteNG.Settings.Default.LoadConsFromCustomLocation = true;
+						mRemoteNG.Settings.Default.CustomConsPath = saveFileDialog.FileName;
 					}
 				}
 					
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddExceptionMessage(string.Format(My.Language.strConnectionsFileCouldNotSaveAs, connectionsSave.ConnectionFileName), ex);
+                MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotSaveAs, connectionsSave.ConnectionFileName), ex);
 			}
 			finally
 			{
@@ -896,9 +897,9 @@ namespace mRemoteNG.App
 					
 				ConnectionInfo newConnectionInfo = new ConnectionInfo();
 					
-				if (My.Settings.Default.IdentifyQuickConnectTabs)
+				if (mRemoteNG.Settings.Default.IdentifyQuickConnectTabs)
 				{
-					newConnectionInfo.Name = string.Format(My.Language.strQuick, uri.Host);
+					newConnectionInfo.Name = string.Format(Language.strQuick, uri.Host);
 				}
 				else
 				{
@@ -921,7 +922,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddExceptionMessage(My.Language.strQuickConnectFailed, ex, MessageClass.ErrorMsg);
+                MessageCollector.AddExceptionMessage(Language.strQuickConnectFailed, ex, MessageClass.ErrorMsg);
 				return null;
 			}
 		}
@@ -934,7 +935,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 			
@@ -967,7 +968,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 			
@@ -979,7 +980,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 			
@@ -991,7 +992,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 			
@@ -1003,7 +1004,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 			
@@ -1015,7 +1016,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 
@@ -1025,7 +1026,7 @@ namespace mRemoteNG.App
 			{
 				if (ConnectionInfo.Hostname == "" && ConnectionInfo.Protocol != Connection.Protocol.ProtocolType.IntApp)
 				{
-                    MessageCollector.AddMessage(MessageClass.WarningMsg, My.Language.strConnectionOpenFailedNoHostname);
+                    MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strConnectionOpenFailedNoHostname);
 					return;
 				}
 
@@ -1069,7 +1070,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
 			}
 		}
 
@@ -1146,7 +1147,7 @@ namespace mRemoteNG.App
         private static string SetConnectionPanel(ConnectionInfo ConnectionInfo, ConnectionInfo.Force Force)
         {
             string connectionPanel = "";
-            if (ConnectionInfo.Panel == "" || (Force & ConnectionInfo.Force.OverridePanel) == ConnectionInfo.Force.OverridePanel | My.Settings.Default.AlwaysShowPanelSelectionDlg)
+            if (ConnectionInfo.Panel == "" || (Force & ConnectionInfo.Force.OverridePanel) == ConnectionInfo.Force.OverridePanel | mRemoteNG.Settings.Default.AlwaysShowPanelSelectionDlg)
             {
                 frmChoosePanel frmPnl = new frmChoosePanel();
                 if (frmPnl.ShowDialog() == DialogResult.OK)
@@ -1193,7 +1194,7 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-                MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(My.Language.strProtocolEventDisconnected, DisconnectedMessage), true);
+                MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strProtocolEventDisconnected, DisconnectedMessage), true);
 
                 ProtocolBase Prot = (ProtocolBase)sender;
 				if (Prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
@@ -1205,18 +1206,18 @@ namespace mRemoteNG.App
 					{
 						if (!string.IsNullOrEmpty(ReasonDescription))
 						{
-                            MessageCollector.AddMessage(MessageClass.WarningMsg, My.Language.strRdpDisconnected + Environment.NewLine + ReasonDescription + Environment.NewLine + string.Format(My.Language.strErrorCode, ReasonCode));
+                            MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strRdpDisconnected + Environment.NewLine + ReasonDescription + Environment.NewLine + string.Format(Language.strErrorCode, ReasonCode));
 						}
 						else
 						{
-                            MessageCollector.AddMessage(MessageClass.WarningMsg, My.Language.strRdpDisconnected + Environment.NewLine + string.Format(My.Language.strErrorCode, ReasonCode));
+                            MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strRdpDisconnected + Environment.NewLine + string.Format(Language.strErrorCode, ReasonCode));
 						}
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(My.Language.strProtocolEventDisconnectFailed, ex.Message), true);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strProtocolEventDisconnectFailed, ex.Message), true);
 			}
 		}
 			
@@ -1226,9 +1227,9 @@ namespace mRemoteNG.App
 			{
                 ProtocolBase Prot = (ProtocolBase)sender;
 
-                MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strConnenctionCloseEvent, true);
+                MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnenctionCloseEvent, true);
 
-                MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(My.Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName));
+                MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName));
 					
 				Prot.InterfaceControl.Info.OpenConnections.Remove(Prot);
 					
@@ -1248,35 +1249,35 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnenctionCloseEventFailed + Environment.NewLine + ex.Message, true);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnenctionCloseEventFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
 			
 		public static void Prot_Event_Connected(object sender)
 		{
             ProtocolBase prot = (ProtocolBase)sender;
-            MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strConnectionEventConnected, true);
-            MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(My.Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
+            MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventConnected, true);
+            MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
 		}
 			
 		public static void Prot_Event_ErrorOccured(object sender, string ErrorMessage)
 		{
 			try
 			{
-                MessageCollector.AddMessage(MessageClass.InformationMsg, My.Language.strConnectionEventErrorOccured, true);
+                MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventErrorOccured, true);
                 ProtocolBase Prot = (ProtocolBase)sender;
 					
 				if (Prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
 				{
 					if (Convert.ToInt32(ErrorMessage) > -1)
 					{
-                        MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(My.Language.strConnectionRdpErrorDetail, ErrorMessage, ProtocolRDP.FatalErrors.GetError(ErrorMessage)));
+                        MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strConnectionRdpErrorDetail, ErrorMessage, ProtocolRDP.FatalErrors.GetError(ErrorMessage)));
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strConnectionEventConnectionFailed + Environment.NewLine + ex.Message, true);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionEventConnectionFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -1343,7 +1344,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strLogWriteToFileFailed);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strLogWriteToFileFailed);
 			}
 		}
 			
@@ -1362,7 +1363,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, My.Language.strLogWriteToFileFinalLocationFailed + Environment.NewLine + ex.Message, true);
+                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strLogWriteToFileFinalLocationFailed + Environment.NewLine + ex.Message, true);
 				return false;
 			}
 			finally

@@ -5,6 +5,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using System.IO;
+using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 
 
@@ -73,21 +74,21 @@ namespace mRemoteNG.UI.Window
 			//mMenFile
 			//
 			this.mMenFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenFileSaveAll, this.mMenFileRemoveAll});
-			this.mMenFile.Image = My.Resources.File;
+			this.mMenFile.Image = Resources.File;
 			this.mMenFile.Name = "mMenFile";
 			this.mMenFile.Size = new System.Drawing.Size(51, 20);
 			this.mMenFile.Text = "&File";
 			//
 			//mMenFileSaveAll
 			//
-			this.mMenFileSaveAll.Image = My.Resources.Screenshot_Save;
+			this.mMenFileSaveAll.Image = Resources.Screenshot_Save;
 			this.mMenFileSaveAll.Name = "mMenFileSaveAll";
 			this.mMenFileSaveAll.Size = new System.Drawing.Size(128, 22);
 			this.mMenFileSaveAll.Text = "Save All";
 			//
 			//mMenFileRemoveAll
 			//
-			this.mMenFileRemoveAll.Image = My.Resources.Screenshot_Delete;
+			this.mMenFileRemoveAll.Image = Resources.Screenshot_Delete;
 			this.mMenFileRemoveAll.Name = "mMenFileRemoveAll";
 			this.mMenFileRemoveAll.Size = new System.Drawing.Size(128, 22);
 			this.mMenFileRemoveAll.Text = "Remove All";
@@ -100,14 +101,14 @@ namespace mRemoteNG.UI.Window
 			//
 			//cMenScreenshotCopy
 			//
-			this.cMenScreenshotCopy.Image = My.Resources.Screenshot_Copy;
+			this.cMenScreenshotCopy.Image = Resources.Screenshot_Copy;
 			this.cMenScreenshotCopy.Name = "cMenScreenshotCopy";
 			this.cMenScreenshotCopy.Size = new System.Drawing.Size(99, 22);
 			this.cMenScreenshotCopy.Text = "Copy";
 			//
 			//cMenScreenshotSave
 			//
-			this.cMenScreenshotSave.Image = My.Resources.Screenshot_Save;
+			this.cMenScreenshotSave.Image = Resources.Screenshot_Save;
 			this.cMenScreenshotSave.Name = "cMenScreenshotSave";
 			this.cMenScreenshotSave.Size = new System.Drawing.Size(99, 22);
 			this.cMenScreenshotSave.Text = "Save";
@@ -125,7 +126,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.flpScreenshots);
 			this.Controls.Add(this.msMain);
 			this.HideOnClose = true;
-			this.Icon = My.Resources.Screenshot_Icon;
+			this.Icon = Resources.Screenshot_Icon;
 			this.MainMenuStrip = this.msMain;
 			this.Name = "ScreenshotManager";
 			this.TabText = "Screenshots";
@@ -147,14 +148,14 @@ namespace mRemoteNG.UI.Window
 				
 		private void ApplyLanguage()
 		{
-			mMenFile.Text = My.Language.strMenuFile;
-			mMenFileSaveAll.Text = My.Language.strSaveAll;
-			mMenFileRemoveAll.Text = My.Language.strRemoveAll;
-			cMenScreenshotCopy.Text = My.Language.strMenuCopy;
-			cMenScreenshotSave.Text = My.Language.strSave;
-			dlgSaveSingleImage.Filter = My.Language.strSaveImageFilter;
-			TabText = My.Language.strScreenshots;
-			Text = My.Language.strScreenshots;
+			mMenFile.Text = Language.strMenuFile;
+			mMenFileSaveAll.Text = Language.strSaveAll;
+			mMenFileRemoveAll.Text = Language.strRemoveAll;
+			cMenScreenshotCopy.Text = Language.strMenuCopy;
+			cMenScreenshotSave.Text = Language.strSave;
+			dlgSaveSingleImage.Filter = Language.strSaveImageFilter;
+			TabText = Language.strScreenshots;
+			Text = Language.strScreenshots;
 		}
         #endregion
 				

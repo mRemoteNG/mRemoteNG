@@ -33,7 +33,7 @@ namespace mRemoteNG.Config
         {
             GetSqlConnectionDataFromSettings();
 
-            if (My.Settings.Default.SQLUser != "")
+            if (mRemoteNG.Settings.Default.SQLUser != "")
                 BuildSqlConnectionStringWithCustomCredentials();
             else
                 BuildSqlConnectionStringWithDefaultCredentials();
@@ -51,10 +51,10 @@ namespace mRemoteNG.Config
 
         private void GetSqlConnectionDataFromSettings()
         {
-            _sqlHost = My.Settings.Default.SQLHost;
-            _sqlCatalog = My.Settings.Default.SQLDatabaseName;
-            _sqlUsername = My.Settings.Default.SQLUser;
-            _sqlPassword = Security.Crypt.Decrypt(My.Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey);
+            _sqlHost = mRemoteNG.Settings.Default.SQLHost;
+            _sqlCatalog = mRemoteNG.Settings.Default.SQLDatabaseName;
+            _sqlUsername = mRemoteNG.Settings.Default.SQLUser;
+            _sqlPassword = Security.Crypt.Decrypt(mRemoteNG.Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey);
         }
 
         public void Connect()

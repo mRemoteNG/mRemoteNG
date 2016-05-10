@@ -191,14 +191,14 @@ namespace mRemoteNG.UI.Window
 						
 				if (e.Button == MouseButtons.Left)
 				{
-					if (Settings.Default.SingleClickOnConnectionOpensIt && 
+					if (mRemoteNG.Settings.Default.SingleClickOnConnectionOpensIt && 
 						(ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Connection |
                         ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.PuttySession))
 					{
 						Runtime.OpenConnection();
 					}
 							
-					if (Settings.Default.SingleClickSwitchesToOpenConnection && ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Connection)
+					if (mRemoteNG.Settings.Default.SingleClickSwitchesToOpenConnection && ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Connection)
 					{
                         Runtime.SwitchToOpenConnection((ConnectionInfo)e.Node.Tag);
 					}

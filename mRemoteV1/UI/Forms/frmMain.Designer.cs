@@ -1,3 +1,5 @@
+using mRemoteNG.My;
+
 namespace mRemoteNG.UI.Forms
 {
     public partial class frmMain : System.Windows.Forms.Form
@@ -273,7 +275,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenFileNewConnection
 			//
-			this.mMenFileNewConnection.Image = My.Resources.Connection_Add;
+			this.mMenFileNewConnection.Image = Resources.Connection_Add;
 			this.mMenFileNewConnection.Name = "mMenFileNewConnection";
 			this.mMenFileNewConnection.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N);
 			this.mMenFileNewConnection.Size = new System.Drawing.Size(281, 22);
@@ -281,7 +283,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenFileNewFolder
 			//
-			this.mMenFileNewFolder.Image = My.Resources.Folder_Add;
+			this.mMenFileNewFolder.Image = Resources.Folder_Add;
 			this.mMenFileNewFolder.Name = "mMenFileNewFolder";
 			this.mMenFileNewFolder.ShortcutKeys = (System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
 				| System.Windows.Forms.Keys.N);
@@ -295,14 +297,14 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenFileNew
 			//
-			this.mMenFileNew.Image = My.Resources.Connections_New;
+			this.mMenFileNew.Image = Resources.Connections_New;
 			this.mMenFileNew.Name = "mMenFileNew";
 			this.mMenFileNew.Size = new System.Drawing.Size(281, 22);
 			this.mMenFileNew.Text = "New Connection File";
 			//
 			//mMenFileLoad
 			//
-			this.mMenFileLoad.Image = My.Resources.Connections_Load;
+			this.mMenFileLoad.Image = Resources.Connections_Load;
 			this.mMenFileLoad.Name = "mMenFileLoad";
 			this.mMenFileLoad.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O);
 			this.mMenFileLoad.Size = new System.Drawing.Size(281, 22);
@@ -310,7 +312,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenFileSave
 			//
-			this.mMenFileSave.Image = My.Resources.Connections_Save;
+			this.mMenFileSave.Image = Resources.Connections_Save;
 			this.mMenFileSave.Name = "mMenFileSave";
 			this.mMenFileSave.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S);
 			this.mMenFileSave.Size = new System.Drawing.Size(281, 22);
@@ -318,7 +320,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenFileSaveAs
 			//
-			this.mMenFileSaveAs.Image = My.Resources.Connections_SaveAs;
+			this.mMenFileSaveAs.Image = Resources.Connections_SaveAs;
 			this.mMenFileSaveAs.Name = "mMenFileSaveAs";
 			this.mMenFileSaveAs.ShortcutKeys = (System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
 				| System.Windows.Forms.Keys.S);
@@ -368,21 +370,21 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenFileDelete
 			//
-			this.mMenFileDelete.Image = My.Resources.Delete;
+			this.mMenFileDelete.Image = Resources.Delete;
 			this.mMenFileDelete.Name = "mMenFileDelete";
 			this.mMenFileDelete.Size = new System.Drawing.Size(281, 22);
 			this.mMenFileDelete.Text = "Delete...";
 			//
 			//mMenFileRename
 			//
-			this.mMenFileRename.Image = My.Resources.Rename;
+			this.mMenFileRename.Image = Resources.Rename;
 			this.mMenFileRename.Name = "mMenFileRename";
 			this.mMenFileRename.Size = new System.Drawing.Size(281, 22);
 			this.mMenFileRename.Text = "Rename";
 			//
 			//mMenFileDuplicate
 			//
-			this.mMenFileDuplicate.Image = My.Resources.page_copy;
+			this.mMenFileDuplicate.Image = Resources.page_copy;
 			this.mMenFileDuplicate.Name = "mMenFileDuplicate";
 			this.mMenFileDuplicate.Size = new System.Drawing.Size(281, 22);
 			this.mMenFileDuplicate.Text = "Duplicate";
@@ -394,7 +396,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenFileExit
 			//
-			this.mMenFileExit.Image = My.Resources.Quit;
+			this.mMenFileExit.Image = Resources.Quit;
 			this.mMenFileExit.Name = "mMenFileExit";
 			this.mMenFileExit.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4);
 			this.mMenFileExit.Size = new System.Drawing.Size(281, 22);
@@ -409,14 +411,14 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenViewAddConnectionPanel
 			//
-			this.mMenViewAddConnectionPanel.Image = My.Resources.Panel_Add;
+			this.mMenViewAddConnectionPanel.Image = Resources.Panel_Add;
 			this.mMenViewAddConnectionPanel.Name = "mMenViewAddConnectionPanel";
 			this.mMenViewAddConnectionPanel.Size = new System.Drawing.Size(228, 22);
 			this.mMenViewAddConnectionPanel.Text = "Add Connection Panel";
 			//
 			//mMenViewConnectionPanels
 			//
-			this.mMenViewConnectionPanels.Image = My.Resources.Panels;
+			this.mMenViewConnectionPanels.Image = Resources.Panels;
 			this.mMenViewConnectionPanels.Name = "mMenViewConnectionPanels";
 			this.mMenViewConnectionPanels.Size = new System.Drawing.Size(228, 22);
 			this.mMenViewConnectionPanels.Text = "Connection Panels";
@@ -430,7 +432,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			this.mMenViewConnections.Checked = true;
 			this.mMenViewConnections.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.mMenViewConnections.Image = My.Resources.Root;
+			this.mMenViewConnections.Image = Resources.Root;
 			this.mMenViewConnections.Name = "mMenViewConnections";
 			this.mMenViewConnections.Size = new System.Drawing.Size(228, 22);
 			this.mMenViewConnections.Text = "Connections";
@@ -439,7 +441,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			this.mMenViewConfig.Checked = true;
 			this.mMenViewConfig.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.mMenViewConfig.Image = My.Resources.cog;
+			this.mMenViewConfig.Image = Resources.cog;
 			this.mMenViewConfig.Name = "mMenViewConfig";
 			this.mMenViewConfig.Size = new System.Drawing.Size(228, 22);
 			this.mMenViewConfig.Text = "Config";
@@ -448,7 +450,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			this.mMenViewErrorsAndInfos.Checked = true;
 			this.mMenViewErrorsAndInfos.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.mMenViewErrorsAndInfos.Image = My.Resources.ErrorsAndInfos;
+			this.mMenViewErrorsAndInfos.Image = Resources.ErrorsAndInfos;
 			this.mMenViewErrorsAndInfos.Name = "mMenViewErrorsAndInfos";
 			this.mMenViewErrorsAndInfos.Size = new System.Drawing.Size(228, 22);
 			this.mMenViewErrorsAndInfos.Text = "Errors and Infos";
@@ -468,14 +470,14 @@ namespace mRemoteNG.UI.Forms
 			//mMenViewJumpTo
 			//
 			this.mMenViewJumpTo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenViewJumpToConnectionsConfig, this.mMenViewJumpToErrorsInfos});
-			this.mMenViewJumpTo.Image = My.Resources.JumpTo;
+			this.mMenViewJumpTo.Image = Resources.JumpTo;
 			this.mMenViewJumpTo.Name = "mMenViewJumpTo";
 			this.mMenViewJumpTo.Size = new System.Drawing.Size(228, 22);
 			this.mMenViewJumpTo.Text = "Jump To";
 			//
 			//mMenViewJumpToConnectionsConfig
 			//
-			this.mMenViewJumpToConnectionsConfig.Image = My.Resources.Root;
+			this.mMenViewJumpToConnectionsConfig.Image = Resources.Root;
 			this.mMenViewJumpToConnectionsConfig.Name = "mMenViewJumpToConnectionsConfig";
 			this.mMenViewJumpToConnectionsConfig.ShortcutKeys = (System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
 				| System.Windows.Forms.Keys.C);
@@ -484,7 +486,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenViewJumpToErrorsInfos
 			//
-			this.mMenViewJumpToErrorsInfos.Image = My.Resources.InformationSmall;
+			this.mMenViewJumpToErrorsInfos.Image = Resources.InformationSmall;
 			this.mMenViewJumpToErrorsInfos.Name = "mMenViewJumpToErrorsInfos";
 			this.mMenViewJumpToErrorsInfos.ShortcutKeys = (System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
 				| System.Windows.Forms.Keys.E);
@@ -493,7 +495,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenViewResetLayout
 			//
-			this.mMenViewResetLayout.Image = My.Resources.application_side_tree;
+			this.mMenViewResetLayout.Image = Resources.application_side_tree;
 			this.mMenViewResetLayout.Name = "mMenViewResetLayout";
 			this.mMenViewResetLayout.Size = new System.Drawing.Size(228, 22);
 			this.mMenViewResetLayout.Text = "Reset Layout";
@@ -505,14 +507,14 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenViewQuickConnectToolbar
 			//
-			this.mMenViewQuickConnectToolbar.Image = My.Resources.Play_Quick;
+			this.mMenViewQuickConnectToolbar.Image = Resources.Play_Quick;
 			this.mMenViewQuickConnectToolbar.Name = "mMenViewQuickConnectToolbar";
 			this.mMenViewQuickConnectToolbar.Size = new System.Drawing.Size(228, 22);
 			this.mMenViewQuickConnectToolbar.Text = "Quick Connect Toolbar";
 			//
 			//mMenViewExtAppsToolbar
 			//
-			this.mMenViewExtAppsToolbar.Image = My.Resources.ExtApp;
+			this.mMenViewExtAppsToolbar.Image = Resources.ExtApp;
 			this.mMenViewExtAppsToolbar.Name = "mMenViewExtAppsToolbar";
 			this.mMenViewExtAppsToolbar.Size = new System.Drawing.Size(228, 22);
 			this.mMenViewExtAppsToolbar.Text = "External Applications Toolbar";
@@ -524,7 +526,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenViewFullscreen
 			//
-			this.mMenViewFullscreen.Image = My.Resources.arrow_out;
+			this.mMenViewFullscreen.Image = Resources.arrow_out;
 			this.mMenViewFullscreen.Name = "mMenViewFullscreen";
 			this.mMenViewFullscreen.ShortcutKeys = System.Windows.Forms.Keys.F11;
 			this.mMenViewFullscreen.Size = new System.Drawing.Size(228, 22);
@@ -539,14 +541,14 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenToolsSSHTransfer
 			//
-			this.mMenToolsSSHTransfer.Image = My.Resources.SSHTransfer;
+			this.mMenToolsSSHTransfer.Image = Resources.SSHTransfer;
 			this.mMenToolsSSHTransfer.Name = "mMenToolsSSHTransfer";
 			this.mMenToolsSSHTransfer.Size = new System.Drawing.Size(184, 22);
 			this.mMenToolsSSHTransfer.Text = "SSH File Transfer";
 			//
 			//mMenToolsUVNCSC
 			//
-			this.mMenToolsUVNCSC.Image = My.Resources.UVNC_SC;
+			this.mMenToolsUVNCSC.Image = Resources.UVNC_SC;
 			this.mMenToolsUVNCSC.Name = "mMenToolsUVNCSC";
 			this.mMenToolsUVNCSC.Size = new System.Drawing.Size(184, 22);
 			this.mMenToolsUVNCSC.Text = "UltraVNC SingleClick";
@@ -554,14 +556,14 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenToolsExternalApps
 			//
-			this.mMenToolsExternalApps.Image = My.Resources.ExtApp;
+			this.mMenToolsExternalApps.Image = Resources.ExtApp;
 			this.mMenToolsExternalApps.Name = "mMenToolsExternalApps";
 			this.mMenToolsExternalApps.Size = new System.Drawing.Size(184, 22);
 			this.mMenToolsExternalApps.Text = "External Applications";
 			//
 			//mMenToolsPortScan
 			//
-			this.mMenToolsPortScan.Image = My.Resources.PortScan;
+			this.mMenToolsPortScan.Image = Resources.PortScan;
 			this.mMenToolsPortScan.Name = "mMenToolsPortScan";
 			this.mMenToolsPortScan.Size = new System.Drawing.Size(184, 22);
 			this.mMenToolsPortScan.Text = "Port Scan";
@@ -573,7 +575,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenToolsComponentsCheck
 			//
-			this.mMenToolsComponentsCheck.Image = My.Resources.cog_error;
+			this.mMenToolsComponentsCheck.Image = Resources.cog_error;
 			this.mMenToolsComponentsCheck.Name = "mMenToolsComponentsCheck";
 			this.mMenToolsComponentsCheck.Size = new System.Drawing.Size(184, 22);
 			this.mMenToolsComponentsCheck.Text = "Components Check";
@@ -615,21 +617,21 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenInfoDonate
 			//
-			this.mMenInfoDonate.Image = My.Resources.Donate;
+			this.mMenInfoDonate.Image = Resources.Donate;
 			this.mMenInfoDonate.Name = "mMenInfoDonate";
 			this.mMenInfoDonate.Size = new System.Drawing.Size(190, 22);
 			this.mMenInfoDonate.Text = "Donate";
 			//
 			//mMenInfoForum
 			//
-			this.mMenInfoForum.Image = My.Resources.user_comment;
+			this.mMenInfoForum.Image = Resources.user_comment;
 			this.mMenInfoForum.Name = "mMenInfoForum";
 			this.mMenInfoForum.Size = new System.Drawing.Size(190, 22);
 			this.mMenInfoForum.Text = "Support Forum";
 			//
 			//mMenInfoBugReport
 			//
-			this.mMenInfoBugReport.Image = My.Resources.Bug;
+			this.mMenInfoBugReport.Image = Resources.Bug;
 			this.mMenInfoBugReport.Name = "mMenInfoBugReport";
 			this.mMenInfoBugReport.Size = new System.Drawing.Size(190, 22);
 			this.mMenInfoBugReport.Text = "Report a Bug";
@@ -641,14 +643,14 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenInfoAnnouncements
 			//
-			this.mMenInfoAnnouncements.Image = My.Resources.News;
+			this.mMenInfoAnnouncements.Image = Resources.News;
 			this.mMenInfoAnnouncements.Name = "mMenInfoAnnouncements";
 			this.mMenInfoAnnouncements.Size = new System.Drawing.Size(190, 22);
 			this.mMenInfoAnnouncements.Text = "Announcements";
 			//
 			//mMenToolsUpdate
 			//
-			this.mMenToolsUpdate.Image = My.Resources.Update;
+			this.mMenToolsUpdate.Image = Resources.Update;
 			this.mMenToolsUpdate.Name = "mMenToolsUpdate";
 			this.mMenToolsUpdate.Size = new System.Drawing.Size(190, 22);
 			this.mMenToolsUpdate.Text = "Check for Updates";
@@ -660,7 +662,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenInfoAbout
 			//
-			this.mMenInfoAbout.Image = My.Resources.mRemote;
+			this.mMenInfoAbout.Image = Resources.mRemote;
 			this.mMenInfoAbout.Name = "mMenInfoAbout";
 			this.mMenInfoAbout.Size = new System.Drawing.Size(190, 22);
 			this.mMenInfoAbout.Text = "About mRemoteNG";
@@ -732,7 +734,7 @@ namespace mRemoteNG.UI.Forms
 			//btnQuickConnect
 			//
 			this.btnQuickConnect.DropDown = this.mnuQuickConnectProtocol;
-			this.btnQuickConnect.Image = My.Resources.Play_Quick;
+			this.btnQuickConnect.Image = Resources.Play_Quick;
 			this.btnQuickConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnQuickConnect.Margin = new System.Windows.Forms.Padding(0, 1, 3, 2);
 			this.btnQuickConnect.Name = "btnQuickConnect";
@@ -751,7 +753,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			this.btnConnections.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.btnConnections.DropDown = this.mnuConnections;
-			this.btnConnections.Image = My.Resources.Root;
+			this.btnConnections.Image = Resources.Root;
 			this.btnConnections.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
 			this.btnConnections.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.btnConnections.Name = "btnConnections";
@@ -801,7 +803,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//ToolStripButton1
 			//
-			this.ToolStripButton1.Image = My.Resources.Play;
+			this.ToolStripButton1.Image = Resources.Play;
 			this.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.ToolStripButton1.Name = "ToolStripButton1";
 			this.ToolStripButton1.Size = new System.Drawing.Size(72, 22);
@@ -809,7 +811,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//ToolStripButton2
 			//
-			this.ToolStripButton2.Image = My.Resources.Screenshot;
+			this.ToolStripButton2.Image = Resources.Screenshot;
 			this.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.ToolStripButton2.Name = "ToolStripButton2";
 			this.ToolStripButton2.Size = new System.Drawing.Size(85, 22);
@@ -817,7 +819,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//ToolStripButton3
 			//
-			this.ToolStripButton3.Image = My.Resources.Refresh;
+			this.ToolStripButton3.Image = Resources.Refresh;
 			this.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.ToolStripButton3.Name = "ToolStripButton3";
 			this.ToolStripButton3.Size = new System.Drawing.Size(66, 22);
@@ -827,7 +829,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			this.ToolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
 			this.ToolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.ToolStripMenuItem1, this.ToolStripMenuItem2});
-			this.ToolStripSplitButton1.Image = My.Resources.Keyboard;
+			this.ToolStripSplitButton1.Image = Resources.Keyboard;
 			this.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.ToolStripSplitButton1.Name = "ToolStripSplitButton1";
 			this.ToolStripSplitButton1.Size = new System.Drawing.Size(29, 22);
@@ -855,7 +857,7 @@ namespace mRemoteNG.UI.Forms
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(842, 523);
 			this.Controls.Add(this.tsContainer);
-			this.Icon = My.Resources.mRemote_Icon;
+			this.Icon = Resources.mRemote_Icon;
 			this.MainMenuStrip = this.msMain;
 			this.Name = "frmMain";
 			this.Opacity = 0.0D;

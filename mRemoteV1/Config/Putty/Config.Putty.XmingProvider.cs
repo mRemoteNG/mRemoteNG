@@ -187,9 +187,9 @@ namespace mRemoteNG.Config.Putty
 		private static string GetPuttyConfPath()
 		{
 			string puttyPath = "";
-			if (My.Settings.Default.UseCustomPuttyPath)
+			if (mRemoteNG.Settings.Default.UseCustomPuttyPath)
 			{
-				puttyPath = Convert.ToString(My.Settings.Default.CustomPuttyPath);
+				puttyPath = Convert.ToString(mRemoteNG.Settings.Default.CustomPuttyPath);
 			}
 			else
 			{

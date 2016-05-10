@@ -1,5 +1,7 @@
 
 
+using mRemoteNG.My;
+
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
@@ -63,7 +65,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.chkIdentifyQuickConnectTabs.Name = "chkIdentifyQuickConnectTabs";
 			this.chkIdentifyQuickConnectTabs.Size = new System.Drawing.Size(293, 17);
 			this.chkIdentifyQuickConnectTabs.TabIndex = 16;
-			this.chkIdentifyQuickConnectTabs.Text = global::mRemoteNG.My.Language.strIdentifyQuickConnectTabs;
+			this.chkIdentifyQuickConnectTabs.Text = Language.strIdentifyQuickConnectTabs;
 			this.chkIdentifyQuickConnectTabs.UseVisualStyleBackColor = true;
 			//
 			//chkUseOnlyErrorsAndInfosPanel

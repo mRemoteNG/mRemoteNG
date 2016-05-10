@@ -11,6 +11,7 @@ using System.Globalization;
 using System.IO;
 using System.Windows.Forms;
 using System.Xml;
+using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Tree.Root;
 
@@ -75,7 +76,7 @@ namespace mRemoteNG.Config.Connections
 					break;
 				default:
 					SaveToXml();
-					if (My.Settings.Default.EncryptCompleteConnectionsFile)
+					if (mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile)
 					{
 						EncryptCompleteFile();
 					}
@@ -140,12 +141,12 @@ namespace mRemoteNG.Config.Connections
 						
 				if (isVerified == false)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, string.Format(My.Language.strErrorBadDatabaseVersion, databaseVersion.ToString(), (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName));
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, string.Format(Language.strErrorBadDatabaseVersion, databaseVersion.ToString(), (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName));
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(My.Language.strErrorVerifyDatabaseVersionFailed, ex.Message));
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(Language.strErrorVerifyDatabaseVersionFailed, ex.Message));
 			}
 			finally
 			{
@@ -175,7 +176,7 @@ namespace mRemoteNG.Config.Connections
 					
 			if (!VerifyDatabaseVersion(_sqlConnection))
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strErrorConnectionListSaveFailed);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strErrorConnectionListSaveFailed);
 				return ;
 			}
 					

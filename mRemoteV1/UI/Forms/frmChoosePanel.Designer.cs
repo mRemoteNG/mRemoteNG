@@ -1,5 +1,7 @@
 
 
+using mRemoteNG.My;
+
 namespace mRemoteNG
 {
 	[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
@@ -57,7 +59,7 @@ namespace mRemoteNG
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(69, 23);
 			this.btnOK.TabIndex = 20;
-			this.btnOK.Text = My.Language.strButtonOK;
+			this.btnOK.Text = Language.strButtonOK;
 			this.btnOK.UseVisualStyleBackColor = true;
 			//
 			//lblDescription
@@ -66,18 +68,18 @@ namespace mRemoteNG
 			this.lblDescription.Name = "lblDescription";
 			this.lblDescription.Size = new System.Drawing.Size(229, 29);
 			this.lblDescription.TabIndex = 0;
-			this.lblDescription.Text = My.Language.strLabelSelectPanel;
+			this.lblDescription.Text = Language.strLabelSelectPanel;
 			//
 			//btnNew
 			//
 			this.btnNew.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnNew.Image = My.Resources.Panel_Add;
+			this.btnNew.Image = Resources.Panel_Add;
 			this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnNew.Location = new System.Drawing.Point(10, 44);
 			this.btnNew.Name = "btnNew";
 			this.btnNew.Size = new System.Drawing.Size(57, 23);
 			this.btnNew.TabIndex = 40;
-			this.btnNew.Text = My.Language.strButtonNew;
+			this.btnNew.Text = Language.strButtonNew;
 			this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
 			this.btnNew.UseVisualStyleBackColor = true;
 			//
@@ -89,7 +91,7 @@ namespace mRemoteNG
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(69, 23);
 			this.btnCancel.TabIndex = 30;
-			this.btnCancel.Text = My.Language.strButtonCancel;
+			this.btnCancel.Text = Language.strButtonCancel;
 			this.btnCancel.UseVisualStyleBackColor = true;
 			//
 			//frmChoosePanel
@@ -105,13 +107,13 @@ namespace mRemoteNG
 			this.Controls.Add(this.btnOK);
 			this.Controls.Add(this.cbPanels);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-			this.Icon = My.Resources.Panels_Icon;
+			this.Icon = Resources.Panels_Icon;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "frmChoosePanel";
 			this.ShowInTaskbar = false;
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = My.Language.strTitleSelectPanel;
+			this.Text = Language.strTitleSelectPanel;
 			this.ResumeLayout(false);
 			
 		}

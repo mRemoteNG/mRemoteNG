@@ -1,5 +1,6 @@
 using Microsoft.VisualBasic;
 using mRemoteNG.App;
+using mRemoteNG.My;
 
 namespace mRemoteNG
 {
@@ -30,11 +31,11 @@ namespace mRemoteNG
 		
 		private void ApplyLanguage()
 		{
-			btnOK.Text = My.Language.strButtonOK;
-			lblDescription.Text = My.Language.strLabelSelectPanel;
-			btnNew.Text = My.Language.strButtonNew;
-			btnCancel.Text = My.Language.strButtonCancel;
-			Text = My.Language.strTitleSelectPanel;
+			btnOK.Text = Language.strButtonOK;
+			lblDescription.Text = Language.strLabelSelectPanel;
+			btnNew.Text = Language.strButtonNew;
+			btnCancel.Text = Language.strButtonCancel;
+			Text = Language.strTitleSelectPanel;
 		}
 		
 		private void AddAvailablePanels()
@@ -61,7 +62,7 @@ namespace mRemoteNG
 		
 		public void btnNew_Click(System.Object sender, System.EventArgs e)
 		{
-			string pnlName = Interaction.InputBox(My.Language.strPanelName + ":", My.Language.strNewPanel, My.Language.strNewPanel);
+			string pnlName = Interaction.InputBox(Language.strPanelName + ":", Language.strNewPanel, Language.strNewPanel);
 			
 			if (!string.IsNullOrEmpty(pnlName))
 			{

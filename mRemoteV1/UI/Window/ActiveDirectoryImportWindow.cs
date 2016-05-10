@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG.UI.Window
@@ -64,9 +65,9 @@ namespace mRemoteNG.UI.Window
 				
 		private void ApplyLanguage()
 		{
-			btnImport.Text = My.Language.strButtonImport;
-			lblDomain.Text = My.Language.strLabelDomain;
-			btnChangeDomain.Text = My.Language.strButtonChange;
+			btnImport.Text = Language.strButtonImport;
+			lblDomain.Text = Language.strLabelDomain;
+			btnChangeDomain.Text = Language.strButtonChange;
 		}
 				
 		private void ChangeDomain()

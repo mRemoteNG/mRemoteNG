@@ -48,51 +48,51 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            chkWriteLogFile.Checked = Settings.Default.WriteLogFile;
+            chkWriteLogFile.Checked = mRemoteNG.Settings.Default.WriteLogFile;
 
-            chkEncryptCompleteFile.Checked = Settings.Default.EncryptCompleteConnectionsFile;
-            chkAutomaticallyGetSessionInfo.Checked = Settings.Default.AutomaticallyGetSessionInfo;
-            chkAutomaticReconnect.Checked = Settings.Default.ReconnectOnDisconnect;
-            numPuttyWaitTime.Value = Settings.Default.MaxPuttyWaitTime;
+            chkEncryptCompleteFile.Checked = mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile;
+            chkAutomaticallyGetSessionInfo.Checked = mRemoteNG.Settings.Default.AutomaticallyGetSessionInfo;
+            chkAutomaticReconnect.Checked = mRemoteNG.Settings.Default.ReconnectOnDisconnect;
+            numPuttyWaitTime.Value = mRemoteNG.Settings.Default.MaxPuttyWaitTime;
 
-            chkUseCustomPuttyPath.Checked = Settings.Default.UseCustomPuttyPath;
-            txtCustomPuttyPath.Text = Settings.Default.CustomPuttyPath;
+            chkUseCustomPuttyPath.Checked = mRemoteNG.Settings.Default.UseCustomPuttyPath;
+            txtCustomPuttyPath.Text = mRemoteNG.Settings.Default.CustomPuttyPath;
             SetPuttyLaunchButtonEnabled();
 
-            numUVNCSCPort.Value = Settings.Default.UVNCSCPort;
+            numUVNCSCPort.Value = mRemoteNG.Settings.Default.UVNCSCPort;
 
-            txtXULrunnerPath.Text = Settings.Default.XULRunnerPath;
+            txtXULrunnerPath.Text = mRemoteNG.Settings.Default.XULRunnerPath;
         }
 
         public override void SaveSettings()
         {
-            Settings.Default.WriteLogFile = chkWriteLogFile.Checked;
-            Settings.Default.EncryptCompleteConnectionsFile = chkEncryptCompleteFile.Checked;
-            Settings.Default.AutomaticallyGetSessionInfo = chkAutomaticallyGetSessionInfo.Checked;
-            Settings.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
+            mRemoteNG.Settings.Default.WriteLogFile = chkWriteLogFile.Checked;
+            mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile = chkEncryptCompleteFile.Checked;
+            mRemoteNG.Settings.Default.AutomaticallyGetSessionInfo = chkAutomaticallyGetSessionInfo.Checked;
+            mRemoteNG.Settings.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
 
             var puttyPathChanged = false;
-            if (Settings.Default.CustomPuttyPath != txtCustomPuttyPath.Text)
+            if (mRemoteNG.Settings.Default.CustomPuttyPath != txtCustomPuttyPath.Text)
             {
                 puttyPathChanged = true;
-                Settings.Default.CustomPuttyPath = txtCustomPuttyPath.Text;
+                mRemoteNG.Settings.Default.CustomPuttyPath = txtCustomPuttyPath.Text;
             }
-            if (Settings.Default.UseCustomPuttyPath != chkUseCustomPuttyPath.Checked)
+            if (mRemoteNG.Settings.Default.UseCustomPuttyPath != chkUseCustomPuttyPath.Checked)
             {
                 puttyPathChanged = true;
-                Settings.Default.UseCustomPuttyPath = chkUseCustomPuttyPath.Checked;
+                mRemoteNG.Settings.Default.UseCustomPuttyPath = chkUseCustomPuttyPath.Checked;
             }
             if (puttyPathChanged)
             {
-                PuttyBase.PuttyPath = Settings.Default.UseCustomPuttyPath ? Settings.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
+                PuttyBase.PuttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? mRemoteNG.Settings.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
                 Sessions.AddSessionsToTree();
             }
 
-            Settings.Default.MaxPuttyWaitTime = (int) numPuttyWaitTime.Value;
-            Settings.Default.UVNCSCPort = (int) numUVNCSCPort.Value;
-            Settings.Default.XULRunnerPath = txtXULrunnerPath.Text;
+            mRemoteNG.Settings.Default.MaxPuttyWaitTime = (int) numPuttyWaitTime.Value;
+            mRemoteNG.Settings.Default.UVNCSCPort = (int) numUVNCSCPort.Value;
+            mRemoteNG.Settings.Default.XULRunnerPath = txtXULrunnerPath.Text;
 
-            Settings.Default.Save();
+            mRemoteNG.Settings.Default.Save();
         }
 
         #endregion

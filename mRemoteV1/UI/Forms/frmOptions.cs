@@ -80,7 +80,7 @@ namespace mRemoteNG.UI.Forms
                 
             }
             Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-            Settings.Default.Save();
+            mRemoteNG.Settings.Default.Save();
 
            
         }

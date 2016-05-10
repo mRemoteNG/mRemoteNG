@@ -5,6 +5,7 @@ using mRemoteNG.Tools.Sorting;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+using mRemoteNG.My;
 
 namespace mRemoteNG.Tree
 {
@@ -50,14 +51,14 @@ namespace mRemoteNG.Tree
                 {
                     if (Tree.ConnectionTreeNode.IsEmpty(SelectedNode) == false)
                     {
-                        if (Interaction.MsgBox(string.Format(My.Language.strConfirmDeleteNodeFolder, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle)(MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
+                        if (Interaction.MsgBox(string.Format(Language.strConfirmDeleteNodeFolder, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle)(MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
                         {
                             SelectedNode.Remove();
                         }
                     }
                     else
                     {
-                        if (Interaction.MsgBox(string.Format(My.Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle)(MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
+                        if (Interaction.MsgBox(string.Format(Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle)(MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
                         {
                             foreach (TreeNode tNode in SelectedNode.Nodes)
                             {
@@ -69,7 +70,7 @@ namespace mRemoteNG.Tree
                 }
                 else if (Tree.ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Connection)
                 {
-                    if (Interaction.MsgBox(string.Format(My.Language.strConfirmDeleteNodeConnection, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle)(MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
+                    if (Interaction.MsgBox(string.Format(Language.strConfirmDeleteNodeConnection, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle)(MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
                     {
                         SelectedNode.Remove();
                     }
@@ -104,7 +105,7 @@ namespace mRemoteNG.Tree
         {
             try
             {
-                if (My.Settings.Default.ShowDescriptionTooltipsInTree)
+                if (mRemoteNG.Settings.Default.ShowDescriptionTooltipsInTree)
                 {
                     //Find the node under the mouse.
                     TreeNode new_node = _TreeView.GetNodeAt(e.X, e.Y);
@@ -332,7 +333,7 @@ namespace mRemoteNG.Tree
             {
                 TreeView.BeginUpdate();
                 TreeView.Nodes.Clear();
-                TreeView.Nodes.Add(My.Language.strConnections);
+                TreeView.Nodes.Add(Language.strConnections);
                 TreeView.EndUpdate();
             }
         }

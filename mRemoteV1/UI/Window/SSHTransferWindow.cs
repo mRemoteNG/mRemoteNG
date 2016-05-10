@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.My;
 using Tamir.SharpSsh;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -268,7 +269,7 @@ namespace mRemoteNG.UI.Window
 			//
 			this.btnTransfer.Anchor = (System.Windows.Forms.AnchorStyles) (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right);
 			this.btnTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnTransfer.Image = My.Resources.SSHTransfer;
+			this.btnTransfer.Image = Resources.SSHTransfer;
 			this.btnTransfer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.btnTransfer.Location = new System.Drawing.Point(597, 382);
 			this.btnTransfer.Name = "btnTransfer";
@@ -371,19 +372,19 @@ namespace mRemoteNG.UI.Window
 				
 		private void ApplyLanguage()
 		{
-			grpFiles.Text = My.Language.strGroupboxFiles;
-			lblLocalFile.Text = My.Language.strLocalFile + ":";
-			lblRemoteFile.Text = My.Language.strRemoteFile + ":";
-			btnBrowse.Text = My.Language.strButtonBrowse;
-			grpConnection.Text = My.Language.strGroupboxConnection;
-			lblProtocol.Text = My.Language.strLabelProtocol;
-			lblPassword.Text = My.Language.strLabelPassword;
-			lblUser.Text = My.Language.strUser + ":";
-			lblPort.Text = My.Language.strLabelPort;
-			lblHost.Text = My.Language.strHost + ":";
-			btnTransfer.Text = My.Language.strTransfer;
-			TabText = My.Language.strMenuSSHFileTransfer;
-			Text = My.Language.strMenuSSHFileTransfer;
+			grpFiles.Text = Language.strGroupboxFiles;
+			lblLocalFile.Text = Language.strLocalFile + ":";
+			lblRemoteFile.Text = Language.strRemoteFile + ":";
+			btnBrowse.Text = Language.strButtonBrowse;
+			grpConnection.Text = Language.strGroupboxConnection;
+			lblProtocol.Text = Language.strLabelProtocol;
+			lblPassword.Text = Language.strLabelPassword;
+			lblUser.Text = Language.strUser + ":";
+			lblPort.Text = Language.strLabelPort;
+			lblHost.Text = Language.strHost + ":";
+			btnTransfer.Text = Language.strTransfer;
+			TabText = Language.strMenuSSHFileTransfer;
+			Text = Language.strMenuSSHFileTransfer;
 		}
         #endregion
 		
@@ -392,13 +393,13 @@ namespace mRemoteNG.UI.Window
 		{
 			if (AllFieldsSet() == false)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strPleaseFillAllFields);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strPleaseFillAllFields);
 				return;
 			}
 					
 			if (File.Exists(this.txtLocalFile.Text) == false)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, My.Language.strLocalFileDoesNotExist);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.strLocalFileDoesNotExist);
 				return;
 			}
 					
@@ -429,7 +430,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHTransferFailed + Environment.NewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + ex.Message);
 				this.sshT.Close();
 			}
 		}
@@ -446,7 +447,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHStartTransferBG + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHStartTransferBG + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -456,7 +457,7 @@ namespace mRemoteNG.UI.Window
 			{
 				if (this.txtPassword.Text == "")
 				{
-					if (Interaction.MsgBox(My.Language.strEmptyPasswordContinue, (Microsoft.VisualBasic.MsgBoxStyle) (MsgBoxStyle.Question | MsgBoxStyle.YesNo), null) == MsgBoxResult.No)
+					if (Interaction.MsgBox(Language.strEmptyPasswordContinue, (Microsoft.VisualBasic.MsgBoxStyle) (MsgBoxStyle.Question | MsgBoxStyle.YesNo), null) == MsgBoxResult.No)
 					{
 						return false;
 					}
@@ -548,7 +549,7 @@ namespace mRemoteNG.UI.Window
 				EnableButtons();
 				SetStatus();
 						
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, My.Language.strSSHTransferFailed);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.strSSHTransferFailed);
 						
 				if (this.sshT != null)
 				{
@@ -561,7 +562,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, My.Language.strSSHTransferEndFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferEndFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion

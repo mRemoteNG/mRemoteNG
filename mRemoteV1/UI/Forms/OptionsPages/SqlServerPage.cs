@@ -38,22 +38,22 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            chkUseSQLServer.Checked = Settings.Default.UseSQLServer;
-            txtSQLServer.Text = Settings.Default.SQLHost;
-            txtSQLDatabaseName.Text = Settings.Default.SQLDatabaseName;
-            txtSQLUsername.Text = Settings.Default.SQLUser;
-            txtSQLPassword.Text = Crypt.Decrypt(Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey);
+            chkUseSQLServer.Checked = mRemoteNG.Settings.Default.UseSQLServer;
+            txtSQLServer.Text = mRemoteNG.Settings.Default.SQLHost;
+            txtSQLDatabaseName.Text = mRemoteNG.Settings.Default.SQLDatabaseName;
+            txtSQLUsername.Text = mRemoteNG.Settings.Default.SQLUser;
+            txtSQLPassword.Text = Crypt.Decrypt(mRemoteNG.Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey);
         }
 
         public override void SaveSettings()
         {
             base.SaveSettings();
 
-            Settings.Default.UseSQLServer = chkUseSQLServer.Checked;
-            Settings.Default.SQLHost = txtSQLServer.Text;
-            Settings.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
-            Settings.Default.SQLUser = txtSQLUsername.Text;
-            Settings.Default.SQLPass = Crypt.Encrypt(txtSQLPassword.Text, GeneralAppInfo.EncryptionKey);
+            mRemoteNG.Settings.Default.UseSQLServer = chkUseSQLServer.Checked;
+            mRemoteNG.Settings.Default.SQLHost = txtSQLServer.Text;
+            mRemoteNG.Settings.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
+            mRemoteNG.Settings.Default.SQLUser = txtSQLUsername.Text;
+            mRemoteNG.Settings.Default.SQLPass = Crypt.Encrypt(txtSQLPassword.Text, GeneralAppInfo.EncryptionKey);
             ReinitializeSqlUpdater();
         }
 
@@ -62,8 +62,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (Runtime.SQLConnProvider != null)
             {
                 Runtime.SQLConnProvider.Dispose();
-                frmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
-                if (Settings.Default.UseSQLServer)
+                frmMain.Default.AreWeUsingSqlServerForSavingConnections = mRemoteNG.Settings.Default.UseSQLServer;
+                if (mRemoteNG.Settings.Default.UseSQLServer)
                 {
                     Runtime.SQLConnProvider = new SqlConnectionsProvider();
                     Runtime.SQLConnProvider.Enable();

@@ -5,6 +5,7 @@ using System.IO;
 using mRemoteNG.App;
 using System.Threading;
 using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG.UI.Window
@@ -363,7 +364,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.pnlChecks);
 			this.Controls.Add(this.chkAlwaysShow);
 			this.Controls.Add(this.btnCheckAgain);
-			this.Icon = My.Resources.ComponentsCheck_Icon;
+			this.Icon = Resources.ComponentsCheck_Icon;
 			this.Name = "ComponentsCheck";
 			this.TabText = "Components Check";
 			this.Text = "Components Check";
@@ -403,16 +404,16 @@ namespace mRemoteNG.UI.Window
 		{
 			ApplyLanguage();
 					
-			chkAlwaysShow.Checked = Convert.ToBoolean(My.Settings.Default.StartupComponentsCheck);
+			chkAlwaysShow.Checked = Convert.ToBoolean(mRemoteNG.Settings.Default.StartupComponentsCheck);
 			CheckComponents();
 		}
 				
 		private void ApplyLanguage()
 		{
-			TabText = My.Language.strComponentsCheck;
-			Text = My.Language.strComponentsCheck;
-			chkAlwaysShow.Text = My.Language.strCcAlwaysShowScreen;
-			btnCheckAgain.Text = My.Language.strCcCheckAgain;
+			TabText = Language.strComponentsCheck;
+			Text = Language.strComponentsCheck;
+			chkAlwaysShow.Text = Language.strCcAlwaysShowScreen;
+			btnCheckAgain.Text = Language.strCcCheckAgain;
 		}
 				
 		private void btnCheckAgain_Click(object sender, EventArgs e)
@@ -422,15 +423,15 @@ namespace mRemoteNG.UI.Window
 				
 		private void chkAlwaysShow_CheckedChanged(object sender, EventArgs e)
 		{
-			My.Settings.Default.StartupComponentsCheck = chkAlwaysShow.Checked;
-			My.Settings.Default.Save();
+			mRemoteNG.Settings.Default.StartupComponentsCheck = chkAlwaysShow.Checked;
+			mRemoteNG.Settings.Default.Save();
 		}
         #endregion
 				
         #region Private Methods
 		private void CheckComponents()
 		{
-			string errorMsg = My.Language.strCcNotInstalledProperly;
+			string errorMsg = Language.strCcNotInstalledProperly;
 					
 			pnlCheck1.Visible = true;
 			pnlCheck2.Visible = true;
@@ -456,17 +457,17 @@ namespace mRemoteNG.UI.Window
 					throw (new Exception(string.Format("Found RDC Client version {0} but version {1} or higher is required.", rdpClient.Version, ProtocolRDP.Versions.RDC80)));
 				}
 						
-				pbCheck1.Image = My.Resources.Good_Symbol;
+				pbCheck1.Image = Resources.Good_Symbol;
 				lblCheck1.ForeColor = Color.DarkOliveGreen;
-				lblCheck1.Text = "RDP (Remote Desktop) " + My.Language.strCcCheckSucceeded;
-				txtCheck1.Text = string.Format(My.Language.strCcRDPOK, rdpClient.Version);
+				lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckSucceeded;
+				txtCheck1.Text = string.Format(Language.strCcRDPOK, rdpClient.Version);
 			}
 			catch (Exception ex)
 			{
-				pbCheck1.Image = My.Resources.Bad_Symbol;
+				pbCheck1.Image = Resources.Bad_Symbol;
 				lblCheck1.ForeColor = Color.Firebrick;
-				lblCheck1.Text = "RDP (Remote Desktop) " + My.Language.strCcCheckFailed;
-				txtCheck1.Text = My.Language.strCcRDPFailed;
+				lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckFailed;
+				txtCheck1.Text = Language.strCcRDPFailed;
 						
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "RDP " + errorMsg, true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
@@ -491,17 +492,17 @@ namespace mRemoteNG.UI.Window
 					System.Windows.Forms.Application.DoEvents();
 				}
 						
-				pbCheck2.Image = My.Resources.Good_Symbol;
+				pbCheck2.Image = Resources.Good_Symbol;
 				lblCheck2.ForeColor = Color.DarkOliveGreen;
-				lblCheck2.Text = "VNC (Virtual Network Computing) " + My.Language.strCcCheckSucceeded;
-				txtCheck2.Text = string.Format(My.Language.strCcVNCOK, VNC.ProductVersion);
+				lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.strCcCheckSucceeded;
+				txtCheck2.Text = string.Format(Language.strCcVNCOK, VNC.ProductVersion);
 			}
 			catch (Exception)
 			{
-				pbCheck2.Image = My.Resources.Bad_Symbol;
+				pbCheck2.Image = Resources.Bad_Symbol;
 				lblCheck2.ForeColor = Color.Firebrick;
-				lblCheck2.Text = "VNC (Virtual Network Computing) " + My.Language.strCcCheckFailed;
-				txtCheck2.Text = My.Language.strCcVNCFailed;
+				lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.strCcCheckFailed;
+				txtCheck2.Text = Language.strCcVNCFailed;
 						
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "VNC " + errorMsg, true);
 			}
@@ -513,28 +514,28 @@ namespace mRemoteNG.UI.Window
 					
 					
 			string pPath = "";
-			if (My.Settings.Default.UseCustomPuttyPath == false)
+			if (mRemoteNG.Settings.Default.UseCustomPuttyPath == false)
 			{
 				pPath = (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\PuTTYNG.exe";
 			}
 			else
 			{
-				pPath = Convert.ToString(My.Settings.Default.CustomPuttyPath);
+				pPath = Convert.ToString(mRemoteNG.Settings.Default.CustomPuttyPath);
 			}
 					
 			if (File.Exists(pPath))
 			{
-				pbCheck3.Image = My.Resources.Good_Symbol;
+				pbCheck3.Image = Resources.Good_Symbol;
 				lblCheck3.ForeColor = Color.DarkOliveGreen;
-				lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + My.Language.strCcCheckSucceeded;
-				txtCheck3.Text = My.Language.strCcPuttyOK;
+				lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.strCcCheckSucceeded;
+				txtCheck3.Text = Language.strCcPuttyOK;
 			}
 			else
 			{
-				pbCheck3.Image = My.Resources.Bad_Symbol;
+				pbCheck3.Image = Resources.Bad_Symbol;
 				lblCheck3.ForeColor = Color.Firebrick;
-				lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + My.Language.strCcCheckFailed;
-				txtCheck3.Text = My.Language.strCcPuttyFailed;
+				lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.strCcCheckFailed;
+				txtCheck3.Text = Language.strCcPuttyFailed;
 						
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "PuTTY " + errorMsg, true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "File " + pPath + " does not exist.", true);
@@ -555,17 +556,17 @@ namespace mRemoteNG.UI.Window
 					System.Windows.Forms.Application.DoEvents();
 				}
 						
-				pbCheck4.Image = My.Resources.Good_Symbol;
+				pbCheck4.Image = Resources.Good_Symbol;
 				lblCheck4.ForeColor = Color.DarkOliveGreen;
-				lblCheck4.Text = "ICA (Citrix ICA) " + My.Language.strCcCheckSucceeded;
-				txtCheck4.Text = string.Format(My.Language.strCcICAOK, ICA.Version);
+				lblCheck4.Text = "ICA (Citrix ICA) " + Language.strCcCheckSucceeded;
+				txtCheck4.Text = string.Format(Language.strCcICAOK, ICA.Version);
 			}
 			catch (Exception ex)
 			{
-				pbCheck4.Image = My.Resources.Bad_Symbol;
+				pbCheck4.Image = Resources.Bad_Symbol;
 				lblCheck4.ForeColor = Color.Firebrick;
-				lblCheck4.Text = "ICA (Citrix ICA) " + My.Language.strCcCheckFailed;
-				txtCheck4.Text = My.Language.strCcICAFailed;
+				lblCheck4.Text = "ICA (Citrix ICA) " + Language.strCcCheckFailed;
+				txtCheck4.Text = Language.strCcICAFailed;
 						
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ICA " + errorMsg, true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
@@ -579,14 +580,14 @@ namespace mRemoteNG.UI.Window
 					
 			bool GeckoBad = false;
 					
-			if (My.Settings.Default.XULRunnerPath == "")
+			if (mRemoteNG.Settings.Default.XULRunnerPath == "")
 			{
 				GeckoBad = true;
 			}
 					
-			if (Directory.Exists(Convert.ToString(My.Settings.Default.XULRunnerPath)))
+			if (Directory.Exists(Convert.ToString(mRemoteNG.Settings.Default.XULRunnerPath)))
 			{
-				if (File.Exists(Path.Combine(Convert.ToString(My.Settings.Default.XULRunnerPath), "xpcom.dll")) == false)
+				if (File.Exists(Path.Combine(Convert.ToString(mRemoteNG.Settings.Default.XULRunnerPath), "xpcom.dll")) == false)
 				{
 					GeckoBad = true;
 				}
@@ -598,20 +599,20 @@ namespace mRemoteNG.UI.Window
 					
 			if (GeckoBad == false)
 			{
-				pbCheck5.Image = My.Resources.Good_Symbol;
+				pbCheck5.Image = Resources.Good_Symbol;
 				lblCheck5.ForeColor = Color.DarkOliveGreen;
-				lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " + My.Language.strCcCheckSucceeded;
-				txtCheck5.Text = My.Language.strCcGeckoOK;
+				lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckSucceeded;
+				txtCheck5.Text = Language.strCcGeckoOK;
 			}
 			else
 			{
-				pbCheck5.Image = My.Resources.Bad_Symbol;
+				pbCheck5.Image = Resources.Bad_Symbol;
 				lblCheck5.ForeColor = Color.Firebrick;
-				lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " + My.Language.strCcCheckFailed;
-				txtCheck5.Text = My.Language.strCcGeckoFailed;
+				lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckFailed;
+				txtCheck5.Text = Language.strCcGeckoFailed;
 						
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Gecko " + errorMsg, true);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " + My.Settings.Default.XULRunnerPath, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " + mRemoteNG.Settings.Default.XULRunnerPath, true);
 			}
 					
 		}

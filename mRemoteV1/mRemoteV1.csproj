@@ -574,7 +574,7 @@
     <EmbeddedResource Include="Resources\Language\Language.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Language.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>mRemoteNG.My</CustomToolNamespace>
+      <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.fr.resx">
@@ -598,7 +598,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-      <CustomToolNamespace>mRemoteNG.My</CustomToolNamespace>
+      <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Tools\ReconnectGroup.resx">
@@ -674,6 +674,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="Properties\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.cs</LastGenOutput>
@@ -1070,11 +1071,11 @@
     <None Include="Resources\Icons\mRemote_Icon.ico" />
     <None Include="Resources\Icons\Sessions_Icon.ico" />
     <None Include="Resources\Icons\Info_Icon.ico" />
-    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
-      <CustomToolNamespace>mRemoteNG.My</CustomToolNamespace>
+      <CustomToolNamespace>mRemoteNG</CustomToolNamespace>
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <None Include="Resources\Images\Properties.png" />
     <None Include="Resources\Images\Inheritance.png" />

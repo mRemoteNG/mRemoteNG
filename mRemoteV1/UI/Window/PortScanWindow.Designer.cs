@@ -1,5 +1,7 @@
 
 
+using mRemoteNG.My;
+
 namespace mRemoteNG.UI.Window
 {
 	public partial class PortScanWindow : BaseWindow
@@ -109,7 +111,7 @@ namespace mRemoteNG.UI.Window
 			//btnScan
 			//
 			this.btnScan.Anchor = (System.Windows.Forms.AnchorStyles) (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.btnScan.Image = My.Resources.Search;
+			this.btnScan.Image = Resources.Search;
 			this.btnScan.Location = new System.Drawing.Point(420, 9);
 			this.btnScan.Name = "btnScan";
 			this.btnScan.Size = new System.Drawing.Size(86, 58);

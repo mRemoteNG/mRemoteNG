@@ -9,6 +9,7 @@ using mRemoteNG.Connection.Protocol.VNC;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using mRemoteNG.My;
 
 namespace mRemoteNG.Connection.Protocol
 {
@@ -60,7 +61,7 @@ namespace mRemoteNG.Connection.Protocol
 					newProtocol = new IntegratedProgram();
 					if (connectionInfo.ExtApp == "")
 					{
-						throw (new Exception(My.Language.strNoExtAppDefined));
+						throw (new Exception(Language.strNoExtAppDefined));
 					}
 					break;
 			}

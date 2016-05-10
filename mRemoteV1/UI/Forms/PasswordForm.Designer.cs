@@ -1,5 +1,7 @@
 
 
+using mRemoteNG.My;
+
 namespace mRemoteNG.Forms
 {
 	[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]public 
@@ -73,7 +75,7 @@ namespace mRemoteNG.Forms
 			this.btnOK.Name = "btnOK";
 			this.btnOK.Size = new System.Drawing.Size(75, 23);
 			this.btnOK.TabIndex = 7;
-			this.btnOK.Text = mRemoteNG.My.Language.strButtonOK;
+			this.btnOK.Text = Language.strButtonOK;
 			this.btnOK.UseVisualStyleBackColor = true;
 			//
 			//btnCancel
@@ -84,7 +86,7 @@ namespace mRemoteNG.Forms
 			this.btnCancel.Name = "btnCancel";
 			this.btnCancel.Size = new System.Drawing.Size(75, 23);
 			this.btnCancel.TabIndex = 6;
-			this.btnCancel.Text = global::mRemoteNG.My.Language.strButtonCancel;
+			this.btnCancel.Text = Language.strButtonCancel;
 			this.btnCancel.UseVisualStyleBackColor = true;
 			//
 			//lblStatus
@@ -102,7 +104,7 @@ namespace mRemoteNG.Forms
 			//
 			//pbLock
 			//
-			this.pbLock.Image = My.Resources.Lock;
+			this.pbLock.Image = Resources.Lock;
 			this.pbLock.Location = new System.Drawing.Point(12, 12);
 			this.pbLock.Name = "pbLock";
 			this.pbLock.Size = new System.Drawing.Size(64, 64);

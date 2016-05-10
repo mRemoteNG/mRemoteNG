@@ -3,6 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using mRemoteNG.App;
+using mRemoteNG.My;
 
 
 namespace mRemoteNG.Security
@@ -46,7 +47,7 @@ namespace mRemoteNG.Security
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(My.Language.strErrorEncryptionFailed, ex.Message));
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(Language.strErrorEncryptionFailed, ex.Message));
 			}
 				
 			return StrToEncrypt;
@@ -103,7 +104,7 @@ namespace mRemoteNG.Security
 				// Ignore CryptographicException "Padding is invalid and cannot be removed." when password is incorrect.
 				if (!(ex is CryptographicException))
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(My.Language.strErrorDecryptionFailed, ex.Message));
+					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(Language.strErrorDecryptionFailed, ex.Message));
 				}
 			}
 				

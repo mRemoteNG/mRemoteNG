@@ -30,18 +30,18 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            Settings.Default.SaveConsOnExit = chkSaveConsOnExit.Checked;
-            Settings.Default.OpenConsFromLastSession = chkReconnectOnStart.Checked;
-            Settings.Default.SingleInstance = chkSingleInstance.Checked;
-            Settings.Default.StartupComponentsCheck = chkProperInstallationOfComponentsAtStartup.Checked;
+            mRemoteNG.Settings.Default.SaveConsOnExit = chkSaveConsOnExit.Checked;
+            mRemoteNG.Settings.Default.OpenConsFromLastSession = chkReconnectOnStart.Checked;
+            mRemoteNG.Settings.Default.SingleInstance = chkSingleInstance.Checked;
+            mRemoteNG.Settings.Default.StartupComponentsCheck = chkProperInstallationOfComponentsAtStartup.Checked;
         }
 
         public void StartupExitPage_Load(object sender, EventArgs e)
         {
-            chkSaveConsOnExit.Checked = Settings.Default.SaveConsOnExit;
-            chkReconnectOnStart.Checked = Settings.Default.OpenConsFromLastSession;
-            chkSingleInstance.Checked = Settings.Default.SingleInstance;
-            chkProperInstallationOfComponentsAtStartup.Checked = Settings.Default.StartupComponentsCheck;
+            chkSaveConsOnExit.Checked = mRemoteNG.Settings.Default.SaveConsOnExit;
+            chkReconnectOnStart.Checked = mRemoteNG.Settings.Default.OpenConsFromLastSession;
+            chkSingleInstance.Checked = mRemoteNG.Settings.Default.SingleInstance;
+            chkProperInstallationOfComponentsAtStartup.Checked = mRemoteNG.Settings.Default.StartupComponentsCheck;
         }
     }
 }

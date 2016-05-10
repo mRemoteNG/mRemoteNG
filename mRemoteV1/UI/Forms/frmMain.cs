@@ -45,7 +45,7 @@ namespace mRemoteNG.UI.Forms
         #region Constructors
         public frmMain()
 		{
-			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
+			_showFullPathInTitle = mRemoteNG.Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
 			//Added to support default instance behavour in C#. This should be removed at the earliest opportunity.
             if (_defaultInstance == null)
@@ -188,7 +188,7 @@ namespace mRemoteNG.UI.Forms
             Windows.treePanel.Focus();
             ConnectionTree.TreeView = Windows.treeForm.tvConnections;
 
-            if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !System.IO.File.Exists(Runtime.GetStartupConnectionFileName()))
+            if (mRemoteNG.Settings.Default.FirstStart && !mRemoteNG.Settings.Default.LoadConsFromCustomLocation && !System.IO.File.Exists(Runtime.GetStartupConnectionFileName()))
 			{
                 Runtime.NewConnections(Runtime.GetStartupConnectionFileName());
 			}
@@ -201,7 +201,7 @@ namespace mRemoteNG.UI.Forms
 				return ;
 			}
 			Config.Putty.Sessions.StartWatcher();
-			if (Settings.Default.StartupComponentsCheck)
+			if (mRemoteNG.Settings.Default.StartupComponentsCheck)
 			{
                 Windows.Show(WindowType.ComponentsCheck);
 			}
@@ -332,13 +332,13 @@ namespace mRemoteNG.UI.Forms
             #if PORTABLE
 			return ;
             #endif
-//			if (!My.Settings.Default.CheckForUpdatesAsked)
+//			if (!mRemoteNG.Settings.Default.CheckForUpdatesAsked)
 //			{
-//				string[] commandButtons = new string[] {My.Language.strAskUpdatesCommandRecommended, My.Language.strAskUpdatesCommandCustom, My.Language.strAskUpdatesCommandAskLater};
-//				cTaskDialog.ShowTaskDialogBox(this, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, My.Language.strAskUpdatesMainInstruction, string.Format(My.Language.strAskUpdatesContent, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName), "", "", "", "", string.Join("|", commandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question);
+//				string[] commandButtons = new string[] {Language.strAskUpdatesCommandRecommended, Language.strAskUpdatesCommandCustom, Language.strAskUpdatesCommandAskLater};
+//				cTaskDialog.ShowTaskDialogBox(this, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, Language.strAskUpdatesMainInstruction, string.Format(Language.strAskUpdatesContent, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName), "", "", "", "", string.Join("|", commandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question);
 //				if (cTaskDialog.CommandButtonResult == 0 | cTaskDialog.CommandButtonResult == 1)
 //				{
-//					My.Settings.Default.CheckForUpdatesAsked = true;
+//					mRemoteNG.Settings.Default.CheckForUpdatesAsked = true;
 //					}
 //					if (cTaskDialog.CommandButtonResult == 1)
 //					{
@@ -347,13 +347,13 @@ namespace mRemoteNG.UI.Forms
 //						return ;
 //						}
 						
-//						if (!My.Settings.Default.CheckForUpdatesOnStartup)
+//						if (!mRemoteNG.Settings.Default.CheckForUpdatesOnStartup)
 //						{
 //							return ;
 //							}
 							
-//							DateTime nextUpdateCheck = System.Convert.ToDateTime(My.Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(System.Convert.ToDouble(My.Settings.Default.CheckForUpdatesFrequencyDays))));
-//							if (My.Settings.Default.UpdatePending || DateTime.UtcNow > nextUpdateCheck)
+//							DateTime nextUpdateCheck = System.Convert.ToDateTime(mRemoteNG.Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(System.Convert.ToDouble(mRemoteNG.Settings.Default.CheckForUpdatesFrequencyDays))));
+//							if (mRemoteNG.Settings.Default.UpdatePending || DateTime.UtcNow > nextUpdateCheck)
 //							{
 //								if (!IsHandleCreated)
 //								{
@@ -377,12 +377,12 @@ namespace mRemoteNG.UI.Forms
 						openConnections = openConnections + connectionWindow.TabController.TabPages.Count;
 				}
 
-                if (openConnections > 0 && (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All | (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & openConnections > 1) || Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
+                if (openConnections > 0 && (mRemoteNG.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All | (mRemoteNG.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & openConnections > 1) || mRemoteNG.Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
 				{
 					DialogResult result = cTaskDialog.MessageBox(this, System.Windows.Forms.Application.ProductName, Language.strConfirmExitMainInstruction, "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, eSysIcons.Question);
 					if (cTaskDialog.VerificationChecked)
 					{
-                        Settings.Default.ConfirmCloseConnection--;
+                        mRemoteNG.Settings.Default.ConfirmCloseConnection--;
 					}
 					if (result == DialogResult.No)
 					{
@@ -857,10 +857,10 @@ namespace mRemoteNG.UI.Forms
 					if (!(fieldInfo.Name == "value__" || fieldInfo.Name == "IntApp"))
 					{
 						ToolStripMenuItem menuItem = new ToolStripMenuItem(fieldInfo.Name);
-						if (fieldInfo.Name == Settings.Default.QuickConnectProtocol)
+						if (fieldInfo.Name == mRemoteNG.Settings.Default.QuickConnectProtocol)
 						{
 							menuItem.Checked = true;
-							btnQuickConnect.Text = Settings.Default.QuickConnectProtocol;
+							btnQuickConnect.Text = mRemoteNG.Settings.Default.QuickConnectProtocol;
 						}
 						mnuQuickConnectProtocol.Items.Add(menuItem);
 					}
@@ -886,7 +886,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			try
 			{
-				ConnectionInfo connectionInfo = Runtime.CreateQuickConnect(cmbQuickConnect.Text.Trim(), Connection.Protocol.Converter.StringToProtocol(Settings.Default.QuickConnectProtocol));
+				ConnectionInfo connectionInfo = Runtime.CreateQuickConnect(cmbQuickConnect.Text.Trim(), Connection.Protocol.Converter.StringToProtocol(mRemoteNG.Settings.Default.QuickConnectProtocol));
 				if (connectionInfo == null)
 				{
 					cmbQuickConnect.Focus();
@@ -913,7 +913,7 @@ namespace mRemoteNG.UI.Forms
 		
 		private void SetQuickConnectProtocol(string protocol)
 		{
-            Settings.Default.QuickConnectProtocol = protocol;
+            mRemoteNG.Settings.Default.QuickConnectProtocol = protocol;
 			btnQuickConnect.Text = protocol;
 			foreach (ToolStripMenuItem menuItem in mnuQuickConnectProtocol.Items)
 			{
@@ -985,7 +985,7 @@ namespace mRemoteNG.UI.Forms
 											
 					if (Tree.ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.Container)
 					{
-						menuItem.Image = My.Resources.Folder;
+						menuItem.Image = Resources.Folder;
 						menuItem.Tag = treeNode.Tag;
 												
 						toolStripMenuItem.DropDownItems.Add(menuItem);
@@ -1030,7 +1030,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (WindowState == FormWindowState.Minimized)
 			{
-				if (Settings.Default.MinimizeToTray)
+				if (mRemoteNG.Settings.Default.MinimizeToTray)
 				{
 					if (Runtime.NotificationAreaIcon == null)
 					{
@@ -1203,7 +1203,7 @@ namespace mRemoteNG.UI.Forms
 					if (!string.IsNullOrEmpty(ConnectionsFileName))
 					{
 						titleBuilder.Append(separator);
-						if (Settings.Default.ShowCompleteConsPathInTitle)
+						if (mRemoteNG.Settings.Default.ShowCompleteConsPathInTitle)
 						{
 							titleBuilder.Append(ConnectionsFileName);
 						}
@@ -1228,7 +1228,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			DocumentStyle newDocumentStyle = pnlDock.DocumentStyle;
 									
-			if (Settings.Default.AlwaysShowPanelTabs)
+			if (mRemoteNG.Settings.Default.AlwaysShowPanelTabs)
 			{
 				newDocumentStyle = DocumentStyle.DockingWindow; // Show the panel tabs
 			}
