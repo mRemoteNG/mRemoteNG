@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace mRemoteNG.My {
+namespace mRemoteNG {
     using System;
     
     
