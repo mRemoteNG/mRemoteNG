@@ -10,17 +10,20 @@
     <OutputType>Package</OutputType>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' AND '$(MSBuildExtensionsPath32)' != '' ">$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
     <WixTargetsPath Condition=" '$(WixTargetsPath)' == '' ">$(MSBuildExtensionsPath)\Microsoft\WiX\v3.x\Wix.targets</WixTargetsPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
     <OutputPath>bin\$(Configuration)\</OutputPath>
     <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
-    <DefineConstants>Debug</DefineConstants>
-    <DefineConstants>HarvestPath=..\mRemoteV1\bin\Debug</DefineConstants>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <OutputPath>bin\$(Configuration)\</OutputPath>
-    <IntermediateOutputPath>obj\$(Configuration)\</IntermediateOutputPath>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DefineConstants>HarvestPath=..\mRemoteV1\bin\Debug;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DefineConstants>HarvestPath=..\mRemoteV1\bin\Release;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug Portable' ">
+    <DefineConstants>HarvestPath=..\mRemoteV1\bin\Debug Portable;</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release Portable' ">
+    <DefineConstants>HarvestPath=..\mRemoteV1\bin\Release Portable;</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Fragments\FilesFragment.wxs" />
@@ -67,6 +70,6 @@
     <Copy SourceFiles="$(OutputPath)$(OutputName).msi" DestinationFiles="..\Deploy\Setup\$(OutputName) $(AssemblyFileVersion)_$(Platform).msi" />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>call "$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\bin\Release" -ag -dr INSTALLLOCATION -var var.HarvestPath -srd -cg ProductComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt" -v</PreBuildEvent>
+    <PreBuildEvent>call "$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\bin\$(Configuration)" -ag -dr INSTALLLOCATION -var var.HarvestPath -srd -cg ProductComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt" -v</PreBuildEvent>
   </PropertyGroup>
 </Project>
