@@ -6,7 +6,6 @@ using System.Windows.Forms;
 using mRemoteNG.Config.Import;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
-using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using Microsoft.VisualBasic;
 using PSTaskDialog;
@@ -87,11 +86,9 @@ namespace mRemoteNG.App
                         }
                         catch (Exception ex)
                         {
-                            cTaskDialog.ShowTaskDialogBox(Application.ProductName,
-                                Language.strImportFileFailedMainInstruction,
-                                string.Format(Language.strImportFileFailedContent, fileName),
-                                MiscTools.GetExceptionMessageRecursive(ex), "", "", "", "", eTaskDialogButtons.OK,
-                                eSysIcons.Error, eSysIcons.Error);
+                            MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName), Language.strImportFileFailedMainInstruction,
+                                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                            Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:1", ex, logOnly: true);
                         }
                     }
 
@@ -107,7 +104,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed.", ex, logOnly: true);
+                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:2", ex, logOnly: true);
             }
         }
 
