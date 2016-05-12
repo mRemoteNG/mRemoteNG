@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.My;
 using mRemoteNG.UI.Forms.OptionsPages;
 
 namespace mRemoteNG.UI.Forms
@@ -67,7 +62,6 @@ namespace mRemoteNG.UI.Forms
             _pages.Add(typeof(SqlServerPage).Name, new SqlServerPage());
             _pages.Add(typeof(UpdatesPage).Name, new UpdatesPage());
             _pages.Add(typeof(ThemePage).Name, new ThemePage());
-            _pages.Add(typeof(KeyboardPage).Name, new KeyboardPage());
             _pages.Add(typeof(AdvancedPage).Name, new AdvancedPage());
         }
 

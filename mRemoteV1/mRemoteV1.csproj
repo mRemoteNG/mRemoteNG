@@ -201,10 +201,6 @@
     <Compile Include="Config\Import\PuttyConnectionManager.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnection.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnectionManager.cs" />
-    <Compile Include="Config\KeyboardShortcuts\KeyboardShortcutMap.cs" />
-    <Compile Include="Config\KeyboardShortcuts\ShortcutCommandEnum.cs" />
-    <Compile Include="Config\KeyboardShortcuts\ShortcutKey.cs" />
-    <Compile Include="Config\KeyboardShortcuts\ShortcutMapping.cs" />
     <Compile Include="Config\Putty\Config.Putty.RegistryProvider.cs" />
     <Compile Include="Config\Putty\Config.Putty.XmingProvider.cs" />
     <Compile Include="Config\Putty\Config.Putty.Sessions.cs" />
@@ -243,7 +239,6 @@
     <Compile Include="UI\Controls\ToolStripSplitButton.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Config\KeyboardShortcuts\KeyboardShortcuts.cs" />
     <Compile Include="UI\Forms\frmOptions.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -273,12 +268,6 @@
     </Compile>
     <Compile Include="UI\Forms\OptionsForm.cs">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\OptionsPages\KeyboardPage.Designer.cs">
-      <DependentUpon>KeyboardPage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Forms\OptionsPages\KeyboardPage.cs">
-      <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\OptionsPage.cs">
       <SubType>UserControl</SubType>
@@ -527,9 +516,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsPages\KeyboardPage.resx">
-      <DependentUpon>KeyboardPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\SqlServerPage.resx">
       <DependentUpon>SqlServerPage.cs</DependentUpon>
@@ -1206,12 +1192,6 @@
       <WrapperTool>tlbimp</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\SharedLibraryNG\SharedLibraryNG.csproj">
-      <Project>{0f615504-5f30-4cf2-8341-1de7fec95a23}</Project>
-      <Name>SharedLibraryNG</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.VisualBasic" />

@@ -2,12 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.My;
 using mRemoteNG.UI.Forms.OptionsPages;
 
 namespace mRemoteNG.UI.Forms
 {
-	public partial class OptionsForm
+    public partial class OptionsForm
 	{
         private Dictionary<OptionsPage, PageInfo> _pages;
         private ImageList _pageIconImageList;
@@ -37,7 +36,6 @@ namespace mRemoteNG.UI.Forms
             _pages.Add(new SqlServerPage(), new PageInfo());
             _pages.Add(new UpdatesPage(), new PageInfo());
             _pages.Add(new ThemePage(), new PageInfo());
-            _pages.Add(new KeyboardPage(), new PageInfo());
             _pages.Add(new AdvancedPage(), new PageInfo());
         }
 
