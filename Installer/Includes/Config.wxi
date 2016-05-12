@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Include>
+  <?define ProductName = "mRemoteNG" ?>
+  <?define Company = "Next Generation Software" ?>
+  <?define UpgradeCode = "dd678a54-ca75-4791-8dfe-d818095684f8" ?>
+  <?define ProductCode = "*" ?>
+  <?define MajorVersion = "1" ?>
+  <?define MinorVersion = "74" ?>
+  <?define BuildVersion = "1" ?>
+  <?define ProductVersion = "$(var.MajorVersion).$(var.MinorVersion).$(var.BuildVersion)" ?>
+  <?define ProductLanguage = 1033 ?>
+  <?define ExeProcessName = "$(var.ProductName).exe" ?>
+  
+  <?if $(var.Platform) = x64 ?>
+    <?define ProductNameWithPlatform = "$(var.ProductName) (64 bit)" ?>
+    <?define Win64 = "yes" ?>
+    <?define PlatformProgramFilesFolder = "ProgramFiles64Folder" ?>
+  <?else ?>
+    <?define ProductNameWithPlatform = "$(var.ProductName)" ?>
+    <?define Win64 = "no" ?>
+    <?define PlatformProgramFilesFolder = "ProgramFilesFolder" ?>
+  <?endif ?>
+</Include>

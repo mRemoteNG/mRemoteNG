@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
+  <Product Name="$(var.ProductNameWithPlatform)" Manufacturer="Next Generation Software" Version="$(var.ProductVersion)"
+           Id="$(var.ProductCode)" 
+           UpgradeCode="$(var.UpgradeCode)" 
+           Language="$(var.ProductLanguage)">
+    <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+    
+    <Feature Id="ProductFeature" Title="Installer" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+    </Feature>
+  </Product>
+
+  <Fragment Id="FoldersFragment">
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="$(var.PlatformProgramFilesFolder)">
+        <Directory Id="INSTALLLOCATION" Name="$(var.ProductName)" />
+      </Directory>
+    </Directory>
+  </Fragment>
+</Wix>
