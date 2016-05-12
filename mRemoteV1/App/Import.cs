@@ -7,8 +7,8 @@ using mRemoteNG.Config.Import;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
+using mRemoteNG.UI.TaskDialog;
 using Microsoft.VisualBasic;
-using PSTaskDialog;
 
 namespace mRemoteNG.App
 {
@@ -192,11 +192,11 @@ namespace mRemoteNG.App
                 }
                 else
                 {
-                    cTaskDialog.ShowCommandBox(Application.ProductName, Language.strImportLocationMainInstruction,
+                    CTaskDialog.ShowCommandBox(Application.ProductName, Language.strImportLocationMainInstruction,
                         Language.strImportLocationContent, "", "", "",
                         string.Format(Language.strImportLocationCommandButtons, Constants.vbLf, rootTreeNode.Text,
-                            selectedTreeNode.Text), true, eSysIcons.Question, 0);
-                    switch (cTaskDialog.CommandButtonResult)
+                            selectedTreeNode.Text), true, ESysIcons.Question, 0);
+                    switch (CTaskDialog.CommandButtonResult)
                     {
                         case 0: // Root
                             parentTreeNode = rootTreeNode;

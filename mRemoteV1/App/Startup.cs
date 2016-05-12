@@ -6,7 +6,6 @@ using mRemoteNG.My;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Window;
-using PSTaskDialog;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -18,6 +17,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.App
 {
@@ -38,7 +38,7 @@ namespace mRemoteNG.App
             bool isFipsPolicyEnabled = false;
 
             // Windows XP/Windows Server 2003
-            regKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa");
+            regKey = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa");
             if (regKey != null)
             {
                 if ((int)regKey.GetValue("FIPSAlgorithmPolicy") != 0)
@@ -48,7 +48,7 @@ namespace mRemoteNG.App
             }
 
             // Windows Vista/Windows Server 2008 and newer
-            regKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa\\FIPSAlgorithmPolicy");
+            regKey = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa\\FIPSAlgorithmPolicy");
             if (regKey != null)
             {
                 if ((int)regKey.GetValue("Enabled") != 0)
@@ -60,12 +60,12 @@ namespace mRemoteNG.App
             if (isFipsPolicyEnabled)
             {
                 MessageBox.Show(frmMain.Default, string.Format(Language.strErrorFipsPolicyIncompatible, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName), (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                System.Environment.Exit(1);
+                Environment.Exit(1);
             }
         }
         private static void CheckLenovoAutoScrollUtility()
         {
-            if (!mRemoteNG.Settings.Default.CompatibilityWarnLenovoAutoScrollUtility)
+            if (!Settings.Default.CompatibilityWarnLenovoAutoScrollUtility)
             {
                 return;
             }
@@ -83,10 +83,10 @@ namespace mRemoteNG.App
                 return;
             }
 
-            cTaskDialog.MessageBox(System.Windows.Forms.Application.ProductName, Language.strCompatibilityProblemDetected, string.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected, System.Windows.Forms.Application.ProductName), "", "", Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.OK, eSysIcons.Warning, eSysIcons.Warning);
-            if (cTaskDialog.VerificationChecked)
+            CTaskDialog.MessageBox(Application.ProductName, Language.strCompatibilityProblemDetected, string.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected, Application.ProductName), "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok, ESysIcons.Warning, ESysIcons.Warning);
+            if (CTaskDialog.VerificationChecked)
             {
-                mRemoteNG.Settings.Default.CompatibilityWarnLenovoAutoScrollUtility = false;
+                Settings.Default.CompatibilityWarnLenovoAutoScrollUtility = false;
             }
         }
 
@@ -152,7 +152,7 @@ namespace mRemoteNG.App
         }
         public static void LogStartupData()
         {
-            if (mRemoteNG.Settings.Default.WriteLogFile)
+            if (Settings.Default.WriteLogFile)
             {
                 LogApplicationData();
                 LogCmdLineArgs();
@@ -224,7 +224,7 @@ namespace mRemoteNG.App
 #if !PORTABLE
             Runtime.Log.InfoFormat("{0} {1} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion);
 #else
-            Runtime.Log.InfoFormat("{0} {1} {2} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion, Language.strLabelPortableEdition);
+            Runtime.Log.InfoFormat("{0} {1} {2} starting.", Application.ProductName, Application.ProductVersion, Language.strLabelPortableEdition);
 #endif
         }
         private static void LogCmdLineArgs()
@@ -233,7 +233,7 @@ namespace mRemoteNG.App
         }
         private static void LogCLRData()
         {
-            Runtime.Log.InfoFormat("Microsoft .NET CLR {0}", System.Environment.Version.ToString());
+            Runtime.Log.InfoFormat("Microsoft .NET CLR {0}", Environment.Version.ToString());
         }
         private static void LogCultureData()
         {
@@ -243,7 +243,7 @@ namespace mRemoteNG.App
 
         public static void CreateConnectionsProvider()
         {
-            if (mRemoteNG.Settings.Default.UseSQLServer == true)
+            if (Settings.Default.UseSQLServer == true)
             {
                 SqlConnectionsProvider _sqlConnectionsProvider = new SqlConnectionsProvider();
             }
@@ -260,8 +260,8 @@ namespace mRemoteNG.App
                 return;
             }
 
-            DateTime nextUpdateCheck = Convert.ToDateTime(mRemoteNG.Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(mRemoteNG.Settings.Default.CheckForUpdatesFrequencyDays))));
-            if (!mRemoteNG.Settings.Default.UpdatePending && DateTime.UtcNow < nextUpdateCheck)
+            DateTime nextUpdateCheck = Convert.ToDateTime(Settings.Default.CheckForUpdatesLastCheck.Add(TimeSpan.FromDays(Convert.ToDouble(Settings.Default.CheckForUpdatesFrequencyDays))));
+            if (!Settings.Default.UpdatePending && DateTime.UtcNow < nextUpdateCheck)
             {
                 return;
             }
@@ -414,46 +414,46 @@ namespace mRemoteNG.App
                     {
                         if (File.Exists((new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\" + cmd[ConsParam]))
                         {
-                            mRemoteNG.Settings.Default.LoadConsFromCustomLocation = true;
-                            mRemoteNG.Settings.Default.CustomConsPath = (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\" + cmd[ConsParam];
+                            Settings.Default.LoadConsFromCustomLocation = true;
+                            Settings.Default.CustomConsPath = (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\" + cmd[ConsParam];
                             return;
                         }
-                        else if (File.Exists(App.Info.ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam]))
+                        else if (File.Exists(Info.ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam]))
                         {
-                            mRemoteNG.Settings.Default.LoadConsFromCustomLocation = true;
-                            mRemoteNG.Settings.Default.CustomConsPath = App.Info.ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam];
+                            Settings.Default.LoadConsFromCustomLocation = true;
+                            Settings.Default.CustomConsPath = Info.ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam];
                             return;
                         }
                     }
                     else
                     {
-                        mRemoteNG.Settings.Default.LoadConsFromCustomLocation = true;
-                        mRemoteNG.Settings.Default.CustomConsPath = cmd[ConsParam];
+                        Settings.Default.LoadConsFromCustomLocation = true;
+                        Settings.Default.CustomConsPath = cmd[ConsParam];
                         return;
                     }
                 }
 
                 if (!string.IsNullOrEmpty(ResetPosParam))
                 {
-                    mRemoteNG.Settings.Default.MainFormKiosk = false;
-                    mRemoteNG.Settings.Default.MainFormLocation = new Point(999, 999);
-                    mRemoteNG.Settings.Default.MainFormSize = new Size(900, 600);
-                    mRemoteNG.Settings.Default.MainFormState = FormWindowState.Normal;
+                    Settings.Default.MainFormKiosk = false;
+                    Settings.Default.MainFormLocation = new Point(999, 999);
+                    Settings.Default.MainFormSize = new Size(900, 600);
+                    Settings.Default.MainFormState = FormWindowState.Normal;
                 }
 
                 if (!string.IsNullOrEmpty(ResetPanelsParam))
                 {
-                    mRemoteNG.Settings.Default.ResetPanels = true;
+                    Settings.Default.ResetPanels = true;
                 }
 
                 if (!string.IsNullOrEmpty(NoReconnectParam))
                 {
-                    mRemoteNG.Settings.Default.NoReconnect = true;
+                    Settings.Default.NoReconnect = true;
                 }
 
                 if (!string.IsNullOrEmpty(ResetToolbarsParam))
                 {
-                    mRemoteNG.Settings.Default.ResetToolbars = true;
+                    Settings.Default.ResetToolbars = true;
                 }
             }
             catch (Exception ex)

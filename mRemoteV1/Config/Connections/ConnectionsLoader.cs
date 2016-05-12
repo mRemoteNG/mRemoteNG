@@ -4,7 +4,6 @@ using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.My;
-using PSTaskDialog;
 using System;
 using System.Data;
 using System.Data.SqlClient;
@@ -19,6 +18,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Images;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -90,8 +90,8 @@ namespace mRemoteNG.Config.Connections
 		
         public string ConnectionFileName
 		{
-			get { return this._ConnectionFileName; }
-			set { this._ConnectionFileName = value; }
+			get { return _ConnectionFileName; }
+			set { _ConnectionFileName = value; }
 		}
 		
 		public TreeNode RootTreeNode {get; set;}
@@ -100,8 +100,8 @@ namespace mRemoteNG.Config.Connections
 		
         public ContainerList ContainerList
 		{
-			get { return this._ContainerList; }
-			set { this._ContainerList = value; }
+			get { return _ContainerList; }
+			set { _ContainerList = value; }
 		}
 		
         public ConnectionList PreviousConnectionList
@@ -188,19 +188,19 @@ namespace mRemoteNG.Config.Connections
 				const double maxSupportedSchemaVersion = 2.5;
 				if (confVersion > maxSupportedSchemaVersion)
 				{
-                    cTaskDialog.ShowTaskDialogBox(
+                    CTaskDialog.ShowTaskDialogBox(
                         frmMain.Default, 
-                        System.Windows.Forms.Application.ProductName, 
+                        Application.ProductName, 
                         "Incompatible database schema",
-                        $"The database schema on the server is not supported. Please upgrade to a newer version of {System.Windows.Forms.Application.ProductName}.", 
+                        $"The database schema on the server is not supported. Please upgrade to a newer version of {Application.ProductName}.", 
                         string.Format("Schema Version: {1}{0}Highest Supported Version: {2}", Environment.NewLine, confVersion.ToString(), maxSupportedSchemaVersion.ToString()), 
                         "", 
                         "", 
                         "", 
                         "", 
-                        eTaskDialogButtons.OK, 
-                        eSysIcons.Error, 
-                        eSysIcons.Error
+                        ETaskDialogButtons.Ok, 
+                        ESysIcons.Error, 
+                        ESysIcons.Error
                     );
 					throw (new Exception($"Incompatible database schema (schema version {confVersion})."));
 				}
@@ -236,7 +236,7 @@ namespace mRemoteNG.Config.Connections
 				RootTreeNode.Expand();
 						
 				//expand containers
-				foreach (ContainerInfo contI in this._ContainerList)
+				foreach (ContainerInfo contI in _ContainerList)
 				{
 					if (contI.IsExpanded == true)
 					{
@@ -312,7 +312,7 @@ namespace mRemoteNG.Config.Connections
 						conI.TreeNode = tNode;
 						//conI.Parent = _previousContainer 'NEW
 								
-						this.ConnectionList.Add(conI);
+						ConnectionList.Add(conI);
 								
 						tNode.Tag = conI;
 								
@@ -322,7 +322,7 @@ namespace mRemoteNG.Config.Connections
 									
 							if (prevCon != null)
 							{
-								foreach (Connection.Protocol.ProtocolBase prot in prevCon.OpenConnections)
+								foreach (ProtocolBase prot in prevCon.OpenConnections)
 								{
 									prot.InterfaceControl.Info = conI;
 									conI.OpenConnections.Add(prot);
@@ -402,8 +402,8 @@ namespace mRemoteNG.Config.Connections
 							}
 						}
 								
-						this._ContainerList.Add(contI);
-						this.ConnectionList.Add(conI);
+						_ContainerList.Add(contI);
+						ConnectionList.Add(conI);
 								
 						tNode.Tag = contI;
                         tNode.ImageIndex = (int)TreeImageType.Container;
@@ -501,7 +501,7 @@ namespace mRemoteNG.Config.Connections
 				connectionInfo.Icon = Convert.ToString(sqlRd["Icon"]);
 				connectionInfo.Panel = Convert.ToString(sqlRd["Panel"]);
 						
-				if (this.confVersion > 1.5) //1.6
+				if (confVersion > 1.5) //1.6
 				{
                     connectionInfo.ICAEncryption = (ProtocolICA.EncryptionStrength)Tools.MiscTools.StringToEnum(typeof(ProtocolICA.EncryptionStrength), Convert.ToString(sqlRd["ICAEncryptionStrength"]));
 					connectionInfo.Inheritance.ICAEncryption = Convert.ToBoolean(sqlRd["InheritICAEncryptionStrength"]);
@@ -511,7 +511,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.Inheritance.PostExtApp = Convert.ToBoolean(sqlRd["InheritPostExtApp"]);
 				}
 						
-				if (this.confVersion > 1.6) //1.7
+				if (confVersion > 1.6) //1.7
 				{
                     connectionInfo.VNCCompression = (ProtocolVNC.Compression)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Compression), Convert.ToString(sqlRd["VNCCompression"]));
                     connectionInfo.VNCEncoding = (ProtocolVNC.Encoding)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Encoding), Convert.ToString(sqlRd["VNCEncoding"]));
@@ -537,13 +537,13 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.Inheritance.VNCViewOnly = Convert.ToBoolean(sqlRd["InheritVNCViewOnly"]);
 				}
 				
-				if (this.confVersion > 1.7) //1.8
+				if (confVersion > 1.7) //1.8
 				{
                     connectionInfo.RDPAuthenticationLevel = (ProtocolRDP.AuthenticationLevel)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.AuthenticationLevel), Convert.ToString(sqlRd["RDPAuthenticationLevel"]));
 					connectionInfo.Inheritance.RDPAuthenticationLevel = Convert.ToBoolean(sqlRd["InheritRDPAuthenticationLevel"]);
 				}
 				
-				if (this.confVersion > 1.8) //1.9
+				if (confVersion > 1.8) //1.9
 				{
                     connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Tools.MiscTools.StringToEnum(typeof(HTTPBase.RenderingEngine), Convert.ToString(sqlRd["RenderingEngine"]));
 					connectionInfo.MacAddress = Convert.ToString(sqlRd["MacAddress"]);
@@ -551,19 +551,19 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.Inheritance.MacAddress = Convert.ToBoolean(sqlRd["InheritMacAddress"]);
 				}
 				
-				if (this.confVersion > 1.9) //2.0
+				if (confVersion > 1.9) //2.0
 				{
 					connectionInfo.UserField = Convert.ToString(sqlRd["UserField"]);
 					connectionInfo.Inheritance.UserField = Convert.ToBoolean(sqlRd["InheritUserField"]);
 				}
 				
-				if (this.confVersion > 2.0) //2.1
+				if (confVersion > 2.0) //2.1
 				{
 					connectionInfo.ExtApp = Convert.ToString(sqlRd["ExtApp"]);
 					connectionInfo.Inheritance.ExtApp = Convert.ToBoolean(sqlRd["InheritExtApp"]);
 				}
 						
-				if (this.confVersion >= 2.2)
+				if (confVersion >= 2.2)
 				{
                     connectionInfo.RDGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDGatewayUsageMethod), Convert.ToString(sqlRd["RDGatewayUsageMethod"]));
 					connectionInfo.RDGatewayHostname = Convert.ToString(sqlRd["RDGatewayHostname"]);
@@ -578,7 +578,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.Inheritance.RDGatewayDomain = Convert.ToBoolean(sqlRd["InheritRDGatewayDomain"]);
 				}
 						
-				if (this.confVersion >= 2.3)
+				if (confVersion >= 2.3)
 				{
 					connectionInfo.EnableFontSmoothing = Convert.ToBoolean(sqlRd["EnableFontSmoothing"]);
 					connectionInfo.EnableDesktopComposition = Convert.ToBoolean(sqlRd["EnableDesktopComposition"]);
@@ -619,7 +619,7 @@ namespace mRemoteNG.Config.Connections
         #region XML
 		private string DecryptCompleteFile()
 		{
-			StreamReader sRd = new StreamReader(this._ConnectionFileName);
+			StreamReader sRd = new StreamReader(_ConnectionFileName);
 					
 			string strCons = "";
 			strCons = sRd.ReadToEnd();
@@ -686,19 +686,19 @@ namespace mRemoteNG.Config.Connections
 				}
 						
 				// SECTION 1. Create a DOM Document and load the XML data into it.
-				this.xDom = new XmlDocument();
+				xDom = new XmlDocument();
 				if (cons != "")
 				{
 					xDom.LoadXml(cons);
 				}
 				else
 				{
-					xDom.Load(this._ConnectionFileName);
+					xDom.Load(_ConnectionFileName);
 				}
 						
 				if (xDom.DocumentElement.HasAttribute("ConfVersion"))
 				{
-					this.confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."), CultureInfo.InvariantCulture);
+					confVersion = Convert.ToDouble(xDom.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."), CultureInfo.InvariantCulture);
 				}
 				else
 				{
@@ -708,19 +708,19 @@ namespace mRemoteNG.Config.Connections
 				const double maxSupportedConfVersion = 2.5;
 				if (confVersion > maxSupportedConfVersion)
 				{
-                    cTaskDialog.ShowTaskDialogBox(
+                    CTaskDialog.ShowTaskDialogBox(
                         frmMain.Default,
-                        System.Windows.Forms.Application.ProductName, 
+                        Application.ProductName, 
                         "Incompatible connection file format", 
-                        string.Format("The format of this connection file is not supported. Please upgrade to a newer version of {0}.", System.Windows.Forms.Application.ProductName), 
+                        string.Format("The format of this connection file is not supported. Please upgrade to a newer version of {0}.", Application.ProductName), 
                         string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine, ConnectionFileName, confVersion.ToString(), maxSupportedConfVersion.ToString()),
                         "", 
                         "", 
                         "", 
                         "", 
-                        eTaskDialogButtons.OK, 
-                        eSysIcons.Error,
-                        eSysIcons.Error
+                        ETaskDialogButtons.Ok, 
+                        ESysIcons.Error,
+                        ESysIcons.Error
                     );
 					throw (new Exception(string.Format("Incompatible connection file format (file format version {0}).", confVersion)));
 				}
@@ -755,7 +755,7 @@ namespace mRemoteNG.Config.Connections
 					RootTreeNode.Tag = rootInfo;
 				}
 						
-				if (this.confVersion > 1.3) //1.4
+				if (confVersion > 1.3) //1.4
 				{
 					if (Security.Crypt.Decrypt(Convert.ToString(xDom.DocumentElement.Attributes["Protected"].Value), pW) != "ThisIsNotProtected")
 					{
@@ -798,7 +798,7 @@ namespace mRemoteNG.Config.Connections
 				RootTreeNode.Expand();
 						
 				//expand containers
-				foreach (ContainerInfo contI in this._ContainerList)
+				foreach (ContainerInfo contI in _ContainerList)
 				{
 					if (contI.IsExpanded == true)
 					{
@@ -831,7 +831,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				App.Runtime.IsConnectionsFileLoaded = false;
+				Runtime.IsConnectionsFileLoaded = false;
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strLoadFromXmlFailed + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, true);
 				throw;
 			}
@@ -945,7 +945,7 @@ namespace mRemoteNG.Config.Connections
 			try
 			{
 				XmlNode xmlnode = xxNode;
-				if (this.confVersion > 0.1) //0.2
+				if (confVersion > 0.1) //0.2
 				{
 					connectionInfo.Name = xmlnode.Attributes["Name"].Value;
 					connectionInfo.Description = xmlnode.Attributes["Descr"].Value;
@@ -957,7 +957,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.DisplayThemes = bool.Parse(xmlnode.Attributes["DisplayThemes"].Value);
 					connectionInfo.CacheBitmaps = bool.Parse(xmlnode.Attributes["CacheBitmaps"].Value);
 							
-					if (this.confVersion < 1.1) //1.0 - 0.1
+					if (confVersion < 1.1) //1.0 - 0.1
 					{
 						if (Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value) == true)
 						{
@@ -970,9 +970,9 @@ namespace mRemoteNG.Config.Connections
 					}
 				}
 						
-				if (this.confVersion > 0.2) //0.3
+				if (confVersion > 0.2) //0.3
 				{
-					if (this.confVersion < 0.7)
+					if (confVersion < 0.7)
 					{
 						if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
 						{
@@ -991,9 +991,9 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.Protocol = ProtocolType.RDP;
 				}
 						
-				if (this.confVersion > 0.3) //0.4
+				if (confVersion > 0.3) //0.4
 				{
-					if (this.confVersion < 0.7)
+					if (confVersion < 0.7)
 					{
 						if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
                             connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["VNCPort"].Value);
@@ -1005,7 +1005,7 @@ namespace mRemoteNG.Config.Connections
 				}
 				else
 				{
-					if (this.confVersion < 0.7)
+					if (confVersion < 0.7)
 					{
 						if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
 							connectionInfo.Port = (int)ProtocolVNC.Defaults.Port;
@@ -1015,7 +1015,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.UseConsoleSession = false;
 				}
 				
-				if (this.confVersion > 0.4) //0.5 and 0.6
+				if (confVersion > 0.4) //0.5 and 0.6
 				{
 					connectionInfo.RedirectDiskDrives = bool.Parse(xmlnode.Attributes["RedirectDiskDrives"].Value);
 					connectionInfo.RedirectPrinters = bool.Parse(xmlnode.Attributes["RedirectPrinters"].Value);
@@ -1030,23 +1030,23 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.RedirectSmartCards = false;
 				}
 				
-				if (this.confVersion > 0.6) //0.7
+				if (confVersion > 0.6) //0.7
 				{
                     connectionInfo.Protocol = (ProtocolType)Tools.MiscTools.StringToEnum(typeof(ProtocolType), xmlnode.Attributes["Protocol"].Value);
                     connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["Port"].Value);
 				}
 				
-				if (this.confVersion > 0.9) //1.0
+				if (confVersion > 0.9) //1.0
 				{
 					connectionInfo.RedirectKeys = bool.Parse(xmlnode.Attributes["RedirectKeys"].Value);
 				}
 				
-				if (this.confVersion > 1.1) //1.2
+				if (confVersion > 1.1) //1.2
 				{
 					connectionInfo.PuttySession = xmlnode.Attributes["PuttySession"].Value;
 				}
 				
-				if (this.confVersion > 1.2) //1.3
+				if (confVersion > 1.2) //1.3
 				{
                     connectionInfo.Colors = (ProtocolRDP.RDPColors)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPColors), xmlnode.Attributes["Colors"].Value);
                     connectionInfo.Resolution = (ProtocolRDP.RDPResolutions)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPResolutions), Convert.ToString(xmlnode.Attributes["Resolution"].Value));
@@ -1076,7 +1076,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.RedirectSound = (ProtocolRDP.RDPSounds) Convert.ToInt32(xmlnode.Attributes["RedirectSound"].Value);
 				}
 				
-				if (this.confVersion > 1.2) //1.3
+				if (confVersion > 1.2) //1.3
 				{
 					connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
 					connectionInfo.Inheritance.CacheBitmaps = bool.Parse(xmlnode.Attributes["InheritCacheBitmaps"].Value);
@@ -1110,12 +1110,12 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.Panel = Language.strGeneral;
 				}
 				
-				if (this.confVersion > 1.4) //1.5
+				if (confVersion > 1.4) //1.5
 				{
 					connectionInfo.PleaseConnect = bool.Parse(xmlnode.Attributes["Connected"].Value);
 				}
 				
-				if (this.confVersion > 1.5) //1.6
+				if (confVersion > 1.5) //1.6
 				{
                     connectionInfo.ICAEncryption = (ProtocolICA.EncryptionStrength)Tools.MiscTools.StringToEnum(typeof(ProtocolICA.EncryptionStrength), xmlnode.Attributes["ICAEncryptionStrength"].Value);
 					connectionInfo.Inheritance.ICAEncryption = bool.Parse(xmlnode.Attributes["InheritICAEncryptionStrength"].Value);
@@ -1125,7 +1125,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.Inheritance.PostExtApp = bool.Parse(xmlnode.Attributes["InheritPostExtApp"].Value);
 				}
 				
-				if (this.confVersion > 1.6) //1.7
+				if (confVersion > 1.6) //1.7
 				{
                     connectionInfo.VNCCompression = (ProtocolVNC.Compression)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Compression), xmlnode.Attributes["VNCCompression"].Value);
                     connectionInfo.VNCEncoding = (ProtocolVNC.Encoding)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Encoding), Convert.ToString(xmlnode.Attributes["VNCEncoding"].Value));
@@ -1151,13 +1151,13 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.Inheritance.VNCViewOnly = bool.Parse(xmlnode.Attributes["InheritVNCViewOnly"].Value);
 				}
 				
-				if (this.confVersion > 1.7) //1.8
+				if (confVersion > 1.7) //1.8
 				{
                     connectionInfo.RDPAuthenticationLevel = (ProtocolRDP.AuthenticationLevel)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.AuthenticationLevel), xmlnode.Attributes["RDPAuthenticationLevel"].Value);
 					connectionInfo.Inheritance.RDPAuthenticationLevel = bool.Parse(xmlnode.Attributes["InheritRDPAuthenticationLevel"].Value);
 				}
 				
-				if (this.confVersion > 1.8) //1.9
+				if (confVersion > 1.8) //1.9
 				{
                     connectionInfo.RenderingEngine = (HTTPBase.RenderingEngine)Tools.MiscTools.StringToEnum(typeof(HTTPBase.RenderingEngine), xmlnode.Attributes["RenderingEngine"].Value);
 					connectionInfo.MacAddress = xmlnode.Attributes["MacAddress"].Value;
@@ -1165,19 +1165,19 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.Inheritance.MacAddress = bool.Parse(xmlnode.Attributes["InheritMacAddress"].Value);
 				}
 				
-				if (this.confVersion > 1.9) //2.0
+				if (confVersion > 1.9) //2.0
 				{
 					connectionInfo.UserField = xmlnode.Attributes["UserField"].Value;
 					connectionInfo.Inheritance.UserField = bool.Parse(xmlnode.Attributes["InheritUserField"].Value);
 				}
 				
-				if (this.confVersion > 2.0) //2.1
+				if (confVersion > 2.0) //2.1
 				{
 					connectionInfo.ExtApp = xmlnode.Attributes["ExtApp"].Value;
 					connectionInfo.Inheritance.ExtApp = bool.Parse(xmlnode.Attributes["InheritExtApp"].Value);
 				}
 				
-				if (this.confVersion > 2.1) //2.2
+				if (confVersion > 2.1) //2.2
 				{
 					// Get settings
                     connectionInfo.RDGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDGatewayUsageMethod), Convert.ToString(xmlnode.Attributes["RDGatewayUsageMethod"].Value));
@@ -1196,7 +1196,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.Inheritance.RDGatewayDomain = bool.Parse(xmlnode.Attributes["InheritRDGatewayDomain"].Value);
 				}
 				
-				if (this.confVersion > 2.2) //2.3
+				if (confVersion > 2.2) //2.3
 				{
 					// Get settings
 					connectionInfo.EnableFontSmoothing = bool.Parse(xmlnode.Attributes["EnableFontSmoothing"].Value);
@@ -1223,7 +1223,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, this.ConnectionFileName, ex.Message), false);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, ConnectionFileName, ex.Message), false);
 			}
 			return connectionInfo;
 		}

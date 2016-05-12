@@ -89,6 +89,7 @@
     <PlatformTarget>x86</PlatformTarget>
     <DefineConstants>DEBUG;PORTABLE</DefineConstants>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />
@@ -124,10 +125,6 @@
     <Reference Include="Org.Mentalis.Security, Version=1.0.13.715, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Org.Mentalis.Security.dll</HintPath>
-    </Reference>
-    <Reference Include="PSTaskDialog, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\PSTaskDialog.dll</HintPath>
     </Reference>
     <Reference Include="Skybound.Gecko, Version=1.8.1.4, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
       <SpecificVersion>False</SpecificVersion>
@@ -413,6 +410,19 @@
     <Compile Include="UI\Forms\SplashPage.Designer.cs">
       <DependentUpon>SplashPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\TaskDialog\CommandButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\TaskDialog\CommandButton.designer.cs">
+      <DependentUpon>CommandButton.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\TaskDialog\cTaskDialog.cs" />
+    <Compile Include="UI\TaskDialog\frmTaskDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\TaskDialog\frmTaskDialog.designer.cs">
+      <DependentUpon>frmTaskDialog.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Window\AboutWindow.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -593,6 +603,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\SplashPage.resx">
       <DependentUpon>SplashPage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\TaskDialog\frmTaskDialog.resx">
+      <DependentUpon>frmTaskDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Window\AboutWindow.resx">
       <DependentUpon>AboutWindow.cs</DependentUpon>
@@ -837,6 +850,8 @@
     <Content Include="Resources\Images_FamFamFam\database.png" />
     <Content Include="Resources\Images_FamFamFam\Link.png" />
     <Content Include="Resources\Images_FamFamFam\page_copy.png" />
+    <Content Include="UI\TaskDialog\green_arrow1.png" />
+    <Content Include="UI\TaskDialog\green_arrow2.png" />
     <None Include="Resources\Images\puttycm.png" />
     <None Include="Resources\Images_FamFamFam\monitor_go.png" />
     <None Include="Resources\Images_FamFamFam\monitor_delete.png" />
