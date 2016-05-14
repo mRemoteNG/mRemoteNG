@@ -42,7 +42,7 @@
   <ItemGroup>
     <Content Include="Filters\Harvest_Filter.xslt" />
     <Content Include="Includes\Config.wxi" />
-    <Content Include="Resources\mRemoteNG.ico" />
+    <Content Include="Resources\mRemote.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomActions" />
