@@ -27,6 +27,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Fragments\FilesFragment.wxs" />
+    <Compile Include="Fragments\InstallConditionsFragment.wxs" />
+    <Compile Include="Fragments\PuTTYNGFragment.wxs" />
     <Compile Include="Fragments\ShortcutFragment.wxs" />
     <Compile Include="mRemoteNGV1.wxs" />
   </ItemGroup>
@@ -40,6 +42,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dependencies\PuTTYNG.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Filters\Harvest_Filter.xslt" />
     <Content Include="Includes\Config.wxi" />
     <Content Include="Resources\mRemote.ico" />
@@ -53,6 +58,7 @@
     <Folder Include="Localizations\en-us" />
     <Folder Include="Filters" />
     <Folder Include="bin" />
+    <Folder Include="Dependencies" />
     <Folder Include="Resources" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />

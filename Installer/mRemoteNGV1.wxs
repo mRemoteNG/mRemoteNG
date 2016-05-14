@@ -33,6 +33,7 @@
     
     <Feature Id="CompleteFeature" Title="Installer" Level="1">
       <ComponentGroupRef Id="MandatoryComponents" />
+      <ComponentRef Id="C.PuttyNGFile" />
       <ComponentRef Id="C.DesktopShortcut" />
       <ComponentRef Id="C.ApplicationStartMenuShortcut" />
     </Feature>
