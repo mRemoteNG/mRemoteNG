@@ -28,6 +28,7 @@
   <ItemGroup>
     <Compile Include="Fragments\FilesFragment.wxs" />
     <Compile Include="Fragments\InstallConditionsFragment.wxs" />
+    <Compile Include="Fragments\MiscTextFilesFragment.wxs" />
     <Compile Include="Fragments\PuTTYNGFragment.wxs" />
     <Compile Include="Fragments\ShortcutFragment.wxs" />
     <Compile Include="mRemoteNGV1.wxs" />
@@ -47,7 +48,7 @@
     </Content>
     <Content Include="Filters\Harvest_Filter.xslt" />
     <Content Include="Includes\Config.wxi" />
-    <Content Include="Resources\mRemote.ico" />
+    <Content Include="Resources\mRemoteNG.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomActions" />

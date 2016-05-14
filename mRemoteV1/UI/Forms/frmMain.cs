@@ -2,30 +2,26 @@ using System;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
-using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config;
-using mRemoteNG.Config.KeyboardShortcuts;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Controls;
 using mRemoteNG.Messages;
-using mRemoteNG.My;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Window;
 using PSTaskDialog;
-using SharedLibraryNG;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Forms
 {
-	public partial class frmMain
+    public partial class frmMain
     {
         #region Private Variables
         private static clipboardchangeEventHandler clipboardchangeEvent;
@@ -204,7 +200,6 @@ namespace mRemoteNG.UI.Forms
 			AddSysMenuItems();
 			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
             Opacity = 1;
-			KeyboardShortcuts.RequestKeyNotifications(Handle);
 		}
 
         private void ApplySpecialSettingsForPortableVersion()
@@ -1111,22 +1106,6 @@ namespace mRemoteNG.UI.Forms
 					//Send to the next window
                     Native.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
 					fpChainedWindowHandle = m.LParam;
-				}
-				else if (m.Msg == KeyboardHook.HookKeyMsg)
-				{
-					if (m.WParam.ToInt32() != Win32.WM_KEYDOWN)
-					{
-					}
-											
-					switch (KeyboardShortcuts.CommandFromHookKeyMessage(m))
-					{
-						case ShortcutCommand.PreviousTab:
-							SelectTabRelative(-1);
-							break;
-						case ShortcutCommand.NextTab:
-							SelectTabRelative(1);
-							break;
-					}
 				}
 			}
 			catch (Exception)

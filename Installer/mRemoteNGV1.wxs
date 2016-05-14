@@ -11,6 +11,9 @@
     <Property Id="ARPPRODUCTICON" Value="mRemoteNG.ico" />
     <Property Id="ARPHELPLINK" Value="http://www.mremoteng.org" />
     <Property Id="MAINEXE" Value="$(var.ExeProcessName)" />
+    <Property Id="APPLICATIONROOTDIRECTORY">
+      <RegistrySearch Id='AcmeFoobarRegistry' Type='raw' Root='HKLM' Key='Software\mRemoteNG' Name='InstallDir' />
+    </Property>
     <Icon Id="mRemoteNG.ico" SourceFile="Resources\mRemoteNG.ico" />
     
     
@@ -27,15 +30,21 @@
     </Directory>
     
     
-    <Feature Id="MinimalFeature" Title="Installer" Level="0">
-      <ComponentGroupRef Id="MandatoryComponents" />
+    <Feature Id="F.MinimalFeature" Title="$(var.ProductName)" Level="1">
+      <ComponentGroupRef Id="MandatoryComponents" Primary="yes" />
+      <ComponentGroupRef Id="CG.ProjectInfoFiles" Primary="yes" />
     </Feature>
-    
-    <Feature Id="CompleteFeature" Title="Installer" Level="1">
-      <ComponentGroupRef Id="MandatoryComponents" />
-      <ComponentRef Id="C.PuttyNGFile" />
-      <ComponentRef Id="C.DesktopShortcut" />
-      <ComponentRef Id="C.ApplicationStartMenuShortcut" />
+
+    <Feature Id="F.PuttyNG" Title="PuTTYNG" Absent="allow" Level="1">
+      <ComponentRef Id="C.PuttyNGFile" Primary="yes" />
+    </Feature>
+
+    <Feature Id="F.DesktopShortcut" Title="Desktop Shortcut" Absent="allow" Level="1">
+      <ComponentRef Id="C.DesktopShortcut" Primary="yes" />
+    </Feature>
+
+    <Feature Id="F.ApplicationStartMenuShortcut" Title="Start menu shortcut" Absent="allow" Level="1">
+      <ComponentRef Id="C.ApplicationStartMenuShortcut" Primary="yes" />
     </Feature>
   </Product>
 </Wix>

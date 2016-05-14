@@ -111,10 +111,6 @@
       <Project>{4934a491-40bc-4e5b-9166-ea1169a220f6}</Project>
       <Name>mRemoteV1</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SharedLibraryNG\SharedLibraryNG.csproj">
-      <Project>{0f615504-5f30-4cf2-8341-1de7fec95a23}</Project>
-      <Name>SharedLibraryNG</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="UI\Controls\TestForm.resx">

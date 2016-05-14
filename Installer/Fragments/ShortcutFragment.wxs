@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
-	<Fragment Id="F.Shortcuts">
+	<Fragment Id="Fr.Shortcuts">
     
     <DirectoryRef Id="DesktopFolder">
       <Component Id="C.DesktopShortcut" Guid="F78E5A16-A2F7-4BD9-9250-CBF3016CCCDA">
