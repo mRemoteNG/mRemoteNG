@@ -7,19 +7,34 @@
            Language="$(var.ProductLanguage)">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-    <MediaTemplate />
+    <MediaTemplate EmbedCab="yes" />
+    <Property Id="ARPPRODUCTICON" Value="mRemoteNG.ico" />
+    <Property Id="ARPHELPLINK" Value="http://www.mremoteng.org" />
+    <Property Id="MAINEXE" Value="$(var.ExeProcessName)" />
+    <Icon Id="mRemoteNG.ico" SourceFile="Resources\mRemoteNG.ico" />
     
-    <Feature Id="ProductFeature" Title="Installer" Level="1">
-      <ComponentGroupRef Id="ProductComponents" />
-    </Feature>
-  </Product>
-
-  <Fragment Id="FoldersFragment">
+    
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="$(var.PlatformProgramFilesFolder)">
-        <Directory Id="INSTALLLOCATION" Name="$(var.ProductName)" />
+        <Directory Id="APPLICATIONROOTDIRECTORY" Name="$(var.ProductName)" />
+      </Directory>
+      
+      <Directory Id="DesktopFolder" Name="Desktop" />
+      
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="$(var.ProductName)"/>
       </Directory>
     </Directory>
-  </Fragment>
-  
+    
+    
+    <Feature Id="MinimalFeature" Title="Installer" Level="0">
+      <ComponentGroupRef Id="MandatoryComponents" />
+    </Feature>
+    
+    <Feature Id="CompleteFeature" Title="Installer" Level="1">
+      <ComponentGroupRef Id="MandatoryComponents" />
+      <ComponentRef Id="C.DesktopShortcut" />
+      <ComponentRef Id="C.ApplicationStartMenuShortcut" />
+    </Feature>
+  </Product>
 </Wix>

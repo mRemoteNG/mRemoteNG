@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
-  <Fragment Id="RegistryEntries">
-    <Property Id="INSTALLLOCATION">
-      <RegistrySearch Id="RegistrySearch" Type="raw" Root="HKLM" Win64="$(var.Win64)" Key="$(var.ProductName)" Name="InstallLocation" />
-    </Property>
-  </Fragment>
-</Wix>

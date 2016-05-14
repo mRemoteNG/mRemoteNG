@@ -27,8 +27,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Fragments\FilesFragment.wxs" />
-    <Compile Include="Fragments\ProgramFilesInfoFragment.wxs" />
-    <Compile Include="Fragments\RegistryFragment.wxs" />
+    <Compile Include="Fragments\ShortcutFragment.wxs" />
     <Compile Include="mRemoteNGV1.wxs" />
   </ItemGroup>
   <ItemGroup>
@@ -37,7 +36,7 @@
       <Project>{4934a491-40bc-4e5b-9166-ea1169a220f6}</Project>
       <Private>True</Private>
       <RefProjectOutputGroups>Binaries;Content;Satellites</RefProjectOutputGroups>
-      <RefTargetDir>INSTALLLOCATION</RefTargetDir>
+      <RefTargetDir>APPLICATIONROOTDIRECTORY</RefTargetDir>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +69,6 @@
     <Copy SourceFiles="$(OutputPath)$(OutputName).msi" DestinationFiles="..\Deploy\Setup\$(OutputName) $(AssemblyFileVersion)_$(Platform).msi" />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>call "$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\bin\$(Configuration)" -ag -dr INSTALLLOCATION -var var.HarvestPath -srd -cg ProductComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt" -v</PreBuildEvent>
+    <PreBuildEvent>call "$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\bin\$(Configuration)" -ag -dr APPLICATIONROOTDIRECTORY -var var.HarvestPath -srd -cg MandatoryComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt" -v</PreBuildEvent>
   </PropertyGroup>
 </Project>

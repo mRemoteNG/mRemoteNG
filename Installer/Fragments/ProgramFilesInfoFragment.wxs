@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
-  <Fragment Id="UninstallDetails">
-    <Icon Id="mRemoteNG.ico" SourceFile=".\Resources\mRemoteNG.ico" />
-    <Property Id="ARPPRODUCTICON" Value="mRemoteNG.ico" />
-    <Property Id="ARPHELPLINK" Value="http://www.mremoteng.org" />
-  </Fragment>
-</Wix>
