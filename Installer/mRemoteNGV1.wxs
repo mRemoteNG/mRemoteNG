@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
   <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
   <Product Name="$(var.ProductNameWithPlatform)" Manufacturer="Next Generation Software" Version="$(var.ProductVersion)"
            Id="$(var.ProductCode)" 
@@ -14,20 +14,31 @@
     <Property Id="APPLICATIONROOTDIRECTORY">
       <RegistrySearch Id='mRemoteNGRegistry' Type='raw' Root='HKLM' Key='Software\mRemoteNG' Name='InstallDir' />
     </Property>
+    <Property Id='REQUIREDDOTNETFRAMEWORKVERSION' Value='$(var.RequiredDotNetFrameworkVersion)' />
     <Icon Id="mRemoteNG.ico" SourceFile="Resources\mRemoteNG.ico" />
+
+
+    <PropertyRef Id="NETFRAMEWORK40FULL" />
+    <PropertyRef Id="WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
+    
+    <!-- Need to be admin to install -->
+    <Condition Message="!(loc.Install_NeedToBeAdminToInstall)">
+      Privileged
+    </Condition>
+    <!-- Windows 7 or higher required -->
+    <Condition Message="!(loc.Install_OSVersionRequirement)">
+      <![CDATA[Installed OR (VersionNT >= 601) OR (VersionNT64 >= 601)]]>
+    </Condition>
+    <!-- If Windows 7, SP 1 is required -->
+    <Condition Message="!(loc.Install_Win7RequiresSP1)">
+      <![CDATA[Installed OR ((VersionNT >= 602) OR (VersionNT64 >= 602)) OR ((VersionNT = 601 OR VersionNT64 = 601) AND ServicePackLevel >= 1)]]>
+    </Condition>
+    <!-- .Net Framework Version Condition -->
+    <Condition Message="!(loc.Install_NeedDotNetFrameworkVersion)">
+      <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED = 1]]>
+    </Condition>
     
     
-    <Directory Id="TARGETDIR" Name="SourceDir">
-      <Directory Id="$(var.PlatformProgramFilesFolder)">
-        <Directory Id="APPLICATIONROOTDIRECTORY" Name="$(var.ProductName)" />
-      </Directory>
-      
-      <Directory Id="DesktopFolder" Name="!(loc.Folders_Desktop)" />
-      
-      <Directory Id="ProgramMenuFolder">
-        <Directory Id="ApplicationProgramsFolder" Name="$(var.ProductName)"/>
-      </Directory>
-    </Directory>
 
     <Feature Id="F.Complete" Title="!(loc.Feature_Complete)" Display="expand" AllowAdvertise="no" Level="1">
       <Feature Id="F.MinimalFeature" Title="$(var.ProductName)" Absent="disallow" ConfigurableDirectory="APPLICATIONROOTDIRECTORY" Level="1">
