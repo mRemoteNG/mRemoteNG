@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalization Culture="en-US" Language="1033" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+<WixLocalization Culture="cs-CZ" Language="1029" xmlns="http://schemas.microsoft.com/wix/2006/localization">
   
   <!-- Install Conditions -->
   <String Id="Upgrade_NewerVersionInstalled" Overridable="yes">A newer version of [ProductName] is already installed.</String>

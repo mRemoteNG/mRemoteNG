@@ -6,13 +6,13 @@
            UpgradeCode="$(var.UpgradeCode)" 
            Language="$(var.ProductLanguage)">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
-    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MajorUpgrade DowngradeErrorMessage="!(loc.Upgrade_NewerVersionInstalled)" />
     <MediaTemplate EmbedCab="yes" />
     <Property Id="ARPPRODUCTICON" Value="mRemoteNG.ico" />
     <Property Id="ARPHELPLINK" Value="http://www.mremoteng.org" />
     <Property Id="MAINEXE" Value="$(var.ExeProcessName)" />
     <Property Id="APPLICATIONROOTDIRECTORY">
-      <RegistrySearch Id='AcmeFoobarRegistry' Type='raw' Root='HKLM' Key='Software\mRemoteNG' Name='InstallDir' />
+      <RegistrySearch Id='mRemoteNGRegistry' Type='raw' Root='HKLM' Key='Software\mRemoteNG' Name='InstallDir' />
     </Property>
     <Icon Id="mRemoteNG.ico" SourceFile="Resources\mRemoteNG.ico" />
     
@@ -22,14 +22,14 @@
         <Directory Id="APPLICATIONROOTDIRECTORY" Name="$(var.ProductName)" />
       </Directory>
       
-      <Directory Id="DesktopFolder" Name="Desktop" />
+      <Directory Id="DesktopFolder" Name="!(loc.Folders_Desktop)" />
       
       <Directory Id="ProgramMenuFolder">
         <Directory Id="ApplicationProgramsFolder" Name="$(var.ProductName)"/>
       </Directory>
     </Directory>
 
-    <Feature Id="F.Complete" Title="Complete" Display="expand" AllowAdvertise="no" Level="1">
+    <Feature Id="F.Complete" Title="!(loc.Feature_Complete)" Display="expand" AllowAdvertise="no" Level="1">
       <Feature Id="F.MinimalFeature" Title="$(var.ProductName)" Absent="disallow" ConfigurableDirectory="APPLICATIONROOTDIRECTORY" Level="1">
         <ComponentGroupRef Id="MandatoryComponents" Primary="yes" />
         <ComponentGroupRef Id="CG.ProjectInfoFiles" Primary="yes" />
@@ -39,11 +39,11 @@
         <ComponentRef Id="C.PuttyNGFile" Primary="yes" />
       </Feature>
 
-      <Feature Id="F.DesktopShortcut" Title="Desktop Shortcut" Absent="allow" AllowAdvertise="no" Level="1">
+      <Feature Id="F.DesktopShortcut" Title="!(loc.Feature_DesktopShortcut)" Absent="allow" AllowAdvertise="no" Level="1">
         <ComponentRef Id="C.DesktopShortcut" Primary="yes" />
       </Feature>
 
-      <Feature Id="F.ApplicationStartMenuShortcut" Title="Start menu shortcut" Absent="allow" AllowAdvertise="no" Level="1">
+      <Feature Id="F.ApplicationStartMenuShortcut" Title="!(loc.Feature_StartMenuShortcut)" Absent="allow" AllowAdvertise="no" Level="1">
         <ComponentRef Id="C.ApplicationStartMenuShortcut" Primary="yes" />
       </Feature>
     </Feature>

@@ -65,8 +65,21 @@
     <Folder Include="Resources" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Localizations\ru-RU.wxl" />
+    <EmbeddedResource Include="Localizations\ja-JP.wxl" />
+    <EmbeddedResource Include="Localizations\cs-CZ.wxl" />
     <EmbeddedResource Include="Localizations\de-DE.wxl" />
-    <EmbeddedResource Include="Localizations\en-us.wxl" />
+    <EmbeddedResource Include="Localizations\en-US.wxl" />
+  </ItemGroup>
+  <ItemGroup>
+    <WixExtension Include="WixUIExtension">
+      <HintPath>$(WixExtDir)\WixUIExtension.dll</HintPath>
+      <Name>WixUIExtension</Name>
+    </WixExtension>
+    <WixExtension Include="WixNetFxExtension">
+      <HintPath>$(WixExtDir)\WixNetFxExtension.dll</HintPath>
+      <Name>WixNetFxExtension</Name>
+    </WixExtension>
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
@@ -78,7 +91,8 @@
   <Target Name="AfterBuild">
   </Target>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>
+    <LinkerAdditionalOptions>
+    </LinkerAdditionalOptions>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>REM Harvest bin directory of the mRemoteV1 project

@@ -1,4 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<WixLocalization Culture="de-DE" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+<WixLocalization Culture="de-DE" Language="1031" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  
+  <!-- Install Conditions -->
+  <String Id="Upgrade_NewerVersionInstalled" Overridable="yes">A newer version of [ProductName] is already installed.</String>
+  <String Id="Install_NeedToBeAdminToInstall">You need to be an administrator to install this product.</String>
+  <String Id="Install_NeedDotNetFrameworkVersion">mRemoteNG requires Microsoft .NET Framework $(var.RequiredDotNetFrameworkVersion).</String>
+
+  <!-- Directories and File names -->
+  <String Id="Folders_Desktop">Desktop</String>
+  <String Id="File_Credits">Credits</String>
+  <String Id="File_License">License</String>
+  <String Id="File_VersionHistory">Version History</String>
+
+  <!-- Features and install options -->
+  <String Id="Feature_Complete">Complete</String>
+  <String Id="Feature_DesktopShortcut">Desktop Shortcut</String>
+  <String Id="Feature_StartMenuShortcut">Start menu shortcut</String>
+
+  <!-- GUI Page Text -->
   <String Id="FinishPage_LaunchMremoteNow" Overridable="yes">mRemoteNG jetzt Starten</String>
+  
 </WixLocalization>

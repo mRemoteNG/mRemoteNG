@@ -11,6 +11,11 @@
   <?define ProductLanguage = 1033 ?>
   <?define ExeProcessName = "$(var.ProductName).exe" ?>
   
+  <?define RequiredDotNetFrameworkMajorVersion = "4" ?>
+  <?define RequiredDotNetFrameworkMinorVersion = "0" ?>
+  <?define RequiredDotNetFrameworkServicePackLevel = "" ?>
+  <?define RequiredDotNetFrameworkVersion = "$(var.RequiredDotNetFrameworkMajorVersion).$(var.RequiredDotNetFrameworkMinorVersion)" ?>
+  
   <?if $(var.Platform) = x64 ?>
     <?define ProductNameWithPlatform = "$(var.ProductName) (64 bit)" ?>
     <?define Win64 = "yes" ?>
