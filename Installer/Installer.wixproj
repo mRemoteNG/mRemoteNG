@@ -100,4 +100,7 @@ call "$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\bin\$(Configuration)" -ag
 REM Convert the license file "COPYING.TXT" to "License.rtf" to be shown in the installer GUI
 call "$(ProjectDir)Resources\Pandoc\pandoc.exe" -s -t rtf -o "$(ProjectDir)\Resources\License.rtf" "$(SolutionDir)COPYING.TXT"</PreBuildEvent>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <Cultures>en-US</Cultures>
+  </PropertyGroup>
 </Project>

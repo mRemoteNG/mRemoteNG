@@ -5,6 +5,8 @@
   <String Id="Upgrade_NewerVersionInstalled" Overridable="yes">A newer version of [ProductName] is already installed.</String>
   <String Id="Install_NeedToBeAdminToInstall">You need to be an administrator to install this product.</String>
   <String Id="Install_NeedDotNetFrameworkVersion">mRemoteNG requires Microsoft .NET Framework $(var.RequiredDotNetFrameworkVersion).</String>
+  <String Id="Install_OSVersionRequirement">mRemoteNG requires Windows 7 SP1 or higher to run. Please update your operating system and try again.</String>
+  <String Id="Install_Win7RequiresSP1">For mRemoteNG to run on Windows 7, it requires Service Pack 1 to be installed. Please install Service Pack 1 and try again.</String>
   
   <!-- Directories and File names -->
   <String Id="Folders_Desktop">Desktop</String>
