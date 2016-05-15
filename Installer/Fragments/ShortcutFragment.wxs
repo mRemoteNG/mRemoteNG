@@ -13,6 +13,9 @@
     <DirectoryRef Id="ApplicationProgramsFolder">
       <Component Id="C.ApplicationStartMenuShortcut" Guid="193B9E14-F40E-44F1-8514-BED253BCBF75">
         <Shortcut Id="ApplicationStartMenuShortcut" Name="$(var.ProductName)" Target="[APPLICATIONROOTDIRECTORY][MAINEXE]" WorkingDirectory="APPLICATIONROOTDIRECTORY" Icon="mRemoteNG.ico" />
+        <Shortcut Id="CreditsShortcut" Name="Credits" Target="[APPLICATIONROOTDIRECTORY]Credits.txt" WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+        <Shortcut Id="LicenseShortcut" Name="License" Target="[APPLICATIONROOTDIRECTORY]License.txt" WorkingDirectory="APPLICATIONROOTDIRECTORY" />
+        <Shortcut Id="ReadmeShortcut" Name="Readme" Target="[APPLICATIONROOTDIRECTORY]Readme.txt" WorkingDirectory="APPLICATIONROOTDIRECTORY" />
         <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall"/>
         <RegistryValue Root="HKCU" Key="Software\$(var.ProductName)" Name="ApplicationStartMenuShortcut" Type="integer" Value="1" KeyPath="yes"/>
       </Component>
