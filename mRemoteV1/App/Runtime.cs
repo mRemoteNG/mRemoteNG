@@ -12,7 +12,6 @@ using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Window;
-using PSTaskDialog;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,6 +22,7 @@ using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 
 
@@ -628,8 +628,8 @@ namespace mRemoteNG.App
 				{
                     MessageCollector.AddExceptionMessage(Language.strLoadFromSqlFailed, ex);
 					string commandButtons = string.Join("|", new[] {Language.strCommandTryAgain, Language.strCommandOpenConnectionFile, string.Format(Language.strCommandExitProgram, Application.ProductName)});
-                    cTaskDialog.ShowCommandBox(Application.ProductName, Language.strLoadFromSqlFailed, Language.strLoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, eSysIcons.Error, eSysIcons.Error);
-					switch (cTaskDialog.CommandButtonResult)
+                    CTaskDialog.ShowCommandBox(Application.ProductName, Language.strLoadFromSqlFailed, Language.strLoadFromSqlFailedContent, MiscTools.GetExceptionMessageRecursive(ex), "", "", commandButtons, false, ESysIcons.Error, ESysIcons.Error);
+					switch (CTaskDialog.CommandButtonResult)
 					{
 						case 0:
 							LoadConnections(withDialog, update);
@@ -653,7 +653,7 @@ namespace mRemoteNG.App
 					}
 
                     MessageCollector.AddExceptionMessage(string.Format(Language.strConnectionsFileCouldNotBeLoaded, connectionsLoader.ConnectionFileName), ex);
-					if (!(connectionsLoader.ConnectionFileName == GetStartupConnectionFileName()))
+					if (connectionsLoader.ConnectionFileName != GetStartupConnectionFileName())
 					{
 						LoadConnections(withDialog, update);
 						return ;

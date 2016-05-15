@@ -15,8 +15,8 @@ using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
+using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
-using PSTaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Forms
@@ -300,13 +300,12 @@ namespace mRemoteNG.UI.Forms
 		
 		private static void ApplyMenuColors(ToolStripItemCollection itemCollection)
 		{
-			var menuItem = default(ToolStripMenuItem);
-			foreach (ToolStripItem item in itemCollection)
+		    foreach (ToolStripItem item in itemCollection)
 			{
 				item.BackColor = ThemeManager.ActiveTheme.MenuBackgroundColor;
 				item.ForeColor = ThemeManager.ActiveTheme.MenuTextColor;
 				
-				menuItem = item as ToolStripMenuItem;
+				var menuItem = item as ToolStripMenuItem;
 				if (menuItem != null)
 				{
 					ApplyMenuColors(menuItem.DropDownItems);
@@ -365,8 +364,8 @@ namespace mRemoteNG.UI.Forms
 
 			    if (openConnections > 0 && (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All | (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Multiple & openConnections > 1) || Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.Exit))
 				{
-					var result = cTaskDialog.MessageBox(this, Application.ProductName, Language.strConfirmExitMainInstruction, "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, eTaskDialogButtons.YesNo, eSysIcons.Question, eSysIcons.Question);
-					if (cTaskDialog.VerificationChecked)
+					var result = CTaskDialog.MessageBox(this, Application.ProductName, Language.strConfirmExitMainInstruction, "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
+					if (CTaskDialog.VerificationChecked)
 					{
                         Settings.Default.ConfirmCloseConnection--;
 					}
