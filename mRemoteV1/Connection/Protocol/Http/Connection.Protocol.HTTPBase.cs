@@ -76,6 +76,10 @@ namespace mRemoteNG.Connection.Protocol.Http
                     WebBrowser objWebBrowser = (WebBrowser)wBrowser;
                     //SHDocVw.WebBrowserClass objAxWebBrowser = (SHDocVw.WebBrowserClass)objWebBrowser.ActiveXInstance;
 					objWebBrowser.ScrollBarsEnabled = true;
+
+                    // http://stackoverflow.com/questions/4655662/how-to-ignore-script-errors-in-webbrowser
+                    objWebBrowser.ScriptErrorsSuppressed = true;
+
                     objWebBrowser.Navigated += wBrowser_Navigated;
 					objWebBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
 				    //objWebBrowser.NewWindow3 += wBrowser_NewWindow3;
