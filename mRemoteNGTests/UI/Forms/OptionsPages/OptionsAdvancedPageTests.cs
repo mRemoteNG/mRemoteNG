@@ -12,14 +12,14 @@ namespace mRemoteNGTests.UI.Forms.OptionsPages
         public void AdvancedPageLinkExistsInListView()
         {
             ListViewTester listViewTester = new ListViewTester("PageListView", _optionsForm);
-            Assert.That(listViewTester.Items[8].Text, Does.Match("Advanced"));
+            Assert.That(listViewTester.Items[7].Text, Does.Match("Advanced"));
         }
 
         [Test]
         public void AdvancedIconShownInListView()
         {
             ListViewTester listViewTester = new ListViewTester("PageListView", _optionsForm);
-            Assert.That(listViewTester.Items[8].ImageList, Is.Not.Null);
+            Assert.That(listViewTester.Items[7].ImageList, Is.Not.Null);
         }
 
         [Test]
