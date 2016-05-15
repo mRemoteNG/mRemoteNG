@@ -59,11 +59,14 @@
     <Folder Include="Fragments" />
     <Folder Include="Includes" />
     <Folder Include="Localizations" />
-    <Folder Include="Localizations\en-us" />
     <Folder Include="Filters" />
     <Folder Include="bin" />
     <Folder Include="Dependencies" />
     <Folder Include="Resources" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Localizations\de-DE.wxl" />
+    <EmbeddedResource Include="Localizations\en-us.wxl" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
@@ -73,10 +76,6 @@
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
-    <CallTarget Targets="CopyToDeploy" />
-  </Target>
-  <Target Name="CopyToDeploy" Condition="'$(Configuration)' == 'Release'">
-    <Copy SourceFiles="$(OutputPath)$(OutputName).msi" DestinationFiles="..\Deploy\Setup\$(OutputName) $(AssemblyFileVersion)_$(Platform).msi" />
   </Target>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>

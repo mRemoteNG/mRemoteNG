@@ -50,7 +50,6 @@
 
     
     <UIRef Id="WixUI_FeatureTree"/>
-    <UIRef Id="WixUI_ErrorProgressText" />
     <WixVariable Id="WixUILicenseRtf" Value="Resources\License.rtf" />
     <WixVariable Id="WixUIDialogBmp" Value="Resources\welcome.bmp" />
     <WixVariable Id="WixUIBannerBmp" Value="Resources\header.bmp" />
