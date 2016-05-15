@@ -1,9 +1,10 @@
 using System;
-using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
-using mRemoteNG.My;
+using TabPage = Crownwood.Magic.Controls.TabPage;
+
+//using SHDocVw;
 
 namespace mRemoteNG.Connection.Protocol.Http
 {
@@ -23,12 +24,12 @@ namespace mRemoteNG.Connection.Protocol.Http
 			{
 				if (RenderingEngine == RenderingEngine.Gecko)
 				{
-					this.Control = new MiniGeckoBrowser.MiniGeckoBrowser();
-					(this.Control as MiniGeckoBrowser.MiniGeckoBrowser).XULrunnerPath = Convert.ToString(mRemoteNG.Settings.Default.XULRunnerPath);
+                    Control = new MiniGeckoBrowser.MiniGeckoBrowser();
+					((MiniGeckoBrowser.MiniGeckoBrowser)Control).XULrunnerPath = Convert.ToString(Settings.Default.XULRunnerPath);
 				}
 				else
 				{
-					this.Control = new WebBrowser();
+                    Control = new WebBrowser();
 				}
 						
 				NewExtended();
@@ -49,32 +50,36 @@ namespace mRemoteNG.Connection.Protocol.Http
 					
 			try
 			{
-				Crownwood.Magic.Controls.TabPage objTabPage = this.InterfaceControl.Parent as Crownwood.Magic.Controls.TabPage;
-				this.tabTitle = objTabPage.Title;
+			    TabPage objTabPage = InterfaceControl.Parent as TabPage;
+			    if (objTabPage != null) tabTitle = objTabPage.Title;
 			}
 			catch (Exception)
 			{
-				this.tabTitle = "";
+                tabTitle = "";
 			}
 					
 			try
 			{
-				this.wBrowser = this.Control;
+                wBrowser = Control;
 						
 				if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 				{
 					MiniGeckoBrowser.MiniGeckoBrowser objMiniGeckoBrowser = wBrowser as MiniGeckoBrowser.MiniGeckoBrowser;
-                    objMiniGeckoBrowser.TitleChanged += geckoBrowser_DocumentTitleChanged;
-					objMiniGeckoBrowser.LastTabRemoved += wBrowser_LastTabRemoved;
+				    if (objMiniGeckoBrowser != null)
+				    {
+				        objMiniGeckoBrowser.TitleChanged += geckoBrowser_DocumentTitleChanged;
+				        objMiniGeckoBrowser.LastTabRemoved += wBrowser_LastTabRemoved;
+				    }
 				}
 				else
 				{
                     WebBrowser objWebBrowser = (WebBrowser)wBrowser;
-                    SHDocVw.WebBrowserClass objAxWebBrowser = (SHDocVw.WebBrowserClass)objWebBrowser.ActiveXInstance;
+                    //SHDocVw.WebBrowserClass objAxWebBrowser = (SHDocVw.WebBrowserClass)objWebBrowser.ActiveXInstance;
 					objWebBrowser.ScrollBarsEnabled = true;
-					objWebBrowser.Navigated += wBrowser_Navigated;
+                    objWebBrowser.Navigated += wBrowser_Navigated;
 					objWebBrowser.DocumentTitleChanged += wBrowser_DocumentTitleChanged;
-					objAxWebBrowser.NewWindow3 += wBrowser_NewWindow3;
+				    //objWebBrowser.NewWindow3 += wBrowser_NewWindow3;
+				    //objAxWebBrowser.NewWindow3 += wBrowser_NewWindow3;
 				}
 				
 				return true;
@@ -90,15 +95,15 @@ namespace mRemoteNG.Connection.Protocol.Http
 		{
 			try
 			{
-				string strHost = Convert.ToString(this.InterfaceControl.Info.Hostname);
+				string strHost = Convert.ToString(InterfaceControl.Info.Hostname);
 				string strAuth = "";
 
-                if (!(((int)Force & (int)ConnectionInfo.Force.NoCredentials) == (int)ConnectionInfo.Force.NoCredentials) && !string.IsNullOrEmpty(InterfaceControl.Info.Username) && !string.IsNullOrEmpty(InterfaceControl.Info.Password))
+                if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials && !string.IsNullOrEmpty(InterfaceControl.Info.Username) && !string.IsNullOrEmpty(InterfaceControl.Info.Password))
 				{
-					strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(this.InterfaceControl.Info.Username + ":" + this.InterfaceControl.Info.Password)) + Environment.NewLine;
+					strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(InterfaceControl.Info.Username + ":" + InterfaceControl.Info.Password)) + Environment.NewLine;
 				}
 						
-				if (this.InterfaceControl.Info.Port != defaultPort)
+				if (InterfaceControl.Info.Port != defaultPort)
 				{
 					if (strHost.EndsWith("/"))
 					{
@@ -112,11 +117,11 @@ namespace mRemoteNG.Connection.Protocol.Http
 							
 					if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 					{
-                        ((MiniGeckoBrowser.MiniGeckoBrowser)wBrowser).Navigate(strHost + ":" + this.InterfaceControl.Info.Port);
+                        ((MiniGeckoBrowser.MiniGeckoBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
 					}
 					else
 					{
-                        ((WebBrowser)wBrowser).Navigate(strHost + ":" + this.InterfaceControl.Info.Port);
+                        ((WebBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
 					}
 				}
 				else
@@ -128,7 +133,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 							
 					if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 					{
-						(wBrowser as MiniGeckoBrowser.MiniGeckoBrowser).Navigate(strHost);
+						((MiniGeckoBrowser.MiniGeckoBrowser)wBrowser).Navigate(strHost);
 					}
 					else
 					{
@@ -151,7 +156,7 @@ namespace mRemoteNG.Connection.Protocol.Http
         #endregion
 				
         #region Events
-		private void wBrowser_Navigated(object sender, System.Windows.Forms.WebBrowserNavigatedEventArgs e)
+		private void wBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
 		{
 			WebBrowser objWebBrowser = wBrowser as WebBrowser;
 			if (objWebBrowser == null)
@@ -179,44 +184,43 @@ namespace mRemoteNG.Connection.Protocol.Http
 				
 		private void wBrowser_LastTabRemoved(object sender)
 		{
-			this.Close();
+            Close();
 		}
 				
-		private void wBrowser_DocumentTitleChanged(System.Object sender, System.EventArgs e)
+		private void wBrowser_DocumentTitleChanged(object sender, EventArgs e)
 		{
 			try
 			{
-				Crownwood.Magic.Controls.TabPage tabP = default(Crownwood.Magic.Controls.TabPage);
-				tabP = InterfaceControl.Parent as Crownwood.Magic.Controls.TabPage;
-						
-				if (tabP != null)
+			    var tabP = InterfaceControl.Parent as TabPage;
+
+			    if (tabP != null)
 				{
-					string shortTitle = "";
+					string shortTitle;
 							
-					if (this.InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+					if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 					{
-						if ((wBrowser as MiniGeckoBrowser.MiniGeckoBrowser).Title.Length >= 30)
+						if (((MiniGeckoBrowser.MiniGeckoBrowser) wBrowser).Title.Length >= 30)
 						{
-							shortTitle = (wBrowser as MiniGeckoBrowser.MiniGeckoBrowser).Title.Substring(0, 29) + " ...";
+							shortTitle = ((MiniGeckoBrowser.MiniGeckoBrowser) wBrowser).Title.Substring(0, 29) + " ...";
 						}
 						else
 						{
-							shortTitle = (wBrowser as MiniGeckoBrowser.MiniGeckoBrowser).Title;
+							shortTitle = ((MiniGeckoBrowser.MiniGeckoBrowser) wBrowser).Title;
 						}
 					}
 					else
 					{
-						if ((wBrowser as WebBrowser).DocumentTitle.Length >= 30)
+						if (((WebBrowser) wBrowser).DocumentTitle.Length >= 30)
 						{
-							shortTitle = (wBrowser as WebBrowser).DocumentTitle.Substring(0, 29) + " ...";
+							shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 29) + " ...";
 						}
 						else
 						{
-							shortTitle = (wBrowser as WebBrowser).DocumentTitle;
+							shortTitle = ((WebBrowser) wBrowser).DocumentTitle;
 						}
 					}
 							
-					if (!string.IsNullOrEmpty(this.tabTitle))
+					if (!string.IsNullOrEmpty(tabTitle))
 					{
 						tabP.Title = tabTitle + " - " + shortTitle;
 					}
@@ -233,41 +237,40 @@ namespace mRemoteNG.Connection.Protocol.Http
 		}
 
 
-        private void geckoBrowser_DocumentTitleChanged(System.Object sender, string e)
+        private void geckoBrowser_DocumentTitleChanged(object sender, string e)
         {
             try
             {
-                Crownwood.Magic.Controls.TabPage tabP = default(Crownwood.Magic.Controls.TabPage);
-                tabP = InterfaceControl.Parent as Crownwood.Magic.Controls.TabPage;
+                var tabP = InterfaceControl.Parent as TabPage;
 
                 if (tabP != null)
                 {
-                    string shortTitle = "";
+                    string shortTitle;
 
-                    if (this.InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
+                    if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
                     {
-                        if ((wBrowser as MiniGeckoBrowser.MiniGeckoBrowser).Title.Length >= 30)
+                        if (((MiniGeckoBrowser.MiniGeckoBrowser) wBrowser).Title.Length >= 30)
                         {
-                            shortTitle = (wBrowser as MiniGeckoBrowser.MiniGeckoBrowser).Title.Substring(0, 29) + " ...";
+                            shortTitle = ((MiniGeckoBrowser.MiniGeckoBrowser) wBrowser).Title.Substring(0, 29) + " ...";
                         }
                         else
                         {
-                            shortTitle = (wBrowser as MiniGeckoBrowser.MiniGeckoBrowser).Title;
+                            shortTitle = ((MiniGeckoBrowser.MiniGeckoBrowser) wBrowser).Title;
                         }
                     }
                     else
                     {
-                        if ((wBrowser as WebBrowser).DocumentTitle.Length >= 30)
+                        if (((WebBrowser) wBrowser).DocumentTitle.Length >= 30)
                         {
-                            shortTitle = (wBrowser as WebBrowser).DocumentTitle.Substring(0, 29) + " ...";
+                            shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 29) + " ...";
                         }
                         else
                         {
-                            shortTitle = (wBrowser as WebBrowser).DocumentTitle;
+                            shortTitle = ((WebBrowser) wBrowser).DocumentTitle;
                         }
                     }
 
-                    if (!string.IsNullOrEmpty(this.tabTitle))
+                    if (!string.IsNullOrEmpty(tabTitle))
                     {
                         tabP.Title = tabTitle + " - " + shortTitle;
                     }
