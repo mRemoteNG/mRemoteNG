@@ -48,7 +48,10 @@
     </Content>
     <Content Include="Filters\Harvest_Filter.xslt" />
     <Content Include="Includes\Config.wxi" />
+    <Content Include="Resources\header.bmp" />
+    <Content Include="Resources\License.rtf" />
     <Content Include="Resources\mRemoteNG.ico" />
+    <Content Include="Resources\welcome.bmp" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CustomActions" />
@@ -75,7 +78,13 @@
   <Target Name="CopyToDeploy" Condition="'$(Configuration)' == 'Release'">
     <Copy SourceFiles="$(OutputPath)$(OutputName).msi" DestinationFiles="..\Deploy\Setup\$(OutputName) $(AssemblyFileVersion)_$(Platform).msi" />
   </Target>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <LinkerAdditionalOptions>-ext WixUIExtension</LinkerAdditionalOptions>
+  </PropertyGroup>
   <PropertyGroup>
-    <PreBuildEvent>call "$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\bin\$(Configuration)" -ag -dr APPLICATIONROOTDIRECTORY -var var.HarvestPath -srd -cg MandatoryComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt" -v</PreBuildEvent>
+    <PreBuildEvent>REM Harvest bin directory of the mRemoteV1 project
+call "$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\bin\$(Configuration)" -ag -dr APPLICATIONROOTDIRECTORY -var var.HarvestPath -srd -cg MandatoryComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt" -v
+REM Convert the license file "COPYING.TXT" to "License.rtf" to be shown in the installer GUI
+call "$(ProjectDir)Resources\Pandoc\pandoc.exe" -s -t rtf -o "$(ProjectDir)\Resources\License.rtf" "$(SolutionDir)COPYING.TXT"</PreBuildEvent>
   </PropertyGroup>
 </Project>

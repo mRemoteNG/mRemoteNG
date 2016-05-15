@@ -28,23 +28,31 @@
         <Directory Id="ApplicationProgramsFolder" Name="$(var.ProductName)"/>
       </Directory>
     </Directory>
+
+    <Feature Id="F.Complete" Title="Complete" Display="expand" AllowAdvertise="no" Level="1">
+      <Feature Id="F.MinimalFeature" Title="$(var.ProductName)" Absent="disallow" ConfigurableDirectory="APPLICATIONROOTDIRECTORY" Level="1">
+        <ComponentGroupRef Id="MandatoryComponents" Primary="yes" />
+        <ComponentGroupRef Id="CG.ProjectInfoFiles" Primary="yes" />
+      </Feature>
+
+      <Feature Id="F.PuttyNG" Title="PuTTYNG" Absent="allow" AllowAdvertise="no" Level="1">
+        <ComponentRef Id="C.PuttyNGFile" Primary="yes" />
+      </Feature>
+
+      <Feature Id="F.DesktopShortcut" Title="Desktop Shortcut" Absent="allow" AllowAdvertise="no" Level="1">
+        <ComponentRef Id="C.DesktopShortcut" Primary="yes" />
+      </Feature>
+
+      <Feature Id="F.ApplicationStartMenuShortcut" Title="Start menu shortcut" Absent="allow" AllowAdvertise="no" Level="1">
+        <ComponentRef Id="C.ApplicationStartMenuShortcut" Primary="yes" />
+      </Feature>
+    </Feature>
+
     
-    
-    <Feature Id="F.MinimalFeature" Title="$(var.ProductName)" Level="1">
-      <ComponentGroupRef Id="MandatoryComponents" Primary="yes" />
-      <ComponentGroupRef Id="CG.ProjectInfoFiles" Primary="yes" />
-    </Feature>
-
-    <Feature Id="F.PuttyNG" Title="PuTTYNG" Absent="allow" Level="1">
-      <ComponentRef Id="C.PuttyNGFile" Primary="yes" />
-    </Feature>
-
-    <Feature Id="F.DesktopShortcut" Title="Desktop Shortcut" Absent="allow" Level="1">
-      <ComponentRef Id="C.DesktopShortcut" Primary="yes" />
-    </Feature>
-
-    <Feature Id="F.ApplicationStartMenuShortcut" Title="Start menu shortcut" Absent="allow" Level="1">
-      <ComponentRef Id="C.ApplicationStartMenuShortcut" Primary="yes" />
-    </Feature>
+    <UIRef Id="WixUI_FeatureTree"/>
+    <UIRef Id="WixUI_ErrorProgressText" />
+    <WixVariable Id="WixUILicenseRtf" Value="Resources\License.rtf" />
+    <WixVariable Id="WixUIDialogBmp" Value="Resources\welcome.bmp" />
+    <WixVariable Id="WixUIBannerBmp" Value="Resources\header.bmp" />
   </Product>
 </Wix>

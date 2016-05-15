@@ -275,3 +275,5 @@ paket-files/
 .idea/
 *.sln.iml
 *.msi
+Installer/Resources/License.rtf
+Installer/Fragments/FilesFragment.wxs
