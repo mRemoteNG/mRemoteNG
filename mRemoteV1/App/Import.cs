@@ -8,7 +8,6 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
-using Microsoft.VisualBasic;
 using PSTaskDialog;
 
 namespace mRemoteNG.App
@@ -197,7 +196,7 @@ namespace mRemoteNG.App
                 {
                     cTaskDialog.ShowCommandBox(Application.ProductName, Language.strImportLocationMainInstruction,
                         Language.strImportLocationContent, "", "", "",
-                        string.Format(Language.strImportLocationCommandButtons, Constants.vbLf, rootTreeNode.Text,
+                        string.Format(Language.strImportLocationCommandButtons, Environment.NewLine, rootTreeNode.Text,
                             selectedTreeNode.Text), true, eSysIcons.Question, 0);
                     switch (cTaskDialog.CommandButtonResult)
                     {
