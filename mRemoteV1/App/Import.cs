@@ -6,9 +6,8 @@ using System.Windows.Forms;
 using mRemoteNG.Config.Import;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
-using mRemoteNG.Tools;
 using mRemoteNG.Tree;
-using PSTaskDialog;
+using Microsoft.VisualBasic;
 
 namespace mRemoteNG.App
 {
@@ -86,11 +85,9 @@ namespace mRemoteNG.App
                         }
                         catch (Exception ex)
                         {
-                            cTaskDialog.ShowTaskDialogBox(Application.ProductName,
-                                Language.strImportFileFailedMainInstruction,
-                                string.Format(Language.strImportFileFailedContent, fileName),
-                                MiscTools.GetExceptionMessageRecursive(ex), "", "", "", "", eTaskDialogButtons.OK,
-                                eSysIcons.Error, eSysIcons.Error);
+                            MessageBox.Show(string.Format(Language.strImportFileFailedContent, fileName), Language.strImportFileFailedMainInstruction,
+                                            MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                            Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:1", ex, logOnly: true);
                         }
                     }
 
@@ -106,7 +103,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed.", ex, logOnly: true);
+                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:2", ex, logOnly: true);
             }
         }
 
@@ -194,9 +191,9 @@ namespace mRemoteNG.App
                 }
                 else
                 {
-                    cTaskDialog.ShowCommandBox(Application.ProductName, Language.strImportLocationMainInstruction,
+                    CTaskDialog.ShowCommandBox(Application.ProductName, Language.strImportLocationMainInstruction,
                         Language.strImportLocationContent, "", "", "",
-                        string.Format(Language.strImportLocationCommandButtons, Environment.NewLine, rootTreeNode.Text,
+                        string.Format(Language.strImportLocationCommandButtons, Constants.vbLf, rootTreeNode.Text,
                             selectedTreeNode.Text), true, eSysIcons.Question, 0);
                     switch (cTaskDialog.CommandButtonResult)
                     {

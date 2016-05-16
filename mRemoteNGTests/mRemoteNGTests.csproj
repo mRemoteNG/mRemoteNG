@@ -94,7 +94,6 @@
     <Compile Include="UI\Forms\OptionsPages\OptionsAdvancedPageTests.cs" />
     <Compile Include="UI\Forms\OptionsPages\OptionsAppearancePageTests.cs" />
     <Compile Include="UI\Forms\OptionsPages\OptionsConnectionsPageTests.cs" />
-    <Compile Include="UI\Forms\OptionsPages\OptionsKeyboardPageTests.cs" />
     <Compile Include="UI\Forms\OptionsPages\OptionsSQLPageTests.cs" />
     <Compile Include="UI\Forms\OptionsPages\OptionsStartupExitPageTests.cs" />
     <Compile Include="UI\Forms\OptionsPages\OptionsTabsPanelPageTests.cs" />
