@@ -7,8 +7,8 @@ using mRemoteNG.App.Update;
 using mRemoteNG.My;
 using mRemoteNG.Security;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
-using PSTaskDialog;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -246,13 +246,13 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                     throw e.Error;
                 }
 
-                cTaskDialog.ShowCommandBox(this, Convert.ToString(Application.ProductName),
+                CTaskDialog.ShowCommandBox(this, Convert.ToString(Application.ProductName),
                     Language.strProxyTestSucceeded, "", Language.strButtonOK, false);
             }
             catch (Exception ex)
             {
-                cTaskDialog.ShowCommandBox(this, Convert.ToString(Application.ProductName), Language.strProxyTestFailed,
-                    MiscTools.GetExceptionMessageRecursive(ex), "", "", "", Language.strButtonOK, false, eSysIcons.Error,
+                CTaskDialog.ShowCommandBox(this, Convert.ToString(Application.ProductName), Language.strProxyTestFailed,
+                    MiscTools.GetExceptionMessageRecursive(ex), "", "", "", Language.strButtonOK, false, ESysIcons.Error,
                     0);
             }
         }

@@ -1,12 +1,11 @@
 using System;
 using System.IO;
 using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.My;
 using mRemoteNG.Tools;
-using PSTaskDialog;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -48,51 +47,51 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            chkWriteLogFile.Checked = mRemoteNG.Settings.Default.WriteLogFile;
+            chkWriteLogFile.Checked = Settings.Default.WriteLogFile;
 
-            chkEncryptCompleteFile.Checked = mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile;
-            chkAutomaticallyGetSessionInfo.Checked = mRemoteNG.Settings.Default.AutomaticallyGetSessionInfo;
-            chkAutomaticReconnect.Checked = mRemoteNG.Settings.Default.ReconnectOnDisconnect;
-            numPuttyWaitTime.Value = mRemoteNG.Settings.Default.MaxPuttyWaitTime;
+            chkEncryptCompleteFile.Checked = Settings.Default.EncryptCompleteConnectionsFile;
+            chkAutomaticallyGetSessionInfo.Checked = Settings.Default.AutomaticallyGetSessionInfo;
+            chkAutomaticReconnect.Checked = Settings.Default.ReconnectOnDisconnect;
+            numPuttyWaitTime.Value = Settings.Default.MaxPuttyWaitTime;
 
-            chkUseCustomPuttyPath.Checked = mRemoteNG.Settings.Default.UseCustomPuttyPath;
-            txtCustomPuttyPath.Text = mRemoteNG.Settings.Default.CustomPuttyPath;
+            chkUseCustomPuttyPath.Checked = Settings.Default.UseCustomPuttyPath;
+            txtCustomPuttyPath.Text = Settings.Default.CustomPuttyPath;
             SetPuttyLaunchButtonEnabled();
 
-            numUVNCSCPort.Value = mRemoteNG.Settings.Default.UVNCSCPort;
+            numUVNCSCPort.Value = Settings.Default.UVNCSCPort;
 
-            txtXULrunnerPath.Text = mRemoteNG.Settings.Default.XULRunnerPath;
+            txtXULrunnerPath.Text = Settings.Default.XULRunnerPath;
         }
 
         public override void SaveSettings()
         {
-            mRemoteNG.Settings.Default.WriteLogFile = chkWriteLogFile.Checked;
-            mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile = chkEncryptCompleteFile.Checked;
-            mRemoteNG.Settings.Default.AutomaticallyGetSessionInfo = chkAutomaticallyGetSessionInfo.Checked;
-            mRemoteNG.Settings.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
+            Settings.Default.WriteLogFile = chkWriteLogFile.Checked;
+            Settings.Default.EncryptCompleteConnectionsFile = chkEncryptCompleteFile.Checked;
+            Settings.Default.AutomaticallyGetSessionInfo = chkAutomaticallyGetSessionInfo.Checked;
+            Settings.Default.ReconnectOnDisconnect = chkAutomaticReconnect.Checked;
 
             var puttyPathChanged = false;
-            if (mRemoteNG.Settings.Default.CustomPuttyPath != txtCustomPuttyPath.Text)
+            if (Settings.Default.CustomPuttyPath != txtCustomPuttyPath.Text)
             {
                 puttyPathChanged = true;
-                mRemoteNG.Settings.Default.CustomPuttyPath = txtCustomPuttyPath.Text;
+                Settings.Default.CustomPuttyPath = txtCustomPuttyPath.Text;
             }
-            if (mRemoteNG.Settings.Default.UseCustomPuttyPath != chkUseCustomPuttyPath.Checked)
+            if (Settings.Default.UseCustomPuttyPath != chkUseCustomPuttyPath.Checked)
             {
                 puttyPathChanged = true;
-                mRemoteNG.Settings.Default.UseCustomPuttyPath = chkUseCustomPuttyPath.Checked;
+                Settings.Default.UseCustomPuttyPath = chkUseCustomPuttyPath.Checked;
             }
             if (puttyPathChanged)
             {
-                PuttyBase.PuttyPath = mRemoteNG.Settings.Default.UseCustomPuttyPath ? mRemoteNG.Settings.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
+                PuttyBase.PuttyPath = Settings.Default.UseCustomPuttyPath ? Settings.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
                 Sessions.AddSessionsToTree();
             }
 
-            mRemoteNG.Settings.Default.MaxPuttyWaitTime = (int) numPuttyWaitTime.Value;
-            mRemoteNG.Settings.Default.UVNCSCPort = (int) numUVNCSCPort.Value;
-            mRemoteNG.Settings.Default.XULRunnerPath = txtXULrunnerPath.Text;
+            Settings.Default.MaxPuttyWaitTime = (int) numPuttyWaitTime.Value;
+            Settings.Default.UVNCSCPort = (int) numUVNCSCPort.Value;
+            Settings.Default.XULRunnerPath = txtXULrunnerPath.Text;
 
-            mRemoteNG.Settings.Default.Save();
+            Settings.Default.Save();
         }
 
         #endregion
@@ -135,8 +134,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             try
             {
                 var puttyProcess = new PuttyProcessController();
-                var fileName = "";
-                fileName = chkUseCustomPuttyPath.Checked ? txtCustomPuttyPath.Text : GeneralAppInfo.PuttyPath;
+                var fileName = chkUseCustomPuttyPath.Checked ? txtCustomPuttyPath.Text : GeneralAppInfo.PuttyPath;
                 puttyProcess.Start(fileName);
                 puttyProcess.SetControlText("Button", "&Cancel", "&Close");
                 puttyProcess.SetControlVisible("Button", "&Open", false);
@@ -144,8 +142,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
             catch (Exception ex)
             {
-                cTaskDialog.MessageBox(Convert.ToString(Application.ProductName), Language.strErrorCouldNotLaunchPutty,
-                    "", ex.Message, "", "", eTaskDialogButtons.OK, eSysIcons.Error, eSysIcons.Error);
+                MessageBox.Show(Language.strErrorCouldNotLaunchPutty, Application.ProductName,
+                                MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                Runtime.MessageCollector.AddExceptionMessage(Language.strErrorCouldNotLaunchPutty, ex, logOnly: true);
             }
         }
 
@@ -165,8 +164,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private void SetPuttyLaunchButtonEnabled()
         {
-            var puttyPath = "";
-            puttyPath = chkUseCustomPuttyPath.Checked ? txtCustomPuttyPath.Text : GeneralAppInfo.PuttyPath;
+            var puttyPath = chkUseCustomPuttyPath.Checked ? txtCustomPuttyPath.Text : GeneralAppInfo.PuttyPath;
 
             var exists = false;
             try
