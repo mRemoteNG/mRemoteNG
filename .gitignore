@@ -277,3 +277,6 @@ paket-files/
 *.msi
 Installer/Resources/License.rtf
 Installer/Fragments/FilesFragment.wxs
+Installer Projects/Installer/Resources/License.rtf
+Installer Projects/Installer/Resources/Pandoc/
+Installer Projects/Installer/Fragments/FilesFragment.wxs
