@@ -206,9 +206,10 @@ namespace mRemoteNG.Tools
             }
         }
 
-#if PORTABLE
+
         public static void Unregister()
         {
+#if PORTABLE
             try
             {
                 DeleteBrowserFeatureControl();
@@ -225,11 +226,3 @@ namespace mRemoteNG.Tools
         }
     }
 }
-
-
-//=======================================================
-//Service provided by Telerik (www.telerik.com)
-//Conversion powered by NRefactory.
-//Twitter: @telerik
-//Facebook: facebook.com/telerik
-//=======================================================
