@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WixLocalization Culture="ja-JP" Language="1041" xmlns="http://schemas.microsoft.com/wix/2006/localization">
+  
+  <!-- Install Conditions -->
+  <String Id="Upgrade_NewerVersionInstalled" Overridable="yes">A newer version of [ProductName] is already installed.</String>
+  <String Id="Install_NeedToBeAdminToInstall">You need to be an administrator to install this product.</String>
+  <String Id="Install_NeedDotNetFrameworkVersion">mRemoteNG requires Microsoft .NET Framework $(var.RequiredDotNetFrameworkVersion).</String>
+  <String Id="Install_OSVersionRequirement">mRemoteNG requires Windows 7 SP1 or higher to run. Please update your operating system and try again.</String>
+  <String Id="Install_RDP80Requirement">mRemoteNG requires RDP 8.0 or higher to run. Windows 7 users will need to install KB2592687</String>
+  <String Id="Install_Win7RequiresSP1">For mRemoteNG to run on Windows 7, it requires Service Pack 1 to be installed. Please install Service Pack 1 and try again.</String>
+  
+  <!-- Directories and File names -->
+  <String Id="Folders_Desktop">Desktop</String>
+  <String Id="File_Credits">Credits</String>
+  <String Id="File_License">License</String>
+  <String Id="File_VersionHistory">Version History</String>
+  
+  <!-- Features and install options -->
+  <String Id="Feature_Complete">Complete</String>
+  <String Id="Feature_DesktopShortcut">Desktop Shortcut</String>
+  <String Id="Feature_StartMenuShortcut">Start menu shortcut</String>
+  
+  <!-- GUI Page Text -->
+  <String Id="FinishPage_LaunchMremoteNow" Overridable="yes">Launch [ProductName] Now</String>
+  
+</WixLocalization>
