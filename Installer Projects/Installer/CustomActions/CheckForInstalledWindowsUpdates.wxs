@@ -2,7 +2,11 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
 	<Fragment>
-    <CustomAction Id="SetRDP80KBValue" Return="check" Execute="immediate" Property="CheckIfRDP80Installed" Value="KB=$(var.RDP80KB)" />
+    <CustomAction Id="SetRDP80KBValue" Return="check" Execute="immediate" Property="KB" Value="$(var.RDP80KB)" />
     <CustomAction Id="CheckIfRDP80Installed" Return="check" Execute="immediate" BinaryKey="CustomActions.CA.dll" DllEntry="IsKBInstalled" />
+  </Fragment>
+  <Fragment>
+    <CustomAction Id="SetRDP81KBValue" Return="check" Execute="immediate" Property="KB" Value="$(var.RDP81KB)" />
+    <CustomAction Id="CheckIfRDP81Installed" Return="check" Execute="immediate" BinaryKey="CustomActions.CA.dll" DllEntry="IsKBInstalled" />
   </Fragment>
 </Wix>

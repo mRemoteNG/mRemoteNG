@@ -8,7 +8,7 @@ namespace CustomActions
         public static ActionResult IsKBInstalled(Session session)
         {
             session.Log("Begin IsKBInstalled");
-            string kb = session.CustomActionData["KB"];
+            string kb = session["KB"];
             session.Log("Checking if '{0}' is installed", kb);
             InstalledWindowsUpdateGatherer updateGatherer = new InstalledWindowsUpdateGatherer();
             bool isUpdateInstalled = updateGatherer.IsUpdateInstalled(kb);
