@@ -40,7 +40,7 @@ namespace mRemoteNG.Tools
 				if (Icon != null)
 					return Icon.ToBitmap();
 				else
-					return null;
+					return Resources.mRemote_Icon.ToBitmap();
 			}
 		}
         #endregion
