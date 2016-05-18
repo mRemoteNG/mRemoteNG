@@ -1,7 +1,7 @@
-﻿using NUnit.Framework;
-using mRemoteNG.Connection;
+﻿using mRemoteNG.Connection;
+using NUnit.Framework;
 using System.Reflection;
-using System;
+using System.Collections;
 
 namespace mRemoteNGTests.Connection
 {
@@ -11,6 +11,7 @@ namespace mRemoteNGTests.Connection
         private ConnectionInfo _connectionInfo;
         private ConnectionInfoInheritance _inheritance;
         private PropertyInfo[] _inheritanceProperties = typeof(ConnectionInfoInheritance).GetProperties();
+
 
         [SetUp]
         public void Setup()
@@ -31,26 +32,14 @@ namespace mRemoteNGTests.Connection
         {
             _inheritance.Username = true;
             _inheritance.TurnOffInheritanceCompletely();
-            bool allPropertiesFalse = true;
-            foreach (var property in _inheritanceProperties)
-            {
-                if (property.PropertyType.Name == typeof(Boolean).Name && (bool)property.GetValue(_inheritance) == true)
-                    allPropertiesFalse = false;
-            }
-            Assert.That(allPropertiesFalse, Is.True);
+            Assert.That(AllInheritancePropertiesAreFalse(), Is.True);
         }
 
         [Test]
         public void TurnOnInheritanceCompletely()
         {
             _inheritance.TurnOnInheritanceCompletely();
-            bool allPropertiesTrue = true;
-            foreach(var property in _inheritanceProperties)
-            {
-                if (property.PropertyType.Name == typeof(Boolean).Name && (bool)property.GetValue(_inheritance) == false)
-                    allPropertiesTrue = false;
-            }
-            Assert.That(allPropertiesTrue, Is.True);
+            Assert.That(AllInheritancePropertiesAreTrue(), Is.True);
         }
 
         [Test]
@@ -58,13 +47,7 @@ namespace mRemoteNGTests.Connection
         {
             _inheritance.Username = true;
             _inheritance.DisableInheritance();
-            bool allPropertiesFalse = true;
-            foreach (var property in _inheritanceProperties)
-            {
-                if (property.PropertyType.Name == typeof(Boolean).Name && (bool)property.GetValue(_inheritance) == true)
-                    allPropertiesFalse = false;
-            }
-            Assert.That(allPropertiesFalse, Is.True);
+            Assert.That(AllInheritancePropertiesAreFalse(), Is.True);
         }
 
         [Test]
@@ -74,6 +57,51 @@ namespace mRemoteNGTests.Connection
             _inheritance.DisableInheritance();
             _inheritance.EnableInheritance();
             Assert.That(_inheritance.Username, Is.True);
+        }
+
+
+        private bool AllInheritancePropertiesAreTrue()
+        {
+            bool allPropertiesTrue = true;
+            foreach (var property in _inheritanceProperties)
+            {
+                if (PropertyIsBoolean(property) && PropertyIsChangedWhenSettingInheritAll(property) && BooleanPropertyIsSetToFalse(property))
+                    allPropertiesTrue = false;
+            }
+            return allPropertiesTrue;
+        }
+
+        private bool AllInheritancePropertiesAreFalse()
+        {
+            bool allPropertiesFalse = true;
+            foreach (var property in _inheritanceProperties)
+            {
+                if (PropertyIsBoolean(property) && PropertyIsChangedWhenSettingInheritAll(property) && BooleanPropertyIsSetToTrue(property))
+                    allPropertiesFalse = false;
+            }
+            return allPropertiesFalse;
+        }
+
+        private bool PropertyIsChangedWhenSettingInheritAll(PropertyInfo property)
+        {
+            ArrayList propertiesIgnoredByInheritAll = new ArrayList();
+            propertiesIgnoredByInheritAll.Add("IsDefault");
+            return propertiesIgnoredByInheritAll.Contains(property);
+        }
+
+        private bool PropertyIsBoolean(PropertyInfo property)
+        {
+            return (property.PropertyType.Name == typeof(bool).Name);
+        }
+
+        private bool BooleanPropertyIsSetToFalse(PropertyInfo property)
+        {
+            return (bool)property.GetValue(_inheritance) == false;
+        }
+
+        private bool BooleanPropertyIsSetToTrue(PropertyInfo property)
+        {
+            return (bool)property.GetValue(_inheritance) == true;
         }
     }
 }

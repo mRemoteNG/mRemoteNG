@@ -4,8 +4,6 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Messages;
-using mRemoteNG.My;
-using mRemoteNG.Root;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 using System;
@@ -24,6 +22,7 @@ namespace mRemoteNG.UI.Window
 	{
         private bool _originalPropertyGridToolStripItemCountValid;
         private int _originalPropertyGridToolStripItemCount;
+        private System.ComponentModel.Container components = null;
         internal ToolStripButton btnShowProperties;
         internal ToolStripButton btnShowDefaultProperties;
         internal ToolStripButton btnShowInheritance;
@@ -31,7 +30,6 @@ namespace mRemoteNG.UI.Window
         internal ToolStripButton btnIcon;
         internal ToolStripButton btnHostStatus;
         internal ContextMenuStrip cMenIcons;
-        private System.ComponentModel.Container components = null;
         internal ContextMenuStrip propertyGridContextMenu;
         internal ToolStripMenuItem propertyGridContextMenuShowHelpText;
         internal ToolStripMenuItem propertyGridContextMenuReset;
@@ -43,7 +41,7 @@ namespace mRemoteNG.UI.Window
 		{
             components = new System.ComponentModel.Container();
             Load += new EventHandler(Config_Load);
-			base.SystemColorsChanged += new EventHandler(Config_SystemColorsChanged);
+            SystemColorsChanged += new EventHandler(Config_SystemColorsChanged);
             pGrid = new FilteredPropertyGrid();
             pGrid.PropertyValueChanged += new PropertyValueChangedEventHandler(pGrid_PropertyValueChanged);
             pGrid.PropertySortChanged += new EventHandler(pGrid_PropertySortChanged);
@@ -287,7 +285,7 @@ namespace mRemoteNG.UI.Window
         #region Public Methods
 		// Main form handle command key events
 		// Adapted from http://kiwigis.blogspot.com/2009/05/adding-tab-key-support-to-propertygrid.html
-		protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, System.Windows.Forms.Keys keyData)
+		protected override bool ProcessCmdKey(ref System.Windows.Forms.Message msg, Keys keyData)
 		{
 			if ((keyData & Keys.KeyCode) == Keys.Tab)
 			{
@@ -302,20 +300,14 @@ namespace mRemoteNG.UI.Window
 				FindChildGridItems(gridRoot, ref gridItems);
 						
 				if (!ContainsGridItemProperty(gridItems))
-				{
 					return true;
-				}
 						
 				GridItem newItem = selectedItem;
 						
 				if (keyData == (Keys.Tab | Keys.Shift))
-				{
 					newItem = FindPreviousGridItemProperty(gridItems, selectedItem);
-				}
 				else if (keyData == Keys.Tab)
-				{
 					newItem = FindNextGridItemProperty(gridItems, selectedItem);
-				}
 						
 				pGrid.SelectedGridItem = newItem;
 						
@@ -354,17 +346,10 @@ namespace mRemoteNG.UI.Window
 				
 		private GridItem FindPreviousGridItemProperty(List<GridItem> gridItems, GridItem startItem)
 		{
-			if (gridItems.Count == 0)
-			{
+			if (gridItems.Count == 0 || startItem == null)
 				return null;
-			}
-			if (startItem == null)
-			{
-				return null;
-			}
-					
+			
 			int startIndex = gridItems.IndexOf(startItem);
-					
 			if (startItem.GridItemType == GridItemType.Property)
 			{
 				startIndex--;
@@ -373,7 +358,7 @@ namespace mRemoteNG.UI.Window
 					startIndex = gridItems.Count - 1;
 				}
 			}
-					
+			
 			int previousIndex = 0;
 			bool previousIndexValid = false;
 			for (int index = startIndex; index >= 0; index--)
@@ -385,12 +370,10 @@ namespace mRemoteNG.UI.Window
 					break;
 				}
 			}
-					
+			
 			if (previousIndexValid)
-			{
 				return gridItems[previousIndex];
-			}
-					
+			
 			for (int index = gridItems.Count - 1; index >= startIndex + 1; index--)
 			{
 				if (gridItems[index].GridItemType == GridItemType.Property)
@@ -400,28 +383,18 @@ namespace mRemoteNG.UI.Window
 					break;
 				}
 			}
-					
+			
 			if (!previousIndexValid)
-			{
 				return null;
-			}
-					
 			return gridItems[previousIndex];
 		}
 				
 		private GridItem FindNextGridItemProperty(List<GridItem> gridItems, GridItem startItem)
 		{
-			if (gridItems.Count == 0)
-			{
+			if (gridItems.Count == 0 || startItem == null)
 				return null;
-			}
-			if (startItem == null)
-			{
-				return null;
-			}
 					
 			int startIndex = gridItems.IndexOf(startItem);
-					
 			if (startItem.GridItemType == GridItemType.Property)
 			{
 				startIndex++;
@@ -430,7 +403,7 @@ namespace mRemoteNG.UI.Window
 					startIndex = 0;
 				}
 			}
-					
+			
 			int nextIndex = 0;
 			bool nextIndexValid = false;
 			for (int index = startIndex; index <= gridItems.Count - 1; index++)
@@ -442,11 +415,9 @@ namespace mRemoteNG.UI.Window
 					break;
 				}
 			}
-					
+			
 			if (nextIndexValid)
-			{
 				return gridItems[nextIndex];
-			}
 					
 			for (int index = 0; index <= startIndex - 1; index++)
 			{
@@ -457,12 +428,9 @@ namespace mRemoteNG.UI.Window
 					break;
 				}
 			}
-					
+			
 			if (!nextIndexValid)
-			{
 				return null;
-			}
-					
 			return gridItems[nextIndex];
 		}
 				
@@ -744,7 +712,7 @@ namespace mRemoteNG.UI.Window
 			Themes.ThemeManager.ThemeChanged += ApplyTheme;
 			ApplyTheme();
 			AddToolStripItems();
-			pGrid.HelpVisible = mRemoteNG.Settings.Default.ShowConfigHelpText;
+			pGrid.HelpVisible = Settings.Default.ShowConfigHelpText;
 		}
 				
 		private void Config_SystemColorsChanged(object sender, EventArgs e)
@@ -779,7 +747,7 @@ namespace mRemoteNG.UI.Window
                 else if (e.ChangedItem.Label == Language.strPropertyNameName)
                 {
                     Windows.treeForm.tvConnections.SelectedNode.Text = Convert.ToString(((ConnectionInfo)pGrid.SelectedObject).Name);
-                    if (mRemoteNG.Settings.Default.SetHostnameLikeDisplayName && pGrid.SelectedObject is ConnectionInfo)
+                    if (Settings.Default.SetHostnameLikeDisplayName && pGrid.SelectedObject is ConnectionInfo)
                     {
                         ConnectionInfo connectionInfo = (ConnectionInfo)pGrid.SelectedObject;
                         if (!string.IsNullOrEmpty(connectionInfo.Name))
@@ -813,7 +781,7 @@ namespace mRemoteNG.UI.Window
                         if (rootInfo.Password == true)
                         {
                             string passwordName = "";
-                            if (mRemoteNG.Settings.Default.UseSQLServer)
+                            if (Settings.Default.UseSQLServer)
                                 passwordName = Language.strSQLServer.TrimEnd(':');
                             else
                                 passwordName = Path.GetFileName(Runtime.GetStartupConnectionFileName());
@@ -845,16 +813,14 @@ namespace mRemoteNG.UI.Window
         private void pGrid_PropertySortChanged(object sender, EventArgs e)
 		{
 			if (pGrid.PropertySort == PropertySort.CategorizedAlphabetical)
-			{
 				pGrid.PropertySort = PropertySort.Categorized;
-			}
 		}
 				
 		private void ShowHideGridItems()
 		{
 			try
 			{
-				System.Collections.Generic.List<string> strHide = new System.Collections.Generic.List<string>();
+                List<string> strHide = new List<string>();
 						
 				if (pGrid.SelectedObject is ConnectionInfo)
 				{
@@ -862,7 +828,7 @@ namespace mRemoteNG.UI.Window
 							
 					switch (conI.Protocol)
 					{
-						case mRemoteNG.Connection.Protocol.ProtocolType.RDP:
+						case Connection.Protocol.ProtocolType.RDP:
 							strHide.Add("ExtApp");
 							strHide.Add("ICAEncryption");
 							strHide.Add("PuttySession");
@@ -897,7 +863,7 @@ namespace mRemoteNG.UI.Window
 								strHide.Add("AutomaticResize");
 							}
 							break;
-						case mRemoteNG.Connection.Protocol.ProtocolType.VNC:
+						case Connection.Protocol.ProtocolType.VNC:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -939,7 +905,7 @@ namespace mRemoteNG.UI.Window
 								strHide.Add("VNCProxyUsername");
 							}
 							break;
-						case mRemoteNG.Connection.Protocol.ProtocolType.SSH1:
+						case Connection.Protocol.ProtocolType.SSH1:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -980,7 +946,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case mRemoteNG.Connection.Protocol.ProtocolType.SSH2:
+						case Connection.Protocol.ProtocolType.SSH2:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -1021,50 +987,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case mRemoteNG.Connection.Protocol.ProtocolType.Telnet:
-							strHide.Add("CacheBitmaps");
-							strHide.Add("Colors");
-							strHide.Add("DisplayThemes");
-							strHide.Add("DisplayWallpaper");
-							strHide.Add("EnableFontSmoothing");
-							strHide.Add("EnableDesktopComposition");
-							strHide.Add("Domain");
-							strHide.Add("ExtApp");
-							strHide.Add("ICAEncryption");
-							strHide.Add("Password");
-							strHide.Add("RDGatewayDomain");
-							strHide.Add("RDGatewayHostname");
-							strHide.Add("RDGatewayPassword");
-							strHide.Add("RDGatewayUsageMethod");
-							strHide.Add("RDGatewayUseConnectionCredentials");
-							strHide.Add("RDGatewayUsername");
-							strHide.Add("RDPAuthenticationLevel");
-							strHide.Add("LoadBalanceInfo");
-							strHide.Add("RedirectDiskDrives");
-							strHide.Add("RedirectKeys");
-							strHide.Add("RedirectPorts");
-							strHide.Add("RedirectPrinters");
-							strHide.Add("RedirectSmartCards");
-							strHide.Add("RedirectSound");
-							strHide.Add("RenderingEngine");
-							strHide.Add("Resolution");
-							strHide.Add("AutomaticResize");
-							strHide.Add("UseConsoleSession");
-							strHide.Add("UseCredSsp");
-							strHide.Add("Username");
-							strHide.Add("VNCAuthMode");
-							strHide.Add("VNCColors");
-							strHide.Add("VNCCompression");
-							strHide.Add("VNCEncoding");
-							strHide.Add("VNCProxyIP");
-							strHide.Add("VNCProxyPassword");
-							strHide.Add("VNCProxyPort");
-							strHide.Add("VNCProxyType");
-							strHide.Add("VNCProxyUsername");
-							strHide.Add("VNCSmartSizeMode");
-							strHide.Add("VNCViewOnly");
-							break;
-						case mRemoteNG.Connection.Protocol.ProtocolType.Rlogin:
+						case Connection.Protocol.ProtocolType.Telnet:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -1107,7 +1030,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case mRemoteNG.Connection.Protocol.ProtocolType.RAW:
+						case Connection.Protocol.ProtocolType.Rlogin:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -1150,7 +1073,50 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case mRemoteNG.Connection.Protocol.ProtocolType.HTTP:
+						case Connection.Protocol.ProtocolType.RAW:
+							strHide.Add("CacheBitmaps");
+							strHide.Add("Colors");
+							strHide.Add("DisplayThemes");
+							strHide.Add("DisplayWallpaper");
+							strHide.Add("EnableFontSmoothing");
+							strHide.Add("EnableDesktopComposition");
+							strHide.Add("Domain");
+							strHide.Add("ExtApp");
+							strHide.Add("ICAEncryption");
+							strHide.Add("Password");
+							strHide.Add("RDGatewayDomain");
+							strHide.Add("RDGatewayHostname");
+							strHide.Add("RDGatewayPassword");
+							strHide.Add("RDGatewayUsageMethod");
+							strHide.Add("RDGatewayUseConnectionCredentials");
+							strHide.Add("RDGatewayUsername");
+							strHide.Add("RDPAuthenticationLevel");
+							strHide.Add("LoadBalanceInfo");
+							strHide.Add("RedirectDiskDrives");
+							strHide.Add("RedirectKeys");
+							strHide.Add("RedirectPorts");
+							strHide.Add("RedirectPrinters");
+							strHide.Add("RedirectSmartCards");
+							strHide.Add("RedirectSound");
+							strHide.Add("RenderingEngine");
+							strHide.Add("Resolution");
+							strHide.Add("AutomaticResize");
+							strHide.Add("UseConsoleSession");
+							strHide.Add("UseCredSsp");
+							strHide.Add("Username");
+							strHide.Add("VNCAuthMode");
+							strHide.Add("VNCColors");
+							strHide.Add("VNCCompression");
+							strHide.Add("VNCEncoding");
+							strHide.Add("VNCProxyIP");
+							strHide.Add("VNCProxyPassword");
+							strHide.Add("VNCProxyPort");
+							strHide.Add("VNCProxyType");
+							strHide.Add("VNCProxyUsername");
+							strHide.Add("VNCSmartSizeMode");
+							strHide.Add("VNCViewOnly");
+							break;
+						case Connection.Protocol.ProtocolType.HTTP:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -1191,7 +1157,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case mRemoteNG.Connection.Protocol.ProtocolType.HTTPS:
+						case Connection.Protocol.ProtocolType.HTTPS:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -1231,7 +1197,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case mRemoteNG.Connection.Protocol.ProtocolType.ICA:
+						case Connection.Protocol.ProtocolType.ICA:
 							strHide.Add("DisplayThemes");
 							strHide.Add("DisplayWallpaper");
 							strHide.Add("EnableFontSmoothing");
@@ -1269,7 +1235,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case mRemoteNG.Connection.Protocol.ProtocolType.IntApp:
+						case Connection.Protocol.ProtocolType.IntApp:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -1679,11 +1645,11 @@ namespace mRemoteNG.UI.Window
 			SetHostStatus(pGrid.SelectedObject);
 		}
 				
-		private void btnIcon_Click(object sender, System.Windows.Forms.MouseEventArgs e)
+		private void btnIcon_Click(object sender, MouseEventArgs e)
 		{
 			try
 			{
-				if (pGrid.SelectedObject is ConnectionInfo&& !(pGrid.SelectedObject is PuttySessionInfo))
+				if (pGrid.SelectedObject is ConnectionInfo && !(pGrid.SelectedObject is PuttySessionInfo))
 				{
                     cMenIcons.Items.Clear();
 							
@@ -1836,7 +1802,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				propertyGridContextMenuShowHelpText.Checked = mRemoteNG.Settings.Default.ShowConfigHelpText;
+				propertyGridContextMenuShowHelpText.Checked = Settings.Default.ShowConfigHelpText;
 				GridItem gridItem = pGrid.SelectedGridItem;
 				propertyGridContextMenuReset.Enabled = Convert.ToBoolean(pGrid.SelectedObject != null && gridItem != null && gridItem.PropertyDescriptor != null && gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject));
 			}
@@ -1869,7 +1835,7 @@ namespace mRemoteNG.UI.Window
 				
 		private void propertyGridContextMenuShowHelpText_CheckedChanged(object sender, EventArgs e)
 		{
-            mRemoteNG.Settings.Default.ShowConfigHelpText = propertyGridContextMenuShowHelpText.Checked;
+            Settings.Default.ShowConfigHelpText = propertyGridContextMenuShowHelpText.Checked;
 			pGrid.HelpVisible = propertyGridContextMenuShowHelpText.Checked;
         }
         #endregion

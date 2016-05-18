@@ -365,13 +365,13 @@ namespace mRemoteNG.Connection
 		{
 			SetAllValues(false);
 		}
-		
+
 		private void SetAllValues(bool value)
 		{
             var properties = typeof(ConnectionInfoInheritance).GetProperties();
             foreach (var property in properties)
             {
-                if (property.PropertyType.Name == typeof(Boolean).Name && property.Name != "EverythingInherited")
+                if (property.PropertyType.Name == typeof(Boolean).Name && property.Name != "EverythingInherited" && property.Name != "IsDefault")
                     property.SetValue(this, value, null);
             }
         }
