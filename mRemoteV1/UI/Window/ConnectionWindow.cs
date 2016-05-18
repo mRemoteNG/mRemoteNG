@@ -969,8 +969,16 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				//clean up
-				cmenTabExternalApps.DropDownItems.Clear();
+                //clean up
+                //since new items are added below, we have to dispose of any previous items first
+			    if (cmenTabExternalApps.DropDownItems.Count > 0)
+			    {
+			        foreach (ToolStripMenuItem mitem in cmenTabExternalApps.DropDownItems)
+			            mitem.Dispose();
+
+                    cmenTabExternalApps.DropDownItems.Clear();
+                }
+                
 						
 				//add ext apps
 				foreach (Tools.ExternalTool extA in Runtime.ExternalTools)
