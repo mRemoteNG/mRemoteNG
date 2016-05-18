@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 [assembly:AssemblyDescription("")]
 [assembly:AssemblyCompany("")]
 [assembly:AssemblyProduct("mRemoteNG")]
-[assembly:AssemblyCopyright("Copyright Â© 2007-2009 Felix Deimel, 2010-2013 Riley McArdle")]
+[assembly:AssemblyCopyright("Copyright © 2007-2009 Felix Deimel, 2010-2013 Riley McArdle, 2016 David Sparer")]
 [assembly:AssemblyTrademark("")]
 
 [assembly:ComVisible(false)]
@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // <Assembly: AssemblyVersion("1.0.*")>
 
-[assembly:AssemblyVersion("1.73.*")]
+[assembly:AssemblyVersion("1.74.*")]
 
 [assembly:NeutralResourcesLanguageAttribute("en")]
 

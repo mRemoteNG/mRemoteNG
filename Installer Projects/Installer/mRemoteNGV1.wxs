@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
   <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
-  <Product Name="$(var.ProductNameWithPlatform)" Manufacturer="Next Generation Software" Version="$(var.ProductVersion)"
+  <Product Name="$(var.ProductNameWithPlatform)" Manufacturer="Next Generation Software"
+           Version="$(var.ProductVersion)"
            Id="$(var.ProductCode)" 
            UpgradeCode="$(var.UpgradeCode)" 
            Language="1033">
     <Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
-    <MajorUpgrade DowngradeErrorMessage="!(loc.Upgrade_NewerVersionInstalled)" />
+    <MajorUpgrade DowngradeErrorMessage="!(loc.Upgrade_NewerVersionInstalled)" Schedule="afterInstallExecute" />
     <MediaTemplate EmbedCab="yes" />
     <Binary Id="CustomActions.CA.dll" SourceFile="$(var.SolutionDir)Installer Projects\CustomActions\bin\$(var.Configuration)\CustomActions.CA.dll" />
     <Property Id="ARPPRODUCTICON" Value="mRemoteNG.ico" />
