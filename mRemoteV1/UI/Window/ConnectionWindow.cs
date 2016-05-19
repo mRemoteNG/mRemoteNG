@@ -9,13 +9,12 @@ using mRemoteNG.Config;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.UI.Window
 {
-	public class ConnectionWindow : BaseWindow
+    public class ConnectionWindow : BaseWindow
 	{
         #region Form Init
 		internal ContextMenuStrip cmenTab;
@@ -98,9 +97,9 @@ namespace mRemoteNG.UI.Window
 			//
 			//TabController
 			//
-			TabController.Anchor = (AnchorStyles) (((AnchorStyles.Top | AnchorStyles.Bottom) 
-				| AnchorStyles.Left) 
-				| AnchorStyles.Right);
+			TabController.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom)
+                | AnchorStyles.Left)
+                | AnchorStyles.Right;
 			TabController.Appearance = Crownwood.Magic.Controls.TabControl.VisualAppearance.MultiDocument;
 			TabController.Cursor = Cursors.Hand;
 			TabController.DragFromControl = false;
@@ -241,7 +240,7 @@ namespace mRemoteNG.UI.Window
 			//
 			ClientSize = new Size(632, 453);
 			Controls.Add(TabController);
-			Font = new Font("Microsoft Sans Serif", (float) (8.25F), FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
+			Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
 			Icon = Resources.mRemote_Icon;
 			Name = "Connection";
 			TabText = "UI.Window.Connection";
@@ -272,7 +271,7 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				Crownwood.Magic.Controls.TabPage nTab = new Crownwood.Magic.Controls.TabPage();
-				nTab.Anchor = (AnchorStyles) (AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top);
+				nTab.Anchor = AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Top;
 						
 				if (Settings.Default.ShowProtocolOnTabs)
 				{
@@ -590,27 +589,27 @@ namespace mRemoteNG.UI.Window
 				{
                     ProtocolRDP rdp = (ProtocolRDP)IC.Protocol;
 							
-					cmenTabFullscreen.Enabled = true;
+					cmenTabFullscreen.Visible = true;
 					cmenTabFullscreen.Checked = rdp.Fullscreen;
 							
-					cmenTabSmartSize.Enabled = true;
+					cmenTabSmartSize.Visible = true;
 					cmenTabSmartSize.Checked = rdp.SmartSize;
 				}
 				else
 				{
-					cmenTabFullscreen.Enabled = false;
-					cmenTabSmartSize.Enabled = false;
+					cmenTabFullscreen.Visible = false;
+					cmenTabSmartSize.Visible = false;
 				}
 						
 				if (IC.Info.Protocol == ProtocolType.VNC)
 				{
-					cmenTabSendSpecialKeys.Enabled = true;
-					cmenTabViewOnly.Enabled = true;
+					cmenTabSendSpecialKeys.Visible = true;
+					cmenTabViewOnly.Visible = true;
 							
-					cmenTabSmartSize.Enabled = true;
-					cmenTabStartChat.Enabled = true;
-					cmenTabRefreshScreen.Enabled = true;
-					cmenTabTransferFile.Enabled = false;
+					cmenTabSmartSize.Visible = true;
+					cmenTabStartChat.Visible = true;
+					cmenTabRefreshScreen.Visible = true;
+					cmenTabTransferFile.Visible = false;
 
                     ProtocolVNC vnc = (ProtocolVNC)IC.Protocol;
 					cmenTabSmartSize.Checked = vnc.SmartSize;
@@ -618,25 +617,25 @@ namespace mRemoteNG.UI.Window
 				}
 				else
 				{
-					cmenTabSendSpecialKeys.Enabled = false;
-					cmenTabViewOnly.Enabled = false;
-					cmenTabStartChat.Enabled = false;
-					cmenTabRefreshScreen.Enabled = false;
-					cmenTabTransferFile.Enabled = false;
+					cmenTabSendSpecialKeys.Visible = false;
+					cmenTabViewOnly.Visible = false;
+					cmenTabStartChat.Visible = false;
+					cmenTabRefreshScreen.Visible = false;
+					cmenTabTransferFile.Visible = false;
 				}
 						
 				if (IC.Info.Protocol == ProtocolType.SSH1 | IC.Info.Protocol == ProtocolType.SSH2)
 				{
-					cmenTabTransferFile.Enabled = true;
+					cmenTabTransferFile.Visible = true;
 				}
 						
 				if (IC.Protocol is PuttyBase)
 				{
-					cmenTabPuttySettings.Enabled = true;
+					cmenTabPuttySettings.Visible = true;
 				}
 				else
 				{
-					cmenTabPuttySettings.Enabled = false;
+					cmenTabPuttySettings.Visible = false;
 				}
 						
 				AddExternalApps();
@@ -1225,7 +1224,7 @@ namespace mRemoteNG.UI.Window
 								
 						if (IC.Info.Protocol == ProtocolType.VNC)
 						{
-							(IC.Protocol as ProtocolVNC).RefreshScreen();
+							((ProtocolVNC)IC.Protocol).RefreshScreen();
 						}
 					}
 				}
