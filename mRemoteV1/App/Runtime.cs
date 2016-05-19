@@ -20,7 +20,6 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
@@ -28,13 +27,8 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App
 {
-	public class Runtime
+    public class Runtime
 	{
-		private Runtime()
-		{
-			// Fix Warning 292 CA1053 : Microsoft.Design : Because type 'Native' contains only 'static' ('Shared' in Visual Basic) members, add a default private constructor to prevent the compiler from adding a default public constructor.
-		}
-
         #region Private Variables
         private static ConnectionList _connectionList;
         private static ConnectionList _previousConnectionList;
@@ -941,15 +935,15 @@ namespace mRemoteNG.App
 					return;
 				}
 
-                if (Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.Connection | Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.PuttySession)
+                if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.PuttySession)
 				{
 					OpenConnection((ConnectionInfo)Windows.treeForm.tvConnections.SelectedNode.Tag, Force);
 				}
-                else if (Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.Container)
+                else if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.Container)
 				{
                     foreach (TreeNode tNode in ConnectionTree.SelectedNode.Nodes)
 					{
-                        if (Tree.ConnectionTreeNode.GetNodeType(tNode) == Tree.TreeNodeType.Connection | Tree.ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.PuttySession)
+                        if (ConnectionTreeNode.GetNodeType(tNode) == Tree.TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.PuttySession)
 						{
 							if (tNode.Tag != null)
 							{
@@ -977,7 +971,7 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		public static void OpenConnection(ConnectionInfo ConnectionInfo, System.Windows.Forms.Form ConnectionForm)
+		public static void OpenConnection(ConnectionInfo ConnectionInfo, Form ConnectionForm)
 		{
 			try
 			{
@@ -989,7 +983,7 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		public static void OpenConnection(ConnectionInfo ConnectionInfo, System.Windows.Forms.Form ConnectionForm, ConnectionInfo.Force Force)
+		public static void OpenConnection(ConnectionInfo ConnectionInfo, Form ConnectionForm, ConnectionInfo.Force Force)
 		{
 			try
 			{
@@ -1013,11 +1007,11 @@ namespace mRemoteNG.App
 			}
 		}
 
-		private static void OpenConnectionFinal(ConnectionInfo ConnectionInfo, ConnectionInfo.Force Force, System.Windows.Forms.Form ConForm)
+		private static void OpenConnectionFinal(ConnectionInfo ConnectionInfo, ConnectionInfo.Force Force, Form ConForm)
 		{
 			try
 			{
-				if (ConnectionInfo.Hostname == "" && ConnectionInfo.Protocol != Connection.Protocol.ProtocolType.IntApp)
+				if (ConnectionInfo.Hostname == "" && ConnectionInfo.Protocol != ProtocolType.IntApp)
 				{
                     MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strConnectionOpenFailedNoHostname);
 					return;
@@ -1069,15 +1063,15 @@ namespace mRemoteNG.App
 
         private static void BuildConnectionInterfaceController(ConnectionInfo ConnectionInfo, ProtocolBase newProtocol, Control connectionContainer)
         {
-            newProtocol.InterfaceControl = new Connection.InterfaceControl(connectionContainer, newProtocol, ConnectionInfo);
+            newProtocol.InterfaceControl = new InterfaceControl(connectionContainer, newProtocol, ConnectionInfo);
         }
 
         private static void SetConnectionFormEventHandlers(ProtocolBase newProtocol, Form connectionForm)
         {
-            newProtocol.Closed += ((UI.Window.ConnectionWindow)connectionForm).Prot_Event_Closed;
+            newProtocol.Closed += ((ConnectionWindow)connectionForm).Prot_Event_Closed;
         }
 
-        private static Control SetConnectionContainer(ConnectionInfo ConnectionInfo, System.Windows.Forms.Form connectionForm)
+        private static Control SetConnectionContainer(ConnectionInfo ConnectionInfo, Form connectionForm)
         {
             Control connectionContainer = default(Control);
             connectionContainer = ((ConnectionWindow)connectionForm).AddConnectionTab(ConnectionInfo);
@@ -1094,9 +1088,9 @@ namespace mRemoteNG.App
         {
             if (ConnectionInfo.IsQuickConnect == false)
             {
-                if (ConnectionInfo.Protocol != Connection.Protocol.ProtocolType.IntApp)
+                if (ConnectionInfo.Protocol != ProtocolType.IntApp)
                 {
-                    Tree.ConnectionTreeNode.SetNodeImage(ConnectionInfo.TreeNode, TreeImageType.ConnectionOpen);
+                    ConnectionTreeNode.SetNodeImage(ConnectionInfo.TreeNode, TreeImageType.ConnectionOpen);
                 }
                 else
                 {
@@ -1105,7 +1099,7 @@ namespace mRemoteNG.App
                     {
                         if (extApp.TryIntegrate && ConnectionInfo.TreeNode != null)
                         {
-                            Tree.ConnectionTreeNode.SetNodeImage(ConnectionInfo.TreeNode, TreeImageType.ConnectionOpen);
+                            ConnectionTreeNode.SetNodeImage(ConnectionInfo.TreeNode, TreeImageType.ConnectionOpen);
                         }
                     }
                 }
@@ -1159,7 +1153,7 @@ namespace mRemoteNG.App
         {
             if (ConnectionInfo.PreExtApp != "")
             {
-                Tools.ExternalTool extA = Runtime.GetExtAppByName(ConnectionInfo.PreExtApp);
+                ExternalTool extA = Runtime.GetExtAppByName(ConnectionInfo.PreExtApp);
                 if (extA != null)
                 {
                     extA.Start(ConnectionInfo);
@@ -1219,21 +1213,18 @@ namespace mRemoteNG.App
 			try
 			{
                 ProtocolBase Prot = (ProtocolBase)sender;
-
                 MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnenctionCloseEvent, true);
-
                 MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName));
-					
 				Prot.InterfaceControl.Info.OpenConnections.Remove(Prot);
 					
 				if (Prot.InterfaceControl.Info.OpenConnections.Count < 1 && Prot.InterfaceControl.Info.IsQuickConnect == false)
 				{
-					Tree.ConnectionTreeNode.SetNodeImage(Prot.InterfaceControl.Info.TreeNode, TreeImageType.ConnectionClosed);
+                    ConnectionTreeNode.SetNodeImage(Prot.InterfaceControl.Info.TreeNode, TreeImageType.ConnectionClosed);
 				}
 				
 				if (Prot.InterfaceControl.Info.PostExtApp != "")
 				{
-					Tools.ExternalTool extA = Runtime.GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp);
+                    ExternalTool extA = Runtime.GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp);
 					if (extA != null)
 					{
 						extA.Start(Prot.InterfaceControl.Info);
@@ -1276,9 +1267,9 @@ namespace mRemoteNG.App
         #endregion
 		
         #region External Apps
-		public static Tools.ExternalTool GetExtAppByName(string Name)
+		public static ExternalTool GetExtAppByName(string Name)
 		{
-			foreach (Tools.ExternalTool extA in ExternalTools)
+			foreach (ExternalTool extA in ExternalTools)
 			{
 				if (extA.DisplayName == Name)
 					return extA;
@@ -1309,22 +1300,22 @@ namespace mRemoteNG.App
 			
 		public static void GoToWebsite()
 		{
-			GoToURL(App.Info.GeneralAppInfo.UrlHome);
+			GoToURL(GeneralAppInfo.UrlHome);
 		}
 			
 		public static void GoToDonate()
 		{
-			GoToURL(App.Info.GeneralAppInfo.UrlDonate);
+			GoToURL(GeneralAppInfo.UrlDonate);
 		}
 			
 		public static void GoToForum()
 		{
-			GoToURL(App.Info.GeneralAppInfo.UrlForum);
+			GoToURL(GeneralAppInfo.UrlForum);
 		}
 			
 		public static void GoToBugs()
 		{
-			GoToURL(App.Info.GeneralAppInfo.UrlBugs);
+			GoToURL(GeneralAppInfo.UrlBugs);
 		}
 			
 		public static void Report(string Text)
@@ -1350,7 +1341,7 @@ namespace mRemoteNG.App
 				streamReader = new StreamReader(SettingsFileInfo.exePath + "\\Report.log");
 				string text = streamReader.ReadToEnd();
 				streamReader.Close();
-				streamWriter = new StreamWriter(App.Info.GeneralAppInfo.ReportingFilePath, true);
+				streamWriter = new StreamWriter(GeneralAppInfo.ReportingFilePath, true);
 				streamWriter.Write(text);
 				return true;
 			}
@@ -1410,7 +1401,7 @@ namespace mRemoteNG.App
 			foreach (Control tempLoopVar_ctlChild in ctlParent.Controls)
 			{
 				ctlChild = tempLoopVar_ctlChild;
-				ctlChild.Font = new System.Drawing.Font(SystemFonts.MessageBoxFont.Name, ctlChild.Font.Size, ctlChild.Font.Style, ctlChild.Font.Unit, ctlChild.Font.GdiCharSet);
+				ctlChild.Font = new Font(SystemFonts.MessageBoxFont.Name, ctlChild.Font.Size, ctlChild.Font.Style, ctlChild.Font.Unit, ctlChild.Font.GdiCharSet);
 				if (ctlChild.Controls.Count > 0)
 				{
 					FontOverride(ctlChild);
