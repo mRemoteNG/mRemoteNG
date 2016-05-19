@@ -56,8 +56,11 @@ namespace mRemoteNG.Tools
 		{
 			try
 			{
-				if (string.IsNullOrEmpty(FileName))
-					throw (new InvalidOperationException("FileName cannot be blank."));
+			    if (string.IsNullOrEmpty(FileName))
+			    {
+			        Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ExternalApp.Start() failed: FileName cannot be blank.", false);
+			        return;
+			    }
 				
 				ConnectionInfo = startConnectionInfo;
 				
