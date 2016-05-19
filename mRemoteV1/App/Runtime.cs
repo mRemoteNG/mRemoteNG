@@ -191,55 +191,55 @@ namespace mRemoteNG.App
 			
 		public static void DefaultConnectionToSettings()
 		{
-			mRemoteNG.Settings.Default.ConDefaultDescription = DefaultConnection.Description;
-			mRemoteNG.Settings.Default.ConDefaultIcon = DefaultConnection.Icon;
-			mRemoteNG.Settings.Default.ConDefaultUsername = DefaultConnection.Username;
-			mRemoteNG.Settings.Default.ConDefaultPassword = DefaultConnection.Password;
-			mRemoteNG.Settings.Default.ConDefaultDomain = DefaultConnection.Domain;
-			mRemoteNG.Settings.Default.ConDefaultProtocol = DefaultConnection.Protocol.ToString();
-			mRemoteNG.Settings.Default.ConDefaultPuttySession = DefaultConnection.PuttySession;
-			mRemoteNG.Settings.Default.ConDefaultICAEncryptionStrength = DefaultConnection.ICAEncryption.ToString();
-			mRemoteNG.Settings.Default.ConDefaultRDPAuthenticationLevel = DefaultConnection.RDPAuthenticationLevel.ToString();
-			mRemoteNG.Settings.Default.ConDefaultLoadBalanceInfo = DefaultConnection.LoadBalanceInfo;
-			mRemoteNG.Settings.Default.ConDefaultUseConsoleSession = DefaultConnection.UseConsoleSession;
-			mRemoteNG.Settings.Default.ConDefaultUseCredSsp = DefaultConnection.UseCredSsp;
-			mRemoteNG.Settings.Default.ConDefaultRenderingEngine = DefaultConnection.RenderingEngine.ToString();
-			mRemoteNG.Settings.Default.ConDefaultResolution = DefaultConnection.Resolution.ToString();
-			mRemoteNG.Settings.Default.ConDefaultAutomaticResize = DefaultConnection.AutomaticResize;
-			mRemoteNG.Settings.Default.ConDefaultColors = DefaultConnection.Colors.ToString();
-			mRemoteNG.Settings.Default.ConDefaultCacheBitmaps = DefaultConnection.CacheBitmaps;
-			mRemoteNG.Settings.Default.ConDefaultDisplayWallpaper = DefaultConnection.DisplayWallpaper;
-			mRemoteNG.Settings.Default.ConDefaultDisplayThemes = DefaultConnection.DisplayThemes;
-			mRemoteNG.Settings.Default.ConDefaultEnableFontSmoothing = DefaultConnection.EnableFontSmoothing;
-			mRemoteNG.Settings.Default.ConDefaultEnableDesktopComposition = DefaultConnection.EnableDesktopComposition;
-			mRemoteNG.Settings.Default.ConDefaultRedirectKeys = DefaultConnection.RedirectKeys;
-			mRemoteNG.Settings.Default.ConDefaultRedirectDiskDrives = DefaultConnection.RedirectDiskDrives;
-			mRemoteNG.Settings.Default.ConDefaultRedirectPrinters = DefaultConnection.RedirectPrinters;
-			mRemoteNG.Settings.Default.ConDefaultRedirectPorts = DefaultConnection.RedirectPorts;
-			mRemoteNG.Settings.Default.ConDefaultRedirectSmartCards = DefaultConnection.RedirectSmartCards;
-			mRemoteNG.Settings.Default.ConDefaultRedirectSound = DefaultConnection.RedirectSound.ToString();
-			mRemoteNG.Settings.Default.ConDefaultPreExtApp = DefaultConnection.PreExtApp;
-			mRemoteNG.Settings.Default.ConDefaultPostExtApp = DefaultConnection.PostExtApp;
-			mRemoteNG.Settings.Default.ConDefaultMacAddress = DefaultConnection.MacAddress;
-			mRemoteNG.Settings.Default.ConDefaultUserField = DefaultConnection.UserField;
-			mRemoteNG.Settings.Default.ConDefaultVNCAuthMode = DefaultConnection.VNCAuthMode.ToString();
-			mRemoteNG.Settings.Default.ConDefaultVNCColors = DefaultConnection.VNCColors.ToString();
-			mRemoteNG.Settings.Default.ConDefaultVNCCompression = DefaultConnection.VNCCompression.ToString();
-			mRemoteNG.Settings.Default.ConDefaultVNCEncoding = DefaultConnection.VNCEncoding.ToString();
-			mRemoteNG.Settings.Default.ConDefaultVNCProxyIP = DefaultConnection.VNCProxyIP;
-			mRemoteNG.Settings.Default.ConDefaultVNCProxyPassword = DefaultConnection.VNCProxyPassword;
-			mRemoteNG.Settings.Default.ConDefaultVNCProxyPort = DefaultConnection.VNCProxyPort;
-			mRemoteNG.Settings.Default.ConDefaultVNCProxyType = DefaultConnection.VNCProxyType.ToString();
-			mRemoteNG.Settings.Default.ConDefaultVNCProxyUsername = DefaultConnection.VNCProxyUsername;
-			mRemoteNG.Settings.Default.ConDefaultVNCSmartSizeMode = DefaultConnection.VNCSmartSizeMode.ToString();
-			mRemoteNG.Settings.Default.ConDefaultVNCViewOnly = DefaultConnection.VNCViewOnly;
-			mRemoteNG.Settings.Default.ConDefaultExtApp = DefaultConnection.ExtApp;
-			mRemoteNG.Settings.Default.ConDefaultRDGatewayUsageMethod = DefaultConnection.RDGatewayUsageMethod.ToString();
-			mRemoteNG.Settings.Default.ConDefaultRDGatewayHostname = DefaultConnection.RDGatewayHostname;
-			mRemoteNG.Settings.Default.ConDefaultRDGatewayUsername = DefaultConnection.RDGatewayUsername;
-			mRemoteNG.Settings.Default.ConDefaultRDGatewayPassword = DefaultConnection.RDGatewayPassword;
-			mRemoteNG.Settings.Default.ConDefaultRDGatewayDomain = DefaultConnection.RDGatewayDomain;
-			mRemoteNG.Settings.Default.ConDefaultRDGatewayUseConnectionCredentials = DefaultConnection.RDGatewayUseConnectionCredentials.ToString();
+            Settings.Default.ConDefaultDescription = DefaultConnection.Description;
+            Settings.Default.ConDefaultIcon = DefaultConnection.Icon;
+            Settings.Default.ConDefaultUsername = DefaultConnection.Username;
+            Settings.Default.ConDefaultPassword = DefaultConnection.Password;
+            Settings.Default.ConDefaultDomain = DefaultConnection.Domain;
+            Settings.Default.ConDefaultProtocol = DefaultConnection.Protocol.ToString();
+            Settings.Default.ConDefaultPuttySession = DefaultConnection.PuttySession;
+            Settings.Default.ConDefaultICAEncryptionStrength = DefaultConnection.ICAEncryption.ToString();
+            Settings.Default.ConDefaultRDPAuthenticationLevel = DefaultConnection.RDPAuthenticationLevel.ToString();
+            Settings.Default.ConDefaultLoadBalanceInfo = DefaultConnection.LoadBalanceInfo;
+            Settings.Default.ConDefaultUseConsoleSession = DefaultConnection.UseConsoleSession;
+            Settings.Default.ConDefaultUseCredSsp = DefaultConnection.UseCredSsp;
+            Settings.Default.ConDefaultRenderingEngine = DefaultConnection.RenderingEngine.ToString();
+            Settings.Default.ConDefaultResolution = DefaultConnection.Resolution.ToString();
+            Settings.Default.ConDefaultAutomaticResize = DefaultConnection.AutomaticResize;
+            Settings.Default.ConDefaultColors = DefaultConnection.Colors.ToString();
+            Settings.Default.ConDefaultCacheBitmaps = DefaultConnection.CacheBitmaps;
+            Settings.Default.ConDefaultDisplayWallpaper = DefaultConnection.DisplayWallpaper;
+            Settings.Default.ConDefaultDisplayThemes = DefaultConnection.DisplayThemes;
+            Settings.Default.ConDefaultEnableFontSmoothing = DefaultConnection.EnableFontSmoothing;
+            Settings.Default.ConDefaultEnableDesktopComposition = DefaultConnection.EnableDesktopComposition;
+            Settings.Default.ConDefaultRedirectKeys = DefaultConnection.RedirectKeys;
+            Settings.Default.ConDefaultRedirectDiskDrives = DefaultConnection.RedirectDiskDrives;
+            Settings.Default.ConDefaultRedirectPrinters = DefaultConnection.RedirectPrinters;
+            Settings.Default.ConDefaultRedirectPorts = DefaultConnection.RedirectPorts;
+            Settings.Default.ConDefaultRedirectSmartCards = DefaultConnection.RedirectSmartCards;
+            Settings.Default.ConDefaultRedirectSound = DefaultConnection.RedirectSound.ToString();
+            Settings.Default.ConDefaultPreExtApp = DefaultConnection.PreExtApp;
+            Settings.Default.ConDefaultPostExtApp = DefaultConnection.PostExtApp;
+            Settings.Default.ConDefaultMacAddress = DefaultConnection.MacAddress;
+            Settings.Default.ConDefaultUserField = DefaultConnection.UserField;
+            Settings.Default.ConDefaultVNCAuthMode = DefaultConnection.VNCAuthMode.ToString();
+            Settings.Default.ConDefaultVNCColors = DefaultConnection.VNCColors.ToString();
+            Settings.Default.ConDefaultVNCCompression = DefaultConnection.VNCCompression.ToString();
+            Settings.Default.ConDefaultVNCEncoding = DefaultConnection.VNCEncoding.ToString();
+            Settings.Default.ConDefaultVNCProxyIP = DefaultConnection.VNCProxyIP;
+            Settings.Default.ConDefaultVNCProxyPassword = DefaultConnection.VNCProxyPassword;
+            Settings.Default.ConDefaultVNCProxyPort = DefaultConnection.VNCProxyPort;
+            Settings.Default.ConDefaultVNCProxyType = DefaultConnection.VNCProxyType.ToString();
+            Settings.Default.ConDefaultVNCProxyUsername = DefaultConnection.VNCProxyUsername;
+            Settings.Default.ConDefaultVNCSmartSizeMode = DefaultConnection.VNCSmartSizeMode.ToString();
+            Settings.Default.ConDefaultVNCViewOnly = DefaultConnection.VNCViewOnly;
+            Settings.Default.ConDefaultExtApp = DefaultConnection.ExtApp;
+            Settings.Default.ConDefaultRDGatewayUsageMethod = DefaultConnection.RDGatewayUsageMethod.ToString();
+            Settings.Default.ConDefaultRDGatewayHostname = DefaultConnection.RDGatewayHostname;
+            Settings.Default.ConDefaultRDGatewayUsername = DefaultConnection.RDGatewayUsername;
+            Settings.Default.ConDefaultRDGatewayPassword = DefaultConnection.RDGatewayPassword;
+            Settings.Default.ConDefaultRDGatewayDomain = DefaultConnection.RDGatewayDomain;
+            Settings.Default.ConDefaultRDGatewayUseConnectionCredentials = DefaultConnection.RDGatewayUseConnectionCredentials.ToString();
 		}
         #endregion
 		
@@ -253,60 +253,60 @@ namespace mRemoteNG.App
 		
 		public static void DefaultInheritanceToSettings()
 		{
-			mRemoteNG.Settings.Default.InhDefaultDescription = DefaultInheritance.Description;
-			mRemoteNG.Settings.Default.InhDefaultIcon = DefaultInheritance.Icon;
-			mRemoteNG.Settings.Default.InhDefaultPanel = DefaultInheritance.Panel;
-			mRemoteNG.Settings.Default.InhDefaultUsername = DefaultInheritance.Username;
-			mRemoteNG.Settings.Default.InhDefaultPassword = DefaultInheritance.Password;
-			mRemoteNG.Settings.Default.InhDefaultDomain = DefaultInheritance.Domain;
-			mRemoteNG.Settings.Default.InhDefaultProtocol = DefaultInheritance.Protocol;
-			mRemoteNG.Settings.Default.InhDefaultPort = DefaultInheritance.Port;
-			mRemoteNG.Settings.Default.InhDefaultPuttySession = DefaultInheritance.PuttySession;
-			mRemoteNG.Settings.Default.InhDefaultUseConsoleSession = DefaultInheritance.UseConsoleSession;
-			mRemoteNG.Settings.Default.InhDefaultUseCredSsp = DefaultInheritance.UseCredSsp;
-			mRemoteNG.Settings.Default.InhDefaultRenderingEngine = DefaultInheritance.RenderingEngine;
-			mRemoteNG.Settings.Default.InhDefaultICAEncryptionStrength = DefaultInheritance.ICAEncryption;
-			mRemoteNG.Settings.Default.InhDefaultRDPAuthenticationLevel = DefaultInheritance.RDPAuthenticationLevel;
-			mRemoteNG.Settings.Default.InhDefaultLoadBalanceInfo = DefaultInheritance.LoadBalanceInfo;
-			mRemoteNG.Settings.Default.InhDefaultResolution = DefaultInheritance.Resolution;
-			mRemoteNG.Settings.Default.InhDefaultAutomaticResize = DefaultInheritance.AutomaticResize;
-			mRemoteNG.Settings.Default.InhDefaultColors = DefaultInheritance.Colors;
-			mRemoteNG.Settings.Default.InhDefaultCacheBitmaps = DefaultInheritance.CacheBitmaps;
-			mRemoteNG.Settings.Default.InhDefaultDisplayWallpaper = DefaultInheritance.DisplayWallpaper;
-			mRemoteNG.Settings.Default.InhDefaultDisplayThemes = DefaultInheritance.DisplayThemes;
-			mRemoteNG.Settings.Default.InhDefaultEnableFontSmoothing = DefaultInheritance.EnableFontSmoothing;
-			mRemoteNG.Settings.Default.InhDefaultEnableDesktopComposition = DefaultInheritance.EnableDesktopComposition;
-			mRemoteNG.Settings.Default.InhDefaultRedirectKeys = DefaultInheritance.RedirectKeys;
-			mRemoteNG.Settings.Default.InhDefaultRedirectDiskDrives = DefaultInheritance.RedirectDiskDrives;
-			mRemoteNG.Settings.Default.InhDefaultRedirectPrinters = DefaultInheritance.RedirectPrinters;
-			mRemoteNG.Settings.Default.InhDefaultRedirectPorts = DefaultInheritance.RedirectPorts;
-			mRemoteNG.Settings.Default.InhDefaultRedirectSmartCards = DefaultInheritance.RedirectSmartCards;
-			mRemoteNG.Settings.Default.InhDefaultRedirectSound = DefaultInheritance.RedirectSound;
-			mRemoteNG.Settings.Default.InhDefaultPreExtApp = DefaultInheritance.PreExtApp;
-			mRemoteNG.Settings.Default.InhDefaultPostExtApp = DefaultInheritance.PostExtApp;
-			mRemoteNG.Settings.Default.InhDefaultMacAddress = DefaultInheritance.MacAddress;
-			mRemoteNG.Settings.Default.InhDefaultUserField = DefaultInheritance.UserField;
-			// VNC inheritance
-			mRemoteNG.Settings.Default.InhDefaultVNCAuthMode = DefaultInheritance.VNCAuthMode;
-			mRemoteNG.Settings.Default.InhDefaultVNCColors = DefaultInheritance.VNCColors;
-			mRemoteNG.Settings.Default.InhDefaultVNCCompression = DefaultInheritance.VNCCompression;
-			mRemoteNG.Settings.Default.InhDefaultVNCEncoding = DefaultInheritance.VNCEncoding;
-			mRemoteNG.Settings.Default.InhDefaultVNCProxyIP = DefaultInheritance.VNCProxyIP;
-			mRemoteNG.Settings.Default.InhDefaultVNCProxyPassword = DefaultInheritance.VNCProxyPassword;
-			mRemoteNG.Settings.Default.InhDefaultVNCProxyPort = DefaultInheritance.VNCProxyPort;
-			mRemoteNG.Settings.Default.InhDefaultVNCProxyType = DefaultInheritance.VNCProxyType;
-			mRemoteNG.Settings.Default.InhDefaultVNCProxyUsername = DefaultInheritance.VNCProxyUsername;
-			mRemoteNG.Settings.Default.InhDefaultVNCSmartSizeMode = DefaultInheritance.VNCSmartSizeMode;
-			mRemoteNG.Settings.Default.InhDefaultVNCViewOnly = DefaultInheritance.VNCViewOnly;
-			// Ext. App inheritance
-			mRemoteNG.Settings.Default.InhDefaultExtApp = DefaultInheritance.ExtApp;
-			// RDP gateway inheritance
-			mRemoteNG.Settings.Default.InhDefaultRDGatewayUsageMethod = DefaultInheritance.RDGatewayUsageMethod;
-			mRemoteNG.Settings.Default.InhDefaultRDGatewayHostname = DefaultInheritance.RDGatewayHostname;
-			mRemoteNG.Settings.Default.InhDefaultRDGatewayUsername = DefaultInheritance.RDGatewayUsername;
-			mRemoteNG.Settings.Default.InhDefaultRDGatewayPassword = DefaultInheritance.RDGatewayPassword;
-			mRemoteNG.Settings.Default.InhDefaultRDGatewayDomain = DefaultInheritance.RDGatewayDomain;
-			mRemoteNG.Settings.Default.InhDefaultRDGatewayUseConnectionCredentials = DefaultInheritance.RDGatewayUseConnectionCredentials;
+            Settings.Default.InhDefaultDescription = DefaultInheritance.Description;
+            Settings.Default.InhDefaultIcon = DefaultInheritance.Icon;
+            Settings.Default.InhDefaultPanel = DefaultInheritance.Panel;
+            Settings.Default.InhDefaultUsername = DefaultInheritance.Username;
+            Settings.Default.InhDefaultPassword = DefaultInheritance.Password;
+            Settings.Default.InhDefaultDomain = DefaultInheritance.Domain;
+            Settings.Default.InhDefaultProtocol = DefaultInheritance.Protocol;
+            Settings.Default.InhDefaultPort = DefaultInheritance.Port;
+            Settings.Default.InhDefaultPuttySession = DefaultInheritance.PuttySession;
+            Settings.Default.InhDefaultUseConsoleSession = DefaultInheritance.UseConsoleSession;
+            Settings.Default.InhDefaultUseCredSsp = DefaultInheritance.UseCredSsp;
+            Settings.Default.InhDefaultRenderingEngine = DefaultInheritance.RenderingEngine;
+            Settings.Default.InhDefaultICAEncryptionStrength = DefaultInheritance.ICAEncryption;
+            Settings.Default.InhDefaultRDPAuthenticationLevel = DefaultInheritance.RDPAuthenticationLevel;
+            Settings.Default.InhDefaultLoadBalanceInfo = DefaultInheritance.LoadBalanceInfo;
+            Settings.Default.InhDefaultResolution = DefaultInheritance.Resolution;
+            Settings.Default.InhDefaultAutomaticResize = DefaultInheritance.AutomaticResize;
+            Settings.Default.InhDefaultColors = DefaultInheritance.Colors;
+            Settings.Default.InhDefaultCacheBitmaps = DefaultInheritance.CacheBitmaps;
+            Settings.Default.InhDefaultDisplayWallpaper = DefaultInheritance.DisplayWallpaper;
+            Settings.Default.InhDefaultDisplayThemes = DefaultInheritance.DisplayThemes;
+            Settings.Default.InhDefaultEnableFontSmoothing = DefaultInheritance.EnableFontSmoothing;
+            Settings.Default.InhDefaultEnableDesktopComposition = DefaultInheritance.EnableDesktopComposition;
+            Settings.Default.InhDefaultRedirectKeys = DefaultInheritance.RedirectKeys;
+            Settings.Default.InhDefaultRedirectDiskDrives = DefaultInheritance.RedirectDiskDrives;
+            Settings.Default.InhDefaultRedirectPrinters = DefaultInheritance.RedirectPrinters;
+            Settings.Default.InhDefaultRedirectPorts = DefaultInheritance.RedirectPorts;
+            Settings.Default.InhDefaultRedirectSmartCards = DefaultInheritance.RedirectSmartCards;
+            Settings.Default.InhDefaultRedirectSound = DefaultInheritance.RedirectSound;
+            Settings.Default.InhDefaultPreExtApp = DefaultInheritance.PreExtApp;
+            Settings.Default.InhDefaultPostExtApp = DefaultInheritance.PostExtApp;
+            Settings.Default.InhDefaultMacAddress = DefaultInheritance.MacAddress;
+            Settings.Default.InhDefaultUserField = DefaultInheritance.UserField;
+            // VNC inheritance
+            Settings.Default.InhDefaultVNCAuthMode = DefaultInheritance.VNCAuthMode;
+            Settings.Default.InhDefaultVNCColors = DefaultInheritance.VNCColors;
+            Settings.Default.InhDefaultVNCCompression = DefaultInheritance.VNCCompression;
+            Settings.Default.InhDefaultVNCEncoding = DefaultInheritance.VNCEncoding;
+            Settings.Default.InhDefaultVNCProxyIP = DefaultInheritance.VNCProxyIP;
+            Settings.Default.InhDefaultVNCProxyPassword = DefaultInheritance.VNCProxyPassword;
+            Settings.Default.InhDefaultVNCProxyPort = DefaultInheritance.VNCProxyPort;
+            Settings.Default.InhDefaultVNCProxyType = DefaultInheritance.VNCProxyType;
+            Settings.Default.InhDefaultVNCProxyUsername = DefaultInheritance.VNCProxyUsername;
+            Settings.Default.InhDefaultVNCSmartSizeMode = DefaultInheritance.VNCSmartSizeMode;
+            Settings.Default.InhDefaultVNCViewOnly = DefaultInheritance.VNCViewOnly;
+            // Ext. App inheritance
+            Settings.Default.InhDefaultExtApp = DefaultInheritance.ExtApp;
+            // RDP gateway inheritance
+            Settings.Default.InhDefaultRDGatewayUsageMethod = DefaultInheritance.RDGatewayUsageMethod;
+            Settings.Default.InhDefaultRDGatewayHostname = DefaultInheritance.RDGatewayHostname;
+            Settings.Default.InhDefaultRDGatewayUsername = DefaultInheritance.RDGatewayUsername;
+            Settings.Default.InhDefaultRDGatewayPassword = DefaultInheritance.RDGatewayPassword;
+            Settings.Default.InhDefaultRDGatewayDomain = DefaultInheritance.RDGatewayDomain;
+            Settings.Default.InhDefaultRDGatewayUseConnectionCredentials = DefaultInheritance.RDGatewayUseConnectionCredentials;
 		}
         #endregion
 		
@@ -453,13 +453,6 @@ namespace mRemoteNG.App
 		}
         #endregion
 		
-        #region Credential Loading/Saving
-		public static void LoadCredentials()
-		{
-				
-		}
-        #endregion
-		
         #region Connections Loading/Saving
 		public static void NewConnections(string filename)
 		{
@@ -471,12 +464,12 @@ namespace mRemoteNG.App
 					
 				if (filename == GetDefaultStartupConnectionFileName())
 				{
-					mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
+                    Settings.Default.LoadConsFromCustomLocation = false;
 				}
 				else
 				{
-					mRemoteNG.Settings.Default.LoadConsFromCustomLocation = true;
-					mRemoteNG.Settings.Default.CustomConsPath = filename;
+                    Settings.Default.LoadConsFromCustomLocation = true;
+                    Settings.Default.CustomConsPath = filename;
 				}
 					
 				Directory.CreateDirectory(Path.GetDirectoryName(filename));
@@ -552,7 +545,7 @@ namespace mRemoteNG.App
 				ConnectionList = new ConnectionList();
 				ContainerList = new ContainerList();
 					
-				if (!mRemoteNG.Settings.Default.UseSQLServer)
+				if (!Settings.Default.UseSQLServer)
 				{
 					if (withDialog)
 					{
@@ -591,15 +584,15 @@ namespace mRemoteNG.App
                 ConnectionTree.ResetTree();
 					
 				connectionsLoader.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
-				connectionsLoader.UseSQL = mRemoteNG.Settings.Default.UseSQLServer;
-				connectionsLoader.SQLHost = mRemoteNG.Settings.Default.SQLHost;
-				connectionsLoader.SQLDatabaseName = mRemoteNG.Settings.Default.SQLDatabaseName;
-				connectionsLoader.SQLUsername = mRemoteNG.Settings.Default.SQLUser;
-				connectionsLoader.SQLPassword = Security.Crypt.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
+				connectionsLoader.UseSQL = Settings.Default.UseSQLServer;
+				connectionsLoader.SQLHost = Settings.Default.SQLHost;
+				connectionsLoader.SQLDatabaseName = Settings.Default.SQLDatabaseName;
+				connectionsLoader.SQLUsername = Settings.Default.SQLUser;
+				connectionsLoader.SQLPassword = Security.Crypt.Decrypt(Convert.ToString(Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
 				connectionsLoader.SQLUpdate = update;
 				connectionsLoader.LoadConnections(false);
 					
-				if (mRemoteNG.Settings.Default.UseSQLServer == true)
+				if (Settings.Default.UseSQLServer == true)
 				{
 					LastSqlUpdate = DateTime.Now;
 				}
@@ -607,24 +600,24 @@ namespace mRemoteNG.App
 				{
 					if (connectionsLoader.ConnectionFileName == GetDefaultStartupConnectionFileName())
 					{
-						mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
+                        Settings.Default.LoadConsFromCustomLocation = false;
 					}
 					else
 					{
-						mRemoteNG.Settings.Default.LoadConsFromCustomLocation = true;
-						mRemoteNG.Settings.Default.CustomConsPath = connectionsLoader.ConnectionFileName;
+                        Settings.Default.LoadConsFromCustomLocation = true;
+                        Settings.Default.CustomConsPath = connectionsLoader.ConnectionFileName;
 					}
 				}
 
                 // re-enable sql update checking after updates are loaded
-                if (mRemoteNG.Settings.Default.UseSQLServer && SQLConnProvider != null)
+                if (Settings.Default.UseSQLServer && SQLConnProvider != null)
 				{
                     SQLConnProvider.Enable();
 				}
 			}
 			catch (Exception ex)
 			{
-				if (mRemoteNG.Settings.Default.UseSQLServer)
+				if (Settings.Default.UseSQLServer)
 				{
                     MessageCollector.AddExceptionMessage(Language.strLoadFromSqlFailed, ex);
 					string commandButtons = string.Join("|", new[] {Language.strCommandTryAgain, Language.strCommandOpenConnectionFile, string.Format(Language.strCommandExitProgram, Application.ProductName)});
@@ -635,7 +628,7 @@ namespace mRemoteNG.App
 							LoadConnections(withDialog, update);
 							return ;
 						case 1:
-							mRemoteNG.Settings.Default.UseSQLServer = false;
+                            Settings.Default.UseSQLServer = false;
 							LoadConnections(true, update);
 							return ;
 						default:
@@ -671,14 +664,14 @@ namespace mRemoteNG.App
 		protected static void CreateBackupFile(string fileName)
 		{
 			// This intentionally doesn't prune any existing backup files. We just assume the user doesn't want any new ones created.
-			if (mRemoteNG.Settings.Default.BackupFileKeepCount == 0)
+			if (Settings.Default.BackupFileKeepCount == 0)
 			{
 				return ;
 			}
 				
 			try
 			{
-				string backupFileName = string.Format(mRemoteNG.Settings.Default.BackupFileNameFormat, fileName, DateTime.UtcNow);
+				string backupFileName = string.Format(Settings.Default.BackupFileNameFormat, fileName, DateTime.UtcNow);
 				File.Copy(fileName, backupFileName);
 				PruneBackupFiles(fileName);
 			}
@@ -699,16 +692,16 @@ namespace mRemoteNG.App
 				return ;
 			}
 				
-			string searchPattern = string.Format(mRemoteNG.Settings.Default.BackupFileNameFormat, fileName, "*");
+			string searchPattern = string.Format(Settings.Default.BackupFileNameFormat, fileName, "*");
 			string[] files = Directory.GetFiles(directoryName, searchPattern);
 				
-			if (files.Length <= mRemoteNG.Settings.Default.BackupFileKeepCount)
+			if (files.Length <= Settings.Default.BackupFileKeepCount)
 			{
 				return ;
 			}
 				
 			Array.Sort(files);
-			Array.Resize(ref files, files.Length - mRemoteNG.Settings.Default.BackupFileKeepCount);
+			Array.Resize(ref files, files.Length - Settings.Default.BackupFileKeepCount);
 				
 			foreach (string file in files)
 			{
@@ -731,13 +724,13 @@ namespace mRemoteNG.App
 		
 		public static string GetStartupConnectionFileName()
 		{
-			if (mRemoteNG.Settings.Default.LoadConsFromCustomLocation == false)
+			if (Settings.Default.LoadConsFromCustomLocation == false)
 			{
 				return GetDefaultStartupConnectionFileName();
 			}
 			else
 			{
-				return mRemoteNG.Settings.Default.CustomConsPath;
+				return Settings.Default.CustomConsPath;
 			}
 		}
 		
@@ -767,7 +760,7 @@ namespace mRemoteNG.App
 				
 			try
 			{
-				if (Update == true && mRemoteNG.Settings.Default.UseSQLServer == false)
+				if (Update == true && Settings.Default.UseSQLServer == false)
 				{
 					return;
 				}
@@ -779,7 +772,7 @@ namespace mRemoteNG.App
 					
 				ConnectionsSaver conS = new ConnectionsSaver();
 					
-				if (!mRemoteNG.Settings.Default.UseSQLServer)
+				if (!Settings.Default.UseSQLServer)
 				{
 					conS.ConnectionFileName = GetStartupConnectionFileName();
 				}
@@ -790,18 +783,18 @@ namespace mRemoteNG.App
 				conS.SaveSecurity = new Security.Save(false);
 				conS.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
 					
-				if (mRemoteNG.Settings.Default.UseSQLServer == true)
+				if (Settings.Default.UseSQLServer == true)
 				{
 					conS.SaveFormat = ConnectionsSaver.Format.SQL;
-					conS.SQLHost = Convert.ToString(mRemoteNG.Settings.Default.SQLHost);
-					conS.SQLDatabaseName = Convert.ToString(mRemoteNG.Settings.Default.SQLDatabaseName);
-					conS.SQLUsername = Convert.ToString(mRemoteNG.Settings.Default.SQLUser);
-					conS.SQLPassword = Security.Crypt.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
+					conS.SQLHost = Convert.ToString(Settings.Default.SQLHost);
+					conS.SQLDatabaseName = Convert.ToString(Settings.Default.SQLDatabaseName);
+					conS.SQLUsername = Convert.ToString(Settings.Default.SQLUser);
+					conS.SQLPassword = Security.Crypt.Decrypt(Convert.ToString(Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
 				}
 					
 				conS.SaveConnections();
 					
-				if (mRemoteNG.Settings.Default.UseSQLServer == true)
+				if (Settings.Default.UseSQLServer == true)
 				{
 					LastSqlUpdate = DateTime.Now;
 				}
@@ -860,12 +853,12 @@ namespace mRemoteNG.App
 						
 					if (saveFileDialog.FileName == GetDefaultStartupConnectionFileName())
 					{
-						mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
+                        Settings.Default.LoadConsFromCustomLocation = false;
 					}
 					else
 					{
-						mRemoteNG.Settings.Default.LoadConsFromCustomLocation = true;
-						mRemoteNG.Settings.Default.CustomConsPath = saveFileDialog.FileName;
+                        Settings.Default.LoadConsFromCustomLocation = true;
+                        Settings.Default.CustomConsPath = saveFileDialog.FileName;
 					}
 				}
 					
@@ -897,7 +890,7 @@ namespace mRemoteNG.App
 					
 				ConnectionInfo newConnectionInfo = new ConnectionInfo();
 					
-				if (mRemoteNG.Settings.Default.IdentifyQuickConnectTabs)
+				if (Settings.Default.IdentifyQuickConnectTabs)
 				{
 					newConnectionInfo.Name = string.Format(Language.strQuick, uri.Host);
 				}
@@ -1147,7 +1140,7 @@ namespace mRemoteNG.App
         private static string SetConnectionPanel(ConnectionInfo ConnectionInfo, ConnectionInfo.Force Force)
         {
             string connectionPanel = "";
-            if (ConnectionInfo.Panel == "" || (Force & ConnectionInfo.Force.OverridePanel) == ConnectionInfo.Force.OverridePanel | mRemoteNG.Settings.Default.AlwaysShowPanelSelectionDlg)
+            if (ConnectionInfo.Panel == "" || (Force & ConnectionInfo.Force.OverridePanel) == ConnectionInfo.Force.OverridePanel | Settings.Default.AlwaysShowPanelSelectionDlg)
             {
                 frmChoosePanel frmPnl = new frmChoosePanel();
                 if (frmPnl.ShowDialog() == DialogResult.OK)
