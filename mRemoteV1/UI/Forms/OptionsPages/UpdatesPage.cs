@@ -61,26 +61,26 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            chkCheckForUpdatesOnStartup.Checked = Convert.ToBoolean(mRemoteNG.Settings.Default.CheckForUpdatesOnStartup);
+            chkCheckForUpdatesOnStartup.Checked = Convert.ToBoolean(Settings.Default.CheckForUpdatesOnStartup);
             cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked;
             cboUpdateCheckFrequency.Items.Clear();
             var nDaily = cboUpdateCheckFrequency.Items.Add(Language.strUpdateFrequencyDaily);
             var nWeekly = cboUpdateCheckFrequency.Items.Add(Language.strUpdateFrequencyWeekly);
             var nMonthly = cboUpdateCheckFrequency.Items.Add(Language.strUpdateFrequencyMonthly);
-            if (mRemoteNG.Settings.Default.CheckForUpdatesFrequencyDays < 1)
+            if (Settings.Default.CheckForUpdatesFrequencyDays < 1)
             {
                 chkCheckForUpdatesOnStartup.Checked = false;
                 cboUpdateCheckFrequency.SelectedIndex = nDaily;
             } // Daily
-            else if (mRemoteNG.Settings.Default.CheckForUpdatesFrequencyDays == 1)
+            else if (Settings.Default.CheckForUpdatesFrequencyDays == 1)
             {
                 cboUpdateCheckFrequency.SelectedIndex = nDaily;
             } // Weekly
-            else if (mRemoteNG.Settings.Default.CheckForUpdatesFrequencyDays == 7)
+            else if (Settings.Default.CheckForUpdatesFrequencyDays == 7)
             {
                 cboUpdateCheckFrequency.SelectedIndex = nWeekly;
             } // Monthly
-            else if (mRemoteNG.Settings.Default.CheckForUpdatesFrequencyDays == 31)
+            else if (Settings.Default.CheckForUpdatesFrequencyDays == 31)
             {
                 cboUpdateCheckFrequency.SelectedIndex = nMonthly;
             }
@@ -88,22 +88,22 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 var nCustom =
                     cboUpdateCheckFrequency.Items.Add(string.Format(Language.strUpdateFrequencyCustom,
-                        mRemoteNG.Settings.Default.CheckForUpdatesFrequencyDays));
+                        Settings.Default.CheckForUpdatesFrequencyDays));
                 cboUpdateCheckFrequency.SelectedIndex = nCustom;
             }
 
-            chkUseProxyForAutomaticUpdates.Checked = Convert.ToBoolean(mRemoteNG.Settings.Default.UpdateUseProxy);
-            pnlProxyBasic.Enabled = Convert.ToBoolean(mRemoteNG.Settings.Default.UpdateUseProxy);
-            txtProxyAddress.Text = Convert.ToString(mRemoteNG.Settings.Default.UpdateProxyAddress);
-            numProxyPort.Value = Convert.ToDecimal(mRemoteNG.Settings.Default.UpdateProxyPort);
+            chkUseProxyForAutomaticUpdates.Checked = Convert.ToBoolean(Settings.Default.UpdateUseProxy);
+            pnlProxyBasic.Enabled = Convert.ToBoolean(Settings.Default.UpdateUseProxy);
+            txtProxyAddress.Text = Convert.ToString(Settings.Default.UpdateProxyAddress);
+            numProxyPort.Value = Convert.ToDecimal(Settings.Default.UpdateProxyPort);
 
-            chkUseProxyAuthentication.Checked = Convert.ToBoolean(mRemoteNG.Settings.Default.UpdateProxyUseAuthentication);
-            pnlProxyAuthentication.Enabled = Convert.ToBoolean(mRemoteNG.Settings.Default.UpdateProxyUseAuthentication);
-            txtProxyUsername.Text = Convert.ToString(mRemoteNG.Settings.Default.UpdateProxyAuthUser);
-            txtProxyPassword.Text = Crypt.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.UpdateProxyAuthPass),
+            chkUseProxyAuthentication.Checked = Convert.ToBoolean(Settings.Default.UpdateProxyUseAuthentication);
+            pnlProxyAuthentication.Enabled = Convert.ToBoolean(Settings.Default.UpdateProxyUseAuthentication);
+            txtProxyUsername.Text = Convert.ToString(Settings.Default.UpdateProxyAuthUser);
+            txtProxyPassword.Text = Crypt.Decrypt(Convert.ToString(Settings.Default.UpdateProxyAuthPass),
                 GeneralAppInfo.EncryptionKey);
 
-            btnTestProxy.Enabled = Convert.ToBoolean(mRemoteNG.Settings.Default.UpdateUseProxy);
+            btnTestProxy.Enabled = Convert.ToBoolean(Settings.Default.UpdateUseProxy);
 
 #if PORTABLE
             foreach (Control Control in Controls)
@@ -120,27 +120,27 @@ namespace mRemoteNG.UI.Forms.OptionsPages
         {
             base.SaveSettings();
 
-            mRemoteNG.Settings.Default.CheckForUpdatesOnStartup = chkCheckForUpdatesOnStartup.Checked;
+            Settings.Default.CheckForUpdatesOnStartup = chkCheckForUpdatesOnStartup.Checked;
             if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.strUpdateFrequencyDaily)
             {
-                mRemoteNG.Settings.Default.CheckForUpdatesFrequencyDays = 1;
+                Settings.Default.CheckForUpdatesFrequencyDays = 1;
             }
             else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.strUpdateFrequencyWeekly)
             {
-                mRemoteNG.Settings.Default.CheckForUpdatesFrequencyDays = 7;
+                Settings.Default.CheckForUpdatesFrequencyDays = 7;
             }
             else if (cboUpdateCheckFrequency.SelectedItem.ToString() == Language.strUpdateFrequencyMonthly)
             {
-                mRemoteNG.Settings.Default.CheckForUpdatesFrequencyDays = 31;
+                Settings.Default.CheckForUpdatesFrequencyDays = 31;
             }
 
-            mRemoteNG.Settings.Default.UpdateUseProxy = chkUseProxyForAutomaticUpdates.Checked;
-            mRemoteNG.Settings.Default.UpdateProxyAddress = txtProxyAddress.Text;
-            mRemoteNG.Settings.Default.UpdateProxyPort = (int) numProxyPort.Value;
+            Settings.Default.UpdateUseProxy = chkUseProxyForAutomaticUpdates.Checked;
+            Settings.Default.UpdateProxyAddress = txtProxyAddress.Text;
+            Settings.Default.UpdateProxyPort = (int) numProxyPort.Value;
 
-            mRemoteNG.Settings.Default.UpdateProxyUseAuthentication = chkUseProxyAuthentication.Checked;
-            mRemoteNG.Settings.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
-            mRemoteNG.Settings.Default.UpdateProxyAuthPass = Crypt.Encrypt(txtProxyPassword.Text, GeneralAppInfo.EncryptionKey);
+            Settings.Default.UpdateProxyUseAuthentication = chkUseProxyAuthentication.Checked;
+            Settings.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
+            Settings.Default.UpdateProxyAuthPass = Crypt.Encrypt(txtProxyPassword.Text, GeneralAppInfo.EncryptionKey);
         }
 
         #endregion

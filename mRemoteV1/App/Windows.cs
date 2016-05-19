@@ -142,13 +142,5 @@ namespace mRemoteNG.App
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "App.Runtime.Windows.Show() failed." + Environment.NewLine + ex.Message, true);
             }
         }
-
-        public static void ShowUpdatesTab()
-        {
-            using (OptionsForm optionsForm = new OptionsForm())
-            {
-                optionsForm.ShowDialog(frmMain.Default, typeof(UpdatesPage));
-            }
-        }
     }
 }

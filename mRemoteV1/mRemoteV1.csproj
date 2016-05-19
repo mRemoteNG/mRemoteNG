@@ -260,12 +260,6 @@
     <Compile Include="UI\Forms\OptionsPages\ConnectionsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="UI\Forms\OptionsForm.Designer.cs">
-      <DependentUpon>OptionsForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Forms\OptionsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="UI\Forms\OptionsPages\OptionsPage.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -523,9 +517,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\ConnectionsPage.resx">
       <DependentUpon>ConnectionsPage.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\OptionsForm.resx">
-      <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\OptionsPages\SqlServerPage.resx">
       <DependentUpon>SqlServerPage.cs</DependentUpon>
