@@ -1,17 +1,8 @@
-using System.Collections.Generic;
 using System;
-using AxWFICALib;
-using System.Drawing;
-using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
-using Microsoft.VisualBasic;
-using System.Collections;
 using System.Windows.Forms;
 using System.Xml;
 using System.IO;
 using System.Runtime.InteropServices;
-using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Images;
@@ -333,19 +324,19 @@ namespace mRemoteNG.Config.Import
 			}
 				
 			GCHandle gcHandle = new GCHandle();
-			Win32.DATA_BLOB plaintextData = new Win32.DATA_BLOB();
+			NativeMethods.DATA_BLOB plaintextData = new NativeMethods.DATA_BLOB();
 			try
 			{
 				byte[] ciphertextArray = Convert.FromBase64String(ciphertext);
-				gcHandle = System.Runtime.InteropServices.GCHandle.Alloc(ciphertextArray, GCHandleType.Pinned);
+				gcHandle = GCHandle.Alloc(ciphertextArray, GCHandleType.Pinned);
 					
-				Win32.DATA_BLOB ciphertextData = new Win32.DATA_BLOB();
+				NativeMethods.DATA_BLOB ciphertextData = new NativeMethods.DATA_BLOB();
 				ciphertextData.cbData = ciphertextArray.Length;
 				ciphertextData.pbData = gcHandle.AddrOfPinnedObject();
 
-                Win32.DATA_BLOB temp_optionalEntropy = new Win32.DATA_BLOB();
+                NativeMethods.DATA_BLOB temp_optionalEntropy = new NativeMethods.DATA_BLOB();
 				IntPtr temp_promptStruct = IntPtr.Zero;
-				if (!Win32.CryptUnprotectData(ref ciphertextData, null, ref temp_optionalEntropy, IntPtr.Zero, ref temp_promptStruct, 0, ref plaintextData))
+				if (!NativeMethods.CryptUnprotectData(ref ciphertextData, null, ref temp_optionalEntropy, IntPtr.Zero, ref temp_promptStruct, 0, ref plaintextData))
 				{
 					return null;
 				}
@@ -369,13 +360,13 @@ namespace mRemoteNG.Config.Import
 				}
 				if (!(plaintextData.pbData == IntPtr.Zero))
 				{
-					Win32.LocalFree(plaintextData.pbData);
+					NativeMethods.LocalFree(plaintextData.pbData);
 				}
 			}
 		}
 			
 		// ReSharper disable once ClassNeverInstantiated.Local
-		private class Win32
+		private class NativeMethods
 		{
 			// ReSharper disable InconsistentNaming
 			// ReSharper disable IdentifierTypo

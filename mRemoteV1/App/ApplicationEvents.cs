@@ -66,11 +66,11 @@
 //            //Restore window if minimized. Do not restore if already in
 //            //normal or maximised window state, since we don't want to
 //            //change the current state of the window.
-//            if (App.Native.IsIconic(hWnd) != 0)
+//            if (App.NativeMethods.IsIconic(hWnd) != 0)
 //            {
-//                App.Native.ShowWindow(hWnd, App.Native.SW_RESTORE);
+//                App.NativeMethods.ShowWindow(hWnd, App.NativeMethods.SW_RESTORE);
 //            }
-//            App.Native.SetForegroundWindow(hWnd);
+//            App.NativeMethods.SetForegroundWindow(hWnd);
 //        }
 //    }
 

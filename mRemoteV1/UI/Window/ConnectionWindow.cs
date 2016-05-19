@@ -1150,12 +1150,12 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				if (!(Native.GetForegroundWindow() == frmMain.Default.Handle) && !_ignoreChangeSelectedTabClick)
+				if (!(NativeMethods.GetForegroundWindow() == frmMain.Default.Handle) && !_ignoreChangeSelectedTabClick)
 				{
 					Crownwood.Magic.Controls.TabPage clickedTab = TabController.TabPageFromPoint(e.Location);
 					if (clickedTab != null && TabController.SelectedTab != clickedTab)
 					{
-						Native.SetForegroundWindow(Handle);
+						NativeMethods.SetForegroundWindow(Handle);
 						TabController.SelectedTab = clickedTab;
 					}
 				}
@@ -1182,7 +1182,7 @@ namespace mRemoteNG.UI.Window
 						break;
 					case MouseButtons.Right:
 						ShowHideMenuButtons();
-						Native.SetForegroundWindow(Handle);
+						NativeMethods.SetForegroundWindow(Handle);
 						cmenTab.Show(TabController, e.Location);
 						break;
 				}
@@ -1241,7 +1241,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				if (m.Msg == Native.WM_MOUSEACTIVATE)
+				if (m.Msg == NativeMethods.WM_MOUSEACTIVATE)
 				{
 					Crownwood.Magic.Controls.TabPage selectedTab = TabController.SelectedTab;
 					if (selectedTab != null)

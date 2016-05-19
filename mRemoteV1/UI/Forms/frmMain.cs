@@ -166,7 +166,7 @@ namespace mRemoteNG.UI.Forms
 			PopulateQuickConnectProtocolMenu();
 			ThemeManager.ThemeChanged += ApplyThemes;
 			ApplyThemes();
-			fpChainedWindowHandle = Native.SetClipboardViewer(Handle);
+			fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
             Runtime.MessageCollector = new MessageCollector(Windows.errorsForm);
             Runtime.WindowList = new WindowList();
             //Startup.CreatePanels();
@@ -1035,20 +1035,20 @@ namespace mRemoteNG.UI.Forms
             // Listen for and handle operating system messages
 			try
 			{
-				if (m.Msg == Native.WM_MOUSEACTIVATE)
+				if (m.Msg == NativeMethods.WM_MOUSEACTIVATE)
 				{
 					_inMouseActivate = true;
 				}
-                else if (m.Msg == Native.WM_ACTIVATEAPP) // occurs when mRemoteNG becomes the active app
+                else if (m.Msg == NativeMethods.WM_ACTIVATEAPP) // occurs when mRemoteNG becomes the active app
 				{
 					_inMouseActivate = false;
 				}
-                else if (m.Msg == Native.WM_ACTIVATE)
+                else if (m.Msg == NativeMethods.WM_ACTIVATE)
 				{
 					// Ingore this message if it wasn't triggered by a click
-                    if (Native.LOWORD(m.WParam) != Native.WA_CLICKACTIVE) { }
+                    if (NativeMethods.LOWORD(m.WParam) != NativeMethods.WA_CLICKACTIVE) { }
 
-                    var control = FromChildHandle(Native.WindowFromPoint(MousePosition));
+                    var control = FromChildHandle(NativeMethods.WindowFromPoint(MousePosition));
 					if (control != null)
 					{
 						// Let TreeViews and ComboBoxes get focus but don't simulate a mouse event
@@ -1060,7 +1060,7 @@ namespace mRemoteNG.UI.Forms
 							var clientMousePosition = control.PointToClient(MousePosition);
 							var temp_wLow = clientMousePosition.X;
 							var temp_wHigh = clientMousePosition.Y;
-                            Native.SendMessage(control.Handle, Native.WM_LBUTTONDOWN, Native.MK_LBUTTON, Native.MAKELPARAM(ref temp_wLow, ref temp_wHigh));
+                            NativeMethods.SendMessage(control.Handle, NativeMethods.WM_LBUTTONDOWN, NativeMethods.MK_LBUTTON, NativeMethods.MAKELPARAM(ref temp_wLow, ref temp_wHigh));
 							clientMousePosition.X = temp_wLow;
 							clientMousePosition.Y = temp_wHigh;
 							control.Focus();
@@ -1070,11 +1070,11 @@ namespace mRemoteNG.UI.Forms
 					// This handles activations from clicks that did not start a size/move operation
 					ActivateConnection();
 				}
-                else if (m.Msg == Native.WM_WINDOWPOSCHANGED)
+                else if (m.Msg == NativeMethods.WM_WINDOWPOSCHANGED)
 				{
 					// Ignore this message if the window wasn't activated
-                    var windowPos = (Native.WINDOWPOS)Marshal.PtrToStructure(m.LParam, typeof(Native.WINDOWPOS));
-                    if ((windowPos.flags & Native.SWP_NOACTIVATE) != 0)
+                    var windowPos = (NativeMethods.WINDOWPOS)Marshal.PtrToStructure(m.LParam, typeof(NativeMethods.WINDOWPOS));
+                    if ((windowPos.flags & NativeMethods.SWP_NOACTIVATE) != 0)
 					{
 					}
 											
@@ -1084,7 +1084,7 @@ namespace mRemoteNG.UI.Forms
 						ActivateConnection();
 					}
 				}
-                else if (m.Msg == Native.WM_SYSCOMMAND)
+                else if (m.Msg == NativeMethods.WM_SYSCOMMAND)
 				{
 					for (var i = 0; i <= SysMenSubItems.Length - 1; i++)
 					{
@@ -1095,15 +1095,15 @@ namespace mRemoteNG.UI.Forms
 						}
 					}
 				}
-                else if (m.Msg == Native.WM_DRAWCLIPBOARD)
+                else if (m.Msg == NativeMethods.WM_DRAWCLIPBOARD)
 				{
-					Native.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
+					NativeMethods.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
 				    clipboardchangeEvent?.Invoke();
 				}
-                else if (m.Msg == Native.WM_CHANGECBCHAIN)
+                else if (m.Msg == NativeMethods.WM_CHANGECBCHAIN)
 				{
 					//Send to the next window
-                    Native.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
+                    NativeMethods.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
 					fpChainedWindowHandle = m.LParam;
 				}
 			}
@@ -1124,7 +1124,7 @@ namespace mRemoteNG.UI.Forms
 					var tab = cW.TabController.SelectedTab;
                     var ifc = (InterfaceControl)tab.Tag;
 					ifc.Protocol.Focus();
-					(ifc.FindForm() as ConnectionWindow).RefreshIC();
+					((ConnectionWindow) ifc.FindForm()).RefreshIC();
 				}
 			}
 		}

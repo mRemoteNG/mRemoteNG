@@ -58,7 +58,7 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			get
 			{
-				if (Native.GetForegroundWindow() == PuttyHandle)
+				if (NativeMethods.GetForegroundWindow() == PuttyHandle)
 					return true;
 				return false;
 			}
@@ -167,7 +167,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					if (_isPuttyNg)
 					{
-						PuttyHandle = Native.FindWindowEx(
+						PuttyHandle = NativeMethods.FindWindowEx(
                             InterfaceControl.Handle, new IntPtr(0), Constants.vbNullString, Constants.vbNullString);
 					}
 					else
@@ -183,7 +183,7 @@ namespace mRemoteNG.Connection.Protocol
 						
 				if (!_isPuttyNg)
 				{
-					Native.SetParent(PuttyHandle, InterfaceControl.Handle);
+					NativeMethods.SetParent(PuttyHandle, InterfaceControl.Handle);
 				}
 						
 				Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strPuttyStuff, true);
@@ -210,7 +210,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return ;
 				}
-				Native.SetForegroundWindow(PuttyHandle);
+				NativeMethods.SetForegroundWindow(PuttyHandle);
 			}
 			catch (Exception ex)
 			{
@@ -226,7 +226,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return ;
 				}
-                Native.MoveWindow(PuttyHandle, Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
+                NativeMethods.MoveWindow(PuttyHandle, Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
 			}
 			catch (Exception ex)
 			{
@@ -264,8 +264,8 @@ namespace mRemoteNG.Connection.Protocol
 		{
 			try
 			{
-                Native.PostMessage(this.PuttyHandle, Native.WM_SYSCOMMAND, IDM_RECONF, 0);
-                Native.SetForegroundWindow(this.PuttyHandle);
+                NativeMethods.PostMessage(this.PuttyHandle, NativeMethods.WM_SYSCOMMAND, IDM_RECONF, 0);
+                NativeMethods.SetForegroundWindow(this.PuttyHandle);
 			}
 			catch (Exception ex)
 			{

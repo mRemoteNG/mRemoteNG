@@ -52,13 +52,13 @@ namespace mRemoteNG.Connection.Protocol
 				_process.Exited += ProcessExited;
 						
 				_process.Start();
-				_process.WaitForInputIdle(Convert.ToInt32(mRemoteNG.Settings.Default.MaxPuttyWaitTime * 1000));
+				_process.WaitForInputIdle(Convert.ToInt32(Settings.Default.MaxPuttyWaitTime * 1000));
 						
 				int startTicks = Environment.TickCount;
-				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + (mRemoteNG.Settings.Default.MaxPuttyWaitTime * 1000))
+				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + (Settings.Default.MaxPuttyWaitTime * 1000))
 				{
 					_process.Refresh();
-					if (!(_process.MainWindowTitle == "Default IME"))
+					if (_process.MainWindowTitle != "Default IME")
 					{
 						_handle = _process.MainWindowHandle;
 					}
@@ -68,7 +68,7 @@ namespace mRemoteNG.Connection.Protocol
 					}
 				}
 						
-				Native.SetParent(_handle, InterfaceControl.Handle);
+				NativeMethods.SetParent(_handle, InterfaceControl.Handle);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.strIntAppStuff, true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppHandle, _handle.ToString()), true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format(Language.strIntAppTitle, _process.MainWindowTitle), true);
@@ -93,7 +93,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return ;
 				}
-				Native.SetForegroundWindow(_handle);
+				NativeMethods.SetForegroundWindow(_handle);
 			}
 			catch (Exception ex)
 			{
@@ -109,7 +109,7 @@ namespace mRemoteNG.Connection.Protocol
 				{
 					return ;
 				}
-                Native.MoveWindow(_handle, Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
+                NativeMethods.MoveWindow(_handle, Convert.ToInt32(-SystemInformation.FrameBorderSize.Width), Convert.ToInt32(-(SystemInformation.CaptionHeight + SystemInformation.FrameBorderSize.Height)), InterfaceControl.Width + (SystemInformation.FrameBorderSize.Width * 2), InterfaceControl.Height + SystemInformation.CaptionHeight + (SystemInformation.FrameBorderSize.Height * 2), true);
 			}
 			catch (Exception ex)
 			{
