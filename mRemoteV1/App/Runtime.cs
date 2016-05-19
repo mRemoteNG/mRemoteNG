@@ -23,6 +23,7 @@ using System.Xml;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
+using TabPage = Crownwood.Magic.Controls.TabPage;
 
 
 namespace mRemoteNG.App
@@ -570,7 +571,7 @@ namespace mRemoteNG.App
                     connectionsLoader.PreviousContainerList = PreviousContainerList;
                 }
 
-                if (update == true)
+                if (update)
                 {
                     connectionsLoader.PreviousSelected = LastSelected;
                 }
@@ -754,7 +755,7 @@ namespace mRemoteNG.App
 
             try
             {
-                if (Update == true && Settings.Default.UseSQLServer == false)
+                if (Update && Settings.Default.UseSQLServer == false)
                 {
                     return;
                 }
@@ -777,7 +778,7 @@ namespace mRemoteNG.App
                 conS.SaveSecurity = new Security.Save(false);
                 conS.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
 
-                if (Settings.Default.UseSQLServer == true)
+                if (Settings.Default.UseSQLServer)
                 {
                     conS.SaveFormat = ConnectionsSaver.Format.SQL;
                     conS.SQLHost = Convert.ToString(Settings.Default.SQLHost);
@@ -788,7 +789,7 @@ namespace mRemoteNG.App
 
                 conS.SaveConnections();
 
-                if (Settings.Default.UseSQLServer == true)
+                if (Settings.Default.UseSQLServer)
                 {
                     LastSqlUpdate = DateTime.Now;
                 }
@@ -876,7 +877,7 @@ namespace mRemoteNG.App
         {
             try
             {
-                Uri uri = new Uri("dummyscheme" + System.Uri.SchemeDelimiter + connectionString);
+                Uri uri = new Uri("dummyscheme" + Uri.SchemeDelimiter + connectionString);
                 if (string.IsNullOrEmpty(uri.Host))
                 {
                     return null;
@@ -935,15 +936,15 @@ namespace mRemoteNG.App
                     return;
                 }
 
-                if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.PuttySession)
+                if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
                 {
                     OpenConnection((ConnectionInfo)Windows.treeForm.tvConnections.SelectedNode.Tag, Force);
                 }
-                else if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.Container)
+                else if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Container)
                 {
                     foreach (TreeNode tNode in ConnectionTree.SelectedNode.Nodes)
                     {
-                        if (ConnectionTreeNode.GetNodeType(tNode) == Tree.TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == Tree.TreeNodeType.PuttySession)
+                        if (ConnectionTreeNode.GetNodeType(tNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
                         {
                             if (tNode.Tag != null)
                             {
@@ -1078,8 +1079,8 @@ namespace mRemoteNG.App
 
             if (ConnectionInfo.Protocol == ProtocolType.IntApp)
             {
-                if (Runtime.GetExtAppByName(ConnectionInfo.ExtApp).Icon != null)
-                    (connectionContainer as Crownwood.Magic.Controls.TabPage).Icon = Runtime.GetExtAppByName(ConnectionInfo.ExtApp).Icon;
+                if (GetExtAppByName(ConnectionInfo.ExtApp).Icon != null)
+                    ((TabPage) connectionContainer).Icon = GetExtAppByName(ConnectionInfo.ExtApp).Icon;
             }
             return connectionContainer;
         }
@@ -1153,7 +1154,7 @@ namespace mRemoteNG.App
         {
             if (ConnectionInfo.PreExtApp != "")
             {
-                ExternalTool extA = Runtime.GetExtAppByName(ConnectionInfo.PreExtApp);
+                ExternalTool extA = GetExtAppByName(ConnectionInfo.PreExtApp);
                 if (extA != null)
                 {
                     extA.Start(ConnectionInfo);
@@ -1168,7 +1169,7 @@ namespace mRemoteNG.App
             {
                 ((ConnectionWindow)IC.FindForm()).Focus();
                 ((ConnectionWindow)IC.FindForm()).Show(frmMain.Default.pnlDock);
-                Crownwood.Magic.Controls.TabPage tabPage = (Crownwood.Magic.Controls.TabPage)IC.Parent;
+                TabPage tabPage = (TabPage)IC.Parent;
                 tabPage.Selected = true;
                 return true;
             }
@@ -1224,7 +1225,7 @@ namespace mRemoteNG.App
 
                 if (Prot.InterfaceControl.Info.PostExtApp != "")
                 {
-                    ExternalTool extA = Runtime.GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp);
+                    ExternalTool extA = GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp);
                     if (extA != null)
                     {
                         extA.Start(Prot.InterfaceControl.Info);
@@ -1295,7 +1296,7 @@ namespace mRemoteNG.App
             }
             connectionInfo.SetDefaultPort();
             connectionInfo.IsQuickConnect = true;
-            Runtime.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+            OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
         }
 
         public static void GoToWebsite()
@@ -1376,7 +1377,7 @@ namespace mRemoteNG.App
                         ConnectionWindow connectionWindow = (ConnectionWindow)WindowList[i];
                         if (connectionWindow.TabController != null)
                         {
-                            foreach (Crownwood.Magic.Controls.TabPage t in connectionWindow.TabController.TabPages)
+                            foreach (TabPage t in connectionWindow.TabController.TabPages)
                             {
                                 if (t.Controls[0] != null && t.Controls[0] is InterfaceControl)
                                 {
