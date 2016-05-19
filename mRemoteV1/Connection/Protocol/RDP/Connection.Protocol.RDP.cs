@@ -388,14 +388,16 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				if (_rdpVersion >= Versions.RDC61)
 				{
 					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strRdpSetConsoleSwitch, _rdpVersion), true);
-					//_rdpClient.AdvancedSettings7.ConnectToAdministerServer = value;
+					_rdpClient.AdvancedSettings7.ConnectToAdministerServer = value;
 				}
 				else
 				{
-					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strRdpSetConsoleSwitch, _rdpVersion), true);
-					_rdpClient.AdvancedSettings2.ConnectToServerConsole = value;
-				}
-			}
+					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strRdpSetConsoleSwitch, _rdpVersion) + Environment.NewLine + "No longer supported in this RDP version. Reference: https://msdn.microsoft.com/en-us/library/aa380863(v=vs.85).aspx", true);
+                    // ConnectToServerConsole is deprecated
+                    //https://msdn.microsoft.com/en-us/library/aa380863(v=vs.85).aspx
+                    //_rdpClient.AdvancedSettings2.ConnectToServerConsole = value;
+                }
+            }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionMessage(Language.strRdpSetConsoleSessionFailed, ex, MessageClass.ErrorMsg, true);
