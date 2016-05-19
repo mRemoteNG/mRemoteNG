@@ -3,24 +3,18 @@ using mRemoteNG.App;
 using mRemoteNG.Forms;
 using mRemoteNG.UI.Window;
 using System;
-using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using mRemoteNG.My;
-using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.Tools
 {
-	public class MiscTools
+    public class MiscTools
 	{
 		private struct SHFILEINFO
 		{
@@ -42,34 +36,41 @@ namespace mRemoteNG.Tools
 
 		public static Icon GetIconFromFile(string FileName)
 		{
-			try
-			{
-				if (File.Exists(FileName) == false)
-				{
-					return null;
-				}
-					
-				IntPtr hImgSmall; //The handle to the system image list.
-				//Dim hImgLarge As IntPtr  'The handle to the system image list.
-				SHFILEINFO shinfo = new SHFILEINFO();
-				shinfo = new SHFILEINFO();
-					
-				shinfo.szDisplayName = new string('\0', 260);
-				shinfo.szTypeName = new string('\0', 80);
-					
-				//Use this to get the small icon.
-				hImgSmall = SHGetFileInfo(FileName, 0, ref shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON | SHGFI_SMALLICON);
-					
-				//Use this to get the large icon.
-				//hImgLarge = SHGetFileInfo(fName, 0, ref shinfo, (uint)Marshal.SizeOf(shinfo), SHGFI_ICON | SHGFI_LARGEICON);
-					
-				//The icon is returned in the hIcon member of the
-				//shinfo struct.
-				System.Drawing.Icon myIcon = default(System.Drawing.Icon);
-				myIcon = System.Drawing.Icon.FromHandle(shinfo.hIcon);
-					
-				return myIcon;
-			}
+		    try
+		    {
+		        if (File.Exists(FileName) == false)
+		        {
+		            return null;
+		        }
+
+		        IntPtr hImgSmall; //The handle to the system image list.
+		        //Dim hImgLarge As IntPtr  'The handle to the system image list.
+		        SHFILEINFO shinfo = new SHFILEINFO();
+		        shinfo = new SHFILEINFO();
+
+		        shinfo.szDisplayName = new string('\0', 260);
+		        shinfo.szTypeName = new string('\0', 80);
+
+		        //Use this to get the small icon.
+		        hImgSmall = SHGetFileInfo(FileName, 0, ref shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON | SHGFI_SMALLICON);
+
+                //Use this to get the large icon.
+                //hImgLarge = SHGetFileInfo(fName, 0, ref shinfo, (uint)Marshal.SizeOf(shinfo), SHGFI_ICON | SHGFI_LARGEICON);
+
+                //The icon is returned in the hIcon member of the
+                //shinfo struct.
+                Icon myIcon = default(Icon);
+		        myIcon = Icon.FromHandle(shinfo.hIcon);
+
+		        return myIcon;
+		    }
+		    catch (ArgumentException AEx)
+		    {
+		        Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+		            "GetIconFromFile failed (Tools.Misc) - using default icon" + Environment.NewLine + AEx.Message, true);
+                return Resources.mRemote_Icon;
+
+		    }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" + Environment.NewLine + ex.Message, true);
@@ -117,11 +118,11 @@ namespace mRemoteNG.Tools
 
 		public static string DBDate(DateTime Dt)
 		{
-			string strDate = "";
-			strDate = Dt.Year + LeadingZero(Convert.ToString(Dt.Month)) + LeadingZero(Convert.ToString(Dt.Day)) + " " + LeadingZero(Convert.ToString(Dt.Hour)) + ":" + LeadingZero(Convert.ToString(Dt.Minute)) + ":" + LeadingZero(Convert.ToString(Dt.Second));
-			return strDate;
+		    var strDate = Dt.Year + LeadingZero(Convert.ToString(Dt.Month)) + LeadingZero(Convert.ToString(Dt.Day)) + " " + LeadingZero(Convert.ToString(Dt.Hour)) + ":" + LeadingZero(Convert.ToString(Dt.Minute)) + ":" + LeadingZero(Convert.ToString(Dt.Second));
+		    return strDate;
 		}
-		public static string PrepareForDB(string Text)
+
+        public static string PrepareForDB(string Text)
 		{
 			return ReplaceBooleanStringsWithNumbers(Text);
 		}
@@ -179,7 +180,7 @@ namespace mRemoteNG.Tools
 					
 				Size currentFormSize = new Size(LeftWidth, TopHeight);
 				Bitmap ScreenToBitmap = new Bitmap(LeftWidth, TopHeight);
-				System.Drawing.Graphics gGraphics = System.Drawing.Graphics.FromImage(ScreenToBitmap);
+                Graphics gGraphics = Graphics.FromImage(ScreenToBitmap);
 					
 				gGraphics.CopyFromScreen(new Point(LeftStart, TopStart), new Point(0, 0), currentFormSize);
 					
@@ -301,11 +302,11 @@ namespace mRemoteNG.Tools
 				return true;
 			}
 				
-			public override TypeConverter.StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
+			public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
 			{
 				bool[] bools = new bool[] {true, false};
 					
-				TypeConverter.StandardValuesCollection svc = new TypeConverter.StandardValuesCollection(bools);
+				StandardValuesCollection svc = new StandardValuesCollection(bools);
 					
 				return svc;
 			}

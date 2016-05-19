@@ -75,7 +75,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="WriteLogFile" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
+      <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="UseCustomPuttyPath" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -135,7 +135,7 @@
       <Value Profile="(Default)">Colors16Bit</Value>
     </Setting>
     <Setting Name="ConDefaultCacheBitmaps" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="ConDefaultDisplayWallpaper" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -426,7 +426,7 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="CheckForUpdatesFrequencyDays" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">7</Value>
+      <Value Profile="(Default)">14</Value>
     </Setting>
     <Setting Name="CheckForUpdatesLastCheck" Type="System.DateTime" Scope="User">
       <Value Profile="(Default)">1980-01-01</Value>

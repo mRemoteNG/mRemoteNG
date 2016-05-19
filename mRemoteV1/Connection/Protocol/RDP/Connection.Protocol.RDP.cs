@@ -9,7 +9,6 @@ using System.Threading;
 using System.ComponentModel;
 using mRemoteNG.Messages;
 using mRemoteNG.App;
-using mRemoteNG.My;
 using MSTSCLib;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
@@ -133,7 +132,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				//not user changeable
 				_rdpClient.AdvancedSettings2.GrabFocusOnConnect = true;
 				_rdpClient.AdvancedSettings3.EnableAutoReconnect = true;
-				_rdpClient.AdvancedSettings3.MaxReconnectAttempts = Convert.ToInt32(mRemoteNG.Settings.Default.RdpReconnectionCount);
+				_rdpClient.AdvancedSettings3.MaxReconnectAttempts = Convert.ToInt32(Settings.Default.RdpReconnectionCount);
 				_rdpClient.AdvancedSettings2.keepAliveInterval = 60000; //in milliseconds (10.000 = 10 seconds)
 				_rdpClient.AdvancedSettings5.AuthenticationLevel = 0;
 				_rdpClient.AdvancedSettings2.EncryptionEnabled = 1;
@@ -199,7 +198,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strRdpDisconnectFailed + Environment.NewLine + ex.Message, true);
-				base.Close();
+				Close();
 			}
 		}
 				
@@ -309,16 +308,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			{
 				return ;
 			}
-					
-			Size size = new Size();
-			if (!Fullscreen)
-			{
-				size = Control.Size;
-			}
-			else
-			{
-				size = Screen.FromControl(Control).Bounds.Size;
-			}
+
+		    var size = !Fullscreen ? Control.Size : Screen.FromControl(Control).Bounds.Size;
 
             IMsRdpClient8 msRdpClient8 = _rdpClient;
 			msRdpClient8.Reconnect((uint)size.Width, (uint)size.Height);
@@ -397,14 +388,16 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				if (_rdpVersion >= Versions.RDC61)
 				{
 					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strRdpSetConsoleSwitch, _rdpVersion), true);
-					//_rdpClient.AdvancedSettings7.ConnectToAdministerServer = value;
+					_rdpClient.AdvancedSettings7.ConnectToAdministerServer = value;
 				}
 				else
 				{
-					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strRdpSetConsoleSwitch, _rdpVersion), true);
-					_rdpClient.AdvancedSettings2.ConnectToServerConsole = value;
-				}
-			}
+					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strRdpSetConsoleSwitch, _rdpVersion) + Environment.NewLine + "No longer supported in this RDP version. Reference: https://msdn.microsoft.com/en-us/library/aa380863(v=vs.85).aspx", true);
+                    // ConnectToServerConsole is deprecated
+                    //https://msdn.microsoft.com/en-us/library/aa380863(v=vs.85).aspx
+                    //_rdpClient.AdvancedSettings2.ConnectToServerConsole = value;
+                }
+            }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionMessage(Language.strRdpSetConsoleSessionFailed, ex, MessageClass.ErrorMsg, true);
@@ -426,13 +419,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
 						
 				if (string.IsNullOrEmpty(userName))
 				{
-					if (mRemoteNG.Settings.Default.EmptyCredentials == "windows")
+					if (Settings.Default.EmptyCredentials == "windows")
 					{
 						_rdpClient.UserName = Environment.UserName;
 					}
-					else if (mRemoteNG.Settings.Default.EmptyCredentials == "custom")
+					else if (Settings.Default.EmptyCredentials == "custom")
 					{
-						_rdpClient.UserName = Convert.ToString(mRemoteNG.Settings.Default.DefaultUsername);
+						_rdpClient.UserName = Convert.ToString(Settings.Default.DefaultUsername);
 					}
 				}
 				else
@@ -442,11 +435,11 @@ namespace mRemoteNG.Connection.Protocol.RDP
 						
 				if (string.IsNullOrEmpty(password))
 				{
-					if (mRemoteNG.Settings.Default.EmptyCredentials == "custom")
+					if (Settings.Default.EmptyCredentials == "custom")
 					{
-						if (mRemoteNG.Settings.Default.DefaultPassword != "")
+						if (Settings.Default.DefaultPassword != "")
 						{
-							_rdpClient.AdvancedSettings2.ClearTextPassword = Security.Crypt.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
+							_rdpClient.AdvancedSettings2.ClearTextPassword = Security.Crypt.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
 						}
 					}
 				}
@@ -457,13 +450,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
 						
 				if (string.IsNullOrEmpty(domain))
 				{
-					if (mRemoteNG.Settings.Default.EmptyCredentials == "windows")
+					if (Settings.Default.EmptyCredentials == "windows")
 					{
 						_rdpClient.Domain = Environment.UserDomainName;
 					}
-					else if (mRemoteNG.Settings.Default.EmptyCredentials == "custom")
+					else if (Settings.Default.EmptyCredentials == "custom")
 					{
-						_rdpClient.Domain = Convert.ToString(mRemoteNG.Settings.Default.DefaultDomain);
+						_rdpClient.Domain = Convert.ToString(Settings.Default.DefaultDomain);
 					}
 				}
 				else
@@ -494,6 +487,13 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				{
 					_rdpClient.DesktopWidth = InterfaceControl.Size.Width;
 					_rdpClient.DesktopHeight = InterfaceControl.Size.Height;
+
+				    if (InterfaceControl.Info.Resolution == RDPResolutions.SmartSize)
+				    {
+                        _rdpClient.AdvancedSettings2.SmartSizing = true;
+                    }
+
+                    
 				}
 				else if (InterfaceControl.Info.Resolution == RDPResolutions.Fullscreen)
 				{
@@ -639,7 +639,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				Event_Disconnected(this, discReason + "\r\n" + reason);
 			}
 					
-			if (mRemoteNG.Settings.Default.ReconnectOnDisconnect)
+			if (Settings.Default.ReconnectOnDisconnect)
 			{
 				ReconnectGroup = new ReconnectGroup();
 				ReconnectGroup.CloseClicked += Event_ReconnectGroupCloseClicked;
@@ -761,7 +761,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 			[Description("1600x1280")]Res1600x1280,
 			[Description("1680x1050")]Res1680x1050,
 			[Description("1900x1200")]Res1900x1200,
-			[Description("1920x1200")]Res1920x1200,
+            [Description("1920x1080")]Res1920x1080,
+            [Description("1920x1200")]Res1920x1200,
 			[Description("2048x1536")]Res2048x1536,
 			[Description("2560x2048")]Res2560x2048,
 			[Description("3200x2400")]Res3200x2400,
@@ -833,27 +834,28 @@ namespace mRemoteNG.Connection.Protocol.RDP
             protected static Hashtable _description;
             protected static void InitDescription()
             {
-                _description = new Hashtable();
-                _description.Add("0", "Language.strRdpErrorUnknown");
-                _description.Add("1", "Language.strRdpErrorCode1");
-                _description.Add("2", "Language.strRdpErrorOutOfMemory");
-                _description.Add("3", "Language.strRdpErrorWindowCreation");
-                _description.Add("4", "Language.strRdpErrorCode2");
-                _description.Add("5", "Language.strRdpErrorCode3");
-                _description.Add("6", "Language.strRdpErrorCode4");
-                _description.Add("7", "Language.strRdpErrorConnection");
-                _description.Add("100", "Language.strRdpErrorWinsock");
+                _description = new Hashtable
+                {
+                    {"0", "Language.strRdpErrorUnknown"},
+                    {"1", "Language.strRdpErrorCode1"},
+                    {"2", "Language.strRdpErrorOutOfMemory"},
+                    {"3", "Language.strRdpErrorWindowCreation"},
+                    {"4", "Language.strRdpErrorCode2"},
+                    {"5", "Language.strRdpErrorCode3"},
+                    {"6", "Language.strRdpErrorCode4"},
+                    {"7", "Language.strRdpErrorConnection"},
+                    {"100", "Language.strRdpErrorWinsock"}
+                };
             }
 					
 			public static string GetError(string id)
 			{
-                if (_description == null)
-                {
-                    InitDescription();
-                }
 				try
 				{
-					return ((string)_description[id]);
+				    if (_description == null)
+                        InitDescription();
+
+				    return ((string)_description?[id]);
 				}
 				catch (Exception ex)
 				{

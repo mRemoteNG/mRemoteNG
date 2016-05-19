@@ -2,7 +2,11 @@
 using log4net.Appender;
 using log4net.Config;
 using log4net.Repository;
+#if !PORTABLE
+using System;
+#endif
 using System.IO;
+using System.Windows.Forms;
 
 namespace mRemoteNG.App
 {
@@ -47,12 +51,12 @@ namespace mRemoteNG.App
         private static string BuildLogFilePath()
         {
             string logFilePath = "";
-            #if !PORTABLE
-			logFilePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData), System.Windows.Forms.Application.ProductName);
-            #else
-            logFilePath = System.Windows.Forms.Application.StartupPath;
-            #endif
-            string logFileName = Path.ChangeExtension(System.Windows.Forms.Application.ProductName, ".log");
+#if !PORTABLE
+			logFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
+#else
+            logFilePath = Application.StartupPath;
+#endif
+            string logFileName = Path.ChangeExtension(Application.ProductName, ".log");
             string logFile = Path.Combine(logFilePath, logFileName);
             return logFile;
         }

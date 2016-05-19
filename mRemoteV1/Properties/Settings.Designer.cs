@@ -313,7 +313,7 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool WriteLogFile {
             get {
                 return ((bool)(this["WriteLogFile"]));
@@ -553,7 +553,7 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool ConDefaultCacheBitmaps {
             get {
                 return ((bool)(this["ConDefaultCacheBitmaps"]));
@@ -1717,7 +1717,7 @@ namespace mRemoteNG {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        [global::System.Configuration.DefaultSettingValueAttribute("14")]
         public int CheckForUpdatesFrequencyDays {
             get {
                 return ((int)(this["CheckForUpdatesFrequencyDays"]));
