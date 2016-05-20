@@ -76,8 +76,8 @@ Copyright © 2006 Matthew Kleinwaks
 Copyright © 2008 Felix Deimel
 http://www.vbforums.com/showthread.php?t=430169
 
-log4net 1.2.10.0
-Copyright © 2001-2006 The Apache Software Foundation
+log4net 1.2.15.0
+Copyright © 2001-2015 The Apache Software Foundation
 Apache License Version 2.0
 http://logging.apache.org/log4net/
 
