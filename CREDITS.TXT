@@ -62,10 +62,6 @@ Copyright © 2007 Weifen Luo
 MIT License
 http://sourceforge.net/projects/dockpanelsuite/
 
-Emergent OnLine WTSCOM 2.0.6.0
-Copyright © 2001-2003 Emergent OnLine
-http://www.go-eol.com/
-
 FilteredPropertyGrid 1.0.0.0
 Copyright © 2006 Azuria
 http://www.codeproject.com/KB/cs/FilteredPropertyGrid.aspx
@@ -99,12 +95,8 @@ MiniGeckoBrowser 1.0
 Copyright © 2008 Felix Deimel
 http://www.appjuice.org/
 
-MiniTabControl 1.0
-Copyright © 2008 Felix Deimel
-http://www.appjuice.org/
-
-PuTTY 0.62
-Copyright © 1997-2011 Simon Tatham
+PuTTY 0.67
+Copyright © 1997-2016 Simon Tatham
 MIT License
 http://www.chiark.greenend.org.uk/~sgtatham/putty/
 
@@ -118,11 +110,6 @@ Silk Icon Set
 Copyright © 2005-2008 FAMFAMFAM
 Creative Commons Attribution 2.5 License
 http://www.famfamfam.com/
-
-Vista TaskDialog Wrapper and Emulator 1.0
-Copyright © 2007-2009 Hedley Muscroft
-Code Project Open License (CPOL)
-http://www.codeproject.com/KB/vista/Vista_TaskDialog_Wrapper.aspx
 
 VncSharp 1.0
 Copyright © 2004-2009 David Humphrey
