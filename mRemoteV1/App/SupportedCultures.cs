@@ -1,6 +1,7 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Globalization;
 
 
 namespace mRemoteNG.App
@@ -9,24 +10,25 @@ namespace mRemoteNG.App
 	{
         private static SupportedCultures _Instance = null;
 
-
+        private static SupportedCultures SingletonInstance
+        {
+            get
+            {
+                if (_Instance == null)
+                    _Instance = new SupportedCultures();
+                return _Instance;
+            }
+        }
 		
-		public static void InstantiateSingleton()
-		{
-			if (_Instance == null)
-			{
-				_Instance = new SupportedCultures();
-			}
-		}
 
         private SupportedCultures()
         {
-            System.Globalization.CultureInfo CultureInfo = default(System.Globalization.CultureInfo);
-            foreach (string CultureName in mRemoteNG.Settings.Default.SupportedUICultures.Split(','))
+            CultureInfo CultureInfo = default(CultureInfo);
+            foreach (string CultureName in Settings.Default.SupportedUICultures.Split(','))
             {
                 try
                 {
-                    CultureInfo = new System.Globalization.CultureInfo(CultureName.Trim());
+                    CultureInfo = new CultureInfo(CultureName.Trim());
                     Add(CultureInfo.Name, CultureInfo.TextInfo.ToTitleCase(CultureInfo.NativeName));
                 }
                 catch (Exception ex)
@@ -38,23 +40,23 @@ namespace mRemoteNG.App
 			
 		public static bool IsNameSupported(string CultureName)
 		{
-			return _Instance.ContainsKey(CultureName);
+			return SingletonInstance.ContainsKey(CultureName);
 		}
 			
 		public static bool IsNativeNameSupported(string CultureNativeName)
 		{
-			return _Instance.ContainsValue(CultureNativeName);
+			return SingletonInstance.ContainsValue(CultureNativeName);
 		}
 			
 		public static string get_CultureName(string CultureNativeName)
 		{
-			string[] Names = new string[_Instance.Count + 1];
-			string[] NativeNames = new string[_Instance.Count + 1];
+			string[] Names = new string[SingletonInstance.Count + 1];
+			string[] NativeNames = new string[SingletonInstance.Count + 1];
+
+            SingletonInstance.Keys.CopyTo(Names, 0);
+            SingletonInstance.Values.CopyTo(NativeNames, 0);
 				
-			_Instance.Keys.CopyTo(Names, 0);
-			_Instance.Values.CopyTo(NativeNames, 0);
-				
-			for (int Index = 0; Index <= _Instance.Count; Index++)
+			for (int Index = 0; Index <= SingletonInstance.Count; Index++)
 			{
 				if (NativeNames[Index] == CultureNativeName)
 				{
@@ -62,12 +64,12 @@ namespace mRemoteNG.App
 				}
 			}
 				
-			throw (new System.Collections.Generic.KeyNotFoundException());
+			throw (new KeyNotFoundException());
 		}
 			
 		public static string get_CultureNativeName(string CultureName)
 		{
-			return _Instance[CultureName];
+			return SingletonInstance[CultureName];
 		}
 			
         public static List<string> CultureNativeNames
@@ -75,7 +77,7 @@ namespace mRemoteNG.App
 			get
 			{
 				List<string> ValueList = new List<string>();
-				foreach (string Value in _Instance.Values)
+				foreach (string Value in SingletonInstance.Values)
 				{
 					ValueList.Add(Value);
 				}

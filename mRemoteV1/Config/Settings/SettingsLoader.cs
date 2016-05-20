@@ -83,7 +83,6 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetSupportedCulture()
         {
-            SupportedCultures.InstantiateSingleton();
             if (mRemoteNG.Settings.Default.OverrideUICulture != "" && SupportedCultures.IsNameSupported(mRemoteNG.Settings.Default.OverrideUICulture))
             {
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(mRemoteNG.Settings.Default.OverrideUICulture);
