@@ -6,6 +6,7 @@ namespace mRemoteNG.Tools
 {
 	public class SystemMenu
 	{
+		[Flags]
 		public enum Flags
 		{
 			MF_STRING = App.NativeMethods.MF_STRING,
