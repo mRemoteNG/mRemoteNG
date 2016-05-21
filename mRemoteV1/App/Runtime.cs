@@ -31,108 +31,41 @@ namespace mRemoteNG.App
     public class Runtime
     {
         #region Private Variables
-        private static ConnectionList _connectionList;
-        private static ConnectionList _previousConnectionList;
-        private static ContainerList _containerList;
-        private static ContainerList _previousContainerList;
-        private static CredentialList _credentialList;
-        private static CredentialList _previousCredentialList;
-        private static WindowList _windowList;
-        private static MessageCollector _messageCollector;
-        private static Tools.Controls.NotificationAreaIcon _notificationAreaIcon;
-        private static SystemMenu _systemMenu;
-        private static ILog _log;
-        private static bool _isConnectionsFileLoaded;
+
         //private static System.Timers.Timer _timerSqlWatcher;
-        private static SqlConnectionsProvider _sqlConnectionsProvider;
-        private static DateTime _lastSqlUpdate;
-        private static string _lastSelected;
-        private static ConnectionInfo _defaultConnection;
-        private static ConnectionInfoInheritance _defaultInheritance;
-        private static ArrayList _externalTools = new ArrayList();
+
         #endregion
 
         #region Public Properties
         public static frmMain MainForm { get; set; }
 
-        public static ConnectionList ConnectionList
-        {
-            get { return _connectionList; }
-            set { _connectionList = value; }
-        }
+        public static ConnectionList ConnectionList { get; set; }
 
-        public static ConnectionList PreviousConnectionList
-        {
-            get { return _previousConnectionList; }
-            set { _previousConnectionList = value; }
-        }
+        public static ConnectionList PreviousConnectionList { get; set; }
 
-        public static ContainerList ContainerList
-        {
-            get { return _containerList; }
-            set { _containerList = value; }
-        }
+        public static ContainerList ContainerList { get; set; }
 
-        public static ContainerList PreviousContainerList
-        {
-            get { return _previousContainerList; }
-            set { _previousContainerList = value; }
-        }
+        public static ContainerList PreviousContainerList { get; set; }
 
-        public static CredentialList CredentialList
-        {
-            get { return _credentialList; }
-            set { _credentialList = value; }
-        }
+        public static CredentialList CredentialList { get; set; }
 
-        public static CredentialList PreviousCredentialList
-        {
-            get { return _previousCredentialList; }
-            set { _previousCredentialList = value; }
-        }
+        public static CredentialList PreviousCredentialList { get; set; }
 
-        public static WindowList WindowList
-        {
-            get { return _windowList; }
-            set { _windowList = value; }
-        }
+        public static WindowList WindowList { get; set; }
 
-        public static MessageCollector MessageCollector
-        {
-            get { return _messageCollector; }
-            set { _messageCollector = value; }
-        }
+        public static MessageCollector MessageCollector { get; set; }
 
-        public static Tools.Controls.NotificationAreaIcon NotificationAreaIcon
-        {
-            get { return _notificationAreaIcon; }
-            set { _notificationAreaIcon = value; }
-        }
+        public static Tools.Controls.NotificationAreaIcon NotificationAreaIcon { get; set; }
 
-        public static SystemMenu SystemMenu
-        {
-            get { return _systemMenu; }
-            set { _systemMenu = value; }
-        }
+        public static SystemMenu SystemMenu { get; set; }
 
-        public static ILog Log
-        {
-            get { return _log; }
-            set { _log = value; }
-        }
+        public static ILog Log { get; set; }
 
-        public static bool IsConnectionsFileLoaded
-        {
-            get { return _isConnectionsFileLoaded; }
-            set { _isConnectionsFileLoaded = value; }
-        }
+        public static bool IsConnectionsFileLoaded { get; set; }
 
 
-        public static SqlConnectionsProvider SQLConnProvider
-        {
-            get { return _sqlConnectionsProvider; }
-            set { _sqlConnectionsProvider = value; }
-        }
+        public static SqlConnectionsProvider SQLConnProvider { get; set; }
+
         /*
         public static System.Timers.Timer TimerSqlWatcher
 		{
@@ -145,35 +78,16 @@ namespace mRemoteNG.App
 		}
          */
 
-        public static DateTime LastSqlUpdate
-        {
-            get { return _lastSqlUpdate; }
-            set { _lastSqlUpdate = value; }
-        }
+        public static DateTime LastSqlUpdate { get; set; }
 
-        public static string LastSelected
-        {
-            get { return _lastSelected; }
-            set { _lastSelected = value; }
-        }
+        public static string LastSelected { get; set; }
 
-        public static ConnectionInfo DefaultConnection
-        {
-            get { return _defaultConnection; }
-            set { _defaultConnection = value; }
-        }
+        public static ConnectionInfo DefaultConnection { get; set; }
 
-        public static ConnectionInfoInheritance DefaultInheritance
-        {
-            get { return _defaultInheritance; }
-            set { _defaultInheritance = value; }
-        }
+        public static ConnectionInfoInheritance DefaultInheritance { get; set; }
 
-        public static ArrayList ExternalTools
-        {
-            get { return _externalTools; }
-            set { _externalTools = value; }
-        }
+        public static ArrayList ExternalTools { get; set; } = new ArrayList();
+
         #endregion
 
         #region Default Connection
@@ -510,7 +424,7 @@ namespace mRemoteNG.App
             _withDialog = false;
             _loadUpdate = true;
 
-            Thread t = new Thread(new ThreadStart(LoadConnectionsBGd));
+            Thread t = new Thread(LoadConnectionsBGd);
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
         }
@@ -587,7 +501,7 @@ namespace mRemoteNG.App
                 connectionsLoader.SQLUpdate = update;
                 connectionsLoader.LoadConnections(false);
 
-                if (Settings.Default.UseSQLServer == true)
+                if (Settings.Default.UseSQLServer)
                 {
                     LastSqlUpdate = DateTime.Now;
                 }
@@ -732,7 +646,7 @@ namespace mRemoteNG.App
         public static void SaveConnectionsBG()
         {
             _saveUpdate = true;
-            Thread t = new Thread(new ThreadStart(SaveConnectionsBGd));
+            Thread t = new Thread(SaveConnectionsBGd);
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
         }
