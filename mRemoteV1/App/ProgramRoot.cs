@@ -12,9 +12,7 @@ namespace mRemoteNG.App
         [STAThread]
         public static void Main(string[] args)
         {
-            var mainForm = new frmMain();
-            frmMain.Default = mainForm;
-            Application.Run(mainForm);
+            Application.Run(frmMain.Default);
         }
     }
 }

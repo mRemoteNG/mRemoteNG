@@ -35,48 +35,23 @@ namespace mRemoteNG.UI.Forms
         private string _connectionsFileName = null;
         private bool _showFullPathInTitle;
         private ConnectionInfo _selectedConnection = null;
-        public MiscTools.Fullscreen _fullscreen;
-        #endregion
-
-        #region Constructors
-        public frmMain()
-		{
-			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
-			InitializeComponent();
-			//Added to support default instance behavour in C#. This should be removed at the earliest opportunity.
-            if (_defaultInstance == null)
-                _defaultInstance = this;
-		}
+        private MiscTools.Fullscreen _fullscreen;
         #endregion
 
         #region Default Instance
-        private static frmMain _defaultInstance;
-		
-		/// <summary>
-		/// Added by the VB.Net to C# Converter to support default instance behavour in C#
-		/// </summary>
-        public static frmMain Default
+        private static readonly frmMain _defaultInstance = new frmMain();
+        public static frmMain Default => _defaultInstance;
+        #endregion
+
+        #region Constructors
+        private frmMain()
 		{
-			get
-			{
-				if (_defaultInstance == null)
-				{
-					_defaultInstance = new frmMain();
-					_defaultInstance.FormClosed += defaultInstance_FormClosed;
-				}
-				
-				return _defaultInstance;
-			}
-			set
-			{
-				_defaultInstance = value;
-			}
+			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
+			InitializeComponent();
 		}
-		
-		static void defaultInstance_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			_defaultInstance = null;
-		}
+        static frmMain()
+        {
+        }
         #endregion
 
         #region Properties
