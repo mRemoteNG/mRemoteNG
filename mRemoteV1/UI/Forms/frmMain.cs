@@ -147,7 +147,7 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_Load(object sender, EventArgs e)
 		{
-            Startup.InitializeProgram();
+            
 
             // Create gui config load and save objects
             var settingsLoader = new SettingsLoader(this);
@@ -171,7 +171,6 @@ namespace mRemoteNG.UI.Forms
                 Runtime.NewConnections(Runtime.GetStartupConnectionFileName());
 			}
 
-            //LoadCredentials()
             Runtime.LoadConnections();
             if (!Runtime.IsConnectionsFileLoaded)
 			{
