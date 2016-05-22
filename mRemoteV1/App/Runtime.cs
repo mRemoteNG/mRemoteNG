@@ -37,8 +37,6 @@ namespace mRemoteNG.App
         #endregion
 
         #region Public Properties
-        public static frmMain MainForm { get; set; }
-
         public static ConnectionList ConnectionList { get; set; }
 
         public static ConnectionList PreviousConnectionList { get; set; }

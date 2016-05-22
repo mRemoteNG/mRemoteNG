@@ -24,7 +24,6 @@ namespace mRemoteNG.UI.Forms
 {
     public partial class frmMain
     {
-        #region Private Variables
         private static clipboardchangeEventHandler clipboardchangeEvent;
         private bool _inSizeMove = false;
         private bool _inMouseActivate = false;
@@ -36,9 +35,7 @@ namespace mRemoteNG.UI.Forms
         private bool _showFullPathInTitle;
         private ConnectionInfo _selectedConnection = null;
         public MiscTools.Fullscreen _fullscreen;
-        #endregion
 
-        #region Constructors
         public frmMain()
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
@@ -47,7 +44,6 @@ namespace mRemoteNG.UI.Forms
             if (_defaultInstance == null)
                 _defaultInstance = this;
 		}
-        #endregion
 
         #region Default Instance
         private static frmMain _defaultInstance;
@@ -151,8 +147,6 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_Load(object sender, EventArgs e)
 		{
-            Runtime.MainForm = this;
-            
             Startup.CreateLogger();
             Startup.LogStartupData();
 

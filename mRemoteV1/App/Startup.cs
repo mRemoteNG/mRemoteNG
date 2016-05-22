@@ -271,9 +271,9 @@ namespace mRemoteNG.App
         }
         private static void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            if (Runtime.MainForm.InvokeRequired)
+            if (frmMain.Default.InvokeRequired)
             {
-                Runtime.MainForm.Invoke(new AsyncCompletedEventHandler(GetUpdateInfoCompleted), new object[] { sender, e });
+                frmMain.Default.Invoke(new AsyncCompletedEventHandler(GetUpdateInfoCompleted), new object[] { sender, e });
                 return;
             }
 
@@ -314,9 +314,9 @@ namespace mRemoteNG.App
         }
         private static void GetAnnouncementInfoCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            if (Runtime.MainForm.InvokeRequired)
+            if (frmMain.Default.InvokeRequired)
             {
-                Runtime.MainForm.Invoke(new AsyncCompletedEventHandler(GetAnnouncementInfoCompleted), new object[] { sender, e });
+                frmMain.Default.Invoke(new AsyncCompletedEventHandler(GetAnnouncementInfoCompleted), new object[] { sender, e });
                 return;
             }
 
