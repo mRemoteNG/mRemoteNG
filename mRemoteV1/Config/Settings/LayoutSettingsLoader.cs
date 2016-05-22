@@ -1,5 +1,6 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using System;
@@ -31,7 +32,7 @@ namespace mRemoteNG.Config.Settings
                     dc.Close();
                 }
 
-                Startup.CreatePanels();
+                CreatePanels();
 
                 string oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName + "\\" + SettingsFileInfo.LayoutFileName;
                 string newPath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.LayoutFileName;
@@ -82,6 +83,28 @@ namespace mRemoteNG.Config.Settings
             }
 
             return null;
+        }
+
+        public void CreatePanels()
+        {
+            Windows.configForm = new ConfigWindow(Windows.configPanel);
+            Windows.configPanel = Windows.configForm;
+
+            Windows.treeForm = new ConnectionTreeWindow(Windows.treePanel);
+            Windows.treePanel = Windows.treeForm;
+            ConnectionTree.TreeView = Windows.treeForm.tvConnections;
+
+            Windows.errorsForm = new ErrorAndInfoWindow(Windows.errorsPanel);
+            Windows.errorsPanel = Windows.errorsForm;
+
+            Windows.screenshotForm = new ScreenshotManagerWindow(Windows.screenshotPanel);
+            Windows.screenshotPanel = Windows.screenshotForm;
+
+            Windows.updateForm = new UpdateWindow(Windows.updatePanel);
+            Windows.updatePanel = Windows.updateForm;
+
+            Windows.AnnouncementForm = new AnnouncementWindow(Windows.AnnouncementPanel);
+            Windows.AnnouncementPanel = Windows.AnnouncementForm;
         }
     }
 }
