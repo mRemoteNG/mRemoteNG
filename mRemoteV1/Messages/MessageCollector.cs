@@ -63,27 +63,27 @@ namespace mRemoteNG.Messages
         {
             Debug.Print("Info: " + nMsg.MsgText);
             if (mRemoteNG.Settings.Default.WriteLogFile)
-                Runtime.Log.Info(nMsg.MsgText);
+                Logger.Instance.Info(nMsg.MsgText);
         }
 
         private void AddWarningMessage(bool OnlyLog, Message nMsg)
         {
             Debug.Print("Warning: " + nMsg.MsgText);
             if (mRemoteNG.Settings.Default.WriteLogFile)
-                Runtime.Log.Warn(nMsg.MsgText);
+                Logger.Instance.Warn(nMsg.MsgText);
         }
 
         private void AddErrorMessage(bool OnlyLog, Message nMsg)
         {
             Debug.Print("Error: " + nMsg.MsgText);
-            Runtime.Log.Error(nMsg.MsgText);
+            Logger.Instance.Error(nMsg.MsgText);
         }
 
         private static void AddReportMessage(Message nMsg)
         {
             Debug.Print("Report: " + nMsg.MsgText);
             if (mRemoteNG.Settings.Default.WriteLogFile)
-                Runtime.Log.Info(nMsg.MsgText);
+                Logger.Instance.Info(nMsg.MsgText);
         }
 
         private static ListViewItem BuildListViewItem(Message nMsg)

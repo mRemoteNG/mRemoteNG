@@ -53,7 +53,7 @@ namespace mRemoteNG.Config.Settings
             }
             catch (Exception ex)
             {
-                Runtime.Log.Error("LoadPanelsFromXML failed" + Environment.NewLine + ex.Message);
+                Logger.Instance.Error("LoadPanelsFromXML failed" + Environment.NewLine + ex.Message);
             }
         }
 
@@ -79,7 +79,7 @@ namespace mRemoteNG.Config.Settings
             }
             catch (Exception ex)
             {
-                Runtime.Log.Error("GetContentFromPersistString failed" + Environment.NewLine + ex.Message);
+                Logger.Instance.Error("GetContentFromPersistString failed" + Environment.NewLine + ex.Message);
             }
 
             return null;

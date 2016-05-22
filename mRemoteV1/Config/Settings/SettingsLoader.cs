@@ -61,7 +61,7 @@ namespace mRemoteNG.Config.Settings
 			}
 			catch (Exception ex)
 			{
-                Runtime.Log.Error("Loading settings failed" + Environment.NewLine + ex.Message);
+                Logger.Instance.Error("Loading settings failed" + Environment.NewLine + ex.Message);
 			}
 		}
 
@@ -86,7 +86,7 @@ namespace mRemoteNG.Config.Settings
             if (mRemoteNG.Settings.Default.OverrideUICulture != "" && SupportedCultures.IsNameSupported(mRemoteNG.Settings.Default.OverrideUICulture))
             {
                 Thread.CurrentThread.CurrentUICulture = new CultureInfo(mRemoteNG.Settings.Default.OverrideUICulture);
-                Runtime.Log.InfoFormat("Override Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName);
+                Logger.Instance.InfoFormat("Override Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName);
             }
         }
 
@@ -176,7 +176,7 @@ namespace mRemoteNG.Config.Settings
             }
             catch (Exception ex)
             {
-                Runtime.Log.Error("Settings.Upgrade() failed" + Environment.NewLine + ex.Message);
+                Logger.Instance.Error("Settings.Upgrade() failed" + Environment.NewLine + ex.Message);
             }
             mRemoteNG.Settings.Default.DoUpgrade = false;
 

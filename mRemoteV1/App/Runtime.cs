@@ -57,10 +57,7 @@ namespace mRemoteNG.App
 
         public static SystemMenu SystemMenu { get; set; }
 
-        public static ILog Log { get; set; }
-
         public static bool IsConnectionsFileLoaded { get; set; }
-
 
         public static SqlConnectionsProvider SQLConnProvider { get; set; }
 

@@ -38,7 +38,6 @@ namespace mRemoteNG.App
         public static void InitializeProgram()
         {
             Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
-            _singletonInstance.CreateLogger();
             _singletonInstance.LogStartupData();
             //CheckCompatibility();
             _singletonInstance.ParseCommandLineArgs();
@@ -144,10 +143,6 @@ namespace mRemoteNG.App
         }
 
 
-        private void CreateLogger()
-        {
-            Runtime.Log = Logger.Instance;
-        }
         private void LogStartupData()
         {
             if (Settings.Default.WriteLogFile)
@@ -163,7 +158,7 @@ namespace mRemoteNG.App
         {
             string osData = GetOperatingSystemData();
             string architecture = GetArchitectureData();
-            Runtime.Log.InfoFormat(string.Join(" ", Array.FindAll(new string[] { osData, architecture }, s => !string.IsNullOrEmpty(Convert.ToString(s)))));
+            Logger.Instance.InfoFormat(string.Join(" ", Array.FindAll(new string[] { osData, architecture }, s => !string.IsNullOrEmpty(Convert.ToString(s)))));
         }
         private string GetOperatingSystemData()
         {
@@ -181,7 +176,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.Log.WarnFormat("Error retrieving operating system information from WMI. {0}", ex.Message);
+                Logger.Instance.WarnFormat("Error retrieving operating system information from WMI. {0}", ex.Message);
             }
             osData = string.Join(" ", new string[] { osVersion, servicePack });
             return osData;
@@ -213,29 +208,29 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.Log.WarnFormat("Error retrieving operating system address width from WMI. {0}", ex.Message);
+                Logger.Instance.WarnFormat("Error retrieving operating system address width from WMI. {0}", ex.Message);
             }
             return architecture;
         }
         private void LogApplicationData()
         {
 #if !PORTABLE
-            Runtime.Log.InfoFormat("{0} {1} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion);
+            Logger.Instance.InfoFormat("{0} {1} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion);
 #else
-            Runtime.Log.InfoFormat("{0} {1} {2} starting.", Application.ProductName, Application.ProductVersion, Language.strLabelPortableEdition);
+            Logger.Instance.InfoFormat("{0} {1} {2} starting.", Application.ProductName, Application.ProductVersion, Language.strLabelPortableEdition);
 #endif
         }
         private void LogCmdLineArgs()
         {
-            Runtime.Log.InfoFormat("Command Line: {0}", Environment.GetCommandLineArgs());
+            Logger.Instance.InfoFormat("Command Line: {0}", Environment.GetCommandLineArgs());
         }
         private void LogCLRData()
         {
-            Runtime.Log.InfoFormat("Microsoft .NET CLR {0}", Environment.Version.ToString());
+            Logger.Instance.InfoFormat("Microsoft .NET CLR {0}", Environment.Version.ToString());
         }
         private void LogCultureData()
         {
-            Runtime.Log.InfoFormat("System Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName);
+            Logger.Instance.InfoFormat("System Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName);
         }
 
 
