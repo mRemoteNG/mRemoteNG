@@ -11,14 +11,14 @@ namespace mRemoteNGTests.App
         [Test]
         public void GetSingletonInstanceReturnsAnILogObject()
         {
-            Assert.That(Logger.GetSingletonInstance(), Is.InstanceOf<ILog>());
+            Assert.That(Logger.Instance, Is.InstanceOf<ILog>());
         }
 
         [Test]
         public void SingletonOnlyEverReturnsTheSameInstance()
         {
-            ILog log1 = Logger.GetSingletonInstance();
-            ILog log2 = Logger.GetSingletonInstance();
+            ILog log1 = Logger.Instance;
+            ILog log2 = Logger.Instance;
             Assert.That(log1, Is.EqualTo(log2));
         }
     }

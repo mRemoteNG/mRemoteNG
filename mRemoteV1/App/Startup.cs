@@ -146,7 +146,7 @@ namespace mRemoteNG.App
 
         private void CreateLogger()
         {
-            Runtime.Log = Logger.GetSingletonInstance();
+            Runtime.Log = Logger.Instance;
         }
         private void LogStartupData()
         {

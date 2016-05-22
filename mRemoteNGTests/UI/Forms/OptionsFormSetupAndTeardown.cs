@@ -21,7 +21,7 @@ namespace mRemoteNGTests.UI.Forms
         public void OnetimeSetup()
         {
             Runtime.MessageCollector = new MessageCollector(new ErrorAndInfoWindow(new DockContent()));
-            Runtime.Log = Logger.GetSingletonInstance();
+            Runtime.Log = Logger.Instance;
         }
 
         [SetUp]

@@ -12,19 +12,24 @@ namespace mRemoteNG.App
 {
     public class Logger
     {
-        private static Logger _logger = null;
+        private static readonly Logger _loggerInstance = new Logger();
         private ILog _log;
 
-        public static ILog GetSingletonInstance()
+        public static ILog Instance
         {
-            if (_logger == null)
-                _logger = new Logger();
-            return _logger._log;
+            get
+            {
+                return _loggerInstance._log;
+            }
         }
 
         private Logger()
         {
-            this.Initialize();
+            Initialize();
+        }
+
+        static Logger()
+        {
         }
 
         private void Initialize()
@@ -51,11 +56,11 @@ namespace mRemoteNG.App
         private static string BuildLogFilePath()
         {
             string logFilePath = "";
-#if !PORTABLE
+            #if !PORTABLE
 			logFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
-#else
+            #else
             logFilePath = Application.StartupPath;
-#endif
+            #endif
             string logFileName = Path.ChangeExtension(Application.ProductName, ".log");
             string logFile = Path.Combine(logFilePath, logFileName);
             return logFile;
