@@ -149,14 +149,11 @@ namespace mRemoteNG.UI.Forms
 		{
             Startup.InitializeProgram();
 
-            //Runtime.Startup.CheckCompatibility();
-
             // Create gui config load and save objects
             var settingsLoader = new SettingsLoader(this);
 			settingsLoader.LoadSettings();
 			
-			Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
-            Startup.ParseCommandLineArgs();
+            
 			ApplyLanguage();
 			PopulateQuickConnectProtocolMenu();
 			ThemeManager.ThemeChanged += ApplyThemes;
@@ -164,8 +161,6 @@ namespace mRemoteNG.UI.Forms
 			fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
             Runtime.MessageCollector = new MessageCollector(Windows.errorsForm);
             Runtime.WindowList = new WindowList();
-            //Startup.CreatePanels();
-            //Startup.SetDefaultLayout();
             IeBrowserEmulation.Register();
             Startup.GetConnectionIcons();
             Windows.treePanel.Focus();

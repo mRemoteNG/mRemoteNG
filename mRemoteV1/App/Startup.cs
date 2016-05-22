@@ -17,6 +17,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
+using System.Globalization;
 
 namespace mRemoteNG.App
 {
@@ -36,9 +37,11 @@ namespace mRemoteNG.App
 
         public static void InitializeProgram()
         {
+            Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
             _singletonInstance.CreateLogger();
             _singletonInstance.LogStartupData();
             //CheckCompatibility();
+            _singletonInstance.ParseCommandLineArgs();
         }
 
         private void CheckCompatibility()
@@ -340,7 +343,7 @@ namespace mRemoteNG.App
         }
 
 
-        public static void ParseCommandLineArgs()
+        private void ParseCommandLineArgs()
         {
             try
             {
