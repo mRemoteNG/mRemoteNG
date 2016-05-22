@@ -23,8 +23,24 @@ namespace mRemoteNG.App
 {
     public class Startup
     {
-        private static AppUpdater _appUpdate;
+        private static readonly Startup _singletonInstance = new Startup();
+        private AppUpdater _appUpdate;
 
+        private Startup()
+        {
+            _appUpdate = new AppUpdater();
+        }
+
+        static Startup()
+        {
+        }
+
+        public static void InitializeProgram()
+        {
+            CreateLogger();
+            LogStartupData();
+            //CheckCompatibility();
+        }
 
         public static void CheckCompatibility()
         {
