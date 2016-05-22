@@ -153,15 +153,17 @@ namespace mRemoteNG.UI.Forms
             var settingsLoader = new SettingsLoader(this);
 			settingsLoader.LoadSettings();
 			
-            
 			ApplyLanguage();
 			PopulateQuickConnectProtocolMenu();
 			ThemeManager.ThemeChanged += ApplyThemes;
 			ApplyThemes();
+
 			fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
+
             Runtime.MessageCollector = new MessageCollector(Windows.errorsForm);
             Runtime.WindowList = new WindowList();
-            IeBrowserEmulation.Register();
+
+            
             Startup.GetConnectionIcons();
             Windows.treePanel.Focus();
             ConnectionTree.TreeView = Windows.treeForm.tvConnections;

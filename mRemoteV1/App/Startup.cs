@@ -41,6 +41,7 @@ namespace mRemoteNG.App
             _singletonInstance.LogStartupData();
             //CheckCompatibility();
             _singletonInstance.ParseCommandLineArgs();
+            IeBrowserEmulation.Register();
         }
 
         private void CheckCompatibility()
