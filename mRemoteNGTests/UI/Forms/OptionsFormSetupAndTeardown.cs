@@ -1,13 +1,7 @@
 ﻿using mRemoteNG.App;
-using mRemoteNG.Forms;
 using mRemoteNG.Messages;
 using mRemoteNG.UI.Window;
 using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
