@@ -147,8 +147,7 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_Load(object sender, EventArgs e)
 		{
-            Startup.CreateLogger();
-            Startup.LogStartupData();
+            Startup.InitializeProgram();
 
             //Runtime.Startup.CheckCompatibility();
 

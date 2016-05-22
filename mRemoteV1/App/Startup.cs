@@ -2,7 +2,6 @@
 using mRemoteNG.App.Update;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;
-using mRemoteNG.My;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Window;
@@ -37,17 +36,17 @@ namespace mRemoteNG.App
 
         public static void InitializeProgram()
         {
-            CreateLogger();
-            LogStartupData();
+            _singletonInstance.CreateLogger();
+            _singletonInstance.LogStartupData();
             //CheckCompatibility();
         }
 
-        public static void CheckCompatibility()
+        private void CheckCompatibility()
         {
             CheckFipsPolicy();
             CheckLenovoAutoScrollUtility();
         }
-        private static void CheckFipsPolicy()
+        private void CheckFipsPolicy()
         {
             RegistryKey regKey = default(RegistryKey);
 
@@ -79,7 +78,7 @@ namespace mRemoteNG.App
                 Environment.Exit(1);
             }
         }
-        private static void CheckLenovoAutoScrollUtility()
+        private void CheckLenovoAutoScrollUtility()
         {
             if (!Settings.Default.CompatibilityWarnLenovoAutoScrollUtility)
             {
@@ -162,11 +161,11 @@ namespace mRemoteNG.App
         }
 
 
-        public static void CreateLogger()
+        private void CreateLogger()
         {
             Runtime.Log = Logger.GetSingletonInstance();
         }
-        public static void LogStartupData()
+        private void LogStartupData()
         {
             if (Settings.Default.WriteLogFile)
             {
@@ -177,13 +176,13 @@ namespace mRemoteNG.App
                 LogCultureData();
             }
         }
-        private static void LogSystemData()
+        private void LogSystemData()
         {
             string osData = GetOperatingSystemData();
             string architecture = GetArchitectureData();
             Runtime.Log.InfoFormat(string.Join(" ", Array.FindAll(new string[] { osData, architecture }, s => !string.IsNullOrEmpty(Convert.ToString(s)))));
         }
-        private static string GetOperatingSystemData()
+        private string GetOperatingSystemData()
         {
             string osVersion = string.Empty;
             string servicePack = string.Empty;
@@ -204,12 +203,12 @@ namespace mRemoteNG.App
             osData = string.Join(" ", new string[] { osVersion, servicePack });
             return osData;
         }
-        private static string GetOSVersion(string osVersion, ManagementObject managementObject)
+        private string GetOSVersion(string osVersion, ManagementObject managementObject)
         {
             osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption")).Trim();
             return osVersion;
         }
-        private static string GetOSServicePack(string servicePack, ManagementObject managementObject)
+        private string GetOSServicePack(string servicePack, ManagementObject managementObject)
         {
             int servicePackNumber = Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"));
             if (!(servicePackNumber == 0))
@@ -218,7 +217,7 @@ namespace mRemoteNG.App
             }
             return servicePack;
         }
-        private static string GetArchitectureData()
+        private string GetArchitectureData()
         {
             string architecture = string.Empty;
             try
@@ -235,7 +234,7 @@ namespace mRemoteNG.App
             }
             return architecture;
         }
-        private static void LogApplicationData()
+        private void LogApplicationData()
         {
 #if !PORTABLE
             Runtime.Log.InfoFormat("{0} {1} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion);
@@ -243,15 +242,15 @@ namespace mRemoteNG.App
             Runtime.Log.InfoFormat("{0} {1} {2} starting.", Application.ProductName, Application.ProductVersion, Language.strLabelPortableEdition);
 #endif
         }
-        private static void LogCmdLineArgs()
+        private void LogCmdLineArgs()
         {
             Runtime.Log.InfoFormat("Command Line: {0}", Environment.GetCommandLineArgs());
         }
-        private static void LogCLRData()
+        private void LogCLRData()
         {
             Runtime.Log.InfoFormat("Microsoft .NET CLR {0}", Environment.Version.ToString());
         }
-        private static void LogCultureData()
+        private void LogCultureData()
         {
             Runtime.Log.InfoFormat("System Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName);
         }
@@ -265,7 +264,7 @@ namespace mRemoteNG.App
             }
         }
 
-        public static void CheckForUpdate()
+        private void CheckForUpdate()
         {
             if (_appUpdate == null)
             {
@@ -285,7 +284,7 @@ namespace mRemoteNG.App
             _appUpdate.GetUpdateInfoCompletedEvent += GetUpdateInfoCompleted;
             _appUpdate.GetUpdateInfoAsync();
         }
-        private static void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
+        private void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (frmMain.Default.InvokeRequired)
             {
@@ -318,7 +317,7 @@ namespace mRemoteNG.App
         }
 
 
-        public static void CheckForAnnouncement()
+        private void CheckForAnnouncement()
         {
             if (_appUpdate == null)
                 _appUpdate = new AppUpdater();
@@ -328,7 +327,7 @@ namespace mRemoteNG.App
             _appUpdate.GetAnnouncementInfoCompletedEvent += GetAnnouncementInfoCompleted;
             _appUpdate.GetAnnouncementInfoAsync();
         }
-        private static void GetAnnouncementInfoCompleted(object sender, AsyncCompletedEventArgs e)
+        private void GetAnnouncementInfoCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (frmMain.Default.InvokeRequired)
             {
