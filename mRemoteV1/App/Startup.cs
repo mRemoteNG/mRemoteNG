@@ -41,6 +41,7 @@ namespace mRemoteNG.App
             //CheckCompatibility();
             _singletonInstance.ParseCommandLineArgs();
             IeBrowserEmulation.Register();
+            _singletonInstance.GetConnectionIcons();
         }
 
         private void CheckCompatibility()
@@ -126,7 +127,7 @@ namespace mRemoteNG.App
 
             frmMain.Default.pnlDock.Visible = true;
         }
-        public static void GetConnectionIcons()
+        private void GetConnectionIcons()
         {
             string iPath = (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\Icons\\";
             if (Directory.Exists(iPath) == false)

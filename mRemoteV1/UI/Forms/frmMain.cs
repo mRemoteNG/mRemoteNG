@@ -163,8 +163,6 @@ namespace mRemoteNG.UI.Forms
             Runtime.MessageCollector = new MessageCollector(Windows.errorsForm);
             Runtime.WindowList = new WindowList();
 
-            
-            Startup.GetConnectionIcons();
             Windows.treePanel.Focus();
             ConnectionTree.TreeView = Windows.treeForm.tvConnections;
 
