@@ -3,7 +3,6 @@ using mRemoteNG.App.Update;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
-using mRemoteNG.Tree;
 using mRemoteNG.UI.Window;
 using System;
 using System.ComponentModel;
@@ -215,11 +214,11 @@ namespace mRemoteNG.App
         }
         private void LogApplicationData()
         {
-#if !PORTABLE
+            #if !PORTABLE
             Logger.Instance.InfoFormat("{0} {1} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion);
-#else
+            #else
             Logger.Instance.InfoFormat("{0} {1} {2} starting.", Application.ProductName, Application.ProductVersion, Language.strLabelPortableEdition);
-#endif
+            #endif
         }
         private void LogCmdLineArgs()
         {
