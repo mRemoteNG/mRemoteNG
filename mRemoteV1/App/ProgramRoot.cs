@@ -13,9 +13,7 @@ namespace mRemoteNG.App
         public static void Main(string[] args)
         {
             Startup.InitializeProgram();
-            var mainForm = new frmMain();
-            frmMain.Default = mainForm;
-            Application.Run(mainForm);
+            Application.Run(frmMain.Default);
         }
     }
 }

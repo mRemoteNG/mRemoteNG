@@ -24,6 +24,8 @@ namespace mRemoteNG.UI.Forms
 {
     public partial class frmMain
     {
+        private static readonly frmMain _defaultInstance = new frmMain();
+        public static frmMain Default => _defaultInstance;
         private static clipboardchangeEventHandler clipboardchangeEvent;
         private bool _inSizeMove = false;
         private bool _inMouseActivate = false;
@@ -36,44 +38,17 @@ namespace mRemoteNG.UI.Forms
         private ConnectionInfo _selectedConnection = null;
         public MiscTools.Fullscreen _fullscreen;
 
-        public frmMain()
+
+
+        private frmMain()
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
-			//Added to support default instance behavour in C#. This should be removed at the earliest opportunity.
-            if (_defaultInstance == null)
-                _defaultInstance = this;
 		}
 
-        #region Default Instance
-        private static frmMain _defaultInstance;
-		
-		/// <summary>
-		/// Added by the VB.Net to C# Converter to support default instance behavour in C#
-		/// </summary>
-        public static frmMain Default
-		{
-			get
-			{
-				if (_defaultInstance == null)
-				{
-					_defaultInstance = new frmMain();
-					_defaultInstance.FormClosed += defaultInstance_FormClosed;
-				}
-				
-				return _defaultInstance;
-			}
-			set
-			{
-				_defaultInstance = value;
-			}
-		}
-		
-		static void defaultInstance_FormClosed(object sender, FormClosedEventArgs e)
-		{
-			_defaultInstance = null;
-		}
-        #endregion
+        static frmMain()
+        {
+        }
 
         #region Properties
         public FormWindowState PreviousWindowState { get; set; }
