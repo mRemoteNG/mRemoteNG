@@ -26,6 +26,7 @@ namespace mRemoteNG.UI.Forms
             Runtime.FontOverride(this);
             SetImageListForListView();
             AddOptionsPagesToListView();
+            SetInitiallyActivatedPage();
         }
 
         private void AddOptionsPagesToListView()
@@ -38,11 +39,6 @@ namespace mRemoteNG.UI.Forms
                 item.Tag = page.GetType().Name;
                 lstOptionPages.Items.Add(item);
             }
-
-            // First one to be selected
-            pnlMain.Controls.Add(_pages.FirstOrDefault().Value);
-            pnlMain.Focus();
-            lstOptionPages.Items[0].Selected = true;
         }
 
         private void SetImageListForListView()
@@ -63,6 +59,11 @@ namespace mRemoteNG.UI.Forms
             _pages.Add(typeof(UpdatesPage).Name, new UpdatesPage());
             _pages.Add(typeof(ThemePage).Name, new ThemePage());
             _pages.Add(typeof(AdvancedPage).Name, new AdvancedPage());
+        }
+
+        private void SetInitiallyActivatedPage()
+        {
+            lstOptionPages.Items[0].Selected = true;
         }
 
         private void btnOK_Click(object sender, EventArgs e)
