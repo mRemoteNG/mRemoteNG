@@ -1,16 +1,15 @@
-﻿using System;
+﻿using mRemoteNG.App;
+using mRemoteNG.UI.Forms.OptionsPages;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
-using mRemoteNG.App;
-using mRemoteNG.UI.Forms.OptionsPages;
 
 namespace mRemoteNG.UI.Forms
 {
     public partial class frmOptions : Form
     {
-
         private Dictionary<string, OptionsPage> _pages;
         private ImageList _pageIconImageList;
 
@@ -21,31 +20,11 @@ namespace mRemoteNG.UI.Forms
 
         private void frmOptions_Load(object sender, EventArgs e)
         {
-            // Load all the controls in memory
             CompileListOfOptionsPages();
             Runtime.FontOverride(this);
             SetImageListForListView();
             AddOptionsPagesToListView();
             SetInitiallyActivatedPage();
-        }
-
-        private void AddOptionsPagesToListView()
-        {
-            foreach (var page in _pages.Select(keyValuePair => keyValuePair.Value))
-            {
-                page.LoadSettings();
-                _pageIconImageList.Images.Add(page.PageName, page.PageIcon);
-                var item = new ListViewItem(page.PageName, page.PageName);
-                item.Tag = page.GetType().Name;
-                lstOptionPages.Items.Add(item);
-            }
-        }
-
-        private void SetImageListForListView()
-        {
-            _pageIconImageList = new ImageList {ColorDepth = ColorDepth.Depth32Bit};
-            lstOptionPages.LargeImageList = _pageIconImageList;
-            lstOptionPages.SmallImageList = _pageIconImageList;
         }
 
         private void CompileListOfOptionsPages()
@@ -61,6 +40,25 @@ namespace mRemoteNG.UI.Forms
             _pages.Add(typeof(AdvancedPage).Name, new AdvancedPage());
         }
 
+        private void SetImageListForListView()
+        {
+            _pageIconImageList = new ImageList { ColorDepth = ColorDepth.Depth32Bit };
+            lstOptionPages.LargeImageList = _pageIconImageList;
+            lstOptionPages.SmallImageList = _pageIconImageList;
+        }
+
+        private void AddOptionsPagesToListView()
+        {
+            foreach (var page in _pages.Select(keyValuePair => keyValuePair.Value))
+            {
+                page.LoadSettings();
+                _pageIconImageList.Images.Add(page.PageName, page.PageIcon);
+                var item = new ListViewItem(page.PageName, page.PageName);
+                item.Tag = page.GetType().Name;
+                lstOptionPages.Items.Add(item);
+            }
+        }
+
         private void SetInitiallyActivatedPage()
         {
             lstOptionPages.Items[0].Selected = true;
@@ -72,24 +70,18 @@ namespace mRemoteNG.UI.Forms
             {
                 Debug.WriteLine(page.PageName);
                 page.SaveSettings();
-                
             }
             Debug.WriteLine(AppDomain.CurrentDomain.SetupInformation.ConfigurationFile);
-            mRemoteNG.Settings.Default.Save();
-
-           
+            Settings.Default.Save();
         }
 
         private void lstOptionPages_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-
             pnlMain.Controls.Clear();
 
             var page = _pages[(string) e.Item.Tag];
             if (page != null)
-            {
                 pnlMain.Controls.Add(page);
-            }
         }
     }
 }
