@@ -88,6 +88,7 @@
             this.lstOptionPages.FullRowSelect = true;
             this.lstOptionPages.GridLines = true;
             this.lstOptionPages.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lstOptionPages.HideSelection = false;
             this.lstOptionPages.LabelWrap = false;
             this.lstOptionPages.Location = new System.Drawing.Point(0, 0);
             this.lstOptionPages.MultiSelect = false;
