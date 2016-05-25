@@ -1,8 +1,6 @@
 using System.Collections.Generic;
 using System;
-using Microsoft.VisualBasic;
 using System.Windows.Forms;
-using mRemoteNG.My;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 
@@ -27,36 +25,36 @@ namespace mRemoteNG.UI.Window
 		{
 			get
 			{
-				if (string.IsNullOrEmpty(ipStart.Octet1))
+				if (string.IsNullOrEmpty(ipStart.Octet1.Text))
 				{
 					return false;
 				}
-				if (string.IsNullOrEmpty(ipStart.Octet2))
+				if (string.IsNullOrEmpty(ipStart.Octet2.Text))
 				{
 					return false;
 				}
-				if (string.IsNullOrEmpty(ipStart.Octet3))
+				if (string.IsNullOrEmpty(ipStart.Octet3.Text))
 				{
 					return false;
 				}
-				if (string.IsNullOrEmpty(ipStart.Octet4))
+				if (string.IsNullOrEmpty(ipStart.Octet4.Text))
 				{
 					return false;
 				}
 						
-				if (string.IsNullOrEmpty(ipEnd.Octet1))
+				if (string.IsNullOrEmpty(ipEnd.Octet1.Text))
 				{
 					return false;
 				}
-				if (string.IsNullOrEmpty(ipEnd.Octet2))
+				if (string.IsNullOrEmpty(ipEnd.Octet2.Text))
 				{
 					return false;
 				}
-				if (string.IsNullOrEmpty(ipEnd.Octet3))
+				if (string.IsNullOrEmpty(ipEnd.Octet3.Text))
 				{
 					return false;
 				}
-				if (string.IsNullOrEmpty(ipEnd.Octet4))
+				if (string.IsNullOrEmpty(ipEnd.Octet4.Text))
 				{
 					return false;
 				}
