@@ -322,8 +322,8 @@ Zorg ervoor dat u ofwel de Putty.exe in uw mRemoteNG directory staat(standaard: 
     <value>Het programmabestand PuTTY werd gevonden en is klaar voor gebruik</value>
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
-    <value>Om RDP goed te laten werken moet je minimaal Verbinding met extern bureaublad (Terminal Services Client) 6.1 geïnstalleerd te hebben. U kunt het hier downloaden: http://support.microsoft.com/kb/951616
-Als u RDP 6.1 heeft geïnstalleerd en de check nog niet lukt, probeer dan om handmatig mstscax.dll te registreren. Om dit uit te voeren opent u het dialoogvenster Uitvoeren (Start - Uitvoeren) en typ het volgende:  regsvr32 "c:\windows\system32\mstscax.dll" (Waarbij c: \ je systeem schijf is).
+    <value>Om RDP goed te laten werken moet je minimaal Verbinding met extern bureaublad (Terminal Services Client) 8.0 geïnstalleerd te hebben. U kunt het hier downloaden: https://support.microsoft.com/kb/2592687
+Als u RDP 8.0 heeft geïnstalleerd en de check nog niet lukt, probeer dan om handmatig mstscax.dll te registreren. Om dit uit te voeren opent u het dialoogvenster Uitvoeren (Start - Uitvoeren) en typ het volgende:  regsvr32 "c:\windows\system32\mstscax.dll" (Waarbij c: \ je systeem schijf is).
 Als u nog steeds niet in staat bent om de langs check te komen voor RDP raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">

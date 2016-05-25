@@ -319,8 +319,8 @@ Assicurarsi che Putty.exe sia contenuto nella cartella mRemoteNG (default: C:\Pr
     <value>L'eseguibile PuTTY è stato trovato e dovrebbe essere pronto per l'uso.</value>
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
-    <value>Per fare funzionare RDP correttamente è necessario avere installato Remote Desktop Connection (Terminal Services Client) versione 6.1, disponibile all'indirizzo http://support.microsoft.com/kb/951616/it
-Se RDP 6.1 è installato e questo controllo fallisce, tentare di registrare mstscax.dll manualmente. Aprire la schermata "Esegui" (combinazione tasti WIN+R) ed inserire il seguente testo: regsvr32 "C:\Windows\System32\mstscax.dll"
+    <value>Per fare funzionare RDP correttamente è necessario avere installato Remote Desktop Connection (Terminal Services Client) versione 8.0, disponibile all'indirizzo https://support.microsoft.com/kb/2592687/it
+Se RDP 8.0 è installato e questo controllo fallisce, tentare di registrare mstscax.dll manualmente. Aprire la schermata "Esegui" (combinazione tasti WIN+R) ed inserire il seguente testo: regsvr32 "C:\Windows\System32\mstscax.dll"
 Se il problema con RDP persiste consultare il forum di mRemoteNG all'indirizzo http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">

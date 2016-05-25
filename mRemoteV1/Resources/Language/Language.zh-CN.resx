@@ -318,8 +318,8 @@ Citrix ICA 客户端空间版本：{0}</value>
     <value>发现 PuTTY 执行文件。</value>
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
-    <value>为确保RDP工作征程，请您提前安装远程桌面连接（终端服务客户端）6.1版本。您可以在这里下载：http://support.microsoft.com/kb/951616
-如果您已经安装RDP 6.1，但依然检测失败，请尝试手动注册mstscax.dll文件。注册方法：打开运行对话框（开始菜单/运行），并输入以下命令：“regsvr32 "c:\windows\system32\mstscax.dll"”（C:\是您的系统所在驱动器）。
+    <value>为确保RDP工作征程，请您提前安装远程桌面连接（终端服务客户端）8.0版本。您可以在这里下载：https://support.microsoft.com/kb/2592687
+如果您已经安装RDP 8.0，但依然检测失败，请尝试手动注册mstscax.dll文件。注册方法：打开运行对话框（开始菜单/运行），并输入以下命令：“regsvr32 "c:\windows\system32\mstscax.dll"”（C:\是您的系统所在驱动器）。
 如果执行此操作后，依然无法正常使用RDP，请在mRemoteNG论坛中咨询，地址是：http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">

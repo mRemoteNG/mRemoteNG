@@ -322,8 +322,8 @@ Vennligst kontroller at du enten har putty.exe i mRemoteNG-mappen (standard: C:\
     <value>PuTTY ble funnet og er klar til bruk.</value>
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
-    <value>For at RDP skal fungere korrekt må du som et minimum ha Remote Desktop Connection (Terminal Services Client) 6.1 installert. Denne kan lastes ned herfra: http://support.microsoft.com/kb/951616
-Hvis du har RDP 6.1 installert og kontrollen fremdeles feiler, kan du prøve å registrere mstscax.dll manuelt. For å gjøre dette, åpne Kjør-dialogboksen (Start - Kjør) og skriv inn følgende: regsvr32 "c:\windows\system32\mstscax.dll" (der c:\ er systemdisken).
+    <value>For at RDP skal fungere korrekt må du som et minimum ha Remote Desktop Connection (Terminal Services Client) 8.0 installert. Denne kan lastes ned herfra: https://support.microsoft.com/kb/2592687
+Hvis du har RDP 8.0 installert og kontrollen fremdeles feiler, kan du prøve å registrere mstscax.dll manuelt. For å gjøre dette, åpne Kjør-dialogboksen (Start - Kjør) og skriv inn følgende: regsvr32 "c:\windows\system32\mstscax.dll" (der c:\ er systemdisken).
 Hvis du fremdeles har problemer med å få RDP til å fungere, vennligst konsulter mRemoteNG-forumet på http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">

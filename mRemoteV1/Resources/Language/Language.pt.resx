@@ -310,7 +310,7 @@
     <value>O executável PuTTY foi encontrado e está pronto para usar.</value>
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
-    <value>Para que o RDP funcione corretamente é necessário ter pelo menos o Remote Desktop Connection (Terminal Services Client) 6.1 instalado. Pode obtê-lo aqui: http://support.microsoft.com/kb/951616 se tiver RDP 6.1 instalado e a verificação ainda falhar, tente registrar manualmente o mstscax.dll. Para fazer isso abra a caixa de diálogo Executar (Iniciar - Executar) e digite o seguinte: regsvr32 "c:\windows\system32\mstscax.dll" (onde c:\ é sua unidade do sistema). Se você ainda tiver problemas para obter o RDP para trabalhar por favor consulte o fórum de mRemoteNG em http://forum.mremoteng.org/</value>
+    <value>Para que o RDP funcione corretamente é necessário ter pelo menos o Remote Desktop Connection (Terminal Services Client) 8.0 instalado. Pode obtê-lo aqui: https://support.microsoft.com/kb/2592687 se tiver RDP 8.0 instalado e a verificação ainda falhar, tente registrar manualmente o mstscax.dll. Para fazer isso abra a caixa de diálogo Executar (Iniciar - Executar) e digite o seguinte: regsvr32 "c:\windows\system32\mstscax.dll" (onde c:\ é sua unidade do sistema). Se você ainda tiver problemas para obter o RDP para trabalhar por favor consulte o fórum de mRemoteNG em http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
     <value>Todos os componentes RDP foram encontrados e parecem estar registrados corretamente. RDP versão {0}</value>

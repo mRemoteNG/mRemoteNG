@@ -315,7 +315,7 @@ Proszę upewnić się, że albo masz Putty.exe w katalogu mRemoteNG (domyślnie:
     <value>Aplikacja PuTTY została odnaleziona i powinna być gotowa do użytku.</value>
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
-    <value>Aby połączenia RDP działały poprawnie trzeba mieć zainstalowane Podłączanie Pulpitu Zdalnego (Klient Usług Terminalowych) w wersji 6.1. Można go pobrać ze strony: http://support.microsoft.com/kb/951616. Jeśli RDP 6.1 jest już zainstalowany i nadal nie działają połączenia RDP, spróbuj ręcznie zarejestrować plik mstscax.dll. Aby zarejestrować plik wybierz Uruchom (Start - Uruchom) i wprowadź w linii polecń: regsvr32 "c:\windows\system32\mstscax.dll" (gdzie c:\ jest dyskiem systemowym). Jeśli nadal masz problemy z połączeniem RDP skonsultuj się z mRemoteNG Forum na http://forum.mremoteng.org/</value>
+    <value>Aby połączenia RDP działały poprawnie trzeba mieć zainstalowane Podłączanie Pulpitu Zdalnego (Klient Usług Terminalowych) w wersji 8.0. Można go pobrać ze strony: https://support.microsoft.com/kb/2592687. Jeśli RDP 8.0 jest już zainstalowany i nadal nie działają połączenia RDP, spróbuj ręcznie zarejestrować plik mstscax.dll. Aby zarejestrować plik wybierz Uruchom (Start - Uruchom) i wprowadź w linii polecń: regsvr32 "c:\windows\system32\mstscax.dll" (gdzie c:\ jest dyskiem systemowym). Jeśli nadal masz problemy z połączeniem RDP skonsultuj się z mRemoteNG Forum na http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">
     <value>Wszystkie składniki RDP zostały znalezione i wydają się być poprawnie zarejestrowane. Wersja Podłączanie Pulpitu Zdalnego {0}</value>
