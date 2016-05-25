@@ -93,8 +93,9 @@ namespace mRemoteNG.App
             {
                 proccesses = Process.GetProcessesByName("virtscrl");
             }
-            catch
+            catch(Exception ex)
             {
+                Runtime.MessageCollector.AddExceptionMessage("Error in CheckLenovoAutoScrollUtility", ex);
             }
             if (proccesses.Length == 0)
             {
@@ -165,7 +166,6 @@ namespace mRemoteNG.App
         {
             string osVersion = string.Empty;
             string servicePack = string.Empty;
-            string osData = string.Empty;
 
             try
             {
@@ -179,7 +179,7 @@ namespace mRemoteNG.App
             {
                 Logger.Instance.WarnFormat("Error retrieving operating system information from WMI. {0}", ex.Message);
             }
-            osData = string.Join(" ", new string[] { osVersion, servicePack });
+            string osData = string.Join(" ", new string[] { osVersion, servicePack });
             return osData;
         }
         private string GetOSVersion(string osVersion, ManagementObject managementObject)
@@ -227,7 +227,7 @@ namespace mRemoteNG.App
         }
         private void LogCLRData()
         {
-            Logger.Instance.InfoFormat("Microsoft .NET CLR {0}", Environment.Version.ToString());
+            Logger.Instance.InfoFormat("Microsoft .NET CLR {0}", Environment.Version);
         }
         private void LogCultureData()
         {
@@ -237,7 +237,7 @@ namespace mRemoteNG.App
 
         public static void CreateConnectionsProvider()
         {
-            if (Settings.Default.UseSQLServer == true)
+            if (Settings.Default.UseSQLServer)
             {
                 SqlConnectionsProvider _sqlConnectionsProvider = new SqlConnectionsProvider();
             }

@@ -55,12 +55,11 @@ namespace mRemoteNG.App
 
         private static string BuildLogFilePath()
         {
-            string logFilePath = "";
-            #if !PORTABLE
-			logFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
-            #else
-            logFilePath = Application.StartupPath;
-            #endif
+#if !PORTABLE
+			string logFilePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), Application.ProductName);
+#else
+            string logFilePath = Application.StartupPath;
+#endif
             string logFileName = Path.ChangeExtension(Application.ProductName, ".log");
             string logFile = Path.Combine(logFilePath, logFileName);
             return logFile;

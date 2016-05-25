@@ -54,7 +54,7 @@ namespace mRemoteNG.Config.Settings
 				LoadExternalAppsFromXML();
                 SetAlwaysShowPanelTabs();
 						
-				if (mRemoteNG.Settings.Default.ResetToolbars == true)
+				if (mRemoteNG.Settings.Default.ResetToolbars)
                     SetToolbarsDefault();
 				else
                     LoadToolbarsFromSettings();
@@ -142,7 +142,7 @@ namespace mRemoteNG.Config.Settings
 
         private void SetKioskMode()
         {
-            if (mRemoteNG.Settings.Default.MainFormKiosk == true)
+            if (mRemoteNG.Settings.Default.MainFormKiosk)
             {
                 _MainForm.Fullscreen.Value = true;
                 _MainForm.mMenViewFullscreen.Checked = true;
