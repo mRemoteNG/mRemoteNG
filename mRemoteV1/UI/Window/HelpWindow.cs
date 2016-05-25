@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using mRemoteNG.App.Info;
 using mRemoteNG.My;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -10,77 +11,77 @@ namespace mRemoteNG.UI.Window
 	{
 				
         #region Form Init
-		internal System.Windows.Forms.TreeView tvIndex;
-		internal System.Windows.Forms.ImageList imgListHelp;
+		internal TreeView tvIndex;
+		internal ImageList imgListHelp;
 		private System.ComponentModel.Container components = null;
-		internal System.Windows.Forms.SplitContainer pnlSplitter;
-		internal System.Windows.Forms.Label lblDocName;
-		internal System.Windows.Forms.WebBrowser wbHelp;
+		internal SplitContainer pnlSplitter;
+		internal Label lblDocName;
+		internal WebBrowser wbHelp;
 				
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.Load += new System.EventHandler(Help_Load);
-			this.Shown += new System.EventHandler(Help_Shown);
-			System.Windows.Forms.TreeNode TreeNode1 = new System.Windows.Forms.TreeNode("Introduction");
-			System.Windows.Forms.TreeNode TreeNode2 = new System.Windows.Forms.TreeNode("Prerequisites");
-			System.Windows.Forms.TreeNode TreeNode3 = new System.Windows.Forms.TreeNode("Installation");
-			System.Windows.Forms.TreeNode TreeNode4 = new System.Windows.Forms.TreeNode("Configuration");
-			System.Windows.Forms.TreeNode TreeNode5 = new System.Windows.Forms.TreeNode("SQL Configuration");
-			System.Windows.Forms.TreeNode TreeNode6 = new System.Windows.Forms.TreeNode("Command-Line Switches");
-			System.Windows.Forms.TreeNode TreeNode7 = new System.Windows.Forms.TreeNode("Getting Started", new System.Windows.Forms.TreeNode[] {TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6});
-			System.Windows.Forms.TreeNode TreeNode8 = new System.Windows.Forms.TreeNode("Main Menu");
-			System.Windows.Forms.TreeNode TreeNode9 = new System.Windows.Forms.TreeNode("Connections");
-			System.Windows.Forms.TreeNode TreeNode10 = new System.Windows.Forms.TreeNode("Config");
-			System.Windows.Forms.TreeNode TreeNode11 = new System.Windows.Forms.TreeNode("Errors and Infos");
-			System.Windows.Forms.TreeNode TreeNode12 = new System.Windows.Forms.TreeNode("Save As / Export");
-			System.Windows.Forms.TreeNode TreeNode13 = new System.Windows.Forms.TreeNode("Sessions");
-			System.Windows.Forms.TreeNode TreeNode14 = new System.Windows.Forms.TreeNode("Screenshot Manager");
-			System.Windows.Forms.TreeNode TreeNode15 = new System.Windows.Forms.TreeNode("Connection");
-			System.Windows.Forms.TreeNode TreeNode16 = new System.Windows.Forms.TreeNode("Options");
-			System.Windows.Forms.TreeNode TreeNode17 = new System.Windows.Forms.TreeNode("Update");
-			System.Windows.Forms.TreeNode TreeNode18 = new System.Windows.Forms.TreeNode("SSH File Transfer");
-			System.Windows.Forms.TreeNode TreeNode19 = new System.Windows.Forms.TreeNode("Quick Connect");
-			System.Windows.Forms.TreeNode TreeNode20 = new System.Windows.Forms.TreeNode("Import From Active Directory");
-			System.Windows.Forms.TreeNode TreeNode21 = new System.Windows.Forms.TreeNode("External Applications");
-			System.Windows.Forms.TreeNode TreeNode22 = new System.Windows.Forms.TreeNode("Port Scan");
-			System.Windows.Forms.TreeNode TreeNode23 = new System.Windows.Forms.TreeNode("User Interface", new System.Windows.Forms.TreeNode[] {TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12, TreeNode13, TreeNode14, TreeNode15, TreeNode16, TreeNode17, TreeNode18, TreeNode19, TreeNode20, TreeNode21, TreeNode22});
-			System.Windows.Forms.TreeNode TreeNode24 = new System.Windows.Forms.TreeNode("Quick Reference");
-			System.Windows.Forms.TreeNode TreeNode25 = new System.Windows.Forms.TreeNode("Help", new System.Windows.Forms.TreeNode[] {TreeNode1, TreeNode7, TreeNode23, TreeNode24});
-			this.wbHelp = new System.Windows.Forms.WebBrowser();
-			this.wbHelp.DocumentTitleChanged += new System.EventHandler(this.wbHelp_DocumentTitleChanged);
-			this.tvIndex = new System.Windows.Forms.TreeView();
-			this.tvIndex.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.tvIndex_NodeMouseClick);
-			this.tvIndex.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvIndex_AfterSelect);
-			this.imgListHelp = new System.Windows.Forms.ImageList(this.components);
-			this.pnlSplitter = new System.Windows.Forms.SplitContainer();
-			this.lblDocName = new System.Windows.Forms.Label();
-			this.pnlSplitter.Panel1.SuspendLayout();
-			this.pnlSplitter.Panel2.SuspendLayout();
-			this.pnlSplitter.SuspendLayout();
-			this.SuspendLayout();
+			components = new System.ComponentModel.Container();
+			Load += new EventHandler(Help_Load);
+			Shown += new EventHandler(Help_Shown);
+			TreeNode TreeNode1 = new TreeNode("Introduction");
+			TreeNode TreeNode2 = new TreeNode("Prerequisites");
+			TreeNode TreeNode3 = new TreeNode("Installation");
+			TreeNode TreeNode4 = new TreeNode("Configuration");
+			TreeNode TreeNode5 = new TreeNode("SQL Configuration");
+			TreeNode TreeNode6 = new TreeNode("Command-Line Switches");
+			TreeNode TreeNode7 = new TreeNode("Getting Started", new TreeNode[] {TreeNode2, TreeNode3, TreeNode4, TreeNode5, TreeNode6});
+			TreeNode TreeNode8 = new TreeNode("Main Menu");
+			TreeNode TreeNode9 = new TreeNode("Connections");
+			TreeNode TreeNode10 = new TreeNode("Config");
+			TreeNode TreeNode11 = new TreeNode("Errors and Infos");
+			TreeNode TreeNode12 = new TreeNode("Save As / Export");
+			TreeNode TreeNode13 = new TreeNode("Sessions");
+			TreeNode TreeNode14 = new TreeNode("Screenshot Manager");
+			TreeNode TreeNode15 = new TreeNode("Connection");
+			TreeNode TreeNode16 = new TreeNode("Options");
+			TreeNode TreeNode17 = new TreeNode("Update");
+			TreeNode TreeNode18 = new TreeNode("SSH File Transfer");
+			TreeNode TreeNode19 = new TreeNode("Quick Connect");
+			TreeNode TreeNode20 = new TreeNode("Import From Active Directory");
+			TreeNode TreeNode21 = new TreeNode("External Applications");
+			TreeNode TreeNode22 = new TreeNode("Port Scan");
+			TreeNode TreeNode23 = new TreeNode("User Interface", new TreeNode[] {TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12, TreeNode13, TreeNode14, TreeNode15, TreeNode16, TreeNode17, TreeNode18, TreeNode19, TreeNode20, TreeNode21, TreeNode22});
+			TreeNode TreeNode24 = new TreeNode("Quick Reference");
+			TreeNode TreeNode25 = new TreeNode("Help", new TreeNode[] {TreeNode1, TreeNode7, TreeNode23, TreeNode24});
+			wbHelp = new WebBrowser();
+			wbHelp.DocumentTitleChanged += new EventHandler(wbHelp_DocumentTitleChanged);
+			tvIndex = new TreeView();
+			tvIndex.NodeMouseClick += new TreeNodeMouseClickEventHandler(tvIndex_NodeMouseClick);
+			tvIndex.AfterSelect += new TreeViewEventHandler(tvIndex_AfterSelect);
+			imgListHelp = new ImageList(components);
+			pnlSplitter = new SplitContainer();
+			lblDocName = new Label();
+			pnlSplitter.Panel1.SuspendLayout();
+			pnlSplitter.Panel2.SuspendLayout();
+			pnlSplitter.SuspendLayout();
+			SuspendLayout();
 			//
 			//wbHelp
 			//
-			this.wbHelp.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.wbHelp.Location = new System.Drawing.Point(1, 36);
-			this.wbHelp.MinimumSize = new System.Drawing.Size(20, 20);
-			this.wbHelp.Name = "wbHelp";
-			this.wbHelp.ScriptErrorsSuppressed = true;
-			this.wbHelp.Size = new System.Drawing.Size(327, 286);
-			this.wbHelp.TabIndex = 1;
+			wbHelp.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) 
+			                 | AnchorStyles.Left) 
+			                | AnchorStyles.Right;
+			wbHelp.Location = new System.Drawing.Point(1, 36);
+			wbHelp.MinimumSize = new System.Drawing.Size(20, 20);
+			wbHelp.Name = "wbHelp";
+			wbHelp.ScriptErrorsSuppressed = true;
+			wbHelp.Size = new System.Drawing.Size(327, 286);
+			wbHelp.TabIndex = 1;
 			//
 			//tvIndex
 			//
-			this.tvIndex.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.tvIndex.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.tvIndex.HideSelection = false;
-			this.tvIndex.Location = new System.Drawing.Point(1, 1);
-			this.tvIndex.Name = "tvIndex";
+			tvIndex.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) 
+			                  | AnchorStyles.Left) 
+			                 | AnchorStyles.Right;
+			tvIndex.BorderStyle = BorderStyle.None;
+			tvIndex.HideSelection = false;
+			tvIndex.Location = new System.Drawing.Point(1, 1);
+			tvIndex.Name = "tvIndex";
 			TreeNode1.Name = "Node0";
 			TreeNode1.Tag = "Introduction";
 			TreeNode1.Text = "Introduction";
@@ -153,64 +154,64 @@ namespace mRemoteNG.UI.Window
 			TreeNode24.Text = "Quick Reference";
 			TreeNode25.Name = "Node0";
 			TreeNode25.Text = "Help";
-			this.tvIndex.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {TreeNode25});
-			this.tvIndex.ShowRootLines = false;
-			this.tvIndex.Size = new System.Drawing.Size(207, 321);
-			this.tvIndex.TabIndex = 0;
+			tvIndex.Nodes.AddRange(new TreeNode[] {TreeNode25});
+			tvIndex.ShowRootLines = false;
+			tvIndex.Size = new System.Drawing.Size(207, 321);
+			tvIndex.TabIndex = 0;
 			//
 			//imgListHelp
 			//
-			this.imgListHelp.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit;
-			this.imgListHelp.ImageSize = new System.Drawing.Size(16, 16);
-			this.imgListHelp.TransparentColor = System.Drawing.Color.Transparent;
+			imgListHelp.ColorDepth = ColorDepth.Depth32Bit;
+			imgListHelp.ImageSize = new System.Drawing.Size(16, 16);
+			imgListHelp.TransparentColor = System.Drawing.Color.Transparent;
 			//
 			//pnlSplitter
 			//
-			this.pnlSplitter.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.pnlSplitter.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
-			this.pnlSplitter.Location = new System.Drawing.Point(0, 0);
-			this.pnlSplitter.Name = "pnlSplitter";
+			pnlSplitter.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom) 
+			                      | AnchorStyles.Left) 
+			                     | AnchorStyles.Right;
+			pnlSplitter.FixedPanel = FixedPanel.Panel1;
+			pnlSplitter.Location = new System.Drawing.Point(0, 0);
+			pnlSplitter.Name = "pnlSplitter";
 			//
 			//pnlSplitter.Panel1
 			//
-			this.pnlSplitter.Panel1.Controls.Add(this.tvIndex);
+			pnlSplitter.Panel1.Controls.Add(tvIndex);
 			//
 			//pnlSplitter.Panel2
 			//
-			this.pnlSplitter.Panel2.Controls.Add(this.lblDocName);
-			this.pnlSplitter.Panel2.Controls.Add(this.wbHelp);
-			this.pnlSplitter.Size = new System.Drawing.Size(542, 323);
-			this.pnlSplitter.SplitterDistance = 209;
-			this.pnlSplitter.TabIndex = 2;
+			pnlSplitter.Panel2.Controls.Add(lblDocName);
+			pnlSplitter.Panel2.Controls.Add(wbHelp);
+			pnlSplitter.Size = new System.Drawing.Size(542, 323);
+			pnlSplitter.SplitterDistance = 209;
+			pnlSplitter.TabIndex = 2;
 			//
 			//lblDocName
 			//
-			this.lblDocName.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.lblDocName.BackColor = System.Drawing.Color.DimGray;
-			this.lblDocName.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (12.0F), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
-			this.lblDocName.ForeColor = System.Drawing.Color.White;
-			this.lblDocName.Location = new System.Drawing.Point(1, 1);
-			this.lblDocName.Name = "lblDocName";
-			this.lblDocName.Size = new System.Drawing.Size(327, 35);
-			this.lblDocName.TabIndex = 2;
-			this.lblDocName.Text = "Introduction";
-			this.lblDocName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			lblDocName.Anchor = (AnchorStyles.Top | AnchorStyles.Left) 
+			                    | AnchorStyles.Right;
+			lblDocName.BackColor = System.Drawing.Color.DimGray;
+			lblDocName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.0F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
+			lblDocName.ForeColor = System.Drawing.Color.White;
+			lblDocName.Location = new System.Drawing.Point(1, 1);
+			lblDocName.Name = "lblDocName";
+			lblDocName.Size = new System.Drawing.Size(327, 35);
+			lblDocName.TabIndex = 2;
+			lblDocName.Text = "Introduction";
+			lblDocName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			//
 			//Help
 			//
-			this.ClientSize = new System.Drawing.Size(542, 323);
-			this.Controls.Add(this.pnlSplitter);
-			this.Icon = Resources.Help_Icon;
-			this.Name = "Help";
-			this.TabText = "Help";
-			this.Text = "Help";
-			this.pnlSplitter.Panel1.ResumeLayout(false);
-			this.pnlSplitter.Panel2.ResumeLayout(false);
-			this.pnlSplitter.ResumeLayout(false);
-			this.ResumeLayout(false);
+			ClientSize = new System.Drawing.Size(542, 323);
+			Controls.Add(pnlSplitter);
+			Icon = Resources.Help_Icon;
+			Name = "Help";
+			TabText = "Help";
+			Text = "Help";
+			pnlSplitter.Panel1.ResumeLayout(false);
+			pnlSplitter.Panel2.ResumeLayout(false);
+			pnlSplitter.ResumeLayout(false);
+			ResumeLayout(false);
 					
 		}
         #endregion
@@ -218,13 +219,13 @@ namespace mRemoteNG.UI.Window
         #region Public Methods
 		public HelpWindow(DockContent Panel)
 		{
-			this.WindowType = WindowType.Help;
-			this.DockPnl = Panel;
-			this.InitializeComponent();
+			WindowType = WindowType.Help;
+			DockPnl = Panel;
+			InitializeComponent();
 					
-			this.FillImageList();
-			this.tvIndex.ImageList = this.imgListHelp;
-			this.SetImages(this.tvIndex.Nodes[0]);
+			FillImageList();
+			tvIndex.ImageList = imgListHelp;
+			SetImages(tvIndex.Nodes[0]);
 		}
         #endregion
 				
@@ -241,29 +242,29 @@ namespace mRemoteNG.UI.Window
 			wbHelp.AllowWebBrowserDrop = false;
 		}
 				
-		private void tvIndex_NodeMouseClick(object sender, System.Windows.Forms.TreeNodeMouseClickEventArgs e)
+		private void tvIndex_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
 		{
-			this.tvIndex.SelectedNode = e.Node;
+			tvIndex.SelectedNode = e.Node;
 		}
 				
-		private void tvIndex_AfterSelect(System.Object sender, System.Windows.Forms.TreeViewEventArgs e)
+		private void tvIndex_AfterSelect(Object sender, TreeViewEventArgs e)
 		{
 			if (((string)e.Node.Tag) != "")
 			{
-				this.wbHelp.Navigate((new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\Help\\" + Convert.ToString(e.Node.Tag) +".htm");
+				wbHelp.Navigate(GeneralAppInfo.HomePath + "\\Help\\" + Convert.ToString(e.Node.Tag) +".htm");
 			}
 		}
 				
-		private void wbHelp_DocumentTitleChanged(object sender, System.EventArgs e)
+		private void wbHelp_DocumentTitleChanged(object sender, EventArgs e)
 		{
-			this.lblDocName.Text = this.wbHelp.DocumentTitle;
+			lblDocName.Text = wbHelp.DocumentTitle;
 		}
 				
 		private void FillImageList()
 		{
-			this.imgListHelp.Images.Add("File", Resources.Page);
-			this.imgListHelp.Images.Add("Folder", Resources.Folder);
-			this.imgListHelp.Images.Add("Help", Resources.Help);
+			imgListHelp.Images.Add("File", Resources.Page);
+			imgListHelp.Images.Add("Folder", Resources.Folder);
+			imgListHelp.Images.Add("Help", Resources.Help);
 		}
 				
 		private void SetImages(TreeNode node)

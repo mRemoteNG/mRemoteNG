@@ -14,7 +14,7 @@ namespace mRemoteNG.App.Info
 		public static readonly string UrlDonate = "http://donate.mremoteng.org/";
 		public static readonly string UrlForum = "http://forum.mremoteng.org/";
 		public static readonly string UrlBugs = "http://bugs.mremoteng.org/";
-	    private static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+	    public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 		public static readonly string EncryptionKey = "mR3m";
 		public static string ReportingFilePath = "";
 		public static readonly string PuttyPath = HomePath + "\\PuTTYNG.exe";

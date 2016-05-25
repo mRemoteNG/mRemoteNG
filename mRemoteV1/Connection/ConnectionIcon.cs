@@ -2,6 +2,7 @@ using System;
 using Microsoft.VisualBasic;
 using System.ComponentModel;
 using mRemoteNG.App;
+using mRemoteNG.App.Info;
 
 
 namespace mRemoteNG.Connection
@@ -29,7 +30,7 @@ namespace mRemoteNG.Connection
 		{
 			try
 			{
-				string IconPath = (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\Icons\\" + IconName +".ico";
+				string IconPath = GeneralAppInfo.HomePath + "\\Icons\\" + IconName +".ico";
 				
 				if (System.IO.File.Exists(IconPath))
 				{

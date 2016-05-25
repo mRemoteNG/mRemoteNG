@@ -4,9 +4,8 @@ using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 using mRemoteNG.App;
 using System.Threading;
+using mRemoteNG.App.Info;
 using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.My;
-
 
 namespace mRemoteNG.UI.Window
 {
@@ -39,353 +38,353 @@ namespace mRemoteNG.UI.Window
 				
 		private void InitializeComponent()
 		{
-			this.pnlCheck1 = new System.Windows.Forms.Panel();
-			this.Load += new EventHandler(ComponentsCheck_Load);
-			this.txtCheck1 = new System.Windows.Forms.TextBox();
-			this.lblCheck1 = new System.Windows.Forms.Label();
-			this.pbCheck1 = new System.Windows.Forms.PictureBox();
-			this.pnlCheck2 = new System.Windows.Forms.Panel();
-			this.txtCheck2 = new System.Windows.Forms.TextBox();
-			this.lblCheck2 = new System.Windows.Forms.Label();
-			this.pbCheck2 = new System.Windows.Forms.PictureBox();
-			this.pnlCheck3 = new System.Windows.Forms.Panel();
-			this.txtCheck3 = new System.Windows.Forms.TextBox();
-			this.lblCheck3 = new System.Windows.Forms.Label();
-			this.pbCheck3 = new System.Windows.Forms.PictureBox();
-			this.pnlCheck4 = new System.Windows.Forms.Panel();
-			this.txtCheck4 = new System.Windows.Forms.TextBox();
-			this.lblCheck4 = new System.Windows.Forms.Label();
-			this.pbCheck4 = new System.Windows.Forms.PictureBox();
-			this.pnlCheck5 = new System.Windows.Forms.Panel();
-			this.txtCheck5 = new System.Windows.Forms.TextBox();
-			this.lblCheck5 = new System.Windows.Forms.Label();
-			this.pbCheck5 = new System.Windows.Forms.PictureBox();
-			this.btnCheckAgain = new System.Windows.Forms.Button();
-			this.btnCheckAgain.Click += new EventHandler(this.btnCheckAgain_Click);
-			this.chkAlwaysShow = new System.Windows.Forms.CheckBox();
-			this.chkAlwaysShow.CheckedChanged += new EventHandler(this.chkAlwaysShow_CheckedChanged);
-			this.pnlChecks = new System.Windows.Forms.Panel();
-			this.pnlCheck1.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize) this.pbCheck1).BeginInit();
-			this.pnlCheck2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize) this.pbCheck2).BeginInit();
-			this.pnlCheck3.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize) this.pbCheck3).BeginInit();
-			this.pnlCheck4.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize) this.pbCheck4).BeginInit();
-			this.pnlCheck5.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize) this.pbCheck5).BeginInit();
-			this.pnlChecks.SuspendLayout();
-			this.SuspendLayout();
+			pnlCheck1 = new System.Windows.Forms.Panel();
+			Load += new EventHandler(ComponentsCheck_Load);
+			txtCheck1 = new System.Windows.Forms.TextBox();
+			lblCheck1 = new System.Windows.Forms.Label();
+			pbCheck1 = new System.Windows.Forms.PictureBox();
+			pnlCheck2 = new System.Windows.Forms.Panel();
+			txtCheck2 = new System.Windows.Forms.TextBox();
+			lblCheck2 = new System.Windows.Forms.Label();
+			pbCheck2 = new System.Windows.Forms.PictureBox();
+			pnlCheck3 = new System.Windows.Forms.Panel();
+			txtCheck3 = new System.Windows.Forms.TextBox();
+			lblCheck3 = new System.Windows.Forms.Label();
+			pbCheck3 = new System.Windows.Forms.PictureBox();
+			pnlCheck4 = new System.Windows.Forms.Panel();
+			txtCheck4 = new System.Windows.Forms.TextBox();
+			lblCheck4 = new System.Windows.Forms.Label();
+			pbCheck4 = new System.Windows.Forms.PictureBox();
+			pnlCheck5 = new System.Windows.Forms.Panel();
+			txtCheck5 = new System.Windows.Forms.TextBox();
+			lblCheck5 = new System.Windows.Forms.Label();
+			pbCheck5 = new System.Windows.Forms.PictureBox();
+			btnCheckAgain = new System.Windows.Forms.Button();
+			btnCheckAgain.Click += new EventHandler(btnCheckAgain_Click);
+			chkAlwaysShow = new System.Windows.Forms.CheckBox();
+			chkAlwaysShow.CheckedChanged += new EventHandler(chkAlwaysShow_CheckedChanged);
+			pnlChecks = new System.Windows.Forms.Panel();
+			pnlCheck1.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize) pbCheck1).BeginInit();
+			pnlCheck2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize) pbCheck2).BeginInit();
+			pnlCheck3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize) pbCheck3).BeginInit();
+			pnlCheck4.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize) pbCheck4).BeginInit();
+			pnlCheck5.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize) pbCheck5).BeginInit();
+			pnlChecks.SuspendLayout();
+			SuspendLayout();
 			//
 			//pnlCheck1
 			//
-			this.pnlCheck1.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			pnlCheck1.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.pnlCheck1.Controls.Add(this.txtCheck1);
-			this.pnlCheck1.Controls.Add(this.lblCheck1);
-			this.pnlCheck1.Controls.Add(this.pbCheck1);
-			this.pnlCheck1.Location = new Point(3, 3);
-			this.pnlCheck1.Name = "pnlCheck1";
-			this.pnlCheck1.Size = new Size(562, 130);
-			this.pnlCheck1.TabIndex = 10;
-			this.pnlCheck1.Visible = false;
+			pnlCheck1.Controls.Add(txtCheck1);
+			pnlCheck1.Controls.Add(lblCheck1);
+			pnlCheck1.Controls.Add(pbCheck1);
+			pnlCheck1.Location = new Point(3, 3);
+			pnlCheck1.Name = "pnlCheck1";
+			pnlCheck1.Size = new Size(562, 130);
+			pnlCheck1.TabIndex = 10;
+			pnlCheck1.Visible = false;
 			//
 			//txtCheck1
 			//
-			this.txtCheck1.Anchor = ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			txtCheck1.Anchor = ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.txtCheck1.BackColor = SystemColors.Control;
-			this.txtCheck1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.txtCheck1.Location = new Point(129, 29);
-			this.txtCheck1.Multiline = true;
-			this.txtCheck1.Name = "txtCheck1";
-			this.txtCheck1.ReadOnly = true;
-			this.txtCheck1.Size = new Size(430, 97);
-			this.txtCheck1.TabIndex = 2;
+			txtCheck1.BackColor = SystemColors.Control;
+			txtCheck1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			txtCheck1.Location = new Point(129, 29);
+			txtCheck1.Multiline = true;
+			txtCheck1.Name = "txtCheck1";
+			txtCheck1.ReadOnly = true;
+			txtCheck1.Size = new Size(430, 97);
+			txtCheck1.TabIndex = 2;
 			//
 			//lblCheck1
 			//
-			this.lblCheck1.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			lblCheck1.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.lblCheck1.Font = new Font("Microsoft Sans Serif", 12.0F, FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
-			this.lblCheck1.ForeColor = SystemColors.ControlText;
-			this.lblCheck1.Location = new Point(108, 3);
-			this.lblCheck1.Name = "lblCheck1";
-			this.lblCheck1.Size = new Size(451, 23);
-			this.lblCheck1.TabIndex = 1;
-			this.lblCheck1.Text = "RDP check succeeded!";
+			lblCheck1.Font = new Font("Microsoft Sans Serif", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
+			lblCheck1.ForeColor = SystemColors.ControlText;
+			lblCheck1.Location = new Point(108, 3);
+			lblCheck1.Name = "lblCheck1";
+			lblCheck1.Size = new Size(451, 23);
+			lblCheck1.TabIndex = 1;
+			lblCheck1.Text = "RDP check succeeded!";
 			//
 			//pbCheck1
 			//
-			this.pbCheck1.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			pbCheck1.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left;
-			this.pbCheck1.Location = new Point(3, 3);
-			this.pbCheck1.Name = "pbCheck1";
-			this.pbCheck1.Size = new Size(72, 123);
-			this.pbCheck1.TabIndex = 0;
-			this.pbCheck1.TabStop = false;
+			pbCheck1.Location = new Point(3, 3);
+			pbCheck1.Name = "pbCheck1";
+			pbCheck1.Size = new Size(72, 123);
+			pbCheck1.TabIndex = 0;
+			pbCheck1.TabStop = false;
 			//
 			//pnlCheck2
 			//
-			this.pnlCheck2.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			pnlCheck2.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.pnlCheck2.Controls.Add(this.txtCheck2);
-			this.pnlCheck2.Controls.Add(this.lblCheck2);
-			this.pnlCheck2.Controls.Add(this.pbCheck2);
-			this.pnlCheck2.Location = new Point(3, 139);
-			this.pnlCheck2.Name = "pnlCheck2";
-			this.pnlCheck2.Size = new Size(562, 130);
-			this.pnlCheck2.TabIndex = 20;
-			this.pnlCheck2.Visible = false;
+			pnlCheck2.Controls.Add(txtCheck2);
+			pnlCheck2.Controls.Add(lblCheck2);
+			pnlCheck2.Controls.Add(pbCheck2);
+			pnlCheck2.Location = new Point(3, 139);
+			pnlCheck2.Name = "pnlCheck2";
+			pnlCheck2.Size = new Size(562, 130);
+			pnlCheck2.TabIndex = 20;
+			pnlCheck2.Visible = false;
 			//
 			//txtCheck2
 			//
-			this.txtCheck2.Anchor = ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			txtCheck2.Anchor = ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.txtCheck2.BackColor = SystemColors.Control;
-			this.txtCheck2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.txtCheck2.Location = new Point(129, 29);
-			this.txtCheck2.Multiline = true;
-			this.txtCheck2.Name = "txtCheck2";
-			this.txtCheck2.ReadOnly = true;
-			this.txtCheck2.Size = new Size(430, 97);
-			this.txtCheck2.TabIndex = 2;
+			txtCheck2.BackColor = SystemColors.Control;
+			txtCheck2.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			txtCheck2.Location = new Point(129, 29);
+			txtCheck2.Multiline = true;
+			txtCheck2.Name = "txtCheck2";
+			txtCheck2.ReadOnly = true;
+			txtCheck2.Size = new Size(430, 97);
+			txtCheck2.TabIndex = 2;
 			//
 			//lblCheck2
 			//
-			this.lblCheck2.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			lblCheck2.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.lblCheck2.Font = new Font("Microsoft Sans Serif", 12.0F, FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
-			this.lblCheck2.Location = new Point(112, 3);
-			this.lblCheck2.Name = "lblCheck2";
-			this.lblCheck2.Size = new Size(447, 23);
-			this.lblCheck2.TabIndex = 1;
-			this.lblCheck2.Text = "RDP check succeeded!";
+			lblCheck2.Font = new Font("Microsoft Sans Serif", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
+			lblCheck2.Location = new Point(112, 3);
+			lblCheck2.Name = "lblCheck2";
+			lblCheck2.Size = new Size(447, 23);
+			lblCheck2.TabIndex = 1;
+			lblCheck2.Text = "RDP check succeeded!";
 			//
 			//pbCheck2
 			//
-			this.pbCheck2.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			pbCheck2.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left;
-			this.pbCheck2.Location = new Point(3, 3);
-			this.pbCheck2.Name = "pbCheck2";
-			this.pbCheck2.Size = new Size(72, 123);
-			this.pbCheck2.TabIndex = 0;
-			this.pbCheck2.TabStop = false;
+			pbCheck2.Location = new Point(3, 3);
+			pbCheck2.Name = "pbCheck2";
+			pbCheck2.Size = new Size(72, 123);
+			pbCheck2.TabIndex = 0;
+			pbCheck2.TabStop = false;
 			//
 			//pnlCheck3
 			//
-			this.pnlCheck3.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			pnlCheck3.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.pnlCheck3.Controls.Add(this.txtCheck3);
-			this.pnlCheck3.Controls.Add(this.lblCheck3);
-			this.pnlCheck3.Controls.Add(this.pbCheck3);
-			this.pnlCheck3.Location = new Point(3, 275);
-			this.pnlCheck3.Name = "pnlCheck3";
-			this.pnlCheck3.Size = new Size(562, 130);
-			this.pnlCheck3.TabIndex = 30;
-			this.pnlCheck3.Visible = false;
+			pnlCheck3.Controls.Add(txtCheck3);
+			pnlCheck3.Controls.Add(lblCheck3);
+			pnlCheck3.Controls.Add(pbCheck3);
+			pnlCheck3.Location = new Point(3, 275);
+			pnlCheck3.Name = "pnlCheck3";
+			pnlCheck3.Size = new Size(562, 130);
+			pnlCheck3.TabIndex = 30;
+			pnlCheck3.Visible = false;
 			//
 			//txtCheck3
 			//
-			this.txtCheck3.Anchor = ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			txtCheck3.Anchor = ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.txtCheck3.BackColor = SystemColors.Control;
-			this.txtCheck3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.txtCheck3.Location = new Point(129, 29);
-			this.txtCheck3.Multiline = true;
-			this.txtCheck3.Name = "txtCheck3";
-			this.txtCheck3.ReadOnly = true;
-			this.txtCheck3.Size = new Size(430, 97);
-			this.txtCheck3.TabIndex = 2;
+			txtCheck3.BackColor = SystemColors.Control;
+			txtCheck3.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			txtCheck3.Location = new Point(129, 29);
+			txtCheck3.Multiline = true;
+			txtCheck3.Name = "txtCheck3";
+			txtCheck3.ReadOnly = true;
+			txtCheck3.Size = new Size(430, 97);
+			txtCheck3.TabIndex = 2;
 			//
 			//lblCheck3
 			//
-			this.lblCheck3.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			lblCheck3.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.lblCheck3.Font = new Font("Microsoft Sans Serif", 12.0F, FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
-			this.lblCheck3.Location = new Point(112, 3);
-			this.lblCheck3.Name = "lblCheck3";
-			this.lblCheck3.Size = new Size(447, 23);
-			this.lblCheck3.TabIndex = 1;
-			this.lblCheck3.Text = "RDP check succeeded!";
+			lblCheck3.Font = new Font("Microsoft Sans Serif", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
+			lblCheck3.Location = new Point(112, 3);
+			lblCheck3.Name = "lblCheck3";
+			lblCheck3.Size = new Size(447, 23);
+			lblCheck3.TabIndex = 1;
+			lblCheck3.Text = "RDP check succeeded!";
 			//
 			//pbCheck3
 			//
-			this.pbCheck3.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			pbCheck3.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left;
-			this.pbCheck3.Location = new Point(3, 3);
-			this.pbCheck3.Name = "pbCheck3";
-			this.pbCheck3.Size = new Size(72, 123);
-			this.pbCheck3.TabIndex = 0;
-			this.pbCheck3.TabStop = false;
+			pbCheck3.Location = new Point(3, 3);
+			pbCheck3.Name = "pbCheck3";
+			pbCheck3.Size = new Size(72, 123);
+			pbCheck3.TabIndex = 0;
+			pbCheck3.TabStop = false;
 			//
 			//pnlCheck4
 			//
-			this.pnlCheck4.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			pnlCheck4.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.pnlCheck4.Controls.Add(this.txtCheck4);
-			this.pnlCheck4.Controls.Add(this.lblCheck4);
-			this.pnlCheck4.Controls.Add(this.pbCheck4);
-			this.pnlCheck4.Location = new Point(3, 411);
-			this.pnlCheck4.Name = "pnlCheck4";
-			this.pnlCheck4.Size = new Size(562, 130);
-			this.pnlCheck4.TabIndex = 40;
-			this.pnlCheck4.Visible = false;
+			pnlCheck4.Controls.Add(txtCheck4);
+			pnlCheck4.Controls.Add(lblCheck4);
+			pnlCheck4.Controls.Add(pbCheck4);
+			pnlCheck4.Location = new Point(3, 411);
+			pnlCheck4.Name = "pnlCheck4";
+			pnlCheck4.Size = new Size(562, 130);
+			pnlCheck4.TabIndex = 40;
+			pnlCheck4.Visible = false;
 			//
 			//txtCheck4
 			//
-			this.txtCheck4.Anchor = ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			txtCheck4.Anchor = ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.txtCheck4.BackColor = SystemColors.Control;
-			this.txtCheck4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.txtCheck4.Location = new Point(129, 30);
-			this.txtCheck4.Multiline = true;
-			this.txtCheck4.Name = "txtCheck4";
-			this.txtCheck4.ReadOnly = true;
-			this.txtCheck4.Size = new Size(430, 97);
-			this.txtCheck4.TabIndex = 2;
+			txtCheck4.BackColor = SystemColors.Control;
+			txtCheck4.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			txtCheck4.Location = new Point(129, 30);
+			txtCheck4.Multiline = true;
+			txtCheck4.Name = "txtCheck4";
+			txtCheck4.ReadOnly = true;
+			txtCheck4.Size = new Size(430, 97);
+			txtCheck4.TabIndex = 2;
 			//
 			//lblCheck4
 			//
-			this.lblCheck4.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			lblCheck4.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.lblCheck4.Font = new Font("Microsoft Sans Serif", 12.0F, FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
-			this.lblCheck4.Location = new Point(112, 3);
-			this.lblCheck4.Name = "lblCheck4";
-			this.lblCheck4.Size = new Size(447, 23);
-			this.lblCheck4.TabIndex = 1;
-			this.lblCheck4.Text = "RDP check succeeded!";
+			lblCheck4.Font = new Font("Microsoft Sans Serif", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
+			lblCheck4.Location = new Point(112, 3);
+			lblCheck4.Name = "lblCheck4";
+			lblCheck4.Size = new Size(447, 23);
+			lblCheck4.TabIndex = 1;
+			lblCheck4.Text = "RDP check succeeded!";
 			//
 			//pbCheck4
 			//
-			this.pbCheck4.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			pbCheck4.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left;
-			this.pbCheck4.Location = new Point(3, 3);
-			this.pbCheck4.Name = "pbCheck4";
-			this.pbCheck4.Size = new Size(72, 123);
-			this.pbCheck4.TabIndex = 0;
-			this.pbCheck4.TabStop = false;
+			pbCheck4.Location = new Point(3, 3);
+			pbCheck4.Name = "pbCheck4";
+			pbCheck4.Size = new Size(72, 123);
+			pbCheck4.TabIndex = 0;
+			pbCheck4.TabStop = false;
 			//
 			//pnlCheck5
 			//
-			this.pnlCheck5.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			pnlCheck5.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.pnlCheck5.Controls.Add(this.txtCheck5);
-			this.pnlCheck5.Controls.Add(this.lblCheck5);
-			this.pnlCheck5.Controls.Add(this.pbCheck5);
-			this.pnlCheck5.Location = new Point(3, 547);
-			this.pnlCheck5.Name = "pnlCheck5";
-			this.pnlCheck5.Size = new Size(562, 130);
-			this.pnlCheck5.TabIndex = 50;
-			this.pnlCheck5.Visible = false;
+			pnlCheck5.Controls.Add(txtCheck5);
+			pnlCheck5.Controls.Add(lblCheck5);
+			pnlCheck5.Controls.Add(pbCheck5);
+			pnlCheck5.Location = new Point(3, 547);
+			pnlCheck5.Name = "pnlCheck5";
+			pnlCheck5.Size = new Size(562, 130);
+			pnlCheck5.TabIndex = 50;
+			pnlCheck5.Visible = false;
 			//
 			//txtCheck5
 			//
-			this.txtCheck5.Anchor = ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			txtCheck5.Anchor = ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.txtCheck5.BackColor = SystemColors.Control;
-			this.txtCheck5.BorderStyle = System.Windows.Forms.BorderStyle.None;
-			this.txtCheck5.Location = new Point(129, 29);
-			this.txtCheck5.Multiline = true;
-			this.txtCheck5.Name = "txtCheck5";
-			this.txtCheck5.ReadOnly = true;
-			this.txtCheck5.Size = new Size(430, 97);
-			this.txtCheck5.TabIndex = 2;
+			txtCheck5.BackColor = SystemColors.Control;
+			txtCheck5.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			txtCheck5.Location = new Point(129, 29);
+			txtCheck5.Multiline = true;
+			txtCheck5.Name = "txtCheck5";
+			txtCheck5.ReadOnly = true;
+			txtCheck5.Size = new Size(430, 97);
+			txtCheck5.TabIndex = 2;
 			//
 			//lblCheck5
 			//
-			this.lblCheck5.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+			lblCheck5.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.lblCheck5.Font = new Font("Microsoft Sans Serif", 12.0F, FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
-			this.lblCheck5.Location = new Point(112, 3);
-			this.lblCheck5.Name = "lblCheck5";
-			this.lblCheck5.Size = new Size(447, 23);
-			this.lblCheck5.TabIndex = 1;
-			this.lblCheck5.Text = "RDP check succeeded!";
+			lblCheck5.Font = new Font("Microsoft Sans Serif", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
+			lblCheck5.Location = new Point(112, 3);
+			lblCheck5.Name = "lblCheck5";
+			lblCheck5.Size = new Size(447, 23);
+			lblCheck5.TabIndex = 1;
+			lblCheck5.Text = "RDP check succeeded!";
 			//
 			//pbCheck5
 			//
-			this.pbCheck5.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			pbCheck5.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left;
-			this.pbCheck5.Location = new Point(3, 3);
-			this.pbCheck5.Name = "pbCheck5";
-			this.pbCheck5.Size = new Size(72, 123);
-			this.pbCheck5.TabIndex = 0;
-			this.pbCheck5.TabStop = false;
+			pbCheck5.Location = new Point(3, 3);
+			pbCheck5.Name = "pbCheck5";
+			pbCheck5.Size = new Size(72, 123);
+			pbCheck5.TabIndex = 0;
+			pbCheck5.TabStop = false;
 			//
 			//btnCheckAgain
 			//
-			this.btnCheckAgain.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
-			this.btnCheckAgain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnCheckAgain.Location = new Point(476, 842);
-			this.btnCheckAgain.Name = "btnCheckAgain";
-			this.btnCheckAgain.Size = new Size(104, 23);
-			this.btnCheckAgain.TabIndex = 0;
-			this.btnCheckAgain.Text = "Check again";
-			this.btnCheckAgain.UseVisualStyleBackColor = true;
+			btnCheckAgain.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right;
+			btnCheckAgain.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			btnCheckAgain.Location = new Point(476, 842);
+			btnCheckAgain.Name = "btnCheckAgain";
+			btnCheckAgain.Size = new Size(104, 23);
+			btnCheckAgain.TabIndex = 0;
+			btnCheckAgain.Text = "Check again";
+			btnCheckAgain.UseVisualStyleBackColor = true;
 			//
 			//chkAlwaysShow
 			//
-			this.chkAlwaysShow.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
-			this.chkAlwaysShow.AutoSize = true;
-			this.chkAlwaysShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.chkAlwaysShow.Location = new Point(12, 846);
-			this.chkAlwaysShow.Name = "chkAlwaysShow";
-			this.chkAlwaysShow.Size = new Size(185, 17);
-			this.chkAlwaysShow.TabIndex = 51;
-			this.chkAlwaysShow.Text = "Always show this screen at startup";
-			this.chkAlwaysShow.UseVisualStyleBackColor = true;
+			chkAlwaysShow.Anchor = System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left;
+			chkAlwaysShow.AutoSize = true;
+			chkAlwaysShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			chkAlwaysShow.Location = new Point(12, 846);
+			chkAlwaysShow.Name = "chkAlwaysShow";
+			chkAlwaysShow.Size = new Size(185, 17);
+			chkAlwaysShow.TabIndex = 51;
+			chkAlwaysShow.Text = "Always show this screen at startup";
+			chkAlwaysShow.UseVisualStyleBackColor = true;
 			//
 			//pnlChecks
 			//
-			this.pnlChecks.Anchor = ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+			pnlChecks.Anchor = ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                 | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			this.pnlChecks.AutoScroll = true;
-			this.pnlChecks.Controls.Add(this.pnlCheck1);
-			this.pnlChecks.Controls.Add(this.pnlCheck2);
-			this.pnlChecks.Controls.Add(this.pnlCheck3);
-			this.pnlChecks.Controls.Add(this.pnlCheck5);
-			this.pnlChecks.Controls.Add(this.pnlCheck4);
-			this.pnlChecks.Location = new Point(12, 12);
-			this.pnlChecks.Name = "pnlChecks";
-			this.pnlChecks.Size = new Size(568, 824);
-			this.pnlChecks.TabIndex = 52;
+			pnlChecks.AutoScroll = true;
+			pnlChecks.Controls.Add(pnlCheck1);
+			pnlChecks.Controls.Add(pnlCheck2);
+			pnlChecks.Controls.Add(pnlCheck3);
+			pnlChecks.Controls.Add(pnlCheck5);
+			pnlChecks.Controls.Add(pnlCheck4);
+			pnlChecks.Location = new Point(12, 12);
+			pnlChecks.Name = "pnlChecks";
+			pnlChecks.Size = new Size(568, 824);
+			pnlChecks.TabIndex = 52;
 			//
 			//ComponentsCheck
 			//
-			this.ClientSize = new Size(592, 877);
-			this.Controls.Add(this.pnlChecks);
-			this.Controls.Add(this.chkAlwaysShow);
-			this.Controls.Add(this.btnCheckAgain);
-			this.Icon = Resources.ComponentsCheck_Icon;
-			this.Name = "ComponentsCheck";
-			this.TabText = "Components Check";
-			this.Text = "Components Check";
-			this.pnlCheck1.ResumeLayout(false);
-			this.pnlCheck1.PerformLayout();
-			((System.ComponentModel.ISupportInitialize) this.pbCheck1).EndInit();
-			this.pnlCheck2.ResumeLayout(false);
-			this.pnlCheck2.PerformLayout();
-			((System.ComponentModel.ISupportInitialize) this.pbCheck2).EndInit();
-			this.pnlCheck3.ResumeLayout(false);
-			this.pnlCheck3.PerformLayout();
-			((System.ComponentModel.ISupportInitialize) this.pbCheck3).EndInit();
-			this.pnlCheck4.ResumeLayout(false);
-			this.pnlCheck4.PerformLayout();
-			((System.ComponentModel.ISupportInitialize) this.pbCheck4).EndInit();
-			this.pnlCheck5.ResumeLayout(false);
-			this.pnlCheck5.PerformLayout();
-			((System.ComponentModel.ISupportInitialize) this.pbCheck5).EndInit();
-			this.pnlChecks.ResumeLayout(false);
-			this.ResumeLayout(false);
-			this.PerformLayout();
+			ClientSize = new Size(592, 877);
+			Controls.Add(pnlChecks);
+			Controls.Add(chkAlwaysShow);
+			Controls.Add(btnCheckAgain);
+			Icon = Resources.ComponentsCheck_Icon;
+			Name = "ComponentsCheck";
+			TabText = "Components Check";
+			Text = "Components Check";
+			pnlCheck1.ResumeLayout(false);
+			pnlCheck1.PerformLayout();
+			((System.ComponentModel.ISupportInitialize) pbCheck1).EndInit();
+			pnlCheck2.ResumeLayout(false);
+			pnlCheck2.PerformLayout();
+			((System.ComponentModel.ISupportInitialize) pbCheck2).EndInit();
+			pnlCheck3.ResumeLayout(false);
+			pnlCheck3.PerformLayout();
+			((System.ComponentModel.ISupportInitialize) pbCheck3).EndInit();
+			pnlCheck4.ResumeLayout(false);
+			pnlCheck4.PerformLayout();
+			((System.ComponentModel.ISupportInitialize) pbCheck4).EndInit();
+			pnlCheck5.ResumeLayout(false);
+			pnlCheck5.PerformLayout();
+			((System.ComponentModel.ISupportInitialize) pbCheck5).EndInit();
+			pnlChecks.ResumeLayout(false);
+			ResumeLayout(false);
+			PerformLayout();
 					
 		}
         #endregion
@@ -393,9 +392,9 @@ namespace mRemoteNG.UI.Window
         #region Public Methods
 		public ComponentsCheckWindow(DockContent Panel)
 		{
-			this.WindowType = WindowType.ComponentsCheck;
-			this.DockPnl = Panel;
-			this.InitializeComponent();
+			WindowType = WindowType.ComponentsCheck;
+			DockPnl = Panel;
+			InitializeComponent();
 		}
         #endregion
 				
@@ -404,7 +403,7 @@ namespace mRemoteNG.UI.Window
 		{
 			ApplyLanguage();
 					
-			chkAlwaysShow.Checked = Convert.ToBoolean(mRemoteNG.Settings.Default.StartupComponentsCheck);
+			chkAlwaysShow.Checked = Convert.ToBoolean(Settings.Default.StartupComponentsCheck);
 			CheckComponents();
 		}
 				
@@ -423,8 +422,8 @@ namespace mRemoteNG.UI.Window
 				
 		private void chkAlwaysShow_CheckedChanged(object sender, EventArgs e)
 		{
-			mRemoteNG.Settings.Default.StartupComponentsCheck = chkAlwaysShow.Checked;
-			mRemoteNG.Settings.Default.Save();
+			Settings.Default.StartupComponentsCheck = chkAlwaysShow.Checked;
+			Settings.Default.Save();
 		}
         #endregion
 				
@@ -514,13 +513,13 @@ namespace mRemoteNG.UI.Window
 					
 					
 			string pPath = "";
-			if (mRemoteNG.Settings.Default.UseCustomPuttyPath == false)
+			if (Settings.Default.UseCustomPuttyPath == false)
 			{
-				pPath = (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\PuTTYNG.exe";
+				pPath = GeneralAppInfo.HomePath + "\\PuTTYNG.exe";
 			}
 			else
 			{
-				pPath = Convert.ToString(mRemoteNG.Settings.Default.CustomPuttyPath);
+				pPath = Convert.ToString(Settings.Default.CustomPuttyPath);
 			}
 					
 			if (File.Exists(pPath))
@@ -580,14 +579,14 @@ namespace mRemoteNG.UI.Window
 					
 			bool GeckoBad = false;
 					
-			if (mRemoteNG.Settings.Default.XULRunnerPath == "")
+			if (Settings.Default.XULRunnerPath == "")
 			{
 				GeckoBad = true;
 			}
 					
-			if (Directory.Exists(Convert.ToString(mRemoteNG.Settings.Default.XULRunnerPath)))
+			if (Directory.Exists(Convert.ToString(Settings.Default.XULRunnerPath)))
 			{
-				if (File.Exists(Path.Combine(Convert.ToString(mRemoteNG.Settings.Default.XULRunnerPath), "xpcom.dll")) == false)
+				if (File.Exists(Path.Combine(Convert.ToString(Settings.Default.XULRunnerPath), "xpcom.dll")) == false)
 				{
 					GeckoBad = true;
 				}
@@ -612,7 +611,7 @@ namespace mRemoteNG.UI.Window
 				txtCheck5.Text = Language.strCcGeckoFailed;
 						
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Gecko " + errorMsg, true);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " + mRemoteNG.Settings.Default.XULRunnerPath, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " + Settings.Default.XULRunnerPath, true);
 			}
 					
 		}

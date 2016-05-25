@@ -17,6 +17,7 @@ using mRemoteNG.Config.Connections;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 using System.Globalization;
+using mRemoteNG.App.Info;
 
 namespace mRemoteNG.App
 {
@@ -130,7 +131,7 @@ namespace mRemoteNG.App
         }
         private void GetConnectionIcons()
         {
-            string iPath = (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\Icons\\";
+            string iPath = GeneralAppInfo.HomePath + "\\Icons\\";
             if (Directory.Exists(iPath) == false)
             {
                 return;
@@ -406,16 +407,16 @@ namespace mRemoteNG.App
                 {
                     if (File.Exists(cmd[ConsParam]) == false)
                     {
-                        if (File.Exists((new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\" + cmd[ConsParam]))
+                        if (File.Exists(GeneralAppInfo.HomePath + "\\" + cmd[ConsParam]))
                         {
                             Settings.Default.LoadConsFromCustomLocation = true;
-                            Settings.Default.CustomConsPath = (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.DirectoryPath + "\\" + cmd[ConsParam];
+                            Settings.Default.CustomConsPath = GeneralAppInfo.HomePath + "\\" + cmd[ConsParam];
                             return;
                         }
-                        else if (File.Exists(Info.ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam]))
+                        else if (File.Exists(ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam]))
                         {
                             Settings.Default.LoadConsFromCustomLocation = true;
-                            Settings.Default.CustomConsPath = Info.ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam];
+                            Settings.Default.CustomConsPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + cmd[ConsParam];
                             return;
                         }
                     }
