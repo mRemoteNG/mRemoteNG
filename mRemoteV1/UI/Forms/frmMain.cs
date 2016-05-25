@@ -36,6 +36,7 @@ namespace mRemoteNG.UI.Forms
         private string _connectionsFileName = null;
         private bool _showFullPathInTitle;
         private ConnectionInfo _selectedConnection = null;
+        private SystemMenu _systemMenu;
         public MiscTools.Fullscreen _fullscreen;
 
 
@@ -1224,24 +1225,24 @@ namespace mRemoteNG.UI.Forms
 			AddSysMenuItems();
 		}
 		
-		private static void ResetSysMenuItems()
+		private void ResetSysMenuItems()
 		{
-			Runtime.SystemMenu.Reset();
+			_systemMenu.Reset();
 		}
 								
 		private void AddSysMenuItems()
 		{
-            Runtime.SystemMenu = new SystemMenu(Handle);
-            var popMen = Runtime.SystemMenu.CreatePopupMenuItem();
+            _systemMenu = new SystemMenu(Handle);
+            var popMen = _systemMenu.CreatePopupMenuItem();
 									
 			for (var i = 0; i <= Screen.AllScreens.Length - 1; i++)
 			{
 				SysMenSubItems[i] = 200 + i;
-                Runtime.SystemMenu.AppendMenuItem(popMen, SystemMenu.Flags.MF_STRING, new IntPtr(SysMenSubItems[i]), Language.strScreen + " " + Convert.ToString(i + 1));
+                _systemMenu.AppendMenuItem(popMen, SystemMenu.Flags.MF_STRING, new IntPtr(SysMenSubItems[i]), Language.strScreen + " " + Convert.ToString(i + 1));
 			}
 
-            Runtime.SystemMenu.InsertMenuItem(Runtime.SystemMenu.SystemMenuHandle, 0, SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen, Language.strSendTo);
-            Runtime.SystemMenu.InsertMenuItem(Runtime.SystemMenu.SystemMenuHandle, 1, SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, null);
+            _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 0, SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen, Language.strSendTo);
+            _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 1, SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, null);
 		}
         #endregion
 
