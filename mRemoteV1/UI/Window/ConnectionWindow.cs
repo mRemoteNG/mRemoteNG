@@ -240,7 +240,7 @@ namespace mRemoteNG.UI.Window
 			//
 			ClientSize = new Size(632, 453);
 			Controls.Add(TabController);
-			Font = new Font("Microsoft Sans Serif", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
+			Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
 			Icon = Resources.mRemote_Icon;
 			Name = "Connection";
 			TabText = "UI.Window.Connection";

@@ -211,7 +211,7 @@ namespace mRemoteNG.UI.Window
             this.ClientSize = new System.Drawing.Size(984, 705);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlBottom);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = global::mRemoteNG.Resources.mRemote_Icon;
             this.MaximumSize = new System.Drawing.Size(20000, 10000);

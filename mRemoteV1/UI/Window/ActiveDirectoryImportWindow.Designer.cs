@@ -82,7 +82,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.txtDomain);
 			this.Controls.Add(this.btnChangeDomain);
 			this.Controls.Add(this.btnImport);
-			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.Icon = Resources.ActiveDirectory_Icon;
 			this.Name = "ActiveDirectoryImport";
 			this.TabText = "Active Directory Import";

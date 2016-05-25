@@ -18,7 +18,7 @@ namespace mRemoteNG.UI.TaskDialog
 
     string _mainInstruction = "Main Instruction Text";
     int _mainInstructionHeight = 0;
-    Font _mainInstructionFont = new Font("Arial", 11.75F, FontStyle.Regular, GraphicsUnit.Point, (byte)0);
+    Font _mainInstructionFont = new Font("Segoe UI", 11.75F, FontStyle.Regular, GraphicsUnit.Point, (byte)0);
 
     List<RadioButton> _radioButtonCtrls = new List<RadioButton>();
     string _radioButtons = "";

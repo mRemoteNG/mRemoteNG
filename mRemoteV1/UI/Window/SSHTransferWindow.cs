@@ -295,7 +295,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.grpConnection);
 			this.Controls.Add(this.btnTransfer);
 			this.Controls.Add(this.pbStatus);
-			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
+			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.Icon = (System.Drawing.Icon) (resources.GetObject("$this.Icon"));
 			this.Name = "SSHTransfer";
 			this.TabText = "SSH File Transfer";
