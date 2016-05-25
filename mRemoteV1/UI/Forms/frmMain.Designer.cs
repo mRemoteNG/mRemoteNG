@@ -1,4 +1,4 @@
-using mRemoteNG.My;
+using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -38,7 +38,6 @@ namespace mRemoteNG.UI.Forms
 			this.ResizeBegin += new System.EventHandler(frmMain_ResizeBegin);
 			this.Resize += new System.EventHandler(frmMain_Resize);
 			this.ResizeEnd += new System.EventHandler(frmMain_ResizeEnd);
-			WeifenLuo.WinFormsUI.Docking.DockPanelSkin DockPanelSkin2 = new WeifenLuo.WinFormsUI.Docking.DockPanelSkin();
 			WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin AutoHideStripSkin2 = new WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin();
 			WeifenLuo.WinFormsUI.Docking.DockPanelGradient DockPanelGradient4 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
 			WeifenLuo.WinFormsUI.Docking.TabGradient TabGradient8 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
@@ -212,7 +211,6 @@ namespace mRemoteNG.UI.Forms
 			TabGradient8.TextColor = System.Drawing.SystemColors.ControlDarkDark;
 			AutoHideStripSkin2.TabGradient = TabGradient8;
 			AutoHideStripSkin2.TextFont = new System.Drawing.Font("Segoe UI", (float) (9.0F));
-			DockPanelSkin2.AutoHideStripSkin = AutoHideStripSkin2;
 			TabGradient9.EndColor = System.Drawing.SystemColors.ControlLightLight;
 			TabGradient9.StartColor = System.Drawing.SystemColors.ControlLightLight;
 			TabGradient9.TextColor = System.Drawing.SystemColors.ControlText;
@@ -248,8 +246,7 @@ namespace mRemoteNG.UI.Forms
 			TabGradient14.TextColor = System.Drawing.SystemColors.ControlDarkDark;
 			DockPaneStripToolWindowGradient2.InactiveTabGradient = TabGradient14;
 			DockPaneStripSkin2.ToolWindowGradient = DockPaneStripToolWindowGradient2;
-			DockPanelSkin2.DockPaneStripSkin = DockPaneStripSkin2;
-			this.pnlDock.Skin = DockPanelSkin2;
+			this.pnlDock.Theme = new VS2012LightTheme();
 			this.pnlDock.TabIndex = 13;
 			//
 			//msMain
