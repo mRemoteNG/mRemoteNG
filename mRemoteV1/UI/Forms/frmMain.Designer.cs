@@ -1,3 +1,4 @@
+using mRemoteNG.Controls;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Forms
@@ -900,7 +901,7 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewErrorsAndInfos;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewScreenshotManager;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewAddConnectionPanel;
-		internal Controls.QuickConnectComboBox cmbQuickConnect;
+		internal QuickConnectComboBox cmbQuickConnect;
 		internal System.Windows.Forms.ToolStripSeparator mMenViewSep2;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewFullscreen;
 		internal System.Windows.Forms.ToolStripMenuItem mMenToolsSSHTransfer;
@@ -917,7 +918,7 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoDonate;
 		internal System.Windows.Forms.ToolStripSeparator mMenViewSep3;
-		internal Controls.ToolStripSplitButton btnQuickConnect;
+		internal ToolStripSplitButton btnQuickConnect;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpTo;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToConnectionsConfig;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToErrorsInfos;
