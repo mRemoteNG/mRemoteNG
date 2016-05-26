@@ -172,7 +172,7 @@
     <value>{0} can automatically check for updates that may provide new features and bug fixes. It is recommended that you allow {0} to check for updates weekly.</value>
   </data>
   <data name="strAskUpdatesMainInstruction" xml:space="preserve">
-    <value>Automatic update settings</value>
+    <value>自動更新設定</value>
   </data>
   <data name="strAspect" xml:space="preserve">
     <value>Aspect</value>
@@ -220,13 +220,13 @@
     <value>Inheritance</value>
   </data>
   <data name="strButtonLaunch" xml:space="preserve">
-    <value>&amp;Launch</value>
+    <value>立ち上げる(&amp;L)</value>
   </data>
   <data name="strButtonLaunchPutty" xml:space="preserve">
     <value>PuTTYを開始</value>
   </data>
   <data name="strButtonNew" xml:space="preserve">
-    <value>&amp;New</value>
+    <value>新規(&amp;N)</value>
   </data>
   <data name="strButtonOK" xml:space="preserve">
     <value>&amp;OK</value>
@@ -962,22 +962,22 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Released under the GNU General Public License (GPL)</value>
   </data>
   <data name="strLabelSeconds" xml:space="preserve">
-    <value>seconds</value>
+    <value>秒</value>
   </data>
   <data name="strLabelSelectPanel" xml:space="preserve">
     <value>Select a panel from the list below or click New to add a new one. Click OK to continue.</value>
   </data>
   <data name="strLabelServerStatus" xml:space="preserve">
-    <value>Server Status:</value>
+    <value>サーバーの状態：</value>
   </data>
   <data name="strLabelSQLDatabaseName" xml:space="preserve">
-    <value>Database:</value>
+    <value>データベース：</value>
   </data>
   <data name="strLabelSQLServerDatabaseName" xml:space="preserve">
-    <value>Database:</value>
+    <value>データベース：</value>
   </data>
   <data name="strLabelUsername" xml:space="preserve">
-    <value>Username:</value>
+    <value>ユーザー名：</value>
   </data>
   <data name="strLabelVerify" xml:space="preserve">
     <value>Verify:</value>
@@ -986,7 +986,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Language</value>
   </data>
   <data name="strLanguageDefault" xml:space="preserve">
-    <value>(Automatically Detect)</value>
+    <value>（自動検出）</value>
   </data>
   <data name="strLanguageRestartRequired" xml:space="preserve">
     <value>{0} must be restarted before changes to the language will take effect.</value>
@@ -1127,25 +1127,25 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Notifications</value>
   </data>
   <data name="strMenuNotificationsCopyAll" xml:space="preserve">
-    <value>Copy All</value>
+    <value>全てコピー</value>
   </data>
   <data name="strMenuNotificationsDelete" xml:space="preserve">
-    <value>Delete</value>
+    <value>削除</value>
   </data>
   <data name="strMenuNotificationsDeleteAll" xml:space="preserve">
-    <value>Delete All</value>
+    <value>全て削除</value>
   </data>
   <data name="strMenuOpenConnectionFile" xml:space="preserve">
-    <value>Open Connection File...</value>
+    <value>接続ファイルを開く...</value>
   </data>
   <data name="strMenuOptions" xml:space="preserve">
-    <value>Options</value>
+    <value>オプション</value>
   </data>
   <data name="strMenuPaste" xml:space="preserve">
-    <value>Paste</value>
+    <value>貼り付け</value>
   </data>
   <data name="strMenuPortScan" xml:space="preserve">
-    <value>Port Scan</value>
+    <value>ポートをスキャンする</value>
   </data>
   <data name="strMenuQuickConnectToolbar" xml:space="preserve">
     <value>Quick Connect Toolbar</value>
@@ -1154,7 +1154,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>再接続</value>
   </data>
   <data name="strMenuRefreshScreen" xml:space="preserve">
-    <value>Refresh Screen (VNC)</value>
+    <value>スクリーンを更新する (VNC)</value>
   </data>
   <data name="strMenuRename" xml:space="preserve">
     <value>名前を変更</value>
@@ -1181,10 +1181,10 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Save Connection File As...</value>
   </data>
   <data name="strMenuScreenshot" xml:space="preserve">
-    <value>Screenshot</value>
+    <value>スクリーンキャプチャ</value>
   </data>
   <data name="strMenuScreenshotManager" xml:space="preserve">
-    <value>Screenshot Manager</value>
+    <value>スクリーンキャプチャの管理</value>
   </data>
   <data name="strMenuSendSpecialKeys" xml:space="preserve">
     <value>Send Special Keys (VNC)</value>
@@ -1193,34 +1193,34 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Retrieve</value>
   </data>
   <data name="strMenuSessions" xml:space="preserve">
-    <value>Sessions</value>
+    <value>セッション</value>
   </data>
   <data name="strMenuSessionsAndScreenshots" xml:space="preserve">
-    <value>Sessions and Screenshots</value>
+    <value>セッションとスクリーンキャプチャ</value>
   </data>
   <data name="strMenuShowHelpText" xml:space="preserve">
     <value>&amp;Show Help Text</value>
   </data>
   <data name="strMenuShowText" xml:space="preserve">
-    <value>Show Text</value>
+    <value>文字の表示</value>
   </data>
   <data name="strMenuSmartSize" xml:space="preserve">
     <value>SmartSize (RDP/VNC)</value>
   </data>
   <data name="strMenuSSHFileTransfer" xml:space="preserve">
-    <value>SSH File Transfer</value>
+    <value>SSHによるファイル転送</value>
   </data>
   <data name="strMenuStartChat" xml:space="preserve">
     <value>Start Chat (VNC)</value>
   </data>
   <data name="strMenuSupportForum" xml:space="preserve">
-    <value>Support Forum</value>
+    <value>サポートフォーラム</value>
   </data>
   <data name="strMenuTools" xml:space="preserve">
     <value>ツール(&amp;T)</value>
   </data>
   <data name="strMenuTransferFile" xml:space="preserve">
-    <value>SSHによるファイルの送信</value>
+    <value>SSHによるファイルの転送</value>
   </data>
   <data name="strMenuView" xml:space="preserve">
     <value>表示(&amp;V)</value>
@@ -1294,6 +1294,8 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
   <data name="strOldConffile" xml:space="preserve">
     <value>You are trying to load a connection file that was created using an very early version of mRemote, this could result in an runtime error.
 If you run into such an error, please create a new connection file!</value>
+    <comment>You are trying to load a connection file that was created using an very early version of mRemote, this could result in an runtime error.
+If you run into such an error, please create a new connection file!</comment>
   </data>
   <data name="strOpenNewTabRight" xml:space="preserve">
     <value>Open new tab to the right of the currently selected tab</value>
@@ -1305,7 +1307,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>&amp;Delete</value>
   </data>
   <data name="strOptionsKeyboardButtonNew" xml:space="preserve">
-    <value>&amp;New</value>
+    <value>新規(&amp;N)</value>
   </data>
   <data name="strOptionsKeyboardButtonReset" xml:space="preserve">
     <value>&amp;Reset to Default</value>
@@ -1339,10 +1341,10 @@ If you run into such an error, please create a new connection file!</value>
     <value>テーマ</value>
   </data>
   <data name="strOptionsThemeButtonDelete" xml:space="preserve">
-    <value>&amp;Delete</value>
+    <value>削除(&amp;D)</value>
   </data>
   <data name="strOptionsThemeButtonNew" xml:space="preserve">
-    <value>&amp;New</value>
+    <value>新規(&amp;N)</value>
   </data>
   <data name="strPanelName" xml:space="preserve">
     <value>Panel Name</value>
@@ -1357,10 +1359,10 @@ If you run into such an error, please create a new connection file!</value>
     <value>The password must be at least 3 characters long.</value>
   </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
-    <value>Please fill all fields</value>
+    <value>全て入力してください</value>
   </data>
   <data name="strPortScanComplete" xml:space="preserve">
-    <value>Port scan complete.</value>
+    <value>ポートのスキャンが完了しました</value>
   </data>
   <data name="strPortScanCouldNotLoadPanel" xml:space="preserve">
     <value>Couldn't load PortScan panel!</value>
@@ -1402,7 +1404,7 @@ If you run into such an error, please create a new connection file!</value>
     <value>Select yes if the wallpaper of the remote host should be displayed.</value>
   </data>
   <data name="strPropertyDescriptionDomain" xml:space="preserve">
-    <value>Enter your domain.</value>
+    <value>ドメインを入力してください</value>
   </data>
   <data name="strPropertyDescriptionEnableDesktopComposition" xml:space="preserve">
     <value>Select whether to use desktop composition or not.</value>
