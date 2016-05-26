@@ -19,14 +19,20 @@ namespace CustomActions
             GetLegacymRemoteNGRegistryKeyPath();
         }
 
-        public void UninstallLegacyVersion()
+        public void UninstallLegacyVersion(bool Silent = false)
         {
             if (!IsLegacymRemoteNGInstalled())
                 return;
             string uninstallString = GetLegacyUninstallString();
+            string forceNonTempUninstaller = string.Format("_?={0}", uninstallString.Replace("Uninstall.exe", "").Replace(@"""", ""));
+            string silentUninstall = "";
+            if (Silent)
+            {
+                silentUninstall = "/S";
+            }
             ProcessStartInfo processStartInfo = new ProcessStartInfo(uninstallString);
             processStartInfo.UseShellExecute = true;
-            processStartInfo.Arguments = string.Format("_?={0}", uninstallString.Replace("Uninstall.exe", "").Replace(@"""", ""));
+            processStartInfo.Arguments = string.Format("{0} {1}", forceNonTempUninstaller, silentUninstall);
             Process uninstallProcess = Process.Start(processStartInfo);
             while (uninstallProcess.HasExited == false)
             {
