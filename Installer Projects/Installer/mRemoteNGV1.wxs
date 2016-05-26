@@ -17,13 +17,17 @@
       <RegistrySearch Id='mRemoteNGRegistry' Type='raw' Root='HKLM' Key='Software\mRemoteNG' Name='InstallDir' />
     </Property>
     <Property Id='REQUIREDDOTNETFRAMEWORKVERSION' Value='$(var.RequiredDotNetFrameworkVersion)' />
+    <Property Id='LEGACYVERSIONINSTALLED' Value='0' />
     <PropertyRef Id="NETFRAMEWORK40FULL" />
     <PropertyRef Id="WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
     <Icon Id="mRemoteNG.ico" SourceFile="Resources\mRemoteNG.ico" />
 
     <InstallUISequence>
       <Custom Action="SetRDP80KBValue" After="AppSearch" />
-      <Custom Action="CheckIfRDP80Installed" After="SetRDP80KBValue">NOT Installed AND (VersionNT = 601 OR VersionNT64 = 601)</Custom>
+      <Custom Action="CheckIfRDP80Installed" After="SetRDP80KBValue">(NOT Installed) AND (VersionNT = 601 OR VersionNT64 = 601)</Custom>
+      <LaunchConditions After="SetWIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
+      <Custom Action="CheckIfLegacyVersionInstalled" After="LaunchConditions" />
+      <Custom Action="UninstallLegacyVersion" After="CheckIfLegacyVersionInstalled">(NOT Installed) AND (LEGACYVERSIONINSTALLED = 1)</Custom>
     </InstallUISequence>
     
     
