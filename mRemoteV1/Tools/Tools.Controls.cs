@@ -90,7 +90,7 @@ namespace mRemoteNG.Tools
 					this._cMenExit.Click += cMenExit_Click;
 						
 					this._cMen = new ContextMenuStrip();
-					this._cMen.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
+					this._cMen.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 					this._cMen.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
 					this._cMen.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this._cMenCons, this._cMenSep1, this._cMenExit});
 						

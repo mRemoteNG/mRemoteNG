@@ -69,7 +69,7 @@ namespace mRemoteNG.UI.Window
 			//lblChangeLogLabel
 			//
 			this.lblChangeLogLabel.AutoSize = true;
-			this.lblChangeLogLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.lblChangeLogLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.lblChangeLogLabel.Location = new System.Drawing.Point(0, 0);
 			this.lblChangeLogLabel.Name = "lblChangeLogLabel";
 			this.lblChangeLogLabel.Size = new System.Drawing.Size(79, 13);
@@ -115,7 +115,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//lblStatus
 			//
-			this.lblStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (12.0F), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.lblStatus.Font = new System.Drawing.Font("Segoe UI", 12.0F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.lblStatus.ForeColor = System.Drawing.SystemColors.ControlText;
 			this.lblStatus.Location = new System.Drawing.Point(12, 16);
 			this.lblStatus.Name = "lblStatus";
@@ -126,7 +126,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//lblLatestVersionLabel
 			//
-			this.lblLatestVersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.lblLatestVersionLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.lblLatestVersionLabel.Location = new System.Drawing.Point(16, 72);
 			this.lblLatestVersionLabel.Name = "lblLatestVersionLabel";
 			this.lblLatestVersionLabel.Size = new System.Drawing.Size(120, 16);
@@ -136,7 +136,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//lblInstalledVersionLabel
 			//
-			this.lblInstalledVersionLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.lblInstalledVersionLabel.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.lblInstalledVersionLabel.Location = new System.Drawing.Point(16, 48);
 			this.lblInstalledVersionLabel.Name = "lblInstalledVersionLabel";
 			this.lblInstalledVersionLabel.Size = new System.Drawing.Size(120, 16);
@@ -185,7 +185,7 @@ namespace mRemoteNG.UI.Window
 			this.Controls.Add(this.lblInstalledVersion);
 			this.Controls.Add(this.pnlUpdate);
 			this.Controls.Add(this.lblStatus);
-			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.Icon = Resources.Update_Icon;
 			this.Name = "Update";
 			this.TabText = "Update";

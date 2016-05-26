@@ -322,8 +322,8 @@ Bitte versichern Sie sich, dass sich die Datei Putty.exe in ihrem mRemote Instal
     <value>PuTTY wurde gefunden und scheint betriebsbereit zu sein.</value>
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
-    <value>Um RDP korrekt betreiben können muss mindestens Remote Desktop Connection (Terminal Services Client) 6.0 installiert sein. Hier können Sie die Software herunterladen: http://support.microsoft.com/kb/951616
-Wenn Sie RDP 6.1 bereits installiert haben und die Prüfung noch immer fehlschlägt, versuchen Sie die Datei mstscax.dll manuell zu registrieren. Öffnen Sie hierzu den Ausführen Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\windows\system32\mstscax.dll" (Wobei c:\ Ihr System-Laufwerk ist).
+    <value>Um RDP korrekt betreiben können muss mindestens Remote Desktop Connection (Terminal Services Client) 8.0 installiert sein. Hier können Sie die Software herunterladen: https://support.microsoft.com/kb/2592687
+Wenn Sie RDP 8.0 bereits installiert haben und die Prüfung noch immer fehlschlägt, versuchen Sie die Datei mstscax.dll manuell zu registrieren. Öffnen Sie hierzu den Ausführen Dialog (Start - Ausführen) und geben Sie Folgendes ein: regsvr32 "c:\windows\system32\mstscax.dll" (Wobei c:\ Ihr System-Laufwerk ist).
 Wenn Sie noch immer Probleme mit RDP haben, konsultieren Sie bitte das mRemoteNG Forum: http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">

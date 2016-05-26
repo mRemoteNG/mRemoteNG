@@ -165,7 +165,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//cMenTree
 			//
-			this.cMenTree.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.cMenTree.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.cMenTree.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.cMenTreeConnect, this.cMenTreeConnectWithOptions, this.cMenTreeDisconnect, this.cMenTreeSep1, this.cMenTreeToolsExternalApps, this.cMenTreeToolsTransferFile, this.cMenTreeSep2, this.cMenTreeDuplicate, this.cMenTreeRename, this.cMenTreeDelete, this.cMenTreeSep3, this.cMenTreeImport, this.cMenTreeExportFile, this.cMenTreeSep4, this.cMenTreeAddConnection, this.cMenTreeAddFolder, this.ToolStripSeparator1, this.cMenTreeToolsSort, this.cMenTreeMoveUp, this.cMenTreeMoveDown});
 			this.cMenTree.Name = "cMenTree";
 			this.cMenTree.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -420,7 +420,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//msMain
 			//
-			this.msMain.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.msMain.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenAddConnection, this.mMenAddFolder, this.mMenView, this.mMenSortAscending});
 			this.msMain.Location = new System.Drawing.Point(0, 0);
 			this.msMain.Name = "msMain";
@@ -479,7 +479,7 @@ namespace mRemoteNG.UI.Window
 			this.ClientSize = new System.Drawing.Size(192, 453);
 			this.Controls.Add(this.msMain);
 			this.Controls.Add(this.pnlConnections);
-			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.HideOnClose = true;
 			this.Icon = Resources.Root_Icon;
 			this.Name = "Tree";

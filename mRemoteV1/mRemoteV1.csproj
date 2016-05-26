@@ -109,10 +109,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\FilteredPropertyGrid.dll</HintPath>
     </Reference>
-    <Reference Include="IPTextBox, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\IPTextBox.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\log4net.dll</HintPath>
@@ -231,6 +227,9 @@
     <Compile Include="Tree\NodeType.cs" />
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
     <Compile Include="Tree\TreeNodeMover.cs" />
+    <Compile Include="UI\Controls\IPTextBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
     <Compile Include="UI\Controls\ListView.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -501,6 +500,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Language\Language.ja-JP.resx" />
+    <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
+      <DependentUpon>IPTextBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmChoosePanel.resx">
       <DependentUpon>frmChoosePanel.cs</DependentUpon>
       <SubType>Designer</SubType>

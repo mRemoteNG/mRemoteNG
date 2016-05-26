@@ -76,7 +76,7 @@ namespace mRemoteNG.UI.Window
                 | AnchorStyles.Right;
             pGrid.BrowsableProperties = null;
             pGrid.ContextMenuStrip = propertyGridContextMenu;
-            pGrid.Font = new Font("Microsoft Sans Serif", (float) (8.25F), FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
+            pGrid.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
             pGrid.HiddenAttributes = null;
             pGrid.HiddenProperties = null;
             pGrid.Location = new Point(0, 0);
@@ -176,7 +176,7 @@ namespace mRemoteNG.UI.Window
             //
             ClientSize = new Size(226, 530);
             Controls.Add(pGrid);
-            Font = new Font("Microsoft Sans Serif", (float) (8.25F), FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
+            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
             HideOnClose = true;
             Icon = Resources.Config_Icon;
             Name = "Config";

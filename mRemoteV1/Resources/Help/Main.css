@@ -11,7 +11,7 @@ body
 
 body, td, th
 {
-	font-family: Verdana, Tahoma, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Segoe UI, Segoe UI, Helvetica, sans-serif;
 	font-size: 11px;
 	color: #333333;
 }
@@ -32,7 +32,7 @@ ul
 
 .heading1
 {
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-family: Segoe UI, Verdana, Segoe UI, Helvetica, sans-serif;
 	font-size: 16px;
 	color: Black;
 }
@@ -55,28 +55,28 @@ ul
 	
 .heading2
 {
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-family: Segoe UI, Verdana, Segoe UI, Helvetica, sans-serif;
 	font-size: 15px;
 	color: Black;
 }
 
 .heading3
 {
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-family: Segoe UI, Verdana, Segoe UI, Helvetica, sans-serif;
 	font-size: 14px;
 	color: Black;
 }
 
 .heading4
 {
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-family: Segoe UI, Verdana, Segoe UI, Helvetica, sans-serif;
 	font-size: 13px;
 	color: Black;
 }
 
 .heading5
 {
-	font-family: Tahoma, Verdana, Arial, Helvetica, sans-serif;
+	font-family: Segoe UI, Verdana, Segoe UI, Helvetica, sans-serif;
 	font-size: 12px;
 	color: Black;
 }

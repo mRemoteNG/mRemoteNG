@@ -1,3 +1,4 @@
+using mRemoteNG.Controls;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Forms
@@ -210,7 +211,7 @@ namespace mRemoteNG.UI.Forms
 			TabGradient8.StartColor = System.Drawing.SystemColors.Control;
 			TabGradient8.TextColor = System.Drawing.SystemColors.ControlDarkDark;
 			AutoHideStripSkin2.TabGradient = TabGradient8;
-			AutoHideStripSkin2.TextFont = new System.Drawing.Font("Segoe UI", (float) (9.0F));
+			AutoHideStripSkin2.TextFont = new System.Drawing.Font("Segoe UI", 9.0F);
 			TabGradient9.EndColor = System.Drawing.SystemColors.ControlLightLight;
 			TabGradient9.StartColor = System.Drawing.SystemColors.ControlLightLight;
 			TabGradient9.TextColor = System.Drawing.SystemColors.ControlText;
@@ -223,7 +224,7 @@ namespace mRemoteNG.UI.Forms
 			TabGradient10.TextColor = System.Drawing.SystemColors.ControlText;
 			DockPaneStripGradient2.InactiveTabGradient = TabGradient10;
 			DockPaneStripSkin2.DocumentGradient = DockPaneStripGradient2;
-			DockPaneStripSkin2.TextFont = new System.Drawing.Font("Segoe UI", (float) (9.0F));
+			DockPaneStripSkin2.TextFont = new System.Drawing.Font("Segoe UI", 9.0F);
 			TabGradient11.EndColor = System.Drawing.SystemColors.ActiveCaption;
 			TabGradient11.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
 			TabGradient11.StartColor = System.Drawing.SystemColors.GradientActiveCaption;
@@ -900,7 +901,7 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewErrorsAndInfos;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewScreenshotManager;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewAddConnectionPanel;
-		internal Controls.QuickConnectComboBox cmbQuickConnect;
+		internal QuickConnectComboBox cmbQuickConnect;
 		internal System.Windows.Forms.ToolStripSeparator mMenViewSep2;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewFullscreen;
 		internal System.Windows.Forms.ToolStripMenuItem mMenToolsSSHTransfer;
@@ -917,7 +918,7 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
 		internal System.Windows.Forms.ToolStripMenuItem mMenInfoDonate;
 		internal System.Windows.Forms.ToolStripSeparator mMenViewSep3;
-		internal Controls.ToolStripSplitButton btnQuickConnect;
+		internal ToolStripSplitButton btnQuickConnect;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpTo;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToConnectionsConfig;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToErrorsInfos;

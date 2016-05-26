@@ -62,7 +62,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//msMain
 			//
-			this.msMain.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
+			this.msMain.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenFile});
 			this.msMain.Location = new System.Drawing.Point(0, 0);
 			this.msMain.Name = "msMain";

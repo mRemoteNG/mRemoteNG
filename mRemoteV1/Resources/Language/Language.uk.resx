@@ -319,8 +319,8 @@ Citrix ICA Client Control версії {0}</value>
     <value>Виконуваний файл PuTTY знайдений і готовий до використання.</value>
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
-    <value>Для правильної роботи RDP необхідно мати встановлений Remote Desktop Connection (Terminal Services Client) 6.1. Ви можете отримати його тут: http://support.microsoft.com/kb/951616
-Якщо у вас є встановлений RDP 6.1 і підключитися не вдається, спробуйте зареєструватися mstscax.dll вручну. Для цього відкрийте (Пуск - Виконати) і введіть наступну команду: regsvr32 "C:\Windows\system32\mstscax.dll" (де C: \ - ваш системний диск).
+    <value>Для правильної роботи RDP необхідно мати встановлений Remote Desktop Connection (Terminal Services Client) 8.0. Ви можете отримати його тут: https://support.microsoft.com/kb/2592687
+Якщо у вас є встановлений RDP 8.0 і підключитися не вдається, спробуйте зареєструватися mstscax.dll вручну. Для цього відкрийте (Пуск - Виконати) і введіть наступну команду: regsvr32 "C:\Windows\system32\mstscax.dll" (де C: \ - ваш системний диск).
 Якщо у вас виникли проблеми при роботі з RDP зверніться на форум mRemoteNGhttp: / / forum.mremoteng.org /</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">

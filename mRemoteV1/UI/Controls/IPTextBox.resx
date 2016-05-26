@@ -117,29 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        AAABAAEAEBAAAAEAIABoBAAAFgAAACgAAAAQAAAAIAAAAAEAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAGxsbP9sbGz/EVuT/xRclP8XX5f/GmGZ/x1jm/8hZp7/JGig/yhro/8sbqb/MHGp/66u
-        rv+3t7f/AAAAAAAAAAAAAAAAAAAAABVdlf90qNH/dqrS/3mr0/97rdT/fa/V/4Gy1v+Ds9f/hrbY/zZ1
-        rf8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAZYJj/d6vT/1SVx/9Yl8j/W5rJ/1+dy/9ioM3/ZqLO/4u5
-        2v88ebH/IGqqAiZqoJMbYpl3AAAAAAAAAAAAAAAAHmSc/3ut1P9Zmcn/XJvK/2CezP9koc3/Z6TP/3an
-        yf+buMv/Tn+u/0OEv5t6qNL/MnKotwAAAAAAAAAAAAAAACNnn/9/sNX/XpzL/2KfzP9mos7/aaXP/4+u
-        wP/bxK//682z/9y9o/+sr7b/UYzCvSJopBgAAAAAAAAAAAAAAAAoa6P/gbTX/1TC7f9bt+P/a6fQ/2+p
-        0v/ezrz/9+PQ//Xcw//64cf/4cGm/WGCpCoAAAAAAAAAAAAAAAAAAAAALm+n/3y74P9L1P//X7rk/3Gr
-        0v91rdT/8d3J//bizv/03MP/9t3E/+3Qtv/TpH4qAAAAAAAAAAAAAAAAAAAAADNzq/+Mutr/bavU/3Os
-        0/93r9X/erLW/+LYy//46dr/9uPQ//jl0//qzLLr3bGNGQAAAAAAAAAAAAAAAAAAAAA5d6//j73c/3St
-        1P95sNX/fLPX/4C22P+bwNX/49nN//Phzv/czcH/58KhSgAAAAAAAAAAAAAAAAAAAAAAAAAAP3y0/5TB
-        3f96stb/frTX/4G32f+Futv/iL3c/4y/3f+oz+X/Y5XN/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEWA
-        uP+ZxOD/gLbY/4O42v+Hu9v/ir7c/43A3v+Qwt//q9Hn/2eY0P8AAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AABLhLz/ncfh/6DJ4v+iy+T/pc3k/6jP5f+q0ef/q9Po/67U6P9rm9P/AAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAUYjA/1WLw/9Zjsb/XJDI/2CTy/9jlc3/ZpfP/2ma0v9sm9P/bp3V/wAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        AAAAAAAA//+cQYABnEHgB5xB4ACcQeAAnEHgAJxB4AGcQeABnEHgAZxB4AOcQeAHnEHgB5xB4AecQeAH
-        nEH//5xB//+cQQ==
-</value>
-  </data>
+  <metadata name="panel1.Locked" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="toolTip1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

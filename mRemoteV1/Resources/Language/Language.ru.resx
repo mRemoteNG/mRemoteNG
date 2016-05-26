@@ -322,8 +322,8 @@
     <value>Испольняемый файл PuTTY найден и готов к использованию.</value>
   </data>
   <data name="strCcRDPFailed" xml:space="preserve">
-    <value>Для правильной работы RDP необходимо иметь установленный Remote Desktop Connection (Terminal Services Client) 6.1. Вы можете получить его здесь: http://support.microsoft.com/kb/951616
- Если у вас есть установленный RDP 6.1 и подключиться не удается, попробуйте зарегистрироваться mstscax.dll вручную. Для этого откройте (Пуск - Выполнить) и введите следующую команду: regsvr32 "C:\Windows\system32\mstscax.dll" (где C:\ваш системный диск).
+    <value>Для правильной работы RDP необходимо иметь установленный Remote Desktop Connection (Terminal Services Client) 8.0. Вы можете получить его здесь: https://support.microsoft.com/kb/2592687
+ Если у вас есть установленный RDP 8.0 и подключиться не удается, попробуйте зарегистрироваться mstscax.dll вручную. Для этого откройте (Пуск - Выполнить) и введите следующую команду: regsvr32 "C:\Windows\system32\mstscax.dll" (где C:\ваш системный диск).
  Если у вас возникли проблемы при работе с RDP обратитесь на форум mRemoteNGhttp://forum.mremoteng.org/</value>
   </data>
   <data name="strCcRDPOK" xml:space="preserve">

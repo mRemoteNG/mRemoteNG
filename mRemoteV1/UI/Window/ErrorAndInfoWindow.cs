@@ -83,7 +83,7 @@ namespace mRemoteNG.UI.Window
 			//
 			this.lblMsgDate.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
 				| System.Windows.Forms.AnchorStyles.Right);
-			this.lblMsgDate.Font = new System.Drawing.Font("Tahoma", (float) (8.25F), System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
+			this.lblMsgDate.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.lblMsgDate.Location = new System.Drawing.Point(40, 5);
 			this.lblMsgDate.Name = "lblMsgDate";
 			this.lblMsgDate.Size = new System.Drawing.Size(155, 13);
@@ -125,7 +125,7 @@ namespace mRemoteNG.UI.Window
 			//
 			//cMenMC
 			//
-			this.cMenMC.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
+			this.cMenMC.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.cMenMC.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.cMenMCCopy, this.cMenMCDelete});
 			this.cMenMC.Name = "cMenMC";
 			this.cMenMC.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
@@ -158,7 +158,7 @@ namespace mRemoteNG.UI.Window
 			this.ClientSize = new System.Drawing.Size(617, 233);
 			this.Controls.Add(this.lvErrorCollector);
 			this.Controls.Add(this.pnlErrorMsg);
-			this.Font = new System.Drawing.Font("Microsoft Sans Serif", (float) (8.25F), System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
+			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			this.HideOnClose = true;
 			this.Icon = Resources.Info_Icon;
 			this.Name = "ErrorsAndInfos";
