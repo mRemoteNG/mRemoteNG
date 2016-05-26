@@ -27,5 +27,34 @@ namespace CustomActions
             session.Log("End IsKBInstalled");
             return ActionResult.Success;
         }
+
+        [CustomAction]
+        public static ActionResult IsLegacyVersionInstalled(Session session)
+        {
+            session.Log("Begin IsLegacyVersionInstalled");
+            UninstallNSISVersions uninstaller = new UninstallNSISVersions();
+            if (uninstaller.IsLegacymRemoteNGInstalled())
+            {
+                session["LEGACYVERSIONINSTALLED"] = "1";
+            }
+            else
+            {
+                session["LEGACYVERSIONINSTALLED"] = "0";
+            }
+
+            session.Log("End IsLegacyVersionInstalled");
+            return ActionResult.Success;
+        }
+
+        [CustomAction]
+        public static ActionResult UninstallLegacyVersion(Session session)
+        {
+            session.Log("Begin UninstallLegacyVersion");
+            UninstallNSISVersions uninstaller = new UninstallNSISVersions();
+            string uninstallString = uninstaller.GetLegacyUninstallString();
+            uninstaller.UninstallLegacyVersion(true);
+            session.Log("End UninstallLegacyVersion");
+            return ActionResult.Success;
+        }
     }
 }
