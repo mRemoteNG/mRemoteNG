@@ -1,8 +1,8 @@
 using System;
-using Microsoft.VisualBasic;
 using System.Runtime.InteropServices;
 using System.Security.Principal;
 using System.Security.Permissions;
+using System.Text.RegularExpressions;
 using mRemoteNG.App;
 
 
@@ -39,21 +39,23 @@ namespace mRemoteNG.Security
 		private string GetErrorMessage(int errorCode)
 		{
 			int messageSize = 255;
-			string lpMsgBuf = "";
-			int dwFlags = FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS;
+		    string lpMsgBuf = "";
+
+            int dwFlags = FORMAT_MESSAGE_ALLOCATE_BUFFER | FORMAT_MESSAGE_FROM_SYSTEM | FORMAT_MESSAGE_IGNORE_INSERTS;
 				
 			IntPtr ptrlpSource = IntPtr.Zero;
 			IntPtr prtArguments = IntPtr.Zero;
 				
 			int retVal = FormatMessage(dwFlags, ref ptrlpSource, errorCode, 0, ref lpMsgBuf, messageSize, ref prtArguments);
-			return lpMsgBuf.Trim(new char[] {char.Parse(Constants.vbCr), char.Parse(Constants.vbLf)});
+		    lpMsgBuf = Regex.Replace(lpMsgBuf, @"\r\n|\n|\r", " ");
+            return lpMsgBuf;
 		}
 			
 		[PermissionSetAttribute(SecurityAction.Demand, Name = "FullTrust")]public void StartImpersonation(string DomainName, string UserName, string Password)
 		{
 			try
 			{
-				if (!(impersonatedUser == null))
+				if (impersonatedUser != null)
 				{
 					throw (new Exception("Already impersonating a user."));
 				}

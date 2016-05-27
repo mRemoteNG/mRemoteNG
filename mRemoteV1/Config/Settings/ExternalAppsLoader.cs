@@ -19,7 +19,7 @@ namespace mRemoteNG.Config.Settings
 
         public void LoadExternalAppsFromXML()
         {
-            string oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName + "\\" + SettingsFileInfo.ExtAppsFilesName;
+            string oldPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData) + "\\" + GeneralAppInfo.ProdName + "\\" + SettingsFileInfo.ExtAppsFilesName;
             string newPath = SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.ExtAppsFilesName;
             XmlDocument xDom = new XmlDocument();
             if (File.Exists(newPath))

@@ -1,10 +1,5 @@
-
-
-using mRemoteNG.My;
-
 namespace mRemoteNG
 {
-	[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
     public partial class ReconnectGroup : System.Windows.Forms.UserControl
 	{
 		//UserControl overrides dispose to clean up the component list.

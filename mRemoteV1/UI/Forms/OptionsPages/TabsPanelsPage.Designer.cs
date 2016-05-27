@@ -4,7 +4,7 @@ using mRemoteNG.My;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-	[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
+	
     public partial class TabsPanelsPage : OptionsPage
 	{
 			

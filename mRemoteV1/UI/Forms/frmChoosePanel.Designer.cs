@@ -4,7 +4,7 @@ using mRemoteNG.My;
 
 namespace mRemoteNG
 {
-	[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
+	
     public partial class frmChoosePanel : System.Windows.Forms.Form
 	{
 		//Form overrides dispose to clean up the component list.

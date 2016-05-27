@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Net;
@@ -6,6 +5,7 @@ using System.ComponentModel;
 using System.Threading;
 using mRemoteNG.Tools;
 using System.Reflection;
+using mRemoteNG.App.Info;
 
 
 namespace mRemoteNG.App.Update
@@ -107,7 +107,7 @@ namespace mRemoteNG.App.Update
 			
 		public void SetProxySettings()
 		{
-			SetProxySettings(Convert.ToBoolean(mRemoteNG.Settings.Default.UpdateUseProxy), Convert.ToString(mRemoteNG.Settings.Default.UpdateProxyAddress), Convert.ToInt32(mRemoteNG.Settings.Default.UpdateProxyPort), Convert.ToBoolean(mRemoteNG.Settings.Default.UpdateProxyUseAuthentication), Convert.ToString(mRemoteNG.Settings.Default.UpdateProxyAuthUser), Security.Crypt.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.UpdateProxyAuthPass), Info.GeneralAppInfo.EncryptionKey));
+			SetProxySettings(Convert.ToBoolean(Settings.Default.UpdateUseProxy), Convert.ToString(Settings.Default.UpdateProxyAddress), Convert.ToInt32(Settings.Default.UpdateProxyPort), Convert.ToBoolean(Settings.Default.UpdateProxyUseAuthentication), Convert.ToString(Settings.Default.UpdateProxyAuthUser), Security.Crypt.Decrypt(Convert.ToString(Settings.Default.UpdateProxyAuthPass), GeneralAppInfo.EncryptionKey));
 		}
 			
 		public void SetProxySettings(bool useProxy, string address, int port, bool useAuthentication, string username, string password)
@@ -145,7 +145,7 @@ namespace mRemoteNG.App.Update
 				return false;
 			}
 				
-			return _currentUpdateInfo.Version > (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.Version;
+			return _currentUpdateInfo.Version > GeneralAppInfo.getVer();
 		}
 			
 		public bool IsAnnouncementAvailable()
@@ -155,7 +155,7 @@ namespace mRemoteNG.App.Update
 				return false;
 			}
 				
-			return !(_currentAnnouncementInfo.Name == mRemoteNG.Settings.Default.LastAnnouncement);
+			return (_currentAnnouncementInfo.Name != Settings.Default.LastAnnouncement);
 		}
 			
 		public void GetUpdateInfoAsync()
@@ -165,7 +165,7 @@ namespace mRemoteNG.App.Update
 				_getUpdateInfoThread.Abort();
 			}
 				
-			_getUpdateInfoThread = new Thread(new System.Threading.ThreadStart(GetUpdateInfo));
+			_getUpdateInfoThread = new Thread(new ThreadStart(GetUpdateInfo));
 			_getUpdateInfoThread.SetApartmentState(ApartmentState.STA);
 			_getUpdateInfoThread.IsBackground = true;
 			_getUpdateInfoThread.Start();
@@ -183,7 +183,7 @@ namespace mRemoteNG.App.Update
 				_getChangeLogThread.Abort();
 			}
 				
-			_getChangeLogThread = new Thread(new System.Threading.ThreadStart(GetChangeLog));
+			_getChangeLogThread = new Thread(new ThreadStart(GetChangeLog));
 			_getChangeLogThread.SetApartmentState(ApartmentState.STA);
 			_getChangeLogThread.IsBackground = true;
 			_getChangeLogThread.Start();
@@ -196,7 +196,7 @@ namespace mRemoteNG.App.Update
 				_getAnnouncementInfoThread.Abort();
 			}
 				
-			_getAnnouncementInfoThread = new Thread(new System.Threading.ThreadStart(GetAnnouncementInfo));
+			_getAnnouncementInfoThread = new Thread(new ThreadStart(GetAnnouncementInfo));
 			_getAnnouncementInfoThread.SetApartmentState(ApartmentState.STA);
 			_getAnnouncementInfoThread.IsBackground = true;
 			_getAnnouncementInfoThread.Start();
@@ -244,7 +244,7 @@ namespace mRemoteNG.App.Update
 		private WebClient CreateWebClient()
 		{
 			WebClient webClient = new WebClient();
-			webClient.Headers.Add("user-agent", Info.GeneralAppInfo.UserAgent);
+			webClient.Headers.Add("user-agent", GeneralAppInfo.UserAgent);
 			webClient.Proxy = _webProxy;
 			return webClient;
 		}
@@ -285,17 +285,17 @@ namespace mRemoteNG.App.Update
 			
 		private void GetUpdateInfo()
 		{
-			Uri updateFileUri = new Uri(new Uri(Convert.ToString(mRemoteNG.Settings.Default.UpdateAddress)), new Uri(Info.UpdateChannelInfo.FileName, UriKind.Relative));
+			Uri updateFileUri = new Uri(new Uri(Convert.ToString(Settings.Default.UpdateAddress)), new Uri(UpdateChannelInfo.FileName, UriKind.Relative));
 			DownloadStringCompletedEventArgs e = DownloadString(updateFileUri);
 				
 			if (!e.Cancelled && e.Error == null)
 			{
 				_currentUpdateInfo = UpdateInfo.FromString(e.Result);
-					
-				mRemoteNG.Settings.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
-				if (!mRemoteNG.Settings.Default.UpdatePending)
+
+                Settings.Default.CheckForUpdatesLastCheck = DateTime.UtcNow;
+				if (!Settings.Default.UpdatePending)
 				{
-					mRemoteNG.Settings.Default.UpdatePending = IsUpdateAvailable();
+                    Settings.Default.UpdatePending = IsUpdateAvailable();
 				}
 			}
 				
@@ -318,7 +318,7 @@ namespace mRemoteNG.App.Update
 			
 		private void GetAnnouncementInfo()
 		{
-			Uri announcementFileUri = new Uri(Convert.ToString(mRemoteNG.Settings.Default.AnnouncementAddress));
+			Uri announcementFileUri = new Uri(Convert.ToString(Settings.Default.AnnouncementAddress));
 			DownloadStringCompletedEventArgs e = DownloadString(announcementFileUri);
 				
 			if (!e.Cancelled && e.Error == null)
@@ -327,7 +327,7 @@ namespace mRemoteNG.App.Update
 					
 				if (!string.IsNullOrEmpty(_currentAnnouncementInfo.Name))
 				{
-					mRemoteNG.Settings.Default.LastAnnouncement = _currentAnnouncementInfo.Name;
+                    Settings.Default.LastAnnouncement = _currentAnnouncementInfo.Name;
 				}
 			}
 				
@@ -341,7 +341,7 @@ namespace mRemoteNG.App.Update
 				DownloadUpdateProgressChangedEventEvent(sender, e);
 		}
 			
-		private void DownloadUpdateCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+		private void DownloadUpdateCompleted(object sender, AsyncCompletedEventArgs e)
 		{
 			AsyncCompletedEventArgs raiseEventArgs = e;
 				
@@ -353,7 +353,7 @@ namespace mRemoteNG.App.Update
 					updateAuthenticode.RequireThumbprintMatch = true;
 					updateAuthenticode.ThumbprintToMatch = _currentUpdateInfo.CertificateThumbprint;
 						
-					if (!(updateAuthenticode.Verify() == Authenticode.StatusValue.Verified))
+					if (updateAuthenticode.Verify() != Authenticode.StatusValue.Verified)
 					{
 						if (updateAuthenticode.Status == Authenticode.StatusValue.UnhandledException)
 						{
@@ -390,11 +390,11 @@ namespace mRemoteNG.App.Update
         {
             add
             {
-                GetUpdateInfoCompletedEventEvent = (AsyncCompletedEventHandler)System.Delegate.Combine(GetUpdateInfoCompletedEventEvent, value);
+                GetUpdateInfoCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Combine(GetUpdateInfoCompletedEventEvent, value);
             }
             remove
             {
-                GetUpdateInfoCompletedEventEvent = (AsyncCompletedEventHandler)System.Delegate.Remove(GetUpdateInfoCompletedEventEvent, value);
+                GetUpdateInfoCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Remove(GetUpdateInfoCompletedEventEvent, value);
             }
         }
 
@@ -403,11 +403,11 @@ namespace mRemoteNG.App.Update
         {
             add
             {
-                GetChangeLogCompletedEventEvent = (AsyncCompletedEventHandler)System.Delegate.Combine(GetChangeLogCompletedEventEvent, value);
+                GetChangeLogCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Combine(GetChangeLogCompletedEventEvent, value);
             }
             remove
             {
-                GetChangeLogCompletedEventEvent = (AsyncCompletedEventHandler)System.Delegate.Remove(GetChangeLogCompletedEventEvent, value);
+                GetChangeLogCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Remove(GetChangeLogCompletedEventEvent, value);
             }
         }
 
@@ -416,11 +416,11 @@ namespace mRemoteNG.App.Update
         {
             add
             {
-                GetAnnouncementInfoCompletedEventEvent = (AsyncCompletedEventHandler)System.Delegate.Combine(GetAnnouncementInfoCompletedEventEvent, value);
+                GetAnnouncementInfoCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Combine(GetAnnouncementInfoCompletedEventEvent, value);
             }
             remove
             {
-                GetAnnouncementInfoCompletedEventEvent = (AsyncCompletedEventHandler)System.Delegate.Remove(GetAnnouncementInfoCompletedEventEvent, value);
+                GetAnnouncementInfoCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Remove(GetAnnouncementInfoCompletedEventEvent, value);
             }
         }
 
@@ -429,11 +429,11 @@ namespace mRemoteNG.App.Update
         {
             add
             {
-                DownloadUpdateProgressChangedEventEvent = (DownloadProgressChangedEventHandler)System.Delegate.Combine(DownloadUpdateProgressChangedEventEvent, value);
+                DownloadUpdateProgressChangedEventEvent = (DownloadProgressChangedEventHandler)Delegate.Combine(DownloadUpdateProgressChangedEventEvent, value);
             }
             remove
             {
-                DownloadUpdateProgressChangedEventEvent = (DownloadProgressChangedEventHandler)System.Delegate.Remove(DownloadUpdateProgressChangedEventEvent, value);
+                DownloadUpdateProgressChangedEventEvent = (DownloadProgressChangedEventHandler)Delegate.Remove(DownloadUpdateProgressChangedEventEvent, value);
             }
         }
 
@@ -442,11 +442,11 @@ namespace mRemoteNG.App.Update
         {
             add
             {
-                DownloadUpdateCompletedEventEvent = (AsyncCompletedEventHandler)System.Delegate.Combine(DownloadUpdateCompletedEventEvent, value);
+                DownloadUpdateCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Combine(DownloadUpdateCompletedEventEvent, value);
             }
             remove
             {
-                DownloadUpdateCompletedEventEvent = (AsyncCompletedEventHandler)System.Delegate.Remove(DownloadUpdateCompletedEventEvent, value);
+                DownloadUpdateCompletedEventEvent = (AsyncCompletedEventHandler)Delegate.Remove(DownloadUpdateCompletedEventEvent, value);
             }
         }
         #endregion
