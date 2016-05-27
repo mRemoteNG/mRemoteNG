@@ -54,7 +54,8 @@ namespace mRemoteNG.Tree
                         {
                             foreach (TreeNode tNode in SelectedNode.Nodes)
                             {
-                                tNode.Remove();
+                                if (tNode != null)
+                                    tNode.Remove();
                             }
                             SelectedNode.Remove();
                         }
