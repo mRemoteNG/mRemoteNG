@@ -47,7 +47,7 @@ namespace mRemoteNG.Tree
                 }
                 else if (ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Container)
                 {
-                    if (ConnectionTreeNode.IsEmpty(SelectedNode) == false)
+                    if (ConnectionTreeNode.IsEmpty(SelectedNode))
                     {
                         if (Interaction.MsgBox(string.Format(Language.strConfirmDeleteNodeFolder, SelectedNode.Text), MsgBoxStyle.YesNo | MsgBoxStyle.Question, null) == MsgBoxResult.Yes)
                         {
