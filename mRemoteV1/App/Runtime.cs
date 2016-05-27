@@ -1,4 +1,3 @@
-using log4net;
 using Microsoft.VisualBasic;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
@@ -555,7 +554,9 @@ namespace mRemoteNG.App
                     }
                     else
                     {
-                        Interaction.MsgBox(string.Format(Language.strErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)), (int)MsgBoxStyle.OkOnly + MsgBoxStyle.Critical, null);
+                        MessageBox.Show(frmMain.Default,
+                            string.Format(Language.strErrorStartupConnectionFileLoad, Environment.NewLine, Application.ProductName, GetStartupConnectionFileName(), MiscTools.GetExceptionMessageRecursive(ex)),
+                            "Could not load startup file.", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         Application.Exit();
                         return;
                     }

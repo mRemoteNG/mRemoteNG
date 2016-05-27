@@ -1,10 +1,9 @@
-using Microsoft.VisualBasic;
 using mRemoteNG.App;
 using System;
 using System.IO;
 using System.Threading;
 using System.Windows.Forms;
-using mRemoteNG.My;
+using mRemoteNG.UI.Forms;
 using Tamir.SharpSsh;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -14,298 +13,298 @@ namespace mRemoteNG.UI.Window
 	public class SSHTransferWindow : BaseWindow
 	{
         #region Form Init
-		internal System.Windows.Forms.ProgressBar pbStatus;
-		internal System.Windows.Forms.Button btnTransfer;
-		internal System.Windows.Forms.TextBox txtUser;
-		internal System.Windows.Forms.TextBox txtPassword;
-		internal System.Windows.Forms.TextBox txtHost;
-		internal System.Windows.Forms.TextBox txtPort;
-		internal System.Windows.Forms.Label lblHost;
-		internal System.Windows.Forms.Label lblPort;
-		internal System.Windows.Forms.Label lblUser;
-		internal System.Windows.Forms.Label lblPassword;
-		internal System.Windows.Forms.Label lblProtocol;
-		internal System.Windows.Forms.RadioButton radProtSCP;
-		internal System.Windows.Forms.RadioButton radProtSFTP;
-		internal System.Windows.Forms.GroupBox grpConnection;
-		internal System.Windows.Forms.Button btnBrowse;
-		internal System.Windows.Forms.Label lblRemoteFile;
-		internal System.Windows.Forms.TextBox txtRemoteFile;
-		internal System.Windows.Forms.TextBox txtLocalFile;
-		internal System.Windows.Forms.Label lblLocalFile;
-		internal System.Windows.Forms.GroupBox grpFiles;
+		internal ProgressBar pbStatus;
+		internal Button btnTransfer;
+		internal TextBox txtUser;
+		internal TextBox txtPassword;
+		internal TextBox txtHost;
+		internal TextBox txtPort;
+		internal Label lblHost;
+		internal Label lblPort;
+		internal Label lblUser;
+		internal Label lblPassword;
+		internal Label lblProtocol;
+		internal RadioButton radProtSCP;
+		internal RadioButton radProtSFTP;
+		internal GroupBox grpConnection;
+		internal Button btnBrowse;
+		internal Label lblRemoteFile;
+		internal TextBox txtRemoteFile;
+		internal TextBox txtLocalFile;
+		internal Label lblLocalFile;
+		internal GroupBox grpFiles;
 				
 		private void InitializeComponent()
 		{
-			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SSHTransferWindow));
-			this.grpFiles = new System.Windows.Forms.GroupBox();
-			this.Load += new System.EventHandler(SSHTransfer_Load);
-			this.lblLocalFile = new System.Windows.Forms.Label();
-			this.txtLocalFile = new System.Windows.Forms.TextBox();
-			this.txtRemoteFile = new System.Windows.Forms.TextBox();
-			this.lblRemoteFile = new System.Windows.Forms.Label();
-			this.btnBrowse = new System.Windows.Forms.Button();
-			this.btnBrowse.Click += new System.EventHandler(this.btnBrowse_Click);
-			this.grpConnection = new System.Windows.Forms.GroupBox();
-			this.radProtSFTP = new System.Windows.Forms.RadioButton();
-			this.radProtSCP = new System.Windows.Forms.RadioButton();
-			this.lblProtocol = new System.Windows.Forms.Label();
-			this.lblPassword = new System.Windows.Forms.Label();
-			this.lblUser = new System.Windows.Forms.Label();
-			this.lblPort = new System.Windows.Forms.Label();
-			this.lblHost = new System.Windows.Forms.Label();
-			this.txtPort = new System.Windows.Forms.TextBox();
-			this.txtHost = new System.Windows.Forms.TextBox();
-			this.txtPassword = new System.Windows.Forms.TextBox();
-			this.txtUser = new System.Windows.Forms.TextBox();
-			this.btnTransfer = new System.Windows.Forms.Button();
-			this.btnTransfer.Click += new System.EventHandler(this.btnTransfer_Click);
-			this.pbStatus = new System.Windows.Forms.ProgressBar();
-			this.grpFiles.SuspendLayout();
-			this.grpConnection.SuspendLayout();
-			this.SuspendLayout();
-			//
-			//grpFiles
-			//
-			this.grpFiles.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.grpFiles.Controls.Add(this.lblLocalFile);
-			this.grpFiles.Controls.Add(this.txtLocalFile);
-			this.grpFiles.Controls.Add(this.txtRemoteFile);
-			this.grpFiles.Controls.Add(this.lblRemoteFile);
-			this.grpFiles.Controls.Add(this.btnBrowse);
-			this.grpFiles.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.grpFiles.Location = new System.Drawing.Point(12, 153);
-			this.grpFiles.Name = "grpFiles";
-			this.grpFiles.Size = new System.Drawing.Size(668, 194);
-			this.grpFiles.TabIndex = 2000;
-			this.grpFiles.TabStop = false;
-			this.grpFiles.Text = "Files";
-			//
-			//lblLocalFile
-			//
-			this.lblLocalFile.AutoSize = true;
-			this.lblLocalFile.Location = new System.Drawing.Point(20, 25);
-			this.lblLocalFile.Name = "lblLocalFile";
-			this.lblLocalFile.Size = new System.Drawing.Size(52, 13);
-			this.lblLocalFile.TabIndex = 10;
-			this.lblLocalFile.Text = "Local file:";
-			//
-			//txtLocalFile
-			//
-			this.txtLocalFile.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.txtLocalFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.txtLocalFile.Location = new System.Drawing.Point(105, 23);
-			this.txtLocalFile.Name = "txtLocalFile";
-			this.txtLocalFile.Size = new System.Drawing.Size(455, 20);
-			this.txtLocalFile.TabIndex = 20;
-			//
-			//txtRemoteFile
-			//
-			this.txtRemoteFile.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.txtRemoteFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.txtRemoteFile.Location = new System.Drawing.Point(105, 49);
-			this.txtRemoteFile.Name = "txtRemoteFile";
-			this.txtRemoteFile.Size = new System.Drawing.Size(542, 20);
-			this.txtRemoteFile.TabIndex = 50;
-			//
-			//lblRemoteFile
-			//
-			this.lblRemoteFile.AutoSize = true;
-			this.lblRemoteFile.Location = new System.Drawing.Point(20, 51);
-			this.lblRemoteFile.Name = "lblRemoteFile";
-			this.lblRemoteFile.Size = new System.Drawing.Size(63, 13);
-			this.lblRemoteFile.TabIndex = 40;
-			this.lblRemoteFile.Text = "Remote file:";
-			//
-			//btnBrowse
-			//
-			this.btnBrowse.Anchor = (System.Windows.Forms.AnchorStyles) (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.btnBrowse.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnBrowse.Location = new System.Drawing.Point(566, 21);
-			this.btnBrowse.Name = "btnBrowse";
-			this.btnBrowse.Size = new System.Drawing.Size(81, 23);
-			this.btnBrowse.TabIndex = 30;
-			this.btnBrowse.Text = "Browse";
-			this.btnBrowse.UseVisualStyleBackColor = true;
-			//
-			//grpConnection
-			//
-			this.grpConnection.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.grpConnection.Controls.Add(this.radProtSFTP);
-			this.grpConnection.Controls.Add(this.radProtSCP);
-			this.grpConnection.Controls.Add(this.lblProtocol);
-			this.grpConnection.Controls.Add(this.lblPassword);
-			this.grpConnection.Controls.Add(this.lblUser);
-			this.grpConnection.Controls.Add(this.lblPort);
-			this.grpConnection.Controls.Add(this.lblHost);
-			this.grpConnection.Controls.Add(this.txtPort);
-			this.grpConnection.Controls.Add(this.txtHost);
-			this.grpConnection.Controls.Add(this.txtPassword);
-			this.grpConnection.Controls.Add(this.txtUser);
-			this.grpConnection.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.grpConnection.Location = new System.Drawing.Point(12, 12);
-			this.grpConnection.Name = "grpConnection";
-			this.grpConnection.Size = new System.Drawing.Size(668, 135);
-			this.grpConnection.TabIndex = 1000;
-			this.grpConnection.TabStop = false;
-			this.grpConnection.Text = "Connection";
-			//
-			//radProtSFTP
-			//
-			this.radProtSFTP.AutoSize = true;
-			this.radProtSFTP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.radProtSFTP.Location = new System.Drawing.Point(153, 103);
-			this.radProtSFTP.Name = "radProtSFTP";
-			this.radProtSFTP.Size = new System.Drawing.Size(51, 17);
-			this.radProtSFTP.TabIndex = 110;
-			this.radProtSFTP.Text = "SFTP";
-			this.radProtSFTP.UseVisualStyleBackColor = true;
-			//
-			//radProtSCP
-			//
-			this.radProtSCP.AutoSize = true;
-			this.radProtSCP.Checked = true;
-			this.radProtSCP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.radProtSCP.Location = new System.Drawing.Point(92, 103);
-			this.radProtSCP.Name = "radProtSCP";
-			this.radProtSCP.Size = new System.Drawing.Size(45, 17);
-			this.radProtSCP.TabIndex = 100;
-			this.radProtSCP.TabStop = true;
-			this.radProtSCP.Text = "SCP";
-			this.radProtSCP.UseVisualStyleBackColor = true;
-			//
-			//lblProtocol
-			//
-			this.lblProtocol.AutoSize = true;
-			this.lblProtocol.Location = new System.Drawing.Point(20, 105);
-			this.lblProtocol.Name = "lblProtocol";
-			this.lblProtocol.Size = new System.Drawing.Size(49, 13);
-			this.lblProtocol.TabIndex = 90;
-			this.lblProtocol.Text = "Protocol:";
-			//
-			//lblPassword
-			//
-			this.lblPassword.AutoSize = true;
-			this.lblPassword.Location = new System.Drawing.Point(20, 79);
-			this.lblPassword.Name = "lblPassword";
-			this.lblPassword.Size = new System.Drawing.Size(56, 13);
-			this.lblPassword.TabIndex = 70;
-			this.lblPassword.Text = "Password:";
-			//
-			//lblUser
-			//
-			this.lblUser.AutoSize = true;
-			this.lblUser.Location = new System.Drawing.Point(20, 53);
-			this.lblUser.Name = "lblUser";
-			this.lblUser.Size = new System.Drawing.Size(32, 13);
-			this.lblUser.TabIndex = 50;
-			this.lblUser.Text = "User:";
-			//
-			//lblPort
-			//
-			this.lblPort.Anchor = (System.Windows.Forms.AnchorStyles) (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.lblPort.AutoSize = true;
-			this.lblPort.Location = new System.Drawing.Point(582, 27);
-			this.lblPort.Name = "lblPort";
-			this.lblPort.Size = new System.Drawing.Size(29, 13);
-			this.lblPort.TabIndex = 30;
-			this.lblPort.Text = "Port:";
-			//
-			//lblHost
-			//
-			this.lblHost.AutoSize = true;
-			this.lblHost.Location = new System.Drawing.Point(20, 27);
-			this.lblHost.Name = "lblHost";
-			this.lblHost.Size = new System.Drawing.Size(32, 13);
-			this.lblHost.TabIndex = 10;
-			this.lblHost.Text = "Host:";
-			//
-			//txtPort
-			//
-			this.txtPort.Anchor = (System.Windows.Forms.AnchorStyles) (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right);
-			this.txtPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.txtPort.Location = new System.Drawing.Point(617, 25);
-			this.txtPort.Name = "txtPort";
-			this.txtPort.Size = new System.Drawing.Size(30, 20);
-			this.txtPort.TabIndex = 40;
-			//
-			//txtHost
-			//
-			this.txtHost.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.txtHost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.txtHost.Location = new System.Drawing.Point(105, 25);
-			this.txtHost.Name = "txtHost";
-			this.txtHost.Size = new System.Drawing.Size(471, 20);
-			this.txtHost.TabIndex = 20;
-			//
-			//txtPassword
-			//
-			this.txtPassword.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.txtPassword.Location = new System.Drawing.Point(105, 77);
-			this.txtPassword.Name = "txtPassword";
-			this.txtPassword.PasswordChar = global::Microsoft.VisualBasic.Strings.ChrW(42);
-			this.txtPassword.Size = new System.Drawing.Size(471, 20);
-			this.txtPassword.TabIndex = 80;
-			//
-			//txtUser
-			//
-			this.txtUser.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-			this.txtUser.Location = new System.Drawing.Point(105, 51);
-			this.txtUser.Name = "txtUser";
-			this.txtUser.Size = new System.Drawing.Size(471, 20);
-			this.txtUser.TabIndex = 60;
-			//
-			//btnTransfer
-			//
-			this.btnTransfer.Anchor = (System.Windows.Forms.AnchorStyles) (System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right);
-			this.btnTransfer.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.btnTransfer.Image = Resources.SSHTransfer;
-			this.btnTransfer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-			this.btnTransfer.Location = new System.Drawing.Point(597, 382);
-			this.btnTransfer.Name = "btnTransfer";
-			this.btnTransfer.Size = new System.Drawing.Size(83, 29);
-			this.btnTransfer.TabIndex = 10000;
-			this.btnTransfer.Text = "Transfer";
-			this.btnTransfer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-			this.btnTransfer.UseVisualStyleBackColor = true;
-			//
-			//pbStatus
-			//
-			this.pbStatus.Anchor = (System.Windows.Forms.AnchorStyles) ((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.pbStatus.Location = new System.Drawing.Point(12, 353);
-			this.pbStatus.Name = "pbStatus";
-			this.pbStatus.Size = new System.Drawing.Size(668, 23);
-			this.pbStatus.TabIndex = 3000;
-			//
-			//SSHTransfer
-			//
-			this.ClientSize = new System.Drawing.Size(692, 423);
-			this.Controls.Add(this.grpFiles);
-			this.Controls.Add(this.grpConnection);
-			this.Controls.Add(this.btnTransfer);
-			this.Controls.Add(this.pbStatus);
-			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
-			this.Icon = (System.Drawing.Icon) (resources.GetObject("$this.Icon"));
-			this.Name = "SSHTransfer";
-			this.TabText = "SSH File Transfer";
-			this.Text = "SSH File Transfer";
-			this.grpFiles.ResumeLayout(false);
-			this.grpFiles.PerformLayout();
-			this.grpConnection.ResumeLayout(false);
-			this.grpConnection.PerformLayout();
-			this.ResumeLayout(false);
-					
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SSHTransferWindow));
+            grpFiles = new GroupBox();
+            lblLocalFile = new Label();
+            txtLocalFile = new TextBox();
+            txtRemoteFile = new TextBox();
+            lblRemoteFile = new Label();
+            btnBrowse = new Button();
+            grpConnection = new GroupBox();
+            radProtSFTP = new RadioButton();
+            radProtSCP = new RadioButton();
+            lblProtocol = new Label();
+            lblPassword = new Label();
+            lblUser = new Label();
+            lblPort = new Label();
+            lblHost = new Label();
+            txtPort = new TextBox();
+            txtHost = new TextBox();
+            txtPassword = new TextBox();
+            txtUser = new TextBox();
+            btnTransfer = new Button();
+            pbStatus = new ProgressBar();
+            grpFiles.SuspendLayout();
+            grpConnection.SuspendLayout();
+            SuspendLayout();
+            // 
+            // grpFiles
+            // 
+            grpFiles.Anchor = (((AnchorStyles.Top | AnchorStyles.Bottom)
+            | AnchorStyles.Left)
+            | AnchorStyles.Right);
+            grpFiles.Controls.Add(lblLocalFile);
+            grpFiles.Controls.Add(txtLocalFile);
+            grpFiles.Controls.Add(txtRemoteFile);
+            grpFiles.Controls.Add(lblRemoteFile);
+            grpFiles.Controls.Add(btnBrowse);
+            grpFiles.FlatStyle = FlatStyle.Flat;
+            grpFiles.Location = new System.Drawing.Point(12, 153);
+            grpFiles.Name = "grpFiles";
+            grpFiles.Size = new System.Drawing.Size(668, 194);
+            grpFiles.TabIndex = 2000;
+            grpFiles.TabStop = false;
+            grpFiles.Text = "Files";
+            // 
+            // lblLocalFile
+            // 
+            lblLocalFile.AutoSize = true;
+            lblLocalFile.Location = new System.Drawing.Point(20, 25);
+            lblLocalFile.Name = "lblLocalFile";
+            lblLocalFile.Size = new System.Drawing.Size(55, 13);
+            lblLocalFile.TabIndex = 10;
+            lblLocalFile.Text = "Local file:";
+            // 
+            // txtLocalFile
+            // 
+            txtLocalFile.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
+            | AnchorStyles.Right);
+            txtLocalFile.BorderStyle = BorderStyle.FixedSingle;
+            txtLocalFile.Location = new System.Drawing.Point(105, 23);
+            txtLocalFile.Name = "txtLocalFile";
+            txtLocalFile.Size = new System.Drawing.Size(455, 22);
+            txtLocalFile.TabIndex = 20;
+            // 
+            // txtRemoteFile
+            // 
+            txtRemoteFile.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
+            | AnchorStyles.Right);
+            txtRemoteFile.BorderStyle = BorderStyle.FixedSingle;
+            txtRemoteFile.Location = new System.Drawing.Point(105, 49);
+            txtRemoteFile.Name = "txtRemoteFile";
+            txtRemoteFile.Size = new System.Drawing.Size(542, 22);
+            txtRemoteFile.TabIndex = 50;
+            // 
+            // lblRemoteFile
+            // 
+            lblRemoteFile.AutoSize = true;
+            lblRemoteFile.Location = new System.Drawing.Point(20, 51);
+            lblRemoteFile.Name = "lblRemoteFile";
+            lblRemoteFile.Size = new System.Drawing.Size(68, 13);
+            lblRemoteFile.TabIndex = 40;
+            lblRemoteFile.Text = "Remote file:";
+            // 
+            // btnBrowse
+            // 
+            btnBrowse.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            btnBrowse.FlatStyle = FlatStyle.Flat;
+            btnBrowse.Location = new System.Drawing.Point(566, 21);
+            btnBrowse.Name = "btnBrowse";
+            btnBrowse.Size = new System.Drawing.Size(81, 23);
+            btnBrowse.TabIndex = 30;
+            btnBrowse.Text = "Browse";
+            btnBrowse.UseVisualStyleBackColor = true;
+            btnBrowse.Click += new EventHandler(btnBrowse_Click);
+            // 
+            // grpConnection
+            // 
+            grpConnection.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
+            | AnchorStyles.Right);
+            grpConnection.Controls.Add(radProtSFTP);
+            grpConnection.Controls.Add(radProtSCP);
+            grpConnection.Controls.Add(lblProtocol);
+            grpConnection.Controls.Add(lblPassword);
+            grpConnection.Controls.Add(lblUser);
+            grpConnection.Controls.Add(lblPort);
+            grpConnection.Controls.Add(lblHost);
+            grpConnection.Controls.Add(txtPort);
+            grpConnection.Controls.Add(txtHost);
+            grpConnection.Controls.Add(txtPassword);
+            grpConnection.Controls.Add(txtUser);
+            grpConnection.FlatStyle = FlatStyle.Flat;
+            grpConnection.Location = new System.Drawing.Point(12, 12);
+            grpConnection.Name = "grpConnection";
+            grpConnection.Size = new System.Drawing.Size(668, 135);
+            grpConnection.TabIndex = 1000;
+            grpConnection.TabStop = false;
+            grpConnection.Text = "Connection";
+            // 
+            // radProtSFTP
+            // 
+            radProtSFTP.AutoSize = true;
+            radProtSFTP.FlatStyle = FlatStyle.Flat;
+            radProtSFTP.Location = new System.Drawing.Point(153, 103);
+            radProtSFTP.Name = "radProtSFTP";
+            radProtSFTP.Size = new System.Drawing.Size(47, 17);
+            radProtSFTP.TabIndex = 110;
+            radProtSFTP.Text = "SFTP";
+            radProtSFTP.UseVisualStyleBackColor = true;
+            // 
+            // radProtSCP
+            // 
+            radProtSCP.AutoSize = true;
+            radProtSCP.Checked = true;
+            radProtSCP.FlatStyle = FlatStyle.Flat;
+            radProtSCP.Location = new System.Drawing.Point(92, 103);
+            radProtSCP.Name = "radProtSCP";
+            radProtSCP.Size = new System.Drawing.Size(43, 17);
+            radProtSCP.TabIndex = 100;
+            radProtSCP.TabStop = true;
+            radProtSCP.Text = "SCP";
+            radProtSCP.UseVisualStyleBackColor = true;
+            // 
+            // lblProtocol
+            // 
+            lblProtocol.AutoSize = true;
+            lblProtocol.Location = new System.Drawing.Point(20, 105);
+            lblProtocol.Name = "lblProtocol";
+            lblProtocol.Size = new System.Drawing.Size(53, 13);
+            lblProtocol.TabIndex = 90;
+            lblProtocol.Text = "Protocol:";
+            // 
+            // lblPassword
+            // 
+            lblPassword.AutoSize = true;
+            lblPassword.Location = new System.Drawing.Point(20, 79);
+            lblPassword.Name = "lblPassword";
+            lblPassword.Size = new System.Drawing.Size(59, 13);
+            lblPassword.TabIndex = 70;
+            lblPassword.Text = "Password:";
+            // 
+            // lblUser
+            // 
+            lblUser.AutoSize = true;
+            lblUser.Location = new System.Drawing.Point(20, 53);
+            lblUser.Name = "lblUser";
+            lblUser.Size = new System.Drawing.Size(33, 13);
+            lblUser.TabIndex = 50;
+            lblUser.Text = "User:";
+            // 
+            // lblPort
+            // 
+            lblPort.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            lblPort.AutoSize = true;
+            lblPort.Location = new System.Drawing.Point(582, 27);
+            lblPort.Name = "lblPort";
+            lblPort.Size = new System.Drawing.Size(31, 13);
+            lblPort.TabIndex = 30;
+            lblPort.Text = "Port:";
+            // 
+            // lblHost
+            // 
+            lblHost.AutoSize = true;
+            lblHost.Location = new System.Drawing.Point(20, 27);
+            lblHost.Name = "lblHost";
+            lblHost.Size = new System.Drawing.Size(34, 13);
+            lblHost.TabIndex = 10;
+            lblHost.Text = "Host:";
+            // 
+            // txtPort
+            // 
+            txtPort.Anchor = (AnchorStyles.Top | AnchorStyles.Right);
+            txtPort.BorderStyle = BorderStyle.FixedSingle;
+            txtPort.Location = new System.Drawing.Point(617, 25);
+            txtPort.Name = "txtPort";
+            txtPort.Size = new System.Drawing.Size(30, 22);
+            txtPort.TabIndex = 40;
+            // 
+            // txtHost
+            // 
+            txtHost.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
+            | AnchorStyles.Right);
+            txtHost.BorderStyle = BorderStyle.FixedSingle;
+            txtHost.Location = new System.Drawing.Point(105, 25);
+            txtHost.Name = "txtHost";
+            txtHost.Size = new System.Drawing.Size(471, 22);
+            txtHost.TabIndex = 20;
+            // 
+            // txtPassword
+            // 
+            txtPassword.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
+            | AnchorStyles.Right);
+            txtPassword.BorderStyle = BorderStyle.FixedSingle;
+            txtPassword.Location = new System.Drawing.Point(105, 77);
+            txtPassword.Name = "txtPassword";
+            txtPassword.Size = new System.Drawing.Size(471, 22);
+            txtPassword.TabIndex = 80;
+            txtPassword.UseSystemPasswordChar = true;
+            // 
+            // txtUser
+            // 
+            txtUser.Anchor = ((AnchorStyles.Top | AnchorStyles.Left)
+            | AnchorStyles.Right);
+            txtUser.BorderStyle = BorderStyle.FixedSingle;
+            txtUser.Location = new System.Drawing.Point(105, 51);
+            txtUser.Name = "txtUser";
+            txtUser.Size = new System.Drawing.Size(471, 22);
+            txtUser.TabIndex = 60;
+            // 
+            // btnTransfer
+            // 
+            btnTransfer.Anchor = (AnchorStyles.Bottom | AnchorStyles.Right);
+            btnTransfer.FlatStyle = FlatStyle.Flat;
+            btnTransfer.Image = Resources.SSHTransfer;
+            btnTransfer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            btnTransfer.Location = new System.Drawing.Point(597, 382);
+            btnTransfer.Name = "btnTransfer";
+            btnTransfer.Size = new System.Drawing.Size(83, 29);
+            btnTransfer.TabIndex = 10000;
+            btnTransfer.Text = "Transfer";
+            btnTransfer.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            btnTransfer.UseVisualStyleBackColor = true;
+            btnTransfer.Click += new EventHandler(btnTransfer_Click);
+            // 
+            // pbStatus
+            // 
+            pbStatus.Anchor = ((AnchorStyles.Bottom | AnchorStyles.Left)
+            | AnchorStyles.Right);
+            pbStatus.Location = new System.Drawing.Point(12, 353);
+            pbStatus.Name = "pbStatus";
+            pbStatus.Size = new System.Drawing.Size(668, 23);
+            pbStatus.TabIndex = 3000;
+            // 
+            // SSHTransferWindow
+            // 
+            ClientSize = new System.Drawing.Size(692, 423);
+            Controls.Add(grpFiles);
+            Controls.Add(grpConnection);
+            Controls.Add(btnTransfer);
+            Controls.Add(pbStatus);
+            Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            Name = "SSHTransferWindow";
+            TabText = "SSH File Transfer";
+            Text = "SSH File Transfer";
+            Load += new EventHandler(SSHTransfer_Load);
+            grpFiles.ResumeLayout(false);
+            grpFiles.PerformLayout();
+            grpConnection.ResumeLayout(false);
+            grpConnection.PerformLayout();
+            ResumeLayout(false);
+
 		}
         #endregion
 		
@@ -319,11 +318,11 @@ namespace mRemoteNG.UI.Window
 		{
 			get
 			{
-				return this.txtHost.Text;
+				return txtHost.Text;
 			}
 			set
 			{
-				this.txtHost.Text = value;
+                txtHost.Text = value;
 			}
 		}
 				
@@ -331,11 +330,11 @@ namespace mRemoteNG.UI.Window
 		{
 			get
 			{
-				return this.txtPort.Text;
+				return txtPort.Text;
 			}
 			set
 			{
-				this.txtPort.Text = value;
+                txtPort.Text = value;
 			}
 		}
 				
@@ -343,11 +342,11 @@ namespace mRemoteNG.UI.Window
 		{
 			get
 			{
-				return this.txtUser.Text;
+				return txtUser.Text;
 			}
 			set
 			{
-				this.txtUser.Text = value;
+                txtUser.Text = value;
 			}
 		}
 				
@@ -355,17 +354,17 @@ namespace mRemoteNG.UI.Window
 		{
 			get
 			{
-				return this.txtPassword.Text;
+				return txtPassword.Text;
 			}
 			set
 			{
-				this.txtPassword.Text = value;
+                txtPassword.Text = value;
 			}
 		}
         #endregion
 		
         #region Form Stuff
-		private void SSHTransfer_Load(object sender, System.EventArgs e)
+		private void SSHTransfer_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
 		}
@@ -397,7 +396,7 @@ namespace mRemoteNG.UI.Window
 				return;
 			}
 					
-			if (File.Exists(this.txtLocalFile.Text) == false)
+			if (File.Exists(txtLocalFile.Text) == false)
 			{
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.strLocalFileDoesNotExist);
 				return;
@@ -407,23 +406,23 @@ namespace mRemoteNG.UI.Window
 			{
 				if (Protocol == SSHTransferProtocol.SCP)
 				{
-					this.sshT = new Scp(txtHost.Text, txtUser.Text, txtPassword.Text);
+                    sshT = new Scp(txtHost.Text, txtUser.Text, txtPassword.Text);
 				}
 				else if (Protocol == SSHTransferProtocol.SFTP)
 				{
-					this.sshT = new Sftp(txtHost.Text, txtUser.Text, txtPassword.Text);
+                    sshT = new Sftp(txtHost.Text, txtUser.Text, txtPassword.Text);
 				}
 						
 				sshT.OnTransferStart += SshTransfer_Start;
 				sshT.OnTransferProgress += SshTransfer_Progress;
 				sshT.OnTransferEnd += SshTransfer_End;
+
+                sshT.Connect(Convert.ToInt32(txtPort.Text));
 						
-				this.sshT.Connect(Convert.ToInt32(this.txtPort.Text));
+				LocalFile = txtLocalFile.Text;
+				RemoteFile = txtRemoteFile.Text;
 						
-				LocalFile = this.txtLocalFile.Text;
-				RemoteFile = this.txtRemoteFile.Text;
-						
-				Thread t = new Thread(new System.Threading.ThreadStart(StartTransferBG));
+				Thread t = new Thread(new ThreadStart(StartTransferBG));
 				t.SetApartmentState(ApartmentState.STA);
 				t.IsBackground = true;
 				t.Start();
@@ -431,7 +430,7 @@ namespace mRemoteNG.UI.Window
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + ex.Message);
-				this.sshT.Close();
+                sshT.Close();
 			}
 		}
 				
@@ -443,7 +442,7 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				DisableButtons();
-				this.sshT.Put(LocalFile, RemoteFile);
+                sshT.Put(LocalFile, RemoteFile);
 			}
 			catch (Exception ex)
 			{
@@ -453,19 +452,19 @@ namespace mRemoteNG.UI.Window
 				
 		private bool AllFieldsSet()
 		{
-			if (this.txtHost.Text != "" && this.txtPort.Text != "" && this.txtUser.Text != "" && this.txtLocalFile.Text != "" && this.txtRemoteFile.Text != "")
+			if (txtHost.Text != "" && txtPort.Text != "" && txtUser.Text != "" && txtLocalFile.Text != "" && txtRemoteFile.Text != "")
 			{
-				if (this.txtPassword.Text == "")
+				if (txtPassword.Text == "")
 				{
-					if (Interaction.MsgBox(Language.strEmptyPasswordContinue, (Microsoft.VisualBasic.MsgBoxStyle) (MsgBoxStyle.Question | MsgBoxStyle.YesNo), null) == MsgBoxResult.No)
+                    if (MessageBox.Show(frmMain.Default, Language.strEmptyPasswordContinue, "Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
 					{
 						return false;
 					}
 				}
 						
-				if (this.txtRemoteFile.Text.EndsWith("/") || this.txtRemoteFile.Text.EndsWith("\\"))
+				if (txtRemoteFile.Text.EndsWith("/") || txtRemoteFile.Text.EndsWith("\\"))
 				{
-					this.txtRemoteFile.Text += this.txtLocalFile.Text.Substring(this.txtLocalFile.Text.LastIndexOf("\\") + 1);
+                    txtRemoteFile.Text += txtLocalFile.Text.Substring(txtLocalFile.Text.LastIndexOf("\\") + 1);
 				}
 						
 				return true;
@@ -486,7 +485,7 @@ namespace mRemoteNG.UI.Window
 			if (pbStatus.InvokeRequired)
 			{
 				SetStatusCB d = new SetStatusCB(SetStatus);
-				this.pbStatus.Invoke(d);
+                pbStatus.Invoke(d);
 			}
 			else
 			{
@@ -501,7 +500,7 @@ namespace mRemoteNG.UI.Window
 			if (btnTransfer.InvokeRequired)
 			{
 				EnableButtonsCB d = new EnableButtonsCB(EnableButtons);
-				this.btnTransfer.Invoke(d);
+                btnTransfer.Invoke(d);
 			}
 			else
 			{
@@ -515,7 +514,7 @@ namespace mRemoteNG.UI.Window
 			if (btnTransfer.InvokeRequired)
 			{
 				DisableButtonsCB d = new DisableButtonsCB(DisableButtons);
-				this.btnTransfer.Invoke(d);
+                btnTransfer.Invoke(d);
 			}
 			else
 			{
@@ -551,13 +550,13 @@ namespace mRemoteNG.UI.Window
 						
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.strSSHTransferFailed);
 						
-				if (this.sshT != null)
+				if (sshT != null)
 				{
-					this.sshT.Close();
+                    sshT.Close();
 				}
-				else if (this.sshT != null)
+				else if (sshT != null)
 				{
-					this.sshT.Close();
+                    sshT.Close();
 				}
 			}
 			catch (Exception ex)
@@ -570,37 +569,37 @@ namespace mRemoteNG.UI.Window
         #region Public Methods
 		public SSHTransferWindow(DockContent Panel)
 		{
-			this.WindowType = WindowType.SSHTransfer;
-			this.DockPnl = Panel;
-			this.InitializeComponent();
-					
-			this.oDlg = new OpenFileDialog();
-			this.oDlg.Filter = "All Files (*.*)|*.*";
-			this.oDlg.CheckFileExists = true;
+            WindowType = WindowType.SSHTransfer;
+            DockPnl = Panel;
+            InitializeComponent();
+
+            oDlg = new OpenFileDialog();
+            oDlg.Filter = "All Files (*.*)|*.*";
+            oDlg.CheckFileExists = true;
 		}
         #endregion
 		
         #region Form Stuff
-		private void btnBrowse_Click(System.Object sender, System.EventArgs e)
+		private void btnBrowse_Click(object sender, EventArgs e)
 		{
-			if (this.oDlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+			if (oDlg.ShowDialog() == DialogResult.OK)
 			{
-				if (this.oDlg.FileName != "")
+				if (oDlg.FileName != "")
 				{
-					this.txtLocalFile.Text = this.oDlg.FileName;
+                    txtLocalFile.Text = oDlg.FileName;
 				}
 			}
 		}
 				
-		private void btnTransfer_Click(System.Object sender, System.EventArgs e)
+		private void btnTransfer_Click(object sender, EventArgs e)
 		{
-			if (this.radProtSCP.Checked)
+			if (radProtSCP.Checked)
 			{
-				this.StartTransfer(SSHTransferProtocol.SCP);
+                StartTransfer(SSHTransferProtocol.SCP);
 			}
-			else if (this.radProtSFTP.Checked)
+			else if (radProtSFTP.Checked)
 			{
-				this.StartTransfer(SSHTransferProtocol.SFTP);
+                StartTransfer(SSHTransferProtocol.SFTP);
 			}
 		}
         #endregion

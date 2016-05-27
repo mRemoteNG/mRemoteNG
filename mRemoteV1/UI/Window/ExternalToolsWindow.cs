@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System;
-using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 
 
@@ -23,7 +21,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 				
         #region Private Fields
-		private Tools.ExternalTool _selectedTool = null;
+		private Tools.ExternalTool _selectedTool;
         #endregion
 				
         #region Private Methods
@@ -34,12 +32,12 @@ namespace mRemoteNG.UI.Window
 			UpdateToolsListView();
 		}
 				
-		static public void ExternalTools_FormClosed(System.Object sender, FormClosedEventArgs e)
+		static public void ExternalTools_FormClosed(object sender, FormClosedEventArgs e)
 		{
-			mRemoteNG.Config.Settings.SettingsSaver.SaveExternalAppsToXML();
+            Config.Settings.SettingsSaver.SaveExternalAppsToXML();
 		}
 				
-		public void NewTool_Click(System.Object sender, EventArgs e)
+		public void NewTool_Click(object sender, EventArgs e)
 		{
 			try
 			{
@@ -54,11 +52,11 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		public void DeleteTool_Click(System.Object sender, EventArgs e)
+		public void DeleteTool_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				string message = "";
+				string message;
 				if (ToolsListView.SelectedItems.Count == 1)
 				{
 					message = string.Format(Language.strConfirmDeleteExternalTool, ToolsListView.SelectedItems[0].Text);
@@ -71,8 +69,8 @@ namespace mRemoteNG.UI.Window
 				{
 					return ;
 				}
-						
-				if (!(Interaction.MsgBox(message, (Microsoft.VisualBasic.MsgBoxStyle) (MsgBoxStyle.Question | MsgBoxStyle.YesNo), null) == MsgBoxResult.Yes))
+				
+				if (MessageBox.Show(frmMain.Default, message, "Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
 				{
 					return ;
 				}
@@ -95,12 +93,12 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		public void LaunchTool_Click(System.Object sender, EventArgs e)
+		public void LaunchTool_Click(object sender, EventArgs e)
 		{
 			LaunchTool();
 		}
 				
-		public void ToolsListView_SelectedIndexChanged(System.Object sender, EventArgs e)
+		public void ToolsListView_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			try
 			{
@@ -161,7 +159,7 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		public void BrowseButton_Click(System.Object sender, EventArgs e)
+		public void BrowseButton_Click(object sender, EventArgs e)
 		{
 			try
 			{
@@ -181,7 +179,7 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		public void TryToIntegrateCheckBox_CheckedChanged(System.Object sender, EventArgs e)
+		public void TryToIntegrateCheckBox_CheckedChanged(object sender, EventArgs e)
 		{
 			if (TryToIntegrateCheckBox.Checked)
 			{
