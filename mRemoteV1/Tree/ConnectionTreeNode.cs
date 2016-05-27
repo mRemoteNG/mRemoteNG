@@ -108,7 +108,7 @@ namespace mRemoteNG.Tree
 		{
 			try
 			{
-				if (treeNode.Nodes.Count <= 0)
+				if (treeNode.Nodes.Count > 0)
 					return false;
 			}
 			catch (Exception ex)

@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools.Sorting;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace mRemoteNG.Tree
 {
@@ -37,43 +37,31 @@ namespace mRemoteNG.Tree
         {
             try
             {
-                if (SelectedNode == null)
-                {
+                if (!SelectedNodeIsAValidDeletionTarget())
                     return;
-                }
 
-                if (ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Root)
+                if (ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Container)
                 {
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "The root item cannot be deleted!");
-                }
-                else if (ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Container)
-                {
-                    if (ConnectionTreeNode.IsEmpty(SelectedNode) == false)
+                    if (ConnectionTreeNode.IsEmpty(SelectedNode))
                     {
-                        
-                        if (MessageBox.Show(string.Format(Language.strConfirmDeleteNodeFolder, SelectedNode.Text), "Confirm Delete?", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                        {
+                        if (UserConfirmsEmptyFolderDeletion())
                             SelectedNode.Remove();
-                        }
                     }
                     else
                     {
-                        if (MessageBox.Show(string.Format(Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text), "Confirm Delete?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                        if (UserConfirmsNonEmptyFolderDeletion())
                         {
-                            foreach (TreeNode tNode in SelectedNode.Nodes)
-                            {
-                                tNode.Remove();
-                            }
+                            TreeView.BeginUpdate();
+                            SelectedNode.Nodes.Clear();
                             SelectedNode.Remove();
+                            TreeView.EndUpdate();
                         }
                     }
                 }
                 else if (ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Connection)
                 {
-                    if (MessageBox.Show(string.Format(Language.strConfirmDeleteNodeConnection, SelectedNode.Text), "Confirm Delete?", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                    {
+                    if (UserConfirmsConnectionDeletion())
                         SelectedNode.Remove();
-                    }
                 }
                 else
                 {
@@ -84,6 +72,43 @@ namespace mRemoteNG.Tree
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Deleting selected node failed" + Environment.NewLine + ex.Message, true);
             }
+        }
+
+        private static bool SelectedNodeIsAValidDeletionTarget()
+        {
+            bool validDeletionTarget = true;
+            if (SelectedNode == null)
+                validDeletionTarget = false;
+            else if (ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Root)
+            {
+                validDeletionTarget = false;
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "The root item cannot be deleted!");
+            }
+            return validDeletionTarget;
+        }
+
+        private static bool UserConfirmsEmptyFolderDeletion()
+        {
+            string messagePrompt = string.Format(Language.strConfirmDeleteNodeFolder, SelectedNode.Text);
+            return PromptUser(messagePrompt);
+        }
+
+        private static bool UserConfirmsNonEmptyFolderDeletion()
+        {
+            string messagePrompt = string.Format(Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text);
+            return PromptUser(messagePrompt);
+        }
+
+        private static bool UserConfirmsConnectionDeletion()
+        {
+            string messagePrompt = string.Format(Language.strConfirmDeleteNodeConnection, SelectedNode.Text);
+            return PromptUser(messagePrompt);
+        }
+
+        private static bool PromptUser(string PromptMessage)
+        {
+            DialogResult msgBoxResponse = MessageBox.Show(PromptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return (msgBoxResponse == DialogResult.Yes);
         }
 
         public static void StartRenameSelectedNode()
