@@ -113,10 +113,7 @@ namespace mRemoteNG.Tree
 
         public static void StartRenameSelectedNode()
         {
-            if (SelectedNode != null)
-            {
-                SelectedNode.BeginEdit();
-            }
+            SelectedNode?.BeginEdit();
         }
 
         public static void FinishRenameSelectedNode(string newName)
@@ -130,28 +127,26 @@ namespace mRemoteNG.Tree
         {
             try
             {
-                if (Settings.Default.ShowDescriptionTooltipsInTree)
+                if (!Settings.Default.ShowDescriptionTooltipsInTree) return;
+                //Find the node under the mouse.
+                TreeNode new_node = _TreeView.GetNodeAt(e.X, e.Y);
+                if (new_node == null || new_node.Equals(SetNodeToolTip_old_node))
                 {
-                    //Find the node under the mouse.
-                    TreeNode new_node = _TreeView.GetNodeAt(e.X, e.Y);
-                    if (new_node == null || new_node.Equals(SetNodeToolTip_old_node))
-                    {
-                        return;
-                    }
-                    SetNodeToolTip_old_node = new_node;
+                    return;
+                }
+                SetNodeToolTip_old_node = new_node;
 
-                    //See if we have a node.
-                    if (SetNodeToolTip_old_node == null)
+                //See if we have a node.
+                if (SetNodeToolTip_old_node == null)
+                {
+                    tTip.SetToolTip(_TreeView, "");
+                }
+                else
+                {
+                    //Get this node's object data.
+                    if (ConnectionTreeNode.GetNodeType(SetNodeToolTip_old_node) == TreeNodeType.Connection)
                     {
-                        tTip.SetToolTip(_TreeView, "");
-                    }
-                    else
-                    {
-                        //Get this node's object data.
-                        if (ConnectionTreeNode.GetNodeType(SetNodeToolTip_old_node) == TreeNodeType.Connection)
-                        {
-                            tTip.SetToolTip(_TreeView, ((ConnectionInfo) SetNodeToolTip_old_node.Tag).Description);
-                        }
+                        tTip.SetToolTip(_TreeView, ((ConnectionInfo) SetNodeToolTip_old_node.Tag).Description);
                     }
                 }
             }
@@ -182,21 +177,16 @@ namespace mRemoteNG.Tree
         {
             try
             {
-                if (SelectedNode != null)
-                {
-                    if (!(SelectedNode.NextNode == null))
-                    {
-                        TreeView.BeginUpdate();
-                        TreeView.Sorted = false;
+                if (SelectedNode?.NextNode == null) return;
+                TreeView.BeginUpdate();
+                TreeView.Sorted = false;
 
-                        TreeNode newNode = (TreeNode)SelectedNode.Clone();
-                        SelectedNode.Parent.Nodes.Insert(SelectedNode.Index + 2, newNode);
-                        SelectedNode.Remove();
-                        SelectedNode = newNode;
+                TreeNode newNode = (TreeNode)SelectedNode.Clone();
+                SelectedNode.Parent.Nodes.Insert(SelectedNode.Index + 2, newNode);
+                SelectedNode.Remove();
+                SelectedNode = newNode;
 
-                        TreeView.EndUpdate();
-                    }
-                }
+                TreeView.EndUpdate();
             }
             catch (Exception ex)
             {
@@ -208,21 +198,16 @@ namespace mRemoteNG.Tree
         {
             try
             {
-                if (SelectedNode != null)
-                {
-                    if (!(SelectedNode.PrevNode == null))
-                    {
-                        TreeView.BeginUpdate();
-                        TreeView.Sorted = false;
+                if (SelectedNode?.PrevNode == null) return;
+                TreeView.BeginUpdate();
+                TreeView.Sorted = false;
 
-                        TreeNode newNode = (TreeNode)SelectedNode.Clone();
-                        SelectedNode.Parent.Nodes.Insert(SelectedNode.Index - 1, newNode);
-                        SelectedNode.Remove();
-                        SelectedNode = newNode;
+                TreeNode newNode = (TreeNode)SelectedNode.Clone();
+                SelectedNode.Parent.Nodes.Insert(SelectedNode.Index - 1, newNode);
+                SelectedNode.Remove();
+                SelectedNode = newNode;
 
-                        TreeView.EndUpdate();
-                    }
-                }
+                TreeView.EndUpdate();
             }
             catch (Exception ex)
             {
