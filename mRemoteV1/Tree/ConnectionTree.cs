@@ -52,8 +52,10 @@ namespace mRemoteNG.Tree
                     {
                         if (UserConfirmsNonEmptyFolderDeletion())
                         {
+                            TreeView.BeginUpdate();
                             SelectedNode.Nodes.Clear();
                             SelectedNode.Remove();
+                            TreeView.EndUpdate();
                         }
                     }
                 }
