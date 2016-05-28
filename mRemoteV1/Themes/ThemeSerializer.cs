@@ -39,8 +39,7 @@ namespace mRemoteNG.Themes
 				
 			var themeType = (new ThemeInfo()).GetType();
 			var colorType = (new Color()).GetType();
-			var color = new Color();
-			foreach (var themeInfo in themes)
+		    foreach (var themeInfo in themes)
 			{
 				xmlTextWriter.WriteStartElement("Theme");
 				xmlTextWriter.WriteAttributeString("Name", themeInfo.Name);
@@ -51,7 +50,7 @@ namespace mRemoteNG.Themes
 					{
 						continue;
 					}
-					color = (Color)propertyInfo.GetValue(themeInfo, null);
+					var color = (Color)propertyInfo.GetValue(themeInfo, null);
 					xmlTextWriter.WriteStartElement("Color");
 					xmlTextWriter.WriteAttributeString("Name", propertyInfo.Name);
 					xmlTextWriter.WriteAttributeString("Value", EncodeColorName(color));
