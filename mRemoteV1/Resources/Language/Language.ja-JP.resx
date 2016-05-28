@@ -2040,13 +2040,13 @@ Message:
     <value>Socks 5</value>
   </data>
   <data name="strSort" xml:space="preserve">
-    <value>Sort</value>
+    <value>並び替え</value>
   </data>
   <data name="strSortAsc" xml:space="preserve">
-    <value>Ascending (A-Z)</value>
+    <value>昇順</value>
   </data>
   <data name="strSortDesc" xml:space="preserve">
-    <value>Descending (Z-A)</value>
+    <value>降順</value>
   </data>
   <data name="strSpecialKeys" xml:space="preserve">
     <value>Special Keys</value>
@@ -2103,7 +2103,7 @@ Message:
     <value>Tabs &amp;&amp; Panels</value>
   </data>
   <data name="strTabUpdates" xml:space="preserve">
-    <value>Updates</value>
+    <value>更新</value>
   </data>
   <data name="strTelnet" xml:space="preserve">
     <value>Telnet</value>
