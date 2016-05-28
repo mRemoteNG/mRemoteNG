@@ -13,9 +13,8 @@ namespace mRemoteNG.Themes
 	{
 		public static void SaveToXmlFile(ThemeInfo themeInfo, string filename)
 		{
-			var themeList = new List<ThemeInfo>();
-			themeList.Add(themeInfo);
-			SaveToXmlFile(themeList, filename);
+		    var themeList = new List<ThemeInfo> {themeInfo};
+		    SaveToXmlFile(themeList, filename);
 		}
 			
 		public static void SaveToXmlFile(List<ThemeInfo> themes, string filename)
@@ -97,21 +96,16 @@ namespace mRemoteNG.Themes
 				
 			var themeNodes = xmlDocument.SelectNodes("/mRemoteNG/Theme");
 			var themes = new List<ThemeInfo>();
-			var themeInfo = default(ThemeInfo);
-			var themeType = (new ThemeInfo()).GetType();
+		    var themeType = (new ThemeInfo()).GetType();
 			var colorType = (new Color()).GetType();
-			var colorName = "";
-			var colorValue = "";
-			var propertyInfo = default(PropertyInfo);
-			foreach (XmlNode themeNode in themeNodes)
+		    foreach (XmlNode themeNode in themeNodes)
 			{
-				themeInfo = new ThemeInfo();
-				themeInfo.Name = themeNode.Attributes["Name"].Value;
-				foreach (XmlNode colorNode in themeNode.SelectNodes("./Color"))
+			    var themeInfo = new ThemeInfo {Name = themeNode.Attributes?["Name"].Value};
+			    foreach (XmlNode colorNode in themeNode.SelectNodes("./Color"))
 				{
-					colorName = colorNode.Attributes["Name"].Value;
-					colorValue = colorNode.Attributes["Value"].Value;
-					propertyInfo = themeType.GetProperty(colorName);
+					var colorName = colorNode.Attributes?["Name"].Value;
+					var colorValue = colorNode.Attributes?["Value"].Value;
+					var propertyInfo = themeType.GetProperty(colorName);
 					if (propertyInfo == null || !(propertyInfo.PropertyType == colorType))
 					{
 						continue;
@@ -126,27 +120,13 @@ namespace mRemoteNG.Themes
 			
 		private static string EncodeColorName(Color color)
 		{
-			if (color.IsNamedColor)
-			{
-				return color.Name;
-			}
-			else
-			{
-				return Conversion.Hex(color.ToArgb()).PadLeft(8, '0');
-			}
+		    return color.IsNamedColor ? color.Name : Conversion.Hex(color.ToArgb()).PadLeft(8, '0');
 		}
-			
-		private static Color DecodeColorName(string name)
-		{
-			var regex = new System.Text.RegularExpressions.Regex("^[0-9a-fA-F]{8}$");
-			if (regex.Match(name).Success)
-			{
-				return Color.FromArgb(Convert.ToInt32(name, 16));
-			}
-			else
-			{
-				return Color.FromName(name);
-			}
-		}
+
+	    private static Color DecodeColorName(string name)
+	    {
+	        var regex = new System.Text.RegularExpressions.Regex("^[0-9a-fA-F]{8}$");
+	        return regex.Match(name).Success ? Color.FromArgb(Convert.ToInt32(name, 16)) : Color.FromName(name);
+	    }
 	}
 }
