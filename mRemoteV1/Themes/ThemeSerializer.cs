@@ -13,20 +13,22 @@ namespace mRemoteNG.Themes
 	{
 		public static void SaveToXmlFile(ThemeInfo themeInfo, string filename)
 		{
-			List<ThemeInfo> themeList = new List<ThemeInfo>();
+			var themeList = new List<ThemeInfo>();
 			themeList.Add(themeInfo);
 			SaveToXmlFile(themeList, filename);
 		}
 			
 		public static void SaveToXmlFile(List<ThemeInfo> themes, string filename)
 		{
-			string tempFileName = Path.GetTempFileName();
-			XmlTextWriter xmlTextWriter = new XmlTextWriter(tempFileName, System.Text.Encoding.UTF8);
-				
-			xmlTextWriter.Formatting = Formatting.Indented;
-			xmlTextWriter.Indentation = 4;
-				
-			xmlTextWriter.WriteStartDocument();
+			var tempFileName = Path.GetTempFileName();
+		    var xmlTextWriter = new XmlTextWriter(tempFileName, System.Text.Encoding.UTF8)
+		    {
+		        Formatting = Formatting.Indented,
+		        Indentation = 4
+		    };
+
+
+		    xmlTextWriter.WriteStartDocument();
 				
 			xmlTextWriter.WriteStartElement("mRemoteNG");
 				
@@ -36,15 +38,15 @@ namespace mRemoteNG.Themes
 			xmlTextWriter.WriteElementString("FileTypeVersion", "1.0");
 			xmlTextWriter.WriteEndElement(); // FileInfo
 				
-			Type themeType = (new ThemeInfo()).GetType();
-			Type colorType = (new Color()).GetType();
-			Color color = new Color();
-			foreach (ThemeInfo themeInfo in themes)
+			var themeType = (new ThemeInfo()).GetType();
+			var colorType = (new Color()).GetType();
+			var color = new Color();
+			foreach (var themeInfo in themes)
 			{
 				xmlTextWriter.WriteStartElement("Theme");
 				xmlTextWriter.WriteAttributeString("Name", themeInfo.Name);
 					
-				foreach (PropertyInfo propertyInfo in themeType.GetProperties())
+				foreach (var propertyInfo in themeType.GetProperties())
 				{
 					if (!(propertyInfo.PropertyType == colorType))
 					{
@@ -70,37 +72,37 @@ namespace mRemoteNG.Themes
 			
 		public static List<ThemeInfo> LoadFromXmlFile(string filename)
 		{
-			XmlDocument xmlDocument = new XmlDocument();
+			var xmlDocument = new XmlDocument();
 			xmlDocument.Load(filename);
 				
-			XmlNode fileInfoNode = xmlDocument.SelectSingleNode("/mRemoteNG/FileInfo");
-			Version fileInfoVersion = new Version(fileInfoNode.Attributes["Version"].Value);
+			var fileInfoNode = xmlDocument.SelectSingleNode("/mRemoteNG/FileInfo");
+			var fileInfoVersion = new Version(fileInfoNode.Attributes["Version"].Value);
 			if (fileInfoVersion > new Version(1, 0))
 			{
-				throw (new FileFormatException(string.Format("Unsupported FileInfo version ({0}).", fileInfoVersion)));
+				throw (new FileFormatException($"Unsupported FileInfo version ({fileInfoVersion})."));
 			}
 				
-			XmlNode fileTypeNode = fileInfoNode.SelectSingleNode("./FileType");
-			string fileType = fileTypeNode.InnerText;
-			if (!(fileType == "Theme"))
+			var fileTypeNode = fileInfoNode.SelectSingleNode("./FileType");
+			var fileType = fileTypeNode.InnerText;
+			if (fileType != "Theme")
 			{
-				throw (new FileFormatException(string.Format("Incorrect FileType ({0}). Expected \"Theme\".", fileType)));
+				throw (new FileFormatException($"Incorrect FileType ({fileType}). Expected \"Theme\"."));
 			}
 				
-			Version fileTypeVersion = new Version(fileInfoNode.SelectSingleNode("./FileTypeVersion").InnerText);
+			var fileTypeVersion = new Version(fileInfoNode.SelectSingleNode("./FileTypeVersion").InnerText);
 			if (fileTypeVersion > new Version(1, 0))
 			{
-				throw (new FileFormatException(string.Format("Unsupported FileTypeVersion ({0}).", fileTypeVersion)));
+				throw (new FileFormatException($"Unsupported FileTypeVersion ({fileTypeVersion})."));
 			}
 				
-			XmlNodeList themeNodes = xmlDocument.SelectNodes("/mRemoteNG/Theme");
-			List<ThemeInfo> themes = new List<ThemeInfo>();
-			ThemeInfo themeInfo = default(ThemeInfo);
-			Type themeType = (new ThemeInfo()).GetType();
-			Type colorType = (new Color()).GetType();
-			string colorName = "";
-			string colorValue = "";
-			PropertyInfo propertyInfo = default(PropertyInfo);
+			var themeNodes = xmlDocument.SelectNodes("/mRemoteNG/Theme");
+			var themes = new List<ThemeInfo>();
+			var themeInfo = default(ThemeInfo);
+			var themeType = (new ThemeInfo()).GetType();
+			var colorType = (new Color()).GetType();
+			var colorName = "";
+			var colorValue = "";
+			var propertyInfo = default(PropertyInfo);
 			foreach (XmlNode themeNode in themeNodes)
 			{
 				themeInfo = new ThemeInfo();
@@ -136,7 +138,7 @@ namespace mRemoteNG.Themes
 			
 		private static Color DecodeColorName(string name)
 		{
-			System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("^[0-9a-fA-F]{8}$");
+			var regex = new System.Text.RegularExpressions.Regex("^[0-9a-fA-F]{8}$");
 			if (regex.Match(name).Success)
 			{
 				return Color.FromArgb(Convert.ToInt32(name, 16));
