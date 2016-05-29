@@ -9,14 +9,14 @@ namespace mRemoteNG.Connection
 {
 	public class ConnectionIcon : StringConverter
 	{
-		public static string[] Icons = new string[] {};
+		public static string[] Icons = {};
 		
-		public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(System.ComponentModel.ITypeDescriptorContext context)
+		public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
 		{
 			return new StandardValuesCollection(Icons);
 		}
 		
-		public override bool GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext context)
+		public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
 		{
 			return true;
 		}
@@ -26,21 +26,22 @@ namespace mRemoteNG.Connection
 			return true;
 		}
 		
-		public static System.Drawing.Icon FromString(string IconName)
+		public static System.Drawing.Icon FromString(string iconName)
 		{
 			try
 			{
-				string IconPath = GeneralAppInfo.HomePath + "\\Icons\\" + IconName +".ico";
+				var iconPath = $"{GeneralAppInfo.HomePath}\\Icons\\{iconName}.ico";
 				
-				if (System.IO.File.Exists(IconPath))
+				if (System.IO.File.Exists(iconPath))
 				{
-					System.Drawing.Icon nI = new System.Drawing.Icon(IconPath);
+					var nI = new System.Drawing.Icon(iconPath);
 					return nI;
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Couldn\'t get Icon from String" + Environment.NewLine + ex.Message);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg,
+				    $"Couldn\'t get Icon from String" + Environment.NewLine + ex.Message);
 			}
 			return null;
 		}
