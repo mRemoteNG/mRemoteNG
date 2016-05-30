@@ -37,7 +37,7 @@ namespace mRemoteNG.UI.Forms
         private bool _showFullPathInTitle;
         private ConnectionInfo _selectedConnection = null;
         private SystemMenu _systemMenu;
-        public MiscTools.Fullscreen _fullscreen;
+        private MiscTools.Fullscreen _fullscreen;
 
 
 
@@ -45,6 +45,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
+            _fullscreen = new MiscTools.Fullscreen(this);
 		}
 
         static frmMain()
