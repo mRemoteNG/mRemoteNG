@@ -956,9 +956,10 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (e.Button == MouseButtons.Left)
 			{
-                if (((Control)sender).Tag is ConnectionInfo)
+			    var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
+			    if (tag != null)
 				{
-                    Runtime.OpenConnection((ConnectionInfo)((Control)sender).Tag);
+                    Runtime.OpenConnection(tag);
 				}
 			}
 		}
