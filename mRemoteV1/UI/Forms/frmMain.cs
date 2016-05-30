@@ -627,8 +627,8 @@ namespace mRemoteNG.UI.Forms
 								
 		private void ConnectionPanelMenuItem_Click(object sender, EventArgs e)
 		{
-			((BaseWindow) ((Control)sender).Tag).Show(pnlDock);
-            ((BaseWindow) ((Control)sender).Tag).Focus();
+			((BaseWindow) ((ToolStripMenuItem)sender).Tag).Show(pnlDock);
+            ((BaseWindow) ((ToolStripMenuItem)sender).Tag).Focus();
 		}
 
         private void mMenViewConnections_Click(object sender, EventArgs e)
