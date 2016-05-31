@@ -30,6 +30,7 @@
     <Compile Include="CustomActions\UninstallLegacyVersions.wxs" />
     <Compile Include="Fragments\FilesFragment.wxs" />
     <Compile Include="Fragments\DirectoriesFragment.wxs" />
+    <Compile Include="Fragments\HelpFilesFragment.wxs" />
     <Compile Include="Fragments\MainExeFragment.wxs" />
     <Compile Include="Fragments\MiscTextFilesFragment.wxs" />
     <Compile Include="Fragments\PuTTYNGFragment.wxs" />
@@ -98,22 +99,24 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <LinkerAdditionalOptions>
     </LinkerAdditionalOptions>
-    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteV1\bin\Release;</DefineConstants>
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteV1\bin\Release;HelpFilesHarvestPath=$(SolutionDir)mRemoteV1\Resources\Help</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <Cultures>en-US</Cultures>
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteV1\bin\Debug;HelpFilesHarvestPath=$(SolutionDir)mRemoteV1\Resources\Help</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Portable|x86' ">
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteV1\bin\Debug Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteV1\Resources\Help</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Portable|x86' ">
+    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteV1\bin\Release Portable;HelpFilesHarvestPath=$(SolutionDir)mRemoteV1\Resources\Help</DefineConstants>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>REM Harvest bin directory of the mRemoteV1 project
 call "$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\bin\$(Configuration)" -ag -dr APPLICATIONROOTDIRECTORY -var var.HarvestPath -srd -cg MandatoryComponents -template fragment -out "$(ProjectDir)Fragments\FilesFragment.wxs" -t "$(ProjectDir)Filters\Harvest_Filter.xslt" -v
 REM Convert the license file "COPYING.TXT" to "License.rtf" to be shown in the installer GUI
-call "$(ProjectDir)Resources\Pandoc\pandoc.exe" -s -t rtf -o "$(ProjectDir)\Resources\License.rtf" "$(SolutionDir)COPYING.TXT"</PreBuildEvent>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <Cultures>en-US</Cultures>
-    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteV1\bin\Debug;</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug Portable|x86' ">
-    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteV1\bin\Debug Portable;</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release Portable|x86' ">
-    <DefineConstants>HarvestPath=$(SolutionDir)mRemoteV1\bin\Release Portable;</DefineConstants>
+call "$(ProjectDir)Resources\Pandoc\pandoc.exe" -s -t rtf -o "$(ProjectDir)\Resources\License.rtf" "$(SolutionDir)COPYING.TXT"
+REM Harvest the help files for inclusion in a custom directory
+call "$(WIX)bin\heat.exe" dir "$(SolutionDir)mRemoteV1\Resources\Help" -ag -dr HELPFILESDIRECTORY -var var.HelpFilesHarvestPath -srd -cg HelpFiles -template fragment -out "$(ProjectDir)Fragments\HelpFilesFragment.wxs" -v</PreBuildEvent>
   </PropertyGroup>
 </Project>
