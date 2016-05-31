@@ -22,6 +22,7 @@
     <PropertyRef Id="WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
     <Icon Id="mRemoteNG.ico" SourceFile="Resources\mRemoteNG.ico" />
 
+
     <InstallUISequence>
       <Custom Action="SetRDP80KBValue" After="AppSearch" />
       <Custom Action="CheckIfRDP80Installed" After="SetRDP80KBValue">(NOT Installed) AND (VersionNT = 601 OR VersionNT64 = 601)</Custom>
@@ -58,6 +59,7 @@
       <Feature Id="F.MinimalFeature" Title="$(var.ProductName)" Absent="disallow" ConfigurableDirectory="APPLICATIONROOTDIRECTORY" Level="1">
         <ComponentGroupRef Id="MandatoryComponents" Primary="yes" />
         <ComponentRef Id="C.MainExe" Primary="yes" />
+        <ComponentGroupRef Id="HelpFiles" Primary="yes" />
         <ComponentGroupRef Id="CG.ProjectInfoFiles" Primary="yes" />
       </Feature>
 
