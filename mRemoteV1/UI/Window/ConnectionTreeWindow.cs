@@ -589,7 +589,7 @@ namespace mRemoteNG.UI.Window
 				
 		private static void cMenTreeToolsExternalAppsEntry_Click(object sender, EventArgs e)
 		{
-			StartExternalApp((mRemoteNG.Tools.ExternalTool)((System.Windows.Forms.Control)sender).Tag);
+			StartExternalApp((mRemoteNG.Tools.ExternalTool)((System.Windows.Forms.ToolStripMenuItem)sender).Tag);
 		}
 				
 		public void cMenTreeDuplicate_Click(System.Object sender, EventArgs e)
