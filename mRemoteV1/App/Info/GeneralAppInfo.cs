@@ -3,6 +3,7 @@ using System;
 using System.IO;
 using System.Reflection;
 using System.Threading;
+using System.Windows.Forms;
 using static System.Environment;
 
 
@@ -14,7 +15,10 @@ namespace mRemoteNG.App.Info
 		public static readonly string UrlDonate = "http://donate.mremoteng.org/";
 		public static readonly string UrlForum = "http://forum.mremoteng.org/";
 		public static readonly string UrlBugs = "http://bugs.mremoteng.org/";
-	    public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
+	    public static readonly string version = Application.ProductVersion;
+        public static readonly string ProdName = Application.ProductName;
+        public static readonly string copyright = ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false)).Copyright;
+        public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 		public static readonly string EncryptionKey = "mR3m";
 		public static string ReportingFilePath = "";
 		public static readonly string PuttyPath = HomePath + "\\PuTTYNG.exe";
@@ -33,8 +37,15 @@ namespace mRemoteNG.App.Info
 				details.Add($".NET CLR {Environment.Version}");
 				string detailsString = string.Join("; ", details.ToArray());
 						
-				return $"Mozilla/5.0 ({detailsString}) {System.Windows.Forms.Application.ProductName}/{System.Windows.Forms.Application.ProductVersion}";
+				return $"Mozilla/5.0 ({detailsString}) {ProdName}/{version}";
 			}
 		}
+
+	    public static Version getVer()
+	    {
+	        System.Version v = new Version();
+            System.Version.TryParse(version, out v);
+	        return v;
+	    }
 	}
 }

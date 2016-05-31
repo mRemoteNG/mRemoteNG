@@ -1,17 +1,16 @@
-﻿using Microsoft.VisualBasic;
-using mRemoteNG.App;
+﻿using mRemoteNG.App;
 using mRemoteNG.Connection;
+using mRemoteNG.Messages;
 using mRemoteNG.Tools.Sorting;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using mRemoteNG.My;
 
 namespace mRemoteNG.Tree
 {
     public class ConnectionTree
     {
-        private static TreeNode SetNodeToolTip_old_node = null;
+        private static TreeNode SetNodeToolTip_old_node;
         private static TreeNode treeNodeToBeSelected;
         private static TreeView _TreeView;
 
@@ -38,101 +37,122 @@ namespace mRemoteNG.Tree
         {
             try
             {
-                if (SelectedNode == null)
-                {
+                if (!SelectedNodeIsAValidDeletionTarget())
                     return;
-                }
 
-                if (Tree.ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Root)
+                if (ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Container)
                 {
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "The root item cannot be deleted!");
-                }
-                else if (Tree.ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Container)
-                {
-                    if (Tree.ConnectionTreeNode.IsEmpty(SelectedNode) == false)
+                    if (ConnectionTreeNode.IsEmpty(SelectedNode))
                     {
-                        if (Interaction.MsgBox(string.Format(Language.strConfirmDeleteNodeFolder, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle)(MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
-                        {
+                        if (UserConfirmsEmptyFolderDeletion())
                             SelectedNode.Remove();
-                        }
                     }
                     else
                     {
-                        if (Interaction.MsgBox(string.Format(Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle)(MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
+                        if (UserConfirmsNonEmptyFolderDeletion())
                         {
-                            foreach (TreeNode tNode in SelectedNode.Nodes)
-                            {
-                                tNode.Remove();
-                            }
+                            TreeView.BeginUpdate();
+                            SelectedNode.Nodes.Clear();
                             SelectedNode.Remove();
+                            TreeView.EndUpdate();
                         }
                     }
                 }
-                else if (Tree.ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Connection)
+                else if (ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Connection)
                 {
-                    if (Interaction.MsgBox(string.Format(Language.strConfirmDeleteNodeConnection, SelectedNode.Text), (Microsoft.VisualBasic.MsgBoxStyle)(MsgBoxStyle.YesNo | MsgBoxStyle.Question), null) == MsgBoxResult.Yes)
-                    {
+                    if (UserConfirmsConnectionDeletion())
                         SelectedNode.Remove();
-                    }
                 }
                 else
                 {
-                    Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Tree item type is unknown so it cannot be deleted!");
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Tree item type is unknown so it cannot be deleted!");
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Deleting selected node failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Deleting selected node failed" + Environment.NewLine + ex.Message, true);
             }
+        }
+
+        private static bool SelectedNodeIsAValidDeletionTarget()
+        {
+            bool validDeletionTarget = true;
+            if (SelectedNode == null)
+                validDeletionTarget = false;
+            else if (ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Root)
+            {
+                validDeletionTarget = false;
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "The root item cannot be deleted!");
+            }
+            return validDeletionTarget;
+        }
+
+        private static bool UserConfirmsEmptyFolderDeletion()
+        {
+            string messagePrompt = string.Format(Language.strConfirmDeleteNodeFolder, SelectedNode.Text);
+            return PromptUser(messagePrompt);
+        }
+
+        private static bool UserConfirmsNonEmptyFolderDeletion()
+        {
+            string messagePrompt = string.Format(Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text);
+            return PromptUser(messagePrompt);
+        }
+
+        private static bool UserConfirmsConnectionDeletion()
+        {
+            string messagePrompt = string.Format(Language.strConfirmDeleteNodeConnection, SelectedNode.Text);
+            return PromptUser(messagePrompt);
+        }
+
+        private static bool PromptUser(string PromptMessage)
+        {
+            DialogResult msgBoxResponse = MessageBox.Show(PromptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return (msgBoxResponse == DialogResult.Yes);
         }
 
         public static void StartRenameSelectedNode()
         {
-            if (SelectedNode != null)
-            {
-                SelectedNode.BeginEdit();
-            }
+            SelectedNode?.BeginEdit();
         }
 
         public static void FinishRenameSelectedNode(string newName)
         {
             ConnectionInfo connectionInfo = SelectedNode.Tag as ConnectionInfo;
             if (connectionInfo != null)
-                Tree.ConnectionTreeNode.RenameNode(connectionInfo, newName);
+                ConnectionTreeNode.RenameNode(connectionInfo, newName);
         }
 
         public static void SetNodeToolTip(MouseEventArgs e, ToolTip tTip)
         {
             try
             {
-                if (mRemoteNG.Settings.Default.ShowDescriptionTooltipsInTree)
+                if (!Settings.Default.ShowDescriptionTooltipsInTree) return;
+                //Find the node under the mouse.
+                TreeNode new_node = _TreeView.GetNodeAt(e.X, e.Y);
+                if (new_node == null || new_node.Equals(SetNodeToolTip_old_node))
                 {
-                    //Find the node under the mouse.
-                    TreeNode new_node = _TreeView.GetNodeAt(e.X, e.Y);
-                    if (new_node.Equals(SetNodeToolTip_old_node))
-                    {
-                        return;
-                    }
-                    SetNodeToolTip_old_node = new_node;
+                    return;
+                }
+                SetNodeToolTip_old_node = new_node;
 
-                    //See if we have a node.
-                    if (SetNodeToolTip_old_node == null)
+                //See if we have a node.
+                if (SetNodeToolTip_old_node == null)
+                {
+                    tTip.SetToolTip(_TreeView, "");
+                }
+                else
+                {
+                    //Get this node's object data.
+                    if (ConnectionTreeNode.GetNodeType(SetNodeToolTip_old_node) == TreeNodeType.Connection)
                     {
-                        tTip.SetToolTip(_TreeView, "");
-                    }
-                    else
-                    {
-                        //Get this node's object data.
-                        if (Tree.ConnectionTreeNode.GetNodeType(SetNodeToolTip_old_node) == TreeNodeType.Connection)
-                        {
-                            tTip.SetToolTip(_TreeView, (SetNodeToolTip_old_node.Tag as ConnectionInfo).Description);
-                        }
+                        tTip.SetToolTip(_TreeView, ((ConnectionInfo) SetNodeToolTip_old_node.Tag).Description);
                     }
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SetNodeToolTip failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SetNodeToolTip failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -157,25 +177,20 @@ namespace mRemoteNG.Tree
         {
             try
             {
-                if (SelectedNode != null)
-                {
-                    if (!(SelectedNode.NextNode == null))
-                    {
-                        TreeView.BeginUpdate();
-                        TreeView.Sorted = false;
+                if (SelectedNode?.NextNode == null) return;
+                TreeView.BeginUpdate();
+                TreeView.Sorted = false;
 
-                        TreeNode newNode = (TreeNode)SelectedNode.Clone();
-                        SelectedNode.Parent.Nodes.Insert(SelectedNode.Index + 2, newNode);
-                        SelectedNode.Remove();
-                        SelectedNode = newNode;
+                TreeNode newNode = (TreeNode)SelectedNode.Clone();
+                SelectedNode.Parent.Nodes.Insert(SelectedNode.Index + 2, newNode);
+                SelectedNode.Remove();
+                SelectedNode = newNode;
 
-                        TreeView.EndUpdate();
-                    }
-                }
+                TreeView.EndUpdate();
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeDown failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "MoveNodeDown failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -183,25 +198,20 @@ namespace mRemoteNG.Tree
         {
             try
             {
-                if (SelectedNode != null)
-                {
-                    if (!(SelectedNode.PrevNode == null))
-                    {
-                        TreeView.BeginUpdate();
-                        TreeView.Sorted = false;
+                if (SelectedNode?.PrevNode == null) return;
+                TreeView.BeginUpdate();
+                TreeView.Sorted = false;
 
-                        TreeNode newNode = (TreeNode)SelectedNode.Clone();
-                        SelectedNode.Parent.Nodes.Insert(SelectedNode.Index - 1, newNode);
-                        SelectedNode.Remove();
-                        SelectedNode = newNode;
+                TreeNode newNode = (TreeNode)SelectedNode.Clone();
+                SelectedNode.Parent.Nodes.Insert(SelectedNode.Index - 1, newNode);
+                SelectedNode.Remove();
+                SelectedNode = newNode;
 
-                        TreeView.EndUpdate();
-                    }
-                }
+                TreeView.EndUpdate();
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "MoveNodeUp failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "MoveNodeUp failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
@@ -219,7 +229,7 @@ namespace mRemoteNG.Tree
                 else
                     return;
             }
-            else if (Tree.ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.Connection)
+            else if (ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.Connection)
             {
                 treeNode = treeNode.Parent;
                 if (treeNode == null)
@@ -251,8 +261,11 @@ namespace mRemoteNG.Tree
                             currentNode = childNode;
                         }
                     }
-                    treeNode.Nodes.Remove(currentNode);
-                    sortedNodes.Add(currentNode);
+                    if (currentNode != null)
+                    {
+                        treeNode.Nodes.Remove(currentNode);
+                        sortedNodes.Add(currentNode);
+                    }
                     currentNode = null;
                 }
 
@@ -263,14 +276,13 @@ namespace mRemoteNG.Tree
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Sort nodes failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Sort nodes failed" + Environment.NewLine + ex.Message, true);
             }
         }
 
         public static TreeNode Find(TreeNode treeNode, string searchFor)
         {
-            TreeNode tmpNode = default(TreeNode);
-
+            
             try
             {
                 if (IsThisTheNodeWeAreSearchingFor(treeNode, searchFor))
@@ -278,8 +290,8 @@ namespace mRemoteNG.Tree
 
                 foreach (TreeNode childNode in treeNode.Nodes)
                 {
-                    tmpNode = Find(childNode, searchFor);
-                    if (!(tmpNode == null))
+                    TreeNode tmpNode = Find(childNode, searchFor);
+                    if (tmpNode != null)
                     {
                         return tmpNode;
                     }
@@ -287,7 +299,7 @@ namespace mRemoteNG.Tree
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Find node failed" + Environment.NewLine + ex.Message, true);
             }
 
             return null;
@@ -300,7 +312,6 @@ namespace mRemoteNG.Tree
 
         public static TreeNode Find(TreeNode treeNode, ConnectionInfo conInfo)
         {
-            TreeNode tmpNode = default(TreeNode);
             try
             {
                 if (treeNode.Tag == conInfo)
@@ -308,14 +319,14 @@ namespace mRemoteNG.Tree
 
                 foreach (TreeNode childNode in treeNode.Nodes)
                 {
-                    tmpNode = Find(childNode, conInfo);
-                    if (!(tmpNode == null))
+                    TreeNode tmpNode = Find(childNode, conInfo);
+                    if (tmpNode != null)
                         return tmpNode;
                 }
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Find node failed" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Find node failed" + Environment.NewLine + ex.Message, true);
             }
 
             return null;
@@ -326,7 +337,7 @@ namespace mRemoteNG.Tree
         {
             if (TreeView.InvokeRequired)
             {
-                ResetTreeDelegate resetTreeDelegate = new ResetTreeDelegate(ResetTree);
+                ResetTreeDelegate resetTreeDelegate = ResetTree;
                 Windows.treeForm.Invoke(resetTreeDelegate);
             }
             else
@@ -341,9 +352,9 @@ namespace mRemoteNG.Tree
         private delegate void SelectNodeCB();
         private static void SelectNode()
         {
-            if (_TreeView.InvokeRequired == true)
+            if (_TreeView.InvokeRequired)
             {
-                SelectNodeCB d = new SelectNodeCB(SelectNode);
+                SelectNodeCB d = SelectNode;
                 _TreeView.Invoke(d);
             }
             else

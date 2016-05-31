@@ -1,17 +1,8 @@
-using System.Collections.Generic;
 using System;
-using AxWFICALib;
-using System.Drawing;
-using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
-using Microsoft.VisualBasic;
-using System.Collections;
 using System.Windows.Forms;
 using System.DirectoryServices;
 using mRemoteNG.App;
 using System.Text.RegularExpressions;
-using mRemoteNG.My;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
@@ -24,14 +15,14 @@ namespace mRemoteNG.Config.Import
 		{
 			try
 			{
-				TreeNode treeNode = Tree.ConnectionTreeNode.AddNode(TreeNodeType.Container);
+				var treeNode = ConnectionTreeNode.AddNode(TreeNodeType.Container);
 					
-				ContainerInfo containerInfo = new ContainerInfo();
+				var containerInfo = new ContainerInfo();
 				containerInfo.TreeNode = treeNode;
 				containerInfo.ConnectionInfo = new ConnectionInfo(containerInfo);
 				
-				string name = "";
-				Match match = Regex.Match(ldapPath, "ou=([^,]*)", RegexOptions.IgnoreCase);
+				var name = "";
+				var match = Regex.Match(ldapPath, "ou=([^,]*)", RegexOptions.IgnoreCase);
 				if (match.Success)
 				{
 					name = match.Groups[1].Captures[0].Value;
@@ -64,7 +55,7 @@ namespace mRemoteNG.Config.Import
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "Config.Import.ActiveDirectory.Import() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.Import() failed.", ex, logOnly: true);
 			}
 		}
 			
@@ -72,15 +63,11 @@ namespace mRemoteNG.Config.Import
 		{
 			try
 			{
-				string strDisplayName = "";
-				string strDescription = "";
-				string strHostName = "";
+			    const string ldapFilter = "(objectClass=computer)";
 					
-				const string ldapFilter = "(objectClass=computer)";
-					
-				DirectorySearcher ldapSearcher = new DirectorySearcher();
-				SearchResultCollection ldapResults = default(SearchResultCollection);
-				SearchResult ldapResult = default(SearchResult);
+				var ldapSearcher = new DirectorySearcher();
+				var ldapResults = default(SearchResultCollection);
+				var ldapResult = default(SearchResult);
 					
 				ldapSearcher.SearchRoot = new DirectoryEntry(ldapPath);
 				ldapSearcher.PropertiesToLoad.AddRange(new[] {"securityEquals", "cn"});
@@ -92,26 +79,26 @@ namespace mRemoteNG.Config.Import
 				foreach (SearchResult tempLoopVar_ldapResult in ldapResults)
 				{
 					ldapResult = tempLoopVar_ldapResult;
-					System.DirectoryServices.DirectoryEntry with_2 = ldapResult.GetDirectoryEntry();
-					strDisplayName = Convert.ToString(with_2.Properties["cn"].Value);
-					strDescription = Convert.ToString(with_2.Properties["Description"].Value);
-					strHostName = Convert.ToString(with_2.Properties["dNSHostName"].Value);
+					var with_2 = ldapResult.GetDirectoryEntry();
+					var displayName = Convert.ToString(with_2.Properties["cn"].Value);
+					var description = Convert.ToString(with_2.Properties["Description"].Value);
+					var hostName = Convert.ToString(with_2.Properties["dNSHostName"].Value);
 						
-					TreeNode treeNode = Tree.ConnectionTreeNode.AddNode(TreeNodeType.Connection, strDisplayName);
+					var treeNode = ConnectionTreeNode.AddNode(TreeNodeType.Connection, displayName);
 						
-					ConnectionInfo connectionInfo = new ConnectionInfo();
-					ConnectionInfoInheritance inheritanceInfo = new ConnectionInfoInheritance(connectionInfo, true);
+					var connectionInfo = new ConnectionInfo();
+					var inheritanceInfo = new ConnectionInfoInheritance(connectionInfo, true);
 					inheritanceInfo.Description = false;
 					if (parentTreeNode.Tag is ContainerInfo)
 					{
 						connectionInfo.Parent = (ContainerInfo)parentTreeNode.Tag;
 					}
 					connectionInfo.Inheritance = inheritanceInfo;
-					connectionInfo.Name = strDisplayName;
-					connectionInfo.Hostname = strHostName;
-					connectionInfo.Description = strDescription;
+					connectionInfo.Name = displayName;
+					connectionInfo.Hostname = hostName;
+					connectionInfo.Description = description;
 					connectionInfo.TreeNode = treeNode;
-					treeNode.Name = strDisplayName;
+					treeNode.Name = displayName;
 					treeNode.Tag = connectionInfo; //set the nodes tag to the conI
 					//add connection to connections
                     Runtime.ConnectionList.Add(connectionInfo);
@@ -121,7 +108,7 @@ namespace mRemoteNG.Config.Import
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(message: "Config.Import.ActiveDirectory.ImportComputers() failed.", ex: ex, logOnly: true);
+				Runtime.MessageCollector.AddExceptionMessage("Config.Import.ActiveDirectory.ImportComputers() failed.", ex, logOnly: true);
 			}
 		}
 	}

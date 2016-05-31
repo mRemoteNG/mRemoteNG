@@ -1112,7 +1112,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>mRemoteNGヘルプ</value>
   </data>
   <data name="strMenuJumpTo" xml:space="preserve">
-    <value>Jump To</value>
+    <value>移動先</value>
   </data>
   <data name="strMenuLaunchExternalTool" xml:space="preserve">
     <value>外部ツールの立ち上げ</value>
@@ -1124,7 +1124,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>新規外部ツール</value>
   </data>
   <data name="strMenuNotifications" xml:space="preserve">
-    <value>Notifications</value>
+    <value>通知</value>
   </data>
   <data name="strMenuNotificationsCopyAll" xml:space="preserve">
     <value>全てコピー</value>
@@ -1172,10 +1172,10 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>バグを報告する</value>
   </data>
   <data name="strMenuResetLayout" xml:space="preserve">
-    <value>Reset layout</value>
+    <value>レイアウトを初期化</value>
   </data>
   <data name="strMenuSaveConnectionFile" xml:space="preserve">
-    <value>Save Connection File</value>
+    <value>接続ファイルの保存</value>
   </data>
   <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
     <value>Save Connection File As...</value>
@@ -1277,7 +1277,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>No Ext. App specified.</value>
   </data>
   <data name="strNoInformation" xml:space="preserve">
-    <value>なし</value>
+    <value>情報がありません</value>
   </data>
   <data name="strNone" xml:space="preserve">
     <value>なし</value>
@@ -1347,13 +1347,13 @@ If you run into such an error, please create a new connection file!</comment>
     <value>新規(&amp;N)</value>
   </data>
   <data name="strPanelName" xml:space="preserve">
-    <value>Panel Name</value>
+    <value>パネル名</value>
   </data>
   <data name="strPasswordProtect" xml:space="preserve">
-    <value>Password protect</value>
+    <value>パスワードの保護</value>
   </data>
   <data name="strPasswordStatusMustMatch" xml:space="preserve">
-    <value>Both passwords must match.</value>
+    <value>同じパスワードを入力してください</value>
   </data>
   <data name="strPasswordStatusTooShort" xml:space="preserve">
     <value>The password must be at least 3 characters long.</value>
@@ -1506,7 +1506,7 @@ If you run into such an error, please create a new connection file!</comment>
     <value>Feel free to enter any information you need here.</value>
   </data>
   <data name="strPropertyDescriptionUsername" xml:space="preserve">
-    <value>Enter your username.</value>
+    <value>ユーザー名を入力してください</value>
   </data>
   <data name="strPropertyDescriptionViewOnly" xml:space="preserve">
     <value>If you want to establish a view only connection to the host select yes.</value>
@@ -1530,7 +1530,7 @@ If you run into such an error, please create a new connection file!</comment>
     <value>Hostname/IP</value>
   </data>
   <data name="strPropertyNameAll" xml:space="preserve">
-    <value>All</value>
+    <value>全て</value>
   </data>
   <data name="strPropertyNameAuthenticationLevel" xml:space="preserve">
     <value>Server Authentication</value>
@@ -1545,7 +1545,7 @@ If you run into such an error, please create a new connection file!</comment>
     <value>Cache Bitmaps</value>
   </data>
   <data name="strPropertyNameColors" xml:space="preserve">
-    <value>Colours</value>
+    <value>色</value>
   </data>
   <data name="strPropertyNameCompression" xml:space="preserve">
     <value>Compression</value>
@@ -1584,31 +1584,31 @@ If you run into such an error, please create a new connection file!</comment>
     <value>External Tool Before</value>
   </data>
   <data name="strPropertyNameIcon" xml:space="preserve">
-    <value>Icon</value>
+    <value>アイコン</value>
   </data>
   <data name="strPropertyNameLoadBalanceInfo" xml:space="preserve">
     <value>Load Balance Info</value>
   </data>
   <data name="strPropertyNameMACAddress" xml:space="preserve">
-    <value>MAC Address</value>
+    <value>MACアドレス</value>
   </data>
   <data name="strPropertyNameName" xml:space="preserve">
-    <value>Name</value>
+    <value>名前</value>
   </data>
   <data name="strPropertyNamePanel" xml:space="preserve">
-    <value>Panel</value>
+    <value>パネル</value>
   </data>
   <data name="strPropertyNamePassword" xml:space="preserve">
-    <value>Password</value>
+    <value>パスワード</value>
   </data>
   <data name="strPropertyNamePort" xml:space="preserve">
-    <value>Port</value>
+    <value>ポート</value>
   </data>
   <data name="strPropertyNameProtocol" xml:space="preserve">
-    <value>Protocol</value>
+    <value>プロトコル</value>
   </data>
   <data name="strPropertyNamePuttySession" xml:space="preserve">
-    <value>PuTTY Session</value>
+    <value>PuTTYのセッション</value>
   </data>
   <data name="strPropertyNameRDGatewayDomain" xml:space="preserve">
     <value>Gateway Domain</value>
@@ -1635,16 +1635,16 @@ If you run into such an error, please create a new connection file!</comment>
     <value>Key Combinations</value>
   </data>
   <data name="strPropertyNameRedirectPorts" xml:space="preserve">
-    <value>Ports</value>
+    <value>ポート</value>
   </data>
   <data name="strPropertyNameRedirectPrinters" xml:space="preserve">
-    <value>Printers</value>
+    <value>プリンター</value>
   </data>
   <data name="strPropertyNameRedirectSmartCards" xml:space="preserve">
-    <value>Smart Cards</value>
+    <value>スマートカード</value>
   </data>
   <data name="strPropertyNameRedirectSounds" xml:space="preserve">
-    <value>Sounds</value>
+    <value>サウンド</value>
   </data>
   <data name="strPropertyNameRenderingEngine" xml:space="preserve">
     <value>Rendering Engine</value>
@@ -1956,7 +1956,7 @@ Message:
     <value>遠隔ファイル</value>
   </data>
   <data name="strRemoveAll" xml:space="preserve">
-    <value>すべて削除</value>
+    <value>全て削除</value>
   </data>
   <data name="strRename" xml:space="preserve">
     <value>名前の変更</value>
@@ -1968,7 +1968,7 @@ Message:
     <value>保存</value>
   </data>
   <data name="strSaveAll" xml:space="preserve">
-    <value>すべて保存</value>
+    <value>全て保存</value>
   </data>
   <data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
     <value>Do you want to save the current connections file before loading another?</value>
@@ -2040,13 +2040,13 @@ Message:
     <value>Socks 5</value>
   </data>
   <data name="strSort" xml:space="preserve">
-    <value>Sort</value>
+    <value>並び替え</value>
   </data>
   <data name="strSortAsc" xml:space="preserve">
-    <value>Ascending (A-Z)</value>
+    <value>昇順</value>
   </data>
   <data name="strSortDesc" xml:space="preserve">
-    <value>Descending (Z-A)</value>
+    <value>降順</value>
   </data>
   <data name="strSpecialKeys" xml:space="preserve">
     <value>Special Keys</value>
@@ -2061,34 +2061,34 @@ Message:
     <value>SQL Update check finished and there is an update available! Going to refresh connections.</value>
   </data>
   <data name="strSsh1" xml:space="preserve">
-    <value>SSH version 1</value>
+    <value>SSHバージョン1</value>
   </data>
   <data name="strSsh2" xml:space="preserve">
-    <value>SSH version 2</value>
+    <value>SSHバージョン2</value>
   </data>
   <data name="strSSHStartTransferBG" xml:space="preserve">
     <value>SSH background transfer failed!</value>
   </data>
   <data name="strSSHTranferSuccessful" xml:space="preserve">
-    <value>Transfer successful!</value>
+    <value>転送に成功しました</value>
   </data>
   <data name="strSSHTransferEndFailed" xml:space="preserve">
     <value>SSH Transfer End (UI.Window.SSHTransfer) failed!</value>
   </data>
   <data name="strSSHTransferFailed" xml:space="preserve">
-    <value>SSH transfer failed.</value>
+    <value>SSH経由の転送に失敗しました</value>
   </data>
   <data name="strStartIP" xml:space="preserve">
-    <value>Start IP</value>
+    <value>開始IP</value>
   </data>
   <data name="strStartPort" xml:space="preserve">
-    <value>Start Port</value>
+    <value>開始のポート</value>
   </data>
   <data name="strStartupExit" xml:space="preserve">
     <value>Startup/Exit</value>
   </data>
   <data name="strStatus" xml:space="preserve">
-    <value>Status</value>
+    <value>ステータス</value>
   </data>
   <data name="strSwitchToErrorsAndInfos" xml:space="preserve">
     <value>Switch to Notifications panel on:</value>
@@ -2115,7 +2115,7 @@ Message:
     <value>設定パネル</value>
   </data>
   <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
-    <value>Connections Panel</value>
+    <value>接続パネル</value>
   </data>
   <data name="strThemeCategoryGeneral" xml:space="preserve">
     <value>General</value>
@@ -2220,10 +2220,10 @@ Message:
     <value>Toolbar Text Colour</value>
   </data>
   <data name="strThemeNameWindowBackgroundColor" xml:space="preserve">
-    <value>Window Background Colour</value>
+    <value>ウィンドウの背景色</value>
   </data>
   <data name="strTitleError" xml:space="preserve">
-    <value>Error ({0})</value>
+    <value>エラー({0})</value>
   </data>
   <data name="strTitleInformation" xml:space="preserve">
     <value>Information ({0})</value>
@@ -2235,22 +2235,22 @@ Message:
     <value>Password for {0}</value>
   </data>
   <data name="strTitleSelectPanel" xml:space="preserve">
-    <value>Select Panel</value>
+    <value>パネルを選択</value>
   </data>
   <data name="strTitleWarning" xml:space="preserve">
     <value>Warning ({0})</value>
   </data>
   <data name="strTransfer" xml:space="preserve">
-    <value>Transfer</value>
+    <value>転送</value>
   </data>
   <data name="strTransferFailed" xml:space="preserve">
-    <value>Transfer failed!</value>
+    <value>転送中にエラーが発生しました</value>
   </data>
   <data name="strTryIntegrate" xml:space="preserve">
     <value>Try to integrate</value>
   </data>
   <data name="strType" xml:space="preserve">
-    <value>Type</value>
+    <value>種類</value>
   </data>
   <data name="strUltraVncRepeater" xml:space="preserve">
     <value>Ultra VNC Repeater</value>
@@ -2262,7 +2262,7 @@ Message:
     <value>Uncheck the properties you want not to be saved!</value>
   </data>
   <data name="strUnnamedTheme" xml:space="preserve">
-    <value>Unnamed Theme</value>
+    <value>無名のテーマ</value>
   </data>
   <data name="strUpdateAvailable" xml:space="preserve">
     <value>mRemoteNG requires an update</value>
@@ -2274,17 +2274,17 @@ Message:
     <value>The update information could not be downloaded.</value>
   </data>
   <data name="strUpdateCheckFailedLabel" xml:space="preserve">
-    <value>Check failed</value>
+    <value>確認に失敗しました</value>
   </data>
   <data name="strUpdateCheckingLabel" xml:space="preserve">
-    <value>Checking for updates...</value>
+    <value>更新を確認しています…</value>
   </data>
   <data name="strUpdateCheckPortableEdition" xml:space="preserve">
     <value>mRemoteNG Portable Edition does not currently support automatic updates.</value>
   </data>
   <data name="strUpdateDownloadComplete" xml:space="preserve">
-    <value>Download complete!
-mRemoteNG will now quit and begin with the installation.</value>
+    <value>ダウンロードが終了しました
+mRemoteNGを終了してインストールを開始します</value>
   </data>
   <data name="strUpdateDownloadCompleteFailed" xml:space="preserve">
     <value>The update could not be downloaded.</value>
@@ -2293,16 +2293,16 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>The update download could not be initiated.</value>
   </data>
   <data name="strUpdateFrequencyCustom" xml:space="preserve">
-    <value>Every {0} days</value>
+    <value>{0}日毎</value>
   </data>
   <data name="strUpdateFrequencyDaily" xml:space="preserve">
-    <value>Daily</value>
+    <value>毎日</value>
   </data>
   <data name="strUpdateFrequencyMonthly" xml:space="preserve">
-    <value>Monthly</value>
+    <value>毎月</value>
   </data>
   <data name="strUpdateFrequencyWeekly" xml:space="preserve">
-    <value>Weekly</value>
+    <value>毎週</value>
   </data>
   <data name="strUpdateGetAnnouncementInfoFailed" xml:space="preserve">
     <value>The announcement information could not be downloaded.</value>
@@ -2317,7 +2317,7 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Use only Notifications panel (no messagebox popups)</value>
   </data>
   <data name="strUser" xml:space="preserve">
-    <value>User</value>
+    <value>ユーザー</value>
   </data>
   <data name="strUseSameUsernameAndPassword" xml:space="preserve">
     <value>Use the same username and password</value>
@@ -2368,7 +2368,7 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>Warn me if authentication fails</value>
   </data>
   <data name="strWarnings" xml:space="preserve">
-    <value>Warnings</value>
+    <value>警告</value>
   </data>
   <data name="strWeifenLuoAttribution" xml:space="preserve">
     <value>Uses the DockPanel Suite by [Weifen Luo]</value>
@@ -2377,12 +2377,12 @@ mRemoteNG will now quit and begin with the installation.</value>
     <value>http://sourceforge.net/projects/dockpanelsuite/</value>
   </data>
   <data name="strWriteLogFile" xml:space="preserve">
-    <value>Write log file (mRemoteNG.log)</value>
+    <value>ログファイルを書き出す(mRemoteNG.log)</value>
   </data>
   <data name="strXULrunnerPath" xml:space="preserve">
-    <value>XULrunner path:</value>
+    <value>XULRunnerのパス：</value>
   </data>
   <data name="strYes" xml:space="preserve">
-    <value>Yes</value>
+    <value>はい</value>
   </data>
 </root>

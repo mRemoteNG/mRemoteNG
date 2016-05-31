@@ -2,7 +2,6 @@ using System;
 using System.Drawing;
 using System.Diagnostics;
 using AxMSTSCLib;
-using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using System.Threading;
@@ -153,7 +152,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				SetLoadBalanceInfo();
                 SetRdGateway();
 						
-				_rdpClient.ColorDepth = Convert.ToInt32(Conversion.Int(_connectionInfo.Colors));
+				_rdpClient.ColorDepth = (int)_connectionInfo.Colors;
 
                 SetPerformanceFlags();
 						
@@ -537,7 +536,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				_rdpClient.AdvancedSettings2.RedirectPorts = _connectionInfo.RedirectPorts;
 				_rdpClient.AdvancedSettings2.RedirectPrinters = _connectionInfo.RedirectPrinters;
 				_rdpClient.AdvancedSettings2.RedirectSmartCards = _connectionInfo.RedirectSmartCards;
-				_rdpClient.SecuredSettings2.AudioRedirectionMode = Convert.ToInt32(Conversion.Int(_connectionInfo.RedirectSound));
+				_rdpClient.SecuredSettings2.AudioRedirectionMode = (int)_connectionInfo.RedirectSound;
 			}
 			catch (Exception ex)
 			{
@@ -552,22 +551,22 @@ namespace mRemoteNG.Connection.Protocol.RDP
 				int pFlags = 0;
 				if (_connectionInfo.DisplayThemes == false)
 				{
-					pFlags += Convert.ToInt32(Conversion.Int(RDPPerformanceFlags.DisableThemes));
+					pFlags += Convert.ToInt32(RDPPerformanceFlags.DisableThemes);
 				}
 						
 				if (_connectionInfo.DisplayWallpaper == false)
 				{
-					pFlags += Convert.ToInt32(Conversion.Int(RDPPerformanceFlags.DisableWallpaper));
+					pFlags += Convert.ToInt32(RDPPerformanceFlags.DisableWallpaper);
 				}
 						
 				if (_connectionInfo.EnableFontSmoothing)
 				{
-					pFlags += Convert.ToInt32(Conversion.Int(RDPPerformanceFlags.EnableFontSmoothing));
+					pFlags += Convert.ToInt32(RDPPerformanceFlags.EnableFontSmoothing);
 				}
 						
 				if (_connectionInfo.EnableDesktopComposition)
 				{
-					pFlags += Convert.ToInt32(Conversion.Int(RDPPerformanceFlags.EnableDesktopComposition));
+					pFlags += Convert.ToInt32(RDPPerformanceFlags.EnableDesktopComposition);
 				}
 						
 				_rdpClient.AdvancedSettings2.PerformanceFlags = pFlags;

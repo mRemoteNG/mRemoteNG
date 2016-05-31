@@ -2,7 +2,7 @@
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
-	[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]
+	
     public partial class SqlServerPage : OptionsPage
 	{
 			

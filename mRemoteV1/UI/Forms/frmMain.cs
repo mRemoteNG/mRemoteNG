@@ -37,7 +37,7 @@ namespace mRemoteNG.UI.Forms
         private bool _showFullPathInTitle;
         private ConnectionInfo _selectedConnection = null;
         private SystemMenu _systemMenu;
-        public MiscTools.Fullscreen _fullscreen;
+        private MiscTools.Fullscreen _fullscreen;
 
 
 
@@ -45,6 +45,7 @@ namespace mRemoteNG.UI.Forms
 		{
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
+            _fullscreen = new MiscTools.Fullscreen(this);
 		}
 
         static frmMain()
@@ -286,7 +287,7 @@ namespace mRemoteNG.UI.Forms
 //			if (!mRemoteNG.Settings.Default.CheckForUpdatesAsked)
 //			{
 //				string[] commandButtons = new string[] {Language.strAskUpdatesCommandRecommended, Language.strAskUpdatesCommandCustom, Language.strAskUpdatesCommandAskLater};
-//				cTaskDialog.ShowTaskDialogBox(this, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, Language.strAskUpdatesMainInstruction, string.Format(Language.strAskUpdatesContent, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName), "", "", "", "", string.Join("|", commandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question);
+//				cTaskDialog.ShowTaskDialogBox(this, GeneralAppInfo.ProdName, Language.strAskUpdatesMainInstruction, string.Format(Language.strAskUpdatesContent, GeneralAppInfo.ProdName, "", "", "", "", string.Join("|", commandButtons), eTaskDialogButtons.None, eSysIcons.Question, eSysIcons.Question);
 //				if (cTaskDialog.CommandButtonResult == 0 | cTaskDialog.CommandButtonResult == 1)
 //				{
 //					mRemoteNG.Settings.Default.CheckForUpdatesAsked = true;
@@ -626,8 +627,8 @@ namespace mRemoteNG.UI.Forms
 								
 		private void ConnectionPanelMenuItem_Click(object sender, EventArgs e)
 		{
-			((BaseWindow) ((Control)sender).Tag).Show(pnlDock);
-            ((BaseWindow) ((Control)sender).Tag).Focus();
+			((BaseWindow) ((ToolStripMenuItem)sender).Tag).Show(pnlDock);
+            ((BaseWindow) ((ToolStripMenuItem)sender).Tag).Focus();
 		}
 
         private void mMenViewConnections_Click(object sender, EventArgs e)
@@ -955,9 +956,10 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (e.Button == MouseButtons.Left)
 			{
-                if (((Control)sender).Tag is ConnectionInfo)
+			    var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
+			    if (tag != null)
 				{
-                    Runtime.OpenConnection((ConnectionInfo)((Control)sender).Tag);
+                    Runtime.OpenConnection(tag);
 				}
 			}
 		}

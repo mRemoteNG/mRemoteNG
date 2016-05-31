@@ -33,7 +33,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject />
+    <StartupObject>
+    </StartupObject>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -46,6 +47,7 @@
     <Compile Include="CustomActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InstalledWindowsUpdateGatherer.cs" />
+    <Compile Include="UninstallNSISVersions.cs" />
     <Content Include="CustomAction.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,11 +1,3 @@
-using System.Collections.Generic;
-using System;
-using AxWFICALib;
-using System.Drawing;
-using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
-using Microsoft.VisualBasic;
 using System.Collections;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -22,12 +14,12 @@ namespace mRemoteNG.Config.Import
 		{
 			foreach (Tools.PortScan.ScanHost host in hosts)
 			{
-				ProtocolType finalProtocol = default(ProtocolType);
-				bool protocolValid = false;
+				var finalProtocol = default(ProtocolType);
+				var protocolValid = false;
 					
-				TreeNode treeNode = Tree.ConnectionTreeNode.AddNode(Tree.TreeNodeType.Connection, host.HostNameWithoutDomain);
+				var treeNode = Tree.ConnectionTreeNode.AddNode(Tree.TreeNodeType.Connection, host.HostNameWithoutDomain);
 					
-				ConnectionInfo connectionInfo = new ConnectionInfo();
+				var connectionInfo = new ConnectionInfo();
 				connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
 					
 				connectionInfo.Name = host.HostNameWithoutDomain;

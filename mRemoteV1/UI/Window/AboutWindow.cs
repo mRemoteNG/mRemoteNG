@@ -256,26 +256,25 @@ namespace mRemoteNG.UI.Window
             #endif
 		}
 				
-		private void FillLinkLabel(LinkLabel llbl, string Text, string URL)
+		private void FillLinkLabel(LinkLabel llbl, string txt, string URL)
 		{
 			llbl.Links.Clear();
 					
-			int Open = Text.IndexOf("[");
-			int Close = 0;
+			int Open = txt.IndexOf("[");
 			while (Open != -1)
 			{
-				Text = Text.Remove(Open, 1);
-				Close = Text.IndexOf("]", Open);
+				txt = txt.Remove(Open, 1);
+				int Close = txt.IndexOf("]", Open);
 				if (Close == -1)
 				{
 					break;
 				}
-				Text = Text.Remove(Close, 1);
+				txt = txt.Remove(Close, 1);
 				llbl.Links.Add(Open, Close - Open, URL);
-				Open = Text.IndexOf("[", Open);
+				Open = txt.IndexOf("[", Open);
 			}
 					
-			llbl.Text = Text;
+			llbl.Text = txt;
 		}
         #endregion
 				
@@ -287,9 +286,9 @@ namespace mRemoteNG.UI.Window
 					
 			try
 			{
-				lblCopyright.Text = (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.Copyright;
+				lblCopyright.Text = GeneralAppInfo.copyright;
 						
-				lblVersion.Text = "Version " + (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.Version.ToString();
+				lblVersion.Text = @"Version " + GeneralAppInfo.version;
 						
 				if (File.Exists(GeneralAppInfo.HomePath + "\\CHANGELOG.TXT"))
 				{
@@ -310,8 +309,9 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Loading About failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
-		private void llblFAMFAMFAM_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e)
+
+#if false
+        private void llblFAMFAMFAM_LinkClicked(Object sender, LinkLabelLinkClickedEventArgs e)
 		{
 			Runtime.GoToURL(Language.strFAMFAMFAMAttributionURL);
 		}
@@ -325,6 +325,7 @@ namespace mRemoteNG.UI.Window
 		{
 			Runtime.GoToURL(Language.strWeifenLuoAttributionURL);
 		}
-        #endregion
+#endif
+#endregion
 	}
 }

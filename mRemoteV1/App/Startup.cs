@@ -78,7 +78,7 @@ namespace mRemoteNG.App
 
             if (isFipsPolicyEnabled)
             {
-                MessageBox.Show(frmMain.Default, string.Format(Language.strErrorFipsPolicyIncompatible, (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName), (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(frmMain.Default, string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProdName, GeneralAppInfo.ProdName, MessageBoxButtons.OK, MessageBoxIcon.Error));
                 Environment.Exit(1);
             }
         }

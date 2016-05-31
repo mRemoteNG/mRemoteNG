@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <?include $(sys.CURRENTDIR)Includes\Config.wxi?>
+	<Fragment>
+    <CustomAction Id="CheckIfLegacyVersionInstalled" Return="check" Execute="immediate" BinaryKey="CustomActions.CA.dll" DllEntry="IsLegacyVersionInstalled" />
+	</Fragment>
+  <Fragment>
+    <CustomAction Id="UninstallLegacyVersion" Return="check" Execute="immediate" BinaryKey="CustomActions.CA.dll" DllEntry="UninstallLegacyVersion" />
+  </Fragment>
+</Wix>

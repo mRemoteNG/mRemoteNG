@@ -4,7 +4,7 @@ using mRemoteNG.My;
 
 namespace mRemoteNG.Forms
 {
-	[global::Microsoft.VisualBasic.CompilerServices.DesignerGenerated()]public 
+	public 
 	partial class PasswordForm : System.Windows.Forms.Form
 	{
 			

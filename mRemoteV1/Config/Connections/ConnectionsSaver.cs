@@ -1,19 +1,23 @@
-using mRemoteNG.App;
-using mRemoteNG.Connection;
-using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.Container;
-using mRemoteNG.Tools;
-using mRemoteNG.Tree;
 using System;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using mRemoteNG.My;
-using mRemoteNG.UI.Forms;
+using mRemoteNG.App;
+using mRemoteNG.App.Info;
+using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Container;
+using mRemoteNG.Messages;
+using mRemoteNG.Security;
+using mRemoteNG.Tools;
+using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -38,7 +42,7 @@ namespace mRemoteNG.Config.Connections
 		private SqlConnection _sqlConnection;
 		private SqlCommand _sqlQuery;
 				
-		private int _currentNodeIndex = 0;
+		private int _currentNodeIndex;
 		private string _parentConstantId = Convert.ToString(0);
         #endregion
 				
@@ -52,7 +56,7 @@ namespace mRemoteNG.Config.Connections
 		public TreeNode RootTreeNode {get; set;}
 		public bool Export {get; set;}
 		public Format SaveFormat {get; set;}
-		public Security.Save SaveSecurity {get; set;}
+		public Save SaveSecurity {get; set;}
 		public ConnectionList ConnectionList {get; set;}
 		public ContainerList ContainerList {get; set;}
         #endregion
@@ -95,7 +99,7 @@ namespace mRemoteNG.Config.Connections
 		{
 			bool isVerified = false;
 			SqlDataReader sqlDataReader = null;
-			System.Version databaseVersion = null;
+			Version databaseVersion = null;
 			try
 			{
 				SqlCommand sqlCommand = new SqlCommand("SELECT * FROM tblRoot", sqlConnection);
@@ -110,17 +114,17 @@ namespace mRemoteNG.Config.Connections
 						
 				sqlDataReader.Close();
 						
-				if (databaseVersion.CompareTo(new System.Version(2, 2)) == 0) // 2.2
+				if (databaseVersion.CompareTo(new Version(2, 2)) == 0) // 2.2
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString(), "2.3"));
+					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format("Upgrading database from version {0} to version {1}.", databaseVersion, "2.3"));
 					sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD EnableFontSmoothing bit NOT NULL DEFAULT 0, EnableDesktopComposition bit NOT NULL DEFAULT 0, InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;", sqlConnection);
 					sqlCommand.ExecuteNonQuery();
-					databaseVersion = new System.Version(2, 3);
+					databaseVersion = new Version(2, 3);
 				}
 						
-				if (databaseVersion.CompareTo(new System.Version(2, 3)) == 0) // 2.3
+				if (databaseVersion.CompareTo(new Version(2, 3)) == 0) // 2.3
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString(), "2.4"));
+					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format("Upgrading database from version {0} to version {1}.", databaseVersion, "2.4"));
 					sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD UseCredSsp bit NOT NULL DEFAULT 1, InheritUseCredSsp bit NOT NULL DEFAULT 0;", sqlConnection);
 					sqlCommand.ExecuteNonQuery();
 					databaseVersion = new Version(2, 4);
@@ -128,7 +132,7 @@ namespace mRemoteNG.Config.Connections
 						
 				if (databaseVersion.CompareTo(new Version(2, 4)) == 0) // 2.4
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, string.Format("Upgrading database from version {0} to version {1}.", databaseVersion.ToString(), "2.5"));
+					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format("Upgrading database from version {0} to version {1}.", databaseVersion, "2.5"));
 					sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, AutomaticResize bit NOT NULL DEFAULT 1, InheritLoadBalanceInfo bit NOT NULL DEFAULT 0, InheritAutomaticResize bit NOT NULL DEFAULT 0;", sqlConnection);
 					sqlCommand.ExecuteNonQuery();
 					databaseVersion = new Version(2, 5);
@@ -141,12 +145,12 @@ namespace mRemoteNG.Config.Connections
 						
 				if (isVerified == false)
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, string.Format(Language.strErrorBadDatabaseVersion, databaseVersion.ToString(), (new Microsoft.VisualBasic.ApplicationServices.WindowsFormsApplicationBase()).Info.ProductName));
+					Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strErrorBadDatabaseVersion, databaseVersion, GeneralAppInfo.ProdName));
 				}
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, string.Format(Language.strErrorVerifyDatabaseVersionFailed, ex.Message));
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorVerifyDatabaseVersionFailed, ex.Message));
 			}
 			finally
 			{
@@ -176,48 +180,46 @@ namespace mRemoteNG.Config.Connections
 					
 			if (!VerifyDatabaseVersion(_sqlConnection))
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strErrorConnectionListSaveFailed);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorConnectionListSaveFailed);
 				return ;
 			}
+
+		    var tN = (TreeNode)RootTreeNode.Clone();
 					
-			TreeNode tN = default(TreeNode);
-			tN = (TreeNode)RootTreeNode.Clone();
-					
-			string strProtected = "";
+			string strProtected;
 			if (tN.Tag != null)
 			{
-				if ((tN.Tag as RootNodeInfo).Password == true)
+				if (((RootNodeInfo) tN.Tag).Password)
 				{
-					_password = Convert.ToString((tN.Tag as RootNodeInfo).PasswordString);
-					strProtected = Security.Crypt.Encrypt("ThisIsProtected", _password);
+					_password = Convert.ToString(((RootNodeInfo) tN.Tag).PasswordString);
+					strProtected = Crypt.Encrypt("ThisIsProtected", _password);
 				}
 				else
 				{
-					strProtected = Security.Crypt.Encrypt("ThisIsNotProtected", _password);
+					strProtected = Crypt.Encrypt("ThisIsNotProtected", _password);
 				}
 			}
 			else
 			{
-				strProtected = Security.Crypt.Encrypt("ThisIsNotProtected", _password);
+				strProtected = Crypt.Encrypt("ThisIsNotProtected", _password);
 			}
 					
 			_sqlQuery = new SqlCommand("DELETE FROM tblRoot", _sqlConnection);
 			_sqlQuery.ExecuteNonQuery();
 
-            _sqlQuery = new SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" + MiscTools.PrepareValueForDB(tN.Text) + "\', 0, \'" + strProtected + "\'," + App.Info.ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")", _sqlConnection);
+            _sqlQuery = new SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" + MiscTools.PrepareValueForDB(tN.Text) + "\', 0, \'" + strProtected + "\'," + ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")", _sqlConnection);
 			_sqlQuery.ExecuteNonQuery();
 					
 			_sqlQuery = new SqlCommand("DELETE FROM tblCons", _sqlConnection);
 			_sqlQuery.ExecuteNonQuery();
 					
-			TreeNodeCollection tNC = default(TreeNodeCollection);
-			tNC = tN.Nodes;
-					
+			TreeNodeCollection tNC = tN.Nodes;
+
 			SaveNodesSQL(tNC);
 					
 			_sqlQuery = new SqlCommand("DELETE FROM tblUpdate", _sqlConnection);
 			_sqlQuery.ExecuteNonQuery();
-			_sqlQuery = new SqlCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + Tools.MiscTools.DBDate(DateTime.Now) + "\')", _sqlConnection);
+			_sqlQuery = new SqlCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) + "\')", _sqlConnection);
 			_sqlQuery.ExecuteNonQuery();
 					
 			_sqlConnection.Close();
@@ -234,33 +236,33 @@ namespace mRemoteNG.Config.Connections
 				+ "InheritUseCredSsp, " + "PositionID, ParentID, ConstantID, LastChange)" + "VALUES (", _sqlConnection
 				);
 						
-				if (Tree.ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection | Tree.ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container)
+				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container)
 				{
 					//_xmlTextWriter.WriteStartElement("Node")
 					_sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(node.Text) + "\',"; //Name
-					_sqlQuery.CommandText += "\'" + Tree.ConnectionTreeNode.GetNodeType(node).ToString() + "\',"; //Type
+					_sqlQuery.CommandText += "\'" + ConnectionTreeNode.GetNodeType(node) + "\',"; //Type
 				}
 						
-				if (Tree.ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container) //container
+				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container) //container
 				{
-					_sqlQuery.CommandText += "\'" + this.ContainerList[node.Tag].IsExpanded + "\',"; //Expanded
-					curConI = this.ContainerList[node.Tag].ConnectionInfo;
+					_sqlQuery.CommandText += "\'" + ContainerList[node.Tag].IsExpanded + "\',"; //Expanded
+					curConI = ContainerList[node.Tag].ConnectionInfo;
 					SaveConnectionFieldsSQL(curConI);
 							
-					_sqlQuery.CommandText = Tools.MiscTools.PrepareForDB(_sqlQuery.CommandText);
+					_sqlQuery.CommandText = MiscTools.PrepareForDB(_sqlQuery.CommandText);
 					_sqlQuery.ExecuteNonQuery();
 					//_parentConstantId = _currentNodeIndex
 					SaveNodesSQL(node.Nodes);
 					//_xmlTextWriter.WriteEndElement()
 				}
 						
-				if (Tree.ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection)
+				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection)
 				{
 					_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-					curConI = this.ConnectionList[node.Tag];
+					curConI = ConnectionList[node.Tag];
 					SaveConnectionFieldsSQL(curConI);
 					//_xmlTextWriter.WriteEndElement()
-					_sqlQuery.CommandText = Tools.MiscTools.PrepareForDB(_sqlQuery.CommandText);
+					_sqlQuery.CommandText = MiscTools.PrepareForDB(_sqlQuery.CommandText);
 					_sqlQuery.ExecuteNonQuery();
 				}
 						
@@ -275,7 +277,7 @@ namespace mRemoteNG.Config.Connections
             _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.Icon) + "\',";
             _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.Panel) + "\',";
 					
-			if (this.SaveSecurity.Username == true)
+			if (SaveSecurity.Username)
 			{
                 _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.Username) + "\',";
 			}
@@ -284,7 +286,7 @@ namespace mRemoteNG.Config.Connections
 				_sqlQuery.CommandText += "\'" + "" + "\',";
 			}
 					
-			if (this.SaveSecurity.Domain == true)
+			if (SaveSecurity.Domain)
 			{
                 _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.Domain) + "\',";
 			}
@@ -293,9 +295,9 @@ namespace mRemoteNG.Config.Connections
 				_sqlQuery.CommandText += "\'" + "" + "\',";
 			}
 					
-			if (this.SaveSecurity.Password == true)
+			if (SaveSecurity.Password)
 			{
-                _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(Security.Crypt.Encrypt(with_1.Password, _password)) + "\',";
+                _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(Crypt.Encrypt(with_1.Password, _password)) + "\',";
 			}
 			else
 			{
@@ -303,16 +305,16 @@ namespace mRemoteNG.Config.Connections
 			}
 
             _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.Hostname) + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.Protocol.ToString() + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.Protocol + "\',";
             _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.PuttySession) + "\',";
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Port) + "\',";
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.UseConsoleSession) + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.RenderingEngine.ToString() + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.ICAEncryption.ToString() + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.RDPAuthenticationLevel.ToString() + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.RenderingEngine + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.ICAEncryption + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.RDPAuthenticationLevel + "\',";
 			_sqlQuery.CommandText += "\'" + with_1.LoadBalanceInfo + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.Colors.ToString() + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.Resolution.ToString() + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.Colors + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.Resolution + "\',";
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.AutomaticResize) + "\',";
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.DisplayWallpaper) + "\',";
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.DisplayThemes) + "\',";
@@ -323,7 +325,7 @@ namespace mRemoteNG.Config.Connections
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.RedirectPorts) + "\',";
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.RedirectPrinters) + "\',";
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.RedirectSmartCards) + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.RedirectSound.ToString() + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.RedirectSound + "\',";
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.RedirectKeys) + "\',";
 					
 			if (curConI.OpenConnections.Count > 0)
@@ -341,23 +343,23 @@ namespace mRemoteNG.Config.Connections
 			_sqlQuery.CommandText += "\'" + with_1.UserField + "\',";
 			_sqlQuery.CommandText += "\'" + with_1.ExtApp + "\',";
 					
-			_sqlQuery.CommandText += "\'" + with_1.VNCCompression.ToString() + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.VNCEncoding.ToString() + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.VNCAuthMode.ToString() + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.VNCProxyType.ToString() + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.VNCCompression + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.VNCEncoding + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.VNCAuthMode + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.VNCProxyType + "\',";
 			_sqlQuery.CommandText += "\'" + with_1.VNCProxyIP + "\',";
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.VNCProxyPort) + "\',";
 			_sqlQuery.CommandText += "\'" + with_1.VNCProxyUsername + "\',";
-			_sqlQuery.CommandText += "\'" + Security.Crypt.Encrypt(with_1.VNCProxyPassword, _password) + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.VNCColors.ToString() + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.VNCSmartSizeMode.ToString() + "\',";
+			_sqlQuery.CommandText += "\'" + Crypt.Encrypt(with_1.VNCProxyPassword, _password) + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.VNCColors + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.VNCSmartSizeMode + "\',";
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.VNCViewOnly) + "\',";
 					
-			_sqlQuery.CommandText += "\'" + with_1.RDGatewayUsageMethod.ToString() + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.RDGatewayUsageMethod + "\',";
 			_sqlQuery.CommandText += "\'" + with_1.RDGatewayHostname + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.RDGatewayUseConnectionCredentials.ToString() + "\',";
+			_sqlQuery.CommandText += "\'" + with_1.RDGatewayUseConnectionCredentials + "\',";
 					
-			if (this.SaveSecurity.Username == true)
+			if (SaveSecurity.Username)
 			{
 				_sqlQuery.CommandText += "\'" + with_1.RDGatewayUsername + "\',";
 			}
@@ -366,16 +368,16 @@ namespace mRemoteNG.Config.Connections
 				_sqlQuery.CommandText += "\'" + "" + "\',";
 			}
 					
-			if (this.SaveSecurity.Password == true)
+			if (SaveSecurity.Password)
 			{
-				_sqlQuery.CommandText += "\'" + Security.Crypt.Encrypt(with_1.RDGatewayPassword, _password) + "\',";
+				_sqlQuery.CommandText += "\'" + Crypt.Encrypt(with_1.RDGatewayPassword, _password) + "\',";
 			}
 			else
 			{
 				_sqlQuery.CommandText += "\'" + "" + "\',";
 			}
 					
-			if (this.SaveSecurity.Domain == true)
+			if (SaveSecurity.Domain)
 			{
 				_sqlQuery.CommandText += "\'" + with_1.RDGatewayDomain + "\',";
 			}
@@ -386,7 +388,7 @@ namespace mRemoteNG.Config.Connections
 					
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.UseCredSsp) + "\',";
 					
-			if (this.SaveSecurity.Inheritance == true)
+			if (SaveSecurity.Inheritance)
 			{
 				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.CacheBitmaps) + "\',";
 				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Colors) + "\',";
@@ -507,7 +509,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if (with_1.Parent != null)
 				{
-					_parentConstantId = Convert.ToString((with_1.Parent as ContainerInfo).ConnectionInfo.ConstantID);
+					_parentConstantId = Convert.ToString(with_1.Parent.ConnectionInfo.ConstantID);
 				}
 				else
 				{
@@ -516,9 +518,9 @@ namespace mRemoteNG.Config.Connections
 			}
 			else
 			{
-				if ((with_1.Parent as ContainerInfo).Parent != null)
+				if (with_1.Parent.Parent != null)
 				{
-					_parentConstantId = Convert.ToString(((with_1.Parent as ContainerInfo).Parent as ContainerInfo).ConnectionInfo.ConstantID);
+					_parentConstantId = Convert.ToString(with_1.Parent.Parent.ConnectionInfo.ConstantID);
 				}
 				else
 				{
@@ -526,7 +528,7 @@ namespace mRemoteNG.Config.Connections
 				}
 			}
 					
-			_sqlQuery.CommandText += _currentNodeIndex + ",\'" + _parentConstantId + "\',\'" + with_1.ConstantID + "\',\'" + Tools.MiscTools.DBDate(DateTime.Now) + "\')";
+			_sqlQuery.CommandText += _currentNodeIndex + ",\'" + _parentConstantId + "\',\'" + with_1.ConstantID + "\',\'" + MiscTools.DBDate(DateTime.Now) + "\')";
 		}
         #endregion
 				
@@ -535,14 +537,14 @@ namespace mRemoteNG.Config.Connections
 		{
 			StreamReader streamReader = new StreamReader(ConnectionFileName);
 					
-			string fileContents = "";
+			string fileContents;
 			fileContents = streamReader.ReadToEnd();
 			streamReader.Close();
 					
 			if (!string.IsNullOrEmpty(fileContents))
 			{
 				StreamWriter streamWriter = new StreamWriter(ConnectionFileName);
-				streamWriter.Write(Security.Crypt.Encrypt(fileContents, _password));
+				streamWriter.Write(Crypt.Encrypt(fileContents, _password));
 				streamWriter.Close();
 			}
 		}
@@ -558,18 +560,18 @@ namespace mRemoteNG.Config.Connections
 						
 				TreeNode treeNode = default(TreeNode);
 						
-				if (Tree.ConnectionTreeNode.GetNodeType(RootTreeNode) == Tree.TreeNodeType.Root)
+				if (ConnectionTreeNode.GetNodeType(RootTreeNode) == TreeNodeType.Root)
 				{
 					treeNode = (TreeNode)RootTreeNode.Clone();
 				}
 				else
 				{
-					treeNode = new TreeNode("mR|Export (" + Tools.MiscTools.DBDate(DateTime.Now) + ")");
+					treeNode = new TreeNode("mR|Export (" + MiscTools.DBDate(DateTime.Now) + ")");
 					treeNode.Nodes.Add(Convert.ToString(RootTreeNode.Clone()));
 				}
 						
 				string tempFileName = Path.GetTempFileName();
-				_xmlTextWriter = new XmlTextWriter(tempFileName, System.Text.Encoding.UTF8);
+				_xmlTextWriter = new XmlTextWriter(tempFileName, Encoding.UTF8);
 						
 				_xmlTextWriter.Formatting = Formatting.Indented;
 				_xmlTextWriter.Indentation = 4;
@@ -582,22 +584,22 @@ namespace mRemoteNG.Config.Connections
 						
 				if (Export)
 				{
-					_xmlTextWriter.WriteAttributeString("Protected", "", Security.Crypt.Encrypt("ThisIsNotProtected", _password));
+					_xmlTextWriter.WriteAttributeString("Protected", "", Crypt.Encrypt("ThisIsNotProtected", _password));
 				}
 				else
 				{
-					if ((treeNode.Tag as RootNodeInfo).Password == true)
+					if (((RootNodeInfo) treeNode.Tag).Password)
 					{
-						_password = Convert.ToString((treeNode.Tag as RootNodeInfo).PasswordString);
-						_xmlTextWriter.WriteAttributeString("Protected", "", Security.Crypt.Encrypt("ThisIsProtected", _password));
+						_password = Convert.ToString(((RootNodeInfo) treeNode.Tag).PasswordString);
+						_xmlTextWriter.WriteAttributeString("Protected", "", Crypt.Encrypt("ThisIsProtected", _password));
 					}
 					else
 					{
-						_xmlTextWriter.WriteAttributeString("Protected", "", Security.Crypt.Encrypt("ThisIsNotProtected", _password));
+						_xmlTextWriter.WriteAttributeString("Protected", "", Crypt.Encrypt("ThisIsNotProtected", _password));
 					}
 				}
 						
-				_xmlTextWriter.WriteAttributeString("ConfVersion", "", App.Info.ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture));
+				_xmlTextWriter.WriteAttributeString("ConfVersion", "", ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture));
 						
 				TreeNodeCollection treeNodeCollection = default(TreeNodeCollection);
 				treeNodeCollection = treeNode.Nodes;
@@ -624,7 +626,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveToXml failed" + Environment.NewLine + ex.Message, false);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SaveToXml failed" + Environment.NewLine + ex.Message, false);
 			}
 		}
 				
@@ -636,25 +638,25 @@ namespace mRemoteNG.Config.Connections
 				{
                     ConnectionInfo curConI = default(ConnectionInfo);
 							
-					if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Connection | Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Container)
+					if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container)
 					{
 						_xmlTextWriter.WriteStartElement("Node");
 						_xmlTextWriter.WriteAttributeString("Name", "", node.Text);
-						_xmlTextWriter.WriteAttributeString("Type", "", Tree.ConnectionTreeNode.GetNodeType(node).ToString());
+						_xmlTextWriter.WriteAttributeString("Type", "", ConnectionTreeNode.GetNodeType(node).ToString());
 					}
 							
-					if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Container) //container
+					if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container) //container
 					{
-						_xmlTextWriter.WriteAttributeString("Expanded", "", Convert.ToString(this.ContainerList[node.Tag].TreeNode.IsExpanded));
-						curConI = this.ContainerList[node.Tag].ConnectionInfo;
+						_xmlTextWriter.WriteAttributeString("Expanded", "", Convert.ToString(ContainerList[node.Tag].TreeNode.IsExpanded));
+						curConI = ContainerList[node.Tag].ConnectionInfo;
 						SaveConnectionFields(curConI);
 						SaveNode(node.Nodes);
 						_xmlTextWriter.WriteEndElement();
 					}
 							
-					if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Connection)
+					if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection)
 					{
-						curConI = this.ConnectionList[node.Tag];
+						curConI = ConnectionList[node.Tag];
 						SaveConnectionFields(curConI);
 						_xmlTextWriter.WriteEndElement();
 					}
@@ -662,7 +664,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveNode failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SaveNode failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
@@ -676,7 +678,7 @@ namespace mRemoteNG.Config.Connections
 						
 				_xmlTextWriter.WriteAttributeString("Panel", "", curConI.Panel);
 						
-				if (this.SaveSecurity.Username == true)
+				if (SaveSecurity.Username)
 				{
 					_xmlTextWriter.WriteAttributeString("Username", "", curConI.Username);
 				}
@@ -685,7 +687,7 @@ namespace mRemoteNG.Config.Connections
 					_xmlTextWriter.WriteAttributeString("Username", "", "");
 				}
 						
-				if (this.SaveSecurity.Domain == true)
+				if (SaveSecurity.Domain)
 				{
 					_xmlTextWriter.WriteAttributeString("Domain", "", curConI.Domain);
 				}
@@ -694,9 +696,9 @@ namespace mRemoteNG.Config.Connections
 					_xmlTextWriter.WriteAttributeString("Domain", "", "");
 				}
 						
-				if (this.SaveSecurity.Password == true)
+				if (SaveSecurity.Password)
 				{
-					_xmlTextWriter.WriteAttributeString("Password", "", Security.Crypt.Encrypt(curConI.Password, _password));
+					_xmlTextWriter.WriteAttributeString("Password", "", Crypt.Encrypt(curConI.Password, _password));
 				}
 				else
 				{
@@ -773,7 +775,7 @@ namespace mRemoteNG.Config.Connections
 				_xmlTextWriter.WriteAttributeString("VNCProxyIP", "", curConI.VNCProxyIP);
 				_xmlTextWriter.WriteAttributeString("VNCProxyPort", "", Convert.ToString(curConI.VNCProxyPort));
 				_xmlTextWriter.WriteAttributeString("VNCProxyUsername", "", curConI.VNCProxyUsername);
-				_xmlTextWriter.WriteAttributeString("VNCProxyPassword", "", Security.Crypt.Encrypt(curConI.VNCProxyPassword, _password));
+				_xmlTextWriter.WriteAttributeString("VNCProxyPassword", "", Crypt.Encrypt(curConI.VNCProxyPassword, _password));
 				_xmlTextWriter.WriteAttributeString("VNCColors", "", curConI.VNCColors.ToString());
 				_xmlTextWriter.WriteAttributeString("VNCSmartSizeMode", "", curConI.VNCSmartSizeMode.ToString());
 				_xmlTextWriter.WriteAttributeString("VNCViewOnly", "", Convert.ToString(curConI.VNCViewOnly));
@@ -783,7 +785,7 @@ namespace mRemoteNG.Config.Connections
 						
 				_xmlTextWriter.WriteAttributeString("RDGatewayUseConnectionCredentials", "", curConI.RDGatewayUseConnectionCredentials.ToString());
 						
-				if (this.SaveSecurity.Username == true)
+				if (SaveSecurity.Username)
 				{
 					_xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", curConI.RDGatewayUsername);
 				}
@@ -792,16 +794,16 @@ namespace mRemoteNG.Config.Connections
 					_xmlTextWriter.WriteAttributeString("RDGatewayUsername", "", "");
 				}
 						
-				if (this.SaveSecurity.Password == true)
+				if (SaveSecurity.Password)
 				{
-					_xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", Security.Crypt.Encrypt(curConI.RDGatewayPassword, _password));
+					_xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", Crypt.Encrypt(curConI.RDGatewayPassword, _password));
 				}
 				else
 				{
 					_xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", "");
 				}
 						
-				if (this.SaveSecurity.Domain == true)
+				if (SaveSecurity.Domain)
 				{
 					_xmlTextWriter.WriteAttributeString("RDGatewayDomain", "", curConI.RDGatewayDomain);
 				}
@@ -810,7 +812,7 @@ namespace mRemoteNG.Config.Connections
 					_xmlTextWriter.WriteAttributeString("RDGatewayDomain", "", "");
 				}
 						
-				if (this.SaveSecurity.Inheritance == true)
+				if (SaveSecurity.Inheritance)
 				{
 					_xmlTextWriter.WriteAttributeString("InheritCacheBitmaps", "", Convert.ToString(curConI.Inheritance.CacheBitmaps));
 					_xmlTextWriter.WriteAttributeString("InheritColors", "", Convert.ToString(curConI.Inheritance.Colors));
@@ -920,7 +922,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "SaveConnectionFields failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SaveConnectionFields failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
         #endregion
@@ -930,7 +932,7 @@ namespace mRemoteNG.Config.Connections
 				
 		private void SaveTomRCSV()
 		{
-			if (App.Runtime.IsConnectionsFileLoaded == false)
+			if (Runtime.IsConnectionsFileLoaded == false)
 			{
 				return;
 			}
@@ -981,13 +983,13 @@ namespace mRemoteNG.Config.Connections
 		{
 			foreach (TreeNode node in tNC)
 			{
-				if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Connection)
+				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection)
 				{
                     ConnectionInfo curConI = (ConnectionInfo)node.Tag;
 							
 					WritemRCSVLine(curConI);
 				}
-				else if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Container)
+				else if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container)
 				{
 					SaveNodemRCSV(node.Nodes);
 				}
@@ -1030,7 +1032,7 @@ namespace mRemoteNG.Config.Connections
 				csvLn += con.Domain + ";";
 			}
 					
-			csvLn += con.Hostname + ";" + con.Protocol.ToString() + ";" + con.PuttySession + ";" + Convert.ToString(con.Port) + ";" + Convert.ToString(con.UseConsoleSession) + ";" + Convert.ToString(con.UseCredSsp) + ";" + con.RenderingEngine.ToString() + ";" + con.ICAEncryption.ToString() + ";" + con.RDPAuthenticationLevel.ToString() + ";" + con.LoadBalanceInfo + ";" + con.Colors.ToString() + ";" + con.Resolution.ToString() + ";" + Convert.ToString(con.AutomaticResize) + ";" + Convert.ToString(con.DisplayWallpaper) + ";" + Convert.ToString(con.DisplayThemes) + ";" + Convert.ToString(con.EnableFontSmoothing) + ";" + Convert.ToString(con.EnableDesktopComposition) + ";" + Convert.ToString(con.CacheBitmaps) + ";" + Convert.ToString(con.RedirectDiskDrives) + ";" + Convert.ToString(con.RedirectPorts) + ";" + Convert.ToString(con.RedirectPrinters) + ";" + Convert.ToString(con.RedirectSmartCards) + ";" + con.RedirectSound.ToString() + ";" + Convert.ToString(con.RedirectKeys) + ";" + con.PreExtApp + ";" + con.PostExtApp + ";" + con.MacAddress + ";" + con.UserField + ";" + con.ExtApp + ";" + con.VNCCompression.ToString() + ";" + con.VNCEncoding.ToString() + ";" + con.VNCAuthMode.ToString() + ";" + con.VNCProxyType.ToString() + ";" + con.VNCProxyIP + ";" + Convert.ToString(con.VNCProxyPort) + ";" + con.VNCProxyUsername + ";" + con.VNCProxyPassword + ";" + con.VNCColors.ToString() + ";" + con.VNCSmartSizeMode.ToString() + ";" + Convert.ToString(con.VNCViewOnly) + ";";
+			csvLn += con.Hostname + ";" + con.Protocol + ";" + con.PuttySession + ";" + Convert.ToString(con.Port) + ";" + Convert.ToString(con.UseConsoleSession) + ";" + Convert.ToString(con.UseCredSsp) + ";" + con.RenderingEngine + ";" + con.ICAEncryption + ";" + con.RDPAuthenticationLevel + ";" + con.LoadBalanceInfo + ";" + con.Colors + ";" + con.Resolution + ";" + Convert.ToString(con.AutomaticResize) + ";" + Convert.ToString(con.DisplayWallpaper) + ";" + Convert.ToString(con.DisplayThemes) + ";" + Convert.ToString(con.EnableFontSmoothing) + ";" + Convert.ToString(con.EnableDesktopComposition) + ";" + Convert.ToString(con.CacheBitmaps) + ";" + Convert.ToString(con.RedirectDiskDrives) + ";" + Convert.ToString(con.RedirectPorts) + ";" + Convert.ToString(con.RedirectPrinters) + ";" + Convert.ToString(con.RedirectSmartCards) + ";" + con.RedirectSound + ";" + Convert.ToString(con.RedirectKeys) + ";" + con.PreExtApp + ";" + con.PostExtApp + ";" + con.MacAddress + ";" + con.UserField + ";" + con.ExtApp + ";" + con.VNCCompression + ";" + con.VNCEncoding + ";" + con.VNCAuthMode + ";" + con.VNCProxyType + ";" + con.VNCProxyIP + ";" + Convert.ToString(con.VNCProxyPort) + ";" + con.VNCProxyUsername + ";" + con.VNCProxyPassword + ";" + con.VNCColors + ";" + con.VNCSmartSizeMode + ";" + Convert.ToString(con.VNCViewOnly) + ";";
 					
 			if (SaveSecurity.Inheritance)
 			{
@@ -1045,7 +1047,7 @@ namespace mRemoteNG.Config.Connections
         #region vRD CSV
 		private void SaveTovRDCSV()
 		{
-			if (App.Runtime.IsConnectionsFileLoaded == false)
+			if (Runtime.IsConnectionsFileLoaded == false)
 			{
 				return;
 			}
@@ -1067,16 +1069,16 @@ namespace mRemoteNG.Config.Connections
 		{
 			foreach (TreeNode node in tNC)
 			{
-				if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Connection)
+				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection)
 				{
                     ConnectionInfo curConI = (ConnectionInfo)node.Tag;
 							
-					if (curConI.Protocol == Connection.Protocol.ProtocolType.RDP)
+					if (curConI.Protocol == ProtocolType.RDP)
 					{
 						WritevRDCSVLine(curConI);
 					}
 				}
-				else if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Container)
+				else if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container)
 				{
 					SaveNodevRDCSV(node.Nodes);
 				}
@@ -1107,7 +1109,7 @@ namespace mRemoteNG.Config.Connections
         #region vRD VRE
 		private void SaveToVRE()
 		{
-			if (App.Runtime.IsConnectionsFileLoaded == false)
+			if (Runtime.IsConnectionsFileLoaded == false)
 			{
 				return;
 			}
@@ -1118,7 +1120,7 @@ namespace mRemoteNG.Config.Connections
 			TreeNodeCollection tNC = default(TreeNodeCollection);
 			tNC = tN.Nodes;
 					
-			_xmlTextWriter = new XmlTextWriter(ConnectionFileName, System.Text.Encoding.UTF8);
+			_xmlTextWriter = new XmlTextWriter(ConnectionFileName, Encoding.UTF8);
 			_xmlTextWriter.Formatting = Formatting.Indented;
 			_xmlTextWriter.Indentation = 4;
 					
@@ -1140,11 +1142,11 @@ namespace mRemoteNG.Config.Connections
 		{
 			foreach (TreeNode node in tNC)
 			{
-				if (Tree.ConnectionTreeNode.GetNodeType(node) == Tree.TreeNodeType.Connection)
+				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection)
 				{
                     ConnectionInfo curConI = (ConnectionInfo)node.Tag;
 							
-					if (curConI.Protocol == Connection.Protocol.ProtocolType.RDP)
+					if (curConI.Protocol == ProtocolType.RDP)
 					{
 						_xmlTextWriter.WriteStartElement("Connection");
 						_xmlTextWriter.WriteAttributeString("Id", "", "");
