@@ -442,10 +442,10 @@ VncSharpNG Control Version {0}</value>
     <value>Compatibility problem detected</value>
   </data>
   <data name="strComponentsCheck" xml:space="preserve">
-    <value>Components Check</value>
+    <value>コンポーネントの確認</value>
   </data>
   <data name="strConfigPropertyGridButtonIconClickFailed" xml:space="preserve">
-    <value>btnIcon_Click failed!</value>
+    <value>btnIcon_Clickがエラーを発生しました</value>
   </data>
   <data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
     <value>ShowHideGridItems failed!</value>
@@ -577,10 +577,10 @@ Starting with new connections file.</value>
     <value>Could not find ToolStrip control in FilteredPropertyGrid.</value>
   </data>
   <data name="strCurrentVersion" xml:space="preserve">
-    <value>Installed version</value>
+    <value>バージョン</value>
   </data>
   <data name="strDefaultTheme" xml:space="preserve">
-    <value>Default Theme</value>
+    <value>デフォルトのテーマ</value>
   </data>
   <data name="strDetect" xml:space="preserve">
     <value>Detect</value>
@@ -592,10 +592,10 @@ Starting with new connections file.</value>
     <value>Don't connect if authentication fails</value>
   </data>
   <data name="strDoubleClickTabClosesIt" xml:space="preserve">
-    <value>Double click on tab closes it</value>
+    <value>ダブルクリックでタブを閉じる</value>
   </data>
   <data name="strDownloadAndInstall" xml:space="preserve">
-    <value>Download and Install</value>
+    <value>ダウンロードとインストール</value>
   </data>
   <data name="strDuplicate" xml:space="preserve">
     <value>Duplicate</value>
@@ -607,22 +607,22 @@ Starting with new connections file.</value>
     <value>For empty Username, Password or Domain fields use:</value>
   </data>
   <data name="strEnc128Bit" xml:space="preserve">
-    <value>128-bit</value>
+    <value>128ビット</value>
   </data>
   <data name="strEnc128BitLogonOnly" xml:space="preserve">
     <value>128-bit (logon only)</value>
   </data>
   <data name="strEnc40Bit" xml:space="preserve">
-    <value>40-bit</value>
+    <value>40ビット</value>
   </data>
   <data name="strEnc56Bit" xml:space="preserve">
-    <value>56-bit</value>
+    <value>56ビット</value>
   </data>
   <data name="strEncBasic" xml:space="preserve">
     <value>Basic</value>
   </data>
   <data name="strEncryptCompleteConnectionFile" xml:space="preserve">
-    <value>Completely encrypt connection file</value>
+    <value>接続設定ファイルをすべて暗号化する</value>
   </data>
   <data name="strEndIP" xml:space="preserve">
     <value>End IP</value>
@@ -677,7 +677,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Expand all folders</value>
   </data>
   <data name="strExperimental" xml:space="preserve">
-    <value>Experimental</value>
+    <value>試験的機能</value>
   </data>
   <data name="strExport" xml:space="preserve">
     <value>エクスポート</value>
@@ -686,7 +686,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>すべてエクスポート</value>
   </data>
   <data name="strExportFile" xml:space="preserve">
-    <value>Export File</value>
+    <value>ファイルをエクスポート</value>
   </data>
   <data name="strExportItems" xml:space="preserve">
     <value>Export Items</value>
@@ -761,7 +761,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>全画面</value>
   </data>
   <data name="strGeneral" xml:space="preserve">
-    <value>General</value>
+    <value>一般</value>
   </data>
   <data name="strGetConnectionInfoFromSqlFailed" xml:space="preserve">
     <value>Get Connection Info From SQL failed</value>
@@ -911,7 +911,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>CTRL-ESC</value>
   </data>
   <data name="strLabelAddress" xml:space="preserve">
-    <value>Address:</value>
+    <value>アドレス：</value>
   </data>
   <data name="strLabelArguments" xml:space="preserve">
     <value>Arguments:</value>
@@ -920,16 +920,16 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Change Log:</value>
   </data>
   <data name="strLabelClosingConnections" xml:space="preserve">
-    <value>When closing connections:</value>
+    <value>切断時：</value>
   </data>
   <data name="strLabelConnect" xml:space="preserve">
-    <value>&amp;Connect:</value>
+    <value>接続(&amp;C)：</value>
   </data>
   <data name="strLabelDisplayName" xml:space="preserve">
-    <value>Display Name</value>
+    <value>ディスプレイ名</value>
   </data>
   <data name="strLabelDomain" xml:space="preserve">
-    <value>Domain:</value>
+    <value>ドメイン：</value>
   </data>
   <data name="strLabelFilename" xml:space="preserve">
     <value>ファイル名：</value>
@@ -980,10 +980,10 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>ユーザー名：</value>
   </data>
   <data name="strLabelVerify" xml:space="preserve">
-    <value>Verify:</value>
+    <value>確認：</value>
   </data>
   <data name="strLanguage" xml:space="preserve">
-    <value>Language</value>
+    <value>言語</value>
   </data>
   <data name="strLanguageDefault" xml:space="preserve">
     <value>（自動検出）</value>
@@ -1004,10 +1004,10 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Local file</value>
   </data>
   <data name="strLocalFileDoesNotExist" xml:space="preserve">
-    <value>Local file does not exist!</value>
+    <value>ファイルが存在しません</value>
   </data>
   <data name="strLogOff" xml:space="preserve">
-    <value>Logoff</value>
+    <value>ログオフ</value>
   </data>
   <data name="strLogWriteToFileFailed" xml:space="preserve">
     <value>Writing to report file failed!</value>
@@ -1304,13 +1304,13 @@ If you run into such an error, please create a new connection file!</comment>
     <value>Open Ports</value>
   </data>
   <data name="strOptionsKeyboardButtonDelete" xml:space="preserve">
-    <value>&amp;Delete</value>
+    <value>削除(&amp;D)</value>
   </data>
   <data name="strOptionsKeyboardButtonNew" xml:space="preserve">
     <value>新規(&amp;N)</value>
   </data>
   <data name="strOptionsKeyboardButtonReset" xml:space="preserve">
-    <value>&amp;Reset to Default</value>
+    <value>デフォルトに戻す(&amp;R)</value>
   </data>
   <data name="strOptionsKeyboardButtonResetAll" xml:space="preserve">
     <value>すべてデフォルトに戻す(&amp;A)</value>
@@ -1932,13 +1932,13 @@ Message:
     <value>Smart Size</value>
   </data>
   <data name="strRDPSoundBringToThisComputer" xml:space="preserve">
-    <value>Bring to this computer</value>
+    <value>このコンピューターで再生</value>
   </data>
   <data name="strRDPSoundDoNotPlay" xml:space="preserve">
-    <value>Do not play</value>
+    <value>再生しない</value>
   </data>
   <data name="strRDPSoundLeaveAtRemoteComputer" xml:space="preserve">
-    <value>Leave at remote computer</value>
+    <value>遠隔コンピューターで再生</value>
   </data>
   <data name="strRdpToggleFullscreenFailed" xml:space="preserve">
     <value>RDP ToggleFullscreen failed!</value>
@@ -1950,25 +1950,25 @@ Message:
     <value>Reconnect to previously opened sessions on startup</value>
   </data>
   <data name="strRefresh" xml:space="preserve">
-    <value>Refresh</value>
+    <value>更新</value>
   </data>
   <data name="strRemoteFile" xml:space="preserve">
-    <value>Remote file</value>
+    <value>遠隔ファイル</value>
   </data>
   <data name="strRemoveAll" xml:space="preserve">
-    <value>Remove All</value>
+    <value>すべて削除</value>
   </data>
   <data name="strRename" xml:space="preserve">
-    <value>Rename</value>
+    <value>名前の変更</value>
   </data>
   <data name="strRlogin" xml:space="preserve">
     <value>Rlogin</value>
   </data>
   <data name="strSave" xml:space="preserve">
-    <value>Save</value>
+    <value>保存</value>
   </data>
   <data name="strSaveAll" xml:space="preserve">
-    <value>Save All</value>
+    <value>すべて保存</value>
   </data>
   <data name="strSaveConnectionsFileBeforeOpeningAnother" xml:space="preserve">
     <value>Do you want to save the current connections file before loading another?</value>
@@ -1980,19 +1980,19 @@ Message:
     <value>Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group File (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Network Graphics File (.png)|*.png</value>
   </data>
   <data name="strScreen" xml:space="preserve">
-    <value>Screen</value>
+    <value>スクリーン</value>
   </data>
   <data name="strScreenshot" xml:space="preserve">
-    <value>Screenshot</value>
+    <value>スクリーンショット</value>
   </data>
   <data name="strScreenshots" xml:space="preserve">
-    <value>Screenshots</value>
+    <value>複数のスクリーンショット</value>
   </data>
   <data name="strSearchPrompt" xml:space="preserve">
-    <value>Search</value>
+    <value>検索</value>
   </data>
   <data name="strSendTo" xml:space="preserve">
-    <value>Send To...</value>
+    <value>送信...</value>
   </data>
   <data name="strSessionGetFailed" xml:space="preserve">
     <value>Get Sessions Background failed</value>
@@ -2094,16 +2094,16 @@ Message:
     <value>Switch to Notifications panel on:</value>
   </data>
   <data name="strTabAdvanced" xml:space="preserve">
-    <value>Advanced</value>
+    <value>詳細設定</value>
   </data>
   <data name="strTabAppearance" xml:space="preserve">
-    <value>Appearance</value>
+    <value>外観</value>
   </data>
   <data name="strTabsAndPanels" xml:space="preserve">
     <value>Tabs &amp;&amp; Panels</value>
   </data>
   <data name="strTabUpdates" xml:space="preserve">
-    <value>Updates</value>
+    <value>タブの更新</value>
   </data>
   <data name="strTelnet" xml:space="preserve">
     <value>Telnet</value>
@@ -2112,7 +2112,7 @@ Message:
     <value>The following:</value>
   </data>
   <data name="strThemeCategoryConfigPanel" xml:space="preserve">
-    <value>Config Panel</value>
+    <value>設定パネル</value>
   </data>
   <data name="strThemeCategoryConnectionsPanel" xml:space="preserve">
     <value>Connections Panel</value>
