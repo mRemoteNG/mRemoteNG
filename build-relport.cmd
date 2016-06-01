@@ -31,7 +31,14 @@ copy "%~dp0\Installer Projects\Installer\Dependencies\PuTTYNG.exe" %~dp0\mRemote
 
 xcopy /S /Y "%~dp0\mRemoteV1\bin\Release Portable" %~dp0\mRemoteV1\bin\package
 
+rem Move the help files to the proper location
+move %~dp0\mRemoteV1\bin\package\Resources\Help %~dp0\mRemoteV1\bin\package\
+
 rem These del's can error out, that's OK. We don't want these files in the release.
+del /s /q "%~dp0\mRemoteV1\bin\package\app.publish"
+rmdir "%~dp0\mRemoteV1\bin\package\app.publish"
+del /s /q "%~dp0\mRemoteV1\bin\package\Resources"
+rmdir "%~dp0\mRemoteV1\bin\package\Resources"
 del "%~dp0\mRemoteV1\bin\package\confCons*"
 del "%~dp0\mRemoteV1\bin\package\mRemoteNG.log"
 del "%~dp0\mRemoteV1\bin\package\pnlLayout.xml"
@@ -43,4 +50,4 @@ echo Creating portable ZIP file...
 echo %PORTABLEZIP% 
 del /f /q %PORTABLEZIP% > nul 2>&1
 %SEVENZIP% a -r -tzip -y %PORTABLEZIP% "%~dp0\mRemoteV1\bin\package\*.*"
-%SEVENZIP% a -r -tzip -y %PORTABLEZIP% "%~dp0\*.TXT"
+%SEVENZIP% a -tzip -y %PORTABLEZIP% "%~dp0\*.TXT"
