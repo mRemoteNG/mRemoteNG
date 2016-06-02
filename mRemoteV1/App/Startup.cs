@@ -163,7 +163,7 @@ namespace mRemoteNG.App
         private void LogApplicationData()
         {
             #if !PORTABLE
-            Logger.Instance.InfoFormat("{0} {1} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion);
+            Logger.Instance.InfoFormat("{0} {1} starting.", Application.ProductName, Application.ProductVersion);
             #else
             Logger.Instance.InfoFormat("{0} {1} {2} starting.", Application.ProductName, Application.ProductVersion, Language.strLabelPortableEdition);
             #endif
