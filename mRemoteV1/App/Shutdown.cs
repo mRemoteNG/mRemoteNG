@@ -2,7 +2,7 @@
 using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
-using mRemoteNG.My;
+using mRemoteNG.App.Info;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
@@ -54,7 +54,7 @@ namespace mRemoteNG.App
 
         private static void SaveConnections()
         {
-            if (mRemoteNG.Settings.Default.SaveConsOnExit)
+            if (Settings.Default.SaveConsOnExit)
                 Runtime.SaveConnections();
         }
 
@@ -65,7 +65,8 @@ namespace mRemoteNG.App
 
         private static void UnregisterBrowsers()
         {
-            IeBrowserEmulation.Unregister();
+            if (!GeneralAppInfo.isUnix())
+                IeBrowserEmulation.Unregister();
         }
 
         public static void StartUpdate()

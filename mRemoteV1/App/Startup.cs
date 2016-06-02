@@ -41,7 +41,10 @@ namespace mRemoteNG.App
             _singletonInstance.LogStartupData();
             //CheckCompatibility();
             _singletonInstance.ParseCommandLineArgs();
-            IeBrowserEmulation.Register();
+
+            if(!GeneralAppInfo.isUnix())
+                IeBrowserEmulation.Register();
+
             _singletonInstance.GetConnectionIcons();
         }
 
@@ -153,6 +156,7 @@ namespace mRemoteNG.App
                 LogApplicationData();
                 LogCmdLineArgs();
                 LogSystemData();
+                LogPlatform();
                 LogCLRData();
                 LogCultureData();
             }
@@ -228,11 +232,20 @@ namespace mRemoteNG.App
         }
         private void LogCLRData()
         {
-            Logger.Instance.InfoFormat("Microsoft .NET CLR {0}", Environment.Version);
+            var rt = "Microsoft .NET CLR";
+            if (GeneralAppInfo.isUnix())
+                rt = "Mono Runtime";
+            
+            Logger.Instance.InfoFormat("{0} {1}", rt, Environment.Version);
         }
         private void LogCultureData()
         {
             Logger.Instance.InfoFormat("System Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName);
+        }
+
+        private void LogPlatform()
+        {
+            Logger.Instance.InfoFormat("Platform ID: {0} is UNIX: {1}", GeneralAppInfo.platid, GeneralAppInfo.isUnix());
         }
 
 

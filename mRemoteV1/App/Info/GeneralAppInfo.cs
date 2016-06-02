@@ -22,6 +22,7 @@ namespace mRemoteNG.App.Info
 		public static readonly string EncryptionKey = "mR3m";
 		public static string ReportingFilePath = "";
 		public static readonly string PuttyPath = HomePath + "\\PuTTYNG.exe";
+        public static readonly int platid = (int)OSVersion.Platform;
         public static string UserAgent
 		{
 			get
@@ -46,6 +47,17 @@ namespace mRemoteNG.App.Info
 	        System.Version v = new Version();
             System.Version.TryParse(version, out v);
 	        return v;
+	    }
+
+	    public static Boolean isUnix()
+	    {
+            // http://www.mono-project.com/docs/faq/technical/#how-to-detect-the-execution-platform
+            if ((platid == 4) || (platid == 6) || (platid == 128))
+            {
+                return true;
+            }
+
+	        return false;
 	    }
 	}
 }
