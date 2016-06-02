@@ -160,7 +160,6 @@
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\ApplicationEvents.cs" />
     <Compile Include="App\Info\GeneralAppInfo.cs" />
     <Compile Include="App\Logger.cs" />
     <Compile Include="App\NativeMethods.cs" />
