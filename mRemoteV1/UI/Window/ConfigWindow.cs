@@ -509,7 +509,7 @@ namespace mRemoteNG.UI.Window
                         pGrid.SelectedObject = Obj;
 
                         btnShowProperties.Enabled = true;
-                        if (((Container.ContainerInfo)((ConnectionInfo)Obj).Parent).Parent != null)
+                        if (((ConnectionInfo)Obj).Parent.Parent != null)
 						{
                             btnShowInheritance.Enabled = true;
 						}
@@ -654,7 +654,7 @@ namespace mRemoteNG.UI.Window
 				ToolStrip toolStrip = null;
 				foreach (Control control in pGrid.Controls)
 				{
-                    toolStrip = control as ToolStrip;
+                    toolStrip = (ToolStrip) control;
                     if (toolStrip != null)
                     {
                         propertyGridToolStrip = toolStrip;
@@ -1551,7 +1551,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigPropertyGridHideItemsFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConfigPropertyGridHideItemsFailed + Environment.NewLine + ex.StackTrace, true);
 			}
 		}
 				
@@ -1711,7 +1711,7 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				pReply = pingSender.Send(HostName);
-				if (pReply.Status == IPStatus.Success)
+				if (pReply != null && pReply.Status == IPStatus.Success)
 				{
 					if ((string)btnHostStatus.Tag == "checking")
 					{

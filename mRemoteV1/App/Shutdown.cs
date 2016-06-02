@@ -33,7 +33,8 @@ namespace mRemoteNG.App
                 DisposeNotificationAreaIcon();
                 SaveConnections();
                 SaveSettings();
-                UnregisterBrowsers();
+                if (!GeneralAppInfo.isUnix())
+                    UnregisterBrowsers();
             }
             catch (Exception ex)
             {

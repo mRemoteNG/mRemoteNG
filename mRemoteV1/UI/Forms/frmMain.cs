@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.App.Info;
 using mRemoteNG.Config;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
@@ -135,7 +136,8 @@ namespace mRemoteNG.UI.Forms
 			ThemeManager.ThemeChanged += ApplyThemes;
 			ApplyThemes();
 
-			fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
+            if(!GeneralAppInfo.isUnix())
+			    fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
             Runtime.MessageCollector = new MessageCollector(Windows.errorsForm);
             Runtime.WindowList = new WindowList();
@@ -154,7 +156,10 @@ namespace mRemoteNG.UI.Forms
 				Application.Exit();
 				return ;
 			}
-			Config.Putty.Sessions.StartWatcher();
+
+            if (!GeneralAppInfo.isUnix())
+                Config.Putty.Sessions.StartWatcher();
+
 			if (Settings.Default.StartupComponentsCheck)
 			{
                 Windows.Show(WindowType.ComponentsCheck);
@@ -163,7 +168,8 @@ namespace mRemoteNG.UI.Forms
             ApplySpecialSettingsForPortableVersion();
 
             Startup.CreateConnectionsProvider();
-			AddSysMenuItems();
+            if (!GeneralAppInfo.isUnix())
+                AddSysMenuItems();
 			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
             Opacity = 1;
 		}
@@ -999,6 +1005,9 @@ namespace mRemoteNG.UI.Forms
 		
 		protected override void WndProc(ref System.Windows.Forms.Message m)
 		{
+		    if (m == null)
+		        return;
+
             // Listen for and handle operating system messages
 			try
 			{
@@ -1068,12 +1077,12 @@ namespace mRemoteNG.UI.Forms
 						}
 					}
 				}
-                else if (m.Msg == NativeMethods.WM_DRAWCLIPBOARD)
+                else if (!GeneralAppInfo.isUnix() &&m.Msg == NativeMethods.WM_DRAWCLIPBOARD)
 				{
 					NativeMethods.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
 				    clipboardchangeEvent?.Invoke();
 				}
-                else if (m.Msg == NativeMethods.WM_CHANGECBCHAIN)
+                else if (!GeneralAppInfo.isUnix() &&m.Msg == NativeMethods.WM_CHANGECBCHAIN)
 				{
 					//Send to the next window
                     NativeMethods.SendMessage(fpChainedWindowHandle, m.Msg, m.LParam.ToInt32(), m.WParam.ToInt32());
@@ -1223,7 +1232,10 @@ namespace mRemoteNG.UI.Forms
         #region Screen Stuff
 		private void DisplayChanged(object sender, EventArgs e)
 		{
-			ResetSysMenuItems();
+		    if (GeneralAppInfo.isUnix())
+		        return;
+
+            ResetSysMenuItems();
 			AddSysMenuItems();
 		}
 		
