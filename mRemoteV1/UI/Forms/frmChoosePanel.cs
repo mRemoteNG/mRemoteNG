@@ -1,6 +1,6 @@
-using Microsoft.VisualBasic;
+using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.My;
+using mRemoteNG.UI.Forms.Input;
 
 namespace mRemoteNG
 {
@@ -22,7 +22,7 @@ namespace mRemoteNG
 			}
 		}
 		
-		public void frmChoosePanel_Load(System.Object sender, System.EventArgs e)
+		public void frmChoosePanel_Load(object sender, System.EventArgs e)
 		{
 			ApplyLanguage();
 			
@@ -60,11 +60,11 @@ namespace mRemoteNG
 			}
 		}
 		
-		public void btnNew_Click(System.Object sender, System.EventArgs e)
+		public void btnNew_Click(object sender, System.EventArgs e)
 		{
-			string pnlName = Interaction.InputBox(Language.strPanelName + ":", Language.strNewPanel, Language.strNewPanel);
+		    string pnlName = Language.strNewPanel;
 			
-			if (!string.IsNullOrEmpty(pnlName))
+			if (input.InputBox(Language.strNewPanel, Language.strPanelName + ":", ref pnlName) == DialogResult.OK && !string.IsNullOrEmpty(pnlName))
 			{
                 Runtime.AddPanel(pnlName);
 				AddAvailablePanels();
@@ -73,14 +73,14 @@ namespace mRemoteNG
 			}
 		}
 		
-		public void btnOK_Click(System.Object sender, System.EventArgs e)
+		public void btnOK_Click(object sender, System.EventArgs e)
 		{
-			this.DialogResult = System.Windows.Forms.DialogResult.OK;
+            DialogResult = DialogResult.OK;
 		}
 		
-		public void btnCancel_Click(System.Object sender, System.EventArgs e)
+		public void btnCancel_Click(object sender, System.EventArgs e)
 		{
-			this.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            DialogResult = DialogResult.Cancel;
 		}
 	}
 }
