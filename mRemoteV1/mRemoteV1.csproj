@@ -1210,7 +1210,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="mscorlib" />
   </ItemGroup>
   <PropertyGroup>

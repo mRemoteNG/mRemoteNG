@@ -1,7 +1,5 @@
 using System;
-using Microsoft.VisualBasic;
 using mRemoteNG.App;
-using mRemoteNG.My;
 using WeifenLuo.WinFormsUI.Docking;
 
 
