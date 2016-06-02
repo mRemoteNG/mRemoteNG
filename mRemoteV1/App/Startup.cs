@@ -24,6 +24,7 @@ namespace mRemoteNG.App
     public class Startup
     {
         private static readonly Startup _singletonInstance = new Startup();
+        private CompatibilityChecker _compatibilityChecker;
         private AppUpdater _appUpdate;
 
         public static Startup Instance
@@ -33,6 +34,7 @@ namespace mRemoteNG.App
 
         private Startup()
         {
+            _compatibilityChecker = new CompatibilityChecker();
             _appUpdate = new AppUpdater();
         }
 
@@ -43,78 +45,12 @@ namespace mRemoteNG.App
         public void InitializeProgram()
         {
             Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
-            //CheckCompatibility();
             LogStartupData();
+            _compatibilityChecker.CheckCompatibility();
             ParseCommandLineArgs();
             IeBrowserEmulation.Register();
             GetConnectionIcons();
         }
-
-        private void CheckCompatibility()
-        {
-            CheckFipsPolicy();
-            CheckLenovoAutoScrollUtility();
-        }
-        private void CheckFipsPolicy()
-        {
-            RegistryKey regKey = default(RegistryKey);
-
-            bool isFipsPolicyEnabled = false;
-
-            // Windows XP/Windows Server 2003
-            regKey = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa");
-            if (regKey != null)
-            {
-                if ((int)regKey.GetValue("FIPSAlgorithmPolicy") != 0)
-                {
-                    isFipsPolicyEnabled = true;
-                }
-            }
-
-            // Windows Vista/Windows Server 2008 and newer
-            regKey = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa\\FIPSAlgorithmPolicy");
-            if (regKey != null)
-            {
-                if ((int)regKey.GetValue("Enabled") != 0)
-                {
-                    isFipsPolicyEnabled = true;
-                }
-            }
-
-            if (isFipsPolicyEnabled)
-            {
-                MessageBox.Show(frmMain.Default, string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProdName, GeneralAppInfo.ProdName, MessageBoxButtons.OK, MessageBoxIcon.Error));
-                Environment.Exit(1);
-            }
-        }
-        private void CheckLenovoAutoScrollUtility()
-        {
-            if (!Settings.Default.CompatibilityWarnLenovoAutoScrollUtility)
-            {
-                return;
-            }
-
-            Process[] proccesses = new Process[] { };
-            try
-            {
-                proccesses = Process.GetProcessesByName("virtscrl");
-            }
-            catch(Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionMessage("Error in CheckLenovoAutoScrollUtility", ex);
-            }
-            if (proccesses.Length == 0)
-            {
-                return;
-            }
-
-            CTaskDialog.MessageBox(Application.ProductName, Language.strCompatibilityProblemDetected, string.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected, Application.ProductName), "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok, ESysIcons.Warning, ESysIcons.Warning);
-            if (CTaskDialog.VerificationChecked)
-            {
-                Settings.Default.CompatibilityWarnLenovoAutoScrollUtility = false;
-            }
-        }
-
 
         
         public static void SetDefaultLayout()
