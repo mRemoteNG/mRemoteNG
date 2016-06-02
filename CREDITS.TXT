@@ -47,6 +47,9 @@ IP TextBox
 Copyright © 2005 mawnkay
 http://www.codeproject.com/Articles/11576/IP-TextBox
 
+InputBox
+Copyright © 2016 Jan Slama
+http://www.csharp-examples.net/inputbox/
 
 Included Components
 ===================
