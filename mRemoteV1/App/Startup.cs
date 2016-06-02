@@ -1,23 +1,21 @@
-﻿using Microsoft.Win32;
+﻿using mRemoteNG.App.Info;
 using mRemoteNG.App.Update;
+using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Management;
 using System.Threading;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.Config.Connections;
-using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.TaskDialog;
-using System.Globalization;
-using mRemoteNG.App.Info;
 
 namespace mRemoteNG.App
 {
