@@ -162,7 +162,7 @@ namespace mRemoteNG.UI.Forms
 
             ApplySpecialSettingsForPortableVersion();
 
-            Startup.CreateConnectionsProvider();
+            Startup.Instance.CreateConnectionsProvider();
 			AddSysMenuItems();
 			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
             Opacity = 1;
@@ -709,7 +709,7 @@ namespace mRemoteNG.UI.Forms
             var msgBoxResult = MessageBox.Show(Language.strConfirmResetLayout, "", MessageBoxButtons.YesNo);
             if (msgBoxResult == DialogResult.Yes)
 			{
-				Startup.SetDefaultLayout();
+				Startup.Instance.SetDefaultLayout();
 			}
 		}
 

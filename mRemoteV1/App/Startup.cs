@@ -51,7 +51,7 @@ namespace mRemoteNG.App
         }
 
         
-        public static void SetDefaultLayout()
+        public void SetDefaultLayout()
         {
             frmMain.Default.pnlDock.Visible = false;
 
@@ -68,6 +68,7 @@ namespace mRemoteNG.App
 
             frmMain.Default.pnlDock.Visible = true;
         }
+
         private void GetConnectionIcons()
         {
             string iPath = GeneralAppInfo.HomePath + "\\Icons\\";
@@ -96,12 +97,14 @@ namespace mRemoteNG.App
                 LogCultureData();
             }
         }
+
         private void LogSystemData()
         {
             string osData = GetOperatingSystemData();
             string architecture = GetArchitectureData();
             Logger.Instance.InfoFormat(string.Join(" ", Array.FindAll(new string[] { osData, architecture }, s => !string.IsNullOrEmpty(Convert.ToString(s)))));
         }
+
         private string GetOperatingSystemData()
         {
             string osVersion = string.Empty;
@@ -122,11 +125,13 @@ namespace mRemoteNG.App
             string osData = string.Join(" ", new string[] { osVersion, servicePack });
             return osData;
         }
+
         private string GetOSVersion(string osVersion, ManagementObject managementObject)
         {
             osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption")).Trim();
             return osVersion;
         }
+
         private string GetOSServicePack(string servicePack, ManagementObject managementObject)
         {
             int servicePackNumber = Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"));
@@ -136,6 +141,7 @@ namespace mRemoteNG.App
             }
             return servicePack;
         }
+
         private string GetArchitectureData()
         {
             string architecture = string.Empty;
@@ -153,6 +159,7 @@ namespace mRemoteNG.App
             }
             return architecture;
         }
+
         private void LogApplicationData()
         {
             #if !PORTABLE
@@ -161,21 +168,24 @@ namespace mRemoteNG.App
             Logger.Instance.InfoFormat("{0} {1} {2} starting.", Application.ProductName, Application.ProductVersion, Language.strLabelPortableEdition);
             #endif
         }
+
         private void LogCmdLineArgs()
         {
             Logger.Instance.InfoFormat("Command Line: {0}", Environment.GetCommandLineArgs());
         }
+
         private void LogCLRData()
         {
             Logger.Instance.InfoFormat("Microsoft .NET CLR {0}", Environment.Version);
         }
+
         private void LogCultureData()
         {
             Logger.Instance.InfoFormat("System Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName);
         }
 
 
-        public static void CreateConnectionsProvider()
+        public void CreateConnectionsProvider()
         {
             if (Settings.Default.UseSQLServer)
             {
@@ -203,6 +213,7 @@ namespace mRemoteNG.App
             _appUpdate.GetUpdateInfoCompletedEvent += GetUpdateInfoCompleted;
             _appUpdate.GetUpdateInfoAsync();
         }
+
         private void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (frmMain.Default.InvokeRequired)
@@ -246,6 +257,7 @@ namespace mRemoteNG.App
             _appUpdate.GetAnnouncementInfoCompletedEvent += GetAnnouncementInfoCompleted;
             _appUpdate.GetAnnouncementInfoAsync();
         }
+
         private void GetAnnouncementInfoCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (frmMain.Default.InvokeRequired)
