@@ -24,7 +24,7 @@ namespace mRemoteNG.App
 
         private static void StartApplication()
         {
-            Startup.InitializeProgram();
+            Startup.Instance.InitializeProgram();
             Application.Run(frmMain.Default);
         }
 

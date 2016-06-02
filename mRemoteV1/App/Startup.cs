@@ -26,6 +26,11 @@ namespace mRemoteNG.App
         private static readonly Startup _singletonInstance = new Startup();
         private AppUpdater _appUpdate;
 
+        public static Startup Instance
+        {
+            get { return _singletonInstance; }
+        }
+
         private Startup()
         {
             _appUpdate = new AppUpdater();
@@ -35,14 +40,14 @@ namespace mRemoteNG.App
         {
         }
 
-        public static void InitializeProgram()
+        public void InitializeProgram()
         {
             Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
-            _singletonInstance.LogStartupData();
             //CheckCompatibility();
-            _singletonInstance.ParseCommandLineArgs();
+            LogStartupData();
+            ParseCommandLineArgs();
             IeBrowserEmulation.Register();
-            _singletonInstance.GetConnectionIcons();
+            GetConnectionIcons();
         }
 
         private void CheckCompatibility()
