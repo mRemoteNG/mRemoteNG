@@ -396,13 +396,13 @@ VncSharpNG Control Version {0}</value>
     <value>Choose panel before connecting</value>
   </data>
   <data name="strClosedPorts" xml:space="preserve">
-    <value>Closed Ports</value>
+    <value>閉じているポート</value>
   </data>
   <data name="strCollapseAllFolders" xml:space="preserve">
-    <value>Collapse all folders</value>
+    <value>すべてのフォルダを折りたたむ</value>
   </data>
   <data name="strColumnArguments" xml:space="preserve">
-    <value>Arguments</value>
+    <value>パラメータ</value>
   </data>
   <data name="strColumnDisplayName" xml:space="preserve">
     <value>ディスプレイ名</value>
@@ -427,7 +427,7 @@ VncSharpNG Control Version {0}</value>
     <comment>E&amp;xit {0}</comment>
   </data>
   <data name="strCommandLineArgsCouldNotBeParsed" xml:space="preserve">
-    <value>Couldn't parse command line args!</value>
+    <value>コマンドのパラメータが正しくありません</value>
   </data>
   <data name="strCommandOpenConnectionFile" xml:space="preserve">
     <value>接続ファイルを開く(&amp;O)</value>
@@ -439,7 +439,7 @@ VncSharpNG Control Version {0}</value>
     <value>{0} has detected the Lenovo Auto Scroll Utility running on this system. This utility is known to cause problems with {0}. It is recommended that you disable or uninstall it.</value>
   </data>
   <data name="strCompatibilityProblemDetected" xml:space="preserve">
-    <value>Compatibility problem detected</value>
+    <value>互換性の問題が検出されました</value>
   </data>
   <data name="strComponentsCheck" xml:space="preserve">
     <value>コンポーネントの確認</value>
@@ -466,7 +466,8 @@ VncSharpNG Control Version {0}</value>
     <value>Config UI load failed!</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Do you want to close the connection, "{0}"?</value>
+    <value>接続「{0}」を切断しますか？</value>
+    <comment>Do you want to close the connection, "{0}"?</comment>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Are you sure you want to close the panel, "{0}"? Any connections that it contains will also be closed.</value>
@@ -490,7 +491,7 @@ VncSharpNG Control Version {0}</value>
     <value>すべてのセッションを切断しますか？</value>
   </data>
   <data name="strConfirmResetLayout" xml:space="preserve">
-    <value>Are you sure you want to reset the panels to their default layout?</value>
+    <value>パネル配置を初期化しますか？</value>
   </data>
   <data name="strConnect" xml:space="preserve">
     <value>接続</value>
@@ -517,7 +518,7 @@ VncSharpNG Control Version {0}</value>
     <value>接続の開始に失敗しました</value>
   </data>
   <data name="strConnectionOpenFailedNoHostname" xml:space="preserve">
-    <value>Cannot open connection: No hostname specified!</value>
+    <value>ホスト名が入力されていないので接続出来ません</value>
   </data>
   <data name="strConnectionRdpErrorDetail" xml:space="preserve">
     <value>RDP error!
@@ -704,7 +705,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Export the currently selected folder</value>
   </data>
   <data name="strExportToFileMenuItem" xml:space="preserve">
-    <value>&amp;Export to File...</value>
+    <value>ファイルへの書き出し...(&amp;E)</value>
   </data>
   <data name="strExtApp" xml:space="preserve">
     <value>Ext. App</value>
@@ -833,19 +834,19 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Identify quick connect tabs by adding the prefix "Quick:"</value>
   </data>
   <data name="strImportAD" xml:space="preserve">
-    <value>Import from Active Directory</value>
+    <value>アクティブディレクトリからインポート</value>
   </data>
   <data name="strImportExport" xml:space="preserve">
-    <value>Import/Export</value>
+    <value>インポート／エクスポート</value>
   </data>
   <data name="strImportFileFailedContent" xml:space="preserve">
-    <value>An error occurred while importing the file, "{0}".</value>
+    <value>ファイル「{0}」のインポート中にエラーが発生しました</value>
   </data>
   <data name="strImportFileFailedMainInstruction" xml:space="preserve">
-    <value>Import failed</value>
+    <value>インポートに失敗しました</value>
   </data>
   <data name="strImportFromFileMenuItem" xml:space="preserve">
-    <value>Import from &amp;File...</value>
+    <value>ファイルからインポート...(&amp;F)</value>
   </data>
   <data name="strImportLocationCommandButtons" xml:space="preserve">
     <value>Under the root{0}{1}|Under the selected folder{0}{2}</value>
@@ -857,13 +858,13 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Import location</value>
   </data>
   <data name="strImportMenuItem" xml:space="preserve">
-    <value>&amp;Import</value>
+    <value>インポート(&amp;I)</value>
   </data>
   <data name="strImportmRemoteXML" xml:space="preserve">
     <value>Import mRemote/mRemoteNG XML</value>
   </data>
   <data name="strImportPortScan" xml:space="preserve">
-    <value>Import from Port Scan</value>
+    <value>ポートスキャンからインポート</value>
   </data>
   <data name="strImportRDPFiles" xml:space="preserve">
     <value>Import from .RDP file(s)</value>
@@ -872,13 +873,13 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Inactive</value>
   </data>
   <data name="strInformations" xml:space="preserve">
-    <value>Informations</value>
+    <value>情報</value>
   </data>
   <data name="strInheritNewConnection" xml:space="preserve">
-    <value>mRemoteNG is up to date</value>
+    <value>mRemoteNGは最新バージョンです</value>
   </data>
   <data name="strIntAppConnectionFailed" xml:space="preserve">
-    <value>Connection failed!</value>
+    <value>接続に失敗しました</value>
   </data>
   <data name="strIntAppDisposeFailed" xml:space="preserve">
     <value>Dispose of Int App process failed!</value>
@@ -1148,7 +1149,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>ポートをスキャンする</value>
   </data>
   <data name="strMenuQuickConnectToolbar" xml:space="preserve">
-    <value>Quick Connect Toolbar</value>
+    <value>クイック接続ツールバー</value>
   </data>
   <data name="strMenuReconnect" xml:space="preserve">
     <value>再接続</value>
@@ -1178,7 +1179,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>接続ファイルの保存</value>
   </data>
   <data name="strMenuSaveConnectionFileAs" xml:space="preserve">
-    <value>Save Connection File As...</value>
+    <value>接続ファイルを別名で保存...</value>
   </data>
   <data name="strMenuScreenshot" xml:space="preserve">
     <value>スクリーンキャプチャ</value>
@@ -1199,7 +1200,8 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>セッションとスクリーンキャプチャ</value>
   </data>
   <data name="strMenuShowHelpText" xml:space="preserve">
-    <value>&amp;Show Help Text</value>
+    <value>ヘルプ文字を表示(&amp;S)</value>
+    <comment>&amp;Show Help Text</comment>
   </data>
   <data name="strMenuShowText" xml:space="preserve">
     <value>文字の表示</value>
@@ -1869,7 +1871,7 @@ Message:
     <value>Winsock initialization error.</value>
   </data>
   <data name="strRdpFileCouldNotBeImported" xml:space="preserve">
-    <value>Couldn't import rdp file!</value>
+    <value>RDPファイルのインポートに失敗しました</value>
   </data>
   <data name="strRDPFitToPanel" xml:space="preserve">
     <value>Fit To Panel</value>

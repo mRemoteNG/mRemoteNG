@@ -706,7 +706,8 @@ namespace mRemoteNG.UI.Forms
 
         private void mMenViewResetLayout_Click(object sender, EventArgs e)
 		{
-            var msgBoxResult = MessageBox.Show(Language.strConfirmResetLayout, "", MessageBoxButtons.YesNo);
+            var msgBoxResult = MessageBox.Show(Language.strConfirmResetLayout, string.Empty, MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
             if (msgBoxResult == DialogResult.Yes)
 			{
 				Startup.Instance.SetDefaultLayout();
