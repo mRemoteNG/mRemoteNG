@@ -43,7 +43,6 @@ namespace mRemoteNG.App
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, System.Text.StringBuilder lParam);
 
-
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
 			
@@ -71,6 +70,11 @@ namespace mRemoteNG.App
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern int GetDlgCtrlID(int hwndCtl);
 
+        [DllImport("user32", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+
+        [DllImport("user32", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern bool SetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
         #endregion
 
         #region Structures
@@ -85,8 +89,32 @@ namespace mRemoteNG.App
             public int cy;
             public int flags;
         }
+
+        public struct WINDOWPLACEMENT
+        {
+            public uint length;
+            public uint flags;
+            public uint showCmd;
+            public POINT ptMinPosition;
+            public POINT ptMaxPosition;
+            public RECT rcNormalPosition;
+        }
+
+        public struct POINT
+        {
+            public long x;
+            public long y;
+        }
+
+        private struct RECT
+        {
+            public long left;
+            public long top;
+            public long right;
+            public long bottom;
+        }
         #endregion
-		
+
         #region Helpers
         public static int MAKELONG(int wLow, int wHigh)
         {
@@ -139,10 +167,17 @@ namespace mRemoteNG.App
         #endregion
 
         #region ShowWindow
-        public const int SW_HIDE = 0;
-        public const int SW_SHOWMAXIMIZED = 3;
-        public const int SW_SHOW = 5;
-        public const int SW_RESTORE = 9;
+        public const UInt32 SW_HIDE = 0;
+        public const UInt32 SW_SHOWNORMAL = 1;
+        public const UInt32 SW_SHOWMINIMIZED = 2;
+        public const UInt32 SW_SHOWMAXIMIZED = 3;
+        public const UInt32 SW_MAXIMIZE = 3;
+        public const UInt32 SW_SHOWNOACTIVATE = 4;
+        public const UInt32 SW_SHOW = 5;
+        public const UInt32 SW_MINIMIZE = 6;
+        public const UInt32 SW_SHOWMINNOACTIVE = 7;
+        public const UInt32 SW_SHOWNA = 8;
+        public const UInt32 SW_RESTORE = 9;
         #endregion
 
         #region SetWindowPos / WM_WINDOWPOSCHANGING / WM_WINDOWPOSCHANGED
@@ -230,6 +265,12 @@ namespace mRemoteNG.App
         /// 
         /// </summary>
         public const int SWP_STATECHANGED = 0x8000;
+        #endregion
+
+        #region Window Placement Flags (WPF)
+        public const UInt32 WPF_SETMINPOSITION = 0x1;
+        public const UInt32 WPF_RESTORETOMAXIMIZED = 0x2;
+        public const UInt32 WPF_ASYNCWINDOWPLACEMENT = 0x4;
         #endregion
 
         #region WM_ACTIVATE
@@ -412,7 +453,7 @@ namespace mRemoteNG.App
         public const int LB_ERR = -1;
         public const int LB_SELECTSTRING = 0x18C;
         #endregion
-
+        
         #endregion
     }
 }
