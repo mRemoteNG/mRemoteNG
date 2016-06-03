@@ -32,11 +32,18 @@ namespace mRemoteNG.App
         internal static extern bool MoveWindow(IntPtr hWnd, int x, int y, int cx, int cy, bool repaint);
 			
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern bool PostMessage(IntPtr hWnd, UInt32 Msg, int wParam, int lParam);
+        internal static extern bool PostMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
 			
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern int SendMessage(IntPtr hWnd, int msg, int wparam, int lparam);
-			
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, System.Text.StringBuilder lParam);
+
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
 			
@@ -57,8 +64,15 @@ namespace mRemoteNG.App
 			
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern IntPtr WindowFromPoint(Point point);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern void GetClassName(IntPtr hWnd, System.Text.StringBuilder lpClassName, int nMaxCount);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int GetDlgCtrlID(int hwndCtl);
+
         #endregion
-		
+
         #region Structures
         [StructLayout(LayoutKind.Sequential)]
         public struct WINDOWPOS
@@ -106,6 +120,8 @@ namespace mRemoteNG.App
         #endregion
 
         #region Constants
+        public const int TRUE = 1;
+
         #region GetWindowLong
         public const int GWL_STYLE = (-16);
         #endregion
@@ -123,7 +139,9 @@ namespace mRemoteNG.App
         #endregion
 
         #region ShowWindow
+        public const int SW_HIDE = 0;
         public const int SW_SHOWMAXIMIZED = 3;
+        public const int SW_SHOW = 5;
         public const int SW_RESTORE = 9;
         #endregion
 
@@ -248,6 +266,11 @@ namespace mRemoteNG.App
         public const int WM_ACTIVATE = 0x6;
 
         /// <summary>
+        /// 
+        /// </summary>
+        public const int WM_SETTEXT = 0xC;
+
+        /// <summary>
         /// Copies the text that corresponds to a window into a buffer provided by the caller. 
         /// </summary>
         public const int WM_GETTEXT = 0xD;
@@ -291,6 +314,11 @@ namespace mRemoteNG.App
         /// Posted to the window with the keyboard focus when a nonsystem key is released. A nonsystem key is a key that is pressed when the ALT key is not pressed, or a keyboard key that is pressed when a window has the keyboard focus. 
         /// </summary>
         public const int WM_KEYUP = 0x101;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int WM_COMMAND = 0x111;
 
         /// <summary>
         /// A window receives this message when the user chooses a command from the Window menu (formerly known as the system or control menu) or when the user chooses the maximize button, minimize button, restore button, or close button.
@@ -379,6 +407,12 @@ namespace mRemoteNG.App
         public const int VK_CONTROL = 0x11;
         public const int VK_C = 0x67;
         #endregion
+
+        #region LB
+        public const int LB_ERR = -1;
+        public const int LB_SELECTSTRING = 0x18C;
+        #endregion
+
         #endregion
     }
 }
