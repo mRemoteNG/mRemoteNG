@@ -216,7 +216,6 @@
     <Compile Include="Connection\Protocol\RDP\RDPEnums.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPVersions.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
-    <Compile Include="Images\ErrorImageType.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
     <Compile Include="Tools\ArgumentParser.cs" />
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
@@ -359,7 +358,7 @@
     <Compile Include="UI\Forms\PasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Images\TreeImageType.cs" />
+    <Compile Include="Tree\TreeImageType.cs" />
     <Compile Include="Resources\Language\Language.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

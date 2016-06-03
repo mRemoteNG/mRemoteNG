@@ -1,5 +1,4 @@
 using mRemoteNG.Connection;
-using mRemoteNG.Images;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using System.Collections.Generic;
