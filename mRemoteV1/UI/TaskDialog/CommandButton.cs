@@ -124,9 +124,9 @@ namespace mRemoteNG.UI.TaskDialog
     //--------------------------------------------------------------------------------
     protected override void OnCreateControl()
     {
-      base.OnCreateControl();
-      imgArrow1 = new Bitmap(this.GetType(), "green_arrow1.png");
-      imgArrow2 = new Bitmap(this.GetType(), "green_arrow2.png");
+        base.OnCreateControl();
+        imgArrow1 = Resources.green_arrow1;
+        imgArrow2 = Resources.green_arrow2;
     }
 
     //--------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ namespace mRemoteNG.UI.TaskDialog
       Color text_color = SystemColors.WindowText;
 
       Image img = imgArrow1;
-
+      
       if (Enabled)
       {
         switch (m_State)

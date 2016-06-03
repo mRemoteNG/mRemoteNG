@@ -851,8 +851,8 @@
     <Content Include="Resources\Images_FamFamFam\database.png" />
     <Content Include="Resources\Images_FamFamFam\Link.png" />
     <Content Include="Resources\Images_FamFamFam\page_copy.png" />
-    <Content Include="UI\TaskDialog\green_arrow1.png" />
-    <Content Include="UI\TaskDialog\green_arrow2.png" />
+    <Content Include="Resources\Images\green_arrow1.png" />
+    <Content Include="Resources\Images\green_arrow2.png" />
     <None Include="Resources\Images\puttycm.png" />
     <None Include="Resources\Images_FamFamFam\monitor_go.png" />
     <None Include="Resources\Images_FamFamFam\monitor_delete.png" />
