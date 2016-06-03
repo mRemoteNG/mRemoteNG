@@ -34,12 +34,12 @@ namespace mRemoteNG.Tools
 			if (controlHandle == IntPtr.Zero)
 				return false;
 				
-			int nCmdShow = 0;
+			uint nCmdShow = 0;
 			if (visible)
 				nCmdShow = NativeMethods.SW_SHOW;
 			else
 				nCmdShow = NativeMethods.SW_HIDE;
-            NativeMethods.ShowWindow(controlHandle, nCmdShow);
+            NativeMethods.ShowWindow(controlHandle, (int)nCmdShow);
 			return true;
 		}
 			
