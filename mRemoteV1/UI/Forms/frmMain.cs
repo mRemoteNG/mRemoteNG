@@ -167,7 +167,7 @@ namespace mRemoteNG.UI.Forms
 
             ApplySpecialSettingsForPortableVersion();
 
-            Startup.CreateConnectionsProvider();
+            Startup.Instance.CreateConnectionsProvider();
             if (!GeneralAppInfo.isUnix())
                 AddSysMenuItems();
 			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
@@ -712,10 +712,11 @@ namespace mRemoteNG.UI.Forms
 
         private void mMenViewResetLayout_Click(object sender, EventArgs e)
 		{
-            var msgBoxResult = MessageBox.Show(Language.strConfirmResetLayout, "", MessageBoxButtons.YesNo);
+            var msgBoxResult = MessageBox.Show(Language.strConfirmResetLayout, string.Empty, MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
             if (msgBoxResult == DialogResult.Yes)
 			{
-				Startup.SetDefaultLayout();
+				Startup.Instance.SetDefaultLayout();
 			}
 		}
 

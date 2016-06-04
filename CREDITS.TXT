@@ -34,14 +34,17 @@ Copyright © 2002 Richard Lopes
 MIT License
 http://www.codeproject.com/KB/recipes/command_line.aspx
 
-DotNetVer
-Copyright © 2010 David Grinberg
-Copyright © 2010-2011 Brandon Hansen
-http://nsis.sourceforge.net/DotNetVer
+FilteredPropertyGrid
+Copyright © 2006 Azuria
+http://www.codeproject.com/KB/cs/FilteredPropertyGrid.aspx
 
 Hotkey Selection Control for .NET
 Copyright © 2006 Thomas Backman
 http://www.codeproject.com/Articles/15085/A-simple-hotkey-selection-control-for-NET
+
+InputBox
+Copyright © 2016 Jan Slama
+http://www.csharp-examples.net/inputbox/
 
 IP TextBox
 Copyright © 2005 mawnkay
@@ -61,14 +64,10 @@ Copyright © 2003 The Mentalis.org Team
 Modified New BSD License
 http://www.mentalis.org/
 
-DockPanel Suite 2.3.1
-Copyright © 2007 Weifen Luo
+DockPanel Suite 2.10.0.beta2
+Copyright © 2015 @roken and @lextm (formerly Weifen Luo)
 MIT License
-http://sourceforge.net/projects/dockpanelsuite/
-
-FilteredPropertyGrid 1.0.0.0
-Copyright © 2006 Azuria
-http://www.codeproject.com/KB/cs/FilteredPropertyGrid.aspx
+https://github.com/dockpanelsuite/dockpanelsuite
 
 GeckoFX 1.8.1.4
 Copyright © 2008 Skybound Software

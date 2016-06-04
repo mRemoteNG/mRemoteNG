@@ -118,9 +118,22 @@ namespace mRemoteNG.Tree
 
         public static void FinishRenameSelectedNode(string newName)
         {
+            FinishRenameSelectedConnectionNode(newName);
+            FinishRenameSelectedContainerNode(newName);
+        }
+
+        private static void FinishRenameSelectedConnectionNode(string newName)
+        {
             ConnectionInfo connectionInfo = SelectedNode.Tag as ConnectionInfo;
             if (connectionInfo != null)
                 ConnectionTreeNode.RenameNode(connectionInfo, newName);
+        }
+
+        private static void FinishRenameSelectedContainerNode(string newName)
+        {
+            Container.ContainerInfo containerInfo = SelectedNode.Tag as Container.ContainerInfo;
+            if (containerInfo != null)
+                ConnectionTreeNode.RenameNode(containerInfo.ConnectionInfo, newName);
         }
 
         public static void SetNodeToolTip(MouseEventArgs e, ToolTip tTip)

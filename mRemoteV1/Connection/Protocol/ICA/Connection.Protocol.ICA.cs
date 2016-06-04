@@ -1,13 +1,11 @@
 using System;
 using AxWFICALib;
 using System.Drawing;
-using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using System.Threading;
 using mRemoteNG.Tools;
 using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 
 

@@ -1,6 +1,5 @@
 using System;
 using System.Drawing;
-using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using mRemoteNG.Connection;
 using mRemoteNG.App;
@@ -12,6 +11,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.App.Info;
+using mRemoteNG.UI.Forms.Input;
 
 namespace mRemoteNG.UI.Window
 {
@@ -1070,9 +1070,9 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				string nTitle = Interaction.InputBox(Prompt: Language.strNewTitle + ":", DefaultResponse: TabController.SelectedTab.Title.Replace("&&", "&"));
+			    string nTitle = "";
 				
-				if (!string.IsNullOrEmpty(nTitle))
+				if (input.InputBox(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle) == DialogResult.OK && !string.IsNullOrEmpty(nTitle))
 				{
 					TabController.SelectedTab.Title = nTitle.Replace("&", "&&");
 				}

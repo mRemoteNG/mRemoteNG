@@ -23,6 +23,7 @@ namespace mRemoteNG.App
         {
             _updateFilePath = updateFilePath;
             frmMain.Default.Close();
+            ProgramRoot.CloseSingletonInstanceMutex();
         }
 
         public static void Cleanup()

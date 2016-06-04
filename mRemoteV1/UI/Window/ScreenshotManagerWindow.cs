@@ -1,11 +1,9 @@
 using System;
 using System.Drawing;
-using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using System.IO;
-using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 
 

@@ -1,4 +1,3 @@
-using Azuria.Common.Controls;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol.RDP;
@@ -13,6 +12,7 @@ using System.Drawing;
 using System.IO;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
+using mRemoteNG.UI.Controls.FilteredPropertyGrid;
 using WeifenLuo.WinFormsUI.Docking;
 
 

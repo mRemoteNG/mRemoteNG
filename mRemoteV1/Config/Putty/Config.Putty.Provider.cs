@@ -1,22 +1,13 @@
 using System.Collections.Generic;
 using System;
-using AxWFICALib;
-using System.Drawing;
-using System.Diagnostics;
-using System.Data;
-using AxMSTSCLib;
-using Microsoft.VisualBasic;
-using System.Collections;
 using System.Windows.Forms;
-using mRemoteNG.My;
 using mRemoteNG.Tree;
-using mRemoteNG.Images;
 using mRemoteNG.Connection;
 
 
 namespace mRemoteNG.Config.Putty
 {
-	public abstract class Provider
+    public abstract class Provider
 	{
         #region Public Methods
 		private TreeNode _rootTreeNode;

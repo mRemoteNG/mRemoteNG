@@ -1,4 +1,3 @@
-using Microsoft.VisualBasic;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
@@ -6,7 +5,6 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
-using mRemoteNG.Images;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -20,6 +18,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.UI.Forms;
+using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 using TabPage = Crownwood.Magic.Controls.TabPage;
@@ -285,9 +284,10 @@ namespace mRemoteNG.App
             try
             {
                 ConnectionWindow conW = default(ConnectionWindow);
-                conW = (ConnectionWindow)((Control)sender).Tag;
+                conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
 
-                string nTitle = Interaction.InputBox(Prompt: Language.strNewTitle + ":", DefaultResponse: Convert.ToString(((Control)((Control)sender).Tag).Text.Replace("&&", "&")));
+                string nTitle = "";
+                input.InputBox(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle);
 
                 if (!string.IsNullOrEmpty(nTitle))
                 {

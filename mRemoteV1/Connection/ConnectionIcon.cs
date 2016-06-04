@@ -1,5 +1,4 @@
 using System;
-using Microsoft.VisualBasic;
 using System.ComponentModel;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;

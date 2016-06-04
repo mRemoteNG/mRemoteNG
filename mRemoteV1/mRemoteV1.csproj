@@ -105,10 +105,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\DiffieHellman.dll</HintPath>
     </Reference>
-    <Reference Include="FilteredPropertyGrid, Version=1.0.2258.31541, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\FilteredPropertyGrid.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\log4net.dll</HintPath>
@@ -160,7 +156,7 @@
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App\ApplicationEvents.cs" />
+    <Compile Include="App\CompatibilityChecker.cs" />
     <Compile Include="App\Info\GeneralAppInfo.cs" />
     <Compile Include="App\Logger.cs" />
     <Compile Include="App\NativeMethods.cs" />
@@ -216,7 +212,6 @@
     <Compile Include="Connection\Protocol\RDP\RDPEnums.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPVersions.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
-    <Compile Include="Images\ErrorImageType.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
     <Compile Include="Tools\ArgumentParser.cs" />
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
@@ -227,6 +222,13 @@
     <Compile Include="Tree\NodeType.cs" />
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
     <Compile Include="Tree\TreeNodeMover.cs" />
+    <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.designer.cs">
+      <DependentUpon>FilteredPropertyGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\FilteredPropertyGrid\ObjectWrapper.cs" />
     <Compile Include="UI\Controls\IPTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -248,6 +250,7 @@
     <Compile Include="UI\Forms\frmOptions.Designer.cs">
       <DependentUpon>frmOptions.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Forms\Input\input.cs" />
     <Compile Include="UI\Forms\OptionsPages\AdvancedPage.Designer.cs">
       <DependentUpon>AdvancedPage.cs</DependentUpon>
     </Compile>
@@ -358,7 +361,7 @@
     <Compile Include="UI\Forms\PasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Images\TreeImageType.cs" />
+    <Compile Include="Tree\TreeImageType.cs" />
     <Compile Include="Resources\Language\Language.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -850,8 +853,8 @@
     <Content Include="Resources\Images_FamFamFam\database.png" />
     <Content Include="Resources\Images_FamFamFam\Link.png" />
     <Content Include="Resources\Images_FamFamFam\page_copy.png" />
-    <Content Include="UI\TaskDialog\green_arrow1.png" />
-    <Content Include="UI\TaskDialog\green_arrow2.png" />
+    <Content Include="Resources\Images\green_arrow1.png" />
+    <Content Include="Resources\Images\green_arrow2.png" />
     <None Include="Resources\Images\puttycm.png" />
     <None Include="Resources\Images_FamFamFam\monitor_go.png" />
     <None Include="Resources\Images_FamFamFam\monitor_delete.png" />
@@ -1209,7 +1212,6 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="mscorlib" />
   </ItemGroup>
   <PropertyGroup>

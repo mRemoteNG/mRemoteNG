@@ -4,7 +4,6 @@ using System.Xml;
 using System.IO;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Images;
 using mRemoteNG.Connection;
 using mRemoteNG.Tree;
 using mRemoteNG.Container;
