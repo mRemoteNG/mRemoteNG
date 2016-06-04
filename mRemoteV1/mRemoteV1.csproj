@@ -105,10 +105,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\DiffieHellman.dll</HintPath>
     </Reference>
-    <Reference Include="FilteredPropertyGrid, Version=1.0.2258.31541, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\FilteredPropertyGrid.dll</HintPath>
-    </Reference>
     <Reference Include="log4net, Version=1.2.10.0, Culture=neutral, PublicKeyToken=1b44e1d426115821, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\log4net.dll</HintPath>
@@ -226,6 +222,13 @@
     <Compile Include="Tree\NodeType.cs" />
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
     <Compile Include="Tree\TreeNodeMover.cs" />
+    <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.designer.cs">
+      <DependentUpon>FilteredPropertyGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\FilteredPropertyGrid\ObjectWrapper.cs" />
     <Compile Include="UI\Controls\IPTextBox.cs">
       <SubType>UserControl</SubType>
     </Compile>
