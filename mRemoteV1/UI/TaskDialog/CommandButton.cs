@@ -61,8 +61,8 @@ namespace mRemoteNG.UI.TaskDialog
     public CommandButton()
     {
       InitializeComponent();
-      base.Font = new Font("Segoe UI", 11.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
-      m_smallFont = new Font("Segoe UI", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+      base.Font = new Font("Verdana", 11.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
+      m_smallFont = new Font("Verdana", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, (byte)0);
     }
     
     #endregion

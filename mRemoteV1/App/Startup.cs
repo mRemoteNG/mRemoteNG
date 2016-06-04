@@ -181,6 +181,8 @@ namespace mRemoteNG.App
             var rt = "Microsoft .NET CLR";
             if (GeneralAppInfo.isUnix())
                 rt = "Mono Runtime";
+            if (GeneralAppInfo.isWine())
+                rt = "WINE Runtime";
             
             Logger.Instance.InfoFormat("{0} {1}", rt, Environment.Version);
         }

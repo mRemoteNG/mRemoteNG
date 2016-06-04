@@ -191,7 +191,7 @@ namespace mRemoteNG.UI.Window
 			lblDocName.Anchor = (AnchorStyles.Top | AnchorStyles.Left) 
 			                    | AnchorStyles.Right;
 			lblDocName.BackColor = System.Drawing.Color.DimGray;
-			lblDocName.Font = new System.Drawing.Font("Segoe UI", 12.0F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
+			lblDocName.Font = new System.Drawing.Font("Verdana", 12.0F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
 			lblDocName.ForeColor = System.Drawing.Color.White;
 			lblDocName.Location = new System.Drawing.Point(1, 1);
 			lblDocName.Name = "lblDocName";

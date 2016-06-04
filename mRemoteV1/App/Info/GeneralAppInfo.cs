@@ -4,6 +4,7 @@ using System.IO;
 using System.Reflection;
 using System.Threading;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using static System.Environment;
 
 
@@ -49,6 +50,16 @@ namespace mRemoteNG.App.Info
 	        return v;
 	    }
 
+	    public static Boolean isWine()
+	    {
+	        if (Registry.LocalMachine.OpenSubKey(@"SOFTWARE\\Wine", false) == null)
+	            return false;
+            if (Registry.CurrentUser.OpenSubKey(@"SOFTWARE\\Wine", false) == null)
+                return false;
+
+	        return true;
+
+	    }
 	    public static Boolean isUnix()
 	    {
             // http://www.mono-project.com/docs/faq/technical/#how-to-detect-the-execution-platform
@@ -56,6 +67,9 @@ namespace mRemoteNG.App.Info
             {
                 return true;
             }
+
+	        if (isWine())
+	            return true;
 
 	        return false;
 	    }

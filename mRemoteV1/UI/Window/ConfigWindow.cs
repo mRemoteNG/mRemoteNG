@@ -22,7 +22,7 @@ namespace mRemoteNG.UI.Window
 	{
         private bool _originalPropertyGridToolStripItemCountValid;
         private int _originalPropertyGridToolStripItemCount;
-        private System.ComponentModel.Container components = null;
+        private System.ComponentModel.IContainer components;
         internal ToolStripButton btnShowProperties;
         internal ToolStripButton btnShowDefaultProperties;
         internal ToolStripButton btnShowInheritance;
@@ -39,152 +39,144 @@ namespace mRemoteNG.UI.Window
 
         private void InitializeComponent()
 		{
-            components = new System.ComponentModel.Container();
-            Load += Config_Load;
-            SystemColorsChanged += Config_SystemColorsChanged;
-            pGrid = new FilteredPropertyGrid();
-            pGrid.PropertyValueChanged += pGrid_PropertyValueChanged;
-            pGrid.PropertySortChanged += pGrid_PropertySortChanged;
-            propertyGridContextMenu = new ContextMenuStrip(components);
-            propertyGridContextMenu.Opening += propertyGridContextMenu_Opening;
-            propertyGridContextMenuReset = new ToolStripMenuItem();
-            propertyGridContextMenuReset.Click += propertyGridContextMenuReset_Click;
-            ToolStripSeparator1 = new ToolStripSeparator();
-            propertyGridContextMenuShowHelpText = new ToolStripMenuItem();
-            propertyGridContextMenuShowHelpText.Click += propertyGridContextMenuShowHelpText_Click;
-            propertyGridContextMenuShowHelpText.CheckedChanged += propertyGridContextMenuShowHelpText_CheckedChanged;
-            btnShowInheritance = new ToolStripButton();
-            btnShowInheritance.Click += btnShowInheritance_Click;
-            btnShowDefaultInheritance = new ToolStripButton();
-            btnShowDefaultInheritance.Click += btnShowDefaultInheritance_Click;
-            btnShowProperties = new ToolStripButton();
-            btnShowProperties.Click += btnShowProperties_Click;
-            btnShowDefaultProperties = new ToolStripButton();
-            btnShowDefaultProperties.Click += btnShowDefaultProperties_Click;
-            btnIcon = new ToolStripButton();
-            btnIcon.MouseUp += btnIcon_Click;
-            btnHostStatus = new ToolStripButton();
-            btnHostStatus.Click += btnHostStatus_Click;
-            cMenIcons = new ContextMenuStrip(components);
-            propertyGridContextMenu.SuspendLayout();
-            SuspendLayout();
-            //
-            //pGrid
-            //
-            pGrid.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom)
-                | AnchorStyles.Left)
-                | AnchorStyles.Right;
-            pGrid.BrowsableProperties = null;
-            pGrid.ContextMenuStrip = propertyGridContextMenu;
-            pGrid.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
-            pGrid.HiddenAttributes = null;
-            pGrid.HiddenProperties = null;
-            pGrid.Location = new Point(0, 0);
-            pGrid.Name = "pGrid";
-            pGrid.PropertySort = PropertySort.Categorized;
-            pGrid.Size = new Size(226, 530);
-            pGrid.TabIndex = 0;
-            pGrid.UseCompatibleTextRendering = true;
-            //
-            //propertyGridContextMenu
-            //
-            propertyGridContextMenu.Items.AddRange(new ToolStripItem[] { propertyGridContextMenuReset, ToolStripSeparator1, propertyGridContextMenuShowHelpText });
-            propertyGridContextMenu.Name = "propertyGridContextMenu";
-            propertyGridContextMenu.Size = new Size(157, 76);
-            //
-            //propertyGridContextMenuReset
-            //
-            propertyGridContextMenuReset.Name = "propertyGridContextMenuReset";
-            propertyGridContextMenuReset.Size = new Size(156, 22);
-            propertyGridContextMenuReset.Text = "&Reset";
-            //
-            //ToolStripSeparator1
-            //
-            ToolStripSeparator1.Name = "ToolStripSeparator1";
-            ToolStripSeparator1.Size = new Size(153, 6);
-            //
-            //propertyGridContextMenuShowHelpText
-            //
-            propertyGridContextMenuShowHelpText.Name = "propertyGridContextMenuShowHelpText";
-            propertyGridContextMenuShowHelpText.Size = new Size(156, 22);
-            propertyGridContextMenuShowHelpText.Text = "&Show Help Text";
-            //
-            //btnShowInheritance
-            //
-            btnShowInheritance.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnShowInheritance.Image = Resources.Inheritance;
-            btnShowInheritance.ImageTransparentColor = Color.Magenta;
-            btnShowInheritance.Name = "btnShowInheritance";
-            btnShowInheritance.Size = new Size(23, 22);
-            btnShowInheritance.Text = "Inheritance";
-            //
-            //btnShowDefaultInheritance
-            //
-            btnShowDefaultInheritance.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnShowDefaultInheritance.Image = Resources.Inheritance_Default;
-            btnShowDefaultInheritance.ImageTransparentColor = Color.Magenta;
-            btnShowDefaultInheritance.Name = "btnShowDefaultInheritance";
-            btnShowDefaultInheritance.Size = new Size(23, 22);
-            btnShowDefaultInheritance.Text = "Default Inheritance";
-            //
-            //btnShowProperties
-            //
-            btnShowProperties.Checked = true;
-            btnShowProperties.CheckState = CheckState.Checked;
-            btnShowProperties.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnShowProperties.Image = Resources.Properties;
-            btnShowProperties.ImageTransparentColor = Color.Magenta;
-            btnShowProperties.Name = "btnShowProperties";
-            btnShowProperties.Size = new Size(23, 22);
-            btnShowProperties.Text = "Properties";
-            //
-            //btnShowDefaultProperties
-            //
-            btnShowDefaultProperties.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnShowDefaultProperties.Image = Resources.Properties_Default;
-            btnShowDefaultProperties.ImageTransparentColor = Color.Magenta;
-            btnShowDefaultProperties.Name = "btnShowDefaultProperties";
-            btnShowDefaultProperties.Size = new Size(23, 22);
-            btnShowDefaultProperties.Text = "Default Properties";
-            //
-            //btnIcon
-            //
-            btnIcon.Alignment = ToolStripItemAlignment.Right;
-            btnIcon.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnIcon.ImageTransparentColor = Color.Magenta;
-            btnIcon.Name = "btnIcon";
-            btnIcon.Size = new Size(23, 22);
-            btnIcon.Text = "Icon";
-            //
-            //btnHostStatus
-            //
-            btnHostStatus.Alignment = ToolStripItemAlignment.Right;
-            btnHostStatus.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            btnHostStatus.Image = Resources.HostStatus_Check;
-            btnHostStatus.ImageTransparentColor = Color.Magenta;
-            btnHostStatus.Name = "btnHostStatus";
-            btnHostStatus.Size = new Size(23, 22);
-            btnHostStatus.Tag = "checking";
-            btnHostStatus.Text = "Status";
-            //
-            //cMenIcons
-            //
-            cMenIcons.Name = "cMenIcons";
-            cMenIcons.Size = new Size(61, 4);
-            //
-            //Config
-            //
-            ClientSize = new Size(226, 530);
-            Controls.Add(pGrid);
-            Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
-            HideOnClose = true;
-            Icon = Resources.Config_Icon;
-            Name = "Config";
-            TabText = "Config";
-            Text = "Config";
-            propertyGridContextMenu.ResumeLayout(false);
-            ResumeLayout(false);
-					
+            this.components = new System.ComponentModel.Container();
+            this.pGrid = new mRemoteNG.UI.Controls.FilteredPropertyGrid.FilteredPropertyGrid();
+            this.propertyGridContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.propertyGridContextMenuReset = new System.Windows.Forms.ToolStripMenuItem();
+            this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.propertyGridContextMenuShowHelpText = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnShowInheritance = new System.Windows.Forms.ToolStripButton();
+            this.btnShowDefaultInheritance = new System.Windows.Forms.ToolStripButton();
+            this.btnShowProperties = new System.Windows.Forms.ToolStripButton();
+            this.btnShowDefaultProperties = new System.Windows.Forms.ToolStripButton();
+            this.btnIcon = new System.Windows.Forms.ToolStripButton();
+            this.btnHostStatus = new System.Windows.Forms.ToolStripButton();
+            this.cMenIcons = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.propertyGridContextMenu.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // pGrid
+            // 
+            this.pGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.pGrid.BrowsableProperties = null;
+            this.pGrid.ContextMenuStrip = this.propertyGridContextMenu;
+            this.pGrid.Font = new System.Drawing.Font("Arial", 8.25F);
+            this.pGrid.HiddenAttributes = null;
+            this.pGrid.HiddenProperties = null;
+            this.pGrid.Location = new System.Drawing.Point(0, 0);
+            this.pGrid.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.pGrid.Name = "pGrid";
+            this.pGrid.PropertySort = System.Windows.Forms.PropertySort.Categorized;
+            this.pGrid.Size = new System.Drawing.Size(226, 530);
+            this.pGrid.TabIndex = 0;
+            this.pGrid.UseCompatibleTextRendering = true;
+            // 
+            // propertyGridContextMenu
+            // 
+            this.propertyGridContextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.propertyGridContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.propertyGridContextMenuReset,
+            this.ToolStripSeparator1,
+            this.propertyGridContextMenuShowHelpText});
+            this.propertyGridContextMenu.Name = "propertyGridContextMenu";
+            this.propertyGridContextMenu.Size = new System.Drawing.Size(188, 62);
+            // 
+            // propertyGridContextMenuReset
+            // 
+            this.propertyGridContextMenuReset.Name = "propertyGridContextMenuReset";
+            this.propertyGridContextMenuReset.Size = new System.Drawing.Size(187, 26);
+            this.propertyGridContextMenuReset.Text = "&Reset";
+            // 
+            // ToolStripSeparator1
+            // 
+            this.ToolStripSeparator1.Name = "ToolStripSeparator1";
+            this.ToolStripSeparator1.Size = new System.Drawing.Size(184, 6);
+            // 
+            // propertyGridContextMenuShowHelpText
+            // 
+            this.propertyGridContextMenuShowHelpText.Name = "propertyGridContextMenuShowHelpText";
+            this.propertyGridContextMenuShowHelpText.Size = new System.Drawing.Size(187, 26);
+            this.propertyGridContextMenuShowHelpText.Text = "&Show Help Text";
+            // 
+            // btnShowInheritance
+            // 
+            this.btnShowInheritance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnShowInheritance.Image = global::mRemoteNG.Resources.Inheritance;
+            this.btnShowInheritance.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShowInheritance.Name = "btnShowInheritance";
+            this.btnShowInheritance.Size = new System.Drawing.Size(23, 22);
+            this.btnShowInheritance.Text = "Inheritance";
+            // 
+            // btnShowDefaultInheritance
+            // 
+            this.btnShowDefaultInheritance.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnShowDefaultInheritance.Image = global::mRemoteNG.Resources.Inheritance_Default;
+            this.btnShowDefaultInheritance.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShowDefaultInheritance.Name = "btnShowDefaultInheritance";
+            this.btnShowDefaultInheritance.Size = new System.Drawing.Size(23, 22);
+            this.btnShowDefaultInheritance.Text = "Default Inheritance";
+            // 
+            // btnShowProperties
+            // 
+            this.btnShowProperties.Checked = true;
+            this.btnShowProperties.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.btnShowProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnShowProperties.Image = global::mRemoteNG.Resources.Properties;
+            this.btnShowProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShowProperties.Name = "btnShowProperties";
+            this.btnShowProperties.Size = new System.Drawing.Size(23, 22);
+            this.btnShowProperties.Text = "Properties";
+            // 
+            // btnShowDefaultProperties
+            // 
+            this.btnShowDefaultProperties.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnShowDefaultProperties.Image = global::mRemoteNG.Resources.Properties_Default;
+            this.btnShowDefaultProperties.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnShowDefaultProperties.Name = "btnShowDefaultProperties";
+            this.btnShowDefaultProperties.Size = new System.Drawing.Size(23, 22);
+            this.btnShowDefaultProperties.Text = "Default Properties";
+            // 
+            // btnIcon
+            // 
+            this.btnIcon.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnIcon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnIcon.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnIcon.Name = "btnIcon";
+            this.btnIcon.Size = new System.Drawing.Size(23, 22);
+            this.btnIcon.Text = "Icon";
+            // 
+            // btnHostStatus
+            // 
+            this.btnHostStatus.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
+            this.btnHostStatus.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.btnHostStatus.Image = global::mRemoteNG.Resources.HostStatus_Check;
+            this.btnHostStatus.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.btnHostStatus.Name = "btnHostStatus";
+            this.btnHostStatus.Size = new System.Drawing.Size(23, 22);
+            this.btnHostStatus.Tag = "checking";
+            this.btnHostStatus.Text = "Status";
+            // 
+            // cMenIcons
+            // 
+            this.cMenIcons.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cMenIcons.Name = "cMenIcons";
+            this.cMenIcons.Size = new System.Drawing.Size(67, 4);
+            // 
+            // ConfigWindow
+            // 
+            this.ClientSize = new System.Drawing.Size(226, 530);
+            this.Controls.Add(this.pGrid);
+            this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HideOnClose = true;
+            this.Icon = global::mRemoteNG.Resources.Config_Icon;
+            this.Name = "ConfigWindow";
+            this.TabText = "Config";
+            this.Text = "Config";
+            this.propertyGridContextMenu.ResumeLayout(false);
+            this.ResumeLayout(false);
+
 		}
 		
         #region Public Properties
@@ -654,6 +646,8 @@ namespace mRemoteNG.UI.Window
 				ToolStrip toolStrip = null;
 				foreach (Control control in pGrid.Controls)
 				{
+				    if (!(control is ToolStrip))
+				        continue;
                     toolStrip = (ToolStrip) control;
                     if (toolStrip != null)
                     {
@@ -806,10 +800,11 @@ namespace mRemoteNG.UI.Window
 			try
 			{
                 var strHide = new List<string>();
-						
-				if (pGrid.SelectedObject is ConnectionInfo)
+
+			    var o = (ConnectionInfo) pGrid.SelectedObject;
+			    if (o != null)
 				{
-                    var conI = (ConnectionInfo)pGrid.SelectedObject;
+                    var conI = o;
 							
 					switch (conI.Protocol)
 					{
@@ -1536,16 +1531,20 @@ namespace mRemoteNG.UI.Window
 						strHide.Add("Name");
 					}
 				}
-				else if (pGrid.SelectedObject is RootNodeInfo)
-				{
-					var rootInfo = (RootNodeInfo) pGrid.SelectedObject;
-					if (rootInfo.Type == RootNodeType.PuttySessions)
-					{
-						strHide.Add("Password");
-					}
-				}
+				else
+			    {
+			        var info = pGrid.SelectedObject as RootNodeInfo;
+			        if (info != null)
+			        {
+			            var rootInfo = info;
+			            if (rootInfo.Type == RootNodeType.PuttySessions)
+			            {
+			                strHide.Add("Password");
+			            }
+			        }
+			    }
 
-                pGrid.HiddenProperties = strHide.ToArray();
+			    pGrid.HiddenProperties = strHide.ToArray();
 
                 pGrid.Refresh();
 			}

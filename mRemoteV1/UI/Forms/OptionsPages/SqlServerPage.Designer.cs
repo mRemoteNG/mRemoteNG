@@ -69,7 +69,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.lblExperimental.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 				| System.Windows.Forms.AnchorStyles.Left) 
 				| System.Windows.Forms.AnchorStyles.Right);
-			this.lblExperimental.Font = new System.Drawing.Font("Segoe UI", 12.0F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World);
+			this.lblExperimental.Font = new System.Drawing.Font("Verdana", 12.0F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World);
 			this.lblExperimental.ForeColor = System.Drawing.Color.FromArgb(System.Convert.ToInt32(System.Convert.ToByte(192)), System.Convert.ToInt32(System.Convert.ToByte(0)), System.Convert.ToInt32(System.Convert.ToByte(0)));
 			this.lblExperimental.Location = new System.Drawing.Point(3, 0);
 			this.lblExperimental.Name = "lblExperimental";
@@ -113,7 +113,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.lblSQLInfo.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
 				| System.Windows.Forms.AnchorStyles.Left) 
 				| System.Windows.Forms.AnchorStyles.Right);
-			this.lblSQLInfo.Font = new System.Drawing.Font("Segoe UI", 12.0F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World);
+			this.lblSQLInfo.Font = new System.Drawing.Font("Verdana", 12.0F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.World);
 			this.lblSQLInfo.ForeColor = System.Drawing.Color.FromArgb(System.Convert.ToInt32(System.Convert.ToByte(192)), System.Convert.ToInt32(System.Convert.ToByte(0)), System.Convert.ToInt32(System.Convert.ToByte(0)));
 			this.lblSQLInfo.Location = new System.Drawing.Point(3, 25);
 			this.lblSQLInfo.Name = "lblSQLInfo";

@@ -108,7 +108,7 @@ namespace mRemoteNG.UI.Window
 			//
 			lblCheck1.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			lblCheck1.Font = new Font("Segoe UI", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
+			lblCheck1.Font = new Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
 			lblCheck1.ForeColor = SystemColors.ControlText;
 			lblCheck1.Location = new Point(108, 3);
 			lblCheck1.Name = "lblCheck1";
@@ -157,7 +157,7 @@ namespace mRemoteNG.UI.Window
 			//
 			lblCheck2.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			lblCheck2.Font = new Font("Segoe UI", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
+			lblCheck2.Font = new Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
 			lblCheck2.Location = new Point(112, 3);
 			lblCheck2.Name = "lblCheck2";
 			lblCheck2.Size = new Size(447, 23);
@@ -205,7 +205,7 @@ namespace mRemoteNG.UI.Window
 			//
 			lblCheck3.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			lblCheck3.Font = new Font("Segoe UI", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
+			lblCheck3.Font = new Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
 			lblCheck3.Location = new Point(112, 3);
 			lblCheck3.Name = "lblCheck3";
 			lblCheck3.Size = new Size(447, 23);
@@ -253,7 +253,7 @@ namespace mRemoteNG.UI.Window
 			//
 			lblCheck4.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			lblCheck4.Font = new Font("Segoe UI", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
+			lblCheck4.Font = new Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
 			lblCheck4.Location = new Point(112, 3);
 			lblCheck4.Name = "lblCheck4";
 			lblCheck4.Size = new Size(447, 23);
@@ -301,7 +301,7 @@ namespace mRemoteNG.UI.Window
 			//
 			lblCheck5.Anchor = (System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                 | System.Windows.Forms.AnchorStyles.Right;
-			lblCheck5.Font = new Font("Segoe UI", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
+			lblCheck5.Font = new Font("Verdana", 12.0F, FontStyle.Bold, GraphicsUnit.Point, Convert.ToByte(0));
 			lblCheck5.Location = new Point(112, 3);
 			lblCheck5.Name = "lblCheck5";
 			lblCheck5.Size = new Size(447, 23);

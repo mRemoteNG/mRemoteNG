@@ -349,7 +349,7 @@ namespace mRemoteNG.UI.Window
 			//
 			this.ClientSize = new System.Drawing.Size(684, 323);
 			this.Controls.Add(this.ToolStripContainer);
-			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.Icon = (System.Drawing.Icon) (resources.GetObject("$this.Icon"));
 			this.Name = "ExternalTools";
 			this.TabText = "External Applications";

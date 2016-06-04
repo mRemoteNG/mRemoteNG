@@ -134,13 +134,13 @@ th {
 	padding-right: 5px;
 	padding-left: 5px;
 	color: #000000;
-	font-family: 'Courier New' , Monospace;
+	font-family: 'Verdana' , Monospace;
 	background-color: #C1C1C1;
 }
 
 .monospace {
     white-space: nowrap;
-    font-family: 'Courier New', monospace;
+    font-family: 'Verdana', monospace;
 }
 
 .nowrap {

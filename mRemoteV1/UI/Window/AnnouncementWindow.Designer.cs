@@ -28,7 +28,7 @@ namespace mRemoteNG.UI.Window
 			//
 			this.ClientSize = new System.Drawing.Size(549, 474);
 			this.Controls.Add(this.webBrowser);
-			this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
+			this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, System.Convert.ToByte(0));
 			this.Icon = Resources.News_Icon;
 			this.Name = "Announcement";
 			this.TabText = "Announcement";

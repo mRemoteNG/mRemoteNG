@@ -59,7 +59,7 @@ namespace mRemoteNG.UI.Window
             // 
             this.lblEdition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblEdition.BackColor = System.Drawing.Color.Black;
-            this.lblEdition.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEdition.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblEdition.ForeColor = System.Drawing.Color.White;
             this.lblEdition.Location = new System.Drawing.Point(712, 112);
             this.lblEdition.Name = "lblEdition";
@@ -102,7 +102,7 @@ namespace mRemoteNG.UI.Window
             // lblCredits
             // 
             this.lblCredits.AutoSize = true;
-            this.lblCredits.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.lblCredits.Font = new System.Drawing.Font("Verdana", 11F);
             this.lblCredits.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblCredits.Location = new System.Drawing.Point(16, 131);
             this.lblCredits.Name = "lblCredits";
@@ -116,7 +116,7 @@ namespace mRemoteNG.UI.Window
             this.txtCredits.BackColor = System.Drawing.SystemColors.Control;
             this.txtCredits.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtCredits.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtCredits.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtCredits.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtCredits.ForeColor = System.Drawing.SystemColors.ControlText;
             this.txtCredits.Location = new System.Drawing.Point(8, 156);
             this.txtCredits.MinimumSize = new System.Drawing.Size(370, 260);
@@ -133,7 +133,7 @@ namespace mRemoteNG.UI.Window
             this.txtChangeLog.BackColor = System.Drawing.SystemColors.Control;
             this.txtChangeLog.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.txtChangeLog.Cursor = System.Windows.Forms.Cursors.Default;
-            this.txtChangeLog.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.txtChangeLog.Font = new System.Drawing.Font("Verdana", 9F);
             this.txtChangeLog.ForeColor = System.Drawing.SystemColors.ControlText;
             this.txtChangeLog.Location = new System.Drawing.Point(501, 156);
             this.txtChangeLog.MinimumSize = new System.Drawing.Size(370, 260);
@@ -148,7 +148,7 @@ namespace mRemoteNG.UI.Window
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Verdana", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblTitle.Location = new System.Drawing.Point(16, 16);
             this.lblTitle.Name = "lblTitle";
@@ -160,7 +160,7 @@ namespace mRemoteNG.UI.Window
             // lblVersion
             // 
             this.lblVersion.AutoSize = true;
-            this.lblVersion.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.lblVersion.Font = new System.Drawing.Font("Verdana", 11F);
             this.lblVersion.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblVersion.Location = new System.Drawing.Point(16, 56);
             this.lblVersion.Name = "lblVersion";
@@ -172,7 +172,7 @@ namespace mRemoteNG.UI.Window
             // lblChangeLog
             // 
             this.lblChangeLog.AutoSize = true;
-            this.lblChangeLog.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.lblChangeLog.Font = new System.Drawing.Font("Verdana", 11F);
             this.lblChangeLog.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblChangeLog.Location = new System.Drawing.Point(501, 131);
             this.lblChangeLog.Name = "lblChangeLog";
@@ -184,7 +184,7 @@ namespace mRemoteNG.UI.Window
             // lblLicense
             // 
             this.lblLicense.AutoSize = true;
-            this.lblLicense.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.lblLicense.Font = new System.Drawing.Font("Verdana", 11F);
             this.lblLicense.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblLicense.Location = new System.Drawing.Point(16, 96);
             this.lblLicense.Name = "lblLicense";
@@ -196,7 +196,7 @@ namespace mRemoteNG.UI.Window
             // lblCopyright
             // 
             this.lblCopyright.AutoSize = true;
-            this.lblCopyright.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.lblCopyright.Font = new System.Drawing.Font("Verdana", 11F);
             this.lblCopyright.ForeColor = System.Drawing.SystemColors.ControlText;
             this.lblCopyright.Location = new System.Drawing.Point(16, 76);
             this.lblCopyright.Name = "lblCopyright";
@@ -211,7 +211,7 @@ namespace mRemoteNG.UI.Window
             this.ClientSize = new System.Drawing.Size(984, 705);
             this.Controls.Add(this.pnlTop);
             this.Controls.Add(this.pnlBottom);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.Icon = global::mRemoteNG.Resources.mRemote_Icon;
             this.MaximumSize = new System.Drawing.Size(20000, 10000);

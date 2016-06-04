@@ -117,7 +117,7 @@ namespace mRemoteNG.UI.Controls
             this.panel1.Controls.Add(this.Octet2);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.Octet1);
-            this.panel1.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.panel1.Font = new System.Drawing.Font("Verdana", 9F);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(128, 18);
@@ -145,7 +145,7 @@ namespace mRemoteNG.UI.Controls
             // Octet4
             // 
             this.Octet4.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Octet4.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.Octet4.Font = new System.Drawing.Font("Verdana", 9F);
             this.Octet4.Location = new System.Drawing.Point(100, 0);
             this.Octet4.MaxLength = 3;
             this.Octet4.Name = "Octet4";
@@ -159,7 +159,7 @@ namespace mRemoteNG.UI.Controls
             // Octet3
             // 
             this.Octet3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Octet3.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.Octet3.Font = new System.Drawing.Font("Verdana", 9F);
             this.Octet3.Location = new System.Drawing.Point(64, 0);
             this.Octet3.MaxLength = 3;
             this.Octet3.Name = "Octet3";
@@ -173,7 +173,7 @@ namespace mRemoteNG.UI.Controls
             // Octet2
             // 
             this.Octet2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Octet2.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.Octet2.Font = new System.Drawing.Font("Verdana", 9F);
             this.Octet2.Location = new System.Drawing.Point(32, 0);
             this.Octet2.MaxLength = 3;
             this.Octet2.Name = "Octet2";
@@ -196,7 +196,7 @@ namespace mRemoteNG.UI.Controls
             // Octet1
             // 
             this.Octet1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.Octet1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Octet1.Font = new System.Drawing.Font("Verdana", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Octet1.Location = new System.Drawing.Point(4, 0);
             this.Octet1.MaxLength = 3;
             this.Octet1.Name = "Octet1";

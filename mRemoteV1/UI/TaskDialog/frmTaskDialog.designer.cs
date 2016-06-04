@@ -286,7 +286,7 @@ namespace mRemoteNG.UI.TaskDialog
       this.Controls.Add(this.pnlExpandedInfo);
       this.Controls.Add(this.pnlContent);
       this.Controls.Add(this.pnlMainInstruction);
-      this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+      this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
       this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
       this.MaximizeBox = false;
       this.MinimizeBox = false;

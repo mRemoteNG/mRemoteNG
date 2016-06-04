@@ -310,7 +310,7 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.lblStartIP);
             this.Controls.Add(this.ipEnd);
             this.Controls.Add(this.ipStart);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "PortScanWindow";
             this.TabText = "Port Scan";
