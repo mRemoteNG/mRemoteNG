@@ -223,116 +223,144 @@ namespace mRemoteNG.Tools
 			}
 		}
         #endregion
-				
+
         #region Private Methods
-		private void ScanAsync()
+
+        private int hostCount;
+        private void ScanAsync()
 		{
 			try
 			{
-				int hostCount = 0;
-				foreach (IPAddress ipAddress in _ipAddresses)
+			    hostCount = 0;
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Starting scan of {_ipAddresses.Count} hosts...", true);
+                foreach (IPAddress ipAddress in _ipAddresses)
 				{
                     BeginHostScanEvent?.Invoke(ipAddress.ToString());
 
-                    ScanHost scanHost = new ScanHost(ipAddress.ToString());
-					hostCount++;
-							
-					if (!IsHostAlive(ipAddress))
-					{
-						scanHost.ClosedPorts.AddRange(_ports);
-						scanHost.SetAllProtocols(false);
-					}
-					else
-					{
-						foreach (int port in _ports)
-						{
-							bool isPortOpen = false;
-							try
-							{
-								System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(ipAddress.ToString(), port);
-								isPortOpen = true;
-								scanHost.OpenPorts.Add(port);
-                                tcpClient.Close();
-							}
-							catch (Exception)
-							{
-								isPortOpen = false;
-								scanHost.ClosedPorts.Add(port);
-							}
-							
-							if (port == ScanHost.SSHPort)
-							{
-								scanHost.SSH = isPortOpen;
-							}
-                            else if (port == ScanHost.TelnetPort)
-							{
-								scanHost.Telnet = isPortOpen;
-							}
-                            else if (port == ScanHost.HTTPPort)
-							{
-								scanHost.HTTP = isPortOpen;
-							}
-                            else if (port == ScanHost.HTTPSPort)
-							{
-								scanHost.HTTPS = isPortOpen;
-							}
-                            else if (port == ScanHost.RloginPort)
-							{
-								scanHost.Rlogin = isPortOpen;
-							}
-                            else if (port == ScanHost.RDPPort)
-							{
-								scanHost.RDP = isPortOpen;
-							}
-                            else if (port == ScanHost.VNCPort)
-							{
-								scanHost.VNC = isPortOpen;
-							}
-						}
-					}
-							
-					try
-					{
-						scanHost.HostName = Dns.GetHostEntry(scanHost.HostIp).HostName;
-					}
-					catch (Exception dnsex)
-					{
-                        Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Could not resolve {scanHost.HostIp} {Environment.NewLine} {dnsex.Message}");
-					}
-					if (string.IsNullOrEmpty(scanHost.HostName))
-					{
-						scanHost.HostName = scanHost.HostIp;
-					}
-							
-					_scannedHosts.Add(scanHost);
-                    HostScannedEvent?.Invoke(scanHost, hostCount, _ipAddresses.Count);
-                }
+                    Ping pingSender = new Ping();
 
-                ScanCompleteEvent?.Invoke(_scannedHosts);
+                    try
+                    {
+                        pingSender.PingCompleted += PingSender_PingCompleted;
+                        pingSender.SendAsync(ipAddress, ipAddress);
+                    }
+                    catch (Exception ex)
+                    {
+                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"Tools.PortScan: Ping failed for {ipAddress} {Environment.NewLine} {ex.Message}", true);
+                    }
+                }
             }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"StartScanBG failed (Tools.PortScan) {Environment.NewLine} {ex.Message}", true);
 			}
 		}
-				
-		private static bool IsHostAlive(IPAddress ipAddress)
-		{
-			Ping pingSender = new Ping();
-					
-			try
-			{
-                PingReply pingReply = pingSender.Send(ipAddress);
 
-			    return pingReply != null && pingReply.Status == IPStatus.Success;
-			}
-			catch (Exception ex)
-			{
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"IsHostAlive failed (Tools.PortScan) {Environment.NewLine} {ex.Message}", true);
-                return false;
-			}
-		}
-				
+        /* Some examples found here:
+         * http://stackoverflow.com/questions/2114266/convert-ping-application-to-multithreaded-version-to-increase-speed-c-sharp
+         */
+        private void PingSender_PingCompleted(object sender, PingCompletedEventArgs e)
+        {
+            // UserState is the IP Address
+            var ip = e.UserState.ToString();
+            ScanHost scanHost = new ScanHost(ip);
+            hostCount++;
+
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Scanning {hostCount} of {_ipAddresses.Count} hosts: {scanHost.HostIp}", true);
+
+            if (e.Error != null)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Ping failed to {e.UserState} {Environment.NewLine} {e.Error.Message}", true);
+                scanHost.ClosedPorts.AddRange(_ports);
+                scanHost.SetAllProtocols(false);
+            }
+            else if (e.Reply.Status == IPStatus.Success)
+            {
+                /* ping was successful, try to resolve the hostname */
+                try
+                {
+                    scanHost.HostName = Dns.GetHostEntry(scanHost.HostIp).HostName;
+                }
+                catch (Exception dnsex)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                        $"Tools.PortScan: Could not resolve {scanHost.HostIp} {Environment.NewLine} {dnsex.Message}",
+                        true);
+                }
+
+                if (string.IsNullOrEmpty(scanHost.HostName))
+                {
+                    scanHost.HostName = scanHost.HostIp;
+                }
+
+                foreach (int port in _ports)
+                {
+                    bool isPortOpen = false;
+                    try
+                    {
+                        System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(ip, port);
+                        isPortOpen = true;
+                        scanHost.OpenPorts.Add(port);
+                        tcpClient.Close();
+                    }
+                    catch (Exception)
+                    {
+                        isPortOpen = false;
+                        scanHost.ClosedPorts.Add(port);
+                    }
+
+                    if (port == ScanHost.SSHPort)
+                    {
+                        scanHost.SSH = isPortOpen;
+                    }
+                    else if (port == ScanHost.TelnetPort)
+                    {
+                        scanHost.Telnet = isPortOpen;
+                    }
+                    else if (port == ScanHost.HTTPPort)
+                    {
+                        scanHost.HTTP = isPortOpen;
+                    }
+                    else if (port == ScanHost.HTTPSPort)
+                    {
+                        scanHost.HTTPS = isPortOpen;
+                    }
+                    else if (port == ScanHost.RloginPort)
+                    {
+                        scanHost.Rlogin = isPortOpen;
+                    }
+                    else if (port == ScanHost.RDPPort)
+                    {
+                        scanHost.RDP = isPortOpen;
+                    }
+                    else if (port == ScanHost.VNCPort)
+                    {
+                        scanHost.VNC = isPortOpen;
+                    }
+                }
+            }
+            else if(e.Reply.Status != IPStatus.Success)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Ping did not complete to {e.UserState} : {e.Reply.Status}", true);
+                scanHost.ClosedPorts.AddRange(_ports);
+                scanHost.SetAllProtocols(false);
+            }
+
+            // cleanup
+            var p = (Ping)sender;
+            p.PingCompleted -= PingSender_PingCompleted;
+            p.Dispose();
+
+            var h = string.IsNullOrEmpty(scanHost.HostName) ? "HostNameNotFound" : scanHost.HostName;
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Scan of {scanHost.HostIp} ({h}) complete.", true);
+
+            _scannedHosts.Add(scanHost);
+            HostScannedEvent?.Invoke(scanHost, hostCount, _ipAddresses.Count);
+
+            if (_scannedHosts.Count == _ipAddresses.Count)
+                ScanCompleteEvent?.Invoke(_scannedHosts);
+        }
+        
 		private static IPAddress[] IpAddressArrayFromRange(IPAddress ipAddress1, IPAddress ipAddress2)
 		{
 			IPAddress startIpAddress = IpAddressMin(ipAddress1, ipAddress2);
