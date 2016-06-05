@@ -338,7 +338,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
         #region Reconnect Stuff
 		public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
-			bool srvReady = Tools.PortScan.Scanner.IsPortOpen(_Info.Hostname, Convert.ToString(_Info.Port));
+			bool srvReady = Scanner.IsPortOpen(_Info.Hostname, Convert.ToString(_Info.Port));
 					
 			ReconnectGroup.ServerReady = srvReady;
 					
