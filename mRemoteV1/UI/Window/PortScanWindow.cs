@@ -81,16 +81,20 @@ namespace mRemoteNG.UI.Window
 					
 			try
 			{
+                /* flipped the UI around a bit
+                 * Show the open/closed port numbers in import mode in case custom ports are scanned.
+                 * Since (currently) the non-import mode doesn't allow custom ports, just show the standard port columns.
+                 */
 				if (_import)
 				{
-					lvHosts.Columns.AddRange(new[] {clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC});
+                    lvHosts.Columns.AddRange(new[] { clmHost, clmOpenPorts, clmClosedPorts });
 					ShowImportControls(true);
 					cbProtocol.SelectedIndex = 0;
 				}
 				else
 				{
-					lvHosts.Columns.AddRange(new[] {clmHost, clmOpenPorts, clmClosedPorts});
-					ShowImportControls(false);
+                    lvHosts.Columns.AddRange(new[] { clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC });
+                    ShowImportControls(false);
 				}
 			}
 			catch (Exception ex)

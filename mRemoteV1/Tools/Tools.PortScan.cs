@@ -102,8 +102,12 @@ namespace mRemoteNG.Tools
 				ListViewItem listViewItem = new ListViewItem();
 				listViewItem.Tag = this;
 				listViewItem.Text = !string.IsNullOrEmpty(HostName) ? HostName : HostIp;
-						
-				if (import)
+
+                /* flipped the UI around a bit
+                 * Show the open/closed port numbers in import mode in case custom ports are scanned.
+                 * Since (currently) the non-import mode doesn't allow custom ports, just show the standard port columns.
+                 */
+                if (!import)
 				{
 					listViewItem.SubItems.Add(BoolToYesNo(SSH));
 					listViewItem.SubItems.Add(BoolToYesNo(Telnet));
