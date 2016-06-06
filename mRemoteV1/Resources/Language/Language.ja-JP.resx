@@ -1954,7 +1954,8 @@ Message:
     <value>RDP ToggleSmartSize failed!</value>
   </data>
   <data name="strReconnectAtStartup" xml:space="preserve">
-    <value>Reconnect to previously opened sessions on startup</value>
+    <value>起動時に前セッション時の接続を開始する</value>
+    <comment>Reconnect to previously opened sessions on startup</comment>
   </data>
   <data name="strRefresh" xml:space="preserve">
     <value>更新</value>
