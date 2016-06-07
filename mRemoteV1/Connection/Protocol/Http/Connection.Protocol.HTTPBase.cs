@@ -1,5 +1,6 @@
 using System;
 using System.Windows.Forms;
+using Gecko;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
 using TabPage = Crownwood.Magic.Controls.TabPage;
@@ -24,8 +25,8 @@ namespace mRemoteNG.Connection.Protocol.Http
 			{
 				if (RenderingEngine == RenderingEngine.Gecko)
 				{
-                    Control = new MiniGeckoBrowser.MiniGeckoBrowser();
-					((MiniGeckoBrowser.MiniGeckoBrowser)Control).XULrunnerPath = Convert.ToString(Settings.Default.XULRunnerPath);
+                    Xpcom.Initialize("Firefox");
+                    Control = new GeckoWebBrowser();
 				}
 				else
 				{
@@ -64,14 +65,14 @@ namespace mRemoteNG.Connection.Protocol.Http
 						
 				if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 				{
-					MiniGeckoBrowser.MiniGeckoBrowser objMiniGeckoBrowser = wBrowser as MiniGeckoBrowser.MiniGeckoBrowser;
-				    if (objMiniGeckoBrowser != null)
-				    {
-				        objMiniGeckoBrowser.TitleChanged += geckoBrowser_DocumentTitleChanged;
-				        objMiniGeckoBrowser.LastTabRemoved += wBrowser_LastTabRemoved;
-				    }
-				}
-				else
+				    GeckoWebBrowser GeckoBrowser = (GeckoWebBrowser) wBrowser;
+                    if (GeckoBrowser != null)
+                    {
+                        GeckoBrowser.DocumentTitleChanged += geckoBrowser_DocumentTitleChanged;
+                        //GeckoBrowser.Tab.LastTabRemoved += wBrowser_LastTabRemoved;
+                    }
+                }
+                else
 				{
                     WebBrowser objWebBrowser = (WebBrowser)wBrowser;
                     //SHDocVw.WebBrowserClass objAxWebBrowser = (SHDocVw.WebBrowserClass)objWebBrowser.ActiveXInstance;
@@ -121,7 +122,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 							
 					if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 					{
-                        ((MiniGeckoBrowser.MiniGeckoBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
+                        ((GeckoWebBrowser)wBrowser).Navigate(strHost + ":" + InterfaceControl.Info.Port);
 					}
 					else
 					{
@@ -137,7 +138,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 							
 					if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 					{
-						((MiniGeckoBrowser.MiniGeckoBrowser)wBrowser).Navigate(strHost);
+						((GeckoWebBrowser)wBrowser).Navigate(strHost);
 					}
 					else
 					{
@@ -203,13 +204,13 @@ namespace mRemoteNG.Connection.Protocol.Http
 							
 					if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 					{
-						if (((MiniGeckoBrowser.MiniGeckoBrowser) wBrowser).Title.Length >= 30)
+						if (((GeckoWebBrowser) wBrowser).DocumentTitle.Length >= 30)
 						{
-							shortTitle = ((MiniGeckoBrowser.MiniGeckoBrowser) wBrowser).Title.Substring(0, 29) + " ...";
+							shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 29) + " ...";
 						}
 						else
 						{
-							shortTitle = ((MiniGeckoBrowser.MiniGeckoBrowser) wBrowser).Title;
+							shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle;
 						}
 					}
 					else
@@ -226,7 +227,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 							
 					if (!string.IsNullOrEmpty(tabTitle))
 					{
-						tabP.Title = tabTitle + " - " + shortTitle;
+						tabP.Title = tabTitle + @" - " + shortTitle;
 					}
 					else
 					{
@@ -241,7 +242,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 		}
 
 
-        private void geckoBrowser_DocumentTitleChanged(object sender, string e)
+        private void geckoBrowser_DocumentTitleChanged(object sender, EventArgs e)
         {
             try
             {
@@ -253,13 +254,13 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                     if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
                     {
-                        if (((MiniGeckoBrowser.MiniGeckoBrowser) wBrowser).Title.Length >= 30)
+                        if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 30)
                         {
-                            shortTitle = ((MiniGeckoBrowser.MiniGeckoBrowser) wBrowser).Title.Substring(0, 29) + " ...";
+                            shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 29) + " ...";
                         }
                         else
                         {
-                            shortTitle = ((MiniGeckoBrowser.MiniGeckoBrowser) wBrowser).Title;
+                            shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle;
                         }
                     }
                     else
@@ -276,7 +277,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                     if (!string.IsNullOrEmpty(tabTitle))
                     {
-                        tabP.Title = tabTitle + " - " + shortTitle;
+                        tabP.Title = tabTitle + @" - " + shortTitle;
                     }
                     else
                     {
