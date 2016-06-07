@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using mRemoteNG.Connection;
 
 namespace mRemoteNG.Tools
@@ -68,7 +67,7 @@ namespace mRemoteNG.Tools
                         variableNameLength--;
 
                         variableName = input.Substring(variableNameStart, variableNameLength);
-                        replacements.Add(new Replacement(tokenStart, tokenLength, string.Format("%{0}%", variableName)));
+                        replacements.Add(new Replacement(tokenStart, tokenLength, $"%{variableName}%"));
 
                         index = tokenEnd;
                         continue;
@@ -89,7 +88,7 @@ namespace mRemoteNG.Tools
                         break;
                 }
 
-                if (!(escape == EscapeType.All))
+                if (escape != EscapeType.All)
                 {
                     // Remove the escape character from the name
                     variableNameStart++;
@@ -112,7 +111,7 @@ namespace mRemoteNG.Tools
 
                 bool haveReplacement = false;
 
-                if (!(replacementValue == token))
+                if (replacementValue != token)
                 {
                     haveReplacement = true;
                 }
@@ -138,7 +137,7 @@ namespace mRemoteNG.Tools
                             replacementValue = CommandLineArguments.EscapeBackslashesForTrailingQuote(replacementValue);
                     }
 
-                    if (escape == EscapeType.All | escape == EscapeType.ShellMetacharacters)
+                    if (escape == EscapeType.All || escape == EscapeType.ShellMetacharacters)
                         replacementValue = CommandLineArguments.EscapeShellMetacharacters(replacementValue);
 
                     replacements.Add(new Replacement(tokenStart, tokenLength, replacementValue));
@@ -156,7 +155,7 @@ namespace mRemoteNG.Tools
             {
                 foreach (Replacement replacement in replacements)
                 {
-                    if (!(replacement.Start == index))
+                    if (replacement.Start != index)
                     {
                         continue;
                     }
