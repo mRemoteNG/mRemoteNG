@@ -38,8 +38,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkAutomaticallyGetSessionInfo.Text = Language.strAutomaticallyGetSessionInfo;
             chkWriteLogFile.Text = Language.strWriteLogFile;
             lblUVNCSCPort.Text = Language.strUltraVNCSCListeningPort;
-            lblXulRunnerPath.Text = Language.strXULrunnerPath;
-            btnBrowseXulRunnerPath.Text = Language.strButtonBrowse;
             chkEncryptCompleteFile.Text = Language.strEncryptCompleteConnectionFile;
         }
 
@@ -59,8 +57,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             SetPuttyLaunchButtonEnabled();
 
             numUVNCSCPort.Value = Settings.Default.UVNCSCPort;
-
-            txtXULrunnerPath.Text = Settings.Default.XULRunnerPath;
         }
 
         public override void SaveSettings()
@@ -89,7 +85,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.MaxPuttyWaitTime = (int) numPuttyWaitTime.Value;
             Settings.Default.UVNCSCPort = (int) numUVNCSCPort.Value;
-            Settings.Default.XULRunnerPath = txtXULrunnerPath.Text;
 
             Settings.Default.Save();
         }
@@ -146,18 +141,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                                 MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 Runtime.MessageCollector.AddExceptionMessage(Language.strErrorCouldNotLaunchPutty, ex, logOnly: true);
             }
-        }
-
-        public void btnBrowseXulRunnerPath_Click(object sender, EventArgs e)
-        {
-            var oDlg = new FolderBrowserDialog {ShowNewFolderButton = false};
-
-            if (oDlg.ShowDialog() == DialogResult.OK)
-            {
-                txtXULrunnerPath.Text = oDlg.SelectedPath;
-            }
-
-            oDlg.Dispose();
         }
 
         #endregion
