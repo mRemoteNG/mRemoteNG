@@ -860,6 +860,7 @@
     <Content Include="Resources\Icons\RDCMan_Icon.ico" />
     <Content Include="Resources\Images_FamFamFam\Config.png" />
     <Content Include="Resources\Images_FamFamFam\database.png" />
+    <None Include="Resources\Images_FamFamFam\key.png" />
     <Content Include="Resources\Images_FamFamFam\Link.png" />
     <Content Include="Resources\Images_FamFamFam\page_copy.png" />
     <Content Include="Resources\Images\green_arrow1.png" />
