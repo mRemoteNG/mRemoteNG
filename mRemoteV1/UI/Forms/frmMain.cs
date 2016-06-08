@@ -755,6 +755,12 @@ namespace mRemoteNG.UI.Forms
         #endregion
 
         #region Tools
+        private void mMenToolsCredentialManager_Click(object sender, EventArgs e)
+        {
+            var frmCredManager = new frmCredentialManager();
+            frmCredManager.Show();
+        }
+
         private void mMenToolsUpdate_Click(object sender, EventArgs e)
 		{
 			Windows.Show(WindowType.Update);

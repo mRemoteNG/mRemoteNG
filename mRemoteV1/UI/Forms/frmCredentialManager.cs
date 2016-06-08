@@ -15,5 +15,10 @@ namespace mRemoteNG.UI.Forms
         {
             InitializeComponent();
         }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
     }
 }
