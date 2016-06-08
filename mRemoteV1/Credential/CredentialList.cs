@@ -12,13 +12,9 @@ namespace mRemoteNG.Credential
 			get
 			{
 				if (Index is CredentialInfo)
-				{
                     return (CredentialInfo)Index;
-				}
 				else
-				{
 					return ((CredentialInfo) (List[Convert.ToInt32(Index)]));
-				}
 			}
 		}
 			
