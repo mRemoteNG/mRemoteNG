@@ -1,4 +1,4 @@
-namespace mRemoteNG.Images
+namespace mRemoteNG.Tree
 {
 	public enum TreeImageType
 	{

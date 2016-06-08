@@ -1,7 +1,6 @@
 using System.Windows.Forms;
 using System.IO;
 using mRemoteNG.App;
-using mRemoteNG.Images;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Container;
 using mRemoteNG.Connection;

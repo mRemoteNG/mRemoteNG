@@ -5,7 +5,6 @@ using System.IO;
 using System.Runtime.InteropServices;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.Images;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;

@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System;
 using System.Windows.Forms;
 using mRemoteNG.Tree;
-using mRemoteNG.Images;
 using mRemoteNG.Connection;
 
 

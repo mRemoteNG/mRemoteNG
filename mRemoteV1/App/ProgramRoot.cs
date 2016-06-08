@@ -54,7 +54,7 @@ namespace mRemoteNG.App
             if (singletonInstanceWindowHandle != IntPtr.Zero)
             {
                 if (NativeMethods.IsIconic(singletonInstanceWindowHandle) != 0)
-                    NativeMethods.ShowWindow(singletonInstanceWindowHandle, NativeMethods.SW_RESTORE);
+                    NativeMethods.ShowWindow(singletonInstanceWindowHandle, (int)NativeMethods.SW_RESTORE);
             }
         }
 
