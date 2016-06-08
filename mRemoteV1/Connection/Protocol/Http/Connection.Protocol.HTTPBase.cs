@@ -25,7 +25,9 @@ namespace mRemoteNG.Connection.Protocol.Http
 			{
 				if (RenderingEngine == RenderingEngine.Gecko)
 				{
-                    Xpcom.Initialize("Firefox");
+                    if(!Xpcom.IsInitialized)
+                        Xpcom.Initialize("Firefox");
+
                     Control = new GeckoWebBrowser();
 				}
 				else

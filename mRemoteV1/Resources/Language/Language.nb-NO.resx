@@ -299,7 +299,7 @@ Når nedlastingen er ferdig, pakk den ut til et passende sted. I mRemoteNG, gå 
 Hvis du fremdeles ikke passerer denne kontrollen eller brukre Gecko-renderingsmotoren i mRemoteNG, vennligst konsulter mRemoteNG-forumet på http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
-    <value>XULrunner ble funnet å ser ut til å være korrekt installert.</value>
+    <value>GeckoFx ble funnet å ser ut til å være korrekt installert.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA krever at XenDesktop Online Plugin er installert og at wfica.ocx-biblioteket er registrert. Du kan laste ned klienten herfra: http://www.citrix.com/download/

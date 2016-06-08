@@ -4,6 +4,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 using mRemoteNG.App;
 using System.Threading;
+using Gecko;
 using mRemoteNG.App.Info;
 using mRemoteNG.Connection.Protocol.RDP;
 
@@ -578,30 +579,31 @@ namespace mRemoteNG.UI.Window
 					
 					
 			bool GeckoBad = false;
-					
-			if (Settings.Default.XULRunnerPath == "")
-			{
-				GeckoBad = true;
-			}
-					
-			if (Directory.Exists(Convert.ToString(Settings.Default.XULRunnerPath)))
-			{
-				if (File.Exists(Path.Combine(Convert.ToString(Settings.Default.XULRunnerPath), "xpcom.dll")) == false)
-				{
-					GeckoBad = true;
-				}
-			}
-			else
-			{
-				GeckoBad = true;
-			}
-					
-			if (GeckoBad == false)
+            var GeckoFxPath = Path.Combine(GeneralAppInfo.HomePath, "Firefox");
+			
+            if(File.Exists(Path.Combine(GeneralAppInfo.HomePath, "Geckofx-Core.dll")))
+            { 
+			    if (Directory.Exists(GeckoFxPath))
+			    {
+				    if (!File.Exists(Path.Combine(GeckoFxPath, "xul.dll")))
+				    {
+					    GeckoBad = true;
+				    }
+			    }
+			    else
+			    {
+				    GeckoBad = true;
+			    }
+            }
+
+            if (GeckoBad == false)
 			{
 				pbCheck5.Image = Resources.Good_Symbol;
 				lblCheck5.ForeColor = Color.DarkOliveGreen;
 				lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckSucceeded;
-				txtCheck5.Text = Language.strCcGeckoOK;
+                if (!Xpcom.IsInitialized)
+                    Xpcom.Initialize("Firefox");
+                txtCheck5.Text = Language.strCcGeckoOK + " Version: " + Xpcom.XulRunnerVersion;
 			}
 			else
 			{
@@ -611,7 +613,7 @@ namespace mRemoteNG.UI.Window
 				txtCheck5.Text = Language.strCcGeckoFailed;
 						
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Gecko " + errorMsg, true);
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "XULrunner was not found in " + Settings.Default.XULRunnerPath, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "GeckoFx was not found in " + GeckoFxPath, true);
 			}
 					
 		}

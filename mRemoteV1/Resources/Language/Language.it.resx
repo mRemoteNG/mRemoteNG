@@ -297,7 +297,7 @@ Quando il download è terminato, è sufficiente estrarre il pacchetto in una car
 Se il controllo fallisce o risulta impossibile utilizzare il motore di rendering Gecko con mRemoteNG, per favore consultare il forum di mRemoteNG all'indirizzo http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
-    <value>XULrunner è stato rilevato e sembra installato correttamente.</value>
+    <value>GeckoFx è stato rilevato e sembra installato correttamente.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA richiede che il plugin XenDesktop Online sia installato e che la libreria wfica.ocx sia registrata. Il client è scaricabile all'indirizzo http://www.citrix.com/download/

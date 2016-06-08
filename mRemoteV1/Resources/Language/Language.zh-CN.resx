@@ -295,7 +295,7 @@
 如果执行此操作后，依然无法通过Gecko渲染引擎的检测，请在mRemoteNG论坛中咨询，地址是：http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
-    <value>发现XULrunner组件。</value>
+    <value>发现GeckoFx组件。</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>启用ICA需要提前安装 XenDesktop Online 插件，并正确注册wfica.ocx库文件。您可以在此下载此插件：http://www.citrix.com/download/

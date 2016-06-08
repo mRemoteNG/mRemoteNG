@@ -290,7 +290,7 @@
     <value>Για να χρησιμοποιήσετε το μηχανισμό απόδοσης Gecko πρέπει να έχετε XULrunner 1.8.1.x και ο δρόμος για την εγκατάσταση ορίστε στις επιλογές σας. Μπορείτε να κατεβάσετε XULrunner 1.8.1.3 εδώ: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/ όταν ολοκληρώσετε τη λήψη κάντε εξαγωγή του πακέτου για την πορεία της επιλογής σας. Στη συνέχεια, στο mRemoteNG πηγαίνετε στο εργαλεία - επιλογές - προηγμένες και πληκτρολογήσει τη σωστή διαδρομή στο πεδίο διαδρομή XULrunner. Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή χρησιμοποιούν την μηχανή Gecko στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
-    <value>Το XULrunner βρέθηκε και φαίνεται να έχει εγκατασταθεί σωστά.</value>
+    <value>Το GeckoFx βρέθηκε και φαίνεται να έχει εγκατασταθεί σωστά.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA απαιτεί ότι είναι εγκατεστημένο το XenDesktop Online Plugin και ότι καταχωρείται η βιβλιοθήκη wfica.ocx. Μπορείτε να κατεβάσετε τον πελάτη εδώ: http://www.citrix.com/download/ αν έχετε το XenDesktop Online Plugin εγκατασταθεί και ο έλεγχος συνεχίσει να αποτυγχάνει, προσπαθήστε να εγγραφείτε wfica.ocx με μη αυτόματο τρόπο. Να κάνει αυτό ανοίγω πάνω στο τρέχω διάλογος (έναρξη - Run) και πληκτρολογήστε τα παρακάτω: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (όπου c:\Program Files\Citrix\ICA Client\ είναι η διαδρομή στην εγκατάσταση XenDesktop Online Plugin). Εάν είστε ακόμα δεν είναι σε θέση να περάσει ο έλεγχος αυτός ή να χρησιμοποιήσετε ICA στο mRemoteNG συμβουλευτείτε το mRemoteNG φόρουμ στο http://forum.mremoteng.org/"</value>

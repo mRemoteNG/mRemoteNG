@@ -608,7 +608,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XULrunner was found and seems to be installed properly..
+        ///   Looks up a localized string similar to GeckoFx was found and seems to be installed properly..
         /// </summary>
         internal static string strCcGeckoOK {
             get {

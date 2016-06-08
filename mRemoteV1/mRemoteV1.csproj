@@ -504,7 +504,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Language\Language.ja-JP.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.ja-JP.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="UI\Controls\IPTextBox.resx">
       <DependentUpon>IPTextBox.cs</DependentUpon>
     </EmbeddedResource>
@@ -550,7 +552,9 @@
     <EmbeddedResource Include="Resources\Language\Language.de.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.el.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.el.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.en-US.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -568,7 +572,9 @@
     <EmbeddedResource Include="Resources\Language\Language.nl.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Language\Language.pt-BR.resx" />
+    <EmbeddedResource Include="Resources\Language\Language.pt-BR.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\Language\Language.pt.resx">
       <SubType>Designer</SubType>
     </EmbeddedResource>
