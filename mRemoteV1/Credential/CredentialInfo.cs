@@ -1,4 +1,5 @@
 using mRemoteNG.Tools;
+using System;
 using System.ComponentModel;
 using System.Security;
 
@@ -6,6 +7,13 @@ namespace mRemoteNG.Credential
 {
 	public class CredentialInfo
 	{
+        private string uuid = Guid.NewGuid().ToString();
+
+        public string UUID
+        {
+            get { return uuid; }
+        }
+
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1), 
             Browsable(true),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
