@@ -1,9 +1,13 @@
 using mRemoteNG.Controls;
+using System;
+using System.Drawing;
+using System.Drawing.Drawing2D;
+using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class frmMain : System.Windows.Forms.Form
+    public partial class frmMain : Form
 	{
 		
 		//Form overrides dispose to clean up the component list.
@@ -32,929 +36,929 @@ namespace mRemoteNG.UI.Forms
 		[System.Diagnostics.DebuggerStepThrough()]
         private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.Load += new System.EventHandler(frmMain_Load);
-			this.Shown += new System.EventHandler(frmMain_Shown);
-			this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(frmMain_FormClosing);
-			this.ResizeBegin += new System.EventHandler(frmMain_ResizeBegin);
-			this.Resize += new System.EventHandler(frmMain_Resize);
-			this.ResizeEnd += new System.EventHandler(frmMain_ResizeEnd);
-			WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin AutoHideStripSkin2 = new WeifenLuo.WinFormsUI.Docking.AutoHideStripSkin();
-			WeifenLuo.WinFormsUI.Docking.DockPanelGradient DockPanelGradient4 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-			WeifenLuo.WinFormsUI.Docking.TabGradient TabGradient8 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-			WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin DockPaneStripSkin2 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripSkin();
-			WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient DockPaneStripGradient2 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripGradient();
-			WeifenLuo.WinFormsUI.Docking.TabGradient TabGradient9 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-			WeifenLuo.WinFormsUI.Docking.DockPanelGradient DockPanelGradient5 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-			WeifenLuo.WinFormsUI.Docking.TabGradient TabGradient10 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-			WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient DockPaneStripToolWindowGradient2 = new WeifenLuo.WinFormsUI.Docking.DockPaneStripToolWindowGradient();
-			WeifenLuo.WinFormsUI.Docking.TabGradient TabGradient11 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-			WeifenLuo.WinFormsUI.Docking.TabGradient TabGradient12 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-			WeifenLuo.WinFormsUI.Docking.DockPanelGradient DockPanelGradient6 = new WeifenLuo.WinFormsUI.Docking.DockPanelGradient();
-			WeifenLuo.WinFormsUI.Docking.TabGradient TabGradient13 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
-			WeifenLuo.WinFormsUI.Docking.TabGradient TabGradient14 = new WeifenLuo.WinFormsUI.Docking.TabGradient();
+			components = new System.ComponentModel.Container();
+			Load += new EventHandler(frmMain_Load);
+			Shown += new EventHandler(frmMain_Shown);
+			FormClosing += new FormClosingEventHandler(frmMain_FormClosing);
+			ResizeBegin += new EventHandler(frmMain_ResizeBegin);
+			Resize += new EventHandler(frmMain_Resize);
+			ResizeEnd += new EventHandler(frmMain_ResizeEnd);
+			AutoHideStripSkin AutoHideStripSkin2 = new AutoHideStripSkin();
+			DockPanelGradient DockPanelGradient4 = new DockPanelGradient();
+			TabGradient TabGradient8 = new TabGradient();
+			DockPaneStripSkin DockPaneStripSkin2 = new DockPaneStripSkin();
+			DockPaneStripGradient DockPaneStripGradient2 = new DockPaneStripGradient();
+			TabGradient TabGradient9 = new TabGradient();
+			DockPanelGradient DockPanelGradient5 = new DockPanelGradient();
+			TabGradient TabGradient10 = new TabGradient();
+			DockPaneStripToolWindowGradient DockPaneStripToolWindowGradient2 = new DockPaneStripToolWindowGradient();
+			TabGradient TabGradient11 = new TabGradient();
+			TabGradient TabGradient12 = new TabGradient();
+			DockPanelGradient DockPanelGradient6 = new DockPanelGradient();
+			TabGradient TabGradient13 = new TabGradient();
+			TabGradient TabGradient14 = new TabGradient();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-			this.pnlDock = new WeifenLuo.WinFormsUI.Docking.DockPanel();
-			this.pnlDock.ActiveDocumentChanged += new System.EventHandler(this.pnlDock_ActiveDocumentChanged);
-			this.msMain = new System.Windows.Forms.MenuStrip();
-			this.mMenFile = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFile.DropDownOpening += new System.EventHandler(this.mMenFile_DropDownOpening);
-			this.mMenFileNewConnection = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileNewConnection.Click += new System.EventHandler(mMenFileNewConnection_Click);
-			this.mMenFileNewFolder = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileNewFolder.Click += new System.EventHandler(mMenFileNewFolder_Click);
-			this.mMenFileSep1 = new System.Windows.Forms.ToolStripSeparator();
-			this.mMenFileNew = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileNew.Click += new System.EventHandler(mMenFileNew_Click);
-			this.mMenFileLoad = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileLoad.Click += new System.EventHandler(mMenFileLoad_Click);
-			this.mMenFileSave = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileSave.Click += new System.EventHandler(mMenFileSave_Click);
-			this.mMenFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileSaveAs.Click += new System.EventHandler(mMenFileSaveAs_Click);
-			this.mMenFileSep2 = new System.Windows.Forms.ToolStripSeparator();
-			this.mMenFileImport = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileImportFromFile = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileImportFromFile.Click += new System.EventHandler(mMenFileImportFromFile_Click);
-			this.mMenFileImportFromActiveDirectory = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileImportFromActiveDirectory.Click += new System.EventHandler(mMenFileImportFromActiveDirectory_Click);
-			this.mMenFileImportFromPortScan = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileImportFromPortScan.Click += new System.EventHandler(mMenFileImportFromPortScan_Click);
-			this.mMenFileExport = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileExport.Click += new System.EventHandler(mMenFileExport_Click);
-			this.mMenFileSep3 = new System.Windows.Forms.ToolStripSeparator();
-			this.mMenFileDelete = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileDelete.Click += new System.EventHandler(mMenFileDelete_Click);
-			this.mMenFileRename = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileRename.Click += new System.EventHandler(mMenFileRename_Click);
-			this.mMenFileDuplicate = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileDuplicate.Click += new System.EventHandler(mMenFileDuplicate_Click);
-			this.mMenFileSep4 = new System.Windows.Forms.ToolStripSeparator();
-			this.mMenFileExit = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileExit.Click += new System.EventHandler(mMenFileExit_Click);
-			this.mMenView = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenView.DropDownOpening += new System.EventHandler(this.mMenView_DropDownOpening);
-			this.mMenViewAddConnectionPanel = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewAddConnectionPanel.Click += new System.EventHandler(this.mMenViewAddConnectionPanel_Click);
-			this.mMenViewConnectionPanels = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewSep1 = new System.Windows.Forms.ToolStripSeparator();
-			this.mMenViewConnections = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewConnections.Click += new System.EventHandler(this.mMenViewConnections_Click);
-			this.mMenViewConfig = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewConfig.Click += new System.EventHandler(this.mMenViewConfig_Click);
-			this.mMenViewErrorsAndInfos = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewErrorsAndInfos.Click += new System.EventHandler(this.mMenViewErrorsAndInfos_Click);
-			this.mMenViewScreenshotManager = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewScreenshotManager.Click += new System.EventHandler(this.mMenViewScreenshotManager_Click);
-			this.ToolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-			this.mMenViewJumpTo = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewJumpToConnectionsConfig = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewJumpToConnectionsConfig.Click += new System.EventHandler(this.mMenViewJumpToConnectionsConfig_Click);
-			this.mMenViewJumpToErrorsInfos = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewJumpToErrorsInfos.Click += new System.EventHandler(this.mMenViewJumpToErrorsInfos_Click);
-			this.mMenViewResetLayout = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewResetLayout.Click += new System.EventHandler(this.mMenViewResetLayout_Click);
-			this.mMenViewSep2 = new System.Windows.Forms.ToolStripSeparator();
-			this.mMenViewQuickConnectToolbar = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewQuickConnectToolbar.Click += new System.EventHandler(this.mMenViewQuickConnectToolbar_Click);
-			this.mMenViewExtAppsToolbar = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewExtAppsToolbar.Click += new System.EventHandler(this.mMenViewExtAppsToolbar_Click);
-			this.mMenViewSep3 = new System.Windows.Forms.ToolStripSeparator();
-			this.mMenViewFullscreen = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenViewFullscreen.Click += new System.EventHandler(this.mMenViewFullscreen_Click);
-			this.mMenTools = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenToolsSSHTransfer = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenToolsSSHTransfer.Click += new System.EventHandler(this.mMenToolsSSHTransfer_Click);
-			this.mMenToolsUVNCSC = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenToolsUVNCSC.Click += new System.EventHandler(this.mMenToolsUVNCSC_Click);
-			this.mMenToolsExternalApps = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenToolsExternalApps.Click += new System.EventHandler(this.mMenToolsExternalApps_Click);
-			this.mMenToolsPortScan = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenToolsPortScan.Click += new System.EventHandler(this.mMenToolsPortScan_Click);
-			this.mMenToolsSep1 = new System.Windows.Forms.ToolStripSeparator();
-			this.mMenToolsComponentsCheck = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenToolsComponentsCheck.Click += new System.EventHandler(this.mMenToolsComponentsCheck_Click);
-			this.mMenToolsOptions = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenToolsOptions.Click += new System.EventHandler(this.mMenToolsOptions_Click);
-			this.mMenInfo = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenInfoHelp = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenInfoHelp.Click += new System.EventHandler(this.mMenInfoHelp_Click);
-			this.mMenInfoSep1 = new System.Windows.Forms.ToolStripSeparator();
-			this.mMenInfoWebsite = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenInfoWebsite.Click += new System.EventHandler(this.mMenInfoWebsite_Click);
-			this.mMenInfoDonate = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenInfoDonate.Click += new System.EventHandler(this.mMenInfoDonate_Click);
-			this.mMenInfoForum = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenInfoForum.Click += new System.EventHandler(this.mMenInfoForum_Click);
-			this.mMenInfoBugReport = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenInfoBugReport.Click += new System.EventHandler(this.mMenInfoBugReport_Click);
-			this.ToolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-			this.mMenInfoAnnouncements = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenInfoAnnouncements.Click += new System.EventHandler(this.mMenInfoAnnouncements_Click);
-			this.mMenToolsUpdate = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenToolsUpdate.Click += new System.EventHandler(this.mMenToolsUpdate_Click);
-			this.mMenInfoSep2 = new System.Windows.Forms.ToolStripSeparator();
-			this.mMenInfoAbout = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenInfoAbout.Click += new System.EventHandler(this.mMenInfoAbout_Click);
-			this.mMenSep3 = new System.Windows.Forms.ToolStripSeparator();
-			this.lblQuickConnect = new System.Windows.Forms.ToolStripLabel();
-			this.lblQuickConnect.Click += new System.EventHandler(this.lblQuickConnect_Click);
-			this.cmbQuickConnect = new mRemoteNG.Controls.QuickConnectComboBox();
-			this.cmbQuickConnect.ConnectRequested += new mRemoteNG.Controls.QuickConnectComboBox.ConnectRequestedEventHandler(this.cmbQuickConnect_ConnectRequested);
-			this.cmbQuickConnect.ProtocolChanged += new mRemoteNG.Controls.QuickConnectComboBox.ProtocolChangedEventHandler(this.cmbQuickConnect_ProtocolChanged);
-			this.tsContainer = new System.Windows.Forms.ToolStripContainer();
-			this.tsQuickConnect = new System.Windows.Forms.ToolStrip();
-			this.btnQuickConnect = new mRemoteNG.Controls.ToolStripSplitButton();
-			this.btnQuickConnect.ButtonClick += new System.EventHandler(this.btnQuickConnect_ButtonClick);
-			this.btnQuickConnect.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.btnQuickConnect_DropDownItemClicked);
-			this.mnuQuickConnectProtocol = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.btnConnections = new System.Windows.Forms.ToolStripDropDownButton();
-			this.btnConnections.DropDownOpening += new System.EventHandler(this.btnConnections_DropDownOpening);
-			this.mnuConnections = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.tsExternalTools = new System.Windows.Forms.ToolStrip();
-			this.cMenExtAppsToolbar = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.cMenToolbarShowText = new System.Windows.Forms.ToolStripMenuItem();
-			this.cMenToolbarShowText.Click += new System.EventHandler(this.cMenToolbarShowText_Click);
-			this.ToolStrip1 = new System.Windows.Forms.ToolStrip();
-			this.ToolStripButton1 = new System.Windows.Forms.ToolStripButton();
-			this.ToolStripButton2 = new System.Windows.Forms.ToolStripButton();
-			this.ToolStripButton3 = new System.Windows.Forms.ToolStripButton();
-			this.ToolStripSplitButton1 = new System.Windows.Forms.ToolStripDropDownButton();
-			this.ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.ToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
-			this.tmrAutoSave = new System.Windows.Forms.Timer(this.components);
-			this.tmrAutoSave.Tick += new System.EventHandler(this.tmrAutoSave_Tick);
-			this.msMain.SuspendLayout();
-			this.tsContainer.ContentPanel.SuspendLayout();
-			this.tsContainer.TopToolStripPanel.SuspendLayout();
-			this.tsContainer.SuspendLayout();
-			this.tsQuickConnect.SuspendLayout();
-			this.cMenExtAppsToolbar.SuspendLayout();
-			this.ToolStrip1.SuspendLayout();
-			this.SuspendLayout();
+			pnlDock = new DockPanel();
+			pnlDock.ActiveDocumentChanged += new EventHandler(pnlDock_ActiveDocumentChanged);
+			msMain = new MenuStrip();
+			mMenFile = new ToolStripMenuItem();
+			mMenFile.DropDownOpening += new EventHandler(mMenFile_DropDownOpening);
+			mMenFileNewConnection = new ToolStripMenuItem();
+			mMenFileNewConnection.Click += new EventHandler(mMenFileNewConnection_Click);
+			mMenFileNewFolder = new ToolStripMenuItem();
+			mMenFileNewFolder.Click += new EventHandler(mMenFileNewFolder_Click);
+			mMenFileSep1 = new ToolStripSeparator();
+			mMenFileNew = new ToolStripMenuItem();
+			mMenFileNew.Click += new EventHandler(mMenFileNew_Click);
+			mMenFileLoad = new ToolStripMenuItem();
+			mMenFileLoad.Click += new EventHandler(mMenFileLoad_Click);
+			mMenFileSave = new ToolStripMenuItem();
+			mMenFileSave.Click += new EventHandler(mMenFileSave_Click);
+			mMenFileSaveAs = new ToolStripMenuItem();
+			mMenFileSaveAs.Click += new EventHandler(mMenFileSaveAs_Click);
+			mMenFileSep2 = new ToolStripSeparator();
+			mMenFileImport = new ToolStripMenuItem();
+			mMenFileImportFromFile = new ToolStripMenuItem();
+			mMenFileImportFromFile.Click += new EventHandler(mMenFileImportFromFile_Click);
+			mMenFileImportFromActiveDirectory = new ToolStripMenuItem();
+			mMenFileImportFromActiveDirectory.Click += new EventHandler(mMenFileImportFromActiveDirectory_Click);
+			mMenFileImportFromPortScan = new ToolStripMenuItem();
+			mMenFileImportFromPortScan.Click += new EventHandler(mMenFileImportFromPortScan_Click);
+			mMenFileExport = new ToolStripMenuItem();
+			mMenFileExport.Click += new EventHandler(mMenFileExport_Click);
+			mMenFileSep3 = new ToolStripSeparator();
+			mMenFileDelete = new ToolStripMenuItem();
+			mMenFileDelete.Click += new EventHandler(mMenFileDelete_Click);
+			mMenFileRename = new ToolStripMenuItem();
+			mMenFileRename.Click += new EventHandler(mMenFileRename_Click);
+			mMenFileDuplicate = new ToolStripMenuItem();
+			mMenFileDuplicate.Click += new EventHandler(mMenFileDuplicate_Click);
+			mMenFileSep4 = new ToolStripSeparator();
+			mMenFileExit = new ToolStripMenuItem();
+			mMenFileExit.Click += new EventHandler(mMenFileExit_Click);
+			mMenView = new ToolStripMenuItem();
+			mMenView.DropDownOpening += new EventHandler(mMenView_DropDownOpening);
+			mMenViewAddConnectionPanel = new ToolStripMenuItem();
+			mMenViewAddConnectionPanel.Click += new EventHandler(mMenViewAddConnectionPanel_Click);
+			mMenViewConnectionPanels = new ToolStripMenuItem();
+			mMenViewSep1 = new ToolStripSeparator();
+			mMenViewConnections = new ToolStripMenuItem();
+			mMenViewConnections.Click += new EventHandler(mMenViewConnections_Click);
+			mMenViewConfig = new ToolStripMenuItem();
+			mMenViewConfig.Click += new EventHandler(mMenViewConfig_Click);
+			mMenViewErrorsAndInfos = new ToolStripMenuItem();
+			mMenViewErrorsAndInfos.Click += new EventHandler(mMenViewErrorsAndInfos_Click);
+			mMenViewScreenshotManager = new ToolStripMenuItem();
+			mMenViewScreenshotManager.Click += new EventHandler(mMenViewScreenshotManager_Click);
+			ToolStripSeparator1 = new ToolStripSeparator();
+			mMenViewJumpTo = new ToolStripMenuItem();
+			mMenViewJumpToConnectionsConfig = new ToolStripMenuItem();
+			mMenViewJumpToConnectionsConfig.Click += new EventHandler(mMenViewJumpToConnectionsConfig_Click);
+			mMenViewJumpToErrorsInfos = new ToolStripMenuItem();
+			mMenViewJumpToErrorsInfos.Click += new EventHandler(mMenViewJumpToErrorsInfos_Click);
+			mMenViewResetLayout = new ToolStripMenuItem();
+			mMenViewResetLayout.Click += new EventHandler(mMenViewResetLayout_Click);
+			mMenViewSep2 = new ToolStripSeparator();
+			mMenViewQuickConnectToolbar = new ToolStripMenuItem();
+			mMenViewQuickConnectToolbar.Click += new EventHandler(mMenViewQuickConnectToolbar_Click);
+			mMenViewExtAppsToolbar = new ToolStripMenuItem();
+			mMenViewExtAppsToolbar.Click += new EventHandler(mMenViewExtAppsToolbar_Click);
+			mMenViewSep3 = new ToolStripSeparator();
+			mMenViewFullscreen = new ToolStripMenuItem();
+			mMenViewFullscreen.Click += new EventHandler(mMenViewFullscreen_Click);
+			mMenTools = new ToolStripMenuItem();
+			mMenToolsSSHTransfer = new ToolStripMenuItem();
+			mMenToolsSSHTransfer.Click += new EventHandler(mMenToolsSSHTransfer_Click);
+			mMenToolsUVNCSC = new ToolStripMenuItem();
+			mMenToolsUVNCSC.Click += new EventHandler(mMenToolsUVNCSC_Click);
+			mMenToolsExternalApps = new ToolStripMenuItem();
+			mMenToolsExternalApps.Click += new EventHandler(mMenToolsExternalApps_Click);
+			mMenToolsPortScan = new ToolStripMenuItem();
+			mMenToolsPortScan.Click += new EventHandler(mMenToolsPortScan_Click);
+			mMenToolsSep1 = new ToolStripSeparator();
+			mMenToolsComponentsCheck = new ToolStripMenuItem();
+			mMenToolsComponentsCheck.Click += new EventHandler(mMenToolsComponentsCheck_Click);
+			mMenToolsOptions = new ToolStripMenuItem();
+			mMenToolsOptions.Click += new EventHandler(mMenToolsOptions_Click);
+			mMenInfo = new ToolStripMenuItem();
+			mMenInfoHelp = new ToolStripMenuItem();
+			mMenInfoHelp.Click += new EventHandler(mMenInfoHelp_Click);
+			mMenInfoSep1 = new ToolStripSeparator();
+			mMenInfoWebsite = new ToolStripMenuItem();
+			mMenInfoWebsite.Click += new EventHandler(mMenInfoWebsite_Click);
+			mMenInfoDonate = new ToolStripMenuItem();
+			mMenInfoDonate.Click += new EventHandler(mMenInfoDonate_Click);
+			mMenInfoForum = new ToolStripMenuItem();
+			mMenInfoForum.Click += new EventHandler(mMenInfoForum_Click);
+			mMenInfoBugReport = new ToolStripMenuItem();
+			mMenInfoBugReport.Click += new EventHandler(mMenInfoBugReport_Click);
+			ToolStripSeparator2 = new ToolStripSeparator();
+			mMenInfoAnnouncements = new ToolStripMenuItem();
+			mMenInfoAnnouncements.Click += new EventHandler(mMenInfoAnnouncements_Click);
+			mMenToolsUpdate = new ToolStripMenuItem();
+			mMenToolsUpdate.Click += new EventHandler(mMenToolsUpdate_Click);
+			mMenInfoSep2 = new ToolStripSeparator();
+			mMenInfoAbout = new ToolStripMenuItem();
+			mMenInfoAbout.Click += new EventHandler(mMenInfoAbout_Click);
+			mMenSep3 = new ToolStripSeparator();
+			lblQuickConnect = new ToolStripLabel();
+			lblQuickConnect.Click += new EventHandler(lblQuickConnect_Click);
+			cmbQuickConnect = new mRemoteNG.Controls.QuickConnectComboBox();
+			cmbQuickConnect.ConnectRequested += new mRemoteNG.Controls.QuickConnectComboBox.ConnectRequestedEventHandler(cmbQuickConnect_ConnectRequested);
+			cmbQuickConnect.ProtocolChanged += new mRemoteNG.Controls.QuickConnectComboBox.ProtocolChangedEventHandler(cmbQuickConnect_ProtocolChanged);
+			tsContainer = new ToolStripContainer();
+			tsQuickConnect = new ToolStrip();
+			btnQuickConnect = new mRemoteNG.Controls.ToolStripSplitButton();
+			btnQuickConnect.ButtonClick += new EventHandler(btnQuickConnect_ButtonClick);
+			btnQuickConnect.DropDownItemClicked += new ToolStripItemClickedEventHandler(btnQuickConnect_DropDownItemClicked);
+			mnuQuickConnectProtocol = new ContextMenuStrip(components);
+			btnConnections = new ToolStripDropDownButton();
+			btnConnections.DropDownOpening += new EventHandler(btnConnections_DropDownOpening);
+			mnuConnections = new ContextMenuStrip(components);
+			tsExternalTools = new ToolStrip();
+			cMenExtAppsToolbar = new ContextMenuStrip(components);
+			cMenToolbarShowText = new ToolStripMenuItem();
+			cMenToolbarShowText.Click += new EventHandler(cMenToolbarShowText_Click);
+			ToolStrip1 = new ToolStrip();
+			ToolStripButton1 = new ToolStripButton();
+			ToolStripButton2 = new ToolStripButton();
+			ToolStripButton3 = new ToolStripButton();
+			ToolStripSplitButton1 = new ToolStripDropDownButton();
+			ToolStripMenuItem1 = new ToolStripMenuItem();
+			ToolStripMenuItem2 = new ToolStripMenuItem();
+			tmrAutoSave = new Timer(components);
+			tmrAutoSave.Tick += new EventHandler(tmrAutoSave_Tick);
+			msMain.SuspendLayout();
+			tsContainer.ContentPanel.SuspendLayout();
+			tsContainer.TopToolStripPanel.SuspendLayout();
+			tsContainer.SuspendLayout();
+			tsQuickConnect.SuspendLayout();
+			cMenExtAppsToolbar.SuspendLayout();
+			ToolStrip1.SuspendLayout();
+			SuspendLayout();
 			//
 			//pnlDock
 			//
-			this.pnlDock.ActiveAutoHideContent = null;
-			this.pnlDock.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.pnlDock.DockBackColor = System.Drawing.SystemColors.Control;
-			this.pnlDock.DockLeftPortion = 230.0D;
-			this.pnlDock.DockRightPortion = 230.0D;
-			this.pnlDock.DocumentStyle = WeifenLuo.WinFormsUI.Docking.DocumentStyle.DockingSdi;
-			this.pnlDock.Location = new System.Drawing.Point(0, 0);
-			this.pnlDock.Name = "pnlDock";
-			this.pnlDock.Size = new System.Drawing.Size(842, 449);
-			DockPanelGradient4.EndColor = System.Drawing.SystemColors.ControlLight;
-			DockPanelGradient4.StartColor = System.Drawing.SystemColors.ControlLight;
+			pnlDock.ActiveAutoHideContent = null;
+			pnlDock.Dock = DockStyle.Fill;
+			pnlDock.DockBackColor = SystemColors.Control;
+			pnlDock.DockLeftPortion = 230.0D;
+			pnlDock.DockRightPortion = 230.0D;
+			pnlDock.DocumentStyle = DocumentStyle.DockingSdi;
+			pnlDock.Location = new Point(0, 0);
+			pnlDock.Name = "pnlDock";
+			pnlDock.Size = new Size(842, 449);
+			DockPanelGradient4.EndColor = SystemColors.ControlLight;
+			DockPanelGradient4.StartColor = SystemColors.ControlLight;
 			AutoHideStripSkin2.DockStripGradient = DockPanelGradient4;
-			TabGradient8.EndColor = System.Drawing.SystemColors.Control;
-			TabGradient8.StartColor = System.Drawing.SystemColors.Control;
-			TabGradient8.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+			TabGradient8.EndColor = SystemColors.Control;
+			TabGradient8.StartColor = SystemColors.Control;
+			TabGradient8.TextColor = SystemColors.ControlDarkDark;
 			AutoHideStripSkin2.TabGradient = TabGradient8;
-			AutoHideStripSkin2.TextFont = new System.Drawing.Font("Segoe UI", 9.0F);
-			TabGradient9.EndColor = System.Drawing.SystemColors.ControlLightLight;
-			TabGradient9.StartColor = System.Drawing.SystemColors.ControlLightLight;
-			TabGradient9.TextColor = System.Drawing.SystemColors.ControlText;
+			AutoHideStripSkin2.TextFont = new Font("Segoe UI", 9.0F);
+			TabGradient9.EndColor = SystemColors.ControlLightLight;
+			TabGradient9.StartColor = SystemColors.ControlLightLight;
+			TabGradient9.TextColor = SystemColors.ControlText;
 			DockPaneStripGradient2.ActiveTabGradient = TabGradient9;
-			DockPanelGradient5.EndColor = System.Drawing.SystemColors.Control;
-			DockPanelGradient5.StartColor = System.Drawing.SystemColors.Control;
+			DockPanelGradient5.EndColor = SystemColors.Control;
+			DockPanelGradient5.StartColor = SystemColors.Control;
 			DockPaneStripGradient2.DockStripGradient = DockPanelGradient5;
-			TabGradient10.EndColor = System.Drawing.SystemColors.ControlLight;
-			TabGradient10.StartColor = System.Drawing.SystemColors.ControlLight;
-			TabGradient10.TextColor = System.Drawing.SystemColors.ControlText;
+			TabGradient10.EndColor = SystemColors.ControlLight;
+			TabGradient10.StartColor = SystemColors.ControlLight;
+			TabGradient10.TextColor = SystemColors.ControlText;
 			DockPaneStripGradient2.InactiveTabGradient = TabGradient10;
 			DockPaneStripSkin2.DocumentGradient = DockPaneStripGradient2;
-			DockPaneStripSkin2.TextFont = new System.Drawing.Font("Segoe UI", 9.0F);
-			TabGradient11.EndColor = System.Drawing.SystemColors.ActiveCaption;
-			TabGradient11.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-			TabGradient11.StartColor = System.Drawing.SystemColors.GradientActiveCaption;
-			TabGradient11.TextColor = System.Drawing.SystemColors.ActiveCaptionText;
+			DockPaneStripSkin2.TextFont = new Font("Segoe UI", 9.0F);
+			TabGradient11.EndColor = SystemColors.ActiveCaption;
+			TabGradient11.LinearGradientMode = LinearGradientMode.Vertical;
+			TabGradient11.StartColor = SystemColors.GradientActiveCaption;
+			TabGradient11.TextColor = SystemColors.ActiveCaptionText;
 			DockPaneStripToolWindowGradient2.ActiveCaptionGradient = TabGradient11;
-			TabGradient12.EndColor = System.Drawing.SystemColors.Control;
-			TabGradient12.StartColor = System.Drawing.SystemColors.Control;
-			TabGradient12.TextColor = System.Drawing.SystemColors.ControlText;
+			TabGradient12.EndColor = SystemColors.Control;
+			TabGradient12.StartColor = SystemColors.Control;
+			TabGradient12.TextColor = SystemColors.ControlText;
 			DockPaneStripToolWindowGradient2.ActiveTabGradient = TabGradient12;
-			DockPanelGradient6.EndColor = System.Drawing.SystemColors.ControlLight;
-			DockPanelGradient6.StartColor = System.Drawing.SystemColors.ControlLight;
+			DockPanelGradient6.EndColor = SystemColors.ControlLight;
+			DockPanelGradient6.StartColor = SystemColors.ControlLight;
 			DockPaneStripToolWindowGradient2.DockStripGradient = DockPanelGradient6;
-			TabGradient13.EndColor = System.Drawing.SystemColors.GradientInactiveCaption;
-			TabGradient13.LinearGradientMode = System.Drawing.Drawing2D.LinearGradientMode.Vertical;
-			TabGradient13.StartColor = System.Drawing.SystemColors.GradientInactiveCaption;
-			TabGradient13.TextColor = System.Drawing.SystemColors.ControlText;
+			TabGradient13.EndColor = SystemColors.GradientInactiveCaption;
+			TabGradient13.LinearGradientMode = LinearGradientMode.Vertical;
+			TabGradient13.StartColor = SystemColors.GradientInactiveCaption;
+			TabGradient13.TextColor = SystemColors.ControlText;
 			DockPaneStripToolWindowGradient2.InactiveCaptionGradient = TabGradient13;
-			TabGradient14.EndColor = System.Drawing.Color.Transparent;
-			TabGradient14.StartColor = System.Drawing.Color.Transparent;
-			TabGradient14.TextColor = System.Drawing.SystemColors.ControlDarkDark;
+			TabGradient14.EndColor = Color.Transparent;
+			TabGradient14.StartColor = Color.Transparent;
+			TabGradient14.TextColor = SystemColors.ControlDarkDark;
 			DockPaneStripToolWindowGradient2.InactiveTabGradient = TabGradient14;
 			DockPaneStripSkin2.ToolWindowGradient = DockPaneStripToolWindowGradient2;
-			this.pnlDock.Theme = new VS2012LightTheme();
-			this.pnlDock.TabIndex = 13;
+			pnlDock.Theme = new VS2012LightTheme();
+			pnlDock.TabIndex = 13;
 			//
 			//msMain
 			//
-			this.msMain.Dock = System.Windows.Forms.DockStyle.None;
-			this.msMain.GripMargin = new System.Windows.Forms.Padding(0);
-			this.msMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
-			this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenFile, this.mMenView, this.mMenTools, this.mMenInfo});
-			this.msMain.Location = new System.Drawing.Point(3, 0);
-			this.msMain.Name = "msMain";
-			this.msMain.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-			this.msMain.Size = new System.Drawing.Size(274, 24);
-			this.msMain.Stretch = false;
-			this.msMain.TabIndex = 16;
-			this.msMain.Text = "Main Toolbar";
+			msMain.Dock = DockStyle.None;
+			msMain.GripMargin = new Padding(0);
+			msMain.GripStyle = ToolStripGripStyle.Visible;
+			msMain.Items.AddRange(new ToolStripItem[] {mMenFile, mMenView, mMenTools, mMenInfo});
+			msMain.Location = new Point(3, 0);
+			msMain.Name = "msMain";
+			msMain.Padding = new Padding(2, 2, 0, 2);
+			msMain.Size = new Size(274, 24);
+			msMain.Stretch = false;
+			msMain.TabIndex = 16;
+			msMain.Text = "Main Toolbar";
 			//
 			//mMenFile
 			//
-			this.mMenFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenFileNewConnection, this.mMenFileNewFolder, this.mMenFileSep1, this.mMenFileNew, this.mMenFileLoad, this.mMenFileSave, this.mMenFileSaveAs, this.mMenFileSep2, this.mMenFileDelete, this.mMenFileRename, this.mMenFileDuplicate, this.mMenFileSep3, this.mMenFileImport, this.mMenFileExport, this.mMenFileSep4, this.mMenFileExit});
-			this.mMenFile.Name = "mMenFile";
-			this.mMenFile.Size = new System.Drawing.Size(37, 20);
-			this.mMenFile.Text = "&File";
+			mMenFile.DropDownItems.AddRange(new ToolStripItem[] {mMenFileNewConnection, mMenFileNewFolder, mMenFileSep1, mMenFileNew, mMenFileLoad, mMenFileSave, mMenFileSaveAs, mMenFileSep2, mMenFileDelete, mMenFileRename, mMenFileDuplicate, mMenFileSep3, mMenFileImport, mMenFileExport, mMenFileSep4, mMenFileExit});
+			mMenFile.Name = "mMenFile";
+			mMenFile.Size = new Size(37, 20);
+			mMenFile.Text = "&File";
 			//
 			//mMenFileNewConnection
 			//
-			this.mMenFileNewConnection.Image = Resources.Connection_Add;
-			this.mMenFileNewConnection.Name = "mMenFileNewConnection";
-			this.mMenFileNewConnection.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N);
-			this.mMenFileNewConnection.Size = new System.Drawing.Size(281, 22);
-			this.mMenFileNewConnection.Text = "New Connection";
+			mMenFileNewConnection.Image = Resources.Connection_Add;
+			mMenFileNewConnection.Name = "mMenFileNewConnection";
+			mMenFileNewConnection.ShortcutKeys = (Keys) (Keys.Control | Keys.N);
+			mMenFileNewConnection.Size = new Size(281, 22);
+			mMenFileNewConnection.Text = "New Connection";
 			//
 			//mMenFileNewFolder
 			//
-			this.mMenFileNewFolder.Image = Resources.Folder_Add;
-			this.mMenFileNewFolder.Name = "mMenFileNewFolder";
-			this.mMenFileNewFolder.ShortcutKeys = (System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-				| System.Windows.Forms.Keys.N);
-			this.mMenFileNewFolder.Size = new System.Drawing.Size(281, 22);
-			this.mMenFileNewFolder.Text = "New Folder";
+			mMenFileNewFolder.Image = Resources.Folder_Add;
+			mMenFileNewFolder.Name = "mMenFileNewFolder";
+			mMenFileNewFolder.ShortcutKeys = (Keys) ((Keys.Control | Keys.Shift) 
+				| Keys.N);
+			mMenFileNewFolder.Size = new Size(281, 22);
+			mMenFileNewFolder.Text = "New Folder";
 			//
 			//mMenFileSep1
 			//
-			this.mMenFileSep1.Name = "mMenFileSep1";
-			this.mMenFileSep1.Size = new System.Drawing.Size(278, 6);
+			mMenFileSep1.Name = "mMenFileSep1";
+			mMenFileSep1.Size = new Size(278, 6);
 			//
 			//mMenFileNew
 			//
-			this.mMenFileNew.Image = Resources.Connections_New;
-			this.mMenFileNew.Name = "mMenFileNew";
-			this.mMenFileNew.Size = new System.Drawing.Size(281, 22);
-			this.mMenFileNew.Text = "New Connection File";
+			mMenFileNew.Image = Resources.Connections_New;
+			mMenFileNew.Name = "mMenFileNew";
+			mMenFileNew.Size = new Size(281, 22);
+			mMenFileNew.Text = "New Connection File";
 			//
 			//mMenFileLoad
 			//
-			this.mMenFileLoad.Image = Resources.Connections_Load;
-			this.mMenFileLoad.Name = "mMenFileLoad";
-			this.mMenFileLoad.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O);
-			this.mMenFileLoad.Size = new System.Drawing.Size(281, 22);
-			this.mMenFileLoad.Text = "Open Connection File...";
+			mMenFileLoad.Image = Resources.Connections_Load;
+			mMenFileLoad.Name = "mMenFileLoad";
+			mMenFileLoad.ShortcutKeys = (Keys) (Keys.Control | Keys.O);
+			mMenFileLoad.Size = new Size(281, 22);
+			mMenFileLoad.Text = "Open Connection File...";
 			//
 			//mMenFileSave
 			//
-			this.mMenFileSave.Image = Resources.Connections_Save;
-			this.mMenFileSave.Name = "mMenFileSave";
-			this.mMenFileSave.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S);
-			this.mMenFileSave.Size = new System.Drawing.Size(281, 22);
-			this.mMenFileSave.Text = "Save Connection File";
+			mMenFileSave.Image = Resources.Connections_Save;
+			mMenFileSave.Name = "mMenFileSave";
+			mMenFileSave.ShortcutKeys = (Keys) (Keys.Control | Keys.S);
+			mMenFileSave.Size = new Size(281, 22);
+			mMenFileSave.Text = "Save Connection File";
 			//
 			//mMenFileSaveAs
 			//
-			this.mMenFileSaveAs.Image = Resources.Connections_SaveAs;
-			this.mMenFileSaveAs.Name = "mMenFileSaveAs";
-			this.mMenFileSaveAs.ShortcutKeys = (System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-				| System.Windows.Forms.Keys.S);
-			this.mMenFileSaveAs.Size = new System.Drawing.Size(281, 22);
-			this.mMenFileSaveAs.Text = "Save Connection File As...";
+			mMenFileSaveAs.Image = Resources.Connections_SaveAs;
+			mMenFileSaveAs.Name = "mMenFileSaveAs";
+			mMenFileSaveAs.ShortcutKeys = (Keys) ((Keys.Control | Keys.Shift) 
+				| Keys.S);
+			mMenFileSaveAs.Size = new Size(281, 22);
+			mMenFileSaveAs.Text = "Save Connection File As...";
 			//
 			//mMenFileSep2
 			//
-			this.mMenFileSep2.Name = "mMenFileSep2";
-			this.mMenFileSep2.Size = new System.Drawing.Size(278, 6);
+			mMenFileSep2.Name = "mMenFileSep2";
+			mMenFileSep2.Size = new Size(278, 6);
 			//
 			//mMenFileImport
 			//
-			this.mMenFileImport.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenFileImportFromFile, this.mMenFileImportFromActiveDirectory, this.mMenFileImportFromPortScan});
-			this.mMenFileImport.Name = "mMenFileImport";
-			this.mMenFileImport.Size = new System.Drawing.Size(281, 22);
-			this.mMenFileImport.Text = "&Import";
+			mMenFileImport.DropDownItems.AddRange(new ToolStripItem[] {mMenFileImportFromFile, mMenFileImportFromActiveDirectory, mMenFileImportFromPortScan});
+			mMenFileImport.Name = "mMenFileImport";
+			mMenFileImport.Size = new Size(281, 22);
+			mMenFileImport.Text = "&Import";
 			//
 			//mMenFileImportFromFile
 			//
-			this.mMenFileImportFromFile.Name = "mMenFileImportFromFile";
-			this.mMenFileImportFromFile.Size = new System.Drawing.Size(235, 22);
-			this.mMenFileImportFromFile.Text = "Import from &File...";
+			mMenFileImportFromFile.Name = "mMenFileImportFromFile";
+			mMenFileImportFromFile.Size = new Size(235, 22);
+			mMenFileImportFromFile.Text = "Import from &File...";
 			//
 			//mMenFileImportFromActiveDirectory
 			//
-			this.mMenFileImportFromActiveDirectory.Name = "mMenFileImportFromActiveDirectory";
-			this.mMenFileImportFromActiveDirectory.Size = new System.Drawing.Size(235, 22);
-			this.mMenFileImportFromActiveDirectory.Text = "Import from &Active Directory...";
+			mMenFileImportFromActiveDirectory.Name = "mMenFileImportFromActiveDirectory";
+			mMenFileImportFromActiveDirectory.Size = new Size(235, 22);
+			mMenFileImportFromActiveDirectory.Text = "Import from &Active Directory...";
 			//
 			//mMenFileImportFromPortScan
 			//
-			this.mMenFileImportFromPortScan.Name = "mMenFileImportFromPortScan";
-			this.mMenFileImportFromPortScan.Size = new System.Drawing.Size(235, 22);
-			this.mMenFileImportFromPortScan.Text = "Import from &Port Scan...";
+			mMenFileImportFromPortScan.Name = "mMenFileImportFromPortScan";
+			mMenFileImportFromPortScan.Size = new Size(235, 22);
+			mMenFileImportFromPortScan.Text = "Import from &Port Scan...";
 			//
 			//mMenFileExport
 			//
-			this.mMenFileExport.Name = "mMenFileExport";
-			this.mMenFileExport.Size = new System.Drawing.Size(281, 22);
-			this.mMenFileExport.Text = "&Export to File...";
+			mMenFileExport.Name = "mMenFileExport";
+			mMenFileExport.Size = new Size(281, 22);
+			mMenFileExport.Text = "&Export to File...";
 			//
 			//mMenFileSep3
 			//
-			this.mMenFileSep3.Name = "mMenFileSep3";
-			this.mMenFileSep3.Size = new System.Drawing.Size(278, 6);
+			mMenFileSep3.Name = "mMenFileSep3";
+			mMenFileSep3.Size = new Size(278, 6);
 			//
 			//mMenFileDelete
 			//
-			this.mMenFileDelete.Image = Resources.Delete;
-			this.mMenFileDelete.Name = "mMenFileDelete";
-			this.mMenFileDelete.Size = new System.Drawing.Size(281, 22);
-			this.mMenFileDelete.Text = "Delete...";
+			mMenFileDelete.Image = Resources.Delete;
+			mMenFileDelete.Name = "mMenFileDelete";
+			mMenFileDelete.Size = new Size(281, 22);
+			mMenFileDelete.Text = "Delete...";
 			//
 			//mMenFileRename
 			//
-			this.mMenFileRename.Image = Resources.Rename;
-			this.mMenFileRename.Name = "mMenFileRename";
-			this.mMenFileRename.Size = new System.Drawing.Size(281, 22);
-			this.mMenFileRename.Text = "Rename";
+			mMenFileRename.Image = Resources.Rename;
+			mMenFileRename.Name = "mMenFileRename";
+			mMenFileRename.Size = new Size(281, 22);
+			mMenFileRename.Text = "Rename";
 			//
 			//mMenFileDuplicate
 			//
-			this.mMenFileDuplicate.Image = Resources.page_copy;
-			this.mMenFileDuplicate.Name = "mMenFileDuplicate";
-			this.mMenFileDuplicate.Size = new System.Drawing.Size(281, 22);
-			this.mMenFileDuplicate.Text = "Duplicate";
+			mMenFileDuplicate.Image = Resources.page_copy;
+			mMenFileDuplicate.Name = "mMenFileDuplicate";
+			mMenFileDuplicate.Size = new Size(281, 22);
+			mMenFileDuplicate.Text = "Duplicate";
 			//
 			//mMenFileSep4
 			//
-			this.mMenFileSep4.Name = "mMenFileSep4";
-			this.mMenFileSep4.Size = new System.Drawing.Size(278, 6);
+			mMenFileSep4.Name = "mMenFileSep4";
+			mMenFileSep4.Size = new Size(278, 6);
 			//
 			//mMenFileExit
 			//
-			this.mMenFileExit.Image = Resources.Quit;
-			this.mMenFileExit.Name = "mMenFileExit";
-			this.mMenFileExit.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4);
-			this.mMenFileExit.Size = new System.Drawing.Size(281, 22);
-			this.mMenFileExit.Text = "Exit";
+			mMenFileExit.Image = Resources.Quit;
+			mMenFileExit.Name = "mMenFileExit";
+			mMenFileExit.ShortcutKeys = (Keys) (Keys.Alt | Keys.F4);
+			mMenFileExit.Size = new Size(281, 22);
+			mMenFileExit.Text = "Exit";
 			//
 			//mMenView
 			//
-			this.mMenView.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenViewAddConnectionPanel, this.mMenViewConnectionPanels, this.mMenViewSep1, this.mMenViewConnections, this.mMenViewConfig, this.mMenViewErrorsAndInfos, this.mMenViewScreenshotManager, this.ToolStripSeparator1, this.mMenViewJumpTo, this.mMenViewResetLayout, this.mMenViewSep2, this.mMenViewQuickConnectToolbar, this.mMenViewExtAppsToolbar, this.mMenViewSep3, this.mMenViewFullscreen});
-			this.mMenView.Name = "mMenView";
-			this.mMenView.Size = new System.Drawing.Size(44, 20);
-			this.mMenView.Text = "&View";
+			mMenView.DropDownItems.AddRange(new ToolStripItem[] {mMenViewAddConnectionPanel, mMenViewConnectionPanels, mMenViewSep1, mMenViewConnections, mMenViewConfig, mMenViewErrorsAndInfos, mMenViewScreenshotManager, ToolStripSeparator1, mMenViewJumpTo, mMenViewResetLayout, mMenViewSep2, mMenViewQuickConnectToolbar, mMenViewExtAppsToolbar, mMenViewSep3, mMenViewFullscreen});
+			mMenView.Name = "mMenView";
+			mMenView.Size = new Size(44, 20);
+			mMenView.Text = "&View";
 			//
 			//mMenViewAddConnectionPanel
 			//
-			this.mMenViewAddConnectionPanel.Image = Resources.Panel_Add;
-			this.mMenViewAddConnectionPanel.Name = "mMenViewAddConnectionPanel";
-			this.mMenViewAddConnectionPanel.Size = new System.Drawing.Size(228, 22);
-			this.mMenViewAddConnectionPanel.Text = "Add Connection Panel";
+			mMenViewAddConnectionPanel.Image = Resources.Panel_Add;
+			mMenViewAddConnectionPanel.Name = "mMenViewAddConnectionPanel";
+			mMenViewAddConnectionPanel.Size = new Size(228, 22);
+			mMenViewAddConnectionPanel.Text = "Add Connection Panel";
 			//
 			//mMenViewConnectionPanels
 			//
-			this.mMenViewConnectionPanels.Image = Resources.Panels;
-			this.mMenViewConnectionPanels.Name = "mMenViewConnectionPanels";
-			this.mMenViewConnectionPanels.Size = new System.Drawing.Size(228, 22);
-			this.mMenViewConnectionPanels.Text = "Connection Panels";
+			mMenViewConnectionPanels.Image = Resources.Panels;
+			mMenViewConnectionPanels.Name = "mMenViewConnectionPanels";
+			mMenViewConnectionPanels.Size = new Size(228, 22);
+			mMenViewConnectionPanels.Text = "Connection Panels";
 			//
 			//mMenViewSep1
 			//
-			this.mMenViewSep1.Name = "mMenViewSep1";
-			this.mMenViewSep1.Size = new System.Drawing.Size(225, 6);
+			mMenViewSep1.Name = "mMenViewSep1";
+			mMenViewSep1.Size = new Size(225, 6);
 			//
 			//mMenViewConnections
 			//
-			this.mMenViewConnections.Checked = true;
-			this.mMenViewConnections.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.mMenViewConnections.Image = Resources.Root;
-			this.mMenViewConnections.Name = "mMenViewConnections";
-			this.mMenViewConnections.Size = new System.Drawing.Size(228, 22);
-			this.mMenViewConnections.Text = "Connections";
+			mMenViewConnections.Checked = true;
+			mMenViewConnections.CheckState = CheckState.Checked;
+			mMenViewConnections.Image = Resources.Root;
+			mMenViewConnections.Name = "mMenViewConnections";
+			mMenViewConnections.Size = new Size(228, 22);
+			mMenViewConnections.Text = "Connections";
 			//
 			//mMenViewConfig
 			//
-			this.mMenViewConfig.Checked = true;
-			this.mMenViewConfig.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.mMenViewConfig.Image = Resources.cog;
-			this.mMenViewConfig.Name = "mMenViewConfig";
-			this.mMenViewConfig.Size = new System.Drawing.Size(228, 22);
-			this.mMenViewConfig.Text = "Config";
+			mMenViewConfig.Checked = true;
+			mMenViewConfig.CheckState = CheckState.Checked;
+			mMenViewConfig.Image = Resources.cog;
+			mMenViewConfig.Name = "mMenViewConfig";
+			mMenViewConfig.Size = new Size(228, 22);
+			mMenViewConfig.Text = "Config";
 			//
 			//mMenViewErrorsAndInfos
 			//
-			this.mMenViewErrorsAndInfos.Checked = true;
-			this.mMenViewErrorsAndInfos.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.mMenViewErrorsAndInfos.Image = Resources.ErrorsAndInfos;
-			this.mMenViewErrorsAndInfos.Name = "mMenViewErrorsAndInfos";
-			this.mMenViewErrorsAndInfos.Size = new System.Drawing.Size(228, 22);
-			this.mMenViewErrorsAndInfos.Text = "Errors and Infos";
+			mMenViewErrorsAndInfos.Checked = true;
+			mMenViewErrorsAndInfos.CheckState = CheckState.Checked;
+			mMenViewErrorsAndInfos.Image = Resources.ErrorsAndInfos;
+			mMenViewErrorsAndInfos.Name = "mMenViewErrorsAndInfos";
+			mMenViewErrorsAndInfos.Size = new Size(228, 22);
+			mMenViewErrorsAndInfos.Text = "Errors and Infos";
 			//
 			//mMenViewScreenshotManager
 			//
-			this.mMenViewScreenshotManager.Image = (System.Drawing.Image) (resources.GetObject("mMenViewScreenshotManager.Image"));
-			this.mMenViewScreenshotManager.Name = "mMenViewScreenshotManager";
-			this.mMenViewScreenshotManager.Size = new System.Drawing.Size(228, 22);
-			this.mMenViewScreenshotManager.Text = "Screenshot Manager";
+			mMenViewScreenshotManager.Image = (Image) (resources.GetObject("mMenViewScreenshotManager.Image"));
+			mMenViewScreenshotManager.Name = "mMenViewScreenshotManager";
+			mMenViewScreenshotManager.Size = new Size(228, 22);
+			mMenViewScreenshotManager.Text = "Screenshot Manager";
 			//
 			//ToolStripSeparator1
 			//
-			this.ToolStripSeparator1.Name = "ToolStripSeparator1";
-			this.ToolStripSeparator1.Size = new System.Drawing.Size(225, 6);
+			ToolStripSeparator1.Name = "ToolStripSeparator1";
+			ToolStripSeparator1.Size = new Size(225, 6);
 			//
 			//mMenViewJumpTo
 			//
-			this.mMenViewJumpTo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenViewJumpToConnectionsConfig, this.mMenViewJumpToErrorsInfos});
-			this.mMenViewJumpTo.Image = Resources.JumpTo;
-			this.mMenViewJumpTo.Name = "mMenViewJumpTo";
-			this.mMenViewJumpTo.Size = new System.Drawing.Size(228, 22);
-			this.mMenViewJumpTo.Text = "Jump To";
+			mMenViewJumpTo.DropDownItems.AddRange(new ToolStripItem[] {mMenViewJumpToConnectionsConfig, mMenViewJumpToErrorsInfos});
+			mMenViewJumpTo.Image = Resources.JumpTo;
+			mMenViewJumpTo.Name = "mMenViewJumpTo";
+			mMenViewJumpTo.Size = new Size(228, 22);
+			mMenViewJumpTo.Text = "Jump To";
 			//
 			//mMenViewJumpToConnectionsConfig
 			//
-			this.mMenViewJumpToConnectionsConfig.Image = Resources.Root;
-			this.mMenViewJumpToConnectionsConfig.Name = "mMenViewJumpToConnectionsConfig";
-			this.mMenViewJumpToConnectionsConfig.ShortcutKeys = (System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-				| System.Windows.Forms.Keys.C);
-			this.mMenViewJumpToConnectionsConfig.Size = new System.Drawing.Size(260, 22);
-			this.mMenViewJumpToConnectionsConfig.Text = "Connections && Config";
+			mMenViewJumpToConnectionsConfig.Image = Resources.Root;
+			mMenViewJumpToConnectionsConfig.Name = "mMenViewJumpToConnectionsConfig";
+			mMenViewJumpToConnectionsConfig.ShortcutKeys = (Keys) ((Keys.Control | Keys.Alt) 
+				| Keys.C);
+			mMenViewJumpToConnectionsConfig.Size = new Size(260, 22);
+			mMenViewJumpToConnectionsConfig.Text = "Connections && Config";
 			//
 			//mMenViewJumpToErrorsInfos
 			//
-			this.mMenViewJumpToErrorsInfos.Image = Resources.InformationSmall;
-			this.mMenViewJumpToErrorsInfos.Name = "mMenViewJumpToErrorsInfos";
-			this.mMenViewJumpToErrorsInfos.ShortcutKeys = (System.Windows.Forms.Keys) ((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
-				| System.Windows.Forms.Keys.E);
-			this.mMenViewJumpToErrorsInfos.Size = new System.Drawing.Size(260, 22);
-			this.mMenViewJumpToErrorsInfos.Text = "Errors && Infos";
+			mMenViewJumpToErrorsInfos.Image = Resources.InformationSmall;
+			mMenViewJumpToErrorsInfos.Name = "mMenViewJumpToErrorsInfos";
+			mMenViewJumpToErrorsInfos.ShortcutKeys = (Keys) ((Keys.Control | Keys.Alt) 
+				| Keys.E);
+			mMenViewJumpToErrorsInfos.Size = new Size(260, 22);
+			mMenViewJumpToErrorsInfos.Text = "Errors && Infos";
 			//
 			//mMenViewResetLayout
 			//
-			this.mMenViewResetLayout.Image = Resources.application_side_tree;
-			this.mMenViewResetLayout.Name = "mMenViewResetLayout";
-			this.mMenViewResetLayout.Size = new System.Drawing.Size(228, 22);
-			this.mMenViewResetLayout.Text = "Reset Layout";
+			mMenViewResetLayout.Image = Resources.application_side_tree;
+			mMenViewResetLayout.Name = "mMenViewResetLayout";
+			mMenViewResetLayout.Size = new Size(228, 22);
+			mMenViewResetLayout.Text = "Reset Layout";
 			//
 			//mMenViewSep2
 			//
-			this.mMenViewSep2.Name = "mMenViewSep2";
-			this.mMenViewSep2.Size = new System.Drawing.Size(225, 6);
+			mMenViewSep2.Name = "mMenViewSep2";
+			mMenViewSep2.Size = new Size(225, 6);
 			//
 			//mMenViewQuickConnectToolbar
 			//
-			this.mMenViewQuickConnectToolbar.Image = Resources.Play_Quick;
-			this.mMenViewQuickConnectToolbar.Name = "mMenViewQuickConnectToolbar";
-			this.mMenViewQuickConnectToolbar.Size = new System.Drawing.Size(228, 22);
-			this.mMenViewQuickConnectToolbar.Text = "Quick Connect Toolbar";
+			mMenViewQuickConnectToolbar.Image = Resources.Play_Quick;
+			mMenViewQuickConnectToolbar.Name = "mMenViewQuickConnectToolbar";
+			mMenViewQuickConnectToolbar.Size = new Size(228, 22);
+			mMenViewQuickConnectToolbar.Text = "Quick Connect Toolbar";
 			//
 			//mMenViewExtAppsToolbar
 			//
-			this.mMenViewExtAppsToolbar.Image = Resources.ExtApp;
-			this.mMenViewExtAppsToolbar.Name = "mMenViewExtAppsToolbar";
-			this.mMenViewExtAppsToolbar.Size = new System.Drawing.Size(228, 22);
-			this.mMenViewExtAppsToolbar.Text = "External Applications Toolbar";
+			mMenViewExtAppsToolbar.Image = Resources.ExtApp;
+			mMenViewExtAppsToolbar.Name = "mMenViewExtAppsToolbar";
+			mMenViewExtAppsToolbar.Size = new Size(228, 22);
+			mMenViewExtAppsToolbar.Text = "External Applications Toolbar";
 			//
 			//mMenViewSep3
 			//
-			this.mMenViewSep3.Name = "mMenViewSep3";
-			this.mMenViewSep3.Size = new System.Drawing.Size(225, 6);
+			mMenViewSep3.Name = "mMenViewSep3";
+			mMenViewSep3.Size = new Size(225, 6);
 			//
 			//mMenViewFullscreen
 			//
-			this.mMenViewFullscreen.Image = Resources.arrow_out;
-			this.mMenViewFullscreen.Name = "mMenViewFullscreen";
-			this.mMenViewFullscreen.ShortcutKeys = System.Windows.Forms.Keys.F11;
-			this.mMenViewFullscreen.Size = new System.Drawing.Size(228, 22);
-			this.mMenViewFullscreen.Text = "Full Screen";
+			mMenViewFullscreen.Image = Resources.arrow_out;
+			mMenViewFullscreen.Name = "mMenViewFullscreen";
+			mMenViewFullscreen.ShortcutKeys = Keys.F11;
+			mMenViewFullscreen.Size = new Size(228, 22);
+			mMenViewFullscreen.Text = "Full Screen";
 			//
 			//mMenTools
 			//
-			this.mMenTools.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenToolsSSHTransfer, this.mMenToolsUVNCSC, this.mMenToolsExternalApps, this.mMenToolsPortScan, this.mMenToolsSep1, this.mMenToolsComponentsCheck, this.mMenToolsOptions});
-			this.mMenTools.Name = "mMenTools";
-			this.mMenTools.Size = new System.Drawing.Size(48, 20);
-			this.mMenTools.Text = "&Tools";
+			mMenTools.DropDownItems.AddRange(new ToolStripItem[] {mMenToolsSSHTransfer, mMenToolsUVNCSC, mMenToolsExternalApps, mMenToolsPortScan, mMenToolsSep1, mMenToolsComponentsCheck, mMenToolsOptions});
+			mMenTools.Name = "mMenTools";
+			mMenTools.Size = new Size(48, 20);
+			mMenTools.Text = "&Tools";
 			//
 			//mMenToolsSSHTransfer
 			//
-			this.mMenToolsSSHTransfer.Image = Resources.SSHTransfer;
-			this.mMenToolsSSHTransfer.Name = "mMenToolsSSHTransfer";
-			this.mMenToolsSSHTransfer.Size = new System.Drawing.Size(184, 22);
-			this.mMenToolsSSHTransfer.Text = "SSH File Transfer";
+			mMenToolsSSHTransfer.Image = Resources.SSHTransfer;
+			mMenToolsSSHTransfer.Name = "mMenToolsSSHTransfer";
+			mMenToolsSSHTransfer.Size = new Size(184, 22);
+			mMenToolsSSHTransfer.Text = "SSH File Transfer";
 			//
 			//mMenToolsUVNCSC
 			//
-			this.mMenToolsUVNCSC.Image = Resources.UVNC_SC;
-			this.mMenToolsUVNCSC.Name = "mMenToolsUVNCSC";
-			this.mMenToolsUVNCSC.Size = new System.Drawing.Size(184, 22);
-			this.mMenToolsUVNCSC.Text = "UltraVNC SingleClick";
-			this.mMenToolsUVNCSC.Visible = false;
+			mMenToolsUVNCSC.Image = Resources.UVNC_SC;
+			mMenToolsUVNCSC.Name = "mMenToolsUVNCSC";
+			mMenToolsUVNCSC.Size = new Size(184, 22);
+			mMenToolsUVNCSC.Text = "UltraVNC SingleClick";
+			mMenToolsUVNCSC.Visible = false;
 			//
 			//mMenToolsExternalApps
 			//
-			this.mMenToolsExternalApps.Image = Resources.ExtApp;
-			this.mMenToolsExternalApps.Name = "mMenToolsExternalApps";
-			this.mMenToolsExternalApps.Size = new System.Drawing.Size(184, 22);
-			this.mMenToolsExternalApps.Text = "External Applications";
+			mMenToolsExternalApps.Image = Resources.ExtApp;
+			mMenToolsExternalApps.Name = "mMenToolsExternalApps";
+			mMenToolsExternalApps.Size = new Size(184, 22);
+			mMenToolsExternalApps.Text = "External Applications";
 			//
 			//mMenToolsPortScan
 			//
-			this.mMenToolsPortScan.Image = Resources.PortScan;
-			this.mMenToolsPortScan.Name = "mMenToolsPortScan";
-			this.mMenToolsPortScan.Size = new System.Drawing.Size(184, 22);
-			this.mMenToolsPortScan.Text = "Port Scan";
+			mMenToolsPortScan.Image = Resources.PortScan;
+			mMenToolsPortScan.Name = "mMenToolsPortScan";
+			mMenToolsPortScan.Size = new Size(184, 22);
+			mMenToolsPortScan.Text = "Port Scan";
 			//
 			//mMenToolsSep1
 			//
-			this.mMenToolsSep1.Name = "mMenToolsSep1";
-			this.mMenToolsSep1.Size = new System.Drawing.Size(181, 6);
+			mMenToolsSep1.Name = "mMenToolsSep1";
+			mMenToolsSep1.Size = new Size(181, 6);
 			//
 			//mMenToolsComponentsCheck
 			//
-			this.mMenToolsComponentsCheck.Image = Resources.cog_error;
-			this.mMenToolsComponentsCheck.Name = "mMenToolsComponentsCheck";
-			this.mMenToolsComponentsCheck.Size = new System.Drawing.Size(184, 22);
-			this.mMenToolsComponentsCheck.Text = "Components Check";
+			mMenToolsComponentsCheck.Image = Resources.cog_error;
+			mMenToolsComponentsCheck.Name = "mMenToolsComponentsCheck";
+			mMenToolsComponentsCheck.Size = new Size(184, 22);
+			mMenToolsComponentsCheck.Text = "Components Check";
 			//
 			//mMenToolsOptions
 			//
-			this.mMenToolsOptions.Image = (System.Drawing.Image) (resources.GetObject("mMenToolsOptions.Image"));
-			this.mMenToolsOptions.Name = "mMenToolsOptions";
-			this.mMenToolsOptions.Size = new System.Drawing.Size(184, 22);
-			this.mMenToolsOptions.Text = "Options";
+			mMenToolsOptions.Image = (Image) (resources.GetObject("mMenToolsOptions.Image"));
+			mMenToolsOptions.Name = "mMenToolsOptions";
+			mMenToolsOptions.Size = new Size(184, 22);
+			mMenToolsOptions.Text = "Options";
 			//
 			//mMenInfo
 			//
-			this.mMenInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenInfoHelp, this.mMenInfoSep1, this.mMenInfoWebsite, this.mMenInfoDonate, this.mMenInfoForum, this.mMenInfoBugReport, this.ToolStripSeparator2, this.mMenInfoAnnouncements, this.mMenToolsUpdate, this.mMenInfoSep2, this.mMenInfoAbout});
-			this.mMenInfo.Name = "mMenInfo";
-			this.mMenInfo.Size = new System.Drawing.Size(44, 20);
-			this.mMenInfo.Text = "&Help";
-			this.mMenInfo.TextDirection = System.Windows.Forms.ToolStripTextDirection.Horizontal;
+			mMenInfo.DropDownItems.AddRange(new ToolStripItem[] {mMenInfoHelp, mMenInfoSep1, mMenInfoWebsite, mMenInfoDonate, mMenInfoForum, mMenInfoBugReport, ToolStripSeparator2, mMenInfoAnnouncements, mMenToolsUpdate, mMenInfoSep2, mMenInfoAbout});
+			mMenInfo.Name = "mMenInfo";
+			mMenInfo.Size = new Size(44, 20);
+			mMenInfo.Text = "&Help";
+			mMenInfo.TextDirection = ToolStripTextDirection.Horizontal;
 			//
 			//mMenInfoHelp
 			//
-			this.mMenInfoHelp.Image = (System.Drawing.Image) (resources.GetObject("mMenInfoHelp.Image"));
-			this.mMenInfoHelp.Name = "mMenInfoHelp";
-			this.mMenInfoHelp.ShortcutKeys = System.Windows.Forms.Keys.F1;
-			this.mMenInfoHelp.Size = new System.Drawing.Size(190, 22);
-			this.mMenInfoHelp.Text = "mRemoteNG Help";
+			mMenInfoHelp.Image = (Image) (resources.GetObject("mMenInfoHelp.Image"));
+			mMenInfoHelp.Name = "mMenInfoHelp";
+			mMenInfoHelp.ShortcutKeys = Keys.F1;
+			mMenInfoHelp.Size = new Size(190, 22);
+			mMenInfoHelp.Text = "mRemoteNG Help";
 			//
 			//mMenInfoSep1
 			//
-			this.mMenInfoSep1.Name = "mMenInfoSep1";
-			this.mMenInfoSep1.Size = new System.Drawing.Size(187, 6);
+			mMenInfoSep1.Name = "mMenInfoSep1";
+			mMenInfoSep1.Size = new Size(187, 6);
 			//
 			//mMenInfoWebsite
 			//
-			this.mMenInfoWebsite.Image = (System.Drawing.Image) (resources.GetObject("mMenInfoWebsite.Image"));
-			this.mMenInfoWebsite.Name = "mMenInfoWebsite";
-			this.mMenInfoWebsite.Size = new System.Drawing.Size(190, 22);
-			this.mMenInfoWebsite.Text = "Website";
+			mMenInfoWebsite.Image = (Image) (resources.GetObject("mMenInfoWebsite.Image"));
+			mMenInfoWebsite.Name = "mMenInfoWebsite";
+			mMenInfoWebsite.Size = new Size(190, 22);
+			mMenInfoWebsite.Text = "Website";
 			//
 			//mMenInfoDonate
 			//
-			this.mMenInfoDonate.Image = Resources.Donate;
-			this.mMenInfoDonate.Name = "mMenInfoDonate";
-			this.mMenInfoDonate.Size = new System.Drawing.Size(190, 22);
-			this.mMenInfoDonate.Text = "Donate";
+			mMenInfoDonate.Image = Resources.Donate;
+			mMenInfoDonate.Name = "mMenInfoDonate";
+			mMenInfoDonate.Size = new Size(190, 22);
+			mMenInfoDonate.Text = "Donate";
 			//
 			//mMenInfoForum
 			//
-			this.mMenInfoForum.Image = Resources.user_comment;
-			this.mMenInfoForum.Name = "mMenInfoForum";
-			this.mMenInfoForum.Size = new System.Drawing.Size(190, 22);
-			this.mMenInfoForum.Text = "Support Forum";
+			mMenInfoForum.Image = Resources.user_comment;
+			mMenInfoForum.Name = "mMenInfoForum";
+			mMenInfoForum.Size = new Size(190, 22);
+			mMenInfoForum.Text = "Support Forum";
 			//
 			//mMenInfoBugReport
 			//
-			this.mMenInfoBugReport.Image = Resources.Bug;
-			this.mMenInfoBugReport.Name = "mMenInfoBugReport";
-			this.mMenInfoBugReport.Size = new System.Drawing.Size(190, 22);
-			this.mMenInfoBugReport.Text = "Report a Bug";
+			mMenInfoBugReport.Image = Resources.Bug;
+			mMenInfoBugReport.Name = "mMenInfoBugReport";
+			mMenInfoBugReport.Size = new Size(190, 22);
+			mMenInfoBugReport.Text = "Report a Bug";
 			//
 			//ToolStripSeparator2
 			//
-			this.ToolStripSeparator2.Name = "ToolStripSeparator2";
-			this.ToolStripSeparator2.Size = new System.Drawing.Size(187, 6);
+			ToolStripSeparator2.Name = "ToolStripSeparator2";
+			ToolStripSeparator2.Size = new Size(187, 6);
 			//
 			//mMenInfoAnnouncements
 			//
-			this.mMenInfoAnnouncements.Image = Resources.News;
-			this.mMenInfoAnnouncements.Name = "mMenInfoAnnouncements";
-			this.mMenInfoAnnouncements.Size = new System.Drawing.Size(190, 22);
-			this.mMenInfoAnnouncements.Text = "Announcements";
+			mMenInfoAnnouncements.Image = Resources.News;
+			mMenInfoAnnouncements.Name = "mMenInfoAnnouncements";
+			mMenInfoAnnouncements.Size = new Size(190, 22);
+			mMenInfoAnnouncements.Text = "Announcements";
 			//
 			//mMenToolsUpdate
 			//
-			this.mMenToolsUpdate.Image = Resources.Update;
-			this.mMenToolsUpdate.Name = "mMenToolsUpdate";
-			this.mMenToolsUpdate.Size = new System.Drawing.Size(190, 22);
-			this.mMenToolsUpdate.Text = "Check for Updates";
+			mMenToolsUpdate.Image = Resources.Update;
+			mMenToolsUpdate.Name = "mMenToolsUpdate";
+			mMenToolsUpdate.Size = new Size(190, 22);
+			mMenToolsUpdate.Text = "Check for Updates";
 			//
 			//mMenInfoSep2
 			//
-			this.mMenInfoSep2.Name = "mMenInfoSep2";
-			this.mMenInfoSep2.Size = new System.Drawing.Size(187, 6);
+			mMenInfoSep2.Name = "mMenInfoSep2";
+			mMenInfoSep2.Size = new Size(187, 6);
 			//
 			//mMenInfoAbout
 			//
-			this.mMenInfoAbout.Image = Resources.mRemote;
-			this.mMenInfoAbout.Name = "mMenInfoAbout";
-			this.mMenInfoAbout.Size = new System.Drawing.Size(190, 22);
-			this.mMenInfoAbout.Text = "About mRemoteNG";
+			mMenInfoAbout.Image = Resources.mRemote;
+			mMenInfoAbout.Name = "mMenInfoAbout";
+			mMenInfoAbout.Size = new Size(190, 22);
+			mMenInfoAbout.Text = "About mRemoteNG";
 			//
 			//mMenSep3
 			//
-			this.mMenSep3.Name = "mMenSep3";
-			this.mMenSep3.Size = new System.Drawing.Size(211, 6);
+			mMenSep3.Name = "mMenSep3";
+			mMenSep3.Size = new Size(211, 6);
 			//
 			//lblQuickConnect
 			//
-			this.lblQuickConnect.Name = "lblQuickConnect";
-			this.lblQuickConnect.Size = new System.Drawing.Size(55, 22);
-			this.lblQuickConnect.Text = "&Connect:";
+			lblQuickConnect.Name = "lblQuickConnect";
+			lblQuickConnect.Size = new Size(55, 22);
+			lblQuickConnect.Text = "&Connect:";
 			//
 			//cmbQuickConnect
 			//
-			this.cmbQuickConnect.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-			this.cmbQuickConnect.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-			this.cmbQuickConnect.Margin = new System.Windows.Forms.Padding(1, 0, 3, 0);
-			this.cmbQuickConnect.Name = "cmbQuickConnect";
-			this.cmbQuickConnect.Size = new System.Drawing.Size(200, 25);
+			cmbQuickConnect.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			cmbQuickConnect.AutoCompleteSource = AutoCompleteSource.ListItems;
+			cmbQuickConnect.Margin = new Padding(1, 0, 3, 0);
+			cmbQuickConnect.Name = "cmbQuickConnect";
+			cmbQuickConnect.Size = new Size(200, 25);
 			//
 			//tsContainer
 			//
 			//
 			//tsContainer.BottomToolStripPanel
 			//
-			this.tsContainer.BottomToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+			tsContainer.BottomToolStripPanel.RenderMode = ToolStripRenderMode.Professional;
 			//
 			//tsContainer.ContentPanel
 			//
-			this.tsContainer.ContentPanel.Controls.Add(this.pnlDock);
-			this.tsContainer.ContentPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			this.tsContainer.ContentPanel.Size = new System.Drawing.Size(842, 449);
-			this.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+			tsContainer.ContentPanel.Controls.Add(pnlDock);
+			tsContainer.ContentPanel.RenderMode = ToolStripRenderMode.Professional;
+			tsContainer.ContentPanel.Size = new Size(842, 449);
+			tsContainer.Dock = DockStyle.Fill;
 			//
 			//tsContainer.LeftToolStripPanel
 			//
-			this.tsContainer.LeftToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			this.tsContainer.Location = new System.Drawing.Point(0, 0);
-			this.tsContainer.Name = "tsContainer";
+			tsContainer.LeftToolStripPanel.RenderMode = ToolStripRenderMode.Professional;
+			tsContainer.Location = new Point(0, 0);
+			tsContainer.Name = "tsContainer";
 			//
 			//tsContainer.RightToolStripPanel
 			//
-			this.tsContainer.RightToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			this.tsContainer.Size = new System.Drawing.Size(842, 523);
-			this.tsContainer.TabIndex = 17;
-			this.tsContainer.Text = "ToolStripContainer1";
+			tsContainer.RightToolStripPanel.RenderMode = ToolStripRenderMode.Professional;
+			tsContainer.Size = new Size(842, 523);
+			tsContainer.TabIndex = 17;
+			tsContainer.Text = "ToolStripContainer1";
 			//
 			//tsContainer.TopToolStripPanel
 			//
-			this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
-			this.tsContainer.TopToolStripPanel.Controls.Add(this.tsQuickConnect);
-			this.tsContainer.TopToolStripPanel.Controls.Add(this.tsExternalTools);
-			this.tsContainer.TopToolStripPanel.Controls.Add(this.ToolStrip1);
-			this.tsContainer.TopToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
+			tsContainer.TopToolStripPanel.Controls.Add(msMain);
+			tsContainer.TopToolStripPanel.Controls.Add(tsQuickConnect);
+			tsContainer.TopToolStripPanel.Controls.Add(tsExternalTools);
+			tsContainer.TopToolStripPanel.Controls.Add(ToolStrip1);
+			tsContainer.TopToolStripPanel.RenderMode = ToolStripRenderMode.Professional;
 			//
 			//tsQuickConnect
 			//
-			this.tsQuickConnect.Dock = System.Windows.Forms.DockStyle.None;
-			this.tsQuickConnect.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.lblQuickConnect, this.cmbQuickConnect, this.btnQuickConnect, this.btnConnections});
-			this.tsQuickConnect.Location = new System.Drawing.Point(3, 24);
-			this.tsQuickConnect.MaximumSize = new System.Drawing.Size(0, 25);
-			this.tsQuickConnect.Name = "tsQuickConnect";
-			this.tsQuickConnect.Size = new System.Drawing.Size(387, 25);
-			this.tsQuickConnect.TabIndex = 18;
+			tsQuickConnect.Dock = DockStyle.None;
+			tsQuickConnect.Items.AddRange(new ToolStripItem[] {lblQuickConnect, cmbQuickConnect, btnQuickConnect, btnConnections});
+			tsQuickConnect.Location = new Point(3, 24);
+			tsQuickConnect.MaximumSize = new Size(0, 25);
+			tsQuickConnect.Name = "tsQuickConnect";
+			tsQuickConnect.Size = new Size(387, 25);
+			tsQuickConnect.TabIndex = 18;
 			//
 			//btnQuickConnect
 			//
-			this.btnQuickConnect.DropDown = this.mnuQuickConnectProtocol;
-			this.btnQuickConnect.Image = Resources.Play_Quick;
-			this.btnQuickConnect.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnQuickConnect.Margin = new System.Windows.Forms.Padding(0, 1, 3, 2);
-			this.btnQuickConnect.Name = "btnQuickConnect";
-			this.btnQuickConnect.Size = new System.Drawing.Size(84, 22);
-			this.btnQuickConnect.Text = "Connect";
+			btnQuickConnect.DropDown = mnuQuickConnectProtocol;
+			btnQuickConnect.Image = Resources.Play_Quick;
+			btnQuickConnect.ImageTransparentColor = Color.Magenta;
+			btnQuickConnect.Margin = new Padding(0, 1, 3, 2);
+			btnQuickConnect.Name = "btnQuickConnect";
+			btnQuickConnect.Size = new Size(84, 22);
+			btnQuickConnect.Text = "Connect";
 			//
 			//mnuQuickConnectProtocol
 			//
-			this.mnuQuickConnectProtocol.Name = "mnuQuickConnectProtocol";
-			this.mnuQuickConnectProtocol.OwnerItem = this.btnQuickConnect;
-			this.mnuQuickConnectProtocol.ShowCheckMargin = true;
-			this.mnuQuickConnectProtocol.ShowImageMargin = false;
-			this.mnuQuickConnectProtocol.Size = new System.Drawing.Size(61, 4);
+			mnuQuickConnectProtocol.Name = "mnuQuickConnectProtocol";
+			mnuQuickConnectProtocol.OwnerItem = btnQuickConnect;
+			mnuQuickConnectProtocol.ShowCheckMargin = true;
+			mnuQuickConnectProtocol.ShowImageMargin = false;
+			mnuQuickConnectProtocol.Size = new Size(61, 4);
 			//
 			//btnConnections
 			//
-			this.btnConnections.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.btnConnections.DropDown = this.mnuConnections;
-			this.btnConnections.Image = Resources.Root;
-			this.btnConnections.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None;
-			this.btnConnections.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.btnConnections.Name = "btnConnections";
-			this.btnConnections.Size = new System.Drawing.Size(29, 22);
-			this.btnConnections.Text = "Connections";
+			btnConnections.DisplayStyle = ToolStripItemDisplayStyle.Image;
+			btnConnections.DropDown = mnuConnections;
+			btnConnections.Image = Resources.Root;
+			btnConnections.ImageScaling = ToolStripItemImageScaling.None;
+			btnConnections.ImageTransparentColor = Color.Magenta;
+			btnConnections.Name = "btnConnections";
+			btnConnections.Size = new Size(29, 22);
+			btnConnections.Text = "Connections";
 			//
 			//mnuConnections
 			//
-			this.mnuConnections.Name = "mnuConnections";
-			this.mnuConnections.OwnerItem = this.btnConnections;
-			this.mnuConnections.Size = new System.Drawing.Size(61, 4);
+			mnuConnections.Name = "mnuConnections";
+			mnuConnections.OwnerItem = btnConnections;
+			mnuConnections.Size = new Size(61, 4);
 			//
 			//tsExternalTools
 			//
-			this.tsExternalTools.ContextMenuStrip = this.cMenExtAppsToolbar;
-			this.tsExternalTools.Dock = System.Windows.Forms.DockStyle.None;
-			this.tsExternalTools.Location = new System.Drawing.Point(39, 49);
-			this.tsExternalTools.MaximumSize = new System.Drawing.Size(0, 25);
-			this.tsExternalTools.Name = "tsExternalTools";
-			this.tsExternalTools.Size = new System.Drawing.Size(111, 25);
-			this.tsExternalTools.TabIndex = 17;
+			tsExternalTools.ContextMenuStrip = cMenExtAppsToolbar;
+			tsExternalTools.Dock = DockStyle.None;
+			tsExternalTools.Location = new Point(39, 49);
+			tsExternalTools.MaximumSize = new Size(0, 25);
+			tsExternalTools.Name = "tsExternalTools";
+			tsExternalTools.Size = new Size(111, 25);
+			tsExternalTools.TabIndex = 17;
 			//
 			//cMenExtAppsToolbar
 			//
-			this.cMenExtAppsToolbar.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.cMenToolbarShowText});
-			this.cMenExtAppsToolbar.Name = "cMenToolbar";
-			this.cMenExtAppsToolbar.Size = new System.Drawing.Size(129, 26);
+			cMenExtAppsToolbar.Items.AddRange(new ToolStripItem[] {cMenToolbarShowText});
+			cMenExtAppsToolbar.Name = "cMenToolbar";
+			cMenExtAppsToolbar.Size = new Size(129, 26);
 			//
 			//cMenToolbarShowText
 			//
-			this.cMenToolbarShowText.Checked = true;
-			this.cMenToolbarShowText.CheckState = System.Windows.Forms.CheckState.Checked;
-			this.cMenToolbarShowText.Name = "cMenToolbarShowText";
-			this.cMenToolbarShowText.Size = new System.Drawing.Size(128, 22);
-			this.cMenToolbarShowText.Text = "Show Text";
+			cMenToolbarShowText.Checked = true;
+			cMenToolbarShowText.CheckState = CheckState.Checked;
+			cMenToolbarShowText.Name = "cMenToolbarShowText";
+			cMenToolbarShowText.Size = new Size(128, 22);
+			cMenToolbarShowText.Text = "Show Text";
 			//
 			//ToolStrip1
 			//
-			this.ToolStrip1.Dock = System.Windows.Forms.DockStyle.None;
-			this.ToolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.ToolStripButton1, this.ToolStripButton2, this.ToolStripButton3, this.ToolStripSplitButton1});
-			this.ToolStrip1.Location = new System.Drawing.Point(3, 74);
-			this.ToolStrip1.MaximumSize = new System.Drawing.Size(0, 25);
-			this.ToolStrip1.Name = "ToolStrip1";
-			this.ToolStrip1.Size = new System.Drawing.Size(0, 25);
-			this.ToolStrip1.TabIndex = 19;
-			this.ToolStrip1.Visible = false;
+			ToolStrip1.Dock = DockStyle.None;
+			ToolStrip1.Items.AddRange(new ToolStripItem[] {ToolStripButton1, ToolStripButton2, ToolStripButton3, ToolStripSplitButton1});
+			ToolStrip1.Location = new Point(3, 74);
+			ToolStrip1.MaximumSize = new Size(0, 25);
+			ToolStrip1.Name = "ToolStrip1";
+			ToolStrip1.Size = new Size(0, 25);
+			ToolStrip1.TabIndex = 19;
+			ToolStrip1.Visible = false;
 			//
 			//ToolStripButton1
 			//
-			this.ToolStripButton1.Image = Resources.Play;
-			this.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.ToolStripButton1.Name = "ToolStripButton1";
-			this.ToolStripButton1.Size = new System.Drawing.Size(72, 22);
-			this.ToolStripButton1.Text = "Connect";
+			ToolStripButton1.Image = Resources.Play;
+			ToolStripButton1.ImageTransparentColor = Color.Magenta;
+			ToolStripButton1.Name = "ToolStripButton1";
+			ToolStripButton1.Size = new Size(72, 22);
+			ToolStripButton1.Text = "Connect";
 			//
 			//ToolStripButton2
 			//
-			this.ToolStripButton2.Image = Resources.Screenshot;
-			this.ToolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.ToolStripButton2.Name = "ToolStripButton2";
-			this.ToolStripButton2.Size = new System.Drawing.Size(85, 22);
-			this.ToolStripButton2.Text = "Screenshot";
+			ToolStripButton2.Image = Resources.Screenshot;
+			ToolStripButton2.ImageTransparentColor = Color.Magenta;
+			ToolStripButton2.Name = "ToolStripButton2";
+			ToolStripButton2.Size = new Size(85, 22);
+			ToolStripButton2.Text = "Screenshot";
 			//
 			//ToolStripButton3
 			//
-			this.ToolStripButton3.Image = Resources.Refresh;
-			this.ToolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.ToolStripButton3.Name = "ToolStripButton3";
-			this.ToolStripButton3.Size = new System.Drawing.Size(66, 22);
-			this.ToolStripButton3.Text = "Refresh";
+			ToolStripButton3.Image = Resources.Refresh;
+			ToolStripButton3.ImageTransparentColor = Color.Magenta;
+			ToolStripButton3.Name = "ToolStripButton3";
+			ToolStripButton3.Size = new Size(66, 22);
+			ToolStripButton3.Text = "Refresh";
 			//
 			//ToolStripSplitButton1
 			//
-			this.ToolStripSplitButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-			this.ToolStripSplitButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.ToolStripMenuItem1, this.ToolStripMenuItem2});
-			this.ToolStripSplitButton1.Image = Resources.Keyboard;
-			this.ToolStripSplitButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
-			this.ToolStripSplitButton1.Name = "ToolStripSplitButton1";
-			this.ToolStripSplitButton1.Size = new System.Drawing.Size(29, 22);
-			this.ToolStripSplitButton1.Text = "Special Keys";
+			ToolStripSplitButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
+			ToolStripSplitButton1.DropDownItems.AddRange(new ToolStripItem[] {ToolStripMenuItem1, ToolStripMenuItem2});
+			ToolStripSplitButton1.Image = Resources.Keyboard;
+			ToolStripSplitButton1.ImageTransparentColor = Color.Magenta;
+			ToolStripSplitButton1.Name = "ToolStripSplitButton1";
+			ToolStripSplitButton1.Size = new Size(29, 22);
+			ToolStripSplitButton1.Text = "Special Keys";
 			//
 			//ToolStripMenuItem1
 			//
-			this.ToolStripMenuItem1.Name = "ToolStripMenuItem1";
-			this.ToolStripMenuItem1.Size = new System.Drawing.Size(135, 22);
-			this.ToolStripMenuItem1.Text = "Ctrl-Alt-Del";
+			ToolStripMenuItem1.Name = "ToolStripMenuItem1";
+			ToolStripMenuItem1.Size = new Size(135, 22);
+			ToolStripMenuItem1.Text = "Ctrl-Alt-Del";
 			//
 			//ToolStripMenuItem2
 			//
-			this.ToolStripMenuItem2.Name = "ToolStripMenuItem2";
-			this.ToolStripMenuItem2.Size = new System.Drawing.Size(135, 22);
-			this.ToolStripMenuItem2.Text = "Ctrl-Esc";
+			ToolStripMenuItem2.Name = "ToolStripMenuItem2";
+			ToolStripMenuItem2.Size = new Size(135, 22);
+			ToolStripMenuItem2.Text = "Ctrl-Esc";
 			//
 			//tmrAutoSave
 			//
-			this.tmrAutoSave.Interval = 10000;
+			tmrAutoSave.Interval = 10000;
 			//
 			//frmMain
 			//
-			this.AutoScaleDimensions = new System.Drawing.SizeF((float) (6.0F), (float) (13.0F));
-			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(842, 523);
-			this.Controls.Add(this.tsContainer);
-			this.Icon = Resources.mRemote_Icon;
-			this.MainMenuStrip = this.msMain;
-			this.Name = "frmMain";
-			this.Opacity = 0.0D;
-			this.Text = "mRemoteNG";
-			this.msMain.ResumeLayout(false);
-			this.msMain.PerformLayout();
-			this.tsContainer.ContentPanel.ResumeLayout(false);
-			this.tsContainer.TopToolStripPanel.ResumeLayout(false);
-			this.tsContainer.TopToolStripPanel.PerformLayout();
-			this.tsContainer.ResumeLayout(false);
-			this.tsContainer.PerformLayout();
-			this.tsQuickConnect.ResumeLayout(false);
-			this.tsQuickConnect.PerformLayout();
-			this.cMenExtAppsToolbar.ResumeLayout(false);
-			this.ToolStrip1.ResumeLayout(false);
-			this.ToolStrip1.PerformLayout();
-			this.ResumeLayout(false);
+			AutoScaleDimensions = new SizeF((float) (6.0F), (float) (13.0F));
+			AutoScaleMode = AutoScaleMode.Font;
+			ClientSize = new Size(842, 523);
+			Controls.Add(tsContainer);
+			Icon = Resources.mRemote_Icon;
+			MainMenuStrip = msMain;
+			Name = "frmMain";
+			Opacity = 0.0D;
+			Text = "mRemoteNG";
+			msMain.ResumeLayout(false);
+			msMain.PerformLayout();
+			tsContainer.ContentPanel.ResumeLayout(false);
+			tsContainer.TopToolStripPanel.ResumeLayout(false);
+			tsContainer.TopToolStripPanel.PerformLayout();
+			tsContainer.ResumeLayout(false);
+			tsContainer.PerformLayout();
+			tsQuickConnect.ResumeLayout(false);
+			tsQuickConnect.PerformLayout();
+			cMenExtAppsToolbar.ResumeLayout(false);
+			ToolStrip1.ResumeLayout(false);
+			ToolStrip1.PerformLayout();
+			ResumeLayout(false);
 			
 		}
-		internal WeifenLuo.WinFormsUI.Docking.DockPanel pnlDock;
-		internal System.Windows.Forms.MenuStrip msMain;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFile;
-		internal System.Windows.Forms.ToolStripMenuItem mMenView;
-		internal System.Windows.Forms.ToolStripMenuItem mMenTools;
-		internal System.Windows.Forms.ToolStripLabel lblQuickConnect;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfo;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileNew;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileLoad;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileSave;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileSaveAs;
-		internal System.Windows.Forms.ToolStripSeparator mMenFileSep1;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileExit;
-		internal System.Windows.Forms.ToolStripSeparator mMenToolsSep1;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsOptions;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoHelp;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoWebsite;
-		internal System.Windows.Forms.ToolStripSeparator mMenInfoSep1;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoAbout;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewConnectionPanels;
-		internal System.Windows.Forms.ToolStripSeparator mMenViewSep1;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewConnections;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewConfig;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewErrorsAndInfos;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewScreenshotManager;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewAddConnectionPanel;
+		internal DockPanel pnlDock;
+		internal MenuStrip msMain;
+		internal ToolStripMenuItem mMenFile;
+		internal ToolStripMenuItem mMenView;
+		internal ToolStripMenuItem mMenTools;
+		internal ToolStripLabel lblQuickConnect;
+		internal ToolStripMenuItem mMenInfo;
+		internal ToolStripMenuItem mMenFileNew;
+		internal ToolStripMenuItem mMenFileLoad;
+		internal ToolStripMenuItem mMenFileSave;
+		internal ToolStripMenuItem mMenFileSaveAs;
+		internal ToolStripSeparator mMenFileSep1;
+		internal ToolStripMenuItem mMenFileExit;
+		internal ToolStripSeparator mMenToolsSep1;
+		internal ToolStripMenuItem mMenToolsOptions;
+		internal ToolStripMenuItem mMenInfoHelp;
+		internal ToolStripMenuItem mMenInfoWebsite;
+		internal ToolStripSeparator mMenInfoSep1;
+		internal ToolStripMenuItem mMenInfoAbout;
+		internal ToolStripMenuItem mMenViewConnectionPanels;
+		internal ToolStripSeparator mMenViewSep1;
+		internal ToolStripMenuItem mMenViewConnections;
+		internal ToolStripMenuItem mMenViewConfig;
+		internal ToolStripMenuItem mMenViewErrorsAndInfos;
+		internal ToolStripMenuItem mMenViewScreenshotManager;
+		internal ToolStripMenuItem mMenViewAddConnectionPanel;
 		internal QuickConnectComboBox cmbQuickConnect;
-		internal System.Windows.Forms.ToolStripSeparator mMenViewSep2;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewFullscreen;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsSSHTransfer;
-		internal System.Windows.Forms.ToolStripContainer tsContainer;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsExternalApps;
-		internal System.Windows.Forms.Timer tmrAutoSave;
-		internal System.Windows.Forms.ToolStrip tsExternalTools;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewExtAppsToolbar;
-		internal System.Windows.Forms.ContextMenuStrip cMenExtAppsToolbar;
-		internal System.Windows.Forms.ToolStripMenuItem cMenToolbarShowText;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsPortScan;
-		internal System.Windows.Forms.ToolStrip tsQuickConnect;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewQuickConnectToolbar;
-		internal System.Windows.Forms.ToolStripSeparator mMenSep3;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoDonate;
-		internal System.Windows.Forms.ToolStripSeparator mMenViewSep3;
-		internal ToolStripSplitButton btnQuickConnect;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpTo;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToConnectionsConfig;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewJumpToErrorsInfos;
-		internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator1;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsUVNCSC;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsComponentsCheck;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoAnnouncements;
-		internal System.Windows.Forms.ToolStripSeparator mMenInfoSep2;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoBugReport;
-		internal System.Windows.Forms.ToolStripSeparator ToolStripSeparator2;
-		internal System.Windows.Forms.ToolStripMenuItem mMenInfoForum;
-		internal System.Windows.Forms.ToolStripMenuItem mMenToolsUpdate;
-		internal System.Windows.Forms.ToolStripMenuItem mMenViewResetLayout;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileDuplicate;
-		internal System.Windows.Forms.ToolStripSeparator mMenFileSep2;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileNewConnection;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileNewFolder;
-		internal System.Windows.Forms.ToolStripSeparator mMenFileSep3;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileDelete;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileRename;
-		internal System.Windows.Forms.ToolStripSeparator mMenFileSep4;
-		internal System.Windows.Forms.ToolStrip ToolStrip1;
-		internal System.Windows.Forms.ToolStripButton ToolStripButton1;
-		internal System.Windows.Forms.ToolStripButton ToolStripButton2;
-		internal System.Windows.Forms.ToolStripButton ToolStripButton3;
-		internal System.Windows.Forms.ToolStripDropDownButton ToolStripSplitButton1;
-		internal System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem1;
-		internal System.Windows.Forms.ToolStripMenuItem ToolStripMenuItem2;
-		internal System.Windows.Forms.ContextMenuStrip mnuQuickConnectProtocol;
-		internal System.Windows.Forms.ToolStripDropDownButton btnConnections;
-		internal System.Windows.Forms.ContextMenuStrip mnuConnections;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileExport;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileImportFromFile;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileImportFromActiveDirectory;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileImportFromPortScan;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileImport;
+		internal ToolStripSeparator mMenViewSep2;
+		internal ToolStripMenuItem mMenViewFullscreen;
+		internal ToolStripMenuItem mMenToolsSSHTransfer;
+		internal ToolStripContainer tsContainer;
+		internal ToolStripMenuItem mMenToolsExternalApps;
+		internal Timer tmrAutoSave;
+		internal ToolStrip tsExternalTools;
+		internal ToolStripMenuItem mMenViewExtAppsToolbar;
+		internal ContextMenuStrip cMenExtAppsToolbar;
+		internal ToolStripMenuItem cMenToolbarShowText;
+		internal ToolStripMenuItem mMenToolsPortScan;
+		internal ToolStrip tsQuickConnect;
+		internal ToolStripMenuItem mMenViewQuickConnectToolbar;
+		internal ToolStripSeparator mMenSep3;
+		internal ToolStripMenuItem mMenInfoDonate;
+		internal ToolStripSeparator mMenViewSep3;
+		internal mRemoteNG.Controls.ToolStripSplitButton btnQuickConnect;
+		internal ToolStripMenuItem mMenViewJumpTo;
+		internal ToolStripMenuItem mMenViewJumpToConnectionsConfig;
+		internal ToolStripMenuItem mMenViewJumpToErrorsInfos;
+		internal ToolStripSeparator ToolStripSeparator1;
+		internal ToolStripMenuItem mMenToolsUVNCSC;
+		internal ToolStripMenuItem mMenToolsComponentsCheck;
+		internal ToolStripMenuItem mMenInfoAnnouncements;
+		internal ToolStripSeparator mMenInfoSep2;
+		internal ToolStripMenuItem mMenInfoBugReport;
+		internal ToolStripSeparator ToolStripSeparator2;
+		internal ToolStripMenuItem mMenInfoForum;
+		internal ToolStripMenuItem mMenToolsUpdate;
+		internal ToolStripMenuItem mMenViewResetLayout;
+		internal ToolStripMenuItem mMenFileDuplicate;
+		internal ToolStripSeparator mMenFileSep2;
+		internal ToolStripMenuItem mMenFileNewConnection;
+		internal ToolStripMenuItem mMenFileNewFolder;
+		internal ToolStripSeparator mMenFileSep3;
+		internal ToolStripMenuItem mMenFileDelete;
+		internal ToolStripMenuItem mMenFileRename;
+		internal ToolStripSeparator mMenFileSep4;
+		internal ToolStrip ToolStrip1;
+		internal ToolStripButton ToolStripButton1;
+		internal ToolStripButton ToolStripButton2;
+		internal ToolStripButton ToolStripButton3;
+		internal ToolStripDropDownButton ToolStripSplitButton1;
+		internal ToolStripMenuItem ToolStripMenuItem1;
+		internal ToolStripMenuItem ToolStripMenuItem2;
+		internal ContextMenuStrip mnuQuickConnectProtocol;
+		internal ToolStripDropDownButton btnConnections;
+		internal ContextMenuStrip mnuConnections;
+		internal ToolStripMenuItem mMenFileExport;
+		internal ToolStripMenuItem mMenFileImportFromFile;
+		internal ToolStripMenuItem mMenFileImportFromActiveDirectory;
+		internal ToolStripMenuItem mMenFileImportFromPortScan;
+		internal ToolStripMenuItem mMenFileImport;
 		
 	}
 }
