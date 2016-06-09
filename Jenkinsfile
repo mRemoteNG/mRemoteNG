@@ -1,6 +1,6 @@
 node('windows') {
 	def jobDir = pwd()
-	def solutionFilePath = "\"${jobDir}\\mRemoteV1.sln\"
+	def solutionFilePath = "\"${jobDir}\\mRemoteV1.sln\""
 	def vsToolsDir = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\Tools"
 	def vsExtensionsDir = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
 	
