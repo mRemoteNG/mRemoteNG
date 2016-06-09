@@ -1202,7 +1202,7 @@ editbin /largeaddressaware $(TargetPath)</PostBuildEvent>
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x86\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <NoWarn>1591,660,661</NoWarn>
     <DebugType>full</DebugType>
@@ -1213,7 +1213,7 @@ editbin /largeaddressaware $(TargetPath)</PostBuildEvent>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <DebugSymbols>true</DebugSymbols>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x86\Release\</OutputPath>
+    <OutputPath>bin\Release\</OutputPath>
     <NoWarn>1591,660,661</NoWarn>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x86</PlatformTarget>
@@ -1222,7 +1222,7 @@ editbin /largeaddressaware $(TargetPath)</PostBuildEvent>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Portable|x86'">
     <DebugSymbols>true</DebugSymbols>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x86\Release Portable\</OutputPath>
+    <OutputPath>bin\Release Portable\</OutputPath>
     <DefineConstants>PORTABLE</DefineConstants>
     <NoWarn>1591,660,661</NoWarn>
     <DebugType>pdbonly</DebugType>
@@ -1234,7 +1234,7 @@ editbin /largeaddressaware $(TargetPath)</PostBuildEvent>
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
-    <OutputPath>bin\x86\Debug Portable\</OutputPath>
+    <OutputPath>bin\Debug Portable\</OutputPath>
     <DefineConstants>DEBUG;PORTABLE</DefineConstants>
     <NoWarn>1591,660,661</NoWarn>
     <DebugType>full</DebugType>
