@@ -1,5 +1,6 @@
 node('windows') {
 	def jobDir = pwd()
+	def solutionFilePath = "\"${jobDir}\\mRemoteV1.sln\"
 	def vsToolsDir = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\Tools"
 	def vsExtensionsDir = "C:\\Program Files (x86)\\Microsoft Visual Studio 14.0\\Common7\\IDE\\CommonExtensions\\Microsoft\\TestWindow"
 	
@@ -8,6 +9,10 @@ node('windows') {
 	def branchName = GetBranchName()
 	echo "BranchName: ${branchName}"
 	git([url: gitUrl, branch: branchName])
+
+	stage 'Restore NuGet Packages'
+	def nugetPath = "C:\\nuget.exe"
+	bat "${nugetPath} restore ${solutionFilePath}"
 
 	stage 'Build mRemoteNG (Normal)'
 	bat "\"${vsToolsDir}\\VsDevCmd.bat\" && msbuild.exe /nologo \"${jobDir}\\mRemoteV1.sln\""
