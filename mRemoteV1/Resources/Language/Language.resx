@@ -2018,7 +2018,7 @@ Message:
     <value>Single click on connection opens it</value>
   </data>
   <data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
-    <value>Single click on opened connection switches to it</value>
+    <value>Single click on opened connection in Connection Tree switches to opened Connection Tab</value>
   </data>
   <data name="strSmartSizeModeAspect" xml:space="preserve">
     <value>Aspect</value>
