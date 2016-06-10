@@ -293,7 +293,7 @@ Veuillez utiliser le menu Fichier - Ouvrir un fichier de connexion pour les fich
     <value>Pour utiliser le moteur de rendu Gecko, vous devez avoir XULrunner 1.8.1.x et le chemin d'accès correctement renseigné dans vos Options. Vous pouvez télécharger XULrunner 1.8.1.3 ici : ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/ Lorsque vous avez terminé le téléchargement, extraire le package vers le chemin de votre choix. Puis dans mRemoteNG, allez dans Outils - Options - Avancées et entrez le chemin d'accès correct dans "chemin de XULrunner". Si vous n'êtes toujours pas en mesure de passer cette vérification ou d'utiliser le moteur Gecko dans mRemoteNG, veuillez consulter le Forum de mRemoteNG sur http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
-    <value>XULRunner a été trouvé et semble être installé correctement.</value>
+    <value>GeckoFx a été trouvé et semble être installé correctement.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA requiert l'installation du Plugin XenDesktop Online, ainsi que l'enregistrement de la librairie wfica.ocx. Vous pouvez télécharger le client ici : http://www.citrix.com/download/

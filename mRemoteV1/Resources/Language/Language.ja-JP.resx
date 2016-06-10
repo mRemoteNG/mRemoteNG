@@ -307,7 +307,7 @@ When you are finished downloading extract the package to a path of your choice. 
 If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
-    <value>XULrunner was found and seems to be installed properly.</value>
+    <value>GeckoFx was found and seems to be installed properly.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/

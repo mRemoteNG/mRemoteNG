@@ -299,7 +299,7 @@ Wenn der Download abgeschlossen ist, entpacken Sie das Paket (Der Speicherort is
 Wenn Sie noch immer Probleme mit der Gecko Engine in mRemote haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
-    <value>XULrunner wurde gefunden und scheint korrekt installiert zu sein.</value>
+    <value>GeckoFx wurde gefunden und scheint korrekt installiert zu sein.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA benötigt eine funktionierende XenDesktop-Online-Plugin-Installation und dass die Datei wfica.ocx korrekt registriert ist. Hier können Sie das Plugin herunterladen: http://www.citrix.com/download/

@@ -69,10 +69,10 @@ Copyright © 2015 @roken and @lextm (formerly Weifen Luo)
 MIT License
 https://github.com/dockpanelsuite/dockpanelsuite
 
-GeckoFX 1.8.1.4
-Copyright © 2008 Skybound Software
-Mozilla Public License 1.1
-http://www.geckofx.org/
+GeckoFX 45
+Copyright © 2016 Tom Hindle
+Mozilla Public License
+https://bitbucket.org/geckofx/
 
 log4net 1.2.15.0
 Copyright © 2001-2015 The Apache Software Foundation
@@ -88,10 +88,6 @@ Mentalis.org Security Library 1.0.13.715
 Copyright © 2002-2005 The Mentalis.org Team
 Modified New BSD License
 http://www.mentalis.org/
-
-MiniGeckoBrowser 1.0
-Copyright © 2008 Felix Deimel
-http://www.appjuice.org/
 
 PuTTY 0.67
 Copyright © 1997-2016 Simon Tatham

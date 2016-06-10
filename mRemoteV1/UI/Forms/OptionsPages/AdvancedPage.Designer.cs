@@ -35,15 +35,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AdvancedPage));
             this.chkWriteLogFile = new System.Windows.Forms.CheckBox();
             this.chkAutomaticallyGetSessionInfo = new System.Windows.Forms.CheckBox();
-            this.lblXulRunnerPath = new System.Windows.Forms.Label();
             this.lblMaximumPuttyWaitTime = new System.Windows.Forms.Label();
             this.chkEncryptCompleteFile = new System.Windows.Forms.CheckBox();
             this.chkAutomaticReconnect = new System.Windows.Forms.CheckBox();
-            this.btnBrowseXulRunnerPath = new System.Windows.Forms.Button();
             this.numPuttyWaitTime = new System.Windows.Forms.NumericUpDown();
             this.chkUseCustomPuttyPath = new System.Windows.Forms.CheckBox();
             this.lblConfigurePuttySessions = new System.Windows.Forms.Label();
-            this.txtXULrunnerPath = new System.Windows.Forms.TextBox();
             this.numUVNCSCPort = new System.Windows.Forms.NumericUpDown();
             this.txtCustomPuttyPath = new System.Windows.Forms.TextBox();
             this.btnLaunchPutty = new System.Windows.Forms.Button();
@@ -74,15 +71,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkAutomaticallyGetSessionInfo.Text = "Automatically get session information";
             this.chkAutomaticallyGetSessionInfo.UseVisualStyleBackColor = true;
             // 
-            // lblXulRunnerPath
-            // 
-            this.lblXulRunnerPath.AutoSize = true;
-            this.lblXulRunnerPath.Location = new System.Drawing.Point(3, 240);
-            this.lblXulRunnerPath.Name = "lblXulRunnerPath";
-            this.lblXulRunnerPath.Size = new System.Drawing.Size(90, 13);
-            this.lblXulRunnerPath.TabIndex = 29;
-            this.lblXulRunnerPath.Text = "XULRunner path:";
-            // 
             // lblMaximumPuttyWaitTime
             // 
             this.lblMaximumPuttyWaitTime.Location = new System.Drawing.Point(3, 195);
@@ -111,16 +99,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.chkAutomaticReconnect.TabIndex = 20;
             this.chkAutomaticReconnect.Text = "Automatically try to reconnect when disconnected from server (RDP && ICA only)";
             this.chkAutomaticReconnect.UseVisualStyleBackColor = true;
-            // 
-            // btnBrowseXulRunnerPath
-            // 
-            this.btnBrowseXulRunnerPath.Location = new System.Drawing.Point(373, 262);
-            this.btnBrowseXulRunnerPath.Name = "btnBrowseXulRunnerPath";
-            this.btnBrowseXulRunnerPath.Size = new System.Drawing.Size(75, 23);
-            this.btnBrowseXulRunnerPath.TabIndex = 31;
-            this.btnBrowseXulRunnerPath.Text = "Browse...";
-            this.btnBrowseXulRunnerPath.UseVisualStyleBackColor = true;
-            this.btnBrowseXulRunnerPath.Click += new System.EventHandler(this.btnBrowseXulRunnerPath_Click);
             // 
             // numPuttyWaitTime
             // 
@@ -160,14 +138,6 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.lblConfigurePuttySessions.Text = "To configure PuTTY sessions click this button:";
             this.lblConfigurePuttySessions.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
-            // txtXULrunnerPath
-            // 
-            this.txtXULrunnerPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.txtXULrunnerPath.Location = new System.Drawing.Point(21, 264);
-            this.txtXULrunnerPath.Name = "txtXULrunnerPath";
-            this.txtXULrunnerPath.Size = new System.Drawing.Size(346, 20);
-            this.txtXULrunnerPath.TabIndex = 30;
-            // 
             // numUVNCSCPort
             // 
             this.numUVNCSCPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
@@ -199,7 +169,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             // 
             // btnLaunchPutty
             // 
-            this.btnLaunchPutty.Image = Resources.PuttyConfig;
+            this.btnLaunchPutty.Image = global::mRemoteNG.Resources.PuttyConfig;
             this.btnLaunchPutty.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnLaunchPutty.Location = new System.Drawing.Point(373, 159);
             this.btnLaunchPutty.Name = "btnLaunchPutty";
@@ -246,15 +216,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.chkWriteLogFile);
             this.Controls.Add(this.chkAutomaticallyGetSessionInfo);
-            this.Controls.Add(this.lblXulRunnerPath);
             this.Controls.Add(this.lblMaximumPuttyWaitTime);
             this.Controls.Add(this.chkEncryptCompleteFile);
             this.Controls.Add(this.chkAutomaticReconnect);
-            this.Controls.Add(this.btnBrowseXulRunnerPath);
             this.Controls.Add(this.numPuttyWaitTime);
             this.Controls.Add(this.chkUseCustomPuttyPath);
             this.Controls.Add(this.lblConfigurePuttySessions);
-            this.Controls.Add(this.txtXULrunnerPath);
             this.Controls.Add(this.numUVNCSCPort);
             this.Controls.Add(this.txtCustomPuttyPath);
             this.Controls.Add(this.btnLaunchPutty);
@@ -272,15 +239,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 		}
 		internal System.Windows.Forms.CheckBox chkWriteLogFile;
 		internal System.Windows.Forms.CheckBox chkAutomaticallyGetSessionInfo;
-		internal System.Windows.Forms.Label lblXulRunnerPath;
 		internal System.Windows.Forms.Label lblMaximumPuttyWaitTime;
 		internal System.Windows.Forms.CheckBox chkEncryptCompleteFile;
 		internal System.Windows.Forms.CheckBox chkAutomaticReconnect;
-		internal System.Windows.Forms.Button btnBrowseXulRunnerPath;
 		internal System.Windows.Forms.NumericUpDown numPuttyWaitTime;
 		internal System.Windows.Forms.CheckBox chkUseCustomPuttyPath;
 		internal System.Windows.Forms.Label lblConfigurePuttySessions;
-		internal System.Windows.Forms.TextBox txtXULrunnerPath;
 		internal System.Windows.Forms.NumericUpDown numUVNCSCPort;
 		internal System.Windows.Forms.TextBox txtCustomPuttyPath;
 		internal System.Windows.Forms.Button btnLaunchPutty;
