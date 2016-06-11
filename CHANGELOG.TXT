@@ -1,8 +1,53 @@
-1.74 (2016-05-31):
+1.74 (2016-06-1X):
+
+  General Changes:
+  ----------------
 	Converted source from Visual Basic to C Sharp
-	Lots of code refactoring
-	Removed Keyboard shortcut functionality (introduced in 1.73 beta, caused stability issues, may be re-added in a future release)
-	Updated PuTTY to 0.67
+	Lots of code refactoring/clean up/general stability changes
+	MR-714: Removed Keyboard shortcut functionality
+	  - Introduced in 1.73 beta that was never offiginally relesed
+	  - This caused stability issues
+	  - May be re-added in a future release
+	  - Removal does *NOT* impact the ability to send keyboard shortcuts to RDP sessions (when redirect key combinations is set to "yes")
+	MR-559: Removed RDP Sessions panel funcionality. This required a library for which no trusted origin/source could be located
+	Removed a bunch of old code/libraries and replaced them accordingly
+	
+	
+	Security Updates:
+	-----------------
+	MR-775, MR-745: Updated PuTTY to 0.67
+	
+	Features/Enhacenments:
+	----------------------
+	Updated to latest DockPanelSuite and enabled a slick new theme!
+	MR-145: Installer is now MSI based
+	MR-255: Updated RDP Client to version 8
+	MR-389: Updates to IE rendering engine
+	  - Support for latest version of IE (9-11)
+	  - Dropped support for IE 7 & IE 8
+	MR-850: Replaced XULRunner with GeckoFx
+	  No need to manually configure to have the Gecko rendering engine availble now
+	  Install image is now signifigantly larger due to the inclusion of the Gecko Engine
+	Port Scan is now Asynchronous (and is signifignaly faster)
+	
+	  
+	Fixes:
+	------
+	MR-854: crashes when right clicking on connection tab
+	MR-852: Option "Allow only a single instance of the application" non-functional
+	MR-836: Trying to delete a folder of connections only deletes 2 connections at a time
+	MR-824, MR-706: Suppress Script Errors when using the IE rendering engine
+	MR-640: Fixed Inheritance not working
+	MR-639: RDP: Connect to console session
+	MR-610, MR-582, MR-451: RDP: Portocol Error 3334 or exceptions with large number of connections open
+	  - This problem appears largely resolved by most reports and testing
+	  - Further workarounds/problem avoidance: Disable Bitmap Caching on all RDP session configuration
+	MR-429: Display issue on the Options -> Advanced panel
+	MR-385: Inheritance settings lost when moving item to the root of the tree
+	
+	
+	
+	
 	
 1.73 Beta 2 (NEVER RELEASED):
   Fixed issue MR-619 - Keyboard shortcuts stop working after locking the screen with Win+L
@@ -25,7 +70,7 @@
   Fixed issue MR-556 - Export fails when overwriting an existing file
   Fixed issue MR-594 - Crash on startup if write access is denied to the IE browser emulation registry key
   Fixed issue MR-603 - Some configuration options are still shown even when inheritance is enabled
-  Added "Reset" to config panel context menu to allow resetting some config settings to their default value.
+  MR-590: Added "Reset" to config panel context menu to allow resetting some config settings to their default value.
   Added and improved menu icons.
   Removed misleading log messages about RD Gateway support.
   Removed invalid "Site" configuration option from PuTTY Saved Sessions.
