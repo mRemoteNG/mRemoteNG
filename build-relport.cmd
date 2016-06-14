@@ -49,5 +49,5 @@ del "%~dp0\mRemoteV1\bin\package\*vshost*"
 echo Creating portable ZIP file...
 echo %PORTABLEZIP% 
 del /f /q %PORTABLEZIP% > nul 2>&1
-%SEVENZIP% a -r -tzip -y %PORTABLEZIP% "%~dp0\mRemoteV1\bin\package\*.*"
-%SEVENZIP% a -tzip -y %PORTABLEZIP% "%~dp0\*.TXT"
+%SEVENZIP% a -bt -mx=9 -mm=LZMA -tzip -y -r %PORTABLEZIP% "%~dp0\mRemoteV1\bin\package\*.*"
+%SEVENZIP% a -bt -mx=9 -mm=LZMA -tzip -y %PORTABLEZIP% "%~dp0\*.TXT"
