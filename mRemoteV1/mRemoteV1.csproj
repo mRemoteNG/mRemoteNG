@@ -1196,7 +1196,7 @@
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>call "$(DevEnvDir)..\tools\vsvars32.bat"
-editbin /largeaddressaware $(TargetPath)</PostBuildEvent>
+editbin /largeaddressaware mRemoteNG.exe</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
