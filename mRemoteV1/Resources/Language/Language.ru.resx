@@ -299,7 +299,7 @@
  Если у вас ничего не получилось обратитесь на форум mRemoteNG http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
-    <value>XULRunner был найден и установлен правильно.</value>
+    <value>GeckoFx был найден и установлен правильно.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA требуется установленный XenDesktop Online Plugin и зарегистрированная библиотека wfica.ocx. Вы можете скачать клиент здесь: http://www.citrix.com/download/ 

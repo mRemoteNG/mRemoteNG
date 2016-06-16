@@ -1,10 +1,3 @@
-using mRemoteNG.App;
-using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.SSH;
-using mRemoteNG.Connection.Protocol.VNC;
-using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.Connection.Protocol.Telnet;
-using mRemoteNG.Connection.Protocol.Rlogin;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,84 +6,41 @@ using System.Net;
 using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
-using mRemoteNG.My;
+using mRemoteNG.App;
+using mRemoteNG.Connection.Protocol.Http;
+using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Connection.Protocol.Rlogin;
+using mRemoteNG.Connection.Protocol.SSH;
+using mRemoteNG.Connection.Protocol.Telnet;
+using mRemoteNG.Connection.Protocol.VNC;
+using mRemoteNG.Messages;
 
-
-namespace mRemoteNG.Tools.PortScan
+namespace mRemoteNG.Tools
 {
 	public class ScanHost
     {
         #region Private Variables
-        private static int _SSHPort = (int)ProtocolSSH1.Defaults.Port;
-        private static int _TelnetPort = (int)ProtocolTelnet.Defaults.Port;
-        private static int _HTTPPort = (int)ProtocolHTTP.Defaults.Port;
-        private static int _HTTPSPort = (int)ProtocolHTTPS.Defaults.Port;
-        private static int _RloginPort = (int)ProtocolRlogin.Defaults.Port;
-        private static int _RDPPort = (int)ProtocolRDP.Defaults.Port;
-        private static int _VNCPort = (int)ProtocolVNC.Defaults.Port;
-        private string _hostName = "";
-        private string _hostIp;
-        private ArrayList _openPorts = new ArrayList();
-        private ArrayList _closedPorts;
-        private bool _RDP;
-        private bool _VNC;
-        private bool _SSH;
-        private bool _Telnet;
-        private bool _Rlogin;
-        private bool _HTTP;
-        private bool _HTTPS;
-        #endregion
+
+	    #endregion
 
         #region Properties
-        public static int SSHPort
-		{
-			get { return _SSHPort; }
-			set { _SSHPort = value; }
-		}
+        public static int SSHPort { get; set; } = (int)ProtocolSSH1.Defaults.Port;
 
-        public static int TelnetPort
-		{
-			get { return _TelnetPort; }
-			set { _TelnetPort = value; }
-		}
+	    public static int TelnetPort { get; set; } = (int)ProtocolTelnet.Defaults.Port;
 
-        public static int HTTPPort
-		{
-			get { return _HTTPPort; }
-			set { _HTTPPort = value; }
-		}
+	    public static int HTTPPort { get; set; } = (int)ProtocolHTTP.Defaults.Port;
 
-        public static int HTTPSPort
-		{
-			get { return _HTTPSPort; }
-			set { _HTTPSPort = value; }
-		}
+	    public static int HTTPSPort { get; set; } = (int)ProtocolHTTPS.Defaults.Port;
 
-        public static int RloginPort
-		{
-			get { return _RloginPort; }
-			set { _RloginPort = value; }
-		}
+	    public static int RloginPort { get; set; } = (int)ProtocolRlogin.Defaults.Port;
 
-        public static int RDPPort
-		{
-			get { return _RDPPort; }
-			set { _RDPPort = value; }
-		}
+	    public static int RDPPort { get; set; } = (int)ProtocolRDP.Defaults.Port;
 
-        public static int VNCPort
-		{
-			get { return _VNCPort; }
-			set { _VNCPort = value; }
-		}
+	    public static int VNCPort { get; set; } = (int)ProtocolVNC.Defaults.Port;
 
-        public string HostName
-		{
-			get { return _hostName; }
-			set { _hostName = value; }
-		}
-				
-        public string HostNameWithoutDomain
+	    public string HostName { get; set; } = "";
+
+	    public string HostNameWithoutDomain
 		{
 			get
 			{
@@ -102,84 +52,45 @@ namespace mRemoteNG.Tools.PortScan
 			}
 		}
 
-        public string HostIp
-		{
-			get { return _hostIp; }
-			set { _hostIp = value; }
-		}
+        public string HostIp { get; set; }
 
-        public ArrayList OpenPorts
-		{
-			get { return _openPorts; }
-			set { _openPorts = value; }
-		}
+	    public ArrayList OpenPorts { get; set; } = new ArrayList();
 
-        public ArrayList ClosedPorts
-		{
-			get { return _closedPorts; }
-			set { _closedPorts = value; }
-		}
+	    public ArrayList ClosedPorts { get; set; }
 
-        public bool RDP
-		{
-			get { return _RDP; }
-			set { _RDP = value; }
-		}
+	    public bool RDP { get; set; }
 
-        public bool VNC
-		{
-			get { return _VNC; }
-			set { _VNC = value; }
-		}
+	    public bool VNC { get; set; }
 
-        public bool SSH
-		{
-			get { return _SSH; }
-			set { _SSH = value; }
-		}
-		
-        public bool Telnet
-		{
-			get { return _Telnet; }
-			set { _Telnet = value; }
-		}
+	    public bool SSH { get; set; }
 
-        public bool Rlogin
-		{
-			get { return _Rlogin; }
-			set { _Rlogin = value; }
-		}
+	    public bool Telnet { get; set; }
 
-        public bool HTTP
-		{
-			get { return _HTTP; }
-			set { _HTTP = value; }
-		}
+	    public bool Rlogin { get; set; }
 
-        public bool HTTPS
-		{
-			get { return _HTTPS; }
-			set { _HTTPS = value; }
-		}
-        #endregion
+	    public bool HTTP { get; set; }
+
+	    public bool HTTPS { get; set; }
+
+	    #endregion
 				
         #region Methods
 		public ScanHost(string host)
 		{
-			_hostIp = host;
-			_openPorts = new ArrayList();
-			_closedPorts = new ArrayList();
+			HostIp = host;
+			OpenPorts = new ArrayList();
+			ClosedPorts = new ArrayList();
 		}
 				
 		public override string ToString()
 		{
 			try
 			{
-				return "SSH: " + Convert.ToString(_SSH) + " Telnet: " + Convert.ToString(_Telnet) + " HTTP: " + Convert.ToString(_HTTP) + " HTTPS: " + Convert.ToString(_HTTPS) + " Rlogin: " + Convert.ToString(_Rlogin) + " RDP: " + Convert.ToString(_RDP) + " VNC: " + Convert.ToString(_VNC);
+				return "SSH: " + Convert.ToString(SSH) + " Telnet: " + Convert.ToString(Telnet) + " HTTP: " + Convert.ToString(HTTP) + " HTTPS: " + Convert.ToString(HTTPS) + " Rlogin: " + Convert.ToString(Rlogin) + " RDP: " + Convert.ToString(RDP) + " VNC: " + Convert.ToString(VNC);
 			}
 			catch (Exception)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ToString failed (Tools.PortScan)", true);
+				Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "ToString failed (Tools.PortScan)", true);
 				return "";
 			}
 		}
@@ -190,36 +101,33 @@ namespace mRemoteNG.Tools.PortScan
 			{
 				ListViewItem listViewItem = new ListViewItem();
 				listViewItem.Tag = this;
-				if (!string.IsNullOrEmpty(_hostName))
+				listViewItem.Text = !string.IsNullOrEmpty(HostName) ? HostName : HostIp;
+
+                /* flipped the UI around a bit
+                 * Show the open/closed port numbers in import mode in case custom ports are scanned.
+                 * Since (currently) the non-import mode doesn't allow custom ports, just show the standard port columns.
+                 */
+                if (!import)
 				{
-					listViewItem.Text = _hostName;
-				}
-				else
-				{
-					listViewItem.Text = _hostIp;
-				}
-						
-				if (import)
-				{
-					listViewItem.SubItems.Add(BoolToYesNo(_SSH));
-					listViewItem.SubItems.Add(BoolToYesNo(_Telnet));
-					listViewItem.SubItems.Add(BoolToYesNo(_HTTP));
-					listViewItem.SubItems.Add(BoolToYesNo(_HTTPS));
-					listViewItem.SubItems.Add(BoolToYesNo(_Rlogin));
-					listViewItem.SubItems.Add(BoolToYesNo(_RDP));
-					listViewItem.SubItems.Add(BoolToYesNo(_VNC));
+					listViewItem.SubItems.Add(BoolToYesNo(SSH));
+					listViewItem.SubItems.Add(BoolToYesNo(Telnet));
+					listViewItem.SubItems.Add(BoolToYesNo(HTTP));
+					listViewItem.SubItems.Add(BoolToYesNo(HTTPS));
+					listViewItem.SubItems.Add(BoolToYesNo(Rlogin));
+					listViewItem.SubItems.Add(BoolToYesNo(RDP));
+					listViewItem.SubItems.Add(BoolToYesNo(VNC));
 				}
 				else
 				{
 					string strOpen = "";
 					string strClosed = "";
 							
-					foreach (int p in _openPorts)
+					foreach (int p in OpenPorts)
 					{
 						strOpen += p + ", ";
 					}
 							
-					foreach (int p in _closedPorts)
+					foreach (int p in ClosedPorts)
 					{
 						strClosed += p + ", ";
 					}
@@ -232,32 +140,25 @@ namespace mRemoteNG.Tools.PortScan
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage("Tools.PortScan.ToListViewItem() failed.", ex, Messages.MessageClass.WarningMsg, true);
+				Runtime.MessageCollector.AddExceptionMessage("Tools.PortScan.ToListViewItem() failed.", ex, MessageClass.WarningMsg, true);
 				return null;
 			}
 		}
 				
 		private string BoolToYesNo(bool value)
 		{
-			if (value)
-			{
-				return Language.strYes;
-			}
-			else
-			{
-				return Language.strNo;
-			}
+		    return value ? Language.strYes : Language.strNo;
 		}
-				
-		public void SetAllProtocols(bool value)
+
+	    public void SetAllProtocols(bool value)
 		{
-			_VNC = value;
-			_Telnet = value;
-			_SSH = value;
-			_Rlogin = value;
-			_RDP = value;
-			_HTTPS = value;
-			_HTTP = value;
+			VNC = value;
+			Telnet = value;
+			SSH = value;
+			Rlogin = value;
+			RDP = value;
+			HTTPS = value;
+			HTTP = value;
 		}
         #endregion
 	}
@@ -278,7 +179,7 @@ namespace mRemoteNG.Tools.PortScan
 			IPAddress ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
 					
 			_ports.Clear();
-            _ports.AddRange(new int[] { ScanHost.SSHPort, ScanHost.TelnetPort, ScanHost.HTTPPort, ScanHost.HTTPSPort, ScanHost.RloginPort, ScanHost.RDPPort, ScanHost.VNCPort });
+            _ports.AddRange(new[] { ScanHost.SSHPort, ScanHost.TelnetPort, ScanHost.HTTPPort, ScanHost.HTTPSPort, ScanHost.RloginPort, ScanHost.RDPPort, ScanHost.VNCPort });
 					
 			_ipAddresses.Clear();
 			_ipAddresses.AddRange(IpAddressArrayFromRange(ipAddressStart, ipAddressEnd));
@@ -301,7 +202,7 @@ namespace mRemoteNG.Tools.PortScan
 				
 		public void StartScan()
 		{
-			_scanThread = new Thread(new System.Threading.ThreadStart(ScanAsync));
+			_scanThread = new Thread(ScanAsync);
 			_scanThread.SetApartmentState(ApartmentState.STA);
 			_scanThread.IsBackground = true;
 			_scanThread.Start();
@@ -310,13 +211,14 @@ namespace mRemoteNG.Tools.PortScan
 		public void StopScan()
 		{
 			_scanThread.Abort();
-		}
+        }
 				
 		public static bool IsPortOpen(string hostname, string port)
 		{
 			try
 			{
 				System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(hostname, Convert.ToInt32(port));
+                tcpClient.Close(); 
 				return true;
 			}
 			catch (Exception)
@@ -325,124 +227,144 @@ namespace mRemoteNG.Tools.PortScan
 			}
 		}
         #endregion
-				
+
         #region Private Methods
-		private void ScanAsync()
+
+        private int hostCount;
+        private void ScanAsync()
 		{
 			try
 			{
-				int hostCount = 0;
-				foreach (IPAddress ipAddress in _ipAddresses)
+			    hostCount = 0;
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Starting scan of {_ipAddresses.Count} hosts...", true);
+                foreach (IPAddress ipAddress in _ipAddresses)
 				{
-					if (BeginHostScanEvent != null)
-						BeginHostScanEvent(ipAddress.ToString());
-							
-					ScanHost scanHost = new ScanHost(ipAddress.ToString());
-					hostCount++;
-							
-					if (!IsHostAlive(ipAddress))
-					{
-						scanHost.ClosedPorts.AddRange(_ports);
-						scanHost.SetAllProtocols(false);
-					}
-					else
-					{
-						foreach (int port in _ports)
-						{
-							bool isPortOpen = false;
-							try
-							{
-								System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(ipAddress.ToString(), port);
-								isPortOpen = true;
-								scanHost.OpenPorts.Add(port);
-							}
-							catch (Exception)
-							{
-								isPortOpen = false;
-								scanHost.ClosedPorts.Add(port);
-							}
-							
-							if (port == ScanHost.SSHPort)
-							{
-								scanHost.SSH = isPortOpen;
-							}
-                            else if (port == ScanHost.TelnetPort)
-							{
-								scanHost.Telnet = isPortOpen;
-							}
-                            else if (port == ScanHost.HTTPPort)
-							{
-								scanHost.HTTP = isPortOpen;
-							}
-                            else if (port == ScanHost.HTTPSPort)
-							{
-								scanHost.HTTPS = isPortOpen;
-							}
-                            else if (port == ScanHost.RloginPort)
-							{
-								scanHost.Rlogin = isPortOpen;
-							}
-                            else if (port == ScanHost.RDPPort)
-							{
-								scanHost.RDP = isPortOpen;
-							}
-                            else if (port == ScanHost.VNCPort)
-							{
-								scanHost.VNC = isPortOpen;
-							}
-						}
-					}
-							
-					try
-					{
-						scanHost.HostName = Dns.GetHostEntry(scanHost.HostIp).HostName;
-					}
-					catch (Exception)
-					{
-					}
-					if (string.IsNullOrEmpty(scanHost.HostName))
-					{
-						scanHost.HostName = scanHost.HostIp;
-					}
-							
-					_scannedHosts.Add(scanHost);
-					if (HostScannedEvent != null)
-						HostScannedEvent(scanHost, hostCount, _ipAddresses.Count);
-				}
-						
-				if (ScanCompleteEvent != null)
-					ScanCompleteEvent(_scannedHosts);
-			}
+                    BeginHostScanEvent?.Invoke(ipAddress.ToString());
+
+                    Ping pingSender = new Ping();
+
+                    try
+                    {
+                        pingSender.PingCompleted += PingSender_PingCompleted;
+                        pingSender.SendAsync(ipAddress, ipAddress);
+                    }
+                    catch (Exception ex)
+                    {
+                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"Tools.PortScan: Ping failed for {ipAddress} {Environment.NewLine} {ex.Message}", true);
+                    }
+                }
+            }
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "StartScanBG failed (Tools.PortScan)" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, $"StartScanBG failed (Tools.PortScan) {Environment.NewLine} {ex.Message}", true);
 			}
 		}
-				
-		private static bool IsHostAlive(IPAddress ipAddress)
-		{
-			Ping pingSender = new Ping();
-			PingReply pingReply;
-					
-			try
-			{
-				pingReply = pingSender.Send(ipAddress);
-						
-				if (pingReply.Status == IPStatus.Success)
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-			catch (Exception)
-			{
-				return false;
-			}
-		}
-				
+
+        /* Some examples found here:
+         * http://stackoverflow.com/questions/2114266/convert-ping-application-to-multithreaded-version-to-increase-speed-c-sharp
+         */
+        private void PingSender_PingCompleted(object sender, PingCompletedEventArgs e)
+        {
+            // UserState is the IP Address
+            var ip = e.UserState.ToString();
+            ScanHost scanHost = new ScanHost(ip);
+            hostCount++;
+
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Scanning {hostCount} of {_ipAddresses.Count} hosts: {scanHost.HostIp}", true);
+
+            if (e.Error != null)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Ping failed to {e.UserState} {Environment.NewLine} {e.Error.Message}", true);
+                scanHost.ClosedPorts.AddRange(_ports);
+                scanHost.SetAllProtocols(false);
+            }
+            else if (e.Reply.Status == IPStatus.Success)
+            {
+                /* ping was successful, try to resolve the hostname */
+                try
+                {
+                    scanHost.HostName = Dns.GetHostEntry(scanHost.HostIp).HostName;
+                }
+                catch (Exception dnsex)
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg,
+                        $"Tools.PortScan: Could not resolve {scanHost.HostIp} {Environment.NewLine} {dnsex.Message}",
+                        true);
+                }
+
+                if (string.IsNullOrEmpty(scanHost.HostName))
+                {
+                    scanHost.HostName = scanHost.HostIp;
+                }
+
+                foreach (int port in _ports)
+                {
+                    bool isPortOpen = false;
+                    try
+                    {
+                        System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(ip, port);
+                        isPortOpen = true;
+                        scanHost.OpenPorts.Add(port);
+                        tcpClient.Close();
+                    }
+                    catch (Exception)
+                    {
+                        isPortOpen = false;
+                        scanHost.ClosedPorts.Add(port);
+                    }
+
+                    if (port == ScanHost.SSHPort)
+                    {
+                        scanHost.SSH = isPortOpen;
+                    }
+                    else if (port == ScanHost.TelnetPort)
+                    {
+                        scanHost.Telnet = isPortOpen;
+                    }
+                    else if (port == ScanHost.HTTPPort)
+                    {
+                        scanHost.HTTP = isPortOpen;
+                    }
+                    else if (port == ScanHost.HTTPSPort)
+                    {
+                        scanHost.HTTPS = isPortOpen;
+                    }
+                    else if (port == ScanHost.RloginPort)
+                    {
+                        scanHost.Rlogin = isPortOpen;
+                    }
+                    else if (port == ScanHost.RDPPort)
+                    {
+                        scanHost.RDP = isPortOpen;
+                    }
+                    else if (port == ScanHost.VNCPort)
+                    {
+                        scanHost.VNC = isPortOpen;
+                    }
+                }
+            }
+            else if(e.Reply.Status != IPStatus.Success)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Ping did not complete to {e.UserState} : {e.Reply.Status}", true);
+                scanHost.ClosedPorts.AddRange(_ports);
+                scanHost.SetAllProtocols(false);
+            }
+
+            // cleanup
+            var p = (Ping)sender;
+            p.PingCompleted -= PingSender_PingCompleted;
+            p.Dispose();
+
+            var h = string.IsNullOrEmpty(scanHost.HostName) ? "HostNameNotFound" : scanHost.HostName;
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Tools.PortScan: Scan of {scanHost.HostIp} ({h}) complete.", true);
+
+            _scannedHosts.Add(scanHost);
+            HostScannedEvent?.Invoke(scanHost, hostCount, _ipAddresses.Count);
+
+            if (_scannedHosts.Count == _ipAddresses.Count)
+                ScanCompleteEvent?.Invoke(_scannedHosts);
+        }
+        
 		private static IPAddress[] IpAddressArrayFromRange(IPAddress ipAddress1, IPAddress ipAddress2)
 		{
 			IPAddress startIpAddress = IpAddressMin(ipAddress1, ipAddress2);
@@ -494,7 +416,7 @@ namespace mRemoteNG.Tools.PortScan
 				
 		private static int IpAddressToInt32(IPAddress ipAddress)
 		{
-			if (!(ipAddress.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork))
+			if (ipAddress.AddressFamily != System.Net.Sockets.AddressFamily.InterNetwork)
 			{
 				throw (new ArgumentException("ipAddress"));
 			}
@@ -530,11 +452,11 @@ namespace mRemoteNG.Tools.PortScan
 		{
 			add
 			{
-				BeginHostScanEvent = (BeginHostScanEventHandler) System.Delegate.Combine(BeginHostScanEvent, value);
+				BeginHostScanEvent = (BeginHostScanEventHandler) Delegate.Combine(BeginHostScanEvent, value);
 			}
 			remove
 			{
-				BeginHostScanEvent = (BeginHostScanEventHandler) System.Delegate.Remove(BeginHostScanEvent, value);
+				BeginHostScanEvent = (BeginHostScanEventHandler) Delegate.Remove(BeginHostScanEvent, value);
 			}
 		}
 				
@@ -545,11 +467,11 @@ namespace mRemoteNG.Tools.PortScan
 		{
 			add
 			{
-				HostScannedEvent = (HostScannedEventHandler) System.Delegate.Combine(HostScannedEvent, value);
+				HostScannedEvent = (HostScannedEventHandler) Delegate.Combine(HostScannedEvent, value);
 			}
 			remove
 			{
-				HostScannedEvent = (HostScannedEventHandler) System.Delegate.Remove(HostScannedEvent, value);
+				HostScannedEvent = (HostScannedEventHandler) Delegate.Remove(HostScannedEvent, value);
 			}
 		}
 				
@@ -560,11 +482,11 @@ namespace mRemoteNG.Tools.PortScan
 		{
 			add
 			{
-				ScanCompleteEvent = (ScanCompleteEventHandler) System.Delegate.Combine(ScanCompleteEvent, value);
+				ScanCompleteEvent = (ScanCompleteEventHandler) Delegate.Combine(ScanCompleteEvent, value);
 			}
 			remove
 			{
-				ScanCompleteEvent = (ScanCompleteEventHandler) System.Delegate.Remove(ScanCompleteEvent, value);
+				ScanCompleteEvent = (ScanCompleteEventHandler) Delegate.Remove(ScanCompleteEvent, value);
 			}
 		}
         #endregion

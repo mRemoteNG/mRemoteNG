@@ -1,5 +1,4 @@
 using System;
-using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
@@ -172,7 +171,16 @@ namespace mRemoteNG.Tools
 					case StatusValue.NoThumbprintToMatch:
 						return "A thumbprint match is required but no thumbprint to match against was specified.";
 					case StatusValue.ThumbprintNotMatch:
-						return string.Format("The thumbprint does not match. {0} {1} {2}.", _thumbprint, Strings.ChrW(0x2260), ThumbprintToMatch);
+                        /* (char)0x2260 == the "not equal to" symbol (which I cannot print in here without changing the encoding of the file)
+                         * Fancy...
+                         * 
+                         * "<>" is  fiarly cryptic for non-programers
+                         * So is "!="
+                         * "=/=" gets the job done, no?
+                         * What about plain old English (or localized value): X is not equal to Y?
+                         * :P
+                         */
+                        return string.Format("The thumbprint does not match. {0} {1} {2}.", _thumbprint, (char)0x2260, ThumbprintToMatch);
 					case StatusValue.TrustProviderError:
 						Win32Exception ex = new Win32Exception(_trustProviderErrorCode);
 						return string.Format("The trust provider returned an error. {0}", ex.Message);

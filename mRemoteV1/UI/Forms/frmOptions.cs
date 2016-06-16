@@ -25,6 +25,15 @@ namespace mRemoteNG.UI.Forms
             SetImageListForListView();
             AddOptionsPagesToListView();
             SetInitiallyActivatedPage();
+            ApplyLanguage();
+        }
+
+        private void ApplyLanguage()
+        {
+            foreach (var optionPage in _pages.Values)
+            {
+                optionPage.ApplyLanguage();
+            }
         }
 
         private void CompileListOfOptionsPages()

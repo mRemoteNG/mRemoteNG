@@ -34,14 +34,17 @@ Copyright © 2002 Richard Lopes
 MIT License
 http://www.codeproject.com/KB/recipes/command_line.aspx
 
-DotNetVer
-Copyright © 2010 David Grinberg
-Copyright © 2010-2011 Brandon Hansen
-http://nsis.sourceforge.net/DotNetVer
+FilteredPropertyGrid
+Copyright © 2006 Azuria
+http://www.codeproject.com/KB/cs/FilteredPropertyGrid.aspx
 
 Hotkey Selection Control for .NET
 Copyright © 2006 Thomas Backman
 http://www.codeproject.com/Articles/15085/A-simple-hotkey-selection-control-for-NET
+
+InputBox
+Copyright © 2016 Jan Slama
+http://www.csharp-examples.net/inputbox/
 
 IP TextBox
 Copyright © 2005 mawnkay
@@ -61,19 +64,15 @@ Copyright © 2003 The Mentalis.org Team
 Modified New BSD License
 http://www.mentalis.org/
 
-DockPanel Suite 2.3.1
-Copyright © 2007 Weifen Luo
+DockPanel Suite 2.10.0.beta2
+Copyright © 2015 @roken and @lextm (formerly Weifen Luo)
 MIT License
-http://sourceforge.net/projects/dockpanelsuite/
+https://github.com/dockpanelsuite/dockpanelsuite
 
-FilteredPropertyGrid 1.0.0.0
-Copyright © 2006 Azuria
-http://www.codeproject.com/KB/cs/FilteredPropertyGrid.aspx
-
-GeckoFX 1.8.1.4
-Copyright © 2008 Skybound Software
-Mozilla Public License 1.1
-http://www.geckofx.org/
+GeckoFX 45
+Copyright © 2016 Tom Hindle
+Mozilla Public License
+https://bitbucket.org/geckofx/
 
 log4net 1.2.15.0
 Copyright © 2001-2015 The Apache Software Foundation
@@ -89,10 +88,6 @@ Mentalis.org Security Library 1.0.13.715
 Copyright © 2002-2005 The Mentalis.org Team
 Modified New BSD License
 http://www.mentalis.org/
-
-MiniGeckoBrowser 1.0
-Copyright © 2008 Felix Deimel
-http://www.appjuice.org/
 
 PuTTY 0.67
 Copyright © 1997-2016 Simon Tatham

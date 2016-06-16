@@ -1,13 +1,11 @@
 using System;
 using AxWFICALib;
 using System.Drawing;
-using Microsoft.VisualBasic;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using System.Threading;
 using mRemoteNG.Tools;
 using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 
 
@@ -340,7 +338,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
         #region Reconnect Stuff
 		public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
-			bool srvReady = Tools.PortScan.Scanner.IsPortOpen(_Info.Hostname, Convert.ToString(_Info.Port));
+			bool srvReady = Scanner.IsPortOpen(_Info.Hostname, Convert.ToString(_Info.Port));
 					
 			ReconnectGroup.ServerReady = srvReady;
 					

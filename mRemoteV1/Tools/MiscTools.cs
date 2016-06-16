@@ -1,4 +1,3 @@
-using Microsoft.VisualBasic;
 using mRemoteNG.App;
 using mRemoteNG.Forms;
 using mRemoteNG.UI.Window;
@@ -142,8 +141,7 @@ namespace mRemoteNG.Tools
         }
 		public static string PrepareValueForDB(string Text)
 		{
-			Text = Strings.Replace(Expression: Text, Find: "\'", Replacement: "\'\'", Compare: CompareMethod.Text);
-			return Text;
+			return Text.Replace("\'", "\'\'");
 		}
 		
 

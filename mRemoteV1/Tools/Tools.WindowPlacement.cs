@@ -1,78 +1,21 @@
 using System;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
-
+using mRemoteNG.App;
 
 namespace mRemoteNG.Tools
 {
 	public class WindowPlacement
 	{
-        #region Windows API
-        #region Functions
-		[DllImport("user32", ExactSpelling=true, CharSet=CharSet.Ansi, SetLastError=true)]
-		private static extern bool GetWindowPlacement(System.IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
-		[DllImport("user32", ExactSpelling=true, CharSet=CharSet.Ansi, SetLastError=true)]
-		private static extern bool SetWindowPlacement(System.IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
-        #endregion
-			
-        #region Structures
-		private struct WINDOWPLACEMENT
-		{
-			public UInt32 length;
-			public UInt32 flags;
-			public UInt32 showCmd;
-			public POINT ptMinPosition;
-			public POINT ptMaxPosition;
-			public RECT rcNormalPosition;
-		}
-			
-		private struct POINT
-		{
-			public long x;
-			public long y;
-		}
-			
-		private struct RECT
-		{
-			public long left;
-			public long top;
-			public long right;
-			public long bottom;
-		}
-        #endregion
-			
-        #region Constants
-		// WINDOWPLACEMENT.flags values
-		private const UInt32 WPF_SETMINPOSITION = 0x1;
-		private const UInt32 WPF_RESTORETOMAXIMIZED = 0x2;
-		private const UInt32 WPF_ASYNCWINDOWPLACEMENT = 0x4;
-			
-		// WINDOWPLACEMENT.showCmd values
-		private const UInt32 SW_HIDE = 0;
-		private const UInt32 SW_SHOWNORMAL = 1;
-		private const UInt32 SW_SHOWMINIMIZED = 2;
-		private const UInt32 SW_SHOWMAXIMIZED = 3;
-		private const UInt32 SW_MAXIMIZE = 3;
-		private const UInt32 SW_SHOWNOACTIVATE = 4;
-		private const UInt32 SW_SHOW = 5;
-		private const UInt32 SW_MINIMIZE = 6;
-		private const UInt32 SW_SHOWMINNOACTIVE = 7;
-		private const UInt32 SW_SHOWNA = 8;
-		private const UInt32 SW_RESTORE = 9;
-        #endregion
-        #endregion
-			
-        #region Private Variables
 		private Form _form;
-        #endregion
-			
-        #region Constructors/Destructors
+		
+
 		public WindowPlacement(Form form)
 		{
 			_form = form;
 		}
-        #endregion
-			
+		
+
         #region Public Properties
         public Form Form
 		{
@@ -90,19 +33,19 @@ namespace mRemoteNG.Tools
 		{
 			get
 			{
-				WINDOWPLACEMENT windowPlacement = GetWindowPlacement();
-				return Convert.ToBoolean(windowPlacement.flags & WPF_RESTORETOMAXIMIZED);
+				NativeMethods.WINDOWPLACEMENT windowPlacement = GetWindowPlacement();
+				return Convert.ToBoolean(windowPlacement.flags & NativeMethods.WPF_RESTORETOMAXIMIZED);
 			}
 			set
 			{
-				WINDOWPLACEMENT windowPlacement = GetWindowPlacement();
+                NativeMethods.WINDOWPLACEMENT windowPlacement = GetWindowPlacement();
 				if (value)
 				{
-					windowPlacement.flags = windowPlacement.flags | WPF_RESTORETOMAXIMIZED;
+					windowPlacement.flags = windowPlacement.flags | NativeMethods.WPF_RESTORETOMAXIMIZED;
 				}
 				else
 				{
-					windowPlacement.flags = windowPlacement.flags & ~WPF_RESTORETOMAXIMIZED;
+					windowPlacement.flags = windowPlacement.flags & ~NativeMethods.WPF_RESTORETOMAXIMIZED;
 				}
 				SetWindowPlacement(windowPlacement);
 			}
@@ -110,17 +53,17 @@ namespace mRemoteNG.Tools
         #endregion
 			
         #region Private Functions
-		private WINDOWPLACEMENT GetWindowPlacement()
+		private NativeMethods.WINDOWPLACEMENT GetWindowPlacement()
 		{
 			if (_form == null)
 			{
-				throw (new System.NullReferenceException("WindowPlacement.Form is not set."));
+				throw (new NullReferenceException("WindowPlacement.Form is not set."));
 			}
-			WINDOWPLACEMENT windowPlacement = new WINDOWPLACEMENT();
+            NativeMethods.WINDOWPLACEMENT windowPlacement = new NativeMethods.WINDOWPLACEMENT();
 			windowPlacement.length = (uint)Marshal.SizeOf(windowPlacement);
 			try
 			{
-				GetWindowPlacement(_form.Handle, ref windowPlacement);
+                NativeMethods.GetWindowPlacement(_form.Handle, ref windowPlacement);
 				return windowPlacement;
 			}
 			catch (Exception)
@@ -129,16 +72,16 @@ namespace mRemoteNG.Tools
 			}
 		}
 			
-		private bool SetWindowPlacement(WINDOWPLACEMENT windowPlacement)
+		private bool SetWindowPlacement(NativeMethods.WINDOWPLACEMENT windowPlacement)
 		{
 			if (_form == null)
 			{
-				throw (new System.NullReferenceException("WindowPlacement.Form is not set."));
+				throw (new NullReferenceException("WindowPlacement.Form is not set."));
 			}
 			windowPlacement.length = (uint)Marshal.SizeOf(windowPlacement);
 			try
 			{
-				return SetWindowPlacement(_form.Handle, ref windowPlacement);
+				return NativeMethods.SetWindowPlacement(_form.Handle, ref windowPlacement);
 			}
 			catch (Exception)
 			{

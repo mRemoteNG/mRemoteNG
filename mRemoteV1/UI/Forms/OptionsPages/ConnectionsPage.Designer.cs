@@ -238,7 +238,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 			this.chkSingleClickOnOpenedConnectionSwitchesToIt.Name = "chkSingleClickOnOpenedConnectionSwitchesToIt";
 			this.chkSingleClickOnOpenedConnectionSwitchesToIt.Size = new System.Drawing.Size(254, 17);
 			this.chkSingleClickOnOpenedConnectionSwitchesToIt.TabIndex = 8;
-			this.chkSingleClickOnOpenedConnectionSwitchesToIt.Text = "Single click on opened connection switches to it";
+			this.chkSingleClickOnOpenedConnectionSwitchesToIt.Text = Language.strSingleClickOnOpenConnectionSwitchesToIt;
 			this.chkSingleClickOnOpenedConnectionSwitchesToIt.UseVisualStyleBackColor = true;
 			//
 			//pnlAutoSave

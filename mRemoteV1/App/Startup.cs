@@ -1,33 +1,38 @@
-﻿using Microsoft.Win32;
+﻿using mRemoteNG.App.Info;
 using mRemoteNG.App.Update;
+using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Management;
 using System.Threading;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
-using mRemoteNG.Config.Connections;
-using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.TaskDialog;
-using System.Globalization;
-using mRemoteNG.App.Info;
 
 namespace mRemoteNG.App
 {
     public class Startup
     {
         private static readonly Startup _singletonInstance = new Startup();
+        private CompatibilityChecker _compatibilityChecker;
         private AppUpdater _appUpdate;
+
+        public static Startup Instance
+        {
+            get { return _singletonInstance; }
+        }
 
         private Startup()
         {
+            _compatibilityChecker = new CompatibilityChecker();
             _appUpdate = new AppUpdater();
         }
 
@@ -35,84 +40,18 @@ namespace mRemoteNG.App
         {
         }
 
-        public static void InitializeProgram()
+        public void InitializeProgram()
         {
             Debug.Print("---------------------------" + Environment.NewLine + "[START] - " + Convert.ToString(DateTime.Now, CultureInfo.InvariantCulture));
-            _singletonInstance.LogStartupData();
-            //CheckCompatibility();
-            _singletonInstance.ParseCommandLineArgs();
+            LogStartupData();
+            _compatibilityChecker.CheckCompatibility();
+            ParseCommandLineArgs();
             IeBrowserEmulation.Register();
-            _singletonInstance.GetConnectionIcons();
+            GetConnectionIcons();
         }
-
-        private void CheckCompatibility()
-        {
-            CheckFipsPolicy();
-            CheckLenovoAutoScrollUtility();
-        }
-        private void CheckFipsPolicy()
-        {
-            RegistryKey regKey = default(RegistryKey);
-
-            bool isFipsPolicyEnabled = false;
-
-            // Windows XP/Windows Server 2003
-            regKey = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa");
-            if (regKey != null)
-            {
-                if ((int)regKey.GetValue("FIPSAlgorithmPolicy") != 0)
-                {
-                    isFipsPolicyEnabled = true;
-                }
-            }
-
-            // Windows Vista/Windows Server 2008 and newer
-            regKey = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa\\FIPSAlgorithmPolicy");
-            if (regKey != null)
-            {
-                if ((int)regKey.GetValue("Enabled") != 0)
-                {
-                    isFipsPolicyEnabled = true;
-                }
-            }
-
-            if (isFipsPolicyEnabled)
-            {
-                MessageBox.Show(frmMain.Default, string.Format(Language.strErrorFipsPolicyIncompatible, GeneralAppInfo.ProdName, GeneralAppInfo.ProdName, MessageBoxButtons.OK, MessageBoxIcon.Error));
-                Environment.Exit(1);
-            }
-        }
-        private void CheckLenovoAutoScrollUtility()
-        {
-            if (!Settings.Default.CompatibilityWarnLenovoAutoScrollUtility)
-            {
-                return;
-            }
-
-            Process[] proccesses = new Process[] { };
-            try
-            {
-                proccesses = Process.GetProcessesByName("virtscrl");
-            }
-            catch(Exception ex)
-            {
-                Runtime.MessageCollector.AddExceptionMessage("Error in CheckLenovoAutoScrollUtility", ex);
-            }
-            if (proccesses.Length == 0)
-            {
-                return;
-            }
-
-            CTaskDialog.MessageBox(Application.ProductName, Language.strCompatibilityProblemDetected, string.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected, Application.ProductName), "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok, ESysIcons.Warning, ESysIcons.Warning);
-            if (CTaskDialog.VerificationChecked)
-            {
-                Settings.Default.CompatibilityWarnLenovoAutoScrollUtility = false;
-            }
-        }
-
 
         
-        public static void SetDefaultLayout()
+        public void SetDefaultLayout()
         {
             frmMain.Default.pnlDock.Visible = false;
 
@@ -129,6 +68,7 @@ namespace mRemoteNG.App
 
             frmMain.Default.pnlDock.Visible = true;
         }
+
         private void GetConnectionIcons()
         {
             string iPath = GeneralAppInfo.HomePath + "\\Icons\\";
@@ -157,12 +97,14 @@ namespace mRemoteNG.App
                 LogCultureData();
             }
         }
+
         private void LogSystemData()
         {
             string osData = GetOperatingSystemData();
             string architecture = GetArchitectureData();
             Logger.Instance.InfoFormat(string.Join(" ", Array.FindAll(new string[] { osData, architecture }, s => !string.IsNullOrEmpty(Convert.ToString(s)))));
         }
+
         private string GetOperatingSystemData()
         {
             string osVersion = string.Empty;
@@ -183,11 +125,13 @@ namespace mRemoteNG.App
             string osData = string.Join(" ", new string[] { osVersion, servicePack });
             return osData;
         }
+
         private string GetOSVersion(string osVersion, ManagementObject managementObject)
         {
             osVersion = Convert.ToString(managementObject.GetPropertyValue("Caption")).Trim();
             return osVersion;
         }
+
         private string GetOSServicePack(string servicePack, ManagementObject managementObject)
         {
             int servicePackNumber = Convert.ToInt32(managementObject.GetPropertyValue("ServicePackMajorVersion"));
@@ -197,6 +141,7 @@ namespace mRemoteNG.App
             }
             return servicePack;
         }
+
         private string GetArchitectureData()
         {
             string architecture = string.Empty;
@@ -214,29 +159,33 @@ namespace mRemoteNG.App
             }
             return architecture;
         }
+
         private void LogApplicationData()
         {
             #if !PORTABLE
-            Logger.Instance.InfoFormat("{0} {1} starting.", System.Windows.Forms.Application.ProductName, System.Windows.Forms.Application.ProductVersion);
+            Logger.Instance.InfoFormat("{0} {1} starting.", Application.ProductName, Application.ProductVersion);
             #else
             Logger.Instance.InfoFormat("{0} {1} {2} starting.", Application.ProductName, Application.ProductVersion, Language.strLabelPortableEdition);
             #endif
         }
+
         private void LogCmdLineArgs()
         {
             Logger.Instance.InfoFormat("Command Line: {0}", Environment.GetCommandLineArgs());
         }
+
         private void LogCLRData()
         {
             Logger.Instance.InfoFormat("Microsoft .NET CLR {0}", Environment.Version);
         }
+
         private void LogCultureData()
         {
             Logger.Instance.InfoFormat("System Culture: {0}/{1}", Thread.CurrentThread.CurrentUICulture.Name, Thread.CurrentThread.CurrentUICulture.NativeName);
         }
 
 
-        public static void CreateConnectionsProvider()
+        public void CreateConnectionsProvider()
         {
             if (Settings.Default.UseSQLServer)
             {
@@ -264,6 +213,7 @@ namespace mRemoteNG.App
             _appUpdate.GetUpdateInfoCompletedEvent += GetUpdateInfoCompleted;
             _appUpdate.GetUpdateInfoAsync();
         }
+
         private void GetUpdateInfoCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (frmMain.Default.InvokeRequired)
@@ -307,6 +257,7 @@ namespace mRemoteNG.App
             _appUpdate.GetAnnouncementInfoCompletedEvent += GetAnnouncementInfoCompleted;
             _appUpdate.GetAnnouncementInfoAsync();
         }
+
         private void GetAnnouncementInfoCompleted(object sender, AsyncCompletedEventArgs e)
         {
             if (frmMain.Default.InvokeRequired)

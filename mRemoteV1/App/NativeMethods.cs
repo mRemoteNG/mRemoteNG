@@ -32,11 +32,17 @@ namespace mRemoteNG.App
         internal static extern bool MoveWindow(IntPtr hWnd, int x, int y, int cx, int cy, bool repaint);
 			
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        internal static extern bool PostMessage(IntPtr hWnd, UInt32 Msg, int wParam, int lParam);
+        internal static extern bool PostMessage(IntPtr hWnd, uint Msg, int wParam, int lParam);
 			
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern int SendMessage(IntPtr hWnd, int msg, int wparam, int lparam);
-			
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, System.Text.StringBuilder lParam);
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
 			
@@ -57,8 +63,20 @@ namespace mRemoteNG.App
 			
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern IntPtr WindowFromPoint(Point point);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern void GetClassName(IntPtr hWnd, System.Text.StringBuilder lpClassName, int nMaxCount);
+
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int GetDlgCtrlID(int hwndCtl);
+
+        [DllImport("user32", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern bool GetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
+
+        [DllImport("user32", ExactSpelling = true, CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern bool SetWindowPlacement(IntPtr hWnd, ref WINDOWPLACEMENT lpwndpl);
         #endregion
-		
+
         #region Structures
         [StructLayout(LayoutKind.Sequential)]
         public struct WINDOWPOS
@@ -71,8 +89,32 @@ namespace mRemoteNG.App
             public int cy;
             public int flags;
         }
+
+        public struct WINDOWPLACEMENT
+        {
+            public uint length;
+            public uint flags;
+            public uint showCmd;
+            public POINT ptMinPosition;
+            public POINT ptMaxPosition;
+            public RECT rcNormalPosition;
+        }
+
+        public struct POINT
+        {
+            public long x;
+            public long y;
+        }
+
+        public struct RECT
+        {
+            public long left;
+            public long top;
+            public long right;
+            public long bottom;
+        }
         #endregion
-		
+
         #region Helpers
         public static int MAKELONG(int wLow, int wHigh)
         {
@@ -106,6 +148,8 @@ namespace mRemoteNG.App
         #endregion
 
         #region Constants
+        public const int TRUE = 1;
+
         #region GetWindowLong
         public const int GWL_STYLE = (-16);
         #endregion
@@ -123,8 +167,17 @@ namespace mRemoteNG.App
         #endregion
 
         #region ShowWindow
-        public const int SW_SHOWMAXIMIZED = 3;
-        public const int SW_RESTORE = 9;
+        public const uint SW_HIDE = 0;
+        public const uint SW_SHOWNORMAL = 1;
+        public const uint SW_SHOWMINIMIZED = 2;
+        public const uint SW_SHOWMAXIMIZED = 3;
+        public const uint SW_MAXIMIZE = 3;
+        public const uint SW_SHOWNOACTIVATE = 4;
+        public const uint SW_SHOW = 5;
+        public const uint SW_MINIMIZE = 6;
+        public const uint SW_SHOWMINNOACTIVE = 7;
+        public const uint SW_SHOWNA = 8;
+        public const uint SW_RESTORE = 9;
         #endregion
 
         #region SetWindowPos / WM_WINDOWPOSCHANGING / WM_WINDOWPOSCHANGED
@@ -214,6 +267,12 @@ namespace mRemoteNG.App
         public const int SWP_STATECHANGED = 0x8000;
         #endregion
 
+        #region Window Placement Flags (WPF)
+        public const uint WPF_SETMINPOSITION = 0x1;
+        public const uint WPF_RESTORETOMAXIMIZED = 0x2;
+        public const uint WPF_ASYNCWINDOWPLACEMENT = 0x4;
+        #endregion
+
         #region WM_ACTIVATE
         /// <summary>
         /// 
@@ -246,6 +305,11 @@ namespace mRemoteNG.App
         /// Sent to both the window being activated and the window being deactivated. If the windows use the same input queue, the message is sent synchronously, first to the window procedure of the top-level window being deactivated, then to the window procedure of the top-level window being activated. If the windows use different input queues, the message is sent asynchronously, so the window is activated immediately.
         /// </summary>
         public const int WM_ACTIVATE = 0x6;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int WM_SETTEXT = 0xC;
 
         /// <summary>
         /// Copies the text that corresponds to a window into a buffer provided by the caller. 
@@ -291,6 +355,11 @@ namespace mRemoteNG.App
         /// Posted to the window with the keyboard focus when a nonsystem key is released. A nonsystem key is a key that is pressed when the ALT key is not pressed, or a keyboard key that is pressed when a window has the keyboard focus. 
         /// </summary>
         public const int WM_KEYUP = 0x101;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const int WM_COMMAND = 0x111;
 
         /// <summary>
         /// A window receives this message when the user chooses a command from the Window menu (formerly known as the system or control menu) or when the user chooses the maximize button, minimize button, restore button, or close button.
@@ -379,6 +448,12 @@ namespace mRemoteNG.App
         public const int VK_CONTROL = 0x11;
         public const int VK_C = 0x67;
         #endregion
+
+        #region LB
+        public const int LB_ERR = -1;
+        public const int LB_SELECTSTRING = 0x18C;
+        #endregion
+        
         #endregion
     }
 }

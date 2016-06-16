@@ -1,10 +1,8 @@
 using System.Collections.Generic;
 using System;
 using System.Drawing;
-using Microsoft.VisualBasic;
 using System.IO;
 using System.Xml;
-using System.Reflection;
 
 
 namespace mRemoteNG.Themes
@@ -119,7 +117,8 @@ namespace mRemoteNG.Themes
 			
 		private static string EncodeColorName(Color color)
 		{
-		    return color.IsNamedColor ? color.Name : Conversion.Hex(color.ToArgb()).PadLeft(8, '0');
+            // best/simplest answer to converting to hex: http://stackoverflow.com/questions/12078942/how-to-convert-from-argb-to-hex-aarrggbb
+            return color.IsNamedColor ? color.Name : $"{color.A:X2}{color.R:X2}{color.G:X2}{color.B:X2}";
 		}
 
 	    private static Color DecodeColorName(string name)

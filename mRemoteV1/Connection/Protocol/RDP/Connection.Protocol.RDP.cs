@@ -868,7 +868,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #region Reconnect Stuff
 		public void tmrReconnect_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
 		{
-			bool srvReady = Tools.PortScan.Scanner.IsPortOpen(_connectionInfo.Hostname, Convert.ToString(_connectionInfo.Port));
+			bool srvReady = Scanner.IsPortOpen(_connectionInfo.Hostname, Convert.ToString(_connectionInfo.Port));
 					
 			ReconnectGroup.ServerReady = srvReady;
 					

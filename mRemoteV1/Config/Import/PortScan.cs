@@ -4,15 +4,16 @@ using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
+using mRemoteNG.Tools;
 
 
 namespace mRemoteNG.Config.Import
 {
-	public class PortScan
+	public static class PortScan
 	{
 		public static void Import(IEnumerable hosts, ProtocolType protocol, TreeNode parentTreeNode)
 		{
-			foreach (Tools.PortScan.ScanHost host in hosts)
+			foreach (ScanHost host in hosts)
 			{
 				var finalProtocol = default(ProtocolType);
 				var protocolValid = false;

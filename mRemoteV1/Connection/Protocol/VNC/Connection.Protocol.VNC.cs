@@ -1,8 +1,6 @@
 using System;
-using Microsoft.VisualBasic;
 using mRemoteNG.App;
 using System.ComponentModel;
-using mRemoteNG.My;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 

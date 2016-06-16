@@ -287,7 +287,7 @@
     <value>找到 EOLWTSCOM 並似乎正確註冊。</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
-    <value>找到 XULrunner 並似乎正確註冊。</value>
+    <value>找到 GeckoFx 並似乎正確註冊。</value>
   </data>
   <data name="strCcICAOK" xml:space="preserve">
     <value>找到所有 ICA 元件並似乎正確註冊。

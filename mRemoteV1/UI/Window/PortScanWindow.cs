@@ -3,11 +3,13 @@ using System;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
+using mRemoteNG.Tools;
+using static mRemoteNG.Tools.MiscTools;
 
 
 namespace mRemoteNG.UI.Window
 {
-	public partial class PortScanWindow : BaseWindow
+	public partial class PortScanWindow
 	{
         #region Constructors
 		public PortScanWindow(DockContent panel, bool import)
@@ -66,28 +68,33 @@ namespace mRemoteNG.UI.Window
 				
         #region Private Fields
 		private bool _import;
-		private Tools.PortScan.Scanner _portScanner;
+		private Scanner _portScanner;
 		private bool _scanning = false;
         #endregion
 				
         #region Private Methods
         #region Event Handlers
-		public void PortScan_Load(System.Object sender, EventArgs e)
+
+	    private void PortScan_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
 					
 			try
 			{
+                /* flipped the UI around a bit
+                 * Show the open/closed port numbers in import mode in case custom ports are scanned.
+                 * Since (currently) the non-import mode doesn't allow custom ports, just show the standard port columns.
+                 */
 				if (_import)
 				{
-					lvHosts.Columns.AddRange(new ColumnHeader[] {clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC});
+                    lvHosts.Columns.AddRange(new[] { clmHost, clmOpenPorts, clmClosedPorts });
 					ShowImportControls(true);
 					cbProtocol.SelectedIndex = 0;
 				}
 				else
 				{
-					lvHosts.Columns.AddRange(new ColumnHeader[] {clmHost, clmOpenPorts, clmClosedPorts});
-					ShowImportControls(false);
+                    lvHosts.Columns.AddRange(new[] { clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC });
+                    ShowImportControls(false);
 				}
 			}
 			catch (Exception ex)
@@ -95,18 +102,18 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddExceptionMessage(Language.strPortScanCouldNotLoadPanel, ex);
 			}
 		}
-				
-		public void portStart_Enter(System.Object sender, EventArgs e)
+
+	    private void portStart_Enter(object sender, EventArgs e)
 		{
 			portStart.Select(0, portStart.Text.Length);
 		}
-				
-		public void portEnd_Enter(System.Object sender, EventArgs e)
+
+	    private void portEnd_Enter(object sender, EventArgs e)
 		{
 			portEnd.Select(0, portEnd.Text.Length);
 		}
-				
-		public void btnScan_Click(System.Object sender, EventArgs e)
+
+	    private void btnScan_Click(object sender, EventArgs e)
 		{
 			if (_scanning)
 			{
@@ -124,21 +131,21 @@ namespace mRemoteNG.UI.Window
 				}
 			}
 		}
-				
-		public void btnImport_Click(System.Object sender, EventArgs e)
+
+	    private void btnImport_Click(object sender, EventArgs e)
 		{
-            mRemoteNG.Connection.Protocol.ProtocolType protocol = (mRemoteNG.Connection.Protocol.ProtocolType)Tools.MiscTools.StringToEnum(typeof(mRemoteNG.Connection.Protocol.ProtocolType), Convert.ToString(cbProtocol.SelectedItem));
+            Connection.Protocol.ProtocolType protocol = (Connection.Protocol.ProtocolType)StringToEnum(typeof(Connection.Protocol.ProtocolType), Convert.ToString(cbProtocol.SelectedItem));
 					
-			List<Tools.PortScan.ScanHost> hosts = new List<Tools.PortScan.ScanHost>();
+			List<ScanHost> hosts = new List<ScanHost>();
 			foreach (ListViewItem item in lvHosts.SelectedItems)
 			{
-                Tools.PortScan.ScanHost scanHost = (Tools.PortScan.ScanHost)item.Tag;
+                var scanHost = (ScanHost)item.Tag;
 				if (scanHost != null)
 				{
 					hosts.Add(scanHost);
 				}
 			}
-			App.Import.ImportFromPortScan(hosts, protocol);
+			Import.ImportFromPortScan(hosts, protocol);
 			DialogResult = DialogResult.OK;
 			Close();
 		}
@@ -146,16 +153,16 @@ namespace mRemoteNG.UI.Window
 				
 		private void ApplyLanguage()
 		{
-			lblStartIP.Text = string.Format("{0}:", Language.strStartIP);
-			lblEndIP.Text = string.Format("{0}:", Language.strEndIP);
+			lblStartIP.Text = $"{Language.strStartIP}:";
+			lblEndIP.Text = $"{Language.strEndIP}:";
 			btnScan.Text = Language.strButtonScan;
 			btnImport.Text = Language.strButtonImport;
-			lblOnlyImport.Text = string.Format("{0}:", Language.strProtocolToImport);
+			lblOnlyImport.Text = $"{Language.strProtocolToImport}:";
 			clmHost.Text = Language.strColumnHostnameIP;
 			clmOpenPorts.Text = Language.strOpenPorts;
 			clmClosedPorts.Text = Language.strClosedPorts;
-			Label2.Text = string.Format("{0}:", Language.strEndPort);
-			Label1.Text = string.Format("{0}:", Language.strStartPort);
+			Label2.Text = $"{Language.strEndPort}:";
+			Label1.Text = $"{Language.strStartPort}:";
 			TabText = Language.strMenuPortScan;
 			Text = Language.strMenuPortScan;
 		}
@@ -184,14 +191,15 @@ namespace mRemoteNG.UI.Window
 						
 				System.Net.IPAddress ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
 				System.Net.IPAddress ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
-						
-				if (_import)
+				
+                // reversed logic here. port values are only available on the import screen	
+				if (!_import)
 				{
-					_portScanner = new Tools.PortScan.Scanner(ipAddressStart, ipAddressEnd);
+					_portScanner = new Scanner(ipAddressStart, ipAddressEnd);
 				}
 				else
 				{
-					_portScanner = new Tools.PortScan.Scanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value);
+					_portScanner = new Scanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value);
 				}
 						
 				_portScanner.BeginHostScan += PortScanner_BeginHostScan;
@@ -208,11 +216,8 @@ namespace mRemoteNG.UI.Window
 				
 		private void StopScan()
 		{
-			if (_portScanner != null)
-			{
-				_portScanner.StopScan();
-			}
-			_scanning = false;
+		    _portScanner?.StopScan();
+		    _scanning = false;
 			SwitchButtonText();
 		}
 				
@@ -236,8 +241,8 @@ namespace mRemoteNG.UI.Window
 			Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Scanning " + host, true);
 		}
 				
-		private delegate void PortScannerHostScannedDelegate(Tools.PortScan.ScanHost host, int scannedCount, int totalCount);
-		private void PortScanner_HostScanned(Tools.PortScan.ScanHost host, int scannedCount, int totalCount)
+		private delegate void PortScannerHostScannedDelegate(ScanHost host, int scannedCount, int totalCount);
+		private void PortScanner_HostScanned(ScanHost host, int scannedCount, int totalCount)
 		{
 			if (InvokeRequired)
 			{
@@ -258,8 +263,8 @@ namespace mRemoteNG.UI.Window
 			prgBar.Value = scannedCount;
 		}
 				
-		private delegate void PortScannerScanComplete(List<Tools.PortScan.ScanHost> hosts);
-		private void PortScanner_ScanComplete(List<Tools.PortScan.ScanHost> hosts)
+		private delegate void PortScannerScanComplete(List<ScanHost> hosts);
+		private void PortScanner_ScanComplete(List<ScanHost> hosts)
 		{
 			if (InvokeRequired)
 			{
@@ -273,5 +278,5 @@ namespace mRemoteNG.UI.Window
 			SwitchButtonText();
 		}
         #endregion
-	}
+    }
 }
