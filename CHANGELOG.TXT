@@ -34,9 +34,10 @@
 	  - Support for latest version of IE (9-11)
 	  - Dropped support for IE 7 & IE 8
 	MR-850: Replaced XULRunner with GeckoFx
-	  No need to manually configure to have the Gecko rendering engine available now
-	  Install image is now significantly larger due to the inclusion of the Gecko Engine
+	  - No need to manually configure to have the Gecko rendering engine available now
+	  - Install image is now significantly larger due to the inclusion of the Gecko Engine
 	Port Scan is now Asynchronous (and is significantly faster)
+	Initial Japanese translation include
 	
 	
 	Fixes:
