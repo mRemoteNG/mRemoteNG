@@ -12,10 +12,10 @@ using System.Runtime.InteropServices;
 // Review the values of the assembly attributes
 
 [assembly:AssemblyTitle("mRemoteNG")]
-[assembly:AssemblyDescription("")]
-[assembly:AssemblyCompany("")]
+[assembly: AssemblyDescription("Multi-protocol remote connections manager")]
+[assembly: AssemblyCompany("mRemoteNG Dev Team")]
 [assembly:AssemblyProduct("mRemoteNG")]
-[assembly:AssemblyCopyright("Copyright © 2007-2009 Felix Deimel, 2010-2013 Riley McArdle, 2016 David Sparer")]
+[assembly: AssemblyCopyright("Copyright © 2016 mRemoteNG Dev Team; 2010-2013 Riley McArdle; 2007-2009 Felix Deimel")]
 [assembly:AssemblyTrademark("")]
 
 [assembly:ComVisible(false)]
