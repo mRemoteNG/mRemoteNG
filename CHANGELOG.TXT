@@ -37,7 +37,7 @@
 	  - No need to manually configure to have the Gecko rendering engine available now
 	  - Install image is now significantly larger due to the inclusion of the Gecko Engine
 	Port Scan is now Asynchronous (and is significantly faster)
-	Initial Japanese translation include
+	Initial Japanese translation included
 	
 	
 	Fixes:
