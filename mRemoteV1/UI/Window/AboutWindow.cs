@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
+using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 
@@ -299,7 +300,7 @@ namespace mRemoteNG.UI.Window
 
                 if (File.Exists(GeneralAppInfo.HomePath + "\\CREDITS.TXT"))
                 {
-                    StreamReader sR = new StreamReader(GeneralAppInfo.HomePath + "\\CREDITS.TXT");
+                    StreamReader sR = new StreamReader(GeneralAppInfo.HomePath + "\\CREDITS.TXT", Encoding.Default, true);
                     txtCredits.Text = sR.ReadToEnd();
                     sR.Close();
                 }
