@@ -9,9 +9,11 @@ set SEVENZIP="%ProgramFiles%\7-Zip\7z.exe"
 set VCVARSALL="%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
 call %VCVARSALL% x86
 
+IF NOT "%~1"=="build" goto skipbuild
 echo Building...
 "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe" "%~dp0\mRemoteV1.sln" /Rebuild "Release Portable"
 
+:skipbuild
 set SIGCHECK=!SIGCHECK:"=^"!
 set SIGCHECK=!SIGCHECK: =^^ !
 set SIGCHECK=!SIGCHECK:(=^^(!
