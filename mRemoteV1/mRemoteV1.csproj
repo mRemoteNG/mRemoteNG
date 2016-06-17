@@ -1196,7 +1196,13 @@
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>call "$(DevEnvDir)..\tools\vsvars32.bat"
-editbin /largeaddressaware mRemoteNG.exe</PostBuildEvent>
+set /p buildenv=&lt;buildenv.tmp
+
+REM Set LargeAddressAware on binary
+editbin /largeaddressaware mRemoteNG.exe
+
+REM Sign binary
+IF EXIST C:\signfiles.ps1 (powershell "&amp;""C:\signfiles.ps1""" %25buildenv%25)</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -1257,4 +1263,7 @@ editbin /largeaddressaware mRemoteNG.exe</PostBuildEvent>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Geckofx45.45.0.19.0\build\Geckofx45.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx45.45.0.19.0\build\Geckofx45.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>echo $(ConfigurationName) &gt; buildenv.tmp</PreBuildEvent>
+  </PropertyGroup>
 </Project>
