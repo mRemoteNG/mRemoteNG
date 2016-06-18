@@ -1198,11 +1198,21 @@
     <PostBuildEvent>call "$(DevEnvDir)..\tools\vsvars32.bat"
 set /p buildenv=&lt;buildenv.tmp
 
+REM Move Help files to correct directory
+move /Y Resources\Help .\
+rmdir /s /q Resources
+
 REM Set LargeAddressAware on binary
 editbin /largeaddressaware mRemoteNG.exe
 
-REM Sign binary
-IF EXIST C:\signfiles.ps1 (powershell "&amp;""C:\signfiles.ps1""" %25buildenv%25)</PostBuildEvent>
+REM Sign binaries
+IF EXIST C:\mRemoteNG_code_signing_cert.pfx (powershell "&amp;""$(SolutionDir)signfiles.ps1""" %25cd%25)
+
+REM Remove unnecessary files from Release versions
+IF %25buildenv: Portable=%25==Release (
+    rmdir /s /q app.publish
+    del /q *.pdb *.publish *.xml *.backup *.log *vshost* *.tmp
+)</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
