@@ -7,11 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mRemoteV1", "mRemoteV1\mRem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mRemoteNGTests", "mRemoteNGTests\mRemoteNGTests.csproj", "{1453B37F-8621-499E-B0B2-6091F76DC0BB}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Installer Projects", "Installer Projects", "{4FE795BE-646E-4F1B-BAD0-A68EA26394DD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InstallerProjects", "InstallerProjects", "{4FE795BE-646E-4F1B-BAD0-A68EA26394DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomActions", "Installer Projects\CustomActions\CustomActions.csproj", "{5423D985-CB48-4344-B47F-E8C6D60C8B04}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomActions", "InstallerProjects\CustomActions\CustomActions.csproj", "{5423D985-CB48-4344-B47F-E8C6D60C8B04}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "Installer Projects\Installer\Installer.wixproj", "{F0168B9F-6815-40DF-BA53-46CEE7683B68}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "InstallerProjects\Installer\Installer.wixproj", "{F0168B9F-6815-40DF-BA53-46CEE7683B68}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5423D985-CB48-4344-B47F-E8C6D60C8B04} = {5423D985-CB48-4344-B47F-E8C6D60C8B04}
 	EndProjectSection
