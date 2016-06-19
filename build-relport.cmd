@@ -9,9 +9,11 @@ set SEVENZIP="%ProgramFiles%\7-Zip\7z.exe"
 set VCVARSALL="%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
 call %VCVARSALL% x86
 
+IF NOT "%~1"=="build" goto skipbuild
 echo Building...
 "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe" "%~dp0\mRemoteV1.sln" /Rebuild "Release Portable"
 
+:skipbuild
 set SIGCHECK=!SIGCHECK:"=^"!
 set SIGCHECK=!SIGCHECK: =^^ !
 set SIGCHECK=!SIGCHECK:(=^^(!
@@ -30,21 +32,6 @@ copy %~dp0\*.txt %~dp0\mRemoteV1\bin\package
 copy "%~dp0\Installer Projects\Installer\Dependencies\PuTTYNG.exe" %~dp0\mRemoteV1\bin\package
 
 xcopy /S /Y "%~dp0\mRemoteV1\bin\Release Portable" %~dp0\mRemoteV1\bin\package
-
-rem Move the help files to the proper location
-move %~dp0\mRemoteV1\bin\package\Resources\Help %~dp0\mRemoteV1\bin\package\
-
-rem These del's can error out, that's OK. We don't want these files in the release.
-del /s /q "%~dp0\mRemoteV1\bin\package\app.publish"
-rmdir "%~dp0\mRemoteV1\bin\package\app.publish"
-del /s /q "%~dp0\mRemoteV1\bin\package\Resources"
-rmdir "%~dp0\mRemoteV1\bin\package\Resources"
-del "%~dp0\mRemoteV1\bin\package\confCons*"
-del "%~dp0\mRemoteV1\bin\package\mRemoteNG.log"
-del "%~dp0\mRemoteV1\bin\package\pnlLayout.xml"
-del "%~dp0\mRemoteV1\bin\package\extApps.xml"
-del "%~dp0\mRemoteV1\bin\package\*.pdb"
-del "%~dp0\mRemoteV1\bin\package\*vshost*"
 
 echo Creating portable ZIP file...
 echo %PORTABLEZIP% 

@@ -36,7 +36,7 @@ def GetBranchName() {
 def GetPatternToMatchBranchNameFromDirectory() {
 	def patternToUse = ""
 	def folderSeparator = ""
-	def branchNamePattern = "[a-zA-Z0-9\\-_]*"
+	def branchNamePattern = "[a-zA-Z0-9\\-_.]*"
 	def jenkinsJobInfoTag = "@*[0-9]*"
 	echo "isUnix: ${isUnix()}"
 	if (isUnix()) {

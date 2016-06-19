@@ -5,7 +5,6 @@
     <Directory Id="TARGETDIR" Name="SourceDir">
       <Directory Id="$(var.PlatformProgramFilesFolder)">
         <Directory Id="APPLICATIONROOTDIRECTORY" Name="$(var.ProductName)">
-          <Directory Id="HELPFILESDIRECTORY" Name="Help" />
         </Directory>
       </Directory>
 

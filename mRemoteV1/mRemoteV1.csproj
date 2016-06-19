@@ -1196,7 +1196,23 @@
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>call "$(DevEnvDir)..\tools\vsvars32.bat"
-editbin /largeaddressaware mRemoteNG.exe</PostBuildEvent>
+set /p buildenv=&lt;buildenv.tmp
+
+REM Move Help files to correct directory
+move /Y Resources\Help .\
+rmdir /s /q Resources
+
+REM Set LargeAddressAware on binary
+editbin /largeaddressaware mRemoteNG.exe
+
+REM Sign binaries
+IF EXIST C:\mRemoteNG_code_signing_cert.pfx (powershell "&amp;""$(SolutionDir)signfiles.ps1""" %25cd%25)
+
+REM Remove unnecessary files from Release versions
+IF %25buildenv: Portable=%25==Release (
+    rmdir /s /q app.publish
+    del /q *.pdb *.publish *.xml *.backup *.log *vshost* *.tmp
+)</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
@@ -1211,21 +1227,21 @@ editbin /largeaddressaware mRemoteNG.exe</PostBuildEvent>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>false</DebugSymbols>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Release\</OutputPath>
     <NoWarn>1591,660,661</NoWarn>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Portable|x86'">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>false</DebugSymbols>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Release Portable\</OutputPath>
     <DefineConstants>PORTABLE</DefineConstants>
     <NoWarn>1591,660,661</NoWarn>
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
@@ -1257,4 +1273,7 @@ editbin /largeaddressaware mRemoteNG.exe</PostBuildEvent>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Geckofx45.45.0.19.0\build\Geckofx45.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx45.45.0.19.0\build\Geckofx45.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PreBuildEvent>echo $(ConfigurationName) &gt; buildenv.tmp</PreBuildEvent>
+  </PropertyGroup>
 </Project>
