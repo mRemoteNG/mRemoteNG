@@ -246,7 +246,7 @@ namespace mRemoteNG.UI.Window
 				
 		private void tvIndex_AfterSelect(Object sender, TreeViewEventArgs e)
 		{
-			if (((string)e.Node.Tag) != "")
+			if (((string)e.Node.Tag) != "" && e.Node.Tag != null)
 			{
 				wbHelp.Navigate(GeneralAppInfo.HomePath + "\\Help\\" + Convert.ToString(e.Node.Tag) +".htm");
 			}
