@@ -1,13 +1,68 @@
-1.74 (2016-05-31):
+1.74 (2016-06-20):
+
+  Supported Platforms/Components:
+  -------------------------------
+  Windows 7 SP1 (with RDP Client v8: KB2592687/KB2923545) or later
+  .NET Framework 4 or later
+  XULRunner is no longer required for Gecko support (see below)
+  
+  
+  General Changes:
+  ----------------
 	Converted source from Visual Basic to C Sharp
-	Lots of code refactoring
-	Removed Keyboard shortcut functionality (introduced in 1.73 beta, caused stability issues, may be re-added in a future release)
-	Updated PuTTY to 0.67
+	Lots of code refactoring/clean up/general stability changes
+	MR-714: Removed Keyboard shortcut functionality
+	  - Introduced in 1.73 beta that was never officially released
+	  - This caused stability issues
+	  - May be re-added in a future release
+	  - Removal does *NOT* impact the ability to send keyboard shortcuts to RDP sessions (when redirect key combinations is set to "yes")
+	MR-559: Removed RDP Sessions panel functionality. This required a library for which no trusted origin/source could be located
+	Removed a bunch of old code/libraries and replaced them accordingly
+	
+	
+	Security Updates:
+	-----------------
+	MR-775, MR-745: Updated PuTTY to 0.67
+	
+	
+	Features/Enhancements:
+	----------------------
+	Updated to latest DockPanelSuite and enabled a slick new theme!
+	MR-145: Installer is now MSI based
+	MR-255: Updated RDP Client to version 8
+	MR-389: Updates to IE rendering engine
+	  - Support for latest version of IE (9-11)
+	  - Dropped support for IE 7 & IE 8
+	MR-850: Replaced XULRunner with GeckoFx
+	  - No need to manually configure to have the Gecko rendering engine available now
+	  - Install image is now significantly larger due to the inclusion of the Gecko Engine
+	MR-821: Initial Japanese translation included
+	Port Scan is now Asynchronous (and is significantly faster)
+	
+	
+	Fixes:
+	------
+	MR-854: crashes when right clicking on connection tab
+	MR-852: Option "Allow only a single instance of the application" non-functional
+	MR-836: Trying to delete a folder of connections only deletes 2 connections at a time
+	MR-824, MR-706: Suppress Script Errors when using the IE rendering engine
+	MR-822: Improve RDP error code messages
+	MR-640: Fixed Inheritance not working
+	MR-639: RDP: Connect to console session
+	MR-610, MR-582, MR-451: RDP: Protocol Error 3334 or exceptions with large number of connections open
+	  - This problem appears largely resolved by most reports and testing
+	  - Further workarounds/problem avoidance: Disable Bitmap Caching on all RDP session configuration
+	MR-429: Display issue on the Options -> Advanced panel
+	MR-385: Inheritance settings lost when moving item to the root of the tree
+	
+	
 	
 1.73 Beta 2 (NEVER RELEASED):
   Fixed issue MR-619 - Keyboard shortcuts stop working after locking the screen with Win+L
   Added support for importing files from PuTTY Connection Manager.
   Improved the import and export functionality.
+
+
 
 1.73 Beta 1 (2013-11-19):
   Added feature MR-16 - Add keyboard shortcuts to switch between tabs
@@ -25,7 +80,7 @@
   Fixed issue MR-556 - Export fails when overwriting an existing file
   Fixed issue MR-594 - Crash on startup if write access is denied to the IE browser emulation registry key
   Fixed issue MR-603 - Some configuration options are still shown even when inheritance is enabled
-  Added "Reset" to config panel context menu to allow resetting some config settings to their default value.
+  MR-590: Added "Reset" to config panel context menu to allow resetting some config settings to their default value.
   Added and improved menu icons.
   Removed misleading log messages about RD Gateway support.
   Removed invalid "Site" configuration option from PuTTY Saved Sessions.
@@ -33,9 +88,13 @@
   Fixed config panel showing settings from previously loaded connection file after loading a new one.
   Improved handling of variables in external tool arguments.
 
+
+
 1.72 (2013-11-13):
   Fixed issue MR-592 - Unable to run VBS script as an external tool
   Fixed issue MR-596 - Incorrect escaping of quotation marks in external tool arguments
+
+
 
 1.71 (2013-10-29):
   Fixed issue MR-574 - Crash when retrieving RDP session list if eolwtscom.dll is not registered
@@ -46,11 +105,15 @@
   Improved error reporting when loading connections files.
   Removed warning message when mRemoteNG is started for the first time about new connections file being created.
 
+
+
 1.71 Release Candidate 2 (2013-10-16):
   Fixed issue MR-560 - Cannot Auto-Update With Open Connections: Unable to find an entry point named 'TaskDialogIndirect' in DLL 'ComCtl32'
   Fixed issue MR-565 - Double Folder keep heritage on the initial Folder
   Fixed issue MR-566 - Typo in German UI Automatic Update Settings
   Fixed duplicated folders possibly being named "New Connection" instead of the original folder's name.
+
+
 
 1.71 Release Candidate 1 (2013-10-01):
   Fixed issue MR-495 - Having a negative range in port scan creates memory exhaustion.
@@ -68,10 +131,14 @@
   Added Chinese (Traditional) translation.
   Added partial Greek and Hungarian translations.
 
+
+
 1.71 Beta 5 (2013-06-09):
   Fixed issue MR-491 - Could not start RDP Connection
   Fixed issue MR-499 - TS Gateway is not working in latest release 1.71
   Fixed typo in SQL queries.
+
+
 
 1.71 Beta 4 (2013-05-28):
   Added feature MR-435 - Add digital signature check to updater
@@ -104,6 +171,8 @@
   Lowered required version of RDC from 6.1 to 6.0.
   Updated VncSharpNG to 1.3.4896.25007.
 
+
+
 1.71 Beta 3 (2013-03-20):
   Fixed issue MR-397 - Putty disappears from the screen
   Fixed issue MR-398 - Full Screen mode doesn't correctly make use of available space
@@ -114,6 +183,8 @@
   Fixed new connections having a globe icon.
   Fixed the category names in the themes tab of the options dialog on Windows XP not showing correctly.
   Fixed PuTTY saved sessions with spaces or special characters not being listed.
+
+
 
 1.71 Beta 2 (2013-03-19):
   Added feature MR-336 - Customizable background color for the windows/panels
@@ -129,6 +200,8 @@
   The username and domain settings are now hidden for VNC connections since they are not supported.
   Changed "Automatically get session information" to be disabled by default.
   RDP connections can now be switched to full screen mode when redirect key combinations is enabled.
+
+
 
 1.71 Beta 1 (2013-03-04):
   Added feature MR-329 - Create Option to disable the "Quick: " prefix
@@ -148,6 +221,8 @@
   If RDC 7.0 or higher is installed, the connection bar is no longer briefly shown when connecting to an RDP connection with redirect key combinations enabled.
   If RDC 8.0 or higher is installed, RDP connections automatically adjust their size when the window is resized or when toggling full screen mode.
 
+
+
 1.70 (2013-03-07):  
   Fixed issue MR-339 - Connection group collapses with just one click
   Fixed issue MR-340 - Object reference not set to an instance of an object.
@@ -156,10 +231,14 @@
   Fixed issue MR-355 - Moving sub folders to top level causes property loss
   Fixed tabs not closing on double-click when the active tab is a PuTTY connection.
 
+
+
 1.70 Release Candidate 2 (2013-02-25):
   Fixed issue MR-332 - Can't select different tab with one click after disconnecting existing tab
   Fixed issue MR-338 - PuTTYNG crashing on fresh install of mRemoteNG
   Re-enabled PuTTYNG integration enhancements on Windows 8
+
+
 
 1.70 Release Candidate 1 (2013-02-22):
   Fixed issue MR-183 - Error trying to save connections when using SQL - Invalid column name _parentConstantId
@@ -173,6 +252,8 @@
   Added option to always show panel tabs.
   Fixed "Decryption failed. Padding is invalid and cannot be removed." notification.
   Fixed KiTTY opening in a separate window when using a saved session.
+
+
 
 1.70 Beta 2 (2013-02-18):
   Fixed issue MR-47 - Silent Installation Prompts for Language
@@ -216,6 +297,7 @@
   Improved the use of Tab and Shift-Tab to cycle through entries in the Config grid.
   Improved loading of XML files from older versions of mRemote/mRemoteNG.
 
+
 1.70 Beta 1 (2012-02-27):
   Fixed issue MR-77 - VerifyDatabaseVersion (Config.Connections.Save) failed. Version string portion was too short or too long.
   Fixed issue MR-78 - Renaming Connections
@@ -240,6 +322,8 @@
   Updated VncSharpNG to version 1.2.4440.36644.
   Added debugging symbols for VncSharpNG.
 
+
+
 1.69 (2011-12-09):
   Fixed issue #66 - Fresh Install Fails to Create Config
   Fixed issue #69 - Connection file gets erased
@@ -251,10 +335,14 @@
   Binaries are now digitally signed
   Added Credits, License, and Version History items to the Start Menu and made Start Menu item names localizable.
 
+
+
 1.68 (2011-07-07):
   Fixed issue #48 - VerifyDatabaseVersion fails with new (empty) database tables.
   Fixed issue #60 - Can't save connections file
   Fixed issue #62 - Connection file error upon launch.
+
+
 
 1.67 (2011-06-05):
   Fixed migration of external tools configuration and panel layout from Local to Roaming folder.
@@ -287,8 +375,12 @@
   Fixed tab order of controls in Options dialog.
   Fixed bug 45 - Changing some settings in the config file may not save.
 
+
+
 1.66 (2011-05-02):
   Fixed connections not working
+
+
 
 1.65 (2011-05-02):
   Fixed Ctrl-Tab and Ctrl-Shift-Tab not working in any other applications while mRemoteNG is running
@@ -296,6 +388,8 @@
   Fixed bug 36 - Install creates shortcuts only for the installing user
   Fixed bug 38 - Application uses the wrong Application Data settings folder (in Local Settings)
   Added code to the installer to check that the user is in the 'Power Users' or 'Administrators' group
+
+
 
 1.64 (2011-04-27):
   Fixed bug 6 - VNC CTRL+key & keyboard combo mappings are broken
@@ -316,6 +410,8 @@
   Updated DockPanel Suite to version 2.5 RC1
   Updated VNCSharpNG to correct Ctrl and Alt key pass-through behavior
 
+
+
 1.63 (2010-02-02):
   New icon and logo
   Fixed problems moving or resizing the main window while PuTTY (SSH/telnet/rlogin/raw) connections are open
@@ -330,6 +426,8 @@
   Added support for connecting through Remote Desktop Gateway servers
   Popups can now be allowed in Internet Explorer by holding Ctrl+Alt when clicking a link
   Added PuTTY Settings item to tab context menu
+
+
 
 1.62 (2010-01-19):
   Switched to VncSharp, an open source VNC component
@@ -347,9 +445,13 @@
   Added RDP, VNC and ICA version numbers to Components Check page
   Fixed a bug with the inheritance buttons on the Config panel disappearing after awhile
 
+
+
 1.61 (2010-01-14):
   Removed unlicensed SmartCode Solutions ViewerX VNC Viewer ActiveX
   This version of mRemoteNG does not support VNC
+
+
 
 1.60 (2010-01-09):
   Changed name to mRemoteNG
@@ -362,6 +464,8 @@
   Added Report a Bug and Support Forum links to the Help menu
   Moved Check for Updates to the Help menu
   Changed website links in Help menu and About page to load within mRemoteNG instead of launching an external browser
+
+-----
 
 1.50:
   Added the following formats to the "Save Connections As" function:

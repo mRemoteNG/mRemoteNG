@@ -142,7 +142,8 @@
     <value>AddNodesFromSQL failed!</value>
   </data>
   <data name="strAllowOnlySingleInstance" xml:space="preserve">
-    <value>Allow only a single instance of the application (mRemoteNG restart required)</value>
+    <value>アプリケーションの単一インスタンスのみを許可する（mRemoteNGを再起動する必要があります）</value>
+    <comment>Allow only a single instance of the application (mRemoteNG restart required)</comment>
   </data>
   <data name="strAlways" xml:space="preserve">
     <value>常時</value>
@@ -157,7 +158,7 @@
     <value>常にパネルのタブを表示</value>
   </data>
   <data name="strAlwaysShowSysTrayIcon" xml:space="preserve">
-    <value>Always show notification area icon</value>
+    <value>常に通知領域アイコンを表示</value>
   </data>
   <data name="strAskUpdatesCommandAskLater" xml:space="preserve">
     <value>もう一度後で聞く</value>
@@ -166,7 +167,7 @@
     <value>Customize the settings now</value>
   </data>
   <data name="strAskUpdatesCommandRecommended" xml:space="preserve">
-    <value>Use the recommended settings</value>
+    <value>推奨設定を使用</value>
   </data>
   <data name="strAskUpdatesContent" xml:space="preserve">
     <value>{0} can automatically check for updates that may provide new features and bug fixes. It is recommended that you allow {0} to check for updates weekly.</value>
@@ -306,7 +307,7 @@ When you are finished downloading extract the package to a path of your choice. 
 If you are still not able to pass this check or use the Gecko Engine in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
-    <value>XULrunner was found and seems to be installed properly.</value>
+    <value>GeckoFx was found and seems to be installed properly.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA requires that the XenDesktop Online Plugin is installed and that the wfica.ocx library is registered. You can download the client here: http://www.citrix.com/download/
@@ -319,7 +320,7 @@ If you are still not able to pass this check or use ICA in mRemoteNG please cons
 Citrix ICA Client Control Version {0}</value>
   </data>
   <data name="strCcNotInstalledProperly" xml:space="preserve">
-    <value>not installed properly</value>
+    <value>正しくインストールされていません</value>
   </data>
   <data name="strCcPuttyFailed" xml:space="preserve">
     <value>The SSH, Telnet, Rlogin and RAW protocols need PuTTY to work. PuTTY comes with every mRemoteNG package and is located in the installation path.
@@ -390,7 +391,8 @@ VncSharpNG Control Version {0}</value>
     <value>点検する</value>
   </data>
   <data name="strCheckProperInstallationOfComponentsAtStartup" xml:space="preserve">
-    <value>Check proper installation of components at startup</value>
+    <value>起動時に必要なコンポネントがインストールされているかを確認する</value>
+    <comment>Check proper installation of components at startup</comment>
   </data>
   <data name="strChoosePanelBeforeConnecting" xml:space="preserve">
     <value>接続時にパネルを選択する</value>
@@ -483,7 +485,7 @@ VncSharpNG Control Version {0}</value>
     <value>Are you sure you want to delete the connection, "{0}"?</value>
   </data>
   <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
-    <value>Are you sure you want to delete the empty folder, "{0}"?</value>
+    <value>空のフォルダ「{0}」削除してもよろしいですか？</value>
   </data>
   <data name="strConfirmDeleteNodeFolderNotEmpty" xml:space="preserve">
     <value>Are you sure you want to delete the folder, "{0}"? Any folders or connections that it contains will also be deleted.</value>
@@ -568,7 +570,7 @@ Starting with new connections file.</value>
     <value>Connection to {0} via {1} closed by user {2}.  (Description: "{3}"; User Field: "{4}")</value>
   </data>
   <data name="strConnenctionCloseEvent" xml:space="preserve">
-    <value>Connection Event Closed</value>
+    <value>接続イベントに失敗しました</value>
   </data>
   <data name="strConnenctionCloseEventFailed" xml:space="preserve">
     <value>Connection Event Closed failed!</value>
@@ -917,10 +919,10 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>アドレス：</value>
   </data>
   <data name="strLabelArguments" xml:space="preserve">
-    <value>Arguments:</value>
+    <value>パラメータ：</value>
   </data>
   <data name="strLabelChangeLog" xml:space="preserve">
-    <value>Change Log:</value>
+    <value>履歴：</value>
   </data>
   <data name="strLabelClosingConnections" xml:space="preserve">
     <value>切断時：</value>
@@ -993,19 +995,21 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>（自動検出）</value>
   </data>
   <data name="strLanguageRestartRequired" xml:space="preserve">
-    <value>{0} must be restarted before changes to the language will take effect.</value>
+    <value>言語設定の変更を有効にするには{0}の再起動が必要です</value>
+    <comment>{0} must be restarted before changes to the language will take effect.</comment>
   </data>
   <data name="strLoadFromSqlFailed" xml:space="preserve">
     <value>SQLサーバーからの読み込みに失敗しました</value>
   </data>
   <data name="strLoadFromSqlFailedContent" xml:space="preserve">
-    <value>The connection information could not be loaded from the SQL server.</value>
+    <value>接続情報はSQLサーバーから読み込むことが出来ませんでした</value>
+    <comment>The connection information could not be loaded from the SQL server.</comment>
   </data>
   <data name="strLoadFromXmlFailed" xml:space="preserve">
     <value>XMLファイルからの読み込みに失敗しました</value>
   </data>
   <data name="strLocalFile" xml:space="preserve">
-    <value>Local file</value>
+    <value>ローカルファイル</value>
   </data>
   <data name="strLocalFileDoesNotExist" xml:space="preserve">
     <value>ファイルが存在しません</value>
@@ -1303,7 +1307,8 @@ If you run into such an error, please create a new connection file!</value>
 If you run into such an error, please create a new connection file!</comment>
   </data>
   <data name="strOpenNewTabRight" xml:space="preserve">
-    <value>Open new tab to the right of the currently selected tab</value>
+    <value>選択されているタブの右側に新規タブを作成</value>
+    <comment>Open new tab to the right of the currently selected tab</comment>
   </data>
   <data name="strOpenPorts" xml:space="preserve">
     <value>Open Ports</value>
@@ -1361,7 +1366,7 @@ If you run into such an error, please create a new connection file!</comment>
     <value>同じパスワードを入力してください</value>
   </data>
   <data name="strPasswordStatusTooShort" xml:space="preserve">
-    <value>The password must be at least 3 characters long.</value>
+    <value>パスワードは最低３文字必要です</value>
   </data>
   <data name="strPleaseFillAllFields" xml:space="preserve">
     <value>全て入力してください</value>
@@ -1376,7 +1381,7 @@ If you run into such an error, please create a new connection file!</comment>
     <value>(These properties will only be saved if you select mRemote/mRemoteNG XML as output file format!)</value>
   </data>
   <data name="strPropertyDescriptionAddress" xml:space="preserve">
-    <value>Enter the hostname or ip you want to connect to.</value>
+    <value>ホスト名かIPアドレスを入力してください</value>
   </data>
   <data name="strPropertyDescriptionAll" xml:space="preserve">
     <value>Toggle all inheritance options.</value>
@@ -1445,13 +1450,15 @@ If you run into such an error, please create a new connection file!</comment>
     <value>This is the name that will be displayed in the connections tree.</value>
   </data>
   <data name="strPropertyDescriptionPanel" xml:space="preserve">
-    <value>Sets the panel in which the connection will open.</value>
+    <value>接続をするパネルを指定</value>
+    <comment>Sets the panel in which the connection will open.</comment>
   </data>
   <data name="strPropertyDescriptionPassword" xml:space="preserve">
-    <value>パスワードを入力してください</value>
+    <value>パスワードを入力</value>
   </data>
   <data name="strPropertyDescriptionPort" xml:space="preserve">
-    <value>Enter the port the selected protocol is listening on.</value>
+    <value>プロトコルのポートを入力</value>
+    <comment>Enter the port the selected protocol is listening on.</comment>
   </data>
   <data name="strPropertyDescriptionProtocol" xml:space="preserve">
     <value>Choose the protocol mRemoteNG should use to connect to the host.</value>
@@ -1562,7 +1569,7 @@ If you run into such an error, please create a new connection file!</comment>
     <value>テーマの表示</value>
   </data>
   <data name="strPropertyNameDisplayWallpaper" xml:space="preserve">
-    <value>Display Wallpaper</value>
+    <value>ウォールペーパーを表示</value>
   </data>
   <data name="strPropertyNameDomain" xml:space="preserve">
     <value>ドメイン</value>
@@ -1580,7 +1587,7 @@ If you run into such an error, please create a new connection file!</comment>
     <value>Encryption Strength</value>
   </data>
   <data name="strPropertyNameExternalTool" xml:space="preserve">
-    <value>External Tool</value>
+    <value>外部ツール</value>
   </data>
   <data name="strPropertyNameExternalToolAfter" xml:space="preserve">
     <value>External Tool After</value>
@@ -1828,16 +1835,16 @@ Message:
     <value>Disable Full Window drag</value>
   </data>
   <data name="strRDPDisableMenuAnimations" xml:space="preserve">
-    <value>Disable Menu Animations</value>
+    <value>メニューのアニメーションを無効にする</value>
   </data>
   <data name="strRDPDisableThemes" xml:space="preserve">
-    <value>Disable Themes</value>
+    <value>テーマを無効にする</value>
   </data>
   <data name="strRDPDisableWallpaper" xml:space="preserve">
     <value>Disable Wallpaper</value>
   </data>
   <data name="strRdpDisconnected" xml:space="preserve">
-    <value>RDP disconnected!</value>
+    <value>リモートデスクトップが切断されました</value>
   </data>
   <data name="strRdpDisconnectFailed" xml:space="preserve">
     <value>RDP Disconnect failed, trying to close!</value>
@@ -2018,10 +2025,12 @@ Message:
     <value>Couldn't save settings or dispose SysTray Icon!</value>
   </data>
   <data name="strShowDescriptionTooltips" xml:space="preserve">
-    <value>Show description tooltips in connection tree</value>
+    <value>接続ツリーに接続の説明をツールチップを表示する</value>
+    <comment>Show description tooltips in connection tree</comment>
   </data>
   <data name="strShowFullConsFilePath" xml:space="preserve">
-    <value>Show full connections file path in window title</value>
+    <value>ウィンドウのタイトルに接続設定ファイルへのフルパス名を表示する</value>
+    <comment>Show full connections file path in window title</comment>
   </data>
   <data name="strShowLogonInfoOnTabs" xml:space="preserve">
     <value>Show logon information on tab names</value>

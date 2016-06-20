@@ -608,7 +608,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to XULrunner was found and seems to be installed properly..
+        ///   Looks up a localized string similar to GeckoFx was found and seems to be installed properly..
         /// </summary>
         internal static string strCcGeckoOK {
             get {
@@ -5704,7 +5704,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Single click on opened connection switches to it.
+        ///   Looks up a localized string similar to Single click on opened connection in Connection Tree switches to opened Connection Tab.
         /// </summary>
         internal static string strSingleClickOnOpenConnectionSwitchesToIt {
             get {

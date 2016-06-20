@@ -1095,19 +1095,12 @@ namespace mRemoteNG.App
                 ProtocolBase Prot = (ProtocolBase)sender;
                 if (Prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
                 {
-                    string[] Reason = DisconnectedMessage.Split("\r\n".ToCharArray());
-                    string ReasonCode = Reason[0];
-                    string ReasonDescription = Reason[1];
+                    string ReasonCode = DisconnectedMessage.Split("\r\n".ToCharArray())[0];
+                    string desc = DisconnectedMessage.Replace("\r\n", " ");
+                    
                     if (Convert.ToInt32(ReasonCode) > 3)
                     {
-                        if (!string.IsNullOrEmpty(ReasonDescription))
-                        {
-                            MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strRdpDisconnected + Environment.NewLine + ReasonDescription + Environment.NewLine + string.Format(Language.strErrorCode, ReasonCode));
-                        }
-                        else
-                        {
-                            MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strRdpDisconnected + Environment.NewLine + string.Format(Language.strErrorCode, ReasonCode));
-                        }
+                        MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strRdpDisconnected + Environment.NewLine + desc);
                     }
                 }
             }

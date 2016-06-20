@@ -295,7 +295,7 @@ Jeśli nadal nie można sprawdzić lub użyć fukcji Sesji (RDP) skonsultuj to n
     <value>Aby użyć Gecko Rendering Engine, musisz mieć XULrunner 1.8.1.x oraz podać ścieżkę instalacji w opcjach. XULrunner 1.8.1.3 możesz pobrać ze ftp: ftp://ftp.mozilla.org/pub/xulrunner/releases/1.8.1.3/contrib/win32/ Po zakończeniu pobierania wypakuj pakiet do właściwego katalogu. Następnie w mRemoteNG przejdź do menu Narzędzia - Opcje - Zaawansowane i wprowadź poprawną ścieżkę w polu Ścieżka XULrunner. Jeśli to nadal nie pomogło prosimy o kontakt na mRemoteNG Forum na stronie http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
-    <value>XULrunner został znaleziony i wydaje się być zainstalowany prawidłowo.</value>
+    <value>GeckoFx został znaleziony i wydaje się być zainstalowany prawidłowo.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA wymaga zainstalowania wtyczki Online XenDesktop, i aby była zarejestrowana biblioteka wfica.ocx. Możesz pobrać klienta tutaj: http://www.citrix.com/download/ Jeżeli masz zainstalowany Plugin Online XenDesktop a nadal nie działa, spróbuj ręcznie zarejestrować bibliotekę wfica.ocx. Aby to zrobić wybierz polecenie Uruchom (Start - Uruchom) i wprowadź w linii komend: regsvr32 "c:\Program Files\Citrix\ICA Client\wfica.ocx" (gdzie c:\Program Files\Citrix\ICA Client\ jest ścieżką instalacji XenDesktop Online Plugin). Jeśli nadal nie można użyć ICA w mRemoteNG prosimy o kontakt mRemoteNG Forum na http://forum.mremoteng.org/</value>

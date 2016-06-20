@@ -296,7 +296,7 @@ Em seguida, emtre no mRemoteNG e vá em ferramentas - opções - avançadas e di
 Se ainda não conseguir passar esta verificação ou usar o motor Gecko em mRemoteNG por favor consultar o fórum de mRemoteNG em http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcGeckoOK" xml:space="preserve">
-    <value>XULrunner foi encontrado e aparenta estar instalado corretamente.</value>
+    <value>GeckoFx foi encontrado e aparenta estar instalado corretamente.</value>
   </data>
   <data name="strCcICAFailed" xml:space="preserve">
     <value>ICA requer que o XenDesktop Online Plugin esteja instalado e a biblioteca wfica.ocs registrada. Você pode baixar o cliente aqui: http://www.citrix.com/download/ 
