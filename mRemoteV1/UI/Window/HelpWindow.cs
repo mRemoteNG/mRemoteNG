@@ -150,6 +150,7 @@ namespace mRemoteNG.UI.Window
 			TreeNode24.Text = "Quick Reference";
 			TreeNode25.Name = "Node0";
 			TreeNode25.Text = "Help";
+            TreeNode25.Tag = "Index";
 			tvIndex.Nodes.AddRange(new TreeNode[] {TreeNode25});
 			tvIndex.ShowRootLines = false;
 			tvIndex.Size = new System.Drawing.Size(207, 321);
