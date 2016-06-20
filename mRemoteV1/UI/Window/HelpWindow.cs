@@ -35,7 +35,6 @@ namespace mRemoteNG.UI.Window
 			TreeNode TreeNode10 = new TreeNode("Config");
 			TreeNode TreeNode11 = new TreeNode("Errors and Infos");
 			TreeNode TreeNode12 = new TreeNode("Save As / Export");
-			TreeNode TreeNode13 = new TreeNode("Sessions");
 			TreeNode TreeNode14 = new TreeNode("Screenshot Manager");
 			TreeNode TreeNode15 = new TreeNode("Connection");
 			TreeNode TreeNode16 = new TreeNode("Options");
@@ -45,7 +44,7 @@ namespace mRemoteNG.UI.Window
 			TreeNode TreeNode20 = new TreeNode("Import From Active Directory");
 			TreeNode TreeNode21 = new TreeNode("External Applications");
 			TreeNode TreeNode22 = new TreeNode("Port Scan");
-			TreeNode TreeNode23 = new TreeNode("User Interface", new TreeNode[] {TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12, TreeNode13, TreeNode14, TreeNode15, TreeNode16, TreeNode17, TreeNode18, TreeNode19, TreeNode20, TreeNode21, TreeNode22});
+			TreeNode TreeNode23 = new TreeNode("User Interface", new TreeNode[] {TreeNode8, TreeNode9, TreeNode10, TreeNode11, TreeNode12, TreeNode14, TreeNode15, TreeNode16, TreeNode17, TreeNode18, TreeNode19, TreeNode20, TreeNode21, TreeNode22});
 			TreeNode TreeNode24 = new TreeNode("Quick Reference");
 			TreeNode TreeNode25 = new TreeNode("Help", new TreeNode[] {TreeNode1, TreeNode7, TreeNode23, TreeNode24});
 			wbHelp = new WebBrowser();
@@ -117,9 +116,6 @@ namespace mRemoteNG.UI.Window
 			TreeNode12.Name = "Node11";
 			TreeNode12.Tag = "SaveAsExport";
 			TreeNode12.Text = "Save As / Export";
-			TreeNode13.Name = "Node12";
-			TreeNode13.Tag = "Sessions";
-			TreeNode13.Text = "Sessions";
 			TreeNode14.Name = "Node13";
 			TreeNode14.Tag = "ScreenshotManager";
 			TreeNode14.Text = "Screenshot Manager";
@@ -154,6 +150,7 @@ namespace mRemoteNG.UI.Window
 			TreeNode24.Text = "Quick Reference";
 			TreeNode25.Name = "Node0";
 			TreeNode25.Text = "Help";
+            TreeNode25.Tag = "Index";
 			tvIndex.Nodes.AddRange(new TreeNode[] {TreeNode25});
 			tvIndex.ShowRootLines = false;
 			tvIndex.Size = new System.Drawing.Size(207, 321);
@@ -249,7 +246,7 @@ namespace mRemoteNG.UI.Window
 				
 		private void tvIndex_AfterSelect(Object sender, TreeViewEventArgs e)
 		{
-			if (((string)e.Node.Tag) != "")
+			if (((string)e.Node.Tag) != "" && e.Node.Tag != null)
 			{
 				wbHelp.Navigate(GeneralAppInfo.HomePath + "\\Help\\" + Convert.ToString(e.Node.Tag) +".htm");
 			}

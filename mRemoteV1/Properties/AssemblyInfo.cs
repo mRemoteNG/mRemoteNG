@@ -13,7 +13,7 @@ using System.Runtime.InteropServices;
 
 [assembly:AssemblyTitle("mRemoteNG")]
 [assembly: AssemblyDescription("Multi-protocol remote connections manager")]
-[assembly: AssemblyCompany("mRemoteNG Dev Team")]
+[assembly: AssemblyCompany("")]
 [assembly:AssemblyProduct("mRemoteNG")]
 [assembly: AssemblyCopyright("Copyright © 2016 mRemoteNG Dev Team; 2010-2013 Riley McArdle; 2007-2009 Felix Deimel")]
 [assembly:AssemblyTrademark("")]
