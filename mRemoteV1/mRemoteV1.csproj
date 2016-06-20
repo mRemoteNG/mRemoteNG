@@ -1212,7 +1212,7 @@ IF %25buildenv: Portable=%25==Release (
 )
 
 REM Package ZIP if building Release Portable
-IF %25buildenv: =%25==ReleasePortable ("$(SolutionDir)build-relport.cmd")</PostBuildEvent>
+IF %25buildenv: =%25==ReleasePortable ("$(SolutionDir)Tools\build-relport.cmd")</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
