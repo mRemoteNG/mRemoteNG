@@ -1203,13 +1203,16 @@ REM Set LargeAddressAware on binary
 editbin /largeaddressaware mRemoteNG.exe
 
 REM Sign binaries
-IF EXIST C:\mRemoteNG_code_signing_cert.pfx (powershell "&amp;""$(SolutionDir)signfiles.ps1""" %25cd%25)
+IF EXIST C:\mRemoteNG_code_signing_cert.pfx (powershell "&amp;""$(SolutionDir)Tools\signfiles.ps1""" '%25cd%25')
 
 REM Remove unnecessary files from Release versions
 IF %25buildenv: Portable=%25==Release (
     rmdir /s /q app.publish
     del /q *.pdb *.publish *.xml *.backup *.log *vshost* *.tmp
-)</PostBuildEvent>
+)
+
+REM Package ZIP if building Release Portable
+IF %25buildenv: =%25==ReleasePortable ("$(SolutionDir)build-relport.cmd")</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DebugSymbols>true</DebugSymbols>
