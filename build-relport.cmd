@@ -3,8 +3,8 @@
 setlocal enabledelayedexpansion
 
 rem Windows Sysinternals Sigcheck from http://technet.microsoft.com/en-us/sysinternals/bb897441
-set SIGCHECK="%ProgramFiles(x86)%\Sigcheck\sigcheck.exe"
-set SEVENZIP="%ProgramFiles%\7-Zip\7z.exe"
+set SIGCHECK="Tools\sigcheck.exe"
+set SEVENZIP="Tools\7zip\7za.exe"
 
 set VCVARSALL="%ProgramFiles(x86)%\Microsoft Visual Studio 14.0\VC\vcvarsall.bat"
 call %VCVARSALL% x86
