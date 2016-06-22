@@ -16,6 +16,7 @@ echo Building...
 "C:\Program Files (x86)\Microsoft Visual Studio 14.0\Common7\IDE\devenv.exe" "%SOLUTIONDIR%\mRemoteV1.sln" /Rebuild "Release Portable"
 
 :skipbuild
+IF NOT EXIST "%SOLUTIONDIR%\mRemoteV1\bin\Release Portable\mRemoteNG.exe" echo Did you forget to build? && goto end
 set SIGCHECK=!SIGCHECK:"=^"!
 set SIGCHECK=!SIGCHECK: =^^ !
 set SIGCHECK=!SIGCHECK:(=^^(!
@@ -38,5 +39,7 @@ xcopy /S /Y "%SOLUTIONDIR%\mRemoteV1\bin\Release Portable" "%SOLUTIONDIR%\mRemot
 echo Creating portable ZIP file...
 echo %PORTABLEZIP% 
 del /f /q %PORTABLEZIP% > nul 2>&1
-%SEVENZIP% a -bt -mx=9 -mm=LZMA -tzip -y -r %PORTABLEZIP% "%SOLUTIONDIR%\mRemoteV1\bin\package\*.*"
-%SEVENZIP% a -bt -mx=9 -mm=LZMA -tzip -y %PORTABLEZIP% "%SOLUTIONDIR%\*.TXT"
+%SEVENZIP% a -bt -mx=9 -tzip -y -r %PORTABLEZIP% "%SOLUTIONDIR%\mRemoteV1\bin\package\*.*"
+%SEVENZIP% a -bt -mx=9 -tzip -y %PORTABLEZIP% "%SOLUTIONDIR%\*.TXT"
+
+:end
