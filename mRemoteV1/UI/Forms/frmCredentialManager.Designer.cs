@@ -1,6 +1,6 @@
 ﻿namespace mRemoteNG.UI.Forms
 {
-    partial class frmCredentialManager
+    partial class FrmCredentialManager
     {
         /// <summary>
         /// Required designer variable.
@@ -28,25 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lvCredentialList = new System.Windows.Forms.ListView();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnAddCredential = new System.Windows.Forms.Button();
             this.btnRemoveCredential = new System.Windows.Forms.Button();
+            this.btnEditCredential = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listView1
+            // lvCredentialList
             // 
-            this.listView1.Location = new System.Drawing.Point(189, 12);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(367, 309);
-            this.listView1.TabIndex = 0;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lvCredentialList.Location = new System.Drawing.Point(12, 11);
+            this.lvCredentialList.Name = "lvCredentialList";
+            this.lvCredentialList.Size = new System.Drawing.Size(430, 309);
+            this.lvCredentialList.TabIndex = 0;
+            this.lvCredentialList.UseCompatibleStateImageBehavior = false;
+            this.lvCredentialList.View = System.Windows.Forms.View.Details;
             // 
             // btnClose
             // 
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(481, 357);
+            this.btnClose.Location = new System.Drawing.Point(367, 357);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 1;
@@ -56,33 +57,45 @@
             // 
             // btnAddCredential
             // 
-            this.btnAddCredential.Location = new System.Drawing.Point(189, 327);
+            this.btnAddCredential.Location = new System.Drawing.Point(12, 326);
             this.btnAddCredential.Name = "btnAddCredential";
             this.btnAddCredential.Size = new System.Drawing.Size(75, 23);
             this.btnAddCredential.TabIndex = 2;
             this.btnAddCredential.Text = "Add";
             this.btnAddCredential.UseVisualStyleBackColor = true;
+            this.btnAddCredential.Click += new System.EventHandler(this.btnAddCredential_Click);
             // 
             // btnRemoveCredential
             // 
-            this.btnRemoveCredential.Location = new System.Drawing.Point(271, 326);
+            this.btnRemoveCredential.Location = new System.Drawing.Point(174, 326);
             this.btnRemoveCredential.Name = "btnRemoveCredential";
             this.btnRemoveCredential.Size = new System.Drawing.Size(75, 23);
             this.btnRemoveCredential.TabIndex = 3;
             this.btnRemoveCredential.Text = "Remove";
             this.btnRemoveCredential.UseVisualStyleBackColor = true;
             // 
-            // frmCredentialManager
+            // btnEditCredential
+            // 
+            this.btnEditCredential.Location = new System.Drawing.Point(93, 326);
+            this.btnEditCredential.Name = "btnEditCredential";
+            this.btnEditCredential.Size = new System.Drawing.Size(75, 23);
+            this.btnEditCredential.TabIndex = 4;
+            this.btnEditCredential.Text = "Edit";
+            this.btnEditCredential.UseVisualStyleBackColor = true;
+            this.btnEditCredential.Click += new System.EventHandler(this.btnEditCredential_Click);
+            // 
+            // FrmCredentialManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(568, 392);
+            this.ClientSize = new System.Drawing.Size(454, 392);
+            this.Controls.Add(this.btnEditCredential);
             this.Controls.Add(this.btnRemoveCredential);
             this.Controls.Add(this.btnAddCredential);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.listView1);
-            this.Name = "frmCredentialManager";
+            this.Controls.Add(this.lvCredentialList);
+            this.Name = "FrmCredentialManager";
             this.Text = "Credential Manager";
             this.ResumeLayout(false);
 
@@ -90,9 +103,10 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lvCredentialList;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnAddCredential;
         private System.Windows.Forms.Button btnRemoveCredential;
+        private System.Windows.Forms.Button btnEditCredential;
     }
 }

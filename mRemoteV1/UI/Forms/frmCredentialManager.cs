@@ -1,19 +1,31 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+using mRemoteNG;
 using System.Windows.Forms;
+using mRemoteNG.App;
 
 namespace mRemoteNG.UI.Forms
 {
-    public partial class frmCredentialManager : Form
+    public partial class FrmCredentialManager : Form
     {
-        public frmCredentialManager()
+        public FrmCredentialManager()
         {
             InitializeComponent();
+            Load += OnLoad;
+        }
+
+        private void OnLoad(object sender, EventArgs eventArgs)
+        {
+            
+        }
+
+        private void btnAddCredential_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnEditCredential_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void btnClose_Click(object sender, EventArgs e)
