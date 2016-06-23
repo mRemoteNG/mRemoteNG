@@ -55,7 +55,7 @@ namespace mRemoteNG.UI.Forms
 
         private void UpdateCredentialEntry()
         {
-            
+            Runtime.CredentialList.Replace(_credentialInfo);
         }
 
         private void AddCredentialEntry()
