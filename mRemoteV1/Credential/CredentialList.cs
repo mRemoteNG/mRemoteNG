@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Linq;
 
 
 namespace mRemoteNG.Credential
@@ -35,8 +36,13 @@ namespace mRemoteNG.Credential
 				List.Add(cI);
 			}
 		}
-			
-		public CredentialList Copy()
+
+	    public bool Contains(CredentialInfo targetCredentialinfo)
+	    {
+	        return List.Cast<CredentialInfo>().Any(credential => credential.Uuid == targetCredentialinfo.Uuid);
+	    }
+
+	    public CredentialList Copy()
 		{
 			try
 			{

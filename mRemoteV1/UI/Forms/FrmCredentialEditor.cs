@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.Credential;
 
 namespace mRemoteNG.UI.Forms
@@ -46,7 +47,20 @@ namespace mRemoteNG.UI.Forms
 
         private void CommitChanges()
         {
+            if (Runtime.CredentialList.Contains(_credentialInfo))
+                UpdateCredentialEntry();
+            else
+                AddCredentialEntry();
+        }
+
+        private void UpdateCredentialEntry()
+        {
             
+        }
+
+        private void AddCredentialEntry()
+        {
+            Runtime.CredentialList.Add(_credentialInfo);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
