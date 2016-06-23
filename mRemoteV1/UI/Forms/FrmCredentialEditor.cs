@@ -78,9 +78,9 @@ namespace mRemoteNG.UI.Forms
             _credentialInfo.Domain = txtManualEntryDomain.Text;
         }
 
-        private void maskedTextBoxManualEntryPassword_TextChanged(object sender, EventArgs e)
+        private void secureTextBoxManualEntryPassword_TextChanged(object sender, EventArgs e)
         {
-            _credentialInfo.SetPasswordFromUnsecureString(maskedTextBoxManualEntryPassword.Text);
+            _credentialInfo.Password = secureTextBoxManualEntryPassword.SecureString;
         }
     }
 }

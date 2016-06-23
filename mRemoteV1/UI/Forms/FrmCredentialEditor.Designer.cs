@@ -35,7 +35,6 @@
             this.tabPageManualEntry = new System.Windows.Forms.TabPage();
             this.txtManualEntryDomain = new System.Windows.Forms.TextBox();
             this.lblManualEntryDomain = new System.Windows.Forms.Label();
-            this.maskedTextBoxManualEntryPassword = new System.Windows.Forms.MaskedTextBox();
             this.lblManualEntryPassword = new System.Windows.Forms.Label();
             this.tabPageKeePass = new System.Windows.Forms.TabPage();
             this.lblEntryName = new System.Windows.Forms.Label();
@@ -48,6 +47,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxSourceSelector = new System.Windows.Forms.ComboBox();
             this.lblSeparator = new System.Windows.Forms.Label();
+            this.secureTextBoxManualEntryPassword = new mRemoteNG.UI.Controls.SecureTextBox();
             this.tabControlCredentialEditor.SuspendLayout();
             this.tabPageManualEntry.SuspendLayout();
             this.groupBoxCredentialSourceDetails.SuspendLayout();
@@ -83,9 +83,9 @@
             // tabPageManualEntry
             // 
             this.tabPageManualEntry.BackColor = System.Drawing.Color.Transparent;
+            this.tabPageManualEntry.Controls.Add(this.secureTextBoxManualEntryPassword);
             this.tabPageManualEntry.Controls.Add(this.txtManualEntryDomain);
             this.tabPageManualEntry.Controls.Add(this.lblManualEntryDomain);
-            this.tabPageManualEntry.Controls.Add(this.maskedTextBoxManualEntryPassword);
             this.tabPageManualEntry.Controls.Add(this.lblManualEntryPassword);
             this.tabPageManualEntry.Controls.Add(this.txtManualEntryUsername);
             this.tabPageManualEntry.Controls.Add(this.lblManualEntryUsername);
@@ -112,15 +112,6 @@
             this.lblManualEntryDomain.Size = new System.Drawing.Size(43, 13);
             this.lblManualEntryDomain.TabIndex = 4;
             this.lblManualEntryDomain.Text = "Domain";
-            // 
-            // maskedTextBoxManualEntryPassword
-            // 
-            this.maskedTextBoxManualEntryPassword.Location = new System.Drawing.Point(9, 127);
-            this.maskedTextBoxManualEntryPassword.Name = "maskedTextBoxManualEntryPassword";
-            this.maskedTextBoxManualEntryPassword.PasswordChar = '●';
-            this.maskedTextBoxManualEntryPassword.Size = new System.Drawing.Size(170, 20);
-            this.maskedTextBoxManualEntryPassword.TabIndex = 5;
-            this.maskedTextBoxManualEntryPassword.TextChanged += new System.EventHandler(this.maskedTextBoxManualEntryPassword_TextChanged);
             // 
             // lblManualEntryPassword
             // 
@@ -234,6 +225,16 @@
             this.lblSeparator.Size = new System.Drawing.Size(534, 2);
             this.lblSeparator.TabIndex = 16;
             // 
+            // secureTextBoxManualEntryPassword
+            // 
+            this.secureTextBoxManualEntryPassword.Location = new System.Drawing.Point(9, 127);
+            this.secureTextBoxManualEntryPassword.Name = "secureTextBoxManualEntryPassword";
+            this.secureTextBoxManualEntryPassword.PasswordChar = '●';
+            this.secureTextBoxManualEntryPassword.ShortcutsEnabled = false;
+            this.secureTextBoxManualEntryPassword.Size = new System.Drawing.Size(170, 20);
+            this.secureTextBoxManualEntryPassword.TabIndex = 5;
+            this.secureTextBoxManualEntryPassword.TextChanged += new System.EventHandler(this.secureTextBoxManualEntryPassword_TextChanged);
+            // 
             // FrmCredentialEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -264,7 +265,6 @@
         private System.Windows.Forms.TabPage tabPageManualEntry;
         private System.Windows.Forms.TextBox txtManualEntryDomain;
         private System.Windows.Forms.Label lblManualEntryDomain;
-        private System.Windows.Forms.MaskedTextBox maskedTextBoxManualEntryPassword;
         private System.Windows.Forms.Label lblManualEntryPassword;
         private System.Windows.Forms.Label lblEntryName;
         private System.Windows.Forms.TextBox txtEntryName;
@@ -277,5 +277,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox comboBoxSourceSelector;
         private System.Windows.Forms.Label lblSeparator;
+        private Controls.SecureTextBox secureTextBoxManualEntryPassword;
     }
 }

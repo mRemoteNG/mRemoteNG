@@ -32,7 +32,7 @@
             // 
             // SecureTextBox
             // 
-            this.Name = "SecureTextBox";
+            this.ShortcutsEnabled = false;
             this.ResumeLayout(false);
 
         }
