@@ -117,6 +117,7 @@
             // 
             this.maskedTextBoxManualEntryPassword.Location = new System.Drawing.Point(9, 127);
             this.maskedTextBoxManualEntryPassword.Name = "maskedTextBoxManualEntryPassword";
+            this.maskedTextBoxManualEntryPassword.PasswordChar = '●';
             this.maskedTextBoxManualEntryPassword.Size = new System.Drawing.Size(170, 20);
             this.maskedTextBoxManualEntryPassword.TabIndex = 3;
             this.maskedTextBoxManualEntryPassword.TextChanged += new System.EventHandler(this.maskedTextBoxManualEntryPassword_TextChanged);
