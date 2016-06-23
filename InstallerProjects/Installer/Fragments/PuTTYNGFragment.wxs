@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 	<Fragment>
     <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
       <Component Id="C.PuttyNGFile" Guid="*">
-        <File Id="PuttyNGFile" Name="PuTTYNG.exe" Source="Dependencies\PuTTYNG.exe" KeyPath="yes" />
+        <File Id="PuttyNGFile" Name="PuTTYNG.exe" Source="$(var.HarvestPath)\PuTTYNG.exe" KeyPath="yes" />
       </Component>
     </DirectoryRef>
 	</Fragment>

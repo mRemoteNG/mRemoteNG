@@ -368,7 +368,7 @@ namespace mRemoteNG.UI.Window
 				
 		private bool _documentHandlersAdded = false;
 		private bool _floatHandlersAdded = false;
-		private void Connection_DockStateChanged(Object sender, EventArgs e)
+		private void Connection_DockStateChanged(object sender, EventArgs e)
 		{
 			if (DockState == DockState.Float)
 			{
@@ -464,7 +464,7 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		private void Connection_ResizeBegin(Object sender, EventArgs e)
+		private void Connection_ResizeBegin(object sender, EventArgs e)
 		{
 		    ResizeBeginEvent?.Invoke(this, e);
 		}
@@ -482,7 +482,7 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		public void Connection_ResizeEnd(Object sender, EventArgs e)
+		public void Connection_ResizeEnd(object sender, EventArgs e)
 		{
 			if (ResizeEndEvent != null)
 				ResizeEndEvent(sender, e);
@@ -647,29 +647,29 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		private void cmenTabScreenshot_Click(Object sender, EventArgs e)
+		private void cmenTabScreenshot_Click(object sender, EventArgs e)
 		{
 			cmenTab.Close();
 			Application.DoEvents();
             Windows.screenshotForm.AddScreenshot(Tools.MiscTools.TakeScreenshot(this));
 		}
 				
-		private void cmenTabSmartSize_Click(Object sender, EventArgs e)
+		private void cmenTabSmartSize_Click(object sender, EventArgs e)
 		{
 			ToggleSmartSize();
 		}
 				
-		private void cmenTabReconnect_Click(Object sender, EventArgs e)
+		private void cmenTabReconnect_Click(object sender, EventArgs e)
 		{
 			Reconnect();
 		}
 				
-		private void cmenTabTransferFile_Click(Object sender, EventArgs e)
+		private void cmenTabTransferFile_Click(object sender, EventArgs e)
 		{
 			TransferFile();
 		}
 				
-		private void cmenTabViewOnly_Click(Object sender, EventArgs e)
+		private void cmenTabViewOnly_Click(object sender, EventArgs e)
 		{
 			ToggleViewOnly();
 		}
@@ -684,42 +684,42 @@ namespace mRemoteNG.UI.Window
 			RefreshScreen();
 		}
 				
-		private void cmenTabSendSpecialKeysCtrlAltDel_Click(Object sender, EventArgs e)
+		private void cmenTabSendSpecialKeysCtrlAltDel_Click(object sender, EventArgs e)
 		{
 			SendSpecialKeys(ProtocolVNC.SpecialKeys.CtrlAltDel);
 		}
 				
-		private void cmenTabSendSpecialKeysCtrlEsc_Click(Object sender, EventArgs e)
+		private void cmenTabSendSpecialKeysCtrlEsc_Click(object sender, EventArgs e)
 		{
 			SendSpecialKeys(ProtocolVNC.SpecialKeys.CtrlEsc);
 		}
 				
-		private void cmenTabFullscreen_Click(Object sender, EventArgs e)
+		private void cmenTabFullscreen_Click(object sender, EventArgs e)
 		{
 			ToggleFullscreen();
 		}
 				
-		private void cmenTabPuttySettings_Click(Object sender, EventArgs e)
+		private void cmenTabPuttySettings_Click(object sender, EventArgs e)
 		{
 			ShowPuttySettingsDialog();
 		}
 				
 		private void cmenTabExternalAppsEntry_Click(object sender, EventArgs e)
 		{
-			StartExternalApp((Tools.ExternalTool)((Control)sender).Tag);
+			StartExternalApp((Tools.ExternalTool)((ToolStripMenuItem)sender).Tag);
 		}
 				
-		private void cmenTabDisconnect_Click(Object sender, EventArgs e)
+		private void cmenTabDisconnect_Click(object sender, EventArgs e)
 		{
 			CloseTabMenu();
 		}
 				
-		private void cmenTabDuplicateTab_Click(Object sender, EventArgs e)
+		private void cmenTabDuplicateTab_Click(object sender, EventArgs e)
 		{
 			DuplicateTab();
 		}
 				
-		private void cmenTabRenameTab_Click(Object sender, EventArgs e)
+		private void cmenTabRenameTab_Click(object sender, EventArgs e)
 		{
 			RenameTab();
 		}

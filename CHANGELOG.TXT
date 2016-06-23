@@ -42,6 +42,7 @@
 	
 	Fixes:
 	------
+	MR-872: Crash in External Tools when arguments aren't quoted
 	MR-854: crashes when right clicking on connection tab
 	MR-852: Option "Allow only a single instance of the application" non-functional
 	MR-836: Trying to delete a folder of connections only deletes 2 connections at a time

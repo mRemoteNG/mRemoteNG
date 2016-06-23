@@ -72,7 +72,6 @@
 
       <Feature Id="F.ApplicationStartMenuShortcut" Title="!(loc.Feature_StartMenuShortcut)" Absent="allow" AllowAdvertise="no" Level="1">
         <ComponentRef Id="C.ApplicationStartMenuShortcut" Primary="yes" />
-        
       </Feature>
     </Feature>
 
