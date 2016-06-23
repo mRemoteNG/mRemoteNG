@@ -20,17 +20,23 @@ namespace mRemoteNG.UI.Forms
 
         private void btnAddCredential_Click(object sender, EventArgs e)
         {
-
+            ShowCredentialEditor();
         }
 
         private void btnEditCredential_Click(object sender, EventArgs e)
         {
-
+            ShowCredentialEditor();
         }
 
         private void btnClose_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void ShowCredentialEditor()
+        {
+            var credentialEditor = new FrmCredentialEditor();
+            credentialEditor.Show();
         }
     }
 }
