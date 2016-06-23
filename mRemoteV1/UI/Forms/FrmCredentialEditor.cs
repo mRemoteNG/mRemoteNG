@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 
 namespace mRemoteNG.UI.Forms
@@ -22,6 +17,22 @@ namespace mRemoteNG.UI.Forms
             tabControlCredentialEditor.Appearance = TabAppearance.FlatButtons;
             tabControlCredentialEditor.ItemSize = new Size(0, 1);
             tabControlCredentialEditor.SizeMode = TabSizeMode.Fixed;
+        }
+
+        private void btnOk_Click(object sender, EventArgs e)
+        {
+            CommitChanges();
+            Close();
+        }
+
+        private void CommitChanges()
+        {
+            
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

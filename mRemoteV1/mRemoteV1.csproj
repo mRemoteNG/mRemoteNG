@@ -72,6 +72,9 @@
       <HintPath>References\MagicLibrary.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ObjectListView">
+      <HintPath>..\packages\ObjectListView.Official.2.9.1\lib\net20\ObjectListView.dll</HintPath>
+    </Reference>
     <Reference Include="Org.Mentalis.Security, Version=1.0.13.715, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\Org.Mentalis.Security.dll</HintPath>
@@ -79,6 +82,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Design" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
@@ -847,6 +851,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\Icons\RDCMan_Icon.ico" />
+    <None Include="Resources\Icons_FamFamFam\key_add_icon.ico" />
+    <None Include="Resources\Icons_FamFamFam\key.ico" />
+    <None Include="Resources\Icons_FamFamFam\key_icon.ico" />
     <Content Include="Resources\Images_FamFamFam\Config.png" />
     <Content Include="Resources\Images_FamFamFam\database.png" />
     <None Include="Resources\Images_FamFamFam\key.png" />
