@@ -66,7 +66,7 @@
             // 
             this.txtManualEntryUsername.Location = new System.Drawing.Point(9, 28);
             this.txtManualEntryUsername.Name = "txtManualEntryUsername";
-            this.txtManualEntryUsername.Size = new System.Drawing.Size(170, 20);
+            this.txtManualEntryUsername.Size = new System.Drawing.Size(206, 20);
             this.txtManualEntryUsername.TabIndex = 3;
             this.txtManualEntryUsername.TextChanged += new System.EventHandler(this.txtManualEntryUsername_TextChanged);
             // 
@@ -100,7 +100,7 @@
             // 
             this.txtManualEntryDomain.Location = new System.Drawing.Point(9, 78);
             this.txtManualEntryDomain.Name = "txtManualEntryDomain";
-            this.txtManualEntryDomain.Size = new System.Drawing.Size(170, 20);
+            this.txtManualEntryDomain.Size = new System.Drawing.Size(206, 20);
             this.txtManualEntryDomain.TabIndex = 4;
             this.txtManualEntryDomain.TextChanged += new System.EventHandler(this.txtManualEntryDomain_TextChanged);
             // 
@@ -231,7 +231,7 @@
             this.secureTextBoxManualEntryPassword.Name = "secureTextBoxManualEntryPassword";
             this.secureTextBoxManualEntryPassword.PasswordChar = '●';
             this.secureTextBoxManualEntryPassword.ShortcutsEnabled = false;
-            this.secureTextBoxManualEntryPassword.Size = new System.Drawing.Size(170, 20);
+            this.secureTextBoxManualEntryPassword.Size = new System.Drawing.Size(206, 20);
             this.secureTextBoxManualEntryPassword.TabIndex = 5;
             this.secureTextBoxManualEntryPassword.TextChanged += new System.EventHandler(this.secureTextBoxManualEntryPassword_TextChanged);
             // 
@@ -247,7 +247,7 @@
             this.Controls.Add(this.lblSeparator);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCredentialEditor";
-            this.Text = "FrmCredentialEditor";
+            this.Text = "Credential Editor";
             this.tabControlCredentialEditor.ResumeLayout(false);
             this.tabPageManualEntry.ResumeLayout(false);
             this.tabPageManualEntry.PerformLayout();
