@@ -68,6 +68,7 @@
             this.txtManualEntryUsername.Name = "txtManualEntryUsername";
             this.txtManualEntryUsername.Size = new System.Drawing.Size(170, 20);
             this.txtManualEntryUsername.TabIndex = 1;
+            this.txtManualEntryUsername.TextChanged += new System.EventHandler(this.txtManualEntryUsername_TextChanged);
             // 
             // tabControlCredentialEditor
             // 
@@ -101,6 +102,7 @@
             this.txtManualEntryDomain.Name = "txtManualEntryDomain";
             this.txtManualEntryDomain.Size = new System.Drawing.Size(170, 20);
             this.txtManualEntryDomain.TabIndex = 5;
+            this.txtManualEntryDomain.TextChanged += new System.EventHandler(this.txtManualEntryDomain_TextChanged);
             // 
             // lblManualEntryDomain
             // 
@@ -117,6 +119,7 @@
             this.maskedTextBoxManualEntryPassword.Name = "maskedTextBoxManualEntryPassword";
             this.maskedTextBoxManualEntryPassword.Size = new System.Drawing.Size(170, 20);
             this.maskedTextBoxManualEntryPassword.TabIndex = 3;
+            this.maskedTextBoxManualEntryPassword.TextChanged += new System.EventHandler(this.maskedTextBoxManualEntryPassword_TextChanged);
             // 
             // lblManualEntryPassword
             // 
