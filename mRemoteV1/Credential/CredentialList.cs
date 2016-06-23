@@ -7,25 +7,19 @@ namespace mRemoteNG.Credential
 	public class CredentialList : CollectionBase
 	{
         #region Public Properties
-        public CredentialInfo this[object Index]
+        public CredentialInfo this[object index]
 		{
 			get
 			{
-				if (Index is CredentialInfo)
-                    return (CredentialInfo)Index;
-				else
-					return ((CredentialInfo) (List[Convert.ToInt32(Index)]));
+			    if (index is CredentialInfo)
+                    return (CredentialInfo)index;
+			    return (CredentialInfo) List[Convert.ToInt32(index)];
 			}
 		}
 			
-        public new int Count
-		{
-			get
-			{
-				return List.Count;
-			}
-		}
-        #endregion
+        public new int Count => List.Count;
+
+	    #endregion
 			
         #region Public Methods
 		public CredentialInfo Add(CredentialInfo credentialInfo)
@@ -46,7 +40,7 @@ namespace mRemoteNG.Credential
 		{
 			try
 			{
-                return (CredentialList)this.MemberwiseClone();
+                return (CredentialList)MemberwiseClone();
 			}
 			catch (Exception)
 			{
