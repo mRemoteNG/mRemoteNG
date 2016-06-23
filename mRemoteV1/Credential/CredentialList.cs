@@ -12,8 +12,9 @@ namespace mRemoteNG.Credential
 		{
 			get
 			{
-			    if (index is CredentialInfo)
-                    return (CredentialInfo)index;
+			    var info = index as CredentialInfo;
+			    if (info != null)
+                    return info;
 			    return (CredentialInfo) List[Convert.ToInt32(index)];
 			}
 		}
@@ -23,10 +24,9 @@ namespace mRemoteNG.Credential
 	    #endregion
 			
         #region Public Methods
-		public CredentialInfo Add(CredentialInfo credentialInfo)
+		public void Add(CredentialInfo credentialInfo)
 		{
 			List.Add(credentialInfo);
-			return credentialInfo;
 		}
 			
 		public void AddRange(CredentialInfo[] cInfo)
@@ -37,12 +37,28 @@ namespace mRemoteNG.Credential
 			}
 		}
 
+	    public void Remove(CredentialInfo credentialInfo)
+	    {
+	        foreach (CredentialInfo cred in List)
+	        {
+	            if (cred.Uuid == credentialInfo.Uuid)
+                    List.Remove(cred);
+	        }
+	    }
+
 	    public bool Contains(CredentialInfo targetCredentialinfo)
 	    {
 	        return List.Cast<CredentialInfo>().Any(credential => credential.Uuid == targetCredentialinfo.Uuid);
 	    }
 
-	    public CredentialList Copy()
+        public void Replace(CredentialInfo replacementCredentialInfo)
+        {
+            if (Contains(replacementCredentialInfo))
+                Remove(replacementCredentialInfo);
+            Add(replacementCredentialInfo);
+        }
+
+        public CredentialList Copy()
 		{
 			try
 			{
