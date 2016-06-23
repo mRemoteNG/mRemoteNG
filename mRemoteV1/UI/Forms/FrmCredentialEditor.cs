@@ -1,15 +1,34 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using mRemoteNG.Credential;
 
 namespace mRemoteNG.UI.Forms
 {
     public partial class FrmCredentialEditor : Form
     {
-        public FrmCredentialEditor()
+        private CredentialInfo _credentialInfo;
+
+        public FrmCredentialEditor(CredentialInfo credentialInfo = null)
         {
+            _credentialInfo = credentialInfo;
+            InitializeCredentialData();
             InitializeComponent();
             HideTabControllerHeader();
+            PopulateFormWithCredentialData();
+        }
+
+        private void InitializeCredentialData()
+        {
+            if (_credentialInfo == null)
+                _credentialInfo = new CredentialInfo();
+        }
+
+        private void PopulateFormWithCredentialData()
+        {
+            txtEntryName.Text = _credentialInfo.Name;
+            txtUUID.Text = _credentialInfo.Uuid;
+            comboBoxSourceSelector.SelectedText = _credentialInfo.CredentialSource;
         }
 
         private void HideTabControllerHeader()
