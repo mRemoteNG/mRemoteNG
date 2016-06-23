@@ -33,10 +33,11 @@
             this.txtManualEntryUsername = new System.Windows.Forms.TextBox();
             this.tabControlCredentialEditor = new System.Windows.Forms.TabControl();
             this.tabPageManualEntry = new System.Windows.Forms.TabPage();
-            this.lblManualEntryPassword = new System.Windows.Forms.Label();
-            this.maskedTextBoxManualEntryPassword = new System.Windows.Forms.MaskedTextBox();
-            this.lblManualEntryDomain = new System.Windows.Forms.Label();
             this.txtManualEntryDomain = new System.Windows.Forms.TextBox();
+            this.lblManualEntryDomain = new System.Windows.Forms.Label();
+            this.maskedTextBoxManualEntryPassword = new System.Windows.Forms.MaskedTextBox();
+            this.lblManualEntryPassword = new System.Windows.Forms.Label();
+            this.tabPageKeePass = new System.Windows.Forms.TabPage();
             this.lblEntryName = new System.Windows.Forms.Label();
             this.txtEntryName = new System.Windows.Forms.TextBox();
             this.lblEntryUUID = new System.Windows.Forms.Label();
@@ -44,10 +45,9 @@
             this.btnOk = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.groupBoxCredentialSourceDetails = new System.Windows.Forms.GroupBox();
-            this.tabPageKeePass = new System.Windows.Forms.TabPage();
-            this.lblSeparator = new System.Windows.Forms.Label();
-            this.comboBoxSourceSelector = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxSourceSelector = new System.Windows.Forms.ComboBox();
+            this.lblSeparator = new System.Windows.Forms.Label();
             this.tabControlCredentialEditor.SuspendLayout();
             this.tabPageManualEntry.SuspendLayout();
             this.groupBoxCredentialSourceDetails.SuspendLayout();
@@ -95,21 +95,12 @@
             this.tabPageManualEntry.TabIndex = 0;
             this.tabPageManualEntry.Text = "ManualEntry";
             // 
-            // lblManualEntryPassword
+            // txtManualEntryDomain
             // 
-            this.lblManualEntryPassword.AutoSize = true;
-            this.lblManualEntryPassword.Location = new System.Drawing.Point(6, 111);
-            this.lblManualEntryPassword.Name = "lblManualEntryPassword";
-            this.lblManualEntryPassword.Size = new System.Drawing.Size(53, 13);
-            this.lblManualEntryPassword.TabIndex = 2;
-            this.lblManualEntryPassword.Text = "Password";
-            // 
-            // maskedTextBoxManualEntryPassword
-            // 
-            this.maskedTextBoxManualEntryPassword.Location = new System.Drawing.Point(9, 127);
-            this.maskedTextBoxManualEntryPassword.Name = "maskedTextBoxManualEntryPassword";
-            this.maskedTextBoxManualEntryPassword.Size = new System.Drawing.Size(170, 20);
-            this.maskedTextBoxManualEntryPassword.TabIndex = 3;
+            this.txtManualEntryDomain.Location = new System.Drawing.Point(9, 78);
+            this.txtManualEntryDomain.Name = "txtManualEntryDomain";
+            this.txtManualEntryDomain.Size = new System.Drawing.Size(170, 20);
+            this.txtManualEntryDomain.TabIndex = 5;
             // 
             // lblManualEntryDomain
             // 
@@ -120,12 +111,30 @@
             this.lblManualEntryDomain.TabIndex = 4;
             this.lblManualEntryDomain.Text = "Domain";
             // 
-            // txtManualEntryDomain
+            // maskedTextBoxManualEntryPassword
             // 
-            this.txtManualEntryDomain.Location = new System.Drawing.Point(9, 78);
-            this.txtManualEntryDomain.Name = "txtManualEntryDomain";
-            this.txtManualEntryDomain.Size = new System.Drawing.Size(170, 20);
-            this.txtManualEntryDomain.TabIndex = 5;
+            this.maskedTextBoxManualEntryPassword.Location = new System.Drawing.Point(9, 127);
+            this.maskedTextBoxManualEntryPassword.Name = "maskedTextBoxManualEntryPassword";
+            this.maskedTextBoxManualEntryPassword.Size = new System.Drawing.Size(170, 20);
+            this.maskedTextBoxManualEntryPassword.TabIndex = 3;
+            // 
+            // lblManualEntryPassword
+            // 
+            this.lblManualEntryPassword.AutoSize = true;
+            this.lblManualEntryPassword.Location = new System.Drawing.Point(6, 111);
+            this.lblManualEntryPassword.Name = "lblManualEntryPassword";
+            this.lblManualEntryPassword.Size = new System.Drawing.Size(53, 13);
+            this.lblManualEntryPassword.TabIndex = 2;
+            this.lblManualEntryPassword.Text = "Password";
+            // 
+            // tabPageKeePass
+            // 
+            this.tabPageKeePass.Location = new System.Drawing.Point(4, 22);
+            this.tabPageKeePass.Name = "tabPageKeePass";
+            this.tabPageKeePass.Size = new System.Drawing.Size(499, 270);
+            this.tabPageKeePass.TabIndex = 1;
+            this.tabPageKeePass.Text = "KeePass";
+            this.tabPageKeePass.UseVisualStyleBackColor = true;
             // 
             // lblEntryName
             // 
@@ -196,22 +205,14 @@
             this.groupBoxCredentialSourceDetails.TabStop = false;
             this.groupBoxCredentialSourceDetails.Text = "Credential Source Details";
             // 
-            // tabPageKeePass
+            // label1
             // 
-            this.tabPageKeePass.Location = new System.Drawing.Point(4, 22);
-            this.tabPageKeePass.Name = "tabPageKeePass";
-            this.tabPageKeePass.Size = new System.Drawing.Size(499, 270);
-            this.tabPageKeePass.TabIndex = 1;
-            this.tabPageKeePass.Text = "KeePass";
-            this.tabPageKeePass.UseVisualStyleBackColor = true;
-            // 
-            // lblSeparator
-            // 
-            this.lblSeparator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblSeparator.Location = new System.Drawing.Point(-18, 430);
-            this.lblSeparator.Name = "lblSeparator";
-            this.lblSeparator.Size = new System.Drawing.Size(534, 2);
-            this.lblSeparator.TabIndex = 16;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(11, 74);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 13);
+            this.label1.TabIndex = 18;
+            this.label1.Text = "Source";
             // 
             // comboBoxSourceSelector
             // 
@@ -221,14 +222,13 @@
             this.comboBoxSourceSelector.Size = new System.Drawing.Size(155, 21);
             this.comboBoxSourceSelector.TabIndex = 17;
             // 
-            // label1
+            // lblSeparator
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(11, 74);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Source";
+            this.lblSeparator.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.lblSeparator.Location = new System.Drawing.Point(-18, 430);
+            this.lblSeparator.Name = "lblSeparator";
+            this.lblSeparator.Size = new System.Drawing.Size(534, 2);
+            this.lblSeparator.TabIndex = 16;
             // 
             // FrmCredentialEditor
             // 
