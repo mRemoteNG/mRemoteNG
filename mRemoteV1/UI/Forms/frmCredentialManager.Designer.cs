@@ -50,7 +50,7 @@
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Location = new System.Drawing.Point(367, 326);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(75, 23);
+            this.btnClose.Size = new System.Drawing.Size(75, 27);
             this.btnClose.TabIndex = 4;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -62,7 +62,7 @@
             this.btnAddCredential.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddCredential.Location = new System.Drawing.Point(12, 326);
             this.btnAddCredential.Name = "btnAddCredential";
-            this.btnAddCredential.Size = new System.Drawing.Size(86, 23);
+            this.btnAddCredential.Size = new System.Drawing.Size(86, 27);
             this.btnAddCredential.TabIndex = 1;
             this.btnAddCredential.Text = "Add";
             this.btnAddCredential.UseVisualStyleBackColor = true;
@@ -74,7 +74,7 @@
             this.btnRemoveCredential.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRemoveCredential.Location = new System.Drawing.Point(199, 326);
             this.btnRemoveCredential.Name = "btnRemoveCredential";
-            this.btnRemoveCredential.Size = new System.Drawing.Size(86, 23);
+            this.btnRemoveCredential.Size = new System.Drawing.Size(86, 27);
             this.btnRemoveCredential.TabIndex = 3;
             this.btnRemoveCredential.Text = "Remove";
             this.btnRemoveCredential.UseVisualStyleBackColor = true;
@@ -83,7 +83,7 @@
             // 
             this.btnEditCredential.Location = new System.Drawing.Point(104, 326);
             this.btnEditCredential.Name = "btnEditCredential";
-            this.btnEditCredential.Size = new System.Drawing.Size(89, 23);
+            this.btnEditCredential.Size = new System.Drawing.Size(89, 27);
             this.btnEditCredential.TabIndex = 2;
             this.btnEditCredential.Text = "Edit";
             this.btnEditCredential.UseVisualStyleBackColor = true;
