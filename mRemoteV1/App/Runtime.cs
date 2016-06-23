@@ -45,8 +45,6 @@ namespace mRemoteNG.App
 
         public static CredentialList CredentialList { get; set; }
 
-        public static CredentialList PreviousCredentialList { get; set; }
-
         public static WindowList WindowList { get; set; }
 
         public static MessageCollector MessageCollector { get; set; }
