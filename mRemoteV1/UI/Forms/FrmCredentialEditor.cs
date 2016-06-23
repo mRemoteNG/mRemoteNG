@@ -14,6 +14,14 @@ namespace mRemoteNG.UI.Forms
         public FrmCredentialEditor()
         {
             InitializeComponent();
+            HideTabControllerHeader();
+        }
+
+        private void HideTabControllerHeader()
+        {
+            tabControlCredentialEditor.Appearance = TabAppearance.FlatButtons;
+            tabControlCredentialEditor.ItemSize = new Size(0, 1);
+            tabControlCredentialEditor.SizeMode = TabSizeMode.Fixed;
         }
     }
 }
