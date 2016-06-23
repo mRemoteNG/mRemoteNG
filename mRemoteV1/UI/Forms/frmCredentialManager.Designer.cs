@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCredentialManager));
             this.lvCredentialList = new System.Windows.Forms.ListView();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnAddCredential = new System.Windows.Forms.Button();
@@ -47,7 +48,7 @@
             // btnClose
             // 
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnClose.Location = new System.Drawing.Point(367, 357);
+            this.btnClose.Location = new System.Drawing.Point(367, 326);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
             this.btnClose.TabIndex = 1;
@@ -89,12 +90,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(454, 392);
+            this.ClientSize = new System.Drawing.Size(454, 365);
             this.Controls.Add(this.btnEditCredential);
             this.Controls.Add(this.btnRemoveCredential);
             this.Controls.Add(this.btnAddCredential);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.lvCredentialList);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCredentialManager";
             this.Text = "Credential Manager";
             this.ResumeLayout(false);
