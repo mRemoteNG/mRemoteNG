@@ -51,36 +51,40 @@
             this.btnClose.Location = new System.Drawing.Point(367, 326);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(75, 23);
-            this.btnClose.TabIndex = 1;
+            this.btnClose.TabIndex = 4;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
             this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // btnAddCredential
             // 
+            this.btnAddCredential.Image = global::mRemoteNG.Resources.key_add;
+            this.btnAddCredential.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddCredential.Location = new System.Drawing.Point(12, 326);
             this.btnAddCredential.Name = "btnAddCredential";
-            this.btnAddCredential.Size = new System.Drawing.Size(75, 23);
-            this.btnAddCredential.TabIndex = 2;
+            this.btnAddCredential.Size = new System.Drawing.Size(86, 23);
+            this.btnAddCredential.TabIndex = 1;
             this.btnAddCredential.Text = "Add";
             this.btnAddCredential.UseVisualStyleBackColor = true;
             this.btnAddCredential.Click += new System.EventHandler(this.btnAddCredential_Click);
             // 
             // btnRemoveCredential
             // 
-            this.btnRemoveCredential.Location = new System.Drawing.Point(174, 326);
+            this.btnRemoveCredential.Image = global::mRemoteNG.Resources.key_delete;
+            this.btnRemoveCredential.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnRemoveCredential.Location = new System.Drawing.Point(199, 326);
             this.btnRemoveCredential.Name = "btnRemoveCredential";
-            this.btnRemoveCredential.Size = new System.Drawing.Size(75, 23);
+            this.btnRemoveCredential.Size = new System.Drawing.Size(86, 23);
             this.btnRemoveCredential.TabIndex = 3;
             this.btnRemoveCredential.Text = "Remove";
             this.btnRemoveCredential.UseVisualStyleBackColor = true;
             // 
             // btnEditCredential
             // 
-            this.btnEditCredential.Location = new System.Drawing.Point(93, 326);
+            this.btnEditCredential.Location = new System.Drawing.Point(104, 326);
             this.btnEditCredential.Name = "btnEditCredential";
-            this.btnEditCredential.Size = new System.Drawing.Size(75, 23);
-            this.btnEditCredential.TabIndex = 4;
+            this.btnEditCredential.Size = new System.Drawing.Size(89, 23);
+            this.btnEditCredential.TabIndex = 2;
             this.btnEditCredential.Text = "Edit";
             this.btnEditCredential.UseVisualStyleBackColor = true;
             this.btnEditCredential.Click += new System.EventHandler(this.btnEditCredential_Click);
