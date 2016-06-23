@@ -15,6 +15,7 @@ using System.IO;
 using System.Management;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Credential;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App
@@ -406,6 +407,11 @@ namespace mRemoteNG.App
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strCommandLineArgsCouldNotBeParsed + Environment.NewLine + ex.Message);
             }
+        }
+
+        public void LoadCredentials()
+        {
+            Runtime.CredentialList = new CredentialList();
         }
     }
 }

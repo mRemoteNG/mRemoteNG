@@ -124,8 +124,6 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_Load(object sender, EventArgs e)
 		{
-            
-
             // Create gui config load and save objects
             var settingsLoader = new SettingsLoader(this);
 			settingsLoader.LoadSettings();
@@ -159,6 +157,8 @@ namespace mRemoteNG.UI.Forms
 			{
                 Windows.Show(WindowType.ComponentsCheck);
 			}
+
+            Startup.Instance.LoadCredentials();
 
             ApplySpecialSettingsForPortableVersion();
 
