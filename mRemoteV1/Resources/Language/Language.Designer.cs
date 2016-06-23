@@ -3414,6 +3414,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New Credential.
+        /// </summary>
+        internal static string strNewCredential {
+            get {
+                return ResourceManager.GetString("strNewCredential", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Folder.
         /// </summary>
         internal static string strNewFolder {

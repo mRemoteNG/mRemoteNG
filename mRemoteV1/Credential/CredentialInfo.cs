@@ -9,11 +9,11 @@ namespace mRemoteNG.Credential
 	{
 	    public string Uuid { get; } = Guid.NewGuid().ToString();
 
-	    [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1), 
-            Browsable(true),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
-        public string Name { get; set; }
+	    [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
+	     Browsable(true),
+	     LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
+	     LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
+	    public string Name { get; set; } = Language.strNewCredential;
 		
 
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
