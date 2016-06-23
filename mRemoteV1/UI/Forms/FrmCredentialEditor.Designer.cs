@@ -67,7 +67,7 @@
             this.txtManualEntryUsername.Location = new System.Drawing.Point(9, 28);
             this.txtManualEntryUsername.Name = "txtManualEntryUsername";
             this.txtManualEntryUsername.Size = new System.Drawing.Size(170, 20);
-            this.txtManualEntryUsername.TabIndex = 1;
+            this.txtManualEntryUsername.TabIndex = 3;
             this.txtManualEntryUsername.TextChanged += new System.EventHandler(this.txtManualEntryUsername_TextChanged);
             // 
             // tabControlCredentialEditor
@@ -101,7 +101,7 @@
             this.txtManualEntryDomain.Location = new System.Drawing.Point(9, 78);
             this.txtManualEntryDomain.Name = "txtManualEntryDomain";
             this.txtManualEntryDomain.Size = new System.Drawing.Size(170, 20);
-            this.txtManualEntryDomain.TabIndex = 5;
+            this.txtManualEntryDomain.TabIndex = 4;
             this.txtManualEntryDomain.TextChanged += new System.EventHandler(this.txtManualEntryDomain_TextChanged);
             // 
             // lblManualEntryDomain
@@ -119,7 +119,7 @@
             this.maskedTextBoxManualEntryPassword.Name = "maskedTextBoxManualEntryPassword";
             this.maskedTextBoxManualEntryPassword.PasswordChar = '●';
             this.maskedTextBoxManualEntryPassword.Size = new System.Drawing.Size(170, 20);
-            this.maskedTextBoxManualEntryPassword.TabIndex = 3;
+            this.maskedTextBoxManualEntryPassword.TabIndex = 5;
             this.maskedTextBoxManualEntryPassword.TextChanged += new System.EventHandler(this.maskedTextBoxManualEntryPassword_TextChanged);
             // 
             // lblManualEntryPassword
@@ -154,7 +154,7 @@
             this.txtEntryName.Location = new System.Drawing.Point(79, 19);
             this.txtEntryName.Name = "txtEntryName";
             this.txtEntryName.Size = new System.Drawing.Size(242, 20);
-            this.txtEntryName.TabIndex = 9;
+            this.txtEntryName.TabIndex = 1;
             // 
             // lblEntryUUID
             // 
@@ -224,7 +224,7 @@
             this.comboBoxSourceSelector.Location = new System.Drawing.Point(79, 71);
             this.comboBoxSourceSelector.Name = "comboBoxSourceSelector";
             this.comboBoxSourceSelector.Size = new System.Drawing.Size(155, 21);
-            this.comboBoxSourceSelector.TabIndex = 17;
+            this.comboBoxSourceSelector.TabIndex = 2;
             // 
             // lblSeparator
             // 
