@@ -56,6 +56,7 @@ namespace mRemoteNG.Credential
             var secureString = new SecureString();
 	        foreach (var character in unsecuredPassword.ToCharArray())
                 secureString.AppendChar(character);
+	        unsecuredPassword = null;
 	        Password = secureString;
 	    }
     }
