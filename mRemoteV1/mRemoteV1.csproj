@@ -1195,6 +1195,9 @@
     <PostBuildEvent>call "$(DevEnvDir)..\tools\vsvars32.bat"
 set /p buildenv=&lt;buildenv.tmp
 
+echo Copy PUTTYNG to correct directory
+copy /Y "$(SolutionDir)mRemoteV1\Resources\PuTTYNG.exe" .\
+
 REM Move Help files to correct directory
 move /Y Resources\Help .\
 rmdir /s /q Resources

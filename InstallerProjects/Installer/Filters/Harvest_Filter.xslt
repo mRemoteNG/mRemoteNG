@@ -14,6 +14,7 @@ xmlns:wix="http://schemas.microsoft.com/wix/2006/wi">
   <xsl:key name="service-search" match="wix:Component[contains(wix:File/@Source, 'manifest')]" use="@Id" />
   <xsl:key name="service-search" match="wix:Component[contains(wix:File/@Source, '.application')]" use="@Id" />
   <xsl:key name="service-search" match="wix:Component[wix:File/@Source = '$(var.HarvestPath)\mRemoteNG.exe']" use="@Id" />
+  <xsl:key name="service-search" match="wix:Component[wix:File/@Source = '$(var.HarvestPath)\PuTTYNG.exe']" use="@Id" />
   <xsl:template match="wix:Component[key('service-search', @Id)]" />
   <xsl:template match="wix:ComponentRef[key('service-search', @Id)]" />
 </xsl:stylesheet>
