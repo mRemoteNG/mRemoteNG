@@ -996,7 +996,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.Tree)" + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window)" + Environment.NewLine + ex.Message, true);
 			}
 		}
 				
