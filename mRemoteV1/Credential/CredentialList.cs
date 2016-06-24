@@ -49,6 +49,7 @@ namespace mRemoteNG.Credential
 	            if (cred.Uuid != credentialInfo.Uuid) continue;
 	            List.Remove(cred);
 	            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, cred));
+                return;
 	        }
         }
 
