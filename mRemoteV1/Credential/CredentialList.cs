@@ -38,8 +38,8 @@ namespace mRemoteNG.Credential
 			foreach (CredentialInfo cI in cInfo)
 			{
 				List.Add(cI);
-			}
-            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, cInfo));
+                CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, cInfo));
+            }
 		}
 
 	    public void Remove(CredentialInfo credentialInfo)
