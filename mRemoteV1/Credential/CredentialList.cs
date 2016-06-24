@@ -1,11 +1,12 @@
 using System;
 using System.Collections;
+using System.Collections.Specialized;
 using System.Linq;
 
 
 namespace mRemoteNG.Credential
 {
-	public class CredentialList : CollectionBase
+	public class CredentialList : CollectionBase, INotifyCollectionChanged
 	{
         #region Public Properties
         public CredentialInfo this[object index]
@@ -21,30 +22,35 @@ namespace mRemoteNG.Credential
 			
         public new int Count => List.Count;
 
-	    #endregion
-			
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+        #endregion
+
         #region Public Methods
-		public void Add(CredentialInfo credentialInfo)
-		{
-			List.Add(credentialInfo);
-		}
-			
-		public void AddRange(CredentialInfo[] cInfo)
+        public void Add(CredentialInfo credentialInfo)
+        {
+            List.Add(credentialInfo);
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, credentialInfo));
+        }
+
+	    public void AddRange(CredentialInfo[] cInfo)
 		{
 			foreach (CredentialInfo cI in cInfo)
 			{
 				List.Add(cI);
 			}
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, cInfo));
 		}
 
 	    public void Remove(CredentialInfo credentialInfo)
 	    {
 	        foreach (CredentialInfo cred in List)
 	        {
-	            if (cred.Uuid == credentialInfo.Uuid)
-                    List.Remove(cred);
+	            if (cred.Uuid != credentialInfo.Uuid) continue;
+	            List.Remove(cred);
+	            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, cred));
 	        }
-	    }
+        }
 
 	    public bool Contains(CredentialInfo targetCredentialinfo)
 	    {
@@ -56,6 +62,7 @@ namespace mRemoteNG.Credential
             if (Contains(replacementCredentialInfo))
                 Remove(replacementCredentialInfo);
             Add(replacementCredentialInfo);
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, replacementCredentialInfo));
         }
 
         public CredentialList Copy()
@@ -74,7 +81,8 @@ namespace mRemoteNG.Credential
 		public new void Clear()
 		{
 			List.Clear();
-		}
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+        }
         #endregion
 	}
 }
