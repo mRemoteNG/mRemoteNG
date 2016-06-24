@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Credential;
+using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -17,6 +18,13 @@ namespace mRemoteNG.UI.Forms
             InitializeComponent();
             HideTabControllerHeader();
             PopulateFormWithCredentialData();
+            Load += FrmCredentialEditor_OnLoad;
+        }
+
+        private void FrmCredentialEditor_OnLoad(object sender, EventArgs eventArgs)
+        {
+            if (_credentialInfo.Password?.Length > 0)
+                secureTextBoxManualEntryPassword.CueBanner(true, Language.strPasswordHidden);
         }
 
         private void InitializeCredentialData()
@@ -30,6 +38,13 @@ namespace mRemoteNG.UI.Forms
             txtEntryName.Text = _credentialInfo.Name;
             txtUUID.Text = _credentialInfo.Uuid;
             comboBoxSourceSelector.SelectedText = _credentialInfo.CredentialSource;
+            PopulateManualEntryForm();
+        }
+
+        private void PopulateManualEntryForm()
+        {
+            txtManualEntryUsername.Text = _credentialInfo.Username;
+            txtManualEntryDomain.Text = _credentialInfo.Domain;
         }
 
         private void HideTabControllerHeader()

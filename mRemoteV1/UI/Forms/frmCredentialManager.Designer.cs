@@ -95,8 +95,11 @@
             this.olvColumnName,
             this.olvColumnDomain,
             this.olvColumnUsername});
+            this.olvCredentialList.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvCredentialList.EmptyListMsg = "No credentials found";
             this.olvCredentialList.EmptyListMsgFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.olvCredentialList.FullRowSelect = true;
+            this.olvCredentialList.GridLines = true;
             this.olvCredentialList.Location = new System.Drawing.Point(12, 12);
             this.olvCredentialList.Name = "olvCredentialList";
             this.olvCredentialList.Size = new System.Drawing.Size(430, 308);
@@ -107,17 +110,23 @@
             // olvColumnName
             // 
             this.olvColumnName.AspectName = "Name";
+            this.olvColumnName.AutoCompleteEditor = false;
+            this.olvColumnName.AutoCompleteEditorMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.olvColumnName.IsEditable = false;
             this.olvColumnName.Text = "Name";
+            this.olvColumnName.Width = 140;
             // 
             // olvColumnUsername
             // 
             this.olvColumnUsername.AspectName = "Username";
             this.olvColumnUsername.Text = "Username";
+            this.olvColumnUsername.Width = 140;
             // 
             // olvColumnDomain
             // 
             this.olvColumnDomain.AspectName = "Domain";
             this.olvColumnDomain.Text = "Domain";
+            this.olvColumnDomain.Width = 100;
             // 
             // FrmCredentialManager
             // 

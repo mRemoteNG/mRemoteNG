@@ -36,7 +36,7 @@ namespace mRemoteNG.UI.Forms
 
         private void btnEditCredential_Click(object sender, EventArgs e)
         {
-            ShowCredentialEditor();
+            ShowCredentialEditor(olvCredentialList.SelectedObject as CredentialInfo);
         }
 
         private void btnClose_Click(object sender, EventArgs e)
@@ -44,9 +44,9 @@ namespace mRemoteNG.UI.Forms
             Close();
         }
 
-        private void ShowCredentialEditor()
+        private void ShowCredentialEditor(CredentialInfo credentialInfo = null)
         {
-            var credentialEditor = new FrmCredentialEditor();
+            var credentialEditor = new FrmCredentialEditor(credentialInfo);
             credentialEditor.Show();
         }
 
