@@ -196,6 +196,19 @@ namespace mRemoteNGTests.Credential
         }
 
         [Test]
+        public void CollectionChangedEventNotRaisedWhenThereIsNoItemToRemove()
+        {
+            var wasCalled = false;
+            _credentialList.CollectionChanged += (o, e) =>
+            {
+                if (e.Action == NotifyCollectionChangedAction.Remove)
+                    wasCalled = true;
+            };
+            _credentialList.Remove(_testCredential1);
+            Assert.That(wasCalled, Is.False);
+        }
+
+        [Test]
         public void CollectionChangedEventRaisedOnReplace()
         {
             var wasCalled = false;
