@@ -91,7 +91,9 @@
     </When>
     <Otherwise>
       <ItemGroup>
-        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework" />
+        <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework">
+          <Private>False</Private>
+        </Reference>
       </ItemGroup>
     </Otherwise>
   </Choose>
@@ -99,6 +101,7 @@
     <Compile Include="App\LoggerTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Connection\ConnectionInfoInheritanceTests.cs" />
+    <Compile Include="Credential\CredentialListTests.cs" />
     <Compile Include="ListViewTester.cs" />
     <Compile Include="Config\Connections\SqlConnectionUpdateCheckerTests.cs" />
     <Compile Include="Config\Connections\SqlUpdateQueryBuilderTest.cs" />
