@@ -73,6 +73,7 @@
             this.btnRemoveCredential.TabIndex = 3;
             this.btnRemoveCredential.Text = "Remove";
             this.btnRemoveCredential.UseVisualStyleBackColor = true;
+            this.btnRemoveCredential.Click += new System.EventHandler(this.btnRemoveCredential_Click);
             // 
             // btnEditCredential
             // 

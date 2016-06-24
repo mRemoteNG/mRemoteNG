@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Credential;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -47,6 +48,14 @@ namespace mRemoteNG.UI.Forms
         {
             var credentialEditor = new FrmCredentialEditor();
             credentialEditor.Show();
+        }
+
+        private void btnRemoveCredential_Click(object sender, EventArgs e)
+        {
+            foreach (CredentialInfo selectedCredentialInfoitem in olvCredentialList.SelectedObjects)
+            {
+                Runtime.CredentialList.Remove(selectedCredentialInfoitem);
+            }
         }
     }
 }
