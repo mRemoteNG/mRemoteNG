@@ -2381,4 +2381,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strNewCredential" xml:space="preserve">
     <value>New Credential</value>
   </data>
+  <data name="strPasswordHidden" xml:space="preserve">
+    <value>Password hidden</value>
+  </data>
 </root>

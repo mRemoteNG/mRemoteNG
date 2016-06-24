@@ -3694,6 +3694,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Password hidden.
+        /// </summary>
+        internal static string strPasswordHidden {
+            get {
+                return ResourceManager.GetString("strPasswordHidden", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password protect.
         /// </summary>
         internal static string strPasswordProtect {

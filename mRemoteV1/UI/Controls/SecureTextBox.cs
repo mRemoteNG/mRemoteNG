@@ -14,7 +14,6 @@ namespace mRemoteNG.UI.Controls
             KeyDown += SecureTextBox_KeyDown;
         }
 
-
         private void SecureTextBox_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (e.KeyChar == '\b')

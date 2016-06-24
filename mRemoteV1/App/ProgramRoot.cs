@@ -16,6 +16,7 @@ namespace mRemoteNG.App
         [STAThread]
         public static void Main(string[] args)
         {
+            Application.EnableVisualStyles();
             if (Settings.Default.SingleInstance)
                 StartApplicationAsSingleInstance();
             else

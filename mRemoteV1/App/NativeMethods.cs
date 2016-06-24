@@ -43,6 +43,9 @@ namespace mRemoteNG.App
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, System.Text.StringBuilder lParam);
 
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, string lParam);
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
 			
@@ -453,7 +456,11 @@ namespace mRemoteNG.App
         public const int LB_ERR = -1;
         public const int LB_SELECTSTRING = 0x18C;
         #endregion
-        
+
+        #region EM
+        public const uint EM_SETCUEBANNER = 0x1501;
+        #endregion
+
         #endregion
     }
 }

@@ -180,6 +180,7 @@
     <Compile Include="Tree\NodeType.cs" />
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
     <Compile Include="Tree\TreeNodeMover.cs" />
+    <Compile Include="UI\Controls\TextBoxExtensions.cs" />
     <Compile Include="UI\Controls\FilteredPropertyGrid\FilteredPropertyGrid.cs">
       <SubType>Component</SubType>
     </Compile>
