@@ -35,8 +35,9 @@
             this.btnEditCredential = new System.Windows.Forms.Button();
             this.olvCredentialList = new BrightIdeasSoftware.ObjectListView();
             this.olvColumnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvColumnUsername = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnDomain = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnUsername = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnUuid = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.olvCredentialList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,6 +91,8 @@
             this.olvCredentialList.AllColumns.Add(this.olvColumnName);
             this.olvCredentialList.AllColumns.Add(this.olvColumnDomain);
             this.olvCredentialList.AllColumns.Add(this.olvColumnUsername);
+            this.olvCredentialList.AllColumns.Add(this.olvColumnUuid);
+            this.olvCredentialList.AutoArrange = false;
             this.olvCredentialList.CellEditUseWholeCell = false;
             this.olvCredentialList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvColumnName,
@@ -112,21 +115,37 @@
             this.olvColumnName.AspectName = "Name";
             this.olvColumnName.AutoCompleteEditor = false;
             this.olvColumnName.AutoCompleteEditorMode = System.Windows.Forms.AutoCompleteMode.None;
+            this.olvColumnName.FillsFreeSpace = true;
+            this.olvColumnName.Groupable = false;
             this.olvColumnName.IsEditable = false;
             this.olvColumnName.Text = "Name";
             this.olvColumnName.Width = 140;
             // 
-            // olvColumnUsername
-            // 
-            this.olvColumnUsername.AspectName = "Username";
-            this.olvColumnUsername.Text = "Username";
-            this.olvColumnUsername.Width = 140;
-            // 
             // olvColumnDomain
             // 
             this.olvColumnDomain.AspectName = "Domain";
+            this.olvColumnDomain.FillsFreeSpace = true;
+            this.olvColumnDomain.IsEditable = false;
             this.olvColumnDomain.Text = "Domain";
             this.olvColumnDomain.Width = 100;
+            // 
+            // olvColumnUsername
+            // 
+            this.olvColumnUsername.AspectName = "Username";
+            this.olvColumnUsername.FillsFreeSpace = true;
+            this.olvColumnUsername.IsEditable = false;
+            this.olvColumnUsername.Text = "Username";
+            this.olvColumnUsername.Width = 140;
+            // 
+            // olvColumnUuid
+            // 
+            this.olvColumnUuid.AspectName = "Uuid";
+            this.olvColumnUuid.DisplayIndex = 3;
+            this.olvColumnUuid.FillsFreeSpace = true;
+            this.olvColumnUuid.Groupable = false;
+            this.olvColumnUuid.IsEditable = false;
+            this.olvColumnUuid.IsVisible = false;
+            this.olvColumnUuid.Text = "UUID";
             // 
             // FrmCredentialManager
             // 
@@ -156,5 +175,6 @@
         private BrightIdeasSoftware.OLVColumn olvColumnName;
         private BrightIdeasSoftware.OLVColumn olvColumnDomain;
         private BrightIdeasSoftware.OLVColumn olvColumnUsername;
+        private BrightIdeasSoftware.OLVColumn olvColumnUuid;
     }
 }

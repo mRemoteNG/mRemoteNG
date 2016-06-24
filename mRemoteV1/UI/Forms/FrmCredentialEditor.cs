@@ -83,6 +83,11 @@ namespace mRemoteNG.UI.Forms
             Close();
         }
 
+        private void txtEntryName_TextChanged(object sender, EventArgs e)
+        {
+            _credentialInfo.Name = txtEntryName.Text;
+        }
+
         private void txtManualEntryUsername_TextChanged(object sender, EventArgs e)
         {
             _credentialInfo.Username = txtManualEntryUsername.Text;

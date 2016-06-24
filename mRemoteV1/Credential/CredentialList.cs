@@ -63,7 +63,7 @@ namespace mRemoteNG.Credential
             if (Contains(replacementCredentialInfo))
                 Remove(replacementCredentialInfo);
             Add(replacementCredentialInfo);
-            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, replacementCredentialInfo));
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, replacementCredentialInfo));
         }
 
         public CredentialList Copy()

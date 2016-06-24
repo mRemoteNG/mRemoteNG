@@ -33,6 +33,7 @@
             this.txtManualEntryUsername = new System.Windows.Forms.TextBox();
             this.tabControlCredentialEditor = new System.Windows.Forms.TabControl();
             this.tabPageManualEntry = new System.Windows.Forms.TabPage();
+            this.secureTextBoxManualEntryPassword = new mRemoteNG.UI.Controls.SecureTextBox();
             this.txtManualEntryDomain = new System.Windows.Forms.TextBox();
             this.lblManualEntryDomain = new System.Windows.Forms.Label();
             this.lblManualEntryPassword = new System.Windows.Forms.Label();
@@ -47,7 +48,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.comboBoxSourceSelector = new System.Windows.Forms.ComboBox();
             this.lblSeparator = new System.Windows.Forms.Label();
-            this.secureTextBoxManualEntryPassword = new mRemoteNG.UI.Controls.SecureTextBox();
             this.tabControlCredentialEditor.SuspendLayout();
             this.tabPageManualEntry.SuspendLayout();
             this.groupBoxCredentialSourceDetails.SuspendLayout();
@@ -95,6 +95,16 @@
             this.tabPageManualEntry.Size = new System.Drawing.Size(499, 270);
             this.tabPageManualEntry.TabIndex = 0;
             this.tabPageManualEntry.Text = "ManualEntry";
+            // 
+            // secureTextBoxManualEntryPassword
+            // 
+            this.secureTextBoxManualEntryPassword.Location = new System.Drawing.Point(9, 127);
+            this.secureTextBoxManualEntryPassword.Name = "secureTextBoxManualEntryPassword";
+            this.secureTextBoxManualEntryPassword.PasswordChar = '●';
+            this.secureTextBoxManualEntryPassword.ShortcutsEnabled = false;
+            this.secureTextBoxManualEntryPassword.Size = new System.Drawing.Size(206, 20);
+            this.secureTextBoxManualEntryPassword.TabIndex = 5;
+            this.secureTextBoxManualEntryPassword.TextChanged += new System.EventHandler(this.secureTextBoxManualEntryPassword_TextChanged);
             // 
             // txtManualEntryDomain
             // 
@@ -146,6 +156,7 @@
             this.txtEntryName.Name = "txtEntryName";
             this.txtEntryName.Size = new System.Drawing.Size(242, 20);
             this.txtEntryName.TabIndex = 1;
+            this.txtEntryName.TextChanged += new System.EventHandler(this.txtEntryName_TextChanged);
             // 
             // lblEntryUUID
             // 
@@ -224,16 +235,6 @@
             this.lblSeparator.Name = "lblSeparator";
             this.lblSeparator.Size = new System.Drawing.Size(534, 2);
             this.lblSeparator.TabIndex = 16;
-            // 
-            // secureTextBoxManualEntryPassword
-            // 
-            this.secureTextBoxManualEntryPassword.Location = new System.Drawing.Point(9, 127);
-            this.secureTextBoxManualEntryPassword.Name = "secureTextBoxManualEntryPassword";
-            this.secureTextBoxManualEntryPassword.PasswordChar = '●';
-            this.secureTextBoxManualEntryPassword.ShortcutsEnabled = false;
-            this.secureTextBoxManualEntryPassword.Size = new System.Drawing.Size(206, 20);
-            this.secureTextBoxManualEntryPassword.TabIndex = 5;
-            this.secureTextBoxManualEntryPassword.TextChanged += new System.EventHandler(this.secureTextBoxManualEntryPassword_TextChanged);
             // 
             // FrmCredentialEditor
             // 
