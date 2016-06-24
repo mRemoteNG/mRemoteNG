@@ -29,21 +29,16 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmCredentialManager));
-            this.lvCredentialList = new System.Windows.Forms.ListView();
             this.btnClose = new System.Windows.Forms.Button();
             this.btnAddCredential = new System.Windows.Forms.Button();
             this.btnRemoveCredential = new System.Windows.Forms.Button();
             this.btnEditCredential = new System.Windows.Forms.Button();
+            this.olvCredentialList = new BrightIdeasSoftware.ObjectListView();
+            this.olvColumnName = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnUsername = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnDomain = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            ((System.ComponentModel.ISupportInitialize)(this.olvCredentialList)).BeginInit();
             this.SuspendLayout();
-            // 
-            // lvCredentialList
-            // 
-            this.lvCredentialList.Location = new System.Drawing.Point(12, 11);
-            this.lvCredentialList.Name = "lvCredentialList";
-            this.lvCredentialList.Size = new System.Drawing.Size(430, 309);
-            this.lvCredentialList.TabIndex = 0;
-            this.lvCredentialList.UseCompatibleStateImageBehavior = false;
-            this.lvCredentialList.View = System.Windows.Forms.View.Details;
             // 
             // btnClose
             // 
@@ -89,30 +84,67 @@
             this.btnEditCredential.UseVisualStyleBackColor = true;
             this.btnEditCredential.Click += new System.EventHandler(this.btnEditCredential_Click);
             // 
+            // olvCredentialList
+            // 
+            this.olvCredentialList.AllColumns.Add(this.olvColumnName);
+            this.olvCredentialList.AllColumns.Add(this.olvColumnDomain);
+            this.olvCredentialList.AllColumns.Add(this.olvColumnUsername);
+            this.olvCredentialList.CellEditUseWholeCell = false;
+            this.olvCredentialList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.olvColumnName,
+            this.olvColumnDomain,
+            this.olvColumnUsername});
+            this.olvCredentialList.EmptyListMsg = "No credentials found";
+            this.olvCredentialList.EmptyListMsgFont = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.olvCredentialList.Location = new System.Drawing.Point(12, 12);
+            this.olvCredentialList.Name = "olvCredentialList";
+            this.olvCredentialList.Size = new System.Drawing.Size(430, 308);
+            this.olvCredentialList.TabIndex = 1;
+            this.olvCredentialList.UseCompatibleStateImageBehavior = false;
+            this.olvCredentialList.View = System.Windows.Forms.View.Details;
+            // 
+            // olvColumnName
+            // 
+            this.olvColumnName.AspectName = "Name";
+            this.olvColumnName.Text = "Name";
+            // 
+            // olvColumnUsername
+            // 
+            this.olvColumnUsername.AspectName = "Username";
+            this.olvColumnUsername.Text = "Username";
+            // 
+            // olvColumnDomain
+            // 
+            this.olvColumnDomain.AspectName = "Domain";
+            this.olvColumnDomain.Text = "Domain";
+            // 
             // FrmCredentialManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(454, 365);
+            this.Controls.Add(this.olvCredentialList);
             this.Controls.Add(this.btnEditCredential);
             this.Controls.Add(this.btnRemoveCredential);
             this.Controls.Add(this.btnAddCredential);
             this.Controls.Add(this.btnClose);
-            this.Controls.Add(this.lvCredentialList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FrmCredentialManager";
             this.Text = "Credential Manager";
+            ((System.ComponentModel.ISupportInitialize)(this.olvCredentialList)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListView lvCredentialList;
         private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.Button btnAddCredential;
         private System.Windows.Forms.Button btnRemoveCredential;
         private System.Windows.Forms.Button btnEditCredential;
+        private BrightIdeasSoftware.ObjectListView olvCredentialList;
+        private BrightIdeasSoftware.OLVColumn olvColumnName;
+        private BrightIdeasSoftware.OLVColumn olvColumnDomain;
+        private BrightIdeasSoftware.OLVColumn olvColumnUsername;
     }
 }

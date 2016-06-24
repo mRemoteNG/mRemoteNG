@@ -1,5 +1,4 @@
 ﻿using System;
-using mRemoteNG;
 using System.Windows.Forms;
 using mRemoteNG.App;
 
@@ -15,7 +14,18 @@ namespace mRemoteNG.UI.Forms
 
         private void OnLoad(object sender, EventArgs eventArgs)
         {
-            
+            PopulateCredentialList();
+        }
+
+        private void PopulateCredentialList()
+        {
+            Runtime.CredentialList.CollectionChanged += CredentialList_CollectionChanged;
+            olvCredentialList.SetObjects(Runtime.CredentialList);
+        }
+
+        private void CredentialList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            olvCredentialList.SetObjects(Runtime.CredentialList);
         }
 
         private void btnAddCredential_Click(object sender, EventArgs e)
