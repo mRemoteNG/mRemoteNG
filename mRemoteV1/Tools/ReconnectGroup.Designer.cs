@@ -56,7 +56,7 @@ namespace mRemoteNG
 			this.grpAutomaticReconnect.Size = new System.Drawing.Size(171, 98);
 			this.grpAutomaticReconnect.TabIndex = 8;
 			this.grpAutomaticReconnect.TabStop = false;
-			this.grpAutomaticReconnect.Text = "Automatisches wiederverbinden";
+			this.grpAutomaticReconnect.Text = Language.strGroupboxAutomaticReconnect;
 			//
 			//lblAnimation
 			//
@@ -72,7 +72,7 @@ namespace mRemoteNG
 			this.btnClose.Name = "btnClose";
 			this.btnClose.Size = new System.Drawing.Size(159, 23);
 			this.btnClose.TabIndex = 7;
-			this.btnClose.Text = "&Schließen";
+			this.btnClose.Text = Language.strButtonClose;
 			this.btnClose.UseVisualStyleBackColor = true;
 			//
 			//lblServerStatus
@@ -92,7 +92,7 @@ namespace mRemoteNG
 			this.chkReconnectWhenReady.Name = "chkReconnectWhenReady";
 			this.chkReconnectWhenReady.Size = new System.Drawing.Size(129, 17);
 			this.chkReconnectWhenReady.TabIndex = 6;
-			this.chkReconnectWhenReady.Text = "Verbinden wenn bereit";
+			this.chkReconnectWhenReady.Text = Language.strCheckboxReconnectWhenReady;
 			this.chkReconnectWhenReady.UseVisualStyleBackColor = true;
 			//
 			//pbServerStatus
