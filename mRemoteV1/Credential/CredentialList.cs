@@ -58,12 +58,25 @@ namespace mRemoteNG.Credential
 	        return List.Cast<CredentialInfo>().Any(credential => credential.Uuid == targetCredentialinfo.Uuid);
 	    }
 
+	    public int IndexOf(string uuid)
+	    {
+	        var index = -1;
+	        for (var i=0; i < List.Count; i++)
+	        {
+	            if (this[i].Uuid != uuid) continue;
+	            index = i;
+	            break;
+	        }
+            return index;
+	    }
+
         public void Replace(CredentialInfo replacementCredentialInfo)
         {
-            if (Contains(replacementCredentialInfo))
-                Remove(replacementCredentialInfo);
-            Add(replacementCredentialInfo);
-            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, replacementCredentialInfo));
+            var targetCredentialIndex = IndexOf(replacementCredentialInfo.Uuid);
+            if (targetCredentialIndex < 0) return;
+            var oldCredentialItem = List[targetCredentialIndex];
+            List[targetCredentialIndex] = replacementCredentialInfo;
+            CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Replace, replacementCredentialInfo, oldCredentialItem, targetCredentialIndex));
         }
 
         public CredentialList Copy()
