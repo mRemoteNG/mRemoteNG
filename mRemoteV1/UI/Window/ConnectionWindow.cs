@@ -940,13 +940,18 @@ namespace mRemoteNG.UI.Window
 				//add ext apps
 				foreach (Tools.ExternalTool extA in Runtime.ExternalTools)
 				{
-					ToolStripMenuItem nItem = new ToolStripMenuItem();
-					nItem.Text = extA.DisplayName;
-					nItem.Tag = extA;
-							
-					nItem.Image = extA.Image;
-							
-					nItem.Click += cmenTabExternalAppsEntry_Click;
+				    ToolStripMenuItem nItem = new ToolStripMenuItem
+				    {
+				        Text = extA.DisplayName,
+				        Tag = extA,
+                        /* rare failure here. While ExternalTool.Image already tries to default this
+                         * try again so it's not null/doesn't crash.
+                         */
+                        Image = extA.Image ?? Resources.mRemote_Icon.ToBitmap()
+                    };
+
+
+				    nItem.Click += cmenTabExternalAppsEntry_Click;
 							
 					cmenTabExternalApps.DropDownItems.Add(nItem);
 				}

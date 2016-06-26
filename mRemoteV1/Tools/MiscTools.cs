@@ -1,6 +1,3 @@
-using mRemoteNG.App;
-using mRemoteNG.Forms;
-using mRemoteNG.UI.Window;
 using System;
 using System.ComponentModel;
 using System.Drawing;
@@ -9,7 +6,11 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
-
+using mRemoteNG.App;
+using mRemoteNG.Forms;
+using mRemoteNG.Messages;
+using mRemoteNG.UI.Window;
+using static System.String;
 
 namespace mRemoteNG.Tools
 {
@@ -18,8 +19,8 @@ namespace mRemoteNG.Tools
 		private struct SHFILEINFO
 		{
 			public IntPtr hIcon; // : icon
-			public int iIcon; // : icondex
-			public int dwAttributes; // : SFGAO_ flags
+			//public int iIcon; // : icondex
+			//public int dwAttributes; // : SFGAO_ flags
 			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
             public string szDisplayName;
 			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
@@ -37,42 +38,18 @@ namespace mRemoteNG.Tools
 		{
 		    try
 		    {
-		        if (File.Exists(FileName) == false)
-		        {
-		            return null;
-		        }
-
-		        IntPtr hImgSmall; //The handle to the system image list.
-		        //Dim hImgLarge As IntPtr  'The handle to the system image list.
-		        SHFILEINFO shinfo = new SHFILEINFO();
-		        shinfo = new SHFILEINFO();
-
-		        shinfo.szDisplayName = new string('\0', 260);
-		        shinfo.szTypeName = new string('\0', 80);
-
-		        //Use this to get the small icon.
-		        hImgSmall = SHGetFileInfo(FileName, 0, ref shinfo, Marshal.SizeOf(shinfo), SHGFI_ICON | SHGFI_SMALLICON);
-
-                //Use this to get the large icon.
-                //hImgLarge = SHGetFileInfo(fName, 0, ref shinfo, (uint)Marshal.SizeOf(shinfo), SHGFI_ICON | SHGFI_LARGEICON);
-
-                //The icon is returned in the hIcon member of the
-                //shinfo struct.
-                Icon myIcon = default(Icon);
-		        myIcon = Icon.FromHandle(shinfo.hIcon);
-
-		        return myIcon;
+		        return File.Exists(FileName) == false ? null : Icon.ExtractAssociatedIcon(FileName);
 		    }
 		    catch (ArgumentException AEx)
 		    {
-		        Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg,
+		        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg,
 		            "GetIconFromFile failed (Tools.Misc) - using default icon" + Environment.NewLine + AEx.Message, true);
                 return Resources.mRemote_Icon;
 
 		    }
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "GetIconFromFile failed (Tools.Misc)" + Environment.NewLine + ex.Message, true);
 				return null;
 			}
 		}
@@ -85,14 +62,7 @@ namespace mRemoteNG.Tools
 		{
 			PasswordForm passwordForm = new PasswordForm(passwordName, verify);
 				
-			if (passwordForm.ShowDialog() == DialogResult.OK)
-			{
-				return passwordForm.Password;
-			}
-			else
-			{
-				return "";
-			}
+			return passwordForm.ShowDialog() == DialogResult.OK ? passwordForm.Password : "";
 		}
 		
 
@@ -104,18 +74,15 @@ namespace mRemoteNG.Tools
 
 		public static string LeadingZero(string Number)
 		{
-			if (Convert.ToInt32(Number) < 10)
+		    if (Convert.ToInt32(Number) < 10)
 			{
 				return "0" + Number;
 			}
-			else
-			{
-				return Number;
-			}
+		    return Number;
 		}
-		
 
-		public static string DBDate(DateTime Dt)
+
+        public static string DBDate(DateTime Dt)
 		{
 		    var strDate = Dt.Year + LeadingZero(Convert.ToString(Dt.Month)) + LeadingZero(Convert.ToString(Dt.Day)) + " " + LeadingZero(Convert.ToString(Dt.Hour)) + ":" + LeadingZero(Convert.ToString(Dt.Minute)) + ":" + LeadingZero(Convert.ToString(Dt.Second));
 		    return strDate;
@@ -155,13 +122,13 @@ namespace mRemoteNG.Tools
         {
             return GetExceptionMessageRecursive(ex, Environment.NewLine);
         }
-        public static string GetExceptionMessageRecursive(Exception ex, string separator)
+        private static string GetExceptionMessageRecursive(Exception ex, string separator)
 		{
 			string message = ex.Message;
 			if (ex.InnerException != null)
 			{
 				string innerMessage = GetExceptionMessageRecursive(ex.InnerException, separator);
-				message = string.Join(separator, new string[] {message, innerMessage});
+				message = Join(separator, message, innerMessage);
 			}
 			return message;
 		}
@@ -186,7 +153,7 @@ namespace mRemoteNG.Tools
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "Taking Screenshot failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Taking Screenshot failed" + Environment.NewLine + ex.Message, true);
 			}
 				
 			return null;
@@ -208,17 +175,15 @@ namespace mRemoteNG.Tools
 				
 			public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destType)
 			{
-				FieldInfo fi = _enumType.GetField(Enum.GetName(_enumType, value));
-				DescriptionAttribute dna = (DescriptionAttribute) (Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)));
+			    if (value != null)
+			    {
+			        FieldInfo fi = _enumType.GetField(Enum.GetName(_enumType, value: value));
+			        DescriptionAttribute dna = (DescriptionAttribute) (Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)));
 					
-				if (dna != null)
-				{
-					return dna.Description;
-				}
-				else
-				{
-					return value.ToString();
-				}
+			        return dna != null ? dna.Description : value.ToString();
+			    }
+
+			    return null;
 			}
 				
 			public override bool CanConvertFrom(ITypeDescriptorContext context, Type srcType)
@@ -232,7 +197,7 @@ namespace mRemoteNG.Tools
 				{
 					DescriptionAttribute dna = (DescriptionAttribute) (Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)));
 						
-					if ((dna != null) && (((string) value) == dna.Description))
+					if ((dna != null) && ((string) value == dna.Description))
 					{
 						return Enum.Parse(_enumType, fi.Name);
 					}
@@ -267,14 +232,14 @@ namespace mRemoteNG.Tools
 				
 			public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 			{
-				if (value.GetType() == typeof(string))
+				if (value is string)
 				{
-					if ((value).ToString().ToLower() == Language.strYes.ToLower())
+					if (string.Equals(value.ToString(), Language.strYes, StringComparison.CurrentCultureIgnoreCase))
 					{
 						return true;
 					}
 						
-					if ((value).ToString().ToLower() == Language.strNo.ToLower())
+					if (string.Equals(value.ToString(), Language.strNo, StringComparison.CurrentCultureIgnoreCase))
 					{
 						return false;
 					}
@@ -302,7 +267,7 @@ namespace mRemoteNG.Tools
 				
 			public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
 			{
-				bool[] bools = new bool[] {true, false};
+				bool[] bools = {true, false};
 					
 				StandardValuesCollection svc = new StandardValuesCollection(bools);
 					
@@ -322,7 +287,7 @@ namespace mRemoteNG.Tools
 			private FormBorderStyle _savedBorderStyle;
 			private Rectangle _savedBounds;
 				
-			private bool _value = false;
+			private bool _value;
             public bool Value
 			{
 				get
