@@ -1,14 +1,11 @@
-using System.Collections.Generic;
 using System;
-using System.Drawing;
 using System.Diagnostics;
-using mRemoteNG.App;
+using System.Drawing;
 using System.IO;
-using System.ComponentModel;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.My;
-
+using mRemoteNG.Messages;
 
 namespace mRemoteNG.Tools
 {
@@ -22,34 +19,17 @@ namespace mRemoteNG.Tools
 		public bool TryIntegrate { get; set; }
         public ConnectionInfo ConnectionInfo { get; set; }
 		
-        public Icon Icon
-		{
-			get
-			{
-				if (File.Exists(FileName))
-					return MiscTools.GetIconFromFile(FileName);
-				else
-					return null;
-			}
-		}
-		
-        public Image Image
-		{
-			get
-			{
-				if (Icon != null)
-					return Icon.ToBitmap();
-				else
-					return Resources.mRemote_Icon.ToBitmap();
-			}
-		}
-        #endregion
+        public Icon Icon => File.Exists(FileName) ? MiscTools.GetIconFromFile(FileName) : Resources.mRemote_Icon;
+
+	    public Image Image => Icon?.ToBitmap() ?? Resources.mRemote_Icon.ToBitmap();
+
+	    #endregion
 		
 		public ExternalTool(string displayName = "", string fileName = "", string arguments = "")
 		{
-			this.DisplayName = displayName;
-			this.FileName = fileName;
-			this.Arguments = arguments;
+			DisplayName = displayName;
+			FileName = fileName;
+			Arguments = arguments;
 		}
 
         public void Start(ConnectionInfo startConnectionInfo = null)
@@ -58,7 +38,7 @@ namespace mRemoteNG.Tools
 			{
 			    if (string.IsNullOrEmpty(FileName))
 			    {
-			        Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "ExternalApp.Start() failed: FileName cannot be blank.", false);
+			        Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ExternalApp.Start() failed: FileName cannot be blank.");
 			        return;
 			    }
 				
@@ -94,8 +74,8 @@ namespace mRemoteNG.Tools
             process.StartInfo.FileName = argParser.ParseArguments(FileName);
             process.StartInfo.Arguments = argParser.ParseArguments(Arguments);
         }
-		
-		public void StartIntegrated()
+
+        private void StartIntegrated()
 		{
 			try
 			{
@@ -117,15 +97,11 @@ namespace mRemoteNG.Tools
 
         private ConnectionInfo GetAppropriateInstanceOfConnectionInfo()
         {
-            ConnectionInfo newConnectionInfo = default(ConnectionInfo);
-            if (this.ConnectionInfo == null)
-                newConnectionInfo = new ConnectionInfo();
-            else
-                newConnectionInfo = this.ConnectionInfo.Copy();
+            var newConnectionInfo = ConnectionInfo == null ? new ConnectionInfo() : ConnectionInfo.Copy();
             return newConnectionInfo;
         }
 
-        private void SetConnectionInfoFields(ConnectionInfo newConnectionInfo)
+	    private void SetConnectionInfoFields(ConnectionInfo newConnectionInfo)
         {
             newConnectionInfo.Protocol = ProtocolType.IntApp;
             newConnectionInfo.ExtApp = DisplayName;
