@@ -227,6 +227,7 @@
             this.comboBoxSourceSelector.Name = "comboBoxSourceSelector";
             this.comboBoxSourceSelector.Size = new System.Drawing.Size(155, 21);
             this.comboBoxSourceSelector.TabIndex = 2;
+            this.comboBoxSourceSelector.SelectedIndexChanged += new System.EventHandler(this.comboBoxSourceSelector_SelectedIndexChanged);
             // 
             // lblSeparator
             // 
