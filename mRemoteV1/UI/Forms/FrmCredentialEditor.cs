@@ -17,8 +17,14 @@ namespace mRemoteNG.UI.Forms
             InitializeCredentialData();
             InitializeComponent();
             HideTabControllerHeader();
+            BindCredentialSourceToComboBox();
             PopulateFormWithCredentialData();
             Load += FrmCredentialEditor_OnLoad;
+        }
+
+        private void BindCredentialSourceToComboBox()
+        {
+            comboBoxSourceSelector.DataSource = Enum.GetValues(typeof(CredentialSource));
         }
 
         private void FrmCredentialEditor_OnLoad(object sender, EventArgs eventArgs)
@@ -37,7 +43,7 @@ namespace mRemoteNG.UI.Forms
         {
             txtEntryName.Text = _credentialInfo.Name;
             txtUUID.Text = _credentialInfo.Uuid;
-            comboBoxSourceSelector.SelectedText = _credentialInfo.CredentialSource;
+            comboBoxSourceSelector.SelectedText = _credentialInfo.CredentialSource.ToString();
             PopulateManualEntryForm();
         }
 

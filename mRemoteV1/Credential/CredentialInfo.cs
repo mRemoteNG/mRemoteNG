@@ -48,7 +48,7 @@ namespace mRemoteNG.Credential
             Browsable(true),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameDomain"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
-        public string CredentialSource { get; set; }
+        public CredentialSource CredentialSource { get; set; }
 
 
 	    public void SetPasswordFromUnsecureString(string unsecuredPassword)

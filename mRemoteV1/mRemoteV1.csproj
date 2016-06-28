@@ -170,6 +170,7 @@
     <Compile Include="Connection\Protocol\RDP\RDPVersions.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Credential\CredentialManager.cs" />
+    <Compile Include="Credential\CredentialSourceEnum.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
     <Compile Include="Tools\ArgumentParser.cs" />
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
