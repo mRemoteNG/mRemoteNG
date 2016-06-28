@@ -38,6 +38,7 @@
             this.olvColumnDomain = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnUsername = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvColumnUuid = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvColumnCredentialSource = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.olvCredentialList)).BeginInit();
             this.SuspendLayout();
             // 
@@ -92,6 +93,7 @@
             this.olvCredentialList.AllColumns.Add(this.olvColumnDomain);
             this.olvCredentialList.AllColumns.Add(this.olvColumnUsername);
             this.olvCredentialList.AllColumns.Add(this.olvColumnUuid);
+            this.olvCredentialList.AllColumns.Add(this.olvColumnCredentialSource);
             this.olvCredentialList.AutoArrange = false;
             this.olvCredentialList.CellEditUseWholeCell = false;
             this.olvCredentialList.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
@@ -147,6 +149,14 @@
             this.olvColumnUuid.IsVisible = false;
             this.olvColumnUuid.Text = "UUID";
             // 
+            // olvColumnCredentialSource
+            // 
+            this.olvColumnCredentialSource.AspectName = "CredentialSource";
+            this.olvColumnCredentialSource.DisplayIndex = 3;
+            this.olvColumnCredentialSource.IsEditable = false;
+            this.olvColumnCredentialSource.IsVisible = false;
+            this.olvColumnCredentialSource.Text = "Source";
+            // 
             // FrmCredentialManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -176,5 +186,6 @@
         private BrightIdeasSoftware.OLVColumn olvColumnDomain;
         private BrightIdeasSoftware.OLVColumn olvColumnUsername;
         private BrightIdeasSoftware.OLVColumn olvColumnUuid;
+        private BrightIdeasSoftware.OLVColumn olvColumnCredentialSource;
     }
 }

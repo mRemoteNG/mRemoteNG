@@ -108,5 +108,10 @@ namespace mRemoteNG.UI.Forms
         {
             _credentialInfo.Password = secureTextBoxManualEntryPassword.SecureString;
         }
+
+        private void comboBoxSourceSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _credentialInfo.CredentialSource = (CredentialSource)comboBoxSourceSelector.SelectedValue;
+        }
     }
 }
