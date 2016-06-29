@@ -8,25 +8,25 @@ namespace mRemoteNGTests.UI.Forms
     [TestFixture]
     public class CredentialManagerTests
     {
-        private FrmCredentialManager _credentialManager;
+        private FrmCredentialManager _credentialManagerForm;
         private CredentialList _credentialList;
 
         [SetUp]
         public void Setup()
         {
             _credentialList = new CredentialList();
-            _credentialManager = new FrmCredentialManager(_credentialList);
-            _credentialManager.Show();
+            _credentialManagerForm = new FrmCredentialManager(_credentialList);
+            _credentialManagerForm.Show();
         }
 
         [TearDown]
         public void Teardown()
         {
-            _credentialManager.Dispose();
-            while (_credentialManager.Disposing)
+            _credentialManagerForm.Dispose();
+            while (_credentialManagerForm.Disposing)
             {
             }
-            _credentialManager = null;
+            _credentialManagerForm = null;
         }
 
         private void AddTestCredentialToList()
@@ -37,7 +37,7 @@ namespace mRemoteNGTests.UI.Forms
         [Test]
         public void CredentialManagerFormLoads()
         {
-            var credentialFormTester = new FormTester(_credentialManager.Name);
+            var credentialFormTester = new FormTester(_credentialManagerForm.Name);
             Assert.That(credentialFormTester.Count, Is.EqualTo(1));
         }
 
@@ -121,6 +121,15 @@ namespace mRemoteNGTests.UI.Forms
             credentialListView.Properties.SelectedObjects = itemsToBeRemoved;
             removeCredentialButton.Click();
             Assert.That(credentialListView.Contains(itemsToBeRemoved), Is.False);
+        }
+
+        [Test]
+        public void CloseButtonClosesForm()
+        {
+            var cancelButton = new ButtonTester("btnClose");
+            cancelButton.Click();
+            var credentialFormTester = new FormTester(_credentialManagerForm.Name);
+            Assert.That(credentialFormTester.Count, Is.EqualTo(0));
         }
     }
 }
