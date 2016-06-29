@@ -58,7 +58,7 @@ namespace mRemoteNG.UI.Forms
         {
             foreach (CredentialInfo selectedCredentialInfoitem in olvCredentialList.SelectedObjects)
             {
-                Runtime.CredentialList.Remove(selectedCredentialInfoitem);
+                _credentialList.Remove(selectedCredentialInfoitem);
             }
         }
 
