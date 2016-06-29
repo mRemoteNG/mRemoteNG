@@ -7,7 +7,7 @@ namespace mRemoteNG.Credential
 {
 	public class CredentialInfo
 	{
-	    public string Uuid { get; } = Guid.NewGuid().ToString();
+	    public string Uuid { get; set; } = Guid.NewGuid().ToString();
 
 	    [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
 	     Browsable(true),
