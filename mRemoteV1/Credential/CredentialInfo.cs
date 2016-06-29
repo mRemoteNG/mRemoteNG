@@ -60,5 +60,20 @@ namespace mRemoteNG.Credential
 	        unsecuredPassword = null;
 	        Password = secureString;
 	    }
-    }
+
+	    public CredentialInfo Clone()
+	    {
+	        var clone = new CredentialInfo
+	        {
+                Uuid = Uuid,
+	            Name = Name,
+	            Description = Description,
+                Username = Username,
+                Password = Password,
+                Domain = Domain,
+                CredentialSource = CredentialSource
+	        };
+	        return clone;
+	    }
+	}
 }
