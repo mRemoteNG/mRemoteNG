@@ -44,11 +44,11 @@ namespace mRemoteNG.Credential
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
         public string Domain { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2),
-            Browsable(true),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameDomain"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
-        public CredentialSource CredentialSource { get; set; }
+	    [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2),
+	     Browsable(true),
+	     LocalizedAttributes.LocalizedDisplayName("strPropertyNameDomain"),
+	     LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
+	    public CredentialSource CredentialSource { get; set; } = default(CredentialSource);
 
 
 	    public void SetPasswordFromUnsecureString(string unsecuredPassword)
