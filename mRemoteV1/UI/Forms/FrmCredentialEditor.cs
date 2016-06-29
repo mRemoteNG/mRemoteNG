@@ -44,6 +44,7 @@ namespace mRemoteNG.UI.Forms
             txtEntryName.Text = _credentialInfo.Name;
             txtUUID.Text = _credentialInfo.Uuid;
             comboBoxSourceSelector.SelectedText = _credentialInfo.CredentialSource.ToString();
+            SelectCredentialEditorTabBasedOnCredentialSource();
             PopulateManualEntryForm();
         }
 
@@ -112,6 +113,12 @@ namespace mRemoteNG.UI.Forms
         private void comboBoxSourceSelector_SelectedIndexChanged(object sender, EventArgs e)
         {
             _credentialInfo.CredentialSource = (CredentialSource)comboBoxSourceSelector.SelectedValue;
+            SelectCredentialEditorTabBasedOnCredentialSource();
+        }
+
+        private void SelectCredentialEditorTabBasedOnCredentialSource()
+        {
+            tabControlCredentialEditor.SelectTab($"tabPage{_credentialInfo.CredentialSource}");
         }
     }
 }
