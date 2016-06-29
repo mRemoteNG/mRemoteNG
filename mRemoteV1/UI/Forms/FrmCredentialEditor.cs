@@ -44,7 +44,7 @@ namespace mRemoteNG.UI.Forms
         {
             txtEntryName.Text = _credentialInfo.Name;
             txtUUID.Text = _credentialInfo.Uuid;
-            comboBoxSourceSelector.SelectedText = _credentialInfo.CredentialSource.ToString();
+            comboBoxSourceSelector.SelectedItem = _credentialInfo.CredentialSource;
             SelectCredentialEditorTabBasedOnCredentialSource();
             PopulateManualEntryForm();
         }
