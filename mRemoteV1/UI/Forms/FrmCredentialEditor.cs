@@ -13,7 +13,7 @@ namespace mRemoteNG.UI.Forms
 
         public FrmCredentialEditor(CredentialInfo credentialInfo = null)
         {
-            _credentialInfo = credentialInfo;
+            _credentialInfo = credentialInfo?.Clone();
             InitializeCredentialData();
             InitializeComponent();
             HideTabControllerHeader();
