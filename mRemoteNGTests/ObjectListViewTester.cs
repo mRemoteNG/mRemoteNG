@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System.Collections;
+using System.Linq;
+using System.Windows.Forms;
 using BrightIdeasSoftware;
 
 namespace NUnit.Extensions.Forms
@@ -32,6 +34,21 @@ namespace NUnit.Extensions.Forms
         public void SelectAll()
         {
             Properties.SelectAll();
+        }
+
+        public int GetItemCount()
+        {
+            return Properties.GetItemCount();
+        }
+
+        public bool Contains(object targetObject)
+        {
+            return Properties.Items.Cast<object>().Contains(targetObject);
+        }
+
+        public bool Contains(IEnumerable targetObject)
+        {
+            return Properties.Items.Cast<object>().Contains(targetObject);
         }
     }
 }
