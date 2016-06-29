@@ -14,6 +14,7 @@ namespace mRemoteNG.UI.Forms
             _credentialList = credentialList;
             InitializeComponent();
             Load += OnLoad;
+            olvCredentialList.SelectedIndexChanged += OlvCredentialListOnSelectedIndexChanged;
         }
 
         private void OnLoad(object sender, EventArgs eventArgs)
@@ -59,6 +60,22 @@ namespace mRemoteNG.UI.Forms
             {
                 Runtime.CredentialList.Remove(selectedCredentialInfoitem);
             }
+        }
+
+        private void OlvCredentialListOnSelectedIndexChanged(object sender, EventArgs eventArgs)
+        {
+            UpdateEditButtonEnabledState();
+            UpdateRemoveButtonEnabledState();
+        }
+
+        private void UpdateEditButtonEnabledState()
+        {
+            btnEditCredential.Enabled = olvCredentialList.SelectedItems.Count > 0;
+        }
+
+        private void UpdateRemoveButtonEnabledState()
+        {
+            btnRemoveCredential.Enabled = olvCredentialList.SelectedItems.Count > 0;
         }
     }
 }

@@ -67,6 +67,7 @@
             // 
             // btnRemoveCredential
             // 
+            this.btnRemoveCredential.Enabled = false;
             this.btnRemoveCredential.Image = global::mRemoteNG.Resources.key_delete;
             this.btnRemoveCredential.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnRemoveCredential.Location = new System.Drawing.Point(199, 326);
@@ -79,6 +80,7 @@
             // 
             // btnEditCredential
             // 
+            this.btnEditCredential.Enabled = false;
             this.btnEditCredential.Location = new System.Drawing.Point(104, 326);
             this.btnEditCredential.Name = "btnEditCredential";
             this.btnEditCredential.Size = new System.Drawing.Size(89, 27);
