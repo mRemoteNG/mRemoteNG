@@ -20,6 +20,7 @@ namespace mRemoteNG.UI.Forms
             BindCredentialSourceToComboBox();
             PopulateFormWithCredentialData();
             Load += FrmCredentialEditor_OnLoad;
+            comboBoxSourceSelector.SelectedIndexChanged += comboBoxSourceSelector_SelectedIndexChanged;
         }
 
         private void BindCredentialSourceToComboBox()
