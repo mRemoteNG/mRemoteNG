@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using mRemoteNG.App;
 using mRemoteNG.Credential;
 
 namespace mRemoteNG.UI.Forms

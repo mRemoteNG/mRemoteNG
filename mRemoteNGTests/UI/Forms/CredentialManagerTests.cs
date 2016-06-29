@@ -117,7 +117,7 @@ namespace mRemoteNGTests.UI.Forms
             AddTestCredentialToList();
             AddTestCredentialToList();
             AddTestCredentialToList();
-            var itemsToBeRemoved = new[] { _credentialList[1], _credentialList[1] };
+            var itemsToBeRemoved = new[] { _credentialList[1], _credentialList[2] };
             credentialListView.Properties.SelectedObjects = itemsToBeRemoved;
             removeCredentialButton.Click();
             Assert.That(credentialListView.Contains(itemsToBeRemoved), Is.False);
