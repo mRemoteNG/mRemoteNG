@@ -7,8 +7,11 @@ namespace mRemoteNG.UI.Forms
 {
     public partial class FrmCredentialManager : Form
     {
-        public FrmCredentialManager()
+        private CredentialList _credentialList;
+
+        public FrmCredentialManager(CredentialList credentialList)
         {
+            _credentialList = credentialList;
             InitializeComponent();
             Load += OnLoad;
         }
@@ -20,13 +23,13 @@ namespace mRemoteNG.UI.Forms
 
         private void PopulateCredentialList()
         {
-            Runtime.CredentialList.CollectionChanged += CredentialList_CollectionChanged;
-            olvCredentialList.SetObjects(Runtime.CredentialList);
+            _credentialList.CollectionChanged += CredentialList_CollectionChanged;
+            olvCredentialList.SetObjects(_credentialList);
         }
 
         private void CredentialList_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            olvCredentialList.SetObjects(Runtime.CredentialList);
+            olvCredentialList.SetObjects(_credentialList);
         }
 
         private void btnAddCredential_Click(object sender, EventArgs e)
