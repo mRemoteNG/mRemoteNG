@@ -75,5 +75,19 @@ namespace mRemoteNGTests.UI.Forms
             var cueBannerText = passwordBox.Properties.GetCueBannerText();
             Assert.That(cueBannerText, Is.Not.Null);
         }
+
+        [Test]
+        public void ClickingOkButtonCommitsChangesToCredentialList()
+        {
+            var originalEntryName = "MyEntry";
+            var updatedEntryName = "MyUpdatedEntryName";
+            var credential = new CredentialInfo { Name = originalEntryName };
+            CreateCredentialEditorForm(credential);
+            var entryNameTextbox = new TextBoxTester("txtEntryName");
+            var okButton = new ButtonTester("btnOk");
+            entryNameTextbox.Enter(updatedEntryName);
+            okButton.Click();
+            Assert.That(_credentialList[credential].Name, Is.EqualTo(updatedEntryName));
+        }
     }
 }
