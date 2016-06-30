@@ -18,6 +18,7 @@
   <?define RequiredDotNetFrameworkVersion = "$(var.RequiredDotNetFrameworkMajorVersion).$(var.RequiredDotNetFrameworkMinorVersion)" ?>
   <?define RDP80KB = "KB2592687" ?>
   <?define RDP81KB = "KB2923545" ?>
+  <?define IGNOREPREREQUISITES = 0 ?>
   
   <?if $(var.Platform) = x64 ?>
     <?define ProductNameWithPlatform = "$(var.ProductName) (64 bit)" ?>
