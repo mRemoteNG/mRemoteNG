@@ -29,5 +29,18 @@ namespace mRemoteNG.Security
                 Marshal.ZeroFreeGlobalAllocUnicode(unmanagedString);
             }
         }
+
+        public static SecureString ConvertToSecureString(this string unsecuredPassword)
+        {
+            if (unsecuredPassword == null)
+                throw new ArgumentNullException(nameof(unsecuredPassword));
+
+            var secureString = new SecureString();
+            foreach (var character in unsecuredPassword.ToCharArray())
+                secureString.AppendChar(character);
+            // ReSharper disable once RedundantAssignment
+            unsecuredPassword = null;
+            return secureString;
+        }
     }
 }
