@@ -117,6 +117,13 @@
     <Compile Include="UI\Controls\TestForm.Designer.cs">
       <DependentUpon>TestForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Controls\TextBoxExtensionsTestForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Controls\TextBoxExtensionsTestForm.Designer.cs">
+      <DependentUpon>TextBoxExtensionsTestForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Controls\TextBoxExtensionsTests.cs" />
     <Compile Include="UI\Forms\CredentialEditorTests.cs" />
     <Compile Include="UI\Forms\CredentialManagerTests.cs" />
     <Compile Include="UI\Forms\OptionsFormSetupAndTeardown.cs" />
@@ -135,6 +142,9 @@
   <ItemGroup>
     <EmbeddedResource Include="UI\Controls\TestForm.resx">
       <DependentUpon>TestForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Controls\TextBoxExtensionsTestForm.resx">
+      <DependentUpon>TextBoxExtensionsTestForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Choose>
