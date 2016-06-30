@@ -229,5 +229,18 @@ namespace mRemoteNGTests.Credential
             _credentialList.AddRange(list);
             Assert.That(_credentialList.Count, Is.EqualTo(list.Length));
         }
+
+        [Test]
+        public void IndexingByObjectReturnsNothingIfObjectIsNotInList()
+        {
+            Assert.That(_credentialList[_testCredential1], Is.Null);
+        }
+
+        [Test]
+        public void IndexingByObjectReturnsCorrectObject()
+        {
+            _credentialList.AddRange(new [] {_testCredential1, _testCredential3});
+            Assert.That(_credentialList[_testCredential3], Is.EqualTo(_testCredential3));
+        }
     }
 }

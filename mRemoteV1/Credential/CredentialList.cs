@@ -14,9 +14,11 @@ namespace mRemoteNG.Credential
 			get
 			{
 			    var info = index as CredentialInfo;
-			    if (info != null)
-                    return info;
-			    return (CredentialInfo) List[Convert.ToInt32(index)];
+			    if (info != null && Contains(info))
+                    return (CredentialInfo)List[IndexOf(info.Uuid)];
+                if(index is int && (int)index < Count)
+			        return (CredentialInfo) List[Convert.ToInt32(index)];
+			    return null;
 			}
 		}
 			
