@@ -172,6 +172,7 @@
     <Compile Include="Credential\CredentialManager.cs" />
     <Compile Include="Credential\CredentialSourceEnum.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
+    <Compile Include="Security\SecureStringExtensions.cs" />
     <Compile Include="Tools\ArgumentParser.cs" />
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
