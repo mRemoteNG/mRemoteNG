@@ -221,5 +221,13 @@ namespace mRemoteNGTests.Credential
             _credentialList.Replace(_testCredential1);
             Assert.That(wasCalled, Is.True);
         }
+
+        [Test]
+        public void CountReturnsCorrectNumberOfListElements()
+        {
+            var list = new[] {_testCredential1, _testCredential2};
+            _credentialList.AddRange(list);
+            Assert.That(_credentialList.Count, Is.EqualTo(list.Length));
+        }
     }
 }
