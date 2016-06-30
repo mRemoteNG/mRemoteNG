@@ -101,6 +101,7 @@
     <Compile Include="App\LoggerTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Connection\ConnectionInfoInheritanceTests.cs" />
+    <Compile Include="Credential\CredentialInfoTests.cs" />
     <Compile Include="Credential\CredentialListTests.cs" />
     <Compile Include="ListViewTester.cs" />
     <Compile Include="Config\Connections\SqlConnectionUpdateCheckerTests.cs" />
