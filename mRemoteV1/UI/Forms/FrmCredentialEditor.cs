@@ -13,6 +13,7 @@ namespace mRemoteNG.UI.Forms
 
         public FrmCredentialEditor(CredentialInfo credentialInfo = null)
         {
+            Application.EnableVisualStyles();
             _credentialInfo = credentialInfo?.Clone();
             InitializeCredentialData();
             InitializeComponent();
@@ -30,8 +31,13 @@ namespace mRemoteNG.UI.Forms
 
         private void FrmCredentialEditor_OnLoad(object sender, EventArgs eventArgs)
         {
+            SetCueBannerOnPasswordField();
+        }
+
+        private void SetCueBannerOnPasswordField()
+        {
             if (_credentialInfo.Password?.Length > 0)
-                secureTextBoxManualEntryPassword.CueBanner(true, Language.strPasswordHidden);
+                secureTextBoxManualEntryPassword.SetCueBannerText(Language.strPasswordHidden, true);
         }
 
         private void InitializeCredentialData()
