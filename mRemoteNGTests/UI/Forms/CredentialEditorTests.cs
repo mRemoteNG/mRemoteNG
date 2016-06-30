@@ -11,16 +11,24 @@ namespace mRemoteNGTests.UI.Forms
     public class CredentialEditorTests
     {
         private FrmCredentialEditor _credentialEditorForm;
+        private CredentialList _credentialList;
+
+        [SetUp]
+        public void Setup()
+        {
+            _credentialList = new CredentialList {new CredentialInfo()};
+        }
 
         [TearDown]
         public void TearDown()
         {
+            _credentialList = null;
             _credentialEditorForm?.Dispose();
         }
 
         private void CreateCredentialEditorForm(CredentialInfo credentialInfo = null)
         {
-            _credentialEditorForm = new FrmCredentialEditor(credentialInfo);
+            _credentialEditorForm = new FrmCredentialEditor(_credentialList, credentialInfo);
             _credentialEditorForm.Show();
         }
 
