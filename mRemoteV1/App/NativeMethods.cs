@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Runtime.InteropServices;
+using System.Text;
 
 namespace mRemoteNG.App
 {
@@ -41,10 +42,13 @@ namespace mRemoteNG.App
         public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
-        public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, System.Text.StringBuilder lParam);
+        public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, StringBuilder lParam);
 
         [DllImport("user32.dll", CharSet = CharSet.Unicode)]
         public static extern IntPtr SendMessage(IntPtr hWnd, uint msg, IntPtr wParam, string lParam);
+
+        [DllImport("user32.dll", CharSet = CharSet.Unicode)]
+        public static extern IntPtr SendMessage([In] IntPtr hWnd, [In] uint msg, [Out] StringBuilder wParam, [In] IntPtr lParam);
 
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         internal static extern IntPtr SetClipboardViewer(IntPtr hWndNewViewer);
@@ -458,7 +462,9 @@ namespace mRemoteNG.App
         #endregion
 
         #region EM
-        public const uint EM_SETCUEBANNER = 0x1501;
+        public const uint ECM_FIRST = 0x1500;
+        public const uint EM_SETCUEBANNER = ECM_FIRST + 1;
+        public const uint EM_GETCUEBANNER = ECM_FIRST + 2;
         #endregion
 
         #endregion
