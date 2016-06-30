@@ -49,7 +49,7 @@ namespace mRemoteNG.UI.Forms
 
         private void ShowCredentialEditor(CredentialInfo credentialInfo = null)
         {
-            var credentialEditor = new FrmCredentialEditor(credentialInfo);
+            var credentialEditor = new FrmCredentialEditor(_credentialList, credentialInfo);
             credentialEditor.Show();
         }
 

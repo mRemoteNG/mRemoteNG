@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using mRemoteNG.App;
 using mRemoteNG.Credential;
 using mRemoteNG.UI.Controls;
 
@@ -9,11 +8,13 @@ namespace mRemoteNG.UI.Forms
 {
     public partial class FrmCredentialEditor : Form
     {
+        private readonly CredentialList _credentialList;
         private CredentialInfo _credentialInfo;
 
-        public FrmCredentialEditor(CredentialInfo credentialInfo = null)
+        public FrmCredentialEditor(CredentialList credentialList, CredentialInfo credentialInfo = null)
         {
             Application.EnableVisualStyles();
+            _credentialList = credentialList;
             _credentialInfo = credentialInfo?.Clone();
             InitializeCredentialData();
             InitializeComponent();
@@ -76,7 +77,7 @@ namespace mRemoteNG.UI.Forms
 
         private void CommitChanges()
         {
-            if (Runtime.CredentialList.Contains(_credentialInfo))
+            if (_credentialList.Contains(_credentialInfo))
                 UpdateCredentialEntry();
             else
                 AddCredentialEntry();
@@ -84,12 +85,12 @@ namespace mRemoteNG.UI.Forms
 
         private void UpdateCredentialEntry()
         {
-            Runtime.CredentialList.Replace(_credentialInfo);
+            _credentialList.Replace(_credentialInfo);
         }
 
         private void AddCredentialEntry()
         {
-            Runtime.CredentialList.Add(_credentialInfo);
+            _credentialList.Add(_credentialInfo);
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
