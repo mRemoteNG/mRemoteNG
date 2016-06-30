@@ -68,6 +68,18 @@ namespace mRemoteNGTests.UI.Forms
         }
 
         [Test]
+        public void EditButtonOpensCredentionEditor()
+        {
+            var editButton = new ButtonTester("btnEditCredential");
+            var credentialListView = new ObjectListViewTester("olvCredentialList");
+            AddTestCredentialToList();
+            credentialListView.Select(1);
+            editButton.Click();
+            var credentialEditorFormTester = new FormTester("FrmCredentialEditor");
+            Assert.That(credentialEditorFormTester.Properties.Visible, Is.True);
+        }
+
+        [Test]
         public void RemoveButtonIsDiabledWhenCredentialItemNotSelected()
         {
             var removeCredentialButton = new ButtonTester("btnRemoveCredential");
