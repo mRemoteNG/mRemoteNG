@@ -1,4 +1,6 @@
 ﻿using mRemoteNG.Credential;
+using mRemoteNG.Security;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.Forms;
 using NUnit.Framework;
 using NUnit.Extensions.Forms;
@@ -54,6 +56,16 @@ namespace mRemoteNGTests.UI.Forms
             CreateCredentialEditorForm();
             var entryNameField = new TextBoxTester("txtEntryName");
             Assert.That(entryNameField.Properties.Enabled, Is.True);
+        }
+
+        [Test]
+        public void CueBannerSetOnPasswordFieldWhenEditingAlreadyExistingPassword()
+        {
+            var credential = new CredentialInfo {Password = "testPassword".ConvertToSecureString()};
+            CreateCredentialEditorForm(credential);
+            var passwordBox = new TextBoxTester("secureTextBoxManualEntryPassword");
+            var cueBannerText = passwordBox.Properties.GetCueBannerText();
+            Assert.That(cueBannerText, Is.Not.Null);
         }
     }
 }
