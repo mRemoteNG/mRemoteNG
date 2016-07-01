@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
+﻿using System.Security;
 using mRemoteNG.Security;
 using NUnit.Framework;
+using NUnit.Framework.Constraints;
 
 namespace mRemoteNGTests.Security
 {
@@ -41,6 +39,22 @@ namespace mRemoteNGTests.Security
             foreach (var c in _testPassword.ToCharArray())
                 _secureString.AppendChar(c);
             Assert.That(securePassword.ConvertToUnsecureString(), Is.EqualTo(_secureString.ConvertToUnsecureString()));
+        }
+
+        [Test]
+        public void ConvertToSecureStringThrowsExceptionWhenStringIsNull()
+        {
+            string testString = null;
+            ActualValueDelegate<object> testDelegate = () => testString.ConvertToSecureString();
+            Assert.That(testDelegate, Throws.ArgumentNullException);
+        }
+
+        [Test]
+        public void ConvertToUnsecureStringThrowsExceptionWhenSecureStringIsNull()
+        {
+            SecureString testSecureString = null;
+            ActualValueDelegate<object> testDelegate = () => testSecureString.ConvertToUnsecureString();
+            Assert.That(testDelegate, Throws.ArgumentNullException);
         }
     }
 }
