@@ -88,5 +88,24 @@ namespace mRemoteNGTests.UI.Forms
             okButton.Click();
             Assert.That(_credentialList[credentialToUpdate].Name, Is.EqualTo(updatedEntryName));
         }
+
+        [Test]
+        public void EditingExistingCredentialItemDoesNotAddANewItemToList()
+        {
+            var credentialToUpdate = _credentialList[0];
+            CreateCredentialEditorForm(credentialToUpdate);
+            var okButton = new ButtonTester("btnOk");
+            okButton.Click();
+            Assert.That(_credentialList.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void CreatingNewCredentialItemAddsItemToListAfterClickingOk()
+        {
+            CreateCredentialEditorForm();
+            var okButton = new ButtonTester("btnOk");
+            okButton.Click();
+            Assert.That(_credentialList.Count, Is.EqualTo(2));
+        }
     }
 }
