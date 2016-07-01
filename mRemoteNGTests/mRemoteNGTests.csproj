@@ -108,6 +108,7 @@
     <Compile Include="Config\Connections\SqlUpdateQueryBuilderTest.cs" />
     <Compile Include="Config\Connections\SqlUpdateTimerTests.cs" />
     <Compile Include="NUnitExtensions\ObjectListViewTester.cs" />
+    <Compile Include="NUnitExtensions\SecureTextBoxTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
     <Compile Include="UI\Controls\CustomListViewTests.cs" />
