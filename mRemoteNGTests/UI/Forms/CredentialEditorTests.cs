@@ -122,5 +122,31 @@ namespace mRemoteNGTests.UI.Forms
             okButton.Click();
             Assert.That(_credentialList.Count, Is.EqualTo(2));
         }
+
+        [Test]
+        public void EditingUserNameTextBoxUpdatesCredentialObject()
+        {
+            var credentialToEdit = _credentialList[0];
+            CreateCredentialEditorForm(credentialToEdit);
+            var userNameTextbox = new TextBoxTester("txtManualEntryUsername");
+            var newUserName = "User123";
+            userNameTextbox.Enter(newUserName);
+            var okButton = new ButtonTester("btnOk");
+            okButton.Click();
+            Assert.That(_credentialList[credentialToEdit].Username, Is.EqualTo(newUserName));
+        }
+
+        [Test]
+        public void EditingDomainTextBoxUpdatesCredentialObject()
+        {
+            var credentialToEdit = _credentialList[0];
+            CreateCredentialEditorForm(credentialToEdit);
+            var domainTextbox = new TextBoxTester("txtManualEntryDomain");
+            var newDomain = "User123";
+            domainTextbox.Enter(newDomain);
+            var okButton = new ButtonTester("btnOk");
+            okButton.Click();
+            Assert.That(_credentialList[credentialToEdit].Domain, Is.EqualTo(newDomain));
+        }
     }
 }
