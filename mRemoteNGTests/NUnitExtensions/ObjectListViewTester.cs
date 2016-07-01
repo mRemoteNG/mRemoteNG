@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 
+// ReSharper disable once CheckNamespace
 namespace NUnit.Extensions.Forms
 {
     public class ObjectListViewTester : ControlTester

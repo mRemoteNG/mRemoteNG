@@ -103,11 +103,11 @@
     <Compile Include="Connection\ConnectionInfoInheritanceTests.cs" />
     <Compile Include="Credential\CredentialInfoTests.cs" />
     <Compile Include="Credential\CredentialListTests.cs" />
-    <Compile Include="ListViewTester.cs" />
+    <Compile Include="NUnitExtensions\ListViewTester.cs" />
     <Compile Include="Config\Connections\SqlConnectionUpdateCheckerTests.cs" />
     <Compile Include="Config\Connections\SqlUpdateQueryBuilderTest.cs" />
     <Compile Include="Config\Connections\SqlUpdateTimerTests.cs" />
-    <Compile Include="ObjectListViewTester.cs" />
+    <Compile Include="NUnitExtensions\ObjectListViewTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
     <Compile Include="UI\Controls\CustomListViewTests.cs" />
