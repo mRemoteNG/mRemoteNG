@@ -59,6 +59,29 @@ namespace mRemoteNGTests.UI.Forms
         }
 
         [Test]
+        public void ClickingCancelDoesNotAddNewCredentialToList()
+        {
+            CreateCredentialEditorForm();
+            var cancelButton = new ButtonTester("btnCancel");
+            cancelButton.Click();
+            Assert.That(_credentialList.Count, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void ClickingCancelButtonDoesNotUpdateExistingCredentialItem()
+        {
+            var credentialToUpdate = _credentialList[0];
+            var originalEntryName = credentialToUpdate.Name;
+            var updatedEntryName = "MyUpdatedEntryName";
+            CreateCredentialEditorForm(credentialToUpdate);
+            var entryNameTextbox = new TextBoxTester("txtEntryName");
+            entryNameTextbox.Enter(updatedEntryName);
+            var cancelButton = new ButtonTester("btnCancel");
+            cancelButton.Click();
+            Assert.That(_credentialList[credentialToUpdate].Name, Is.EqualTo(originalEntryName));
+        }
+
+        [Test]
         public void EntryNameFieldIsEditable()
         {
             CreateCredentialEditorForm();
