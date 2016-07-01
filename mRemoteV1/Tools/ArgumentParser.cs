@@ -124,11 +124,7 @@ namespace mRemoteNG.Tools
 
                 if (haveReplacement)
                 {
-                    char trailing = '\0';
-                    if (tokenEnd + 2 <= input.Length)
-                        trailing = input.Substring(tokenEnd + 1, 1).ToCharArray()[0];
-                    else
-                        trailing = string.Empty.ToCharArray()[0];
+                    var trailing = tokenEnd + 2 <= input.Length ? input.Substring(tokenEnd + 1, 1).ToCharArray()[0] : '\0';
 
                     if (escape == EscapeType.All)
                     {

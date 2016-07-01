@@ -8,7 +8,7 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 	internal class ObjectWrapper : ICustomTypeDescriptor
 	{
 		/// <summary>Contain a reference to the selected objet that will linked to the parent PropertyGrid.</summary>
-		private object m_SelectedObject = null;
+		private object m_SelectedObject;
 		/// <summary>Contain a reference to the collection of properties to show in the parent PropertyGrid.</summary>
 		/// <remarks>By default, m_PropertyDescriptors contain all the properties of the object. </remarks>
 		List<PropertyDescriptor> m_PropertyDescriptors = new List<PropertyDescriptor>();
@@ -22,7 +22,7 @@ namespace mRemoteNG.UI.Controls.FilteredPropertyGrid
 		/// <summary>Get or set a reference to the selected objet that will linked to the parent PropertyGrid.</summary>
 		public object SelectedObject {
 			get { return m_SelectedObject; }
-			set { if(m_SelectedObject != value) m_SelectedObject = value; } 
+			set { m_SelectedObject = value; } 
 		}
 
 		/// <summary>Get or set a reference to the collection of properties to show in the parent PropertyGrid.</summary>

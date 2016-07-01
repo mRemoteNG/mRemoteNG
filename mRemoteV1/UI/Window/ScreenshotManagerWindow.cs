@@ -12,134 +12,134 @@ namespace mRemoteNG.UI.Window
 	public class ScreenshotManagerWindow : BaseWindow
 	{
         #region Form Init
-		internal System.Windows.Forms.MenuStrip msMain;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFile;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileSaveAll;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileRemoveAll;
-		internal System.Windows.Forms.ContextMenuStrip cMenScreenshot;
+		internal MenuStrip msMain;
+		internal ToolStripMenuItem mMenFile;
+		internal ToolStripMenuItem mMenFileSaveAll;
+		internal ToolStripMenuItem mMenFileRemoveAll;
+		internal ContextMenuStrip cMenScreenshot;
 		private System.ComponentModel.Container components = null;
-		internal System.Windows.Forms.ToolStripMenuItem cMenScreenshotCopy;
-		internal System.Windows.Forms.ToolStripMenuItem cMenScreenshotSave;
-		internal System.Windows.Forms.SaveFileDialog dlgSaveSingleImage;
-		internal System.Windows.Forms.FolderBrowserDialog dlgSaveAllImages;
-		internal System.Windows.Forms.FlowLayoutPanel flpScreenshots;
+		internal ToolStripMenuItem cMenScreenshotCopy;
+		internal ToolStripMenuItem cMenScreenshotSave;
+		internal SaveFileDialog dlgSaveSingleImage;
+		internal FolderBrowserDialog dlgSaveAllImages;
+		internal FlowLayoutPanel flpScreenshots;
 				
 		private void InitializeComponent()
 		{
-			this.components = new System.ComponentModel.Container();
-			this.Load += new System.EventHandler(ScreenshotManager_Load);
-			this.flpScreenshots = new System.Windows.Forms.FlowLayoutPanel();
-			this.msMain = new System.Windows.Forms.MenuStrip();
-			this.mMenFile = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFile.DropDownOpening += new System.EventHandler(this.mMenFile_DropDownOpening);
-			this.mMenFileSaveAll = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileSaveAll.Click += new System.EventHandler(this.mMenFileSaveAll_Click);
-			this.mMenFileRemoveAll = new System.Windows.Forms.ToolStripMenuItem();
-			this.mMenFileRemoveAll.Click += new System.EventHandler(this.mMenFileRemoveAll_Click);
-			this.cMenScreenshot = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.cMenScreenshotCopy = new System.Windows.Forms.ToolStripMenuItem();
-			this.cMenScreenshotCopy.Click += new System.EventHandler(this.cMenScreenshotCopy_Click);
-			this.cMenScreenshotSave = new System.Windows.Forms.ToolStripMenuItem();
-			this.cMenScreenshotSave.Click += new System.EventHandler(this.cMenScreenshotSave_Click);
-			this.dlgSaveSingleImage = new System.Windows.Forms.SaveFileDialog();
-			this.dlgSaveAllImages = new System.Windows.Forms.FolderBrowserDialog();
-			this.msMain.SuspendLayout();
-			this.cMenScreenshot.SuspendLayout();
-			this.SuspendLayout();
+			components = new System.ComponentModel.Container();
+			Load += new EventHandler(ScreenshotManager_Load);
+			flpScreenshots = new FlowLayoutPanel();
+			msMain = new MenuStrip();
+			mMenFile = new ToolStripMenuItem();
+			mMenFile.DropDownOpening += new EventHandler(mMenFile_DropDownOpening);
+			mMenFileSaveAll = new ToolStripMenuItem();
+			mMenFileSaveAll.Click += new EventHandler(mMenFileSaveAll_Click);
+			mMenFileRemoveAll = new ToolStripMenuItem();
+			mMenFileRemoveAll.Click += new EventHandler(mMenFileRemoveAll_Click);
+			cMenScreenshot = new ContextMenuStrip(components);
+			cMenScreenshotCopy = new ToolStripMenuItem();
+			cMenScreenshotCopy.Click += new EventHandler(cMenScreenshotCopy_Click);
+			cMenScreenshotSave = new ToolStripMenuItem();
+			cMenScreenshotSave.Click += new EventHandler(cMenScreenshotSave_Click);
+			dlgSaveSingleImage = new SaveFileDialog();
+			dlgSaveAllImages = new FolderBrowserDialog();
+			msMain.SuspendLayout();
+			cMenScreenshot.SuspendLayout();
+			SuspendLayout();
 			//
 			//flpScreenshots
 			//
-			this.flpScreenshots.Anchor = (System.Windows.Forms.AnchorStyles) (((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-				| System.Windows.Forms.AnchorStyles.Left) 
-				| System.Windows.Forms.AnchorStyles.Right);
-			this.flpScreenshots.AutoScroll = true;
-			this.flpScreenshots.Location = new System.Drawing.Point(0, 26);
-			this.flpScreenshots.Name = "flpScreenshots";
-			this.flpScreenshots.Size = new System.Drawing.Size(542, 296);
-			this.flpScreenshots.TabIndex = 0;
+			flpScreenshots.Anchor = ((AnchorStyles.Top | AnchorStyles.Bottom)
+                | AnchorStyles.Left)
+                | AnchorStyles.Right;
+			flpScreenshots.AutoScroll = true;
+			flpScreenshots.Location = new Point(0, 26);
+			flpScreenshots.Name = "flpScreenshots";
+			flpScreenshots.Size = new Size(542, 296);
+			flpScreenshots.TabIndex = 0;
 			//
 			//msMain
 			//
-			this.msMain.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, Convert.ToByte(0));
-			this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenFile});
-			this.msMain.Location = new System.Drawing.Point(0, 0);
-			this.msMain.Name = "msMain";
-			this.msMain.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-			this.msMain.Size = new System.Drawing.Size(542, 24);
-			this.msMain.TabIndex = 1;
-			this.msMain.Text = "MenuStrip1";
+			msMain.Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
+			msMain.Items.AddRange(new ToolStripItem[] {mMenFile});
+			msMain.Location = new Point(0, 0);
+			msMain.Name = "msMain";
+			msMain.RenderMode = ToolStripRenderMode.Professional;
+			msMain.Size = new Size(542, 24);
+			msMain.TabIndex = 1;
+			msMain.Text = "MenuStrip1";
 			//
 			//mMenFile
 			//
-			this.mMenFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenFileSaveAll, this.mMenFileRemoveAll});
-			this.mMenFile.Image = Resources.File;
-			this.mMenFile.Name = "mMenFile";
-			this.mMenFile.Size = new System.Drawing.Size(51, 20);
-			this.mMenFile.Text = "&File";
+			mMenFile.DropDownItems.AddRange(new ToolStripItem[] {mMenFileSaveAll, mMenFileRemoveAll});
+			mMenFile.Image = Resources.File;
+			mMenFile.Name = "mMenFile";
+			mMenFile.Size = new Size(51, 20);
+			mMenFile.Text = "&File";
 			//
 			//mMenFileSaveAll
 			//
-			this.mMenFileSaveAll.Image = Resources.Screenshot_Save;
-			this.mMenFileSaveAll.Name = "mMenFileSaveAll";
-			this.mMenFileSaveAll.Size = new System.Drawing.Size(128, 22);
-			this.mMenFileSaveAll.Text = "Save All";
+			mMenFileSaveAll.Image = Resources.Screenshot_Save;
+			mMenFileSaveAll.Name = "mMenFileSaveAll";
+			mMenFileSaveAll.Size = new Size(128, 22);
+			mMenFileSaveAll.Text = "Save All";
 			//
 			//mMenFileRemoveAll
 			//
-			this.mMenFileRemoveAll.Image = Resources.Screenshot_Delete;
-			this.mMenFileRemoveAll.Name = "mMenFileRemoveAll";
-			this.mMenFileRemoveAll.Size = new System.Drawing.Size(128, 22);
-			this.mMenFileRemoveAll.Text = "Remove All";
+			mMenFileRemoveAll.Image = Resources.Screenshot_Delete;
+			mMenFileRemoveAll.Name = "mMenFileRemoveAll";
+			mMenFileRemoveAll.Size = new Size(128, 22);
+			mMenFileRemoveAll.Text = "Remove All";
 			//
 			//cMenScreenshot
 			//
-			this.cMenScreenshot.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {this.cMenScreenshotCopy, this.cMenScreenshotSave});
-			this.cMenScreenshot.Name = "cMenScreenshot";
-			this.cMenScreenshot.Size = new System.Drawing.Size(100, 48);
+			cMenScreenshot.Items.AddRange(new ToolStripItem[] {cMenScreenshotCopy, cMenScreenshotSave});
+			cMenScreenshot.Name = "cMenScreenshot";
+			cMenScreenshot.Size = new Size(100, 48);
 			//
 			//cMenScreenshotCopy
 			//
-			this.cMenScreenshotCopy.Image = Resources.Screenshot_Copy;
-			this.cMenScreenshotCopy.Name = "cMenScreenshotCopy";
-			this.cMenScreenshotCopy.Size = new System.Drawing.Size(99, 22);
-			this.cMenScreenshotCopy.Text = "Copy";
+			cMenScreenshotCopy.Image = Resources.Screenshot_Copy;
+			cMenScreenshotCopy.Name = "cMenScreenshotCopy";
+			cMenScreenshotCopy.Size = new Size(99, 22);
+			cMenScreenshotCopy.Text = "Copy";
 			//
 			//cMenScreenshotSave
 			//
-			this.cMenScreenshotSave.Image = Resources.Screenshot_Save;
-			this.cMenScreenshotSave.Name = "cMenScreenshotSave";
-			this.cMenScreenshotSave.Size = new System.Drawing.Size(99, 22);
-			this.cMenScreenshotSave.Text = "Save";
+			cMenScreenshotSave.Image = Resources.Screenshot_Save;
+			cMenScreenshotSave.Name = "cMenScreenshotSave";
+			cMenScreenshotSave.Size = new Size(99, 22);
+			cMenScreenshotSave.Text = "Save";
 			//
 			//dlgSaveSingleImage
 			//
-			this.dlgSaveSingleImage.Filter = "Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group Fi" + 
+			dlgSaveSingleImage.Filter = "Graphics Interchange Format File (.gif)|*.gif|Joint Photographic Experts Group Fi" + 
 				"le (.jpeg)|*.jpeg|Joint Photographic Experts Group File (.jpg)|*.jpg|Portable Ne" + 
 				"twork Graphics File (.png)|*.png";
-			this.dlgSaveSingleImage.FilterIndex = 4;
+			dlgSaveSingleImage.FilterIndex = 4;
 			//
 			//ScreenshotManager
 			//
-			this.ClientSize = new System.Drawing.Size(542, 323);
-			this.Controls.Add(this.flpScreenshots);
-			this.Controls.Add(this.msMain);
-			this.HideOnClose = true;
-			this.Icon = Resources.Screenshot_Icon;
-			this.MainMenuStrip = this.msMain;
-			this.Name = "ScreenshotManager";
-			this.TabText = "Screenshots";
-			this.Text = "Screenshots";
-			this.msMain.ResumeLayout(false);
-			this.msMain.PerformLayout();
-			this.cMenScreenshot.ResumeLayout(false);
-			this.ResumeLayout(false);
-			this.PerformLayout();
+			ClientSize = new Size(542, 323);
+			Controls.Add(flpScreenshots);
+			Controls.Add(msMain);
+			HideOnClose = true;
+			Icon = Resources.Screenshot_Icon;
+			MainMenuStrip = msMain;
+			Name = "ScreenshotManager";
+			TabText = "Screenshots";
+			Text = "Screenshots";
+			msMain.ResumeLayout(false);
+			msMain.PerformLayout();
+			cMenScreenshot.ResumeLayout(false);
+			ResumeLayout(false);
+			PerformLayout();
 					
 		}
         #endregion
 				
         #region Form Stuff
-		private void ScreenshotManager_Load(object sender, System.EventArgs e)
+		private void ScreenshotManager_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
 		}
@@ -160,9 +160,9 @@ namespace mRemoteNG.UI.Window
         #region Public Methods
 		public ScreenshotManagerWindow(DockContent Panel)
 		{
-			this.WindowType = WindowType.ScreenshotManager;
-			this.DockPnl = Panel;
-			this.InitializeComponent();
+			WindowType = WindowType.ScreenshotManager;
+			DockPnl = Panel;
+			InitializeComponent();
 		}
 				
 		public void AddScreenshot(Image Screenshot)
@@ -170,12 +170,12 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				PictureBox nPB = new PictureBox();
-				nPB.MouseDown += this.pbScreenshot_MouseDown;
+				nPB.MouseDown += pbScreenshot_MouseDown;
 						
-				nPB.Parent = this.flpScreenshots;
+				nPB.Parent = flpScreenshots;
 				nPB.SizeMode = PictureBoxSizeMode.StretchImage;
 				nPB.BorderStyle = BorderStyle.FixedSingle;
-				nPB.ContextMenuStrip = this.cMenScreenshot;
+				nPB.ContextMenuStrip = cMenScreenshot;
 				nPB.Image = Screenshot;
 				nPB.Size = new Size(100, 100); //New Size((Screenshot.Width / 100) * 20, (Screenshot.Height / 100) * 20)
 				nPB.Show();
@@ -190,7 +190,7 @@ namespace mRemoteNG.UI.Window
 				nBtn.Location = new Point(nPB.Width - nBtn.Width, -1);
 				nBtn.Show();
 						
-				this.Show(frmMain.Default.pnlDock);
+				Show(frmMain.Default.pnlDock);
 			}
 			catch (Exception ex)
 			{
@@ -200,21 +200,21 @@ namespace mRemoteNG.UI.Window
         #endregion
 				
         #region Private Methods
-		private void pbScreenshot_MouseDown(System.Object sender, System.Windows.Forms.MouseEventArgs e)
+		private void pbScreenshot_MouseDown(object sender, MouseEventArgs e)
 		{
-			this.cMenScreenshot.Tag = sender;
+			cMenScreenshot.Tag = sender;
 					
-			if (e.Button == System.Windows.Forms.MouseButtons.Left)
+			if (e.Button == MouseButtons.Left)
 			{
-				this.OpenScreenshot((System.Windows.Forms.PictureBox)sender);
+				OpenScreenshot((PictureBox)sender);
 			}
 		}
 				
-		private void pbScreenshotOpen_MouseDown(System.Object sender, System.Windows.Forms.MouseEventArgs e)
+		private void pbScreenshotOpen_MouseDown(object sender, MouseEventArgs e)
 		{
-			if (e.Button == System.Windows.Forms.MouseButtons.Left)
+			if (e.Button == MouseButtons.Left)
 			{
-				this.CloseOpenedScreenshot((System.Windows.Forms.Form)((Control)sender).Parent);
+				CloseOpenedScreenshot((Form)((PictureBox)sender).Parent);
 			}
 		}
 				
@@ -237,19 +237,19 @@ namespace mRemoteNG.UI.Window
 				nForm.MinimizeBox = false;
 				nForm.Width = mImage.Width + 2;
 				nForm.Height = mImage.Height + 2;
-				nForm.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+				nForm.FormBorderStyle = FormBorderStyle.None;
 						
 				PictureBox nPB = new PictureBox();
 				nPB.Parent = nForm;
 				nPB.BorderStyle = BorderStyle.FixedSingle;
 				nPB.Location = new Point(0, 0);
 				nPB.SizeMode = PictureBoxSizeMode.AutoSize;
-				nPB.Anchor = (System.Windows.Forms.AnchorStyles) (AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top);
+				nPB.Anchor = AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top;
 				nPB.Image = mImage;
-				nPB.ContextMenuStrip = this.cMenScreenshot;
+				nPB.ContextMenuStrip = cMenScreenshot;
 				nPB.Show();
 						
-				nPB.MouseDown += this.pbScreenshotOpen_MouseDown;
+				nPB.MouseDown += pbScreenshotOpen_MouseDown;
 						
 				nForm.ShowDialog();
 			}
@@ -259,11 +259,11 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		private void btnCloseScreenshot_Click(System.Object sender, System.EventArgs e)
+		private void btnCloseScreenshot_Click(object sender, EventArgs e)
 		{
 			try
 			{
-				((Control)sender).Parent.Dispose();
+				((PictureBox)sender).Parent.Dispose();
 			}
 			catch (Exception ex)
 			{
@@ -271,19 +271,19 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		private void mMenFileRemoveAll_Click(System.Object sender, System.EventArgs e)
+		private void mMenFileRemoveAll_Click(object sender, EventArgs e)
 		{
-			this.RemoveAllImages();
+			RemoveAllImages();
 		}
 				
 		private void RemoveAllImages()
 		{
-			this.flpScreenshots.Controls.Clear();
+			flpScreenshots.Controls.Clear();
 		}
 				
-		private void mMenFileSaveAll_Click(System.Object sender, System.EventArgs e)
+		private void mMenFileSaveAll_Click(object sender, EventArgs e)
 		{
-			this.SaveAllImages();
+			SaveAllImages();
 		}
 				
 		private void SaveAllImages()
@@ -292,9 +292,9 @@ namespace mRemoteNG.UI.Window
 			{
 				int pCount = 1;
 						
-				if (this.dlgSaveAllImages.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+				if (dlgSaveAllImages.ShowDialog() == DialogResult.OK)
 				{
-					foreach (string fPath in Directory.GetFiles(this.dlgSaveAllImages.SelectedPath, "Screenshot_*", SearchOption.TopDirectoryOnly))
+					foreach (string fPath in Directory.GetFiles(dlgSaveAllImages.SelectedPath, "Screenshot_*", SearchOption.TopDirectoryOnly))
 					{
 						FileInfo f = new FileInfo(fPath);
 								
@@ -305,11 +305,11 @@ namespace mRemoteNG.UI.Window
 						pCount = (int) (double.Parse(fCount) + 1);
 					}
 							
-					foreach (System.Windows.Forms.Control ctrl in this.flpScreenshots.Controls)
+					foreach (Control ctrl in flpScreenshots.Controls)
 					{
 						if (ctrl is PictureBox)
 						{
-							(ctrl as PictureBox).Image.Save(this.dlgSaveAllImages.SelectedPath + "\\Screenshot_" + Tools.MiscTools.LeadingZero(Convert.ToString(pCount)) +".png", System.Drawing.Imaging.ImageFormat.Png);
+							(ctrl as PictureBox).Image.Save(dlgSaveAllImages.SelectedPath + "\\Screenshot_" + Tools.MiscTools.LeadingZero(Convert.ToString(pCount)) +".png", System.Drawing.Imaging.ImageFormat.Png);
 							pCount++;
 						}
 					}
@@ -321,16 +321,16 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		private void cMenScreenshotCopy_Click(System.Object sender, System.EventArgs e)
+		private void cMenScreenshotCopy_Click(object sender, EventArgs e)
 		{
-			this.CopyImageToClipboard();
+			CopyImageToClipboard();
 		}
 				
 		private void CopyImageToClipboard()
 		{
 			try
 			{
-				Clipboard.SetImage((cMenScreenshot.Tag as PictureBox).Image);
+				Clipboard.SetImage(((PictureBox) cMenScreenshot.Tag).Image);
 			}
 			catch (Exception ex)
 			{
@@ -338,30 +338,30 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		private void cMenScreenshotSave_Click(System.Object sender, System.EventArgs e)
+		private void cMenScreenshotSave_Click(object sender, EventArgs e)
 		{
-			this.SaveSingleImage();
+			SaveSingleImage();
 		}
 				
 		private void SaveSingleImage()
 		{
 			try
 			{
-				if (this.dlgSaveSingleImage.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+				if (dlgSaveSingleImage.ShowDialog() == DialogResult.OK)
 				{
-					switch (this.dlgSaveSingleImage.FileName.Substring(this.dlgSaveSingleImage.FileName.LastIndexOf(".") + 1).ToLower())
+					switch (dlgSaveSingleImage.FileName.Substring(dlgSaveSingleImage.FileName.LastIndexOf(".", StringComparison.Ordinal) + 1).ToLower())
 					{
 						case "gif":
-							(this.cMenScreenshot.Tag as PictureBox).Image.Save(this.dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Gif);
+							((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Gif);
 							break;
 						case "jpeg":
-							(this.cMenScreenshot.Tag as PictureBox).Image.Save(this.dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+							((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
 							break;
 						case "jpg":
-							(this.cMenScreenshot.Tag as PictureBox).Image.Save(this.dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+							((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
 							break;
 						case "png":
-							(this.cMenScreenshot.Tag as PictureBox).Image.Save(this.dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Png);
+							((PictureBox) cMenScreenshot.Tag).Image.Save(dlgSaveSingleImage.FileName, System.Drawing.Imaging.ImageFormat.Png);
 							break;
 					}
 				}
@@ -372,17 +372,17 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		private void mMenFile_DropDownOpening(object sender, System.EventArgs e)
+		private void mMenFile_DropDownOpening(object sender, EventArgs e)
 		{
-			if (this.flpScreenshots.Controls.Count < 1)
+			if (flpScreenshots.Controls.Count < 1)
 			{
-				this.mMenFileSaveAll.Enabled = false;
-				this.mMenFileRemoveAll.Enabled = false;
+				mMenFileSaveAll.Enabled = false;
+				mMenFileRemoveAll.Enabled = false;
 			}
 			else
 			{
-				this.mMenFileSaveAll.Enabled = true;
-				this.mMenFileRemoveAll.Enabled = true;
+				mMenFileSaveAll.Enabled = true;
+				mMenFileRemoveAll.Enabled = true;
 			}
 		}
         #endregion

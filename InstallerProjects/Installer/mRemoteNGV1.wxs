@@ -38,19 +38,19 @@
     </Condition>
     <!-- Windows 7 or higher required -->
     <Condition Message="!(loc.Install_OSVersionRequirement)">
-      <![CDATA[Installed OR (VersionNT >= 601) OR (VersionNT64 >= 601)]]>
+      <![CDATA[Installed OR (IGNOREPREREQUISITES = 1) OR (VersionNT >= 601) OR (VersionNT64 >= 601)]]>
     </Condition>
     <!-- If Windows 7, SP 1 is required -->
     <Condition Message="!(loc.Install_Win7RequiresSP1)">
-      <![CDATA[Installed OR (VersionNT >= 602 OR VersionNT64 >= 602) OR ((VersionNT = 601 OR VersionNT64 = 601) AND ServicePackLevel >= 1)]]>
+      <![CDATA[Installed OR (IGNOREPREREQUISITES = 1) OR (VersionNT >= 602 OR VersionNT64 >= 602) OR ((VersionNT = 601 OR VersionNT64 = 601) AND ServicePackLevel >= 1)]]>
     </Condition>
     <!-- .Net Framework Version Condition -->
     <Condition Message="!(loc.Install_NeedDotNetFrameworkVersion)">
-      <![CDATA[Installed OR WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED = 1]]>
+      <![CDATA[Installed OR (IGNOREPREREQUISITES = 1) OR WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED = 1]]>
     </Condition>
     <!-- If Win7, require RDP 8.0 update (KB2592687) -->
     <Condition Message="!(loc.Install_RDP80Requirement)">
-      <![CDATA[Installed OR (VersionNT >= 602 OR VersionNT64 >= 602) OR ((VersionNT = 601 OR VersionNT64 = 601) ]]>AND ($(var.RDP80KB) = 1 OR $(var.RDP81KB) = 1))
+      <![CDATA[Installed OR (IGNOREPREREQUISITES = 1) OR (VersionNT >= 602 OR VersionNT64 >= 602) OR ((VersionNT = 601 OR VersionNT64 = 601) ]]>AND ($(var.RDP80KB) = 1 OR $(var.RDP81KB) = 1))
     </Condition>
     
     
@@ -72,7 +72,6 @@
 
       <Feature Id="F.ApplicationStartMenuShortcut" Title="!(loc.Feature_StartMenuShortcut)" Absent="allow" AllowAdvertise="no" Level="1">
         <ComponentRef Id="C.ApplicationStartMenuShortcut" Primary="yes" />
-        
       </Feature>
     </Feature>
 

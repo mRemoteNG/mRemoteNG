@@ -416,7 +416,7 @@ namespace mRemoteNG.UI.Forms
 								
 		private void tsExtAppEntry_Click(object sender, EventArgs e)
 		{
-            var extA = (ExternalTool)((Control)sender).Tag;
+            var extA = (ExternalTool)((ToolStripButton)sender).Tag;
 
             if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
 			{

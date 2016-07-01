@@ -25,7 +25,6 @@ namespace mRemoteNG.Connection.Protocol
         [LocalizedAttributes.LocalizedDescription("strICA")]
         ICA = 9,
         [LocalizedAttributes.LocalizedDescription("strExtApp")]
-        IntApp = 20,
-        SSH = 10
+        IntApp = 20
 	}
 }

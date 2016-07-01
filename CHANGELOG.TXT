@@ -1,4 +1,4 @@
-1.74 (2016-06-20):
+1.74 (2016-06-28):
 
   Supported Platforms/Components:
   -------------------------------
@@ -42,6 +42,9 @@
 	
 	Fixes:
 	------
+    MR-874: Added work-around to installer to ignore installation prerequisites
+	MR-884: Slow startup in some scnearios checking authenticode certificate
+	MR-872: Crash in External Tools when arguments aren't quoted
 	MR-854: crashes when right clicking on connection tab
 	MR-852: Option "Allow only a single instance of the application" non-functional
 	MR-836: Trying to delete a folder of connections only deletes 2 connections at a time

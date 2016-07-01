@@ -1556,7 +1556,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AddFolder (UI.Window.Tree) failed. {0}.
+        ///   Looks up a localized string similar to AddFolder (UI.Window.ConnectionTreeWindow) failed. {0}.
         /// </summary>
         internal static string strErrorAddFolderFailed {
             get {

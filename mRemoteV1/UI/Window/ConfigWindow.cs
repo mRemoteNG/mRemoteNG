@@ -22,19 +22,19 @@ namespace mRemoteNG.UI.Window
 	{
         private bool _originalPropertyGridToolStripItemCountValid;
         private int _originalPropertyGridToolStripItemCount;
-        private System.ComponentModel.Container components = null;
-        internal ToolStripButton btnShowProperties;
-        internal ToolStripButton btnShowDefaultProperties;
-        internal ToolStripButton btnShowInheritance;
-        internal ToolStripButton btnShowDefaultInheritance;
-        internal ToolStripButton btnIcon;
-        internal ToolStripButton btnHostStatus;
+        private System.ComponentModel.Container components;
+        private ToolStripButton btnShowProperties;
+        private ToolStripButton btnShowDefaultProperties;
+        private ToolStripButton btnShowInheritance;
+        private ToolStripButton btnShowDefaultInheritance;
+        private ToolStripButton btnIcon;
+        private ToolStripButton btnHostStatus;
         internal ContextMenuStrip cMenIcons;
         internal ContextMenuStrip propertyGridContextMenu;
-        internal ToolStripMenuItem propertyGridContextMenuShowHelpText;
-        internal ToolStripMenuItem propertyGridContextMenuReset;
-        internal ToolStripSeparator ToolStripSeparator1;
-        internal FilteredPropertyGrid pGrid;
+        private ToolStripMenuItem propertyGridContextMenuShowHelpText;
+        private ToolStripMenuItem propertyGridContextMenuReset;
+        private ToolStripSeparator ToolStripSeparator1;
+        private FilteredPropertyGrid pGrid;
 
 
         private void InitializeComponent()
@@ -96,7 +96,7 @@ namespace mRemoteNG.UI.Window
             //
             propertyGridContextMenuReset.Name = "propertyGridContextMenuReset";
             propertyGridContextMenuReset.Size = new Size(156, 22);
-            propertyGridContextMenuReset.Text = "&Reset";
+            propertyGridContextMenuReset.Text = @"&Reset";
             //
             //ToolStripSeparator1
             //
@@ -107,7 +107,7 @@ namespace mRemoteNG.UI.Window
             //
             propertyGridContextMenuShowHelpText.Name = "propertyGridContextMenuShowHelpText";
             propertyGridContextMenuShowHelpText.Size = new Size(156, 22);
-            propertyGridContextMenuShowHelpText.Text = "&Show Help Text";
+            propertyGridContextMenuShowHelpText.Text = @"&Show Help Text";
             //
             //btnShowInheritance
             //
@@ -116,7 +116,7 @@ namespace mRemoteNG.UI.Window
             btnShowInheritance.ImageTransparentColor = Color.Magenta;
             btnShowInheritance.Name = "btnShowInheritance";
             btnShowInheritance.Size = new Size(23, 22);
-            btnShowInheritance.Text = "Inheritance";
+            btnShowInheritance.Text = @"Inheritance";
             //
             //btnShowDefaultInheritance
             //
@@ -125,7 +125,7 @@ namespace mRemoteNG.UI.Window
             btnShowDefaultInheritance.ImageTransparentColor = Color.Magenta;
             btnShowDefaultInheritance.Name = "btnShowDefaultInheritance";
             btnShowDefaultInheritance.Size = new Size(23, 22);
-            btnShowDefaultInheritance.Text = "Default Inheritance";
+            btnShowDefaultInheritance.Text = @"Default Inheritance";
             //
             //btnShowProperties
             //
@@ -136,7 +136,7 @@ namespace mRemoteNG.UI.Window
             btnShowProperties.ImageTransparentColor = Color.Magenta;
             btnShowProperties.Name = "btnShowProperties";
             btnShowProperties.Size = new Size(23, 22);
-            btnShowProperties.Text = "Properties";
+            btnShowProperties.Text = @"Properties";
             //
             //btnShowDefaultProperties
             //
@@ -145,7 +145,7 @@ namespace mRemoteNG.UI.Window
             btnShowDefaultProperties.ImageTransparentColor = Color.Magenta;
             btnShowDefaultProperties.Name = "btnShowDefaultProperties";
             btnShowDefaultProperties.Size = new Size(23, 22);
-            btnShowDefaultProperties.Text = "Default Properties";
+            btnShowDefaultProperties.Text = @"Default Properties";
             //
             //btnIcon
             //
@@ -154,7 +154,7 @@ namespace mRemoteNG.UI.Window
             btnIcon.ImageTransparentColor = Color.Magenta;
             btnIcon.Name = "btnIcon";
             btnIcon.Size = new Size(23, 22);
-            btnIcon.Text = "Icon";
+            btnIcon.Text = @"Icon";
             //
             //btnHostStatus
             //
@@ -165,7 +165,7 @@ namespace mRemoteNG.UI.Window
             btnHostStatus.Name = "btnHostStatus";
             btnHostStatus.Size = new Size(23, 22);
             btnHostStatus.Tag = "checking";
-            btnHostStatus.Text = "Status";
+            btnHostStatus.Text = @"Status";
             //
             //cMenIcons
             //
@@ -179,9 +179,9 @@ namespace mRemoteNG.UI.Window
             Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
             HideOnClose = true;
             Icon = Resources.Config_Icon;
-            Name = "Config";
-            TabText = "Config";
-            Text = "Config";
+            Name = $"Config";
+            TabText = @"Config";
+            Text = @"Config";
             propertyGridContextMenu.ResumeLayout(false);
             ResumeLayout(false);
 					
@@ -509,7 +509,7 @@ namespace mRemoteNG.UI.Window
                         pGrid.SelectedObject = Obj;
 
                         btnShowProperties.Enabled = true;
-                        if (((Container.ContainerInfo)((ConnectionInfo)Obj).Parent).Parent != null)
+                        if (((ConnectionInfo)Obj).Parent.Parent != null)
 						{
                             btnShowInheritance.Enabled = true;
 						}
@@ -723,64 +723,67 @@ namespace mRemoteNG.UI.Window
 
         private void UpdateConnectionInfoNode(PropertyValueChangedEventArgs e)
         {
-            if (pGrid.SelectedObject is ConnectionInfo)
+            var o = pGrid.SelectedObject as ConnectionInfo;
+            if (o != null)
             {
                 if (e.ChangedItem.Label == Language.strPropertyNameProtocol)
                 {
-                    ((ConnectionInfo)pGrid.SelectedObject).SetDefaultPort();
+                    o.SetDefaultPort();
                 }
                 else if (e.ChangedItem.Label == Language.strPropertyNameName)
                 {
-                    Windows.treeForm.tvConnections.SelectedNode.Text = Convert.ToString(((ConnectionInfo)pGrid.SelectedObject).Name);
-                    if (Settings.Default.SetHostnameLikeDisplayName && pGrid.SelectedObject is ConnectionInfo)
+                    Windows.treeForm.tvConnections.SelectedNode.Text = Convert.ToString(o.Name);
+                    if (Settings.Default.SetHostnameLikeDisplayName)
                     {
-                        var connectionInfo = (ConnectionInfo)pGrid.SelectedObject;
+                        var connectionInfo = o;
                         if (!string.IsNullOrEmpty(connectionInfo.Name))
                             connectionInfo.Hostname = connectionInfo.Name;
                     }
                 }
                 else if (e.ChangedItem.Label == Language.strPropertyNameIcon)
                 {
-                    var conIcon = ConnectionIcon.FromString(Convert.ToString(((ConnectionInfo)pGrid.SelectedObject).Icon));
+                    var conIcon = ConnectionIcon.FromString(Convert.ToString(o.Icon));
                     if (conIcon != null)
                         btnIcon.Image = conIcon.ToBitmap();
                 }
                 else if (e.ChangedItem.Label == Language.strPropertyNameAddress)
                 {
-                    SetHostStatus(pGrid.SelectedObject);
+                    SetHostStatus(o);
                 }
 
-                if (((ConnectionInfo)pGrid.SelectedObject).IsDefault)
+                if (o.IsDefault)
                     Runtime.DefaultConnectionToSettings();
             }
         }
 
         private void UpdateRootInfoNode(PropertyValueChangedEventArgs e)
         {
-            if (pGrid.SelectedObject is RootNodeInfo)
+            var o = pGrid.SelectedObject as RootNodeInfo;
+            if (o != null)
             {
-                var rootInfo = (RootNodeInfo)pGrid.SelectedObject;
-                switch (e.ChangedItem.PropertyDescriptor.Name)
-                {
-                    case "Password":
-                        if (rootInfo.Password)
-                        {
-                            var passwordName = "";
-                            if (Settings.Default.UseSQLServer)
-                                passwordName = Language.strSQLServer.TrimEnd(':');
-                            else
-                                passwordName = Path.GetFileName(Runtime.GetStartupConnectionFileName());
+                var rootInfo = o;
+                if (e.ChangedItem.PropertyDescriptor != null)
+                    switch (e.ChangedItem.PropertyDescriptor.Name)
+                    {
+                        case "Password":
+                            if (rootInfo.Password)
+                            {
+                                string passwordName;
+                                if (Settings.Default.UseSQLServer)
+                                    passwordName = Language.strSQLServer.TrimEnd(':');
+                                else
+                                    passwordName = Path.GetFileName(Runtime.GetStartupConnectionFileName());
 
-                            var password = MiscTools.PasswordDialog(passwordName);
-                            if (string.IsNullOrEmpty(password))
-                                rootInfo.Password = false;
-                            else
-                                rootInfo.PasswordString = password;
-                        }
-                        break;
-                    case "Name":
-                        break;
-                }
+                                var password = MiscTools.PasswordDialog(passwordName);
+                                if (string.IsNullOrEmpty(password))
+                                    rootInfo.Password = false;
+                                else
+                                    rootInfo.PasswordString = password;
+                            }
+                            break;
+                        case "Name":
+                            break;
+                    }
             }
         }
 
@@ -1711,7 +1714,7 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				pReply = pingSender.Send(HostName);
-				if (pReply.Status == IPStatus.Success)
+				if (pReply != null && pReply.Status == IPStatus.Success)
 				{
 					if ((string)btnHostStatus.Tag == "checking")
 					{
