@@ -82,14 +82,6 @@ namespace mRemoteNGTests.UI.Forms
         }
 
         [Test]
-        public void EntryNameFieldIsEditable()
-        {
-            CreateCredentialEditorForm();
-            var entryNameField = new TextBoxTester("txtEntryName");
-            Assert.That(entryNameField.Properties.Enabled, Is.True);
-        }
-
-        [Test]
         public void CueBannerSetOnPasswordFieldWhenEditingAlreadyExistingPassword()
         {
             var credential = new CredentialInfo {Password = "testPassword".ConvertToSecureString()};
