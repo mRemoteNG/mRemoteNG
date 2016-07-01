@@ -79,15 +79,14 @@ namespace mRemoteNGTests.UI.Forms
         [Test]
         public void EditingExistingCredentialItemUpdatesCredentialListAfterClickingOk()
         {
-            var originalEntryName = "MyEntry";
             var updatedEntryName = "MyUpdatedEntryName";
-            var credential = new CredentialInfo { Name = originalEntryName };
-            CreateCredentialEditorForm(credential);
+            var credentialToUpdate = _credentialList[0];
+            CreateCredentialEditorForm(credentialToUpdate);
             var entryNameTextbox = new TextBoxTester("txtEntryName");
             var okButton = new ButtonTester("btnOk");
             entryNameTextbox.Enter(updatedEntryName);
             okButton.Click();
-            Assert.That(_credentialList[credential].Name, Is.EqualTo(updatedEntryName));
+            Assert.That(_credentialList[credentialToUpdate].Name, Is.EqualTo(updatedEntryName));
         }
     }
 }
