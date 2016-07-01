@@ -77,7 +77,7 @@ namespace mRemoteNGTests.UI.Forms
         }
 
         [Test]
-        public void ClickingOkButtonCommitsChangesToCredentialList()
+        public void EditingExistingCredentialItemUpdatesCredentialListAfterClickingOk()
         {
             var originalEntryName = "MyEntry";
             var updatedEntryName = "MyUpdatedEntryName";
