@@ -1,6 +1,4 @@
-﻿
-using System.Windows.Forms;
-using mRemoteNG.Security;
+﻿using mRemoteNG.Security;
 using NUnit.Extensions.Forms;
 using NUnit.Framework;
 
