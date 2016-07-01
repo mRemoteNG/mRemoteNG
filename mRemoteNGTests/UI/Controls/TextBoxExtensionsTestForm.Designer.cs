@@ -53,6 +53,6 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        internal System.Windows.Forms.TextBox textBox1;
     }
 }

@@ -29,7 +29,7 @@ namespace mRemoteNGTests.UI.Controls
         public void SetCueBannerSetsTheBannerText()
         {
             var text = "Type Here";
-            var textBox = new TextBoxTester("textBox1");
+            var textBox = new TextBoxTester(_textBoxExtensionsTestForm.textBox1.Name);
             Assert.That(textBox.Properties.SetCueBannerText(text), Is.True);
         }
 
@@ -37,7 +37,7 @@ namespace mRemoteNGTests.UI.Controls
         public void GetCueBannerReturnsCorrectValue()
         {
             var text = "Type Here";
-            var textBox = new TextBoxTester("textBox1");
+            var textBox = new TextBoxTester(_textBoxExtensionsTestForm.textBox1.Name);
             textBox.Properties.SetCueBannerText(text);
             Assert.That(textBox.Properties.GetCueBannerText(), Is.EqualTo(text));
         }
