@@ -14,6 +14,7 @@ namespace mRemoteNGTests.UI.Controls
     {
         public SecureTextBoxTestForm()
         {
+            Application.EnableVisualStyles();
             InitializeComponent();
         }
     }
