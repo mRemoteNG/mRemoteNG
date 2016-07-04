@@ -1238,6 +1238,9 @@
     <PostBuildEvent>call "$(DevEnvDir)..\tools\vsvars32.bat"
 set /p buildenv=&lt;buildenv.tmp
 
+echo Building XmlSerializers assembly
+sgen /nologo /force /assembly:mRemoteNG.exe /type:mRemoteNG.Credential.CredentialInfo
+
 echo Copy PUTTYNG to correct directory
 copy /Y "$(SolutionDir)mRemoteV1\Resources\PuTTYNG.exe" .\
 
