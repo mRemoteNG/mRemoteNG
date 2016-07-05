@@ -7,74 +7,87 @@ using mRemoteNG.Security;
 
 namespace mRemoteNG.Credential
 {
-    [Serializable()]
+    [Serializable]
     public class CredentialInfo
-	{
+    {
         [XmlElement("Uuid")]
         public string Uuid { get; set; } = Guid.NewGuid().ToString();
 
-	    [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
-	     Browsable(true),
+        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
+         Browsable(true),
          XmlElement("Name"),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
-	     LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
-	    public string Name { get; set; } = Language.strNewCredential;
-		
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
+        public string Name { get; set; } = Language.strNewCredential;
+
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
-            Browsable(true),
+         Browsable(true),
          XmlElement("Description"),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameDescription"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDescription")]
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameDescription"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDescription")]
         public string Description { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2), 
-            Browsable(true),
+        [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2),
+         Browsable(true),
          XmlElement("Username"),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameUsername"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUsername")]
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameUsername"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUsername")]
         public string Username { get; set; }
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2), 
-            Browsable(true),
-         XmlElement("Password"),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNamePassword"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPassword"), 
-            PasswordPropertyText(true)]
-        public SecureString Password { get; set; }
-		
         [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2),
-            Browsable(true),
+         Browsable(true),
+         XmlIgnore,
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNamePassword"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPassword"),
+         PasswordPropertyText(true)]
+        public SecureString Password { get; set; }
+
+        [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2),
+         Browsable(true),
          XmlElement("Domain"),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameDomain"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
+         LocalizedAttributes.LocalizedDisplayName("strPropertyNameDomain"),
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
         public string Domain { get; set; }
 
-	    [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2),
-	     Browsable(true),
+        [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2),
+         Browsable(true),
          XmlElement("CredentialSource"),
          LocalizedAttributes.LocalizedDisplayName("strPropertyNameDomain"),
-	     LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
-	    public CredentialSource CredentialSource { get; set; } = default(CredentialSource);
+         LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDomain")]
+        public CredentialSource CredentialSource { get; set; } = default(CredentialSource);
+
+        [XmlElement("Password")]
+        public string EncryptedPassword
+        {
+            get
+            {
+                return Password.ConvertToEncryptedString();
+            }
+            set
+            {
+                Password = new SecureString().ConvertFromEncryptedString(value);
+            }
+        } 
 
 
-	    public void SetPasswordFromUnsecureString(string unsecuredPassword)
-	    {
-	        Password = unsecuredPassword.ConvertToSecureString();
-	    }
+        public void SetPasswordFromUnsecureString(string unsecuredPassword)
+        {
+            Password = unsecuredPassword.ConvertToSecureString();
+        }
 
-	    public CredentialInfo Clone()
-	    {
-	        var clone = new CredentialInfo
-	        {
+        public CredentialInfo Clone()
+        {
+            var clone = new CredentialInfo
+            {
                 Uuid = Uuid,
-	            Name = Name,
-	            Description = Description,
+                Name = Name,
+                Description = Description,
                 Username = Username,
                 Password = Password,
                 Domain = Domain,
                 CredentialSource = CredentialSource
-	        };
-	        return clone;
-	    }
-	}
+            };
+            return clone;
+        }
+    }
 }

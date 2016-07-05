@@ -30,6 +30,17 @@ namespace mRemoteNG.Security
             }
         }
 
+        public static string ConvertToEncryptedString(this SecureString secureString)
+        {
+            return "TEST ENCRYPTION";
+        }
+
+        public static SecureString ConvertFromEncryptedString(this SecureString secureString, string encryptedString)
+        {
+            var unencryptedString = encryptedString;
+            return unencryptedString.ConvertToSecureString();
+        }
+
         public static SecureString ConvertToSecureString(this string unsecuredPassword)
         {
             if (unsecuredPassword == null)
