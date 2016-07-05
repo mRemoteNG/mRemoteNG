@@ -3,6 +3,7 @@ using System;
 using System.ComponentModel;
 using System.Security;
 using System.Xml.Serialization;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.Credential
 {
@@ -19,7 +20,6 @@ namespace mRemoteNG.Credential
 	     LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
 	    public string Name { get; set; } = Language.strNewCredential;
 		
-
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
             Browsable(true),
          XmlElement("Description"),
@@ -27,14 +27,12 @@ namespace mRemoteNG.Credential
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDescription")]
         public string Description { get; set; }
 
-
         [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2), 
             Browsable(true),
          XmlElement("Username"),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameUsername"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUsername")]
         public string Username { get; set; }
-		
 
         [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2), 
             Browsable(true),
@@ -43,7 +41,6 @@ namespace mRemoteNG.Credential
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPassword"), 
             PasswordPropertyText(true)]
         public SecureString Password { get; set; }
-
 		
         [LocalizedAttributes.LocalizedCategory("strCategoryCredentials", 2),
             Browsable(true),
@@ -62,12 +59,7 @@ namespace mRemoteNG.Credential
 
 	    public void SetPasswordFromUnsecureString(string unsecuredPassword)
 	    {
-            var secureString = new SecureString();
-	        foreach (var character in unsecuredPassword.ToCharArray())
-                secureString.AppendChar(character);
-	        // ReSharper disable once RedundantAssignment
-	        unsecuredPassword = null;
-	        Password = secureString;
+	        Password = unsecuredPassword.ConvertToSecureString();
 	    }
 
 	    public CredentialInfo Clone()
