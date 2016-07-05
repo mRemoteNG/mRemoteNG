@@ -8,16 +8,22 @@ namespace mRemoteNG.Credential
 {
 	public class CredentialList : CollectionBase, INotifyCollectionChanged
 	{
-        #region Public Properties
-        public CredentialInfo this[object index]
+	    public CredentialInfo this[int index]
+	    {
+	        get
+	        {
+                if (index < Count)
+                    return (CredentialInfo)List[Convert.ToInt32(index)];
+	            return null;
+	        }
+	    }
+
+        public CredentialInfo this[CredentialInfo index]
 		{
 			get
 			{
-			    var info = index as CredentialInfo;
-			    if (info != null && Contains(info))
-                    return (CredentialInfo)List[IndexOf(info.Uuid)];
-                if(index is int && (int)index < Count)
-			        return (CredentialInfo) List[Convert.ToInt32(index)];
+			    if (index != null && Contains(index))
+                    return (CredentialInfo)List[IndexOf(index.Uuid)];
 			    return null;
 			}
 		}
@@ -26,7 +32,6 @@ namespace mRemoteNG.Credential
 
         public event NotifyCollectionChangedEventHandler CollectionChanged;
 
-        #endregion
 
         #region Public Methods
         public void Add(CredentialInfo credentialInfo)
