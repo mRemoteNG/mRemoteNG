@@ -21,21 +21,17 @@ namespace mRemoteNG.Config.Credentials
             xmlDoc.Save(_credentialFilePath);
         }
 
-        private XmlDocument BuildXmlDocument(IEnumerable credentialList)
+        private XmlDocument BuildXmlDocument(CredentialList credentialList)
         {
             var xmlDoc = new XmlDocument();
-            var xmlSerializer = new XmlSerializer(typeof(CredentialInfo));
-            using (var xmlStream = new MemoryStream())
+            var xmlSerializer = new XmlSerializer(typeof(CredentialList));
+            using (var memoryStream = new MemoryStream())
             {
-                foreach (var credential in credentialList)
-                {
-                    xmlSerializer.Serialize(xmlStream, credential);
-                }
-                
-                xmlStream.Position = 0;
-                xmlDoc.Load(xmlStream);
+                xmlSerializer.Serialize(memoryStream, credentialList);
+                memoryStream.Position = 0;
+                xmlDoc.Load(memoryStream);
+                return xmlDoc;
             }
-            return xmlDoc;
         }
     }
 }
