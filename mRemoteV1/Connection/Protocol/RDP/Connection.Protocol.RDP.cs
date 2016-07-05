@@ -8,6 +8,8 @@ using System.Threading;
 using System.ComponentModel;
 using mRemoteNG.Messages;
 using mRemoteNG.App;
+using mRemoteNG.App.Info;
+using mRemoteNG.Security;
 using MSTSCLib;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
@@ -30,6 +32,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
         private ConnectionInfo _connectionInfo;
         private bool _loginComplete;
         private bool _redirectKeys = false;
+        private ICryptographyProvider _cryptographyProvider = new Crypt();
         #endregion
 
         #region Properties
@@ -438,7 +441,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					{
 						if (Settings.Default.DefaultPassword != "")
 						{
-							_rdpClient.AdvancedSettings2.ClearTextPassword = Security.Crypt.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
+							_rdpClient.AdvancedSettings2.ClearTextPassword = _cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), GeneralAppInfo.EncryptionKey.ConvertToSecureString());
 						}
 					}
 				}

@@ -6,6 +6,8 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.App.Info;
+using mRemoteNG.Security;
 
 
 namespace mRemoteNG.Connection.Protocol
@@ -14,8 +16,9 @@ namespace mRemoteNG.Connection.Protocol
 	{	
 		private const int IDM_RECONF = 0x50; // PuTTY Settings Menu ID
 		bool _isPuttyNg;
+	    protected ICryptographyProvider _cryptographyProvider;
 
-	    #region Public Properties
+        #region Public Properties
         public Putty_Protocol PuttyProtocol { get; set; }
 
 	    public Putty_SSHVersion PuttySSHVersion { get; set; }
@@ -39,7 +42,7 @@ namespace mRemoteNG.Connection.Protocol
 
         public PuttyBase()
         {
-
+            _cryptographyProvider = new Crypt();
         }
 
         #region Private Events & Handlers
@@ -98,7 +101,7 @@ namespace mRemoteNG.Connection.Protocol
 						{
 							if (Settings.Default.EmptyCredentials == "custom")
 							{
-								password = Security.Crypt.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
+								password = _cryptographyProvider.Decrypt(Settings.Default.DefaultPassword, GeneralAppInfo.EncryptionKey.ConvertToSecureString());
 							}
 						}
 								

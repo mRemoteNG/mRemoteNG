@@ -1,10 +1,10 @@
 ﻿using mRemoteNG.App.Info;
-using System;
 using System.Data.SqlClient;
+using mRemoteNG.Security;
 
 namespace mRemoteNG.Config
 {
-    public class SqlConnectorImp : IDisposable, mRemoteNG.Config.SqlConnector
+    public class SqlConnectorImp : SqlConnector
     {
         private SqlConnection _sqlConnection = default(SqlConnection);
         private string _sqlConnectionString = "";
@@ -12,10 +12,12 @@ namespace mRemoteNG.Config
         private string _sqlCatalog;
         private string _sqlUsername;
         private string _sqlPassword;
+        private ICryptographyProvider _cryptographyProvider;
 
         public SqlConnectorImp()
         {
             Initialize();
+            _cryptographyProvider = new Crypt();
         }
 
         ~SqlConnectorImp()
@@ -54,7 +56,7 @@ namespace mRemoteNG.Config
             _sqlHost = mRemoteNG.Settings.Default.SQLHost;
             _sqlCatalog = mRemoteNG.Settings.Default.SQLDatabaseName;
             _sqlUsername = mRemoteNG.Settings.Default.SQLUser;
-            _sqlPassword = Security.Crypt.Decrypt(mRemoteNG.Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey);
+            _sqlPassword = _cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey.ConvertToSecureString());
         }
 
         public void Connect()

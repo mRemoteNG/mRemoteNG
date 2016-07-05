@@ -63,7 +63,7 @@ namespace mRemoteNG.Config.Settings
                 mRemoteNG.Settings.Default.QuickyTBVisible = with1.tsQuickConnect.Visible;
 
                 mRemoteNG.Settings.Default.ConDefaultPassword =
-                    Crypt.Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword), GeneralAppInfo.EncryptionKey);
+                    new Crypt().Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword), GeneralAppInfo.EncryptionKey.ConvertToSecureString());
 
                 mRemoteNG.Settings.Default.Save();
 

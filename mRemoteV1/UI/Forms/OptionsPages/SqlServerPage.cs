@@ -9,9 +9,12 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 {
     public partial class SqlServerPage
     {
+        private ICryptographyProvider _cryptographyProvider;
+
         public SqlServerPage()
         {
             InitializeComponent();
+            _cryptographyProvider = new Crypt();
         }
 
         public override string PageName
@@ -42,7 +45,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLServer.Text = mRemoteNG.Settings.Default.SQLHost;
             txtSQLDatabaseName.Text = mRemoteNG.Settings.Default.SQLDatabaseName;
             txtSQLUsername.Text = mRemoteNG.Settings.Default.SQLUser;
-            txtSQLPassword.Text = Crypt.Decrypt(mRemoteNG.Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey);
+            txtSQLPassword.Text = _cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey.ConvertToSecureString());
         }
 
         public override void SaveSettings()
@@ -53,7 +56,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             mRemoteNG.Settings.Default.SQLHost = txtSQLServer.Text;
             mRemoteNG.Settings.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
             mRemoteNG.Settings.Default.SQLUser = txtSQLUsername.Text;
-            mRemoteNG.Settings.Default.SQLPass = Crypt.Encrypt(txtSQLPassword.Text, GeneralAppInfo.EncryptionKey);
+            mRemoteNG.Settings.Default.SQLPass = _cryptographyProvider.Encrypt(txtSQLPassword.Text, GeneralAppInfo.EncryptionKey.ConvertToSecureString());
             ReinitializeSqlUpdater();
         }
 

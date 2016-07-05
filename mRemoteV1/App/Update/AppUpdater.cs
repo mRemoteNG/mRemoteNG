@@ -6,6 +6,7 @@ using System.Threading;
 using mRemoteNG.Tools;
 using System.Reflection;
 using mRemoteNG.App.Info;
+using mRemoteNG.Security;
 
 
 namespace mRemoteNG.App.Update
@@ -19,6 +20,7 @@ namespace mRemoteNG.App.Update
         private Thread _getUpdateInfoThread;
         private Thread _getChangeLogThread;
         private Thread _getAnnouncementInfoThread;
+        private ICryptographyProvider _cryptographyProvider = new Crypt();
 
         #region Public Properties
         public UpdateInfo CurrentUpdateInfo
@@ -107,7 +109,12 @@ namespace mRemoteNG.App.Update
 			
 		public void SetProxySettings()
 		{
-			SetProxySettings(Convert.ToBoolean(Settings.Default.UpdateUseProxy), Convert.ToString(Settings.Default.UpdateProxyAddress), Convert.ToInt32(Settings.Default.UpdateProxyPort), Convert.ToBoolean(Settings.Default.UpdateProxyUseAuthentication), Convert.ToString(Settings.Default.UpdateProxyAuthUser), Security.Crypt.Decrypt(Convert.ToString(Settings.Default.UpdateProxyAuthPass), GeneralAppInfo.EncryptionKey));
+			SetProxySettings(Settings.Default.UpdateUseProxy, 
+                Settings.Default.UpdateProxyAddress, 
+                Settings.Default.UpdateProxyPort, 
+                Settings.Default.UpdateProxyUseAuthentication, 
+                Settings.Default.UpdateProxyAuthUser,
+                _cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.UpdateProxyAuthPass), GeneralAppInfo.EncryptionKey.ConvertToSecureString()));
 		}
 			
 		public void SetProxySettings(bool useProxy, string address, int port, bool useAuthentication, string username, string password)
