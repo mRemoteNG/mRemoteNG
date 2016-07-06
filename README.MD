@@ -1,4 +1,4 @@
-[![Build Status](http://ec2-52-39-111-114.us-west-2.compute.amazonaws.com:8080/job/mRemoteNG/mRemoteNG/develop/badge/icon)](http://ec2-52-39-111-114.us-west-2.compute.amazonaws.com:8080/job/mRemoteNG/mRemoteNG/develop)
+[![Build Status](http://ec2-52-39-111-114.us-west-2.compute.amazonaws.com:8080/buildStatus/icon?job=mRemoteNG/mRemoteNG/develop)](http://ec2-52-39-111-114.us-west-2.compute.amazonaws.com:8080/job/mRemoteNG/mRemoteNG/develop)
 
 
 mRemoteNG is the next generation of mRemote, a full-featured, multi-tab remote connections manager.
