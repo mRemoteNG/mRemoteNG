@@ -21,11 +21,8 @@ Currently these protocols are supported:
 mRemoteNG can be installed on Windows 7 or later.
 
 Windows 7 systems require RDP version 8:
-
 https://support.microsoft.com/en-us/kb/2592687 
-
 OR
-
 https://support.microsoft.com/en-us/kb/2923545
 
 Windows 8+ support RDP version 8+ out of the box.
