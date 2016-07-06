@@ -1,3 +1,4 @@
+[![Twitter Follow](https://img.shields.io/twitter/follow/mRemoteNG.svg?style=social&label=Follow&maxAge=2592000)]()
 [![Build Status](http://ec2-52-39-111-114.us-west-2.compute.amazonaws.com:8080/buildStatus/icon?job=mRemoteNG/mRemoteNG/develop)](http://ec2-52-39-111-114.us-west-2.compute.amazonaws.com:8080/job/mRemoteNG/mRemoteNG/develop)
 [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.74/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.74)
 
