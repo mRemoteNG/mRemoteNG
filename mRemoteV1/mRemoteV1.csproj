@@ -172,6 +172,7 @@
     <Compile Include="Credential\CredentialManager.cs" />
     <Compile Include="Credential\CredentialSourceEnum.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
+    <Compile Include="Security\Crypt.cs" />
     <Compile Include="Security\ICryptographyProvider.cs" />
     <Compile Include="Security\SecureStringExtensions.cs" />
     <Compile Include="Tools\ArgumentParser.cs" />
@@ -365,7 +366,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Tree\Root\RootNodeInfo.cs" />
-    <Compile Include="Security\Security.Crypt.cs" />
     <Compile Include="Security\Security.Impersonator.cs" />
     <Compile Include="Security\Security.Save.cs" />
     <Compile Include="Tools\IeBrowserEmulation.cs" />
