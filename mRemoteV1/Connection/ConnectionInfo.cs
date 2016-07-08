@@ -8,7 +8,6 @@ using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.RAW;
-using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.Rlogin;
@@ -37,7 +36,9 @@ namespace mRemoteNG.Connection
         private string _extApp;
         private int _port;
         private string _puttySession;
-        private ProtocolICA.EncryptionStrength _icaEncryption;
+#if ICA
+        private mRemoteNG.Connection.Protocol.ICA.ProtocolICA.EncryptionStrength _icaEncryption;
+#endif
         private bool _useConsoleSession;
         private ProtocolRDP.AuthenticationLevel _rdpAuthenticationLevel;
         private string _loadBalanceInfo;
@@ -86,10 +87,10 @@ namespace mRemoteNG.Connection
         private bool _IsQuickConnect;
         private bool _PleaseConnect;
         private string _constantId;
-        #endregion
+#endregion
 
-        #region Public Properties
-        #region Display
+#region Public Properties
+#region Display
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
@@ -126,8 +127,8 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("Panel", _panel); }
 			set { _panel = value; }
 		}
-        #endregion
-        #region Connection
+#endregion
+#region Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryConnection", 2),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameAddress"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionAddress")]
@@ -174,8 +175,8 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("Domain", _domain).Trim(); }
 			set { _domain = value.Trim(); }
 		}
-        #endregion
-        #region Protocol
+#endregion
+#region Protocol
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameProtocol"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionProtocol"), 
@@ -214,7 +215,8 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("PuttySession", _puttySession); }
 			set { _puttySession = value; }
 		}
-		
+
+#if ICA
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameEncryptionStrength"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEncryptionStrength"), 
@@ -224,7 +226,8 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("ICAEncryption", _icaEncryption); }
 			set { _icaEncryption = value; }
 		}
-		
+#endif
+
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameUseConsoleSession"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUseConsoleSession"), 
@@ -273,8 +276,8 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("UseCredSsp", _useCredSsp); }
 			set { _useCredSsp = value; }
 		}
-        #endregion
-        #region RD Gateway
+#endregion
+#region RD Gateway
         [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 4),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayUsageMethod"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUsageMethod"), 
@@ -331,8 +334,8 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("RDGatewayDomain", _rdGatewayDomain).Trim(); }
 			set { _rdGatewayDomain = value.Trim(); }
 		}
-        #endregion
-        #region Appearance
+#endregion
+#region Appearance
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameResolution"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionResolution"), 
@@ -412,8 +415,8 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("EnableDesktopComposition", _enableDesktopComposition); }
 			set { _enableDesktopComposition = value; }
 		}
-        #endregion
-        #region Redirect
+#endregion
+#region Redirect
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectKeys"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectKeys"), 
@@ -473,8 +476,8 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("RedirectSound", _redirectSound); }
 			set { _redirectSound = value; }
 		}
-        #endregion
-        #region Misc
+#endregion
+#region Misc
         [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalToolBefore"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionExternalToolBefore"), 
@@ -512,8 +515,8 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("UserField", _userField); }
             set { _userField = value; }
         }
-        #endregion
-        #region VNC
+#endregion
+#region VNC
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5), 
             Browsable(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameCompression"),
@@ -629,8 +632,8 @@ namespace mRemoteNG.Connection
             get { return GetPropertyValue("VNCViewOnly", _vncViewOnly); }
 			set { _vncViewOnly = value; }
 		}
-        #endregion
-        #region Non-browsable public properties
+#endregion
+#region Non-browsable public properties
         [Browsable(false)]
         public ConnectionInfoInheritance Inheritance
         {
@@ -692,10 +695,10 @@ namespace mRemoteNG.Connection
             get { return _PleaseConnect; }
             set { _PleaseConnect = value; }
         }
-        #endregion
-        #endregion
+#endregion
+#endregion
 
-        #region Constructors
+#region Constructors
         public ConnectionInfo()
 		{
             // initialize default values for all standard instance members
@@ -716,9 +719,9 @@ namespace mRemoteNG.Connection
 			IsContainer = true;
 			this.Parent = parent;
 		}
-        #endregion
+#endregion
 			
-        #region Public Methods
+#region Public Methods
 		public ConnectionInfo Copy()
 		{
 			ConnectionInfo newConnectionInfo = (ConnectionInfo)MemberwiseClone();
@@ -744,9 +747,9 @@ namespace mRemoteNG.Connection
 		{
 			this.Port = GetDefaultPort();
 		}
-        #endregion
+#endregion
 			
-        #region Public Enumerations
+#region Public Enumerations
 		[Flags()]
         public enum Force
 		{
@@ -758,9 +761,9 @@ namespace mRemoteNG.Connection
 			DontUseConsoleSession = 16,
 			NoCredentials = 32
 		}
-        #endregion
+#endregion
 			
-        #region Private Methods
+#region Private Methods
         private TPropertyType GetPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
         {
             if (ShouldThisPropertyBeInherited(propertyName))
@@ -827,8 +830,10 @@ namespace mRemoteNG.Connection
                         return (int)ProtocolHTTP.Defaults.Port;
                     case ProtocolType.HTTPS:
                         return (int)ProtocolHTTPS.Defaults.Port;
+#if ICA
                     case ProtocolType.ICA:
                         return (int)ProtocolICA.Defaults.Port;
+#endif
                     case ProtocolType.IntApp:
                         return (int)IntegratedProgram.Defaults.Port;
                 }
@@ -863,7 +868,9 @@ namespace mRemoteNG.Connection
             _extApp = mRemoteNG.Settings.Default.ConDefaultExtApp;
             _port = 0;
             _puttySession = mRemoteNG.Settings.Default.ConDefaultPuttySession;
-            _icaEncryption = (ProtocolICA.EncryptionStrength) Enum.Parse(typeof(ProtocolICA.EncryptionStrength), mRemoteNG.Settings.Default.ConDefaultICAEncryptionStrength);
+#if ICA
+            _icaEncryption = (mRemoteNG.Connection.Protocol.ICA.ProtocolICA.EncryptionStrength) Enum.Parse(typeof(mRemoteNG.Connection.Protocol.ICA.ProtocolICA.EncryptionStrength), mRemoteNG.Settings.Default.ConDefaultICAEncryptionStrength);
+#endif
             _useConsoleSession = mRemoteNG.Settings.Default.ConDefaultUseConsoleSession;
             _rdpAuthenticationLevel = (ProtocolRDP.AuthenticationLevel) Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), mRemoteNG.Settings.Default.ConDefaultRDPAuthenticationLevel);
             _loadBalanceInfo = mRemoteNG.Settings.Default.ConDefaultLoadBalanceInfo;
@@ -937,6 +944,6 @@ namespace mRemoteNG.Connection
             _IsQuickConnect = false;
             _PleaseConnect = false;
         }
-        #endregion
+#endregion
 	}
 }

@@ -53,6 +53,8 @@ namespace mRemoteNG.Connection.Protocol
 						
 				_process.Start();
 				_process.WaitForInputIdle(Convert.ToInt32(Settings.Default.MaxPuttyWaitTime * 1000));
+
+                _process.OutputDataReceived += _process_OutputDataReceived;
 						
 				int startTicks = Environment.TickCount;
 				while (_handle.ToInt32() == 0 & Environment.TickCount < startTicks + (Settings.Default.MaxPuttyWaitTime * 1000))
@@ -84,8 +86,13 @@ namespace mRemoteNG.Connection.Protocol
 				return false;
 			}
 		}
-				
-		public override void Focus()
+
+        private void _process_OutputDataReceived(object sender, DataReceivedEventArgs e)
+        {
+            
+        }
+
+        public override void Focus()
 		{
 			try
 			{

@@ -540,9 +540,9 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "PuTTY " + errorMsg, true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "File " + pPath + " does not exist.", true);
 			}
-					
-					
-			AxWFICALib.AxICAClient ICA = null;
+
+#if ICA
+            AxWFICALib.AxICAClient ICA = null;
 					
 			try
 			{
@@ -615,9 +615,8 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Gecko " + errorMsg, true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "GeckoFx was not found in " + GeckoFxPath, true);
 			}
-					
-		}
+#endif
+        }
         #endregion
-				
-	}
+    }
 }

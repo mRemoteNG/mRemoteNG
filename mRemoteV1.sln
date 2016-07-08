@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mRemoteV1", "mRemoteV1\mRemoteV1.csproj", "{4934A491-40BC-4E5B-9166-EA1169A220F6}"
 EndProject
@@ -14,6 +14,11 @@ EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Installer", "InstallerProjects\Installer\Installer.wixproj", "{F0168B9F-6815-40DF-BA53-46CEE7683B68}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5423D985-CB48-4344-B47F-E8C6D60C8B04} = {5423D985-CB48-4344-B47F-E8C6D60C8B04}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E49ABB96-D4E6-44FB-9FDD-9F5BA6A037B9}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
 Global

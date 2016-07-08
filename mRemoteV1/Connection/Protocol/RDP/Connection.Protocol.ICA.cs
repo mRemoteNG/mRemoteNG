@@ -1,3 +1,5 @@
+#if ICA
+
 using System;
 using AxWFICALib;
 using System.Drawing;
@@ -374,3 +376,5 @@ namespace mRemoteNG.Connection.Protocol.ICA
         #endregion
 	}
 }
+
+#endif

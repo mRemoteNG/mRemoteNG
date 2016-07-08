@@ -98,7 +98,9 @@ namespace mRemoteNG.App
             Settings.Default.ConDefaultDomain = DefaultConnection.Domain;
             Settings.Default.ConDefaultProtocol = DefaultConnection.Protocol.ToString();
             Settings.Default.ConDefaultPuttySession = DefaultConnection.PuttySession;
+#if ICA
             Settings.Default.ConDefaultICAEncryptionStrength = DefaultConnection.ICAEncryption.ToString();
+#endif
             Settings.Default.ConDefaultRDPAuthenticationLevel = DefaultConnection.RDPAuthenticationLevel.ToString();
             Settings.Default.ConDefaultLoadBalanceInfo = DefaultConnection.LoadBalanceInfo;
             Settings.Default.ConDefaultUseConsoleSession = DefaultConnection.UseConsoleSession;
@@ -141,9 +143,9 @@ namespace mRemoteNG.App
             Settings.Default.ConDefaultRDGatewayDomain = DefaultConnection.RDGatewayDomain;
             Settings.Default.ConDefaultRDGatewayUseConnectionCredentials = DefaultConnection.RDGatewayUseConnectionCredentials.ToString();
         }
-        #endregion
+#endregion
 
-        #region Default Inheritance
+#region Default Inheritance
         public static ConnectionInfoInheritance DefaultInheritanceFromSettings()
         {
             DefaultInheritance = new ConnectionInfoInheritance(null);
@@ -208,9 +210,9 @@ namespace mRemoteNG.App
             Settings.Default.InhDefaultRDGatewayDomain = DefaultInheritance.RDGatewayDomain;
             Settings.Default.InhDefaultRDGatewayUseConnectionCredentials = DefaultInheritance.RDGatewayUseConnectionCredentials;
         }
-        #endregion
+#endregion
 
-        #region Panels
+#region Panels
         public static Form AddPanel(string title = "", bool noTabber = false)
         {
             try
@@ -352,9 +354,9 @@ namespace mRemoteNG.App
                 MessageCollector.AddMessage(MessageClass.ErrorMsg, "Caught Exception: " + Environment.NewLine + ex.Message);
             }
         }
-        #endregion
+#endregion
 
-        #region Connections Loading/Saving
+#region Connections Loading/Saving
         public static void NewConnections(string filename)
         {
             try
@@ -778,9 +780,9 @@ namespace mRemoteNG.App
                 }
             }
         }
-        #endregion
+#endregion
 
-        #region Opening Connection
+#region Opening Connection
         public static ConnectionInfo CreateQuickConnect(string connectionString, ProtocolType protocol)
         {
             try
@@ -1083,9 +1085,9 @@ namespace mRemoteNG.App
             }
             return false;
         }
-        #endregion
+#endregion
 
-        #region Event Handlers
+#region Event Handlers
         public static void Prot_Event_Disconnected(object sender, string DisconnectedMessage)
         {
             try
@@ -1166,9 +1168,9 @@ namespace mRemoteNG.App
                 MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionEventConnectionFailed + Environment.NewLine + ex.Message, true);
             }
         }
-        #endregion
+#endregion
 
-        #region External Apps
+#region External Apps
         public static ExternalTool GetExtAppByName(string Name)
         {
             foreach (ExternalTool extA in ExternalTools)
@@ -1178,9 +1180,9 @@ namespace mRemoteNG.App
             }
             return null;
         }
-        #endregion
+#endregion
 
-        #region Misc
+#region Misc
         public static void GoToURL(string URL)
         {
             ConnectionInfo connectionInfo = new ConnectionInfo();
@@ -1310,6 +1312,6 @@ namespace mRemoteNG.App
                 }
             }
         }
-        #endregion
+#endregion
     }
 }

@@ -310,8 +310,12 @@ namespace mRemoteNG.Config.Connections
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Port) + "\',";
 			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.UseConsoleSession) + "\',";
 			_sqlQuery.CommandText += "\'" + with_1.RenderingEngine + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.ICAEncryption + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.RDPAuthenticationLevel + "\',";
+#if ICA
+            _sqlQuery.CommandText += "\'" + with_1.ICAEncryption + "\',";
+#else
+            _sqlQuery.CommandText += "\'\',";
+#endif
+            _sqlQuery.CommandText += "\'" + with_1.RDPAuthenticationLevel + "\',";
 			_sqlQuery.CommandText += "\'" + with_1.LoadBalanceInfo + "\',";
 			_sqlQuery.CommandText += "\'" + with_1.Colors + "\',";
 			_sqlQuery.CommandText += "\'" + with_1.Resolution + "\',";
@@ -530,9 +534,9 @@ namespace mRemoteNG.Config.Connections
 					
 			_sqlQuery.CommandText += _currentNodeIndex + ",\'" + _parentConstantId + "\',\'" + with_1.ConstantID + "\',\'" + MiscTools.DBDate(DateTime.Now) + "\')";
 		}
-        #endregion
+#endregion
 				
-        #region XML
+#region XML
 		private void EncryptCompleteFile()
 		{
 			StreamReader streamReader = new StreamReader(ConnectionFileName);
@@ -718,10 +722,13 @@ namespace mRemoteNG.Config.Connections
 				_xmlTextWriter.WriteAttributeString("UseCredSsp", "", Convert.ToString(curConI.UseCredSsp));
 						
 				_xmlTextWriter.WriteAttributeString("RenderingEngine", "", curConI.RenderingEngine.ToString());
-						
-				_xmlTextWriter.WriteAttributeString("ICAEncryptionStrength", "", curConI.ICAEncryption.ToString());
-						
-				_xmlTextWriter.WriteAttributeString("RDPAuthenticationLevel", "", curConI.RDPAuthenticationLevel.ToString());
+#if ICA
+                _xmlTextWriter.WriteAttributeString("ICAEncryptionStrength", "", curConI.ICAEncryption.ToString());
+#else
+                _xmlTextWriter.WriteAttributeString("ICAEncryptionStrength", "", "");
+#endif
+
+                _xmlTextWriter.WriteAttributeString("RDPAuthenticationLevel", "", curConI.RDPAuthenticationLevel.ToString());
 						
 				_xmlTextWriter.WriteAttributeString("LoadBalanceInfo", "", curConI.LoadBalanceInfo);
 						
@@ -925,9 +932,9 @@ namespace mRemoteNG.Config.Connections
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SaveConnectionFields failed" + Environment.NewLine + ex.Message, true);
 			}
 		}
-        #endregion
+#endregion
 				
-        #region CSV
+#region CSV
 		private StreamWriter csvWr;
 				
 		private void SaveTomRCSV()
@@ -1031,8 +1038,27 @@ namespace mRemoteNG.Config.Connections
 			{
 				csvLn += con.Domain + ";";
 			}
-					
-			csvLn += con.Hostname + ";" + con.Protocol + ";" + con.PuttySession + ";" + Convert.ToString(con.Port) + ";" + Convert.ToString(con.UseConsoleSession) + ";" + Convert.ToString(con.UseCredSsp) + ";" + con.RenderingEngine + ";" + con.ICAEncryption + ";" + con.RDPAuthenticationLevel + ";" + con.LoadBalanceInfo + ";" + con.Colors + ";" + con.Resolution + ";" + Convert.ToString(con.AutomaticResize) + ";" + Convert.ToString(con.DisplayWallpaper) + ";" + Convert.ToString(con.DisplayThemes) + ";" + Convert.ToString(con.EnableFontSmoothing) + ";" + Convert.ToString(con.EnableDesktopComposition) + ";" + Convert.ToString(con.CacheBitmaps) + ";" + Convert.ToString(con.RedirectDiskDrives) + ";" + Convert.ToString(con.RedirectPorts) + ";" + Convert.ToString(con.RedirectPrinters) + ";" + Convert.ToString(con.RedirectSmartCards) + ";" + con.RedirectSound + ";" + Convert.ToString(con.RedirectKeys) + ";" + con.PreExtApp + ";" + con.PostExtApp + ";" + con.MacAddress + ";" + con.UserField + ";" + con.ExtApp + ";" + con.VNCCompression + ";" + con.VNCEncoding + ";" + con.VNCAuthMode + ";" + con.VNCProxyType + ";" + con.VNCProxyIP + ";" + Convert.ToString(con.VNCProxyPort) + ";" + con.VNCProxyUsername + ";" + con.VNCProxyPassword + ";" + con.VNCColors + ";" + con.VNCSmartSizeMode + ";" + Convert.ToString(con.VNCViewOnly) + ";";
+
+		    csvLn += con.Hostname + ";" + con.Protocol + ";" + con.PuttySession + ";" + Convert.ToString(con.Port) + ";" +
+		             Convert.ToString(con.UseConsoleSession) + ";" + Convert.ToString(con.UseCredSsp) + ";" +
+		             con.RenderingEngine + ";" +
+#if ICA
+                     con.ICAEncryption + ";" + 
+#else
+                     ";" +
+#endif
+                     con.RDPAuthenticationLevel + ";" +
+		             con.LoadBalanceInfo + ";" + con.Colors + ";" + con.Resolution + ";" +
+		             Convert.ToString(con.AutomaticResize) + ";" + Convert.ToString(con.DisplayWallpaper) + ";" +
+		             Convert.ToString(con.DisplayThemes) + ";" + Convert.ToString(con.EnableFontSmoothing) + ";" +
+		             Convert.ToString(con.EnableDesktopComposition) + ";" + Convert.ToString(con.CacheBitmaps) + ";" +
+		             Convert.ToString(con.RedirectDiskDrives) + ";" + Convert.ToString(con.RedirectPorts) + ";" +
+		             Convert.ToString(con.RedirectPrinters) + ";" + Convert.ToString(con.RedirectSmartCards) + ";" +
+		             con.RedirectSound + ";" + Convert.ToString(con.RedirectKeys) + ";" + con.PreExtApp + ";" + con.PostExtApp +
+		             ";" + con.MacAddress + ";" + con.UserField + ";" + con.ExtApp + ";" + con.VNCCompression + ";" +
+		             con.VNCEncoding + ";" + con.VNCAuthMode + ";" + con.VNCProxyType + ";" + con.VNCProxyIP + ";" +
+		             Convert.ToString(con.VNCProxyPort) + ";" + con.VNCProxyUsername + ";" + con.VNCProxyPassword + ";" +
+		             con.VNCColors + ";" + con.VNCSmartSizeMode + ";" + Convert.ToString(con.VNCViewOnly) + ";";
 					
 			if (SaveSecurity.Inheritance)
 			{
@@ -1042,9 +1068,9 @@ namespace mRemoteNG.Config.Connections
 					
 			csvWr.WriteLine(csvLn);
 		}
-        #endregion
+#endregion
 				
-        #region vRD CSV
+#region vRD CSV
 		private void SaveTovRDCSV()
 		{
 			if (Runtime.IsConnectionsFileLoaded == false)
@@ -1104,9 +1130,9 @@ namespace mRemoteNG.Config.Connections
 					
 			csvWr.WriteLine(con.Name + ";" + con.Hostname + ";" + con.MacAddress + ";;" + Convert.ToString(con.Port) + ";" + Convert.ToString(con.UseConsoleSession) + ";" + nodePath);
 		}
-        #endregion
+#endregion
 				
-        #region vRD VRE
+#region vRD VRE
 		private void SaveToVRE()
 		{
 			if (Runtime.IsConnectionsFileLoaded == false)
@@ -1285,6 +1311,6 @@ namespace mRemoteNG.Config.Connections
 			_xmlTextWriter.WriteValue(con.DisplayWallpaper);
 			_xmlTextWriter.WriteEndElement();
 		}
-        #endregion
+#endregion
 	}
 }
