@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Security;
+using System.Text.RegularExpressions;
 
 namespace mRemoteNG.Security
 {
@@ -52,6 +53,12 @@ namespace mRemoteNG.Security
             // ReSharper disable once RedundantAssignment
             unsecuredPassword = null;
             return secureString;
+        }
+
+        public static bool IsBase64String(this string s)
+        {
+            s = s.Trim();
+            return (s.Length % 4 == 0) && Regex.IsMatch(s, @"^[a-zA-Z0-9\+/]*={0,3}$", RegexOptions.None);
         }
     }
 }

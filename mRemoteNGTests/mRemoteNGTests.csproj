@@ -110,6 +110,7 @@
     <Compile Include="NUnitExtensions\ObjectListViewTester.cs" />
     <Compile Include="NUnitExtensions\SecureTextBoxTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\AesCryptographyProviderTests.cs" />
     <Compile Include="Security\SecureStringExtensionsTests.cs" />
     <Compile Include="UI\Controls\SecureTextBoxTestForm.cs">
       <SubType>Form</SubType>
