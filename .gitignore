@@ -282,6 +282,3 @@ Installer Projects/Installer/Fragments/FilesFragment.wxs
 Installer Projects/Installer/Fragments/HelpFilesFragment.wxs
 InstallerProjects/Installer/Fragments/FilesFragment.wxs
 InstallerProjects/Installer/Resources/License.rtf
-
-# user preference: .editorconfig - http://editorconfig.org/
-.editorconfig
