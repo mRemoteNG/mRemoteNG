@@ -1,6 +1,5 @@
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.My;
@@ -499,18 +498,19 @@ namespace mRemoteNG.Config.Connections
 				connectionInfo.Inheritance.Username = Convert.ToBoolean(sqlRd["InheritUsername"]);
 				connectionInfo.Icon = Convert.ToString(sqlRd["Icon"]);
 				connectionInfo.Panel = Convert.ToString(sqlRd["Panel"]);
-						
-				if (confVersion > 1.5) //1.6
+
+                if (confVersion > 1.5) //1.6
 				{
-                    connectionInfo.ICAEncryption = (ProtocolICA.EncryptionStrength)Tools.MiscTools.StringToEnum(typeof(ProtocolICA.EncryptionStrength), Convert.ToString(sqlRd["ICAEncryptionStrength"]));
-					connectionInfo.Inheritance.ICAEncryption = Convert.ToBoolean(sqlRd["InheritICAEncryptionStrength"]);
+#if ICA
+                    connectionInfo.ICAEncryption = (mRemoteNG.Connection.Protocol.ICA.ProtocolICA.EncryptionStrength)Tools.MiscTools.StringToEnum(typeof(mRemoteNG.Connection.Protocol.ICA.ProtocolICA.EncryptionStrength), Convert.ToString(sqlRd["ICAEncryptionStrength"]));
+#endif
+                    connectionInfo.Inheritance.ICAEncryption = Convert.ToBoolean(sqlRd["InheritICAEncryptionStrength"]);
 					connectionInfo.PreExtApp = Convert.ToString(sqlRd["PreExtApp"]);
 					connectionInfo.PostExtApp = Convert.ToString(sqlRd["PostExtApp"]);
 					connectionInfo.Inheritance.PreExtApp = Convert.ToBoolean(sqlRd["InheritPreExtApp"]);
 					connectionInfo.Inheritance.PostExtApp = Convert.ToBoolean(sqlRd["InheritPostExtApp"]);
 				}
-						
-				if (confVersion > 1.6) //1.7
+                    if (confVersion > 1.6) //1.7
 				{
                     connectionInfo.VNCCompression = (ProtocolVNC.Compression)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Compression), Convert.ToString(sqlRd["VNCCompression"]));
                     connectionInfo.VNCEncoding = (ProtocolVNC.Encoding)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Encoding), Convert.ToString(sqlRd["VNCEncoding"]));
@@ -613,9 +613,9 @@ namespace mRemoteNG.Config.Connections
 					
 			return null;
 		}
-        #endregion
+#endregion
 				
-        #region XML
+#region XML
 		private string DecryptCompleteFile()
 		{
 			StreamReader sRd = new StreamReader(_ConnectionFileName);
@@ -1116,7 +1116,9 @@ namespace mRemoteNG.Config.Connections
 				
 				if (confVersion > 1.5) //1.6
 				{
+#if ICA
                     connectionInfo.ICAEncryption = (ProtocolICA.EncryptionStrength)Tools.MiscTools.StringToEnum(typeof(ProtocolICA.EncryptionStrength), xmlnode.Attributes["ICAEncryptionStrength"].Value);
+#endif
 					connectionInfo.Inheritance.ICAEncryption = bool.Parse(xmlnode.Attributes["InheritICAEncryptionStrength"].Value);
 					connectionInfo.PreExtApp = xmlnode.Attributes["PreExtApp"].Value;
 					connectionInfo.PostExtApp = xmlnode.Attributes["PostExtApp"].Value;
@@ -1272,6 +1274,6 @@ namespace mRemoteNG.Config.Connections
 					
 			return true;
 		}
-        #endregion
+#endregion
 	}
 }

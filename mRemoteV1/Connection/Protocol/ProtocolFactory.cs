@@ -1,5 +1,4 @@
 ﻿using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.RAW;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.Rlogin;
@@ -53,10 +52,12 @@ namespace mRemoteNG.Connection.Protocol
 				case ProtocolType.HTTPS:
 					newProtocol = new ProtocolHTTPS(connectionInfo.RenderingEngine);
 					break;
-				case ProtocolType.ICA:
-					newProtocol = new ProtocolICA();
-					((ProtocolICA) newProtocol).tmrReconnect.Elapsed += ((ProtocolICA) newProtocol).tmrReconnect_Elapsed;
+#if ICA
+                case ProtocolType.ICA:
+					newProtocol = new mRemoteNG.Connection.Protocol.ICA.ProtocolICA();
+					((mRemoteNG.Connection.Protocol.ICA.ProtocolICA) newProtocol).tmrReconnect.Elapsed += ((mRemoteNG.Connection.Protocol.ICA.ProtocolICA) newProtocol).tmrReconnect_Elapsed;
 					break;
+#endif
 				case ProtocolType.IntApp:
 					newProtocol = new IntegratedProgram();
 					if (connectionInfo.ExtApp == "")

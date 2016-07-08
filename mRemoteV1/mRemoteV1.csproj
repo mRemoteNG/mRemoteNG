@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="12.0">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -25,7 +25,7 @@
     <ManifestKeyFile>mRemoteV1_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
     <SignManifests>false</SignManifests>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
@@ -103,6 +103,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Connection\Protocol\ICA\" />
     <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <ItemGroup>
@@ -274,7 +275,7 @@
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPBase.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPS.cs" />
-    <Compile Include="Connection\Protocol\ICA\Connection.Protocol.ICA.cs" />
+    <Compile Include="Connection\Protocol\RDP\Connection.Protocol.ICA.cs" />
     <Compile Include="Connection\Protocol\IntegratedProgram.cs" />
     <Compile Include="Connection\Protocol\ProtocolList.cs" />
     <Compile Include="Connection\Protocol\ProtocolType.cs" />
@@ -1226,12 +1227,13 @@ IF %25buildenv: =%25==ReleasePortable ("$(SolutionDir)Tools\build-relport.cmd")<
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG</DefineConstants>
+    <DefineConstants>DEBUG;RDP</DefineConstants>
     <NoWarn>1591,660,661</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <DebugSymbols>false</DebugSymbols>
@@ -1241,29 +1243,33 @@ IF %25buildenv: =%25==ReleasePortable ("$(SolutionDir)Tools\build-relport.cmd")<
     <DebugType>none</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
+    <DefineConstants>RDP</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Portable|x86'">
     <DebugSymbols>false</DebugSymbols>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Release Portable\</OutputPath>
-    <DefineConstants>PORTABLE</DefineConstants>
+    <DefineConstants>PORTABLE,RDP</DefineConstants>
     <NoWarn>1591,660,661</NoWarn>
     <DebugType>none</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug Portable|x86'">
     <DebugSymbols>true</DebugSymbols>
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug Portable\</OutputPath>
-    <DefineConstants>DEBUG;PORTABLE</DefineConstants>
+    <DefineConstants>DEBUG;PORTABLE,RDP</DefineConstants>
     <NoWarn>1591,660,661</NoWarn>
     <DebugType>full</DebugType>
     <PlatformTarget>x86</PlatformTarget>
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

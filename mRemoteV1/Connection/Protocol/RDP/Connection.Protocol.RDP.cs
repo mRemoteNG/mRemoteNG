@@ -1,3 +1,5 @@
+#if RDP
+
 using System;
 using System.Drawing;
 using System.Diagnostics;
@@ -883,3 +885,5 @@ namespace mRemoteNG.Connection.Protocol.RDP
         #endregion
 	}
 }
+
+#endif
