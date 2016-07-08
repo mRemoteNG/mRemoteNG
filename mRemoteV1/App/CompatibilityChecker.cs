@@ -10,11 +10,6 @@ namespace mRemoteNG.App
 {
     public class CompatibilityChecker
     {
-        public CompatibilityChecker()
-        {
-
-        }
-
         public void CheckCompatibility()
         {
             CheckFipsPolicy();
@@ -34,20 +29,18 @@ namespace mRemoteNG.App
         {
             var regKey = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa");
             var fipsPolicy = regKey?.GetValue("FIPSAlgorithmPolicy");
-            if (fipsPolicy != null && (int)fipsPolicy != 0)
-                return true;
-            else
-                return false;
+            if (fipsPolicy == null) return false;
+            fipsPolicy = Convert.ToInt32(fipsPolicy);
+            return (int)fipsPolicy != 0;
         }
 
         private bool FipsPolicyEnabledForServer2008AndNewer()
         {
             var regKey = Registry.LocalMachine.OpenSubKey("System\\CurrentControlSet\\Control\\Lsa\\FIPSAlgorithmPolicy");
             var fipsPolicy = regKey?.GetValue("Enabled");
-            if (fipsPolicy != null && (int)fipsPolicy != 0)
-                return true;
-            else
-                return false;
+            if (fipsPolicy == null) return false;
+            fipsPolicy = Convert.ToInt32(fipsPolicy);
+            return (int)fipsPolicy != 0;
         }
 
         private void CheckLenovoAutoScrollUtility()
@@ -65,7 +58,7 @@ namespace mRemoteNG.App
                 Runtime.MessageCollector.AddExceptionMessage("Error in CheckLenovoAutoScrollUtility", ex);
             }
 
-            if (proccesses?.Length > 0)
+            if (proccesses.Length > 0)
             {
                 CTaskDialog.MessageBox(Application.ProductName, Language.strCompatibilityProblemDetected, string.Format(Language.strCompatibilityLenovoAutoScrollUtilityDetected, Application.ProductName), "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.Ok, ESysIcons.Warning, ESysIcons.Warning);
                 if (CTaskDialog.VerificationChecked)
