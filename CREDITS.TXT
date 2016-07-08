@@ -115,7 +115,7 @@ Copyright © 2005-2008 FAMFAMFAM
 Creative Commons Attribution 2.5 License
 http://www.famfamfam.com/
 
-VncSharp 1.0
+VncSharp 1.1
 Copyright © 2004-2009 David Humphrey
 GNU General Public License (GPL) Version 2
-http://cdot.senecac.on.ca/projects/vncsharp/
+https://github.com/humphd/VncSharp
