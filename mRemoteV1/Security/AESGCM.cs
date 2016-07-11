@@ -7,6 +7,7 @@
 
 using System;
 using System.IO;
+using System.Security;
 using System.Text;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
@@ -32,6 +33,8 @@ namespace mRemoteNG.Security
         public static readonly int Iterations = 10000;
         public static readonly int MinPasswordLength = 12;
 
+        public static int BlockSizeInBytes => 16;
+
 
         /// <summary>
         /// Helper that generates a random new key on each call.
@@ -42,6 +45,18 @@ namespace mRemoteNG.Security
             var key = new byte[KeyBitSize / 8];
             Random.NextBytes(key);
             return key;
+        }
+
+        public static string Encrypt(string plainText, SecureString encryptionKey)
+        {
+            var encryptedText = SimpleEncryptWithPassword(plainText, encryptionKey.ConvertToUnsecureString());
+            return encryptedText;
+        }
+
+        public static string Decrypt(string cipherText, SecureString decryptionKey)
+        {
+            var decryptedText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString());
+            return decryptedText;
         }
 
         /// <summary>
