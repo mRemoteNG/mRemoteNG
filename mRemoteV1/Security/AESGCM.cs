@@ -10,7 +10,6 @@ using System.IO;
 using System.Security;
 using System.Text;
 using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Generators;
 using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
@@ -18,9 +17,11 @@ using Org.BouncyCastle.Security;
 
 namespace mRemoteNG.Security
 {
-
-    public class AESGCM : ICryptographyProvider
+    public class AESGCM<TBlockCipher> : ICryptographyProvider
+        where TBlockCipher : IBlockCipher, new()
     {
+        private readonly IBlockCipher _blockCipher;
+        private IAeadBlockCipher _aeadBlockCipher;
         private readonly SecureRandom Random = new SecureRandom();
 
         //Preconfigured Encryption Parameters
@@ -33,19 +34,14 @@ namespace mRemoteNG.Security
         public readonly int Iterations = 10000;
         public readonly int MinPasswordLength = 12;
 
-        public int BlockSizeInBytes => 16;
+        public int BlockSizeInBytes => _aeadBlockCipher.GetBlockSize();
 
-
-        /// <summary>
-        /// Helper that generates a random new key on each call.
-        /// </summary>
-        /// <returns></returns>
-        public byte[] NewKey()
+        public AESGCM()
         {
-            var key = new byte[KeyBitSize / 8];
-            Random.NextBytes(key);
-            return key;
+            _blockCipher = new TBlockCipher();
+            _aeadBlockCipher = new GcmBlockCipher(_blockCipher);
         }
+
 
         public string Encrypt(string plainText, SecureString encryptionKey)
         {
@@ -178,14 +174,13 @@ namespace mRemoteNG.Security
             var nonce = new byte[NonceBitSize / 8];
             Random.NextBytes(nonce, 0, nonce.Length);
 
-            var cipher = new GcmBlockCipher(new AesFastEngine());
             var parameters = new AeadParameters(new KeyParameter(key), MacBitSize, nonce, nonSecretPayload);
-            cipher.Init(true, parameters);
+            _aeadBlockCipher.Init(true, parameters);
 
             //Generate Cipher Text With Auth Tag
-            var cipherText = new byte[cipher.GetOutputSize(secretMessage.Length)];
-            var len = cipher.ProcessBytes(secretMessage, 0, secretMessage.Length, cipherText, 0);
-            cipher.DoFinal(cipherText, len);
+            var cipherText = new byte[_aeadBlockCipher.GetOutputSize(secretMessage.Length)];
+            var len = _aeadBlockCipher.ProcessBytes(secretMessage, 0, secretMessage.Length, cipherText, 0);
+            _aeadBlockCipher.DoFinal(cipherText, len);
 
             //Assemble Message
             using (var combinedStream = new MemoryStream())
@@ -228,19 +223,17 @@ namespace mRemoteNG.Security
                 //Grab Nonce
                 var nonce = cipherReader.ReadBytes(NonceBitSize / 8);
              
-                var cipher = new GcmBlockCipher(new AesFastEngine());
                 var parameters = new AeadParameters(new KeyParameter(key), MacBitSize, nonce, nonSecretPayload);
-                cipher.Init(false, parameters);
+                _aeadBlockCipher.Init(false, parameters);
 
                 //Decrypt Cipher Text
                 var cipherText = cipherReader.ReadBytes(encryptedMessage.Length - nonSecretPayloadLength - nonce.Length);
-                var plainText = new byte[cipher.GetOutputSize(cipherText.Length)];  
+                var plainText = new byte[_aeadBlockCipher.GetOutputSize(cipherText.Length)];  
 
                 try
                 {
-                    var len = cipher.ProcessBytes(cipherText, 0, cipherText.Length, plainText, 0);
-                    cipher.DoFinal(plainText, len);
-
+                    var len = _aeadBlockCipher.ProcessBytes(cipherText, 0, cipherText.Length, plainText, 0);
+                    _aeadBlockCipher.DoFinal(plainText, len);
                 }
                 catch (InvalidCipherTextException)
                 {
