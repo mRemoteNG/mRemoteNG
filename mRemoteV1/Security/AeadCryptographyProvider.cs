@@ -21,7 +21,6 @@ namespace mRemoteNG.Security
 {
     public class AeadCryptographyProvider : ICryptographyProvider
     {
-        private readonly IBlockCipher _blockCipher;
         private readonly IAeadBlockCipher _aeadBlockCipher;
         private readonly Encoding _encoding;
         private readonly SecureRandom _random = new SecureRandom();
@@ -72,7 +71,7 @@ namespace mRemoteNG.Security
         private string SimpleEncryptWithPassword(string secretMessage, string password, byte[] nonSecretPayload = null)
         {
             if (string.IsNullOrEmpty(secretMessage))
-                throw new ArgumentException("Secret Message Required!", "secretMessage");
+                throw new ArgumentException("Secret Message Required!", nameof(secretMessage));
 
             var plainText = _encoding.GetBytes(secretMessage);
             var cipherText = SimpleEncryptWithPassword(plainText, password, nonSecretPayload);
@@ -85,10 +84,10 @@ namespace mRemoteNG.Security
 
             //User Error Checks
             if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
-                throw new ArgumentException(String.Format("Must have a password of at least {0} characters!", MinPasswordLength), "password");
+                throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!", nameof(password));
 
             if (secretMessage == null || secretMessage.Length == 0)
-                throw new ArgumentException("Secret Message Required!", "secretMessage");
+                throw new ArgumentException("Secret Message Required!", nameof(secretMessage));
 
             var generator = new Pkcs5S2ParametersGenerator();
 
@@ -116,10 +115,10 @@ namespace mRemoteNG.Security
         {
             //User Error Checks
             if (key == null || key.Length != KeyBitSize / 8)
-                throw new ArgumentException(String.Format("Key needs to be {0} bit!", KeyBitSize), "key");
+                throw new ArgumentException($"Key needs to be {KeyBitSize} bit!", nameof(key));
 
             if (secretMessage == null || secretMessage.Length == 0)
-                throw new ArgumentException("Secret Message Required!", "secretMessage");
+                throw new ArgumentException("Secret Message Required!", nameof(secretMessage));
 
             //Non-secret Payload Optional
             nonSecretPayload = nonSecretPayload ?? new byte[] { };
@@ -162,7 +161,7 @@ namespace mRemoteNG.Security
         private string SimpleDecryptWithPassword(string encryptedMessage, SecureString decryptionKey, int nonSecretPayloadLength = 0)
         {
             if (string.IsNullOrWhiteSpace(encryptedMessage))
-                throw new ArgumentException("Encrypted Message Required!", "encryptedMessage");
+                throw new ArgumentException("Encrypted Message Required!", nameof(encryptedMessage));
 
             var cipherText = Convert.FromBase64String(encryptedMessage);
             var plainText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString(), nonSecretPayloadLength);
