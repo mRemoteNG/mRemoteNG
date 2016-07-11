@@ -1,4 +1,5 @@
 /*
+ * Initial work:
  * This work (Modern Encryption of a String C#, by James Tuley), 
  * identified by James Tuley, is free of known copyright restrictions.
  * https://gist.github.com/4336842
@@ -72,69 +73,7 @@ namespace mRemoteNG.Security
             return encryptedText;
         }
 
-        public string Decrypt(string cipherText, SecureString decryptionKey)
-        {
-            var decryptedText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString());
-            return decryptedText;
-        }
-
-        /// <summary>
-        /// Simple Encryption And Authentication (AES-GCM) of a UTF8 string.
-        /// </summary>
-        /// <param name="secretMessage">The secret message.</param>
-        /// <param name="key">The key.</param>
-        /// <param name="nonSecretPayload">Optional non-secret payload.</param>
-        /// <returns>
-        /// Encrypted Message
-        /// </returns>
-        /// <exception cref="System.ArgumentException">Secret Message Required!;secretMessage</exception>
-        /// <remarks>
-        /// Adds overhead of (Optional-Payload + BlockSize(16) + Message +  HMac-Tag(16)) * 1.33 Base64
-        /// </remarks>
-        public string SimpleEncrypt(string secretMessage, byte[] key, byte[] nonSecretPayload = null)
-        {
-            if (string.IsNullOrEmpty(secretMessage))
-                throw new ArgumentException("Secret Message Required!", "secretMessage");
-
-            var plainText = _encoding.GetBytes(secretMessage);
-            var cipherText = SimpleEncrypt(plainText, key, nonSecretPayload);
-            return Convert.ToBase64String(cipherText);
-        }
-
-
-        /// <summary>
-        /// Simple Decryption & Authentication (AES-GCM) of a UTF8 Message
-        /// </summary>
-        /// <param name="encryptedMessage">The encrypted message.</param>
-        /// <param name="key">The key.</param>
-        /// <param name="nonSecretPayloadLength">Length of the optional non-secret payload.</param>
-        /// <returns>Decrypted Message</returns>
-        public string SimpleDecrypt(string encryptedMessage, byte[] key, int nonSecretPayloadLength = 0)
-        {
-            if (string.IsNullOrEmpty(encryptedMessage))
-                throw new ArgumentException("Encrypted Message Required!", "encryptedMessage");
-
-            var cipherText = Convert.FromBase64String(encryptedMessage);
-            var plainText = SimpleDecrypt(cipherText, key, nonSecretPayloadLength);
-            return plainText == null ? null : _encoding.GetString(plainText);
-        }
-
-        /// <summary>
-        /// Simple Encryption And Authentication (AES-GCM) of a UTF8 String
-        /// using key derived from a password (PBKDF2).
-        /// </summary>
-        /// <param name="secretMessage">The secret message.</param>
-        /// <param name="password">The password.</param>
-        /// <param name="nonSecretPayload">The non secret payload.</param>
-        /// <returns>
-        /// Encrypted Message
-        /// </returns>
-        /// <remarks>
-        /// Significantly less secure than using random binary keys.
-        /// Adds additional non secret payload for key generation parameters.
-        /// </remarks>
-        public string SimpleEncryptWithPassword(string secretMessage, string password,
-                                                       byte[] nonSecretPayload = null)
+        public string SimpleEncryptWithPassword(string secretMessage, string password, byte[] nonSecretPayload = null)
         {
             if (string.IsNullOrEmpty(secretMessage))
                 throw new ArgumentException("Secret Message Required!", "secretMessage");
@@ -144,43 +83,39 @@ namespace mRemoteNG.Security
             return Convert.ToBase64String(cipherText);
         }
 
-
-        /// <summary>
-        /// Simple Decryption and Authentication (AES-GCM) of a UTF8 message
-        /// using a key derived from a password (PBKDF2)
-        /// </summary>
-        /// <param name="encryptedMessage">The encrypted message.</param>
-        /// <param name="password">The password.</param>
-        /// <param name="nonSecretPayloadLength">Length of the non secret payload.</param>
-        /// <returns>
-        /// Decrypted Message
-        /// </returns>
-        /// <exception cref="System.ArgumentException">Encrypted Message Required!;encryptedMessage</exception>
-        /// <remarks>
-        /// Significantly less secure than using random binary keys.
-        /// </remarks>
-        public string SimpleDecryptWithPassword(string encryptedMessage, string password,
-                                                       int nonSecretPayloadLength = 0)
+        public byte[] SimpleEncryptWithPassword(byte[] secretMessage, string password, byte[] nonSecretPayload = null)
         {
-            if (string.IsNullOrWhiteSpace(encryptedMessage))
-                throw new ArgumentException("Encrypted Message Required!", "encryptedMessage");
+            nonSecretPayload = nonSecretPayload ?? new byte[] { };
 
-            var cipherText = Convert.FromBase64String(encryptedMessage);
-            var plainText = SimpleDecryptWithPassword(cipherText, password, nonSecretPayloadLength);
-            return plainText == null ? null : _encoding.GetString(plainText);
+            //User Error Checks
+            if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
+                throw new ArgumentException(String.Format("Must have a password of at least {0} characters!", MinPasswordLength), "password");
+
+            if (secretMessage == null || secretMessage.Length == 0)
+                throw new ArgumentException("Secret Message Required!", "secretMessage");
+
+            var generator = new Pkcs5S2ParametersGenerator();
+
+            //Use Random Salt to minimize pre-generated weak password attacks.
+            var salt = new byte[SaltBitSize / 8];
+            Random.NextBytes(salt);
+
+            generator.Init(
+                PbeParametersGenerator.Pkcs5PasswordToBytes(password.ToCharArray()),
+                salt,
+                Iterations);
+
+            //Generate Key
+            var key = (KeyParameter)generator.GenerateDerivedMacParameters(KeyBitSize);
+
+            //Create Full Non Secret Payload
+            var payload = new byte[salt.Length + nonSecretPayload.Length];
+            Array.Copy(nonSecretPayload, payload, nonSecretPayload.Length);
+            Array.Copy(salt, 0, payload, nonSecretPayload.Length, salt.Length);
+
+            return SimpleEncrypt(secretMessage, key.GetKey(), payload);
         }
 
-
-        /// <summary>
-        /// Simple Encryption And Authentication (AES-GCM) of a UTF8 string.
-        /// </summary>
-        /// <param name="secretMessage">The secret message.</param>
-        /// <param name="key">The key.</param>
-        /// <param name="nonSecretPayload">Optional non-secret payload.</param>
-        /// <returns>Encrypted Message</returns>
-        /// <remarks>
-        /// Adds overhead of (Optional-Payload + BlockSize(16) + Message +  HMac-Tag(16)) * 1.33 Base64
-        /// </remarks>
         public byte[] SimpleEncrypt(byte[] secretMessage, byte[] key, byte[] nonSecretPayload = null)
         {
             //User Error Checks
@@ -221,13 +156,50 @@ namespace mRemoteNG.Security
             }
         }
 
-        /// <summary>
-        /// Simple Decryption & Authentication (AES-GCM) of a UTF8 Message
-        /// </summary>
-        /// <param name="encryptedMessage">The encrypted message.</param>
-        /// <param name="key">The key.</param>
-        /// <param name="nonSecretPayloadLength">Length of the optional non-secret payload.</param>
-        /// <returns>Decrypted Message</returns>
+
+        public string Decrypt(string cipherText, SecureString decryptionKey)
+        {
+            var decryptedText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString());
+            return decryptedText;
+        }
+
+        public string SimpleDecryptWithPassword(string encryptedMessage, string password,
+                                                       int nonSecretPayloadLength = 0)
+        {
+            if (string.IsNullOrWhiteSpace(encryptedMessage))
+                throw new ArgumentException("Encrypted Message Required!", "encryptedMessage");
+
+            var cipherText = Convert.FromBase64String(encryptedMessage);
+            var plainText = SimpleDecryptWithPassword(cipherText, password, nonSecretPayloadLength);
+            return plainText == null ? null : _encoding.GetString(plainText);
+        }
+
+        public byte[] SimpleDecryptWithPassword(byte[] encryptedMessage, string password, int nonSecretPayloadLength = 0)
+        {
+            //User Error Checks
+            if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
+                throw new ArgumentException(String.Format("Must have a password of at least {0} characters!", MinPasswordLength), "password");
+
+            if (encryptedMessage == null || encryptedMessage.Length == 0)
+                throw new ArgumentException("Encrypted Message Required!", "encryptedMessage");
+
+            var generator = new Pkcs5S2ParametersGenerator();
+
+            //Grab Salt from Payload
+            var salt = new byte[SaltBitSize / 8];
+            Array.Copy(encryptedMessage, nonSecretPayloadLength, salt, 0, salt.Length);
+
+            generator.Init(
+                PbeParametersGenerator.Pkcs5PasswordToBytes(password.ToCharArray()),
+                salt,
+                Iterations);
+
+            //Generate Key
+            var key = (KeyParameter)generator.GenerateDerivedMacParameters(KeyBitSize);
+
+            return SimpleDecrypt(encryptedMessage, key.GetKey(), salt.Length + nonSecretPayloadLength);
+        }
+        
         public byte[] SimpleDecrypt(byte[] encryptedMessage, byte[] key, int nonSecretPayloadLength = 0)
         {
             //User Error Checks
@@ -266,95 +238,6 @@ namespace mRemoteNG.Security
 
                 return plainText;
             }
-
-        }
-
-        /// <summary>
-        /// Simple Encryption And Authentication (AES-GCM) of a UTF8 String
-        /// using key derived from a password.
-        /// </summary>
-        /// <param name="secretMessage">The secret message.</param>
-        /// <param name="password">The password.</param>
-        /// <param name="nonSecretPayload">The non secret payload.</param>
-        /// <returns>
-        /// Encrypted Message
-        /// </returns>
-        /// <exception cref="System.ArgumentException">Must have a password of minimum length;password</exception>
-        /// <remarks>
-        /// Significantly less secure than using random binary keys.
-        /// Adds additional non secret payload for key generation parameters.
-        /// </remarks>
-        public byte[] SimpleEncryptWithPassword(byte[] secretMessage, string password, byte[] nonSecretPayload = null)
-        {
-            nonSecretPayload = nonSecretPayload ?? new byte[] {};
-
-            //User Error Checks
-            if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
-                throw new ArgumentException(String.Format("Must have a password of at least {0} characters!", MinPasswordLength), "password");
-
-            if (secretMessage == null || secretMessage.Length == 0)
-                throw new ArgumentException("Secret Message Required!", "secretMessage");
-
-            var generator = new Pkcs5S2ParametersGenerator();
-
-            //Use Random Salt to minimize pre-generated weak password attacks.
-            var salt = new byte[SaltBitSize / 8];
-            Random.NextBytes(salt);
-
-            generator.Init(
-                PbeParametersGenerator.Pkcs5PasswordToBytes(password.ToCharArray()),
-                salt,
-                Iterations);
-
-            //Generate Key
-            var key = (KeyParameter)generator.GenerateDerivedMacParameters(KeyBitSize);
-
-            //Create Full Non Secret Payload
-            var payload = new byte[salt.Length + nonSecretPayload.Length];
-            Array.Copy(nonSecretPayload, payload, nonSecretPayload.Length);
-            Array.Copy(salt,0, payload,nonSecretPayload.Length, salt.Length);
-
-            return SimpleEncrypt(secretMessage, key.GetKey(), payload);
-        }
-
-        /// <summary>
-        /// Simple Decryption and Authentication of a UTF8 message
-        /// using a key derived from a password
-        /// </summary>
-        /// <param name="encryptedMessage">The encrypted message.</param>
-        /// <param name="password">The password.</param>
-        /// <param name="nonSecretPayloadLength">Length of the non secret payload.</param>
-        /// <returns>
-        /// Decrypted Message
-        /// </returns>
-        /// <exception cref="System.ArgumentException">Must have a password of minimum length;password</exception>
-        /// <remarks>
-        /// Significantly less secure than using random binary keys.
-        /// </remarks>
-        public byte[] SimpleDecryptWithPassword(byte[] encryptedMessage, string password, int nonSecretPayloadLength = 0)
-        {
-            //User Error Checks
-            if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)
-                throw new ArgumentException(String.Format("Must have a password of at least {0} characters!", MinPasswordLength), "password");
-
-            if (encryptedMessage == null || encryptedMessage.Length == 0)
-                throw new ArgumentException("Encrypted Message Required!", "encryptedMessage");
-
-            var generator = new Pkcs5S2ParametersGenerator();
-
-            //Grab Salt from Payload
-            var salt = new byte[SaltBitSize / 8];
-            Array.Copy(encryptedMessage, nonSecretPayloadLength, salt, 0, salt.Length);
-
-            generator.Init(
-                PbeParametersGenerator.Pkcs5PasswordToBytes(password.ToCharArray()),
-                salt,
-                Iterations);
-
-            //Generate Key
-            var key = (KeyParameter)generator.GenerateDerivedMacParameters(KeyBitSize);
-
-            return SimpleDecrypt(encryptedMessage, key.GetKey(), salt.Length + nonSecretPayloadLength);
         }
     }
 }
