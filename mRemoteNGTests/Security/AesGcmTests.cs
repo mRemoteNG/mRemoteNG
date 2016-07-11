@@ -15,7 +15,7 @@ namespace mRemoteNGTests.Security
         [SetUp]
         public void Setup()
         {
-            _aesgcm = new AESGCM<AesFastEngine>();
+            _aesgcm = new AESGCM();
             _encryptionKey = "mypassword111111".ConvertToSecureString();
             _plainText = "MySecret!";
         }
