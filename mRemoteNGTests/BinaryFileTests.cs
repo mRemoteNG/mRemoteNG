@@ -13,7 +13,7 @@ namespace mRemoteNGTests
             Assert.That(IsLargeAware(exePath), Is.True);
         }
 
-        static string GetTargetPath()
+        static string GetTargetPath([System.Runtime.CompilerServices.CallerFilePath] string sourceFilePath = "")
         {
             string debugOrRelease = "";
             string normalOrPortable = "";
@@ -27,8 +27,9 @@ namespace mRemoteNGTests
 #else
             normalOrPortable = "";
 #endif
-            string path = string.Format(".\\mRemoteV1\\bin\\{0}{1}\\mRemoteNG.exe", debugOrRelease, normalOrPortable);
-            return path;
+            var path = Path.GetDirectoryName(sourceFilePath);
+            string FilePath = $"{path}\\..\\mRemoteV1\\bin\\{debugOrRelease}{normalOrPortable}\\mRemoteNG.exe";
+            return FilePath;
         }
 
         static bool IsLargeAware(string file)
