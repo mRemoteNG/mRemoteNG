@@ -22,6 +22,7 @@ namespace mRemoteNG.Security
     {
         private readonly IBlockCipher _blockCipher;
         private IAeadBlockCipher _aeadBlockCipher;
+        private Encoding _encoding;
         private readonly SecureRandom Random = new SecureRandom();
 
         //Preconfigured Encryption Parameters
@@ -40,6 +41,28 @@ namespace mRemoteNG.Security
         {
             _blockCipher = new TBlockCipher();
             _aeadBlockCipher = new GcmBlockCipher(_blockCipher);
+            _encoding = Encoding.UTF8;
+        }
+
+        public AESGCM(Encoding encoding)
+        {
+            _blockCipher = new TBlockCipher();
+            _aeadBlockCipher = new GcmBlockCipher(_blockCipher);
+            _encoding = encoding;
+        }
+
+        public AESGCM(IAeadBlockCipher aeadBlockCipher)
+        {
+            _blockCipher = new TBlockCipher();
+            _aeadBlockCipher = aeadBlockCipher;
+            _encoding = Encoding.UTF8;
+        }
+
+        public AESGCM(IAeadBlockCipher aeadBlockCipher, Encoding encoding)
+        {
+            _blockCipher = new TBlockCipher();
+            _aeadBlockCipher = aeadBlockCipher;
+            _encoding = encoding;
         }
 
 
@@ -73,7 +96,7 @@ namespace mRemoteNG.Security
             if (string.IsNullOrEmpty(secretMessage))
                 throw new ArgumentException("Secret Message Required!", "secretMessage");
 
-            var plainText = Encoding.UTF8.GetBytes(secretMessage);
+            var plainText = _encoding.GetBytes(secretMessage);
             var cipherText = SimpleEncrypt(plainText, key, nonSecretPayload);
             return Convert.ToBase64String(cipherText);
         }
@@ -93,7 +116,7 @@ namespace mRemoteNG.Security
 
             var cipherText = Convert.FromBase64String(encryptedMessage);
             var plainText = SimpleDecrypt(cipherText, key, nonSecretPayloadLength);
-            return plainText == null ? null : Encoding.UTF8.GetString(plainText);
+            return plainText == null ? null : _encoding.GetString(plainText);
         }
 
         /// <summary>
@@ -116,7 +139,7 @@ namespace mRemoteNG.Security
             if (string.IsNullOrEmpty(secretMessage))
                 throw new ArgumentException("Secret Message Required!", "secretMessage");
 
-            var plainText = Encoding.UTF8.GetBytes(secretMessage);
+            var plainText = _encoding.GetBytes(secretMessage);
             var cipherText = SimpleEncryptWithPassword(plainText, password, nonSecretPayload);
             return Convert.ToBase64String(cipherText);
         }
@@ -144,7 +167,7 @@ namespace mRemoteNG.Security
 
             var cipherText = Convert.FromBase64String(encryptedMessage);
             var plainText = SimpleDecryptWithPassword(cipherText, password, nonSecretPayloadLength);
-            return plainText == null ? null : Encoding.UTF8.GetString(plainText);
+            return plainText == null ? null : _encoding.GetString(plainText);
         }
 
 
