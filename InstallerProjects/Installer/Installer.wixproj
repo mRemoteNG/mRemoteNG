@@ -135,9 +135,9 @@ IF EXIST C:\mRemoteNG_code_signing_cert.pfx (
 )
 
 REM Rename MSI to include version number
-powershell "&amp;""$(SolutionDir)Tools\rename_installer_with_version.ps1""" %27$(SolutionDir)%27 %27!(TargetPath)%27
+powershell -ExecutionPolicy Bypass -File "$(SolutionDir)Tools\rename_installer_with_version.ps1" $(SolutionDir)
 
 REM Copy MSI to Release folder
-IF %25buildenv: Portable=%25==Release (powershell "&amp;""$(SolutionDir)Tools\copy_release_installer.ps1""" %27$(TargetDir)%27 %27$(SolutionDir)Release%27)</PostBuildEvent>
+IF %25buildenv: Portable=%25==Release (powershell -ExecutionPolicy Bypass -File  "$(SolutionDir)Tools\copy_release_installer.ps1" $(TargetDir) $(SolutionDir)Release)</PostBuildEvent>
   </PropertyGroup>
 </Project>

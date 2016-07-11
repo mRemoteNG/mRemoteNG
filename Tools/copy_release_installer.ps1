@@ -1,6 +1,9 @@
 ﻿$sourcePath = $args[0]
 $destinationDir = $args[1]
 
+Write-Host $sourcePath
+Write-Host $destinationDir
+
 if (!(Test-Path -Path $destinationDir))
 {
     New-Item -Path $destinationDir -ItemType "directory"
