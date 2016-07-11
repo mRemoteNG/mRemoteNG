@@ -19,41 +19,41 @@ using Org.BouncyCastle.Security;
 namespace mRemoteNG.Security
 {
 
-    public static class AESGCM
+    public class AESGCM
     {
-        private static readonly SecureRandom Random = new SecureRandom();
+        private readonly SecureRandom Random = new SecureRandom();
 
         //Preconfigured Encryption Parameters
-        public static readonly int NonceBitSize = 128;
-        public static readonly int MacBitSize = 128;
-        public static readonly int KeyBitSize = 256;
+        public readonly int NonceBitSize = 128;
+        public readonly int MacBitSize = 128;
+        public readonly int KeyBitSize = 256;
 
         //Preconfigured Password Key Derivation Parameters
-        public static readonly int SaltBitSize = 128;
-        public static readonly int Iterations = 10000;
-        public static readonly int MinPasswordLength = 12;
+        public readonly int SaltBitSize = 128;
+        public readonly int Iterations = 10000;
+        public readonly int MinPasswordLength = 12;
 
-        public static int BlockSizeInBytes => 16;
+        public int BlockSizeInBytes => 16;
 
 
         /// <summary>
         /// Helper that generates a random new key on each call.
         /// </summary>
         /// <returns></returns>
-        public static byte[] NewKey()
+        public byte[] NewKey()
         {
             var key = new byte[KeyBitSize / 8];
             Random.NextBytes(key);
             return key;
         }
 
-        public static string Encrypt(string plainText, SecureString encryptionKey)
+        public string Encrypt(string plainText, SecureString encryptionKey)
         {
             var encryptedText = SimpleEncryptWithPassword(plainText, encryptionKey.ConvertToUnsecureString());
             return encryptedText;
         }
 
-        public static string Decrypt(string cipherText, SecureString decryptionKey)
+        public string Decrypt(string cipherText, SecureString decryptionKey)
         {
             var decryptedText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString());
             return decryptedText;
@@ -72,7 +72,7 @@ namespace mRemoteNG.Security
         /// <remarks>
         /// Adds overhead of (Optional-Payload + BlockSize(16) + Message +  HMac-Tag(16)) * 1.33 Base64
         /// </remarks>
-        public static string SimpleEncrypt(string secretMessage, byte[] key, byte[] nonSecretPayload = null)
+        public string SimpleEncrypt(string secretMessage, byte[] key, byte[] nonSecretPayload = null)
         {
             if (string.IsNullOrEmpty(secretMessage))
                 throw new ArgumentException("Secret Message Required!", "secretMessage");
@@ -90,7 +90,7 @@ namespace mRemoteNG.Security
         /// <param name="key">The key.</param>
         /// <param name="nonSecretPayloadLength">Length of the optional non-secret payload.</param>
         /// <returns>Decrypted Message</returns>
-        public static string SimpleDecrypt(string encryptedMessage, byte[] key, int nonSecretPayloadLength = 0)
+        public string SimpleDecrypt(string encryptedMessage, byte[] key, int nonSecretPayloadLength = 0)
         {
             if (string.IsNullOrEmpty(encryptedMessage))
                 throw new ArgumentException("Encrypted Message Required!", "encryptedMessage");
@@ -114,7 +114,7 @@ namespace mRemoteNG.Security
         /// Significantly less secure than using random binary keys.
         /// Adds additional non secret payload for key generation parameters.
         /// </remarks>
-        public static string SimpleEncryptWithPassword(string secretMessage, string password,
+        public string SimpleEncryptWithPassword(string secretMessage, string password,
                                                        byte[] nonSecretPayload = null)
         {
             if (string.IsNullOrEmpty(secretMessage))
@@ -140,7 +140,7 @@ namespace mRemoteNG.Security
         /// <remarks>
         /// Significantly less secure than using random binary keys.
         /// </remarks>
-        public static string SimpleDecryptWithPassword(string encryptedMessage, string password,
+        public string SimpleDecryptWithPassword(string encryptedMessage, string password,
                                                        int nonSecretPayloadLength = 0)
         {
             if (string.IsNullOrWhiteSpace(encryptedMessage))
@@ -162,7 +162,7 @@ namespace mRemoteNG.Security
         /// <remarks>
         /// Adds overhead of (Optional-Payload + BlockSize(16) + Message +  HMac-Tag(16)) * 1.33 Base64
         /// </remarks>
-        public static byte[] SimpleEncrypt(byte[] secretMessage, byte[] key, byte[] nonSecretPayload = null)
+        public byte[] SimpleEncrypt(byte[] secretMessage, byte[] key, byte[] nonSecretPayload = null)
         {
             //User Error Checks
             if (key == null || key.Length != KeyBitSize / 8)
@@ -210,7 +210,7 @@ namespace mRemoteNG.Security
         /// <param name="key">The key.</param>
         /// <param name="nonSecretPayloadLength">Length of the optional non-secret payload.</param>
         /// <returns>Decrypted Message</returns>
-        public static byte[] SimpleDecrypt(byte[] encryptedMessage, byte[] key, int nonSecretPayloadLength = 0)
+        public byte[] SimpleDecrypt(byte[] encryptedMessage, byte[] key, int nonSecretPayloadLength = 0)
         {
             //User Error Checks
             if (key == null || key.Length != KeyBitSize / 8)
@@ -268,7 +268,7 @@ namespace mRemoteNG.Security
         /// Significantly less secure than using random binary keys.
         /// Adds additional non secret payload for key generation parameters.
         /// </remarks>
-        public static byte[] SimpleEncryptWithPassword(byte[] secretMessage, string password, byte[] nonSecretPayload = null)
+        public byte[] SimpleEncryptWithPassword(byte[] secretMessage, string password, byte[] nonSecretPayload = null)
         {
             nonSecretPayload = nonSecretPayload ?? new byte[] {};
 
@@ -315,7 +315,7 @@ namespace mRemoteNG.Security
         /// <remarks>
         /// Significantly less secure than using random binary keys.
         /// </remarks>
-        public static byte[] SimpleDecryptWithPassword(byte[] encryptedMessage, string password, int nonSecretPayloadLength = 0)
+        public byte[] SimpleDecryptWithPassword(byte[] encryptedMessage, string password, int nonSecretPayloadLength = 0)
         {
             //User Error Checks
             if (string.IsNullOrWhiteSpace(password) || password.Length < MinPasswordLength)

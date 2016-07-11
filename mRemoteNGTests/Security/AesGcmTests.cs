@@ -7,12 +7,14 @@ namespace mRemoteNGTests.Security
 {
     public class AesGcmTests
     {
+        private AESGCM _aesgcm;
         private SecureString _encryptionKey;
         private string _plainText;
 
         [SetUp]
         public void Setup()
         {
+            _aesgcm = new AESGCM();
             _encryptionKey = "mypassword111111".ConvertToSecureString();
             _plainText = "MySecret!";
         }
@@ -25,29 +27,29 @@ namespace mRemoteNGTests.Security
         [Test]
         public void GetBlockSizeReturnsProperValueForAes()
         {
-            Assert.That(AESGCM.BlockSizeInBytes, Is.EqualTo(16));
+            Assert.That(_aesgcm.BlockSizeInBytes, Is.EqualTo(16));
         }
 
         [Test]
         public void EncryptionOutputsBase64String()
         {
-            var cipherText = AESGCM.Encrypt(_plainText, _encryptionKey);
+            var cipherText = _aesgcm.Encrypt(_plainText, _encryptionKey);
             Assert.That(cipherText.IsBase64String, Is.True);
         }
 
         [Test]
         public void DecryptedTextIsEqualToOriginalPlainText()
         {
-            var cipherText = AESGCM.Encrypt(_plainText, _encryptionKey);
-            var decryptedCipherText = AESGCM.Decrypt(cipherText, _encryptionKey);
+            var cipherText = _aesgcm.Encrypt(_plainText, _encryptionKey);
+            var decryptedCipherText = _aesgcm.Decrypt(cipherText, _encryptionKey);
             Assert.That(decryptedCipherText, Is.EqualTo(_plainText));
         }
 
         [Test]
         public void EncryptingTheSameValueReturnsNewCipherTextEachTime()
         {
-            var cipherText1 = AESGCM.Encrypt(_plainText, _encryptionKey);
-            var cipherText2 = AESGCM.Encrypt(_plainText, _encryptionKey);
+            var cipherText1 = _aesgcm.Encrypt(_plainText, _encryptionKey);
+            var cipherText2 = _aesgcm.Encrypt(_plainText, _encryptionKey);
             Assert.That(cipherText1, Is.Not.EqualTo(cipherText2));
         }
     }
