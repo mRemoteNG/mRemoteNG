@@ -49,25 +49,30 @@ namespace mRemoteNG.Security
         {
             try
             {
-                var inputBytes = Encoding.UTF8.GetBytes(input);
-                var iv = BuildInitializationVector(); //for the sake of demo
-
                 //Set up
+                var inputStringAsByteArray = Encoding.UTF8.GetBytes(input);
                 var cipher = new PaddedBufferedBlockCipher(_blockCipher);
-                var keyParam = new KeyParameter(Encoding.Default.GetBytes(key.ConvertToUnsecureString()));
-                var keyParamWithIv = new ParametersWithIV(keyParam, iv, 0, 16);
+                var keyParamWithIv = BuildKeyParameterWithIv(key);
 
                 // Encrypt/Decrypt
                 cipher.Init(forEncrypt, keyParamWithIv);
-                var outputBytes = new byte[cipher.GetOutputSize(inputBytes.Length)];
-                var length = cipher.ProcessBytes(inputBytes, outputBytes, 0);
-                cipher.DoFinal(outputBytes, length); //Do the final block
+                var outputBytes = new byte[cipher.GetOutputSize(inputStringAsByteArray.Length)];
+                var length = cipher.ProcessBytes(inputStringAsByteArray, outputBytes, 0);
+                cipher.DoFinal(outputBytes, length);
                 return outputBytes;
             }
             catch (CryptoException ex)
             {
                 throw new CryptoException("", ex);
             }
+        }
+
+        private ParametersWithIV BuildKeyParameterWithIv(SecureString key)
+        {
+            var iv = BuildInitializationVector();
+            var keyParam = new KeyParameter(Encoding.Default.GetBytes(key.ConvertToUnsecureString()));
+            var keyParamWithIv = new ParametersWithIV(keyParam, iv, 0, 16);
+            return keyParamWithIv;
         }
 
         private byte[] BuildInitializationVector()

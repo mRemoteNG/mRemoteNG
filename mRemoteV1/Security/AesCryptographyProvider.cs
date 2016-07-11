@@ -10,7 +10,7 @@ namespace mRemoteNG.Security
         private AesEngine _aesEngine;
         private readonly Encoding _encoding;
 
-        public int BlockSize => _aesEngine.GetBlockSize();
+        public int BlockSizeInBytes => _aesEngine.GetBlockSize();
 
         public AesCryptographyProvider()
         {

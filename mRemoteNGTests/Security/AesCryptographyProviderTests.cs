@@ -1,6 +1,9 @@
 ﻿using System.Security;
+using System.Text;
 using mRemoteNG.Security;
 using NUnit.Framework;
+using Org.BouncyCastle.Crypto.Digests;
+using Org.BouncyCastle.Crypto.Engines;
 
 
 namespace mRemoteNGTests.Security
@@ -26,7 +29,7 @@ namespace mRemoteNGTests.Security
         [Test]
         public void GetBlockSizeReturnsProperValueForAes()
         {
-            Assert.That(_aesCryptographyProvider.BlockSize, Is.EqualTo(16));
+            Assert.That(_aesCryptographyProvider.BlockSizeInBytes, Is.EqualTo(16));
         }
 
         [Test]
@@ -43,6 +46,16 @@ namespace mRemoteNGTests.Security
             var plainText = "MySecret!";
             var cipherText = _aesCryptographyProvider.Encrypt(plainText, _encryptionKey);
             var decryptedCipherText = _aesCryptographyProvider.Decrypt(cipherText, _encryptionKey);
+            Assert.That(decryptedCipherText, Is.EqualTo(plainText));
+        }
+
+        [Test]
+        public void EncryptorTest_DecryptedTextIsEqualToOriginalPlainText()
+        {
+            var plainText = "MySecret!";
+            var aes = new Encryptor<AesEngine, Sha256Digest>();
+            var cipherText = aes.Encrypt(plainText, _encryptionKey);
+            var decryptedCipherText = aes.Decrypt(cipherText, _encryptionKey);
             Assert.That(decryptedCipherText, Is.EqualTo(plainText));
         }
 
