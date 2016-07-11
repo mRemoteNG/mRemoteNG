@@ -1,5 +1,4 @@
 ﻿using System.Security;
-using System.Text;
 using mRemoteNG.Security;
 using NUnit.Framework;
 using Org.BouncyCastle.Crypto.Digests;
@@ -10,14 +9,16 @@ namespace mRemoteNGTests.Security
 {
     public class AesCryptographyProviderTests
     {
-        private AesCryptographyProvider _aesCryptographyProvider;
+        private ICryptographyProvider _aesCryptographyProvider;
         private SecureString _encryptionKey;
+        private string _plainText;
 
         [SetUp]
         public void Setup()
         {
-            _aesCryptographyProvider = new AesCryptographyProvider();
+            _aesCryptographyProvider = new Encryptor<AesEngine, Sha256Digest>();
             _encryptionKey = "mypassword111111".ConvertToSecureString();
+            _plainText = "MySecret!";
         }
 
         [TearDown]
@@ -35,36 +36,23 @@ namespace mRemoteNGTests.Security
         [Test]
         public void EncryptionOutputsBase64String()
         {
-            var plainText = "MySecret!";
-            var cipherText = _aesCryptographyProvider.Encrypt(plainText, _encryptionKey);
+            var cipherText = _aesCryptographyProvider.Encrypt(_plainText, _encryptionKey);
             Assert.That(cipherText.IsBase64String, Is.True);
         }
 
         [Test]
         public void DecryptedTextIsEqualToOriginalPlainText()
         {
-            var plainText = "MySecret!";
-            var cipherText = _aesCryptographyProvider.Encrypt(plainText, _encryptionKey);
+            var cipherText = _aesCryptographyProvider.Encrypt(_plainText, _encryptionKey);
             var decryptedCipherText = _aesCryptographyProvider.Decrypt(cipherText, _encryptionKey);
-            Assert.That(decryptedCipherText, Is.EqualTo(plainText));
-        }
-
-        [Test]
-        public void EncryptorTest_DecryptedTextIsEqualToOriginalPlainText()
-        {
-            var plainText = "MySecret!";
-            var aes = new Encryptor<AesEngine, Sha256Digest>();
-            var cipherText = aes.Encrypt(plainText, _encryptionKey);
-            var decryptedCipherText = aes.Decrypt(cipherText, _encryptionKey);
-            Assert.That(decryptedCipherText, Is.EqualTo(plainText));
+            Assert.That(decryptedCipherText, Is.EqualTo(_plainText));
         }
 
         [Test]
         public void EncryptingTheSameValueReturnsNewCipherTextEachTime()
         {
-            var plainText = "MySecret!";
-            var cipherText1 = _aesCryptographyProvider.Encrypt(plainText, _encryptionKey);
-            var cipherText2 = _aesCryptographyProvider.Encrypt(plainText, _encryptionKey);
+            var cipherText1 = _aesCryptographyProvider.Encrypt(_plainText, _encryptionKey);
+            var cipherText2 = _aesCryptographyProvider.Encrypt(_plainText, _encryptionKey);
             Assert.That(cipherText1, Is.Not.EqualTo(cipherText2));
         }
     }
