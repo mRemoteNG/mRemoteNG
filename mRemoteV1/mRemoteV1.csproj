@@ -168,7 +168,7 @@
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
     <Compile Include="Security\AesCryptographyProvider.cs" />
-    <Compile Include="Security\AESGCM.cs" />
+    <Compile Include="Security\AeadCryptographyProvider.cs" />
     <Compile Include="Security\BouncyCastleCryptographyEngine.cs" />
     <Compile Include="Security\Crypt.cs" />
     <Compile Include="Security\Encryptor.cs" />

@@ -19,7 +19,7 @@ using Org.BouncyCastle.Security;
 
 namespace mRemoteNG.Security
 {
-    public class AESGCM : ICryptographyProvider
+    public class AeadCryptographyProvider : ICryptographyProvider
     {
         private readonly IBlockCipher _blockCipher;
         private readonly IAeadBlockCipher _aeadBlockCipher;
@@ -38,25 +38,25 @@ namespace mRemoteNG.Security
 
         public int BlockSizeInBytes => _aeadBlockCipher.GetBlockSize();
 
-        public AESGCM()
+        public AeadCryptographyProvider()
         {
             _aeadBlockCipher = new GcmBlockCipher(new AesFastEngine());
             _encoding = Encoding.UTF8;
         }
 
-        public AESGCM(Encoding encoding)
+        public AeadCryptographyProvider(Encoding encoding)
         {
             _aeadBlockCipher = new GcmBlockCipher(new AesFastEngine());
             _encoding = encoding;
         }
 
-        public AESGCM(IAeadBlockCipher aeadBlockCipher)
+        public AeadCryptographyProvider(IAeadBlockCipher aeadBlockCipher)
         {
             _aeadBlockCipher = aeadBlockCipher;
             _encoding = Encoding.UTF8;
         }
 
-        public AESGCM(IAeadBlockCipher aeadBlockCipher, Encoding encoding)
+        public AeadCryptographyProvider(IAeadBlockCipher aeadBlockCipher, Encoding encoding)
         {
             _aeadBlockCipher = aeadBlockCipher;
             _encoding = encoding;

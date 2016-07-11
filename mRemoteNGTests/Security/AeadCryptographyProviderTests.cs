@@ -1,12 +1,11 @@
 ﻿using System.Security;
 using mRemoteNG.Security;
 using NUnit.Framework;
-using Org.BouncyCastle.Crypto.Engines;
 
 
 namespace mRemoteNGTests.Security
 {
-    public class AesGcmTests
+    public class AeadCryptographyProviderTests
     {
         private ICryptographyProvider _aesgcm;
         private SecureString _encryptionKey;
@@ -15,7 +14,7 @@ namespace mRemoteNGTests.Security
         [SetUp]
         public void Setup()
         {
-            _aesgcm = new AESGCM();
+            _aesgcm = new AeadCryptographyProvider();
             _encryptionKey = "mypassword111111".ConvertToSecureString();
             _plainText = "MySecret!";
         }
