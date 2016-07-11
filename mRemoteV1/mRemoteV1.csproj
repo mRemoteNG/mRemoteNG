@@ -46,6 +46,10 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Geckofx-Core, Version=45.0.19.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
       <HintPath>..\packages\Geckofx45.45.0.19.0\lib\net40\Geckofx-Core.dll</HintPath>
       <Private>True</Private>
@@ -163,6 +167,10 @@
     <Compile Include="Connection\Protocol\RDP\RDPVersions.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
+    <Compile Include="Security\AesCryptographyProvider.cs" />
+    <Compile Include="Security\BouncyCastleCryptographyEngine.cs" />
+    <Compile Include="Security\ICryptographyProvider.cs" />
+    <Compile Include="Security\SecureStringExtensions.cs" />
     <Compile Include="Tools\ArgumentParser.cs" />
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
