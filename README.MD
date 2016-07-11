@@ -1,7 +1,7 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/mRemoteNG.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=mRemoteNG)
 
 
-[![Join the chat at https://gitter.im/mRemoteNG/](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mRemoteNG)
+[![Join the chat at https://gitter.im/mRemoteNG/PublicChat/](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mRemoteNG/PublicChat)
 
 [![Build Status](http://ec2-52-39-111-114.us-west-2.compute.amazonaws.com:8080/buildStatus/icon?job=mRemoteNG/mRemoteNG/develop)](http://ec2-52-39-111-114.us-west-2.compute.amazonaws.com:8080/job/mRemoteNG/job/mRemoteNG/job/develop/)
 [![Github Releases (by Release)](https://img.shields.io/github/downloads/mRemoteNG/mRemoteNG/v1.74/total.svg)](https://github.com/mRemoteNG/mRemoteNG/releases/tag/v1.74)
