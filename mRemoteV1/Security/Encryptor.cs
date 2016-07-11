@@ -15,11 +15,14 @@ namespace mRemoteNG.Security
         where TBlockCipher : IBlockCipher, new()
         where TDigest : IDigest, new()
     {
-        private Encoding _encoding;
         private IBlockCipher _blockCipher;
+        private TDigest _digest;
+        private Encoding _encoding;
         private BufferedBlockCipher _cipher;
         private HMac _mac;
-        private TDigest _digest;
+        
+
+        public int BlockSizeInBytes => _blockCipher.GetBlockSize();
 
         public Encryptor()
         {
