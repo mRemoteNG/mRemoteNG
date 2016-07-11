@@ -19,7 +19,7 @@ using Org.BouncyCastle.Security;
 namespace mRemoteNG.Security
 {
 
-    public class AESGCM
+    public class AESGCM : ICryptographyProvider
     {
         private readonly SecureRandom Random = new SecureRandom();
 

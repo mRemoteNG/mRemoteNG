@@ -7,7 +7,7 @@ namespace mRemoteNGTests.Security
 {
     public class AesGcmTests
     {
-        private AESGCM _aesgcm;
+        private ICryptographyProvider _aesgcm;
         private SecureString _encryptionKey;
         private string _plainText;
 
@@ -22,6 +22,7 @@ namespace mRemoteNGTests.Security
         [TearDown]
         public void TearDown()
         {
+            _aesgcm = null;
         }
 
         [Test]
