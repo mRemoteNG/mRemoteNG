@@ -46,12 +46,12 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Geckofx-Core, Version=45.0.19.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
-      <HintPath>..\packages\Geckofx45.45.0.19.0\lib\net40\Geckofx-Core.dll</HintPath>
+    <Reference Include="Geckofx-Core, Version=45.0.20.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
+      <HintPath>..\packages\Geckofx45.45.0.20\lib\net40\Geckofx-Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Geckofx-Winforms, Version=45.0.19.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
-      <HintPath>..\packages\Geckofx45.45.0.19.0\lib\net40\Geckofx-Winforms.dll</HintPath>
+    <Reference Include="Geckofx-Winforms, Version=45.0.20.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
+      <HintPath>..\packages\Geckofx45.45.0.20\lib\net40\Geckofx-Winforms.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="mscorlib" />
@@ -93,12 +93,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>References\VncSharp.dll</HintPath>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.5.0.15095, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>References\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking, Version=2.9.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.2.10.0\lib\net40\WeifenLuo.WinFormsUI.Docking.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2012Light">
-      <HintPath>References\WeifenLuo.WinFormsUI.Docking.ThemeVS2012Light.dll</HintPath>
+    <Reference Include="WeifenLuo.WinFormsUI.Docking.ThemeVS2012Light, Version=2.9.0.0, Culture=neutral, PublicKeyToken=5cded1a1a0a7b481, processorArchitecture=MSIL">
+      <HintPath>..\packages\DockPanelSuite.ThemeVS2012Light.2.10.0\lib\net40\WeifenLuo.WinFormsUI.Docking.ThemeVS2012Light.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -1273,14 +1274,14 @@ IF %25buildenv: =%25==ReleasePortable ("$(SolutionDir)Tools\build-relport.cmd")<
   </Target>
   -->
   <Import Project="$(MSBuildBinPath)/Microsoft.CSharp.targets" />
-  <Import Project="..\packages\Geckofx45.45.0.19.0\build\Geckofx45.targets" Condition="Exists('..\packages\Geckofx45.45.0.19.0\build\Geckofx45.targets')" />
+  <PropertyGroup>
+    <PreBuildEvent>echo $(ConfigurationName) &gt; buildenv.tmp</PreBuildEvent>
+  </PropertyGroup>
+  <Import Project="..\packages\Geckofx45.45.0.20\build\Geckofx45.targets" Condition="Exists('..\packages\Geckofx45.45.0.20\build\Geckofx45.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\packages\Geckofx45.45.0.19.0\build\Geckofx45.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx45.45.0.19.0\build\Geckofx45.targets'))" />
+    <Error Condition="!Exists('..\packages\Geckofx45.45.0.20\build\Geckofx45.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Geckofx45.45.0.20\build\Geckofx45.targets'))" />
   </Target>
-  <PropertyGroup>
-    <PreBuildEvent>echo $(ConfigurationName) &gt; buildenv.tmp</PreBuildEvent>
-  </PropertyGroup>
 </Project>
