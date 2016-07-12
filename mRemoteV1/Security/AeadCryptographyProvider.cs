@@ -41,13 +41,13 @@ namespace mRemoteNG.Security
 
         public AeadCryptographyProvider()
         {
-            _aeadBlockCipher = new GcmBlockCipher(new AesFastEngine());
+            _aeadBlockCipher = new GcmBlockCipher(new AesEngine());
             _encoding = Encoding.UTF8;
         }
 
         public AeadCryptographyProvider(Encoding encoding)
         {
-            _aeadBlockCipher = new GcmBlockCipher(new AesFastEngine());
+            _aeadBlockCipher = new GcmBlockCipher(new AesEngine());
             _encoding = encoding;
         }
 
