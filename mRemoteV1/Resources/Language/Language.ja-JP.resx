@@ -179,7 +179,7 @@
     <value>Aspect</value>
   </data>
   <data name="strAutomaticallyGetSessionInfo" xml:space="preserve">
-    <value>Automatically get session information</value>
+    <value>セッション情報を自動的に取得する</value>
   </data>
   <data name="strAutoSaveEvery" xml:space="preserve">
     <value>自動保存の間隔：</value>
@@ -206,7 +206,7 @@
     <value>Default Inheritance</value>
   </data>
   <data name="strButtonDefaultProperties" xml:space="preserve">
-    <value>Default Properties</value>
+    <value>デフォルトのプロパティ</value>
   </data>
   <data name="strButtonDisconnect" xml:space="preserve">
     <value>切断</value>
@@ -286,7 +286,7 @@ Please use File - Load Connections for normal connection files!</value>
     <value>更新</value>
   </data>
   <data name="strCcCheckFailed" xml:space="preserve">
-    <value>Check failed!</value>
+    <value>確認に失敗しました</value>
   </data>
   <data name="strCcCheckSucceeded" xml:space="preserve">
     <value>Check succeeded!</value>
@@ -451,38 +451,39 @@ VncSharpNG Control Version {0}</value>
     <value>btnIcon_Clickがエラーを発生しました</value>
   </data>
   <data name="strConfigPropertyGridHideItemsFailed" xml:space="preserve">
-    <value>ShowHideGridItems failed!</value>
+    <value>ShowHideGridItemsがエラーを発生しました</value>
   </data>
   <data name="strConfigPropertyGridMenuClickFailed" xml:space="preserve">
-    <value>IconMenu_Click failed!</value>
+    <value>IconMenu_Clickがエラーを発生しました</value>
   </data>
   <data name="strConfigPropertyGridObjectFailed" xml:space="preserve">
-    <value>Property Grid object failed!</value>
+    <value>プロパティを表示するグリッドがエラーを発生しました</value>
   </data>
   <data name="strConfigPropertyGridSetHostStatusFailed" xml:space="preserve">
-    <value>SetHostStatus failed!</value>
+    <value>SetHostStatusがエラーを発生しました</value>
   </data>
   <data name="strConfigPropertyGridValueFailed" xml:space="preserve">
-    <value>pGrid_PopertyValueChanged failed!</value>
+    <value>pGrid_PopertyValueChangedがエラーを発生しました</value>
   </data>
   <data name="strConfigUiLoadFailed" xml:space="preserve">
-    <value>Config UI load failed!</value>
+    <value>Config UI loadがエラーを発生しました</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
     <value>接続「{0}」を切断しますか？</value>
     <comment>Do you want to close the connection, "{0}"?</comment>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
-    <value>Are you sure you want to close the panel, "{0}"? Any connections that it contains will also be closed.</value>
+    <value>パネル内で開いている接続も全て切断されますが、パネル「{0}」を閉じますか？</value>
   </data>
   <data name="strConfirmDeleteExternalTool" xml:space="preserve">
-    <value>Are you sure you want to delete the external tool, "{0}"?</value>
+    <value>外部ツール「{0}」を削除してもよろしいですか？</value>
   </data>
   <data name="strConfirmDeleteExternalToolMultiple" xml:space="preserve">
-    <value>Are you sure you want to delete the {0} selected external tools?</value>
+    <value>選択された外部ツール「{0}」を削除してもよろしいですか？</value>
   </data>
   <data name="strConfirmDeleteNodeConnection" xml:space="preserve">
-    <value>Are you sure you want to delete the connection, "{0}"?</value>
+    <value>接続「{0}」を削除してもよろしいですか？</value>
+    <comment>Are you sure you want to delete the connection, "{0}"?</comment>
   </data>
   <data name="strConfirmDeleteNodeFolder" xml:space="preserve">
     <value>空のフォルダ「{0}」削除してもよろしいですか？</value>
@@ -573,7 +574,8 @@ Starting with new connections file.</value>
     <value>接続イベントに失敗しました</value>
   </data>
   <data name="strConnenctionCloseEventFailed" xml:space="preserve">
-    <value>Connection Event Closed failed!</value>
+    <value />
+    <comment>Connection Event Closed failed!</comment>
   </data>
   <data name="strCouldNotCreateNewConnectionsFile" xml:space="preserve">
     <value>Couldn't create new connections file!</value>
@@ -630,10 +632,10 @@ Starting with new connections file.</value>
     <value>接続設定ファイルをすべて暗号化する</value>
   </data>
   <data name="strEndIP" xml:space="preserve">
-    <value>End IP</value>
+    <value>最終IPアドレス</value>
   </data>
   <data name="strEndPort" xml:space="preserve">
-    <value>End Port</value>
+    <value>最終ポート</value>
   </data>
   <data name="strErrorAddExternalToolsToToolBarFailed" xml:space="preserve">
     <value>AddExternalToolsToToolBar (frmMain) failed. {0}</value>
@@ -651,7 +653,7 @@ Starting with new connections file.</value>
     <value>エラーコード：{0}</value>
   </data>
   <data name="strErrorConnectionListSaveFailed" xml:space="preserve">
-    <value>The connection list could not be saved.</value>
+    <value>接続リストが保存できませんでした</value>
   </data>
   <data name="strErrorCouldNotLaunchPutty" xml:space="preserve">
     <value>PuTTYの実行に失敗しました</value>
@@ -700,7 +702,7 @@ See the Microsoft Support article at http://support.microsoft.com/kb/811833 for 
     <value>Export mRemote/mRemoteNG XML</value>
   </data>
   <data name="strExportProperties" xml:space="preserve">
-    <value>Export Properties</value>
+    <value>プロパティのエクスポート</value>
   </data>
   <data name="strExportSelectedConnection" xml:space="preserve">
     <value>Export the currently selected connection</value>
@@ -2033,16 +2035,20 @@ Message:
     <comment>Show full connections file path in window title</comment>
   </data>
   <data name="strShowLogonInfoOnTabs" xml:space="preserve">
-    <value>Show logon information on tab names</value>
+    <value>タブ名と一緒にログオン情報を表示する</value>
+    <comment>Show logon information on tab names</comment>
   </data>
   <data name="strShowProtocolOnTabs" xml:space="preserve">
-    <value>Show protocols on tab names</value>
+    <value>タブ名と一緒にプロトコルを表示する</value>
+    <comment>Show protocols on tab names</comment>
   </data>
   <data name="strSingleClickOnConnectionOpensIt" xml:space="preserve">
-    <value>Single click on connection opens it</value>
+    <value>ワンクリックで接続を開始する</value>
+    <comment>Single click on connection opens it</comment>
   </data>
   <data name="strSingleClickOnOpenConnectionSwitchesToIt" xml:space="preserve">
-    <value>Single click on opened connection switches to it</value>
+    <value />
+    <comment>Single click on opened connection switches to it</comment>
   </data>
   <data name="strSmartSizeModeAspect" xml:space="preserve">
     <value>Aspect</value>
@@ -2343,10 +2349,11 @@ mRemoteNGを終了してインストールを開始します</value>
     <value>Use a smart card</value>
   </data>
   <data name="strUseSQLServer" xml:space="preserve">
-    <value>Use SQL Server to load &amp;&amp; save connections</value>
+    <value>接続設定の保存にSQLサーバーを使用する</value>
+    <comment>Use SQL Server to load &amp;&amp; save connections</comment>
   </data>
   <data name="strVersion" xml:space="preserve">
-    <value>Version</value>
+    <value>バージョン</value>
   </data>
   <data name="strVisionAppRemoteDesktopCsv" xml:space="preserve">
     <value>visionapp Remote Desktop 2008 CSV</value>
@@ -2355,13 +2362,13 @@ mRemoteNGを終了してインストールを開始します</value>
     <value>VNC</value>
   </data>
   <data name="strVncConnectionDisconnectFailed" xml:space="preserve">
-    <value>VNC disconnect failed!</value>
+    <value>VNCの切断に失敗しました</value>
   </data>
   <data name="strVncConnectionOpenFailed" xml:space="preserve">
-    <value>Opening connection failed!</value>
+    <value>接続に失敗しました</value>
   </data>
   <data name="strVncRefreshFailed" xml:space="preserve">
-    <value>VNC Refresh Screen Failed!</value>
+    <value>VNCのスクリーンの更新に失敗しました</value>
   </data>
   <data name="strVncSendSpecialKeysFailed" xml:space="preserve">
     <value>VNC SendSpecialKeys failed!</value>
@@ -2382,7 +2389,7 @@ mRemoteNGを終了してインストールを開始します</value>
     <value>VNC Toggle ViewOnly Failed!</value>
   </data>
   <data name="strWarnIfAuthFails" xml:space="preserve">
-    <value>Warn me if authentication fails</value>
+    <value>認証に失敗した場合は警告する</value>
   </data>
   <data name="strWarnings" xml:space="preserve">
     <value>警告</value>
