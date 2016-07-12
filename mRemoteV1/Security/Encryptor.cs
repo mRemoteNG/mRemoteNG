@@ -24,6 +24,8 @@ namespace mRemoteNG.Security
 
         public int BlockSizeInBytes => _blockCipher.GetBlockSize();
 
+        public string CipherEngine => _blockCipher.AlgorithmName;
+
         public Encryptor()
         {
             _encoding = Encoding.UTF8;

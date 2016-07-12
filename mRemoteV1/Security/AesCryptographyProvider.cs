@@ -12,6 +12,8 @@ namespace mRemoteNG.Security
 
         public int BlockSizeInBytes => _aesEngine.GetBlockSize();
 
+        public string CipherEngine => _aesEngine.AlgorithmName;
+
         public AesCryptographyProvider()
         {
             _aesEngine = new AesEngine();

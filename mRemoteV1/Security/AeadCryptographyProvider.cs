@@ -37,6 +37,8 @@ namespace mRemoteNG.Security
 
         public int BlockSizeInBytes => _aeadBlockCipher.GetBlockSize();
 
+        public string CipherEngine => _aeadBlockCipher.AlgorithmName;
+
         public AeadCryptographyProvider()
         {
             _aeadBlockCipher = new GcmBlockCipher(new AesFastEngine());
