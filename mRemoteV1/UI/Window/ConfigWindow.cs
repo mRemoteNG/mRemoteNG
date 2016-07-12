@@ -179,7 +179,7 @@ namespace mRemoteNG.UI.Window
             Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
             HideOnClose = true;
             Icon = Resources.Config_Icon;
-            Name = $"Config";
+            Name = @"Config";
             TabText = @"Config";
             Text = @"Config";
             propertyGridContextMenu.ResumeLayout(false);
