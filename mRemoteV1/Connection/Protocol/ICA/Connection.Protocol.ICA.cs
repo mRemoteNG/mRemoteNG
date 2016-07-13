@@ -8,6 +8,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Tools;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
 
 

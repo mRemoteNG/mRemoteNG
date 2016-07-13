@@ -17,6 +17,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.TaskDialog;

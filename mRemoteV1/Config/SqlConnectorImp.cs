@@ -2,6 +2,7 @@
 using System;
 using System.Data.SqlClient;
 using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.Config
 {

@@ -6,8 +6,7 @@ using System.Text;
 using mRemoteNG.App;
 using mRemoteNG.Messages;
 
-
-namespace mRemoteNG.Security
+namespace mRemoteNG.Security.SymmetricEncryption
 {
 	public class LegacyRijndaelCryptographyProvider : ICryptographyProvider
 	{

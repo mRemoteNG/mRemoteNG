@@ -3,6 +3,7 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Config;
 using mRemoteNG.My;
 using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {

@@ -18,6 +18,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.TaskDialog;

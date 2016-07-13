@@ -1,4 +1,5 @@
 ﻿using System;
+using mRemoteNG.Security.SymmetricEncryption;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Engines;
 using Org.BouncyCastle.Crypto.Modes;

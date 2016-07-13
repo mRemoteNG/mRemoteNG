@@ -1,5 +1,6 @@
 ﻿using System.Security;
 using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 using NUnit.Framework;
 
 

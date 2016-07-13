@@ -8,6 +8,7 @@ using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
 using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 
 
 namespace mRemoteNG.Connection.Protocol

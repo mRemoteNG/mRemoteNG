@@ -9,6 +9,7 @@ using System.ComponentModel;
 using mRemoteNG.Messages;
 using mRemoteNG.App;
 using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 using MSTSCLib;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
