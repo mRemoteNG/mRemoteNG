@@ -104,7 +104,6 @@
     <Compile Include="Config\Connections\SqlUpdateQueryBuilderTest.cs" />
     <Compile Include="Config\Connections\SqlUpdateTimerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Security\AesCryptographyProviderTests.cs" />
     <Compile Include="Security\AeadCryptographyProviderTests.cs" />
     <Compile Include="Security\CryptographyProviderFactoryTests.cs" />
     <Compile Include="Security\LegacyRijndaelCryptographyProviderTests.cs" />
