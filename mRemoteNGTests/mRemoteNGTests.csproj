@@ -106,6 +106,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AeadCryptographyProviderTests.cs" />
     <Compile Include="Security\CryptographyProviderFactoryTests.cs" />
+    <Compile Include="Security\EncryptedSecureStringTests.cs" />
     <Compile Include="Security\LegacyRijndaelCryptographyProviderTests.cs" />
     <Compile Include="UI\Controls\CustomListViewTests.cs" />
     <Compile Include="UI\Controls\TestForm.cs">
