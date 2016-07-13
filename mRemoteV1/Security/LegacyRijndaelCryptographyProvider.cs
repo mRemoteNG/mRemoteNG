@@ -73,26 +73,32 @@ namespace mRemoteNG.Security
                 var plaintext = "";
 
                 using (var rijndaelManaged = new RijndaelManaged())
-                using (var md5 = new MD5CryptoServiceProvider())
                 {
-                    var key = md5.ComputeHash(Encoding.UTF8.GetBytes(password.ConvertToUnsecureString()));
-                    rijndaelManaged.Key = key;
+                    using (var md5 = new MD5CryptoServiceProvider())
+                    {
+                        var key = md5.ComputeHash(Encoding.UTF8.GetBytes(password.ConvertToUnsecureString()));
+                        rijndaelManaged.Key = key;
+                    }
+
                     var ciphertext = Convert.FromBase64String(ciphertextBase64);
 
                     using (var memoryStream = new MemoryStream(ciphertext))
-                    using (var cryptoStream = new CryptoStream(memoryStream, rijndaelManaged.CreateDecryptor(), CryptoStreamMode.Read))
-                    using (var streamReader = new StreamReader(cryptoStream, Encoding.UTF8, true))
                     {
                         var iv = new byte[BlockSizeInBytes];
-                        memoryStream.Read(iv, 0, BlockSizeInBytes);
+                        memoryStream.Read(iv, 0, iv.Length);
                         rijndaelManaged.IV = iv;
-                        plaintext = streamReader.ReadToEnd();
-                        rijndaelManaged.Clear();
-                    }
-                }
 
-			    return plaintext;
-			}
+                        using (var cryptoStream = new CryptoStream(memoryStream, rijndaelManaged.CreateDecryptor(), CryptoStreamMode.Read))
+                        using (var streamReader = new StreamReader(cryptoStream, Encoding.UTF8, true))
+                        {
+                            plaintext = streamReader.ReadToEnd();
+                            rijndaelManaged.Clear();
+                        }
+                    } // memoryStream
+                } // rijndaelManaged
+
+                return plaintext;
+            }
 			catch (Exception ex)
 			{
 				// Ignore CryptographicException "Padding is invalid and cannot be removed." when password is incorrect.
