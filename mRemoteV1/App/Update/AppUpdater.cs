@@ -6,6 +6,7 @@ using System.Threading;
 using mRemoteNG.Tools;
 using System.Reflection;
 using mRemoteNG.App.Info;
+using mRemoteNG.Security;
 
 
 namespace mRemoteNG.App.Update
@@ -107,7 +108,15 @@ namespace mRemoteNG.App.Update
 			
 		public void SetProxySettings()
 		{
-			SetProxySettings(Convert.ToBoolean(Settings.Default.UpdateUseProxy), Convert.ToString(Settings.Default.UpdateProxyAddress), Convert.ToInt32(Settings.Default.UpdateProxyPort), Convert.ToBoolean(Settings.Default.UpdateProxyUseAuthentication), Convert.ToString(Settings.Default.UpdateProxyAuthUser), Security.LegacyRijndaelCryptographyProvider.Decrypt(Convert.ToString(Settings.Default.UpdateProxyAuthPass), GeneralAppInfo.EncryptionKey));
+		    var shouldWeUseProxy = Settings.Default.UpdateUseProxy;
+		    var proxyAddress = Settings.Default.UpdateProxyAddress;
+		    var port = Settings.Default.UpdateProxyPort;
+		    var useAuthentication = Settings.Default.UpdateProxyUseAuthentication;
+		    var username = Settings.Default.UpdateProxyAuthUser;
+            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+		    var password = cryptographyProvider.Decrypt(Settings.Default.UpdateProxyAuthPass, GeneralAppInfo.EncryptionKey);
+
+            SetProxySettings(shouldWeUseProxy, proxyAddress, port, useAuthentication, username, password);
 		}
 			
 		public void SetProxySettings(bool useProxy, string address, int port, bool useAuthentication, string username, string password)

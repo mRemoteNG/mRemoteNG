@@ -8,6 +8,7 @@ using System.Threading;
 using System.ComponentModel;
 using mRemoteNG.Messages;
 using mRemoteNG.App;
+using mRemoteNG.Security;
 using MSTSCLib;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
@@ -438,7 +439,8 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					{
 						if (Settings.Default.DefaultPassword != "")
 						{
-							_rdpClient.AdvancedSettings2.ClearTextPassword = Security.LegacyRijndaelCryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
+                            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+                            _rdpClient.AdvancedSettings2.ClearTextPassword = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
 						}
 					}
 				}

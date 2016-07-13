@@ -62,8 +62,9 @@ namespace mRemoteNG.Config.Settings
                 }
                 mRemoteNG.Settings.Default.QuickyTBVisible = with1.tsQuickConnect.Visible;
 
+                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
                 mRemoteNG.Settings.Default.ConDefaultPassword =
-                    LegacyRijndaelCryptographyProvider.Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword), GeneralAppInfo.EncryptionKey);
+                    cryptographyProvider.Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword), GeneralAppInfo.EncryptionKey);
 
                 mRemoteNG.Settings.Default.Save();
 

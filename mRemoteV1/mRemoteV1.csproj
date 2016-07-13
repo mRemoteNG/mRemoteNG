@@ -170,7 +170,7 @@
     <Compile Include="Security\BlockCipherEngines.cs" />
     <Compile Include="Security\BlockCipherModes.cs" />
     <Compile Include="Security\AeadCryptographyProvider.cs" />
-    <Compile Include="Security\Crypt.cs" />
+    <Compile Include="Security\LegacyRijndaelCryptographyProvider.cs" />
     <Compile Include="Security\Encryptor.cs" />
     <Compile Include="Security\ICryptographyProvider.cs" />
     <Compile Include="Security\SecureStringExtensions.cs" />

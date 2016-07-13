@@ -10,7 +10,7 @@ namespace mRemoteNG.Security
 {
 	public class LegacyRijndaelCryptographyProvider
 	{
-		public static string Encrypt(string strToEncrypt, string strSecret)
+		public string Encrypt(string strToEncrypt, string strSecret)
 		{
 			if (strToEncrypt == "" || strSecret == "")
 			{
@@ -53,7 +53,7 @@ namespace mRemoteNG.Security
 			return strToEncrypt;
 		}
 			
-		public static string Decrypt(string ciphertextBase64, string password)
+		public string Decrypt(string ciphertextBase64, string password)
 		{
 			if (string.IsNullOrEmpty(ciphertextBase64) || string.IsNullOrEmpty(password))
 				return ciphertextBase64;

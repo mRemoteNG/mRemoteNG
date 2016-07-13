@@ -42,7 +42,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             txtSQLServer.Text = mRemoteNG.Settings.Default.SQLHost;
             txtSQLDatabaseName.Text = mRemoteNG.Settings.Default.SQLDatabaseName;
             txtSQLUsername.Text = mRemoteNG.Settings.Default.SQLUser;
-            txtSQLPassword.Text = LegacyRijndaelCryptographyProvider.Decrypt(mRemoteNG.Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey);
+            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            txtSQLPassword.Text = cryptographyProvider.Decrypt(Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey);
         }
 
         public override void SaveSettings()
@@ -53,7 +54,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             mRemoteNG.Settings.Default.SQLHost = txtSQLServer.Text;
             mRemoteNG.Settings.Default.SQLDatabaseName = txtSQLDatabaseName.Text;
             mRemoteNG.Settings.Default.SQLUser = txtSQLUsername.Text;
-            mRemoteNG.Settings.Default.SQLPass = LegacyRijndaelCryptographyProvider.Encrypt(txtSQLPassword.Text, GeneralAppInfo.EncryptionKey);
+            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            mRemoteNG.Settings.Default.SQLPass = cryptographyProvider.Encrypt(txtSQLPassword.Text, GeneralAppInfo.EncryptionKey);
             ReinitializeSqlUpdater();
         }
 
