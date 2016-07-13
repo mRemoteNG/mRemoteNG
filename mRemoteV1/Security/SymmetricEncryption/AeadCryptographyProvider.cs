@@ -17,7 +17,7 @@ using Org.BouncyCastle.Crypto.Modes;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 
-namespace mRemoteNG.Security
+namespace mRemoteNG.Security.SymmetricEncryption
 {
     public class AeadCryptographyProvider : ICryptographyProvider
     {
