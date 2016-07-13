@@ -1,7 +1,6 @@
 ﻿using mRemoteNG.Security;
 using NUnit.Framework;
-using Org.BouncyCastle.Crypto.Engines;
-using Org.BouncyCastle.Crypto.Modes;
+
 
 namespace mRemoteNGTests.Security
 {
@@ -101,6 +100,13 @@ namespace mRemoteNGTests.Security
             var mode = BlockCipherModes.GCM;
             var cryptoProvider = _cryptographyProviderFactory.CreateAeadCryptographyProvider(engine, mode);
             Assert.That(cryptoProvider.CipherEngine, Is.EqualTo($"{engine}/{mode}"));
+        }
+
+        [Test]
+        public void CanCreateLegacyRijndael()
+        {
+            var cryptoProvider = _cryptographyProviderFactory.CreateLegacyRijndaelCryptographyProvider();
+            Assert.That(cryptoProvider.CipherEngine, Is.EqualTo("Rijndael"));
         }
     }
 }

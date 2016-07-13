@@ -14,6 +14,11 @@ namespace mRemoteNG.Security
             return new AeadCryptographyProvider(cipher);
         }
 
+        public ICryptographyProvider CreateLegacyRijndaelCryptographyProvider()
+        {
+            return new LegacyRijndaelCryptographyProvider();
+        }
+
         private IBlockCipher ChooseBlockCipherEngine(BlockCipherEngines engine)
         {
             switch (engine)
