@@ -67,7 +67,7 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetConDefaultPassword()
         {
-            mRemoteNG.Settings.Default.ConDefaultPassword = Security.Crypt.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, GeneralAppInfo.EncryptionKey);
+            mRemoteNG.Settings.Default.ConDefaultPassword = Security.LegacyRijndaelCryptographyProvider.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, GeneralAppInfo.EncryptionKey);
         }
 
         private static void SetAlwaysShowPanelTabs()

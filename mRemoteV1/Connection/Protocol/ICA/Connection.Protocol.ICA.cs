@@ -172,7 +172,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 					{
 						if (mRemoteNG.Settings.Default.DefaultPassword != "")
 						{
-							_ICAClient.SetProp("ClearPassword", Security.Crypt.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey));
+							_ICAClient.SetProp("ClearPassword", Security.LegacyRijndaelCryptographyProvider.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey));
 						}
 					}
 				}

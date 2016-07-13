@@ -54,7 +54,7 @@ namespace mRemoteNG.Config
             _sqlHost = mRemoteNG.Settings.Default.SQLHost;
             _sqlCatalog = mRemoteNG.Settings.Default.SQLDatabaseName;
             _sqlUsername = mRemoteNG.Settings.Default.SQLUser;
-            _sqlPassword = Security.Crypt.Decrypt(mRemoteNG.Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey);
+            _sqlPassword = Security.LegacyRijndaelCryptographyProvider.Decrypt(mRemoteNG.Settings.Default.SQLPass, GeneralAppInfo.EncryptionKey);
         }
 
         public void Connect()

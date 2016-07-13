@@ -8,7 +8,7 @@ using mRemoteNG.Messages;
 
 namespace mRemoteNG.Security
 {
-	public class Crypt
+	public class LegacyRijndaelCryptographyProvider
 	{
 		public static string Encrypt(string strToEncrypt, string strSecret)
 		{

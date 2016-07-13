@@ -98,7 +98,7 @@ namespace mRemoteNG.Connection.Protocol
 						{
 							if (Settings.Default.EmptyCredentials == "custom")
 							{
-								password = Security.Crypt.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
+								password = Security.LegacyRijndaelCryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
 							}
 						}
 								

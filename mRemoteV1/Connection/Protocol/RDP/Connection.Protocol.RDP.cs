@@ -438,7 +438,7 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					{
 						if (Settings.Default.DefaultPassword != "")
 						{
-							_rdpClient.AdvancedSettings2.ClearTextPassword = Security.Crypt.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
+							_rdpClient.AdvancedSettings2.ClearTextPassword = Security.LegacyRijndaelCryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
 						}
 					}
 				}

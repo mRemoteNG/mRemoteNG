@@ -76,7 +76,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             txtCredentialsUsername.Text = Convert.ToString(mRemoteNG.Settings.Default.DefaultUsername);
-            txtCredentialsPassword.Text = Crypt.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.DefaultPassword),
+            txtCredentialsPassword.Text = LegacyRijndaelCryptographyProvider.Decrypt(Convert.ToString(mRemoteNG.Settings.Default.DefaultPassword),
                 GeneralAppInfo.EncryptionKey);
             txtCredentialsDomain.Text = Convert.ToString(mRemoteNG.Settings.Default.DefaultDomain);
 
@@ -132,7 +132,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
 
             mRemoteNG.Settings.Default.DefaultUsername = txtCredentialsUsername.Text;
-            mRemoteNG.Settings.Default.DefaultPassword = Crypt.Encrypt(txtCredentialsPassword.Text, GeneralAppInfo.EncryptionKey);
+            mRemoteNG.Settings.Default.DefaultPassword = LegacyRijndaelCryptographyProvider.Encrypt(txtCredentialsPassword.Text, GeneralAppInfo.EncryptionKey);
             mRemoteNG.Settings.Default.DefaultDomain = txtCredentialsDomain.Text;
 
             if (radCloseWarnAll.Checked)

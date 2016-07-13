@@ -107,7 +107,7 @@ namespace mRemoteNG.App.Update
 			
 		public void SetProxySettings()
 		{
-			SetProxySettings(Convert.ToBoolean(Settings.Default.UpdateUseProxy), Convert.ToString(Settings.Default.UpdateProxyAddress), Convert.ToInt32(Settings.Default.UpdateProxyPort), Convert.ToBoolean(Settings.Default.UpdateProxyUseAuthentication), Convert.ToString(Settings.Default.UpdateProxyAuthUser), Security.Crypt.Decrypt(Convert.ToString(Settings.Default.UpdateProxyAuthPass), GeneralAppInfo.EncryptionKey));
+			SetProxySettings(Convert.ToBoolean(Settings.Default.UpdateUseProxy), Convert.ToString(Settings.Default.UpdateProxyAddress), Convert.ToInt32(Settings.Default.UpdateProxyPort), Convert.ToBoolean(Settings.Default.UpdateProxyUseAuthentication), Convert.ToString(Settings.Default.UpdateProxyAuthUser), Security.LegacyRijndaelCryptographyProvider.Decrypt(Convert.ToString(Settings.Default.UpdateProxyAuthPass), GeneralAppInfo.EncryptionKey));
 		}
 			
 		public void SetProxySettings(bool useProxy, string address, int port, bool useAuthentication, string username, string password)

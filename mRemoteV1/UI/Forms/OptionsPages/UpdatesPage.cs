@@ -100,7 +100,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkUseProxyAuthentication.Checked = Convert.ToBoolean(Settings.Default.UpdateProxyUseAuthentication);
             pnlProxyAuthentication.Enabled = Convert.ToBoolean(Settings.Default.UpdateProxyUseAuthentication);
             txtProxyUsername.Text = Convert.ToString(Settings.Default.UpdateProxyAuthUser);
-            txtProxyPassword.Text = Crypt.Decrypt(Convert.ToString(Settings.Default.UpdateProxyAuthPass),
+            txtProxyPassword.Text = LegacyRijndaelCryptographyProvider.Decrypt(Convert.ToString(Settings.Default.UpdateProxyAuthPass),
                 GeneralAppInfo.EncryptionKey);
 
             btnTestProxy.Enabled = Convert.ToBoolean(Settings.Default.UpdateUseProxy);
@@ -140,7 +140,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
             Settings.Default.UpdateProxyUseAuthentication = chkUseProxyAuthentication.Checked;
             Settings.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
-            Settings.Default.UpdateProxyAuthPass = Crypt.Encrypt(txtProxyPassword.Text, GeneralAppInfo.EncryptionKey);
+            Settings.Default.UpdateProxyAuthPass = LegacyRijndaelCryptographyProvider.Encrypt(txtProxyPassword.Text, GeneralAppInfo.EncryptionKey);
         }
 
         #endregion

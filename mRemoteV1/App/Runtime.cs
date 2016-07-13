@@ -489,7 +489,7 @@ namespace mRemoteNG.App
                 connectionsLoader.SQLHost = Settings.Default.SQLHost;
                 connectionsLoader.SQLDatabaseName = Settings.Default.SQLDatabaseName;
                 connectionsLoader.SQLUsername = Settings.Default.SQLUser;
-                connectionsLoader.SQLPassword = Security.Crypt.Decrypt(Convert.ToString(Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
+                connectionsLoader.SQLPassword = Security.LegacyRijndaelCryptographyProvider.Decrypt(Convert.ToString(Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
                 connectionsLoader.SQLUpdate = update;
                 connectionsLoader.LoadConnections(false);
 
@@ -692,7 +692,7 @@ namespace mRemoteNG.App
                     conS.SQLHost = Convert.ToString(Settings.Default.SQLHost);
                     conS.SQLDatabaseName = Convert.ToString(Settings.Default.SQLDatabaseName);
                     conS.SQLUsername = Convert.ToString(Settings.Default.SQLUser);
-                    conS.SQLPassword = Security.Crypt.Decrypt(Convert.ToString(Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
+                    conS.SQLPassword = Security.LegacyRijndaelCryptographyProvider.Decrypt(Convert.ToString(Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
                 }
 
                 conS.SaveConnections();
