@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Security;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -37,7 +38,7 @@ namespace mRemoteNG.Config.Connections
 				
         #region Private Properties
 		private XmlTextWriter _xmlTextWriter;
-		private string _password = "mR3m";
+		private SecureString _password = GeneralAppInfo.EncryptionKey;
 				
 		private SqlConnection _sqlConnection;
 		private SqlCommand _sqlQuery;
@@ -192,7 +193,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if (((RootNodeInfo) tN.Tag).Password)
 				{
-					_password = Convert.ToString(((RootNodeInfo) tN.Tag).PasswordString);
+					_password = Convert.ToString(((RootNodeInfo) tN.Tag).PasswordString).ConvertToSecureString();
 					strProtected = cryptographyProvider.Encrypt("ThisIsProtected", _password);
 				}
 				else
@@ -593,7 +594,7 @@ namespace mRemoteNG.Config.Connections
 				{
 					if (((RootNodeInfo) treeNode.Tag).Password)
 					{
-						_password = Convert.ToString(((RootNodeInfo) treeNode.Tag).PasswordString);
+						_password = Convert.ToString(((RootNodeInfo) treeNode.Tag).PasswordString).ConvertToSecureString();
 						_xmlTextWriter.WriteAttributeString("Protected", "", cryptographyProvider.Encrypt("ThisIsProtected", _password));
 					}
 					else

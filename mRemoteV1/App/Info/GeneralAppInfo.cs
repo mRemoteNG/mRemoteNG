@@ -2,8 +2,10 @@ using System.Collections.Generic;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Security;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Security;
 using static System.Environment;
 
 
@@ -19,7 +21,7 @@ namespace mRemoteNG.App.Info
         public static readonly string ProdName = Application.ProductName;
         public static readonly string copyright = ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false)).Copyright;
         public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
-		public static readonly string EncryptionKey = "mR3m";
+		public static readonly SecureString EncryptionKey = "mR3m".ConvertToSecureString();
 		public static string ReportingFilePath = "";
 		public static readonly string PuttyPath = HomePath + "\\PuTTYNG.exe";
         public static string UserAgent

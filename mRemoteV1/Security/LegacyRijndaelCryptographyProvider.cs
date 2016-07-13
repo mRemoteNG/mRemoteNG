@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Security;
 using System.Security.Cryptography;
 using System.Text;
 using mRemoteNG.App;
@@ -8,21 +9,30 @@ using mRemoteNG.Messages;
 
 namespace mRemoteNG.Security
 {
-	public class LegacyRijndaelCryptographyProvider
+	public class LegacyRijndaelCryptographyProvider : ICryptographyProvider
 	{
-		public string Encrypt(string strToEncrypt, string strSecret)
+        public int BlockSizeInBytes { get; }
+
+        public string CipherEngine { get; }
+
+	    public LegacyRijndaelCryptographyProvider()
+	    {
+	        CipherEngine = "Rijndael";
+	        BlockSizeInBytes = 16;
+	    }
+
+
+        public string Encrypt(string strToEncrypt, SecureString strSecret)
 		{
-			if (strToEncrypt == "" || strSecret == "")
-			{
+			if (strToEncrypt == "" || strSecret.Length == 0)
 				return strToEncrypt;
-			}
 			
 			try
 			{
 				var rd = new RijndaelManaged();
 
                 var md5 = new MD5CryptoServiceProvider();
-                var key = md5.ComputeHash(Encoding.UTF8.GetBytes(strSecret));
+                var key = md5.ComputeHash(Encoding.UTF8.GetBytes(strSecret.ConvertToUnsecureString()));
 					
 				md5.Clear();
 				rd.Key = key;
@@ -53,9 +63,9 @@ namespace mRemoteNG.Security
 			return strToEncrypt;
 		}
 			
-		public string Decrypt(string ciphertextBase64, string password)
+		public string Decrypt(string ciphertextBase64, SecureString password)
 		{
-			if (string.IsNullOrEmpty(ciphertextBase64) || string.IsNullOrEmpty(password))
+			if (string.IsNullOrEmpty(ciphertextBase64) || password.Length == 0)
 				return ciphertextBase64;
 				
 			try
@@ -65,7 +75,7 @@ namespace mRemoteNG.Security
                 using (var rijndaelManaged = new RijndaelManaged())
                 using (var md5 = new MD5CryptoServiceProvider())
                 {
-                    var key = md5.ComputeHash(Encoding.UTF8.GetBytes(password));
+                    var key = md5.ComputeHash(Encoding.UTF8.GetBytes(password.ConvertToUnsecureString()));
                     rijndaelManaged.Key = key;
                     var ciphertext = Convert.FromBase64String(ciphertextBase64);
 
@@ -73,9 +83,8 @@ namespace mRemoteNG.Security
                     using (var cryptoStream = new CryptoStream(memoryStream, rijndaelManaged.CreateDecryptor(), CryptoStreamMode.Read))
                     using (var streamReader = new StreamReader(cryptoStream, Encoding.UTF8, true))
                     {
-                        const int ivLength = 16;
-                        var iv = new byte[ivLength - 1 + 1];
-                        memoryStream.Read(iv, 0, ivLength);
+                        var iv = new byte[BlockSizeInBytes];
+                        memoryStream.Read(iv, 0, BlockSizeInBytes);
                         rijndaelManaged.IV = iv;
                         plaintext = streamReader.ReadToEnd();
                         rijndaelManaged.Clear();

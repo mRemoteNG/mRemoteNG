@@ -12,6 +12,7 @@ using System.Drawing;
 using System.IO;
 using System.Net.NetworkInformation;
 using System.Windows.Forms;
+using mRemoteNG.Security;
 using mRemoteNG.UI.Controls.FilteredPropertyGrid;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -775,10 +776,10 @@ namespace mRemoteNG.UI.Window
                                     passwordName = Path.GetFileName(Runtime.GetStartupConnectionFileName());
 
                                 var password = MiscTools.PasswordDialog(passwordName);
-                                if (string.IsNullOrEmpty(password))
+                                if (password.Length == 0)
                                     rootInfo.Password = false;
                                 else
-                                    rootInfo.PasswordString = password;
+                                    rootInfo.PasswordString = password.ConvertToUnsecureString();
                             }
                             break;
                         case "Name":

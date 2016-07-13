@@ -8,8 +8,10 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
+using System.Security;
 using System.Windows.Forms;
 using System.Xml;
+using mRemoteNG.App.Info;
 using mRemoteNG.Tree;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -26,7 +28,7 @@ namespace mRemoteNG.Config.Connections
         #region Private Properties
 		private XmlDocument xDom;
 		private double confVersion;
-		private string pW = "mR3m";
+		private SecureString pW = GeneralAppInfo.EncryptionKey;
 		private SqlConnection sqlCon;
 		private SqlCommand sqlQuery;
 		private SqlDataReader sqlRd;
@@ -1252,7 +1254,7 @@ namespace mRemoteNG.Config.Connections
 				{
 					pW = Tools.MiscTools.PasswordDialog(passwordName, false);
 							
-					if (string.IsNullOrEmpty(pW))
+					if (pW.Length == 0)
 					{
 						return false;
 					}
@@ -1264,7 +1266,7 @@ namespace mRemoteNG.Config.Connections
 				{
 					pW = Tools.MiscTools.PasswordDialog(passwordName, false);
 							
-					if (string.IsNullOrEmpty(pW))
+					if (pW.Length == 0)
 					{
 						return false;
 					}
@@ -1273,7 +1275,7 @@ namespace mRemoteNG.Config.Connections
 				if (rootInfo != null)
 				{
 					rootInfo.Password = true;
-					rootInfo.PasswordString = pW;
+					rootInfo.PasswordString = pW.ConvertToUnsecureString();
 				}
 			}
 					
