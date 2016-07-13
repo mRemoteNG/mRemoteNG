@@ -351,7 +351,6 @@ namespace mRemoteNG.Connection.Protocol.RDP
 						}
 						else
 						{
-                            // Fixed in MR-910
                             _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.RDGatewayUsername;
                             _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.RDGatewayPassword;
                             _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.RDGatewayDomain;
