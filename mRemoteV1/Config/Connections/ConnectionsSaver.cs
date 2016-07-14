@@ -101,8 +101,7 @@ namespace mRemoteNG.Config.Connections
 		{
 			bool isVerified = false;
 			SqlDataReader sqlDataReader = null;
-			Version databaseVersion = null;
-			try
+		    try
 			{
 				SqlCommand sqlCommand = new SqlCommand("SELECT * FROM tblRoot", sqlConnection);
 				sqlDataReader = sqlCommand.ExecuteReader();
@@ -112,7 +111,7 @@ namespace mRemoteNG.Config.Connections
 				}
 				sqlDataReader.Read();
 						
-				databaseVersion = new Version(Convert.ToString(sqlDataReader["confVersion"], CultureInfo.InvariantCulture));
+				var databaseVersion = new Version(Convert.ToString(sqlDataReader["confVersion"], CultureInfo.InvariantCulture));
 						
 				sqlDataReader.Close();
 						
@@ -234,7 +233,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				_currentNodeIndex++;
 						
-				ConnectionInfo curConI = default(ConnectionInfo);
+				ConnectionInfo curConI;
 				_sqlQuery = new SqlCommand("INSERT INTO tblCons (Name, Type, Expanded, Description, Icon, Panel, Username, " + "DomainName, Password, Hostname, Protocol, PuttySession, " + "Port, ConnectToConsole, RenderingEngine, ICAEncryptionStrength, RDPAuthenticationLevel, LoadBalanceInfo, Colors, Resolution, AutomaticResize, DisplayWallpaper, " + "DisplayThemes, EnableFontSmoothing, EnableDesktopComposition, CacheBitmaps, RedirectDiskDrives, RedirectPorts, " + "RedirectPrinters, RedirectSmartCards, RedirectSound, RedirectKeys, " + "Connected, PreExtApp, PostExtApp, MacAddress, UserField, ExtApp, VNCCompression, VNCEncoding, VNCAuthMode, " + "VNCProxyType, VNCProxyIP, VNCProxyPort, VNCProxyUsername, VNCProxyPassword, " + "VNCColors, VNCSmartSizeMode, VNCViewOnly, " + "RDGatewayUsageMethod, RDGatewayHostname, RDGatewayUseConnectionCredentials, RDGatewayUsername, RDGatewayPassword, RDGatewayDomain, " + "UseCredSsp, " + "InheritCacheBitmaps, InheritColors, " + "InheritDescription, InheritDisplayThemes, InheritDisplayWallpaper, InheritEnableFontSmoothing, InheritEnableDesktopComposition, InheritDomain, " + "InheritIcon, InheritPanel, InheritPassword, InheritPort, " + "InheritProtocol, InheritPuttySession, InheritRedirectDiskDrives, " + "InheritRedirectKeys, InheritRedirectPorts, InheritRedirectPrinters, " + "InheritRedirectSmartCards, InheritRedirectSound, InheritResolution, InheritAutomaticResize, " + "InheritUseConsoleSession, InheritRenderingEngine, InheritUsername, InheritICAEncryptionStrength, InheritRDPAuthenticationLevel, InheritLoadBalanceInfo, " + "InheritPreExtApp, InheritPostExtApp, InheritMacAddress, InheritUserField, InheritExtApp, InheritVNCCompression, InheritVNCEncoding, " + "InheritVNCAuthMode, InheritVNCProxyType, InheritVNCProxyIP, InheritVNCProxyPort, " + "InheritVNCProxyUsername, InheritVNCProxyPassword, InheritVNCColors, " + "InheritVNCSmartSizeMode, InheritVNCViewOnly, " + "InheritRDGatewayUsageMethod, InheritRDGatewayHostname, InheritRDGatewayUseConnectionCredentials, InheritRDGatewayUsername, InheritRDGatewayPassword, InheritRDGatewayDomain, "
 				+ "InheritUseCredSsp, " + "PositionID, ParentID, ConstantID, LastChange)" + "VALUES (", _sqlConnection
 				);
@@ -563,7 +562,7 @@ namespace mRemoteNG.Config.Connections
 					return;
 				}
                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                TreeNode treeNode = default(TreeNode);
+                TreeNode treeNode;
 						
 				if (ConnectionTreeNode.GetNodeType(RootTreeNode) == TreeNodeType.Root)
 				{
@@ -605,9 +604,8 @@ namespace mRemoteNG.Config.Connections
 				}
 						
 				_xmlTextWriter.WriteAttributeString("ConfVersion", "", ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture));
-						
-				TreeNodeCollection treeNodeCollection = default(TreeNodeCollection);
-				treeNodeCollection = treeNode.Nodes;
+
+			    var treeNodeCollection = treeNode.Nodes;
 						
 				SaveNode(treeNodeCollection);
 						
@@ -631,8 +629,9 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SaveToXml failed" + Environment.NewLine + ex.Message, false);
-			}
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SaveToXml failed" + Environment.NewLine + ex.Message);
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SaveToXml failed" + Environment.NewLine + ex.StackTrace, true);
+            }
 		}
 				
 		private void SaveNode(TreeNodeCollection tNC)
@@ -641,7 +640,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				foreach (TreeNode node in tNC)
 				{
-                    ConnectionInfo curConI = default(ConnectionInfo);
+                    ConnectionInfo curConI;
 							
 					if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container)
 					{
@@ -942,12 +941,10 @@ namespace mRemoteNG.Config.Connections
 			{
 				return;
 			}
-					
-			TreeNode tN = default(TreeNode);
-			tN = (TreeNode)RootTreeNode.Clone();
-					
-			TreeNodeCollection tNC = default(TreeNodeCollection);
-			tNC = tN.Nodes;
+
+		    var tN = (TreeNode)RootTreeNode.Clone();
+
+		    var tNC = tN.Nodes;
 					
 			csvWr = new StreamWriter(ConnectionFileName);
 					
@@ -1006,9 +1003,9 @@ namespace mRemoteNG.Config.Connections
 		{
 			string nodePath = con.TreeNode.FullPath;
 					
-			int firstSlash = nodePath.IndexOf("\\");
+			int firstSlash = nodePath.IndexOf("\\", StringComparison.Ordinal);
 			nodePath = nodePath.Remove(0, firstSlash + 1);
-			int lastSlash = nodePath.LastIndexOf("\\");
+			int lastSlash = nodePath.LastIndexOf("\\", StringComparison.Ordinal);
 					
 			if (lastSlash > 0)
 			{
@@ -1057,12 +1054,10 @@ namespace mRemoteNG.Config.Connections
 			{
 				return;
 			}
-					
-			TreeNode tN = default(TreeNode);
-			tN = (TreeNode)RootTreeNode.Clone();
-					
-			TreeNodeCollection tNC = default(TreeNodeCollection);
-			tNC = tN.Nodes;
+
+		    var tN = (TreeNode)RootTreeNode.Clone();
+
+		    var tNC = tN.Nodes;
 					
 			csvWr = new StreamWriter(ConnectionFileName);
 					
@@ -1095,9 +1090,9 @@ namespace mRemoteNG.Config.Connections
 		{
 			string nodePath = con.TreeNode.FullPath;
 					
-			int firstSlash = nodePath.IndexOf("\\");
+			int firstSlash = nodePath.IndexOf("\\", StringComparison.Ordinal);
 			nodePath = nodePath.Remove(0, firstSlash + 1);
-			int lastSlash = nodePath.LastIndexOf("\\");
+			int lastSlash = nodePath.LastIndexOf("\\", StringComparison.Ordinal);
 					
 			if (lastSlash > 0)
 			{
@@ -1119,12 +1114,10 @@ namespace mRemoteNG.Config.Connections
 			{
 				return;
 			}
-					
-			TreeNode tN = default(TreeNode);
-			tN = (TreeNode)RootTreeNode.Clone();
-					
-			TreeNodeCollection tNC = default(TreeNodeCollection);
-			tNC = tN.Nodes;
+
+		    var tN = (TreeNode)RootTreeNode.Clone();
+
+		    var tNC = tN.Nodes;
 					
 			_xmlTextWriter = new XmlTextWriter(ConnectionFileName, Encoding.UTF8);
 			_xmlTextWriter.Formatting = Formatting.Indented;
