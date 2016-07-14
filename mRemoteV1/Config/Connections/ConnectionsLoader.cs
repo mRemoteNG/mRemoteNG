@@ -3,18 +3,21 @@ using mRemoteNG.Connection.Protocol.Http;
 using mRemoteNG.Connection.Protocol.ICA;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Connection.Protocol.RDP;
-using mRemoteNG.My;
 using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
 using System.IO;
+using System.Security;
 using System.Windows.Forms;
 using System.Xml;
+using mRemoteNG.App.Info;
 using mRemoteNG.Tree;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.TaskDialog;
@@ -26,7 +29,7 @@ namespace mRemoteNG.Config.Connections
         #region Private Properties
 		private XmlDocument xDom;
 		private double confVersion;
-		private string pW = "mR3m";
+		private SecureString pW = GeneralAppInfo.EncryptionKey;
 		private SqlConnection sqlCon;
 		private SqlCommand sqlQuery;
 		private SqlDataReader sqlRd;
@@ -213,8 +216,9 @@ namespace mRemoteNG.Config.Connections
 				RootTreeNode.Tag = rootInfo;
 				RootTreeNode.ImageIndex = (int)TreeImageType.Root;
                 RootTreeNode.SelectedImageIndex = (int)TreeImageType.Root;
-						
-				if (Security.Crypt.Decrypt(Convert.ToString(sqlRd["Protected"]), pW) != "ThisIsNotProtected")
+
+                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+                if (cryptographyProvider.Decrypt(Convert.ToString(sqlRd["Protected"]), pW) != "ThisIsNotProtected")
 				{
 					if (Authenticate(Convert.ToString(sqlRd["Protected"]), false, rootInfo) == false)
 					{
@@ -458,7 +462,8 @@ namespace mRemoteNG.Config.Connections
 				connectionInfo.Description = Convert.ToString(sqlRd["Description"]);
 				connectionInfo.Hostname = Convert.ToString(sqlRd["Hostname"]);
 				connectionInfo.Username = Convert.ToString(sqlRd["Username"]);
-				connectionInfo.Password = Security.Crypt.Decrypt(Convert.ToString(sqlRd["Password"]), pW);
+                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+                connectionInfo.Password = cryptographyProvider.Decrypt(Convert.ToString(sqlRd["Password"]), pW);
 				connectionInfo.Domain = Convert.ToString(sqlRd["DomainName"]);
 				connectionInfo.DisplayWallpaper = Convert.ToBoolean(sqlRd["DisplayWallpaper"]);
 				connectionInfo.DisplayThemes = Convert.ToBoolean(sqlRd["DisplayThemes"]);
@@ -519,7 +524,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.VNCProxyIP = Convert.ToString(sqlRd["VNCProxyIP"]);
 					connectionInfo.VNCProxyPort = Convert.ToInt32(sqlRd["VNCProxyPort"]);
 					connectionInfo.VNCProxyUsername = Convert.ToString(sqlRd["VNCProxyUsername"]);
-					connectionInfo.VNCProxyPassword = Security.Crypt.Decrypt(Convert.ToString(sqlRd["VNCProxyPassword"]), pW);
+                    connectionInfo.VNCProxyPassword = cryptographyProvider.Decrypt(Convert.ToString(sqlRd["VNCProxyPassword"]), pW);
                     connectionInfo.VNCColors = (ProtocolVNC.Colors)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Colors), Convert.ToString(sqlRd["VNCColors"]));
                     connectionInfo.VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.SmartSizeMode), Convert.ToString(sqlRd["VNCSmartSizeMode"]));
 					connectionInfo.VNCViewOnly = Convert.ToBoolean(sqlRd["VNCViewOnly"]);
@@ -568,7 +573,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.RDGatewayHostname = Convert.ToString(sqlRd["RDGatewayHostname"]);
                     connectionInfo.RDGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), Convert.ToString(sqlRd["RDGatewayUseConnectionCredentials"]));
 					connectionInfo.RDGatewayUsername = Convert.ToString(sqlRd["RDGatewayUsername"]);
-					connectionInfo.RDGatewayPassword = Security.Crypt.Decrypt(Convert.ToString(sqlRd["RDGatewayPassword"]), pW);
+					connectionInfo.RDGatewayPassword = cryptographyProvider.Decrypt(Convert.ToString(sqlRd["RDGatewayPassword"]), pW);
 					connectionInfo.RDGatewayDomain = Convert.ToString(sqlRd["RDGatewayDomain"]);
 					connectionInfo.Inheritance.RDGatewayUsageMethod = Convert.ToBoolean(sqlRd["InheritRDGatewayUsageMethod"]);
 					connectionInfo.Inheritance.RDGatewayHostname = Convert.ToBoolean(sqlRd["InheritRDGatewayHostname"]);
@@ -619,8 +624,9 @@ namespace mRemoteNG.Config.Connections
 		private string DecryptCompleteFile()
 		{
 			StreamReader sRd = new StreamReader(_ConnectionFileName);
-					
-			string strCons = "";
+            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+
+            string strCons = "";
 			strCons = sRd.ReadToEnd();
 			sRd.Close();
 					
@@ -637,7 +643,7 @@ namespace mRemoteNG.Config.Connections
 						
 				try
 				{
-					strDecr = Security.Crypt.Decrypt(strCons, pW);
+					strDecr = cryptographyProvider.Decrypt(strCons, pW);
 							
 					if (strDecr != strCons)
 						notDecr = false;
@@ -653,7 +659,7 @@ namespace mRemoteNG.Config.Connections
 				{
 					if (Authenticate(strCons, true) == true)
 					{
-						strDecr = Security.Crypt.Decrypt(strCons, pW);
+						strDecr = cryptographyProvider.Decrypt(strCons, pW);
 						notDecr = false;
 					}
 					else
@@ -683,9 +689,11 @@ namespace mRemoteNG.Config.Connections
 				{
 					Runtime.IsConnectionsFileLoaded = false;
 				}
-						
-				// SECTION 1. Create a DOM Document and load the XML data into it.
-				xDom = new XmlDocument();
+
+                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+
+                // SECTION 1. Create a DOM Document and load the XML data into it.
+                xDom = new XmlDocument();
 				if (cons != "")
 				{
 					xDom.LoadXml(cons);
@@ -756,7 +764,7 @@ namespace mRemoteNG.Config.Connections
 						
 				if (confVersion > 1.3) //1.4
 				{
-					if (Security.Crypt.Decrypt(Convert.ToString(xDom.DocumentElement.Attributes["Protected"].Value), pW) != "ThisIsNotProtected")
+					if (cryptographyProvider.Decrypt(Convert.ToString(xDom.DocumentElement.Attributes["Protected"].Value), pW) != "ThisIsNotProtected")
 					{
 						if (Authenticate(Convert.ToString(xDom.DocumentElement.Attributes["Protected"].Value), false, rootInfo) == false)
 						{
@@ -941,7 +949,8 @@ namespace mRemoteNG.Config.Connections
 		private ConnectionInfo GetConnectionInfoFromXml(XmlNode xxNode)
 		{
 			ConnectionInfo connectionInfo = new ConnectionInfo();
-			try
+            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            try
 			{
 				XmlNode xmlnode = xxNode;
 				if (confVersion > 0.1) //0.2
@@ -950,7 +959,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.Description = xmlnode.Attributes["Descr"].Value;
 					connectionInfo.Hostname = xmlnode.Attributes["Hostname"].Value;
 					connectionInfo.Username = xmlnode.Attributes["Username"].Value;
-					connectionInfo.Password = Security.Crypt.Decrypt(xmlnode.Attributes["Password"].Value, pW);
+					connectionInfo.Password = cryptographyProvider.Decrypt(xmlnode.Attributes["Password"].Value, pW);
 					connectionInfo.Domain = xmlnode.Attributes["Domain"].Value;
 					connectionInfo.DisplayWallpaper = bool.Parse(xmlnode.Attributes["DisplayWallpaper"].Value);
 					connectionInfo.DisplayThemes = bool.Parse(xmlnode.Attributes["DisplayThemes"].Value);
@@ -1133,7 +1142,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.VNCProxyIP = xmlnode.Attributes["VNCProxyIP"].Value;
                     connectionInfo.VNCProxyPort = Convert.ToInt32(xmlnode.Attributes["VNCProxyPort"].Value);
 					connectionInfo.VNCProxyUsername = xmlnode.Attributes["VNCProxyUsername"].Value;
-					connectionInfo.VNCProxyPassword = Security.Crypt.Decrypt(xmlnode.Attributes["VNCProxyPassword"].Value, pW);
+                    connectionInfo.VNCProxyPassword = cryptographyProvider.Decrypt(xmlnode.Attributes["VNCProxyPassword"].Value, pW);
                     connectionInfo.VNCColors = (ProtocolVNC.Colors)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.Colors), xmlnode.Attributes["VNCColors"].Value);
                     connectionInfo.VNCSmartSizeMode = (ProtocolVNC.SmartSizeMode)Tools.MiscTools.StringToEnum(typeof(ProtocolVNC.SmartSizeMode), xmlnode.Attributes["VNCSmartSizeMode"].Value);
 					connectionInfo.VNCViewOnly = bool.Parse(xmlnode.Attributes["VNCViewOnly"].Value);
@@ -1183,7 +1192,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.RDGatewayHostname = xmlnode.Attributes["RDGatewayHostname"].Value;
                     connectionInfo.RDGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), Convert.ToString(xmlnode.Attributes["RDGatewayUseConnectionCredentials"].Value));
 					connectionInfo.RDGatewayUsername = xmlnode.Attributes["RDGatewayUsername"].Value;
-					connectionInfo.RDGatewayPassword = Security.Crypt.Decrypt(Convert.ToString(xmlnode.Attributes["RDGatewayPassword"].Value), pW);
+					connectionInfo.RDGatewayPassword = cryptographyProvider.Decrypt(Convert.ToString(xmlnode.Attributes["RDGatewayPassword"].Value), pW);
 					connectionInfo.RDGatewayDomain = xmlnode.Attributes["RDGatewayDomain"].Value;
 							
 					// Get inheritance settings
@@ -1230,7 +1239,8 @@ namespace mRemoteNG.Config.Connections
 		private bool Authenticate(string Value, bool CompareToOriginalValue, RootNodeInfo rootInfo = null)
 		{
 			string passwordName = "";
-			if (UseSQL)
+            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            if (UseSQL)
 			{
 				passwordName = Language.strSQLServer.TrimEnd(':');
 			}
@@ -1241,11 +1251,11 @@ namespace mRemoteNG.Config.Connections
 					
 			if (CompareToOriginalValue)
 			{
-				while (!(Security.Crypt.Decrypt(Value, pW) != Value))
+				while (cryptographyProvider.Decrypt(Value, pW) == Value)
 				{
 					pW = Tools.MiscTools.PasswordDialog(passwordName, false);
 							
-					if (string.IsNullOrEmpty(pW))
+					if (pW.Length == 0)
 					{
 						return false;
 					}
@@ -1253,11 +1263,11 @@ namespace mRemoteNG.Config.Connections
 			}
 			else
 			{
-				while (!(Security.Crypt.Decrypt(Value, pW) == "ThisIsProtected"))
+				while (cryptographyProvider.Decrypt(Value, pW) != "ThisIsProtected")
 				{
 					pW = Tools.MiscTools.PasswordDialog(passwordName, false);
 							
-					if (string.IsNullOrEmpty(pW))
+					if (pW.Length == 0)
 					{
 						return false;
 					}
@@ -1266,7 +1276,7 @@ namespace mRemoteNG.Config.Connections
 				if (rootInfo != null)
 				{
 					rootInfo.Password = true;
-					rootInfo.PasswordString = pW;
+					rootInfo.PasswordString = pW.ConvertToUnsecureString();
 				}
 			}
 					

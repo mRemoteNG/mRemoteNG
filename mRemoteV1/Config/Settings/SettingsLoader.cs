@@ -8,6 +8,8 @@ using System.Globalization;
 using mRemoteNG.Themes;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
+using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
 
 
@@ -67,7 +69,8 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetConDefaultPassword()
         {
-            mRemoteNG.Settings.Default.ConDefaultPassword = Security.Crypt.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, GeneralAppInfo.EncryptionKey);
+            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            mRemoteNG.Settings.Default.ConDefaultPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, GeneralAppInfo.EncryptionKey);
         }
 
         private static void SetAlwaysShowPanelTabs()

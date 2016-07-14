@@ -46,8 +46,12 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Geckofx-Core, Version=45.0.20.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
-      <HintPath>..\packages\Geckofx45.45.0.20\lib\net40\Geckofx-Core.dll</HintPath>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>    
+    <Reference Include="Geckofx-Core, Version=45.0.19.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
+      <HintPath>..\packages\Geckofx45.45.0.19.0\lib\net40\Geckofx-Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Geckofx-Winforms, Version=45.0.20.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
@@ -164,6 +168,14 @@
     <Compile Include="Connection\Protocol\RDP\RDPVersions.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
+    <Compile Include="Security\BlockCipherEngines.cs" />
+    <Compile Include="Security\BlockCipherModes.cs" />
+    <Compile Include="Security\EncryptedSecureString.cs" />
+    <Compile Include="Security\SymmetricEncryption\AeadCryptographyProvider.cs" />
+    <Compile Include="Security\SymmetricEncryption\LegacyRijndaelCryptographyProvider.cs" />
+    <Compile Include="Security\ICryptographyProvider.cs" />
+    <Compile Include="Security\SecureStringExtensions.cs" />
+    <Compile Include="Security\CryptographyProviderFactory.cs" />
     <Compile Include="Tools\ArgumentParser.cs" />
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
@@ -336,7 +348,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Tree\Root\RootNodeInfo.cs" />
-    <Compile Include="Security\Security.Crypt.cs" />
     <Compile Include="Security\Security.Impersonator.cs" />
     <Compile Include="Security\Security.Save.cs" />
     <Compile Include="Tools\IeBrowserEmulation.cs" />

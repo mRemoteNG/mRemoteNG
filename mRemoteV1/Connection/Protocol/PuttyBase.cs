@@ -6,6 +6,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.App.Info;
+using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 
 
 namespace mRemoteNG.Connection.Protocol
@@ -98,7 +101,8 @@ namespace mRemoteNG.Connection.Protocol
 						{
 							if (Settings.Default.EmptyCredentials == "custom")
 							{
-								password = Security.Crypt.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), App.Info.GeneralAppInfo.EncryptionKey);
+                                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+                                password = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.DefaultPassword), GeneralAppInfo.EncryptionKey);
 							}
 						}
 								

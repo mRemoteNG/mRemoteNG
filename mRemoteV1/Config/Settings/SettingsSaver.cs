@@ -7,6 +7,7 @@ using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
+using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 
@@ -62,8 +63,9 @@ namespace mRemoteNG.Config.Settings
                 }
                 mRemoteNG.Settings.Default.QuickyTBVisible = with1.tsQuickConnect.Visible;
 
+                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
                 mRemoteNG.Settings.Default.ConDefaultPassword =
-                    Crypt.Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword), GeneralAppInfo.EncryptionKey);
+                    cryptographyProvider.Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword), GeneralAppInfo.EncryptionKey);
 
                 mRemoteNG.Settings.Default.Save();
 

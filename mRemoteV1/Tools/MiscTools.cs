@@ -5,10 +5,12 @@ using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Forms;
 using mRemoteNG.Messages;
+using mRemoteNG.Security;
 using mRemoteNG.UI.Window;
 using static System.String;
 
@@ -58,11 +60,11 @@ namespace mRemoteNG.Tools
 		
 		
 
-		public static string PasswordDialog(string passwordName = null, bool verify = true)
+		public static SecureString PasswordDialog(string passwordName = null, bool verify = true)
 		{
 			PasswordForm passwordForm = new PasswordForm(passwordName, verify);
 				
-			return passwordForm.ShowDialog() == DialogResult.OK ? passwordForm.Password : "";
+			return passwordForm.ShowDialog() == DialogResult.OK ? passwordForm.Password.ConvertToSecureString() : "".ConvertToSecureString();
 		}
 		
 
