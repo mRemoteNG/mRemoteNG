@@ -341,21 +341,21 @@ namespace mRemoteNG.Connection.Protocol.RDP
 					{
 						if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.Yes)
 						{
-							//_rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.Username;
-							//_rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.Password;
-							//_rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.Domain;
+							_rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.Username;
+							_rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.Password;
+							_rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.Domain;
 						}
 						else if (_connectionInfo.RDGatewayUseConnectionCredentials == RDGatewayUseConnectionCredentials.SmartCard)
 						{
-							//_rdpClient.TransportSettings2.GatewayCredSharing = 0;
+							_rdpClient.TransportSettings2.GatewayCredSharing = 0;
 						}
 						else
 						{
-							//_rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.RDGatewayUsername;
-							//_rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.RDGatewayPassword;
-							//_rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.RDGatewayDomain;
-							//_rdpClient.TransportSettings2.GatewayCredSharing = 0;
-						}
+                            _rdpClient.TransportSettings2.GatewayUsername = _connectionInfo.RDGatewayUsername;
+                            _rdpClient.TransportSettings2.GatewayPassword = _connectionInfo.RDGatewayPassword;
+                            _rdpClient.TransportSettings2.GatewayDomain = _connectionInfo.RDGatewayDomain;
+                            _rdpClient.TransportSettings2.GatewayCredSharing = 0;
+                        }
 					}
 				}
 			}
