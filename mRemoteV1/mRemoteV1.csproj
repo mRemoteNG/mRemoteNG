@@ -49,9 +49,9 @@
     <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
       <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
       <Private>True</Private>
-    </Reference>    
-    <Reference Include="Geckofx-Core, Version=45.0.19.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
-      <HintPath>..\packages\Geckofx45.45.0.19.0\lib\net40\Geckofx-Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Geckofx-Core, Version=45.0.20.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=x86">
+      <HintPath>..\packages\Geckofx45.45.0.20\lib\net40\Geckofx-Core.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Geckofx-Winforms, Version=45.0.20.0, Culture=neutral, PublicKeyToken=3209ac31600d1857, processorArchitecture=MSIL">
