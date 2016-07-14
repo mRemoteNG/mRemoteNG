@@ -243,7 +243,7 @@ namespace mRemoteNG.UI.Window
 			Controls.Add(TabController);
 			Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
 			Icon = Resources.mRemote_Icon;
-			Name = $"Connection";
+			Name = @"Connection";
 			TabText = @"UI.Window.Connection";
 			Text = @"UI.Window.Connection";
 			cmenTab.ResumeLayout(false);
