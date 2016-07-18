@@ -6,6 +6,7 @@ using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using mRemoteNG.App;
 using mRemoteNG.Config;
 using mRemoteNG.Config.Settings;
@@ -457,10 +458,12 @@ namespace mRemoteNG.UI.Forms
 				mMenFileDelete.Enabled = false;
 				mMenFileRename.Enabled = true;
 				mMenFileDuplicate.Enabled = false;
+                mMenReconnectAll.Enabled = true;
 				mMenFileDelete.Text = Language.strMenuDelete;
 				mMenFileRename.Text = Language.strMenuRenameFolder;
 				mMenFileDuplicate.Text = Language.strMenuDuplicate;
-			}
+                mMenReconnectAll.Text = Language.strMenuReconnectAll;
+            }
             else if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Container)
 			{
 				mMenFileNewConnection.Enabled = true;
@@ -468,10 +471,13 @@ namespace mRemoteNG.UI.Forms
 				mMenFileDelete.Enabled = true;
 				mMenFileRename.Enabled = true;
 				mMenFileDuplicate.Enabled = true;
-				mMenFileDelete.Text = Language.strMenuDeleteFolder;
+                mMenReconnectAll.Enabled = true;
+                mMenFileDelete.Text = Language.strMenuDeleteFolder;
 				mMenFileRename.Text = Language.strMenuRenameFolder;
 				mMenFileDuplicate.Text = Language.strMenuDuplicateFolder;
-			}
+                mMenReconnectAll.Text = Language.strMenuReconnectAll;
+
+            }
             else if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection)
 			{
 				mMenFileNewConnection.Enabled = true;
@@ -479,10 +485,12 @@ namespace mRemoteNG.UI.Forms
 				mMenFileDelete.Enabled = true;
 				mMenFileRename.Enabled = true;
 				mMenFileDuplicate.Enabled = true;
-				mMenFileDelete.Text = Language.strMenuDeleteConnection;
+                mMenReconnectAll.Enabled = true;
+                mMenFileDelete.Text = Language.strMenuDeleteConnection;
 				mMenFileRename.Text = Language.strMenuRenameConnection;
 				mMenFileDuplicate.Text = Language.strMenuDuplicateConnection;
-			}
+                mMenReconnectAll.Text = Language.strMenuReconnectAll;
+            }
             else if ((ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttyRoot) || (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession))
 			{
 				mMenFileNewConnection.Enabled = false;
@@ -490,10 +498,12 @@ namespace mRemoteNG.UI.Forms
 				mMenFileDelete.Enabled = false;
 				mMenFileRename.Enabled = false;
 				mMenFileDuplicate.Enabled = false;
-				mMenFileDelete.Text = Language.strMenuDelete;
+                mMenReconnectAll.Enabled = true;
+                mMenFileDelete.Text = Language.strMenuDelete;
 				mMenFileRename.Text = Language.strMenuRename;
 				mMenFileDuplicate.Text = Language.strMenuDuplicate;
-			}
+                mMenReconnectAll.Text = Language.strMenuReconnectAll;
+            }
 			else
 			{
 				mMenFileNewConnection.Enabled = true;
@@ -501,10 +511,12 @@ namespace mRemoteNG.UI.Forms
 				mMenFileDelete.Enabled = false;
 				mMenFileRename.Enabled = false;
 				mMenFileDuplicate.Enabled = false;
-				mMenFileDelete.Text = Language.strMenuDelete;
+                mMenReconnectAll.Enabled = true;
+                mMenFileDelete.Text = Language.strMenuDelete;
 				mMenFileRename.Text = Language.strMenuRename;
 				mMenFileDuplicate.Text = Language.strMenuDuplicate;
-			}
+                mMenReconnectAll.Text = Language.strMenuReconnectAll;
+            }
 		}
 
         private static void mMenFileNewConnection_Click(object sender, EventArgs e)
@@ -575,6 +587,34 @@ namespace mRemoteNG.UI.Forms
             ConnectionTreeNode.CloneNode(ConnectionTree.SelectedNode);
             Runtime.SaveConnectionsBG();
 		}
+
+        private static void mMenReconnectAll_Click(object sender, EventArgs e)
+        {
+            if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
+            {
+                foreach (BaseWindow window in Runtime.WindowList)
+                {
+                    var connectionWindow = window as ConnectionWindow;
+                    if (connectionWindow == null)
+                        return;
+
+                    var ICList = new List<InterfaceControl>();
+                    foreach (Crownwood.Magic.Controls.TabPage tab in connectionWindow.TabController.TabPages)
+                    {
+                        if (tab.Tag is InterfaceControl)
+                        {
+                            ICList.Add((InterfaceControl)tab.Tag);
+                        }
+                    }
+
+                    foreach (var i in ICList)
+                    {
+                        i.Protocol.Close();
+                        Runtime.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
+                    }
+                }
+            }
+        }
 
         private static void mMenFileImportFromFile_Click(object sender, EventArgs e)
 		{

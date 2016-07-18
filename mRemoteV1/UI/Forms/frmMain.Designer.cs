@@ -89,7 +89,10 @@ namespace mRemoteNG.UI.Forms
 			this.mMenFileRename.Click += new System.EventHandler(mMenFileRename_Click);
 			this.mMenFileDuplicate = new System.Windows.Forms.ToolStripMenuItem();
 			this.mMenFileDuplicate.Click += new System.EventHandler(mMenFileDuplicate_Click);
-			this.mMenFileSep4 = new System.Windows.Forms.ToolStripSeparator();
+            this.mMenFileSep4 = new System.Windows.Forms.ToolStripSeparator();
+            this.mMenReconnectAll = new System.Windows.Forms.ToolStripMenuItem();
+            this.mMenReconnectAll.Click += new System.EventHandler(mMenReconnectAll_Click);
+            this.mMenFileSep5 = new System.Windows.Forms.ToolStripSeparator();
 			this.mMenFileExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.mMenFileExit.Click += new System.EventHandler(mMenFileExit_Click);
 			this.mMenView = new System.Windows.Forms.ToolStripMenuItem();
@@ -266,7 +269,7 @@ namespace mRemoteNG.UI.Forms
 			//
 			//mMenFile
 			//
-			this.mMenFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenFileNewConnection, this.mMenFileNewFolder, this.mMenFileSep1, this.mMenFileNew, this.mMenFileLoad, this.mMenFileSave, this.mMenFileSaveAs, this.mMenFileSep2, this.mMenFileDelete, this.mMenFileRename, this.mMenFileDuplicate, this.mMenFileSep3, this.mMenFileImport, this.mMenFileExport, this.mMenFileSep4, this.mMenFileExit});
+			this.mMenFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {this.mMenFileNewConnection, this.mMenFileNewFolder, this.mMenFileSep1, this.mMenFileNew, this.mMenFileLoad, this.mMenFileSave, this.mMenFileSaveAs, this.mMenFileSep2, this.mMenFileDelete, this.mMenFileRename, this.mMenFileDuplicate, this.mMenFileSep4, this.mMenReconnectAll, this.mMenFileSep3, this.mMenFileImport, this.mMenFileExport, this.mMenFileSep5, this.mMenFileExit});
 			this.mMenFile.Name = "mMenFile";
 			this.mMenFile.Size = new System.Drawing.Size(37, 20);
 			this.mMenFile.Text = "&File";
@@ -386,15 +389,27 @@ namespace mRemoteNG.UI.Forms
 			this.mMenFileDuplicate.Name = "mMenFileDuplicate";
 			this.mMenFileDuplicate.Size = new System.Drawing.Size(281, 22);
 			this.mMenFileDuplicate.Text = "Duplicate";
-			//
-			//mMenFileSep4
-			//
-			this.mMenFileSep4.Name = "mMenFileSep4";
+            //
+            //mMenFileReconnectAll
+            //
+            this.mMenReconnectAll.Image = Resources.Refresh;
+            this.mMenReconnectAll.Name = "mMenFileReconnectAll";
+            this.mMenReconnectAll.Size = new System.Drawing.Size(281, 22);
+            this.mMenReconnectAll.Text = "Reconnect All Connections";
+            //
+            //mMenFileSep4
+            //
+            this.mMenFileSep4.Name = "mMenFileSep4";
 			this.mMenFileSep4.Size = new System.Drawing.Size(278, 6);
-			//
-			//mMenFileExit
-			//
-			this.mMenFileExit.Image = Resources.Quit;
+            //
+            //mMenFileSep5
+            //
+            this.mMenFileSep5.Name = "mMenFileSep5";
+            this.mMenFileSep5.Size = new System.Drawing.Size(278, 6);
+            //
+            //mMenFileExit
+            //
+            this.mMenFileExit.Image = Resources.Quit;
 			this.mMenFileExit.Name = "mMenFileExit";
 			this.mMenFileExit.ShortcutKeys = (System.Windows.Forms.Keys) (System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4);
 			this.mMenFileExit.Size = new System.Drawing.Size(281, 22);
@@ -933,13 +948,15 @@ namespace mRemoteNG.UI.Forms
 		internal System.Windows.Forms.ToolStripMenuItem mMenToolsUpdate;
 		internal System.Windows.Forms.ToolStripMenuItem mMenViewResetLayout;
 		internal System.Windows.Forms.ToolStripMenuItem mMenFileDuplicate;
-		internal System.Windows.Forms.ToolStripSeparator mMenFileSep2;
+        internal System.Windows.Forms.ToolStripMenuItem mMenReconnectAll;
+        internal System.Windows.Forms.ToolStripSeparator mMenFileSep2;
 		internal System.Windows.Forms.ToolStripMenuItem mMenFileNewConnection;
 		internal System.Windows.Forms.ToolStripMenuItem mMenFileNewFolder;
 		internal System.Windows.Forms.ToolStripSeparator mMenFileSep3;
-		internal System.Windows.Forms.ToolStripMenuItem mMenFileDelete;
+        internal System.Windows.Forms.ToolStripSeparator mMenFileSep4;
+        internal System.Windows.Forms.ToolStripMenuItem mMenFileDelete;
 		internal System.Windows.Forms.ToolStripMenuItem mMenFileRename;
-		internal System.Windows.Forms.ToolStripSeparator mMenFileSep4;
+		internal System.Windows.Forms.ToolStripSeparator mMenFileSep5;
 		internal System.Windows.Forms.ToolStrip ToolStrip1;
 		internal System.Windows.Forms.ToolStripButton ToolStripButton1;
 		internal System.Windows.Forms.ToolStripButton ToolStripButton2;
