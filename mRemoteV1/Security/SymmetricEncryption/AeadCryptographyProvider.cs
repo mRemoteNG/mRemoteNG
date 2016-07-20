@@ -26,14 +26,14 @@ namespace mRemoteNG.Security.SymmetricEncryption
         private readonly SecureRandom _random = new SecureRandom();
 
         //Preconfigured Encryption Parameters
-        public readonly int NonceBitSize = 128;
-        public readonly int MacBitSize = 128;
-        public readonly int KeyBitSize = 256;
+        private readonly int NonceBitSize = 128;
+        private readonly int MacBitSize = 128;
+        private readonly int KeyBitSize = 256;
 
         //Preconfigured Password Key Derivation Parameters
-        public readonly int SaltBitSize = 128;
-        public readonly int Iterations = 10000;
-        public readonly int MinPasswordLength = 12;
+        private readonly int SaltBitSize = 128;
+        private readonly int Iterations = 10000;
+        private readonly int MinPasswordLength = 12;
 
         public int BlockSizeInBytes => _aeadBlockCipher.GetBlockSize();
 
@@ -73,7 +73,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
         private string SimpleEncryptWithPassword(string secretMessage, string password, byte[] nonSecretPayload = null)
         {
             if (string.IsNullOrEmpty(secretMessage))
-                throw new ArgumentException("Secret Message Required!", nameof(secretMessage));
+                throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
             var plainText = _encoding.GetBytes(secretMessage);
             var cipherText = SimpleEncryptWithPassword(plainText, password, nonSecretPayload);
@@ -89,7 +89,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!", nameof(password));
 
             if (secretMessage == null || secretMessage.Length == 0)
-                throw new ArgumentException("Secret Message Required!", nameof(secretMessage));
+                throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
             var generator = new Pkcs5S2ParametersGenerator();
 
@@ -120,7 +120,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 throw new ArgumentException($"Key needs to be {KeyBitSize} bit!", nameof(key));
 
             if (secretMessage == null || secretMessage.Length == 0)
-                throw new ArgumentException("Secret Message Required!", nameof(secretMessage));
+                throw new ArgumentException(@"Secret Message Required!", nameof(secretMessage));
 
             //Non-secret Payload Optional
             nonSecretPayload = nonSecretPayload ?? new byte[] { };
@@ -163,7 +163,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
         private string SimpleDecryptWithPassword(string encryptedMessage, SecureString decryptionKey, int nonSecretPayloadLength = 0)
         {
             if (string.IsNullOrWhiteSpace(encryptedMessage))
-                throw new ArgumentException("Encrypted Message Required!", nameof(encryptedMessage));
+                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var cipherText = Convert.FromBase64String(encryptedMessage);
             var plainText = SimpleDecryptWithPassword(cipherText, decryptionKey.ConvertToUnsecureString(), nonSecretPayloadLength);
@@ -177,7 +177,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 throw new ArgumentException($"Must have a password of at least {MinPasswordLength} characters!", nameof(password));
 
             if (encryptedMessage == null || encryptedMessage.Length == 0)
-                throw new ArgumentException("Encrypted Message Required!", nameof(encryptedMessage));
+                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             var generator = new Pkcs5S2ParametersGenerator();
 
@@ -203,7 +203,7 @@ namespace mRemoteNG.Security.SymmetricEncryption
                 throw new ArgumentException($"Key needs to be {KeyBitSize} bit!", nameof(key));
 
             if (encryptedMessage == null || encryptedMessage.Length == 0)
-                throw new ArgumentException("Encrypted Message Required!", nameof(encryptedMessage));
+                throw new ArgumentException(@"Encrypted Message Required!", nameof(encryptedMessage));
 
             using (var cipherStream = new MemoryStream(encryptedMessage))
             using (var cipherReader = new BinaryReader(cipherStream))
