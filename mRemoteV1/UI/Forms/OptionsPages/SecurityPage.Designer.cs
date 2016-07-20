@@ -87,7 +87,7 @@
             this.cryptoGroupBox.Controls.Add(this.cryptoTypeComboBox);
             this.cryptoGroupBox.Location = new System.Drawing.Point(4, 32);
             this.cryptoGroupBox.Name = "cryptoGroupBox";
-            this.cryptoGroupBox.Size = new System.Drawing.Size(543, 298);
+            this.cryptoGroupBox.Size = new System.Drawing.Size(543, 192);
             this.cryptoGroupBox.TabIndex = 22;
             this.cryptoGroupBox.TabStop = false;
             this.cryptoGroupBox.Text = "Cryptography";
