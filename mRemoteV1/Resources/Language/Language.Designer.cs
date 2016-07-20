@@ -277,6 +277,78 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AES.
+        /// </summary>
+        internal static string strBCEAES {
+            get {
+                return ResourceManager.GetString("strBCEAES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Serpent.
+        /// </summary>
+        internal static string strBCESerpent {
+            get {
+                return ResourceManager.GetString("strBCESerpent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twofish.
+        /// </summary>
+        internal static string strBCETwofish {
+            get {
+                return ResourceManager.GetString("strBCETwofish", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CCM.
+        /// </summary>
+        internal static string strBCMCcm {
+            get {
+                return ResourceManager.GetString("strBCMCcm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EAX.
+        /// </summary>
+        internal static string strBCMEax {
+            get {
+                return ResourceManager.GetString("strBCMEax", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GCM.
+        /// </summary>
+        internal static string strBCMGcm {
+            get {
+                return ResourceManager.GetString("strBCMGcm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Block Cipher Engine.
+        /// </summary>
+        internal static string strBlockCipherEngine {
+            get {
+                return ResourceManager.GetString("strBlockCipherEngine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Block Cipher Mode.
+        /// </summary>
+        internal static string strBlockCipherMode {
+            get {
+                return ResourceManager.GetString("strBlockCipherMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &amp;Browse....
         /// </summary>
         internal static string strButtonBrowse {
@@ -1381,6 +1453,24 @@ namespace mRemoteNG {
         internal static string strCouldNotFindToolStripInFilteredPropertyGrid {
             get {
                 return ResourceManager.GetString("strCouldNotFindToolStripInFilteredPropertyGrid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cryptography.
+        /// </summary>
+        internal static string strCryptography {
+            get {
+                return ResourceManager.GetString("strCryptography", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cryptography Provider.
+        /// </summary>
+        internal static string strCryptoProvider {
+            get {
+                return ResourceManager.GetString("strCryptoProvider", resourceCulture);
             }
         }
         
@@ -5601,6 +5691,15 @@ namespace mRemoteNG {
         internal static string strSearchPrompt {
             get {
                 return ResourceManager.GetString("strSearchPrompt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Security.
+        /// </summary>
+        internal static string strSecurity {
+            get {
+                return ResourceManager.GetString("strSecurity", resourceCulture);
             }
         }
         

@@ -81,11 +81,15 @@ namespace mRemoteNG.Config.Connections
 					SaveTovRDCSV();
 					break;
 				default:
-					SaveToXml();
 					if (mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile)
 					{
+                        SaveToXml(true);
 						EncryptCompleteFile();
 					}
+                    else
+                    {
+                        SaveToXml(false);
+                    }
 					if (!Export)
 					{
 						frmMain.Default.ConnectionsFileName = ConnectionFileName;
@@ -553,7 +557,7 @@ namespace mRemoteNG.Config.Connections
 			}
 		}
 				
-		private void SaveToXml()
+		private void SaveToXml(bool encryptContents)
 		{
 			try
 			{
@@ -561,7 +565,7 @@ namespace mRemoteNG.Config.Connections
 				{
 					return;
 				}
-                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+                var cryptographyProvider = new AeadCryptographyProvider(); //new LegacyRijndaelCryptographyProvider();
                 TreeNode treeNode;
 						
 				if (ConnectionTreeNode.GetNodeType(RootTreeNode) == TreeNodeType.Root)

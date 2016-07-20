@@ -47,6 +47,7 @@ namespace mRemoteNG.UI.Forms
             _pages.Add(typeof(UpdatesPage).Name, new UpdatesPage());
             _pages.Add(typeof(ThemePage).Name, new ThemePage());
             _pages.Add(typeof(AdvancedPage).Name, new AdvancedPage());
+            _pages.Add(typeof(SecurityPage).Name, new SecurityPage());
         }
 
         private void SetImageListForListView()

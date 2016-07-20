@@ -2295,5 +2295,41 @@ namespace mRemoteNG {
                 this["ShowCompleteConsPathInTitle"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CryptoProvider {
+            get {
+                return ((int)(this["CryptoProvider"]));
+            }
+            set {
+                this["CryptoProvider"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CryptoBlockCipherMode {
+            get {
+                return ((int)(this["CryptoBlockCipherMode"]));
+            }
+            set {
+                this["CryptoBlockCipherMode"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int CryptoBlockCipherEngine {
+            get {
+                return ((int)(this["CryptoBlockCipherEngine"]));
+            }
+            set {
+                this["CryptoBlockCipherEngine"] = value;
+            }
+        }
     }
 }
