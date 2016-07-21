@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Security;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
@@ -63,9 +64,32 @@ namespace mRemoteNG.Config.Settings
                 }
                 mRemoteNG.Settings.Default.QuickyTBVisible = with1.tsQuickConnect.Visible;
 
-                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+                SecureString _password = null;
+                // Determine which crypto provider we should use based on the settings
+                ICryptographyProvider cryptoProvider = null;
+
+                switch ((CryptoProviders)mRemoteNG.Settings.Default.CryptoProvider)
+                {
+                    case CryptoProviders.Rijndael:
+                        _password = GeneralAppInfo.EncryptionKey;
+                        cryptoProvider = new CryptographyProviderFactory().CreateLegacyRijndaelCryptographyProvider();
+                        break;
+                    case CryptoProviders.AEAD:
+                        _password = GeneralAppInfo.StrongEncryptionKey;
+                        cryptoProvider = new CryptographyProviderFactory()
+                            .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                            (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                        break;
+                    default:
+                        _password = GeneralAppInfo.StrongEncryptionKey;
+                        cryptoProvider = new CryptographyProviderFactory()
+                            .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                            (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                        break;
+                }
+
                 mRemoteNG.Settings.Default.ConDefaultPassword =
-                    cryptographyProvider.Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword), GeneralAppInfo.EncryptionKey);
+                    cryptoProvider.Encrypt(Convert.ToString(mRemoteNG.Settings.Default.ConDefaultPassword), _password);
 
                 mRemoteNG.Settings.Default.Save();
 

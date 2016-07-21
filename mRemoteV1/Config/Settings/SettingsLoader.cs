@@ -5,6 +5,7 @@ using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using System.Threading;
 using System.Globalization;
+using System.Security;
 using mRemoteNG.Themes;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.App.Info;
@@ -69,8 +70,31 @@ namespace mRemoteNG.Config.Settings
 
         private static void SetConDefaultPassword()
         {
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            mRemoteNG.Settings.Default.ConDefaultPassword = cryptographyProvider.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, GeneralAppInfo.EncryptionKey);
+            SecureString _password = null;
+            // Determine which crypto provider we should use based on the settings
+            ICryptographyProvider cryptoProvider = null;
+
+            switch ((CryptoProviders)mRemoteNG.Settings.Default.CryptoProvider)
+            {
+                case CryptoProviders.Rijndael:
+                    _password = GeneralAppInfo.EncryptionKey;
+                    cryptoProvider = new CryptographyProviderFactory().CreateLegacyRijndaelCryptographyProvider();
+                    break;
+                case CryptoProviders.AEAD:
+                    _password = GeneralAppInfo.StrongEncryptionKey;
+                    cryptoProvider = new CryptographyProviderFactory()
+                        .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                        (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                    break;
+                default:
+                    _password = GeneralAppInfo.StrongEncryptionKey;
+                    cryptoProvider = new CryptographyProviderFactory()
+                        .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                        (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                    break;
+            }
+ 
+            mRemoteNG.Settings.Default.ConDefaultPassword = cryptoProvider.Decrypt(mRemoteNG.Settings.Default.ConDefaultPassword, _password);
         }
 
         private static void SetAlwaysShowPanelTabs()

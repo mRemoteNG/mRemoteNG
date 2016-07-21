@@ -38,7 +38,7 @@ namespace mRemoteNG.Config.Connections
         #endregion
 				
         #region Private Properties
-		private XmlTextWriter _xmlTextWriter;
+		private XmlWriter _xmlTextWriter;
 		private SecureString _password = GeneralAppInfo.EncryptionKey;
 				
 		private SqlConnection _sqlConnection;
@@ -596,7 +596,7 @@ namespace mRemoteNG.Config.Connections
 
                 using (var sw = new StringWriter())
                 {
-                    using (var _xmlTextWriter = XmlTextWriter.Create(sw))
+                    using (_xmlTextWriter = XmlWriter.Create(sw))
                     {
                         //_xmlTextWriter.Formatting = Formatting.Indented;
                         //_xmlTextWriter.Indentation = 4;
@@ -713,7 +713,28 @@ namespace mRemoteNG.Config.Connections
 		{
 			try
 			{
-                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+                ICryptographyProvider cryptoProvider = null;
+
+                switch ((CryptoProviders)mRemoteNG.Settings.Default.CryptoProvider)
+                {
+                    case CryptoProviders.Rijndael:
+                        _password = GeneralAppInfo.EncryptionKey;
+                        cryptoProvider = new CryptographyProviderFactory().CreateLegacyRijndaelCryptographyProvider();
+                        break;
+                    case CryptoProviders.AEAD:
+                        _password = GeneralAppInfo.StrongEncryptionKey;
+                        cryptoProvider = new CryptographyProviderFactory()
+                            .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                            (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                        break;
+                    default:
+                        _password = GeneralAppInfo.StrongEncryptionKey;
+                        cryptoProvider = new CryptographyProviderFactory()
+                            .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                            (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                        break;
+                }
+
                 _xmlTextWriter.WriteAttributeString("Descr", "", curConI.Description);
 						
 				_xmlTextWriter.WriteAttributeString("Icon", "", curConI.Icon);
@@ -740,7 +761,7 @@ namespace mRemoteNG.Config.Connections
 						
 				if (SaveSecurity.Password)
 				{
-					_xmlTextWriter.WriteAttributeString("Password", "", cryptographyProvider.Encrypt(curConI.Password, _password));
+					_xmlTextWriter.WriteAttributeString("Password", "", cryptoProvider.Encrypt(curConI.Password, _password));
 				}
 				else
 				{
@@ -817,7 +838,7 @@ namespace mRemoteNG.Config.Connections
 				_xmlTextWriter.WriteAttributeString("VNCProxyIP", "", curConI.VNCProxyIP);
 				_xmlTextWriter.WriteAttributeString("VNCProxyPort", "", Convert.ToString(curConI.VNCProxyPort));
 				_xmlTextWriter.WriteAttributeString("VNCProxyUsername", "", curConI.VNCProxyUsername);
-				_xmlTextWriter.WriteAttributeString("VNCProxyPassword", "", cryptographyProvider.Encrypt(curConI.VNCProxyPassword, _password));
+				_xmlTextWriter.WriteAttributeString("VNCProxyPassword", "", cryptoProvider.Encrypt(curConI.VNCProxyPassword, _password));
 				_xmlTextWriter.WriteAttributeString("VNCColors", "", curConI.VNCColors.ToString());
 				_xmlTextWriter.WriteAttributeString("VNCSmartSizeMode", "", curConI.VNCSmartSizeMode.ToString());
 				_xmlTextWriter.WriteAttributeString("VNCViewOnly", "", Convert.ToString(curConI.VNCViewOnly));
@@ -838,7 +859,7 @@ namespace mRemoteNG.Config.Connections
 						
 				if (SaveSecurity.Password)
 				{
-					_xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", cryptographyProvider.Encrypt(curConI.RDGatewayPassword, _password));
+					_xmlTextWriter.WriteAttributeString("RDGatewayPassword", "", cryptoProvider.Encrypt(curConI.RDGatewayPassword, _password));
 				}
 				else
 				{
@@ -1157,8 +1178,6 @@ namespace mRemoteNG.Config.Connections
 		    var tNC = tN.Nodes;
 					
 			_xmlTextWriter = new XmlTextWriter(ConnectionFileName, Encoding.UTF8);
-			_xmlTextWriter.Formatting = Formatting.Indented;
-			_xmlTextWriter.Indentation = 4;
 					
 			_xmlTextWriter.WriteStartDocument();
 					
