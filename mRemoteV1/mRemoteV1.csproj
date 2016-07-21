@@ -107,9 +107,7 @@
     </Reference>
     <Reference Include="WindowsBase" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Properties\DataSources\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Compile Include="App\CompatibilityChecker.cs" />
     <Compile Include="App\Info\GeneralAppInfo.cs" />
@@ -170,6 +168,7 @@
     <Compile Include="Messages\MessageClassEnum.cs" />
     <Compile Include="Security\BlockCipherEngines.cs" />
     <Compile Include="Security\BlockCipherModes.cs" />
+    <Compile Include="Security\CryptoProviders.cs" />
     <Compile Include="Security\EncryptedSecureString.cs" />
     <Compile Include="Security\SymmetricEncryption\AeadCryptographyProvider.cs" />
     <Compile Include="Security\SymmetricEncryption\LegacyRijndaelCryptographyProvider.cs" />
@@ -234,6 +233,12 @@
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\OptionsPage.cs">
       <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\SecurityPage.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\Forms\OptionsPages\SecurityPage.Designer.cs">
+      <DependentUpon>SecurityPage.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Forms\OptionsPages\SqlServerPage.Designer.cs">
       <DependentUpon>SqlServerPage.cs</DependentUpon>
@@ -480,6 +485,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\frmOptions.resx">
       <DependentUpon>frmOptions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Forms\OptionsPages\SecurityPage.resx">
+      <DependentUpon>SecurityPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Forms\PasswordForm.resx">
       <DependentUpon>PasswordForm.cs</DependentUpon>
@@ -837,6 +845,7 @@
     <Content Include="Resources\Help\Update.htm">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\Icons\Lock.ico" />
     <Content Include="Resources\Icons\RDCMan_Icon.ico" />
     <Content Include="Resources\Images_FamFamFam\Config.png" />
     <Content Include="Resources\Images_FamFamFam\database.png" />
@@ -844,6 +853,7 @@
     <Content Include="Resources\Images_FamFamFam\page_copy.png" />
     <Content Include="Resources\Images\green_arrow1.png" />
     <Content Include="Resources\Images\green_arrow2.png" />
+    <None Include="Properties\DataSources\mRemoteNG.UI.Forms.OptionsPages.SecurityPage.datasource" />
     <None Include="Resources\Images\puttycm.png" />
     <None Include="Resources\Images_FamFamFam\monitor_go.png" />
     <None Include="Resources\Images_FamFamFam\monitor_delete.png" />

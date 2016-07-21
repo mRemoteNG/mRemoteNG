@@ -22,7 +22,11 @@ namespace mRemoteNG.App.Info
         public static readonly string copyright = ((AssemblyCopyrightAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyCopyrightAttribute), false)).Copyright;
         public static readonly string HomePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
 		public static readonly SecureString EncryptionKey = "mR3m".ConvertToSecureString();
-		public static string ReportingFilePath = "";
+
+	    public static readonly SecureString StrongEncryptionKey =
+	        "2d779d6fa1164fd8be0604f679a456f9".ConvertToSecureString();
+
+        public static string ReportingFilePath = "";
 		public static readonly string PuttyPath = HomePath + "\\PuTTYNG.exe";
         public static string UserAgent
 		{

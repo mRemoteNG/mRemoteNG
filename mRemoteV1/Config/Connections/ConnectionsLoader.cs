@@ -624,7 +624,28 @@ namespace mRemoteNG.Config.Connections
 		private string DecryptCompleteFile()
 		{
 			StreamReader sRd = new StreamReader(_ConnectionFileName);
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+
+            // Determine which crypto provider we should use based on the settings
+            ICryptographyProvider cryptoProvider = null;
+
+            switch ((CryptoProviders)mRemoteNG.Settings.Default.CryptoProvider)
+            {
+                case CryptoProviders.Rijndael:
+                    cryptoProvider = new CryptographyProviderFactory().CreateLegacyRijndaelCryptographyProvider();
+                    break;
+                case CryptoProviders.AEAD:
+                    pW = GeneralAppInfo.StrongEncryptionKey;
+                    cryptoProvider = new CryptographyProviderFactory()
+                        .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                        (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                    break;
+                default:
+                    pW = GeneralAppInfo.StrongEncryptionKey;
+                    cryptoProvider = new CryptographyProviderFactory()
+                        .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                        (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                    break;
+            }
 
             string strCons = "";
 			strCons = sRd.ReadToEnd();
@@ -635,7 +656,7 @@ namespace mRemoteNG.Config.Connections
 				string strDecr = "";
 				bool notDecr = true;
 						
-				if (strCons.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>"))
+				if (strCons.Contains("<?xml version=\"1.0\""))
 				{
 					strDecr = strCons;
 					return strDecr;
@@ -643,7 +664,7 @@ namespace mRemoteNG.Config.Connections
 						
 				try
 				{
-					strDecr = cryptographyProvider.Decrypt(strCons, pW);
+					strDecr = cryptoProvider.Decrypt(strCons, pW);
 							
 					if (strDecr != strCons)
 						notDecr = false;
@@ -659,7 +680,7 @@ namespace mRemoteNG.Config.Connections
 				{
 					if (Authenticate(strCons, true) == true)
 					{
-						strDecr = cryptographyProvider.Decrypt(strCons, pW);
+						strDecr = cryptoProvider.Decrypt(strCons, pW);
 						notDecr = false;
 					}
 					else
@@ -690,7 +711,25 @@ namespace mRemoteNG.Config.Connections
 					Runtime.IsConnectionsFileLoaded = false;
 				}
 
-                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+                // Determine which crypto provider we should use based on the settings
+                ICryptographyProvider cryptoProvider = null;
+
+                switch ((CryptoProviders)mRemoteNG.Settings.Default.CryptoProvider)
+                {
+                    case CryptoProviders.Rijndael:
+                        cryptoProvider = new CryptographyProviderFactory().CreateLegacyRijndaelCryptographyProvider();
+                        break;
+                    case CryptoProviders.AEAD:
+                        cryptoProvider = new CryptographyProviderFactory()
+                            .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                            (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                        break;
+                    default:
+                        cryptoProvider = new CryptographyProviderFactory()
+                            .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                            (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                        break;
+                }
 
                 // SECTION 1. Create a DOM Document and load the XML data into it.
                 xDom = new XmlDocument();
@@ -764,7 +803,7 @@ namespace mRemoteNG.Config.Connections
 						
 				if (confVersion > 1.3) //1.4
 				{
-					if (cryptographyProvider.Decrypt(Convert.ToString(xDom.DocumentElement.Attributes["Protected"].Value), pW) != "ThisIsNotProtected")
+					if (cryptoProvider.Decrypt(Convert.ToString(xDom.DocumentElement.Attributes["Protected"].Value), pW) != "ThisIsNotProtected")
 					{
 						if (Authenticate(Convert.ToString(xDom.DocumentElement.Attributes["Protected"].Value), false, rootInfo) == false)
 						{
@@ -1239,7 +1278,25 @@ namespace mRemoteNG.Config.Connections
 		private bool Authenticate(string Value, bool CompareToOriginalValue, RootNodeInfo rootInfo = null)
 		{
 			string passwordName = "";
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            // Determine which crypto provider we should use based on the settings
+            ICryptographyProvider cryptoProvider = null;
+
+            switch ((CryptoProviders)mRemoteNG.Settings.Default.CryptoProvider)
+            {
+                case CryptoProviders.Rijndael:
+                    cryptoProvider = new CryptographyProviderFactory().CreateLegacyRijndaelCryptographyProvider();
+                    break;
+                case CryptoProviders.AEAD:
+                    cryptoProvider = new CryptographyProviderFactory()
+                        .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                        (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                    break;
+                default:
+                    cryptoProvider = new CryptographyProviderFactory()
+                        .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                        (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                    break;
+            }
             if (UseSQL)
 			{
 				passwordName = Language.strSQLServer.TrimEnd(':');
@@ -1251,7 +1308,7 @@ namespace mRemoteNG.Config.Connections
 					
 			if (CompareToOriginalValue)
 			{
-				while (cryptographyProvider.Decrypt(Value, pW) == Value)
+				while (cryptoProvider.Decrypt(Value, pW) == Value)
 				{
 					pW = Tools.MiscTools.PasswordDialog(passwordName, false);
 							
@@ -1263,7 +1320,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			else
 			{
-				while (cryptographyProvider.Decrypt(Value, pW) != "ThisIsProtected")
+				while (cryptoProvider.Decrypt(Value, pW) != "ThisIsProtected")
 				{
 					pW = Tools.MiscTools.PasswordDialog(passwordName, false);
 							
