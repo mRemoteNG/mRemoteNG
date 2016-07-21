@@ -81,15 +81,7 @@ namespace mRemoteNG.Config.Connections
 					SaveTovRDCSV();
 					break;
 				default:
-					if (mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile)
-					{
-                        SaveToXml(true);
-						EncryptCompleteFile();
-					}
-                    else
-                    {
-                        SaveToXml(false);
-                    }
+					SaveToXml(true);
 					if (!Export)
 					{
 						frmMain.Default.ConnectionsFileName = ConnectionFileName;
@@ -575,11 +567,13 @@ namespace mRemoteNG.Config.Connections
                         cryptoProvider = new CryptographyProviderFactory().CreateLegacyRijndaelCryptographyProvider();
                         break;
                     case CryptoProviders.AEAD:
+                        _password = GeneralAppInfo.StrongEncryptionKey;
                         cryptoProvider = new CryptographyProviderFactory()
                             .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
                             (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
                         break;
                     default:
+                        _password = GeneralAppInfo.StrongEncryptionKey;
                         cryptoProvider = new CryptographyProviderFactory()
                             .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
                             (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);

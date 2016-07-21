@@ -634,11 +634,13 @@ namespace mRemoteNG.Config.Connections
                     cryptoProvider = new CryptographyProviderFactory().CreateLegacyRijndaelCryptographyProvider();
                     break;
                 case CryptoProviders.AEAD:
+                    pW = GeneralAppInfo.StrongEncryptionKey;
                     cryptoProvider = new CryptographyProviderFactory()
                         .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
                         (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
                     break;
                 default:
+                    pW = GeneralAppInfo.StrongEncryptionKey;
                     cryptoProvider = new CryptographyProviderFactory()
                         .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
                         (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
