@@ -565,7 +565,27 @@ namespace mRemoteNG.Config.Connections
 				{
 					return;
 				}
-                var cryptographyProvider = new AeadCryptographyProvider(); //new LegacyRijndaelCryptographyProvider();
+
+                // Determine which crypto provider we should use based on the settings
+                ICryptographyProvider cryptoProvider = null;
+
+                switch ((CryptoProviders)mRemoteNG.Settings.Default.CryptoProvider)
+                {
+                    case CryptoProviders.Rijndael:
+                        cryptoProvider = new CryptographyProviderFactory().CreateLegacyRijndaelCryptographyProvider();
+                        break;
+                    case CryptoProviders.AEAD:
+                        cryptoProvider = new CryptographyProviderFactory()
+                            .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                            (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                        break;
+                    default:
+                        cryptoProvider = new CryptographyProviderFactory()
+                            .CreateAeadCryptographyProvider((BlockCipherEngines)mRemoteNG.Settings.Default.CryptoBlockCipherEngine,
+                            (BlockCipherModes)mRemoteNG.Settings.Default.CryptoBlockCipherMode);
+                        break;
+                }
+                
                 TreeNode treeNode;
 						
 				if (ConnectionTreeNode.GetNodeType(RootTreeNode) == TreeNodeType.Root)
@@ -579,57 +599,76 @@ namespace mRemoteNG.Config.Connections
 				}
 						
 				string tempFileName = Path.GetTempFileName();
-				_xmlTextWriter = new XmlTextWriter(tempFileName, Encoding.UTF8);
-						
-				_xmlTextWriter.Formatting = Formatting.Indented;
-				_xmlTextWriter.Indentation = 4;
-						
-				_xmlTextWriter.WriteStartDocument();
-						
-				_xmlTextWriter.WriteStartElement("Connections"); // Do not localize
-				_xmlTextWriter.WriteAttributeString("Name", "", treeNode.Text);
-				_xmlTextWriter.WriteAttributeString("Export", "", Convert.ToString(Export));
-						
-				if (Export)
-				{
-					_xmlTextWriter.WriteAttributeString("Protected", "", cryptographyProvider.Encrypt("ThisIsNotProtected", _password));
-				}
-				else
-				{
-					if (((RootNodeInfo) treeNode.Tag).Password)
-					{
-						_password = Convert.ToString(((RootNodeInfo) treeNode.Tag).PasswordString).ConvertToSecureString();
-						_xmlTextWriter.WriteAttributeString("Protected", "", cryptographyProvider.Encrypt("ThisIsProtected", _password));
-					}
-					else
-					{
-						_xmlTextWriter.WriteAttributeString("Protected", "", cryptographyProvider.Encrypt("ThisIsNotProtected", _password));
-					}
-				}
-						
-				_xmlTextWriter.WriteAttributeString("ConfVersion", "", ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture));
 
-			    var treeNodeCollection = treeNode.Nodes;
-						
-				SaveNode(treeNodeCollection);
-						
-				_xmlTextWriter.WriteEndElement();
-				_xmlTextWriter.Close();
-						
-				if (File.Exists(ConnectionFileName))
-				{
-					if (Export)
-					{
-						File.Delete(ConnectionFileName);
-					}
-					else
-					{
-						string backupFileName = ConnectionFileName +".backup";
-						File.Delete(backupFileName);
-						File.Move(ConnectionFileName, backupFileName);
-					}
-				}
-				File.Move(tempFileName, ConnectionFileName);
+                using (var sw = new StringWriter())
+                {
+                    using (var _xmlTextWriter = XmlTextWriter.Create(sw))
+                    {
+                        //_xmlTextWriter.Formatting = Formatting.Indented;
+                        //_xmlTextWriter.Indentation = 4;
+
+                        _xmlTextWriter.WriteStartDocument();
+
+                        _xmlTextWriter.WriteStartElement("Connections"); // Do not localize
+                        _xmlTextWriter.WriteAttributeString("Name", "", treeNode.Text);
+                        _xmlTextWriter.WriteAttributeString("Export", "", Convert.ToString(Export));
+
+                        if (Export)
+                        {
+                            _xmlTextWriter.WriteAttributeString("Protected", "", cryptoProvider.Encrypt("ThisIsNotProtected", _password));
+                        }
+                        else
+                        {
+                            if (((RootNodeInfo)treeNode.Tag).Password)
+                            {
+                                _password = Convert.ToString(((RootNodeInfo)treeNode.Tag).PasswordString).ConvertToSecureString();
+                                _xmlTextWriter.WriteAttributeString("Protected", "", cryptoProvider.Encrypt("ThisIsProtected", _password));
+                            }
+                            else
+                            {
+                                _xmlTextWriter.WriteAttributeString("Protected", "", cryptoProvider.Encrypt("ThisIsNotProtected", _password));
+                            }
+                        }
+
+                        _xmlTextWriter.WriteAttributeString("ConfVersion", "", ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture));
+
+                        var treeNodeCollection = treeNode.Nodes;
+
+                        SaveNode(treeNodeCollection);
+
+                        _xmlTextWriter.WriteEndElement();
+                        _xmlTextWriter.Close();
+                    }
+
+                    // Write the XML to file, if Encryption enabled - encrypt it then write it to file
+                    if(File.Exists(ConnectionFileName))
+                    {
+                        if(Export)
+                        {
+                            File.Delete(ConnectionFileName);
+                        }
+                        else
+                        {
+                            string backupFileName = ConnectionFileName + ".backup";
+                            File.Delete(backupFileName);
+                            File.Move(ConnectionFileName, backupFileName);
+                        }
+
+                        StreamWriter streamWriter = new StreamWriter(ConnectionFileName);
+
+                        if(mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile)
+                        {
+                            streamWriter.Write(cryptoProvider.Encrypt(sw.ToString(), _password));
+                        }
+                        else
+                        {
+                            streamWriter.Write(sw.ToString());
+                        }
+                        
+                        streamWriter.Close();
+                    }   
+                    
+                }		
 			}
 			catch (Exception ex)
 			{
