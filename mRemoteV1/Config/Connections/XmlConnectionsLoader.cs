@@ -128,12 +128,10 @@ namespace mRemoteNG.Config.Connections
 
         private bool IsExportFile()
         {
-            bool isExportFile;
-            if (_confVersion >= 1.0)
-            {
-                if (Convert.ToBoolean(_xmlDocument.DocumentElement.Attributes["Export"].Value))
-                    isExportFile = true;
-            }
+            var isExportFile = false;
+            if (!(_confVersion >= 1.0)) return isExportFile;
+            if (Convert.ToBoolean(_xmlDocument.DocumentElement.Attributes["Export"].Value))
+                isExportFile = true;
             return isExportFile;
         }
 
