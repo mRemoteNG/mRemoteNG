@@ -51,7 +51,6 @@ namespace mRemoteNG.Config.Connections
                     ConnectionList = ConnectionList,
                     ContainerList = ContainerList,
                     RootTreeNode = RootTreeNode,
-                    UseSql = UseDatabase
                 };
 				xmlConnectionsLoader.LoadFromXml(import);
 			}

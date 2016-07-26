@@ -31,7 +31,6 @@ namespace mRemoteNG.Config.Connections
         private SecureString _pW = GeneralAppInfo.EncryptionKey;
 
 
-        public bool UseSql { get; set; }
         public string ConnectionFileName { get; set; }
         public TreeNode RootTreeNode { get; set; }
         public ConnectionList ConnectionList { get; set; }
@@ -591,10 +590,7 @@ namespace mRemoteNG.Config.Connections
         {
             var passwordName = "";
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            if (UseSql)
-                passwordName = Language.strSQLServer.TrimEnd(':');
-            else
-                passwordName = Path.GetFileName(ConnectionFileName);
+            passwordName = Path.GetFileName(ConnectionFileName);
 
             if (compareToOriginalValue)
             {
