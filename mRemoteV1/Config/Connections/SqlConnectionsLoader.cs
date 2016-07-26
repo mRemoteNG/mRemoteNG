@@ -320,30 +320,32 @@ namespace mRemoteNG.Config.Connections
                 connectionInfo.PuttySession = Convert.ToString(_sqlDataReader["PuttySession"]);
                 connectionInfo.Colors = (ProtocolRDP.RDPColors)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPColors), Convert.ToString(_sqlDataReader["Colors"]));
                 connectionInfo.Resolution = (ProtocolRDP.RDPResolutions)Tools.MiscTools.StringToEnum(typeof(ProtocolRDP.RDPResolutions), Convert.ToString(_sqlDataReader["Resolution"]));
-                connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
-                connectionInfo.Inheritance.CacheBitmaps = Convert.ToBoolean(_sqlDataReader["InheritCacheBitmaps"]);
-                connectionInfo.Inheritance.Colors = Convert.ToBoolean(_sqlDataReader["InheritColors"]);
-                connectionInfo.Inheritance.Description = Convert.ToBoolean(_sqlDataReader["InheritDescription"]);
-                connectionInfo.Inheritance.DisplayThemes = Convert.ToBoolean(_sqlDataReader["InheritDisplayThemes"]);
-                connectionInfo.Inheritance.DisplayWallpaper = Convert.ToBoolean(_sqlDataReader["InheritDisplayWallpaper"]);
-                connectionInfo.Inheritance.Domain = Convert.ToBoolean(_sqlDataReader["InheritDomain"]);
-                connectionInfo.Inheritance.Icon = Convert.ToBoolean(_sqlDataReader["InheritIcon"]);
-                connectionInfo.Inheritance.Panel = Convert.ToBoolean(_sqlDataReader["InheritPanel"]);
-                connectionInfo.Inheritance.Password = Convert.ToBoolean(_sqlDataReader["InheritPassword"]);
-                connectionInfo.Inheritance.Port = Convert.ToBoolean(_sqlDataReader["InheritPort"]);
-                connectionInfo.Inheritance.Protocol = Convert.ToBoolean(_sqlDataReader["InheritProtocol"]);
-                connectionInfo.Inheritance.PuttySession = Convert.ToBoolean(_sqlDataReader["InheritPuttySession"]);
-                connectionInfo.Inheritance.RedirectDiskDrives = Convert.ToBoolean(_sqlDataReader["InheritRedirectDiskDrives"]);
-                connectionInfo.Inheritance.RedirectKeys = Convert.ToBoolean(_sqlDataReader["InheritRedirectKeys"]);
-                connectionInfo.Inheritance.RedirectPorts = Convert.ToBoolean(_sqlDataReader["InheritRedirectPorts"]);
-                connectionInfo.Inheritance.RedirectPrinters = Convert.ToBoolean(_sqlDataReader["InheritRedirectPrinters"]);
-                connectionInfo.Inheritance.RedirectSmartCards = Convert.ToBoolean(_sqlDataReader["InheritRedirectSmartCards"]);
-                connectionInfo.Inheritance.RedirectSound = Convert.ToBoolean(_sqlDataReader["InheritRedirectSound"]);
-                connectionInfo.Inheritance.Resolution = Convert.ToBoolean(_sqlDataReader["InheritResolution"]);
-                connectionInfo.Inheritance.UseConsoleSession = Convert.ToBoolean(_sqlDataReader["InheritUseConsoleSession"]);
-                connectionInfo.Inheritance.Username = Convert.ToBoolean(_sqlDataReader["InheritUsername"]);
                 connectionInfo.Icon = Convert.ToString(_sqlDataReader["Icon"]);
                 connectionInfo.Panel = Convert.ToString(_sqlDataReader["Panel"]);
+                connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo)
+                {
+                    CacheBitmaps = Convert.ToBoolean(_sqlDataReader["InheritCacheBitmaps"]),
+                    Colors = Convert.ToBoolean(_sqlDataReader["InheritColors"]),
+                    Description = Convert.ToBoolean(_sqlDataReader["InheritDescription"]),
+                    DisplayThemes = Convert.ToBoolean(_sqlDataReader["InheritDisplayThemes"]),
+                    DisplayWallpaper = Convert.ToBoolean(_sqlDataReader["InheritDisplayWallpaper"]),
+                    Domain = Convert.ToBoolean(_sqlDataReader["InheritDomain"]),
+                    Icon = Convert.ToBoolean(_sqlDataReader["InheritIcon"]),
+                    Panel = Convert.ToBoolean(_sqlDataReader["InheritPanel"]),
+                    Password = Convert.ToBoolean(_sqlDataReader["InheritPassword"]),
+                    Port = Convert.ToBoolean(_sqlDataReader["InheritPort"]),
+                    Protocol = Convert.ToBoolean(_sqlDataReader["InheritProtocol"]),
+                    PuttySession = Convert.ToBoolean(_sqlDataReader["InheritPuttySession"]),
+                    RedirectDiskDrives = Convert.ToBoolean(_sqlDataReader["InheritRedirectDiskDrives"]),
+                    RedirectKeys = Convert.ToBoolean(_sqlDataReader["InheritRedirectKeys"]),
+                    RedirectPorts = Convert.ToBoolean(_sqlDataReader["InheritRedirectPorts"]),
+                    RedirectPrinters = Convert.ToBoolean(_sqlDataReader["InheritRedirectPrinters"]),
+                    RedirectSmartCards = Convert.ToBoolean(_sqlDataReader["InheritRedirectSmartCards"]),
+                    RedirectSound = Convert.ToBoolean(_sqlDataReader["InheritRedirectSound"]),
+                    Resolution = Convert.ToBoolean(_sqlDataReader["InheritResolution"]),
+                    UseConsoleSession = Convert.ToBoolean(_sqlDataReader["InheritUseConsoleSession"]),
+                    Username = Convert.ToBoolean(_sqlDataReader["InheritUsername"])
+                };
 
                 if (_confVersion > 1.5) //1.6
                 {
