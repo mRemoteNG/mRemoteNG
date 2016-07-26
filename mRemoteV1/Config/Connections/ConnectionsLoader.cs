@@ -1,5 +1,4 @@
 using System.Windows.Forms;
-using System.Xml;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.UI.Forms;
@@ -8,10 +7,7 @@ using mRemoteNG.UI.Forms;
 namespace mRemoteNG.Config.Connections
 {
 	public class ConnectionsLoader
-	{
-		private XmlDocument _xmlDocument;
-		private double _confVersion;
-		
+	{		
         public bool UseSql { get; set; }
 	    public string SqlHost { get; set; }
 	    public string SqlDatabaseName { get; set; }
