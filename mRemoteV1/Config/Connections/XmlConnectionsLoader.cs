@@ -43,20 +43,12 @@ namespace mRemoteNG.Config.Connections
         {
             try
             {
-                var connections = DecryptCompleteFile();
-
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = false;
-
                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
 
                 // SECTION 1. Create a DOM Document and load the XML data into it.
-                _xmlDocument = new XmlDocument();
-                if (connections != "")
-                    _xmlDocument.LoadXml(connections);
-                else
-                    _xmlDocument.Load(ConnectionFileName);
-
+                LoadXmlConnectionData();
                 ValidateConnectionFileVersion();
 
                 // SECTION 2. Initialize the treeview control.
@@ -143,6 +135,16 @@ namespace mRemoteNG.Config.Connections
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strLoadFromXmlFailed + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, true);
                 throw;
             }
+        }
+
+        private void LoadXmlConnectionData()
+        {
+            var connections = DecryptCompleteFile();
+            _xmlDocument = new XmlDocument();
+            if (connections != "")
+                _xmlDocument.LoadXml(connections);
+            else
+                _xmlDocument.Load(ConnectionFileName);
         }
 
         private void ValidateConnectionFileVersion()
