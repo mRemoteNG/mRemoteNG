@@ -68,39 +68,22 @@ namespace mRemoteNG.Config.Connections
                     }
                 }
 
-                var isExportFile = false;
-                if (_confVersion >= 1.0)
-                {
-                    if (Convert.ToBoolean(_xmlDocument.DocumentElement.Attributes["Export"].Value))
-                        isExportFile = true;
-                }
-
-                if (import && !isExportFile)
+                if (import && !IsExportFile())
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strCannotImportNormalSessionFile);
                     return;
                 }
 
-                if (!isExportFile)
+                if (!IsExportFile())
                 {
                     RootTreeNode.ImageIndex = (int)TreeImageType.Root;
                     RootTreeNode.SelectedImageIndex = (int)TreeImageType.Root;
                 }
 
-                Windows.treeForm.tvConnections.BeginUpdate();
+
 
                 // SECTION 3. Populate the TreeView with the DOM nodes.
-                AddNodeFromXml(_xmlDocument.DocumentElement, RootTreeNode);
-                RootTreeNode.Expand();
-
-                //expand containers
-                foreach (ContainerInfo contI in ContainerList)
-                {
-                    if (contI.IsExpanded)
-                        contI.TreeNode.Expand();
-                }
-
-                Windows.treeForm.tvConnections.EndUpdate();
+                PopulateTreeview();
 
                 //open connections from last mremote session
                 if (mRemoteNG.Settings.Default.OpenConsFromLastSession && !mRemoteNG.Settings.Default.NoReconnect)
@@ -124,6 +107,48 @@ namespace mRemoteNG.Config.Connections
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strLoadFromXmlFailed + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, true);
                 throw;
             }
+        }
+
+        private void PopulateTreeview()
+        {
+            Windows.treeForm.tvConnections.BeginUpdate();
+            AddNodeFromXml(_xmlDocument.DocumentElement, RootTreeNode);
+            RootTreeNode.Expand();
+            //expand containers
+            foreach (ContainerInfo contI in ContainerList)
+            {
+                if (contI.IsExpanded)
+                    contI.TreeNode.Expand();
+            }
+            Windows.treeForm.tvConnections.EndUpdate();
+        }
+
+        private bool IsExportFile()
+        {
+            bool isExportFile;
+            if (_confVersion >= 1.0)
+            {
+                if (Convert.ToBoolean(_xmlDocument.DocumentElement.Attributes["Export"].Value))
+                    isExportFile = true;
+            }
+            return isExportFile;
+        }
+
+        private RootNodeInfo InitializeRootNode()
+        {
+            var rootNodeName = "";
+            if (_xmlDocument.DocumentElement.HasAttribute("Name"))
+                rootNodeName = Convert.ToString(_xmlDocument.DocumentElement.Attributes["Name"].Value.Trim());
+            RootTreeNode.Name = !string.IsNullOrEmpty(rootNodeName) ? rootNodeName : _xmlDocument.DocumentElement.Name;
+            RootTreeNode.Text = RootTreeNode.Name;
+
+            var rootInfo = new RootNodeInfo(RootNodeType.Connection)
+            {
+                Name = RootTreeNode.Name,
+                TreeNode = RootTreeNode
+            };
+            RootTreeNode.Tag = rootInfo;
+            return rootInfo;
         }
 
         private void LoadXmlConnectionData()
