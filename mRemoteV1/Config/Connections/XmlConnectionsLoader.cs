@@ -80,20 +80,11 @@ namespace mRemoteNG.Config.Connections
                     RootTreeNode.SelectedImageIndex = (int)TreeImageType.Root;
                 }
 
-
-
                 // SECTION 3. Populate the TreeView with the DOM nodes.
                 PopulateTreeview();
 
                 //open connections from last mremote session
-                if (mRemoteNG.Settings.Default.OpenConsFromLastSession && !mRemoteNG.Settings.Default.NoReconnect)
-                {
-                    foreach (ConnectionInfo conI in ConnectionList)
-                    {
-                        if (conI.PleaseConnect)
-                            Runtime.OpenConnection(conI);
-                    }
-                }
+                OpenConnectionsFromLastSession();
 
                 RootTreeNode.EnsureVisible();
                 if (!import)
@@ -106,6 +97,18 @@ namespace mRemoteNG.Config.Connections
                 Runtime.IsConnectionsFileLoaded = false;
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strLoadFromXmlFailed + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, true);
                 throw;
+            }
+        }
+
+        private void OpenConnectionsFromLastSession()
+        {
+            if (mRemoteNG.Settings.Default.OpenConsFromLastSession && !mRemoteNG.Settings.Default.NoReconnect)
+            {
+                foreach (ConnectionInfo conI in ConnectionList)
+                {
+                    if (conI.PleaseConnect)
+                        Runtime.OpenConnection(conI);
+                }
             }
         }
 
