@@ -33,11 +33,11 @@ namespace mRemoteNG.Config.Connections
         private SecureString _pW = GeneralAppInfo.EncryptionKey;
 
 
-        public string SqlHost { get; set; }
-        public string SqlDatabaseName { get; set; }
-        public string SqlUsername { get; set; }
-        public string SqlPassword { get; set; }
-        public bool SqlUpdate { get; set; }
+        public string DatabaseHost { get; set; }
+        public string DatabaseName { get; set; }
+        public string DatabaseUsername { get; set; }
+        public string DatabasePassword { get; set; }
+        public bool DatabaseUpdate { get; set; }
         public string PreviousSelected { get; set; }
         public TreeNode RootTreeNode { get; set; }
         public ConnectionList ConnectionList { get; set; }
@@ -60,7 +60,7 @@ namespace mRemoteNG.Config.Connections
             try
             {
                 Runtime.IsConnectionsFileLoaded = false;
-                _sqlConnection = !string.IsNullOrEmpty(SqlUsername) ? new SqlConnection("Data Source=" + SqlHost + ";Initial Catalog=" + SqlDatabaseName + ";User Id=" + SqlUsername + ";Password=" + SqlPassword) : new SqlConnection("Data Source=" + SqlHost + ";Initial Catalog=" + SqlDatabaseName + ";Integrated Security=True");
+                _sqlConnection = !string.IsNullOrEmpty(DatabaseUsername) ? new SqlConnection("Data Source=" + DatabaseHost + ";Initial Catalog=" + DatabaseName + ";User Id=" + DatabaseUsername + ";Password=" + DatabasePassword) : new SqlConnection("Data Source=" + DatabaseHost + ";Initial Catalog=" + DatabaseName + ";Integrated Security=True");
 
                 _sqlConnection.Open();
                 _sqlQuery = new SqlCommand("SELECT * FROM tblRoot", _sqlConnection);
@@ -179,7 +179,7 @@ namespace mRemoteNG.Config.Connections
                                 ConnectionList.Add(conI);
                                 tNode.Tag = conI;
 
-                                if (SqlUpdate)
+                                if (DatabaseUpdate)
                                 {
                                     var prevCon = PreviousConnectionList.FindByConstantID(conI.ConstantID);
                                     if (prevCon != null)
@@ -230,7 +230,7 @@ namespace mRemoteNG.Config.Connections
                                 conI.IsContainer = true;
                                 contI.ConnectionInfo = conI;
 
-                                if (SqlUpdate)
+                                if (DatabaseUpdate)
                                 {
                                     var prevCont = PreviousContainerList.FindByConstantID(conI.ConstantID);
                                     if (prevCont != null)
@@ -444,7 +444,7 @@ namespace mRemoteNG.Config.Connections
                     connectionInfo.Inheritance.AutomaticResize = Convert.ToBoolean(_sqlDataReader["InheritAutomaticResize"]);
                 }
 
-                if (SqlUpdate)
+                if (DatabaseUpdate)
                     connectionInfo.PleaseConnect = Convert.ToBoolean(_sqlDataReader["Connected"]);
 
                 return connectionInfo;

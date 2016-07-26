@@ -8,12 +8,12 @@ namespace mRemoteNG.Config.Connections
 {
 	public class ConnectionsLoader
 	{		
-        public bool UseSql { get; set; }
-	    public string SqlHost { get; set; }
-	    public string SqlDatabaseName { get; set; }
-	    public string SqlUsername { get; set; }
-	    public string SqlPassword { get; set; }
-	    public bool SqlUpdate { get; set; }
+        public bool UseDatabase { get; set; }
+	    public string DatabaseHost { get; set; }
+	    public string DatabaseName { get; set; }
+	    public string DatabaseUsername { get; set; }
+	    public string DatabasePassword { get; set; }
+	    public bool DatabaseUpdate { get; set; }
 	    public string PreviousSelected { get; set; }
 	    public string ConnectionFileName { get; set; }
 	    public TreeNode RootTreeNode { get; set; }
@@ -25,7 +25,7 @@ namespace mRemoteNG.Config.Connections
 
 		public void LoadConnections(bool import)
 		{
-			if (UseSql)
+			if (UseDatabase)
 			{
 			    var sqlConnectionsLoader = new SqlConnectionsLoader()
 			    {
@@ -35,11 +35,11 @@ namespace mRemoteNG.Config.Connections
 			        PreviousContainerList = PreviousContainerList,
 			        PreviousSelected = PreviousSelected,
 			        RootTreeNode = RootTreeNode,
-			        SqlDatabaseName = SqlDatabaseName,
-			        SqlHost = SqlHost,
-			        SqlPassword = SqlPassword,
-			        SqlUpdate = SqlUpdate,
-			        SqlUsername = SqlUsername
+			        DatabaseName = DatabaseName,
+			        DatabaseHost = DatabaseHost,
+			        DatabasePassword = DatabasePassword,
+			        DatabaseUpdate = DatabaseUpdate,
+			        DatabaseUsername = DatabaseUsername
 			    };
                 sqlConnectionsLoader.LoadFromSql();
 			}
@@ -51,12 +51,12 @@ namespace mRemoteNG.Config.Connections
                     ConnectionList = ConnectionList,
                     ContainerList = ContainerList,
                     RootTreeNode = RootTreeNode,
-                    UseSql = UseSql
+                    UseSql = UseDatabase
                 };
 				xmlConnectionsLoader.LoadFromXml(import);
 			}
 			
-			frmMain.Default.AreWeUsingSqlServerForSavingConnections = UseSql;
+			frmMain.Default.AreWeUsingSqlServerForSavingConnections = UseDatabase;
 			frmMain.Default.ConnectionsFileName = ConnectionFileName;
 			
 			if (!import)

@@ -487,13 +487,13 @@ namespace mRemoteNG.App
                 ConnectionTree.ResetTree();
 
                 connectionsLoader.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
-                connectionsLoader.UseSql = Settings.Default.UseSQLServer;
-                connectionsLoader.SqlHost = Settings.Default.SQLHost;
-                connectionsLoader.SqlDatabaseName = Settings.Default.SQLDatabaseName;
-                connectionsLoader.SqlUsername = Settings.Default.SQLUser;
+                connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
+                connectionsLoader.DatabaseHost = Settings.Default.SQLHost;
+                connectionsLoader.DatabaseName = Settings.Default.SQLDatabaseName;
+                connectionsLoader.DatabaseUsername = Settings.Default.SQLUser;
                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                connectionsLoader.SqlPassword = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
-                connectionsLoader.SqlUpdate = update;
+                connectionsLoader.DatabasePassword = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
+                connectionsLoader.DatabaseUpdate = update;
                 connectionsLoader.LoadConnections(false);
 
                 if (Settings.Default.UseSQLServer)
