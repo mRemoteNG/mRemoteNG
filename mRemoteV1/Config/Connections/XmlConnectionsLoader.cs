@@ -117,13 +117,17 @@ namespace mRemoteNG.Config.Connections
             Windows.treeForm.tvConnections.BeginUpdate();
             AddNodeFromXml(_xmlDocument.DocumentElement, RootTreeNode);
             RootTreeNode.Expand();
-            //expand containers
+            ExpandPreviouslyOpenedFolders();
+            Windows.treeForm.tvConnections.EndUpdate();
+        }
+
+        private void ExpandPreviouslyOpenedFolders()
+        {
             foreach (ContainerInfo contI in ContainerList)
             {
                 if (contI.IsExpanded)
                     contI.TreeNode.Expand();
             }
-            Windows.treeForm.tvConnections.EndUpdate();
         }
 
         private bool IsExportFile()
