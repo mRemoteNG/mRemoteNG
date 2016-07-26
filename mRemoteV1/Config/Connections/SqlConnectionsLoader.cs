@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
-using System.IO;
 using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.App;

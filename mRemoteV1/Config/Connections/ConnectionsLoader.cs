@@ -1,27 +1,9 @@
-using mRemoteNG.App;
-using mRemoteNG.Connection.Protocol.Http;
-using mRemoteNG.Connection.Protocol.ICA;
-using mRemoteNG.Connection.Protocol.VNC;
-using mRemoteNG.Connection.Protocol.RDP;
-using System;
-using System.Data;
-using System.Data.SqlClient;
-using System.Globalization;
-using System.IO;
-using System.Security;
 using System.Windows.Forms;
 using System.Xml;
-using mRemoteNG.App.Info;
-using mRemoteNG.Tree;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
-using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Messages;
-using mRemoteNG.Security;
-using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.Tree.Root;
-using mRemoteNG.UI.TaskDialog;
+
 
 namespace mRemoteNG.Config.Connections
 {
