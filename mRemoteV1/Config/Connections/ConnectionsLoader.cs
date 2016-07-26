@@ -26,7 +26,6 @@ namespace mRemoteNG.Config.Connections
 {
 	public class ConnectionsLoader
 	{
-        #region Private Properties
 		private XmlDocument _xmlDocument;
 		private double _confVersion;
 		private SecureString _pW = GeneralAppInfo.EncryptionKey;
@@ -35,7 +34,6 @@ namespace mRemoteNG.Config.Connections
 		private SqlDataReader _sqlDataReader;
 		private TreeNode _selectedTreeNode;
 
-	    #endregion
 				
         #region Public Properties
         public bool UseSql { get; set; }
@@ -75,7 +73,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			else
 			{
-				string connections = DecryptCompleteFile();
+				var connections = DecryptCompleteFile();
 				LoadFromXML(connections, import);
 			}
 					
@@ -570,17 +568,17 @@ namespace mRemoteNG.Config.Connections
         #region XML
 		private string DecryptCompleteFile()
 		{
-			StreamReader sRd = new StreamReader(ConnectionFileName);
+			var sRd = new StreamReader(ConnectionFileName);
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
 
-            string strCons = "";
+            var strCons = "";
 			strCons = sRd.ReadToEnd();
 			sRd.Close();
 					
 			if (!string.IsNullOrEmpty(strCons))
 			{
-				string strDecr = "";
-				bool notDecr = true;
+                var strDecr = "";
+                var notDecr = true;
 						
 				if (strCons.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>"))
 				{
@@ -687,7 +685,7 @@ namespace mRemoteNG.Config.Connections
 				}
 				else
 				{
-					string rootNodeName = "";
+                    var rootNodeName = "";
 					if (_xmlDocument.DocumentElement.HasAttribute("Name"))
 					{
 						rootNodeName = Convert.ToString(_xmlDocument.DocumentElement.Attributes["Name"].Value.Trim());
@@ -722,8 +720,8 @@ namespace mRemoteNG.Config.Connections
 						}
 					}
 				}
-						
-				bool isExportFile = false;
+
+                var isExportFile = false;
 				if (_confVersion >= 1.0)
 				{
 					if (Convert.ToBoolean(_xmlDocument.DocumentElement.Attributes["Export"].Value) == true)
@@ -802,12 +800,12 @@ namespace mRemoteNG.Config.Connections
 				{
 					foreach (XmlNode xmlNode in parentXmlNode.ChildNodes)
 					{
-						TreeNode treeNode = new TreeNode(xmlNode.Attributes["Name"].Value);
+                        var treeNode = new TreeNode(xmlNode.Attributes["Name"].Value);
 						parentTreeNode.Nodes.Add(treeNode);
 								
 						if (ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == TreeNodeType.Connection) //connection info
 						{
-							ConnectionInfo connectionInfo = GetConnectionInfoFromXml(xmlNode);
+                            var connectionInfo = GetConnectionInfoFromXml(xmlNode);
 							connectionInfo.TreeNode = treeNode;
 							connectionInfo.Parent = _previousContainer; //NEW
 									
@@ -819,7 +817,7 @@ namespace mRemoteNG.Config.Connections
 						}
 						else if (ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == TreeNodeType.Container) //container info
 						{
-							ContainerInfo containerInfo = new ContainerInfo();
+                            var containerInfo = new ContainerInfo();
 							if (treeNode.Parent != null)
 							{
 								if (ConnectionTreeNode.GetNodeType(treeNode.Parent) == TreeNodeType.Container)
@@ -843,8 +841,8 @@ namespace mRemoteNG.Config.Connections
 									containerInfo.IsExpanded = false;
 								}
 							}
-									
-							ConnectionInfo connectionInfo = default(ConnectionInfo);
+
+                            var connectionInfo = default(ConnectionInfo);
 							if (_confVersion >= 0.9)
 							{
 								connectionInfo = GetConnectionInfoFromXml(xmlNode);
@@ -870,8 +868,8 @@ namespace mRemoteNG.Config.Connections
 				}
 				else
 				{
-					string nodeName = "";
-					XmlAttribute nameAttribute = parentXmlNode.Attributes["Name"];
+                    var nodeName = "";
+                    var nameAttribute = parentXmlNode.Attributes["Name"];
 					if (!(nameAttribute == null))
 					{
 						nodeName = nameAttribute.Value.Trim();
@@ -895,7 +893,7 @@ namespace mRemoteNG.Config.Connections
 				
 		private ConnectionInfo GetConnectionInfoFromXml(XmlNode xxNode)
 		{
-			ConnectionInfo connectionInfo = new ConnectionInfo();
+            var connectionInfo = new ConnectionInfo();
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             try
 			{
@@ -1185,7 +1183,7 @@ namespace mRemoteNG.Config.Connections
 				
 		private bool Authenticate(string Value, bool CompareToOriginalValue, RootNodeInfo rootInfo = null)
 		{
-			string passwordName = "";
+            var passwordName = "";
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             if (UseSql)
 			{
