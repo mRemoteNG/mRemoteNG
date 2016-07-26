@@ -52,18 +52,7 @@ namespace mRemoteNG.Config.Connections
                 ValidateConnectionFileVersion();
 
                 // SECTION 2. Initialize the treeview control.
-                var rootNodeName = "";
-                if (_xmlDocument.DocumentElement.HasAttribute("Name"))
-                    rootNodeName = Convert.ToString(_xmlDocument.DocumentElement.Attributes["Name"].Value.Trim());
-                RootTreeNode.Name = !string.IsNullOrEmpty(rootNodeName) ? rootNodeName : _xmlDocument.DocumentElement.Name;
-                RootTreeNode.Text = RootTreeNode.Name;
-
-                var rootInfo = new RootNodeInfo(RootNodeType.Connection)
-                {
-                    Name = RootTreeNode.Name,
-                    TreeNode = RootTreeNode
-                };
-                RootTreeNode.Tag = rootInfo;
+                var rootInfo = InitializeRootNode();
 
                 if (_confVersion > 1.3) //1.4
                 {
