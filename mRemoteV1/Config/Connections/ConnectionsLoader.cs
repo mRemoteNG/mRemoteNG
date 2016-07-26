@@ -34,90 +34,37 @@ namespace mRemoteNG.Config.Connections
 		private SqlCommand sqlQuery;
 		private SqlDataReader sqlRd;
 		private TreeNode _selectedTreeNode;
-        private bool _UseSQL;
-        private string _SQLHost;
-        private string _SQLDatabaseName;
-        private string _SQLUsername;
-        private string _SQLPassword;
-        private bool _SQLUpdate;
-        private string _PreviousSelected;
-        private string _ConnectionFileName;
-        private ContainerList _ContainerList;
-        private ConnectionList _PreviousConnectionList;
-        private ContainerList _PreviousContainerList;
-        #endregion
+
+	    #endregion
 				
         #region Public Properties
-        public bool UseSQL
-		{
-			get { return _UseSQL; }
-			set { _UseSQL = value; }
-		}
+        public bool UseSQL { get; set; }
+
+	    public string SQLHost { get; set; }
+
+	    public string SQLDatabaseName { get; set; }
+
+	    public string SQLUsername { get; set; }
+
+	    public string SQLPassword { get; set; }
+
+	    public bool SQLUpdate { get; set; }
+
+	    public string PreviousSelected { get; set; }
+
+	    public string ConnectionFileName { get; set; }
+
+	    public TreeNode RootTreeNode { get; set; }
 		
-        public string SQLHost
-		{
-			get { return _SQLHost; }
-			set { _SQLHost = value; }
-		}
+		public ConnectionList ConnectionList { get; set; }
 		
-        public string SQLDatabaseName
-		{
-			get { return _SQLDatabaseName; }
-			set { _SQLDatabaseName = value; }
-		}
-		
-        public string SQLUsername
-		{
-			get { return _SQLUsername; }
-			set { _SQLUsername = value; }
-		}
-		
-        public string SQLPassword
-		{
-			get { return _SQLPassword; }
-			set { _SQLPassword = value; }
-		}
-		
-        public bool SQLUpdate
-		{
-			get { return _SQLUpdate; }
-			set { _SQLUpdate = value; }
-		}
-		
-        public string PreviousSelected
-		{
-			get { return _PreviousSelected; }
-			set { _PreviousSelected = value; }
-		}
-		
-        public string ConnectionFileName
-		{
-			get { return _ConnectionFileName; }
-			set { _ConnectionFileName = value; }
-		}
-		
-		public TreeNode RootTreeNode {get; set;}
-		
-		public ConnectionList ConnectionList {get; set;}
-		
-        public ContainerList ContainerList
-		{
-			get { return _ContainerList; }
-			set { _ContainerList = value; }
-		}
-		
-        public ConnectionList PreviousConnectionList
-		{
-			get { return _PreviousConnectionList; }
-			set { _PreviousConnectionList = value; }
-		}
-		
-        public ContainerList PreviousContainerList
-		{
-			get { return _PreviousContainerList; }
-			set { _PreviousContainerList = value; }
-		}
-        #endregion
+        public ContainerList ContainerList { get; set; }
+
+	    public ConnectionList PreviousConnectionList { get; set; }
+
+	    public ContainerList PreviousContainerList { get; set; }
+
+	    #endregion
 				
         #region Public Methods
 		public void LoadConnections(bool import)
@@ -160,13 +107,13 @@ namespace mRemoteNG.Config.Connections
 			{
                 Runtime.IsConnectionsFileLoaded = false;
 						
-				if (!string.IsNullOrEmpty(_SQLUsername))
+				if (!string.IsNullOrEmpty(SQLUsername))
 				{
-					sqlCon = new SqlConnection("Data Source=" + _SQLHost + ";Initial Catalog=" + _SQLDatabaseName + ";User Id=" + _SQLUsername + ";Password=" + _SQLPassword);
+					sqlCon = new SqlConnection("Data Source=" + SQLHost + ";Initial Catalog=" + SQLDatabaseName + ";User Id=" + SQLUsername + ";Password=" + SQLPassword);
 				}
 				else
 				{
-					sqlCon = new SqlConnection("Data Source=" + _SQLHost + ";Initial Catalog=" + _SQLDatabaseName + ";Integrated Security=True");
+					sqlCon = new SqlConnection("Data Source=" + SQLHost + ";Initial Catalog=" + SQLDatabaseName + ";Integrated Security=True");
 				}
 						
 				sqlCon.Open();
@@ -239,7 +186,7 @@ namespace mRemoteNG.Config.Connections
 				RootTreeNode.Expand();
 						
 				//expand containers
-				foreach (ContainerInfo contI in _ContainerList)
+				foreach (ContainerInfo contI in ContainerList)
 				{
 					if (contI.IsExpanded == true)
 					{
@@ -348,7 +295,7 @@ namespace mRemoteNG.Config.Connections
                                 tNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
 							}
 									
-							if (conI.ConstantID == _PreviousSelected)
+							if (conI.ConstantID == PreviousSelected)
 							{
 								_selectedTreeNode = tNode;
 							}
@@ -388,7 +335,7 @@ namespace mRemoteNG.Config.Connections
 								contI.IsExpanded = prevCont.IsExpanded;
 							}
 									
-							if (conI.ConstantID == _PreviousSelected)
+							if (conI.ConstantID == PreviousSelected)
 							{
 								_selectedTreeNode = tNode;
 							}
@@ -405,7 +352,7 @@ namespace mRemoteNG.Config.Connections
 							}
 						}
 								
-						_ContainerList.Add(contI);
+						ContainerList.Add(contI);
 						ConnectionList.Add(conI);
 								
 						tNode.Tag = contI;
@@ -623,7 +570,7 @@ namespace mRemoteNG.Config.Connections
         #region XML
 		private string DecryptCompleteFile()
 		{
-			StreamReader sRd = new StreamReader(_ConnectionFileName);
+			StreamReader sRd = new StreamReader(ConnectionFileName);
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
 
             string strCons = "";
@@ -700,7 +647,7 @@ namespace mRemoteNG.Config.Connections
 				}
 				else
 				{
-					xDom.Load(_ConnectionFileName);
+					xDom.Load(ConnectionFileName);
 				}
 						
 				if (xDom.DocumentElement.HasAttribute("ConfVersion"))
@@ -805,7 +752,7 @@ namespace mRemoteNG.Config.Connections
 				RootTreeNode.Expand();
 						
 				//expand containers
-				foreach (ContainerInfo contI in _ContainerList)
+				foreach (ContainerInfo contI in ContainerList)
 				{
 					if (contI.IsExpanded == true)
 					{
