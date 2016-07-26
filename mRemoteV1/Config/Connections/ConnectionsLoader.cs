@@ -140,12 +140,14 @@ namespace mRemoteNG.Config.Connections
 				}
 						
 				RootTreeNode.Name = Convert.ToString(_sqlDataReader["Name"]);
-						
-				var rootInfo = new RootNodeInfo(RootNodeType.Connection);
-				rootInfo.Name = RootTreeNode.Name;
-				rootInfo.TreeNode = RootTreeNode;
-						
-				RootTreeNode.Tag = rootInfo;
+
+			    var rootInfo = new RootNodeInfo(RootNodeType.Connection)
+			    {
+			        Name = RootTreeNode.Name,
+			        TreeNode = RootTreeNode
+			    };
+
+			    RootTreeNode.Tag = rootInfo;
 				RootTreeNode.ImageIndex = (int)TreeImageType.Root;
                 RootTreeNode.SelectedImageIndex = (int)TreeImageType.Root;
 
@@ -193,10 +195,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			finally
 			{
-				if (_sqlConnection != null)
-				{
-					_sqlConnection.Close();
-				}
+			    _sqlConnection?.Close();
 			}
 		}
 				
@@ -282,19 +281,13 @@ namespace mRemoteNG.Config.Connections
 					        break;
 					    case TreeNodeType.Container:
 					    {
-					        var contI = new ContainerInfo();
-					        //If tNode.Parent IsNot Nothing Then
-					        //    If Tree.Node.GetNodeType(tNode.Parent) = Tree.Node.Type.Container Then
-					        //        contI.Parent = tNode.Parent.Tag
-					        //    End If
-					        //End If
-					        //_previousContainer = contI 'NEW
-					        contI.TreeNode = tNode;
-								
-					        contI.Name = Convert.ToString(_sqlDataReader["Name"]);
+					        var contI = new ContainerInfo
+					        {
+					            TreeNode = tNode,
+					            Name = Convert.ToString(_sqlDataReader["Name"])
+					        };
 
 					        var conI = default(ConnectionInfo);
-								
 					        conI = GetConnectionInfoFromSql();
 					        conI.Parent = contI;
 					        conI.IsContainer = true;
@@ -365,15 +358,17 @@ namespace mRemoteNG.Config.Connections
 		{
 			try
 			{
-                var connectionInfo = new ConnectionInfo();
-						
-				connectionInfo.PositionID = Convert.ToInt32(_sqlDataReader["PositionID"]);
-				connectionInfo.ConstantID = Convert.ToString(_sqlDataReader["ConstantID"]);
-				connectionInfo.Name = Convert.ToString(_sqlDataReader["Name"]);
-				connectionInfo.Description = Convert.ToString(_sqlDataReader["Description"]);
-				connectionInfo.Hostname = Convert.ToString(_sqlDataReader["Hostname"]);
-				connectionInfo.Username = Convert.ToString(_sqlDataReader["Username"]);
-                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+			    var connectionInfo = new ConnectionInfo
+			    {
+			        PositionID = Convert.ToInt32(_sqlDataReader["PositionID"]),
+			        ConstantID = Convert.ToString(_sqlDataReader["ConstantID"]),
+			        Name = Convert.ToString(_sqlDataReader["Name"]),
+			        Description = Convert.ToString(_sqlDataReader["Description"]),
+			        Hostname = Convert.ToString(_sqlDataReader["Hostname"]),
+			        Username = Convert.ToString(_sqlDataReader["Username"])
+			    };
+
+			    var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
                 connectionInfo.Password = cryptographyProvider.Decrypt(Convert.ToString(_sqlDataReader["Password"]), _pW);
 				connectionInfo.Domain = Convert.ToString(_sqlDataReader["DomainName"]);
 				connectionInfo.DisplayWallpaper = Convert.ToBoolean(_sqlDataReader["DisplayWallpaper"]);
@@ -637,11 +632,13 @@ namespace mRemoteNG.Config.Connections
 						rootNodeName = Convert.ToString(_xmlDocument.DocumentElement.Attributes["Name"].Value.Trim());
 					RootTreeNode.Name = !string.IsNullOrEmpty(rootNodeName) ? rootNodeName : _xmlDocument.DocumentElement.Name;
 					RootTreeNode.Text = RootTreeNode.Name;
-							
-					rootInfo = new RootNodeInfo(RootNodeType.Connection);
-					rootInfo.Name = RootTreeNode.Name;
-					rootInfo.TreeNode = RootTreeNode;
-					RootTreeNode.Tag = rootInfo;
+
+				    rootInfo = new RootNodeInfo(RootNodeType.Connection)
+				    {
+				        Name = RootTreeNode.Name,
+				        TreeNode = RootTreeNode
+				    };
+				    RootTreeNode.Tag = rootInfo;
 				}
 						
 				if (_confVersion > 1.3) //1.4
@@ -688,7 +685,7 @@ namespace mRemoteNG.Config.Connections
 				//expand containers
 				foreach (ContainerInfo contI in ContainerList)
 				{
-					if (contI.IsExpanded == true)
+					if (contI.IsExpanded)
 						contI.TreeNode.Expand();
 				}
 
@@ -699,7 +696,7 @@ namespace mRemoteNG.Config.Connections
 				{
 					foreach (ConnectionInfo conI in ConnectionList)
 					{
-						if (conI.PleaseConnect == true)
+						if (conI.PleaseConnect)
 							Runtime.OpenConnection(conI);
 					}
 				}
@@ -935,29 +932,31 @@ namespace mRemoteNG.Config.Connections
 				
 				if (_confVersion > 1.2) //1.3
 				{
-					connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
-					connectionInfo.Inheritance.CacheBitmaps = bool.Parse(xmlnode.Attributes["InheritCacheBitmaps"].Value);
-					connectionInfo.Inheritance.Colors = bool.Parse(xmlnode.Attributes["InheritColors"].Value);
-					connectionInfo.Inheritance.Description = bool.Parse(xmlnode.Attributes["InheritDescription"].Value);
-					connectionInfo.Inheritance.DisplayThemes = bool.Parse(xmlnode.Attributes["InheritDisplayThemes"].Value);
-					connectionInfo.Inheritance.DisplayWallpaper = bool.Parse(xmlnode.Attributes["InheritDisplayWallpaper"].Value);
-					connectionInfo.Inheritance.Domain = bool.Parse(xmlnode.Attributes["InheritDomain"].Value);
-					connectionInfo.Inheritance.Icon = bool.Parse(xmlnode.Attributes["InheritIcon"].Value);
-					connectionInfo.Inheritance.Panel = bool.Parse(xmlnode.Attributes["InheritPanel"].Value);
-					connectionInfo.Inheritance.Password = bool.Parse(xmlnode.Attributes["InheritPassword"].Value);
-					connectionInfo.Inheritance.Port = bool.Parse(xmlnode.Attributes["InheritPort"].Value);
-					connectionInfo.Inheritance.Protocol = bool.Parse(xmlnode.Attributes["InheritProtocol"].Value);
-					connectionInfo.Inheritance.PuttySession = bool.Parse(xmlnode.Attributes["InheritPuttySession"].Value);
-					connectionInfo.Inheritance.RedirectDiskDrives = bool.Parse(xmlnode.Attributes["InheritRedirectDiskDrives"].Value);
-					connectionInfo.Inheritance.RedirectKeys = bool.Parse(xmlnode.Attributes["InheritRedirectKeys"].Value);
-					connectionInfo.Inheritance.RedirectPorts = bool.Parse(xmlnode.Attributes["InheritRedirectPorts"].Value);
-					connectionInfo.Inheritance.RedirectPrinters = bool.Parse(xmlnode.Attributes["InheritRedirectPrinters"].Value);
-					connectionInfo.Inheritance.RedirectSmartCards = bool.Parse(xmlnode.Attributes["InheritRedirectSmartCards"].Value);
-					connectionInfo.Inheritance.RedirectSound = bool.Parse(xmlnode.Attributes["InheritRedirectSound"].Value);
-					connectionInfo.Inheritance.Resolution = bool.Parse(xmlnode.Attributes["InheritResolution"].Value);
-					connectionInfo.Inheritance.UseConsoleSession = bool.Parse(xmlnode.Attributes["InheritUseConsoleSession"].Value);
-					connectionInfo.Inheritance.Username = bool.Parse(xmlnode.Attributes["InheritUsername"].Value);
-					connectionInfo.Icon = xmlnode.Attributes["Icon"].Value;
+				    connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo)
+				    {
+				        CacheBitmaps = bool.Parse(xmlnode.Attributes["InheritCacheBitmaps"].Value),
+				        Colors = bool.Parse(xmlnode.Attributes["InheritColors"].Value),
+				        Description = bool.Parse(xmlnode.Attributes["InheritDescription"].Value),
+				        DisplayThemes = bool.Parse(xmlnode.Attributes["InheritDisplayThemes"].Value),
+				        DisplayWallpaper = bool.Parse(xmlnode.Attributes["InheritDisplayWallpaper"].Value),
+				        Domain = bool.Parse(xmlnode.Attributes["InheritDomain"].Value),
+				        Icon = bool.Parse(xmlnode.Attributes["InheritIcon"].Value),
+				        Panel = bool.Parse(xmlnode.Attributes["InheritPanel"].Value),
+				        Password = bool.Parse(xmlnode.Attributes["InheritPassword"].Value),
+				        Port = bool.Parse(xmlnode.Attributes["InheritPort"].Value),
+				        Protocol = bool.Parse(xmlnode.Attributes["InheritProtocol"].Value),
+				        PuttySession = bool.Parse(xmlnode.Attributes["InheritPuttySession"].Value),
+				        RedirectDiskDrives = bool.Parse(xmlnode.Attributes["InheritRedirectDiskDrives"].Value),
+				        RedirectKeys = bool.Parse(xmlnode.Attributes["InheritRedirectKeys"].Value),
+				        RedirectPorts = bool.Parse(xmlnode.Attributes["InheritRedirectPorts"].Value),
+				        RedirectPrinters = bool.Parse(xmlnode.Attributes["InheritRedirectPrinters"].Value),
+				        RedirectSmartCards = bool.Parse(xmlnode.Attributes["InheritRedirectSmartCards"].Value),
+				        RedirectSound = bool.Parse(xmlnode.Attributes["InheritRedirectSound"].Value),
+				        Resolution = bool.Parse(xmlnode.Attributes["InheritResolution"].Value),
+				        UseConsoleSession = bool.Parse(xmlnode.Attributes["InheritUseConsoleSession"].Value),
+				        Username = bool.Parse(xmlnode.Attributes["InheritUsername"].Value)
+				    };
+				    connectionInfo.Icon = xmlnode.Attributes["Icon"].Value;
 					connectionInfo.Panel = xmlnode.Attributes["Panel"].Value;
 				}
 				else
