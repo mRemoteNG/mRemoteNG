@@ -29,6 +29,8 @@ namespace mRemoteNG.Config.Connections
         private XmlDocument _xmlDocument;
         private double _confVersion;
         private SecureString _pW = GeneralAppInfo.EncryptionKey;
+        private ContainerInfo _previousContainer;
+
 
 
         public string ConnectionFileName { get; set; }
@@ -55,30 +57,7 @@ namespace mRemoteNG.Config.Connections
                 else
                     _xmlDocument.Load(ConnectionFileName);
 
-                if (_xmlDocument.DocumentElement.HasAttribute("ConfVersion"))
-                    _confVersion = Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."), CultureInfo.InvariantCulture);
-                else
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strOldConffile);
-
-                const double maxSupportedConfVersion = 2.5;
-                if (_confVersion > maxSupportedConfVersion)
-                {
-                    CTaskDialog.ShowTaskDialogBox(
-                        frmMain.Default,
-                        Application.ProductName,
-                        "Incompatible connection file format",
-                        $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
-                        string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine, ConnectionFileName, _confVersion, maxSupportedConfVersion),
-                        "",
-                        "",
-                        "",
-                        "",
-                        ETaskDialogButtons.Ok,
-                        ESysIcons.Error,
-                        ESysIcons.Error
-                    );
-                    throw (new Exception($"Incompatible connection file format (file format version {_confVersion})."));
-                }
+                ValidateConnectionFileVersion();
 
                 // SECTION 2. Initialize the treeview control.
                 var rootNodeName = "";
@@ -166,7 +145,34 @@ namespace mRemoteNG.Config.Connections
             }
         }
 
-        private ContainerInfo _previousContainer;
+        private void ValidateConnectionFileVersion()
+        {
+            if (_xmlDocument.DocumentElement.HasAttribute("ConfVersion"))
+                _confVersion = Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."),
+                    CultureInfo.InvariantCulture);
+            else
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strOldConffile);
+
+            const double maxSupportedConfVersion = 2.5;
+            if (!(_confVersion > maxSupportedConfVersion)) return;
+            CTaskDialog.ShowTaskDialogBox(
+                frmMain.Default,
+                Application.ProductName,
+                "Incompatible connection file format",
+                $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
+                string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine,
+                    ConnectionFileName, _confVersion, maxSupportedConfVersion),
+                "",
+                "",
+                "",
+                "",
+                ETaskDialogButtons.Ok,
+                ESysIcons.Error,
+                ESysIcons.Error
+                );
+            throw (new Exception($"Incompatible connection file format (file format version {_confVersion})."));
+        }
+
         private void AddNodeFromXml(XmlNode parentXmlNode, TreeNode parentTreeNode)
         {
             try
