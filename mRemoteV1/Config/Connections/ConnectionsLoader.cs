@@ -70,12 +70,12 @@ namespace mRemoteNG.Config.Connections
 		{
 			if (UseSql)
 			{
-				LoadFromSQL();
+				LoadFromSql();
 			}
 			else
 			{
 				var connections = DecryptCompleteFile();
-				LoadFromXML(connections, import);
+				LoadFromXml(connections, import);
 			}
 					
 			frmMain.Default.AreWeUsingSqlServerForSavingConnections = UseSql;
@@ -90,13 +90,13 @@ namespace mRemoteNG.Config.Connections
 				
         #region SQL
 		private delegate void LoadFromSqlDelegate();
-		private void LoadFromSQL()
+		private void LoadFromSql()
 		{
             if (Windows.treeForm == null || Windows.treeForm.tvConnections == null)
 				return ;
             if (Windows.treeForm.tvConnections.InvokeRequired)
 			{
-                Windows.treeForm.tvConnections.Invoke(new LoadFromSqlDelegate(LoadFromSQL));
+                Windows.treeForm.tvConnections.Invoke(new LoadFromSqlDelegate(LoadFromSql));
 				return ;
 			}
 					
@@ -172,7 +172,7 @@ namespace mRemoteNG.Config.Connections
                 Windows.treeForm.tvConnections.BeginUpdate();
 						
 				// SECTION 3. Populate the TreeView with the DOM nodes.
-				AddNodesFromSQL(RootTreeNode);
+				AddNodesFromSql(RootTreeNode);
 				RootTreeNode.Expand();
 						
 				//expand containers
@@ -222,7 +222,7 @@ namespace mRemoteNG.Config.Connections
             Windows.treeForm.tvConnections.SelectedNode = treeNode;
 		}
 				
-		private void AddNodesFromSQL(TreeNode baseNode)
+		private void AddNodesFromSql(TreeNode baseNode)
 		{
 			try
 			{
@@ -242,7 +242,7 @@ namespace mRemoteNG.Config.Connections
 							
 					if (ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(_sqlDataReader["Type"])) == TreeNodeType.Connection)
 					{
-                        var conI = GetConnectionInfoFromSQL();
+                        var conI = GetConnectionInfoFromSql();
 						conI.TreeNode = tNode;
 						//conI.Parent = _previousContainer 'NEW
 								
@@ -303,7 +303,7 @@ namespace mRemoteNG.Config.Connections
 
                         var conI = default(ConnectionInfo);
 								
-						conI = GetConnectionInfoFromSQL();
+						conI = GetConnectionInfoFromSql();
 						conI.Parent = contI;
 						conI.IsContainer = true;
 						contI.ConnectionInfo = conI;
@@ -365,7 +365,7 @@ namespace mRemoteNG.Config.Connections
 			}
 		}
 				
-		private ConnectionInfo GetConnectionInfoFromSQL()
+		private ConnectionInfo GetConnectionInfoFromSql()
 		{
 			try
 			{
@@ -593,7 +593,7 @@ namespace mRemoteNG.Config.Connections
 			return "";
 		}
 				
-		private void LoadFromXML(string cons, bool import)
+		private void LoadFromXml(string cons, bool import)
 		{
 			try
 			{
