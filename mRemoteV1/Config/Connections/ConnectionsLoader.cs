@@ -103,14 +103,7 @@ namespace mRemoteNG.Config.Connections
 			try
 			{
                 Runtime.IsConnectionsFileLoaded = false;
-				if (!string.IsNullOrEmpty(SqlUsername))
-				{
-					_sqlConnection = new SqlConnection("Data Source=" + SqlHost + ";Initial Catalog=" + SqlDatabaseName + ";User Id=" + SqlUsername + ";Password=" + SqlPassword);
-				}
-				else
-				{
-					_sqlConnection = new SqlConnection("Data Source=" + SqlHost + ";Initial Catalog=" + SqlDatabaseName + ";Integrated Security=True");
-				}
+				_sqlConnection = !string.IsNullOrEmpty(SqlUsername) ? new SqlConnection("Data Source=" + SqlHost + ";Initial Catalog=" + SqlDatabaseName + ";User Id=" + SqlUsername + ";Password=" + SqlPassword) : new SqlConnection("Data Source=" + SqlHost + ";Initial Catalog=" + SqlDatabaseName + ";Integrated Security=True");
 						
 				_sqlConnection.Open();
 				_sqlQuery = new SqlCommand("SELECT * FROM tblRoot", _sqlConnection);
@@ -178,10 +171,8 @@ namespace mRemoteNG.Config.Connections
 				//expand containers
 				foreach (ContainerInfo contI in ContainerList)
 				{
-					if (contI.IsExpanded == true)
-					{
+					if (contI.IsExpanded)
 						contI.TreeNode.Expand();
-					}
 				}
 
                 Windows.treeForm.tvConnections.EndUpdate();
@@ -191,10 +182,8 @@ namespace mRemoteNG.Config.Connections
 				{
 					foreach (ConnectionInfo conI in ConnectionList)
 					{
-						if (conI.PleaseConnect == true)
-						{
+						if (conI.PleaseConnect)
                             Runtime.OpenConnection(conI);
-						}
 					}
 				}
 
@@ -240,96 +229,98 @@ namespace mRemoteNG.Config.Connections
 					tNode = new TreeNode(Convert.ToString(_sqlDataReader["Name"]));
 					//baseNode.Nodes.Add(tNode)
 							
-					if (ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(_sqlDataReader["Type"])) == TreeNodeType.Connection)
+					switch (ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(_sqlDataReader["Type"])))
 					{
-                        var conI = GetConnectionInfoFromSql();
-						conI.TreeNode = tNode;
-						//conI.Parent = _previousContainer 'NEW
+					    case TreeNodeType.Connection:
+					    {
+					        var conI = GetConnectionInfoFromSql();
+					        conI.TreeNode = tNode;
+					        //conI.Parent = _previousContainer 'NEW
 								
-						ConnectionList.Add(conI);
+					        ConnectionList.Add(conI);
 								
-						tNode.Tag = conI;
+					        tNode.Tag = conI;
 								
-						if (SqlUpdate == true)
-						{
-                            var prevCon = PreviousConnectionList.FindByConstantID(conI.ConstantID);
+					        if (SqlUpdate)
+					        {
+					            var prevCon = PreviousConnectionList.FindByConstantID(conI.ConstantID);
 									
-							if (prevCon != null)
-							{
-								foreach (ProtocolBase prot in prevCon.OpenConnections)
-								{
-									prot.InterfaceControl.Info = conI;
-									conI.OpenConnections.Add(prot);
-								}
+					            if (prevCon != null)
+					            {
+					                foreach (ProtocolBase prot in prevCon.OpenConnections)
+					                {
+					                    prot.InterfaceControl.Info = conI;
+					                    conI.OpenConnections.Add(prot);
+					                }
 										
-								if (conI.OpenConnections.Count > 0)
-								{
-                                    tNode.ImageIndex = (int)TreeImageType.ConnectionOpen;
-                                    tNode.SelectedImageIndex = (int)TreeImageType.ConnectionOpen;
-								}
-								else
-								{
-                                    tNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
-                                    tNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
-								}
-							}
-							else
-							{
-                                tNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
-                                tNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
-							}
+					                if (conI.OpenConnections.Count > 0)
+					                {
+					                    tNode.ImageIndex = (int)TreeImageType.ConnectionOpen;
+					                    tNode.SelectedImageIndex = (int)TreeImageType.ConnectionOpen;
+					                }
+					                else
+					                {
+					                    tNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
+					                    tNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
+					                }
+					            }
+					            else
+					            {
+					                tNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
+					                tNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
+					            }
 									
-							if (conI.ConstantID == PreviousSelected)
-								_selectedTreeNode = tNode;
-						}
-						else
-						{
-                            tNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
-                            tNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
-						}
-					}
-					else if (ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(_sqlDataReader["Type"])) == TreeNodeType.Container)
-					{
-                        var contI = new ContainerInfo();
-						//If tNode.Parent IsNot Nothing Then
-						//    If Tree.Node.GetNodeType(tNode.Parent) = Tree.Node.Type.Container Then
-						//        contI.Parent = tNode.Parent.Tag
-						//    End If
-						//End If
-						//_previousContainer = contI 'NEW
-						contI.TreeNode = tNode;
+					            if (conI.ConstantID == PreviousSelected)
+					                _selectedTreeNode = tNode;
+					        }
+					        else
+					        {
+					            tNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
+					            tNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
+					        }
+					    }
+					        break;
+					    case TreeNodeType.Container:
+					    {
+					        var contI = new ContainerInfo();
+					        //If tNode.Parent IsNot Nothing Then
+					        //    If Tree.Node.GetNodeType(tNode.Parent) = Tree.Node.Type.Container Then
+					        //        contI.Parent = tNode.Parent.Tag
+					        //    End If
+					        //End If
+					        //_previousContainer = contI 'NEW
+					        contI.TreeNode = tNode;
 								
-						contI.Name = Convert.ToString(_sqlDataReader["Name"]);
+					        contI.Name = Convert.ToString(_sqlDataReader["Name"]);
 
-                        var conI = default(ConnectionInfo);
+					        var conI = default(ConnectionInfo);
 								
-						conI = GetConnectionInfoFromSql();
-						conI.Parent = contI;
-						conI.IsContainer = true;
-						contI.ConnectionInfo = conI;
+					        conI = GetConnectionInfoFromSql();
+					        conI.Parent = contI;
+					        conI.IsContainer = true;
+					        contI.ConnectionInfo = conI;
 								
-						if (SqlUpdate == true)
-						{
-                            var prevCont = PreviousContainerList.FindByConstantID(conI.ConstantID);
-							if (prevCont != null)
-								contI.IsExpanded = prevCont.IsExpanded;
+					        if (SqlUpdate)
+					        {
+					            var prevCont = PreviousContainerList.FindByConstantID(conI.ConstantID);
+					            if (prevCont != null)
+					                contI.IsExpanded = prevCont.IsExpanded;
 									
-							if (conI.ConstantID == PreviousSelected)
-								_selectedTreeNode = tNode;
-						}
-						else
-						{
-							if (Convert.ToBoolean(_sqlDataReader["Expanded"]) == true)
-								contI.IsExpanded = true;
-							else
-								contI.IsExpanded = false;
-						}
+					            if (conI.ConstantID == PreviousSelected)
+					                _selectedTreeNode = tNode;
+					        }
+					        else
+					        {
+					            contI.IsExpanded = Convert.ToBoolean(_sqlDataReader["Expanded"]);
+					        }
 								
-						ContainerList.Add(contI);
-						ConnectionList.Add(conI);
-						tNode.Tag = contI;
-                        tNode.ImageIndex = (int)TreeImageType.Container;
-                        tNode.SelectedImageIndex = (int)TreeImageType.Container;
+					        ContainerList.Add(contI);
+					        ConnectionList.Add(conI);
+					        tNode.Tag = contI;
+					        tNode.ImageIndex = (int)TreeImageType.Container;
+					        tNode.SelectedImageIndex = (int)TreeImageType.Container;
+					    }
+					        break;
 					}
 
                     var parentId = Convert.ToString(_sqlDataReader["ParentID"].ToString().Trim());
@@ -343,12 +334,17 @@ namespace mRemoteNG.Config.Connections
 								
 						if (pNode != null)
 						{
-							pNode.Nodes.Add(tNode);
-									
-							if (ConnectionTreeNode.GetNodeType(tNode) == TreeNodeType.Connection)
-								(tNode.Tag as ConnectionInfo).Parent = (ContainerInfo)pNode.Tag;
-							else if (ConnectionTreeNode.GetNodeType(tNode) == TreeNodeType.Container)
-								(tNode.Tag as ContainerInfo).Parent = (ContainerInfo)pNode.Tag;
+						    pNode.Nodes.Add(tNode);
+
+						    switch (ConnectionTreeNode.GetNodeType(tNode))
+						    {
+						        case TreeNodeType.Connection:
+						            (tNode.Tag as ConnectionInfo).Parent = (ContainerInfo)pNode.Tag;
+						            break;
+						        case TreeNodeType.Container:
+						            (tNode.Tag as ContainerInfo).Parent = (ContainerInfo)pNode.Tag;
+						            break;
+						    }
 						}
 						else
 						{
@@ -519,7 +515,7 @@ namespace mRemoteNG.Config.Connections
 					connectionInfo.Inheritance.AutomaticResize = Convert.ToBoolean(_sqlDataReader["InheritAutomaticResize"]);
 				}
 						
-				if (SqlUpdate == true)
+				if (SqlUpdate)
 				{
 					connectionInfo.PleaseConnect = Convert.ToBoolean(_sqlDataReader["Connected"]);
 				}
@@ -543,54 +539,48 @@ namespace mRemoteNG.Config.Connections
             var strCons = "";
 			strCons = sRd.ReadToEnd();
 			sRd.Close();
-					
-			if (!string.IsNullOrEmpty(strCons))
-			{
-                var strDecr = "";
-                var notDecr = true;
+
+		    if (string.IsNullOrEmpty(strCons)) return "";
+		    var strDecr = "";
+		    var notDecr = true;
 						
-				if (strCons.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>"))
-				{
-					strDecr = strCons;
-					return strDecr;
-				}
+		    if (strCons.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>"))
+		    {
+		        strDecr = strCons;
+		        return strDecr;
+		    }
 						
-				try
-				{
-					strDecr = cryptographyProvider.Decrypt(strCons, _pW);
+		    try
+		    {
+		        strDecr = cryptographyProvider.Decrypt(strCons, _pW);
+		        notDecr = strDecr == strCons;
+		    }
+		    catch (Exception)
+		    {
+		        notDecr = true;
+		    }
+						
+		    if (notDecr)
+		    {
+		        if (Authenticate(strCons, true))
+		        {
+		            strDecr = cryptographyProvider.Decrypt(strCons, _pW);
+		            notDecr = false;
+		        }
+		        else
+		        {
+		            notDecr = true;
+		        }
 							
-					if (strDecr != strCons)
-						notDecr = false;
-					else
-						notDecr = true;
-				}
-				catch (Exception)
-				{
-					notDecr = true;
-				}
-						
-				if (notDecr)
-				{
-					if (Authenticate(strCons, true) == true)
-					{
-						strDecr = cryptographyProvider.Decrypt(strCons, _pW);
-						notDecr = false;
-					}
-					else
-					{
-						notDecr = true;
-					}
-							
-					if (notDecr == false)
-						return strDecr;
-				}
-				else
-				{
-					return strDecr;
-				}
-			}
-					
-			return "";
+		        if (notDecr == false)
+		            return strDecr;
+		    }
+		    else
+		    {
+		        return strDecr;
+		    }
+
+		    return "";
 		}
 				
 		private void LoadFromXml(string cons, bool import)
@@ -645,10 +635,7 @@ namespace mRemoteNG.Config.Connections
                     var rootNodeName = "";
 					if (_xmlDocument.DocumentElement.HasAttribute("Name"))
 						rootNodeName = Convert.ToString(_xmlDocument.DocumentElement.Attributes["Name"].Value.Trim());
-					if (!string.IsNullOrEmpty(rootNodeName))
-						RootTreeNode.Name = rootNodeName;
-					else
-						RootTreeNode.Name = _xmlDocument.DocumentElement.Name;
+					RootTreeNode.Name = !string.IsNullOrEmpty(rootNodeName) ? rootNodeName : _xmlDocument.DocumentElement.Name;
 					RootTreeNode.Text = RootTreeNode.Name;
 							
 					rootInfo = new RootNodeInfo(RootNodeType.Connection);
@@ -748,59 +735,50 @@ namespace mRemoteNG.Config.Connections
                         var treeNode = new TreeNode(xmlNode.Attributes["Name"].Value);
 						parentTreeNode.Nodes.Add(treeNode);
 								
-						if (ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == TreeNodeType.Connection) //connection info
+						switch (ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value))
 						{
-                            var connectionInfo = GetConnectionInfoFromXml(xmlNode);
-							connectionInfo.TreeNode = treeNode;
-							connectionInfo.Parent = _previousContainer; //NEW
-							ConnectionList.Add(connectionInfo);
-							treeNode.Tag = connectionInfo;
-                            treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
-                            treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
-						}
-						else if (ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value) == TreeNodeType.Container) //container info
-						{
-                            var containerInfo = new ContainerInfo();
-							if (treeNode.Parent != null)
-							{
-								if (ConnectionTreeNode.GetNodeType(treeNode.Parent) == TreeNodeType.Container)
-									containerInfo.Parent = (ContainerInfo)treeNode.Parent.Tag;
-							}
-							_previousContainer = containerInfo; //NEW
-							containerInfo.TreeNode = treeNode;
-							containerInfo.Name = xmlNode.Attributes["Name"].Value;
+						    case TreeNodeType.Connection:
+						    {
+						        var connectionInfo = GetConnectionInfoFromXml(xmlNode);
+						        connectionInfo.TreeNode = treeNode;
+						        connectionInfo.Parent = _previousContainer; //NEW
+						        ConnectionList.Add(connectionInfo);
+						        treeNode.Tag = connectionInfo;
+						        treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
+						        treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
+						    }
+						        break;
+						    case TreeNodeType.Container:
+						    {
+						        var containerInfo = new ContainerInfo();
+						        if (treeNode.Parent != null)
+						        {
+						            if (ConnectionTreeNode.GetNodeType(treeNode.Parent) == TreeNodeType.Container)
+						                containerInfo.Parent = (ContainerInfo)treeNode.Parent.Tag;
+						        }
+						        _previousContainer = containerInfo; //NEW
+						        containerInfo.TreeNode = treeNode;
+						        containerInfo.Name = xmlNode.Attributes["Name"].Value;
 									
-							if (_confVersion >= 0.8)
-							{
-								if (xmlNode.Attributes["Expanded"].Value == "True")
-								{
-									containerInfo.IsExpanded = true;
-								}
-								else
-								{
-									containerInfo.IsExpanded = false;
-								}
-							}
+						        if (_confVersion >= 0.8)
+						        {
+						            containerInfo.IsExpanded = xmlNode.Attributes["Expanded"].Value == "True";
+						        }
 
-                            var connectionInfo = default(ConnectionInfo);
-							if (_confVersion >= 0.9)
-							{
-								connectionInfo = GetConnectionInfoFromXml(xmlNode);
-							}
-							else
-							{
-								connectionInfo = new ConnectionInfo();
-							}
+						        var connectionInfo = default(ConnectionInfo);
+						        connectionInfo = _confVersion >= 0.9 ? GetConnectionInfoFromXml(xmlNode) : new ConnectionInfo();
 									
-							connectionInfo.Parent = containerInfo;
-							connectionInfo.IsContainer = true;
-							containerInfo.ConnectionInfo = connectionInfo;
+						        connectionInfo.Parent = containerInfo;
+						        connectionInfo.IsContainer = true;
+						        containerInfo.ConnectionInfo = connectionInfo;
 									
-							ContainerList.Add(containerInfo);
+						        ContainerList.Add(containerInfo);
 									
-							treeNode.Tag = containerInfo;
-                            treeNode.ImageIndex = (int)TreeImageType.Container;
-                            treeNode.SelectedImageIndex = (int)TreeImageType.Container;
+						        treeNode.Tag = containerInfo;
+						        treeNode.ImageIndex = (int)TreeImageType.Container;
+						        treeNode.SelectedImageIndex = (int)TreeImageType.Container;
+						    }
+						        break;
 						}
 								
 						AddNodeFromXml(xmlNode, treeNode);
@@ -810,18 +788,11 @@ namespace mRemoteNG.Config.Connections
 				{
                     var nodeName = "";
                     var nameAttribute = parentXmlNode.Attributes["Name"];
-					if (!(nameAttribute == null))
+					if (nameAttribute != null)
 					{
 						nodeName = nameAttribute.Value.Trim();
 					}
-					if (!string.IsNullOrEmpty(nodeName))
-					{
-						parentTreeNode.Text = nodeName;
-					}
-					else
-					{
-						parentTreeNode.Text = parentXmlNode.Name;
-					}
+					parentTreeNode.Text = !string.IsNullOrEmpty(nodeName) ? nodeName : parentXmlNode.Name;
 				}
 			}
 			catch (Exception ex)
@@ -837,7 +808,7 @@ namespace mRemoteNG.Config.Connections
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             try
 			{
-				XmlNode xmlnode = xxNode;
+				var xmlnode = xxNode;
 				if (_confVersion > 0.1) //0.2
 				{
 					connectionInfo.Name = xmlnode.Attributes["Name"].Value;
@@ -852,14 +823,7 @@ namespace mRemoteNG.Config.Connections
 							
 					if (_confVersion < 1.1) //1.0 - 0.1
 					{
-						if (Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value) == true)
-						{
-							connectionInfo.Resolution = ProtocolRDP.RDPResolutions.Fullscreen;
-						}
-						else
-						{
-							connectionInfo.Resolution = ProtocolRDP.RDPResolutions.FitToWindow;
-						}
+						connectionInfo.Resolution = Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value) == true ? ProtocolRDP.RDPResolutions.Fullscreen : ProtocolRDP.RDPResolutions.FitToWindow;
 					}
 				}
 						
@@ -888,7 +852,7 @@ namespace mRemoteNG.Config.Connections
 				{
 					if (_confVersion < 0.7)
 					{
-						if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
+						if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value))
                             connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["VNCPort"].Value);
 						else
                             connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["RDPPort"].Value);
@@ -900,7 +864,7 @@ namespace mRemoteNG.Config.Connections
 				{
 					if (_confVersion < 0.7)
 					{
-						if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
+						if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value))
 							connectionInfo.Port = (int)ProtocolVNC.Defaults.Port;
 						else
 							connectionInfo.Port = (int)ProtocolRDP.Defaults.Port;
@@ -1157,12 +1121,10 @@ namespace mRemoteNG.Config.Connections
 						return false;
 					}
 				}
-						
-				if (rootInfo != null)
-				{
-					rootInfo.Password = true;
-					rootInfo.PasswordString = _pW.ConvertToUnsecureString();
-				}
+
+			    if (rootInfo == null) return true;
+			    rootInfo.Password = true;
+			    rootInfo.PasswordString = _pW.ConvertToUnsecureString();
 			}
 					
 			return true;
