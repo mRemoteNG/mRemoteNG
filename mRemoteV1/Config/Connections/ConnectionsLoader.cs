@@ -220,30 +220,22 @@ namespace mRemoteNG.Config.Connections
 						
 				if (_sqlDataReader.HasRows == false)
 					return;
-						
-				var tNode = default(TreeNode);
-						
-				while (_sqlDataReader.Read())
+
+			    while (_sqlDataReader.Read())
 				{
-					tNode = new TreeNode(Convert.ToString(_sqlDataReader["Name"]));
-					//baseNode.Nodes.Add(tNode)
-							
+					var tNode = new TreeNode(Convert.ToString(_sqlDataReader["Name"]));
 					switch (ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(_sqlDataReader["Type"])))
 					{
 					    case TreeNodeType.Connection:
 					    {
 					        var conI = GetConnectionInfoFromSql();
 					        conI.TreeNode = tNode;
-					        //conI.Parent = _previousContainer 'NEW
-								
 					        ConnectionList.Add(conI);
-								
 					        tNode.Tag = conI;
 								
 					        if (SqlUpdate)
 					        {
 					            var prevCon = PreviousConnectionList.FindByConstantID(conI.ConstantID);
-									
 					            if (prevCon != null)
 					            {
 					                foreach (ProtocolBase prot in prevCon.OpenConnections)
@@ -287,8 +279,7 @@ namespace mRemoteNG.Config.Connections
 					            Name = Convert.ToString(_sqlDataReader["Name"])
 					        };
 
-					        var conI = default(ConnectionInfo);
-					        conI = GetConnectionInfoFromSql();
+					        var conI = GetConnectionInfoFromSql();
 					        conI.Parent = contI;
 					        conI.IsContainer = true;
 					        contI.ConnectionInfo = conI;
@@ -324,7 +315,6 @@ namespace mRemoteNG.Config.Connections
 					else
 					{
                         var pNode = ConnectionTreeNode.GetNodeFromConstantID(Convert.ToString(_sqlDataReader["ParentID"]));
-								
 						if (pNode != null)
 						{
 						    pNode.Nodes.Add(tNode);
@@ -344,8 +334,6 @@ namespace mRemoteNG.Config.Connections
 							baseNode.Nodes.Add(tNode);
 						}
 					}
-							
-					//AddNodesFromSQL(tNode)
 				}
 			}
 			catch (Exception ex)
@@ -511,9 +499,7 @@ namespace mRemoteNG.Config.Connections
 				}
 						
 				if (SqlUpdate)
-				{
 					connectionInfo.PleaseConnect = Convert.ToBoolean(_sqlDataReader["Connected"]);
-				}
 						
 				return connectionInfo;
 			}
@@ -537,7 +523,7 @@ namespace mRemoteNG.Config.Connections
 
 		    if (string.IsNullOrEmpty(strCons)) return "";
 		    var strDecr = "";
-		    var notDecr = true;
+		    bool notDecr;
 						
 		    if (strCons.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>"))
 		    {
@@ -561,10 +547,6 @@ namespace mRemoteNG.Config.Connections
 		        {
 		            strDecr = cryptographyProvider.Decrypt(strCons, _pW);
 		            notDecr = false;
-		        }
-		        else
-		        {
-		            notDecr = true;
 		        }
 							
 		        if (notDecr == false)
@@ -620,26 +602,18 @@ namespace mRemoteNG.Config.Connections
 				}
 
                 // SECTION 2. Initialize the treeview control.
-                var rootInfo = default(RootNodeInfo);
-				if (import)
-				{
-					rootInfo = null;
-				}
-				else
-				{
-                    var rootNodeName = "";
-					if (_xmlDocument.DocumentElement.HasAttribute("Name"))
-						rootNodeName = Convert.ToString(_xmlDocument.DocumentElement.Attributes["Name"].Value.Trim());
-					RootTreeNode.Name = !string.IsNullOrEmpty(rootNodeName) ? rootNodeName : _xmlDocument.DocumentElement.Name;
-					RootTreeNode.Text = RootTreeNode.Name;
+                var rootNodeName = "";
+				if (_xmlDocument.DocumentElement.HasAttribute("Name"))
+					rootNodeName = Convert.ToString(_xmlDocument.DocumentElement.Attributes["Name"].Value.Trim());
+				RootTreeNode.Name = !string.IsNullOrEmpty(rootNodeName) ? rootNodeName : _xmlDocument.DocumentElement.Name;
+				RootTreeNode.Text = RootTreeNode.Name;
 
-				    rootInfo = new RootNodeInfo(RootNodeType.Connection)
-				    {
-				        Name = RootTreeNode.Name,
-				        TreeNode = RootTreeNode
-				    };
-				    RootTreeNode.Tag = rootInfo;
-				}
+				var rootInfo = new RootNodeInfo(RootNodeType.Connection)
+				{
+				    Name = RootTreeNode.Name,
+				    TreeNode = RootTreeNode
+				};
+				RootTreeNode.Tag = rootInfo;
 						
 				if (_confVersion > 1.3) //1.4
 				{
@@ -659,9 +633,7 @@ namespace mRemoteNG.Config.Connections
 				if (_confVersion >= 1.0)
 				{
 					if (Convert.ToBoolean(_xmlDocument.DocumentElement.Attributes["Export"].Value) == true)
-					{
 						isExportFile = true;
-					}
 				}
 						
 				if (import && !isExportFile)
@@ -702,11 +674,8 @@ namespace mRemoteNG.Config.Connections
 				}
 						
 				RootTreeNode.EnsureVisible();
-						
 				if (!import)
-				{
                     Runtime.IsConnectionsFileLoaded = true;
-				}
                 Windows.treeForm.InitialRefresh();
 				SetSelectedNode(RootTreeNode);
 			}
@@ -762,15 +731,11 @@ namespace mRemoteNG.Config.Connections
 						            containerInfo.IsExpanded = xmlNode.Attributes["Expanded"].Value == "True";
 						        }
 
-						        var connectionInfo = default(ConnectionInfo);
-						        connectionInfo = _confVersion >= 0.9 ? GetConnectionInfoFromXml(xmlNode) : new ConnectionInfo();
-									
+						        var connectionInfo = _confVersion >= 0.9 ? GetConnectionInfoFromXml(xmlNode) : new ConnectionInfo();
 						        connectionInfo.Parent = containerInfo;
 						        connectionInfo.IsContainer = true;
 						        containerInfo.ConnectionInfo = connectionInfo;
-									
 						        ContainerList.Add(containerInfo);
-									
 						        treeNode.Tag = containerInfo;
 						        treeNode.ImageIndex = (int)TreeImageType.Container;
 						        treeNode.SelectedImageIndex = (int)TreeImageType.Container;
@@ -820,7 +785,7 @@ namespace mRemoteNG.Config.Connections
 							
 					if (_confVersion < 1.1) //1.0 - 0.1
 					{
-						connectionInfo.Resolution = Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value) == true ? ProtocolRDP.RDPResolutions.Fullscreen : ProtocolRDP.RDPResolutions.FitToWindow;
+						connectionInfo.Resolution = Convert.ToBoolean(xmlnode.Attributes["Fullscreen"].Value) ? ProtocolRDP.RDPResolutions.Fullscreen : ProtocolRDP.RDPResolutions.FitToWindow;
 					}
 				}
 						
@@ -828,7 +793,7 @@ namespace mRemoteNG.Config.Connections
 				{
 					if (_confVersion < 0.7)
 					{
-						if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value) == true)
+						if (Convert.ToBoolean(xmlnode.Attributes["UseVNC"].Value))
 						{
 							connectionInfo.Protocol = ProtocolType.VNC;
 							connectionInfo.Port = Convert.ToInt32(xmlnode.Attributes["VNCPort"].Value);
@@ -1079,46 +1044,36 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, ConnectionFileName, ex.Message), false);
+				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, ConnectionFileName, ex.Message));
 			}
 			return connectionInfo;
 		}
 				
-		private bool Authenticate(string Value, bool CompareToOriginalValue, RootNodeInfo rootInfo = null)
+		private bool Authenticate(string value, bool compareToOriginalValue, RootNodeInfo rootInfo = null)
 		{
             var passwordName = "";
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             if (UseSql)
-			{
 				passwordName = Language.strSQLServer.TrimEnd(':');
-			}
 			else
-			{
 				passwordName = Path.GetFileName(ConnectionFileName);
-			}
 					
-			if (CompareToOriginalValue)
+			if (compareToOriginalValue)
 			{
-				while (cryptographyProvider.Decrypt(Value, _pW) == Value)
+				while (cryptographyProvider.Decrypt(value, _pW) == value)
 				{
 					_pW = Tools.MiscTools.PasswordDialog(passwordName, false);
-							
 					if (_pW.Length == 0)
-					{
 						return false;
-					}
 				}
 			}
 			else
 			{
-				while (cryptographyProvider.Decrypt(Value, _pW) != "ThisIsProtected")
+				while (cryptographyProvider.Decrypt(value, _pW) != "ThisIsProtected")
 				{
 					_pW = Tools.MiscTools.PasswordDialog(passwordName, false);
-							
 					if (_pW.Length == 0)
-					{
 						return false;
-					}
 				}
 
 			    if (rootInfo == null) return true;
