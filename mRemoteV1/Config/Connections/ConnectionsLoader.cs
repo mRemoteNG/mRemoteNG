@@ -127,7 +127,7 @@ namespace mRemoteNG.Config.Connections
                         Application.ProductName, 
                         "Incompatible database schema",
                         $"The database schema on the server is not supported. Please upgrade to a newer version of {Application.ProductName}.", 
-                        string.Format("Schema Version: {1}{0}Highest Supported Version: {2}", Environment.NewLine, _confVersion.ToString(), maxSupportedSchemaVersion.ToString()), 
+                        string.Format("Schema Version: {1}{0}Highest Supported Version: {2}", Environment.NewLine, _confVersion, maxSupportedSchemaVersion), 
                         "", 
                         "", 
                         "", 
@@ -204,7 +204,7 @@ namespace mRemoteNG.Config.Connections
 		{
             if (ConnectionTree.TreeView != null && ConnectionTree.TreeView.InvokeRequired)
 			{
-                Windows.treeForm.Invoke(new SetSelectedNodeDelegate(SetSelectedNode), new object[] { treeNode });
+                Windows.treeForm.Invoke(new SetSelectedNodeDelegate(SetSelectedNode), treeNode);
 				return ;
 			}
             Windows.treeForm.tvConnections.SelectedNode = treeNode;
@@ -587,9 +587,9 @@ namespace mRemoteNG.Config.Connections
                     CTaskDialog.ShowTaskDialogBox(
                         frmMain.Default,
                         Application.ProductName, 
-                        "Incompatible connection file format", 
-                        string.Format("The format of this connection file is not supported. Please upgrade to a newer version of {0}.", Application.ProductName), 
-                        string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine, ConnectionFileName, _confVersion.ToString(), maxSupportedConfVersion.ToString()),
+                        "Incompatible connection file format",
+                        $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.", 
+                        string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine, ConnectionFileName, _confVersion, maxSupportedConfVersion),
                         "", 
                         "", 
                         "", 
@@ -598,7 +598,7 @@ namespace mRemoteNG.Config.Connections
                         ESysIcons.Error,
                         ESysIcons.Error
                     );
-					throw (new Exception(string.Format("Incompatible connection file format (file format version {0}).", _confVersion)));
+					throw (new Exception($"Incompatible connection file format (file format version {_confVersion})."));
 				}
 
                 // SECTION 2. Initialize the treeview control.
@@ -632,7 +632,7 @@ namespace mRemoteNG.Config.Connections
                 var isExportFile = false;
 				if (_confVersion >= 1.0)
 				{
-					if (Convert.ToBoolean(_xmlDocument.DocumentElement.Attributes["Export"].Value) == true)
+					if (Convert.ToBoolean(_xmlDocument.DocumentElement.Attributes["Export"].Value))
 						isExportFile = true;
 				}
 						
