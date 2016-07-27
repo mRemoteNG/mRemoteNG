@@ -170,88 +170,12 @@ namespace mRemoteNG.Config.Connections
                 while (_sqlDataReader.Read())
                 {
                     var tNode = new TreeNode(Convert.ToString(_sqlDataReader["Name"]));
-                    switch (ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(_sqlDataReader["Type"])))
-                    {
-                        case TreeNodeType.Connection:
-                            {
-                                var conI = GetConnectionInfoFromSql();
-                                conI.TreeNode = tNode;
-                                ConnectionList.Add(conI);
-                                tNode.Tag = conI;
+                    var nodeType = ConnectionTreeNode.GetNodeTypeFromString(Convert.ToString(_sqlDataReader["Type"]));
 
-                                if (DatabaseUpdate)
-                                {
-                                    var prevCon = PreviousConnectionList.FindByConstantID(conI.ConstantID);
-                                    if (prevCon != null)
-                                    {
-                                        foreach (ProtocolBase prot in prevCon.OpenConnections)
-                                        {
-                                            prot.InterfaceControl.Info = conI;
-                                            conI.OpenConnections.Add(prot);
-                                        }
-
-                                        if (conI.OpenConnections.Count > 0)
-                                        {
-                                            tNode.ImageIndex = (int)TreeImageType.ConnectionOpen;
-                                            tNode.SelectedImageIndex = (int)TreeImageType.ConnectionOpen;
-                                        }
-                                        else
-                                        {
-                                            tNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
-                                            tNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        tNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
-                                        tNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
-                                    }
-
-                                    if (conI.ConstantID == PreviousSelected)
-                                        _selectedTreeNode = tNode;
-                                }
-                                else
-                                {
-                                    tNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
-                                    tNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
-                                }
-                            }
-                            break;
-                        case TreeNodeType.Container:
-                            {
-                                var contI = new ContainerInfo
-                                {
-                                    TreeNode = tNode,
-                                    Name = Convert.ToString(_sqlDataReader["Name"])
-                                };
-
-                                var conI = GetConnectionInfoFromSql();
-                                conI.Parent = contI;
-                                conI.IsContainer = true;
-                                contI.ConnectionInfo = conI;
-
-                                if (DatabaseUpdate)
-                                {
-                                    var prevCont = PreviousContainerList.FindByConstantID(conI.ConstantID);
-                                    if (prevCont != null)
-                                        contI.IsExpanded = prevCont.IsExpanded;
-
-                                    if (conI.ConstantID == PreviousSelected)
-                                        _selectedTreeNode = tNode;
-                                }
-                                else
-                                {
-                                    contI.IsExpanded = Convert.ToBoolean(_sqlDataReader["Expanded"]);
-                                }
-
-                                ContainerList.Add(contI);
-                                ConnectionList.Add(conI);
-                                tNode.Tag = contI;
-                                tNode.ImageIndex = (int)TreeImageType.Container;
-                                tNode.SelectedImageIndex = (int)TreeImageType.Container;
-                            }
-                            break;
-                    }
+                    if (nodeType == TreeNodeType.Connection)
+                        AddConnectionToList(tNode);
+                    else if (nodeType == TreeNodeType.Container)
+                        AddContainerToList(tNode);
 
                     var parentId = Convert.ToString(_sqlDataReader["ParentID"].ToString().Trim());
                     if (string.IsNullOrEmpty(parentId) || parentId == "0")
@@ -268,10 +192,10 @@ namespace mRemoteNG.Config.Connections
                             switch (ConnectionTreeNode.GetNodeType(tNode))
                             {
                                 case TreeNodeType.Connection:
-                                    (tNode.Tag as ConnectionInfo).Parent = (ContainerInfo)pNode.Tag;
+                                    ((ConnectionInfo) tNode.Tag).Parent = (ContainerInfo)pNode.Tag;
                                     break;
                                 case TreeNodeType.Container:
-                                    (tNode.Tag as ContainerInfo).Parent = (ContainerInfo)pNode.Tag;
+                                    ((ContainerInfo) tNode.Tag).Parent = (ContainerInfo)pNode.Tag;
                                     break;
                             }
                         }
@@ -286,6 +210,85 @@ namespace mRemoteNG.Config.Connections
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strAddNodesFromSqlFailed + Environment.NewLine + ex.Message, true);
             }
+        }
+
+        private void AddConnectionToList(TreeNode tNode)
+        {
+            var conI = GetConnectionInfoFromSql();
+            conI.TreeNode = tNode;
+            ConnectionList.Add(conI);
+            tNode.Tag = conI;
+
+            if (DatabaseUpdate)
+            {
+                var prevCon = PreviousConnectionList.FindByConstantID(conI.ConstantID);
+                if (prevCon != null)
+                {
+                    foreach (ProtocolBase prot in prevCon.OpenConnections)
+                    {
+                        prot.InterfaceControl.Info = conI;
+                        conI.OpenConnections.Add(prot);
+                    }
+
+                    if (conI.OpenConnections.Count > 0)
+                    {
+                        tNode.ImageIndex = (int) TreeImageType.ConnectionOpen;
+                        tNode.SelectedImageIndex = (int) TreeImageType.ConnectionOpen;
+                    }
+                    else
+                    {
+                        tNode.ImageIndex = (int) TreeImageType.ConnectionClosed;
+                        tNode.SelectedImageIndex = (int) TreeImageType.ConnectionClosed;
+                    }
+                }
+                else
+                {
+                    tNode.ImageIndex = (int) TreeImageType.ConnectionClosed;
+                    tNode.SelectedImageIndex = (int) TreeImageType.ConnectionClosed;
+                }
+
+                if (conI.ConstantID == PreviousSelected)
+                    _selectedTreeNode = tNode;
+            }
+            else
+            {
+                tNode.ImageIndex = (int) TreeImageType.ConnectionClosed;
+                tNode.SelectedImageIndex = (int) TreeImageType.ConnectionClosed;
+            }
+        }
+
+        private void AddContainerToList(TreeNode tNode)
+        {
+            var contI = new ContainerInfo
+            {
+                TreeNode = tNode,
+                Name = Convert.ToString(_sqlDataReader["Name"])
+            };
+
+            var conI = GetConnectionInfoFromSql();
+            conI.Parent = contI;
+            conI.IsContainer = true;
+            contI.ConnectionInfo = conI;
+
+            if (DatabaseUpdate)
+            {
+                var prevCont = PreviousContainerList.FindByConstantID(conI.ConstantID);
+                if (prevCont != null)
+                    contI.IsExpanded = prevCont.IsExpanded;
+
+                if (conI.ConstantID == PreviousSelected)
+                    _selectedTreeNode = tNode;
+            }
+            else
+            {
+                contI.IsExpanded = Convert.ToBoolean(_sqlDataReader["Expanded"]);
+            }
+
+            ContainerList.Add(contI);
+            ConnectionList.Add(conI);
+            tNode.Tag = contI;
+            tNode.ImageIndex = (int)TreeImageType.Container;
+            tNode.SelectedImageIndex = (int)TreeImageType.Container;
         }
 
         private ConnectionInfo GetConnectionInfoFromSql()
@@ -469,7 +472,6 @@ namespace mRemoteNG.Config.Connections
             }
             Windows.treeForm.tvConnections.SelectedNode = treeNode;
         }
-
 
         private bool Authenticate(string value, bool compareToOriginalValue, RootNodeInfo rootInfo = null)
         {
