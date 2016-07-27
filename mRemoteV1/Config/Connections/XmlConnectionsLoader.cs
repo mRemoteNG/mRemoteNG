@@ -132,34 +132,22 @@ namespace mRemoteNG.Config.Connections
                 {
                     foreach (XmlNode xmlNode in parentXmlNode.ChildNodes)
                     {
-                        var treeNode = new TreeNode(xmlNode.Attributes["Name"].Value);
+                        var treeNode = new TreeNode(xmlNode.Attributes?["Name"].Value);
                         parentTreeNode.Nodes.Add(treeNode);
+                        var nodeType = ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes?["Type"].Value);
 
-                        switch (ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value))
-                        {
-                            case TreeNodeType.Connection:
-                            {
-                                AddConnectionToList(xmlNode, treeNode);
-                            }
-                            break;
-                            case TreeNodeType.Container:
-                            {
-                                AddContainerToList(xmlNode, treeNode);
-                            }
-                            break;
-                        }
+                        if (nodeType == TreeNodeType.Connection)
+                            AddConnectionToList(xmlNode, treeNode);
+                        else if (nodeType == TreeNodeType.Container)
+                            AddContainerToList(xmlNode, treeNode);
 
                         AddNodeFromXml(xmlNode, treeNode);
                     }
                 }
                 else
                 {
-                    var nodeName = "";
-                    var nameAttribute = parentXmlNode.Attributes["Name"];
-                    if (nameAttribute != null)
-                    {
-                        nodeName = nameAttribute.Value.Trim();
-                    }
+                    var nameAttribute = parentXmlNode.Attributes?["Name"];
+                    var nodeName = nameAttribute?.Value.Trim();
                     parentTreeNode.Text = !string.IsNullOrEmpty(nodeName) ? nodeName : parentXmlNode.Name;
                 }
             }
