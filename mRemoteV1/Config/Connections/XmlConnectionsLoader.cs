@@ -45,7 +45,7 @@ namespace mRemoteNG.Config.Connections
             {
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = false;
-                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+                
 
                 // SECTION 1. Create a DOM Document and load the XML data into it.
                 LoadXmlConnectionData();
@@ -54,19 +54,7 @@ namespace mRemoteNG.Config.Connections
                 // SECTION 2. Initialize the treeview control.
                 var rootInfo = InitializeRootNode();
 
-                if (_confVersion > 1.3) //1.4
-                {
-                    if (cryptographyProvider.Decrypt(Convert.ToString(_xmlDocument.DocumentElement.Attributes["Protected"].Value), _pW) != "ThisIsNotProtected")
-                    {
-                        if (Authenticate(Convert.ToString(_xmlDocument.DocumentElement.Attributes["Protected"].Value), false, rootInfo) == false)
-                        {
-                            mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
-                            mRemoteNG.Settings.Default.CustomConsPath = "";
-                            RootTreeNode.Remove();
-                            return;
-                        }
-                    }
-                }
+                if (!ConnectionsFileIsAuthentic(rootInfo)) return;
 
                 if (import && !IsExportFile())
                 {
@@ -82,15 +70,16 @@ namespace mRemoteNG.Config.Connections
 
                 // SECTION 3. Populate the TreeView with the DOM nodes.
                 PopulateTreeview();
+                RootTreeNode.EnsureVisible();
+                Windows.treeForm.InitialRefresh();
+                SetSelectedNode(RootTreeNode);
 
                 //open connections from last mremote session
                 OpenConnectionsFromLastSession();
 
-                RootTreeNode.EnsureVisible();
+                
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = true;
-                Windows.treeForm.InitialRefresh();
-                SetSelectedNode(RootTreeNode);
             }
             catch (Exception ex)
             {
@@ -100,15 +89,27 @@ namespace mRemoteNG.Config.Connections
             }
         }
 
+        private bool ConnectionsFileIsAuthentic(RootNodeInfo rootInfo)
+        {
+            if (!(_confVersion > 1.3)) return true;
+            var protectedString = _xmlDocument.DocumentElement.Attributes["Protected"].Value;
+            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            var connectionsFileIsNotEncrypted = cryptographyProvider.Decrypt(protectedString, _pW) == "ThisIsNotProtected";
+            if (connectionsFileIsNotEncrypted) return true;
+            if (Authenticate(protectedString, false, rootInfo)) return true;
+            mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
+            mRemoteNG.Settings.Default.CustomConsPath = "";
+            RootTreeNode.Remove();
+            return false;
+        }
+
         private void OpenConnectionsFromLastSession()
         {
-            if (mRemoteNG.Settings.Default.OpenConsFromLastSession && !mRemoteNG.Settings.Default.NoReconnect)
+            if (!mRemoteNG.Settings.Default.OpenConsFromLastSession || mRemoteNG.Settings.Default.NoReconnect) return;
+            foreach (ConnectionInfo conI in ConnectionList)
             {
-                foreach (ConnectionInfo conI in ConnectionList)
-                {
-                    if (conI.PleaseConnect)
-                        Runtime.OpenConnection(conI);
-                }
+                if (conI.PleaseConnect)
+                    Runtime.OpenConnection(conI);
             }
         }
 
@@ -119,79 +120,6 @@ namespace mRemoteNG.Config.Connections
             RootTreeNode.Expand();
             ExpandPreviouslyOpenedFolders();
             Windows.treeForm.tvConnections.EndUpdate();
-        }
-
-        private void ExpandPreviouslyOpenedFolders()
-        {
-            foreach (ContainerInfo contI in ContainerList)
-            {
-                if (contI.IsExpanded)
-                    contI.TreeNode.Expand();
-            }
-        }
-
-        private bool IsExportFile()
-        {
-            var isExportFile = false;
-            if (!(_confVersion >= 1.0)) return isExportFile;
-            if (Convert.ToBoolean(_xmlDocument.DocumentElement.Attributes["Export"].Value))
-                isExportFile = true;
-            return isExportFile;
-        }
-
-        private RootNodeInfo InitializeRootNode()
-        {
-            var rootNodeName = "";
-            if (_xmlDocument.DocumentElement.HasAttribute("Name"))
-                rootNodeName = Convert.ToString(_xmlDocument.DocumentElement.Attributes["Name"].Value.Trim());
-            RootTreeNode.Name = !string.IsNullOrEmpty(rootNodeName) ? rootNodeName : _xmlDocument.DocumentElement.Name;
-            RootTreeNode.Text = RootTreeNode.Name;
-
-            var rootInfo = new RootNodeInfo(RootNodeType.Connection)
-            {
-                Name = RootTreeNode.Name,
-                TreeNode = RootTreeNode
-            };
-            RootTreeNode.Tag = rootInfo;
-            return rootInfo;
-        }
-
-        private void LoadXmlConnectionData()
-        {
-            var connections = DecryptCompleteFile();
-            _xmlDocument = new XmlDocument();
-            if (connections != "")
-                _xmlDocument.LoadXml(connections);
-            else
-                _xmlDocument.Load(ConnectionFileName);
-        }
-
-        private void ValidateConnectionFileVersion()
-        {
-            if (_xmlDocument.DocumentElement.HasAttribute("ConfVersion"))
-                _confVersion = Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."),
-                    CultureInfo.InvariantCulture);
-            else
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strOldConffile);
-
-            const double maxSupportedConfVersion = 2.5;
-            if (!(_confVersion > maxSupportedConfVersion)) return;
-            CTaskDialog.ShowTaskDialogBox(
-                frmMain.Default,
-                Application.ProductName,
-                "Incompatible connection file format",
-                $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
-                string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine,
-                    ConnectionFileName, _confVersion, maxSupportedConfVersion),
-                "",
-                "",
-                "",
-                "",
-                ETaskDialogButtons.Ok,
-                ESysIcons.Error,
-                ESysIcons.Error
-                );
-            throw (new Exception($"Incompatible connection file format (file format version {_confVersion})."));
         }
 
         private void AddNodeFromXml(XmlNode parentXmlNode, TreeNode parentTreeNode)
@@ -553,6 +481,80 @@ namespace mRemoteNG.Config.Connections
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, ConnectionFileName, ex.Message));
             }
             return connectionInfo;
+        }
+
+
+        private void ExpandPreviouslyOpenedFolders()
+        {
+            foreach (ContainerInfo contI in ContainerList)
+            {
+                if (contI.IsExpanded)
+                    contI.TreeNode.Expand();
+            }
+        }
+
+        private bool IsExportFile()
+        {
+            var isExportFile = false;
+            if (!(_confVersion >= 1.0)) return isExportFile;
+            if (Convert.ToBoolean(_xmlDocument.DocumentElement.Attributes["Export"].Value))
+                isExportFile = true;
+            return isExportFile;
+        }
+
+        private RootNodeInfo InitializeRootNode()
+        {
+            var rootNodeName = "";
+            if (_xmlDocument.DocumentElement.HasAttribute("Name"))
+                rootNodeName = Convert.ToString(_xmlDocument.DocumentElement.Attributes["Name"].Value.Trim());
+            RootTreeNode.Name = !string.IsNullOrEmpty(rootNodeName) ? rootNodeName : _xmlDocument.DocumentElement.Name;
+            RootTreeNode.Text = RootTreeNode.Name;
+
+            var rootInfo = new RootNodeInfo(RootNodeType.Connection)
+            {
+                Name = RootTreeNode.Name,
+                TreeNode = RootTreeNode
+            };
+            RootTreeNode.Tag = rootInfo;
+            return rootInfo;
+        }
+
+        private void LoadXmlConnectionData()
+        {
+            var connections = DecryptCompleteFile();
+            _xmlDocument = new XmlDocument();
+            if (connections != "")
+                _xmlDocument.LoadXml(connections);
+            else
+                _xmlDocument.Load(ConnectionFileName);
+        }
+
+        private void ValidateConnectionFileVersion()
+        {
+            if (_xmlDocument.DocumentElement.HasAttribute("ConfVersion"))
+                _confVersion = Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."),
+                    CultureInfo.InvariantCulture);
+            else
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strOldConffile);
+
+            const double maxSupportedConfVersion = 2.5;
+            if (!(_confVersion > maxSupportedConfVersion)) return;
+            CTaskDialog.ShowTaskDialogBox(
+                frmMain.Default,
+                Application.ProductName,
+                "Incompatible connection file format",
+                $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
+                string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine,
+                    ConnectionFileName, _confVersion, maxSupportedConfVersion),
+                "",
+                "",
+                "",
+                "",
+                ETaskDialogButtons.Ok,
+                ESysIcons.Error,
+                ESysIcons.Error
+                );
+            throw (new Exception($"Incompatible connection file format (file format version {_confVersion})."));
         }
 
         private delegate void SetSelectedNodeDelegate(TreeNode treeNode);
