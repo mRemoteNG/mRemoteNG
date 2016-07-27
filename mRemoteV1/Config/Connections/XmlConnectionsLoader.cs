@@ -138,43 +138,15 @@ namespace mRemoteNG.Config.Connections
                         switch (ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes["Type"].Value))
                         {
                             case TreeNodeType.Connection:
-                                {
-                                    var connectionInfo = GetConnectionInfoFromXml(xmlNode);
-                                    connectionInfo.TreeNode = treeNode;
-                                    connectionInfo.Parent = _previousContainer; //NEW
-                                    ConnectionList.Add(connectionInfo);
-                                    treeNode.Tag = connectionInfo;
-                                    treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
-                                    treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
-                                }
-                                break;
+                            {
+                                AddConnectionToList(xmlNode, treeNode);
+                            }
+                            break;
                             case TreeNodeType.Container:
-                                {
-                                    var containerInfo = new ContainerInfo();
-                                    if (treeNode.Parent != null)
-                                    {
-                                        if (ConnectionTreeNode.GetNodeType(treeNode.Parent) == TreeNodeType.Container)
-                                            containerInfo.Parent = (ContainerInfo)treeNode.Parent.Tag;
-                                    }
-                                    _previousContainer = containerInfo; //NEW
-                                    containerInfo.TreeNode = treeNode;
-                                    containerInfo.Name = xmlNode.Attributes["Name"].Value;
-
-                                    if (_confVersion >= 0.8)
-                                    {
-                                        containerInfo.IsExpanded = xmlNode.Attributes["Expanded"].Value == "True";
-                                    }
-
-                                    var connectionInfo = _confVersion >= 0.9 ? GetConnectionInfoFromXml(xmlNode) : new ConnectionInfo();
-                                    connectionInfo.Parent = containerInfo;
-                                    connectionInfo.IsContainer = true;
-                                    containerInfo.ConnectionInfo = connectionInfo;
-                                    ContainerList.Add(containerInfo);
-                                    treeNode.Tag = containerInfo;
-                                    treeNode.ImageIndex = (int)TreeImageType.Container;
-                                    treeNode.SelectedImageIndex = (int)TreeImageType.Container;
-                                }
-                                break;
+                            {
+                                AddContainerToList(xmlNode, treeNode);
+                            }
+                            break;
                         }
 
                         AddNodeFromXml(xmlNode, treeNode);
@@ -196,6 +168,44 @@ namespace mRemoteNG.Config.Connections
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strAddNodeFromXmlFailed + Environment.NewLine + ex.Message + ex.StackTrace, true);
                 throw;
             }
+        }
+
+        private void AddConnectionToList(XmlNode xmlNode, TreeNode treeNode)
+        {
+            var connectionInfo = GetConnectionInfoFromXml(xmlNode);
+            connectionInfo.TreeNode = treeNode;
+            connectionInfo.Parent = _previousContainer; //NEW
+            ConnectionList.Add(connectionInfo);
+            treeNode.Tag = connectionInfo;
+            treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
+            treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
+        }
+
+        private void AddContainerToList(XmlNode xmlNode, TreeNode treeNode)
+        {
+            var containerInfo = new ContainerInfo();
+            if (treeNode.Parent != null)
+            {
+                if (ConnectionTreeNode.GetNodeType(treeNode.Parent) == TreeNodeType.Container)
+                    containerInfo.Parent = (ContainerInfo) treeNode.Parent.Tag;
+            }
+            _previousContainer = containerInfo; //NEW
+            containerInfo.TreeNode = treeNode;
+            containerInfo.Name = xmlNode.Attributes["Name"].Value;
+
+            if (_confVersion >= 0.8)
+            {
+                containerInfo.IsExpanded = xmlNode.Attributes["Expanded"].Value == "True";
+            }
+
+            var connectionInfo = _confVersion >= 0.9 ? GetConnectionInfoFromXml(xmlNode) : new ConnectionInfo();
+            connectionInfo.Parent = containerInfo;
+            connectionInfo.IsContainer = true;
+            containerInfo.ConnectionInfo = connectionInfo;
+            ContainerList.Add(containerInfo);
+            treeNode.Tag = containerInfo;
+            treeNode.ImageIndex = (int) TreeImageType.Container;
+            treeNode.SelectedImageIndex = (int) TreeImageType.Container;
         }
 
         private ConnectionInfo GetConnectionInfoFromXml(XmlNode xxNode)
