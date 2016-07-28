@@ -4,8 +4,8 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.UI.Forms;
-using Tamir.SharpSsh;
 using WeifenLuo.WinFormsUI.Docking;
+using Renci.SshNet;
 
 
 namespace mRemoteNG.UI.Window
@@ -309,8 +309,11 @@ namespace mRemoteNG.UI.Window
         #endregion
 		
         #region Private Properties
-		private SshTransferProtocolBase sshT;
-		private OpenFileDialog oDlg;
+	    private SftpClient sftpc;
+        private ScpClient scpc;
+	    private ConnectionInfo cInfo;
+	    private AuthenticationMethod pInfo;
+        private OpenFileDialog oDlg;
         #endregion
 		
         #region Public Properties
@@ -362,9 +365,9 @@ namespace mRemoteNG.UI.Window
 			}
 		}
         #endregion
-		
+
         #region Form Stuff
-		private void SSHTransfer_Load(object sender, EventArgs e)
+        private void SSHTransfer_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
 		}
@@ -404,36 +407,50 @@ namespace mRemoteNG.UI.Window
 					
 			try
 			{
-				if (Protocol == SSHTransferProtocol.SCP)
+                pInfo = new PasswordAuthenticationMethod(txtUser.Text, txtPassword.Text);
+                cInfo = new ConnectionInfo(txtHost.Text, txtUser.Text, pInfo);
+                if (Protocol == SSHTransferProtocol.SCP)
 				{
-                    sshT = new Scp(txtHost.Text, txtUser.Text, txtPassword.Text);
+                    scpc = new ScpClient(cInfo);
+                    scpc.Connect();
+                    scpc.Upload(new FileInfo(txtLocalFile.Text), txtRemoteFile.Text);
+                    //scpc.
 				}
 				else if (Protocol == SSHTransferProtocol.SFTP)
 				{
-                    sshT = new Sftp(txtHost.Text, txtUser.Text, txtPassword.Text);
+                    sftpc = new SftpClient(cInfo);
 				}
 						
-				sshT.OnTransferStart += SshTransfer_Start;
-				sshT.OnTransferProgress += SshTransfer_Progress;
-				sshT.OnTransferEnd += SshTransfer_End;
+				//sshT.OnTransferStart += SshTransfer_Start;
+				//sshT.OnTransferProgress += SshTransfer_Progress;
+				//sshT.OnTransferEnd += SshTransfer_End;
 
-                sshT.Connect(Convert.ToInt32(txtPort.Text));
+                //sshT.Connect(Convert.ToInt32(txtPort.Text));
 						
-				LocalFile = txtLocalFile.Text;
-				RemoteFile = txtRemoteFile.Text;
+				//LocalFile = txtLocalFile.Text;
+				//RemoteFile = txtRemoteFile.Text;
 						
-				Thread t = new Thread(new ThreadStart(StartTransferBG));
-				t.SetApartmentState(ApartmentState.STA);
-				t.IsBackground = true;
-				t.Start();
+				//Thread t = new Thread(StartTransferBG);
+				//t.SetApartmentState(ApartmentState.STA);
+				//t.IsBackground = true;
+				//t.Start();
 			}
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + ex.Message);
-                sshT.Close();
-			}
+			    if (Protocol == SSHTransferProtocol.SCP)
+			    {
+			        scpc.Disconnect();
+                    scpc.Dispose();
+			    }
+                else if (Protocol == SSHTransferProtocol.SFTP)
+			    {
+                    sftpc.Disconnect();
+                    sftpc.Dispose();
+                }
+            }
 		}
-				
+/*				
 		private string LocalFile;
 		private string RemoteFile;
 				
@@ -449,14 +466,14 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHStartTransferBG + Environment.NewLine + ex.Message, true);
 			}
 		}
-				
+*/				
 		private bool AllFieldsSet()
 		{
 			if (txtHost.Text != "" && txtPort.Text != "" && txtUser.Text != "" && txtLocalFile.Text != "" && txtRemoteFile.Text != "")
 			{
 				if (txtPassword.Text == "")
 				{
-                    if (MessageBox.Show(frmMain.Default, Language.strEmptyPasswordContinue, "Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
+                    if (MessageBox.Show(frmMain.Default, Language.strEmptyPasswordContinue, @"Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
 					{
 						return false;
 					}
@@ -464,7 +481,7 @@ namespace mRemoteNG.UI.Window
 						
 				if (txtRemoteFile.Text.EndsWith("/") || txtRemoteFile.Text.EndsWith("\\"))
 				{
-                    txtRemoteFile.Text += txtLocalFile.Text.Substring(txtLocalFile.Text.LastIndexOf("\\") + 1);
+                    txtRemoteFile.Text += txtLocalFile.Text.Substring(txtLocalFile.Text.LastIndexOf("\\", StringComparison.Ordinal) + 1);
 				}
 						
 				return true;
@@ -521,7 +538,7 @@ namespace mRemoteNG.UI.Window
 				btnTransfer.Enabled = false;
 			}
 		}
-				
+/*				
 		private void SshTransfer_Start(string src, string dst, int transferredBytes, int totalBytes, string message)
 		{
 			maxVal = totalBytes;
@@ -564,6 +581,7 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferEndFailed + Environment.NewLine + ex.Message, true);
 			}
 		}
+*/
         #endregion
 		
         #region Public Methods
@@ -573,9 +591,11 @@ namespace mRemoteNG.UI.Window
             DockPnl = Panel;
             InitializeComponent();
 
-            oDlg = new OpenFileDialog();
-            oDlg.Filter = "All Files (*.*)|*.*";
-            oDlg.CheckFileExists = true;
+		    oDlg = new OpenFileDialog
+		    {
+		        Filter = @"All Files (*.*)|*.*",
+		        CheckFileExists = true
+		    };
 		}
         #endregion
 		
