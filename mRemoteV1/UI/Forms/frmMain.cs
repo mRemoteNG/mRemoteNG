@@ -534,7 +534,7 @@ namespace mRemoteNG.UI.Forms
         private static void mMenFileNew_Click(object sender, EventArgs e)
 		{
 			var saveFileDialog = Tools.Controls.ConnectionsSaveAsDialog();
-			if (!(saveFileDialog.ShowDialog() == DialogResult.OK))
+			if (saveFileDialog.ShowDialog() != DialogResult.OK)
 			{
 				return ;
 			}
@@ -590,29 +590,31 @@ namespace mRemoteNG.UI.Forms
 
         private static void mMenReconnectAll_Click(object sender, EventArgs e)
         {
-            if (!(Runtime.WindowList == null || Runtime.WindowList.Count == 0))
+            if (Runtime.WindowList == null || Runtime.WindowList.Count == 0) return;
+            foreach (BaseWindow window in Runtime.WindowList)
             {
-                foreach (BaseWindow window in Runtime.WindowList)
+                var connectionWindow = window as ConnectionWindow;
+                if (connectionWindow == null)
+                    return;
+
+                var ICList = new List<InterfaceControl>();
+                foreach (Crownwood.Magic.Controls.TabPage tab in connectionWindow.TabController.TabPages)
                 {
-                    var connectionWindow = window as ConnectionWindow;
-                    if (connectionWindow == null)
-                        return;
-
-                    var ICList = new List<InterfaceControl>();
-                    foreach (Crownwood.Magic.Controls.TabPage tab in connectionWindow.TabController.TabPages)
+                    var tag = tab.Tag as InterfaceControl;
+                    if (tag != null)
                     {
-                        if (tab.Tag is InterfaceControl)
-                        {
-                            ICList.Add((InterfaceControl)tab.Tag);
-                        }
-                    }
-
-                    foreach (var i in ICList)
-                    {
-                        i.Protocol.Close();
-                        Runtime.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
+                        ICList.Add(tag);
                     }
                 }
+
+                foreach (var i in ICList)
+                {
+                    i.Protocol.Close();
+                    Runtime.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
+                }
+
+                // throw it on the garbage collector
+                ICList = null;
             }
         }
 
@@ -1131,17 +1133,12 @@ namespace mRemoteNG.UI.Forms
         
 		private void ActivateConnection()
 		{
-			if (pnlDock.ActiveDocument is ConnectionWindow)
-			{
-                var cW = (ConnectionWindow) pnlDock.ActiveDocument;
-				if (cW.TabController.SelectedTab != null)
-				{
-					var tab = cW.TabController.SelectedTab;
-                    var ifc = (InterfaceControl)tab.Tag;
-					ifc.Protocol.Focus();
-					((ConnectionWindow) ifc.FindForm()).RefreshIC();
-				}
-			}
+		    var w = pnlDock.ActiveDocument as ConnectionWindow;
+		    if (w?.TabController.SelectedTab == null) return;
+		    var tab = w.TabController.SelectedTab;
+		    var ifc = (InterfaceControl)tab.Tag;
+		    ifc.Protocol.Focus();
+		    ((ConnectionWindow) ifc.FindForm())?.RefreshIC();
 		}
 
         private void pnlDock_ActiveDocumentChanged(object sender, EventArgs e)
@@ -1200,7 +1197,7 @@ namespace mRemoteNG.UI.Forms
 		
 		public void ShowHidePanelTabs(DockContent closingDocument = null)
 		{
-			var newDocumentStyle = pnlDock.DocumentStyle;
+			DocumentStyle newDocumentStyle;
 									
 			if (Settings.Default.AlwaysShowPanelTabs)
 			{
@@ -1209,22 +1206,16 @@ namespace mRemoteNG.UI.Forms
 			else
 			{
 				var nonConnectionPanelCount = 0;
-				foreach (DockContent document in pnlDock.Documents)
+				foreach (var dockContent in pnlDock.Documents)
 				{
-					if ((closingDocument == null || document != closingDocument) && !(document is ConnectionWindow))
+				    var document = (DockContent) dockContent;
+				    if ((closingDocument == null || document != closingDocument) && !(document is ConnectionWindow))
 					{
 						nonConnectionPanelCount++;
 					}
 				}
-										
-				if (nonConnectionPanelCount == 0)
-				{
-					newDocumentStyle = DocumentStyle.DockingSdi; // Hide the panel tabs
-				}
-				else
-				{
-					newDocumentStyle = DocumentStyle.DockingWindow; // Show the panel tabs
-				}
+
+			    newDocumentStyle = nonConnectionPanelCount == 0 ? DocumentStyle.DockingSdi : DocumentStyle.DockingWindow;
 			}
 									
 			if (pnlDock.DocumentStyle != newDocumentStyle)

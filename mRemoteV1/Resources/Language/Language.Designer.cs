@@ -3106,18 +3106,16 @@ namespace mRemoteNG {
                 return ResourceManager.GetString("strMenuReconnect", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Reconnect All Opened Connections....
+        ///   Looks up a localized string similar to Reconnect All Open Connections.
         /// </summary>
-        internal static string strMenuReconnectAll
-        {
-            get
-            {
+        internal static string strMenuReconnectAll {
+            get {
                 return ResourceManager.GetString("strMenuReconnectAll", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Refresh Screen (VNC).
         /// </summary>
