@@ -171,6 +171,7 @@
     <Compile Include="Tools\ArgumentParser.cs" />
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
+    <Compile Include="Tools\SecureTransfer.cs" />
     <Compile Include="Tools\Sorting\TreeNodeSorter.cs" />
     <Compile Include="Tools\Sorting\Sortable.cs" />
     <Compile Include="Tree\ConnectionTree.cs" />
