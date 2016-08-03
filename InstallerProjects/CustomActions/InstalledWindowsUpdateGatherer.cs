@@ -6,13 +6,11 @@ namespace CustomActions
 {
     public class InstalledWindowsUpdateGatherer
     {
-        private ManagementScope _managementScope;
-        private ManagementClass _managementClass;
+        private readonly ManagementScope _managementScope;
 
         public InstalledWindowsUpdateGatherer()
         {
             _managementScope = Connect();
-            _managementClass = new ManagementClass("Win32_QuickFixEngineering");
         }
 
 
@@ -24,28 +22,29 @@ namespace CustomActions
             }
             catch (ManagementException e)
             {
-                Console.WriteLine("Failed to connect", e.Message);
+                Console.WriteLine($"Failed to connect: {e.Message}");
                 throw;
             }
         }
 
         public ArrayList GetInstalledUpdates()
         {
-            string query = "SELECT * FROM Win32_QuickFixEngineering";
-            ArrayList installedUpdates = new ArrayList();
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(_managementScope, new ObjectQuery(query));
-            foreach(ManagementObject queryObj in searcher.Get())
+            const string query = "SELECT * FROM Win32_QuickFixEngineering";
+            var installedUpdates = new ArrayList();
+            var searcher = new ManagementObjectSearcher(_managementScope, new ObjectQuery(query));
+            foreach(var o in searcher.Get())
             {
+                var queryObj = (ManagementObject) o;
                 installedUpdates.Add(queryObj["HotFixID"]);
             }
             return installedUpdates;
         }
 
-        public bool IsUpdateInstalled(string KB)
+        public bool IsUpdateInstalled(string kb)
         {
-            bool updateIsInstalled = false;
-            string query = string.Format("SELECT HotFixID FROM Win32_QuickFixEngineering WHERE HotFixID='{0}'", KB);
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(_managementScope, new ObjectQuery(query));
+            var updateIsInstalled = false;
+            var query = $"SELECT HotFixID FROM Win32_QuickFixEngineering WHERE HotFixID='{kb}'";
+            var searcher = new ManagementObjectSearcher(_managementScope, new ObjectQuery(query));
             if (searcher.Get().Count > 0)
                 updateIsInstalled = true;
             return updateIsInstalled;

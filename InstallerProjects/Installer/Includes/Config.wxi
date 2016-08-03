@@ -16,8 +16,9 @@
   <?define RequiredDotNetFrameworkMinorVersion = "0" ?>
   <?define RequiredDotNetFrameworkServicePackLevel = "" ?>
   <?define RequiredDotNetFrameworkVersion = "$(var.RequiredDotNetFrameworkMajorVersion).$(var.RequiredDotNetFrameworkMinorVersion)" ?>
-  <?define RDP80KB = "KB2592687" ?>
-  <?define RDP81KB = "KB2923545" ?>
+  <?define Rdp80Kb = "KB2592687" ?>
+  <?define Rdp81Kb = "KB2923545" ?>
+  <?define MinimumRdpKb = $(var.Rdp80Kb) ?>
   <?define IGNOREPREREQUISITES = 0 ?>
   
   <?if $(var.Platform) = x64 ?>
