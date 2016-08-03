@@ -5,26 +5,29 @@ namespace CustomActions
     public class CustomActions
     {
         [CustomAction]
-        public static ActionResult IsKBInstalled(Session session)
+        public static ActionResult IsMinimumRdpVersionInstalleds(Session session)
         {
-            session.Log("Begin IsKBInstalled");
-            var kb = session["KB"];
-            session.Log("Checking if '{0}' is installed", kb);
-            var updateGatherer = new InstalledWindowsUpdateGatherer();
-            var isUpdateInstalled = updateGatherer.IsUpdateInstalled(kb);
-            session.Log("KB is installed = '{0}'", isUpdateInstalled);
-            if (isUpdateInstalled)
-            {
-                session[kb] = "1";
-                session.Log("Set property '{0}' to '1'", kb);
-            }
-            else
-            {
-                session[kb] = "0";
-                session.Log("Set property '{0}' to '0'", kb);
-            }
+            var rdpVersionChecker = new RdpVersionChecker(session);
+            rdpVersionChecker.Execute();
+            return ActionResult.Success;
+        }
 
-            session.Log("End IsKBInstalled");
+        [CustomAction]
+        public static ActionResult IsMinimumRdpVersionInstalled(Session session)
+        {
+            const string MinimumVersionInstalledReturnVar = "MINIMUM_RDP_VERSION_INSTALLED";
+            const string MinimumRdpKbVariable = "MINIMUM_RDP_KB";
+            session.Log("Begin IsMinimumRdpVersionInstalled");
+            var minimumKb = session[MinimumRdpKbVariable];
+            session.Log("Checking if '{0}' is installed", minimumKb);
+            var updateGatherer = new InstalledWindowsUpdateGatherer();
+            var isUpdateInstalled = updateGatherer.IsUpdateInstalled(minimumKb);
+            session.Log("KB is installed = '{0}'", isUpdateInstalled);
+            var updateInstalledVal = isUpdateInstalled ? "1" : "0";
+            session[MinimumVersionInstalledReturnVar] = updateInstalledVal;
+            session.Log($"Set property '{MinimumVersionInstalledReturnVar}' to '{updateInstalledVal}'");
+            session.Log("End IsMinimumRdpVersionInstalled");
+
             return ActionResult.Success;
         }
 
