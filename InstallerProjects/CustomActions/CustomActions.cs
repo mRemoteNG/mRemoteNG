@@ -8,10 +8,10 @@ namespace CustomActions
         public static ActionResult IsKBInstalled(Session session)
         {
             session.Log("Begin IsKBInstalled");
-            string kb = session["KB"];
+            var kb = session["KB"];
             session.Log("Checking if '{0}' is installed", kb);
-            InstalledWindowsUpdateGatherer updateGatherer = new InstalledWindowsUpdateGatherer();
-            bool isUpdateInstalled = updateGatherer.IsUpdateInstalled(kb);
+            var updateGatherer = new InstalledWindowsUpdateGatherer();
+            var isUpdateInstalled = updateGatherer.IsUpdateInstalled(kb);
             session.Log("KB is installed = '{0}'", isUpdateInstalled);
             if (isUpdateInstalled)
             {
@@ -32,7 +32,7 @@ namespace CustomActions
         public static ActionResult IsLegacyVersionInstalled(Session session)
         {
             session.Log("Begin IsLegacyVersionInstalled");
-            UninstallNSISVersions uninstaller = new UninstallNSISVersions();
+            var uninstaller = new UninstallNSISVersions();
             if (uninstaller.IsLegacymRemoteNGInstalled())
             {
                 session["LEGACYVERSIONINSTALLED"] = "1";
@@ -50,8 +50,8 @@ namespace CustomActions
         public static ActionResult UninstallLegacyVersion(Session session)
         {
             session.Log("Begin UninstallLegacyVersion");
-            UninstallNSISVersions uninstaller = new UninstallNSISVersions();
-            string uninstallString = uninstaller.GetLegacyUninstallString();
+            var uninstaller = new UninstallNSISVersions();
+            var uninstallString = uninstaller.GetLegacyUninstallString();
             uninstaller.UninstallLegacyVersion(true);
             session.Log("End UninstallLegacyVersion");
             return ActionResult.Success;
