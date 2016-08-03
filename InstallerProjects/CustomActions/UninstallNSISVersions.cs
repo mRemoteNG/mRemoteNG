@@ -1,58 +1,56 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Microsoft.Win32;
 using System.Diagnostics;
-using System.IO;
+
 
 namespace CustomActions
 {
-    public class UninstallNSISVersions
+    public class UninstallNsisVersions
     {
-        private const string REGISTRY_PATH = "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\mRemoteNG";
-        private const string REGISTRY_PATH_Wow6432 = "Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\mRemoteNG";
+        private const string RegistryPath = "Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\mRemoteNG";
+        private const string RegistryPathWow6432 = "Software\\Wow6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\mRemoteNG";
         private RegistryKey _activeRegistryPath;
 
 
-        public UninstallNSISVersions()
+        public UninstallNsisVersions()
         {
-            GetLegacymRemoteNGRegistryKeyPath();
+            GetLegacymRemoteNgRegistryKeyPath();
         }
 
         public void UninstallLegacyVersion(bool Silent = false)
         {
-            if (!IsLegacymRemoteNGInstalled())
+            if (!IsLegacymRemoteNgInstalled())
                 return;
-            string uninstallString = GetLegacyUninstallString();
-            string forceNonTempUninstaller = string.Format("_?={0}", uninstallString.Replace("Uninstall.exe", "").Replace(@"""", ""));
-            string silentUninstall = "";
+            var uninstallString = GetLegacyUninstallString();
+            var forceNonTempUninstaller = $"_?={uninstallString.Replace("Uninstall.exe", "").Replace(@"""", "")}";
+            var silentUninstall = "";
             if (Silent)
             {
                 silentUninstall = "/S";
             }
-            ProcessStartInfo processStartInfo = new ProcessStartInfo(uninstallString);
-            processStartInfo.UseShellExecute = true;
-            processStartInfo.Arguments = string.Format("{0} {1}", forceNonTempUninstaller, silentUninstall);
-            Process uninstallProcess = Process.Start(processStartInfo);
-            while (uninstallProcess.HasExited == false)
+            var processStartInfo = new ProcessStartInfo(uninstallString)
+            {
+                UseShellExecute = true,
+                Arguments = $"{forceNonTempUninstaller} {silentUninstall}"
+            };
+            var uninstallProcess = Process.Start(processStartInfo);
+            while (uninstallProcess != null && uninstallProcess.HasExited == false)
             {
                 Debug.WriteLine("Waiting for uninstaller to exit");
             }
         }
 
-        public bool IsLegacymRemoteNGInstalled()
+        public bool IsLegacymRemoteNgInstalled()
         {
             return (_activeRegistryPath != null);
         }
 
         public string GetLegacyUninstallString()
         {
-            if (IsLegacymRemoteNGInstalled())
-                return _activeRegistryPath.GetValue("UninstallString").ToString();
-            return "";
+            return IsLegacymRemoteNgInstalled() ? _activeRegistryPath.GetValue("UninstallString").ToString() : "";
         }
 
-        private void GetLegacymRemoteNGRegistryKeyPath()
+        private void GetLegacymRemoteNgRegistryKeyPath()
         {
             GetUninstallKeyPath();
             GetUninstallKeyPath6432();
@@ -62,7 +60,7 @@ namespace CustomActions
         {
             try
             {
-                _activeRegistryPath = Registry.LocalMachine.OpenSubKey(REGISTRY_PATH);
+                _activeRegistryPath = Registry.LocalMachine.OpenSubKey(RegistryPath);
             }
             catch (Exception ex)
             { }
@@ -72,7 +70,7 @@ namespace CustomActions
         {
             try
             {
-                _activeRegistryPath = Registry.LocalMachine.OpenSubKey(REGISTRY_PATH_Wow6432);
+                _activeRegistryPath = Registry.LocalMachine.OpenSubKey(RegistryPathWow6432);
             }
             catch (Exception ex)
             { }
