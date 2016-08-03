@@ -17,14 +17,14 @@ namespace CustomActions
             GetLegacymRemoteNgRegistryKeyPath();
         }
 
-        public void UninstallLegacyVersion(bool Silent = false)
+        public void UninstallLegacyVersion(bool silent = false)
         {
             if (!IsLegacymRemoteNgInstalled())
                 return;
             var uninstallString = GetLegacyUninstallString();
             var forceNonTempUninstaller = $"_?={uninstallString.Replace("Uninstall.exe", "").Replace(@"""", "")}";
             var silentUninstall = "";
-            if (Silent)
+            if (silent)
             {
                 silentUninstall = "/S";
             }
@@ -62,8 +62,10 @@ namespace CustomActions
             {
                 _activeRegistryPath = Registry.LocalMachine.OpenSubKey(RegistryPath);
             }
-            catch (Exception ex)
-            { }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
 
         private void GetUninstallKeyPath6432()
@@ -72,8 +74,10 @@ namespace CustomActions
             {
                 _activeRegistryPath = Registry.LocalMachine.OpenSubKey(RegistryPathWow6432);
             }
-            catch (Exception ex)
-            { }
+            catch (Exception)
+            {
+                // ignored
+            }
         }
     }
 }
