@@ -1,4 +1,5 @@
-﻿using Microsoft.Deployment.WindowsInstaller;
+﻿using System;
+using Microsoft.Deployment.WindowsInstaller;
 
 namespace CustomActions
 {
@@ -15,12 +16,20 @@ namespace CustomActions
 
         public bool Execute()
         {
-            _session.Log("Begin IsMinimumRdpVersionInstalled");
-            var minimumKb = _session[MinimumRdpKbVariable];
-            var isUpdateInstalled = IsUpdateInstalled(minimumKb);
-            SetReturnValue(isUpdateInstalled);
-            _session.Log("End IsMinimumRdpVersionInstalled");
-            return true;
+            try
+            {
+                _session.Log("Begin IsMinimumRdpVersionInstalled");
+                var minimumKb = _session[MinimumRdpKbVariable];
+                var isUpdateInstalled = IsUpdateInstalled(minimumKb);
+                SetReturnValue(isUpdateInstalled);
+                _session.Log("End IsMinimumRdpVersionInstalled");
+                return true;
+            }
+            catch (Exception e)
+            {
+                _session.Log($"There was an issue executing the RdpVersionChecker. Exception: {e}");
+                return false;
+            }
         }
 
         private bool IsUpdateInstalled(string minimumKb)
