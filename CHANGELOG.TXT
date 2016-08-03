@@ -1,9 +1,21 @@
-1.75 Something (2016-XX-XX):
+1.75 Alpha 2 (2016-08-03):
 
   General Changes:
   ----------------
   Updated GeckoFx pacakge
   Updated DockPanelSuite library to 2.10 Final
+  Japanese translation updated
+  MR-942: Refactored code relating to loading the connections file 
+
+  Features/Enhancements:
+  ----------------------
+  PR-133: Option to reconnect all currently opened connection tabs 
+  MR-917: Improved cryptographic support
+
+  Fixes:
+  ------
+  MR-910: Fixes to support Remote Desktop Gateways
+
   
   
 1.75 Alpha 1 (2016-07-08):
