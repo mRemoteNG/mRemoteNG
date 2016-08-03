@@ -15,6 +15,7 @@
   Fixes:
   ------
   MR-910: Fixes to support Remote Desktop Gateways
+  MR-874: Incorrect RDP prerequisite check in installer
 
   
   
