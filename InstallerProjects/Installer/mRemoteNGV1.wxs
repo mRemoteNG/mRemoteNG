@@ -16,6 +16,8 @@
     <Property Id="APPLICATIONROOTDIRECTORY">
       <RegistrySearch Id='mRemoteNGRegistry' Type='raw' Root='HKLM' Key='Software\mRemoteNG' Name='InstallDir' />
     </Property>
+    <Property Id='RDP_DTLS_KB' Value='$(var.RdpDtlsKb)' />
+    <Property Id='RDP_DTLS_UPDATE_INSTALLED' Value='0' Secure='yes' />
     <Property Id='MINIMUM_RDP_KB' Value='$(var.MinimumRdpKb)' />
     <Property Id='MINIMUM_RDP_VERSION_INSTALLED' Value='0' Secure='yes' />
     <Property Id='REQUIREDDOTNETFRAMEWORKVERSION' Value='$(var.RequiredDotNetFrameworkVersion)' />
@@ -26,7 +28,8 @@
 
 
     <InstallUISequence>
-      <Custom Action="CheckIfMinimumRdpInstalled" After="AppSearch">(NOT Installed) AND (VersionNT = 601 OR VersionNT64 = 601)</Custom>
+      <Custom Action="CheckIfRdpDtlsUpdateInstalled" After="AppSearch">(NOT Installed) AND (VersionNT = 601 OR VersionNT64 = 601)</Custom>
+      <Custom Action="CheckIfMinimumRdpInstalled" After="CheckIfRdpDtlsUpdateInstalled">(NOT Installed) AND (VersionNT = 601 OR VersionNT64 = 601)</Custom>
       <LaunchConditions After="SetWIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED" />
       <Custom Action="CheckIfLegacyVersionInstalled" After="LaunchConditions" />
       <Custom Action="UninstallLegacyVersion" After="CheckIfLegacyVersionInstalled">(NOT Installed) AND (LEGACYVERSIONINSTALLED = 1)</Custom>
@@ -48,6 +51,10 @@
     <!-- .Net Framework Version Condition -->
     <Condition Message="!(loc.Install_NeedDotNetFrameworkVersion)">
       <![CDATA[Installed OR (IGNOREPREREQUISITES = 1) OR WIX_IS_NETFRAMEWORK_40_OR_LATER_INSTALLED = 1]]>
+    </Condition>
+    <!-- If Win7, require RDP DTLS update (KB2574819) -->
+    <Condition Message="!(loc.Install_RDPDtlsRequirement)">
+      <![CDATA[Installed OR (IGNOREPREREQUISITES = 1) OR (VersionNT >= 602 OR VersionNT64 >= 602) OR ((VersionNT = 601 OR VersionNT64 = 601) AND (RDP_DTLS_UPDATE_INSTALLED = 1))]]>
     </Condition>
     <!-- If Win7, require RDP 8.0 update (KB2592687) -->
     <Condition Message="!(loc.Install_RDP80Requirement)">

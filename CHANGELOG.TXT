@@ -1,3 +1,18 @@
+1.75 SOMETHING (2016-x-x):
+  General Changes:
+  ----------------
+
+
+  Features/Enhancements:
+  ----------------------
+  
+
+  Fixes:
+  ------
+  MR-896: Added prerequisite installer check for KB2574819. Prevents "Class not registered" errors when opening RDP connections.
+
+
+
 1.75 Alpha 2 (2016-08-03):
 
   General Changes:
