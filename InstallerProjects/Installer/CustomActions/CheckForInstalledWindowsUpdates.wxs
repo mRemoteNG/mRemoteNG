@@ -4,4 +4,7 @@
 	<Fragment>
     <CustomAction Id="CheckIfMinimumRdpInstalled" Return="check" Execute="immediate" BinaryKey="CustomActions.CA.dll" DllEntry="IsMinimumRdpVersionInstalled" />
   </Fragment>
+  <Fragment>
+    <CustomAction Id="CheckIfRdpDtlsUpdateInstalled" Return="check" Execute="immediate" BinaryKey="CustomActions.CA.dll" DllEntry="IsRdpDtlsUpdateInstalled" />
+  </Fragment>
 </Wix>
