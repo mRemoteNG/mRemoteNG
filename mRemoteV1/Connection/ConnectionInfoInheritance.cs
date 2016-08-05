@@ -18,24 +18,17 @@ namespace mRemoteNG.Connection
 		{
 			get
 			{
-				if (CacheBitmaps && Colors && Description && DisplayThemes && DisplayWallpaper 
-					&& EnableFontSmoothing && EnableDesktopComposition && Domain && Icon && Password 
-					&& Port && Protocol && PuttySession && RedirectDiskDrives && RedirectKeys 
-					&& RedirectPorts && RedirectPrinters && RedirectSmartCards && RedirectSound && Resolution 
-					&& AutomaticResize && UseConsoleSession && UseCredSsp && RenderingEngine && UserField 
-					&& ExtApp && Username && Panel && ICAEncryption && RDPAuthenticationLevel 
-					&& LoadBalanceInfo && PreExtApp && PostExtApp && MacAddress && VNCAuthMode 
-					&& VNCColors && VNCCompression && VNCEncoding && VNCProxyIP && VNCProxyPassword 
-					&& VNCProxyPort && VNCProxyType && VNCProxyUsername)
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
+			    return CacheBitmaps && Colors && Description && DisplayThemes && DisplayWallpaper 
+			           && EnableFontSmoothing && EnableDesktopComposition && Domain && Icon && Password 
+			           && Port && Protocol && PuttySession && RedirectDiskDrives && RedirectKeys 
+			           && RedirectPorts && RedirectPrinters && RedirectSmartCards && RedirectSound && Resolution 
+			           && AutomaticResize && UseConsoleSession && UseCredSsp && RenderingEngine && UserField 
+			           && ExtApp && Username && Panel && ICAEncryption && RDPAuthenticationLevel 
+			           && LoadBalanceInfo && PreExtApp && PostExtApp && MacAddress && VNCAuthMode 
+			           && VNCColors && VNCCompression && VNCEncoding && VNCProxyIP && VNCProxyPassword 
+			           && VNCProxyPort && VNCProxyType && VNCProxyUsername;
 			}
-			set
+            set
 			{
 				SetAllValues(value);
 			}
@@ -371,7 +364,7 @@ namespace mRemoteNG.Connection
             var properties = typeof(ConnectionInfoInheritance).GetProperties();
             foreach (var property in properties)
             {
-                if (property.PropertyType.Name == typeof(Boolean).Name && property.Name != "EverythingInherited" && property.Name != "IsDefault")
+                if (property.PropertyType.Name == typeof(bool).Name && property.Name != "EverythingInherited" && property.Name != "IsDefault")
                     property.SetValue(this, value, null);
             }
         }
@@ -381,11 +374,9 @@ namespace mRemoteNG.Connection
             var properties = typeof(ConnectionInfoInheritance).GetProperties();
             foreach (var property in properties)
             {
-                if (property.Name != "EverythingInherited")
-                {
-                    var newPropertyValue = property.GetValue(otherInheritanceObject, null);
-                    property.SetValue(this, newPropertyValue, null);
-                }
+                if (property.Name == "EverythingInherited") continue;
+                var newPropertyValue = property.GetValue(otherInheritanceObject, null);
+                property.SetValue(this, newPropertyValue, null);
             }
         }
     }
