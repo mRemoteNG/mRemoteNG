@@ -1,12 +1,11 @@
 using mRemoteNG.Tools;
-using System;
 using System.ComponentModel;
 
 namespace mRemoteNG.Connection
 {
     public class ConnectionInfoInheritance
 	{
-        private ConnectionInfoInheritance _tempInheritanceStorage = null;
+        private ConnectionInfoInheritance _tempInheritanceStorage;
 
         #region Public Properties
         #region General
@@ -16,18 +15,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool EverythingInherited
 		{
-			get
-			{
-			    return CacheBitmaps && Colors && Description && DisplayThemes && DisplayWallpaper 
-			           && EnableFontSmoothing && EnableDesktopComposition && Domain && Icon && Password 
-			           && Port && Protocol && PuttySession && RedirectDiskDrives && RedirectKeys 
-			           && RedirectPorts && RedirectPrinters && RedirectSmartCards && RedirectSound && Resolution 
-			           && AutomaticResize && UseConsoleSession && UseCredSsp && RenderingEngine && UserField 
-			           && ExtApp && Username && Panel && ICAEncryption && RDPAuthenticationLevel 
-			           && LoadBalanceInfo && PreExtApp && PostExtApp && MacAddress && VNCAuthMode 
-			           && VNCColors && VNCCompression && VNCEncoding && VNCProxyIP && VNCProxyPassword 
-			           && VNCProxyPort && VNCProxyType && VNCProxyUsername;
-			}
+			get { return EverythingIsInherited(); }
             set
 			{
 				SetAllValues(value);
@@ -358,6 +346,19 @@ namespace mRemoteNG.Connection
 		{
 			SetAllValues(false);
 		}
+
+        private bool EverythingIsInherited()
+        {
+            var displaySettings = Description && Icon && Panel;
+            var connectionSettings = Username && Password && Domain;
+            var protocolSettings = Protocol && ExtApp && Port && PuttySession && ICAEncryption && RDPAuthenticationLevel && LoadBalanceInfo && RenderingEngine && UseConsoleSession && UseCredSsp; 
+            var appearanceSettings = Resolution && AutomaticResize && Colors && CacheBitmaps && DisplayWallpaper && DisplayThemes && EnableFontSmoothing && EnableDesktopComposition;
+            var redirectSettings = RedirectDiskDrives && RedirectKeys && RedirectPorts && RedirectPrinters && RedirectSmartCards && RedirectSound;
+            var miscSettings = PreExtApp && PostExtApp && MacAddress && UserField;
+            var vncSettings = VNCAuthMode && VNCColors && VNCCompression && VNCEncoding && VNCProxyIP && VNCProxyPassword && VNCProxyPort && VNCProxyType && VNCProxyUsername;
+
+            return displaySettings && connectionSettings && protocolSettings && appearanceSettings && redirectSettings && miscSettings && vncSettings;
+        }
 
 		private void SetAllValues(bool value)
 		{
