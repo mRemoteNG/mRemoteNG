@@ -47,7 +47,8 @@
     <Compile Include="CustomActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="InstalledWindowsUpdateGatherer.cs" />
-    <Compile Include="UninstallNSISVersions.cs" />
+    <Compile Include="InstalledKbChecker.cs" />
+    <Compile Include="UninstallNsisVersions.cs" />
     <Content Include="CustomAction.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,9 +1,37 @@
-1.75 Something (2016-XX-XX):
+1.75 SOMETHING (2016-x-x):
+  General Changes:
+  ----------------
+
+
+  Features/Enhancements:
+  ----------------------
+  
+
+  Fixes:
+  ------
+  MR-896: Added prerequisite installer check for KB2574819. Prevents "Class not registered" errors when opening RDP connections.
+
+
+
+1.75 Alpha 2 (2016-08-03):
 
   General Changes:
   ----------------
   Updated GeckoFx pacakge
   Updated DockPanelSuite library to 2.10 Final
+  Japanese translation updated
+  MR-942: Refactored code relating to loading the connections file 
+
+  Features/Enhancements:
+  ----------------------
+  PR-133: Option to reconnect all currently opened connection tabs 
+  MR-917: Improved cryptographic support
+
+  Fixes:
+  ------
+  MR-910: Fixes to support Remote Desktop Gateways
+  MR-874: Incorrect RDP prerequisite check in installer
+
   
   
 1.75 Alpha 1 (2016-07-08):
