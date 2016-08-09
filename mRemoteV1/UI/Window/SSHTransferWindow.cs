@@ -9,10 +9,10 @@ using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Window
 {
-	public class SSHTransferWindow : BaseWindow
-	{
+    public class SSHTransferWindow : BaseWindow
+    {
         #region Form Init
-		private ProgressBar pbStatus;
+        private ProgressBar pbStatus;
         private Button btnTransfer;
         private TextBox txtUser;
         private TextBox txtPassword;
@@ -32,9 +32,9 @@ namespace mRemoteNG.UI.Window
         private TextBox txtLocalFile;
         private Label lblLocalFile;
         private GroupBox grpFiles;
-				
-		private void InitializeComponent()
-		{
+
+        private void InitializeComponent()
+        {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SSHTransferWindow));
             this.grpFiles = new System.Windows.Forms.GroupBox();
             this.lblLocalFile = new System.Windows.Forms.Label();
@@ -273,8 +273,8 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.grpFiles);
             this.Controls.Add(this.grpConnection);
             this.Controls.Add(this.pbStatus);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
+            this.Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
             this.Name = "SSHTransferWindow";
             this.TabText = "SSH File Transfer";
             this.Text = "SSH File Transfer";
@@ -285,128 +285,128 @@ namespace mRemoteNG.UI.Window
             this.grpConnection.PerformLayout();
             this.ResumeLayout(false);
 
-		}
+        }
         #endregion
-		
+
         #region Private Properties
         private OpenFileDialog oDlg;
         #endregion
-		
+
         #region Public Properties
         public string Hostname
-		{
-			get
-			{
-				return txtHost.Text;
-			}
-			set
-			{
+        {
+            get
+            {
+                return txtHost.Text;
+            }
+            set
+            {
                 txtHost.Text = value;
-			}
-		}
-				
+            }
+        }
+
         public string Port
-		{
-			get
-			{
-				return txtPort.Text;
-			}
-			set
-			{
+        {
+            get
+            {
+                return txtPort.Text;
+            }
+            set
+            {
                 txtPort.Text = value;
-			}
-		}
-				
+            }
+        }
+
         public string Username
-		{
-			get
-			{
-				return txtUser.Text;
-			}
-			set
-			{
+        {
+            get
+            {
+                return txtUser.Text;
+            }
+            set
+            {
                 txtUser.Text = value;
-			}
-		}
-				
+            }
+        }
+
         public string Password
-		{
-			get
-			{
-				return txtPassword.Text;
-			}
-			set
-			{
+        {
+            get
+            {
+                return txtPassword.Text;
+            }
+            set
+            {
                 txtPassword.Text = value;
-			}
-		}
+            }
+        }
         #endregion
 
         #region Form Stuff
         private void SSHTransfer_Load(object sender, EventArgs e)
-		{
-			ApplyLanguage();
-		}
-				
-		private void ApplyLanguage()
-		{
-			grpFiles.Text = Language.strGroupboxFiles;
-			lblLocalFile.Text = Language.strLocalFile + ":";
-			lblRemoteFile.Text = Language.strRemoteFile + ":";
-			btnBrowse.Text = Language.strButtonBrowse;
-			grpConnection.Text = Language.strGroupboxConnection;
-			lblProtocol.Text = Language.strLabelProtocol;
-			lblPassword.Text = Language.strLabelPassword;
-			lblUser.Text = Language.strUser + ":";
-			lblPort.Text = Language.strLabelPort;
-			lblHost.Text = Language.strHost + ":";
-			btnTransfer.Text = Language.strTransfer;
-			TabText = Language.strMenuSSHFileTransfer;
-			Text = Language.strMenuSSHFileTransfer;
-		}
+        {
+            ApplyLanguage();
+        }
+
+        private void ApplyLanguage()
+        {
+            grpFiles.Text = Language.strGroupboxFiles;
+            lblLocalFile.Text = Language.strLocalFile + ":";
+            lblRemoteFile.Text = Language.strRemoteFile + ":";
+            btnBrowse.Text = Language.strButtonBrowse;
+            grpConnection.Text = Language.strGroupboxConnection;
+            lblProtocol.Text = Language.strLabelProtocol;
+            lblPassword.Text = Language.strLabelPassword;
+            lblUser.Text = Language.strUser + ":";
+            lblPort.Text = Language.strLabelPort;
+            lblHost.Text = Language.strHost + ":";
+            btnTransfer.Text = Language.strTransfer;
+            TabText = Language.strMenuSSHFileTransfer;
+            Text = Language.strMenuSSHFileTransfer;
+        }
         #endregion
-		
+
         #region Private Methods
         private SecureTransfer st;
         private void StartTransfer(SecureTransfer.SSHTransferProtocol Protocol)
-		{
+        {
             if (AllFieldsSet() == false)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strPleaseFillAllFields);
-				return;
-			}
-					
-			if (File.Exists(txtLocalFile.Text) == false)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.strLocalFileDoesNotExist);
-				return;
-			}
-					
-			try
-			{
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strPleaseFillAllFields);
+                return;
+            }
+
+            if (File.Exists(txtLocalFile.Text) == false)
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.strLocalFileDoesNotExist);
+                return;
+            }
+
+            try
+            {
                 st = new SecureTransfer(txtHost.Text, txtUser.Text, txtPassword.Text, int.Parse(txtPort.Text), Protocol);
-			    st.SrcFile = txtLocalFile.Text;
-			    st.DstFile = txtRemoteFile.Text;
+                st.SrcFile = txtLocalFile.Text;
+                st.DstFile = txtRemoteFile.Text;
                 st.Connect();
 
-			    if (Protocol == SecureTransfer.SSHTransferProtocol.SCP)
-			    {
+                if (Protocol == SecureTransfer.SSHTransferProtocol.SCP)
+                {
                     st.ScpClt.Uploading += ScpClt_Uploading;
-			    }
+                }
 
                 Thread t = new Thread(StartTransferBG);
                 t.SetApartmentState(ApartmentState.STA);
                 t.IsBackground = true;
                 t.Start();
             }
-			catch (Exception ex)
-			{
+            catch (Exception ex)
+            {
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + ex.Message);
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + ex.StackTrace, true);
                 st?.Disconnect();
                 st?.Dispose();
             }
-		}
+        }
 
         private void ScpClt_Uploading(object sender, Renci.SshNet.Common.ScpUploadEventArgs e)
         {
@@ -427,96 +427,96 @@ namespace mRemoteNG.UI.Window
             */
         }
 
-       private void StartTransferBG()
-       {
-           try
-           {
-               DisableButtons();
-               Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} started.", true);
-               st.Upload();
-               Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} completed.", true);
-               st.Disconnect();
-               st.Dispose();
-               EnableButtons();
-           }
-           catch (Exception ex)
-           {
-               Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHStartTransferBG + Environment.NewLine + ex.StackTrace, true);
-           }
-       }
+        private void StartTransferBG()
+        {
+            try
+            {
+                DisableButtons();
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} started.", true);
+                st.Upload();
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} completed.", true);
+                st.Disconnect();
+                st.Dispose();
+                EnableButtons();
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHStartTransferBG + Environment.NewLine + ex.StackTrace, true);
+            }
+        }
 
         private bool AllFieldsSet()
-		{
-			if (txtHost.Text != "" && txtPort.Text != "" && txtUser.Text != "" && txtLocalFile.Text != "" && txtRemoteFile.Text != "")
-			{
-				if (txtPassword.Text == "")
-				{
+        {
+            if (txtHost.Text != "" && txtPort.Text != "" && txtUser.Text != "" && txtLocalFile.Text != "" && txtRemoteFile.Text != "")
+            {
+                if (txtPassword.Text == "")
+                {
                     if (MessageBox.Show(frmMain.Default, Language.strEmptyPasswordContinue, @"Question?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.No)
-					{
-						return false;
-					}
-				}
-						
-				if (txtRemoteFile.Text.EndsWith("/") || txtRemoteFile.Text.EndsWith("\\"))
-				{
+                    {
+                        return false;
+                    }
+                }
+
+                if (txtRemoteFile.Text.EndsWith("/") || txtRemoteFile.Text.EndsWith("\\"))
+                {
                     txtRemoteFile.Text += txtLocalFile.Text.Substring(txtLocalFile.Text.LastIndexOf("\\", StringComparison.Ordinal) + 1);
-				}
-						
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-		}
-				
-				
-		private int maxVal;
+                }
+
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+
+        private int maxVal;
         private int curVal;
-				
-		delegate void SetStatusCB();
-		private void SetStatus()
-		{
-			if (pbStatus.InvokeRequired)
-			{
-				SetStatusCB d = SetStatus;
+
+        delegate void SetStatusCB();
+        private void SetStatus()
+        {
+            if (pbStatus.InvokeRequired)
+            {
+                SetStatusCB d = SetStatus;
                 pbStatus.Invoke(d);
-			}
-			else
-			{
-				pbStatus.Maximum = maxVal;
-				pbStatus.Value = curVal;
-			}
-		}
-				
-		delegate void EnableButtonsCB();
-		private void EnableButtons()
-		{
-			if (btnTransfer.InvokeRequired)
-			{
-				EnableButtonsCB d = EnableButtons;
+            }
+            else
+            {
+                pbStatus.Maximum = maxVal;
+                pbStatus.Value = curVal;
+            }
+        }
+
+        delegate void EnableButtonsCB();
+        private void EnableButtons()
+        {
+            if (btnTransfer.InvokeRequired)
+            {
+                EnableButtonsCB d = EnableButtons;
                 btnTransfer.Invoke(d);
-			}
-			else
-			{
-				btnTransfer.Enabled = true;
-			}
-		}
-				
-		delegate void DisableButtonsCB();
-		private void DisableButtons()
-		{
-			if (btnTransfer.InvokeRequired)
-			{
-				DisableButtonsCB d = DisableButtons;
+            }
+            else
+            {
+                btnTransfer.Enabled = true;
+            }
+        }
+
+        delegate void DisableButtonsCB();
+        private void DisableButtons()
+        {
+            if (btnTransfer.InvokeRequired)
+            {
+                DisableButtonsCB d = DisableButtons;
                 btnTransfer.Invoke(d);
-			}
-			else
-			{
-				btnTransfer.Enabled = false;
-			}
-		}
-		
+            }
+            else
+            {
+                btnTransfer.Enabled = false;
+            }
+        }
+
         /*	
 		private void SshTransfer_Start(int transferredBytes, int totalBytes)
 		{
@@ -525,16 +525,16 @@ namespace mRemoteNG.UI.Window
 					
 			SetStatus();
 		}
-		*/	
+		*/
 
-		private void SshTransfer_Progress(int transferredBytes, int totalBytes)
-		{
-			maxVal = totalBytes;
-			curVal = transferredBytes;
-					
-			SetStatus();
-		}
-		
+        private void SshTransfer_Progress(int transferredBytes, int totalBytes)
+        {
+            maxVal = totalBytes;
+            curVal = transferredBytes;
+
+            SetStatus();
+        }
+
         /*		
 		private void SshTransfer_End(int transferredBytes, int totalBytes)
 		{
@@ -562,45 +562,45 @@ namespace mRemoteNG.UI.Window
 		}
         */
         #endregion
-		
+
         #region Public Methods
-		public SSHTransferWindow(DockContent Panel)
-		{
+        public SSHTransferWindow(DockContent Panel)
+        {
             WindowType = WindowType.SSHTransfer;
             DockPnl = Panel;
             InitializeComponent();
 
-		    oDlg = new OpenFileDialog
-		    {
-		        Filter = @"All Files (*.*)|*.*",
-		        CheckFileExists = true
-		    };
-		}
+            oDlg = new OpenFileDialog
+            {
+                Filter = @"All Files (*.*)|*.*",
+                CheckFileExists = true
+            };
+        }
         #endregion
-		
+
         #region Form Stuff
-		private void btnBrowse_Click(object sender, EventArgs e)
-		{
-			if (oDlg.ShowDialog() == DialogResult.OK)
-			{
-				if (oDlg.FileName != "")
-				{
+        private void btnBrowse_Click(object sender, EventArgs e)
+        {
+            if (oDlg.ShowDialog() == DialogResult.OK)
+            {
+                if (oDlg.FileName != "")
+                {
                     txtLocalFile.Text = oDlg.FileName;
-				}
-			}
-		}
-				
-		private void btnTransfer_Click(object sender, EventArgs e)
-		{
-			if (radProtSCP.Checked)
-			{
+                }
+            }
+        }
+
+        private void btnTransfer_Click(object sender, EventArgs e)
+        {
+            if (radProtSCP.Checked)
+            {
                 StartTransfer(SecureTransfer.SSHTransferProtocol.SCP);
-			}
-			else if (radProtSFTP.Checked)
-			{
+            }
+            else if (radProtSFTP.Checked)
+            {
                 StartTransfer(SecureTransfer.SSHTransferProtocol.SFTP);
-			}
-		}
+            }
+        }
         #endregion
-	}
+    }
 }
