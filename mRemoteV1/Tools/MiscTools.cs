@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using System.Reflection;
-using System.Runtime.InteropServices;
 using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.App;
@@ -18,24 +17,6 @@ namespace mRemoteNG.Tools
 {
     public class MiscTools
 	{
-		private struct SHFILEINFO
-		{
-			public IntPtr hIcon; // : icon
-			//public int iIcon; // : icondex
-			//public int dwAttributes; // : SFGAO_ flags
-			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 260)]
-            public string szDisplayName;
-			[MarshalAs(UnmanagedType.ByValTStr, SizeConst = 80)]
-            public string szTypeName;
-		}
-			
-		[DllImport("shell32.dll")]
-        private static  extern IntPtr SHGetFileInfo(string pszPath, int dwFileAttributes, ref SHFILEINFO psfi, int cbFileInfo, int uFlags);
-		private const int SHGFI_ICON = 0x100;
-		private const int SHGFI_SMALLICON = 0x1;
-		//Private Const SHGFI_LARGEICON = &H0    ' Large icon
-
-
 		public static Icon GetIconFromFile(string FileName)
 		{
 		    try
@@ -56,10 +37,6 @@ namespace mRemoteNG.Tools
 			}
 		}
 		
-
-		
-		
-
 		public static SecureString PasswordDialog(string passwordName = null, bool verify = true)
 		{
 			PasswordForm passwordForm = new PasswordForm(passwordName, verify);
@@ -177,15 +154,11 @@ namespace mRemoteNG.Tools
 				
 			public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destType)
 			{
-			    if (value != null)
-			    {
-			        FieldInfo fi = _enumType.GetField(Enum.GetName(_enumType, value: value));
-			        DescriptionAttribute dna = (DescriptionAttribute) (Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)));
+			    if (value == null) return null;
+			    FieldInfo fi = _enumType.GetField(Enum.GetName(_enumType, value: value));
+			    DescriptionAttribute dna = (DescriptionAttribute) (Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)));
 					
-			        return dna != null ? dna.Description : value.ToString();
-			    }
-
-			    return null;
+			    return dna != null ? dna.Description : value.ToString();
 			}
 				
 			public override bool CanConvertFrom(ITypeDescriptorContext context, Type srcType)
@@ -195,7 +168,7 @@ namespace mRemoteNG.Tools
 				
 			public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
 			{
-				foreach (FieldInfo fi in _enumType.GetFields())
+			    foreach (FieldInfo fi in _enumType.GetFields())
 				{
 					DescriptionAttribute dna = (DescriptionAttribute) (Attribute.GetCustomAttribute(fi, typeof(DescriptionAttribute)));
 						
@@ -204,8 +177,8 @@ namespace mRemoteNG.Tools
 						return Enum.Parse(_enumType, fi.Name);
 					}
 				}
-					
-				return Enum.Parse(_enumType, (string) value);
+
+			    return value != null ? Enum.Parse(_enumType, (string) value) : null;
 			}
 		}
 		
@@ -256,7 +229,7 @@ namespace mRemoteNG.Tools
 			{
 				if (destinationType == typeof(string))
 				{
-					return ((Convert.ToBoolean(value)) ? Language.strYes : Language.strNo);
+					return Convert.ToBoolean(value) ? Language.strYes : Language.strNo;
 				}
 					
 				return base.ConvertTo(context, culture, value, destinationType);
