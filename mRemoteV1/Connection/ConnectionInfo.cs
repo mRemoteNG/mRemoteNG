@@ -221,7 +221,7 @@ namespace mRemoteNG.Connection
             TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
         public ProtocolICA.EncryptionStrength ICAEncryption
 		{
-            get { return GetPropertyValue("ICAEncryption", _icaEncryption); }
+            get { return GetPropertyValue("ICAEncryptionStrength", _icaEncryption); }
 			set { _icaEncryption = value; }
 		}
 		

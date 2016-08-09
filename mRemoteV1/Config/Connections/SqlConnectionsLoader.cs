@@ -353,7 +353,7 @@ namespace mRemoteNG.Config.Connections
                 if (_confVersion > 1.5) //1.6
                 {
                     connectionInfo.ICAEncryption = (ProtocolICA.EncryptionStrength)Tools.MiscTools.StringToEnum(typeof(ProtocolICA.EncryptionStrength), Convert.ToString(_sqlDataReader["ICAEncryptionStrength"]));
-                    connectionInfo.Inheritance.ICAEncryption = Convert.ToBoolean(_sqlDataReader["InheritICAEncryptionStrength"]);
+                    connectionInfo.Inheritance.ICAEncryptionStrength = Convert.ToBoolean(_sqlDataReader["InheritICAEncryptionStrength"]);
                     connectionInfo.PreExtApp = Convert.ToString(_sqlDataReader["PreExtApp"]);
                     connectionInfo.PostExtApp = Convert.ToString(_sqlDataReader["PostExtApp"]);
                     connectionInfo.Inheritance.PreExtApp = Convert.ToBoolean(_sqlDataReader["InheritPreExtApp"]);

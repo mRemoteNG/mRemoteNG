@@ -180,7 +180,7 @@ namespace mRemoteNG.UI.Window
             Font = new Font("Segoe UI", 8.25F, FontStyle.Regular, GraphicsUnit.Point, Convert.ToByte(0));
             HideOnClose = true;
             Icon = Resources.Config_Icon;
-            Name = $"Config";
+            Name = "Config";
             TabText = @"Config";
             Text = @"Config";
             propertyGridContextMenu.ResumeLayout(false);
@@ -790,13 +790,8 @@ namespace mRemoteNG.UI.Window
 
         private void UpdateInheritanceNode()
         {
-            if (pGrid.SelectedObject is ConnectionInfoInheritance)
-            {
-                if (((ConnectionInfoInheritance)pGrid.SelectedObject).IsDefault)
-                {
-                    Runtime.DefaultInheritanceToSettings();
-                }
-            }
+            if (!(pGrid.SelectedObject is DefaultConnectionInheritance)) return;
+            DefaultConnectionInheritance.Instance.SaveToSettings();
         }
 
         private void pGrid_PropertySortChanged(object sender, EventArgs e)
@@ -819,7 +814,7 @@ namespace mRemoteNG.UI.Window
 					{
 						case Connection.Protocol.ProtocolType.RDP:
 							strHide.Add("ExtApp");
-							strHide.Add("ICAEncryption");
+							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("PuttySession");
 							strHide.Add("RenderingEngine");
 							strHide.Add("VNCAuthMode");
@@ -860,7 +855,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("EnableFontSmoothing");
 							strHide.Add("EnableDesktopComposition");
 							strHide.Add("ExtApp");
-							strHide.Add("ICAEncryption");
+							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("PuttySession");
 							strHide.Add("RDGatewayDomain");
 							strHide.Add("RDGatewayHostname");
@@ -903,7 +898,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("EnableDesktopComposition");
 							strHide.Add("Domain");
 							strHide.Add("ExtApp");
-							strHide.Add("ICAEncryption");
+							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("RDGatewayDomain");
 							strHide.Add("RDGatewayHostname");
 							strHide.Add("RDGatewayPassword");
@@ -944,7 +939,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("EnableDesktopComposition");
 							strHide.Add("Domain");
 							strHide.Add("ExtApp");
-							strHide.Add("ICAEncryption");
+							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("RDGatewayDomain");
 							strHide.Add("RDGatewayHostname");
 							strHide.Add("RDGatewayPassword");
@@ -985,7 +980,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("EnableDesktopComposition");
 							strHide.Add("Domain");
 							strHide.Add("ExtApp");
-							strHide.Add("ICAEncryption");
+							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("Password");
 							strHide.Add("RDGatewayDomain");
 							strHide.Add("RDGatewayHostname");
@@ -1028,7 +1023,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("EnableDesktopComposition");
 							strHide.Add("Domain");
 							strHide.Add("ExtApp");
-							strHide.Add("ICAEncryption");
+							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("Password");
 							strHide.Add("RDGatewayDomain");
 							strHide.Add("RDGatewayHostname");
@@ -1071,7 +1066,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("EnableDesktopComposition");
 							strHide.Add("Domain");
 							strHide.Add("ExtApp");
-							strHide.Add("ICAEncryption");
+							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("Password");
 							strHide.Add("RDGatewayDomain");
 							strHide.Add("RDGatewayHostname");
@@ -1114,7 +1109,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("EnableDesktopComposition");
 							strHide.Add("Domain");
 							strHide.Add("ExtApp");
-							strHide.Add("ICAEncryption");
+							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("PuttySession");
 							strHide.Add("RDGatewayDomain");
 							strHide.Add("RDGatewayHostname");
@@ -1155,7 +1150,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("EnableDesktopComposition");
 							strHide.Add("Domain");
 							strHide.Add("ExtApp");
-							strHide.Add("ICAEncryption");
+							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("PuttySession");
 							strHide.Add("RDGatewayDomain");
 							strHide.Add("RDGatewayHostname");
@@ -1232,7 +1227,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("EnableFontSmoothing");
 							strHide.Add("EnableDesktopComposition");
 							strHide.Add("Domain");
-							strHide.Add("ICAEncryption");
+							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("PuttySession");
 							strHide.Add("RDGatewayDomain");
 							strHide.Add("RDGatewayHostname");
@@ -1389,9 +1384,9 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("RenderingEngine");
 						}
 								
-						if (conI.Inheritance.ICAEncryption)
+						if (conI.Inheritance.ICAEncryptionStrength)
 						{
-							strHide.Add("ICAEncryption");
+							strHide.Add("ICAEncryptionStrength");
 						}
 								
 						if (conI.Inheritance.RDPAuthenticationLevel)
@@ -1563,7 +1558,7 @@ namespace mRemoteNG.UI.Window
 		{
 			if (pGrid.SelectedObject is ConnectionInfoInheritance)
 			{
-				if (((ConnectionInfoInheritance)pGrid.SelectedObject).IsDefault)
+				if (pGrid.SelectedObject is DefaultConnectionInheritance)
 				{
                     PropertiesVisible = true;
                     InheritanceVisible = false;
@@ -1625,7 +1620,9 @@ namespace mRemoteNG.UI.Window
                 InheritanceVisible = false;
                 DefaultPropertiesVisible = false;
                 DefaultInheritanceVisible = true;
-                SetPropertyGridObject(Runtime.DefaultInheritanceFromSettings());
+			    var defaultInheritance = DefaultConnectionInheritance.Instance;
+                defaultInheritance.LoadFromSettings();
+                SetPropertyGridObject(defaultInheritance);
 			}
 		}
 				

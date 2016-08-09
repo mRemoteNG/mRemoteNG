@@ -1,5 +1,10 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using mRemoteNG.Tools;
 using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 
 namespace mRemoteNG.Connection
 {
@@ -16,10 +21,7 @@ namespace mRemoteNG.Connection
         public bool EverythingInherited
 		{
 			get { return EverythingIsInherited(); }
-            set
-			{
-				SetAllValues(value);
-			}
+            set { SetAllValues(value); }
 		}
         #endregion
         #region Display
@@ -78,7 +80,7 @@ namespace mRemoteNG.Connection
 		[LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameEncryptionStrength"), 
 		LocalizedAttributes.LocalizedDescriptionInheritAttribute("strPropertyDescriptionEncryptionStrength"), 
-		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool ICAEncryption {get; set;}
+		TypeConverter(typeof(MiscTools.YesNoTypeConverter))]public bool ICAEncryptionStrength {get; set;}
 				
 		[LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 4), 
 		LocalizedAttributes.LocalizedDisplayNameInheritAttribute("strPropertyNameAuthenticationLevel"), 
@@ -294,9 +296,6 @@ namespace mRemoteNG.Connection
 		
 		[Browsable(false)]
         public object Parent {get; set;}
-		
-		[Browsable(false)]
-        public bool IsDefault {get; set;}
         #endregion
 		
 
@@ -349,15 +348,23 @@ namespace mRemoteNG.Connection
 
         private bool EverythingIsInherited()
         {
-            var displaySettings = Description && Icon && Panel;
-            var connectionSettings = Username && Password && Domain;
-            var protocolSettings = Protocol && ExtApp && Port && PuttySession && ICAEncryption && RDPAuthenticationLevel && LoadBalanceInfo && RenderingEngine && UseConsoleSession && UseCredSsp; 
-            var appearanceSettings = Resolution && AutomaticResize && Colors && CacheBitmaps && DisplayWallpaper && DisplayThemes && EnableFontSmoothing && EnableDesktopComposition;
-            var redirectSettings = RedirectDiskDrives && RedirectKeys && RedirectPorts && RedirectPrinters && RedirectSmartCards && RedirectSound;
-            var miscSettings = PreExtApp && PostExtApp && MacAddress && UserField;
-            var vncSettings = VNCAuthMode && VNCColors && VNCCompression && VNCEncoding && VNCProxyIP && VNCProxyPassword && VNCProxyPort && VNCProxyType && VNCProxyUsername;
+            var inheritanceProperties = GetProperties();
+            var everythingInherited = inheritanceProperties.All((p) => (bool)p.GetValue(this, null));
+            return everythingInherited;
+        }
 
-            return displaySettings && connectionSettings && protocolSettings && appearanceSettings && redirectSettings && miscSettings && vncSettings;
+        public IEnumerable<PropertyInfo> GetProperties()
+        {
+            var properties = typeof(ConnectionInfoInheritance).GetProperties();
+            var filteredProperties = properties.Where(FilterProperty);
+            return filteredProperties;
+        }
+
+        private bool FilterProperty(PropertyInfo propertyInfo)
+        {
+            var exclusions = new[] { "EverythingInherited", "Parent" };
+            var valueShouldNotBeFiltered = !exclusions.Contains(propertyInfo.Name);
+            return valueShouldNotBeFiltered;
         }
 
 		private void SetAllValues(bool value)
@@ -370,7 +377,7 @@ namespace mRemoteNG.Connection
             }
         }
 
-        private void SetAllValues(ConnectionInfoInheritance otherInheritanceObject)
+        protected void SetAllValues(ConnectionInfoInheritance otherInheritanceObject)
         {
             var properties = typeof(ConnectionInfoInheritance).GetProperties();
             foreach (var property in properties)
