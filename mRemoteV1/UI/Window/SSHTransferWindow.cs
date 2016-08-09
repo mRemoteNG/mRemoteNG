@@ -394,21 +394,10 @@ namespace mRemoteNG.UI.Window
                     st.ScpClt.Uploading += ScpClt_Uploading;
 			    }
 
-                st.Upload();
-
-                //sshT.OnTransferStart += SshTransfer_Start;
-                //sshT.OnTransferProgress += SshTransfer_Progress;
-                //sshT.OnTransferEnd += SshTransfer_End;
-
-                //sshT.Connect(Convert.ToInt32(txtPort.Text));
-
-                //LocalFile = txtLocalFile.Text;
-                //RemoteFile = txtRemoteFile.Text;
-
-                //Thread t = new Thread(StartTransferBG);
-                //t.SetApartmentState(ApartmentState.STA);
-                //t.IsBackground = true;
-                //t.Start();
+                Thread t = new Thread(StartTransferBG);
+                t.SetApartmentState(ApartmentState.STA);
+                t.IsBackground = true;
+                t.Start();
             }
 			catch (Exception ex)
 			{
@@ -422,33 +411,40 @@ namespace mRemoteNG.UI.Window
         private void ScpClt_Uploading(object sender, Renci.SshNet.Common.ScpUploadEventArgs e)
         {
             // If the file size is over 2 gigs, convert to kb. This means we'll support a 2TB file.
-            maxVal = e.Size > int.MaxValue ? Convert.ToInt32(e.Size / 1024) : Convert.ToInt32(e.Size);
+            int max = e.Size > int.MaxValue ? Convert.ToInt32(e.Size / 1024) : Convert.ToInt32(e.Size);
 
             // yes, compare to size since that's the total/original file size
-            curVal = e.Size > int.MaxValue ? Convert.ToInt32(e.Uploaded / 1024) : Convert.ToInt32(e.Uploaded);
+            int cur = e.Size > int.MaxValue ? Convert.ToInt32(e.Uploaded / 1024) : Convert.ToInt32(e.Uploaded);
 
-            //Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Max: {maxVal}  Cur: {curVal}", true);
+            SshTransfer_Progress(cur, max);
 
-            SetStatus();
+            // Upload should be complete
+            /*
+            if (e.Size == e.Uploaded)
+            {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Transfer of {e.Filename} completed.", true);
+            }
+            */
         }
-
-        /*				
-       private string LocalFile;
-       private string RemoteFile;
 
        private void StartTransferBG()
        {
            try
            {
                DisableButtons();
-               sshT.Put(LocalFile, RemoteFile);
+               Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} started.", true);
+               st.Upload();
+               Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} completed.", true);
+               st.Disconnect();
+               st.Dispose();
+               EnableButtons();
            }
            catch (Exception ex)
            {
-               Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHStartTransferBG + Environment.NewLine + ex.Message, true);
+               Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHStartTransferBG + Environment.NewLine + ex.StackTrace, true);
            }
        }
-*/
+
         private bool AllFieldsSet()
 		{
 			if (txtHost.Text != "" && txtPort.Text != "" && txtUser.Text != "" && txtLocalFile.Text != "" && txtRemoteFile.Text != "")
@@ -520,24 +516,27 @@ namespace mRemoteNG.UI.Window
 				btnTransfer.Enabled = false;
 			}
 		}
-/*				
-		private void SshTransfer_Start(string src, string dst, int transferredBytes, int totalBytes, string message)
+		
+        /*	
+		private void SshTransfer_Start(int transferredBytes, int totalBytes)
 		{
 			maxVal = totalBytes;
 			curVal = transferredBytes;
 					
 			SetStatus();
 		}
-				
-		private void SshTransfer_Progress(string src, string dst, int transferredBytes, int totalBytes, string message)
+		*/	
+
+		private void SshTransfer_Progress(int transferredBytes, int totalBytes)
 		{
 			maxVal = totalBytes;
 			curVal = transferredBytes;
 					
 			SetStatus();
 		}
-				
-		private void SshTransfer_End(string src, string dst, int transferredBytes, int totalBytes, string message)
+		
+        /*		
+		private void SshTransfer_End(int transferredBytes, int totalBytes)
 		{
 			try
 			{
@@ -549,21 +548,19 @@ namespace mRemoteNG.UI.Window
 						
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.strSSHTransferFailed);
 						
-				if (sshT != null)
+				if (st != null)
 				{
-                    sshT.Close();
-				}
-				else if (sshT != null)
-				{
-                    sshT.Close();
-				}
+                    st?.Disconnect();
+                    st?.Dispose();
+                }
+				
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferEndFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferEndFailed + Environment.NewLine + ex.StackTrace, true);
 			}
 		}
-*/
+        */
         #endregion
 		
         #region Public Methods
