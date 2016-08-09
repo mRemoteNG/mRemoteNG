@@ -99,7 +99,7 @@ namespace mRemoteNG.App
             Settings.Default.ConDefaultDomain = DefaultConnection.Domain;
             Settings.Default.ConDefaultProtocol = DefaultConnection.Protocol.ToString();
             Settings.Default.ConDefaultPuttySession = DefaultConnection.PuttySession;
-            Settings.Default.ConDefaultICAEncryptionStrength = DefaultConnection.ICAEncryption.ToString();
+            Settings.Default.ConDefaultICAEncryptionStrength = DefaultConnection.ICAEncryptionStrength.ToString();
             Settings.Default.ConDefaultRDPAuthenticationLevel = DefaultConnection.RDPAuthenticationLevel.ToString();
             Settings.Default.ConDefaultLoadBalanceInfo = DefaultConnection.LoadBalanceInfo;
             Settings.Default.ConDefaultUseConsoleSession = DefaultConnection.UseConsoleSession;

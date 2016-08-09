@@ -203,7 +203,7 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameEncryptionStrength"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEncryptionStrength"), 
             TypeConverter(typeof(MiscTools.EnumTypeConverter))]
-        public ProtocolICA.EncryptionStrength ICAEncryption
+        public ProtocolICA.EncryptionStrength ICAEncryptionStrength
 		{
             get { return GetPropertyValue("ICAEncryptionStrength", _icaEncryption); }
 			set { _icaEncryption = value; }
@@ -742,7 +742,7 @@ namespace mRemoteNG.Connection
             var parentConnectionInfo = IsContainer ? Parent.Parent.ConnectionInfo : Parent.ConnectionInfo;
             var connectionInfoType = parentConnectionInfo.GetType();
             var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
-            var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(parentConnectionInfo, BindingFlags.GetProperty, null, null, null);
+            var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(parentConnectionInfo, null);
 
             return parentPropertyValue;
         }
