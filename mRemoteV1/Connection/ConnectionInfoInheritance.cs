@@ -367,20 +367,19 @@ namespace mRemoteNG.Connection
 
 		private void SetAllValues(bool value)
 		{
-            var properties = typeof(ConnectionInfoInheritance).GetProperties();
+            var properties = GetProperties();
             foreach (var property in properties)
             {
-                if (property.PropertyType.Name == typeof(bool).Name && property.Name != "EverythingInherited" && property.Name != "IsDefault")
+                if (property.PropertyType.Name == typeof(bool).Name)
                     property.SetValue(this, value, null);
             }
         }
 
         protected void SetAllValues(ConnectionInfoInheritance otherInheritanceObject)
         {
-            var properties = typeof(ConnectionInfoInheritance).GetProperties();
+            var properties = GetProperties();
             foreach (var property in properties)
             {
-                if (property.Name == "EverythingInherited") continue;
                 var newPropertyValue = property.GetValue(otherInheritanceObject, null);
                 property.SetValue(this, newPropertyValue, null);
             }
