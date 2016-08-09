@@ -388,22 +388,28 @@ namespace mRemoteNG.UI.Window
 			    st.SrcFile = txtLocalFile.Text;
 			    st.DstFile = txtRemoteFile.Text;
                 st.Connect();
+
+			    if (Protocol == SecureTransfer.SSHTransferProtocol.SCP)
+			    {
+                    st.ScpClt.Uploading += ScpClt_Uploading;
+			    }
+
                 st.Upload();
-						
-				//sshT.OnTransferStart += SshTransfer_Start;
-				//sshT.OnTransferProgress += SshTransfer_Progress;
-				//sshT.OnTransferEnd += SshTransfer_End;
+
+                //sshT.OnTransferStart += SshTransfer_Start;
+                //sshT.OnTransferProgress += SshTransfer_Progress;
+                //sshT.OnTransferEnd += SshTransfer_End;
 
                 //sshT.Connect(Convert.ToInt32(txtPort.Text));
-						
-				//LocalFile = txtLocalFile.Text;
-				//RemoteFile = txtRemoteFile.Text;
-						
-				//Thread t = new Thread(StartTransferBG);
-				//t.SetApartmentState(ApartmentState.STA);
-				//t.IsBackground = true;
-				//t.Start();
-			}
+
+                //LocalFile = txtLocalFile.Text;
+                //RemoteFile = txtRemoteFile.Text;
+
+                //Thread t = new Thread(StartTransferBG);
+                //t.SetApartmentState(ApartmentState.STA);
+                //t.IsBackground = true;
+                //t.Start();
+            }
 			catch (Exception ex)
 			{
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + ex.Message);
@@ -412,24 +418,38 @@ namespace mRemoteNG.UI.Window
                 st?.Dispose();
             }
 		}
-/*				
-		private string LocalFile;
-		private string RemoteFile;
-				
-		private void StartTransferBG()
-		{
-			try
-			{
-				DisableButtons();
-                sshT.Put(LocalFile, RemoteFile);
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHStartTransferBG + Environment.NewLine + ex.Message, true);
-			}
-		}
-*/				
-		private bool AllFieldsSet()
+
+        private void ScpClt_Uploading(object sender, Renci.SshNet.Common.ScpUploadEventArgs e)
+        {
+            // If the file size is over 2 gigs, convert to kb. This means we'll support a 2TB file.
+            maxVal = e.Size > int.MaxValue ? Convert.ToInt32(e.Size / 1024) : Convert.ToInt32(e.Size);
+
+            // yes, compare to size since that's the total/original file size
+            curVal = e.Size > int.MaxValue ? Convert.ToInt32(e.Uploaded / 1024) : Convert.ToInt32(e.Uploaded);
+
+            //Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Max: {maxVal}  Cur: {curVal}", true);
+
+            SetStatus();
+        }
+
+        /*				
+       private string LocalFile;
+       private string RemoteFile;
+
+       private void StartTransferBG()
+       {
+           try
+           {
+               DisableButtons();
+               sshT.Put(LocalFile, RemoteFile);
+           }
+           catch (Exception ex)
+           {
+               Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHStartTransferBG + Environment.NewLine + ex.Message, true);
+           }
+       }
+*/
+        private bool AllFieldsSet()
 		{
 			if (txtHost.Text != "" && txtPort.Text != "" && txtUser.Text != "" && txtLocalFile.Text != "" && txtRemoteFile.Text != "")
 			{

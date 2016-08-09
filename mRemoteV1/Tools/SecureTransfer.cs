@@ -15,8 +15,8 @@ namespace mRemoteNG.Tools
         private readonly SSHTransferProtocol Protocol;
         public string SrcFile;
         public string DstFile;
-        private ScpClient ScpClt;
-        private SftpClient SftpClt;
+        public ScpClient ScpClt;
+        public SftpClient SftpClt;
 
         public SecureTransfer()
         {
