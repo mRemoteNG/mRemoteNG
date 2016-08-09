@@ -15,13 +15,12 @@ using mRemoteNG.Connection.Protocol.Rlogin;
 using mRemoteNG.Container;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
-using mRemoteNG.My;
 
 
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public partial class ConnectionInfo : Parent,Inheritance
+    public class ConnectionInfo : Parent,Inheritance
     {
         #region Private Properties
         // Private properties with public get/set
@@ -71,22 +70,15 @@ namespace mRemoteNG.Connection
         private ProtocolVNC.Encoding _vncEncoding;
         private ProtocolVNC.AuthMode _vncAuthMode;
         private ProtocolVNC.ProxyType _vncProxyType;
-        private string _vncProxyIP;
+        private string _vncProxyIp;
         private int _vncProxyPort;
         private string _vncProxyUsername;
         private string _vncProxyPassword;
         private ProtocolVNC.Colors _vncColors;
         private ProtocolVNC.SmartSizeMode _vncSmartSizeMode;
         private bool _vncViewOnly;
-        private ConnectionInfoInheritance _Inheritance;
-        private ProtocolList _OpenConnections;
-        private bool _IsContainer;
-        private bool _IsDefault;
-        private int _PositionID;
-        private bool _IsQuickConnect;
-        private bool _PleaseConnect;
-        private string _constantId;
-        #endregion
+
+	    #endregion
 
         #region Public Properties
         #region Display
@@ -134,16 +126,8 @@ namespace mRemoteNG.Connection
         public virtual string Hostname
 		{
 			get { return _hostname.Trim(); }
-			set
-			{
-				if (string.IsNullOrEmpty(value))
-				{
-					_hostname = string.Empty;
-				}
-				else
-				{
-					_hostname = value.Trim();
-				}
+			set {
+			    _hostname = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
 			}
 		}
 			
@@ -179,7 +163,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameProtocol"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionProtocol"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public virtual ProtocolType Protocol
 		{
             get { return GetPropertyValue("Protocol", _protocol); }
@@ -189,7 +173,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalTool"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionExternalTool"), 
-            TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]
+            TypeConverter(typeof(ExternalToolsTypeConverter))]
         public string ExtApp
 		{
             get { return GetPropertyValue("ExtApp", _extApp); }
@@ -218,7 +202,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameEncryptionStrength"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEncryptionStrength"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolICA.EncryptionStrength ICAEncryption
 		{
             get { return GetPropertyValue("ICAEncryptionStrength", _icaEncryption); }
@@ -228,7 +212,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameUseConsoleSession"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUseConsoleSession"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UseConsoleSession
 		{
             get { return GetPropertyValue("UseConsoleSession", _useConsoleSession); }
@@ -238,7 +222,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameAuthenticationLevel"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionAuthenticationLevel"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolRDP.AuthenticationLevel RDPAuthenticationLevel
 		{
             get { return GetPropertyValue("RDPAuthenticationLevel", _rdpAuthenticationLevel); }
@@ -257,7 +241,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRenderingEngine"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRenderingEngine"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public HTTPBase.RenderingEngine RenderingEngine
 		{
             get { return GetPropertyValue("RenderingEngine", _renderingEngine); }
@@ -267,7 +251,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameUseCredSsp"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionUseCredSsp"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool UseCredSsp
 		{
             get { return GetPropertyValue("UseCredSsp", _useCredSsp); }
@@ -278,7 +262,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 4),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayUsageMethod"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUsageMethod"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolRDP.RDGatewayUsageMethod RDGatewayUsageMethod
 		{
             get { return GetPropertyValue("RDGatewayUsageMethod", _rdGatewayUsageMethod); }
@@ -297,7 +281,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryGateway", 4),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRDGatewayUseConnectionCredentials"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRDGatewayUseConnectionCredentials"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolRDP.RDGatewayUseConnectionCredentials RDGatewayUseConnectionCredentials
 		{
             get { return GetPropertyValue("RDGatewayUseConnectionCredentials", _rdGatewayUseConnectionCredentials); }
@@ -336,7 +320,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameResolution"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionResolution"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolRDP.RDPResolutions Resolution
 		{
             get { return GetPropertyValue("Resolution", _resolution); }
@@ -346,7 +330,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameAutomaticResize"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionAutomaticResize"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool AutomaticResize
 		{
             get { return GetPropertyValue("AutomaticResize", _automaticResize); }
@@ -356,7 +340,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameColors"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionColors"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolRDP.RDPColors Colors
 		{
             get { return GetPropertyValue("Colors", _colors); }
@@ -366,7 +350,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameCacheBitmaps"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionCacheBitmaps"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool CacheBitmaps
 		{
             get { return GetPropertyValue("CacheBitmaps", _cacheBitmaps); }
@@ -376,7 +360,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameDisplayWallpaper"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDisplayWallpaper"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool DisplayWallpaper
 		{
             get { return GetPropertyValue("DisplayWallpaper", _displayWallpaper); }
@@ -386,7 +370,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameDisplayThemes"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionDisplayThemes"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool DisplayThemes
 		{
             get { return GetPropertyValue("DisplayThemes", _displayThemes); }
@@ -396,7 +380,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameEnableFontSmoothing"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEnableFontSmoothing"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool EnableFontSmoothing
 		{
             get { return GetPropertyValue("EnableFontSmoothing", _enableFontSmoothing); }
@@ -406,7 +390,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameEnableDesktopComposition"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEnableDesktopComposition"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool EnableDesktopComposition
 		{
             get { return GetPropertyValue("EnableDesktopComposition", _enableDesktopComposition); }
@@ -417,7 +401,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectKeys"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectKeys"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RedirectKeys
 		{
             get { return GetPropertyValue("RedirectKeys", _redirectKeys); }
@@ -427,7 +411,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectDrives"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectDrives"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RedirectDiskDrives
 		{
             get { return GetPropertyValue("RedirectDiskDrives", _redirectDiskDrives); }
@@ -437,7 +421,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectPrinters"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectPrinters"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RedirectPrinters
 		{
             get { return GetPropertyValue("RedirectPrinters", _redirectPrinters); }
@@ -447,7 +431,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectPorts"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectPorts"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RedirectPorts
 		{
             get { return GetPropertyValue("RedirectPorts", _redirectPorts); }
@@ -457,7 +441,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectSmartCards"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectSmartCards"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool RedirectSmartCards
 		{
             get { return GetPropertyValue("RedirectSmartCards", _redirectSmartCards); }
@@ -467,7 +451,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryRedirect", 6),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameRedirectSounds"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionRedirectSounds"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolRDP.RDPSounds RedirectSound
 		{
             get { return GetPropertyValue("RedirectSound", _redirectSound); }
@@ -478,7 +462,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalToolBefore"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionExternalToolBefore"), 
-            TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]
+            TypeConverter(typeof(ExternalToolsTypeConverter))]
         public virtual string PreExtApp
 		{
             get { return GetPropertyValue("PreExtApp", _preExtApp); }
@@ -488,7 +472,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameExternalToolAfter"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionExternalToolAfter"), 
-            TypeConverter(typeof(Tools.ExternalToolsTypeConverter))]
+            TypeConverter(typeof(ExternalToolsTypeConverter))]
         public virtual string PostExtApp
 		{
             get { return GetPropertyValue("PostExtApp", _postExtApp); }
@@ -518,7 +502,7 @@ namespace mRemoteNG.Connection
             Browsable(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameCompression"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionCompression"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolVNC.Compression VNCCompression
 		{
             get { return GetPropertyValue("VNCCompression", _vncCompression); }
@@ -529,7 +513,7 @@ namespace mRemoteNG.Connection
             Browsable(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameEncoding"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionEncoding"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolVNC.Encoding VNCEncoding
 		{
             get { return GetPropertyValue("VNCEncoding", _vncEncoding); }
@@ -540,7 +524,7 @@ namespace mRemoteNG.Connection
             Browsable(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameAuthenticationMode"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionAuthenticationMode"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolVNC.AuthMode VNCAuthMode
 		{
             get { return GetPropertyValue("VNCAuthMode", _vncAuthMode); }
@@ -551,7 +535,7 @@ namespace mRemoteNG.Connection
             Browsable(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameVNCProxyType"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyType"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolVNC.ProxyType VNCProxyType
 		{
             get { return GetPropertyValue("VNCProxyType", _vncProxyType); }
@@ -564,8 +548,8 @@ namespace mRemoteNG.Connection
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionVNCProxyAddress")]
         public string VNCProxyIP
 		{
-            get { return GetPropertyValue("VNCProxyIP", _vncProxyIP); }
-			set { _vncProxyIP = value; }
+            get { return GetPropertyValue("VNCProxyIP", _vncProxyIp); }
+			set { _vncProxyIp = value; }
 		}
 		
         [LocalizedAttributes.LocalizedCategory("strCategoryMiscellaneous", 7), 
@@ -603,7 +587,7 @@ namespace mRemoteNG.Connection
             Browsable(false),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameColors"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionColors"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolVNC.Colors VNCColors
 		{
             get { return GetPropertyValue("VNCColors", _vncColors); }
@@ -613,7 +597,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameSmartSizeMode"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionSmartSizeMode"), 
-            TypeConverter(typeof(Tools.MiscTools.EnumTypeConverter))]
+            TypeConverter(typeof(MiscTools.EnumTypeConverter))]
         public ProtocolVNC.SmartSizeMode VNCSmartSizeMode
 		{
             get { return GetPropertyValue("VNCSmartSizeMode", _vncSmartSizeMode); }
@@ -623,7 +607,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryAppearance", 5),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameViewOnly"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionViewOnly"), 
-            TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
+            TypeConverter(typeof(MiscTools.YesNoTypeConverter))]
         public bool VNCViewOnly
 		{
             get { return GetPropertyValue("VNCViewOnly", _vncViewOnly); }
@@ -632,67 +616,36 @@ namespace mRemoteNG.Connection
         #endregion
         #region Non-browsable public properties
         [Browsable(false)]
-        public ConnectionInfoInheritance Inheritance
-        {
-            get { return _Inheritance; }
-            set { _Inheritance = value; }
-        }
-        
-        [Browsable(false)]
-        public ProtocolList OpenConnections
-        {
-            get { return _OpenConnections; }
-            set { _OpenConnections = value; }
-        }
+        public ConnectionInfoInheritance Inheritance { get; set; }
 
-        [Browsable(false)]
-        public bool IsContainer
-        {
-            get { return _IsContainer; }
-            set { _IsContainer = value; }
-        }
+	    [Browsable(false)]
+        public ProtocolList OpenConnections { get; set; }
 
-        [Browsable(false)]
-        public bool IsDefault
-        {
-            get { return _IsDefault; }
-            set { _IsDefault = value; }
-        }
+	    [Browsable(false)]
+        public bool IsContainer { get; set; }
 
-        [Browsable(false)]
+	    [Browsable(false)]
+        public bool IsDefault { get; set; }
+
+	    [Browsable(false)]
         public ContainerInfo Parent { get; set; }
 
         [Browsable(false)]
-        public int PositionID
-        {
-            get { return _PositionID; }
-            set { _PositionID = value; }
-        }
+        public int PositionID { get; set; }
 
-        [Browsable(false)]
-        public string ConstantID
-        {
-            get { return _constantId; }
-            set { _constantId = value; }
-        }
+	    [Browsable(false)]
+        public string ConstantID { get; set; }
 
-        [Browsable(false)]
+	    [Browsable(false)]
         public TreeNode TreeNode { get; set; }
 
         [Browsable(false)]
-        public bool IsQuickConnect
-        {
-            get { return _IsQuickConnect; }
-            set { _IsQuickConnect = value; }
-        }
+        public bool IsQuickConnect { get; set; }
 
-        [Browsable(false)]
-        public bool PleaseConnect
-        {
-            get { return _PleaseConnect; }
-            set { _PleaseConnect = value; }
-        }
-        #endregion
+	    [Browsable(false)]
+        public bool PleaseConnect { get; set; }
+
+	    #endregion
         #endregion
 
         #region Constructors
@@ -702,11 +655,11 @@ namespace mRemoteNG.Connection
             SetTreeDisplayDefaults();
             SetConnectionDefaults();
             SetProtocolDefaults();
-            SetRDGatewayDefaults();
+            SetRdGatewayDefaults();
             SetAppearanceDefaults();
             SetRedirectDefaults();
             SetMiscDefaults();
-            SetVNCDefaults();
+            SetVncDefaults();
             SetNonBrowsablePropertiesDefaults();
             SetDefaults();
 		}
@@ -714,22 +667,22 @@ namespace mRemoteNG.Connection
 		public ConnectionInfo(ContainerInfo parent) : this()
 		{
 			IsContainer = true;
-			this.Parent = parent;
+			Parent = parent;
 		}
         #endregion
 			
         #region Public Methods
 		public ConnectionInfo Copy()
 		{
-			ConnectionInfo newConnectionInfo = (ConnectionInfo)MemberwiseClone();
+			var newConnectionInfo = (ConnectionInfo)MemberwiseClone();
 			newConnectionInfo.ConstantID = MiscTools.CreateConstantID();
-			newConnectionInfo._OpenConnections = new ProtocolList();
+			newConnectionInfo.OpenConnections = new ProtocolList();
 			return newConnectionInfo;
 		}
 			
 		public void SetDefaults()
 		{
-			if (this.Port == 0)
+			if (Port == 0)
 			{
 				SetDefaultPort();
 			}
@@ -742,7 +695,7 @@ namespace mRemoteNG.Connection
 			
 		public void SetDefaultPort()
 		{
-			this.Port = GetDefaultPort();
+			Port = GetDefaultPort();
 		}
         #endregion
 			
@@ -763,13 +716,10 @@ namespace mRemoteNG.Connection
         #region Private Methods
         private TPropertyType GetPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
         {
-            if (ShouldThisPropertyBeInherited(propertyName))
-                return GetInheritedPropertyValue(propertyName, value);
-            else
-                return value;
+            return ShouldThisPropertyBeInherited(propertyName) ? GetInheritedPropertyValue<TPropertyType>(propertyName) : value;
         }
 
-        private bool ShouldThisPropertyBeInherited(string propertyName)
+	    private bool ShouldThisPropertyBeInherited(string propertyName)
         {
             return (ParentIsValidInheritanceTarget() && IsInheritanceTurnedOnForThisProperty(propertyName));
         }
@@ -781,24 +731,18 @@ namespace mRemoteNG.Connection
 
         private bool IsInheritanceTurnedOnForThisProperty(string propertyName)
         {
-            bool inheritPropertyValue = false;
-            Type inheritType = _Inheritance.GetType();
-            PropertyInfo inheritPropertyInfo = inheritType.GetProperty(propertyName);
-            inheritPropertyValue = Convert.ToBoolean(inheritPropertyInfo.GetValue(Inheritance, BindingFlags.GetProperty, null, null, null));
+            var inheritType = Inheritance.GetType();
+            var inheritPropertyInfo = inheritType.GetProperty(propertyName);
+            var inheritPropertyValue = Convert.ToBoolean(inheritPropertyInfo.GetValue(Inheritance, null));
             return inheritPropertyValue;
         }
 
-        private TPropertyType GetInheritedPropertyValue<TPropertyType>(string propertyName, TPropertyType value)
+        private TPropertyType GetInheritedPropertyValue<TPropertyType>(string propertyName)
         {
-            var parentConnectionInfo = default(ConnectionInfo);
-            if (IsContainer)
-                parentConnectionInfo = ((ContainerInfo)Parent.Parent).ConnectionInfo;
-            else
-                parentConnectionInfo = Parent.ConnectionInfo;
-
-            Type connectionInfoType = parentConnectionInfo.GetType();
-            PropertyInfo parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
-            TPropertyType parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(parentConnectionInfo, BindingFlags.GetProperty, null, null, null);
+            var parentConnectionInfo = IsContainer ? Parent.Parent.ConnectionInfo : Parent.ConnectionInfo;
+            var connectionInfoType = parentConnectionInfo.GetType();
+            var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
+            var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(parentConnectionInfo, BindingFlags.GetProperty, null, null, null);
 
             return parentPropertyValue;
         }
@@ -844,98 +788,98 @@ namespace mRemoteNG.Connection
         private void SetTreeDisplayDefaults()
         {
             _name = Language.strNewConnection;
-            _description = mRemoteNG.Settings.Default.ConDefaultDescription;
-            _icon = mRemoteNG.Settings.Default.ConDefaultIcon;
+            _description = Settings.Default.ConDefaultDescription;
+            _icon = Settings.Default.ConDefaultIcon;
             _panel = Language.strGeneral;
         }
 
         private void SetConnectionDefaults()
         {
             _hostname = string.Empty;
-            _username = mRemoteNG.Settings.Default.ConDefaultUsername;
-            _password = mRemoteNG.Settings.Default.ConDefaultPassword;
-            _domain = mRemoteNG.Settings.Default.ConDefaultDomain;
+            _username = Settings.Default.ConDefaultUsername;
+            _password = Settings.Default.ConDefaultPassword;
+            _domain = Settings.Default.ConDefaultDomain;
         }
 
         private void SetProtocolDefaults()
         {
-            _protocol = (ProtocolType)System.Enum.Parse(typeof(ProtocolType), mRemoteNG.Settings.Default.ConDefaultProtocol);
-            _extApp = mRemoteNG.Settings.Default.ConDefaultExtApp;
+            _protocol = (ProtocolType)Enum.Parse(typeof(ProtocolType), Settings.Default.ConDefaultProtocol);
+            _extApp = Settings.Default.ConDefaultExtApp;
             _port = 0;
-            _puttySession = mRemoteNG.Settings.Default.ConDefaultPuttySession;
-            _icaEncryption = (ProtocolICA.EncryptionStrength) Enum.Parse(typeof(ProtocolICA.EncryptionStrength), mRemoteNG.Settings.Default.ConDefaultICAEncryptionStrength);
-            _useConsoleSession = mRemoteNG.Settings.Default.ConDefaultUseConsoleSession;
-            _rdpAuthenticationLevel = (ProtocolRDP.AuthenticationLevel) Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), mRemoteNG.Settings.Default.ConDefaultRDPAuthenticationLevel);
-            _loadBalanceInfo = mRemoteNG.Settings.Default.ConDefaultLoadBalanceInfo;
-            _renderingEngine = (HTTPBase.RenderingEngine) Enum.Parse(typeof(HTTPBase.RenderingEngine), mRemoteNG.Settings.Default.ConDefaultRenderingEngine);
-            _useCredSsp = mRemoteNG.Settings.Default.ConDefaultUseCredSsp;
+            _puttySession = Settings.Default.ConDefaultPuttySession;
+            _icaEncryption = (ProtocolICA.EncryptionStrength) Enum.Parse(typeof(ProtocolICA.EncryptionStrength), Settings.Default.ConDefaultICAEncryptionStrength);
+            _useConsoleSession = Settings.Default.ConDefaultUseConsoleSession;
+            _rdpAuthenticationLevel = (ProtocolRDP.AuthenticationLevel) Enum.Parse(typeof(ProtocolRDP.AuthenticationLevel), Settings.Default.ConDefaultRDPAuthenticationLevel);
+            _loadBalanceInfo = Settings.Default.ConDefaultLoadBalanceInfo;
+            _renderingEngine = (HTTPBase.RenderingEngine) Enum.Parse(typeof(HTTPBase.RenderingEngine), Settings.Default.ConDefaultRenderingEngine);
+            _useCredSsp = Settings.Default.ConDefaultUseCredSsp;
         }
 
-        private void SetRDGatewayDefaults()
+        private void SetRdGatewayDefaults()
         {
-            _rdGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod) Enum.Parse(typeof(ProtocolRDP.RDGatewayUsageMethod), mRemoteNG.Settings.Default.ConDefaultRDGatewayUsageMethod);
-            _rdGatewayHostname = mRemoteNG.Settings.Default.ConDefaultRDGatewayHostname;
-            _rdGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials) Enum.Parse(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), mRemoteNG.Settings.Default.ConDefaultRDGatewayUseConnectionCredentials); ;
-            _rdGatewayUsername = mRemoteNG.Settings.Default.ConDefaultRDGatewayUsername;
-            _rdGatewayPassword = mRemoteNG.Settings.Default.ConDefaultRDGatewayPassword;
-            _rdGatewayDomain = mRemoteNG.Settings.Default.ConDefaultRDGatewayDomain;
+            _rdGatewayUsageMethod = (ProtocolRDP.RDGatewayUsageMethod) Enum.Parse(typeof(ProtocolRDP.RDGatewayUsageMethod), Settings.Default.ConDefaultRDGatewayUsageMethod);
+            _rdGatewayHostname = Settings.Default.ConDefaultRDGatewayHostname;
+            _rdGatewayUseConnectionCredentials = (ProtocolRDP.RDGatewayUseConnectionCredentials) Enum.Parse(typeof(ProtocolRDP.RDGatewayUseConnectionCredentials), Settings.Default.ConDefaultRDGatewayUseConnectionCredentials); ;
+            _rdGatewayUsername = Settings.Default.ConDefaultRDGatewayUsername;
+            _rdGatewayPassword = Settings.Default.ConDefaultRDGatewayPassword;
+            _rdGatewayDomain = Settings.Default.ConDefaultRDGatewayDomain;
         }
 
         private void SetAppearanceDefaults() 
         {
-            _resolution = (ProtocolRDP.RDPResolutions) Enum.Parse(typeof(ProtocolRDP.RDPResolutions), mRemoteNG.Settings.Default.ConDefaultResolution);
-            _automaticResize = mRemoteNG.Settings.Default.ConDefaultAutomaticResize;
-            _colors = (ProtocolRDP.RDPColors) Enum.Parse(typeof(ProtocolRDP.RDPColors), mRemoteNG.Settings.Default.ConDefaultColors);
-            _cacheBitmaps = mRemoteNG.Settings.Default.ConDefaultCacheBitmaps;
-            _displayWallpaper = mRemoteNG.Settings.Default.ConDefaultDisplayWallpaper;
-            _displayThemes = mRemoteNG.Settings.Default.ConDefaultDisplayThemes;
-            _enableFontSmoothing = mRemoteNG.Settings.Default.ConDefaultEnableFontSmoothing;
-            _enableDesktopComposition = mRemoteNG.Settings.Default.ConDefaultEnableDesktopComposition;
+            _resolution = (ProtocolRDP.RDPResolutions) Enum.Parse(typeof(ProtocolRDP.RDPResolutions), Settings.Default.ConDefaultResolution);
+            _automaticResize = Settings.Default.ConDefaultAutomaticResize;
+            _colors = (ProtocolRDP.RDPColors) Enum.Parse(typeof(ProtocolRDP.RDPColors), Settings.Default.ConDefaultColors);
+            _cacheBitmaps = Settings.Default.ConDefaultCacheBitmaps;
+            _displayWallpaper = Settings.Default.ConDefaultDisplayWallpaper;
+            _displayThemes = Settings.Default.ConDefaultDisplayThemes;
+            _enableFontSmoothing = Settings.Default.ConDefaultEnableFontSmoothing;
+            _enableDesktopComposition = Settings.Default.ConDefaultEnableDesktopComposition;
         }
 
         private void SetRedirectDefaults()
         {
-            _redirectKeys = mRemoteNG.Settings.Default.ConDefaultRedirectKeys;
-            _redirectDiskDrives = mRemoteNG.Settings.Default.ConDefaultRedirectDiskDrives;
-            _redirectPrinters = mRemoteNG.Settings.Default.ConDefaultRedirectPrinters;
-            _redirectPorts = mRemoteNG.Settings.Default.ConDefaultRedirectPorts;
-            _redirectSmartCards = mRemoteNG.Settings.Default.ConDefaultRedirectSmartCards;
-            _redirectSound = (ProtocolRDP.RDPSounds) Enum.Parse(typeof(ProtocolRDP.RDPSounds), mRemoteNG.Settings.Default.ConDefaultRedirectSound);
+            _redirectKeys = Settings.Default.ConDefaultRedirectKeys;
+            _redirectDiskDrives = Settings.Default.ConDefaultRedirectDiskDrives;
+            _redirectPrinters = Settings.Default.ConDefaultRedirectPrinters;
+            _redirectPorts = Settings.Default.ConDefaultRedirectPorts;
+            _redirectSmartCards = Settings.Default.ConDefaultRedirectSmartCards;
+            _redirectSound = (ProtocolRDP.RDPSounds) Enum.Parse(typeof(ProtocolRDP.RDPSounds), Settings.Default.ConDefaultRedirectSound);
         }
 
         private void SetMiscDefaults()
         {
-            _constantId = MiscTools.CreateConstantID();
-            _preExtApp = mRemoteNG.Settings.Default.ConDefaultPreExtApp;
-            _postExtApp = mRemoteNG.Settings.Default.ConDefaultPostExtApp;
-            _macAddress = mRemoteNG.Settings.Default.ConDefaultMacAddress;
-            _userField = mRemoteNG.Settings.Default.ConDefaultUserField;
+            ConstantID = MiscTools.CreateConstantID();
+            _preExtApp = Settings.Default.ConDefaultPreExtApp;
+            _postExtApp = Settings.Default.ConDefaultPostExtApp;
+            _macAddress = Settings.Default.ConDefaultMacAddress;
+            _userField = Settings.Default.ConDefaultUserField;
         }
 
-        private void SetVNCDefaults()
+        private void SetVncDefaults()
         {
-            _vncCompression = (ProtocolVNC.Compression) Enum.Parse(typeof(ProtocolVNC.Compression), mRemoteNG.Settings.Default.ConDefaultVNCCompression);
-            _vncEncoding = (ProtocolVNC.Encoding) Enum.Parse(typeof(ProtocolVNC.Encoding), mRemoteNG.Settings.Default.ConDefaultVNCEncoding);
-            _vncAuthMode = (ProtocolVNC.AuthMode) Enum.Parse(typeof(ProtocolVNC.AuthMode), mRemoteNG.Settings.Default.ConDefaultVNCAuthMode);
-            _vncProxyType = (ProtocolVNC.ProxyType) Enum.Parse(typeof(ProtocolVNC.ProxyType), mRemoteNG.Settings.Default.ConDefaultVNCProxyType);
-            _vncProxyIP = mRemoteNG.Settings.Default.ConDefaultVNCProxyIP;
-            _vncProxyPort = mRemoteNG.Settings.Default.ConDefaultVNCProxyPort;
-            _vncProxyUsername = mRemoteNG.Settings.Default.ConDefaultVNCProxyUsername;
-            _vncProxyPassword = mRemoteNG.Settings.Default.ConDefaultVNCProxyPassword;
-            _vncColors = (ProtocolVNC.Colors) Enum.Parse(typeof(ProtocolVNC.Colors), mRemoteNG.Settings.Default.ConDefaultVNCColors);
-            _vncSmartSizeMode = (ProtocolVNC.SmartSizeMode) Enum.Parse(typeof(ProtocolVNC.SmartSizeMode), mRemoteNG.Settings.Default.ConDefaultVNCSmartSizeMode);
-            _vncViewOnly = mRemoteNG.Settings.Default.ConDefaultVNCViewOnly;
+            _vncCompression = (ProtocolVNC.Compression) Enum.Parse(typeof(ProtocolVNC.Compression), Settings.Default.ConDefaultVNCCompression);
+            _vncEncoding = (ProtocolVNC.Encoding) Enum.Parse(typeof(ProtocolVNC.Encoding), Settings.Default.ConDefaultVNCEncoding);
+            _vncAuthMode = (ProtocolVNC.AuthMode) Enum.Parse(typeof(ProtocolVNC.AuthMode), Settings.Default.ConDefaultVNCAuthMode);
+            _vncProxyType = (ProtocolVNC.ProxyType) Enum.Parse(typeof(ProtocolVNC.ProxyType), Settings.Default.ConDefaultVNCProxyType);
+            _vncProxyIp = Settings.Default.ConDefaultVNCProxyIP;
+            _vncProxyPort = Settings.Default.ConDefaultVNCProxyPort;
+            _vncProxyUsername = Settings.Default.ConDefaultVNCProxyUsername;
+            _vncProxyPassword = Settings.Default.ConDefaultVNCProxyPassword;
+            _vncColors = (ProtocolVNC.Colors) Enum.Parse(typeof(ProtocolVNC.Colors), Settings.Default.ConDefaultVNCColors);
+            _vncSmartSizeMode = (ProtocolVNC.SmartSizeMode) Enum.Parse(typeof(ProtocolVNC.SmartSizeMode), Settings.Default.ConDefaultVNCSmartSizeMode);
+            _vncViewOnly = Settings.Default.ConDefaultVNCViewOnly;
         }
 
         private void SetNonBrowsablePropertiesDefaults()
         {
-            _Inheritance = new ConnectionInfoInheritance(this);
-            _OpenConnections = new ProtocolList();
-            _IsContainer = false;
-            _IsDefault = false;
-            _PositionID = 0;
-            _IsQuickConnect = false;
-            _PleaseConnect = false;
+            Inheritance = new ConnectionInfoInheritance(this);
+            OpenConnections = new ProtocolList();
+            IsContainer = false;
+            IsDefault = false;
+            PositionID = 0;
+            IsQuickConnect = false;
+            PleaseConnect = false;
         }
         #endregion
 	}
