@@ -791,7 +791,7 @@ namespace mRemoteNG.UI.Window
         private void UpdateInheritanceNode()
         {
             if (!(pGrid.SelectedObject is DefaultConnectionInheritance)) return;
-            DefaultConnectionInheritance.Instance.SaveToSettings();
+            DefaultConnectionInheritance.Instance.SaveTo<Settings>(Settings.Default, (a)=>"InhDefault"+a);
         }
 
         private void pGrid_PropertySortChanged(object sender, EventArgs e)
