@@ -297,13 +297,12 @@ namespace mRemoteNG.Connection
         #endregion
 		
 
-		public ConnectionInfoInheritance(object parent, bool inheritEverything = false)
+		public ConnectionInfoInheritance(object parent, bool ignoreDefaultInheritance = false)
 		{
             Parent = parent;
-			if (inheritEverything)
-				TurnOnInheritanceCompletely();
+			if (!ignoreDefaultInheritance)
+			    SetAllValues(DefaultConnectionInheritance.Instance);
 		}
-
 
 
 		public ConnectionInfoInheritance Copy()

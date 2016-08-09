@@ -87,7 +87,8 @@ namespace mRemoteNG.Config.Import
 					var treeNode = ConnectionTreeNode.AddNode(TreeNodeType.Connection, displayName);
 						
 					var connectionInfo = new ConnectionInfo();
-					var inheritanceInfo = new ConnectionInfoInheritance(connectionInfo, true);
+					var inheritanceInfo = new ConnectionInfoInheritance(connectionInfo);
+                    inheritanceInfo.TurnOnInheritanceCompletely();
 					inheritanceInfo.Description = false;
 					if (parentTreeNode.Tag is ContainerInfo)
 					{

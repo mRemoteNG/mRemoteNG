@@ -1620,9 +1620,7 @@ namespace mRemoteNG.UI.Window
                 InheritanceVisible = false;
                 DefaultPropertiesVisible = false;
                 DefaultInheritanceVisible = true;
-			    var defaultInheritance = DefaultConnectionInheritance.Instance;
-                defaultInheritance.LoadFrom<Settings>(Settings.Default, (a)=>"InhDefault"+a);
-                SetPropertyGridObject(defaultInheritance);
+                SetPropertyGridObject(DefaultConnectionInheritance.Instance);
 			}
 		}
 				
