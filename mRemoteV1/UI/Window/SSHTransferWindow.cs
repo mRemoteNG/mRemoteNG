@@ -81,7 +81,7 @@ namespace mRemoteNG.UI.Window
             this.lblLocalFile.AutoSize = true;
             this.lblLocalFile.Location = new System.Drawing.Point(6, 30);
             this.lblLocalFile.Name = "lblLocalFile";
-            this.lblLocalFile.Size = new System.Drawing.Size(64, 19);
+            this.lblLocalFile.Size = new System.Drawing.Size(55, 13);
             this.lblLocalFile.TabIndex = 10;
             this.lblLocalFile.Text = "Local file:";
             // 
@@ -90,7 +90,7 @@ namespace mRemoteNG.UI.Window
             this.txtLocalFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtLocalFile.Location = new System.Drawing.Point(105, 28);
             this.txtLocalFile.Name = "txtLocalFile";
-            this.txtLocalFile.Size = new System.Drawing.Size(455, 26);
+            this.txtLocalFile.Size = new System.Drawing.Size(455, 22);
             this.txtLocalFile.TabIndex = 20;
             // 
             // btnTransfer
@@ -112,7 +112,7 @@ namespace mRemoteNG.UI.Window
             this.txtRemoteFile.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtRemoteFile.Location = new System.Drawing.Point(105, 60);
             this.txtRemoteFile.Name = "txtRemoteFile";
-            this.txtRemoteFile.Size = new System.Drawing.Size(542, 26);
+            this.txtRemoteFile.Size = new System.Drawing.Size(542, 22);
             this.txtRemoteFile.TabIndex = 50;
             // 
             // lblRemoteFile
@@ -120,7 +120,7 @@ namespace mRemoteNG.UI.Window
             this.lblRemoteFile.AutoSize = true;
             this.lblRemoteFile.Location = new System.Drawing.Point(6, 67);
             this.lblRemoteFile.Name = "lblRemoteFile";
-            this.lblRemoteFile.Size = new System.Drawing.Size(80, 19);
+            this.lblRemoteFile.Size = new System.Drawing.Size(68, 13);
             this.lblRemoteFile.TabIndex = 40;
             this.lblRemoteFile.Text = "Remote file:";
             // 
@@ -162,7 +162,7 @@ namespace mRemoteNG.UI.Window
             this.radProtSFTP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radProtSFTP.Location = new System.Drawing.Point(164, 113);
             this.radProtSFTP.Name = "radProtSFTP";
-            this.radProtSFTP.Size = new System.Drawing.Size(58, 23);
+            this.radProtSFTP.Size = new System.Drawing.Size(47, 17);
             this.radProtSFTP.TabIndex = 90;
             this.radProtSFTP.Text = "SFTP";
             this.radProtSFTP.UseVisualStyleBackColor = true;
@@ -174,7 +174,7 @@ namespace mRemoteNG.UI.Window
             this.radProtSCP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.radProtSCP.Location = new System.Drawing.Point(105, 113);
             this.radProtSCP.Name = "radProtSCP";
-            this.radProtSCP.Size = new System.Drawing.Size(53, 23);
+            this.radProtSCP.Size = new System.Drawing.Size(43, 17);
             this.radProtSCP.TabIndex = 80;
             this.radProtSCP.TabStop = true;
             this.radProtSCP.Text = "SCP";
@@ -185,7 +185,7 @@ namespace mRemoteNG.UI.Window
             this.lblProtocol.AutoSize = true;
             this.lblProtocol.Location = new System.Drawing.Point(6, 117);
             this.lblProtocol.Name = "lblProtocol";
-            this.lblProtocol.Size = new System.Drawing.Size(63, 19);
+            this.lblProtocol.Size = new System.Drawing.Size(53, 13);
             this.lblProtocol.TabIndex = 90;
             this.lblProtocol.Text = "Protocol:";
             // 
@@ -194,7 +194,7 @@ namespace mRemoteNG.UI.Window
             this.lblPassword.AutoSize = true;
             this.lblPassword.Location = new System.Drawing.Point(6, 88);
             this.lblPassword.Name = "lblPassword";
-            this.lblPassword.Size = new System.Drawing.Size(70, 19);
+            this.lblPassword.Size = new System.Drawing.Size(59, 13);
             this.lblPassword.TabIndex = 70;
             this.lblPassword.Text = "Password:";
             // 
@@ -203,7 +203,7 @@ namespace mRemoteNG.UI.Window
             this.lblUser.AutoSize = true;
             this.lblUser.Location = new System.Drawing.Point(6, 58);
             this.lblUser.Name = "lblUser";
-            this.lblUser.Size = new System.Drawing.Size(40, 19);
+            this.lblUser.Size = new System.Drawing.Size(33, 13);
             this.lblUser.TabIndex = 50;
             this.lblUser.Text = "User:";
             // 
@@ -212,7 +212,7 @@ namespace mRemoteNG.UI.Window
             this.lblPort.AutoSize = true;
             this.lblPort.Location = new System.Drawing.Point(228, 115);
             this.lblPort.Name = "lblPort";
-            this.lblPort.Size = new System.Drawing.Size(37, 19);
+            this.lblPort.Size = new System.Drawing.Size(31, 13);
             this.lblPort.TabIndex = 30;
             this.lblPort.Text = "Port:";
             // 
@@ -221,7 +221,7 @@ namespace mRemoteNG.UI.Window
             this.lblHost.AutoSize = true;
             this.lblHost.Location = new System.Drawing.Point(6, 27);
             this.lblHost.Name = "lblHost";
-            this.lblHost.Size = new System.Drawing.Size(41, 19);
+            this.lblHost.Size = new System.Drawing.Size(34, 13);
             this.lblHost.TabIndex = 10;
             this.lblHost.Text = "Host:";
             // 
@@ -230,7 +230,7 @@ namespace mRemoteNG.UI.Window
             this.txtPort.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPort.Location = new System.Drawing.Point(271, 110);
             this.txtPort.Name = "txtPort";
-            this.txtPort.Size = new System.Drawing.Size(30, 26);
+            this.txtPort.Size = new System.Drawing.Size(30, 22);
             this.txtPort.TabIndex = 100;
             this.txtPort.Text = "22";
             this.txtPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -240,7 +240,7 @@ namespace mRemoteNG.UI.Window
             this.txtHost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtHost.Location = new System.Drawing.Point(105, 19);
             this.txtHost.Name = "txtHost";
-            this.txtHost.Size = new System.Drawing.Size(471, 26);
+            this.txtHost.Size = new System.Drawing.Size(471, 22);
             this.txtHost.TabIndex = 20;
             // 
             // txtPassword
@@ -248,7 +248,7 @@ namespace mRemoteNG.UI.Window
             this.txtPassword.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtPassword.Location = new System.Drawing.Point(105, 81);
             this.txtPassword.Name = "txtPassword";
-            this.txtPassword.Size = new System.Drawing.Size(471, 26);
+            this.txtPassword.Size = new System.Drawing.Size(471, 22);
             this.txtPassword.TabIndex = 60;
             this.txtPassword.UseSystemPasswordChar = true;
             // 
@@ -257,7 +257,7 @@ namespace mRemoteNG.UI.Window
             this.txtUser.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.txtUser.Location = new System.Drawing.Point(105, 51);
             this.txtUser.Name = "txtUser";
-            this.txtUser.Size = new System.Drawing.Size(471, 26);
+            this.txtUser.Size = new System.Drawing.Size(471, 22);
             this.txtUser.TabIndex = 40;
             // 
             // pbStatus
@@ -265,6 +265,7 @@ namespace mRemoteNG.UI.Window
             this.pbStatus.Location = new System.Drawing.Point(12, 353);
             this.pbStatus.Name = "pbStatus";
             this.pbStatus.Size = new System.Drawing.Size(668, 23);
+            this.pbStatus.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
             this.pbStatus.TabIndex = 3000;
             // 
             // SSHTransferWindow
@@ -273,8 +274,8 @@ namespace mRemoteNG.UI.Window
             this.Controls.Add(this.grpFiles);
             this.Controls.Add(this.grpConnection);
             this.Controls.Add(this.pbStatus);
-            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, 0);
-            this.Icon = (System.Drawing.Icon)resources.GetObject("$this.Icon");
+            this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SSHTransferWindow";
             this.TabText = "SSH File Transfer";
             this.Text = "SSH File Transfer";
