@@ -11,7 +11,9 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net.NetworkInformation;
+using System.Threading;
 using System.Windows.Forms;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Security;
 using mRemoteNG.UI.Controls.FilteredPropertyGrid;
 using WeifenLuo.WinFormsUI.Docking;
@@ -812,7 +814,7 @@ namespace mRemoteNG.UI.Window
 							
 					switch (conI.Protocol)
 					{
-						case Connection.Protocol.ProtocolType.RDP:
+						case ProtocolType.RDP:
 							strHide.Add("ExtApp");
 							strHide.Add("ICAEncryptionStrength");
 							strHide.Add("PuttySession");
@@ -847,7 +849,7 @@ namespace mRemoteNG.UI.Window
 								strHide.Add("AutomaticResize");
 							}
 							break;
-						case Connection.Protocol.ProtocolType.VNC:
+						case ProtocolType.VNC:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -889,7 +891,7 @@ namespace mRemoteNG.UI.Window
 								strHide.Add("VNCProxyUsername");
 							}
 							break;
-						case Connection.Protocol.ProtocolType.SSH1:
+						case ProtocolType.SSH1:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -930,7 +932,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case Connection.Protocol.ProtocolType.SSH2:
+						case ProtocolType.SSH2:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -971,50 +973,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case Connection.Protocol.ProtocolType.Telnet:
-							strHide.Add("CacheBitmaps");
-							strHide.Add("Colors");
-							strHide.Add("DisplayThemes");
-							strHide.Add("DisplayWallpaper");
-							strHide.Add("EnableFontSmoothing");
-							strHide.Add("EnableDesktopComposition");
-							strHide.Add("Domain");
-							strHide.Add("ExtApp");
-							strHide.Add("ICAEncryptionStrength");
-							strHide.Add("Password");
-							strHide.Add("RDGatewayDomain");
-							strHide.Add("RDGatewayHostname");
-							strHide.Add("RDGatewayPassword");
-							strHide.Add("RDGatewayUsageMethod");
-							strHide.Add("RDGatewayUseConnectionCredentials");
-							strHide.Add("RDGatewayUsername");
-							strHide.Add("RDPAuthenticationLevel");
-							strHide.Add("LoadBalanceInfo");
-							strHide.Add("RedirectDiskDrives");
-							strHide.Add("RedirectKeys");
-							strHide.Add("RedirectPorts");
-							strHide.Add("RedirectPrinters");
-							strHide.Add("RedirectSmartCards");
-							strHide.Add("RedirectSound");
-							strHide.Add("RenderingEngine");
-							strHide.Add("Resolution");
-							strHide.Add("AutomaticResize");
-							strHide.Add("UseConsoleSession");
-							strHide.Add("UseCredSsp");
-							strHide.Add("Username");
-							strHide.Add("VNCAuthMode");
-							strHide.Add("VNCColors");
-							strHide.Add("VNCCompression");
-							strHide.Add("VNCEncoding");
-							strHide.Add("VNCProxyIP");
-							strHide.Add("VNCProxyPassword");
-							strHide.Add("VNCProxyPort");
-							strHide.Add("VNCProxyType");
-							strHide.Add("VNCProxyUsername");
-							strHide.Add("VNCSmartSizeMode");
-							strHide.Add("VNCViewOnly");
-							break;
-						case Connection.Protocol.ProtocolType.Rlogin:
+						case ProtocolType.Telnet:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -1057,7 +1016,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case Connection.Protocol.ProtocolType.RAW:
+						case ProtocolType.Rlogin:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -1100,7 +1059,50 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case Connection.Protocol.ProtocolType.HTTP:
+						case ProtocolType.RAW:
+							strHide.Add("CacheBitmaps");
+							strHide.Add("Colors");
+							strHide.Add("DisplayThemes");
+							strHide.Add("DisplayWallpaper");
+							strHide.Add("EnableFontSmoothing");
+							strHide.Add("EnableDesktopComposition");
+							strHide.Add("Domain");
+							strHide.Add("ExtApp");
+							strHide.Add("ICAEncryptionStrength");
+							strHide.Add("Password");
+							strHide.Add("RDGatewayDomain");
+							strHide.Add("RDGatewayHostname");
+							strHide.Add("RDGatewayPassword");
+							strHide.Add("RDGatewayUsageMethod");
+							strHide.Add("RDGatewayUseConnectionCredentials");
+							strHide.Add("RDGatewayUsername");
+							strHide.Add("RDPAuthenticationLevel");
+							strHide.Add("LoadBalanceInfo");
+							strHide.Add("RedirectDiskDrives");
+							strHide.Add("RedirectKeys");
+							strHide.Add("RedirectPorts");
+							strHide.Add("RedirectPrinters");
+							strHide.Add("RedirectSmartCards");
+							strHide.Add("RedirectSound");
+							strHide.Add("RenderingEngine");
+							strHide.Add("Resolution");
+							strHide.Add("AutomaticResize");
+							strHide.Add("UseConsoleSession");
+							strHide.Add("UseCredSsp");
+							strHide.Add("Username");
+							strHide.Add("VNCAuthMode");
+							strHide.Add("VNCColors");
+							strHide.Add("VNCCompression");
+							strHide.Add("VNCEncoding");
+							strHide.Add("VNCProxyIP");
+							strHide.Add("VNCProxyPassword");
+							strHide.Add("VNCProxyPort");
+							strHide.Add("VNCProxyType");
+							strHide.Add("VNCProxyUsername");
+							strHide.Add("VNCSmartSizeMode");
+							strHide.Add("VNCViewOnly");
+							break;
+						case ProtocolType.HTTP:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -1141,7 +1143,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case Connection.Protocol.ProtocolType.HTTPS:
+						case ProtocolType.HTTPS:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -1181,7 +1183,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case Connection.Protocol.ProtocolType.ICA:
+						case ProtocolType.ICA:
 							strHide.Add("DisplayThemes");
 							strHide.Add("DisplayWallpaper");
 							strHide.Add("EnableFontSmoothing");
@@ -1219,7 +1221,7 @@ namespace mRemoteNG.UI.Window
 							strHide.Add("VNCSmartSizeMode");
 							strHide.Add("VNCViewOnly");
 							break;
-						case Connection.Protocol.ProtocolType.IntApp:
+						case ProtocolType.IntApp:
 							strHide.Add("CacheBitmaps");
 							strHide.Add("Colors");
 							strHide.Add("DisplayThemes");
@@ -1265,270 +1267,112 @@ namespace mRemoteNG.UI.Window
 					if (conI.IsDefault == false)
 					{
 						if (conI.Inheritance.CacheBitmaps)
-						{
 							strHide.Add("CacheBitmaps");
-						}
-								
 						if (conI.Inheritance.Colors)
-						{
 							strHide.Add("Colors");
-						}
-								
 						if (conI.Inheritance.Description)
-						{
 							strHide.Add("Description");
-						}
-								
 						if (conI.Inheritance.DisplayThemes)
-						{
 							strHide.Add("DisplayThemes");
-						}
-								
 						if (conI.Inheritance.DisplayWallpaper)
-						{
 							strHide.Add("DisplayWallpaper");
-						}
-								
 						if (conI.Inheritance.EnableFontSmoothing)
-						{
 							strHide.Add("EnableFontSmoothing");
-						}
-								
 						if (conI.Inheritance.EnableDesktopComposition)
-						{
 							strHide.Add("EnableDesktopComposition");
-						}
-								
 						if (conI.Inheritance.Domain)
-						{
 							strHide.Add("Domain");
-						}
-								
 						if (conI.Inheritance.Icon)
-						{
 							strHide.Add("Icon");
-						}
-								
 						if (conI.Inheritance.Password)
-						{
 							strHide.Add("Password");
-						}
-								
 						if (conI.Inheritance.Port)
-						{
 							strHide.Add("Port");
-						}
-								
 						if (conI.Inheritance.Protocol)
-						{
 							strHide.Add("Protocol");
-						}
-								
 						if (conI.Inheritance.PuttySession)
-						{
 							strHide.Add("PuttySession");
-						}
-								
 						if (conI.Inheritance.RedirectDiskDrives)
-						{
-							strHide.Add("RedirectDiskDrives");
-						}
-								
-						if (conI.Inheritance.RedirectKeys)
-						{
-							strHide.Add("RedirectKeys");
-						}
-								
-						if (conI.Inheritance.RedirectPorts)
-						{
-							strHide.Add("RedirectPorts");
-						}
-								
-						if (conI.Inheritance.RedirectPrinters)
-						{
-							strHide.Add("RedirectPrinters");
-						}
-								
-						if (conI.Inheritance.RedirectSmartCards)
-						{
-							strHide.Add("RedirectSmartCards");
-						}
-								
-						if (conI.Inheritance.RedirectSound)
-						{
-							strHide.Add("RedirectSound");
-						}
-								
-						if (conI.Inheritance.Resolution)
-						{
-							strHide.Add("Resolution");
-						}
-								
-						if (conI.Inheritance.AutomaticResize)
-						{
-							strHide.Add("AutomaticResize");
-						}
-								
-						if (conI.Inheritance.UseConsoleSession)
-						{
-							strHide.Add("UseConsoleSession");
-						}
-								
-						if (conI.Inheritance.UseCredSsp)
-						{
-							strHide.Add("UseCredSsp");
-						}
-								
-						if (conI.Inheritance.RenderingEngine)
-						{
-							strHide.Add("RenderingEngine");
-						}
-								
-						if (conI.Inheritance.ICAEncryptionStrength)
-						{
-							strHide.Add("ICAEncryptionStrength");
-						}
-								
-						if (conI.Inheritance.RDPAuthenticationLevel)
-						{
-							strHide.Add("RDPAuthenticationLevel");
-						}
-								
-						if (conI.Inheritance.LoadBalanceInfo)
-						{
-							strHide.Add("LoadBalanceInfo");
-						}
-								
-						if (conI.Inheritance.Username)
-						{
-							strHide.Add("Username");
-						}
-								
-						if (conI.Inheritance.Panel)
-						{
-							strHide.Add("Panel");
-						}
-								
-						if (conI.IsContainer)
-						{
-							strHide.Add("Hostname");
-						}
-								
-						if (conI.Inheritance.PreExtApp)
-						{
-							strHide.Add("PreExtApp");
-						}
-								
-						if (conI.Inheritance.PostExtApp)
-						{
-							strHide.Add("PostExtApp");
-						}
-								
-						if (conI.Inheritance.MacAddress)
-						{
-							strHide.Add("MacAddress");
-						}
-								
-						if (conI.Inheritance.UserField)
-						{
-							strHide.Add("UserField");
-						}
-								
-						if (conI.Inheritance.VNCAuthMode)
-						{
-							strHide.Add("VNCAuthMode");
-						}
-								
-						if (conI.Inheritance.VNCColors)
-						{
-							strHide.Add("VNCColors");
-						}
-								
-						if (conI.Inheritance.VNCCompression)
-						{
-							strHide.Add("VNCCompression");
-						}
-								
-						if (conI.Inheritance.VNCEncoding)
-						{
-							strHide.Add("VNCEncoding");
-						}
-								
-						if (conI.Inheritance.VNCProxyIP)
-						{
-							strHide.Add("VNCProxyIP");
-						}
-								
-						if (conI.Inheritance.VNCProxyPassword)
-						{
-							strHide.Add("VNCProxyPassword");
-						}
-								
-						if (conI.Inheritance.VNCProxyPort)
-						{
-							strHide.Add("VNCProxyPort");
-						}
-								
-						if (conI.Inheritance.VNCProxyType)
-						{
-							strHide.Add("VNCProxyType");
-						}
-								
-						if (conI.Inheritance.VNCProxyUsername)
-						{
-							strHide.Add("VNCProxyUsername");
-						}
-								
-						if (conI.Inheritance.VNCViewOnly)
-						{
-							strHide.Add("VNCViewOnly");
-						}
-								
-						if (conI.Inheritance.VNCSmartSizeMode)
-						{
-							strHide.Add("VNCSmartSizeMode");
-						}
-								
-						if (conI.Inheritance.ExtApp)
-						{
-							strHide.Add("ExtApp");
-						}
-								
-						if (conI.Inheritance.RDGatewayUsageMethod)
-						{
-							strHide.Add("RDGatewayUsageMethod");
-						}
-								
-						if (conI.Inheritance.RDGatewayHostname)
-						{
-							strHide.Add("RDGatewayHostname");
-						}
-								
-						if (conI.Inheritance.RDGatewayUsername)
-						{
-							strHide.Add("RDGatewayUsername");
-						}
-								
-						if (conI.Inheritance.RDGatewayPassword)
-						{
-							strHide.Add("RDGatewayPassword");
-						}
-								
-						if (conI.Inheritance.RDGatewayDomain)
-						{
-							strHide.Add("RDGatewayDomain");
-						}
-								
-						if (conI.Inheritance.RDGatewayUseConnectionCredentials)
-						{
-							strHide.Add("RDGatewayUseConnectionCredentials");
-						}
-								
-						if (conI.Inheritance.RDGatewayHostname)
-						{
-							strHide.Add("RDGatewayHostname");
-						}
-					}
+                            strHide.Add("RedirectDiskDrives");
+                        if (conI.Inheritance.RedirectKeys)
+                            strHide.Add("RedirectKeys");
+                        if (conI.Inheritance.RedirectPorts)
+                            strHide.Add("RedirectPorts");
+                        if (conI.Inheritance.RedirectPrinters)
+                            strHide.Add("RedirectPrinters");
+                        if (conI.Inheritance.RedirectSmartCards)
+                            strHide.Add("RedirectSmartCards");
+                        if (conI.Inheritance.RedirectSound)
+                            strHide.Add("RedirectSound");
+                        if (conI.Inheritance.Resolution)
+                            strHide.Add("Resolution");
+                        if (conI.Inheritance.AutomaticResize)
+                            strHide.Add("AutomaticResize");
+                        if (conI.Inheritance.UseConsoleSession)
+                            strHide.Add("UseConsoleSession");
+                        if (conI.Inheritance.UseCredSsp)
+                            strHide.Add("UseCredSsp");
+                        if (conI.Inheritance.RenderingEngine)
+                            strHide.Add("RenderingEngine");
+                        if (conI.Inheritance.ICAEncryptionStrength)
+                            strHide.Add("ICAEncryptionStrength");
+                        if (conI.Inheritance.RDPAuthenticationLevel)
+                            strHide.Add("RDPAuthenticationLevel");
+                        if (conI.Inheritance.LoadBalanceInfo)
+                            strHide.Add("LoadBalanceInfo");
+                        if (conI.Inheritance.Username)
+                            strHide.Add("Username");
+                        if (conI.Inheritance.Panel)
+                            strHide.Add("Panel");
+                        if (conI.IsContainer)
+                            strHide.Add("Hostname");
+                        if (conI.Inheritance.PreExtApp)
+                            strHide.Add("PreExtApp");
+                        if (conI.Inheritance.PostExtApp)
+                            strHide.Add("PostExtApp");
+                        if (conI.Inheritance.MacAddress)
+                            strHide.Add("MacAddress");
+                        if (conI.Inheritance.UserField)
+                            strHide.Add("UserField");
+                        if (conI.Inheritance.VNCAuthMode)
+                            strHide.Add("VNCAuthMode");
+                        if (conI.Inheritance.VNCColors)
+                            strHide.Add("VNCColors");
+                        if (conI.Inheritance.VNCCompression)
+                            strHide.Add("VNCCompression");
+                        if (conI.Inheritance.VNCEncoding)
+                            strHide.Add("VNCEncoding");
+                        if (conI.Inheritance.VNCProxyIP)
+                            strHide.Add("VNCProxyIP");
+                        if (conI.Inheritance.VNCProxyPassword)
+                            strHide.Add("VNCProxyPassword");
+                        if (conI.Inheritance.VNCProxyPort)
+                            strHide.Add("VNCProxyPort");
+                        if (conI.Inheritance.VNCProxyType)
+                            strHide.Add("VNCProxyType");
+                        if (conI.Inheritance.VNCProxyUsername)
+                            strHide.Add("VNCProxyUsername");
+                        if (conI.Inheritance.VNCViewOnly)
+                            strHide.Add("VNCViewOnly");
+                        if (conI.Inheritance.VNCSmartSizeMode)
+                            strHide.Add("VNCSmartSizeMode");
+                        if (conI.Inheritance.ExtApp)
+                            strHide.Add("ExtApp");
+                        if (conI.Inheritance.RDGatewayUsageMethod)
+                            strHide.Add("RDGatewayUsageMethod");
+                        if (conI.Inheritance.RDGatewayHostname)
+                            strHide.Add("RDGatewayHostname");
+                        if (conI.Inheritance.RDGatewayUsername)
+                            strHide.Add("RDGatewayUsername");
+                        if (conI.Inheritance.RDGatewayPassword)
+                            strHide.Add("RDGatewayPassword");
+                        if (conI.Inheritance.RDGatewayDomain)
+                            strHide.Add("RDGatewayDomain");
+                        if (conI.Inheritance.RDGatewayUseConnectionCredentials)
+                            strHide.Add("RDGatewayUseConnectionCredentials");
+                        if (conI.Inheritance.RDGatewayHostname)
+                            strHide.Add("RDGatewayHostname");
+                    }
 					else
 					{
 						strHide.Add("Hostname");
@@ -1545,7 +1389,6 @@ namespace mRemoteNG.UI.Window
 				}
 
                 pGrid.HiddenProperties = strHide.ToArray();
-
                 pGrid.Refresh();
 			}
 			catch (Exception ex)
@@ -1577,39 +1420,33 @@ namespace mRemoteNG.UI.Window
 			}
 			else if (pGrid.SelectedObject is ConnectionInfo)
 			{
-                if (((ConnectionInfo)pGrid.SelectedObject).IsDefault)
-				{
-                    PropertiesVisible = true;
-                    InheritanceVisible = false;
-                    DefaultPropertiesVisible = false;
-                    DefaultInheritanceVisible = false;
-                    SetPropertyGridObject((RootNodeInfo)Windows.treeForm.tvConnections.SelectedNode.Tag);
-				}
+			    if (!((ConnectionInfo) pGrid.SelectedObject).IsDefault) return;
+			    PropertiesVisible = true;
+			    InheritanceVisible = false;
+			    DefaultPropertiesVisible = false;
+			    DefaultInheritanceVisible = false;
+			    SetPropertyGridObject((RootNodeInfo)Windows.treeForm.tvConnections.SelectedNode.Tag);
 			}
 		}
 				
 		private void btnShowDefaultProperties_Click(object sender, EventArgs e)
 		{
-			if (pGrid.SelectedObject is RootNodeInfo || pGrid.SelectedObject is ConnectionInfoInheritance)
-			{
-                PropertiesVisible = false;
-                InheritanceVisible = false;
-                DefaultPropertiesVisible = true;
-                DefaultInheritanceVisible = false;
-                SetPropertyGridObject(Runtime.DefaultConnectionFromSettings());
-			}
+		    if (!(pGrid.SelectedObject is RootNodeInfo) && !(pGrid.SelectedObject is ConnectionInfoInheritance)) return;
+		    PropertiesVisible = false;
+		    InheritanceVisible = false;
+		    DefaultPropertiesVisible = true;
+		    DefaultInheritanceVisible = false;
+		    SetPropertyGridObject(Runtime.DefaultConnectionFromSettings());
 		}
 				
 		private void btnShowInheritance_Click(object sender, EventArgs e)
 		{
-			if (pGrid.SelectedObject is ConnectionInfo)
-			{
-                PropertiesVisible = false;
-                InheritanceVisible = true;
-                DefaultPropertiesVisible = false;
-                DefaultInheritanceVisible = false;
-                SetPropertyGridObject(((ConnectionInfo)pGrid.SelectedObject).Inheritance);
-			}
+		    if (!(pGrid.SelectedObject is ConnectionInfo)) return;
+		    PropertiesVisible = false;
+		    InheritanceVisible = true;
+		    DefaultPropertiesVisible = false;
+		    DefaultInheritanceVisible = false;
+		    SetPropertyGridObject(((ConnectionInfo)pGrid.SelectedObject).Inheritance);
 		}
 				
 		private void btnShowDefaultInheritance_Click(object sender, EventArgs e)
@@ -1639,10 +1476,12 @@ namespace mRemoteNG.UI.Window
 							
 					foreach (var iStr in ConnectionIcon.Icons)
 					{
-						var tI = new ToolStripMenuItem();
-						tI.Text = iStr;
-						tI.Image = ConnectionIcon.FromString(iStr).ToBitmap();
-						tI.Click += IconMenu_Click;
+					    var tI = new ToolStripMenuItem
+					    {
+					        Text = iStr,
+					        Image = ConnectionIcon.FromString(iStr).ToBitmap()
+					    };
+					    tI.Click += IconMenu_Click;
 
                         cMenIcons.Items.Add(tI);
 					}
@@ -1700,17 +1539,16 @@ namespace mRemoteNG.UI.Window
 		
         #region Host Status (Ping)
 		private string HostName;
-		private System.Threading.Thread pThread;
+		private Thread pThread;
 				
 		private void CheckHostAlive()
 		{
 			var pingSender = new Ping();
-			PingReply pReply;
-					
-			try
+
+		    try
 			{
-				pReply = pingSender.Send(HostName);
-				if (pReply != null && pReply.Status == IPStatus.Success)
+			    var pReply = pingSender.Send(HostName);
+			    if (pReply?.Status == IPStatus.Success)
 				{
 					if ((string)btnHostStatus.Tag == "checking")
 					{
@@ -1734,30 +1572,30 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		delegate void ShowStatusImageCB(Image Image);
-		private void ShowStatusImage(Image Image)
+		delegate void ShowStatusImageCB(Image image);
+		private void ShowStatusImage(Image image)
 		{
 			if (pGrid.InvokeRequired)
 			{
 				ShowStatusImageCB d = ShowStatusImage;
-                pGrid.Invoke(d, new object[] {Image});
+                pGrid.Invoke(d, image);
 			}
 			else
 			{
-                btnHostStatus.Image = Image;
+                btnHostStatus.Image = image;
                 btnHostStatus.Tag = "checkfinished";
 			}
 		}
 				
-		public void SetHostStatus(object ConnectionInfo)
+		public void SetHostStatus(object connectionInfo)
 		{
 			try
 			{
                 btnHostStatus.Image = Resources.HostStatus_Check;
 				// To check status, ConnectionInfo must be an mRemoteNG.Connection.Info that is not a container
-				if (ConnectionInfo is ConnectionInfo)
+				if (connectionInfo is ConnectionInfo)
 				{
-                    if (((ConnectionInfo)ConnectionInfo).IsContainer)
+                    if (((ConnectionInfo)connectionInfo).IsContainer)
 					{
 						return;
 					}
@@ -1768,9 +1606,9 @@ namespace mRemoteNG.UI.Window
 				}
 
                 btnHostStatus.Tag = "checking";
-                HostName = ((ConnectionInfo)ConnectionInfo).Hostname;
-				pThread = new System.Threading.Thread(CheckHostAlive);
-				pThread.SetApartmentState(System.Threading.ApartmentState.STA);
+                HostName = ((ConnectionInfo)connectionInfo).Hostname;
+				pThread = new Thread(CheckHostAlive);
+				pThread.SetApartmentState(ApartmentState.STA);
 				pThread.IsBackground = true;
 				pThread.Start();
 			}
@@ -1788,7 +1626,7 @@ namespace mRemoteNG.UI.Window
 			{
 				propertyGridContextMenuShowHelpText.Checked = Settings.Default.ShowConfigHelpText;
 				var gridItem = pGrid.SelectedGridItem;
-				propertyGridContextMenuReset.Enabled = Convert.ToBoolean(pGrid.SelectedObject != null && gridItem != null && gridItem.PropertyDescriptor != null && gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject));
+				propertyGridContextMenuReset.Enabled = Convert.ToBoolean(pGrid.SelectedObject != null && gridItem?.PropertyDescriptor != null && gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject));
 			}
 			catch (Exception ex)
 			{
@@ -1801,7 +1639,7 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				var gridItem = pGrid.SelectedGridItem;
-				if (pGrid.SelectedObject != null && gridItem != null && gridItem.PropertyDescriptor != null && gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject))
+				if (pGrid.SelectedObject != null && gridItem?.PropertyDescriptor != null && gridItem.PropertyDescriptor.CanResetValue(pGrid.SelectedObject))
 				{
 					pGrid.ResetSelectedProperty();
 				}
