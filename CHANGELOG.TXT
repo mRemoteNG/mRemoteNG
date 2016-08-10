@@ -9,6 +9,7 @@
 
   Fixes:
   ------
+  MR-946: Remove old/insecure SharpSSH and related components. Replace with SSH.NET for File Transfer Functionality
   MR-896: Added prerequisite installer check for KB2574819. Prevents "Class not registered" errors when opening RDP connections.
 
 
@@ -24,7 +25,7 @@
 
   Features/Enhancements:
   ----------------------
-  PR-133: Option to reconnect all currently opened connection tabs 
+  MR-961, PR-133: Option to reconnect all currently opened connection tabs 
   MR-917: Improved cryptographic support
 
   Fixes:
