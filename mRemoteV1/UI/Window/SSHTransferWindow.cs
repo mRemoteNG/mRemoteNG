@@ -395,7 +395,12 @@ namespace mRemoteNG.UI.Window
                     st.ScpClt.Uploading += ScpClt_Uploading;
                 }
 
-                Thread t = new Thread(StartTransferBG);
+                if (Protocol == SecureTransfer.SSHTransferProtocol.SFTP)
+                {
+                    st.asyncCallback = AsyncCallback;
+                }
+
+                var t = new Thread(StartTransferBG);
                 t.SetApartmentState(ApartmentState.STA);
                 t.IsBackground = true;
                 t.Start();
@@ -409,23 +414,20 @@ namespace mRemoteNG.UI.Window
             }
         }
 
+        private void AsyncCallback(IAsyncResult ar)
+        {
+            Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"SFTP AsyncCallback completed.", true);
+        }
+
         private void ScpClt_Uploading(object sender, Renci.SshNet.Common.ScpUploadEventArgs e)
         {
             // If the file size is over 2 gigs, convert to kb. This means we'll support a 2TB file.
-            int max = e.Size > int.MaxValue ? Convert.ToInt32(e.Size / 1024) : Convert.ToInt32(e.Size);
+            var max = e.Size > int.MaxValue ? Convert.ToInt32(e.Size / 1024) : Convert.ToInt32(e.Size);
 
             // yes, compare to size since that's the total/original file size
-            int cur = e.Size > int.MaxValue ? Convert.ToInt32(e.Uploaded / 1024) : Convert.ToInt32(e.Uploaded);
+            var cur = e.Size > int.MaxValue ? Convert.ToInt32(e.Uploaded / 1024) : Convert.ToInt32(e.Uploaded);
 
             SshTransfer_Progress(cur, max);
-
-            // Upload should be complete
-            /*
-            if (e.Size == e.Uploaded)
-            {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Transfer of {e.Filename} completed.", true);
-            }
-            */
         }
 
         private void StartTransferBG()
@@ -435,6 +437,21 @@ namespace mRemoteNG.UI.Window
                 DisableButtons();
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} started.", true);
                 st.Upload();
+
+                // SftpClient is Asynchronous, so we need to wait here after the upload and handle the status directly since no status events are raised.
+                if (st.Protocol == SecureTransfer.SSHTransferProtocol.SFTP)
+                {
+                    var fi = new FileInfo(st.SrcFile);
+                    while (!st.asyncResult.IsCompleted)
+                    {
+                        var max = fi.Length > int.MaxValue ? Convert.ToInt32(fi.Length / 1024) : Convert.ToInt32(fi.Length);
+
+                        var cur = fi.Length > int.MaxValue ? Convert.ToInt32(st.asyncResult.UploadedBytes / 1024) : Convert.ToInt32(st.asyncResult.UploadedBytes);
+                        SshTransfer_Progress(cur, max);
+                        Thread.Sleep(50);
+                    }
+                }
+
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, $"Transfer of {Path.GetFileName(st.SrcFile)} completed.", true);
                 st.Disconnect();
                 st.Dispose();
@@ -518,16 +535,6 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        /*	
-		private void SshTransfer_Start(int transferredBytes, int totalBytes)
-		{
-			maxVal = totalBytes;
-			curVal = transferredBytes;
-					
-			SetStatus();
-		}
-		*/
-
         private void SshTransfer_Progress(int transferredBytes, int totalBytes)
         {
             maxVal = totalBytes;
@@ -536,32 +543,6 @@ namespace mRemoteNG.UI.Window
             SetStatus();
         }
 
-        /*		
-		private void SshTransfer_End(int transferredBytes, int totalBytes)
-		{
-			try
-			{
-				maxVal = totalBytes;
-				curVal = transferredBytes;
-						
-				EnableButtons();
-				SetStatus();
-						
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.strSSHTransferFailed);
-						
-				if (st != null)
-				{
-                    st?.Disconnect();
-                    st?.Dispose();
-                }
-				
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferEndFailed + Environment.NewLine + ex.StackTrace, true);
-			}
-		}
-        */
         #endregion
 
         #region Public Methods

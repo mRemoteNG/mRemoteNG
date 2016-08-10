@@ -2,6 +2,7 @@
 using System.IO;
 using mRemoteNG.App;
 using Renci.SshNet;
+using Renci.SshNet.Sftp;
 using static System.IO.FileMode;
 
 namespace mRemoteNG.Tools
@@ -12,11 +13,14 @@ namespace mRemoteNG.Tools
         private readonly string User;
         private readonly string Password;
         private readonly int Port;
-        private readonly SSHTransferProtocol Protocol;
+        public readonly SSHTransferProtocol Protocol;
         public string SrcFile;
         public string DstFile;
         public ScpClient ScpClt;
         public SftpClient SftpClt;
+        public SftpUploadAsyncResult asyncResult;
+        public AsyncCallback asyncCallback;
+
 
         public SecureTransfer()
         {
@@ -104,7 +108,7 @@ namespace mRemoteNG.Tools
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + "SFTP Not Connected!");
                     return;
                 }
-                SftpClt.UploadFile(new FileStream(SrcFile, Open), $"{DstFile}/{Path.GetFileName(SrcFile)}");
+                asyncResult = (SftpUploadAsyncResult)SftpClt.BeginUploadFile(new FileStream(SrcFile, Open), $"{DstFile}/{Path.GetFileName(SrcFile)}", asyncCallback);
             }
         }
 
