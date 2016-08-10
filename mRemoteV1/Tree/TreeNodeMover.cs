@@ -67,7 +67,7 @@ namespace mRemoteNG.Tree
             if (ConnectionTreeNode.GetNodeType(_nodeBeingMoved.Parent) == TreeNodeType.Container)
             {
                 ((Parent)_nodeBeingMoved.Tag).Parent = (ContainerInfo)_nodeBeingMoved.Parent.Tag;
-                ((Inheritance)_nodeBeingMoved.Tag).Inheritance.EnableInheritance();
+                ((IInheritable)_nodeBeingMoved.Tag).Inheritance.EnableInheritance();
             }
         }
 
@@ -76,7 +76,7 @@ namespace mRemoteNG.Tree
             if (ConnectionTreeNode.GetNodeType(_nodeBeingMoved.Parent) == TreeNodeType.Root)
             {
                 ((Parent)_nodeBeingMoved.Tag).Parent = null;
-                ((Inheritance)_nodeBeingMoved.Tag).Inheritance.DisableInheritance();
+                ((IInheritable)_nodeBeingMoved.Tag).Inheritance.DisableInheritance();
             }
         }
 

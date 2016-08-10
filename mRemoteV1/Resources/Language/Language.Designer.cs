@@ -313,7 +313,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Default Inheritance.
+        ///   Looks up a localized string similar to Default IInheritable.
         /// </summary>
         internal static string strButtonDefaultInheritance {
             get {
@@ -358,7 +358,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inheritance.
+        ///   Looks up a localized string similar to IInheritable.
         /// </summary>
         internal static string strButtonInheritance {
             get {
@@ -734,7 +734,7 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Inheritance.
+        ///   Looks up a localized string similar to IInheritable.
         /// </summary>
         internal static string strCheckboxInheritance {
             get {

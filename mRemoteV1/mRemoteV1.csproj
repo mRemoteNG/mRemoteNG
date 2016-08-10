@@ -164,7 +164,7 @@
     <Compile Include="App\ProgramRoot.cs" />
     <Compile Include="Connection\Converter.cs" />
     <Compile Include="Connection\DefaultConnectionInheritance.cs" />
-    <Compile Include="Connection\Inheritance.cs" />
+    <Compile Include="Connection\IInheritable.cs" />
     <Compile Include="Connection\Parent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPEnums.cs" />

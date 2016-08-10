@@ -119,7 +119,7 @@ namespace mRemoteNG.UI.Window
             btnShowInheritance.ImageTransparentColor = Color.Magenta;
             btnShowInheritance.Name = "btnShowInheritance";
             btnShowInheritance.Size = new Size(23, 22);
-            btnShowInheritance.Text = @"Inheritance";
+            btnShowInheritance.Text = @"IInheritable";
             //
             //btnShowDefaultInheritance
             //
@@ -128,7 +128,7 @@ namespace mRemoteNG.UI.Window
             btnShowDefaultInheritance.ImageTransparentColor = Color.Magenta;
             btnShowDefaultInheritance.Name = "btnShowDefaultInheritance";
             btnShowDefaultInheritance.Size = new Size(23, 22);
-            btnShowDefaultInheritance.Text = @"Default Inheritance";
+            btnShowDefaultInheritance.Text = @"Default IInheritable";
             //
             //btnShowProperties
             //
@@ -482,7 +482,7 @@ namespace mRemoteNG.UI.Window
                                 PropertiesVisible = true;
 							}
 						}
-						else if (InheritanceVisible) //Inheritance selected
+						else if (InheritanceVisible) //IInheritable selected
 						{
                             pGrid.SelectedObject = ((ConnectionInfo)Obj).Inheritance;
 

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 namespace mRemoteNG.Container
 {
     [DefaultProperty("Name")]
-    public class ContainerInfo : Parent,Inheritance
+    public class ContainerInfo : Parent,IInheritable
 	{
         private TreeNode _TreeNode;
         private ContainerInfo _Parent;

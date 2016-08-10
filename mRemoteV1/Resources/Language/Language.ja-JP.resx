@@ -203,7 +203,7 @@
     <value>閉じる(&amp;C)</value>
   </data>
   <data name="strButtonDefaultInheritance" xml:space="preserve">
-    <value>Default Inheritance</value>
+    <value>Default IInheritable</value>
   </data>
   <data name="strButtonDefaultProperties" xml:space="preserve">
     <value>デフォルトのプロパティ</value>
@@ -218,7 +218,7 @@
     <value>インポート(&amp;I)</value>
   </data>
   <data name="strButtonInheritance" xml:space="preserve">
-    <value>Inheritance</value>
+    <value>IInheritable</value>
   </data>
   <data name="strButtonLaunch" xml:space="preserve">
     <value>立ち上げる(&amp;L)</value>
@@ -358,7 +358,7 @@ VncSharpNG Control Version {0}</value>
     <value>このメッセージを再び表示しない</value>
   </data>
   <data name="strCheckboxInheritance" xml:space="preserve">
-    <value>Inheritance</value>
+    <value>IInheritable</value>
   </data>
   <data name="strCheckboxPassword" xml:space="preserve">
     <value>パスワード</value>
