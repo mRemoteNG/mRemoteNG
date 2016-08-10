@@ -23,6 +23,7 @@ Apisitt Rattana
 Andreas Rehm
 David Vidmar
 github.com/Brandhor
+github.com/Kvarkas
 
 
 Translators
