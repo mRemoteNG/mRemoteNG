@@ -77,7 +77,7 @@ namespace mRemoteNG.Config.Putty
 					
 					sessionInfo.RootPuttySessionsInfo = provider.RootInfo;
 					sessionInfo.TreeNode = treeNode;
-					//sessionInfo.Inheritance.TurnOffInheritanceCompletely();
+					//sessionInfo.IInheritable.TurnOffInheritanceCompletely();
 					
 					treeNode.Tag = sessionInfo;
 						

@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Reflection;
 using System.Collections;
+using System.Linq;
 
 namespace mRemoteNGTests.Connection
 {
@@ -59,10 +60,23 @@ namespace mRemoteNGTests.Connection
             Assert.That(_inheritance.Username, Is.True);
         }
 
+        [Test]
+        public void GetPropertiesReturnsListOfSettableProperties()
+        {
+            var hasIconProperty = _inheritance.GetProperties().Contains(typeof(ConnectionInfoInheritance).GetProperty("Icon"));
+            Assert.That(hasIconProperty, Is.True);
+        }
+
+        [Test]
+        public void GetPropertiesExludesPropertiesThatShouldNotBeSet()
+        {
+            var hasEverythingInheritedProperty = _inheritance.GetProperties().Contains(typeof(ConnectionInfoInheritance).GetProperty("EverythingInherited"));
+            Assert.That(hasEverythingInheritedProperty, Is.False);
+        }
 
         private bool AllInheritancePropertiesAreTrue()
         {
-            bool allPropertiesTrue = true;
+            var allPropertiesTrue = true;
             foreach (var property in _inheritanceProperties)
             {
                 if (PropertyIsBoolean(property) && PropertyIsChangedWhenSettingInheritAll(property) && BooleanPropertyIsSetToFalse(property))
@@ -73,7 +87,7 @@ namespace mRemoteNGTests.Connection
 
         private bool AllInheritancePropertiesAreFalse()
         {
-            bool allPropertiesFalse = true;
+            var allPropertiesFalse = true;
             foreach (var property in _inheritanceProperties)
             {
                 if (PropertyIsBoolean(property) && PropertyIsChangedWhenSettingInheritAll(property) && BooleanPropertyIsSetToTrue(property))
@@ -84,8 +98,7 @@ namespace mRemoteNGTests.Connection
 
         private bool PropertyIsChangedWhenSettingInheritAll(PropertyInfo property)
         {
-            ArrayList propertiesIgnoredByInheritAll = new ArrayList();
-            propertiesIgnoredByInheritAll.Add("IsDefault");
+            var propertiesIgnoredByInheritAll = new ArrayList {"IsDefault"};
             return propertiesIgnoredByInheritAll.Contains(property);
         }
 
@@ -101,7 +114,7 @@ namespace mRemoteNGTests.Connection
 
         private bool BooleanPropertyIsSetToTrue(PropertyInfo property)
         {
-            return (bool)property.GetValue(_inheritance) == true;
+            return (bool)property.GetValue(_inheritance);
         }
     }
 }

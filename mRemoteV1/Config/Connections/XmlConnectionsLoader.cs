@@ -358,7 +358,9 @@ namespace mRemoteNG.Config.Connections
                 }
                 else
                 {
-                    connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo, Convert.ToBoolean(xmlnode.Attributes["Inherit"].Value));
+                    connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
+                    if (Convert.ToBoolean(xmlnode.Attributes["Inherit"].Value))
+                        connectionInfo.Inheritance.TurnOnInheritanceCompletely();
                     connectionInfo.Icon = Convert.ToString(xmlnode.Attributes["Icon"].Value.Replace(".ico", ""));
                     connectionInfo.Panel = Language.strGeneral;
                 }
@@ -370,8 +372,8 @@ namespace mRemoteNG.Config.Connections
 
                 if (_confVersion > 1.5) //1.6
                 {
-                    connectionInfo.ICAEncryption = (ProtocolICA.EncryptionStrength)Tools.MiscTools.StringToEnum(typeof(ProtocolICA.EncryptionStrength), xmlnode.Attributes["ICAEncryptionStrength"].Value);
-                    connectionInfo.Inheritance.ICAEncryption = bool.Parse(xmlnode.Attributes["InheritICAEncryptionStrength"].Value);
+                    connectionInfo.ICAEncryptionStrength = (ProtocolICA.EncryptionStrength)Tools.MiscTools.StringToEnum(typeof(ProtocolICA.EncryptionStrength), xmlnode.Attributes["ICAEncryptionStrength"].Value);
+                    connectionInfo.Inheritance.ICAEncryptionStrength = bool.Parse(xmlnode.Attributes["InheritICAEncryptionStrength"].Value);
                     connectionInfo.PreExtApp = xmlnode.Attributes["PreExtApp"].Value;
                     connectionInfo.PostExtApp = xmlnode.Attributes["PostExtApp"].Value;
                     connectionInfo.Inheritance.PreExtApp = bool.Parse(xmlnode.Attributes["InheritPreExtApp"].Value);

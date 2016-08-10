@@ -17,7 +17,6 @@ using System.IO;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
@@ -100,7 +99,7 @@ namespace mRemoteNG.App
             Settings.Default.ConDefaultDomain = DefaultConnection.Domain;
             Settings.Default.ConDefaultProtocol = DefaultConnection.Protocol.ToString();
             Settings.Default.ConDefaultPuttySession = DefaultConnection.PuttySession;
-            Settings.Default.ConDefaultICAEncryptionStrength = DefaultConnection.ICAEncryption.ToString();
+            Settings.Default.ConDefaultICAEncryptionStrength = DefaultConnection.ICAEncryptionStrength.ToString();
             Settings.Default.ConDefaultRDPAuthenticationLevel = DefaultConnection.RDPAuthenticationLevel.ToString();
             Settings.Default.ConDefaultLoadBalanceInfo = DefaultConnection.LoadBalanceInfo;
             Settings.Default.ConDefaultUseConsoleSession = DefaultConnection.UseConsoleSession;
@@ -142,73 +141,6 @@ namespace mRemoteNG.App
             Settings.Default.ConDefaultRDGatewayPassword = DefaultConnection.RDGatewayPassword;
             Settings.Default.ConDefaultRDGatewayDomain = DefaultConnection.RDGatewayDomain;
             Settings.Default.ConDefaultRDGatewayUseConnectionCredentials = DefaultConnection.RDGatewayUseConnectionCredentials.ToString();
-        }
-        #endregion
-
-        #region Default Inheritance
-        public static ConnectionInfoInheritance DefaultInheritanceFromSettings()
-        {
-            DefaultInheritance = new ConnectionInfoInheritance(null);
-            DefaultInheritance.IsDefault = true;
-            return DefaultInheritance;
-        }
-
-        public static void DefaultInheritanceToSettings()
-        {
-            Settings.Default.InhDefaultDescription = DefaultInheritance.Description;
-            Settings.Default.InhDefaultIcon = DefaultInheritance.Icon;
-            Settings.Default.InhDefaultPanel = DefaultInheritance.Panel;
-            Settings.Default.InhDefaultUsername = DefaultInheritance.Username;
-            Settings.Default.InhDefaultPassword = DefaultInheritance.Password;
-            Settings.Default.InhDefaultDomain = DefaultInheritance.Domain;
-            Settings.Default.InhDefaultProtocol = DefaultInheritance.Protocol;
-            Settings.Default.InhDefaultPort = DefaultInheritance.Port;
-            Settings.Default.InhDefaultPuttySession = DefaultInheritance.PuttySession;
-            Settings.Default.InhDefaultUseConsoleSession = DefaultInheritance.UseConsoleSession;
-            Settings.Default.InhDefaultUseCredSsp = DefaultInheritance.UseCredSsp;
-            Settings.Default.InhDefaultRenderingEngine = DefaultInheritance.RenderingEngine;
-            Settings.Default.InhDefaultICAEncryptionStrength = DefaultInheritance.ICAEncryption;
-            Settings.Default.InhDefaultRDPAuthenticationLevel = DefaultInheritance.RDPAuthenticationLevel;
-            Settings.Default.InhDefaultLoadBalanceInfo = DefaultInheritance.LoadBalanceInfo;
-            Settings.Default.InhDefaultResolution = DefaultInheritance.Resolution;
-            Settings.Default.InhDefaultAutomaticResize = DefaultInheritance.AutomaticResize;
-            Settings.Default.InhDefaultColors = DefaultInheritance.Colors;
-            Settings.Default.InhDefaultCacheBitmaps = DefaultInheritance.CacheBitmaps;
-            Settings.Default.InhDefaultDisplayWallpaper = DefaultInheritance.DisplayWallpaper;
-            Settings.Default.InhDefaultDisplayThemes = DefaultInheritance.DisplayThemes;
-            Settings.Default.InhDefaultEnableFontSmoothing = DefaultInheritance.EnableFontSmoothing;
-            Settings.Default.InhDefaultEnableDesktopComposition = DefaultInheritance.EnableDesktopComposition;
-            Settings.Default.InhDefaultRedirectKeys = DefaultInheritance.RedirectKeys;
-            Settings.Default.InhDefaultRedirectDiskDrives = DefaultInheritance.RedirectDiskDrives;
-            Settings.Default.InhDefaultRedirectPrinters = DefaultInheritance.RedirectPrinters;
-            Settings.Default.InhDefaultRedirectPorts = DefaultInheritance.RedirectPorts;
-            Settings.Default.InhDefaultRedirectSmartCards = DefaultInheritance.RedirectSmartCards;
-            Settings.Default.InhDefaultRedirectSound = DefaultInheritance.RedirectSound;
-            Settings.Default.InhDefaultPreExtApp = DefaultInheritance.PreExtApp;
-            Settings.Default.InhDefaultPostExtApp = DefaultInheritance.PostExtApp;
-            Settings.Default.InhDefaultMacAddress = DefaultInheritance.MacAddress;
-            Settings.Default.InhDefaultUserField = DefaultInheritance.UserField;
-            // VNC inheritance
-            Settings.Default.InhDefaultVNCAuthMode = DefaultInheritance.VNCAuthMode;
-            Settings.Default.InhDefaultVNCColors = DefaultInheritance.VNCColors;
-            Settings.Default.InhDefaultVNCCompression = DefaultInheritance.VNCCompression;
-            Settings.Default.InhDefaultVNCEncoding = DefaultInheritance.VNCEncoding;
-            Settings.Default.InhDefaultVNCProxyIP = DefaultInheritance.VNCProxyIP;
-            Settings.Default.InhDefaultVNCProxyPassword = DefaultInheritance.VNCProxyPassword;
-            Settings.Default.InhDefaultVNCProxyPort = DefaultInheritance.VNCProxyPort;
-            Settings.Default.InhDefaultVNCProxyType = DefaultInheritance.VNCProxyType;
-            Settings.Default.InhDefaultVNCProxyUsername = DefaultInheritance.VNCProxyUsername;
-            Settings.Default.InhDefaultVNCSmartSizeMode = DefaultInheritance.VNCSmartSizeMode;
-            Settings.Default.InhDefaultVNCViewOnly = DefaultInheritance.VNCViewOnly;
-            // Ext. App inheritance
-            Settings.Default.InhDefaultExtApp = DefaultInheritance.ExtApp;
-            // RDP gateway inheritance
-            Settings.Default.InhDefaultRDGatewayUsageMethod = DefaultInheritance.RDGatewayUsageMethod;
-            Settings.Default.InhDefaultRDGatewayHostname = DefaultInheritance.RDGatewayHostname;
-            Settings.Default.InhDefaultRDGatewayUsername = DefaultInheritance.RDGatewayUsername;
-            Settings.Default.InhDefaultRDGatewayPassword = DefaultInheritance.RDGatewayPassword;
-            Settings.Default.InhDefaultRDGatewayDomain = DefaultInheritance.RDGatewayDomain;
-            Settings.Default.InhDefaultRDGatewayUseConnectionCredentials = DefaultInheritance.RDGatewayUseConnectionCredentials;
         }
         #endregion
 

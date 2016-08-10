@@ -110,7 +110,7 @@ namespace mRemoteNG.Forms
             this.chkInheritance.Name = "chkInheritance";
             this.chkInheritance.Size = new System.Drawing.Size(79, 17);
             this.chkInheritance.TabIndex = 3;
-            this.chkInheritance.Text = "Inheritance";
+            this.chkInheritance.Text = "IInheritable";
             this.chkInheritance.UseVisualStyleBackColor = true;
             // 
             // txtFileName

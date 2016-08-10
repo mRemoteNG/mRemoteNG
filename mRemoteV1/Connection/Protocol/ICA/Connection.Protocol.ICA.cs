@@ -265,7 +265,7 @@ namespace mRemoteNG.Connection.Protocol.ICA
 				
 		private void SetSecurity()
 		{
-			switch (_Info.ICAEncryption)
+			switch (_Info.ICAEncryptionStrength)
 			{
 				case EncryptionStrength.Encr128BitLogonOnly:
 					_ICAClient.Encrypt = true;
