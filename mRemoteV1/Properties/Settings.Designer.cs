@@ -2295,5 +2295,17 @@ namespace mRemoteNG {
                 this["ShowCompleteConsPathInTitle"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int ConRDPOverallConnectionTimeout {
+            get {
+                return ((int)(this["ConRDPOverallConnectionTimeout"]));
+            }
+            set {
+                this["ConRDPOverallConnectionTimeout"] = value;
+            }
+        }
     }
 }

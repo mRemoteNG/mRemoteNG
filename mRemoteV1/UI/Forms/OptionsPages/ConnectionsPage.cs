@@ -1,8 +1,6 @@
 using System;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config;
-using mRemoteNG.My;
-using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -29,6 +27,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkHostnameLikeDisplayName.Text = Language.strSetHostnameLikeDisplayName;
 
             lblRdpReconnectionCount.Text = Language.strRdpReconnectCount;
+
+            lblRDPConTimeout.Text = Language.strRDPOverallConnectionTimeout;
 
             lblAutoSave1.Text = Language.strAutoSaveEvery;
             lblAutoSave2.Text = Language.strAutoSaveMins;
@@ -59,6 +59,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             chkHostnameLikeDisplayName.Checked = Convert.ToBoolean(mRemoteNG.Settings.Default.SetHostnameLikeDisplayName);
 
             numRdpReconnectionCount.Value = Convert.ToDecimal(mRemoteNG.Settings.Default.RdpReconnectionCount);
+
+            numRDPConTimeout.Value = Convert.ToDecimal(mRemoteNG.Settings.Default.ConRDPOverallConnectionTimeout);
 
             numAutoSave.Value = Convert.ToDecimal(mRemoteNG.Settings.Default.AutoSaveEveryMinutes);
 
@@ -106,6 +108,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             mRemoteNG.Settings.Default.SetHostnameLikeDisplayName = chkHostnameLikeDisplayName.Checked;
 
             mRemoteNG.Settings.Default.RdpReconnectionCount = (int) numRdpReconnectionCount.Value;
+
+            mRemoteNG.Settings.Default.ConRDPOverallConnectionTimeout = (int) numRDPConTimeout.Value;
 
             mRemoteNG.Settings.Default.AutoSaveEveryMinutes = (int) numAutoSave.Value;
             if (mRemoteNG.Settings.Default.AutoSaveEveryMinutes > 0)

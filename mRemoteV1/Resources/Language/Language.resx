@@ -2381,4 +2381,7 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strMenuReconnectAll" xml:space="preserve">
     <value>Reconnect All Open Connections</value>
   </data>
+  <data name="strRDPOverallConnectionTimeout" xml:space="preserve">
+    <value>RDP Connection Timeout</value>
+  </data>
 </root>
