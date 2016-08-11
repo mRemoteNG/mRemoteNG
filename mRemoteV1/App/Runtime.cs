@@ -29,12 +29,6 @@ namespace mRemoteNG.App
 {
     public class Runtime
     {
-        #region Private Variables
-
-        //private static System.Timers.Timer _timerSqlWatcher;
-
-        #endregion
-
         #region Public Properties
         public static ConnectionList ConnectionList { get; set; }
 
@@ -74,7 +68,7 @@ namespace mRemoteNG.App
 
         public static string LastSelected { get; set; }
 
-        public static ConnectionInfo DefaultConnection { get; set; }
+        public static ConnectionInfo DefaultConnection { get; set; } = DefaultConnectionInfo.Instance;
 
         public static ConnectionInfoInheritance DefaultInheritance { get; set; }
 
@@ -83,13 +77,6 @@ namespace mRemoteNG.App
         #endregion
 
         #region Default Connection
-        public static ConnectionInfo DefaultConnectionFromSettings()
-        {
-            DefaultConnection = new ConnectionInfo();
-            DefaultConnection.IsDefault = true;
-            return DefaultConnection;
-        }
-
         public static void DefaultConnectionToSettings()
         {
             Settings.Default.ConDefaultDescription = DefaultConnection.Description;

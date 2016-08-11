@@ -461,7 +461,7 @@ namespace mRemoteNG.UI.Window
 						{
                             pGrid.SelectedObject = Obj;
 
-                            if (((ConnectionInfo)Obj).IsDefault) //Is the default connection
+                            if (Obj is DefaultConnectionInfo) //Is the default connection
 							{
                                 btnShowProperties.Enabled = true;
                                 btnShowInheritance.Enabled = false;
@@ -1436,7 +1436,7 @@ namespace mRemoteNG.UI.Window
 		    InheritanceVisible = false;
 		    DefaultPropertiesVisible = true;
 		    DefaultInheritanceVisible = false;
-		    SetPropertyGridObject(Runtime.DefaultConnectionFromSettings());
+		    SetPropertyGridObject(DefaultConnectionInfo.Instance);
 		}
 				
 		private void btnShowInheritance_Click(object sender, EventArgs e)

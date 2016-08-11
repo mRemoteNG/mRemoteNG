@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 using mRemoteNG.Tools;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.VNC;
@@ -22,8 +25,6 @@ namespace mRemoteNG.Connection
     public class ConnectionInfo : Parent, IInheritable
     {
         #region Private Properties
-        // Private properties with public get/set
-        private string _name;
         private string _description;
         private string _icon;
         private string _panel;
@@ -76,19 +77,14 @@ namespace mRemoteNG.Connection
         private ProtocolVNC.Colors _vncColors;
         private ProtocolVNC.SmartSizeMode _vncSmartSizeMode;
         private bool _vncViewOnly;
-
 	    #endregion
 
         #region Public Properties
         #region Display
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
-        public virtual string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+	    [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
+	     LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
+	     LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
+	    public virtual string Name { get; set; }
 		
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameDescription"),
@@ -650,7 +646,6 @@ namespace mRemoteNG.Connection
         #region Constructors
         public ConnectionInfo()
 		{
-            // initialize default values for all standard instance members
             SetTreeDisplayDefaults();
             SetConnectionDefaults();
             SetProtocolDefaults();
@@ -706,10 +701,17 @@ namespace mRemoteNG.Connection
 		{
 			Port = GetDefaultPort();
 		}
+
+        public virtual IEnumerable<PropertyInfo> GetProperties(string[] excludedPropertyNames)
+        {
+            var properties = typeof(ConnectionInfo).GetProperties();
+            var filteredProperties = properties.Where((prop) => !excludedPropertyNames.Contains(prop.Name));
+            return filteredProperties;
+        }
         #endregion
-			
+
         #region Public Enumerations
-		[Flags()]
+        [Flags()]
         public enum Force
 		{
 			None = 0,
@@ -795,7 +797,7 @@ namespace mRemoteNG.Connection
 
         private void SetTreeDisplayDefaults()
         {
-            _name = Language.strNewConnection;
+            Name = Language.strNewConnection;
             _description = Settings.Default.ConDefaultDescription;
             _icon = Settings.Default.ConDefaultIcon;
             _panel = Language.strGeneral;
@@ -883,11 +885,7 @@ namespace mRemoteNG.Connection
         {
             Inheritance = new ConnectionInfoInheritance(this);
             OpenConnections = new ProtocolList();
-            IsContainer = false;
-            IsDefault = false;
             PositionID = 0;
-            IsQuickConnect = false;
-            PleaseConnect = false;
         }
         #endregion
 	}
