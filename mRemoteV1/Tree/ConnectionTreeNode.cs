@@ -18,7 +18,7 @@ namespace mRemoteNG.Tree
 			if (GetNodeType(node) == TreeNodeType.Connection)
 				return (node.Tag as ConnectionInfo).ConstantID;
 			else if (GetNodeType(node) == TreeNodeType.Container)
-				return (node.Tag as ContainerInfo).ConnectionInfo.ConstantID;
+				return (node.Tag as ContainerInfo).ConstantID;
 				
 			return null;
 		}
@@ -181,14 +181,14 @@ namespace mRemoteNG.Tree
             ContainerInfo oldContainerInfo = (ContainerInfo) oldTreeNode.Tag;
 
             ContainerInfo newContainerInfo = oldContainerInfo.Copy();
-            ConnectionInfo newConnectionInfo = oldContainerInfo.ConnectionInfo.Copy();
-            newContainerInfo.ConnectionInfo = newConnectionInfo;
+            ConnectionInfo newConnectionInfo = oldContainerInfo.Copy();
+            newContainerInfo.CopyFrom(newConnectionInfo);
 
             TreeNode newTreeNode = new TreeNode(newContainerInfo.Name);
             newTreeNode.Tag = newContainerInfo;
             newTreeNode.ImageIndex = (int)TreeImageType.Container;
             newTreeNode.SelectedImageIndex = (int)TreeImageType.Container;
-            newContainerInfo.ConnectionInfo.Parent = newContainerInfo;
+            newContainerInfo.Parent = newContainerInfo;
 
             Runtime.ContainerList.Add(newContainerInfo);
 

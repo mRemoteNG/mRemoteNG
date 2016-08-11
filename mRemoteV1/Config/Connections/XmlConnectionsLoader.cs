@@ -162,7 +162,7 @@ namespace mRemoteNG.Config.Connections
         {
             var connectionInfo = GetConnectionInfoFromXml(xmlNode);
             connectionInfo.TreeNode = treeNode;
-            connectionInfo.Parent = _previousContainer; //NEW
+            connectionInfo.Parent = _previousContainer;
             ConnectionList.Add(connectionInfo);
             treeNode.Tag = connectionInfo;
             treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
@@ -172,24 +172,19 @@ namespace mRemoteNG.Config.Connections
         private void AddContainerToList(XmlNode xmlNode, TreeNode treeNode)
         {
             var containerInfo = new ContainerInfo();
-            if (treeNode.Parent != null)
-            {
-                if (ConnectionTreeNode.GetNodeType(treeNode.Parent) == TreeNodeType.Container)
-                    containerInfo.Parent = (ContainerInfo) treeNode.Parent.Tag;
-            }
-            _previousContainer = containerInfo; //NEW
-            containerInfo.TreeNode = treeNode;
-            containerInfo.Name = xmlNode.Attributes["Name"].Value;
 
             if (_confVersion >= 0.8)
-            {
-                containerInfo.IsExpanded = xmlNode.Attributes["Expanded"].Value == "True";
-            }
+                containerInfo.IsExpanded = xmlNode.Attributes?["Expanded"].Value == "True";
+            if (_confVersion >= 0.9)
+                containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode));
 
-            var connectionInfo = _confVersion >= 0.9 ? GetConnectionInfoFromXml(xmlNode) : new ConnectionInfo();
-            connectionInfo.Parent = containerInfo;
-            connectionInfo.IsContainer = true;
-            containerInfo.ConnectionInfo = connectionInfo;
+            if (treeNode.Parent?.Tag is ContainerInfo)
+                containerInfo.Parent = (ContainerInfo) treeNode.Parent.Tag;
+
+            containerInfo.TreeNode = treeNode;
+            containerInfo.Name = xmlNode.Attributes?["Name"].Value;
+
+            _previousContainer = containerInfo;
             ContainerList.Add(containerInfo);
             treeNode.Tag = containerInfo;
             treeNode.ImageIndex = (int) TreeImageType.Container;

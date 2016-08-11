@@ -2,7 +2,6 @@ using System;
 using System.Windows.Forms;
 using System.ComponentModel;
 using mRemoteNG.Tools;
-using System.Reflection;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Connection.Protocol.SSH;
@@ -20,7 +19,7 @@ using mRemoteNG.Messages;
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public class ConnectionInfo : Parent,IInheritable
+    public class ConnectionInfo : Parent, IInheritable
     {
         #region Private Properties
         // Private properties with public get/set
@@ -672,13 +671,23 @@ namespace mRemoteNG.Connection
         #endregion
 			
         #region Public Methods
-		public ConnectionInfo Copy()
+		public virtual ConnectionInfo Copy()
 		{
 			var newConnectionInfo = (ConnectionInfo)MemberwiseClone();
 			newConnectionInfo.ConstantID = MiscTools.CreateConstantID();
 			newConnectionInfo.OpenConnections = new ProtocolList();
 			return newConnectionInfo;
 		}
+
+	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
+	    {
+	        var properties = typeof(ConnectionInfo).GetProperties();
+	        foreach (var property in properties)
+	        {
+	            var remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
+                property.SetValue(this, remotePropertyValue, null);
+	        }
+	    }
 			
 		public void SetDefaults()
 		{
@@ -739,10 +748,9 @@ namespace mRemoteNG.Connection
 
         private TPropertyType GetInheritedPropertyValue<TPropertyType>(string propertyName)
         {
-            var parentConnectionInfo = IsContainer ? Parent.Parent.ConnectionInfo : Parent.ConnectionInfo;
-            var connectionInfoType = parentConnectionInfo.GetType();
+            var connectionInfoType = Parent.GetType();
             var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
-            var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(parentConnectionInfo, null);
+            var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
 
             return parentPropertyValue;
         }

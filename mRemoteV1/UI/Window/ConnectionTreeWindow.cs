@@ -159,7 +159,7 @@ namespace mRemoteNG.UI.Window
 				}
 				else if (ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Container)
 				{
-                    Windows.configForm.SetPropertyGridObject(((ContainerInfo) e.Node.Tag).ConnectionInfo);
+                    Windows.configForm.SetPropertyGridObject((ContainerInfo) e.Node.Tag);
 				}
 				else if ((ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Root) || (ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.PuttyRoot))
 				{
@@ -709,8 +709,7 @@ namespace mRemoteNG.UI.Window
 						parentNode = selectedNode;
 				}
 						
-				newContainerInfo.ConnectionInfo = new ConnectionInfo(newContainerInfo);
-				newContainerInfo.ConnectionInfo.Name = newNode.Text;
+				newContainerInfo.Name = newNode.Text;
 						
 				// We can only inherit from a container node, not the root node or connection nodes
 				if (ConnectionTreeNode.GetNodeType(parentNode) == TreeNodeType.Container)
@@ -719,7 +718,7 @@ namespace mRemoteNG.UI.Window
 				}
 				else
 				{
-					newContainerInfo.ConnectionInfo.Inheritance.DisableInheritance();
+					newContainerInfo.Inheritance.DisableInheritance();
 				}
 
                 Runtime.ContainerList.Add(newContainerInfo);

@@ -19,7 +19,6 @@ namespace mRemoteNG.Config.Import
 					
 				var containerInfo = new ContainerInfo();
 				containerInfo.TreeNode = treeNode;
-				containerInfo.ConnectionInfo = new ConnectionInfo(containerInfo);
 				
 				var name = "";
 				var match = Regex.Match(ldapPath, "ou=([^,]*)", RegexOptions.IgnoreCase);
@@ -41,7 +40,7 @@ namespace mRemoteNG.Config.Import
 				}
 				else
 				{
-					containerInfo.ConnectionInfo.Inheritance.DisableInheritance();
+					containerInfo.Inheritance.DisableInheritance();
 				}
 					
 				treeNode.Text = name;

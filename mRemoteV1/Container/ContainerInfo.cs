@@ -1,60 +1,20 @@
+using System.Collections.Generic;
 using mRemoteNG.Connection;
-using mRemoteNG.Tools;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace mRemoteNG.Container
 {
     [DefaultProperty("Name")]
-    public class ContainerInfo : Parent,IInheritable
+    public class ContainerInfo : ConnectionInfo
 	{
-        #region Properties
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1), 
-            Browsable(true), 
-            ReadOnly(false), 
-            Bindable(false), 
-            DefaultValue(""), 
-            DesignOnly(false),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
-        public string Name
-		{
-			get { return ConnectionInfo.Name; }
-			set { ConnectionInfo.Name = value; }
-		}
-		
-        [Category(""), 
-            Browsable(false), 
-            ReadOnly(false), 
-            Bindable(false), 
-            DefaultValue(""), 
-            DesignOnly(false)]
-        public TreeNode TreeNode { get; set; }
+        [Browsable(false)]
+        public List<ConnectionInfo> Children { get; set; } = new List<ConnectionInfo>();
 
-        [Category(""), Browsable(false)]
-        public ContainerInfo Parent { get; set; }
-
-        [Category(""), Browsable(false)]
-        public ConnectionInfoInheritance Inheritance
-        {
-            get { return ConnectionInfo.Inheritance; }
-            set { ConnectionInfo.Inheritance = value; }
-        }
-
-        [Category(""), 
-            Browsable(false), 
-            ReadOnly(false), 
-            Bindable(false), 
-            DefaultValue(""), 
-            DesignOnly(false)]
+        [Category(""), Browsable(false), ReadOnly(false), 
+            Bindable(false), DefaultValue(""), DesignOnly(false)]
         public bool IsExpanded { get; set; }
-
-        public ConnectionInfo ConnectionInfo { get; set; } = new ConnectionInfo();
-
-        #endregion
 			
-        #region Methods
-		public ContainerInfo Copy()
+		public new ContainerInfo Copy()
 		{
 			return (ContainerInfo)MemberwiseClone();
 		}
@@ -62,12 +22,12 @@ namespace mRemoteNG.Container
 		public ContainerInfo()
 		{
             SetDefaults();
+		    IsContainer = true;
 		}
 			
 		public void SetDefaults()
 		{
             IsExpanded = true;
 		}
-        #endregion
 	}
 }
