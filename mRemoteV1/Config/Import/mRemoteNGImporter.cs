@@ -9,7 +9,7 @@ using mRemoteNG.Tree;
 namespace mRemoteNG.Config.Import
 {
 	// ReSharper disable once InconsistentNaming
-	public class mRemoteNG
+	public class mRemoteNGImporter
 	{
 		public static void Import(string fileName, TreeNode parentTreeNode)
 		{
@@ -20,22 +20,18 @@ namespace mRemoteNG.Config.Import
 		    var containerInfo = new ContainerInfo
 		    {
 		        TreeNode = treeNode,
-		        Name = name
-		    };
+		        Name = name,
+                IsContainer = true
+            };
 
-		    var connectionInfo = new ConnectionInfo();
-			connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
-			connectionInfo.Name = name;
-			connectionInfo.TreeNode = treeNode;
-			connectionInfo.Parent = containerInfo;
-			connectionInfo.IsContainer = true;
-			containerInfo.CopyFrom(connectionInfo);
-				
+            containerInfo.Inheritance = new ConnectionInfoInheritance(containerInfo);
+			
 			// We can only inherit from a container node, not the root node or connection nodes
-			if (ConnectionTreeNode.GetNodeType(parentTreeNode) == TreeNodeType.Container)
-				containerInfo.Parent = (ContainerInfo)parentTreeNode.Tag;
+		    var parent = parentTreeNode.Tag as ContainerInfo;
+		    if (parent != null)
+				containerInfo.Parent = parent;
 			else
-				connectionInfo.Inheritance.DisableInheritance();
+                containerInfo.Inheritance.DisableInheritance();
 				
 			treeNode.Name = name;
 			treeNode.Tag = containerInfo;
@@ -51,7 +47,6 @@ namespace mRemoteNG.Config.Import
 		    };
 
 		    connectionsLoad.LoadConnections(true);
-				
 			Runtime.ContainerList.Add(containerInfo);
 		}
 	}
