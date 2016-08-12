@@ -1,4 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
+using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Tools;
 
 
 namespace mRemoteNG.Connection
@@ -6,7 +9,8 @@ namespace mRemoteNG.Connection
     public class DefaultConnectionInfo : ConnectionInfo
     {
         public static DefaultConnectionInfo Instance { get; } = new DefaultConnectionInfo();
-        private readonly string[] _excludedProperties = { "Parent" };
+        private readonly string[] _excludedProperties = { "Parent", "Name", "Panel", "Hostname", "Port", "Inheritance",
+            "OpenConnections", "IsContainer", "IsDefault", "PositionID", "ConstantID", "TreeNode", "IsQuickConnect", "PleaseConnect" };
 
         private DefaultConnectionInfo()
         {
@@ -19,9 +23,15 @@ namespace mRemoteNG.Connection
             var connectionProperties = GetProperties(_excludedProperties);
             foreach (var property in connectionProperties)
             {
-                var propertyFromSettings = typeof(TSource).GetProperty(propertyNameMutator(property.Name));
-                var valueFromSettings = propertyFromSettings.GetValue(sourceInstance, null);
-                property.SetValue(Instance, valueFromSettings, null);
+                var propertyFromSource = typeof(TSource).GetProperty(propertyNameMutator(property.Name));
+                var valueFromSource = propertyFromSource.GetValue(sourceInstance, null);
+                
+                var descriptor = TypeDescriptor.GetProperties(Instance)[property.Name];
+                var converter = descriptor.Converter;
+                if (converter != null && converter.CanConvertFrom(valueFromSource.GetType()))
+                    property.SetValue(Instance, converter.ConvertFrom(valueFromSource), null);
+                else
+                    property.SetValue(Instance, valueFromSource, null);
             }
         }
 
