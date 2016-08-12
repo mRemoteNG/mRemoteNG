@@ -726,37 +726,35 @@ namespace mRemoteNG.UI.Window
 
         private void UpdateConnectionInfoNode(PropertyValueChangedEventArgs e)
         {
-            var o = pGrid.SelectedObject as ConnectionInfo;
-            if (o != null)
+            var selectedGridObject = pGrid.SelectedObject as ConnectionInfo;
+            if (selectedGridObject == null) return;
+            if (e.ChangedItem.Label == Language.strPropertyNameProtocol)
             {
-                if (e.ChangedItem.Label == Language.strPropertyNameProtocol)
-                {
-                    o.SetDefaultPort();
-                }
-                else if (e.ChangedItem.Label == Language.strPropertyNameName)
-                {
-                    Windows.treeForm.tvConnections.SelectedNode.Text = Convert.ToString(o.Name);
-                    if (Settings.Default.SetHostnameLikeDisplayName)
-                    {
-                        var connectionInfo = o;
-                        if (!string.IsNullOrEmpty(connectionInfo.Name))
-                            connectionInfo.Hostname = connectionInfo.Name;
-                    }
-                }
-                else if (e.ChangedItem.Label == Language.strPropertyNameIcon)
-                {
-                    var conIcon = ConnectionIcon.FromString(Convert.ToString(o.Icon));
-                    if (conIcon != null)
-                        btnIcon.Image = conIcon.ToBitmap();
-                }
-                else if (e.ChangedItem.Label == Language.strPropertyNameAddress)
-                {
-                    SetHostStatus(o);
-                }
-
-                if (o.IsDefault)
-                    DefaultConnectionInfo.Instance.SaveTo(Settings.Default, (a)=>"ConDefault"+a);
+                selectedGridObject.SetDefaultPort();
             }
+            else if (e.ChangedItem.Label == Language.strPropertyNameName)
+            {
+                Windows.treeForm.tvConnections.SelectedNode.Text = Convert.ToString(selectedGridObject.Name);
+                if (Settings.Default.SetHostnameLikeDisplayName)
+                {
+                    var connectionInfo = selectedGridObject;
+                    if (!string.IsNullOrEmpty(connectionInfo.Name))
+                        connectionInfo.Hostname = connectionInfo.Name;
+                }
+            }
+            else if (e.ChangedItem.Label == Language.strPropertyNameIcon)
+            {
+                var conIcon = ConnectionIcon.FromString(Convert.ToString(selectedGridObject.Icon));
+                if (conIcon != null)
+                    btnIcon.Image = conIcon.ToBitmap();
+            }
+            else if (e.ChangedItem.Label == Language.strPropertyNameAddress)
+            {
+                SetHostStatus(selectedGridObject);
+            }
+
+            if (selectedGridObject is DefaultConnectionInfo)
+                DefaultConnectionInfo.Instance.SaveTo(Settings.Default, (a)=>"ConDefault"+a);
         }
 
         private void UpdateRootInfoNode(PropertyValueChangedEventArgs e)

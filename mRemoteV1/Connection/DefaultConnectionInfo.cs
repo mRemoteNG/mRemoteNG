@@ -1,7 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Tools;
 
 
 namespace mRemoteNG.Connection
