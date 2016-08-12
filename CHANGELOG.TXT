@@ -1,11 +1,4 @@
-1.75 SOMETHING (2016-x-x):
-  General Changes:
-  ----------------
-
-
-  Features/Enhancements:
-  ----------------------
-  
+1.75 Alpha 3 (2016-08-12):  
 
   Fixes:
   ------
