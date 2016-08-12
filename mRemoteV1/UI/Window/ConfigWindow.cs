@@ -755,7 +755,7 @@ namespace mRemoteNG.UI.Window
                 }
 
                 if (o.IsDefault)
-                    Runtime.DefaultConnectionToSettings();
+                    DefaultConnectionInfo.Instance.SaveTo(Settings.Default, (a)=>"ConDefault"+a);
             }
         }
 
