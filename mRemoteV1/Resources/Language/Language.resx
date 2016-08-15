@@ -202,7 +202,7 @@
     <value>&amp;Close</value>
   </data>
   <data name="strButtonDefaultInheritance" xml:space="preserve">
-    <value>Default IInheritable</value>
+    <value>Default Inheritance</value>
   </data>
   <data name="strButtonDefaultProperties" xml:space="preserve">
     <value>Default Properties</value>
@@ -217,7 +217,7 @@
     <value>&amp;Import</value>
   </data>
   <data name="strButtonInheritance" xml:space="preserve">
-    <value>IInheritable</value>
+    <value>Inheritance</value>
   </data>
   <data name="strButtonLaunch" xml:space="preserve">
     <value>&amp;Launch</value>
@@ -354,7 +354,7 @@ VncSharpNG Control Version {0}</value>
     <value>Do not show this message again.</value>
   </data>
   <data name="strCheckboxInheritance" xml:space="preserve">
-    <value>IInheritable</value>
+    <value>Inheritance</value>
   </data>
   <data name="strCheckboxPassword" xml:space="preserve">
     <value>Password</value>
