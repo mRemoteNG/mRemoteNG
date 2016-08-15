@@ -1,13 +1,13 @@
 using mRemoteNG.Tools;
 using System.ComponentModel;
 using System.Windows.Forms;
-using mRemoteNG.My;
+using mRemoteNG.Container;
 
 
 namespace mRemoteNG.Tree.Root
 {
 	[DefaultProperty("Name")]
-    public class RootNodeInfo
+    public class RootNodeInfo : ContainerInfo
     {
         private string _name;
 

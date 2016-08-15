@@ -14,6 +14,7 @@ using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows.Forms;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Container;
 using mRemoteNG.Security;
 using mRemoteNG.UI.Controls.FilteredPropertyGrid;
 using WeifenLuo.WinFormsUI.Docking;
@@ -437,41 +438,94 @@ namespace mRemoteNG.UI.Window
 						
 				if (Obj is ConnectionInfo) //CONNECTION INFO
 				{
-                    if (((ConnectionInfo)Obj).IsContainer == false) //NO CONTAINER
+                    if (Obj is ContainerInfo) //CONTAINER
 					{
-						if (PropertiesVisible) //Properties selected
-						{
+					    if (Obj is RootNodeInfo) // ROOT
+					    {
+					        var rootInfo = (RootNodeInfo) Obj;
+					        switch (rootInfo.Type)
+					        {
+					            case RootNodeType.Connection:
+					                PropertiesVisible = true;
+					                DefaultPropertiesVisible = false;
+					                btnShowProperties.Enabled = true;
+					                btnShowInheritance.Enabled = false;
+					                btnShowDefaultProperties.Enabled = true;
+					                btnShowDefaultInheritance.Enabled = true;
+					                btnIcon.Enabled = false;
+					                btnHostStatus.Enabled = false;
+					                break;
+					            case RootNodeType.Credential:
+					                throw (new NotImplementedException());
+					            case RootNodeType.PuttySessions:
+					                PropertiesVisible = true;
+					                DefaultPropertiesVisible = false;
+					                btnShowProperties.Enabled = true;
+					                btnShowInheritance.Enabled = false;
+					                btnShowDefaultProperties.Enabled = false;
+					                btnShowDefaultInheritance.Enabled = false;
+					                btnIcon.Enabled = false;
+					                btnHostStatus.Enabled = false;
+					                break;
+					        }
+					        pGrid.SelectedObject = Obj;
+					    }
+					    else
+					    {
+					        pGrid.SelectedObject = Obj;
+
+					        btnShowProperties.Enabled = true;
+					        if (((ContainerInfo) Obj).Parent.Parent != null)
+					        {
+					            btnShowInheritance.Enabled = true;
+					        }
+					        else
+					        {
+					            btnShowInheritance.Enabled = false;
+					        }
+					        btnShowDefaultProperties.Enabled = false;
+					        btnShowDefaultInheritance.Enabled = false;
+					        btnIcon.Enabled = true;
+					        btnHostStatus.Enabled = false;
+
+					        PropertiesVisible = true;
+					    }
+					}
+                    else //NO CONTAINER
+                    {
+                        if (PropertiesVisible) //Properties selected
+                        {
                             pGrid.SelectedObject = Obj;
 
                             btnShowProperties.Enabled = true;
                             if (((ConnectionInfo)Obj).Parent != null)
-							{
+                            {
                                 btnShowInheritance.Enabled = true;
-							}
-							else
-							{
+                            }
+                            else
+                            {
                                 btnShowInheritance.Enabled = false;
-							}
+                            }
                             btnShowDefaultProperties.Enabled = false;
                             btnShowDefaultInheritance.Enabled = false;
-							btnIcon.Enabled = true;
+                            btnIcon.Enabled = true;
                             btnHostStatus.Enabled = true;
-						}
-						else if (DefaultPropertiesVisible) //Defaults selected
-						{
+                        }
+                        else if (DefaultPropertiesVisible) //Defaults selected
+                        {
                             pGrid.SelectedObject = Obj;
 
                             if (Obj is DefaultConnectionInfo) //Is the default connection
-							{
+                            {
                                 btnShowProperties.Enabled = true;
                                 btnShowInheritance.Enabled = false;
                                 btnShowDefaultProperties.Enabled = true;
                                 btnShowDefaultInheritance.Enabled = true;
                                 btnIcon.Enabled = true;
                                 btnHostStatus.Enabled = false;
-							}
-							else //is not the default connection
-							{
+                            }
+                            else //is not the default connection
+                            {
                                 btnShowProperties.Enabled = true;
                                 btnShowInheritance.Enabled = true;
                                 btnShowDefaultProperties.Enabled = false;
@@ -480,10 +534,10 @@ namespace mRemoteNG.UI.Window
                                 btnHostStatus.Enabled = true;
 
                                 PropertiesVisible = true;
-							}
-						}
-						else if (InheritanceVisible) //Inheritance selected
-						{
+                            }
+                        }
+                        else if (InheritanceVisible) //Inheritance selected
+                        {
                             pGrid.SelectedObject = ((ConnectionInfo)Obj).Inheritance;
 
                             btnShowProperties.Enabled = true;
@@ -492,10 +546,10 @@ namespace mRemoteNG.UI.Window
                             btnShowDefaultInheritance.Enabled = false;
                             btnIcon.Enabled = true;
                             btnHostStatus.Enabled = true;
-						}
-						else if (DefaultInheritanceVisible) //Default Inhertiance selected
-						{
-							pGrid.SelectedObject = Obj;
+                        }
+                        else if (DefaultInheritanceVisible) //Default Inhertiance selected
+                        {
+                            pGrid.SelectedObject = Obj;
 
                             btnShowProperties.Enabled = true;
                             btnShowInheritance.Enabled = true;
@@ -505,64 +559,14 @@ namespace mRemoteNG.UI.Window
                             btnHostStatus.Enabled = true;
 
                             PropertiesVisible = true;
-						}
-					}
-                    else if (((ConnectionInfo)Obj).IsContainer) //CONTAINER
-					{
-                        pGrid.SelectedObject = Obj;
-
-                        btnShowProperties.Enabled = true;
-                        if (((ConnectionInfo)Obj).Parent.Parent != null)
-						{
-                            btnShowInheritance.Enabled = true;
-						}
-						else
-						{
-                            btnShowInheritance.Enabled = false;
-						}
-                        btnShowDefaultProperties.Enabled = false;
-                        btnShowDefaultInheritance.Enabled = false;
-                        btnIcon.Enabled = true;
-                        btnHostStatus.Enabled = false;
-
-                        PropertiesVisible = true;
-					}
+                        }
+                    }
 
                     var conIcon = ConnectionIcon.FromString(Convert.ToString(((ConnectionInfo)Obj).Icon));
 					if (conIcon != null)
 					{
                         btnIcon.Image = conIcon.ToBitmap();
 					}
-				}
-				else if (Obj is RootNodeInfo) //ROOT
-				{
-					var rootInfo = (RootNodeInfo) Obj;
-					switch (rootInfo.Type)
-					{
-						case RootNodeType.Connection:
-							PropertiesVisible = true;
-							DefaultPropertiesVisible = false;
-							btnShowProperties.Enabled = true;
-							btnShowInheritance.Enabled = false;
-							btnShowDefaultProperties.Enabled = true;
-							btnShowDefaultInheritance.Enabled = true;
-							btnIcon.Enabled = false;
-							btnHostStatus.Enabled = false;
-							break;
-						case RootNodeType.Credential:
-							throw (new NotImplementedException());
-						case RootNodeType.PuttySessions:
-							PropertiesVisible = true;
-							DefaultPropertiesVisible = false;
-							btnShowProperties.Enabled = true;
-							btnShowInheritance.Enabled = false;
-							btnShowDefaultProperties.Enabled = false;
-							btnShowDefaultInheritance.Enabled = false;
-							btnIcon.Enabled = false;
-							btnHostStatus.Enabled = false;
-							break;
-					}
-					pGrid.SelectedObject = Obj;
 				}
 				else if (Obj is ConnectionInfoInheritance) //INHERITANCE
 				{
@@ -805,8 +809,67 @@ namespace mRemoteNG.UI.Window
 			try
 			{
                 var strHide = new List<string>();
-						
-				if (pGrid.SelectedObject is ConnectionInfo)
+
+                if (pGrid.SelectedObject is RootNodeInfo)
+                {
+                    var rootInfo = (RootNodeInfo)pGrid.SelectedObject;
+                    if (rootInfo.Type == RootNodeType.PuttySessions)
+                    {
+                        strHide.Add("Password");
+                    }
+                    strHide.Add("CacheBitmaps");
+                    strHide.Add("Colors");
+                    strHide.Add("DisplayThemes");
+                    strHide.Add("DisplayWallpaper");
+                    strHide.Add("EnableFontSmoothing");
+                    strHide.Add("EnableDesktopComposition");
+                    strHide.Add("Domain");
+                    strHide.Add("ExtApp");
+                    strHide.Add("ICAEncryptionStrength");
+                    strHide.Add("RDGatewayDomain");
+                    strHide.Add("RDGatewayHostname");
+                    strHide.Add("RDGatewayPassword");
+                    strHide.Add("RDGatewayUsageMethod");
+                    strHide.Add("RDGatewayUseConnectionCredentials");
+                    strHide.Add("RDGatewayUsername");
+                    strHide.Add("RDPAuthenticationLevel");
+                    strHide.Add("LoadBalanceInfo");
+                    strHide.Add("RedirectDiskDrives");
+                    strHide.Add("RedirectKeys");
+                    strHide.Add("RedirectPorts");
+                    strHide.Add("RedirectPrinters");
+                    strHide.Add("RedirectSmartCards");
+                    strHide.Add("RedirectSound");
+                    strHide.Add("RenderingEngine");
+                    strHide.Add("Resolution");
+                    strHide.Add("AutomaticResize");
+                    strHide.Add("UseConsoleSession");
+                    strHide.Add("UseCredSsp");
+                    strHide.Add("VNCAuthMode");
+                    strHide.Add("VNCColors");
+                    strHide.Add("VNCCompression");
+                    strHide.Add("VNCEncoding");
+                    strHide.Add("VNCProxyIP");
+                    strHide.Add("VNCProxyPassword");
+                    strHide.Add("VNCProxyPort");
+                    strHide.Add("VNCProxyType");
+                    strHide.Add("VNCProxyUsername");
+                    strHide.Add("VNCSmartSizeMode");
+                    strHide.Add("VNCViewOnly");
+                    strHide.Add("Icon");
+                    strHide.Add("Panel");
+                    strHide.Add("Hostname");
+                    strHide.Add("Username");
+                    strHide.Add("Protocol");
+                    strHide.Add("Port");
+                    strHide.Add("PuttySession");
+                    strHide.Add("PreExtApp");
+                    strHide.Add("PostExtApp");
+                    strHide.Add("MacAddress");
+                    strHide.Add("UserField");
+                    strHide.Add("Description");
+                }
+                else if (pGrid.SelectedObject is ConnectionInfo)
 				{
                     var conI = (ConnectionInfo)pGrid.SelectedObject;
 							
@@ -1262,7 +1325,7 @@ namespace mRemoteNG.UI.Window
 							break;
 					}
 							
-					if (conI.IsDefault == false)
+					if (!(conI is DefaultConnectionInfo))
 					{
 						if (conI.Inheritance.CacheBitmaps)
 							strHide.Add("CacheBitmaps");
@@ -1375,14 +1438,6 @@ namespace mRemoteNG.UI.Window
 					{
 						strHide.Add("Hostname");
 						strHide.Add("Name");
-					}
-				}
-				else if (pGrid.SelectedObject is RootNodeInfo)
-				{
-					var rootInfo = (RootNodeInfo) pGrid.SelectedObject;
-					if (rootInfo.Type == RootNodeType.PuttySessions)
-					{
-						strHide.Add("Password");
 					}
 				}
 
