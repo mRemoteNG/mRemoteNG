@@ -54,5 +54,19 @@ namespace mRemoteNGTests.IntegrationTests
             folder.Add(connection);
             Assert.That(new object[] { connection.Protocol, connection.Username, connection.Domain }, Is.EquivalentTo(new object[] {folder.Protocol, folder.Username, folder.Domain}));
         }
+
+        [Test]
+        public void CanInheritThroughMultipleFolderLevels()
+        {
+            var folder1 = new ContainerInfo {Username = "folder1User"};
+            var folder2 = new ContainerInfo {Inheritance = {Username = true}};
+            var folder3 = new ContainerInfo {Inheritance = {Username = true}};
+            var connection = new ConnectionInfo {Inheritance = {Username = true}};
+            _rootNode.Add(folder1);
+            folder1.Add(folder2);
+            folder2.Add(folder3);
+            folder3.Add(connection);
+            Assert.That(connection.Username, Is.EqualTo(folder1.Username));
+        }
     }
 }
