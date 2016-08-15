@@ -661,7 +661,7 @@ namespace mRemoteNG.Connection
 		public ConnectionInfo(ContainerInfo parent) : this()
 		{
 			IsContainer = true;
-			Parent = parent;
+			parent.Add(this);
 		}
         #endregion
 			
