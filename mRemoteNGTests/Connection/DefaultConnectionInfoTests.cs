@@ -25,18 +25,18 @@ namespace mRemoteNGTests.Connection
         [Test]
         public void SavingDefaultConnectionInfoExportsAllProperties()
         {
-            var connectionInfoDestination = new ConnectionInfo();
+            var saveTarget = new ConnectionInfo();
             DefaultConnectionInfo.Instance.Domain = _testDomain;
-            DefaultConnectionInfo.Instance.SaveTo(connectionInfoDestination);
-            Assert.That(connectionInfoDestination.Domain, Is.EqualTo(_testDomain));
+            DefaultConnectionInfo.Instance.SaveTo(saveTarget);
+            Assert.That(saveTarget.Domain, Is.EqualTo(_testDomain));
         }
 
-        [Test]
-        public void NewConnectionInfoInstancesCreatedWithDefaultConnectionInfoValues()
-        {
-            DefaultConnectionInfo.Instance.Domain = _testDomain;
-            var connectionInstance = new ConnectionInfo();
-            Assert.That(connectionInstance.Domain, Is.EqualTo(_testDomain));
-        }
+        //[Test]
+        //public void NewConnectionInfoInstancesCreatedWithDefaultConnectionInfoValues()
+        //{
+        //    DefaultConnectionInfo.Instance.Domain = _testDomain;
+        //    var connectionInstance = new ConnectionInfo();
+        //    Assert.That(connectionInstance.Domain, Is.EqualTo(_testDomain));
+        //}
     }
 }

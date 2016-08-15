@@ -39,15 +39,15 @@ namespace mRemoteNG.Connection
             var inheritanceProperties = GetProperties(_excludedProperties);
             foreach (var property in inheritanceProperties)
             {
-                var propertyFromSettings = typeof(TDestination).GetProperty(propertyNameMutator(property.Name));
+                var propertyFromDestination = typeof(TDestination).GetProperty(propertyNameMutator(property.Name));
                 var localValue = property.GetValue(Instance, null);
 
                 var descriptor = TypeDescriptor.GetProperties(Instance)[property.Name];
                 var converter = descriptor.Converter;
                 if (converter != null && converter.CanConvertFrom(localValue.GetType()))
-                    property.SetValue(Instance, converter.ConvertFrom(localValue), null);
+                    propertyFromDestination.SetValue(destinationInstance, converter.ConvertFrom(localValue), null);
                 else
-                    propertyFromSettings.SetValue(destinationInstance, localValue, null);
+                    propertyFromDestination.SetValue(destinationInstance, localValue, null);
             }
         }
     }
