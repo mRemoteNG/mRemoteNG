@@ -645,6 +645,7 @@ namespace mRemoteNG.App
                 }
 
                 ConnectionInfo newConnectionInfo = new ConnectionInfo();
+                newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
                 if (Settings.Default.IdentifyQuickConnectTabs)
                 {
@@ -1037,6 +1038,7 @@ namespace mRemoteNG.App
         public static void GoToURL(string URL)
         {
             ConnectionInfo connectionInfo = new ConnectionInfo();
+            connectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
             connectionInfo.Name = "";
             connectionInfo.Hostname = URL;

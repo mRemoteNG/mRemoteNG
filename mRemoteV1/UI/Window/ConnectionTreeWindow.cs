@@ -662,6 +662,7 @@ namespace mRemoteNG.UI.Window
 				}
 
                 ConnectionInfo newConnectionInfo = new ConnectionInfo();
+                newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 				if (ConnectionTreeNode.GetNodeType(containerNode) == TreeNodeType.Root)
 				{
 					newConnectionInfo.Inheritance.DisableInheritance();
@@ -692,6 +693,7 @@ namespace mRemoteNG.UI.Window
 			{
 				TreeNode newNode = ConnectionTreeNode.AddNode(TreeNodeType.Container);
 				ContainerInfo newContainerInfo = new ContainerInfo();
+                newContainerInfo.CopyFrom(DefaultConnectionInfo.Instance);
 				newNode.Tag = newContainerInfo;
 				newContainerInfo.TreeNode = newNode;
 

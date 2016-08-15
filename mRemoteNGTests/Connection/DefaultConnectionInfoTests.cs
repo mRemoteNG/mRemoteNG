@@ -30,13 +30,5 @@ namespace mRemoteNGTests.Connection
             DefaultConnectionInfo.Instance.SaveTo(saveTarget);
             Assert.That(saveTarget.Domain, Is.EqualTo(_testDomain));
         }
-
-        //[Test]
-        //public void NewConnectionInfoInstancesCreatedWithDefaultConnectionInfoValues()
-        //{
-        //    DefaultConnectionInfo.Instance.Domain = _testDomain;
-        //    var connectionInstance = new ConnectionInfo();
-        //    Assert.That(connectionInstance.Domain, Is.EqualTo(_testDomain));
-        //}
     }
 }
