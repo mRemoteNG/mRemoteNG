@@ -9,11 +9,10 @@ Sean Kaim (github.com/kmscode)
 Felix Deimel - mRemote original developer
 Riley McArdle - mRemoteNG original developer
 
-github.com/Brandhor
-
 
 Past Contributors
 =================
+
 Jason Barbier
 Wiktor Beryt
 Lionel Caignec
@@ -23,6 +22,8 @@ Tom Hiller
 Apisitt Rattana
 Andreas Rehm
 David Vidmar
+github.com/Brandhor
+github.com/Kvarkas
 
 
 Translators
@@ -69,11 +70,6 @@ Copyright © 2004 Marc Merritt
 Copyright © 2008 Felix Deimel
 http://www.codeproject.com/KB/selection/ADPickerCtrl.aspx
 
-DiffieHellman 1.0
-Copyright © 2003 The Mentalis.org Team
-Modified New BSD License
-http://www.mentalis.org/
-
 DockPanel Suite 2.10.0.beta2
 Copyright © 2015 @roken and @lextm (formerly Weifen Luo)
 MIT License
@@ -94,26 +90,20 @@ Copyright © 2002-2003 Crownwood Consulting, Ltd.
 Freely redistributable with attribution
 http://www.dotnetmagic.com/magic_download.html
 
-Mentalis.org Security Library 1.0.13.715
-Copyright © 2002-2005 The Mentalis.org Team
-Modified New BSD License
-http://www.mentalis.org/
-
 PuTTY 0.67
 Copyright © 1997-2016 Simon Tatham
 MIT License
 http://www.chiark.greenend.org.uk/~sgtatham/putty/
 
-SharpSSH 1.1.1.13
-Copyright © 2002-2008 Atsuhiko Yamanaka, JCraft, Inc.
-Copyright © 2007 Tamir Gal
-BSD Style License
-http://www.tamirgal.com/blog/page/SharpSSH.aspx
-
 Silk Icon Set
 Copyright © 2005-2008 FAMFAMFAM
 Creative Commons Attribution 2.5 License
 http://www.famfamfam.com/
+
+SSH.NET v2016.0.0
+Copyright © 2016
+MIT License
+https://github.com/sshnet/SSH.NET
 
 VncSharp 1.1
 Copyright © 2004-2009 David Humphrey

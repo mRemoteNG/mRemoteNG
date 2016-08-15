@@ -5308,6 +5308,15 @@ namespace mRemoteNG {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RDP Connection Timeout.
+        /// </summary>
+        internal static string strRDPOverallConnectionTimeout {
+            get {
+                return ResourceManager.GetString("strRDPOverallConnectionTimeout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to RDP reconnection count:.
         /// </summary>
         internal static string strRdpReconnectCount {

@@ -1,15 +1,11 @@
-1.75 SOMETHING (2016-x-x):
-  General Changes:
-  ----------------
-
-
-  Features/Enhancements:
-  ----------------------
-  
+1.75 Alpha 3 (2016-08-12):  
 
   Fixes:
   ------
+  MR-965, MR-871, MR-629: Error 264 on RDP Connect attempt - Added timeout value to Tools -> Options -> Connections
+  MR-946: Remove old/insecure SharpSSH and related components. Replace with SSH.NET for File Transfer Functionality
   MR-896: Added prerequisite installer check for KB2574819. Prevents "Class not registered" errors when opening RDP connections.
+  PR-130: Fix Scan button width to fit russian translation
 
 
 
@@ -24,7 +20,7 @@
 
   Features/Enhancements:
   ----------------------
-  PR-133: Option to reconnect all currently opened connection tabs 
+  MR-961, PR-133: Option to reconnect all currently opened connection tabs 
   MR-917: Improved cryptographic support
 
   Fixes:
