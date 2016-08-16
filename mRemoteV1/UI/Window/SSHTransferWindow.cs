@@ -385,9 +385,9 @@ namespace mRemoteNG.UI.Window
 
             try
             {
-                st = new SecureTransfer(txtHost.Text, txtUser.Text, txtPassword.Text, int.Parse(txtPort.Text), Protocol);
-                st.SrcFile = txtLocalFile.Text;
-                st.DstFile = txtRemoteFile.Text;
+                st = new SecureTransfer(txtHost.Text, txtUser.Text, txtPassword.Text, int.Parse(txtPort.Text), Protocol, txtLocalFile.Text, txtRemoteFile.Text);
+
+                // Connect creates the protocol objects and makes the initial connection.
                 st.Connect();
 
                 if (Protocol == SecureTransfer.SSHTransferProtocol.SCP)
@@ -459,7 +459,10 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
+                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHStartTransferBG + Environment.NewLine + ex.Message);
                 Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHStartTransferBG + Environment.NewLine + ex.StackTrace, true);
+                st?.Disconnect();
+                st?.Dispose();
             }
         }
 

@@ -98,7 +98,7 @@ namespace mRemoteNG.Tools
                     return;
                 }
 
-                ScpClt.Upload(new FileInfo(SrcFile), $"{DstFile}/{Path.GetFileName(SrcFile)}");
+                ScpClt.Upload(new FileInfo(SrcFile), $"{DstFile}");
             }
 
             if (Protocol == SSHTransferProtocol.SFTP)
@@ -108,7 +108,7 @@ namespace mRemoteNG.Tools
                     Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + "SFTP Not Connected!");
                     return;
                 }
-                asyncResult = (SftpUploadAsyncResult)SftpClt.BeginUploadFile(new FileStream(SrcFile, Open), $"{DstFile}/{Path.GetFileName(SrcFile)}", asyncCallback);
+                asyncResult = (SftpUploadAsyncResult)SftpClt.BeginUploadFile(new FileStream(SrcFile, Open), $"{DstFile}", asyncCallback);
             }
         }
 
