@@ -52,7 +52,7 @@ namespace mRemoteNG.Container
 			return (ContainerInfo)MemberwiseClone();
 		}
 			
-		private void SetDefaults()
+		private new void SetDefaults()
 		{
             IsExpanded = true;
 		}

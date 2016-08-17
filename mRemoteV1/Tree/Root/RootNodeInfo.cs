@@ -24,7 +24,7 @@ namespace mRemoteNG.Tree.Root
             LocalizedAttributes.LocalizedDefaultValue("strConnections"),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
-        public virtual string Name
+        public override string Name
 		{
 			get { return _name; }
 			set
@@ -46,16 +46,13 @@ namespace mRemoteNG.Tree.Root
             Browsable(true),
             LocalizedAttributes.LocalizedDisplayName("strPasswordProtect"),
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]
-        public bool Password { get; set; }
+        public new bool Password { get; set; }
 			
 		[Browsable(false)]
         public string PasswordString {get; set;}
 			
 		[Browsable(false)]
         public RootNodeType Type {get; set;}
-			
-		[Browsable(false)]
-        public TreeNode TreeNode {get; set;}
         #endregion
 	}
 }
