@@ -39,8 +39,44 @@ namespace mRemoteNG.Config.Connections
         public XmlConnectionsDeserializer(string xml)
         {
             LoadXmlConnectionData(xml);
+            ValidateConnectionFileVersion();
         }
 
+        private void LoadXmlConnectionData(string connections)
+        {
+            connections = _decryptor.DecryptConnections(connections);
+            _xmlDocument = new XmlDocument();
+            if (connections != "")
+                _xmlDocument.LoadXml(connections);
+        }
+
+        private void ValidateConnectionFileVersion()
+        {
+            if (_xmlDocument.DocumentElement != null && _xmlDocument.DocumentElement.HasAttribute("ConfVersion"))
+                _confVersion = Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."),
+                    CultureInfo.InvariantCulture);
+            else
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strOldConffile);
+
+            const double maxSupportedConfVersion = 2.5;
+            if (!(_confVersion > maxSupportedConfVersion)) return;
+            CTaskDialog.ShowTaskDialogBox(
+                frmMain.Default,
+                Application.ProductName,
+                "Incompatible connection file format",
+                $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
+                string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine,
+                    ConnectionFileName, _confVersion, maxSupportedConfVersion),
+                "",
+                "",
+                "",
+                "",
+                ETaskDialogButtons.Ok,
+                ESysIcons.Error,
+                ESysIcons.Error
+                );
+            throw (new Exception($"Incompatible connection file format (file format version {_confVersion})."));
+        }
 
         public void LoadFromXml(bool import)
         {
@@ -48,9 +84,6 @@ namespace mRemoteNG.Config.Connections
             {
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = false;
-
-                // SECTION 1. Create a DOM Document and load the XML data into it.
-                ValidateConnectionFileVersion();
 
                 // SECTION 2. Initialize the treeview control.
                 var rootInfo = InitializeRootNode();
@@ -87,7 +120,6 @@ namespace mRemoteNG.Config.Connections
 
                 //open connections from last mremote session
                 OpenConnectionsFromLastSession();
-
                 
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = true;
@@ -97,16 +129,6 @@ namespace mRemoteNG.Config.Connections
                 Runtime.IsConnectionsFileLoaded = false;
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strLoadFromXmlFailed + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, true);
                 throw;
-            }
-        }
-
-        private void OpenConnectionsFromLastSession()
-        {
-            if (!mRemoteNG.Settings.Default.OpenConsFromLastSession || mRemoteNG.Settings.Default.NoReconnect) return;
-            foreach (ConnectionInfo conI in ConnectionList)
-            {
-                if (conI.PleaseConnect)
-                    Runtime.OpenConnection(conI);
             }
         }
 
@@ -475,7 +497,6 @@ namespace mRemoteNG.Config.Connections
             return connectionInfo;
         }
 
-
         private void ExpandPreviouslyOpenedFolders()
         {
             foreach (ContainerInfo contI in ContainerList)
@@ -511,42 +532,6 @@ namespace mRemoteNG.Config.Connections
             return rootInfo;
         }
 
-        private void LoadXmlConnectionData(string connections)
-        {
-            connections = _decryptor.DecryptConnections(connections);
-            _xmlDocument = new XmlDocument();
-            if (connections != "")
-                _xmlDocument.LoadXml(connections);
-        }
-
-        private void ValidateConnectionFileVersion()
-        {
-            if (_xmlDocument.DocumentElement.HasAttribute("ConfVersion"))
-                _confVersion = Convert.ToDouble(_xmlDocument.DocumentElement.Attributes["ConfVersion"].Value.Replace(",", "."),
-                    CultureInfo.InvariantCulture);
-            else
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strOldConffile);
-
-            const double maxSupportedConfVersion = 2.5;
-            if (!(_confVersion > maxSupportedConfVersion)) return;
-            CTaskDialog.ShowTaskDialogBox(
-                frmMain.Default,
-                Application.ProductName,
-                "Incompatible connection file format",
-                $"The format of this connection file is not supported. Please upgrade to a newer version of {Application.ProductName}.",
-                string.Format("{1}{0}File Format Version: {2}{0}Highest Supported Version: {3}", Environment.NewLine,
-                    ConnectionFileName, _confVersion, maxSupportedConfVersion),
-                "",
-                "",
-                "",
-                "",
-                ETaskDialogButtons.Ok,
-                ESysIcons.Error,
-                ESysIcons.Error
-                );
-            throw (new Exception($"Incompatible connection file format (file format version {_confVersion})."));
-        }
-
         private delegate void SetSelectedNodeDelegate(TreeNode treeNode);
         private static void SetSelectedNode(TreeNode treeNode)
         {
@@ -556,6 +541,16 @@ namespace mRemoteNG.Config.Connections
                 return;
             }
             Windows.treeForm.tvConnections.SelectedNode = treeNode;
+        }
+
+        private void OpenConnectionsFromLastSession()
+        {
+            if (!mRemoteNG.Settings.Default.OpenConsFromLastSession || mRemoteNG.Settings.Default.NoReconnect) return;
+            foreach (ConnectionInfo conI in ConnectionList)
+            {
+                if (conI.PleaseConnect)
+                    Runtime.OpenConnection(conI);
+            }
         }
     }
 }
