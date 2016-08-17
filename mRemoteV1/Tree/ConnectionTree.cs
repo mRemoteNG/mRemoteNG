@@ -12,19 +12,14 @@ namespace mRemoteNG.Tree
     {
         private static TreeNode SetNodeToolTip_old_node;
         private static TreeNode treeNodeToBeSelected;
-        private static TreeView _TreeView;
 
-        public static TreeView TreeView
-        {
-            get { return _TreeView; }
-            set { _TreeView = value; }
-        }
+        public static TreeView TreeView { get; set; }
 
         public static TreeNode SelectedNode
         {
             get
             { 
-                return _TreeView.SelectedNode;
+                return TreeView.SelectedNode;
             }
             set
             {
@@ -142,7 +137,7 @@ namespace mRemoteNG.Tree
             {
                 if (!Settings.Default.ShowDescriptionTooltipsInTree) return;
                 //Find the node under the mouse.
-                TreeNode new_node = _TreeView.GetNodeAt(e.X, e.Y);
+                TreeNode new_node = TreeView.GetNodeAt(e.X, e.Y);
                 if (new_node == null || new_node.Equals(SetNodeToolTip_old_node))
                 {
                     return;
@@ -152,14 +147,14 @@ namespace mRemoteNG.Tree
                 //See if we have a node.
                 if (SetNodeToolTip_old_node == null)
                 {
-                    tTip.SetToolTip(_TreeView, "");
+                    tTip.SetToolTip(TreeView, "");
                 }
                 else
                 {
                     //Get this node's object data.
                     if (ConnectionTreeNode.GetNodeType(SetNodeToolTip_old_node) == TreeNodeType.Connection)
                     {
-                        tTip.SetToolTip(_TreeView, ((ConnectionInfo) SetNodeToolTip_old_node.Tag).Description);
+                        tTip.SetToolTip(TreeView, ((ConnectionInfo) SetNodeToolTip_old_node.Tag).Description);
                     }
                 }
             }
@@ -362,17 +357,17 @@ namespace mRemoteNG.Tree
             }
         }
 
-        private delegate void SelectNodeCB();
+        private delegate void SelectNodeDelegate();
         private static void SelectNode()
         {
-            if (_TreeView.InvokeRequired)
+            if (TreeView.InvokeRequired)
             {
-                SelectNodeCB d = SelectNode;
-                _TreeView.Invoke(d);
+                SelectNodeDelegate d = SelectNode;
+                TreeView.Invoke(d);
             }
             else
             {
-                _TreeView.SelectedNode = treeNodeToBeSelected;
+                TreeView.SelectedNode = treeNodeToBeSelected;
             }
         }
     }

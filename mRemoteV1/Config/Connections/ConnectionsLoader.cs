@@ -45,9 +45,10 @@ namespace mRemoteNG.Config.Connections
 			}
 			else
 			{
-                var xmlConnectionsLoader = new XmlConnectionsLoader()
+			    var dataProvider = new FileDataProvider(ConnectionFileName);
+			    var xmlString = dataProvider.Load();
+                var xmlConnectionsLoader = new XmlConnectionsDeserializer(xmlString)
                 {
-                    ConnectionFileName = ConnectionFileName,
                     ConnectionList = ConnectionList,
                     ContainerList = ContainerList,
                     RootTreeNode = RootTreeNode,

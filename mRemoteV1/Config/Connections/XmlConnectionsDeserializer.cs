@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Globalization;
-using System.IO;
 using System.Security;
 using System.Windows.Forms;
 using System.Xml;
@@ -14,7 +13,6 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
-using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -24,19 +22,24 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.Config.Connections
 {
-    public class XmlConnectionsLoader
+    public class XmlConnectionsDeserializer
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
         private SecureString _pW = GeneralAppInfo.EncryptionKey;
         private ContainerInfo _previousContainer;
+        private ConnectionsDecryptor _decryptor = new ConnectionsDecryptor();
+        //TODO find way to inject data source info
+        private string ConnectionFileName = "";
 
-
-
-        public string ConnectionFileName { get; set; }
         public TreeNode RootTreeNode { get; set; }
         public ConnectionList ConnectionList { get; set; }
         public ContainerList ContainerList { get; set; }
+
+        public XmlConnectionsDeserializer(string xml)
+        {
+            LoadXmlConnectionData(xml);
+        }
 
 
         public void LoadFromXml(bool import)
@@ -45,16 +48,24 @@ namespace mRemoteNG.Config.Connections
             {
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = false;
-                
 
                 // SECTION 1. Create a DOM Document and load the XML data into it.
-                LoadXmlConnectionData();
                 ValidateConnectionFileVersion();
 
                 // SECTION 2. Initialize the treeview control.
                 var rootInfo = InitializeRootNode();
 
-                if (!ConnectionsFileIsAuthentic(rootInfo)) return;
+                if (_confVersion > 1.3)
+                {
+                    var protectedString = _xmlDocument.DocumentElement?.Attributes["Protected"].Value;
+                    if (!_decryptor.ConnectionsFileIsAuthentic(protectedString, rootInfo))
+                    {
+                        mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
+                        mRemoteNG.Settings.Default.CustomConsPath = "";
+                        RootTreeNode.Remove();
+                        return;
+                    }
+                }
 
                 if (import && !IsExportFile())
                 {
@@ -87,20 +98,6 @@ namespace mRemoteNG.Config.Connections
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strLoadFromXmlFailed + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, true);
                 throw;
             }
-        }
-
-        private bool ConnectionsFileIsAuthentic(RootNodeInfo rootInfo)
-        {
-            if (!(_confVersion > 1.3)) return true;
-            var protectedString = _xmlDocument.DocumentElement.Attributes["Protected"].Value;
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            var connectionsFileIsNotEncrypted = cryptographyProvider.Decrypt(protectedString, _pW) == "ThisIsNotProtected";
-            if (connectionsFileIsNotEncrypted) return true;
-            if (Authenticate(protectedString, false, rootInfo)) return true;
-            mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
-            mRemoteNG.Settings.Default.CustomConsPath = "";
-            RootTreeNode.Remove();
-            return false;
         }
 
         private void OpenConnectionsFromLastSession()
@@ -514,14 +511,12 @@ namespace mRemoteNG.Config.Connections
             return rootInfo;
         }
 
-        private void LoadXmlConnectionData()
+        private void LoadXmlConnectionData(string connections)
         {
-            var connections = DecryptCompleteFile();
+            connections = _decryptor.DecryptConnections(connections);
             _xmlDocument = new XmlDocument();
             if (connections != "")
                 _xmlDocument.LoadXml(connections);
-            else
-                _xmlDocument.Load(ConnectionFileName);
         }
 
         private void ValidateConnectionFileVersion()
@@ -561,85 +556,6 @@ namespace mRemoteNG.Config.Connections
                 return;
             }
             Windows.treeForm.tvConnections.SelectedNode = treeNode;
-        }
-
-        private string DecryptCompleteFile()
-        {
-            var sRd = new StreamReader(ConnectionFileName);
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            var strCons = "";
-            strCons = sRd.ReadToEnd();
-            sRd.Close();
-
-            if (string.IsNullOrEmpty(strCons)) return "";
-            var strDecr = "";
-            bool notDecr;
-
-            if (strCons.Contains("<?xml version=\"1.0\" encoding=\"utf-8\"?>"))
-            {
-                strDecr = strCons;
-                return strDecr;
-            }
-
-            try
-            {
-                strDecr = cryptographyProvider.Decrypt(strCons, _pW);
-                notDecr = strDecr == strCons;
-            }
-            catch (Exception)
-            {
-                notDecr = true;
-            }
-
-            if (notDecr)
-            {
-                if (Authenticate(strCons, true))
-                {
-                    strDecr = cryptographyProvider.Decrypt(strCons, _pW);
-                    notDecr = false;
-                }
-
-                if (notDecr == false)
-                    return strDecr;
-            }
-            else
-            {
-                return strDecr;
-            }
-
-            return "";
-        }
-
-        private bool Authenticate(string value, bool compareToOriginalValue, RootNodeInfo rootInfo = null)
-        {
-            var passwordName = "";
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            passwordName = Path.GetFileName(ConnectionFileName);
-
-            if (compareToOriginalValue)
-            {
-                while (cryptographyProvider.Decrypt(value, _pW) == value)
-                {
-                    _pW = Tools.MiscTools.PasswordDialog(passwordName, false);
-                    if (_pW.Length == 0)
-                        return false;
-                }
-            }
-            else
-            {
-                while (cryptographyProvider.Decrypt(value, _pW) != "ThisIsProtected")
-                {
-                    _pW = Tools.MiscTools.PasswordDialog(passwordName, false);
-                    if (_pW.Length == 0)
-                        return false;
-                }
-
-                if (rootInfo == null) return true;
-                rootInfo.Password = true;
-                rootInfo.PasswordString = _pW.ConvertToUnsecureString();
-            }
-
-            return true;
         }
     }
 }
