@@ -22,7 +22,7 @@ using mRemoteNG.Messages;
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public class ConnectionInfo : Parent, IInheritable
+    public class ConnectionInfo : IParent, IInheritable
     {
         #region Private Properties
         private string _description;

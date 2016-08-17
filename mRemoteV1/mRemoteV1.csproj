@@ -158,7 +158,7 @@
     <Compile Include="Connection\DefaultConnectionInfo.cs" />
     <Compile Include="Connection\DefaultConnectionInheritance.cs" />
     <Compile Include="Connection\IInheritable.cs" />
-    <Compile Include="Connection\Parent.cs" />
+    <Compile Include="Connection\IParent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPEnums.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPVersions.cs" />

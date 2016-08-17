@@ -2,7 +2,7 @@
 
 namespace mRemoteNG.Connection
 {
-    public interface Parent
+    public interface IParent
     {
         ContainerInfo Parent { get; set; }
     }
