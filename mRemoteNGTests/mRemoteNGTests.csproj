@@ -103,7 +103,11 @@
     <Compile Include="App\LoggerTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Connection\ConnectionInfoInheritanceTests.cs" />
+    <Compile Include="Connection\ConnectionInfoTests.cs" />
+    <Compile Include="Connection\DefaultConnectionInfoTests.cs" />
     <Compile Include="Connection\DefaultConnectionInheritanceTests.cs" />
+    <Compile Include="Container\ContainerInfoTests.cs" />
+    <Compile Include="IntegrationTests\ConnectionInheritanceIntegrationTests.cs" />
     <Compile Include="ListViewTester.cs" />
     <Compile Include="Config\Connections\SqlConnectionUpdateCheckerTests.cs" />
     <Compile Include="Config\Connections\SqlUpdateQueryBuilderTest.cs" />

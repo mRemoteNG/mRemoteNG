@@ -133,7 +133,7 @@ namespace mRemoteNG.Tree
         {
             Container.ContainerInfo containerInfo = SelectedNode.Tag as Container.ContainerInfo;
             if (containerInfo != null)
-                ConnectionTreeNode.RenameNode(containerInfo.ConnectionInfo, newName);
+                ConnectionTreeNode.RenameNode(containerInfo, newName);
         }
 
         public static void SetNodeToolTip(MouseEventArgs e, ToolTip tTip)

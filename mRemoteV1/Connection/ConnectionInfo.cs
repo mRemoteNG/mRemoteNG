@@ -1,8 +1,10 @@
 using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 using System.ComponentModel;
-using mRemoteNG.Tools;
+using System.Linq;
 using System.Reflection;
+using mRemoteNG.Tools;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Connection.Protocol.SSH;
@@ -20,11 +22,9 @@ using mRemoteNG.Messages;
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public class ConnectionInfo : Parent,IInheritable
+    public class ConnectionInfo : IParent, IInheritable
     {
         #region Private Properties
-        // Private properties with public get/set
-        private string _name;
         private string _description;
         private string _icon;
         private string _panel;
@@ -77,19 +77,14 @@ namespace mRemoteNG.Connection
         private ProtocolVNC.Colors _vncColors;
         private ProtocolVNC.SmartSizeMode _vncSmartSizeMode;
         private bool _vncViewOnly;
-
 	    #endregion
 
         #region Public Properties
         #region Display
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
-        public virtual string Name
-        {
-            get { return _name; }
-            set { _name = value; }
-        }
+	    [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
+	     LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
+	     LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
+	    public virtual string Name { get; set; }
 		
         [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameDescription"),
@@ -651,7 +646,6 @@ namespace mRemoteNG.Connection
         #region Constructors
         public ConnectionInfo()
 		{
-            // initialize default values for all standard instance members
             SetTreeDisplayDefaults();
             SetConnectionDefaults();
             SetProtocolDefaults();
@@ -667,18 +661,28 @@ namespace mRemoteNG.Connection
 		public ConnectionInfo(ContainerInfo parent) : this()
 		{
 			IsContainer = true;
-			Parent = parent;
+			parent.Add(this);
 		}
         #endregion
 			
         #region Public Methods
-		public ConnectionInfo Copy()
+		public virtual ConnectionInfo Copy()
 		{
 			var newConnectionInfo = (ConnectionInfo)MemberwiseClone();
 			newConnectionInfo.ConstantID = MiscTools.CreateConstantID();
 			newConnectionInfo.OpenConnections = new ProtocolList();
 			return newConnectionInfo;
 		}
+
+	    public void CopyFrom(ConnectionInfo sourceConnectionInfo)
+	    {
+	        var properties = typeof(ConnectionInfo).GetProperties();
+	        foreach (var property in properties)
+	        {
+	            var remotePropertyValue = property.GetValue(sourceConnectionInfo, null);
+                property.SetValue(this, remotePropertyValue, null);
+	        }
+	    }
 			
 		public void SetDefaults()
 		{
@@ -697,10 +701,17 @@ namespace mRemoteNG.Connection
 		{
 			Port = GetDefaultPort();
 		}
+
+        public virtual IEnumerable<PropertyInfo> GetProperties(string[] excludedPropertyNames)
+        {
+            var properties = typeof(ConnectionInfo).GetProperties();
+            var filteredProperties = properties.Where((prop) => !excludedPropertyNames.Contains(prop.Name));
+            return filteredProperties;
+        }
         #endregion
-			
+
         #region Public Enumerations
-		[Flags()]
+        [Flags()]
         public enum Force
 		{
 			None = 0,
@@ -739,10 +750,9 @@ namespace mRemoteNG.Connection
 
         private TPropertyType GetInheritedPropertyValue<TPropertyType>(string propertyName)
         {
-            var parentConnectionInfo = IsContainer ? Parent.Parent.ConnectionInfo : Parent.ConnectionInfo;
-            var connectionInfoType = parentConnectionInfo.GetType();
+            var connectionInfoType = Parent.GetType();
             var parentPropertyInfo = connectionInfoType.GetProperty(propertyName);
-            var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(parentConnectionInfo, null);
+            var parentPropertyValue = (TPropertyType)parentPropertyInfo.GetValue(Parent, null);
 
             return parentPropertyValue;
         }
@@ -787,7 +797,7 @@ namespace mRemoteNG.Connection
 
         private void SetTreeDisplayDefaults()
         {
-            _name = Language.strNewConnection;
+            Name = Language.strNewConnection;
             _description = Settings.Default.ConDefaultDescription;
             _icon = Settings.Default.ConDefaultIcon;
             _panel = Language.strGeneral;
@@ -875,11 +885,7 @@ namespace mRemoteNG.Connection
         {
             Inheritance = new ConnectionInfoInheritance(this);
             OpenConnections = new ProtocolList();
-            IsContainer = false;
-            IsDefault = false;
             PositionID = 0;
-            IsQuickConnect = false;
-            PleaseConnect = false;
         }
         #endregion
 	}

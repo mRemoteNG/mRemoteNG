@@ -248,7 +248,7 @@ namespace mRemoteNG.Config.Connections
 				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container) //container
 				{
 					_sqlQuery.CommandText += "\'" + ContainerList[node.Tag].IsExpanded + "\',"; //Expanded
-					curConI = ContainerList[node.Tag].ConnectionInfo;
+					curConI = ContainerList[node.Tag];
 					SaveConnectionFieldsSQL(curConI);
 							
 					_sqlQuery.CommandText = MiscTools.PrepareForDB(_sqlQuery.CommandText);
@@ -512,7 +512,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if (with_1.Parent != null)
 				{
-					_parentConstantId = Convert.ToString(with_1.Parent.ConnectionInfo.ConstantID);
+					_parentConstantId = Convert.ToString(with_1.Parent.ConstantID);
 				}
 				else
 				{
@@ -523,7 +523,7 @@ namespace mRemoteNG.Config.Connections
 			{
 				if (with_1.Parent.Parent != null)
 				{
-					_parentConstantId = Convert.ToString(with_1.Parent.Parent.ConnectionInfo.ConstantID);
+					_parentConstantId = Convert.ToString(with_1.Parent.Parent.ConstantID);
 				}
 				else
 				{
@@ -652,7 +652,7 @@ namespace mRemoteNG.Config.Connections
 					if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container) //container
 					{
 						_xmlTextWriter.WriteAttributeString("Expanded", "", Convert.ToString(ContainerList[node.Tag].TreeNode.IsExpanded));
-						curConI = ContainerList[node.Tag].ConnectionInfo;
+						curConI = ContainerList[node.Tag];
 						SaveConnectionFields(curConI);
 						SaveNode(node.Nodes);
 						_xmlTextWriter.WriteEndElement();

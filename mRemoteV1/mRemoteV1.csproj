@@ -141,7 +141,7 @@
     <Compile Include="Config\Settings\SettingsSaver.cs" />
     <Compile Include="Config\ConfirmCloseEnum.cs" />
     <Compile Include="Config\Import\ActiveDirectory.cs" />
-    <Compile Include="Config\Import\mRemoteNG.cs" />
+    <Compile Include="Config\Import\mRemoteNGImporter.cs" />
     <Compile Include="Config\Import\PortScan.cs" />
     <Compile Include="Config\Import\PuttyConnectionManager.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnection.cs" />
@@ -155,9 +155,10 @@
     <Compile Include="Connection\ConnectionInfoInheritance.cs" />
     <Compile Include="App\ProgramRoot.cs" />
     <Compile Include="Connection\Converter.cs" />
+    <Compile Include="Connection\DefaultConnectionInfo.cs" />
     <Compile Include="Connection\DefaultConnectionInheritance.cs" />
     <Compile Include="Connection\IInheritable.cs" />
-    <Compile Include="Connection\Parent.cs" />
+    <Compile Include="Connection\IParent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPEnums.cs" />
     <Compile Include="Connection\Protocol\RDP\RDPVersions.cs" />

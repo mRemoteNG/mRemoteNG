@@ -1,95 +1,60 @@
+using System.Collections.Generic;
 using mRemoteNG.Connection;
-using mRemoteNG.Tools;
 using System.ComponentModel;
-using System.Windows.Forms;
 
 namespace mRemoteNG.Container
 {
     [DefaultProperty("Name")]
-    public class ContainerInfo : Parent,IInheritable
+    public class ContainerInfo : ConnectionInfo
 	{
-        private TreeNode _TreeNode;
-        private ContainerInfo _Parent;
-        private ConnectionInfo _ConnectionInfo = new ConnectionInfo();
-        private bool _IsExpanded;
+        [Browsable(false)]
+        public List<ConnectionInfo> Children { get; set; } = new List<ConnectionInfo>();
 
-        #region Properties
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1), 
-            Browsable(true), 
-            ReadOnly(false), 
-            Bindable(false), 
-            DefaultValue(""), 
-            DesignOnly(false),
-            LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
-            LocalizedAttributes.LocalizedDescription("strPropertyDescriptionName")]
-        public string Name
-		{
-			get { return ConnectionInfo.Name; }
-			set { ConnectionInfo.Name = value; }
-		}
-		
-        [Category(""), 
-            Browsable(false), 
-            ReadOnly(false), 
-            Bindable(false), 
-            DefaultValue(""), 
-            DesignOnly(false)]
-        public TreeNode TreeNode
-		{
-			get { return _TreeNode; }
-			set { _TreeNode = value; }
-		}
-		
-        [Category(""), 
-            Browsable(false)]
-        public ContainerInfo Parent
-		{
-			get { return _Parent; }
-			set { _Parent = value; }
-		}
+        [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
+        public bool IsExpanded { get; set; }
 
-        [Category(""),
-            Browsable(false)]
-        public ConnectionInfoInheritance Inheritance
+        public ContainerInfo()
         {
-            get { return ConnectionInfo.Inheritance; }
-            set { ConnectionInfo.Inheritance = value; }
+            SetDefaults();
+            IsContainer = true;
         }
 
-        [Category(""), 
-            Browsable(false), 
-            ReadOnly(false), 
-            Bindable(false), 
-            DefaultValue(""), 
-            DesignOnly(false)]
-        public bool IsExpanded
-		{
-			get { return _IsExpanded; }
-			set { _IsExpanded = value; }
-		}
-		
-        public ConnectionInfo ConnectionInfo
-		{
-			get { return _ConnectionInfo; }
-			set { _ConnectionInfo = value; }
-		}
-        #endregion
-			
-        #region Methods
-		public ContainerInfo Copy()
+        public void Add(ConnectionInfo newChildItem)
+        {
+            newChildItem.Parent = this;
+            Children.Add(newChildItem);
+        }
+
+        public void AddRange(IEnumerable<ConnectionInfo> newChildren)
+        {
+            foreach (var child in newChildren)
+            {
+                Add(child);
+            }
+        }
+
+        public void Remove(ConnectionInfo removalTarget)
+        {
+            removalTarget.Parent = null;
+            Children.Remove(removalTarget);
+        }
+
+        public void RemoveRange(IEnumerable<ConnectionInfo> removalTargets)
+        {
+            foreach (var child in removalTargets)
+            {
+                Remove(child);
+            }
+        }
+
+        public new ContainerInfo Copy()
 		{
 			return (ContainerInfo)MemberwiseClone();
 		}
 			
-		public ContainerInfo()
-		{
-            SetDefaults();
-		}
-			
-		public void SetDefaults()
+		private new void SetDefaults()
 		{
             IsExpanded = true;
 		}
-        #endregion
 	}
 }

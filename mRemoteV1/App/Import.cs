@@ -68,7 +68,7 @@ namespace mRemoteNG.App
                             switch (DetermineFileType(fileName))
                             {
                                 case FileType.mRemoteXml:
-                                    Config.Import.mRemoteNG.Import(fileName, parentTreeNode);
+                                    Config.Import.mRemoteNGImporter.Import(fileName, parentTreeNode);
                                     break;
                                 case FileType.RemoteDesktopConnection:
                                     RemoteDesktopConnection.Import(fileName, parentTreeNode);

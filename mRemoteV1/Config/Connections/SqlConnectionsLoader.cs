@@ -268,7 +268,7 @@ namespace mRemoteNG.Config.Connections
             var conI = GetConnectionInfoFromSql();
             conI.Parent = contI;
             conI.IsContainer = true;
-            contI.ConnectionInfo = conI;
+            contI.CopyFrom(conI);
 
             if (DatabaseUpdate)
             {

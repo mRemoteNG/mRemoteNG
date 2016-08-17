@@ -29,12 +29,6 @@ namespace mRemoteNG.App
 {
     public class Runtime
     {
-        #region Private Variables
-
-        //private static System.Timers.Timer _timerSqlWatcher;
-
-        #endregion
-
         #region Public Properties
         public static ConnectionList ConnectionList { get; set; }
 
@@ -74,74 +68,12 @@ namespace mRemoteNG.App
 
         public static string LastSelected { get; set; }
 
-        public static ConnectionInfo DefaultConnection { get; set; }
+        public static ConnectionInfo DefaultConnection { get; set; } = DefaultConnectionInfo.Instance;
 
         public static ConnectionInfoInheritance DefaultInheritance { get; set; }
 
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
 
-        #endregion
-
-        #region Default Connection
-        public static ConnectionInfo DefaultConnectionFromSettings()
-        {
-            DefaultConnection = new ConnectionInfo();
-            DefaultConnection.IsDefault = true;
-            return DefaultConnection;
-        }
-
-        public static void DefaultConnectionToSettings()
-        {
-            Settings.Default.ConDefaultDescription = DefaultConnection.Description;
-            Settings.Default.ConDefaultIcon = DefaultConnection.Icon;
-            Settings.Default.ConDefaultUsername = DefaultConnection.Username;
-            Settings.Default.ConDefaultPassword = DefaultConnection.Password;
-            Settings.Default.ConDefaultDomain = DefaultConnection.Domain;
-            Settings.Default.ConDefaultProtocol = DefaultConnection.Protocol.ToString();
-            Settings.Default.ConDefaultPuttySession = DefaultConnection.PuttySession;
-            Settings.Default.ConDefaultICAEncryptionStrength = DefaultConnection.ICAEncryptionStrength.ToString();
-            Settings.Default.ConDefaultRDPAuthenticationLevel = DefaultConnection.RDPAuthenticationLevel.ToString();
-            Settings.Default.ConDefaultLoadBalanceInfo = DefaultConnection.LoadBalanceInfo;
-            Settings.Default.ConDefaultUseConsoleSession = DefaultConnection.UseConsoleSession;
-            Settings.Default.ConDefaultUseCredSsp = DefaultConnection.UseCredSsp;
-            Settings.Default.ConDefaultRenderingEngine = DefaultConnection.RenderingEngine.ToString();
-            Settings.Default.ConDefaultResolution = DefaultConnection.Resolution.ToString();
-            Settings.Default.ConDefaultAutomaticResize = DefaultConnection.AutomaticResize;
-            Settings.Default.ConDefaultColors = DefaultConnection.Colors.ToString();
-            Settings.Default.ConDefaultCacheBitmaps = DefaultConnection.CacheBitmaps;
-            Settings.Default.ConDefaultDisplayWallpaper = DefaultConnection.DisplayWallpaper;
-            Settings.Default.ConDefaultDisplayThemes = DefaultConnection.DisplayThemes;
-            Settings.Default.ConDefaultEnableFontSmoothing = DefaultConnection.EnableFontSmoothing;
-            Settings.Default.ConDefaultEnableDesktopComposition = DefaultConnection.EnableDesktopComposition;
-            Settings.Default.ConDefaultRedirectKeys = DefaultConnection.RedirectKeys;
-            Settings.Default.ConDefaultRedirectDiskDrives = DefaultConnection.RedirectDiskDrives;
-            Settings.Default.ConDefaultRedirectPrinters = DefaultConnection.RedirectPrinters;
-            Settings.Default.ConDefaultRedirectPorts = DefaultConnection.RedirectPorts;
-            Settings.Default.ConDefaultRedirectSmartCards = DefaultConnection.RedirectSmartCards;
-            Settings.Default.ConDefaultRedirectSound = DefaultConnection.RedirectSound.ToString();
-            Settings.Default.ConDefaultPreExtApp = DefaultConnection.PreExtApp;
-            Settings.Default.ConDefaultPostExtApp = DefaultConnection.PostExtApp;
-            Settings.Default.ConDefaultMacAddress = DefaultConnection.MacAddress;
-            Settings.Default.ConDefaultUserField = DefaultConnection.UserField;
-            Settings.Default.ConDefaultVNCAuthMode = DefaultConnection.VNCAuthMode.ToString();
-            Settings.Default.ConDefaultVNCColors = DefaultConnection.VNCColors.ToString();
-            Settings.Default.ConDefaultVNCCompression = DefaultConnection.VNCCompression.ToString();
-            Settings.Default.ConDefaultVNCEncoding = DefaultConnection.VNCEncoding.ToString();
-            Settings.Default.ConDefaultVNCProxyIP = DefaultConnection.VNCProxyIP;
-            Settings.Default.ConDefaultVNCProxyPassword = DefaultConnection.VNCProxyPassword;
-            Settings.Default.ConDefaultVNCProxyPort = DefaultConnection.VNCProxyPort;
-            Settings.Default.ConDefaultVNCProxyType = DefaultConnection.VNCProxyType.ToString();
-            Settings.Default.ConDefaultVNCProxyUsername = DefaultConnection.VNCProxyUsername;
-            Settings.Default.ConDefaultVNCSmartSizeMode = DefaultConnection.VNCSmartSizeMode.ToString();
-            Settings.Default.ConDefaultVNCViewOnly = DefaultConnection.VNCViewOnly;
-            Settings.Default.ConDefaultExtApp = DefaultConnection.ExtApp;
-            Settings.Default.ConDefaultRDGatewayUsageMethod = DefaultConnection.RDGatewayUsageMethod.ToString();
-            Settings.Default.ConDefaultRDGatewayHostname = DefaultConnection.RDGatewayHostname;
-            Settings.Default.ConDefaultRDGatewayUsername = DefaultConnection.RDGatewayUsername;
-            Settings.Default.ConDefaultRDGatewayPassword = DefaultConnection.RDGatewayPassword;
-            Settings.Default.ConDefaultRDGatewayDomain = DefaultConnection.RDGatewayDomain;
-            Settings.Default.ConDefaultRDGatewayUseConnectionCredentials = DefaultConnection.RDGatewayUseConnectionCredentials.ToString();
-        }
         #endregion
 
         #region Panels
@@ -713,6 +645,7 @@ namespace mRemoteNG.App
                 }
 
                 ConnectionInfo newConnectionInfo = new ConnectionInfo();
+                newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
                 if (Settings.Default.IdentifyQuickConnectTabs)
                 {
@@ -1105,6 +1038,7 @@ namespace mRemoteNG.App
         public static void GoToURL(string URL)
         {
             ConnectionInfo connectionInfo = new ConnectionInfo();
+            connectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
             connectionInfo.Name = "";
             connectionInfo.Hostname = URL;

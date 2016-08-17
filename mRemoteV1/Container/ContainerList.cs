@@ -44,7 +44,7 @@ namespace mRemoteNG.Container
 		{
 			foreach (ContainerInfo containerInfo in List)
 			{
-				if (containerInfo.ConnectionInfo.ConstantID == id)
+				if (containerInfo.ConstantID == id)
 				{
 					return containerInfo;
 				}
