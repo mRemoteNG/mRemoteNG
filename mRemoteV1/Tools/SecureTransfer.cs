@@ -7,7 +7,7 @@ using static System.IO.FileMode;
 
 namespace mRemoteNG.Tools
 {
-    class SecureTransfer
+    internal class SecureTransfer
     {
         private readonly string Host;
         private readonly string User;
