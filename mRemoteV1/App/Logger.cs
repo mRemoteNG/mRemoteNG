@@ -36,7 +36,7 @@ namespace mRemoteNG.App
 
             foreach (IAppender appender in appenders)
             {
-                var fileAppender = (FileAppender)appender;
+                var fileAppender = (RollingFileAppender)appender;
                 if (fileAppender == null || fileAppender.Name != "LogFileAppender") continue;
                 fileAppender.File = logFile;
                 fileAppender.ActivateOptions();
