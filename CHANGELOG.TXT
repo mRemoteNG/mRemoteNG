@@ -1,5 +1,9 @@
 1.75 SOMETHING (2016-XX-XX):
 
+  General Changes:
+  ----------------
+  Limit log file size to 1 main log + 5 backups * 10MB.
+  
   Fixes:
   ------
   MR-967: File transfer doesn't work when specifying full path and file name (as prompted)
