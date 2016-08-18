@@ -1,0 +1,81 @@
+{% capture jbcache %}{% comment %}
+
+  Sort the given array or map.
+  
+  Parameters:
+    collection: the array or map to sort [REQUIRED]
+    sort_by: the property to sort by [OPTIONAL]
+    sort_descending: reverse the collection [OPTIONAL]
+
+  Returns:
+    sort_result: the sorted collection
+
+  Examples:
+    <h3>Pages</h3>
+    <ol>
+      {% include JB/sort_collection collection=site.pages sort_by="title" %}
+      {% assign pages_list = sort_result %}
+      {% include JB/pages_list %}
+    </ol>
+
+    <h3>Pages [Reversed]</h3>
+    <ol>
+      {% include JB/sort_collection collection=site.pages sort_by="title" sort_descending=true %}
+      {% assign pages_list = sort_result %}
+      {% include JB/pages_list %}
+    </ol>
+
+    <h3>Array</h3>
+    <ol>
+      {% assign test_array = "one,two,three,four" | split: "," %}
+      {% include JB/sort_collection collection=test_array %}
+      {% for test in sort_result %}
+        <li>{{test}}</li>
+      {% endfor %}
+    </ol>
+
+    <h3>Array [Reversed]</h3>
+    <ol>
+      {% assign test_array = "one,two,three,four" | split: "," %}
+      {% include JB/sort_collection collection=test_array sort_descending=true %}
+      {% for test in sort_result %}
+        <li>{{test}}</li>
+      {% endfor %}
+    </ol>
+
+{% endcomment %}
+
+{% assign is_array = true %}
+{% assign sort_result = "," | split: "," %}
+{% assign collection = include.collection %}
+{% if include.sort_by %}
+  {% assign sort_by = include.sort_by %}
+{% else %}
+  {% assign sort_by = "title" %}
+{% endif %}
+
+{% if collection and collection.size > 0 %}
+  {% for x in collection.first %}
+    {% if x[1].size > 0 %}
+      {% assign is_array = false %}
+    {% endif %}
+    {% break %}
+  {% endfor %}
+
+  {% if is_array == false %}
+    {% assign sort_result = collection | sort: sort_by %}
+  {% else %}
+    {% assign sort_result = collection | sort %}
+  {% endif %}
+  
+  {% if include.sort_descending %}
+    {% assign reversed = "," | split: "," %}
+    {% for index in (1..sort_result.size) %}
+      {% assign i = sort_result.size | minus: index %}
+      {% assign reversed = reversed | push: sort_result[i] %}
+    {% endfor %}
+    {% assign sort_result = reversed %}
+    {% assign reversed = nil %}
+  {% endif %}
+
+{% endif %}{% endcapture %}{% assign jbcache = nil %}

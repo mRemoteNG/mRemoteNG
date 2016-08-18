@@ -1,0 +1,3 @@
+{% if site.author.feedburner != null %}
+<link href="http://feeds.feedburner.com/{{ site.author.feedburner }}" rel="alternate" title="{{ site.title }}" type="application/atom+xml" />
+{% endif %}

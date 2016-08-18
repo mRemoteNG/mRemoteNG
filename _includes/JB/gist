@@ -1,0 +1,19 @@
+{% comment %}<!--
+The gist include allows you to embed GitHub Gist snippets in your content.
+Usage:
+  1) include JB/gist
+  2) specify the gist_id parameter (REQUIRED)
+  3) specify the gist_file parameter (OPTIONAL)
+  example:
+    <ul>
+  	  {% include JB/gist gist_id="fdcfeaba4f33c172828d" %}
+  	  {% include JB/gist gist_id="fdcfeaba4f33c172828d" gist_file="jekyll-bootstrap.js" %}
+  	</ul>
+-->{% endcomment %}
+
+<div id="gist">
+<script src="https://gist.github.com/{{ include.gist_id }}.js{% if include.gist_file %}?file={{ include.gist_file }}{% endif %}"></script>
+<noscript>
+<pre>https://gist.github.com/{{include.gist_id}}.js{% if include.gist_file %}?file={{include.gist_file}}{% endif %}</pre>
+</noscript>
+</div>
