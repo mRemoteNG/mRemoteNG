@@ -1,3 +1,9 @@
+1.75 SOMETHING (2016-XX-XX):
+
+  Fixes:
+  ------
+  MR-967: File transfer doesn't work when specifying full path and file name (as prompted)
+  
 1.75 Alpha 3 (2016-08-12):  
 
   Fixes:
