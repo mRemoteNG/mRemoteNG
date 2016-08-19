@@ -629,8 +629,7 @@ namespace mRemoteNG.Config.Connections
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SaveToXml failed" + Environment.NewLine + ex.Message);
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SaveToXml failed" + Environment.NewLine + ex.StackTrace, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("SaveToXml failed", ex);
             }
 		}
 				

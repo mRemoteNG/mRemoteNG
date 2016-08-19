@@ -84,7 +84,7 @@ namespace mRemoteNG.Config.Connections
             catch (Exception ex)
             {
                 Runtime.IsConnectionsFileLoaded = false;
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strLoadFromXmlFailed + Environment.NewLine + ex.Message + Environment.NewLine + ex.StackTrace, true);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strLoadFromXmlFailed, ex);
                 throw;
             }
         }
@@ -153,7 +153,7 @@ namespace mRemoteNG.Config.Connections
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strAddNodeFromXmlFailed + Environment.NewLine + ex.Message + ex.StackTrace, true);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strAddNodeFromXmlFailed, ex);
                 throw;
             }
         }
