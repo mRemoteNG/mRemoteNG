@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Security;
-using mRemoteNG.App.Info;
 using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree.Root;
@@ -11,7 +10,7 @@ namespace mRemoteNG.Config.Connections
     public class ConnectionsDecryptor
     {
         private readonly ICryptographyProvider _cryptographyProvider;
-        private SecureString _pW = GeneralAppInfo.EncryptionKey;
+        private SecureString _pW = "mR3m".ConvertToSecureString();
 
         public ConnectionsDecryptor()
         {
