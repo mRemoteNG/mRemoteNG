@@ -1,15 +1,13 @@
-using System.Collections.Generic;
 using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.My;
 
-
-namespace mRemoteNG.Forms
+namespace mRemoteNG.UI.Forms
 {
-    public partial class ExportForm : Form
-	{
+    public partial class ExportForm
+    {
         #region Public Properties
         public string FileName
 		{
@@ -42,11 +40,7 @@ namespace mRemoteNG.Forms
 				foreach (object item in cboFileFormat.Items)
 				{
 					ExportFormat exportFormat = item as ExportFormat;
-					if (exportFormat == null)
-					{
-						continue;
-					}
-					if (exportFormat.Format == value)
+				    if (exportFormat?.Format == value)
 					{
 						cboFileFormat.SelectedItem = item;
 						break;
@@ -99,14 +93,7 @@ namespace mRemoteNG.Forms
 			set
 			{
 				_selectedFolder = value;
-				if (value == null)
-				{
-					lblSelectedFolder.Text = string.Empty;
-				}
-				else
-				{
-					lblSelectedFolder.Text = value.Text;
-				}
+				lblSelectedFolder.Text = value == null ? string.Empty : value.Text;
 				rdoExportSelectedFolder.Enabled = value != null;
 			}
 		}
@@ -121,14 +108,7 @@ namespace mRemoteNG.Forms
 			set
 			{
 				_selectedConnection = value;
-				if (value == null)
-				{
-					lblSelectedConnection.Text = string.Empty;
-				}
-				else
-				{
-					lblSelectedConnection.Text = value.Text;
-				}
+				lblSelectedConnection.Text = value == null ? string.Empty : value.Text;
 				rdoExportSelectedConnection.Enabled = value != null;
 			}
 		}
@@ -198,7 +178,8 @@ namespace mRemoteNG.Forms
 			
         #region Private Methods
         #region Event Handlers
-		public void ExportForm_Load(object sender, EventArgs e)
+
+        private void ExportForm_Load(object sender, EventArgs e)
 		{
 			cboFileFormat.Items.Clear();
             cboFileFormat.Items.Add(new ExportFormat(Config.Connections.ConnectionsSaver.Format.mRXML));
@@ -208,13 +189,13 @@ namespace mRemoteNG.Forms
 				
 			ApplyLanguage();
 		}
-			
-		public void txtFileName_TextChanged(System.Object sender, EventArgs e)
+
+        private void txtFileName_TextChanged(object sender, EventArgs e)
 		{
 			btnOK.Enabled = !string.IsNullOrEmpty(txtFileName.Text);
 		}
-			
-		public void btnBrowse_Click(System.Object sender, EventArgs e)
+
+        private void btnBrowse_Click(object sender, EventArgs e)
 		{
 			using (SaveFileDialog saveFileDialog = new SaveFileDialog())
 			{
@@ -230,22 +211,22 @@ namespace mRemoteNG.Forms
 					
 				saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
 					
-				if (!(saveFileDialog.ShowDialog(this) == DialogResult.OK))
+				if (saveFileDialog.ShowDialog(this) != DialogResult.OK)
 				{
 					return ;
 				}
 					
 				txtFileName.Text = saveFileDialog.FileName;
-			}
+            }
 				
 		}
-			
-		public void btnOK_Click(System.Object sender, EventArgs e)
+
+        private void btnOK_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.OK;
 		}
-			
-		public void btnCancel_Click(System.Object sender, EventArgs e)
+
+        private void btnCancel_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.Cancel;
 		}
@@ -292,14 +273,9 @@ namespace mRemoteNG.Forms
 		{
             #region Public Properties
 			private Config.Connections.ConnectionsSaver.Format _format;
-            public Config.Connections.ConnectionsSaver.Format Format
-			{
-				get
-				{
-					return _format;
-				}
-			}
-            #endregion
+            public Config.Connections.ConnectionsSaver.Format Format => _format;
+
+		    #endregion
 				
             #region Constructors
 			public ExportFormat(Config.Connections.ConnectionsSaver.Format format)
