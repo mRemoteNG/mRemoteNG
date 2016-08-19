@@ -1,6 +1,9 @@
+using System.Linq;
 using System.Windows.Forms;
+using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.UI;
 using mRemoteNG.UI.Forms;
 
 
@@ -50,11 +53,16 @@ namespace mRemoteNG.Config.Connections
                 var xmlConnectionsDeserializer = new XmlConnectionsDeserializer(xmlString)
                 {
                     ConnectionList = ConnectionList,
-                    ContainerList = ContainerList,
-                    RootTreeNode = RootTreeNode,
+                    ContainerList = ContainerList
                 };
-				xmlConnectionsDeserializer.Deserialize(import);
-			}
+				var connectionTreeModel = xmlConnectionsDeserializer.Deserialize(import);
+                var connectionTreeViewBuilder = new ConnectionTreeViewBuilder(connectionTreeModel);
+                connectionTreeViewBuilder.Build();
+                var treeNodes = new TreeNode[connectionTreeViewBuilder.TreeView.Nodes.Count];
+                connectionTreeViewBuilder.TreeView.Nodes.CopyTo(treeNodes, 0);
+                Windows.treeForm.tvConnections.Nodes.AddRange(treeNodes);
+                //Windows.treeForm.InitialRefresh();
+            }
 			
 			frmMain.Default.AreWeUsingSqlServerForSavingConnections = UseDatabase;
 			frmMain.Default.ConnectionsFileName = ConnectionFileName;

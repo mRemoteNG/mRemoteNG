@@ -4,7 +4,6 @@ using System.Security;
 using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.App;
-using mRemoteNG.App.Info;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -13,6 +12,7 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Connection.Protocol.VNC;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
@@ -26,13 +26,12 @@ namespace mRemoteNG.Config.Connections
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
-        private SecureString _pW = GeneralAppInfo.EncryptionKey;
-        private ContainerInfo _previousContainer;
-        private ConnectionsDecryptor _decryptor = new ConnectionsDecryptor();
+        private readonly SecureString _pW = "mR3m".ConvertToSecureString();
+        private readonly ConnectionsDecryptor _decryptor = new ConnectionsDecryptor();
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
 
-        public TreeNode RootTreeNode { get; set; }
+        //public TreeNode RootTreeNode { get; set; }
         public ConnectionList ConnectionList { get; set; }
         public ContainerList ContainerList { get; set; }
 
@@ -40,6 +39,8 @@ namespace mRemoteNG.Config.Connections
         {
             LoadXmlConnectionData(xml);
             ValidateConnectionFileVersion();
+            ConnectionList = new ConnectionList();
+            ContainerList = new ContainerList();
         }
 
         private void LoadXmlConnectionData(string connections)
@@ -78,7 +79,7 @@ namespace mRemoteNG.Config.Connections
             throw (new Exception($"Incompatible connection file format (file format version {_confVersion})."));
         }
 
-        public void Deserialize(bool import)
+        public ConnectionTreeModel Deserialize(bool import = false)
         {
             try
             {
@@ -87,6 +88,8 @@ namespace mRemoteNG.Config.Connections
 
                 // SECTION 2. Initialize the treeview control.
                 var rootInfo = InitializeRootNode();
+                var connectionTreeModel = new ConnectionTreeModel();
+                connectionTreeModel.AddRootNode(rootInfo);
 
                 if (_confVersion > 1.3)
                 {
@@ -95,34 +98,36 @@ namespace mRemoteNG.Config.Connections
                     {
                         mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
                         mRemoteNG.Settings.Default.CustomConsPath = "";
-                        RootTreeNode.Remove();
-                        return;
+                        return null;
                     }
                 }
 
                 if (import && !IsExportFile())
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strCannotImportNormalSessionFile);
-                    return;
+                    return null;
                 }
 
-                if (!IsExportFile())
-                {
-                    RootTreeNode.ImageIndex = (int)TreeImageType.Root;
-                    RootTreeNode.SelectedImageIndex = (int)TreeImageType.Root;
-                }
+                //if (!IsExportFile())
+                //{
+                //    RootTreeNode.ImageIndex = (int)TreeImageType.Root;
+                //    RootTreeNode.SelectedImageIndex = (int)TreeImageType.Root;
+                //}
 
                 // SECTION 3. Populate the TreeView with the DOM nodes.
-                PopulateTreeview();
-                RootTreeNode.EnsureVisible();
-                Windows.treeForm.InitialRefresh();
-                SetSelectedNode(RootTreeNode);
+                //PopulateTreeview();
+                AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, rootInfo);
+                //RootTreeNode.EnsureVisible();
+                //Windows.treeForm.InitialRefresh();
+                //SetSelectedNode(RootTreeNode);
 
                 //open connections from last mremote session
-                OpenConnectionsFromLastSession();
+                //OpenConnectionsFromLastSession();
                 
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = true;
+
+                return connectionTreeModel;
             }
             catch (Exception ex)
             {
@@ -132,42 +137,34 @@ namespace mRemoteNG.Config.Connections
             }
         }
 
-        private void PopulateTreeview()
-        {
-            Windows.treeForm.tvConnections.BeginUpdate();
-            AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, RootTreeNode);
-            RootTreeNode.Expand();
-            ExpandPreviouslyOpenedFolders();
-            Windows.treeForm.tvConnections.EndUpdate();
-        }
-
-        private void AddNodesFromXmlRecursive(XmlNode parentXmlNode, TreeNode parentTreeNode)
+        private void AddNodesFromXmlRecursive(XmlNode parentXmlNode, ContainerInfo parentContainer)
         {
             try
             {
-                // Loop through the XML nodes until the leaf is reached.
-                // Add the nodes to the TreeView during the looping process.
-                if (parentXmlNode.HasChildNodes)
+                if (!parentXmlNode.HasChildNodes) return;
+                foreach (XmlNode xmlNode in parentXmlNode.ChildNodes)
                 {
-                    foreach (XmlNode xmlNode in parentXmlNode.ChildNodes)
+                    var nodeType = ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes?["Type"].Value);
+
+                    if (nodeType == TreeNodeType.Connection)
                     {
-                        var treeNode = new TreeNode(xmlNode.Attributes?["Name"].Value);
-                        parentTreeNode.Nodes.Add(treeNode);
-                        var nodeType = ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes?["Type"].Value);
-
-                        if (nodeType == TreeNodeType.Connection)
-                            AddConnectionToList(xmlNode, treeNode);
-                        else if (nodeType == TreeNodeType.Container)
-                            AddContainerToList(xmlNode, treeNode);
-
-                        AddNodesFromXmlRecursive(xmlNode, treeNode);
+                        var connectionInfo = GetConnectionInfoFromXml(xmlNode);
+                        parentContainer.Add(connectionInfo);
+                        ConnectionList.Add(connectionInfo);
                     }
-                }
-                else
-                {
-                    var nameAttribute = parentXmlNode.Attributes?["Name"];
-                    var nodeName = nameAttribute?.Value.Trim();
-                    parentTreeNode.Text = !string.IsNullOrEmpty(nodeName) ? nodeName : parentXmlNode.Name;
+                    else if (nodeType == TreeNodeType.Container)
+                    {
+                        var containerInfo = new ContainerInfo();
+                            
+                        if (_confVersion >= 0.9)
+                            containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode));
+                        if (_confVersion >= 0.8)
+                            containerInfo.IsExpanded = xmlNode.Attributes?["Expanded"].Value == "True";
+
+                        parentContainer.Add(containerInfo);
+                        ContainerList.Add(containerInfo);
+                        AddNodesFromXmlRecursive(xmlNode, containerInfo);
+                    }
                 }
             }
             catch (Exception ex)
@@ -175,39 +172,6 @@ namespace mRemoteNG.Config.Connections
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strAddNodeFromXmlFailed + Environment.NewLine + ex.Message + ex.StackTrace, true);
                 throw;
             }
-        }
-
-        private void AddConnectionToList(XmlNode xmlNode, TreeNode treeNode)
-        {
-            var connectionInfo = GetConnectionInfoFromXml(xmlNode);
-            connectionInfo.TreeNode = treeNode;
-            connectionInfo.Parent = _previousContainer;
-            ConnectionList.Add(connectionInfo);
-            treeNode.Tag = connectionInfo;
-            treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
-            treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
-        }
-
-        private void AddContainerToList(XmlNode xmlNode, TreeNode treeNode)
-        {
-            var containerInfo = new ContainerInfo();
-
-            if (_confVersion >= 0.8)
-                containerInfo.IsExpanded = xmlNode.Attributes?["Expanded"].Value == "True";
-            if (_confVersion >= 0.9)
-                containerInfo.CopyFrom(GetConnectionInfoFromXml(xmlNode));
-
-            if (treeNode.Parent?.Tag is ContainerInfo)
-                containerInfo.Parent = (ContainerInfo) treeNode.Parent.Tag;
-
-            containerInfo.TreeNode = treeNode;
-            containerInfo.Name = xmlNode.Attributes?["Name"].Value;
-
-            _previousContainer = containerInfo;
-            ContainerList.Add(containerInfo);
-            treeNode.Tag = containerInfo;
-            treeNode.ImageIndex = (int) TreeImageType.Container;
-            treeNode.SelectedImageIndex = (int) TreeImageType.Container;
         }
 
         private ConnectionInfo GetConnectionInfoFromXml(XmlNode xxNode)
@@ -517,18 +481,12 @@ namespace mRemoteNG.Config.Connections
 
         private RootNodeInfo InitializeRootNode()
         {
-            var rootNodeName = "";
-            if (_xmlDocument.DocumentElement.HasAttribute("Name"))
-                rootNodeName = Convert.ToString(_xmlDocument.DocumentElement.Attributes["Name"].Value.Trim());
-            RootTreeNode.Name = !string.IsNullOrEmpty(rootNodeName) ? rootNodeName : _xmlDocument.DocumentElement.Name;
-            RootTreeNode.Text = RootTreeNode.Name;
+            var rootNodeName = _xmlDocument.DocumentElement?.Attributes["Name"].Value.Trim();
 
             var rootInfo = new RootNodeInfo(RootNodeType.Connection)
             {
-                Name = RootTreeNode.Name,
-                TreeNode = RootTreeNode
+                Name = rootNodeName
             };
-            RootTreeNode.Tag = rootInfo;
             return rootInfo;
         }
 

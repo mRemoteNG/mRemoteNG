@@ -33,6 +33,7 @@ namespace mRemoteNG.UI
         private TreeNode InitRootNode(RootNodeInfo rootNodeInfo)
         {
             var rootNode = new TreeNode(rootNodeInfo.Name);
+            rootNode.Expand();
             TreeView.Nodes.Add(rootNode);
             return rootNode;
         }

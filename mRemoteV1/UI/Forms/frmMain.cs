@@ -125,8 +125,6 @@ namespace mRemoteNG.UI.Forms
 
         private void frmMain_Load(object sender, EventArgs e)
 		{
-            
-
             // Create gui config load and save objects
             var settingsLoader = new SettingsLoader(this);
 			settingsLoader.LoadSettings();
@@ -141,9 +139,6 @@ namespace mRemoteNG.UI.Forms
             Runtime.MessageCollector = new MessageCollector(Windows.errorsForm);
             Runtime.WindowList = new WindowList();
 
-            Windows.treePanel.Focus();
-            ConnectionTree.TreeView = Windows.treeForm.tvConnections;
-
             if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.GetStartupConnectionFileName()))
 			{
                 Runtime.NewConnections(Runtime.GetStartupConnectionFileName());
@@ -155,7 +150,11 @@ namespace mRemoteNG.UI.Forms
 				Application.Exit();
 				return ;
 			}
-			Config.Putty.Sessions.StartWatcher();
+
+            Windows.treePanel.Focus();
+            ConnectionTree.TreeView = Windows.treeForm.tvConnections;
+
+            Config.Putty.Sessions.StartWatcher();
 			if (Settings.Default.StartupComponentsCheck)
 			{
                 Windows.Show(WindowType.ComponentsCheck);
