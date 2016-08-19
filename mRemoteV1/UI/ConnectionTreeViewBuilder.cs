@@ -39,28 +39,21 @@ namespace mRemoteNG.UI
 
         private void BuildTreeViewFromConnectionTree(ContainerInfo parentContainer, TreeNode parentTreeNode)
         {
-            if (parentContainer.Children.Any())
+            if (!parentContainer.Children.Any()) return;
+            foreach (var child in parentContainer.Children)
             {
-                foreach (var child in parentContainer.Children)
+                var treeNode = new TreeNode(child.Name);
+                parentTreeNode.Nodes.Add(treeNode);
+
+                if (child is ContainerInfo)
                 {
-                    var treeNode = new TreeNode(child.Name);
-                    parentTreeNode.Nodes.Add(treeNode);
-
-                    if (child is ContainerInfo)
-                    {
-                        AddContainerToList((ContainerInfo) child, treeNode);
-                        BuildTreeViewFromConnectionTree((ContainerInfo)child, treeNode);
-                    }
-                    else
-                    {
-                        AddConnectionToList(child, treeNode);
-                    }
+                    AddContainerToList((ContainerInfo) child, treeNode);
+                    BuildTreeViewFromConnectionTree((ContainerInfo)child, treeNode);
                 }
-            }
-            else
-            {
-
-                //parentTreeNode.Text = parentContainer.Name;
+                else
+                {
+                    AddConnectionToList(child, treeNode);
+                }
             }
         }
 
