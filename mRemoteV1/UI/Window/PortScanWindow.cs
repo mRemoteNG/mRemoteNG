@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
+using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using static mRemoteNG.Tools.MiscTools;
 
@@ -113,14 +116,14 @@ namespace mRemoteNG.UI.Window
 				}
 				else
 				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.strCannotStartPortScan);
+					Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strCannotStartPortScan);
 				}
 			}
 		}
 
 	    private void btnImport_Click(object sender, EventArgs e)
 		{
-            Connection.Protocol.ProtocolType protocol = (Connection.Protocol.ProtocolType)StringToEnum(typeof(Connection.Protocol.ProtocolType), Convert.ToString(cbProtocol.SelectedItem));
+            ProtocolType protocol = (ProtocolType)StringToEnum(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem));
 					
 			List<ScanHost> hosts = new List<ScanHost>();
 			foreach (ListViewItem item in lvHosts.SelectedItems)
@@ -209,7 +212,7 @@ namespace mRemoteNG.UI.Window
 				
 		private static void PortScanner_BeginHostScan(string host)
 		{
-			Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Scanning " + host, true);
+			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Scanning " + host, true);
 		}
 				
 		private delegate void PortScannerHostScannedDelegate(ScanHost host, int scannedCount, int totalCount);
@@ -221,7 +224,7 @@ namespace mRemoteNG.UI.Window
 				return ;
 			}
 					
-			Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Host scanned " + host.HostIp, true);
+			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, "Host scanned " + host.HostIp, true);
 					
 			ListViewItem listViewItem = host.ToListViewItem();
 			if (listViewItem != null)
@@ -243,11 +246,60 @@ namespace mRemoteNG.UI.Window
 				return ;
 			}
 					
-			Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, Language.strPortScanComplete);
+			Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strPortScanComplete);
 					
 			_scanning = false;
 			SwitchButtonText();
 		}
         #endregion
+
+	    private void ListView_MouseDown(object sender, MouseEventArgs e)
+	    {
+            if (e.Button == MouseButtons.Right)
+            {
+                var hitTestInfo = lvHosts.HitTest(e.X, e.Y);
+                if (hitTestInfo.Item != null)
+                {
+                    var loc = e.Location;
+                    loc.Offset(lvHosts.Location);
+
+                    var lvi = lvHosts.GetItemAt(e.X, e.Y);
+
+                    // Adjust context menu (or it's contents) based on hitTestInfo details
+                    resultsMenuStrip.Show(this, loc);
+                }
+            }
+        }
+
+        private void ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            List<ScanHost> hosts = new List<ScanHost>();
+            foreach (ListViewItem item in lvHosts.SelectedItems)
+            {
+                var scanHost = (ScanHost)item.Tag;
+                if (scanHost != null)
+                {
+                    hosts.Add(scanHost);
+                }
+            }
+
+            if (hosts.Count < 1)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Could not import host(s) from port scan context menu");
+                return;
+            }
+
+            var toolStripMenuItem = (ToolStripMenuItem)sender;
+            string pText = null;
+            if (toolStripMenuItem != null)
+                pText = toolStripMenuItem.Text;
+
+            //TODO - rewrite this so it's not a hack. Put the import into it's own method and have different events for each protocol...
+            pText = pText?.Replace("Import", "");
+
+            ProtocolType protocol = (ProtocolType)StringToEnum(typeof(ProtocolType), pText);
+
+            Import.ImportFromPortScan(hosts, protocol);
+        }
     }
 }
