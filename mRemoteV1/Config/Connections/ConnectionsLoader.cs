@@ -47,13 +47,13 @@ namespace mRemoteNG.Config.Connections
 			{
 			    var dataProvider = new FileDataProvider(ConnectionFileName);
 			    var xmlString = dataProvider.Load();
-                var xmlConnectionsLoader = new XmlConnectionsDeserializer(xmlString)
+                var xmlConnectionsDeserializer = new XmlConnectionsDeserializer(xmlString)
                 {
                     ConnectionList = ConnectionList,
                     ContainerList = ContainerList,
                     RootTreeNode = RootTreeNode,
                 };
-				xmlConnectionsLoader.LoadFromXml(import);
+				xmlConnectionsDeserializer.Deserialize(import);
 			}
 			
 			frmMain.Default.AreWeUsingSqlServerForSavingConnections = UseDatabase;

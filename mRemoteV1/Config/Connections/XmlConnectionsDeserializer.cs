@@ -78,7 +78,7 @@ namespace mRemoteNG.Config.Connections
             throw (new Exception($"Incompatible connection file format (file format version {_confVersion})."));
         }
 
-        public void LoadFromXml(bool import)
+        public void Deserialize(bool import)
         {
             try
             {
@@ -135,13 +135,13 @@ namespace mRemoteNG.Config.Connections
         private void PopulateTreeview()
         {
             Windows.treeForm.tvConnections.BeginUpdate();
-            AddNodeFromXml(_xmlDocument.DocumentElement, RootTreeNode);
+            AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, RootTreeNode);
             RootTreeNode.Expand();
             ExpandPreviouslyOpenedFolders();
             Windows.treeForm.tvConnections.EndUpdate();
         }
 
-        private void AddNodeFromXml(XmlNode parentXmlNode, TreeNode parentTreeNode)
+        private void AddNodesFromXmlRecursive(XmlNode parentXmlNode, TreeNode parentTreeNode)
         {
             try
             {
@@ -160,7 +160,7 @@ namespace mRemoteNG.Config.Connections
                         else if (nodeType == TreeNodeType.Container)
                             AddContainerToList(xmlNode, treeNode);
 
-                        AddNodeFromXml(xmlNode, treeNode);
+                        AddNodesFromXmlRecursive(xmlNode, treeNode);
                     }
                 }
                 else
