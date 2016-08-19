@@ -1,6 +1,5 @@
 using System;
 using System.Windows.Forms;
-using mRemoteNG.Forms;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.UI.Forms;
 

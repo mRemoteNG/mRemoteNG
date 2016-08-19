@@ -272,15 +272,15 @@ namespace mRemoteNG.UI.Forms
         private class ExportFormat
 		{
             #region Public Properties
-			private Config.Connections.ConnectionsSaver.Format _format;
-            public Config.Connections.ConnectionsSaver.Format Format => _format;
+
+		    public Config.Connections.ConnectionsSaver.Format Format { get; }
 
 		    #endregion
 				
             #region Constructors
 			public ExportFormat(Config.Connections.ConnectionsSaver.Format format)
 			{
-				_format = format;
+				Format = format;
 			}
             #endregion
 				
