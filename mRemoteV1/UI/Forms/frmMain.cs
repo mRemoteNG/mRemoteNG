@@ -630,7 +630,7 @@ namespace mRemoteNG.UI.Forms
 
         private static void mMenFileImportFromPortScan_Click(object sender, EventArgs e)
 		{
-            Windows.Show(WindowType.PortScan, true);
+            Windows.Show(WindowType.PortScan);
 		}
 
         private static void mMenFileExport_Click(object sender, EventArgs e)
