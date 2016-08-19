@@ -12,13 +12,12 @@ namespace mRemoteNG.UI.Window
 	public partial class PortScanWindow
 	{
         #region Constructors
-		public PortScanWindow(DockContent panel, bool import)
+		public PortScanWindow(DockContent panel)
 		{
 			InitializeComponent();
 					
 			WindowType = WindowType.PortScan;
 			DockPnl = panel;
-			_import = import;
 		}
         #endregion
 				
@@ -67,41 +66,28 @@ namespace mRemoteNG.UI.Window
         #endregion
 				
         #region Private Fields
-		private bool _import;
 		private Scanner _portScanner;
-		private bool _scanning = false;
+		private bool _scanning;
         #endregion
 				
         #region Private Methods
         #region Event Handlers
 
 	    private void PortScan_Load(object sender, EventArgs e)
-		{
-			ApplyLanguage();
-					
-			try
-			{
-                /* flipped the UI around a bit
-                 * Show the open/closed port numbers in import mode in case custom ports are scanned.
-                 * Since (currently) the non-import mode doesn't allow custom ports, just show the standard port columns.
-                 */
-				if (_import)
-				{
-                    lvHosts.Columns.AddRange(new[] { clmHost, clmOpenPorts, clmClosedPorts });
-					ShowImportControls(true);
-					cbProtocol.SelectedIndex = 0;
-				}
-				else
-				{
-                    lvHosts.Columns.AddRange(new[] { clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC });
-                    ShowImportControls(false);
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddExceptionMessage(Language.strPortScanCouldNotLoadPanel, ex);
-			}
-		}
+	    {
+	        ApplyLanguage();
+
+	        try
+	        {
+	            lvHosts.Columns.AddRange(new[]{clmHost, clmSSH, clmTelnet, clmHTTP, clmHTTPS, clmRlogin, clmRDP, clmVNC, clmOpenPorts, clmClosedPorts});
+	            ShowImportControls(true);
+	            cbProtocol.SelectedIndex = 0;
+	        }
+	        catch (Exception ex)
+	        {
+	            Runtime.MessageCollector.AddExceptionMessage(Language.strPortScanCouldNotLoadPanel, ex);
+	        }
+	    }
 
 	    private void portStart_Enter(object sender, EventArgs e)
 		{
@@ -192,15 +178,7 @@ namespace mRemoteNG.UI.Window
 				System.Net.IPAddress ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
 				System.Net.IPAddress ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
 				
-                // reversed logic here. port values are only available on the import screen	
-				if (!_import)
-				{
-					_portScanner = new Scanner(ipAddressStart, ipAddressEnd);
-				}
-				else
-				{
-					_portScanner = new Scanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value);
-				}
+				_portScanner = new Scanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value);
 						
 				_portScanner.BeginHostScan += PortScanner_BeginHostScan;
 				_portScanner.HostScanned += PortScanner_HostScanned;
@@ -210,7 +188,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "StartScan failed (UI.Window.PortScan)" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionMessage("StartScan failed (UI.Window.PortScan)", ex);
 			}
 		}
 				
@@ -223,14 +201,7 @@ namespace mRemoteNG.UI.Window
 				
 		private void SwitchButtonText()
 		{
-			if (_scanning)
-			{
-				btnScan.Text = Language.strButtonStop;
-			}
-			else
-			{
-				btnScan.Text = Language.strButtonScan;
-			}
+			btnScan.Text = _scanning ? Language.strButtonStop : Language.strButtonScan;
 					
 			prgBar.Maximum = 100;
 			prgBar.Value = 0;
@@ -252,7 +223,7 @@ namespace mRemoteNG.UI.Window
 					
 			Runtime.MessageCollector.AddMessage(Messages.MessageClass.InformationMsg, "Host scanned " + host.HostIp, true);
 					
-			ListViewItem listViewItem = host.ToListViewItem(_import);
+			ListViewItem listViewItem = host.ToListViewItem();
 			if (listViewItem != null)
 			{
 				lvHosts.Items.Add(listViewItem);

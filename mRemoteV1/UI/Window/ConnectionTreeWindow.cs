@@ -618,7 +618,7 @@ namespace mRemoteNG.UI.Window
 
         private static void cMenTreeImportPortScan_Click(object sender, EventArgs e)
 		{
-            Windows.Show(WindowType.PortScan, true);
+            Windows.Show(WindowType.PortScan);
 		}
 
         private static void cMenTreeExportFile_Click(object sender, EventArgs e)
