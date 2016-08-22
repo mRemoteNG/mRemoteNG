@@ -4,6 +4,7 @@ using mRemoteNG.Tree;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
+using mRemoteNG.App;
 
 
 namespace mRemoteNG.Config.Putty
@@ -11,10 +12,9 @@ namespace mRemoteNG.Config.Putty
 	public class Sessions
 	{
         #region Public Methods
-		private delegate void AddSessionsToTreeDelegate();
-		public static void AddSessionsToTree()
+		private delegate void AddSessionsToTreeDelegate(TreeView treeView);
+		public static void AddSessionsToTree(TreeView treeView)
 		{
-            TreeView treeView = ConnectionTree.TreeView;
 			if (treeView == null)
 			{
 				return ;
@@ -139,7 +139,7 @@ namespace mRemoteNG.Config.Putty
 			
 		public static void SessionChanged(object sender, Provider.SessionChangedEventArgs e)
 		{
-			AddSessionsToTree();
+			AddSessionsToTree(Windows.treeForm.tvConnections);
 		}
         #endregion
 			

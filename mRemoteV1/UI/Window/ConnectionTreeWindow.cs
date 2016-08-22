@@ -909,7 +909,13 @@ namespace mRemoteNG.UI.Window
 				
 		public void txtSearch_TextChanged(object sender, EventArgs e)
 		{
-			tvConnections.SelectedNode = ConnectionTree.Find(tvConnections.Nodes[0], txtSearch.Text);
+		    try
+		    {
+                tvConnections.SelectedNode = ConnectionTree.Find(tvConnections.Nodes[0], txtSearch.Text);
+            }
+		    catch (Exception)
+		    {
+		    }
 		}
 				
 		public void tvConnections_KeyPress(object sender, KeyPressEventArgs e)
