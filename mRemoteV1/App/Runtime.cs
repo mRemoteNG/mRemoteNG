@@ -341,9 +341,9 @@ namespace mRemoteNG.App
                     connectionsLoader.PreviousSelected = LastSelected;
                 }
 
-                ConnectionTree.ResetTree();
+                //ConnectionTree.ResetTree();
 
-                connectionsLoader.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
+                //connectionsLoader.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
                 connectionsLoader.DatabaseHost = Settings.Default.SQLHost;
                 connectionsLoader.DatabaseName = Settings.Default.SQLDatabaseName;

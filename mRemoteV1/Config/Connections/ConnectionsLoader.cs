@@ -58,17 +58,14 @@ namespace mRemoteNG.Config.Connections
 				var connectionTreeModel = xmlConnectionsDeserializer.Deserialize(import);
                 var connectionTreeViewBuilder = new ConnectionTreeViewBuilder(connectionTreeModel);
                 connectionTreeViewBuilder.Build();
-                var treeNodes = new TreeNode[connectionTreeViewBuilder.TreeView.Nodes.Count];
-                connectionTreeViewBuilder.TreeView.Nodes.CopyTo(treeNodes, 0);
-                Windows.treeForm.tvConnections.Nodes.AddRange(treeNodes);
-                //Windows.treeForm.InitialRefresh();
+                connectionTreeViewBuilder.AppendTo(Windows.treeForm.tvConnections);
             }
 			
 			frmMain.Default.AreWeUsingSqlServerForSavingConnections = UseDatabase;
 			frmMain.Default.ConnectionsFileName = ConnectionFileName;
-			
+
 			if (!import)
-				Putty.Sessions.AddSessionsToTree();
+				Putty.Sessions.AddSessionsToTree(Windows.treeForm.tvConnections);
 		}
     }
 }

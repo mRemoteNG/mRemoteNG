@@ -35,8 +35,8 @@ namespace mRemoteNGTests.UI
         {
             CreateRootNode();
             _connectionTreeViewBuilder.Build();
-            var tree = _connectionTreeViewBuilder.TreeView;
-            Assert.That(tree.Nodes.Count, Is.EqualTo(1));
+            var rootTreeNode = _connectionTreeViewBuilder.RootNode;
+            Assert.That(rootTreeNode, Is.Not.Null);
         }
 
         [Test]
@@ -50,7 +50,7 @@ namespace mRemoteNGTests.UI
             var con1 = new ConnectionInfo();
             root.Add(con1);
             _connectionTreeViewBuilder.Build();
-            var rootTreeNode = _connectionTreeViewBuilder.TreeView.Nodes[0];
+            var rootTreeNode = _connectionTreeViewBuilder.RootNode;
             Assert.That(rootTreeNode.Nodes[0].Tag, Is.EqualTo(con1));
         }
 
@@ -65,7 +65,7 @@ namespace mRemoteNGTests.UI
             var folder1 = new ContainerInfo();
             root.Add(folder1);
             _connectionTreeViewBuilder.Build();
-            var rootTreeNode = _connectionTreeViewBuilder.TreeView.Nodes[0];
+            var rootTreeNode = _connectionTreeViewBuilder.RootNode;
             Assert.That(rootTreeNode.Nodes[0].Tag, Is.EqualTo(folder1));
         }
 
@@ -82,7 +82,7 @@ namespace mRemoteNGTests.UI
             var con2 = new ConnectionInfo();
             root.AddRange(new []{con1, con2});
             _connectionTreeViewBuilder.Build();
-            var rootTreeNode = _connectionTreeViewBuilder.TreeView.Nodes[0];
+            var rootTreeNode = _connectionTreeViewBuilder.RootNode;
             Assert.That(GetTreeNodeTags(rootTreeNode.Nodes), Is.EquivalentTo(new[] { con1, con2 }));
         }
 
@@ -100,7 +100,7 @@ namespace mRemoteNGTests.UI
             root.Add(folder1);
             folder1.Add(con1);
             _connectionTreeViewBuilder.Build();
-            var rootTreeNode = _connectionTreeViewBuilder.TreeView.Nodes[0];
+            var rootTreeNode = _connectionTreeViewBuilder.RootNode;
             Assert.That(rootTreeNode.Nodes[0].Tag, Is.EqualTo(folder1));
             Assert.That(rootTreeNode.Nodes[0].Nodes[0].Tag, Is.EqualTo(con1));
         }
@@ -122,7 +122,7 @@ namespace mRemoteNGTests.UI
             folder1.Add(con1);
             root.Add(folder2);
             _connectionTreeViewBuilder.Build();
-            var rootTreeNode = _connectionTreeViewBuilder.TreeView.Nodes[0];
+            var rootTreeNode = _connectionTreeViewBuilder.RootNode;
             Assert.That(rootTreeNode.Nodes[0].Tag, Is.EqualTo(folder1));
             Assert.That(rootTreeNode.Nodes[0].Nodes[0].Tag, Is.EqualTo(con1));
             Assert.That(rootTreeNode.Nodes[1].Tag, Is.EqualTo(folder2));
@@ -145,7 +145,7 @@ namespace mRemoteNGTests.UI
             folder1.Add(folder2);
             folder2.Add(con1);
             _connectionTreeViewBuilder.Build();
-            var rootTreeNode = _connectionTreeViewBuilder.TreeView.Nodes[0];
+            var rootTreeNode = _connectionTreeViewBuilder.RootNode;
             Assert.That(rootTreeNode.Nodes[0].Nodes[0].Nodes[0].Tag, Is.EqualTo(con1));
         }
 
@@ -175,7 +175,7 @@ namespace mRemoteNGTests.UI
             folder3.Add(folder4);
             folder4.Add(con2);
             _connectionTreeViewBuilder.Build();
-            var rootTreeNode = _connectionTreeViewBuilder.TreeView.Nodes[0];
+            var rootTreeNode = _connectionTreeViewBuilder.RootNode;
             Assert.That(rootTreeNode.Nodes[0].Nodes[0].Nodes[0].Tag, Is.EqualTo(con1));
             Assert.That(rootTreeNode.Nodes[1].Nodes[0].Nodes[0].Tag, Is.EqualTo(con2));
         }

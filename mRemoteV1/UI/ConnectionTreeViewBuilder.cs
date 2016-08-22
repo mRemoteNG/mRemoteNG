@@ -10,32 +10,41 @@ namespace mRemoteNG.UI
 {
     public class ConnectionTreeViewBuilder
     {
-        private ConnectionTreeModel _connectionTreeModel;
+        private readonly ConnectionTreeModel _connectionTreeModel;
 
-        public TreeView TreeView { get; private set; }
+        public TreeNode RootNode { get; private set; }
         public ConnectionList ConnectionList { get; set; }
         public ContainerList ContainerList { get; set; }
 
         public ConnectionTreeViewBuilder(ConnectionTreeModel connectionTreeModel)
         {
             _connectionTreeModel = connectionTreeModel;
-            TreeView = new TreeView();
             ConnectionList = new ConnectionList();
             ContainerList = new ContainerList();
+        }
+
+        public void AppendTo(TreeView foreignTreeView)
+        {
+            foreignTreeView.BeginUpdate();
+            foreignTreeView.Nodes.Add(RootNode);
+            foreignTreeView.EndUpdate();
         }
 
         public void Build()
         {
             var rootNodeInfo = _connectionTreeModel.RootNodes.First(a => a is RootNodeInfo);
-            BuildTreeViewFromConnectionTree(rootNodeInfo, InitRootNode((RootNodeInfo)rootNodeInfo));
+            InitRootNode((RootNodeInfo)rootNodeInfo);
+            BuildTreeViewFromConnectionTree(rootNodeInfo, RootNode);
         }
 
-        private TreeNode InitRootNode(RootNodeInfo rootNodeInfo)
+        private void InitRootNode(RootNodeInfo rootNodeInfo)
         {
-            var rootNode = new TreeNode(rootNodeInfo.Name);
-            rootNode.Expand();
-            TreeView.Nodes.Add(rootNode);
-            return rootNode;
+            RootNode = new TreeNode(rootNodeInfo.Name)
+            {
+                Name = rootNodeInfo.Name,
+                Tag = rootNodeInfo
+            };
+            RootNode.Expand();
         }
 
         private void BuildTreeViewFromConnectionTree(ContainerInfo parentContainer, TreeNode parentTreeNode)
@@ -43,7 +52,7 @@ namespace mRemoteNG.UI
             if (!parentContainer.Children.Any()) return;
             foreach (var child in parentContainer.Children)
             {
-                var treeNode = new TreeNode(child.Name);
+                var treeNode = new TreeNode(child.Name) {Name = child.Name};
                 parentTreeNode.Nodes.Add(treeNode);
 
                 if (child is ContainerInfo)
