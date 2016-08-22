@@ -1,0 +1,50 @@
+<nav class='navbar navbar-default navbar-static-top'>
+    <div class='container-fluid'>
+        <div class='navbar-header'>
+            <button type='button' class='navbar-toggle collapsed' data-toggle='collapse' data-target='#navbar-collapse' aria-expanded='false'>
+                <span class='sr-only'>Toggle navigation</span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+                <span class='icon-bar'></span>
+            </button>
+            <a class='navbar-brand' href='/'>mRemoteNG</a>
+        </div>
+        <div class='collapse navbar-collapse' id='navbar-collapse'>
+            <ul class='nav navbar-nav'>
+                <li role='presentation' {% if page.url == '/' %}class='active'{% endif %}>
+                    <a href='/'>Home</a>
+                </li>
+                <li role='presentation'>
+                    <a href='{{ site.github.wiki_url }}'>Documentation</a>
+                </li>
+                <li role='presentation' {% if page.url == '/download' %}class='active'{% endif %}>
+                    <a href='/download'>Download</a>
+                </li>
+                <li role='presentation' {% if page.url == '/download2' %}class='active'{% endif %} title='beta'>
+                    <a href='/download2'>Download <span class='label label-warning'>v2</span></a>
+                </li>
+                <li role='presentation' {% if page.url == '/contribute' %}class='active'{% endif %}>
+                    <a href='/contribute'>Contribute</a>
+                </li>
+                <li role='presentation' {% if page.url == '/contribute2' %}class='active'{% endif %} title='beta'>
+                    <a href='/contribute2'>Contribute <span class='label label-warning'>v2</span></a>
+                </li>
+                <li role='presentation'>
+                    <a href='http://forum.mremoteng.org'>Forum</a>
+                </li>
+                <li role='presentation'>
+                    <a href='{{ site.github.issues_url }}'>Report a bug</a>
+                </li>
+                <li role='presentation'>
+                    <a href='https://mremoteng.atlassian.net/wiki/display/MR/Request+a+Feature'>Request a Feature</a>
+                </li>
+                <li role='presentation' {% if page.url == '/video' %}class='active'{% endif %}>
+                    <a href='/video'>Quick Look Video</a>
+                </li>
+                <li role='presentation'>
+                    <a href='{{ site.github.repository_url }}'>Source Code</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

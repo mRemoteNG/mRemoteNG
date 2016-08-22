@@ -1,0 +1,29 @@
+---
+title: Contribute v2
+permalink: /contribute2
+---
+
+<div class='alert alert-warning'>Beta</div>
+
+If you find mRemoteNG useful and would like to express your appreciation, please click the button below to be securely make a contribution with Stripe.
+<form action='/charge' method='POST'>
+    <div class='form-group'>
+        <div class='input-group'>
+            <span class='input-group-addon'>$</span>
+            <input id='amount' type='number' class='form-control' aria-label='Amount'>
+        </div>
+    </div>
+    <script
+    src='https://checkout.stripe.com/checkout.js' class='stripe-button'
+    data-key=''
+    data-name='mRemoteNG'
+    data-description='Donation'
+    data-image=''
+    data-label='Donate'
+    data-bitcoin='true'
+    data-locale='auto'
+    data-zip-code='true'>
+</script>
+</form>
+
+The mRemoteNG Project is **NOT** considered a non-profit organization and contributions are **NOT** tax deductible.
