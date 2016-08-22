@@ -142,7 +142,6 @@ namespace mRemoteNG.UI.Window
             this.lvHosts.TabIndex = 26;
             this.lvHosts.UseCompatibleStateImageBehavior = false;
             this.lvHosts.View = System.Windows.Forms.View.Details;
-            this.lvHosts.MouseDown += new System.Windows.Forms.MouseEventHandler(this.ListView_MouseDown);
             // 
             // resultsMenuStrip
             // 
@@ -155,56 +154,56 @@ namespace mRemoteNG.UI.Window
             this.importTelnetToolStripMenuItem,
             this.importVNCToolStripMenuItem});
             this.resultsMenuStrip.Name = "resultsMenuStrip";
-            this.resultsMenuStrip.Size = new System.Drawing.Size(153, 180);
+            this.resultsMenuStrip.Size = new System.Drawing.Size(150, 158);
             // 
             // importHTTPToolStripMenuItem
             // 
             this.importHTTPToolStripMenuItem.Name = "importHTTPToolStripMenuItem";
-            this.importHTTPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importHTTPToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.importHTTPToolStripMenuItem.Text = "Import HTTP";
-            this.importHTTPToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            this.importHTTPToolStripMenuItem.Click += new System.EventHandler(this.importHTTPToolStripMenuItem_Click);
             // 
             // importHTTPSToolStripMenuItem
             // 
             this.importHTTPSToolStripMenuItem.Name = "importHTTPSToolStripMenuItem";
-            this.importHTTPSToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importHTTPSToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.importHTTPSToolStripMenuItem.Text = "Import HTTPS";
-            this.importHTTPSToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            this.importHTTPSToolStripMenuItem.Click += new System.EventHandler(this.importHTTPSToolStripMenuItem_Click);
             // 
             // importRDPToolStripMenuItem
             // 
             this.importRDPToolStripMenuItem.Name = "importRDPToolStripMenuItem";
-            this.importRDPToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importRDPToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.importRDPToolStripMenuItem.Text = "Import RDP";
-            this.importRDPToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            this.importRDPToolStripMenuItem.Click += new System.EventHandler(this.importRDPToolStripMenuItem_Click);
             // 
             // importRloginToolStripMenuItem
             // 
             this.importRloginToolStripMenuItem.Name = "importRloginToolStripMenuItem";
-            this.importRloginToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importRloginToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.importRloginToolStripMenuItem.Text = "Import Rlogin";
-            this.importRloginToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            this.importRloginToolStripMenuItem.Click += new System.EventHandler(this.importRloginToolStripMenuItem_Click);
             // 
             // importSSH2ToolStripMenuItem
             // 
             this.importSSH2ToolStripMenuItem.Name = "importSSH2ToolStripMenuItem";
-            this.importSSH2ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importSSH2ToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.importSSH2ToolStripMenuItem.Text = "Import SSH2";
-            this.importSSH2ToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            this.importSSH2ToolStripMenuItem.Click += new System.EventHandler(this.importSSH2ToolStripMenuItem_Click);
             // 
             // importTelnetToolStripMenuItem
             // 
             this.importTelnetToolStripMenuItem.Name = "importTelnetToolStripMenuItem";
-            this.importTelnetToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importTelnetToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.importTelnetToolStripMenuItem.Text = "Import Telnet";
-            this.importTelnetToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            this.importTelnetToolStripMenuItem.Click += new System.EventHandler(this.importTelnetToolStripMenuItem_Click);
             // 
             // importVNCToolStripMenuItem
             // 
             this.importVNCToolStripMenuItem.Name = "importVNCToolStripMenuItem";
-            this.importVNCToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.importVNCToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
             this.importVNCToolStripMenuItem.Text = "Import VNC";
-            this.importVNCToolStripMenuItem.Click += new System.EventHandler(this.ToolStripMenuItem_Click);
+            this.importVNCToolStripMenuItem.Click += new System.EventHandler(this.importVNCToolStripMenuItem_Click);
             // 
             // btnImport
             // 
