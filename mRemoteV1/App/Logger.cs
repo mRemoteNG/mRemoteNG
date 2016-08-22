@@ -15,13 +15,7 @@ namespace mRemoteNG.App
         private static readonly Logger _loggerInstance = new Logger();
         private ILog _log;
 
-        public static ILog Instance
-        {
-            get
-            {
-                return _loggerInstance._log;
-            }
-        }
+        public static ILog Instance => _loggerInstance._log;
 
         private Logger()
         {
@@ -39,16 +33,13 @@ namespace mRemoteNG.App
 
             ILoggerRepository repository = LogManager.GetRepository();
             IAppender[] appenders = repository.GetAppenders();
-            
-            FileAppender fileAppender = default(FileAppender);
+
             foreach (IAppender appender in appenders)
             {
-                fileAppender = appender as FileAppender;
-                if (!(fileAppender == null || fileAppender.Name != "LogFileAppender"))
-                {
-                    fileAppender.File = logFile;
-                    fileAppender.ActivateOptions();
-                }
+                var fileAppender = (RollingFileAppender)appender;
+                if (fileAppender == null || fileAppender.Name != "LogFileAppender") continue;
+                fileAppender.File = logFile;
+                fileAppender.ActivateOptions();
             }
             _log = LogManager.GetLogger("Logger");
         }

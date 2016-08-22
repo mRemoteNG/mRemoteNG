@@ -1,7 +1,5 @@
-﻿using mRemoteNG.Forms;
-using mRemoteNG.Messages;
+﻿using mRemoteNG.Messages;
 using mRemoteNG.UI.Forms;
-using mRemoteNG.UI.Forms.OptionsPages;
 using mRemoteNG.UI.Window;
 using System;
 using WeifenLuo.WinFormsUI.Docking;
@@ -41,7 +39,7 @@ namespace mRemoteNG.App
         public static AnnouncementWindow AnnouncementForm;
         public static DockContent AnnouncementPanel = new DockContent();
 
-        public static void Show(WindowType windowType, bool portScanImport = false)
+        public static void Show(WindowType windowType)
         {
             try
             {
@@ -105,7 +103,7 @@ namespace mRemoteNG.App
                 }
                 else if (windowType.Equals(WindowType.PortScan))
                 {
-                    portscanForm = new PortScanWindow(portscanPanel, portScanImport);
+                    portscanForm = new PortScanWindow(portscanPanel);
                     portscanPanel = portscanForm;
                     portscanForm.Show(frmMain.Default.pnlDock);
                 }

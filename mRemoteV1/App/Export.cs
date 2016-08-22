@@ -1,20 +1,18 @@
 using System;
 using System.Windows.Forms;
-using mRemoteNG.Forms;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.UI.Forms;
 
 
 namespace mRemoteNG.App
 {
-	public class Export
+	public static class Export
 	{
 		public static void ExportToFile(TreeNode rootTreeNode, TreeNode selectedTreeNode)
 		{
 			try
 			{
-				TreeNode exportTreeNode = default(TreeNode);
-				Security.Save saveSecurity = new Security.Save();
+			    Security.Save saveSecurity = new Security.Save();
 					
 				using (ExportForm exportForm = new ExportForm())
 				{
@@ -35,13 +33,14 @@ namespace mRemoteNG.App
 					{
 						return ;
 					}
-						
-					switch (exportForm.Scope)
+
+				    TreeNode exportTreeNode;
+				    switch (exportForm.Scope)
 					{
-						case mRemoteNG.Forms.ExportForm.ExportScope.SelectedFolder:
+						case ExportForm.ExportScope.SelectedFolder:
 							exportTreeNode = exportForm.SelectedFolder;
 							break;
-                        case mRemoteNG.Forms.ExportForm.ExportScope.SelectedConnection:
+                        case ExportForm.ExportScope.SelectedConnection:
 							exportTreeNode = exportForm.SelectedConnection;
 							break;
 						default:
@@ -60,7 +59,7 @@ namespace mRemoteNG.App
 			}
 			catch (Exception ex)
 			{
-                Runtime.MessageCollector.AddExceptionMessage(message: "App.Export.ExportToFile() failed.", ex: ex, logOnly: true);
+                Runtime.MessageCollector.AddExceptionMessage("App.Export.ExportToFile() failed.", ex, logOnly: true);
 			}
 		}
 			
@@ -72,20 +71,22 @@ namespace mRemoteNG.App
 				{
                     Runtime.SQLConnProvider.Disable();
 				}
-					
-				ConnectionsSaver connectionsSave = new ConnectionsSaver();
-				connectionsSave.Export = true;
-				connectionsSave.ConnectionFileName = fileName;
-				connectionsSave.SaveFormat = saveFormat;
-                connectionsSave.ConnectionList = Runtime.ConnectionList;
-                connectionsSave.ContainerList = Runtime.ContainerList;
-				connectionsSave.RootTreeNode = rootNode;
-				connectionsSave.SaveSecurity = saveSecurity;
-				connectionsSave.SaveConnections();
+
+			    ConnectionsSaver connectionsSave = new ConnectionsSaver
+			    {
+			        Export = true,
+			        ConnectionFileName = fileName,
+			        SaveFormat = saveFormat,
+			        ConnectionList = Runtime.ConnectionList,
+			        ContainerList = Runtime.ContainerList,
+			        RootTreeNode = rootNode,
+			        SaveSecurity = saveSecurity
+			    };
+			    connectionsSave.SaveConnections();
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage(string.Format("Export.SaveExportFile(\"{0}\") failed.", fileName), ex);
+				Runtime.MessageCollector.AddExceptionStackTrace($"Export.SaveExportFile(\"{fileName}\") failed.", ex);
 			}
 			finally
 			{

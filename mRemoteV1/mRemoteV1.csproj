@@ -1210,7 +1210,8 @@
     <Reference Include="mscorlib" />
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>call "$(DevEnvDir)..\tools\vsvars32.bat"
+    <PostBuildEvent>powershell sleep 2
+call "$(DevEnvDir)..\tools\vsvars32.bat"
 set /p buildenv=&lt;buildenv.tmp
 
 echo Copy PUTTYNG to correct directory

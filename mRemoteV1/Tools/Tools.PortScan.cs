@@ -54,7 +54,7 @@ namespace mRemoteNG.Tools
 
         public string HostIp { get; set; }
 
-	    public ArrayList OpenPorts { get; set; } = new ArrayList();
+	    public ArrayList OpenPorts { get; set; }
 
 	    public ArrayList ClosedPorts { get; set; }
 
@@ -95,57 +95,50 @@ namespace mRemoteNG.Tools
 			}
 		}
 				
-		public ListViewItem ToListViewItem(bool import)
+		public ListViewItem ToListViewItem()
 		{
 			try
 			{
-				ListViewItem listViewItem = new ListViewItem();
-				listViewItem.Tag = this;
-				listViewItem.Text = !string.IsNullOrEmpty(HostName) ? HostName : HostIp;
+			    ListViewItem listViewItem = new ListViewItem
+			    {
+			        Tag = this,
+			        Text = !string.IsNullOrEmpty(HostName) ? HostName : HostIp
+			    };
 
-                /* flipped the UI around a bit
-                 * Show the open/closed port numbers in import mode in case custom ports are scanned.
-                 * Since (currently) the non-import mode doesn't allow custom ports, just show the standard port columns.
-                 */
-                if (!import)
+			    listViewItem.SubItems.Add(BoolToYesNo(SSH));
+				listViewItem.SubItems.Add(BoolToYesNo(Telnet));
+				listViewItem.SubItems.Add(BoolToYesNo(HTTP));
+				listViewItem.SubItems.Add(BoolToYesNo(HTTPS));
+				listViewItem.SubItems.Add(BoolToYesNo(Rlogin));
+				listViewItem.SubItems.Add(BoolToYesNo(RDP));
+				listViewItem.SubItems.Add(BoolToYesNo(VNC));
+				
+				string strOpen = "";
+				string strClosed = "";
+							
+				foreach (int p in OpenPorts)
 				{
-					listViewItem.SubItems.Add(BoolToYesNo(SSH));
-					listViewItem.SubItems.Add(BoolToYesNo(Telnet));
-					listViewItem.SubItems.Add(BoolToYesNo(HTTP));
-					listViewItem.SubItems.Add(BoolToYesNo(HTTPS));
-					listViewItem.SubItems.Add(BoolToYesNo(Rlogin));
-					listViewItem.SubItems.Add(BoolToYesNo(RDP));
-					listViewItem.SubItems.Add(BoolToYesNo(VNC));
+					strOpen += p + ", ";
 				}
-				else
+							
+				foreach (int p in ClosedPorts)
 				{
-					string strOpen = "";
-					string strClosed = "";
-							
-					foreach (int p in OpenPorts)
-					{
-						strOpen += p + ", ";
-					}
-							
-					foreach (int p in ClosedPorts)
-					{
-						strClosed += p + ", ";
-					}
-							
-					listViewItem.SubItems.Add(strOpen.Substring(0, strOpen.Length > 0 ? strOpen.Length - 2 : strOpen.Length));
-					listViewItem.SubItems.Add(strClosed.Substring(0, strClosed.Length > 0 ? strClosed.Length - 2 : strClosed.Length));
+					strClosed += p + ", ";
 				}
-						
+							
+				listViewItem.SubItems.Add(strOpen.Substring(0, strOpen.Length > 0 ? strOpen.Length - 2 : strOpen.Length));
+				listViewItem.SubItems.Add(strClosed.Substring(0, strClosed.Length > 0 ? strClosed.Length - 2 : strClosed.Length));
+
 				return listViewItem;
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddExceptionMessage("Tools.PortScan.ToListViewItem() failed.", ex, MessageClass.WarningMsg, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("Tools.PortScan.ToListViewItem() failed.", ex);
 				return null;
 			}
 		}
 				
-		private string BoolToYesNo(bool value)
+		private static string BoolToYesNo(bool value)
 		{
 		    return value ? Language.strYes : Language.strNo;
 		}
@@ -173,24 +166,13 @@ namespace mRemoteNG.Tools
         #endregion
 				
         #region Public Methods
-		public Scanner(IPAddress ipAddress1, IPAddress ipAddress2)
+	
+		public Scanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2)
 		{
-			IPAddress ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
-			IPAddress ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
-					
-			_ports.Clear();
-            _ports.AddRange(new[] { ScanHost.SSHPort, ScanHost.TelnetPort, ScanHost.HTTPPort, ScanHost.HTTPSPort, ScanHost.RloginPort, ScanHost.RDPPort, ScanHost.VNCPort });
-					
-			_ipAddresses.Clear();
-			_ipAddresses.AddRange(IpAddressArrayFromRange(ipAddressStart, ipAddressEnd));
-					
-			_scannedHosts.Clear();
-		}
-		
-		public Scanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2) : this(ipAddress1, ipAddress2)
-		{
-					
-			int portStart = Math.Min(port1, port2);
+            IPAddress ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
+            IPAddress ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);
+
+            int portStart = Math.Min(port1, port2);
 			int portEnd = Math.Max(port1, port2);
 					
 			_ports.Clear();
@@ -198,7 +180,13 @@ namespace mRemoteNG.Tools
 			{
 				_ports.Add(port);
 			}
-		}
+            _ports.AddRange(new[] { ScanHost.SSHPort, ScanHost.TelnetPort, ScanHost.HTTPPort, ScanHost.HTTPSPort, ScanHost.RloginPort, ScanHost.RDPPort, ScanHost.VNCPort });
+
+            _ipAddresses.Clear();
+            _ipAddresses.AddRange(IpAddressArrayFromRange(ipAddressStart, ipAddressEnd));
+
+            _scannedHosts.Clear();
+        }
 				
 		public void StartScan()
 		{
@@ -299,7 +287,7 @@ namespace mRemoteNG.Tools
 
                 foreach (int port in _ports)
                 {
-                    bool isPortOpen = false;
+                    bool isPortOpen;
                     try
                     {
                         System.Net.Sockets.TcpClient tcpClient = new System.Net.Sockets.TcpClient(ip, port);

@@ -407,8 +407,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + ex.Message);
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHTransferFailed + Environment.NewLine + ex.StackTrace, true);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strSSHTransferFailed, ex);
                 st?.Disconnect();
                 st?.Dispose();
             }
@@ -459,8 +458,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHStartTransferBG + Environment.NewLine + ex.Message);
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strSSHStartTransferBG + Environment.NewLine + ex.StackTrace, true);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strSSHStartTransferBG, ex);
                 st?.Disconnect();
                 st?.Dispose();
             }

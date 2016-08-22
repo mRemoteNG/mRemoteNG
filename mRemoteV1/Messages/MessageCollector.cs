@@ -37,13 +37,13 @@ namespace mRemoteNG.Messages
             }
 
             if (Settings.Default.SwitchToMCOnInformation && nMsg.MsgClass == MessageClass.InformationMsg)
-                AddInfoMessage(OnlyLog, nMsg);
+                AddInfoMessage(nMsg);
             
             if (Settings.Default.SwitchToMCOnWarning && nMsg.MsgClass == MessageClass.WarningMsg)
-                AddWarningMessage(OnlyLog, nMsg);
+                AddWarningMessage(nMsg);
 
             if (Settings.Default.SwitchToMCOnError && nMsg.MsgClass == MessageClass.ErrorMsg)
-                AddErrorMessage(OnlyLog, nMsg);
+                AddErrorMessage(nMsg);
 
             if (!OnlyLog)
             {
@@ -57,21 +57,21 @@ namespace mRemoteNG.Messages
             }
         }
 
-        private void AddInfoMessage(bool OnlyLog, Message nMsg)
+        private void AddInfoMessage(Message nMsg)
         {
             Debug.Print("Info: " + nMsg.MsgText);
             if (Settings.Default.WriteLogFile)
                 Logger.Instance.Info(nMsg.MsgText);
         }
 
-        private void AddWarningMessage(bool OnlyLog, Message nMsg)
+        private void AddWarningMessage(Message nMsg)
         {
             Debug.Print("Warning: " + nMsg.MsgText);
             if (Settings.Default.WriteLogFile)
                 Logger.Instance.Warn(nMsg.MsgText);
         }
 
-        private void AddErrorMessage(bool OnlyLog, Message nMsg)
+        private void AddErrorMessage(Message nMsg)
         {
             Debug.Print("Error: " + nMsg.MsgText);
             Logger.Instance.Error(nMsg.MsgText);
@@ -86,10 +86,12 @@ namespace mRemoteNG.Messages
 
         private static ListViewItem BuildListViewItem(Message nMsg)
         {
-            ListViewItem lvItem = new ListViewItem();
-            lvItem.ImageIndex = Convert.ToInt32(nMsg.MsgClass);
-            lvItem.Text = nMsg.MsgText.Replace(Environment.NewLine, "  ");
-            lvItem.Tag = nMsg;
+            ListViewItem lvItem = new ListViewItem
+            {
+                ImageIndex = Convert.ToInt32(nMsg.MsgClass),
+                Text = nMsg.MsgText.Replace(Environment.NewLine, "  "),
+                Tag = nMsg
+            };
             return lvItem;
         }
 
@@ -97,14 +99,21 @@ namespace mRemoteNG.Messages
         {
             AddMessage(msgClass, message + Environment.NewLine + Tools.MiscTools.GetExceptionMessageRecursive(ex), logOnly);
         }
+
+        public void AddExceptionStackTrace(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = false)
+        {
+            AddMessage(msgClass, message + Environment.NewLine + ex.StackTrace, logOnly);
+        }
         #endregion
 
         #region Private Methods
         private void CreateTimer()
         {
-            _ECTimer = new Timer();
-            _ECTimer.Enabled = false;
-            _ECTimer.Interval = 300;
+            _ECTimer = new Timer
+            {
+                Enabled = false,
+                Interval = 300
+            };
             _ECTimer.Tick += SwitchTimerTick;
         }
 
