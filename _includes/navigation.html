@@ -26,20 +26,11 @@
                 <li role='presentation' {% if page.url == '/contribute' %}class='active'{% endif %}>
                     <a href='/contribute'>Contribute</a>
                 </li>
-                <li role='presentation' {% if page.url == '/contribute2' %}class='active'{% endif %} title='beta'>
-                    <a href='/contribute2'>Contribute <span class='label label-warning'>v2</span></a>
-                </li>
                 <li role='presentation'>
-                    <a href='http://forum.mremoteng.org'>Forum</a>
-                </li>
-                <li role='presentation'>
-                    <a href='{{ site.github.issues_url }}'>Report a bug</a>
+                    <a href='https://mremoteng.atlassian.net/wiki/display/MR/Report+a+Bug'>Report a bug</a>
                 </li>
                 <li role='presentation'>
                     <a href='https://mremoteng.atlassian.net/wiki/display/MR/Request+a+Feature'>Request a Feature</a>
-                </li>
-                <li role='presentation' {% if page.url == '/video' %}class='active'{% endif %}>
-                    <a href='/video'>Quick Look Video</a>
                 </li>
                 <li role='presentation'>
                     <a href='{{ site.github.repository_url }}'>Source Code</a>
