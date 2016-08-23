@@ -127,9 +127,11 @@
     <Compile Include="App\Update\UpdateFile.cs" />
     <Compile Include="App\Update\UpdateInfo.cs" />
     <Compile Include="App\Windows.cs" />
+    <Compile Include="Config\FileDataProviderWithBackup.cs" />
     <Compile Include="Config\Connections\ConnectionsDecryptor.cs" />
     <Compile Include="Config\Connections\ConnectionsLoader.cs" />
     <Compile Include="Config\Connections\ConnectionsSaver.cs" />
+    <Compile Include="Config\FileDataProviderWithRollingBackup.cs" />
     <Compile Include="Config\IDeserializer.cs" />
     <Compile Include="Config\ISerializer.cs" />
     <Compile Include="Config\Connections\XmlConnectionsSerializer.cs" />

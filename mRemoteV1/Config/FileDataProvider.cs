@@ -1,4 +1,6 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
+using mRemoteNG.App;
 
 namespace mRemoteNG.Config
 {
@@ -11,14 +13,43 @@ namespace mRemoteNG.Config
             FilePath = filePath;
         }
 
-        public string Load()
+        public virtual string Load()
         {
-            return File.ReadAllText(FilePath);
+            var fileContents = "";
+            try
+            {
+                fileContents = File.ReadAllText(FilePath);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace($"Failed to load file {FilePath}", ex);
+            }
+            return fileContents;
         }
 
-        public void Save(string content)
+        public virtual void Save(string content)
         {
-            File.WriteAllText(FilePath, content);
+            try
+            {
+                File.WriteAllText(FilePath, content);
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace($"Failed to save file {FilePath}", ex);
+            }
+        }
+
+        public virtual void MoveTo(string newPath)
+        {
+            try
+            {
+                File.Move(FilePath, newPath);
+                FilePath = newPath;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace($"Failed to move file {FilePath} to {newPath}", ex);
+            }
         }
     }
 }
