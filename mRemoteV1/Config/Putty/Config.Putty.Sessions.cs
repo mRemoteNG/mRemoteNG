@@ -25,12 +25,12 @@ namespace mRemoteNG.Config.Putty
 				return ;
 			}
 				
-			foreach (Provider provider in Providers)
+			foreach (var provider in Providers)
 			{
-				TreeNode rootTreeNode = provider.RootTreeNode;
-				bool inUpdate = false;
+				var rootTreeNode = provider.RootTreeNode;
+				var inUpdate = false;
 					
-				List<ConnectionInfo> savedSessions = new List<ConnectionInfo>(provider.GetSessions());
+				var savedSessions = new List<ConnectionInfo>(provider.GetSessions());
 				if (!IsProviderEnabled(provider) || savedSessions == null || savedSessions.Count == 0)
 				{
 					if (rootTreeNode != null && treeView.Nodes.Contains(rootTreeNode))
@@ -52,11 +52,11 @@ namespace mRemoteNG.Config.Putty
 					treeView.Nodes.Add(rootTreeNode);
 				}
 					
-				List<TreeNode> newTreeNodes = new List<TreeNode>();
+				var newTreeNodes = new List<TreeNode>();
 				foreach (PuttySessionInfo sessionInfo in savedSessions)
 				{
-					TreeNode treeNode = default(TreeNode);
-					bool isNewNode = false;
+                    TreeNode treeNode;
+                    bool isNewNode;
 					if (rootTreeNode.Nodes.ContainsKey(sessionInfo.Name))
 					{
 						treeNode = rootTreeNode.Nodes[sessionInfo.Name];
@@ -89,18 +89,16 @@ namespace mRemoteNG.Config.Putty
 					
 				foreach (TreeNode treeNode in rootTreeNode.Nodes)
 				{
-					if (!savedSessions.Contains((ConnectionInfo)treeNode.Tag))
-					{
-						if (!inUpdate)
-						{
-							treeView.BeginUpdate();
-							inUpdate = true;
-						}
-						rootTreeNode.Nodes.Remove(treeNode);
-					}
+				    if (savedSessions.Contains((ConnectionInfo) treeNode.Tag)) continue;
+				    if (!inUpdate)
+				    {
+				        treeView.BeginUpdate();
+				        inUpdate = true;
+				    }
+				    rootTreeNode.Nodes.Remove(treeNode);
 				}
 					
-				if (!(newTreeNodes.Count == 0))
+				if (newTreeNodes.Count != 0)
 				{
 					if (!inUpdate)
 					{
@@ -109,19 +107,17 @@ namespace mRemoteNG.Config.Putty
 					}
 					rootTreeNode.Nodes.AddRange(newTreeNodes.ToArray());
 				}
-					
-				if (inUpdate)
-				{
-                    ConnectionTree.Sort(rootTreeNode, SortOrder.Ascending);
-					rootTreeNode.Expand();
-					treeView.EndUpdate();
-				}
+
+			    if (!inUpdate) continue;
+			    ConnectionTree.Sort(rootTreeNode, SortOrder.Ascending);
+			    rootTreeNode.Expand();
+			    treeView.EndUpdate();
 			}
 		}
 			
 		public static void StartWatcher()
 		{
-			foreach (Provider provider in Providers)
+			foreach (var provider in Providers)
 			{
 				provider.StartWatcher();
 				provider.SessionChanged += SessionChanged;
@@ -130,7 +126,7 @@ namespace mRemoteNG.Config.Putty
 			
 		public static void StopWatcher()
 		{
-			foreach (Provider provider in Providers)
+			foreach (var provider in Providers)
 			{
 				provider.StopWatcher();
 				provider.SessionChanged -= SessionChanged;
@@ -159,15 +155,13 @@ namespace mRemoteNG.Config.Putty
 			
 		private static void AddProviders()
 		{
-			_providers = new List<Provider>();
-			_providers.Add(new RegistryProvider());
-			_providers.Add(new XmingProvider());
+		    _providers = new List<Provider> {new RegistryProvider(), new XmingProvider()};
 		}
 			
 		private static string[] GetSessionNames(bool raw = false)
 		{
-			List<string> sessionNames = new List<string>();
-			foreach (Provider provider in Providers)
+			var sessionNames = new List<string>();
+			foreach (var provider in Providers)
 			{
 				if (!IsProviderEnabled(provider))
 				{
@@ -180,20 +174,16 @@ namespace mRemoteNG.Config.Putty
 			
 		private static bool IsProviderEnabled(Provider provider)
 		{
-			bool enabled = true;
+            var enabled = true;
 			if (PuttyTypeDetector.GetPuttyType() == PuttyTypeDetector.PuttyType.Xming)
 			{
 				if ((provider) is RegistryProvider)
-				{
 					enabled = false;
-				}
 			}
 			else
 			{
 				if ((provider) is XmingProvider)
-				{
 					enabled = false;
-				}
 			}
 			return enabled;
 		}
@@ -202,21 +192,14 @@ namespace mRemoteNG.Config.Putty
         #region Public Classes
         public class SessionList : StringConverter
         {
-				
-            public static string[] Names
-	        {
-		        get
-		        {
-			        return GetSessionNames();
-		        }
-	        }
-				
-	        public override System.ComponentModel.TypeConverter.StandardValuesCollection GetStandardValues(System.ComponentModel.ITypeDescriptorContext context)
+            public static string[] Names => GetSessionNames();
+
+            public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
 	        {
 		        return new StandardValuesCollection(Names);
 	        }
 				
-	        public override bool GetStandardValuesExclusive(System.ComponentModel.ITypeDescriptorContext context)
+	        public override bool GetStandardValuesExclusive(ITypeDescriptorContext context)
 	        {
 		        return true;
 	        }
