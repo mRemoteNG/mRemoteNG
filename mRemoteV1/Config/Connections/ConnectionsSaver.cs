@@ -567,24 +567,10 @@ namespace mRemoteNG.Config.Connections
 				};
 			    var xml = xmlConnectionsSerializer.Serialize(ConnectionTreeModel);
 						
-				var tempFileName = Path.GetTempFileName();
-                var fileDataProvider = new FileDataProvider(tempFileName);
+				//var tempFileName = Path.GetTempFileName();
+                var fileDataProvider = new FileDataProviderWithBackup(ConnectionFileName);
                 fileDataProvider.Save(xml);
-				if (File.Exists(ConnectionFileName))
-				{
-					if (Export)
-					{
-						File.Delete(ConnectionFileName);
-					}
-					else
-					{
-						var backupFileName = ConnectionFileName +".backup";
-						File.Delete(backupFileName);
-						File.Move(ConnectionFileName, backupFileName);
-					}
-				}
-				File.Move(tempFileName, ConnectionFileName);
-			}
+            }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionStackTrace("SaveToXml failed", ex);
