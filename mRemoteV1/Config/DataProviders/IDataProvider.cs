@@ -1,5 +1,5 @@
 ﻿
-namespace mRemoteNG.Config
+namespace mRemoteNG.Config.DataProviders
 {
     public interface IDataProvider
     {

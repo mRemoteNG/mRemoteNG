@@ -1,5 +1,6 @@
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.UI;

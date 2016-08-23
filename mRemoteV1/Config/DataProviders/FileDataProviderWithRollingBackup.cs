@@ -1,8 +1,7 @@
 ﻿using System;
 using mRemoteNG.App;
 
-
-namespace mRemoteNG.Config
+namespace mRemoteNG.Config.DataProviders
 {
     public class FileDataProviderWithRollingBackup : FileDataProviderWithBackup
     {

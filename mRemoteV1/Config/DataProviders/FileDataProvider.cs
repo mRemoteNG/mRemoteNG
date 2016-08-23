@@ -2,7 +2,7 @@
 using System.IO;
 using mRemoteNG.App;
 
-namespace mRemoteNG.Config
+namespace mRemoteNG.Config.DataProviders
 {
     public class FileDataProvider : IDataProvider
     {

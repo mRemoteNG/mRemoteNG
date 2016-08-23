@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
