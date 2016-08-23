@@ -32,10 +32,10 @@ namespace mRemoteNG.Config.Connections
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
             var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
-            return SaveToXml(rootNode);
+            return SerializeToXml(rootNode);
         }
 
-        private string SaveToXml(RootNodeInfo rootNodeInfo)
+        private string SerializeToXml(RootNodeInfo rootNodeInfo)
         {
             var xml = "";
             try

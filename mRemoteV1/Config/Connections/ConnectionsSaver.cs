@@ -568,7 +568,6 @@ namespace mRemoteNG.Config.Connections
 				};
 			    var xml = xmlConnectionsSerializer.Serialize(ConnectionTreeModel);
 						
-				//var tempFileName = Path.GetTempFileName();
                 var fileDataProvider = new FileDataProviderWithBackup(ConnectionFileName);
                 fileDataProvider.Save(xml);
             }
