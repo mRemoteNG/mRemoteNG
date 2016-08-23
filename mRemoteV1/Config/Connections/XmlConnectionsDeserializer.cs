@@ -22,7 +22,7 @@ using mRemoteNG.UI.TaskDialog;
 
 namespace mRemoteNG.Config.Connections
 {
-    public class XmlConnectionsDeserializer
+    public class XmlConnectionsDeserializer : IDeserializer
     {
         private XmlDocument _xmlDocument;
         private double _confVersion;
@@ -78,7 +78,12 @@ namespace mRemoteNG.Config.Connections
             throw (new Exception($"Incompatible connection file format (file format version {_confVersion})."));
         }
 
-        public ConnectionTreeModel Deserialize(bool import = false)
+        public ConnectionTreeModel Deserialize()
+        {
+            return Deserialize(false);
+        }
+
+        public ConnectionTreeModel Deserialize(bool import)
         {
             try
             {
