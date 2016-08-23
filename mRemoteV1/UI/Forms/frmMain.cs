@@ -153,7 +153,6 @@ namespace mRemoteNG.UI.Forms
 
             Windows.treePanel.Focus();
             ConnectionTree.TreeView = Windows.treeForm.tvConnections;
-            Windows.treeForm.ExpandPreviouslyOpenedFolders();
 
             Config.Putty.Sessions.StartWatcher();
 			if (Settings.Default.StartupComponentsCheck)
@@ -167,7 +166,11 @@ namespace mRemoteNG.UI.Forms
 			AddSysMenuItems();
 			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
             Opacity = 1;
-		}
+
+            Windows.treeForm.ExpandPreviouslyOpenedFolders();
+            Windows.treeForm.EnsureRootNodeVisible();
+            Windows.treeForm.OpenConnectionsFromLastSession();
+        }
 
         private void ApplySpecialSettingsForPortableVersion()
         {

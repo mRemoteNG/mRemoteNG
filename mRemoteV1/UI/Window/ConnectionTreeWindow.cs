@@ -94,10 +94,12 @@ namespace mRemoteNG.UI.Window
 			DockPnl = panel;
 			InitializeComponent();
 			FillImageList();
-					
-			DescriptionTooltip = new ToolTip();
-			DescriptionTooltip.InitialDelay = 300;
-			DescriptionTooltip.ReshowDelay = 0;
+
+		    DescriptionTooltip = new ToolTip
+		    {
+		        InitialDelay = 300,
+		        ReshowDelay = 0
+		    };
 		}
 				
 		public void InitialRefresh()
@@ -113,6 +115,22 @@ namespace mRemoteNG.UI.Window
                     contI.TreeNode.Expand();
             }
         }
+
+        public void OpenConnectionsFromLastSession()
+        {
+            if (!Settings.Default.OpenConsFromLastSession || Settings.Default.NoReconnect) return;
+            foreach (ConnectionInfo conI in Runtime.ConnectionList)
+            {
+                if (conI.PleaseConnect)
+                    Runtime.OpenConnection(conI);
+            }
+        }
+
+	    public void EnsureRootNodeVisible()
+	    {
+	        var rootNode = tvConnections.Nodes[0];
+            rootNode.EnsureVisible();
+	    }
         #endregion
 
         #region Public Properties

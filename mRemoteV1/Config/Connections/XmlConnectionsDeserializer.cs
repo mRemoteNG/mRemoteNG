@@ -85,7 +85,6 @@ namespace mRemoteNG.Config.Connections
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = false;
 
-                // SECTION 2. Initialize the treeview control.
                 var rootInfo = InitializeRootNode();
                 var connectionTreeModel = new ConnectionTreeModel();
                 connectionTreeModel.AddRootNode(rootInfo);
@@ -107,22 +106,10 @@ namespace mRemoteNG.Config.Connections
                     return null;
                 }
 
-                //if (!IsExportFile())
-                //{
-                //    RootTreeNode.ImageIndex = (int)TreeImageType.Root;
-                //    RootTreeNode.SelectedImageIndex = (int)TreeImageType.Root;
-                //}
-
-                // SECTION 3. Populate the TreeView with the DOM nodes.
-                //PopulateTreeview();
                 AddNodesFromXmlRecursive(_xmlDocument.DocumentElement, rootInfo);
-                //RootTreeNode.EnsureVisible();
                 //Windows.treeForm.InitialRefresh();
                 //SetSelectedNode(RootTreeNode);
 
-                //open connections from last mremote session
-                //OpenConnectionsFromLastSession();
-                
                 if (!import)
                     Runtime.IsConnectionsFileLoaded = true;
 
@@ -489,16 +476,6 @@ namespace mRemoteNG.Config.Connections
                 return;
             }
             Windows.treeForm.tvConnections.SelectedNode = treeNode;
-        }
-
-        private void OpenConnectionsFromLastSession()
-        {
-            if (!mRemoteNG.Settings.Default.OpenConsFromLastSession || mRemoteNG.Settings.Default.NoReconnect) return;
-            foreach (ConnectionInfo conI in ConnectionList)
-            {
-                if (conI.PleaseConnect)
-                    Runtime.OpenConnection(conI);
-            }
         }
     }
 }
