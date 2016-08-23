@@ -1,4 +1,3 @@
-using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
@@ -59,7 +58,8 @@ namespace mRemoteNG.Config.Connections
                 var connectionTreeViewBuilder = new ConnectionTreeViewBuilder(connectionTreeModel);
                 connectionTreeViewBuilder.Build();
                 connectionTreeViewBuilder.AppendTo(Windows.treeForm.tvConnections);
-            }
+			    Runtime.ConnectionTreeModel = connectionTreeModel;
+			}
 			
 			frmMain.Default.AreWeUsingSqlServerForSavingConnections = UseDatabase;
 			frmMain.Default.ConnectionsFileName = ConnectionFileName;

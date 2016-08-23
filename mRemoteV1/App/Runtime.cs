@@ -31,49 +31,22 @@ namespace mRemoteNG.App
     {
         #region Public Properties
         public static ConnectionList ConnectionList { get; set; }
-
         public static ConnectionList PreviousConnectionList { get; set; }
-
         public static ContainerList ContainerList { get; set; }
-
         public static ContainerList PreviousContainerList { get; set; }
-
         public static CredentialList CredentialList { get; set; }
-
         public static CredentialList PreviousCredentialList { get; set; }
-
         public static WindowList WindowList { get; set; }
-
         public static MessageCollector MessageCollector { get; set; }
-
         public static Tools.Controls.NotificationAreaIcon NotificationAreaIcon { get; set; }
-
         public static bool IsConnectionsFileLoaded { get; set; }
-
         public static SqlConnectionsProvider SQLConnProvider { get; set; }
-
-        /*
-        public static System.Timers.Timer TimerSqlWatcher
-		{
-			get { return _timerSqlWatcher; }
-			set
-			{
-				_timerSqlWatcher = value;
-				_timerSqlWatcher.Elapsed += tmrSqlWatcher_Elapsed;
-			}
-		}
-         */
-
         public static DateTime LastSqlUpdate { get; set; }
-
         public static string LastSelected { get; set; }
-
         public static ConnectionInfo DefaultConnection { get; set; } = DefaultConnectionInfo.Instance;
-
         public static ConnectionInfoInheritance DefaultInheritance { get; set; }
-
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
-
+        public static ConnectionTreeModel ConnectionTreeModel { get; set; }
         #endregion
 
         #region Panels
@@ -509,51 +482,41 @@ namespace mRemoteNG.App
         public static void SaveConnections(bool Update = false)
         {
             if (!IsConnectionsFileLoaded)
-            {
                 return;
-            }
 
             try
             {
                 if (Update && Settings.Default.UseSQLServer == false)
-                {
                     return;
-                }
 
-                if (SQLConnProvider != null)
-                {
-                    SQLConnProvider.Disable();
-                }
+                SQLConnProvider?.Disable();
 
-                ConnectionsSaver conS = new ConnectionsSaver();
+                var connectionsSaver = new ConnectionsSaver();
 
                 if (!Settings.Default.UseSQLServer)
-                {
-                    conS.ConnectionFileName = GetStartupConnectionFileName();
-                }
+                    connectionsSaver.ConnectionFileName = GetStartupConnectionFileName();
 
-                conS.ConnectionList = ConnectionList;
-                conS.ContainerList = ContainerList;
-                conS.Export = false;
-                conS.SaveSecurity = new Security.Save(false);
-                conS.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
+                connectionsSaver.ConnectionList = ConnectionList;
+                connectionsSaver.ContainerList = ContainerList;
+                connectionsSaver.Export = false;
+                connectionsSaver.SaveSecurity = new Security.Save(false);
+                connectionsSaver.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
+                connectionsSaver.ConnectionTreeModel = ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)
                 {
-                    conS.SaveFormat = ConnectionsSaver.Format.SQL;
-                    conS.SQLHost = Convert.ToString(Settings.Default.SQLHost);
-                    conS.SQLDatabaseName = Convert.ToString(Settings.Default.SQLDatabaseName);
-                    conS.SQLUsername = Convert.ToString(Settings.Default.SQLUser);
+                    connectionsSaver.SaveFormat = ConnectionsSaver.Format.SQL;
+                    connectionsSaver.SQLHost = Convert.ToString(Settings.Default.SQLHost);
+                    connectionsSaver.SQLDatabaseName = Convert.ToString(Settings.Default.SQLDatabaseName);
+                    connectionsSaver.SQLUsername = Convert.ToString(Settings.Default.SQLUser);
                     var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                    conS.SQLPassword = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
+                    connectionsSaver.SQLPassword = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
                 }
 
-                conS.SaveConnections();
+                connectionsSaver.SaveConnections();
 
                 if (Settings.Default.UseSQLServer)
-                {
                     LastSqlUpdate = DateTime.Now;
-                }
             }
             catch (Exception ex)
             {
@@ -561,23 +524,17 @@ namespace mRemoteNG.App
             }
             finally
             {
-                if (SQLConnProvider != null)
-                {
-                    SQLConnProvider.Enable();
-                }
+                SQLConnProvider?.Enable();
             }
         }
 
         public static void SaveConnectionsAs()
         {
-            ConnectionsSaver connectionsSave = new ConnectionsSaver();
+            var connectionsSave = new ConnectionsSaver();
 
             try
             {
-                if (SQLConnProvider != null)
-                {
-                    SQLConnProvider.Disable();
-                }
+                SQLConnProvider?.Disable();
 
                 using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
@@ -586,16 +543,14 @@ namespace mRemoteNG.App
                     saveFileDialog.FileName = ConnectionsFileInfo.DefaultConnectionsFile;
                     saveFileDialog.OverwritePrompt = true;
 
-                    List<string> fileTypes = new List<string>();
+                    var fileTypes = new List<string>();
                     fileTypes.AddRange(new[] { Language.strFiltermRemoteXML, "*.xml" });
                     fileTypes.AddRange(new[] { Language.strFilterAll, "*.*" });
 
                     saveFileDialog.Filter = string.Join("|", fileTypes.ToArray());
 
-                    if (!(saveFileDialog.ShowDialog(frmMain.Default) == DialogResult.OK))
-                    {
+                    if (saveFileDialog.ShowDialog(frmMain.Default) != DialogResult.OK)
                         return;
-                    }
 
                     connectionsSave.SaveFormat = ConnectionsSaver.Format.mRXML;
                     connectionsSave.ConnectionFileName = saveFileDialog.FileName;
@@ -604,6 +559,7 @@ namespace mRemoteNG.App
                     connectionsSave.ConnectionList = ConnectionList;
                     connectionsSave.ContainerList = ContainerList;
                     connectionsSave.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
+                    connectionsSave.ConnectionTreeModel = ConnectionTreeModel;
 
                     connectionsSave.SaveConnections();
 
@@ -625,10 +581,7 @@ namespace mRemoteNG.App
             }
             finally
             {
-                if (SQLConnProvider != null)
-                {
-                    SQLConnProvider.Enable();
-                }
+                SQLConnProvider?.Enable();
             }
         }
         #endregion

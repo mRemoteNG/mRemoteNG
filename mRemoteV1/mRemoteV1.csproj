@@ -130,6 +130,9 @@
     <Compile Include="Config\Connections\ConnectionsDecryptor.cs" />
     <Compile Include="Config\Connections\ConnectionsLoader.cs" />
     <Compile Include="Config\Connections\ConnectionsSaver.cs" />
+    <Compile Include="Config\IDeserializer.cs" />
+    <Compile Include="Config\ISerializer.cs" />
+    <Compile Include="Config\Connections\XmlConnectionsSerializer.cs" />
     <Compile Include="Config\FileDataProvider.cs" />
     <Compile Include="Config\IDataProvider.cs" />
     <Compile Include="Config\Connections\SqlCommandBuilder.cs" />
