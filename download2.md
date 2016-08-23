@@ -3,7 +3,7 @@ title: Download v2
 permalink: /download2
 ---
 
-<div class='alert alert-warning'>Beta</div>
+<div class='alert alert-warning'><h1>Beta</h1></div>
 
 Former mRemote users, please follow [these instructions](https://github.com/mRemoteNG/mRemoteNG/wiki/mRemote-Settings-Migration) to migrate your settings from mRemote to mRemoteNG.
 

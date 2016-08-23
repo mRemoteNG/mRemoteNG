@@ -3,27 +3,58 @@ title: Contribute v2
 permalink: /contribute2
 ---
 
-<div class='alert alert-warning'>Beta</div>
-
-If you find mRemoteNG useful and would like to express your appreciation, please click the button below to be securely make a contribution with Stripe.
-<form action='/charge' method='POST'>
+<div class='alert alert-warning'>
+<h1>Beta</h1>
+<p>Since Stripe requires https, and custom domains on GitHub pages don't natively support https, CloudFare (<a href='https://blog.cloudflare.com/secure-and-fast-github-pages-with-cloudflare/' targe='_blank'>instructions</a>) will be required.  That means that CloudFlare will also have to take over DNS roles, so it's something to think about.</p> 
+</div>
+<p>Donations, while never mandatory, are always appreciated and help continue the development of mRemoteNG.  We use <a href='https://stripe.com' targe='_blank'>Stripe</a> for credit card and Bitcoin donations.  We never see any personal information except that which is defined in <a href='https://stripe.com/privacy' target='_blank'>Stripe's Privacy Policy</a></p>
+<script src='https://checkout.stripe.com/checkout.js'></script>
+<script>
+    $(document).ready(function() {
+        var handler = StripeCheckout.configure({
+            'bitcoin': true,
+            'key': 'pk_test_tR0k2ZodvMmy2vVnSbdfDv6b',
+            'image': '/favicon/256.png',
+            'locale': 'auto',
+            'token': function(token) {
+                $('#amount, #donateButton').prop('disabled', true);
+                $('#thankYou').removeClass('hidden');
+            }
+        });
+        $('#amount').on('keyup', function(event) {
+            if (this.value == '') {
+                $('#donateButton').prop('disabled', true)
+                .addClass('disabled');
+            } else {
+                $('#donateButton').prop('disabled', false)
+                .removeClass('disabled');
+            }
+        });
+        $('#donateButton').on('click', function(event) {
+            handler.open({
+                'name': 'mRemoteNG',
+                'description': 'Donation to mRemoteNG development',
+                'zipCode': true,
+                'amount': $('#amount').val() * 100
+            });
+            e.preventDefault();
+        });
+        $(window).on('popstate', function(e) {
+            handler.close();
+        });
+    });
+</script>
+<div class='form-inline' id='donateForm'>
     <div class='form-group'>
         <div class='input-group'>
             <span class='input-group-addon'>$</span>
             <input id='amount' type='number' class='form-control' aria-label='Amount'>
         </div>
+        <button class='form-control btn btn-default' id='donateButton' disabled>Donate</button>
     </div>
-    <script
-    src='https://checkout.stripe.com/checkout.js' class='stripe-button'
-    data-key=''
-    data-name='mRemoteNG'
-    data-description='Donation'
-    data-image=''
-    data-label='Donate'
-    data-bitcoin='true'
-    data-locale='auto'
-    data-zip-code='true'>
-</script>
-</form>
-
-The mRemoteNG Project is **NOT** considered a non-profit organization and contributions are **NOT** tax deductible.
+</div>
+<div class='alert alert-success text-center hidden' id='thankYou'>
+<p>Thank you very much for your donation, it is truly appreciated!</p>
+</div>
+<p>If you'd rather contribute with code, check out the source code at <a href='{{ site.github.repository_url }}' target='_blank'>GitHub</a> and submit some pull requests.</p>
+<p>The mRemoteNG Project is <strong>NOT</strong> considered a non-profit organization and contributions are <strong>NOT</strong> tax deductible.</p>
