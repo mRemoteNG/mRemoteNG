@@ -31,7 +31,6 @@ namespace mRemoteNG.Config.Connections
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
 
-        //public TreeNode RootTreeNode { get; set; }
         public ConnectionList ConnectionList { get; set; }
         public ContainerList ContainerList { get; set; }
 
@@ -459,15 +458,6 @@ namespace mRemoteNG.Config.Connections
                 Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strGetConnectionInfoFromXmlFailed, connectionInfo.Name, ConnectionFileName, ex.Message));
             }
             return connectionInfo;
-        }
-
-        private void ExpandPreviouslyOpenedFolders()
-        {
-            foreach (ContainerInfo contI in ContainerList)
-            {
-                if (contI.IsExpanded)
-                    contI.TreeNode.Expand();
-            }
         }
 
         private bool IsExportFile()

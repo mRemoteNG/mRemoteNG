@@ -153,6 +153,7 @@ namespace mRemoteNG.UI.Forms
 
             Windows.treePanel.Focus();
             ConnectionTree.TreeView = Windows.treeForm.tvConnections;
+            Windows.treeForm.ExpandPreviouslyOpenedFolders();
 
             Config.Putty.Sessions.StartWatcher();
 			if (Settings.Default.StartupComponentsCheck)

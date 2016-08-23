@@ -104,10 +104,19 @@ namespace mRemoteNG.UI.Window
 		{
 			tvConnections_AfterSelect(tvConnections, new TreeViewEventArgs(tvConnections.SelectedNode, TreeViewAction.ByMouse));
 		}
+
+        public void ExpandPreviouslyOpenedFolders()
+        {
+            foreach (ContainerInfo contI in Runtime.ContainerList)
+            {
+                if (contI.IsExpanded)
+                    contI.TreeNode.Expand();
+            }
+        }
         #endregion
-		
+
         #region Public Properties
-		public ToolTip DescriptionTooltip {get; set;}
+        public ToolTip DescriptionTooltip {get; set;}
         #endregion
 		
         #region Private Methods
