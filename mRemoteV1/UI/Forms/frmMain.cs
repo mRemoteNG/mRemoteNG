@@ -638,7 +638,7 @@ namespace mRemoteNG.UI.Forms
 
         private static void mMenFileExport_Click(object sender, EventArgs e)
 		{
-            Export.ExportToFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode);
+            Export.ExportToFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode, Runtime.ConnectionTreeModel);
 		}
 
         private static void mMenFileExit_Click(object sender, EventArgs e)
