@@ -74,13 +74,13 @@ namespace mRemoteNG.Config.Connections
 					SaveToSQL();
 					break;
 				case Format.mRCSV:
-			        SaveToCsv();
+			        SaveToMremotengFormattedCsv();
                     break;
 				case Format.vRDvRE:
 					SaveToVRE();
 					break;
 				case Format.vRDCSV:
-					SaveTovRDCSV();
+					SaveToRemoteDesktop2008FormattedCsv();
 					break;
 				default:
 					SaveToXml();
@@ -573,7 +573,7 @@ namespace mRemoteNG.Config.Connections
             }
 		}
 				
-		private void SaveToCsv()
+		private void SaveToMremotengFormattedCsv()
 		{
             var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveSecurity = SaveSecurity };
 		    var dataProvider = new FileDataProvider(ConnectionFileName);
@@ -582,60 +582,13 @@ namespace mRemoteNG.Config.Connections
         }
 
         #region vRD CSV
-
-	    private StreamWriter csvWr;
-        private void SaveTovRDCSV()
-		{
-			if (Runtime.IsConnectionsFileLoaded == false)
-			{
-				return;
-			}
-		    var tN = (TreeNode)RootTreeNode.Clone();
-		    var tNC = tN.Nodes;
-            csvWr = new StreamWriter(ConnectionFileName);
-			SaveNodevRDCSV(tNC);
-			csvWr.Close();
-		}
-				
-		private void SaveNodevRDCSV(TreeNodeCollection tNC)
-		{
-			foreach (TreeNode node in tNC)
-			{
-				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection)
-				{
-                    ConnectionInfo curConI = (ConnectionInfo)node.Tag;
-							
-					if (curConI.Protocol == ProtocolType.RDP)
-					{
-						WritevRDCSVLine(curConI);
-					}
-				}
-				else if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container)
-				{
-					SaveNodevRDCSV(node.Nodes);
-				}
-			}
-		}
-				
-		private void WritevRDCSVLine(ConnectionInfo con)
-		{
-			string nodePath = con.TreeNode.FullPath;
-					
-			int firstSlash = nodePath.IndexOf("\\", StringComparison.Ordinal);
-			nodePath = nodePath.Remove(0, firstSlash + 1);
-			int lastSlash = nodePath.LastIndexOf("\\", StringComparison.Ordinal);
-					
-			if (lastSlash > 0)
-			{
-				nodePath = nodePath.Remove(lastSlash);
-			}
-			else
-			{
-				nodePath = "";
-			}
-					
-			csvWr.WriteLine(con.Name + ";" + con.Hostname + ";" + con.MacAddress + ";;" + Convert.ToString(con.Port) + ";" + Convert.ToString(con.UseConsoleSession) + ";" + nodePath);
-		}
+        private void SaveToRemoteDesktop2008FormattedCsv()
+        {
+            var csvSerializer = new CsvConnectionsSerializerRemoteDesktop2008Format();
+            var dataProvider = new FileDataProvider(ConnectionFileName);
+            var csvContent = csvSerializer.Serialize(ConnectionTreeModel);
+            dataProvider.Save(csvContent);
+        }
         #endregion
 				
         #region vRD VRE
