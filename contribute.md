@@ -9,7 +9,7 @@ If you find mRemoteNG useful and would like to express your appreciation, please
 
 You may also make a contribution by sending [Bitcoins](http://www.bitcoin.org/) to 16fUnHUM3k7W9Fvpc6dug7TAdfeGEcLbSg.
 
-![Bitcoin QR Code](http://www.mremoteng.org/_/rsrc/1462915613176/contribute/tIT6eoF.png)
+![Bitcoin QR Code](16fUnHUM3k7W9Fvpc6dug7TAdfeGEcLbSg.png)
 
 
 The mRemoteNG Project is **NOT** considered a non-profit organization and contributions are **NOT** tax deductible.
