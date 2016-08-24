@@ -578,9 +578,11 @@ namespace mRemoteNG.Config.Connections
             var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveSecurity = SaveSecurity };
             csvConnectionsSerializer.Serialize(ConnectionTreeModel);
         }
-				
+
         #region vRD CSV
-		private void SaveTovRDCSV()
+
+	    private StreamWriter csvWr;
+        private void SaveTovRDCSV()
 		{
 			if (Runtime.IsConnectionsFileLoaded == false)
 			{
@@ -588,7 +590,7 @@ namespace mRemoteNG.Config.Connections
 			}
 		    var tN = (TreeNode)RootTreeNode.Clone();
 		    var tNC = tN.Nodes;
-            var csvWr = new StreamWriter(ConnectionFileName);
+            csvWr = new StreamWriter(ConnectionFileName);
 			SaveNodevRDCSV(tNC);
 			csvWr.Close();
 		}
