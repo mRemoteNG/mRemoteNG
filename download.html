@@ -1,0 +1,84 @@
+---
+title: Download
+permalink: /download
+---
+<style>
+    .glyphicon.spinner {
+        /*-webkit-animation: glyphicon-spin-r 1s infinite linear;*/
+        animation: glyphicon-spin 1s infinite linear;
+    }
+    @keyframes glyphicon-spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(359deg);
+        }
+    }
+</style>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            'url': 'https://api.github.com/repos/mRemoteNG/mRemoteNG/releases/latest',
+            'dataType': 'json',
+            'success': function(data, textStatus, jqXHR) {
+                $('#loadingAlert').addClass('hidden');
+                $('#latestRelease [data-version]').text(data.tag_name);
+                $('#latestRelease [data-timestamp]').text(new Date(data.created_at).toDateString());
+                $.grep(data.assets, function(element, index) {
+                    if (element.content_type == 'application/x-msdownload') {
+                        $('#latestRelease [data-msi]').attr('href', element.browser_download_url)
+                        .attr('data-original-title', (element.size / 1048576).toFixed(2) + ' MiB')
+                        .removeClass('hidden');
+                    }
+                    if (element.content_type == 'application/x-zip-compressed') {
+                        $('#latestRelease [data-zip]').attr('href', element.browser_download_url)
+                        .attr('data-original-title', (element.size / 1048576).toFixed(2) + ' MiB')
+                        .removeClass('hidden');
+                    }
+                });
+            }, 'error': function(jqXHR, textStatus, errorThrow) {
+                $('#loadingAlert').addClass('hidden');
+                console.error(errorThrow);
+            }, 'headers': {
+                'Authorization': 'token {{ site.token }}'
+            }
+        });
+        $('[data-toggle="tooltip"]').tooltip({
+            'container': 'body'
+        });
+    });
+</script>
+<div class='row well'>
+    <div class='col-md-6 text-center' id='latestRelease'>
+        <div class='alert alert-info' id='loadingAlert'>
+            <p><span class='glyphicon glyphicon-repeat spinner'></span> Loading…</p>
+        </div>
+        <h2>Stable <small data-version></small></h2>
+        <h4 data-timestamp></h4>
+        <a class='btn btn-success hidden' data-toggle='tooltip' data-msi>MSI</a>
+        <a class='btn btn-success hidden' data-toggle='tooltip' data-zip>ZIP</a>
+    </div>
+    <div class='col-md-6 text-center'>
+        <h2>All Releases</h2>
+        <p>You can view all releases (including pre-releses) by clicking <a href='{{ site.repo }}/releases'>here</a>.</p>
+    </div>
+</div>
+<p>View installation requirements at the <a href='{{ site.repo }}/wiki/Prerequisites'>Wiki</a></p>
+<h2>Languages</h2>
+<ul class='list-inline'>
+    <li>English</li>
+    <li>中文</li>
+    <li>Nederlands</li>
+    <li>Français</li>
+    <li>Deutsch</li>
+    <li>Ελληνικά</li>
+    <li>Magyar</li>
+    <li>Italiano</li>
+    <li>Norsk</li>
+    <li>Polski</li>
+    <li>Português</li>
+    <li>Русский</li>
+    <li>Español</li>
+    <li>Українська</li>
+</ul>
