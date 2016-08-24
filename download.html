@@ -40,8 +40,6 @@ permalink: /download
             }, 'error': function(jqXHR, textStatus, errorThrow) {
                 $('#loadingAlert').addClass('hidden');
                 console.error(errorThrow);
-            }, 'headers': {
-                'Authorization': 'token {{ site.token }}'
             }
         });
         $('[data-toggle="tooltip"]').tooltip({
