@@ -85,13 +85,9 @@ namespace mRemoteNG.Config.Connections
 				default:
 					SaveToXml();
 					if (mRemoteNG.Settings.Default.EncryptCompleteConnectionsFile)
-					{
 						EncryptCompleteFile();
-					}
 					if (!Export)
-					{
 						frmMain.Default.ConnectionsFileName = ConnectionFileName;
-					}
 					break;
 			}
 			frmMain.Default.AreWeUsingSqlServerForSavingConnections = SaveFormat == Format.SQL;
@@ -581,7 +577,6 @@ namespace mRemoteNG.Config.Connections
             dataProvider.Save(csvContent);
         }
 
-        #region vRD CSV
         private void SaveToRemoteDesktop2008FormattedCsv()
         {
             var csvSerializer = new CsvConnectionsSerializerRemoteDesktop2008Format();
@@ -589,9 +584,9 @@ namespace mRemoteNG.Config.Connections
             var csvContent = csvSerializer.Serialize(ConnectionTreeModel);
             dataProvider.Save(csvContent);
         }
-        #endregion
 				
         #region vRD VRE
+        // What export format is this? What does vRD VRE mean?
 		private void SaveToVRE()
 		{
 			if (Runtime.IsConnectionsFileLoaded == false)
