@@ -537,22 +537,18 @@ namespace mRemoteNG.Config.Connections
 		}
         #endregion
 				
-        #region XML
 		private void EncryptCompleteFile()
 		{
-			StreamReader streamReader = new StreamReader(ConnectionFileName);
+			var streamReader = new StreamReader(ConnectionFileName);
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
 
-            string fileContents;
-			fileContents = streamReader.ReadToEnd();
+		    var fileContents = streamReader.ReadToEnd();
 			streamReader.Close();
-					
-			if (!string.IsNullOrEmpty(fileContents))
-			{
-				StreamWriter streamWriter = new StreamWriter(ConnectionFileName);
-				streamWriter.Write(cryptographyProvider.Encrypt(fileContents, _password));
-				streamWriter.Close();
-			}
+
+		    if (string.IsNullOrEmpty(fileContents)) return;
+		    var streamWriter = new StreamWriter(ConnectionFileName);
+		    streamWriter.Write(cryptographyProvider.Encrypt(fileContents, _password));
+		    streamWriter.Close();
 		}
 				
 		private void SaveToXml()
