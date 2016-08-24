@@ -9,7 +9,7 @@ namespace mRemoteNG.Config.Connections
 {
     public class SqlConnectionsUpdateChecker : IDisposable
     {
-        private ISqlConnector sqlConnector;
+        private IDatabaseConnector sqlConnector;
         private SqlCommand sqlQuery;
         private SqlDataReader sqlReader;
 

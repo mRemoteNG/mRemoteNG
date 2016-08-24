@@ -1,11 +1,12 @@
-﻿using mRemoteNG.App.Info;
+﻿using System.Data;
+using mRemoteNG.App.Info;
 using System.Data.SqlClient;
 using mRemoteNG.Security.SymmetricEncryption;
 
 
 namespace mRemoteNG.Config
 {
-    public class SqlDatabaseConnector : ISqlConnector
+    public class SqlDatabaseConnector : IDatabaseConnector
     {
         private SqlConnection _sqlConnection = default(SqlConnection);
         private string _sqlConnectionString = "";
@@ -13,6 +14,8 @@ namespace mRemoteNG.Config
         private string _sqlCatalog;
         private string _sqlUsername;
         private string _sqlPassword;
+
+        public bool IsConnected => (_sqlConnection.State == ConnectionState.Open);
 
         public SqlDatabaseConnector()
         {

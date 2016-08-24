@@ -5,6 +5,13 @@ namespace mRemoteNG.Config.DataProviders
 {
     public class SqlDataProvider : IDataProvider
     {
+        private IDatabaseConnector _sqlConnector;
+
+        public SqlDataProvider(IDatabaseConnector sqlConnector)
+        {
+            _sqlConnector = sqlConnector;
+        }
+
         public string Load()
         {
             throw new NotImplementedException();
