@@ -26,7 +26,7 @@ namespace mRemoteNG.Config.Connections
         {
             if (Runtime.IsConnectionsFileLoaded == false)
                 return "";
-
+            _csv = "";
             WriteCsvHeader();
             SerializeNodesRecursive(rootNodeInfo);
             return _csv;
