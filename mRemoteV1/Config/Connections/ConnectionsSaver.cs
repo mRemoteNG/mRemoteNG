@@ -576,7 +576,9 @@ namespace mRemoteNG.Config.Connections
 		private void SaveToCsv()
 		{
             var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveSecurity = SaveSecurity };
-            csvConnectionsSerializer.Serialize(ConnectionTreeModel);
+		    var dataProvider = new FileDataProvider(ConnectionFileName);
+            var csvContent = csvConnectionsSerializer.Serialize(ConnectionTreeModel);
+            dataProvider.Save(csvContent);
         }
 
         #region vRD CSV
