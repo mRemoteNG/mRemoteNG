@@ -1,12 +1,11 @@
 ﻿using mRemoteNG.App.Info;
-using System;
 using System.Data.SqlClient;
-using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
+
 
 namespace mRemoteNG.Config
 {
-    public class SqlConnectorImp : IDisposable, mRemoteNG.Config.SqlConnector
+    public class SqlDatabaseConnector : ISqlConnector
     {
         private SqlConnection _sqlConnection = default(SqlConnection);
         private string _sqlConnectionString = "";
@@ -15,12 +14,12 @@ namespace mRemoteNG.Config
         private string _sqlUsername;
         private string _sqlPassword;
 
-        public SqlConnectorImp()
+        public SqlDatabaseConnector()
         {
             Initialize();
         }
 
-        ~SqlConnectorImp()
+        ~SqlDatabaseConnector()
         {
             Dispose(false);
         }
@@ -43,12 +42,12 @@ namespace mRemoteNG.Config
 
         private void BuildSqlConnectionStringWithCustomCredentials()
         {
-            _sqlConnectionString = string.Format("Data Source={0};Initial Catalog={1};User Id={2};Password={3}", _sqlHost, _sqlCatalog, _sqlUsername, _sqlPassword);
+            _sqlConnectionString = $"Data Source={_sqlHost};Initial Catalog={_sqlCatalog};User Id={_sqlUsername};Password={_sqlPassword}";
         }
 
         private void BuildSqlConnectionStringWithDefaultCredentials()
         {
-            _sqlConnectionString = string.Format("Data Source={0};Initial Catalog={1};Integrated Security=True", _sqlHost, _sqlCatalog);
+            _sqlConnectionString = $"Data Source={_sqlHost};Initial Catalog={_sqlCatalog};Integrated Security=True";
         }
 
         private void GetSqlConnectionDataFromSettings()
@@ -74,7 +73,6 @@ namespace mRemoteNG.Config
         {
             sqlCommand.Connection = _sqlConnection;
         }
-        
 
         public void Dispose()
         {
@@ -82,11 +80,9 @@ namespace mRemoteNG.Config
         }
         private void Dispose(bool itIsSafeToFreeManagedObjects)
         {
-            if (itIsSafeToFreeManagedObjects)
-            {
-                _sqlConnection.Close();
-                _sqlConnection.Dispose();
-            }
+            if (!itIsSafeToFreeManagedObjects) return;
+            _sqlConnection.Close();
+            _sqlConnection.Dispose();
         }
     }
 }

@@ -9,14 +9,14 @@ namespace mRemoteNG.Config.Connections
 {
     public class SqlConnectionsUpdateChecker : IDisposable
     {
-        private SqlConnector sqlConnector;
+        private ISqlConnector sqlConnector;
         private SqlCommand sqlQuery;
         private SqlDataReader sqlReader;
 
 
         public SqlConnectionsUpdateChecker()
         {
-            sqlConnector = default(SqlConnectorImp);
+            sqlConnector = default(SqlDatabaseConnector);
             sqlQuery = default(SqlCommand);
             sqlReader = default(SqlDataReader);
         }
@@ -52,7 +52,7 @@ namespace mRemoteNG.Config.Connections
         {
             try
             {
-                sqlConnector = new SqlConnectorImp();
+                sqlConnector = new SqlDatabaseConnector();
                 sqlConnector.Connect();
             }
             catch(Exception e)

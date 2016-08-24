@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 namespace mRemoteNG.Config
 {
-    public interface SqlConnector : IDisposable
+    public interface ISqlConnector : IDisposable
     {
         void Connect();
         void Disconnect();
