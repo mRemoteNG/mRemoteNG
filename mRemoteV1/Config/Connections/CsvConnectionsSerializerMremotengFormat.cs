@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -11,7 +10,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Connections
 {
-    public class CsvConnectionsSerializer : ISerializer
+    public class CsvConnectionsSerializerMremotengFormat : ISerializer
     {
         private string _csv = "";
 
@@ -87,8 +86,51 @@ namespace mRemoteNG.Config.Connections
 
             if (SaveSecurity.Inheritance)
             {
-                csvLine += con.Inheritance.CacheBitmaps + ";" + Convert.ToString(con.Inheritance.Colors) + ";" + Convert.ToString(con.Inheritance.Description) + ";" + Convert.ToString(con.Inheritance.DisplayThemes) + ";" + Convert.ToString(con.Inheritance.DisplayWallpaper) + ";" + Convert.ToString(con.Inheritance.EnableFontSmoothing) + ";" + Convert.ToString(con.Inheritance.EnableDesktopComposition) + ";" + Convert.ToString(con.Inheritance.Domain) + ";" + Convert.ToString(con.Inheritance.Icon) + ";" + Convert.ToString(con.Inheritance.Panel) + ";" + Convert.ToString(con.Inheritance.Password) + ";" + Convert.ToString(con.Inheritance.Port) + ";" + Convert.ToString(con.Inheritance.Protocol) + ";" + Convert.ToString(con.Inheritance.PuttySession) + ";" + Convert.ToString(con.Inheritance.RedirectDiskDrives) + ";" + Convert.ToString(con.Inheritance.RedirectKeys) + ";" + Convert.ToString(con.Inheritance.RedirectPorts) + ";" + Convert.ToString(con.Inheritance.RedirectPrinters) + ";" + Convert.ToString(con.Inheritance.RedirectSmartCards) + ";" + Convert.ToString(con.Inheritance.RedirectSound) + ";" + Convert.ToString(con.Inheritance.Resolution) + ";" + Convert.ToString(con.Inheritance.AutomaticResize) + ";" + Convert.ToString(con.Inheritance.UseConsoleSession) + ";" + Convert.ToString(con.Inheritance.UseCredSsp) + ";" + Convert.ToString(con.Inheritance.RenderingEngine) + ";" + Convert.ToString(con.Inheritance.Username) + ";" + Convert.ToString(con.Inheritance.ICAEncryptionStrength) + ";" + Convert.ToString(con.Inheritance.RDPAuthenticationLevel) + ";" + Convert.ToString(con.Inheritance.LoadBalanceInfo) + ";" + Convert.ToString(con.Inheritance.PreExtApp) + ";" + Convert.ToString(con.Inheritance.PostExtApp) + ";" + Convert.ToString(con.Inheritance.MacAddress) + ";" + Convert.ToString(con.Inheritance.UserField) + ";" + Convert.ToString(con.Inheritance.ExtApp) + ";" + Convert.ToString(con.Inheritance.VNCCompression) + ";"
-                + Convert.ToString(con.Inheritance.VNCEncoding) + ";" + Convert.ToString(con.Inheritance.VNCAuthMode) + ";" + Convert.ToString(con.Inheritance.VNCProxyType) + ";" + Convert.ToString(con.Inheritance.VNCProxyIP) + ";" + Convert.ToString(con.Inheritance.VNCProxyPort) + ";" + Convert.ToString(con.Inheritance.VNCProxyUsername) + ";" + Convert.ToString(con.Inheritance.VNCProxyPassword) + ";" + Convert.ToString(con.Inheritance.VNCColors) + ";" + Convert.ToString(con.Inheritance.VNCSmartSizeMode) + ";" + Convert.ToString(con.Inheritance.VNCViewOnly);
+                csvLine += con.Inheritance.CacheBitmaps + ";" + 
+                    con.Inheritance.Colors + ";" +
+                    con.Inheritance.Description + ";" +
+                    con.Inheritance.DisplayThemes + ";" +
+                    con.Inheritance.DisplayWallpaper + ";" +
+                    con.Inheritance.EnableFontSmoothing + ";" +
+                    con.Inheritance.EnableDesktopComposition + ";" +
+                    con.Inheritance.Domain + ";" +
+                    con.Inheritance.Icon + ";" +
+                    con.Inheritance.Panel + ";" +
+                    con.Inheritance.Password + ";" +
+                    con.Inheritance.Port + ";" +
+                    con.Inheritance.Protocol + ";" +
+                    con.Inheritance.PuttySession + ";" +
+                    con.Inheritance.RedirectDiskDrives + ";" +
+                    con.Inheritance.RedirectKeys + ";" +
+                    con.Inheritance.RedirectPorts + ";" +
+                    con.Inheritance.RedirectPrinters + ";" +
+                    con.Inheritance.RedirectSmartCards + ";" +
+                    con.Inheritance.RedirectSound + ";" +
+                    con.Inheritance.Resolution + ";" +
+                    con.Inheritance.AutomaticResize + ";" +
+                    con.Inheritance.UseConsoleSession + ";" +
+                    con.Inheritance.UseCredSsp + ";" +
+                    con.Inheritance.RenderingEngine + ";" +
+                    con.Inheritance.Username + ";" +
+                    con.Inheritance.ICAEncryptionStrength + ";" +
+                    con.Inheritance.RDPAuthenticationLevel + ";" +
+                    con.Inheritance.LoadBalanceInfo + ";" +
+                    con.Inheritance.PreExtApp + ";" +
+                    con.Inheritance.PostExtApp + ";" +
+                    con.Inheritance.MacAddress + ";" +
+                    con.Inheritance.UserField + ";" +
+                    con.Inheritance.ExtApp + ";" +
+                    con.Inheritance.VNCCompression + ";" +
+                    con.Inheritance.VNCEncoding + ";" +
+                    con.Inheritance.VNCAuthMode + ";" +
+                    con.Inheritance.VNCProxyType + ";" +
+                    con.Inheritance.VNCProxyIP + ";" +
+                    con.Inheritance.VNCProxyPort + ";" +
+                    con.Inheritance.VNCProxyUsername + ";" +
+                    con.Inheritance.VNCProxyPassword + ";" +
+                    con.Inheritance.VNCColors + ";" +
+                    con.Inheritance.VNCSmartSizeMode + ";" +
+                    con.Inheritance.VNCViewOnly;
             }
 
             _csv += csvLine;

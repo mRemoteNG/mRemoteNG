@@ -74,8 +74,8 @@ namespace mRemoteNG.Config.Connections
 					SaveToSQL();
 					break;
 				case Format.mRCSV:
-					SaveTomRCSV();
-					break;
+			        SaveToCsv();
+                    break;
 				case Format.vRDvRE:
 					SaveToVRE();
 					break;
@@ -576,122 +576,12 @@ namespace mRemoteNG.Config.Connections
 				Runtime.MessageCollector.AddExceptionStackTrace("SaveToXml failed", ex);
             }
 		}
-        #endregion
 				
-        #region CSV
-		private StreamWriter csvWr;
-				
-		private void SaveTomRCSV()
+		private void SaveToCsv()
 		{
-			if (Runtime.IsConnectionsFileLoaded == false)
-			{
-				return;
-			}
-
-		    var tN = (TreeNode)RootTreeNode.Clone();
-
-		    var tNC = tN.Nodes;
-					
-			csvWr = new StreamWriter(ConnectionFileName);
-					
-					
-			string csvLn = string.Empty;
-					
-			csvLn += "Name;Folder;Description;Icon;Panel;";
-					
-			if (SaveSecurity.Username)
-			{
-				csvLn += "Username;";
-			}
-					
-			if (SaveSecurity.Password)
-			{
-				csvLn += "Password;";
-			}
-					
-			if (SaveSecurity.Domain)
-			{
-				csvLn += "Domain;";
-			}
-					
-			csvLn += "Hostname;Protocol;PuttySession;Port;ConnectToConsole;UseCredSsp;RenderingEngine;ICAEncryptionStrength;RDPAuthenticationLevel;LoadBalanceInfo;Colors;Resolution;AutomaticResize;DisplayWallpaper;DisplayThemes;EnableFontSmoothing;EnableDesktopComposition;CacheBitmaps;RedirectDiskDrives;RedirectPorts;RedirectPrinters;RedirectSmartCards;RedirectSound;RedirectKeys;PreExtApp;PostExtApp;MacAddress;UserField;ExtApp;VNCCompression;VNCEncoding;VNCAuthMode;VNCProxyType;VNCProxyIP;VNCProxyPort;VNCProxyUsername;VNCProxyPassword;VNCColors;VNCSmartSizeMode;VNCViewOnly;RDGatewayUsageMethod;RDGatewayHostname;RDGatewayUseConnectionCredentials;RDGatewayUsername;RDGatewayPassword;RDGatewayDomain;";
-					
-			if (SaveSecurity.Inheritance)
-			{
-				csvLn += "InheritCacheBitmaps;InheritColors;InheritDescription;InheritDisplayThemes;InheritDisplayWallpaper;InheritEnableFontSmoothing;InheritEnableDesktopComposition;InheritDomain;InheritIcon;InheritPanel;InheritPassword;InheritPort;InheritProtocol;InheritPuttySession;InheritRedirectDiskDrives;InheritRedirectKeys;InheritRedirectPorts;InheritRedirectPrinters;InheritRedirectSmartCards;InheritRedirectSound;InheritResolution;InheritAutomaticResize;InheritUseConsoleSession;InheritUseCredSsp;InheritRenderingEngine;InheritUsername;InheritICAEncryptionStrength;InheritRDPAuthenticationLevel;InheritLoadBalanceInfo;InheritPreExtApp;InheritPostExtApp;InheritMacAddress;InheritUserField;InheritExtApp;InheritVNCCompression;InheritVNCEncoding;InheritVNCAuthMode;InheritVNCProxyType;InheritVNCProxyIP;InheritVNCProxyPort;InheritVNCProxyUsername;InheritVNCProxyPassword;InheritVNCColors;InheritVNCSmartSizeMode;InheritVNCViewOnly;InheritRDGatewayUsageMethod;InheritRDGatewayHostname;InheritRDGatewayUseConnectionCredentials;InheritRDGatewayUsername;InheritRDGatewayPassword;InheritRDGatewayDomain";
-			}
-					
-			csvWr.WriteLine(csvLn);
-					
-			SaveNodemRCSV(tNC);
-					
-			csvWr.Close();
-		}
-				
-		private void SaveNodemRCSV(TreeNodeCollection tNC)
-		{
-			foreach (TreeNode node in tNC)
-			{
-				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection)
-				{
-                    ConnectionInfo curConI = (ConnectionInfo)node.Tag;
-							
-					WritemRCSVLine(curConI);
-				}
-				else if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container)
-				{
-					SaveNodemRCSV(node.Nodes);
-				}
-			}
-		}
-				
-		private void WritemRCSVLine(ConnectionInfo con)
-		{
-			string nodePath = con.TreeNode.FullPath;
-					
-			int firstSlash = nodePath.IndexOf("\\", StringComparison.Ordinal);
-			nodePath = nodePath.Remove(0, firstSlash + 1);
-			int lastSlash = nodePath.LastIndexOf("\\", StringComparison.Ordinal);
-					
-			if (lastSlash > 0)
-			{
-				nodePath = nodePath.Remove(lastSlash);
-			}
-			else
-			{
-				nodePath = "";
-			}
-					
-			string csvLn = string.Empty;
-					
-			csvLn += con.Name + ";" + nodePath + ";" + con.Description + ";" + con.Icon + ";" + con.Panel + ";";
-					
-			if (SaveSecurity.Username)
-			{
-				csvLn += con.Username + ";";
-			}
-					
-			if (SaveSecurity.Password)
-			{
-				csvLn += con.Password + ";";
-			}
-					
-			if (SaveSecurity.Domain)
-			{
-				csvLn += con.Domain + ";";
-			}
-					
-			csvLn += con.Hostname + ";" + con.Protocol + ";" + con.PuttySession + ";" + Convert.ToString(con.Port) + ";" + Convert.ToString(con.UseConsoleSession) + ";" + Convert.ToString(con.UseCredSsp) + ";" + con.RenderingEngine + ";" + con.ICAEncryptionStrength + ";" + con.RDPAuthenticationLevel + ";" + con.LoadBalanceInfo + ";" + con.Colors + ";" + con.Resolution + ";" + Convert.ToString(con.AutomaticResize) + ";" + Convert.ToString(con.DisplayWallpaper) + ";" + Convert.ToString(con.DisplayThemes) + ";" + Convert.ToString(con.EnableFontSmoothing) + ";" + Convert.ToString(con.EnableDesktopComposition) + ";" + Convert.ToString(con.CacheBitmaps) + ";" + Convert.ToString(con.RedirectDiskDrives) + ";" + Convert.ToString(con.RedirectPorts) + ";" + Convert.ToString(con.RedirectPrinters) + ";" + Convert.ToString(con.RedirectSmartCards) + ";" + con.RedirectSound + ";" + Convert.ToString(con.RedirectKeys) + ";" + con.PreExtApp + ";" + con.PostExtApp + ";" + con.MacAddress + ";" + con.UserField + ";" + con.ExtApp + ";" + con.VNCCompression + ";" + con.VNCEncoding + ";" + con.VNCAuthMode + ";" + con.VNCProxyType + ";" + con.VNCProxyIP + ";" + Convert.ToString(con.VNCProxyPort) + ";" + con.VNCProxyUsername + ";" + con.VNCProxyPassword + ";" + con.VNCColors + ";" + con.VNCSmartSizeMode + ";" + Convert.ToString(con.VNCViewOnly) + ";";
-					
-			if (SaveSecurity.Inheritance)
-			{
-				csvLn += con.Inheritance.CacheBitmaps + ";" + Convert.ToString(con.Inheritance.Colors) + ";" + Convert.ToString(con.Inheritance.Description) + ";" + Convert.ToString(con.Inheritance.DisplayThemes) + ";" + Convert.ToString(con.Inheritance.DisplayWallpaper) + ";" + Convert.ToString(con.Inheritance.EnableFontSmoothing) + ";" + Convert.ToString(con.Inheritance.EnableDesktopComposition) + ";" + Convert.ToString(con.Inheritance.Domain) + ";" + Convert.ToString(con.Inheritance.Icon) + ";" + Convert.ToString(con.Inheritance.Panel) + ";" + Convert.ToString(con.Inheritance.Password) + ";" + Convert.ToString(con.Inheritance.Port) + ";" + Convert.ToString(con.Inheritance.Protocol) + ";" + Convert.ToString(con.Inheritance.PuttySession) + ";" + Convert.ToString(con.Inheritance.RedirectDiskDrives) + ";" + Convert.ToString(con.Inheritance.RedirectKeys) + ";" + Convert.ToString(con.Inheritance.RedirectPorts) + ";" + Convert.ToString(con.Inheritance.RedirectPrinters) + ";" + Convert.ToString(con.Inheritance.RedirectSmartCards) + ";" + Convert.ToString(con.Inheritance.RedirectSound) + ";" + Convert.ToString(con.Inheritance.Resolution) + ";" + Convert.ToString(con.Inheritance.AutomaticResize) + ";" + Convert.ToString(con.Inheritance.UseConsoleSession) + ";" + Convert.ToString(con.Inheritance.UseCredSsp) + ";" + Convert.ToString(con.Inheritance.RenderingEngine) + ";" + Convert.ToString(con.Inheritance.Username) + ";" + Convert.ToString(con.Inheritance.ICAEncryptionStrength) + ";" + Convert.ToString(con.Inheritance.RDPAuthenticationLevel) + ";" + Convert.ToString(con.Inheritance.LoadBalanceInfo) + ";" + Convert.ToString(con.Inheritance.PreExtApp) + ";" + Convert.ToString(con.Inheritance.PostExtApp) + ";" + Convert.ToString(con.Inheritance.MacAddress) + ";" + Convert.ToString(con.Inheritance.UserField) + ";" + Convert.ToString(con.Inheritance.ExtApp) + ";" + Convert.ToString(con.Inheritance.VNCCompression) + ";"
-				+ Convert.ToString(con.Inheritance.VNCEncoding) + ";" + Convert.ToString(con.Inheritance.VNCAuthMode) + ";" + Convert.ToString(con.Inheritance.VNCProxyType) + ";" + Convert.ToString(con.Inheritance.VNCProxyIP) + ";" + Convert.ToString(con.Inheritance.VNCProxyPort) + ";" + Convert.ToString(con.Inheritance.VNCProxyUsername) + ";" + Convert.ToString(con.Inheritance.VNCProxyPassword) + ";" + Convert.ToString(con.Inheritance.VNCColors) + ";" + Convert.ToString(con.Inheritance.VNCSmartSizeMode) + ";" + Convert.ToString(con.Inheritance.VNCViewOnly);
-			}
-					
-			csvWr.WriteLine(csvLn);
-		}
-        #endregion
+            var csvConnectionsSerializer = new CsvConnectionsSerializerMremotengFormat { SaveSecurity = SaveSecurity };
+            csvConnectionsSerializer.Serialize(ConnectionTreeModel);
+        }
 				
         #region vRD CSV
 		private void SaveTovRDCSV()
@@ -700,15 +590,10 @@ namespace mRemoteNG.Config.Connections
 			{
 				return;
 			}
-
 		    var tN = (TreeNode)RootTreeNode.Clone();
-
 		    var tNC = tN.Nodes;
-					
-			csvWr = new StreamWriter(ConnectionFileName);
-					
+            var csvWr = new StreamWriter(ConnectionFileName);
 			SaveNodevRDCSV(tNC);
-					
 			csvWr.Close();
 		}
 				
