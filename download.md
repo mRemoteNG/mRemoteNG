@@ -3,6 +3,6 @@ title: Download
 permalink: /download
 ---
 
-# [Stable](https://github.com/mRemoteNG/mRemoteNG/releases/latest)
+# [Stable]({{ site.repo }}/releases/latest)
 
-# [Pre-release](https://github.com/mRemoteNG/mRemoteNG/releases)
+# [Pre-release]({{ site.repo }}/releases)
