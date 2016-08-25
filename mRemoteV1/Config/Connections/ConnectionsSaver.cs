@@ -129,8 +129,13 @@ namespace mRemoteNG.Config.Connections
             try
             {
                 var databaseVersion = GetDatabaseVersion(sqlConnection);
-
                 SqlCommand sqlCommand;
+
+                if (databaseVersion.Equals(new Version()))
+                {
+                    return true;
+                }
+
                 if (databaseVersion.CompareTo(new Version(2, 2)) == 0) // 2.2
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Upgrading database from version {databaseVersion} to version 2.3.");
