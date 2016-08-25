@@ -180,7 +180,7 @@ namespace mRemoteNG.Config.Connections
             dataRow["PositionID"] = _currentNodeIndex;
             dataRow["LastChange"] = FormateDateForDatabase(DateTime.Now);
             dataRow["Expanded"] = connectionInfo is ContainerInfo ? ((ContainerInfo)connectionInfo).IsExpanded.ToString() : "";
-            dataRow["Descr"] = connectionInfo.Description;
+            dataRow["Description"] = connectionInfo.Description;
             dataRow["Icon"] = connectionInfo.Icon;
             dataRow["Panel"] = connectionInfo.Panel;
             dataRow["Username"] = _saveSecurity.Username ? connectionInfo.Username : "";
