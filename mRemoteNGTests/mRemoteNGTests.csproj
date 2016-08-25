@@ -102,6 +102,7 @@
   <ItemGroup>
     <Compile Include="App\LoggerTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
+    <Compile Include="Config\Connections\DataTableSerializerTests.cs" />
     <Compile Include="Config\Connections\XmlConnectionsDeserializerTests.cs" />
     <Compile Include="Connection\ConnectionInfoInheritanceTests.cs" />
     <Compile Include="Connection\ConnectionInfoTests.cs" />

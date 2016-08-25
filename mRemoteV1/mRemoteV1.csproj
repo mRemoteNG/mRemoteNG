@@ -129,6 +129,7 @@
     <Compile Include="App\Windows.cs" />
     <Compile Include="Config\Connections\CsvConnectionsSerializerMremotengFormat.cs" />
     <Compile Include="Config\Connections\CsvConnectionsSerializerRemoteDesktop2008Format.cs" />
+    <Compile Include="Config\Connections\DataTableSerializer.cs" />
     <Compile Include="Config\Connections\SqlConnectionsSerializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithBackup.cs" />
     <Compile Include="Config\Connections\ConnectionsDecryptor.cs" />
