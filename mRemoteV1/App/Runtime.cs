@@ -481,8 +481,8 @@ namespace mRemoteNG.App
 
         public static void SaveConnections(bool Update = false)
         {
-            if (!IsConnectionsFileLoaded)
-                return;
+            //if (!IsConnectionsFileLoaded)
+            //    return;
 
             try
             {

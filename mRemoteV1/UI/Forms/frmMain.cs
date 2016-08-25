@@ -147,8 +147,8 @@ namespace mRemoteNG.UI.Forms
             Runtime.LoadConnections();
             if (!Runtime.IsConnectionsFileLoaded)
 			{
-				Application.Exit();
-				return ;
+				//Application.Exit();
+				//return ;
 			}
 
             Windows.treePanel.Focus();

@@ -71,7 +71,7 @@ namespace mRemoteNG.Config.Connections
 			switch (SaveFormat)
 			{
 				case Format.SQL:
-					SaveToSQL();
+					SaveToSql();
 					break;
 				case Format.mRCSV:
 			        SaveToMremotengFormattedCsv();
@@ -95,137 +95,151 @@ namespace mRemoteNG.Config.Connections
         #endregion
 				
         #region SQL
-		private bool VerifyDatabaseVersion(SqlConnection sqlConnection)
+		private void SaveToSql()
 		{
-			bool isVerified = false;
-			SqlDataReader sqlDataReader = null;
-		    try
-			{
-				SqlCommand sqlCommand = new SqlCommand("SELECT * FROM tblRoot", sqlConnection);
-				sqlDataReader = sqlCommand.ExecuteReader();
-				if (!sqlDataReader.HasRows)
-				{
-					return true; // assume new empty database
-				}
-				sqlDataReader.Read();
-						
-				var databaseVersion = new Version(Convert.ToString(sqlDataReader["confVersion"], CultureInfo.InvariantCulture));
-						
-				sqlDataReader.Close();
-						
-				if (databaseVersion.CompareTo(new Version(2, 2)) == 0) // 2.2
-				{
-					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format("Upgrading database from version {0} to version {1}.", databaseVersion, "2.3"));
-					sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD EnableFontSmoothing bit NOT NULL DEFAULT 0, EnableDesktopComposition bit NOT NULL DEFAULT 0, InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;", sqlConnection);
-					sqlCommand.ExecuteNonQuery();
-					databaseVersion = new Version(2, 3);
-				}
-						
-				if (databaseVersion.CompareTo(new Version(2, 3)) == 0) // 2.3
-				{
-					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format("Upgrading database from version {0} to version {1}.", databaseVersion, "2.4"));
-					sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD UseCredSsp bit NOT NULL DEFAULT 1, InheritUseCredSsp bit NOT NULL DEFAULT 0;", sqlConnection);
-					sqlCommand.ExecuteNonQuery();
-					databaseVersion = new Version(2, 4);
-				}
-						
-				if (databaseVersion.CompareTo(new Version(2, 4)) == 0) // 2.4
-				{
-					Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format("Upgrading database from version {0} to version {1}.", databaseVersion, "2.5"));
-					sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, AutomaticResize bit NOT NULL DEFAULT 1, InheritLoadBalanceInfo bit NOT NULL DEFAULT 0, InheritAutomaticResize bit NOT NULL DEFAULT 0;", sqlConnection);
-					sqlCommand.ExecuteNonQuery();
-					databaseVersion = new Version(2, 5);
-				}
-						
-				if (databaseVersion.CompareTo(new Version(2, 5)) == 0) // 2.5
-				{
-					isVerified = true;
-				}
-						
-				if (isVerified == false)
-				{
-					Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strErrorBadDatabaseVersion, databaseVersion, GeneralAppInfo.ProdName));
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorVerifyDatabaseVersionFailed, ex.Message));
-			}
-			finally
-			{
-				if (sqlDataReader != null)
-				{
-					if (!sqlDataReader.IsClosed)
-					{
-						sqlDataReader.Close();
-					}
-				}
-			}
-			return isVerified;
-		}
-				
-		private void SaveToSQL()
-		{
-			if (SQLUsername != "")
-			{
-				_sqlConnection = new SqlConnection("Data Source=" + SQLHost + ";Initial Catalog=" + SQLDatabaseName + ";User Id=" + SQLUsername + ";Password=" + SQLPassword);
-			}
-			else
-			{
-				_sqlConnection = new SqlConnection("Data Source=" + SQLHost + ";Initial Catalog=" + SQLDatabaseName + ";Integrated Security=True");
-			}
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-
-            _sqlConnection.Open();
-					
-			if (!VerifyDatabaseVersion(_sqlConnection))
+		    OpenDatabaseConnection();
+            if (!VerifyDatabaseVersion(_sqlConnection))
 			{
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorConnectionListSaveFailed);
 				return ;
 			}
 
-		    var tN = (TreeNode)RootTreeNode.Clone();
-					
-			string strProtected;
-			if (tN.Tag != null)
-			{
-				if (((RootNodeInfo) tN.Tag).Password)
-				{
-					_password = Convert.ToString(((RootNodeInfo) tN.Tag).PasswordString).ConvertToSecureString();
-					strProtected = cryptographyProvider.Encrypt("ThisIsProtected", _password);
-				}
-				else
-				{
-					strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", _password);
-				}
-			}
-			else
-			{
-				strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", _password);
-			}
-					
-			_sqlQuery = new SqlCommand("DELETE FROM tblRoot", _sqlConnection);
-			_sqlQuery.ExecuteNonQuery();
+		    var rootTreeNode = (TreeNode)RootTreeNode.Clone();
 
-            _sqlQuery = new SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" + MiscTools.PrepareValueForDB(tN.Text) + "\', 0, \'" + strProtected + "\'," + ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")", _sqlConnection);
-			_sqlQuery.ExecuteNonQuery();
-					
-			_sqlQuery = new SqlCommand("DELETE FROM tblCons", _sqlConnection);
-			_sqlQuery.ExecuteNonQuery();
-					
-			TreeNodeCollection tNC = tN.Nodes;
+		    UpdateRootNodeTable(rootTreeNode);
+		    UpdateConnectionsTable(rootTreeNode);
+		    UpdateUpdatesTable();
 
-			SaveNodesSQL(tNC);
-					
-			_sqlQuery = new SqlCommand("DELETE FROM tblUpdate", _sqlConnection);
-			_sqlQuery.ExecuteNonQuery();
-			_sqlQuery = new SqlCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) + "\')", _sqlConnection);
-			_sqlQuery.ExecuteNonQuery();
-					
-			_sqlConnection.Close();
+            _sqlConnection.Close();
 		}
-				
-		private void SaveNodesSQL(TreeNodeCollection tnc)
+
+	    private void OpenDatabaseConnection()
+	    {
+            var sqlConnectionString = "Data Source=" + SQLHost + ";Initial Catalog=" + SQLDatabaseName;
+            sqlConnectionString += SQLUsername != ""
+                ? ";User Id=" + SQLUsername + ";Password=" + SQLPassword
+                : ";Integrated Security=True";
+            _sqlConnection = new SqlConnection(sqlConnectionString);
+            _sqlConnection.Open();
+        }
+
+        private bool VerifyDatabaseVersion(SqlConnection sqlConnection)
+        {
+            var isVerified = false;
+            try
+            {
+                var databaseVersion = GetDatabaseVersion(sqlConnection);
+
+                SqlCommand sqlCommand;
+                if (databaseVersion.CompareTo(new Version(2, 2)) == 0) // 2.2
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Upgrading database from version {databaseVersion} to version 2.3.");
+                    sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD EnableFontSmoothing bit NOT NULL DEFAULT 0, EnableDesktopComposition bit NOT NULL DEFAULT 0, InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;", sqlConnection);
+                    sqlCommand.ExecuteNonQuery();
+                    databaseVersion = new Version(2, 3);
+                }
+
+                if (databaseVersion.CompareTo(new Version(2, 3)) == 0) // 2.3
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Upgrading database from version {databaseVersion} to version 2.4.");
+                    sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD UseCredSsp bit NOT NULL DEFAULT 1, InheritUseCredSsp bit NOT NULL DEFAULT 0;", sqlConnection);
+                    sqlCommand.ExecuteNonQuery();
+                    databaseVersion = new Version(2, 4);
+                }
+
+                if (databaseVersion.CompareTo(new Version(2, 4)) == 0) // 2.4
+                {
+                    Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Upgrading database from version {databaseVersion} to version 2.5.");
+                    sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, AutomaticResize bit NOT NULL DEFAULT 1, InheritLoadBalanceInfo bit NOT NULL DEFAULT 0, InheritAutomaticResize bit NOT NULL DEFAULT 0;", sqlConnection);
+                    sqlCommand.ExecuteNonQuery();
+                    databaseVersion = new Version(2, 5);
+                }
+
+                if (databaseVersion.CompareTo(new Version(2, 5)) == 0) // 2.5
+                    isVerified = true;
+
+                if (isVerified == false)
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strErrorBadDatabaseVersion, databaseVersion, GeneralAppInfo.ProdName));
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorVerifyDatabaseVersionFailed, ex.Message));
+            }
+            return isVerified;
+        }
+
+	    private Version GetDatabaseVersion(SqlConnection sqlConnection)
+	    {
+	        Version databaseVersion;
+            SqlDataReader sqlDataReader = null;
+	        try
+	        {
+	            var sqlCommand = new SqlCommand("SELECT * FROM tblRoot", sqlConnection);
+	            sqlDataReader = sqlCommand.ExecuteReader();
+	            if (!sqlDataReader.HasRows)
+                    return new Version(); // assume new empty database
+                else
+	            sqlDataReader.Read();
+	            databaseVersion = new Version(Convert.ToString(sqlDataReader["confVersion"], CultureInfo.InvariantCulture));
+	        }
+	        catch (Exception ex)
+	        {
+                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, $"Retrieving database version failed. {ex}");
+                throw;
+	        }
+	        finally
+	        {
+                if (sqlDataReader != null && !sqlDataReader.IsClosed)
+                    sqlDataReader.Close();
+	        }
+	        return databaseVersion;
+	    }
+
+        private void UpdateRootNodeTable(TreeNode rootTreeNode)
+	    {
+            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
+            string strProtected;
+            if (rootTreeNode.Tag != null)
+            {
+                if (((RootNodeInfo)rootTreeNode.Tag).Password)
+                {
+                    _password = Convert.ToString(((RootNodeInfo)rootTreeNode.Tag).PasswordString).ConvertToSecureString();
+                    strProtected = cryptographyProvider.Encrypt("ThisIsProtected", _password);
+                }
+                else
+                {
+                    strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", _password);
+                }
+            }
+            else
+            {
+                strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", _password);
+            }
+
+            _sqlQuery = new SqlCommand("DELETE FROM tblRoot", _sqlConnection);
+            _sqlQuery.ExecuteNonQuery();
+
+            _sqlQuery = new SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" + MiscTools.PrepareValueForDB(rootTreeNode.Text) + "\', 0, \'" + strProtected + "\'," + ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")", _sqlConnection);
+            _sqlQuery.ExecuteNonQuery();
+        }
+
+	    private void UpdateConnectionsTable(TreeNode rootTreeNode)
+	    {
+            _sqlQuery = new SqlCommand("DELETE FROM tblCons", _sqlConnection);
+            _sqlQuery.ExecuteNonQuery();
+            var treeNodeCollection = rootTreeNode.Nodes;
+            SaveNodesRecursiveSql(treeNodeCollection);
+        }
+
+	    private void UpdateUpdatesTable()
+	    {
+            _sqlQuery = new SqlCommand("DELETE FROM tblUpdate", _sqlConnection);
+            _sqlQuery.ExecuteNonQuery();
+            _sqlQuery = new SqlCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) + "\')", _sqlConnection);
+            _sqlQuery.ExecuteNonQuery();
+        }
+
+		private void SaveNodesRecursiveSql(TreeNodeCollection tnc)
 		{
 			foreach (TreeNode node in tnc)
 			{
@@ -247,12 +261,12 @@ namespace mRemoteNG.Config.Connections
 				{
 					_sqlQuery.CommandText += "\'" + ContainerList[node.Tag].IsExpanded + "\',"; //Expanded
 					curConI = ContainerList[node.Tag];
-					SaveConnectionFieldsSQL(curConI);
+					SaveConnectionFieldsSql(curConI);
 							
 					_sqlQuery.CommandText = MiscTools.PrepareForDB(_sqlQuery.CommandText);
 					_sqlQuery.ExecuteNonQuery();
 					//_parentConstantId = _currentNodeIndex
-					SaveNodesSQL(node.Nodes);
+					SaveNodesRecursiveSql(node.Nodes);
 					//_xmlTextWriter.WriteEndElement()
 				}
 						
@@ -260,7 +274,7 @@ namespace mRemoteNG.Config.Connections
 				{
 					_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
 					curConI = ConnectionList[node.Tag];
-					SaveConnectionFieldsSQL(curConI);
+					SaveConnectionFieldsSql(curConI);
 					//_xmlTextWriter.WriteEndElement()
 					_sqlQuery.CommandText = MiscTools.PrepareForDB(_sqlQuery.CommandText);
 					_sqlQuery.ExecuteNonQuery();
@@ -270,7 +284,7 @@ namespace mRemoteNG.Config.Connections
 			}
 		}
 				
-		private void SaveConnectionFieldsSQL(ConnectionInfo curConI)
+		private void SaveConnectionFieldsSql(ConnectionInfo curConI)
 		{
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             ConnectionInfo with_1 = curConI;

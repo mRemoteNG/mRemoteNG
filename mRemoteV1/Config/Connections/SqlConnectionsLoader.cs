@@ -67,12 +67,18 @@ namespace mRemoteNG.Config.Connections
                 _sqlDataReader = _sqlQuery.ExecuteReader(CommandBehavior.CloseConnection);
                 _sqlDataReader.Read();
 
-                if (_sqlDataReader.HasRows == false)
+                //if (_sqlDataReader.HasRows == false)
+                //{
+                //    Runtime.SaveConnections();
+                //    _sqlQuery = new SqlCommand("SELECT * FROM tblRoot", _sqlConnection);
+                //    _sqlDataReader = _sqlQuery.ExecuteReader(CommandBehavior.CloseConnection);
+                //    _sqlDataReader.Read();
+                //}
+
+                if (!_sqlDataReader.HasRows)
                 {
-                    Runtime.SaveConnections();
-                    _sqlQuery = new SqlCommand("SELECT * FROM tblRoot", _sqlConnection);
-                    _sqlDataReader = _sqlQuery.ExecuteReader(CommandBehavior.CloseConnection);
-                    _sqlDataReader.Read();
+                    CreateRootTreeNode("Connections");
+                    return;
                 }
 
                 _confVersion = Convert.ToDouble(_sqlDataReader["confVersion"], CultureInfo.InvariantCulture);
@@ -96,22 +102,12 @@ namespace mRemoteNG.Config.Connections
                     throw (new Exception($"Incompatible database schema (schema version {_confVersion})."));
                 }
 
-                RootTreeNode.Name = Convert.ToString(_sqlDataReader["Name"]);
-
-                var rootInfo = new RootNodeInfo(RootNodeType.Connection)
-                {
-                    Name = RootTreeNode.Name,
-                    TreeNode = RootTreeNode
-                };
-
-                RootTreeNode.Tag = rootInfo;
-                RootTreeNode.ImageIndex = (int)TreeImageType.Root;
-                RootTreeNode.SelectedImageIndex = (int)TreeImageType.Root;
+                CreateRootTreeNode(Convert.ToString(_sqlDataReader["Name"]));
 
                 var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
                 if (cryptographyProvider.Decrypt(Convert.ToString(_sqlDataReader["Protected"]), _pW) != "ThisIsNotProtected")
                 {
-                    if (Authenticate(Convert.ToString(_sqlDataReader["Protected"]), false, rootInfo) == false)
+                    if (Authenticate(Convert.ToString(_sqlDataReader["Protected"]), false, (RootNodeInfo)RootTreeNode.Tag) == false)
                     {
                         mRemoteNG.Settings.Default.LoadConsFromCustomLocation = false;
                         mRemoteNG.Settings.Default.CustomConsPath = "";
@@ -154,6 +150,22 @@ namespace mRemoteNG.Config.Connections
             {
                 _sqlConnection?.Close();
             }
+        }
+
+        private void CreateRootTreeNode(string name)
+        {
+            RootTreeNode = new TreeNode(name);
+            Windows.treeForm.tvConnections.Nodes.Add(RootTreeNode);
+
+            var rootInfo = new RootNodeInfo(RootNodeType.Connection)
+            {
+                Name = RootTreeNode.Name,
+                TreeNode = RootTreeNode
+            };
+
+            RootTreeNode.Tag = rootInfo;
+            RootTreeNode.ImageIndex = (int)TreeImageType.Root;
+            RootTreeNode.SelectedImageIndex = (int)TreeImageType.Root;
         }
 
         private void AddNodesFromSql(TreeNode baseNode)
