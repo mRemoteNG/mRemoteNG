@@ -257,7 +257,6 @@ namespace mRemoteNG.Config.Connections
 						
 				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container)
 				{
-					//_xmlTextWriter.WriteStartElement("Node")
 					_sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(node.Text) + "\',"; //Name
 					_sqlQuery.CommandText += "\'" + ConnectionTreeNode.GetNodeType(node) + "\',"; //Type
 				}
@@ -272,7 +271,6 @@ namespace mRemoteNG.Config.Connections
 					_sqlQuery.ExecuteNonQuery();
 					//_parentConstantId = _currentNodeIndex
 					SaveNodesRecursiveSql(node.Nodes);
-					//_xmlTextWriter.WriteEndElement()
 				}
 						
 				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection)
@@ -280,7 +278,6 @@ namespace mRemoteNG.Config.Connections
 					_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
 					curConI = ConnectionList[node.Tag];
 					SaveConnectionFieldsSql(curConI);
-					//_xmlTextWriter.WriteEndElement()
 					_sqlQuery.CommandText = MiscTools.PrepareForDB(_sqlQuery.CommandText);
 					_sqlQuery.ExecuteNonQuery();
 				}
@@ -288,7 +285,7 @@ namespace mRemoteNG.Config.Connections
 				//_parentConstantId = 0
 			}
 		}
-				
+		
 		private void SaveConnectionFieldsSql(ConnectionInfo curConI)
 		{
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
@@ -551,7 +548,7 @@ namespace mRemoteNG.Config.Connections
 			_sqlQuery.CommandText += _currentNodeIndex + ",\'" + _parentConstantId + "\',\'" + with_1.ConstantID + "\',\'" + MiscTools.DBDate(DateTime.Now) + "\')";
 		}
         #endregion
-				
+		
 		private void EncryptCompleteFile()
 		{
 			var streamReader = new StreamReader(ConnectionFileName);
