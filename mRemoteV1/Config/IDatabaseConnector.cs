@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Data.SqlClient;
+
+
 namespace mRemoteNG.Config
 {
     public interface IDatabaseConnector : IDisposable
