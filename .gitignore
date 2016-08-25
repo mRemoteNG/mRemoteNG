@@ -285,3 +285,5 @@ InstallerProjects/Installer/Resources/License.rtf
 
 # user preference: .editorconfig - http://editorconfig.org/
 .editorconfig
+
+runlocal.bat
