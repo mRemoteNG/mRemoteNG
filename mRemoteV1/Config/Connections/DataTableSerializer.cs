@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
@@ -14,6 +15,7 @@ namespace mRemoteNG.Config.Connections
         private DataTable _dataTable;
         private const string TableName = "tblCons";
         private readonly Save _saveSecurity;
+        private int _currentNodeIndex;
 
         public DataTableSerializer(Save saveSecurity)
         {
@@ -33,6 +35,7 @@ namespace mRemoteNG.Config.Connections
             _dataTable = new DataTable(TableName);
             CreateSchema();
             SetPrimaryKey();
+            _currentNodeIndex = 0;
             SerializeNodesRecursive(rootNodeInfo);
         }
 
@@ -42,6 +45,8 @@ namespace mRemoteNG.Config.Connections
             _dataTable.Columns.Add("Type");
             _dataTable.Columns.Add("ConstantID");
             _dataTable.Columns.Add("ParentID");
+            _dataTable.Columns.Add("PositionID");
+            _dataTable.Columns.Add("LastChange");
             _dataTable.Columns.Add("Expanded");
             _dataTable.Columns.Add("Descr");
             _dataTable.Columns.Add("Icon");
@@ -166,11 +171,14 @@ namespace mRemoteNG.Config.Connections
 
         private void SerializeConnectionInfo(ConnectionInfo connectionInfo)
         {
+            _currentNodeIndex++;
             var dataRow = _dataTable.NewRow();
             dataRow["Name"] = connectionInfo.Name;
             dataRow["Type"] = ConnectionTreeNode.GetNodeType(connectionInfo.TreeNode).ToString();
             dataRow["ConstantID"] = connectionInfo.ConstantID;
             dataRow["ParentID"] = connectionInfo.Parent.ConstantID;
+            dataRow["PositionID"] = _currentNodeIndex;
+            dataRow["LastChange"] = FormateDateForDatabase(DateTime.Now);
             dataRow["Expanded"] = connectionInfo is ContainerInfo ? ((ContainerInfo)connectionInfo).IsExpanded.ToString() : "";
             dataRow["Descr"] = connectionInfo.Description;
             dataRow["Icon"] = connectionInfo.Icon;
@@ -334,6 +342,11 @@ namespace mRemoteNG.Config.Connections
                 dataRow["InheritRDGatewayDomain"] = "";
             }
             _dataTable.Rows.Add(dataRow);
+        }
+
+        private string FormateDateForDatabase(DateTime dateTime)
+        {
+            return $"{dateTime:yyyy-MM-dd HH:mm:ss}";
         }
     }
 }
