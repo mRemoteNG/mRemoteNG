@@ -10,3 +10,4 @@ mRemoteNG GitHub Hosted Web Pages
    bundle install
    bundle exec jekyll serve -w --config _config.yaml,_config-dev.yaml
    ```
+4. Open http://localhost:4000/mRemoteNG/
