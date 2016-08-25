@@ -1,0 +1,19 @@
+{% include head.html %}
+    <body>
+        {% include navigation.html %}
+        <div class='jumbotron'>
+            <div class='container text-center'>
+                <h1>mRemoteNG</h1>
+                <p>Multi-Remote Next Generation</p>
+                <ul class='list-inline'>
+                    <li><a class='github-button' href='{{ site.repo }}' data-count-href='{{ site.repo }}/stargazers' data-count-api='/repos/{{ site.nwo }}#stargazers_count' data-count-aria-label='# stargazers on GitHub' aria-label='Star {{ site.nwo }} on GitHub'>Star</a><script async defer src='https://buttons.github.io/buttons.js'></script></li>
+                    <li><a href='https://twitter.com/mRemoteNG' class='twitter-follow-button' data-show-count='true' data-show-screen-name='false'>Follow @mRemoteNG</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></li>
+                </ul>
+            </div>
+        </div>
+        <div class='container'>
+            {{ content }}
+        </div>
+        {% include footer.html %}
+    </body>
+</html>

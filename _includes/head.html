@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang='en' prefix='og: http://ogp.me/ns#'>
+    <head>
+        <meta charset='utf-8'>
+        <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+        <meta name='viewport' content='width=device-width, initial-scale=1'>
+        <meta name='description' content='{{ site.description }}'>
+        <meta name='url' content='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
+        <meta property='og:url' content='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
+        <meta property='og:type' content='website'>
+        <meta property='og:title' content='{% if page.title %}{{ page.title }}{% else %}{{ site.name }}{% endif %}'>
+        <meta property='og:description' content='{{ site.description }}'>
+        <meta property='og:site_name' content='{{ site.name }}'>
+        <meta property='og:locale' content='en_US'>
+        <meta name='twitter:card' content='summary'>
+        <meta name='twitter:site' content='@mRemoteNG'>
+        <meta name='themecolor' content='#3E3F3A'>
+
+        <link rel='canonical' href='{{ site.url }}{{ site.baseurl }}{{ page.url | replace: "index.html,"" }}'>
+        <link rel='stylesheet' href='https://bootswatch.com/sandstone/bootstrap.min.css'>
+        {% for file in site.static_files %}
+        {% if file.path contains '/favicon/' %}
+        {% assign name = file.path | remove: '/favicon/' | remove: file.extname %}
+        <link rel='icon' href='{{ file.path }}' sizes='{{ name }}x{{ name }}' type='image/png'>
+        {% endif %}
+        {% endfor %}
+
+        <title>{% if page.title %}{{ page.title }}{% else %}{{ site.name }}{% endif %}</title>
+        <base href='{{ site.url }}{{ site.baseurl }}'>
+        <style>
+            .jumbotron {
+                margin-top: -50px;
+                padding-bottom: 25px;
+            }
+            footer {
+                background-color: #3e3f3a;
+                color: #98978b;
+                margin-top: 100px;
+                padding-bottom: 50px;
+                padding-top: 50px;
+            }
+        </style>
+
+        {% include javascript.html %}
+    </head>
