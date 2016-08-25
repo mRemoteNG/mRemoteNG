@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
+using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.Http;
@@ -38,7 +37,7 @@ namespace mRemoteNG.Config.Connections
             return _connectionTreeModel;
         }
 
-        private IEnumerable<ConnectionInfo> CreateNodesFromTable()
+        private List<ConnectionInfo> CreateNodesFromTable()
         {
             var nodeList = new List<ConnectionInfo>();
             foreach (DataRow row in _dataTable.Rows)
@@ -69,9 +68,9 @@ namespace mRemoteNG.Config.Connections
         {
             connectionInfo.Name = (string)dataRow["Name"];
             connectionInfo.ConstantID = (string)dataRow["ConstantID"];
-            connectionInfo.Parent.ConstantID = (string)dataRow["ParentID"];
+            //connectionInfo.Parent.ConstantID = (string)dataRow["ParentID"];
             //connectionInfo is ContainerInfo ? ((ContainerInfo)connectionInfo).IsExpanded.ToString() : "" = dataRow["Expanded"];
-            connectionInfo.Description = (string)dataRow["Descr"];
+            connectionInfo.Description = (string)dataRow["Description"];
             connectionInfo.Icon = (string)dataRow["Icon"];
             connectionInfo.Panel = (string)dataRow["Panel"];
             connectionInfo.Username = (string)dataRow["Username"];
@@ -178,14 +177,21 @@ namespace mRemoteNG.Config.Connections
             connectionInfo.Inheritance.RDGatewayDomain = (bool)dataRow["InheritRDGatewayDomain"];
         }
 
-        private void CreateNodeHierarchy(IEnumerable<ConnectionInfo> connectionList)
+        private void CreateNodeHierarchy(List<ConnectionInfo> connectionList)
         {
             _connectionTreeModel = new ConnectionTreeModel();
-            _connectionTreeModel.AddRootNode(new RootNodeInfo(RootNodeType.Connection));
+            var rootNode = new RootNodeInfo(RootNodeType.Connection) {ConstantID = "0"};
+            _connectionTreeModel.AddRootNode(rootNode);
 
-            foreach (var connection in connectionList)
+            foreach (DataRow row in _dataTable.Rows)
             {
-                
+                var id = (string) row["ConstantID"];
+                var connectionInfo = connectionList.First(node => node.ConstantID == id);
+                var parentId = (string) row["ParentID"];
+                if (parentId == "0")
+                    _connectionTreeModel.AddRootNode((ContainerInfo)connectionInfo);
+                else
+                    connectionInfo.Parent = connectionList.First(node => node.ConstantID == parentId) as ContainerInfo;
             }
         }
     }
