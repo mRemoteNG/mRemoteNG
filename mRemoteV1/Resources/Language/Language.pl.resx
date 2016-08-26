@@ -321,10 +321,10 @@ Proszę upewnić się, że albo masz Putty.exe w katalogu mRemoteNG (domyślnie:
     <value>Wszystkie składniki RDP zostały znalezione i wydają się być poprawnie zarejestrowane. Wersja Podłączanie Pulpitu Zdalnego {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC wymaga, aby biblioteka VncSharpNG.dll znajdowała się w folderze instalacji mRemoteNG. Upewnij się, że masz plik VncSharpNG.dll w folderze aplikacji mRemoteNG (domyślnie C:\Program Files\mRemoteNG\). Jeśli nadal nie można użyć VNC w mRemoteNG prosimy o kontakt mRemoteNG Forum na http://forum.mremoteng.org/</value>
+    <value>VNC wymaga, aby biblioteka VncSharp.dll znajdowała się w folderze instalacji mRemoteNG. Upewnij się, że masz plik VncSharp.dll w folderze aplikacji mRemoteNG (domyślnie C:\Program Files\mRemoteNG\). Jeśli nadal nie można użyć VNC w mRemoteNG prosimy o kontakt mRemoteNG Forum na http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
-    <value>Wszystkie składniki VNC zostały znalezione i wydają się być poprawnie zarejestrowane. Wersja VncSharpNG {0}</value>
+    <value>Wszystkie składniki VNC zostały znalezione i wydają się być poprawnie zarejestrowane. Wersja VncSharp {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatycznie połącz ponownie jeśli nastąpi odłączenie od serwera (tylko RDP &amp;&amp; ICA)</value>

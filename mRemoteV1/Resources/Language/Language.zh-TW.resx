@@ -305,7 +305,7 @@ Remote Desktop Connection Control 版本 {0}</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>找到所有 VNC 元件並似乎正確註冊。
-VncSharpNG Control 版本 {0}</value>
+VncSharp Control 版本 {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>從伺服器中斷連線時自動嘗試重新連線 (僅限 RDP &amp;&amp; ICA)</value>

@@ -331,13 +331,13 @@ Als u nog steeds niet in staat bent om de langs check te komen voor RDP raadplee
 Verbinding met extern bureaublad Versie {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC vereist dat VncSharpNG.dll in de mRemoteNG installatiemap is geplaatst.
-Zorg ervoor dat u  VncSharpNG.dll bestand in de  mRemoteNG installatiemap wordt geplaatst (standaard C:\Program Files\mRemoteNG\).
+    <value>VNC vereist dat VncSharp.dll in de mRemoteNG installatiemap is geplaatst.
+Zorg ervoor dat u  VncSharp.dll bestand in de  mRemoteNG installatiemap wordt geplaatst (standaard C:\Program Files\mRemoteNG\).
 Als u nog steeds niet in staat bent om de langs check te komen gebruik dan VNC in mRemoteNG of raadpleeg mRemoteNG Forum op http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>Alle VNC componenten werden gevonden en lijken correct te zijn geregistreerd.
-VncSharpNG Versie {0}</value>
+VncSharp Versie {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatisch proberen opnieuw te verbinden wanneer de verbinding is verbroken van de server (RDP &amp;&amp; ICA Alleen)</value>

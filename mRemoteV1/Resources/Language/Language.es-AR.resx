@@ -170,7 +170,7 @@
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>Todos los componentes de VNC se encontraron y parecen estar registrados correctamente.
-VncSharpNG Control {0}</value>
+VncSharp Control {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Intentar reconectar automáticamente cuando se desconecte (solo para RDP &amp;&amp; ICA)</value>

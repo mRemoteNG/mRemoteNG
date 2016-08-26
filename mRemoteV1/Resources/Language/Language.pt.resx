@@ -316,10 +316,10 @@
     <value>Todos os componentes RDP foram encontrados e parecem estar registrados corretamente. RDP versão {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>O VNC requer VncSharpNG.dll estar localizado na pasta do aplicativo mRemoteNG. Por favor, certifique-se de que você tem o arquivo VncSharpNG.dll na pasta do aplicativo mRemoteNG (geralmente, C:\Program Files\mRemoteNG\). Se você ainda não pode efetuar essa verificação ou usar o VNC em mRemoteNG por favor consulte o fórum de mRemoteNG em http://forum.mremoteng.org/</value>
+    <value>O VNC requer VncSharp.dll estar localizado na pasta do aplicativo mRemoteNG. Por favor, certifique-se de que você tem o arquivo VncSharp.dll na pasta do aplicativo mRemoteNG (geralmente, C:\Program Files\mRemoteNG\). Se você ainda não pode efetuar essa verificação ou usar o VNC em mRemoteNG por favor consulte o fórum de mRemoteNG em http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
-    <value>Todos os componentes do VNC foram encontrados e parecem estar registrados corretamente. VncSharpNG versão {0}</value>
+    <value>Todos os componentes do VNC foram encontrados e parecem estar registrados corretamente. VncSharp versão {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Tentar reconectar automaticamente quando desconectado do servidor (RDP &amp;&amp; ICA somente)</value>

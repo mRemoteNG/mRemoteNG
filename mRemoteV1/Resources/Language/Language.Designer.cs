@@ -686,8 +686,8 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to VNC requires VncSharpNG.dll to be located in your mRemoteNG application folder.
-        ///Please make sure that you have the VncSharpNG.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
+        ///   Looks up a localized string similar to VNC requires VncSharp.dll to be located in your mRemoteNG application folder.
+        ///Please make sure that you have the VncSharp.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
         ///If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/.
         /// </summary>
         internal static string strCcVNCFailed {
@@ -698,7 +698,7 @@ namespace mRemoteNG {
         
         /// <summary>
         ///   Looks up a localized string similar to All VNC components were found and seem to be registered properly.
-        ///VncSharpNG Control Version {0}.
+        ///VncSharp Control Version {0}.
         /// </summary>
         internal static string strCcVNCOK {
             get {

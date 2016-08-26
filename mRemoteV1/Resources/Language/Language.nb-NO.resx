@@ -331,13 +331,13 @@ Hvis du fremdeles har problemer med å få RDP til å fungere, vennligst konsult
 Remote Desktop Connection Control Version {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC krever at VncSharpNG.dll finnes i mappen mRemoteNG er installert i.
-Vennligst kontroller at du har VncSharpNG.dll i installasjonsmappen til mRemoteNG (vanligvis C:\Program Files\mRemoteNG\).
+    <value>VNC krever at VncSharp.dll finnes i mappen mRemoteNG er installert i.
+Vennligst kontroller at du har VncSharp.dll i installasjonsmappen til mRemoteNG (vanligvis C:\Program Files\mRemoteNG\).
 Hvis du ikke passerer kontrollen eller ikke får brukt VNC i mRemoteNG, vennligst konsulter mRemoteNG-forumet på http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>Alle VNC-komponenter ble funnet og ser ut til å være korrekt registrert.
-VncSharpNG Control Version {0}</value>
+VncSharp Control Version {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Forsøk å automatisk koble til på nytt ved frakobling fra server (kun RDP &amp;&amp; ICA)</value>

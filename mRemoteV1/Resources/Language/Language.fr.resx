@@ -320,10 +320,10 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
     <value>Tous les composants RDP ont été trouvés et semblent être enregistrés correctement. Remote Desktop Connection Version Control {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC nécessite VncSharpNG.dll qui doit se trouver dans le dossier de mRemoteNG. Assurez-vous que le fichier VncSharpNG.dll est présent dans le dossier de mRemoteNG (habituellement C:\Program Files\mRemoteNG\). Si la vérification de VNC échoue, veuillez consulter le Forum mRemoteNG:  http://forum.mremoteng.org/</value>
+    <value>VNC nécessite VncSharp.dll qui doit se trouver dans le dossier de mRemoteNG. Assurez-vous que le fichier VncSharp.dll est présent dans le dossier de mRemoteNG (habituellement C:\Program Files\mRemoteNG\). Si la vérification de VNC échoue, veuillez consulter le Forum mRemoteNG:  http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
-    <value>Tous les composants VNC ont été trouvés et semblent être enregistrés correctement. Version Control VncSharpNG {0}</value>
+    <value>Tous les composants VNC ont été trouvés et semblent être enregistrés correctement. Version Control VncSharp {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Reconnexion automatique en cas de déconnexion du serveur (RDP seulement)</value>
