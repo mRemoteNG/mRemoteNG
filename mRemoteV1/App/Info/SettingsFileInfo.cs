@@ -1,5 +1,8 @@
 ﻿using System.IO;
 using System.Reflection;
+#if !PORTABLE
+using System.Windows.Forms;
+#endif
 
 namespace mRemoteNG.App.Info
 {
