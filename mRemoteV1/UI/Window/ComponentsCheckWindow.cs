@@ -431,8 +431,6 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
 		private void CheckComponents()
 		{
-			string errorMsg = Language.strCcNotInstalledProperly;
-					
 			pnlCheck1.Visible = true;
 			pnlCheck2.Visible = true;
 			pnlCheck3.Visible = true;
@@ -454,7 +452,7 @@ namespace mRemoteNG.UI.Window
 						
 				if (!(new Version(Convert.ToString(rdpClient.Version)) >= ProtocolRDP.Versions.RDC80))
 				{
-					throw (new Exception(string.Format("Found RDC Client version {0} but version {1} or higher is required.", rdpClient.Version, ProtocolRDP.Versions.RDC80)));
+					throw (new Exception($"Found RDC Client version {rdpClient.Version} but version {ProtocolRDP.Versions.RDC80} or higher is required."));
 				}
 						
 				pbCheck1.Image = Resources.Good_Symbol;
@@ -469,17 +467,14 @@ namespace mRemoteNG.UI.Window
 				lblCheck1.Text = "RDP (Remote Desktop) " + Language.strCcCheckFailed;
 				txtCheck1.Text = Language.strCcRDPFailed;
 						
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "RDP " + errorMsg, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "RDP " + Language.strCcNotInstalledProperly, true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
 			}
-					
-			if (rdpClient != null)
-			{
-				rdpClient.Dispose();
-			}
-					
-					
-			VncSharp.RemoteDesktop VNC = null;
+
+		    rdpClient?.Dispose();
+
+
+		    VncSharp.RemoteDesktop VNC = null;
 					
 			try
 			{
@@ -504,16 +499,13 @@ namespace mRemoteNG.UI.Window
 				lblCheck2.Text = "VNC (Virtual Network Computing) " + Language.strCcCheckFailed;
 				txtCheck2.Text = Language.strCcVNCFailed;
 						
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "VNC " + errorMsg, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "VNC " + Language.strCcNotInstalledProperly, true);
 			}
-					
-			if (VNC != null)
-			{
-				VNC.Dispose();
-			}
-					
-					
-			string pPath = "";
+
+		    VNC?.Dispose();
+
+
+		    string pPath;
 			if (Settings.Default.UseCustomPuttyPath == false)
 			{
 				pPath = GeneralAppInfo.HomePath + "\\PuTTYNG.exe";
@@ -537,7 +529,7 @@ namespace mRemoteNG.UI.Window
 				lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.strCcCheckFailed;
 				txtCheck3.Text = Language.strCcPuttyFailed;
 						
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "PuTTY " + errorMsg, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "PuTTY " + Language.strCcNotInstalledProperly, true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "File " + pPath + " does not exist.", true);
 			}
 					
@@ -546,9 +538,8 @@ namespace mRemoteNG.UI.Window
 					
 			try
 			{
-				ICA = new AxWFICALib.AxICAClient();
-				ICA.Parent = this;
-				ICA.CreateControl();
+			    ICA = new AxWFICALib.AxICAClient {Parent = this};
+			    ICA.CreateControl();
 						
 				while (!ICA.Created)
 				{
@@ -568,17 +559,14 @@ namespace mRemoteNG.UI.Window
 				lblCheck4.Text = "ICA (Citrix ICA) " + Language.strCcCheckFailed;
 				txtCheck4.Text = Language.strCcICAFailed;
 						
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ICA " + errorMsg, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "ICA " + Language.strCcNotInstalledProperly, true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, ex.Message, true);
 			}
-					
-			if (ICA != null)
-			{
-				ICA.Dispose();
-			}
-					
-					
-			bool GeckoBad = false;
+
+		    ICA?.Dispose();
+
+
+		    var GeckoBad = false;
             var GeckoFxPath = Path.Combine(GeneralAppInfo.HomePath, "Firefox");
 			
             if(File.Exists(Path.Combine(GeneralAppInfo.HomePath, "Geckofx-Core.dll")))
@@ -612,7 +600,7 @@ namespace mRemoteNG.UI.Window
 				lblCheck5.Text = "Gecko (Firefox) Rendering Engine (HTTP/S) " + Language.strCcCheckFailed;
 				txtCheck5.Text = Language.strCcGeckoFailed;
 						
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Gecko " + errorMsg, true);
+				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, "Gecko " + Language.strCcNotInstalledProperly, true);
 				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "GeckoFx was not found in " + GeckoFxPath, true);
 			}
 					
