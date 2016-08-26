@@ -1,4 +1,4 @@
-# mRemoteNG.github.io
+# [mRemoteNG.github.io/mRemoteNG](https://mRemoteNG.github.io/mRemoteNG/)
 mRemoteNG GitHub Hosted Web Pages
 
 # Building
