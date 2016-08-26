@@ -1,23 +1,15 @@
-﻿using mRemoteNG.Messages;
-using mRemoteNG.Tools;
+﻿using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
-using mRemoteNG.My;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
 {
-    public class Shutdown
+    public static class Shutdown
     {
-        private static string _updateFilePath = null;
+        private static string _updateFilePath;
 
-        public static bool UpdatePending
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(_updateFilePath);
-            }
-        }
+        private static bool UpdatePending => !string.IsNullOrEmpty(_updateFilePath);
 
         public static void Quit(string updateFilePath = null)
         {
@@ -38,7 +30,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strSettingsCouldNotBeSavedOrTrayDispose + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strSettingsCouldNotBeSavedOrTrayDispose, ex);
             }
         }
 
@@ -77,7 +69,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "The update could not be started." + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddExceptionStackTrace("The update could not be started.", ex);
             }
         }
 

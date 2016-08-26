@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App
 {
-    public class Screens
+    public static class Screens
     {
         public static void SendFormToScreen(Screen Screen)
         {
@@ -30,8 +27,11 @@ namespace mRemoteNG.App
         public static void SendPanelToScreen(DockContent Panel, Screen Screen)
         {
             Panel.DockState = DockState.Float;
-            Panel.ParentForm.Left = Screen.Bounds.Location.X;
-            Panel.ParentForm.Top = Screen.Bounds.Location.Y;
+            if (Panel.ParentForm != null)
+            {
+                Panel.ParentForm.Left = Screen.Bounds.Location.X;
+                Panel.ParentForm.Top = Screen.Bounds.Location.Y;
+            }
         }
     }
 }

@@ -1,12 +1,11 @@
-﻿using mRemoteNG.Messages;
-using mRemoteNG.UI.Forms;
+﻿using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using System;
 using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.App
 {
-    public class Windows
+    public static class Windows
     {
         public static ConnectionTreeWindow treeForm;
         public static DockContent treePanel = new DockContent();
@@ -18,24 +17,24 @@ namespace mRemoteNG.App
         public static DockContent screenshotPanel = new DockContent();
         public static ExportForm exportForm;
         public static DockContent exportPanel = new DockContent();
-        public static AboutWindow aboutForm;
-        public static DockContent aboutPanel = new DockContent();
+        private static AboutWindow aboutForm;
+        private static DockContent aboutPanel = new DockContent();
         public static UpdateWindow updateForm;
         public static DockContent updatePanel = new DockContent();
         public static SSHTransferWindow sshtransferForm;
-        public static DockContent sshtransferPanel = new DockContent();
-        public static ActiveDirectoryImportWindow adimportForm;
-        public static DockContent adimportPanel = new DockContent();
-        public static HelpWindow helpForm;
-        public static DockContent helpPanel = new DockContent();
-        public static ExternalToolsWindow externalappsForm;
-        public static DockContent externalappsPanel = new DockContent();
-        public static PortScanWindow portscanForm;
-        public static DockContent portscanPanel = new DockContent();
-        public static UltraVNCWindow ultravncscForm;
-        public static DockContent ultravncscPanel = new DockContent();
-        public static ComponentsCheckWindow componentscheckForm;
-        public static DockContent componentscheckPanel = new DockContent();
+        private static DockContent sshtransferPanel = new DockContent();
+        private static ActiveDirectoryImportWindow adimportForm;
+        private static DockContent adimportPanel = new DockContent();
+        private static HelpWindow helpForm;
+        private static DockContent helpPanel = new DockContent();
+        private static ExternalToolsWindow externalappsForm;
+        private static DockContent externalappsPanel = new DockContent();
+        private static PortScanWindow portscanForm;
+        private static DockContent portscanPanel = new DockContent();
+        private static UltraVNCWindow ultravncscForm;
+        private static DockContent ultravncscPanel = new DockContent();
+        private static ComponentsCheckWindow componentscheckForm;
+        private static DockContent componentscheckPanel = new DockContent();
         public static AnnouncementWindow AnnouncementForm;
         public static DockContent AnnouncementPanel = new DockContent();
 
@@ -137,7 +136,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "App.Runtime.Windows.Show() failed." + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddExceptionStackTrace("App.Runtime.Windows.Show() failed.", ex);
             }
         }
     }
