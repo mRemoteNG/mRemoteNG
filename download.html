@@ -47,21 +47,39 @@ permalink: /download
         });
     });
 </script>
-<div class='row well'>
-    <div class='col-md-6 text-center' id='latestRelease'>
-        <div class='alert alert-info' id='loadingAlert'>
-            <p><span class='glyphicon glyphicon-repeat spinner'></span> Loading…</p>
-        </div>
-        <h2>Stable <small data-version></small></h2>
-        <h4 data-timestamp></h4>
-        <a class='btn btn-success hidden' data-toggle='tooltip' data-placement='bottom' data-msi>MSI</a>
-        <a class='btn btn-success hidden' data-toggle='tooltip' data-placement='bottom' data-zip>ZIP</a>
+{% for release in site.github.releases %}
+    {% if release.draft == false and release.prerelease == false and stableRelease == nil %}
+        {% assign stableRelease = release %}
+    {% endif %}
+    {% if release.draft == false and release.prerelease == true and preRelease == nil %}
+        {% assign preRelease = release %}
+    {% endif %}
+{% endfor %}
+<div class='row well text-center'>
+    <div class='col-md-6'>
+        <h2>Stable <small>{{ stableRelease.tag_name }}</small></h2>
+        <h4>{{ stableRelease.published_at | date: '%a, %b %d, %Y' }}</h4>
+        {% for asset in stableRelease.assets %}
+        {% if asset.state == 'uploaded' %}
+        <a href='{{ asset.browser_download_url }}' class='btn btn-success' data-toggle='tooltip' data-placement='bottom' title='{{ asset.size | divided_by: 1048576.0 | round: 2 }} MiB'>
+            {% if asset.content_type == 'application/x-msdownload' %}MSI{% elsif asset.content_type == 'application/x-zip-compressed' %}ZIP{% endif %}
+        </a>
+        {% endif %}
+        {% endfor %}
     </div>
-    <div class='col-md-6 text-center'>
-        <h2>All Releases</h2>
-        <p>You can view all releases (including pre-releases) by clicking <a href='{{ site.repo }}/releases'>here</a>.</p>
+    <div class='col-md-6'>
+        <h2>Prerelease <small>{{ preRelease.tag_name }}</small></h2>
+        <h4>{{ preRelease.published_at | date: '%a, %b %d, %Y' }}</h4>
+        {% for asset in preRelease.assets %}
+        {% if asset.state == 'uploaded' %}
+        <a href='{{ asset.browser_download_url }}' class='btn btn-warning' data-toggle='tooltip' data-placement='bottom' title='{{ asset.size | divided_by: 1048576.0 | round: 2 }} MiB'>
+            {% if asset.content_type == 'application/x-msdownload' %}MSI{% elsif asset.content_type == 'application/x-zip-compressed' %}ZIP{% endif %}
+        </a>
+        {% endif %}
+        {% endfor %}
     </div>
 </div>
+<p>You can view all releases (including pre-releases) by going <a href='{{ site.github.releases_url }}'>here</a></p>
 <p>View installation requirements at the <a href='{{ site.repo }}/wiki/Prerequisites'>Wiki</a></p>
 <h2>Languages</h2>
 <ul class='list-inline'>
