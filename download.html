@@ -59,6 +59,7 @@ permalink: /download
     <div class='col-md-6'>
         <h2>Stable <small>{{ stableRelease.tag_name }}</small></h2>
         <h4>{{ stableRelease.published_at | date: '%a, %b %d, %Y' }}</h4>
+        <div>
         {% for asset in stableRelease.assets %}
         {% if asset.state == 'uploaded' %}
         <a href='{{ asset.browser_download_url }}' class='btn btn-success' data-toggle='tooltip' data-placement='bottom' title='{{ asset.size | divided_by: 1048576.0 | round: 2 }} MiB'>
@@ -66,10 +67,13 @@ permalink: /download
         </a>
         {% endif %}
         {% endfor %}
+        </div>
+        <a href='{{ stableRelease.html_url }}'>Changelog</a>
     </div>
     <div class='col-md-6'>
         <h2>Prerelease <small>{{ preRelease.tag_name }}</small></h2>
         <h4>{{ preRelease.published_at | date: '%a, %b %d, %Y' }}</h4>
+        <div>
         {% for asset in preRelease.assets %}
         {% if asset.state == 'uploaded' %}
         <a href='{{ asset.browser_download_url }}' class='btn btn-warning' data-toggle='tooltip' data-placement='bottom' title='{{ asset.size | divided_by: 1048576.0 | round: 2 }} MiB'>
@@ -77,6 +81,8 @@ permalink: /download
         </a>
         {% endif %}
         {% endfor %}
+        </div>
+        <a href='{{ preRelease.html_url }}'>Changelog</a>
     </div>
 </div>
 <p>You can view all releases (including pre-releases) by going <a href='{{ site.github.releases_url }}'>here</a></p>
