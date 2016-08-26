@@ -3,7 +3,7 @@ title: Contribute
 permalink: /contribute
 ---
 
-## There are several ways to help:
+## There are several ways to help
 
 ### Donate
 If you find mRemoteNG useful and would like to express your appreciation, please click the link below to be taken to PayPal where you can securely make a contribution. A PayPal account is not required.

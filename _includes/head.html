@@ -8,7 +8,7 @@
         <meta name='url' content='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
         <meta property='og:url' content='{{ site.url }}{{ site.baseurl }}{{ page.url }}'>
         <meta property='og:type' content='website'>
-        <meta property='og:title' content='{% if page.title %}{{ page.title }}{% else %}{{ site.name }}{% endif %}'>
+        <meta property='og:title' content='{% if page.title and page.url != '/' %}{{ page.title }} | {% endif %}{{ site.name }}'>
         <meta property='og:description' content='{{ site.description }}'>
         <meta property='og:site_name' content='{{ site.name }}'>
         <meta property='og:locale' content='en_US'>
@@ -21,7 +21,7 @@
         {% for file in site.static_files %}{% if file.path contains '/favicon/' %}{% assign name = file.path | remove: '/favicon/' | remove: file.extname %}
         <link rel='icon' href='{{ site.baseurl }}{{ file.path }}' sizes='{{ name }}x{{ name }}' type='image/png'>{% endif %}{% endfor %}
 
-        <title>{% if page.title %}{{ page.title }}{% else %}{{ site.name }}{% endif %}</title>
+        <title>{% if page.title and page.url != '/' %}{{ page.title }} | {% endif %}{{ site.name }}</title>
         <base href='{{ site.url }}{{ site.baseurl }}'>
         <style>
             .jumbotron {
