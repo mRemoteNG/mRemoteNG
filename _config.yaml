@@ -3,7 +3,7 @@ description: The next generation of mRemote, open source, tabbed, multi-protocol
 url: https://mRemoteNG.github.io
 baseurl: /mRemoteNG
 repository: mRemoteNG/mRemoteNG
-exclude: [Gemfile, Gemfile.lock]
+exclude: [README.md, Gemfile, Gemfile.lock]
 
 defaults:
   -
