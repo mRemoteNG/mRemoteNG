@@ -3,13 +3,14 @@ title: Download v2
 permalink: /download2
 ---
 
-<div class='alert alert-warning'><h1>Beta</h1></div>
+## Beta
+{: class='alert alert-warning' }
 
 Former mRemote users, please follow [these instructions](https://github.com/mRemoteNG/mRemoteNG/wiki/mRemote-Settings-Migration) to migrate your settings from mRemote to mRemoteNG.
 
 {% for release in site.github.releases %}
 {% if release.draft == false %}
-# {{ release.name }}
+## {{ release.name }}
 *{{ release.published_at | date: '%c' }}*
 
 ```
