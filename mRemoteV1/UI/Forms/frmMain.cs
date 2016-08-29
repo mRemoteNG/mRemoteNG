@@ -12,11 +12,11 @@ using mRemoteNG.Config;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Controls;
 using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
+using mRemoteNG.UI.Controls;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.UI.Window;
 using WeifenLuo.WinFormsUI.Docking;
@@ -28,15 +28,15 @@ namespace mRemoteNG.UI.Forms
         private static readonly frmMain _defaultInstance = new frmMain();
         public static frmMain Default => _defaultInstance;
         private static clipboardchangeEventHandler clipboardchangeEvent;
-        private bool _inSizeMove = false;
-        private bool _inMouseActivate = false;
+        private bool _inSizeMove;
+        private bool _inMouseActivate;
         private IntPtr fpChainedWindowHandle;
         private int[] SysMenSubItems = new int[51];
-	    private bool _isClosing = false;
-        private bool _usingSqlServer = false;
-        private string _connectionsFileName = null;
+	    private bool _isClosing;
+        private bool _usingSqlServer;
+        private string _connectionsFileName;
         private bool _showFullPathInTitle;
-        private ConnectionInfo _selectedConnection = null;
+        private ConnectionInfo _selectedConnection;
         private SystemMenu _systemMenu;
         private MiscTools.Fullscreen _fullscreen;
 
@@ -283,6 +283,7 @@ namespace mRemoteNG.UI.Forms
         private void frmMain_Shown(object sender, EventArgs e)
 		{
             #if PORTABLE
+		    // ReSharper disable once RedundantJumpStatement
 			return ;
             #endif
 //			if (!mRemoteNG.Settings.Default.CheckForUpdatesAsked)
@@ -519,19 +520,19 @@ namespace mRemoteNG.UI.Forms
             }
 		}
 
-        private static void mMenFileNewConnection_Click(object sender, EventArgs e)
+        private void mMenFileNewConnection_Click(object sender, EventArgs e)
 		{
 			Windows.treeForm.AddConnection();
             Runtime.SaveConnectionsBG();
 		}
 
-        private static void mMenFileNewFolder_Click(object sender, EventArgs e)
+        private void mMenFileNewFolder_Click(object sender, EventArgs e)
 		{
             Windows.treeForm.AddFolder();
             Runtime.SaveConnectionsBG();
 		}
 
-        private static void mMenFileNew_Click(object sender, EventArgs e)
+        private void mMenFileNew_Click(object sender, EventArgs e)
 		{
 			var saveFileDialog = Tools.Controls.ConnectionsSaveAsDialog();
 			if (saveFileDialog.ShowDialog() != DialogResult.OK)
@@ -542,7 +543,7 @@ namespace mRemoteNG.UI.Forms
             Runtime.NewConnections(saveFileDialog.FileName);
 		}
 
-        private static void mMenFileLoad_Click(object sender, EventArgs e)
+        private void mMenFileLoad_Click(object sender, EventArgs e)
 		{
             if (Runtime.IsConnectionsFileLoaded)
 			{
@@ -560,35 +561,35 @@ namespace mRemoteNG.UI.Forms
             Runtime.LoadConnections(true);
 		}
 
-        private static void mMenFileSave_Click(object sender, EventArgs e)
+        private void mMenFileSave_Click(object sender, EventArgs e)
 		{
             Runtime.SaveConnections();
 		}
 
-        private static void mMenFileSaveAs_Click(object sender, EventArgs e)
+        private void mMenFileSaveAs_Click(object sender, EventArgs e)
 		{
             Runtime.SaveConnectionsAs();
 		}
 
-        private static void mMenFileDelete_Click(object sender, EventArgs e)
+        private void mMenFileDelete_Click(object sender, EventArgs e)
 		{
             ConnectionTree.DeleteSelectedNode();
             Runtime.SaveConnectionsBG();
 		}
 
-        private static void mMenFileRename_Click(object sender, EventArgs e)
+        private void mMenFileRename_Click(object sender, EventArgs e)
 		{
 			ConnectionTree.StartRenameSelectedNode();
             Runtime.SaveConnectionsBG();
 		}
 
-        private static void mMenFileDuplicate_Click(object sender, EventArgs e)
+        private void mMenFileDuplicate_Click(object sender, EventArgs e)
 		{
             ConnectionTreeNode.CloneNode(ConnectionTree.SelectedNode);
             Runtime.SaveConnectionsBG();
 		}
 
-        private static void mMenReconnectAll_Click(object sender, EventArgs e)
+        private void mMenReconnectAll_Click(object sender, EventArgs e)
         {
             if (Runtime.WindowList == null || Runtime.WindowList.Count == 0) return;
             foreach (BaseWindow window in Runtime.WindowList)
@@ -614,31 +615,32 @@ namespace mRemoteNG.UI.Forms
                 }
 
                 // throw it on the garbage collector
+                // ReSharper disable once RedundantAssignment
                 ICList = null;
             }
         }
 
-        private static void mMenFileImportFromFile_Click(object sender, EventArgs e)
+        private void mMenFileImportFromFile_Click(object sender, EventArgs e)
 		{
             Import.ImportFromFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode);
 		}
 
-        private static void mMenFileImportFromActiveDirectory_Click(object sender, EventArgs e)
+        private void mMenFileImportFromActiveDirectory_Click(object sender, EventArgs e)
 		{
             Windows.Show(WindowType.ActiveDirectoryImport);
 		}
 
-        private static void mMenFileImportFromPortScan_Click(object sender, EventArgs e)
+        private void mMenFileImportFromPortScan_Click(object sender, EventArgs e)
 		{
             Windows.Show(WindowType.PortScan);
 		}
 
-        private static void mMenFileExport_Click(object sender, EventArgs e)
+        private void mMenFileExport_Click(object sender, EventArgs e)
 		{
             Export.ExportToFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode);
 		}
 
-        private static void mMenFileExit_Click(object sender, EventArgs e)
+        private void mMenFileExit_Click(object sender, EventArgs e)
 		{
             Shutdown.Quit();
 		}
@@ -1224,8 +1226,9 @@ namespace mRemoteNG.UI.Forms
 				pnlDock.Size = new Size(1, 1);
 			}
 		}
-		
-		private void SelectTabRelative(int relativeIndex)
+
+#if false
+        private void SelectTabRelative(int relativeIndex)
 		{
 			if (!(pnlDock.ActiveDocument is ConnectionWindow))
 			{
@@ -1250,9 +1253,10 @@ namespace mRemoteNG.UI.Forms
 									
 			tabController.SelectedIndex = newIndex;
 		}
-        #endregion
+#endif
+#endregion
 		
-        #region Screen Stuff
+#region Screen Stuff
 		private void DisplayChanged(object sender, EventArgs e)
 		{
 			ResetSysMenuItems();
@@ -1278,9 +1282,9 @@ namespace mRemoteNG.UI.Forms
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 0, SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen, Language.strSendTo);
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 1, SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, null);
 		}
-        #endregion
+#endregion
 
-        #region Events
+#region Events
         public delegate void clipboardchangeEventHandler();
         public static event clipboardchangeEventHandler clipboardchange
         {
@@ -1293,6 +1297,6 @@ namespace mRemoteNG.UI.Forms
                 clipboardchangeEvent = (clipboardchangeEventHandler)Delegate.Remove(clipboardchangeEvent, value);
             }
         }
-        #endregion
+#endregion
 	}					
 }
