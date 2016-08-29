@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
@@ -517,10 +518,12 @@ namespace mRemoteNG.UI.Window
 					
 			if (File.Exists(pPath))
 			{
-				pbCheck3.Image = Resources.Good_Symbol;
+			    var versionInfo = FileVersionInfo.GetVersionInfo(pPath);
+
+                pbCheck3.Image = Resources.Good_Symbol;
 				lblCheck3.ForeColor = Color.DarkOliveGreen;
 				lblCheck3.Text = "PuTTY (SSH/Telnet/Rlogin/RAW) " + Language.strCcCheckSucceeded;
-				txtCheck3.Text = Language.strCcPuttyOK;
+				txtCheck3.Text = $"{Language.strCcPuttyOK}{Environment.NewLine}Version: {versionInfo.ProductName} Release: {versionInfo.FileVersion}";
 			}
 			else
 			{

@@ -3,6 +3,7 @@
   General Changes:
   ----------------
   Limit log file size to 1 main log + 5 backups * 10MB.
+  MR-366 - Show PuTTY type and version on components check screen
   
   Fixes:
   ------
