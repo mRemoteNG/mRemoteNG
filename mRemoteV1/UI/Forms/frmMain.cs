@@ -47,6 +47,7 @@ namespace mRemoteNG.UI.Forms
 			_showFullPathInTitle = Settings.Default.ShowCompleteConsPathInTitle;
 			InitializeComponent();
             _fullscreen = new MiscTools.Fullscreen(this);
+            pnlDock.Theme = new VS2012LightTheme();
 		}
 
         static frmMain()
