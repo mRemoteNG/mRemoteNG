@@ -159,8 +159,6 @@
     <Compile Include="Connection\IInheritable.cs" />
     <Compile Include="Connection\IParent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
-    <Compile Include="Connection\Protocol\RDP\RDPEnums.cs" />
-    <Compile Include="Connection\Protocol\RDP\RDPVersions.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />
     <Compile Include="Security\BlockCipherEngines.cs" />
