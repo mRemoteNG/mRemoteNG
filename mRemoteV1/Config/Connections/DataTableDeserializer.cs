@@ -53,18 +53,18 @@ namespace mRemoteNG.Config.Connections
         private ConnectionInfo DeserializeConnectionInfo(DataRow row)
         {
             var connectionInfo = new ConnectionInfo();
-            CopyConnectionInfoToObject(row, connectionInfo);
+            PopulateConnectionInfoFromDatarow(row, connectionInfo);
             return connectionInfo;
         }
 
         private ContainerInfo DeserializeContainerInfo(DataRow row)
         {
             var containerInfo = new ContainerInfo();
-            CopyConnectionInfoToObject(row, containerInfo);
+            PopulateConnectionInfoFromDatarow(row, containerInfo);
             return containerInfo;
         }
 
-        private void CopyConnectionInfoToObject(DataRow dataRow, ConnectionInfo connectionInfo)
+        private void PopulateConnectionInfoFromDatarow(DataRow dataRow, ConnectionInfo connectionInfo)
         {
             connectionInfo.Name = (string)dataRow["Name"];
             connectionInfo.ConstantID = (string)dataRow["ConstantID"];
