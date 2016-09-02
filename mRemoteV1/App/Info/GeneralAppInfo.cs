@@ -45,7 +45,7 @@ namespace mRemoteNG.App.Info
 
 	    public static Version getVer()
 	    {
-	        System.Version v = new Version();
+            Version v;
             System.Version.TryParse(version, out v);
 	        return v;
 	    }

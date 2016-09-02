@@ -331,13 +331,13 @@
  Remote Desktop Connection, Control Version {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC требуется VncSharpNG.dll который находится в папке с mRemoteNG.
- Убедитесь, что у вас есть VncSharpNG.dll в папке mRemoteNG (обычно C:\Program Files\mRemoteNG\).
+    <value>VNC требуется VncSharp.dll который находится в папке с mRemoteNG.
+ Убедитесь, что у вас есть VncSharp.dll в папке mRemoteNG (обычно C:\Program Files\mRemoteNG\).
  Если  у вас все же не работает VNC в mRemoteNG обратитесь на форум mRemoteNGhttp://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>Все VNC компоненты были найдены и зарегистрированы.
- VncSharpNG Control Version {0}</value>
+ VncSharp Control Version {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Автоматически пытаться восстановить связь при отключении от сервера (только RDP и ICA)</value>

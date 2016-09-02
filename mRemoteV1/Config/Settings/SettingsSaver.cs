@@ -3,17 +3,15 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using System.Xml;
-using mRemoteNG.App;
 using mRemoteNG.App.Info;
-using mRemoteNG.Messages;
-using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
+using static mRemoteNG.App.Runtime;
 
 namespace mRemoteNG.Config.Settings
 {
-    public class SettingsSaver
+    public static class SettingsSaver
     {
         public static void SaveSettings()
         {
@@ -74,12 +72,11 @@ namespace mRemoteNG.Config.Settings
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                    "Saving settings failed" + Environment.NewLine + Environment.NewLine + ex.Message, false);
+                MessageCollector.AddExceptionStackTrace("Saving settings failed", ex);
             }
         }
 
-        public static void SavePanelsToXML()
+        private static void SavePanelsToXML()
         {
             try
             {
@@ -92,8 +89,7 @@ namespace mRemoteNG.Config.Settings
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                    "SavePanelsToXML failed" + Environment.NewLine + Environment.NewLine + ex.Message, false);
+                MessageCollector.AddExceptionStackTrace("SavePanelsToXML failed", ex);
             }
         }
 
@@ -108,14 +104,16 @@ namespace mRemoteNG.Config.Settings
 
                 var xmlTextWriter =
                     new XmlTextWriter(SettingsFileInfo.SettingsPath + "\\" + SettingsFileInfo.ExtAppsFilesName,
-                        Encoding.UTF8);
-                xmlTextWriter.Formatting = Formatting.Indented;
-                xmlTextWriter.Indentation = 4;
+                        Encoding.UTF8)
+                    {
+                        Formatting = Formatting.Indented,
+                        Indentation = 4
+                    };
 
                 xmlTextWriter.WriteStartDocument();
                 xmlTextWriter.WriteStartElement("Apps");
 
-                foreach (ExternalTool extA in Runtime.ExternalTools)
+                foreach (ExternalTool extA in ExternalTools)
                 {
                     xmlTextWriter.WriteStartElement("App");
                     xmlTextWriter.WriteAttributeString("DisplayName", "", extA.DisplayName);
@@ -133,8 +131,7 @@ namespace mRemoteNG.Config.Settings
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg,
-                    "SaveExternalAppsToXML failed" + Environment.NewLine + Environment.NewLine + ex.Message, false);
+                MessageCollector.AddExceptionStackTrace("SaveExternalAppsToXML failed", ex);
             }
         }
     }

@@ -327,12 +327,12 @@ Citrix ICA 客户端空间版本：{0}</value>
 远程桌面版本 {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>使用VNC前，请确认VncSharpNG.dll在您安装mRemoteNG的目录中（一般为 C:\Program Files\mRemoteNG\）。
+    <value>使用VNC前，请确认VncSharp.dll在您安装mRemoteNG的目录中（一般为 C:\Program Files\mRemoteNG\）。
 如果执行此操作后，依然无法通过VNC的检测，请在mRemoteNG论坛中咨询，地址是：http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>发现 VNC 组件。
-VncSharpNG 版本 {0}</value>
+VncSharp 版本 {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>服务器连接断开时，自动重试连接(仅限RDP和ICA)</value>

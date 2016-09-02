@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace mRemoteNG.Tree
 {
-    public class ConnectionTree
+    public static class ConnectionTree
     {
         private static TreeNode SetNodeToolTip_old_node;
         private static TreeNode treeNodeToBeSelected;
@@ -315,7 +315,7 @@ namespace mRemoteNG.Tree
 
         private static bool IsThisTheNodeWeAreSearchingFor(TreeNode treeNode, string searchFor)
         {
-            return ((treeNode.Text.ToLower()).IndexOf(searchFor.ToLower()) + 1 > 0);
+            return treeNode.Text.ToLower().IndexOf(searchFor.ToLower(), StringComparison.Ordinal) + 1 > 0;
         }
 
         public static TreeNode Find(TreeNode treeNode, ConnectionInfo conInfo)

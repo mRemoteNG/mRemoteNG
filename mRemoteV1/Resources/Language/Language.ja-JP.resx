@@ -340,13 +340,13 @@ If this check still fails or you are unable to use RDP, please consult the mRemo
 Remote Desktop Connection Control Version {0}</comment>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC requires VncSharpNG.dll to be located in your mRemoteNG application folder.
-Please make sure that you have the VncSharpNG.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
+    <value>VNC requires VncSharp.dll to be located in your mRemoteNG application folder.
+Please make sure that you have the VncSharp.dll file in your mRemoteNG application folder (usually C:\Program Files\mRemoteNG\).
 If you are still not able to pass this check or use VNC in mRemoteNG please consult the mRemoteNG Forum at http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>All VNC components were found and seem to be registered properly.
-VncSharpNG Control Version {0}</value>
+VncSharp Control Version {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatically try to reconnect when disconnected from server (RDP &amp;&amp; ICA only)</value>

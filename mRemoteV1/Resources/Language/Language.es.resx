@@ -330,13 +330,13 @@ Si continúa teniendo problemas para hacer funcionar RDP, consulte el Foro de mR
 Versión de Control {0} de la Conexión de Escritorio Remoto</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC necesita que VncSharpNG.dll esté situada en la carpeta donde está instalado mRemoteNG.
-Por favor, compruebe que tiene el archivo VncSharpNG.dll en la carpeta de instalación de mRemoteNG (normalmente C:\Archivos de Programa\mRemoteNG\).
+    <value>VNC necesita que VncSharp.dll esté situada en la carpeta donde está instalado mRemoteNG.
+Por favor, compruebe que tiene el archivo VncSharp.dll en la carpeta de instalación de mRemoteNG (normalmente C:\Archivos de Programa\mRemoteNG\).
 Si continúa sin funcionar la comprobación ó no puede utilizar VNC en mRemoteNG, consulte el Foro de mRemoteNG en http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>Todos los componentes VNC han sido localizados y parecen registrados adecuadamente.
-Versión de Control {0} de VNCSharpNG</value>
+Versión de Control {0} de VncSharp</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Tratar de reconectar automáticamente al ser desconectado del servidor (solo RDP &amp;&amp; ICA)</value>

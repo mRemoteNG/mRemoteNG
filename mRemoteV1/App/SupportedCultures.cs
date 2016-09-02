@@ -8,32 +8,23 @@ namespace mRemoteNG.App
 {
 	public class SupportedCultures : Dictionary<string, string>
 	{
-        private static SupportedCultures _Instance = null;
+        private static SupportedCultures _Instance;
 
-        private static SupportedCultures SingletonInstance
-        {
-            get
-            {
-                if (_Instance == null)
-                    _Instance = new SupportedCultures();
-                return _Instance;
-            }
-        }
-		
+        private static SupportedCultures SingletonInstance => _Instance ?? (_Instance = new SupportedCultures());
 
-        private SupportedCultures()
+
+	    private SupportedCultures()
         {
-            CultureInfo CultureInfo = default(CultureInfo);
             foreach (string CultureName in Settings.Default.SupportedUICultures.Split(','))
             {
                 try
                 {
-                    CultureInfo = new CultureInfo(CultureName.Trim());
+                    var CultureInfo = new CultureInfo(CultureName.Trim());
                     Add(CultureInfo.Name, CultureInfo.TextInfo.ToTitleCase(CultureInfo.NativeName));
                 }
                 catch (Exception ex)
                 {
-                    Debug.Print(string.Format("An exception occurred while adding the culture \'{0}\' to the list of supported cultures. {1}", CultureName, ex.ToString()));
+                    Debug.Print($"An exception occurred while adding the culture {CultureName} to the list of supported cultures. {ex.StackTrace}");
                 }
             }
         }

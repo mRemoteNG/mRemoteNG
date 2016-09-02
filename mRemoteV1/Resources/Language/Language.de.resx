@@ -331,13 +331,13 @@ Wenn Sie noch immer Probleme mit RDP haben, konsultieren Sie bitte das mRemoteNG
 Remote Desktop Verbindung Control Version {0}</value>
   </data>
   <data name="strCcVNCFailed" xml:space="preserve">
-    <value>VNC benötigt die Datei VncSharpNG.dll im mRemoteNG-Programmordner.
-Bitte stellen Sie sicher, dass Sie die Datei VncSharpNG.dll in Ihrem mRemoteNG-Programmordner haben (üblicherweise C:\Programme\mRemoteNG\).
+    <value>VNC benötigt die Datei VncSharp.dll im mRemoteNG-Programmordner.
+Bitte stellen Sie sicher, dass Sie die Datei VncSharp.dll in Ihrem mRemoteNG-Programmordner haben (üblicherweise C:\Programme\mRemoteNG\).
 Wenn Sie noch immer Probleme mit VNC haben, konsultieren Sie bitte das mRemoteNG-Forum: http://forum.mremoteng.org/</value>
   </data>
   <data name="strCcVNCOK" xml:space="preserve">
     <value>Alle VNC-Komponenten wurden gefunden und scheinen korrekt registriert zu sein.
-VncSharpNG Control Version {0}</value>
+VncSharp Control Version {0}</value>
   </data>
   <data name="strCheckboxAutomaticReconnect" xml:space="preserve">
     <value>Automatisch versuchen zu verbinden, wenn Verbindung getrennt wird (nur RDP &amp;&amp; ICA)</value>

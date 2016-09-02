@@ -124,18 +124,8 @@ namespace mRemoteNG.UI.Window
 	    private void btnImport_Click(object sender, EventArgs e)
 		{
             ProtocolType protocol = (ProtocolType)StringToEnum(typeof(ProtocolType), Convert.ToString(cbProtocol.SelectedItem));
-					
-			List<ScanHost> hosts = new List<ScanHost>();
-			foreach (ListViewItem item in lvHosts.SelectedItems)
-			{
-                var scanHost = (ScanHost)item.Tag;
-				if (scanHost != null)
-				{
-					hosts.Add(scanHost);
-				}
-			}
-			Import.ImportFromPortScan(hosts, protocol);
-			DialogResult = DialogResult.OK;
+		    importSelectedHosts(protocol);
+            DialogResult = DialogResult.OK;
 			Close();
 		}
         #endregion
@@ -253,25 +243,7 @@ namespace mRemoteNG.UI.Window
 		}
         #endregion
 
-	    private void ListView_MouseDown(object sender, MouseEventArgs e)
-	    {
-            if (e.Button == MouseButtons.Right)
-            {
-                var hitTestInfo = lvHosts.HitTest(e.X, e.Y);
-                if (hitTestInfo.Item != null)
-                {
-                    var loc = e.Location;
-                    loc.Offset(lvHosts.Location);
-
-                    var lvi = lvHosts.GetItemAt(e.X, e.Y);
-
-                    // Adjust context menu (or it's contents) based on hitTestInfo details
-                    resultsMenuStrip.Show(this, loc);
-                }
-            }
-        }
-
-        private void ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void importSelectedHosts(ProtocolType protocol)
         {
             List<ScanHost> hosts = new List<ScanHost>();
             foreach (ListViewItem item in lvHosts.SelectedItems)
@@ -289,17 +261,42 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            var toolStripMenuItem = (ToolStripMenuItem)sender;
-            string pText = null;
-            if (toolStripMenuItem != null)
-                pText = toolStripMenuItem.Text;
-
-            //TODO - rewrite this so it's not a hack. Put the import into it's own method and have different events for each protocol...
-            pText = pText?.Replace("Import", "");
-
-            ProtocolType protocol = (ProtocolType)StringToEnum(typeof(ProtocolType), pText);
-
             Import.ImportFromPortScan(hosts, protocol);
+        }
+
+        private void importVNCToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            importSelectedHosts(ProtocolType.VNC);
+        }
+
+        private void importTelnetToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            importSelectedHosts(ProtocolType.Telnet);
+        }
+
+        private void importSSH2ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            importSelectedHosts(ProtocolType.SSH2);
+        }
+
+        private void importRloginToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            importSelectedHosts(ProtocolType.Rlogin);
+        }
+
+        private void importRDPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            importSelectedHosts(ProtocolType.RDP);
+        }
+
+        private void importHTTPSToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            importSelectedHosts(ProtocolType.HTTPS);
+        }
+
+        private void importHTTPToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            importSelectedHosts(ProtocolType.HTTP);
         }
     }
 }

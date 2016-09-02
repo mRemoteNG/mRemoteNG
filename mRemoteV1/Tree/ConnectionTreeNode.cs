@@ -4,23 +4,22 @@ using mRemoteNG.Container;
 using System;
 using System.Windows.Forms;
 using mRemoteNG.Messages;
-using mRemoteNG.My;
 using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Tree
 {
-	public class ConnectionTreeNode
+	public static class ConnectionTreeNode
     {
         #region Public Methods
 		public static string GetConstantID(TreeNode node)
 		{
 			if (GetNodeType(node) == TreeNodeType.Connection)
-				return (node.Tag as ConnectionInfo).ConstantID;
-			else if (GetNodeType(node) == TreeNodeType.Container)
-				return (node.Tag as ContainerInfo).ConstantID;
-				
-			return null;
+				return ((ConnectionInfo) node.Tag).ConstantID;
+		    if (GetNodeType(node) == TreeNodeType.Container)
+		        return ((ContainerInfo) node.Tag).ConstantID;
+
+		    return null;
 		}
 		
 		public static TreeNode GetNodeFromPositionID(int id)
@@ -29,10 +28,9 @@ namespace mRemoteNG.Tree
 			{
 				if (connection.PositionID == id)
 				{
-					if (connection.IsContainer)
-						return (connection.Parent as ContainerInfo).TreeNode;
-					else
-						return connection.TreeNode;
+				    if (connection.IsContainer)
+						return connection.Parent.TreeNode;
+				    return connection.TreeNode;
 				}
 			}
 				
@@ -45,10 +43,9 @@ namespace mRemoteNG.Tree
 			{
 				if (connectionInfo.ConstantID == id)
 				{
-					if (connectionInfo.IsContainer)
-						return (connectionInfo.Parent as ContainerInfo).TreeNode;
-					else
-						return connectionInfo.TreeNode;
+				    if (connectionInfo.IsContainer)
+						return connectionInfo.Parent.TreeNode;
+				    return connectionInfo.TreeNode;
 				}
 			}
 				
@@ -59,19 +56,19 @@ namespace mRemoteNG.Tree
 		{
 			try
 			{
-                if (treeNode == null || treeNode.Tag == null)
+                if (treeNode?.Tag == null)
 					return TreeNodeType.None;
 					
 				if (treeNode.Tag is PuttySessionsNodeInfo)
 					return TreeNodeType.PuttyRoot;
-				else if (treeNode.Tag is RootNodeInfo)
-					return TreeNodeType.Root;
-				else if (treeNode.Tag is ContainerInfo)
-					return TreeNodeType.Container;
-				else if (treeNode.Tag is PuttySessionInfo)
-					return TreeNodeType.PuttySession;
-				else if (treeNode.Tag is ConnectionInfo)
-					return TreeNodeType.Connection;
+			    if (treeNode.Tag is RootNodeInfo)
+			        return TreeNodeType.Root;
+			    if (treeNode.Tag is ContainerInfo)
+			        return TreeNodeType.Container;
+			    if (treeNode.Tag is PuttySessionInfo)
+			        return TreeNodeType.PuttySession;
+			    if (treeNode.Tag is ConnectionInfo)
+			        return TreeNodeType.Connection;
 			}
 			catch (Exception ex)
 			{
@@ -145,10 +142,7 @@ namespace mRemoteNG.Tree
 						break;
 				}
 					
-				if (!string.IsNullOrEmpty(name))
-					treeNode.Name = name;
-				else
-					treeNode.Name = defaultName;
+				treeNode.Name = !string.IsNullOrEmpty(name) ? name : defaultName;
 				treeNode.Text = treeNode.Name;
 					
 				return treeNode;
@@ -221,10 +215,12 @@ namespace mRemoteNG.Tree
 
             Runtime.ConnectionList.Add(newConnectionInfo);
 
-            TreeNode newTreeNode = new TreeNode(newConnectionInfo.Name);
-            newTreeNode.Tag = newConnectionInfo;
-            newTreeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
-            newTreeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
+            TreeNode newTreeNode = new TreeNode(newConnectionInfo.Name)
+            {
+                Tag = newConnectionInfo,
+                ImageIndex = (int) TreeImageType.ConnectionClosed,
+                SelectedImageIndex = (int) TreeImageType.ConnectionClosed
+            };
 
             newConnectionInfo.TreeNode = newTreeNode;
 
@@ -255,7 +251,7 @@ namespace mRemoteNG.Tree
                 return;
 
             connectionInfo.Name = newName;
-            if (mRemoteNG.Settings.Default.SetHostnameLikeDisplayName)
+            if (Settings.Default.SetHostnameLikeDisplayName)
                 connectionInfo.Hostname = newName;
         }
         #endregion
@@ -264,7 +260,7 @@ namespace mRemoteNG.Tree
         private delegate void SetNodeImageIndexDelegate(TreeNode treeNode, int imageIndex);
         private static void SetNodeImageIndex(TreeNode treeNode, int imageIndex)
         {
-            if (treeNode == null || treeNode.TreeView == null)
+            if (treeNode?.TreeView == null)
             {
                 return;
             }

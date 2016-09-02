@@ -14,8 +14,11 @@ namespace mRemoteNG.UI.Window
 {
 	public partial class ConnectionTreeWindow
 	{
+        private ToolTip DescriptionTooltip { get; }
+
         #region Form Stuff
-		public void Tree_Load(object sender, EventArgs e)
+
+        private void Tree_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
 					
@@ -73,8 +76,8 @@ namespace mRemoteNG.UI.Window
 					
 			txtSearch.Text = Language.strSearchPrompt;
 		}
-				
-		public void ApplyTheme()
+
+        private void ApplyTheme()
 		{
 			msMain.BackColor = Themes.ThemeManager.ActiveTheme.ToolbarBackgroundColor;
 			msMain.ForeColor = Themes.ThemeManager.ActiveTheme.ToolbarTextColor;
@@ -132,10 +135,6 @@ namespace mRemoteNG.UI.Window
             rootNode.EnsureVisible();
 	    }
         #endregion
-
-        #region Public Properties
-        public ToolTip DescriptionTooltip {get; set;}
-        #endregion
 		
         #region Private Methods
 		private void FillImageList()
@@ -150,7 +149,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "FillImageList (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("FillImageList (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
 				
@@ -172,7 +171,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterLabelEdit (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
 
@@ -204,7 +203,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
 
@@ -232,7 +231,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_NodeMouseClick (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_NodeMouseClick (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
 
@@ -253,7 +252,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
 				
@@ -400,7 +399,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "ShowHideTreeContextMenuItems (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("ShowHideTreeContextMenuItems (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
         #endregion
@@ -423,7 +422,7 @@ namespace mRemoteNG.UI.Window
             }
             catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_DragDrop (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_DragDrop (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
 
@@ -447,7 +446,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_DragEnter (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_DragEnter (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
 
@@ -494,7 +493,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_DragOver (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_DragOver (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
 
@@ -503,19 +502,15 @@ namespace mRemoteNG.UI.Window
 			try
 			{
 				TreeNode dragTreeNode = e.Item as TreeNode;
-				if (dragTreeNode == null)
+
+			    if (dragTreeNode?.Tag == null)
 				{
-					return ;
-				}
-						
-				if (dragTreeNode.Tag == null)
-				{
-					return ;
+					return;
 				}
 				if (dragTreeNode.Tag is PuttySessionInfo|| !(dragTreeNode.Tag is ConnectionInfo|| dragTreeNode.Tag is ContainerInfo))
 				{
 					tvConnections.SelectedNode = dragTreeNode;
-					return ;
+				    return;
 				}
 						
 				//Set the drag node and initiate the DragDrop
@@ -523,7 +518,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_ItemDrag (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_ItemDrag (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
         #endregion
@@ -710,7 +705,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.Tree.AddConnection() failed." + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("UI.Window.Tree.AddConnection() failed.", ex);
 			}
 		}
 				
@@ -758,7 +753,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strErrorAddFolderFailed, ex.Message), true);
+				Runtime.MessageCollector.AddExceptionStackTrace(Language.strErrorAddFolderFailed, ex);
 			}
 		}
 				
@@ -795,7 +790,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "DisconnectConnection (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("DisconnectConnection (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
 				
@@ -814,7 +809,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SSHTransferFile (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("SSHTransferFile (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
 				
@@ -848,7 +843,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "cMenTreeTools_DropDownOpening failed (UI.Window.ConnectionTreeWindow)" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeTools_DropDownOpening failed (UI.Window.ConnectionTreeWindow)", ex);
 			}
 		}
 				
@@ -863,18 +858,18 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.ConnectionTreeWindow)" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.ConnectionTreeWindow)", ex);
 			}
 		}
         #endregion
-		
+
         #region Menu
-		public static void mMenViewExpandAllFolders_Click(object sender, EventArgs e)
+        private void mMenViewExpandAllFolders_Click(object sender, EventArgs e)
 		{
             ConnectionTree.ExpandAllNodes();
 		}
-				
-		public void mMenViewCollapseAllFolders_Click(object sender, EventArgs e)
+
+        private void mMenViewCollapseAllFolders_Click(object sender, EventArgs e)
 		{
 			if (tvConnections.SelectedNode != null)
 			{
@@ -886,9 +881,9 @@ namespace mRemoteNG.UI.Window
             ConnectionTree.CollapseAllNodes();
 		}
         #endregion
-		
+
         #region Search
-		public void txtSearch_GotFocus(object sender, EventArgs e)
+        private void txtSearch_GotFocus(object sender, EventArgs e)
 		{
 			txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextColor;
 			if (txtSearch.Text == Language.strSearchPrompt)
@@ -896,8 +891,8 @@ namespace mRemoteNG.UI.Window
 				txtSearch.Text = "";
 			}
 		}
-				
-		public void txtSearch_LostFocus(object sender, EventArgs e)
+
+        private void txtSearch_LostFocus(object sender, EventArgs e)
 		{
 			if (txtSearch.Text == "")
 			{
@@ -905,8 +900,8 @@ namespace mRemoteNG.UI.Window
 				txtSearch.Text = Language.strSearchPrompt;
 			}
 		}
-				
-		public void txtSearch_KeyDown(object sender, KeyEventArgs e)
+
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
 		{
 			try
 			{
@@ -930,11 +925,11 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "txtSearch_KeyDown (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("txtSearch_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
-				
-		public void txtSearch_TextChanged(object sender, EventArgs e)
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
 		{
 		    try
 		    {
@@ -944,8 +939,8 @@ namespace mRemoteNG.UI.Window
 		    {
 		    }
 		}
-				
-		public void tvConnections_KeyPress(object sender, KeyPressEventArgs e)
+
+        private void tvConnections_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			try
 			{
@@ -959,11 +954,11 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_KeyPress (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_KeyPress (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
-				
-		public void tvConnections_KeyDown(object sender, KeyEventArgs e)
+
+        private void tvConnections_KeyDown(object sender, KeyEventArgs e)
 		{
 			try
 			{
@@ -994,7 +989,7 @@ namespace mRemoteNG.UI.Window
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "tvConnections_KeyDown (UI.Window.ConnectionTreeWindow) failed" + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_KeyDown (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
         #endregion

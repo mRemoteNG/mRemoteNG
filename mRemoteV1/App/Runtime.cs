@@ -22,18 +22,19 @@ using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
+using static System.IO.Path;
 using TabPage = Crownwood.Magic.Controls.TabPage;
 
 
 namespace mRemoteNG.App
 {
-    public class Runtime
+    public static class Runtime
     {
         #region Public Properties
         public static ConnectionList ConnectionList { get; set; }
-        public static ConnectionList PreviousConnectionList { get; set; }
+        private static ConnectionList PreviousConnectionList { get; set; }
         public static ContainerList ContainerList { get; set; }
-        public static ContainerList PreviousContainerList { get; set; }
+        private static ContainerList PreviousContainerList { get; set; }
         public static CredentialList CredentialList { get; set; }
         public static CredentialList PreviousCredentialList { get; set; }
         public static WindowList WindowList { get; set; }
@@ -93,16 +94,18 @@ namespace mRemoteNG.App
             ContextMenuStrip cMen = new ContextMenuStrip();
             ToolStripMenuItem cMenRen = CreateRenameMenuItem(pnlcForm);
             ToolStripMenuItem cMenScreens = CreateScreensMenuItem(pnlcForm);
-            cMen.Items.AddRange(new ToolStripMenuItem[] { cMenRen, cMenScreens });
+            cMen.Items.AddRange(new ToolStripItem[] { cMenRen, cMenScreens });
             pnlcForm.TabPageContextMenuStrip = cMen;
         }
 
         private static ToolStripMenuItem CreateScreensMenuItem(DockContent pnlcForm)
         {
-            ToolStripMenuItem cMenScreens = new ToolStripMenuItem();
-            cMenScreens.Text = Language.strSendTo;
-            cMenScreens.Image = Resources.Monitor;
-            cMenScreens.Tag = pnlcForm;
+            ToolStripMenuItem cMenScreens = new ToolStripMenuItem
+            {
+                Text = Language.strSendTo,
+                Image = Resources.Monitor,
+                Tag = pnlcForm
+            };
             cMenScreens.DropDownItems.Add("Dummy");
             cMenScreens.DropDownOpening += cMenConnectionPanelScreens_DropDownOpening;
             return cMenScreens;
@@ -110,10 +113,12 @@ namespace mRemoteNG.App
 
         private static ToolStripMenuItem CreateRenameMenuItem(DockContent pnlcForm)
         {
-            ToolStripMenuItem cMenRen = new ToolStripMenuItem();
-            cMenRen.Text = Language.strRename;
-            cMenRen.Image = Resources.Rename;
-            cMenRen.Tag = pnlcForm;
+            ToolStripMenuItem cMenRen = new ToolStripMenuItem
+            {
+                Text = Language.strRename,
+                Image = Resources.Rename,
+                Tag = pnlcForm
+            };
             cMenRen.Click += cMenConnectionPanelRename_Click;
             return cMenRen;
         }
@@ -122,8 +127,7 @@ namespace mRemoteNG.App
         {
             try
             {
-                ConnectionWindow conW = default(ConnectionWindow);
-                conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
+                var conW = (ConnectionWindow)((ToolStripMenuItem)sender).Tag;
 
                 string nTitle = "";
                 input.InputBox(Language.strNewTitle, Language.strNewTitle + ":", ref nTitle);
@@ -135,7 +139,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t rename panel" + Environment.NewLine + ex.Message);
+                MessageCollector.AddExceptionStackTrace("cMenConnectionPanelRename_Click: Caught Exception: ", ex);
             }
         }
 
@@ -159,7 +163,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t enumerate screens" + Environment.NewLine + ex.Message);
+                MessageCollector.AddExceptionStackTrace("cMenConnectionPanelScreens_DropDownOpening: Caught Exception: ", ex);
             }
         }
 
@@ -188,7 +192,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, "Caught Exception: " + Environment.NewLine + ex.Message);
+                MessageCollector.AddExceptionStackTrace("cMenConnectionPanelScreen_Click: Caught Exception: ", ex);
             }
         }
         #endregion
@@ -212,7 +216,9 @@ namespace mRemoteNG.App
                     Settings.Default.CustomConsPath = filename;
                 }
 
-                Directory.CreateDirectory(Path.GetDirectoryName(filename));
+                var dirname = GetDirectoryName(filename);
+                if(dirname != null)
+                    Directory.CreateDirectory(dirname);
 
                 // Use File.Open with FileMode.CreateNew so that we don't overwrite an existing file
                 using (FileStream fileStream = File.Open(filename, FileMode.CreateNew, FileAccess.Write, FileShare.None))
@@ -246,11 +252,11 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                MessageCollector.AddExceptionMessage(Language.strCouldNotCreateNewConnectionsFile, ex, MessageClass.ErrorMsg);
+                MessageCollector.AddExceptionMessage(Language.strCouldNotCreateNewConnectionsFile, ex);
             }
         }
 
-        public static void LoadConnectionsBG(bool withDialog = false, bool update = false)
+        public static void LoadConnectionsBG()
         {
             _withDialog = false;
             _loadUpdate = true;
@@ -260,8 +266,8 @@ namespace mRemoteNG.App
             t.Start();
         }
 
-        private static bool _withDialog = false;
-        private static bool _loadUpdate = false;
+        private static bool _withDialog;
+        private static bool _loadUpdate;
         private static void LoadConnectionsBGd()
         {
             LoadConnections(_withDialog, _loadUpdate);
@@ -389,7 +395,7 @@ namespace mRemoteNG.App
             }
         }
 
-        protected static void CreateBackupFile(string fileName)
+        private static void CreateBackupFile(string fileName)
         {
             // This intentionally doesn't prune any existing backup files. We just assume the user doesn't want any new ones created.
             if (Settings.Default.BackupFileKeepCount == 0)
@@ -410,10 +416,10 @@ namespace mRemoteNG.App
             }
         }
 
-        protected static void PruneBackupFiles(string baseName)
+        private static void PruneBackupFiles(string baseName)
         {
-            string fileName = Path.GetFileName(baseName);
-            string directoryName = Path.GetDirectoryName(baseName);
+            string fileName = GetFileName(baseName);
+            string directoryName = GetDirectoryName(baseName);
 
             if (string.IsNullOrEmpty(fileName) || string.IsNullOrEmpty(directoryName))
             {
@@ -437,7 +443,7 @@ namespace mRemoteNG.App
             }
         }
 
-        public static string GetDefaultStartupConnectionFileName()
+        private static string GetDefaultStartupConnectionFileName()
         {
             string newPath = ConnectionsFileInfo.DefaultConnectionsPath + "\\" + ConnectionsFileInfo.DefaultConnectionsFile;
 #if !PORTABLE
@@ -470,7 +476,7 @@ namespace mRemoteNG.App
             t.Start();
         }
 
-        private static bool _saveUpdate = false;
+        private static bool _saveUpdate;
         private static object _saveLock = new object();
         private static void SaveConnectionsBGd()
         {
@@ -600,14 +606,7 @@ namespace mRemoteNG.App
                 ConnectionInfo newConnectionInfo = new ConnectionInfo();
                 newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
 
-                if (Settings.Default.IdentifyQuickConnectTabs)
-                {
-                    newConnectionInfo.Name = string.Format(Language.strQuick, uri.Host);
-                }
-                else
-                {
-                    newConnectionInfo.Name = uri.Host;
-                }
+                newConnectionInfo.Name = Settings.Default.IdentifyQuickConnectTabs ? string.Format(Language.strQuick, uri.Host) : uri.Host;
 
                 newConnectionInfo.Protocol = protocol;
                 newConnectionInfo.Hostname = uri.Host;
@@ -625,7 +624,7 @@ namespace mRemoteNG.App
             }
             catch (Exception ex)
             {
-                MessageCollector.AddExceptionMessage(Language.strQuickConnectFailed, ex, MessageClass.ErrorMsg);
+                MessageCollector.AddExceptionMessage(Language.strQuickConnectFailed, ex);
                 return null;
             }
         }
@@ -789,8 +788,7 @@ namespace mRemoteNG.App
 
         private static Control SetConnectionContainer(ConnectionInfo ConnectionInfo, Form connectionForm)
         {
-            Control connectionContainer = default(Control);
-            connectionContainer = ((ConnectionWindow)connectionForm).AddConnectionTab(ConnectionInfo);
+            Control connectionContainer = ((ConnectionWindow)connectionForm).AddConnectionTab(ConnectionInfo);
 
             if (ConnectionInfo.Protocol == ProtocolType.IntApp)
             {
@@ -832,11 +830,7 @@ namespace mRemoteNG.App
 
         private static Form SetConnectionForm(Form ConForm, string connectionPanel)
         {
-            Form connectionForm = default(Form);
-            if (ConForm == null)
-                connectionForm = WindowList.FromString(connectionPanel);
-            else
-                connectionForm = ConForm;
+            var connectionForm = ConForm ?? WindowList.FromString(connectionPanel);
 
             if (connectionForm == null)
                 connectionForm = AddPanel(connectionPanel);
@@ -870,10 +864,7 @@ namespace mRemoteNG.App
             if (ConnectionInfo.PreExtApp != "")
             {
                 ExternalTool extA = GetExtAppByName(ConnectionInfo.PreExtApp);
-                if (extA != null)
-                {
-                    extA.Start(ConnectionInfo);
-                }
+                extA?.Start(ConnectionInfo);
             }
         }
 
@@ -882,8 +873,10 @@ namespace mRemoteNG.App
             InterfaceControl IC = FindConnectionContainer(nCi);
             if (IC != null)
             {
-                ((ConnectionWindow)IC.FindForm()).Focus();
-                ((ConnectionWindow)IC.FindForm()).Show(frmMain.Default.pnlDock);
+                var connectionWindow = (ConnectionWindow)IC.FindForm();
+                connectionWindow?.Focus();
+                var findForm = (ConnectionWindow)IC.FindForm();
+                findForm?.Show(frmMain.Default.pnlDock);
                 TabPage tabPage = (TabPage)IC.Parent;
                 tabPage.Selected = true;
                 return true;
@@ -893,7 +886,8 @@ namespace mRemoteNG.App
         #endregion
 
         #region Event Handlers
-        public static void Prot_Event_Disconnected(object sender, string DisconnectedMessage)
+
+        private static void Prot_Event_Disconnected(object sender, string DisconnectedMessage)
         {
             try
             {
@@ -917,7 +911,7 @@ namespace mRemoteNG.App
             }
         }
 
-        public static void Prot_Event_Closed(object sender)
+        private static void Prot_Event_Closed(object sender)
         {
             try
             {
@@ -934,10 +928,7 @@ namespace mRemoteNG.App
                 if (Prot.InterfaceControl.Info.PostExtApp != "")
                 {
                     ExternalTool extA = GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp);
-                    if (extA != null)
-                    {
-                        extA.Start(Prot.InterfaceControl.Info);
-                    }
+                    extA?.Start(Prot.InterfaceControl.Info);
                 }
             }
             catch (Exception ex)
@@ -946,14 +937,14 @@ namespace mRemoteNG.App
             }
         }
 
-        public static void Prot_Event_Connected(object sender)
+        private static void Prot_Event_Connected(object sender)
         {
             ProtocolBase prot = (ProtocolBase)sender;
             MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventConnected, true);
             MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
         }
 
-        public static void Prot_Event_ErrorOccured(object sender, string ErrorMessage)
+        private static void Prot_Event_ErrorOccured(object sender, string ErrorMessage)
         {
             try
             {
@@ -988,7 +979,8 @@ namespace mRemoteNG.App
         #endregion
 
         #region Misc
-        public static void GoToURL(string URL)
+
+        private static void GoToURL(string URL)
         {
             ConnectionInfo connectionInfo = new ConnectionInfo();
             connectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
@@ -1075,7 +1067,7 @@ namespace mRemoteNG.App
             }
         }
 
-        public static InterfaceControl FindConnectionContainer(ConnectionInfo connectionInfo)
+        private static InterfaceControl FindConnectionContainer(ConnectionInfo connectionInfo)
         {
             if (connectionInfo.OpenConnections.Count > 0)
             {
@@ -1107,10 +1099,9 @@ namespace mRemoteNG.App
         // Override the font of all controls in a container with the default font based on the OS version
         public static void FontOverride(Control ctlParent)
         {
-            Control ctlChild = default(Control);
             foreach (Control tempLoopVar_ctlChild in ctlParent.Controls)
             {
-                ctlChild = tempLoopVar_ctlChild;
+                var ctlChild = tempLoopVar_ctlChild;
                 ctlChild.Font = new Font(SystemFonts.MessageBoxFont.Name, ctlChild.Font.Size, ctlChild.Font.Style, ctlChild.Font.Unit, ctlChild.Font.GdiCharSet);
                 if (ctlChild.Controls.Count > 0)
                 {

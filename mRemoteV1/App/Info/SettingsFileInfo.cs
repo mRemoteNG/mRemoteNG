@@ -1,11 +1,12 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Reflection;
+#if !PORTABLE
 using System.Windows.Forms;
+#endif
 
 namespace mRemoteNG.App.Info
 {
-    public class SettingsFileInfo
+    public static class SettingsFileInfo
     {
         //public static readonly string exe = Assembly.GetExecutingAssembly().GetName().CodeBase;
         public static readonly string exePath = Path.GetDirectoryName(Assembly.GetEntryAssembly().Location);
