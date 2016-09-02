@@ -475,14 +475,7 @@ namespace mRemoteNG.UI.Window
 					        pGrid.SelectedObject = Obj;
 
 					        btnShowProperties.Enabled = true;
-					        if (((ContainerInfo) Obj).Parent.Parent != null)
-					        {
-					            btnShowInheritance.Enabled = true;
-					        }
-					        else
-					        {
-					            btnShowInheritance.Enabled = false;
-					        }
+					        btnShowInheritance.Enabled = ((ContainerInfo) Obj).Parent != null;
 					        btnShowDefaultProperties.Enabled = false;
 					        btnShowDefaultInheritance.Enabled = false;
 					        btnIcon.Enabled = true;
