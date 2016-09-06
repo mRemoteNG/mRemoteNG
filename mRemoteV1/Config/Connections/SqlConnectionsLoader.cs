@@ -143,7 +143,6 @@ namespace mRemoteNG.Config.Connections
                 }
 
                 Runtime.IsConnectionsFileLoaded = true;
-                Windows.treeForm.InitialRefresh();
                 SetSelectedNode(_selectedTreeNode);
             }
             finally
