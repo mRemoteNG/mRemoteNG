@@ -127,6 +127,7 @@ namespace mRemoteNG.UI.Window
             // olvColumn1
             // 
             this.olvColumn1.AspectName = "Name";
+            this.olvColumn1.FillsFreeSpace = true;
             this.olvColumn1.IsButton = true;
             this.olvColumn1.Width = 200;
             // 
