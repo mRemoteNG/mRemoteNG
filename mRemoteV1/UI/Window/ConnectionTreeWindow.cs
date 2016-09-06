@@ -151,7 +151,7 @@ namespace mRemoteNG.UI.Window
 
         public void ExpandPreviouslyOpenedFolders()
         {
-            var containerList = ConnectionTreeModel.GetChildList(GetRootConnectionNode()).OfType<ContainerInfo>();
+            var containerList = ConnectionTreeModel.GetRecursiveChildList(GetRootConnectionNode()).OfType<ContainerInfo>();
             var previouslyExpandedNodes = containerList.Where(container => container.IsExpanded);
             olvConnections.ExpandedObjects = previouslyExpandedNodes;
             olvConnections.RebuildAll(true);

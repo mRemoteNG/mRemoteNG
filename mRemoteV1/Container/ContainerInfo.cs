@@ -62,5 +62,31 @@ namespace mRemoteNG.Container
 		{
             IsExpanded = true;
 		}
-	}
+
+        public IEnumerable<ConnectionInfo> GetRecursiveChildList()
+        {
+            var childList = new List<ConnectionInfo>();
+            foreach (var child in Children)
+            {
+                childList.Add(child);
+                var childContainer = child as ContainerInfo;
+                if (childContainer != null)
+                    childList.AddRange(GetRecursiveChildList(childContainer));
+            }
+            return childList;
+        }
+
+        private IEnumerable<ConnectionInfo> GetRecursiveChildList(ContainerInfo container)
+        {
+            var childList = new List<ConnectionInfo>();
+            foreach (var child in container.Children)
+            {
+                childList.Add(child);
+                var childContainer = child as ContainerInfo;
+                if (childContainer != null)
+                    childList.AddRange(GetRecursiveChildList(childContainer));
+            }
+            return childList;
+        }
+    }
 }
