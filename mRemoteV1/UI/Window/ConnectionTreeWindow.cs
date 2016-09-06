@@ -35,23 +35,55 @@ namespace mRemoteNG.UI.Window
 			WindowType = WindowType.Tree;
 			DockPnl = panel;
 			InitializeComponent();
-			FillImageList();
-
 		    DescriptionTooltip = new ToolTip
 		    {
 		        InitialDelay = 300,
 		        ReshowDelay = 0
 		    };
-		    LinkModelToView();
+
+            FillImageList();
+            LinkModelToView();
 		    SetEventHandlers();
 		}
 
-	    private void LinkModelToView()
+        private void FillImageList()
+        {
+            try
+            {
+                imgListTree.Images.Add(Resources.Root);
+                imgListTree.Images.SetKeyName(0, "Root");
+                imgListTree.Images.Add(Resources.Folder);
+                imgListTree.Images.SetKeyName(1, "Folder");
+                imgListTree.Images.Add(Resources.Play);
+                imgListTree.Images.SetKeyName(2, "Play");
+                imgListTree.Images.Add(Resources.Pause);
+                imgListTree.Images.SetKeyName(3, "Pause");
+                imgListTree.Images.Add(Resources.PuttySessions);
+                imgListTree.Images.SetKeyName(4, "PuttySessions");
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("FillImageList (UI.Window.ConnectionTreeWindow) failed", ex);
+            }
+        }
+
+        private void LinkModelToView()
 	    {
             olvNameColumn.AspectGetter = item => ((ConnectionInfo)item).Name;
+	        olvNameColumn.ImageGetter = ConnectionImageGetter;
             olvConnections.CanExpandGetter = item => item is ContainerInfo;
             olvConnections.ChildrenGetter = item => ((ContainerInfo)item).Children;
         }
+
+	    private object ConnectionImageGetter(object rowObject)
+	    {
+            if (rowObject is RootNodeInfo) return "Root";
+	        if (rowObject is ContainerInfo) return "Folder";
+            if (rowObject is PuttySessionInfo) return "PuttySessions";
+	        var connection = rowObject as ConnectionInfo;
+	        if (connection == null) return "";
+	        return connection.OpenConnections.Count > 0 ? "Play" : "Pause";
+	    }
 
 	    private void SetEventHandlers()
 	    {
@@ -176,23 +208,6 @@ namespace mRemoteNG.UI.Window
 	    }
 
         #region Private Methods
-        //TODO Fix for TreeListView
-        private void FillImageList()
-		{
-			try
-			{
-				imgListTree.Images.Add(Resources.Root);
-				imgListTree.Images.Add(Resources.Folder);
-				imgListTree.Images.Add(Resources.Play);
-				imgListTree.Images.Add(Resources.Pause);
-				imgListTree.Images.Add(Resources.PuttySessions);
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddExceptionStackTrace("FillImageList (UI.Window.ConnectionTreeWindow) failed", ex);
-			}
-		}
-
         //TODO Fix for TreeListView
         private void tvConnections_BeforeLabelEdit(object sender, LabelEditEventArgs e)
 		{
