@@ -48,7 +48,7 @@ namespace mRemoteNG.Config.Connections
             _dataTable.Columns.Add("PositionID");
             _dataTable.Columns.Add("LastChange");
             _dataTable.Columns.Add("Expanded");
-            _dataTable.Columns.Add("Descr");
+            _dataTable.Columns.Add("Description");
             _dataTable.Columns.Add("Icon");
             _dataTable.Columns.Add("Panel");
             _dataTable.Columns.Add("Username");
