@@ -43,6 +43,7 @@ namespace mRemoteNG.UI.Window
 		        ReshowDelay = 0
 		    };
 		    LinkModelToView();
+		    SetEventHandlers();
 		}
 
 	    private void LinkModelToView()
@@ -50,6 +51,12 @@ namespace mRemoteNG.UI.Window
             olvNameColumn.AspectGetter = item => ((ConnectionInfo)item).Name;
             olvConnections.CanExpandGetter = item => item is ContainerInfo;
             olvConnections.ChildrenGetter = item => ((ContainerInfo)item).Children;
+        }
+
+	    private void SetEventHandlers()
+	    {
+	        olvConnections.Collapsed += (sender, args) => ((ContainerInfo) args.Model).IsExpanded = false;
+            olvConnections.Expanded += (sender, args) => ((ContainerInfo) args.Model).IsExpanded = true;
         }
 
 	    private void PopulateTreeView()

@@ -143,7 +143,7 @@ namespace mRemoteNG.Config.Connections
             _xmlTextWriter.WriteStartElement("Node");
             _xmlTextWriter.WriteAttributeString("Name", "", containerInfo.Name);
             _xmlTextWriter.WriteAttributeString("Type", "", ConnectionTreeNode.GetNodeType(containerInfo.TreeNode).ToString());
-            _xmlTextWriter.WriteAttributeString("Expanded", "", containerInfo.TreeNode.IsExpanded.ToString());
+            _xmlTextWriter.WriteAttributeString("Expanded", "", containerInfo.IsExpanded.ToString());
             SaveConnectionFields(containerInfo);
         }
 
