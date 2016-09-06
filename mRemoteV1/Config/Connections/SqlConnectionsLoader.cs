@@ -179,6 +179,9 @@ namespace mRemoteNG.Config.Connections
                 if (_sqlDataReader.HasRows == false)
                     return;
 
+                //var deserializer = new DataTableDeserializer(_sqlDataReader);
+                //var connectionTreeModel = deserializer.Deserialize();
+
                 while (_sqlDataReader.Read())
                 {
                     var tNode = new TreeNode(Convert.ToString(_sqlDataReader["Name"]));
@@ -271,34 +274,32 @@ namespace mRemoteNG.Config.Connections
 
         private void AddContainerToList(TreeNode tNode)
         {
-            var contI = new ContainerInfo
-            {
-                TreeNode = tNode,
-                Name = Convert.ToString(_sqlDataReader["Name"])
-            };
+            var containerInfo = new ContainerInfo();
 
-            var conI = GetConnectionInfoFromSql();
-            conI.Parent = contI;
-            conI.IsContainer = true;
-            contI.CopyFrom(conI);
+            var connectionInfo = GetConnectionInfoFromSql();
+            containerInfo.CopyFrom(connectionInfo);
+            //connectionInfo.Parent = contI;
+            containerInfo.IsContainer = true;
+            containerInfo.Name = Convert.ToString(_sqlDataReader["Name"]);
+            containerInfo.TreeNode = tNode;
 
             if (DatabaseUpdate)
             {
-                var prevCont = PreviousContainerList.FindByConstantID(conI.ConstantID);
+                var prevCont = PreviousContainerList.FindByConstantID(connectionInfo.ConstantID);
                 if (prevCont != null)
-                    contI.IsExpanded = prevCont.IsExpanded;
+                    containerInfo.IsExpanded = prevCont.IsExpanded;
 
-                if (conI.ConstantID == PreviousSelected)
+                if (connectionInfo.ConstantID == PreviousSelected)
                     _selectedTreeNode = tNode;
             }
             else
             {
-                contI.IsExpanded = Convert.ToBoolean(_sqlDataReader["Expanded"]);
+                containerInfo.IsExpanded = Convert.ToBoolean(_sqlDataReader["Expanded"]);
             }
 
-            ContainerList.Add(contI);
-            ConnectionList.Add(conI);
-            tNode.Tag = contI;
+            ContainerList.Add(containerInfo);
+            ConnectionList.Add(connectionInfo);
+            tNode.Tag = containerInfo;
             tNode.ImageIndex = (int)TreeImageType.Container;
             tNode.SelectedImageIndex = (int)TreeImageType.Container;
         }
