@@ -1,5 +1,4 @@
 
-using mRemoteNG.Connection;
 
 namespace mRemoteNG.UI.Window
 {

@@ -11,6 +11,7 @@ namespace mRemoteNG.Tree
 {
 	public static class ConnectionTreeNode
     {
+        //TODO Everything in this class needs to be updated / rewritten to work with the TreeListView/ConnectionTreeModel
         #region Public Methods
 		public static string GetConstantID(TreeNode node)
 		{
