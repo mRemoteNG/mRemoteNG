@@ -46,7 +46,7 @@ namespace mRemoteNG.UI.Window
 		{
             this.components = new System.ComponentModel.Container();
             this.olvConnections = new BrightIdeasSoftware.TreeListView();
-            this.olvColumn1 = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.cMenTree = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.cMenTreeConnect = new System.Windows.Forms.ToolStripMenuItem();
             this.cMenTreeConnectWithOptions = new System.Windows.Forms.ToolStripMenuItem();
@@ -98,7 +98,7 @@ namespace mRemoteNG.UI.Window
             // 
             // olvConnections
             // 
-            this.olvConnections.AllColumns.Add(this.olvColumn1);
+            this.olvConnections.AllColumns.Add(this.olvNameColumn);
             this.olvConnections.AllowDrop = true;
             this.olvConnections.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
@@ -106,7 +106,7 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.olvConnections.CellEditUseWholeCell = false;
             this.olvConnections.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.olvColumn1});
+            this.olvNameColumn});
             this.olvConnections.ContextMenuStrip = this.cMenTree;
             this.olvConnections.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvConnections.FullRowSelect = true;
@@ -124,12 +124,11 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.View = System.Windows.Forms.View.Details;
             this.olvConnections.VirtualMode = true;
             // 
-            // olvColumn1
+            // olvNameColumn
             // 
-            this.olvColumn1.AspectName = "Name";
-            this.olvColumn1.FillsFreeSpace = true;
-            this.olvColumn1.IsButton = true;
-            this.olvColumn1.Width = 200;
+            this.olvNameColumn.AspectName = "Name";
+            this.olvNameColumn.FillsFreeSpace = true;
+            this.olvNameColumn.IsButton = true;
             // 
             // cMenTree
             // 
@@ -541,6 +540,6 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         private System.ComponentModel.IContainer components;
-        private BrightIdeasSoftware.OLVColumn olvColumn1;
+        private BrightIdeasSoftware.OLVColumn olvNameColumn;
     }
 }

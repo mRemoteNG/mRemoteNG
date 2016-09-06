@@ -117,7 +117,7 @@ namespace mRemoteNG.UI.Window
 
 	    private void PopulateTreeView()
 	    {
-	        olvColumn1.AspectGetter = item => ((ConnectionInfo) item).Name;
+	        olvNameColumn.AspectGetter = item => ((ConnectionInfo) item).Name;
             olvConnections.CanExpandGetter = item => item is ContainerInfo;
 	        olvConnections.ChildrenGetter = item => ((ContainerInfo) item).Children;
             olvConnections.Roots = ConnectionTreeModel.RootNodes;
