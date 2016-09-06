@@ -110,7 +110,6 @@ namespace mRemoteNG.UI.Window
             this.olvNameColumn});
             this.olvConnections.ContextMenuStrip = this.cMenTree;
             this.olvConnections.Cursor = System.Windows.Forms.Cursors.Default;
-            this.olvConnections.FullRowSelect = true;
             this.olvConnections.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.olvConnections.HideSelection = false;
             this.olvConnections.LabelEdit = true;
