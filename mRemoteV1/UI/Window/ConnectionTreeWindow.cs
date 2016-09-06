@@ -29,79 +29,6 @@ namespace mRemoteNG.UI.Window
 	        }
 	    }
 
-        #region Form Stuff
-        private void Tree_Load(object sender, EventArgs e)
-		{
-			ApplyLanguage();
-			Themes.ThemeManager.ThemeChanged += ApplyTheme;
-			ApplyTheme();
-					
-			txtSearch.Multiline = true;
-			txtSearch.MinimumSize = new Size(0, 14);
-			txtSearch.Size = new Size(txtSearch.Size.Width, 14);
-			txtSearch.Multiline = false;
-		}
-				
-		private void ApplyLanguage()
-		{
-			Text = Language.strConnections;
-			TabText = Language.strConnections;
-					
-			mMenAddConnection.ToolTipText = Language.strAddConnection;
-			mMenAddFolder.ToolTipText = Language.strAddFolder;
-			mMenView.ToolTipText = Language.strMenuView.Replace("&", "");
-			mMenViewExpandAllFolders.Text = Language.strExpandAllFolders;
-			mMenViewCollapseAllFolders.Text = Language.strCollapseAllFolders;
-			mMenSortAscending.ToolTipText = Language.strSortAsc;
-					
-			cMenTreeConnect.Text = Language.strConnect;
-			cMenTreeConnectWithOptions.Text = Language.strConnectWithOptions;
-			cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.strConnectToConsoleSession;
-			cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text = Language.strDontConnectToConsoleSessionMenuItem;
-			cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.strConnectInFullscreen;
-			cMenTreeConnectWithOptionsNoCredentials.Text = Language.strConnectNoCredentials;
-			cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.strChoosePanelBeforeConnecting;
-			cMenTreeDisconnect.Text = Language.strMenuDisconnect;
-					
-			cMenTreeToolsExternalApps.Text = Language.strMenuExternalTools;
-			cMenTreeToolsTransferFile.Text = Language.strMenuTransferFile;
-					
-			cMenTreeDuplicate.Text = Language.strDuplicate;
-			cMenTreeRename.Text = Language.strRename;
-			cMenTreeDelete.Text = Language.strMenuDelete;
-					
-			cMenTreeImport.Text = Language.strImportMenuItem;
-			cMenTreeImportFile.Text = Language.strImportFromFileMenuItem;
-			cMenTreeImportActiveDirectory.Text = Language.strImportAD;
-			cMenTreeImportPortScan.Text = Language.strImportPortScan;
-			cMenTreeExportFile.Text = Language.strExportToFileMenuItem;
-					
-			cMenTreeAddConnection.Text = Language.strAddConnection;
-			cMenTreeAddFolder.Text = Language.strAddFolder;
-					
-			cMenTreeToolsSort.Text = Language.strSort;
-			cMenTreeToolsSortAscending.Text = Language.strSortAsc;
-			cMenTreeToolsSortDescending.Text = Language.strSortDesc;
-			cMenTreeMoveUp.Text = Language.strMoveUp;
-			cMenTreeMoveDown.Text = Language.strMoveDown;
-					
-			txtSearch.Text = Language.strSearchPrompt;
-		}
-
-        private void ApplyTheme()
-		{
-			msMain.BackColor = Themes.ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			msMain.ForeColor = Themes.ThemeManager.ActiveTheme.ToolbarTextColor;
-			olvConnections.BackColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelBackgroundColor;
-            olvConnections.ForeColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelTextColor;
-			//tvConnections.LineColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelTreeLineColor;
-			BackColor = Themes.ThemeManager.ActiveTheme.ToolbarBackgroundColor;
-			txtSearch.BackColor = Themes.ThemeManager.ActiveTheme.SearchBoxBackgroundColor;
-			txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextPromptColor;
-		}
-        #endregion
-		
-        #region Public Methods
 		public ConnectionTreeWindow(DockContent panel)
 		{
 			WindowType = WindowType.Tree;
@@ -136,6 +63,78 @@ namespace mRemoteNG.UI.Window
             olvConnections.Expand(rootConnectionNode);
         }
 
+        #region Form Stuff
+        private void Tree_Load(object sender, EventArgs e)
+        {
+            ApplyLanguage();
+            Themes.ThemeManager.ThemeChanged += ApplyTheme;
+            ApplyTheme();
+
+            txtSearch.Multiline = true;
+            txtSearch.MinimumSize = new Size(0, 14);
+            txtSearch.Size = new Size(txtSearch.Size.Width, 14);
+            txtSearch.Multiline = false;
+        }
+
+        private void ApplyLanguage()
+        {
+            Text = Language.strConnections;
+            TabText = Language.strConnections;
+
+            mMenAddConnection.ToolTipText = Language.strAddConnection;
+            mMenAddFolder.ToolTipText = Language.strAddFolder;
+            mMenView.ToolTipText = Language.strMenuView.Replace("&", "");
+            mMenViewExpandAllFolders.Text = Language.strExpandAllFolders;
+            mMenViewCollapseAllFolders.Text = Language.strCollapseAllFolders;
+            mMenSortAscending.ToolTipText = Language.strSortAsc;
+
+            cMenTreeConnect.Text = Language.strConnect;
+            cMenTreeConnectWithOptions.Text = Language.strConnectWithOptions;
+            cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.strConnectToConsoleSession;
+            cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text = Language.strDontConnectToConsoleSessionMenuItem;
+            cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.strConnectInFullscreen;
+            cMenTreeConnectWithOptionsNoCredentials.Text = Language.strConnectNoCredentials;
+            cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.strChoosePanelBeforeConnecting;
+            cMenTreeDisconnect.Text = Language.strMenuDisconnect;
+
+            cMenTreeToolsExternalApps.Text = Language.strMenuExternalTools;
+            cMenTreeToolsTransferFile.Text = Language.strMenuTransferFile;
+
+            cMenTreeDuplicate.Text = Language.strDuplicate;
+            cMenTreeRename.Text = Language.strRename;
+            cMenTreeDelete.Text = Language.strMenuDelete;
+
+            cMenTreeImport.Text = Language.strImportMenuItem;
+            cMenTreeImportFile.Text = Language.strImportFromFileMenuItem;
+            cMenTreeImportActiveDirectory.Text = Language.strImportAD;
+            cMenTreeImportPortScan.Text = Language.strImportPortScan;
+            cMenTreeExportFile.Text = Language.strExportToFileMenuItem;
+
+            cMenTreeAddConnection.Text = Language.strAddConnection;
+            cMenTreeAddFolder.Text = Language.strAddFolder;
+
+            cMenTreeToolsSort.Text = Language.strSort;
+            cMenTreeToolsSortAscending.Text = Language.strSortAsc;
+            cMenTreeToolsSortDescending.Text = Language.strSortDesc;
+            cMenTreeMoveUp.Text = Language.strMoveUp;
+            cMenTreeMoveDown.Text = Language.strMoveDown;
+
+            txtSearch.Text = Language.strSearchPrompt;
+        }
+
+        private void ApplyTheme()
+        {
+            msMain.BackColor = Themes.ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+            msMain.ForeColor = Themes.ThemeManager.ActiveTheme.ToolbarTextColor;
+            olvConnections.BackColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelBackgroundColor;
+            olvConnections.ForeColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelTextColor;
+            //tvConnections.LineColor = Themes.ThemeManager.ActiveTheme.ConnectionsPanelTreeLineColor;
+            BackColor = Themes.ThemeManager.ActiveTheme.ToolbarBackgroundColor;
+            txtSearch.BackColor = Themes.ThemeManager.ActiveTheme.SearchBoxBackgroundColor;
+            txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextPromptColor;
+        }
+        #endregion
+
         //TODO Fix for TreeListView
         public void ExpandPreviouslyOpenedFolders()
         {
@@ -163,7 +162,6 @@ namespace mRemoteNG.UI.Window
 	        var rootNode = tvConnections.Nodes[0];
             rootNode.EnsureVisible();
 	    }
-        #endregion
 
         #region Private Methods
         //TODO Fix for TreeListView
