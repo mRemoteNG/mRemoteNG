@@ -104,6 +104,7 @@
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Config\Connections\DataTableSerializerTests.cs" />
     <Compile Include="Config\Connections\XmlConnectionsDeserializerTests.cs" />
+    <Compile Include="Tree\ConnectionTreeModelTests.cs" />
     <Compile Include="Connection\ConnectionInfoInheritanceTests.cs" />
     <Compile Include="Connection\ConnectionInfoTests.cs" />
     <Compile Include="Connection\DefaultConnectionInfoTests.cs" />
@@ -157,6 +158,7 @@
   <ItemGroup>
     <Content Include="Resources\TestConfCons.xml" />
   </ItemGroup>
+  <ItemGroup />
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
