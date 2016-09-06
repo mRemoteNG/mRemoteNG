@@ -5,6 +5,7 @@ using System;
 using System.ComponentModel;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Root.PuttySessions;
+using mRemoteNG.Tree;
 
 
 namespace mRemoteNG.Connection
@@ -89,8 +90,12 @@ namespace mRemoteNG.Connection
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorCouldNotLaunchPutty + Environment.NewLine + ex.Message);
 			}
 	    }
-	    
-		
+
+        public override TreeNodeType GetTreeNodeType()
+        {
+            return TreeNodeType.PuttySession;
+        }
+
         #region IComponent
         [Browsable(false)]
         public ISite Site

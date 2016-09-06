@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using mRemoteNG.Connection;
 using System.ComponentModel;
+using mRemoteNG.Tree;
 
 namespace mRemoteNG.Container
 {
@@ -17,6 +18,11 @@ namespace mRemoteNG.Container
         {
             SetDefaults();
             IsContainer = true;
+        }
+
+        public override TreeNodeType GetTreeNodeType()
+        {
+            return TreeNodeType.Container;
         }
 
         public void Add(ConnectionInfo newChildItem)

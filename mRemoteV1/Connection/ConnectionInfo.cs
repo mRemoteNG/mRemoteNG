@@ -17,6 +17,7 @@ using mRemoteNG.Connection.Protocol.Rlogin;
 using mRemoteNG.Container;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Messages;
+using mRemoteNG.Tree;
 
 
 namespace mRemoteNG.Connection
@@ -683,7 +684,12 @@ namespace mRemoteNG.Connection
                 property.SetValue(this, remotePropertyValue, null);
 	        }
 	    }
-			
+
+	    public virtual TreeNodeType GetTreeNodeType()
+	    {
+	        return TreeNodeType.Connection;
+	    }
+
 		public void SetDefaults()
 		{
 			if (Port == 0)

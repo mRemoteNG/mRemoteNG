@@ -2,6 +2,7 @@ using mRemoteNG.My;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 using System.Windows.Forms;
+using mRemoteNG.Tree;
 
 
 namespace mRemoteNG.Root.PuttySessions
@@ -53,6 +54,11 @@ namespace mRemoteNG.Root.PuttySessions
 				_panel = value;
                 mRemoteNG.Settings.Default.PuttySavedSessionsPanel = value;
 			}
+        }
+
+        public override TreeNodeType GetTreeNodeType()
+        {
+            return TreeNodeType.PuttyRoot;
         }
         #endregion
     }

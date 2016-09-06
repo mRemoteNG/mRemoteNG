@@ -506,7 +506,6 @@ namespace mRemoteNG.App
                 connectionsSaver.ContainerList = ContainerList;
                 connectionsSaver.Export = false;
                 connectionsSaver.SaveSecurity = new Security.Save(false);
-                connectionsSaver.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
                 connectionsSaver.ConnectionTreeModel = ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)

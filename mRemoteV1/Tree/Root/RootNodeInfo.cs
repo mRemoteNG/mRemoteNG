@@ -1,6 +1,5 @@
 using mRemoteNG.Tools;
 using System.ComponentModel;
-using System.Windows.Forms;
 using mRemoteNG.Container;
 
 
@@ -53,6 +52,11 @@ namespace mRemoteNG.Tree.Root
 			
 		[Browsable(false)]
         public RootNodeType Type {get; set;}
+
+        public override TreeNodeType GetTreeNodeType()
+        {
+            return TreeNodeType.Root;
+        }
         #endregion
-	}
+    }
 }
