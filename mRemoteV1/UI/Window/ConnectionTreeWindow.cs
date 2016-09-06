@@ -6,6 +6,7 @@ using mRemoteNG.Messages;
 using mRemoteNG.Tree;
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -113,14 +114,26 @@ namespace mRemoteNG.UI.Window
 		        InitialDelay = 300,
 		        ReshowDelay = 0
 		    };
+		    LinkModelToView();
 		}
+
+	    private void LinkModelToView()
+	    {
+            olvNameColumn.AspectGetter = item => ((ConnectionInfo)item).Name;
+            olvConnections.CanExpandGetter = item => item is ContainerInfo;
+            olvConnections.ChildrenGetter = item => ((ContainerInfo)item).Children;
+        }
 
 	    private void PopulateTreeView()
 	    {
-	        olvNameColumn.AspectGetter = item => ((ConnectionInfo) item).Name;
-            olvConnections.CanExpandGetter = item => item is ContainerInfo;
-	        olvConnections.ChildrenGetter = item => ((ContainerInfo) item).Children;
             olvConnections.Roots = ConnectionTreeModel.RootNodes;
+	        ExpandRootConnectionNode();
+	    }
+
+	    private void ExpandRootConnectionNode()
+	    {
+            var rootConnectionNode = olvConnections.Roots.Cast<ConnectionInfo>().First(item => item.Name == "Connections");
+            olvConnections.Expand(rootConnectionNode);
         }
 
         //TODO Fix for TreeListView

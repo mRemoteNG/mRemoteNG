@@ -1,4 +1,6 @@
 
+using mRemoteNG.Connection;
+
 namespace mRemoteNG.UI.Window
 {
 	public partial class ConnectionTreeWindow : BaseWindow
