@@ -56,9 +56,9 @@ namespace mRemoteNG.Config.Connections
                     ContainerList = ContainerList
                 };
 				var connectionTreeModel = xmlConnectionsDeserializer.Deserialize(import);
-                var connectionTreeViewBuilder = new ConnectionTreeViewBuilder(connectionTreeModel);
-                connectionTreeViewBuilder.Build();
-                connectionTreeViewBuilder.AppendTo(Windows.treeForm.tvConnections);
+                //var connectionTreeViewBuilder = new ConnectionTreeViewBuilder(connectionTreeModel);
+                //connectionTreeViewBuilder.Build();
+                //connectionTreeViewBuilder.AppendTo(Windows.treeForm.tvConnections);
 			    Runtime.ConnectionTreeModel = connectionTreeModel;
 			}
 			

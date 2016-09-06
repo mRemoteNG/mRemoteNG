@@ -168,9 +168,10 @@ namespace mRemoteNG.UI.Forms
 			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
             Opacity = 1;
 
-            Windows.treeForm.ExpandPreviouslyOpenedFolders();
-            Windows.treeForm.EnsureRootNodeVisible();
-            Windows.treeForm.OpenConnectionsFromLastSession();
+            Windows.treeForm.ConnectionTreeModel = Runtime.ConnectionTreeModel;
+            //Windows.treeForm.ExpandPreviouslyOpenedFolders();
+            //Windows.treeForm.EnsureRootNodeVisible();
+            //Windows.treeForm.OpenConnectionsFromLastSession();
         }
 
         private void ApplySpecialSettingsForPortableVersion()
