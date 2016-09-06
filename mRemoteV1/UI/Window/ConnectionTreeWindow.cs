@@ -8,6 +8,7 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using mRemoteNG.Tree.Root;
 using WeifenLuo.WinFormsUI.Docking;
 
 
@@ -54,13 +55,19 @@ namespace mRemoteNG.UI.Window
 	    private void PopulateTreeView()
 	    {
             olvConnections.Roots = ConnectionTreeModel.RootNodes;
-	        ExpandRootConnectionNode();
-	    }
+	        ExpandPreviouslyOpenedFolders();
+            ExpandRootConnectionNode();
+        }
 
 	    private void ExpandRootConnectionNode()
 	    {
-            var rootConnectionNode = olvConnections.Roots.Cast<ConnectionInfo>().First(item => item.Name == "Connections");
+            var rootConnectionNode = GetRootConnectionNode();
             olvConnections.Expand(rootConnectionNode);
+        }
+
+	    private RootNodeInfo GetRootConnectionNode()
+	    {
+            return (RootNodeInfo)olvConnections.Roots.Cast<ConnectionInfo>().First(item => item is RootNodeInfo);
         }
 
         #region Form Stuff
@@ -135,14 +142,12 @@ namespace mRemoteNG.UI.Window
         }
         #endregion
 
-        //TODO Fix for TreeListView
         public void ExpandPreviouslyOpenedFolders()
         {
-            foreach (ContainerInfo contI in Runtime.ContainerList)
-            {
-                if (contI.IsExpanded)
-                    contI.TreeNode.Expand();
-            }
+            var containerList = ConnectionTreeModel.GetChildList(GetRootConnectionNode()).OfType<ContainerInfo>();
+            var previouslyExpandedNodes = containerList.Where(container => container.IsExpanded);
+            olvConnections.ExpandedObjects = previouslyExpandedNodes;
+            olvConnections.RebuildAll(true);
         }
 
         //TODO Fix for TreeListView
