@@ -28,6 +28,7 @@ namespace mRemoteNG.Tree
             }
         }
 
+        //TODO Fix for TreeListView
         public static void DeleteSelectedNode()
         {
             try
@@ -69,6 +70,7 @@ namespace mRemoteNG.Tree
             }
         }
 
+        //TODO Fix for TreeListView
         private static bool SelectedNodeIsAValidDeletionTarget()
         {
             bool validDeletionTarget = true;
@@ -82,55 +84,64 @@ namespace mRemoteNG.Tree
             return validDeletionTarget;
         }
 
+        //TODO Fix for TreeListView
         private static bool UserConfirmsEmptyFolderDeletion()
         {
             string messagePrompt = string.Format(Language.strConfirmDeleteNodeFolder, SelectedNode.Text);
             return PromptUser(messagePrompt);
         }
 
+        //TODO Fix for TreeListView
         private static bool UserConfirmsNonEmptyFolderDeletion()
         {
             string messagePrompt = string.Format(Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text);
             return PromptUser(messagePrompt);
         }
 
+        //TODO Fix for TreeListView
         private static bool UserConfirmsConnectionDeletion()
         {
             string messagePrompt = string.Format(Language.strConfirmDeleteNodeConnection, SelectedNode.Text);
             return PromptUser(messagePrompt);
         }
 
+        //TODO Fix for TreeListView
         private static bool PromptUser(string PromptMessage)
         {
             DialogResult msgBoxResponse = MessageBox.Show(PromptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return (msgBoxResponse == DialogResult.Yes);
         }
 
+        //TODO Fix for TreeListView
         public static void StartRenameSelectedNode()
         {
             SelectedNode?.BeginEdit();
         }
 
+        //TODO Fix for TreeListView
         public static void FinishRenameSelectedNode(string newName)
         {
             FinishRenameSelectedConnectionNode(newName);
             FinishRenameSelectedContainerNode(newName);
         }
 
+        //TODO Fix for TreeListView
         private static void FinishRenameSelectedConnectionNode(string newName)
         {
-            ConnectionInfo connectionInfo = SelectedNode.Tag as ConnectionInfo;
+            var connectionInfo = SelectedNode.Tag as ConnectionInfo;
             if (connectionInfo != null)
                 ConnectionTreeNode.RenameNode(connectionInfo, newName);
         }
 
+        //TODO Fix for TreeListView
         private static void FinishRenameSelectedContainerNode(string newName)
         {
-            Container.ContainerInfo containerInfo = SelectedNode.Tag as Container.ContainerInfo;
+            var containerInfo = SelectedNode.Tag as Container.ContainerInfo;
             if (containerInfo != null)
                 ConnectionTreeNode.RenameNode(containerInfo, newName);
         }
 
+        //TODO Fix for TreeListView
         public static void SetNodeToolTip(MouseEventArgs e, ToolTip tTip)
         {
             try
@@ -164,6 +175,7 @@ namespace mRemoteNG.Tree
             }
         }
 
+        //TODO Fix for TreeListView
         public static void ExpandAllNodes()
         {
             TreeView.BeginUpdate();
@@ -171,6 +183,7 @@ namespace mRemoteNG.Tree
             TreeView.EndUpdate();
         }
 
+        //TODO Fix for TreeListView
         public static void CollapseAllNodes()
         {
             TreeView.BeginUpdate();
@@ -181,6 +194,7 @@ namespace mRemoteNG.Tree
             TreeView.EndUpdate();
         }
 
+        //TODO Fix for TreeListView
         public static void MoveNodeDown()
         {
             try
@@ -202,6 +216,7 @@ namespace mRemoteNG.Tree
             }
         }
 
+        //TODO Fix for TreeListView
         public static void MoveNodeUp()
         {
             try
@@ -223,6 +238,7 @@ namespace mRemoteNG.Tree
             }
         }
 
+        //TODO Fix for TreeListView
         public static void Sort(TreeNode treeNode, SortOrder sorting)
         {
             if (TreeView == null)
@@ -248,6 +264,7 @@ namespace mRemoteNG.Tree
             TreeView.EndUpdate();
         }
 
+        //TODO Fix for TreeListView
         private static void Sort(TreeNode treeNode, TreeNodeSorter nodeSorter)
         {
             // Adapted from http://www.codeproject.com/Tips/252234/ASP-NET-TreeView-Sort
@@ -288,6 +305,7 @@ namespace mRemoteNG.Tree
             }
         }
 
+        //TODO Fix for TreeListView
         public static TreeNode Find(TreeNode treeNode, string searchFor)
         {
             
@@ -313,11 +331,13 @@ namespace mRemoteNG.Tree
             return null;
         }
 
+        //TODO Fix for TreeListView
         private static bool IsThisTheNodeWeAreSearchingFor(TreeNode treeNode, string searchFor)
         {
             return treeNode.Text.ToLower().IndexOf(searchFor.ToLower(), StringComparison.Ordinal) + 1 > 0;
         }
 
+        //TODO Fix for TreeListView
         public static TreeNode Find(TreeNode treeNode, ConnectionInfo conInfo)
         {
             try
@@ -340,6 +360,7 @@ namespace mRemoteNG.Tree
             return null;
         }
 
+        //TODO Fix for TreeListView
         private delegate void ResetTreeDelegate();
         public static void ResetTree()
         {
@@ -357,6 +378,7 @@ namespace mRemoteNG.Tree
             }
         }
 
+        //TODO Fix for TreeListView
         private delegate void SelectNodeDelegate();
         private static void SelectNode()
         {
