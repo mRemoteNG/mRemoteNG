@@ -18,4 +18,4 @@ The mRemoteNG Project is **NOT** considered a non-profit organization and contri
 Check out our [source code]({{ site.github.repository_url }}) and submit a pull request or two
 
 ## Translate
-Join us over at [Crowdin](https://crowdin.com/project/mRemoteNG) and make mRemoteNG a polygot
+Check out the [Wiki page]({{ site.github.wiki_url }}/How to Help Translating mRemoteNG) on how to help make mRemoteNG a polygot
