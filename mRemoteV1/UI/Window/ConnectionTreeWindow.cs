@@ -8,6 +8,7 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tree.Root;
 using WeifenLuo.WinFormsUI.Docking;
 
@@ -89,7 +90,11 @@ namespace mRemoteNG.UI.Window
 	    {
 	        olvConnections.Collapsed += (sender, args) => ((ContainerInfo) args.Model).IsExpanded = false;
             olvConnections.Expanded += (sender, args) => ((ContainerInfo) args.Model).IsExpanded = true;
-        }
+	        //olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
+	        //olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
+	        olvConnections.SelectionChanged += tvConnections_AfterSelect;
+
+	    }
 
 	    private void PopulateTreeView()
 	    {
@@ -234,35 +239,17 @@ namespace mRemoteNG.UI.Window
         //TODO Fix for TreeListView
         private void tvConnections_AfterSelect(object sender, EventArgs e)
 		{
-			//try
-			//{
-			//	if ((ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Connection) || (ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.PuttySession))
-			//	{
-   //                 Windows.configForm.SetPropertyGridObject(e.Node.Tag);
-			//	}
-			//	else if (ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Container)
-			//	{
-   //                 Windows.configForm.SetPropertyGridObject((ContainerInfo) e.Node.Tag);
-			//	}
-			//	else if ((ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Root) || (ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.PuttyRoot))
-			//	{
-   //                 Windows.configForm.SetPropertyGridObject(e.Node.Tag);
-			//	}
-			//	else
-			//	{
-			//		return;
-			//	}
-
-   //             Windows.configForm.pGrid_SelectedObjectChanged();
-			//	ShowHideTreeContextMenuItems(e.Node);
-
-   //             Runtime.LastSelected = ConnectionTreeNode.GetConstantID(e.Node);
-			//}
-			//catch (Exception ex)
-			//{
-			//	Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed", ex);
-			//}
-		}
+            try
+            {
+                Windows.configForm.SetPropertyGridObject(olvConnections.SelectedObject);
+                ShowHideTreeContextMenuItems((ConnectionInfo)olvConnections.SelectedObject);
+                Runtime.LastSelected = ((ConnectionInfo)olvConnections.SelectedObject)?.ConstantID;
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_AfterSelect (UI.Window.ConnectionTreeWindow) failed", ex);
+            }
+        }
 
         //TODO Fix for TreeListView
         private void tvConnections_NodeMouseClick(object sender, MouseEventArgs e)
@@ -335,57 +322,81 @@ namespace mRemoteNG.UI.Window
 		}
 
         //TODO Fix for TreeListView
-        private void ShowHideTreeContextMenuItems(TreeNode selectedNode)
+        private void ShowHideTreeContextMenuItems(ConnectionInfo connectionInfo)
 		{
-			if (selectedNode == null)
-			{
+			if (connectionInfo == null)
 				return ;
-			}
 					
 			try
 			{
 				cMenTree.Enabled = true;
 				EnableMenuItemsRecursive(cMenTree.Items);
-						
-				if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.Connection)
+				if (connectionInfo is RootPuttySessionsNodeInfo)
+                {
+                    cMenTreeAddConnection.Enabled = false;
+                    cMenTreeAddFolder.Enabled = false;
+                    cMenTreeConnect.Enabled = false;
+                    cMenTreeConnectWithOptions.Enabled = false;
+                    cMenTreeDisconnect.Enabled = false;
+                    cMenTreeToolsTransferFile.Enabled = false;
+                    cMenTreeConnectWithOptions.Enabled = false;
+                    cMenTreeToolsSort.Enabled = false;
+                    cMenTreeToolsExternalApps.Enabled = false;
+                    cMenTreeDuplicate.Enabled = false;
+                    cMenTreeRename.Enabled = true;
+                    cMenTreeDelete.Enabled = false;
+                    cMenTreeMoveUp.Enabled = false;
+                    cMenTreeMoveDown.Enabled = false;
+                }
+                else if (connectionInfo is RootNodeInfo)
+                {
+                    cMenTreeConnect.Enabled = false;
+                    cMenTreeConnectWithOptions.Enabled = false;
+                    cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+                    cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+                    cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = false;
+                    cMenTreeDisconnect.Enabled = false;
+                    cMenTreeToolsTransferFile.Enabled = false;
+                    cMenTreeToolsExternalApps.Enabled = false;
+                    cMenTreeDuplicate.Enabled = false;
+                    cMenTreeDelete.Enabled = false;
+                    cMenTreeMoveUp.Enabled = false;
+                    cMenTreeMoveDown.Enabled = false;
+                }
+                else if (connectionInfo is ContainerInfo)
+                {
+                    cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+                    cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+                    cMenTreeDisconnect.Enabled = false;
+
+                    var openConnections = 0;
+                    //foreach (TreeNode node in selectedNode.Nodes)
+                    //{
+                    //    if (node.Tag is ConnectionInfo)
+                    //    {
+                    //        var connectionInfo = (ConnectionInfo)node.Tag;
+                    //        openConnections = openConnections + connectionInfo.OpenConnections.Count;
+                    //    }
+                    //}
+                    if (openConnections == 0)
+                    {
+                        cMenTreeDisconnect.Enabled = false;
+                    }
+
+                    cMenTreeToolsTransferFile.Enabled = false;
+                    cMenTreeToolsExternalApps.Enabled = false;
+                }
+                else if (connectionInfo is PuttySessionInfo)
 				{
-                    ConnectionInfo connectionInfo = (ConnectionInfo)selectedNode.Tag;
+					cMenTreeAddConnection.Enabled = false;
+					cMenTreeAddFolder.Enabled = false;
 							
 					if (connectionInfo.OpenConnections.Count == 0)
 					{
 						cMenTreeDisconnect.Enabled = false;
 					}
 							
-					if (!(connectionInfo.Protocol == ProtocolType.SSH1 | 
-						connectionInfo.Protocol == ProtocolType.SSH2))
-					{
-						cMenTreeToolsTransferFile.Enabled = false;
-					}
-							
-					if (!(connectionInfo.Protocol == ProtocolType.RDP | connectionInfo.Protocol == ProtocolType.ICA))
-					{
-						cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-						cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-					}
-							
-					if (connectionInfo.Protocol == ProtocolType.IntApp)
-					{
-						cMenTreeConnectWithOptionsNoCredentials.Enabled = false;
-					}
-				}
-				else if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.PuttySession)
-				{
-                    PuttySessionInfo puttySessionInfo = (PuttySessionInfo)selectedNode.Tag;
-							
-					cMenTreeAddConnection.Enabled = false;
-					cMenTreeAddFolder.Enabled = false;
-							
-					if (puttySessionInfo.OpenConnections.Count == 0)
-					{
-						cMenTreeDisconnect.Enabled = false;
-					}
-							
-					if (!(puttySessionInfo.Protocol == ProtocolType.SSH1 | puttySessionInfo.Protocol == ProtocolType.SSH2))
+					if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
 					{
 						cMenTreeToolsTransferFile.Enabled = false;
 					}
@@ -399,65 +410,23 @@ namespace mRemoteNG.UI.Window
 					cMenTreeMoveUp.Enabled = false;
 					cMenTreeMoveDown.Enabled = false;
 				}
-				else if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.Container)
-				{
-					cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-					cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-					cMenTreeDisconnect.Enabled = false;
-							
-					int openConnections = 0;
-				    foreach (TreeNode node in selectedNode.Nodes)
-					{
-						if (node.Tag is ConnectionInfo)
-						{
-						    var connectionInfo = (ConnectionInfo)node.Tag;
-						    openConnections = openConnections + connectionInfo.OpenConnections.Count;
-						}
-					}
-					if (openConnections == 0)
-					{
-						cMenTreeDisconnect.Enabled = false;
-					}
-							
-					cMenTreeToolsTransferFile.Enabled = false;
-					cMenTreeToolsExternalApps.Enabled = false;
-				}
-				else if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.Root)
-				{
-					cMenTreeConnect.Enabled = false;
-					cMenTreeConnectWithOptions.Enabled = false;
-					cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-					cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-					cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = false;
-					cMenTreeDisconnect.Enabled = false;
-					cMenTreeToolsTransferFile.Enabled = false;
-					cMenTreeToolsExternalApps.Enabled = false;
-					cMenTreeDuplicate.Enabled = false;
-					cMenTreeDelete.Enabled = false;
-					cMenTreeMoveUp.Enabled = false;
-					cMenTreeMoveDown.Enabled = false;
-				}
-				else if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.PuttyRoot)
-				{
-					cMenTreeAddConnection.Enabled = false;
-					cMenTreeAddFolder.Enabled = false;
-					cMenTreeConnect.Enabled = false;
-					cMenTreeConnectWithOptions.Enabled = false;
-					cMenTreeDisconnect.Enabled = false;
-					cMenTreeToolsTransferFile.Enabled = false;
-					cMenTreeConnectWithOptions.Enabled = false;
-					cMenTreeToolsSort.Enabled = false;
-					cMenTreeToolsExternalApps.Enabled = false;
-					cMenTreeDuplicate.Enabled = false;
-					cMenTreeRename.Enabled = true;
-					cMenTreeDelete.Enabled = false;
-					cMenTreeMoveUp.Enabled = false;
-					cMenTreeMoveDown.Enabled = false;
-				}
-				else
-				{
-					cMenTree.Enabled = false;
-				}
+                else
+                {
+                    if (connectionInfo.OpenConnections.Count == 0)
+                        cMenTreeDisconnect.Enabled = false;
+
+                    if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+                        cMenTreeToolsTransferFile.Enabled = false;
+
+                    if (!(connectionInfo.Protocol == ProtocolType.RDP | connectionInfo.Protocol == ProtocolType.ICA))
+                    {
+                        cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+                        cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+                    }
+
+                    if (connectionInfo.Protocol == ProtocolType.IntApp)
+                        cMenTreeConnectWithOptionsNoCredentials.Enabled = false;
+                }
 			}
 			catch (Exception ex)
 			{
@@ -542,7 +511,7 @@ namespace mRemoteNG.UI.Window
 
 			    while (targetNode != null)
 				{
-					var puttyRootInfo = targetNode.Tag as Root.PuttySessions.PuttySessionsNodeInfo;
+					var puttyRootInfo = targetNode.Tag as Root.PuttySessions.RootPuttySessionsNodeInfo;
 					if (puttyRootInfo != null || targetNode == dropNode)
 					{
 						e.Effect = DragDropEffects.None;

@@ -7,13 +7,13 @@ using mRemoteNG.Tree;
 
 namespace mRemoteNG.Root.PuttySessions
 {
-	public class PuttySessionsNodeInfo : RootNodeInfo
+	public class RootPuttySessionsNodeInfo : RootNodeInfo
     {
         private string _name;
         private string _panel;
 
 
-        public PuttySessionsNodeInfo() : base(RootNodeType.PuttySessions)
+        public RootPuttySessionsNodeInfo() : base(RootNodeType.PuttySessions)
 		{
 			_name = Language.strPuttySavedSessionsRootName;
 			_panel = Language.strGeneral;

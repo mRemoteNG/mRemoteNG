@@ -60,7 +60,7 @@ namespace mRemoteNG.Tree
                 if (treeNode?.Tag == null)
 					return TreeNodeType.None;
 					
-				if (treeNode.Tag is PuttySessionsNodeInfo)
+				if (treeNode.Tag is RootPuttySessionsNodeInfo)
 					return TreeNodeType.PuttyRoot;
 			    if (treeNode.Tag is RootNodeInfo)
 			        return TreeNodeType.Root;

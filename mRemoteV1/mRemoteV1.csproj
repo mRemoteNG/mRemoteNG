@@ -285,7 +285,7 @@
     <Compile Include="Tools\EnvironmentInfo.cs" />
     <Compile Include="Tools\PropertyGridCommandSite.cs" />
     <Compile Include="Connection\PuttySessionInfo.cs" />
-    <Compile Include="Tree\Root\PuttySessionsNodeInfo.cs" />
+    <Compile Include="Tree\Root\RootPuttySessionsNodeInfo.cs" />
     <Compile Include="Themes\ThemeManager.cs" />
     <Compile Include="Themes\ThemeSerializer.cs" />
     <Compile Include="Connection\ConnectionIcon.cs" />

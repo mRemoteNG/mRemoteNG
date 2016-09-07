@@ -75,7 +75,7 @@ namespace mRemoteNG.Config.Putty
 						isNewNode = true;
 					}
 					
-					sessionInfo.RootPuttySessionsInfo = provider.RootInfo;
+					sessionInfo.RootRootPuttySessionsInfo = provider.RootInfo;
 					sessionInfo.TreeNode = treeNode;
 					//sessionInfo.IInheritable.TurnOffInheritanceCompletely();
 					
