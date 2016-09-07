@@ -119,29 +119,6 @@ namespace mRemoteNG.Tree
         }
 
         //TODO Fix for TreeListView
-        public static void FinishRenameSelectedNode(string newName)
-        {
-            FinishRenameSelectedConnectionNode(newName);
-            FinishRenameSelectedContainerNode(newName);
-        }
-
-        //TODO Fix for TreeListView
-        private static void FinishRenameSelectedConnectionNode(string newName)
-        {
-            var connectionInfo = SelectedNode.Tag as ConnectionInfo;
-            if (connectionInfo != null)
-                ConnectionTreeNode.RenameNode(connectionInfo, newName);
-        }
-
-        //TODO Fix for TreeListView
-        private static void FinishRenameSelectedContainerNode(string newName)
-        {
-            var containerInfo = SelectedNode.Tag as Container.ContainerInfo;
-            if (containerInfo != null)
-                ConnectionTreeNode.RenameNode(containerInfo, newName);
-        }
-
-        //TODO Fix for TreeListView
         public static void SetNodeToolTip(MouseEventArgs e, ToolTip tTip)
         {
             try

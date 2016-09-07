@@ -665,7 +665,6 @@ namespace mRemoteNG.UI.Window
             Runtime.SaveConnectionsBG();
 		}
 
-        //TODO Fix for TreeListView
         private void cMenTreeDelete_Click(object sender, EventArgs e)
 		{
             ConnectionTreeModel.DeleteNode(SelectedNode);
