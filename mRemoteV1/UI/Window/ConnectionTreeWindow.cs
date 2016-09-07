@@ -201,11 +201,9 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        //TODO Fix for TreeListView
         public void EnsureRootNodeVisible()
 	    {
-	        var rootNode = tvConnections.Nodes[0];
-            rootNode.EnsureVisible();
+            olvConnections.EnsureModelVisible(GetRootConnectionNode());
 	    }
 
         #region Private Methods
