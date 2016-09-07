@@ -720,7 +720,7 @@ namespace mRemoteNG.Connection
 
 	    public void SetParent(ContainerInfo parent)
 	    {
-            parent.AddChild(this);
+            parent?.AddChild(this);
 	    }
 
         public void RemoveParent()
