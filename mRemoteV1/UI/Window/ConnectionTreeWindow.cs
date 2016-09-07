@@ -717,43 +717,11 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				if (tvConnections.SelectedNode == null)
-				{
-					tvConnections.SelectedNode = tvConnections.Nodes[0];
-				}
-						
-				TreeNode newTreeNode = ConnectionTreeNode.AddNode(TreeNodeType.Connection);
-				if (newTreeNode == null)
-				{
-					Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "UI.Window.Tree.AddConnection() failed." + Environment.NewLine + "mRemoteNG.Tree.Node.AddNode() returned Nothing.", true);
-					return ;
-				}
-						
-				TreeNode containerNode = tvConnections.SelectedNode;
-				if (ConnectionTreeNode.GetNodeType(containerNode) == TreeNodeType.Connection)
-				{
-					containerNode = containerNode.Parent;
-				}
-
-                ConnectionInfo newConnectionInfo = new ConnectionInfo();
-                newConnectionInfo.CopyFrom(DefaultConnectionInfo.Instance);
-				if (ConnectionTreeNode.GetNodeType(containerNode) == TreeNodeType.Root)
-				{
-					newConnectionInfo.Inheritance.DisableInheritance();
-				}
-				else
-				{
-                    newConnectionInfo.Parent = (ContainerInfo)containerNode.Tag;
-				}
-						
-				newConnectionInfo.TreeNode = newTreeNode;
-				newTreeNode.Tag = newConnectionInfo;
+			    var newConnectionInfo = new ConnectionInfo();
+			    var selectedContainer = SelectedNode as ContainerInfo;
+			    newConnectionInfo.SetParent(selectedContainer ?? SelectedNode.Parent);
+                olvConnections.RebuildAll(true);
                 Runtime.ConnectionList.Add(newConnectionInfo);
-						
-				containerNode.Nodes.Add(newTreeNode);
-						
-				tvConnections.SelectedNode = newTreeNode;
-				tvConnections.SelectedNode.BeginEdit();
 			}
 			catch (Exception ex)
 			{
