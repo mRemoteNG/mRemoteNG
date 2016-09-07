@@ -74,6 +74,7 @@ namespace mRemoteNG.Container
 			
 		private new void SetDefaults()
 		{
+		    Name = "New Folder";
             IsExpanded = true;
 		}
 
