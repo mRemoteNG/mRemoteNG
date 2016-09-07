@@ -94,6 +94,8 @@ namespace mRemoteNG.UI.Window
 	        olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
 	        olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
 	        olvConnections.SelectionChanged += tvConnections_AfterSelect;
+	        olvConnections.MouseClick += tvConnections_NodeMouseClick;
+
 
 	    }
 
@@ -213,7 +215,6 @@ namespace mRemoteNG.UI.Window
 	    }
 
         #region Private Methods
-        //TODO Fix for TreeListView
         private void tvConnections_BeforeLabelEdit(object sender, LabelEditEventArgs e)
 		{
 			cMenTreeDelete.ShortcutKeys = Keys.None;
@@ -249,33 +250,28 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        //TODO Fix for TreeListView
         private void tvConnections_NodeMouseClick(object sender, MouseEventArgs e)
 		{
-            //try
-            //{
-            //    ShowHideTreeContextMenuItems(tvConnections.SelectedNode);
-            //    tvConnections.SelectedNode = e.Node;
+            try
+            {
+                ShowHideTreeContextMenuItems(SelectedNode);
 
-            //    if (e.Button == MouseButtons.Left)
-            //    {
-            //        if (Settings.Default.SingleClickOnConnectionOpensIt &&
-            //            (ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Connection |
-            //                     ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.PuttySession))
-            //        {
-            //            Runtime.OpenConnection();
-            //        }
+                if (e.Button != MouseButtons.Left) return;
+                if (Settings.Default.SingleClickOnConnectionOpensIt &&
+                    (SelectedNode.GetTreeNodeType() == TreeNodeType.Connection | SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession))
+                {
+                    Runtime.OpenConnection();
+                }
 
-            //        if (Settings.Default.SingleClickSwitchesToOpenConnection && ConnectionTreeNode.GetNodeType(e.Node) == TreeNodeType.Connection)
-            //        {
-            //            Runtime.SwitchToOpenConnection((ConnectionInfo)e.Node.Tag);
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_NodeMouseClick (UI.Window.ConnectionTreeWindow) failed", ex);
-            //}
+                if (Settings.Default.SingleClickSwitchesToOpenConnection && SelectedNode.GetTreeNodeType() == TreeNodeType.Connection)
+                {
+                    Runtime.SwitchToOpenConnection(SelectedNode);
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_NodeMouseClick (UI.Window.ConnectionTreeWindow) failed", ex);
+            }
         }
 
         //TODO Fix for TreeListView
@@ -642,17 +638,18 @@ namespace mRemoteNG.UI.Window
             Runtime.SaveConnectionsBG();
 		}
 
+        //TODO Fix for TreeListView
         private void cMenTree_DropDownOpening(object sender, EventArgs e)
 		{
 			AddExternalApps();
 		}
-
+        
+        //TODO Fix for TreeListView
         private void cMenTreeToolsExternalAppsEntry_Click(object sender, EventArgs e)
 		{
 			StartExternalApp((Tools.ExternalTool)((ToolStripMenuItem)sender).Tag);
 		}
 
-        //TODO Fix for TreeListView
         private void cMenTreeDuplicate_Click(object sender, EventArgs e)
         {
             SelectedNode.Clone();
