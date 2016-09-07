@@ -35,7 +35,8 @@ namespace mRemoteNG.Tree
             if (connectionInfo is RootNodeInfo)
                 return;
             
-            connectionInfo.Dispose();
+            connectionInfo?.Dispose();
+        }
         }
     }
 }
