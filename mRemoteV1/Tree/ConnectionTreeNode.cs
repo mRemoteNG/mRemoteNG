@@ -245,16 +245,6 @@ namespace mRemoteNG.Tree
 		{
 			SetNodeImageIndex(treeNode, (int)Img);
 		}
-		
-        public static void RenameNode(ConnectionInfo connectionInfo, string newName)
-        {
-            if (newName == null || newName.Length <= 0)
-                return;
-
-            connectionInfo.Name = newName;
-            if (Settings.Default.SetHostnameLikeDisplayName)
-                connectionInfo.Hostname = newName;
-        }
         #endregion
 
         #region Private Methods

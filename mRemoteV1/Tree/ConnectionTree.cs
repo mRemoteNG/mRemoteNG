@@ -112,7 +112,6 @@ namespace mRemoteNG.Tree
             return (msgBoxResponse == DialogResult.Yes);
         }
 
-        //TODO Fix for TreeListView
         public static void StartRenameSelectedNode()
         {
             SelectedNode?.BeginEdit();
