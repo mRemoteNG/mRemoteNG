@@ -96,7 +96,8 @@ namespace mRemoteNG.UI.Window
             olvConnections.Roots = ConnectionTreeModel.RootNodes;
 	        ExpandPreviouslyOpenedFolders();
             ExpandRootConnectionNode();
-        }
+	        OpenConnectionsFromLastSession();
+	    }
 
 	    private void ExpandRootConnectionNode()
 	    {
@@ -189,14 +190,14 @@ namespace mRemoteNG.UI.Window
             olvConnections.RebuildAll(true);
         }
 
-        //TODO Fix for TreeListView
         public void OpenConnectionsFromLastSession()
         {
             if (!Settings.Default.OpenConsFromLastSession || Settings.Default.NoReconnect) return;
-            foreach (ConnectionInfo conI in Runtime.ConnectionList)
+            var connectionInfoList = GetRootConnectionNode().GetRecursiveChildList().Where(node => !(node is ContainerInfo));
+            var previouslyOpenedConnections = connectionInfoList.Where(item => item.PleaseConnect);
+            foreach (var connectionInfo in previouslyOpenedConnections)
             {
-                if (conI.PleaseConnect)
-                    Runtime.OpenConnection(conI);
+                Runtime.OpenConnection(connectionInfo);
             }
         }
 
