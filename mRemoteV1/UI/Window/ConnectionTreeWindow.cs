@@ -712,7 +712,6 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Context Menu Actions
-        //TODO Fix for TreeListView
         public void AddConnection()
 		{
 			try
@@ -729,48 +728,15 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        //TODO Fix for TreeListView
         public void AddFolder()
 		{
 			try
 			{
-				TreeNode newNode = ConnectionTreeNode.AddNode(TreeNodeType.Container);
-				ContainerInfo newContainerInfo = new ContainerInfo();
-                newContainerInfo.CopyFrom(DefaultConnectionInfo.Instance);
-				newNode.Tag = newContainerInfo;
-				newContainerInfo.TreeNode = newNode;
-
-                TreeNode selectedNode = ConnectionTree.SelectedNode;
-				TreeNode parentNode;
-				if (selectedNode == null)
-				{
-					parentNode = tvConnections.Nodes[0];
-				}
-				else
-				{
-					if (ConnectionTreeNode.GetNodeType(selectedNode) == TreeNodeType.Connection)
-						parentNode = selectedNode.Parent;
-					else
-						parentNode = selectedNode;
-				}
-						
-				newContainerInfo.Name = newNode.Text;
-						
-				// We can only inherit from a container node, not the root node or connection nodes
-				if (ConnectionTreeNode.GetNodeType(parentNode) == TreeNodeType.Container)
-				{
-					newContainerInfo.Parent = (ContainerInfo)parentNode.Tag;
-				}
-				else
-				{
-					newContainerInfo.Inheritance.DisableInheritance();
-				}
-
+				var newContainerInfo = new ContainerInfo();
+                var selectedContainer = SelectedNode as ContainerInfo;
+                newContainerInfo.SetParent(selectedContainer ?? SelectedNode.Parent);
+                olvConnections.RebuildAll(true);
                 Runtime.ContainerList.Add(newContainerInfo);
-				parentNode.Nodes.Add(newNode);
-						
-				tvConnections.SelectedNode = newNode;
-				tvConnections.SelectedNode.BeginEdit();
 			}
 			catch (Exception ex)
 			{
