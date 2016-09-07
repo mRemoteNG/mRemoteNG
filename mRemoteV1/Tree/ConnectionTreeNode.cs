@@ -175,7 +175,7 @@ namespace mRemoteNG.Tree
         {
             ContainerInfo oldContainerInfo = (ContainerInfo) oldTreeNode.Tag;
 
-            ContainerInfo newContainerInfo = oldContainerInfo.Clone();
+            ContainerInfo newContainerInfo = (ContainerInfo)oldContainerInfo.Clone();
             ConnectionInfo newConnectionInfo = oldContainerInfo.Clone();
             newContainerInfo.CopyFrom(newConnectionInfo);
 

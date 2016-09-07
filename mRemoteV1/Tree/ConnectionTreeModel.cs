@@ -37,6 +37,10 @@ namespace mRemoteNG.Tree
             
             connectionInfo?.Dispose();
         }
+
+        public void CloneNode(ConnectionInfo connectionInfo)
+        {
+            connectionInfo.Clone();
         }
     }
 }

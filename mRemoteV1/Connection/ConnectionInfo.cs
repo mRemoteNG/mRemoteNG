@@ -670,7 +670,8 @@ namespace mRemoteNG.Connection
         #region Public Methods
 		public virtual ConnectionInfo Clone()
 		{
-			var newConnectionInfo = (ConnectionInfo)MemberwiseClone();
+		    var newConnectionInfo = new ConnectionInfo();
+            newConnectionInfo.CopyFrom(this);
 			newConnectionInfo.ConstantID = MiscTools.CreateConstantID();
             newConnectionInfo.SetParent(Parent);
 			newConnectionInfo.OpenConnections = new ProtocolList();
@@ -718,7 +719,7 @@ namespace mRemoteNG.Connection
             return filteredProperties;
         }
 
-	    public void SetParent(ContainerInfo parent)
+	    public virtual void SetParent(ContainerInfo parent)
 	    {
             parent?.AddChild(this);
 	    }

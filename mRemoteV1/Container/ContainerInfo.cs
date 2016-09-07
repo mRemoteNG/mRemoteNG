@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using mRemoteNG.Connection;
 using System.ComponentModel;
+using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 
@@ -66,9 +67,17 @@ namespace mRemoteNG.Container
         public override ConnectionInfo Clone()
 		{
             var newContainer = new ContainerInfo();
-            newContainer.CopyFrom(base.Clone());
-            foreach (var child in Children)
-                newContainer.AddChild(child.Clone());
+            newContainer.CopyFrom(this);
+            newContainer.ConstantID = MiscTools.CreateConstantID();
+            newContainer.SetParent(Parent);
+            newContainer.OpenConnections = new ProtocolList();
+            newContainer.Inheritance = Inheritance.Clone();
+            foreach (var child in Children.ToArray())
+            {
+                var newChild = child.Clone();
+                newChild.RemoveParent();
+                newContainer.AddChild(newChild);
+            }
             return newContainer;
 		}
 			

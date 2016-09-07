@@ -654,9 +654,10 @@ namespace mRemoteNG.UI.Window
 
         //TODO Fix for TreeListView
         private void cMenTreeDuplicate_Click(object sender, EventArgs e)
-		{
-            ConnectionTreeNode.CloneNode(tvConnections.SelectedNode);
+        {
+            SelectedNode.Clone();
             Runtime.SaveConnectionsBG();
+            olvConnections.RebuildAll(true);
 		}
 
         private void cMenTreeRename_Click(object sender, EventArgs e)
