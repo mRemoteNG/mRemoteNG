@@ -140,7 +140,7 @@ namespace mRemoteNG.Config.Connections
                     if (nodeType == TreeNodeType.Connection)
                     {
                         var connectionInfo = GetConnectionInfoFromXml(xmlNode);
-                        parentContainer.Add(connectionInfo);
+                        parentContainer.AddChild(connectionInfo);
                         ConnectionList.Add(connectionInfo);
                     }
                     else if (nodeType == TreeNodeType.Container)
@@ -152,7 +152,7 @@ namespace mRemoteNG.Config.Connections
                         if (_confVersion >= 0.8)
                             containerInfo.IsExpanded = xmlNode.Attributes?["Expanded"].Value == "True";
 
-                        parentContainer.Add(containerInfo);
+                        parentContainer.AddChild(containerInfo);
                         ContainerList.Add(containerInfo);
                         AddNodesFromXmlRecursive(xmlNode, containerInfo);
                     }

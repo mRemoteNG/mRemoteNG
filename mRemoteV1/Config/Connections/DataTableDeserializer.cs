@@ -189,9 +189,9 @@ namespace mRemoteNG.Config.Connections
                 var connectionInfo = connectionList.First(node => node.ConstantID == id);
                 var parentId = (string) row["ParentID"];
                 if (parentId == "0")
-                    rootNode.Add(connectionInfo);
+                    rootNode.AddChild(connectionInfo);
                 else
-                    (connectionList.First(node => node.ConstantID == parentId) as ContainerInfo)?.Add(connectionInfo);
+                    (connectionList.First(node => node.ConstantID == parentId) as ContainerInfo)?.AddChild(connectionInfo);
             }
             return connectionTreeModel;
         }

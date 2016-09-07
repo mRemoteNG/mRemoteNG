@@ -25,32 +25,40 @@ namespace mRemoteNG.Container
             return TreeNodeType.Container;
         }
 
-        public void Add(ConnectionInfo newChildItem)
+        public void AddChild(ConnectionInfo newChildItem)
         {
             newChildItem.Parent = this;
             Children.Add(newChildItem);
         }
 
-        public void AddRange(IEnumerable<ConnectionInfo> newChildren)
+        public void AddChildRange(IEnumerable<ConnectionInfo> newChildren)
         {
             foreach (var child in newChildren)
             {
-                Add(child);
+                AddChild(child);
             }
         }
 
-        public void Remove(ConnectionInfo removalTarget)
+        public void RemoveChild(ConnectionInfo removalTarget)
         {
             removalTarget.Parent = null;
             Children.Remove(removalTarget);
         }
 
-        public void RemoveRange(IEnumerable<ConnectionInfo> removalTargets)
+        public void RemoveChildRange(IEnumerable<ConnectionInfo> removalTargets)
         {
             foreach (var child in removalTargets)
             {
-                Remove(child);
+                RemoveChild(child);
             }
+        }
+
+        public override void Dispose()
+        {
+            var tempChildList = Children.ToArray();
+            foreach (var child in tempChildList)
+                child.Dispose();
+            RemoveParent();
         }
 
         public new ContainerInfo Copy()

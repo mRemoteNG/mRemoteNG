@@ -20,6 +20,7 @@ namespace mRemoteNG.UI.Window
 	    private ConnectionTreeModel _connectionTreeModel;
 
         private ToolTip DescriptionTooltip { get; }
+	    private ConnectionInfo SelectedNode => (ConnectionInfo) olvConnections.SelectedObject;
 
 	    public ConnectionTreeModel ConnectionTreeModel
 	    {
@@ -90,8 +91,8 @@ namespace mRemoteNG.UI.Window
 	    {
 	        olvConnections.Collapsed += (sender, args) => ((ContainerInfo) args.Model).IsExpanded = false;
             olvConnections.Expanded += (sender, args) => ((ContainerInfo) args.Model).IsExpanded = true;
-	        //olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
-	        //olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
+	        olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
+	        olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
 	        olvConnections.SelectionChanged += tvConnections_AfterSelect;
 
 	    }
@@ -218,16 +219,14 @@ namespace mRemoteNG.UI.Window
 			cMenTreeDelete.ShortcutKeys = Keys.None;
 		}
 
-        //TODO Fix for TreeListView
         private void tvConnections_AfterLabelEdit(object sender, LabelEditEventArgs e)
 		{
 			try
 			{
 				cMenTreeDelete.ShortcutKeys = Keys.Delete;
-
-                ConnectionTree.FinishRenameSelectedNode(e.Label);
+                ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
                 Windows.configForm.pGrid_SelectedObjectChanged();
-				//ShowHideTreeContextMenuItems(e.Node);
+				ShowHideTreeContextMenuItems(SelectedNode);
                 Runtime.SaveConnectionsBG();
 			}
 			catch (Exception ex)
@@ -236,7 +235,6 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        //TODO Fix for TreeListView
         private void tvConnections_AfterSelect(object sender, EventArgs e)
 		{
             try
@@ -661,18 +659,18 @@ namespace mRemoteNG.UI.Window
             Runtime.SaveConnectionsBG();
 		}
 
-        //TODO Fix for TreeListView
         private void cMenTreeRename_Click(object sender, EventArgs e)
 		{
-            ConnectionTree.StartRenameSelectedNode();
+            olvConnections.SelectedItem.BeginEdit();
             Runtime.SaveConnectionsBG();
 		}
 
         //TODO Fix for TreeListView
         private void cMenTreeDelete_Click(object sender, EventArgs e)
 		{
-            ConnectionTree.DeleteSelectedNode();
+            ConnectionTreeModel.DeleteNode(SelectedNode);
             Runtime.SaveConnectionsBG();
+            olvConnections.RebuildAll(true);
 		}
 
         //TODO Fix for TreeListView

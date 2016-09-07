@@ -23,7 +23,7 @@ using mRemoteNG.Tree;
 namespace mRemoteNG.Connection
 {
 	[DefaultProperty("Name")]
-    public class ConnectionInfo : IParent, IInheritable
+    public class ConnectionInfo : IHasParent, IInheritable, IDisposable
     {
         #region Private Properties
         private string _description;
@@ -78,6 +78,7 @@ namespace mRemoteNG.Connection
         private ProtocolVNC.Colors _vncColors;
         private ProtocolVNC.SmartSizeMode _vncSmartSizeMode;
         private bool _vncViewOnly;
+	    private ContainerInfo _parent;
 	    #endregion
 
         #region Public Properties
@@ -624,7 +625,7 @@ namespace mRemoteNG.Connection
         public bool IsDefault { get; set; }
 
 	    [Browsable(false)]
-        public ContainerInfo Parent { get; set; }
+	    public ContainerInfo Parent { get; internal set; }
 
         [Browsable(false)]
         public int PositionID { get; set; }
@@ -662,7 +663,7 @@ namespace mRemoteNG.Connection
 		public ConnectionInfo(ContainerInfo parent) : this()
 		{
 			IsContainer = true;
-			parent.Add(this);
+			parent.AddChild(this);
 		}
         #endregion
 			
@@ -714,6 +715,21 @@ namespace mRemoteNG.Connection
             var filteredProperties = properties.Where((prop) => !excludedPropertyNames.Contains(prop.Name));
             return filteredProperties;
         }
+
+	    public void SetParent(ContainerInfo parent)
+	    {
+            parent.AddChild(this);
+	    }
+
+        public void RemoveParent()
+        {
+            Parent?.RemoveChild(this);
+        }
+
+        public virtual void Dispose()
+	    {
+	        RemoveParent();
+	    }
         #endregion
 
         #region Public Enumerations

@@ -175,7 +175,7 @@
     <Compile Include="Connection\DefaultConnectionInfo.cs" />
     <Compile Include="Connection\DefaultConnectionInheritance.cs" />
     <Compile Include="Connection\IInheritable.cs" />
-    <Compile Include="Connection\IParent.cs" />
+    <Compile Include="Connection\IHasParent.cs" />
     <Compile Include="Connection\Protocol\ProtocolFactory.cs" />
     <Compile Include="Connection\Protocol\VNC\VNCEnum.cs" />
     <Compile Include="Messages\MessageClassEnum.cs" />

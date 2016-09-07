@@ -39,9 +39,9 @@ namespace mRemoteNGTests.IntegrationTests
             var connection1 = new ConnectionInfo();
             var connection2 = new ConnectionInfo();
             var connection3 = new ConnectionInfo {Inheritance = {Username = true}};
-            _rootNode.Add(folder1);
-            folder1.AddRange(new []{connection1, folder2, connection3});
-            folder2.Add(connection2);
+            _rootNode.AddChild(folder1);
+            folder1.AddChildRange(new []{connection1, folder2, connection3});
+            folder2.AddChild(connection2);
             Assert.That(connection3.Username, Is.EqualTo(folder1.Username));
         }
 
@@ -50,8 +50,8 @@ namespace mRemoteNGTests.IntegrationTests
         {
             var folder = new ContainerInfo() {Protocol = ProtocolType.SSH2, Username = "folderUser", Domain = "CoolDomain"};
             var connection = new ConnectionInfo() {Inheritance = {EverythingInherited = true}};
-            _rootNode.Add(folder);
-            folder.Add(connection);
+            _rootNode.AddChild(folder);
+            folder.AddChild(connection);
             Assert.That(new object[] { connection.Protocol, connection.Username, connection.Domain }, Is.EquivalentTo(new object[] {folder.Protocol, folder.Username, folder.Domain}));
         }
 
@@ -62,10 +62,10 @@ namespace mRemoteNGTests.IntegrationTests
             var folder2 = new ContainerInfo {Inheritance = {Username = true}};
             var folder3 = new ContainerInfo {Inheritance = {Username = true}};
             var connection = new ConnectionInfo {Inheritance = {Username = true}};
-            _rootNode.Add(folder1);
-            folder1.Add(folder2);
-            folder2.Add(folder3);
-            folder3.Add(connection);
+            _rootNode.AddChild(folder1);
+            folder1.AddChild(folder2);
+            folder2.AddChild(folder3);
+            folder3.AddChild(connection);
             Assert.That(connection.Username, Is.EqualTo(folder1.Username));
         }
     }

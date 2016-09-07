@@ -27,14 +27,14 @@ namespace mRemoteNGTests.Container
         [Test]
         public void AddSetsParentPropertyOnTheChild()
         {
-            _containerInfo.Add(_connectionInfo);
+            _containerInfo.AddChild(_connectionInfo);
             Assert.That(_connectionInfo.Parent, Is.EqualTo(_containerInfo));
         }
 
         [Test]
         public void AddAddsChildToChildrenList()
         {
-            _containerInfo.Add(_connectionInfo);
+            _containerInfo.AddChild(_connectionInfo);
             Assert.That(_containerInfo.Children, Does.Contain(_connectionInfo));
         }
 
@@ -42,23 +42,23 @@ namespace mRemoteNGTests.Container
         public void AddRangeAddsAllItems()
         {
             var collection = new[] {new ConnectionInfo(),new ConnectionInfo(), new ContainerInfo()};
-            _containerInfo.AddRange(collection);
+            _containerInfo.AddChildRange(collection);
             Assert.That(_containerInfo.Children, Is.EquivalentTo(collection));
         }
 
         [Test]
         public void RemoveUnsetsParentPropertyOnChild()
         {
-            _containerInfo.Add(_connectionInfo);
-            _containerInfo.Remove(_connectionInfo);
+            _containerInfo.AddChild(_connectionInfo);
+            _containerInfo.RemoveChild(_connectionInfo);
             Assert.That(_connectionInfo.Parent, Is.Not.EqualTo(_containerInfo));
         }
 
         [Test]
         public void RemoveRemovesChildFromChildrenList()
         {
-            _containerInfo.Add(_connectionInfo);
-            _containerInfo.Remove(_connectionInfo);
+            _containerInfo.AddChild(_connectionInfo);
+            _containerInfo.RemoveChild(_connectionInfo);
             Assert.That(_containerInfo.Children, Does.Not.Contains(_connectionInfo));
         }
 
@@ -66,8 +66,8 @@ namespace mRemoteNGTests.Container
         public void RemoveRangeRemovesAllIndicatedItems()
         {
             var collection = new[] { new ConnectionInfo(), new ConnectionInfo(), new ContainerInfo() };
-            _containerInfo.AddRange(collection);
-            _containerInfo.RemoveRange(collection);
+            _containerInfo.AddChildRange(collection);
+            _containerInfo.RemoveChildRange(collection);
             Assert.That(_containerInfo.Children, Does.Not.Contains(collection[0]).And.Not.Contains(collection[1]).And.Not.Contains(collection[2]));
         }
 
@@ -75,9 +75,9 @@ namespace mRemoteNGTests.Container
         public void RemoveRangeDoesNotRemoveUntargetedMembers()
         {
             var collection = new[] { new ConnectionInfo(), new ConnectionInfo(), new ContainerInfo() };
-            _containerInfo.AddRange(collection);
-            _containerInfo.Add(_connectionInfo);
-            _containerInfo.RemoveRange(collection);
+            _containerInfo.AddChildRange(collection);
+            _containerInfo.AddChild(_connectionInfo);
+            _containerInfo.RemoveChildRange(collection);
             Assert.That(_containerInfo.Children, Does.Contain(_connectionInfo));
         }
     }
