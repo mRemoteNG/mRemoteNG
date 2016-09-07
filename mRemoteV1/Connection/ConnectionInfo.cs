@@ -672,7 +672,9 @@ namespace mRemoteNG.Connection
 		{
 			var newConnectionInfo = (ConnectionInfo)MemberwiseClone();
 			newConnectionInfo.ConstantID = MiscTools.CreateConstantID();
+            newConnectionInfo.SetParent(Parent);
 			newConnectionInfo.OpenConnections = new ProtocolList();
+		    newConnectionInfo.Inheritance = Inheritance.Clone();
 			return newConnectionInfo;
 		}
 

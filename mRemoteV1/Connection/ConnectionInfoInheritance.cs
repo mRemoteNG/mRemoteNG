@@ -307,7 +307,9 @@ namespace mRemoteNG.Connection
 
 		public ConnectionInfoInheritance Clone()
 		{
-			return (ConnectionInfoInheritance)MemberwiseClone();
+		    var newInheritance = (ConnectionInfoInheritance) MemberwiseClone();
+		    newInheritance._tempInheritanceStorage = null;
+            return newInheritance;
 		}
 
         public void EnableInheritance()

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using mRemoteNG.Connection;
 using System.ComponentModel;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 
 namespace mRemoteNG.Container
@@ -61,9 +62,22 @@ namespace mRemoteNG.Container
             RemoveParent();
         }
 
+        // Deep clone, recursive
+        public ContainerInfo DeepClone()
+        {
+            var newContainer = new ContainerInfo();
+            newContainer.CopyFrom(base.Clone());
+            foreach (var child in Children)
+                newContainer.AddChild(child.Clone());
+            return newContainer;
+        }
+
         public new ContainerInfo Clone()
 		{
-			return (ContainerInfo)MemberwiseClone();
+            var newContainer = new ContainerInfo();
+            newContainer.CopyFrom(base.Clone());
+            newContainer.Children = new List<ConnectionInfo>();
+            return newContainer;
 		}
 			
 		private new void SetDefaults()
