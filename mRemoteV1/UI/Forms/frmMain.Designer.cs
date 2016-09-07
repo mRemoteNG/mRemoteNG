@@ -140,16 +140,15 @@ namespace mRemoteNG.UI.Forms
             // 
             this.msMain.Dock = System.Windows.Forms.DockStyle.None;
             this.msMain.GripMargin = new System.Windows.Forms.Padding(0);
-            this.msMain.GripStyle = System.Windows.Forms.ToolStripGripStyle.Visible;
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mMenFile,
             this.mMenView,
             this.mMenTools,
             this.mMenInfo});
-            this.msMain.Location = new System.Drawing.Point(114, 25);
+            this.msMain.Location = new System.Drawing.Point(3, 0);
             this.msMain.Name = "msMain";
             this.msMain.Padding = new System.Windows.Forms.Padding(2, 2, 0, 2);
-            this.msMain.Size = new System.Drawing.Size(181, 24);
+            this.msMain.Size = new System.Drawing.Size(176, 24);
             this.msMain.Stretch = false;
             this.msMain.TabIndex = 16;
             this.msMain.Text = "Main Toolbar";
@@ -716,9 +715,9 @@ namespace mRemoteNG.UI.Forms
             // 
             // tsContainer.TopToolStripPanel
             // 
+            this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
             this.tsContainer.TopToolStripPanel.Controls.Add(this.tsQuickConnect);
             this.tsContainer.TopToolStripPanel.Controls.Add(this.tsExternalTools);
-            this.tsContainer.TopToolStripPanel.Controls.Add(this.msMain);
             this.tsContainer.TopToolStripPanel.Controls.Add(this.ToolStrip1);
             this.tsContainer.TopToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             // 
@@ -730,7 +729,7 @@ namespace mRemoteNG.UI.Forms
             this.cmbQuickConnect,
             this.btnQuickConnect,
             this.btnConnections});
-            this.tsQuickConnect.Location = new System.Drawing.Point(3, 0);
+            this.tsQuickConnect.Location = new System.Drawing.Point(179, 0);
             this.tsQuickConnect.MaximumSize = new System.Drawing.Size(0, 25);
             this.tsQuickConnect.Name = "tsQuickConnect";
             this.tsQuickConnect.Size = new System.Drawing.Size(387, 25);
