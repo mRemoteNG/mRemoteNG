@@ -408,7 +408,8 @@ Por favor, certifique-se de que você tem o Putty.exe em seu diretório mRemoteN
     <value>Config UI carregamento falhou!</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Você quer fechar a conexão, "{0}"?</value>
+    <value>Você quer fechar a conexão:
+"{0}"?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Tem certeza que deseja fechar o painel, "{0}"? Todas as ligações ativas serão fechadas.</value>

@@ -439,7 +439,8 @@ VncSharp Control versione {0}</value>
     <value>Caricamento Config UI fallito!</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Vuoi chiudere la connessione "{0}"?</value>
+    <value>Vuoi chiudere la connessione:
+"{0}"?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Sei sicuro di voler chiudere il pannello "{0}"? Tutte le connessioni contenute in esso verranno terminate.</value>

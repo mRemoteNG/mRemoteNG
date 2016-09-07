@@ -462,7 +462,8 @@ VncSharp Control Version {0}</value>
     <value>Config UI load failed!</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Do you want to close the connection, "{0}"?</value>
+    <value>Do you want to close the connection:
+"{0}"?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Are you sure you want to close the panel, "{0}"? Any connections that it contains will also be closed.</value>

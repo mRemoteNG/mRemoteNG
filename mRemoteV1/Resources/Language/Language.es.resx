@@ -444,7 +444,8 @@ Versión de Control {0} de VncSharp</value>
     <value>Error al Cargar la Interfaz de Configuración de Usuario</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Desea cerrar la conexión, "{0}"?</value>
+    <value>Desea cerrar la conexión:
+"{0}"?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Está seguro de querer cerrar el panel, "{0}"? Cualquier conexión que contenga será también cerrada.</value>

@@ -448,7 +448,8 @@ VncSharp Versie {0}</value>
     <value>Configuratie UI laden mislukt!</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Wilt u de verbinding sluiten, "{0}"?</value>
+    <value>Wilt u de verbinding sluiten:
+"{0}"?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Weet u zeker dat u  het paneel wilt sluiten, "{0}"? Alle connecties zullen dan ook worden gesloten.</value>

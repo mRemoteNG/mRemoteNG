@@ -233,7 +233,8 @@ VncSharp Control {0}</value>
     <value>btnIcon_Click falló!</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>¿Desea cerrar la conexión, "{0}"?</value>
+    <value>¿Desea cerrar la conexión:
+"{0}"?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>¿Está seguro que desea cerrar el panel, "{0}"? Cualquier conexión que contenga el panel también estará cerrada.</value>
