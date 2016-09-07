@@ -1,6 +1,5 @@
 using mRemoteNG.Controls;
 using mRemoteNG.UI.Controls;
-using WeifenLuo.WinFormsUI.Docking;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -138,6 +137,7 @@ namespace mRemoteNG.UI.Forms
             // 
             // msMain
             // 
+            this.msMain.Dock = System.Windows.Forms.DockStyle.None;
             this.msMain.GripMargin = new System.Windows.Forms.Padding(0);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mMenFile,
@@ -688,26 +688,13 @@ namespace mRemoteNG.UI.Forms
             // tsContainer
             // 
             // 
-            // tsContainer.BottomToolStripPanel
-            // 
-            this.tsContainer.BottomToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            // 
             // tsContainer.ContentPanel
             // 
             this.tsContainer.ContentPanel.Controls.Add(this.pnlDock);
-            this.tsContainer.ContentPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.tsContainer.ContentPanel.Size = new System.Drawing.Size(966, 473);
             this.tsContainer.Dock = System.Windows.Forms.DockStyle.Fill;
-            // 
-            // tsContainer.LeftToolStripPanel
-            // 
-            this.tsContainer.LeftToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.tsContainer.Location = new System.Drawing.Point(0, 0);
             this.tsContainer.Name = "tsContainer";
-            // 
-            // tsContainer.RightToolStripPanel
-            // 
-            this.tsContainer.RightToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.tsContainer.Size = new System.Drawing.Size(966, 523);
             this.tsContainer.TabIndex = 17;
             this.tsContainer.Text = "ToolStripContainer1";
