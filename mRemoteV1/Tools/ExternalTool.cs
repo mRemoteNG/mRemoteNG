@@ -97,7 +97,7 @@ namespace mRemoteNG.Tools
 
         private ConnectionInfo GetAppropriateInstanceOfConnectionInfo()
         {
-            var newConnectionInfo = ConnectionInfo == null ? new ConnectionInfo() : ConnectionInfo.Copy();
+            var newConnectionInfo = ConnectionInfo == null ? new ConnectionInfo() : ConnectionInfo.Clone();
             return newConnectionInfo;
         }
 

@@ -668,7 +668,7 @@ namespace mRemoteNG.Connection
         #endregion
 			
         #region Public Methods
-		public virtual ConnectionInfo Copy()
+		public virtual ConnectionInfo Clone()
 		{
 			var newConnectionInfo = (ConnectionInfo)MemberwiseClone();
 			newConnectionInfo.ConstantID = MiscTools.CreateConstantID();

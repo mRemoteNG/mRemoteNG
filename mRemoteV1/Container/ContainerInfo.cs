@@ -61,7 +61,7 @@ namespace mRemoteNG.Container
             RemoveParent();
         }
 
-        public new ContainerInfo Copy()
+        public new ContainerInfo Clone()
 		{
 			return (ContainerInfo)MemberwiseClone();
 		}
