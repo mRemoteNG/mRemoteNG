@@ -63,20 +63,12 @@ namespace mRemoteNG.Container
         }
 
         // Deep clone, recursive
-        public ContainerInfo DeepClone()
-        {
+        public override ConnectionInfo Clone()
+		{
             var newContainer = new ContainerInfo();
             newContainer.CopyFrom(base.Clone());
             foreach (var child in Children)
                 newContainer.AddChild(child.Clone());
-            return newContainer;
-        }
-
-        public new ContainerInfo Clone()
-		{
-            var newContainer = new ContainerInfo();
-            newContainer.CopyFrom(base.Clone());
-            newContainer.Children = new List<ConnectionInfo>();
             return newContainer;
 		}
 			
