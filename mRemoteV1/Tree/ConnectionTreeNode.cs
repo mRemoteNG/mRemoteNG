@@ -210,7 +210,7 @@ namespace mRemoteNG.Tree
             ConnectionInfo oldConnectionInfo = (ConnectionInfo)oldTreeNode.Tag;
 
             ConnectionInfo newConnectionInfo = oldConnectionInfo.Clone();
-            ConnectionInfoInheritance newInheritance = oldConnectionInfo.Inheritance.Copy();
+            ConnectionInfoInheritance newInheritance = oldConnectionInfo.Inheritance.Clone();
             newInheritance.Parent = newConnectionInfo;
             newConnectionInfo.Inheritance = newInheritance;
 

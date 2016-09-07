@@ -305,7 +305,7 @@ namespace mRemoteNG.Connection
 		}
 
 
-		public ConnectionInfoInheritance Copy()
+		public ConnectionInfoInheritance Clone()
 		{
 			return (ConnectionInfoInheritance)MemberwiseClone();
 		}
@@ -330,7 +330,7 @@ namespace mRemoteNG.Connection
 
         private void StashInheritanceData()
         {
-            _tempInheritanceStorage = Copy();
+            _tempInheritanceStorage = Clone();
         }
 
         public void TurnOnInheritanceCompletely()
