@@ -138,7 +138,6 @@ namespace mRemoteNG.UI.Forms
             // 
             // msMain
             // 
-            this.msMain.Dock = System.Windows.Forms.DockStyle.None;
             this.msMain.GripMargin = new System.Windows.Forms.Padding(0);
             this.msMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mMenFile,
@@ -719,7 +718,6 @@ namespace mRemoteNG.UI.Forms
             this.tsContainer.TopToolStripPanel.Controls.Add(this.tsQuickConnect);
             this.tsContainer.TopToolStripPanel.Controls.Add(this.tsExternalTools);
             this.tsContainer.TopToolStripPanel.Controls.Add(this.ToolStrip1);
-            this.tsContainer.TopToolStripPanel.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             // 
             // tsQuickConnect
             // 
