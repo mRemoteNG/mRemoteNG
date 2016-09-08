@@ -721,6 +721,7 @@ namespace mRemoteNG.Connection
 
 	    public virtual void SetParent(ContainerInfo parent)
 	    {
+            RemoveParent();
             parent?.AddChild(this);
 	    }
 
