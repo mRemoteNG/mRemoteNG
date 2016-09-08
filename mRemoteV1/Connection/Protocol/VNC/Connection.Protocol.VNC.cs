@@ -31,7 +31,7 @@ namespace mRemoteNG.Connection.Protocol.VNC
         #region Public Methods
 		public ProtocolVNC()
 		{
-			this.Control = new VncSharp.RemoteDesktop();
+			Control = new VncSharp.RemoteDesktop();
 		}
 				
 		public override bool Initialize()
@@ -40,76 +40,13 @@ namespace mRemoteNG.Connection.Protocol.VNC
 					
 			try
 			{
-                _VNC = (VncSharp.RemoteDesktop)this.Control;
-						
-				Info = this.InterfaceControl.Info;
-						
-				_VNC.VncPort = this.Info.Port;
-						
-				//If Info.VNCCompression <> Compression.CompNone Then
-				//    VNC.JPEGCompression = True
-				//    VNC.JPEGCompressionLevel = Info.VNCCompression
-				//End If
-						
-				//Select Case Info.VNCEncoding
-				//    Case Encoding.EncCorre
-				//        VNC.Encoding = ViewerX.VNCEncoding.RFB_CORRE
-				//    Case Encoding.EncHextile
-				//        VNC.Encoding = ViewerX.VNCEncoding.RFB_HEXTILE
-				//    Case Encoding.EncRaw
-				//        VNC.Encoding = ViewerX.VNCEncoding.RFB_RAW
-				//    Case Encoding.EncRRE
-				//        VNC.Encoding = ViewerX.VNCEncoding.RFB_RRE
-				//    Case Encoding.EncTight
-				//        VNC.Encoding = ViewerX.VNCEncoding.RFB_TIGHT
-				//    Case Encoding.EncZlib
-				//        VNC.Encoding = ViewerX.VNCEncoding.RFB_ZLIB
-				//    Case Encoding.EncZLibHex
-				//        VNC.Encoding = ViewerX.VNCEncoding.RFB_ZLIBHEX
-				//    Case Encoding.EncZRLE
-				//        VNC.Encoding = ViewerX.VNCEncoding.RFB_ZRLE
-				//End Select
-						
-				//If Info.VNCAuthMode = AuthMode.AuthWin Then
-				//    VNC.LoginType = ViewerX.ViewerLoginType.VLT_MSWIN
-				//    VNC.MsUser = Me.Info.Username
-				//    VNC.MsDomain = Me.Info.Domain
-				//    VNC.MsPassword = Me.Info.Password
-				//Else
-				//    VNC.LoginType = ViewerX.ViewerLoginType.VLT_VNC
-				//    VNC.Password = Me.Info.Password
-				//End If
-						
-				//Select Case Info.VNCProxyType
-				//    Case ProxyType.ProxyNone
-				//        VNC.ProxyType = ViewerX.ConnectionProxyType.VPT_NONE
-				//    Case ProxyType.ProxyHTTP
-				//        VNC.ProxyType = ViewerX.ConnectionProxyType.VPT_HTTP
-				//    Case ProxyType.ProxySocks5
-				//        VNC.ProxyType = ViewerX.ConnectionProxyType.VPT_SOCKS5
-				//    Case ProxyType.ProxyUltra
-				//        VNC.ProxyType = ViewerX.ConnectionProxyType.VPT_ULTRA_REPEATER
-				//End Select
-						
-				//If Info.VNCProxyType <> ProxyType.ProxyNone Then
-				//    VNC.ProxyIP = Info.VNCProxyIP
-				//    VNC.ProxyPort = Info.VNCProxyPort
-				//    VNC.ProxyUser = Info.VNCProxyUsername
-				//    VNC.ProxyPassword = Info.VNCProxyPassword
-				//End If
-						
-				//If Info.VNCColors = Colors.Col8Bit Then
-				//    VNC.RestrictPixel = True
-				//Else
-				//    VNC.RestrictPixel = False
-				//End If
-						
-				//VNC.ConnectingText = Language.strInheritConnecting & " (SmartCode VNC viewer)"
-				//VNC.DisconnectedText = Language.strInheritDisconnected
-				//VNC.MessageBoxes = False
-				//VNC.EndInit()
-						
-				return true;
+                _VNC = (VncSharp.RemoteDesktop)Control;
+				
+				Info = InterfaceControl.Info;
+					
+				_VNC.VncPort = Info.Port;
+
+                return true;
 			}
 			catch (Exception ex)
 			{
@@ -120,11 +57,11 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				
 		public override bool Connect()
 		{
-			this.SetEventHandlers();
+			SetEventHandlers();
 					
 			try
 			{
-				_VNC.Connect(this.Info.Hostname, this.Info.VNCViewOnly, Info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
+				_VNC.Connect(Info.Hostname, Info.VNCViewOnly, Info.VNCSmartSizeMode != SmartSizeMode.SmartSNo);
 			}
 			catch (Exception ex)
 			{
@@ -153,10 +90,10 @@ namespace mRemoteNG.Connection.Protocol.VNC
 			{
 				switch (Keys)
 				{
-					case ProtocolVNC.SpecialKeys.CtrlAltDel:
+					case SpecialKeys.CtrlAltDel:
 						_VNC.SendSpecialKeys(VncSharp.SpecialKeys.CtrlAltDel);
 						break;
-					case ProtocolVNC.SpecialKeys.CtrlEsc:
+					case SpecialKeys.CtrlEsc:
 						_VNC.SendSpecialKeys(VncSharp.SpecialKeys.CtrlEsc);
 						break;
 				}
@@ -195,35 +132,13 @@ namespace mRemoteNG.Connection.Protocol.VNC
 				
 		public void StartChat()
 		{
-			try
-			{
-				//If VNC.Capabilities.Chat = True Then
-				//    VNC.OpenChat()
-				//Else
-				//    mC.AddMessage(Messages.MessageClass.InformationMsg, "VNC Server doesn't support chat")
-				//End If
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strVncStartChatFailed + Environment.NewLine + ex.Message, true);
-			}
+		    throw (new NotImplementedException());
 		}
 				
 		public void StartFileTransfer()
 		{
-			try
-			{
-				//If VNC.Capabilities.FileTransfer = True Then
-				//    VNC.OpenFileTransfer()
-				//Else
-				//    mC.AddMessage(Messages.MessageClass.InformationMsg, "VNC Server doesn't support file transfers")
-				//End If
-			}
-			catch (Exception)
-			{
-						
-			}
-		}
+            throw (new NotImplementedException());
+        }
 				
 		public void RefreshScreen()
 		{
@@ -261,19 +176,19 @@ namespace mRemoteNG.Connection.Protocol.VNC
         #region Private Events & Handlers
 		private void VNCEvent_Connected(object sender, EventArgs e)
 		{
-			base.Event_Connected(this);
+			Event_Connected(this);
 			_VNC.AutoScroll = Info.VNCSmartSizeMode == SmartSizeMode.SmartSNo;
 		}
 				
 		private void VNCEvent_Disconnected(object sender, EventArgs e)
 		{
-			base.Event_Disconnected(sender, e.ToString());
-			base.Close();
+			Event_Disconnected(sender, e.ToString());
+			Close();
 		}
 				
 		private void VNCEvent_ClipboardChanged()
 		{
-			this._VNC.FillServerClipboard();
+			_VNC.FillServerClipboard();
 		}
 				
 		private string VNCEvent_Authenticate()

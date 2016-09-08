@@ -424,7 +424,8 @@
     <value>Config UI carregamento falhado!</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Pretende fechar a ligação, "{0}"?</value>
+    <value>Pretende fechar a ligação:
+"{0}"?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Tem certeza que deseja fechar o painel, "{0}"? Todas as ligações ativas serão fechadas.</value>

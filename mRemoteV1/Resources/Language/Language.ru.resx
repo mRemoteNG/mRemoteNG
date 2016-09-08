@@ -448,7 +448,8 @@
     <value>Ошибка загрузки Config UI!</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Хотите закрыть подключение, "{0}"?</value>
+    <value>Хотите закрыть подключение:
+"{0}"?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Хотите закрыть панель "{0}"? Все ее подключения также будут закрыты.</value>

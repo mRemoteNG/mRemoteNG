@@ -434,7 +434,8 @@ Si la vérification des composants ou l'utilisation d'ICA échoue malgré tout, 
     <value>Fenêtre de configuration échec du chargement !</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Voulez-vous fermer la connexion, "{0}"?</value>
+    <value>Voulez-vous fermer la connexion:
+"{0}"?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Êtes-vous sûr de vouloir fermer le panneau, "{0}"? Toutes les connexions contenues dans ce panneau seront fermées également.</value>

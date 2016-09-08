@@ -6,6 +6,7 @@
   Minor UI Tweak: Default Menubar and QuickConnect Bar to same line
   MR-366 - Show PuTTY type and version on components check screen
   MR-938 - Adjust RDP Resolution list (ensure most common resolutions were available)
+  MR-586 - Reduce HTTP/HTTPS document title length that is appended to the connection tab title
   
   Features/Enhancements:
   ----------------------

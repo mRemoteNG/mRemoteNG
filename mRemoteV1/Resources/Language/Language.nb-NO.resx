@@ -448,7 +448,8 @@ VncSharp Control Version {0}</value>
     <value>Innlasting av Konfigurasjonsgrensesnitt mislyktes!</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Ønsker du å avslutte tilkoblingen "{0}"?</value>
+    <value>Ønsker du å avslutte tilkoblingen:
+"{0}"?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Er du sikker på at du ønsker å lukke panelet "{0}"? Alle tilkoblinger den inneholder vil også bli lukket.</value>

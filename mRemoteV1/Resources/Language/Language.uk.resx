@@ -439,7 +439,8 @@ VncSharp Control Version {0}</value>
     <value>Помилка завантаження Config UI!</value>
   </data>
   <data name="strConfirmCloseConnectionMainInstruction" xml:space="preserve">
-    <value>Хочете закрити з'єднання, "{0}"?</value>
+    <value>Хочете закрити з'єднання:
+"{0}"?</value>
   </data>
   <data name="strConfirmCloseConnectionPanelMainInstruction" xml:space="preserve">
     <value>Хочете закрити панель "{0}"? Всі її з'єднання також будуть закриті.</value>

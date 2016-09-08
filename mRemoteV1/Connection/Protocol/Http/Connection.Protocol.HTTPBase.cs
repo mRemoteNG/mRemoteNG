@@ -34,16 +34,16 @@ namespace mRemoteNG.Connection.Protocol.Http
 				{
                     Control = new WebBrowser();
 				}
-						
+				
 				NewExtended();
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strHttpConnectionFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpConnectionFailed, ex);
 			}
 		}
-				
-		public virtual void NewExtended()
+
+	    public virtual void NewExtended()
 		{
 		}
 				
@@ -93,7 +93,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strHttpSetPropsFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpSetPropsFailed, ex);
 				return false;
 			}
 		}
@@ -103,13 +103,17 @@ namespace mRemoteNG.Connection.Protocol.Http
 			try
 			{
 				string strHost = Convert.ToString(InterfaceControl.Info.Hostname);
+                /* 
+                 * Commenting out since this codes doesn't actually do anything at this time...
+                 * Possibly related to MR-221 and/or MR-533 ????
+                 * 
 				string strAuth = "";
 
                 if (((int)Force & (int)ConnectionInfo.Force.NoCredentials) != (int)ConnectionInfo.Force.NoCredentials && !string.IsNullOrEmpty(InterfaceControl.Info.Username) && !string.IsNullOrEmpty(InterfaceControl.Info.Password))
 				{
 					strAuth = "Authorization: Basic " + Convert.ToBase64String(System.Text.Encoding.ASCII.GetBytes(InterfaceControl.Info.Username + ":" + InterfaceControl.Info.Password)) + Environment.NewLine;
 				}
-						
+				*/	
 				if (InterfaceControl.Info.Port != defaultPort)
 				{
 					if (strHost.EndsWith("/"))
@@ -153,7 +157,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, Language.strHttpConnectFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpConnectFailed, ex);
 				return false;
 			}
 		}
@@ -177,6 +181,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			objWebBrowser.Navigated -= wBrowser_Navigated;
 		}
 
+#if false
         private void wBrowser_NewWindow3(ref object ppDisp, ref bool Cancel, uint dwFlags, string bstrUrlContext, string bstrUrl)
 		{
 			if ((dwFlags & (long)NWMF.NWMF_OVERRIDEKEY) > 0)
@@ -188,13 +193,13 @@ namespace mRemoteNG.Connection.Protocol.Http
 				Cancel = true;
 			}
 		}
-				
+              
 		private void wBrowser_LastTabRemoved(object sender)
 		{
             Close();
 		}
-				
-		private void wBrowser_DocumentTitleChanged(object sender, EventArgs e)
+#endif
+        private void wBrowser_DocumentTitleChanged(object sender, EventArgs e)
 		{
 			try
 			{
@@ -206,9 +211,9 @@ namespace mRemoteNG.Connection.Protocol.Http
 							
 					if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
 					{
-						if (((GeckoWebBrowser) wBrowser).DocumentTitle.Length >= 30)
+						if (((GeckoWebBrowser) wBrowser).DocumentTitle.Length >= 15)
 						{
-							shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 29) + " ...";
+							shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
 						}
 						else
 						{
@@ -217,9 +222,9 @@ namespace mRemoteNG.Connection.Protocol.Http
 					}
 					else
 					{
-						if (((WebBrowser) wBrowser).DocumentTitle.Length >= 30)
+						if (((WebBrowser) wBrowser).DocumentTitle.Length >= 15)
 						{
-							shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 29) + " ...";
+							shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
 						}
 						else
 						{
@@ -239,7 +244,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			}
 			catch (Exception ex)
 			{
-				Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.strHttpDocumentTileChangeFailed + Environment.NewLine + ex.Message, true);
+				Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpDocumentTileChangeFailed, ex);
 			}
 		}
 
@@ -256,9 +261,9 @@ namespace mRemoteNG.Connection.Protocol.Http
 
                     if (InterfaceControl.Info.RenderingEngine == RenderingEngine.Gecko)
                     {
-                        if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 30)
+                        if (((GeckoWebBrowser)wBrowser).DocumentTitle.Length >= 15)
                         {
-                            shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 29) + " ...";
+                            shortTitle = ((GeckoWebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
                         }
                         else
                         {
@@ -267,9 +272,9 @@ namespace mRemoteNG.Connection.Protocol.Http
                     }
                     else
                     {
-                        if (((WebBrowser) wBrowser).DocumentTitle.Length >= 30)
+                        if (((WebBrowser) wBrowser).DocumentTitle.Length >= 15)
                         {
-                            shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 29) + " ...";
+                            shortTitle = ((WebBrowser) wBrowser).DocumentTitle.Substring(0, 10) + "...";
                         }
                         else
                         {
@@ -289,12 +294,12 @@ namespace mRemoteNG.Connection.Protocol.Http
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddMessage(Messages.MessageClass.WarningMsg, Language.strHttpDocumentTileChangeFailed + Environment.NewLine + ex.Message, true);
+                Runtime.MessageCollector.AddExceptionStackTrace(Language.strHttpDocumentTileChangeFailed, ex);
             }
         }
-        #endregion
+#endregion
 				
-        #region Enums
+#region Enums
 		public enum RenderingEngine
 		{
             [LocalizedAttributes.LocalizedDescription("strHttpInternetExplorer")]
@@ -302,8 +307,9 @@ namespace mRemoteNG.Connection.Protocol.Http
             [LocalizedAttributes.LocalizedDescription("strHttpGecko")]
             Gecko = 2
 		}
-				
-		private enum NWMF
+
+#if false
+        private enum NWMF
 		{
 			// ReSharper disable InconsistentNaming
 			NWMF_UNLOADING = 0x1,
@@ -322,6 +328,7 @@ namespace mRemoteNG.Connection.Protocol.Http
 			NWMF_INACTIVETAB = 0x100000
 			// ReSharper restore InconsistentNaming
 		}
-        #endregion
+#endif
+#endregion
 	}
 }

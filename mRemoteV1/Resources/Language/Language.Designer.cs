@@ -1058,7 +1058,8 @@ namespace mRemoteNG {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do you want to close the connection, &quot;{0}&quot;?.
+        ///   Looks up a localized string similar to Do you want to close the connection:
+        ///&quot;{0}&quot;?.
         /// </summary>
         internal static string strConfirmCloseConnectionMainInstruction {
             get {
