@@ -95,7 +95,7 @@ namespace mRemoteNG.UI.Window
 	        olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
 	        olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
 	        olvConnections.SelectionChanged += tvConnections_AfterSelect;
-	        olvConnections.MouseClick += tvConnections_NodeMouseClick;
+	        olvConnections.CellClick += tvConnections_NodeMouseSingleClick;
 	        olvConnections.CellClick += tvConnections_NodeMouseDoubleClick;
 	    }
 
@@ -250,23 +250,21 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        private void tvConnections_NodeMouseClick(object sender, MouseEventArgs e)
+        private void tvConnections_NodeMouseSingleClick(object sender, CellClickEventArgs e)
 		{
             try
             {
+                if (e.ClickCount > 1) return;
+                var clickedNode = (ConnectionInfo)e.Model;
                 ShowHideTreeContextMenuItems(SelectedNode);
-
-                if (e.Button != MouseButtons.Left) return;
-                if (Settings.Default.SingleClickOnConnectionOpensIt &&
-                    (SelectedNode.GetTreeNodeType() == TreeNodeType.Connection | SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession))
-                {
+                
+                //if (e.Button != MouseButtons.Left) return;
+                if (clickedNode.GetTreeNodeType() != TreeNodeType.Connection && clickedNode.GetTreeNodeType() != TreeNodeType.PuttySession) return;
+                if (Settings.Default.SingleClickOnConnectionOpensIt)
                     Runtime.OpenConnection();
-                }
 
-                if (Settings.Default.SingleClickSwitchesToOpenConnection && SelectedNode.GetTreeNodeType() == TreeNodeType.Connection)
-                {
+                if (Settings.Default.SingleClickSwitchesToOpenConnection)
                     Runtime.SwitchToOpenConnection(SelectedNode);
-                }
             }
             catch (Exception ex)
             {
