@@ -98,8 +98,12 @@ namespace mRemoteNG.UI.Window
 	        olvConnections.CellClick += tvConnections_NodeMouseSingleClick;
 	        olvConnections.CellClick += tvConnections_NodeMouseDoubleClick;
 	        olvConnections.CellToolTipShowing += tvConnections_CellToolTipShowing;
-
+            olvConnections.ModelCanDrop += OlvConnections_OnModelCanDrop;
+            olvConnections.ModelDropped += OlvConnections_OnModelDropped;
 	    }
+
+	    
+
 
 	    private void PopulateTreeView()
 	    {
@@ -432,6 +436,34 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Drag and Drop
+        private void OlvConnections_OnModelCanDrop(object sender, ModelDropEventArgs e)
+        {
+            var draggedObject = e.SourceModels[0] as ConnectionInfo;
+            if (!NodeIsDraggable(draggedObject)) return;
+            var dropTarget = e.TargetModel as ContainerInfo;
+            if (dropTarget != null)
+                e.Effect = DragDropEffects.Move;
+            else
+            {
+                e.Effect = DragDropEffects.None;
+            }
+        }
+
+	    private bool NodeIsDraggable(ConnectionInfo node)
+	    {
+            if (node == null || node is RootNodeInfo || node is PuttySessionInfo) return false;
+	        return true;
+	    }
+
+        private void OlvConnections_OnModelDropped(object sender, ModelDropEventArgs e)
+        {
+            var draggedObject = (IHasParent)e.SourceModels[0];
+            var dropTarget = e.TargetModel as ContainerInfo;
+            if (dropTarget != null)
+                draggedObject.SetParent(dropTarget);
+            e.RefreshObjects();
+        }
+
         //TODO Fix for TreeListView
         private static void tvConnections_DragDrop(object sender, DragEventArgs e)
 		{

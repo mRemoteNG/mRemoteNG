@@ -112,6 +112,8 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvConnections.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.olvConnections.HideSelection = false;
+            this.olvConnections.IsSimpleDragSource = true;
+            this.olvConnections.IsSimpleDropSink = true;
             this.olvConnections.LabelEdit = true;
             this.olvConnections.Location = new System.Drawing.Point(0, 0);
             this.olvConnections.MultiSelect = false;
