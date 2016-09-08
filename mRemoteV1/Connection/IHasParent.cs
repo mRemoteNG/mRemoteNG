@@ -7,5 +7,7 @@ namespace mRemoteNG.Connection
         ContainerInfo Parent { get; }
 
         void SetParent(ContainerInfo containerInfo);
+
+        void RemoveParent();
     }
 }
