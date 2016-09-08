@@ -118,40 +118,6 @@ namespace mRemoteNG.Tree
         }
 
         //TODO Fix for TreeListView
-        public static void SetNodeToolTip(MouseEventArgs e, ToolTip tTip)
-        {
-            try
-            {
-                if (!Settings.Default.ShowDescriptionTooltipsInTree) return;
-                //Find the node under the mouse.
-                TreeNode new_node = TreeView.GetNodeAt(e.X, e.Y);
-                if (new_node == null || new_node.Equals(SetNodeToolTip_old_node))
-                {
-                    return;
-                }
-                SetNodeToolTip_old_node = new_node;
-
-                //See if we have a node.
-                if (SetNodeToolTip_old_node == null)
-                {
-                    tTip.SetToolTip(TreeView, "");
-                }
-                else
-                {
-                    //Get this node's object data.
-                    if (ConnectionTreeNode.GetNodeType(SetNodeToolTip_old_node) == TreeNodeType.Connection)
-                    {
-                        tTip.SetToolTip(TreeView, ((ConnectionInfo) SetNodeToolTip_old_node.Tag).Description);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "SetNodeToolTip failed" + Environment.NewLine + ex.Message, true);
-            }
-        }
-
-        //TODO Fix for TreeListView
         public static void ExpandAllNodes()
         {
             TreeView.BeginUpdate();

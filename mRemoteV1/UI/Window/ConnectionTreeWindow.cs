@@ -97,6 +97,8 @@ namespace mRemoteNG.UI.Window
 	        olvConnections.SelectionChanged += tvConnections_AfterSelect;
 	        olvConnections.CellClick += tvConnections_NodeMouseSingleClick;
 	        olvConnections.CellClick += tvConnections_NodeMouseDoubleClick;
+	        olvConnections.CellToolTipShowing += tvConnections_CellToolTipShowing;
+
 	    }
 
 	    private void PopulateTreeView()
@@ -284,12 +286,12 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        //TODO Fix for TreeListView
-        private void tvConnections_MouseMove(object sender, MouseEventArgs e)
+        private void tvConnections_CellToolTipShowing(object sender, ToolTipShowingEventArgs e)
 		{
 			try
 			{
-                ConnectionTree.SetNodeToolTip(e, DescriptionTooltip);
+			    var nodeProducingTooltip = (ConnectionInfo) e.Model;
+			    e.Text = nodeProducingTooltip.Description;
 			}
 			catch (Exception ex)
 			{
