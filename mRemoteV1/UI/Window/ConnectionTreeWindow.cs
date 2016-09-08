@@ -8,6 +8,7 @@ using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using BrightIdeasSoftware;
 using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tree.Root;
 using WeifenLuo.WinFormsUI.Docking;
@@ -95,8 +96,7 @@ namespace mRemoteNG.UI.Window
 	        olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
 	        olvConnections.SelectionChanged += tvConnections_AfterSelect;
 	        olvConnections.MouseClick += tvConnections_NodeMouseClick;
-
-
+	        olvConnections.CellClick += tvConnections_NodeMouseDoubleClick;
 	    }
 
 	    private void PopulateTreeView()
@@ -274,11 +274,13 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        //TODO Fix for TreeListView
-        private static void tvConnections_NodeMouseDoubleClick(object sender, MouseEventArgs e)
-		{
-            if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection |
-                ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
+        private void tvConnections_NodeMouseDoubleClick(object sender, CellClickEventArgs e)
+        {
+            if (e.ClickCount < 2) return;
+            var clickedNode = e.Model as ConnectionInfo;
+            
+            if (clickedNode?.GetTreeNodeType() == TreeNodeType.Connection |
+                clickedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
 			{
                 Runtime.OpenConnection();
 			}
