@@ -25,6 +25,8 @@ namespace mRemoteNG.Tree
                 e.InfoMessage = "Cannot drag node onto itself";
             else if (AncestorDraggingOntoChild(dropSource, dropTarget))
                 e.InfoMessage = "Cannot drag parent node onto child.";
+            else if (DraggingOntoCurrentParent(dropSource, dropTarget))
+                e.InfoMessage = "This node is already in this folder.";
             else
                 e.Effect = DragDropEffects.Move;
 
@@ -46,6 +48,12 @@ namespace mRemoteNG.Tree
         {
             var sourceAsContainer = source as ContainerInfo;
             return sourceAsContainer != null && sourceAsContainer.GetRecursiveChildList().Contains(target);
+        }
+
+        private bool DraggingOntoCurrentParent(ConnectionInfo source, ConnectionInfo target)
+        {
+            var targetAsContainer = target as ContainerInfo;
+            return targetAsContainer != null && targetAsContainer.Children.Contains(source);
         }
 
         internal void OnModelDropped(object sender, ModelDropEventArgs e)
