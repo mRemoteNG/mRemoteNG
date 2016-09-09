@@ -572,14 +572,16 @@ namespace mRemoteNG.UI.Window
         //TODO Fix for TreeListView
         private void cMenTreeMoveUp_Click(object sender, EventArgs e)
 		{
-            ConnectionTree.MoveNodeUp();
+            SelectedNode.Parent.PromoteChild(SelectedNode);
+            olvConnections.RefreshObject(SelectedNode);
             Runtime.SaveConnectionsBG();
 		}
 
         //TODO Fix for TreeListView
         private void cMenTreeMoveDown_Click(object sender, EventArgs e)
 		{
-            ConnectionTree.MoveNodeDown();
+            SelectedNode.Parent.DemoteChild(SelectedNode);
+            olvConnections.RefreshObject(SelectedNode);
             Runtime.SaveConnectionsBG();
 		}
         #endregion

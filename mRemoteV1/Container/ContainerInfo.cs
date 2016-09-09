@@ -55,6 +55,27 @@ namespace mRemoteNG.Container
             }
         }
 
+        public void SetChildPosition(ConnectionInfo child, int newIndex)
+        {
+            var originalIndex = Children.IndexOf(child);
+            if (originalIndex < 0 || originalIndex == newIndex || newIndex < 0) return;
+            if (newIndex > Children.Count) newIndex = Children.Count;
+            Children.Remove(child);
+            Children.Insert(newIndex, child);
+        }
+
+        public void PromoteChild(ConnectionInfo child)
+        {
+            var originalIndex = Children.IndexOf(child);
+            SetChildPosition(child, originalIndex - 1);
+        }
+
+        public void DemoteChild(ConnectionInfo child)
+        {
+            var originalIndex = Children.IndexOf(child);
+            SetChildPosition(child, originalIndex + 1);
+        }
+
         public override void Dispose()
         {
             var tempChildList = Children.ToArray();
