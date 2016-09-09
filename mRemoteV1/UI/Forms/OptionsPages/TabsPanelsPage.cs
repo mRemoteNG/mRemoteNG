@@ -70,6 +70,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.SwitchToMCOnInformation = chkMCInformation.Checked;
             Settings.Default.SwitchToMCOnWarning = chkMCWarnings.Checked;
             Settings.Default.SwitchToMCOnError = chkMCErrors.Checked;
+
+            Settings.Default.Save();
         }
 
         private void chkUseOnlyErrorsAndInfosPanel_CheckedChanged(object sender, EventArgs e)

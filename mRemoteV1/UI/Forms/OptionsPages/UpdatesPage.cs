@@ -141,6 +141,8 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             Settings.Default.UpdateProxyAuthUser = txtProxyUsername.Text;
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             Settings.Default.UpdateProxyAuthPass = cryptographyProvider.Encrypt(txtProxyPassword.Text, GeneralAppInfo.EncryptionKey);
+
+            Settings.Default.Save();
         }
 
         #endregion
@@ -149,17 +151,17 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         #region Event Handlers
 
-        public void chkCheckForUpdatesOnStartup_CheckedChanged(object sender, EventArgs e)
+        private void chkCheckForUpdatesOnStartup_CheckedChanged(object sender, EventArgs e)
         {
             cboUpdateCheckFrequency.Enabled = chkCheckForUpdatesOnStartup.Checked;
         }
 
-        public void btnUpdateCheckNow_Click(object sender, EventArgs e)
+        private void btnUpdateCheckNow_Click(object sender, EventArgs e)
         {
             Windows.Show(WindowType.Update);
         }
 
-        public void chkUseProxyForAutomaticUpdates_CheckedChanged(object sender, EventArgs e)
+        private void chkUseProxyForAutomaticUpdates_CheckedChanged(object sender, EventArgs e)
         {
             pnlProxyBasic.Enabled = chkUseProxyForAutomaticUpdates.Checked;
             btnTestProxy.Enabled = chkUseProxyForAutomaticUpdates.Checked;
@@ -180,7 +182,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
         }
 
-        public void btnTestProxy_Click(object sender, EventArgs e)
+        private void btnTestProxy_Click(object sender, EventArgs e)
         {
             if (_appUpdate != null)
             {
@@ -204,7 +206,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             _appUpdate.GetUpdateInfoAsync();
         }
 
-        public void chkUseProxyAuthentication_CheckedChanged(object sender, EventArgs e)
+        private void chkUseProxyAuthentication_CheckedChanged(object sender, EventArgs e)
         {
             if (chkUseProxyForAutomaticUpdates.Checked)
             {

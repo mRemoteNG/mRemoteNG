@@ -95,19 +95,19 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         #region Event Handlers
 
-        public void chkUseCustomPuttyPath_CheckedChanged(object sender, EventArgs e)
+        private void chkUseCustomPuttyPath_CheckedChanged(object sender, EventArgs e)
         {
             txtCustomPuttyPath.Enabled = chkUseCustomPuttyPath.Checked;
             btnBrowseCustomPuttyPath.Enabled = chkUseCustomPuttyPath.Checked;
             SetPuttyLaunchButtonEnabled();
         }
 
-        public void txtCustomPuttyPath_TextChanged(object sender, EventArgs e)
+        private void txtCustomPuttyPath_TextChanged(object sender, EventArgs e)
         {
             SetPuttyLaunchButtonEnabled();
         }
 
-        public void btnBrowseCustomPuttyPath_Click(object sender, EventArgs e)
+        private void btnBrowseCustomPuttyPath_Click(object sender, EventArgs e)
         {
             using (var openFileDialog = new OpenFileDialog())
             {
@@ -124,7 +124,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             }
         }
 
-        public void btnLaunchPutty_Click(object sender, EventArgs e)
+        private void btnLaunchPutty_Click(object sender, EventArgs e)
         {
             try
             {
