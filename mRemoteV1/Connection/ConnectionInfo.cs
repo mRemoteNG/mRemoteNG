@@ -734,14 +734,6 @@ namespace mRemoteNG.Connection
 	    {
 	        RemoveParent();
 	    }
-
-	    public override bool Equals(object otherObject)
-	    {
-	        var otherObjectAsConnectionInfo = otherObject as ConnectionInfo;
-	        if (otherObjectAsConnectionInfo == null) return false;
-	        return otherObjectAsConnectionInfo.ConstantID == ConstantID;
-	    }
-
 	    #endregion
 
         #region Public Enumerations
