@@ -99,8 +99,8 @@ namespace mRemoteNG.UI.Window
 	        olvConnections.CellClick += tvConnections_NodeMouseSingleClick;
 	        olvConnections.CellClick += tvConnections_NodeMouseDoubleClick;
 	        olvConnections.CellToolTipShowing += tvConnections_CellToolTipShowing;
-            olvConnections.ModelCanDrop += _dragAndDropHandler.OnModelCanDrop;
-            olvConnections.ModelDropped += _dragAndDropHandler.OnModelDropped;
+            olvConnections.ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
+            olvConnections.ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
 	    }
 
 	    private void PopulateTreeView()

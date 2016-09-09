@@ -13,7 +13,17 @@ namespace mRemoteNG.Tree
         internal Color DropAllowedFeedbackColor = Color.Green;
         internal Color DropDeniedFeedbackColor = Color.Red;
 
-        internal void OnModelCanDrop(object sender, ModelDropEventArgs e)
+        internal void HandleEvent_ModelDropped(object sender, ModelDropEventArgs e)
+        {
+            var draggedObject = (IHasParent)e.SourceModels[0];
+            var dropTarget = e.TargetModel as ContainerInfo;
+            if (dropTarget != null)
+                draggedObject.SetParent(dropTarget);
+            e.Handled = true;
+            e.RefreshObjects();
+        }
+
+        internal void HandleEvent_ModelCanDrop(object sender, ModelDropEventArgs e)
         {
             e.Effect = DragDropEffects.None;
             e.DropSink.EnableFeedback = true;
@@ -62,16 +72,6 @@ namespace mRemoteNG.Tree
         {
             var targetAsContainer = target as ContainerInfo;
             return targetAsContainer != null && targetAsContainer.Children.Contains(source);
-        }
-
-        internal void OnModelDropped(object sender, ModelDropEventArgs e)
-        {
-            var draggedObject = (IHasParent)e.SourceModels[0];
-            var dropTarget = e.TargetModel as ContainerInfo;
-            if (dropTarget != null)
-                draggedObject.SetParent(dropTarget);
-            e.Handled = true;
-            e.RefreshObjects();
         }
     }
 }
