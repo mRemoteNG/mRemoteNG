@@ -19,6 +19,7 @@ namespace mRemoteNG.UI.Window
 	public partial class ConnectionTreeWindow
 	{
 	    private ConnectionTreeModel _connectionTreeModel;
+	    private ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
 
         private ToolTip DescriptionTooltip { get; }
 	    private ConnectionInfo SelectedNode => (ConnectionInfo) olvConnections.SelectedObject;
@@ -105,12 +106,9 @@ namespace mRemoteNG.UI.Window
 	        olvConnections.CellClick += tvConnections_NodeMouseSingleClick;
 	        olvConnections.CellClick += tvConnections_NodeMouseDoubleClick;
 	        olvConnections.CellToolTipShowing += tvConnections_CellToolTipShowing;
-            olvConnections.ModelCanDrop += OlvConnections_OnModelCanDrop;
-            olvConnections.ModelDropped += OlvConnections_OnModelDropped;
+            olvConnections.ModelCanDrop += _dragAndDropHandler.OnModelCanDrop;
+            olvConnections.ModelDropped += _dragAndDropHandler.OnModelDropped;
 	    }
-
-	    
-
 
 	    private void PopulateTreeView()
 	    {
@@ -442,82 +440,44 @@ namespace mRemoteNG.UI.Window
 		}
         #endregion
 
-        #region Drag and Drop
-        private void OlvConnections_OnModelCanDrop(object sender, ModelDropEventArgs e)
-        {
-            var draggedObject = e.SourceModels[0] as ConnectionInfo;
-            if (!NodeIsDraggable(draggedObject)) return;
-            var dropTarget = e.TargetModel as ContainerInfo;
-            if (dropTarget != null)
-                e.Effect = DragDropEffects.Move;
-            else
-            {
-                e.Effect = DragDropEffects.None;
-            }
-        }
-
-	    private bool NodeIsDraggable(ConnectionInfo node)
-	    {
-            if (node == null || node is RootNodeInfo || node is PuttySessionInfo) return false;
-	        return true;
-	    }
-
-        private void OlvConnections_OnModelDropped(object sender, ModelDropEventArgs e)
-        {
-            var draggedObject = (IHasParent)e.SourceModels[0];
-            var dropTarget = e.TargetModel as ContainerInfo;
-            if (dropTarget != null)
-                draggedObject.SetParent(dropTarget);
-            e.RefreshObjects();
-        }
-        #endregion
-
         #region Tree Context Menu
-        //TODO Fix for TreeListView
         private void cMenTreeAddConnection_Click(object sender, EventArgs e)
 		{
 			AddConnection();
             Runtime.SaveConnectionsBG();
 		}
 
-        //TODO Fix for TreeListView
         private void cMenTreeAddFolder_Click(object sender, EventArgs e)
 		{
 			AddFolder();
             Runtime.SaveConnectionsBG();
 		}
 
-        //TODO Fix for TreeListView
         private void cMenTreeConnect_Click(object sender, EventArgs e)
 		{
             Runtime.OpenConnection(ConnectionInfo.Force.DoNotJump);
 		}
 
-        //TODO Fix for TreeListView
         private void cMenTreeConnectWithOptionsConnectToConsoleSession_Click(object sender, EventArgs e)
 		{
             Runtime.OpenConnection(ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
 		}
 
-        //TODO Fix for TreeListView
         private void cMenTreeConnectWithOptionsNoCredentials_Click(object sender, EventArgs e)
 		{
             Runtime.OpenConnection(ConnectionInfo.Force.NoCredentials);
 		}
 
-        //TODO Fix for TreeListView
         private void cMenTreeConnectWithOptionsDontConnectToConsoleSession_Click(object sender, EventArgs e)
 		{
             Runtime.OpenConnection(ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
 		}
 
-        //TODO Fix for TreeListView
         private void cMenTreeConnectWithOptionsConnectInFullscreen_Click(object sender, EventArgs e)
 		{
             Runtime.OpenConnection(ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
 		}
 
-        //TODO Fix for TreeListView
         private void cMenTreeConnectWithOptionsChoosePanelBeforeConnecting_Click(object sender, EventArgs e)
 		{
             Runtime.OpenConnection(ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
@@ -525,7 +485,7 @@ namespace mRemoteNG.UI.Window
 
 	    private void cMenTreeDisconnect_Click(object sender, EventArgs e)
 		{
-			DisconnectConnection();
+			DisconnectConnection(SelectedNode);
 		}
 
         private void cMenTreeToolsTransferFile_Click(object sender, EventArgs e)
@@ -665,36 +625,29 @@ namespace mRemoteNG.UI.Window
 		}
 
         //TODO Fix for TreeListView
-        private void DisconnectConnection()
+        private void DisconnectConnection(ConnectionInfo connectionInfo)
 		{
 			try
 			{
-				if (tvConnections.SelectedNode != null)
-				{
-					if (tvConnections.SelectedNode.Tag is ConnectionInfo)
-					{
-                        ConnectionInfo conI = (ConnectionInfo)tvConnections.SelectedNode.Tag;
-						for (int i = 0; i <= conI.OpenConnections.Count - 1; i++)
-						{
-							conI.OpenConnections[i].Disconnect();
-						}
-					}
-							
-					if (tvConnections.SelectedNode.Tag is ContainerInfo)
-					{
-						foreach (TreeNode n in tvConnections.SelectedNode.Nodes)
-						{
-							if (n.Tag is ConnectionInfo)
-							{
-                                ConnectionInfo conI = (ConnectionInfo)n.Tag;
-								for (int i = 0; i <= conI.OpenConnections.Count - 1; i++)
-								{
-									conI.OpenConnections[i].Disconnect();
-								}
-							}
-						}
-					}
-				}
+			    if (connectionInfo == null) return;
+			    var nodeAsContainer = connectionInfo as ContainerInfo;
+                if (nodeAsContainer != null)
+                {
+                    foreach (var child in nodeAsContainer.Children)
+                    {
+                        for (var i = 0; i <= child.OpenConnections.Count - 1; i++)
+                        {
+                            child.OpenConnections[i].Disconnect();
+                        }
+                    }
+                }
+			    else
+                {
+			        for (var i = 0; i <= connectionInfo.OpenConnections.Count - 1; i++)
+			        {
+                        connectionInfo.OpenConnections[i].Disconnect();
+			        }
+			    }
 			}
 			catch (Exception ex)
 			{
