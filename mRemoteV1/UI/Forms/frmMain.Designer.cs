@@ -1,4 +1,3 @@
-using mRemoteNG.Controls;
 using mRemoteNG.UI.Controls;
 
 namespace mRemoteNG.UI.Forms
@@ -98,7 +97,7 @@ namespace mRemoteNG.UI.Forms
             this.cmbQuickConnect = new mRemoteNG.UI.Controls.QuickConnectComboBox();
             this.tsContainer = new System.Windows.Forms.ToolStripContainer();
             this.tsQuickConnect = new System.Windows.Forms.ToolStrip();
-            this.btnQuickConnect = new mRemoteNG.Controls.ToolStripSplitButton();
+            this.btnQuickConnect = new ToolStripSplitButton();
             this.mnuQuickConnectProtocol = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.btnConnections = new System.Windows.Forms.ToolStripDropDownButton();
             this.mnuConnections = new System.Windows.Forms.ContextMenuStrip(this.components);

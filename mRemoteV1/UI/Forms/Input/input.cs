@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace mRemoteNG.UI.Forms.Input
 {
-    internal class input
+    internal static class input
     {
         public static DialogResult InputBox(string title, string promptText, ref string value)
         {

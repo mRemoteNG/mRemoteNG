@@ -1,8 +1,6 @@
 
 
-using mRemoteNG.My;
-
-namespace mRemoteNG
+namespace mRemoteNG.UI.Forms
 {
 	
     public partial class frmChoosePanel : System.Windows.Forms.Form

@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using mRemoteNG.Tools;
 using mRemoteNG.UI.Forms;
 using WeifenLuo.WinFormsUI.Docking;
+using TextBox = System.Windows.Forms.TextBox;
 
 namespace mRemoteNG.UI.Window
 {

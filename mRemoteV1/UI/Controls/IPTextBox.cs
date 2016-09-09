@@ -17,12 +17,12 @@ namespace mRemoteNG.UI.Controls
 	public class IPTextBox: UserControl
 	{
 		private Panel panel1;
-		public TextBox Octet1; 
-		private Label label1;
-        public TextBox Octet2;
-        public TextBox Octet3;
-        public TextBox Octet4;
-		private Label label2;
+		public System.Windows.Forms.TextBox Octet1; 
+        public System.Windows.Forms.TextBox Octet2;
+        public System.Windows.Forms.TextBox Octet3;
+        public System.Windows.Forms.TextBox Octet4;
+        private Label label1;
+        private Label label2;
 		private Label label3;
 		private ToolTip toolTip1;
 		private System.ComponentModel.IContainer components;
