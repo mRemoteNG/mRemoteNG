@@ -46,7 +46,6 @@ namespace mRemoteNG.UI.Window
 		    };
 
             FillImageList();
-		    SetDragAndDropProperties();
             LinkModelToView();
 		    SetEventHandlers();
 		}
@@ -71,12 +70,6 @@ namespace mRemoteNG.UI.Window
                 Runtime.MessageCollector.AddExceptionStackTrace("FillImageList (UI.Window.ConnectionTreeWindow) failed", ex);
             }
         }
-
-	    private void SetDragAndDropProperties()
-	    {
-	        var dropSink = (SimpleDropSink)olvConnections.DropSink;
-            dropSink.FeedbackColor = Color.SteelBlue;
-	    }
 
         private void LinkModelToView()
 	    {

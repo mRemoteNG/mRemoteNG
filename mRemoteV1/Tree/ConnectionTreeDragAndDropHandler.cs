@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Connection;
@@ -9,10 +10,14 @@ namespace mRemoteNG.Tree
 {
     internal class ConnectionTreeDragAndDropHandler
     {
+        internal Color DropAllowedFeedbackColor = Color.Green;
+        internal Color DropDeniedFeedbackColor = Color.Red;
+
         internal void OnModelCanDrop(object sender, ModelDropEventArgs e)
         {
             e.Effect = DragDropEffects.None;
             e.DropSink.EnableFeedback = true;
+            e.DropSink.FeedbackColor = DropDeniedFeedbackColor;
             var dropSource = e.SourceModels.Cast<ConnectionInfo>().First();
             var dropTarget = e.TargetModel as ConnectionInfo;
 
@@ -28,7 +33,10 @@ namespace mRemoteNG.Tree
             else if (DraggingOntoCurrentParent(dropSource, dropTarget))
                 e.InfoMessage = "This node is already in this folder.";
             else
+            {
                 e.Effect = DragDropEffects.Move;
+                e.DropSink.FeedbackColor = DropAllowedFeedbackColor;
+            }
 
             e.Handled = true;
         }
