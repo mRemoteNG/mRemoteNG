@@ -33,15 +33,15 @@ namespace mRemoteNG.Tree
 
             if (!NodeIsDraggable(dropSource))
             {
-                e.InfoMessage = "This node is not draggable";
+                e.InfoMessage = Language.strNodeNotDraggable;
                 e.DropSink.EnableFeedback = false;
             }
             else if (NodeDraggingOntoSelf(dropSource, dropTarget))
-                e.InfoMessage = "Cannot drag node onto itself";
+                e.InfoMessage = Language.strNodeCannotDragOnSelf;
             else if (AncestorDraggingOntoChild(dropSource, dropTarget))
-                e.InfoMessage = "Cannot drag parent node onto child.";
+                e.InfoMessage = Language.strNodeCannotDragParentOnChild;
             else if (DraggingOntoCurrentParent(dropSource, dropTarget))
-                e.InfoMessage = "This node is already in this folder.";
+                e.InfoMessage = Language.strNodeAlreadyInFolder;
             else
             {
                 e.Effect = DragDropEffects.Move;

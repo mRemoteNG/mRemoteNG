@@ -2385,4 +2385,16 @@ mRemoteNG will now quit and begin with the installation.</value>
   <data name="strRDPOverallConnectionTimeout" xml:space="preserve">
     <value>RDP Connection Timeout</value>
   </data>
+  <data name="strNodeAlreadyInFolder" xml:space="preserve">
+    <value>This node is already in this folder.</value>
+  </data>
+  <data name="strNodeCannotDragOnSelf" xml:space="preserve">
+    <value>Cannot drag node onto itself.</value>
+  </data>
+  <data name="strNodeCannotDragParentOnChild" xml:space="preserve">
+    <value>Cannot drag parent node onto child.</value>
+  </data>
+  <data name="strNodeNotDraggable" xml:space="preserve">
+    <value>This node is not draggable.</value>
+  </data>
 </root>
