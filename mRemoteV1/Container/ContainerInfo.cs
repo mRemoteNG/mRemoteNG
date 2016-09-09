@@ -59,9 +59,31 @@ namespace mRemoteNG.Container
         {
             var originalIndex = Children.IndexOf(child);
             if (originalIndex < 0 || originalIndex == newIndex || newIndex < 0) return;
-            if (newIndex > Children.Count) newIndex = Children.Count;
             Children.Remove(child);
+            if (newIndex > Children.Count) newIndex = Children.Count;
             Children.Insert(newIndex, child);
+        }
+
+        public void SetChildAbove(ConnectionInfo childToPromote, ConnectionInfo reference)
+        {
+            var originalIndex = Children.IndexOf(childToPromote);
+            var newIndex = Children.IndexOf(reference);
+            if (newIndex < 0) return;
+            if (originalIndex < newIndex)
+                SetChildPosition(childToPromote, newIndex - 1);
+            else if (originalIndex > newIndex)
+                SetChildPosition(childToPromote, newIndex);
+        }
+
+        public void SetChildBelow(ConnectionInfo childToPromote, ConnectionInfo reference)
+        {
+            var originalIndex = Children.IndexOf(childToPromote);
+            var newIndex = Children.IndexOf(reference);
+            if (newIndex < 0) return;
+            if (originalIndex < newIndex)
+                SetChildPosition(childToPromote, newIndex);
+            else if (originalIndex  > newIndex)
+                SetChildPosition(childToPromote, newIndex + 1);
         }
 
         public void PromoteChild(ConnectionInfo child)

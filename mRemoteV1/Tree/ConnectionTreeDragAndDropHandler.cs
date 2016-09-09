@@ -15,10 +15,28 @@ namespace mRemoteNG.Tree
 
         internal void HandleEvent_ModelDropped(object sender, ModelDropEventArgs e)
         {
-            var draggedObject = (IHasParent)e.SourceModels[0];
-            var dropTarget = e.TargetModel as ContainerInfo;
-            if (dropTarget != null)
-                draggedObject.SetParent(dropTarget);
+            var draggedObject = (ConnectionInfo)e.SourceModels[0];
+            var dropTarget = e.TargetModel as ConnectionInfo;
+            if (dropTarget == null) return;
+            if (e.DropTargetLocation == DropTargetLocation.Item)
+            {
+                var dropTargetAsContainer = dropTarget as ContainerInfo;
+                if (dropTargetAsContainer == null) return;
+                draggedObject.SetParent(dropTargetAsContainer);
+            }
+            else if (e.DropTargetLocation == DropTargetLocation.AboveItem)
+            {
+                if (!draggedObject.Parent.Equals(dropTarget.Parent))
+                    draggedObject.SetParent(dropTarget.Parent);
+
+                dropTarget.Parent.SetChildAbove(draggedObject, dropTarget);
+            }
+            else if (e.DropTargetLocation == DropTargetLocation.BelowItem)
+            {
+                if (!draggedObject.Parent.Equals(dropTarget.Parent))
+                    draggedObject.SetParent(dropTarget.Parent);
+                dropTarget.Parent.SetChildBelow(draggedObject, dropTarget);
+            }
             e.Handled = true;
             e.RefreshObjects();
         }
@@ -36,19 +54,46 @@ namespace mRemoteNG.Tree
                 e.InfoMessage = Language.strNodeNotDraggable;
                 e.DropSink.EnableFeedback = false;
             }
-            else if (NodeDraggingOntoSelf(dropSource, dropTarget))
-                e.InfoMessage = Language.strNodeCannotDragOnSelf;
-            else if (AncestorDraggingOntoChild(dropSource, dropTarget))
+            else if (e.DropTargetLocation == DropTargetLocation.Item)
+                HandleCanDropOnItem(dropSource, dropTarget, e);
+            else if (e.DropTargetLocation == DropTargetLocation.AboveItem || e.DropTargetLocation == DropTargetLocation.BelowItem)
+                HandleCanDropBetweenItems(dropSource, dropTarget, e);
+            else
+                return;
+            e.Handled = true;
+        }
+
+        private void HandleCanDropOnItem(ConnectionInfo dropSource, ConnectionInfo dropTarget, ModelDropEventArgs e)
+        {
+            if (dropTarget is ContainerInfo)
+            {
+                if (NodeDraggingOntoSelf(dropSource, dropTarget))
+                    e.InfoMessage = Language.strNodeCannotDragOnSelf;
+                else if (AncestorDraggingOntoChild(dropSource, dropTarget))
+                    e.InfoMessage = Language.strNodeCannotDragParentOnChild;
+                else if (DraggingOntoCurrentParent(dropSource, dropTarget))
+                    e.InfoMessage = Language.strNodeAlreadyInFolder;
+                else
+                {
+                    e.Effect = DragDropEffects.Move;
+                    e.DropSink.FeedbackColor = DropAllowedFeedbackColor;
+                }
+            }
+            else
+            {
+                e.DropSink.EnableFeedback = false;
+            }
+        }
+
+        private void HandleCanDropBetweenItems(ConnectionInfo dropSource, ConnectionInfo dropTarget, ModelDropEventArgs e)
+        {
+            if (AncestorDraggingOntoChild(dropSource, dropTarget))
                 e.InfoMessage = Language.strNodeCannotDragParentOnChild;
-            else if (DraggingOntoCurrentParent(dropSource, dropTarget))
-                e.InfoMessage = Language.strNodeAlreadyInFolder;
             else
             {
                 e.Effect = DragDropEffects.Move;
                 e.DropSink.FeedbackColor = DropAllowedFeedbackColor;
             }
-
-            e.Handled = true;
         }
 
         private bool NodeIsDraggable(ConnectionInfo node)

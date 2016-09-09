@@ -47,7 +47,8 @@ namespace mRemoteNG.UI.Window
 
             FillImageList();
             LinkModelToView();
-		    SetEventHandlers();
+		    SetupDropSink();
+            SetEventHandlers();
 		}
 
         private void FillImageList()
@@ -78,6 +79,12 @@ namespace mRemoteNG.UI.Window
             olvConnections.CanExpandGetter = item => item is ContainerInfo;
             olvConnections.ChildrenGetter = item => ((ContainerInfo)item).Children;
         }
+
+	    private void SetupDropSink()
+	    {
+	        var dropSink = (SimpleDropSink)olvConnections.DropSink;
+	        dropSink.CanDropBetween = true;
+	    }
 
 	    private object ConnectionImageGetter(object rowObject)
 	    {
@@ -569,7 +576,6 @@ namespace mRemoteNG.UI.Window
             Export.ExportToFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode, Runtime.ConnectionTreeModel);
 		}
 
-        //TODO Fix for TreeListView
         private void cMenTreeMoveUp_Click(object sender, EventArgs e)
 		{
             SelectedNode.Parent.PromoteChild(SelectedNode);
@@ -577,7 +583,6 @@ namespace mRemoteNG.UI.Window
             Runtime.SaveConnectionsBG();
 		}
 
-        //TODO Fix for TreeListView
         private void cMenTreeMoveDown_Click(object sender, EventArgs e)
 		{
             SelectedNode.Parent.DemoteChild(SelectedNode);
