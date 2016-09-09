@@ -1,8 +1,6 @@
 using System.Drawing;
-using mRemoteNG.My;
 
-
-namespace mRemoteNG
+namespace mRemoteNG.Tools
 {
 	public partial class ReconnectGroup
 	{
@@ -19,16 +17,9 @@ namespace mRemoteNG
 			}
 			set
 			{
-				if (value == true)
-				{
-					SetStatusImage(Resources.HostStatus_On);
-				}
-				else
-				{
-					SetStatusImage(Resources.HostStatus_Off);
-				}
-				
-				_ServerReady = value;
+			    SetStatusImage(value ? Resources.HostStatus_On : Resources.HostStatus_Off);
+
+			    _ServerReady = value;
 			}
 		}
 		
@@ -37,8 +28,8 @@ namespace mRemoteNG
 		{
 			if (pbServerStatus.InvokeRequired)
 			{
-				SetStatusImageCB d = new SetStatusImageCB(SetStatusImage);
-				ParentForm.Invoke(d, new object[] {Img});
+			    SetStatusImageCB d = new SetStatusImageCB(SetStatusImage);
+			    ParentForm?.Invoke(d, new object[] {Img});
 			}
 			else
 			{
@@ -70,8 +61,8 @@ namespace mRemoteNG
 		{
 			if (chkReconnectWhenReady.InvokeRequired)
 			{
-				SetCheckboxCB d = new SetCheckboxCB(SetCheckbox);
-				ParentForm.Invoke(d, new object[] {Val});
+			    SetCheckboxCB d = new SetCheckboxCB(SetCheckbox);
+			    ParentForm?.Invoke(d, new object[] {Val});
 			}
 			else
 			{
@@ -125,8 +116,8 @@ namespace mRemoteNG
 		{
 			if (this.InvokeRequired)
 			{
-				DisposeReconnectGroupCB d = new DisposeReconnectGroupCB(DisposeReconnectGroup);
-				ParentForm.Invoke(d);
+			    DisposeReconnectGroupCB d = new DisposeReconnectGroupCB(DisposeReconnectGroup);
+			    ParentForm?.Invoke(d);
 			}
 			else
 			{

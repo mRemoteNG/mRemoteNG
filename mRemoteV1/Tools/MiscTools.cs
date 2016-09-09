@@ -7,9 +7,9 @@ using System.Reflection;
 using System.Security;
 using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.Forms;
 using mRemoteNG.Messages;
 using mRemoteNG.Security;
+using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using static System.String;
 

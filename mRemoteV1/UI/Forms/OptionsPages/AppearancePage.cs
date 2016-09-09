@@ -1,7 +1,6 @@
 using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.My;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {

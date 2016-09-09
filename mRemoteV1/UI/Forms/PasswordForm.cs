@@ -1,9 +1,7 @@
 using System;
 using System.Windows.Forms;
-using mRemoteNG.My;
 
-
-namespace mRemoteNG.Forms
+namespace mRemoteNG.UI.Forms
 {
     public partial class PasswordForm
 	{

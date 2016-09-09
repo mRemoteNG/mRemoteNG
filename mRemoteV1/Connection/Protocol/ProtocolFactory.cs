@@ -7,19 +7,11 @@ using mRemoteNG.Connection.Protocol.SSH;
 using mRemoteNG.Connection.Protocol.Telnet;
 using mRemoteNG.Connection.Protocol.VNC;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using mRemoteNG.My;
 
 namespace mRemoteNG.Connection.Protocol
 {
     public class ProtocolFactory
     {
-        public ProtocolFactory()
-        {
-
-        }
-
         public ProtocolBase CreateProtocol(ConnectionInfo connectionInfo)
         {
             ProtocolBase newProtocol = default(ProtocolBase);

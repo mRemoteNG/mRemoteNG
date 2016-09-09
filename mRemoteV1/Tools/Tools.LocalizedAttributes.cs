@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using mRemoteNG.My;
 
 
 namespace mRemoteNG.Tools
@@ -15,20 +14,13 @@ namespace mRemoteNG.Tools
 				
 			public LocalizedCategoryAttribute(string value, int Order = 1) : base(value)
 			{
-				if (Order > LocalizedCategoryAttribute.MaxOrder)
-				{
-					this.Order = LocalizedCategoryAttribute.MaxOrder;
-				}
-				else
-				{
-					this.Order = Order;
-				}
+			    this.Order = Order > MaxOrder ? MaxOrder : Order;
 			}
 				
 			protected override string GetLocalizedString(string value)
 			{
 				string OrderPrefix = "";
-				for (int x = 0; x <= LocalizedCategoryAttribute.MaxOrder - this.Order; x++)
+				for (int x = 0; x <= MaxOrder - Order; x++)
 				{
 					OrderPrefix += Convert.ToString("\t");
 				}
@@ -45,17 +37,17 @@ namespace mRemoteNG.Tools
 				
 			public LocalizedDisplayNameAttribute(string value) : base(value)
 			{
-				this.Localized = false;
+				Localized = false;
 			}
 				
             public override string DisplayName
 			{
 				get
 				{
-					if (!this.Localized)
+					if (!Localized)
 					{
-						this.Localized = true;
-						this.DisplayNameValue = Language.ResourceManager.GetString(this.DisplayNameValue);
+						Localized = true;
+						DisplayNameValue = Language.ResourceManager.GetString(DisplayNameValue);
 					}
 						
 					return base.DisplayName;
@@ -69,17 +61,17 @@ namespace mRemoteNG.Tools
 			private bool Localized;
 			public LocalizedDescriptionAttribute(string value) : base(value)
 			{
-				this.Localized = false;
+				Localized = false;
 			}
 				
             public override string Description
 			{
 				get
 				{
-					if (!this.Localized)
+					if (!Localized)
 					{
-						this.Localized = true;
-						this.DescriptionValue = Language.ResourceManager.GetString(this.DescriptionValue);
+						Localized = true;
+						DescriptionValue = Language.ResourceManager.GetString(DescriptionValue);
 					}
 						
 					return base.Description;
@@ -96,13 +88,7 @@ namespace mRemoteNG.Tools
 				
 			// This allows localized attributes in a derived class to override a matching
 			// non-localized attribute inherited from its base class
-            public override object TypeId
-			{
-				get
-				{
-					return typeof(DefaultValueAttribute);
-				}
-			}
+            public override object TypeId => typeof(DefaultValueAttribute);
 		}
 			
         #region Special localization - with String.Format
@@ -113,17 +99,17 @@ namespace mRemoteNG.Tools
 			public LocalizedDisplayNameInheritAttribute(string value) : base(value)
 			{
 					
-				this.Localized = false;
+				Localized = false;
 			}
 				
             public override string DisplayName
 			{
 				get
 				{
-					if (!this.Localized)
+					if (!Localized)
 					{
-						this.Localized = true;
-						this.DisplayNameValue = string.Format(Language.strFormatInherit, Language.ResourceManager.GetString(this.DisplayNameValue));
+						Localized = true;
+						DisplayNameValue = string.Format(Language.strFormatInherit, Language.ResourceManager.GetString(DisplayNameValue));
 					}
 						
 					return base.DisplayName;
@@ -138,17 +124,17 @@ namespace mRemoteNG.Tools
 			public LocalizedDescriptionInheritAttribute(string value) : base(value)
 			{
 					
-				this.Localized = false;
+				Localized = false;
 			}
 				
             public override string Description
 			{
 				get
 				{
-					if (!this.Localized)
+					if (!Localized)
 					{
-						this.Localized = true;
-						this.DescriptionValue = string.Format(Language.strFormatInheritDescription, Language.ResourceManager.GetString(this.DescriptionValue));
+						Localized = true;
+						DescriptionValue = string.Format(Language.strFormatInheritDescription, Language.ResourceManager.GetString(DescriptionValue));
 					}
 						
 					return base.Description;

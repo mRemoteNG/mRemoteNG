@@ -1,12 +1,10 @@
 ﻿using mRemoteNG.App.Info;
-using System;
 using System.Data.SqlClient;
-using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.Config
 {
-    public class SqlConnectorImp : IDisposable, mRemoteNG.Config.SqlConnector
+    public class SqlConnectorImp : SqlConnector
     {
         private SqlConnection _sqlConnection = default(SqlConnection);
         private string _sqlConnectionString = "";

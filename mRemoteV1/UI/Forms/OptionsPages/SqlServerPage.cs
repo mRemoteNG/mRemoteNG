@@ -2,8 +2,6 @@ using System;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
-using mRemoteNG.My;
-using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 
 namespace mRemoteNG.UI.Forms.OptionsPages

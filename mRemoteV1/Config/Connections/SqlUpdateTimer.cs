@@ -1,9 +1,6 @@
-﻿using mRemoteNG.App;
-using mRemoteNG.Messages;
-using System;
-using System.Data;
-using System.Data.SqlClient;
+﻿using System;
 using System.Timers;
+using mRemoteNG.App;
 
 namespace mRemoteNG.Config.Connections
 {
@@ -67,8 +64,9 @@ namespace mRemoteNG.Config.Connections
                 _sqlUpdateTimer.Stop();
                 _sqlUpdateTimer.Close();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Runtime.MessageCollector.AddExceptionStackTrace("SqlUpdateTimer StopTimer Exception", ex);
             }
         }
 

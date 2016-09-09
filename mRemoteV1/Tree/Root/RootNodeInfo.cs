@@ -1,6 +1,5 @@
 using mRemoteNG.Tools;
 using System.ComponentModel;
-using System.Windows.Forms;
 using mRemoteNG.Container;
 
 
@@ -19,7 +18,7 @@ namespace mRemoteNG.Tree.Root
 		}
 			
         #region Public Properties
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1), 
+        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"), 
             Browsable(true),
             LocalizedAttributes.LocalizedDefaultValue("strConnections"),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNameName"),
@@ -42,7 +41,7 @@ namespace mRemoteNG.Tree.Root
 			}
 		}
 
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
+        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
             Browsable(true),
             LocalizedAttributes.LocalizedDisplayName("strPasswordProtect"),
             TypeConverter(typeof(Tools.MiscTools.YesNoTypeConverter))]

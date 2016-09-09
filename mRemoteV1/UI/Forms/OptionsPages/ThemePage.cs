@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using mRemoteNG.My;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -67,7 +66,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         public void cboTheme_DropDown(object sender, EventArgs e)
         {
-            if (ThemeManager.ActiveTheme == ThemeManager.DefaultTheme)
+            if (Equals(ThemeManager.ActiveTheme, ThemeManager.DefaultTheme))
             {
                 return;
             }
@@ -81,7 +80,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 cboTheme.SelectedItem = ThemeManager.DefaultTheme;
             }
 
-            if (cboTheme.SelectedItem == ThemeManager.DefaultTheme)
+            if (Equals(cboTheme.SelectedItem, ThemeManager.DefaultTheme))
             {
                 cboTheme.DropDownStyle = ComboBoxStyle.DropDownList;
                 btnThemeDelete.Enabled = false;

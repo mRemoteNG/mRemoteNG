@@ -1,8 +1,6 @@
 
 
-using mRemoteNG.My;
-
-namespace mRemoteNG.Forms
+namespace mRemoteNG.UI.Forms
 {
 	public 
 	partial class PasswordForm : System.Windows.Forms.Form
@@ -163,8 +161,8 @@ namespace mRemoteNG.Forms
             this.PerformLayout();
 
 		}
-		private Controls.TextBox txtPassword;
-		private Controls.TextBox txtVerify;
+		private mRemoteNG.Controls.TextBox txtPassword;
+		private mRemoteNG.Controls.TextBox txtVerify;
 		private System.Windows.Forms.Label lblPassword;
 		private System.Windows.Forms.Label lblVerify;
 		private System.Windows.Forms.Button btnOK;

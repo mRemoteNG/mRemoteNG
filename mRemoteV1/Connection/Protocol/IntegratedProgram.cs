@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-using mRemoteNG.My;
 
 
 namespace mRemoteNG.Connection.Protocol

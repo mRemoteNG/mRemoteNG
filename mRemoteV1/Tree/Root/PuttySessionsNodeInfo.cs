@@ -1,7 +1,5 @@
-using mRemoteNG.My;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
-using System.Windows.Forms;
 
 
 namespace mRemoteNG.Root.PuttySessions
@@ -34,14 +32,14 @@ namespace mRemoteNG.Root.PuttySessions
 				{
 					TreeNode.Text = value;
 				}
-                mRemoteNG.Settings.Default.PuttySavedSessionsName = value;
+                Settings.Default.PuttySavedSessionsName = value;
 			}
 		}
 				
-        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay", 1),
+        [LocalizedAttributes.LocalizedCategory("strCategoryDisplay"),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNamePanel"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPanel")]
-        public string Panel
+        public override string Panel
 		{
 			get { return _panel; }
 			set
@@ -51,7 +49,7 @@ namespace mRemoteNG.Root.PuttySessions
 					return ;
 				}
 				_panel = value;
-                mRemoteNG.Settings.Default.PuttySavedSessionsPanel = value;
+                Settings.Default.PuttySavedSessionsPanel = value;
 			}
         }
         #endregion

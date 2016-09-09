@@ -1,5 +1,4 @@
 using System;
-using mRemoteNG.My;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
