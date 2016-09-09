@@ -12,12 +12,14 @@ namespace mRemoteNG.Tree
         internal void OnModelCanDrop(object sender, ModelDropEventArgs e)
         {
             e.Effect = DragDropEffects.None;
-            var draggedObject = e.SourceModels.Cast<ConnectionInfo>().First();
+            var dropSource = e.SourceModels.Cast<ConnectionInfo>().First();
             var dropTarget = e.TargetModel as ContainerInfo;
-            if (AncestorDraggingOntoChild(draggedObject, dropTarget))
-                e.InfoMessage = "Cannot drag parent node onto child.";
-            else if (!NodeIsDraggable(draggedObject))
+            if (!NodeIsDraggable(dropSource))
                 e.InfoMessage = "This node is not draggable";
+            else if (NodeDraggingOntoSelf(dropSource, dropTarget))
+                e.InfoMessage = "Cannot drag node onto itself";
+            else if (AncestorDraggingOntoChild(dropSource, dropTarget))
+                e.InfoMessage = "Cannot drag parent node onto child.";
             else
                 e.Effect = DragDropEffects.Move;
             e.Handled = true;
@@ -27,6 +29,11 @@ namespace mRemoteNG.Tree
         {
             if (node == null || node is RootNodeInfo || node is PuttySessionInfo) return false;
             return true;
+        }
+
+        private bool NodeDraggingOntoSelf(ConnectionInfo source, ConnectionInfo target)
+        {
+            return source.Equals(target);
         }
 
         private bool AncestorDraggingOntoChild(ConnectionInfo source, ConnectionInfo target)
