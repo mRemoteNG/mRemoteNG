@@ -12,16 +12,22 @@ namespace mRemoteNG.Tree
         internal void OnModelCanDrop(object sender, ModelDropEventArgs e)
         {
             e.Effect = DragDropEffects.None;
+            e.DropSink.EnableFeedback = true;
             var dropSource = e.SourceModels.Cast<ConnectionInfo>().First();
-            var dropTarget = e.TargetModel as ContainerInfo;
+            var dropTarget = e.TargetModel as ConnectionInfo;
+
             if (!NodeIsDraggable(dropSource))
+            {
                 e.InfoMessage = "This node is not draggable";
+                e.DropSink.EnableFeedback = false;
+            }
             else if (NodeDraggingOntoSelf(dropSource, dropTarget))
                 e.InfoMessage = "Cannot drag node onto itself";
             else if (AncestorDraggingOntoChild(dropSource, dropTarget))
                 e.InfoMessage = "Cannot drag parent node onto child.";
             else
                 e.Effect = DragDropEffects.Move;
+
             e.Handled = true;
         }
 
