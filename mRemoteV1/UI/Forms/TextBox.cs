@@ -1,17 +1,16 @@
 using System;
-using System.Windows.Forms;
 using System.ComponentModel;
-
+using System.Windows.Forms;
 
 // Adapted from http://stackoverflow.com/a/3678888/2101395
 
-namespace mRemoteNG.Controls
+namespace mRemoteNG.UI.Forms
 {
 	public class TextBox : System.Windows.Forms.TextBox
 	{
         #region Public Properties
 		[Category("Behavior"),
-			DefaultValue(false)]private bool _SelectAllOnFocus = false;
+			DefaultValue(false)]private bool _SelectAllOnFocus;
         public bool SelectAllOnFocus
 		{
 			get
@@ -60,7 +59,7 @@ namespace mRemoteNG.Controls
         #endregion
 			
         #region Private Fields
-		private bool _focusHandled = false;
+		private bool _focusHandled;
         #endregion
 	}
 }

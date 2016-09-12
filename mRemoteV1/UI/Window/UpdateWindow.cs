@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.ComponentModel;
-using mRemoteNG.My;
 using WeifenLuo.WinFormsUI.Docking;
 using System.IO;
 using mRemoteNG.App;
@@ -39,22 +38,22 @@ namespace mRemoteNG.UI.Window
 			btnDownload.Text = Language.strDownloadAndInstall;
 			lblChangeLogLabel.Text = Language.strLabelChangeLog;
 			lblInstalledVersion.Text = Language.strVersion;
-			lblInstalledVersionLabel.Text = string.Format("{0}:", Language.strCurrentVersion);
+			lblInstalledVersionLabel.Text = $"{Language.strCurrentVersion}:";
 			lblLatestVersion.Text = Language.strVersion;
-			lblLatestVersionLabel.Text = string.Format("{0}:", Language.strAvailableVersion);
+			lblLatestVersionLabel.Text = $"{Language.strAvailableVersion}:";
 		}
 				
-		public void btnCheckForUpdate_Click(System.Object sender, EventArgs e)
+		public void btnCheckForUpdate_Click(Object sender, EventArgs e)
 		{
 			CheckForUpdate();
 		}
 				
-		public void btnDownload_Click(System.Object sender, EventArgs e)
+		public void btnDownload_Click(Object sender, EventArgs e)
 		{
 			DownloadUpdate();
 		}
 				
-		public void pbUpdateImage_Click(System.Object sender, EventArgs e)
+		public void pbUpdateImage_Click(Object sender, EventArgs e)
 		{
 			Uri linkUri = pbUpdateImage.Tag as Uri;
 			if (linkUri == null || linkUri.IsFile || linkUri.IsUnc || linkUri.IsLoopback)
@@ -67,7 +66,7 @@ namespace mRemoteNG.UI.Window
 		
         #region Private Fields
 		private AppUpdater _appUpdate;
-		private bool _isUpdateDownloadHandlerDeclared = false;
+		private bool _isUpdateDownloadHandlerDeclared;
         #endregion
 		
         #region Private Methods
@@ -177,7 +176,7 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		private void GetChangeLogCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+		private void GetChangeLogCompleted(object sender, AsyncCompletedEventArgs e)
 		{
 			if (InvokeRequired)
 			{
@@ -237,7 +236,7 @@ namespace mRemoteNG.UI.Window
 			prgbDownload.Value = e.ProgressPercentage;
 		}
 				
-		private void DownloadUpdateCompleted(object sender, System.ComponentModel.AsyncCompletedEventArgs e)
+		private void DownloadUpdateCompleted(object sender, AsyncCompletedEventArgs e)
 		{
 			try
 			{
@@ -253,10 +252,9 @@ namespace mRemoteNG.UI.Window
 					throw (e.Error);
 				}
 						
-				if (MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == System.Windows.Forms.DialogResult.OK)
+				if (MessageBox.Show(Language.strUpdateDownloadComplete, Language.strMenuCheckForUpdates, MessageBoxButtons.OKCancel, MessageBoxIcon.Warning) == DialogResult.OK)
 				{
 					Shutdown.Quit(_appUpdate.CurrentUpdateInfo.UpdateFilePath);
-					return ;
 				}
 				else
 				{

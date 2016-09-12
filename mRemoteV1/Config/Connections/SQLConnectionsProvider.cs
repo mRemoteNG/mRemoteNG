@@ -1,11 +1,6 @@
 ﻿using mRemoteNG.App;
 using mRemoteNG.Messages;
-using mRemoteNG.Tools;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Timers;
-using mRemoteNG.My;
 
 namespace mRemoteNG.Config.Connections
 {

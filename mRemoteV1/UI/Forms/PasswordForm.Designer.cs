@@ -1,8 +1,6 @@
+using TextBox = mRemoteNG.UI.Forms.TextBox;
 
-
-using mRemoteNG.My;
-
-namespace mRemoteNG.Forms
+namespace mRemoteNG.UI.Forms
 {
 	public 
 	partial class PasswordForm : System.Windows.Forms.Form
@@ -40,8 +38,8 @@ namespace mRemoteNG.Forms
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             this.pbLock = new System.Windows.Forms.PictureBox();
-            this.txtVerify = new mRemoteNG.Controls.TextBox();
-            this.txtPassword = new mRemoteNG.Controls.TextBox();
+            this.txtVerify = new TextBox();
+            this.txtPassword = new TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbLock)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,8 +161,8 @@ namespace mRemoteNG.Forms
             this.PerformLayout();
 
 		}
-		private Controls.TextBox txtPassword;
-		private Controls.TextBox txtVerify;
+        private TextBox txtPassword;
+		private TextBox txtVerify;
 		private System.Windows.Forms.Label lblPassword;
 		private System.Windows.Forms.Label lblVerify;
 		private System.Windows.Forms.Button btnOK;

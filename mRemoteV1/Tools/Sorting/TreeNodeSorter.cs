@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Windows.Forms;
 
 namespace mRemoteNG.Tools.Sorting
@@ -20,9 +21,9 @@ namespace mRemoteNG.Tools.Sorting
             switch (Sorting)
             {
                 case SortOrder.Ascending:
-                    return string.Compare(tx.Text, ty.Text);
+                    return String.CompareOrdinal(tx.Text, ty.Text);
                 case SortOrder.Descending:
-                    return string.Compare(ty.Text, tx.Text);
+                    return String.CompareOrdinal(ty.Text, tx.Text);
                 default:
                     return 0;
             }

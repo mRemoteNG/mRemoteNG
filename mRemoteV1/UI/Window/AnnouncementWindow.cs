@@ -1,6 +1,5 @@
 using System;
 using System.ComponentModel;
-using mRemoteNG.My;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.App.Update;

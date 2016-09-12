@@ -1,7 +1,6 @@
 using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
-using mRemoteNG.My;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
 {
@@ -41,20 +40,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             {
                 cboLanguage.Items.Add(nativeName);
             }
-            if (!string.IsNullOrEmpty(mRemoteNG.Settings.Default.OverrideUICulture) &&
-                SupportedCultures.IsNameSupported(mRemoteNG.Settings.Default.OverrideUICulture))
+            if (!string.IsNullOrEmpty(Settings.Default.OverrideUICulture) &&
+                SupportedCultures.IsNameSupported(Settings.Default.OverrideUICulture))
             {
-                cboLanguage.SelectedItem = SupportedCultures.get_CultureNativeName(mRemoteNG.Settings.Default.OverrideUICulture);
+                cboLanguage.SelectedItem = SupportedCultures.get_CultureNativeName(Settings.Default.OverrideUICulture);
             }
             if (cboLanguage.SelectedIndex == -1)
             {
                 cboLanguage.SelectedIndex = 0;
             }
 
-            chkShowDescriptionTooltipsInTree.Checked = mRemoteNG.Settings.Default.ShowDescriptionTooltipsInTree;
-            chkShowFullConnectionsFilePathInTitle.Checked = mRemoteNG.Settings.Default.ShowCompleteConsPathInTitle;
-            chkShowSystemTrayIcon.Checked = mRemoteNG.Settings.Default.ShowSystemTrayIcon;
-            chkMinimizeToSystemTray.Checked = mRemoteNG.Settings.Default.MinimizeToTray;
+            chkShowDescriptionTooltipsInTree.Checked = Settings.Default.ShowDescriptionTooltipsInTree;
+            chkShowFullConnectionsFilePathInTitle.Checked = Settings.Default.ShowCompleteConsPathInTitle;
+            chkShowSystemTrayIcon.Checked = Settings.Default.ShowSystemTrayIcon;
+            chkMinimizeToSystemTray.Checked = Settings.Default.MinimizeToTray;
         }
 
         public override void SaveSettings()
@@ -63,20 +62,20 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (cboLanguage.SelectedIndex > 0 &&
                 SupportedCultures.IsNativeNameSupported(Convert.ToString(cboLanguage.SelectedItem)))
             {
-                mRemoteNG.Settings.Default.OverrideUICulture =
+                Settings.Default.OverrideUICulture =
                     SupportedCultures.get_CultureName(Convert.ToString(cboLanguage.SelectedItem));
             }
             else
             {
-                mRemoteNG.Settings.Default.OverrideUICulture = string.Empty;
+                Settings.Default.OverrideUICulture = string.Empty;
             }
 
-            mRemoteNG.Settings.Default.ShowDescriptionTooltipsInTree = chkShowDescriptionTooltipsInTree.Checked;
-            mRemoteNG.Settings.Default.ShowCompleteConsPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked;
+            Settings.Default.ShowDescriptionTooltipsInTree = chkShowDescriptionTooltipsInTree.Checked;
+            Settings.Default.ShowCompleteConsPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked;
             frmMain.Default.ShowFullPathInTitle = chkShowFullConnectionsFilePathInTitle.Checked;
 
-            mRemoteNG.Settings.Default.ShowSystemTrayIcon = chkShowSystemTrayIcon.Checked;
-            if (mRemoteNG.Settings.Default.ShowSystemTrayIcon)
+            Settings.Default.ShowSystemTrayIcon = chkShowSystemTrayIcon.Checked;
+            if (Settings.Default.ShowSystemTrayIcon)
             {
                 if (Runtime.NotificationAreaIcon == null)
                 {
@@ -92,7 +91,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
                 }
             }
 
-            mRemoteNG.Settings.Default.MinimizeToTray = chkMinimizeToSystemTray.Checked;
+            Settings.Default.MinimizeToTray = chkMinimizeToSystemTray.Checked;
+
+            Settings.Default.Save();
         }
     }
 }

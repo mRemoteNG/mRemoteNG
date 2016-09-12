@@ -1,8 +1,6 @@
 ﻿using mRemoteNG.App;
 using System;
-using System.Collections.Generic;
 using System.Collections.Specialized;
-using System.Text;
 using System.Text.RegularExpressions;
 
 namespace mRemoteNG.Tools
@@ -22,21 +20,14 @@ namespace mRemoteNG.Tools
         private StringDictionary Parameters;
 
         // Retrieve a parameter value if it exists
-        public string this[string Param]
-        {
-            get
-            {
-                return (Parameters[Param]);
-            }
-        }
+        public string this[string Param] => (Parameters[Param]);
 
         public CmdArgumentsInterpreter(string[] Args)
         {
             Parameters = new StringDictionary();
-            Regex Spliter = new Regex("^-{1,2}|^/|=|:", (RegexOptions)(RegexOptions.IgnoreCase | RegexOptions.Compiled));
-            Regex Remover = new Regex("^[\'\"]?(.*?)[\'\"]?$", (RegexOptions)(RegexOptions.IgnoreCase | RegexOptions.Compiled));
+            Regex Spliter = new Regex("^-{1,2}|^/|=|:", RegexOptions.IgnoreCase | RegexOptions.Compiled);
+            Regex Remover = new Regex("^[\'\"]?(.*?)[\'\"]?$", RegexOptions.IgnoreCase | RegexOptions.Compiled);
             string Parameter = null;
-            string[] Parts = null;
 
             // Valid parameters forms:
             // {-,/,--}param{ ,=,:}((",')value(",'))
@@ -47,7 +38,7 @@ namespace mRemoteNG.Tools
                 foreach (string Txt in Args)
                 {
                     // Look for new parameters (-,/ or --) and a possible enclosed value (=,:)
-                    Parts = Spliter.Split(Txt, 3);
+                    var Parts = Spliter.Split(Txt, 3);
                     switch (Parts.Length)
                     {
                         case 1:

@@ -192,7 +192,6 @@
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
     <Compile Include="Tools\Sorting\TreeNodeSorter.cs" />
-    <Compile Include="Tools\Sorting\Sortable.cs" />
     <Compile Include="Tree\ConnectionTree.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandler.cs" />
     <Compile Include="Tree\ConnectionTreeModel.cs" />
@@ -214,9 +213,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\QuickConnectComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="UI\Controls\TextBox.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\Controls\ToolStripSplitButton.cs">
@@ -384,11 +380,8 @@
     <Compile Include="Tools\Tools.SystemMenu.cs" />
     <Compile Include="Tools\Tools.WindowPlacement.cs" />
     <Compile Include="Tree\ConnectionTreeNode.cs" />
-    <Compile Include="UI\Forms\SplashPage.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Forms\SplashPage.Designer.cs">
-      <DependentUpon>SplashPage.cs</DependentUpon>
+    <Compile Include="UI\Forms\TextBox.cs">
+      <SubType>Component</SubType>
     </Compile>
     <Compile Include="UI\TaskDialog\CommandButton.cs">
       <SubType>Component</SubType>
@@ -586,9 +579,6 @@
     <EmbeddedResource Include="Tools\ReconnectGroup.resx">
       <DependentUpon>ReconnectGroup.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Forms\SplashPage.resx">
-      <DependentUpon>SplashPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\TaskDialog\frmTaskDialog.resx">
       <DependentUpon>frmTaskDialog.cs</DependentUpon>

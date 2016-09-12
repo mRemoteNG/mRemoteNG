@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using System.Threading;
 using mRemoteNG.App;
+using mRemoteNG.Tools;
 
 
 namespace mRemoteNG.Connection.Protocol
@@ -54,12 +55,22 @@ namespace mRemoteNG.Connection.Protocol
 
 	    public readonly System.Timers.Timer tmrReconnect = new System.Timers.Timer(2000);
         protected ReconnectGroup ReconnectGroup;
+
+        protected ProtocolBase(string name)
+        {
+            Name = name;
+        }
+
+        public ProtocolBase()
+        {
+        }
+
         #endregion
-		
+
         #region Methods
         //public abstract int GetDefaultPort();
 
-		public virtual void Focus()
+        public virtual void Focus()
 		{
 			try
 			{

@@ -1,15 +1,14 @@
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using System.ComponentModel;
 
-
-namespace mRemoteNG.Controls
+namespace mRemoteNG.UI.Controls
 {
 	public class ListView : System.Windows.Forms.ListView
     {
-        Brush foreColorBrush = null;
-        Brush backColorBrush = null;
-        Pen borderPen = null;
+        Brush foreColorBrush;
+        Brush backColorBrush;
+        Pen borderPen;
 
         #region Public Properties
         [Category("Appearance"), DefaultValue(typeof(Color), "HighlightText")]
@@ -172,12 +171,9 @@ namespace mRemoteNG.Controls
 
         private void DisposeBrushesAndPens()
         {
-            if (foreColorBrush != null)
-                foreColorBrush.Dispose();
-            if (backColorBrush != null)
-                backColorBrush.Dispose();
-            if (borderPen != null)
-                borderPen.Dispose();
+            foreColorBrush?.Dispose();
+            backColorBrush?.Dispose();
+            borderPen?.Dispose();
         }
         #endregion
 			
@@ -210,14 +206,14 @@ namespace mRemoteNG.Controls
 					format.Alignment = StringAlignment.Far;
 					break;
 			}
-            
-			if (RightToLeft.ToString() != null)
-				format.FormatFlags = (StringFormatFlags) (format.FormatFlags | StringFormatFlags.DirectionRightToLeft);
+
+			if (RightToLeftLayout)
+				format.FormatFlags = format.FormatFlags | StringFormatFlags.DirectionRightToLeft;
 				
 			if (LabelWrap)
-				format.FormatFlags = (StringFormatFlags) (format.FormatFlags & ~StringFormatFlags.NoWrap);
+				format.FormatFlags = format.FormatFlags & ~StringFormatFlags.NoWrap;
 			else
-				format.FormatFlags = (StringFormatFlags) (format.FormatFlags | StringFormatFlags.NoWrap);
+				format.FormatFlags = format.FormatFlags | StringFormatFlags.NoWrap;
 			
 			return format;
 		}
@@ -258,7 +254,7 @@ namespace mRemoteNG.Controls
 
         public override string ToString()
 		{
-			return string.Format("{0}, {1}", Vertical, Horizontal);
+			return $"{Vertical}, {Horizontal}";
         }
     }
 

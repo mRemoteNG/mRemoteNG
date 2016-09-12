@@ -6,7 +6,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 {
 	public class OptionsPage : UserControl
 	{
-		public OptionsPage()
+	    protected OptionsPage()
 		{
 			//InitializeComponent();
 		}

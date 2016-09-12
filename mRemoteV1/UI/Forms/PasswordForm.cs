@@ -1,9 +1,8 @@
 using System;
 using System.Windows.Forms;
-using mRemoteNG.My;
+using mRemoteNG.UI.Controls;
 
-
-namespace mRemoteNG.Forms
+namespace mRemoteNG.UI.Forms
 {
     public partial class PasswordForm
 	{
@@ -37,12 +36,13 @@ namespace mRemoteNG.Forms
 				
 			// Add any initialization after the InitializeComponent() call.
 			_passwordName = passwordName;
-			this.Verify = verify;
+			Verify = verify;
 		}
         #endregion
 		
         #region Event Handlers
-		public void frmPassword_Load(object sender, EventArgs e)
+
+	    private void frmPassword_Load(object sender, EventArgs e)
 		{
 			ApplyLanguage();
 				
@@ -53,14 +53,14 @@ namespace mRemoteNG.Forms
 				txtVerify.Visible = false;
 			}
 		}
-			
-		public void btnCancel_Click(System.Object sender, EventArgs e)
+
+	    private void btnCancel_Click(object sender, EventArgs e)
 		{
 			DialogResult = DialogResult.Cancel;
             Close();
 		}
-			
-		public void btnOK_Click(System.Object sender, EventArgs e)
+
+	    private void btnOK_Click(object sender, EventArgs e)
 		{
 			if (Verify)
 			{
@@ -72,8 +72,8 @@ namespace mRemoteNG.Forms
 				DialogResult = DialogResult.OK;
 			}
 		}
-			
-		public void txtPassword_TextChanged(System.Object sender, EventArgs e)
+
+	    private void txtPassword_TextChanged(object sender, EventArgs e)
 		{
 			HideStatus();
 		}

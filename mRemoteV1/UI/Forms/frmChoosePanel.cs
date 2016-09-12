@@ -2,7 +2,7 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.UI.Forms.Input;
 
-namespace mRemoteNG
+namespace mRemoteNG.UI.Forms
 {
 	public partial class frmChoosePanel
 	{
@@ -21,8 +21,8 @@ namespace mRemoteNG
 				cbPanels.SelectedItem = value;
 			}
 		}
-		
-		public void frmChoosePanel_Load(object sender, System.EventArgs e)
+
+	    private void frmChoosePanel_Load(object sender, System.EventArgs e)
 		{
 			ApplyLanguage();
 			
@@ -59,8 +59,8 @@ namespace mRemoteNG
 				btnOK.Enabled = false;
 			}
 		}
-		
-		public void btnNew_Click(object sender, System.EventArgs e)
+
+	    private void btnNew_Click(object sender, System.EventArgs e)
 		{
 		    string pnlName = Language.strNewPanel;
 			
@@ -72,13 +72,13 @@ namespace mRemoteNG
 				cbPanels.Focus();
 			}
 		}
-		
-		public void btnOK_Click(object sender, System.EventArgs e)
+
+	    private void btnOK_Click(object sender, System.EventArgs e)
 		{
             DialogResult = DialogResult.OK;
 		}
-		
-		public void btnCancel_Click(object sender, System.EventArgs e)
+
+	    private void btnCancel_Click(object sender, System.EventArgs e)
 		{
             DialogResult = DialogResult.Cancel;
 		}

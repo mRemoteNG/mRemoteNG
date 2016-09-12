@@ -1,4 +1,3 @@
-using mRemoteNG.My;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
@@ -9,9 +8,9 @@ namespace mRemoteNG.Themes
 	public class ThemeManager
     {
         #region Private Variables
-        private static readonly ThemeInfo _defaultTheme = new ThemeInfo(Language.strDefaultTheme);
+
         private static ThemeInfo _activeTheme;
-        private static bool _activeThemeHandlerSet = false;
+        private static bool _activeThemeHandlerSet;
         #endregion
 
         #region Public Methods
@@ -93,11 +92,8 @@ namespace mRemoteNG.Themes
         #endregion
 			
         #region Properties
-        public static ThemeInfo DefaultTheme
-		{
-			get { return _defaultTheme; }
-		}
-		
+        public static ThemeInfo DefaultTheme { get; } = new ThemeInfo(Language.strDefaultTheme);
+
         public static ThemeInfo ActiveTheme
 		{
 			get
@@ -123,7 +119,7 @@ namespace mRemoteNG.Themes
 					
 				if (_activeThemeHandlerSet)
 				{
-					_activeTheme.PropertyChanged -= NotifyThemeChanged;
+				    if (_activeTheme != null) _activeTheme.PropertyChanged -= NotifyThemeChanged;
 				}
 					
 				_activeTheme = value;

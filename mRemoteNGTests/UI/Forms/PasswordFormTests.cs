@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using NUnit.Extensions.Forms;
-using System.Threading.Tasks;
-using mRemoteNG.Forms;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNGTests.UI.Forms
@@ -26,7 +20,9 @@ namespace mRemoteNGTests.UI.Forms
         public void Teardown()
         {
             _passwordForm.Dispose();
-            while (_passwordForm.Disposing) ;
+            while (_passwordForm.Disposing)
+            {
+            }
             _passwordForm = null;
         }
 

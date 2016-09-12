@@ -36,25 +36,50 @@ namespace mRemoteNG.Messages
                 return;
             }
 
-            if (Settings.Default.SwitchToMCOnInformation && nMsg.MsgClass == MessageClass.InformationMsg)
+            var EnableTimer = true; // used to control if we SWITCH to the notifiation panel. Message will still be added regardless.
+
+            if (nMsg.MsgClass == MessageClass.InformationMsg)
+            {
                 AddInfoMessage(nMsg);
-            
-            if (Settings.Default.SwitchToMCOnWarning && nMsg.MsgClass == MessageClass.WarningMsg)
+
+                if (!Settings.Default.SwitchToMCOnInformation)
+                    EnableTimer = false;
+            }
+
+            if (nMsg.MsgClass == MessageClass.WarningMsg)
+            {
                 AddWarningMessage(nMsg);
 
-            if (Settings.Default.SwitchToMCOnError && nMsg.MsgClass == MessageClass.ErrorMsg)
+                if (!Settings.Default.SwitchToMCOnWarning)
+                    EnableTimer = false;
+            }
+
+            if (nMsg.MsgClass == MessageClass.ErrorMsg)
+            {
                 AddErrorMessage(nMsg);
 
-            if (!OnlyLog)
-            {
-                if (Settings.Default.ShowNoMessageBoxes)
-                    _ECTimer.Enabled = true;
-                else
-                    ShowMessageBox(nMsg);
-
-                ListViewItem lvItem = BuildListViewItem(nMsg);
-                AddToList(lvItem);
+                if (!Settings.Default.SwitchToMCOnError)
+                    EnableTimer = false;
             }
+
+            if (OnlyLog)
+                return;
+
+            if (Settings.Default.ShowNoMessageBoxes)
+            {
+                /* These if statements need to be split so we can:
+                 * control that no messages boxes will be dispalyed
+                 * add items to the notifications panel
+                 * NOT switch to the notification panel if configured that way
+                 */
+                if(EnableTimer)
+                    _ECTimer.Enabled = true;
+            }
+            else
+                ShowMessageBox(nMsg);
+
+            ListViewItem lvItem = BuildListViewItem(nMsg);
+            AddToList(lvItem);
         }
 
         private void AddInfoMessage(Message nMsg)
@@ -100,9 +125,9 @@ namespace mRemoteNG.Messages
             AddMessage(msgClass, message + Environment.NewLine + Tools.MiscTools.GetExceptionMessageRecursive(ex), logOnly);
         }
 
-        public void AddExceptionStackTrace(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg, bool logOnly = false)
+        public void AddExceptionStackTrace(string message, Exception ex, MessageClass msgClass = MessageClass.ErrorMsg)
         {
-            AddMessage(msgClass, message + Environment.NewLine + ex.StackTrace, logOnly);
+            AddMessage(msgClass, message + Environment.NewLine + ex.StackTrace, true);
         }
         #endregion
 

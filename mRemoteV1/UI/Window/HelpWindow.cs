@@ -1,7 +1,6 @@
 using System;
 using System.Windows.Forms;
 using mRemoteNG.App.Info;
-using mRemoteNG.My;
 using WeifenLuo.WinFormsUI.Docking;
 
 
@@ -13,7 +12,7 @@ namespace mRemoteNG.UI.Window
         #region Form Init
 		internal TreeView tvIndex;
 		internal ImageList imgListHelp;
-		private System.ComponentModel.Container components = null;
+		private System.ComponentModel.Container components;
 		internal SplitContainer pnlSplitter;
 		internal Label lblDocName;
 		internal WebBrowser wbHelp;

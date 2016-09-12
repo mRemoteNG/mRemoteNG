@@ -1,7 +1,6 @@
 using System;
 using System.ComponentModel;
 using System.Windows.Forms;
-using mRemoteNG.My;
 using mRemoteNG.Themes;
 
 namespace mRemoteNG.UI.Forms.OptionsPages
@@ -46,7 +45,9 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             base.SaveSettings();
 
             ThemeManager.SaveThemes(_themeList);
-            mRemoteNG.Settings.Default.ThemeName = ThemeManager.ActiveTheme.Name;
+            Settings.Default.ThemeName = ThemeManager.ActiveTheme.Name;
+
+            Settings.Default.Save();
         }
 
         public override void RevertSettings()
@@ -65,23 +66,23 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         #region Event Handlers
 
-        public void cboTheme_DropDown(object sender, EventArgs e)
+        private void cboTheme_DropDown(object sender, EventArgs e)
         {
-            if (ThemeManager.ActiveTheme == ThemeManager.DefaultTheme)
+            if (Equals(ThemeManager.ActiveTheme, ThemeManager.DefaultTheme))
             {
                 return;
             }
             ThemeManager.ActiveTheme.Name = cboTheme.Text;
         }
 
-        public void cboTheme_SelectionChangeCommitted(object sender, EventArgs e)
+        private void cboTheme_SelectionChangeCommitted(object sender, EventArgs e)
         {
             if (cboTheme.SelectedItem == null)
             {
                 cboTheme.SelectedItem = ThemeManager.DefaultTheme;
             }
 
-            if (cboTheme.SelectedItem == ThemeManager.DefaultTheme)
+            if (Equals(cboTheme.SelectedItem, ThemeManager.DefaultTheme))
             {
                 cboTheme.DropDownStyle = ComboBoxStyle.DropDownList;
                 btnThemeDelete.Enabled = false;
@@ -99,7 +100,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             ThemePropertyGrid.Refresh();
         }
 
-        public void btnThemeNew_Click(object sender, EventArgs e)
+        private void btnThemeNew_Click(object sender, EventArgs e)
         {
             var newTheme = (ThemeInfo) ThemeManager.ActiveTheme.Clone();
             newTheme.Name = Language.strUnnamedTheme;
@@ -112,7 +113,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             cboTheme.Focus();
         }
 
-        public void btnThemeDelete_Click(object sender, EventArgs e)
+        private void btnThemeDelete_Click(object sender, EventArgs e)
         {
             var theme = (ThemeInfo) cboTheme.SelectedItem;
             if (theme == null)

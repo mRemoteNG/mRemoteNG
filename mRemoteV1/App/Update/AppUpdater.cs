@@ -6,7 +6,6 @@ using System.Threading;
 using mRemoteNG.Tools;
 using System.Reflection;
 using mRemoteNG.App.Info;
-using mRemoteNG.Security;
 using mRemoteNG.Security.SymmetricEncryption;
 
 

@@ -1,4 +1,4 @@
-namespace mRemoteNG
+namespace mRemoteNG.Tools
 {
     public partial class ReconnectGroup : System.Windows.Forms.UserControl
 	{

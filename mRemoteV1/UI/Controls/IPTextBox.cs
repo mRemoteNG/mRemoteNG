@@ -17,12 +17,12 @@ namespace mRemoteNG.UI.Controls
 	public class IPTextBox: UserControl
 	{
 		private Panel panel1;
-		public TextBox Octet1; 
-		private Label label1;
-        public TextBox Octet2;
-        public TextBox Octet3;
-        public TextBox Octet4;
-		private Label label2;
+		public System.Windows.Forms.TextBox Octet1; 
+        public System.Windows.Forms.TextBox Octet2;
+        public System.Windows.Forms.TextBox Octet3;
+        public System.Windows.Forms.TextBox Octet4;
+        private Label label1;
+        private Label label2;
 		private Label label3;
 		private ToolTip toolTip1;
 		private System.ComponentModel.IContainer components;
@@ -49,13 +49,13 @@ namespace mRemoteNG.UI.Controls
 		{
 			get 
 			{
-				return Octet1.Text + "." + Octet2.Text + "." + Octet3.Text + "." + Octet4.Text;
+				return Octet1.Text + @"." + Octet2.Text + @"." + Octet3.Text + @"." + Octet4.Text;
 			}
 			set
 			{
 				if (!string.IsNullOrEmpty(value))
 				{
-					var pieces = value.Split(".".ToCharArray(),4);
+					var pieces = value.Split(@".".ToCharArray(),4);
 					Octet1.Text = pieces[0];
 					Octet2.Text = pieces[1];
 					Octet3.Text = pieces[2];
@@ -225,7 +225,7 @@ namespace mRemoteNG.UI.Controls
 		 * \return True if the string is between 0 and 255 inclusively, false otherwise
 		 * \endif
 		 * */
-		private bool IsValid(string inString)
+		private static bool IsValid(string inString)
 		{
 			try 
 			{
@@ -249,7 +249,7 @@ namespace mRemoteNG.UI.Controls
 		private void Box1_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			//Only Accept a '.', a numeral, or backspace
-			if(e.KeyChar.ToString() == "." || Char.IsDigit(e.KeyChar) || e.KeyChar == 8)
+			if(e.KeyChar.ToString() == "." || char.IsDigit(e.KeyChar) || e.KeyChar == 8)
 			{
 				//If the key pressed is a '.'
 				if(e.KeyChar.ToString() == ".")
@@ -272,9 +272,7 @@ namespace mRemoteNG.UI.Controls
 					// ip octet then move on to next box
 					if(Octet1.Text.Length == 2)
 					{
-						if(e.KeyChar == 8)
-							Octet1.Text.Remove(Octet1.Text.Length-1,1);
-						else if(!IsValid(Octet1.Text + e.KeyChar.ToString()))
+						if(!IsValid(Octet1.Text + e.KeyChar))
 						{
 							Octet1.SelectAll();
 							e.Handled = true;
@@ -299,7 +297,7 @@ namespace mRemoteNG.UI.Controls
 		{
 			//Similar to Box1_KeyPress but in special case for backspace moves cursor
 			//to the previouse box (Box1)
-			if(e.KeyChar.ToString() == "." || Char.IsDigit(e.KeyChar) || e.KeyChar == 8)
+			if(e.KeyChar.ToString() == "." || char.IsDigit(e.KeyChar) || e.KeyChar == 8)
 			{
 				if(e.KeyChar.ToString() == ".")
 				{
@@ -316,11 +314,7 @@ namespace mRemoteNG.UI.Controls
 				{
 					if(Octet2.Text.Length == 2)
 					{
-						if(e.KeyChar == 8)
-						{
-							Octet2.Text.Remove(Octet2.Text.Length-1,1);
-						}
-						else if(!IsValid(Octet2.Text + e.KeyChar.ToString()))
+						if(!IsValid(Octet2.Text + e.KeyChar))
 						{
 							Octet2.SelectAll();
 							e.Handled = true;
@@ -350,7 +344,7 @@ namespace mRemoteNG.UI.Controls
 		{
 			//Identical to Box2_KeyPress except that previous box is Box2 and
 			//next box is Box3
-			if(e.KeyChar.ToString() == "." || Char.IsDigit(e.KeyChar) || e.KeyChar == 8)
+			if(e.KeyChar.ToString() == "." || char.IsDigit(e.KeyChar) || e.KeyChar == 8)
 			{
 				if(e.KeyChar.ToString() == ".")
 				{
@@ -367,11 +361,7 @@ namespace mRemoteNG.UI.Controls
 				{
 					if(Octet3.Text.Length == 2)
 					{
-						if(e.KeyChar == 8)
-						{
-							Octet3.Text.Remove(Octet3.Text.Length-1,1);
-						}
-						else if(!IsValid(Octet3.Text + e.KeyChar.ToString()))
+						if(!IsValid(Octet3.Text + e.KeyChar))
 						{
 							Octet3.SelectAll();
 							e.Handled = true;
@@ -400,17 +390,13 @@ namespace mRemoteNG.UI.Controls
 		{
 			//Similar to Box3 but ignores the '.' character and does not advance
 			//to the next box.  Also Box3 is previous box for backspace case.
-			if(Char.IsDigit(e.KeyChar) || e.KeyChar == 8)
+			if(char.IsDigit(e.KeyChar) || e.KeyChar == 8)
 			{
 				if(Octet4.SelectionLength != Octet4.Text.Length)
 				{
 					if(Octet4.Text.Length == 2)
 					{
-						if(e.KeyChar == 8)
-						{
-							Octet4.Text.Remove(Octet4.Text.Length-1,1);
-						}
-						else if(!IsValid(Octet4.Text + e.KeyChar.ToString()))
+						if(!IsValid(Octet4.Text + e.KeyChar))
 						{
 							Octet4.SelectAll();
 							e.Handled = true;
@@ -441,11 +427,8 @@ namespace mRemoteNG.UI.Controls
 		/// \endif
 		private void label_EnabledChanged(object sender, EventArgs e)
 		{
-			var lbl = (Label) sender;
-			if(lbl.Enabled)
-				lbl.BackColor = SystemColors.Window;
-			else
-				lbl.BackColor = SystemColors.Control;
+		    var lbl = (Label) sender;
+		    lbl.BackColor = lbl.Enabled ? SystemColors.Window : SystemColors.Control;
 		}
 
 		/// \ifnot hide_events
@@ -453,11 +436,8 @@ namespace mRemoteNG.UI.Controls
 		/// \endif
 		private void panel1_EnabledChanged(object sender, EventArgs e)
 		{
-			var pan = (Panel) sender;
-			if(pan.Enabled)
-				pan.BackColor = SystemColors.Window;
-			else
-				pan.BackColor = SystemColors.Control;
+		    var pan = (Panel) sender;
+		    pan.BackColor = pan.Enabled ? SystemColors.Window : SystemColors.Control;
 		}
 	}
 }

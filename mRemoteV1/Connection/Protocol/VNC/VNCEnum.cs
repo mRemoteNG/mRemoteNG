@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
+﻿using System.ComponentModel;
 using mRemoteNG.Tools;
 
 namespace mRemoteNG.Connection.Protocol.VNC
