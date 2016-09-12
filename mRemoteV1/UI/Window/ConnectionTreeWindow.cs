@@ -272,7 +272,7 @@ namespace mRemoteNG.UI.Window
                 //if (e.Button != MouseButtons.Left) return;
                 if (clickedNode.GetTreeNodeType() != TreeNodeType.Connection && clickedNode.GetTreeNodeType() != TreeNodeType.PuttySession) return;
                 if (Settings.Default.SingleClickOnConnectionOpensIt)
-                    ConnectionInitiator.OpenConnection();
+                    ConnectionInitiator.OpenConnection(SelectedNode);
 
                 if (Settings.Default.SingleClickSwitchesToOpenConnection)
                     ConnectionInitiator.SwitchToOpenConnection(SelectedNode);
@@ -291,7 +291,7 @@ namespace mRemoteNG.UI.Window
             if (clickedNode?.GetTreeNodeType() == TreeNodeType.Connection |
                 clickedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
 			{
-                ConnectionInitiator.OpenConnection();
+                ConnectionInitiator.OpenConnection(SelectedNode);
 			}
 		}
 
@@ -838,7 +838,7 @@ namespace mRemoteNG.UI.Window
 					if (tvConnections.SelectedNode.Tag is ConnectionInfo)
 					{
 						e.Handled = true;
-                        ConnectionInitiator.OpenConnection();
+                        ConnectionInitiator.OpenConnection(SelectedNode);
 					}
 					else
 					{

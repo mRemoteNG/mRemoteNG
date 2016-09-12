@@ -16,19 +16,6 @@ namespace mRemoteNG.Connection
     public static class ConnectionInitiator
     {
         //TODO Fix for TreeListView
-        public static void OpenConnection()
-        {
-            try
-            {
-                OpenConnection(ConnectionInfo.Force.None);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
-            }
-        }
-
-        //TODO Fix for TreeListView
         public static void OpenConnection(ConnectionInfo.Force Force)
         {
             try
