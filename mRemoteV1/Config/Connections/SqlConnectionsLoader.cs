@@ -138,7 +138,7 @@ namespace mRemoteNG.Config.Connections
                     foreach (ConnectionInfo conI in ConnectionList)
                     {
                         if (conI.PleaseConnect)
-                            Runtime.OpenConnection(conI);
+                            ConnectionInitiator.OpenConnection(conI);
                     }
                 }
 

@@ -627,112 +627,6 @@ namespace mRemoteNG.App
                 return null;
             }
         }
-        
-        //TODO Fix for TreeListView
-        public static void OpenConnection()
-        {
-            try
-            {
-                OpenConnection(ConnectionInfo.Force.None);
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
-            }
-        }
-
-        //TODO Fix for TreeListView
-        public static void OpenConnection(ConnectionInfo.Force Force)
-        {
-            try
-            {
-                if (Windows.treeForm.tvConnections.SelectedNode.Tag == null)
-                    return;
-
-                if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
-                {
-                    OpenConnection((ConnectionInfo)Windows.treeForm.tvConnections.SelectedNode.Tag, Force);
-                }
-                else if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Container)
-                {
-                    foreach (TreeNode tNode in ConnectionTree.SelectedNode.Nodes)
-                    {
-                        if (ConnectionTreeNode.GetNodeType(tNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
-                        {
-                            if (tNode.Tag != null)
-                            {
-                                OpenConnection((ConnectionInfo)tNode.Tag, Force);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
-            }
-        }
-
-        //TODO Fix for TreeListView
-        public static void OpenConnection(ConnectionInfo ConnectionInfo)
-        {
-            try
-            {
-                OpenConnection(ConnectionInfo, ConnectionInfo.Force.None);
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
-            }
-        }
-
-        //TODO Fix for TreeListView
-        public static void OpenConnection(ConnectionInfo ConnectionInfo, Form ConnectionForm, ConnectionInfo.Force Force)
-        {
-            try
-            {
-                OpenConnectionFinal(ConnectionInfo, Force, ConnectionForm);
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
-            }
-        }
-
-        //TODO Fix for TreeListView
-        public static void OpenConnection(ConnectionInfo ConnectionInfo, ConnectionInfo.Force Force)
-        {
-            try
-            {
-                OpenConnectionFinal(ConnectionInfo, Force, null);
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
-            }
-        }
-
-        //TODO Fix for TreeListView
-        private static void OpenConnectionFinal(ConnectionInfo ConnectionInfo, ConnectionInfo.Force Force, Form ConForm)
-        {
-            ConnectionInitiator.OpenConnection(ConnectionInfo, Force, ConForm);
-        }
-
-        public static bool SwitchToOpenConnection(ConnectionInfo nCi)
-        {
-            InterfaceControl IC = FindConnectionContainer(nCi);
-            if (IC != null)
-            {
-                var connectionWindow = (ConnectionWindow)IC.FindForm();
-                connectionWindow?.Focus();
-                var findForm = (ConnectionWindow)IC.FindForm();
-                findForm?.Show(frmMain.Default.pnlDock);
-                TabPage tabPage = (TabPage)IC.Parent;
-                tabPage.Selected = true;
-                return true;
-            }
-            return false;
-        }
         #endregion
 
         #region External Apps
@@ -765,7 +659,7 @@ namespace mRemoteNG.App
             }
             connectionInfo.SetDefaultPort();
             connectionInfo.IsQuickConnect = true;
-            OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+            ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
         }
 
         public static void GoToWebsite()

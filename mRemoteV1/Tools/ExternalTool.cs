@@ -80,7 +80,7 @@ namespace mRemoteNG.Tools
 			try
 			{
                 ConnectionInfo newConnectionInfo = BuildConnectionInfoForIntegratedApp();
-				Runtime.OpenConnection(newConnectionInfo);
+                ConnectionInitiator.OpenConnection(newConnectionInfo);
 			}
 			catch (Exception ex)
 			{

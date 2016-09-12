@@ -550,7 +550,7 @@ namespace mRemoteNG.UI.Window
         {
             if (e.Data.GetDataPresent("System.Windows.Forms.TreeNode", true))
             {
-                Runtime.OpenConnection((ConnectionInfo)((TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode", true)).Tag, this, ConnectionInfo.Force.DoNotJump);
+                ConnectionInitiator.OpenConnection((ConnectionInfo)((TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode", true)).Tag, this, ConnectionInfo.Force.DoNotJump);
             }
         }
 
@@ -1001,7 +1001,7 @@ namespace mRemoteNG.UI.Window
                 if (TabController.SelectedTab?.Tag is InterfaceControl)
                 {
                     InterfaceControl IC = (InterfaceControl)TabController.SelectedTab.Tag;
-                    Runtime.OpenConnection(IC.Info, ConnectionInfo.Force.DoNotJump);
+                    ConnectionInitiator.OpenConnection(IC.Info, ConnectionInfo.Force.DoNotJump);
                     _ignoreChangeSelectedTabClick = false;
                 }
             }
@@ -1019,7 +1019,7 @@ namespace mRemoteNG.UI.Window
                 {
                     InterfaceControl IC = (InterfaceControl)TabController.SelectedTab.Tag;
                     IC.Protocol.Close();
-                    Runtime.OpenConnection(IC.Info, ConnectionInfo.Force.DoNotJump);
+                    ConnectionInitiator.OpenConnection(IC.Info, ConnectionInfo.Force.DoNotJump);
                 }
             }
             catch (Exception ex)

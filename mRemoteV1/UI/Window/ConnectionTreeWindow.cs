@@ -216,7 +216,7 @@ namespace mRemoteNG.UI.Window
             var previouslyOpenedConnections = connectionInfoList.Where(item => item.PleaseConnect);
             foreach (var connectionInfo in previouslyOpenedConnections)
             {
-                Runtime.OpenConnection(connectionInfo);
+                ConnectionInitiator.OpenConnection(connectionInfo);
             }
         }
 
@@ -272,10 +272,10 @@ namespace mRemoteNG.UI.Window
                 //if (e.Button != MouseButtons.Left) return;
                 if (clickedNode.GetTreeNodeType() != TreeNodeType.Connection && clickedNode.GetTreeNodeType() != TreeNodeType.PuttySession) return;
                 if (Settings.Default.SingleClickOnConnectionOpensIt)
-                    Runtime.OpenConnection();
+                    ConnectionInitiator.OpenConnection();
 
                 if (Settings.Default.SingleClickSwitchesToOpenConnection)
-                    Runtime.SwitchToOpenConnection(SelectedNode);
+                    ConnectionInitiator.SwitchToOpenConnection(SelectedNode);
             }
             catch (Exception ex)
             {
@@ -291,7 +291,7 @@ namespace mRemoteNG.UI.Window
             if (clickedNode?.GetTreeNodeType() == TreeNodeType.Connection |
                 clickedNode?.GetTreeNodeType() == TreeNodeType.PuttySession)
 			{
-                Runtime.OpenConnection();
+                ConnectionInitiator.OpenConnection();
 			}
 		}
 
@@ -455,32 +455,32 @@ namespace mRemoteNG.UI.Window
 
         private void cMenTreeConnect_Click(object sender, EventArgs e)
 		{
-            Runtime.OpenConnection(ConnectionInfo.Force.DoNotJump);
+            ConnectionInitiator.OpenConnection(ConnectionInfo.Force.DoNotJump);
 		}
 
         private void cMenTreeConnectWithOptionsConnectToConsoleSession_Click(object sender, EventArgs e)
 		{
-            Runtime.OpenConnection(ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
+            ConnectionInitiator.OpenConnection(ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
 		}
 
         private void cMenTreeConnectWithOptionsNoCredentials_Click(object sender, EventArgs e)
 		{
-            Runtime.OpenConnection(ConnectionInfo.Force.NoCredentials);
+            ConnectionInitiator.OpenConnection(ConnectionInfo.Force.NoCredentials);
 		}
 
         private void cMenTreeConnectWithOptionsDontConnectToConsoleSession_Click(object sender, EventArgs e)
 		{
-            Runtime.OpenConnection(ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
+            ConnectionInitiator.OpenConnection(ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
 		}
 
         private void cMenTreeConnectWithOptionsConnectInFullscreen_Click(object sender, EventArgs e)
 		{
-            Runtime.OpenConnection(ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
+            ConnectionInitiator.OpenConnection(ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
 		}
 
         private void cMenTreeConnectWithOptionsChoosePanelBeforeConnecting_Click(object sender, EventArgs e)
 		{
-            Runtime.OpenConnection(ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
+            ConnectionInitiator.OpenConnection(ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
 		}
 
 	    private void cMenTreeDisconnect_Click(object sender, EventArgs e)
@@ -838,7 +838,7 @@ namespace mRemoteNG.UI.Window
 					if (tvConnections.SelectedNode.Tag is ConnectionInfo)
 					{
 						e.Handled = true;
-                        Runtime.OpenConnection();
+                        ConnectionInitiator.OpenConnection();
 					}
 					else
 					{

@@ -616,7 +616,7 @@ namespace mRemoteNG.UI.Forms
                 foreach (var i in ICList)
                 {
                     i.Protocol.Close();
-                    Runtime.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
+                    ConnectionInitiator.OpenConnection(i.Info, ConnectionInfo.Force.DoNotJump);
                 }
 
                 // throw it on the garbage collector
@@ -887,7 +887,7 @@ namespace mRemoteNG.UI.Forms
 					return ;
 				}
 				cmbQuickConnect.Add(connectionInfo);
-				Runtime.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
+                ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump);
 			}
 			catch (Exception ex)
 			{
@@ -1009,7 +1009,7 @@ namespace mRemoteNG.UI.Forms
 			    var tag = ((ToolStripMenuItem)sender).Tag as ConnectionInfo;
 			    if (tag != null)
 				{
-                    Runtime.OpenConnection(tag);
+                    ConnectionInitiator.OpenConnection(tag);
 				}
 			}
 		}

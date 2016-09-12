@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Connection;
 using mRemoteNG.UI.Forms;
 
 
@@ -210,7 +211,7 @@ namespace mRemoteNG.Tools
 						{
 							ShowForm();
 						}
-                        App.Runtime.OpenConnection((mRemoteNG.Connection.ConnectionInfo)((System.Windows.Forms.Control)sender).Tag);
+                        ConnectionInitiator.OpenConnection((mRemoteNG.Connection.ConnectionInfo)((System.Windows.Forms.Control)sender).Tag);
 					}
 				}
 			}
