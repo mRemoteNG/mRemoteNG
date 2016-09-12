@@ -675,7 +675,6 @@ namespace mRemoteNG.App
             }
         }
 
-
         //TODO Fix for TreeListView
         public static void OpenConnection(ConnectionInfo ConnectionInfo)
         {
@@ -688,21 +687,6 @@ namespace mRemoteNG.App
                 MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
             }
         }
-
-
-        //TODO Fix for TreeListView
-        public static void OpenConnection(ConnectionInfo ConnectionInfo, Form ConnectionForm)
-        {
-            try
-            {
-                OpenConnectionFinal(ConnectionInfo, ConnectionInfo.Force.None, ConnectionForm);
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
-            }
-        }
-
 
         //TODO Fix for TreeListView
         public static void OpenConnection(ConnectionInfo ConnectionInfo, Form ConnectionForm, ConnectionInfo.Force Force)
@@ -717,7 +701,6 @@ namespace mRemoteNG.App
             }
         }
 
-
         //TODO Fix for TreeListView
         public static void OpenConnection(ConnectionInfo ConnectionInfo, ConnectionInfo.Force Force)
         {
@@ -730,7 +713,6 @@ namespace mRemoteNG.App
                 MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
             }
         }
-
 
         //TODO Fix for TreeListView
         private static void OpenConnectionFinal(ConnectionInfo ConnectionInfo, ConnectionInfo.Force Force, Form ConForm)
