@@ -15,7 +15,6 @@ namespace mRemoteNG.Connection
 {
     public static class ConnectionInitiator
     {
-        //TODO Fix for TreeListView
         public static void OpenConnection(ConnectionInfo connectionInfo)
         {
             try
@@ -28,7 +27,6 @@ namespace mRemoteNG.Connection
             }
         }
 
-        //TODO Fix for TreeListView
         public static void OpenConnection(ConnectionInfo connectionInfo, Form connectionForm, ConnectionInfo.Force force)
         {
             try
@@ -41,7 +39,6 @@ namespace mRemoteNG.Connection
             }
         }
 
-        //TODO Fix for TreeListView
         public static void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force)
         {
             try
@@ -54,7 +51,6 @@ namespace mRemoteNG.Connection
             }
         }
 
-        //TODO Fix for TreeListView
         public static void OpenConnection(ConnectionInfo connectionInfo, ConnectionInfo.Force force, Form conForm)
         {
             try
@@ -98,7 +94,6 @@ namespace mRemoteNG.Connection
                 }
 
                 connectionInfo.OpenConnections.Add(newProtocol);
-                SetTreeNodeImages(connectionInfo);
                 frmMain.Default.SelectedConnection = connectionInfo;
             }
             catch (Exception ex)
@@ -227,28 +222,6 @@ namespace mRemoteNG.Connection
             newProtocol.ErrorOccured += Prot_Event_ErrorOccured;
         }
 
-        private static void SetTreeNodeImages(ConnectionInfo connectionInfo)
-        {
-            if (connectionInfo.IsQuickConnect == false)
-            {
-                if (connectionInfo.Protocol != ProtocolType.IntApp)
-                {
-                    ConnectionTreeNode.SetNodeImage(connectionInfo.TreeNode, TreeImageType.ConnectionOpen);
-                }
-                else
-                {
-                    ExternalTool extApp = GetExtAppByName(connectionInfo.ExtApp);
-                    if (extApp != null)
-                    {
-                        if (extApp.TryIntegrate && connectionInfo.TreeNode != null)
-                        {
-                            ConnectionTreeNode.SetNodeImage(connectionInfo.TreeNode, TreeImageType.ConnectionOpen);
-                        }
-                    }
-                }
-            }
-        }
-
         private static void BuildConnectionInterfaceController(ConnectionInfo connectionInfo, ProtocolBase newProtocol, Control connectionContainer)
         {
             newProtocol.InterfaceControl = new InterfaceControl(connectionContainer, newProtocol, connectionInfo);
@@ -263,17 +236,13 @@ namespace mRemoteNG.Connection
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strProtocolEventDisconnected, disconnectedMessage), true);
 
-                ProtocolBase Prot = (ProtocolBase)sender;
-                if (Prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
-                {
-                    string ReasonCode = disconnectedMessage.Split("\r\n".ToCharArray())[0];
-                    string desc = disconnectedMessage.Replace("\r\n", " ");
+                var Prot = (ProtocolBase)sender;
+                if (Prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
+                var ReasonCode = disconnectedMessage.Split("\r\n".ToCharArray())[0];
+                var desc = disconnectedMessage.Replace("\r\n", " ");
 
-                    if (Convert.ToInt32(ReasonCode) > 3)
-                    {
-                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strRdpDisconnected + Environment.NewLine + desc);
-                    }
-                }
+                if (Convert.ToInt32(ReasonCode) > 3)
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strRdpDisconnected + Environment.NewLine + desc);
             }
             catch (Exception ex)
             {
@@ -285,21 +254,17 @@ namespace mRemoteNG.Connection
         {
             try
             {
-                ProtocolBase Prot = (ProtocolBase)sender;
+                var Prot = (ProtocolBase)sender;
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnenctionCloseEvent, true);
                 Runtime.MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName));
                 Prot.InterfaceControl.Info.OpenConnections.Remove(Prot);
 
                 if (Prot.InterfaceControl.Info.OpenConnections.Count < 1 && Prot.InterfaceControl.Info.IsQuickConnect == false)
-                {
                     ConnectionTreeNode.SetNodeImage(Prot.InterfaceControl.Info.TreeNode, TreeImageType.ConnectionClosed);
-                }
 
-                if (Prot.InterfaceControl.Info.PostExtApp != "")
-                {
-                    ExternalTool extA = GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp);
-                    extA?.Start(Prot.InterfaceControl.Info);
-                }
+                if (Prot.InterfaceControl.Info.PostExtApp == "") return;
+                var extA = GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp);
+                extA?.Start(Prot.InterfaceControl.Info);
             }
             catch (Exception ex)
             {
@@ -309,9 +274,9 @@ namespace mRemoteNG.Connection
 
         private static void Prot_Event_Connected(object sender)
         {
-            ProtocolBase prot = (ProtocolBase)sender;
+            var prot = (ProtocolBase)sender;
             Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventConnected, true);
-            Runtime.MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
+            Runtime.MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol, Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
         }
 
         private static void Prot_Event_ErrorOccured(object sender, string errorMessage)
@@ -319,15 +284,11 @@ namespace mRemoteNG.Connection
             try
             {
                 Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventErrorOccured, true);
-                ProtocolBase Prot = (ProtocolBase)sender;
+                var Prot = (ProtocolBase)sender;
 
-                if (Prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
-                {
-                    if (Convert.ToInt32(errorMessage) > -1)
-                    {
-                        Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strConnectionRdpErrorDetail, errorMessage, ProtocolRDP.FatalErrors.GetError(errorMessage)));
-                    }
-                }
+                if (Prot.InterfaceControl.Info.Protocol != ProtocolType.RDP) return;
+                if (Convert.ToInt32(errorMessage) > -1)
+                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strConnectionRdpErrorDetail, errorMessage, ProtocolRDP.FatalErrors.GetError(errorMessage)));
             }
             catch (Exception ex)
             {
