@@ -455,32 +455,32 @@ namespace mRemoteNG.UI.Window
 
         private void cMenTreeConnect_Click(object sender, EventArgs e)
 		{
-            ConnectionInitiator.OpenConnection(ConnectionInfo.Force.DoNotJump);
+            ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DoNotJump);
 		}
 
         private void cMenTreeConnectWithOptionsConnectToConsoleSession_Click(object sender, EventArgs e)
 		{
-            ConnectionInitiator.OpenConnection(ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
+            ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
 		}
 
         private void cMenTreeConnectWithOptionsNoCredentials_Click(object sender, EventArgs e)
 		{
-            ConnectionInitiator.OpenConnection(ConnectionInfo.Force.NoCredentials);
+            ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.NoCredentials);
 		}
 
         private void cMenTreeConnectWithOptionsDontConnectToConsoleSession_Click(object sender, EventArgs e)
 		{
-            ConnectionInitiator.OpenConnection(ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
+            ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
 		}
 
         private void cMenTreeConnectWithOptionsConnectInFullscreen_Click(object sender, EventArgs e)
 		{
-            ConnectionInitiator.OpenConnection(ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
+            ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
 		}
 
         private void cMenTreeConnectWithOptionsChoosePanelBeforeConnecting_Click(object sender, EventArgs e)
 		{
-            ConnectionInitiator.OpenConnection(ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
+            ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
 		}
 
 	    private void cMenTreeDisconnect_Click(object sender, EventArgs e)

@@ -16,38 +16,6 @@ namespace mRemoteNG.Connection
     public static class ConnectionInitiator
     {
         //TODO Fix for TreeListView
-        public static void OpenConnection(ConnectionInfo.Force Force)
-        {
-            try
-            {
-                if (Windows.treeForm.tvConnections.SelectedNode.Tag == null)
-                    return;
-
-                if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
-                {
-                    OpenConnection((ConnectionInfo)Windows.treeForm.tvConnections.SelectedNode.Tag, Force);
-                }
-                else if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Container)
-                {
-                    foreach (TreeNode tNode in ConnectionTree.SelectedNode.Nodes)
-                    {
-                        if (ConnectionTreeNode.GetNodeType(tNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
-                        {
-                            if (tNode.Tag != null)
-                            {
-                                OpenConnection((ConnectionInfo)tNode.Tag, Force);
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
-            }
-        }
-
-        //TODO Fix for TreeListView
         public static void OpenConnection(ConnectionInfo ConnectionInfo)
         {
             try
