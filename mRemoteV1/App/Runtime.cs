@@ -647,9 +647,7 @@ namespace mRemoteNG.App
             try
             {
                 if (Windows.treeForm.tvConnections.SelectedNode.Tag == null)
-                {
                     return;
-                }
 
                 if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
                 {
@@ -717,148 +715,7 @@ namespace mRemoteNG.App
         //TODO Fix for TreeListView
         private static void OpenConnectionFinal(ConnectionInfo ConnectionInfo, ConnectionInfo.Force Force, Form ConForm)
         {
-            try
-            {
-                if (ConnectionInfo.Hostname == "" && ConnectionInfo.Protocol != ProtocolType.IntApp)
-                {
-                    MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strConnectionOpenFailedNoHostname);
-                    return;
-                }
-
-                StartPreConnectionExternalApp(ConnectionInfo);
-
-                if ((Force & ConnectionInfo.Force.DoNotJump) != ConnectionInfo.Force.DoNotJump)
-                {
-                    if (SwitchToOpenConnection(ConnectionInfo))
-                    {
-                        return;
-                    }
-                }
-
-                ProtocolFactory protocolFactory = new ProtocolFactory();
-                ProtocolBase newProtocol = protocolFactory.CreateProtocol(ConnectionInfo);
-
-                string connectionPanel = SetConnectionPanel(ConnectionInfo, Force);
-                Form connectionForm = SetConnectionForm(ConForm, connectionPanel);
-                Control connectionContainer = SetConnectionContainer(ConnectionInfo, connectionForm);
-                SetConnectionFormEventHandlers(newProtocol, connectionForm);
-                SetConnectionEventHandlers(newProtocol);
-                BuildConnectionInterfaceController(ConnectionInfo, newProtocol, connectionContainer);
-
-                newProtocol.Force = Force;
-
-                if (newProtocol.Initialize() == false)
-                {
-                    newProtocol.Close();
-                    return;
-                }
-
-                if (newProtocol.Connect() == false)
-                {
-                    newProtocol.Close();
-                    return;
-                }
-
-                ConnectionInfo.OpenConnections.Add(newProtocol);
-                SetTreeNodeImages(ConnectionInfo);
-                frmMain.Default.SelectedConnection = ConnectionInfo;
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
-            }
-        }
-
-        private static void BuildConnectionInterfaceController(ConnectionInfo ConnectionInfo, ProtocolBase newProtocol, Control connectionContainer)
-        {
-            newProtocol.InterfaceControl = new InterfaceControl(connectionContainer, newProtocol, ConnectionInfo);
-        }
-
-        private static void SetConnectionFormEventHandlers(ProtocolBase newProtocol, Form connectionForm)
-        {
-            newProtocol.Closed += ((ConnectionWindow)connectionForm).Prot_Event_Closed;
-        }
-
-        private static Control SetConnectionContainer(ConnectionInfo ConnectionInfo, Form connectionForm)
-        {
-            Control connectionContainer = ((ConnectionWindow)connectionForm).AddConnectionTab(ConnectionInfo);
-
-            if (ConnectionInfo.Protocol == ProtocolType.IntApp)
-            {
-                if (GetExtAppByName(ConnectionInfo.ExtApp).Icon != null)
-                    ((TabPage) connectionContainer).Icon = GetExtAppByName(ConnectionInfo.ExtApp).Icon;
-            }
-            return connectionContainer;
-        }
-
-        private static void SetTreeNodeImages(ConnectionInfo ConnectionInfo)
-        {
-            if (ConnectionInfo.IsQuickConnect == false)
-            {
-                if (ConnectionInfo.Protocol != ProtocolType.IntApp)
-                {
-                    ConnectionTreeNode.SetNodeImage(ConnectionInfo.TreeNode, TreeImageType.ConnectionOpen);
-                }
-                else
-                {
-                    ExternalTool extApp = GetExtAppByName(ConnectionInfo.ExtApp);
-                    if (extApp != null)
-                    {
-                        if (extApp.TryIntegrate && ConnectionInfo.TreeNode != null)
-                        {
-                            ConnectionTreeNode.SetNodeImage(ConnectionInfo.TreeNode, TreeImageType.ConnectionOpen);
-                        }
-                    }
-                }
-            }
-        }
-
-        private static void SetConnectionEventHandlers(ProtocolBase newProtocol)
-        {
-            newProtocol.Disconnected += Prot_Event_Disconnected;
-            newProtocol.Connected += Prot_Event_Connected;
-            newProtocol.Closed += Prot_Event_Closed;
-            newProtocol.ErrorOccured += Prot_Event_ErrorOccured;
-        }
-
-        private static Form SetConnectionForm(Form ConForm, string connectionPanel)
-        {
-            var connectionForm = ConForm ?? WindowList.FromString(connectionPanel);
-
-            if (connectionForm == null)
-                connectionForm = AddPanel(connectionPanel);
-            else
-                ((ConnectionWindow)connectionForm).Show(frmMain.Default.pnlDock);
-
-            connectionForm.Focus();
-            return connectionForm;
-        }
-
-        private static string SetConnectionPanel(ConnectionInfo ConnectionInfo, ConnectionInfo.Force Force)
-        {
-            string connectionPanel = "";
-            if (ConnectionInfo.Panel == "" || (Force & ConnectionInfo.Force.OverridePanel) == ConnectionInfo.Force.OverridePanel | Settings.Default.AlwaysShowPanelSelectionDlg)
-            {
-                frmChoosePanel frmPnl = new frmChoosePanel();
-                if (frmPnl.ShowDialog() == DialogResult.OK)
-                {
-                    connectionPanel = frmPnl.Panel;
-                }
-            }
-            else
-            {
-                connectionPanel = ConnectionInfo.Panel;
-            }
-            return connectionPanel;
-        }
-
-        private static void StartPreConnectionExternalApp(ConnectionInfo ConnectionInfo)
-        {
-            if (ConnectionInfo.PreExtApp != "")
-            {
-                ExternalTool extA = GetExtAppByName(ConnectionInfo.PreExtApp);
-                extA?.Start(ConnectionInfo);
-            }
+            ConnectionInitiator.OpenConnection(ConnectionInfo, Force, ConForm);
         }
 
         public static bool SwitchToOpenConnection(ConnectionInfo nCi)
@@ -878,87 +735,6 @@ namespace mRemoteNG.App
         }
         #endregion
 
-        #region Event Handlers
-
-        private static void Prot_Event_Disconnected(object sender, string DisconnectedMessage)
-        {
-            try
-            {
-                MessageCollector.AddMessage(MessageClass.InformationMsg, string.Format(Language.strProtocolEventDisconnected, DisconnectedMessage), true);
-
-                ProtocolBase Prot = (ProtocolBase)sender;
-                if (Prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
-                {
-                    string ReasonCode = DisconnectedMessage.Split("\r\n".ToCharArray())[0];
-                    string desc = DisconnectedMessage.Replace("\r\n", " ");
-                    
-                    if (Convert.ToInt32(ReasonCode) > 3)
-                    {
-                        MessageCollector.AddMessage(MessageClass.WarningMsg, Language.strRdpDisconnected + Environment.NewLine + desc);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, string.Format(Language.strProtocolEventDisconnectFailed, ex.Message), true);
-            }
-        }
-
-        private static void Prot_Event_Closed(object sender)
-        {
-            try
-            {
-                ProtocolBase Prot = (ProtocolBase)sender;
-                MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnenctionCloseEvent, true);
-                MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName));
-                Prot.InterfaceControl.Info.OpenConnections.Remove(Prot);
-
-                if (Prot.InterfaceControl.Info.OpenConnections.Count < 1 && Prot.InterfaceControl.Info.IsQuickConnect == false)
-                {
-                    ConnectionTreeNode.SetNodeImage(Prot.InterfaceControl.Info.TreeNode, TreeImageType.ConnectionClosed);
-                }
-
-                if (Prot.InterfaceControl.Info.PostExtApp != "")
-                {
-                    ExternalTool extA = GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp);
-                    extA?.Start(Prot.InterfaceControl.Info);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnenctionCloseEventFailed + Environment.NewLine + ex.Message, true);
-            }
-        }
-
-        private static void Prot_Event_Connected(object sender)
-        {
-            ProtocolBase prot = (ProtocolBase)sender;
-            MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventConnected, true);
-            MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnectionEventConnectedDetail, prot.InterfaceControl.Info.Hostname, prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName, prot.InterfaceControl.Info.Description, prot.InterfaceControl.Info.UserField));
-        }
-
-        private static void Prot_Event_ErrorOccured(object sender, string ErrorMessage)
-        {
-            try
-            {
-                MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strConnectionEventErrorOccured, true);
-                ProtocolBase Prot = (ProtocolBase)sender;
-
-                if (Prot.InterfaceControl.Info.Protocol == ProtocolType.RDP)
-                {
-                    if (Convert.ToInt32(ErrorMessage) > -1)
-                    {
-                        MessageCollector.AddMessage(MessageClass.WarningMsg, string.Format(Language.strConnectionRdpErrorDetail, ErrorMessage, ProtocolRDP.FatalErrors.GetError(ErrorMessage)));
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionEventConnectionFailed + Environment.NewLine + ex.Message, true);
-            }
-        }
-        #endregion
-
         #region External Apps
         public static ExternalTool GetExtAppByName(string Name)
         {
@@ -972,7 +748,6 @@ namespace mRemoteNG.App
         #endregion
 
         #region Misc
-
         private static void GoToURL(string URL)
         {
             ConnectionInfo connectionInfo = new ConnectionInfo();
