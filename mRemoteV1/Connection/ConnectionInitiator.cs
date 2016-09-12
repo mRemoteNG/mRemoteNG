@@ -4,7 +4,6 @@ using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Messages;
-using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
@@ -106,19 +105,9 @@ namespace mRemoteNG.Connection
         {
             if (connectionInfo.PreExtApp != "")
             {
-                var extA = GetExtAppByName(connectionInfo.PreExtApp);
+                var extA = Runtime.GetExtAppByName(connectionInfo.PreExtApp);
                 extA?.Start(connectionInfo);
             }
-        }
-
-        public static ExternalTool GetExtAppByName(string name)
-        {
-            foreach (ExternalTool extA in Runtime.ExternalTools)
-            {
-                if (extA.DisplayName == name)
-                    return extA;
-            }
-            return null;
         }
 
         public static bool SwitchToOpenConnection(ConnectionInfo nCi)
@@ -203,8 +192,8 @@ namespace mRemoteNG.Connection
 
             if (connectionInfo.Protocol == ProtocolType.IntApp)
             {
-                if (GetExtAppByName(connectionInfo.ExtApp).Icon != null)
-                    ((TabPage)connectionContainer).Icon = GetExtAppByName(connectionInfo.ExtApp).Icon;
+                if (Runtime.GetExtAppByName(connectionInfo.ExtApp).Icon != null)
+                    ((TabPage)connectionContainer).Icon = Runtime.GetExtAppByName(connectionInfo.ExtApp).Icon;
             }
             return connectionContainer;
         }
@@ -263,7 +252,7 @@ namespace mRemoteNG.Connection
                     ConnectionTreeNode.SetNodeImage(Prot.InterfaceControl.Info.TreeNode, TreeImageType.ConnectionClosed);
 
                 if (Prot.InterfaceControl.Info.PostExtApp == "") return;
-                var extA = GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp);
+                var extA = Runtime.GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp);
                 extA?.Start(Prot.InterfaceControl.Info);
             }
             catch (Exception ex)
