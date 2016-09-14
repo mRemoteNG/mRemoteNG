@@ -845,13 +845,17 @@ namespace mRemoteNG.UI.Window
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
 		{
-            var matches = _nodeSearcher.SearchByName(txtSearch.Text);
-            var match = matches.First();
-            JumpToNode(match);
+            _nodeSearcher.SearchByName(txtSearch.Text);
+            JumpToNode(_nodeSearcher.CurrentMatch);
         }
 
 	    private void JumpToNode(ConnectionInfo connectionInfo)
 	    {
+	        if (connectionInfo == null)
+	        {
+	            olvConnections.SelectedObject = null;
+                return;
+	        }
 	        ExpandParentsRecursive(connectionInfo);
             olvConnections.SelectObject(connectionInfo);
             olvConnections.EnsureModelVisible(connectionInfo);
@@ -859,7 +863,7 @@ namespace mRemoteNG.UI.Window
 
 	    private void ExpandParentsRecursive(ConnectionInfo connectionInfo)
 	    {
-            if (connectionInfo.Parent == null) return;
+            if (connectionInfo?.Parent == null) return;
 	        olvConnections.Expand(connectionInfo.Parent);
             ExpandParentsRecursive(connectionInfo.Parent);
         }
@@ -893,10 +897,11 @@ namespace mRemoteNG.UI.Window
 					e.Handled = true;
                     ConnectionInitiator.OpenConnection(SelectedNode);
 				}
-				else if (e.KeyCode == Keys.Escape ^ e.KeyCode == Keys.Control | e.KeyCode == Keys.F)
+				else if (e.Control && e.KeyCode == Keys.F)
 				{
 					txtSearch.Focus();
-					txtSearch.SelectionStart = txtSearch.TextLength;
+                    txtSearch.SelectAll();
+				    e.Handled = true;
 				}
 			}
 			catch (Exception ex)

@@ -8,9 +8,10 @@ namespace mRemoteNG.Tree
     internal class NodeSearcher
     {
         private readonly ConnectionTreeModel _connectionTreeModel;
-        private ConnectionInfo _currentMatch;
 
         public List<ConnectionInfo> Matches { get; private set; }
+        public ConnectionInfo CurrentMatch { get; private set; }
+
 
         public NodeSearcher(ConnectionTreeModel connectionTreeModel)
         {
@@ -27,30 +28,31 @@ namespace mRemoteNG.Tree
                 if (node.Name.ToLowerInvariant().Contains(searchText.ToLowerInvariant()))
                     Matches.Add(node);
             }
-            _currentMatch = Matches.First();
+            if (Matches.Count > 0)
+                CurrentMatch = Matches.First();
             return Matches;
         }
 
         internal ConnectionInfo NextMatch()
         {
-            var currentMatchIndex = Matches.IndexOf(_currentMatch);
+            var currentMatchIndex = Matches.IndexOf(CurrentMatch);
             if (currentMatchIndex < Matches.Count-1)
-                _currentMatch = Matches[currentMatchIndex + 1];
-            return _currentMatch;
+                CurrentMatch = Matches[currentMatchIndex + 1];
+            return CurrentMatch;
         }
 
         internal ConnectionInfo PreviousMatch()
         {
-            var currentMatchIndex = Matches.IndexOf(_currentMatch);
+            var currentMatchIndex = Matches.IndexOf(CurrentMatch);
             if (currentMatchIndex > 0)
-                _currentMatch = Matches[currentMatchIndex - 1];
-            return _currentMatch;
+                CurrentMatch = Matches[currentMatchIndex - 1];
+            return CurrentMatch;
         }
 
         private void ResetMatches()
         {
             Matches = new List<ConnectionInfo>();
-            _currentMatch = null;
+            CurrentMatch = null;
         }
     }
 }
