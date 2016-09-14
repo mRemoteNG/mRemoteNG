@@ -19,6 +19,7 @@ namespace mRemoteNG.UI.Window
 	{
 	    private ConnectionTreeModel _connectionTreeModel;
 	    private ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
+        private NodeSearcher _nodeSearcher;
 
 	    public ConnectionInfo SelectedNode => (ConnectionInfo) olvConnections.SelectedObject;
 
@@ -135,6 +136,7 @@ namespace mRemoteNG.UI.Window
 	    private void PopulateTreeView()
 	    {
             olvConnections.Roots = ConnectionTreeModel.RootNodes;
+            _nodeSearcher = new NodeSearcher(ConnectionTreeModel);
 	        ExpandPreviouslyOpenedFolders();
             ExpandRootConnectionNode();
 	        OpenConnectionsFromLastSession();
@@ -817,11 +819,13 @@ namespace mRemoteNG.UI.Window
 				}
 				else if (e.KeyCode == Keys.Up)
 				{
-					tvConnections.SelectedNode = tvConnections.SelectedNode.PrevVisibleNode;
+					//tvConnections.SelectedNode = tvConnections.SelectedNode.PrevVisibleNode;
+				    olvConnections.SelectObject(_nodeSearcher.PreviousMatch());
 				}
 				else if (e.KeyCode == Keys.Down)
 				{
-					tvConnections.SelectedNode = tvConnections.SelectedNode.NextVisibleNode;
+                    //tvConnections.SelectedNode = tvConnections.SelectedNode.NextVisibleNode;
+                    olvConnections.SelectObject(_nodeSearcher.NextMatch());
 				}
 				else
 				{
@@ -837,13 +841,8 @@ namespace mRemoteNG.UI.Window
         //TODO Fix for TreeListView
         private void txtSearch_TextChanged(object sender, EventArgs e)
 		{
-		    try
-		    {
-                tvConnections.SelectedNode = ConnectionTree.Find(tvConnections.Nodes[0], txtSearch.Text);
-            }
-		    catch (Exception)
-		    {
-		    }
+            var matches = _nodeSearcher.SearchByName(txtSearch.Text);
+            olvConnections.SelectObject(matches.First());
 		}
 
         //TODO Fix for TreeListView
