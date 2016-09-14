@@ -527,9 +527,10 @@ namespace mRemoteNG.UI.Window
 
         private void cMenTreeDuplicate_Click(object sender, EventArgs e)
         {
-            SelectedNode.Clone();
+            var newNode = SelectedNode.Clone();
+            newNode.Parent.SetChildBelow(newNode, SelectedNode);
             Runtime.SaveConnectionsBG();
-            olvConnections.RebuildAll(true);
+            olvConnections.RefreshObject(SelectedNode);
 		}
 
         private void cMenTreeRename_Click(object sender, EventArgs e)
