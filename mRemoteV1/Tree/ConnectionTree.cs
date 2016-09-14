@@ -28,19 +28,6 @@ namespace mRemoteNG.Tree
             }
         }
 
-        public static void StartRenameSelectedNode()
-        {
-            SelectedNode?.BeginEdit();
-        }
-
-        //TODO Fix for TreeListView
-        public static void ExpandAllNodes()
-        {
-            TreeView.BeginUpdate();
-            TreeView.ExpandAll();
-            TreeView.EndUpdate();
-        }
-
         //TODO Fix for TreeListView
         public static void CollapseAllNodes()
         {

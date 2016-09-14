@@ -770,10 +770,9 @@ namespace mRemoteNG.UI.Window
         #endregion
 
         #region Menu
-        //TODO Fix for TreeListView
         private void mMenViewExpandAllFolders_Click(object sender, EventArgs e)
 		{
-            ConnectionTree.ExpandAllNodes();
+            olvConnections.ExpandAll();
 		}
 
         //TODO Fix for TreeListView
