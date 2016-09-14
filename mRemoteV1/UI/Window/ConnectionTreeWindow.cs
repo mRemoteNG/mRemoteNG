@@ -821,17 +821,15 @@ namespace mRemoteNG.UI.Window
 				{
                     //tvConnections.SelectedNode = tvConnections.SelectedNode.PrevVisibleNode;
                     var match = _nodeSearcher.PreviousMatch();
-                    olvConnections.SelectObject(match);
-                    olvConnections.EnsureModelVisible(match);
-				    e.Handled = true;
+                    JumpToNode(match);
+                    e.Handled = true;
 				}
 				else if (e.KeyCode == Keys.Down)
 				{
                     //tvConnections.SelectedNode = tvConnections.SelectedNode.NextVisibleNode;
 				    var match = _nodeSearcher.NextMatch();
-                    olvConnections.SelectObject(match);
-                    olvConnections.EnsureModelVisible(match);
-				    e.Handled = true;
+				    JumpToNode(match);
+                    e.Handled = true;
 				}
 				else
 				{
@@ -849,9 +847,22 @@ namespace mRemoteNG.UI.Window
 		{
             var matches = _nodeSearcher.SearchByName(txtSearch.Text);
             var match = matches.First();
-            olvConnections.SelectObject(match);
-            olvConnections.EnsureModelVisible(match);
-		}
+            JumpToNode(match);
+        }
+
+	    private void JumpToNode(ConnectionInfo connectionInfo)
+	    {
+	        ExpandParentsRecursive(connectionInfo);
+            olvConnections.SelectObject(connectionInfo);
+            olvConnections.EnsureModelVisible(connectionInfo);
+        }
+
+	    private void ExpandParentsRecursive(ConnectionInfo connectionInfo)
+	    {
+            if (connectionInfo.Parent == null) return;
+	        olvConnections.Expand(connectionInfo.Parent);
+            ExpandParentsRecursive(connectionInfo.Parent);
+        }
 
         //TODO Fix for TreeListView
         private void tvConnections_KeyPress(object sender, KeyPressEventArgs e)
