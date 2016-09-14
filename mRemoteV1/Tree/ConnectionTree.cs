@@ -19,97 +19,13 @@ namespace mRemoteNG.Tree
         {
             get
             { 
-                return TreeView.SelectedNode;
+                return TreeView?.SelectedNode;
             }
             set
             {
                 treeNodeToBeSelected = value;
                 SelectNode();
             }
-        }
-
-        //TODO Fix for TreeListView
-        public static void DeleteSelectedNode()
-        {
-            try
-            {
-                if (!SelectedNodeIsAValidDeletionTarget())
-                    return;
-
-                if (ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Container)
-                {
-                    if (ConnectionTreeNode.IsEmpty(SelectedNode))
-                    {
-                        if (UserConfirmsEmptyFolderDeletion())
-                            SelectedNode.Remove();
-                    }
-                    else
-                    {
-                        if (UserConfirmsNonEmptyFolderDeletion())
-                        {
-                            TreeView.BeginUpdate();
-                            SelectedNode.Nodes.Clear();
-                            SelectedNode.Remove();
-                            TreeView.EndUpdate();
-                        }
-                    }
-                }
-                else if (ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Connection)
-                {
-                    if (UserConfirmsConnectionDeletion())
-                        SelectedNode.Remove();
-                }
-                else
-                {
-                    Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "Tree item type is unknown so it cannot be deleted!");
-                }
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Deleting selected node failed" + Environment.NewLine + ex.Message, true);
-            }
-        }
-
-        //TODO Fix for TreeListView
-        private static bool SelectedNodeIsAValidDeletionTarget()
-        {
-            bool validDeletionTarget = true;
-            if (SelectedNode == null)
-                validDeletionTarget = false;
-            else if (ConnectionTreeNode.GetNodeType(SelectedNode) == TreeNodeType.Root)
-            {
-                validDeletionTarget = false;
-                Runtime.MessageCollector.AddMessage(MessageClass.WarningMsg, "The root item cannot be deleted!");
-            }
-            return validDeletionTarget;
-        }
-
-        //TODO Fix for TreeListView
-        private static bool UserConfirmsEmptyFolderDeletion()
-        {
-            string messagePrompt = string.Format(Language.strConfirmDeleteNodeFolder, SelectedNode.Text);
-            return PromptUser(messagePrompt);
-        }
-
-        //TODO Fix for TreeListView
-        private static bool UserConfirmsNonEmptyFolderDeletion()
-        {
-            string messagePrompt = string.Format(Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Text);
-            return PromptUser(messagePrompt);
-        }
-
-        //TODO Fix for TreeListView
-        private static bool UserConfirmsConnectionDeletion()
-        {
-            string messagePrompt = string.Format(Language.strConfirmDeleteNodeConnection, SelectedNode.Text);
-            return PromptUser(messagePrompt);
-        }
-
-        //TODO Fix for TreeListView
-        private static bool PromptUser(string PromptMessage)
-        {
-            DialogResult msgBoxResponse = MessageBox.Show(PromptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            return (msgBoxResponse == DialogResult.Yes);
         }
 
         public static void StartRenameSelectedNode()

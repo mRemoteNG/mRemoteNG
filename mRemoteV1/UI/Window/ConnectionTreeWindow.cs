@@ -247,9 +247,44 @@ namespace mRemoteNG.UI.Window
 
         public void DeleteSelectedNode()
         {
+            if (!UserConfirmsDeletion()) return;
             ConnectionTreeModel.DeleteNode(SelectedNode);
             Runtime.SaveConnectionsBG();
             olvConnections.RefreshObject(SelectedNode);
+        }
+
+	    private bool UserConfirmsDeletion()
+	    {
+	        var selectedNodeAsContainer = SelectedNode as ContainerInfo;
+	        if (selectedNodeAsContainer != null)
+	            return selectedNodeAsContainer.HasChildren()
+	                ? UserConfirmsNonEmptyFolderDeletion()
+	                : UserConfirmsEmptyFolderDeletion();
+	        return UserConfirmsConnectionDeletion();
+	    }
+
+        private bool UserConfirmsEmptyFolderDeletion()
+        {
+            var messagePrompt = string.Format(Language.strConfirmDeleteNodeFolder, SelectedNode.Name);
+            return PromptUser(messagePrompt);
+        }
+
+        private bool UserConfirmsNonEmptyFolderDeletion()
+        {
+            var messagePrompt = string.Format(Language.strConfirmDeleteNodeFolderNotEmpty, SelectedNode.Name);
+            return PromptUser(messagePrompt);
+        }
+
+        private bool UserConfirmsConnectionDeletion()
+        {
+            var messagePrompt = string.Format(Language.strConfirmDeleteNodeConnection, SelectedNode.Name);
+            return PromptUser(messagePrompt);
+        }
+
+        private bool PromptUser(string promptMessage)
+        {
+            var msgBoxResponse = MessageBox.Show(promptMessage, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return (msgBoxResponse == DialogResult.Yes);
         }
 
         #region Private Methods
