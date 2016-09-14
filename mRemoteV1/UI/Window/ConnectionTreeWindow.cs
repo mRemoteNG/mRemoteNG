@@ -118,7 +118,8 @@ namespace mRemoteNG.UI.Window
             olvConnections.CellToolTipShowing += tvConnections_CellToolTipShowing;
             olvConnections.ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
             olvConnections.ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
-        }
+	        olvConnections.KeyDown += tvConnections_KeyDown;
+	    }
 
 	    private void SetMenuEventHandlers()
 	    {
@@ -842,7 +843,6 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        //TODO Fix for TreeListView
         private void txtSearch_TextChanged(object sender, EventArgs e)
 		{
             var matches = _nodeSearcher.SearchByName(txtSearch.Text);
@@ -890,22 +890,8 @@ namespace mRemoteNG.UI.Window
 			{
 				if (e.KeyCode == Keys.Enter)
 				{
-					if (tvConnections.SelectedNode.Tag is ConnectionInfo)
-					{
-						e.Handled = true;
-                        ConnectionInitiator.OpenConnection(SelectedNode);
-					}
-					else
-					{
-						if (tvConnections.SelectedNode.IsExpanded)
-						{
-							tvConnections.SelectedNode.Collapse(true);
-						}
-						else
-						{
-							tvConnections.SelectedNode.Expand();
-						}
-					}
+					e.Handled = true;
+                    ConnectionInitiator.OpenConnection(SelectedNode);
 				}
 				else if (e.KeyCode == Keys.Escape ^ e.KeyCode == Keys.Control | e.KeyCode == Keys.F)
 				{
