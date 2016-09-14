@@ -2,7 +2,6 @@ using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
-using mRemoteNG.Messages;
 using mRemoteNG.Tree;
 using System;
 using System.Drawing;
@@ -21,7 +20,6 @@ namespace mRemoteNG.UI.Window
 	    private ConnectionTreeModel _connectionTreeModel;
 	    private ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
 
-        private ToolTip DescriptionTooltip { get; }
 	    private ConnectionInfo SelectedNode => (ConnectionInfo) olvConnections.SelectedObject;
 
 	    public ConnectionTreeModel ConnectionTreeModel
@@ -39,11 +37,6 @@ namespace mRemoteNG.UI.Window
 			WindowType = WindowType.Tree;
 			DockPnl = panel;
 			InitializeComponent();
-		    DescriptionTooltip = new ToolTip
-		    {
-		        InitialDelay = 300,
-		        ReshowDelay = 0
-		    };
 
             FillImageList();
             LinkModelToView();
