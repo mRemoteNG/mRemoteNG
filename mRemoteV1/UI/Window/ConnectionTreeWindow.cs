@@ -686,7 +686,6 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        //TODO Fix for TreeListView
         private void DisconnectConnection(ConnectionInfo connectionInfo)
 		{
 			try
@@ -717,19 +716,15 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        //TODO Fix for TreeListView
-        private static void SshTransferFile()
+        private void SshTransferFile()
 		{
 			try
 			{
-                Windows.Show(WindowType.SSHTransfer);
-
-                ConnectionInfo conI = (ConnectionInfo)ConnectionTree.SelectedNode.Tag;
-
-                Windows.sshtransferForm.Hostname = conI.Hostname;
-                Windows.sshtransferForm.Username = conI.Username;
-                Windows.sshtransferForm.Password = conI.Password;
-                Windows.sshtransferForm.Port = Convert.ToString(conI.Port);
+                Windows.Show(WindowType.SSHTransfer);                
+                Windows.sshtransferForm.Hostname = SelectedNode.Hostname;
+                Windows.sshtransferForm.Username = SelectedNode.Username;
+                Windows.sshtransferForm.Password = SelectedNode.Password;
+                Windows.sshtransferForm.Port = Convert.ToString(SelectedNode.Port);
 			}
 			catch (Exception ex)
 			{
