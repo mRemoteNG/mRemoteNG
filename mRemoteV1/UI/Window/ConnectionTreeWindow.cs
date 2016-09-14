@@ -732,33 +732,23 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        //TODO Fix for TreeListView
         private void AddExternalApps()
 		{
 			try
 			{
-                //clean up
-                //since new items are added below, we have to dispose of any previous items first
-                if (cMenTreeToolsExternalApps.DropDownItems.Count > 0)
-                {
-                    for (int i = cMenTreeToolsExternalApps.DropDownItems.Count - 1; i >= 0; i--)
-                        cMenTreeToolsExternalApps.DropDownItems[i].Dispose();
+			    ResetExternalAppMenu();
 
-                    cMenTreeToolsExternalApps.DropDownItems.Clear();
-                }
-						
-				//add ext apps
-				foreach (Tools.ExternalTool extA in Runtime.ExternalTools)
+                foreach (Tools.ExternalTool extA in Runtime.ExternalTools)
 				{
-					ToolStripMenuItem nItem = new ToolStripMenuItem();
-					nItem.Text = extA.DisplayName;
-					nItem.Tag = extA;
-							
-					nItem.Image = extA.Image;
-							
-					nItem.Click += cMenTreeToolsExternalAppsEntry_Click;
-							
-					cMenTreeToolsExternalApps.DropDownItems.Add(nItem);
+				    var menuItem = new ToolStripMenuItem
+				    {
+				        Text = extA.DisplayName,
+				        Tag = extA,
+				        Image = extA.Image
+				    };
+
+				    menuItem.Click += cMenTreeToolsExternalAppsEntry_Click;
+					cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
 				}
 			}
 			catch (Exception ex)
@@ -767,15 +757,21 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        //TODO Fix for TreeListView
-        private static void StartExternalApp(Tools.ExternalTool externalTool)
+	    private void ResetExternalAppMenu()
+	    {
+	        if (cMenTreeToolsExternalApps.DropDownItems.Count <= 0) return;
+	        for (var i = cMenTreeToolsExternalApps.DropDownItems.Count - 1; i >= 0; i--)
+	            cMenTreeToolsExternalApps.DropDownItems[i].Dispose();
+
+	        cMenTreeToolsExternalApps.DropDownItems.Clear();
+	    }
+
+        private void StartExternalApp(Tools.ExternalTool externalTool)
 		{
 			try
 			{
-                if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
-				{
-                    externalTool.Start((ConnectionInfo)ConnectionTree.SelectedNode.Tag);
-				}
+                if (SelectedNode.GetTreeNodeType() == TreeNodeType.Connection | SelectedNode.GetTreeNodeType() == TreeNodeType.PuttySession)
+                    externalTool.Start(SelectedNode);
 			}
 			catch (Exception ex)
 			{
