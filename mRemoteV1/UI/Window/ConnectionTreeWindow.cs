@@ -133,7 +133,10 @@ namespace mRemoteNG.UI.Window
 	            olvConnections.CollapseAll();
                 olvConnections.Expand(GetRootConnectionNode());
 	        };
-	    }
+            cMenTree.Opening += (sender, args) => AddExternalApps();
+            cMenTreeImport.Click += (sender, args) => Windows.Show(WindowType.ActiveDirectoryImport);
+            cMenTreeImportPortScan.Click += (sender, args) => Windows.Show(WindowType.PortScan);
+        }
 
 	    private void PopulateTreeView()
 	    {
@@ -390,7 +393,6 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        //TODO Fix for TreeListView
         private static void EnableMenuItemsRecursive(ToolStripItemCollection items, bool enable = true)
 		{
 		    foreach (ToolStripItem item in items)
@@ -408,7 +410,6 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        //TODO Fix for TreeListView
         private void ShowHideTreeContextMenuItems(ConnectionInfo connectionInfo)
 		{
 			if (connectionInfo == null)
@@ -456,19 +457,9 @@ namespace mRemoteNG.UI.Window
                     cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
                     cMenTreeDisconnect.Enabled = false;
 
-                    var openConnections = 0;
-                    //foreach (TreeNode node in selectedNode.Nodes)
-                    //{
-                    //    if (node.Tag is ConnectionInfo)
-                    //    {
-                    //        var connectionInfo = (ConnectionInfo)node.Tag;
-                    //        openConnections = openConnections + connectionInfo.OpenConnections.Count;
-                    //    }
-                    //}
+                    var openConnections = ((ContainerInfo) connectionInfo).Children.Sum(child => child.OpenConnections.Count);
                     if (openConnections == 0)
-                    {
                         cMenTreeDisconnect.Enabled = false;
-                    }
 
                     cMenTreeToolsTransferFile.Enabled = false;
                     cMenTreeToolsExternalApps.Enabled = false;
@@ -479,14 +470,10 @@ namespace mRemoteNG.UI.Window
 					cMenTreeAddFolder.Enabled = false;
 							
 					if (connectionInfo.OpenConnections.Count == 0)
-					{
 						cMenTreeDisconnect.Enabled = false;
-					}
 							
 					if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
-					{
 						cMenTreeToolsTransferFile.Enabled = false;
-					}
 							
 					cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
 					cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
@@ -603,33 +590,9 @@ namespace mRemoteNG.UI.Window
 		}
 
         //TODO Fix for TreeListView
-        private void cMenTree_DropDownOpening(object sender, EventArgs e)
-		{
-			AddExternalApps();
-		}
-        
-        //TODO Fix for TreeListView
-        private void cMenTreeToolsExternalAppsEntry_Click(object sender, EventArgs e)
-		{
-			StartExternalApp((Tools.ExternalTool)((ToolStripMenuItem)sender).Tag);
-		}
-
-        //TODO Fix for TreeListView
         private void cMenTreeImportFile_Click(object sender, EventArgs e)
 		{
             Import.ImportFromFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode, true);
-		}
-
-        //TODO Fix for TreeListView
-        private void cMenTreeImportActiveDirectory_Click(object sender, EventArgs e)
-		{
-            Windows.Show(WindowType.ActiveDirectoryImport);
-		}
-
-        //TODO Fix for TreeListView
-        private void cMenTreeImportPortScan_Click(object sender, EventArgs e)
-		{
-            Windows.Show(WindowType.PortScan);
 		}
 
         //TODO Fix for TreeListView
@@ -747,7 +710,7 @@ namespace mRemoteNG.UI.Window
 				        Image = extA.Image
 				    };
 
-				    menuItem.Click += cMenTreeToolsExternalAppsEntry_Click;
+				    menuItem.Click += (sender, args) => StartExternalApp((Tools.ExternalTool)((ToolStripMenuItem)sender).Tag);
 					cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
 				}
 			}

@@ -163,7 +163,6 @@ namespace mRemoteNG.UI.Window
             this.cMenTree.Name = "cMenTree";
             this.cMenTree.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
             this.cMenTree.Size = new System.Drawing.Size(200, 364);
-            this.cMenTree.Opening += new System.ComponentModel.CancelEventHandler(this.cMenTree_DropDownOpening);
             // 
             // cMenTreeConnect
             // 
@@ -312,14 +311,12 @@ namespace mRemoteNG.UI.Window
             this.cMenTreeImportActiveDirectory.Name = "cMenTreeImportActiveDirectory";
             this.cMenTreeImportActiveDirectory.Size = new System.Drawing.Size(226, 22);
             this.cMenTreeImportActiveDirectory.Text = "Import from &Active Directory...";
-            this.cMenTreeImportActiveDirectory.Click += new System.EventHandler(this.cMenTreeImportActiveDirectory_Click);
             // 
             // cMenTreeImportPortScan
             // 
             this.cMenTreeImportPortScan.Name = "cMenTreeImportPortScan";
             this.cMenTreeImportPortScan.Size = new System.Drawing.Size(226, 22);
             this.cMenTreeImportPortScan.Text = "Import from &Port Scan...";
-            this.cMenTreeImportPortScan.Click += new System.EventHandler(this.cMenTreeImportPortScan_Click);
             // 
             // cMenTreeExportFile
             // 
