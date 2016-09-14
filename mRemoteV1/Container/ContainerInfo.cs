@@ -27,6 +27,11 @@ namespace mRemoteNG.Container
             return TreeNodeType.Container;
         }
 
+        public bool HasChildren()
+        {
+            return Children.Count > 0;
+        }
+
         public void AddChild(ConnectionInfo newChildItem)
         {
             newChildItem.Parent = this;
