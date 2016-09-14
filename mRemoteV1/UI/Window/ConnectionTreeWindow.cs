@@ -119,6 +119,7 @@ namespace mRemoteNG.UI.Window
             olvConnections.ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
             olvConnections.ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
 	        olvConnections.KeyDown += tvConnections_KeyDown;
+	        olvConnections.KeyPress += tvConnections_KeyPress;
 	    }
 
 	    private void SetMenuEventHandlers()
@@ -793,22 +794,16 @@ namespace mRemoteNG.UI.Window
 		{
 			txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextColor;
 			if (txtSearch.Text == Language.strSearchPrompt)
-			{
 				txtSearch.Text = "";
-			}
 		}
 
-        //TODO Fix for TreeListView
         private void txtSearch_LostFocus(object sender, EventArgs e)
 		{
-			if (txtSearch.Text == "")
-			{
-				txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextPromptColor;
-				txtSearch.Text = Language.strSearchPrompt;
-			}
+            if (txtSearch.Text != "") return;
+            txtSearch.ForeColor = Themes.ThemeManager.ActiveTheme.SearchBoxTextPromptColor;
+            txtSearch.Text = Language.strSearchPrompt;
 		}
 
-        //TODO Fix for TreeListView
         private void txtSearch_KeyDown(object sender, KeyEventArgs e)
 		{
 			try
@@ -843,6 +838,7 @@ namespace mRemoteNG.UI.Window
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
 		{
+            if (txtSearch.Text == "") return;
             _nodeSearcher.SearchByName(txtSearch.Text);
             JumpToNode(_nodeSearcher.CurrentMatch);
         }
@@ -866,18 +862,14 @@ namespace mRemoteNG.UI.Window
             ExpandParentsRecursive(connectionInfo.Parent);
         }
 
-        //TODO Fix for TreeListView
         private void tvConnections_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			try
 			{
-				if (char.IsLetterOrDigit(e.KeyChar))
-				{
-					txtSearch.Text = e.KeyChar.ToString();
-							
-					txtSearch.Focus();
-					txtSearch.SelectionStart = txtSearch.TextLength;
-				}
+			    if (!char.IsLetterOrDigit(e.KeyChar)) return;
+			    txtSearch.Text = e.KeyChar.ToString();
+			    txtSearch.Focus();
+			    txtSearch.SelectionStart = txtSearch.TextLength;
 			}
 			catch (Exception ex)
 			{
@@ -885,7 +877,6 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        //TODO Fix for TreeListView
         private void tvConnections_KeyDown(object sender, KeyEventArgs e)
 		{
 			try
