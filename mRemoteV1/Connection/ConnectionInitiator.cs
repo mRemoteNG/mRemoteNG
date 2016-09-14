@@ -248,9 +248,6 @@ namespace mRemoteNG.Connection
                 Runtime.MessageCollector.AddMessage(MessageClass.ReportMsg, string.Format(Language.strConnenctionClosedByUser, Prot.InterfaceControl.Info.Hostname, Prot.InterfaceControl.Info.Protocol.ToString(), Environment.UserName));
                 Prot.InterfaceControl.Info.OpenConnections.Remove(Prot);
 
-                if (Prot.InterfaceControl.Info.OpenConnections.Count < 1 && Prot.InterfaceControl.Info.IsQuickConnect == false)
-                    ConnectionTreeNode.SetNodeImage(Prot.InterfaceControl.Info.TreeNode, TreeImageType.ConnectionClosed);
-
                 if (Prot.InterfaceControl.Info.PostExtApp == "") return;
                 var extA = Runtime.GetExtAppByName(Prot.InterfaceControl.Info.PostExtApp);
                 extA?.Start(Prot.InterfaceControl.Info);

@@ -240,11 +240,6 @@ namespace mRemoteNG.Tree
                 parentNode.Nodes.Add(newTreeNode);
             }
         }
-		
-		public static void SetNodeImage(TreeNode treeNode, TreeImageType Img)
-		{
-			SetNodeImageIndex(treeNode, (int)Img);
-		}
         #endregion
 
         #region Private Methods
