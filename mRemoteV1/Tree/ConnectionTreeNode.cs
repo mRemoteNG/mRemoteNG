@@ -12,32 +12,6 @@ namespace mRemoteNG.Tree
 	public static class ConnectionTreeNode
     {
         //TODO Everything in this class needs to be updated / rewritten to work with the TreeListView/ConnectionTreeModel
-        #region Public Methods
-		public static string GetConstantID(TreeNode node)
-		{
-			if (GetNodeType(node) == TreeNodeType.Connection)
-				return ((ConnectionInfo) node.Tag).ConstantID;
-		    if (GetNodeType(node) == TreeNodeType.Container)
-		        return ((ContainerInfo) node.Tag).ConstantID;
-
-		    return null;
-		}
-		
-		public static TreeNode GetNodeFromPositionID(int id)
-		{
-			foreach (ConnectionInfo connection in Runtime.ConnectionList)
-			{
-				if (connection.PositionID == id)
-				{
-				    if (connection.IsContainer)
-						return connection.Parent.TreeNode;
-				    return connection.TreeNode;
-				}
-			}
-				
-			return null;
-		}
-		
 		public static TreeNode GetNodeFromConstantID(string id)
 		{
             foreach (ConnectionInfo connectionInfo in Runtime.ConnectionList)
@@ -101,21 +75,6 @@ namespace mRemoteNG.Tree
 			return TreeNodeType.None;
 		}
 		
-		public static bool IsEmpty(TreeNode treeNode)
-		{
-			try
-			{
-				if (treeNode.Nodes.Count > 0)
-					return false;
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "IsEmpty (Tree.Node) failed" + Environment.NewLine + ex.Message, true);
-			}
-				
-			return true;
-		}
-		
 		public static TreeNode AddNode(TreeNodeType nodeType, string name = null)
 		{
 			try
@@ -155,25 +114,5 @@ namespace mRemoteNG.Tree
 				
 			return null;
 		}
-        #endregion
-
-        #region Private Methods
-        private delegate void SetNodeImageIndexDelegate(TreeNode treeNode, int imageIndex);
-        private static void SetNodeImageIndex(TreeNode treeNode, int imageIndex)
-        {
-            if (treeNode?.TreeView == null)
-            {
-                return;
-            }
-            if (treeNode.TreeView.InvokeRequired)
-            {
-                treeNode.TreeView.Invoke(new SetNodeImageIndexDelegate(SetNodeImageIndex), new object[] { treeNode, imageIndex });
-                return;
-            }
-
-            treeNode.ImageIndex = imageIndex;
-            treeNode.SelectedImageIndex = imageIndex;
-        }
-        #endregion
     }
 }
