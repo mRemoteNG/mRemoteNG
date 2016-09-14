@@ -39,6 +39,7 @@ namespace mRemoteNG.UI.Forms
         private ConnectionInfo _selectedConnection;
         private SystemMenu _systemMenu;
         private MiscTools.Fullscreen _fullscreen;
+        private ConnectionTreeWindow ConnectionTreeWindow { get; set; }
 
 
 
@@ -168,10 +169,8 @@ namespace mRemoteNG.UI.Forms
 			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
             Opacity = 1;
 
-            Windows.treeForm.ConnectionTreeModel = Runtime.ConnectionTreeModel;
-            //Windows.treeForm.ExpandPreviouslyOpenedFolders();
-            //Windows.treeForm.EnsureRootNodeVisible();
-            //Windows.treeForm.OpenConnectionsFromLastSession();
+            ConnectionTreeWindow = Windows.treeForm;
+            ConnectionTreeWindow.ConnectionTreeModel = Runtime.ConnectionTreeModel;
         }
 
         private void ApplySpecialSettingsForPortableVersion()
@@ -456,8 +455,9 @@ namespace mRemoteNG.UI.Forms
         #region Menu
         #region File
         private void mMenFile_DropDownOpening(Object sender, EventArgs e)
-		{
-            if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Root)
+        {
+            var selectedNodeType = ConnectionTreeWindow.SelectedNode?.GetTreeNodeType();
+            if (selectedNodeType == TreeNodeType.Root)
 			{
 				mMenFileNewConnection.Enabled = true;
 				mMenFileNewFolder.Enabled = true;
@@ -470,7 +470,7 @@ namespace mRemoteNG.UI.Forms
 				mMenFileDuplicate.Text = Language.strMenuDuplicate;
                 mMenReconnectAll.Text = Language.strMenuReconnectAll;
             }
-            else if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Container)
+            else if (selectedNodeType == TreeNodeType.Container)
 			{
 				mMenFileNewConnection.Enabled = true;
 				mMenFileNewFolder.Enabled = true;
@@ -484,7 +484,7 @@ namespace mRemoteNG.UI.Forms
                 mMenReconnectAll.Text = Language.strMenuReconnectAll;
 
             }
-            else if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection)
+            else if (selectedNodeType == TreeNodeType.Connection)
 			{
 				mMenFileNewConnection.Enabled = true;
 				mMenFileNewFolder.Enabled = true;
@@ -497,7 +497,7 @@ namespace mRemoteNG.UI.Forms
 				mMenFileDuplicate.Text = Language.strMenuDuplicateConnection;
                 mMenReconnectAll.Text = Language.strMenuReconnectAll;
             }
-            else if ((ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttyRoot) || (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession))
+            else if (selectedNodeType == TreeNodeType.PuttyRoot || selectedNodeType == TreeNodeType.PuttySession)
 			{
 				mMenFileNewConnection.Enabled = false;
 				mMenFileNewFolder.Enabled = false;
@@ -527,13 +527,13 @@ namespace mRemoteNG.UI.Forms
 
         private void mMenFileNewConnection_Click(object sender, EventArgs e)
 		{
-			Windows.treeForm.AddConnection();
+            ConnectionTreeWindow.AddConnection();
             Runtime.SaveConnectionsBG();
 		}
 
         private void mMenFileNewFolder_Click(object sender, EventArgs e)
 		{
-            Windows.treeForm.AddFolder();
+            ConnectionTreeWindow.AddFolder();
             Runtime.SaveConnectionsBG();
 		}
 
@@ -578,19 +578,19 @@ namespace mRemoteNG.UI.Forms
 
         private void mMenFileDelete_Click(object sender, EventArgs e)
 		{
-            ConnectionTree.DeleteSelectedNode();
+            ConnectionTreeWindow.DeleteSelectedNode();
             Runtime.SaveConnectionsBG();
 		}
 
         private void mMenFileRename_Click(object sender, EventArgs e)
 		{
-			ConnectionTree.StartRenameSelectedNode();
+            ConnectionTreeWindow.RenameSelectedNode();
             Runtime.SaveConnectionsBG();
 		}
 
         private void mMenFileDuplicate_Click(object sender, EventArgs e)
 		{
-            ConnectionTreeNode.CloneNode(ConnectionTree.SelectedNode);
+            ConnectionTreeWindow.DuplicateSelectedNode();
             Runtime.SaveConnectionsBG();
 		}
 

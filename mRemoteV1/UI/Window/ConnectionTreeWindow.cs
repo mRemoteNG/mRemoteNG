@@ -20,7 +20,7 @@ namespace mRemoteNG.UI.Window
 	    private ConnectionTreeModel _connectionTreeModel;
 	    private ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
 
-	    private ConnectionInfo SelectedNode => (ConnectionInfo) olvConnections.SelectedObject;
+	    public ConnectionInfo SelectedNode => (ConnectionInfo) olvConnections.SelectedObject;
 
 	    public ConnectionTreeModel ConnectionTreeModel
 	    {
