@@ -816,18 +816,16 @@ namespace mRemoteNG.UI.Window
 				if (e.KeyCode == Keys.Escape)
 				{
 					e.Handled = true;
-					tvConnections.Focus();
+				    olvConnections.Focus();
 				}
 				else if (e.KeyCode == Keys.Up)
 				{
-                    //tvConnections.SelectedNode = tvConnections.SelectedNode.PrevVisibleNode;
                     var match = _nodeSearcher.PreviousMatch();
                     JumpToNode(match);
                     e.Handled = true;
 				}
 				else if (e.KeyCode == Keys.Down)
 				{
-                    //tvConnections.SelectedNode = tvConnections.SelectedNode.NextVisibleNode;
 				    var match = _nodeSearcher.NextMatch();
 				    JumpToNode(match);
                     e.Handled = true;
