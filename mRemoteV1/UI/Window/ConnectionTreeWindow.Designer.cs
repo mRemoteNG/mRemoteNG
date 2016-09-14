@@ -489,7 +489,6 @@ namespace mRemoteNG.UI.Window
             this.mMenViewExpandAllFolders.Name = "mMenViewExpandAllFolders";
             this.mMenViewExpandAllFolders.Size = new System.Drawing.Size(172, 22);
             this.mMenViewExpandAllFolders.Text = "Expand all folders";
-            this.mMenViewExpandAllFolders.Click += new System.EventHandler(this.mMenViewExpandAllFolders_Click);
             // 
             // mMenViewCollapseAllFolders
             // 
@@ -497,7 +496,6 @@ namespace mRemoteNG.UI.Window
             this.mMenViewCollapseAllFolders.Name = "mMenViewCollapseAllFolders";
             this.mMenViewCollapseAllFolders.Size = new System.Drawing.Size(172, 22);
             this.mMenViewCollapseAllFolders.Text = "Collapse all folders";
-            this.mMenViewCollapseAllFolders.Click += new System.EventHandler(this.mMenViewCollapseAllFolders_Click);
             // 
             // mMenSortAscending
             // 

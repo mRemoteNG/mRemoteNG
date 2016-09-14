@@ -96,9 +96,19 @@ namespace mRemoteNG.UI.Window
 	    }
 
 	    private void SetTreeEventHandlers()
-        {
-            olvConnections.Collapsed += (sender, args) => ((ContainerInfo)args.Model).IsExpanded = false;
-            olvConnections.Expanded += (sender, args) => ((ContainerInfo)args.Model).IsExpanded = true;
+	    {
+	        olvConnections.Collapsed += (sender, args) =>
+	        {
+	            var container = args.Model as ContainerInfo;
+                if (container != null)
+                    container.IsExpanded = false;
+	        };
+            olvConnections.Expanded += (sender, args) =>
+            {
+                var container = args.Model as ContainerInfo;
+                if (container != null)
+                    container.IsExpanded = true;
+            };
             olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
             olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
             olvConnections.SelectionChanged += tvConnections_AfterSelect;
@@ -114,7 +124,13 @@ namespace mRemoteNG.UI.Window
             cMenTreeDuplicate.Click += (sender, args) => DuplicateSelectedNode();
             cMenTreeRename.Click += (sender, args) => RenameSelectedNode();
             cMenTreeDelete.Click += (sender, args) => DeleteSelectedNode();
-        }
+            mMenViewExpandAllFolders.Click += (sender, args) => olvConnections.ExpandAll();
+	        mMenViewCollapseAllFolders.Click += (sender, args) =>
+	        {
+	            olvConnections.CollapseAll();
+                olvConnections.Expand(GetRootConnectionNode());
+	        };
+	    }
 
 	    private void PopulateTreeView()
 	    {
@@ -766,26 +782,6 @@ namespace mRemoteNG.UI.Window
 			{
 				Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeToolsExternalAppsEntry_Click failed (UI.Window.ConnectionTreeWindow)", ex);
 			}
-		}
-        #endregion
-
-        #region Menu
-        private void mMenViewExpandAllFolders_Click(object sender, EventArgs e)
-		{
-            olvConnections.ExpandAll();
-		}
-
-        //TODO Fix for TreeListView
-        private void mMenViewCollapseAllFolders_Click(object sender, EventArgs e)
-		{
-			if (tvConnections.SelectedNode != null)
-			{
-				if (tvConnections.SelectedNode.IsEditing)
-				{
-					tvConnections.SelectedNode.EndEdit(false);
-				}
-			}
-            ConnectionTree.CollapseAllNodes();
 		}
         #endregion
 
