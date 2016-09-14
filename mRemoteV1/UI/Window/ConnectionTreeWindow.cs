@@ -543,7 +543,7 @@ namespace mRemoteNG.UI.Window
 		{
             ConnectionTreeModel.DeleteNode(SelectedNode);
             Runtime.SaveConnectionsBG();
-            olvConnections.RebuildAll(true);
+            olvConnections.RefreshObject(SelectedNode);
 		}
 
         //TODO Fix for TreeListView
