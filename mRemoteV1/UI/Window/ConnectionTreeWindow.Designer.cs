@@ -264,7 +264,6 @@ namespace mRemoteNG.UI.Window
             this.cMenTreeDuplicate.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
             this.cMenTreeDuplicate.Size = new System.Drawing.Size(199, 22);
             this.cMenTreeDuplicate.Text = "Duplicate";
-            this.cMenTreeDuplicate.Click += new System.EventHandler(this.cMenTreeDuplicate_Click);
             // 
             // cMenTreeRename
             // 
@@ -273,7 +272,6 @@ namespace mRemoteNG.UI.Window
             this.cMenTreeRename.ShortcutKeys = System.Windows.Forms.Keys.F2;
             this.cMenTreeRename.Size = new System.Drawing.Size(199, 22);
             this.cMenTreeRename.Text = "Rename";
-            this.cMenTreeRename.Click += new System.EventHandler(this.cMenTreeRename_Click);
             // 
             // cMenTreeDelete
             // 
@@ -282,7 +280,6 @@ namespace mRemoteNG.UI.Window
             this.cMenTreeDelete.ShortcutKeys = System.Windows.Forms.Keys.Delete;
             this.cMenTreeDelete.Size = new System.Drawing.Size(199, 22);
             this.cMenTreeDelete.Text = "Delete";
-            this.cMenTreeDelete.Click += new System.EventHandler(this.cMenTreeDelete_Click);
             // 
             // cMenTreeSep3
             // 

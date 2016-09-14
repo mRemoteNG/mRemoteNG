@@ -91,17 +91,30 @@ namespace mRemoteNG.UI.Window
 
 	    private void SetEventHandlers()
 	    {
-	        olvConnections.Collapsed += (sender, args) => ((ContainerInfo) args.Model).IsExpanded = false;
-            olvConnections.Expanded += (sender, args) => ((ContainerInfo) args.Model).IsExpanded = true;
-	        olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
-	        olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
-	        olvConnections.SelectionChanged += tvConnections_AfterSelect;
-	        olvConnections.CellClick += tvConnections_NodeMouseSingleClick;
-	        olvConnections.CellClick += tvConnections_NodeMouseDoubleClick;
-	        olvConnections.CellToolTipShowing += tvConnections_CellToolTipShowing;
+	        SetTreeEventHandlers();
+	        SetMenuEventHandlers();
+	    }
+
+	    private void SetTreeEventHandlers()
+        {
+            olvConnections.Collapsed += (sender, args) => ((ContainerInfo)args.Model).IsExpanded = false;
+            olvConnections.Expanded += (sender, args) => ((ContainerInfo)args.Model).IsExpanded = true;
+            olvConnections.BeforeLabelEdit += tvConnections_BeforeLabelEdit;
+            olvConnections.AfterLabelEdit += tvConnections_AfterLabelEdit;
+            olvConnections.SelectionChanged += tvConnections_AfterSelect;
+            olvConnections.CellClick += tvConnections_NodeMouseSingleClick;
+            olvConnections.CellClick += tvConnections_NodeMouseDoubleClick;
+            olvConnections.CellToolTipShowing += tvConnections_CellToolTipShowing;
             olvConnections.ModelCanDrop += _dragAndDropHandler.HandleEvent_ModelCanDrop;
             olvConnections.ModelDropped += _dragAndDropHandler.HandleEvent_ModelDropped;
-	    }
+        }
+
+	    private void SetMenuEventHandlers()
+	    {
+            cMenTreeDuplicate.Click += (sender, args) => DuplicateSelectedNode();
+            cMenTreeRename.Click += (sender, args) => RenameSelectedNode();
+            cMenTreeDelete.Click += (sender, args) => DeleteSelectedNode();
+        }
 
 	    private void PopulateTreeView()
 	    {
@@ -217,6 +230,27 @@ namespace mRemoteNG.UI.Window
 	    {
             olvConnections.EnsureModelVisible(GetRootConnectionNode());
 	    }
+
+        public void DuplicateSelectedNode()
+        {
+            var newNode = SelectedNode.Clone();
+            newNode.Parent.SetChildBelow(newNode, SelectedNode);
+            Runtime.SaveConnectionsBG();
+            olvConnections.RefreshObject(SelectedNode);
+        }
+
+        public void RenameSelectedNode()
+        {
+            olvConnections.SelectedItem.BeginEdit();
+            Runtime.SaveConnectionsBG();
+        }
+
+        public void DeleteSelectedNode()
+        {
+            ConnectionTreeModel.DeleteNode(SelectedNode);
+            Runtime.SaveConnectionsBG();
+            olvConnections.RefreshObject(SelectedNode);
+        }
 
         #region Private Methods
         private void tvConnections_BeforeLabelEdit(object sender, LabelEditEventArgs e)
@@ -523,27 +557,6 @@ namespace mRemoteNG.UI.Window
         private void cMenTreeToolsExternalAppsEntry_Click(object sender, EventArgs e)
 		{
 			StartExternalApp((Tools.ExternalTool)((ToolStripMenuItem)sender).Tag);
-		}
-
-        private void cMenTreeDuplicate_Click(object sender, EventArgs e)
-        {
-            var newNode = SelectedNode.Clone();
-            newNode.Parent.SetChildBelow(newNode, SelectedNode);
-            Runtime.SaveConnectionsBG();
-            olvConnections.RefreshObject(SelectedNode);
-		}
-
-        private void cMenTreeRename_Click(object sender, EventArgs e)
-		{
-            olvConnections.SelectedItem.BeginEdit();
-            Runtime.SaveConnectionsBG();
-		}
-
-        private void cMenTreeDelete_Click(object sender, EventArgs e)
-		{
-            ConnectionTreeModel.DeleteNode(SelectedNode);
-            Runtime.SaveConnectionsBG();
-            olvConnections.RefreshObject(SelectedNode);
 		}
 
         //TODO Fix for TreeListView
