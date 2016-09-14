@@ -19,13 +19,15 @@ namespace mRemoteNG.Tree
 
         internal IEnumerable<ConnectionInfo> SearchByName(string searchText)
         {
-            if (searchText == "")
-                ResetMatches();
-            else
+            ResetMatches();
+            if (searchText == "") return Matches;
+            var nodes = (List<ConnectionInfo>)_connectionTreeModel.GetRecursiveChildList();
+            foreach (var node in nodes)
             {
-                Matches = (List<ConnectionInfo>)_connectionTreeModel.GetRecursiveChildList().Where(node => node.Name.Contains(searchText));
-                _currentMatch = Matches.First();
+                if (node.Name.ToLowerInvariant().Contains(searchText.ToLowerInvariant()))
+                    Matches.Add(node);
             }
+            _currentMatch = Matches.First();
             return Matches;
         }
 
