@@ -15,6 +15,16 @@ namespace mRemoteNG.Tree
             RootNodes.Add(rootNode);
         }
 
+        public IEnumerable<ConnectionInfo> GetRecursiveChildList()
+        {
+            var list = new List<ConnectionInfo>();
+            foreach (var rootNode in RootNodes)
+            {
+                list.AddRange(GetRecursiveChildList(rootNode));
+            }
+            return list;
+        }
+
         public IEnumerable<ConnectionInfo> GetRecursiveChildList(ContainerInfo container)
         {
             return container.GetRecursiveChildList();
