@@ -118,10 +118,12 @@ namespace mRemoteNG.UI.Window
             this.olvConnections.Location = new System.Drawing.Point(0, 0);
             this.olvConnections.MultiSelect = false;
             this.olvConnections.Name = "olvConnections";
+            this.olvConnections.SelectedBackColor = System.Drawing.SystemColors.Highlight;
             this.olvConnections.ShowGroups = false;
             this.olvConnections.Size = new System.Drawing.Size(192, 410);
             this.olvConnections.SmallImageList = this.imgListTree;
             this.olvConnections.TabIndex = 20;
+            this.olvConnections.UnfocusedSelectedBackColor = System.Drawing.Color.Yellow;
             this.olvConnections.UseCompatibleStateImageBehavior = false;
             this.olvConnections.View = System.Windows.Forms.View.Details;
             this.olvConnections.VirtualMode = true;
