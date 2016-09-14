@@ -29,61 +29,6 @@ namespace mRemoteNG.Tree
         }
 
         //TODO Fix for TreeListView
-        public static void CollapseAllNodes()
-        {
-            TreeView.BeginUpdate();
-            foreach (TreeNode treeNode in TreeView.Nodes[0].Nodes)
-            {
-                treeNode.Collapse(false);
-            }
-            TreeView.EndUpdate();
-        }
-
-        //TODO Fix for TreeListView
-        public static void MoveNodeDown()
-        {
-            try
-            {
-                if (SelectedNode?.NextNode == null) return;
-                TreeView.BeginUpdate();
-                TreeView.Sorted = false;
-
-                TreeNode newNode = (TreeNode)SelectedNode.Clone();
-                SelectedNode.Parent.Nodes.Insert(SelectedNode.Index + 2, newNode);
-                SelectedNode.Remove();
-                SelectedNode = newNode;
-
-                TreeView.EndUpdate();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "MoveNodeDown failed" + Environment.NewLine + ex.Message, true);
-            }
-        }
-
-        //TODO Fix for TreeListView
-        public static void MoveNodeUp()
-        {
-            try
-            {
-                if (SelectedNode?.PrevNode == null) return;
-                TreeView.BeginUpdate();
-                TreeView.Sorted = false;
-
-                TreeNode newNode = (TreeNode)SelectedNode.Clone();
-                SelectedNode.Parent.Nodes.Insert(SelectedNode.Index - 1, newNode);
-                SelectedNode.Remove();
-                SelectedNode = newNode;
-
-                TreeView.EndUpdate();
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "MoveNodeUp failed" + Environment.NewLine + ex.Message, true);
-            }
-        }
-
-        //TODO Fix for TreeListView
         public static void Sort(TreeNode treeNode, SortOrder sorting)
         {
             if (TreeView == null)
