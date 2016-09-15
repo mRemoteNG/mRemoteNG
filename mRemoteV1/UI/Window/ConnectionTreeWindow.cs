@@ -127,6 +127,7 @@ namespace mRemoteNG.UI.Window
 
 	    private void SetContextMenuEventHandlers()
 	    {
+	        _contextMenu.Opening += (sender, args) => _contextMenu.ShowHideTreeContextMenuItems(SelectedNode);
 	        _contextMenu.ConnectClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DoNotJump);
 	        _contextMenu.ConnectToConsoleSessionClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
             _contextMenu.DontConnectToConsoleSessionClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
