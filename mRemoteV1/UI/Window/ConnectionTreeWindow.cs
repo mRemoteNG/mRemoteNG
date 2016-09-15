@@ -3,6 +3,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -18,9 +19,9 @@ namespace mRemoteNG.UI.Window
 	public partial class ConnectionTreeWindow
 	{
 	    private ConnectionTreeModel _connectionTreeModel;
-	    private ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
+	    private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private NodeSearcher _nodeSearcher;
-	    private ConnectionContextMenu _contextMenu = new ConnectionContextMenu();
+	    private readonly ConnectionContextMenu _contextMenu = new ConnectionContextMenu();
 
 	    public ConnectionInfo SelectedNode => (ConnectionInfo) olvConnections.SelectedObject;
 
@@ -145,8 +146,8 @@ namespace mRemoteNG.UI.Window
             _contextMenu.ExportFileClicked += (sender, args) => Export.ExportToFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode, Runtime.ConnectionTreeModel);
             _contextMenu.AddConnectionClicked += cMenTreeAddConnection_Click;
             _contextMenu.AddFolderClicked += cMenTreeAddFolder_Click;
-            _contextMenu.SortAscendingClicked += cMenTreeToolsSortAscending_Click;
-            _contextMenu.SortDescendingClicked += cMenTreeToolsSortDescending_Click;
+            _contextMenu.SortAscendingClicked += (sender, args) => SortNodes(ListSortDirection.Ascending);
+            _contextMenu.SortDescendingClicked += (sender, args) => SortNodes(ListSortDirection.Descending); ;
             _contextMenu.MoveUpClicked += cMenTreeMoveUp_Click;
             _contextMenu.MoveDownClicked += cMenTreeMoveDown_Click;
             _contextMenu.ExternalToolClicked += (sender, args) => StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
@@ -160,7 +161,8 @@ namespace mRemoteNG.UI.Window
 	            olvConnections.CollapseAll();
                 olvConnections.Expand(GetRootConnectionNode());
 	        };
-        }
+	        mMenSortAscending.Click += (sender, args) => SortNodesRecursive(GetRootConnectionNode(), ListSortDirection.Ascending);
+	    }
 
 	    private void PopulateTreeView()
 	    {
@@ -404,32 +406,23 @@ namespace mRemoteNG.UI.Window
             Runtime.SaveConnectionsBG();
 		}
 
-        //TODO Fix for TreeListView
-        private void mMenSortAscending_Click(object sender, EventArgs e)
-		{
-			tvConnections.BeginUpdate();
-            ConnectionTree.Sort(tvConnections.Nodes[0], SortOrder.Ascending);
-			tvConnections.EndUpdate();
+	    private void SortNodes(ListSortDirection sortDirection)
+	    {
+            var selectedNodeAsContainer = SelectedNode as ContainerInfo;
+            if (selectedNodeAsContainer != null)
+                selectedNodeAsContainer.Sort(sortDirection);
+            else
+                SelectedNode.Parent.Sort(sortDirection);
+            olvConnections.RefreshObject(SelectedNode);
             Runtime.SaveConnectionsBG();
-		}
+        }
 
-        //TODO Fix for TreeListView
-        private void cMenTreeToolsSortAscending_Click(object sender, EventArgs e)
-		{
-			tvConnections.BeginUpdate();
-            ConnectionTree.Sort(tvConnections.SelectedNode, SortOrder.Ascending);
-			tvConnections.EndUpdate();
+	    private void SortNodesRecursive(ContainerInfo rootSortTarget, ListSortDirection sortDirection)
+	    {
+	        rootSortTarget.SortRecursive(sortDirection);
+            olvConnections.RefreshObject(rootSortTarget);
             Runtime.SaveConnectionsBG();
-		}
-
-        //TODO Fix for TreeListView
-        private void cMenTreeToolsSortDescending_Click(object sender, EventArgs e)
-		{
-			tvConnections.BeginUpdate();
-            ConnectionTree.Sort(tvConnections.SelectedNode, SortOrder.Descending);
-			tvConnections.EndUpdate();
-            Runtime.SaveConnectionsBG();
-		}
+        }
 
         private void cMenTreeMoveUp_Click(object sender, EventArgs e)
 		{

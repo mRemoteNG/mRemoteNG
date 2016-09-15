@@ -2,7 +2,6 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Credential;
 using mRemoteNG.Messages;

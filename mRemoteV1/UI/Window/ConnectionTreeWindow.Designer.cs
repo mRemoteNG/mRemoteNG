@@ -188,7 +188,6 @@ namespace mRemoteNG.UI.Window
             this.mMenSortAscending.Image = global::mRemoteNG.Resources.Sort_AZ;
             this.mMenSortAscending.Name = "mMenSortAscending";
             this.mMenSortAscending.Size = new System.Drawing.Size(28, 20);
-            this.mMenSortAscending.Click += new System.EventHandler(this.mMenSortAscending_Click);
             // 
             // ConnectionTreeWindow
             // 

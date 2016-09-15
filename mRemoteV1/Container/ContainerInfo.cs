@@ -1,6 +1,10 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using mRemoteNG.Connection;
 using System.ComponentModel;
+using System.Globalization;
+using System.Linq;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -101,6 +105,34 @@ namespace mRemoteNG.Container
         {
             var originalIndex = Children.IndexOf(child);
             SetChildPosition(child, originalIndex + 1);
+        }
+
+        public void Sort(ListSortDirection sortDirection = ListSortDirection.Ascending)
+        {
+            SortOn(connectionInfo => connectionInfo.Name, sortDirection);
+        }
+
+        public void SortOn<TProperty>(Func<ConnectionInfo, TProperty> propertyToCompare, ListSortDirection sortDirection = ListSortDirection.Ascending) 
+            where TProperty : IComparable<TProperty>
+        {
+            var connectionComparer = new ConnectionInfoComparer<TProperty>(propertyToCompare)
+            {
+                SortDirection = sortDirection
+            };
+            Children.Sort(connectionComparer);
+        }
+
+        public void SortRecursive(ListSortDirection sortDirection = ListSortDirection.Ascending)
+        {
+            SortOnRecursive(connectionInfo => connectionInfo.Name, sortDirection);
+        }
+
+        public void SortOnRecursive<TProperty>(Func<ConnectionInfo, TProperty> propertyToCompare, ListSortDirection sortDirection = ListSortDirection.Ascending)
+            where TProperty : IComparable<TProperty>
+        {
+            foreach (var child in Children.OfType<ContainerInfo>())
+                child.SortOnRecursive(propertyToCompare, sortDirection);
+            SortOn(propertyToCompare, sortDirection);
         }
 
         public override void Dispose()
