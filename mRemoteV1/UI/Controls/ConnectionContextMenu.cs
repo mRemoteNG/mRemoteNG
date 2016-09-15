@@ -1,5 +1,13 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
+using mRemoteNG.App;
+using mRemoteNG.Connection;
+using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Container;
+using mRemoteNG.Root.PuttySessions;
+using mRemoteNG.Tools;
+using mRemoteNG.Tree.Root;
 
 
 namespace mRemoteNG.UI.Controls
@@ -42,6 +50,8 @@ namespace mRemoteNG.UI.Controls
         public ConnectionContextMenu()
         {
             InitializeComponent();
+            ApplyLanguage();
+            Opening += (sender, args) => AddExternalApps();
         }
 
         private void InitializeComponent()
@@ -346,7 +356,190 @@ namespace mRemoteNG.UI.Controls
             _cMenTreeMoveDown.Click += (sender, args) => OnMoveDownClicked(args);
         }
 
+        private void ApplyLanguage()
+        {
+            _cMenTreeConnect.Text = Language.strConnect;
+            _cMenTreeConnectWithOptions.Text = Language.strConnectWithOptions;
+            _cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.strConnectToConsoleSession;
+            _cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text = Language.strDontConnectToConsoleSessionMenuItem;
+            _cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.strConnectInFullscreen;
+            _cMenTreeConnectWithOptionsNoCredentials.Text = Language.strConnectNoCredentials;
+            _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.strChoosePanelBeforeConnecting;
+            _cMenTreeDisconnect.Text = Language.strMenuDisconnect;
 
+            _cMenTreeToolsExternalApps.Text = Language.strMenuExternalTools;
+            _cMenTreeToolsTransferFile.Text = Language.strMenuTransferFile;
+
+            _cMenTreeDuplicate.Text = Language.strDuplicate;
+            _cMenTreeRename.Text = Language.strRename;
+            _cMenTreeDelete.Text = Language.strMenuDelete;
+
+            _cMenTreeImport.Text = Language.strImportMenuItem;
+            _cMenTreeImportFile.Text = Language.strImportFromFileMenuItem;
+            _cMenTreeImportActiveDirectory.Text = Language.strImportAD;
+            _cMenTreeImportPortScan.Text = Language.strImportPortScan;
+            _cMenTreeExportFile.Text = Language.strExportToFileMenuItem;
+
+            _cMenTreeAddConnection.Text = Language.strAddConnection;
+            _cMenTreeAddFolder.Text = Language.strAddFolder;
+
+            _cMenTreeToolsSort.Text = Language.strSort;
+            _cMenTreeToolsSortAscending.Text = Language.strSortAsc;
+            _cMenTreeToolsSortDescending.Text = Language.strSortDesc;
+            _cMenTreeMoveUp.Text = Language.strMoveUp;
+            _cMenTreeMoveDown.Text = Language.strMoveDown;
+        }
+
+        internal void ShowHideTreeContextMenuItems(ConnectionInfo connectionInfo)
+        {
+            if (connectionInfo == null)
+                return;
+
+            try
+            {
+                Enabled = true;
+                EnableMenuItemsRecursive(Items);
+                if (connectionInfo is RootPuttySessionsNodeInfo)
+                {
+                    _cMenTreeAddConnection.Enabled = false;
+                    _cMenTreeAddFolder.Enabled = false;
+                    _cMenTreeConnect.Enabled = false;
+                    _cMenTreeConnectWithOptions.Enabled = false;
+                    _cMenTreeDisconnect.Enabled = false;
+                    _cMenTreeToolsTransferFile.Enabled = false;
+                    _cMenTreeConnectWithOptions.Enabled = false;
+                    _cMenTreeToolsSort.Enabled = false;
+                    _cMenTreeToolsExternalApps.Enabled = false;
+                    _cMenTreeDuplicate.Enabled = false;
+                    _cMenTreeRename.Enabled = true;
+                    _cMenTreeDelete.Enabled = false;
+                    _cMenTreeMoveUp.Enabled = false;
+                    _cMenTreeMoveDown.Enabled = false;
+                }
+                else if (connectionInfo is RootNodeInfo)
+                {
+                    _cMenTreeConnect.Enabled = false;
+                    _cMenTreeConnectWithOptions.Enabled = false;
+                    _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+                    _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+                    _cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = false;
+                    _cMenTreeDisconnect.Enabled = false;
+                    _cMenTreeToolsTransferFile.Enabled = false;
+                    _cMenTreeToolsExternalApps.Enabled = false;
+                    _cMenTreeDuplicate.Enabled = false;
+                    _cMenTreeDelete.Enabled = false;
+                    _cMenTreeMoveUp.Enabled = false;
+                    _cMenTreeMoveDown.Enabled = false;
+                }
+                else if (connectionInfo is ContainerInfo)
+                {
+                    _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+                    _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+                    _cMenTreeDisconnect.Enabled = false;
+
+                    var openConnections = ((ContainerInfo)connectionInfo).Children.Sum(child => child.OpenConnections.Count);
+                    if (openConnections == 0)
+                        _cMenTreeDisconnect.Enabled = false;
+
+                    _cMenTreeToolsTransferFile.Enabled = false;
+                    _cMenTreeToolsExternalApps.Enabled = false;
+                }
+                else if (connectionInfo is PuttySessionInfo)
+                {
+                    _cMenTreeAddConnection.Enabled = false;
+                    _cMenTreeAddFolder.Enabled = false;
+
+                    if (connectionInfo.OpenConnections.Count == 0)
+                        _cMenTreeDisconnect.Enabled = false;
+
+                    if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+                        _cMenTreeToolsTransferFile.Enabled = false;
+
+                    _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+                    _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+                    _cMenTreeToolsSort.Enabled = false;
+                    _cMenTreeDuplicate.Enabled = false;
+                    _cMenTreeRename.Enabled = false;
+                    _cMenTreeDelete.Enabled = false;
+                    _cMenTreeMoveUp.Enabled = false;
+                    _cMenTreeMoveDown.Enabled = false;
+                }
+                else
+                {
+                    if (connectionInfo.OpenConnections.Count == 0)
+                        _cMenTreeDisconnect.Enabled = false;
+
+                    if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
+                        _cMenTreeToolsTransferFile.Enabled = false;
+
+                    if (!(connectionInfo.Protocol == ProtocolType.RDP | connectionInfo.Protocol == ProtocolType.ICA))
+                    {
+                        _cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
+                        _cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
+                    }
+
+                    if (connectionInfo.Protocol == ProtocolType.IntApp)
+                        _cMenTreeConnectWithOptionsNoCredentials.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("ShowHideTreeContextMenuItems (UI.Window.ConnectionTreeWindow) failed", ex);
+            }
+        }
+
+        private static void EnableMenuItemsRecursive(ToolStripItemCollection items, bool enable = true)
+        {
+            foreach (ToolStripItem item in items)
+            {
+                var menuItem = item as ToolStripMenuItem;
+                if (menuItem == null)
+                {
+                    continue;
+                }
+                menuItem.Enabled = enable;
+                if (menuItem.HasDropDownItems)
+                {
+                    EnableMenuItemsRecursive(menuItem.DropDownItems, enable);
+                }
+            }
+        }
+
+        private void AddExternalApps()
+        {
+            try
+            {
+                ResetExternalAppMenu();
+
+                foreach (ExternalTool extA in Runtime.ExternalTools)
+                {
+                    var menuItem = new ToolStripMenuItem
+                    {
+                        Text = extA.DisplayName,
+                        Tag = extA,
+                        Image = extA.Image
+                    };
+
+                    menuItem.Click += OnExternalToolClicked;
+                    _cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
+                }
+            }
+            catch (Exception ex)
+            {
+                Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeTools_DropDownOpening failed (UI.Window.ConnectionTreeWindow)", ex);
+            }
+        }
+
+        private void ResetExternalAppMenu()
+        {
+            if (_cMenTreeToolsExternalApps.DropDownItems.Count <= 0) return;
+            for (var i = _cMenTreeToolsExternalApps.DropDownItems.Count - 1; i >= 0; i--)
+                _cMenTreeToolsExternalApps.DropDownItems[i].Dispose();
+
+            _cMenTreeToolsExternalApps.DropDownItems.Clear();
+        }
+
+        #region Events
         public event EventHandler ConnectClicked;
         protected virtual void OnConnectClicked(EventArgs e)
         {
@@ -494,5 +687,13 @@ namespace mRemoteNG.UI.Controls
             var handler = MoveDownClicked;
             handler?.Invoke(this, e);
         }
+
+        public event EventHandler ExternalToolClicked;
+        protected virtual void OnExternalToolClicked(object sender, EventArgs e)
+        {
+            var handler = ExternalToolClicked;
+            handler?.Invoke(sender, e);
+        }
+        #endregion
     }
 }

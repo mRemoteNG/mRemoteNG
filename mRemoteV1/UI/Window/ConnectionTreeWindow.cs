@@ -1,6 +1,5 @@
 using mRemoteNG.App;
 using mRemoteNG.Connection;
-using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using System;
@@ -8,8 +7,9 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
-using mRemoteNG.Root.PuttySessions;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
+using mRemoteNG.UI.Controls;
 using WeifenLuo.WinFormsUI.Docking;
 
 
@@ -20,6 +20,7 @@ namespace mRemoteNG.UI.Window
 	    private ConnectionTreeModel _connectionTreeModel;
 	    private ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private NodeSearcher _nodeSearcher;
+	    private ConnectionContextMenu _contextMenu = new ConnectionContextMenu();
 
 	    public ConnectionInfo SelectedNode => (ConnectionInfo) olvConnections.SelectedObject;
 
@@ -72,7 +73,8 @@ namespace mRemoteNG.UI.Window
 	        olvNameColumn.ImageGetter = ConnectionImageGetter;
             olvConnections.CanExpandGetter = item => item is ContainerInfo && ((ContainerInfo)item).Children.Count > 0;
             olvConnections.ChildrenGetter = item => ((ContainerInfo)item).Children;
-        }
+            olvConnections.ContextMenuStrip = _contextMenu;
+	    }
 
 	    private void SetupDropSink()
 	    {
@@ -93,7 +95,8 @@ namespace mRemoteNG.UI.Window
 	    private void SetEventHandlers()
 	    {
 	        SetTreeEventHandlers();
-	        SetMenuEventHandlers();
+	        SetContextMenuEventHandlers();
+            SetMenuEventHandlers();
 	    }
 
 	    private void SetTreeEventHandlers()
@@ -122,20 +125,40 @@ namespace mRemoteNG.UI.Window
 	        olvConnections.KeyPress += tvConnections_KeyPress;
 	    }
 
+	    private void SetContextMenuEventHandlers()
+	    {
+	        _contextMenu.ConnectClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DoNotJump);
+	        _contextMenu.ConnectToConsoleSessionClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
+            _contextMenu.DontConnectToConsoleSessionClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
+            _contextMenu.ConnectInFullscreenClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
+            _contextMenu.ConnectWithNoCredentialsClick += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.NoCredentials);
+            _contextMenu.ChoosePanelBeforeConnectingClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
+            _contextMenu.DisconnectClicked += (sender, args) => DisconnectConnection(SelectedNode);
+            _contextMenu.TransferFileClicked += (sender, args) => SshTransferFile();
+            _contextMenu.DuplicateClicked += (sender, args) => DuplicateSelectedNode();
+            _contextMenu.RenameClicked += (sender, args) => RenameSelectedNode();
+            _contextMenu.DeleteClicked += (sender, args) => DeleteSelectedNode();
+            _contextMenu.ImportFileClicked += (sender, args) => Import.ImportFromFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode, true);
+            _contextMenu.ImportActiveDirectoryClicked += (sender, args) => Windows.Show(WindowType.ActiveDirectoryImport);
+            _contextMenu.ImportPortScanClicked += (sender, args) => Windows.Show(WindowType.PortScan);
+            _contextMenu.ExportFileClicked += (sender, args) => Export.ExportToFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode, Runtime.ConnectionTreeModel);
+            _contextMenu.AddConnectionClicked += cMenTreeAddConnection_Click;
+            _contextMenu.AddFolderClicked += cMenTreeAddFolder_Click;
+            _contextMenu.SortAscendingClicked += cMenTreeToolsSortAscending_Click;
+            _contextMenu.SortDescendingClicked += cMenTreeToolsSortDescending_Click;
+            _contextMenu.MoveUpClicked += cMenTreeMoveUp_Click;
+            _contextMenu.MoveDownClicked += cMenTreeMoveDown_Click;
+            _contextMenu.ExternalToolClicked += (sender, args) => StartExternalApp((ExternalTool)((ToolStripMenuItem)sender).Tag);
+	    }
+
 	    private void SetMenuEventHandlers()
 	    {
-            cMenTreeDuplicate.Click += (sender, args) => DuplicateSelectedNode();
-            cMenTreeRename.Click += (sender, args) => RenameSelectedNode();
-            cMenTreeDelete.Click += (sender, args) => DeleteSelectedNode();
             mMenViewExpandAllFolders.Click += (sender, args) => olvConnections.ExpandAll();
 	        mMenViewCollapseAllFolders.Click += (sender, args) =>
 	        {
 	            olvConnections.CollapseAll();
                 olvConnections.Expand(GetRootConnectionNode());
 	        };
-            cMenTree.Opening += (sender, args) => AddExternalApps();
-            cMenTreeImport.Click += (sender, args) => Windows.Show(WindowType.ActiveDirectoryImport);
-            cMenTreeImportPortScan.Click += (sender, args) => Windows.Show(WindowType.PortScan);
         }
 
 	    private void PopulateTreeView()
@@ -182,37 +205,6 @@ namespace mRemoteNG.UI.Window
             mMenViewExpandAllFolders.Text = Language.strExpandAllFolders;
             mMenViewCollapseAllFolders.Text = Language.strCollapseAllFolders;
             mMenSortAscending.ToolTipText = Language.strSortAsc;
-
-            cMenTreeConnect.Text = Language.strConnect;
-            cMenTreeConnectWithOptions.Text = Language.strConnectWithOptions;
-            cMenTreeConnectWithOptionsConnectToConsoleSession.Text = Language.strConnectToConsoleSession;
-            cMenTreeConnectWithOptionsDontConnectToConsoleSession.Text = Language.strDontConnectToConsoleSessionMenuItem;
-            cMenTreeConnectWithOptionsConnectInFullscreen.Text = Language.strConnectInFullscreen;
-            cMenTreeConnectWithOptionsNoCredentials.Text = Language.strConnectNoCredentials;
-            cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Text = Language.strChoosePanelBeforeConnecting;
-            cMenTreeDisconnect.Text = Language.strMenuDisconnect;
-
-            cMenTreeToolsExternalApps.Text = Language.strMenuExternalTools;
-            cMenTreeToolsTransferFile.Text = Language.strMenuTransferFile;
-
-            cMenTreeDuplicate.Text = Language.strDuplicate;
-            cMenTreeRename.Text = Language.strRename;
-            cMenTreeDelete.Text = Language.strMenuDelete;
-
-            cMenTreeImport.Text = Language.strImportMenuItem;
-            cMenTreeImportFile.Text = Language.strImportFromFileMenuItem;
-            cMenTreeImportActiveDirectory.Text = Language.strImportAD;
-            cMenTreeImportPortScan.Text = Language.strImportPortScan;
-            cMenTreeExportFile.Text = Language.strExportToFileMenuItem;
-
-            cMenTreeAddConnection.Text = Language.strAddConnection;
-            cMenTreeAddFolder.Text = Language.strAddFolder;
-
-            cMenTreeToolsSort.Text = Language.strSort;
-            cMenTreeToolsSortAscending.Text = Language.strSortAsc;
-            cMenTreeToolsSortDescending.Text = Language.strSortDesc;
-            cMenTreeMoveUp.Text = Language.strMoveUp;
-            cMenTreeMoveDown.Text = Language.strMoveDown;
 
             txtSearch.Text = Language.strSearchPrompt;
         }
@@ -313,17 +305,17 @@ namespace mRemoteNG.UI.Window
         #region Private Methods
         private void tvConnections_BeforeLabelEdit(object sender, LabelEditEventArgs e)
 		{
-			cMenTreeDelete.ShortcutKeys = Keys.None;
+			//cMenTreeDelete.ShortcutKeys = Keys.None;
 		}
 
         private void tvConnections_AfterLabelEdit(object sender, LabelEditEventArgs e)
 		{
 			try
 			{
-				cMenTreeDelete.ShortcutKeys = Keys.Delete;
+				//cMenTreeDelete.ShortcutKeys = Keys.Delete;
                 ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
                 Windows.configForm.pGrid_SelectedObjectChanged();
-				ShowHideTreeContextMenuItems(SelectedNode);
+				//ShowHideTreeContextMenuItems(SelectedNode);
                 Runtime.SaveConnectionsBG();
 			}
 			catch (Exception ex)
@@ -337,7 +329,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 Windows.configForm.SetPropertyGridObject(olvConnections.SelectedObject);
-                ShowHideTreeContextMenuItems((ConnectionInfo)olvConnections.SelectedObject);
+                //ShowHideTreeContextMenuItems((ConnectionInfo)olvConnections.SelectedObject);
                 Runtime.LastSelected = ((ConnectionInfo)olvConnections.SelectedObject)?.ConstantID;
             }
             catch (Exception ex)
@@ -352,7 +344,7 @@ namespace mRemoteNG.UI.Window
             {
                 if (e.ClickCount > 1) return;
                 var clickedNode = (ConnectionInfo)e.Model;
-                ShowHideTreeContextMenuItems(SelectedNode);
+                //ShowHideTreeContextMenuItems(SelectedNode);
                 
                 //if (e.Button != MouseButtons.Left) return;
                 if (clickedNode.GetTreeNodeType() != TreeNodeType.Connection && clickedNode.GetTreeNodeType() != TreeNodeType.PuttySession) return;
@@ -393,120 +385,9 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        private static void EnableMenuItemsRecursive(ToolStripItemCollection items, bool enable = true)
-		{
-		    foreach (ToolStripItem item in items)
-			{
-				var menuItem = item as ToolStripMenuItem;
-				if (menuItem == null)
-				{
-					continue;
-				}
-				menuItem.Enabled = enable;
-				if (menuItem.HasDropDownItems)
-				{
-					EnableMenuItemsRecursive(menuItem.DropDownItems, enable);
-				}
-			}
-		}
+        
 
-        private void ShowHideTreeContextMenuItems(ConnectionInfo connectionInfo)
-		{
-			if (connectionInfo == null)
-				return ;
-					
-			try
-			{
-				cMenTree.Enabled = true;
-				EnableMenuItemsRecursive(cMenTree.Items);
-				if (connectionInfo is RootPuttySessionsNodeInfo)
-                {
-                    cMenTreeAddConnection.Enabled = false;
-                    cMenTreeAddFolder.Enabled = false;
-                    cMenTreeConnect.Enabled = false;
-                    cMenTreeConnectWithOptions.Enabled = false;
-                    cMenTreeDisconnect.Enabled = false;
-                    cMenTreeToolsTransferFile.Enabled = false;
-                    cMenTreeConnectWithOptions.Enabled = false;
-                    cMenTreeToolsSort.Enabled = false;
-                    cMenTreeToolsExternalApps.Enabled = false;
-                    cMenTreeDuplicate.Enabled = false;
-                    cMenTreeRename.Enabled = true;
-                    cMenTreeDelete.Enabled = false;
-                    cMenTreeMoveUp.Enabled = false;
-                    cMenTreeMoveDown.Enabled = false;
-                }
-                else if (connectionInfo is RootNodeInfo)
-                {
-                    cMenTreeConnect.Enabled = false;
-                    cMenTreeConnectWithOptions.Enabled = false;
-                    cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-                    cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-                    cMenTreeConnectWithOptionsChoosePanelBeforeConnecting.Enabled = false;
-                    cMenTreeDisconnect.Enabled = false;
-                    cMenTreeToolsTransferFile.Enabled = false;
-                    cMenTreeToolsExternalApps.Enabled = false;
-                    cMenTreeDuplicate.Enabled = false;
-                    cMenTreeDelete.Enabled = false;
-                    cMenTreeMoveUp.Enabled = false;
-                    cMenTreeMoveDown.Enabled = false;
-                }
-                else if (connectionInfo is ContainerInfo)
-                {
-                    cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-                    cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-                    cMenTreeDisconnect.Enabled = false;
-
-                    var openConnections = ((ContainerInfo) connectionInfo).Children.Sum(child => child.OpenConnections.Count);
-                    if (openConnections == 0)
-                        cMenTreeDisconnect.Enabled = false;
-
-                    cMenTreeToolsTransferFile.Enabled = false;
-                    cMenTreeToolsExternalApps.Enabled = false;
-                }
-                else if (connectionInfo is PuttySessionInfo)
-				{
-					cMenTreeAddConnection.Enabled = false;
-					cMenTreeAddFolder.Enabled = false;
-							
-					if (connectionInfo.OpenConnections.Count == 0)
-						cMenTreeDisconnect.Enabled = false;
-							
-					if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
-						cMenTreeToolsTransferFile.Enabled = false;
-							
-					cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-					cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-					cMenTreeToolsSort.Enabled = false;
-					cMenTreeDuplicate.Enabled = false;
-					cMenTreeRename.Enabled = false;
-					cMenTreeDelete.Enabled = false;
-					cMenTreeMoveUp.Enabled = false;
-					cMenTreeMoveDown.Enabled = false;
-				}
-                else
-                {
-                    if (connectionInfo.OpenConnections.Count == 0)
-                        cMenTreeDisconnect.Enabled = false;
-
-                    if (!(connectionInfo.Protocol == ProtocolType.SSH1 | connectionInfo.Protocol == ProtocolType.SSH2))
-                        cMenTreeToolsTransferFile.Enabled = false;
-
-                    if (!(connectionInfo.Protocol == ProtocolType.RDP | connectionInfo.Protocol == ProtocolType.ICA))
-                    {
-                        cMenTreeConnectWithOptionsConnectInFullscreen.Enabled = false;
-                        cMenTreeConnectWithOptionsConnectToConsoleSession.Enabled = false;
-                    }
-
-                    if (connectionInfo.Protocol == ProtocolType.IntApp)
-                        cMenTreeConnectWithOptionsNoCredentials.Enabled = false;
-                }
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddExceptionStackTrace("ShowHideTreeContextMenuItems (UI.Window.ConnectionTreeWindow) failed", ex);
-			}
-		}
+        
         #endregion
 
         #region Tree Context Menu
@@ -520,46 +401,6 @@ namespace mRemoteNG.UI.Window
 		{
 			AddFolder();
             Runtime.SaveConnectionsBG();
-		}
-
-        private void cMenTreeConnect_Click(object sender, EventArgs e)
-		{
-            ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DoNotJump);
-		}
-
-        private void cMenTreeConnectWithOptionsConnectToConsoleSession_Click(object sender, EventArgs e)
-		{
-            ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
-		}
-
-        private void cMenTreeConnectWithOptionsNoCredentials_Click(object sender, EventArgs e)
-		{
-            ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.NoCredentials);
-		}
-
-        private void cMenTreeConnectWithOptionsDontConnectToConsoleSession_Click(object sender, EventArgs e)
-		{
-            ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
-		}
-
-        private void cMenTreeConnectWithOptionsConnectInFullscreen_Click(object sender, EventArgs e)
-		{
-            ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
-		}
-
-        private void cMenTreeConnectWithOptionsChoosePanelBeforeConnecting_Click(object sender, EventArgs e)
-		{
-            ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
-		}
-
-	    private void cMenTreeDisconnect_Click(object sender, EventArgs e)
-		{
-			DisconnectConnection(SelectedNode);
-		}
-
-        private void cMenTreeToolsTransferFile_Click(object sender, EventArgs e)
-		{
-			SshTransferFile();
 		}
 
         //TODO Fix for TreeListView
@@ -587,18 +428,6 @@ namespace mRemoteNG.UI.Window
             ConnectionTree.Sort(tvConnections.SelectedNode, SortOrder.Descending);
 			tvConnections.EndUpdate();
             Runtime.SaveConnectionsBG();
-		}
-
-        //TODO Fix for TreeListView
-        private void cMenTreeImportFile_Click(object sender, EventArgs e)
-		{
-            Import.ImportFromFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode, true);
-		}
-
-        //TODO Fix for TreeListView
-        private void cMenTreeExportFile_Click(object sender, EventArgs e)
-		{
-            Export.ExportToFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode, Runtime.ConnectionTreeModel);
 		}
 
         private void cMenTreeMoveUp_Click(object sender, EventArgs e)
@@ -695,41 +524,7 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
-        private void AddExternalApps()
-		{
-			try
-			{
-			    ResetExternalAppMenu();
-
-                foreach (Tools.ExternalTool extA in Runtime.ExternalTools)
-				{
-				    var menuItem = new ToolStripMenuItem
-				    {
-				        Text = extA.DisplayName,
-				        Tag = extA,
-				        Image = extA.Image
-				    };
-
-				    menuItem.Click += (sender, args) => StartExternalApp((Tools.ExternalTool)((ToolStripMenuItem)sender).Tag);
-					cMenTreeToolsExternalApps.DropDownItems.Add(menuItem);
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddExceptionStackTrace("cMenTreeTools_DropDownOpening failed (UI.Window.ConnectionTreeWindow)", ex);
-			}
-		}
-
-	    private void ResetExternalAppMenu()
-	    {
-	        if (cMenTreeToolsExternalApps.DropDownItems.Count <= 0) return;
-	        for (var i = cMenTreeToolsExternalApps.DropDownItems.Count - 1; i >= 0; i--)
-	            cMenTreeToolsExternalApps.DropDownItems[i].Dispose();
-
-	        cMenTreeToolsExternalApps.DropDownItems.Clear();
-	    }
-
-        private void StartExternalApp(Tools.ExternalTool externalTool)
+        private void StartExternalApp(ExternalTool externalTool)
 		{
 			try
 			{
