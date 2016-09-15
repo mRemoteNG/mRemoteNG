@@ -307,18 +307,17 @@ namespace mRemoteNG.UI.Window
 
         #region Private Methods
         private void tvConnections_BeforeLabelEdit(object sender, LabelEditEventArgs e)
-		{
-			//cMenTreeDelete.ShortcutKeys = Keys.None;
-		}
+        {
+            _contextMenu.DisableShortcutKeys();
+        }
 
         private void tvConnections_AfterLabelEdit(object sender, LabelEditEventArgs e)
 		{
 			try
 			{
-				//cMenTreeDelete.ShortcutKeys = Keys.Delete;
+				_contextMenu.EnableShortcutKeys();
                 ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
                 Windows.configForm.pGrid_SelectedObjectChanged();
-				//ShowHideTreeContextMenuItems(SelectedNode);
                 Runtime.SaveConnectionsBG();
 			}
 			catch (Exception ex)
@@ -332,7 +331,6 @@ namespace mRemoteNG.UI.Window
             try
             {
                 Windows.configForm.SetPropertyGridObject(olvConnections.SelectedObject);
-                //ShowHideTreeContextMenuItems((ConnectionInfo)olvConnections.SelectedObject);
                 Runtime.LastSelected = ((ConnectionInfo)olvConnections.SelectedObject)?.ConstantID;
             }
             catch (Exception ex)
@@ -347,7 +345,6 @@ namespace mRemoteNG.UI.Window
             {
                 if (e.ClickCount > 1) return;
                 var clickedNode = (ConnectionInfo)e.Model;
-                //ShowHideTreeContextMenuItems(SelectedNode);
                 
                 //if (e.Button != MouseButtons.Left) return;
                 if (clickedNode.GetTreeNodeType() != TreeNodeType.Connection && clickedNode.GetTreeNodeType() != TreeNodeType.PuttySession) return;
@@ -387,10 +384,6 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
-
-        
-
-        
         #endregion
 
         #region Tree Context Menu

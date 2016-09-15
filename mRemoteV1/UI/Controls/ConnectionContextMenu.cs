@@ -51,6 +51,7 @@ namespace mRemoteNG.UI.Controls
         {
             InitializeComponent();
             ApplyLanguage();
+            EnableShortcutKeys();
             Opening += (sender, args) => AddExternalApps();
         }
 
@@ -122,7 +123,6 @@ namespace mRemoteNG.UI.Controls
             // 
             _cMenTreeConnect.Image = Resources.Play;
             _cMenTreeConnect.Name = "_cMenTreeConnect";
-            _cMenTreeConnect.ShortcutKeys = ((Keys.Control | Keys.Shift) | Keys.C);
             _cMenTreeConnect.Size = new System.Drawing.Size(199, 22);
             _cMenTreeConnect.Text = "Connect";
             _cMenTreeConnect.Click += (sender, args) => OnConnectClicked(args);
@@ -218,7 +218,6 @@ namespace mRemoteNG.UI.Controls
             // 
             _cMenTreeDuplicate.Image = Resources.page_copy;
             _cMenTreeDuplicate.Name = "_cMenTreeDuplicate";
-            _cMenTreeDuplicate.ShortcutKeys = Keys.Control | Keys.D;
             _cMenTreeDuplicate.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDuplicate.Text = "Duplicate";
             _cMenTreeDuplicate.Click += (sender, args) => OnDuplicateClicked(args);
@@ -227,7 +226,6 @@ namespace mRemoteNG.UI.Controls
             // 
             _cMenTreeRename.Image = Resources.Rename;
             _cMenTreeRename.Name = "_cMenTreeRename";
-            _cMenTreeRename.ShortcutKeys = Keys.F2;
             _cMenTreeRename.Size = new System.Drawing.Size(199, 22);
             _cMenTreeRename.Text = "Rename";
             _cMenTreeRename.Click += (sender, args) => OnRenameClicked(args);
@@ -236,7 +234,6 @@ namespace mRemoteNG.UI.Controls
             // 
             _cMenTreeDelete.Image = Resources.Delete;
             _cMenTreeDelete.Name = "_cMenTreeDelete";
-            _cMenTreeDelete.ShortcutKeys = Keys.Delete;
             _cMenTreeDelete.Size = new System.Drawing.Size(199, 22);
             _cMenTreeDelete.Text = "Delete";
             _cMenTreeDelete.Click += (sender, args) => OnDeleteClicked(args);
@@ -341,7 +338,6 @@ namespace mRemoteNG.UI.Controls
             // 
             _cMenTreeMoveUp.Image = Resources.Arrow_Up;
             _cMenTreeMoveUp.Name = "_cMenTreeMoveUp";
-            _cMenTreeMoveUp.ShortcutKeys = Keys.Control | Keys.Up;
             _cMenTreeMoveUp.Size = new System.Drawing.Size(199, 22);
             _cMenTreeMoveUp.Text = "Move up";
             _cMenTreeMoveUp.Click += (sender, args) => OnMoveUpClicked(args);
@@ -350,7 +346,6 @@ namespace mRemoteNG.UI.Controls
             // 
             _cMenTreeMoveDown.Image = Resources.Arrow_Down;
             _cMenTreeMoveDown.Name = "_cMenTreeMoveDown";
-            _cMenTreeMoveDown.ShortcutKeys = Keys.Control | Keys.Down;
             _cMenTreeMoveDown.Size = new System.Drawing.Size(199, 22);
             _cMenTreeMoveDown.Text = "Move down";
             _cMenTreeMoveDown.Click += (sender, args) => OnMoveDownClicked(args);
@@ -486,6 +481,26 @@ namespace mRemoteNG.UI.Controls
             {
                 Runtime.MessageCollector.AddExceptionStackTrace("ShowHideTreeContextMenuItems (UI.Window.ConnectionTreeWindow) failed", ex);
             }
+        }
+
+        internal void DisableShortcutKeys()
+        {
+            _cMenTreeConnect.ShortcutKeys = Keys.None;
+            _cMenTreeDuplicate.ShortcutKeys = Keys.None;
+            _cMenTreeRename.ShortcutKeys = Keys.None;
+            _cMenTreeDelete.ShortcutKeys = Keys.None;
+            _cMenTreeMoveUp.ShortcutKeys = Keys.None;
+            _cMenTreeMoveDown.ShortcutKeys = Keys.None;
+        }
+
+        internal void EnableShortcutKeys()
+        {
+            _cMenTreeConnect.ShortcutKeys = ((Keys.Control | Keys.Shift) | Keys.C);
+            _cMenTreeDuplicate.ShortcutKeys = Keys.Control | Keys.D;
+            _cMenTreeRename.ShortcutKeys = Keys.F2;
+            _cMenTreeDelete.ShortcutKeys = Keys.Delete;
+            _cMenTreeMoveUp.ShortcutKeys = Keys.Control | Keys.Up;
+            _cMenTreeMoveDown.ShortcutKeys = Keys.Control | Keys.Down;
         }
 
         private static void EnableMenuItemsRecursive(ToolStripItemCollection items, bool enable = true)
