@@ -11,7 +11,7 @@ using System.Security.Principal;
 
 namespace mRemoteNG.Config.Putty
 {
-	public class RegistryProvider : Provider
+	public class PuttySessionsRegistryProvider : PuttySessionsProvider
 	{
         #region Private Fields
         private const string PuttySessionsKey = "Software\\SimonTatham\\PuTTY\\Sessions";

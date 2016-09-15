@@ -7,7 +7,7 @@ using mRemoteNG.Connection;
 
 namespace mRemoteNG.Config.Putty
 {
-    public abstract class Provider
+    public abstract class PuttySessionsProvider
 	{
         #region Public Methods
 		private TreeNode _rootTreeNode;

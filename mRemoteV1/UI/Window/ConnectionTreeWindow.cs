@@ -346,7 +346,6 @@ namespace mRemoteNG.UI.Window
                 if (e.ClickCount > 1) return;
                 var clickedNode = (ConnectionInfo)e.Model;
                 
-                //if (e.Button != MouseButtons.Left) return;
                 if (clickedNode.GetTreeNodeType() != TreeNodeType.Connection && clickedNode.GetTreeNodeType() != TreeNodeType.PuttySession) return;
                 if (Settings.Default.SingleClickOnConnectionOpensIt)
                     ConnectionInitiator.OpenConnection(SelectedNode);

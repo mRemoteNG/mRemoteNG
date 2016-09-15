@@ -133,15 +133,15 @@ namespace mRemoteNG.Config.Putty
 			}
 		}
 			
-		public static void SessionChanged(object sender, Provider.SessionChangedEventArgs e)
+		public static void SessionChanged(object sender, PuttySessionsProvider.SessionChangedEventArgs e)
 		{
 			AddSessionsToTree(Windows.treeForm.tvConnections);
 		}
         #endregion
 			
         #region Private Methods
-		private static List<Provider> _providers;
-        private static List<Provider> Providers
+		private static List<PuttySessionsProvider> _providers;
+        private static List<PuttySessionsProvider> Providers
 		{
 			get
 			{
@@ -155,7 +155,7 @@ namespace mRemoteNG.Config.Putty
 			
 		private static void AddProviders()
 		{
-		    _providers = new List<Provider> {new RegistryProvider(), new XmingProvider()};
+		    _providers = new List<PuttySessionsProvider> {new PuttySessionsRegistryProvider(), new PuttySessionsXmingProvider()};
 		}
 			
 		private static string[] GetSessionNames(bool raw = false)
@@ -172,17 +172,17 @@ namespace mRemoteNG.Config.Putty
 			return sessionNames.ToArray();
 		}
 			
-		private static bool IsProviderEnabled(Provider provider)
+		private static bool IsProviderEnabled(PuttySessionsProvider puttySessionsProvider)
 		{
             var enabled = true;
 			if (PuttyTypeDetector.GetPuttyType() == PuttyTypeDetector.PuttyType.Xming)
 			{
-				if ((provider) is RegistryProvider)
+				if ((puttySessionsProvider) is PuttySessionsRegistryProvider)
 					enabled = false;
 			}
 			else
 			{
-				if ((provider) is XmingProvider)
+				if ((puttySessionsProvider) is PuttySessionsXmingProvider)
 					enabled = false;
 			}
 			return enabled;

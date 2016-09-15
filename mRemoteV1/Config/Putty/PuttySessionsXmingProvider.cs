@@ -10,12 +10,12 @@ using System.Text.RegularExpressions;
 
 namespace mRemoteNG.Config.Putty
 {
-	public class XmingProvider : Provider
+	public class PuttySessionsXmingProvider : PuttySessionsProvider
 	{
         #region Private Fields
         private const string RegistrySessionNameFormat = "{0} [registry]";
         private const string RegistrySessionNamePattern = "(.*)\\ \\[registry\\]";
-        private static readonly RegistryProvider RegistryProvider = new RegistryProvider();
+        private static readonly PuttySessionsRegistryProvider PuttySessionsRegistryProvider = new PuttySessionsRegistryProvider();
         private static FileSystemWatcher _eventWatcher;
         #endregion
 
@@ -58,7 +58,7 @@ namespace mRemoteNG.Config.Putty
 			}
 
             List<string> registrySessionNames = new List<string>();
-			foreach (string sessionName in RegistryProvider.GetSessionNames(raw))
+			foreach (string sessionName in PuttySessionsRegistryProvider.GetSessionNames(raw))
 			{
 				registrySessionNames.Add(string.Format(RegistrySessionNameFormat, sessionName));
 			}
@@ -74,7 +74,7 @@ namespace mRemoteNG.Config.Putty
 			string registrySessionName = GetRegistrySessionName(sessionName);
 			if (!string.IsNullOrEmpty(registrySessionName))
 			{
-				return ModifyRegistrySessionInfo(RegistryProvider.GetSession(registrySessionName));
+				return ModifyRegistrySessionInfo(PuttySessionsRegistryProvider.GetSession(registrySessionName));
 			}
 				
 			string sessionsFolderPath = GetSessionsFolderPath();
@@ -144,8 +144,8 @@ namespace mRemoteNG.Config.Putty
 			
 		public override void StartWatcher()
 		{
-			RegistryProvider.StartWatcher();
-			RegistryProvider.SessionChanged += OnRegistrySessionChanged;
+			PuttySessionsRegistryProvider.StartWatcher();
+			PuttySessionsRegistryProvider.SessionChanged += OnRegistrySessionChanged;
 				
 			if (_eventWatcher != null)
 			{
@@ -170,8 +170,8 @@ namespace mRemoteNG.Config.Putty
 			
 		public override void StopWatcher()
 		{
-			RegistryProvider.StopWatcher();
-			RegistryProvider.SessionChanged -= OnRegistrySessionChanged;
+			PuttySessionsRegistryProvider.StopWatcher();
+			PuttySessionsRegistryProvider.SessionChanged -= OnRegistrySessionChanged;
 				
 			if (_eventWatcher == null)
 			{

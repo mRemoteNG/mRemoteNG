@@ -163,10 +163,10 @@
     <Compile Include="Config\Import\PuttyConnectionManager.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnection.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnectionManager.cs" />
-    <Compile Include="Config\Putty\Config.Putty.RegistryProvider.cs" />
-    <Compile Include="Config\Putty\Config.Putty.XmingProvider.cs" />
+    <Compile Include="Config\Putty\PuttySessionsRegistryProvider.cs" />
+    <Compile Include="Config\Putty\PuttySessionsXmingProvider.cs" />
     <Compile Include="Config\Putty\Config.Putty.Sessions.cs" />
-    <Compile Include="Config\Putty\Config.Putty.Provider.cs" />
+    <Compile Include="Config\Putty\PuttySessionsProvider.cs" />
     <Compile Include="Config\IDatabaseConnector.cs" />
     <Compile Include="Config\SqlDatabaseConnector.cs" />
     <Compile Include="Connection\ConnectionInfoComparer.cs" />
