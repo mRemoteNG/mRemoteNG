@@ -104,6 +104,7 @@
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Config\Connections\DataTableSerializerTests.cs" />
     <Compile Include="Config\Connections\XmlConnectionsDeserializerTests.cs" />
+    <Compile Include="Connection\AbstractConnectionInfoDataTests.cs" />
     <Compile Include="Tree\ConnectionTreeModelTests.cs" />
     <Compile Include="Connection\ConnectionInfoInheritanceTests.cs" />
     <Compile Include="Connection\ConnectionInfoTests.cs" />
