@@ -11,7 +11,7 @@ using System.Text.RegularExpressions;
 
 namespace mRemoteNG.Config.Putty
 {
-	public class PuttySessionsXmingProvider : PuttySessionsProvider
+	public class PuttySessionsXmingProvider : AbstractPuttySessionsProvider
 	{
         private const string RegistrySessionNameFormat = "{0} [registry]";
         private const string RegistrySessionNamePattern = "(.*)\\ \\[registry\\]";

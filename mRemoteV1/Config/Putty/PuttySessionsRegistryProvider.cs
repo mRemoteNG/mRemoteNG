@@ -12,7 +12,7 @@ using System.Web;
 
 namespace mRemoteNG.Config.Putty
 {
-	public class PuttySessionsRegistryProvider : PuttySessionsProvider
+	public class PuttySessionsRegistryProvider : AbstractPuttySessionsProvider
 	{
         private const string PuttySessionsKey = "Software\\SimonTatham\\PuTTY\\Sessions";
         private static ManagementEventWatcher _eventWatcher;
@@ -32,20 +32,10 @@ namespace mRemoteNG.Config.Putty
 			    sessionNames.Add(raw ? sessionName : HttpUtility.UrlDecode(sessionName.Replace("+", "%2B")));
 			}
 				
-			if (raw)
-			{
-				if (!sessionNames.Contains("Default%20Settings")) // Do not localize
-				{
-					sessionNames.Insert(0, "Default%20Settings");
-				}
-			}
-			else
-			{
-				if (!sessionNames.Contains("Default Settings"))
-				{
-					sessionNames.Insert(0, "Default Settings");
-				}
-			}
+			if (raw && !sessionNames.Contains("Default%20Settings"))
+				sessionNames.Insert(0, "Default%20Settings");
+			else if (!sessionNames.Contains("Default Settings"))
+				sessionNames.Insert(0, "Default Settings");
 				
 			return sessionNames.ToArray();
 		}
@@ -60,7 +50,7 @@ namespace mRemoteNG.Config.Putty
 				return null;
 			}
 				
-			sessionName = System.Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"));
+			sessionName = HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"));
 
 		    var sessionInfo = new PuttySessionInfo
 		    {
@@ -112,7 +102,7 @@ namespace mRemoteNG.Config.Putty
 				
 			try
 			{
-                var currentUserSid = WindowsIdentity.GetCurrent().User.Value;
+                var currentUserSid = WindowsIdentity.GetCurrent().User?.Value;
                 var key = Convert.ToString(string.Join("\\", currentUserSid, PuttySessionsKey).Replace("\\", "\\\\"));
                 var query = new WqlEventQuery($"SELECT * FROM RegistryTreeChangeEvent WHERE Hive = \'HKEY_USERS\' AND RootPath = \'{key}\'");
 				_eventWatcher = new ManagementEventWatcher(query);

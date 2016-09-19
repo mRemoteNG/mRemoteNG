@@ -166,7 +166,7 @@
     <Compile Include="Config\Putty\PuttySessionsRegistryProvider.cs" />
     <Compile Include="Config\Putty\PuttySessionsXmingProvider.cs" />
     <Compile Include="Config\Putty\PuttySessionsManager.cs" />
-    <Compile Include="Config\Putty\PuttySessionsProvider.cs" />
+    <Compile Include="Config\Putty\AbstractPuttySessionsProvider.cs" />
     <Compile Include="Config\IDatabaseConnector.cs" />
     <Compile Include="Config\SqlDatabaseConnector.cs" />
     <Compile Include="Connection\ConnectionInfoComparer.cs" />

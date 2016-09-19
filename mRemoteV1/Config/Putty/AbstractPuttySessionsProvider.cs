@@ -3,11 +3,12 @@ using System;
 using System.Windows.Forms;
 using mRemoteNG.Tree;
 using mRemoteNG.Connection;
+using mRemoteNG.Root.PuttySessions;
 
 
 namespace mRemoteNG.Config.Putty
 {
-    public abstract class PuttySessionsProvider
+    public abstract class AbstractPuttySessionsProvider
 	{
         #region Public Methods
 		private TreeNode _rootTreeNode;
@@ -23,36 +24,25 @@ namespace mRemoteNG.Config.Putty
 			}
 		}
 			
-		private Root.PuttySessions.RootPuttySessionsNodeInfo _rootInfo;
-        public Root.PuttySessions.RootPuttySessionsNodeInfo RootInfo
-		{
-			get
-			{
-				if (_rootInfo == null)
-				{
-					_rootInfo = CreateRootInfo();
-				}
-				return _rootInfo;
-			}
-		}
-			
-		public abstract string[] GetSessionNames(bool raw = false);
+		private RootPuttySessionsNodeInfo _rootInfo;
+        public RootPuttySessionsNodeInfo RootInfo => _rootInfo ?? (_rootInfo = CreateRootInfo());
+
+        public abstract string[] GetSessionNames(bool raw = false);
 		public abstract PuttySessionInfo GetSession(string sessionName);
 			
-		public virtual PuttySessionInfo[] GetSessions()
+		public virtual IEnumerable<PuttySessionInfo> GetSessions()
 		{
-			List<PuttySessionInfo> sessionList = new List<PuttySessionInfo>();
-            PuttySessionInfo sessionInfo = (PuttySessionInfo)default(ConnectionInfo);
-			foreach (string sessionName in GetSessionNames(true))
+			var sessionList = new List<PuttySessionInfo>();
+			foreach (var sessionName in GetSessionNames(true))
 			{
-				sessionInfo = GetSession(sessionName);
-				if (sessionInfo == null || string.IsNullOrEmpty(sessionInfo.Hostname))
+				var sessionInfo = GetSession(sessionName);
+				if (string.IsNullOrEmpty(sessionInfo?.Hostname))
 				{
 					continue;
 				}
 				sessionList.Add(sessionInfo);
 			}
-			return sessionList.ToArray();
+			return sessionList;
 		}
 			
 		public virtual void StartWatcher()
@@ -74,11 +64,11 @@ namespace mRemoteNG.Config.Putty
 		{
 			add
 			{
-				SessionChangedEvent = (SessionChangedEventHandler) System.Delegate.Combine(SessionChangedEvent, value);
+				SessionChangedEvent = (SessionChangedEventHandler) Delegate.Combine(SessionChangedEvent, value);
 			}
 			remove
 			{
-				SessionChangedEvent = (SessionChangedEventHandler) System.Delegate.Remove(SessionChangedEvent, value);
+				SessionChangedEvent = (SessionChangedEventHandler) Delegate.Remove(SessionChangedEvent, value);
 			}
 		}
         #endregion
@@ -115,9 +105,9 @@ namespace mRemoteNG.Config.Putty
 			return newTreeNode;
 		}
 			
-		protected virtual Root.PuttySessions.RootPuttySessionsNodeInfo CreateRootInfo()
+		protected virtual RootPuttySessionsNodeInfo CreateRootInfo()
 		{
-			Root.PuttySessions.RootPuttySessionsNodeInfo newRootInfo = new Root.PuttySessions.RootPuttySessionsNodeInfo();
+			var newRootInfo = new RootPuttySessionsNodeInfo();
 				
 			if (string.IsNullOrEmpty(Convert.ToString(mRemoteNG.Settings.Default.PuttySavedSessionsName)))
 			{
@@ -142,9 +132,9 @@ namespace mRemoteNG.Config.Putty
 			
 		protected virtual void OnSessionChanged(SessionChangedEventArgs e)
 		{
-			if (SessionChangedEvent != null)
-				SessionChangedEvent(this, new SessionChangedEventArgs());
+		    SessionChangedEvent?.Invoke(this, new SessionChangedEventArgs());
 		}
+
         #endregion
 	}
 }

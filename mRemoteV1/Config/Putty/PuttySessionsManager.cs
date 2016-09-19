@@ -11,8 +11,8 @@ namespace mRemoteNG.Config.Putty
 {
 	public class PuttySessionsManager
 	{
-        private static List<PuttySessionsProvider> _providers;
-        private static List<PuttySessionsProvider> Providers
+        private static List<AbstractPuttySessionsProvider> _providers;
+        public static IEnumerable<AbstractPuttySessionsProvider> Providers
         {
             get
             {
@@ -24,6 +24,11 @@ namespace mRemoteNG.Config.Putty
             }
         }
 
+
+	    public PuttySessionsManager()
+	    {
+	        
+	    }
 
         #region Public Methods
         private delegate void AddSessionsToTreeDelegate(TreeView treeView);
@@ -147,18 +152,22 @@ namespace mRemoteNG.Config.Putty
 			}
 		}
 		
-		public static void SessionChanged(object sender, PuttySessionsProvider.SessionChangedEventArgs e)
+		public static void SessionChanged(object sender, AbstractPuttySessionsProvider.SessionChangedEventArgs e)
 		{
 			AddSessionsToTree(Windows.treeForm.tvConnections);
 		}
         #endregion
 		
         #region Private Methods
-		
+
+	    public void AddProvider(AbstractPuttySessionsProvider provider)
+	    {
+	        _providers.Add(provider);
+	    }
 			
 		private static void AddProviders()
 		{
-		    _providers = new List<PuttySessionsProvider> {new PuttySessionsRegistryProvider(), new PuttySessionsXmingProvider()};
+		    _providers = new List<AbstractPuttySessionsProvider> {new PuttySessionsRegistryProvider(), new PuttySessionsXmingProvider()};
 		}
 			
 		private static string[] GetSessionNames(bool raw = false)
@@ -175,17 +184,17 @@ namespace mRemoteNG.Config.Putty
 			return sessionNames.ToArray();
 		}
 			
-		private static bool IsProviderEnabled(PuttySessionsProvider puttySessionsProvider)
+		private static bool IsProviderEnabled(AbstractPuttySessionsProvider puttySessionsProvider)
 		{
             var enabled = true;
 			if (PuttyTypeDetector.GetPuttyType() == PuttyTypeDetector.PuttyType.Xming)
 			{
-				if ((puttySessionsProvider) is PuttySessionsRegistryProvider)
+				if (puttySessionsProvider is PuttySessionsRegistryProvider)
 					enabled = false;
 			}
 			else
 			{
-				if ((puttySessionsProvider) is PuttySessionsXmingProvider)
+				if (puttySessionsProvider is PuttySessionsXmingProvider)
 					enabled = false;
 			}
 			return enabled;
