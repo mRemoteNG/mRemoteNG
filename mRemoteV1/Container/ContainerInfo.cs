@@ -36,8 +36,10 @@ namespace mRemoteNG.Container
 
         public void AddChild(ConnectionInfo newChildItem)
         {
+            if (Children.Contains(newChildItem)) return;
             newChildItem.Parent = this;
             Children.Add(newChildItem);
+            OnPropertyChanged("Children");
         }
 
         public void AddChildRange(IEnumerable<ConnectionInfo> newChildren)
@@ -50,8 +52,10 @@ namespace mRemoteNG.Container
 
         public void RemoveChild(ConnectionInfo removalTarget)
         {
+            if (!Children.Contains(removalTarget)) return;
             removalTarget.Parent = null;
             Children.Remove(removalTarget);
+            OnPropertyChanged("Children");
         }
 
         public void RemoveChildRange(IEnumerable<ConnectionInfo> removalTargets)
@@ -69,6 +73,7 @@ namespace mRemoteNG.Container
             Children.Remove(child);
             if (newIndex > Children.Count) newIndex = Children.Count;
             Children.Insert(newIndex, child);
+            OnPropertyChanged("Children");
         }
 
         public void SetChildAbove(ConnectionInfo childToPromote, ConnectionInfo reference)
@@ -118,6 +123,7 @@ namespace mRemoteNG.Container
                 SortDirection = sortDirection
             };
             Children.Sort(connectionComparer);
+            OnPropertyChanged("Children");
         }
 
         public void SortRecursive(ListSortDirection sortDirection = ListSortDirection.Ascending)
