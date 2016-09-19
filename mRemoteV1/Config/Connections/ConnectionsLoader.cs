@@ -1,6 +1,7 @@
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.Putty;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.UI;
@@ -65,8 +66,9 @@ namespace mRemoteNG.Config.Connections
 			frmMain.Default.AreWeUsingSqlServerForSavingConnections = UseDatabase;
 			frmMain.Default.ConnectionsFileName = ConnectionFileName;
 
-			if (!import)
-				Putty.PuttySessionsManager.AddSessionsToTree(Windows.treeForm.tvConnections);
+		    if (import) return;
+		    PuttySessionsManager.AddSessionsToTree(Windows.treeForm.tvConnections);
+		    Runtime.ConnectionTreeModel.RootNodes.AddRange(PuttySessionsManager.RootPuttySessionsNodes);
 		}
     }
 }

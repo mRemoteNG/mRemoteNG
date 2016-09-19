@@ -12,9 +12,12 @@ namespace mRemoteNG.Root.PuttySessions
 
 
         public RootPuttySessionsNodeInfo() : base(RootNodeType.PuttySessions)
-		{
-			_name = Language.strPuttySavedSessionsRootName;
-			_panel = Language.strGeneral;
+        {
+            _name = Language.strPuttySavedSessionsRootName;
+            _panel =
+                string.IsNullOrEmpty(Settings.Default.PuttySavedSessionsPanel)
+                    ? Language.strGeneral
+                    : Settings.Default.PuttySavedSessionsPanel;
 		}
 
         #region Public Properties
@@ -24,16 +27,8 @@ namespace mRemoteNG.Root.PuttySessions
 			get { return _name; }
 			set
 			{
-				if (_name == value)
-				{
-					return ;
-				}
 				_name = value;
-				if (TreeNode != null)
-				{
-					TreeNode.Text = value;
-				}
-                Settings.Default.PuttySavedSessionsName = value;
+                //Settings.Default.PuttySavedSessionsName = value;
 			}
 		}
 				
@@ -45,10 +40,6 @@ namespace mRemoteNG.Root.PuttySessions
 			get { return _panel; }
 			set
 			{
-				if (_panel == value)
-				{
-					return ;
-				}
 				_panel = value;
                 Settings.Default.PuttySavedSessionsPanel = value;
 			}

@@ -1,9 +1,7 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using mRemoteNG.Connection;
 using System.ComponentModel;
-using System.Globalization;
 using System.Linq;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Tools;
