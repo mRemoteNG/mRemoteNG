@@ -83,7 +83,7 @@ namespace mRemoteNG.Config.Putty
             //    }
             //}
 
-            if (!RootPuttySessionsNodes.Contains(rootTreeNode))
+            if (!RootPuttySessionsNodes.Contains(rootTreeNode) && rootTreeNode.HasChildren())
                 RootPuttySessionsNodes.Add(rootTreeNode);
             rootTreeNode.SortRecursive();
         }
