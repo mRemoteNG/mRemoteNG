@@ -9,10 +9,24 @@ using mRemoteNG.App;
 
 namespace mRemoteNG.Config.Putty
 {
-	public class Sessions
+	public class PuttySessionsManager
 	{
+        private static List<PuttySessionsProvider> _providers;
+        private static List<PuttySessionsProvider> Providers
+        {
+            get
+            {
+                if (_providers == null || _providers.Count == 0)
+                {
+                    AddProviders();
+                }
+                return _providers;
+            }
+        }
+
+
         #region Public Methods
-		private delegate void AddSessionsToTreeDelegate(TreeView treeView);
+        private delegate void AddSessionsToTreeDelegate(TreeView treeView);
 		public static void AddSessionsToTree(TreeView treeView)
 		{
 			if (treeView == null)
@@ -114,7 +128,7 @@ namespace mRemoteNG.Config.Putty
 			    treeView.EndUpdate();
 			}
 		}
-			
+		
 		public static void StartWatcher()
 		{
 			foreach (var provider in Providers)
@@ -123,7 +137,7 @@ namespace mRemoteNG.Config.Putty
 				provider.SessionChanged += SessionChanged;
 			}
 		}
-			
+		
 		public static void StopWatcher()
 		{
 			foreach (var provider in Providers)
@@ -132,26 +146,15 @@ namespace mRemoteNG.Config.Putty
 				provider.SessionChanged -= SessionChanged;
 			}
 		}
-			
+		
 		public static void SessionChanged(object sender, PuttySessionsProvider.SessionChangedEventArgs e)
 		{
 			AddSessionsToTree(Windows.treeForm.tvConnections);
 		}
         #endregion
-			
+		
         #region Private Methods
-		private static List<PuttySessionsProvider> _providers;
-        private static List<PuttySessionsProvider> Providers
-		{
-			get
-			{
-				if (_providers == null || _providers.Count == 0)
-				{
-					AddProviders();
-				}
-				return _providers;
-			}
-		}
+		
 			
 		private static void AddProviders()
 		{

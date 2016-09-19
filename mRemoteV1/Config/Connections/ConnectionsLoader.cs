@@ -66,7 +66,7 @@ namespace mRemoteNG.Config.Connections
 			frmMain.Default.ConnectionsFileName = ConnectionFileName;
 
 			if (!import)
-				Putty.Sessions.AddSessionsToTree(Windows.treeForm.tvConnections);
+				Putty.PuttySessionsManager.AddSessionsToTree(Windows.treeForm.tvConnections);
 		}
     }
 }

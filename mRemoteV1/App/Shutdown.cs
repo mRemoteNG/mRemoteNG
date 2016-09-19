@@ -36,7 +36,7 @@ namespace mRemoteNG.App
 
         private static void StopPuttySessionWatcher()
         {
-            Config.Putty.Sessions.StopWatcher();
+            Config.Putty.PuttySessionsManager.StopWatcher();
         }
 
         private static void DisposeNotificationAreaIcon()

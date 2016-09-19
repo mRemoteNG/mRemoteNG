@@ -189,7 +189,7 @@ namespace mRemoteNG.Connection
         [LocalizedAttributes.LocalizedCategory("strCategoryProtocol", 3),
             LocalizedAttributes.LocalizedDisplayName("strPropertyNamePuttySession"),
             LocalizedAttributes.LocalizedDescription("strPropertyDescriptionPuttySession"),
-            TypeConverter(typeof(Config.Putty.Sessions.SessionList))]
+            TypeConverter(typeof(Config.Putty.PuttySessionsManager.SessionList))]
         public virtual string PuttySession
 		{
             get { return GetPropertyValue("PuttySession", _puttySession); }
