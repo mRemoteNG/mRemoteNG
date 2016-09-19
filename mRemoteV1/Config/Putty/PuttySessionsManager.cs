@@ -24,7 +24,7 @@ namespace mRemoteNG.Config.Putty
         public static List<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = new List<RootPuttySessionsNodeInfo>();
 
         #region Public Methods
-		public static void AddSessionsToTree(TreeView treeView)
+		public static void AddSessionsToTree()
 		{
 			foreach (var provider in Providers)
 			{
@@ -36,52 +36,6 @@ namespace mRemoteNG.Config.Putty
 	    {
             var rootTreeNode = provider.RootInfo;
 	        provider.GetSessions();
-            //var savedSessions = new List<PuttySessionInfo>(provider.GetSessions());
-            //if (!IsProviderEnabled(provider) || savedSessions == null || savedSessions.Count == 0)
-            //{
-            //    if (rootTreeNode != null && treeView.Nodes.Contains(rootTreeNode))
-            //    {
-            //        treeView.BeginUpdate();
-            //        treeView.Nodes.Remove(rootTreeNode);
-            //        treeView.EndUpdate();
-            //    }
-            //    continue;
-            //}
-
-            //var newTreeNodes = new List<TreeNode>();
-            //foreach (var sessionInfo in savedSessions)
-            //{
-            //    TreeNode treeNode;
-            //    bool isNewNode;
-            //    if (rootTreeNode.Nodes.ContainsKey(sessionInfo.Name))
-            //    {
-            //        treeNode = rootTreeNode.Nodes[sessionInfo.Name];
-            //        isNewNode = false;
-            //    }
-            //    else
-            //    {
-            //        treeNode = ConnectionTreeNode.AddNode(TreeNodeType.PuttySession, sessionInfo.Name);
-            //        if (treeNode == null)
-            //        {
-            //            continue;
-            //        }
-            //        treeNode.Name = treeNode.Text;
-            //        treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
-            //        treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
-            //        isNewNode = true;
-            //    }
-
-            //    sessionInfo.RootRootPuttySessionsInfo = provider.RootInfo;
-            //    sessionInfo.TreeNode = treeNode;
-            //    //sessionInfo.IInheritable.TurnOffInheritanceCompletely();
-
-            //    treeNode.Tag = sessionInfo;
-
-            //    if (isNewNode)
-            //    {
-            //        newTreeNodes.Add(treeNode);
-            //    }
-            //}
 
             if (!RootPuttySessionsNodes.Contains(rootTreeNode) && rootTreeNode.HasChildren())
                 RootPuttySessionsNodes.Add(rootTreeNode);
@@ -108,7 +62,7 @@ namespace mRemoteNG.Config.Putty
 		
 		public static void SessionChanged(object sender, AbstractPuttySessionsProvider.SessionChangedEventArgs e)
 		{
-			AddSessionsToTree(Windows.treeForm.tvConnections);
+			AddSessionsToTree();
 		}
         #endregion
 		

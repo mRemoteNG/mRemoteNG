@@ -9,6 +9,7 @@ using System.Windows.Forms;
 using System.Collections.Generic;
 using mRemoteNG.App;
 using mRemoteNG.Config;
+using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
@@ -156,7 +157,7 @@ namespace mRemoteNG.UI.Forms
             Windows.treePanel.Focus();
             ConnectionTree.TreeView = Windows.treeForm.tvConnections;
 
-            Config.Putty.PuttySessionsManager.StartWatcher();
+            PuttySessionsManager.StartWatcher();
 			if (Settings.Default.StartupComponentsCheck)
 			{
                 Windows.Show(WindowType.ComponentsCheck);

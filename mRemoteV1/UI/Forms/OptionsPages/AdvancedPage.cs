@@ -80,7 +80,7 @@ namespace mRemoteNG.UI.Forms.OptionsPages
             if (puttyPathChanged)
             {
                 PuttyBase.PuttyPath = Settings.Default.UseCustomPuttyPath ? Settings.Default.CustomPuttyPath : GeneralAppInfo.PuttyPath;
-                PuttySessionsManager.AddSessionsToTree(Windows.treeForm.tvConnections);
+                PuttySessionsManager.AddSessionsToTree();
             }
 
             Settings.Default.MaxPuttyWaitTime = (int) numPuttyWaitTime.Value;
