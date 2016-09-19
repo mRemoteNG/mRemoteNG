@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
 using mRemoteNG.UI.Controls;
@@ -85,9 +86,9 @@ namespace mRemoteNG.UI.Window
 
 	    private object ConnectionImageGetter(object rowObject)
 	    {
+            if (rowObject is RootPuttySessionsNodeInfo) return "PuttySessions";
             if (rowObject is RootNodeInfo) return "Root";
 	        if (rowObject is ContainerInfo) return "Folder";
-            if (rowObject is PuttySessionInfo) return "PuttySessions";
 	        var connection = rowObject as ConnectionInfo;
 	        if (connection == null) return "";
 	        return connection.OpenConnections.Count > 0 ? "Play" : "Pause";
