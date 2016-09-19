@@ -7,37 +7,29 @@ using System;
 using System.Collections.Generic;
 using System.Management;
 using System.Security.Principal;
+using System.Web;
 
 
 namespace mRemoteNG.Config.Putty
 {
 	public class PuttySessionsRegistryProvider : PuttySessionsProvider
 	{
-        #region Private Fields
         private const string PuttySessionsKey = "Software\\SimonTatham\\PuTTY\\Sessions";
         private static ManagementEventWatcher _eventWatcher;
-        #endregion
 
         #region Public Methods
 		public override string[] GetSessionNames(bool raw = false)
 		{
-			RegistryKey sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
+            var sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
 			if (sessionsKey == null)
 			{
 				return new string[] {};
 			}
-				
-			List<string> sessionNames = new List<string>();
-			foreach (string sessionName in sessionsKey.GetSubKeyNames())
+
+            var sessionNames = new List<string>();
+			foreach (var sessionName in sessionsKey.GetSubKeyNames())
 			{
-				if (raw)
-				{
-					sessionNames.Add(sessionName);
-				}
-				else
-				{
-					sessionNames.Add(System.Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B")));
-				}
+			    sessionNames.Add(raw ? sessionName : HttpUtility.UrlDecode(sessionName.Replace("+", "%2B")));
 			}
 				
 			if (raw)
@@ -60,31 +52,25 @@ namespace mRemoteNG.Config.Putty
 			
 		public override PuttySessionInfo GetSession(string sessionName)
 		{
-			RegistryKey sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
-			if (sessionsKey == null)
-			{
-				return null;
-			}
-				
-			RegistryKey sessionKey = sessionsKey.OpenSubKey(sessionName);
+            var sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
+
+            var sessionKey = sessionsKey?.OpenSubKey(sessionName);
 			if (sessionKey == null)
 			{
 				return null;
 			}
 				
 			sessionName = System.Web.HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"));
-				
-			PuttySessionInfo sessionInfo = new PuttySessionInfo();
-			sessionInfo.PuttySession = sessionName;
-			sessionInfo.Name = sessionName;
-			sessionInfo.Hostname = Convert.ToString(sessionKey.GetValue("HostName"));
-			sessionInfo.Username = Convert.ToString(sessionKey.GetValue("UserName"));
-			string protocol = Convert.ToString(sessionKey.GetValue("Protocol"));
-			if (protocol == null)
-			{
-				protocol = "ssh";
-			}
-			switch (protocol.ToLowerInvariant())
+
+		    var sessionInfo = new PuttySessionInfo
+		    {
+		        PuttySession = sessionName,
+		        Name = sessionName,
+		        Hostname = Convert.ToString(sessionKey.GetValue("HostName")),
+		        Username = Convert.ToString(sessionKey.GetValue("UserName"))
+		    };
+            var protocol = Convert.ToString(sessionKey.GetValue("Protocol")) ?? "ssh";
+		    switch (protocol.ToLowerInvariant())
 			{
 				case "raw":
 					sessionInfo.Protocol = ProtocolType.RAW;
@@ -95,18 +81,11 @@ namespace mRemoteNG.Config.Putty
 				case "serial":
 					return null;
 				case "ssh":
-					object sshVersionObject = sessionKey.GetValue("SshProt");
+                    var sshVersionObject = sessionKey.GetValue("SshProt");
 					if (sshVersionObject != null)
 					{
-						int sshVersion = Convert.ToInt32(sshVersionObject);
-						if (sshVersion >= 2)
-						{
-							sessionInfo.Protocol = ProtocolType.SSH2;
-						}
-						else
-						{
-							sessionInfo.Protocol = ProtocolType.SSH1;
-						}
+					    var sshVersion = Convert.ToInt32(sshVersionObject);
+					    sessionInfo.Protocol = sshVersion >= 2 ? ProtocolType.SSH2 : ProtocolType.SSH1;
 					}
 					else
 					{
@@ -133,9 +112,9 @@ namespace mRemoteNG.Config.Putty
 				
 			try
 			{
-				string currentUserSid = WindowsIdentity.GetCurrent().User.Value;
-				string key = Convert.ToString(string.Join("\\", new[] {currentUserSid, PuttySessionsKey}).Replace("\\", "\\\\"));
-				WqlEventQuery query = new WqlEventQuery(string.Format("SELECT * FROM RegistryTreeChangeEvent WHERE Hive = \'HKEY_USERS\' AND RootPath = \'{0}\'", key));
+                var currentUserSid = WindowsIdentity.GetCurrent().User.Value;
+                var key = Convert.ToString(string.Join("\\", currentUserSid, PuttySessionsKey).Replace("\\", "\\\\"));
+                var query = new WqlEventQuery($"SELECT * FROM RegistryTreeChangeEvent WHERE Hive = \'HKEY_USERS\' AND RootPath = \'{key}\'");
 				_eventWatcher = new ManagementEventWatcher(query);
 				_eventWatcher.EventArrived += OnManagementEventArrived;
 				_eventWatcher.Start();
@@ -158,11 +137,9 @@ namespace mRemoteNG.Config.Putty
 		}
         #endregion
 		
-        #region Private Methods
 		private void OnManagementEventArrived(object sender, EventArrivedEventArgs e)
 		{
 			OnSessionChanged(new SessionChangedEventArgs());
 		}
-        #endregion
 	}
 }
