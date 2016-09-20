@@ -124,7 +124,7 @@ namespace mRemoteNG.Config.Putty
 		public override void StartWatcher()
 		{
 			PuttySessionsRegistryProvider.StartWatcher();
-			PuttySessionsRegistryProvider.SessionChanged += OnRegistrySessionChanged;
+			PuttySessionsRegistryProvider.PuttySessionChanged += OnRegistrySessionChanged;
 				
 			if (_eventWatcher != null)
 			{
@@ -152,7 +152,7 @@ namespace mRemoteNG.Config.Putty
 		public override void StopWatcher()
 		{
 			PuttySessionsRegistryProvider.StopWatcher();
-			PuttySessionsRegistryProvider.SessionChanged -= OnRegistrySessionChanged;
+			PuttySessionsRegistryProvider.PuttySessionChanged -= OnRegistrySessionChanged;
 				
 			if (_eventWatcher == null)
 			{

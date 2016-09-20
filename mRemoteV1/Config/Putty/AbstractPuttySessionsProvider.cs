@@ -33,11 +33,11 @@ namespace mRemoteNG.Config.Putty
         #endregion
 		
 		public delegate void PuttySessionChangedEventHandler(object sender, PuttySessionChangedEventArgs e);
-        public event PuttySessionChangedEventHandler SessionChanged;
+        public event PuttySessionChangedEventHandler PuttySessionChanged;
 		
 		protected virtual void RaiseSessionChangedEvent(PuttySessionChangedEventArgs args)
 		{
-            SessionChanged?.Invoke(this, args);
+            PuttySessionChanged?.Invoke(this, args);
 		}
     }
 }

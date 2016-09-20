@@ -46,7 +46,7 @@ namespace mRemoteNG.Config.Putty
 			foreach (var provider in Providers)
 			{
 				provider.StartWatcher();
-				provider.SessionChanged += SessionChanged;
+				provider.PuttySessionChanged += PuttySessionChanged;
 			}
 		}
 		
@@ -55,7 +55,7 @@ namespace mRemoteNG.Config.Putty
 			foreach (var provider in Providers)
 			{
 				provider.StopWatcher();
-				provider.SessionChanged -= SessionChanged;
+				provider.PuttySessionChanged -= PuttySessionChanged;
 			}
 		}
 
@@ -78,7 +78,7 @@ namespace mRemoteNG.Config.Putty
                 RaiseSessionProvidersCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, providerToRemove));
         }
 
-        public void SessionChanged(object sender, PuttySessionChangedEventArgs e)
+        public void PuttySessionChanged(object sender, PuttySessionChangedEventArgs e)
 		{
 			AddSessions();
 		}
