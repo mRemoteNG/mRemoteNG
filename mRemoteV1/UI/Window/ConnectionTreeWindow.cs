@@ -74,7 +74,11 @@ namespace mRemoteNG.UI.Window
 	    {
             olvNameColumn.AspectGetter = item => ((ConnectionInfo)item).Name;
 	        olvNameColumn.ImageGetter = ConnectionImageGetter;
-            olvConnections.CanExpandGetter = item => item is ContainerInfo && ((ContainerInfo)item).Children.Count > 0;
+            olvConnections.CanExpandGetter = item =>
+            {
+                var itemAsContainer = item as ContainerInfo;
+                return itemAsContainer?.Children.Count > 0;
+            };
             olvConnections.ChildrenGetter = item => ((ContainerInfo)item).Children;
             olvConnections.ContextMenuStrip = _contextMenu;
 	    }
