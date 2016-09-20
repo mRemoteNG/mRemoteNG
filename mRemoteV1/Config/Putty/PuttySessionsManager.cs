@@ -1,8 +1,7 @@
 using mRemoteNG.Tools;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
-using System.Windows.Forms;
-using mRemoteNG.App;
 using mRemoteNG.Root.PuttySessions;
 
 
@@ -10,8 +9,10 @@ namespace mRemoteNG.Config.Putty
 {
 	public class PuttySessionsManager
 	{
-        private static List<AbstractPuttySessionsProvider> _providers;
-        public static IEnumerable<AbstractPuttySessionsProvider> Providers
+        public static PuttySessionsManager Instance { get; } = new PuttySessionsManager();
+
+        private List<AbstractPuttySessionsProvider> _providers;
+        public IEnumerable<AbstractPuttySessionsProvider> Providers
         {
             get
             {
@@ -20,11 +21,13 @@ namespace mRemoteNG.Config.Putty
                 return _providers;
             }
         }
+        public List<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = new List<RootPuttySessionsNodeInfo>();
 
-        public static List<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = new List<RootPuttySessionsNodeInfo>();
+        private PuttySessionsManager()
+        { }
 
         #region Public Methods
-		public static void AddSessionsToTree()
+		public void AddSessionsToTree()
 		{
 			foreach (var provider in Providers)
 			{
@@ -32,7 +35,7 @@ namespace mRemoteNG.Config.Putty
 			}
 		}
 
-	    private static void AddSessionsToTreeForProvider(AbstractPuttySessionsProvider provider)
+	    private void AddSessionsToTreeForProvider(AbstractPuttySessionsProvider provider)
 	    {
             var rootTreeNode = provider.RootInfo;
 	        provider.GetSessions();
@@ -42,7 +45,7 @@ namespace mRemoteNG.Config.Putty
             rootTreeNode.SortRecursive();
         }
 		
-		public static void StartWatcher()
+		public void StartWatcher()
 		{
 			foreach (var provider in Providers)
 			{
@@ -51,7 +54,7 @@ namespace mRemoteNG.Config.Putty
 			}
 		}
 		
-		public static void StopWatcher()
+		public void StopWatcher()
 		{
 			foreach (var provider in Providers)
 			{
@@ -60,24 +63,24 @@ namespace mRemoteNG.Config.Putty
 			}
 		}
 		
-		public static void SessionChanged(object sender, AbstractPuttySessionsProvider.SessionChangedEventArgs e)
+		public void SessionChanged(object sender, AbstractPuttySessionsProvider.SessionChangedEventArgs e)
 		{
 			AddSessionsToTree();
 		}
         #endregion
 		
         #region Private Methods
-	    public static void AddProvider(AbstractPuttySessionsProvider provider)
+	    public void AddProvider(AbstractPuttySessionsProvider provider)
 	    {
 	        _providers.Add(provider);
 	    }
 			
-		private static void AddProviders()
+		private void AddProviders()
 		{
 		    _providers = new List<AbstractPuttySessionsProvider> {new PuttySessionsRegistryProvider(), new PuttySessionsXmingProvider()};
 		}
 			
-		private static string[] GetSessionNames(bool raw = false)
+		private string[] GetSessionNames(bool raw = false)
 		{
 			var sessionNames = new List<string>();
 			foreach (var provider in Providers)
@@ -91,7 +94,7 @@ namespace mRemoteNG.Config.Putty
 			return sessionNames.ToArray();
 		}
 			
-		private static bool IsProviderEnabled(AbstractPuttySessionsProvider puttySessionsProvider)
+		private bool IsProviderEnabled(AbstractPuttySessionsProvider puttySessionsProvider)
 		{
             var enabled = true;
 			if (PuttyTypeDetector.GetPuttyType() == PuttyTypeDetector.PuttyType.Xming)
@@ -111,7 +114,7 @@ namespace mRemoteNG.Config.Putty
         #region Public Classes
         public class SessionList : StringConverter
         {
-            public static string[] Names => GetSessionNames();
+            public static string[] Names => Instance.GetSessionNames();
 
             public override StandardValuesCollection GetStandardValues(ITypeDescriptorContext context)
 	        {
@@ -129,5 +132,12 @@ namespace mRemoteNG.Config.Putty
 	        }
         }
         #endregion
-	}
+
+        public event NotifyCollectionChangedEventHandler PuttySessionsCollectionChanged;
+
+	    protected void RaiseCollectionChangedEvent(NotifyCollectionChangedEventArgs args)
+	    {
+	        PuttySessionsCollectionChanged?.Invoke(this, args);
+	    }
+    }
 }

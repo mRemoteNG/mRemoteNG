@@ -1,6 +1,7 @@
 ﻿using mRemoteNG.Tools;
 using System;
 using System.Diagnostics;
+using mRemoteNG.Config.Putty;
 using mRemoteNG.UI.Forms;
 
 namespace mRemoteNG.App
@@ -36,7 +37,7 @@ namespace mRemoteNG.App
 
         private static void StopPuttySessionWatcher()
         {
-            Config.Putty.PuttySessionsManager.StopWatcher();
+            PuttySessionsManager.Instance.StopWatcher();
         }
 
         private static void DisposeNotificationAreaIcon()
@@ -47,7 +48,7 @@ namespace mRemoteNG.App
 
         private static void SaveConnections()
         {
-            if (mRemoteNG.Settings.Default.SaveConsOnExit)
+            if (Settings.Default.SaveConsOnExit)
                 Runtime.SaveConnections();
         }
 
