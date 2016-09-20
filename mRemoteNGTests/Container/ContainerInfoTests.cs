@@ -159,5 +159,29 @@ namespace mRemoteNGTests.Container
             _containerInfo.SetChildPosition(_con2, -1);
             Assert.That(_containerInfo.Children.IndexOf(_con2), Is.EqualTo(originalIndex));
         }
+
+        [Test]
+        public void SetChildAbovePutsChildInCorrectPosition()
+        {
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con3);
+            var referenceChildIndexBeforeMove = _containerInfo.Children.IndexOf(_con2);
+            _containerInfo.SetChildAbove(_con3, _con2);
+            var targetsNewIndex = _containerInfo.Children.IndexOf(_con3);
+            Assert.That(targetsNewIndex, Is.EqualTo(referenceChildIndexBeforeMove));
+        }
+
+        [Test]
+        public void SetChildBelowPutsChildInCorrectPosition()
+        {
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con3);
+            var referenceChildIndexBeforeMove = _containerInfo.Children.IndexOf(_con1);
+            _containerInfo.SetChildBelow(_con3, _con1);
+            var targetsNewIndex = _containerInfo.Children.IndexOf(_con3);
+            Assert.That(targetsNewIndex, Is.EqualTo(referenceChildIndexBeforeMove+1));
+        }
     }
 }
