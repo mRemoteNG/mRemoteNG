@@ -149,6 +149,7 @@
     <Compile Include="Config\Connections\SqlUpdateQueryBuilder.cs" />
     <Compile Include="Config\Connections\SqlUpdateTimer.cs" />
     <Compile Include="Config\Connections\XmlConnectionsDeserializer.cs" />
+    <Compile Include="Config\Putty\SessionChangedEventArgs.cs" />
     <Compile Include="Config\Settings\ExternalAppsLoader.cs" />
     <Compile Include="Config\Settings\LayoutSettingsLoader.cs" />
     <Compile Include="Config\Settings\Providers\AppSettingsProvider.cs" />

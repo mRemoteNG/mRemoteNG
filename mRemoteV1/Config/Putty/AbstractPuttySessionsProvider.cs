@@ -50,9 +50,6 @@ namespace mRemoteNG.Config.Putty
         #endregion
 			
         #region Public Classes
-		public class SessionChangedEventArgs : EventArgs
-		{
-		}
         #endregion
 			
         #region Protected Methods
