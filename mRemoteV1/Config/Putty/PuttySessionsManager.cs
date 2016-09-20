@@ -61,21 +61,24 @@ namespace mRemoteNG.Config.Putty
 
         public void AddProvider(AbstractPuttySessionsProvider newProvider)
         {
+            if (_providers.Contains(newProvider)) return;
             _providers.Add(newProvider);
+            newProvider.PuttySessionsCollectionChanged += PuttySessionsCollectionChanged;
             RaiseSessionProvidersCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newProvider));
         }
 
         public void AddProviders(IEnumerable<AbstractPuttySessionsProvider> newProviders)
         {
-            _providers.AddRange(newProviders);
-            RaiseSessionProvidersCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newProviders));
+            foreach (var provider in newProviders)
+                AddProvider(provider);
         }
 
         public void RemoveProvider(AbstractPuttySessionsProvider providerToRemove)
         {
-            var wasRemoved = _providers.Remove(providerToRemove);
-            if (wasRemoved)
-                RaiseSessionProvidersCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, providerToRemove));
+            if (!_providers.Contains(providerToRemove)) return;
+            _providers.Remove(providerToRemove);
+            providerToRemove.PuttySessionsCollectionChanged -= PuttySessionsCollectionChanged;
+            RaiseSessionProvidersCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, providerToRemove));
         }
 
         public void PuttySessionChanged(object sender, PuttySessionChangedEventArgs e)
