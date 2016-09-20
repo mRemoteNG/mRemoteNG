@@ -14,7 +14,7 @@ namespace mRemoteNG.Config.Putty
         #region Public Methods
         public abstract string[] GetSessionNames(bool raw = false);
 		public abstract PuttySessionInfo GetSession(string sessionName);
-			
+		
 		public virtual IEnumerable<PuttySessionInfo> GetSessions()
 		{
 			foreach (var sessionName in GetSessionNames(true))
@@ -26,22 +26,18 @@ namespace mRemoteNG.Config.Putty
 			}
 			return RootInfo.Children.OfType<PuttySessionInfo>();
 		}
-			
+		
 		public virtual void StartWatcher() { }
-			
+		
 		public virtual void StopWatcher() { }
         #endregion
-			
-        #region Public Events
+		
 		public delegate void SessionChangedEventHandler(object sender, SessionChangedEventArgs e);
         public event SessionChangedEventHandler SessionChanged;
-        #endregion
-			
-        #region Protected Methods
-		protected virtual void RaiseSessionChangedEvent(SessionChangedEventArgs e)
+		
+		protected virtual void RaiseSessionChangedEvent(SessionChangedEventArgs args)
 		{
-            SessionChanged?.Invoke(this, new SessionChangedEventArgs());
+            SessionChanged?.Invoke(this, args);
 		}
-        #endregion
     }
 }
