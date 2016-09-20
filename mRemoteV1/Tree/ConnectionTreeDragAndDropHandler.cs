@@ -6,6 +6,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree.Root;
 
+
 namespace mRemoteNG.Tree
 {
     internal class ConnectionTreeDragAndDropHandler
@@ -15,9 +16,9 @@ namespace mRemoteNG.Tree
 
         internal void HandleEvent_ModelDropped(object sender, ModelDropEventArgs e)
         {
-            var draggedObject = (ConnectionInfo)e.SourceModels[0];
             var dropTarget = e.TargetModel as ConnectionInfo;
             if (dropTarget == null) return;
+            var draggedObject = (ConnectionInfo)e.SourceModels[0];
             if (e.DropTargetLocation == DropTargetLocation.Item)
             {
                 var dropTargetAsContainer = dropTarget as ContainerInfo;
@@ -38,7 +39,6 @@ namespace mRemoteNG.Tree
                 dropTarget.Parent.SetChildBelow(draggedObject, dropTarget);
             }
             e.Handled = true;
-            e.RefreshObjects();
         }
 
         internal void HandleEvent_ModelCanDrop(object sender, ModelDropEventArgs e)
