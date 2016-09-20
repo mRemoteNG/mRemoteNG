@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.Specialized;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree.Root;
@@ -6,13 +7,24 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Tree
 {
-    public class ConnectionTreeModel
+    public class ConnectionTreeModel : INotifyCollectionChanged
     {
         public List<ContainerInfo> RootNodes { get; } = new List<ContainerInfo>();
 
         public void AddRootNode(ContainerInfo rootNode)
         {
+            if (RootNodes.Contains(rootNode)) return;
             RootNodes.Add(rootNode);
+            rootNode.CollectionChanged += RaiseCollectionChangedEvent;
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, rootNode));
+        }
+
+        public void RemoveRootNode(ContainerInfo rootNode)
+        {
+            if (!RootNodes.Contains(rootNode)) return;
+            rootNode.CollectionChanged -= RaiseCollectionChangedEvent;
+            RootNodes.Remove(rootNode);
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, rootNode));
         }
 
         public IEnumerable<ConnectionInfo> GetRecursiveChildList()
@@ -51,6 +63,12 @@ namespace mRemoteNG.Tree
         public void CloneNode(ConnectionInfo connectionInfo)
         {
             connectionInfo.Clone();
+        }
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            CollectionChanged?.Invoke(sender, args);
         }
     }
 }
