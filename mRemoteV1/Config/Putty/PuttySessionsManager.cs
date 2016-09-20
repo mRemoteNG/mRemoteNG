@@ -11,31 +11,27 @@ namespace mRemoteNG.Config.Putty
 	{
         public static PuttySessionsManager Instance { get; } = new PuttySessionsManager();
 
-        private List<AbstractPuttySessionsProvider> _providers;
-        public IEnumerable<AbstractPuttySessionsProvider> Providers
-        {
-            get
-            {
-                if (_providers == null || _providers.Count == 0)
-                    AddProviders();
-                return _providers;
-            }
-        }
-        public List<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = new List<RootPuttySessionsNodeInfo>();
+        private readonly List<AbstractPuttySessionsProvider> _providers = new List<AbstractPuttySessionsProvider>();
+        public IEnumerable<AbstractPuttySessionsProvider> Providers => _providers;
+	    public List<RootPuttySessionsNodeInfo> RootPuttySessionsNodes { get; } = new List<RootPuttySessionsNodeInfo>();
 
-        private PuttySessionsManager()
-        { }
+	    private PuttySessionsManager()
+	    {
+	        AddProvider(new PuttySessionsRegistryProvider());
+            AddProvider(new PuttySessionsXmingProvider());
+	    }
+
 
         #region Public Methods
-		public void AddSessionsToTree()
+		public void AddSessions()
 		{
 			foreach (var provider in Providers)
 			{
-			    AddSessionsToTreeForProvider(provider);
+			    AddSessionsFromProvider(provider);
 			}
 		}
 
-	    private void AddSessionsToTreeForProvider(AbstractPuttySessionsProvider provider)
+	    private void AddSessionsFromProvider(AbstractPuttySessionsProvider provider)
 	    {
             var rootTreeNode = provider.RootInfo;
 	        provider.GetSessions();
@@ -62,24 +58,33 @@ namespace mRemoteNG.Config.Putty
 				provider.SessionChanged -= SessionChanged;
 			}
 		}
-		
-		public void SessionChanged(object sender, AbstractPuttySessionsProvider.SessionChangedEventArgs e)
+
+        public void AddProvider(AbstractPuttySessionsProvider newProvider)
+        {
+            _providers.Add(newProvider);
+            RaiseSessionProvidersCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newProvider));
+        }
+
+        public void AddProviders(IEnumerable<AbstractPuttySessionsProvider> newProviders)
+        {
+            _providers.AddRange(newProviders);
+            RaiseSessionProvidersCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newProviders));
+        }
+
+        public void RemoveProvider(AbstractPuttySessionsProvider providerToRemove)
+        {
+            var wasRemoved = _providers.Remove(providerToRemove);
+            if (wasRemoved)
+                RaiseSessionProvidersCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, providerToRemove));
+        }
+
+        public void SessionChanged(object sender, AbstractPuttySessionsProvider.SessionChangedEventArgs e)
 		{
-			AddSessionsToTree();
+			AddSessions();
 		}
         #endregion
-		
+
         #region Private Methods
-	    public void AddProvider(AbstractPuttySessionsProvider provider)
-	    {
-	        _providers.Add(provider);
-	    }
-			
-		private void AddProviders()
-		{
-		    _providers = new List<AbstractPuttySessionsProvider> {new PuttySessionsRegistryProvider(), new PuttySessionsXmingProvider()};
-		}
-			
 		private string[] GetSessionNames(bool raw = false)
 		{
 			var sessionNames = new List<string>();
@@ -135,9 +140,16 @@ namespace mRemoteNG.Config.Putty
 
         public event NotifyCollectionChangedEventHandler PuttySessionsCollectionChanged;
 
-	    protected void RaiseCollectionChangedEvent(NotifyCollectionChangedEventArgs args)
+	    protected void RaisePuttySessionCollectionChangedEvent(NotifyCollectionChangedEventArgs args)
 	    {
 	        PuttySessionsCollectionChanged?.Invoke(this, args);
 	    }
+
+        public event NotifyCollectionChangedEventHandler SessionProvidersCollectionChanged;
+
+        protected void RaiseSessionProvidersCollectionChangedEvent(NotifyCollectionChangedEventArgs args)
+        {
+            SessionProvidersCollectionChanged?.Invoke(this, args);
+        }
     }
 }

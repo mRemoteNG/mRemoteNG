@@ -67,7 +67,7 @@ namespace mRemoteNG.Config.Connections
 			frmMain.Default.ConnectionsFileName = ConnectionFileName;
 
 		    if (import) return;
-		    PuttySessionsManager.Instance.AddSessionsToTree();
+		    PuttySessionsManager.Instance.AddSessions();
 		    Runtime.ConnectionTreeModel.RootNodes.AddRange(PuttySessionsManager.Instance.RootPuttySessionsNodes);
 		}
     }
