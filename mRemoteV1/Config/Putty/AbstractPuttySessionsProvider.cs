@@ -32,8 +32,8 @@ namespace mRemoteNG.Config.Putty
 		public virtual void StopWatcher() { }
         #endregion
 		
-		public delegate void SessionChangedEventHandler(object sender, PuttySessionChangedEventArgs e);
-        public event SessionChangedEventHandler SessionChanged;
+		public delegate void PuttySessionChangedEventHandler(object sender, PuttySessionChangedEventArgs e);
+        public event PuttySessionChangedEventHandler SessionChanged;
 		
 		protected virtual void RaiseSessionChangedEvent(PuttySessionChangedEventArgs args)
 		{
