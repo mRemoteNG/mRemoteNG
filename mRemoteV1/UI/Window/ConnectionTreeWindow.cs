@@ -9,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using mRemoteNG.Config.Putty;
 using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree.Root;
@@ -24,6 +25,7 @@ namespace mRemoteNG.UI.Window
 	    private readonly ConnectionTreeDragAndDropHandler _dragAndDropHandler = new ConnectionTreeDragAndDropHandler();
         private NodeSearcher _nodeSearcher;
 	    private readonly ConnectionContextMenu _contextMenu = new ConnectionContextMenu();
+        private readonly PuttySessionsManager _puttySessionsManager = PuttySessionsManager.Instance;
 
 	    public ConnectionInfo SelectedNode => (ConnectionInfo) olvConnections.SelectedObject;
 
@@ -104,6 +106,7 @@ namespace mRemoteNG.UI.Window
 	        SetTreeEventHandlers();
 	        SetContextMenuEventHandlers();
             SetMenuEventHandlers();
+	        SetModelUpdateHandlers();
 	    }
 
 	    private void SetTreeEventHandlers()
@@ -168,6 +171,11 @@ namespace mRemoteNG.UI.Window
                 olvConnections.Expand(GetRootConnectionNode());
 	        };
 	        mMenSortAscending.Click += (sender, args) => SortNodesRecursive(GetRootConnectionNode(), ListSortDirection.Ascending);
+	    }
+
+	    private void SetModelUpdateHandlers()
+	    {
+	        _puttySessionsManager.PuttySessionsCollectionChanged += (sender, args) => RefreshTreeObjects(olvConnections.Objects.OfType<RootPuttySessionsNodeInfo>().ToList());
 	    }
 
 	    private void PopulateTreeView()

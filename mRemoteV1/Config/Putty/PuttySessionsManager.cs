@@ -63,7 +63,7 @@ namespace mRemoteNG.Config.Putty
         {
             if (_providers.Contains(newProvider)) return;
             _providers.Add(newProvider);
-            newProvider.PuttySessionsCollectionChanged += PuttySessionsCollectionChanged;
+            newProvider.PuttySessionsCollectionChanged += RaisePuttySessionCollectionChangedEvent;
             RaiseSessionProvidersCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newProvider));
         }
 
@@ -77,7 +77,7 @@ namespace mRemoteNG.Config.Putty
         {
             if (!_providers.Contains(providerToRemove)) return;
             _providers.Remove(providerToRemove);
-            providerToRemove.PuttySessionsCollectionChanged -= PuttySessionsCollectionChanged;
+            providerToRemove.PuttySessionsCollectionChanged -= RaisePuttySessionCollectionChangedEvent;
             RaiseSessionProvidersCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, providerToRemove));
         }
 
@@ -142,14 +142,12 @@ namespace mRemoteNG.Config.Putty
         #endregion
 
         public event NotifyCollectionChangedEventHandler PuttySessionsCollectionChanged;
-
-	    protected void RaisePuttySessionCollectionChangedEvent(NotifyCollectionChangedEventArgs args)
-	    {
-	        PuttySessionsCollectionChanged?.Invoke(this, args);
-	    }
+        protected void RaisePuttySessionCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            PuttySessionsCollectionChanged?.Invoke(sender, args);
+        }
 
         public event NotifyCollectionChangedEventHandler SessionProvidersCollectionChanged;
-
         protected void RaiseSessionProvidersCollectionChangedEvent(NotifyCollectionChangedEventArgs args)
         {
             SessionProvidersCollectionChanged?.Invoke(this, args);
