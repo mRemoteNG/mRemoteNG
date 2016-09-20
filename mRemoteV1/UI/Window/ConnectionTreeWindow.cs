@@ -3,6 +3,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -255,7 +256,7 @@ namespace mRemoteNG.UI.Window
             var newNode = SelectedNode.Clone();
             newNode.Parent.SetChildBelow(newNode, SelectedNode);
             Runtime.SaveConnectionsBG();
-            olvConnections.RefreshObject(SelectedNode);
+            RefreshTreeObject(SelectedNode);
         }
 
         public void RenameSelectedNode()
@@ -269,7 +270,7 @@ namespace mRemoteNG.UI.Window
             if (!UserConfirmsDeletion()) return;
             ConnectionTreeModel.DeleteNode(SelectedNode);
             Runtime.SaveConnectionsBG();
-            olvConnections.RefreshObject(SelectedNode);
+            RefreshTreeObject(SelectedNode);
         }
 
 	    private bool UserConfirmsDeletion()
@@ -384,6 +385,16 @@ namespace mRemoteNG.UI.Window
 				Runtime.MessageCollector.AddExceptionStackTrace("tvConnections_MouseMove (UI.Window.ConnectionTreeWindow) failed", ex);
 			}
 		}
+
+	    private void RefreshTreeObject(object modelObject)
+	    {
+	        RefreshTreeObjects(new[] { modelObject });
+	    }
+
+	    private void RefreshTreeObjects(IList modelObjects)
+	    {
+	        olvConnections.RefreshObjects(modelObjects);
+	    }
         #endregion
 
         #region Tree Context Menu
@@ -406,28 +417,28 @@ namespace mRemoteNG.UI.Window
                 selectedNodeAsContainer.Sort(sortDirection);
             else
                 SelectedNode.Parent.Sort(sortDirection);
-            olvConnections.RefreshObject(SelectedNode);
+            RefreshTreeObject(SelectedNode);
             Runtime.SaveConnectionsBG();
         }
 
 	    private void SortNodesRecursive(ContainerInfo rootSortTarget, ListSortDirection sortDirection)
 	    {
 	        rootSortTarget.SortRecursive(sortDirection);
-            olvConnections.RefreshObject(rootSortTarget);
+            RefreshTreeObject(rootSortTarget);
             Runtime.SaveConnectionsBG();
         }
 
         private void cMenTreeMoveUp_Click(object sender, EventArgs e)
 		{
             SelectedNode.Parent.PromoteChild(SelectedNode);
-            olvConnections.RefreshObject(SelectedNode);
+            RefreshTreeObject(SelectedNode);
             Runtime.SaveConnectionsBG();
 		}
 
         private void cMenTreeMoveDown_Click(object sender, EventArgs e)
 		{
             SelectedNode.Parent.DemoteChild(SelectedNode);
-            olvConnections.RefreshObject(SelectedNode);
+            RefreshTreeObject(SelectedNode);
             Runtime.SaveConnectionsBG();
 		}
         #endregion
@@ -440,9 +451,9 @@ namespace mRemoteNG.UI.Window
 			    var newConnectionInfo = new ConnectionInfo();
 			    var selectedContainer = SelectedNode as ContainerInfo;
 			    newConnectionInfo.SetParent(selectedContainer ?? SelectedNode.Parent);
-                olvConnections.RebuildAll(true);
                 Runtime.ConnectionList.Add(newConnectionInfo);
-			}
+                RefreshTreeObject(newConnectionInfo.Parent);
+            }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionStackTrace("UI.Window.Tree.AddConnection() failed.", ex);
@@ -456,9 +467,9 @@ namespace mRemoteNG.UI.Window
 				var newContainerInfo = new ContainerInfo();
                 var selectedContainer = SelectedNode as ContainerInfo;
                 newContainerInfo.SetParent(selectedContainer ?? SelectedNode.Parent);
-                olvConnections.RebuildAll(true);
                 Runtime.ContainerList.Add(newContainerInfo);
-			}
+                RefreshTreeObject(newContainerInfo.Parent);
+            }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionStackTrace(Language.strErrorAddFolderFailed, ex);
