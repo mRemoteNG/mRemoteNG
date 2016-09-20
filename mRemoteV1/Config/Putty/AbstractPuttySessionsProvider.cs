@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System;
 using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Root.PuttySessions;

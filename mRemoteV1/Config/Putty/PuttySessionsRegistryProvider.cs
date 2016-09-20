@@ -21,10 +21,7 @@ namespace mRemoteNG.Config.Putty
 		public override string[] GetSessionNames(bool raw = false)
 		{
             var sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
-			if (sessionsKey == null)
-			{
-				return new string[] {};
-			}
+			if (sessionsKey == null) return new string[] {};
 
             var sessionNames = new List<string>();
 			foreach (var sessionName in sessionsKey.GetSubKeyNames())
@@ -43,12 +40,8 @@ namespace mRemoteNG.Config.Putty
 		public override PuttySessionInfo GetSession(string sessionName)
 		{
             var sessionsKey = Registry.CurrentUser.OpenSubKey(PuttySessionsKey);
-
             var sessionKey = sessionsKey?.OpenSubKey(sessionName);
-			if (sessionKey == null)
-			{
-				return null;
-			}
+			if (sessionKey == null)	return null;
 				
 			sessionName = HttpUtility.UrlDecode(sessionName.Replace("+", "%2B"));
 
@@ -95,10 +88,7 @@ namespace mRemoteNG.Config.Putty
 			
 		public override void StartWatcher()
 		{
-			if (_eventWatcher != null)
-			{
-				return ;
-			}
+			if (_eventWatcher != null) return;
 				
 			try
 			{
@@ -117,10 +107,7 @@ namespace mRemoteNG.Config.Putty
 			
 		public override void StopWatcher()
 		{
-			if (_eventWatcher == null)
-			{
-				return ;
-			}
+			if (_eventWatcher == null) return;
 			_eventWatcher.Stop();
 			_eventWatcher.Dispose();
 			_eventWatcher = null;
