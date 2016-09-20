@@ -78,7 +78,7 @@ namespace mRemoteNG.Config.Putty
                 RaiseSessionProvidersCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, providerToRemove));
         }
 
-        public void SessionChanged(object sender, SessionChangedEventArgs e)
+        public void SessionChanged(object sender, PuttySessionChangedEventArgs e)
 		{
 			AddSessions();
 		}

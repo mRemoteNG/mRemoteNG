@@ -129,7 +129,7 @@ namespace mRemoteNG.Config.Putty
 		
 		private void OnManagementEventArrived(object sender, EventArrivedEventArgs e)
 		{
-			RaiseSessionChangedEvent(new SessionChangedEventArgs());
+			RaiseSessionChangedEvent(new PuttySessionChangedEventArgs());
 		}
 	}
 }

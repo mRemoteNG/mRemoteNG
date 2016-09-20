@@ -203,12 +203,12 @@ namespace mRemoteNG.Config.Putty
 			
 		private void OnFileSystemEventArrived(object sender, FileSystemEventArgs e)
 		{
-			RaiseSessionChangedEvent(new SessionChangedEventArgs());
+			RaiseSessionChangedEvent(new PuttySessionChangedEventArgs());
 		}
 			
-		private void OnRegistrySessionChanged(object sender, SessionChangedEventArgs e)
+		private void OnRegistrySessionChanged(object sender, PuttySessionChangedEventArgs e)
 		{
-			RaiseSessionChangedEvent(new SessionChangedEventArgs());
+			RaiseSessionChangedEvent(new PuttySessionChangedEventArgs());
 		}
         #endregion
 			
