@@ -183,5 +183,53 @@ namespace mRemoteNGTests.Container
             var targetsNewIndex = _containerInfo.Children.IndexOf(_con3);
             Assert.That(targetsNewIndex, Is.EqualTo(referenceChildIndexBeforeMove+1));
         }
+
+        [Test]
+        public void PromoteChildMovesTargetUpOne()
+        {
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con3);
+            var targetsIndexBeforeMove = _containerInfo.Children.IndexOf(_con3);
+            _containerInfo.PromoteChild(_con3);
+            var targetsNewIndex = _containerInfo.Children.IndexOf(_con3);
+            Assert.That(targetsNewIndex, Is.EqualTo(targetsIndexBeforeMove - 1));
+        }
+
+        [Test]
+        public void PromoteChildDoesNothingWhenAlreadyAtTopOfList()
+        {
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con3);
+            var targetsIndexBeforeMove = _containerInfo.Children.IndexOf(_con1);
+            _containerInfo.PromoteChild(_con1);
+            var targetsNewIndex = _containerInfo.Children.IndexOf(_con1);
+            Assert.That(targetsNewIndex, Is.EqualTo(targetsIndexBeforeMove));
+        }
+
+        [Test]
+        public void DemoteChildMovesTargetDownOne()
+        {
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con3);
+            var targetsIndexBeforeMove = _containerInfo.Children.IndexOf(_con1);
+            _containerInfo.DemoteChild(_con1);
+            var targetsNewIndex = _containerInfo.Children.IndexOf(_con1);
+            Assert.That(targetsNewIndex, Is.EqualTo(targetsIndexBeforeMove + 1));
+        }
+
+        [Test]
+        public void DemoteChildDoesNothingWhenAlreadyAtTopOfList()
+        {
+            _containerInfo.AddChild(_con1);
+            _containerInfo.AddChild(_con2);
+            _containerInfo.AddChild(_con3);
+            var targetsIndexBeforeMove = _containerInfo.Children.IndexOf(_con3);
+            _containerInfo.DemoteChild(_con3);
+            var targetsNewIndex = _containerInfo.Children.IndexOf(_con3);
+            Assert.That(targetsNewIndex, Is.EqualTo(targetsIndexBeforeMove));
+        }
     }
 }
