@@ -5,6 +5,7 @@ using mRemoteNG.Tree;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -107,7 +108,6 @@ namespace mRemoteNG.UI.Window
 	        SetTreeEventHandlers();
 	        SetContextMenuEventHandlers();
             SetMenuEventHandlers();
-	        SetModelUpdateHandlers();
 	    }
 
 	    private void SetTreeEventHandlers()
@@ -177,11 +177,13 @@ namespace mRemoteNG.UI.Window
 	    private void SetModelUpdateHandlers()
 	    {
 	        _puttySessionsManager.PuttySessionsCollectionChanged += (sender, args) => RefreshTreeObjects(GetRootPuttyNodes().ToList());
+	        ConnectionTreeModel.CollectionChanged += HandleCollectionChanged;
 	    }
 
 	    private void PopulateTreeView()
 	    {
             olvConnections.SetObjects(ConnectionTreeModel.RootNodes);
+            SetModelUpdateHandlers();
             _nodeSearcher = new NodeSearcher(ConnectionTreeModel);
 	        ExpandPreviouslyOpenedFolders();
             ExpandRootConnectionNode();
@@ -274,7 +276,6 @@ namespace mRemoteNG.UI.Window
             var newNode = SelectedNode.Clone();
             newNode.Parent.SetChildBelow(newNode, SelectedNode);
             Runtime.SaveConnectionsBG();
-            RefreshTreeObject(SelectedNode);
         }
 
         public void RenameSelectedNode()
@@ -288,7 +289,6 @@ namespace mRemoteNG.UI.Window
             if (!UserConfirmsDeletion()) return;
             ConnectionTreeModel.DeleteNode(SelectedNode);
             Runtime.SaveConnectionsBG();
-            RefreshTreeObject(SelectedNode);
         }
 
 	    private bool UserConfirmsDeletion()
@@ -404,6 +404,29 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 
+	    private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
+	    {
+	        switch (args?.Action)
+	        {
+	            case NotifyCollectionChangedAction.Add:
+                    RefreshTreeObject(sender);
+	                break;
+	            case NotifyCollectionChangedAction.Remove:
+                    RefreshTreeObjects(args.OldItems);
+	                break;
+                case NotifyCollectionChangedAction.Move:
+                    RefreshTreeObject(sender);
+                    break;
+                case NotifyCollectionChangedAction.Reset:
+                    RefreshTreeObject(sender);
+                    break;
+	            case NotifyCollectionChangedAction.Replace:
+	                break;
+	            case null:
+	                break;
+	        }
+	    }
+
 	    private void RefreshTreeObject(object modelObject)
 	    {
 	        RefreshTreeObjects(new[] { modelObject });
@@ -435,28 +458,24 @@ namespace mRemoteNG.UI.Window
                 selectedNodeAsContainer.Sort(sortDirection);
             else
                 SelectedNode.Parent.Sort(sortDirection);
-            RefreshTreeObject(SelectedNode);
             Runtime.SaveConnectionsBG();
         }
 
 	    private void SortNodesRecursive(ContainerInfo rootSortTarget, ListSortDirection sortDirection)
 	    {
 	        rootSortTarget.SortRecursive(sortDirection);
-            RefreshTreeObject(rootSortTarget);
             Runtime.SaveConnectionsBG();
         }
 
         private void cMenTreeMoveUp_Click(object sender, EventArgs e)
 		{
             SelectedNode.Parent.PromoteChild(SelectedNode);
-            RefreshTreeObject(SelectedNode);
             Runtime.SaveConnectionsBG();
 		}
 
         private void cMenTreeMoveDown_Click(object sender, EventArgs e)
 		{
             SelectedNode.Parent.DemoteChild(SelectedNode);
-            RefreshTreeObject(SelectedNode);
             Runtime.SaveConnectionsBG();
 		}
         #endregion
@@ -470,7 +489,6 @@ namespace mRemoteNG.UI.Window
 			    var selectedContainer = SelectedNode as ContainerInfo;
 			    newConnectionInfo.SetParent(selectedContainer ?? SelectedNode.Parent);
                 Runtime.ConnectionList.Add(newConnectionInfo);
-                RefreshTreeObject(newConnectionInfo.Parent);
             }
 			catch (Exception ex)
 			{
@@ -486,7 +504,6 @@ namespace mRemoteNG.UI.Window
                 var selectedContainer = SelectedNode as ContainerInfo;
                 newContainerInfo.SetParent(selectedContainer ?? SelectedNode.Parent);
                 Runtime.ContainerList.Add(newContainerInfo);
-                RefreshTreeObject(newContainerInfo.Parent);
             }
 			catch (Exception ex)
 			{
