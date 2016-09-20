@@ -172,7 +172,7 @@ namespace mRemoteNG.UI.Window
 
 	    private void PopulateTreeView()
 	    {
-            olvConnections.Roots = ConnectionTreeModel.RootNodes;
+            olvConnections.SetObjects(ConnectionTreeModel.RootNodes);
             _nodeSearcher = new NodeSearcher(ConnectionTreeModel);
 	        ExpandPreviouslyOpenedFolders();
             ExpandRootConnectionNode();
