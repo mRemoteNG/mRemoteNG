@@ -40,8 +40,8 @@ namespace mRemoteNG.Container
             if (Children.Contains(newChildItem)) return;
             newChildItem.Parent = this;
             Children.Add(newChildItem);
-            newChildItem.PropertyChanged += OnPropertyChanged;
-            RaiseCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newChildItem));
+            SubscribeToChildEvents(newChildItem);
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newChildItem));
         }
 
         public void AddChildRange(IEnumerable<ConnectionInfo> newChildren)
@@ -57,8 +57,8 @@ namespace mRemoteNG.Container
             if (!Children.Contains(removalTarget)) return;
             removalTarget.Parent = null;
             Children.Remove(removalTarget);
-            removalTarget.PropertyChanged -= OnPropertyChanged;
-            RaiseCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removalTarget));
+            UnsubscribeToChildEvents(removalTarget);
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, removalTarget));
         }
 
         public void RemoveChildRange(IEnumerable<ConnectionInfo> removalTargets)
@@ -76,7 +76,7 @@ namespace mRemoteNG.Container
             Children.Remove(child);
             if (newIndex > Children.Count) newIndex = Children.Count;
             Children.Insert(newIndex, child);
-            RaiseCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, child, newIndex, originalIndex));
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Move, child, newIndex, originalIndex));
         }
 
         public void SetChildAbove(ConnectionInfo childToPromote, ConnectionInfo reference)
@@ -126,7 +126,7 @@ namespace mRemoteNG.Container
                 SortDirection = sortDirection
             };
             Children.Sort(connectionComparer);
-            RaiseCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
         }
 
         public void SortRecursive(ListSortDirection sortDirection = ListSortDirection.Ascending)
@@ -200,12 +200,26 @@ namespace mRemoteNG.Container
             return childList;
         }
 
-        public event NotifyCollectionChangedEventHandler CollectionChanged;
-
-        private void RaiseCollectionChangedEvent(NotifyCollectionChangedEventArgs args)
+        protected virtual void SubscribeToChildEvents(ConnectionInfo child)
         {
-            var handler = CollectionChanged;
-            handler?.Invoke(this, args);
+            child.PropertyChanged += OnPropertyChanged;
+            var childAsContainer = child as ContainerInfo;
+            if (childAsContainer == null) return;
+            childAsContainer.CollectionChanged += RaiseCollectionChangedEvent;
+        }
+
+        protected virtual void UnsubscribeToChildEvents(ConnectionInfo child)
+        {
+            child.PropertyChanged -= OnPropertyChanged;
+            var childAsContainer = child as ContainerInfo;
+            if (childAsContainer == null) return;
+            childAsContainer.CollectionChanged -= RaiseCollectionChangedEvent;
+        }
+
+        public event NotifyCollectionChangedEventHandler CollectionChanged;
+        private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
+        {
+            CollectionChanged?.Invoke(sender, args);
         }
 	}
 }
