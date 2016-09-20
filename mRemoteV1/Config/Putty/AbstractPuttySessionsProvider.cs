@@ -8,7 +8,7 @@ namespace mRemoteNG.Config.Putty
 {
     public abstract class AbstractPuttySessionsProvider
 	{
-        public RootPuttySessionsNodeInfo RootInfo { get; } = new RootPuttySessionsNodeInfo();
+        public virtual RootPuttySessionsNodeInfo RootInfo { get; } = new RootPuttySessionsNodeInfo();
 
         #region Public Methods
         public abstract string[] GetSessionNames(bool raw = false);

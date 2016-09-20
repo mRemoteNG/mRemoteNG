@@ -7,12 +7,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
+using mRemoteNG.Root.PuttySessions;
 
 
 namespace mRemoteNG.Config.Putty
 {
 	public class PuttySessionsXmingProvider : AbstractPuttySessionsProvider
 	{
+        public override RootPuttySessionsNodeInfo RootInfo { get; } = new RootPuttySessionsNodeInfo { Name = "Xming Putty Sessions" };
         private const string RegistrySessionNameFormat = "{0} [registry]";
         private const string RegistrySessionNamePattern = "(.*)\\ \\[registry\\]";
         private static readonly PuttySessionsRegistryProvider PuttySessionsRegistryProvider = new PuttySessionsRegistryProvider();
