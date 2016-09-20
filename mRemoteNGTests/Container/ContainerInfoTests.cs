@@ -80,5 +80,46 @@ namespace mRemoteNGTests.Container
             _containerInfo.RemoveChildRange(collection);
             Assert.That(_containerInfo.Children, Does.Contain(_connectionInfo));
         }
+
+        [Test]
+        public void AddingChildTriggersCollectionChangedEvent()
+        {
+            var wasCalled = false;
+            _containerInfo.CollectionChanged += (sender, args) => wasCalled = true;
+            _containerInfo.AddChild(_connectionInfo);
+            Assert.That(wasCalled, Is.True);
+        }
+
+        [Test]
+        public void RemovingChildTriggersCollectionChangedEvent()
+        {
+            var wasCalled = false;
+            _containerInfo.AddChild(_connectionInfo);
+            _containerInfo.CollectionChanged += (sender, args) => wasCalled = true;
+            _containerInfo.RemoveChild(_connectionInfo);
+            Assert.That(wasCalled, Is.True);
+        }
+
+        [Test]
+        public void ChangingChildPropertyTriggersPropertyChangedEvent()
+        {
+            var wasCalled = false;
+            _containerInfo.AddChild(_connectionInfo);
+            _containerInfo.PropertyChanged += (sender, args) => wasCalled = true;
+            _connectionInfo.Name = "somethinghere";
+            Assert.That(wasCalled, Is.True);
+        }
+
+        [Test]
+        public void ChangingSubChildPropertyTriggersPropertyChangedEvent()
+        {
+            var wasCalled = false;
+            var container2 = new ContainerInfo();
+            _containerInfo.AddChild(container2);
+            container2.AddChild(_connectionInfo);
+            _containerInfo.PropertyChanged += (sender, args) => wasCalled = true;
+            _connectionInfo.Name = "somethinghere";
+            Assert.That(wasCalled, Is.True);
+        }
     }
 }
