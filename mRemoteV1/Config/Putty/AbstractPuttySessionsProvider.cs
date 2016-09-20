@@ -34,29 +34,14 @@ namespace mRemoteNG.Config.Putty
 			
         #region Public Events
 		public delegate void SessionChangedEventHandler(object sender, SessionChangedEventArgs e);
-		private SessionChangedEventHandler SessionChangedEvent;
-			
-		public event SessionChangedEventHandler SessionChanged
-		{
-			add
-			{
-				SessionChangedEvent = (SessionChangedEventHandler) Delegate.Combine(SessionChangedEvent, value);
-			}
-			remove
-			{
-				SessionChangedEvent = (SessionChangedEventHandler) Delegate.Remove(SessionChangedEvent, value);
-			}
-		}
-        #endregion
-			
-        #region Public Classes
+        public event SessionChangedEventHandler SessionChanged;
         #endregion
 			
         #region Protected Methods
-		protected virtual void OnSessionChanged(SessionChangedEventArgs e)
+		protected virtual void RaiseSessionChangedEvent(SessionChangedEventArgs e)
 		{
-		    SessionChangedEvent?.Invoke(this, new SessionChangedEventArgs());
+            SessionChanged?.Invoke(this, new SessionChangedEventArgs());
 		}
         #endregion
-	}
+    }
 }
