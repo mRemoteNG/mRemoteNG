@@ -4,6 +4,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
@@ -175,7 +176,7 @@ namespace mRemoteNG.UI.Window
 
 	    private void SetModelUpdateHandlers()
 	    {
-	        _puttySessionsManager.PuttySessionsCollectionChanged += (sender, args) => RefreshTreeObjects(olvConnections.Objects.OfType<RootPuttySessionsNodeInfo>().ToList());
+	        _puttySessionsManager.PuttySessionsCollectionChanged += (sender, args) => RefreshTreeObjects(GetRootPuttyNodes().ToList());
 	    }
 
 	    private void PopulateTreeView()
@@ -197,6 +198,11 @@ namespace mRemoteNG.UI.Window
 	    {
             return (RootNodeInfo)olvConnections.Roots.Cast<ConnectionInfo>().First(item => item is RootNodeInfo);
         }
+
+	    private IEnumerable<RootPuttySessionsNodeInfo> GetRootPuttyNodes()
+	    {
+	        return olvConnections.Objects.OfType<RootPuttySessionsNodeInfo>();
+	    }
 
         #region Form Stuff
         private void Tree_Load(object sender, EventArgs e)
