@@ -18,13 +18,33 @@ namespace mRemoteNG.Config.Putty
 		
 		public virtual IEnumerable<PuttySessionInfo> GetSessions()
 		{
-			foreach (var sessionName in GetSessionNames(true))
+		    var sessionNamesFromProvider = GetSessionNames(true);
+            foreach (var sessionName in GetSessionNamesToAdd(sessionNamesFromProvider))
 			{
 				var sessionInfo = GetSession(sessionName);
 			    AddSession(sessionInfo);
 			}
+		    foreach (var session in GetSessionToRemove(sessionNamesFromProvider))
+		    {
+		        RemoveSession(session);
+		    }
+            RootInfo.SortRecursive();
 			return Sessions;
 		}
+
+        private IEnumerable<string> GetSessionNamesToAdd(IEnumerable<string> sessionNamesFromProvider)
+        {
+            var currentlyKnownSessionNames = Sessions.Select(session => session.Name);
+            var sessionNamesToAdd = sessionNamesFromProvider.Except(currentlyKnownSessionNames);
+            return sessionNamesToAdd;
+        }
+
+        private IEnumerable<PuttySessionInfo> GetSessionToRemove(IEnumerable<string> sessionNamesFromProvider)
+        {
+            var currentlyKnownSessionNames = Sessions.Select(session => session.Name);
+            var sessionNamesToRemove = currentlyKnownSessionNames.Except(sessionNamesFromProvider);
+            return Sessions.Where(session => sessionNamesToRemove.Contains(session.Name));
+        }
 
         protected virtual void AddSession(PuttySessionInfo sessionInfo)
         {
