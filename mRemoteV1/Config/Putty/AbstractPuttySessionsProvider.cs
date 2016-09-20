@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using mRemoteNG.Connection;
 using mRemoteNG.Root.PuttySessions;
@@ -19,12 +20,18 @@ namespace mRemoteNG.Config.Putty
 			foreach (var sessionName in GetSessionNames(true))
 			{
 				var sessionInfo = GetSession(sessionName);
-				if (string.IsNullOrEmpty(sessionInfo?.Hostname) || RootInfo.Children.Any(child => child.Name == sessionInfo.Name))
-					continue;
-                RootInfo.AddChild(sessionInfo);
+			    AddSession(sessionInfo);
 			}
 			return RootInfo.Children.OfType<PuttySessionInfo>();
 		}
+
+        protected virtual void AddSession(PuttySessionInfo sessionInfo)
+        {
+            if (string.IsNullOrEmpty(sessionInfo?.Name) || RootInfo.Children.Any(child => child.Name == sessionInfo.Name))
+                return;
+            RootInfo.AddChild(sessionInfo);
+            RaisePuttySessionCollectionChangedEvent(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, sessionInfo));
+        }
 		
 		public virtual void StartWatcher() { }
 		
@@ -38,5 +45,12 @@ namespace mRemoteNG.Config.Putty
 		{
             PuttySessionChanged?.Invoke(this, args);
 		}
+
+        public event NotifyCollectionChangedEventHandler PuttySessionsCollectionChanged;
+
+        protected void RaisePuttySessionCollectionChangedEvent(NotifyCollectionChangedEventArgs args)
+        {
+            PuttySessionsCollectionChanged?.Invoke(this, args);
+        }
     }
 }
