@@ -2,6 +2,7 @@
 using BrightIdeasSoftware;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
@@ -108,6 +109,25 @@ namespace mRemoteNGTests.Tree
             var dragDropEffects = _dragAndDropHandler.CanModelDrop(source, target, DropTargetLocation.Item);
             Assert.That(dragDropEffects, Is.EqualTo(DragDropEffects.None));
         }
+
+        [Test]
+        public void CantDragConnectionOntoRootPuttySessionNode()
+        {
+            var source = _connection1;
+            var target = new RootPuttySessionsNodeInfo();
+            var dragDropEffects = _dragAndDropHandler.CanModelDrop(source, target, DropTargetLocation.Item);
+            Assert.That(dragDropEffects, Is.EqualTo(DragDropEffects.None));
+        }
+
+        [Test]
+        public void CantDragContainerOntoRootPuttySessionNode()
+        {
+            var source = _container1;
+            var target = new RootPuttySessionsNodeInfo();
+            var dragDropEffects = _dragAndDropHandler.CanModelDrop(source, target, DropTargetLocation.Item);
+            Assert.That(dragDropEffects, Is.EqualTo(DragDropEffects.None));
+        }
+
 
         private void InitializeNodes()
         {

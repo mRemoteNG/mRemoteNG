@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
+using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Tree.Root;
 
 
@@ -79,7 +80,7 @@ namespace mRemoteNG.Tree
         private DragDropEffects HandleCanDropOnItem(ConnectionInfo dropSource, ConnectionInfo dropTarget)
         {
             var dragDropEffect = DragDropEffects.None;
-            if (dropTarget is ContainerInfo)
+            if (dropTarget is ContainerInfo && !(dropTarget is RootPuttySessionsNodeInfo))
             {
                 if (NodeDraggingOntoSelf(dropSource, dropTarget))
                     _infoMessage = Language.strNodeCannotDragOnSelf;
