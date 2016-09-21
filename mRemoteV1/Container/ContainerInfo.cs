@@ -19,6 +19,7 @@ namespace mRemoteNG.Container
         [Category(""), Browsable(false), ReadOnly(false), Bindable(false), DefaultValue(""), DesignOnly(false)]
         public bool IsExpanded { get; set; }
 
+
         public ContainerInfo()
         {
             SetDefaults();
@@ -37,9 +38,31 @@ namespace mRemoteNG.Container
 
         public void AddChild(ConnectionInfo newChildItem)
         {
+            AddChildAt(newChildItem, Children.Count);
+        }
+
+        public void AddChildAbove(ConnectionInfo newChildItem, ConnectionInfo reference)
+        {
+            var newChildIndex = Children.IndexOf(reference);
+            if (newChildIndex < 0)
+                newChildIndex = Children.Count;
+            AddChildAt(newChildItem, newChildIndex);
+        }
+
+        public void AddChildBelow(ConnectionInfo newChildItem, ConnectionInfo reference)
+        {
+            var newChildIndex = Children.IndexOf(reference) + 1;
+            if (newChildIndex > Children.Count)
+                newChildIndex = 0;
+            AddChildAt(newChildItem, newChildIndex);
+        }
+
+        public void AddChildAt(ConnectionInfo newChildItem, int index)
+        {
             if (Children.Contains(newChildItem)) return;
+            newChildItem.Parent?.RemoveChild(newChildItem);
             newChildItem.Parent = this;
-            Children.Add(newChildItem);
+            Children.Insert(index, newChildItem);
             SubscribeToChildEvents(newChildItem);
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, newChildItem));
         }
@@ -81,24 +104,32 @@ namespace mRemoteNG.Container
 
         public void SetChildAbove(ConnectionInfo childToPromote, ConnectionInfo reference)
         {
+            var newIndex = GetNewChildIndexAboveReference(childToPromote, reference);
+            SetChildPosition(childToPromote, newIndex);
+        }
+
+        private int GetNewChildIndexAboveReference(ConnectionInfo childToPromote, ConnectionInfo reference)
+        {
             var originalIndex = Children.IndexOf(childToPromote);
             var newIndex = Children.IndexOf(reference);
-            if (newIndex < 0) return;
             if (originalIndex < newIndex)
-                SetChildPosition(childToPromote, newIndex - 1);
-            else if (originalIndex > newIndex)
-                SetChildPosition(childToPromote, newIndex);
+                newIndex -= 1;
+            return newIndex < 0 ? 0 : newIndex;
         }
 
         public void SetChildBelow(ConnectionInfo childToPromote, ConnectionInfo reference)
         {
+            var newIndex = GetNewChildIndexBelowReference(childToPromote, reference);
+            SetChildPosition(childToPromote, newIndex);
+        }
+
+        private int GetNewChildIndexBelowReference(ConnectionInfo childToPromote, ConnectionInfo reference)
+        {
             var originalIndex = Children.IndexOf(childToPromote);
             var newIndex = Children.IndexOf(reference);
-            if (newIndex < 0) return;
-            if (originalIndex < newIndex)
-                SetChildPosition(childToPromote, newIndex);
-            else if (originalIndex  > newIndex)
-                SetChildPosition(childToPromote, newIndex + 1);
+            if (originalIndex > newIndex)
+                newIndex += 1;
+            return newIndex < 0 ? 0 : newIndex;
         }
 
         public void PromoteChild(ConnectionInfo child)
