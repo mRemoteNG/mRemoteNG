@@ -48,9 +48,9 @@ namespace mRemoteNG.Tree
 
         public void HandleEvent_ModelCanDrop(object sender, ModelDropEventArgs e)
         {
-
             _enableFeedback = true;
             _currentFeedbackColor = DropDeniedFeedbackColor;
+            _infoMessage = null;
             var dropSource = e.SourceModels.Cast<ConnectionInfo>().First();
             var dropTarget = e.TargetModel as ConnectionInfo;
 
