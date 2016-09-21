@@ -112,6 +112,8 @@ namespace mRemoteNG.Tree
             var dragDropEffect = DragDropEffects.None;
             if (AncestorDraggingOntoChild(dropSource, dropTarget))
                 _infoMessage = Language.strNodeCannotDragParentOnChild;
+            else if (dropTarget is PuttySessionInfo || dropTarget is RootPuttySessionsNodeInfo)
+                _enableFeedback = false;
             else
             {
                 dragDropEffect = DragDropEffects.Move;

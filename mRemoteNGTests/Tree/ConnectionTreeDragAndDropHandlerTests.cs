@@ -156,6 +156,24 @@ namespace mRemoteNGTests.Tree
         }
 
         [Test]
+        public void CantDragNodeAbovePuttySessionNodes()
+        {
+            var source = _connection1;
+            var target = new PuttySessionInfo();
+            var dragDropEffects = _dragAndDropHandler.CanModelDrop(source, target, DropTargetLocation.AboveItem);
+            Assert.That(dragDropEffects, Is.EqualTo(DragDropEffects.None));
+        }
+
+        [Test]
+        public void CantDragNodeBelowPuttySessionNodes()
+        {
+            var source = _connection1;
+            var target = new PuttySessionInfo();
+            var dragDropEffects = _dragAndDropHandler.CanModelDrop(source, target, DropTargetLocation.BelowItem);
+            Assert.That(dragDropEffects, Is.EqualTo(DragDropEffects.None));
+        }
+
+        [Test]
         public void DraggingNodeBelowSiblingRearrangesTheUnderlyingModelCorrectly()
         {
             var source = _connection3;
