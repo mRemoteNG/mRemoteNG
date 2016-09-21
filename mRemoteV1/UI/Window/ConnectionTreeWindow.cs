@@ -406,19 +406,20 @@ namespace mRemoteNG.UI.Window
 
 	    private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
 	    {
+	        var senderAsConnectionInfo = sender as ConnectionInfo;
 	        switch (args?.Action)
 	        {
 	            case NotifyCollectionChangedAction.Add:
-                    RefreshTreeObject(sender);
+                    RefreshTreeObject(senderAsConnectionInfo);
 	                break;
 	            case NotifyCollectionChangedAction.Remove:
                     RefreshTreeObjects(args.OldItems);
 	                break;
                 case NotifyCollectionChangedAction.Move:
-                    RefreshTreeObject(sender);
+                    RefreshTreeObjects(args.OldItems);
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    RefreshTreeObject(sender);
+                    RefreshTreeObject(senderAsConnectionInfo);
                     break;
 	            case NotifyCollectionChangedAction.Replace:
 	                break;
@@ -427,9 +428,9 @@ namespace mRemoteNG.UI.Window
 	        }
 	    }
 
-	    private void RefreshTreeObject(object modelObject)
+	    private void RefreshTreeObject(ConnectionInfo modelObject)
 	    {
-	        RefreshTreeObjects(new[] { modelObject });
+            olvConnections.RefreshObject(modelObject);
 	    }
 
 	    private void RefreshTreeObjects(IList modelObjects)
