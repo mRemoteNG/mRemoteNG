@@ -155,6 +155,50 @@ namespace mRemoteNGTests.Tree
             Assert.That(dragDropEffects, Is.EqualTo(DragDropEffects.None));
         }
 
+        [Test]
+        public void DraggingNodeBelowSiblingRearrangesTheUnderlyingModelCorrectly()
+        {
+            var source = _connection3;
+            var target = _connection5;
+            var location = DropTargetLocation.BelowItem;
+            _dragAndDropHandler.DropModel(source, target, location);
+            var actualIndex = _container3.Children.IndexOf(source);
+            var expectedIndex = _container3.Children.IndexOf(target) + 1;
+            Assert.That(actualIndex, Is.EqualTo(expectedIndex));
+        }
+
+        [Test]
+        public void DraggingNodeAboveSiblingRearrangesTheUnderlyingModelCorrectly()
+        {
+            var source = _connection3;
+            var target = _connection5;
+            var location = DropTargetLocation.AboveItem;
+            _dragAndDropHandler.DropModel(source, target, location);
+            var actualIndex = _container3.Children.IndexOf(source);
+            var expectedIndex = _container3.Children.IndexOf(target) - 1;
+            Assert.That(actualIndex, Is.EqualTo(expectedIndex));
+        }
+
+        [Test]
+        public void DraggingNodeToNewContainerAddsNodeToTheNewContainer()
+        {
+            var source = _connection3;
+            var target = _container1;
+            var location = DropTargetLocation.Item;
+            _dragAndDropHandler.DropModel(source, target, location);
+            Assert.That(target.Children.Contains(source));
+        }
+
+        [Test]
+        public void DraggingNodeToNewContainerRemovesNodeFromOldContainer()
+        {
+            var source = _connection3;
+            var target = _container1;
+            var location = DropTargetLocation.Item;
+            _dragAndDropHandler.DropModel(source, target, location);
+            Assert.That(!_container3.Children.Contains(source));
+        }
+
 
         private void InitializeNodes()
         {
