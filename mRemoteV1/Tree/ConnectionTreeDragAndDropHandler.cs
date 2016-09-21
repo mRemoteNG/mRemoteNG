@@ -82,17 +82,9 @@ namespace mRemoteNG.Tree
             var dragDropEffect = DragDropEffects.None;
             if (dropTarget is ContainerInfo && !(dropTarget is RootPuttySessionsNodeInfo))
             {
-                if (NodeDraggingOntoSelf(dropSource, dropTarget))
-                    _infoMessage = Language.strNodeCannotDragOnSelf;
-                else if (AncestorDraggingOntoChild(dropSource, dropTarget))
-                    _infoMessage = Language.strNodeCannotDragParentOnChild;
-                else if (DraggingOntoCurrentParent(dropSource, dropTarget))
-                    _infoMessage = Language.strNodeAlreadyInFolder;
-                else
-                {
-                    dragDropEffect = DragDropEffects.Move;
-                    _currentFeedbackColor = DropAllowedFeedbackColor;
-                }
+                if (!IsValidDrag(dropSource, dropTarget)) return dragDropEffect;
+                dragDropEffect = DragDropEffects.Move;
+                _currentFeedbackColor = DropAllowedFeedbackColor;
             }
             else
             {
@@ -112,6 +104,20 @@ namespace mRemoteNG.Tree
                 _currentFeedbackColor = DropAllowedFeedbackColor;
             }
             return dragDropEffect;
+        }
+
+        private bool IsValidDrag(ConnectionInfo dropSource, ConnectionInfo dropTarget)
+        {
+            var validDrag = false;
+            if (NodeDraggingOntoSelf(dropSource, dropTarget))
+                _infoMessage = Language.strNodeCannotDragOnSelf;
+            else if (AncestorDraggingOntoChild(dropSource, dropTarget))
+                _infoMessage = Language.strNodeCannotDragParentOnChild;
+            else if (DraggingOntoCurrentParent(dropSource, dropTarget))
+                _infoMessage = Language.strNodeAlreadyInFolder;
+            else
+                validDrag = true;
+            return validDrag;
         }
 
         private bool NodeIsDraggable(ConnectionInfo node)
