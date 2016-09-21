@@ -57,6 +57,24 @@ namespace mRemoteNGTests.Tree
         }
 
         [Test]
+        public void CanDragContainerBetweenContainers()
+        {
+            var source = _container3;
+            var target = _container2;
+            var dragDropEffects = _dragAndDropHandler.CanModelDrop(source, target, DropTargetLocation.AboveItem);
+            Assert.That(dragDropEffects, Is.EqualTo(DragDropEffects.Move));
+        }
+
+        [Test]
+        public void CanDragConnectionBetweenConnections()
+        {
+            var source = _connection1;
+            var target = _connection4;
+            var dragDropEffects = _dragAndDropHandler.CanModelDrop(source, target, DropTargetLocation.AboveItem);
+            Assert.That(dragDropEffects, Is.EqualTo(DragDropEffects.Move));
+        }
+
+        [Test]
         public void CantDragConnectionOntoItself()
         {
             var source = _connection1;
@@ -80,6 +98,15 @@ namespace mRemoteNGTests.Tree
             var source = _container2;
             var target = _container3;
             var dragDropEffects = _dragAndDropHandler.CanModelDrop(source, target, DropTargetLocation.Item);
+            Assert.That(dragDropEffects, Is.EqualTo(DragDropEffects.None));
+        }
+
+        [Test]
+        public void CantDragContainerBetweenItsChildren()
+        {
+            var source = _container3;
+            var target = _connection4;
+            var dragDropEffects = _dragAndDropHandler.CanModelDrop(source, target, DropTargetLocation.BelowItem);
             Assert.That(dragDropEffects, Is.EqualTo(DragDropEffects.None));
         }
 
