@@ -24,27 +24,41 @@ namespace mRemoteNG.Tree
             var dropTarget = e.TargetModel as ConnectionInfo;
             if (dropTarget == null) return;
             var draggedObject = (ConnectionInfo)e.SourceModels[0];
-            if (e.DropTargetLocation == DropTargetLocation.Item)
-            {
-                var dropTargetAsContainer = dropTarget as ContainerInfo;
-                if (dropTargetAsContainer == null) return;
-                draggedObject.SetParent(dropTargetAsContainer);
-            }
-            else if (e.DropTargetLocation == DropTargetLocation.AboveItem)
-            {
-                if (!draggedObject.Parent.Equals(dropTarget.Parent))
-                    dropTarget.Parent.AddChildAbove(draggedObject, dropTarget);
-                else
-                    dropTarget.Parent.SetChildAbove(draggedObject, dropTarget);
-            }
-            else if (e.DropTargetLocation == DropTargetLocation.BelowItem)
-            {
-                if (!draggedObject.Parent.Equals(dropTarget.Parent))
-                    dropTarget.Parent.AddChildBelow(draggedObject, dropTarget);
-                else
-                    dropTarget.Parent.SetChildBelow(draggedObject, dropTarget);
-            }
+            DropModel(draggedObject, dropTarget, e.DropTargetLocation);
             e.Handled = true;
+        }
+
+        public void DropModel(ConnectionInfo dropSource, ConnectionInfo dropTarget, DropTargetLocation dropTargetLocation)
+        {
+            if (dropTargetLocation == DropTargetLocation.Item)
+                DropModelOntoTarget(dropSource, dropTarget);
+            else if (dropTargetLocation == DropTargetLocation.AboveItem)
+                DropModelAboveTarget(dropSource, dropTarget);
+            else if (dropTargetLocation == DropTargetLocation.BelowItem)
+                DropModelBelowTarget(dropSource, dropTarget);
+        }
+
+        private void DropModelOntoTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
+        {
+            var dropTargetAsContainer = dropTarget as ContainerInfo;
+            if (dropTargetAsContainer == null) return;
+            dropSource.SetParent(dropTargetAsContainer);
+        }
+
+        private void DropModelAboveTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
+        {
+            if (!dropSource.Parent.Equals(dropTarget.Parent))
+                dropTarget.Parent.AddChildAbove(dropSource, dropTarget);
+            else
+                dropTarget.Parent.SetChildAbove(dropSource, dropTarget);
+        }
+
+        private void DropModelBelowTarget(ConnectionInfo dropSource, ConnectionInfo dropTarget)
+        {
+            if (!dropSource.Parent.Equals(dropTarget.Parent))
+                dropTarget.Parent.AddChildBelow(dropSource, dropTarget);
+            else
+                dropTarget.Parent.SetChildBelow(dropSource, dropTarget);
         }
 
         public void HandleEvent_ModelCanDrop(object sender, ModelDropEventArgs e)
