@@ -23,8 +23,8 @@ namespace mRemoteNG.Tree
         {
             var dropTarget = e.TargetModel as ConnectionInfo;
             if (dropTarget == null) return;
-            var draggedObject = (ConnectionInfo)e.SourceModels[0];
-            DropModel(draggedObject, dropTarget, e.DropTargetLocation);
+            var dropSource = (ConnectionInfo)e.SourceModels[0];
+            DropModel(dropSource, dropTarget, e.DropTargetLocation);
             e.Handled = true;
         }
 
