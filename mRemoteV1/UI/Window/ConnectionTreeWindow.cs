@@ -150,7 +150,11 @@ namespace mRemoteNG.UI.Window
             _contextMenu.DuplicateClicked += (sender, args) => DuplicateSelectedNode();
             _contextMenu.RenameClicked += (sender, args) => RenameSelectedNode();
             _contextMenu.DeleteClicked += (sender, args) => DeleteSelectedNode();
-            _contextMenu.ImportFileClicked += (sender, args) => Import.ImportFromFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode, true);
+            _contextMenu.ImportFileClicked += (sender, args) =>
+            {
+                var selectedNodeAsContainer = SelectedNode as ContainerInfo ?? SelectedNode.Parent;
+                Import.ImportFromFile(selectedNodeAsContainer, true);
+            };
             _contextMenu.ImportActiveDirectoryClicked += (sender, args) => Windows.Show(WindowType.ActiveDirectoryImport);
             _contextMenu.ImportPortScanClicked += (sender, args) => Windows.Show(WindowType.PortScan);
             _contextMenu.ExportFileClicked += (sender, args) => Export.ExportToFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode, Runtime.ConnectionTreeModel);

@@ -13,8 +13,6 @@ namespace mRemoteNG.App
 {
     public class Import
     {
-        #region Private Enumerations
-
         private enum FileType
         {
             Unknown = 0,
@@ -25,12 +23,9 @@ namespace mRemoteNG.App
             PuttyConnectionManager
         }
 
-        #endregion
-
         #region Public Methods
         //TODO Fix for TreeListView
-        public static void ImportFromFile(TreeNode rootTreeNode, TreeNode selectedTreeNode,
-            bool alwaysUseSelectedTreeNode = false)
+        public static void ImportFromFile(ContainerInfo importDestinationContainer, bool alwaysUseSelectedTreeNode = false)
         {
             try
             {
@@ -55,12 +50,7 @@ namespace mRemoteNG.App
                         return;
                     }
 
-                    var parentTreeNode = GetParentTreeNode(rootTreeNode, selectedTreeNode, alwaysUseSelectedTreeNode);
-                    if (parentTreeNode == null)
-                    {
-                        return;
-                    }
-
+                    IConnectionImporter importer;
                     foreach (var fileName in openFileDialog.FileNames)
                     {
                         try
@@ -68,16 +58,17 @@ namespace mRemoteNG.App
                             switch (DetermineFileType(fileName))
                             {
                                 case FileType.mRemoteXml:
-                                    Config.Import.mRemoteNGImporter.Import(fileName, parentTreeNode);
+                                    importer = new mRemoteNGImporter();
+                                    importer.Import(fileName, importDestinationContainer);
                                     break;
                                 case FileType.RemoteDesktopConnection:
-                                    RemoteDesktopConnection.Import(fileName, parentTreeNode);
+                                    //RemoteDesktopConnection.Import(fileName, importDestinationContainer);
                                     break;
                                 case FileType.RemoteDesktopConnectionManager:
-                                    RemoteDesktopConnectionManager.Import(fileName, parentTreeNode);
+                                    //RemoteDesktopConnectionManager.Import(fileName, importDestinationContainer);
                                     break;
                                 case FileType.PuttyConnectionManager:
-                                    PuttyConnectionManager.Import(fileName, parentTreeNode);
+                                    //PuttyConnectionManager.Import(fileName, importDestinationContainer);
                                     break;
                                 default:
                                     throw new FileFormatException("Unrecognized file format.");
@@ -89,13 +80,6 @@ namespace mRemoteNG.App
                                             MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                             Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromFile() failed:1", ex, logOnly: true);
                         }
-                    }
-
-                    parentTreeNode.Expand();
-                    var parentContainer = (ContainerInfo) parentTreeNode.Tag;
-                    if (parentContainer != null)
-                    {
-                        parentContainer.IsExpanded = true;
                     }
 
                     Runtime.SaveConnectionsBG();
@@ -245,7 +229,6 @@ namespace mRemoteNG.App
                     return FileType.Unknown;
             }
         }
-
         #endregion
     }
 }

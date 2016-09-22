@@ -138,6 +138,7 @@
     <Compile Include="Config\DataProviders\FileDataProviderWithRollingBackup.cs" />
     <Compile Include="Config\DataProviders\SqlDataProvider.cs" />
     <Compile Include="Config\IDeserializer.cs" />
+    <Compile Include="Config\Import\IConnectionImporter.cs" />
     <Compile Include="Config\ISerializer.cs" />
     <Compile Include="Config\Connections\XmlConnectionsSerializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProvider.cs" />

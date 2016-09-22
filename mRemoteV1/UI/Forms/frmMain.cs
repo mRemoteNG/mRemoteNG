@@ -13,6 +13,7 @@ using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Settings;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
@@ -627,8 +628,10 @@ namespace mRemoteNG.UI.Forms
         }
 
         private void mMenFileImportFromFile_Click(object sender, EventArgs e)
-		{
-            Import.ImportFromFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode);
+        {
+            var selectedNode = ConnectionTreeWindow.SelectedNode;
+            var selectedNodeAsContainer = selectedNode as ContainerInfo ?? selectedNode.Parent;
+            Import.ImportFromFile(selectedNodeAsContainer);
 		}
 
         private void mMenFileImportFromActiveDirectory_Click(object sender, EventArgs e)

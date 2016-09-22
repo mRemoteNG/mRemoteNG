@@ -242,12 +242,10 @@ namespace mRemoteNG.App
                 connectionsLoader.ConnectionList = ConnectionList;
                 connectionsLoader.ContainerList = ContainerList;
                 ConnectionTree.ResetTree();
-                connectionsLoader.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
 
                 // Load config
                 connectionsLoader.ConnectionFileName = filename;
                 connectionsLoader.LoadConnections(false);
-                Windows.treeForm.tvConnections.SelectedNode = connectionsLoader.RootTreeNode;
             }
             catch (Exception ex)
             {
@@ -562,7 +560,6 @@ namespace mRemoteNG.App
                     connectionsSave.SaveSecurity = new Security.Save();
                     connectionsSave.ConnectionList = ConnectionList;
                     connectionsSave.ContainerList = ContainerList;
-                    connectionsSave.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
                     connectionsSave.ConnectionTreeModel = ConnectionTreeModel;
 
                     connectionsSave.SaveConnections();
