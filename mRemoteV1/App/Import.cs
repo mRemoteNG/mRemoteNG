@@ -105,7 +105,7 @@ namespace mRemoteNG.App
                     return;
                 }
 
-                ActiveDirectory.Import(ldapPath, parentTreeNode);
+                ActiveDirectoryImporter.Import(ldapPath, parentTreeNode);
 
                 parentTreeNode.Expand();
                 var parentContainer = (ContainerInfo) parentTreeNode.Tag;

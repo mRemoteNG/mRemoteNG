@@ -9,7 +9,7 @@ using mRemoteNG.Tree;
 
 namespace mRemoteNG.Config.Import
 {
-	public class ActiveDirectory
+	public class ActiveDirectoryImporter
 	{
 		public static void Import(string ldapPath, TreeNode parentTreeNode)
 		{
