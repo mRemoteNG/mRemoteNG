@@ -178,6 +178,15 @@ namespace mRemoteNG.UI.Window
 	    {
 	        _puttySessionsManager.PuttySessionsCollectionChanged += (sender, args) => RefreshTreeObjects(GetRootPuttyNodes().ToList());
 	        ConnectionTreeModel.CollectionChanged += HandleCollectionChanged;
+            ConnectionTreeModel.PropertyChanged += HandleCollectionPropertyChanged;
+	    }
+
+	    private void HandleCollectionPropertyChanged(object sender, PropertyChangedEventArgs propertyChangedEventArgs)
+	    {
+	        if (propertyChangedEventArgs.PropertyName != "Name") return;
+	        var senderAsConnectionInfo = sender as ConnectionInfo;
+            if (senderAsConnectionInfo != null)
+                RefreshTreeObject(senderAsConnectionInfo);
 	    }
 
 	    private void PopulateTreeView()
