@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Tree.Root;
@@ -7,7 +8,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Tree
 {
-    public class ConnectionTreeModel : INotifyCollectionChanged
+    public class ConnectionTreeModel : INotifyCollectionChanged, INotifyPropertyChanged
     {
         public List<ContainerInfo> RootNodes { get; } = new List<ContainerInfo>();
 
@@ -16,6 +17,7 @@ namespace mRemoteNG.Tree
             if (RootNodes.Contains(rootNode)) return;
             RootNodes.Add(rootNode);
             rootNode.CollectionChanged += RaiseCollectionChangedEvent;
+            rootNode.PropertyChanged += RaisePropertyChangedEvent;
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Add, rootNode));
         }
 
@@ -23,6 +25,7 @@ namespace mRemoteNG.Tree
         {
             if (!RootNodes.Contains(rootNode)) return;
             rootNode.CollectionChanged -= RaiseCollectionChangedEvent;
+            rootNode.PropertyChanged -= RaisePropertyChangedEvent;
             RootNodes.Remove(rootNode);
             RaiseCollectionChangedEvent(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Remove, rootNode));
         }
@@ -69,6 +72,12 @@ namespace mRemoteNG.Tree
         private void RaiseCollectionChangedEvent(object sender, NotifyCollectionChangedEventArgs args)
         {
             CollectionChanged?.Invoke(sender, args);
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
+        {
+            PropertyChanged?.Invoke(this, args);
         }
     }
 }
