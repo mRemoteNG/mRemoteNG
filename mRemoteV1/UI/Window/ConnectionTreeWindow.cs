@@ -406,12 +406,16 @@ namespace mRemoteNG.UI.Window
 
 	    private void HandleCollectionChanged(object sender, NotifyCollectionChangedEventArgs args)
 	    {
-	        var senderAsConnectionInfo = sender as ConnectionInfo;
+	        var senderAsContainerInfo = sender as ContainerInfo;
 	        switch (args?.Action)
 	        {
 	            case NotifyCollectionChangedAction.Add:
-                    RefreshTreeObject(senderAsConnectionInfo);
-	                break;
+	                var otherChild = senderAsContainerInfo?.Children.First(child => !args.NewItems.Contains(child));
+	                if (otherChild != null)
+	                    RefreshTreeObject(otherChild);
+                    else
+                        RefreshTreeObject(senderAsContainerInfo);
+                    break;
 	            case NotifyCollectionChangedAction.Remove:
                     RefreshTreeObjects(args.OldItems);
 	                break;
@@ -419,7 +423,7 @@ namespace mRemoteNG.UI.Window
                     RefreshTreeObjects(args.OldItems);
                     break;
                 case NotifyCollectionChangedAction.Reset:
-                    RefreshTreeObject(senderAsConnectionInfo);
+                    RefreshTreeObject(senderAsContainerInfo);
                     break;
 	            case NotifyCollectionChangedAction.Replace:
 	                break;
