@@ -162,7 +162,7 @@
     <Compile Include="Config\ConfirmCloseEnum.cs" />
     <Compile Include="Config\Import\ActiveDirectory.cs" />
     <Compile Include="Config\Import\mRemoteNGImporter.cs" />
-    <Compile Include="Config\Import\PortScan.cs" />
+    <Compile Include="Config\Import\PortScanImporter.cs" />
     <Compile Include="Config\Import\PuttyConnectionManager.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnectionImporter.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnectionManager.cs" />

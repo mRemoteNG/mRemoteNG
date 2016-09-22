@@ -9,7 +9,7 @@ using mRemoteNG.Tools;
 
 namespace mRemoteNG.Config.Import
 {
-	public static class PortScan
+	public static class PortScanImporter
 	{
 		public static void Import(IEnumerable hosts, ProtocolType protocol, TreeNode parentTreeNode)
 		{

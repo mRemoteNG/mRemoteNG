@@ -136,7 +136,7 @@ namespace mRemoteNG.App
                     return;
                 }
 
-                PortScan.Import(hosts, protocol, parentTreeNode);
+                PortScanImporter.Import(hosts, protocol, parentTreeNode);
 
                 parentTreeNode.Expand();
                 var parentContainer = (ContainerInfo) parentTreeNode.Tag;
