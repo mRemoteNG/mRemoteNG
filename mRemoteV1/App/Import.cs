@@ -62,7 +62,8 @@ namespace mRemoteNG.App
                                     importer.Import(fileName, importDestinationContainer);
                                     break;
                                 case FileType.RemoteDesktopConnection:
-                                    //RemoteDesktopConnection.Import(fileName, importDestinationContainer);
+                                    importer = new RemoteDesktopConnectionImporter();
+                                    importer.Import(fileName, importDestinationContainer);
                                     break;
                                 case FileType.RemoteDesktopConnectionManager:
                                     //RemoteDesktopConnectionManager.Import(fileName, importDestinationContainer);
