@@ -734,7 +734,6 @@ namespace mRemoteNG.UI.Window
             }
             else if (e.ChangedItem.Label == Language.strPropertyNameName)
             {
-                Windows.treeForm.tvConnections.SelectedNode.Text = Convert.ToString(selectedGridObject.Name);
                 if (Settings.Default.SetHostnameLikeDisplayName)
                 {
                     var connectionInfo = selectedGridObject;
