@@ -83,7 +83,6 @@ namespace mRemoteNG.Connection
 				}
 				puttyProcess.SetControlText("Button", "&Cancel", "&Close");
 				puttyProcess.SetControlVisible("Button", "&Open", false);
-				puttyProcess.WaitForExit();
 			}
 			catch (Exception ex)
 			{
