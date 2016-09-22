@@ -233,7 +233,7 @@ namespace mRemoteNG.Container
 
         protected virtual void SubscribeToChildEvents(ConnectionInfo child)
         {
-            child.PropertyChanged += OnPropertyChanged;
+            child.PropertyChanged += RaisePropertyChangedEvent;
             var childAsContainer = child as ContainerInfo;
             if (childAsContainer == null) return;
             childAsContainer.CollectionChanged += RaiseCollectionChangedEvent;
@@ -241,7 +241,7 @@ namespace mRemoteNG.Container
 
         protected virtual void UnsubscribeToChildEvents(ConnectionInfo child)
         {
-            child.PropertyChanged -= OnPropertyChanged;
+            child.PropertyChanged -= RaisePropertyChangedEvent;
             var childAsContainer = child as ContainerInfo;
             if (childAsContainer == null) return;
             childAsContainer.CollectionChanged -= RaiseCollectionChangedEvent;

@@ -625,23 +625,16 @@ namespace mRemoteNG.Connection
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-        protected virtual void OnPropertyChanged(string propertyName)
+        protected virtual void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
         {
-            var handler = PropertyChanged;
-            handler?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        protected virtual void OnPropertyChanged(object sender, PropertyChangedEventArgs args)
-        {
-            var handler = PropertyChanged;
-            handler?.Invoke(this, new PropertyChangedEventArgs(args.PropertyName));
+            PropertyChanged?.Invoke(sender, new PropertyChangedEventArgs(args.PropertyName));
         }
 
         protected bool SetField<T>(ref T field, T value, string propertyName = null)
         {
             if (EqualityComparer<T>.Default.Equals(field, value)) return false;
             field = value;
-            OnPropertyChanged(propertyName);
+            RaisePropertyChangedEvent(this, new PropertyChangedEventArgs(propertyName));
             return true;
         }
     }
