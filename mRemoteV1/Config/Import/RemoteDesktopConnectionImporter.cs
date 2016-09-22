@@ -9,7 +9,7 @@ using mRemoteNG.Tree;
 
 namespace mRemoteNG.Config.Import
 {
-	public class RemoteDesktopConnection
+	public class RemoteDesktopConnectionImporter
 	{
 		public static void Import(string fileName, TreeNode parentTreeNode)
 		{
