@@ -77,7 +77,7 @@ namespace mRemoteNG.Tree
         public event PropertyChangedEventHandler PropertyChanged;
         protected virtual void RaisePropertyChangedEvent(object sender, PropertyChangedEventArgs args)
         {
-            PropertyChanged?.Invoke(this, args);
+            PropertyChanged?.Invoke(sender, args);
         }
     }
 }
