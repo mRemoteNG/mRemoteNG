@@ -1,11 +1,9 @@
 using System;
 using System.IO;
 using System.Linq;
-using mRemoteNG.App;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Container;
-using mRemoteNG.Connection;
 
 
 namespace mRemoteNG.Config.Import
