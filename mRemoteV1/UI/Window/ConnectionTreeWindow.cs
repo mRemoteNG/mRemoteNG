@@ -337,7 +337,7 @@ namespace mRemoteNG.UI.Window
 			{
 				_contextMenu.EnableShortcutKeys();
                 ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
-                Windows.configForm.pGrid_SelectedObjectChanged();
+                Windows.configForm.pGrid_SelectedObjectChanged(SelectedNode);
                 Runtime.SaveConnectionsBG();
 			}
 			catch (Exception ex)
@@ -350,8 +350,8 @@ namespace mRemoteNG.UI.Window
 		{
             try
             {
-                Windows.configForm.SetPropertyGridObject(olvConnections.SelectedObject);
-                Runtime.LastSelected = ((ConnectionInfo)olvConnections.SelectedObject)?.ConstantID;
+                Windows.configForm.SetPropertyGridObject(SelectedNode);
+                Runtime.LastSelected = (SelectedNode)?.ConstantID;
             }
             catch (Exception ex)
             {
