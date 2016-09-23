@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
@@ -7,8 +6,7 @@ using mRemoteNG.Config.Import;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Tools;
-using mRemoteNG.Tree;
-using mRemoteNG.UI.TaskDialog;
+
 
 namespace mRemoteNG.App
 {
@@ -118,59 +116,6 @@ namespace mRemoteNG.App
             }
         }
         #endregion
-
-        private static TreeNode GetParentTreeNode(TreeNode rootTreeNode, TreeNode selectedTreeNode, bool alwaysUseSelectedTreeNode = false)
-        {
-            TreeNode parentTreeNode;
-
-            selectedTreeNode = GetContainerTreeNode(selectedTreeNode);
-            if (selectedTreeNode == null || selectedTreeNode == rootTreeNode)
-            {
-                parentTreeNode = rootTreeNode;
-            }
-            else
-            {
-                if (alwaysUseSelectedTreeNode)
-                {
-                    parentTreeNode = GetContainerTreeNode(selectedTreeNode);
-                }
-                else
-                {
-                    CTaskDialog.ShowCommandBox(Application.ProductName, Language.strImportLocationMainInstruction,
-                        Language.strImportLocationContent, "", "", "",
-                        string.Format(Language.strImportLocationCommandButtons, Environment.NewLine, rootTreeNode.Text,
-                            selectedTreeNode.Text), true, ESysIcons.Question, 0);
-                    switch (CTaskDialog.CommandButtonResult)
-                    {
-                        case 0: // Root
-                            parentTreeNode = rootTreeNode;
-                            break;
-                        case 1: // Selected Folder
-                            parentTreeNode = GetContainerTreeNode(selectedTreeNode);
-                            break;
-                        default: // Cancel
-                            parentTreeNode = null;
-                            break;
-                    }
-                }
-            }
-
-            return parentTreeNode;
-        }
-
-        private static TreeNode GetContainerTreeNode(TreeNode treeNode)
-        {
-            if ((ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.Root) ||
-                (ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.Container))
-            {
-                return treeNode;
-            }
-            if (ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.Connection)
-            {
-                return treeNode.Parent;
-            }
-            return null;
-        }
 
         private static FileType DetermineFileType(string fileName)
         {
