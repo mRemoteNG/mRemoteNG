@@ -131,6 +131,7 @@
     <Compile Include="Config\Serializers\CsvConnectionsSerializerRemoteDesktop2008Format.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializer.cs" />
     <Compile Include="Config\Serializers\DataTableSerializer.cs" />
+    <Compile Include="Config\Serializers\PortScanDeserializer.cs" />
     <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializer.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializer.cs" />

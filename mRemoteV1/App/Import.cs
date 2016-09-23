@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using mRemoteNG.Config.Import;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
+using mRemoteNG.Tools;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.TaskDialog;
 
@@ -102,28 +103,12 @@ namespace mRemoteNG.App
             }
         }
 
-        public static void ImportFromPortScan(IEnumerable hosts, ProtocolType protocol)
+        public static void ImportFromPortScan(IEnumerable<ScanHost> hosts, ProtocolType protocol, ContainerInfo importDestinationContainer)
         {
             try
             {
-                var rootTreeNode = ConnectionTree.TreeView.Nodes[0];
-                var selectedTreeNode = ConnectionTree.TreeView.SelectedNode;
-
-                var parentTreeNode = GetParentTreeNode(rootTreeNode, selectedTreeNode);
-                if (parentTreeNode == null)
-                {
-                    return;
-                }
-
-                PortScanImporter.Import(hosts, protocol, parentTreeNode);
-
-                parentTreeNode.Expand();
-                var parentContainer = (ContainerInfo) parentTreeNode.Tag;
-                if (parentContainer != null)
-                {
-                    parentContainer.IsExpanded = true;
-                }
-
+                var importer = new PortScanImporter(protocol);
+                importer.Import(hosts, importDestinationContainer);
                 Runtime.SaveConnectionsBG();
             }
             catch (Exception ex)

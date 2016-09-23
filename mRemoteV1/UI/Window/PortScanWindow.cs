@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
+using mRemoteNG.Container;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using static mRemoteNG.Tools.MiscTools;
@@ -244,7 +245,7 @@ namespace mRemoteNG.UI.Window
 
         private void importSelectedHosts(ProtocolType protocol)
         {
-            List<ScanHost> hosts = new List<ScanHost>();
+            var hosts = new List<ScanHost>();
             foreach (ListViewItem item in lvHosts.SelectedItems)
             {
                 var scanHost = (ScanHost)item.Tag;
@@ -260,7 +261,8 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            Import.ImportFromPortScan(hosts, protocol);
+            var selectedTreeNodeAsContainer = Windows.treeForm.SelectedNode as ContainerInfo ?? Windows.treeForm.SelectedNode.Parent;
+            Import.ImportFromPortScan(hosts, protocol, selectedTreeNodeAsContainer);
         }
 
         private void importVNCToolStripMenuItem_Click(object sender, EventArgs e)
