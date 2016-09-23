@@ -126,6 +126,7 @@
     <Compile Include="App\Update\UpdateFile.cs" />
     <Compile Include="App\Update\UpdateInfo.cs" />
     <Compile Include="App\Windows.cs" />
+    <Compile Include="Config\Serializers\ActiveDirectoryDeserializer.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerMremotengFormat.cs" />
     <Compile Include="Config\Serializers\CsvConnectionsSerializerRemoteDesktop2008Format.cs" />
     <Compile Include="Config\Serializers\DataTableDeserializer.cs" />

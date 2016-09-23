@@ -24,7 +24,6 @@ namespace mRemoteNG.App
         }
 
         #region Public Methods
-        //TODO Fix for TreeListView
         public static void ImportFromFile(ContainerInfo importDestinationContainer, bool alwaysUseSelectedTreeNode = false)
         {
             try
@@ -46,9 +45,7 @@ namespace mRemoteNG.App
                     openFileDialog.Filter = string.Join("|", fileTypes.ToArray());
 
                     if (openFileDialog.ShowDialog() != DialogResult.OK)
-                    {
                         return;
-                    }
 
                     foreach (var fileName in openFileDialog.FileNames)
                     {
@@ -91,34 +88,17 @@ namespace mRemoteNG.App
             }
         }
 
-        public static void ImportFromActiveDirectory(string ldapPath)
+        public static void ImportFromActiveDirectory(string ldapPath, ContainerInfo importDestinationContainer)
         {
             try
             {
-                var rootTreeNode = ConnectionTree.TreeView.Nodes[0];
-                var selectedTreeNode = ConnectionTree.TreeView.SelectedNode;
-
-                var parentTreeNode = GetParentTreeNode(rootTreeNode, selectedTreeNode);
-                if (parentTreeNode == null)
-                {
-                    return;
-                }
-
-                ActiveDirectoryImporter.Import(ldapPath, parentTreeNode);
-
-                parentTreeNode.Expand();
-                var parentContainer = (ContainerInfo) parentTreeNode.Tag;
-                if (parentContainer != null)
-                {
-                    parentContainer.IsExpanded = true;
-                }
-
+                var importer = new ActiveDirectoryImporter();
+                importer.Import(ldapPath, importDestinationContainer);
                 Runtime.SaveConnectionsBG();
             }
             catch (Exception ex)
             {
-                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromActiveDirectory() failed.", ex,
-                    logOnly: true);
+                Runtime.MessageCollector.AddExceptionMessage("App.Import.ImportFromActiveDirectory() failed.", ex, logOnly: true);
             }
         }
 
@@ -152,13 +132,9 @@ namespace mRemoteNG.App
                     logOnly: true);
             }
         }
-
         #endregion
 
-        #region Private Methods
-
-        private static TreeNode GetParentTreeNode(TreeNode rootTreeNode, TreeNode selectedTreeNode,
-            bool alwaysUseSelectedTreeNode = false)
+        private static TreeNode GetParentTreeNode(TreeNode rootTreeNode, TreeNode selectedTreeNode, bool alwaysUseSelectedTreeNode = false)
         {
             TreeNode parentTreeNode;
 
@@ -229,6 +205,5 @@ namespace mRemoteNG.App
                     return FileType.Unknown;
             }
         }
-        #endregion
     }
 }

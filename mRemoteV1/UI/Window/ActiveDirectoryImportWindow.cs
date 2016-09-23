@@ -2,6 +2,7 @@ using System;
 using System.Windows.Forms;
 using WeifenLuo.WinFormsUI.Docking;
 using mRemoteNG.App;
+using mRemoteNG.Container;
 
 
 namespace mRemoteNG.UI.Window
@@ -27,22 +28,22 @@ namespace mRemoteNG.UI.Window
 			EnableDisableImportButton();
 		}
 				
-		public void btnImport_Click(Object sender, EventArgs e)
+		public void btnImport_Click(object sender, EventArgs e)
 		{
-			Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath);
+		    var selectedNodeAsContainer = Windows.treeForm.SelectedNode as ContainerInfo ??
+		                                  Windows.treeForm.SelectedNode.Parent;
+		    Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, selectedNodeAsContainer);
 			DialogResult = DialogResult.OK;
 			Close();
 		}
 				
-		static public void txtDomain_PreviewKeyDown(Object sender, PreviewKeyDownEventArgs e)
+		public static void txtDomain_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
 		{
 			if (e.KeyCode == Keys.Enter)
-			{
 				e.IsInputKey = true;
-			}
 		}
 				
-		public void txtDomain_KeyDown(Object sender, KeyEventArgs e)
+		public void txtDomain_KeyDown(object sender, KeyEventArgs e)
 		{
 			if (e.KeyCode == Keys.Enter)
 			{
@@ -51,7 +52,7 @@ namespace mRemoteNG.UI.Window
 			}
 		}
 				
-		public void btnChangeDomain_Click(Object sender, EventArgs e)
+		public void btnChangeDomain_Click(object sender, EventArgs e)
 		{
 			ChangeDomain();
 		}
