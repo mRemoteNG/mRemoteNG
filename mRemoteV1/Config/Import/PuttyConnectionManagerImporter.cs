@@ -10,20 +10,18 @@ using mRemoteNG.Container;
 
 namespace mRemoteNG.Config.Import
 {
-	public class PuttyConnectionManager
+	public class PuttyConnectionManagerImporter
 	{
 		public static void Import(string fileName, TreeNode parentTreeNode)
 		{
-			XmlDocument xmlDocument = new XmlDocument();
+			var xmlDocument = new XmlDocument();
 			xmlDocument.Load(fileName);
 				
-			XmlNode configurationNode = xmlDocument.SelectSingleNode("/configuration");
-			//Dim version As New Version(configurationNode.Attributes("version").Value)
-			//If Not version = New Version(0, 7, 1, 136) Then
-			//    Throw New FileFormatException(String.Format("Unsupported file version ({0}).", version))
-			//End If
-				
-			foreach (XmlNode rootNode in configurationNode.SelectNodes("./root"))
+			var configurationNode = xmlDocument.SelectSingleNode("/configuration");
+
+		    var rootNodes = configurationNode?.SelectNodes("./root");
+		    if (rootNodes == null) return;
+            foreach (XmlNode rootNode in rootNodes)
 			{
 				ImportRootOrContainer(rootNode, parentTreeNode);
 			}
@@ -31,45 +29,47 @@ namespace mRemoteNG.Config.Import
 			
 		private static void ImportRootOrContainer(XmlNode xmlNode, TreeNode parentTreeNode)
 		{
-			string xmlNodeType = xmlNode.Attributes["type"].Value;
-			switch (xmlNode.Name)
+            var xmlNodeType = xmlNode?.Attributes?["type"].Value;
+			switch (xmlNode?.Name)
 			{
 				case "root":
-					if (!(string.Compare(xmlNodeType, "database", ignoreCase: true) == 0))
+					if (string.Compare(xmlNodeType, "database", StringComparison.OrdinalIgnoreCase) != 0)
 					{
-						throw (new FileFormatException(string.Format("Unrecognized root node type ({0}).", xmlNodeType)));
+						throw (new FileFormatException($"Unrecognized root node type ({xmlNodeType})."));
 					}
 					break;
 				case "container":
-					if (!(string.Compare(xmlNodeType, "folder", ignoreCase: true) == 0))
+					if (string.Compare(xmlNodeType, "folder", StringComparison.OrdinalIgnoreCase) != 0)
 					{
-						throw (new FileFormatException(string.Format("Unrecognized root node type ({0}).", xmlNodeType)));
+						throw (new FileFormatException($"Unrecognized root node type ({xmlNodeType})."));
 					}
 					break;
 				default:
 					// ReSharper disable once LocalizableElement
-					throw (new ArgumentException("Argument must be either a root or a container node.", "xmlNode"));
+					throw (new ArgumentException("Argument must be either a root or a container node.", nameof(xmlNode)));
 			}
-				
+			
 			if (parentTreeNode == null)
 			{
 				throw (new InvalidOperationException("parentInfo.TreeNode must not be null."));
 			}
-				
-			string name = xmlNode.Attributes["name"].Value;
-				
-			TreeNode treeNode = new TreeNode(name);
-			parentTreeNode.Nodes.Add(treeNode);
-				
-			ContainerInfo containerInfo = new ContainerInfo();
-			containerInfo.TreeNode = treeNode;
-			containerInfo.Name = name;
 
-            ConnectionInfo connectionInfo = CreateConnectionInfo(name);
+            var name = xmlNode.Attributes?["name"].Value;
+
+            var treeNode = new TreeNode(name);
+			parentTreeNode.Nodes.Add(treeNode);
+
+		    var containerInfo = new ContainerInfo
+		    {
+		        TreeNode = treeNode,
+		        Name = name
+		    };
+            
+            var connectionInfo = CreateConnectionInfo(name);
 			connectionInfo.Parent = containerInfo;
 			connectionInfo.IsContainer = true;
 			containerInfo.CopyFrom(connectionInfo);
-				
+			
 			// We can only inherit from a container node, not the root node or connection nodes
 			if (ConnectionTreeNode.GetNodeType(parentTreeNode) == TreeNodeType.Container)
 			{
@@ -79,13 +79,15 @@ namespace mRemoteNG.Config.Import
 			{
 				connectionInfo.Inheritance.DisableInheritance();
 			}
-				
+			
 			treeNode.Name = name;
 			treeNode.Tag = containerInfo;
 			treeNode.ImageIndex = (int)TreeImageType.Container;
 			treeNode.SelectedImageIndex = (int)TreeImageType.Container;
-				
-			foreach (XmlNode childNode in xmlNode.SelectNodes("./*"))
+
+		    var childNodes = xmlNode.SelectNodes("./*");
+            if (childNodes == null) return;
+            foreach (XmlNode childNode in childNodes)
 			{
 				switch (childNode.Name)
 				{
@@ -96,11 +98,11 @@ namespace mRemoteNG.Config.Import
 						ImportConnection(childNode, treeNode);
 						break;
 					default:
-						throw (new FileFormatException(string.Format("Unrecognized child node ({0}).", childNode.Name)));
+						throw (new FileFormatException($"Unrecognized child node ({childNode.Name})."));
 				}
 			}
 				
-			containerInfo.IsExpanded = bool.Parse(xmlNode.Attributes["expanded"].InnerText);
+			containerInfo.IsExpanded = bool.Parse(xmlNode?.Attributes?["expanded"].InnerText ?? "false");
 			if (containerInfo.IsExpanded)
 			{
 				treeNode.Expand();
@@ -111,17 +113,17 @@ namespace mRemoteNG.Config.Import
 			
 		private static void ImportConnection(XmlNode connectionNode, TreeNode parentTreeNode)
 		{
-			string connectionNodeType = connectionNode.Attributes["type"].Value;
-			if (!(string.Compare(connectionNodeType, "PuTTY", ignoreCase: true) == 0))
+            var connectionNodeType = connectionNode.Attributes?["type"].Value;
+			if (string.Compare(connectionNodeType, "PuTTY", StringComparison.OrdinalIgnoreCase) != 0)
 			{
-				throw (new FileFormatException(string.Format("Unrecognized connection node type ({0}).", connectionNodeType)));
+				throw (new FileFormatException($"Unrecognized connection node type ({connectionNodeType})."));
 			}
-				
-			string name = connectionNode.Attributes["name"].Value;
-			TreeNode treeNode = new TreeNode(name);
+
+            var name = connectionNode.Attributes?["name"].Value;
+            var treeNode = new TreeNode(name);
 			parentTreeNode.Nodes.Add(treeNode);
 
-            ConnectionInfo connectionInfo = ConnectionInfoFromXml(connectionNode);
+            var connectionInfo = ConnectionInfoFromXml(connectionNode);
 			connectionInfo.TreeNode = treeNode;
 			connectionInfo.Parent = (ContainerInfo)parentTreeNode.Tag;
 				
@@ -135,7 +137,7 @@ namespace mRemoteNG.Config.Import
 			
 		private static ConnectionInfo CreateConnectionInfo(string name)
 		{
-			ConnectionInfo connectionInfo = new ConnectionInfo();
+            var connectionInfo = new ConnectionInfo();
 			connectionInfo.Inheritance = new ConnectionInfoInheritance(connectionInfo);
 			connectionInfo.Name = name;
 			return connectionInfo;
@@ -143,13 +145,13 @@ namespace mRemoteNG.Config.Import
 			
 		private static ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
 		{
-			XmlNode connectionInfoNode = xmlNode.SelectSingleNode("./connection_info");
-				
-			string name = connectionInfoNode.SelectSingleNode("./name").InnerText;
-			ConnectionInfo connectionInfo = CreateConnectionInfo(name);
-				
-			string protocol = connectionInfoNode.SelectSingleNode("./protocol").InnerText;
-			switch (protocol.ToLowerInvariant())
+            var connectionInfoNode = xmlNode.SelectSingleNode("./connection_info");
+
+            var name = connectionInfoNode?.SelectSingleNode("./name")?.InnerText;
+            var connectionInfo = CreateConnectionInfo(name);
+
+            var protocol = connectionInfoNode?.SelectSingleNode("./protocol")?.InnerText;
+			switch (protocol?.ToLowerInvariant())
 			{
 				case "telnet":
 					connectionInfo.Protocol = ProtocolType.Telnet;
@@ -158,18 +160,18 @@ namespace mRemoteNG.Config.Import
 					connectionInfo.Protocol = ProtocolType.SSH2;
 					break;
 				default:
-					throw (new FileFormatException(string.Format("Unrecognized protocol ({0}).", protocol)));
+					throw (new FileFormatException($"Unrecognized protocol ({protocol})."));
 			}
 				
-			connectionInfo.Hostname = connectionInfoNode.SelectSingleNode("./host").InnerText;
-			connectionInfo.Port = Convert.ToInt32(connectionInfoNode.SelectSingleNode("./port").InnerText);
-			connectionInfo.PuttySession = connectionInfoNode.SelectSingleNode("./session").InnerText;
+			connectionInfo.Hostname = connectionInfoNode.SelectSingleNode("./host")?.InnerText;
+			connectionInfo.Port = Convert.ToInt32(connectionInfoNode.SelectSingleNode("./port")?.InnerText);
+			connectionInfo.PuttySession = connectionInfoNode.SelectSingleNode("./session")?.InnerText;
 			// ./commandline
-			connectionInfo.Description = connectionInfoNode.SelectSingleNode("./description").InnerText;
-				
-			XmlNode loginNode = xmlNode.SelectSingleNode("./login");
-			connectionInfo.Username = loginNode.SelectSingleNode("login").InnerText;
-			connectionInfo.Password = loginNode.SelectSingleNode("password").InnerText;
+			connectionInfo.Description = connectionInfoNode.SelectSingleNode("./description")?.InnerText;
+
+            var loginNode = xmlNode.SelectSingleNode("./login");
+			connectionInfo.Username = loginNode?.SelectSingleNode("login")?.InnerText;
+			connectionInfo.Password = loginNode?.SelectSingleNode("password")?.InnerText;
 			// ./prompt
 				
 			// ./timeout/connectiontimeout
