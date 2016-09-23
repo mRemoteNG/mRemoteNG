@@ -50,31 +50,29 @@ namespace mRemoteNG.App
                         return;
                     }
 
-                    IConnectionImporter importer;
                     foreach (var fileName in openFileDialog.FileNames)
                     {
                         try
                         {
+                            IConnectionImporter importer;
                             switch (DetermineFileType(fileName))
                             {
                                 case FileType.mRemoteXml:
                                     importer = new mRemoteNGImporter();
-                                    importer.Import(fileName, importDestinationContainer);
                                     break;
                                 case FileType.RemoteDesktopConnection:
                                     importer = new RemoteDesktopConnectionImporter();
-                                    importer.Import(fileName, importDestinationContainer);
                                     break;
                                 case FileType.RemoteDesktopConnectionManager:
                                     importer = new RemoteDesktopConnectionManagerImporter();
-                                    importer.Import(fileName, importDestinationContainer);
                                     break;
                                 case FileType.PuttyConnectionManager:
-                                    //PuttyConnectionManager.Import(fileName, importDestinationContainer);
+                                    importer = new PuttyConnectionManagerImporter();
                                     break;
                                 default:
                                     throw new FileFormatException("Unrecognized file format.");
                             }
+                            importer.Import(fileName, importDestinationContainer);
                         }
                         catch (Exception ex)
                         {

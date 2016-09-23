@@ -130,6 +130,7 @@
     <Compile Include="Config\Connections\CsvConnectionsSerializerRemoteDesktop2008Format.cs" />
     <Compile Include="Config\Connections\DataTableDeserializer.cs" />
     <Compile Include="Config\Connections\DataTableSerializer.cs" />
+    <Compile Include="Config\Connections\PuttyConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Connections\RemoteDesktopConnectionDeserializer.cs" />
     <Compile Include="Config\Connections\RemoteDesktopConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Connections\SqlConnectionsSerializer.cs" />
@@ -164,7 +165,7 @@
     <Compile Include="Config\Import\ActiveDirectoryImporter.cs" />
     <Compile Include="Config\Import\mRemoteNGImporter.cs" />
     <Compile Include="Config\Import\PortScanImporter.cs" />
-    <Compile Include="Config\Import\PuttyConnectionManager.cs" />
+    <Compile Include="Config\Import\PuttyConnectionManagerImporter.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnectionImporter.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnectionManagerImporter.cs" />
     <Compile Include="Config\Putty\PuttySessionsRegistryProvider.cs" />
