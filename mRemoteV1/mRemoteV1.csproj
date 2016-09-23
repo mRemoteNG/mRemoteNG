@@ -131,6 +131,7 @@
     <Compile Include="Config\Connections\DataTableDeserializer.cs" />
     <Compile Include="Config\Connections\DataTableSerializer.cs" />
     <Compile Include="Config\Connections\RemoteDesktopConnectionDeserializer.cs" />
+    <Compile Include="Config\Connections\RemoteDesktopConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Connections\SqlConnectionsSerializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithBackup.cs" />
     <Compile Include="Config\Connections\ConnectionsDecryptor.cs" />
@@ -165,7 +166,7 @@
     <Compile Include="Config\Import\PortScanImporter.cs" />
     <Compile Include="Config\Import\PuttyConnectionManager.cs" />
     <Compile Include="Config\Import\RemoteDesktopConnectionImporter.cs" />
-    <Compile Include="Config\Import\RemoteDesktopConnectionManager.cs" />
+    <Compile Include="Config\Import\RemoteDesktopConnectionManagerImporter.cs" />
     <Compile Include="Config\Putty\PuttySessionsRegistryProvider.cs" />
     <Compile Include="Config\Putty\PuttySessionsXmingProvider.cs" />
     <Compile Include="Config\Putty\PuttySessionsManager.cs" />

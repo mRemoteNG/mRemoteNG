@@ -66,7 +66,8 @@ namespace mRemoteNG.App
                                     importer.Import(fileName, importDestinationContainer);
                                     break;
                                 case FileType.RemoteDesktopConnectionManager:
-                                    //RemoteDesktopConnectionManager.Import(fileName, importDestinationContainer);
+                                    importer = new RemoteDesktopConnectionManagerImporter();
+                                    importer.Import(fileName, importDestinationContainer);
                                     break;
                                 case FileType.PuttyConnectionManager:
                                     //PuttyConnectionManager.Import(fileName, importDestinationContainer);
