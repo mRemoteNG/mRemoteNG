@@ -12,8 +12,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
-
-namespace mRemoteNG.Config.Connections
+namespace mRemoteNG.Config.Serializers
 {
     public class DataTableDeserializer : IDeserializer
     {

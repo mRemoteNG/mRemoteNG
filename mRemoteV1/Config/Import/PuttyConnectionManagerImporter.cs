@@ -1,7 +1,7 @@
 using System.IO;
 using System.Linq;
-using mRemoteNG.Config.Connections;
 using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.Serializers;
 using mRemoteNG.Container;
 
 

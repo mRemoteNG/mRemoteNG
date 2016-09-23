@@ -1,6 +1,6 @@
 ﻿using mRemoteNG.Tree;
 
-namespace mRemoteNG.Config
+namespace mRemoteNG.Config.Serializers
 {
     public interface IDeserializer
     {

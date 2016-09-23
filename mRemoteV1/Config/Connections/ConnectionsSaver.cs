@@ -10,6 +10,7 @@ using System.Xml;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
 using mRemoteNG.Config.DataProviders;
+using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;

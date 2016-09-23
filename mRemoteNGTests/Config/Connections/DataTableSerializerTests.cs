@@ -1,4 +1,4 @@
-﻿using mRemoteNG.Config.Connections;
+﻿using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
