@@ -156,7 +156,6 @@ namespace mRemoteNG.UI.Forms
 			}
 
             Windows.treePanel.Focus();
-            ConnectionTree.TreeView = Windows.treeForm.tvConnections;
 
             PuttySessionsManager.Instance.StartWatcher();
 			if (Settings.Default.StartupComponentsCheck)
@@ -426,9 +425,10 @@ namespace mRemoteNG.UI.Forms
 		{
             var extA = (ExternalTool)((ToolStripButton)sender).Tag;
 
-            if (ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(ConnectionTree.SelectedNode) == TreeNodeType.PuttySession)
+		    var selectedTreeNode = Windows.treeForm.SelectedNode;
+            if (selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection | selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession)
 			{
-                extA.Start((ConnectionInfo)ConnectionTree.SelectedNode.Tag);
+                extA.Start(selectedTreeNode);
 			}
 			else
 			{

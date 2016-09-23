@@ -13,9 +13,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
+using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
@@ -241,7 +243,9 @@ namespace mRemoteNG.App
 
                 connectionsLoader.ConnectionList = ConnectionList;
                 connectionsLoader.ContainerList = ContainerList;
-                ConnectionTree.ResetTree();
+
+                var rootConnectionNode = ConnectionTreeModel.RootNodes.First(node => !(node is RootPuttySessionsNodeInfo));
+                ConnectionTreeModel.RemoveRootNode(rootConnectionNode);
 
                 // Load config
                 connectionsLoader.ConnectionFileName = filename;
