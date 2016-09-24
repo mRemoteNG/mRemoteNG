@@ -8,6 +8,7 @@ namespace mRemoteNG.Config.Serializers
 {
     public class RemoteDesktopConnectionDeserializer : IDeserializer
     {
+        // .rdp file schema: https://technet.microsoft.com/en-us/library/ff393699(v=ws.10).aspx
         private readonly string[] _fileContent;
 
         public RemoteDesktopConnectionDeserializer(string[] fileContent)

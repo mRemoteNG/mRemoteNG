@@ -61,6 +61,37 @@ namespace mRemoteNGTests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to screen mode id:i:2
+        ///use multimon:i:0
+        ///desktopwidth:i:800
+        ///desktopheight:i:600
+        ///session bpp:i:32
+        ///winposstr:s:0,3,0,0,800,600
+        ///compression:i:1
+        ///keyboardhook:i:2
+        ///audiocapturemode:i:0
+        ///videoplaybackmode:i:1
+        ///connection type:i:7
+        ///networkautodetect:i:1
+        ///bandwidthautodetect:i:1
+        ///displayconnectionbar:i:1
+        ///username:s:myusernamehere
+        ///enableworkspacereconnect:i:0
+        ///disable wallpaper:i:0
+        ///allow font smoothing:i:0
+        ///allow desktop composition:i:0
+        ///disable full window drag:i:1
+        ///disable menu anims:i:1
+        ///disable themes:i:0
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string test_remotedesktopconnection_rdp {
+            get {
+                return ResourceManager.GetString("test_remotedesktopconnection_rdp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;Connections Name=&quot;Connections&quot; Export=&quot;False&quot; Protected=&quot;95syzRuZ4mRxpNkZQzoyX8SDpQXLyMq3GncO8o4SyTBoYvn3TAWgn05ZEU2DrjkM&quot; ConfVersion=&quot;2.5&quot;&gt;
         ///    &lt;Node Name=&quot;Folder1&quot; Type=&quot;Container&quot; Expanded=&quot;True&quot; Descr=&quot;&quot; Icon=&quot;mRemoteNG&quot; Panel=&quot;General&quot; Username=&quot;&quot; Domain=&quot;&quot; Password=&quot;&quot; Hostname=&quot;&quot; Protocol=&quot;ICA&quot; PuttySession=&quot;Default Settings&quot; Port=&quot;1494&quot; ConnectToConsole=&quot;False&quot; UseCredSsp=&quot;True&quot; RenderingEngine=&quot;IE&quot; ICAEncryptionStrength=&quot;Encr128Bit&quot; RDPAuthenticationLevel=&quot; [rest of string was truncated]&quot;;.
