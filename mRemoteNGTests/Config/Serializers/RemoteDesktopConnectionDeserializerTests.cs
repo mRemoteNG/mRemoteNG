@@ -22,6 +22,18 @@ namespace mRemoteNGTests.Config.Serializers
         private const string ExpectedGatewayHostname = "gatewayhostname.domain.com";
         private const int ExpectedPort = 9933;
         private const ProtocolRDP.RDPColors ExpectedColors = ProtocolRDP.RDPColors.Colors24Bit;
+        private const bool ExpectedBitmapCaching = false;
+        private const ProtocolRDP.RDPResolutions ExpectedResolutionMode = ProtocolRDP.RDPResolutions.FitToWindow;
+        private const bool ExpectedWallpaperDisplay = true;
+        private const bool ExpectedThemesDisplay = true;
+        private const bool ExpectedFontSmoothing = true;
+        private const bool ExpectedDesktopComposition = true;
+        private const bool ExpectedSmartcardRedirection = true;
+        private const bool ExpectedDriveRedirection = true;
+        private const bool ExpectedPortRedirection = true;
+        private const bool ExpectedPrinterRedirection = true;
+        private const ProtocolRDP.RDPSounds ExpectedSoundRedirection = ProtocolRDP.RDPSounds.BringToThisComputer;
+
 
         [OneTimeSetUp]
         public void OnetimeSetup()
@@ -84,6 +96,83 @@ namespace mRemoteNGTests.Config.Serializers
         {
             var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
             Assert.That(connectionInfo.Colors, Is.EqualTo(ExpectedColors));
+        }
+
+        [Test]
+        public void BitmapCachingImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.CacheBitmaps, Is.EqualTo(ExpectedBitmapCaching));
+        }
+
+        [Test]
+        public void ResolutionImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.Resolution, Is.EqualTo(ExpectedResolutionMode));
+        }
+
+        [Test]
+        public void DisplayWallpaperImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.DisplayWallpaper, Is.EqualTo(ExpectedWallpaperDisplay));
+        }
+
+        [Test]
+        public void DisplayThemesImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.DisplayThemes, Is.EqualTo(ExpectedThemesDisplay));
+        }
+
+        [Test]
+        public void FontSmoothingImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.EnableFontSmoothing, Is.EqualTo(ExpectedFontSmoothing));
+        }
+
+        [Test]
+        public void DesktopCompositionImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.EnableDesktopComposition, Is.EqualTo(ExpectedDesktopComposition));
+        }
+
+        [Test]
+        public void SmartcardRedirectionImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.RedirectSmartCards, Is.EqualTo(ExpectedSmartcardRedirection));
+        }
+
+        [Test]
+        public void DriveRedirectionImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.RedirectDiskDrives, Is.EqualTo(ExpectedDriveRedirection));
+        }
+
+        [Test]
+        public void PortRedirectionImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.RedirectPorts, Is.EqualTo(ExpectedPortRedirection));
+        }
+
+        [Test]
+        public void PrinterRedirectionImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.RedirectPrinters, Is.EqualTo(ExpectedPrinterRedirection));
+        }
+
+        [Test]
+        public void SoundRedirectionImportedCorrectly()
+        {
+            var connectionInfo = _connectionTreeModel.RootNodes.First().Children.First();
+            Assert.That(connectionInfo.RedirectSound, Is.EqualTo(ExpectedSoundRedirection));
         }
 
         //[Test]
