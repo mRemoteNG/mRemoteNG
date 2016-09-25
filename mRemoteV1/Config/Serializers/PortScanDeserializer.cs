@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
