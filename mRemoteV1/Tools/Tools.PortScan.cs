@@ -10,7 +10,7 @@ using mRemoteNG.Messages;
 
 namespace mRemoteNG.Tools
 {
-	public class Scanner
+	public class PortScanner
 	{
         #region Private Members
 		private List<IPAddress> _ipAddresses = new List<IPAddress>();
@@ -21,7 +21,7 @@ namespace mRemoteNG.Tools
 				
         #region Public Methods
 	
-		public Scanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2)
+		public PortScanner(IPAddress ipAddress1, IPAddress ipAddress2, int port1, int port2)
 		{
             IPAddress ipAddressStart = IpAddressMin(ipAddress1, ipAddress2);
             IPAddress ipAddressEnd = IpAddressMax(ipAddress1, ipAddress2);

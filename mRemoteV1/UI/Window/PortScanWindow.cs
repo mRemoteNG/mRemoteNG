@@ -69,7 +69,7 @@ namespace mRemoteNG.UI.Window
         #endregion
 				
         #region Private Fields
-		private Scanner _portScanner;
+		private PortScanner _portScanner;
 		private bool _scanning;
         #endregion
 				
@@ -171,7 +171,7 @@ namespace mRemoteNG.UI.Window
 				System.Net.IPAddress ipAddressStart = System.Net.IPAddress.Parse(ipStart.Text);
 				System.Net.IPAddress ipAddressEnd = System.Net.IPAddress.Parse(ipEnd.Text);
 				
-				_portScanner = new Scanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value);
+				_portScanner = new PortScanner(ipAddressStart, ipAddressEnd, (int) portStart.Value, (int) portEnd.Value);
 						
 				_portScanner.BeginHostScan += PortScanner_BeginHostScan;
 				_portScanner.HostScanned += PortScanner_HostScanned;
