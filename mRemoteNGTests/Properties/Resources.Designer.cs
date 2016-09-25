@@ -61,11 +61,58 @@ namespace mRemoteNGTests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to screen mode id:i:2
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;RDCMan schemaVersion=&quot;1&quot;&gt;
+        ///    &lt;version&gt;2.2&lt;/version&gt;
+        ///    &lt;file&gt;
+        ///        &lt;properties&gt;
+        ///            &lt;name&gt;test_rdcman_v2_2_schema1&lt;/name&gt;
+        ///            &lt;expanded&gt;False&lt;/expanded&gt;
+        ///            &lt;comment /&gt;
+        ///            &lt;logonCredentials inherit=&quot;FromParent&quot; /&gt;
+        ///            &lt;connectionSettings inherit=&quot;FromParent&quot; /&gt;
+        ///            &lt;gatewaySettings inherit=&quot;FromParent&quot; /&gt;
+        ///            &lt;remoteDesktop inherit=&quot;FromParent&quot; /&gt;
+        ///            &lt;localResources inherit=&quot;FromParent&quot; [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string test_rdcman_v2_2_schema1 {
+            get {
+                return ResourceManager.GetString("test_rdcman_v2_2_schema1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;RDCMan programVersion=&quot;2.7&quot; schemaVersion=&quot;3&quot;&gt;
+        ///  &lt;file&gt;
+        ///    &lt;credentialsProfiles /&gt;
+        ///    &lt;properties&gt;
+        ///      &lt;expanded&gt;True&lt;/expanded&gt;
+        ///      &lt;name&gt;test_RDCMan_connections&lt;/name&gt;
+        ///    &lt;/properties&gt;
+        ///    &lt;smartGroup&gt;
+        ///      &lt;properties&gt;
+        ///        &lt;expanded&gt;False&lt;/expanded&gt;
+        ///        &lt;name&gt;AllServers&lt;/name&gt;
+        ///      &lt;/properties&gt;
+        ///      &lt;ruleGroup operator=&quot;All&quot;&gt;
+        ///        &lt;rule&gt;
+        ///          &lt;property&gt;DisplayName&lt;/property&gt;
+        ///          &lt;operator&gt;Matches&lt;/operator&gt;
+        ///         [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string test_rdcman_v2_7_schema3 {
+            get {
+                return ResourceManager.GetString("test_rdcman_v2_7_schema3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to screen mode id:i:1
         ///use multimon:i:0
         ///desktopwidth:i:800
         ///desktopheight:i:600
-        ///session bpp:i:32
+        ///session bpp:i:24
         ///winposstr:s:0,3,0,0,800,600
         ///compression:i:1
         ///keyboardhook:i:2
@@ -77,12 +124,12 @@ namespace mRemoteNGTests.Properties {
         ///displayconnectionbar:i:1
         ///username:s:myusernamehere
         ///enableworkspacereconnect:i:0
-        ///disable wallpaper:i:0
-        ///allow font smoothing:i:0
-        ///allow desktop composition:i:0
+        ///disable wallpaper:i:1
+        ///allow font smoothing:i:1
+        ///allow desktop composition:i:1
         ///disable full window drag:i:1
         ///disable menu anims:i:1
-        ///disable themes:i:0
+        ///disable themes:i:1
         /// [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string test_remotedesktopconnection_rdp {

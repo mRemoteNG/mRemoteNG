@@ -1,0 +1,120 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RDCMan programVersion="2.7" schemaVersion="3">
+  <file>
+    <credentialsProfiles />
+    <properties>
+      <expanded>True</expanded>
+      <name>test_RDCMan_connections</name>
+    </properties>
+    <smartGroup>
+      <properties>
+        <expanded>False</expanded>
+        <name>AllServers</name>
+      </properties>
+      <ruleGroup operator="All">
+        <rule>
+          <property>DisplayName</property>
+          <operator>Matches</operator>
+          <value>server</value>
+        </rule>
+      </ruleGroup>
+    </smartGroup>
+    <group>
+      <properties>
+        <expanded>True</expanded>
+        <name>Group1</name>
+      </properties>
+      <server>
+        <properties>
+          <name>server1</name>
+        </properties>
+        <logonCredentials inherit="None">
+          <profileName scope="Local">Custom</profileName>
+          <userName>someusername1</userName>
+          <password>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/jk3lWsW+ku0n4AOVYyLTAAAAAACAAAAAAAQZgAAAAEAACAAAACZryl2a4trJLcUdyg7jL/m51fxn4Vy+je6SBhT5FasmgAAAAAOgAAAAAIAACAAAAAcG6MQhKFvEcKRrRE74YKrrnYKxLFnVxbGzyfl7JoyvjAAAACAofcbQqcr6h9VQuwwWW5IBkW1zsugofl1MjsL9t2uWfuBgnrya1Xlyue5E7cG8BZAAAAApgx/XXqBqXhr6CV2SJTlXihg7n5epOIT02A8ymy3qRftDgXlmu3IaN7krK3gofv+iNdVrvIdJJMYCihm7dyqOw==</password>
+          <domain>mydomain</domain>
+        </logonCredentials>
+        <connectionSettings inherit="None">
+          <connectToConsole>False</connectToConsole>
+          <startProgram />
+          <workingDir />
+          <port>9933</port>
+          <loadBalanceInfo />
+        </connectionSettings>
+        <gatewaySettings inherit="None">
+          <enabled>True</enabled>
+          <hostName>gatewayserver.innerdomain.net</hostName>
+          <logonMethod>Any</logonMethod>
+          <localBypass>True</localBypass>
+          <credSharing>True</credSharing>
+          <profileName scope="Local">Custom</profileName>
+          <userName />
+          <password />
+          <domain />
+        </gatewaySettings>
+        <remoteDesktop inherit="None">
+          <sameSizeAsClientArea>False</sameSizeAsClientArea>
+          <fullScreen>True</fullScreen>
+          <colorDepth>24</colorDepth>
+        </remoteDesktop>
+        <localResources inherit="None">
+          <audioRedirection>Client</audioRedirection>
+          <audioRedirectionQuality>Dynamic</audioRedirectionQuality>
+          <audioCaptureRedirection>DoNotRecord</audioCaptureRedirection>
+          <keyboardHook>FullScreenClient</keyboardHook>
+          <redirectClipboard>True</redirectClipboard>
+          <redirectDrives>True</redirectDrives>
+          <redirectDrivesList>
+            <item>C:\</item>
+            <item>D:\</item>
+            <item>E:\</item>
+            <item>F:\</item>
+            <item>G:\</item>
+          </redirectDrivesList>
+          <redirectPrinters>True</redirectPrinters>
+          <redirectPorts>True</redirectPorts>
+          <redirectSmartCards>True</redirectSmartCards>
+          <redirectPnpDevices>True</redirectPnpDevices>
+        </localResources>
+        <displaySettings inherit="None">
+          <thumbnailScale>1</thumbnailScale>
+          <smartSizeDockedWindows>False</smartSizeDockedWindows>
+          <smartSizeUndockedWindows>False</smartSizeUndockedWindows>
+        </displaySettings>
+        <securitySettings inherit="None">
+          <authentication>Warn</authentication>
+        </securitySettings>
+      </server>
+      <server>
+        <properties>
+          <name>server2</name>
+        </properties>
+      </server>
+    </group>
+    <group>
+      <properties>
+        <expanded>True</expanded>
+        <name>Group2</name>
+      </properties>
+      <group>
+        <properties>
+          <expanded>True</expanded>
+          <name>Group3</name>
+        </properties>
+        <server>
+          <properties>
+            <name>server3</name>
+          </properties>
+        </server>
+        <server>
+          <properties>
+            <name>server4</name>
+          </properties>
+        </server>
+      </group>
+    </group>
+  </file>
+  <connected />
+  <favorites />
+  <recentlyUsed />
+</RDCMan>

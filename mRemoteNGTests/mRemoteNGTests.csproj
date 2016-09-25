@@ -109,6 +109,7 @@
     <Compile Include="Config\Connections\DataTableSerializerTests.cs" />
     <Compile Include="Config\Connections\XmlConnectionsDeserializerTests.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />
     <Compile Include="Connection\AbstractConnectionInfoDataTests.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandlerTests.cs" />
     <Compile Include="Tree\ConnectionTreeModelTests.cs" />
@@ -146,7 +147,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Resources\test_remotedesktopconnection.rdp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\mRemoteV1\mRemoteV1.csproj">
@@ -165,7 +165,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\TestConfCons.xml" />
-    <None Include="Resources\test_remotedesktopconnection.rdp.txt" />
+    <None Include="Resources\test_rdcman_v2_2_schema1.rdg" />
+    <None Include="Resources\test_RDCMan_v2_7_schema3.rdg" />
+    <None Include="Resources\test_remotedesktopconnection.rdp" />
   </ItemGroup>
   <ItemGroup />
   <Choose>
