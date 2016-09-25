@@ -109,6 +109,7 @@
     <Compile Include="BinaryFileTests.cs" />
     <Compile Include="Config\Serializers\DataTableSerializerTests.cs" />
     <Compile Include="Config\Serializers\PortScanDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializerTests.cs" />
     <Compile Include="Config\Serializers\XmlConnectionsDeserializerTests.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializerTests.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />
@@ -167,6 +168,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Resources\TestConfCons.xml" />
+    <None Include="Resources\test_puttyConnectionManager_database.dat" />
     <None Include="Resources\test_rdcman_badVersionNumber.rdg" />
     <None Include="Resources\test_rdcman_noversion.rdg" />
     <None Include="Resources\test_rdcman_v2_2_badschemaversion.rdg" />

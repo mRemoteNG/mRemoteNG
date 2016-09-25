@@ -62,8 +62,6 @@ namespace mRemoteNG.Config.Serializers
                         throw (new FileFormatException($"Unrecognized child node ({childNode.Name})."));
                 }
             }
-
-            Runtime.ContainerList.Add(newContainer);
         }
 
         private void VerifyNodeType(XmlNode xmlNode)
@@ -108,8 +106,6 @@ namespace mRemoteNG.Config.Serializers
 
             var connectionInfo = ConnectionInfoFromXml(connectionNode);
             parentContainer.AddChild(connectionInfo);
-
-            Runtime.ConnectionList.Add(connectionInfo);
         }
 
         private ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
@@ -129,7 +125,7 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.Protocol = ProtocolType.SSH2;
                     break;
                 default:
-                    throw (new FileFormatException($"Unrecognized protocol ({protocol})."));
+                    throw new FileFormatException($"Unrecognized protocol ({protocol}).");
             }
 
             connectionInfo.Hostname = connectionInfoNode.SelectSingleNode("./host")?.InnerText;

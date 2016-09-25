@@ -61,6 +61,22 @@ namespace mRemoteNGTests.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;
+        ///&lt;!-- ****************************************************************--&gt;
+        ///&lt;!-- *                                                              *--&gt;
+        ///&lt;!-- * PuTTY Configuration Manager save file - All right reserved.  *--&gt;
+        ///&lt;!-- *                                                              *--&gt;
+        ///&lt;!-- ****************************************************************--&gt;
+        ///&lt;!-- The following lines can be modified at your own risks.  --&gt;
+        ///&lt;configuration version=&quot;0.7.1.136&quot;  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string test_puttyConnectionManager_database {
+            get {
+                return ResourceManager.GetString("test_puttyConnectionManager_database", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;RDCMan schemaVersion=&quot;1&quot;&gt;
         ///    &lt;version&gt;99.99&lt;/version&gt;
