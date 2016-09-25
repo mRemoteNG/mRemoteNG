@@ -107,8 +107,8 @@
   <ItemGroup>
     <Compile Include="App\LoggerTests.cs" />
     <Compile Include="BinaryFileTests.cs" />
-    <Compile Include="Config\Connections\DataTableSerializerTests.cs" />
-    <Compile Include="Config\Connections\XmlConnectionsDeserializerTests.cs" />
+    <Compile Include="Config\Serializers\DataTableSerializerTests.cs" />
+    <Compile Include="Config\Serializers\XmlConnectionsDeserializerTests.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializerTests.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializerTests.cs" />
     <Compile Include="Connection\AbstractConnectionInfoDataTests.cs" />

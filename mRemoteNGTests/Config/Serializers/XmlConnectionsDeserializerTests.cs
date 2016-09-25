@@ -7,8 +7,7 @@ using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
 
-
-namespace mRemoteNGTests.Config.Connections
+namespace mRemoteNGTests.Config.Serializers
 {
     public class XmlConnectionsDeserializerTests
     {

@@ -6,8 +6,7 @@ using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 using NUnit.Framework;
 
-
-namespace mRemoteNGTests.Config.Connections
+namespace mRemoteNGTests.Config.Serializers
 {
     public class DataTableSerializerTests
     {
