@@ -126,15 +126,16 @@ namespace mRemoteNGTests.Config.Serializers
             Assert.That(connection.Domain, Is.EqualTo(ExpectedDomain));
         }
 
-        [Test]
-        public void ConnectionPasswordImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.Password, Is.EqualTo(ExpectedPassword));
-        }
+        // Since password is encrypted with a machine key, cant test decryption on another machine
+        //[Test]
+        //public void ConnectionPasswordImported()
+        //{
+        //    var rootNode = _connectionTreeModel.RootNodes.First();
+        //    var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
+        //    var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        //    var connection = group1.Children.First();
+        //    Assert.That(connection.Password, Is.EqualTo(ExpectedPassword));
+        //}
 
         [Test]
         public void ConnectionProtocolSetToRdp()
@@ -196,15 +197,16 @@ namespace mRemoteNGTests.Config.Serializers
             Assert.That(connection.RDGatewayUsername, Is.EqualTo(ExpectedGatewayUsername));
         }
 
-        [Test]
-        public void ConnectionGatewayPasswordImported()
-        {
-            var rootNode = _connectionTreeModel.RootNodes.First();
-            var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
-            var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
-            var connection = group1.Children.First();
-            Assert.That(connection.RDGatewayPassword, Is.EqualTo(ExpectedGatewayPassword));
-        }
+        // Since password is encrypted with a machine key, cant test decryption on another machine
+        //[Test]
+        //public void ConnectionGatewayPasswordImported()
+        //{
+        //    var rootNode = _connectionTreeModel.RootNodes.First();
+        //    var importedRdcmanRootNode = rootNode.Children.OfType<ContainerInfo>().First();
+        //    var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
+        //    var connection = group1.Children.First();
+        //    Assert.That(connection.RDGatewayPassword, Is.EqualTo(ExpectedGatewayPassword));
+        //}
 
         [Test]
         public void ConnectionGatewayDomainImported()
