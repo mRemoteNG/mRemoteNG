@@ -34,18 +34,18 @@
                 <logonCredentials inherit="None">
                     <userName>myusername1</userName>
                     <domain>mydomain</domain>
-                    <password storeAsClearText="False">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/jk3lWsW+ku0n4AOVYyLTAAAAAACAAAAAAAQZgAAAAEAACAAAAC2ydwmIIkk4aAKzKc4Vo6xcHcSUDjwVSXcSTGEhaPUVwAAAAAOgAAAAAIAACAAAACKfrTHU1q7LWhKGfih70PJon3D8CDXHS3Mtj34fSWU9yAAAADf19KsxXuWlJ9Sx+SLe/ou8smSZi2u9MS90P5kGspJlEAAAAAHP5ARrJZnyTQ36URfabE7xPlnmy1qt/+RyqJezQ2G+qg/TecZC7fYRCSjMA9GhgiyLKG4ATVpYFTLJuvZZuRU</password>
+                    <password storeAsClearText="False">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/jk3lWsW+ku0n4AOVYyLTAAAAAACAAAAAAAQZgAAAAEAACAAAABhmrmYHd+c7VjWfPvxJ8pgi55yeV2brJDV/i9XzGUz6wAAAAAOgAAAAAIAACAAAAACJMhtb6tmkJn9vSv9J4VMWgt3S7Ikmf63xK/uKQ+YuyAAAACD3mJOT1910KD71zqbi+m/F6A0LK0tu0BhpOhr9v0yH0AAAADrb+Uv2btNYhfTUDGbw5pT5dbp5oXzc3I8QO7X1vgMXiI5TkrSxfHP/2j+Yak++vAjpVtzlxk49hpDLNAZnnhg</password>
                 </logonCredentials>
                 <connectionSettings inherit="None">
-                    <connectToConsole>False</connectToConsole>
+                    <connectToConsole>True</connectToConsole>
                     <startProgram />
                     <workingDir />
                     <port>9933</port>
                 </connectionSettings>
                 <gatewaySettings inherit="None">
-                    <userName>David</userName>
-                    <domain>Leviathan</domain>
-                    <password storeAsClearText="False" />
+                    <userName>gatewayusername</userName>
+                    <domain>innerdomain</domain>
+                    <password storeAsClearText="False">AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA/jk3lWsW+ku0n4AOVYyLTAAAAAACAAAAAAAQZgAAAAEAACAAAACgU917evQ54VsDf3nkofPOAPj0icRejg3yfyUwZqV3DgAAAAAOgAAAAAIAACAAAACuPdtJTxd2yvFuTpSOeZz1loraPu2WFqUXiJp4cfjbJTAAAAB8L5YX93h6pQoKJozrk+Y+spHWqP+eqBUXRJ45oLreKslslSWCEO7VWg4rgr0FYsNAAAAAU1i5aSTlBy99EkNEd2inrAJAopCfNig6osiEVdvA6eYnCogG5mhzYEK5d5Wt49S8HbEyuLF/8IxV0PKG53vCZQ==</password>
                     <enabled>True</enabled>
                     <hostName>gatewayserverhost.innerdomain.net</hostName>
                     <logonMethod>4</logonMethod>
@@ -56,13 +56,13 @@
                     <size>1024 x 768</size>
                     <sameSizeAsClientArea>True</sameSizeAsClientArea>
                     <fullScreen>False</fullScreen>
-                    <colorDepth>16</colorDepth>
+                    <colorDepth>24</colorDepth>
                 </remoteDesktop>
                 <localResources inherit="None">
-                    <audioRedirection>0</audioRedirection>
+                    <audioRedirection>2</audioRedirection>
                     <audioRedirectionQuality>0</audioRedirectionQuality>
                     <audioCaptureRedirection>0</audioCaptureRedirection>
-                    <keyboardHook>2</keyboardHook>
+                    <keyboardHook>1</keyboardHook>
                     <redirectClipboard>True</redirectClipboard>
                     <redirectDrives>True</redirectDrives>
                     <redirectPorts>True</redirectPorts>
@@ -70,7 +70,7 @@
                     <redirectSmartCards>True</redirectSmartCards>
                 </localResources>
                 <securitySettings inherit="None">
-                    <authentication>2</authentication>
+                    <authentication>1</authentication>
                 </securitySettings>
                 <displaySettings inherit="None">
                     <thumbnailScale>1</thumbnailScale>
