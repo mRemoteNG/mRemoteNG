@@ -195,8 +195,9 @@ namespace mRemoteNG.Config.Serializers
                     connectionInfo.Resolution = ProtocolRDP.RDPResolutions.Fullscreen;
                 }
 
-
-                connectionInfo.Colors = (ProtocolRDP.RDPColors)Enum.Parse(typeof(ProtocolRDP.RDPColors), remoteDesktopNode.SelectSingleNode("./colorDepth").InnerText);
+                var colorDepth = remoteDesktopNode.SelectSingleNode("./colorDepth")?.InnerText;
+                if (colorDepth != null)
+                    connectionInfo.Colors = (ProtocolRDP.RDPColors)Enum.Parse(typeof(ProtocolRDP.RDPColors), colorDepth);
             }
             else
             {
@@ -237,10 +238,10 @@ namespace mRemoteNG.Config.Serializers
                 }
 
                 // ./redirectClipboard
-                connectionInfo.RedirectDiskDrives = bool.Parse(localResourcesNode.SelectSingleNode("./redirectDrives").InnerText);
-                connectionInfo.RedirectPorts = bool.Parse(localResourcesNode.SelectSingleNode("./redirectPorts").InnerText);
-                connectionInfo.RedirectPrinters = bool.Parse(localResourcesNode.SelectSingleNode("./redirectPrinters").InnerText);
-                connectionInfo.RedirectSmartCards = bool.Parse(localResourcesNode.SelectSingleNode("./redirectSmartCards").InnerText);
+                connectionInfo.RedirectDiskDrives = bool.Parse(localResourcesNode.SelectSingleNode("./redirectDrives")?.InnerText ?? "false");
+                connectionInfo.RedirectPorts = bool.Parse(localResourcesNode.SelectSingleNode("./redirectPorts")?.InnerText ?? "false");
+                connectionInfo.RedirectPrinters = bool.Parse(localResourcesNode.SelectSingleNode("./redirectPrinters")?.InnerText ?? "false");
+                connectionInfo.RedirectSmartCards = bool.Parse(localResourcesNode.SelectSingleNode("./redirectSmartCards")?.InnerText ?? "false");
             }
             else
             {
