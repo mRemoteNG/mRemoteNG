@@ -52,11 +52,18 @@ namespace mRemoteNG.Config.Serializers
 
         private void VerifyFileVersion(XmlNode rdcManNode)
         {
-            var versionNode = rdcManNode.SelectSingleNode("./version");
-            var version = new Version(versionNode.InnerText);
-            if (!(version == new Version(2, 2)))
+            var versionNode = rdcManNode.SelectSingleNode("./version")?.InnerText;
+            if (versionNode != null)
             {
-                throw (new FileFormatException($"Unsupported file version ({version})."));
+                var version = new Version(versionNode);
+                if (!(version == new Version(2, 2)))
+                {
+                    throw new FileFormatException($"Unsupported file version ({version}).");
+                }
+            }
+            else
+            {
+                throw new FileFormatException("Unknown file version");
             }
         }
 
