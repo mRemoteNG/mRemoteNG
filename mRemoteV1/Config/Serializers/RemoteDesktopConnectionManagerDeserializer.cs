@@ -109,14 +109,13 @@ namespace mRemoteNG.Config.Serializers
         {
             var connectionInfo = new ConnectionInfo {Protocol = ProtocolType.RDP};
 
-            var name = xmlNode.SelectSingleNode("./name")?.InnerText;
+            var hostname = xmlNode.SelectSingleNode("./name")?.InnerText;
 
-            var displayNameNode = xmlNode.SelectSingleNode("./displayName");
-            var displayName = displayNameNode?.InnerText ?? Language.strNewConnection;
+            var displayName = xmlNode.SelectSingleNode("./displayName")?.InnerText ?? Language.strNewConnection;
 
             connectionInfo.Name = displayName;
             connectionInfo.Description = xmlNode.SelectSingleNode("./comment")?.InnerText;
-            connectionInfo.Hostname = name;
+            connectionInfo.Hostname = hostname;
 
             var logonCredentialsNode = xmlNode.SelectSingleNode("./logonCredentials");
             if (logonCredentialsNode?.Attributes?["inherit"].Value == "None")
