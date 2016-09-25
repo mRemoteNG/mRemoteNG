@@ -86,8 +86,6 @@ namespace mRemoteNG.Config.Serializers
                         break;
                 }
             }
-
-            Runtime.ContainerList.Add(newContainer);
         }
 
         private ContainerInfo ImportContainer(XmlNode containerPropertiesNode, ContainerInfo parentContainer)
@@ -105,8 +103,6 @@ namespace mRemoteNG.Config.Serializers
         {
             var newConnectionInfo = ConnectionInfoFromXml(serverNode);
             parentContainer.AddChild(newConnectionInfo);
-
-            Runtime.ConnectionList.Add(newConnectionInfo);
         }
 
         private ConnectionInfo ConnectionInfoFromXml(XmlNode xmlNode)
