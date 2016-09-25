@@ -83,7 +83,6 @@ namespace mRemoteNG.Config.Serializers
             newConnectionInfo.SetDefaultPort();
 
             parentContainer.AddChild(newConnectionInfo);
-            Runtime.ConnectionList.Add(newConnectionInfo);
         }
     }
 }
