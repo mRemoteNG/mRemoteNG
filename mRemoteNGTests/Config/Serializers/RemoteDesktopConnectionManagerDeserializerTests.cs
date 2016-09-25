@@ -6,7 +6,7 @@ using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNGTests.Properties;
 using NUnit.Framework;
-
+using System.IO;
 
 namespace mRemoteNGTests.Config.Serializers
 {
@@ -304,6 +304,30 @@ namespace mRemoteNGTests.Config.Serializers
             var group1 = importedRdcmanRootNode.Children.OfType<ContainerInfo>().First(node => node.Name == "Group1");
             var connection = group1.Children.First();
             Assert.That(connection.RDPAuthenticationLevel, Is.EqualTo(ExpectedAuthLevel));
+        }
+
+        [Test]
+        public void ExceptionThrownOnBadSchemaVersion()
+        {
+            var badFileContents = Resources.test_rdcman_v2_2_badschemaversion;
+            var deserializer = new RemoteDesktopConnectionManagerDeserializer(badFileContents);
+            Assert.That(() => deserializer.Deserialize(), Throws.TypeOf<FileFormatException>());
+        }
+
+        [Test]
+        public void ExceptionThrownOnUnsupportedVersion()
+        {
+            var badFileContents = Resources.test_rdcman_badVersionNumber;
+            var deserializer = new RemoteDesktopConnectionManagerDeserializer(badFileContents);
+            Assert.That(() => deserializer.Deserialize(), Throws.TypeOf<FileFormatException>());
+        }
+
+        [Test]
+        public void ExceptionThrownOnNoVersion()
+        {
+            var badFileContents = Resources.test_rdcman_noversion;
+            var deserializer = new RemoteDesktopConnectionManagerDeserializer(badFileContents);
+            Assert.That(() => deserializer.Deserialize(), Throws.TypeOf<FileFormatException>());
         }
     }
 }

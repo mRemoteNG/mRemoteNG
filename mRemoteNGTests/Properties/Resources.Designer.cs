@@ -63,17 +63,58 @@ namespace mRemoteNGTests.Properties {
         /// <summary>
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
         ///&lt;RDCMan schemaVersion=&quot;1&quot;&gt;
+        ///    &lt;version&gt;99.99&lt;/version&gt;
+        ///    &lt;file&gt;
+        ///    &lt;/file&gt;
+        ///&lt;/RDCMan&gt;.
+        /// </summary>
+        internal static string test_rdcman_badVersionNumber {
+            get {
+                return ResourceManager.GetString("test_rdcman_badVersionNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;RDCMan schemaVersion=&quot;1&quot;&gt;
+        ///    &lt;file&gt;
+        ///    &lt;/file&gt;
+        ///&lt;/RDCMan&gt;.
+        /// </summary>
+        internal static string test_rdcman_noversion {
+            get {
+                return ResourceManager.GetString("test_rdcman_noversion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;RDCMan schemaVersion=&quot;-99&quot;&gt;
+        ///    &lt;version&gt;2.2&lt;/version&gt;
+        ///    &lt;file&gt;
+        ///    &lt;/file&gt;
+        ///&lt;/RDCMan&gt;.
+        /// </summary>
+        internal static string test_rdcman_v2_2_badschemaversion {
+            get {
+                return ResourceManager.GetString("test_rdcman_v2_2_badschemaversion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+        ///&lt;RDCMan schemaVersion=&quot;1&quot;&gt;
         ///    &lt;version&gt;2.2&lt;/version&gt;
         ///    &lt;file&gt;
         ///        &lt;properties&gt;
         ///            &lt;name&gt;test_rdcman_v2_2_schema1&lt;/name&gt;
-        ///            &lt;expanded&gt;False&lt;/expanded&gt;
+        ///            &lt;expanded&gt;True&lt;/expanded&gt;
         ///            &lt;comment /&gt;
         ///            &lt;logonCredentials inherit=&quot;FromParent&quot; /&gt;
         ///            &lt;connectionSettings inherit=&quot;FromParent&quot; /&gt;
         ///            &lt;gatewaySettings inherit=&quot;FromParent&quot; /&gt;
         ///            &lt;remoteDesktop inherit=&quot;FromParent&quot; /&gt;
-        ///            &lt;localResources inherit=&quot;FromParent&quot; [rest of string was truncated]&quot;;.
+        ///            &lt;localResources inherit=&quot;FromParent&quot;  [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string test_rdcman_v2_2_schema1 {
             get {

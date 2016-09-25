@@ -121,6 +121,15 @@
   <data name="TestConfCons" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\TestConfCons.xml;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;Windows-1252</value>
   </data>
+  <data name="test_rdcman_badVersionNumber" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\test_rdcman_badVersionNumber.rdg;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="test_rdcman_noversion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\test_rdcman_noversion.rdg;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="test_rdcman_v2_2_badschemaversion" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\test_rdcman_v2_2_badschemaversion.rdg;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="test_rdcman_v2_2_schema1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\test_rdcman_v2_2_schema1.rdg;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
