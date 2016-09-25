@@ -1,6 +1,5 @@
 ﻿using System;
 using System.IO;
-using System.Runtime.InteropServices;
 using System.Xml;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
@@ -9,6 +8,9 @@ using mRemoteNG.Connection.Protocol.RDP;
 using mRemoteNG.Container;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
+using System.Security.Cryptography;
+using System.Text;
+
 
 namespace mRemoteNG.Config.Serializers
 {
@@ -123,7 +125,7 @@ namespace mRemoteNG.Config.Serializers
                 connectionInfo.Username = logonCredentialsNode.SelectSingleNode("userName")?.InnerText;
 
                 var passwordNode = logonCredentialsNode.SelectSingleNode("./password");
-                connectionInfo.Password = passwordNode?.Attributes?["storeAsClearText"].Value == "True" ? passwordNode.InnerText : DecryptPassword(passwordNode?.InnerText);
+                connectionInfo.Password = passwordNode?.Attributes?["storeAsClearText"].Value == "True" ? passwordNode.InnerText : DecryptRdcManPassword(passwordNode?.InnerText);
 
                 connectionInfo.Domain = logonCredentialsNode.SelectSingleNode("./domain")?.InnerText;
             }
@@ -156,7 +158,7 @@ namespace mRemoteNG.Config.Serializers
                 connectionInfo.RDGatewayUsername = gatewaySettingsNode.SelectSingleNode("./userName")?.InnerText;
 
                 var passwordNode = gatewaySettingsNode.SelectSingleNode("./password");
-                connectionInfo.RDGatewayPassword = passwordNode?.Attributes?["storeAsClearText"].Value == "True" ? passwordNode.InnerText : DecryptPassword(passwordNode?.InnerText);
+                connectionInfo.RDGatewayPassword = passwordNode?.Attributes?["storeAsClearText"].Value == "True" ? passwordNode.InnerText : DecryptRdcManPassword(passwordNode?.InnerText);
 
                 connectionInfo.RDGatewayDomain = gatewaySettingsNode.SelectSingleNode("./domain")?.InnerText;
                 // ./logonMethod
@@ -281,77 +283,22 @@ namespace mRemoteNG.Config.Serializers
             return connectionInfo;
         }
 
-        private string DecryptPassword(string ciphertext)
+        private string DecryptRdcManPassword(string ciphertext)
         {
             if (string.IsNullOrEmpty(ciphertext))
-            {
                 return null;
-            }
 
-            var gcHandle = new GCHandle();
-            var plaintextData = new NativeMethods.DATA_BLOB();
             try
             {
-                var ciphertextArray = Convert.FromBase64String(ciphertext);
-                gcHandle = GCHandle.Alloc(ciphertextArray, GCHandleType.Pinned);
-
-                var ciphertextData = new NativeMethods.DATA_BLOB
-                {
-                    cbData = ciphertextArray.Length,
-                    pbData = gcHandle.AddrOfPinnedObject()
-                };
-
-                var tempOptionalEntropy = new NativeMethods.DATA_BLOB();
-                var tempPromptStruct = IntPtr.Zero;
-                if (!NativeMethods.CryptUnprotectData(ref ciphertextData, null, ref tempOptionalEntropy, IntPtr.Zero, ref tempPromptStruct, 0, ref plaintextData))
-                {
-                    return null;
-                }
-
-                var plaintextLength = (int)((double)plaintextData.cbData / 2); // Char = 2 bytes
-                var plaintextArray = new char[plaintextLength - 1 + 1];
-                Marshal.Copy(plaintextData.pbData, plaintextArray, 0, plaintextLength);
-
-                return new string(plaintextArray);
+                var plaintextData = ProtectedData.Unprotect(Convert.FromBase64String(ciphertext), new byte[] { }, DataProtectionScope.LocalMachine);
+                var charArray = Encoding.Unicode.GetChars(plaintextData);
+                return new string(charArray);
             }
             catch (Exception ex)
             {
                 Runtime.MessageCollector.AddExceptionMessage("RemoteDesktopConnectionManager.DecryptPassword() failed.", ex, logOnly: true);
                 return null;
             }
-            finally
-            {
-                if (gcHandle.IsAllocated)
-                {
-                    gcHandle.Free();
-                }
-                if (!(plaintextData.pbData == IntPtr.Zero))
-                {
-                    NativeMethods.LocalFree(plaintextData.pbData);
-                }
-            }
-        }
-
-        // ReSharper disable once ClassNeverInstantiated.Local
-        private class NativeMethods
-        {
-            // ReSharper disable InconsistentNaming
-            // ReSharper disable IdentifierTypo
-            // ReSharper disable StringLiteralTypo
-            [DllImport("crypt32.dll", CharSet = CharSet.Unicode)]
-            public static extern bool CryptUnprotectData(ref DATA_BLOB dataIn, string description, ref DATA_BLOB optionalEntropy, IntPtr reserved, ref IntPtr promptStruct, int flags, ref DATA_BLOB dataOut);
-
-            [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
-            public static extern void LocalFree(IntPtr ptr);
-
-            public struct DATA_BLOB
-            {
-                public int cbData;
-                public IntPtr pbData;
-            }
-            // ReSharper restore StringLiteralTypo
-            // ReSharper restore IdentifierTypo
-            // ReSharper restore InconsistentNaming
         }
     }
 }
