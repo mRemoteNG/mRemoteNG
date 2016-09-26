@@ -1,6 +1,7 @@
 using System;
 using System.Windows.Forms;
 using mRemoteNG.Config.Connections;
+using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 
@@ -13,27 +14,21 @@ namespace mRemoteNG.App
 		{
 			try
 			{
-			    Security.Save saveSecurity = new Security.Save();
+			    var saveSecurity = new Save();
 					
-				using (ExportForm exportForm = new ExportForm())
+				using (var exportForm = new ExportForm())
 				{
-					if (Tree.ConnectionTreeNode.GetNodeType(selectedTreeNode) == Tree.TreeNodeType.Container)
-					{
+					if (ConnectionTreeNode.GetNodeType(selectedTreeNode) == TreeNodeType.Container)
 						exportForm.SelectedFolder = selectedTreeNode;
-					}
-					else if (Tree.ConnectionTreeNode.GetNodeType(selectedTreeNode) == Tree.TreeNodeType.Connection)
+					else if (ConnectionTreeNode.GetNodeType(selectedTreeNode) == TreeNodeType.Connection)
 					{
-						if (Tree.ConnectionTreeNode.GetNodeType(selectedTreeNode.Parent) == Tree.TreeNodeType.Container)
-						{
+						if (ConnectionTreeNode.GetNodeType(selectedTreeNode.Parent) == TreeNodeType.Container)
 							exportForm.SelectedFolder = selectedTreeNode.Parent;
-						}
 						exportForm.SelectedConnection = selectedTreeNode;
 					}
 						
 					if (exportForm.ShowDialog(frmMain.Default) != DialogResult.OK)
-					{
 						return ;
-					}
 
 				    TreeNode exportTreeNode;
 				    switch (exportForm.Scope)
@@ -64,16 +59,14 @@ namespace mRemoteNG.App
 			}
 		}
 			
-		private static void SaveExportFile(string fileName, ConnectionsSaver.Format saveFormat, TreeNode rootNode, Security.Save saveSecurity, ConnectionTreeModel connectionTreeModel)
+		private static void SaveExportFile(string fileName, ConnectionsSaver.Format saveFormat, TreeNode rootNode, Save saveSecurity, ConnectionTreeModel connectionTreeModel)
 		{
 			try
 			{
                 if (Runtime.SQLConnProvider != null)
-				{
                     Runtime.SQLConnProvider.Disable();
-				}
 
-			    ConnectionsSaver connectionsSave = new ConnectionsSaver
+			    var connectionsSave = new ConnectionsSaver
 			    {
 			        Export = true,
 			        ConnectionFileName = fileName,
@@ -93,9 +86,7 @@ namespace mRemoteNG.App
 			finally
 			{
                 if (Runtime.SQLConnProvider != null)
-				{
                     Runtime.SQLConnProvider.Enable();
-				}
 			}
 		}
 	}
