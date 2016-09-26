@@ -321,7 +321,7 @@ namespace mRemoteNG.UI.Window
 						}
 						else
 						{
-							Windows.treeForm.Show(frmMain.Default.pnlDock);
+							Windows.TreeForm.Show(frmMain.Default.pnlDock);
 						}
 					}
 					catch (Exception)

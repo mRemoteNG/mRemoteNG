@@ -7,35 +7,35 @@ namespace mRemoteNG.App
 {
     public static class Windows
     {
-        private static AboutWindow aboutForm;
-        private static DockContent aboutPanel = new DockContent();
-        private static DockContent sshtransferPanel = new DockContent();
-        private static ActiveDirectoryImportWindow adimportForm;
-        private static DockContent adimportPanel = new DockContent();
-        private static HelpWindow helpForm;
-        private static DockContent helpPanel = new DockContent();
-        private static ExternalToolsWindow externalappsForm;
-        private static DockContent externalappsPanel = new DockContent();
-        private static PortScanWindow portscanForm;
-        private static DockContent portscanPanel = new DockContent();
-        private static UltraVNCWindow ultravncscForm;
-        private static DockContent ultravncscPanel = new DockContent();
-        private static ComponentsCheckWindow componentscheckForm;
-        private static DockContent componentscheckPanel = new DockContent();
+        private static AboutWindow _aboutForm;
+        private static DockContent _aboutPanel = new DockContent();
+        private static DockContent _sshtransferPanel = new DockContent();
+        private static ActiveDirectoryImportWindow _adimportForm;
+        private static DockContent _adimportPanel = new DockContent();
+        private static HelpWindow _helpForm;
+        private static DockContent _helpPanel = new DockContent();
+        private static ExternalToolsWindow _externalappsForm;
+        private static DockContent _externalappsPanel = new DockContent();
+        private static PortScanWindow _portscanForm;
+        private static DockContent _portscanPanel = new DockContent();
+        private static UltraVNCWindow _ultravncscForm;
+        private static DockContent _ultravncscPanel = new DockContent();
+        private static ComponentsCheckWindow _componentscheckForm;
+        private static DockContent _componentscheckPanel = new DockContent();
 
-        public static ConnectionTreeWindow treeForm { get; set; }
-        public static DockContent treePanel { get; set; } = new DockContent();
-        public static ConfigWindow configForm { get; set; }
-        public static DockContent configPanel { get; set; } = new DockContent();
-        public static ErrorAndInfoWindow errorsForm { get; set; }
-        public static DockContent errorsPanel { get; set; } = new DockContent();
-        public static ScreenshotManagerWindow screenshotForm { get; set; }
-        public static DockContent screenshotPanel { get; set; } = new DockContent();
+        public static ConnectionTreeWindow TreeForm { get; set; }
+        public static DockContent TreePanel { get; set; } = new DockContent();
+        public static ConfigWindow ConfigForm { get; set; }
+        public static DockContent ConfigPanel { get; set; } = new DockContent();
+        public static ErrorAndInfoWindow ErrorsForm { get; set; }
+        public static DockContent ErrorsPanel { get; set; } = new DockContent();
+        public static ScreenshotManagerWindow ScreenshotForm { get; set; }
+        public static DockContent ScreenshotPanel { get; set; } = new DockContent();
         public static AnnouncementWindow AnnouncementForm { get; set; }
         public static DockContent AnnouncementPanel { get; set; } = new DockContent();
-        public static UpdateWindow updateForm { get; set; }
-        public static DockContent updatePanel { get; set; } = new DockContent();
-        public static SSHTransferWindow sshtransferForm { get; set; }
+        public static UpdateWindow UpdateForm { get; set; }
+        public static DockContent UpdatePanel { get; set; } = new DockContent();
+        public static SSHTransferWindow SshtransferForm { get; set; }
         
         
         public static void Show(WindowType windowType)
@@ -44,21 +44,21 @@ namespace mRemoteNG.App
             {
                 if (windowType.Equals(WindowType.About))
                 {
-                    if (aboutForm == null || aboutForm.IsDisposed)
+                    if (_aboutForm == null || _aboutForm.IsDisposed)
                     {
-                        aboutForm = new AboutWindow(aboutPanel);
-                        aboutPanel = aboutForm;
+                        _aboutForm = new AboutWindow(_aboutPanel);
+                        _aboutPanel = _aboutForm;
                     }
-                    aboutForm.Show(frmMain.Default.pnlDock);
+                    _aboutForm.Show(frmMain.Default.pnlDock);
                 }
                 else if (windowType.Equals(WindowType.ActiveDirectoryImport))
                 {
-                    if (adimportForm == null || adimportForm.IsDisposed)
+                    if (_adimportForm == null || _adimportForm.IsDisposed)
                     {
-                        adimportForm = new ActiveDirectoryImportWindow(adimportPanel);
-                        adimportPanel = adimportForm;
+                        _adimportForm = new ActiveDirectoryImportWindow(_adimportPanel);
+                        _adimportPanel = _adimportForm;
                     }
-                    adimportPanel.Show(frmMain.Default.pnlDock);
+                    _adimportPanel.Show(frmMain.Default.pnlDock);
                 }
                 else if (windowType.Equals(WindowType.Options))
                 {
@@ -69,60 +69,60 @@ namespace mRemoteNG.App
                 }
                 else if (windowType.Equals(WindowType.SSHTransfer))
                 {
-                    sshtransferForm = new SSHTransferWindow(sshtransferPanel);
-                    sshtransferPanel = sshtransferForm;
-                    sshtransferForm.Show(frmMain.Default.pnlDock);
+                    SshtransferForm = new SSHTransferWindow(_sshtransferPanel);
+                    _sshtransferPanel = SshtransferForm;
+                    SshtransferForm.Show(frmMain.Default.pnlDock);
                 }
                 else if (windowType.Equals(WindowType.Update))
                 {
-                    if (updateForm == null || updateForm.IsDisposed)
+                    if (UpdateForm == null || UpdateForm.IsDisposed)
                     {
-                        updateForm = new UpdateWindow(updatePanel);
-                        updatePanel = updateForm;
+                        UpdateForm = new UpdateWindow(UpdatePanel);
+                        UpdatePanel = UpdateForm;
                     }
-                    updateForm.Show(frmMain.Default.pnlDock);
+                    UpdateForm.Show(frmMain.Default.pnlDock);
                 }
                 else if (windowType.Equals(WindowType.Help))
                 {
-                    if (helpForm == null || helpForm.IsDisposed)
+                    if (_helpForm == null || _helpForm.IsDisposed)
                     {
-                        helpForm = new HelpWindow(helpPanel);
-                        helpPanel = helpForm;
+                        _helpForm = new HelpWindow(_helpPanel);
+                        _helpPanel = _helpForm;
                     }
-                    helpForm.Show(frmMain.Default.pnlDock);
+                    _helpForm.Show(frmMain.Default.pnlDock);
                 }
                 else if (windowType.Equals(WindowType.ExternalApps))
                 {
-                    if (externalappsForm == null || externalappsForm.IsDisposed)
+                    if (_externalappsForm == null || _externalappsForm.IsDisposed)
                     {
-                        externalappsForm = new ExternalToolsWindow(externalappsPanel);
-                        externalappsPanel = externalappsForm;
+                        _externalappsForm = new ExternalToolsWindow(_externalappsPanel);
+                        _externalappsPanel = _externalappsForm;
                     }
-                    externalappsForm.Show(frmMain.Default.pnlDock);
+                    _externalappsForm.Show(frmMain.Default.pnlDock);
                 }
                 else if (windowType.Equals(WindowType.PortScan))
                 {
-                    portscanForm = new PortScanWindow(portscanPanel);
-                    portscanPanel = portscanForm;
-                    portscanForm.Show(frmMain.Default.pnlDock);
+                    _portscanForm = new PortScanWindow(_portscanPanel);
+                    _portscanPanel = _portscanForm;
+                    _portscanForm.Show(frmMain.Default.pnlDock);
                 }
                 else if (windowType.Equals(WindowType.UltraVNCSC))
                 {
-                    if (ultravncscForm == null || ultravncscForm.IsDisposed)
+                    if (_ultravncscForm == null || _ultravncscForm.IsDisposed)
                     {
-                        ultravncscForm = new UltraVNCWindow(ultravncscPanel);
-                        ultravncscPanel = ultravncscForm;
+                        _ultravncscForm = new UltraVNCWindow(_ultravncscPanel);
+                        _ultravncscPanel = _ultravncscForm;
                     }
-                    ultravncscForm.Show(frmMain.Default.pnlDock);
+                    _ultravncscForm.Show(frmMain.Default.pnlDock);
                 }
                 else if (windowType.Equals(WindowType.ComponentsCheck))
                 {
-                    if (componentscheckForm == null || componentscheckForm.IsDisposed)
+                    if (_componentscheckForm == null || _componentscheckForm.IsDisposed)
                     {
-                        componentscheckForm = new ComponentsCheckWindow(componentscheckPanel);
-                        componentscheckPanel = componentscheckForm;
+                        _componentscheckForm = new ComponentsCheckWindow(_componentscheckPanel);
+                        _componentscheckPanel = _componentscheckForm;
                     }
-                    componentscheckForm.Show(frmMain.Default.pnlDock);
+                    _componentscheckForm.Show(frmMain.Default.pnlDock);
                 }
                 else if (windowType.Equals(WindowType.Announcement))
                 {

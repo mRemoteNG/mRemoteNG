@@ -261,7 +261,7 @@ namespace mRemoteNG.UI.Window
                 return;
             }
 
-            var selectedTreeNodeAsContainer = Windows.treeForm.SelectedNode as ContainerInfo ?? Windows.treeForm.SelectedNode.Parent;
+            var selectedTreeNodeAsContainer = Windows.TreeForm.SelectedNode as ContainerInfo ?? Windows.TreeForm.SelectedNode.Parent;
             Import.ImportFromPortScan(hosts, protocol, selectedTreeNodeAsContainer);
         }
 

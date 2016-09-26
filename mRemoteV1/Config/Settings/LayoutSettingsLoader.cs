@@ -22,9 +22,9 @@ namespace mRemoteNG.Config.Settings
         {
             try
             {
-                Windows.treePanel = null;
-                Windows.configPanel = null;
-                Windows.errorsPanel = null;
+                Windows.TreePanel = null;
+                Windows.ConfigPanel = null;
+                Windows.ErrorsPanel = null;
 
                 while (_MainForm.pnlDock.Contents.Count > 0)
                 {
@@ -67,16 +67,16 @@ namespace mRemoteNG.Config.Settings
             try
             {
                 if (persistString == typeof(ConfigWindow).ToString())
-                    return Windows.configPanel;
+                    return Windows.ConfigPanel;
 
                 if (persistString == typeof(ConnectionTreeWindow).ToString())
-                    return Windows.treePanel;
+                    return Windows.TreePanel;
 
                 if (persistString == typeof(ErrorAndInfoWindow).ToString())
-                    return Windows.errorsPanel;
+                    return Windows.ErrorsPanel;
 
                 if (persistString == typeof(ScreenshotManagerWindow).ToString())
-                    return Windows.screenshotPanel;
+                    return Windows.ScreenshotPanel;
             }
             catch (Exception ex)
             {
@@ -88,20 +88,20 @@ namespace mRemoteNG.Config.Settings
 
         public void CreatePanels()
         {
-            Windows.configForm = new ConfigWindow(Windows.configPanel);
-            Windows.configPanel = Windows.configForm;
+            Windows.ConfigForm = new ConfigWindow(Windows.ConfigPanel);
+            Windows.ConfigPanel = Windows.ConfigForm;
 
-            Windows.treeForm = new ConnectionTreeWindow(Windows.treePanel);
-            Windows.treePanel = Windows.treeForm;
+            Windows.TreeForm = new ConnectionTreeWindow(Windows.TreePanel);
+            Windows.TreePanel = Windows.TreeForm;
 
-            Windows.errorsForm = new ErrorAndInfoWindow(Windows.errorsPanel);
-            Windows.errorsPanel = Windows.errorsForm;
+            Windows.ErrorsForm = new ErrorAndInfoWindow(Windows.ErrorsPanel);
+            Windows.ErrorsPanel = Windows.ErrorsForm;
 
-            Windows.screenshotForm = new ScreenshotManagerWindow(Windows.screenshotPanel);
-            Windows.screenshotPanel = Windows.screenshotForm;
+            Windows.ScreenshotForm = new ScreenshotManagerWindow(Windows.ScreenshotPanel);
+            Windows.ScreenshotPanel = Windows.ScreenshotForm;
 
-            Windows.updateForm = new UpdateWindow(Windows.updatePanel);
-            Windows.updatePanel = Windows.updateForm;
+            Windows.UpdateForm = new UpdateWindow(Windows.UpdatePanel);
+            Windows.UpdatePanel = Windows.UpdateForm;
 
             Windows.AnnouncementForm = new AnnouncementWindow(Windows.AnnouncementPanel);
             Windows.AnnouncementPanel = Windows.AnnouncementForm;

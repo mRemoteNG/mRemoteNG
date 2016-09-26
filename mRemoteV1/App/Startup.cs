@@ -62,11 +62,11 @@ namespace mRemoteNG.App
             frmMain.Default.pnlDock.DockTopPortion = frmMain.Default.pnlDock.Height * 0.25;
             frmMain.Default.pnlDock.DockBottomPortion = frmMain.Default.pnlDock.Height * 0.25;
 
-            Windows.treePanel.Show(frmMain.Default.pnlDock, DockState.DockLeft);
-            Windows.configPanel.Show(frmMain.Default.pnlDock);
-            Windows.configPanel.DockTo(Windows.treePanel.Pane, DockStyle.Bottom, -1);
+            Windows.TreePanel.Show(frmMain.Default.pnlDock, DockState.DockLeft);
+            Windows.ConfigPanel.Show(frmMain.Default.pnlDock);
+            Windows.ConfigPanel.DockTo(Windows.TreePanel.Pane, DockStyle.Bottom, -1);
 
-            Windows.screenshotForm.Hide();
+            Windows.ScreenshotForm.Hide();
 
             frmMain.Default.pnlDock.Visible = true;
         }

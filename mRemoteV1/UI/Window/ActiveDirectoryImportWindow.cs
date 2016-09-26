@@ -30,8 +30,8 @@ namespace mRemoteNG.UI.Window
 				
 		public void btnImport_Click(object sender, EventArgs e)
 		{
-		    var selectedNodeAsContainer = Windows.treeForm.SelectedNode as ContainerInfo ??
-		                                  Windows.treeForm.SelectedNode.Parent;
+		    var selectedNodeAsContainer = Windows.TreeForm.SelectedNode as ContainerInfo ??
+		                                  Windows.TreeForm.SelectedNode.Parent;
 		    Import.ImportFromActiveDirectory(ActiveDirectoryTree.ADPath, selectedNodeAsContainer);
 			DialogResult = DialogResult.OK;
 			Close();

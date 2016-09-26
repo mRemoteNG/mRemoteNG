@@ -350,7 +350,7 @@ namespace mRemoteNG.UI.Window
 			{
 				_contextMenu.EnableShortcutKeys();
                 ConnectionTreeModel.RenameNode(SelectedNode, e.Label);
-                Windows.configForm.pGrid_SelectedObjectChanged(SelectedNode);
+                Windows.ConfigForm.pGrid_SelectedObjectChanged(SelectedNode);
                 Runtime.SaveConnectionsBG();
 			}
 			catch (Exception ex)
@@ -363,7 +363,7 @@ namespace mRemoteNG.UI.Window
 		{
             try
             {
-                Windows.configForm.SetPropertyGridObject(SelectedNode);
+                Windows.ConfigForm.SetPropertyGridObject(SelectedNode);
                 Runtime.LastSelected = (SelectedNode)?.ConstantID;
             }
             catch (Exception ex)
@@ -562,10 +562,10 @@ namespace mRemoteNG.UI.Window
 			try
 			{
                 Windows.Show(WindowType.SSHTransfer);                
-                Windows.sshtransferForm.Hostname = SelectedNode.Hostname;
-                Windows.sshtransferForm.Username = SelectedNode.Username;
-                Windows.sshtransferForm.Password = SelectedNode.Password;
-                Windows.sshtransferForm.Port = Convert.ToString(SelectedNode.Port);
+                Windows.SshtransferForm.Hostname = SelectedNode.Hostname;
+                Windows.SshtransferForm.Username = SelectedNode.Username;
+                Windows.SshtransferForm.Password = SelectedNode.Password;
+                Windows.SshtransferForm.Port = Convert.ToString(SelectedNode.Port);
 			}
 			catch (Exception ex)
 			{

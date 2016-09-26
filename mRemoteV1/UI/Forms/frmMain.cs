@@ -140,7 +140,7 @@ namespace mRemoteNG.UI.Forms
 
 			fpChainedWindowHandle = NativeMethods.SetClipboardViewer(Handle);
 
-            Runtime.MessageCollector = new MessageCollector(Windows.errorsForm);
+            Runtime.MessageCollector = new MessageCollector(Windows.ErrorsForm);
             Runtime.WindowList = new WindowList();
 
             if (Settings.Default.FirstStart && !Settings.Default.LoadConsFromCustomLocation && !File.Exists(Runtime.GetStartupConnectionFileName()))
@@ -155,7 +155,7 @@ namespace mRemoteNG.UI.Forms
 				//return ;
 			}
 
-            Windows.treePanel.Focus();
+            Windows.TreePanel.Focus();
 
             PuttySessionsManager.Instance.StartWatcher();
 			if (Settings.Default.StartupComponentsCheck)
@@ -170,7 +170,7 @@ namespace mRemoteNG.UI.Forms
 			Microsoft.Win32.SystemEvents.DisplaySettingsChanged += DisplayChanged;
             Opacity = 1;
 
-            ConnectionTreeWindow = Windows.treeForm;
+            ConnectionTreeWindow = Windows.TreeForm;
             ConnectionTreeWindow.ConnectionTreeModel = Runtime.ConnectionTreeModel;
         }
 
@@ -425,7 +425,7 @@ namespace mRemoteNG.UI.Forms
 		{
             var extA = (ExternalTool)((ToolStripButton)sender).Tag;
 
-		    var selectedTreeNode = Windows.treeForm.SelectedNode;
+		    var selectedTreeNode = Windows.TreeForm.SelectedNode;
             if (selectedTreeNode.GetTreeNodeType() == TreeNodeType.Connection | selectedTreeNode.GetTreeNodeType() == TreeNodeType.PuttySession)
 			{
                 extA.Start(selectedTreeNode);
@@ -646,7 +646,7 @@ namespace mRemoteNG.UI.Forms
 
         private void mMenFileExport_Click(object sender, EventArgs e)
 		{
-            Export.ExportToFile(Windows.treeForm.SelectedNode, Runtime.ConnectionTreeModel);
+            Export.ExportToFile(Windows.TreeForm.SelectedNode, Runtime.ConnectionTreeModel);
 		}
 
         private void mMenFileExit_Click(object sender, EventArgs e)
@@ -658,10 +658,10 @@ namespace mRemoteNG.UI.Forms
         #region View
         private void mMenView_DropDownOpening(object sender, EventArgs e)
 		{
-            mMenViewConnections.Checked = !Windows.treeForm.IsHidden;
-            mMenViewConfig.Checked = !Windows.configForm.IsHidden;
-            mMenViewErrorsAndInfos.Checked = !Windows.errorsForm.IsHidden;
-            mMenViewScreenshotManager.Checked = !Windows.screenshotForm.IsHidden;
+            mMenViewConnections.Checked = !Windows.TreeForm.IsHidden;
+            mMenViewConfig.Checked = !Windows.ConfigForm.IsHidden;
+            mMenViewErrorsAndInfos.Checked = !Windows.ErrorsForm.IsHidden;
+            mMenViewScreenshotManager.Checked = !Windows.ScreenshotForm.IsHidden;
 
             mMenViewExtAppsToolbar.Checked = tsExternalTools.Visible;
             mMenViewQuickConnectToolbar.Checked = tsQuickConnect.Visible;
@@ -688,12 +688,12 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (mMenViewConnections.Checked == false)
 			{
-                Windows.treePanel.Show(pnlDock);
+                Windows.TreePanel.Show(pnlDock);
                 mMenViewConnections.Checked = true;
 			}
 			else
 			{
-                Windows.treePanel.Hide();
+                Windows.TreePanel.Hide();
                 mMenViewConnections.Checked = false;
 			}
 		}
@@ -702,12 +702,12 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (mMenViewConfig.Checked == false)
 			{
-                Windows.configPanel.Show(pnlDock);
+                Windows.ConfigPanel.Show(pnlDock);
                 mMenViewConfig.Checked = true;
 			}
 			else
 			{
-                Windows.configPanel.Hide();
+                Windows.ConfigPanel.Hide();
                 mMenViewConfig.Checked = false;
 			}
 		}
@@ -716,12 +716,12 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (mMenViewErrorsAndInfos.Checked == false)
 			{
-                Windows.errorsPanel.Show(pnlDock);
+                Windows.ErrorsPanel.Show(pnlDock);
                 mMenViewErrorsAndInfos.Checked = true;
 			}
 			else
 			{
-                Windows.errorsPanel.Hide();
+                Windows.ErrorsPanel.Hide();
                 mMenViewErrorsAndInfos.Checked = false;
 			}
 		}
@@ -730,31 +730,31 @@ namespace mRemoteNG.UI.Forms
 		{
 			if (mMenViewScreenshotManager.Checked == false)
 			{
-                Windows.screenshotPanel.Show(pnlDock);
+                Windows.ScreenshotPanel.Show(pnlDock);
                 mMenViewScreenshotManager.Checked = true;
 			}
 			else
 			{
-                Windows.screenshotPanel.Hide();
+                Windows.ScreenshotPanel.Hide();
                 mMenViewScreenshotManager.Checked = false;
 			}
 		}
 
         private void mMenViewJumpToConnectionsConfig_Click(object sender, EventArgs e)
 		{
-            if (pnlDock.ActiveContent == Windows.treePanel)
+            if (pnlDock.ActiveContent == Windows.TreePanel)
 			{
-                Windows.configForm.Activate();
+                Windows.ConfigForm.Activate();
 			}
 			else
 			{
-                Windows.treeForm.Activate();
+                Windows.TreeForm.Activate();
 			}
 		}
 
         private void mMenViewJumpToErrorsInfos_Click(object sender, EventArgs e)
 		{
-            Windows.errorsForm.Activate();
+            Windows.ErrorsForm.Activate();
 		}
 
         private void mMenViewResetLayout_Click(object sender, EventArgs e)

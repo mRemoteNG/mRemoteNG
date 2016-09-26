@@ -646,7 +646,7 @@ namespace mRemoteNG.UI.Window
         {
             cmenTab.Close();
             Application.DoEvents();
-            Windows.screenshotForm.AddScreenshot(Tools.MiscTools.TakeScreenshot(this));
+            Windows.ScreenshotForm.AddScreenshot(Tools.MiscTools.TakeScreenshot(this));
         }
 
         private void cmenTabSmartSize_Click(object sender, EventArgs e)
@@ -783,10 +783,10 @@ namespace mRemoteNG.UI.Window
 
                 ConnectionInfo conI = IC.Info;
 
-                Windows.sshtransferForm.Hostname = conI.Hostname;
-                Windows.sshtransferForm.Username = conI.Username;
-                Windows.sshtransferForm.Password = conI.Password;
-                Windows.sshtransferForm.Port = Convert.ToString(conI.Port);
+                Windows.SshtransferForm.Hostname = conI.Hostname;
+                Windows.SshtransferForm.Username = conI.Username;
+                Windows.SshtransferForm.Password = conI.Password;
+                Windows.SshtransferForm.Port = Convert.ToString(conI.Port);
             }
             catch (Exception ex)
             {
