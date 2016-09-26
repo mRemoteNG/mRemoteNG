@@ -506,7 +506,6 @@ namespace mRemoteNG.UI.Window
 			    var newConnectionInfo = new ConnectionInfo();
 			    var selectedContainer = SelectedNode as ContainerInfo;
 			    newConnectionInfo.SetParent(selectedContainer ?? SelectedNode.Parent);
-                Runtime.ConnectionList.Add(newConnectionInfo);
             }
 			catch (Exception ex)
 			{

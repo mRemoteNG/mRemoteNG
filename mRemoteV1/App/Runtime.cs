@@ -32,8 +32,6 @@ namespace mRemoteNG.App
     public static class Runtime
     {
         #region Public Properties
-        public static ConnectionList ConnectionList { get; set; }
-        private static ConnectionList PreviousConnectionList { get; set; }
         public static CredentialList CredentialList { get; set; }
         public static CredentialList PreviousCredentialList { get; set; }
         public static WindowList WindowList { get; set; }
@@ -201,7 +199,6 @@ namespace mRemoteNG.App
         {
             try
             {
-                ConnectionList = new ConnectionList();
                 ConnectionsLoader connectionsLoader = new ConnectionsLoader();
 
                 if (filename == GetDefaultStartupConnectionFileName())
@@ -275,13 +272,6 @@ namespace mRemoteNG.App
             {
                 // disable sql update checking while we are loading updates
                 SQLConnProvider?.Disable();
-
-                if (ConnectionList != null)
-                {
-                    PreviousConnectionList = ConnectionList.Copy();
-                }
-
-                ConnectionList = new ConnectionList();
 
                 if (!Settings.Default.UseSQLServer)
                 {
@@ -472,7 +462,6 @@ namespace mRemoteNG.App
                 if (!Settings.Default.UseSQLServer)
                     connectionsSaver.ConnectionFileName = GetStartupConnectionFileName();
 
-                connectionsSaver.ConnectionList = ConnectionList;
                 connectionsSaver.Export = false;
                 connectionsSaver.SaveSecurity = new Security.Save(false);
                 connectionsSaver.ConnectionTreeModel = ConnectionTreeModel;
@@ -530,7 +519,6 @@ namespace mRemoteNG.App
                     connectionsSave.ConnectionFileName = saveFileDialog.FileName;
                     connectionsSave.Export = false;
                     connectionsSave.SaveSecurity = new Security.Save();
-                    connectionsSave.ConnectionList = ConnectionList;
                     connectionsSave.ConnectionTreeModel = ConnectionTreeModel;
 
                     connectionsSave.SaveConnections();

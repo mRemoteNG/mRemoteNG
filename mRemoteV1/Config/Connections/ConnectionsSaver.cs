@@ -59,7 +59,6 @@ namespace mRemoteNG.Config.Connections
 		public bool Export {get; set;}
 		public Format SaveFormat {get; set;}
 		public Save SaveSecurity {get; set;}
-		public ConnectionList ConnectionList {get; set;}
         public ConnectionTreeModel ConnectionTreeModel { get; set; }
         #endregion
 				
@@ -258,7 +257,6 @@ namespace mRemoteNG.Config.Connections
 			{
 				var xmlConnectionsSerializer = new XmlConnectionsSerializer()
 				{
-				    ConnectionList = ConnectionList,
                     Export = Export,
                     SaveSecurity = SaveSecurity
 				};

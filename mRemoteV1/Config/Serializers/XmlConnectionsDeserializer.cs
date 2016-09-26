@@ -31,13 +31,11 @@ namespace mRemoteNG.Config.Serializers
         //TODO find way to inject data source info
         private string ConnectionFileName = "";
 
-        public ConnectionList ConnectionList { get; set; }
 
         public XmlConnectionsDeserializer(string xml)
         {
             LoadXmlConnectionData(xml);
             ValidateConnectionFileVersion();
-            ConnectionList = new ConnectionList();
         }
 
         private void LoadXmlConnectionData(string connections)
@@ -140,7 +138,6 @@ namespace mRemoteNG.Config.Serializers
                     {
                         var connectionInfo = GetConnectionInfoFromXml(xmlNode);
                         parentContainer.AddChild(connectionInfo);
-                        ConnectionList.Add(connectionInfo);
                     }
                     else if (nodeType == TreeNodeType.Container)
                     {

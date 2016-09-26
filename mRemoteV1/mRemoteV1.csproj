@@ -304,7 +304,6 @@
     <Compile Include="Connection\InterfaceControl.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Connection\ConnectionList.cs" />
     <Compile Include="Connection\Protocol\ProtocolBase.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTP.cs" />
     <Compile Include="Connection\Protocol\Http\Connection.Protocol.HTTPBase.cs" />

@@ -83,7 +83,6 @@ namespace mRemoteNG.Config.Serializers
             newConnectionInfo.Inheritance.Description = false;
 
             parentContainer.AddChild(newConnectionInfo);
-            Runtime.ConnectionList.Add(newConnectionInfo);
         }
     }
 }

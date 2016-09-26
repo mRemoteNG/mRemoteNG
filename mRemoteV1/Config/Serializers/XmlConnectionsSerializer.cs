@@ -24,7 +24,6 @@ namespace mRemoteNG.Config.Serializers
 
         public bool Export { get; set; }
         public Save SaveSecurity { get; set; }
-        public ConnectionList ConnectionList { get; set; }
 
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
