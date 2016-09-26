@@ -150,7 +150,6 @@
     <Compile Include="Config\DataProviders\FileDataProvider.cs" />
     <Compile Include="Config\DataProviders\IDataProvider.cs" />
     <Compile Include="Config\Connections\SqlCommandBuilder.cs" />
-    <Compile Include="Config\Connections\SqlConnectionsLoader.cs" />
     <Compile Include="Config\Connections\SqlConnectionsUpdateChecker.cs" />
     <Compile Include="Config\Connections\SqlConnectionsProvider.cs" />
     <Compile Include="Config\Connections\SqlUpdateQueryBuilder.cs" />
