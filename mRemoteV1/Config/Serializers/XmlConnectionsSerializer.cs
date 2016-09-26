@@ -17,7 +17,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class XmlConnectionsSerializer : ISerializer
+    public class XmlConnectionsSerializer : ISerializer<string>
     {
         private SecureString _password = GeneralAppInfo.EncryptionKey;
         private XmlTextWriter _xmlTextWriter;

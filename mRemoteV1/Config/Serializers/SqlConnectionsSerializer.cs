@@ -16,7 +16,7 @@ using mRemoteNG.Tree.Root;
 
 namespace mRemoteNG.Config.Serializers
 {
-    public class SqlConnectionsSerializer : ISerializer
+    public class SqlConnectionsSerializer : ISerializer<string>
     {
         private SqlConnection _sqlConnection;
         private SqlCommand _sqlQuery;

@@ -2,8 +2,8 @@
 
 namespace mRemoteNG.Config.Serializers
 {
-    public interface ISerializer
+    public interface ISerializer<TFormat>
     {
-        string Serialize(ConnectionTreeModel connectionTreeModel);
+        TFormat Serialize(ConnectionTreeModel connectionTreeModel);
     }
 }
