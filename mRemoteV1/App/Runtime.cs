@@ -2,8 +2,6 @@ using mRemoteNG.App.Info;
 using mRemoteNG.Config.Connections;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
-using mRemoteNG.Container;
-using mRemoteNG.Credential;
 using mRemoteNG.Messages;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -24,7 +22,6 @@ using mRemoteNG.UI.Forms.Input;
 using mRemoteNG.UI.TaskDialog;
 using WeifenLuo.WinFormsUI.Docking;
 using static System.IO.Path;
-using TabPage = Crownwood.Magic.Controls.TabPage;
 
 
 namespace mRemoteNG.App
@@ -631,20 +628,6 @@ namespace mRemoteNG.App
         public static void GoToBugs()
         {
             GoToURL(GeneralAppInfo.UrlBugs);
-        }
-
-        public static void Report(string Text)
-        {
-            try
-            {
-                StreamWriter sWr = new StreamWriter(SettingsFileInfo.exePath + "\\Report.log", true);
-                sWr.WriteLine(Text);
-                sWr.Close();
-            }
-            catch (Exception)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strLogWriteToFileFailed);
-            }
         }
 
         // Override the font of all controls in a container with the default font based on the OS version

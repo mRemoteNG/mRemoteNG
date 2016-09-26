@@ -7,21 +7,8 @@ namespace mRemoteNG.App
 {
     public static class Windows
     {
-        public static ConnectionTreeWindow treeForm;
-        public static DockContent treePanel = new DockContent();
-        public static ConfigWindow configForm;
-        public static DockContent configPanel = new DockContent();
-        public static ErrorAndInfoWindow errorsForm;
-        public static DockContent errorsPanel = new DockContent();
-        public static ScreenshotManagerWindow screenshotForm;
-        public static DockContent screenshotPanel = new DockContent();
-        public static ExportForm exportForm;
-        public static DockContent exportPanel = new DockContent();
         private static AboutWindow aboutForm;
         private static DockContent aboutPanel = new DockContent();
-        public static UpdateWindow updateForm;
-        public static DockContent updatePanel = new DockContent();
-        public static SSHTransferWindow sshtransferForm;
         private static DockContent sshtransferPanel = new DockContent();
         private static ActiveDirectoryImportWindow adimportForm;
         private static DockContent adimportPanel = new DockContent();
@@ -35,9 +22,22 @@ namespace mRemoteNG.App
         private static DockContent ultravncscPanel = new DockContent();
         private static ComponentsCheckWindow componentscheckForm;
         private static DockContent componentscheckPanel = new DockContent();
-        public static AnnouncementWindow AnnouncementForm;
-        public static DockContent AnnouncementPanel = new DockContent();
 
+        public static ConnectionTreeWindow treeForm { get; set; }
+        public static DockContent treePanel { get; set; } = new DockContent();
+        public static ConfigWindow configForm { get; set; }
+        public static DockContent configPanel { get; set; } = new DockContent();
+        public static ErrorAndInfoWindow errorsForm { get; set; }
+        public static DockContent errorsPanel { get; set; } = new DockContent();
+        public static ScreenshotManagerWindow screenshotForm { get; set; }
+        public static DockContent screenshotPanel { get; set; } = new DockContent();
+        public static AnnouncementWindow AnnouncementForm { get; set; }
+        public static DockContent AnnouncementPanel { get; set; } = new DockContent();
+        public static UpdateWindow updateForm { get; set; }
+        public static DockContent updatePanel { get; set; } = new DockContent();
+        public static SSHTransferWindow sshtransferForm { get; set; }
+        
+        
         public static void Show(WindowType windowType)
         {
             try
