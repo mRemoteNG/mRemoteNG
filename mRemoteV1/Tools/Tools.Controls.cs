@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection;
@@ -82,51 +84,16 @@ namespace mRemoteNG.Tools
 			
 			private void nI_MouseClick(object sender, MouseEventArgs e)
 			{
-				if (e.Button == MouseButtons.Right)
-				{
-					_cMenCons.DropDownItems.Clear();
-						
-					foreach (TreeNode tNode in Windows.treeForm.tvConnections.Nodes)
-					{
-						AddNodeToMenu(tNode.Nodes, _cMenCons);
-					}
-				}
-			}
-			
-			private void AddNodeToMenu(TreeNodeCollection tnc, ToolStripMenuItem menToolStrip)
-			{
-				try
-				{
-					foreach (TreeNode tNode in tnc)
-					{
-						ToolStripMenuItem tMenItem = new ToolStripMenuItem();
-						tMenItem.Text = tNode.Text;
-						tMenItem.Tag = tNode;
-							
-						if (Tree.ConnectionTreeNode.GetNodeType(tNode) == Tree.TreeNodeType.Container)
-						{
-							tMenItem.Image = Resources.Folder;
-							tMenItem.Tag = tNode.Tag;
-								
-							menToolStrip.DropDownItems.Add(tMenItem);
-							AddNodeToMenu(tNode.Nodes, tMenItem);
-						}
-						else if (Tree.ConnectionTreeNode.GetNodeType(tNode) == Tree.TreeNodeType.Connection | Tree.ConnectionTreeNode.GetNodeType(tNode) == Tree.TreeNodeType.PuttySession)
-						{
-							tMenItem.Image = Windows.treeForm.imgListTree.Images[tNode.ImageIndex];
-							tMenItem.Tag = tNode.Tag;
-								
-							menToolStrip.DropDownItems.Add(tMenItem);
-						}
-							
-						tMenItem.MouseUp += ConMenItem_MouseUp;
-					}
-				}
-				catch (Exception ex)
-				{
-					Runtime.MessageCollector.AddMessage(Messages.MessageClass.ErrorMsg, "AddNodeToMenu failed" + Environment.NewLine + ex.Message, true);
-				}
-			}
+			    if (e.Button != MouseButtons.Right) return;
+			    _cMenCons.DropDownItems.Clear();
+                var menuItemsConverter = new ConnectionsTreeToMenuItemsConverter
+                {
+                    MouseUpEventHandler = ConMenItem_MouseUp
+                };
+
+                ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionTreeModel).ToArray();
+                _cMenCons.DropDownItems.AddRange(rootMenuItems);
+            }
 			
 			private void nI_MouseDoubleClick(object sender, MouseEventArgs e)
 			{

@@ -16,7 +16,6 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
-using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -128,7 +127,6 @@ namespace mRemoteNG.UI.Forms
         #endregion
 		
         #region Startup & Shutdown
-
         private void frmMain_Load(object sender, EventArgs e)
 		{
             // Create gui config load and save objects
@@ -966,55 +964,16 @@ namespace mRemoteNG.UI.Forms
         #region Connections DropDown
         private void btnConnections_DropDownOpening(object sender, EventArgs e)
 		{
-			btnConnections.DropDownItems.Clear();
-            var rootNodes = Runtime.ConnectionTreeModel.RootNodes;
-			foreach (var containerInfo in rootNodes)
-			{
-				AddNodeToMenu(containerInfo.Children, btnConnections);
-			}
-		}
-								
-		private static void AddNodeToMenu(IEnumerable<ConnectionInfo> nodes, ToolStripDropDownItem toolStripMenuItem)
-		{
-			try
-			{
-				foreach (var connectionInfo in nodes)
-				{
-					var menuItem = new ToolStripMenuItem();
-					menuItem.Text = connectionInfo.Name;
-					menuItem.Tag = connectionInfo;
+            btnConnections.DropDownItems.Clear();
+            var menuItemsConverter = new ConnectionsTreeToMenuItemsConverter
+            {
+                MouseUpEventHandler = ConnectionsMenuItem_MouseUp
+            };
 
-				    var nodeAsContainer = connectionInfo as ContainerInfo;
-					if (nodeAsContainer != null)
-					{
-						menuItem.Image = Resources.Folder;
-						menuItem.Tag = nodeAsContainer;
-												
-						toolStripMenuItem.DropDownItems.Add(menuItem);
-						AddNodeToMenu(nodeAsContainer.Children, menuItem);
-					}
-                    else if (connectionInfo.GetTreeNodeType() == TreeNodeType.PuttySession)
-                    {
-                        menuItem.Image = Resources.PuttySessions;
-                        menuItem.Tag = connectionInfo;
-                        toolStripMenuItem.DropDownItems.Add(menuItem);
-                    }
-					else if (connectionInfo.GetTreeNodeType() == TreeNodeType.Connection | connectionInfo.GetTreeNodeType() == TreeNodeType.PuttySession)
-					{
-					    menuItem.Image = Resources.Pause;
-						menuItem.Tag = connectionInfo;
-						toolStripMenuItem.DropDownItems.Add(menuItem);
-					}
-											
-					menuItem.MouseUp += ConnectionsMenuItem_MouseUp;
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddExceptionMessage("frmMain.AddNodeToMenu() failed", ex, MessageClass.ErrorMsg, true);
-			}
+            ToolStripItem[] rootMenuItems = menuItemsConverter.CreateToolStripDropDownItems(Runtime.ConnectionTreeModel).ToArray();
+            btnConnections.DropDownItems.AddRange(rootMenuItems);
 		}
-								
+										
 		private static void ConnectionsMenuItem_MouseUp(object sender, MouseEventArgs e)
 		{
 			if (e.Button == MouseButtons.Left)

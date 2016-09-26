@@ -199,6 +199,7 @@
     <Compile Include="Security\CryptographyProviderFactory.cs" />
     <Compile Include="Tools\ArgumentParser.cs" />
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
+    <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\ScanHost.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
