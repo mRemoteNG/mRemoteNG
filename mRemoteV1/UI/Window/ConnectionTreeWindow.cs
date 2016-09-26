@@ -157,7 +157,7 @@ namespace mRemoteNG.UI.Window
             };
             _contextMenu.ImportActiveDirectoryClicked += (sender, args) => Windows.Show(WindowType.ActiveDirectoryImport);
             _contextMenu.ImportPortScanClicked += (sender, args) => Windows.Show(WindowType.PortScan);
-            _contextMenu.ExportFileClicked += (sender, args) => Export.ExportToFile(Windows.treeForm.tvConnections.Nodes[0], Windows.treeForm.tvConnections.SelectedNode, Runtime.ConnectionTreeModel);
+            _contextMenu.ExportFileClicked += (sender, args) => Export.ExportToFile(SelectedNode, Runtime.ConnectionTreeModel);
             _contextMenu.AddConnectionClicked += cMenTreeAddConnection_Click;
             _contextMenu.AddFolderClicked += cMenTreeAddFolder_Click;
             _contextMenu.SortAscendingClicked += (sender, args) => SortNodes(ListSortDirection.Ascending);

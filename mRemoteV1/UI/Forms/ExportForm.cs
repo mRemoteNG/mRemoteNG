@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Forms;
 using mRemoteNG.App;
+using mRemoteNG.Config.Connections;
+using mRemoteNG.Connection;
+using mRemoteNG.Container;
 
 namespace mRemoteNG.UI.Forms
 {
@@ -21,7 +24,7 @@ namespace mRemoteNG.UI.Forms
 			}
 		}
 			
-        public Config.Connections.ConnectionsSaver.Format SaveFormat
+        public ConnectionsSaver.Format SaveFormat
 		{
 			get
 			{
@@ -83,8 +86,8 @@ namespace mRemoteNG.UI.Forms
 			}
 		}
 			
-		private TreeNode _selectedFolder;
-        public TreeNode SelectedFolder
+		private ContainerInfo _selectedFolder;
+        public ContainerInfo SelectedFolder
 		{
 			get
 			{
@@ -93,13 +96,13 @@ namespace mRemoteNG.UI.Forms
 			set
 			{
 				_selectedFolder = value;
-				lblSelectedFolder.Text = value == null ? string.Empty : value.Text;
+				lblSelectedFolder.Text = value?.Name;
 				rdoExportSelectedFolder.Enabled = value != null;
 			}
 		}
 			
-		private TreeNode _selectedConnection;
-        public TreeNode SelectedConnection
+		private ConnectionInfo _selectedConnection;
+        public ConnectionInfo SelectedConnection
 		{
 			get
 			{
@@ -108,7 +111,7 @@ namespace mRemoteNG.UI.Forms
 			set
 			{
 				_selectedConnection = value;
-				lblSelectedConnection.Text = value == null ? string.Empty : value.Text;
+				lblSelectedConnection.Text = value?.Name;
 				rdoExportSelectedConnection.Enabled = value != null;
 			}
 		}

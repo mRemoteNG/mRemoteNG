@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
+using mRemoteNG.Security;
 using mRemoteNG.Tree;
 using mRemoteNG.Tree.Root;
 
@@ -12,6 +12,7 @@ namespace mRemoteNG.Config.Serializers
     public class CsvConnectionsSerializerRemoteDesktop2008Format : ISerializer<string>
     {
         private string _csv = "";
+        public Save SaveSecurity { get; set; }
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
