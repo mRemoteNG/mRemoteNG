@@ -4,7 +4,7 @@ using mRemoteNG.App;
 
 namespace mRemoteNG.Config.DataProviders
 {
-    public class FileDataProvider : IDataProvider
+    public class FileDataProvider : IDataProvider<string>
     {
         public string FilePath { get; set; }
 

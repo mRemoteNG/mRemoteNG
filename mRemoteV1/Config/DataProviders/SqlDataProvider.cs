@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace mRemoteNG.Config.DataProviders
 {
-    public class SqlDataProvider
+    public class SqlDataProvider : IDataProvider<DataTable>
     {
         public SqlConnection SqlConnection { get; }
 

@@ -1,10 +1,10 @@
 ﻿
 namespace mRemoteNG.Config.DataProviders
 {
-    public interface IDataProvider
+    public interface IDataProvider<TFormat>
     {
-        string Load();
+        TFormat Load();
 
-        void Save(string contents);
+        void Save(TFormat contents);
     }
 }
