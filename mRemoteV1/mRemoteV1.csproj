@@ -136,7 +136,6 @@
     <Compile Include="Config\Serializers\PuttyConnectionManagerDeserializer.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionDeserializer.cs" />
     <Compile Include="Config\Serializers\RemoteDesktopConnectionManagerDeserializer.cs" />
-    <Compile Include="Config\Serializers\SqlConnectionsSerializer.cs" />
     <Compile Include="Config\DataProviders\FileDataProviderWithBackup.cs" />
     <Compile Include="Config\Connections\ConnectionsDecryptor.cs" />
     <Compile Include="Config\Connections\ConnectionsLoader.cs" />
