@@ -173,7 +173,7 @@ namespace mRemoteNG.Config.Serializers
             _currentNodeIndex++;
             var dataRow = _dataTable.NewRow();
             dataRow["Name"] = connectionInfo.Name;
-            dataRow["Type"] = ConnectionTreeNode.GetNodeType(connectionInfo.TreeNode).ToString();
+            dataRow["Type"] = connectionInfo.GetTreeNodeType().ToString();
             dataRow["ConstantID"] = connectionInfo.ConstantID;
             dataRow["ParentID"] = connectionInfo.Parent.ConstantID;
             dataRow["PositionID"] = _currentNodeIndex;
