@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Linq;
 using mRemoteNG.App;
 using mRemoteNG.Config;
 using mRemoteNG.Config.Putty;
@@ -15,6 +16,7 @@ using mRemoteNG.Connection;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Container;
 using mRemoteNG.Messages;
+using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Themes;
 using mRemoteNG.Tools;
 using mRemoteNG.Tree;
@@ -964,36 +966,43 @@ namespace mRemoteNG.UI.Forms
         #region Connections DropDown
         private void btnConnections_DropDownOpening(object sender, EventArgs e)
 		{
-			btnConnections.DropDownItems.Clear();	
-			foreach (TreeNode treeNode in Windows.treeForm.tvConnections.Nodes)
+			btnConnections.DropDownItems.Clear();
+            var rootNodes = Runtime.ConnectionTreeModel.RootNodes;
+			foreach (var containerInfo in rootNodes)
 			{
-				AddNodeToMenu(treeNode.Nodes, btnConnections);
+				AddNodeToMenu(containerInfo.Children, btnConnections);
 			}
 		}
 								
-		private static void AddNodeToMenu(TreeNodeCollection treeNodeCollection, ToolStripDropDownItem toolStripMenuItem)
+		private static void AddNodeToMenu(IEnumerable<ConnectionInfo> nodes, ToolStripDropDownItem toolStripMenuItem)
 		{
 			try
 			{
-				foreach (TreeNode treeNode in treeNodeCollection)
+				foreach (var connectionInfo in nodes)
 				{
 					var menuItem = new ToolStripMenuItem();
-					menuItem.Text = treeNode.Text;
-					menuItem.Tag = treeNode;
-											
-					if (ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.Container)
+					menuItem.Text = connectionInfo.Name;
+					menuItem.Tag = connectionInfo;
+
+				    var nodeAsContainer = connectionInfo as ContainerInfo;
+					if (nodeAsContainer != null)
 					{
 						menuItem.Image = Resources.Folder;
-						menuItem.Tag = treeNode.Tag;
+						menuItem.Tag = nodeAsContainer;
 												
 						toolStripMenuItem.DropDownItems.Add(menuItem);
-						AddNodeToMenu(treeNode.Nodes, menuItem);
+						AddNodeToMenu(nodeAsContainer.Children, menuItem);
 					}
-					else if (ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(treeNode) == TreeNodeType.PuttySession)
+                    else if (connectionInfo.GetTreeNodeType() == TreeNodeType.PuttySession)
+                    {
+                        menuItem.Image = Resources.PuttySessions;
+                        menuItem.Tag = connectionInfo;
+                        toolStripMenuItem.DropDownItems.Add(menuItem);
+                    }
+					else if (connectionInfo.GetTreeNodeType() == TreeNodeType.Connection | connectionInfo.GetTreeNodeType() == TreeNodeType.PuttySession)
 					{
-						menuItem.Image = Windows.treeForm.imgListTree.Images[treeNode.ImageIndex];
-						menuItem.Tag = treeNode.Tag;
-												
+					    menuItem.Image = Resources.Pause;
+						menuItem.Tag = connectionInfo;
 						toolStripMenuItem.DropDownItems.Add(menuItem);
 					}
 											
@@ -1263,9 +1272,9 @@ namespace mRemoteNG.UI.Forms
 			tabController.SelectedIndex = newIndex;
 		}
 #endif
-#endregion
+        #endregion
 		
-#region Screen Stuff
+        #region Screen Stuff
 		private void DisplayChanged(object sender, EventArgs e)
 		{
 			ResetSysMenuItems();
@@ -1291,9 +1300,9 @@ namespace mRemoteNG.UI.Forms
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 0, SystemMenu.Flags.MF_POPUP | SystemMenu.Flags.MF_BYPOSITION, popMen, Language.strSendTo);
             _systemMenu.InsertMenuItem(_systemMenu.SystemMenuHandle, 1, SystemMenu.Flags.MF_BYPOSITION | SystemMenu.Flags.MF_SEPARATOR, IntPtr.Zero, null);
 		}
-#endregion
+        #endregion
 
-#region Events
+        #region Events
         public delegate void clipboardchangeEventHandler();
         public static event clipboardchangeEventHandler clipboardchange
         {
@@ -1306,6 +1315,6 @@ namespace mRemoteNG.UI.Forms
                 clipboardchangeEvent = (clipboardchangeEventHandler)Delegate.Remove(clipboardchangeEvent, value);
             }
         }
-#endregion
+        #endregion
 	}					
 }
