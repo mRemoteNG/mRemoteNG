@@ -325,7 +325,6 @@
     <Compile Include="Themes\ThemeInfo.cs" />
     <Compile Include="Tools\CommandLineArguments.cs" />
     <Compile Include="Container\ContainerInfo.cs" />
-    <Compile Include="Container\ContainerList.cs" />
     <Compile Include="Credential\CredentialInfo.cs" />
     <Compile Include="Credential\CredentialList.cs" />
     <Compile Include="UI\Forms\frmChoosePanel.Designer.cs">

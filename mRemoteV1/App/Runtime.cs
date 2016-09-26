@@ -34,8 +34,6 @@ namespace mRemoteNG.App
         #region Public Properties
         public static ConnectionList ConnectionList { get; set; }
         private static ConnectionList PreviousConnectionList { get; set; }
-        public static ContainerList ContainerList { get; set; }
-        private static ContainerList PreviousContainerList { get; set; }
         public static CredentialList CredentialList { get; set; }
         public static CredentialList PreviousCredentialList { get; set; }
         public static WindowList WindowList { get; set; }
@@ -204,7 +202,6 @@ namespace mRemoteNG.App
             try
             {
                 ConnectionList = new ConnectionList();
-                ContainerList = new ContainerList();
                 ConnectionsLoader connectionsLoader = new ConnectionsLoader();
 
                 if (filename == GetDefaultStartupConnectionFileName())
@@ -279,14 +276,12 @@ namespace mRemoteNG.App
                 // disable sql update checking while we are loading updates
                 SQLConnProvider?.Disable();
 
-                if (ConnectionList != null && ContainerList != null)
+                if (ConnectionList != null)
                 {
                     PreviousConnectionList = ConnectionList.Copy();
-                    PreviousContainerList = ContainerList.Copy();
                 }
 
                 ConnectionList = new ConnectionList();
-                ContainerList = new ContainerList();
 
                 if (!Settings.Default.UseSQLServer)
                 {
@@ -478,7 +473,6 @@ namespace mRemoteNG.App
                     connectionsSaver.ConnectionFileName = GetStartupConnectionFileName();
 
                 connectionsSaver.ConnectionList = ConnectionList;
-                connectionsSaver.ContainerList = ContainerList;
                 connectionsSaver.Export = false;
                 connectionsSaver.SaveSecurity = new Security.Save(false);
                 connectionsSaver.ConnectionTreeModel = ConnectionTreeModel;
@@ -537,7 +531,6 @@ namespace mRemoteNG.App
                     connectionsSave.Export = false;
                     connectionsSave.SaveSecurity = new Security.Save();
                     connectionsSave.ConnectionList = ConnectionList;
-                    connectionsSave.ContainerList = ContainerList;
                     connectionsSave.ConnectionTreeModel = ConnectionTreeModel;
 
                     connectionsSave.SaveConnections();

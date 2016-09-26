@@ -32,14 +32,12 @@ namespace mRemoteNG.Config.Serializers
         private string ConnectionFileName = "";
 
         public ConnectionList ConnectionList { get; set; }
-        public ContainerList ContainerList { get; set; }
 
         public XmlConnectionsDeserializer(string xml)
         {
             LoadXmlConnectionData(xml);
             ValidateConnectionFileVersion();
             ConnectionList = new ConnectionList();
-            ContainerList = new ContainerList();
         }
 
         private void LoadXmlConnectionData(string connections)
@@ -154,7 +152,6 @@ namespace mRemoteNG.Config.Serializers
                             containerInfo.IsExpanded = xmlNode.Attributes?["Expanded"].Value == "True";
 
                         parentContainer.AddChild(containerInfo);
-                        ContainerList.Add(containerInfo);
                         AddNodesFromXmlRecursive(xmlNode, containerInfo);
                     }
                 }

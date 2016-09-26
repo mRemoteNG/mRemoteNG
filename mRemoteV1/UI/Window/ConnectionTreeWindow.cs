@@ -521,7 +521,6 @@ namespace mRemoteNG.UI.Window
 				var newContainerInfo = new ContainerInfo();
                 var selectedContainer = SelectedNode as ContainerInfo;
                 newContainerInfo.SetParent(selectedContainer ?? SelectedNode.Parent);
-                Runtime.ContainerList.Add(newContainerInfo);
             }
 			catch (Exception ex)
 			{
