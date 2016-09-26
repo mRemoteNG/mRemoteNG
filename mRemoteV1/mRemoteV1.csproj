@@ -208,7 +208,6 @@
     <Compile Include="Tree\NodeSearcher.cs" />
     <Compile Include="Tree\NodeType.cs" />
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
-    <Compile Include="UI\ConnectionTreeViewBuilder.cs" />
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -348,7 +347,6 @@
     <Compile Include="UI\Forms\PasswordForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Tree\TreeImageType.cs" />
     <Compile Include="Resources\Language\Language.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
