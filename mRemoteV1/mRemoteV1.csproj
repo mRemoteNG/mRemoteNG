@@ -208,7 +208,6 @@
     <Compile Include="Tree\NodeSearcher.cs" />
     <Compile Include="Tree\NodeType.cs" />
     <Compile Include="Tree\Root\RootNodeTypeEnum.cs" />
-    <Compile Include="Tree\TreeNodeMover.cs" />
     <Compile Include="UI\ConnectionTreeViewBuilder.cs" />
     <Compile Include="UI\Controls\ConnectionContextMenu.cs">
       <SubType>Component</SubType>
