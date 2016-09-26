@@ -135,7 +135,8 @@ namespace mRemoteNG.Config.Serializers
                 if (!parentXmlNode.HasChildNodes) return;
                 foreach (XmlNode xmlNode in parentXmlNode.ChildNodes)
                 {
-                    var nodeType = ConnectionTreeNode.GetNodeTypeFromString(xmlNode.Attributes?["Type"].Value);
+                    var treeNodeTypeString = xmlNode.Attributes?["Type"].Value ?? "connection";
+                    var nodeType = (TreeNodeType)Enum.Parse(typeof(TreeNodeType), treeNodeTypeString, true);
 
                     if (nodeType == TreeNodeType.Connection)
                     {

@@ -52,27 +52,5 @@ namespace mRemoteNG.Tree
 				
 			return TreeNodeType.None;
 		}
-		
-		public static TreeNodeType GetNodeTypeFromString(string str)
-		{
-			try
-			{
-				switch (str.ToLower())
-				{
-					case "root":
-						return TreeNodeType.Root;
-					case "container":
-						return TreeNodeType.Container;
-					case "connection":
-						return TreeNodeType.Connection;
-				}
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "Couldn\'t get node type from string" + Environment.NewLine + ex.Message, true);
-			}
-				
-			return TreeNodeType.None;
-		}
     }
 }
