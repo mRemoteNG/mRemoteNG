@@ -11,22 +11,6 @@ namespace mRemoteNG.Tree
 {
 	public static class ConnectionTreeNode
     {
-        //TODO Everything in this class needs to be updated / rewritten to work with the TreeListView/ConnectionTreeModel
-		public static TreeNode GetNodeFromConstantID(string id)
-		{
-            foreach (ConnectionInfo connectionInfo in Runtime.ConnectionList)
-			{
-				if (connectionInfo.ConstantID == id)
-				{
-				    if (connectionInfo.IsContainer)
-						return connectionInfo.Parent.TreeNode;
-				    return connectionInfo.TreeNode;
-				}
-			}
-				
-			return null;
-		}
-		
 		public static TreeNodeType GetNodeType(TreeNode treeNode)
 		{
 			try
