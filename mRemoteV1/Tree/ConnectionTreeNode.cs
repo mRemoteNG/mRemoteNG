@@ -74,45 +74,5 @@ namespace mRemoteNG.Tree
 				
 			return TreeNodeType.None;
 		}
-		
-		public static TreeNode AddNode(TreeNodeType nodeType, string name = null)
-		{
-			try
-			{
-				TreeNode treeNode = new TreeNode();
-				string defaultName = "";
-					
-				switch (nodeType)
-				{
-					case TreeNodeType.Connection:
-					case TreeNodeType.PuttySession:
-						defaultName = Language.strNewConnection;
-                        treeNode.ImageIndex = (int)TreeImageType.ConnectionClosed;
-                        treeNode.SelectedImageIndex = (int)TreeImageType.ConnectionClosed;
-						break;
-					case TreeNodeType.Container:
-						defaultName = Language.strNewFolder;
-                        treeNode.ImageIndex = (int)TreeImageType.Container;
-                        treeNode.SelectedImageIndex = (int)TreeImageType.Container;
-						break;
-					case TreeNodeType.Root:
-						defaultName = Language.strNewRoot;
-                        treeNode.ImageIndex = (int)TreeImageType.Root;
-                        treeNode.SelectedImageIndex = (int)TreeImageType.Root;
-						break;
-				}
-					
-				treeNode.Name = !string.IsNullOrEmpty(name) ? name : defaultName;
-				treeNode.Text = treeNode.Name;
-					
-				return treeNode;
-			}
-			catch (Exception ex)
-			{
-				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, "AddNode failed" + Environment.NewLine + ex.Message, true);
-			}
-				
-			return null;
-		}
     }
 }
