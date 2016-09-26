@@ -3,6 +3,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Security;
 using System.Text;
 using System.Windows.Forms;
@@ -42,10 +43,7 @@ namespace mRemoteNG.Config.Connections
         #region Private Properties
 		private XmlTextWriter _xmlTextWriter;
 		private SecureString _password = GeneralAppInfo.EncryptionKey;
-				
-		private SqlConnection _sqlConnection;
-		private SqlCommand _sqlQuery;
-				
+						
 		private int _currentNodeIndex;
 		private string _parentConstantId = Convert.ToString(0);
         #endregion
@@ -98,38 +96,31 @@ namespace mRemoteNG.Config.Connections
         #region SQL
 		private void SaveToSql()
 		{
-		    OpenDatabaseConnection();
-            if (!VerifyDatabaseVersion(_sqlConnection))
+            var sqlConnector = new SqlDatabaseConnector();
+            sqlConnector.Connect();
+
+            if (!VerifyDatabaseVersion(sqlConnector))
 			{
 				Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strErrorConnectionListSaveFailed);
 				return ;
 			}
 
-		    var rootTreeNode = (TreeNode)RootTreeNode.Clone();
+		    var rootTreeNode = Runtime.ConnectionTreeModel.RootNodes.OfType<RootNodeInfo>().First();
 
-		    UpdateRootNodeTable(rootTreeNode);
-		    UpdateConnectionsTable(rootTreeNode);
-		    UpdateUpdatesTable();
+		    UpdateRootNodeTable(rootTreeNode, sqlConnector);
+		    UpdateConnectionsTable(rootTreeNode, sqlConnector);
+		    UpdateUpdatesTable(sqlConnector);
 
-            _sqlConnection.Close();
+            sqlConnector.Disconnect();
+            sqlConnector.Dispose();
 		}
 
-	    private void OpenDatabaseConnection()
-	    {
-            var sqlConnectionString = "Data Source=" + SQLHost + ";Initial Catalog=" + SQLDatabaseName;
-            sqlConnectionString += SQLUsername != ""
-                ? ";User Id=" + SQLUsername + ";Password=" + SQLPassword
-                : ";Integrated Security=True";
-            _sqlConnection = new SqlConnection(sqlConnectionString);
-            _sqlConnection.Open();
-        }
-
-        private bool VerifyDatabaseVersion(SqlConnection sqlConnection)
+        private bool VerifyDatabaseVersion(SqlDatabaseConnector sqlDatabaseConnector)
         {
             var isVerified = false;
             try
             {
-                var databaseVersion = GetDatabaseVersion(sqlConnection);
+                var databaseVersion = GetDatabaseVersion(sqlDatabaseConnector);
                 SqlCommand sqlCommand;
 
                 if (databaseVersion.Equals(new Version()))
@@ -140,7 +131,7 @@ namespace mRemoteNG.Config.Connections
                 if (databaseVersion.CompareTo(new Version(2, 2)) == 0) // 2.2
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Upgrading database from version {databaseVersion} to version 2.3.");
-                    sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD EnableFontSmoothing bit NOT NULL DEFAULT 0, EnableDesktopComposition bit NOT NULL DEFAULT 0, InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;", sqlConnection);
+                    sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD EnableFontSmoothing bit NOT NULL DEFAULT 0, EnableDesktopComposition bit NOT NULL DEFAULT 0, InheritEnableFontSmoothing bit NOT NULL DEFAULT 0, InheritEnableDesktopComposition bit NOT NULL DEFAULT 0;", sqlDatabaseConnector.SqlConnection);
                     sqlCommand.ExecuteNonQuery();
                     databaseVersion = new Version(2, 3);
                 }
@@ -148,7 +139,7 @@ namespace mRemoteNG.Config.Connections
                 if (databaseVersion.CompareTo(new Version(2, 3)) == 0) // 2.3
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Upgrading database from version {databaseVersion} to version 2.4.");
-                    sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD UseCredSsp bit NOT NULL DEFAULT 1, InheritUseCredSsp bit NOT NULL DEFAULT 0;", sqlConnection);
+                    sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD UseCredSsp bit NOT NULL DEFAULT 1, InheritUseCredSsp bit NOT NULL DEFAULT 0;", sqlDatabaseConnector.SqlConnection);
                     sqlCommand.ExecuteNonQuery();
                     databaseVersion = new Version(2, 4);
                 }
@@ -156,7 +147,7 @@ namespace mRemoteNG.Config.Connections
                 if (databaseVersion.CompareTo(new Version(2, 4)) == 0) // 2.4
                 {
                     Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, $"Upgrading database from version {databaseVersion} to version 2.5.");
-                    sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, AutomaticResize bit NOT NULL DEFAULT 1, InheritLoadBalanceInfo bit NOT NULL DEFAULT 0, InheritAutomaticResize bit NOT NULL DEFAULT 0;", sqlConnection);
+                    sqlCommand = new SqlCommand("ALTER TABLE tblCons ADD LoadBalanceInfo varchar (1024) COLLATE SQL_Latin1_General_CP1_CI_AS NULL, AutomaticResize bit NOT NULL DEFAULT 1, InheritLoadBalanceInfo bit NOT NULL DEFAULT 0, InheritAutomaticResize bit NOT NULL DEFAULT 0;", sqlDatabaseConnector.SqlConnection);
                     sqlCommand.ExecuteNonQuery();
                     databaseVersion = new Version(2, 5);
                 }
@@ -174,13 +165,13 @@ namespace mRemoteNG.Config.Connections
             return isVerified;
         }
 
-	    private Version GetDatabaseVersion(SqlConnection sqlConnection)
+	    private Version GetDatabaseVersion(SqlDatabaseConnector sqlDatabaseConnector)
 	    {
 	        Version databaseVersion;
             SqlDataReader sqlDataReader = null;
 	        try
 	        {
-	            var sqlCommand = new SqlCommand("SELECT * FROM tblRoot", sqlConnection);
+	            var sqlCommand = new SqlCommand("SELECT * FROM tblRoot", sqlDatabaseConnector.SqlConnection);
 	            sqlDataReader = sqlCommand.ExecuteReader();
 	            if (!sqlDataReader.HasRows)
                     return new Version(); // assume new empty database
@@ -201,15 +192,15 @@ namespace mRemoteNG.Config.Connections
 	        return databaseVersion;
 	    }
 
-        private void UpdateRootNodeTable(TreeNode rootTreeNode)
+        private void UpdateRootNodeTable(RootNodeInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)
 	    {
             var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
             string strProtected;
-            if (rootTreeNode.Tag != null)
+            if (rootTreeNode != null)
             {
-                if (((RootNodeInfo)rootTreeNode.Tag).Password)
+                if (rootTreeNode.Password)
                 {
-                    _password = Convert.ToString(((RootNodeInfo)rootTreeNode.Tag).PasswordString).ConvertToSecureString();
+                    _password = Convert.ToString(rootTreeNode.PasswordString).ConvertToSecureString();
                     strProtected = cryptographyProvider.Encrypt("ThisIsProtected", _password);
                 }
                 else
@@ -222,332 +213,30 @@ namespace mRemoteNG.Config.Connections
                 strProtected = cryptographyProvider.Encrypt("ThisIsNotProtected", _password);
             }
 
-            _sqlQuery = new SqlCommand("DELETE FROM tblRoot", _sqlConnection);
-            _sqlQuery.ExecuteNonQuery();
+            var sqlQuery = new SqlCommand("DELETE FROM tblRoot", sqlDatabaseConnector.SqlConnection);
+            sqlQuery.ExecuteNonQuery();
 
-            _sqlQuery = new SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" + MiscTools.PrepareValueForDB(rootTreeNode.Text) + "\', 0, \'" + strProtected + "\'," + ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")", _sqlConnection);
-            _sqlQuery.ExecuteNonQuery();
+            sqlQuery = new SqlCommand("INSERT INTO tblRoot (Name, Export, Protected, ConfVersion) VALUES(\'" + MiscTools.PrepareValueForDB(rootTreeNode.Name) + "\', 0, \'" + strProtected + "\'," + ConnectionsFileInfo.ConnectionFileVersion.ToString(CultureInfo.InvariantCulture) + ")", sqlDatabaseConnector.SqlConnection);
+            sqlQuery.ExecuteNonQuery();
         }
 
-	    private void UpdateConnectionsTable(TreeNode rootTreeNode)
+	    private void UpdateConnectionsTable(ContainerInfo rootTreeNode, SqlDatabaseConnector sqlDatabaseConnector)
 	    {
-            _sqlQuery = new SqlCommand("DELETE FROM tblCons", _sqlConnection);
-            _sqlQuery.ExecuteNonQuery();
-            var treeNodeCollection = rootTreeNode.Nodes;
-            SaveNodesRecursiveSql(treeNodeCollection);
+            var sqlQuery = new SqlCommand("DELETE FROM tblCons", sqlDatabaseConnector.SqlConnection);
+            sqlQuery.ExecuteNonQuery();
+            var serializer = new DataTableSerializer(SaveSecurity);
+	        var dataTable = serializer.Serialize(rootTreeNode);
+            var dataProvider = new SqlDataProvider(sqlDatabaseConnector);
+            dataProvider.Save(dataTable);
         }
 
-	    private void UpdateUpdatesTable()
+	    private void UpdateUpdatesTable(SqlDatabaseConnector sqlDatabaseConnector)
 	    {
-            _sqlQuery = new SqlCommand("DELETE FROM tblUpdate", _sqlConnection);
-            _sqlQuery.ExecuteNonQuery();
-            _sqlQuery = new SqlCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) + "\')", _sqlConnection);
-            _sqlQuery.ExecuteNonQuery();
+            var sqlQuery = new SqlCommand("DELETE FROM tblUpdate", sqlDatabaseConnector.SqlConnection);
+            sqlQuery.ExecuteNonQuery();
+            sqlQuery = new SqlCommand("INSERT INTO tblUpdate (LastUpdate) VALUES(\'" + MiscTools.DBDate(DateTime.Now) + "\')", sqlDatabaseConnector.SqlConnection);
+            sqlQuery.ExecuteNonQuery();
         }
-
-		private void SaveNodesRecursiveSql(TreeNodeCollection tnc)
-		{
-			foreach (TreeNode node in tnc)
-			{
-				_currentNodeIndex++;
-						
-				ConnectionInfo curConI;
-				_sqlQuery = new SqlCommand("INSERT INTO tblCons (Name, Type, Expanded, Description, Icon, Panel, Username, " + "DomainName, Password, Hostname, Protocol, PuttySession, " + "Port, ConnectToConsole, RenderingEngine, ICAEncryptionStrength, RDPAuthenticationLevel, LoadBalanceInfo, Colors, Resolution, AutomaticResize, DisplayWallpaper, " + "DisplayThemes, EnableFontSmoothing, EnableDesktopComposition, CacheBitmaps, RedirectDiskDrives, RedirectPorts, " + "RedirectPrinters, RedirectSmartCards, RedirectSound, RedirectKeys, " + "Connected, PreExtApp, PostExtApp, MacAddress, UserField, ExtApp, VNCCompression, VNCEncoding, VNCAuthMode, " + "VNCProxyType, VNCProxyIP, VNCProxyPort, VNCProxyUsername, VNCProxyPassword, " + "VNCColors, VNCSmartSizeMode, VNCViewOnly, " + "RDGatewayUsageMethod, RDGatewayHostname, RDGatewayUseConnectionCredentials, RDGatewayUsername, RDGatewayPassword, RDGatewayDomain, " + "UseCredSsp, " + "InheritCacheBitmaps, InheritColors, " + "InheritDescription, InheritDisplayThemes, InheritDisplayWallpaper, InheritEnableFontSmoothing, InheritEnableDesktopComposition, InheritDomain, " + "InheritIcon, InheritPanel, InheritPassword, InheritPort, " + "InheritProtocol, InheritPuttySession, InheritRedirectDiskDrives, " + "InheritRedirectKeys, InheritRedirectPorts, InheritRedirectPrinters, " + "InheritRedirectSmartCards, InheritRedirectSound, InheritResolution, InheritAutomaticResize, " + "InheritUseConsoleSession, InheritRenderingEngine, InheritUsername, InheritICAEncryptionStrength, InheritRDPAuthenticationLevel, InheritLoadBalanceInfo, " + "InheritPreExtApp, InheritPostExtApp, InheritMacAddress, InheritUserField, InheritExtApp, InheritVNCCompression, InheritVNCEncoding, " + "InheritVNCAuthMode, InheritVNCProxyType, InheritVNCProxyIP, InheritVNCProxyPort, " + "InheritVNCProxyUsername, InheritVNCProxyPassword, InheritVNCColors, " + "InheritVNCSmartSizeMode, InheritVNCViewOnly, " + "InheritRDGatewayUsageMethod, InheritRDGatewayHostname, InheritRDGatewayUseConnectionCredentials, InheritRDGatewayUsername, InheritRDGatewayPassword, InheritRDGatewayDomain, "
-				+ "InheritUseCredSsp, " + "PositionID, ParentID, ConstantID, LastChange)" + "VALUES (", _sqlConnection
-				);
-						
-				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection | ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container)
-				{
-					_sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(node.Text) + "\',"; //Name
-					_sqlQuery.CommandText += "\'" + ConnectionTreeNode.GetNodeType(node) + "\',"; //Type
-				}
-						
-				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Container) //container
-				{
-					_sqlQuery.CommandText += "\'" + ContainerList[node.Tag].IsExpanded + "\',"; //Expanded
-					curConI = ContainerList[node.Tag];
-					SaveConnectionFieldsSql(curConI);
-							
-					_sqlQuery.CommandText = MiscTools.PrepareForDB(_sqlQuery.CommandText);
-					_sqlQuery.ExecuteNonQuery();
-					//_parentConstantId = _currentNodeIndex
-					SaveNodesRecursiveSql(node.Nodes);
-				}
-						
-				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection)
-				{
-					_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-					curConI = ConnectionList[node.Tag];
-					SaveConnectionFieldsSql(curConI);
-					_sqlQuery.CommandText = MiscTools.PrepareForDB(_sqlQuery.CommandText);
-					_sqlQuery.ExecuteNonQuery();
-				}
-						
-				//_parentConstantId = 0
-			}
-		}
-		
-		private void SaveConnectionFieldsSql(ConnectionInfo curConI)
-		{
-            var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-            ConnectionInfo with_1 = curConI;
-            _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.Description) + "\',";
-            _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.Icon) + "\',";
-            _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.Panel) + "\',";
-					
-			if (SaveSecurity.Username)
-			{
-                _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.Username) + "\',";
-			}
-			else
-			{
-				_sqlQuery.CommandText += "\'" + "" + "\',";
-			}
-					
-			if (SaveSecurity.Domain)
-			{
-                _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.Domain) + "\',";
-			}
-			else
-			{
-				_sqlQuery.CommandText += "\'" + "" + "\',";
-			}
-					
-			if (SaveSecurity.Password)
-			{
-                _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(cryptographyProvider.Encrypt(with_1.Password, _password)) + "\',";
-			}
-			else
-			{
-				_sqlQuery.CommandText += "\'" + "" + "\',";
-			}
-
-            _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.Hostname) + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.Protocol + "\',";
-            _sqlQuery.CommandText += "\'" + MiscTools.PrepareValueForDB(with_1.PuttySession) + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Port) + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.UseConsoleSession) + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.RenderingEngine + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.ICAEncryptionStrength + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.RDPAuthenticationLevel + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.LoadBalanceInfo + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.Colors + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.Resolution + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.AutomaticResize) + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.DisplayWallpaper) + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.DisplayThemes) + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.EnableFontSmoothing) + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.EnableDesktopComposition) + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.CacheBitmaps) + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.RedirectDiskDrives) + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.RedirectPorts) + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.RedirectPrinters) + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.RedirectSmartCards) + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.RedirectSound + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.RedirectKeys) + "\',";
-					
-			if (curConI.OpenConnections.Count > 0)
-			{
-				_sqlQuery.CommandText += 1 + ",";
-			}
-			else
-			{
-				_sqlQuery.CommandText += 0 + ",";
-			}
-					
-			_sqlQuery.CommandText += "\'" + with_1.PreExtApp + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.PostExtApp + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.MacAddress + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.UserField + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.ExtApp + "\',";
-					
-			_sqlQuery.CommandText += "\'" + with_1.VNCCompression + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.VNCEncoding + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.VNCAuthMode + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.VNCProxyType + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.VNCProxyIP + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.VNCProxyPort) + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.VNCProxyUsername + "\',";
-			_sqlQuery.CommandText += "\'" + cryptographyProvider.Encrypt(with_1.VNCProxyPassword, _password) + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.VNCColors + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.VNCSmartSizeMode + "\',";
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.VNCViewOnly) + "\',";
-					
-			_sqlQuery.CommandText += "\'" + with_1.RDGatewayUsageMethod + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.RDGatewayHostname + "\',";
-			_sqlQuery.CommandText += "\'" + with_1.RDGatewayUseConnectionCredentials + "\',";
-					
-			if (SaveSecurity.Username)
-			{
-				_sqlQuery.CommandText += "\'" + with_1.RDGatewayUsername + "\',";
-			}
-			else
-			{
-				_sqlQuery.CommandText += "\'" + "" + "\',";
-			}
-					
-			if (SaveSecurity.Password)
-			{
-				_sqlQuery.CommandText += "\'" + cryptographyProvider.Encrypt(with_1.RDGatewayPassword, _password) + "\',";
-			}
-			else
-			{
-				_sqlQuery.CommandText += "\'" + "" + "\',";
-			}
-					
-			if (SaveSecurity.Domain)
-			{
-				_sqlQuery.CommandText += "\'" + with_1.RDGatewayDomain + "\',";
-			}
-			else
-			{
-				_sqlQuery.CommandText += "\'" + "" + "\',";
-			}
-					
-			_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.UseCredSsp) + "\',";
-					
-			if (SaveSecurity.Inheritance)
-			{
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.CacheBitmaps) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Colors) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Description) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.DisplayThemes) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.DisplayWallpaper) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.EnableFontSmoothing) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.EnableDesktopComposition) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Domain) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Icon) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Panel) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Password) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Port) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Protocol) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.PuttySession) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RedirectDiskDrives) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RedirectKeys) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RedirectPorts) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RedirectPrinters) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RedirectSmartCards) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RedirectSound) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Resolution) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.AutomaticResize) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.UseConsoleSession) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RenderingEngine) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.Username) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.ICAEncryptionStrength) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDPAuthenticationLevel) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.LoadBalanceInfo) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.PreExtApp) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.PostExtApp) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.MacAddress) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.UserField) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.ExtApp) + "\',";
-						
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCCompression) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCEncoding) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCAuthMode) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCProxyType) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCProxyIP) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCProxyPort) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCProxyUsername) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCProxyPassword) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCColors) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCSmartSizeMode) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.VNCViewOnly) + "\',";
-						
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDGatewayUsageMethod) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDGatewayHostname) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDGatewayUseConnectionCredentials) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDGatewayUsername) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDGatewayPassword) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.RDGatewayDomain) + "\',";
-						
-				_sqlQuery.CommandText += "\'" + Convert.ToString(with_1.Inheritance.UseCredSsp) + "\',";
-			}
-			else
-			{
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',"; // .AutomaticResize
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',"; // .LoadBalanceInfo
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-						
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',";
-						
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',"; // .RDGatewayUsageMethod
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',"; // .RDGatewayHostname
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',"; // .RDGatewayUseConnectionCredentials
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',"; // .RDGatewayUsername
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',"; // .RDGatewayPassword
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',"; // .RDGatewayDomain
-						
-				_sqlQuery.CommandText += "\'" + Convert.ToString(false) + "\',"; // .UseCredSsp
-			}
-					
-			with_1.PositionID = _currentNodeIndex;
-					
-			if (with_1.IsContainer == false)
-			{
-				if (with_1.Parent != null)
-				{
-					_parentConstantId = Convert.ToString(with_1.Parent.ConstantID);
-				}
-				else
-				{
-					_parentConstantId = Convert.ToString(0);
-				}
-			}
-			else
-			{
-				if (with_1.Parent.Parent != null)
-				{
-					_parentConstantId = Convert.ToString(with_1.Parent.Parent.ConstantID);
-				}
-				else
-				{
-					_parentConstantId = Convert.ToString(0);
-				}
-			}
-					
-			_sqlQuery.CommandText += _currentNodeIndex + ",\'" + _parentConstantId + "\',\'" + with_1.ConstantID + "\',\'" + MiscTools.DBDate(DateTime.Now) + "\')";
-		}
         #endregion
 		
 		private void EncryptCompleteFile()
@@ -603,7 +292,7 @@ namespace mRemoteNG.Config.Connections
         }
 				
         #region vRD VRE
-        // What export format is this? What does vRD VRE mean?
+        // .VRE files are for ASG-Remote Desktop (prevously visionapp Remote Desktop)
 		private void SaveToVRE()
 		{
 			if (Runtime.IsConnectionsFileLoaded == false)
@@ -637,7 +326,7 @@ namespace mRemoteNG.Config.Connections
 		{
 			foreach (TreeNode node in tNC)
 			{
-				if (ConnectionTreeNode.GetNodeType(node) == TreeNodeType.Connection)
+				if (((ConnectionInfo)node.Tag).GetTreeNodeType() == TreeNodeType.Connection)
 				{
                     ConnectionInfo curConI = (ConnectionInfo)node.Tag;
 							
