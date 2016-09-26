@@ -241,9 +241,6 @@ namespace mRemoteNG.App
 
                 }
 
-                connectionsLoader.ConnectionList = ConnectionList;
-                connectionsLoader.ContainerList = ContainerList;
-
                 var rootConnectionNode = ConnectionTreeModel.RootNodes.First(node => !(node is RootPuttySessionsNodeInfo));
                 ConnectionTreeModel.RemoveRootNode(rootConnectionNode);
 
@@ -307,30 +304,7 @@ namespace mRemoteNG.App
                     CreateBackupFile(Convert.ToString(connectionsLoader.ConnectionFileName));
                 }
 
-                connectionsLoader.ConnectionList = ConnectionList;
-                connectionsLoader.ContainerList = ContainerList;
-
-                if (PreviousConnectionList != null && PreviousContainerList != null)
-                {
-                    connectionsLoader.PreviousConnectionList = PreviousConnectionList;
-                    connectionsLoader.PreviousContainerList = PreviousContainerList;
-                }
-
-                if (update)
-                {
-                    connectionsLoader.PreviousSelected = LastSelected;
-                }
-
-                //ConnectionTree.ResetTree();
-
-                //connectionsLoader.RootTreeNode = Windows.treeForm.tvConnections.Nodes[0];
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
-                connectionsLoader.DatabaseHost = Settings.Default.SQLHost;
-                connectionsLoader.DatabaseName = Settings.Default.SQLDatabaseName;
-                connectionsLoader.DatabaseUsername = Settings.Default.SQLUser;
-                var cryptographyProvider = new LegacyRijndaelCryptographyProvider();
-                connectionsLoader.DatabasePassword = cryptographyProvider.Decrypt(Convert.ToString(Settings.Default.SQLPass), GeneralAppInfo.EncryptionKey);
-                connectionsLoader.DatabaseUpdate = update;
                 connectionsLoader.LoadConnections(false);
 
                 if (Settings.Default.UseSQLServer)

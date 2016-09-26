@@ -8,14 +8,14 @@ namespace mRemoteNG.Config
 {
     public class SqlDatabaseConnector : IDatabaseConnector
     {
-        private SqlConnection _sqlConnection = default(SqlConnection);
+        public  SqlConnection SqlConnection { get; private set; } = default(SqlConnection);
         private string _sqlConnectionString = "";
         private string _sqlHost;
         private string _sqlCatalog;
         private string _sqlUsername;
         private string _sqlPassword;
 
-        public bool IsConnected => (_sqlConnection.State == ConnectionState.Open);
+        public bool IsConnected => (SqlConnection.State == ConnectionState.Open);
 
         public SqlDatabaseConnector()
         {
@@ -30,7 +30,7 @@ namespace mRemoteNG.Config
         private void Initialize()
         {
             BuildSqlConnectionString();
-            _sqlConnection = new SqlConnection(_sqlConnectionString);
+            SqlConnection = new SqlConnection(_sqlConnectionString);
         }
 
         private void BuildSqlConnectionString()
@@ -64,17 +64,17 @@ namespace mRemoteNG.Config
 
         public void Connect()
         {
-            _sqlConnection.Open();
+            SqlConnection.Open();
         }
 
         public void Disconnect()
         {
-            _sqlConnection.Close();
+            SqlConnection.Close();
         }
 
         public void AssociateItemToThisConnector(SqlCommand sqlCommand)
         {
-            sqlCommand.Connection = _sqlConnection;
+            sqlCommand.Connection = SqlConnection;
         }
 
         public void Dispose()
@@ -84,8 +84,8 @@ namespace mRemoteNG.Config
         private void Dispose(bool itIsSafeToFreeManagedObjects)
         {
             if (!itIsSafeToFreeManagedObjects) return;
-            _sqlConnection.Close();
-            _sqlConnection.Dispose();
+            SqlConnection.Close();
+            SqlConnection.Dispose();
         }
     }
 }

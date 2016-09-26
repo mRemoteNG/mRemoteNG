@@ -1,10 +1,7 @@
-using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Serializers;
-using mRemoteNG.Connection;
-using mRemoteNG.Container;
 using mRemoteNG.UI.Forms;
 
 
@@ -13,57 +10,30 @@ namespace mRemoteNG.Config.Connections
 	public class ConnectionsLoader
 	{		
         public bool UseDatabase { get; set; }
-	    public string DatabaseHost { get; set; }
-	    public string DatabaseName { get; set; }
-	    public string DatabaseUsername { get; set; }
-	    public string DatabasePassword { get; set; }
-	    public bool DatabaseUpdate { get; set; }
-	    public string PreviousSelected { get; set; }
 	    public string ConnectionFileName { get; set; }
-	    public TreeNode RootTreeNode { get; set; }
-		public ConnectionList ConnectionList { get; set; }
-        public ContainerList ContainerList { get; set; }
-	    public ConnectionList PreviousConnectionList { get; set; }
-	    public ContainerList PreviousContainerList { get; set; }
 		
 
 		public void LoadConnections(bool import)
 		{
+		    IDeserializer deserializer;
 			if (UseDatabase)
 			{
-			    var sqlConnectionsLoader = new SqlConnectionsLoader()
-			    {
-			        ConnectionList = ConnectionList,
-			        ContainerList = ContainerList,
-			        PreviousConnectionList = PreviousConnectionList,
-			        PreviousContainerList = PreviousContainerList,
-			        PreviousSelected = PreviousSelected,
-			        RootTreeNode = RootTreeNode,
-			        DatabaseName = DatabaseName,
-			        DatabaseHost = DatabaseHost,
-			        DatabasePassword = DatabasePassword,
-			        DatabaseUpdate = DatabaseUpdate,
-			        DatabaseUsername = DatabaseUsername
-			    };
-                sqlConnectionsLoader.LoadFromSql();
+			    var connector = new SqlDatabaseConnector();
+			    var dataProvider = new SqlDataProvider(connector);
+			    var dataTable = dataProvider.Load();
+			    deserializer = new DataTableDeserializer(dataTable);
 			}
 			else
 			{
 			    var dataProvider = new FileDataProvider(ConnectionFileName);
 			    var xmlString = dataProvider.Load();
-                var xmlConnectionsDeserializer = new XmlConnectionsDeserializer(xmlString)
-                {
-                    ConnectionList = ConnectionList,
-                    ContainerList = ContainerList
-                };
-				var connectionTreeModel = xmlConnectionsDeserializer.Deserialize(import);
-                //var connectionTreeViewBuilder = new ConnectionTreeViewBuilder(connectionTreeModel);
-                //connectionTreeViewBuilder.Build();
-                //connectionTreeViewBuilder.AppendTo(Windows.treeForm.tvConnections);
-			    Runtime.ConnectionTreeModel = connectionTreeModel;
+			    deserializer = new XmlConnectionsDeserializer(xmlString);
 			}
-			
-			frmMain.Default.AreWeUsingSqlServerForSavingConnections = UseDatabase;
+
+            var connectionTreeModel = deserializer.Deserialize();
+            Runtime.ConnectionTreeModel = connectionTreeModel;
+
+            frmMain.Default.AreWeUsingSqlServerForSavingConnections = UseDatabase;
 			frmMain.Default.ConnectionsFileName = ConnectionFileName;
 
 		    if (import) return;
