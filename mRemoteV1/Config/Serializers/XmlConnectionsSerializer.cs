@@ -31,34 +31,20 @@ namespace mRemoteNG.Config.Serializers
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
             var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
-            return SerializeToXml(rootNode);
+            return Serialize(rootNode);
         }
 
-        private string SerializeToXml(RootNodeInfo rootNodeInfo)
+        public string Serialize(ConnectionInfo serializationTarget)
         {
             var xml = "";
             try
             {
-                if (!Runtime.IsConnectionsFileLoaded)
-                    return "";
-                
-                //TreeNode treeNode;
-                //if (ConnectionTreeNode.GetNodeType(rootTreeNode) == TreeNodeType.Root)
-                //{
-                //    treeNode = (TreeNode)rootTreeNode.Clone();
-                //}
-                //else
-                //{
-                //    treeNode = new TreeNode("mR|Export (" + MiscTools.DBDate(DateTime.Now) + ")");
-                //    treeNode.Nodes.Add(Convert.ToString(rootTreeNode.Clone()));
-                //}
-
                 var memoryStream = new MemoryStream();
                 using (_xmlTextWriter = new XmlTextWriter(memoryStream, Encoding.UTF8))
                 {
                     SetXmlTextWriterSettings();
                     _xmlTextWriter.WriteStartDocument();
-                    SaveNodesRecursive(rootNodeInfo);
+                    SaveNodesRecursive(serializationTarget);
                     _xmlTextWriter.Flush();
 
                     var streamReader = new StreamReader(memoryStream, Encoding.UTF8, true);
@@ -79,28 +65,27 @@ namespace mRemoteNG.Config.Serializers
             _xmlTextWriter.Indentation = 4;
         }
 
-        private void SaveNodesRecursive(RootNodeInfo rootNodeInfo)
-        {
-            SerializeRootNodeInfo(rootNodeInfo);
-            foreach (var child in rootNodeInfo.Children)
-                SaveNodesRecursive(child);
-            _xmlTextWriter.WriteEndElement();
-        }
-
-        private void SaveNodesRecursive(ConnectionInfo connectionInfo)
+        private void SaveNodesRecursive(ConnectionInfo node)
         {
             try
             {
-                var containerInfo = connectionInfo as ContainerInfo;
-                if (containerInfo != null)
+                var nodeAsRoot = node as RootNodeInfo;
+                var nodeAsContainer = node as ContainerInfo;
+                if (nodeAsRoot != null)
                 {
-                    SerializeContainerInfo(containerInfo);
-                    foreach (var child in containerInfo.Children)
+                    SerializeRootNodeInfo(nodeAsRoot);
+                    foreach (var child in nodeAsRoot.Children)
+                        SaveNodesRecursive(child);
+                }
+                else if (nodeAsContainer != null)
+                {
+                    SerializeContainerInfo(nodeAsContainer);
+                    foreach (var child in nodeAsContainer.Children)
                         SaveNodesRecursive(child);
                 }
                 else
                 {
-                    SerializeConnectionInfo(connectionInfo);
+                    SerializeConnectionInfo(node);
                 }
                 _xmlTextWriter.WriteEndElement();
             }

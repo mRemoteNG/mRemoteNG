@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using mRemoteNG.App;
 using mRemoteNG.Connection;
 using mRemoteNG.Container;
 using mRemoteNG.Security;
@@ -17,17 +16,15 @@ namespace mRemoteNG.Config.Serializers
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
-            var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
-            return SerializeToCsv(rootNode);
+            var rootNode = connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
+            return Serialize(rootNode);
         }
 
-        private string SerializeToCsv(RootNodeInfo rootNodeInfo)
+        public string Serialize(ConnectionInfo serializationTarget)
         {
-            if (Runtime.IsConnectionsFileLoaded == false)
-                return "";
             _csv = "";
             WriteCsvHeader();
-            SerializeNodesRecursive(rootNodeInfo);
+            SerializeNodesRecursive(serializationTarget);
             return _csv;
         }
 
@@ -47,15 +44,21 @@ namespace mRemoteNG.Config.Serializers
             _csv += csvHeader;
         }
 
-        private void SerializeNodesRecursive(ContainerInfo containerInfo)
+        private void SerializeNodesRecursive(ConnectionInfo node)
         {
-            foreach (var child in containerInfo.Children)
+            var nodeAsContainer = node as ContainerInfo;
+            if (nodeAsContainer != null)
             {
-                if (child is ContainerInfo)
-                    SerializeNodesRecursive((ContainerInfo)child);
-                else
-                    SerializeConnectionInfo(child);
+                foreach (var child in nodeAsContainer.Children)
+                {
+                    if (child is ContainerInfo)
+                        SerializeNodesRecursive((ContainerInfo) child);
+                    else
+                        SerializeConnectionInfo(child);
+                }
             }
+            else
+                SerializeConnectionInfo(node);
         }
 
         private void SerializeConnectionInfo(ConnectionInfo con)

@@ -39,6 +39,11 @@ namespace mRemoteNG.Config.Serializers
             throw new NotImplementedException();
         }
 
+        public string Serialize(ConnectionInfo serializationTarget)
+        {
+            throw new NotImplementedException();
+        }
+
         private bool VerifyDatabaseVersion(SqlConnection sqlConnection)
         {
             bool isVerified = false;

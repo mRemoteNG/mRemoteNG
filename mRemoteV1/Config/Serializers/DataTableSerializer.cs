@@ -25,17 +25,17 @@ namespace mRemoteNG.Config.Serializers
         public DataTable Serialize(ConnectionTreeModel connectionTreeModel)
         {
             var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
-            SerializeToDataTable(rootNode);
-            return _dataTable;
+            return Serialize(rootNode);
         }
 
-        private void SerializeToDataTable(RootNodeInfo rootNodeInfo)
+        public DataTable Serialize(ConnectionInfo serializationTarget)
         {
             _dataTable = new DataTable(TableName);
             CreateSchema();
             SetPrimaryKey();
             _currentNodeIndex = 0;
-            SerializeNodesRecursive(rootNodeInfo);
+            SerializeNodesRecursive(serializationTarget);
+            return _dataTable;
         }
 
         private void CreateSchema()

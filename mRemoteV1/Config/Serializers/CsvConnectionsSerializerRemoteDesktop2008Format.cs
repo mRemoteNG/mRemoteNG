@@ -15,29 +15,32 @@ namespace mRemoteNG.Config.Serializers
 
         public string Serialize(ConnectionTreeModel connectionTreeModel)
         {
-            var rootNode = (RootNodeInfo)connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
-            return SerializeToCsv(rootNode);
+            var rootNode = connectionTreeModel.RootNodes.First(node => node is RootNodeInfo);
+            return Serialize(rootNode);
         }
 
-        private string SerializeToCsv(RootNodeInfo rootNodeInfo)
+        public string Serialize(ConnectionInfo serializationTarget)
         {
-            if (Runtime.IsConnectionsFileLoaded == false)
-                return "";
-
             _csv = "";
-            SerializeNodesRecursive(rootNodeInfo);
+            SerializeNodesRecursive(serializationTarget);
             return _csv;
         }
 
-        private void SerializeNodesRecursive(ContainerInfo containerInfo)
+        private void SerializeNodesRecursive(ConnectionInfo node)
         {
-            foreach (var child in containerInfo.Children)
+            var nodeAsContainer = node as ContainerInfo;
+            if (nodeAsContainer != null)
             {
-                if (child is ContainerInfo)
-                    SerializeNodesRecursive((ContainerInfo)child);
-                else if (child.Protocol == ProtocolType.RDP)
-                    SerializeConnectionInfo(child);
+                foreach (var child in nodeAsContainer.Children)
+                {
+                    if (child is ContainerInfo)
+                        SerializeNodesRecursive((ContainerInfo)child);
+                    else if (child.Protocol == ProtocolType.RDP)
+                        SerializeConnectionInfo(child);
+                }
             }
+            else if (node.Protocol == ProtocolType.RDP)
+                SerializeConnectionInfo(node);
         }
 
         private void SerializeConnectionInfo(ConnectionInfo con)
