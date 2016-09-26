@@ -32,8 +32,6 @@ namespace mRemoteNG.App
     public static class Runtime
     {
         #region Public Properties
-        public static CredentialList CredentialList { get; set; }
-        public static CredentialList PreviousCredentialList { get; set; }
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; set; }
         public static Tools.Controls.NotificationAreaIcon NotificationAreaIcon { get; set; }
@@ -41,8 +39,6 @@ namespace mRemoteNG.App
         public static SqlConnectionsProvider SQLConnProvider { get; set; }
         public static DateTime LastSqlUpdate { get; set; }
         public static string LastSelected { get; set; }
-        public static ConnectionInfo DefaultConnection { get; set; } = DefaultConnectionInfo.Instance;
-        public static ConnectionInfoInheritance DefaultInheritance { get; set; }
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
         public static ConnectionTreeModel ConnectionTreeModel { get; set; }
         #endregion
@@ -649,68 +645,6 @@ namespace mRemoteNG.App
             {
                 MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strLogWriteToFileFailed);
             }
-        }
-
-        public static bool SaveReport()
-        {
-            StreamReader streamReader = null;
-            StreamWriter streamWriter = null;
-            try
-            {
-                streamReader = new StreamReader(SettingsFileInfo.exePath + "\\Report.log");
-                string text = streamReader.ReadToEnd();
-                streamReader.Close();
-                streamWriter = new StreamWriter(GeneralAppInfo.ReportingFilePath, true);
-                streamWriter.Write(text);
-                return true;
-            }
-            catch (Exception ex)
-            {
-                MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strLogWriteToFileFinalLocationFailed + Environment.NewLine + ex.Message, true);
-                return false;
-            }
-            finally
-            {
-                if (streamReader != null)
-                {
-                    streamReader.Close();
-                    streamReader.Dispose();
-                }
-                if (streamWriter != null)
-                {
-                    streamWriter.Close();
-                    streamWriter.Dispose();
-                }
-            }
-        }
-
-        private static InterfaceControl FindConnectionContainer(ConnectionInfo connectionInfo)
-        {
-            if (connectionInfo.OpenConnections.Count > 0)
-            {
-                for (int i = 0; i <= WindowList.Count - 1; i++)
-                {
-                    if (WindowList[i] is ConnectionWindow)
-                    {
-                        ConnectionWindow connectionWindow = (ConnectionWindow)WindowList[i];
-                        if (connectionWindow.TabController != null)
-                        {
-                            foreach (TabPage t in connectionWindow.TabController.TabPages)
-                            {
-                                if (t.Controls[0] != null && t.Controls[0] is InterfaceControl)
-                                {
-                                    InterfaceControl IC = (InterfaceControl)t.Controls[0];
-                                    if (IC.Info == connectionInfo)
-                                    {
-                                        return IC;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            return null;
         }
 
         // Override the font of all controls in a container with the default font based on the OS version
