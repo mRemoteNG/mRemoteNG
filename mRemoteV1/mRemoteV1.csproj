@@ -202,7 +202,6 @@
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />
     <Compile Include="Tools\ScanHost.cs" />
     <Compile Include="Tools\SecureTransfer.cs" />
-    <Compile Include="Tools\Sorting\TreeNodeSorter.cs" />
     <Compile Include="Tree\ConnectionTreeDragAndDropHandler.cs" />
     <Compile Include="Tree\ConnectionTreeModel.cs" />
     <Compile Include="Tree\NodeSearcher.cs" />
