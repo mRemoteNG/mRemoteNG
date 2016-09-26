@@ -474,15 +474,8 @@ namespace mRemoteNG.Config.Connections
             return null;
         }
 
-        private delegate void SetSelectedNodeDelegate(TreeNode treeNode);
         private static void SetSelectedNode(TreeNode treeNode)
         {
-            if (ConnectionTree.TreeView != null && ConnectionTree.TreeView.InvokeRequired)
-            {
-                Windows.treeForm.Invoke(new SetSelectedNodeDelegate(SetSelectedNode), treeNode);
-                return;
-            }
-            Windows.treeForm.tvConnections.SelectedNode = treeNode;
         }
 
         private bool Authenticate(string value, bool compareToOriginalValue, RootNodeInfo rootInfo = null)
@@ -517,6 +510,5 @@ namespace mRemoteNG.Config.Connections
 
             return true;
         }
-
     }
 }

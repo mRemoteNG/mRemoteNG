@@ -471,16 +471,5 @@ namespace mRemoteNG.Config.Serializers
             };
             return rootInfo;
         }
-
-        private delegate void SetSelectedNodeDelegate(TreeNode treeNode);
-        private static void SetSelectedNode(TreeNode treeNode)
-        {
-            if (ConnectionTree.TreeView != null && ConnectionTree.TreeView.InvokeRequired)
-            {
-                Windows.treeForm.Invoke(new SetSelectedNodeDelegate(SetSelectedNode), treeNode);
-                return;
-            }
-            Windows.treeForm.tvConnections.SelectedNode = treeNode;
-        }
     }
 }
