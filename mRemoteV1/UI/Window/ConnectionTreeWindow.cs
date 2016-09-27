@@ -503,9 +503,7 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-			    var newConnectionInfo = new ConnectionInfo();
-			    var selectedContainer = SelectedNode as ContainerInfo;
-			    newConnectionInfo.SetParent(selectedContainer ?? SelectedNode.Parent);
+			    AddNode(new ConnectionInfo());
             }
 			catch (Exception ex)
 			{
@@ -517,15 +515,23 @@ namespace mRemoteNG.UI.Window
 		{
 			try
 			{
-				var newContainerInfo = new ContainerInfo();
-                var selectedContainer = SelectedNode as ContainerInfo;
-                newContainerInfo.SetParent(selectedContainer ?? SelectedNode.Parent);
+                AddNode(new ContainerInfo());
             }
 			catch (Exception ex)
 			{
 				Runtime.MessageCollector.AddExceptionStackTrace(Language.strErrorAddFolderFailed, ex);
 			}
 		}
+
+	    private void AddNode(IHasParent newNode)
+	    {
+            var selectedContainer = SelectedNode as ContainerInfo;
+            var parent = selectedContainer ?? SelectedNode.Parent;
+            newNode.SetParent(parent);
+            olvConnections.Expand(parent);
+            olvConnections.SelectObject(newNode);
+            olvConnections.EnsureModelVisible(newNode);
+        }
 
         private void DisconnectConnection(ConnectionInfo connectionInfo)
 		{
