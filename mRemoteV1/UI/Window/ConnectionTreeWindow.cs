@@ -299,6 +299,7 @@ namespace mRemoteNG.UI.Window
 
         public void DeleteSelectedNode()
         {
+            if (SelectedNode is RootNodeInfo || SelectedNode is PuttySessionInfo) return;
             if (!UserConfirmsDeletion()) return;
             ConnectionTreeModel.DeleteNode(SelectedNode);
             Runtime.SaveConnectionsBG();
