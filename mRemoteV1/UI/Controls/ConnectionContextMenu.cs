@@ -433,8 +433,8 @@ namespace mRemoteNG.UI.Controls
                     _cMenTreeDisconnect.Enabled = false;
 
                     var openConnections = ((ContainerInfo)connectionInfo).Children.Sum(child => child.OpenConnections.Count);
-                    if (openConnections == 0)
-                        _cMenTreeDisconnect.Enabled = false;
+                    if (openConnections > 0)
+                        _cMenTreeDisconnect.Enabled = true;
 
                     _cMenTreeToolsTransferFile.Enabled = false;
                     _cMenTreeToolsExternalApps.Enabled = false;
