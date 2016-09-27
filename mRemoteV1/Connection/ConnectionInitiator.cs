@@ -3,8 +3,8 @@ using System.Windows.Forms;
 using mRemoteNG.App;
 using mRemoteNG.Connection.Protocol;
 using mRemoteNG.Connection.Protocol.RDP;
+using mRemoteNG.Container;
 using mRemoteNG.Messages;
-using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Window;
 using TabPage = Crownwood.Magic.Controls.TabPage;
@@ -14,23 +14,35 @@ namespace mRemoteNG.Connection
 {
     public static class ConnectionInitiator
     {
+        public static void OpenConnection(ContainerInfo containerInfo)
+        {
+            OpenConnection(containerInfo, ConnectionInfo.Force.None);
+        }
+
+        public static void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force)
+        {
+            OpenConnection(containerInfo, force, null);
+        }
+
+        public static void OpenConnection(ContainerInfo containerInfo, ConnectionInfo.Force force, Form conForm)
+        {
+            var children = containerInfo.Children;
+            if (children.Count == 0) return;
+            foreach (var child in children)
+            {
+                var childAsContainer = child as ContainerInfo;
+                if (childAsContainer != null)
+                    OpenConnection(childAsContainer, force, conForm);
+                else
+                    OpenConnection(child, force, conForm);
+            }
+        }
+
         public static void OpenConnection(ConnectionInfo connectionInfo)
         {
             try
             {
                 OpenConnection(connectionInfo, ConnectionInfo.Force.None);
-            }
-            catch (Exception ex)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.ErrorMsg, Language.strConnectionOpenFailed + Environment.NewLine + ex.Message);
-            }
-        }
-
-        public static void OpenConnection(ConnectionInfo connectionInfo, Form connectionForm, ConnectionInfo.Force force)
-        {
-            try
-            {
-                OpenConnection(connectionInfo, force, connectionForm);
             }
             catch (Exception ex)
             {

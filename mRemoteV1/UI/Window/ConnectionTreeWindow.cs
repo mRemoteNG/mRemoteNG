@@ -139,12 +139,54 @@ namespace mRemoteNG.UI.Window
 	    private void SetContextMenuEventHandlers()
 	    {
 	        _contextMenu.Opening += (sender, args) => _contextMenu.ShowHideTreeContextMenuItems(SelectedNode);
-	        _contextMenu.ConnectClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DoNotJump);
-	        _contextMenu.ConnectToConsoleSessionClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
-            _contextMenu.DontConnectToConsoleSessionClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
-            _contextMenu.ConnectInFullscreenClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
-            _contextMenu.ConnectWithNoCredentialsClick += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.NoCredentials);
-            _contextMenu.ChoosePanelBeforeConnectingClicked += (sender, args) => ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
+	        _contextMenu.ConnectClicked += (sender, args) =>
+	        {
+	            var selectedNodeAsContainer = SelectedNode as ContainerInfo;
+                if (selectedNodeAsContainer != null)
+                    ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DoNotJump);
+                else
+                    ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DoNotJump);
+	        };
+	        _contextMenu.ConnectToConsoleSessionClicked += (sender, args) =>
+	        {
+                var selectedNodeAsContainer = SelectedNode as ContainerInfo;
+                if (selectedNodeAsContainer != null)
+                    ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
+                else
+                    ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.UseConsoleSession | ConnectionInfo.Force.DoNotJump);
+            };
+            _contextMenu.DontConnectToConsoleSessionClicked += (sender, args) =>
+            {
+                var selectedNodeAsContainer = SelectedNode as ContainerInfo;
+                if (selectedNodeAsContainer != null)
+                    ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
+                else
+                    ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.DontUseConsoleSession | ConnectionInfo.Force.DoNotJump);
+            };
+            _contextMenu.ConnectInFullscreenClicked += (sender, args) =>
+            {
+                var selectedNodeAsContainer = SelectedNode as ContainerInfo;
+                if (selectedNodeAsContainer != null)
+                    ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
+                else
+                    ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.Fullscreen | ConnectionInfo.Force.DoNotJump);
+            };
+            _contextMenu.ConnectWithNoCredentialsClick += (sender, args) =>
+            {
+                var selectedNodeAsContainer = SelectedNode as ContainerInfo;
+                if (selectedNodeAsContainer != null)
+                    ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.NoCredentials);
+                else
+                    ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.NoCredentials);
+            };
+            _contextMenu.ChoosePanelBeforeConnectingClicked += (sender, args) =>
+            {
+                var selectedNodeAsContainer = SelectedNode as ContainerInfo;
+                if (selectedNodeAsContainer != null)
+                    ConnectionInitiator.OpenConnection(selectedNodeAsContainer, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
+                else
+                    ConnectionInitiator.OpenConnection(SelectedNode, ConnectionInfo.Force.OverridePanel | ConnectionInfo.Force.DoNotJump);
+            };
             _contextMenu.DisconnectClicked += (sender, args) => DisconnectConnection(SelectedNode);
             _contextMenu.TransferFileClicked += (sender, args) => SshTransferFile();
             _contextMenu.DuplicateClicked += (sender, args) => DuplicateSelectedNode();

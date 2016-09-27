@@ -550,7 +550,8 @@ namespace mRemoteNG.UI.Window
         {
             if (e.Data.GetDataPresent("System.Windows.Forms.TreeNode", true))
             {
-                ConnectionInitiator.OpenConnection((ConnectionInfo)((TreeNode)e.Data.GetData("System.Windows.Forms.TreeNode", true)).Tag, this, ConnectionInfo.Force.DoNotJump);
+                var connectionInfo = (ConnectionInfo) ((TreeNode) e.Data.GetData("System.Windows.Forms.TreeNode", true)).Tag;
+                ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump, this);
             }
         }
 
