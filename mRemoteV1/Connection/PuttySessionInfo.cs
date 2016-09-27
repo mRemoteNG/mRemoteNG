@@ -35,7 +35,7 @@ namespace mRemoteNG.Connection
         [ReadOnly(true), Browsable(false)]
         public override string Panel
         {
-            get { return RootRootPuttySessionsInfo.Panel; }
+            get { return Parent?.Panel; }
             set { }
         }
 
