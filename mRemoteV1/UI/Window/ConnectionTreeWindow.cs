@@ -423,12 +423,12 @@ namespace mRemoteNG.UI.Window
 	        switch (args?.Action)
 	        {
 	            case NotifyCollectionChangedAction.Add:
-	                var otherChild = senderAsContainerInfo?.Children.First(child => !args.NewItems.Contains(child));
-	                if (otherChild != null)
-	                    RefreshTreeObject(otherChild);
-                    else
-                        RefreshTreeObject(senderAsContainerInfo);
-                    break;
+	                var childList = senderAsContainerInfo?.Children;
+	                ConnectionInfo otherChild = null;
+                    if (childList?.Count > 0)
+                        try { otherChild = childList.First(child => !args.NewItems.Contains(child)); } catch { }
+	                RefreshTreeObject(otherChild ?? senderAsContainerInfo);
+	                break;
 	            case NotifyCollectionChangedAction.Remove:
                     RefreshTreeObjects(args.OldItems);
 	                break;
