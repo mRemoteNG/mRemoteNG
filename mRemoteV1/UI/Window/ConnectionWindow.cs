@@ -1,6 +1,7 @@
 using System;
 using System.Drawing;
 using System.Windows.Forms;
+using BrightIdeasSoftware;
 using mRemoteNG.Connection;
 using mRemoteNG.App;
 using WeifenLuo.WinFormsUI.Docking;
@@ -11,6 +12,7 @@ using mRemoteNG.Connection.Protocol;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.TaskDialog;
 using mRemoteNG.App.Info;
+using mRemoteNG.Container;
 using mRemoteNG.UI.Forms.Input;
 
 namespace mRemoteNG.UI.Window
@@ -549,10 +551,17 @@ namespace mRemoteNG.UI.Window
         #region Drag and Drop
         private void TabController_DragDrop(object sender, DragEventArgs e)
         {
-            if (e.Data.GetDataPresent("System.Windows.Forms.TreeNode", true))
+            var dropDataAsOlvDataObject = e.Data as OLVDataObject;
+            if (dropDataAsOlvDataObject == null) return;
+            var modelObjects = dropDataAsOlvDataObject.ModelObjects;
+            foreach (var model in modelObjects)
             {
-                var connectionInfo = (ConnectionInfo) ((TreeNode) e.Data.GetData("System.Windows.Forms.TreeNode", true)).Tag;
-                ConnectionInitiator.OpenConnection(connectionInfo, ConnectionInfo.Force.DoNotJump, this);
+                var modelAsContainer = model as ContainerInfo;
+                var modelAsConnection = model as ConnectionInfo;
+                if (modelAsContainer != null)
+                    ConnectionInitiator.OpenConnection(modelAsContainer);
+                else if (modelAsConnection != null)
+                    ConnectionInitiator.OpenConnection(modelAsConnection);
             }
         }
 
