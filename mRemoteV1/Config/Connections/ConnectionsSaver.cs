@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml;
 using mRemoteNG.App;
 using mRemoteNG.App.Info;
+using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Serializers;
 using mRemoteNG.Connection;

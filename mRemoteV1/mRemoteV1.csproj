@@ -173,8 +173,8 @@
     <Compile Include="Config\Putty\PuttySessionsXmingProvider.cs" />
     <Compile Include="Config\Putty\PuttySessionsManager.cs" />
     <Compile Include="Config\Putty\AbstractPuttySessionsProvider.cs" />
-    <Compile Include="Config\IDatabaseConnector.cs" />
-    <Compile Include="Config\SqlDatabaseConnector.cs" />
+    <Compile Include="Config\DatabaseConnectors\IDatabaseConnector.cs" />
+    <Compile Include="Config\DatabaseConnectors\SqlDatabaseConnector.cs" />
     <Compile Include="Connection\AbstractConnectionInfoData.cs" />
     <Compile Include="Connection\ConnectionInfoComparer.cs" />
     <Compile Include="Connection\ConnectionInfoInheritance.cs" />

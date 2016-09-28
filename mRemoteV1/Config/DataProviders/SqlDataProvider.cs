@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using mRemoteNG.Config.DatabaseConnectors;
 
 
 namespace mRemoteNG.Config.DataProviders
