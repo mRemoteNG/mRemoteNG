@@ -76,17 +76,7 @@ namespace mRemoteNG.Tools
 
                 var token = input.Substring(tokenStart, tokenLength);
 
-                var escape = EscapeType.All;
-                var prefix = input.Substring(variableNameStart, 1);
-                switch (prefix)
-                {
-                    case "-":
-                        escape = EscapeType.ShellMetacharacters;
-                        break;
-                    case "!":
-                        escape = EscapeType.None;
-                        break;
-                }
+                var escape = DetermineEscapeType(token);
 
                 if (escape != EscapeType.All)
                 {
@@ -162,6 +152,22 @@ namespace mRemoteNG.Tools
                 }
             }
             return result;
+        }
+
+        private EscapeType DetermineEscapeType(string token)
+        {
+            var escape = EscapeType.All;
+            var prefix = token[1];
+            switch (prefix)
+            {
+                case '-':
+                    escape = EscapeType.ShellMetacharacters;
+                    break;
+                case '!':
+                    escape = EscapeType.None;
+                    break;
+            }
+            return escape;
         }
 
         private string GetVariableReplacement(string variable, string original)
