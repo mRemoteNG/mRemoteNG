@@ -505,6 +505,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 Crownwood.Magic.Controls.TabPage selectedTab = TabController.SelectedTab;
+                if (selectedTab == null) return;
                 if (Settings.Default.ConfirmCloseConnection == (int)ConfirmCloseEnum.All)
                 {
                     DialogResult result = CTaskDialog.MessageBox(this, GeneralAppInfo.ProdName, string.Format(Language.strConfirmCloseConnectionMainInstruction, selectedTab.Title), "", "", "", Language.strCheckboxDoNotShowThisMessageAgain, ETaskDialogButtons.YesNo, ESysIcons.Question, ESysIcons.Question);
