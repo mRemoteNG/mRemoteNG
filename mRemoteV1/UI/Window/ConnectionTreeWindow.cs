@@ -420,8 +420,9 @@ namespace mRemoteNG.UI.Window
             try
             {
                 if (e.ClickCount > 1) return;
-                var clickedNode = (ConnectionInfo)e.Model;
-                
+                var clickedNode = e.Model as ConnectionInfo;
+
+                if (clickedNode == null) return;
                 if (clickedNode.GetTreeNodeType() != TreeNodeType.Connection && clickedNode.GetTreeNodeType() != TreeNodeType.PuttySession) return;
                 if (Settings.Default.SingleClickOnConnectionOpensIt)
                     ConnectionInitiator.OpenConnection(SelectedNode);
