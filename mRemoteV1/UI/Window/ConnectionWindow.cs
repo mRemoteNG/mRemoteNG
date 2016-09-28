@@ -1,5 +1,6 @@
 using System;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using mRemoteNG.Connection;
@@ -53,7 +54,6 @@ namespace mRemoteNG.UI.Window
             TabController.ClosePressed += TabController_ClosePressed;
             TabController.DoubleClickTab += TabController_DoubleClickTab;
             TabController.DragDrop += TabController_DragDrop;
-            TabController.DragEnter += TabController_DragEnter;
             TabController.DragOver += TabController_DragOver;
             TabController.SelectionChanged += TabController_SelectionChanged;
             TabController.MouseUp += TabController_MouseUp;
@@ -565,16 +565,13 @@ namespace mRemoteNG.UI.Window
             }
         }
 
-        private void TabController_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent("System.Windows.Forms.TreeNode", true))
-            {
-                e.Effect = DragDropEffects.Move;
-            }
-        }
-
         private void TabController_DragOver(object sender, DragEventArgs e)
         {
+            e.Effect = DragDropEffects.None;
+            var dropDataAsOlvDataObject = e.Data as OLVDataObject;
+            var modelObjects = dropDataAsOlvDataObject?.ModelObjects;
+            if (modelObjects == null) return;
+            if (!modelObjects.OfType<ConnectionInfo>().Any()) return;
             e.Effect = DragDropEffects.Move;
         }
         #endregion
