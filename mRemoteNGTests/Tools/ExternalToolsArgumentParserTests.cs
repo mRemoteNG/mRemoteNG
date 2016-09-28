@@ -78,13 +78,23 @@ namespace mRemoteNGTests.Tools
         [TestCase("%-USERFIELD%", ExpectedResult = StringAfterMetacharacterEscaping)]
         [TestCase("%!USERFIELD%", ExpectedResult = StringAfterNoEscaping)]
 
-        [TestCase("%%", ExpectedResult = "%%")]
-        [TestCase("/k echo %!USERNAME%", ExpectedResult = SampleCommandString)]
-        [TestCase("%COMSPEC%", ExpectedResult = @"C:\Windows\system32\cmd.exe")]
-        [TestCase("%UNSUPPORTEDPARAMETER%", ExpectedResult = "%UNSUPPORTEDPARAMETER%")]
-        public string ParserTest(string argumentString)
+        [TestCase("%%", ExpectedResult = "%%", TestName = "EmptyVariableTagsNotParsed")]
+        [TestCase("/k echo %!USERNAME%", ExpectedResult = SampleCommandString, TestName = "ParsingWorksWhenVariableIsNotInFirstPosition")]
+        [TestCase("%COMSPEC%", ExpectedResult = @"C:\Windows\system32\cmd.exe", TestName = "EnvironmentVariablesParsed")]
+        [TestCase("%UNSUPPORTEDPARAMETER%", ExpectedResult = "%UNSUPPORTEDPARAMETER%", TestName = "UnsupportedParametersNotParsed")]
+        [TestCase(@"\%COMSPEC\%", ExpectedResult = @"C:\Windows\system32\cmd.exe", TestName = "BackslashEscapedEnvironmentVariablesParsed")]
+        [TestCase(@"^%COMSPEC^%", ExpectedResult = "%COMSPEC%", TestName = "ChevronEscapedEnvironmentVariablesNotParsed")]
+        public string ParserTests(string argumentString)
         {
             return _argumentParser.ParseArguments(argumentString);
+        }
+
+        [Test]
+        public void NullConnectionInfoResultsInEmptyVariables()
+        {
+            var parser = new ExternalToolArgumentParser(null);
+            var parsedText = parser.ParseArguments("test %USERNAME% test");
+            Assert.That(parsedText, Is.EqualTo("test  test"));
         }
     }
 }
