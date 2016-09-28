@@ -15,30 +15,29 @@ namespace mRemoteNG.Tools
 
         public string ParseArguments(string input)
         {
+            var replacements = BuildReplacementList(input);
+            var result = PerformReplacements(input, replacements);
+            return result;
+        }
+
+        private List<Replacement> BuildReplacementList(string input)
+        {
             var index = 0;
             var replacements = new List<Replacement>();
-
             do
             {
                 var tokenStart = input.IndexOf("%", index, StringComparison.InvariantCulture);
                 if (tokenStart == -1)
-                {
                     break;
-                }
 
                 var tokenEnd = input.IndexOf("%", tokenStart + 1, StringComparison.InvariantCulture);
                 if (tokenEnd == -1)
-                {
                     break;
-                }
 
                 var tokenLength = tokenEnd - tokenStart + 1;
-
                 var variableNameStart = tokenStart + 1;
                 var variableNameLength = tokenLength - 2;
-
                 var isEnvironmentVariable = false;
-
                 var variableName = "";
 
                 if (tokenStart > 0)
@@ -134,24 +133,7 @@ namespace mRemoteNG.Tools
                     index = tokenEnd;
                 }
             } while (true);
-
-            var result = input;
-
-            for (index = result.Length; index >= 0; index--)
-            {
-                foreach (var replacement in replacements)
-                {
-                    if (replacement.Start != index)
-                    {
-                        continue;
-                    }
-
-                    var before = result.Substring(0, replacement.Start);
-                    var after = result.Substring(replacement.Start + replacement.Length);
-                    result = before + replacement.Value + after;
-                }
-            }
-            return result;
+            return replacements;
         }
 
         private EscapeType DetermineEscapeType(string token)
@@ -207,6 +189,28 @@ namespace mRemoteNG.Tools
                     return original;
             }
             return replacement;
+        }
+
+        private string PerformReplacements(string input, List<Replacement> replacements)
+        {
+            int index;
+            var result = input;
+
+            for (index = result.Length; index >= 0; index--)
+            {
+                foreach (var replacement in replacements)
+                {
+                    if (replacement.Start != index)
+                    {
+                        continue;
+                    }
+
+                    var before = result.Substring(0, replacement.Start);
+                    var after = result.Substring(replacement.Start + replacement.Length);
+                    result = before + replacement.Value + after;
+                }
+            }
+            return result;
         }
 
         private enum EscapeType
