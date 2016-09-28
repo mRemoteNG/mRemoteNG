@@ -40,7 +40,7 @@ namespace mRemoteNG.Connection.Protocol
 					return false;
 				}
 
-                ArgumentParser argParser = new ArgumentParser(_externalTool.ConnectionInfo);
+                ExternalToolArgumentParser argParser = new ExternalToolArgumentParser(_externalTool.ConnectionInfo);
 				_process = new Process();
 						
 				_process.StartInfo.UseShellExecute = true;

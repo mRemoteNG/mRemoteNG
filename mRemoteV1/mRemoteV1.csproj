@@ -196,7 +196,7 @@
     <Compile Include="Security\ICryptographyProvider.cs" />
     <Compile Include="Security\SecureStringExtensions.cs" />
     <Compile Include="Security\CryptographyProviderFactory.cs" />
-    <Compile Include="Tools\ArgumentParser.cs" />
+    <Compile Include="Tools\ExternalToolArgumentParser.cs" />
     <Compile Include="Tools\CmdArgumentsInterpreter.cs" />
     <Compile Include="Tools\ConnectionsTreeToMenuItemsConverter.cs" />
     <Compile Include="Tools\ExternalToolsTypeConverter.cs" />

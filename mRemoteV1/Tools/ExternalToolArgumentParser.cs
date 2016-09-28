@@ -4,47 +4,47 @@ using mRemoteNG.Connection;
 
 namespace mRemoteNG.Tools
 {
-    public class ArgumentParser
+    public class ExternalToolArgumentParser
     {
-        ConnectionInfo _connectionInfo;
+        private readonly ConnectionInfo _connectionInfo;
 
-        public ArgumentParser(ConnectionInfo connectionInfo)
+        public ExternalToolArgumentParser(ConnectionInfo connectionInfo)
         {
             _connectionInfo = connectionInfo;
         }
 
         public string ParseArguments(string input)
         {
-            int index = 0;
-            List<Replacement> replacements = new List<Replacement>();
+            var index = 0;
+            var replacements = new List<Replacement>();
 
             do
             {
-                int tokenStart = input.IndexOf("%", index, StringComparison.InvariantCulture);
+                var tokenStart = input.IndexOf("%", index, StringComparison.InvariantCulture);
                 if (tokenStart == -1)
                 {
                     break;
                 }
 
-                int tokenEnd = input.IndexOf("%", tokenStart + 1, StringComparison.InvariantCulture);
+                var tokenEnd = input.IndexOf("%", tokenStart + 1, StringComparison.InvariantCulture);
                 if (tokenEnd == -1)
                 {
                     break;
                 }
 
-                int tokenLength = tokenEnd - tokenStart + 1;
+                var tokenLength = tokenEnd - tokenStart + 1;
 
-                int variableNameStart = tokenStart + 1;
-                int variableNameLength = tokenLength - 2;
+                var variableNameStart = tokenStart + 1;
+                var variableNameLength = tokenLength - 2;
 
-                bool isEnvironmentVariable = false;
+                var isEnvironmentVariable = false;
 
-                string variableName = "";
+                var variableName = "";
 
                 if (tokenStart > 0)
                 {
-                    char tokenStartPrefix = input.Substring(tokenStart - 1, 1).ToCharArray()[0];
-                    char tokenEndPrefix = input.Substring(tokenEnd - 1, 1).ToCharArray()[0];
+                    var tokenStartPrefix = input.Substring(tokenStart - 1, 1).ToCharArray()[0];
+                    var tokenEndPrefix = input.Substring(tokenEnd - 1, 1).ToCharArray()[0];
 
                     if (tokenStartPrefix == '\\' && tokenEndPrefix == '\\')
                     {
@@ -74,10 +74,10 @@ namespace mRemoteNG.Tools
                     }
                 }
 
-                string token = input.Substring(tokenStart, tokenLength);
+                var token = input.Substring(tokenStart, tokenLength);
 
-                EscapeType escape = EscapeType.All;
-                string prefix = input.Substring(variableNameStart, 1);
+                var escape = EscapeType.All;
+                var prefix = input.Substring(variableNameStart, 1);
                 switch (prefix)
                 {
                     case "-":
@@ -103,13 +103,13 @@ namespace mRemoteNG.Tools
 
                 variableName = input.Substring(variableNameStart, variableNameLength);
 
-                string replacementValue = token;
+                var replacementValue = token;
                 if (!isEnvironmentVariable)
                 {
                     replacementValue = GetVariableReplacement(variableName, token);
                 }
 
-                bool haveReplacement = false;
+                var haveReplacement = false;
 
                 if (replacementValue != token)
                 {
@@ -145,19 +145,19 @@ namespace mRemoteNG.Tools
                 }
             } while (true);
 
-            string result = input;
+            var result = input;
 
             for (index = result.Length; index >= 0; index--)
             {
-                foreach (Replacement replacement in replacements)
+                foreach (var replacement in replacements)
                 {
                     if (replacement.Start != index)
                     {
                         continue;
                     }
 
-                    string before = result.Substring(0, replacement.Start);
-                    string after = result.Substring(replacement.Start + replacement.Length);
+                    var before = result.Substring(0, replacement.Start);
+                    var after = result.Substring(replacement.Start + replacement.Length);
                     result = before + replacement.Value + after;
                 }
             }
@@ -166,41 +166,39 @@ namespace mRemoteNG.Tools
 
         private string GetVariableReplacement(string variable, string original)
         {
-            string replacement = "";
-            if (_connectionInfo != null)
+            var replacement = "";
+            if (_connectionInfo == null) return replacement;
+            switch (variable.ToLowerInvariant())
             {
-                switch (variable.ToLowerInvariant())
-                {
-                    case "name":
-                        replacement = _connectionInfo.Name;
-                        break;
-                    case "hostname":
-                        replacement = _connectionInfo.Hostname;
-                        break;
-                    case "port":
-                        replacement = Convert.ToString(_connectionInfo.Port);
-                        break;
-                    case "username":
-                        replacement = _connectionInfo.Username;
-                        break;
-                    case "password":
-                        replacement = _connectionInfo.Password;
-                        break;
-                    case "domain":
-                        replacement = _connectionInfo.Domain;
-                        break;
-                    case "description":
-                        replacement = _connectionInfo.Description;
-                        break;
-                    case "macaddress":
-                        replacement = _connectionInfo.MacAddress;
-                        break;
-                    case "userfield":
-                        replacement = _connectionInfo.UserField;
-                        break;
-                    default:
-                        return original;
-                }
+                case "name":
+                    replacement = _connectionInfo.Name;
+                    break;
+                case "hostname":
+                    replacement = _connectionInfo.Hostname;
+                    break;
+                case "port":
+                    replacement = Convert.ToString(_connectionInfo.Port);
+                    break;
+                case "username":
+                    replacement = _connectionInfo.Username;
+                    break;
+                case "password":
+                    replacement = _connectionInfo.Password;
+                    break;
+                case "domain":
+                    replacement = _connectionInfo.Domain;
+                    break;
+                case "description":
+                    replacement = _connectionInfo.Description;
+                    break;
+                case "macaddress":
+                    replacement = _connectionInfo.MacAddress;
+                    break;
+                case "userfield":
+                    replacement = _connectionInfo.UserField;
+                    break;
+                default:
+                    return original;
             }
             return replacement;
         }
@@ -214,31 +212,17 @@ namespace mRemoteNG.Tools
 
         private struct Replacement
         {
-            int _start;
-            int _length;
-            string _value;
+            public int Start { get; }
 
-            public int Start
-            {
-                get { return _start; }
-                set { _start = value; }
-            }
-            public int Length 
-            {
-                get { return _length; }
-                set { _length = value; }
-            }
-            public string Value 
-            {
-                get { return _value; }
-                set { _value = value; }
-            }
+            public int Length { get; }
+
+            public string Value { get; }
 
             public Replacement(int start, int length, string value)
             {
-                _start = start;
-                _length = length;
-                _value = value;
+                Start = start;
+                Length = length;
+                Value = value;
             }
         }
     }
