@@ -14,6 +14,7 @@ namespace mRemoteNGTests.Tools
         private const string StringAfterNoEscaping = TestString;
         private const int Port = 9933;
         private const string PortAsString = "9933";
+        private const string SampleCommandString = @"/k echo ()%!^abc123*<>&|""'\";
 
 
         [OneTimeSetUp]
@@ -76,6 +77,11 @@ namespace mRemoteNGTests.Tools
         [TestCase("%USERFIELD%", ExpectedResult = StringAfterAllEscaping)]
         [TestCase("%-USERFIELD%", ExpectedResult = StringAfterMetacharacterEscaping)]
         [TestCase("%!USERFIELD%", ExpectedResult = StringAfterNoEscaping)]
+
+        [TestCase("%%", ExpectedResult = "%%")]
+        [TestCase("/k echo %!USERNAME%", ExpectedResult = SampleCommandString)]
+        [TestCase("%COMSPEC%", ExpectedResult = @"C:\Windows\system32\cmd.exe")]
+        [TestCase("%UNSUPPORTEDPARAMETER%", ExpectedResult = "%UNSUPPORTEDPARAMETER%")]
         public string ParserTest(string argumentString)
         {
             return _argumentParser.ParseArguments(argumentString);
