@@ -62,14 +62,14 @@ namespace mRemoteNG.UI.Forms.OptionsPages
 
         private static void ReinitializeSqlUpdater()
         {
-            if (Runtime.SQLConnProvider != null)
+            if (Runtime.SqlConnProvider != null)
             {
-                Runtime.SQLConnProvider.Dispose();
+                Runtime.SqlConnProvider.Dispose();
                 frmMain.Default.AreWeUsingSqlServerForSavingConnections = Settings.Default.UseSQLServer;
                 if (Settings.Default.UseSQLServer)
                 {
-                    Runtime.SQLConnProvider = new SqlConnectionsProvider();
-                    Runtime.SQLConnProvider.Enable();
+                    Runtime.SqlConnProvider = new SqlConnectionsProvider();
+                    Runtime.SqlConnProvider.Enable();
                 }
             }
         }

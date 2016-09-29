@@ -11,11 +11,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Xml;
-using mRemoteNG.Root.PuttySessions;
 using mRemoteNG.Security.SymmetricEncryption;
 using mRemoteNG.UI.Forms;
 using mRemoteNG.UI.Forms.Input;
@@ -31,9 +29,9 @@ namespace mRemoteNG.App
         #region Public Properties
         public static WindowList WindowList { get; set; }
         public static MessageCollector MessageCollector { get; set; }
-        public static Tools.Controls.NotificationAreaIcon NotificationAreaIcon { get; set; }
+        public static Controls.NotificationAreaIcon NotificationAreaIcon { get; set; }
         public static bool IsConnectionsFileLoaded { get; set; }
-        public static SqlConnectionsProvider SQLConnProvider { get; set; }
+        public static SqlConnectionsProvider SqlConnProvider { get; set; }
         public static DateTime LastSqlUpdate { get; set; }
         public static string LastSelected { get; set; }
         public static ArrayList ExternalTools { get; set; } = new ArrayList();
@@ -262,7 +260,7 @@ namespace mRemoteNG.App
             try
             {
                 // disable sql update checking while we are loading updates
-                SQLConnProvider?.Disable();
+                SqlConnProvider?.Disable();
 
                 if (!Settings.Default.UseSQLServer)
                 {
@@ -302,7 +300,7 @@ namespace mRemoteNG.App
                 }
 
                 // re-enable sql update checking after updates are loaded
-                SQLConnProvider?.Enable();
+                SqlConnProvider?.Enable();
             }
             catch (Exception ex)
             {
@@ -447,7 +445,7 @@ namespace mRemoteNG.App
                 if (Update && Settings.Default.UseSQLServer == false)
                     return;
 
-                SQLConnProvider?.Disable();
+                SqlConnProvider?.Disable();
 
                 var connectionsSaver = new ConnectionsSaver();
 
@@ -479,7 +477,7 @@ namespace mRemoteNG.App
             }
             finally
             {
-                SQLConnProvider?.Enable();
+                SqlConnProvider?.Enable();
             }
         }
 
@@ -489,7 +487,7 @@ namespace mRemoteNG.App
 
             try
             {
-                SQLConnProvider?.Disable();
+                SqlConnProvider?.Disable();
 
                 using (SaveFileDialog saveFileDialog = new SaveFileDialog())
                 {
@@ -533,7 +531,7 @@ namespace mRemoteNG.App
             }
             finally
             {
-                SQLConnProvider?.Enable();
+                SqlConnProvider?.Enable();
             }
         }
         #endregion
