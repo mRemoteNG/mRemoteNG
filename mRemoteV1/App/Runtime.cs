@@ -228,12 +228,10 @@ namespace mRemoteNG.App
 
                 }
 
-                var rootConnectionNode = ConnectionTreeModel.RootNodes.First(node => !(node is RootPuttySessionsNodeInfo));
-                ConnectionTreeModel.RemoveRootNode(rootConnectionNode);
-
                 // Load config
                 connectionsLoader.ConnectionFileName = filename;
-                connectionsLoader.LoadConnections(false);
+                ConnectionTreeModel = connectionsLoader.LoadConnections(false);
+                Windows.TreeForm.ConnectionTreeModel = ConnectionTreeModel;
             }
             catch (Exception ex)
             {
@@ -270,7 +268,7 @@ namespace mRemoteNG.App
                 {
                     if (withDialog)
                     {
-                        var loadDialog = Tools.Controls.ConnectionsLoadDialog();
+                        var loadDialog = Controls.ConnectionsLoadDialog();
                         if (loadDialog.ShowDialog() != DialogResult.OK) return;
                         connectionsLoader.ConnectionFileName = loadDialog.FileName;
                     }
@@ -283,7 +281,8 @@ namespace mRemoteNG.App
                 }
 
                 connectionsLoader.UseDatabase = Settings.Default.UseSQLServer;
-                connectionsLoader.LoadConnections(false);
+                ConnectionTreeModel = connectionsLoader.LoadConnections(false);
+                Windows.TreeForm.ConnectionTreeModel = ConnectionTreeModel;
 
                 if (Settings.Default.UseSQLServer)
                 {

@@ -3,6 +3,7 @@ using mRemoteNG.Config.DatabaseConnectors;
 using mRemoteNG.Config.DataProviders;
 using mRemoteNG.Config.Putty;
 using mRemoteNG.Config.Serializers;
+using mRemoteNG.Tree;
 using mRemoteNG.UI.Forms;
 
 
@@ -14,7 +15,7 @@ namespace mRemoteNG.Config.Connections
 	    public string ConnectionFileName { get; set; }
 		
 
-		public void LoadConnections(bool import)
+		public ConnectionTreeModel LoadConnections(bool import)
 		{
 		    IDeserializer deserializer;
 			if (UseDatabase)
@@ -32,14 +33,15 @@ namespace mRemoteNG.Config.Connections
 			}
 
             var connectionTreeModel = deserializer.Deserialize();
-            Runtime.ConnectionTreeModel = connectionTreeModel;
 
             frmMain.Default.AreWeUsingSqlServerForSavingConnections = UseDatabase;
 			frmMain.Default.ConnectionsFileName = ConnectionFileName;
 
-		    if (import) return;
+		    if (import) return connectionTreeModel;
 		    PuttySessionsManager.Instance.AddSessions();
-		    Runtime.ConnectionTreeModel.RootNodes.AddRange(PuttySessionsManager.Instance.RootPuttySessionsNodes);
+            connectionTreeModel.RootNodes.AddRange(PuttySessionsManager.Instance.RootPuttySessionsNodes);
+
+		    return connectionTreeModel;
 		}
     }
 }

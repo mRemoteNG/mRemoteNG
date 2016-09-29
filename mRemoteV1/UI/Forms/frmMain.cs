@@ -171,7 +171,6 @@ namespace mRemoteNG.UI.Forms
             Opacity = 1;
 
             ConnectionTreeWindow = Windows.TreeForm;
-            ConnectionTreeWindow.ConnectionTreeModel = Runtime.ConnectionTreeModel;
         }
 
         private void ApplySpecialSettingsForPortableVersion()
