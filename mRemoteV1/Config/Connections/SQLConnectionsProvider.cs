@@ -15,7 +15,7 @@ namespace mRemoteNG.Config.Connections
             _updateTimer = new SqlUpdateTimer();
             _sqlUpdateChecker = new SqlConnectionsUpdateChecker();
             SqlUpdateTimer.SqlUpdateTimerElapsed += SqlUpdateTimer_SqlUpdateTimerElapsed;
-            SqlConnectionsUpdateChecker.SQLUpdateCheckFinished += SQLUpdateCheckFinished;
+            SqlConnectionsUpdateChecker.SqlUpdateCheckFinished += SQLUpdateCheckFinished;
         }
 
         ~SqlConnectionsProvider()
@@ -52,7 +52,7 @@ namespace mRemoteNG.Config.Connections
         private void DestroySQLUpdateHandlers()
         {
             SqlUpdateTimer.SqlUpdateTimerElapsed -= SqlUpdateTimer_SqlUpdateTimerElapsed;
-            SqlConnectionsUpdateChecker.SQLUpdateCheckFinished -= SQLUpdateCheckFinished;
+            SqlConnectionsUpdateChecker.SqlUpdateCheckFinished -= SQLUpdateCheckFinished;
         }
 
         private void SqlUpdateTimer_SqlUpdateTimerElapsed()

@@ -10,16 +10,16 @@ namespace mRemoteNG.Config.Connections
 {
     public class SqlConnectionsUpdateChecker : IDisposable
     {
-        private IDatabaseConnector sqlConnector;
-        private SqlCommand sqlQuery;
-        private SqlDataReader sqlReader;
+        private IDatabaseConnector _sqlConnector;
+        private SqlCommand _sqlQuery;
+        private SqlDataReader _sqlReader;
 
 
         public SqlConnectionsUpdateChecker()
         {
-            sqlConnector = default(SqlDatabaseConnector);
-            sqlQuery = default(SqlCommand);
-            sqlReader = default(SqlDataReader);
+            _sqlConnector = default(SqlDatabaseConnector);
+            _sqlQuery = default(SqlCommand);
+            _sqlReader = default(SqlDataReader);
         }
 
         ~SqlConnectionsUpdateChecker()
@@ -30,7 +30,7 @@ namespace mRemoteNG.Config.Connections
 
         public void IsDatabaseUpdateAvailableAsync()
         {
-            Thread t = new Thread(IsDatabaseUpdateAvailableDelegate);
+            var t = new Thread(IsDatabaseUpdateAvailableDelegate);
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
         }
@@ -42,19 +42,19 @@ namespace mRemoteNG.Config.Connections
 
         public bool IsDatabaseUpdateAvailable()
         {
-            ConnectToSqlDB();
+            ConnectToSqlDb();
             BuildSqlQueryToGetUpdateStatus();
             ExecuteQuery();
-            bool updateIsAvailable = DatabaseIsMoreUpToDateThanUs();
-            SendUpdateCheckFinishedEvent(updateIsAvailable);
+            var updateIsAvailable = DatabaseIsMoreUpToDateThanUs();
+            RaiseUpdateCheckFinishedEvent(updateIsAvailable);
             return updateIsAvailable;
         }
-        private void ConnectToSqlDB()
+        private void ConnectToSqlDb()
         {
             try
             {
-                sqlConnector = new SqlDatabaseConnector();
-                sqlConnector.Connect();
+                _sqlConnector = new SqlDatabaseConnector();
+                _sqlConnector.Connect();
             }
             catch(Exception e)
             {
@@ -66,8 +66,8 @@ namespace mRemoteNG.Config.Connections
             try
             {
                 SqlCommandBuilder sqlCmdBuilder = new SqlUpdateQueryBuilder();
-                sqlQuery = sqlCmdBuilder.BuildCommand();
-                sqlConnector.AssociateItemToThisConnector(sqlQuery);
+                _sqlQuery = sqlCmdBuilder.BuildCommand();
+                _sqlConnector.AssociateItemToThisConnector(_sqlQuery);
             }
             catch (Exception ex)
             {
@@ -78,8 +78,8 @@ namespace mRemoteNG.Config.Connections
         {
             try
             {
-                sqlReader = sqlQuery.ExecuteReader(CommandBehavior.CloseConnection);
-                sqlReader.Read();
+                _sqlReader = _sqlQuery.ExecuteReader(CommandBehavior.CloseConnection);
+                _sqlReader.Read();
             }
             catch (Exception ex)
             {
@@ -88,22 +88,17 @@ namespace mRemoteNG.Config.Connections
         }
         private bool DatabaseIsMoreUpToDateThanUs()
         {
-            if (GetLastUpdateTimeFromDBResponse() > Runtime.LastSqlUpdate)
-                return true;
-            return false;
+            return GetLastUpdateTimeFromDbResponse() > Runtime.LastSqlUpdate;
         }
-        private DateTime GetLastUpdateTimeFromDBResponse()
+
+        private DateTime GetLastUpdateTimeFromDbResponse()
         {
-            DateTime LastUpdateInDB = default(DateTime);
-            if (sqlReader.HasRows)
-                LastUpdateInDB = Convert.ToDateTime(sqlReader["LastUpdate"]);
-            return LastUpdateInDB;
+            var lastUpdateInDb = default(DateTime);
+            if (_sqlReader.HasRows)
+                lastUpdateInDb = Convert.ToDateTime(_sqlReader["LastUpdate"]);
+            return lastUpdateInDb;
         }
-        private void SendUpdateCheckFinishedEvent(bool UpdateAvailable)
-        {
-            if (SQLUpdateCheckFinishedEvent != null)
-                SQLUpdateCheckFinishedEvent(UpdateAvailable);
-        }
+        
 
 
         public void Dispose()
@@ -113,20 +108,18 @@ namespace mRemoteNG.Config.Connections
 
         private void Dispose(bool itIsSafeToDisposeManagedObjects)
         {
-            if (itIsSafeToDisposeManagedObjects)
-            {
-                sqlConnector.Disconnect();
-                sqlConnector.Dispose();
-            }
+            if (!itIsSafeToDisposeManagedObjects) return;
+            _sqlConnector.Disconnect();
+            _sqlConnector.Dispose();
         }
 
 
-        public delegate void SQLUpdateCheckFinishedEventHandler(bool UpdateAvailable);
-        private static SQLUpdateCheckFinishedEventHandler SQLUpdateCheckFinishedEvent;
-        public static event SQLUpdateCheckFinishedEventHandler SQLUpdateCheckFinished
+        public delegate void SqlUpdateCheckFinishedEventHandler(bool updateAvailable);
+
+        public static event SqlUpdateCheckFinishedEventHandler SqlUpdateCheckFinished;
+        private void RaiseUpdateCheckFinishedEvent(bool updateAvailable)
         {
-            add { SQLUpdateCheckFinishedEvent = (SQLUpdateCheckFinishedEventHandler)System.Delegate.Combine(SQLUpdateCheckFinishedEvent, value); }
-            remove { SQLUpdateCheckFinishedEvent = (SQLUpdateCheckFinishedEventHandler)System.Delegate.Remove(SQLUpdateCheckFinishedEvent, value); }
+            SqlUpdateCheckFinished?.Invoke(updateAvailable);
         }
     }
 }
