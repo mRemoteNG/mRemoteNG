@@ -22,31 +22,13 @@ namespace mRemoteNG.App.Update
         private Thread _getAnnouncementInfoThread;
 
         #region Public Properties
-        public UpdateInfo CurrentUpdateInfo
-		{
-			get
-			{
-				return _currentUpdateInfo;
-			}
-		}
-		
-        public string ChangeLog
-		{
-			get
-			{
-				return _changeLog;
-			}
-		}
-		
-        public AnnouncementInfo CurrentAnnouncementInfo
-		{
-			get
-			{
-				return _currentAnnouncementInfo;
-			}
-		}
-		
-        public bool IsGetUpdateInfoRunning
+        public UpdateInfo CurrentUpdateInfo => _currentUpdateInfo;
+
+	    public string ChangeLog => _changeLog;
+
+	    public AnnouncementInfo CurrentAnnouncementInfo => _currentAnnouncementInfo;
+
+	    public bool IsGetUpdateInfoRunning
 		{
 			get
 			{
@@ -91,22 +73,17 @@ namespace mRemoteNG.App.Update
 			}
 		}
 		
-        public bool IsDownloadUpdateRunning
-		{
-			get
-			{
-				return (_downloadUpdateWebClient != null);
-			}
-		}
-        #endregion
+        public bool IsDownloadUpdateRunning => (_downloadUpdateWebClient != null);
+
+	    #endregion
 		
         #region Public Methods
 		public AppUpdater()
 		{
 			SetProxySettings();
 		}
-			
-		public void SetProxySettings()
+
+	    private void SetProxySettings()
 		{
 		    var shouldWeUseProxy = Settings.Default.UpdateUseProxy;
 		    var proxyAddress = Settings.Default.UpdateProxyAddress;
@@ -123,23 +100,9 @@ namespace mRemoteNG.App.Update
 		{
 			if (useProxy && !string.IsNullOrEmpty(address))
 			{
-				if (!(port == 0))
-				{
-					_webProxy = new WebProxy(address, port);
-				}
-				else
-				{
-					_webProxy = new WebProxy(address);
-				}
-					
-				if (useAuthentication)
-				{
-					_webProxy.Credentials = new NetworkCredential(username, password);
-				}
-				else
-				{
-					_webProxy.Credentials = null;
-				}
+			    _webProxy = port != 0 ? new WebProxy(address, port) : new WebProxy(address);
+
+			    _webProxy.Credentials = useAuthentication ? new NetworkCredential(username, password) : null;
 			}
 			else
 			{
@@ -174,7 +137,7 @@ namespace mRemoteNG.App.Update
 				_getUpdateInfoThread.Abort();
 			}
 				
-			_getUpdateInfoThread = new Thread(new ThreadStart(GetUpdateInfo));
+			_getUpdateInfoThread = new Thread(GetUpdateInfo);
 			_getUpdateInfoThread.SetApartmentState(ApartmentState.STA);
 			_getUpdateInfoThread.IsBackground = true;
 			_getUpdateInfoThread.Start();
@@ -192,7 +155,7 @@ namespace mRemoteNG.App.Update
 				_getChangeLogThread.Abort();
 			}
 				
-			_getChangeLogThread = new Thread(new ThreadStart(GetChangeLog));
+			_getChangeLogThread = new Thread(GetChangeLog);
 			_getChangeLogThread.SetApartmentState(ApartmentState.STA);
 			_getChangeLogThread.IsBackground = true;
 			_getChangeLogThread.Start();
@@ -205,7 +168,7 @@ namespace mRemoteNG.App.Update
 				_getAnnouncementInfoThread.Abort();
 			}
 				
-			_getAnnouncementInfoThread = new Thread(new ThreadStart(GetAnnouncementInfo));
+			_getAnnouncementInfoThread = new Thread(GetAnnouncementInfo);
 			_getAnnouncementInfoThread.SetApartmentState(ApartmentState.STA);
 			_getAnnouncementInfoThread.IsBackground = true;
 			_getAnnouncementInfoThread.Start();
@@ -262,9 +225,9 @@ namespace mRemoteNG.App.Update
 		{
 			Type type = typeof(DownloadStringCompletedEventArgs);
             const BindingFlags bindingFlags = BindingFlags.NonPublic | BindingFlags.Instance;
-			Type[] argumentTypes = new Type[] {typeof(string), typeof(Exception), typeof(bool), typeof(object)};
+			Type[] argumentTypes = {typeof(string), typeof(Exception), typeof(bool), typeof(object)};
 			ConstructorInfo constructor = type.GetConstructor(bindingFlags, null, argumentTypes, null);
-			object[] arguments = new object[] {result, exception, cancelled, userToken};
+			object[] arguments = {result, exception, cancelled, userToken};
 
             return (DownloadStringCompletedEventArgs)constructor.Invoke(arguments);
 		}
@@ -307,10 +270,9 @@ namespace mRemoteNG.App.Update
                     Settings.Default.UpdatePending = IsUpdateAvailable();
 				}
 			}
-				
-			if (GetUpdateInfoCompletedEventEvent != null)
-				GetUpdateInfoCompletedEventEvent(this, e);
-		}
+
+            GetUpdateInfoCompletedEventEvent?.Invoke(this, e);
+        }
 			
 		private void GetChangeLog()
 		{
@@ -320,10 +282,9 @@ namespace mRemoteNG.App.Update
 			{
 				_changeLog = e.Result;
 			}
-				
-			if (GetChangeLogCompletedEventEvent != null)
-				GetChangeLogCompletedEventEvent(this, e);
-		}
+
+            GetChangeLogCompletedEventEvent?.Invoke(this, e);
+        }
 			
 		private void GetAnnouncementInfo()
 		{
@@ -339,16 +300,14 @@ namespace mRemoteNG.App.Update
                     Settings.Default.LastAnnouncement = _currentAnnouncementInfo.Name;
 				}
 			}
-				
-			if (GetAnnouncementInfoCompletedEventEvent != null)
-				GetAnnouncementInfoCompletedEventEvent(this, e);
-		}
+
+            GetAnnouncementInfoCompletedEventEvent?.Invoke(this, e);
+        }
 			
 		private void DownloadUpdateProgressChanged(object sender, DownloadProgressChangedEventArgs e)
 		{
-			if (DownloadUpdateProgressChangedEventEvent != null)
-				DownloadUpdateProgressChangedEventEvent(sender, e);
-		}
+            DownloadUpdateProgressChangedEventEvent?.Invoke(sender, e);
+        }
 			
 		private void DownloadUpdateCompleted(object sender, AsyncCompletedEventArgs e)
 		{
@@ -384,11 +343,10 @@ namespace mRemoteNG.App.Update
 			{
 				File.Delete(_currentUpdateInfo.UpdateFilePath);
 			}
-				
-			if (DownloadUpdateCompletedEventEvent != null)
-				DownloadUpdateCompletedEventEvent(this, raiseEventArgs);
-				
-			_downloadUpdateWebClient.Dispose();
+
+            DownloadUpdateCompletedEventEvent?.Invoke(this, raiseEventArgs);
+
+            _downloadUpdateWebClient.Dispose();
 			_downloadUpdateWebClient = null;
 		}
         #endregion
