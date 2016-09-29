@@ -1,0 +1,13 @@
+{% include head.html %}
+<body>
+	{% include navigation.html %}
+	{% include jumbotron.html %}
+	<div class='container'>
+		<h2>{{ page.title }}</h2>
+		<strong>{{ page.author }}</strong> | {{ page.date | date: '%B %-d, %Y'}}
+		<hr>
+		{{ content }}
+	</div>
+	{% include footer.html %}
+</body>
+</html>

@@ -4,6 +4,7 @@ url: https://mRemoteNG.github.io
 baseurl: /mRemoteNG
 repository: mRemoteNG/mRemoteNG
 exclude: [README.md, Gemfile, Gemfile.lock]
+permalink: pretty
 
 defaults:
   -
@@ -12,3 +13,15 @@ defaults:
       type: pages
     values:
       layout: default
+  -
+    scope:
+      path: ''
+      type: posts
+    values:
+      layout: post
+
+gems:
+  - jekyll-feed
+  - jekyll-metions
+  - jekyll-sitemap
+  - jemoji
