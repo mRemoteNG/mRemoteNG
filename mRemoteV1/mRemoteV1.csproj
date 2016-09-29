@@ -430,6 +430,9 @@
     <Compile Include="UI\Window\ConnectionWindow.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="UI\Window\ConnectionWindow.Designer.cs">
+      <DependentUpon>ConnectionWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="UI\Window\ErrorAndInfoWindow.cs">
       <SubType>Form</SubType>
     </Compile>

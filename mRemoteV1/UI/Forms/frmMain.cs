@@ -1117,7 +1117,7 @@ namespace mRemoteNG.UI.Forms
 		    var tab = w.TabController.SelectedTab;
 		    var ifc = (InterfaceControl)tab.Tag;
 		    ifc.Protocol.Focus();
-		    ((ConnectionWindow) ifc.FindForm())?.RefreshIC();
+		    ((ConnectionWindow) ifc.FindForm())?.RefreshInterfaceController();
 		}
 
         private void pnlDock_ActiveDocumentChanged(object sender, EventArgs e)
