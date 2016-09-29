@@ -158,7 +158,7 @@ namespace mRemoteNG.UI.Window
             }
             else
             {
-                var interfaceControl = TabController.SelectedTab.Tag as InterfaceControl;
+                var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 frmMain.Default.SelectedConnection = interfaceControl?.Info;
             }
         }
@@ -424,7 +424,7 @@ namespace mRemoteNG.UI.Window
             try
             {
                 if (!(TabController.SelectedTab?.Tag is InterfaceControl)) return;
-                var interfaceControl = (InterfaceControl)TabController.SelectedTab.Tag;
+                var interfaceControl = (InterfaceControl)TabController.SelectedTab?.Tag;
 
                 var protocol = interfaceControl.Protocol as ProtocolRDP;
                 if (protocol != null)
@@ -448,8 +448,8 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                if (!(TabController.SelectedTab?.Tag is InterfaceControl)) return;
-                var interfaceControl = (InterfaceControl)TabController.SelectedTab.Tag;
+                var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
+                if (interfaceControl == null) return;
 
                 if (interfaceControl.Info.Protocol == ProtocolType.SSH1 | interfaceControl.Info.Protocol == ProtocolType.SSH2)
                     SshTransferFile();
@@ -466,7 +466,8 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = (InterfaceControl)TabController.SelectedTab.Tag;
+                var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
+                if (interfaceControl == null) return;
 
                 Windows.Show(WindowType.SSHTransfer);
                 var connectionInfo = interfaceControl.Info;
@@ -486,9 +487,9 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = (InterfaceControl)TabController.SelectedTab.Tag;
-                var vnc = (ProtocolVNC)interfaceControl.Protocol;
-                vnc.StartFileTransfer();
+                var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
+                var vnc = interfaceControl?.Protocol as ProtocolVNC;
+                vnc?.StartFileTransfer();
             }
             catch (Exception ex)
             {
@@ -811,7 +812,7 @@ namespace mRemoteNG.UI.Window
         {
             try
             {
-                var interfaceControl = TabController.SelectedTab.Tag as InterfaceControl;
+                var interfaceControl = TabController.SelectedTab?.Tag as InterfaceControl;
                 interfaceControl?.Protocol?.Focus();
             }
             catch (Exception ex)
@@ -848,7 +849,7 @@ namespace mRemoteNG.UI.Window
                         var tabClientRectangle = selectedTab.RectangleToScreen(selectedTab.ClientRectangle);
                         if (tabClientRectangle.Contains(MousePosition))
                         {
-                            var interfaceControl = TabController?.SelectedTab.Tag as InterfaceControl;
+                            var interfaceControl = selectedTab.Tag as InterfaceControl;
                             if (interfaceControl?.Info?.Protocol == ProtocolType.RDP)
                             {
                                 interfaceControl.Protocol.Focus();
