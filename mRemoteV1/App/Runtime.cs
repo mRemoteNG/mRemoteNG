@@ -355,7 +355,7 @@ namespace mRemoteNG.App
 
             try
             {
-                string backupFileName = string.Format(Settings.Default.BackupFileNameFormat, fileName, DateTime.UtcNow);
+                var backupFileName = string.Format(Settings.Default.BackupFileNameFormat, fileName, DateTime.UtcNow);
                 File.Copy(fileName, backupFileName);
                 PruneBackupFiles(fileName);
             }
@@ -489,7 +489,7 @@ namespace mRemoteNG.App
             {
                 SqlConnProvider?.Disable();
 
-                using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+                using (var saveFileDialog = new SaveFileDialog())
                 {
                     saveFileDialog.CheckPathExists = true;
                     saveFileDialog.InitialDirectory = ConnectionsFileInfo.DefaultConnectionsPath;
