@@ -6,8 +6,8 @@ namespace mRemoteNG.Config.Connections
 {
     public class SqlConnectionsProvider : IDisposable
     {
-        SqlUpdateTimer _updateTimer;
-        SqlConnectionsUpdateChecker _sqlUpdateChecker;
+        readonly SqlUpdateTimer _updateTimer;
+        readonly SqlConnectionsUpdateChecker _sqlUpdateChecker;
 
 
         public SqlConnectionsProvider()
@@ -41,12 +41,10 @@ namespace mRemoteNG.Config.Connections
 
         private void Dispose(bool itIsSafeToAlsoFreeManagedObjects)
         {
-            if (itIsSafeToAlsoFreeManagedObjects)
-            {
-                DestroySQLUpdateHandlers();
-                _updateTimer.Dispose();
-                _sqlUpdateChecker.Dispose();
-            }
+            if (!itIsSafeToAlsoFreeManagedObjects) return;
+            DestroySQLUpdateHandlers();
+            _updateTimer.Dispose();
+            _sqlUpdateChecker.Dispose();
         }
 
         private void DestroySQLUpdateHandlers()
@@ -60,13 +58,11 @@ namespace mRemoteNG.Config.Connections
             _sqlUpdateChecker.IsDatabaseUpdateAvailableAsync();
         }
 
-        private void SQLUpdateCheckFinished(bool UpdateIsAvailable)
+        private void SQLUpdateCheckFinished(bool updateIsAvailable)
         {
-            if (UpdateIsAvailable)
-            {
-                Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strSqlUpdateCheckUpdateAvailable, true);
-                Runtime.LoadConnectionsBG();
-            }
+            if (!updateIsAvailable) return;
+            Runtime.MessageCollector.AddMessage(MessageClass.InformationMsg, Language.strSqlUpdateCheckUpdateAvailable, true);
+            Runtime.LoadConnectionsBG();
         }
     }
 }
