@@ -569,8 +569,9 @@ namespace mRemoteNG.UI.Window
 
 	    private void AddNode(IHasParent newNode)
 	    {
+            if (SelectedNode == null) return;
             var selectedContainer = SelectedNode as ContainerInfo;
-            var parent = selectedContainer ?? SelectedNode.Parent;
+            var parent = selectedContainer ?? SelectedNode?.Parent;
             newNode.SetParent(parent);
             olvConnections.Expand(parent);
             olvConnections.SelectObject(newNode);
