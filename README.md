@@ -1,5 +1,5 @@
 # [mRemoteNG.github.io/mRemoteNG](https://mRemoteNG.github.io/mRemoteNG/)
-mRemoteNG GitHub Hosted Web Pages
+mRemoteNG Website
 
 # Building
 1. Create a [personal access token](https://help.github.com/articles/creating-an-access-token-for-command-line-use/) with `public_repo` permissions
@@ -8,6 +8,6 @@ mRemoteNG GitHub Hosted Web Pages
 
    ```bash
    bundle install
-   bundle exec jekyll serve -w --config _config.yaml,_config-dev.yaml
+   bundle exec jekyll serve --drafts --config _config.yaml,_config-dev.yaml
    ```
 4. Open http://localhost:4000/mRemoteNG/
